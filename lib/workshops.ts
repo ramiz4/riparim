@@ -1,6 +1,6 @@
 export const services = ["Alle Leistungen", "Inspektion & Wartung", "Diagnose & Elektronik", "Bremsen & Fahrwerk", "Motor & Getriebe", "Karosserie & Lack", "Reifen & Klima"];
 export const cities = ["Ganz Kosovo", "Prishtina", "Prizren", "Peja", "Gjakova", "Ferizaj", "Mitrovica"];
-export const brands = ["Alle Marken","Volkswagen","Audi","SEAT","CUPRA","Volkswagen Nutzfahrzeuge","Volvo","BMW","Mercedes-Benz","Škoda","MINI","Opel","Renault","Dacia","Nissan","Toyota","Ford","Peugeot","Citroën","Hyundai","Kia","Fiat","Honda","Suzuki"];
+export const brands = ["Alle Marken","Volkswagen","Audi","SEAT","CUPRA","Volkswagen Nutzfahrzeuge","Volvo","Porsche","BMW","Mercedes-Benz","Škoda","MINI","Opel","Renault","Dacia","Nissan","Toyota","Ford","Peugeot","Citroën","Hyundai","Kia","Fiat","Honda","Suzuki"];
 export type Source = {url:string;title:string};
 export type Workshop = {id:string;name:string;city:string;address:string;phone:string;phoneNote:string;whatsapp:string;brands:string[];services:string[];serviceDetails:string[];languages:string[];rating:number|null;count:number;initials:string;color:string;specialty:string;description:string;lat:number|null;lng:number|null;sources:Source[];checkedAt:string;status:"draft"|"published";updatedAt:string};
 export const cityCoordinates: Record<string,[number,number]>={Prishtina:[42.6629,21.1655],Prizren:[42.2153,20.7415],Peja:[42.6591,20.2883],Gjakova:[42.3803,20.4308],Ferizaj:[42.3702,21.1483],Mitrovica:[42.8914,20.866]};

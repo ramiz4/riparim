@@ -254,5 +254,312 @@
     "checkedAt": "2026-10-02",
     "status": "published",
     "updatedAt": "2026-10-02T16:15:00.000Z"
+  },
+  {
+    "id": "dd-auto-service",
+    "name": "DD Auto Service",
+    "city": "Gjakova",
+    "address": "Gasper Karaqi, 50000 Gjakovë, Kosovo",
+    "phone": "+38348603353",
+    "phoneNote": "Allgemeiner Werkstattkontakt",
+    "whatsapp": "+38348603353",
+    "brands": [
+      "Audi",
+      "Porsche",
+      "Volkswagen",
+      "Škoda",
+      "SEAT",
+      "CUPRA"
+    ],
+    "services": [
+      "Inspektion & Wartung",
+      "Diagnose & Elektronik",
+      "Bremsen & Fahrwerk",
+      "Motor & Getriebe",
+      "Reifen & Klima"
+    ],
+    "serviceDetails": [
+      "Öl- und Filterwechsel",
+      "Computergestützte Diagnose und Prüfung von Fahrzeugelektrik",
+      "Bremsenprüfung; Fahrwerk wird beim Fahrzeugcheck geprüft",
+      "Motorservice und Zustandsprüfung",
+      "Prüfung von Schaltverhalten, Leckagen und Getriebezustand; Getriebeinstandsetzung ist nicht konkret veröffentlicht",
+      "Prüfung und Service der Klimaanlage; kein Reifenservice laut eigener FAQ"
+    ],
+    "languages": [],
+    "specialty": "Diagnose · VAG-Marken",
+    "description": "DD Auto Service in Gjakovë veröffentlicht Öl- und Filterwechsel, Fahrzeugdiagnose, Elektrik- und Motorservice sowie Bremsen-, Getriebe- und Klimaprüfungen. Die Website nennt Audi, Porsche, Volkswagen, Škoda, SEAT und CUPRA als betreute Marken. Reifenservice wird in der eigenen FAQ ausdrücklich ausgeschlossen.",
+    "lat": 42.3748144,
+    "lng": 20.4465985,
+    "sources": [
+      {
+        "url": "https://ddautoservice.com/",
+        "title": "Name · Adresse · Kontakte · ausdrückliches WhatsApp-Angebot · Marken · Leistungen · FAQ"
+      },
+      {
+        "url": "https://ddautoservice.com/hostinger-backend/api/index.php?resource=settings",
+        "title": "Aktuell veröffentlichte Kontaktangaben und offizieller Kartenlink"
+      },
+      {
+        "url": "https://ddautoservice.com/hostinger-backend/api/index.php?resource=services&lang=sq",
+        "title": "Veröffentlichte konkrete Prüf- und Serviceleistungen"
+      },
+      {
+        "url": "https://maps.app.goo.gl/nciwJW6yFBoGpzqs9",
+        "title": "Offiziell verlinkter Kartenpunkt; genaue Koordinaten im Weiterleitungsziel"
+      }
+    ],
+    "checkedAt": "2026-10-02",
+    "status": "published",
+    "updatedAt": "2026-10-02T18:21:53.000Z"
+  },
+  {
+    "id": "sonic-garage",
+    "name": "Sonic Garage Ferizaj",
+    "city": "Ferizaj",
+    "address": "Beteja Ilire, Muhoc, 70000 Ferizaj, Kosovo",
+    "phone": "+38345934924",
+    "phoneNote": "Allgemeiner Werkstattkontakt · auch für Terminabsprachen",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung",
+      "Diagnose & Elektronik",
+      "Bremsen & Fahrwerk",
+      "Motor & Getriebe"
+    ],
+    "serviceDetails": [
+      "Öl- und Filterwechsel",
+      "Computergestützte Fahrzeugdiagnose",
+      "Arbeiten an Alternator, Starter, Beleuchtung, Sensoren und elektrischen Leitungen",
+      "Wechsel von Bremsscheiben und Bremsbelägen",
+      "Lenkungs-, Fahrwerks- und Stoßdämpferarbeiten",
+      "Wartung und Reparatur manueller und automatischer Getriebe",
+      "Motorreparatur einschließlich Zylinderkopf und Zahnriemen"
+    ],
+    "languages": [],
+    "specialty": "Motor · Getriebe · Diagnose",
+    "description": "Sonic Garage veröffentlicht in Ferizaj Diagnose, Öl- und Filterwechsel, Bremsen- und Fahrwerksarbeiten sowie Reparaturen an Motor, Getriebe und Fahrzeugelektrik. Als Standort nennt der Betrieb Beteja Ilire in Muhoc. Konkrete betreute Fahrzeugmarken sind nicht eindeutig veröffentlicht.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://sonicgarage-ks.com/",
+        "title": "Name · genaue Standortangabe · Telefon · konkrete Serviceleistungen"
+      }
+    ],
+    "checkedAt": "2026-10-02",
+    "status": "published",
+    "updatedAt": "2026-10-02T18:21:53.000Z"
+  },
+  {
+    "id": "eurogoma-ferizaj",
+    "name": "Eurogoma – Ferizaj",
+    "city": "Ferizaj",
+    "address": "Rruga Rexhep Bislimi, afër Viva Fresh, Ferizaj, Kosovo",
+    "phone": "+38349504424",
+    "phoneNote": "Allgemeiner Filialkontakt Ferizaj",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Reifen & Klima"
+    ],
+    "serviceDetails": [
+      "Reifenmontage und Auswuchten laut firmenweiter Leistungsübersicht",
+      "Klimabefüllung laut firmenweiter Leistungsübersicht",
+      "Den konkreten Leistungsumfang dieser Filiale bitte vorab bestätigen"
+    ],
+    "languages": [],
+    "specialty": "Reifenservice",
+    "description": "Eurogoma führt Ferizaj als eigenen Servicestandort und veröffentlicht dafür einen Filialkontakt. Die firmenweite Leistungsübersicht nennt Reifenmontage, Auswuchten und Klimabefüllung. Eine gesonderte Leistungsliste für diese Filiale ist nicht veröffentlicht.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.eurogoma.net/locations/",
+        "title": "Filialdaten Ferizaj: Name · Adresse · aktuelles Filialtelefon in der Standortauswahl"
+      },
+      {
+        "url": "https://www.eurogoma.net/services/",
+        "title": "Firmenweite Leistungen; keine gesonderte Filial-Leistungsliste"
+      }
+    ],
+    "checkedAt": "2026-10-02",
+    "status": "published",
+    "updatedAt": "2026-10-02T18:21:53.000Z"
+  },
+  {
+    "id": "eurogoma-mitrovica",
+    "name": "Eurogoma – Mitrovicë",
+    "city": "Mitrovica",
+    "address": "Magjistralja Mitrovicë–Prishtinë, Shupkovc, Mitrovicë, Kosovo",
+    "phone": "+38349324436",
+    "phoneNote": "Eurogoma-Zentrale · allgemeiner Geschäftskontakt, kein bestätigtes aktuelles Filialtelefon",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Reifen & Klima"
+    ],
+    "serviceDetails": [
+      "Reifenmontage und Auswuchten laut firmenweiter Leistungsübersicht",
+      "Klimabefüllung laut firmenweiter Leistungsübersicht",
+      "Den konkreten Leistungsumfang und direkten Kontakt dieser Filiale bitte über die Zentrale bestätigen"
+    ],
+    "languages": [],
+    "specialty": "Reifenservice",
+    "description": "Eurogoma führt einen Servicestandort in Shupkovc an der Strecke Mitrovicë–Prishtinë. Die firmenweite Website nennt Reifenmontage, Auswuchten und Klimabefüllung. Angegeben ist der aktuelle Kontakt der Zentrale; die Filialseite zeigt noch einen Telefonkontakt mit altem Ländercode.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.eurogoma.net/locations/",
+        "title": "Filialdaten Mitrovicë: Name · Adresse; Filialtelefon nur mit altem Ländercode"
+      },
+      {
+        "url": "https://www.eurogoma.net/contact/",
+        "title": "Aktueller allgemeiner Kontakt der Eurogoma-Zentrale"
+      },
+      {
+        "url": "https://www.eurogoma.net/services/",
+        "title": "Firmenweite Leistungen; keine gesonderte Filial-Leistungsliste"
+      }
+    ],
+    "checkedAt": "2026-10-02",
+    "status": "published",
+    "updatedAt": "2026-10-02T18:21:53.000Z"
+  },
+  {
+    "id": "eurogoma-gjakova",
+    "name": "Eurogoma – Gjakovë-2",
+    "city": "Gjakova",
+    "address": "Rruga e Tirana, tranzit p.n., Gjakovë, Kosovo",
+    "phone": "+38349324436",
+    "phoneNote": "Eurogoma-Zentrale · allgemeiner Geschäftskontakt, kein bestätigtes aktuelles Filialtelefon",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Reifen & Klima"
+    ],
+    "serviceDetails": [
+      "Reifenmontage und Auswuchten laut firmenweiter Leistungsübersicht",
+      "Klimabefüllung laut firmenweiter Leistungsübersicht",
+      "Den konkreten Leistungsumfang und direkten Kontakt dieser Filiale bitte über die Zentrale bestätigen"
+    ],
+    "languages": [],
+    "specialty": "Reifenservice",
+    "description": "Eurogoma führt Gjakovë-2 an der Tirana-Straße im Transitbereich als eigenen Servicestandort. Die firmenweite Website nennt Reifenmontage, Auswuchten und Klimabefüllung. Angegeben ist der aktuelle Kontakt der Zentrale; die Filialseite zeigt noch Telefonkontakte mit alten Ländercodes.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.eurogoma.net/locations/",
+        "title": "Filialdaten Gjakovë-2: Name · Adresse; Filialtelefone nur mit alten Ländercodes"
+      },
+      {
+        "url": "https://www.eurogoma.net/contact/",
+        "title": "Aktueller allgemeiner Kontakt der Eurogoma-Zentrale"
+      },
+      {
+        "url": "https://www.eurogoma.net/services/",
+        "title": "Firmenweite Leistungen; keine gesonderte Filial-Leistungsliste"
+      }
+    ],
+    "checkedAt": "2026-10-02",
+    "status": "published",
+    "updatedAt": "2026-10-02T18:21:53.000Z"
+  },
+  {
+    "id": "porsche-prishtina",
+    "name": "Porsche Prishtina",
+    "city": "Prishtina",
+    "address": "Llapnasellë p.n., 10000 Prishtinë, Kosovo",
+    "phone": "+38338606900",
+    "phoneNote": "Allgemeiner Geschäftskontakt",
+    "whatsapp": "",
+    "brands": [
+      "Volkswagen",
+      "Volkswagen Nutzfahrzeuge",
+      "Škoda",
+      "Audi"
+    ],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Reparatur und Wartung von Škoda-Fahrzeugen laut Markenportal",
+      "Service für Volkswagen, Volkswagen Nutzfahrzeuge und Audi laut eigener Website"
+    ],
+    "languages": [],
+    "specialty": "Markenservice",
+    "description": "Porsche Prishtina veröffentlicht Fahrzeugservice für Volkswagen, Volkswagen Nutzfahrzeuge, Škoda und Audi. Das Škoda-Markenportal beschreibt Reparatur und Wartung bei Porsche Kosova. Der Betrieb nennt Llapnasellë als Standort und veröffentlicht einen allgemeinen Geschäftskontakt.",
+    "lat": 42.6036682,
+    "lng": 21.1339874,
+    "sources": [
+      {
+        "url": "https://www.porsche-prishtina.com/",
+        "title": "Name · konkret betreute Marken laut Unternehmen · Kontakt"
+      },
+      {
+        "url": "https://www.porsche-prishtina.com/kontakt/",
+        "title": "Adresse · allgemeines Geschäftstelefon · offizieller Kartenlink"
+      },
+      {
+        "url": "https://www.skoda-kosova.com/servis/riparim-mirembajtje",
+        "title": "Reparatur und Wartung bei Porsche Kosova laut Škoda-Markenportal"
+      },
+      {
+        "url": "https://maps.app.goo.gl/og7TsXbshw1sFxUY9",
+        "title": "Offiziell verlinkter Kartenpunkt; genaue Koordinaten im Weiterleitungsziel"
+      }
+    ],
+    "checkedAt": "2026-10-02",
+    "status": "published",
+    "updatedAt": "2026-10-02T18:21:53.000Z"
+  },
+  {
+    "id": "autotrade-toyota",
+    "name": "Autotrade sh.p.k. – Toyota",
+    "city": "Prishtina",
+    "address": "Magjistralja Prishtinë–Ferizaj p.n., 10520 Prishtinë, Kosovo",
+    "phone": "+38338600260",
+    "phoneNote": "Allgemeine Toyota-Kontaktzentrale · kein separat ausgewiesenes Servicetelefon",
+    "whatsapp": "",
+    "brands": [
+      "Toyota"
+    ],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Regelmäßige Wartung laut Toyota-Serviceportal",
+      "Toyota-Hybrid-Systemprüfung mit schriftlichem Bericht laut Markenportal",
+      "Den konkreten Umfang und die Verfügbarkeit am Standort bitte direkt bestätigen"
+    ],
+    "languages": [],
+    "specialty": "Toyota-Wartung",
+    "description": "Toyota Kosovo nennt Autotrade sh.p.k. als Servicebetrieb an der Strecke Prishtinë–Ferizaj. Das aktuelle Markenportal veröffentlicht regelmäßige Wartung und Hybrid-Systemprüfungen. Die genaue Adresse stammt aus der weiterhin veröffentlichten Toyota-Broschüre 2024; angegeben ist die aktuelle allgemeine Kontaktzentrale.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.toyota-kosovo.com/contact",
+        "title": "Aktuelle allgemeine Kontaktzentrale Toyota · Autotrade-E-Mail"
+      },
+      {
+        "url": "https://www.toyota-kosovo.com/content/dam/toyota/nmsc/slovenia/cross-model/owners/as2024/winter/WinterKOS.pdf",
+        "title": "Autotrade: Name · genaue Adresse · Servicebetrieb; Broschüre 2024, Angebote abgelaufen"
+      },
+      {
+        "url": "https://www.toyota-kosovo.com/owners/maintenance/express-service",
+        "title": "Regelmäßige Wartung im aktuellen Toyota-Serviceportal"
+      },
+      {
+        "url": "https://www.toyota-kosovo.com/owners/maintenance/hybrid-service",
+        "title": "Hybrid-Systemprüfung und schriftlicher Bericht im Toyota-Serviceportal"
+      }
+    ],
+    "checkedAt": "2026-10-02",
+    "status": "published",
+    "updatedAt": "2026-10-02T18:21:53.000Z"
   }
 ]
