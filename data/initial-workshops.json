@@ -1,0 +1,258 @@
+[
+  {
+    "id": "baki-automobile",
+    "name": "Baki Automobile SH.P.K",
+    "city": "Prishtina",
+    "address": "Magjistralja Prishtinë–Ferizaj, km 5, 10000 Prishtinë, Kosovo",
+    "phone": "+38344505499",
+    "phoneNote": "Allgemeiner Geschäftskontakt",
+    "whatsapp": "",
+    "brands": [
+      "Volkswagen",
+      "Audi",
+      "SEAT",
+      "CUPRA",
+      "Škoda",
+      "Volkswagen Nutzfahrzeuge"
+    ],
+    "services": [
+      "Inspektion & Wartung",
+      "Bremsen & Fahrwerk",
+      "Karosserie & Lack"
+    ],
+    "serviceDetails": [
+      "Regelmäßige Wartung und Fahrzeugkontrolle",
+      "Batterieprüfung und Austausch",
+      "Bremsenprüfung, Reparatur und Austausch",
+      "Karosseriereparaturen"
+    ],
+    "languages": [],
+    "specialty": "Wartung · VAG-Marken",
+    "description": "Baki Automobile veröffentlicht Wartung, Batterie- und Bremsenservice sowie Karosseriereparaturen für Marken der Volkswagen Group. Der Betrieb nennt sich auf seiner Website autorisierter Partner. Lackierung ist nicht separat veröffentlicht.",
+    "lat": 42.5729259,
+    "lng": 21.1292964,
+    "sources": [
+      {
+        "url": "https://bakiautomobile.com/kontakti/",
+        "title": "Name · Adresse · Telefon"
+      },
+      {
+        "url": "https://bakiautomobile.com/servisimi-mirembajtja-kontrolla-teknike-dhe-garancioni/",
+        "title": "Leistungen · Autorisierung laut Unternehmen · offizieller Kartenlink"
+      }
+    ],
+    "checkedAt": "2026-10-02",
+    "status": "published",
+    "updatedAt": "2026-10-02T16:15:00.000Z"
+  },
+  {
+    "id": "auto-mita",
+    "name": "Auto Mita sh.p.k.",
+    "city": "Prishtina",
+    "address": "Magjistralja Prishtinë–Shkup, km 7, 10000 Prishtina, Kosovo",
+    "phone": "+38345686868",
+    "phoneNote": "Allgemeiner Kontakt Renault · Nissan · Dacia",
+    "whatsapp": "",
+    "brands": [
+      "Renault",
+      "Dacia",
+      "Nissan",
+      "Volvo"
+    ],
+    "services": [
+      "Inspektion & Wartung",
+      "Diagnose & Elektronik",
+      "Bremsen & Fahrwerk",
+      "Reifen & Klima"
+    ],
+    "serviceDetails": [
+      "Wartung und Reparatur laut Hauptwebsite",
+      "Inspektionen und Öl-/Filterwechsel im Volvo-Serviceportal",
+      "Elektronische Diagnose und Softwareupdates im Volvo-Serviceportal",
+      "Bremsen- und Fahrwerkservice im Volvo-Serviceportal",
+      "Reifenmontage, Auswuchten und Klimaservice im Volvo-Serviceportal",
+      "Konkrete Diagnose-, Bremsen-, Reifen- und Klimaleistungen sind im Volvo-Serviceportal beschrieben. Den Umfang für Renault, Nissan und Dacia bitte direkt bestätigen."
+    ],
+    "languages": [],
+    "specialty": "Markenservice",
+    "description": "Auto Mita nennt autorisierten Service für Renault, Dacia, Nissan und Volvo. Das eigene Volvo-Serviceportal veröffentlicht Inspektionen, elektronische Diagnose, Bremsen-, Reifen- und Klimaservice.",
+    "lat": 42.585267,
+    "lng": 21.1292178,
+    "sources": [
+      {
+        "url": "https://automita.com/",
+        "title": "Name · Ort Preoc · allgemeine Kontakte"
+      },
+      {
+        "url": "https://automita.volvocarkosova.com/service",
+        "title": "genaue Adresse km 7 · Showroom-Telefon Volvo · konkrete veröffentlichte Volvo-Serviceleistungen"
+      },
+      {
+        "url": "https://www.renaultgroup.com/en/directory/2505/",
+        "title": "Renault Group führt Auto Mita sh.p.k. als Importeur für Albania / Kosovo"
+      }
+    ],
+    "checkedAt": "2026-10-02",
+    "status": "published",
+    "updatedAt": "2026-10-02T16:15:00.000Z"
+  },
+  {
+    "id": "auto-tershana",
+    "name": "Auto Servis Tershana",
+    "city": "Ferizaj",
+    "address": "Rruga Zenel Hajdini, Ferizaj, Kosovo",
+    "phone": "+38344177020",
+    "phoneNote": "Allgemeiner Werkstattkontakt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung",
+      "Diagnose & Elektronik",
+      "Motor & Getriebe",
+      "Reifen & Klima"
+    ],
+    "serviceDetails": [
+      "Fahrzeugdiagnose",
+      "Motorservice",
+      "Reifenwechsel",
+      "Ölwechsel"
+    ],
+    "languages": [],
+    "specialty": "Diagnose · Motorservice",
+    "description": "Auto Servis Tershana in Ferizaj veröffentlicht Fahrzeugdiagnose, Motorservice sowie Öl- und Reifenwechsel. Als Adresse nennt der Betrieb die Zenel-Hajdini-Straße. Getriebearbeiten und Klimaservice sind nicht separat veröffentlicht.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://autotershana-ks.com/service.html",
+        "title": "Name · Adresse · beide Telefonnummern"
+      },
+      {
+        "url": "https://autotershana-ks.com/",
+        "title": "Fahrzeugdiagnose · Kodierung · Motorservice"
+      }
+    ],
+    "checkedAt": "2026-10-02",
+    "status": "published",
+    "updatedAt": "2026-10-02T16:15:00.000Z"
+  },
+  {
+    "id": "auto-service-demi",
+    "name": "Auto Service DEMI",
+    "city": "Prizren",
+    "address": "Rruga tranzit, kyqja në autostradën e re, Prizren, Kosovo",
+    "phone": "+38349156789",
+    "phoneNote": "Service-Terminvereinbarung",
+    "whatsapp": "",
+    "brands": [
+      "Mercedes-Benz"
+    ],
+    "services": [
+      "Inspektion & Wartung",
+      "Diagnose & Elektronik",
+      "Bremsen & Fahrwerk",
+      "Motor & Getriebe",
+      "Reifen & Klima"
+    ],
+    "serviceDetails": [
+      "Wartung und Inspektion",
+      "Mercedes-Diagnose und Programmierung",
+      "Bremsenwechsel und Stoßdämpferkontrolle",
+      "Motor- und Zylinderkopfreparatur",
+      "Getriebeservice und Getriebereparaturen",
+      "Klimaanlagenreinigung und Befüllung"
+    ],
+    "languages": [],
+    "specialty": "Mercedes-Benz-Service",
+    "description": "Auto Service DEMI in Prizren nennt Service für Mercedes-Benz. Veröffentlicht sind unter anderem Diagnose, Wartung, Bremsenwechsel, Motor- und Getriebearbeiten sowie Klimaservice. Reifenservice ist nicht separat veröffentlicht.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://servicedemi.com/our-services/",
+        "title": "Marke Mercedes-Benz · konkrete Leistungen · Service-Telefon für Termine"
+      },
+      {
+        "url": "https://servicedemi.com/contact-us-2/",
+        "title": "Adresse · beide allgemeinen Kontakttelefone · Service-Telefon"
+      }
+    ],
+    "checkedAt": "2026-10-02",
+    "status": "published",
+    "updatedAt": "2026-10-02T16:15:00.000Z"
+  },
+  {
+    "id": "auto-electronics",
+    "name": "Auto Electronics",
+    "city": "Prizren",
+    "address": "Rr. Bekim Berisha 55, Prizren, Kosovo",
+    "phone": "+38349611690",
+    "phoneNote": "Allgemeiner Werkstattkontakt",
+    "whatsapp": "",
+    "brands": [
+      "Audi",
+      "BMW",
+      "Mercedes-Benz",
+      "Volkswagen"
+    ],
+    "services": [
+      "Diagnose & Elektronik"
+    ],
+    "serviceDetails": [
+      "Elektronische Fahrzeugdiagnose",
+      "ECU-/EMS-Kodierung und Programmierung",
+      "Reparatur an BSI-, ABS- und Airbagsystemen"
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugelektronik",
+    "description": "Auto Electronics veröffentlicht elektronische Fahrzeugdiagnose, ECU-Programmierung und Reparaturen an BSI-, ABS- und Airbagsystemen. Die Werkstatt liegt in der Bekim-Berisha-Straße in Prizren.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.autoelectronics-ks.com/",
+        "title": "Name · Adresse · Telefon"
+      }
+    ],
+    "checkedAt": "2026-10-02",
+    "status": "published",
+    "updatedAt": "2026-10-02T16:15:00.000Z"
+  },
+  {
+    "id": "goni-ari",
+    "name": "Auto Goma „Goni Ari“",
+    "city": "Prizren",
+    "address": "Brigada 125 N4, 20000 Prizren, Kosovo",
+    "phone": "+38349137315",
+    "phoneNote": "Allgemeiner Werkstattkontakt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Reifen & Klima"
+    ],
+    "serviceDetails": [
+      "Verkauf neuer und gebrauchter Reifen",
+      "Reifenmontage",
+      "Auswuchten von Rädern",
+      "Felgenverkauf"
+    ],
+    "languages": [],
+    "specialty": "Reifenmontage",
+    "description": "Auto Goma „Goni Ari“ bietet in Prizren Reifenverkauf, Montage und Auswuchten an. Die eigene Website nennt den Standort Brigada 125 N4 nahe dem Retail Park. Klimaservice ist nicht separat veröffentlicht.",
+    "lat": 42.1989787,
+    "lng": 20.6752772,
+    "sources": [
+      {
+        "url": "https://goniari.com/faq",
+        "title": "Name · Adresse · Telefon"
+      },
+      {
+        "url": "https://goniari.com/",
+        "title": "Reifenverkauf · Felgenverkauf · offizieller Kartenlink und exakte Koordinaten im Map-Embed"
+      }
+    ],
+    "checkedAt": "2026-10-02",
+    "status": "published",
+    "updatedAt": "2026-10-02T16:15:00.000Z"
+  }
+]
