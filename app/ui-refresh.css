@@ -21,3 +21,5 @@ html{scroll-padding-top:100px}body{color:var(--foreground);line-height:1.55}.wra
 @media(max-width:720px){.visits-modal.app-dialog{height:calc(100dvh - 28px)}.visits-modal [data-slot=tabs-trigger]{font-size:13px;padding:8px 10px}.star-rating{gap:2px}.star-rating button{min-width:38px}.star-rating>span{font-size:12px}.visit-top{gap:9px}.visit-top>strong{font-size:16px}.visit{padding:15px}.review-section legend{font-size:15px}.visit-status{font-size:12px}.review-loading{min-height:200px}}
 
 .modal-body:focus{outline:none}.modal-body:focus-visible{outline:2px solid #8cc7b8;outline-offset:-2px}
+
+.field>label{font-size:14px!important}

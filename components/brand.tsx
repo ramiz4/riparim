@@ -1,2 +1,3 @@
 import Link from "next/link";
-export function Brand(){return <Link className="brand" href="/" aria-label="Mjeshtër Startseite"><span className="brandmark"><img src="/logo.png" width={1280} height={1280} alt="" aria-hidden="true"/></span><span>mjeshtër</span><span className="brandperiod">.</span></Link>;}
+import styles from "./brand.module.css";
+export function Brand(){return <Link className="brand" href="/" aria-label="Riparim Startseite"><img className={styles.logo} src="/riparim-logo-display.png" width={512} height={195} alt="riparim"/></Link>;}

@@ -1,0 +1,2 @@
+import Link from "next/link";
+export function AdminNavigation({active}:{active:"workshops"|"reviews"|"login"}){return <nav className="admin-navigation wrap" aria-label="Verwaltung"><Link href="/verwaltung" aria-current={active==="workshops"?"page":undefined}>Werkstätten</Link><Link href="/verwaltung/bewertungen" aria-current={active==="reviews"?"page":undefined}>Bewertungen prüfen</Link><Link href="/verwaltung/anmeldung" aria-current={active==="login"?"page":undefined}>Login & Registrierung</Link></nav>;}
