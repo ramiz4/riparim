@@ -1,0 +1,782 @@
+[
+  {
+    "workshopId": "baki-automobile",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Baki%20Automobile%20SH.P.K%20Magjistralja%20Prishtin%C3%AB%E2%80%93Ferizaj%2C%20km%205%2C%2010000%20Prishtin%C3%AB%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-mita",
+    "rating": 4.8,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Mita%20sh.p.k.%20Magjistralja%20Prishtin%C3%AB%E2%80%93Shkup%2C%20km%207%2C%2010000%20Prishtina%2C%20Kosovo%20Kosovo",
+    "sourceUrl": "https://automita.com/",
+    "sourceLabel": "Betriebswebsite: ausdrücklich als Google-Wertung ausgewiesen",
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-tershana",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20Tershana%20Rruga%20Zenel%20Hajdini%2C%20Ferizaj%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-service-demi",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Service%20DEMI%20Rruga%20tranzit%2C%20kyqja%20n%C3%AB%20autostrad%C3%ABn%20e%20re%2C%20Prizren%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-electronics",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Electronics%20Rr.%20Bekim%20Berisha%2055%2C%20Prizren%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "goni-ari",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Goma%20%E2%80%9EGoni%20Ari%E2%80%9C%20Brigada%20125%20N4%2C%2020000%20Prizren%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "dd-auto-service",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=DD%20Auto%20Service%20Gasper%20Karaqi%2C%2050000%20Gjakov%C3%AB%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "sonic-garage",
+    "rating": null,
+    "count": 19,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sonic%20Garage%20Ferizaj%20Beteja%20Ilire%2C%20Muhoc%2C%2070000%20Ferizaj%2C%20Kosovo%20Kosovo",
+    "sourceUrl": "https://sonicgarage-ks.com/",
+    "sourceLabel": "Betriebswebsite: Google-Widget; Anzahl belegt, exakter Sternewert nicht ausgewiesen",
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "eurogoma-ferizaj",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Eurogoma%20%E2%80%93%20Ferizaj%20Rruga%20Rexhep%20Bislimi%2C%20af%C3%ABr%20Viva%20Fresh%2C%20Ferizaj%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "eurogoma-mitrovica",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Eurogoma%20%E2%80%93%20Mitrovic%C3%AB%20Magjistralja%20Mitrovic%C3%AB%E2%80%93Prishtin%C3%AB%2C%20Shupkovc%2C%20Mitrovic%C3%AB%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "eurogoma-gjakova",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Eurogoma%20%E2%80%93%20Gjakov%C3%AB-2%20Rruga%20e%20Tirana%2C%20tranzit%20p.n.%2C%20Gjakov%C3%AB%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "porsche-prishtina",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Porsche%20Prishtina%20Llapnasell%C3%AB%20p.n.%2C%2010000%20Prishtin%C3%AB%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "autotrade-toyota",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autotrade%20sh.p.k.%20%E2%80%93%20Toyota%20Magjistralja%20Prishtin%C3%AB%E2%80%93Ferizaj%20p.n.%2C%2010520%20Prishtin%C3%AB%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-servis-kema",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20KEMA%20Rruga%20Hashim%20Hajdini%2C%2012000%20Fush%C3%AB%20Kosov%C3%AB%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "isuzu-servis-prizren",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Isuzu%20%E2%80%93%20Servis%20Kosovo%20Rruga%20Uk%C3%AB%20Bytyqi%20Nr.%202%2C%20Prizren%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "eurogoma-prizren-lubizhde",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Eurogoma%20%E2%80%93%20Prizren%20Lubizhd%C3%AB%20Rruga%20p%C3%ABr%20Lubizhd%C3%AB%2C%20Prizren%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "eurogoma-prizren-ortakoll",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Eurogoma%20%E2%80%93%20Prizren%20Ortakoll%20Lagjja%20Ortakoll%2C%20Rruga%20Ismail%20Kryeziu%2C%20Prizren%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "as-motors",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=AS%20Motors%20Rruga%20Aziz%20Zhilivoda%20Nr.%2001%2C%2012000%20Fush%C3%AB%20Kosov%C3%AB%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "autodiagnoza-bardhi",
+    "rating": 5.0,
+    "count": 35,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autodiagnoza%20Bardhi%20Rruga%20Ibrahim%20Rugova%2C%20Ferizaj%2C%20Kosovo%20Kosovo",
+    "sourceUrl": "https://dyqani.app/places/car_rental/auto-bardhi-autodiagnoza-chiptuning-ferizaj",
+    "sourceLabel": "Dyqani: Google-Places-Angaben",
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "benita-company-kline",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Benita%20Company%20%E2%80%93%20Fahrzeugservice%20Klin%C3%AB%20Gremnik%20Klin%C3%AB%2C%209-1%2C%2032000%20Klin%C3%AB%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-servis-bashkimi-viti",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20Bashkimi%20Ramnisht%C3%AB%2C%20Viti%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "foleja-motors",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Foleja%20Motors%20Magjistralja%20Prishtin%C3%AB%E2%80%93Ferizaj%2C%20km%205%2C%2010000%20Prishtina%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "delfin-auto-citroen",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Delfin%20Auto%20SH.P.K.%20%E2%80%93%20Citro%C3%ABn%20Magjistralja%20Prishtin%C3%AB%E2%80%93Ferizaj%20km%207%2C%20Llapllasell%C3%AB%2C%2010500%20Gra%C3%A7anic%C3%AB%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-energjia",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Energjia%20Rruga%20Mon%20Balaj%20658%2C%20B%C3%ABrnic%C3%AB%20e%20Ep%C3%ABrme%2C%2010000%20Prishtin%C3%AB%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "global-automotive",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Global%20Automotive%20Rruga%20e%20Pej%C3%ABs%20Nr.%2080%2C%20Fush%C3%AB%20Kosov%C3%AB%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "mercedes-service-ballkan-peja",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Mercedes%20Service%20Ballkan%2094%20Mustaf%C3%AB%20Nimoni%2C%20Pej%C3%AB%2030000%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "mercedes-benz-baaf",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Mercedes-Benz%20BAAF%20Lutogllav%C3%AB%20p.n.%2C%2020000%20Prizren%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-servis-potera-gracanice",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20POTERA%20Magjistralja%20Prishtin%C3%AB%E2%80%93Ferizaj%2C%20km%207%2C%20Gra%C3%A7anic%C3%AB%2C%20Kosovo%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-service-express-prishtina",
+    "rating": 5.0,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Service%20Express%20Rr.%20Ahmet%20Krasniqi%2C%20Arb%C3%ABri%2C%20Prishtin%C3%AB%2010000%20Kosovo",
+    "sourceUrl": "https://autoserviceexpress.net/kontakt",
+    "sourceLabel": "Betriebswebsite: ausdrücklich als Google Reviews ausgewiesen",
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-servis-trimi-prishtina",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20Trimi%20Afer%20shkolles%20iliri%2C%20Isa%20Kastrati%2C%20Prishtina%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-servis-bmw-balia-prishtina",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20BMW%20balia%20Prishtina%2010000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "autoservis-pg-bosch-prishtina",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autoservis%20PG%20Bosch%20M55M%2BCC2%2C%20Prishtina%2010000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "autodiagnoza-kosove-prishtina",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autodiagnoza%20Kosove%20M533%2BXMW%2C%20Prishtina%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "autoelektrika-naimi-prishtina",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autoelektrika%20Naimi%20M44X%2BHR2%2C%20Prishtina%2010000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-servis-anuari-prishtina",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20ANUARI%20Qemal%20Stafa%2C%20Nr.8%20Hasan%20Ferri%2C%20Prishtina%2010000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-service-mali-prishtina",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Service%20Mali%20Rr.%20Mon%20Balaj%20no.245%2C%20Prishtina%2010000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-servis-arlindi-prishtina",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20Arlindi%20Rr%20Q%C3%ABndresa%2C%20Prishtina%2010000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "titans-auto-repair-prishtina",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=TITANS%20Auto%20Repair%20Pristina%2015000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "tahograf-prishtina",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Tahograf%20SH.P.K%20Zona%20Industriale%2C%20Lidhja%20e%20Pej%C3%ABs%2C%20Prishtina%2010000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-servis-genti-prishtina",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20Genti%20M43G%2BVQW%2C%20Unnamed%20Road%2C%20Prishtina%2010000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-servis-budi-prishtina",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20Budi%20Rr%20Raniz%20Cerrnica%2C%20Prroj%20i%20Njelmt%2C%20Prishtina%2010000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "tachograf-kienzle-ferizaj",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Tachograf%20service%20Kienzle%20Magjistralja%20Ferizaj-Shkup%2C%202%20km%20nga%20ura%2C%20Ferizaj%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-servis-cima-ferizaj",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20servis%20CIMA%20Ferizaj%20Kadri%20Zeka%2C%20Ferizaj%2070000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "olluri-ferizaj",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Olluri%20Rruga%20e%20Bonstill%2C%20Ferizaj%2070000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-servis-doni-skenderaj",
+    "rating": 5.0,
+    "count": 6,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20Doni%20QQVM%2B5VX%2C%20R101%2C%20Klin%C3%AB%20e%20Ep%C3%ABrme%2041000%20Kosovo",
+    "sourceUrl": "https://www.top-rated.online/cities/Klin%C3%AB%2Be%2BEp%C3%ABrme/place/p/10916121/Auto%2BServis%2BDoni",
+    "sourceLabel": "Top-Rated.online: Google-Bewertungen",
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": "2026-02-20"
+  },
+  {
+    "workshopId": "auto-beli-ferizaj",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Beli%20Rr.%20Ibrahim%20Rugova%2C%20Ferizaj%2070000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "autohouse-pjese-servis-ferizaj",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autohouse%20Auto%20Pjese%20%26%20Servis%20Magjistralja%20Ferizaj-Prishtin%C3%AB%2C%20Ferizaj%2070000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-ngjyroses-goga-ferizaj",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Ngjyros%C3%ABs%20GOGA%20Rruga%20Ahmet%20Hoxha%2C%20Ferizaj%2070000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-service-kushtrimi-ferizaj",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Service%20Kushtrimi%209573%2BG23%2C%20Hivzi%20Sylejmani%2C%20Ferizaj%2070000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-elektro-blendi-ferizaj",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Elektro%20Blendi%20116%20V%C3%ABllezerit%20G%C3%ABrvalla%2C%20Ferizaj%2070000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-ngjyroses-izmiri-ferizaj",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Ngjyros%C3%ABs%20IZMIRI%20116%20V%C3%ABllezerit%20G%C3%ABrvalla%2C%20Ferizaj%2070000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "ridvan-ferizaj",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Ridvan%20R206%2C%20Ferizaj%2070000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-servis-perparimi-ferizaj",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20P%C3%ABrparimi%2095Q3%2B7VQ%2C%20Driton%20Islami%2C%20Talinoc%20i%20Jerlive%2070000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-ngjyrosje-egzoni-ferizaj",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Ngjyrosje%20Egzoni%2095MC%2BX3%2C%20Talinoc%20i%20Muhaxher%C3%ABve%2070000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-ngjyroses-shypi-ferizaj",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Ngjyros%C3%ABs%20SHYPI%2095Q7%2B872%2C%20Talinoc%20i%20Jerlive%2070000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "mercedes-isa-ferizaj",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Mercedes%20Isa%2095QF%2B28%2C%20Talinoc%20i%20Muhaxher%C3%ABve%2070000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "bmw-service-ferizaj",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=BMW%20Service%2095R6%2BP8J%2C%20Driton%20Islami%2C%20Talinoc%20i%20Jerlive%2070000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "autopjese-service-nazi-ferizaj",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autopjes%C3%AB%20%26%20Service%20Nazi%20959P%2BXV6%2C%20Bibaj%2070000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "servis-kurtaj-erolls-prizren",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Servis%20Kurtaj%20%26%20Auto%20Klima%20EROLLS%20Prizren%2020000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "kio-garage-prizren",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=KIO%20Garage%20William%20Walker%2C%20Prizren%2020000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "cesko-auto-service-prizren",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Cesko%20auto%20service%20Besim%20Shala%2C%20Prizren%2020000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "ahp-volkswagen-prizren",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=AHP%20Volkswagen%20/%20Audi%20/%20Skoda%2020000%2C%20M25%2C%20Prizren%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-elektrika-samko-mitrovica",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://g.page/auto-elektrika-samko",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "valoni-i-mitrovica",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/?cid=10863169548485369450",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "scania-trans-mitrovica",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/?cid=16568289251050981449",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "stavileci-tuning-mitrovica",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/?cid=3038677575624414976",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-cosmetic-fitimi-mitrovica",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/?cid=7080982771088168193",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-llamarinier-luani-mitrovica",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/?cid=3046183341130301890",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-elektrika-dzogovic-mitrovica",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/?cid=14286692127351697162",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "ballkan-auto-garage-gjilan",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Ballkan%20Auto%20Garage%20Rruga%20Gjilan%2C%20Gjilan%2060000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-service-adonisi-gjilan",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Service%20Adonisi%2075%20Ramiz%20Cernica%2C%20Gjilan%2060000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "automehanicarska-radnja-gjilan",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Automehanicarska%20radnja%20Koretiste%2C%20Gjilan%2038250%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "garage-fita-gjilan",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Garage%20Fita%20Fatmir%20Ibishi%2C%20Gjilan%2060000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-moto-universum-gjilan",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Moto%20Universum%20/%20Auto%20Servis%20dhe%20Off%20road%20Abdullah%20Tahiri%2C%20Gjilan%2060000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-ballkan-gjilan",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Ballkan%20Nato%2099%2C%20Gjilan%2060000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "auto-pjese-servis-jaha-gjilan",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Pjes%C3%AB%20%26%20Servis%20JAHA%20CFR5%2B26%2C%20Gjilan%2060000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "universal-auto-pjese-servis-gjilan",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Universal%20Auto%20Pjese%20%26%20Servis%20NenaTereze%2085%2C%20Gjilan%2060000%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  },
+  {
+    "workshopId": "autoavangarde-bmw-service-peja",
+    "rating": null,
+    "count": null,
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=AutoAvangarde%20-%20BMW%20Service%20Magjistralia%20Peje-Prishtine%20KM1%2C%20Pej%C3%AB%20Kosovo",
+    "sourceUrl": null,
+    "sourceLabel": null,
+    "checkedAt": "2026-10-03T17:13:16.309374Z",
+    "sourceUpdatedAt": null
+  }
+]

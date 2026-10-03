@@ -3832,5 +3832,1561 @@
     "checkedAt": "2026-10-03",
     "status": "draft",
     "updatedAt": "2026-10-03T12:47:07.000Z"
+  },
+  {
+    "id": "auto-service-express-prishtina",
+    "name": "Auto Service Express",
+    "city": "Prishtina",
+    "address": "Rr. Ahmet Krasniqi, Arbëri, Prishtinë 10000",
+    "phone": "+38349595483",
+    "phoneNote": "Veröffentlichter Werkstattkontakt",
+    "whatsapp": "+38349595483",
+    "brands": [
+      "Renault",
+      "Peugeot",
+      "Citroën",
+      "Dacia"
+    ],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Service und Reparaturen für französische Fahrzeuge",
+      "Ersatzteile für Renault, Peugeot, Citroën und Dacia"
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice",
+    "description": "Auto Service Express in Arbëri veröffentlicht Fahrzeugservice und Ersatzteile für französische Marken sowie einen bestätigten WhatsApp-Kontakt.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://autoserviceexpress.net/kontakt",
+        "title": "Betriebswebsite: Kontakt und Service",
+        "kind": "official"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-servis-trimi-prishtina",
+    "name": "Auto Servis Trimi",
+    "city": "Prishtina",
+    "address": "Afer shkolles iliri, Isa Kastrati, Prishtina",
+    "phone": "+38349195447",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/pristina/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-servis-bmw-balia-prishtina",
+    "name": "Auto Servis BMW balia",
+    "city": "Prishtina",
+    "address": "Prishtina 10000",
+    "phone": "+38349169839",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen. Genaue Straßenadresse vor der Anfahrt bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/pristina/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "autoservis-pg-bosch-prishtina",
+    "name": "Autoservis PG Bosch",
+    "city": "Prishtina",
+    "address": "M55M+CC2, Prishtina 10000",
+    "phone": "+38344282504",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/pristina/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "autodiagnoza-kosove-prishtina",
+    "name": "Autodiagnoza Kosove",
+    "city": "Prishtina",
+    "address": "M533+XMW, Prishtina",
+    "phone": "+38344260318",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/pristina/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "autoelektrika-naimi-prishtina",
+    "name": "Autoelektrika Naimi",
+    "city": "Prishtina",
+    "address": "M44X+HR2, Prishtina 10000",
+    "phone": "+38344128583",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/pristina/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-servis-anuari-prishtina",
+    "name": "Auto Servis ANUARI",
+    "city": "Prishtina",
+    "address": "Qemal Stafa, Nr.8 Hasan Ferri, Prishtina 10000",
+    "phone": "+38348700548",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/pristina/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-service-mali-prishtina",
+    "name": "Auto Service Mali",
+    "city": "Prishtina",
+    "address": "Rr. Mon Balaj no.245, Prishtina 10000",
+    "phone": "+38343799021",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/pristina/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-servis-arlindi-prishtina",
+    "name": "Auto Servis Arlindi",
+    "city": "Prishtina",
+    "address": "Rr Qëndresa, Prishtina 10000",
+    "phone": "+38344848728",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/pristina/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "titans-auto-repair-prishtina",
+    "name": "TITANS Auto Repair",
+    "city": "Prishtina",
+    "address": "Pristina 15000",
+    "phone": "+38349116411",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen. Genaue Straßenadresse vor der Anfahrt bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/pristina/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "tahograf-prishtina",
+    "name": "Tahograf SH.P.K",
+    "city": "Prishtina",
+    "address": "Zona Industriale, Lidhja e Pejës, Prishtina 10000",
+    "phone": "+38344258295",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/pristina/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-servis-genti-prishtina",
+    "name": "Auto Servis Genti",
+    "city": "Prishtina",
+    "address": "M43G+VQW, Unnamed Road, Prishtina 10000",
+    "phone": "+38344208555",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/pristina/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-servis-budi-prishtina",
+    "name": "Auto Servis Budi",
+    "city": "Prishtina",
+    "address": "Rr Raniz Cerrnica, Prroj i Njelmt, Prishtina 10000",
+    "phone": "+38345454535",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/pristina/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "tachograf-kienzle-ferizaj",
+    "name": "Tachograf service Kienzle",
+    "city": "Ferizaj",
+    "address": "Magjistralja Ferizaj-Shkup, 2 km nga ura, Ferizaj",
+    "phone": "+38344113580",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/ferizaj/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-servis-cima-ferizaj",
+    "name": "Auto servis CIMA Ferizaj",
+    "city": "Ferizaj",
+    "address": "Kadri Zeka, Ferizaj 70000",
+    "phone": "+38345260944",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/ferizaj/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "olluri-ferizaj",
+    "name": "Olluri",
+    "city": "Ferizaj",
+    "address": "Rruga e Bonstill, Ferizaj 70000",
+    "phone": "+38344121791",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/ferizaj/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-servis-doni-skenderaj",
+    "name": "Auto Servis Doni",
+    "city": "Skenderaj",
+    "address": "QQVM+5VX, R101, Klinë e Epërme 41000",
+    "phone": "+38349255770",
+    "phoneNote": "Verzeichnis führt 049 255 770; ältere internationale Vorwahl in der Quelle",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice laut Kategorie „Auto tune up service“ im Verzeichnis"
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Werkstatt in Klinë e Epërme, Gemeinde Skenderaj. Kontaktdaten und Termin direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.top-rated.online/cities/Klin%C3%AB%2Be%2BEp%C3%ABrme/place/p/10916121/Auto%2BServis%2BDoni",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-beli-ferizaj",
+    "name": "Auto Beli",
+    "city": "Ferizaj",
+    "address": "Rr. Ibrahim Rugova, Ferizaj 70000",
+    "phone": "+38344772003",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/ferizaj/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "autohouse-pjese-servis-ferizaj",
+    "name": "Autohouse Auto Pjese & Servis",
+    "city": "Ferizaj",
+    "address": "Magjistralja Ferizaj-Prishtinë, Ferizaj 70000",
+    "phone": "+38348666007",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/ferizaj/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-ngjyroses-goga-ferizaj",
+    "name": "Auto Ngjyrosës GOGA",
+    "city": "Ferizaj",
+    "address": "Rruga Ahmet Hoxha, Ferizaj 70000",
+    "phone": "+38348380560",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/ferizaj/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-service-kushtrimi-ferizaj",
+    "name": "Auto Service Kushtrimi",
+    "city": "Ferizaj",
+    "address": "9573+G23, Hivzi Sylejmani, Ferizaj 70000",
+    "phone": "+38345444656",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/ferizaj/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-elektro-blendi-ferizaj",
+    "name": "Auto Elektro Blendi",
+    "city": "Ferizaj",
+    "address": "116 Vëllezerit Gërvalla, Ferizaj 70000",
+    "phone": "+38344760607",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/ferizaj/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-ngjyroses-izmiri-ferizaj",
+    "name": "Auto Ngjyrosës IZMIRI",
+    "city": "Ferizaj",
+    "address": "116 Vëllezerit Gërvalla, Ferizaj 70000",
+    "phone": "+38345676606",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/ferizaj/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "ridvan-ferizaj",
+    "name": "Ridvan",
+    "city": "Ferizaj",
+    "address": "R206, Ferizaj 70000",
+    "phone": "+38345613617",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/ferizaj/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-servis-perparimi-ferizaj",
+    "name": "Auto Servis Përparimi",
+    "city": "Ferizaj",
+    "address": "95Q3+7VQ, Driton Islami, Talinoc i Jerlive 70000",
+    "phone": "+38344444713",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/ferizaj/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-ngjyrosje-egzoni-ferizaj",
+    "name": "Auto Ngjyrosje Egzoni",
+    "city": "Ferizaj",
+    "address": "95MC+X3, Talinoc i Muhaxherëve 70000",
+    "phone": "+38344367105",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/ferizaj/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-ngjyroses-shypi-ferizaj",
+    "name": "Auto Ngjyrosës SHYPI",
+    "city": "Ferizaj",
+    "address": "95Q7+872, Talinoc i Jerlive 70000",
+    "phone": "+38349729777",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/ferizaj/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "mercedes-isa-ferizaj",
+    "name": "Mercedes Isa",
+    "city": "Ferizaj",
+    "address": "95QF+28, Talinoc i Muhaxherëve 70000",
+    "phone": "+38349999343",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/ferizaj/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "bmw-service-ferizaj",
+    "name": "BMW Service",
+    "city": "Ferizaj",
+    "address": "95R6+P8J, Driton Islami, Talinoc i Jerlive 70000",
+    "phone": "+38344116212",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/ferizaj/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "autopjese-service-nazi-ferizaj",
+    "name": "Autopjesë & Service Nazi",
+    "city": "Ferizaj",
+    "address": "959P+XV6, Bibaj 70000",
+    "phone": "+38349297333",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/ferizaj/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "servis-kurtaj-erolls-prizren",
+    "name": "Servis Kurtaj & Auto Klima EROLLS",
+    "city": "Prizren",
+    "address": "Prizren 20000",
+    "phone": "+38344940015",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen. Genaue Straßenadresse vor der Anfahrt bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/prizren/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "kio-garage-prizren",
+    "name": "KIO Garage",
+    "city": "Prizren",
+    "address": "William Walker, Prizren 20000",
+    "phone": "+38344119976",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/prizren/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "cesko-auto-service-prizren",
+    "name": "Cesko auto service",
+    "city": "Prizren",
+    "address": "Besim Shala, Prizren 20000",
+    "phone": "+38345623482",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/prizren/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "ahp-volkswagen-prizren",
+    "name": "AHP Volkswagen / Audi / Skoda",
+    "city": "Prizren",
+    "address": "20000, M25, Prizren",
+    "phone": "+38344561161",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/prizren/car-repair",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-elektrika-samko-mitrovica",
+    "name": "Auto Elektrika Samko",
+    "city": "Mitrovica",
+    "address": "Filip Vishnjiq, Mitrovicë 38220",
+    "phone": "+381669599440",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "valoni-i-mitrovica",
+    "name": "Valoni-I",
+    "city": "Mitrovica",
+    "address": "Nr. 1 Adem Voca, Mitrovicë 40000",
+    "phone": "+38349303929",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "scania-trans-mitrovica",
+    "name": "Scania Trans",
+    "city": "Mitrovica",
+    "address": "VVGJ+GGC, Minatorët e Trepçës, Mitrovicë 40000",
+    "phone": "+38349172737",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "stavileci-tuning-mitrovica",
+    "name": "Stavileci Tuning",
+    "city": "Mitrovica",
+    "address": "VVR6+9Q5, Rruga Kollashini, Mitrovicë 40000",
+    "phone": "+38349400650",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-cosmetic-fitimi-mitrovica",
+    "name": "Auto Cosmetic te FITIMI",
+    "city": "Mitrovica",
+    "address": "VVCV+5H5, M2, Mitrovicë 40000",
+    "phone": "+38349213901",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-llamarinier-luani-mitrovica",
+    "name": "Auto Llamarinier LUANI",
+    "city": "Mitrovica",
+    "address": "Mbreti Agron Kqiç i Madh, Mitrovicë 40000",
+    "phone": "+38344213762",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-elektrika-dzogovic-mitrovica",
+    "name": "Auto elektrika Dzogovic",
+    "city": "Mitrovica",
+    "address": "Drvarska bb, Mitrovicë 38220",
+    "phone": "+381649161436",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "ballkan-auto-garage-gjilan",
+    "name": "Ballkan Auto Garage",
+    "city": "Gjilan",
+    "address": "Rruga Gjilan, Gjilan 60000",
+    "phone": "+38344133332",
+    "phoneNote": "Lokale 044-Nummer auf +383 normalisiert; Quelle führt auch eine historische +377-Vorwahl",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/gjilan/car-repair/",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-service-adonisi-gjilan",
+    "name": "Auto Service Adonisi",
+    "city": "Gjilan",
+    "address": "75 Ramiz Cernica, Gjilan 60000",
+    "phone": "+38344321126",
+    "phoneNote": "Lokale 044-Nummer auf +383 normalisiert; Quelle führt auch eine historische +377-Vorwahl",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/gjilan/car-repair/",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "automehanicarska-radnja-gjilan",
+    "name": "Automehanicarska radnja",
+    "city": "Gjilan",
+    "address": "Koretiste, Gjilan 38250",
+    "phone": "+381649192290",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/gjilan/car-repair/",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "garage-fita-gjilan",
+    "name": "Garage Fita",
+    "city": "Gjilan",
+    "address": "Fatmir Ibishi, Gjilan 60000",
+    "phone": "+38349273699",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/gjilan/car-repair/",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-moto-universum-gjilan",
+    "name": "Auto Moto Universum / Auto Servis dhe Off road",
+    "city": "Gjilan",
+    "address": "Abdullah Tahiri, Gjilan 60000",
+    "phone": "+38349547577",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/gjilan/car-repair/",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-ballkan-gjilan",
+    "name": "Auto Ballkan",
+    "city": "Gjilan",
+    "address": "Nato 99, Gjilan 60000",
+    "phone": "+38344177327",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK/gjilan/car-repair/",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "auto-pjese-servis-jaha-gjilan",
+    "name": "Auto Pjesë & Servis JAHA",
+    "city": "Gjilan",
+    "address": "CFR5+26, Gjilan 60000",
+    "phone": "+38344296081",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://de.cybo.com/XK/gjilan/autoreparatur",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "universal-auto-pjese-servis-gjilan",
+    "name": "Universal Auto Pjese & Servis",
+    "city": "Gjilan",
+    "address": "NenaTereze 85, Gjilan 60000",
+    "phone": "+38344304686",
+    "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://de.cybo.com/XK/gjilan/autoreparatur",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
+  },
+  {
+    "id": "autoavangarde-bmw-service-peja",
+    "name": "AutoAvangarde - BMW Service",
+    "city": "Peja",
+    "address": "Magjistralia Peje-Prishtine KM1, Pejë",
+    "phone": "+38349327220",
+    "phoneNote": "Lokale 049-Nummer auf +383 normalisiert; Quelle führt auch eine historische +386-Vorwahl",
+    "whatsapp": "",
+    "brands": [],
+    "services": [
+      "Inspektion & Wartung"
+    ],
+    "serviceDetails": [
+      "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
+    ],
+    "languages": [],
+    "specialty": "Fahrzeugservice · Verzeichniseintrag",
+    "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
+    "lat": null,
+    "lng": null,
+    "sources": [
+      {
+        "url": "https://www.cybo.com/XK-biz/autoavangarde-bmw-service",
+        "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
+        "kind": "directory"
+      }
+    ],
+    "checkedAt": "2026-10-03",
+    "status": "published",
+    "updatedAt": "2026-10-03T17:13:16.309374Z"
   }
 ]

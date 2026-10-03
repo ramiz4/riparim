@@ -1,4 +1,4 @@
-import { integer, sqliteTable, text, index } from "drizzle-orm/sqlite-core";
+import { integer, real, sqliteTable, text, index } from "drizzle-orm/sqlite-core";
 export const visits = sqliteTable("visits", {
  id:text("id").primaryKey(),owner:text("owner").notNull(),workshop:text("workshop").notNull(),date:text("date").notNull(),vehicle:text("vehicle").notNull(),service:text("service").notNull(),
  evidenceType:text("evidence_type").notNull(),evidenceNote:text("evidence_note").notNull().default(""),fileKey:text("file_key"),fileName:text("file_name"),fileType:text("file_type"),
@@ -13,6 +13,10 @@ export const workshopProfiles = sqliteTable("workshops", {
  sources:text("sources").notNull(),checkedAt:text("checked_at").notNull(),status:text("status").notNull().default("draft"),updatedAt:text("updated_at").notNull()
 },table=>[index("idx_workshops_status_city").on(table.status,table.city)]);
 export const catalogState=sqliteTable("catalog_state",{key:text("key").primaryKey(),value:text("value").notNull()});
+export const workshopGoogleRatings=sqliteTable("workshop_google_ratings",{
+ workshopId:text("workshop_id").primaryKey(),rating:real("rating"),reviewCount:integer("review_count"),mapsUrl:text("maps_url").notNull(),
+ sourceUrl:text("source_url"),sourceLabel:text("source_label"),checkedAt:text("checked_at").notNull(),sourceUpdatedAt:text("source_updated_at")
+});
 export const authSettings=sqliteTable("auth_settings",{id:text("id").primaryKey(),projectUrl:text("project_url").notNull(),publicKey:text("public_key").notNull(),enabled:integer("enabled").notNull().default(0),emailDeliveryConfirmed:integer("email_delivery_confirmed").notNull().default(0),updatedAt:text("updated_at").notNull()});
 export const authLinks=sqliteTable("auth_links",{accountId:text("account_id").primaryKey(),legacyOwner:text("legacy_owner").notNull().unique(),ownerAdmin:integer("owner_admin").notNull().default(0),createdAt:text("created_at").notNull(),passwordAccess:integer("password_access").notNull().default(1)});
 export const authAttempts=sqliteTable("auth_attempts",{key:text("key").primaryKey(),attempts:integer("attempts").notNull().default(0),expiresAt:integer("expires_at").notNull()},table=>[index("idx_auth_attempts_expiry").on(table.expiresAt)]);
