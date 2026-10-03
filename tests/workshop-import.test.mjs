@@ -55,10 +55,10 @@ assert.equal(filters.parseCatalogueFilters(new URLSearchParams('sort=bewertung')
 const unknown=workshops.find(w=>w.googleRating.rating===null&&w.googleRating.count===null);
 assert.equal(unknown.googleRating.rating,null,'missing Google score stays null');
 const unknownMarkup=renderToStaticMarkup(React.createElement(WorkshopRatings,{workshop:unknown,details:true}));
-assert(unknownMarkup.includes('Nicht verifiziert'));
+assert(unknownMarkup.includes('Bewertung nicht verfügbar'));
 assert(!unknownMarkup.includes('0,0'));
 const emptyCardRatings=renderToStaticMarkup(React.createElement(WorkshopRatings,{workshop:unknown,hideUnavailable:true}));
-assert(!emptyCardRatings.includes('Nicht verifiziert')&&!emptyCardRatings.includes('Noch keine'),'list cards preserve the absence of empty rating placeholders');
+assert(!emptyCardRatings.includes('Bewertung nicht verfügbar')&&!emptyCardRatings.includes('Noch keine'),'list cards preserve the absence of empty rating placeholders');
 const sonic=workshops.find(w=>w.id==='sonic-garage');
 assert.equal(sonic.googleRating.rating,null,'star icons do not establish an exact Google aggregate');
 assert.equal(sonic.googleRating.count,19);

@@ -14,5 +14,5 @@ export function GooglePlaceReviews({workshop}:{workshop:Workshop}){
   })().catch(()=>{if(active){clearTimeout(timer);setWidgetFailed(true);}});
   return()=>{active=false;clearTimeout(timer);element?.remove();};
  },[identity]);
- return <div ref={ref} className="google-reviews-panel"><div ref={container} className={`google-official-widget${widgetFailed?" google-widget-unavailable":""}`} aria-label={`Google-Rezensionen zu ${workshop.name}`}/>{!widgetReady&&<p className="help" role="status">{!widgetFailed&&(status==="loading"||status==="ready")?"Google-Rezensionen werden geladen …":"Aktuelle Sterne und Rezensionen findest du auf Google Maps."}</p>}<a className="text-action" href={mapsUrl} target="_blank" rel="noopener noreferrer">Google Maps öffnen</a></div>;
+ return <div ref={ref} className="google-reviews-panel"><div ref={container} className={`google-official-widget${widgetFailed?" google-widget-unavailable":""}`} aria-label={`Google-Rezensionen zu ${workshop.name}`}/>{!widgetReady&&!widgetFailed&&(status==="loading"||status==="ready")&&<p className="help" role="status">Google-Rezensionen werden geladen …</p>}<a className="text-action" href={mapsUrl} target="_blank" rel="noopener noreferrer">{widgetReady?"Alle Rezensionen auf Google Maps":"Rezensionen auf Google Maps ansehen"}</a></div>;
 }
