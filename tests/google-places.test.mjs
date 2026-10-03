@@ -57,6 +57,9 @@ assert.equal(matchesBefore,1);assert.equal((await directory.listWorkshops()).len
 assert.equal((await directory.listWorkshops()).find(w=>w.id===mita.id).rating,null,'Google matching leaves Riparim aggregates untouched');
 const quotaKey='google-place-lookups:'+new Date().toISOString().slice(0,10);
 sqlite.prepare('UPDATE catalog_state SET value=? WHERE key=?').run('100',quotaKey);
+sqlite.prepare('INSERT INTO workshop_google_places (workshop_id,place_id,profile_hash,checked_at,retry_after) VALUES (?,?,?,?,?)').run('legacy-positive-fixture',candidate.id,legacyHash,Date.now(),Date.now()+365*86400000);
+assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'legacy-positive-fixture'}),candidate.id,'an unchanged verified legacy match survives the strategy upgrade even with no remaining quota');assert.equal(calls,1);
+assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'legacy-positive-fixture',phone:'+38349111111'}),null,'a changed profile cannot reuse a legacy verified identity');assert.equal(calls,1);
 assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'quota-fixture'}),null);assert.equal(calls,1,'daily identity-search budget cannot be exceeded');
 sqlite.prepare('UPDATE catalog_state SET value=? WHERE key=?').run('1',quotaKey);
 assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'ambiguous-fixture',phone:'+38349111111'}),null);assert.equal(calls,2);assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'ambiguous-fixture',phone:'+38349111111'}),null);assert.equal(calls,2,'unmatched candidates are not retried on every visit');

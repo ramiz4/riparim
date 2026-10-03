@@ -10,6 +10,8 @@ export async function resolveWorkshopGooglePlace(workshop:Workshop):Promise<stri
  const config=googlePlacesConfiguration();if(!config.enabled)return null;
  const {db}=storage(),now=Date.now(),hash=await workshopIdentityHash(workshop);
  const existing=await db.prepare("SELECT place_id,profile_hash,checked_at,retry_after FROM workshop_google_places WHERE workshop_id=?").bind(workshop.id).first<MatchRow>();
+ // The search improvement retries old negatives, while unchanged verified IDs stay valid.
+ if(existing&&validGooglePlaceId(existing.place_id)&&now-existing.checked_at<365*DAY&&existing.profile_hash!==hash&&existing.profile_hash===await workshopIdentityHash(workshop,true))return existing.place_id;
  if(existing?.profile_hash===hash){
   if(validGooglePlaceId(existing.place_id)&&now-existing.checked_at<365*DAY)return existing.place_id;
   if(existing.retry_after>now)return null;
