@@ -1,11 +1,12 @@
 import { storage } from "./storage";
 import canonical from "@/data/workshops.json";
-import {validateWorkshopCatalogue} from "@/lib/workshop-source";
+import {validateWorkshopCatalogue,workshopCatalogueSchema} from "@/lib/workshop-source";
 import {workshopIdentityHash} from "@/lib/google-place-identity";
 import {services,cities,type Workshop,type Source,type GoogleRating} from "@/lib/workshops";
 export const profileColumns=["id","name","city","address","phone","phone_note","whatsapp","brands","services","service_details","languages","specialty","description","lat","lng","sources","checked_at","status","updated_at"];
 export type ProfileInput=Omit<Workshop,"initials"|"color"|"rating"|"count"|"googleRating">;
-const catalogue=validateWorkshopCatalogue(canonical);
+// Workers have no reliable wall clock during module initialization.
+const catalogue=workshopCatalogueSchema.parse(canonical);
 const curated=catalogue.workshops.map(({google,...profile})=>profile);
 const googleSnapshots=catalogue.workshops.flatMap(w=>w.google.snapshot?[{workshopId:w.id,...w.google.snapshot}]:[]);
 let seedKey:Promise<string>|undefined;
@@ -20,6 +21,7 @@ export function profileValues(w:ProfileInput){return [w.id,w.name,w.city,w.addre
 // Canonical JSON is imported independently from immutable schema migrations.
 export async function ensureInitialCatalog(){
  const {db}=storage();if(!curated.length)return;
+ validateWorkshopCatalogue(catalogue);
  const key=await catalogueSeedKey();
  const marker=await db.prepare("SELECT value FROM catalog_state WHERE key=?").bind(key).first();if(marker)return;
  const profiles=curated as ProfileInput[],statements=[];

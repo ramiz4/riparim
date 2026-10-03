@@ -15,7 +15,9 @@ for(const file of (await readdir('drizzle')).filter(file=>file.endsWith('.sql'))
 const d1={prepare(sql){const statement=sqlite.prepare(sql);const adapter=(values=[])=>({bind:(...v)=>{assert(v.length<=95,'import respects D1 binding limits');return adapter(v);},first:async()=>statement.get(...values)??null,all:async()=>({results:statement.all(...values)}),run:async()=>({meta:statement.run(...values)})});return adapter();},async batch(statements){assert(statements.length<=50,'large imports use bounded batches');sqlite.exec('BEGIN');try{const result=[];for(const statement of statements)result.push(await statement.run());sqlite.exec('COMMIT');return result;}catch(error){sqlite.exec('ROLLBACK');throw error;}}};
 globalThis.fixtureEnv={DB:d1,BUCKET:{}};
 const load=file=>import(new URL(output+'/'+file,'file://'+process.cwd()+'/').href);
-const directory=await load('db/directory.mjs');
+const realNow=Date.now;
+let directory;
+try{Date.now=()=>0;directory=await load('db/directory.mjs');}finally{Date.now=realNow;}
 const filters=await load('lib/catalogue-filters.mjs');
 const {WorkshopRatings}=await load('components/workshop-ratings.mjs');
 const catalogue=JSON.parse(await readFile('data/workshops.json','utf8'));
