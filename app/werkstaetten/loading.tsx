@@ -1,0 +1,1 @@
+export default function CatalogueLoading(){return <main className="catalogue-page wrap"><h1>Werkstätten</h1><p role="status">Werkstätten werden geladen …</p><div className="catalogue-placeholder-grid" aria-hidden="true">{[1,2,3].map(value=><div className="catalogue-placeholder" key={value}/>)}</div></main>;}

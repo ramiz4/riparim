@@ -14,9 +14,11 @@ import {readSearchSession} from "@/lib/search-session";
 
 type Props={workshop:Workshop;directory:Workshop[];reviews:Review[];reviewError:string;signedIn:boolean;account:AccountIdentity|null;isAdmin:boolean};
 export default function WorkshopProfile({workshop:w,directory,reviews,reviewError,signedIn,account,isAdmin}:Props){
- const router=useRouter();const [reviewOpen,setReviewOpen]=useState(false),[reviewBusy,setReviewBusy]=useState(false),[myReviews,setMyReviews]=useState(false),[editing,setEditing]=useState<Visit|null>(null),[contact,setContact]=useState<"phone"|"whatsapp"|null>(null),[message,setMessage]=useState(""),[feedback,setFeedback]=useState("");
+ const router=useRouter();const [reviewOpen,setReviewOpen]=useState(false),[reviewBusy,setReviewBusy]=useState(false),[myReviews,setMyReviews]=useState(false),[editing,setEditing]=useState<Visit|null>(null),[contact,setContact]=useState<"phone"|"whatsapp"|null>(null),[message,setMessage]=useState(""),[feedback,setFeedback]=useState(""),[backHref,setBackHref]=useState("/werkstaetten");
  const path=`/werkstatt/${encodeURIComponent(w.id)}`,mapHref=`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(w.lat!==null&&w.lng!==null?`${w.lat},${w.lng}`:`${w.name} ${w.address}`)}`;
  const hasDirectorySources=w.sources.some(source=>"kind" in source&&source.kind==="directory");
+ // eslint-disable-next-line react-hooks/set-state-in-effect -- The return link uses only a validated public catalogue URL from browser memory.
+ useEffect(()=>{const href=readSearchSession()?.catalogueHref;if(href?.startsWith("/werkstaetten"))setBackHref(href);},[]);
  // eslint-disable-next-line react-hooks/set-state-in-effect -- A login return may target the inline review section.
  useEffect(()=>{if(window.location.hash==="#bewerten"||new URLSearchParams(window.location.search).get("bewerten")==="1")setReviewOpen(true);},[]);
  function openReview(){setReviewOpen(true);requestAnimationFrame(()=>document.getElementById("bewerten")?.scrollIntoView({behavior:"smooth",block:"start"}));}
@@ -27,7 +29,7 @@ export default function WorkshopProfile({workshop:w,directory,reviews,reviewErro
  async function copy(value:string,label:string){try{await navigator.clipboard.writeText(value);setFeedback(label);}catch{setFeedback("Bitte wähle den Text aus und kopiere ihn manuell.");}}
  return <><SiteHeader account={account} isAdmin={isAdmin} section="Werkstattprofil" onVisits={()=>setMyReviews(true)} onNewVisit={openReview}/>
  <main className="workshop-page wrap">
-  <Link className="profile-back" href="/"><ArrowLeft size={16}/>Zur Werkstattsuche</Link>
+  <Link className="profile-back" href={backHref}><ArrowLeft size={16}/>Zurück zur Suche</Link>
   <header className="workshop-overview"><div className="workshop-overview-identity"><span className={`workshop-mark ${w.color}`} aria-hidden="true">{w.initials}<Wrench size={18}/></span><div><p className="profile-place"><MapPin size={15}/>{w.city} · {w.specialty}</p><h1>{w.name}</h1><div className="profile-rating">{w.rating!==null?<><Star size={17} fill="currentColor"/><strong>{w.rating.toLocaleString("de-DE",{minimumFractionDigits:1,maximumFractionDigits:1})}</strong><span>{w.count} {w.count===1?"geprüfte Bewertung":"geprüfte Bewertungen"}</span></>:<><MessageCircle size={16}/><span>Noch keine geprüften Bewertungen</span></>}</div></div></div><div className="workshop-overview-actions"><button className="primary" onClick={()=>startContact("phone")}><Phone size={17}/>Anrufen</button>{w.whatsapp&&<button className="outline" onClick={()=>startContact("whatsapp")}><MessageCircle size={17}/>WhatsApp</button>}<button className="outline" onClick={openReview}><Star size={17}/>Bewerten</button></div></header>
   <nav className="profile-section-nav" aria-label="Profilbereiche"><a href="#leistungen">Leistungen</a><a href="#bewertungen">Bewertungen</a><a href="#standort">Standort</a><a href="#quellen">Quellen</a></nav>
   <div className="workshop-page-grid"><div className="workshop-page-main">
