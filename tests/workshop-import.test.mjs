@@ -12,13 +12,14 @@ const result=await build({entryPoints:['db/directory.ts','lib/catalogue-filters.
 for(const file of result.outputFiles){await mkdir(file.path.slice(0,file.path.lastIndexOf('/')),{recursive:true});await writeFile(file.path.replace(/\.js$/,'.mjs'),file.contents);}
 const sqlite=new DatabaseSync(':memory:');
 for(const file of (await readdir('drizzle')).filter(file=>file.endsWith('.sql')).sort())sqlite.exec(await readFile('drizzle/'+file,'utf8'));
-const d1={prepare(sql){const statement=sqlite.prepare(sql);const adapter=(values=[])=>({bind:(...v)=>{assert(v.length<=95,'import respects D1 binding limits');return adapter(v);},first:async()=>statement.get(...values)??null,all:async()=>({results:statement.all(...values)}),run:async()=>({meta:statement.run(...values)})});return adapter();},async batch(statements){sqlite.exec('BEGIN');try{const result=[];for(const statement of statements)result.push(await statement.run());sqlite.exec('COMMIT');return result;}catch(error){sqlite.exec('ROLLBACK');throw error;}}};
+const d1={prepare(sql){const statement=sqlite.prepare(sql);const adapter=(values=[])=>({bind:(...v)=>{assert(v.length<=95,'import respects D1 binding limits');return adapter(v);},first:async()=>statement.get(...values)??null,all:async()=>({results:statement.all(...values)}),run:async()=>({meta:statement.run(...values)})});return adapter();},async batch(statements){assert(statements.length<=50,'large imports use bounded batches');sqlite.exec('BEGIN');try{const result=[];for(const statement of statements)result.push(await statement.run());sqlite.exec('COMMIT');return result;}catch(error){sqlite.exec('ROLLBACK');throw error;}}};
 globalThis.fixtureEnv={DB:d1,BUCKET:{}};
 const load=file=>import(new URL(output+'/'+file,'file://'+process.cwd()+'/').href);
 const directory=await load('db/directory.mjs');
 const filters=await load('lib/catalogue-filters.mjs');
 const {WorkshopRatings}=await load('components/workshop-ratings.mjs');
-const curated=JSON.parse(await readFile('data/initial-workshops.json','utf8'));
+const catalogue=JSON.parse(await readFile('data/workshops.json','utf8'));
+const curated=catalogue.workshops.map(({google,...profile})=>profile);
 const manifest=JSON.parse(await readFile('data/import-2026-10-03.json','utf8'));
 const added=new Set(manifest.importedWorkshopIds);
 const oldProfiles=curated.filter(w=>!added.has(w.id));
@@ -78,7 +79,7 @@ for(const text of ['Riparim','Google','3,0','4,8','Anzahl nicht veröffentlicht'
 // A later snapshot and an administrator's edits survive re-running the seed.
 sqlite.prepare("UPDATE workshops SET name='Edited profile',status='draft' WHERE id='auto-mita'").run();
 sqlite.prepare("UPDATE workshop_google_ratings SET rating=4.9,checked_at='2099-01-01T00:00:00Z' WHERE workshop_id='auto-mita'").run();
-sqlite.prepare("DELETE FROM catalog_state WHERE key='initial-catalog-v4-163-google'").run();
+sqlite.prepare("DELETE FROM catalog_state WHERE key=?").run(await directory.catalogueSeedKey());
 await directory.ensureInitialCatalog();
 const edited=(await directory.listWorkshops(true)).find(w=>w.id==='auto-mita');
 assert.equal(edited.name,'Edited profile');

@@ -2,6 +2,8 @@
 
 Die Google-Anbindung ist vorbereitet, aber ohne eingerichtete API-Schlüssel inaktiv. Vorhandene recherchierte Angaben und Google-Maps-Links bleiben erhalten. Es wurden noch keine Werkstätten über die echte Places API zugeordnet.
 
+Die zentrale Importquelle ist `data/workshops.json`; sie enthält Profile, stabile Riparim-IDs, Google-Zuordnungen und belegte Momentaufnahmen getrennt. Datenformat, Bestandsprüfung und Importbefehle stehen in `docs/workshop-data.md`. API-Inhalte werden nicht dauerhaft in Git gespeichert; ein Google-Bulkexport benötigt passende Datenrechte.
+
 ## Aktivierung im bestehenden Google-Cloud-Projekt Riparim
 
 1. Maps JavaScript API, Places API (New) und Places UI Kit API aktivieren. Das bestehende Abrechnungskonto verwenden.

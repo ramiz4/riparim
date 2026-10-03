@@ -1,9 +1,15 @@
 import { storage } from "./storage";
-import curated from "@/data/initial-workshops.json";
-import googleSnapshots from "@/data/google-rating-snapshots.json";
+import canonical from "@/data/workshops.json";
+import {validateWorkshopCatalogue} from "@/lib/workshop-source";
+import {workshopIdentityHash} from "@/lib/google-place-identity";
 import {services,cities,type Workshop,type Source,type GoogleRating} from "@/lib/workshops";
 export const profileColumns=["id","name","city","address","phone","phone_note","whatsapp","brands","services","service_details","languages","specialty","description","lat","lng","sources","checked_at","status","updated_at"];
 export type ProfileInput=Omit<Workshop,"initials"|"color"|"rating"|"count"|"googleRating">;
+const catalogue=validateWorkshopCatalogue(canonical);
+const curated=catalogue.workshops.map(({google,...profile})=>profile);
+const googleSnapshots=catalogue.workshops.flatMap(w=>w.google.snapshot?[{workshopId:w.id,...w.google.snapshot}]:[]);
+let seedKey:Promise<string>|undefined;
+export function catalogueSeedKey(){return seedKey??=crypto.subtle.digest("SHA-256",new TextEncoder().encode(JSON.stringify(catalogue))).then(digest=>"workshop-source:"+Array.from(new Uint8Array(digest),byte=>byte.toString(16).padStart(2,"0")).join(""));}
 function parseArray<T>(value:unknown):T[]{if(typeof value!=="string")return [];try{const a=JSON.parse(value);return Array.isArray(a)?a:[];}catch{return [];}}
 function decodeGoogleRating(row:Record<string,unknown>):GoogleRating|null{
  if(!row.google_workshop_id)return null;
@@ -11,13 +17,14 @@ function decodeGoogleRating(row:Record<string,unknown>):GoogleRating|null{
 }
 export function decodeProfile(row:Record<string,unknown>):Workshop{return {id:String(row.id),name:String(row.name),city:String(row.city),address:String(row.address),phone:String(row.phone),phoneNote:String(row.phone_note??""),whatsapp:String(row.whatsapp??""),brands:parseArray<string>(row.brands),services:parseArray<string>(row.services),serviceDetails:parseArray<string>(row.service_details),languages:parseArray<string>(row.languages),specialty:String(row.specialty),description:String(row.description),lat:row.lat===null?null:Number(row.lat),lng:row.lng===null?null:Number(row.lng),sources:parseArray<Source>(row.sources),checkedAt:String(row.checked_at),status:row.status==="published"?"published":"draft",updatedAt:String(row.updated_at),initials:String(row.name).split(/\s+/).filter(Boolean).slice(0,2).map(s=>s[0]).join("").toUpperCase(),color:["green","blue","orange","purple"][String(row.id).length%4],rating:row.rating===null||row.rating===undefined?null:Number(row.rating),count:Number(row.count??0),googleRating:decodeGoogleRating(row)};}
 export function profileValues(w:ProfileInput){return [w.id,w.name,w.city,w.address,w.phone,w.phoneNote,w.whatsapp,JSON.stringify(w.brands),JSON.stringify(w.services),JSON.stringify(w.serviceDetails),JSON.stringify(w.languages),w.specialty,w.description,w.lat===null?null:String(w.lat),w.lng===null?null:String(w.lng),JSON.stringify(w.sources),w.checkedAt,w.status,w.updatedAt];}
-// Curated source data is seeded separately from schema migrations, once per catalog version.
+// Canonical JSON is imported independently from immutable schema migrations.
 export async function ensureInitialCatalog(){
  const {db}=storage();if(!curated.length)return;
- const marker=await db.prepare("SELECT value FROM catalog_state WHERE key='initial-catalog-v4-163-google'").first();if(marker)return;
+ const key=await catalogueSeedKey();
+ const marker=await db.prepare("SELECT value FROM catalog_state WHERE key=?").bind(key).first();if(marker)return;
  const profiles=curated as ProfileInput[],statements=[];
  const chunkSize=Math.floor(95/profileColumns.length);
- for(let i=0;i<profiles.length;i+=chunkSize){const chunk=profiles.slice(i,i+chunkSize);const sql=`INSERT OR IGNORE INTO workshops (${profileColumns.join(",")}) VALUES ${chunk.map(()=>`(${profileColumns.map(()=>"?").join(",")})`).join(",")}`;statements.push(db.prepare(sql).bind(...chunk.flatMap(profileValues)));}
+ for(let i=0;i<profiles.length;i+=chunkSize){const chunk=profiles.slice(i,i+chunkSize);const sql=`INSERT INTO workshops (${profileColumns.join(",")}) VALUES ${chunk.map(()=>`(${profileColumns.map(()=>"?").join(",")})`).join(",")} ON CONFLICT(id) DO UPDATE SET ${profileColumns.slice(1).map(column=>`${column}=excluded.${column}`).join(",")} WHERE workshops.updated_at < excluded.updated_at`;statements.push(db.prepare(sql).bind(...chunk.flatMap(profileValues)));}
  // Google snapshots never enter the visit aggregate or overwrite the workshop's edited profile.
  const googleColumns=["workshop_id","rating","review_count","maps_url","source_url","source_label","checked_at","source_updated_at"];
  const googleChunkSize=Math.floor(95/googleColumns.length);
@@ -26,8 +33,14 @@ export async function ensureInitialCatalog(){
   const sql=`INSERT INTO workshop_google_ratings (${googleColumns.join(",")}) VALUES ${chunk.map(()=>`(${googleColumns.map(()=>"?").join(",")})`).join(",")} ON CONFLICT(workshop_id) DO UPDATE SET ${googleColumns.slice(1).map(column=>`${column}=excluded.${column}`).join(",")} WHERE workshop_google_ratings.checked_at < excluded.checked_at`;
   statements.push(db.prepare(sql).bind(...chunk.flatMap(g=>[g.workshopId,g.rating,g.count,g.mapsUrl,g.sourceUrl,g.sourceLabel,g.checkedAt,g.sourceUpdatedAt])));
  }
- statements.push(db.prepare("INSERT OR IGNORE INTO catalog_state (key,value) VALUES ('initial-catalog-v4-163-google',?)").bind(new Date().toISOString()));
- await db.batch(statements);
+ for(const w of catalogue.workshops){
+  if(!w.google.placeId||!w.google.matchedAt)continue;
+  const checkedAt=Date.parse(w.google.matchedAt),hash=await workshopIdentityHash(w);
+  statements.push(db.prepare("INSERT INTO workshop_google_places (workshop_id,place_id,profile_hash,checked_at,retry_after) VALUES (?,?,?,?,?) ON CONFLICT(workshop_id) DO UPDATE SET place_id=excluded.place_id,profile_hash=excluded.profile_hash,checked_at=excluded.checked_at,retry_after=excluded.retry_after WHERE workshop_google_places.checked_at < excluded.checked_at").bind(w.id,w.google.placeId,hash,checkedAt,checkedAt+365*86400000));
+ }
+ // Bounded, repeatable batches also support large imports; the completion marker is last.
+ for(let i=0;i<statements.length;i+=50)await db.batch(statements.slice(i,i+50));
+ await db.prepare("INSERT OR IGNORE INTO catalog_state (key,value) VALUES (?,?)").bind(key,new Date().toISOString()).run();
 }
 export async function listWorkshops(includeDrafts=false){await ensureInitialCatalog();const {db}=storage();const result=await db.prepare(`SELECT w.*, ROUND(AVG(v.rating),1) AS rating, COUNT(v.id) AS count, g.workshop_id AS google_workshop_id, g.rating AS google_rating, g.review_count AS google_review_count, g.maps_url AS google_maps_url, g.source_url AS google_source_url, g.source_label AS google_source_label, g.checked_at AS google_checked_at, g.source_updated_at AS google_source_updated_at FROM workshops w LEFT JOIN visits v ON v.workshop=w.id AND v.status='published' LEFT JOIN workshop_google_ratings g ON g.workshop_id=w.id ${includeDrafts?"":"WHERE w.status='published'"} GROUP BY w.id ORDER BY w.name COLLATE NOCASE`).all<Record<string,unknown>>();return result.results.map(decodeProfile);}
 export async function publishedWorkshop(id:string){await ensureInitialCatalog();return storage().db.prepare("SELECT id FROM workshops WHERE id=? AND status='published'").bind(id).first();}
