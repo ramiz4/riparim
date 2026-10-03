@@ -43,6 +43,13 @@
       "when": 1791047960071,
       "tag": "0005_slow_kid_colt",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1791051771899,
+      "tag": "0006_dapper_dark_beast",
+      "breakpoints": true
     }
   ]
 }

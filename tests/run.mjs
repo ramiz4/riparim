@@ -4,7 +4,7 @@ import {fileURLToPath} from 'node:url';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
 const runtime=new URL('../.test-runtime/',import.meta.url);
-const suites=['combined-reviews.test.mjs','auth-ownership.test.mjs','google-auth.test.mjs','catalogue-filters.test.mjs','profile-navigation.test.mjs','workshop-import.test.mjs'];
+const suites=['combined-reviews.test.mjs','auth-ownership.test.mjs','google-auth.test.mjs','email-activation.test.mjs','catalogue-filters.test.mjs','profile-navigation.test.mjs','workshop-import.test.mjs','google-places.test.mjs'];
 
 try{
  await rm(runtime,{recursive:true,force:true});

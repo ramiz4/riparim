@@ -19,19 +19,20 @@ const cookieMap=new Map(),cookieOptions=new Map();
 globalThis.fixtureCookies={get(name){const value=cookieMap.get(name);return value?{name,value}:undefined;},getAll(){return [...cookieMap].map(([name,value])=>({name,value}));},set(name,value,options){cookieOptions.set(name,options);if(options?.maxAge===0)cookieMap.delete(name);else cookieMap.set(name,value);}};
 let user={id:'00000000-0000-4000-8000-000000000001',email:'owner@example.test',email_confirmed_at:'2026-10-03',user_metadata:{full_name:'Owner',provider:'google'},identities:[{provider:'google',identity_data:{sub:'google-owner-123',email:'owner@example.test',email_verified:true}}]};
 let sessionId='oauth-session-1',method='oauth',claimsError=null,claimedId=null,googleEnabled=true,googleProfile={sub:'google-owner-123',email:'owner@example.test',email_verified:true};
-let oauthCalls=0,codeExchanges=0,lastOAuth=null,lastSetSession=null;
+let emailAutoConfirm=false,passwordCalls=0,oauthCalls=0,codeExchanges=0,lastOAuth=null,lastSetSession=null;
 const providerSession=()=>({access_token:'fixture-supabase-access',refresh_token:'fixture-supabase-refresh',provider_token:'fixture-google-token',user});
 globalThis.fixtureClient={auth:{
  getUser:async()=>({data:{user},error:null}),
  getClaims:async()=>({data:{claims:{session_id:sessionId,sub:claimedId??user.id,amr:[{method}]}},error:claimsError}),
  setSession:async(value)=>{lastSetSession=value;return {data:{session:providerSession()},error:null};},
  signInWithOAuth:async(value)=>{oauthCalls++;lastOAuth=value;return {data:{url:projectUrl+'/auth/v1/authorize?provider=google'},error:null};},
+ signInWithPassword:async()=>{passwordCalls++;return {data:{user},error:null};},
  exchangeCodeForSession:async()=>{codeExchanges++;method='oauth';return {data:{user,session:providerSession()},error:null};},
  signOut:async()=>({error:null}),
 }};
 const originalFetch=globalThis.fetch;
 globalThis.fetch=async(url)=>{
- if(String(url)===projectUrl+'/auth/v1/settings')return Response.json({external:{email:true,google:googleEnabled},mailer_autoconfirm:false,disable_signup:false});
+ if(String(url)===projectUrl+'/auth/v1/settings')return Response.json({external:{email:true,google:googleEnabled},mailer_autoconfirm:emailAutoConfirm,disable_signup:false});
  if(String(url)==='https://openidconnect.googleapis.com/v1/userinfo')return Response.json(googleProfile);
  throw Error('Unexpected live request blocked: '+url);
 };
@@ -49,9 +50,17 @@ const row=()=>db.prepare('SELECT * FROM auth_sessions WHERE id=?').get(sessionId
 const config=await cfg.getAuthConfig();
 await cfg.verifyProvider(config,false);passed++;
 let availability=await cfg.providerAvailability(config);
-check(availability.google&&!availability.email,'Google can be ready while email delivery remains unconfirmed');
+check(availability.google&&availability.email&&!availability.emailSignup&&!availability.emailRecovery,'Email/password and Google login do not require sending email');
 check((await post('register',{email:user.email,password:'fixture-password-123'})).status===503,'SMTP-unconfirmed registration cannot send live mail');
 check((await post('recovery',{email:user.email})).status===503,'SMTP-unconfirmed recovery cannot send live mail');
+sessionId='email-without-smtp';method='password';
+check((await post('login',{email:user.email,password:'fixture-password-123'})).status===200,'Confirmed account can log in while SMTP is unconfirmed');
+check(row()?.provider==='password'&&!row()?.moderator,'Email login grants a password session without Google privileges');
+user={...user,email_confirmed_at:null};sessionId='unconfirmed-email-login';
+check((await post('login',{email:user.email,password:'fixture-password-123'})).status===401&&!row(),'Unconfirmed email cannot obtain an app session');
+user={...user,email_confirmed_at:'2026-10-03'};emailAutoConfirm=true;
+check((await post('login',{email:user.email,password:'fixture-password-123'})).status===503&&passwordCalls===2,'Server blocks password login if email confirmation is disabled at the provider');
+emailAutoConfirm=false;sessionId='oauth-session-1';method='oauth';
 check((await post('google',{},'https://other.example.test')).status===403,'Google start rejects cross-origin POST');
 googleEnabled=false;
 check((await post('google')).status===503&&oauthCalls===0,'Disabled Google never produces a pretend OAuth URL');

@@ -25,7 +25,7 @@ export default function AuthForm({screen,emailReady,googleReady,isOwner,returnTo
   try{const r=await fetch("/api/auth/google",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({returnTo})});const d=await r.json() as {error?:string;url?:string};if(!r.ok||!d.url)throw Error(d.error??"Google-Anmeldung ist gerade nicht verfügbar.");window.location.assign(d.url);}
   catch(e){setError(e instanceof Error?e.message:"Bitte versuche es erneut.");setBusy(null);}
  }
- return <><SiteHeader account={account} isAdmin={isOwner} section="Konto"/><main className="auth-page"><section className="auth-card auth-compact" aria-labelledby="auth-title">
+ return <><SiteHeader account={account} isAdmin={isOwner}/><main className="auth-page"><section className="auth-card auth-compact" aria-labelledby="auth-title">
  <h1 id="auth-title">{headings[screen]}</h1><p className="auth-intro">{screen==="login"?"Deine Besuche und Bewertungen an einem Ort.":screen==="register"?"Bewerte deinen Werkstattbesuch.":screen==="recovery"?"Wir senden dir einen Link per E-Mail.":"Wähle ein Passwort mit mindestens 12 Zeichen."}</p>
  {notice&&<p className="admin-feedback" role="status">{notice}</p>}
  {message?<div className="auth-success" role="status"><Mail size={24}/><p>{message}</p><a className="outline" href={`/anmelden?weiter=${encodeURIComponent(returnTo)}`}>Zur Anmeldung</a></div>:<>
@@ -35,7 +35,7 @@ export default function AuthForm({screen,emailReady,googleReady,isOwner,returnTo
  {screen!=="recovery"&&<label><span className="auth-label-row">Passwort{screen==="login"&&<a href="/passwort-vergessen">Vergessen?</a>}</span><span className="auth-password-field"><input name="password" type={showPassword?"text":"password"} autoComplete={screen==="login"?"current-password":"new-password"} required minLength={screen==="login"?1:12} maxLength={128} placeholder={screen==="login"?"Dein Passwort":"Mindestens 12 Zeichen"} disabled={!emailReady||!!busy}/><button type="button" onClick={()=>setShowPassword(v=>!v)} aria-label={showPassword?"Passwort verbergen":"Passwort anzeigen"} aria-pressed={showPassword} disabled={!emailReady}>{showPassword?<EyeOff size={18}/>:<Eye size={18}/>}</button></span></label>}
  {screen==="reset"&&<label>Passwort wiederholen<input name="passwordRepeat" type={showPassword?"text":"password"} autoComplete="new-password" required minLength={12} maxLength={128} disabled={!emailReady||!!busy}/></label>}
  <button className="primary" disabled={!emailReady||!!busy} type="submit">{busy==="email"?<><LoaderCircle className="spin" size={17}/>Einen Moment …</>:screen==="login"?"Anmelden":screen==="register"?"Konto erstellen":screen==="recovery"?"Link senden":"Passwort speichern"}</button>
- {!emailReady&&<p className="auth-unavailable">E-Mail-Anmeldung wird eingerichtet.</p>}
+ {!emailReady&&<p className="auth-unavailable">{screen==="register"?"Die Registrierung ist derzeit noch nicht verfügbar.":screen==="recovery"?"Die Passwort-Wiederherstellung ist derzeit noch nicht verfügbar.":"E-Mail-Anmeldung wird eingerichtet."}</p>}
  </form>
  {error&&<p className="error auth-error" role="alert">{error}</p>}
  <p className="auth-switch">{screen==="login"?<>Noch kein Konto? <a href={`/registrieren?weiter=${encodeURIComponent(returnTo)}`}>Registrieren</a></>:screen==="register"?<>Schon ein Konto? <a href={`/anmelden?weiter=${encodeURIComponent(returnTo)}`}>Anmelden</a></>:<a href="/anmelden">Zur Anmeldung</a>}</p>

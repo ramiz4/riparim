@@ -17,6 +17,9 @@ export const workshopGoogleRatings=sqliteTable("workshop_google_ratings",{
  workshopId:text("workshop_id").primaryKey(),rating:real("rating"),reviewCount:integer("review_count"),mapsUrl:text("maps_url").notNull(),
  sourceUrl:text("source_url"),sourceLabel:text("source_label"),checkedAt:text("checked_at").notNull(),sourceUpdatedAt:text("source_updated_at")
 });
+export const workshopGooglePlaces=sqliteTable("workshop_google_places",{
+ workshopId:text("workshop_id").primaryKey(),placeId:text("place_id"),profileHash:text("profile_hash").notNull(),checkedAt:integer("checked_at").notNull(),retryAfter:integer("retry_after").notNull()
+});
 export const authSettings=sqliteTable("auth_settings",{id:text("id").primaryKey(),projectUrl:text("project_url").notNull(),publicKey:text("public_key").notNull(),enabled:integer("enabled").notNull().default(0),emailDeliveryConfirmed:integer("email_delivery_confirmed").notNull().default(0),updatedAt:text("updated_at").notNull()});
 export const authLinks=sqliteTable("auth_links",{accountId:text("account_id").primaryKey(),legacyOwner:text("legacy_owner").notNull().unique(),ownerAdmin:integer("owner_admin").notNull().default(0),createdAt:text("created_at").notNull(),passwordAccess:integer("password_access").notNull().default(1)});
 export const authAttempts=sqliteTable("auth_attempts",{key:text("key").primaryKey(),attempts:integer("attempts").notNull().default(0),expiresAt:integer("expires_at").notNull()},table=>[index("idx_auth_attempts_expiry").on(table.expiresAt)]);

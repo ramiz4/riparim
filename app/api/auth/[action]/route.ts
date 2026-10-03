@@ -17,7 +17,11 @@ async function rateLimit(request:Request,action:string,email:string){
  }
  return false;
 }
-export async function POST(request:Request,{params}:{params:Promise<{action:string}>}){if(!sameOrigin(request)||!request.headers.get("content-type")?.includes("application/json"))return json({error:"Ungültige Anfrage."},403);const {action}=await params;if(!["login","register","recovery","reset","logout","google"].includes(action))return json({error:"Ungültige Aktion."},404);let body:Record<string,unknown>;try{body=await readJson(request,8192);}catch{return json({error:"Bitte prüfe die Eingaben."},400);}try{const c=await getAuthConfig();if(!c?.enabled)return json({error:"Die Anmeldung wird gerade eingerichtet. Bitte versuche es später erneut."},503);if(["register","recovery"].includes(action)&&!c.emailDeliveryConfirmed)return json({error:"E-Mail-Anmeldung wird gerade eingerichtet. Bitte nutze Google oder versuche es später erneut."},503);const client=await authClient(c);
+export async function POST(request:Request,{params}:{params:Promise<{action:string}>}){if(!sameOrigin(request)||!request.headers.get("content-type")?.includes("application/json"))return json({error:"Ungültige Anfrage."},403);const {action}=await params;if(!["login","register","recovery","reset","logout","google"].includes(action))return json({error:"Ungültige Aktion."},404);let body:Record<string,unknown>;try{body=await readJson(request,8192);}catch{return json({error:"Bitte prüfe die Eingaben."},400);}try{const c=await getAuthConfig();if(!c?.enabled)return json({error:"Die Anmeldung wird gerade eingerichtet. Bitte versuche es später erneut."},503);if(["register","recovery"].includes(action)&&!c.emailDeliveryConfirmed)return json({error:"Der E-Mail-Versand ist derzeit noch nicht verfügbar. Bitte versuche es später erneut."},503);if(["login","register","recovery","reset"].includes(action)){
+  const ready=await providerAvailability(c),available=action==="register"?ready.emailSignup:action==="recovery"?ready.emailRecovery:ready.email;
+  if(!available)return json({error:"E-Mail-Anmeldung ist gerade nicht verfügbar. Bitte versuche es später erneut."},503);
+ }
+ const client=await authClient(c);
  if(action==="google"){
   if(!(await providerAvailability(c)).google)return json({error:"Google-Anmeldung ist gerade nicht verfügbar."},503);
   if(await rateLimit(request,action,""))return json({error:"Zu viele Versuche. Bitte warte einige Minuten."},429);
