@@ -25,7 +25,7 @@ export async function providerAvailability(config:AuthConfig|null){
  if(!config?.enabled)return unavailable;
  try{
   const s=await providerSettings(config),email=s.external?.email===true&&s.mailer_autoconfirm===false;
-  return {email,emailSignup:email&&config.emailDeliveryConfirmed&&s.disable_signup!==true,emailRecovery:email&&config.emailDeliveryConfirmed,google:s.external?.google===true};
+  return {email,emailSignup:email&&s.disable_signup!==true,emailRecovery:email&&config.emailDeliveryConfirmed,google:s.external?.google===true};
  }catch{return unavailable;}
 }
 export async function verifyProvider(config:{projectUrl:string;publicKey:string},emailDeliveryConfirmed=true){

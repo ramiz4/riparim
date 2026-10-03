@@ -41,7 +41,7 @@ const config=await cfg.getAuthConfig();
 check(config.enabled&&row().enabled===1,'Verified existing provider is activated and persisted');
 check(!config.emailDeliveryConfirmed&&row().email_delivery_confirmed===0,'Activation does not claim untested SMTP delivery');
 let ready=await cfg.providerAvailability(config);
-check(ready.email&&!ready.emailSignup&&!ready.emailRecovery,'Existing accounts can log in without exposing mail-dependent flows');
+check(ready.email&&ready.emailSignup&&!ready.emailRecovery,'Provider-enabled signup is available without a local SMTP attestation');
 settings={...settings,disable_signup:true};
 ready=await cfg.providerAvailability({...config,emailDeliveryConfirmed:true});
 check(ready.email&&!ready.emailSignup&&ready.emailRecovery,'Disabling signup preserves existing account login and recovery');

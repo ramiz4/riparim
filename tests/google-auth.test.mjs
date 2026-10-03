@@ -19,7 +19,7 @@ const cookieMap=new Map(),cookieOptions=new Map();
 globalThis.fixtureCookies={get(name){const value=cookieMap.get(name);return value?{name,value}:undefined;},getAll(){return [...cookieMap].map(([name,value])=>({name,value}));},set(name,value,options){cookieOptions.set(name,options);if(options?.maxAge===0)cookieMap.delete(name);else cookieMap.set(name,value);}};
 let user={id:'00000000-0000-4000-8000-000000000001',email:'owner@example.test',email_confirmed_at:'2026-10-03',user_metadata:{full_name:'Owner',provider:'google'},identities:[{provider:'google',identity_data:{sub:'google-owner-123',email:'owner@example.test',email_verified:true}}]};
 let sessionId='oauth-session-1',method='oauth',claimsError=null,claimedId=null,googleEnabled=true,googleProfile={sub:'google-owner-123',email:'owner@example.test',email_verified:true};
-let emailAutoConfirm=false,passwordCalls=0,oauthCalls=0,codeExchanges=0,lastOAuth=null,lastSetSession=null;
+let emailAutoConfirm=false,passwordCalls=0,oauthCalls=0,codeExchanges=0,lastOAuth=null,lastSetSession=null,signupCalls=0,signupError=null,lastSignup=null,signupSession=null;
 const providerSession=()=>({access_token:'fixture-supabase-access',refresh_token:'fixture-supabase-refresh',provider_token:'fixture-google-token',user});
 globalThis.fixtureClient={auth:{
  getUser:async()=>({data:{user},error:null}),
@@ -27,6 +27,7 @@ globalThis.fixtureClient={auth:{
  setSession:async(value)=>{lastSetSession=value;return {data:{session:providerSession()},error:null};},
  signInWithOAuth:async(value)=>{oauthCalls++;lastOAuth=value;return {data:{url:projectUrl+'/auth/v1/authorize?provider=google'},error:null};},
  signInWithPassword:async()=>{passwordCalls++;return {data:{user},error:null};},
+ signUp:async(value)=>{signupCalls++;lastSignup=value;return {data:{user:{...user,email_confirmed_at:null},session:signupSession},error:signupError};},
  exchangeCodeForSession:async()=>{codeExchanges++;method='oauth';return {data:{user,session:providerSession()},error:null};},
  signOut:async()=>({error:null}),
 }};
@@ -50,8 +51,21 @@ const row=()=>db.prepare('SELECT * FROM auth_sessions WHERE id=?').get(sessionId
 const config=await cfg.getAuthConfig();
 await cfg.verifyProvider(config,false);passed++;
 let availability=await cfg.providerAvailability(config);
-check(availability.google&&availability.email&&!availability.emailSignup&&!availability.emailRecovery,'Email/password and Google login do not require sending email');
-check((await post('register',{email:user.email,password:'fixture-password-123'})).status===503,'SMTP-unconfirmed registration cannot send live mail');
+check(availability.google&&availability.email&&availability.emailSignup&&!availability.emailRecovery,'Provider-enabled registration no longer needs local SMTP attestation');
+let registration=await post('register',{email:'new-account@example.test',password:'fixture-password-123',returnTo:'//other.example.test'});
+check(registration.status===200&&signupCalls===1,'Registration invokes signup while local delivery attestation is false');
+check((await registration.json()).message.includes('bestätige deine E-Mail-Adresse'),'Successful signup requires checking the confirmation email');
+check(new URL(lastSignup.options.emailRedirectTo).origin===origin&&new URL(lastSignup.options.emailRedirectTo).pathname==='/auth/bestaetigen','Confirmation uses the canonical callback');
+check(new URL(lastSignup.options.emailRedirectTo).searchParams.get('weiter')==='/?besuche=1','Confirmation callback rejects an external destination');
+check(db.prepare('SELECT COUNT(*) AS n FROM auth_sessions').get().n===0,'Signup cannot enroll a session or grant app access');
+signupError={code:'email_address_not_authorized',status:400};
+registration=await post('register',{email:'new-account@example.test',password:'fixture-password-123'});
+check(registration.status===503&&!(await registration.json()).message,'SMTP rejection produces no false success');
+signupError={code:'over_email_send_rate_limit',status:429};
+check((await post('register',{email:'new-account@example.test',password:'fixture-password-123'})).status===429,'Provider email limit is reported as a retryable rate limit');
+signupError=null;signupSession=providerSession();
+check((await post('register',{email:'new-account@example.test',password:'fixture-password-123'})).status===503,'An unexpected auto-confirmed session fails closed');
+signupSession=null;
 check((await post('recovery',{email:user.email})).status===503,'SMTP-unconfirmed recovery cannot send live mail');
 sessionId='email-without-smtp';method='password';
 check((await post('login',{email:user.email,password:'fixture-password-123'})).status===200,'Confirmed account can log in while SMTP is unconfirmed');
