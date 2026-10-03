@@ -1,7 +1,7 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-03T18:55:32Z",
+  "updatedAt": "2026-10-03T19:20:11Z",
   "coverage": {
     "countryCode": "XK",
     "published": 78,
@@ -14,7 +14,7 @@
     "status": "not_started",
     "reason": "api_credentials_unavailable",
     "matchedPlaceIds": 0,
-    "numericSnapshotRatings": 4,
+    "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 78
   },
   "workshops": [
@@ -261,13 +261,13 @@
         "placeId": null,
         "matchedAt": null,
         "snapshot": {
-          "rating": null,
-          "count": null,
+          "rating": 4.0,
+          "count": 52,
           "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Beli%20Rr.%20Ibrahim%20Rugova%2C%20Ferizaj%2070000%20Kosovo",
-          "sourceUrl": null,
-          "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
-          "sourceUpdatedAt": null
+          "sourceUrl": "https://www.top-rated.online/cities/G%C3%ABrlic%C3%AB+e+Poshtme/place/p/15708354/Auto+Beli",
+          "sourceLabel": "Top-Rated.online: ausdrücklich auf Google-Maps-Bewertungen basierend",
+          "checkedAt": "2026-10-03T19:15:01Z",
+          "sourceUpdatedAt": "2026-02-20"
         }
       }
     },
@@ -2370,13 +2370,13 @@
         "placeId": null,
         "matchedAt": null,
         "snapshot": {
-          "rating": 5,
-          "count": 6,
+          "rating": 5.0,
+          "count": 8,
           "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20Doni%20QQVM%2B5VX%2C%20R101%2C%20Klin%C3%AB%20e%20Ep%C3%ABrme%2041000%20Kosovo",
-          "sourceUrl": "https://www.top-rated.online/cities/Klin%C3%AB%2Be%2BEp%C3%ABrme/place/p/10916121/Auto%2BServis%2BDoni",
-          "sourceLabel": "Top-Rated.online: Google-Bewertungen",
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
-          "sourceUpdatedAt": "2026-02-20"
+          "sourceUrl": "https://www.top-rated.online/cities/Klin%C3%AB+e+Ep%C3%ABrme/place/p/10916121/Auto+Servis+Doni",
+          "sourceLabel": "Top-Rated.online: ausdrücklich auf Google-Maps-Bewertungen basierend",
+          "checkedAt": "2026-10-03T19:15:01Z",
+          "sourceUpdatedAt": "2026-09-05"
         }
       }
     },

@@ -8,7 +8,7 @@ Die bisherigen getrennten Dateien für Profile und Google-Momentaufnahmen wurden
 
 - Riparim-Bewertungen bleiben im eigenen Besuchs-/Bewertungssystem. `rating` und `count` der Riparim-Aggregate gehören nicht in diese Profilquelle.
 - `google.placeId` und `google.matchedAt` speichern die tatsächliche Zuordnung zu Google. Gegenwärtig sind noch keine API-Zuordnungen vorhanden.
-- `google.snapshot` enthält ausschließlich die bereits unabhängig belegten Momentaufnahmen einschließlich Originalquelle und Prüfzeitpunkt. Nur vier Sternebewertungen sind numerisch belegt. Unbekannte Sterne oder Anzahlen bleiben `null`.
+- `google.snapshot` enthält ausschließlich die bereits unabhängig belegten Momentaufnahmen einschließlich Originalquelle und Prüfzeitpunkt. Nur fünf Sternebewertungen sind numerisch belegt. Unbekannte Sterne oder Anzahlen bleiben `null`.
 - Aktuelle API-Sterne und Rezensionen werden live geladen und weder in dieser Datei noch in Git, D1 oder R2 abgelegt.
 
 Die Standardbedingungen von Google erlauben keine dauerhafte Git-Datenbank mit kopierten Places-Geschäftsangaben und Bewertungen. Place IDs sind von den Speicherbeschränkungen ausgenommen. Ein Bulkimport von Google-Inhalten benötigt eine passende abweichende Freigabe/Lizenz; ein API-Schlüssel allein ersetzt diese nicht. Ohne sie werden weitere Betriebsangaben unabhängig recherchiert bzw. aus einer ausdrücklich dafür lizenzierten Datenquelle übernommen.

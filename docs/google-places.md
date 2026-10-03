@@ -21,6 +21,8 @@ Es werden nur Place IDs und eigene Prüf-/Wiederholungsmetadaten dauerhaft gespe
 
 Sichtbare Karten laden aktuelle Sterne und Anzahl direkt über die Google Places JavaScript API. Es gibt keine Speicherung dieser API-Sterne oder Rezensionen in D1, R2 oder Browser Storage. Google Maps erhält seine Quellenkennzeichnung; zusätzliche Providerattribution wird angezeigt. Google-Werte fließen weder in Riparim-Mittelwerte noch in Riparim-Sortierungen ein.
 
+Bei der Sortierung „Google-Bewertung“ werden die zur aktuellen Suche passenden Werkstätten in Gruppen von höchstens vier gleichzeitig geladen. Die Sterne und Anzahl bleiben nur im Arbeitsspeicher der geöffneten Liste. Die Liste sortiert Google und Riparim getrennt nach Sternen; bei gleichem Wert folgt die höhere Anzahl zuerst, fehlende Sterne stehen am Ende. Ohne aktive Google-Anbindung nutzt diese Sortierung die belegten recherchierten Angaben aus `google.snapshot` in `data/workshops.json`. Eine Änderung der zentralen JSON-Quelle löst über deren Inhalts-Hash den Import aus; Profile und recherchierte Google-Angaben werden anhand ihrer getrennten Zeitstempel aktualisiert. Neuere manuell gepflegte Angaben bleiben erhalten.
+
 Im Profil lädt der offizielle `gmp-place-details`-Baustein mit `gmp-place-rating` und `gmp-place-reviews`, sobald sein Bereich sichtbar wird. Die eingebauten Google- und Autorenattributionen werden beibehalten. Bei fehlender Konfiguration, fehlender Zuordnung oder einem Providerfehler steht der direkte Google-Maps-Link bereit.
 
 ## Primäre Dokumentation

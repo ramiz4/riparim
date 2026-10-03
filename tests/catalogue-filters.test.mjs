@@ -5,7 +5,7 @@ const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild
 const bundle=await build({entryPoints:['lib/catalogue-filters.ts'],bundle:true,platform:'node',format:'esm',write:false});
 await mkdir('.test-runtime/catalogue',{recursive:true});
 await writeFile('.test-runtime/catalogue/filters.mjs',bundle.outputFiles[0].contents);
-const {defaultCatalogueFilters:defaults,parseCatalogueFilters,matchCatalogue,catalogueHref,activeCatalogueFilters,hasPublishedRatings}=await import(new URL('../.test-runtime/catalogue/filters.mjs',import.meta.url));
+const {defaultCatalogueFilters:defaults,parseCatalogueFilters,matchCatalogue,catalogueHref,activeCatalogueFilters,hasPublishedRatings,hasGoogleRatings,catalogueDistance}=await import(new URL('../.test-runtime/catalogue/filters.mjs',import.meta.url));
 let passed=0;
 const check=(condition,label)=>{assert(condition,label);passed++;};
 const record=(name,overrides={})=>({id:name,name,city:'Prishtina',status:'published',services:['Inspektion & Wartung'],brands:[],languages:[],rating:null,count:0,lat:null,lng:null,...overrides});
@@ -35,4 +35,25 @@ check(sorted[0].name==='Gamma fixture'&&sorted[1].name==='Alpha fixture','real p
 check(!hasPublishedRatings([record('Unreviewed fixture',{rating:5,count:0})]),'a number without published review count cannot enable rating sorting');
 check(parseCatalogueFilters(new URLSearchParams('sort=bewertung&sprache=de'),[record('Unreviewed fixture')]).sort==='name','unavailable rating sort normalizes without widening language filters');
 check(catalogueHref(defaults)==='/werkstaetten','default values are omitted from public URLs');
+
+const named=[record('Auto Bardhë',{brands:['Volkswagen']}),record('Auto Bardhë Peja',{city:'Peja'}),record('Alpha Other',{brands:['Volkswagen']})];
+check(matchCatalogue(named,{...defaults,query:' BARDHE ',city:'Prishtina',brand:'Volkswagen'}).map(w=>w.name).join('|')==='Auto Bardhë','case and accents do not affect name search, and existing filters still apply');
+check(matchCatalogue(named,{...defaults,query:'Bardhe Auto'}).length===2,'multiple name words can match independently of their order');
+check(matchCatalogue(named,{...defaults,query:'not-a-workshop'}).length===0,'unknown names produce honest empty results');
+const search=parseCatalogueFilters(new URLSearchParams('q=Auto+%26+Bardh%C3%AB&sort=google'),named);
+check(search.query==='Auto & Bardhë'&&search.sort==='google','name and Google sort survive a public link');
+check(catalogueHref(search).includes('q=Auto+%26+Bardh%C3%AB')&&catalogueHref(search).includes('sort=google'),'special characters in names are URL-encoded');
+check(activeCatalogueFilters(search).includes('query'),'name search can be removed using an active filter');
+check(parseCatalogueFilters(new URLSearchParams('q='+encodeURIComponent('x'.repeat(250))),named).query.length===100,'public name search is bounded');
+const googleData=[record('Alpha missing',{rating:5,count:80}),record('Beta 4.8',{googleRating:{rating:4.8,count:150}}),record('Gamma 4.8',{googleRating:{rating:4.8,count:12}}),record('Delta 4.9',{googleRating:{rating:4.9,count:null}})];
+check(matchCatalogue(googleData,{...defaults,sort:'google'}).map(w=>w.name).join('|')==='Delta 4.9|Beta 4.8|Gamma 4.8|Alpha missing','Google sort uses Google stars and review counts without mixing Riparim scores');
+check(matchCatalogue(googleData,{...defaults,sort:'rating'})[0].name==='Alpha missing','Riparim sorting remains independent of Google');
+check(!hasPublishedRatings(googleData.slice(1))&&hasGoogleRatings(googleData),'Google scores enable only the separate Google sort');
+check(matchCatalogue(googleData,{...defaults,sort:'google'},null,false,{'Alpha missing':{rating:5,count:1}})[0].name==='Alpha missing','current API ratings replace old snapshots for Google sorting');
+const distances=[record('Alpha unknown'),record('Beta far',{lat:42.7129,lng:21.1655}),record('Gamma near',{lat:42.6629,lng:21.1655})];
+check(matchCatalogue(distances,{...defaults,city:'Prishtina',sort:'distance'}).map(w=>w.name).join('|')==='Gamma near|Beta far|Alpha unknown','known distances sort near first and missing coordinates stay at the end');
+check(catalogueDistance(distances[0],'Prishtina')===null&&catalogueDistance(distances[2],'Prishtina')===0,'unknown coordinates are not represented as zero distance');
+check(catalogueDistance(distances[1],'Prishtina')>5&&catalogueDistance(distances[1],'Prishtina')<6,'distance uses geographic coordinates and kilometres');
+check(parseCatalogueFilters(new URLSearchParams('sort=entfernung'),distances).sort==='name','distance requires a reference city');
+check(parseCatalogueFilters(new URLSearchParams('sort=entfernung&ort=prishtina'),distances).sort==='distance','distance sorting and city survive a public link');
 console.log(`Catalogue filter contracts: ${passed} passed`);

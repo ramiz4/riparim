@@ -47,21 +47,36 @@ const after=sqlite.prepare('SELECT * FROM workshops ORDER BY id').all().filter(w
 assert.deepEqual(after,before,'existing profile fields and publication state are preserved');
 assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM workshop_google_ratings').get().n,78);
 assert(manifest.originalPublishedWorkshopIds.every(id=>workshops.find(w=>w.id===id)?.googleRating),'all 28 old public profiles get separate Google metadata');
-assert.equal(workshops.filter(w=>w.googleRating.rating!==null).length,4,'only sourced Google scores are numeric');
-assert.equal(workshops.filter(w=>w.googleRating.count!==null).length,3);
+assert.equal(workshops.filter(w=>w.googleRating.rating!==null).length,5,'only sourced Google scores are numeric');
+assert.equal(workshops.filter(w=>w.googleRating.count!==null).length,4);
 assert(workshops.every(w=>w.rating===null&&w.count===0),'Google stars never create Riparim reviews');
 assert.equal(filters.hasPublishedRatings(workshops),false);
 assert.equal(filters.parseCatalogueFilters(new URLSearchParams('sort=bewertung'),workshops).sort,'name','Google scores do not enable Riparim sorting');
 const unknown=workshops.find(w=>w.googleRating.rating===null&&w.googleRating.count===null);
 assert.equal(unknown.googleRating.rating,null,'missing Google score stays null');
 const unknownMarkup=renderToStaticMarkup(React.createElement(WorkshopRatings,{workshop:unknown,details:true}));
-assert(unknownMarkup.includes('Nicht verifiziert'));
+assert(unknownMarkup.includes('Keine Angabe'));
 assert(!unknownMarkup.includes('0,0'));
 const emptyCardRatings=renderToStaticMarkup(React.createElement(WorkshopRatings,{workshop:unknown,hideUnavailable:true}));
-assert(!emptyCardRatings.includes('Nicht verifiziert')&&!emptyCardRatings.includes('Noch keine'),'list cards preserve the absence of empty rating placeholders');
+assert(!emptyCardRatings.includes('Keine Angabe')&&!emptyCardRatings.includes('Noch keine'),'list cards preserve the absence of empty rating placeholders');
 const sonic=workshops.find(w=>w.id==='sonic-garage');
 assert.equal(sonic.googleRating.rating,null,'star icons do not establish an exact Google aggregate');
 assert.equal(sonic.googleRating.count,19);
+const beli=workshops.find(w=>w.id==='auto-beli-ferizaj');
+assert.equal(beli.googleRating.rating,4);
+assert.equal(beli.googleRating.count,52);
+assert.equal(beli.googleRating.sourceUpdatedAt,'2026-02-20');
+assert.equal(workshops.find(w=>w.id==='auto-servis-doni-skenderaj').googleRating.count,8);
+
+// A canonical-source revision updates researched ratings without changing existing profiles.
+const beforeRatingRevision=sqlite.prepare('SELECT * FROM workshops ORDER BY id').all();
+sqlite.prepare("UPDATE workshop_google_ratings SET rating=NULL,review_count=NULL,checked_at='2026-10-03T17:13:16Z' WHERE workshop_id='auto-beli-ferizaj'").run();
+sqlite.prepare("UPDATE workshop_google_ratings SET review_count=6,checked_at='2026-10-03T17:13:16Z' WHERE workshop_id='auto-servis-doni-skenderaj'").run();
+sqlite.prepare("DELETE FROM catalog_state WHERE key=?").run(await directory.catalogueSeedKey());
+await directory.ensureInitialCatalog();
+assert.deepEqual(sqlite.prepare('SELECT * FROM workshops ORDER BY id').all(),beforeRatingRevision);
+assert.equal(sqlite.prepare("SELECT review_count FROM workshop_google_ratings WHERE workshop_id='auto-beli-ferizaj'").get().review_count,52);
+assert.equal(sqlite.prepare("SELECT review_count FROM workshop_google_ratings WHERE workshop_id='auto-servis-doni-skenderaj'").get().review_count,8);
 
 await directory.ensureInitialCatalog();
 assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM workshops').get().n,163,'repeated import adds no duplicates');
@@ -90,4 +105,4 @@ assert.equal(edited.googleRating.rating,4.9,'older imported snapshot never overw
 assert.equal(edited.rating,3,'Google import does not modify visit aggregate');
 assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM workshops').get().n,163);
 sqlite.close();
-console.log(JSON.stringify({newWorkshops:50,publicWorkshops:78,existingDraftsPreserved:85,verifiedGoogleScores:4,independentRatings:true,idempotentImport:true,storage:'isolated SQLite fixture',productionTouched:false}));
+console.log(JSON.stringify({newWorkshops:50,publicWorkshops:78,existingDraftsPreserved:85,verifiedGoogleScores:5,independentRatingRevision:true,independentRatings:true,idempotentImport:true,storage:'isolated SQLite fixture',productionTouched:false}));
