@@ -1,6 +1,6 @@
 import {env} from "cloudflare:workers";
 import {storage} from "./storage";
-import {verifiedGooglePlace,validGooglePlaceId,workshopIdentityHash,type GooglePlaceCandidate} from "@/lib/google-place-identity";
+import {verifiedGooglePlace,validGooglePlaceId,workshopIdentityHash,googlePlaceSearchRequest,type GooglePlaceCandidate} from "@/lib/google-place-identity";
 import type {Workshop} from "@/lib/workshops";
 
 export function googlePlacesConfiguration(){const browserKey=(env.GOOGLE_MAPS_BROWSER_API_KEY??"").trim(),serverKey=(env.GOOGLE_PLACES_SERVER_API_KEY??"").trim();return {enabled:!!browserKey&&!!serverKey,browserKey,serverKey};}
@@ -22,7 +22,7 @@ export async function resolveWorkshopGooglePlace(workshop:Workshop):Promise<stri
  const budget=await db.prepare("INSERT INTO catalog_state (key,value) VALUES (?,'1') ON CONFLICT(key) DO UPDATE SET value=CAST(CAST(catalog_state.value AS INTEGER)+1 AS TEXT) WHERE CAST(catalog_state.value AS INTEGER)<100 RETURNING value").bind(quotaKey).first();
  if(!budget){await db.prepare("UPDATE workshop_google_places SET retry_after=? WHERE workshop_id=? AND profile_hash=? AND checked_at=?").bind(now+DAY,workshop.id,hash,now).run();return null;}
  try{
-  const response=await fetch("https://places.googleapis.com/v1/places:searchText",{method:"POST",headers:{"Content-Type":"application/json","X-Goog-Api-Key":config.serverKey,"X-Goog-FieldMask":"places.id,places.displayName,places.formattedAddress,places.addressComponents,places.location,places.internationalPhoneNumber"},body:JSON.stringify({textQuery:workshop.phone,languageCode:"de",regionCode:"XK",pageSize:5}),signal:AbortSignal.timeout(8000)});
+  const response=await fetch("https://places.googleapis.com/v1/places:searchText",{method:"POST",headers:{"Content-Type":"application/json","X-Goog-Api-Key":config.serverKey,"X-Goog-FieldMask":"places.id,places.displayName,places.formattedAddress,places.addressComponents,places.location,places.internationalPhoneNumber"},body:JSON.stringify(googlePlaceSearchRequest(workshop)),signal:AbortSignal.timeout(8000)});
   if(!response.ok)throw new Error("Google Places identity lookup unavailable");
   const body=await response.json() as {places?:GooglePlaceCandidate[]};
   const placeId=verifiedGooglePlace(workshop,Array.isArray(body.places)?body.places:[]);

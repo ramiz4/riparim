@@ -12,26 +12,27 @@ if(values.write&&!values.fetch)throw Error('--write benötigt --fetch');
 const runtime=resolve(root,'.sites-runtime/catalogue-google');await mkdir(runtime,{recursive:true});
 await build({absWorkingDir:root,entryPoints:['lib/workshop-source.ts','lib/google-place-identity.ts'],outdir:runtime,bundle:true,platform:'node',format:'esm',outExtension:{'.js':'.mjs'}});
 const {validateWorkshopCatalogue,catalogueStats}=await import(pathToFileURL(resolve(runtime,'workshop-source.mjs')));
-const {verifiedGooglePlace}=await import(pathToFileURL(resolve(runtime,'google-place-identity.mjs')));
+const {verifiedGooglePlace,googlePlaceSearchRequest}=await import(pathToFileURL(resolve(runtime,'google-place-identity.mjs')));
 const path=resolve(root,'data/workshops.json');
 const catalogue=validateWorkshopCatalogue(JSON.parse(await readFile(path,'utf8'))),now=Date.now();
 const pending=catalogue.workshops.filter(w=>w.status==='published'&&(!w.google.placeId||now-Date.parse(w.google.matchedAt)>365*86400000));
 if(!values.fetch){
- console.log(JSON.stringify({mode:'plan',published:catalogue.coverage.published,pendingProfiles:pending.length,distinctPhoneQueries:new Set(pending.map(w=>w.phone)).size,limit,apiRequests:0,persistedGoogleFields:['placeId','matchedAt']},null,2));
+ console.log(JSON.stringify({mode:'plan',published:catalogue.coverage.published,pendingProfiles:pending.length,distinctPhoneQueries:new Set(pending.map(w=>w.phone)).size,distinctSearchRequests:new Set(pending.map(w=>JSON.stringify(googlePlaceSearchRequest(w,20)))).size,limit,apiRequests:0,persistedGoogleFields:['placeId','matchedAt']},null,2));
 }else{
  const key=(process.env.GOOGLE_PLACES_SERVER_API_KEY??'').trim();
  if(!key)throw Error('GOOGLE_PLACES_SERVER_API_KEY ist nicht eingerichtet; keine Google-Abfrage ausgeführt');
  const responses=new Map(),matched=[],unmatched=[],errors=[];let requests=0;
  for(const workshop of pending){
-  if(!responses.has(workshop.phone)){
+  const query=JSON.stringify(googlePlaceSearchRequest(workshop,20));
+  if(!responses.has(query)){
    if(requests>=limit)break;requests++;
    try{
-    const response=await fetch('https://places.googleapis.com/v1/places:searchText',{method:'POST',headers:{'Content-Type':'application/json','X-Goog-Api-Key':key,'X-Goog-FieldMask':'places.id,places.displayName,places.formattedAddress,places.addressComponents,places.location,places.internationalPhoneNumber'},body:JSON.stringify({textQuery:workshop.phone,languageCode:'de',regionCode:'XK',pageSize:20}),signal:AbortSignal.timeout(12000)});
-    if(!response.ok){responses.set(workshop.phone,null);errors.push({workshopId:workshop.id,status:response.status});if(response.status===401||response.status===403||response.status===429)break;continue;}
-    const body=await response.json();responses.set(workshop.phone,Array.isArray(body.places)?body.places:[]);
-   }catch{responses.set(workshop.phone,null);errors.push({workshopId:workshop.id,status:'unavailable'});continue;}
+    const response=await fetch('https://places.googleapis.com/v1/places:searchText',{method:'POST',headers:{'Content-Type':'application/json','X-Goog-Api-Key':key,'X-Goog-FieldMask':'places.id,places.displayName,places.formattedAddress,places.addressComponents,places.location,places.internationalPhoneNumber'},body:query,signal:AbortSignal.timeout(12000)});
+    if(!response.ok){responses.set(query,null);errors.push({workshopId:workshop.id,status:response.status});if(response.status===401||response.status===403||response.status===429)break;continue;}
+    const body=await response.json();responses.set(query,Array.isArray(body.places)?body.places:[]);
+   }catch{responses.set(query,null);errors.push({workshopId:workshop.id,status:'unavailable'});continue;}
   }
-  const candidates=responses.get(workshop.phone);if(!candidates)continue;
+  const candidates=responses.get(query);if(!candidates)continue;
   const id=verifiedGooglePlace(workshop,candidates);
   if(!id){unmatched.push(workshop.id);continue;}
   const other=catalogue.workshops.find(w=>w.id!==workshop.id&&w.google.placeId===id);
