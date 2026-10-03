@@ -10,7 +10,6 @@ export function AccountStorageNotice({account}:{account:AccountIdentity|null}){
  if(!account)return null;
  return <aside className="account-storage-notice" aria-label="Dein Konto und die Speicherung">
   <div className="account-identity"><UserRound size={19}/><div><span>{account.provider==="E-Mail"?"Mit deinem Mjeshtër-Konto angemeldet":`Angemeldet${account.provider?` über ${account.provider}`:""}`}</span><strong>{account.email}</strong>{account.displayName!==account.email&&<span>{account.displayName}</span>}</div></div>
-  <p className="account-session-note">Eine bestehende Anmeldung kann bereits aktiv sein. Dann erkennt die Seite dein Konto, ohne dass du dich erneut anmelden musst.</p>
-  <div className="account-storage-copy"><Cloud size={19}/><p>Deine <strong>eingereichten Nachweise und Belege sind auf dem Server gespeichert</strong> und diesem Konto zugeordnet. Sie bleiben erhalten, wenn du den Browsercache löschst oder den Browser wechselst. Melde dich dort wieder mit diesem Konto an.</p></div>
+  <div className="account-storage-copy"><Cloud size={19}/><p><strong>Nachweise bleiben privat auf dem Server gespeichert.</strong> Auch nach einem Browserwechsel oder gelöschtem Cache – melde dich mit diesem Konto an.</p></div>
  <div className="account-actions">{account.provider==="E-Mail"?<button onClick={()=>void signOut()} disabled={busy} type="button">{busy?"Wird abgemeldet …":"Abmelden"}</button>:<a href="/signout-with-chatgpt?return_to=%2Fanmelden" target="_top">Abmelden</a>}<span>Abmelden löscht keine Nachweise.</span></div>{error&&<p className="error" role="alert">{error}</p>}</aside>;
 }
