@@ -12,6 +12,7 @@ import type {AccountIdentity} from "@/components/account-storage-notice";
 import {MyVisits,VisitForm,type Review,type Visit} from "@/app/journeys";
 import {contactHref,type Workshop} from "@/lib/workshops";
 import {readSearchSession} from "@/lib/search-session";
+import {profileSearchHref} from "@/lib/profile-navigation";
 
 type Props={workshop:Workshop;directory:Workshop[];reviews:Review[];reviewError:string;signedIn:boolean;account:AccountIdentity|null;isAdmin:boolean};
 export default function WorkshopProfile({workshop:w,directory,reviews,reviewError,signedIn,account,isAdmin}:Props){
@@ -19,7 +20,7 @@ export default function WorkshopProfile({workshop:w,directory,reviews,reviewErro
  const path=`/werkstatt/${encodeURIComponent(w.id)}`,mapHref=`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(w.lat!==null&&w.lng!==null?`${w.lat},${w.lng}`:`${w.name} ${w.address}`)}`;
  const hasDirectorySources=w.sources.some(source=>"kind" in source&&source.kind==="directory");
  // eslint-disable-next-line react-hooks/set-state-in-effect -- The return link uses only a validated public catalogue URL from browser memory.
- useEffect(()=>{const href=readSearchSession()?.catalogueHref;if(href?.startsWith("/werkstaetten"))setBackHref(href);},[]);
+ useEffect(()=>{const href=profileSearchHref(new URLSearchParams(window.location.search).get("suche"),directory)??profileSearchHref(readSearchSession()?.catalogueHref??null,directory);if(href)setBackHref(href);},[directory]);
  // eslint-disable-next-line react-hooks/set-state-in-effect -- A login return may target the inline review section.
  useEffect(()=>{if(window.location.hash==="#bewerten"||new URLSearchParams(window.location.search).get("bewerten")==="1")setReviewOpen(true);},[]);
  function openReview(){setReviewOpen(true);requestAnimationFrame(()=>document.getElementById("bewerten")?.scrollIntoView({behavior:"smooth",block:"start"}));}

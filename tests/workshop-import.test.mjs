@@ -54,6 +54,7 @@ assert.equal(unknown.googleRating.rating,null,'missing Google score stays null')
 const unknownMarkup=renderToStaticMarkup(React.createElement(WorkshopRatings,{workshop:unknown,details:true}));
 assert(unknownMarkup.includes('Nicht verifiziert'));
 assert(!unknownMarkup.includes('0,0'));
+assert.equal(renderToStaticMarkup(React.createElement(WorkshopRatings,{workshop:unknown,hideUnavailable:true})),"",'list cards preserve the absence of empty rating placeholders');
 const sonic=workshops.find(w=>w.id==='sonic-garage');
 assert.equal(sonic.googleRating.rating,null,'star icons do not establish an exact Google aggregate');
 assert.equal(sonic.googleRating.count,19);
