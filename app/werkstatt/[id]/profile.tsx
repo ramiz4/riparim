@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import {useEffect,useState} from "react";
 import {useRouter} from "next/navigation";
 import {ArrowLeft,ChevronDown,Copy,FileCheck2,Globe,MapPin,MessageCircle,Navigation,Phone,Share2,ShieldCheck,Star} from "lucide-react";
@@ -14,6 +13,7 @@ import {MyVisits,VisitForm,type Review,type Visit} from "@/app/journeys";
 import {contactHref,type Workshop} from "@/lib/workshops";
 import {readSearchSession} from "@/lib/search-session";
 import {profileSearchHref} from "@/lib/profile-navigation";
+import {WorkshopNavigationLink} from "@/components/workshop-navigation-link";
 
 type Props={workshop:Workshop;directory:Workshop[];reviews:Review[];reviewError:string;signedIn:boolean;account:AccountIdentity|null;isAdmin:boolean};
 export default function WorkshopProfile({workshop:w,directory,reviews,reviewError,signedIn,account,isAdmin}:Props){
@@ -37,8 +37,8 @@ export default function WorkshopProfile({workshop:w,directory,reviews,reviewErro
  }
  async function copy(value:string,label:string){try{await navigator.clipboard.writeText(value);setFeedback(label);}catch{setFeedback("Bitte wähle den Text aus und kopiere ihn manuell.");}}
  return <><SiteHeader account={account} isAdmin={isAdmin} onVisits={()=>setMyReviews(true)} onNewVisit={openReview}/>
- <main className="workshop-page wrap">
-  <Link className="profile-back" href={backHref}><ArrowLeft size={16}/>Zurück zur Suche</Link>
+ <main className="workshop-page wrap" data-workshop-id={w.id}>
+  <WorkshopNavigationLink className="profile-back" href={backHref}><ArrowLeft size={16}/>Zurück zur Suche</WorkshopNavigationLink>
   <header className="workshop-overview"><div className="workshop-overview-identity"><div><p className="profile-place"><MapPin size={15}/>{w.city}{specialty&&` · ${specialty}`}</p><h1>{w.name}</h1><WorkshopRatings workshop={w} compact/></div></div><div className="workshop-overview-actions">{phoneHref&&<a className="primary" href={phoneHref}><Phone size={17}/>Anrufen</a>}<a className="outline" href={routeHref} target="_blank" rel="noopener noreferrer"><Navigation size={17}/>Route planen</a></div></header>
   <nav className="profile-section-nav" aria-label="Profilbereiche"><a href="#leistungen">Leistungen</a><a href="#bewertungen">Bewertungen</a><a href="#standort">Standort</a></nav>
   <div className="workshop-page-grid"><div className="workshop-page-main">
