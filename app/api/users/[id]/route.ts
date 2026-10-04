@@ -1,6 +1,7 @@
 import {getAdminUser,providerAccountId} from "@/app/auth";
 import {getAuthAdmin} from "@/lib/auth/admin";
 import {blockAccount} from "@/lib/auth/account-status";
+import {changeAccountRole} from "@/lib/auth/roles";
 import {storage,moderatorEmail,cleanupVisitEvidence} from "@/db/storage";
 import {json,readJson,sameOrigin} from "@/lib/http";
 import {protectedUser,userView,validUserId,parseUserFields,providerFailure,notConfigured} from "@/lib/admin-users";
@@ -17,10 +18,16 @@ export async function PATCH(request:Request,{params}:Context){
   const auth=await getAuthAdmin();if(!auth)return notConfigured();
   const {data:current,error:lookupError}=await auth.client.auth.admin.getUserById(id);if(lookupError||!current.user)return providerFailure(lookupError);
   const user=current.user,accountId=providerAccountId(auth.projectUrl,id),db=storage().db;
-  if(protectedUser(user,admin,auth.projectUrl)&&("active" in fields||fields.email!==undefined&&fields.email!==user.email?.toLowerCase()))return json({error:"Das Administratorkonto kann nicht gesperrt oder auf eine andere E-Mail-Adresse geändert werden."},403);
+  if(protectedUser(user,admin,auth.projectUrl)&&("role" in fields||"active" in fields||fields.email!==undefined&&fields.email!==user.email?.toLowerCase()))return json({error:"Dein eigener und der ursprüngliche Verwaltungszugang sind geschützt: Rolle, Kontostatus und E-Mail-Adresse können nicht geändert werden."},403);
   if(fields.email===moderatorEmail()&&fields.email!==user.email?.toLowerCase())return json({error:"Diese E-Mail-Adresse ist für die Verwaltung reserviert."},403);
   const status=await db.prepare("SELECT status FROM auth_account_status WHERE account_id=?").bind(accountId).first<{status:string}>();
   if(status?.status==="deleted")return json({error:"Die Löschung dieses Kontos wurde bereits begonnen. Bitte schließe sie über Löschen ab."},409);
+  if(fields.role!==undefined){
+   const before=await userView(user,admin,auth.projectUrl);
+   const roleChanged=before.role!==fields.role;
+   if(roleChanged)try{await changeAccountRole(accountId,fields.role,admin);}catch(e){if(e instanceof Error&&e.message==="ROLE_CHANGE_FORBIDDEN")return json({error:"Die Rollenänderung ist nicht mehr erlaubt. Bitte aktualisiere die Benutzerverwaltung und melde dich bei Bedarf erneut an."},403);throw e;}
+   return json({user:await userView(user,admin,auth.projectUrl),roleChanged});
+  }
   const attributes:AdminUserAttributes={};
   if(fields.name!==undefined)attributes.user_metadata={...user.user_metadata,full_name:fields.name};
   if(fields.email!==undefined&&fields.email!==user.email?.toLowerCase())attributes.email=fields.email;
@@ -55,6 +62,7 @@ export async function DELETE(request:Request,{params}:Context){
   await db.prepare("DELETE FROM visits WHERE owner IN (?,?) AND status='deleting'").bind(...owners).run();
   await db.batch([
    db.prepare("DELETE FROM auth_sessions WHERE account_id=?").bind(accountId),
+   db.prepare("DELETE FROM auth_account_roles WHERE account_id=?").bind(accountId),
    db.prepare("DELETE FROM auth_links WHERE account_id=?").bind(accountId)
   ]);
   const deleted=await auth.client.auth.admin.deleteUser(id);if(deleted.error)throw Error("PROVIDER_DELETE_FAILED");
