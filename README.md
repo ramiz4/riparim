@@ -11,7 +11,7 @@ Semantic Release als Release-Prozess.
 ## Technik
 
 - React, TypeScript und Vinext mit App Router
-- Cloudflare Worker, D1-Datenbank und privater R2-Dateispeicher über OpenAI Sites
+- Cloudflare Worker, D1-Datenbank und privater R2-Dateispeicher; die neue Release-Pipeline verwendet den eigenen Cloudflare-Account
 - Supabase Auth für E-Mail/Passwort und Google OAuth
 - Drizzle für Schema und SQL-Migrationen
 
@@ -19,7 +19,7 @@ Semantic Release als Release-Prozess.
 
 ## Lokal starten
 
-Voraussetzungen: Node.js ab 22.13 und npm.
+Voraussetzungen: Node.js 22 ab 22.14 oder ab 24.10 und npm. CI verwendet Node.js 24.
 
 ```sh
 npm run install:ci
@@ -83,10 +83,10 @@ npm run build
 
 Die ergänzende Live- und Browserprüfung steht in [docs/customer-flow-qa.md](docs/customer-flow-qa.md). Die dokumentierte Bestandsprüfung in `data/catalogue-review-2026-10-04.json` führt die unabhängigen Quellen und zurückgestellten Standortkonflikte auf.
 
-GitHub Actions führt Katalogprüfung, Tests, TypeScript, Lint und Worker-Build bei Pull Requests und nach Änderungen an `main` mit dem bestehenden Lockfile aus. Die Prüfung benötigt keine Produktionsgeheimnisse und veröffentlicht die Site nicht automatisch.
+GitHub Actions prüft Katalog, Tests, TypeScript, Lint und Worker-Build bei Pull Requests. Nach einem Squash-Merge nach `main` erstellt `semantic-release` bei relevanten Conventional Commits einen versionierten GitHub Release und veröffentlicht dessen geprüftes Worker-Artefakt auf Cloudflare. Details und nötige Produktions-Secrets stehen in [docs/releases.md](docs/releases.md).
 
 ## Veröffentlichung
 
-Das Projekt wird über OpenAI Sites veröffentlicht. `.openai/hosting.json` enthält die bestehende Projektzuordnung und die logischen D1-/R2-Bindungen. Laufzeitwerte und Geheimnisse werden außerhalb von Git verwaltet. Ein GitHub-Push löst keine automatische Veröffentlichung aus.
+Die neue Veröffentlichung erfolgt ausschließlich über den Workflow **Release** aus dem gemergten `main`, zunächst auf die eigene Workers-Adresse. `wrangler.jsonc` ist die Quelle für Zielaccount, Ressourcen und Laufzeitvariablen. Das GitHub-Environment `production` erlaubt nur `main` und verwahrt die Deployment-/Anwendungs-Secrets. Offene PRs werden nicht veröffentlicht.
 
-Sites-Veröffentlichungen verwenden den passenden Sites-Workflow: geprüften Quellstand speichern, Worker-Artefakt bauen und die gespeicherte Version deployen. Produktionsmigrationen werden dabei über Sites angewendet. Ein lokaler Worker kann mit `npm start -- --port 5175` geprüft werden.
+Die bestehende Site auf `riparim.com` bleibt bis zur Daten- und Domainübernahme auf OpenAI Sites erhalten. `.openai/hosting.json` dokumentiert diese bisherige Zuordnung; native Sites-Tokens werden nicht für CI verwendet. Der eigene Cloudflare-Worker entfernt native Sites-Identitätsheader am Eingang. Ein lokaler Worker kann mit `npm start -- --port 5175` geprüft werden.

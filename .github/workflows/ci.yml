@@ -2,9 +2,12 @@ name: CI
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, edited]
-  push:
-    branches: [main]
+    types: [opened, synchronize, reopened]
+  workflow_call:
+    inputs:
+      upload-build:
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -14,26 +17,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  conventional_title:
-    name: Conventional PR title
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - name: Validate Conventional Commit title
-        env:
-          PR_TITLE: ${{ github.event.pull_request.title }}
-        run: |
-          node <<'JS'
-          const title = process.env.PR_TITLE ?? '';
-          const convention = /^(feat|fix|perf|refactor|docs|test|build|ci|chore|style|revert)(\([a-z0-9][a-z0-9/_-]*\))?!?: \S[^\r\n]*$/;
-          if (!convention.test(title)) {
-            console.error('Use a Conventional Commit PR title, e.g. fix(auth): validate callback redirects');
-            process.exit(1);
-          }
-          console.log('PR title conforms to the repository Conventional Commit rules.');
-          JS
-
   verify:
     name: Tests, types, lint and build
     runs-on: ubuntu-latest
@@ -46,7 +29,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
         with:
-          node-version: "22"
+          node-version: "24"
           cache: npm
           cache-dependency-path: package-lock.json
       - name: Install locked dependencies
@@ -62,3 +45,14 @@ jobs:
       - name: Build Cloudflare Worker
         run: npm run build
         timeout-minutes: 10
+      - name: Package verified Worker
+        if: inputs.upload-build == true
+        run: npm run release:package
+      - name: Retain exact build for semantic release
+        if: inputs.upload-build == true
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: worker-${{ github.sha }}
+          path: artifacts/
+          if-no-files-found: error
+          retention-days: 14

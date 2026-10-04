@@ -117,8 +117,10 @@ keine Release-Automatisierung.
 - Die Anwendung bleibt ein privates Projekt; eine Veröffentlichung als npm-Paket
   gehört nicht zum Release-Prozess. CI-Zugangsdaten bleiben in geschützten Secrets;
   Release-Jobs erhalten nur die benötigten Berechtigungen und laufen serialisiert.
-- Ein GitHub-Release ersetzt keine Sites-Veröffentlichung. Der Deployment-Prozess
-  und Produktionsmigrationen richten sich nach `README.md` und dem Sites-Workflow.
+- Der Workflow `Release` veröffentlicht das geprüfte GitHub-Release-Artefakt auf
+  dem eigenen Cloudflare-Worker. Deployment, Produktionsmigrationen und die
+  gesonderte Daten-/Domainumstellung richten sich nach
+  [docs/releases.md](docs/releases.md). Offene PRs werden nicht veröffentlicht.
 
 Referenz: [Semantic Release](https://semantic-release.org/intro/) und
 [Konfiguration](https://semantic-release.org/usage/configuration/).
