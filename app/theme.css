@@ -198,7 +198,6 @@ html.dark :is(.moderation-search svg, .admin-tools>label, .location-details summ
   .navbar .header-right { display: contents; }
   .navbar .theme-control { grid-column: 2; grid-row: 1; }
   .navbar :is(.header-auth, .user-menu-trigger) { grid-column: 1 / -1; grid-row: 2; justify-self: end; }
-  .landing-hero { min-height: calc(100svh - 104px); }
 }
 
 @media (prefers-reduced-motion: reduce) {
