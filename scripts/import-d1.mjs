@@ -14,13 +14,13 @@ const quote = (value) => { if (!identifier(value)) fail("Invalid destination ide
 function canonical(value) { return Array.isArray(value) ? value.map(canonical) : record(value) ? Object.fromEntries(Object.keys(value).sort().map((key) => [key, canonical(value[key])])) : value; }
 const fingerprint = (value) => hash(JSON.stringify(canonical(value)));
 const sourceFingerprint = (snapshot) => fingerprint({ excludedProviderTables: snapshot.excludedProviderTables, schema: [...snapshot.schema].sort((a, b) => a.name.localeCompare(b.name)), tables: [...snapshot.tables].sort((a, b) => a.name.localeCompare(b.name)) });
-const destinationFingerprint = (snapshot) => fingerprint({ excludedProviderTables: snapshot.excludedProviderTables, schema: [...snapshot.schema].sort((a, b) => a.name.localeCompare(b.name)), tables: snapshot.tables.map((table) => ({ ...table, rows: [...table.rows].sort((a, b) => fingerprint(a).localeCompare(fingerprint(b))) })).sort((a, b) => a.name.localeCompare(b.name)) });
+export const destinationFingerprint = (snapshot) => fingerprint({ excludedProviderTables: snapshot.excludedProviderTables, schema: [...snapshot.schema].sort((a, b) => a.name.localeCompare(b.name)), tables: snapshot.tables.map((table) => ({ ...table, rows: [...table.rows].sort((a, b) => fingerprint(a).localeCompare(fingerprint(b))) })).sort((a, b) => a.name.localeCompare(b.name)) });
 
 function context({ token, expectedCommit, accountId = d1Destination.accountId, databaseId = d1Destination.databaseId }) {
   if (accountId !== d1Destination.accountId || databaseId !== d1Destination.databaseId || !/^[a-f0-9]{40}$/.test(expectedCommit ?? "")) fail("Exact production destination and released commit are required.");
   if (typeof token !== "string" || token.length < 20 || token.length > 512 || /[^\x21-\x7e]/.test(token)) fail("A protected Cloudflare token is required.");
 }
-function queryClient(options) {
+export function queryClient(options) {
   context(options);
   const request = options.request ?? fetch;
   const endpoint = `https://api.cloudflare.com/client/v4/accounts/${d1Destination.accountId}/d1/database/${d1Destination.databaseId}/query`;

@@ -34,8 +34,11 @@ const source = {
   account_id: cloudflareProduction.account,
   name: cloudflareProduction.worker,
   main: "build/cloudflare-worker.ts",
+  workers_dev: true,
+  preview_urls: false,
+  routes: [],
   triggers: {crons:["*/5 * * * *"]},
-  vars: { SITE_ORIGIN: "https://riparim.example.test" },
+  vars: { SITE_ORIGIN: cloudflareProduction.origin },
   d1_databases: [{ binding: "DB", database_id: cloudflareProduction.database, database_name: cloudflareProduction.databaseName, migrations_dir: "drizzle", remote: false }],
   r2_buckets: [{ binding: "BUCKET", bucket_name: cloudflareProduction.bucket, remote: false }],
 };
@@ -46,6 +49,38 @@ for (const change of [{ GITHUB_ACTIONS: "false" }, { GITHUB_EVENT_NAME: "pull_re
 }
 assert.throws(() => assertCloudflareDeployContext(env, commit, "b".repeat(40)));
 assert.doesNotThrow(() => assertCloudflareDeployConfig(source, generated));
+const checkedInConfig = JSON.parse(readFileSync(new URL("../wrangler.jsonc", import.meta.url), "utf8"));
+assert.equal(checkedInConfig.vars.SITE_ORIGIN, cloudflareProduction.origin);
+assert.deepEqual(checkedInConfig.routes, [], "preparing the origin must not activate production routing");
+assert.equal(checkedInConfig.workers_dev, true, "the protected final transfer still needs its technical host");
+assert.equal(checkedInConfig.preview_urls, false);
+// Domain activation belongs to a later checked-in main release. Packaging and
+// deployment reject any generated route that was not in that exact source.
+const productionRoutes = [
+  { pattern: "riparim.com", custom_domain: true },
+  { pattern: "www.riparim.com", custom_domain: true },
+];
+const routedSource = { ...source, routes: productionRoutes };
+const routedGenerated = { ...generated, routes: productionRoutes };
+assert.doesNotThrow(() => assertCloudflareDeployConfig(routedSource, routedGenerated));
+assert.doesNotThrow(() => assertCloudflareDeployConfig({ ...routedSource, workers_dev: false }, { ...routedGenerated, workers_dev: false }));
+for (const [input, output] of [
+  [source, routedGenerated],
+  [routedSource, generated],
+  [routedSource, { ...routedGenerated, routes: productionRoutes.slice(0, 1) }],
+  [routedSource, { ...routedGenerated, routes: [{ pattern: "other.example", custom_domain: true }] }],
+  [routedSource, { ...routedGenerated, routes: productionRoutes.map(route => ({ ...route, custom_domain: false })) }],
+  [source, { ...generated, route: "riparim.com/*" }],
+  [{ ...source, route: "riparim.com/*" }, { ...generated, route: "riparim.com/*" }],
+  [source, { ...generated, routes: null }],
+  [{ ...source, workers_dev: false }, generated],
+  [source, { ...generated, workers_dev: false }],
+  [{ ...source, workers_dev: undefined }, { ...generated, workers_dev: undefined }],
+  [source, { ...generated, preview_urls: true }],
+  [{ ...source, preview_urls: true }, { ...generated, preview_urls: true }],
+  [{ ...source, preview_urls: undefined }, { ...generated, preview_urls: undefined }],
+  [{ ...source, vars: { SITE_ORIGIN: "https://fixture.workers.dev" } }, { ...generated, vars: { SITE_ORIGIN: "https://fixture.workers.dev" } }],
+]) assert.throws(() => assertCloudflareDeployConfig(input, output));
 for (const change of [{ name: "another-worker" }, { account_id: "wrong-account" }, { services: [{ binding: "CONNECTORS", service: "sites-connector-preview" }] }, { main: "../../app/page.tsx" }, { no_bundle: false }, { build: { command: "npm run build" } }, { vars: {} }, { triggers: {} }, { assets: { directory: "../../../" } }, { env: { preview: {} } }, { d1_databases: [{ ...source.d1_databases[0], database_id: "00000000-0000-4000-8000-000000000000" }] }, { r2_buckets: [{ ...source.r2_buckets[0], bucket_name: "preview-bucket" }] }]) {
   assert.throws(() => assertCloudflareDeployConfig(source, { ...generated, ...change }));
 }
@@ -244,6 +279,19 @@ try {
   await makeRelease();
   await assert.rejects(deploy(), /Preview services/);
   assert.deepEqual(remoteOperations, [], "untrusted contexts and artifacts must not touch remote infrastructure");
+  fixtureConfig = generated;
+  await makeRelease();
+  for (const change of [
+    { routes: productionRoutes },
+    { route: "riparim.com/*" },
+    { workers_dev: false },
+    { preview_urls: true },
+  ]) {
+    fixtureConfig = { ...generated, ...change };
+    await makeRelease();
+    await assert.rejects(deploy(), /routing|technical-host|preview URLs/);
+    assert.deepEqual(remoteOperations, [], "routing drift must fail before migrations or deployment");
+  }
   fixtureConfig = generated;
   await makeRelease();
   failOperation = "migrations";

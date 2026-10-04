@@ -7,6 +7,7 @@ const stableReleaseTag = /^v(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)$/;
 export const cloudflareProduction = {
   account: "ec181b3a61c7c3da13910600953fc3ea",
   worker: "riparim",
+  origin: "https://riparim.com",
   database: "b395ea3a-5316-4b0b-bdee-533bdb68d6a0",
   databaseName: "riparim-production",
   bucket: "riparim-evidence-production",
@@ -80,6 +81,9 @@ function assertProductionTarget(config) {
   if (config.services?.length || database.preview_database_id || bucket.preview_bucket_name || config.build?.command || Object.keys(config.env ?? {}).length || config.dispatch_namespace) {
     throw new Error("Preview services, preview resources, custom builds and alternate environments are forbidden during production deployment.");
   }
+  if (config.vars?.SITE_ORIGIN !== cloudflareProduction.origin || typeof config.workers_dev !== "boolean" || config.preview_urls !== false || (config.routes !== undefined && !Array.isArray(config.routes)) || config.route !== undefined) {
+    throw new Error("Production must use its canonical origin and explicit technical-host settings, without preview URLs or singular route overrides.");
+  }
 }
 
 export function assertCloudflareDeployConfig(source, generated) {
@@ -90,6 +94,9 @@ export function assertCloudflareDeployConfig(source, generated) {
   }
   if (generated.no_bundle !== true || posix.normalize(generated.main ?? "") !== "index.js" || posix.normalize(generated.assets?.directory ?? "") !== "../client" || !isDeepStrictEqual(source.vars ?? {}, generated.vars ?? {}) || !isDeepStrictEqual(source.triggers ?? {}, generated.triggers ?? {})) {
     throw new Error("Generated configuration must deploy the released Worker and client assets with the checked-in runtime variables.");
+  }
+  if (!isDeepStrictEqual(source.routes ?? [], generated.routes ?? []) || source.workers_dev !== generated.workers_dev || source.preview_urls !== generated.preview_urls) {
+    throw new Error("Generated routing and technical-host settings must match the checked-in production configuration.");
   }
 }
 
