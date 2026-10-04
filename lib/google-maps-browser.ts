@@ -7,6 +7,7 @@ function safeHttps(value:string|undefined):string|undefined{if(!value)return und
 let configPromise:Promise<ClientConfig>|undefined,libraryPromise:Promise<GooglePlacesLibrary>|undefined;
 const identities=new Map<string,Promise<{placeId:string;browserKey:string}|null>>();
 const liveRequests=new Map<string,Promise<LiveGoogleRating>>();
+const profileRequests=new Map<string,Promise<LiveGoogleProfile>>();
 export function googlePlacesClientConfig(){return configPromise??=fetch("/api/google-places",{credentials:"same-origin",cache:"no-store",signal:AbortSignal.timeout(12000)}).then(async response=>{if(!response.ok)throw Error("Google unavailable");return response.json() as Promise<ClientConfig>;});}
 export async function workshopGoogleIdentity(id:string){
  let pending=identities.get(id);if(!pending){pending=(async()=>{const config=await googlePlacesClientConfig();if(!config.enabled||!config.browserKey)return null;const response=await fetch(`/api/google-places/${encodeURIComponent(id)}`,{credentials:"same-origin",cache:"no-store",signal:AbortSignal.timeout(20000)});if(!response.ok)throw Error("Google unavailable");const result=await response.json() as {placeId?:string|null};return result.placeId?{placeId:result.placeId,browserKey:config.browserKey!}:null;})();identities.set(id,pending);pending.catch(()=>identities.delete(id));}
@@ -18,7 +19,7 @@ export function loadGooglePlaces(browserKey:string):Promise<GooglePlacesLibrary>
  libraryPromise=(async()=>{
   if(!win.google?.maps?.importLibrary)await new Promise<void>((resolve,reject)=>{
    const script=document.createElement("script"),previousAuthFailure=win.gm_authFailure;
-   const finish=(error?:Error)=>{clearTimeout(timeout);delete win.__riparimGoogleMapsLoaded;win.gm_authFailure=previousAuthFailure;error?reject(error):resolve();};
+   const finish=(error?:Error)=>{clearTimeout(timeout);delete win.__riparimGoogleMapsLoaded;win.gm_authFailure=previousAuthFailure;if(error)reject(error);else resolve();};
    const timeout=setTimeout(()=>finish(Error("Google load timeout")),12000);
    win.__riparimGoogleMapsLoaded=()=>finish();win.gm_authFailure=()=>finish(Error("Google authorization unavailable"));
    const params=new URLSearchParams({key:browserKey,v:"weekly",loading:"async",libraries:"places",language:"de",region:"XK",callback:"__riparimGoogleMapsLoaded"});
@@ -32,3 +33,28 @@ export async function currentGoogleRating(placeId:string,browserKey:string){
  let pending=liveRequests.get(placeId);if(!pending){pending=(async()=>{const library=await loadGooglePlaces(browserKey),place=new library.Place({id:placeId,requestedLanguage:"de"});await place.fetchFields({fields:["rating","userRatingCount","googleMapsURI","attributions"]});return {rating:typeof place.rating==="number"&&place.rating>=1&&place.rating<=5?place.rating:null,count:typeof place.userRatingCount==="number"&&Number.isInteger(place.userRatingCount)&&place.userRatingCount>=0?place.userRatingCount:null,mapsUrl:safeHttps(place.googleMapsURI)??`https://www.google.com/maps/search/?api=1&query=Werkstatt&query_place_id=${encodeURIComponent(placeId)}`,attributions:(place.attributions??[]).filter(a=>a.provider).map(a=>({provider:a.provider,providerURI:safeHttps(a.providerURI)}))};})();liveRequests.set(placeId,pending);void pending.finally(()=>liveRequests.delete(placeId)).catch(()=>{});}
  return pending;
 }
+export async function currentGoogleProfile(placeId:string,browserKey:string):Promise<LiveGoogleProfile>{
+ let pending=profileRequests.get(placeId);
+ if(!pending){
+  pending=(async()=>{
+   const response=await fetch(`https://places.googleapis.com/v1/places/${encodeURIComponent(placeId)}?languageCode=de`,{headers:{"X-Goog-Api-Key":browserKey,"X-Goog-FieldMask":"id,rating,userRatingCount,currentOpeningHours,regularOpeningHours,businessStatus,location,photos,googleMapsUri,attributions"},credentials:"omit",cache:"no-store",signal:AbortSignal.timeout(12000)});
+   if(!response.ok)throw Error("Google profile unavailable");
+   return normalizeGoogleProfile(await response.json() as GoogleProfileResponse,placeId);
+  })();
+  profileRequests.set(placeId,pending);void pending.finally(()=>profileRequests.delete(placeId)).catch(()=>{});
+ }
+ return pending;
+}
+type MapInstance=object;
+type MapLibrary={Map:new(element:HTMLElement,options:Record<string,unknown>)=>MapInstance};
+type MarkerLibrary={AdvancedMarkerElement:new(options:Record<string,unknown>)=>{map:MapInstance|null}};
+export async function showConfirmedGoogleMap(element:HTMLElement,profile:Pick<LiveGoogleProfile,"placeId"|"location">,browserKey:string,title:string){
+ if(!profile.location)throw Error("Google location unavailable");
+ await loadGooglePlaces(browserKey);
+ const maps=(window as GoogleWindow).google!.maps!;
+ const [mapLibrary,markerLibrary]=await Promise.all([maps.importLibrary("maps"),maps.importLibrary("marker")]) as unknown as [MapLibrary,MarkerLibrary];
+ const map=new mapLibrary.Map(element,{center:profile.location,zoom:16,mapId:"DEMO_MAP_ID",mapTypeControl:false,streetViewControl:false,gestureHandling:"cooperative"});
+ const marker=new markerLibrary.AdvancedMarkerElement({map,position:profile.location,title});
+ return ()=>{marker.map=null;element.replaceChildren();};
+}
+import {normalizeGoogleProfile,type GoogleProfileResponse,type LiveGoogleProfile} from "./google-workshop-profile";

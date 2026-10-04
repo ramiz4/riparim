@@ -21,7 +21,7 @@ Für Suchlinks wird deren vorhandene Suchanfrage einschließlich Adresse verwend
 
 ## Zuordnung und Darstellung
 
-Ein veröffentlichtes Profil benötigt eine bestätigte Google-Identität, auch wenn keine Rezensionen oder Sterne vorhanden sind. Importvalidator und Verwaltungsroute prüfen diese Voraussetzung. Ein unverändertes bestätigtes Profil behält seine Identität; Änderungen an Name, Telefon, Ort, Adresse oder Koordinaten benötigen eine neue Bestätigung. Doppelt verwendete Place IDs werden zurückgewiesen. Kartenlink und Bewertungsbaustein verwenden dieselbe ID. Die ID steht auch für eine spätere live geladene Öffnungszeitenanzeige bereit; Öffnungszeiten werden derzeit nicht importiert.
+Ein veröffentlichtes Profil benötigt eine bestätigte Google-Identität, auch wenn keine Rezensionen oder Sterne vorhanden sind. Importvalidator und Verwaltungsroute prüfen diese Voraussetzung. Ein unverändertes bestätigtes Profil behält seine Identität; Änderungen an Name, Telefon, Ort, Adresse oder Koordinaten benötigen eine neue Bestätigung. Doppelt verwendete Place IDs werden zurückgewiesen. Kartenlink, Route, Bewertungen, Öffnungszeiten und Fotos verwenden dieselbe ID. Öffnungszeiten und Fotos werden ausschließlich live geladen, nicht in die Importquelle übernommen.
 
 Die öffentliche Zuordnungsroute nimmt ausschließlich eine vorhandene veröffentlichte Werkstattkennung entgegen. Die Suchanfrage stammt aus deren veröffentlichtem Kontakt. Eine Zuordnung braucht dieselbe internationale Telefonnummer, einen charakteristischen Namensbestandteil und passende bekannte Koordinaten bzw. den Ort in Kosovo. Ein ausdrücklich anderes Land wird abgewiesen. Google lässt das Land bei Kosovo-Einträgen teilweise auch in Place Details weg: Dann braucht es entweder höchstens 300 Meter Abstand zu den unabhängig belegten Werkstattkoordinaten oder den passenden Ort im Google-Adressfeld und höchstens 15 Kilometer Abstand zu dessen bekanntem Zentrum. Mehrere geeignete Place IDs werden zurückgewiesen.
 
@@ -34,6 +34,16 @@ Sichtbare Karten laden aktuelle Sterne und Anzahl direkt über die Google Places
 Bei der Sortierung „Google-Bewertung“ werden die zur aktuellen Suche passenden Werkstätten in Gruppen von höchstens vier gleichzeitig geladen. Die Sterne und Anzahl bleiben nur im Arbeitsspeicher der geöffneten Liste. Die Liste sortiert Google und Riparim getrennt nach Sternen; bei gleichem Wert folgt die höhere Anzahl zuerst, fehlende Sterne stehen am Ende. Ohne aktuelle Google-Werte stehen Werkstätten alphabetisch am Ende; historische Momentaufnahmen werden nicht verwendet. Eine Änderung der zentralen JSON-Quelle löst über deren Inhalts-Hash den Import aus; Profile und recherchierte Google-Angaben werden anhand ihrer getrennten Zeitstempel aktualisiert. Neuere manuell gepflegte Angaben bleiben erhalten.
 
 Im Profil lädt der offizielle `gmp-place-details`-Baustein mit `gmp-place-rating` und `gmp-place-reviews`, sobald sein Bereich sichtbar wird. Die eingebauten Google- und Autorenattributionen werden beibehalten. Bei fehlender Konfiguration, fehlender Zuordnung oder einem Providerfehler steht der direkte Google-Maps-Link bereit.
+
+## Live-Daten im Werkstattprofil
+
+Das Profil lädt mit dem bestehenden, für die Website eingeschränkten Browser-Schlüssel Place Details (New): aktuelle Sterne/Anzahl, `currentOpeningHours`, reguläre Wochenzeiten als Ersatz, Geschäftsstatus, Standort und bis zu drei Fotos. Die zurückgelieferte ID muss exakt stimmen. Gleichzeitige Aufrufe teilen nur die laufende Anfrage; Antworten bleiben im Arbeitsspeicher des offenen Profils. Keine API-Öffnungszeiten oder Fotoreferenzen werden in Git, Datenbank oder Browser Storage geschrieben. Der Server-Schlüssel wird nicht an den Browser weitergereicht.
+
+`openNow` und nächste Öffnungs-/Schließzeit kommen direkt von Google; die Darstellung verwendet Kosovo-Ortszeit (`Europe/Belgrade`) einschließlich Sommerzeit. Die aktuelle Wochenbeschreibung berücksichtigt abweichende Zeiten, sofern Google sie bereitstellt. Fehlende Öffnungszeiten, keine Rezensionen und Ladefehler haben unterschiedliche Anzeigen. Das Profil aktualisiert sich zum nächsten Statuswechsel bzw. in begrenzten Abständen; unsichtbare Tabs stellen keine neuen Anfragen.
+
+Fotos werden mit frischen Google-Fotoreferenzen direkt geladen, behalten alle gelieferten Autorenlinks und eine sichtbare Google-Maps-Quellenangabe. Fehlen Fotos oder schlagen sie fehl, verschwindet der Fotobereich. Die aufklappbare Karte nutzt die Maps JavaScript API und ausschließlich die vom identischen Place-Details-Aufruf gelieferten Koordinaten. Routenlinks tragen `destination_place_id`; Verzeichniskoordinaten oder Namenssuchen bestimmen diese Karte nicht mehr.
+
+Bestätigte WhatsApp-Kontakte erhalten eine mobile Aktion. Marken- und Leistungshervorhebungen beziehen sich nur auf bereits belegte Profilangaben. Private Fahrzeugdetails stammen ausschließlich aus der aktiven Suche im Arbeitsspeicher; sie werden nicht in Links oder Google-Anfragen übernommen.
 
 ## Primäre Dokumentation
 

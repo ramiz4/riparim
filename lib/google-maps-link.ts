@@ -21,3 +21,9 @@ export function workshopMapsUrl(workshop:Pick<Workshop,"name"|"address"|"googleR
  const source=workshop.googleRating?.mapsUrl,id=placeId??googlePlaceIdFromMapsUrl(source);
  return id?googleMapsPlaceUrl(id,`${workshop.name} ${workshop.address}`):mapsLink(source)?.href??`https://www.google.com/maps/search/?${new URLSearchParams({api:"1",query:`${workshop.name} ${workshop.address} Kosovo`})}`;
 }
+export function workshopRouteUrl(workshop:Pick<Workshop,"name"|"address"|"googleRating">,placeId?:string|null){
+ const id=placeId??googlePlaceIdFromMapsUrl(workshop.googleRating?.mapsUrl);
+ const query=new URLSearchParams({api:"1",destination:`${workshop.name} ${workshop.address}`});
+ if(id)query.set("destination_place_id",id);
+ return `https://www.google.com/maps/dir/?${query}`;
+}

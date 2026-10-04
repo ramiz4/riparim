@@ -1,0 +1,109 @@
+import assert from 'node:assert/strict';
+import {mkdir,writeFile} from 'node:fs/promises';
+import {createRequire} from 'node:module';
+const require=createRequire(new URL('../package.json',import.meta.url));
+const {build}=require('esbuild'),React=require('react'),{renderToStaticMarkup}=require('react-dom/server');
+const output='.test-runtime/workshop-profile';
+const bundle=await build({entryPoints:{google:'lib/google-workshop-profile.ts',content:'lib/workshop-profile-content.ts',browser:'lib/google-maps-browser.ts',links:'lib/google-maps-link.ts',details:'components/workshop-google-details.tsx',ratings:'components/workshop-ratings.tsx',reviews:'components/google-place-reviews.tsx',profile:'app/werkstatt/[id]/profile.tsx'},outdir:output,bundle:true,write:false,format:'esm',platform:'node',jsx:'automatic',packages:'external',external:['react','react-dom','lucide-react'],plugins:[{name:'router-boundary',setup(b){b.onResolve({filter:/^next\/(navigation|link)$/},a=>({path:a.path,namespace:'router-fixture'}));b.onLoad({filter:/.*/,namespace:'router-fixture'},a=>({loader:'js',contents:a.path==='next/link'?`import React from 'react';export default function Link({children,href,...props}){return React.createElement('a',{...props,href},children);}`:`export function useRouter(){return {push(){},refresh(){},prefetch(){}};}export function usePathname(){return '/werkstatt/fixture';}export function useSearchParams(){return new URLSearchParams();}`}));}}]});
+await mkdir(output,{recursive:true});for(const file of bundle.outputFiles)await writeFile(file.path.replace(/\.js$/,'.mjs'),file.contents);
+const load=name=>import(new URL('../'+output+'/'+name+'.mjs',import.meta.url));
+const [google,content,browser,links,details,ratings,reviews,profilePage]=await Promise.all(['google','content','browser','links','details','ratings','reviews','profile'].map(load));
+const placeId='ChIJConfirmedFixtureOnly';
+const now=new Date('2026-10-04T08:00:00Z');
+const response={id:placeId,rating:4.7,userRatingCount:12,businessStatus:'OPERATIONAL',location:{latitude:42.65,longitude:21.15},googleMapsUri:links.googleMapsPlaceUrl(placeId,'Fixture workshop'),currentOpeningHours:{openNow:false,weekdayDescriptions:['Sonntag: Geschlossen','Montag: 08:00–16:00','Dienstag: 08:00–16:00','Mittwoch: 08:00–16:00','Donnerstag: 08:00–16:00','Freitag: 08:00–16:00','Samstag: 09:00–13:00'],nextOpenTime:'2026-10-05T06:00:00Z'},regularOpeningHours:{weekdayDescriptions:['Sonntag: 08:00–16:00']},photos:[{name:`places/${placeId}/photos/fixturePhoto1`,authorAttributions:[{displayName:'Fixture Photographer',uri:'https://example.test/photographer'}]},{name:'places/ChIJOtherFixture/photos/wrongWorkshop'},{name:`places/${placeId}/photos/fixturePhoto2`},{name:`places/${placeId}/photos/fixturePhoto3`},{name:`places/${placeId}/photos/fixturePhoto4`}],attributions:[{provider:'Fixture source',providerUri:'https://example.test/source'}]};
+const profile=google.normalizeGoogleProfile(response,placeId,now.getTime());
+assert.equal(profile.photos.length,3);
+assert(profile.photos.every(photo=>photo.resource.startsWith(`places/${placeId}/photos/`)),'photos from another Google place are excluded');
+assert.equal(profile.rating.attributions[0].providerURI,'https://example.test/source');
+assert.throws(()=>google.normalizeGoogleProfile({...response,id:'ChIJOtherFixture'},placeId),/identity/,'a different place cannot supply any profile content');
+assert.equal(google.normalizeGoogleProfile({...response,location:{latitude:51.5,longitude:0}},placeId).location,null,'a distant location is not used as this workshop map');
+for(const unsafe of ['javascript:alert(1)','http://example.test/','https://name:secret@example.test/'])assert.equal(google.safeGoogleHttps(unsafe),null);
+assert.equal(google.safeGoogleHttps('//example.test/photo'),'https://example.test/photo');
+const photoUrl=new URL(google.googlePhotoUrl(profile.photos[0],'browser-fixture-key'));
+assert.equal(photoUrl.pathname,`/v1/places/${placeId}/photos/fixturePhoto1/media`);
+assert.equal(photoUrl.searchParams.get('maxWidthPx'),'1000');
+
+const sunday=google.googleOpeningPresentation(profile,'ready',now);
+assert.equal(sunday.label,'Jetzt geschlossen');assert.equal(sunday.today,'Geschlossen','exceptional current hours override regular hours');
+assert.equal(sunday.rows[0].today,true,'weekday matching uses the German name rather than the array position');
+assert.equal(sunday.detail,'Öffnet morgen um 08:00 Uhr','Google UTC transitions render in Kosovo local time');
+const opened=google.googleOpeningPresentation({...profile,hours:{...profile.hours,openNow:true,nextCloseTime:'2026-10-04T14:00:00Z'}},'ready',now);
+assert.equal(opened.label,'Jetzt geöffnet');assert.equal(opened.detail,'Bis heute 16:00 Uhr');
+const midnight=google.googleOpeningPresentation(profile,'ready',new Date('2026-10-03T22:30:00Z'));
+assert.equal(midnight.today,'Geschlossen','a UTC Saturday is already Sunday in Kosovo');
+const autumn=google.googleOpeningPresentation({...profile,hours:{...profile.hours,nextOpenTime:'2026-10-26T07:00:00Z'}},'ready',new Date('2026-10-24T22:30:00Z'));
+assert.equal(autumn.detail,'Öffnet morgen um 08:00 Uhr','tomorrow remains a calendar day across the 25-hour DST day');
+const closed=google.googleOpeningPresentation({...profile,businessStatus:'CLOSED_PERMANENTLY'},'ready',now);
+assert.equal(closed.label,'Dauerhaft geschlossen');assert.equal(closed.today,null);assert.deepEqual(closed.rows,[]);
+const noHours=google.normalizeGoogleProfile({id:placeId},placeId);
+assert.equal(google.googleOpeningPresentation(noHours,'ready',now).label,'Keine Öffnungszeiten hinterlegt');
+assert.equal(google.googleOpeningPresentation(null,'unavailable',now).label,'Öffnungszeiten konnten nicht geladen werden');
+assert.equal(google.googleRatingEmptyLabel({...profile.rating,rating:null,count:0},'ready'),'Noch keine Google-Rezensionen');
+assert.equal(google.googleRatingEmptyLabel({...profile.rating,rating:null,count:null},'ready'),'Keine Google-Bewertung hinterlegt');
+assert.equal(google.googleRatingEmptyLabel(null,'unavailable'),'Google konnte nicht geladen werden');
+assert.equal(google.googleRatingEmptyLabel(null,'loading'),'Google wird geladen …');
+assert.equal(google.googleProfileRefreshDelay(profile,now.getTime()),1800000);
+assert.equal(google.googleProfileRefreshDelay(profile,Date.parse('2026-10-05T06:00:01Z')),300000,'a stale transition does not cause rapid API retries');
+assert.equal(google.googleProfileRefreshDelay(profile,Date.parse('2026-10-05T05:59:59Z')),2500);
+
+const workshop={id:'fixture',name:'Fixture Pkw Werkstatt',city:'Prishtina',address:'Fixture Straße, Prishtina',phone:'+38349123456',phoneNote:'',whatsapp:'+38349123456',lat:42.66,lng:21.16,rating:null,count:0,specialty:'Service',description:'',services:['Diagnose & Elektronik','Bremsen & Fahrwerk'],serviceDetails:['Elektronische Diagnose','Elektronische Diagnose','Bremsenservice laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären.'],brands:['Volvo'],languages:['Deutsch'],sources:[],checkedAt:'2026-10-04',status:'published',googleRating:{rating:4.1,count:99,mapsUrl:links.googleMapsPlaceUrl(placeId,'Fixture'),checkedAt:'2026-10-04'}};
+assert.equal(new URL(links.workshopRouteUrl(workshop)).searchParams.get('destination_place_id'),placeId,'route always targets the confirmed ID even before live Google details arrive');
+assert.equal(new URL(links.workshopMapsUrl(workshop)).searchParams.get('query_place_id'),placeId);
+const groups=content.groupWorkshopServices(workshop);
+assert.deepEqual(groups,[{title:'Diagnose & Elektronik',items:['Elektronische Diagnose']},{title:'Bremsen & Fahrwerk',items:['Bremsenservice']}]);
+assert.equal(content.workshopSelectionMatches(workshop,{brand:'BMW',service:'Motor & Getriebe',vehicle:null}).brand,false);
+assert.equal(content.workshopSelectionMatches(workshop,{brand:'Volvo',service:'Diagnose & Elektronik',vehicle:null}).service,true);
+assert.equal(content.workshopSelectionMatches({...workshop,brands:[]},{brand:'Volvo',service:null,vehicle:null}).brand,false,'unknown brand coverage is not presented as a match');
+assert.equal(content.workshopSelectionMatches({...workshop,brands:['Alle Marken']},{brand:'Volvo',service:null,vehicle:null}).brand,true);
+assert(!content.groupWorkshopServices({services:['Diagnose & Elektronik'],serviceDetails:[]}).some(g=>g.title==='Motor & Getriebe'),'service categories are not invented');
+
+const nativeFetch=globalThis.fetch,requests=[];
+globalThis.fetch=async(url,options)=>{requests.push({url,options});await Promise.resolve();return new Response(JSON.stringify(response),{status:200});};
+try{
+ const [a,b]=await Promise.all([browser.currentGoogleProfile(placeId,'browser-fixture-key'),browser.currentGoogleProfile(placeId,'browser-fixture-key')]);
+ assert.equal(requests.length,1,'concurrent profile consumers share the same live request');assert.equal(a,b);
+ assert.equal(new URL(requests[0].url).pathname,`/v1/places/${placeId}`);
+ assert.equal(requests[0].options.headers['X-Goog-Api-Key'],'browser-fixture-key');
+ assert(requests[0].options.headers['X-Goog-FieldMask'].includes('currentOpeningHours'));
+ assert.equal(requests[0].options.credentials,'omit');assert.equal(requests[0].options.cache,'no-store');
+ await browser.currentGoogleProfile(placeId,'browser-fixture-key');assert.equal(requests.length,2,'Google content is not kept in a persistent response cache');
+ globalThis.fetch=async()=>new Response('{}',{status:503});await assert.rejects(browser.currentGoogleProfile(placeId,'browser-fixture-key'),/unavailable/);
+ globalThis.fetch=async()=>new Response(JSON.stringify({...response,id:'ChIJOtherFixture'}));await assert.rejects(browser.currentGoogleProfile(placeId,'browser-fixture-key'),/identity/);
+}finally{globalThis.fetch=nativeFetch;}
+const nativeWindow=globalThis.window,maps=[],markers=[];
+class FakeMap{constructor(element,options){maps.push({element,options,map:this});}}
+class FakeMarker{constructor(options){Object.assign(this,options);markers.push(this);}}
+globalThis.window={google:{maps:{importLibrary:async name=>name==='maps'?{Map:FakeMap}:name==='marker'?{AdvancedMarkerElement:FakeMarker}:{Place:class{}}}}};
+try{
+ let disposed=false;const element={replaceChildren(){disposed=true;}};
+ const dispose=await browser.showConfirmedGoogleMap(element,profile,'browser-fixture-key',workshop.name);
+ assert.deepEqual(maps[0].options.center,profile.location,'map centers on live coordinates from the same confirmed Google place');
+ assert.deepEqual(markers[0].position,profile.location);assert.notDeepEqual(markers[0].position,{lat:workshop.lat,lng:workshop.lng},'old directory coordinates do not control the map');
+ dispose();assert.equal(markers[0].map,null);assert.equal(disposed,true);
+ await assert.rejects(browser.showConfirmedGoogleMap(element,{...profile,location:null},'browser-fixture-key',workshop.name),/location/);
+}finally{if(nativeWindow===undefined)delete globalThis.window;else globalThis.window=nativeWindow;}
+
+const render=(component,props)=>renderToStaticMarkup(React.createElement(component,props));
+const identity={placeId,browserKey:'browser-fixture-key'},mapsUrl=links.workshopMapsUrl(workshop);
+const photoMarkup=render(details.WorkshopPhotos,{name:workshop.name,profile,identity,status:'ready',mapsUrl});
+assert(photoMarkup.includes('Fixture Photographer')&&photoMarkup.includes('https://example.test/photographer')&&photoMarkup.includes('Google Maps'),'photo authors and Google source remain visible');
+assert(!photoMarkup.includes('wrongWorkshop'));
+assert.equal(render(details.WorkshopPhotos,{name:workshop.name,profile:{...profile,photos:[]},identity,status:'ready',mapsUrl}),'','a photo-less business does not receive a symbolic photo');
+const zeroMarkup=render(ratings.WorkshopRatings,{workshop,googleState:{live:{...profile.rating,rating:null,count:0},status:'ready'}});
+assert(zeroMarkup.includes('Noch keine Google-Rezensionen')&&!zeroMarkup.includes('4,1'),'old Google snapshots are never a fallback');
+const failedMarkup=render(ratings.WorkshopRatings,{workshop,googleState:{live:null,status:'unavailable'}});
+assert(failedMarkup.includes('Google konnte nicht geladen werden')&&!failedMarkup.includes('Noch keine Google-Rezensionen'));
+const emptyReviews=render(reviews.GooglePlaceReviews,{workshop,identity,liveRating:{...profile.rating,rating:null,count:0},status:'ready'});
+assert(emptyReviews.includes('Noch keine Google-Rezensionen')&&!emptyReviews.includes('google-official-widget'));
+const props={workshop,directory:[workshop],reviews:[],reviewError:'',signedIn:false,account:null,isAdmin:false};
+const pageMarkup=render(profilePage.default,props);
+const mobile=pageMarkup.match(/<nav class="profile-mobile-actions[^]*?<\/nav>/)[0];
+assert(mobile.includes('WhatsApp')&&mobile.includes('Anrufen')&&mobile.includes('destination_place_id'),'confirmed WhatsApp, phone and exact-place route are available in the mobile bar');
+const unconfirmed=render(profilePage.default,{...props,workshop:{...workshop,whatsapp:''}}).match(/<nav class="profile-mobile-actions[^]*?<\/nav>/)[0];
+assert(!unconfirmed.includes('WhatsApp'),'a phone number does not imply WhatsApp availability');
+const reviewArea=pageMarkup.slice(pageMarkup.indexOf('id="bewertungen"'));
+assert(reviewArea.indexOf('id="google-bewertungen"')<reviewArea.indexOf('profile-riparim-reviews'),'Google reviews precede an empty Riparim block in reading order');
+const publishedMarkup=render(profilePage.default,{...props,reviews:[{display_name:'Fixture Driver',vehicle:'Fixture car',service:'Diagnose',date:'2026-10-03',rating:5,review:'Fixture published review'}]});
+const populatedReviewArea=publishedMarkup.slice(publishedMarkup.indexOf('id="bewertungen"'));
+assert(populatedReviewArea.indexOf('Fixture published review')<populatedReviewArea.indexOf('id="google-bewertungen"'),'published Riparim reviews precede the Google block in reading order');
+console.log('Workshop profiles: exact identity, live hours, Kosovo time/DST, photo attribution, route/map, service evidence, review states and confirmed mobile actions passed (fictional fixtures only)');
