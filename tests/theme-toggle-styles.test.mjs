@@ -10,8 +10,7 @@ const css=await readFile(process.argv[2]??new URL('../app/theme.css',import.meta
 const start=css.indexOf('.theme-control'),end=css.indexOf('.footer>a');
 assert(start>=0&&end>start,'the shared toggle styles are present');
 const theme=css.slice(start,end);
-// The shared Switch primitive contributes an independent checked translation.
-const primitive='[data-slot=switch-thumb][data-state=checked]{translate:calc(100% - 2px) 0}[data-slot=switch-thumb][data-state=unchecked]{translate:0 0}';
+const primitive=await readFile(new URL('../app/form-controls.css',import.meta.url),'utf8');
 const source='*{box-sizing:border-box}'+primitive+theme;
 const minified=transform({filename:'theme.css',code:Buffer.from(source),minify:true}).code.toString();
 
