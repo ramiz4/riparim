@@ -3,7 +3,7 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createRequire} from 'node:module';
 import {DatabaseSync} from 'node:sqlite';
 const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
-const bundle=await build({entryPoints:{auth:'app/auth.ts',config:'lib/auth/config.ts',actions:'app/api/auth/[action]/route.ts',callback:'app/auth/bestaetigen/route.ts'},bundle:true,format:'esm',platform:'node',outdir:'.test-runtime/google-auth',write:false,plugins:[{name:'auth-fixtures',setup(b){
+const bundle=await build({entryPoints:{auth:'app/auth.ts',config:'lib/auth/config.ts',actions:'app/api/auth/[action]/route.ts',callback:'app/auth/bestaetigen/route.ts',templates:'lib/auth/email-templates.ts'},bundle:true,format:'esm',platform:'node',outdir:'.test-runtime/google-auth',write:false,plugins:[{name:'auth-fixtures',setup(b){
  b.onResolve({filter:/^(cloudflare:workers|@\/app\/chatgpt-auth|\.\/chatgpt-auth|@\/lib\/auth\/client|next\/headers)$/},args=>({path:args.path,namespace:'fixture'}));
  b.onLoad({filter:/.*/,namespace:'fixture'},args=>({contents:args.path==='cloudflare:workers'?'export const env=globalThis.fixtureEnv;':args.path==='next/headers'?'export async function cookies(){return globalThis.fixtureCookies;}':args.path.includes('chatgpt-auth')?'export async function getChatGPTUser(){return globalThis.fixtureNative;}':'export async function authClient(){return globalThis.fixtureClient;}',loader:'js'}));
 }}]});
@@ -20,16 +20,21 @@ globalThis.fixtureCookies={get(name){const value=cookieMap.get(name);return valu
 let user={id:'00000000-0000-4000-8000-000000000001',email:'owner@example.test',email_confirmed_at:'2026-10-03',user_metadata:{full_name:'Owner',provider:'google'},identities:[{provider:'google',identity_data:{sub:'google-owner-123',email:'owner@example.test',email_verified:true}}]};
 let sessionId='oauth-session-1',method='oauth',claimsError=null,claimedId=null,googleEnabled=true,googleProfile={sub:'google-owner-123',email:'owner@example.test',email_verified:true};
 let emailAutoConfirm=false,passwordCalls=0,oauthCalls=0,codeExchanges=0,lastOAuth=null,lastSetSession=null,signupCalls=0,signupError=null,lastSignup=null,signupSession=null;
+let otpError=null,lastOtp=null,lastRecovery=null,recoveryError=null,lastUpdate=null,updateError=null,signoutError=null,userError=null;
+const signouts=[];
 const providerSession=()=>({access_token:'fixture-supabase-access',refresh_token:'fixture-supabase-refresh',provider_token:'fixture-google-token',user});
 globalThis.fixtureClient={auth:{
- getUser:async()=>({data:{user},error:null}),
+ getUser:async()=>({data:{user},error:userError}),
  getClaims:async()=>({data:{claims:{session_id:sessionId,sub:claimedId??user.id,amr:[{method}]}},error:claimsError}),
  setSession:async(value)=>{lastSetSession=value;return {data:{session:providerSession()},error:null};},
  signInWithOAuth:async(value)=>{oauthCalls++;lastOAuth=value;return {data:{url:projectUrl+'/auth/v1/authorize?provider=google'},error:null};},
  signInWithPassword:async()=>{passwordCalls++;return {data:{user},error:null};},
  signUp:async(value)=>{signupCalls++;lastSignup=value;return {data:{user:{...user,email_confirmed_at:null},session:signupSession},error:signupError};},
  exchangeCodeForSession:async()=>{codeExchanges++;method='oauth';return {data:{user,session:providerSession()},error:null};},
- signOut:async()=>({error:null}),
+ verifyOtp:async(value)=>{lastOtp=value;return {data:{user:otpError?null:user,session:otpError?null:providerSession()},error:otpError};},
+ resetPasswordForEmail:async(email,options)=>{lastRecovery={email,options};return {error:recoveryError};},
+ updateUser:async(value)=>{lastUpdate=value;return {data:{user},error:updateError};},
+ signOut:async(options)=>{signouts.push(options);return {error:signoutError};},
 }};
 const originalFetch=globalThis.fetch;
 globalThis.fetch=async(url)=>{
@@ -42,6 +47,7 @@ const auth=await import(new URL('../.test-runtime/google-auth/auth.mjs',import.m
 const cfg=await import(new URL('../.test-runtime/google-auth/config.mjs',import.meta.url));
 const actions=await import(new URL('../.test-runtime/google-auth/actions.mjs',import.meta.url));
 const callback=await import(new URL('../.test-runtime/google-auth/callback.mjs',import.meta.url));
+const templates=await import(new URL('../.test-runtime/google-auth/templates.mjs',import.meta.url));
 let passed=0;
 const check=(value,label)=>{assert(value,label);passed++;};
 const post=(action,body={},requestOrigin=origin)=>actions.POST(new Request(origin+'/api/auth/'+action,{method:'POST',headers:{'content-type':'application/json',Origin:requestOrigin,'cf-connecting-ip':'fixture-ip'},body:JSON.stringify(body)}),{params:Promise.resolve({action})});
@@ -147,5 +153,69 @@ check(!row(),'Historical linked Google identity cannot prove a current password 
 method='oauth';
 await assert.rejects(auth.recordGoogleSession(projectUrl,{...providerSession(),provider_token:null},globalThis.fixtureClient),/INVALID_GOOGLE_SESSION/);passed++;
 check(!row(),'OAuth callback requires fresh provider proof, not account metadata');
+
+// Exercise the email journey at the route boundary with the same isolated DB.
+const emailChecksStart=passed;
+const reviewDestination='/werkstatt/fixture-workshop?suche=wartung#bewerten';
+method='password';sessionId='email-confirmation';
+registration=await post('register',{email:'confirmation@example.test',password:'fixture-password-123',returnTo:reviewDestination});
+check(registration.status===200,'Email registration begins the confirmation journey');
+function emailLink(template,redirectTo,token){
+ const rendered=template.replace('{{ .RedirectTo }}',redirectTo).replace('{{ .TokenHash }}',token).replaceAll('&amp;','&');
+ return new URL(rendered.match(/href="([^"]+)"/)[1]);
+}
+let link=emailLink(templates.confirmationEmailTemplate,lastSignup.options.emailRedirectTo,'fixture-confirmation-token');
+check(link.origin===origin&&link.pathname==='/auth/bestaetigen'&&link.searchParams.get('weiter')===reviewDestination,'Rendered signup email preserves profile, filters and review anchor');
+response=await callback.GET(new Request(link));
+destination=new URL(response.headers.get('Location'));
+check(response.status===303&&destination.pathname==='/anmelden'&&destination.searchParams.get('hinweis')==='email-bestaetigt'&&destination.searchParams.get('weiter')===reviewDestination,'Confirmed signup returns to login with the original review destination');
+check(lastOtp.token_hash==='fixture-confirmation-token'&&lastOtp.type==='signup'&&signouts.at(-1).scope==='local'&&!row(),'Signup verification signs out without granting an app session');
+response=await post('login',{email:user.email,password:'fixture-password-123',returnTo:destination.searchParams.get('weiter')});
+check(response.status===200&&(await response.json()).returnTo===reviewDestination&&row().provider==='password','Separate confirmed login resumes the original workshop review');
+
+otpError={message:'expired fixture token'};
+response=await callbackRequest({token_hash:'expired',type:'signup',weiter:'https://outside.example.test'});
+destination=new URL(response.headers.get('Location'));
+check(destination.pathname==='/anmelden'&&destination.searchParams.get('fehler')==='bestaetigung'&&destination.searchParams.get('weiter')==='/?besuche=1','Expired confirmation fails with a safe return destination');
+otpError=null;
+db.prepare("UPDATE auth_settings SET email_delivery_confirmed=1 WHERE id='main'").run();
+response=await post('recovery',{email:' RECOVERY@example.test ',returnTo:'//outside.example.test'});
+check(response.status===200&&(await response.json()).message.includes('Wenn ein Konto existiert'),'Recovery does not reveal whether an account exists');
+check(lastRecovery.email==='recovery@example.test'&&lastRecovery.options.redirectTo===origin+'/auth/bestaetigen?weiter=/passwort-neu','Recovery normalizes email and uses only the canonical reset destination');
+link=emailLink(templates.recoveryEmailTemplate,lastRecovery.options.redirectTo,'fixture-recovery-token');
+const signoutsBeforeRecovery=signouts.length;
+response=await callback.GET(new Request(link));
+check(response.status===303&&new URL(response.headers.get('Location')).pathname==='/passwort-neu'&&lastOtp.type==='recovery'&&signouts.length===signoutsBeforeRecovery,'Valid recovery preserves the provider session for password reset');
+recoveryError={message:'fixture provider outage'};
+check((await post('recovery',{email:'outage@example.test'})).status===503,'Provider failure cannot report a sent recovery email');
+recoveryError=null;otpError={message:'expired fixture recovery'};
+response=await callbackRequest({token_hash:'expired',type:'recovery'});
+check(new URL(response.headers.get('Location')).pathname==='/anmelden','Expired recovery cannot open the reset form');
+otpError=null;
+
+sessionId='email-reset-session';method='password';
+await auth.recordPasswordSession(projectUrl,user,globalThis.fixtureClient);
+sessionId='email-other-device';await auth.recordPasswordSession(projectUrl,user,globalThis.fixtureClient);
+sessionId='email-reset-session';
+updateError={message:'fixture rejected password'};
+response=await post('reset',{password:'fixture-new-password-123'});
+check(response.status===400&&row().revoked===0,'Failed password update preserves the current app session and reports failure');
+updateError=null;
+response=await post('reset',{password:'fixture-new-password-123'});
+check(response.status===200&&lastUpdate.password==='fixture-new-password-123'&&(await response.json()).returnTo==='/anmelden?hinweis=passwort-geaendert','Successful password update requests a fresh login');
+check(db.prepare('SELECT COUNT(*) AS n FROM auth_sessions WHERE account_id=? AND revoked=0').get(accountId).n===0&&signouts.at(-1).scope==='global','Password reset revokes every app session for the account and signs out the provider globally');
+check(await auth.getAppUser()===null,'An old app session cannot regain access after password reset');
+userError={message:'fixture no current user'};lastUpdate=null;
+check((await post('reset',{password:'fixture-new-password-123'})).status===401&&lastUpdate===null,'Password reset requires a server-verified confirmed provider user');
+userError=null;
+
+sessionId='email-logout';await auth.recordPasswordSession(projectUrl,user,globalThis.fixtureClient);
+response=await post('logout');
+check(response.status===200&&row().revoked===1&&signouts.at(-1).scope==='local'&&await auth.getAppUser()===null,'Logout revokes app access before local provider sign-out');
+sessionId='email-logout-outage';await auth.recordPasswordSession(projectUrl,user,globalThis.fixtureClient);
+signoutError={message:'fixture logout outage'};
+response=await post('logout');
+check(response.status===503&&row().revoked===1&&await auth.getAppUser()===null,'Logout provider failure still revokes local app access');
+signoutError=null;
 globalThis.fetch=originalFetch;
-console.log(JSON.stringify({googleAuthBoundaryChecksPassed:passed,liveProviderCalls:false,realEmailsSent:false}));
+console.log(JSON.stringify({authBoundaryChecksPassed:passed,emailJourneyChecksPassed:passed-emailChecksStart,liveProviderCalls:false,realEmailsSent:false}));

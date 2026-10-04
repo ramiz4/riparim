@@ -1,36 +1,65 @@
 {
   "checkedAt": "2026-10-04",
-  "focus": "Pkw-Werkstätten und belegter Pkw-Service; keine reinen Lkw-, Bus- oder Truck-Teilebetriebe",
+  "focus": "Pkw-Werkstätten mit belegtem Pkw-Service und eindeutigem Standort; keine reinen Lkw-, Bus- oder Truck-Teilebetriebe",
   "excluded": [
     {
       "workshopId": "auto-ballkan-gjilan",
       "reason": "Vom Nutzer als Truck-Teilelieferant bestätigt; kein konkreter Pkw-Werkstattnachweis.",
-      "sourceUrls": ["https://www.gjithebiznesi.com/XK/auto-ballkan-044-177-327"]
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-ballkan-044-177-327"
+      ]
     },
     {
       "workshopId": "scania-trans-mitrovica",
       "reason": "Unternehmensauftritt als Truck & Bus Scania Service; aus dem Pkw-Verzeichnis entfernt.",
-      "sourceUrls": ["https://www.facebook.com/TruckBus-Scania-Service-113881273360473/"]
+      "sourceUrls": [
+        "https://www.facebook.com/TruckBus-Scania-Service-113881273360473/"
+      ]
     },
     {
       "workshopId": "isuzu-servis-prizren",
       "reason": "Der Isuzu-Standort gehört zum Truck-&-Bus-Angebot von Burak; dieser Nutzfahrzeugeintrag wird nicht als Pkw-Werkstatt geführt.",
-      "sourceUrls": ["https://isuzu.co.rs/kontakt-kosovo/", "https://www.burak-ks.com/en/trucks"]
+      "sourceUrls": [
+        "https://isuzu.co.rs/kontakt-kosovo/",
+        "https://www.burak-ks.com/en/trucks"
+      ]
     },
     {
       "workshopId": "tachograf-kienzle-ferizaj",
       "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis.",
-      "sourceUrls": ["https://www.cybo.com/XK/ferizaj/car-repair"]
+      "sourceUrls": [
+        "https://www.cybo.com/XK/ferizaj/car-repair"
+      ]
     },
     {
       "workshopId": "tahograf-prishtina",
       "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis.",
-      "sourceUrls": ["https://www.cybo.com/XK/pristina/car-repair"]
+      "sourceUrls": [
+        "https://www.cybo.com/XK/pristina/car-repair"
+      ]
     },
     {
       "workshopId": "benita-company-kline",
       "reason": "Tankstelle mit ausdrücklich beworbenem Schwerfahrzeug-Service. Der allgemeine Express-Service belegt keinen konkreten Pkw-Werkstattumfang.",
-      "sourceUrls": ["https://benita-ks.com/"]
+      "sourceUrls": [
+        "https://benita-ks.com/"
+      ]
+    },
+    {
+      "workshopId": "autodiagnoza-kosove-prishtina",
+      "reason": "Ungeklärter Standort: Die unabhängig belegte Plus-Code-Adresse weicht mehr als 300 Meter vom aktuellen Eintrag der gespeicherten Google-Identität ab. Bis zur unabhängigen Bestätigung des heutigen Standorts als Entwurf behalten.",
+      "sourceUrls": [
+        "https://www.google.com/maps/search/?api=1&query=Autodiagnoza+Kosove+M533%2BXMW%2C+Prishtina&query_place_id=ChIJkbvtE2meVBMRvu2LFtwxfho",
+        "https://www.cybo.com/XK/pristina/car-repair"
+      ]
+    },
+    {
+      "workshopId": "bmw-service-ferizaj",
+      "reason": "Ungeklärter Standort: Die unabhängig belegte Plus-Code-Adresse weicht mehr als 300 Meter vom aktuellen Eintrag der gespeicherten Google-Identität ab. Bis zur unabhängigen Bestätigung des heutigen Standorts als Entwurf behalten.",
+      "sourceUrls": [
+        "https://www.google.com/maps/search/?api=1&query=BMW+Service+95R6%2BP8J%2C+Driton+Islami%2C+Talinoc+i+Jerlive+70000&query_place_id=ChIJb6GZpCd_VBMRi_bRC-yoNhI",
+        "https://www.cybo.com/XK/ferizaj/car-repair"
+      ]
     }
   ]
 }

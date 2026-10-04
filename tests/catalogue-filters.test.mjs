@@ -56,4 +56,7 @@ check(catalogueDistance(distances[0],'Prishtina')===null&&catalogueDistance(dist
 check(catalogueDistance(distances[1],'Prishtina')>5&&catalogueDistance(distances[1],'Prishtina')<6,'distance uses geographic coordinates and kilometres');
 check(parseCatalogueFilters(new URLSearchParams('sort=entfernung'),distances).sort==='name','distance requires a reference city');
 check(parseCatalogueFilters(new URLSearchParams('sort=entfernung&ort=prishtina'),distances).sort==='distance','distance sorting and city survive a public link');
+const skenderaj=record('Fixture Skenderaj',{city:'Skenderaj',lat:42.74667,lng:20.78861});
+check(catalogueDistance(skenderaj,'Skenderaj')===0,'Skenderaj has a verified city origin');
+check(parseCatalogueFilters(new URLSearchParams('sort=entfernung&ort=skenderaj'),[skenderaj]).sort==='distance','Skenderaj distance sorting survives a public link');
 console.log(`Catalogue filter contracts: ${passed} passed`);
