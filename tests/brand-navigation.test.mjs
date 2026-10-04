@@ -17,7 +17,8 @@ const bundle=await build({entryPoints:{header:'components/site-header.tsx',foote
   const Wrapper=({children})=>createElement('div',null,children);
   export const DropdownMenu=Wrapper,DropdownMenuTrigger=Wrapper,DropdownMenuContent=Wrapper,DropdownMenuLabel=Wrapper,DropdownMenuItem=Wrapper,DropdownMenuSeparator=()=>null;
   export function ThemeToggle(){return createElement('button',{'aria-label':'Theme wechseln'});}
-  export function Dialog({open,children}){return open?children:null;}
+  export const Dialog=Wrapper;
+  export function DialogTrigger({children}){return children;}
   export const ModalContent=Wrapper;`}));
 }}]});
 await mkdir(output,{recursive:true});

@@ -26,4 +26,4 @@ html{scroll-padding-top:100px}body{color:var(--foreground);line-height:1.55}.wra
 
 @media(max-width:540px){:root{--site-header-height:64px}}
 
-.guest-menu-trigger{display:none;width:44px;justify-content:center;padding:0}
+.header-login-mobile{display:none;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:6px;border:1px solid var(--border);border-radius:999px;background:var(--card);color:var(--foreground);font-size:13px;font-weight:600;white-space:nowrap}.header-login-mobile svg{flex-shrink:0;color:var(--theme-accent)}.header-login-mobile:hover{background:var(--theme-hover);border-color:var(--input)}

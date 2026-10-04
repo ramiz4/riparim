@@ -195,7 +195,7 @@ html.dark :is(.moderation-search svg, .admin-tools>label, .location-details summ
 
 @media (max-width: 720px) {
   .navbar .header-auth { display: none; }
-  .navbar .guest-menu-trigger { display: flex; }
+  .navbar .header-login-mobile { display: inline-flex; }
 }
 
 @media (max-width: 540px) {
