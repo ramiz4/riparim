@@ -30,7 +30,7 @@ document.addEventListener('click',event=>{
 });
 
 const root=createRoot(document.getElementById('root'));
-async function render(email,isAdmin){await act(async()=>root.render(createElement(SiteHeader,{account:{email,displayName:'Ramiz',provider:'Google'},isAdmin})));}
+async function render(email,isAdmin,provider='Google'){await act(async()=>root.render(createElement(SiteHeader,{account:{email,displayName:'Ramiz',provider},isAdmin})));}
 async function openMenu(){
  const trigger=document.querySelector('[aria-label="Benutzermenü öffnen"]');
  await act(async()=>trigger.dispatchEvent(new MouseEvent('pointerdown',{bubbles:true,cancelable:true,button:0})));
@@ -66,6 +66,22 @@ try{
  await act(async()=>control.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,button:0})));
  assert.deepEqual(routerAttempts,['/?besuche=1'],'the control link exercises the real client-router boundary');
  assert.equal(documents.length,before,'the stalled client-router control cannot load a document');
+ const originalFetch=globalThis.fetch,logoutRequests=[];
+ try{
+  // A retryable response avoids jsdom's unimplemented document navigation;
+  // the auth route suite separately verifies successful session revocation.
+  globalThis.fetch=async(url,options)=>{logoutRequests.push({url,options});return new Response(null,{status:503});};
+  for(const provider of ['Google','E-Mail']){
+   await render('logout@example.test',false,provider);await openMenu();
+   const logout=[...document.querySelectorAll('[role="menuitem"]')].find(node=>node.textContent==='Abmelden');
+   const requestsBefore=logoutRequests.length,documentsBefore=documents.length;
+   await act(async()=>logout.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,button:0})));
+   assert.equal(logoutRequests.length,requestsBefore+1,`${provider} logout must revoke its app session through the auth API`);
+   assert.equal(logoutRequests.at(-1).url,'/api/auth/logout');assert.equal(logoutRequests.at(-1).options.method,'POST');
+   assert.equal(documents.length,documentsBefore,`${provider} logout must not use the ChatGPT sign-out endpoint`);
+   await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));
+  }
+ }finally{globalThis.fetch=originalFetch;}
  console.log('Admin menu: both accounts, mouse and keyboard navigation, menu closure and customer visibility passed');
 }finally{
  await act(async()=>root.unmount());
