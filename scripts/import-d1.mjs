@@ -121,7 +121,7 @@ export async function loadVerifiedDestinationBackup({ directory, expectedCommit 
   return { snapshot, report };
 }
 
-export async function applyDataPlan({ token, expectedCommit, sourceDirectory, expectedSourceProjectId, expectedSourceCommit, expectedDestinationSnapshot, destinationDirectory, migrations, execute = false, request = fetch, readOnlyProbe = fetch, sourcePauseProbe, accountId, databaseId } = {}) {
+export async function applyDataPlan({ token, expectedCommit, sourceDirectory, expectedSourceProjectId, expectedSourceCommit, expectedDestinationSnapshot, destinationDirectory, migrations, retainValidatedCacheMetadata = false, execute = false, request = fetch, readOnlyProbe = fetch, sourcePauseProbe, accountId, databaseId } = {}) {
   const options = { token, expectedCommit, request, accountId, databaseId };
   context(options);
   const source = await loadVerifiedSourceBackup({ directory: sourceDirectory, expectedProjectId: expectedSourceProjectId, expectedCommit: expectedSourceCommit });
@@ -136,8 +136,8 @@ export async function applyDataPlan({ token, expectedCommit, sourceDirectory, ex
   if (migrations && fingerprint(migrations) !== fingerprint(checkedMigrations)) fail("Only the exact checked-in migration set may be used.");
   const initial = await snapshotDestination(options);
   if (destinationFingerprint(initial) !== destinationFingerprint(expectedDestinationSnapshot)) fail("Destination changed since its backup. Take a fresh backup and replan.");
-  const initialPlan = planDataTransfer(source.snapshot, initial, { migrations: checkedMigrations });
-  if (execute !== true) return { executed: false, planned: initialPlan.statements.length, summary: initialPlan.summary };
+  const initialPlan = planDataTransfer(source.snapshot, initial, { migrations: checkedMigrations, retainValidatedCacheMetadata });
+  if (execute !== true) return { executed: false, planned: initialPlan.statements.length, retainedMetadata: initialPlan.retainedMetadata, summary: initialPlan.summary };
   if (typeof sourcePauseProbe !== "function") fail("An authenticated source pause and fingerprint verifier is required for execution.");
   async function verifyPause() {
     let proof;
@@ -153,7 +153,7 @@ export async function applyDataPlan({ token, expectedCommit, sourceDirectory, ex
     await verifyPause();
     const current = await snapshotDestination(options);
     if (destinationFingerprint(current) !== destinationFingerprint(expected)) fail("Destination changed before the next transfer batch; take a fresh backup and replan.");
-    const plan = planDataTransfer(source.snapshot, current, { migrations: checkedMigrations });
+    const plan = planDataTransfer(source.snapshot, current, { migrations: checkedMigrations, retainValidatedCacheMetadata });
     if (!plan.statements.length) break;
     const chunk = plan.statements.slice(0, 50);
     if (chunk.some((statement) => statement.params.some((value) => typeof value === "object" && value !== null))) fail("Application BLOB bindings need a separately verified REST encoding; transfer stopped.");
@@ -170,16 +170,17 @@ export async function applyDataPlan({ token, expectedCommit, sourceDirectory, ex
   await verifyPause();
   const final = await snapshotDestination(options);
   if (destinationFingerprint(final) !== destinationFingerprint(expected)) fail("Destination final verification failed; keep both systems paused and reconcile.");
-  const finalPlan = planDataTransfer(source.snapshot, final, { migrations: checkedMigrations });
+  const finalPlan = planDataTransfer(source.snapshot, final, { migrations: checkedMigrations, retainValidatedCacheMetadata });
   if (finalPlan.statements.length) fail("Destination does not yet contain every source row.");
-  return { executed: true, inserted, summary: finalPlan.summary, destinationFingerprint: destinationFingerprint(final), sourceCommit: expectedSourceCommit };
+  return { executed: true, inserted, retainedMetadata: finalPlan.retainedMetadata, summary: finalPlan.summary, destinationFingerprint: destinationFingerprint(final), sourceCommit: expectedSourceCommit };
 }
 
 async function runCli() {
   let input = "";
   for await (const chunk of process.stdin) { input += chunk; if (Buffer.byteLength(input) > 32_768) fail("Protected transfer input is too large."); }
   const options = JSON.parse(input);
-  if (!record(options)) fail("Protected transfer options are required on stdin.");
+  const allowed = new Set(["token", "expectedCommit", "accountId", "databaseId", "sourceDirectory", "expectedSourceProjectId", "expectedSourceCommit", "destinationBackupDirectory", "execute", "sourceOrigin", "sourceToken", "sourceProbeParent", "retainValidatedCacheMetadata"]);
+  if (!record(options) || Object.keys(options).some((key) => !allowed.has(key)) || (options.retainValidatedCacheMetadata !== undefined && typeof options.retainValidatedCacheMetadata !== "boolean")) fail("Protected transfer options are required on stdin.");
   const target = await snapshotDestination(options);
   const backup = await backupDestination(target, options.destinationBackupDirectory);
   if (!options.sourceDirectory) { console.log(JSON.stringify({ ...backup, destination: undefined })); return; }

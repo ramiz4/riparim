@@ -1,4 +1,7 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
+import { spawnSync } from "node:child_process";
+import { workshopIdentityInput } from "../lib/google-identity-fingerprint.mjs";
 import { mkdtemp, readFile, rm, stat, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -46,8 +49,34 @@ const sourceExport = await exportSource({ origin: "https://source-fixture.exampl
     }
   },
 });
-function apiFixture({ loseAck = false, failBatch = false, foreignChange = false } = {}) {
+const cacheProfile = { id: "cache-workshop-fixture", name: "Fixture Workshop", city: "Fixture City", address: "Fixture Address", phone: "+38344123456", phone_note: "", whatsapp: "", brands: "[]", services: "[]", service_details: "[]", languages: "[]", specialty: "fixture", description: "fixture description", lat: "42.5", lng: "20.8", sources: "[]", checked_at: "2026-10-04T20:00:00Z", status: "published", updated_at: "2026-10-04T20:00:00Z" };
+const cacheRating = { workshop_id: cacheProfile.id, rating: 4.5, review_count: 3, maps_url: "https://maps.google.com/?cid=123", source_url: null, source_label: null, checked_at: "2026-10-04T20:00:00Z", source_updated_at: null };
+const currentCacheHash = createHash("sha256").update(workshopIdentityInput({ ...cacheProfile, lat: Number(cacheProfile.lat), lng: Number(cacheProfile.lng), googleRating: { mapsUrl: cacheRating.maps_url } })).digest("hex");
+function insertCacheFixture(db, source) {
+  for (const [table, row] of [["workshops", cacheProfile], ["workshop_google_ratings", cacheRating], ["catalog_state", { key: `workshop-source:${"a".repeat(64)}`, value: source ? "2026-10-04T20:00:00Z" : "2026-10-04T21:00:00.000Z" }], ["workshop_google_places", { workshop_id: cacheProfile.id, place_id: "place-fixture", profile_hash: source ? "0".repeat(64) : currentCacheHash, checked_at: source ? 100 : 200, retry_after: source ? 1000 : 2000 }]]) {
+    const columns = Object.keys(row);
+    db.prepare(`INSERT INTO ${table} (${columns.join(",")}) VALUES(${columns.map(() => "?").join(",")})`).run(...Object.values(row));
+  }
+}
+const cacheSourceDb = dbFixture(9);
+insertCacheFixture(cacheSourceDb, true);
+for (let index = 0; index < 65; index++) cacheSourceDb.prepare("INSERT INTO auth_attempts VALUES(?,?,?)").run(`cache-import-fixture-${index}`, 0, 1000);
+const cacheSnapshot = snapshotDatabase(cacheSourceDb, { projectId: sourceProjectId, sourceCommit, exportedAt: "2026-10-04T20:00:00Z", excludedProviderTables: ["_cf_KV"] });
+cacheSourceDb.close();
+const cacheSourceDirectory = join(parent, "completed-cache-source");
+const cacheSourceExport = await exportSource({ origin: "https://source-fixture.example", token: "a".repeat(64), expectedProjectId: sourceProjectId, expectedCommit: sourceCommit, directory: cacheSourceDirectory,
+  request: async (target) => {
+    const url = new URL(target);
+    if (url.searchParams.get("operation") === "schema") return Response.json({ ...cacheSnapshot, tables: undefined, readOnly: true });
+    if (url.searchParams.get("operation") === "objects") return Response.json({ objects: [], cursor: null });
+    const table = cacheSnapshot.tables.find((item) => item.name === url.searchParams.get("table"));
+    const offset = Number(url.searchParams.get("offset"));
+    return Response.json({ name: table.name, columns: table.columns, rows: table.rows.slice(offset, offset + 5), nextOffset: offset + 5 < table.rows.length ? offset + 5 : null });
+  },
+});
+function apiFixture({ loseAck = false, failBatch = false, foreignChange = false, cacheMetadata = false } = {}) {
   const db = dbFixture(migrations.length);
+  if (cacheMetadata) insertCacheFixture(db, false);
   db.exec("CREATE TABLE _cf_KV(key TEXT PRIMARY KEY,value BLOB)");
   db.prepare("INSERT INTO _cf_KV VALUES(?,?)").run("private-provider-fixture", new Uint8Array([0, 1, 255]));
   const writeBatches = [];
@@ -200,6 +229,43 @@ try {
     const api = apiFixture({ failBatch: true }); const baseline = await targetBaseline(api);
     await assert.rejects(applyDataPlan(callOptions(api, baseline, { execute: true })), (error) => /write result is unresolved/.test(error.message) && !error.message.includes(token));
     assert.equal(api.writeBatches.length, 1); assert.equal(api.db.prepare("SELECT COUNT(*) AS n FROM auth_attempts").get().n, 0); api.db.close();
+  });
+  await test("validated cache retention is explicit and survives every batch and final replan", async () => {
+    const api = apiFixture({ cacheMetadata: true }); const baseline = await targetBaseline(api);
+    const cacheOptions = { sourceDirectory: cacheSourceDirectory, sourcePauseProbe: async () => cacheSourceExport.report };
+    await assert.rejects(applyDataPlan(callOptions(api, baseline, cacheOptions)), /Conflicting destination row/);
+    const planned = await applyDataPlan(callOptions(api, baseline, { ...cacheOptions, retainValidatedCacheMetadata: true }));
+    assert.equal(planned.planned, 65); assert.equal(planned.retainedMetadata, 2);
+    const originalCache = api.db.prepare("SELECT * FROM workshop_google_places").get();
+    const originalSeed = api.db.prepare("SELECT * FROM catalog_state").get();
+    const result = await applyDataPlan(callOptions(api, baseline, { ...cacheOptions, retainValidatedCacheMetadata: true, execute: true }));
+    assert.equal(result.inserted, 65); assert.equal(result.retainedMetadata, 2);
+    assert.deepEqual(api.writeBatches.map((batch) => batch.length), [50, 15]);
+    assert.deepEqual(api.db.prepare("SELECT * FROM workshop_google_places").get(), originalCache);
+    assert.deepEqual(api.db.prepare("SELECT * FROM catalog_state").get(), originalSeed);
+    assert(api.writeBatches.flat().every((statement) => !/workshop_google_places|catalog_state/.test(statement.sql)));
+    const stored = JSON.parse(await readFile(join(cacheSourceDirectory, "snapshot.json"), "utf8"));
+    assert.equal(stored.tables.find((table) => table.name === "workshop_google_places").rows[0].profile_hash, "0".repeat(64));
+    api.db.close();
+  });
+  await test("cache retention never bypasses original source fingerprint verification", async () => {
+    const api = apiFixture({ cacheMetadata: true }); const baseline = await targetBaseline(api);
+    await assert.rejects(applyDataPlan(callOptions(api, baseline, { sourceDirectory: cacheSourceDirectory, retainValidatedCacheMetadata: true, execute: true, sourcePauseProbe: async () => ({ ...cacheSourceExport.report, dataFingerprint: "0".repeat(64) }) })), /Source snapshot changed/);
+    assert.equal(api.writeBatches.length, 0); api.db.close();
+  });
+  await test("stale target identity hashes remain blocked despite the retention option", async () => {
+    const api = apiFixture({ cacheMetadata: true });
+    api.db.prepare("UPDATE workshop_google_places SET profile_hash=?").run("f".repeat(64));
+    const baseline = await targetBaseline(api);
+    await assert.rejects(applyDataPlan(callOptions(api, baseline, { sourceDirectory: cacheSourceDirectory, retainValidatedCacheMetadata: true, execute: true, sourcePauseProbe: async () => cacheSourceExport.report })), /Conflicting destination row/);
+    assert.equal(api.writeBatches.length, 0); api.db.close();
+  });
+  await test("CLI rejects nonboolean retention flags and unknown options before any network request", async () => {
+    for (const input of [{ retainValidatedCacheMetadata: "true" }, { retainValidatedCacheMetadata: true, arbitrarySql: "DELETE FROM visits" }]) {
+      const result = spawnSync(process.execPath, ["scripts/import-d1.mjs"], { input: JSON.stringify(input), encoding: "utf8" });
+      assert.equal(result.status, 1); assert.equal(result.stdout, "");
+      assert.match(result.stderr, /Protected D1 transfer stopped/);
+    }
   });
   await test("wrong account, database, token or release context never reaches the provider", async () => {
     let calls = 0; const request = async () => { calls++; throw new Error("Unexpected request"); };

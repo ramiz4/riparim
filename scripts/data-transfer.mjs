@@ -4,8 +4,9 @@ import { readFile, realpath, stat } from "node:fs/promises";
 import { join, relative, resolve, sep } from "node:path";
 import { DatabaseSync } from "node:sqlite";
 import { fileURLToPath } from "node:url";
+import { workshopIdentityInput } from "../lib/google-identity-fingerprint.mjs";
 
-const historyNames = new Set(["__drizzle_migrations", "d1_migrations"]);
+const historyNames = new Set(["__drizzle_migrations", "d1_migrations", "__appgarden_migrations"]);
 const schemaTypes = new Set(["table", "index", "trigger", "view"]);
 const blob = (value) => value && typeof value === "object" && !Array.isArray(value) && Object.keys(value).length === 2 && value.type === "blob" && typeof value.base64 === "string" && Buffer.from(value.base64, "base64").toString("base64") === value.base64;
 const scalar = (value) => value === null || typeof value === "string" || blob(value) || (typeof value === "number" && Number.isFinite(value) && (!Number.isInteger(value) || Number.isSafeInteger(value)));
@@ -105,10 +106,22 @@ function checkedPrefix(snapshot, migrations) {
   const prefix = matches[0];
   const history = snapshot.tables.filter((item) => historyNames.has(item.name));
   for (const table of history) {
+    if (table.name === "__appgarden_migrations") {
+      // OpenAI Sites records these same ordered migration filenames in a known
+      // provider table. Accept this exact alias, never an arbitrary name prefix.
+      const expectedSql = 'CREATE TABLE "__appgarden_migrations"(id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT UNIQUE,applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)';
+      const expectedColumns = [
+        { name: "id", type: "INTEGER", notnull: 0, dflt_value: null, pk: 1 },
+        { name: "name", type: "TEXT", notnull: 0, dflt_value: null, pk: 0 },
+        { name: "applied_at", type: "TIMESTAMP", notnull: 1, dflt_value: "CURRENT_TIMESTAMP", pk: 0 },
+      ];
+      const definition = snapshot.schema.find((item) => item.name === table.name && item.type === "table");
+      if (!definition || normalizedSql(definition.sql) !== normalizedSql(expectedSql) || JSON.stringify(columnsShape(table.columns)) !== JSON.stringify(expectedColumns)) fail("Sites migration history schema does not match its verified provider contract.");
+    }
     if (table.rows.length !== prefix) fail("Migration history length does not match schema.");
-    if (table.name === "d1_migrations") {
+    if (table.name === "d1_migrations" || table.name === "__appgarden_migrations") {
       const rows = [...table.rows].sort((a, b) => Number(a.id) - Number(b.id));
-      if (new Set(rows.map((row) => row.id)).size !== rows.length || rows.some((row, index) => !Number.isSafeInteger(row.id) || row.id < 1 || row.name !== migrations[index].name)) fail("D1 migration history does not match checked-in migrations.");
+      if (new Set(rows.map((row) => row.id)).size !== rows.length || rows.some((row, index) => !Number.isSafeInteger(row.id) || row.id < 1 || row.name !== migrations[index].name)) fail("Filename migration history does not match checked-in migrations.");
     } else {
       // SQLite Drizzle uses SERIAL, which permits a null id. Its ordered
       // timestamps and file hashes, rather than that optional id, prove history.
@@ -151,7 +164,34 @@ export function upgradeSnapshot(snapshot, migrations) {
   finally { restored.database.close(); }
 }
 
-export function planDataTransfer(source, target, { migrations } = {}) {
+function sameRow(left, right) {
+  return left !== undefined && right !== undefined && Object.keys(left).length === Object.keys(right).length && Object.keys(left).every((column) => Object.hasOwn(right, column) && JSON.stringify(left[column]) === JSON.stringify(right[column]));
+}
+function isoTimestamp(value) {
+  return typeof value === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z$/.test(value) && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 19) === value.slice(0, 19);
+}
+function retainCacheMetadata(table, row, match, source, target) {
+  const sourceWorkshops = source.tables.find((item) => item.name === "workshops")?.rows ?? [];
+  const targetWorkshops = target.tables.find((item) => item.name === "workshops")?.rows ?? [];
+  if (table.name === "catalog_state") {
+    return /^workshop-source:[a-f0-9]{64}$/.test(row.key) && row.key === match.key && isoTimestamp(row.value) && isoTimestamp(match.value) && sourceWorkshops.length === targetWorkshops.length && sourceWorkshops.every((workshop) => sameRow(workshop, targetWorkshops.find((item) => item.id === workshop.id)));
+  }
+  if (table.name !== "workshop_google_places" || row.workshop_id !== match.workshop_id || row.place_id !== match.place_id || !/^[a-f0-9]{64}$/.test(row.profile_hash) || !/^[a-f0-9]{64}$/.test(match.profile_hash) || [row.checked_at, row.retry_after, match.checked_at, match.retry_after].some((value) => !Number.isSafeInteger(value) || value < 0)) return false;
+  const different = table.columns.filter((column) => JSON.stringify(row[column.name]) !== JSON.stringify(match[column.name])).map((column) => column.name);
+  if (different.some((column) => !["checked_at", "retry_after", "profile_hash"].includes(column))) return false;
+  const workshop = sourceWorkshops.find((item) => item.id === row.workshop_id);
+  if (!workshop || !sameRow(workshop, targetWorkshops.find((item) => item.id === row.workshop_id))) return false;
+  const sourceRating = source.tables.find((item) => item.name === "workshop_google_ratings")?.rows.find((item) => item.workshop_id === row.workshop_id);
+  const targetRating = target.tables.find((item) => item.name === "workshop_google_ratings")?.rows.find((item) => item.workshop_id === row.workshop_id);
+  if (!(sourceRating === undefined && targetRating === undefined) && !sameRow(sourceRating, targetRating)) return false;
+  const lat = workshop.lat === null ? null : Number(workshop.lat);
+  const lng = workshop.lng === null ? null : Number(workshop.lng);
+  if ((lat !== null && (!Number.isFinite(lat) || lat < -90 || lat > 90)) || (lng !== null && (!Number.isFinite(lng) || lng < -180 || lng > 180))) return false;
+  const input = workshopIdentityInput({ name: workshop.name, phone: workshop.phone, city: workshop.city, address: workshop.address, lat, lng, googleRating: sourceRating ? { mapsUrl: sourceRating.maps_url } : null });
+  return match.profile_hash === hash(input);
+}
+
+export function planDataTransfer(source, target, { migrations, retainValidatedCacheMetadata = false } = {}) {
   if (!Array.isArray(migrations) || !migrations.length) fail("Checked-in migrations are required for transfer planning.");
   const upgraded = upgradeSnapshot(source, migrations);
   const restoredTarget = restoreSnapshot(target, migrations);
@@ -170,6 +210,7 @@ export function planDataTransfer(source, target, { migrations } = {}) {
       for (const row of existing.rows) { if (index.has(key(row))) fail(`Duplicate destination primary key in table ${table.name}.`); index.set(key(row), row); }
       const seen = new Set();
       let unchanged = 0;
+      let retainedMetadata = 0;
       let insert = 0;
       for (const row of table.rows) {
         const identity = key(row);
@@ -177,8 +218,10 @@ export function planDataTransfer(source, target, { migrations } = {}) {
         seen.add(identity);
         const match = index.get(identity);
         if (match) {
-          if (columns.some((column) => JSON.stringify(match[column]) !== JSON.stringify(row[column]))) fail(`Conflicting destination row in table ${table.name}; no writes planned.`);
-          unchanged++;
+          if (columns.some((column) => JSON.stringify(match[column]) !== JSON.stringify(row[column]))) {
+            if (retainValidatedCacheMetadata !== true || !retainCacheMetadata(table, row, match, upgraded.snapshot, target)) fail(`Conflicting destination row in table ${table.name}; no writes planned.`);
+            retainedMetadata++;
+          } else unchanged++;
         } else {
           const sql = `INSERT INTO ${quote(table.name)} (${columns.map(quote).join(",")}) VALUES (${columns.map(() => "?").join(",")})`;
           const params = columns.map((column) => row[column]);
@@ -188,11 +231,11 @@ export function planDataTransfer(source, target, { migrations } = {}) {
           insert++;
         }
       }
-      summary.push({ table: table.name, source: table.rows.length, destination: existing.rows.length, insert, unchanged, destinationOnly: [...index.keys()].filter((identity) => !seen.has(identity)).length });
+      summary.push({ table: table.name, source: table.rows.length, destination: existing.rows.length, insert, unchanged, retainedMetadata, destinationOnly: [...index.keys()].filter((identity) => !seen.has(identity)).length });
     }
     if (restoredTarget.database.prepare("PRAGMA foreign_key_check").all().length) fail("Destination foreign-key validation failed.");
     restoredTarget.database.exec("ROLLBACK");
-    return { format: 1, sourceCommit: source.sourceCommit, sourceProjectId: source.projectId, targetProjectId: target.projectId, sourceProof: upgraded.proof, sourceHistory: upgraded.sourceHistory, sourceArchive: upgraded.sourceArchive, destinationHistory: restoredTarget.proof, summary, statements };
+    return { format: 1, sourceCommit: source.sourceCommit, sourceProjectId: source.projectId, targetProjectId: target.projectId, sourceProof: upgraded.proof, sourceHistory: upgraded.sourceHistory, sourceArchive: upgraded.sourceArchive, destinationHistory: restoredTarget.proof, retainedMetadata: summary.reduce((sum, table) => sum + table.retainedMetadata, 0), summary, statements };
   } finally { restoredTarget.database.close(); }
 }
 

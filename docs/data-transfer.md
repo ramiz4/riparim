@@ -84,7 +84,10 @@ werden festgehalten. Ein abgebrochener Export gilt nicht als abgeschlossen.
 `scripts/data-transfer.mjs` stellt die Anwendungsdaten isoliert mit ausschließlich
 eingechecktem SQL wieder her. Fremdes Export-SQL wird nie ausgeführt. Das gesamte
 Schema samt Spalten muss genau einen bekannten Migrationsstand beweisen; eine
-vorhandene D1-/Drizzle-Historie muss dazu passen. Fehlende Historie wird als solche
+vorhandene D1-/Drizzle-Historie muss dazu passen. Die bei Sites tatsächlich
+verwendete `__appgarden_migrations` wird ausschließlich mit ihrer überprüften
+Drei-Spalten-Definition, Reihenfolge und den exakten eingecheckten Dateinamen
+anerkannt; sie bleibt im Quellarchiv und ersetzt keine Zielhistorie. Fehlende Historie wird als solche
 ausgewiesen und niemals durch erfundene angewendete Zeilen ersetzt. Plattform-
 und Quell-Migrationsdaten bleiben unverändert im Quellarchiv erhalten. Das
 Upgrade ergänzt ausschließlich den bewiesenen fehlenden Migrationssuffix.
@@ -105,7 +108,17 @@ verifizieren und einen privaten Plan erzeugen. Gleiche Datensätze sind No-ops;
 fehlende Primärschlüssel können ergänzt werden. Abweichende Zeilen und Unique-
 Kollisionen stoppen den Plan. Auch zusätzliche Zieldatensätze bleiben erhalten
 und sichtbar. Es gibt kein pauschales Replace, Upsert oder Löschen fremder Daten.
-Ein bewusst notwendiger Katalogabgleich benötigt einen gesondert geprüften Plan.
+Die ausdrückliche Option `retainValidatedCacheMetadata=true` behandelt nur zwei
+nachgewiesene Fälle als gleichwertige Metadaten: ISO-Abschlusszeitpunkte desselben
+`workshop-source:<SHA>`-Imports bei exakt gleichem vollständigem Profilbestand;
+und Google-Zuordnungscaches bei gleicher Place ID, gleichem vollständigem Profil
+und gleicher Bewertungsquelle, wenn der Zielhash der aktuellen gemeinsamen
+Identitätsfunktion entspricht. Hier dürfen lediglich Cachezeiten oder veraltete
+Quellhashes abweichen. Zielwerte bleiben erhalten; die Ausgabe weist
+`retainedMetadata` getrennt aus. Quotenzähler, Geschäftsdaten, Besitzrechte,
+Freigaben und andere Zuordnungen werden niemals so gleichgesetzt. Die originale
+Quelle und ihre Fingerprints bleiben unverändert. Es entstehen keine UPDATEs.
+Ein anderer Katalogkonflikt benötigt einen gesondert geprüften Plan.
 
 Private Objekte werden unter gleichen Schlüsseln übernommen. Bereits vorhandene
 Zielobjekte müssen Inhalt und Metadaten nachweislich erfüllen, andernfalls
