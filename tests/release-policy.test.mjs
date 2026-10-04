@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
 import { analyzeCommits } from "@semantic-release/commit-analyzer";
+import { generateNotes } from "@semantic-release/release-notes-generator";
 import config from "../release.config.mjs";
 import { assertBuildProvenance, assertReleaseContext, existingReleaseMetadata } from "../scripts/release-policy.mjs";
 
@@ -24,4 +25,28 @@ for (const [message, expected] of [["fix: repair theme", "patch"], ["feat: add s
   assert.equal(await analyzeCommits(config.plugins[0][1], { cwd: process.cwd(), commits: [{ message, hash: commit }], logger: { log() {} } }), expected);
 }
 assert.notEqual(spawnSync(process.execPath, ["node_modules/@commitlint/cli/cli.js"], { input: "Update Site source", encoding: "utf8" }).status, 0);
-console.log("Release policy: main-only context, exact build, retries and Conventional Commit versioning passed.");
+
+// Exercise the real writer as well as the analyzer: a preset can parse commits
+// successfully while requiring a newer changelog writer at release time.
+const noteMessages = [
+  "feat(catalogue): add fixture filters",
+  "fix(auth): restore fixture session",
+  "feat(api)!: replace fixture response\n\nBREAKING CHANGE: fixture clients must migrate to the new response shape",
+  "docs: revise fixture maintenance guide",
+  "chore: refresh fixture tooling",
+];
+const notes = await generateNotes(config.plugins[1][1], {
+  cwd: process.cwd(),
+  options: { repositoryUrl: config.repositoryUrl },
+  commits: noteMessages.map((message, index) => ({ message, hash: String(index + 1).repeat(40) })),
+  lastRelease: { gitTag: "v1.2.2", gitHead: "f".repeat(40) },
+  nextRelease: { version: "2.0.0", gitTag: "v2.0.0", gitHead: "6".repeat(40) },
+  logger: { log() {} },
+});
+assert.match(notes, /### Features/);
+assert.match(notes, /### Bug Fixes/);
+assert.match(notes, /^### [^\n]*BREAKING CHANGES$/m);
+for (const subject of ["add fixture filters", "restore fixture session", "replace fixture response", "fixture clients must migrate to the new response shape"]) assert(notes.includes(subject));
+assert(notes.includes("https://github.com/ramiz4/riparim/compare/v1.2.2...v2.0.0"), "release notes must link the previous and next version tags");
+for (const subject of ["revise fixture maintenance guide", "refresh fixture tooling"]) assert(!notes.includes(subject), "maintenance-only commits must stay out of release notes");
+console.log("Release policy: main-only context, exact build, retries, Conventional Commit versioning and rendered release notes passed.");
