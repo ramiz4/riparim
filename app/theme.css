@@ -74,8 +74,7 @@ html.dark .theme-control[data-mounted=false] [data-slot=switch-thumb] { translat
 .google-official-widget gmp-place-details { color-scheme: inherit; }
 /* Page surfaces and navigation. Hero photography retains its own overlay. */
 html.dark :is(.landing-page, .search-band, .trust-section) { background: var(--background); }
-html.dark .navbar { background: #0b1d20ed; border-color: var(--border); }
-html.dark .landing-navbar { background: var(--background); }
+html.dark .navbar { background: var(--background); border-color: var(--border); }
 html.dark :is(.hero-band, .results-band, .footer-band, .pilotbar) { background: var(--theme-surface); border-color: var(--border); }
 html.dark :is(.brand, .footer .brand) { color: var(--foreground); }
 html.dark :is(nav, .nav-section, .pilotbar, .footer, .hero-copy>p, .hero-points, .section-heading p, .directory-count, .trust-title p, .trust-steps p, .popular, .search-tabs button, .search-box label>span, .results-note, .results-filters>button, .empty p, .review-loading, .wizard-labels, .access-page>p) { color: var(--muted-foreground); }

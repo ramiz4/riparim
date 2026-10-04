@@ -29,6 +29,8 @@ npm run dev -- --host 127.0.0.1 --port 5174
 
 Die lokale Oberfläche ist unter `http://127.0.0.1:5174` erreichbar. Supabase-Projekt und Anmeldeoptionen werden in der geschützten Verwaltung konfiguriert. SMTP und Google OAuth müssen beim Anbieter eingerichtet und getestet werden; der Quellcode allein aktiviert sie nicht.
 
+Ein neuer Worktree braucht vor dem ersten Seitenaufruf die lokale Datenbank aus dem Abschnitt „Datenbank und Prüfung“. Der Entwicklungsserver verwendet dieselben logischen D1-/R2-Bindings wie der Sites-Build; die vorhandenen Migrationen müssen auf diese lokale Datenbank angewendet werden.
+
 `REVIEW_MODERATOR_EMAIL` bestimmt das Administratorkonto und gehört in die Laufzeitkonfiguration. `.env`, lokale Datenbanken, Uploads und Build-Ausgaben sind von Git ausgeschlossen. Die `.env.example` enthält ausschließlich Platzhalter.
 
 Unter `/verwaltung/benutzer` verwaltet die Administration die E-Mail- und Google-Konten des konfigurierten Supabase-Projekts: ansehen, anlegen, bearbeiten, aktivieren, deaktivieren und löschen. Dafür muss `SUPABASE_SECRET_KEY` als serverseitiges Geheimnis auf einen Secret- oder Service-Role-Key desselben Projekts gesetzt werden. Der Schlüssel wird weder in der Oberfläche abgefragt noch an den Browser übertragen.
@@ -63,10 +65,10 @@ Migrationen liegen in `drizzle/`. Nach Änderungen am Schema:
 npm run db:generate
 ```
 
-Für eine neue lokale Datenbank zuerst bauen und die SQL-Migrationen in aufsteigender Reihenfolge anwenden. Bereits angewendete Migrationen nicht erneut ausführen:
+Für eine neue lokale Entwicklungsdatenbank zuerst den Sites-Worker bauen und die SQL-Migrationen in aufsteigender Reihenfolge anwenden. Bereits angewendete Migrationen nicht erneut ausführen:
 
 ```sh
-npm run build
+BUILD_TARGET=sites npm run build
 node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js d1 execute DB --local --config dist/server/wrangler.json --persist-to .wrangler/state --file drizzle/0000_handy_black_queen.sql
 ```
 

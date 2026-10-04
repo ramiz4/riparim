@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import {ThemeProvider} from "@/components/theme-provider";
 import "./globals.css";
 import "./ui-refresh.css";
+import "./site-header.css";
 import "./auth.css";
 import "./catalogue.css";
 import "./workshop-pages.css";
