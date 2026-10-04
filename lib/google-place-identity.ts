@@ -1,7 +1,8 @@
 import {cityCoordinates,type Workshop} from "./workshops";
+import {googlePlaceIdFromMapsUrl,googleMapsCid,googleMapsSearchQuery} from "./google-maps-link";
 
-export type GooglePlaceCandidate={id?:string;primaryType?:string;displayName?:{text?:string};internationalPhoneNumber?:string;formattedAddress?:string;addressComponents?:{types?:string[];shortText?:string;longText?:string}[];location?:{latitude?:number;longitude?:number}};
-type Identity=Pick<Workshop,"name"|"phone"|"city"|"address"|"lat"|"lng">;
+export type GooglePlaceCandidate={id?:string;primaryType?:string;googleMapsUri?:string;displayName?:{text?:string};internationalPhoneNumber?:string;formattedAddress?:string;addressComponents?:{types?:string[];shortText?:string;longText?:string}[];location?:{latitude?:number;longitude?:number}};
+type Identity=Pick<Workshop,"name"|"phone"|"city"|"address"|"lat"|"lng">&{googleRating?:Workshop["googleRating"];google?:{snapshot?:{mapsUrl:string}|null}};
 const generic=new Set(["auto","autoservis","autoservice","servis","service","servisi","autodiagnoza","automekanik","garage","car","cars","shpk","sh","p","k","kosovo","kosove"]);
 const words=(value:string):string[]=>value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().match(/[a-z0-9]+/g)??[];
 export const normalizeWorkshopPhone=(phone:string)=>{let n=phone.replace(/\D/g,"");if(n.startsWith("00"))n=n.slice(2);return n;};
@@ -16,6 +17,30 @@ export function googlePlaceSearchRequest(workshop:Identity,pageSize=5,byName=fal
  return {textQuery:byName?`${workshop.name} ${workshop.city} Kosovo`:textQuery,languageCode:"de",regionCode:callingCode==="381"?"RS":"XK",pageSize,locationBias};
 }
 export function validGooglePlaceId(id:unknown):id is string{return typeof id==="string"&&/^[A-Za-z0-9_-]{10,255}$/.test(id);}
+const sourceMapsUrl=(workshop:Identity)=>workshop.googleRating?.mapsUrl??workshop.google?.snapshot?.mapsUrl;
+export function googleMapsLinkSearchRequest(workshop:Identity,pageSize=5){return {...googlePlaceSearchRequest(workshop,pageSize,true),textQuery:googleMapsSearchQuery(sourceMapsUrl(workshop))??`${workshop.name} ${workshop.address} Kosovo`};}
+export function verifiedGooglePlaceFromMapsLink(workshop:Identity,candidates:GooglePlaceCandidate[]):string|null{
+ const source=sourceMapsUrl(workshop),directId=googlePlaceIdFromMapsUrl(source),cid=googleMapsCid(source);
+ if(directId)return directId;
+ if(cid){const matches=candidates.filter(c=>validGooglePlaceId(c.id)&&googleMapsCid(c.googleMapsUri)===cid);const ids=[...new Set(matches.map(c=>c.id!))];return ids.length===1?ids[0]:null;}
+ if(!googleMapsSearchQuery(source))return null;
+ const streetGeneric=new Set([...generic,...words(workshop.city),"rr","rruga","rruge","road","magjistralja","magjistralia","km","no","nr","pn","n","prishtina","prishtine","pristina","peja","peje","gjakova","gjakove"]);
+ const street=words(workshop.address).filter(w=>w.length>2&&!/^\d+$/.test(w)&&!streetGeneric.has(w));
+ const plusCodes=workshop.address.toUpperCase().match(/\b[23456789CFGHJMPQRVWX]{4,8}\+[23456789CFGHJMPQRVWX]{2,3}\b/g)??[];
+ const matches=candidates.filter(candidate=>{
+  if(!validGooglePlaceId(candidate.id))return false;
+  // A search link needs corroboration. Stale/missing Google phone numbers do
+  // not prevent a match when the name and precise address agree.
+  const phone=candidate.internationalPhoneNumber??workshop.phone;
+  const confirmed=verifiedGooglePlace({...workshop,phone},[{...candidate,internationalPhoneNumber:candidate.internationalPhoneNumber??workshop.phone}]);
+  if(!confirmed)return false;
+  if(normalizeWorkshopPhone(candidate.internationalPhoneNumber??"")===normalizeWorkshopPhone(workshop.phone))return true;
+  if(workshop.lat!==null&&workshop.lng!==null){const p=candidate.location!;return Math.hypot((p.latitude!-workshop.lat)*111,(p.longitude!-workshop.lng)*82)<=0.3;}
+  const addressWords=words(candidate.formattedAddress??"");
+  return plusCodes.some(code=>(candidate.formattedAddress??"").toUpperCase().includes(code))||new Set(street.filter(w=>addressWords.includes(w))).size>=2;
+ });
+ const ids=[...new Set(matches.map(c=>c.id!))];return ids.length===1?ids[0]:null;
+}
 export function verifiedGooglePlace(workshop:Identity,candidates:GooglePlaceCandidate[]):string|null{
  const distinctive=words(workshop.name).filter(word=>!generic.has(word));
  const matches=candidates.filter(place=>{
@@ -42,4 +67,4 @@ export function verifiedGooglePlace(workshop:Identity,candidates:GooglePlaceCand
  const ids=[...new Set(matches.map(place=>place.id!))];
  return ids.length===1?ids[0]:null;
 }
-export async function workshopIdentityHash(w:Identity,legacy=false){const profile=[w.name,w.phone,w.city,w.address,w.lat,w.lng],input=JSON.stringify(legacy?profile:["phone-name-country-v5",...profile]);const digest=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(input));return Array.from(new Uint8Array(digest),byte=>byte.toString(16).padStart(2,"0")).join("");}
+export async function workshopIdentityHash(w:Identity,legacy=false){const profile=[w.name,w.phone,w.city,w.address,w.lat,w.lng],input=JSON.stringify(legacy?profile:["maps-link-v6",...profile,sourceMapsUrl(w)??null]);const digest=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(input));return Array.from(new Uint8Array(digest),byte=>byte.toString(16).padStart(2,"0")).join("");}

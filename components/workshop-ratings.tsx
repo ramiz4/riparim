@@ -2,6 +2,7 @@
 import {useEffect} from "react";
 import {MessageCircle,ShieldCheck,Star} from "lucide-react";
 import type {Workshop} from "@/lib/workshops";
+import {workshopMapsUrl} from "@/lib/google-maps-link";
 import {useVisibleGooglePlace} from "./use-google-place";
 import type {LiveGoogleRating} from "@/lib/google-maps-browser";
 
@@ -12,7 +13,7 @@ export function WorkshopRatings({workshop:w,details=false,hideUnavailable=false,
  const live=liveGoogleRating??observed;
  useEffect(()=>{if(observed)onGoogleRating?.(w.id,observed);},[w.id,observed,onGoogleRating]);
  const google=live;
- const mapsUrl=google?.mapsUrl??`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${w.name} ${w.address} Kosovo`)}`;
+ const mapsUrl=google?.mapsUrl??workshopMapsUrl(w);
  const riparimRated=w.rating!==null&&w.count>0;
  const googleAvailable=google?.rating!=null||(google?.count??0)>0;
  if(hideUnavailable&&!riparimRated&&!googleAvailable)return <div ref={ref} className="workshop-ratings-empty" aria-hidden="true"/>;

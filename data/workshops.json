@@ -1,7 +1,7 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-04T06:39:14.775Z",
+  "updatedAt": "2026-10-04T06:50:11.092Z",
   "coverage": {
     "countryCode": "XK",
     "published": 78,
@@ -13,9 +13,9 @@
   "googleImport": {
     "status": "partial",
     "reason": "unmatched_profiles",
-    "matchedPlaceIds": 50,
+    "matchedPlaceIds": 55,
     "numericSnapshotRatings": 5,
-    "pendingPublishedMatches": 28
+    "pendingPublishedMatches": 23
   },
   "workshops": [
     {
@@ -54,10 +54,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=AHP%20Volkswagen%20/%20Audi%20/%20Skoda%2020000%2C%20M25%2C%20Prizren%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=AHP+Volkswagen+%2F+Audi+%2F+Skoda+20000%2C+M25%2C+Prizren&query_place_id=ChIJrYwDvZyWUxMRc7AI-ssgTBQ",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -134,15 +134,15 @@
       "status": "published",
       "updatedAt": "2026-10-03T12:08:07.696318+00:00",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJ4UYlzqBjUxMRngtDCVMUKv4",
+        "matchedAt": "2026-10-04T06:47:51.868Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=AS%20Motors%20Rruga%20Aziz%20Zhilivoda%20Nr.%2001%2C%2012000%20Fush%C3%AB%20Kosov%C3%AB%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=AS+Motors+Rruga+Aziz+Zhilivoda+Nr.+01%2C+12000+Fush%C3%AB+Kosov%C3%AB%2C+Kosovo&query_place_id=ChIJ4UYlzqBjUxMRngtDCVMUKv4",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -219,10 +219,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Ballkan%20Nato%2099%2C%20Gjilan%2060000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Ballkan+Nato+99%2C+Gjilan+60000&query_place_id=ChIJG3VcI02NVBMRhghUZ9dLb0U",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -263,10 +263,10 @@
         "snapshot": {
           "rating": 4,
           "count": 52,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Beli%20Rr.%20Ibrahim%20Rugova%2C%20Ferizaj%2070000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Beli+Rr.+Ibrahim+Rugova%2C+Ferizaj+70000&query_place_id=ChIJNXRTcx19VBMRLj2OzkG4A3Q",
           "sourceUrl": "https://www.top-rated.online/cities/G%C3%ABrlic%C3%AB+e+Poshtme/place/p/15708354/Auto+Beli",
           "sourceLabel": "Top-Rated.online: ausdrücklich auf Google-Maps-Bewertungen basierend",
-          "checkedAt": "2026-10-03T19:15:01Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": "2026-02-20"
         }
       }
@@ -307,10 +307,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/?cid=7080982771088168193",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Cosmetic+te+FITIMI+VVCV%2B5H5%2C+M2%2C+Mitrovic%C3%AB+40000&query_place_id=ChIJr_6I2ChFUxMRARVfS1C0RGI",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -475,10 +475,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/?cid=14286692127351697162",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+elektrika+Dzogovic+Drvarska+bb%2C+Mitrovic%C3%AB+38220&query_place_id=ChIJOezcmZVFUxMRCu8qssuGRMY",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -519,10 +519,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://g.page/auto-elektrika-samko",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Elektrika+Samko+Filip+Vishnjiq%2C+Mitrovic%C3%AB+38220&query_place_id=ChIJXaB60G9FUxMRcof91OFOzOQ",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -563,10 +563,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Elektro%20Blendi%20116%20V%C3%ABllezerit%20G%C3%ABrvalla%2C%20Ferizaj%2070000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Elektro+Blendi+116+V%C3%ABllezerit+G%C3%ABrvalla%2C+Ferizaj+70000&query_place_id=ChIJ2Z89GU9_VBMRyR4mlYf6J-Q",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -702,15 +702,15 @@
       "status": "published",
       "updatedAt": "2026-10-03T12:13:17.842594+00:00",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJfSg1uDuhVBMRG9zhbKNtX60",
+        "matchedAt": "2026-10-04T06:47:52.478Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Energjia%20Rruga%20Mon%20Balaj%20658%2C%20B%C3%ABrnic%C3%AB%20e%20Ep%C3%ABrme%2C%2010000%20Prishtin%C3%AB%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Energjia+Rruga+Mon+Balaj+658%2C+B%C3%ABrnic%C3%AB+e+Ep%C3%ABrme%2C+10000+Prishtin%C3%AB%2C+Kosovo&query_place_id=ChIJfSg1uDuhVBMRG9zhbKNtX60",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -899,10 +899,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/?cid=3046183341130301890",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Llamarinier+LUANI+Mbreti+Agron+Kqi%C3%A7+i+Madh%2C+Mitrovic%C3%AB+40000&query_place_id=ChIJJUmVY4dbUxMRwsHIAJw3Rio",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -999,10 +999,10 @@
         "snapshot": {
           "rating": 4.8,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Mita%20sh.p.k.%20Magjistralja%20Prishtin%C3%AB%E2%80%93Shkup%2C%20km%207%2C%2010000%20Prishtina%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Mita+sh.p.k.+Magjistralja+Prishtin%C3%AB%E2%80%93Shkup%2C+km+7%2C+10000+Prishtina%2C+Kosovo&query_place_id=ChIJL9XXwhCdVBMR_jl20uzt15A",
           "sourceUrl": "https://automita.com/",
           "sourceLabel": "Betriebswebsite: ausdrücklich als Google-Wertung ausgewiesen",
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -1043,10 +1043,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Moto%20Universum%20/%20Auto%20Servis%20dhe%20Off%20road%20Abdullah%20Tahiri%2C%20Gjilan%2060000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Moto+Universum+%2F+Auto+Servis+dhe+Off+road+Abdullah+Tahiri%2C+Gjilan+60000&query_place_id=ChIJN009LtzyVBMRBIhEaKINpE4",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -1087,10 +1087,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Ngjyros%C3%ABs%20GOGA%20Rruga%20Ahmet%20Hoxha%2C%20Ferizaj%2070000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Ngjyros%C3%ABs+GOGA+Rruga+Ahmet+Hoxha%2C+Ferizaj+70000&query_place_id=ChIJpyrbaNd_VBMREMjd2Ees5tk",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -1131,10 +1131,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Ngjyros%C3%ABs%20IZMIRI%20116%20V%C3%ABllezerit%20G%C3%ABrvalla%2C%20Ferizaj%2070000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Ngjyros%C3%ABs+IZMIRI+116+V%C3%ABllezerit+G%C3%ABrvalla%2C+Ferizaj+70000&query_place_id=ChIJJ4SlZvp_VBMRyXe6jR8r5-E",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -1413,10 +1413,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Pjes%C3%AB%20%26%20Servis%20JAHA%20CFR5%2B26%2C%20Gjilan%2060000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Pjes%C3%AB+%26+Servis+JAHA+CFR5%2B26%2C+Gjilan+60000&query_place_id=ChIJMb1eezmNVBMRRmiBJtGANVE",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -1531,15 +1531,15 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJw4cSoduMVBMRkm-6Xp2_3Xg",
+        "matchedAt": "2026-10-04T06:47:53.548Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Service%20Adonisi%2075%20Ramiz%20Cernica%2C%20Gjilan%2060000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Service+Adonisi+75+Ramiz+Cernica%2C+Gjilan+60000&query_place_id=ChIJw4cSoduMVBMRkm-6Xp2_3Xg",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -1765,10 +1765,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Service%20Kushtrimi%209573%2BG23%2C%20Hivzi%20Sylejmani%2C%20Ferizaj%2070000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Service+Kushtrimi+9573%2BG23%2C+Hivzi+Sylejmani%2C+Ferizaj+70000&query_place_id=ChIJMxwsC3h_VBMR2K3PwgtzmDQ",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -1809,10 +1809,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Service%20Mali%20Rr.%20Mon%20Balaj%20no.245%2C%20Prishtina%2010000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Service+Mali+Rr.+Mon+Balaj+no.245%2C+Prishtina+10000&query_place_id=ChIJ0-0nVbufVBMRnljLpHwJfFM",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -1925,10 +1925,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20ANUARI%20Qemal%20Stafa%2C%20Nr.8%20Hasan%20Ferri%2C%20Prishtina%2010000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+ANUARI+Qemal+Stafa%2C+Nr.8+Hasan+Ferri%2C+Prishtina+10000&query_place_id=ChIJT9vZ2UifVBMRXP0Z5KC7dl8",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -1969,10 +1969,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20Arlindi%20Rr%20Q%C3%ABndresa%2C%20Prishtina%2010000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Arlindi+Rr+Q%C3%ABndresa%2C+Prishtina+10000&query_place_id=ChIJtS2xJRWZVBMRkML-ELqhZYA",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -2168,10 +2168,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20BMW%20balia%20Prishtina%2010000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+BMW+balia+Prishtina+10000&query_place_id=ChIJUZYIFJ-fVBMR2P9cYiR8f4Y",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -2212,10 +2212,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20Budi%20Rr%20Raniz%20Cerrnica%2C%20Prroj%20i%20Njelmt%2C%20Prishtina%2010000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Budi+Rr+Raniz+Cerrnica%2C+Prroj+i+Njelmt%2C+Prishtina+10000&query_place_id=ChIJgSzMVimfVBMR8FRiAysbryU",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -2292,10 +2292,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20servis%20CIMA%20Ferizaj%20Kadri%20Zeka%2C%20Ferizaj%2070000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+servis+CIMA+Ferizaj+Kadri+Zeka%2C+Ferizaj+70000&query_place_id=ChIJTc9TLsp_VBMR5Q1nCZpNf1g",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -2560,10 +2560,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20Genti%20M43G%2BVQW%2C%20Unnamed%20Road%2C%20Prishtina%2010000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Genti+M43G%2BVQW%2C+Unnamed+Road%2C+Prishtina+10000&query_place_id=ChIJz2OODhafVBMRSk4BbeHIhq8",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -2763,10 +2763,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20KEMA%20Rruga%20Hashim%20Hajdini%2C%2012000%20Fush%C3%AB%20Kosov%C3%AB%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+KEMA+Rruga+Hashim+Hajdini%2C+12000+Fush%C3%AB+Kosov%C3%AB%2C+Kosovo&query_place_id=ChIJSZHjib5jUxMRmW1nprmtBo8",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -3270,10 +3270,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20Trimi%20Afer%20shkolles%20iliri%2C%20Isa%20Kastrati%2C%20Prishtina%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Trimi+Afer+shkolles+iliri%2C+Isa+Kastrati%2C+Prishtina&query_place_id=ChIJ9wwYnhKfVBMRC8kLTQwCz38",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -3513,10 +3513,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20Tershana%20Rruga%20Zenel%20Hajdini%2C%20Ferizaj%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Tershana+Rruga+Zenel+Hajdini%2C+Ferizaj%2C+Kosovo&query_place_id=ChIJZTSQQzx_VBMRkvA_KhRqNk8",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -3601,10 +3601,10 @@
         "snapshot": {
           "rating": 5,
           "count": 35,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autodiagnoza%20Bardhi%20Rruga%20Ibrahim%20Rugova%2C%20Ferizaj%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autodiagnoza+Bardhi+Rruga+Ibrahim+Rugova%2C+Ferizaj%2C+Kosovo&query_place_id=ChIJ03ypjB1_VBMRgU6N3oDQVRY",
           "sourceUrl": "https://dyqani.app/places/car_rental/auto-bardhi-autodiagnoza-chiptuning-ferizaj",
           "sourceLabel": "Dyqani: Google-Places-Angaben",
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -3689,10 +3689,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autoelektrika%20Naimi%20M44X%2BHR2%2C%20Prishtina%2010000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autoelektrika+Naimi+M44X%2BHR2%2C+Prishtina+10000&query_place_id=ChIJUQjLIHufVBMRMpMm10I6HN0",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -3733,10 +3733,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autohouse%20Auto%20Pjese%20%26%20Servis%20Magjistralja%20Ferizaj-Prishtin%C3%AB%2C%20Ferizaj%2070000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autohouse+Auto+Pjese+%26+Servis+Magjistralja+Ferizaj-Prishtin%C3%AB%2C+Ferizaj+70000&query_place_id=ChIJS72rI-p_VBMR_4KThMqdykg",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -4235,10 +4235,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autoservis%20PG%20Bosch%20M55M%2BCC2%2C%20Prishtina%2010000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autoservis+PG+Bosch+M55M%2BCC2%2C+Prishtina+10000&query_place_id=ChIJMTTQbMSfVBMROfUEApqoNwg",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -4425,10 +4425,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Baki%20Automobile%20SH.P.K%20Magjistralja%20Prishtin%C3%AB%E2%80%93Ferizaj%2C%20km%205%2C%2010000%20Prishtin%C3%AB%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Baki+Automobile+SH.P.K+Magjistralja+Prishtin%C3%AB%E2%80%93Ferizaj%2C+km+5%2C+10000+Prishtin%C3%AB%2C+Kosovo&query_place_id=ChIJVYrXNK-dVBMRkWGix3urKCE",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -4469,10 +4469,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Ballkan%20Auto%20Garage%20Rruga%20Gjilan%2C%20Gjilan%2060000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Ballkan+Auto+Garage+Rruga+Gjilan%2C+Gjilan+60000&query_place_id=ChIJ9duUBHDtVBMRl2nLKi2gon0",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -4513,10 +4513,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Benita%20Company%20%E2%80%93%20Fahrzeugservice%20Klin%C3%AB%20Gremnik%20Klin%C3%AB%2C%209-1%2C%2032000%20Klin%C3%AB%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Benita+Company+%E2%80%93+Fahrzeugservice+Klin%C3%AB+Gremnik+Klin%C3%AB%2C+9-1%2C+32000+Klin%C3%AB%2C+Kosovo&query_place_id=ChIJdXtZEM0OUxMRHhYLUY4CKmA",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -4593,10 +4593,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=BMW%20Service%2095R6%2BP8J%2C%20Driton%20Islami%2C%20Talinoc%20i%20Jerlive%2070000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=BMW+Service+95R6%2BP8J%2C+Driton+Islami%2C+Talinoc+i+Jerlive+70000&query_place_id=ChIJb6GZpCd_VBMRi_bRC-yoNhI",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -4637,10 +4637,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Cesko%20auto%20service%20Besim%20Shala%2C%20Prizren%2020000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Cesko+auto+service+Besim+Shala%2C+Prizren+20000&query_place_id=ChIJMzRnIjKVUxMR37SDG3p6bug",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -4880,10 +4880,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Eurogoma%20%E2%80%93%20Ferizaj%20Rruga%20Rexhep%20Bislimi%2C%20af%C3%ABr%20Viva%20Fresh%2C%20Ferizaj%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Eurogoma+%E2%80%93+Ferizaj+Rruga+Rexhep+Bislimi%2C+af%C3%ABr+Viva+Fresh%2C+Ferizaj%2C+Kosovo&query_place_id=ChIJ2ezPzEV_VBMRAPesce8JHaY",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -4928,15 +4928,15 @@
       "status": "published",
       "updatedAt": "2026-10-02T18:21:53.000Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJawgbXVaxUxMRPP3SLe47gc8",
+        "matchedAt": "2026-10-04T06:47:57.880Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Eurogoma%20%E2%80%93%20Gjakov%C3%AB-2%20Rruga%20e%20Tirana%2C%20tranzit%20p.n.%2C%20Gjakov%C3%AB%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Eurogoma+%E2%80%93+Gjakov%C3%AB-2+Rruga+e+Tirana%2C+tranzit+p.n.%2C+Gjakov%C3%AB%2C+Kosovo&query_place_id=ChIJawgbXVaxUxMRPP3SLe47gc8",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -5034,10 +5034,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Eurogoma%20%E2%80%93%20Prizren%20Lubizhd%C3%AB%20Rruga%20p%C3%ABr%20Lubizhd%C3%AB%2C%20Prizren%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Eurogoma+%E2%80%93+Prizren+Lubizhd%C3%AB+Rruga+p%C3%ABr+Lubizhd%C3%AB%2C+Prizren%2C+Kosovo&query_place_id=ChIJr9MOAi-VUxMR6ntYWk2bOVY",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -5082,10 +5082,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Eurogoma%20%E2%80%93%20Prizren%20Ortakoll%20Lagjja%20Ortakoll%2C%20Rruga%20Ismail%20Kryeziu%2C%20Prizren%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Eurogoma+%E2%80%93+Prizren+Ortakoll+Lagjja+Ortakoll%2C+Rruga+Ismail+Kryeziu%2C+Prizren%2C+Kosovo&query_place_id=ChIJR2_3vzK_UxMRj0SC8kETc54",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -5280,10 +5280,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Garage%20Fita%20Fatmir%20Ibishi%2C%20Gjilan%2060000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Garage+Fita+Fatmir+Ibishi%2C+Gjilan+60000&query_place_id=ChIJAZZ6ZTeNVBMRy7byzlQqJ9M",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -5328,10 +5328,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Global%20Automotive%20Rruga%20e%20Pej%C3%ABs%20Nr.%2080%2C%20Fush%C3%AB%20Kosov%C3%AB%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Global+Automotive+Rruga+e+Pej%C3%ABs+Nr.+80%2C+Fush%C3%AB+Kosov%C3%AB%2C+Kosovo&query_place_id=ChIJ0eOahftjUxMR7_JmJ-bgp6E",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -5378,10 +5378,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Goma%20%E2%80%9EGoni%20Ari%E2%80%9C%20Brigada%20125%20N4%2C%2020000%20Prizren%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Goma+%E2%80%9EGoni+Ari%E2%80%9C+Brigada+125+N4%2C+20000+Prizren%2C+Kosovo&query_place_id=ChIJ0w2KCM6_UxMRPlsAoKL18Zc",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -5505,10 +5505,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=KIO%20Garage%20William%20Walker%2C%20Prizren%2020000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=KIO+Garage+William+Walker%2C+Prizren+20000&query_place_id=ChIJHUhxVwa_UxMREIBbS6nCJwU",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -5852,10 +5852,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Olluri%20Rruga%20e%20Bonstill%2C%20Ferizaj%2070000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Olluri+Rruga+e+Bonstill%2C+Ferizaj+70000&query_place_id=ChIJn0HK7tl_VBMRzfULGiPH3kU",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -6061,10 +6061,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Porsche%20Prishtina%20Llapnasell%C3%AB%20p.n.%2C%2010000%20Prishtin%C3%AB%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Porsche+Prishtina+Llapnasell%C3%AB+p.n.%2C+10000+Prishtin%C3%AB%2C+Kosovo&query_place_id=ChIJt5_Taa6dVBMRqBUDFIq0l-o",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -6215,10 +6215,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Ridvan%20R206%2C%20Ferizaj%2070000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Ridvan+R206%2C+Ferizaj+70000&query_place_id=ChIJ8zFU5C9_VBMRg0d-nCiUDv4",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -6259,10 +6259,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/?cid=16568289251050981449",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Scania+Trans+VVGJ%2BGGC%2C+Minator%C3%ABt+e+Trep%C3%A7%C3%ABs%2C+Mitrovic%C3%AB+40000&query_place_id=ChIJ74s4yeVFUxMRSQjRkEpj7uU",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -6303,10 +6303,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Servis%20Kurtaj%20%26%20Auto%20Klima%20EROLLS%20Prizren%2020000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Servis+Kurtaj+%26+Auto+Klima+EROLLS+Prizren+20000&query_place_id=ChIJW0bIRgeVUxMRTDjqVfHvpN8",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -6391,10 +6391,10 @@
         "snapshot": {
           "rating": null,
           "count": 19,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sonic%20Garage%20Ferizaj%20Beteja%20Ilire%2C%20Muhoc%2C%2070000%20Ferizaj%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sonic+Garage+Ferizaj+Beteja+Ilire%2C+Muhoc%2C+70000+Ferizaj%2C+Kosovo&query_place_id=ChIJibLTIg9_VBMRiC_qFd-UsZI",
           "sourceUrl": "https://sonicgarage-ks.com/",
           "sourceLabel": "Betriebswebsite: Google-Widget; Anzahl belegt, exakter Sternewert nicht ausgewiesen",
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -6435,10 +6435,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/?cid=3038677575624414976",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Stavileci+Tuning+VVR6%2B9Q5%2C+Rruga+Kollashini%2C+Mitrovic%C3%AB+40000&query_place_id=ChIJrzhQ3jxFUxMRANcJyieNKyo",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -6479,10 +6479,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Tachograf%20service%20Kienzle%20Magjistralja%20Ferizaj-Shkup%2C%202%20km%20nga%20ura%2C%20Ferizaj%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Tachograf+service+Kienzle+Magjistralja+Ferizaj-Shkup%2C+2+km+nga+ura%2C+Ferizaj&query_place_id=ChIJO7PBcNp_VBMR638RbvzJZts",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -6523,10 +6523,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Tahograf%20SH.P.K%20Zona%20Industriale%2C%20Lidhja%20e%20Pej%C3%ABs%2C%20Prishtina%2010000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Tahograf+SH.P.K+Zona+Industriale%2C+Lidhja+e+Pej%C3%ABs%2C+Prishtina+10000&query_place_id=ChIJ0ykW1rWfVBMRVWmPUwPgbKI",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -6687,10 +6687,10 @@
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Universal%20Auto%20Pjese%20%26%20Servis%20NenaTereze%2085%2C%20Gjilan%2060000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Universal+Auto+Pjese+%26+Servis+NenaTereze+85%2C+Gjilan+60000&query_place_id=ChIJFf8v_FONVBMRnECDJ_M162E",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }
@@ -6762,15 +6762,15 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJdw41w5FFUxMRap5PGCa7wZY",
+        "matchedAt": "2026-10-04T06:48:00.323Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/?cid=10863169548485369450",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Valoni-I+Nr.+1+Adem+Voca%2C+Mitrovic%C3%AB+40000&query_place_id=ChIJdw41w5FFUxMRap5PGCa7wZY",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
       }

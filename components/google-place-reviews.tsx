@@ -2,11 +2,11 @@
 import {useEffect,useRef,useState} from "react";
 import {useVisibleGooglePlace} from "./use-google-place";
 import {loadGooglePlaces} from "@/lib/google-maps-browser";
+import {workshopMapsUrl} from "@/lib/google-maps-link";
 import type {Workshop} from "@/lib/workshops";
 export function GooglePlaceReviews({workshop}:{workshop:Workshop}){
  const {ref,identity,status}=useVisibleGooglePlace(workshop.id,false),container=useRef<HTMLDivElement>(null),[widgetReady,setWidgetReady]=useState(false),[widgetFailed,setWidgetFailed]=useState(false);
- const mapsQuery=encodeURIComponent(`${workshop.name} ${workshop.address} Kosovo`);
- const mapsUrl=identity?`https://www.google.com/maps/search/?api=1&query=${mapsQuery}&query_place_id=${encodeURIComponent(identity.placeId)}`:workshop.googleRating?.mapsUrl??`https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+ const mapsUrl=workshopMapsUrl(workshop,identity?.placeId);
  useEffect(()=>{if(!identity||!container.current)return;let active=true,element:HTMLElement|null=null,timer:ReturnType<typeof setTimeout>|null=null;const host=container.current;
   const clearTimer=()=>{if(timer!==null)clearTimeout(timer);};
   const fail=()=>{if(active){clearTimer();setWidgetFailed(true);active=false;}};

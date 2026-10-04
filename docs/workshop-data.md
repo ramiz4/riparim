@@ -34,7 +34,7 @@ Nach Prüfung und Commit wird die Site wie üblich veröffentlicht. Der Runtime-
 ```sh
 npm run catalog:google-match
 # Nach Einrichtung des Server-Schlüssels in der sicheren Laufzeitumgebung:
-npm run catalog:google-match -- --fetch --write --limit 100
+npm run catalog:google-match -- --fetch --write --links --limit 100
 ```
 
 Ohne `--fetch` werden keinerlei API-Anfragen ausgeführt. Mit `--fetch` wird nach Name und Ort nur für bestehende veröffentlichte Werkstätten gesucht; höchstens 100 Such- und Detailabfragen je Lauf. Der Schlüssel wird ausschließlich aus `GOOGLE_PLACES_SERVER_API_KEY` gelesen und nie ausgegeben oder gespeichert. Ein Treffer braucht passende Telefonnummer, Name, Kosovo und Standort. Mehrdeutige Treffer werden nicht zugeordnet. Bei Authentifizierungs-, Quoten- oder Place-ID-Konflikten wird der Fehler mit Werkstattkennung protokolliert; API-Inhalte und Schlüssel erscheinen nicht im Bericht. Nur erfolgreich zugeordnete Place IDs und eigene Zuordnungszeitpunkte werden mit `--write` übernommen.

@@ -1,6 +1,7 @@
 import {env} from "cloudflare:workers";
 import {storage} from "./storage";
-import {verifiedGooglePlace,validGooglePlaceId,workshopIdentityHash,googlePlaceSearchRequest,normalizeWorkshopPhone,type GooglePlaceCandidate} from "@/lib/google-place-identity";
+import {verifiedGooglePlace,verifiedGooglePlaceFromMapsLink,googleMapsLinkSearchRequest,validGooglePlaceId,workshopIdentityHash,googlePlaceSearchRequest,normalizeWorkshopPhone,type GooglePlaceCandidate} from "@/lib/google-place-identity";
+import {googlePlaceIdFromMapsUrl,googleMapsCid} from "@/lib/google-maps-link";
 import type {Workshop} from "@/lib/workshops";
 
 export function googlePlacesConfiguration(){const browserKey=(env.GOOGLE_MAPS_BROWSER_API_KEY??"").trim(),serverKey=(env.GOOGLE_PLACES_SERVER_API_KEY??"").trim();return {enabled:!!browserKey&&!!serverKey,browserKey,serverKey};}
@@ -10,8 +11,13 @@ export async function resolveWorkshopGooglePlace(workshop:Workshop):Promise<stri
  const config=googlePlacesConfiguration();if(!config.enabled)return null;
  const {db}=storage(),now=Date.now(),hash=await workshopIdentityHash(workshop);
  const existing=await db.prepare("SELECT place_id,profile_hash,checked_at,retry_after FROM workshop_google_places WHERE workshop_id=?").bind(workshop.id).first<MatchRow>();
+ const linkedId=googlePlaceIdFromMapsUrl(workshop.googleRating?.mapsUrl);
+ if(linkedId){
+  if(existing?.place_id===linkedId&&existing.profile_hash===hash)return linkedId;
+  await db.prepare("INSERT INTO workshop_google_places (workshop_id,place_id,profile_hash,checked_at,retry_after) VALUES (?,?,?,?,?) ON CONFLICT(workshop_id) DO UPDATE SET place_id=excluded.place_id,profile_hash=excluded.profile_hash,checked_at=excluded.checked_at,retry_after=excluded.retry_after").bind(workshop.id,linkedId,hash,now,now+365*DAY).run();return linkedId;
+ }
  // The search improvement retries old negatives, while unchanged verified IDs stay valid.
- if(existing&&validGooglePlaceId(existing.place_id)&&now-existing.checked_at<365*DAY&&existing.profile_hash!==hash&&existing.profile_hash===await workshopIdentityHash(workshop,true))return existing.place_id;
+ if(!googleMapsCid(workshop.googleRating?.mapsUrl)&&existing&&validGooglePlaceId(existing.place_id)&&now-existing.checked_at<365*DAY&&existing.profile_hash!==hash&&existing.profile_hash===await workshopIdentityHash(workshop,true))return existing.place_id;
  if(existing?.profile_hash===hash){
   if(validGooglePlaceId(existing.place_id)&&now-existing.checked_at<365*DAY)return existing.place_id;
   if(existing.retry_after>now)return null;
@@ -24,9 +30,10 @@ export async function resolveWorkshopGooglePlace(workshop:Workshop):Promise<stri
  const reserveSearch=async()=>!!await db.prepare("INSERT INTO catalog_state (key,value) VALUES (?,'1') ON CONFLICT(key) DO UPDATE SET value=CAST(CAST(catalog_state.value AS INTEGER)+1 AS TEXT) WHERE CAST(catalog_state.value AS INTEGER)<100 RETURNING value").bind(quotaKey).first();
  try{
   let placeId:string|null=null,quotaExhausted=false;
-  for(const byName of [false,true]){
+  for(const mode of ["link","phone","name"]){
+   if(mode!=="link"&&googleMapsCid(workshop.googleRating?.mapsUrl))break;
    if(!await reserveSearch()){quotaExhausted=true;break;}
-   const response=await fetch("https://places.googleapis.com/v1/places:searchText",{method:"POST",headers:{"Content-Type":"application/json","X-Goog-Api-Key":config.serverKey,"X-Goog-FieldMask":"places.id,places.primaryType,places.displayName,places.formattedAddress,places.addressComponents,places.location,places.internationalPhoneNumber"},body:JSON.stringify(googlePlaceSearchRequest(workshop,5,byName)),signal:AbortSignal.timeout(8000)});
+   const response=await fetch("https://places.googleapis.com/v1/places:searchText",{method:"POST",headers:{"Content-Type":"application/json","X-Goog-Api-Key":config.serverKey,"X-Goog-FieldMask":"places.id,places.googleMapsUri,places.primaryType,places.displayName,places.formattedAddress,places.addressComponents,places.location,places.internationalPhoneNumber"},body:JSON.stringify(mode==="link"?googleMapsLinkSearchRequest(workshop):googlePlaceSearchRequest(workshop,5,mode==="name")),signal:AbortSignal.timeout(8000)});
    if(!response.ok)throw new Error("Google Places identity lookup unavailable");
    const body=await response.json() as {places?:GooglePlaceCandidate[]};
    const candidates=Array.isArray(body.places)?body.places:[];
@@ -38,7 +45,7 @@ export async function resolveWorkshopGooglePlace(workshop:Workshop):Promise<stri
     if(!details.ok)throw new Error("Google Places identity details unavailable");
     candidate.addressComponents=(await details.json() as GooglePlaceCandidate).addressComponents;
    }
-   placeId=verifiedGooglePlace(workshop,candidates);
+   placeId=mode==="link"?verifiedGooglePlaceFromMapsLink(workshop,candidates):verifiedGooglePlace(workshop,candidates);
    if(placeId)break;
   }
   // Persist only a Google Place ID and our own matching metadata. Never API ratings/reviews.

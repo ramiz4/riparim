@@ -4,6 +4,7 @@ import {useRouter} from "next/navigation";
 import {ArrowLeft,ChevronDown,Copy,FileCheck2,Globe,MapPin,MessageCircle,Navigation,Phone,Share2,ShieldCheck,Star} from "lucide-react";
 import {SiteHeader} from "@/components/site-header";
 import {WorkshopRatings} from "@/components/workshop-ratings";
+import {workshopMapsUrl} from "@/lib/google-maps-link";
 import {GooglePlaceReviews} from "@/components/google-place-reviews";
 import {ReviewForm} from "@/components/review-form";
 import {ModalContent} from "@/components/modal-shell";
@@ -20,7 +21,7 @@ export default function WorkshopProfile({workshop:w,directory,reviews,reviewErro
  const router=useRouter();const [reviewOpen,setReviewOpen]=useState(false),[reviewBusy,setReviewBusy]=useState(false),[myReviews,setMyReviews]=useState(false),[editing,setEditing]=useState<Visit|null>(null),[contact,setContact]=useState(false),[message,setMessage]=useState(""),[feedback,setFeedback]=useState(""),[backHref,setBackHref]=useState("/werkstaetten");
  const path=`/werkstatt/${encodeURIComponent(w.id)}`;
  const mapQuery=w.lat!==null&&w.lng!==null?`${w.lat},${w.lng}`:`${w.name} ${w.address} Kosovo`;
- const mapHref=w.googleRating?.mapsUrl??`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`;
+ const mapHref=workshopMapsUrl(w);
  const routeHref=`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(mapQuery)}`;
  const phoneHref=contactHref(w,"phone");
  const serviceLabels=[...new Set((w.serviceDetails.length?w.serviceDetails:w.services).map(service=>service.replace(/\s+laut öffentlichem Verzeichnis\.?/gi,"").replace(/\s*Konkreten Umfang direkt klären\.?/gi,"").trim()).filter(Boolean))];

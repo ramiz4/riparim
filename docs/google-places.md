@@ -1,6 +1,6 @@
 # Google-Bewertungen für Riparim
 
-Die Google-Schlüssel sind in der gehosteten Laufzeit eingerichtet. Sterne und Anzahl werden ausschließlich aktuell von Google geladen; alte Momentaufnahmen werden nicht mehr angezeigt oder zur Sortierung verwendet. 50 der 78 veröffentlichten Werkstätten sind über die Places API verifiziert und in der JSON-Quelle zugeordnet. Die übrigen 28 konnten über Name/Ort und Telefonnummer nicht eindeutig bestätigt werden und behalten einen Google-Maps-Link. Die tatsächliche Anzeige hängt zusätzlich von der verfügbaren Google-Anbindung im Browser ab.
+Die Google-Schlüssel sind in der gehosteten Laufzeit eingerichtet. Sterne und Anzahl werden ausschließlich aktuell von Google geladen; alte Momentaufnahmen werden nicht mehr angezeigt oder zur Sortierung verwendet. 55 der 78 veröffentlichten Werkstätten sind über die Places API verifiziert und in der JSON-Quelle zugeordnet. Die übrigen 23 konnten über die vorhandenen Maps-Links, Name/Ort und Telefonnummer nicht eindeutig bestätigt werden und behalten einen Google-Maps-Link. Die tatsächliche Anzeige hängt zusätzlich von der verfügbaren Google-Anbindung im Browser ab.
 
 Die zentrale Importquelle ist `data/workshops.json`; sie enthält Profile, stabile Riparim-IDs, Google-Zuordnungen und belegte Momentaufnahmen getrennt. Datenformat, Bestandsprüfung und Importbefehle stehen in `docs/workshop-data.md`. API-Inhalte werden nicht dauerhaft in Git gespeichert; ein Google-Bulkexport benötigt passende Datenrechte.
 
@@ -12,6 +12,12 @@ Die zentrale Importquelle ist `data/workshops.json`; sie enthält Profile, stabi
 4. `GOOGLE_MAPS_BROWSER_API_KEY` und `GOOGLE_PLACES_SERVER_API_KEY` als Sites-Runtime-Werte speichern und eine neue Version veröffentlichen. Keine Schlüssel in Git oder `.openai/hosting.json` aufnehmen.
 5. Für browserseitige Places-Aufrufe und das UI Kit im Cloud-Projekt geeignete niedrige Quoten setzen und die Abrechnung beobachten. Ein Abrechnungsbudget allein ist kein harter Ausgabenstopp. Die Anwendung begrenzt serverseitige Identitätssuchen unabhängig davon auf 100/Tag.
 6. Mehrere reale Profile prüfen und Zuordnungsabdeckung feststellen. Fehler oder mehrdeutige Treffer bleiben als Maps-Link verfügbar und werden nicht als fehlende Google-Bewertungen ausgegeben.
+
+## Vorhandene Google-Maps-Links als Identität
+
+Die gespeicherten Links werden zuerst ausgewertet. `query_place_id`, `place_id` und `q=place_id:…` identifizieren den Eintrag unmittelbar und benötigen keine erneute Suchanfrage. Ein CID-Link wird anhand der identischen CID im von Google zurückgegebenen Maps-Link bestätigt. Fremde Domains und Suchtext werden niemals als Place ID behandelt.
+
+Für Suchlinks wird deren vorhandene Suchanfrage einschließlich Adresse verwendet. Ein eindeutiger Treffer muss zusätzlich über Telefonnummer oder den passenden Namen und einen präzisen Standort (belegte Koordinaten, Plus Code oder mindestens zwei passende Adresswörter) bestätigt werden. Ein Suchlink allein belegt keine Identität. Bestätigte Links werden mit der Place ID gespeichert; Kontaktlink und eingebetteter Bewertungsbereich verwenden denselben Eintrag. Ein geänderter Link invalidiert den Zuordnungscache.
 
 ## Zuordnung und Darstellung
 
