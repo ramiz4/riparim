@@ -4,6 +4,7 @@ import {getAuthConfig} from "@/lib/auth/config";
 import {allowsLegacyAccess,allowsGoogleModeration,googleIdentityMatches,verifiedGoogleProfile,type LegacyLink,type SessionGrant} from "@/lib/auth/policy";
 import {storage,moderatorEmail} from "@/db/storage";
 import type {User,SupabaseClient,Session} from "@supabase/supabase-js";
+import {accountBlocked,providerBlocked} from "@/lib/auth/account-status";
 
 export type AppUser=ChatGPTUser&{provider:string;ownerKeys:string[];isModerator:boolean};
 function legacy(u:ChatGPTUser):AppUser{return {...u,provider:"ChatGPT",ownerKeys:[u.userId],isModerator:u.email.toLowerCase()===moderatorEmail()};}
@@ -13,7 +14,9 @@ export function providerAccountId(projectUrl:string,userId:string){return `supab
 // A link established during Google OAuth never upgrades password access.
 export async function linkLegacyAccount(projectUrl:string,u:User,source:"password"|"google"="password"){
  if(!u.email||!u.email_confirmed_at)return;
+ if(providerBlocked(u)||await accountBlocked(providerAccountId(projectUrl,u.id)))throw Error("ACCOUNT_DISABLED");
  const old=await getChatGPTUser();if(!old||old.email.toLowerCase()!==u.email.toLowerCase())return;
+ if(await accountBlocked(old.userId))throw Error("ACCOUNT_DISABLED");
  const db=storage().db,accountId=providerAccountId(projectUrl,u.id);
  await db.prepare("INSERT OR IGNORE INTO auth_links (account_id,legacy_owner,owner_admin,created_at,password_access) VALUES (?,?,?,?,?)").bind(accountId,old.userId,old.email.toLowerCase()===moderatorEmail()?1:0,new Date().toISOString(),source==="password"?1:0).run();
  if(source==="password")await db.prepare("UPDATE auth_links SET password_access=1 WHERE account_id=? AND legacy_owner=?").bind(accountId,old.userId).run();
@@ -26,12 +29,16 @@ async function verifiedSessionId(client:SupabaseClient,user:User,method:"passwor
 }
 
 async function enrollSession(projectUrl:string,user:User,sessionId:string,grant:{provider:"password"|"google";googleSubject?:string;moderator?:boolean;legacyAccess:boolean}){
+ if(providerBlocked(user)||await accountBlocked(providerAccountId(projectUrl,user.id)))throw Error("ACCOUNT_DISABLED");
  const db=storage().db;
  await db.prepare("DELETE FROM auth_sessions WHERE expires_at<?").bind(Date.now()).run();
- await db.prepare("INSERT INTO auth_sessions (id,account_id,revoked,legacy_access,expires_at,created_at,provider,google_subject,moderator) VALUES (?,?,0,?,?,?,?,?,?) ON CONFLICT(id) DO NOTHING").bind(sessionId,providerAccountId(projectUrl,user.id),grant.legacyAccess?1:0,Date.now()+30*86400000,new Date().toISOString(),grant.provider,grant.googleSubject??null,grant.moderator?1:0).run();
+ const accountId=providerAccountId(projectUrl,user.id);
+ await db.prepare("INSERT INTO auth_sessions (id,account_id,revoked,legacy_access,expires_at,created_at,provider,google_subject,moderator) SELECT ?,?,0,?,?,?,?,?,? WHERE NOT EXISTS (SELECT 1 FROM auth_account_status WHERE status IN ('inactive','deleted') AND (account_id=? OR account_id IN (SELECT legacy_owner FROM auth_links WHERE account_id=?))) ON CONFLICT(id) DO NOTHING").bind(sessionId,accountId,grant.legacyAccess?1:0,Date.now()+30*86400000,new Date().toISOString(),grant.provider,grant.googleSubject??null,grant.moderator?1:0,accountId,accountId).run();
+ if(await accountBlocked(accountId))throw Error("ACCOUNT_DISABLED");
 }
 
 export async function recordPasswordSession(projectUrl:string,user:User,client:SupabaseClient){
+ if(providerBlocked(user)||await accountBlocked(providerAccountId(projectUrl,user.id)))throw Error("ACCOUNT_DISABLED");
  const sessionId=await verifiedSessionId(client,user,"password");
  await linkLegacyAccount(projectUrl,user,"password");
  const link=await storage().db.prepare("SELECT legacy_owner,password_access FROM auth_links WHERE account_id=?").bind(providerAccountId(projectUrl,user.id)).first<LegacyLink>();
@@ -43,6 +50,7 @@ export async function recordGoogleSession(projectUrl:string,session:Session,clie
  // Linked account metadata or a previous Google identity cannot prove this session.
  if(!session.provider_token)throw Error("INVALID_GOOGLE_SESSION");
  const {data:{user},error}=await client.auth.getUser();if(error||!user||user.id!==session.user.id)throw Error("INVALID_GOOGLE_SESSION");
+ if(providerBlocked(user)||await accountBlocked(providerAccountId(projectUrl,user.id)))throw Error("ACCOUNT_DISABLED");
  const sessionId=await verifiedSessionId(client,user,"oauth");
  const result=await fetch("https://openidconnect.googleapis.com/v1/userinfo",{headers:{Authorization:`Bearer ${session.provider_token}`},cache:"no-store",signal:AbortSignal.timeout(8000)});
  if(!result.ok)throw Error("INVALID_GOOGLE_SESSION");
@@ -58,9 +66,10 @@ export async function recordGoogleSession(projectUrl:string,session:Session,clie
 export async function revokeCurrentSession(client:SupabaseClient){const {data}=await client.auth.getClaims();if(typeof data?.claims?.session_id==="string")await storage().db.prepare("UPDATE auth_sessions SET revoked=1 WHERE id=?").bind(data.claims.session_id).run();}
 
 export async function getAppUser():Promise<AppUser|null>{
- const c=await getAuthConfig();if(!c?.enabled){const u=await getChatGPTUser();return u?legacy(u):null;}
+ const c=await getAuthConfig();if(!c?.enabled){const u=await getChatGPTUser();return u&&!await accountBlocked(u.userId)?legacy(u):null;}
  const client=await authClient(c,true),{data:{user},error}=await client.auth.getUser();
  if(error||!user?.email||!user.email_confirmed_at)return null;
+ if(providerBlocked(user)||await accountBlocked(providerAccountId(c.projectUrl,user.id)))return null;
  const id=providerAccountId(c.projectUrl,user.id),claims=await client.auth.getClaims(),sessionId=claims.data?.claims?.session_id;
  if(claims.error||claims.data?.claims?.sub!==user.id||typeof sessionId!=="string")return null;
  const session=await storage().db.prepare("SELECT legacy_access,provider,google_subject,moderator FROM auth_sessions WHERE id=? AND account_id=? AND revoked=0 AND expires_at>?").bind(sessionId,id,Date.now()).first<SessionGrant>();
