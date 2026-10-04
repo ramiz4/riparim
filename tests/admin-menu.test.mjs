@@ -38,7 +38,7 @@ document.addEventListener('click',event=>{
 });
 
 const root=createRoot(document.getElementById('root'));
-async function render(email,isAdmin){await act(async()=>root.render(createElement(SiteHeader,{account:{email,displayName:'Ramiz',provider:'Google'},isAdmin})));}
+async function render(email,isAdmin,provider='Google'){await act(async()=>root.render(createElement(SiteHeader,{account:{email,displayName:'Fixture account',provider},isAdmin})));}
 async function openMenu(){
  const trigger=document.querySelector('[aria-label="Benutzermenü öffnen"]');
  await act(async()=>trigger.dispatchEvent(new MouseEvent('pointerdown',{bubbles:true,cancelable:true,button:0})));
@@ -46,7 +46,7 @@ async function openMenu(){
 }
 
 try{
- for(const email of ['ramiz4@gmx.de','ramiz.loki@gmx.de']){
+ for(const email of ['first-admin@example.test','second-admin@example.test']){
   await render(email,true);
   for(const [label,path] of [['Verwaltung','/verwaltung'],['Bewertungen prüfen','/verwaltung/bewertungen']]){
    for(const input of ['click','Enter']){
@@ -88,9 +88,9 @@ try{
   assert.equal(documents.length,before+1,`${input} on ${link.textContent} must load the destination when the client router stalls`);
   assert.equal(documents.at(-1),new URL(link.href).pathname);
  }
- for(const email of ['ramiz4@gmx.de','ramiz.loki@gmx.de']){
+ for(const email of ['first-admin@example.test','second-admin@example.test']){
   for(const [Page,active] of [[AdminPanel,'workshops'],[AdminReviews,'reviews'],[AdminUsers,'users'],[AuthSetup,'login']]){
-   await act(async()=>root.render(createElement(Page,{account:{email,displayName:'Ramiz',provider:'Google'}})));
+   await act(async()=>root.render(createElement(Page,{account:{email,displayName:'Fixture account',provider:'Google'}})));
    const navigation=document.querySelector('nav[aria-label="Verwaltung"]');
    assert(navigation,`${active} includes the shared admin navigation`);
    assert.equal(navigation.querySelectorAll('[aria-current="page"]').length,1);
@@ -109,6 +109,22 @@ try{
   }
  }
  assert.deepEqual(routerAttempts,[],'all admin section links work independently of the client router');
+ const originalFetch=globalThis.fetch,logoutRequests=[];
+ try{
+  // A retryable response avoids jsdom's unimplemented document navigation;
+  // the auth route suite separately verifies successful session revocation.
+  globalThis.fetch=async(url,options)=>{logoutRequests.push({url,options});return new Response(null,{status:503});};
+  for(const provider of ['Google','E-Mail']){
+   await render('logout@example.test',false,provider);await openMenu();
+   const logout=[...document.querySelectorAll('[role="menuitem"]')].find(node=>node.textContent==='Abmelden');
+   const requestsBefore=logoutRequests.length,documentsBefore=documents.length;
+   await act(async()=>logout.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,button:0})));
+   assert.equal(logoutRequests.length,requestsBefore+1,`${provider} logout must revoke its app session through the auth API`);
+   assert.equal(logoutRequests.at(-1).url,'/api/auth/logout');assert.equal(logoutRequests.at(-1).options.method,'POST');
+   assert.equal(documents.length,documentsBefore,`${provider} logout must not use the ChatGPT sign-out endpoint`);
+   await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));
+  }
+ }finally{globalThis.fetch=originalFetch;}
  console.log('Admin navigation: both accounts, all four pages, mouse/keyboard, shortcuts, active section and customer visibility passed');
 }finally{
  await act(async()=>root.unmount());
