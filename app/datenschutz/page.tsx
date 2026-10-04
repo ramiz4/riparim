@@ -1,14 +1,16 @@
 import type {Metadata} from "next";
-import Link from "next/link";
-import {Brand} from "@/components/brand";
+import {getAppUser,getAdminUser} from "@/app/auth";
+import {SiteHeader} from "@/components/site-header";
 import {DirectoryFooter} from "@/components/directory-footer";
 import "./privacy.css";
 
+export const dynamic="force-dynamic";
 export const metadata:Metadata={title:"Datenschutz · Riparim",description:"Informationen zur Anmeldung, Bewertungen, privaten Besuchsnachweisen und Google-Diensten bei Riparim."};
 
-export default function PrivacyPage(){
+export default async function PrivacyPage(){
+ const user=await getAppUser(),admin=await getAdminUser(user);
  return <>
-  <header className="header wrap privacy-header"><Brand/><Link href="/">Zur Startseite</Link></header>
+  <SiteHeader account={user?{email:user.email,displayName:user.displayName,provider:user.provider}:null} isAdmin={!!admin?.isModerator}/>
   <main className="privacy-page">
    <h1>Datenschutz bei Riparim</h1>
    <p className="privacy-date">Stand: 4. Oktober 2026</p>

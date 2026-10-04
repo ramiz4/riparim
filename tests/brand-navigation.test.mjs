@@ -49,7 +49,7 @@ window.addEventListener('click',event=>{
 });
 
 const root=createRoot(document.getElementById('root'));
-const routes=['/anmelden?weiter=%2Fwerkstatt%2Ffixture#formular','/registrieren?weiter=%2Fwerkstaetten','/werkstaetten?ort=prizren&leistung=diagnose-elektronik','/werkstatt/fixture?suche=%2Fwerkstaetten#bewerten','/?besuche=1#nachweise','/'];
+const routes=['/anmelden?weiter=%2Fwerkstatt%2Ffixture#formular','/registrieren?weiter=%2Fwerkstaetten','/werkstaetten?ort=prizren&leistung=diagnose-elektronik','/werkstatt/fixture?suche=%2Fwerkstaetten#bewerten','/?besuche=1#nachweise','/betrieb?werkstatt=fixture','/verwaltung','/verwaltung/betriebe','/einstellungen','/datenschutz','/'];
 let checks=0;
 try{
  for(const [caller,Component,props] of [['header',SiteHeader,{account:null}],['footer',DirectoryFooter,{}]]){
