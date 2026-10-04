@@ -48,12 +48,13 @@ export async function currentGoogleProfile(placeId:string,browserKey:string):Pro
 type MapInstance=object;
 type MapLibrary={Map:new(element:HTMLElement,options:Record<string,unknown>)=>MapInstance};
 type MarkerLibrary={AdvancedMarkerElement:new(options:Record<string,unknown>)=>{map:MapInstance|null}};
-export async function showConfirmedGoogleMap(element:HTMLElement,profile:Pick<LiveGoogleProfile,"placeId"|"location">,browserKey:string,title:string){
+export async function showConfirmedGoogleMap(element:HTMLElement,profile:Pick<LiveGoogleProfile,"placeId"|"location">,browserKey:string,title:string,appearance:{theme:"light"|"dark";signal?:AbortSignal}={theme:"light"}){
  if(!profile.location)throw Error("Google location unavailable");
  await loadGooglePlaces(browserKey);
  const maps=(window as GoogleWindow).google!.maps!;
  const [mapLibrary,markerLibrary]=await Promise.all([maps.importLibrary("maps"),maps.importLibrary("marker")]) as unknown as [MapLibrary,MarkerLibrary];
- const map=new mapLibrary.Map(element,{center:profile.location,zoom:16,mapId:"DEMO_MAP_ID",mapTypeControl:false,streetViewControl:false,gestureHandling:"cooperative"});
+ if(appearance.signal?.aborted)throw new DOMException("Map loading cancelled","AbortError");
+ const map=new mapLibrary.Map(element,{center:profile.location,zoom:16,mapId:"DEMO_MAP_ID",colorScheme:appearance.theme==="dark"?"DARK":"LIGHT",mapTypeControl:false,streetViewControl:false,gestureHandling:"cooperative"});
  const marker=new markerLibrary.AdvancedMarkerElement({map,position:profile.location,title});
  return ()=>{marker.map=null;element.replaceChildren();};
 }

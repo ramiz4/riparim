@@ -1,6 +1,7 @@
 "use client";
 /* eslint-disable @next/next/no-img-element -- Google photos use fresh provider references; avoid an image optimizer persisting these resources. */
 import {useEffect,useId,useRef,useState} from "react";
+import {useTheme} from "next-themes";
 import {Camera,ChevronDown,ChevronLeft,ChevronRight,Clock3,LoaderCircle,MapPin} from "lucide-react";
 import {googleOpeningPresentation,googlePhotoUrl,type GooglePhoto,type GoogleProfileStatus,type LiveGoogleProfile} from "@/lib/google-workshop-profile";
 import {showConfirmedGoogleMap} from "@/lib/google-maps-browser";
@@ -43,15 +44,17 @@ export function WorkshopPhotos({name,profile,identity,status}:{name:string;profi
 }
 
 export function WorkshopGoogleMap({name,profile,identity,status,mapsUrl}:{name:string;profile:LiveGoogleProfile|null;identity:GoogleWorkshopIdentity|null;status:GoogleProfileStatus;mapsUrl:string}){
+ const {resolvedTheme}=useTheme();
+ const mapTheme=resolvedTheme==="dark"?"dark":"light";
  const [open,setOpen]=useState(false),[mapStatus,setMapStatus]=useState<"loading"|"ready"|"unavailable">("loading"),host=useRef<HTMLDivElement>(null);
  const placeId=profile?.placeId,lat=profile?.location?.lat,lng=profile?.location?.lng,browserKey=identity?.browserKey;
  useEffect(()=>{
   if(!open||!host.current||!placeId||lat==null||lng==null||!browserKey)return;
-  let active=true,dispose:(()=>void)|undefined;
+  let active=true,dispose:(()=>void)|undefined;const controller=new AbortController();
   const element=host.current;
-  void showConfirmedGoogleMap(element,{placeId,location:{lat,lng}},browserKey,name).then(cleanup=>{if(!active){cleanup();return;}dispose=cleanup;setMapStatus("ready");}).catch(()=>{if(active)setMapStatus("unavailable");});
-  return()=>{active=false;dispose?.();};
- },[open,placeId,lat,lng,browserKey,name]);
+  void showConfirmedGoogleMap(element,{placeId,location:{lat,lng}},browserKey,name,{theme:mapTheme,signal:controller.signal}).then(cleanup=>{if(!active){cleanup();return;}dispose=cleanup;setMapStatus("ready");}).catch(()=>{if(active)setMapStatus("unavailable");});
+  return()=>{active=false;controller.abort();dispose?.();};
+ },[open,placeId,lat,lng,browserKey,name,mapTheme]);
  const unavailable=mapStatus==="unavailable"||status==="unavailable"||status==="ready"&&!profile?.location;
  return <details className="profile-map" onToggle={event=>{const expanded=event.currentTarget.open;setOpen(expanded);if(expanded)setMapStatus("loading");}}><summary><span><MapPin size={16}/>Karte anzeigen</span><ChevronDown size={17}/></summary>{open&&<>{!unavailable&&<div ref={host} className="profile-google-map" role="region" aria-label={`Karte: ${name}`} data-google-place-id={profile?.placeId}/>}<p className="help" role="status">{unavailable?"Die Karte konnte nicht geladen werden.":mapStatus!=="ready"?"Karte wird geladen …":null}</p>{unavailable&&<a className="text-action" href={mapsUrl} target="_blank" rel="noopener noreferrer">Standort auf Google Maps öffnen</a>}</>}</details>;
 }

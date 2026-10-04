@@ -1,3 +1,4 @@
 .logo{display:block;width:170px;height:40px;object-fit:cover;object-position:center}
+:global(.dark) .logo{filter:brightness(0) invert(1)}
 @media(max-width:720px){.logo{width:145px;height:35px}}
 @media(max-width:380px){.logo{width:135px;height:32px}}
