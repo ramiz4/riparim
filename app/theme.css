@@ -48,11 +48,12 @@ html.dark {
 .theme-switch[data-slot=switch]:hover { border-color: #9fc7bb; box-shadow: 0 0 0 3px #096e6108; }
 .theme-switch[data-slot=switch]:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
 .theme-switch [data-slot=switch-thumb] {
-  width: 28px; height: 28px; background: #fff; translate: none; transform: translateX(0);
+  /* Override the primitive's translate directly so production minification cannot combine two movements. */
+  width: 28px; height: 28px; background: #fff; translate: 0;
   box-shadow: 0 2px 5px #173b3324;
-  transition: transform .35s cubic-bezier(.22, 1, .36, 1), background .25s ease;
+  transition: translate .35s cubic-bezier(.22, 1, .36, 1), background .25s ease;
 }
-.theme-switch[data-state=checked] [data-slot=switch-thumb] { transform: translateX(28px); }
+.theme-switch[data-state=checked] [data-slot=switch-thumb] { translate: 28px; }
 .theme-switch-glyph {
   position: absolute; top: 8px; left: 4px; width: 28px; height: 28px;
   display: grid; place-items: center; pointer-events: none;
@@ -66,7 +67,7 @@ html.dark .theme-switch [data-slot=switch-thumb] { background: #0b1d20; }
 html.dark .theme-switch-glyph { transform: translateX(28px); }
 html.dark .theme-sun { opacity: 0; transform: rotate(90deg) scale(.5); }
 html.dark .theme-moon { opacity: 1; transform: rotate(0) scale(1); }
-html.dark .theme-control[data-mounted=false] [data-slot=switch-thumb] { transform: translateX(28px); }
+html.dark .theme-control[data-mounted=false] [data-slot=switch-thumb] { translate: 28px; }
 .theme-control[data-mounted=false] .theme-switch { opacity: 1; }
 .footer>a:not(.brand) { display: inline-flex; align-items: center; min-height: 44px; font-size: 13px; }
 .footer>a:not(.brand):hover { color: var(--theme-accent); }
