@@ -43,11 +43,21 @@ jobs:
       - name: Lint
         run: npm run lint
       - name: Build Cloudflare Worker
+        env:
+          BUILD_TARGET: cloudflare
         run: npm run build
         timeout-minutes: 10
       - name: Package verified Worker
-        if: inputs.upload-build == true
         run: npm run release:package
+      - name: Build Sites companion from the same checked source
+        env:
+          BUILD_TARGET: sites
+        run: |
+          node -e 'require("node:fs").rmSync("dist", {recursive:true,force:true})'
+          npm run build
+        timeout-minutes: 10
+      - name: Package verified Sites companion
+        run: node scripts/package-release.mjs sites
       - name: Retain exact build for semantic release
         if: inputs.upload-build == true
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1

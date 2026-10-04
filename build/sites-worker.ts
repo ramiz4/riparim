@@ -1,3 +1,4 @@
+import { handleMigrationRequest, migrationReadOnly } from "../lib/migration-export";
 import {withNotificationContext} from "../lib/notifications/background";
 import {processNotifications} from "../lib/notifications/outbox";
 import handler from "vinext/server/fetch-handler";
@@ -5,8 +6,10 @@ import { runWithConnectorBinding } from "../lib/connector-context";
 import type { ConnectorBinding } from "../lib/connector-contract.mjs";
 
 export default {
-  scheduled(_controller:ScheduledController,_env:Cloudflare.Env,ctx:ExecutionContext){ctx.waitUntil(processNotifications());},
-  fetch(request: Request, env: Cloudflare.Env, ctx: ExecutionContext<{ CONNECTORS?: ConnectorBinding }>) {
+  scheduled(_controller:ScheduledController,_env:Cloudflare.Env,ctx:ExecutionContext){if (!migrationReadOnly(_env)) ctx.waitUntil(processNotifications());},
+  async fetch(request: Request, env: Cloudflare.Env, ctx: ExecutionContext<{ CONNECTORS?: ConnectorBinding }>) {
+    const migration = await handleMigrationRequest(request, env);
+    if (migration) return migration;
     let binding = ctx.props?.CONNECTORS;
     // Local preview emulates the same request-scoped capability. This branch and
     // the auxiliary service binding are absent from production builds.

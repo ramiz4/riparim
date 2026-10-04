@@ -3,7 +3,7 @@ import { spawnSync } from "node:child_process";
 import { analyzeCommits } from "@semantic-release/commit-analyzer";
 import { generateNotes } from "@semantic-release/release-notes-generator";
 import config from "../release.config.mjs";
-import { assertBuildProvenance, assertReleaseContext, existingReleaseMetadata } from "../scripts/release-policy.mjs";
+import { assertBuildProvenance, assertReleaseBuildProvenance, assertReleaseContext, assertSitesReleaseAssets, existingReleaseMetadata, sitesProjectId } from "../scripts/release-policy.mjs";
 
 const commit = "a".repeat(40), sha256 = "b".repeat(64);
 const env = { GITHUB_ACTIONS: "true", GITHUB_EVENT_NAME: "push", GITHUB_REF: "refs/heads/main", GITHUB_REPOSITORY: "ramiz4/riparim", GITHUB_SHA: commit };
@@ -14,10 +14,22 @@ for (const change of [{ GITHUB_ACTIONS: undefined }, { GITHUB_EVENT_NAME: "pull_
 const provenance = { repository: env.GITHUB_REPOSITORY, commit, sha256 };
 assert.doesNotThrow(() => assertBuildProvenance(provenance, commit, sha256));
 for (const change of [{ repository: "someone/fork" }, { commit: "c".repeat(40) }, { sha256: "d".repeat(64) }]) assert.throws(() => assertBuildProvenance({ ...provenance, ...change }, commit, sha256));
+assert.doesNotThrow(() => assertReleaseBuildProvenance({ ...provenance, provider: "cloudflare" }, commit, sha256, "cloudflare"));
+const sitesProvenance = { ...provenance, provider: "sites", project_id: sitesProjectId };
+assert.doesNotThrow(() => assertReleaseBuildProvenance(sitesProvenance, commit, sha256, "sites"));
+for (const change of [{ provider: "cloudflare" }, { project_id: "different-site" }, { commit: "c".repeat(40) }, { sha256: "d".repeat(64) }]) assert.throws(() => assertReleaseBuildProvenance({ ...sitesProvenance, ...change }, commit, sha256, "sites"));
+assert.throws(() => assertReleaseBuildProvenance(sitesProvenance, commit, sha256, "cloudflare"));
+assert.throws(() => assertReleaseBuildProvenance(provenance, commit, sha256, "cloudflare"));
 
 const tag = "v1.2.3", release = { tag_name: tag, draft: false, prerelease: false, assets: [{ name: `riparim-${tag}.tar.gz`, state: "uploaded", size: 123 }, { name: `riparim-${tag}.json`, state: "uploaded", size: 100 }] };
 assert.deepEqual(existingReleaseMetadata(release, tag, commit), { version: "1.2.3", gitTag: tag, gitHead: commit });
 for (const change of [{ draft: true }, { prerelease: true }, { tag_name: "v1.2.4" }, { assets: [] }, { assets: release.assets.slice(0, 1) }]) assert.throws(() => existingReleaseMetadata({ ...release, ...change }, tag, commit));
+assert.throws(() => assertSitesReleaseAssets(release, tag, commit), "Historical Cloudflare releases remain valid there, but cannot be published to Sites.");
+const companionRelease = { ...release, assets: [...release.assets, { name: `riparim-sites-${tag}.tar.gz`, state: "uploaded", size: 321 }, { name: `riparim-sites-${tag}.json`, state: "uploaded", size: 150 }] };
+assert.doesNotThrow(() => assertSitesReleaseAssets(companionRelease, tag, commit));
+for (const assets of [companionRelease.assets.slice(0, 3), [...release.assets, { ...companionRelease.assets[2], state: "new" }, companionRelease.assets[3]], [...release.assets, companionRelease.assets[2], { ...companionRelease.assets[3], size: 0 }]]) assert.throws(() => assertSitesReleaseAssets({ ...companionRelease, assets }, tag, commit));
+const publishedAssets = config.plugins[2][1].assets;
+for (const expected of ["artifacts/riparim-worker.tar.gz", "artifacts/provenance.json", "artifacts/riparim-sites.tar.gz", "artifacts/sites-provenance.json"]) assert(publishedAssets.some(asset => asset.path === expected));
 
 for (const [message, expected] of [["fix: repair theme", "patch"], ["feat: add settings", "minor"], ["feat!: replace API", "major"], ["fix: replace API\n\nBREAKING CHANGE: remove old API", "major"], ["docs: update guide", null], ["chore: update tools", null]]) {
   const lint = spawnSync(process.execPath, ["node_modules/@commitlint/cli/cli.js"], { input: message, encoding: "utf8" });
