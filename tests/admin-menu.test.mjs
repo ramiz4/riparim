@@ -4,7 +4,7 @@ import {createRequire} from 'node:module';
 import {JSDOM,VirtualConsole} from 'jsdom';
 
 const dom=new JSDOM('<div id="root"></div>',{url:'https://riparim.test/',pretendToBeVisual:true,virtualConsole:new VirtualConsole()});
-for(const key of ['window','document','navigator','HTMLElement','Element','Node','NodeFilter','MutationObserver','CustomEvent','Event','MouseEvent','KeyboardEvent','getComputedStyle'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});
+for(const key of ['window','document','navigator','HTMLElement','HTMLFormElement','HTMLInputElement','Element','Node','NodeFilter','MutationObserver','CustomEvent','Event','MouseEvent','KeyboardEvent','getComputedStyle'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});
 globalThis.requestAnimationFrame=dom.window.requestAnimationFrame.bind(dom.window);
 globalThis.cancelAnimationFrame=dom.window.cancelAnimationFrame.bind(dom.window);
 globalThis.IS_REACT_ACT_ENVIRONMENT=true;
