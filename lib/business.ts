@@ -1,5 +1,6 @@
 import {z} from "zod";
-import {storage,moderatorEmail} from "@/db/storage";
+import {storage} from "@/db/storage";
+import {moderationAuthority} from "@/lib/auth/moderation-authority";
 import {ownerPair,type AppUser} from "@/app/auth";
 import {decodeProfile,ensureInitialCatalog,listWorkshops,validateProfile} from "@/db/directory";
 import {confirmedPublicationPlace} from "@/db/google-places";
@@ -11,10 +12,6 @@ export class BusinessError extends Error{constructor(message:string,public statu
 function activeOwnerSql(owner="?"){return `NOT EXISTS (SELECT 1 FROM auth_account_status WHERE status IN ('inactive','deleted') AND (account_id=${owner} OR account_id IN (SELECT legacy_owner FROM auth_links WHERE account_id=${owner}) OR account_id IN (SELECT account_id FROM auth_links WHERE legacy_owner=${owner})))`;}
 const activeOwner=activeOwnerSql();
 const activeBindings=(owner:string)=>[owner,owner,owner];
-function authority(user:AppUser){
- if(!user.isModerator)throw new BusinessError("Keine Berechtigung zur Freigabe.",403);
- return {sql:`(?=1 OR EXISTS (SELECT 1 FROM auth_account_roles WHERE account_id=? AND role='admin')) AND ${activeOwner}`,values:[moderatorEmail()&&user.email.toLowerCase()===moderatorEmail()?1:0,user.userId,...activeBindings(user.userId)]};
-}
 function view(row:Record<string,unknown>,kind:"claim"|"change"):BusinessRequest{
  return {id:String(row.id),workshopId:String(row.workshop_id),workshopName:String(row.workshop_name??row.workshop_id),owner:String(row.owner),status:String(row.status),moderatorNote:String(row.moderator_note),revision:Number(row.revision),createdAt:String(row.created_at),...(kind==="claim"?{evidence:String(row.evidence),evidenceLinks:claimSchema.shape.evidenceLinks.parse(JSON.parse(String(row.evidence_links)))}:{profile:businessProfileSchema.parse(JSON.parse(String(row.profile))),baseUpdatedAt:String(row.base_updated_at)})};
 }
@@ -58,7 +55,7 @@ export async function requestWorkshopChange(user:AppUser,workshopId:string,body:
  return id;
 }
 export async function decideClaim(admin:AppUser,id:string,revision:number,decision:BusinessDecision,note:string){
- const db=storage().db,now=new Date().toISOString(),actor=authority(admin);
+ const db=storage().db,now=new Date().toISOString(),actor=moderationAuthority(admin);
  if(decision==="rejected"){
   const result=await db.prepare(`UPDATE workshop_claims SET status='rejected',moderator_note=?,moderated_at=?,moderated_by=?,revision=revision+1 WHERE id=? AND revision=? AND status='pending' AND ${actor.sql}`).bind(note,now,admin.userId,id,revision,...actor.values).run();
   if(!result.meta.changes)throw new BusinessError("Der Antrag wurde geändert oder du bist nicht mehr zur Freigabe berechtigt.");return;
@@ -71,7 +68,7 @@ export async function decideClaim(admin:AppUser,id:string,revision:number,decisi
  if(!results[0].meta.changes)throw new BusinessError("Das Profil ist bereits zugeordnet, das Konto ist gesperrt oder der Antrag wurde geändert.");
 }
 export async function decideChange(admin:AppUser,id:string,revision:number,decision:BusinessDecision,note:string){
- const db=storage().db,actor=authority(admin),now=new Date().toISOString();
+ const db=storage().db,actor=moderationAuthority(admin),now=new Date().toISOString();
  if(decision==="rejected"){
   const result=await db.prepare(`UPDATE workshop_changes SET status='rejected',moderator_note=?,moderated_at=?,moderated_by=?,revision=revision+1 WHERE id=? AND revision=? AND status='pending' AND ${actor.sql}`).bind(note,now,admin.userId,id,revision,...actor.values).run();
   if(!result.meta.changes)throw new BusinessError("Der Entwurf wurde bereits geändert.");return;

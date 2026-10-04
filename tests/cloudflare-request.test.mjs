@@ -33,6 +33,8 @@ const bundle = await build({
   write: false,
   define: { 'import.meta.env.DEV': 'false' },
   plugins: [{ name: 'request-auth-boundaries', setup(builder) {
+    builder.onResolve({filter:/(?:notifications\/outbox|^\.\/outbox)$/},args=>({path:args.path,namespace:'notification-fixture'}));
+    builder.onLoad({filter:/.*/,namespace:'notification-fixture'},()=>({loader:'js',contents:'export async function processNotifications(){return []; }'}));
     builder.onResolve({ filter: /^(vinext\/server\/fetch-handler|next\/headers|next\/navigation)$/ }, args => ({ path: args.path, namespace: 'fixture' }));
     builder.onLoad({ filter: /.*/, namespace: 'fixture' }, args => ({
       loader: 'js',

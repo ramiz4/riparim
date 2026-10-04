@@ -12,7 +12,7 @@ globalThis.IS_REACT_ACT_ENVIRONMENT=true;
 globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
 globalThis.fetch=async(path,options)=>{
  assert(!options?.method||options.method==='GET','navigation fixtures never mutate data');
- const fixtures={'/api/workshops?admin=1':{workshops:[]},'/api/visits?moderation=1':{visits:[],pendingCount:0,nextCursor:null},'/api/auth-settings':{config:null},'/api/users?page=1&perPage=20':{users:[],page:1,perPage:20,hasMore:false,configured:true}};
+ const fixtures={'/api/notifications':{notifications:[],nextCursor:null,configured:true},'/api/workshops?admin=1':{workshops:[]},'/api/visits?moderation=1':{visits:[],pendingCount:0,nextCursor:null},'/api/auth-settings':{config:null},'/api/users?page=1&perPage=20':{users:[],page:1,perPage:20,hasMore:false,configured:true}};
  assert(Object.hasOwn(fixtures,path),`unexpected fixture request: ${path}`);
  return new Response(JSON.stringify(fixtures[path]),{headers:{'Content-Type':'application/json'}});
 };

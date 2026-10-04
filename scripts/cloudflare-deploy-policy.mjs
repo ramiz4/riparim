@@ -15,6 +15,8 @@ export const cloudflareProduction = {
 const workerSecretNames = new Set([
   "REVIEW_MODERATOR_EMAIL",
   "SUPABASE_SECRET_KEY",
+  "RESEND_API_KEY",
+  "TRANSACTIONAL_EMAIL_FROM",
   "GOOGLE_MAPS_BROWSER_API_KEY",
   "GOOGLE_PLACES_SERVER_API_KEY",
   "EMAIL_LOGIN_ACTIVATION_PROJECT",
@@ -86,7 +88,7 @@ export function assertCloudflareDeployConfig(source, generated) {
   if (posix.normalize(source.main ?? "") !== "build/cloudflare-worker.ts" || source.d1_databases[0].migrations_dir !== "drizzle") {
     throw new Error("Production must use the owned Cloudflare request boundary and the checked-in migrations.");
   }
-  if (generated.no_bundle !== true || posix.normalize(generated.main ?? "") !== "index.js" || posix.normalize(generated.assets?.directory ?? "") !== "../client" || !isDeepStrictEqual(source.vars ?? {}, generated.vars ?? {})) {
+  if (generated.no_bundle !== true || posix.normalize(generated.main ?? "") !== "index.js" || posix.normalize(generated.assets?.directory ?? "") !== "../client" || !isDeepStrictEqual(source.vars ?? {}, generated.vars ?? {}) || !isDeepStrictEqual(source.triggers ?? {}, generated.triggers ?? {})) {
     throw new Error("Generated configuration must deploy the released Worker and client assets with the checked-in runtime variables.");
   }
 }
