@@ -11,7 +11,7 @@ const bundle=await build({entryPoints:['app/auth.ts','lib/auth/config.ts'],bundl
 await mkdir('.test-runtime/auth-ownership',{recursive:true});
 for(const file of bundle.outputFiles){await mkdir(file.path.slice(0,file.path.lastIndexOf('/')),{recursive:true});await writeFile(file.path.replace(/\.js$/,'.mjs'),file.contents);}
 const db=new DatabaseSync(':memory:');
-for(const name of ['drizzle/0002_exotic_slayback.sql','drizzle/0003_magenta_boom_boom.sql','drizzle/0004_ambiguous_morbius.sql','drizzle/0007_pink_tyrannus.sql'])db.exec(await readFile(name,'utf8'));
+for(const name of ['drizzle/0002_exotic_slayback.sql','drizzle/0003_magenta_boom_boom.sql','drizzle/0004_ambiguous_morbius.sql','drizzle/0007_pink_tyrannus.sql','drizzle/0008_stormy_blazing_skull.sql'])db.exec(await readFile(name,'utf8'));
 const d1={prepare(sql){
  const s=db.prepare(sql);
  const adapter=(values=[])=>({

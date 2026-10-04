@@ -11,7 +11,7 @@ const d1={prepare(sql){const statement=sqlite.prepare(sql);const adapter=(values
 const objects=new Map();let blockedKey=null,releaseDelete,deleteStarted;
 let failDeleteKey=null,pausePutPrefix=null,putStarted,releasePut;const listCalls=[];
 const bucket={
- async put(key,bytes,options){if(pausePutPrefix&&key.startsWith(pausePutPrefix)){pausePutPrefix=null;putStarted(key);await new Promise(resolve=>releasePut=resolve);}objects.set(key,{bytes,options});},
+ async put(key,bytes,options){if(options?.onlyIf&&pausePutPrefix&&key.startsWith(pausePutPrefix)){pausePutPrefix=null;putStarted(key);await new Promise(resolve=>releasePut=resolve);}if(options?.onlyIf&&!objects.has(key))return null;objects.set(key,{bytes,options});return {etag:key};},
  async head(key){return objects.has(key)?{key}:null;},
  async get(key){const v=objects.get(key);return v?{body:v.bytes,httpMetadata:v.options.httpMetadata}:null;},
  async delete(keys){for(const key of Array.isArray(keys)?keys:[keys]){if(key===failDeleteKey){failDeleteKey=null;throw Error('Fixture R2 deletion failure');}if(key===blockedKey){deleteStarted?.();await new Promise(r=>releaseDelete=r);blockedKey=null;}objects.delete(key);}},

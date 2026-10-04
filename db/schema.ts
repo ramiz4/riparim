@@ -25,3 +25,11 @@ export const authLinks=sqliteTable("auth_links",{accountId:text("account_id").pr
 export const authAttempts=sqliteTable("auth_attempts",{key:text("key").primaryKey(),attempts:integer("attempts").notNull().default(0),expiresAt:integer("expires_at").notNull()},table=>[index("idx_auth_attempts_expiry").on(table.expiresAt)]);
 export const authSessions=sqliteTable("auth_sessions",{id:text("id").primaryKey(),accountId:text("account_id").notNull(),revoked:integer("revoked").notNull().default(0),legacyAccess:integer("legacy_access").notNull().default(0),expiresAt:integer("expires_at").notNull(),createdAt:text("created_at").notNull(),provider:text("provider").notNull().default("password"),googleSubject:text("google_subject"),moderator:integer("moderator").notNull().default(0)},table=>[index("idx_auth_sessions_account").on(table.accountId),index("idx_auth_sessions_expiry").on(table.expiresAt)]);
 export const authAccountStatus=sqliteTable("auth_account_status",{accountId:text("account_id").primaryKey(),status:text("status").notNull(),updatedAt:text("updated_at").notNull()});
+export const authAccountRoles=sqliteTable("auth_account_roles",{accountId:text("account_id").primaryKey(),role:text("role",{enum:["admin"]}).notNull().default("admin"),assignedAt:text("assigned_at").notNull(),assignedBy:text("assigned_by").notNull()});
+export const authAccountDeletions=sqliteTable("auth_account_deletions",{
+ accountId:text("account_id").primaryKey(),userId:text("user_id").notNull(),tokenHash:text("token_hash").notNull().unique(),
+ expiresAt:integer("expires_at").notNull(),started:integer("started").notNull().default(0)
+});
+export const evidenceUploads=sqliteTable("evidence_uploads",{
+ fileKey:text("file_key").primaryKey(),owner:text("owner").notNull()
+},table=>[index("idx_evidence_uploads_owner").on(table.owner)]);
