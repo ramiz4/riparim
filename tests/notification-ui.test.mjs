@@ -1,0 +1,48 @@
+import assert from 'node:assert/strict';
+import {mkdir,writeFile} from 'node:fs/promises';
+import {createRequire} from 'node:module';
+import {JSDOM,VirtualConsole} from 'jsdom';
+const dom=new JSDOM('<div id="root"></div>',{url:'https://riparim.example.test/verwaltung/bewertungen',pretendToBeVisual:true,virtualConsole:new VirtualConsole()});
+for(const key of ['window','document','navigator','HTMLElement','HTMLButtonElement','Event','MouseEvent','Node'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});globalThis.IS_REACT_ACT_ENVIRONMENT=true;
+const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
+const out='.test-runtime/notification-ui';await mkdir(out,{recursive:true});const bundle=await build({entryPoints:['components/notification-status.tsx'],outfile:out+'/ui.mjs',bundle:true,write:false,format:'esm',platform:'node',packages:'external'});await writeFile(out+'/ui.mjs',bundle.outputFiles[0].contents);
+const {createElement,act}=await import('react'),{createRoot}=await import('react-dom/client'),{NotificationStatus}=await import(new URL('../'+out+'/ui.mjs',import.meta.url));
+const item=(id,state,error,attempts=0)=>({id,visitId:'00000000-0000-4000-8000-000000000001',workshopName:'Fiktive Werkstatt',decision:'needs_more',state,attempts,nextAttemptAt:Date.now()+60000,createdAt:'2026-10-04T12:00:00Z',error,retryable:state!=='unknown'&&state!=='sending'});
+let data={notifications:[item('fixture-blocked','blocked','configuration_missing'),item('fixture-unknown','unknown','idempotency_window_expired',2)],configured:false,nextCursor:null};
+let mode='success',pending=null,forbidden=false,loadError=false;const requests=[];
+globalThis.fetch=async(url,options)=>{const method=options?.method??'GET',body=options?.body?JSON.parse(options.body):null;requests.push({url,method,body});
+ if(method==='GET'){assert(url.startsWith('/api/notifications'));if(forbidden)return Response.json({error:'Fixture permission revoked'},{status:403});if(loadError)return Response.json({error:'Fixture load failure'},{status:503});if(url.includes('cursor='))return Response.json({...data,notifications:[item('fixture-older','pending',null)],nextCursor:null});return Response.json(data);}
+ assert.equal(url,'/api/notifications');assert.equal(method,'POST');assert(['retry','dispatch'].includes(body.action));assert.deepEqual(Object.keys(body),body.action==='retry'?['action','id']:['action'],'Retry UI never sends recipient or content overrides');
+ const commit=()=>{data={...data,notifications:data.notifications.filter(item=>item.id!==body.id)};return Response.json({started:true},{status:202});};
+ if(mode==='pending')return new Promise(resolve=>pending={resolve,commit});if(mode==='failure')return Response.json({error:'Fixture unsafe retry'},{status:409});return commit();
+};
+const root=createRoot(document.getElementById('root')),button=label=>[...document.querySelectorAll('button')].find(node=>node.textContent===label);let passed=0;
+const check=(value,label)=>{assert(value,label);passed++;};
+const click=async control=>{assert(control,'Expected status control exists');await act(async()=>{control.focus();control.click();});};
+const render=async key=>act(async()=>root.render(createElement(NotificationStatus,{refreshKey:key})));
+try{
+ loadError=true;await render(0);check(document.querySelector('[role="alert"]').textContent==='Fixture load failure','A failed outbox read announces a recoverable error');
+ loadError=false;await click(button('Versandübersicht aktualisieren'));
+ check(document.querySelector('.note').textContent.includes('noch nicht eingerichtet'),'Missing server configuration is explicit and does not undo moderation');
+ check(button('Fällige Benachrichtigungen prüfen').disabled,'Unconfigured global delivery cannot be started from the UI');
+ const entries=()=>document.querySelectorAll('.notification-entry');
+ check(entries().length===2&&entries()[0].textContent.includes('Versand blockiert')&&entries()[1].textContent.includes('Versandstatus unklar'),'The queue distinguishes blocked and uncertain delivery');
+ check(entries()[1].querySelector('button').disabled&&entries()[1].textContent.includes('sichere Wiederholungszeitraum'),'Uncertain expired events prohibit a blind resend and explain reconciliation');
+ check(entries()[0].querySelector('a').getAttribute('href').includes('/verwaltung/bewertungen?einreichung='),'Delivery diagnostics link to the correct protected review');
+ data={...data,configured:true};await click(button('Versandübersicht aktualisieren'));mode='pending';await click(entries()[0].querySelector('button'));
+ check([...document.querySelectorAll('button')].every(control=>control.disabled),'A pending retry prevents conflicting UI actions');
+ check(requests.at(-1).body.id==='fixture-blocked','Retry targets only the stored event identity');
+ await act(async()=>pending.resolve(pending.commit()));pending=null;mode='success';
+ check(document.querySelector('[role="status"]').textContent.includes('Versandprüfung gestartet')&&!document.querySelector('[role="status"]').textContent.includes('zugestellt'),'Starting retry never falsely announces delivered mail');
+ check(entries().length===1,'Accepted processing refreshes the pending inventory');
+ data={notifications:[item('fixture-failed','failed','provider_unavailable',3)],configured:true,nextCursor:'fixture-cursor'};await render(1);
+ await click(button('Weitere Versandereignisse laden'));
+ check(entries().length===2&&!button('Weitere Versandereignisse laden'),'Older events append through a bounded continuation page');
+ mode='failure';await click(entries()[0].querySelector('button'));
+ check(document.querySelector('[role="alert"]').textContent==='Fixture unsafe retry'&&entries().length===2,'Unsafe retry errors preserve visible diagnostic state');
+ forbidden=true;await click(button('Versandübersicht aktualisieren'));
+ check(entries().length===0&&document.querySelector('[role="alert"]').textContent.includes('permission revoked'),'Revoked access clears previously visible private delivery diagnostics');
+ forbidden=false;mode='success';data={notifications:[],configured:true,nextCursor:null};await render(2);
+ check(document.querySelector('.notification-panel').textContent.includes('bestätigt noch keine Zustellung'),'An empty queue explains acceptance versus final delivery');
+ console.log(JSON.stringify({notificationUiChecksPassed:passed,realEmailsSent:false}));
+}finally{await act(async()=>root.unmount());dom.window.close();}

@@ -34,6 +34,7 @@ const source = {
   account_id: cloudflareProduction.account,
   name: cloudflareProduction.worker,
   main: "build/cloudflare-worker.ts",
+  triggers: {crons:["*/5 * * * *"]},
   vars: { SITE_ORIGIN: "https://riparim.example.test" },
   d1_databases: [{ binding: "DB", database_id: cloudflareProduction.database, database_name: cloudflareProduction.databaseName, migrations_dir: "drizzle", remote: false }],
   r2_buckets: [{ binding: "BUCKET", bucket_name: cloudflareProduction.bucket, remote: false }],
@@ -45,7 +46,7 @@ for (const change of [{ GITHUB_ACTIONS: "false" }, { GITHUB_EVENT_NAME: "pull_re
 }
 assert.throws(() => assertCloudflareDeployContext(env, commit, "b".repeat(40)));
 assert.doesNotThrow(() => assertCloudflareDeployConfig(source, generated));
-for (const change of [{ name: "another-worker" }, { account_id: "wrong-account" }, { services: [{ binding: "CONNECTORS", service: "sites-connector-preview" }] }, { main: "../../app/page.tsx" }, { no_bundle: false }, { build: { command: "npm run build" } }, { vars: {} }, { assets: { directory: "../../../" } }, { env: { preview: {} } }, { d1_databases: [{ ...source.d1_databases[0], database_id: "00000000-0000-4000-8000-000000000000" }] }, { r2_buckets: [{ ...source.r2_buckets[0], bucket_name: "preview-bucket" }] }]) {
+for (const change of [{ name: "another-worker" }, { account_id: "wrong-account" }, { services: [{ binding: "CONNECTORS", service: "sites-connector-preview" }] }, { main: "../../app/page.tsx" }, { no_bundle: false }, { build: { command: "npm run build" } }, { vars: {} }, { triggers: {} }, { assets: { directory: "../../../" } }, { env: { preview: {} } }, { d1_databases: [{ ...source.d1_databases[0], database_id: "00000000-0000-4000-8000-000000000000" }] }, { r2_buckets: [{ ...source.r2_buckets[0], bucket_name: "preview-bucket" }] }]) {
   assert.throws(() => assertCloudflareDeployConfig(source, { ...generated, ...change }));
 }
 assert.throws(() => assertCloudflareDeployConfig({ ...source, main: "build/sites-worker.ts" }, generated));
@@ -53,6 +54,7 @@ for (const invalid of ["fixture-private-value", "[]", "null", '{"GOOGLE_PLACES_S
   assert.throws(() => parseWorkerSecrets(invalid), error => !error.message.includes("fixture-private-value"));
 }
 assert.deepEqual(parseWorkerSecrets('{"GOOGLE_PLACES_SERVER_API_KEY":"fixture-private-value"}'), { GOOGLE_PLACES_SERVER_API_KEY: "fixture-private-value" });
+assert.deepEqual(parseWorkerSecrets('{"RESEND_API_KEY":"re_fixture_key","TRANSACTIONAL_EMAIL_FROM":"Riparim <fixture@example.test>"}'), {RESEND_API_KEY:"re_fixture_key",TRANSACTIONAL_EMAIL_FROM:"Riparim <fixture@example.test>"});
 assert.equal(parseWorkerSecrets(""), null);
 
 // Small USTAR fixtures let the real platform tar tool inspect malicious entry

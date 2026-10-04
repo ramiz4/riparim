@@ -33,6 +33,7 @@ export async function deleteAccount(auth:NonNullable<Awaited<ReturnType<typeof g
   db.prepare("DELETE FROM auth_sessions WHERE account_id IN (?,?)").bind(...owners),
   db.prepare("DELETE FROM auth_account_roles WHERE account_id=?").bind(accountId),
   db.prepare("DELETE FROM auth_account_deletions WHERE account_id=?").bind(accountId),
+  db.prepare("DELETE FROM review_notifications WHERE owner IN (?,?)").bind(...owners),
   db.prepare("DELETE FROM workshop_owners WHERE account_id IN (?,?)").bind(...owners),
   db.prepare("DELETE FROM workshop_claims WHERE owner IN (?,?)").bind(...owners),
   db.prepare("DELETE FROM workshop_changes WHERE owner IN (?,?)").bind(...owners),

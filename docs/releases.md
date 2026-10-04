@@ -39,9 +39,11 @@ D1 und R2 werden vor dem ersten Deployment angelegt und ihre exakten Bindings ge
 Das GitHub-Environment `production` erlaubt ausschließlich den Branch `main`. Darin werden zwei Secrets eingerichtet:
 
 - `CLOUDFLARE_API_TOKEN`: separater Account-Token für automatisierte Deployments und D1-Migrationen. Für die erste Worker-Erstellung sind Workers Product Admin sowie D1 Write nötig; nach dem Bootstrap kann der Workers-Zugriff auf Editor für diesen Worker reduziert werden. Keine DNS-, Billing-, R2-Objekt- oder Token-Management-Rechte sind für diesen Workflow nötig.
-- `CLOUDFLARE_WORKER_SECRETS`: JSON mit mindestens `REVIEW_MODERATOR_EMAIL` sowie den benötigten Google-Schlüsseln, `SUPABASE_SECRET_KEY` für die Benutzerverwaltung oder einmaligen Aktivierungswerten. Der Moderatorwert muss dem bestehenden Riparim-Admin entsprechen. Deployment-Tokens gehören nicht in dieses Laufzeit-JSON.
+- `CLOUDFLARE_WORKER_SECRETS`: JSON mit mindestens `REVIEW_MODERATOR_EMAIL` sowie den benötigten Google-Schlüsseln, `SUPABASE_SECRET_KEY` für Benutzerverwaltung und bestätigte Benachrichtigungsempfänger, `RESEND_API_KEY` und `TRANSACTIONAL_EMAIL_FROM` für transaktionale Bewertungsnachrichten oder einmaligen Aktivierungswerten. Der Moderatorwert muss dem bestehenden Riparim-Admin entsprechen. Deployment-Tokens gehören nicht in dieses Laufzeit-JSON.
 
 Die Secrets dürfen nicht als Repository-Secrets gespeichert werden: PR-Workflows erhalten keinen Zugriff auf das geschützte Produktions-Environment. Die Codex-MCP-Anmeldung bleibt davon getrennt. Anwendungsgeheimnisse werden mit `--secrets-file` gemeinsam mit dem Worker hochgeladen, kurzfristig in einer Datei mit Modus `0600` gehalten und anschließend entfernt. Eine spätere Veröffentlichung ohne neue Werte bewahrt bestehende Worker-Secrets.
+
+Die Anwendung verarbeitet fällige Bewertungsnachrichten alle fünf Minuten über den Scheduled-Handler und den Cron aus `wrangler.jsonc`. Die Deployment-Prüfung stellt sicher, dass dieser Zeitplan im veröffentlichten Artefakt erhalten bleibt.
 
 `SITE_ORIGIN` liegt als normale Variable in der Wrangler-Konfiguration. Das erste Ziel ist die Workers-Adresse; Custom Domains und Routes werden durch diesen PR nicht umgestellt. Fehlende CI-Zugangsdaten lassen den Deploy-Job ausdrücklich scheitern. Lokale `wrangler deploy --dry-run`-Prüfungen validieren Paket und Bindings, aber keine Remote-Berechtigungen.
 
