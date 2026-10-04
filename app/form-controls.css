@@ -1,0 +1,75 @@
+/* Unlayered rules keep shared controls intact under the app's button reset. */
+[data-slot=checkbox], [data-slot=switch] {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  border: 1px solid var(--input);
+  padding: 0;
+  cursor: pointer;
+  vertical-align: middle;
+}
+[data-slot=checkbox] {
+  width: 19px;
+  height: 19px;
+  justify-content: center;
+  border: 1.5px solid var(--muted-foreground);
+  border-radius: 4px;
+  background: var(--background);
+  color: var(--foreground);
+}
+[data-slot=checkbox-indicator] { display: grid; place-items: center; }
+[data-slot=checkbox-indicator] svg { width: 14px; height: 14px; }
+[data-slot=checkbox-mixed],
+[data-slot=checkbox-indicator][data-state=indeterminate] [data-slot=checkbox-check] { display: none; }
+[data-slot=checkbox-indicator][data-state=indeterminate] [data-slot=checkbox-mixed] { display: block; }
+[data-slot=switch] {
+  width: 38px;
+  height: 22px;
+  padding: 2px;
+  border-radius: 999px;
+  background: var(--input);
+  transition: background .15s, border-color .15s;
+}
+[data-slot=switch-thumb] {
+  display: block;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--primary-foreground);
+  box-shadow: 0 1px 3px #233a2520;
+  pointer-events: none;
+  /* Use one movement property; translate and transform otherwise accumulate. */
+  transform: none;
+  translate: 0;
+  transition: translate .15s;
+}
+[data-slot=switch][data-state=checked] [data-slot=switch-thumb] { translate: 16px; }
+[data-slot=switch][data-size=sm] { width: 30px; height: 18px; }
+[data-slot=switch][data-size=sm] [data-slot=switch-thumb] { width: 12px; height: 12px; }
+[data-slot=switch][data-size=sm][data-state=checked] [data-slot=switch-thumb] { translate: 12px; }
+[data-slot=checkbox]:is([data-state=checked], [data-state=indeterminate]),
+[data-slot=switch][data-state=checked] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+}
+[data-slot=checkbox]:focus-visible, [data-slot=switch]:focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 3px;
+}
+[data-slot=checkbox][aria-invalid=true], [data-slot=switch][aria-invalid=true] {
+  border-color: var(--destructive);
+}
+[data-slot=checkbox][aria-invalid=true]:focus-visible,
+[data-slot=switch][aria-invalid=true]:focus-visible {
+  outline-color: var(--destructive);
+}
+[data-slot=checkbox]:disabled, [data-slot=switch]:disabled {
+  cursor: not-allowed;
+  opacity: .5;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-slot=switch], [data-slot=switch-thumb] { transition: none; }
+}
