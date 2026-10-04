@@ -5,6 +5,18 @@ const pageSize = 5;
 type SchemaEntry = { name: string; type: string; tbl_name: string; sql: string };
 type Column = { name: string; type: string; notnull: number; dflt_value: string | null; pk: number };
 
+export function stampReleaseCommit(result: Response) {
+  const commit = typeof __RIPARIM_RELEASE_COMMIT__ === "string" && /^[a-f0-9]{40}$/.test(__RIPARIM_RELEASE_COMMIT__) ? __RIPARIM_RELEASE_COMMIT__ : null;
+  const name = "X-Riparim-Release-Commit";
+  if (result.headers.get(name) === commit) return result;
+  const headers = new Headers(result.headers);
+  if (commit) headers.set(name, commit);
+  else headers.delete(name);
+  // Reuse the body without buffering or teeing it; redirects and session
+  // cookies retain their original response contract.
+  return new Response(result.body, { status: result.status, statusText: result.statusText, headers });
+}
+
 export function migrationReadOnly(env: Cloudflare.Env) {
   // Expiring the export credential must never silently reopen the old writer.
   return env.MIGRATION_READ_ONLY === "true";
@@ -63,9 +75,9 @@ export async function handleMigrationRequest(request: Request, env: Cloudflare.E
   const url = new URL(request.url);
   if (url.pathname !== prefix) {
     if (!migrationReadOnly(env)) return null;
-    return new Response("Riparim wird gerade auf den neuen Server übernommen. Bitte versuche es später erneut.", {
-      status: 503, headers: { "Cache-Control": "no-store", "Retry-After": "300", "X-Riparim-Migration-Read-Only": "true", "X-Riparim-Release-Commit": __RIPARIM_RELEASE_COMMIT__ },
-    });
+    return stampReleaseCommit(new Response("Riparim wird gerade auf den neuen Server übernommen. Bitte versuche es später erneut.", {
+      status: 503, headers: { "Cache-Control": "no-store", "Retry-After": "300", "X-Riparim-Migration-Read-Only": "true" },
+    }));
   }
   // No cookies, native identity, admin UI, cross-origin grant or caller SQL.
   if (!await authorized(request, env)) return response({ error: "Export unavailable" }, 404);

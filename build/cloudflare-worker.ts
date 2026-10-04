@@ -1,4 +1,4 @@
-import { handleMigrationRequest, migrationReadOnly } from "../lib/migration-export";
+import { handleMigrationRequest, migrationReadOnly, stampReleaseCommit } from "../lib/migration-export";
 import { withNotificationContext } from "../lib/notifications/background";
 import { processNotifications } from "../lib/notifications/outbox";
 import handler from "vinext/server/fetch-handler";
@@ -10,7 +10,7 @@ export default {
   },
   async fetch(request: Request, env: Cloudflare.Env, ctx: ExecutionContext) {
     const migration = await handleMigrationRequest(request, env);
-    if (migration) return migration;
-    return withNotificationContext(ctx, () => handler.fetch(stripSitesIdentityHeaders(request), env, ctx));
+    const result = migration ?? await withNotificationContext(ctx, () => handler.fetch(stripSitesIdentityHeaders(request), env, ctx));
+    return stampReleaseCommit(result);
   },
 };

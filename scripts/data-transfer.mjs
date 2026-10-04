@@ -170,7 +170,7 @@ function sameRow(left, right) {
 function isoTimestamp(value) {
   return typeof value === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z$/.test(value) && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 19) === value.slice(0, 19);
 }
-function retainCacheMetadata(table, row, match, source, target) {
+export function retainCacheMetadata(table, row, match, source, target) {
   const sourceWorkshops = source.tables.find((item) => item.name === "workshops")?.rows ?? [];
   const targetWorkshops = target.tables.find((item) => item.name === "workshops")?.rows ?? [];
   if (table.name === "catalog_state") {
