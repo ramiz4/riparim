@@ -75,7 +75,7 @@ try{
  assert.deepEqual(routerAttempts,['/?besuche=1'],'the control link exercises the real client-router boundary');
  assert.equal(documents.length,before,'the stalled client-router control cannot load a document');
  routerAttempts.length=0;
- const sections=[['Werkstätten','/verwaltung','workshops'],['Bewertungen prüfen','/verwaltung/bewertungen','reviews'],['Benutzer','/verwaltung/benutzer','users'],['Login & Registrierung','/verwaltung/anmeldung','login']];
+ const sections=[['Werkstätten','/verwaltung','workshops'],['Bewertungen prüfen','/verwaltung/bewertungen','reviews'],['Benutzer','/verwaltung/benutzer','users'],['Betriebe','/verwaltung/betriebe','business'],['Login & Registrierung','/verwaltung/anmeldung','login']];
  async function activate(link,input){
   const before=documents.length;
   await act(async()=>{
@@ -125,7 +125,7 @@ try{
    await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));
   }
  }finally{globalThis.fetch=originalFetch;}
- console.log('Admin navigation: both accounts, all four pages, mouse/keyboard, shortcuts, active section and customer visibility passed');
+ console.log('Admin navigation: both accounts, all existing pages and business link, mouse/keyboard, shortcuts, active section and customer visibility passed');
 }finally{
  await act(async()=>root.unmount());
  dom.window.close();
