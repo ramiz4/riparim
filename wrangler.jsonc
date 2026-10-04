@@ -1,0 +1,32 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "riparim",
+  "account_id": "ec181b3a61c7c3da13910600953fc3ea",
+  "main": "./build/cloudflare-worker.ts",
+  "compatibility_date": "2026-05-15",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "preview_urls": false,
+  "vars": {
+    "SITE_ORIGIN": "https://riparim.riparim-ec181b.workers.dev"
+  },
+  "secrets": {
+    "required": ["REVIEW_MODERATOR_EMAIL"]
+  },
+  "d1_databases": [{
+    "binding": "DB",
+    "database_name": "riparim-production",
+    "database_id": "b395ea3a-5316-4b0b-bdee-533bdb68d6a0",
+    "migrations_dir": "drizzle",
+    "remote": false
+  }],
+  "r2_buckets": [{
+    "binding": "BUCKET",
+    "bucket_name": "riparim-evidence-production",
+    "remote": false
+  }],
+  "observability": {
+    "enabled": true,
+    "traces": {"enabled": true}
+  }
+}

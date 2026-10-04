@@ -65,22 +65,17 @@ export default defineConfig(async ({ command }) => {
       sites({ mockAuth: !managedLinux }),
       connectorPreview(),
       cloudflare({
+        configPath: "./wrangler.jsonc",
         viteEnvironment: { name: "rsc", childEnvironments: ["ssr"] },
         inspectorPort: false,
-        config: {
+        // A function replaces binding arrays. Object overrides concatenate
+        // them, which would mix the production IDs with local placeholders.
+        config: command === "serve" ? (config) => ({
+          ...config,
           ...localBindingConfig,
-          ...(command === "serve"
-            ? {
-                services: [
-                  {
-                    binding: "CONNECTORS",
-                    service: "sites-connector-preview",
-                    entrypoint: "ConnectorPreview",
-                  },
-                ],
-              }
-            : {}),
-        },
+          vars: { ...config.vars, SITE_ORIGIN: process.env.SITE_ORIGIN ?? "http://127.0.0.1:5174" },
+          services: [{ binding: "CONNECTORS", service: "sites-connector-preview", entrypoint: "ConnectorPreview" }],
+        }) : undefined,
         ...(command === "serve"
           ? {
               auxiliaryWorkers: [
