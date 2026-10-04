@@ -2,7 +2,8 @@ import {getAdminUser,providerAccountId} from "@/app/auth";
 import {getAuthAdmin} from "@/lib/auth/admin";
 import {blockAccount} from "@/lib/auth/account-status";
 import {changeAccountRole} from "@/lib/auth/roles";
-import {storage,moderatorEmail,cleanupVisitEvidence} from "@/db/storage";
+import {storage,moderatorEmail} from "@/db/storage";
+import {deleteAccount} from "@/lib/auth/delete-account";
 import {json,readJson,sameOrigin} from "@/lib/http";
 import {protectedUser,userView,validUserId,parseUserFields,providerFailure,notConfigured} from "@/lib/admin-users";
 import type {AdminUserAttributes} from "@supabase/supabase-js";
@@ -50,22 +51,7 @@ export async function DELETE(request:Request,{params}:Context){
   const auth=await getAuthAdmin();if(!auth)return notConfigured();
   const {data,error}=await auth.client.auth.admin.getUserById(id);if(error||!data.user)return providerFailure(error);
   if(protectedUser(data.user,admin,auth.projectUrl))return json({error:"Das Administratorkonto kann nicht gelöscht werden."},403);
-  const accountId=providerAccountId(auth.projectUrl,id),db=storage().db;
-  const link=await db.prepare("SELECT legacy_owner FROM auth_links WHERE account_id=?").bind(accountId).first<{legacy_owner:string}>();
-  await blockAccount(accountId,"deleted");
-  if(link)await blockAccount(link.legacy_owner,"deleted");
-  // Retain blocked accounts and visit rows on failure so the full cleanup can be retried.
-  const owners:[string,string]=[accountId,link?.legacy_owner??accountId];
-  await db.prepare("UPDATE visits SET status='deleting',revision=revision+1 WHERE owner IN (?,?)").bind(...owners).run();
-  const visits=await db.prepare("SELECT id,owner FROM visits WHERE owner IN (?,?)").bind(...owners).all<{id:string;owner:string}>();
-  for(const visit of visits.results)await cleanupVisitEvidence(visit.owner,visit.id);
-  await db.prepare("DELETE FROM visits WHERE owner IN (?,?) AND status='deleting'").bind(...owners).run();
-  await db.batch([
-   db.prepare("DELETE FROM auth_sessions WHERE account_id=?").bind(accountId),
-   db.prepare("DELETE FROM auth_account_roles WHERE account_id=?").bind(accountId),
-   db.prepare("DELETE FROM auth_links WHERE account_id=?").bind(accountId)
-  ]);
-  const deleted=await auth.client.auth.admin.deleteUser(id);if(deleted.error)throw Error("PROVIDER_DELETE_FAILED");
+  await deleteAccount(auth,id);
   return json({ok:true});
  }catch{return json({error:"Der Benutzer konnte nicht vollständig gelöscht werden. Eine begonnene Löschung hält das Konto gesperrt. Bitte versuche es erneut."},503);}
 }

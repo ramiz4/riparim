@@ -4,6 +4,7 @@ import { getAdminUser, getAppUser } from "@/app/auth";
 import { DirectoryFooter } from "@/components/directory-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeSettings } from "@/components/theme-settings";
+import { AccountSettings } from "@/components/account-settings";
 import "./settings.css";
 
 export const metadata: Metadata = { title: "Einstellungen · Riparim" };
@@ -20,6 +21,7 @@ export default async function SettingsPage() {
         <Link className="settings-back" href="/werkstaetten">Zur Werkstattsuche</Link>
         <h1>Einstellungen</h1>
         <ThemeSettings />
+        <AccountSettings />
       </main>
       <DirectoryFooter />
     </>

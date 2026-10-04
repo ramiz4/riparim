@@ -1,7 +1,8 @@
 import {getAuthConfig,safeReturnPath,siteOrigin} from "@/lib/auth/config";
 import {authClient} from "@/lib/auth/client";
-import {recordGoogleSession} from "@/app/auth";
+import {getAppUser,recordGoogleSession,providerAccountId} from "@/app/auth";
 import {cookies} from "next/headers";
+import {issueDeletionGrant} from "@/lib/auth/deletion-grant";
 import type {SupabaseClient} from "@supabase/supabase-js";
 
 export const dynamic="force-dynamic";
@@ -20,7 +21,20 @@ export async function GET(request:Request){
    client=await authClient(c);
    const {data,error}=await client.auth.exchangeCodeForSession(code);
    if(error||!data.session)throw Error("INVALID_GOOGLE_CODE");
+   const deletionFlow=cookieStore.get("riparim-deletion-flow")?.value;
+   cookieStore.set("riparim-deletion-flow","",{httpOnly:true,secure:!["localhost","127.0.0.1"].includes(new URL(request.url).hostname),sameSite:"lax",path:"/auth/bestaetigen",maxAge:0});
+   let deletion: {flow:string;accountId:string;expiresAt:number}|null=null;
+   if(deletionFlow){
+    deletion=JSON.parse(deletionFlow);
+    if(!deletion||deletion.flow!==flow||deletion.expiresAt<=Date.now()||deletion.accountId!==providerAccountId(c.projectUrl,data.session.user.id))throw Error("INVALID_DELETION_IDENTITY");
+   }
    await recordGoogleSession(c.projectUrl,data.session,client);
+   if(deletion){
+    const current=await getAppUser();
+    if(!current||current.userId!==deletion.accountId)throw Error("INVALID_DELETION_IDENTITY");
+    await issueDeletionGrant(current,c.projectUrl,data.session.user.id);
+    return redirectTo("/einstellungen");
+   }
    return redirectTo(next);
   }
   if(code||(token&&["signup","recovery"].includes(type??""))){

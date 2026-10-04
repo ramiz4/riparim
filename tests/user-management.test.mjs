@@ -28,7 +28,7 @@ for(const [kind,entryPoints] of [['routes',{collection:'app/api/users/route.ts',
 
 const db=new DatabaseSync(':memory:');
 // Include the visit table because account deletion must remove owned visits and files.
-for(const name of ['0000_handy_black_queen','0001_polite_killmonger','0002_exotic_slayback','0003_magenta_boom_boom','0004_ambiguous_morbius','0007_pink_tyrannus','0008_stormy_blazing_skull'])db.exec(await readFile(`drizzle/${name}.sql`,'utf8'));
+for(const name of ['0000_handy_black_queen','0001_polite_killmonger','0002_exotic_slayback','0003_magenta_boom_boom','0004_ambiguous_morbius','0007_pink_tyrannus','0008_stormy_blazing_skull','0009_fine_sister_grimm'])db.exec(await readFile(`drizzle/${name}.sql`,'utf8'));
 let failDatabase=false;
 let beforeRun=null;
 let beforeFirst=null;

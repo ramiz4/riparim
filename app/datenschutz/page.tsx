@@ -38,7 +38,10 @@ export default function PrivacyPage(){
    </section>
    <section aria-labelledby="privacy-deletion"><h2 id="privacy-deletion">Löschung und Speicherdauer</h2>
     <p>Einreichungen bleiben gespeichert, bis du sie unter „Meine Bewertungen“ löschst. Diese Funktion entfernt die gesamte Einreichung einschließlich Bewertung, privatem Nachweis und zugehörigen Dateien aus dem aktiven Speicher.</p>
-    <p>Die Löschung einer Einreichung und das Abmelden entfernen dein Supabase-Nutzerkonto nicht. Für Fragen zur Speicherung oder eine Bitte um Löschung deiner Kontodaten schreibe an <a href="mailto:ramizloki82@googlemail.com">ramizloki82@googlemail.com</a>.</p>
+    <p>Unter „Einstellungen“ kannst du deinen Kontonamen ändern. Die Anzeigenamen bestehender Bewertungen bleiben unverändert; du kannst sie unter „Meine Bewertungen“ bearbeiten.</p>
+    <p>Google- und E-Mail-Konten können unter „Einstellungen“ nach erneuter Identitätsbestätigung und ausdrücklicher Bestätigung gelöscht werden. Dabei entfernen wir das Supabase-Konto, alle zugeordneten Bewertungen und Besuche, private Nachweisdateien, Sitzungszuordnungen und bestätigte Verknüpfungen zu früheren ChatGPT-Einreichungen. Dein Google-Konto bleibt bestehen. Administrationszugänge benötigen vorher eine geregelte Übergabe durch die Verwaltung.</p>
+    <p>Begonnene Löschungen sperren den Zugriff sofort. Bei einem Teilfehler kannst du die Bereinigung in demselben Browser innerhalb von sieben Tagen wiederholen; danach unterstützt die Verwaltung die Fortsetzung. Dafür speichern wir eine gehashte, ausschließlich zur Löschung berechtigende Kennung und ein technisch erforderliches, geschütztes Cookie. Eine noch nicht begonnene Löschung erfordert nach zehn Minuten eine neue Identitätsbestätigung. Minimale Sperrkennungen bleiben erhalten, damit alte Sitzungen oder frühere ChatGPT-Zugänge nicht erneut Zugriff erhalten.</p>
+    <p>Die Löschung einer Einreichung und das Abmelden entfernen dein Supabase-Nutzerkonto nicht. Für Fragen zur Speicherung oder Hilfe bei der Kontolöschung schreibe an <a href="mailto:ramizloki82@googlemail.com">ramizloki82@googlemail.com</a>.</p>
    </section>
   </main>
   <DirectoryFooter/>
