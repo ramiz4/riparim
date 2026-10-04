@@ -85,10 +85,10 @@ try{
 
 const render=(component,props)=>renderToStaticMarkup(React.createElement(component,props));
 const identity={placeId,browserKey:'browser-fixture-key'},mapsUrl=links.workshopMapsUrl(workshop);
-const photoMarkup=render(details.WorkshopPhotos,{name:workshop.name,profile,identity,status:'ready',mapsUrl});
-assert(!photoMarkup.includes('<figcaption')&&photoMarkup.includes('places.googleapis.com')&&photoMarkup.includes(mapsUrl.replaceAll('&','&amp;')),'photos keep their exact Google source links without captions');
+const photoMarkup=render(details.WorkshopPhotos,{name:workshop.name,profile,identity,status:'ready'});
+assert(!photoMarkup.includes('<figcaption')&&!photoMarkup.includes('<a ')&&photoMarkup.includes('places.googleapis.com')&&photoMarkup.includes('aria-haspopup="dialog"'),'photos open an in-profile dialog instead of an external Google link');
 assert(!photoMarkup.includes('wrongWorkshop'));
-assert.equal(render(details.WorkshopPhotos,{name:workshop.name,profile:{...profile,photos:[]},identity,status:'ready',mapsUrl}),'','a photo-less business does not receive a symbolic photo');
+assert.equal(render(details.WorkshopPhotos,{name:workshop.name,profile:{...profile,photos:[]},identity,status:'ready'}),'','a photo-less business does not receive a symbolic photo');
 const zeroMarkup=render(ratings.WorkshopRatings,{workshop,googleState:{live:{...profile.rating,rating:null,count:0},status:'ready'}});
 assert(zeroMarkup.includes('Noch keine Google-Rezensionen')&&!zeroMarkup.includes('4,1'),'old Google snapshots are never a fallback');
 const failedMarkup=render(ratings.WorkshopRatings,{workshop,googleState:{live:null,status:'unavailable'}});
@@ -106,4 +106,4 @@ assert(reviewArea.indexOf('id="google-bewertungen"')<reviewArea.indexOf('profile
 const publishedMarkup=render(profilePage.default,{...props,reviews:[{display_name:'Fixture Driver',vehicle:'Fixture car',service:'Diagnose',date:'2026-10-03',rating:5,review:'Fixture published review'}]});
 const populatedReviewArea=publishedMarkup.slice(publishedMarkup.indexOf('id="bewertungen"'));
 assert(populatedReviewArea.indexOf('Fixture published review')<populatedReviewArea.indexOf('id="google-bewertungen"'),'published Riparim reviews precede the Google block in reading order');
-console.log('Workshop profiles: exact identity, live hours, Kosovo time/DST, photo source links, route/map, service evidence, review states and confirmed mobile actions passed (fictional fixtures only)');
+console.log('Workshop profiles: exact identity, live hours, Kosovo time/DST, in-profile photo dialogs, route/map, service evidence, review states and confirmed mobile actions passed (fictional fixtures only)');

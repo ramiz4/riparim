@@ -23,7 +23,7 @@ export function normalizeGoogleProfile(body:GoogleProfileResponse,placeId:string
   hours:{openNow:typeof current?.openNow==="boolean"?current.openNow:null,weekdays:weekdays.filter(value=>typeof value==="string").slice(0,7),nextOpenTime:validTimestamp(current?.nextOpenTime),nextCloseTime:validTimestamp(current?.nextCloseTime)},
   photos:(body.photos??[]).filter(p=>typeof p.name==="string"&&p.name.startsWith(`places/${placeId}/photos/`)&&/^[A-Za-z0-9_/-]+$/.test(p.name)).slice(0,3).map(p=>({resource:p.name!,mapsUrl:safeGoogleHttps(p.googleMapsUri),authors:(p.authorAttributions??[]).filter(a=>a.displayName).map(a=>({name:a.displayName!,url:safeGoogleHttps(a.uri)}))}))};
 }
-export function googlePhotoUrl(photo:GooglePhoto,browserKey:string){return `https://places.googleapis.com/v1/${photo.resource}/media?${new URLSearchParams({maxWidthPx:"1000",maxHeightPx:"700",key:browserKey})}`;}
+export function googlePhotoUrl(photo:GooglePhoto,browserKey:string,size:"preview"|"large"="preview"){return `https://places.googleapis.com/v1/${photo.resource}/media?${new URLSearchParams({maxWidthPx:size==="large"?"1600":"1000",maxHeightPx:size==="large"?"1200":"700",key:browserKey})}`;}
 export function googleRatingEmptyLabel(live:LiveGoogleRating|null|undefined,status:GoogleProfileStatus|"idle"){
  if(live?.count===0)return "Noch keine Google-Rezensionen";
  if(live)return "Keine Google-Bewertung hinterlegt";

@@ -105,8 +105,13 @@ a.profile-phone-summary{display:flex;flex-direction:row;align-items:center;gap:8
 .profile-photo-section{margin:2px 0 10px;scroll-margin-top:100px}
 .profile-photo-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .profile-photo-strip figure{min-width:0;margin:0}
-.profile-photo-strip figure>a{display:block;overflow:hidden;border-radius:11px;background:#edf3ef}
+.profile-photo-strip figure button{display:block;width:100%;padding:0;overflow:hidden;border-radius:11px;background:#edf3ef;cursor:zoom-in}
 .profile-photo-strip img{width:100%;height:195px;object-fit:cover;display:block}
+.profile-photo-viewer[data-slot=dialog-content]{display:flex;flex-direction:column;width:min(1200px,calc(100vw - 32px));max-width:calc(100vw - 32px)!important;height:min(900px,calc(100dvh - 32px));max-height:calc(100dvh - 32px);padding:56px 12px 12px;gap:0;overflow:hidden;border:1px solid #29483d;border-radius:14px;background:#10251e;color:#fff}
+.profile-photo-viewer>img{display:block;width:100%;height:100%;min-height:0;object-fit:contain}
+.profile-photo-viewer>[data-slot=dialog-close]{top:8px;right:8px;width:44px;height:44px;display:grid;place-items:center;border-radius:9px;background:#f2f7f4;color:#214533;opacity:1}
+.profile-photo-viewer>[data-slot=dialog-close]:hover{background:#dcebe2}
+.profile-photo-error{display:grid;place-items:center;flex:1;margin:0;text-align:center;padding:24px;font-size:16px;line-height:1.6}
 .profile-photo-loading{display:flex;align-items:center;gap:9px;min-height:58px;color:#667d6f;font-size:14px}
 .profile-search-match{padding:12px 15px;background:#f0f7f3;border-left:3px solid #328361;border-radius:0 8px 8px;margin:0 0 19px;overflow-wrap:anywhere}
 .profile-search-match>p{font-size:14px;line-height:1.6;color:#355c47;font-weight:600;margin:0}
@@ -129,7 +134,7 @@ a.profile-phone-summary{display:flex;flex-direction:row;align-items:center;gap:8
 .profile-riparim-reviews.empty{display:flex;flex-wrap:wrap;align-items:center;gap:6px 13px}
 .profile-riparim-reviews.empty .profile-review-empty{font-size:14px;margin:0;color:#687b72}
 .profile-route-short{display:none}
-.profile-week-hours summary:focus-visible,.profile-photo-strip a:focus-visible,.profile-section-nav a:focus-visible{outline:3px solid #57a88b;outline-offset:3px;border-radius:4px}
+.profile-week-hours summary:focus-visible,.profile-photo-strip button:focus-visible,.profile-section-nav a:focus-visible{outline:3px solid #57a88b;outline-offset:3px;border-radius:4px}
 @media(max-width:960px){
  .profile-service-groups{grid-template-columns:1fr;gap:19px}
  .profile-photo-strip img{height:170px}
@@ -141,6 +146,7 @@ a.profile-phone-summary{display:flex;flex-direction:row;align-items:center;gap:8
  .profile-photo-strip{display:flex;gap:11px;overflow-x:auto;scroll-snap-type:x proximity;padding-bottom:4px}
  .profile-photo-strip figure{flex:0 0 82%;scroll-snap-align:start}
  .profile-photo-strip img{height:185px}
+ .profile-photo-viewer[data-slot=dialog-content]{width:calc(100vw - 16px);max-width:calc(100vw - 16px)!important;height:calc(100dvh - 16px);max-height:calc(100dvh - 16px);padding:56px 8px 8px}
  .profile-photo-loading{min-height:46px}
  .profile-service-groups{gap:17px}
  .profile-mobile-actions{gap:7px}
