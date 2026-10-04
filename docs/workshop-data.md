@@ -62,3 +62,9 @@ Offizielle Dokumentation, geprüft am 3. Oktober 2026:
 - https://developers.google.com/maps/documentation/places/web-service/policies
 - https://cloud.google.com/maps-platform/terms
 - https://developers.google.com/maps/documentation/places/web-service/text-search
+
+## Bestätigte Betriebsinhaber
+
+Betriebsinhaber beantragen den Zugang zu einem vorhandenen öffentlichen Profil mit einer privaten Begründung und optionalen HTTPS-Beleglinks. Eine manuelle Bestätigung unter `/verwaltung/betriebe` ordnet genau ein Konto zu; sie veröffentlicht kein Profil und erteilt keine Adminrechte. Kontaktangaben, Leistungen und Beschreibung gelangen über getrennte Änderungsentwürfe zur Freigabe. Die Übernahme bewahrt Kennung, Quellen, Prüfdatum und Freigabestatus. Identitätsfelder wie Name und Standort bleiben der Administration vorbehalten; geänderte Telefonnummern durchlaufen erneut die vorhandene strikte Google-Zuordnung.
+
+Die Identitätsprüfung eines Entwurfs speichert keine vorläufige Place-ID über die öffentliche Zuordnung. Freigabe und neue Zuordnung werden zusammen übernommen, sofern Profilrevision, bestätigter Eigentümer und Moderationsberechtigung noch gültig sind. Eine zwischenzeitliche Adminänderung verhindert die Übernahme alter Entwürfe. Freigegebene Betriebsänderungen bleiben durch ihren neueren Profilzeitpunkt gegen ältere Imports geschützt und müssen beim nächsten Export wie Adminänderungen in die zentrale Quelle übernommen werden. Private Inhabernachweise und Kontokennungen gehören nicht in die JSON-Katalogquelle.

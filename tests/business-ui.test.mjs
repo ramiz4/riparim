@@ -1,0 +1,81 @@
+import assert from 'node:assert/strict';
+import {mkdir,writeFile} from 'node:fs/promises';
+import {createRequire} from 'node:module';
+import {JSDOM,VirtualConsole} from 'jsdom';
+const dom=new JSDOM('<div id="root"></div>',{url:'https://riparim.example.test/betrieb',pretendToBeVisual:true,virtualConsole:new VirtualConsole()});
+for(const key of ['window','document','navigator','HTMLElement','HTMLButtonElement','HTMLFormElement','HTMLInputElement','HTMLSelectElement','HTMLTextAreaElement','DocumentFragment','Element','Node','NodeFilter','MutationObserver','CustomEvent','Event','MouseEvent','KeyboardEvent','getComputedStyle'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});
+globalThis.requestAnimationFrame=dom.window.requestAnimationFrame.bind(dom.window);globalThis.cancelAnimationFrame=dom.window.cancelAnimationFrame.bind(dom.window);globalThis.IS_REACT_ACT_ENVIRONMENT=true;
+const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
+const out='.test-runtime/business-ui';await mkdir(out,{recursive:true});
+const bundle=await build({entryPoints:['components/business-panel.tsx'],outfile:out+'/ui.mjs',bundle:true,write:false,format:'esm',platform:'node',packages:'external'});await writeFile(out+'/ui.mjs',bundle.outputFiles[0].contents);
+const {createElement,act}=await import('react'),{createRoot}=await import('react-dom/client'),{BusinessPanel}=await import(new URL('../'+out+'/ui.mjs',import.meta.url));
+const workshop={id:'fixture-workshop',name:'Fiktive Werkstatt',city:'Prishtina',address:'Fixture Street 10',phone:'+38344123456',phoneNote:'Betrieb',whatsapp:'',services:['Inspektion & Wartung'],serviceDetails:['Inspektion'],description:'A sufficiently detailed fictional passenger-car workshop description.',status:'published',updatedAt:'2026-10-04T09:00:00Z'};
+let records={claims:[],changes:[],workshops:[]},mode='success',pending=null,loadFailure=false;
+const requests=[];
+const requestView=(id,kind)=>({id,workshopId:workshop.id,workshopName:workshop.name,owner:'fixture-owner',status:'pending',moderatorNote:'',revision:0,createdAt:'2026-10-04T10:00:00Z',...(kind==='claim'?{evidence:'A private and sufficiently detailed fictional company-register explanation.',evidenceLinks:['https://business.example.test/proof']}:{profile:{phone:workshop.phone,phoneNote:workshop.phoneNote,whatsapp:workshop.whatsapp,services:workshop.services,serviceDetails:workshop.serviceDetails,description:workshop.description+' Proposed extra services.'},baseUpdatedAt:workshop.updatedAt})});
+globalThis.fetch=async(url,options)=>{
+ const method=options?.method??'GET',body=options?.body?JSON.parse(options.body):null;requests.push({url,method,body});
+ if(method==='GET'){assert(['/api/business','/api/business?moderation=1'].includes(url));if(loadFailure)return Response.json({error:'Fixture loading failed'},{status:503});return Response.json(url.includes('moderation')?{...records,claims:records.claims.filter(row=>row.status==='pending'),changes:records.changes.filter(row=>row.status==='pending')}:{...records});}
+ assert.equal(url,'/api/business','Only the isolated business fixture receives writes');
+ if(method==='POST'){
+  if(mode==='failure')return Response.json({error:'Fixture duplicate or invalid draft'},{status:409});
+  if(body.kind==='claim'){assert.deepEqual(Object.keys(body),['kind','input']);assert.deepEqual(Object.keys(body.input),['workshopId','evidence','evidenceLinks']);records.claims.push(requestView('00000000-0000-4000-8000-000000000001','claim'));return Response.json({status:'pending'},{status:201});}
+  assert.equal(body.kind,'change');assert.deepEqual(Object.keys(body.profile).sort(),['description','phone','phoneNote','serviceDetails','services','whatsapp'].sort());
+  const commit=()=>{records.changes.push({...requestView('00000000-0000-4000-8000-000000000002','change'),profile:body.profile});return Response.json({status:'pending'},{status:201});};
+  if(mode==='pending')return new Promise(resolve=>pending={resolve,commit});return commit();
+ }
+ assert.equal(method,'PATCH');assert.deepEqual(Object.keys(body),['kind','id','revision','decision','note']);
+ if(mode==='failure')return Response.json({error:'Fixture stale decision'},{status:409});
+ const commit=()=>{const list=body.kind==='claim'?records.claims:records.changes;const record=list.find(row=>row.id===body.id);record.status=body.decision;record.revision++;record.moderatorNote=body.note;return Response.json({ok:true});};
+ if(mode==='pending')return new Promise(resolve=>pending={resolve,commit});return commit();
+};
+let root=createRoot(document.getElementById('root')),passed=0;
+const check=(value,label)=>{assert(value,label);passed++;};
+const button=label=>[...document.querySelectorAll('button')].find(node=>node.textContent===label);
+const control=label=>[...document.querySelectorAll('label')].find(node=>node.textContent.startsWith(label))?.querySelector('input,select,textarea')??document.getElementById([...document.querySelectorAll('label')].find(node=>node.textContent===label)?.htmlFor);
+const click=async node=>{assert(node,'Expected UI control exists');await act(async()=>{node.focus();node.click();});};
+const type=async(node,value)=>{const prototype=node instanceof HTMLTextAreaElement?HTMLTextAreaElement.prototype:HTMLInputElement.prototype;await act(async()=>{Object.getOwnPropertyDescriptor(prototype,'value').set.call(node,value);node.dispatchEvent(new Event('input',{bubbles:true}));});};
+const submit=async form=>act(async()=>form.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));
+const render=async(moderation=false)=>act(async()=>root.render(createElement(BusinessPanel,{directory:[workshop],initialWorkshop:workshop.id,moderation})));
+const remount=async(moderation=false)=>{await act(async()=>root.unmount());root=createRoot(document.getElementById('root'));await render(moderation);};
+const dialog=()=>document.querySelector('[role="alertdialog"]');
+try{
+ loadFailure=true;await render();check(document.querySelector('[role="alert"]').textContent==='Fixture loading failed'&&button('Aktualisieren'),'Loading failure exposes an accessible refresh action');
+ loadFailure=false;await click(button('Aktualisieren'));
+ check(document.querySelector('.business-panel').textContent.includes('Noch kein bestätigtes Werkstattprofil'),'An empty owner state explains the required claim');
+ check(control('Bestehendes Profil').value===workshop.id,'The profile claim preserves its selected public workshop');
+ const proof=control('Privater Inhabernachweis');check(proof.minLength===40&&proof.maxLength===4000&&proof.required,'The private proof field is labelled and bounded');
+ await type(proof,'A sufficiently detailed fictional register explanation proving operator ownership.');await type(control('Beleglinks'),'https://business.example.test/proof');mode='failure';await submit(proof.form);
+ check(document.querySelector('[role="alert"]').textContent.includes('duplicate')&&control('Privater Inhabernachweis').value.includes('register explanation'),'Rejected submission preserves the private draft and announces its error');
+ mode='success';await submit(proof.form);
+ check(document.querySelector('[role="status"]').textContent.includes('privater Inhabernachweis')&&document.querySelector('.business-status').textContent==='In Prüfung','Successful submission announces review without granting ownership');
+ check(control('Privater Inhabernachweis').value===''&&!button('Bestätigen'),'Customer views clear submitted proof and offer no moderation action');
+ check(!document.querySelector('.business-evidence')&&!document.querySelector('.business-request a'),'Customer request cards do not expose evidence or review links belonging to other applicants');
+ records.workshops=[workshop];await click(button('Aktualisieren'));await click(button('Angaben als Entwurf bearbeiten'));
+ check(control('Telefon').value===workshop.phone&&control('Beschreibung').value===workshop.description,'The owner editor uses the current approved contact and description');
+ check(document.querySelector('.business-panel').textContent.includes('Quellen und Freigabestatus bleiben geschützt'),'The editor explains protected identity and publication fields');
+ await type(control('Beschreibung'),workshop.description+' Additional documented repair services.');mode='pending';await submit(control('Telefon').form);
+ check(document.querySelector('.business-form fieldset').disabled,'A pending draft disables conflicting editor actions');
+ check(requests.filter(row=>row.method==='POST'&&row.body.kind==='change').length===1,'The pending editor issues one scoped change request');
+ await act(async()=>pending.resolve(pending.commit()));pending=null;mode='success';
+ check(!document.querySelector('.business-panel').textContent.includes('Entwurf für')&&button('Angaben als Entwurf bearbeiten').disabled,'Submitted drafts close the editor and prevent duplicates while awaiting moderation');
+ check(document.querySelector('[role="status"]').textContent.includes('bisherigen öffentlichen Angaben'),'Submission clearly preserves the previously published profile');
+ records.claims=[requestView('00000000-0000-4000-8000-000000000003','claim')];records.workshops=[workshop];await remount(true);
+ check(document.querySelector('.business-evidence').textContent.includes('company-register')&&document.querySelector('.business-request a').getAttribute('rel')==='noopener noreferrer','The administrator sees private evidence with safe external links');
+ check(document.querySelector('.business-current summary').textContent==='Aktuell freigegebene Angaben ansehen','Change review includes the approved profile for comparison');
+ await click(button('Bestätigen'));check(dialog().contains(document.activeElement),'Moderation confirmation takes keyboard focus');
+ check(button('Entscheidung speichern').disabled,'Moderation cannot be confirmed without a meaningful reason');
+ await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));
+ check(!dialog()&&requests.filter(row=>row.method==='PATCH').length===0,'Escape cancels moderation without sending a decision');
+ await click(button('Bestätigen'));await type(control('Begründung'),'Independent fictional operator proof was checked.');mode='pending';await click(button('Entscheidung speichern'));
+ check([...dialog().querySelectorAll('button')].every(node=>node.disabled),'Pending moderation locks confirmation and cancellation');
+ await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));
+ check(dialog()&&requests.filter(row=>row.method==='PATCH').length===1,'A pending decision cannot be dismissed or duplicated');
+ await act(async()=>pending.resolve(pending.commit()));pending=null;mode='success';
+ check(!dialog()&&document.querySelector('[role="status"]').textContent==='Entscheidung gespeichert.','Confirmed ownership refreshes the queue and announces completion');
+ await click(button('Ablehnen'));await type(control('Begründung'),'The proposed fictional changes require additional proof.');mode='failure';await click(button('Entscheidung speichern'));
+ check(dialog().querySelector('[role="alert"]').textContent.includes('stale decision'),'A stale decision remains visible and is not announced as success');
+ mode='success';await click(button('Entscheidung speichern'));
+ check(!dialog()&&document.querySelector('.business-panel').textContent.includes('Keine Änderungsentwürfe vorhanden'),'A confirmed rejection clears the pending change queue');
+ console.log(JSON.stringify({businessUiChecksPassed:passed,liveRequests:false}));
+}finally{await act(async()=>root.unmount());dom.window.close();}
