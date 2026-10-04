@@ -4,6 +4,10 @@ Werkstätten in Kosovo finden, Leistungen und Standort vergleichen und direkt ko
 
 Website: [riparim.com](https://riparim.com)
 
+Für Mitarbeit gelten [CONTRIBUTING.md](CONTRIBUTING.md) und für AI Agents
+[AGENTS.md](AGENTS.md): isolierte Aufgaben-Worktrees, Conventional Commits und
+Semantic Release als Release-Prozess.
+
 ## Technik
 
 - React, TypeScript und Vinext mit App Router
