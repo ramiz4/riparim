@@ -40,6 +40,6 @@ export default function AuthForm({screen,emailReady,googleReady,isOwner,returnTo
  {error&&<p className="error auth-error" role="alert">{error}</p>}
  <p className="auth-switch">{screen==="login"?<>Noch kein Konto? <a href={`/registrieren?weiter=${encodeURIComponent(returnTo)}`}>Registrieren</a></>:screen==="register"?<>Schon ein Konto? <a href={`/anmelden?weiter=${encodeURIComponent(returnTo)}`}>Anmelden</a></>:<a href="/anmelden">Zur Anmeldung</a>}</p>
  </>}
- <div className="auth-privacy"><LockKeyhole size={14}/><p>Deine Belege bleiben privat.</p></div>
+ <div className="auth-privacy"><LockKeyhole size={14}/><p>Deine Belege bleiben privat. <a href="/datenschutz">Datenschutz</a></p></div>
  </section></main></>;
 }
