@@ -5,14 +5,14 @@ import {parseArgs} from 'node:util';
 import {build} from 'esbuild';
 
 const root=fileURLToPath(new URL('../',import.meta.url));
-const {values}=parseArgs({options:{fetch:{type:'boolean',default:false},write:{type:'boolean',default:false},limit:{type:'string',default:'100'}}});
+const {values}=parseArgs({options:{phone:{type:'boolean',default:false},fetch:{type:'boolean',default:false},write:{type:'boolean',default:false},limit:{type:'string',default:'100'}}});
 const limit=Number(values.limit);
 if(!Number.isInteger(limit)||limit<1||limit>100)throw Error('limit muss zwischen 1 und 100 liegen');
 if(values.write&&!values.fetch)throw Error('--write benötigt --fetch');
 const runtime=resolve(root,'.sites-runtime/catalogue-google');await mkdir(runtime,{recursive:true});
 await build({absWorkingDir:root,entryPoints:['lib/workshop-source.ts','lib/google-place-identity.ts'],outdir:runtime,bundle:true,platform:'node',format:'esm',outExtension:{'.js':'.mjs'}});
 const {validateWorkshopCatalogue,catalogueStats}=await import(pathToFileURL(resolve(runtime,'workshop-source.mjs')));
-const {verifiedGooglePlace,googlePlaceSearchRequest}=await import(pathToFileURL(resolve(runtime,'google-place-identity.mjs')));
+const {verifiedGooglePlace,googlePlaceSearchRequest,normalizeWorkshopPhone}=await import(pathToFileURL(resolve(runtime,'google-place-identity.mjs')));
 const path=resolve(root,'data/workshops.json');
 const catalogue=validateWorkshopCatalogue(JSON.parse(await readFile(path,'utf8'))),now=Date.now();
 const pending=catalogue.workshops.filter(w=>w.status==='published'&&(!w.google.placeId||now-Date.parse(w.google.matchedAt)>365*86400000));
@@ -23,13 +23,22 @@ if(!values.fetch){
  if(!key)throw Error('GOOGLE_PLACES_SERVER_API_KEY ist nicht eingerichtet; keine Google-Abfrage ausgeführt');
  const responses=new Map(),matched=[],unmatched=[],errors=[];let requests=0;
  for(const workshop of pending){
-  const query=JSON.stringify(googlePlaceSearchRequest(workshop,20));
+  const query=JSON.stringify(googlePlaceSearchRequest(workshop,5,!values.phone));
   if(!responses.has(query)){
    if(requests>=limit)break;requests++;
    try{
-    const response=await fetch('https://places.googleapis.com/v1/places:searchText',{method:'POST',headers:{'Content-Type':'application/json','X-Goog-Api-Key':key,'X-Goog-FieldMask':'places.id,places.displayName,places.formattedAddress,places.addressComponents,places.location,places.internationalPhoneNumber'},body:query,signal:AbortSignal.timeout(12000)});
+    const response=await fetch('https://places.googleapis.com/v1/places:searchText',{method:'POST',headers:{'Content-Type':'application/json','X-Goog-Api-Key':key,...(process.env.GOOGLE_PLACES_HTTP_REFERRER?{Referer:process.env.GOOGLE_PLACES_HTTP_REFERRER}:{}),'X-Goog-FieldMask':'places.id,places.primaryType,places.displayName,places.formattedAddress,places.addressComponents,places.location,places.internationalPhoneNumber'},body:query,signal:AbortSignal.timeout(12000)});
     if(!response.ok){responses.set(query,null);errors.push({workshopId:workshop.id,status:response.status});if(response.status===401||response.status===403||response.status===429)break;continue;}
-    const body=await response.json();responses.set(query,Array.isArray(body.places)?body.places:[]);
+    const body=await response.json(),candidates=Array.isArray(body.places)?body.places:[];
+    for(const candidate of candidates){
+     if(requests>=limit)break;
+     if(!candidate.id||candidate.addressComponents?.some(c=>c.types?.includes('country'))||normalizeWorkshopPhone(candidate.internationalPhoneNumber??'')!==normalizeWorkshopPhone(workshop.phone)||['electric_vehicle_charging_station','car_wash','parking'].includes(candidate.primaryType))continue;
+     requests++;
+     const details=await fetch(`https://places.googleapis.com/v1/places/${encodeURIComponent(candidate.id)}`,{headers:{'X-Goog-Api-Key':key,...(process.env.GOOGLE_PLACES_HTTP_REFERRER?{Referer:process.env.GOOGLE_PLACES_HTTP_REFERRER}:{}),'X-Goog-FieldMask':'addressComponents'},signal:AbortSignal.timeout(12000)});
+     if(!details.ok){errors.push({workshopId:workshop.id,status:details.status});continue;}
+     candidate.addressComponents=(await details.json()).addressComponents;
+    }
+    responses.set(query,candidates);
    }catch{responses.set(query,null);errors.push({workshopId:workshop.id,status:'unavailable'});continue;}
   }
   const candidates=responses.get(query);if(!candidates)continue;

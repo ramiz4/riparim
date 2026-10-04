@@ -91,7 +91,9 @@ assert.equal(mita.googleRating.count,null,'unpublished Google count is not guess
 const sorted=filters.matchCatalogue(workshops,{...filters.defaultCatalogueFilters,sort:'rating'});
 assert.equal(sorted[0].id,'auto-mita','independent Google 5.0 scores do not outrank a Riparim rating');
 const markup=renderToStaticMarkup(React.createElement(WorkshopRatings,{workshop:mita,details:true}));
-for(const text of ['Riparim','Google','3,0','4,8','Anzahl nicht veröffentlicht','automita.com'])assert(markup.includes(text),`rating display includes ${text}`);
+for(const text of ['Riparim','Google','3,0'])assert(markup.includes(text),`rating display includes ${text}`);
+for(const text of ['4,8','Anzahl nicht veröffentlicht','automita.com'])assert(!markup.includes(text),`historical Google content is not displayed: ${text}`);
+const liveMarkup=renderToStaticMarkup(React.createElement(WorkshopRatings,{workshop:mita,liveGoogleRating:{rating:4.6,count:123,mapsUrl:'https://maps.google.com/',attributions:[]}}));assert(liveMarkup.includes('4,6')&&liveMarkup.includes('123'),'current Google data is displayed');
 
 // A later snapshot and an administrator's edits survive re-running the seed.
 sqlite.prepare("UPDATE workshops SET name='Edited profile',status='draft' WHERE id='auto-mita'").run();

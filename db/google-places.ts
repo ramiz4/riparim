@@ -1,6 +1,6 @@
 import {env} from "cloudflare:workers";
 import {storage} from "./storage";
-import {verifiedGooglePlace,validGooglePlaceId,workshopIdentityHash,googlePlaceSearchRequest,type GooglePlaceCandidate} from "@/lib/google-place-identity";
+import {verifiedGooglePlace,validGooglePlaceId,workshopIdentityHash,googlePlaceSearchRequest,normalizeWorkshopPhone,type GooglePlaceCandidate} from "@/lib/google-place-identity";
 import type {Workshop} from "@/lib/workshops";
 
 export function googlePlacesConfiguration(){const browserKey=(env.GOOGLE_MAPS_BROWSER_API_KEY??"").trim(),serverKey=(env.GOOGLE_PLACES_SERVER_API_KEY??"").trim();return {enabled:!!browserKey&&!!serverKey,browserKey,serverKey};}
@@ -26,10 +26,19 @@ export async function resolveWorkshopGooglePlace(workshop:Workshop):Promise<stri
   let placeId:string|null=null,quotaExhausted=false;
   for(const byName of [false,true]){
    if(!await reserveSearch()){quotaExhausted=true;break;}
-   const response=await fetch("https://places.googleapis.com/v1/places:searchText",{method:"POST",headers:{"Content-Type":"application/json","X-Goog-Api-Key":config.serverKey,"X-Goog-FieldMask":"places.id,places.displayName,places.formattedAddress,places.addressComponents,places.location,places.internationalPhoneNumber"},body:JSON.stringify(googlePlaceSearchRequest(workshop,5,byName)),signal:AbortSignal.timeout(8000)});
+   const response=await fetch("https://places.googleapis.com/v1/places:searchText",{method:"POST",headers:{"Content-Type":"application/json","X-Goog-Api-Key":config.serverKey,"X-Goog-FieldMask":"places.id,places.primaryType,places.displayName,places.formattedAddress,places.addressComponents,places.location,places.internationalPhoneNumber"},body:JSON.stringify(googlePlaceSearchRequest(workshop,5,byName)),signal:AbortSignal.timeout(8000)});
    if(!response.ok)throw new Error("Google Places identity lookup unavailable");
    const body=await response.json() as {places?:GooglePlaceCandidate[]};
-   placeId=verifiedGooglePlace(workshop,Array.isArray(body.places)?body.places:[]);
+   const candidates=Array.isArray(body.places)?body.places:[];
+   for(const candidate of candidates){
+    if(!validGooglePlaceId(candidate.id)||candidate.addressComponents?.some(c=>c.types?.includes("country"))||normalizeWorkshopPhone(candidate.internationalPhoneNumber??"")!==normalizeWorkshopPhone(workshop.phone))continue;
+    if(["electric_vehicle_charging_station","car_wash","parking"].includes(candidate.primaryType??""))continue;
+    if(!await reserveSearch()){quotaExhausted=true;break;}
+    const details=await fetch(`https://places.googleapis.com/v1/places/${encodeURIComponent(candidate.id)}`,{headers:{"X-Goog-Api-Key":config.serverKey,"X-Goog-FieldMask":"addressComponents"},signal:AbortSignal.timeout(8000)});
+    if(!details.ok)throw new Error("Google Places identity details unavailable");
+    candidate.addressComponents=(await details.json() as GooglePlaceCandidate).addressComponents;
+   }
+   placeId=verifiedGooglePlace(workshop,candidates);
    if(placeId)break;
   }
   // Persist only a Google Place ID and our own matching metadata. Never API ratings/reviews.

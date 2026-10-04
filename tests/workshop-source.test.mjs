@@ -8,7 +8,7 @@ await writeFile('.test-runtime/workshop-source/source.mjs',bundle.outputFiles[0]
 const {validateWorkshopCatalogue,catalogueStats,mergeWorkshopCatalogue}=await import(new URL('../.test-runtime/workshop-source/source.mjs',import.meta.url));
 const catalogue=validateWorkshopCatalogue(JSON.parse(await readFile('data/workshops.json','utf8')));
 const stats=catalogueStats(catalogue.workshops);
-assert.equal(stats.published,78);assert.equal(stats.drafts,85);assert.equal(stats.numericSnapshotRatings,5);assert.equal(stats.pendingPublishedMatches,78);
+assert.equal(stats.published,78);assert.equal(stats.drafts,85);assert.equal(stats.numericSnapshotRatings,5);assert.equal(stats.pendingPublishedMatches,catalogue.googleImport.pendingPublishedMatches);assert.equal(stats.matchedPlaceIds+stats.pendingPublishedMatches,78);
 assert.equal(catalogue.coverage.complete,false);assert.equal(catalogue.coverage.estimateSource,'user');
 assert.deepEqual(stats.sharedPhones,[['eurogoma-gjakova','eurogoma-mitrovica']]);
 assert(catalogue.workshops.every(w=>!('rating' in w)&&!('count' in w)),'own reviews remain outside the profile source');

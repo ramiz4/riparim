@@ -1,7 +1,7 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-03T19:20:11Z",
+  "updatedAt": "2026-10-04T06:39:14.775Z",
   "coverage": {
     "countryCode": "XK",
     "published": 78,
@@ -11,11 +11,11 @@
     "complete": false
   },
   "googleImport": {
-    "status": "not_started",
-    "reason": "api_credentials_unavailable",
-    "matchedPlaceIds": 0,
+    "status": "partial",
+    "reason": "unmatched_profiles",
+    "matchedPlaceIds": 50,
     "numericSnapshotRatings": 5,
-    "pendingPublishedMatches": 78
+    "pendingPublishedMatches": 28
   },
   "workshops": [
     {
@@ -49,8 +49,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJrYwDvZyWUxMRc7AI-ssgTBQ",
+        "matchedAt": "2026-10-04T06:38:15.551Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -214,8 +214,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJG3VcI02NVBMRhghUZ9dLb0U",
+        "matchedAt": "2026-10-04T06:38:16.160Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -258,10 +258,10 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJNXRTcx19VBMRLj2OzkG4A3Q",
+        "matchedAt": "2026-10-04T06:38:16.502Z",
         "snapshot": {
-          "rating": 4.0,
+          "rating": 4,
           "count": 52,
           "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Beli%20Rr.%20Ibrahim%20Rugova%2C%20Ferizaj%2070000%20Kosovo",
           "sourceUrl": "https://www.top-rated.online/cities/G%C3%ABrlic%C3%AB+e+Poshtme/place/p/15708354/Auto+Beli",
@@ -302,8 +302,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJr_6I2ChFUxMRARVfS1C0RGI",
+        "matchedAt": "2026-10-04T06:38:16.860Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -470,8 +470,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJOezcmZVFUxMRCu8qssuGRMY",
+        "matchedAt": "2026-10-04T06:38:17.436Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -514,8 +514,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJXaB60G9FUxMRcof91OFOzOQ",
+        "matchedAt": "2026-10-04T06:38:17.755Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -558,8 +558,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJ2Z89GU9_VBMRyR4mlYf6J-Q",
+        "matchedAt": "2026-10-04T06:38:18.096Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -894,8 +894,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJJUmVY4dbUxMRwsHIAJw3Rio",
+        "matchedAt": "2026-10-04T06:38:18.634Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -994,8 +994,8 @@
       "status": "published",
       "updatedAt": "2026-10-02T16:15:00.000Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJL9XXwhCdVBMR_jl20uzt15A",
+        "matchedAt": "2026-10-04T06:38:18.963Z",
         "snapshot": {
           "rating": 4.8,
           "count": null,
@@ -1038,8 +1038,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJN009LtzyVBMRBIhEaKINpE4",
+        "matchedAt": "2026-10-04T06:38:19.304Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -1082,8 +1082,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJpyrbaNd_VBMREMjd2Ees5tk",
+        "matchedAt": "2026-10-04T06:38:19.624Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -1126,8 +1126,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJJ4SlZvp_VBMRyXe6jR8r5-E",
+        "matchedAt": "2026-10-04T06:38:19.979Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -1408,8 +1408,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJMb1eezmNVBMRRmiBJtGANVE",
+        "matchedAt": "2026-10-04T06:38:21.039Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -1760,8 +1760,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJMxwsC3h_VBMR2K3PwgtzmDQ",
+        "matchedAt": "2026-10-04T06:38:22.156Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -1804,8 +1804,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJ0-0nVbufVBMRnljLpHwJfFM",
+        "matchedAt": "2026-10-04T06:38:22.524Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -1920,8 +1920,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJT9vZ2UifVBMRXP0Z5KC7dl8",
+        "matchedAt": "2026-10-04T06:38:22.864Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -1964,8 +1964,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJtS2xJRWZVBMRkML-ELqhZYA",
+        "matchedAt": "2026-10-04T06:38:23.232Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -2163,8 +2163,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJUZYIFJ-fVBMR2P9cYiR8f4Y",
+        "matchedAt": "2026-10-04T06:38:23.800Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -2207,8 +2207,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJgSzMVimfVBMR8FRiAysbryU",
+        "matchedAt": "2026-10-04T06:38:24.120Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -2287,8 +2287,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJTc9TLsp_VBMR5Q1nCZpNf1g",
+        "matchedAt": "2026-10-04T06:38:24.452Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -2370,7 +2370,7 @@
         "placeId": null,
         "matchedAt": null,
         "snapshot": {
-          "rating": 5.0,
+          "rating": 5,
           "count": 8,
           "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20Doni%20QQVM%2B5VX%2C%20R101%2C%20Klin%C3%AB%20e%20Ep%C3%ABrme%2041000%20Kosovo",
           "sourceUrl": "https://www.top-rated.online/cities/Klin%C3%AB+e+Ep%C3%ABrme/place/p/10916121/Auto+Servis+Doni",
@@ -2555,8 +2555,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJz2OODhafVBMRSk4BbeHIhq8",
+        "matchedAt": "2026-10-04T06:38:24.984Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -2758,8 +2758,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T12:04:35.346588+00:00",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJSZHjib5jUxMRmW1nprmtBo8",
+        "matchedAt": "2026-10-04T06:38:25.332Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -3265,8 +3265,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJ9wwYnhKfVBMRC8kLTQwCz38",
+        "matchedAt": "2026-10-04T06:38:26.383Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -3508,8 +3508,8 @@
       "status": "published",
       "updatedAt": "2026-10-02T16:15:00.000Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJZTSQQzx_VBMRkvA_KhRqNk8",
+        "matchedAt": "2026-10-04T06:38:26.703Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -3596,8 +3596,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T12:08:07.696318+00:00",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJ03ypjB1_VBMRgU6N3oDQVRY",
+        "matchedAt": "2026-10-04T06:38:27.230Z",
         "snapshot": {
           "rating": 5,
           "count": 35,
@@ -3684,8 +3684,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJUQjLIHufVBMRMpMm10I6HN0",
+        "matchedAt": "2026-10-04T06:38:27.905Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -3728,8 +3728,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJS72rI-p_VBMR_4KThMqdykg",
+        "matchedAt": "2026-10-04T06:38:28.248Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -4230,8 +4230,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJMTTQbMSfVBMROfUEApqoNwg",
+        "matchedAt": "2026-10-04T06:38:29.129Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -4420,8 +4420,8 @@
       "status": "published",
       "updatedAt": "2026-10-02T16:15:00.000Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJVYrXNK-dVBMRkWGix3urKCE",
+        "matchedAt": "2026-10-04T06:38:29.679Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -4464,8 +4464,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJ9duUBHDtVBMRl2nLKi2gon0",
+        "matchedAt": "2026-10-04T06:38:30.016Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -4508,8 +4508,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T12:08:07.696318+00:00",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJdXtZEM0OUxMRHhYLUY4CKmA",
+        "matchedAt": "2026-10-04T06:38:30.334Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -4588,8 +4588,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJb6GZpCd_VBMRi_bRC-yoNhI",
+        "matchedAt": "2026-10-04T06:38:30.652Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -4632,8 +4632,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJMzRnIjKVUxMR37SDG3p6bug",
+        "matchedAt": "2026-10-04T06:38:30.975Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -4875,8 +4875,8 @@
       "status": "published",
       "updatedAt": "2026-10-02T18:21:53.000Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJ2ezPzEV_VBMRAPesce8JHaY",
+        "matchedAt": "2026-10-04T06:38:31.799Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -5029,8 +5029,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T12:04:35.346588+00:00",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJr9MOAi-VUxMR6ntYWk2bOVY",
+        "matchedAt": "2026-10-04T06:38:32.624Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -5077,8 +5077,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T12:04:35.346588+00:00",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJR2_3vzK_UxMRj0SC8kETc54",
+        "matchedAt": "2026-10-04T06:39:07.807Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -5275,8 +5275,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJAZZ6ZTeNVBMRy7byzlQqJ9M",
+        "matchedAt": "2026-10-04T06:39:08.412Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -5323,8 +5323,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T12:15:08.995338+00:00",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJ0eOahftjUxMR7_JmJ-bgp6E",
+        "matchedAt": "2026-10-04T06:39:08.747Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -5373,8 +5373,8 @@
       "status": "published",
       "updatedAt": "2026-10-02T16:15:00.000Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJ0w2KCM6_UxMRPlsAoKL18Zc",
+        "matchedAt": "2026-10-04T06:39:09.069Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -5500,8 +5500,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJHUhxVwa_UxMREIBbS6nCJwU",
+        "matchedAt": "2026-10-04T06:39:09.645Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -5847,8 +5847,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJn0HK7tl_VBMRzfULGiPH3kU",
+        "matchedAt": "2026-10-04T06:39:11.047Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -6056,8 +6056,8 @@
       "status": "published",
       "updatedAt": "2026-10-02T18:21:53.000Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJt5_Taa6dVBMRqBUDFIq0l-o",
+        "matchedAt": "2026-10-04T06:39:11.400Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -6210,8 +6210,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJ8zFU5C9_VBMRg0d-nCiUDv4",
+        "matchedAt": "2026-10-04T06:39:11.776Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -6254,8 +6254,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJ74s4yeVFUxMRSQjRkEpj7uU",
+        "matchedAt": "2026-10-04T06:39:12.147Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -6298,8 +6298,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJW0bIRgeVUxMRTDjqVfHvpN8",
+        "matchedAt": "2026-10-04T06:39:12.507Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -6386,8 +6386,8 @@
       "status": "published",
       "updatedAt": "2026-10-02T18:21:53.000Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJibLTIg9_VBMRiC_qFd-UsZI",
+        "matchedAt": "2026-10-04T06:39:12.879Z",
         "snapshot": {
           "rating": null,
           "count": 19,
@@ -6430,8 +6430,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJrzhQ3jxFUxMRANcJyieNKyo",
+        "matchedAt": "2026-10-04T06:39:13.219Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -6474,8 +6474,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJO7PBcNp_VBMR638RbvzJZts",
+        "matchedAt": "2026-10-04T06:39:13.579Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -6518,8 +6518,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJ0ykW1rWfVBMRVWmPUwPgbKI",
+        "matchedAt": "2026-10-04T06:39:13.929Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -6682,8 +6682,8 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJFf8v_FONVBMRnECDJ_M162E",
+        "matchedAt": "2026-10-04T06:39:14.527Z",
         "snapshot": {
           "rating": null,
           "count": null,
