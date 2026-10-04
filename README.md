@@ -4,6 +4,10 @@ Werkstätten in Kosovo finden, Leistungen und Standort vergleichen und direkt ko
 
 Website: [riparim.com](https://riparim.com)
 
+Für Mitarbeit gelten [CONTRIBUTING.md](CONTRIBUTING.md) und für AI Agents
+[AGENTS.md](AGENTS.md): isolierte Aufgaben-Worktrees, Conventional Commits und
+Semantic Release als Release-Prozess.
+
 ## Technik
 
 - React, TypeScript und Vinext mit App Router
@@ -60,6 +64,8 @@ npm run build
 `npm test` prüft den Bewertungsablauf, Besitzrechte, Benutzerverwaltung, Katalogfilter sowie Google-Sitzungen und OAuth-Callbacks mit isolierten SQLite-/R2-/Provider-Fixtures. Dabei werden keine echten E-Mails gesendet und keine Produktionsdaten verändert.
 
 Die ergänzende Live- und Browserprüfung steht in [docs/customer-flow-qa.md](docs/customer-flow-qa.md). Die dokumentierte Bestandsprüfung in `data/catalogue-review-2026-10-04.json` führt die unabhängigen Quellen und zurückgestellten Standortkonflikte auf.
+
+GitHub Actions führt Katalogprüfung, Tests, TypeScript, Lint und Worker-Build bei Pull Requests und nach Änderungen an `main` mit dem bestehenden Lockfile aus. Die Prüfung benötigt keine Produktionsgeheimnisse und veröffentlicht die Site nicht automatisch.
 
 ## Veröffentlichung
 
