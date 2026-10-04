@@ -90,7 +90,7 @@ a.profile-phone-summary{display:flex;flex-direction:row;align-items:center;gap:8
 .profile-opening-summary strong{color:#385c4d;font-weight:650}
 .profile-opening-hours.open .profile-opening-summary strong{color:#176449}
 .profile-opening-hours.closed .profile-opening-summary strong{color:#795c30}
-.profile-opening-summary span:last-child{flex-basis:100%}
+.profile-opening-summary .profile-hours-today{flex-basis:100%}
 .profile-week-hours{margin-top:5px;max-width:430px}
 .profile-week-hours>summary{display:inline-flex;align-items:center;gap:7px;cursor:pointer;list-style:none;min-height:36px;color:#385f4f}
 .profile-week-hours>summary::-webkit-details-marker{display:none}
@@ -107,10 +107,6 @@ a.profile-phone-summary{display:flex;flex-direction:row;align-items:center;gap:8
 .profile-photo-strip figure{min-width:0;margin:0}
 .profile-photo-strip figure>a{display:block;overflow:hidden;border-radius:11px;background:#edf3ef}
 .profile-photo-strip img{width:100%;height:195px;object-fit:cover;display:block}
-.profile-photo-strip figcaption{display:flex;flex-wrap:wrap;align-items:center;gap:2px 10px;font-size:12px;line-height:1.5;padding:7px 2px;color:#586c61;overflow-wrap:anywhere}
-.profile-photo-strip figcaption>span+span:before{content:"·";padding-right:10px}
-.profile-photo-strip figcaption a:hover{text-decoration:underline;text-underline-offset:3px}
-.profile-photo-strip figcaption .google-maps-attribution{margin-left:auto;flex-shrink:0}
 .profile-photo-loading{display:flex;align-items:center;gap:9px;min-height:58px;color:#667d6f;font-size:14px}
 .profile-search-match{padding:12px 15px;background:#f0f7f3;border-left:3px solid #328361;border-radius:0 8px 8px;margin:0 0 19px;overflow-wrap:anywhere}
 .profile-search-match>p{font-size:14px;line-height:1.6;color:#355c47;font-weight:600;margin:0}
