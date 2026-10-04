@@ -34,6 +34,8 @@ Wenn eine GitHub-Veröffentlichung nach dem Anlegen des Tags scheitert, bleibt d
 
 `wrangler.jsonc` enthält den eigenen Zielaccount, den Worker `riparim`, die verifizierte D1-Datenbank `riparim-production` und den privaten R2-Bucket `riparim-evidence-production`. Vite übernimmt diese Konfiguration für Produktionsbuilds. Lokale Vorschauen verwenden isolierte Bindings; Produktionsressourcen bleiben mit `remote: false` vom lokalen Entwicklungsserver getrennt. Die generierte `dist/server/wrangler.json` wird unverändert aus dem Release-Archiv deployt.
 
+D1 und R2 werden vor dem ersten Deployment angelegt und ihre exakten Bindings geprüft. Der Deploy-Aufruf deaktiviert Wranglers automatische Provisionierung mit `--experimental-provision=false`. Dadurch entfällt insbesondere die zusätzliche R2-Metadatenabfrage beim ersten Worker-Upload; der Deployment-Token benötigt keine R2-Lese- oder Objektrechte.
+
 Das GitHub-Environment `production` erlaubt ausschließlich den Branch `main`. Darin werden zwei Secrets eingerichtet:
 
 - `CLOUDFLARE_API_TOKEN`: separater Account-Token für automatisierte Deployments und D1-Migrationen. Für die erste Worker-Erstellung sind Workers Product Admin sowie D1 Write nötig; nach dem Bootstrap kann der Workers-Zugriff auf Editor für diesen Worker reduziert werden. Keine DNS-, Billing-, R2-Objekt- oder Token-Management-Rechte sind für diesen Workflow nötig.
