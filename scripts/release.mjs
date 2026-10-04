@@ -3,12 +3,14 @@ import { createHash } from "node:crypto";
 import { appendFile, readFile } from "node:fs/promises";
 import semanticRelease from "semantic-release";
 import releaseConfig from "../release.config.mjs";
-import { assertBuildProvenance, assertReleaseContext, existingReleaseMetadata } from "./release-policy.mjs";
+import { assertReleaseBuildProvenance, assertReleaseContext, assertSitesReleaseAssets, existingReleaseMetadata } from "./release-policy.mjs";
 
 const commit = execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
 assertReleaseContext(process.env, commit);
 const archiveHash = createHash("sha256").update(await readFile("artifacts/riparim-worker.tar.gz")).digest("hex");
-assertBuildProvenance(JSON.parse(await readFile("artifacts/provenance.json", "utf8")), commit, archiveHash);
+assertReleaseBuildProvenance(JSON.parse(await readFile("artifacts/provenance.json", "utf8")), commit, archiveHash, "cloudflare");
+const sitesArchiveHash = createHash("sha256").update(await readFile("artifacts/riparim-sites.tar.gz")).digest("hex");
+assertReleaseBuildProvenance(JSON.parse(await readFile("artifacts/sites-provenance.json", "utf8")), commit, sitesArchiveHash, "sites");
 const latestMain = execFileSync("git", ["ls-remote", "origin", "refs/heads/main"], { encoding: "utf8" }).trim().split(/\s+/)[0];
 
 let release;
@@ -20,7 +22,9 @@ if (latestMain !== commit) {
   if (tags.length) {
     const response = await fetch(`https://api.github.com/repos/ramiz4/riparim/releases/tags/${tags[0]}`, { headers: { Accept: "application/vnd.github+json", Authorization: `Bearer ${process.env.GITHUB_TOKEN}` } });
     if (!response.ok) throw new Error(`The existing ${tags[0]} tag has no readable GitHub release (HTTP ${response.status}). Complete its publication before retrying.`);
-    release = existingReleaseMetadata(await response.json(), tags[0], commit);
+    const publishedRelease = await response.json();
+    assertSitesReleaseAssets(publishedRelease, tags[0], commit);
+    release = existingReleaseMetadata(publishedRelease, tags[0], commit);
     console.log(`Reusing published release ${release.gitTag} for the exact workflow commit.`);
   } else {
     const result = await semanticRelease(releaseConfig);

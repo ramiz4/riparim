@@ -4,6 +4,7 @@ import hostingConfig from "./.openai/hosting.json";
 import { readExecutionProfile } from "./scripts/execution-profile.mjs";
 import { sites } from "./build/sites-vite-plugin";
 import { connectorPreview } from "./build/connector-preview-plugin.mjs";
+import { releaseBuildTarget, sitesBuildConfiguration } from "./scripts/release-policy.mjs";
 
 const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
   "00000000-0000-4000-8000-000000000000";
@@ -38,6 +39,7 @@ const localBindingConfig = {
 };
 
 export default defineConfig(async ({ command }) => {
+  const buildTarget = releaseBuildTarget(process.env.BUILD_TARGET);
   // Use Miniflare's local Request.cf placeholder unless fetching is requested.
   process.env.CLOUDFLARE_CF_FETCH_ENABLED ??= "false";
   process.env.WRANGLER_SEND_METRICS ??= "false";
@@ -66,17 +68,17 @@ export default defineConfig(async ({ command }) => {
       sites({ mockAuth: !managedLinux }),
       connectorPreview(),
       cloudflare({
-        configPath: "./wrangler.jsonc",
+        configPath: command === "build" && buildTarget === "sites" ? "./wrangler.sites.jsonc" : "./wrangler.jsonc",
         viteEnvironment: { name: "rsc", childEnvironments: ["ssr"] },
         inspectorPort: false,
-        // A function replaces binding arrays. Object overrides concatenate
-        // them, which would mix the production IDs with local placeholders.
+        // Sites builds start from a separate Wrangler file because the plugin
+        // merges binding arrays with those already in the source configuration.
         config: command === "serve" ? (config) => ({
           ...config,
           ...localBindingConfig,
           vars: { ...config.vars, SITE_ORIGIN: process.env.SITE_ORIGIN ?? "http://127.0.0.1:5174" },
           services: [{ binding: "CONNECTORS", service: "sites-connector-preview", entrypoint: "ConnectorPreview" }],
-        }) : undefined,
+        }) : buildTarget === "sites" ? () => sitesBuildConfiguration(hostingConfig) : undefined,
         ...(command === "serve"
           ? {
               auxiliaryWorkers: [

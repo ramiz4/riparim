@@ -60,3 +60,14 @@ Der eigene Worker entfernt eingehende `oai-authenticated-user-*`-Header. Diese k
 Die Produktionsumstellung wird in [Issue #17](https://github.com/ramiz4/riparim/issues/17) verfolgt: [Datenübernahme #18](https://github.com/ramiz4/riparim/issues/18), anschließend [Domain-/Auth-Umstellung #19](https://github.com/ramiz4/riparim/issues/19) und nach abgenommener Umstellung sowie beendeter Rückfallphase [Sites-Stilllegung #20](https://github.com/ramiz4/riparim/issues/20).
 
 Referenzen: [semantic-release](https://semantic-release.org/recipes/ci-configurations/github-actions/), [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/), [GitHub Squash-Merges](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests), [Cloudflare CI](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/), [Workers-Berechtigungen](https://developers.cloudflare.com/workers/authorization/workers/).
+
+## Geprüftes Sites-Archiv für die Datenübernahme
+
+CI baut beide Anbieterziele aus demselben geprüften Commit. Der GitHub Release
+enthält neben dem regulären Cloudflare-Artefakt ein Sites-Archiv und eine eigene
+Provenienzdatei mit Projekt-ID und SHA-256. Sites verwendet weiterhin den
+Plattformadapter und logische DB-/BUCKET-Bindings; das eigene Cloudflare-Archiv
+ist dafür ungeeignet. Die reguläre Veröffentlichung auf den eigenen Worker bleibt
+automatisiert. Die einmalige Quellenveröffentlichung übernimmt ausschließlich
+das unveränderte, geprüfte Sites-Release-Archiv. Die erforderliche Schreibpause,
+geschützte Sicherung und Go/No-Go-Prüfung stehen in [data-transfer.md](data-transfer.md).
