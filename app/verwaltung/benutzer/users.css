@@ -17,6 +17,8 @@
 .users-status{display:inline-flex;border-radius:5px;padding:3px 9px;font-size:12px;white-space:nowrap}
 .users-status.active{background:#eaf4e6;color:#387445}
 .users-status.inactive{background:#f4ece8;color:#956247}
+.users-role{display:inline-flex;align-items:center;gap:5px;border-radius:5px;padding:3px 9px;font-size:12px;white-space:nowrap;background:var(--secondary);color:var(--muted-foreground)}
+.users-role.admin{background:#e8f2ef;color:#216f55}
 .users-actions{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
 .users-actions .text-action{display:inline-flex;align-items:center;gap:6px}
 .users-delete{display:inline-flex;align-items:center;gap:5px;color:#a13d35;font-size:13px;font-weight:550;white-space:nowrap}
@@ -32,7 +34,10 @@
 .users-activation{display:flex!important;align-items:center;gap:12px;padding:15px;border:1px solid var(--border);border-radius:8px;background:var(--card)}
 .users-activation>span{display:flex;flex-direction:column;gap:3px;font-size:14px!important;color:var(--foreground)!important}
 .users-activation>span>span{font-size:12px;font-weight:400;color:var(--muted-foreground)}
+.user-role-dialog.role-grant [data-slot=alert-dialog-action]{background:#176b51;color:#fff}
+.user-role-dialog.role-grant [data-slot=alert-dialog-action]:hover:not(:disabled){background:#0b503b}
 html.dark .users-protected{color:var(--theme-positive)}
+html.dark .users-role.admin{background:#163e32;color:var(--theme-positive)}
 html.dark .users-status.active{background:#163e32;color:var(--theme-positive)}
 html.dark .users-status.inactive{background:#3a2926;color:#e6a89b}
 html.dark .users-delete{color:#e6a89b}

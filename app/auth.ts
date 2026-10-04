@@ -72,12 +72,14 @@ export async function getAppUser():Promise<AppUser|null>{
  if(providerBlocked(user)||await accountBlocked(providerAccountId(c.projectUrl,user.id)))return null;
  const id=providerAccountId(c.projectUrl,user.id),claims=await client.auth.getClaims(),sessionId=claims.data?.claims?.session_id;
  if(claims.error||claims.data?.claims?.sub!==user.id||typeof sessionId!=="string")return null;
- const session=await storage().db.prepare("SELECT legacy_access,provider,google_subject,moderator FROM auth_sessions WHERE id=? AND account_id=? AND revoked=0 AND expires_at>?").bind(sessionId,id,Date.now()).first<SessionGrant>();
+ const link=await storage().db.prepare("SELECT legacy_owner,password_access FROM auth_links WHERE account_id=?").bind(id).first<LegacyLink>();
+ // Read the session and role together: promotion must never upgrade an old
+ // customer session that the same role-change transaction has just revoked.
+ const session=await storage().db.prepare("SELECT s.legacy_access,s.provider,s.google_subject,s.moderator,r.role AS account_role FROM auth_sessions s LEFT JOIN auth_account_roles r ON r.account_id=s.account_id WHERE s.id=? AND s.account_id=? AND s.revoked=0 AND s.expires_at>?").bind(sessionId,id,Date.now()).first<SessionGrant&{account_role:string|null}>();
  if(!session||!["password","google"].includes(session.provider))return null;
  if(session.provider==="google"&&(!googleIdentityMatches(user,session.google_subject)||!claims.data?.claims?.amr?.some(proof=>typeof proof==="object"&&proof!==null&&proof.method==="oauth")))return null;
- const link=await storage().db.prepare("SELECT legacy_owner,password_access FROM auth_links WHERE account_id=?").bind(id).first<LegacyLink>();
  const fullName=typeof user.user_metadata?.full_name==="string"?user.user_metadata.full_name:null;
- return {userId:id,email:user.email,fullName,displayName:fullName??user.email,provider:session.provider==="google"?"Google":"E-Mail",ownerKeys:allowsLegacyAccess(session,link)?[id,link!.legacy_owner]:[id],isModerator:allowsGoogleModeration(user,session,moderatorEmail())};
+ return {userId:id,email:user.email,fullName,displayName:fullName??user.email,provider:session.provider==="google"?"Google":"E-Mail",ownerKeys:allowsLegacyAccess(session,link)?[id,link!.legacy_owner]:[id],isModerator:allowsGoogleModeration(user,session,moderatorEmail())||session.account_role==="admin"};
 }
 
 export async function getAdminUser(current?:AppUser|null):Promise<AppUser|null>{const platform=await getChatGPTUser();if(platform&&platform.email.toLowerCase()===moderatorEmail())return legacy(platform);return current!==undefined?current:getAppUser();}
