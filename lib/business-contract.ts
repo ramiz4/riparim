@@ -14,5 +14,5 @@ export const claimSchema=z.object({
 export type BusinessProfile=z.infer<typeof businessProfileSchema>;
 export type BusinessDecision="approved"|"rejected";
 export type BusinessRequest={id:string;workshopId:string;workshopName:string;status:string;moderatorNote:string;revision:number;createdAt:string;owner:string;evidence?:string;evidenceLinks?:string[];profile?:BusinessProfile;baseUpdatedAt?:string};
-export type BusinessState={claims:BusinessRequest[];changes:BusinessRequest[];workshops:Workshop[];error?:string};
+export type BusinessState={claims:BusinessRequest[];changes:BusinessRequest[];workshops:Workshop[];nextClaimCursor:string|null;nextChangeCursor:string|null;error?:string};
 export function editableBusinessProfile(workshop:Pick<Workshop,"phone"|"phoneNote"|"whatsapp"|"services"|"serviceDetails"|"description">):BusinessProfile{return {phone:workshop.phone,phoneNote:workshop.phoneNote,whatsapp:workshop.whatsapp,services:workshop.services,serviceDetails:workshop.serviceDetails,description:workshop.description};}

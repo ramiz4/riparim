@@ -20,10 +20,10 @@ function failure(error:unknown){
 }
 export async function GET(request:Request){
  try{
-  const moderation=new URL(request.url).searchParams.get("moderation")==="1",user=moderation?await getAdminUser():await getAppUser();
+  const params=new URL(request.url).searchParams,moderation=params.get("moderation")==="1",user=moderation?await getAdminUser():await getAppUser();
   if(!user)return json({error:"Bitte melde dich an."},401);
   if(moderation&&!user.isModerator)return json({error:"Kein Zugriff auf die Prüfung."},403);
-  return json(await businessState(user,moderation));
+  return json(await businessState(user,moderation,{claims:params.get("claimCursor"),changes:params.get("changeCursor")}));
  }catch(e){return failure(e);}
 }
 export async function POST(request:Request){

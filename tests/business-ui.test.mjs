@@ -15,7 +15,7 @@ const requests=[];
 const requestView=(id,kind)=>({id,workshopId:workshop.id,workshopName:workshop.name,owner:'fixture-owner',status:'pending',moderatorNote:'',revision:0,createdAt:'2026-10-04T10:00:00Z',...(kind==='claim'?{evidence:'A private and sufficiently detailed fictional company-register explanation.',evidenceLinks:['https://business.example.test/proof']}:{profile:{phone:workshop.phone,phoneNote:workshop.phoneNote,whatsapp:workshop.whatsapp,services:workshop.services,serviceDetails:workshop.serviceDetails,description:workshop.description+' Proposed extra services.'},baseUpdatedAt:workshop.updatedAt})});
 globalThis.fetch=async(url,options)=>{
  const method=options?.method??'GET',body=options?.body?JSON.parse(options.body):null;requests.push({url,method,body});
- if(method==='GET'){assert(['/api/business','/api/business?moderation=1'].includes(url));if(loadFailure)return Response.json({error:'Fixture loading failed'},{status:503});return Response.json(url.includes('moderation')?{...records,claims:records.claims.filter(row=>row.status==='pending'),changes:records.changes.filter(row=>row.status==='pending')}:{...records});}
+ if(method==='GET'){assert(url.startsWith('/api/business'));const query=new URL(url,'https://riparim.example.test').searchParams;if(query.has('claimCursor'))return Response.json({...records,claims:[requestView('00000000-0000-4000-8000-000000000011','claim')],nextClaimCursor:null});if(query.has('changeCursor'))return Response.json({...records,changes:[requestView('00000000-0000-4000-8000-000000000012','change')],nextChangeCursor:null});if(loadFailure)return Response.json({error:'Fixture loading failed'},{status:503});return Response.json(url.includes('moderation')?{...records,claims:records.claims.filter(row=>row.status==='pending'),changes:records.changes.filter(row=>row.status==='pending')}:{...records});}
  assert.equal(url,'/api/business','Only the isolated business fixture receives writes');
  if(method==='POST'){
   if(mode==='failure')return Response.json({error:'Fixture duplicate or invalid draft'},{status:409});
@@ -77,5 +77,10 @@ try{
  check(dialog().querySelector('[role="alert"]').textContent.includes('stale decision'),'A stale decision remains visible and is not announced as success');
  mode='success';await click(button('Entscheidung speichern'));
  check(!dialog()&&document.querySelector('.business-panel').textContent.includes('Keine Änderungsentwürfe vorhanden'),'A confirmed rejection clears the pending change queue');
+ records={workshops:[workshop],claims:[requestView('00000000-0000-4000-8000-000000000004','claim')],changes:[requestView('00000000-0000-4000-8000-000000000005','change')],nextClaimCursor:'fixture-claim-cursor',nextChangeCursor:'fixture-change-cursor'};await remount(true);
+ await click(button('Weitere Übernahme-Anträge laden'));
+ check(document.querySelectorAll('.business-request').length===3&&!button('Weitere Übernahme-Anträge laden')&&button('Weitere Änderungsentwürfe laden'),'Claim pagination appends older requests without resetting the independent draft queue');
+ await click(button('Weitere Änderungsentwürfe laden'));
+ check(document.querySelectorAll('.business-request').length===4&&!button('Weitere Änderungsentwürfe laden'),'Draft pagination appends older proposals and stops at the last page');
  console.log(JSON.stringify({businessUiChecksPassed:passed,liveRequests:false}));
 }finally{await act(async()=>root.unmount());dom.window.close();}

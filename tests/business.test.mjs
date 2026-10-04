@@ -57,6 +57,7 @@ assert.deepEqual(db.prepare('SELECT * FROM workshop_google_places WHERE workshop
 check((await claim('c',first.id)).status===409,'Already assigned profiles cannot be claimed again');
 check((await change('b',first.id,profile(first))).status===403,'Another authenticated account cannot submit changes for the owner’s profile');
 for(const extra of [{status:'published'},{sources:[]},{name:'Other Identity'},{address:'Other Location'},{role:'admin'}])check((await change('a',first.id,{...profile(first),...extra})).status===400,'Owner drafts cannot alter identity, sources, publication or roles directly');
+for(const field of [{phone:'abcdefgh'},{whatsapp:'invalid-value'}]){const invalid=await change('a',first.id,{...profile(first),...field});check(invalid.status===400&&!(await invalid.json()).error.includes('nicht verfügbar'),'Malformed contact data returns a useful input error without replacing public details');}
 response=await change('a',first.id,{...profile(first),description:'A verified fictional operator describes documented passenger-car repair work.'});let changeA=(await response.json()).id;
 check(response.status===201,'Confirmed owners can submit a validated contact/service/description draft');
 check((await change('a',first.id,profile(first))).status===409,'A workshop has at most one pending change draft');
@@ -113,5 +114,15 @@ await cleanup.deleteAccount(deleteAuth,aId);
 check(db.prepare('SELECT COUNT(*) AS n FROM workshop_claims WHERE owner=?').get(actors.a.userId).n===0&&db.prepare('SELECT COUNT(*) AS n FROM workshop_changes WHERE owner IN (?,?)').get(actors.a.userId,'legacy-a').n===0,'Account deletion removes private ownership evidence and drafts, including linked legacy records');
 check(!db.prepare('SELECT workshop_id FROM workshop_owners WHERE account_id IN (?,?)').get(actors.a.userId,'legacy-a'),'Deleted accounts retain no confirmed workshop rights');
 check(db.prepare('SELECT id FROM workshops WHERE id=?').get(first.id),'Account deletion preserves independently maintained public workshop catalogue records');
+// Complete moderation/history queues use stable keyset pagination.
+db.prepare('DELETE FROM workshop_claims').run();
+for(let index=0;index<101;index++)db.prepare('INSERT INTO workshop_claims (id,workshop_id,owner,evidence,created_at,status) VALUES (?,?,?,?,?,?)').run(`00000000-0000-4000-8000-${String(index).padStart(12,'0')}`,first.id,actors.c.userId,evidence,'2026-10-04T12:00:00Z','pending');
+globalThis.fixtureUser=actors.admin;
+let seen=[];let cursor=null;do{const url=new URL(origin+'/api/business');url.searchParams.set('moderation','1');if(cursor)url.searchParams.set('claimCursor',cursor);const page=await route.GET(new Request(url)).then(response=>response.json());seen.push(...page.claims.map(claim=>claim.id));cursor=page.nextClaimCursor;}while(cursor);
+check(seen.length===101&&new Set(seen).size===101&&seen.includes('00000000-0000-4000-8000-000000000000'),'Every pending claim remains reachable beyond the first hundred, including equal timestamps');
+db.prepare("UPDATE workshop_claims SET status='approved' WHERE id<>'00000000-0000-4000-8000-000000000000'").run();
+globalThis.fixtureUser=actors.c;seen=[];cursor=null;do{const url=new URL(origin+'/api/business');if(cursor)url.searchParams.set('claimCursor',cursor);const page=await route.GET(new Request(url)).then(response=>response.json());seen.push(...page.claims);cursor=page.nextClaimCursor;}while(cursor);
+check(seen.length===101&&seen.find(claim=>claim.id==='00000000-0000-4000-8000-000000000000').status==='pending','An applicant can still reach an older pending request beneath more than one hundred history entries');
+check((await route.GET(new Request(origin+'/api/business?claimCursor=invalid'))).status===400,'Malformed pagination is an input error');
 failDb=true;check((await state('admin',true)).status===503,'Storage failure does not expose an incomplete private review queue');failDb=false;
 console.log(JSON.stringify({businessContractChecksPassed:passed,liveProviderCalls:false,productionTouched:false}));
