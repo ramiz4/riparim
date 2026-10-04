@@ -5,6 +5,7 @@ import hostingConfig from "./.openai/hosting.json";
 import { readExecutionProfile } from "./scripts/execution-profile.mjs";
 import { sites } from "./build/sites-vite-plugin";
 import { connectorPreview } from "./build/connector-preview-plugin.mjs";
+import { vinextNavigation } from "./build/vinext-navigation.mjs";
 import { releaseBuildTarget, sitesBuildConfiguration } from "./scripts/release-policy.mjs";
 
 const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
@@ -70,6 +71,7 @@ export default defineConfig(async ({ command }) => {
     },
     plugins: [
       vinext(),
+      vinextNavigation(),
       sites({ mockAuth: !managedLinux }),
       connectorPreview(),
       cloudflare({
