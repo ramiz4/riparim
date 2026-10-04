@@ -2,16 +2,34 @@ import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync, statSync } from "node:fs";
-import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join, relative } from "node:path";
 import { gzipSync } from "node:zlib";
 import { deployCloudflare } from "../scripts/deploy-cloudflare.mjs";
-import { assertCloudflareDeployConfig, assertCloudflareDeployContext, cloudflareProduction, parseWorkerSecrets } from "../scripts/cloudflare-deploy-policy.mjs";
+import { assertCloudflareDeployConfig, assertCloudflareDeployContext, cloudflareProduction, isNewerPublishedRelease, parseWorkerSecrets } from "../scripts/cloudflare-deploy-policy.mjs";
 
 const commit = "a".repeat(40);
 const tag = "v1.2.3";
-const env = { GITHUB_ACTIONS: "true", GITHUB_EVENT_NAME: "push", GITHUB_REF: "refs/heads/main", GITHUB_REPOSITORY: "ramiz4/riparim", GITHUB_SHA: commit, RELEASE_TAG: tag, CLOUDFLARE_API_TOKEN: "fixture-api-token" };
+const env = { GITHUB_ACTIONS: "true", GITHUB_EVENT_NAME: "push", GITHUB_REF: "refs/heads/main", GITHUB_REPOSITORY: "ramiz4/riparim", GITHUB_SHA: commit, RELEASE_TAG: tag, GITHUB_TOKEN: "fixture-github-token", GH_TOKEN: "fixture-gh-token", CLOUDFLARE_API_TOKEN: "fixture-api-token" };
+function publishedRelease(version) {
+  return {
+    tag_name: version,
+    draft: false,
+    prerelease: false,
+    published_at: "2026-10-04T10:00:00Z",
+    assets: [
+      { name: `riparim-${version}.tar.gz`, state: "uploaded", size: 123 },
+      { name: `riparim-${version}.json`, state: "uploaded", size: 100 },
+    ],
+  };
+}
+assert.equal(isNewerPublishedRelease(publishedRelease(tag), tag), false);
+assert.equal(isNewerPublishedRelease(publishedRelease("v1.2.2"), tag), false);
+assert.equal(isNewerPublishedRelease(publishedRelease("v1.2.10"), tag), true);
+assert.equal(isNewerPublishedRelease(publishedRelease("v1.10.0"), tag), true);
+assert.equal(isNewerPublishedRelease(publishedRelease("v2.0.0"), "v1.99.99"), true);
+assert.equal(isNewerPublishedRelease(publishedRelease("v1.2.9007199254740993"), "v1.2.9007199254740992"), true);
 const source = {
   account_id: cloudflareProduction.account,
   name: cloudflareProduction.worker,
@@ -82,7 +100,23 @@ let resolvedTag = commit;
 let failOperation = "";
 let secretFile;
 let remoteOperations = [];
+let latestRelease = publishedRelease(tag);
+let releaseSequence = [];
+let lookupFailure = false;
+let lookupStatus = 200;
+let invalidJson = false;
+async function fixtureRequest(url, options) {
+  assert.equal(url, "https://api.github.com/repos/ramiz4/riparim/releases/latest");
+  assert.equal(options.headers.Authorization, `Bearer ${env.GITHUB_TOKEN}`);
+  assert.equal(options.headers.Accept, "application/vnd.github+json");
+  assert(options.signal instanceof AbortSignal, "GitHub lookup must have a bounded timeout");
+  if (lookupFailure) throw new Error("fixture-private-value: network failure");
+  const release = releaseSequence.length ? releaseSequence.shift() : latestRelease;
+  return new Response(invalidJson ? "fixture-private-value: invalid JSON" : JSON.stringify(release), { status: lookupStatus });
+}
 function fixtureRun(command, args, options) {
+  assert.equal(options.env.GITHUB_TOKEN, undefined, "GitHub authorization must not leak into child processes");
+  assert.equal(options.env.GH_TOKEN, undefined, "GitHub CLI authorization must not leak into child processes");
   if (command === "git") {
     if (args[0] === "ls-remote") return `${currentMain}\trefs/heads/main\n`;
     return `${args.includes("HEAD") ? commit : resolvedTag}\n`;
@@ -116,7 +150,7 @@ function fixtureRun(command, args, options) {
   if (failOperation === remoteOperations.at(-1)) throw new Error("fixture-private-value: provider failure");
   return "";
 }
-const deploy = overrides => deployCloudflare({ root: fixtureRoot, env: { ...env, ...overrides }, run: fixtureRun });
+const deploy = overrides => deployCloudflare({ root: fixtureRoot, env: { ...env, ...overrides }, run: fixtureRun, request: fixtureRequest });
 
 try {
   await mkdir(join(fixtureRoot, "artifacts"), { recursive: true });
@@ -138,10 +172,46 @@ try {
 
   remoteOperations = [];
   currentMain = "b".repeat(40);
+  assert.deepEqual(await deploy(), { deployed: true, tag, commit }, "new docs/chore commits on main must not strand an already published release");
+  assert.deepEqual(remoteOperations, ["migrations", "deploy"]);
+  remoteOperations = [];
+  latestRelease = publishedRelease("v1.2.4");
   assert.deepEqual(await deploy(), { deployed: false, reason: "superseded" });
   assert.deepEqual(remoteOperations, []);
-  currentMain = "";
-  await assert.rejects(deploy(), /Cannot determine origin\/main/);
+  latestRelease = publishedRelease(tag);
+  await assert.rejects(deploy({ GITHUB_TOKEN: "" }), /read-only GitHub token/);
+  lookupFailure = true;
+  await assert.rejects(deploy(), error => /could not be verified/.test(error.message) && !error.message.includes("fixture-private-value"));
+  lookupFailure = false;
+  for (const status of [403, 404, 500]) {
+    lookupStatus = status;
+    await assert.rejects(deploy(), /could not be verified/);
+  }
+  lookupStatus = 200;
+  invalidJson = true;
+  await assert.rejects(deploy(), error => /could not be verified/.test(error.message) && !error.message.includes("fixture-private-value"));
+  invalidJson = false;
+  for (const change of [{ tag_name: "v01.2.4" }, { tag_name: "v1.2.4-beta.1" }, { tag_name: "main" }, { draft: true }, { prerelease: true }, { published_at: null }, { published_at: "invalid" }, { assets: null }, { assets: [] }, { assets: publishedRelease("v1.2.4").assets.slice(0, 1) }]) {
+    latestRelease = { ...publishedRelease("v1.2.4"), ...change };
+    await assert.rejects(deploy(), /metadata|incomplete/);
+  }
+  assert.deepEqual(remoteOperations, [], "API failures and invalid or partial publication must never touch production");
+  latestRelease = publishedRelease(tag);
+
+  // A publication appearing after extraction must still fence a stale retry,
+  // and temporary application secrets must be removed on this early return.
+  const secretsBeforeFence = await readdir(join(tmpdir()));
+  releaseSequence = [publishedRelease(tag), publishedRelease("v1.2.4")];
+  assert.deepEqual(await deploy(withSecrets), { deployed: false, reason: "superseded" });
+  assert.deepEqual(remoteOperations, []);
+  assert.deepEqual((await readdir(join(tmpdir()))).filter(name => name.startsWith("riparim-worker-secrets-") && !secretsBeforeFence.includes(name)), []);
+
+  // Recheck immediately before upload, after migrations, to stop an older
+  // deploy-only rerun from replacing a newer published application release.
+  releaseSequence = [publishedRelease(tag), publishedRelease(tag), publishedRelease("v1.2.4")];
+  assert.deepEqual(await deploy(), { deployed: false, reason: "superseded" });
+  assert.deepEqual(remoteOperations, ["migrations"]);
+  remoteOperations = [];
   currentMain = commit;
   await writeFile(join(fixtureRoot, "package.json"), '{"devDependencies":{"wrangler":"^4.92.0"}}');
   await assert.rejects(deploy(), /exact Wrangler version pinned in package.json/);
@@ -181,7 +251,7 @@ try {
   await assert.rejects(deploy(withSecrets), error => /Worker deployment failed/.test(error.message) && !error.message.includes("fixture-private-value"));
   assert.equal(existsSync(secretFile), false, "secrets must be removed after failed deployment");
   assert.deepEqual(remoteOperations, ["migrations", "deploy"]);
-  console.log("Cloudflare deployment: main/release gating, published archive integrity, safe extraction, production bindings, ordered migrations and secret cleanup passed; no remote operations executed.");
+  console.log("Cloudflare deployment: main/release gating, published-release ordering, archive integrity, safe extraction, production bindings, ordered migrations and secret cleanup passed; no remote operations executed.");
 } finally {
   await rm(fixtureRoot, { recursive: true, force: true });
 }

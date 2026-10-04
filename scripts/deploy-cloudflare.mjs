@@ -4,7 +4,7 @@ import { appendFile, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/pro
 import { tmpdir } from "node:os";
 import { basename, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { assertCloudflareDeployConfig, assertCloudflareDeployContext, assertCloudflareProvenance, assertSafeTarListing, cloudflareProduction, parseWorkerSecrets } from "./cloudflare-deploy-policy.mjs";
+import { assertCloudflareDeployConfig, assertCloudflareDeployContext, assertCloudflareProvenance, assertSafeTarListing, cloudflareProduction, isNewerPublishedRelease, parseWorkerSecrets } from "./cloudflare-deploy-policy.mjs";
 
 function runCommand(command, args, options) {
   const result = spawnSync(command, args, { ...options, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"], maxBuffer: 16 * 1024 * 1024 });
@@ -14,21 +14,35 @@ function runCommand(command, args, options) {
   return result.stdout;
 }
 
-export async function deployCloudflare({ env = process.env, root = fileURLToPath(new URL("../", import.meta.url)), run = runCommand } = {}) {
+export async function deployCloudflare({ env = process.env, root = fileURLToPath(new URL("../", import.meta.url)), run = runCommand, request = fetch } = {}) {
   const options = { cwd: root, env: { ...env, CI: "true", WRANGLER_SEND_METRICS: "false", WRANGLER_WRITE_LOGS: "false" } };
   delete options.env.CLOUDFLARE_WORKER_SECRETS;
+  delete options.env.GITHUB_TOKEN;
+  delete options.env.GH_TOKEN;
   const commit = run("git", ["rev-parse", "HEAD"], options).trim();
   // Validate context before using the release tag in any command argument.
   assertCloudflareDeployContext(env, commit, commit);
   const tagCommit = run("git", ["rev-parse", "--verify", `refs/tags/${env.RELEASE_TAG}^{commit}`], options).trim();
   assertCloudflareDeployContext(env, commit, tagCommit);
-  const latestMain = () => {
-    const head = run("git", ["ls-remote", "origin", "refs/heads/main"], options).trim().split(/\s+/)[0];
-    if (!/^[a-f0-9]{40}$/.test(head)) throw new Error("Cannot determine origin/main for production deployment.");
-    return head;
+  const newerPublishedRelease = async () => {
+    if (!env.GITHUB_TOKEN) throw new Error("A read-only GitHub token is required to verify release ordering.");
+    let release;
+    try {
+      const response = await request("https://api.github.com/repos/ramiz4/riparim/releases/latest", {
+        headers: { Accept: "application/vnd.github+json", Authorization: `Bearer ${env.GITHUB_TOKEN}` },
+        signal: AbortSignal.timeout(10_000),
+      });
+      if (!response.ok) throw new Error("The GitHub release lookup failed.");
+      release = await response.json();
+    } catch {
+      throw new Error("The latest published GitHub release could not be verified.");
+    }
+    return isNewerPublishedRelease(release, env.RELEASE_TAG);
   };
-  if (latestMain() !== commit) {
-    console.log("A newer main commit exists; its release workflow will deploy production.");
+  // Main may have advanced with docs/chore commits that create no release. Only
+  // a newer complete publication supersedes these already verified build bytes.
+  if (await newerPublishedRelease()) {
+    console.log("A newer published release exists; this deployment is superseded.");
     return { deployed: false, reason: "superseded" };
   }
 
@@ -62,10 +76,10 @@ export async function deployCloudflare({ env = process.env, root = fileURLToPath
       await writeFile(secretFile, JSON.stringify(secrets), { mode: 0o600, flag: "wx" });
       deployArgs.push("--secrets-file", secretFile);
     }
-    if (latestMain() !== commit) return { deployed: false, reason: "superseded" };
+    if (await newerPublishedRelease()) return { deployed: false, reason: "superseded" };
     try { run(process.execPath, [cli, "d1", "migrations", "apply", "DB", "--remote", "--config", sourceConfig], options); }
     catch { throw new Error("Cloudflare D1 migrations failed; the Worker was not deployed."); }
-    if (latestMain() !== commit) return { deployed: false, reason: "superseded" };
+    if (await newerPublishedRelease()) return { deployed: false, reason: "superseded" };
     try { run(process.execPath, deployArgs, options); }
     catch { throw new Error("Cloudflare Worker deployment failed. Retry the same published release."); }
     if (env.GITHUB_OUTPUT) await appendFile(env.GITHUB_OUTPUT, `deployed=true\ntag=${env.RELEASE_TAG}\ncommit=${commit}\n`);

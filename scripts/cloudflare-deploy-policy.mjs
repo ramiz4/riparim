@@ -1,6 +1,8 @@
 import { posix } from "node:path";
 import { isDeepStrictEqual } from "node:util";
-import { assertBuildProvenance, assertReleaseContext } from "./release-policy.mjs";
+import { assertBuildProvenance, assertReleaseContext, existingReleaseMetadata } from "./release-policy.mjs";
+
+const stableReleaseTag = /^v(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)$/;
 
 export const cloudflareProduction = {
   account: "ec181b3a61c7c3da13910600953fc3ea",
@@ -21,9 +23,22 @@ const workerSecretNames = new Set([
 
 export function assertCloudflareDeployContext(env, commit, tagCommit) {
   assertReleaseContext(env, commit);
-  if (!/^v(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)$/.test(env.RELEASE_TAG ?? "") || tagCommit !== commit) {
+  if (!stableReleaseTag.test(env.RELEASE_TAG ?? "") || tagCommit !== commit) {
     throw new Error("Deployment requires a stable release tag resolving to the exact main workflow commit.");
   }
+}
+
+export function isNewerPublishedRelease(release, tag) {
+  if (!stableReleaseTag.test(tag ?? "") || !release || typeof release !== "object" || !stableReleaseTag.test(release.tag_name ?? "") || release.draft !== false || release.prerelease !== false || typeof release.published_at !== "string" || !Number.isFinite(Date.parse(release.published_at)) || !Array.isArray(release.assets)) {
+    throw new Error("The latest GitHub release must have valid published stable-version metadata.");
+  }
+  existingReleaseMetadata(release, release.tag_name, "");
+  const latest = release.tag_name.slice(1).split(".").map(BigInt);
+  const current = tag.slice(1).split(".").map(BigInt);
+  for (let index = 0; index < current.length; index++) {
+    if (latest[index] !== current[index]) return latest[index] > current[index];
+  }
+  return false;
 }
 
 export function assertCloudflareProvenance(provenance, commit, sha256) {
