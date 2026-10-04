@@ -19,7 +19,7 @@ const bundle=await build({entryPoints:{account:'app/api/account/route.ts',grant:
 }}]});
 for(const file of bundle.outputFiles)await writeFile(file.path.replace(/\.js$/,'.mjs'),file.contents);
 const db=new DatabaseSync(':memory:');
-for(const file of ['0000_handy_black_queen','0001_polite_killmonger','0002_exotic_slayback','0003_magenta_boom_boom','0004_ambiguous_morbius','0007_pink_tyrannus','0008_stormy_blazing_skull','0009_fine_sister_grimm','0010_handy_luminals'])db.exec(await readFile(`drizzle/${file}.sql`,'utf8'));
+for(const file of ['0000_handy_black_queen','0001_polite_killmonger','0002_exotic_slayback','0003_magenta_boom_boom','0004_ambiguous_morbius','0007_pink_tyrannus','0008_stormy_blazing_skull','0009_fine_sister_grimm','0010_handy_luminals','0011_funny_echo'])db.exec(await readFile(`drizzle/${file}.sql`,'utf8'));
 let beforeBatch=null,batchTail=Promise.resolve(),failDb=false;
 const d1={prepare(sql){const s=db.prepare(sql);const adapter=(values=[])=>({bind:(...next)=>adapter(next),first:async()=>{if(failDb)throw Error('Fixture DB unavailable');return s.get(...values)??null;},all:async()=>({results:s.all(...values)}),run:async()=>({meta:s.run(...values)})});return adapter();},batch(statements){const result=batchTail.then(async()=>{if(beforeBatch){const fn=beforeBatch;beforeBatch=null;fn();}db.exec('BEGIN');try{const results=[];for(const statement of statements)results.push(await statement.run());db.exec('COMMIT');return results;}catch(e){db.exec('ROLLBACK');throw e;}});batchTail=result.catch(()=>{});return result;}};
 const origin='https://riparim.example.test',projectUrl='https://fixture-project.supabase.co';

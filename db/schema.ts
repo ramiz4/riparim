@@ -33,3 +33,15 @@ export const authAccountDeletions=sqliteTable("auth_account_deletions",{
 export const evidenceUploads=sqliteTable("evidence_uploads",{
  fileKey:text("file_key").primaryKey(),owner:text("owner").notNull()
 },table=>[index("idx_evidence_uploads_owner").on(table.owner)]);
+export const workshopClaims=sqliteTable("workshop_claims",{
+ id:text("id").primaryKey(),workshopId:text("workshop_id").notNull(),owner:text("owner").notNull(),
+ evidence:text("evidence").notNull(),evidenceLinks:text("evidence_links").notNull().default("[]"),status:text("status").notNull().default("pending"),
+ moderatorNote:text("moderator_note").notNull().default(""),revision:integer("revision").notNull().default(0),createdAt:text("created_at").notNull(),moderatedAt:text("moderated_at"),moderatedBy:text("moderated_by")
+},table=>[index("idx_workshop_claims_owner").on(table.owner),index("idx_workshop_claims_status").on(table.status)]);
+export const workshopOwners=sqliteTable("workshop_owners",{
+ workshopId:text("workshop_id").primaryKey(),accountId:text("account_id").notNull(),claimId:text("claim_id").notNull(),confirmedAt:text("confirmed_at").notNull(),confirmedBy:text("confirmed_by").notNull()
+},table=>[index("idx_workshop_owners_account").on(table.accountId)]);
+export const workshopChanges=sqliteTable("workshop_changes",{
+ id:text("id").primaryKey(),workshopId:text("workshop_id").notNull(),owner:text("owner").notNull(),profile:text("profile").notNull(),baseUpdatedAt:text("base_updated_at").notNull(),decisionToken:text("decision_token"),
+ status:text("status").notNull().default("pending"),moderatorNote:text("moderator_note").notNull().default(""),revision:integer("revision").notNull().default(0),createdAt:text("created_at").notNull(),moderatedAt:text("moderated_at"),moderatedBy:text("moderated_by")
+},table=>[index("idx_workshop_changes_owner").on(table.owner),index("idx_workshop_changes_status").on(table.status)]);

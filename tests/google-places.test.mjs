@@ -114,5 +114,16 @@ assert.equal((await save.PATCH(sendProfile({...withoutReviews,previousUpdatedAt:
 sqlite.prepare('INSERT INTO workshop_google_places (workshop_id,place_id,profile_hash,checked_at,retry_after) VALUES (?,?,?,?,?)').run('sonic-garage',expectedId,'duplicate-fixture',Date.now(),Date.now()+86400000);
 assert.equal(await places.confirmedPublicationPlace(directory.validateProfile(withoutReviews,withoutReviews.id),withoutReviews),null,'a Google identity already used by another real profile cannot be published twice');
 assert.equal((await save.PATCH(sendProfile({...all.find(w=>w.id==='auto-ballkan-gjilan'),status:'published',previousUpdatedAt:all.find(w=>w.id==='auto-ballkan-gjilan').updatedAt},'PATCH'))).status,400,'truck entries cannot be republished through the management API');
+// Owner drafts validate a changed identity without replacing live metadata.
+sqlite.prepare('UPDATE catalog_state SET value=? WHERE key=?').run('0',quotaKey);
+const cacheBeforeDraft=sqlite.prepare('SELECT * FROM workshop_google_places WHERE workshop_id=?').get(actualMita.id);
+const changedPhone='+383441234567',readonlyCandidate={...candidate,id:'ChIJReadOnlyOperatorFixture',internationalPhoneNumber:changedPhone};
+globalThis.fetch=async url=>{assert.equal(String(url),'https://places.googleapis.com/v1/places:searchText');return Response.json({places:[readonlyCandidate]});};
+const operatorDraft=directory.validateProfile({...actualMita,phone:changedPhone},actualMita.id);
+assert.equal(await places.confirmedPublicationPlace(operatorDraft,actualMita,false),readonlyCandidate.id,'changed owner contacts pass the existing strict matcher in staging mode');
+assert.deepEqual(sqlite.prepare('SELECT * FROM workshop_google_places WHERE workshop_id=?').get(actualMita.id),cacheBeforeDraft,'successful staging preserves the publicly confirmed identity');
+globalThis.fetch=async()=>Response.json({error:'fixture unavailable'},{status:503});
+await assert.rejects(places.confirmedPublicationPlace({...operatorDraft,phone:'+383441234568'},actualMita,false));
+assert.deepEqual(sqlite.prepare('SELECT * FROM workshop_google_places WHERE workshop_id=?').get(actualMita.id),cacheBeforeDraft,'failed staging also preserves the publicly confirmed identity');
 globalThis.fetch=originalFetch;delete globalThis.window;sqlite.close();
 console.log(JSON.stringify({googleIdentityChecks:9,explicitSearchGeography:true,negativeCacheUpgrade:true,apiBoundaries:true,dailyBudget:100,existingPublicWorkshops:78,existingDraftsPreserved:85,currentGoogleRatings:true,googleRatingsPersisted:false,liveProviderCalls:false}));
