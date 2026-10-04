@@ -4,6 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createHash } from "node:crypto";
 import { DatabaseSync } from "node:sqlite";
+import { workshopIdentityInput } from "../lib/google-identity-fingerprint.mjs";
 import { loadMigrationSet, snapshotDatabase, restoreSnapshot, upgradeSnapshot, planDataTransfer, validateSnapshot, validateEvidenceManifest, verifyEvidenceFiles } from "../scripts/data-transfer.mjs";
 
 const migrations = await loadMigrationSet();
@@ -11,9 +12,10 @@ const metadata = { projectId: "source-fixture", sourceCommit: "a".repeat(40), ex
 function fixture(count, history = "d1") {
   const db = new DatabaseSync(":memory:");
   for (const migration of migrations.slice(0, count)) db.exec(migration.sql);
-  if (history === "d1") {
-    db.exec("CREATE TABLE d1_migrations (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE, applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)");
-    for (const migration of migrations.slice(0, count)) db.prepare("INSERT INTO d1_migrations(name) VALUES (?)").run(migration.name);
+  if (history === "d1" || history === "appgarden") {
+    const name = history === "appgarden" ? "__appgarden_migrations" : "d1_migrations";
+    db.exec(`CREATE TABLE "${name}"(id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT UNIQUE,applied_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)`);
+    for (const migration of migrations.slice(0, count)) db.prepare(`INSERT INTO "${name}"(name) VALUES (?)`).run(migration.name);
   } else if (history === "drizzle") {
     db.exec("CREATE TABLE __drizzle_migrations (id SERIAL PRIMARY KEY, hash TEXT NOT NULL, created_at NUMERIC)");
     for (const migration of migrations.slice(0, count)) db.prepare("INSERT INTO __drizzle_migrations(hash,created_at) VALUES (?,?)").run(migration.sha256, migration.when);
@@ -107,6 +109,59 @@ test("misordered, missing, or modified D1 history blocks transfer", () => {
     assert.throws(() => restoreSnapshot(altered, migrations), /migration history/i);
   }
 });
+test("the exact Sites migration-history alias proves old schema and stays archived", () => {
+  const db = fixture(9, "appgarden");
+  db.prepare("INSERT INTO auth_links(account_id,legacy_owner,created_at) VALUES(?,?,?)").run("provider-account-fixture", "legacy-owner-fixture", "2026-10-04");
+  const snapshot = snapshotDatabase(db, metadata);
+  const original = structuredClone(snapshot.tables.find((table) => table.name === "__appgarden_migrations"));
+  const result = upgradeSnapshot(snapshot, migrations);
+  assert.equal(result.proof.count, 9);
+  assert.deepEqual(result.proof.history, ["__appgarden_migrations"]);
+  assert.deepEqual(result.sourceHistory[0], original);
+  assert.deepEqual(result.sourceArchive.tables.find((table) => table.name === "__appgarden_migrations"), original);
+  assert.equal(result.snapshot.tables.find((table) => table.name === "auth_links").rows[0].legacy_owner, "legacy-owner-fixture");
+  const plan = planDataTransfer(snapshot, target, { migrations });
+  assert.equal(plan.statements.length, 1);
+  assert(plan.statements.every((statement) => statement.table !== "__appgarden_migrations" && statement.table !== "d1_migrations"));
+  assert.deepEqual(plan.sourceHistory[0], original);
+  db.close();
+});
+test("current Sites history matches all checked-in names without schema migration", () => {
+  const db = fixture(migrations.length, "appgarden");
+  const result = upgradeSnapshot(snapshotDatabase(db, metadata), migrations);
+  assert.deepEqual(result.proof.applied, []);
+  assert.equal(result.sourceHistory[0].rows.length, migrations.length);
+  db.close();
+});
+test("missing, misordered or foreign Sites migration names remain hard blockers", () => {
+  const db = fixture(9, "appgarden");
+  const snapshot = snapshotDatabase(db, metadata);
+  for (const mutation of [(rows) => rows.pop(), (rows) => { rows[0].name = "foreign.sql"; }, (rows) => { [rows[0].name, rows[1].name] = [rows[1].name, rows[0].name]; }]) {
+    const altered = structuredClone(snapshot);
+    mutation(altered.tables.find((table) => table.name === "__appgarden_migrations").rows);
+    assert.throws(() => restoreSnapshot(altered, migrations), /migration history/i);
+  }
+  db.close();
+});
+test("Sites history schema cannot hide additional data columns or changed constraints", () => {
+  const db = fixture(9, "appgarden");
+  const snapshot = snapshotDatabase(db, metadata);
+  const sqlChange = structuredClone(snapshot);
+  sqlChange.schema.find((item) => item.name === "__appgarden_migrations").sql = sqlChange.schema.find((item) => item.name === "__appgarden_migrations").sql.replace("name TEXT UNIQUE", "name TEXT");
+  assert.throws(() => restoreSnapshot(sqlChange, migrations), /verified provider contract/);
+  const columnChange = structuredClone(snapshot);
+  columnChange.tables.find((item) => item.name === "__appgarden_migrations").columns[2].type = "TEXT";
+  assert.throws(() => restoreSnapshot(columnChange, migrations), /verified provider contract/);
+  db.close();
+});
+test("similar provider names and changed application schema are never whitelisted", () => {
+  const db = fixture(9, "appgarden");
+  db.exec("CREATE TABLE __appgarden_private_data(id TEXT PRIMARY KEY,value TEXT)");
+  assert.throws(() => restoreSnapshot(snapshotDatabase(db, metadata), migrations), /does not match one unique/);
+  db.exec("DROP TABLE __appgarden_private_data; ALTER TABLE visits ADD unexpected TEXT");
+  assert.throws(() => restoreSnapshot(snapshotDatabase(db, metadata), migrations), /does not match one unique/);
+  db.close();
+});
 test("Drizzle null SERIAL ids remain valid only with exact hashes and timestamps", () => {
   const db = fixture(9, "drizzle");
   const snapshot = snapshotDatabase(db, metadata);
@@ -130,6 +185,77 @@ test("already migrated source adds no schema changes; destination must be curren
   const oldTarget = fixture(9);
   assert.throws(() => planDataTransfer(source, snapshotDatabase(oldTarget, { ...metadata, projectId: "target-fixture" }), { migrations }), /Destination must have every/);
   oldTarget.close(); db.close();
+});
+function cacheFixtures() {
+  const profile = { id: "metadata-workshop-fixture", name: "Fixture Workshop", city: "Fixture City", address: "Fixture Address", phone: "+38344123456", phone_note: "", whatsapp: "", brands: "[]", services: "[]", service_details: "[]", languages: "[]", specialty: "fixture", description: "fixture description", lat: "42.5", lng: "20.8", sources: "[]", checked_at: "2026-10-04T20:00:00Z", status: "published", updated_at: "2026-10-04T20:00:00Z" };
+  const rating = { workshop_id: profile.id, rating: 4.5, review_count: 3, maps_url: "https://maps.google.com/?cid=123", source_url: null, source_label: null, checked_at: "2026-10-04T20:00:00Z", source_updated_at: null };
+  const currentHash = createHash("sha256").update(workshopIdentityInput({ ...profile, lat: Number(profile.lat), lng: Number(profile.lng), googleRating: { mapsUrl: rating.maps_url } })).digest("hex");
+  function snapshot(source) {
+    const db = fixture(migrations.length);
+    for (const [table, row] of [["workshops", profile], ["workshop_google_ratings", rating], ["catalog_state", { key: `workshop-source:${"a".repeat(64)}`, value: source ? "2026-10-04T20:00:00Z" : "2026-10-04T21:00:00.000Z" }], ["workshop_google_places", { workshop_id: profile.id, place_id: "place-fixture", profile_hash: source ? "0".repeat(64) : currentHash, checked_at: source ? 100 : 200, retry_after: source ? 1000 : 2000 }]]) {
+      const columns = Object.keys(row);
+      db.prepare(`INSERT INTO ${table} (${columns.join(",")}) VALUES(${columns.map(() => "?").join(",")})`).run(...Object.values(row));
+    }
+    const result = snapshotDatabase(db, { ...metadata, projectId: source ? "source-fixture" : "target-fixture" }); db.close(); return result;
+  }
+  return { source: snapshot(true), target: snapshot(false), currentHash };
+}
+test("cache metadata remains conflicting by default and needs explicit validated retention", () => {
+  const cache = cacheFixtures();
+  assert.throws(() => planDataTransfer(cache.source, cache.target, { migrations }), /Conflicting destination row/);
+  const before = structuredClone(cache);
+  const plan = planDataTransfer(cache.source, cache.target, { migrations, retainValidatedCacheMetadata: true });
+  assert.equal(plan.retainedMetadata, 2);
+  assert.equal(plan.statements.length, 0);
+  assert.equal(plan.summary.find((row) => row.table === "catalog_state").retainedMetadata, 1);
+  assert.equal(plan.summary.find((row) => row.table === "workshop_google_places").retainedMetadata, 1);
+  assert.equal(plan.summary.find((row) => row.table === "workshop_google_places").unchanged, 0);
+  assert.deepEqual(cache, before, "original snapshots and metadata remain exact");
+});
+test("matching-place current hash validates time-only retention, missing cache rows insert normally", () => {
+  const cache = cacheFixtures();
+  cache.source.tables.find((table) => table.name === "workshop_google_places").rows[0].profile_hash = cache.currentHash;
+  assert.equal(planDataTransfer(cache.source, cache.target, { migrations, retainValidatedCacheMetadata: true }).retainedMetadata, 2);
+  cache.target.tables.find((table) => table.name === "workshop_google_places").rows = [];
+  const plan = planDataTransfer(cache.source, cache.target, { migrations, retainValidatedCacheMetadata: true });
+  assert.equal(plan.retainedMetadata, 1);
+  assert.equal(plan.statements.length, 1);
+  assert.equal(plan.statements[0].table, "workshop_google_places");
+  assert.match(plan.statements[0].sql, /^INSERT /);
+});
+test("invalid place IDs, stale target hashes or malformed hash/time metadata cannot be retained", () => {
+  for (const [side, column, value] of [["target", "place_id", "different-place-fixture"], ["target", "profile_hash", "f".repeat(64)], ["source", "profile_hash", "malformed"], ["target", "checked_at", -1], ["source", "retry_after", 1.5]]) {
+    const cache = cacheFixtures();
+    cache[side].tables.find((table) => table.name === "workshop_google_places").rows[0][column] = value;
+    assert.throws(() => planDataTransfer(cache.source, cache.target, { migrations, retainValidatedCacheMetadata: true }), /Conflicting destination row/);
+  }
+});
+test("profile identity, full business data, publication and rating changes remain conflicts", () => {
+  for (const [table, column, value] of [["workshops", "phone", "+38344999999"], ["workshops", "description", "changed private business fixture"], ["workshops", "status", "draft"], ["workshop_google_ratings", "maps_url", "https://maps.google.com/?cid=999"], ["workshop_google_ratings", "rating", 3.0]]) {
+    const cache = cacheFixtures();
+    cache.target.tables.find((entry) => entry.name === table).rows[0][column] = value;
+    assert.throws(() => planDataTransfer(cache.source, cache.target, { migrations, retainValidatedCacheMetadata: true }), /Conflicting destination row/);
+  }
+  const cache = cacheFixtures();
+  cache.target.tables.find((table) => table.name === "workshops").rows = [];
+  assert.throws(() => planDataTransfer(cache.source, cache.target, { migrations, retainValidatedCacheMetadata: true }), /Conflicting destination row/);
+});
+test("seed marker validation rejects malformed timestamps and quota counter conflicts", () => {
+  for (const value of ["not-a-date", "2026-02-30T20:00:00Z", "2026-10-04"]) {
+    const cache = cacheFixtures();
+    cache.source.tables.find((table) => table.name === "catalog_state").rows[0].value = value;
+    assert.throws(() => planDataTransfer(cache.source, cache.target, { migrations, retainValidatedCacheMetadata: true }), /Conflicting destination row/);
+  }
+  const cache = cacheFixtures();
+  cache.source.tables.find((table) => table.name === "catalog_state").rows.push({ key: "google-places-quota:fixture", value: "1" });
+  cache.target.tables.find((table) => table.name === "catalog_state").rows.push({ key: "google-places-quota:fixture", value: "2" });
+  assert.throws(() => planDataTransfer(cache.source, cache.target, { migrations, retainValidatedCacheMetadata: true }), /Conflicting destination row/);
+});
+test("ownership changes are never classified as cache metadata", () => {
+  const cache = cacheFixtures();
+  cache.source.tables.find((table) => table.name === "workshop_owners").rows.push({ workshop_id: "metadata-workshop-fixture", account_id: "source-owner-fixture", claim_id: "claim-fixture", confirmed_at: "2026-10-04", confirmed_by: "bootstrap-fixture" });
+  cache.target.tables.find((table) => table.name === "workshop_owners").rows.push({ workshop_id: "metadata-workshop-fixture", account_id: "different-owner-fixture", claim_id: "claim-fixture", confirmed_at: "2026-10-04", confirmed_by: "bootstrap-fixture" });
+  assert.throws(() => planDataTransfer(cache.source, cache.target, { migrations, retainValidatedCacheMetadata: true }), /Conflicting destination row/);
 });
 test("invalid scalars, unsafe integers, and malformed blobs do not silently change data", () => {
   for (const value of [true, NaN, Number.MAX_SAFE_INTEGER + 1, { type: "blob", base64: "!!!" }, { type: "blob", base64: "AA==", extra: 1 }]) {

@@ -1,3 +1,4 @@
+import {workshopIdentityInput} from "./google-identity-fingerprint.mjs";
 import {cityCoordinates,type Workshop} from "./workshops";
 import {googlePlaceIdFromMapsUrl,googleMapsCid,googleMapsSearchQuery} from "./google-maps-link";
 
@@ -67,4 +68,4 @@ export function verifiedGooglePlace(workshop:Identity,candidates:GooglePlaceCand
  const ids=[...new Set(matches.map(place=>place.id!))];
  return ids.length===1?ids[0]:null;
 }
-export async function workshopIdentityHash(w:Identity,legacy=false){const profile=[w.name,w.phone,w.city,w.address,w.lat,w.lng],input=JSON.stringify(legacy?profile:["maps-link-v6",...profile,sourceMapsUrl(w)??null]);const digest=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(input));return Array.from(new Uint8Array(digest),byte=>byte.toString(16).padStart(2,"0")).join("");}
+export async function workshopIdentityHash(w:Identity,legacy=false){const input=workshopIdentityInput(w,legacy);const digest=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(input));return Array.from(new Uint8Array(digest),byte=>byte.toString(16).padStart(2,"0")).join("");}
