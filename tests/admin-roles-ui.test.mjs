@@ -23,10 +23,11 @@ const {default:AdminUsers}=await import(new URL('../'+output+'/users.mjs',import
 const fixtureUser=(id,name,role,protectedAccount=false)=>({id,name,email:name.toLowerCase().replaceAll(' ','-')+'@example.test',role,protected:protectedAccount,active:true,confirmed:true,providers:['email'],createdAt:'2026-10-04',lastSignInAt:null});
 const users=[fixtureUser('self','Current Admin','admin',true),fixtureUser('bootstrap','Emergency Admin','admin',true),fixtureUser('member','Fixture Member','user'),fixtureUser('other-admin','Other Admin','admin')];
 const requests=[];
-let mode='success',pending=null;
+let mode='success',pending=null,pendingDeletions=[];
 globalThis.fetch=async(url,options)=>{
  const request={url,method:options?.method??'GET',body:options?.body?JSON.parse(options.body):null};requests.push(request);
- if(request.method==='GET'){assert.equal(url,'/api/users?page=1&perPage=20');return Response.json({users,page:1,perPage:20,hasMore:false,configured:true});}
+ if(request.method==='GET'){assert.equal(url,'/api/users?page=1&perPage=20');return Response.json({users,pendingDeletions,page:1,perPage:20,hasMore:false,configured:true});}
+ if(request.method==='DELETE'){assert.equal(url,'/api/users/'+pendingDeletions[0].id);pendingDeletions=[];return Response.json({ok:true});}
  assert.equal(request.method,'PATCH','Role UI fixtures never create or delete users');
  assert.deepEqual(Object.keys(request.body),['role'],'Role changes are sent separately from profile and account-status changes');
  assert(['admin','user'].includes(request.body.role));
@@ -99,6 +100,13 @@ try{
  await click(dialogButton('Adminrechte entziehen'));
  check(!dialog()&&row('member').querySelector('.users-role').textContent==='Benutzer','A stale demotion confirmation reflects an already removed role');
  check(!/Sitzungen|anmelden/.test(document.querySelector('[role="status"]').textContent),'An unchanged demotion does not claim session revocation or require another login');
+ pendingDeletions=[fixtureUser('00000000-0000-4000-8000-000000000099','Begonnene Löschung','user')];
+ await click([...document.querySelectorAll('button')].find(button=>button.textContent==='Aktualisieren'));
+ const finish=button('Löschung für 00000000-0000-4000-8000-000000000099 abschließen');
+ check(finish&&document.querySelector('#pending-deletions-title').textContent==='Unvollständige Kontolöschungen','Incomplete local deletions are recoverable in the administrative UI');
+ await click(finish);check(dialog().textContent.includes('Begonnene Löschung'),'Administrative recovery still requires an explicit deletion confirmation');
+ await click(dialogButton('Benutzer löschen'));
+ check(!dialog()&&!document.querySelector('#pending-deletions-title')&&requests.at(-2).method==='DELETE','Confirmed recovery uses the existing delete action and refreshes the pending inventory');
  console.log(JSON.stringify({adminRoleUiChecksPassed:passed,liveRequests:false}));
 }finally{
  await act(async()=>root.unmount());dom.window.close();

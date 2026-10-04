@@ -18,7 +18,7 @@ export async function linkLegacyAccount(projectUrl:string,u:User,source:"passwor
  const old=await getChatGPTUser();if(!old||old.email.toLowerCase()!==u.email.toLowerCase())return;
  if(await accountBlocked(old.userId))throw Error("ACCOUNT_DISABLED");
  const db=storage().db,accountId=providerAccountId(projectUrl,u.id);
- await db.prepare("INSERT OR IGNORE INTO auth_links (account_id,legacy_owner,owner_admin,created_at,password_access) VALUES (?,?,?,?,?)").bind(accountId,old.userId,old.email.toLowerCase()===moderatorEmail()?1:0,new Date().toISOString(),source==="password"?1:0).run();
+ await db.prepare("INSERT OR IGNORE INTO auth_links (account_id,legacy_owner,owner_admin,created_at,password_access) SELECT ?,?,?,?,? WHERE NOT EXISTS (SELECT 1 FROM auth_account_status WHERE account_id IN (?,?) AND status IN ('inactive','deleted'))").bind(accountId,old.userId,old.email.toLowerCase()===moderatorEmail()?1:0,new Date().toISOString(),source==="password"?1:0,accountId,old.userId).run();
  if(source==="password")await db.prepare("UPDATE auth_links SET password_access=1 WHERE account_id=? AND legacy_owner=?").bind(accountId,old.userId).run();
 }
 
