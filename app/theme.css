@@ -164,11 +164,6 @@ html.dark :is(.help, .field>label, .review-meta, .account-session-note, .account
 html.dark :is(.text-action, .trust-content>.text-action, .phone-number, .activation-switch span) { color: var(--theme-accent)!important; }
 html.dark :is(.phone-number>span, .existing-evidence span, .evidence-details summary) { color: var(--muted-foreground); }
 html.dark :is(.account-actions>a, .account-actions>button, .phone-display, .account-actions>span) { color: var(--theme-accent); }
-html.dark :is(.consent [data-slot=checkbox], .service-checkboxes [data-slot=checkbox]) { background: var(--background); border-color: #7a9c92; }
-html.dark :is(.consent [data-slot=checkbox][data-state=checked], .service-checkboxes [data-slot=checkbox][data-state=checked], .activation-switch [data-slot=switch][data-state=checked]) { background: var(--primary); border-color: var(--primary); color: #fff; }
-html.dark .consent [data-slot=checkbox][aria-invalid=true] { border-color: var(--theme-danger); }
-html.dark .consent [data-slot=checkbox][aria-invalid=true]:focus { outline-color: var(--theme-danger); }
-html.dark .activation-switch [data-slot=switch] { background: var(--secondary); border-color: var(--input); }
 html.dark :is(.star-rating button:hover, .star-rating button[aria-checked=true]) { background: #3b3020; }
 html.dark .visits-modal [data-slot=tabs-list] { background: var(--secondary); }
 html.dark .visits-modal [data-slot=tabs-trigger][data-state=active] { background: var(--card); color: var(--theme-accent); }
