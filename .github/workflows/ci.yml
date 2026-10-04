@@ -2,6 +2,7 @@ name: CI
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened, edited]
   push:
     branches: [main]
 
@@ -13,6 +14,26 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  conventional_title:
+    name: Conventional PR title
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Validate Conventional Commit title
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          node <<'JS'
+          const title = process.env.PR_TITLE ?? '';
+          const convention = /^(feat|fix|perf|refactor|docs|test|build|ci|chore|style|revert)(\([a-z0-9][a-z0-9/_-]*\))?!?: \S[^\r\n]*$/;
+          if (!convention.test(title)) {
+            console.error('Use a Conventional Commit PR title, e.g. fix(auth): validate callback redirects');
+            process.exit(1);
+          }
+          console.log('PR title conforms to the repository Conventional Commit rules.');
+          JS
+
   verify:
     name: Tests, types, lint and build
     runs-on: ubuntu-latest
