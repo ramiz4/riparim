@@ -12,6 +12,7 @@ export const cloudflareProduction = {
 
 const workerSecretNames = new Set([
   "REVIEW_MODERATOR_EMAIL",
+  "SUPABASE_SECRET_KEY",
   "GOOGLE_MAPS_BROWSER_API_KEY",
   "GOOGLE_PLACES_SERVER_API_KEY",
   "EMAIL_LOGIN_ACTIVATION_PROJECT",

@@ -1,0 +1,278 @@
+import assert from 'node:assert/strict';
+import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {createRequire} from 'node:module';
+import {DatabaseSync} from 'node:sqlite';
+
+const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
+const output='.test-runtime/user-management';
+const fixture=(kind)=>({name:`user-management-${kind}`,setup(b){
+ b.onResolve({filter:/^(cloudflare:workers|@\/lib\/auth\/admin|@\/app\/auth|@\/app\/chatgpt-auth|\.\/chatgpt-auth|@\/lib\/auth\/client|@\/db\/directory|@supabase\/supabase-js)$/},args=>{
+  if(kind==='auth'&&args.path==='@/app/auth')return;
+  return {path:args.path,namespace:'fixture'};
+ });
+ b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',contents:
+  args.path==='cloudflare:workers'?'export const env=globalThis.fixtureEnv;':
+  args.path==='@supabase/supabase-js'?'export function createClient(...args){return globalThis.fixtureCreateClient(...args);}':
+  args.path==='@/db/directory'?'export async function publishedWorkshop(){return {id:"fixture-workshop",status:"published"};}':
+  args.path==='@/lib/auth/admin'?'export async function getAuthAdmin(){return globalThis.fixtureAuthAdmin;}':
+  args.path==='@/app/auth'?'export async function getAdminUser(){return globalThis.fixtureAdmin;} export async function getAppUser(){return globalThis.fixtureVisitor;} export function ownerPair(user){return [user.ownerKeys[0],user.ownerKeys[1]??user.ownerKeys[0]];} export function ownsVisit(user,owner){return user.ownerKeys.includes(owner);} export function providerAccountId(url,id){return `supabase:${new URL(url).hostname}:${id}`;}':
+  args.path.includes('chatgpt-auth')?'export async function getChatGPTUser(){return globalThis.fixtureNative;}':
+  'export async function authClient(){return globalThis.fixtureClient;}'
+ }));
+}});
+await mkdir(output,{recursive:true});
+for(const [kind,entryPoints] of [['routes',{collection:'app/api/users/route.ts',item:'app/api/users/[id]/route.ts',visits:'app/api/visits/route.ts'}],['auth',{auth:'app/auth.ts'}],['provider',{adminProvider:'lib/auth/admin.ts'}]]){
+ const bundle=await build({entryPoints,bundle:true,format:'esm',platform:'node',outdir:output,write:false,plugins:[fixture(kind)]});
+ for(const file of bundle.outputFiles)await writeFile(file.path.replace(/\.js$/,'.mjs'),file.contents);
+}
+
+const db=new DatabaseSync(':memory:');
+// Include the visit table because account deletion must remove owned visits and files.
+for(const name of ['0000_handy_black_queen','0001_polite_killmonger','0002_exotic_slayback','0003_magenta_boom_boom','0004_ambiguous_morbius','0007_pink_tyrannus'])db.exec(await readFile(`drizzle/${name}.sql`,'utf8'));
+let failDatabase=false;
+let beforeRun=null;
+const d1={async batch(statements){if(failDatabase)throw Error('Fixture database unavailable');return Promise.all(statements.map(statement=>statement.run()));},prepare(sql){
+ const statement=db.prepare(sql);
+ const adapter=(values=[])=>({
+  first:async()=>{if(failDatabase)throw Error('Fixture database unavailable');return statement.get(...values)??null;},
+  run:async()=>{if(failDatabase)throw Error('Fixture database unavailable');if(beforeRun)beforeRun(sql,values);return {meta:statement.run(...values)};},
+  all:async()=>{if(failDatabase)throw Error('Fixture database unavailable');return {results:statement.all(...values)};},
+  bind:(...next)=>adapter(next),
+ });
+ return adapter();
+}};
+const objects=new Map();
+let failBucket=false;
+const bucket={
+ async list({prefix,cursor}){if(failBucket)throw Error('Fixture evidence unavailable');const keys=[...objects.keys()].filter(key=>key.startsWith(prefix)&&(!cursor||key>cursor)).sort(),page=keys.slice(0,1);return {objects:page.map(key=>({key})),truncated:page.length<keys.length,cursor:page.at(-1)};},
+ async delete(keys){if(failBucket)throw Error('Fixture evidence unavailable');for(const key of Array.isArray(keys)?keys:[keys])objects.delete(key);},
+ async put(key){objects.set(key,true);},
+ async head(key){return objects.has(key)?{key}:null;},
+};
+const projectUrl='https://fixture-project.supabase.co',origin='https://riparim.example.test';
+const moderatorEmail='owner@example.test';
+globalThis.fixtureEnv={DB:d1,BUCKET:bucket,REVIEW_MODERATOR_EMAIL:moderatorEmail,SITE_ORIGIN:origin};
+globalThis.fixtureNative=null;
+const ids={current:'00000000-0000-4000-8000-000000000001',moderator:'00000000-0000-4000-8000-000000000002',member:'aabbccdd-0000-4000-8000-000000000003',other:'00000000-0000-4000-8000-000000000004',created:'00000000-0000-4000-8000-000000000005',failure:'00000000-0000-4000-8000-000000000006'};
+const accountId=id=>`supabase:${new URL(projectUrl).hostname}:${id}`;
+const moderator={userId:accountId(ids.current),email:'current-admin@example.test',displayName:'Fixture Admin',fullName:'Fixture Admin',ownerKeys:[accountId(ids.current)],provider:'Google',isModerator:true};
+globalThis.fixtureAdmin=moderator;
+const providerUser=(id,email,name,providers=['email'])=>({id,email,email_confirmed_at:'2026-10-04T08:00:00Z',created_at:'2026-10-01T08:00:00Z',last_sign_in_at:'2026-10-04T08:00:00Z',user_metadata:{full_name:name},app_metadata:{providers},identities:providers.map(provider=>({provider})),aud:'authenticated',role:'authenticated'});
+const users=new Map([
+ [ids.current,providerUser(ids.current,moderator.email,'Current Admin',['google'])],
+ [ids.moderator,providerUser(ids.moderator,moderatorEmail,'Configured Owner',['google'])],
+ [ids.member,providerUser(ids.member,'member@example.test','Fixture Member')],
+ [ids.other,providerUser(ids.other,'other@example.test','Other Member')],
+ [ids.failure,providerUser(ids.failure,'failure@example.test','Failure Member')],
+]);
+const calls=[];
+let providerError=null;
+let providerPagination=null;
+const result=(data)=>({data,error:providerError});
+const authAdmin={
+ async listUsers(options){calls.push({method:'listUsers',options});if(providerPagination)return result(providerPagination);const page=options?.page??1,perPage=options?.perPage??50,all=[...users.values()];return result({users:all.slice((page-1)*perPage,page*perPage),total:all.length,lastPage:Math.ceil(all.length/perPage),nextPage:page*perPage<all.length?page+1:null});},
+ async getUserById(id){calls.push({method:'getUserById',id});return users.has(id)?{data:{user:users.get(id)},error:null}:{data:{user:null},error:{status:404,code:'user_not_found',message:'Fixture user not found'}};},
+ async createUser(body){calls.push({method:'createUser',body});if(providerError)return result({user:null});const user={...providerUser(ids.created,body.email,body.user_metadata?.full_name??''),email_confirmed_at:body.email_confirm?'2026-10-04T08:00:00Z':null};if(body.ban_duration&&body.ban_duration!=='none')user.banned_until='2126-10-04T08:00:00Z';users.set(user.id,user);return result({user});},
+ async updateUserById(id,body){calls.push({method:'updateUserById',id,body});if(providerError)return result({user:null});const before=users.get(id),user={...before,...(body.email?{email:body.email}:{}),...(body.user_metadata?{user_metadata:{...before.user_metadata,...body.user_metadata}}:{})};if(body.ban_duration)user.banned_until=body.ban_duration==='none'?null:'2126-10-04T08:00:00Z';users.set(id,user);return result({user});},
+ async deleteUser(id){calls.push({method:'deleteUser',id});if(providerError)return result({user:null});const user=users.get(id);users.delete(id);return result({user});},
+};
+globalThis.fixtureAuthAdmin={client:{auth:{admin:authAdmin}},projectUrl};
+db.prepare("INSERT INTO auth_settings VALUES ('main',?,?,1,1,?)").run(projectUrl,'sb_publishable_fixture_public_key_1234567890','2026-10-04');
+const load=name=>import(new URL(`../${output}/${name}.mjs`,import.meta.url));
+const [collection,item,auth,visits]=await Promise.all(['collection','item','auth','visits'].map(load));
+const adminProvider=await load('adminProvider');
+let passed=0;
+const check=(value,label)=>{assert(value,label);passed++;};
+const request=(path,method='GET',body,headers={})=>new Request(origin+path,{method,headers:{Origin:origin,...(body!==undefined?{'content-type':'application/json'}:{}),...headers},...(body!==undefined?{body:JSON.stringify(body)}:{})});
+const list=query=>collection.GET(request('/api/users'+(query?'?'+query:'')));
+const create=(body,headers)=>collection.POST(request('/api/users','POST',body,headers));
+const update=(id,body,headers)=>item.PATCH(request('/api/users/'+id,'PATCH',body,headers),{params:Promise.resolve({id})});
+const remove=(id,headers)=>item.DELETE(request('/api/users/'+id,'DELETE',undefined,headers),{params:Promise.resolve({id})});
+const status=id=>db.prepare('SELECT status FROM auth_account_status WHERE account_id=?').get(accountId(id))?.status;
+const enroll=id=>{const key='session-'+id;db.prepare('INSERT INTO auth_sessions (id,account_id,revoked,legacy_access,expires_at,created_at,provider) VALUES (?,?,0,1,?,?,?) ON CONFLICT(id) DO UPDATE SET revoked=0').run(key,accountId(id),Date.now()+86400000,'2026-10-04','password');return key;};
+const sessionRevoked=id=>db.prepare('SELECT revoked FROM auth_sessions WHERE account_id=?').get(accountId(id))?.revoked;
+const noActiveSessions=id=>db.prepare('SELECT COUNT(*) AS n FROM auth_sessions WHERE account_id=? AND revoked=0').get(accountId(id)).n===0;
+const visit=(id,owner)=>{db.prepare('INSERT INTO visits (id,owner,workshop,date,vehicle,service,evidence_type,file_key,created_at) VALUES (?,?,?,?,?,?,?,?,?)').run(id,owner,'fixture-workshop','2026-10-04','Fixture Car','Repair','document',`evidence/${owner}/${id}/document.pdf`,'2026-10-04');objects.set(`evidence/${owner}/${id}/document.pdf`,true);objects.set(`evidence/${owner}/${id}/older.pdf`,true);};
+
+globalThis.fixtureAdmin=null;
+check((await list()).status===401,'Anonymous visitors cannot list accounts');
+check((await create({name:'New',email:'new@example.test',password:'fixture-password-123',active:true})).status===401,'Anonymous visitors cannot create accounts');
+globalThis.fixtureAdmin={...moderator,isModerator:false};
+check((await list()).status===403,'Signed-in members cannot list accounts');
+check((await update(ids.member,{name:'Forbidden'})).status===403,'Signed-in members cannot edit accounts');
+check((await remove(ids.member)).status===403,'Signed-in members cannot delete accounts');
+check(calls.length===0,'Unauthorized requests never call the provider');
+globalThis.fixtureAdmin=moderator;
+check((await create({name:'New',email:'new@example.test',password:'fixture-password-123',active:true},{Origin:'https://other.example.test'})).status===403,'Creation rejects cross-origin requests');
+check((await update(ids.member,{active:false},{'sec-fetch-site':'cross-site'})).status===403,'Status update rejects cross-site requests');
+check((await remove(ids.member,{Origin:'https://other.example.test'})).status===403,'Deletion rejects cross-origin requests');
+check(calls.length===0,'Cross-origin requests never call the provider');
+
+let response=await list('page=1&perPage=2'),body=await response.json();
+check(response.status===200&&body.configured&&body.page===1&&body.perPage===2&&body.hasMore&&body.users.length===2,'Account listing uses requested pagination and declares configured administration');
+check(body.users.every(user=>user.protected)&&body.users[0].providers.includes('google'),'Current and configured owner accounts are visibly protected with their login provider');
+response=await list('page=2&perPage=2');body=await response.json();
+check(body.users.length===2&&body.users[0].id===ids.member&&!body.users[0].protected&&body.users[0].active&&body.users[0].confirmed,'Subsequent page shows ordinary confirmed active accounts');
+check(body.users[0].name==='Fixture Member'&&body.users[0].createdAt&&body.users[0].lastSignInAt,'Listing exposes account display and activity information');
+check(!JSON.stringify(body).includes('app_metadata')&&!JSON.stringify(body).includes('user_metadata'),'Responses expose only the account view rather than provider internals');
+response=await list('page=3&perPage=2');body=await response.json();
+check(body.users.length===1&&!body.hasMore,'The last account page does not offer another page');
+providerPagination={users:[...users.values()],total:101,lastPage:11,nextPage:1};
+response=await list('page=9&perPage=10');body=await response.json();
+check(body.hasMore,'Pagination reaches double-digit pages even when the SDK truncates nextPage=10 to 1');
+providerPagination=null;
+for(const query of ['page=0','page=-1','page=1.5','perPage=0','perPage=101'])check((await list(query)).status===400,'Invalid pagination is rejected');
+check((await update('not-a-uuid',{name:'Fixture'})).status===400&&(await remove('not-a-uuid')).status===400,'Mutation endpoints reject invalid account identifiers');
+const missingId='00000000-0000-4000-8000-000000000099';
+check((await update(missingId,{name:'Fixture'})).status===404&&(await remove(missingId)).status===404,'Mutation endpoints report unknown accounts');
+
+const invalidCreates=[
+ {name:'Fixture',email:'invalid-email',password:'fixture-password-123',active:true},
+ {name:'Fixture',email:'valid@example.test',password:'short',active:true},
+ {name:'Fixture',email:'valid@example.test',password:'fixture-password-123',active:'false'},
+ {name:'Fixture',email:'valid@example.test',password:'fixture-password-123',active:true,isModerator:true},
+ {name:'Fixture',email:moderatorEmail,password:'fixture-password-123',active:true},
+];
+for(const payload of invalidCreates)check((await create(payload)).status>=400,'Invalid create input, privilege attributes and reserved email are rejected');
+check(!calls.some(call=>call.method==='createUser'),'Rejected creation never creates a provider account');
+check((await create({name:'Fixture',email:'valid@example.test',password:'fixture-password-123',active:true},{'content-type':'text/plain'})).status>=400,'Mutations require JSON content type');
+response=await create({name:'  New Member  ',email:' NEW-MEMBER@example.test ',password:'fixture-password-123',active:false});body=await response.json();
+check(response.ok&&body.user.id===ids.created&&body.user.email==='new-member@example.test'&&body.user.name==='New Member'&&!body.user.active,'Admin creates an inactive account with normalized display information');
+const creation=calls.find(call=>call.method==='createUser');
+check(creation.body.email_confirm===true&&creation.body.password==='fixture-password-123','Admin creation confirms the supplied account and uses the supplied password');
+check(status(ids.created)==='inactive','Inactive creation records a durable local access block');
+check(!JSON.stringify(body).includes('fixture-password-123'),'Creation response never exposes the password');
+
+const writesBeforeInvalid=calls.filter(call=>call.method==='updateUserById').length;
+for(const payload of [{},{email:'invalid'},{password:'short'},{role:'admin'},{active:false,name:'Mixed operation'},{email:moderatorEmail}])check((await update(ids.member,payload)).status>=400,'Invalid edits, role fields, mixed status edits and reserved owner email are rejected');
+check(calls.filter(call=>call.method==='updateUserById').length===writesBeforeInvalid,'Invalid edits never reach the provider');
+enroll(ids.member);
+response=await update(ids.member,{name:'  Renamed Member  ',email:' RENAMED@example.test ',password:'fixture-replacement-123'});body=await response.json();
+check(response.ok&&body.user.name==='Renamed Member'&&body.user.email==='renamed@example.test','Profile edit updates normalized name, email and password');
+check(!JSON.stringify(body).includes('fixture-replacement-123'),'Edit response never exposes the password');
+check(noActiveSessions(ids.member),'Changing credentials revokes existing app sessions');
+for(const protectedId of [ids.current,ids.moderator]){
+ check((await update(protectedId,{active:false})).status>=400,'Protected administrator cannot be deactivated');
+ check((await update(protectedId,{email:'moved-owner@example.test'})).status>=400,'Protected administrator cannot change the administrator email');
+ check((await remove(protectedId)).status>=400,'Protected administrator cannot be deleted');
+}
+
+const memberSession=enroll(ids.member);
+db.prepare('INSERT INTO auth_links (account_id,legacy_owner,owner_admin,created_at,password_access) VALUES (?,?,0,?,1)').run(accountId(ids.member),'legacy-member','2026-10-04');
+response=await update(ids.member.toUpperCase(),{active:false});body=await response.json();
+check(response.ok&&!body.user.active&&status(ids.member)==='inactive'&&sessionRevoked(ids.member)===1,'Deactivation immediately blocks the account and revokes existing app sessions');
+check(!db.prepare('SELECT account_id FROM auth_account_status WHERE account_id=?').get(accountId(ids.member.toUpperCase())),'Uppercase route IDs cannot create a separate local block identity');
+// A stale provider session may still appear unbanned; the local block must suffice.
+let signedInUser={...users.get(ids.member),banned_until:null},sessionId=memberSession,method='password';
+globalThis.fixtureClient={auth:{getUser:async()=>({data:{user:signedInUser},error:null}),getClaims:async()=>({data:{claims:{sub:signedInUser.id,session_id:sessionId,amr:[{method}]}},error:null}),setSession:async()=>({error:null})}};
+check(await auth.getAppUser()===null,'Deactivated account is denied even with a valid provider identity');
+sessionId='disabled-password-session';
+await assert.rejects(auth.recordPasswordSession(projectUrl,signedInUser,globalThis.fixtureClient));passed++;
+check(!db.prepare('SELECT id FROM auth_sessions WHERE id=?').get(sessionId),'Password sign-in cannot enroll a deactivated account');
+method='oauth';sessionId='disabled-google-session';
+await assert.rejects(auth.recordGoogleSession(projectUrl,{user:signedInUser,provider_token:'fixture-token'},globalThis.fixtureClient));passed++;
+check(!db.prepare('SELECT id FROM auth_sessions WHERE id=?').get(sessionId),'Google sign-in cannot enroll a deactivated account');
+method='password';
+globalThis.fixtureNative={userId:'legacy-member',email:signedInUser.email,displayName:'Legacy Member',fullName:null};
+db.prepare("UPDATE auth_settings SET enabled=0 WHERE id='main'").run();
+check(await auth.getAppUser()===null,'Native legacy fallback cannot bypass a linked deactivation');
+db.prepare("UPDATE auth_settings SET enabled=1 WHERE id='main'").run();globalThis.fixtureNative=null;
+
+providerError={status:503,message:'Fixture provider unavailable'};
+response=await update(ids.member,{active:true});
+check(!response.ok&&status(ids.member)==='inactive'&&sessionRevoked(ids.member)===1,'Failed provider activation retains the local access block and revoked sessions');
+providerError=null;
+response=await update(ids.member,{active:true});body=await response.json();
+check(response.ok&&body.user.active&&!status(ids.member),'Successful provider activation clears the local access block');
+sessionId='reactivated-password-session';
+await auth.recordPasswordSession(projectUrl,signedInUser,globalThis.fixtureClient);
+check((await auth.getAppUser()).userId===accountId(ids.member),'Reactivated account can sign in with a new app session');
+check(sessionRevoked(ids.member)===1,'Activation does not revive earlier sessions');
+
+const deletionSession=enroll(ids.member);
+visit('member-provider-visit',accountId(ids.member));visit('member-legacy-visit','legacy-member');visit('other-visit',accountId(ids.other));
+response=await remove(ids.member.toUpperCase());body=await response.json();
+check(response.ok&&body.ok&&!users.has(ids.member),'Account deletion removes the provider account');
+check(status(ids.member)==='deleted'&&noActiveSessions(ids.member),'Deletion retains a tombstone and removes all usable app sessions');
+check(!db.prepare('SELECT legacy_owner FROM auth_links WHERE account_id=?').get(accountId(ids.member)),'Deletion removes the provider ownership link');
+check(db.prepare('SELECT COUNT(*) AS n FROM visits WHERE owner IN (?,?)').get(accountId(ids.member),'legacy-member').n===0,'Deletion removes provider and linked legacy visits');
+check(objects.size===2&&[...objects.keys()].every(key=>key.includes(accountId(ids.other))),'Deletion removes all owned evidence versions and preserves another owner’s files');
+check(db.prepare('SELECT status FROM auth_account_status WHERE account_id=?').get('legacy-member')?.status==='deleted','Deletion preserves the legacy-owner tombstone after removing its link');
+sessionId=deletionSession;
+check(await auth.getAppUser()===null,'Deleted account remains blocked with an old provider cookie');
+sessionId='deleted-password-session';
+await assert.rejects(auth.recordPasswordSession(projectUrl,signedInUser,globalThis.fixtureClient));passed++;
+globalThis.fixtureNative={userId:'legacy-member',email:signedInUser.email,displayName:'Legacy Member',fullName:null};
+db.prepare("UPDATE auth_settings SET enabled=0 WHERE id='main'").run();
+check(await auth.getAppUser()===null,'Deleted native owner cannot return through legacy fallback');
+db.prepare("UPDATE auth_settings SET enabled=1 WHERE id='main'").run();globalThis.fixtureNative=null;
+
+enroll(ids.failure);providerError={status:503,message:'Fixture provider unavailable'};
+response=await update(ids.failure,{active:false});
+check(!response.ok&&status(ids.failure)==='inactive'&&sessionRevoked(ids.failure)===1,'Provider deactivation failure still denies local app access');
+response=await remove(ids.failure);
+check(!response.ok&&status(ids.failure)==='deleted'&&noActiveSessions(ids.failure),'Provider deletion failure still denies local app access');
+providerError=null;
+check((await update(ids.failure,{active:true})).status===409&&status(ids.failure)==='deleted','A deletion in progress cannot be undone by activation');
+enroll(ids.other);visit('failed-cleanup-visit',accountId(ids.other));failBucket=true;
+response=await remove(ids.other);
+check(!response.ok&&status(ids.other)==='deleted'&&sessionRevoked(ids.other)===1,'Evidence cleanup failure cannot leave a deleted account authorized');
+check(db.prepare('SELECT id FROM visits WHERE id=?').get('failed-cleanup-visit'),'Evidence cleanup failure retains the visit inventory for a safe retry');
+failBucket=false;
+response=await remove(ids.other);
+check(response.ok&&!db.prepare('SELECT id FROM visits WHERE id=?').get('failed-cleanup-visit'),'Account deletion can retry evidence cleanup after a storage failure');
+
+providerError={status:503,message:'Fixture provider unavailable'};
+check((await list()).status===503,'Provider list failure is reported without a pretend successful listing');
+providerError=null;globalThis.fixtureAuthAdmin=null;
+response=await list();body=await response.json();
+check(body.configured===false,'Missing server-side administration is visibly unconfigured');
+check(!(await create({name:'New',email:'another@example.test',password:'fixture-password-123',active:true})).ok,'Missing admin credentials cannot create accounts');
+globalThis.fixtureAuthAdmin={client:{auth:{admin:authAdmin}},projectUrl};
+failDatabase=true;
+let failedClosed=false;try{failedClosed=await auth.getAppUser()===null;}catch{failedClosed=true;}
+check(failedClosed,'Account-status storage failures deny authentication');
+failDatabase=false;
+signedInUser=users.get(ids.current);method='password';sessionId='raced-password-session';
+beforeRun=(sql)=>{if(/INSERT INTO auth_sessions/i.test(sql)){beforeRun=null;db.prepare('INSERT INTO auth_account_status (account_id,status,updated_at) VALUES (?,?,?)').run(accountId(ids.current),'inactive','2026-10-04');}};
+await assert.rejects(auth.recordPasswordSession(projectUrl,signedInUser,globalThis.fixtureClient));passed++;
+check(!db.prepare('SELECT id FROM auth_sessions WHERE id=?').get(sessionId),'A deactivation between verification and enrollment cannot create a new authorized session');
+beforeRun=null;db.prepare('DELETE FROM auth_account_status WHERE account_id=?').run(accountId(ids.current));
+
+globalThis.fixtureVisitor=moderator;
+const evidenceRequest=(id,method,revision)=>{
+ const form=new FormData();
+ for(const [key,value] of Object.entries({id,workshop:'fixture-workshop',date:new Date().toISOString().slice(0,10),vehicle:'Fixture Car',service:'Inspektion & Wartung',evidenceType:'Rechnung',name:'Fixture Driver',review:'A sufficiently detailed fixture review of a documented workshop visit.',rating:'5',consent:'true',...(revision!==undefined?{revision:String(revision)}:{})}))form.set(key,value);
+ form.set('file',new File(['%PDF-fixture document'],'fixture.pdf',{type:'application/pdf'}));
+ return new Request(origin+'/api/visits',{method,headers:{Origin:origin},body:form});
+};
+const racedVisit='f0000000-0000-4000-8000-000000000001';
+beforeRun=(sql)=>{if(/INSERT INTO visits/i.test(sql)){beforeRun=null;db.prepare('INSERT INTO auth_account_status (account_id,status,updated_at) VALUES (?,?,?)').run(accountId(ids.current),'deleted','2026-10-04');}};
+response=await visits.POST(evidenceRequest(racedVisit,'POST'));
+check(!response.ok&&!db.prepare('SELECT id FROM visits WHERE id=?').get(racedVisit),'An already authenticated submission cannot create a visit after account deletion begins');
+check(![...objects.keys()].some(key=>key.includes(racedVisit)),'A rejected submission removes its newly uploaded evidence');
+beforeRun=null;db.prepare('DELETE FROM auth_account_status WHERE account_id=?').run(accountId(ids.current));
+const racedEdit='f0000000-0000-4000-8000-000000000002';visit(racedEdit,accountId(ids.current));
+beforeRun=(sql)=>{if(/UPDATE visits SET workshop=/i.test(sql)){beforeRun=null;db.prepare('INSERT INTO auth_account_status (account_id,status,updated_at) VALUES (?,?,?)').run(accountId(ids.current),'inactive','2026-10-04');}};
+response=await visits.PUT(evidenceRequest(racedEdit,'PUT',0));
+check(!response.ok&&db.prepare('SELECT revision FROM visits WHERE id=?').get(racedEdit).revision===0,'An already authenticated edit cannot update a visit after deactivation begins');
+check([...objects.keys()].filter(key=>key.includes(racedEdit)).length===2,'A rejected edit removes its new upload and preserves the previously owned evidence');
+beforeRun=null;db.prepare('DELETE FROM auth_account_status WHERE account_id=?').run(accountId(ids.current));
+
+// Exercise the privileged client boundary without sending any SDK network requests.
+const clientConfigurations=[];
+globalThis.fixtureCreateClient=(...args)=>{clientConfigurations.push(args);return {fixture:true};};
+check(await adminProvider.getAuthAdmin()===null,'No privileged client is created without a server secret');
+globalThis.fixtureEnv.SUPABASE_SECRET_KEY='sb_publishable_fixture_public_key_1234567890';
+check(await adminProvider.getAuthAdmin()===null,'A public publishable key cannot authorize user administration');
+globalThis.fixtureEnv.SUPABASE_SECRET_KEY='sb_secret_fixture_server_secret';
+const privileged=await adminProvider.getAuthAdmin();
+check(privileged.projectUrl===projectUrl&&clientConfigurations.length===1&&clientConfigurations[0][1]===globalThis.fixtureEnv.SUPABASE_SECRET_KEY,'The privileged client uses only the server secret for the configured project');
+const options=clientConfigurations[0][2];
+check(options.auth.persistSession===false&&options.auth.autoRefreshToken===false&&options.auth.detectSessionInUrl===false,'The privileged client does not persist or refresh browser sessions');
+const jwt=role=>'fixture.'+Buffer.from(JSON.stringify({role})).toString('base64url')+'.fixture';
+globalThis.fixtureEnv.SUPABASE_SECRET_KEY=jwt('anon');
+check(await adminProvider.getAuthAdmin()===null,'A legacy anonymous JWT cannot authorize administration');
+globalThis.fixtureEnv.SUPABASE_SECRET_KEY=jwt('service_role');
+check((await adminProvider.getAuthAdmin())?.projectUrl===projectUrl,'A server-side legacy service-role credential supports administration');
+console.log(JSON.stringify({userManagementChecksPassed:passed,realEmailsSent:false,liveProviderTested:false}));

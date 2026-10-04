@@ -31,6 +31,10 @@ Die lokale Oberfläche ist unter `http://127.0.0.1:5174` erreichbar. Supabase-Pr
 
 `REVIEW_MODERATOR_EMAIL` bestimmt das Administratorkonto und gehört in die Laufzeitkonfiguration. `.env`, lokale Datenbanken, Uploads und Build-Ausgaben sind von Git ausgeschlossen. Die `.env.example` enthält ausschließlich Platzhalter.
 
+Unter `/verwaltung/benutzer` verwaltet die Administration die E-Mail- und Google-Konten des konfigurierten Supabase-Projekts: ansehen, anlegen, bearbeiten, aktivieren, deaktivieren und löschen. Dafür muss `SUPABASE_SECRET_KEY` als serverseitiges Geheimnis auf einen Secret- oder Service-Role-Key desselben Projekts gesetzt werden. Der Schlüssel wird weder in der Oberfläche abgefragt noch an den Browser übertragen.
+
+Administrativ angelegte Konten haben bestätigte E-Mail-Adressen und reguläre Kundenrechte; es wird keine E-Mail versendet. Deaktivierung sperrt neue und bestehende Sitzungen sofort. Nach Reaktivierung ist eine neue Anmeldung erforderlich. Änderungen an E-Mail oder Passwort widerrufen bestehende App-Sitzungen. Löschen entfernt auch zugehörige Besuche, Bewertungen und private Nachweise, einschließlich verknüpfter Altbestände. Bei einem Fehler bleibt das Konto gesperrt und die Löschung kann wiederholt werden. Der Verwaltungszugang ist gegen Sperren, Löschen und Änderung seiner E-Mail-Adresse geschützt.
+
 Der portable Entwicklungsserver bietet eine lokale ChatGPT-Testidentität unter `/signin-with-chatgpt?return_to=/`. Diese Simulation gilt nur auf Loopback und wird nicht in den Produktionsbuild übernommen. Verwende sie nicht als Ersatz für Tests der echten Anmeldung.
 
 ## Datenbank und Prüfung
@@ -57,7 +61,7 @@ npm run lint
 npm run build
 ```
 
-`npm test` prüft den Bewertungsablauf, Besitzrechte, Katalogfilter sowie Google-Sitzungen und OAuth-Callbacks mit isolierten SQLite-/R2-/Provider-Fixtures. Dabei werden keine echten E-Mails gesendet und keine Produktionsdaten verändert.
+`npm test` prüft den Bewertungsablauf, Besitzrechte, Benutzerverwaltung, Katalogfilter sowie Google-Sitzungen und OAuth-Callbacks mit isolierten SQLite-/R2-/Provider-Fixtures. Dabei werden keine echten E-Mails gesendet und keine Produktionsdaten verändert.
 
 Die ergänzende Live- und Browserprüfung steht in [docs/customer-flow-qa.md](docs/customer-flow-qa.md). Die dokumentierte Bestandsprüfung in `data/catalogue-review-2026-10-04.json` führt die unabhängigen Quellen und zurückgestellten Standortkonflikte auf.
 

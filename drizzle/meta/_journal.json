@@ -50,6 +50,13 @@
       "when": 1791051771899,
       "tag": "0006_dapper_dark_beast",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1791111746596,
+      "tag": "0007_pink_tyrannus",
+      "breakpoints": true
     }
   ]
 }
