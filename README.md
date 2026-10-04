@@ -83,6 +83,8 @@ npm run build
 
 `npm test` prüft den Bewertungsablauf, Besitzrechte, Benutzerverwaltung, Katalogfilter sowie Google-Sitzungen und OAuth-Callbacks mit isolierten SQLite-/R2-/Provider-Fixtures. Dabei werden keine echten E-Mails gesendet und keine Produktionsdaten verändert.
 
+`npm run build` prüft zusätzlich den erzeugten Browser-Code: Der echte gebündelte Link muss die Navigation auslösen und auch nach einem fehlgeschlagenen Prefetch funktionieren. Die Prüfung läuft für Cloudflare- und Sites-Builds mit isolierten Browser-/Netzwerk-Fixtures. Nach einem vorhandenen Build lässt sie sich mit `npm run test:client-build` einzeln wiederholen.
+
 Die ergänzende Live- und Browserprüfung steht in [docs/customer-flow-qa.md](docs/customer-flow-qa.md). Die dokumentierte Bestandsprüfung in `data/catalogue-review-2026-10-04.json` führt die unabhängigen Quellen und zurückgestellten Standortkonflikte auf.
 
 GitHub Actions prüft Katalog, Tests, TypeScript, Lint und Worker-Build bei Pull Requests. Nach einem Squash-Merge nach `main` erstellt `semantic-release` bei relevanten Conventional Commits einen versionierten GitHub Release und veröffentlicht dessen geprüftes Worker-Artefakt auf Cloudflare. Details und nötige Produktions-Secrets stehen in [docs/releases.md](docs/releases.md).
