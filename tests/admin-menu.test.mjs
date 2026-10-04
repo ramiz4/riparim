@@ -12,13 +12,13 @@ globalThis.IS_REACT_ACT_ENVIRONMENT=true;
 globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
 globalThis.fetch=async(path,options)=>{
  assert(!options?.method||options.method==='GET','navigation fixtures never mutate data');
- const fixtures={'/api/workshops?admin=1':{workshops:[]},'/api/visits?moderation=1':{visits:[],pendingCount:0,nextCursor:null},'/api/auth-settings':{config:null}};
+ const fixtures={'/api/workshops?admin=1':{workshops:[]},'/api/visits?moderation=1':{visits:[],pendingCount:0,nextCursor:null},'/api/auth-settings':{config:null},'/api/users?page=1&perPage=20':{users:[],page:1,perPage:20,hasMore:false,configured:true}};
  assert(Object.hasOwn(fixtures,path),`unexpected fixture request: ${path}`);
  return new Response(JSON.stringify(fixtures[path]),{headers:{'Content-Type':'application/json'}});
 };
 
 const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
-const bundle=await build({stdin:{contents:`export {SiteHeader} from './components/site-header';export {default as AdminPanel} from './app/verwaltung/panel';export {default as AdminReviews} from './app/verwaltung/bewertungen/reviews';export {default as AuthSetup} from './app/verwaltung/anmeldung/setup';`,resolveDir:process.cwd(),loader:'tsx'},bundle:true,platform:'node',format:'esm',outfile:'.test-runtime/admin-menu/header.mjs',write:false,packages:'external',loader:{'.css':'empty'},define:{'process.env.__VINEXT_HAS_PAGES_ROUTER':'"false"','process.env.__VINEXT_HAS_CLIENT_REWRITES':'"false"'},plugins:[{name:'app-router-boundary',setup(b){
+const bundle=await build({stdin:{contents:`export {SiteHeader} from './components/site-header';export {default as AdminPanel} from './app/verwaltung/panel';export {default as AdminReviews} from './app/verwaltung/bewertungen/reviews';export {default as AdminUsers} from './app/verwaltung/benutzer/users';export {default as AuthSetup} from './app/verwaltung/anmeldung/setup';`,resolveDir:process.cwd(),loader:'tsx'},bundle:true,platform:'node',format:'esm',outfile:'.test-runtime/admin-menu/header.mjs',write:false,packages:'external',loader:{'.css':'empty'},define:{'process.env.__VINEXT_HAS_PAGES_ROUTER':'"false"','process.env.__VINEXT_HAS_CLIENT_REWRITES':'"false"'},plugins:[{name:'app-router-boundary',setup(b){
  b.onResolve({filter:/^next\/link$/},()=>({path:new URL('../node_modules/vinext/dist/shims/link.js',import.meta.url).pathname}));
  // Exercise the real Link and Radix menu with an App Router that never commits.
  b.onResolve({filter:/^\.\/navigation\.js$/},args=>args.importer.endsWith('/shims/link.js')?{path:'stalled-router',namespace:'fixture'}:undefined);
@@ -28,7 +28,7 @@ await mkdir('.test-runtime/admin-menu',{recursive:true});
 await writeFile('.test-runtime/admin-menu/header.mjs',bundle.outputFiles[0].contents);
 const {createElement,act}=await import('react');
 const {createRoot}=await import('react-dom/client');
-const {SiteHeader,AdminPanel,AdminReviews,AuthSetup}=await import(new URL('../.test-runtime/admin-menu/header.mjs',import.meta.url));
+const {SiteHeader,AdminPanel,AdminReviews,AdminUsers,AuthSetup}=await import(new URL('../.test-runtime/admin-menu/header.mjs',import.meta.url));
 window[Symbol.for('vinext.navigationRuntime')]={bootstrap:{routeManifest:null,rsc:undefined},functions:{navigate:()=>new Promise(()=>{})}};
 globalThis.routerAttempts=[];
 const documents=[];
@@ -75,7 +75,7 @@ try{
  assert.deepEqual(routerAttempts,['/?besuche=1'],'the control link exercises the real client-router boundary');
  assert.equal(documents.length,before,'the stalled client-router control cannot load a document');
  routerAttempts.length=0;
- const sections=[['Werkstätten','/verwaltung','workshops'],['Bewertungen prüfen','/verwaltung/bewertungen','reviews'],['Login & Registrierung','/verwaltung/anmeldung','login']];
+ const sections=[['Werkstätten','/verwaltung','workshops'],['Bewertungen prüfen','/verwaltung/bewertungen','reviews'],['Benutzer','/verwaltung/benutzer','users'],['Login & Registrierung','/verwaltung/anmeldung','login']];
  async function activate(link,input){
   const before=documents.length;
   await act(async()=>{
@@ -89,7 +89,7 @@ try{
   assert.equal(documents.at(-1),new URL(link.href).pathname);
  }
  for(const email of ['first-admin@example.test','second-admin@example.test']){
-  for(const [Page,active] of [[AdminPanel,'workshops'],[AdminReviews,'reviews'],[AuthSetup,'login']]){
+  for(const [Page,active] of [[AdminPanel,'workshops'],[AdminReviews,'reviews'],[AdminUsers,'users'],[AuthSetup,'login']]){
    await act(async()=>root.render(createElement(Page,{account:{email,displayName:'Fixture account',provider:'Google'}})));
    const navigation=document.querySelector('nav[aria-label="Verwaltung"]');
    assert(navigation,`${active} includes the shared admin navigation`);
@@ -125,7 +125,7 @@ try{
    await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));
   }
  }finally{globalThis.fetch=originalFetch;}
- console.log('Admin navigation: both accounts, all three pages, mouse/keyboard, shortcuts, active section and customer visibility passed');
+ console.log('Admin navigation: both accounts, all four pages, mouse/keyboard, shortcuts, active section and customer visibility passed');
 }finally{
  await act(async()=>root.unmount());
  dom.window.close();
