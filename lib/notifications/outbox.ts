@@ -52,9 +52,8 @@ async function deliver(row:NotificationRow){
   // Freeze the exact payload and credential scope before the first provider
   // call. A lost acknowledgement must retry the same idempotent request.
   if(!await stillCurrent(row)){await setState(row,"suppressed","superseded");return;}
-  const committed=await storage().db.prepare("UPDATE review_notifications SET payload=?,provider_key_hash=?,first_attempt_at=COALESCE(first_attempt_at,?),attempts=attempts+1 WHERE id=? AND lease_token=? AND state='sending'").bind(JSON.stringify(payload),fingerprint,Date.now(),row.id,row.lease_token).run();
+  const committed=await storage().db.prepare("UPDATE review_notifications SET payload=?,provider_key_hash=?,first_attempt_at=COALESCE(first_attempt_at,?) WHERE id=? AND lease_token=? AND state='sending'").bind(JSON.stringify(payload),fingerprint,Date.now(),row.id,row.lease_token).run();
   if(!committed.meta.changes)return;
-  row.attempts++;
   const providerId=await sendReviewEmail(payload,config.key,row.id);
   await storage().db.prepare("UPDATE review_notifications SET state='sent',provider_id=?,payload=NULL,last_error=NULL,lease_until=NULL,lease_token=NULL WHERE id=? AND lease_token=? AND state='sending'").bind(providerId,row.id,row.lease_token).run();
  }catch(error){
@@ -73,7 +72,7 @@ export async function processNotifications({id,force=false,limit=4}:{id?:string;
   }
   if(!force&&candidate.attempts>=maxAutomaticAttempts){await db.prepare("UPDATE review_notifications SET state='failed',last_error='retry_limit' WHERE id=? AND (state='pending' OR (state='sending' AND lease_until<=?))").bind(candidate.id,now).run();continue;}
   const token=crypto.randomUUID();
-  const claimed=await db.prepare(`UPDATE review_notifications SET state='sending',lease_token=?,lease_until=? WHERE id=? AND ((state='pending' AND (next_attempt_at<=? OR ?=1)) OR (state='sending' AND lease_until<=?)${force?" OR state IN ('blocked','failed')":""}) RETURNING *`).bind(token,Date.now()+120000,candidate.id,now,force?1:0,now).first<NotificationRow>();
+  const claimed=await db.prepare(`UPDATE review_notifications SET state='sending',lease_token=?,lease_until=?,attempts=attempts+1 WHERE id=? AND ((state='pending' AND (next_attempt_at<=? OR ?=1)) OR (state='sending' AND lease_until<=?)${force?" OR state IN ('blocked','failed')":""}) RETURNING *`).bind(token,Date.now()+120000,candidate.id,now,force?1:0,now).first<NotificationRow>();
   if(claimed)await deliver(claimed);
  }
 }

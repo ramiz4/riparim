@@ -116,6 +116,16 @@ try{
  await outbox.processNotifications({id:event(id).id});check(event(id).state==='suppressed'&&attempts.length===beforeSuperseded,'A superseded decision cannot send an obsolete status');
  id=fixtureVisit();await moderate(id);globalThis.fixtureAdmin=null;check((await queue.GET(request('GET',null,'/api/notifications'))).status===401,'Anonymous users cannot inspect private delivery state');
  globalThis.fixtureAdmin=member;check((await queue.GET(request('GET',null,'/api/notifications'))).status===403&&(await queue.POST(request('POST',{action:'retry',id:event(id).id},'/api/notifications'))).status===403,'Customers cannot inspect or retry another account’s events');globalThis.fixtureAdmin=admin;
+ const lookupOutage=fixtureVisit();await moderate(lookupOutage);lookupFailure=true;
+ for(let index=0;index<7;index++){
+  db.prepare('UPDATE review_notifications SET next_attempt_at=0 WHERE visit_id=?').run(lookupOutage);
+  await outbox.processNotifications({id:event(lookupOutage).id});
+  if(index===1)check(event(lookupOutage).next_attempt_at-Date.now()>240000,'Recipient lookup failures use the increasing backoff rather than restarting at one minute');
+ }
+ check(event(lookupOutage).attempts===5&&event(lookupOutage).state==='failed'&&event(lookupOutage).last_error==='retry_limit','Recipient lookup failures are counted and stop at the automatic processing limit');
+ check(event(lookupOutage).first_attempt_at===null&&event(lookupOutage).payload===null,'Processing retries do not falsely start the provider deduplication window before any mail API request');
+ lookupFailure=false;await outbox.processNotifications({id:event(lookupOutage).id,force:true});
+ check(event(lookupOutage).state==='sent'&&event(lookupOutage).attempts===6,'An administrator can safely recover a failed contact lookup once the service is restored');
  const view=await queue.GET(request('GET',null,'/api/notifications')).then(r=>r.json());
  check(view.notifications.length>0&&!JSON.stringify(view).includes('re_fixture_secret')&&!JSON.stringify(view).includes('member@example.test')&&!JSON.stringify(view).includes('payload'),'The admin queue returns useful status without secrets or recipient/content payloads');
  check((await queue.POST(request('POST',{action:'retry',id:event(id).id,to:'other@example.test'},'/api/notifications'))).status===400,'Retry actions cannot override recipient or message content');
