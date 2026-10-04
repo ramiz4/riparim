@@ -134,6 +134,7 @@ function fixtureRun(command, args, options) {
     remoteOperations.push("deploy");
     assert.equal(args[1], "deploy");
     assert(args.includes("--no-bundle") && args.includes("--keep-vars"));
+    assert(args.includes("--experimental-provision=false"), "production deployment must use pre-created bindings without automatic resource provisioning");
     assert.equal(args[args.indexOf("--tag") + 1], tag);
     assert.equal(args[args.indexOf("--message") + 1], `${tag} (${commit})`);
     const configPath = args[args.indexOf("--config") + 1];

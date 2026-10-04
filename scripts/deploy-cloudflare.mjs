@@ -69,7 +69,9 @@ export async function deployCloudflare({ env = process.env, root = fileURLToPath
     const sourceConfig = join(root, "wrangler.jsonc");
     const generatedConfig = join(extracted, "dist/server/wrangler.json");
     assertCloudflareDeployConfig(JSON.parse(await readFile(sourceConfig, "utf8")), JSON.parse(await readFile(generatedConfig, "utf8")));
-    const deployArgs = [cli, "deploy", "--config", generatedConfig, "--no-bundle", "--keep-vars", "--tag", env.RELEASE_TAG, "--message", `${env.RELEASE_TAG} (${commit})`];
+    // Bindings are already provisioned and validated; skip Wrangler's first-run
+    // resource lookup so deployment does not need private R2 API access.
+    const deployArgs = [cli, "deploy", "--config", generatedConfig, "--experimental-provision=false", "--no-bundle", "--keep-vars", "--tag", env.RELEASE_TAG, "--message", `${env.RELEASE_TAG} (${commit})`];
     if (secrets) {
       secretDirectory = await mkdtemp(join(tmpdir(), "riparim-worker-secrets-"));
       const secretFile = join(secretDirectory, "secrets.json");
