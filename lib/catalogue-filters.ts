@@ -15,7 +15,7 @@ const unique=(values:string[])=>[...new Set(values)].sort((a,b)=>a.localeCompare
 export function catalogueOptions(directory:Workshop[]){return {cities:[cities[0],...unique(directory.map(w=>w.city))],brands:[brands[0],...unique(directory.flatMap(w=>w.brands).filter(value=>value!==brands[0]))],languages:["Alle Sprachen",...unique(directory.flatMap(w=>w.languages))]};}
 const validRating=(value:number|null|undefined)=>value!=null&&Number.isFinite(value)&&value>=1&&value<=5;
 export function hasPublishedRatings(directory:Workshop[]){return directory.some(w=>w.status==="published"&&validRating(w.rating)&&w.count>0);}
-export function hasGoogleRatings(directory:Workshop[],live:CatalogueGoogleRatings={}){return directory.some(w=>w.status==="published"&&validRating((live[w.id]??w.googleRating)?.rating));}
+export function hasGoogleRatings(directory:Workshop[],live:CatalogueGoogleRatings={}){return directory.some(w=>w.status==="published"&&validRating(live[w.id]?.rating));}
 
 export function catalogueDistance(w:Workshop,city:string):number|null{
  const origin=cityCoordinates[city];
@@ -45,8 +45,8 @@ export function matchCatalogue(directory:Workshop[],filters:CatalogueFilters,con
  const words=searchText(catalogueQuery(filters.query??"")).split(" ").filter(Boolean);
  return findWorkshops(directory,filters.service,filters.city,filters.brand,geography?.radius??0,filters.language,geography?.additionalCity??"").filter(w=>w.status==="published"&&(filters.brand===brands[0]||w.brands.includes(filters.brand)||w.brands.includes(brands[0]))&&words.every(word=>searchText(w.name).includes(word))).sort((a,b)=>{
   if(filters.sort==="rating"||filters.sort==="google"){
-   const av=filters.sort==="google"?live[a.id]??a.googleRating:{rating:a.rating,count:a.count};
-   const bv=filters.sort==="google"?live[b.id]??b.googleRating:{rating:b.rating,count:b.count};
+   const av=filters.sort==="google"?live[a.id]:{rating:a.rating,count:a.count};
+   const bv=filters.sort==="google"?live[b.id]:{rating:b.rating,count:b.count};
    const ar=validRating(av?.rating)&&(filters.sort==="google"||(av?.count??0)>0),br=validRating(bv?.rating)&&(filters.sort==="google"||(bv?.count??0)>0);
    if(ar!==br)return Number(br)-Number(ar);
    if(ar&&br){const difference=(bv?.rating??0)-(av?.rating??0)||(bv?.count??-1)-(av?.count??-1);if(difference)return difference;}

@@ -5,7 +5,7 @@ type Identity=Pick<Workshop,"name"|"phone"|"city"|"address"|"lat"|"lng">;
 const generic=new Set(["auto","autoservis","autoservice","servis","service","servisi","autodiagnoza","automekanik","garage","car","cars","shpk","sh","p","k","kosovo","kosove"]);
 const words=(value:string):string[]=>value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().match(/[a-z0-9]+/g)??[];
 export const normalizeWorkshopPhone=(phone:string)=>{let n=phone.replace(/\D/g,"");if(n.startsWith("00"))n=n.slice(2);return n;};
-export function googlePlaceSearchRequest(workshop:Identity,pageSize=5){
+export function googlePlaceSearchRequest(workshop:Identity,pageSize=5,byName=false){
  const phone=normalizeWorkshopPhone(workshop.phone),callingCode=phone.startsWith("383")?"383":phone.startsWith("381")?"381":null;
  // Google recommends a space after the calling code. Preserve legacy +381 numbers.
  const textQuery=callingCode?`+${callingCode} ${phone.slice(callingCode.length)}`:workshop.phone;
@@ -13,7 +13,7 @@ export function googlePlaceSearchRequest(workshop:Identity,pageSize=5){
   ?{circle:{center:{latitude:workshop.lat,longitude:workshop.lng},radius:3000}}
   :{rectangle:{low:{latitude:41.8,longitude:19.8},high:{latitude:43.3,longitude:21.9}}};
  // Explicit geography avoids biasing searches toward the server's outgoing IP.
- return {textQuery,languageCode:"de",regionCode:callingCode==="381"?"RS":"XK",pageSize,locationBias};
+ return {textQuery:byName?`${workshop.name} ${workshop.city} Kosovo`:textQuery,languageCode:"de",regionCode:callingCode==="381"?"RS":"XK",pageSize,locationBias};
 }
 export function validGooglePlaceId(id:unknown):id is string{return typeof id==="string"&&/^[A-Za-z0-9_-]{10,255}$/.test(id);}
 export function verifiedGooglePlace(workshop:Identity,candidates:GooglePlaceCandidate[]):string|null{
@@ -40,4 +40,4 @@ export function verifiedGooglePlace(workshop:Identity,candidates:GooglePlaceCand
  const ids=[...new Set(matches.map(place=>place.id!))];
  return ids.length===1?ids[0]:null;
 }
-export async function workshopIdentityHash(w:Identity,legacy=false){const profile=[w.name,w.phone,w.city,w.address,w.lat,w.lng],input=JSON.stringify(legacy?profile:["phone-location-v2",...profile]);const digest=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(input));return Array.from(new Uint8Array(digest),byte=>byte.toString(16).padStart(2,"0")).join("");}
+export async function workshopIdentityHash(w:Identity,legacy=false){const profile=[w.name,w.phone,w.city,w.address,w.lat,w.lng],input=JSON.stringify(legacy?profile:["phone-name-location-v3",...profile]);const digest=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(input));return Array.from(new Uint8Array(digest),byte=>byte.toString(16).padStart(2,"0")).join("");}

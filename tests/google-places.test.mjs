@@ -62,8 +62,13 @@ assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'legacy-positiv
 assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'legacy-positive-fixture',phone:'+38349111111'}),null,'a changed profile cannot reuse a legacy verified identity');assert.equal(calls,1);
 assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'quota-fixture'}),null);assert.equal(calls,1,'daily identity-search budget cannot be exceeded');
 sqlite.prepare('UPDATE catalog_state SET value=? WHERE key=?').run('1',quotaKey);
-assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'ambiguous-fixture',phone:'+38349111111'}),null);assert.equal(calls,2);assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'ambiguous-fixture',phone:'+38349111111'}),null);assert.equal(calls,2,'unmatched candidates are not retried on every visit');
-apiError=true;await assert.rejects(places.resolveWorkshopGooglePlace({...mita,id:'error-fixture'}));assert.equal(calls,3);assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'error-fixture'}),null);assert.equal(calls,3,'provider failures back off');
+assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'ambiguous-fixture',phone:'+38349111111'}),null);assert.equal(calls,3);assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'ambiguous-fixture',phone:'+38349111111'}),null);assert.equal(calls,3,'unmatched candidates are not retried on every visit');
+apiError=true;await assert.rejects(places.resolveWorkshopGooglePlace({...mita,id:'error-fixture'}));assert.equal(calls,4);assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'error-fixture'}),null);assert.equal(calls,4,'provider failures back off');
+apiError=false;
+let fallbackCalls=0;
+globalThis.fetch=async(url,options)=>{fallbackCalls++;const query=JSON.parse(options.body);if(fallbackCalls===1){assert.equal(query.textQuery,localSearch.textQuery);return Response.json({places:[]});}assert.equal(query.textQuery,`${mita.name} ${mita.city} Kosovo`);return Response.json({places:[candidate]});};
+assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'name-fallback-fixture'}),candidate.id,'verified name lookup recovers an empty phone search');
+assert.equal(fallbackCalls,2);
 let requestedFields=null,requestedPlace=null;
 globalThis.window={google:{maps:{importLibrary:async()=>({Place:class{constructor(options){requestedPlace=options;this.rating=4.6;this.userRatingCount=123;this.googleMapsURI='https://maps.google.com/?cid=123';this.attributions=[];}async fetchFields(options){requestedFields=options.fields;}}})}}};
 const live=await browser.currentGoogleRating(candidate.id,'fixture-browser-key');assert.equal(live.rating,4.6);assert.equal(live.count,123);assert.equal(requestedPlace.id,candidate.id);assert.deepEqual(requestedFields,['rating','userRatingCount','googleMapsURI','attributions']);

@@ -9,7 +9,7 @@ const identities=new Map<string,Promise<{placeId:string;browserKey:string}|null>
 const liveRequests=new Map<string,Promise<LiveGoogleRating>>();
 export function googlePlacesClientConfig(){return configPromise??=fetch("/api/google-places",{credentials:"same-origin",cache:"no-store",signal:AbortSignal.timeout(12000)}).then(async response=>{if(!response.ok)throw Error("Google unavailable");return response.json() as Promise<ClientConfig>;});}
 export async function workshopGoogleIdentity(id:string){
- let pending=identities.get(id);if(!pending){pending=(async()=>{const config=await googlePlacesClientConfig();if(!config.enabled||!config.browserKey)return null;const response=await fetch(`/api/google-places/${encodeURIComponent(id)}`,{credentials:"same-origin",cache:"no-store",signal:AbortSignal.timeout(12000)});if(!response.ok)throw Error("Google unavailable");const result=await response.json() as {placeId?:string|null};return result.placeId?{placeId:result.placeId,browserKey:config.browserKey!}:null;})();identities.set(id,pending);pending.catch(()=>identities.delete(id));}
+ let pending=identities.get(id);if(!pending){pending=(async()=>{const config=await googlePlacesClientConfig();if(!config.enabled||!config.browserKey)return null;const response=await fetch(`/api/google-places/${encodeURIComponent(id)}`,{credentials:"same-origin",cache:"no-store",signal:AbortSignal.timeout(20000)});if(!response.ok)throw Error("Google unavailable");const result=await response.json() as {placeId?:string|null};return result.placeId?{placeId:result.placeId,browserKey:config.browserKey!}:null;})();identities.set(id,pending);pending.catch(()=>identities.delete(id));}
  return pending;
 }
 export function loadGooglePlaces(browserKey:string):Promise<GooglePlacesLibrary>{
