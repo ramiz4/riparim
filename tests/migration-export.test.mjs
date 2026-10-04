@@ -6,7 +6,7 @@ import {Miniflare} from 'miniflare';
 const token='a'.repeat(64), hash=createHash('sha256').update(token).digest('hex'), commit='b'.repeat(40);
 let passed=0;
 for(const workerPath of ['./build/sites-worker','./build/cloudflare-worker']) {
- const bundle=await build({stdin:{contents:`import worker from '${workerPath}';export default worker;`,resolveDir:process.cwd(),loader:'ts'},bundle:true,write:false,format:'esm',platform:'neutral',external:['cloudflare:workers','node:async_hooks'],define:{'import.meta.env.DEV':'false'},plugins:[{name:'isolated-migration',setup(b){
+ const bundle=await build({stdin:{contents:`import worker from '${workerPath}';export default worker;`,resolveDir:process.cwd(),loader:'ts'},bundle:true,write:false,format:'esm',platform:'neutral',external:['cloudflare:workers','node:async_hooks'],define:{'import.meta.env.DEV':'false',__RIPARIM_RELEASE_COMMIT__:JSON.stringify(commit)},plugins:[{name:'isolated-migration',setup(b){
   b.onResolve({filter:/(?:notifications\/outbox|^\.\/outbox)$/},args=>({path:args.path,namespace:'scheduled'}));
   b.onLoad({filter:/.*/,namespace:'scheduled'},()=>({loader:'js',contents:'export async function processNotifications(){throw Error("Scheduled writes must remain frozen");}'}));
   b.onResolve({filter:/^vinext\/server\/fetch-handler$/},args=>({path:args.path,namespace:'application'}));
@@ -23,7 +23,7 @@ for(const workerPath of ['./build/sites-worker','./build/cloudflare-worker']) {
   await db.prepare('INSERT INTO "without" VALUES (?,?)').bind('fixture','native-owner-unchanged').run();
   await bucket.put('private/fixture.bin',new Uint8Array([0,1,255]),{httpMetadata:{contentType:'application/x-fixture'},customMetadata:{owner:'fixture-only'}});
   const call=(operation,query={})=>runtime.dispatchFetch('http://fixture/__migration/export?'+new URLSearchParams({operation,...query}),{headers:{Authorization:'Bearer '+token}});
-  for(const method of ['GET','POST','DELETE']) {assert.equal((await runtime.dispatchFetch('http://fixture/api/visits',{method})).status,503);passed++;}
+  for(const method of ['GET','POST','DELETE']) {const blocked=await runtime.dispatchFetch('http://fixture/api/visits',{method});assert.equal(blocked.status,503);assert.equal(blocked.headers.get('X-Riparim-Migration-Read-Only'),'true');assert.equal(blocked.headers.get('X-Riparim-Release-Commit'),commit);passed++;}
   assert.equal((await db.prepare('SELECT COUNT(*) AS n FROM application_writes').first()).n,0);passed++;
   const scheduled=await runtime.dispatchFetch('http://fixture/cdn-cgi/handler/scheduled?cron=*+*+*+*+*');assert(scheduled.ok);passed++;
   for(const Authorization of [undefined,'Bearer wrong','Bearer '+hash]) {assert.equal((await runtime.dispatchFetch('http://fixture/__migration/export?operation=schema',{headers:Authorization?{Authorization}:{}})).status,404);passed++;}
