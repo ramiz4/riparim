@@ -103,10 +103,10 @@ export default function AdminUsers({account}:{account:AccountIdentity}){
   setMutating(roleUser.id);setError("");setFeedback("");
   try{
    const response=await fetch(`/api/users/${encodeURIComponent(roleUser.id)}`,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({role})});
-   const data=await response.json() as {user:ManagedUser;error?:string};
+   const data=await response.json() as {user:ManagedUser;roleChanged?:boolean;error?:string};
    if(!response.ok)throw Error(data.error||"Die Benutzerrolle konnte nicht geändert werden.");
    setUsers(old=>old.map(user=>user.id===roleUser.id?data.user:user));setRoleUser(null);
-   setFeedback(`${data.user.role==="admin"?"Adminrechte erteilt.":"Adminrechte entzogen."} Bestehende Sitzungen wurden beendet. Der Benutzer muss sich erneut anmelden.`);
+   setFeedback(data.roleChanged===false?"Diese Rolle war bereits zugewiesen.":`${data.user.role==="admin"?"Adminrechte erteilt.":"Adminrechte entzogen."} Bestehende Sitzungen wurden beendet. Der Benutzer muss sich erneut anmelden.`);
   }catch(roleError){
    const message=failureMessage(roleError,"Die Benutzerrolle konnte nicht geändert werden. Bitte versuche es erneut.");
    // A failed response can follow a completed server write. Reload before offering another role change.

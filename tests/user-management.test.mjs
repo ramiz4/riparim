@@ -197,6 +197,7 @@ beforeFirst=null;db.prepare('UPDATE auth_sessions SET revoked=0 WHERE id=?').run
 const providerWritesBeforeRole=calls.filter(call=>['updateUserById','createUser','deleteUser'].includes(call.method)).length;
 response=await update(ids.member.toUpperCase(),{role:'admin'});body=await response.json();
 check(response.ok&&body.user.role==='admin'&&accountRole(ids.member)==='admin','An administrator can grant a verified email account the admin role');
+check(body.roleChanged===true,'An actual promotion reports that the role changed');
 const assignment=db.prepare('SELECT assigned_by,assigned_at FROM auth_account_roles WHERE account_id=?').get(accountId(ids.member));
 check(assignment.assigned_by===moderator.userId&&assignment.assigned_at,'Role assignments retain the authorized actor and assignment time');
 check(await auth.getAppUser()===null&&noActiveSessions(ids.member),'Granting a role revokes every existing session and requires a fresh login');
@@ -204,8 +205,9 @@ sessionId='roles-password-admin';await auth.recordPasswordSession(projectUrl,sig
 const memberAdmin=await auth.getAppUser();
 check(memberAdmin.isModerator&&memberAdmin.provider==='E-Mail','A fresh verified password session receives its assigned admin role');
 check(JSON.stringify(memberAdmin.ownerKeys)===JSON.stringify(ownershipBefore)&&!auth.ownsVisit(memberAdmin,accountId(ids.other)),'Admin promotion preserves private ownership keys and does not grant another account’s visit ownership');
-response=await update(ids.member,{role:'admin'});
+response=await update(ids.member,{role:'admin'});body=await response.json();
 check(response.ok&&(await auth.getAppUser())?.isModerator,'An unchanged admin role is an idempotent update that keeps the new session active');
+check(body.roleChanged===false,'An unchanged admin role reports no change or session revocation');
 globalThis.fixtureAdmin=memberAdmin;
 response=await update(ids.other,{role:'admin'});body=await response.json();
 check(response.ok&&body.user.role==='admin'&&accountRole(ids.other)==='admin','A delegated administrator can assign another administrator');
@@ -223,13 +225,15 @@ check(otherAdmin.isModerator&&otherAdmin.provider==='Google'&&otherAdmin.ownerKe
 globalThis.fixtureAdmin=moderator;
 response=await update(ids.member,{role:'user'});body=await response.json();
 check(response.ok&&body.user.role==='user'&&accountRole(ids.member)==='user'&&noActiveSessions(ids.member),'An administrator can remove another administrator role and revoke all of its sessions');
+check(body.roleChanged===true,'An actual demotion reports that the role changed');
 signedInUser={...users.get(ids.member),user_metadata:{...users.get(ids.member).user_metadata,role:'admin'},app_metadata:{role:'admin'}};method='password';sessionId='roles-password-admin';
 check(await auth.getAppUser()===null,'Demotion immediately denies a previously authenticated admin session');
 sessionId='roles-password-demoted';await auth.recordPasswordSession(projectUrl,signedInUser,globalThis.fixtureClient);
 const demotedUser=await auth.getAppUser();
 check(!demotedUser.isModerator&&JSON.stringify(demotedUser.ownerKeys)===JSON.stringify(ownershipBefore),'After demotion a new login has ordinary rights with unchanged legacy ownership');
-response=await update(ids.member,{role:'user'});
+response=await update(ids.member,{role:'user'});body=await response.json();
 check(response.ok&&(await auth.getAppUser())?.userId===demotedUser.userId,'An unchanged ordinary role preserves the current customer session');
+check(body.roleChanged===false,'An unchanged ordinary role reports no change or session revocation');
 
 enroll(ids.failure);globalThis.fixtureAdmin=memberAdmin;
 response=await update(ids.failure,{role:'admin'});

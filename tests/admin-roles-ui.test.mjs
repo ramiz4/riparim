@@ -31,9 +31,10 @@ globalThis.fetch=async(url,options)=>{
  assert.deepEqual(Object.keys(request.body),['role'],'Role changes are sent separately from profile and account-status changes');
  assert(['admin','user'].includes(request.body.role));
  const user=users.find(item=>'/api/users/'+item.id===url);assert(user,'Only fictional listed users may be edited');
- const commit=()=>{user.role=request.body.role;return Response.json({user});};
+ const commit=()=>{const roleChanged=user.role!==request.body.role;user.role=request.body.role;return Response.json({user,roleChanged});};
  if(mode==='pending')return new Promise(resolve=>{pending={resolve,commit};});
  if(mode==='uncertain'){user.role=request.body.role;return Response.json({error:'Fixture: Rollenänderung konnte nicht bestätigt werden.'},{status:503});}
+ if(mode==='noop'){assert.equal(user.role,request.body.role,'Another request already assigned the desired role');return Response.json({user,roleChanged:false});}
  return commit();
 };
 const root=createRoot(document.getElementById('root'));
@@ -88,6 +89,16 @@ try{
  await click(demote());await click(dialogButton('Adminrechte entziehen'));
  check(row('member').querySelector('.users-role').textContent==='Benutzer'&&mutations().at(-1).body.role==='user','Confirmed demotion restores the visible ordinary role');
  check(document.querySelector('[role="status"]').textContent.includes('Adminrechte entzogen'),'Successful demotion announces the loss of admin rights');
+
+ await click(promote());users.find(user=>user.id==='member').role='admin';mode='noop';
+ await click(dialogButton('Zum Admin machen'));
+ check(!dialog()&&row('member').querySelector('.users-role').textContent==='Admin','A stale promotion confirmation reflects the role already assigned by another request');
+ check(document.querySelector('[role="status"]').textContent==='Diese Rolle war bereits zugewiesen.','An unchanged role is announced as already assigned');
+ check(!/Sitzungen|anmelden/.test(document.querySelector('[role="status"]').textContent),'An unchanged promotion does not claim session revocation or require another login');
+ await click(demote());users.find(user=>user.id==='member').role='user';
+ await click(dialogButton('Adminrechte entziehen'));
+ check(!dialog()&&row('member').querySelector('.users-role').textContent==='Benutzer','A stale demotion confirmation reflects an already removed role');
+ check(!/Sitzungen|anmelden/.test(document.querySelector('[role="status"]').textContent),'An unchanged demotion does not claim session revocation or require another login');
  console.log(JSON.stringify({adminRoleUiChecksPassed:passed,liveRequests:false}));
 }finally{
  await act(async()=>root.unmount());dom.window.close();

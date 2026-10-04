@@ -24,8 +24,9 @@ export async function PATCH(request:Request,{params}:Context){
   if(status?.status==="deleted")return json({error:"Die Löschung dieses Kontos wurde bereits begonnen. Bitte schließe sie über Löschen ab."},409);
   if(fields.role!==undefined){
    const before=await userView(user,admin,auth.projectUrl);
-   if(before.role!==fields.role)try{await changeAccountRole(accountId,fields.role,admin);}catch(e){if(e instanceof Error&&e.message==="ROLE_CHANGE_FORBIDDEN")return json({error:"Die Rollenänderung ist nicht mehr erlaubt. Bitte aktualisiere die Benutzerverwaltung und melde dich bei Bedarf erneut an."},403);throw e;}
-   return json({user:await userView(user,admin,auth.projectUrl)});
+   const roleChanged=before.role!==fields.role;
+   if(roleChanged)try{await changeAccountRole(accountId,fields.role,admin);}catch(e){if(e instanceof Error&&e.message==="ROLE_CHANGE_FORBIDDEN")return json({error:"Die Rollenänderung ist nicht mehr erlaubt. Bitte aktualisiere die Benutzerverwaltung und melde dich bei Bedarf erneut an."},403);throw e;}
+   return json({user:await userView(user,admin,auth.projectUrl),roleChanged});
   }
   const attributes:AdminUserAttributes={};
   if(fields.name!==undefined)attributes.user_metadata={...user.user_metadata,full_name:fields.name};
