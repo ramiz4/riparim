@@ -21,9 +21,16 @@ if (process.argv.includes("--check")) {
   if (!branch.enforce_admins?.enabled || !branch.required_pull_request_reviews || !branch.required_status_checks?.strict || !branch.required_linear_history?.enabled || !policy.main.required_status_checks.contexts.every(context => contexts.includes(context))) {
     throw new Error("Main branch protection does not match the policy.");
   }
-  console.log("Squash-only merges and required main checks match the repository policy.");
+  const environment = github("GET", `${path}/environments/production`);
+  const allowed = github("GET", `${path}/environments/production/deployment-branch-policies`).branch_policies;
+  if (!environment.deployment_branch_policy?.custom_branch_policies || environment.deployment_branch_policy?.protected_branches || allowed.length !== 1 || allowed[0].name !== "main" || allowed[0].type !== "branch") throw new Error("Production deployments must be restricted to the main branch.");
+  console.log("Squash-only merges, required main checks and main-only production match the repository policy.");
 } else {
   github("PATCH", path, policy.merge);
   github("PUT", `${path}/branches/main/protection`, policy.main);
-  console.log("Configured squash-only merges, Conventional PR titles and protected main.");
+  github("PUT", `${path}/environments/production`, policy.production_environment);
+  const allowed = github("GET", `${path}/environments/production/deployment-branch-policies`).branch_policies;
+  if (allowed.some(rule => rule.name !== "main" || rule.type !== "branch")) throw new Error("Production has additional deployment branches; review them before continuing.");
+  if (!allowed.length) github("POST", `${path}/environments/production/deployment-branch-policies`, { name: "main", type: "branch" });
+  console.log("Configured squash-only merges, protected main and main-only production.");
 }
