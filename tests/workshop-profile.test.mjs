@@ -78,8 +78,14 @@ try{
  let disposed=false;const element={replaceChildren(){disposed=true;}};
  const dispose=await browser.showConfirmedGoogleMap(element,profile,'browser-fixture-key',workshop.name);
  assert.deepEqual(maps[0].options.center,profile.location,'map centers on live coordinates from the same confirmed Google place');
+ assert.equal(maps[0].options.colorScheme,'LIGHT');
  assert.deepEqual(markers[0].position,profile.location);assert.notDeepEqual(markers[0].position,{lat:workshop.lat,lng:workshop.lng},'old directory coordinates do not control the map');
  dispose();assert.equal(markers[0].map,null);assert.equal(disposed,true);
+ const disposeDark=await browser.showConfirmedGoogleMap(element,profile,'browser-fixture-key',workshop.name,{theme:'dark'});
+ assert.equal(maps[1].options.colorScheme,'DARK');disposeDark();
+ const cancelled=new AbortController();cancelled.abort();
+ await assert.rejects(browser.showConfirmedGoogleMap(element,profile,'browser-fixture-key',workshop.name,{theme:'dark',signal:cancelled.signal}),{name:'AbortError'});
+ assert.equal(maps.length,2,'cancelled theme changes never create a stale map');
  await assert.rejects(browser.showConfirmedGoogleMap(element,{...profile,location:null},'browser-fixture-key',workshop.name),/location/);
 }finally{if(nativeWindow===undefined)delete globalThis.window;else globalThis.window=nativeWindow;}
 
