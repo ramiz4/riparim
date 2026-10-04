@@ -24,7 +24,15 @@ deren bestehendes Verhalten hinter dem Plattformzugang.
 Nur ein vollständig veröffentlichter GitHub Release mit passendem Quellcommit,
 Projekt und SHA-256 darf auf die Quell-Site übernommen werden. Der konfigurierte
 Sites-Quellbranch muss den exakten Release-Commit per Fast-forward erhalten;
-bei Divergenz stoppen. Das heruntergeladene geprüfte Sites-Archiv wird unverändert
+bei Divergenz stoppen. Reine zusätzliche Veröffentlichungscommits dürfen nicht
+als vermeintlich gleicher Archivcommit ausgegeben werden. Nach zusätzlicher
+Sicherung der gesamten Quellhistorie auf einem eigenen Branch und mit lokalem
+Git-Bundle samt Wiederherstellungsprüfung kann eine ausdrücklich vom Nutzer
+beauftragte Ausrichtung erfolgen. Sie verwendet ausschließlich
+`--force-with-lease=refs/heads/main:<zuvor bestätigter vollständiger SHA>` zum
+geprüften Release-Commit und bricht bei jeder zwischenzeitlichen Änderung ab.
+Ohne diese ausdrückliche Beauftragung bleibt die Veröffentlichung gestoppt.
+Das heruntergeladene geprüfte Sites-Archiv wird unverändert
 mit den nativen Sites-Werkzeugen gespeichert und veröffentlicht.
 
 ## Geschützter Export und Schreibpause
@@ -86,6 +94,11 @@ angewendete Historie bleibt erhalten. Ein Datentransfer ersetzt keine Migration
 und spielt keine alten CREATE/DROP-Anweisungen über die Produktionsdatenbank.
 
 ## Import und Abnahme
+
+Der Zielnachweis verlangt neben HTTP503/no-store den ausdrücklichen Wartungsmarker
+des Workers und dessen unveränderlich eingebauten Release-Commit. Ein gewöhnlicher
+App-Ausfall gilt nicht als aktive Schreibpause. Quellidentität und Bestandsfingerprints
+werden vor und nach jedem Importabschnitt authentifiziert geprüft.
 
 Vor Import beide Seiten sichern, Wiederherstellung prüfen, Dateien vollständig
 verifizieren und einen privaten Plan erzeugen. Gleiche Datensätze sind No-ops;
