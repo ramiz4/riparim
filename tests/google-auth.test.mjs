@@ -10,7 +10,7 @@ const bundle=await build({entryPoints:{auth:'app/auth.ts',config:'lib/auth/confi
 await mkdir('.test-runtime/google-auth',{recursive:true});
 for(const file of bundle.outputFiles)await writeFile(file.path.replace(/\.js$/,'.mjs'),file.contents);
 const db=new DatabaseSync(':memory:');
-for(const file of ['0002_exotic_slayback','0003_magenta_boom_boom','0004_ambiguous_morbius'])db.exec(await readFile('drizzle/'+file+'.sql','utf8'));
+for(const file of ['0002_exotic_slayback','0003_magenta_boom_boom','0004_ambiguous_morbius','0007_pink_tyrannus'])db.exec(await readFile('drizzle/'+file+'.sql','utf8'));
 const d1={prepare(sql){const statement=db.prepare(sql);const adapter=(values=[])=>({first:async()=>statement.get(...values)??null,run:async()=>({meta:statement.run(...values)}),all:async()=>({results:statement.all(...values)}),bind:(...next)=>adapter(next)});return adapter();}};
 const projectUrl='https://fixture-project.supabase.co',origin='https://riparim.example.test';
 globalThis.fixtureEnv={DB:d1,BUCKET:{},REVIEW_MODERATOR_EMAIL:'owner@example.test',SITE_ORIGIN:origin};
