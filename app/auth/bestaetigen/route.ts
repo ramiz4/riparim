@@ -25,8 +25,9 @@ export async function GET(request:Request){
    cookieStore.set("riparim-deletion-flow","",{httpOnly:true,secure:!["localhost","127.0.0.1"].includes(new URL(request.url).hostname),sameSite:"lax",path:"/auth/bestaetigen",maxAge:0});
    let deletion: {flow:string;accountId:string;expiresAt:number}|null=null;
    if(deletionFlow){
-    deletion=JSON.parse(deletionFlow);
-    if(!deletion||deletion.flow!==flow||deletion.expiresAt<=Date.now()||deletion.accountId!==providerAccountId(c.projectUrl,data.session.user.id))throw Error("INVALID_DELETION_IDENTITY");
+    const intent:unknown=JSON.parse(deletionFlow);
+    if(!intent||typeof intent!=="object"||!("flow" in intent)||!("accountId" in intent)||!("expiresAt" in intent)||typeof intent.flow!=="string"||typeof intent.accountId!=="string"||typeof intent.expiresAt!=="number"||!Number.isFinite(intent.expiresAt)||intent.flow!==flow||intent.expiresAt<=Date.now()||intent.accountId!==providerAccountId(c.projectUrl,data.session.user.id))throw Error("INVALID_DELETION_IDENTITY");
+    deletion={flow:intent.flow,accountId:intent.accountId,expiresAt:intent.expiresAt};
    }
    await recordGoogleSession(c.projectUrl,data.session,client);
    if(deletion){

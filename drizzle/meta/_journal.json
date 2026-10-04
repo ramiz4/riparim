@@ -71,6 +71,13 @@
       "when": 1791121220766,
       "tag": "0009_fine_sister_grimm",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "6",
+      "when": 1791122836959,
+      "tag": "0010_handy_luminals",
+      "breakpoints": true
     }
   ]
 }

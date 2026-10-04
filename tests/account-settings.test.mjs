@@ -5,12 +5,13 @@ import {DatabaseSync} from 'node:sqlite';
 const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
 const output='.test-runtime/account-settings';
 await mkdir(output,{recursive:true});
-const bundle=await build({entryPoints:{account:'app/api/account/route.ts',grant:'lib/auth/deletion-grant.ts',proof:'lib/auth/password-proof.ts'},outdir:output,bundle:true,write:false,format:'esm',platform:'node',plugins:[{name:'account-boundaries',setup(b){
- b.onResolve({filter:/^(cloudflare:workers|@\/app\/auth|@\/lib\/auth\/(admin|client)|next\/headers|@supabase\/supabase-js)$/},args=>({path:args.path,namespace:'fixture'}));
+const bundle=await build({entryPoints:{account:'app/api/account/route.ts',grant:'lib/auth/deletion-grant.ts',visits:'app/api/visits/route.ts',proof:'lib/auth/password-proof.ts'},outdir:output,bundle:true,write:false,format:'esm',platform:'node',plugins:[{name:'account-boundaries',setup(b){
+ b.onResolve({filter:/^(cloudflare:workers|@\/app\/auth|@\/lib\/auth\/(admin|client)|next\/headers|@\/db\/directory|@supabase\/supabase-js)$/},args=>({path:args.path,namespace:'fixture'}));
  b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',contents:
   args.path==='cloudflare:workers'?'export const env=globalThis.fixtureEnv;':
   args.path==='next/headers'?'export async function cookies(){return globalThis.fixtureCookies;} export async function headers(){return new Headers({host:"riparim.example.test"});}':
-  args.path==='@/app/auth'?'export async function getAppUser(){return globalThis.fixtureCurrent();} export function providerAccountId(url,id){return `supabase:${new URL(url).hostname}:${id}`;}':
+  args.path==='@/db/directory'?'export async function publishedWorkshop(){return {id:"fixture-workshop"};}':
+  args.path==='@/app/auth'?'export async function getAppUser(){return globalThis.fixtureCurrent();} export async function getAdminUser(){return globalThis.fixtureCurrent();} export function ownsVisit(user,owner){return user.ownerKeys.includes(owner);} export function ownerPair(user){return [user.ownerKeys[0],user.ownerKeys[1]??user.ownerKeys[0]];} export function providerAccountId(url,id){return `supabase:${new URL(url).hostname}:${id}`;}':
   args.path==='@/lib/auth/admin'?'export async function getAuthAdmin(){return globalThis.fixtureAdmin;}':
   args.path==='@/lib/auth/client'?'export async function authClient(){return globalThis.fixtureClient;}':
   'export function createClient(...args){return globalThis.fixtureCreateClient(...args);}'
@@ -18,7 +19,7 @@ const bundle=await build({entryPoints:{account:'app/api/account/route.ts',grant:
 }}]});
 for(const file of bundle.outputFiles)await writeFile(file.path.replace(/\.js$/,'.mjs'),file.contents);
 const db=new DatabaseSync(':memory:');
-for(const file of ['0000_handy_black_queen','0001_polite_killmonger','0002_exotic_slayback','0003_magenta_boom_boom','0004_ambiguous_morbius','0007_pink_tyrannus','0008_stormy_blazing_skull','0009_fine_sister_grimm'])db.exec(await readFile(`drizzle/${file}.sql`,'utf8'));
+for(const file of ['0000_handy_black_queen','0001_polite_killmonger','0002_exotic_slayback','0003_magenta_boom_boom','0004_ambiguous_morbius','0007_pink_tyrannus','0008_stormy_blazing_skull','0009_fine_sister_grimm','0010_handy_luminals'])db.exec(await readFile(`drizzle/${file}.sql`,'utf8'));
 let beforeBatch=null,batchTail=Promise.resolve(),failDb=false;
 const d1={prepare(sql){const s=db.prepare(sql);const adapter=(values=[])=>({bind:(...next)=>adapter(next),first:async()=>{if(failDb)throw Error('Fixture DB unavailable');return s.get(...values)??null;},all:async()=>({results:s.all(...values)}),run:async()=>({meta:s.run(...values)})});return adapter();},batch(statements){const result=batchTail.then(async()=>{if(beforeBatch){const fn=beforeBatch;beforeBatch=null;fn();}db.exec('BEGIN');try{const results=[];for(const statement of statements)results.push(await statement.run());db.exec('COMMIT');return results;}catch(e){db.exec('ROLLBACK');throw e;}});batchTail=result.catch(()=>{});return result;}};
 const origin='https://riparim.example.test',projectUrl='https://fixture-project.supabase.co';
@@ -27,7 +28,8 @@ const accountId=(uid=id)=>`supabase:fixture-project.supabase.co:${uid}`;
 let user={userId:accountId(),email:'member@example.test',provider:'E-Mail',displayName:'Fixture Member',ownerKeys:[accountId()],isModerator:false};
 let providerUser={id,email:user.email,email_confirmed_at:'2026-10-04',user_metadata:{full_name:user.displayName,unrelated:'preserved'}};
 const objects=new Map();let failBucket=false,failProvider=false,missingProvider=false,allowCurrent=true;
-const bucket={async list({prefix,cursor}){if(failBucket)throw Error('Fixture R2 unavailable');const keys=[...objects.keys()].filter(key=>key.startsWith(prefix)&&(!cursor||key>cursor)).sort(),page=keys.slice(0,1);return {objects:page.map(key=>({key})),truncated:keys.length>page.length,cursor:page.at(-1)};},async delete(keys){if(failBucket)throw Error('Fixture R2 unavailable');for(const key of keys)objects.delete(key);}};
+let reachedPut=null,releasePut=null;
+const bucket={async put(key,bytes,options){if(options?.onlyIf&&reachedPut){reachedPut(key);await new Promise(resolve=>releasePut=resolve);}if(options?.onlyIf&&!objects.has(key))return null;objects.set(key,bytes??false);return {etag:key};},async head(key){return objects.has(key)?{key}:null;},async list({prefix,cursor}){if(failBucket)throw Error('Fixture R2 unavailable');const keys=[...objects.keys()].filter(key=>key.startsWith(prefix)&&(!cursor||key>cursor)).sort(),page=keys.slice(0,1);return {objects:page.map(key=>({key})),truncated:keys.length>page.length,cursor:page.at(-1)};},async delete(keys){if(failBucket)throw Error('Fixture R2 unavailable');for(const key of Array.isArray(keys)?keys:[keys])objects.delete(key);}};
 globalThis.fixtureEnv={DB:d1,BUCKET:bucket,SITE_ORIGIN:origin,REVIEW_MODERATOR_EMAIL:'owner@example.test'};
 globalThis.fixtureCurrent=()=>allowCurrent&&!db.prepare('SELECT account_id FROM auth_account_status WHERE account_id=?').get(user.userId)?user:null;
 const cookieMap=new Map(),cookieOptions=new Map();
@@ -129,4 +131,25 @@ globalThis.fixtureAdmin={client:{auth:{admin:authAdmin}},projectUrl};failDb=true
 check((await account.GET()).status===503,'Database failures fail closed without exposing an unverified account');failDb=false;
 seed();for(let attempt=0;attempt<13;attempt++)response=await confirm({password:'incorrect'});
 check(response.status===429,'Repeated proof attempts are rate limited by server-side identity');
+seed();db.prepare('DELETE FROM auth_attempts').run();await confirm({password:'fixture-password'});
+const visits=await import(new URL(`../${output}/visits.mjs`,import.meta.url));
+const uploadId='00000000-0000-4000-8000-000000000010',form=new FormData();
+for(const [key,value] of Object.entries({id:uploadId,workshop:'fixture-workshop',date:new Date().toISOString().slice(0,10),vehicle:'Fixture Car',service:'Inspektion & Wartung',evidenceType:'Rechnung',name:'Fixture Member',rating:'5',review:'A sufficiently detailed fictional account deletion regression review.',consent:'true'}))form.set(key,value);
+form.set('file',new File(['%PDF-fixture'],'fixture.pdf',{type:'application/pdf'}));
+const atPut=new Promise(resolve=>reachedPut=resolve);
+const pendingUpload=visits.POST(new Request(origin+'/api/visits',{method:'POST',headers:{Origin:origin},body:form}));
+const pendingKey=await atPut;
+check(db.prepare('SELECT file_key FROM evidence_uploads WHERE file_key=?').get(pendingKey)&&objects.get(pendingKey)===false,'The upload has a durable empty reservation before private bytes can be stored');
+response=await remove();
+check(response.ok&&missingProvider&&!objects.has(pendingKey),'Deletion removes the reservation so a late conditional payload cannot write');
+failBucket=true;releasePut();reachedPut=null;const uploadResponse=await pendingUpload;
+check(uploadResponse.status===401&&!db.prepare('SELECT id FROM visits WHERE id=?').get(uploadId),'A late conditional upload cannot commit a visit after deletion starts');
+check(!objects.has(pendingKey)&&db.prepare('SELECT file_key FROM evidence_uploads WHERE file_key=?').get(pendingKey),'Failed compensation retains cleanup inventory without writing any private late bytes');
+failBucket=false;
+check((await remove()).status===401,'Completed deletion grants remain consumed even if a stale upload needs housekeeping');
+seed();db.prepare('DELETE FROM auth_attempts').run();await confirm({password:'fixture-password'});
+const abandonedKey=`evidence/${accountId()}/abandoned/complete.pdf`;objects.set(abandonedKey,true);db.prepare('INSERT INTO evidence_uploads VALUES (?,?)').run(abandonedKey,accountId());
+check((await remove()).ok&&!objects.has(abandonedKey),'An abandoned reservation with an object is safely recovered');
+seed();db.prepare('DELETE FROM auth_attempts').run();await confirm({password:'fixture-password'});db.prepare('INSERT INTO evidence_uploads VALUES (?,?)').run(`evidence/${accountId()}/abandoned/missing`,accountId());
+check((await remove()).ok,'An abandoned reservation with no object cannot permanently block deletion');
 console.log(JSON.stringify({accountSettingsChecksPassed:passed,liveProviderTested:false,productionTouched:false}));

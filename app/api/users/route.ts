@@ -2,9 +2,9 @@ import {getAdminUser} from "@/app/auth";
 import {getAuthAdmin} from "@/lib/auth/admin";
 import {blockAccount} from "@/lib/auth/account-status";
 import {providerAccountId} from "@/app/auth";
-import {moderatorEmail} from "@/db/storage";
+import {moderatorEmail,storage} from "@/db/storage";
 import {json,readJson,sameOrigin} from "@/lib/http";
-import {userView,parseUserFields,providerFailure,notConfigured} from "@/lib/admin-users";
+import {userView,validUserId,parseUserFields,providerFailure,notConfigured} from "@/lib/admin-users";
 export const dynamic="force-dynamic";
 
 export async function GET(request:Request){
@@ -15,7 +15,10 @@ export async function GET(request:Request){
   const auth=await getAuthAdmin();if(!auth)return json({users:[],page,perPage,hasMore:false,configured:false});
   const {data,error}=await auth.client.auth.admin.listUsers({page,perPage});if(error)return providerFailure(error);
   const users=await Promise.all(data.users.map(user=>userView(user,admin,auth.projectUrl)));
-  return json({users,page,perPage,hasMore:data.total>0?page*perPage<data.total:data.users.length===perPage,configured:true});
+  const prefix=providerAccountId(auth.projectUrl,"");
+  const pending=await storage().db.prepare("SELECT s.account_id FROM auth_account_status s WHERE s.status='deleted' AND substr(s.account_id,1,?)=? AND (EXISTS (SELECT 1 FROM auth_links WHERE account_id=s.account_id) OR EXISTS (SELECT 1 FROM auth_sessions WHERE account_id=s.account_id) OR EXISTS (SELECT 1 FROM auth_account_deletions WHERE account_id=s.account_id) OR EXISTS (SELECT 1 FROM evidence_uploads WHERE owner=s.account_id)) ORDER BY s.account_id LIMIT 100").bind(prefix.length,prefix).all<{account_id:string}>();
+  const pendingDeletions=pending.results.map(row=>({id:row.account_id.slice(prefix.length),email:"",name:`Begonnene Löschung (${row.account_id.slice(prefix.length)})`,role:"user",active:false,confirmed:false,createdAt:null,lastSignInAt:null,providers:[],protected:row.account_id===admin.userId})).filter(row=>validUserId(row.id));
+  return json({users,pendingDeletions,page,perPage,hasMore:data.total>0?page*perPage<data.total:data.users.length===perPage,configured:true});
  }catch{return providerFailure(null);}
 }
 

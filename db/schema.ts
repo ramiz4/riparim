@@ -30,3 +30,6 @@ export const authAccountDeletions=sqliteTable("auth_account_deletions",{
  accountId:text("account_id").primaryKey(),userId:text("user_id").notNull(),tokenHash:text("token_hash").notNull().unique(),
  expiresAt:integer("expires_at").notNull(),started:integer("started").notNull().default(0)
 });
+export const evidenceUploads=sqliteTable("evidence_uploads",{
+ fileKey:text("file_key").primaryKey(),owner:text("owner").notNull()
+},table=>[index("idx_evidence_uploads_owner").on(table.owner)]);

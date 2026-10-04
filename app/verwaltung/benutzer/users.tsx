@@ -13,7 +13,7 @@ import {AlertDialog,AlertDialogAction,AlertDialogCancel,AlertDialogContent,Alert
 import {Switch} from "@/components/ui/switch";
 import {Table,TableBody,TableCell,TableHead,TableHeader,TableRow} from "@/components/ui/table";
 
-type UserPage={users:ManagedUser[];page:number;perPage:number;hasMore:boolean;configured:boolean;error?:string};
+type UserPage={users:ManagedUser[];pendingDeletions?:ManagedUser[];page:number;perPage:number;hasMore:boolean;configured:boolean;error?:string};
 type Draft={name:string;email:string;password:string;active:boolean};
 const perPage=20;
 const providerLabels:Record<string,string>={email:"E-Mail",google:"Google",chatgpt:"ChatGPT",apple:"Apple",github:"GitHub"};
@@ -26,6 +26,7 @@ function failureMessage(error:unknown,fallback:string){return error instanceof E
 
 export default function AdminUsers({account}:{account:AccountIdentity}){
  const formId=useId();
+ const [pendingDeletions,setPendingDeletions]=useState<ManagedUser[]>([]);
  const [users,setUsers]=useState<ManagedUser[]>([]),[page,setPage]=useState(1),[hasMore,setHasMore]=useState(false),[configured,setConfigured]=useState<boolean|null>(null);
  const [loading,setLoading]=useState(true),[loaded,setLoaded]=useState(false),[error,setError]=useState(""),[feedback,setFeedback]=useState(""),[query,setQuery]=useState("");
  const [editor,setEditor]=useState(false),[editing,setEditing]=useState<ManagedUser|null>(null),[draft,setDraft]=useState<Draft|null>(null),[saving,setSaving]=useState(false),[formError,setFormError]=useState("");
@@ -42,10 +43,10 @@ export default function AdminUsers({account}:{account:AccountIdentity}){
    const data=await response.json() as UserPage;
    if(generation!==requestGeneration.current)return;
    if(!response.ok){
-    if(response.status===401||response.status===403){setUsers([]);setLoaded(false);setConfigured(null);setHasMore(false);}
+    if(response.status===401||response.status===403){setUsers([]);setPendingDeletions([]);setLoaded(false);setConfigured(null);setHasMore(false);}
     throw Error(data.error||"Benutzer konnten nicht geladen werden.");
    }
-   setUsers(data.users);setPage(data.page);setHasMore(data.hasMore);setConfigured(data.configured);setLoaded(true);
+   setPendingDeletions(data.pendingDeletions??[]);setUsers(data.users);setPage(data.page);setHasMore(data.hasMore);setConfigured(data.configured);setLoaded(true);
   }catch(loadError){
    if(generation===requestGeneration.current&&!request.signal.aborted)setError(failureMessage(loadError,"Benutzer konnten nicht geladen werden. Bitte versuche es erneut."));
   }finally{if(generation===requestGeneration.current)setLoading(false);}
@@ -122,6 +123,7 @@ export default function AdminUsers({account}:{account:AccountIdentity}){
    <div className="users-toolbar"><label className="users-search"><Search size={16} aria-hidden="true"/><input value={query} onChange={event=>setQuery(event.target.value)} placeholder="Name oder E-Mail auf dieser Seite suchen" aria-label="Benutzer auf dieser Seite durchsuchen" disabled={configured!==true}/></label><button className="outline small" disabled={busy} onClick={()=>void load(page)}><RefreshCw size={15} aria-hidden="true"/>Aktualisieren</button></div>
    {feedback&&<p className="admin-feedback" role="status">{feedback}</p>}
    {error&&<p className="error users-error" role="alert">{error}</p>}
+   {pendingDeletions.length>0&&<section className="users-setup-note" aria-labelledby="pending-deletions-title"><div><h2 id="pending-deletions-title">Unvollständige Kontolöschungen</h2><p>Diese Konten bleiben gesperrt. Setze die Bereinigung fort, auch wenn der Anmeldedienst das Konto bereits entfernt hat.</p>{pendingDeletions.map(user=><p key={user.id}><span>{user.id}</span> <button className="outline small" disabled={busy||user.protected} aria-label={`Löschung für ${user.id} abschließen`} onClick={()=>{setDeleteUser(user);setDeleteError("");}}>Löschung abschließen</button></p>)}</div></section>}
    {configured===false&&<section className="users-setup-note" aria-labelledby="users-setup-title"><ShieldCheck size={24} aria-hidden="true"/><div><h2 id="users-setup-title">Serverkonfiguration fehlt</h2><p>Die Benutzerverwaltung benötigt eine serverseitige Verbindung zum Anmeldedienst. Prüfe die Einrichtung unter Login & Registrierung.</p><Link className="text-action" href="/verwaltung/anmeldung">Login & Registrierung öffnen</Link></div></section>}
    {loading&&!loaded&&<div className="review-loading" role="status"><LoaderCircle size={20} className="spin" aria-hidden="true"/>Benutzer werden geladen …</div>}
    {configured===true&&<>

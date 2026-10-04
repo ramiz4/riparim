@@ -12,6 +12,7 @@ import {parseUserFields} from "@/lib/admin-users";
 import {json,readJson,sameOrigin} from "@/lib/http";
 
 export const dynamic="force-dynamic";
+function logFailure(operation:string,error:unknown){console.error("account-operation-failed",{operation,reason:error instanceof Error?error.name:"unknown"});}
 const unavailable=()=>json({error:"Die Kontoverwaltung ist gerade nicht verfügbar. Bitte versuche es erneut."},503);
 async function currentAccount(){
  const user=await getAppUser(),config=await getAuthConfig();
@@ -30,7 +31,7 @@ export async function GET(){
   const validGrant=grant&&config?.enabled&&grant.account_id===providerAccountId(config.projectUrl,grant.user_id)?grant:null;
   if(!current||validGrant?.started)return json({account:null,deletionReady:false,deletionStarted:!!validGrant?.started});
   return json({account:{email:current.user.email,name:current.user.displayName,provider:current.user.provider,protected:await deletionProtected(current.user)},deletionReady:!!validGrant&&validGrant.account_id===current.user.userId,deletionStarted:!!validGrant?.started});
- }catch{return unavailable();}
+ }catch(e){logFailure("read",e);return unavailable();}
 }
 export async function PATCH(request:Request){
  let body;try{body=await input(request);}catch{return json({error:"Ungültige Anfrage."},400);}
@@ -43,7 +44,7 @@ export async function PATCH(request:Request){
   const {data,error}=await auth.client.auth.admin.updateUserById(current.providerUser.id,{user_metadata:{...current.providerUser.user_metadata,full_name:fields.name}});
   if(error||!data.user)return unavailable();
   return json({name:fields.name});
- }catch{return unavailable();}
+ }catch(e){logFailure("rename",e);return unavailable();}
 }
 export async function POST(request:Request){
  let body;try{body=await input(request);}catch{return json({error:"Ungültige Anfrage."},400);}
@@ -56,7 +57,7 @@ export async function POST(request:Request){
   if(await accountBlocked(current.user.userId))return json({error:"Dieses Konto ist gesperrt."},403);
   await issueDeletionGrant(current.user,current.config.projectUrl,current.providerUser.id);
   return json({ok:true});
- }catch{return unavailable();}
+ }catch(e){logFailure("reauthenticate",e);return unavailable();}
 }
 export async function DELETE(request:Request){
  let body;try{body=await input(request);}catch{return json({error:"Ungültige Anfrage."},400);}
@@ -81,6 +82,7 @@ export async function DELETE(request:Request){
   return json({ok:true});
  }catch(e){
   if(e instanceof Error&&e.message==="DELETION_FORBIDDEN")return json({error:"Administrationszugänge sind gegen eigene Löschung geschützt."},403);
+  logFailure("delete",e);
   return json({error:"Die Löschung konnte nicht abgeschlossen werden. Dein Konto bleibt nach Beginn gesperrt. Bitte wiederhole die Löschung hier; falls nötig hilft die Verwaltung."},503);
  }
 }

@@ -15,7 +15,7 @@ export function AccountSettings(){
  const [loading,setLoading]=useState(true),[busy,setBusy]=useState(false),[error,setError]=useState(""),[message,setMessage]=useState("");
  const [open,setOpen]=useState(false),[confirmation,setConfirmation]=useState("");
  const load=useCallback(async(signal?:AbortSignal)=>{
-  setLoading(true);
+  setLoading(true);setError("");
   try{
    const response=await fetch("/api/account",{cache:"no-store",signal}),data=await response.json() as AccountState;
    if(!response.ok)throw Error(data.error||networkError);

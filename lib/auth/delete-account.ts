@@ -7,11 +7,14 @@ import type {getAuthAdmin} from "@/lib/auth/admin";
 // inventory even if every visit has already been removed.
 export async function deleteAccount(auth:NonNullable<Awaited<ReturnType<typeof getAuthAdmin>>>,id:string){
  const accountId=providerAccountId(auth.projectUrl,id),{db,bucket}=storage();
- const link=await db.prepare("SELECT legacy_owner FROM auth_links WHERE account_id=?").bind(accountId).first<{legacy_owner:string}>();
  await blockAccount(accountId,"deleted");
+ const link=await db.prepare("SELECT legacy_owner FROM auth_links WHERE account_id=?").bind(accountId).first<{legacy_owner:string}>();
  if(link)await blockAccount(link.legacy_owner,"deleted");
  const owners:[string,string]=[accountId,link?.legacy_owner??accountId];
  await db.prepare("UPDATE visits SET status='deleting',revision=revision+1 WHERE owner IN (?,?)").bind(...owners).run();
+ // Removing every reservation fences conditional writes already in flight.
+ const uploads=await db.prepare("SELECT file_key FROM evidence_uploads WHERE owner IN (?,?)").bind(...owners).all<{file_key:string}>();
+ for(const upload of uploads.results)await bucket.delete(upload.file_key);
  const visits=await db.prepare("SELECT id,owner FROM visits WHERE owner IN (?,?)").bind(...owners).all<{id:string;owner:string}>();
  for(const visit of visits.results)await cleanupVisitEvidence(visit.owner,visit.id);
  // Include orphaned and superseded evidence, not just current visit files.
@@ -30,6 +33,7 @@ export async function deleteAccount(auth:NonNullable<Awaited<ReturnType<typeof g
   db.prepare("DELETE FROM auth_sessions WHERE account_id IN (?,?)").bind(...owners),
   db.prepare("DELETE FROM auth_account_roles WHERE account_id=?").bind(accountId),
   db.prepare("DELETE FROM auth_account_deletions WHERE account_id=?").bind(accountId),
+  db.prepare("DELETE FROM evidence_uploads WHERE owner IN (?,?)").bind(...owners),
   db.prepare("DELETE FROM auth_links WHERE account_id=?").bind(accountId)
  ]);
 }

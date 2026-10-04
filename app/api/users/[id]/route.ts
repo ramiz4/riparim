@@ -49,8 +49,14 @@ export async function DELETE(request:Request,{params}:Context){
   const admin=await getAdminUser();if(!admin)return json({error:"Bitte melde dich an."},401);if(!admin.isModerator||!sameOrigin(request))return json({error:"Kein Zugriff auf die Benutzerverwaltung."},403);
   const id=(await params).id.toLowerCase();if(!validUserId(id))return json({error:"Ungültige Benutzerkennung."},400);
   const auth=await getAuthAdmin();if(!auth)return notConfigured();
-  const {data,error}=await auth.client.auth.admin.getUserById(id);if(error||!data.user)return providerFailure(error);
-  if(protectedUser(data.user,admin,auth.projectUrl))return json({error:"Das Administratorkonto kann nicht gelöscht werden."},403);
+  const {data,error}=await auth.client.auth.admin.getUserById(id);
+  if(error?.status===404||error?.code==="user_not_found"){
+   const accountId=providerAccountId(auth.projectUrl,id);
+   if(accountId===admin.userId)return json({error:"Das Administratorkonto kann nicht gelöscht werden."},403);
+   const tombstone=await storage().db.prepare("SELECT account_id FROM auth_account_status WHERE account_id=? AND status='deleted'").bind(accountId).first();
+   if(!tombstone)return providerFailure(error);
+  }else if(error||!data.user)return providerFailure(error);
+  if(data.user&&protectedUser(data.user,admin,auth.projectUrl))return json({error:"Das Administratorkonto kann nicht gelöscht werden."},403);
   await deleteAccount(auth,id);
   return json({ok:true});
  }catch{return json({error:"Der Benutzer konnte nicht vollständig gelöscht werden. Eine begonnene Löschung hält das Konto gesperrt. Bitte versuche es erneut."},503);}

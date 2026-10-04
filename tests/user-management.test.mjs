@@ -28,7 +28,7 @@ for(const [kind,entryPoints] of [['routes',{collection:'app/api/users/route.ts',
 
 const db=new DatabaseSync(':memory:');
 // Include the visit table because account deletion must remove owned visits and files.
-for(const name of ['0000_handy_black_queen','0001_polite_killmonger','0002_exotic_slayback','0003_magenta_boom_boom','0004_ambiguous_morbius','0007_pink_tyrannus','0008_stormy_blazing_skull','0009_fine_sister_grimm'])db.exec(await readFile(`drizzle/${name}.sql`,'utf8'));
+for(const name of ['0000_handy_black_queen','0001_polite_killmonger','0002_exotic_slayback','0003_magenta_boom_boom','0004_ambiguous_morbius','0007_pink_tyrannus','0008_stormy_blazing_skull','0009_fine_sister_grimm','0010_handy_luminals'])db.exec(await readFile(`drizzle/${name}.sql`,'utf8'));
 let failDatabase=false;
 let beforeRun=null;
 let beforeFirst=null;
@@ -57,7 +57,7 @@ let failBucket=false;
 const bucket={
  async list({prefix,cursor}){if(failBucket)throw Error('Fixture evidence unavailable');const keys=[...objects.keys()].filter(key=>key.startsWith(prefix)&&(!cursor||key>cursor)).sort(),page=keys.slice(0,1);return {objects:page.map(key=>({key})),truncated:page.length<keys.length,cursor:page.at(-1)};},
  async delete(keys){if(failBucket)throw Error('Fixture evidence unavailable');for(const key of Array.isArray(keys)?keys:[keys])objects.delete(key);},
- async put(key){objects.set(key,true);},
+ async put(key,bytes,options){if(options?.onlyIf&&!objects.has(key))return null;objects.set(key,true);return {etag:key};},
  async head(key){return objects.has(key)?{key}:null;},
 };
 const projectUrl='https://fixture-project.supabase.co',origin='https://riparim.example.test';
@@ -361,6 +361,20 @@ response=await visits.PUT(evidenceRequest(racedEdit,'PUT',0));
 check(!response.ok&&db.prepare('SELECT revision FROM visits WHERE id=?').get(racedEdit).revision===0,'An already authenticated edit cannot update a visit after deactivation begins');
 check([...objects.keys()].filter(key=>key.includes(racedEdit)).length===2,'A rejected edit removes its new upload and preserves the previously owned evidence');
 beforeRun=null;db.prepare('DELETE FROM auth_account_status WHERE account_id=?').run(accountId(ids.current));
+
+// An uncertain final database commit must be recoverable after provider deletion.
+globalThis.fixtureAdmin=moderator;enroll(ids.failure);
+db.prepare("INSERT OR IGNORE INTO auth_links (account_id,legacy_owner,created_at) VALUES (?,'legacy-failure','2026-10-04')").run(accountId(ids.failure));
+const normalProviderDelete=authAdmin.deleteUser;
+authAdmin.deleteUser=async function(id){const result=await normalProviderDelete.call(this,id);beforeBatch=()=>{beforeBatch=null;throw Error('Fixture final account cleanup failure');};return result;};
+response=await remove(ids.failure);
+check(response.status===503&&!users.has(ids.failure)&&status(ids.failure)==='deleted','Provider deletion followed by local finalization failure leaves a blocked recovery state');
+authAdmin.deleteUser=normalProviderDelete;
+body=await list().then(response=>response.json());
+check(body.pendingDeletions.some(user=>user.id===ids.failure),'Administrative recovery lists locally incomplete deletions even if the provider account disappeared');
+check((await remove(ids.failure)).ok,'Administrative deletion retries a persisted tombstone after provider user_not_found');
+check(!db.prepare('SELECT account_id FROM auth_links WHERE account_id=?').get(accountId(ids.failure))&&!db.prepare('SELECT id FROM auth_sessions WHERE account_id=?').get(accountId(ids.failure)),'Administrative recovery clears retained links and sessions');
+check(!(await list().then(response=>response.json())).pendingDeletions.some(user=>user.id===ids.failure),'Completed cleanup disappears from administrative recovery');
 
 // Exercise the privileged client boundary without sending any SDK network requests.
 const clientConfigurations=[];
