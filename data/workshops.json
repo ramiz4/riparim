@@ -1,19 +1,19 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-04T07:26:35.861Z",
+  "updatedAt": "2026-10-04T10:04:19.365Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 71,
-    "drafts": 92,
+    "published": 78,
+    "drafts": 85,
     "estimatedTotal": 1700,
     "estimateSource": "user",
     "complete": false
   },
   "googleImport": {
     "status": "completed",
-    "reason": "Alle veröffentlichten Pkw-Werkstätten sind zugeordnet. Auto Electronics bleibt bis zur eindeutigen Bestätigung als Entwurf erhalten; Lkw-/Bus- und unklare Pkw-Serviceeinträge sind ausgeblendet.",
-    "matchedPlaceIds": 77,
+    "reason": "Alle veröffentlichten Pkw-Werkstätten sind zugeordnet. Auto Electronics bleibt bis zur eindeutigen Identitätsbestätigung als Entwurf erhalten; sechs fachlich ausgeschlossene Einträge und zwei ungeklärte Standortkonflikte bleiben ausgeblendet.",
+    "matchedPlaceIds": 86,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -70,13 +70,16 @@
       "phone": "+38344164141",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
       "whatsapp": "",
-      "brands": [],
+      "brands": [
+        "Mercedes-Benz",
+        "Smart"
+      ],
       "services": [
         "Inspektion & Wartung",
         "Motor & Getriebe"
       ],
       "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen.",
+        "Service für Mercedes-Benz und Smart laut ausdrücklicher Beschreibung im unabhängigen Verzeichnis Gjirafa.biz.",
         "Verzeichnis führt ausdrücklich Turboladerservice."
       ],
       "languages": [],
@@ -91,13 +94,29 @@
           "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "checkedAt": "2026-10-04",
+      "status": "published",
+      "updatedAt": "2026-10-04T10:00:23.292Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJs4k20oyeVBMRVMCGu9mIn20",
+        "matchedAt": "2026-10-04T09:54:03.927040Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Ali+Mercedesi+Shefqet+Shkupi+%2C+Lagjja+Kalabri%28Emshir%29%2C+Prishtin%C3%AB&query_place_id=ChIJs4k20oyeVBMRVMCGu9mIn20",
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "checkedAt": "2026-10-04T09:54:03.927040Z",
+          "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://stgres.gjirafa.biz/ali-mercedesi-1",
+            "https://www.google.com/maps/?cid=7899182740166590548"
+          ],
+          "note": "Individuelle Google-Karte anhand unabhängig belegter Telefonnummer, Werkstattname und präziser Adresse bestätigt; CID und tatsächliche Place ID bezeichnen denselben Eintrag. Keine Google-Geschäftsangaben oder Bewertungen in die Profilquelle übernommen."
+        }
       }
     },
     {
@@ -289,21 +308,26 @@
       "languages": [],
       "specialty": "Fahrzeugservice · Verzeichniseintrag",
       "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
-      "lat": null,
-      "lng": null,
+      "lat": 42.8703875,
+      "lng": 20.8939844,
       "sources": [
         {
           "url": "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/",
           "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-cosmetic-te-fitimi",
+          "title": "Verzeichnis: Name, Telefon und Plus-Code-Adresse erneut geprüft",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
+      "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-04T10:04:19.069Z",
       "google": {
         "placeId": "ChIJr_6I2ChFUxMRARVfS1C0RGI",
-        "matchedAt": "2026-10-04T06:38:16.860Z",
+        "matchedAt": "2026-10-04T09:56:02.071Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -312,6 +336,14 @@
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.google.com/maps/search/?api=1&query=Auto+Cosmetic+te+FITIMI+VVCV%2B5H5%2C+M2%2C+Mitrovic%C3%AB+40000&query_place_id=ChIJr_6I2ChFUxMRARVfS1C0RGI",
+            "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/"
+          ],
+          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
         }
       }
     },
@@ -1157,21 +1189,26 @@
       "languages": [],
       "specialty": "Fahrzeugservice · Verzeichniseintrag",
       "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
-      "lat": null,
-      "lng": null,
+      "lat": 42.3882625,
+      "lng": 21.1631406,
       "sources": [
         {
           "url": "https://www.cybo.com/XK/ferizaj/car-repair",
           "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-ngjyros%C3%ABs-shypi",
+          "title": "Verzeichnis: Name, Telefon und Plus-Code-Adresse erneut geprüft",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
+      "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-04T10:04:19.069Z",
       "google": {
         "placeId": "ChIJs2t2ydx_VBMR7o5UGmJb778",
-        "matchedAt": "2026-10-04T07:26:35.861Z",
+        "matchedAt": "2026-10-04T09:55:31.486Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -1184,9 +1221,10 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": [
+            "https://www.google.com/maps/search/?api=1&query=Auto+Ngjyros%C3%ABs+SHYPI+95Q7%2B872%2C+Talinoc+i+Jerlive+70000&query_place_id=ChIJs2t2ydx_VBMR7o5UGmJb778",
             "https://www.cybo.com/XK/ferizaj/car-repair"
           ],
-          "note": "Telefonnummer, individueller Name und Plus Code stimmen mit der unabhängigen Quelle überein. Der Dorfname im Google-Adressfeld ist kein anderer Betrieb."
+          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
         }
       }
     },
@@ -1208,21 +1246,26 @@
       "languages": [],
       "specialty": "Fahrzeugservice · Verzeichniseintrag",
       "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
-      "lat": null,
-      "lng": null,
+      "lat": 42.3849375,
+      "lng": 21.1701875,
       "sources": [
         {
           "url": "https://www.cybo.com/XK/ferizaj/car-repair",
           "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-ngjyrosje-egzoni",
+          "title": "Verzeichnis: Name, Telefon und Plus-Code-Adresse erneut geprüft",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
+      "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-04T10:04:19.069Z",
       "google": {
         "placeId": "ChIJ7ehTfgZ_VBMRNjghZHjasXA",
-        "matchedAt": "2026-10-04T07:26:35.861Z",
+        "matchedAt": "2026-10-04T09:55:32.347Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -1235,9 +1278,10 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": [
+            "https://www.google.com/maps/search/?api=1&query=Auto+Ngjyrosje+Egzoni+95MC%2BX3%2C+Talinoc+i+Muhaxher%C3%ABve+70000&query_place_id=ChIJ7ehTfgZ_VBMRNjghZHjasXA",
             "https://www.cybo.com/XK/ferizaj/car-repair"
           ],
-          "note": "Telefonnummer und Plus Code bestätigen genau diese Lackierwerkstatt; ähnlich benannte Servicebetriebe wurden ausgeschlossen."
+          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
         }
       }
     },
@@ -1409,21 +1453,26 @@
       "languages": [],
       "specialty": "Fahrzeugservice · Verzeichniseintrag",
       "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
-      "lat": null,
-      "lng": null,
+      "lat": 42.4400625,
+      "lng": 21.4580625,
       "sources": [
         {
           "url": "https://de.cybo.com/XK/gjilan/autoreparatur",
           "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-pjes%C3%AB-servis-jaha",
+          "title": "Verzeichnis: Name, Telefon und Plus-Code-Adresse erneut geprüft",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
+      "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-04T10:04:19.069Z",
       "google": {
         "placeId": "ChIJMb1eezmNVBMRRmiBJtGANVE",
-        "matchedAt": "2026-10-04T06:38:21.039Z",
+        "matchedAt": "2026-10-04T09:56:03.011Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -1432,6 +1481,14 @@
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.google.com/maps/search/?api=1&query=Auto+Pjes%C3%AB+%26+Servis+JAHA+CFR5%2B26%2C+Gjilan+60000&query_place_id=ChIJMb1eezmNVBMRRmiBJtGANVE",
+            "https://de.cybo.com/XK/gjilan/autoreparatur"
+          ],
+          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
         }
       }
     },
@@ -1462,13 +1519,30 @@
           "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:47:07.000Z",
+      "checkedAt": "2026-10-04",
+      "status": "published",
+      "updatedAt": "2026-10-04T10:00:23.292Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJQSGfTZoPUxMRbJPMdKm9pLM",
+        "matchedAt": "2026-10-04T09:54:03.927040Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Rally+90+Mehmet+Haxhaj%2C+Klina+32000&query_place_id=ChIJQSGfTZoPUxMRbJPMdKm9pLM",
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "checkedAt": "2026-10-04T09:54:03.927040Z",
+          "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-rally-049-138-886",
+            "https://www.cybo.com/XK/klina/car-repair/",
+            "https://www.google.com/maps/?cid=12944679764476334956"
+          ],
+          "note": "Individuelle Google-Karte anhand unabhängig belegter Telefonnummer, Werkstattname und präziser Adresse bestätigt; CID und tatsächliche Place ID bezeichnen denselben Eintrag. Keine Google-Geschäftsangaben oder Bewertungen in die Profilquelle übernommen."
+        }
       }
     },
     {
@@ -1505,13 +1579,30 @@
           "kind": "official"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:47:07.000Z",
+      "checkedAt": "2026-10-04",
+      "status": "published",
+      "updatedAt": "2026-10-04T10:00:23.292Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJl6oVOfb9UhMRrXOWUo1G5n4",
+        "matchedAt": "2026-10-04T09:54:03.927040Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Regllazha+TABAKU+Rr.+Ahmet+Gjikolli+57+%28Jarin%C3%AB%29%2C+Peja+30000&query_place_id=ChIJl6oVOfb9UhMRrXOWUo1G5n4",
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "checkedAt": "2026-10-04T09:54:03.927040Z",
+          "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-regllazha-tabaku-049-141-187",
+            "https://stgres.gjirafa.biz/Kategori/Automjete?f=MjQ4MyFAIw%3D%3D",
+            "https://www.google.com/maps/?cid=9144073666212295597"
+          ],
+          "note": "Individuelle Google-Karte anhand unabhängig belegter Telefonnummer, Werkstattname und präziser Adresse bestätigt; CID und tatsächliche Place ID bezeichnen denselben Eintrag. Keine Google-Geschäftsangaben oder Bewertungen in die Profilquelle übernommen."
+        }
       }
     },
     {
@@ -1585,13 +1676,30 @@
           "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:47:07.000Z",
+      "checkedAt": "2026-10-04",
+      "status": "published",
+      "updatedAt": "2026-10-04T10:00:23.292Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJM0I7MP39UhMRSugOjARCpw0",
+        "matchedAt": "2026-10-04T09:54:03.927040Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Service+Bardhi+M83G%2BQCR+Afer+Doganes%2C+Deshmoret+E+Kombit+Tranzit%2C+Deshmoret+e+Kombit%2C+Pej%C3%AB&query_place_id=ChIJM0I7MP39UhMRSugOjARCpw0",
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "checkedAt": "2026-10-04T09:54:03.927040Z",
+          "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-service-bardhi-049-666-755",
+            "https://mapcarta.com/N5792764854",
+            "https://www.google.com/maps/?cid=983827630900832330"
+          ],
+          "note": "Individuelle Google-Karte anhand unabhängig belegter Telefonnummer, Werkstattname und präziser Adresse bestätigt; CID und tatsächliche Place ID bezeichnen denselben Eintrag. Keine Google-Geschäftsangaben oder Bewertungen in die Profilquelle übernommen."
+        }
       }
     },
     {
@@ -1599,8 +1707,8 @@
       "name": "Auto Service BMW-Visari",
       "city": "Peja",
       "address": "Mulla Zekë Bërdynaj, Pejë 30090",
-      "phone": "+38349870650",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
+      "phone": "+38345511217",
+      "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); Erreichbarkeit nicht bestätigt",
       "whatsapp": "",
       "brands": [],
       "services": [
@@ -1626,13 +1734,30 @@
           "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:47:07.000Z",
+      "checkedAt": "2026-10-04",
+      "status": "published",
+      "updatedAt": "2026-10-04T10:00:23.292Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJtePPQnD9UhMRGE6y8atgms0",
+        "matchedAt": "2026-10-04T09:54:03.927040Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Service+BMW-Visari+Mulla+Zek%C3%AB+B%C3%ABrdynaj%2C+Pej%C3%AB+30090&query_place_id=ChIJtePPQnD9UhMRGE6y8atgms0",
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "checkedAt": "2026-10-04T09:54:03.927040Z",
+          "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.cybo.com/XK-biz/auto-service-bmw-visari",
+            "https://www.gjithebiznesi.com/XK/auto-service-bmw-visari-049-870-650",
+            "https://www.google.com/maps/?cid=14815260215799336472"
+          ],
+          "note": "Individuelle Google-Karte anhand unabhängig belegter Telefonnummer, Werkstattname und präziser Adresse bestätigt; CID und tatsächliche Place ID bezeichnen denselben Eintrag. Keine Google-Geschäftsangaben oder Bewertungen in die Profilquelle übernommen."
+        }
       }
     },
     {
@@ -1776,21 +1901,26 @@
       "languages": [],
       "specialty": "Fahrzeugservice · Verzeichniseintrag",
       "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
-      "lat": null,
-      "lng": null,
+      "lat": 42.3637625,
+      "lng": 21.1525469,
       "sources": [
         {
           "url": "https://www.cybo.com/XK/ferizaj/car-repair",
           "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-service-kushtrimi",
+          "title": "Verzeichnis: Name, Telefon und Plus-Code-Adresse erneut geprüft",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
+      "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-04T10:04:19.069Z",
       "google": {
         "placeId": "ChIJMxwsC3h_VBMR2K3PwgtzmDQ",
-        "matchedAt": "2026-10-04T06:38:22.156Z",
+        "matchedAt": "2026-10-04T09:56:03.981Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -1799,6 +1929,14 @@
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.google.com/maps/search/?api=1&query=Auto+Service+Kushtrimi+9573%2BG23%2C+Hivzi+Sylejmani%2C+Ferizaj+70000&query_place_id=ChIJMxwsC3h_VBMR2K3PwgtzmDQ",
+            "https://www.cybo.com/XK/ferizaj/car-repair"
+          ],
+          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
         }
       }
     },
@@ -2159,13 +2297,31 @@
           "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:47:07.000Z",
+      "checkedAt": "2026-10-04",
+      "status": "published",
+      "updatedAt": "2026-10-04T10:00:23.292Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJSz6o8xYPUxMRWJSI5SrGQIc",
+        "matchedAt": "2026-10-04T09:54:03.927040Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+BLEDI+Abedin+Rexha%2C+Klina+32000&query_place_id=ChIJSz6o8xYPUxMRWJSI5SrGQIc",
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "checkedAt": "2026-10-04T09:54:03.927040Z",
+          "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.cybo.com/XK/klina/car-repair/",
+            "https://galego.cybo.com/XK-biz/auto-servis-bledi",
+            "https://www.nlb-kos.com/sq/merchant-list-test",
+            "https://www.google.com/maps/?cid=9746007481171612760"
+          ],
+          "note": "Individuelle Google-Karte anhand unabhängig belegter Telefonnummer, Werkstattname und präziser Adresse bestätigt; CID und tatsächliche Place ID bezeichnen denselben Eintrag. Keine Google-Geschäftsangaben oder Bewertungen in die Profilquelle übernommen."
+        }
       }
     },
     {
@@ -2390,8 +2546,8 @@
       "languages": [],
       "specialty": "Fahrzeugservice · Verzeichniseintrag",
       "description": "Werkstatt in Klinë e Epërme, Gemeinde Skenderaj. Kontaktdaten und Termin direkt beim Betrieb bestätigen.",
-      "lat": null,
-      "lng": null,
+      "lat": 42.7929875,
+      "lng": 20.7847344,
       "sources": [
         {
           "url": "https://www.top-rated.online/cities/Klin%C3%AB%2Be%2BEp%C3%ABrme/place/p/10916121/Auto%2BServis%2BDoni",
@@ -2399,12 +2555,12 @@
           "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
+      "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-04T10:04:19.069Z",
       "google": {
         "placeId": "ChIJZ5Wsu-pBUxMRTFrP2jiQn0g",
-        "matchedAt": "2026-10-04T07:26:35.861Z",
+        "matchedAt": "2026-10-04T09:56:04.863Z",
         "snapshot": {
           "rating": 5,
           "count": 8,
@@ -2417,9 +2573,10 @@
         "verification": {
           "method": "name_and_address",
           "sourceUrls": [
+            "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Doni+QQVM%2B5VX%2C+R101%2C+Klin%C3%AB+e+Ep%C3%ABrme+41000&query_place_id=ChIJZ5Wsu-pBUxMRTFrP2jiQn0g",
             "https://www.top-rated.online/cities/Klin%C3%AB%2Be%2BEp%C3%ABrme/place/p/10916121/Auto%2BServis%2BDoni"
           ],
-          "note": "Individueller Werkstattname und vollständiger Plus Code stimmen überein. Klinë e Epërme und Gornja Klina bezeichnen denselben Ort; die alte Telefonnummer allein wurde nicht als Beweis verwendet."
+          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name und unabhängig belegter Plus Code stimmen überein. Die Telefonnummer hat dieselbe lokale Rufnummer mit älterer Ländervorwahl. Die bestätigte Zuordnung bleibt erhalten; Kontaktdaten wurden nicht geändert."
         }
       }
     },
@@ -2585,8 +2742,8 @@
       "languages": [],
       "specialty": "Fahrzeugservice · Verzeichniseintrag",
       "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
-      "lat": null,
-      "lng": null,
+      "lat": 42.6547375,
+      "lng": 21.1269531,
       "sources": [
         {
           "url": "https://www.cybo.com/XK/pristina/car-repair",
@@ -2594,12 +2751,12 @@
           "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
+      "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-04T10:04:19.069Z",
       "google": {
         "placeId": "ChIJz2OODhafVBMRSk4BbeHIhq8",
-        "matchedAt": "2026-10-04T06:38:24.984Z",
+        "matchedAt": "2026-10-04T09:56:33.421Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -2608,6 +2765,14 @@
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Genti+M43G%2BVQW%2C+Unnamed+Road%2C+Prishtina+10000&query_place_id=ChIJz2OODhafVBMRSk4BbeHIhq8",
+            "https://www.cybo.com/XK/pristina/car-repair"
+          ],
+          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
         }
       }
     },
@@ -3126,21 +3291,26 @@
       "languages": [],
       "specialty": "Fahrzeugservice · Verzeichniseintrag",
       "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
-      "lat": null,
-      "lng": null,
+      "lat": 42.3882125,
+      "lng": 21.1547344,
       "sources": [
         {
           "url": "https://www.cybo.com/XK/ferizaj/car-repair",
           "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-servis-p%C3%ABrparimi",
+          "title": "Verzeichnis: Name, Telefon und Plus-Code-Adresse erneut geprüft",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
+      "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-04T10:04:19.069Z",
       "google": {
         "placeId": "ChIJv4FJP0V_VBMRiq_V3C5Yh2k",
-        "matchedAt": "2026-10-04T07:26:35.861Z",
+        "matchedAt": "2026-10-04T09:56:34.256Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -3153,9 +3323,10 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": [
+            "https://www.google.com/maps/search/?api=1&query=Auto+Servis+P%C3%ABrparimi+95Q3%2B7VQ%2C+Driton+Islami%2C+Talinoc+i+Jerlive+70000&query_place_id=ChIJv4FJP0V_VBMRiq_V3C5Yh2k",
             "https://www.cybo.com/XK/ferizaj/car-repair"
           ],
-          "note": "Telefonnummer, individueller Name und vollständiger Plus Code stimmen mit der unabhängigen Quelle überein."
+          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
         }
       }
     },
@@ -3471,15 +3642,37 @@
           "url": "https://www.cybo.com/XK-biz/auto-servis-xoni",
           "title": "Cybo: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://www.gjithebiznesi.com/XK/auto-servis-xoni-049-231-674",
+          "title": "Nachgeprüfter Verzeichniskontakt: Name · Adresse · Telefon · Pkw-Servicekategorie",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "checkedAt": "2026-10-04",
+      "status": "published",
+      "updatedAt": "2026-10-04T10:00:23.292Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJL5Yb0l-NVBMR2cBjhlecSX4",
+        "matchedAt": "2026-10-04T09:54:03.927040Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+servis+XONI+CFV5%2B49J%2C+M25-3%2C+Gjilan+60000&query_place_id=ChIJL5Yb0l-NVBMR2cBjhlecSX4",
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "checkedAt": "2026-10-04T09:54:03.927040Z",
+          "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-servis-xoni-049-231-674",
+            "https://www.cybo.com/XK-biz/auto-servis-xoni",
+            "https://www.google.com/maps/?cid=9099976421809570009"
+          ],
+          "note": "Individuelle Google-Karte anhand unabhängig belegter Telefonnummer, Werkstattname und präziser Adresse bestätigt; CID und tatsächliche Place ID bezeichnen denselben Eintrag. Keine Google-Geschäftsangaben oder Bewertungen in die Profilquelle übernommen."
+        }
       }
     },
     {
@@ -3701,9 +3894,9 @@
           "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "checkedAt": "2026-10-04",
+      "status": "draft",
+      "updatedAt": "2026-10-04T10:04:19.069Z",
       "google": {
         "placeId": "ChIJkbvtE2meVBMRvu2LFtwxfho",
         "matchedAt": "2026-10-04T07:26:35.861Z",
@@ -3743,8 +3936,8 @@
       "languages": [],
       "specialty": "Fahrzeugservice · Verzeichniseintrag",
       "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
-      "lat": null,
-      "lng": null,
+      "lat": 42.6563875,
+      "lng": 21.1495156,
       "sources": [
         {
           "url": "https://www.cybo.com/XK/pristina/car-repair",
@@ -3752,12 +3945,12 @@
           "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
+      "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-04T10:04:19.069Z",
       "google": {
         "placeId": "ChIJUQjLIHufVBMRMpMm10I6HN0",
-        "matchedAt": "2026-10-04T06:38:27.905Z",
+        "matchedAt": "2026-10-04T09:57:07.966Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -3766,6 +3959,14 @@
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.google.com/maps/search/?api=1&query=Autoelektrika+Naimi+M44X%2BHR2%2C+Prishtina+10000&query_place_id=ChIJUQjLIHufVBMRMpMm10I6HN0",
+            "https://www.cybo.com/XK/pristina/car-repair"
+          ],
+          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
         }
       }
     },
@@ -4032,21 +4233,26 @@
       "languages": [],
       "specialty": "Fahrzeugservice · Verzeichniseintrag",
       "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
-      "lat": null,
-      "lng": null,
+      "lat": 42.3699125,
+      "lng": 21.1871406,
       "sources": [
         {
           "url": "https://www.cybo.com/XK/ferizaj/car-repair",
           "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://www.cybo.com/XK-biz/autopjes%C3%AB-service-nazi",
+          "title": "Verzeichnis: Name, Telefon und Plus-Code-Adresse erneut geprüft",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
+      "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-04T10:04:19.069Z",
       "google": {
         "placeId": "ChIJhduIqz1_VBMR1pQy7eVfBok",
-        "matchedAt": "2026-10-04T07:26:35.861Z",
+        "matchedAt": "2026-10-04T09:57:08.795Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -4059,9 +4265,10 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": [
+            "https://www.google.com/maps/search/?api=1&query=Autopjes%C3%AB+%26+Service+Nazi+959P%2BXV6%2C+Bibaj+70000&query_place_id=ChIJhduIqz1_VBMR1pQy7eVfBok",
             "https://www.cybo.com/XK/ferizaj/car-repair"
           ],
-          "note": "Telefonnummer, individueller Name und Plus Code stimmen mit der unabhängigen Quelle überein."
+          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
         }
       }
     },
@@ -4092,13 +4299,29 @@
           "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:47:07.000Z",
+      "checkedAt": "2026-10-04",
+      "status": "published",
+      "updatedAt": "2026-10-04T10:00:23.292Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJuaQd1SX_UhMRgfEYGf6eXLs",
+        "matchedAt": "2026-10-04T09:54:03.927040Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autoservis+Agimi+TMK%2C+Pej%C3%AB+30000&query_place_id=ChIJuaQd1SX_UhMRgfEYGf6eXLs",
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "checkedAt": "2026-10-04T09:54:03.927040Z",
+          "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.cybo.com/XK-biz/autoservis-agimi",
+            "https://www.google.com/maps/?cid=13500840597129851265"
+          ],
+          "note": "Individuelle Google-Karte anhand unabhängig belegter Telefonnummer, Werkstattname und präziser Adresse bestätigt; CID und tatsächliche Place ID bezeichnen denselben Eintrag. Keine Google-Geschäftsangaben oder Bewertungen in die Profilquelle übernommen."
+        }
       }
     },
     {
@@ -4303,8 +4526,8 @@
       "languages": [],
       "specialty": "Fahrzeugservice · Verzeichniseintrag",
       "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
-      "lat": null,
-      "lng": null,
+      "lat": 42.6585125,
+      "lng": 21.1835156,
       "sources": [
         {
           "url": "https://www.cybo.com/XK/pristina/car-repair",
@@ -4312,12 +4535,12 @@
           "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
+      "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-04T10:04:19.069Z",
       "google": {
         "placeId": "ChIJMTTQbMSfVBMROfUEApqoNwg",
-        "matchedAt": "2026-10-04T06:38:29.129Z",
+        "matchedAt": "2026-10-04T09:57:09.703Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -4326,6 +4549,14 @@
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.google.com/maps/search/?api=1&query=Autoservis+PG+Bosch+M55M%2BCC2%2C+Prishtina+10000&query_place_id=ChIJMTTQbMSfVBMROfUEApqoNwg",
+            "https://www.cybo.com/XK/pristina/car-repair"
+          ],
+          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name und Telefonnummer stimmen überein; der Geschäftspunkt liegt innerhalb von 300 m der unabhängig aus dem Verzeichnis-Plus-Code bestimmten Koordinaten. Google-Koordinaten wurden nicht übernommen."
         }
       }
     },
@@ -4680,9 +4911,9 @@
           "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "checkedAt": "2026-10-04",
+      "status": "draft",
+      "updatedAt": "2026-10-04T10:04:19.069Z",
       "google": {
         "placeId": "ChIJb6GZpCd_VBMRi_bRC-yoNhI",
         "matchedAt": "2026-10-04T06:38:30.652Z",
@@ -5445,13 +5676,14 @@
           "title": "Eigene Website: Fahrzeugservice und Reparatur"
         },
         {
-          "url": "https://www.globalautomotive-ks.com/kontaktijic/",
-          "title": "Reale Geschäftsdaten im Footer: Kosovo-Adresse · Telefon; Platzhalter im oberen Templatebereich wurden nicht übernommen"
+          "url": "https://www.globalautomotive-ks.com/kontakti/",
+          "title": "Betriebswebsite: veröffentlichte Kosovo-Adresse und Telefonnummern",
+          "kind": "official"
         }
       ],
-      "checkedAt": "2026-10-03",
+      "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-03T12:15:08.995338+00:00",
+      "updatedAt": "2026-10-04T10:00:23.292Z",
       "google": {
         "placeId": "ChIJ0eOahftjUxMR7_JmJ-bgp6E",
         "matchedAt": "2026-10-04T06:39:08.747Z",
@@ -5799,21 +6031,26 @@
       "languages": [],
       "specialty": "Fahrzeugservice · Verzeichniseintrag",
       "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
-      "lat": null,
-      "lng": null,
+      "lat": 42.3875625,
+      "lng": 21.1733125,
       "sources": [
         {
           "url": "https://www.cybo.com/XK/ferizaj/car-repair",
           "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://www.cybo.com/XK-biz/mercedes-isa",
+          "title": "Verzeichnis: Name, Telefon und Plus-Code-Adresse erneut geprüft",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
+      "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-04T10:04:19.069Z",
       "google": {
         "placeId": "ChIJI21YCwB_VBMRU22CO97yQLU",
-        "matchedAt": "2026-10-04T07:26:35.861Z",
+        "matchedAt": "2026-10-04T09:57:54.295Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -5826,9 +6063,10 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": [
+            "https://www.google.com/maps/search/?api=1&query=Mercedes+Isa+95QF%2B28%2C+Talinoc+i+Muhaxher%C3%ABve+70000&query_place_id=ChIJI21YCwB_VBMRU22CO97yQLU",
             "https://www.cybo.com/XK/ferizaj/car-repair"
           ],
-          "note": "Telefonnummer, individueller Name und vollständiger Plus Code stimmen mit der unabhängigen Quelle überein."
+          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
         }
       }
     },
@@ -6578,21 +6816,31 @@
       "languages": [],
       "specialty": "Fahrzeugservice · Verzeichniseintrag",
       "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
-      "lat": null,
-      "lng": null,
+      "lat": 42.8908875,
+      "lng": 20.8619844,
       "sources": [
         {
           "url": "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/",
           "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://www.cybo.com/XK-biz/stavileci-tuning",
+          "title": "Verzeichnis: Name, Telefon und Plus-Code-Adresse erneut geprüft",
+          "kind": "directory"
+        },
+        {
+          "url": "https://onlycar.rs/kosovska-mitrovica/tuning/stavileci-tuning",
+          "title": "Verzeichnis: Name, Telefon und Plus-Code-Adresse erneut geprüft",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
+      "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-04T10:04:19.069Z",
       "google": {
         "placeId": "ChIJrzhQ3jxFUxMRANcJyieNKyo",
-        "matchedAt": "2026-10-04T06:39:13.219Z",
+        "matchedAt": "2026-10-04T09:57:55.147Z",
         "snapshot": {
           "rating": null,
           "count": null,
@@ -6601,6 +6849,14 @@
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.google.com/maps/search/?api=1&query=Stavileci+Tuning+VVR6%2B9Q5%2C+Rruga+Kollashini%2C+Mitrovic%C3%AB+40000&query_place_id=ChIJrzhQ3jxFUxMRANcJyieNKyo",
+            "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/"
+          ],
+          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
         }
       }
     },
@@ -7006,13 +7262,29 @@
           "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "checkedAt": "2026-10-04",
+      "status": "published",
+      "updatedAt": "2026-10-04T10:00:23.292Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJVeDlBUyNVBMR664a8Idhs_Q",
+        "matchedAt": "2026-10-04T09:54:03.927040Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Ylli+Performance+Chip+Tuning+CFW5%2B864%2C+Gjilan+60000&query_place_id=ChIJVeDlBUyNVBMR664a8Idhs_Q",
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "checkedAt": "2026-10-04T09:54:03.927040Z",
+          "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.cybo.com/XK-biz/ylli-performance-chip-tuning",
+            "https://www.google.com/maps/?cid=17632544202562383595"
+          ],
+          "note": "Individuelle Google-Karte anhand unabhängig belegter Telefonnummer, Werkstattname und präziser Adresse bestätigt; CID und tatsächliche Place ID bezeichnen denselben Eintrag. Keine Google-Geschäftsangaben oder Bewertungen in die Profilquelle übernommen."
+        }
       }
     }
   ]

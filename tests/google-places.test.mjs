@@ -58,7 +58,7 @@ assert(!lastRequest.headers['X-Goog-FieldMask'].includes('rating')&&!lastRequest
 assert.equal(lastRequest.headers['X-Goog-Api-Key'],'fixture-server-key');
 const columns=sqlite.prepare('PRAGMA table_info(workshop_google_places)').all().map(row=>row.name);assert(!columns.includes('rating')&&!columns.includes('review_count')&&!columns.includes('reviews'),'persistent matching stores only IDs and application metadata');
 const matchesBefore=sqlite.prepare('SELECT COUNT(*) AS n FROM workshop_google_places').get().n;
-assert.equal(matchesBefore,1);assert.equal((await directory.listWorkshops()).length,71);assert.equal((await directory.listWorkshops(true)).filter(w=>w.status==='draft').length,92);
+assert.equal(matchesBefore,1);assert.equal((await directory.listWorkshops()).length,78);assert.equal((await directory.listWorkshops(true)).filter(w=>w.status==='draft').length,85);
 assert.equal((await directory.listWorkshops()).find(w=>w.id===mita.id).rating,null,'Google matching leaves Riparim aggregates untouched');
 const quotaKey='google-place-lookups:'+new Date().toISOString().slice(0,10);
 sqlite.prepare('UPDATE catalog_state SET value=? WHERE key=?').run('100',quotaKey);
@@ -115,4 +115,4 @@ sqlite.prepare('INSERT INTO workshop_google_places (workshop_id,place_id,profile
 assert.equal(await places.confirmedPublicationPlace(directory.validateProfile(withoutReviews,withoutReviews.id),withoutReviews),null,'a Google identity already used by another real profile cannot be published twice');
 assert.equal((await save.PATCH(sendProfile({...all.find(w=>w.id==='auto-ballkan-gjilan'),status:'published',previousUpdatedAt:all.find(w=>w.id==='auto-ballkan-gjilan').updatedAt},'PATCH'))).status,400,'truck entries cannot be republished through the management API');
 globalThis.fetch=originalFetch;delete globalThis.window;sqlite.close();
-console.log(JSON.stringify({googleIdentityChecks:9,explicitSearchGeography:true,negativeCacheUpgrade:true,apiBoundaries:true,dailyBudget:100,existingPublicWorkshops:71,existingDraftsPreserved:92,currentGoogleRatings:true,googleRatingsPersisted:false,liveProviderCalls:false}));
+console.log(JSON.stringify({googleIdentityChecks:9,explicitSearchGeography:true,negativeCacheUpgrade:true,apiBoundaries:true,dailyBudget:100,existingPublicWorkshops:78,existingDraftsPreserved:85,currentGoogleRatings:true,googleRatingsPersisted:false,liveProviderCalls:false}));

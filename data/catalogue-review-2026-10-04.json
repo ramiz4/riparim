@@ -1,0 +1,1991 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-04T10:04:19.459Z",
+  "before": {
+    "published": 71,
+    "drafts": 92,
+    "preciseCoordinates": 6
+  },
+  "after": {
+    "published": 78,
+    "drafts": 85,
+    "preciseCoordinates": 19
+  },
+  "method": "Betriebs- und Verzeichnisquellen unabhängig geprüft. Google-Karten nur zur Identitätsbestätigung; keine Google-Geschäftsinhalte übernommen. Plus Codes aus unabhängig belegten Adressen offline mit Google Open Location Code decodiert.",
+  "algorithmSource": "https://github.com/google/open-location-code/blob/main/python/openlocationcode/openlocationcode.py",
+  "reviewedDrafts": 92,
+  "draftSummary": {
+    "candidate": 9,
+    "needs_evidence": 77,
+    "excluded": 6
+  },
+  "draftAssessments": [
+    {
+      "workshopId": "ali-mercedesi-prishtina",
+      "name": "Ali Mercedesi",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/ali-mercedesi-1",
+        "https://www.google.com/maps/?cid=7899182740166590548"
+      ],
+      "sourceChecks": [],
+      "assessment": "candidate",
+      "reason": "Passenger-car repair scope and independent contact/address are evidenced; official Maps identity uniquely confirmed.",
+      "evidence": {
+        "placeId": "ChIJs4k20oyeVBMRVMCGu9mIn20",
+        "cid": "7899182740166590548",
+        "sourceUrl": "https://stgres.gjirafa.biz/ali-mercedesi-1",
+        "scopeEvidence": "Gjirafa explicitly describes sale and servicing of Mercedes-Benz and Smart cars; supports these brands without name inference.",
+        "contactEvidence": "Gjirafa lists 044 164 141 and Shefqet Shkupi, Kalabri / Emshir, Prishtinë. Exact primary phone and street match the official Maps identity.",
+        "additionalUrls": [],
+        "brandsPatch": [
+          "Mercedes-Benz",
+          "Smart"
+        ]
+      },
+      "googleIdentity": {
+        "placeId": "ChIJs4k20oyeVBMRVMCGu9mIn20",
+        "uniqueInCatalogue": true,
+        "sameIndependentPhone": true,
+        "sameIndependentLocation": true
+      }
+    },
+    {
+      "workshopId": "auspuh-servis-kurti-td-gjakova",
+      "name": "Auspuh Servis Kurti TD",
+      "city": "Gjakova",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/auspuh-servis-kurti-td"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/auspuh-servis-kurti-td",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "auto-ballkan-gjilan",
+      "name": "Auto Ballkan",
+      "city": "Gjilan",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-ballkan-044-177-327"
+      ],
+      "sourceChecks": [],
+      "assessment": "excluded",
+      "reason": "Vom Nutzer als Truck-Teilelieferant bestätigt; kein konkreter Pkw-Werkstattnachweis.",
+      "exclusionAuthority": "data/workshop-scope.json"
+    },
+    {
+      "workshopId": "auto-diagnostika-prishtina",
+      "name": "Auto-Diagnostika",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/autodiagnostika-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/autodiagnostika-1",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "auto-electronics",
+      "name": "Auto Electronics",
+      "city": "Prizren",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.autoelectronics-ks.com/"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.autoelectronics-ks.com/",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "First-party site confirms phone, Prizren address and passenger-car electronic diagnostics/programming. A uniquely confirmed Google entry is still missing; keep draft."
+    },
+    {
+      "workshopId": "auto-elektricist-ermiri-prizren",
+      "name": "Auto elektricist Ermiri",
+      "city": "Prizren",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/auto-elektricist-ermiri"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-elektricist-ermiri",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "auto-elektro-servis-niki-gjilan",
+      "name": "Auto Elektro Servis Niki",
+      "city": "Gjilan",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-elektro-servis-niki-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-elektro-servis-niki-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Gjirafa explicitly confirms passenger-car electrical service, oil changes and parts replacement with current catalogue phone/address. Official Maps search yields other named businesses and different phones; no unique match."
+    },
+    {
+      "workshopId": "auto-elektro-start-prishtina",
+      "name": "Auto elektro Start",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-elektro-start-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-elektro-start-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "auto-fati-prizren",
+      "name": "Auto Fati",
+      "city": "Prizren",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/auto-fati"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-fati",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "auto-ford-service-prizren",
+      "name": "Auto Ford service",
+      "city": "Prizren",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/auto-ford-service"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-ford-service",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "auto-laker-kimi-prishtina",
+      "name": "Auto Laker Kimi",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-laker-kimi-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-laker-kimi-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "auto-limar-alajdini-prizren",
+      "name": "Auto Limar \"Alajdini\"",
+      "city": "Prizren",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/auto-limar-alajdini"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-limar-alajdini",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "auto-llamarist-valoni-peja",
+      "name": "Auto Llamarist Valoni",
+      "city": "Peja",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/auto-llamarist-valoni"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-llamarist-valoni",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Cybo confirms body-repair scope, phone and 11 maji street address. A unique Google Place ID remains to verify."
+    },
+    {
+      "workshopId": "auto-ngjyrosje-fadili-ferizaj",
+      "name": "Auto Ngjyrosje Fadili",
+      "city": "Ferizaj",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/auto-ngjyrosje-fadili"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-ngjyrosje-fadili",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "auto-pjese-service-inovator-group-ferizaj",
+      "name": "Auto Pjesë&Service INOVATOR group",
+      "city": "Ferizaj",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/autoserviceinovatorgroup-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/autoserviceinovatorgroup-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "auto-pjese-servis-dubova-ferizaj",
+      "name": "Auto Pjesë & Servis DUBOVA",
+      "city": "Ferizaj",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-pjes--servis-dubova-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-pjes--servis-dubova-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "auto-pjese-servis-fatosi-gracanice",
+      "name": "Auto Pjesë & Servis Fatosi",
+      "city": "Graçanicë",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-pjes--servis-fatosi-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-pjes--servis-fatosi-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "auto-rally-90-kline",
+      "name": "Auto Rally 90",
+      "city": "Klinë",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-rally-049-138-886",
+        "https://www.cybo.com/XK/klina/car-repair/",
+        "https://www.google.com/maps/?cid=12944679764476334956"
+      ],
+      "sourceChecks": [],
+      "assessment": "candidate",
+      "reason": "Passenger-car repair scope and independent contact/address are evidenced; official Maps identity uniquely confirmed.",
+      "evidence": {
+        "placeId": "ChIJQSGfTZoPUxMRbJPMdKm9pLM",
+        "cid": "12944679764476334956",
+        "sourceUrl": "https://www.gjithebiznesi.com/XK/auto-rally-049-138-886",
+        "scopeEvidence": "Independent car-repair directory category; also listed in Cybo Klina car-repair category.",
+        "contactEvidence": "Independent source lists 049 138 886 and Mehmet Haxhaj, Klinë / Klinac 32000.",
+        "additionalUrls": [
+          "https://www.cybo.com/XK/klina/car-repair/"
+        ]
+      },
+      "googleIdentity": {
+        "placeId": "ChIJQSGfTZoPUxMRbJPMdKm9pLM",
+        "uniqueInCatalogue": true,
+        "sameIndependentPhone": true,
+        "sameIndependentLocation": true
+      }
+    },
+    {
+      "workshopId": "auto-regllazha-tabaku-peja",
+      "name": "Auto Regllazha TABAKU",
+      "city": "Peja",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-regllazha-tabaku-049-141-187",
+        "https://stgres.gjirafa.biz/Kategori/Automjete?f=MjQ4MyFAIw%3D%3D",
+        "https://www.google.com/maps/?cid=9144073666212295597"
+      ],
+      "sourceChecks": [],
+      "assessment": "candidate",
+      "reason": "Passenger-car repair scope and independent contact/address are evidenced; official Maps identity uniquely confirmed.",
+      "evidence": {
+        "placeId": "ChIJl6oVOfb9UhMRrXOWUo1G5n4",
+        "cid": "9144073666212295597",
+        "sourceUrl": "https://www.gjithebiznesi.com/XK/auto-regllazha-tabaku-049-141-187",
+        "scopeEvidence": "Car-repair directory category and passenger-car alignment description in Gjirafa; no truck-only evidence.",
+        "contactEvidence": "Independent source lists 049 141 187 and Ahmet Gjikolli 57 / Jarinë, Pejë.",
+        "additionalUrls": [
+          "https://stgres.gjirafa.biz/Kategori/Automjete?f=MjQ4MyFAIw%3D%3D"
+        ]
+      },
+      "googleIdentity": {
+        "placeId": "ChIJl6oVOfb9UhMRrXOWUo1G5n4",
+        "uniqueInCatalogue": true,
+        "sameIndependentPhone": true,
+        "sameIndependentLocation": true
+      }
+    },
+    {
+      "workshopId": "auto-service-bardhi-peja",
+      "name": "Auto Service Bardhi",
+      "city": "Peja",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-service-bardhi-049-666-755",
+        "https://mapcarta.com/N5792764854",
+        "https://www.google.com/maps/?cid=983827630900832330"
+      ],
+      "sourceChecks": [],
+      "assessment": "candidate",
+      "reason": "Passenger-car repair scope and independent contact/address are evidenced; official Maps identity uniquely confirmed.",
+      "evidence": {
+        "placeId": "ChIJM0I7MP39UhMRSugOjARCpw0",
+        "cid": "983827630900832330",
+        "sourceUrl": "https://www.gjithebiznesi.com/XK/auto-service-bardhi-049-666-755",
+        "scopeEvidence": "Independent car-repair directory category, also represented as a car_repair business by OpenStreetMap.",
+        "contactEvidence": "Independent source lists 049 666 755 and M83G+QCR near customs / Deshmoret e Kombit, Pejë.",
+        "additionalUrls": [
+          "https://mapcarta.com/N5792764854"
+        ]
+      },
+      "googleIdentity": {
+        "placeId": "ChIJM0I7MP39UhMRSugOjARCpw0",
+        "uniqueInCatalogue": true,
+        "sameIndependentPhone": true,
+        "sameIndependentLocation": true
+      }
+    },
+    {
+      "workshopId": "auto-service-bmw-visari-peja",
+      "name": "Auto Service BMW-Visari",
+      "city": "Peja",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/auto-service-bmw-visari",
+        "https://www.gjithebiznesi.com/XK/auto-service-bmw-visari-049-870-650",
+        "https://www.google.com/maps/?cid=14815260215799336472"
+      ],
+      "sourceChecks": [],
+      "assessment": "candidate",
+      "reason": "Passenger-car repair scope and independent contact/address are evidenced; official Maps identity uniquely confirmed.",
+      "evidence": {
+        "placeId": "ChIJtePPQnD9UhMRGE6y8atgms0",
+        "cid": "14815260215799336472",
+        "sourceUrl": "https://www.cybo.com/XK-biz/auto-service-bmw-visari",
+        "scopeEvidence": "Independent car-repair directory category; no brands inferred from the business name.",
+        "contactEvidence": "Cybo lists 049 870 650 and secondary 045 511 217 at Mulla Zekë Bërdynaj, Pejë 30090. The independently listed secondary phone matches the official Maps card.",
+        "additionalUrls": [
+          "https://www.gjithebiznesi.com/XK/auto-service-bmw-visari-049-870-650"
+        ],
+        "phonePatch": "+38345511217"
+      },
+      "googleIdentity": {
+        "placeId": "ChIJtePPQnD9UhMRGE6y8atgms0",
+        "uniqueInCatalogue": true,
+        "sameIndependentPhone": true,
+        "sameIndependentLocation": true
+      }
+    },
+    {
+      "workshopId": "auto-service-muslija-prizren",
+      "name": "Auto Service \"MUSLIJA\"",
+      "city": "Prizren",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/auto-service-muslija"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-service-muslija",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "auto-servis-agimi-gjakova",
+      "name": "Auto servis \"Agimi\"",
+      "city": "Gjakova",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/auto-servis-agimi_1i"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-servis-agimi_1i",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "auto-servis-bajrami-peja",
+      "name": "Auto Servis Bajrami",
+      "city": "Peja",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/auto-servis-bajrami"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-servis-bajrami",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored source could not be retrieved in this pass. Passenger-car service, contact and Google identity need readable independent evidence."
+    },
+    {
+      "workshopId": "auto-servis-beni-prishtina",
+      "name": "Auto Servis Beni",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-beni-2"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-servis-beni-2",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "auto-servis-bledi-kline",
+      "name": "Auto Servis BLEDI",
+      "city": "Klinë",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK/klina/car-repair/",
+        "https://galego.cybo.com/XK-biz/auto-servis-bledi",
+        "https://www.nlb-kos.com/sq/merchant-list-test",
+        "https://www.google.com/maps/?cid=9746007481171612760"
+      ],
+      "sourceChecks": [],
+      "assessment": "candidate",
+      "reason": "Passenger-car repair scope and independent contact/address are evidenced; official Maps identity uniquely confirmed.",
+      "evidence": {
+        "placeId": "ChIJSz6o8xYPUxMRWJSI5SrGQIc",
+        "cid": "9746007481171612760",
+        "sourceUrl": "https://www.cybo.com/XK/klina/car-repair/",
+        "scopeEvidence": "Cybo Klina car-repair listing confirms scope; NLB independently lists NSH AUTO SERVIS BLEDI as an automotive service merchant on the same street.",
+        "contactEvidence": "Cybo lists 049 654 571 and Abedin Rexha, Klina 32000. Distinct from Bledi-Sh on the same street with a different phone.",
+        "additionalUrls": [
+          "https://galego.cybo.com/XK-biz/auto-servis-bledi",
+          "https://www.nlb-kos.com/sq/merchant-list-test"
+        ]
+      },
+      "googleIdentity": {
+        "placeId": "ChIJSz6o8xYPUxMRWJSI5SrGQIc",
+        "uniqueInCatalogue": true,
+        "sameIndependentPhone": true,
+        "sameIndependentLocation": true
+      }
+    },
+    {
+      "workshopId": "auto-servis-buli-prishtina",
+      "name": "Auto Servis BULI",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/auto-servis-buli"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-servis-buli",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "auto-servis-cufa-ferizaj",
+      "name": "Auto Servis Cufa",
+      "city": "Ferizaj",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-cufa-2"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-servis-cufa-2",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "auto-servis-fia-prishtina",
+      "name": "Auto Servis Fia",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-fia-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-servis-fia-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "auto-servis-ford-jashanica-prishtina",
+      "name": "Auto Servis Ford Jashanica",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-ford-jashanica-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-servis-ford-jashanica-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "auto-servis-gashi-peja",
+      "name": "Auto Servis \"Gashi\"",
+      "city": "Peja",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/auto-servis-gashi"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-servis-gashi",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored source could not be retrieved in this pass. Passenger-car service, contact and Google identity need readable independent evidence."
+    },
+    {
+      "workshopId": "auto-servis-gazi-gjakova",
+      "name": "Auto Servis Gazi",
+      "city": "Gjakova",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-gazi-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-servis-gazi-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "auto-servis-goni-peja",
+      "name": "Auto Servis Goni",
+      "city": "Peja",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/auto-servis-goni"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-servis-goni",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Readable Cybo source confirms phone and precise Plus Code, but currently only generic mechanic scope. Concrete passenger-car service and Google Place ID remain to verify."
+    },
+    {
+      "workshopId": "auto-servis-good-year-gjakova",
+      "name": "Auto Servis Good&Year",
+      "city": "Gjakova",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/auto-servis-good-year"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-servis-good-year",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "auto-servis-hoda-ferizaj",
+      "name": "Auto Servis Hoda",
+      "city": "Ferizaj",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-hoda-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-servis-hoda-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "auto-servis-karabeg-prishtina",
+      "name": "Auto servis Karabeg",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-karabeg-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-servis-karabeg-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "auto-servis-kiki-ferizaj",
+      "name": "Auto Servis Kiki",
+      "city": "Ferizaj",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-kiki-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-servis-kiki-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "auto-servis-klima-peja",
+      "name": "Auto Servis Klima",
+      "city": "Peja",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-klima-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-servis-klima-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "auto-servis-lavdrimi-ferizaj",
+      "name": "Auto Servis Lavdrimi",
+      "city": "Ferizaj",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-lavdrimi-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-servis-lavdrimi-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "auto-servis-lumi-m-gjakova",
+      "name": "Auto Servis Lumi-M",
+      "city": "Gjakova",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://gjirafa.biz/autoservislumim-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://gjirafa.biz/autoservislumim-1",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "auto-servis-maloku-decan",
+      "name": "Auto Servis Maloku",
+      "city": "Deçan",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://galego.cybo.com/XK/pej%C3%AB/mechanic"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://galego.cybo.com/XK-biz/auto-servis-maloku",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Readable Cybo source confirms independent phone/address and generic mechanic category. Concrete passenger-car scope and unique Google Place ID need confirmation."
+    },
+    {
+      "workshopId": "auto-servis-mendi-ferizaj",
+      "name": "Auto Servis Mendi",
+      "city": "Ferizaj",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-mendi-2"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-servis-mendi-2",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "auto-servis-mercedes-benz-vedati-prishtina",
+      "name": "Auto Servis Mercedes Benz Vedati",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-mercedes-benz-vedati-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-servis-mercedes-benz-vedati-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "auto-servis-muriqi-prizren",
+      "name": "Auto Servis Muriqi",
+      "city": "Prizren",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/auto-servis-muriqi"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-servis-muriqi",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "auto-servis-rizvanolli-gjakova",
+      "name": "Auto Servis Rizvanolli",
+      "city": "Gjakova",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/auto-servis-rizvanolli"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-servis-rizvanolli",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "auto-servis-sejda-gjilan",
+      "name": "Auto Servis SEJDA",
+      "city": "Gjilan",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-sejda-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-servis-sejda-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Gjirafa confirms passenger-car bodywork/painting and phone/address. Official Maps search does not confirm the same unique name/phone/address; keep draft."
+    },
+    {
+      "workshopId": "auto-servis-valoni-feroda-prishtina",
+      "name": "Auto Servis Valoni - Feroda",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-valoni---feroda-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-servis-valoni---feroda-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "auto-servis-visari-prizren",
+      "name": "Auto Servis Visari",
+      "city": "Prizren",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/auto-servis-visari"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-servis-visari",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "auto-servis-xhelali-prizren",
+      "name": "Auto Servis Xhelali",
+      "city": "Prizren",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-xhelali-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-servis-xhelali-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Gjirafa confirms bodywork/painting, car wrapping and vehicle checks up to 3.5 tonnes. Listed official website was inaccessible. The strongest Maps result, Auto Folje Xhelali, has a different phone and a different street address, so no unique matching identity is confirmed; keep draft."
+    },
+    {
+      "workshopId": "auto-servis-xoni-gjilan",
+      "name": "Auto servis XONI",
+      "city": "Gjilan",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-servis-xoni-049-231-674",
+        "https://www.cybo.com/XK-biz/auto-servis-xoni",
+        "https://www.google.com/maps/?cid=9099976421809570009"
+      ],
+      "sourceChecks": [],
+      "assessment": "candidate",
+      "reason": "Passenger-car repair scope and independent contact/address are evidenced; official Maps identity uniquely confirmed.",
+      "evidence": {
+        "placeId": "ChIJL5Yb0l-NVBMR2cBjhlecSX4",
+        "cid": "9099976421809570009",
+        "sourceUrl": "https://www.gjithebiznesi.com/XK/auto-servis-xoni-049-231-674",
+        "scopeEvidence": "Both independently readable Cybo and GjithëBiznesi identify this business as car repair.",
+        "contactEvidence": "Both sources list 049 231 674 and CFV5+49J, M25-3, Gjilan 60000.",
+        "additionalUrls": [
+          "https://www.cybo.com/XK-biz/auto-servis-xoni"
+        ]
+      },
+      "googleIdentity": {
+        "placeId": "ChIJL5Yb0l-NVBMR2cBjhlecSX4",
+        "uniqueInCatalogue": true,
+        "sameIndependentPhone": true,
+        "sameIndependentLocation": true
+      }
+    },
+    {
+      "workshopId": "auto-star-xharra-gjakova",
+      "name": "Mercedes-Benz | Auto Star Xharra",
+      "city": "Gjakova",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/mercedes-benz-%7C-auto-star-xharra",
+        "https://www.facebook.com/AutoStarXharra/"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/mercedes-benz-%7C-auto-star-xharra",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "automekanik-leoni-prishtina",
+      "name": "Automekanik Leoni",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/automekanik--leoni-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/automekanik--leoni-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "automekanik-muja-prishtina",
+      "name": "Automekanik Muja",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/automekanik-muja-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/automekanik-muja-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "automex-gjakova",
+      "name": "Automex",
+      "city": "Gjakova",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/automex"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/automex",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "autongjyrosje-haskuka-prizren",
+      "name": "AutoNgjyrosje\"HASKUKA\"",
+      "city": "Prizren",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/autongjyrosjehaskuka_1p"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/autongjyrosjehaskuka_1p",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "autoservis-agimi-peja",
+      "name": "Autoservis Agimi",
+      "city": "Peja",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/autoservis-agimi",
+        "https://www.google.com/maps/?cid=13500840597129851265"
+      ],
+      "sourceChecks": [],
+      "assessment": "candidate",
+      "reason": "Passenger-car repair scope and independent contact/address are evidenced; official Maps identity uniquely confirmed.",
+      "evidence": {
+        "placeId": "ChIJuaQd1SX_UhMRgfEYGf6eXLs",
+        "cid": "13500840597129851265",
+        "sourceUrl": "https://www.cybo.com/XK-biz/autoservis-agimi",
+        "scopeEvidence": "Independent car-repair category; exact workshop contact/location verified against official Maps.",
+        "contactEvidence": "Cybo lists 049 850 252 and TMK, Pejë 30000.",
+        "additionalUrls": []
+      },
+      "googleIdentity": {
+        "placeId": "ChIJuaQd1SX_UhMRgfEYGf6eXLs",
+        "uniqueInCatalogue": true,
+        "sameIndependentPhone": true,
+        "sameIndependentLocation": true
+      }
+    },
+    {
+      "workshopId": "autoservis-bekteshi-prishtina",
+      "name": "Autoservis Bekteshi",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/autoservis-bekteshi-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/autoservis-bekteshi-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "autoservis-difa-prishtina",
+      "name": "Autoservis Difa",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/autoservis-difa-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/autoservis-difa-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "autoservis-irfi-prishtina",
+      "name": "Autoservis Irfi",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/autoservis-irfi-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/autoservis-irfi-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "autoservis-keni-prishtina",
+      "name": "Autoservis KENI",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/autoservis-keni"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/autoservis-keni",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "autoservis-naser-minushi-prishtina",
+      "name": "AutoServis Naser Minushi",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/autoservis-naser-minushi-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/autoservis-naser-minushi-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "autoservis-semini-prizren",
+      "name": "AutoServis Semini",
+      "city": "Prizren",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/autoservis-semini"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/autoservis-semini",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "axha-prishtina",
+      "name": "Axha",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/axha-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/axha-1",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "benita-company-kline",
+      "name": "Benita Company – Fahrzeugservice Klinë",
+      "city": "Klinë",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://benita-ks.com/"
+      ],
+      "sourceChecks": [],
+      "assessment": "excluded",
+      "reason": "Tankstelle mit ausdrücklich beworbenem Schwerfahrzeug-Service. Der allgemeine Express-Service belegt keinen konkreten Pkw-Werkstattumfang.",
+      "exclusionAuthority": "data/workshop-scope.json"
+    },
+    {
+      "workshopId": "bmw-prishtina-prishtina",
+      "name": "BMW Prishtina",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/bmw-prishtina-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/bmw-prishtina-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "dida-service-prizren",
+      "name": "Dida Service",
+      "city": "Prizren",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/dida-service"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/dida-service",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "dpf-auto-gjini-prizren",
+      "name": "DPF Auto Gjini",
+      "city": "Prizren",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/dpf-auto-gjini"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/dpf-auto-gjini",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "fiat-prishtina",
+      "name": "Fiat",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/fiat-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/fiat-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "firi-prishtina",
+      "name": "Firi",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/firi-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/firi-1",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "g-b-prishtina",
+      "name": "G & B",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/g--b-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/g--b-1",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "ibra-prishtina",
+      "name": "Ibra",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/ibra-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/ibra-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "isuzu-servis-prizren",
+      "name": "Isuzu – Servis Kosovo",
+      "city": "Prizren",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://isuzu.co.rs/kontakt-kosovo/",
+        "https://www.burak-ks.com/en/trucks"
+      ],
+      "sourceChecks": [],
+      "assessment": "excluded",
+      "reason": "Der Isuzu-Standort gehört zum Truck-&-Bus-Angebot von Burak; dieser Nutzfahrzeugeintrag wird nicht als Pkw-Werkstatt geführt.",
+      "exclusionAuthority": "data/workshop-scope.json"
+    },
+    {
+      "workshopId": "koli-prishtina",
+      "name": "Koli",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/koli-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/koli-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "mercedes-benz-limi-service-istog",
+      "name": "Mercedes-Benz-Limi-Service",
+      "city": "Istog",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK/%C5%BEa%C4%8D/car-repair/"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://galego.cybo.com/XK-biz/mercedes-benz-limi-service",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Official Maps identity matches independent phone/address (Place ID ChIJ2RZCo9UbUxMRRYjsUK8r0is), but readable independent scope is only a generic mechanic category. Keep draft until concrete passenger-car service evidence."
+    },
+    {
+      "workshopId": "moto-stanki-gjilan",
+      "name": "Moto Stanki",
+      "city": "Gjilan",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/moto-stanki-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/moto-stanki-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "nero-prizren",
+      "name": "Nero",
+      "city": "Prizren",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/nero_2Z"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/nero_2Z",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "opel-e-rafuna-prishtina",
+      "name": "OPEL E.Rafuna",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/opel-e-rafuna"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/opel-e-rafuna",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "opel-prishtina-prishtina",
+      "name": "Opel Prishtina",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/opel-prishtina-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/opel-prishtina-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "opel-rakovica-prishtina",
+      "name": "Opel Rakovica",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/opel-rakovica-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/opel-rakovica-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "peugeot-te-beda-prishtina",
+      "name": "Peugeot te Beda",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-beda-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/auto-servis-beda-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "prishtina-auto-home-prishtina",
+      "name": "Prishtina Auto Home",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/prishtina-auto-home-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/prishtina-auto-home-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "reno-center-muciqi-prishtina",
+      "name": "Reno Center MUÇIQI",
+      "city": "Graçanicë",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/renaultcentermuciqi-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/renaultcentermuciqi-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Gjirafa confirms passenger-car service and phone, but its Prishtina-Ferizaj Km.7/Qarshis address conflicts with the matching-phone Maps card in Orlloviq. Keep draft until the current independent address/city is confirmed; listed official website timed out."
+    },
+    {
+      "workshopId": "rex-automobile-prizren",
+      "name": "REX Automobile",
+      "city": "Prizren",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/rex-automobile"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://www.cybo.com/XK-biz/rex-automobile",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "scania-trans-mitrovica",
+      "name": "Scania Trans",
+      "city": "Mitrovica",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.facebook.com/TruckBus-Scania-Service-113881273360473/"
+      ],
+      "sourceChecks": [],
+      "assessment": "excluded",
+      "reason": "Unternehmensauftritt als Truck & Bus Scania Service; aus dem Pkw-Verzeichnis entfernt.",
+      "exclusionAuthority": "data/workshop-scope.json"
+    },
+    {
+      "workshopId": "skifti-prishtina",
+      "name": "Skifti",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/skifti-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/skifti-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "tachograf-kienzle-ferizaj",
+      "name": "Tachograf service Kienzle",
+      "city": "Ferizaj",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK/ferizaj/car-repair"
+      ],
+      "sourceChecks": [],
+      "assessment": "excluded",
+      "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis.",
+      "exclusionAuthority": "data/workshop-scope.json"
+    },
+    {
+      "workshopId": "tahograf-prishtina",
+      "name": "Tahograf SH.P.K",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK/pristina/car-repair"
+      ],
+      "sourceChecks": [],
+      "assessment": "excluded",
+      "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis.",
+      "exclusionAuthority": "data/workshop-scope.json"
+    },
+    {
+      "workshopId": "turbo-service-engineering-prishtina",
+      "name": "Turbo Service Engineering",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/turbo-engineering-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/turbo-engineering-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "turbo-servis-turbo-klinika-prishtina",
+      "name": "Turbo Servis Turbo Klinika",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/turbo-klinika-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/turbo-klinika-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "univerzall-prishtina",
+      "name": "Univerzall",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/univerzall-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/univerzall-1",
+          "checkedAt": "2026-10-04",
+          "status": "unavailable"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source could not be retrieved in this pass. Recheck passenger-car scope and current phone/address from a readable independent source, then confirm a unique Google Place ID."
+    },
+    {
+      "workshopId": "xhema-auto-servis-prishtina",
+      "name": "Xhema Auto Servis",
+      "city": "Prishtina",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/xhema-auto-servis-1"
+      ],
+      "sourceChecks": [
+        {
+          "url": "https://stgres.gjirafa.biz/xhema-auto-servis-1",
+          "checkedAt": "2026-10-04",
+          "status": "accessible"
+        }
+      ],
+      "assessment": "needs_evidence",
+      "reason": "Stored independent source was readable in this pass. Publication still requires a unique Google Place ID with matching independent phone/location; leave draft until confirmed."
+    },
+    {
+      "workshopId": "ylli-performance-chip-tuning-gjilan",
+      "name": "Ylli Performance Chip Tuning",
+      "city": "Gjilan",
+      "checkedAt": "2026-10-04",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/ylli-performance-chip-tuning",
+        "https://www.google.com/maps/?cid=17632544202562383595"
+      ],
+      "sourceChecks": [],
+      "assessment": "candidate",
+      "reason": "Passenger-car repair scope and independent contact/address are evidenced; official Maps identity uniquely confirmed.",
+      "evidence": {
+        "placeId": "ChIJVeDlBUyNVBMR664a8Idhs_Q",
+        "cid": "17632544202562383595",
+        "sourceUrl": "https://www.cybo.com/XK-biz/ylli-performance-chip-tuning",
+        "scopeEvidence": "Independent car-repair category. Specific tuning services are not inferred from the name.",
+        "contactEvidence": "Cybo lists 045 332 669 and CFW5+864, Gjilan 60000.",
+        "additionalUrls": []
+      },
+      "googleIdentity": {
+        "placeId": "ChIJVeDlBUyNVBMR664a8Idhs_Q",
+        "uniqueInCatalogue": true,
+        "sameIndependentPhone": true,
+        "sameIndependentLocation": true
+      }
+    }
+  ],
+  "coordinateChecks": [
+    {
+      "id": "auto-cosmetic-fitimi-mitrovica",
+      "confirmed": true,
+      "method": "phone_and_location",
+      "sourceUrls": [
+        "https://www.google.com/maps/search/?api=1&query=Auto+Cosmetic+te+FITIMI+VVCV%2B5H5%2C+M2%2C+Mitrovic%C3%AB+40000&query_place_id=ChIJr_6I2ChFUxMRARVfS1C0RGI",
+        "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/"
+      ],
+      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "checkedAt": "2026-10-04T09:56:02.071Z",
+      "matchedAt": "2026-10-04T09:56:02.071Z",
+      "independentCode": "8GJ2VVCV+5H5"
+    },
+    {
+      "id": "auto-ngjyroses-shypi-ferizaj",
+      "confirmed": true,
+      "method": "phone_and_location",
+      "sourceUrls": [
+        "https://www.google.com/maps/search/?api=1&query=Auto+Ngjyros%C3%ABs+SHYPI+95Q7%2B872%2C+Talinoc+i+Jerlive+70000&query_place_id=ChIJs2t2ydx_VBMR7o5UGmJb778",
+        "https://www.cybo.com/XK/ferizaj/car-repair"
+      ],
+      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "checkedAt": "2026-10-04T09:55:31.486Z",
+      "matchedAt": "2026-10-04T09:55:31.486Z",
+      "independentCode": "8GJ395Q7+872"
+    },
+    {
+      "id": "auto-ngjyrosje-egzoni-ferizaj",
+      "confirmed": true,
+      "method": "phone_and_location",
+      "sourceUrls": [
+        "https://www.google.com/maps/search/?api=1&query=Auto+Ngjyrosje+Egzoni+95MC%2BX3%2C+Talinoc+i+Muhaxher%C3%ABve+70000&query_place_id=ChIJ7ehTfgZ_VBMRNjghZHjasXA",
+        "https://www.cybo.com/XK/ferizaj/car-repair"
+      ],
+      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "checkedAt": "2026-10-04T09:55:32.347Z",
+      "matchedAt": "2026-10-04T09:55:32.347Z",
+      "independentCode": "8GJ395MC+X3"
+    },
+    {
+      "id": "auto-pjese-servis-jaha-gjilan",
+      "confirmed": true,
+      "method": "phone_and_location",
+      "sourceUrls": [
+        "https://www.google.com/maps/search/?api=1&query=Auto+Pjes%C3%AB+%26+Servis+JAHA+CFR5%2B26%2C+Gjilan+60000&query_place_id=ChIJMb1eezmNVBMRRmiBJtGANVE",
+        "https://de.cybo.com/XK/gjilan/autoreparatur"
+      ],
+      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "checkedAt": "2026-10-04T09:56:03.011Z",
+      "matchedAt": "2026-10-04T09:56:03.011Z",
+      "independentCode": "8GJ3CFR5+26"
+    },
+    {
+      "id": "auto-service-kushtrimi-ferizaj",
+      "confirmed": true,
+      "method": "phone_and_location",
+      "sourceUrls": [
+        "https://www.google.com/maps/search/?api=1&query=Auto+Service+Kushtrimi+9573%2BG23%2C+Hivzi+Sylejmani%2C+Ferizaj+70000&query_place_id=ChIJMxwsC3h_VBMR2K3PwgtzmDQ",
+        "https://www.cybo.com/XK/ferizaj/car-repair"
+      ],
+      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "checkedAt": "2026-10-04T09:56:03.981Z",
+      "matchedAt": "2026-10-04T09:56:03.981Z",
+      "independentCode": "8GJ39573+G23"
+    },
+    {
+      "id": "auto-servis-doni-skenderaj",
+      "confirmed": true,
+      "method": "name_and_address",
+      "sourceUrls": [
+        "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Doni+QQVM%2B5VX%2C+R101%2C+Klin%C3%AB+e+Ep%C3%ABrme+41000&query_place_id=ChIJZ5Wsu-pBUxMRTFrP2jiQn0g",
+        "https://www.top-rated.online/cities/Klin%C3%AB%2Be%2BEp%C3%ABrme/place/p/10916121/Auto%2BServis%2BDoni"
+      ],
+      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name und unabhängig belegter Plus Code stimmen überein. Die Telefonnummer hat dieselbe lokale Rufnummer mit älterer Ländervorwahl. Die bestätigte Zuordnung bleibt erhalten; Kontaktdaten wurden nicht geändert.",
+      "checkedAt": "2026-10-04T09:56:04.863Z",
+      "matchedAt": "2026-10-04T09:56:04.863Z",
+      "independentCode": "8GJ2QQVM+5VX"
+    },
+    {
+      "id": "auto-servis-genti-prishtina",
+      "confirmed": true,
+      "method": "phone_and_location",
+      "sourceUrls": [
+        "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Genti+M43G%2BVQW%2C+Unnamed+Road%2C+Prishtina+10000&query_place_id=ChIJz2OODhafVBMRSk4BbeHIhq8",
+        "https://www.cybo.com/XK/pristina/car-repair"
+      ],
+      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "checkedAt": "2026-10-04T09:56:33.421Z",
+      "matchedAt": "2026-10-04T09:56:33.421Z",
+      "independentCode": "8GJ3M43G+VQW"
+    },
+    {
+      "id": "auto-servis-perparimi-ferizaj",
+      "confirmed": true,
+      "method": "phone_and_location",
+      "sourceUrls": [
+        "https://www.google.com/maps/search/?api=1&query=Auto+Servis+P%C3%ABrparimi+95Q3%2B7VQ%2C+Driton+Islami%2C+Talinoc+i+Jerlive+70000&query_place_id=ChIJv4FJP0V_VBMRiq_V3C5Yh2k",
+        "https://www.cybo.com/XK/ferizaj/car-repair"
+      ],
+      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "checkedAt": "2026-10-04T09:56:34.256Z",
+      "matchedAt": "2026-10-04T09:56:34.256Z",
+      "independentCode": "8GJ395Q3+7VQ"
+    },
+    {
+      "id": "autodiagnoza-kosove-prishtina",
+      "confirmed": false,
+      "method": "phone_and_location",
+      "sourceUrls": [
+        "https://www.google.com/maps/search/?api=1&query=Autodiagnoza+Kosove+M533%2BXMW%2C+Prishtina&query_place_id=ChIJkbvtE2meVBMRvu2LFtwxfho",
+        "https://www.cybo.com/XK/pristina/car-repair"
+      ],
+      "note": "Nicht bestätigt für die neuen Koordinaten: Die gespeicherte Place-ID öffnet einen Betrieb mit derselben Telefonnummer, aber einem abweichenden Standort und Plus Code außerhalb des 300-m-Bereichs. Die unabhängig gewonnenen Koordinaten dürfen für diesen Eintrag nicht übernommen werden. Zuordnung und bestehende Bewertungen für spätere Klärung erhalten.",
+      "checkedAt": "2026-10-04T09:56:35.146Z",
+      "matchedAt": null
+    },
+    {
+      "id": "autoelektrika-naimi-prishtina",
+      "confirmed": true,
+      "method": "phone_and_location",
+      "sourceUrls": [
+        "https://www.google.com/maps/search/?api=1&query=Autoelektrika+Naimi+M44X%2BHR2%2C+Prishtina+10000&query_place_id=ChIJUQjLIHufVBMRMpMm10I6HN0",
+        "https://www.cybo.com/XK/pristina/car-repair"
+      ],
+      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "checkedAt": "2026-10-04T09:57:07.966Z",
+      "matchedAt": "2026-10-04T09:57:07.966Z",
+      "independentCode": "8GJ3M44X+HR2"
+    },
+    {
+      "id": "autopjese-service-nazi-ferizaj",
+      "confirmed": true,
+      "method": "phone_and_location",
+      "sourceUrls": [
+        "https://www.google.com/maps/search/?api=1&query=Autopjes%C3%AB+%26+Service+Nazi+959P%2BXV6%2C+Bibaj+70000&query_place_id=ChIJhduIqz1_VBMR1pQy7eVfBok",
+        "https://www.cybo.com/XK/ferizaj/car-repair"
+      ],
+      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "checkedAt": "2026-10-04T09:57:08.795Z",
+      "matchedAt": "2026-10-04T09:57:08.795Z",
+      "independentCode": "8GJ3959P+XV6"
+    },
+    {
+      "id": "autoservis-pg-bosch-prishtina",
+      "confirmed": true,
+      "method": "phone_and_location",
+      "sourceUrls": [
+        "https://www.google.com/maps/search/?api=1&query=Autoservis+PG+Bosch+M55M%2BCC2%2C+Prishtina+10000&query_place_id=ChIJMTTQbMSfVBMROfUEApqoNwg",
+        "https://www.cybo.com/XK/pristina/car-repair"
+      ],
+      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name und Telefonnummer stimmen überein; der Geschäftspunkt liegt innerhalb von 300 m der unabhängig aus dem Verzeichnis-Plus-Code bestimmten Koordinaten. Google-Koordinaten wurden nicht übernommen.",
+      "checkedAt": "2026-10-04T09:57:09.703Z",
+      "matchedAt": "2026-10-04T09:57:09.703Z",
+      "independentCode": "8GJ3M55M+CC2"
+    },
+    {
+      "id": "bmw-service-ferizaj",
+      "confirmed": false,
+      "method": "phone_and_location",
+      "sourceUrls": [
+        "https://www.google.com/maps/search/?api=1&query=BMW+Service+95R6%2BP8J%2C+Driton+Islami%2C+Talinoc+i+Jerlive+70000&query_place_id=ChIJb6GZpCd_VBMRi_bRC-yoNhI",
+        "https://www.cybo.com/XK/ferizaj/car-repair"
+      ],
+      "note": "Nicht bestätigt für die neuen Koordinaten: Die gespeicherte Place-ID öffnet einen Betrieb mit derselben Telefonnummer, aber einem abweichenden Standort und Plus Code außerhalb des 300-m-Bereichs. Die unabhängig gewonnenen Koordinaten dürfen für diesen Eintrag nicht übernommen werden. Zuordnung und bestehende Bewertungen für spätere Klärung erhalten.",
+      "checkedAt": "2026-10-04T09:57:53.315Z",
+      "matchedAt": null
+    },
+    {
+      "id": "mercedes-isa-ferizaj",
+      "confirmed": true,
+      "method": "phone_and_location",
+      "sourceUrls": [
+        "https://www.google.com/maps/search/?api=1&query=Mercedes+Isa+95QF%2B28%2C+Talinoc+i+Muhaxher%C3%ABve+70000&query_place_id=ChIJI21YCwB_VBMRU22CO97yQLU",
+        "https://www.cybo.com/XK/ferizaj/car-repair"
+      ],
+      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "checkedAt": "2026-10-04T09:57:54.295Z",
+      "matchedAt": "2026-10-04T09:57:54.295Z",
+      "independentCode": "8GJ395QF+28"
+    },
+    {
+      "id": "stavileci-tuning-mitrovica",
+      "confirmed": true,
+      "method": "phone_and_location",
+      "sourceUrls": [
+        "https://www.google.com/maps/search/?api=1&query=Stavileci+Tuning+VVR6%2B9Q5%2C+Rruga+Kollashini%2C+Mitrovic%C3%AB+40000&query_place_id=ChIJrzhQ3jxFUxMRANcJyieNKyo",
+        "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/"
+      ],
+      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "checkedAt": "2026-10-04T09:57:55.147Z",
+      "matchedAt": "2026-10-04T09:57:55.147Z",
+      "independentCode": "8GJ2VVR6+9Q5"
+    }
+  ],
+  "profileCorrections": [
+    {
+      "id": "global-automotive",
+      "fields": {
+        "sources": [
+          {
+            "url": "https://www.globalautomotive-ks.com/",
+            "title": "Eigene Website: Fahrzeugservice und Reparatur"
+          },
+          {
+            "url": "https://www.globalautomotive-ks.com/kontakti/",
+            "title": "Betriebswebsite: veröffentlichte Kosovo-Adresse und Telefonnummern",
+            "kind": "official"
+          }
+        ],
+        "checkedAt": "2026-10-04"
+      },
+      "sourceUrls": [
+        "https://www.globalautomotive-ks.com/kontakti/"
+      ],
+      "evidenceNotes": "Current official contact page explicitly publishes Rruga e Pejës Nr.80 Fushë Kosovë and +383 44/49 409 000. Replaces old /kontaktijic/ template page. Main phone/address unchanged; no identity reconfirmation needed."
+    }
+  ],
+  "languages": {
+    "newConfirmedCurrentEntries": 0,
+    "notes": "Do not infer language from multilingual website controls or English reviews. Historical AS Motors advertiser evidence from July 2015 explicitly says English-speaking mechanic, but it is too old to establish current language availability. Leave languages empty.",
+    "historicalEvidenceUrl": "https://prishtinainsight.com/wp-content/uploads/2016/01/162.pdf"
+  },
+  "excludedWhatsApp": {
+    "auto-energjia": {
+      "number": "+38348170100",
+      "reason": "Official contact page assigns this number to sales WhatsApp; service number +383 44 777 775 explicitly uses Viber. Preserve workshop WhatsApp blank."
+    },
+    "foleja-motors": {
+      "number": "+38349959591",
+      "reason": "Website WhatsApp is global Foleja B2B contact, not clearly dedicated to workshop servicing."
+    }
+  }
+}

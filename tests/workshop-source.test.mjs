@@ -8,8 +8,25 @@ await writeFile('.test-runtime/workshop-source/source.mjs',bundle.outputFiles[0]
 const {validateWorkshopCatalogue,catalogueStats,mergeWorkshopCatalogue}=await import(new URL('../.test-runtime/workshop-source/source.mjs',import.meta.url));
 const catalogue=validateWorkshopCatalogue(JSON.parse(await readFile('data/workshops.json','utf8')));
 const stats=catalogueStats(catalogue.workshops);
-assert.equal(stats.published,71);assert.equal(stats.drafts,92);assert.equal(stats.numericSnapshotRatings,5);assert.equal(stats.pendingPublishedMatches,catalogue.googleImport.pendingPublishedMatches);assert.equal(stats.matchedPlaceIds,77);
+assert.equal(stats.published,78);assert.equal(stats.drafts,85);assert.equal(stats.numericSnapshotRatings,5);assert.equal(stats.pendingPublishedMatches,catalogue.googleImport.pendingPublishedMatches);assert.equal(stats.matchedPlaceIds,86);
 assert.equal(stats.pendingPublishedMatches,0);
+const research=JSON.parse(await readFile('data/catalogue-review-2026-10-04.json','utf8'));
+assert.equal(research.reviewedDrafts,92);
+assert.equal(research.draftAssessments.length,92);
+assert.equal(research.draftAssessments.filter(proof=>proof.assessment==='candidate').length,9);
+for(const proof of research.draftAssessments){
+ const workshop=catalogue.workshops.find(w=>w.id===proof.workshopId);
+ assert.equal(workshop.status,proof.assessment==='candidate'?'published':'draft','only positively verified drafts are promoted');
+ if(proof.assessment==='candidate')assert.equal(workshop.google.placeId,proof.googleIdentity.placeId);
+}
+assert.equal(research.coordinateChecks.filter(proof=>proof.confirmed).length,13);
+assert.equal(catalogue.workshops.filter(w=>w.status==='published'&&w.lat!==null).length,19);
+for(const proof of research.coordinateChecks){
+ const workshop=catalogue.workshops.find(w=>w.id===proof.id);
+ assert(workshop.google.placeId,'location review preserves historical Google identity');
+ if(proof.confirmed){assert(workshop.lat!==null&&workshop.lng!==null);assert.deepEqual(workshop.google.verification.sourceUrls,proof.sourceUrls);}
+ else{assert.equal(workshop.status,'draft');assert.equal(workshop.lat,null);assert.equal(workshop.lng,null);}
+}
 assert(catalogue.workshops.filter(w=>w.status==='published').every(w=>w.google.placeId&&w.google.matchedAt),'every public entry has a stable identity independently of ratings');
 const unconfirmed=structuredClone(catalogue);unconfirmed.workshops.find(w=>w.id==='auto-electronics').status='published';
 assert.throws(()=>validateWorkshopCatalogue(unconfirmed),/bestätigte Google-Zuordnung/);
@@ -54,4 +71,4 @@ const large=Array.from({length:1700},(_,i)=>({...structuredClone(base),id:`fixtu
 const largeImport=mergeWorkshopCatalogue(catalogue,large);
 assert.equal(largeImport.report.added.length,1700);assert.equal(largeImport.catalogue.workshops.length,1863);
 assert.equal(mergeWorkshopCatalogue(largeImport.catalogue,large).report.added.length,0,'repeat bulk import is idempotent');
-console.log(JSON.stringify({publicSource:71,draftsPreserved:92,duplicateDetection:true,googleRatingsSeparate:true,bulkFixture:1700,actualGoogleRequests:0}));
+console.log(JSON.stringify({publicSource:78,draftsPreserved:85,duplicateDetection:true,googleRatingsSeparate:true,bulkFixture:1700,actualGoogleRequests:0}));

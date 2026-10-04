@@ -1,6 +1,6 @@
 # Zentrale Werkstattdaten
 
-`data/workshops.json` ist die versionierte Quelle für Werkstattimporte. Sie enthält den exportierten aktuellen Bestand: **71 veröffentlichte Pkw-Werkstätten und 92 Entwürfe**. Der Status jedes Datensatzes ist ausdrücklich gespeichert. Die Schätzung von ungefähr 1.700 Werkstätten stammt vom Nutzer; sie ist kein recherchierter Gesamtbestand und keine Vollständigkeitsbehauptung.
+`data/workshops.json` ist die versionierte Quelle für Werkstattimporte. Sie enthält den exportierten aktuellen Bestand: **78 veröffentlichte Pkw-Werkstätten und 85 Entwürfe**. Der Status jedes Datensatzes ist ausdrücklich gespeichert. Die Schätzung von ungefähr 1.700 Werkstätten stammt vom Nutzer; sie ist kein recherchierter Gesamtbestand und keine Vollständigkeitsbehauptung.
 
 Die bisherigen getrennten Dateien für Profile und Google-Momentaufnahmen wurden in diese Quelle übernommen und entfernt. Namen, Kontakte, Quellen, Prüfzeitpunkte und stabile Riparim-Kennungen bleiben erhalten. Es werden keine Platzhalter für fehlende Werkstätten erzeugt.
 
@@ -40,6 +40,18 @@ npm run catalog:google-match -- --fetch --write --links --limit 100
 Ohne `--fetch` werden keinerlei API-Anfragen ausgeführt. Mit `--fetch` wird nach Name und Ort nur für bestehende veröffentlichte Werkstätten gesucht; höchstens 100 Such- und Detailabfragen je Lauf. Der Schlüssel wird ausschließlich aus `GOOGLE_PLACES_SERVER_API_KEY` gelesen und nie ausgegeben oder gespeichert. Ein Treffer braucht passende Telefonnummer, Name, Kosovo und Standort. Mehrdeutige Treffer werden nicht zugeordnet. Bei Authentifizierungs-, Quoten- oder Place-ID-Konflikten wird der Fehler mit Werkstattkennung protokolliert; API-Inhalte und Schlüssel erscheinen nicht im Bericht. Nur erfolgreich zugeordnete Place IDs und eigene Zuordnungszeitpunkte werden mit `--write` übernommen.
 
 Die Live-Darstellung benötigt zusätzlich `GOOGLE_MAPS_BROWSER_API_KEY`; Einrichtung und Schlüsselbeschränkungen stehen in `docs/google-places.md`.
+
+## Bestandsprüfung vom 4. Oktober 2026
+
+Alle 92 bisherigen Entwürfe wurden für diese Veröffentlichung gesichtet. Neun konnten anhand unabhängiger Kontakt-/Pkw-Servicequellen und einer individuell bestätigten Google-Identität freigegeben werden; 77 benötigen weitere Belege, sechs bleiben fachlich ausgeschlossen. Auto Regllazha TABAKU, Auto Service Bardhi, BMW-Visari, Autoservis Agimi, Auto Rally 90, BLEDI, XONI, Ylli Performance und Ali Mercedesi wurden veröffentlicht. Die bisherige Kennung bleibt jeweils erhalten. BMW-Visaris aktueller Kontakt ist auch unabhängig als zweite Telefonnummer belegt.
+
+Bei 13 bereits veröffentlichten Profilen wurden die erneut belegten Plus-Code-Adressen mit dem offiziellen Open-Location-Code-Algorithmus offline in Koordinaten umgerechnet. Die gespeicherte Google-Identität wurde einzeln gegen den unabhängig belegten Standort bestätigt. Damit besitzen 19 veröffentlichte Profile genaue Koordinaten; diese sind keine Ortsmittelpunkte und stammen nicht aus einem Google-API-Export.
+
+Der bislang fehlende Suchursprung für Skenderaj stammt aus dem GeoNames-Ortsdatensatz [785642](https://sws.geonames.org/785642/about.rdf), nicht aus dem Gemeindedatensatz. Entfernungssortierung und Umkreissuche funktionieren dadurch auch bei Auswahl dieses Ortes. Der Ursprung bleibt ein Ortsmittelpunkt; die Werkstattkoordinaten bleiben getrennt.
+
+Autodiagnoza Kosove und BMW Service Ferizaj zeigen dagegen einen Abstand von mehr als 300 Metern zwischen der unabhängig belegten Adresse und dem aktuellen Standort ihrer gespeicherten Google-Identität. Beide bleiben bis zur unabhängigen Klärung als Entwurf erhalten. Ihre Kennungen, historischen Google-Zuordnungen und Bewertungen werden nicht gelöscht. `data/workshop-scope.json` verhindert eine versehentliche erneute Veröffentlichung.
+
+Die Prüfung ergibt **78 veröffentlichte Profile und 85 Entwürfe**. `data/catalogue-review-2026-10-04.json` dokumentiert jeden geprüften Entwurf, die eigenen Identitätsprüfungen, Quellen und zurückgestellten Konflikte. Es enthält keine kopierten Google-Geschäftsinhalte. Für aktuell angebotene Beratungssprachen lagen keine ausdrücklichen belastbaren Belege vor; die Sprachfelder bleiben leer. Bereits bestätigte Service-WhatsApp-Kontakte wurden erneut geprüft; reine Verkaufskontakte und Kartenansichts-Mittelpunkte wurden nicht übernommen. Global Automotives Kontaktquelle verweist jetzt auf die aktuelle Betriebsseite `/kontakti/`.
 
 ## Größere Recherche
 
