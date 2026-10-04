@@ -1,3 +1,4 @@
+declare const __RIPARIM_RELEASE_COMMIT__: string;
 declare namespace Cloudflare {
   interface Env {
     MIGRATION_READ_ONLY?: string;

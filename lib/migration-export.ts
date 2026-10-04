@@ -64,7 +64,7 @@ export async function handleMigrationRequest(request: Request, env: Cloudflare.E
   if (url.pathname !== prefix) {
     if (!migrationReadOnly(env)) return null;
     return new Response("Riparim wird gerade auf den neuen Server übernommen. Bitte versuche es später erneut.", {
-      status: 503, headers: { "Cache-Control": "no-store", "Retry-After": "300" },
+      status: 503, headers: { "Cache-Control": "no-store", "Retry-After": "300", "X-Riparim-Migration-Read-Only": "true", "X-Riparim-Release-Commit": __RIPARIM_RELEASE_COMMIT__ },
     });
   }
   // No cookies, native identity, admin UI, cross-origin grant or caller SQL.
