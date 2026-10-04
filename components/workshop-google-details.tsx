@@ -1,11 +1,11 @@
 "use client";
 /* eslint-disable @next/next/no-img-element -- Google photos use fresh provider references; avoid an image optimizer persisting these resources. */
-import {useEffect,useRef,useState} from "react";
-import {Camera,ChevronDown,Clock3,MapPin} from "lucide-react";
-import {googleOpeningPresentation,googlePhotoUrl,type GoogleProfileStatus,type LiveGoogleProfile} from "@/lib/google-workshop-profile";
+import {useEffect,useId,useRef,useState} from "react";
+import {Camera,ChevronDown,ChevronLeft,ChevronRight,Clock3,LoaderCircle,MapPin} from "lucide-react";
+import {googleOpeningPresentation,googlePhotoUrl,type GooglePhoto,type GoogleProfileStatus,type LiveGoogleProfile} from "@/lib/google-workshop-profile";
 import {showConfirmedGoogleMap} from "@/lib/google-maps-browser";
 import type {GoogleWorkshopIdentity} from "./use-google-workshop-profile";
-import {Dialog,DialogContent,DialogTitle,DialogTrigger} from "./ui/dialog";
+import {Dialog,DialogContent,DialogTitle} from "./ui/dialog";
 
 export function WorkshopOpeningHours({profile,status,mapsUrl}:{profile:LiveGoogleProfile|null;status:GoogleProfileStatus;mapsUrl:string}){
  const hours=googleOpeningPresentation(profile,status);
@@ -15,10 +15,31 @@ export function WorkshopOpeningHours({profile,status,mapsUrl}:{profile:LiveGoogl
 
 export function WorkshopPhotos({name,profile,identity,status}:{name:string;profile:LiveGoogleProfile|null;identity:GoogleWorkshopIdentity|null;status:GoogleProfileStatus}){
  const [failed,setFailed]=useState<string[]>([]),[largeFailed,setLargeFailed]=useState<string[]>([]);
+ const [gallery,setGallery]=useState<{photos:GooglePhoto[];index:number}|null>(null),[loaded,setLoaded]=useState<string[]>([]);
+ const opener=useRef<HTMLButtonElement|null>(null),touch=useRef<{x:number;y:number}|null>(null),galleryId=useId();
  const photos=profile?.photos.filter(photo=>!failed.includes(photo.resource))??[];
- if(status==="loading")return <div className="profile-photo-loading" aria-label="Werkstattfotos werden geladen" role="status"><Camera size={20}/><span>Werkstattfotos werden geladen …</span></div>;
- if(!identity||!photos.length)return null;
- return <section className="profile-photo-section" id="fotos" aria-label={`Fotos zu ${name}`}><div className="profile-photo-strip">{photos.map((photo,i)=><figure key={photo.resource}><Dialog onOpenChange={open=>{if(open)setLargeFailed(value=>value.filter(resource=>resource!==photo.resource));}}><DialogTrigger asChild><button type="button" aria-label={`Foto ${i+1} von ${name} vergrößern`}><img src={googlePhotoUrl(photo,identity.browserKey)} alt={`Foto ${i+1} zum Google-Eintrag von ${name}`} width={600} height={380} loading="lazy" decoding="async" referrerPolicy="strict-origin-when-cross-origin" onError={()=>setFailed(value=>value.includes(photo.resource)?value:[...value,photo.resource])}/></button></DialogTrigger><DialogContent className="profile-photo-viewer" aria-describedby={undefined}><DialogTitle className="sr-only">{name} · Foto {i+1} von {photos.length}</DialogTitle>{largeFailed.includes(photo.resource)?<p className="profile-photo-error" role="status">Das Bild konnte nicht geladen werden. Bitte öffne es erneut.</p>:<img src={googlePhotoUrl(photo,identity.browserKey,"large")} alt={`Foto ${i+1} von ${name} in Großansicht`} loading="eager" decoding="async" referrerPolicy="strict-origin-when-cross-origin" onError={()=>setLargeFailed(value=>value.includes(photo.resource)?value:[...value,photo.resource])}/>}</DialogContent></Dialog></figure>)}</div></section>;
+ const selected=gallery?.photos[gallery.index];
+ function move(direction:number){setGallery(current=>current?{...current,index:(current.index+direction+current.photos.length)%current.photos.length}:null);}
+ if(status==="loading"&&!gallery)return <div className="profile-photo-loading" aria-label="Werkstattfotos werden geladen" role="status"><Camera size={20}/><span>Werkstattfotos werden geladen …</span></div>;
+ if(!identity||(!photos.length&&!gallery))return null;
+ return <section className="profile-photo-section" id="fotos" aria-label={`Fotos zu ${name}`}>
+  <Dialog open={!!gallery} onOpenChange={open=>{if(!open)setGallery(null);}}>
+   <div className="profile-photo-strip">{photos.map((photo,i)=><figure key={photo.resource}><button type="button" aria-label={`Foto ${i+1} von ${name} vergrößern`} aria-haspopup="dialog" aria-controls={gallery?galleryId:undefined} onClick={event=>{opener.current=event.currentTarget;setLargeFailed([]);setLoaded([]);setGallery({photos:[...photos],index:i});}}><img src={googlePhotoUrl(photo,identity.browserKey)} alt={`Foto ${i+1} zum Google-Eintrag von ${name}`} width={600} height={380} loading="lazy" decoding="async" referrerPolicy="strict-origin-when-cross-origin" onError={()=>setFailed(value=>value.includes(photo.resource)?value:[...value,photo.resource])}/></button></figure>)}</div>
+   <DialogContent id={galleryId} className="profile-photo-viewer" overlayClassName="profile-gallery-overlay" aria-describedby={undefined} onCloseAutoFocus={event=>{event.preventDefault();opener.current?.focus();}} onKeyDown={event=>{if(event.altKey||event.ctrlKey||event.metaKey)return;if(event.key==="ArrowLeft"||event.key==="ArrowRight"){event.preventDefault();move(event.key==="ArrowLeft"?-1:1);}}}>
+    {gallery&&selected&&<>
+     <header className="profile-gallery-header"><DialogTitle className="profile-gallery-title">{name}</DialogTitle><span className="profile-gallery-counter" role="status" aria-label={`Foto ${gallery.index+1} von ${gallery.photos.length}`}>{gallery.index+1} / {gallery.photos.length}</span></header>
+     <div className="profile-gallery-stage" onTouchStart={event=>{const point=event.touches[0];touch.current=event.touches.length===1?{x:point.clientX,y:point.clientY}:null;}} onTouchCancel={()=>{touch.current=null;}} onTouchEnd={event=>{const start=touch.current,point=event.changedTouches[0];touch.current=null;if(!start||!point)return;const dx=point.clientX-start.x,dy=point.clientY-start.y;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.5)move(dx<0?1:-1);}}>
+      {largeFailed.includes(selected.resource)?<p className="profile-photo-error" role="status">Das Bild konnte nicht geladen werden. {gallery.photos.length>1?"Wähle ein anderes Bild.":"Bitte öffne es erneut."}</p>:<>
+       {!loaded.includes(selected.resource)&&<span className="profile-gallery-loading" role="status"><LoaderCircle size={24} className="spin"/>Bild wird geladen …</span>}
+       <img key={selected.resource} className={loaded.includes(selected.resource)?"is-loaded":""} src={googlePhotoUrl(selected,identity.browserKey,"large")} alt={`Foto ${gallery.index+1} von ${name} in Großansicht`} loading="eager" decoding="async" draggable={false} referrerPolicy="strict-origin-when-cross-origin" onLoad={()=>setLoaded(value=>value.includes(selected.resource)?value:[...value,selected.resource])} onError={()=>setLargeFailed(value=>value.includes(selected.resource)?value:[...value,selected.resource])}/>
+      </>}
+      {gallery.photos.length>1&&<><button type="button" className="profile-gallery-prev" aria-label="Vorheriges Bild" onClick={()=>move(-1)}><ChevronLeft size={25}/></button><button type="button" className="profile-gallery-next" aria-label="Nächstes Bild" onClick={()=>move(1)}><ChevronRight size={25}/></button></>}
+     </div>
+     {gallery.photos.length>1&&<div className="profile-gallery-thumbnails" aria-label="Bildauswahl">{gallery.photos.map((photo,i)=><button key={photo.resource} type="button" aria-label={`Foto ${i+1} anzeigen`} aria-pressed={gallery.index===i} onClick={()=>setGallery(current=>current?{...current,index:i}:null)}><img src={googlePhotoUrl(photo,identity.browserKey)} alt="" width={80} height={56} decoding="async" referrerPolicy="strict-origin-when-cross-origin"/></button>)}</div>}
+    </>}
+   </DialogContent>
+  </Dialog>
+ </section>;
 }
 
 export function WorkshopGoogleMap({name,profile,identity,status,mapsUrl}:{name:string;profile:LiveGoogleProfile|null;identity:GoogleWorkshopIdentity|null;status:GoogleProfileStatus;mapsUrl:string}){
