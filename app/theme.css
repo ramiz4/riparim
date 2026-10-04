@@ -193,11 +193,22 @@ html.dark :is(.moderation-search, .moderation-entry, .moderation-toolbar>[data-s
 html.dark :is(.moderation-entry>summary strong, .moderation-entry-body h2) { color: var(--foreground); }
 html.dark :is(.moderation-search svg, .admin-tools>label, .location-details summary) { color: var(--muted-foreground); }
 
+@media (max-width: 720px) {
+  .navbar .header-auth { display: none; }
+  .navbar .header-login-mobile { display: inline-flex; }
+}
+
 @media (max-width: 540px) {
-  .navbar .header.wrap { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 12px; height: auto; min-height: 104px; padding-block: 10px; }
-  .navbar .header-right { display: contents; }
-  .navbar .theme-control { grid-column: 2; grid-row: 1; }
-  .navbar :is(.header-auth, .user-menu-trigger) { grid-column: 1 / -1; grid-row: 2; justify-self: end; }
+  .navbar .header.wrap { height: var(--site-header-height); gap: 4px; }
+  .navbar .header-right { gap: 4px; flex-shrink: 0; }
+  .navbar .user-menu-name { display: none; }
+  /* A circular switch keeps a full touch target without crowding the account actions. */
+  .navbar .theme-switch-shell { width: 44px; }
+  .navbar .theme-switch[data-slot=switch] { width: 44px; height: 44px; padding: 7px; }
+  .navbar .theme-switch [data-slot=switch-thumb] { translate: 0; box-shadow: none; background: transparent; }
+  .navbar .theme-switch-glyph { left: 8px; }
+  html.dark .navbar .theme-switch-glyph { transform: none; }
+  html.dark .navbar .theme-control[data-mounted=false] [data-slot=switch-thumb] { translate: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

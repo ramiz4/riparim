@@ -1,9 +1,9 @@
 .landing-navbar{background:#fff;border-bottom:0;backdrop-filter:none}
 .landing-navbar .wrap,.landing-page .landing-hero-content{width:min(1440px,calc(100% - 112px))}
-.landing-navbar .header{height:80px}
+.landing-navbar .header{height:var(--site-header-height)}
 .landing-navbar .header-right{margin-left:auto;flex-shrink:0}
 .landing-navbar .header-auth{font-size:15px}
-.landing-navbar .header-auth>a{display:inline-flex;align-items:center;min-height:44px;padding:8px 0}
+.landing-navbar .header-auth>a:first-child{padding-inline:4px}
 .landing-navbar a:focus-visible{outline:3px solid #00857b;outline-offset:5px;border-radius:4px}
 .landing-page{background:#fff}
 .landing-hero{position:relative;isolation:isolate;display:flex;align-items:center;min-height:clamp(600px,84svh,1000px);background:#071e20;color:#fff}
@@ -28,15 +28,11 @@
  .landing-hero-shade{background:linear-gradient(90deg,rgba(3,24,26,.94),rgba(3,24,26,.74) 47%,rgba(3,24,26,.18))}
 }
 @media(max-width:720px){
- .landing-navbar .wrap,.landing-page .landing-hero-content{width:calc(100% - 32px)}
- .navbar.landing-navbar .header.wrap{display:flex;height:70px;min-height:70px;padding-block:0;gap:8px}
- .navbar.landing-navbar .header-right{display:flex;gap:8px}
- .landing-navbar .brand{flex-shrink:0}
- .landing-navbar .header-auth{font-size:14px}
+ .landing-navbar .wrap,.landing-page .landing-hero-content{width:calc(100% - 2*var(--page-gutter))}
  .landing-page .landing-hero{min-height:0}
  .landing-hero-image{object-position:69% center}
  .landing-hero-shade{background:linear-gradient(90deg,rgba(3,24,26,.87),rgba(3,24,26,.7) 56%,rgba(3,24,26,.46)),linear-gradient(0deg,rgba(3,24,26,.36),transparent 65%)}
- .landing-hero-content{padding:48px 0 64px}
+ .landing-hero-content{padding:48px 0 52px}
  .landing-hero-content h1{font-size:clamp(2.4rem,9.6vw,3.5rem);line-height:1.1;letter-spacing:-.035em}
  .landing-hero-content p{max-width:310px;margin:22px 0 28px;font-size:1.125rem;line-height:1.55}
  .landing-hero-cta{min-height:58px;padding:16px 23px;gap:18px;border-radius:12px;font-size:1.125rem}
