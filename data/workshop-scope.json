@@ -1,0 +1,36 @@
+{
+  "checkedAt": "2026-10-04",
+  "focus": "Pkw-Werkstätten und belegter Pkw-Service; keine reinen Lkw-, Bus- oder Truck-Teilebetriebe",
+  "excluded": [
+    {
+      "workshopId": "auto-ballkan-gjilan",
+      "reason": "Vom Nutzer als Truck-Teilelieferant bestätigt; kein konkreter Pkw-Werkstattnachweis.",
+      "sourceUrls": ["https://www.gjithebiznesi.com/XK/auto-ballkan-044-177-327"]
+    },
+    {
+      "workshopId": "scania-trans-mitrovica",
+      "reason": "Unternehmensauftritt als Truck & Bus Scania Service; aus dem Pkw-Verzeichnis entfernt.",
+      "sourceUrls": ["https://www.facebook.com/TruckBus-Scania-Service-113881273360473/"]
+    },
+    {
+      "workshopId": "isuzu-servis-prizren",
+      "reason": "Der Isuzu-Standort gehört zum Truck-&-Bus-Angebot von Burak; dieser Nutzfahrzeugeintrag wird nicht als Pkw-Werkstatt geführt.",
+      "sourceUrls": ["https://isuzu.co.rs/kontakt-kosovo/", "https://www.burak-ks.com/en/trucks"]
+    },
+    {
+      "workshopId": "tachograf-kienzle-ferizaj",
+      "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis.",
+      "sourceUrls": ["https://www.cybo.com/XK/ferizaj/car-repair"]
+    },
+    {
+      "workshopId": "tahograf-prishtina",
+      "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis.",
+      "sourceUrls": ["https://www.cybo.com/XK/pristina/car-repair"]
+    },
+    {
+      "workshopId": "benita-company-kline",
+      "reason": "Tankstelle mit ausdrücklich beworbenem Schwerfahrzeug-Service. Der allgemeine Express-Service belegt keinen konkreten Pkw-Werkstattumfang.",
+      "sourceUrls": ["https://benita-ks.com/"]
+    }
+  ]
+}

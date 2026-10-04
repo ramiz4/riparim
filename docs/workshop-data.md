@@ -1,13 +1,13 @@
 # Zentrale Werkstattdaten
 
-`data/workshops.json` ist die versionierte Quelle für Werkstattimporte. Sie enthält den exportierten aktuellen Bestand: **78 veröffentlichte Werkstätten und 85 vorhandene Entwürfe**. Der Status jedes Datensatzes ist ausdrücklich gespeichert. Die Schätzung von ungefähr 1.700 Werkstätten stammt vom Nutzer; sie ist kein recherchierter Gesamtbestand und keine Vollständigkeitsbehauptung.
+`data/workshops.json` ist die versionierte Quelle für Werkstattimporte. Sie enthält den exportierten aktuellen Bestand: **71 veröffentlichte Pkw-Werkstätten und 92 Entwürfe**. Der Status jedes Datensatzes ist ausdrücklich gespeichert. Die Schätzung von ungefähr 1.700 Werkstätten stammt vom Nutzer; sie ist kein recherchierter Gesamtbestand und keine Vollständigkeitsbehauptung.
 
 Die bisherigen getrennten Dateien für Profile und Google-Momentaufnahmen wurden in diese Quelle übernommen und entfernt. Namen, Kontakte, Quellen, Prüfzeitpunkte und stabile Riparim-Kennungen bleiben erhalten. Es werden keine Platzhalter für fehlende Werkstätten erzeugt.
 
 ## Bewertungsquellen
 
 - Riparim-Bewertungen bleiben im eigenen Besuchs-/Bewertungssystem. `rating` und `count` der Riparim-Aggregate gehören nicht in diese Profilquelle.
-- `google.placeId` und `google.matchedAt` speichern die tatsächliche Zuordnung zu Google. Zuordnungen werden anhand von Telefonnummer, Name und Standort verifiziert.
+- `google.placeId` und `google.matchedAt` speichern die tatsächliche Zuordnung zu Google. Zuordnungen werden über offizielle Karten-/Betriebsnachweise oder passende unabhängige Telefon-, Namens- und Standortbelege verifiziert. `google.verification` bewahrt die eigenen Recherchemetadaten der zuletzt einzeln bestätigten Zuordnungen. Eine veröffentlichte Werkstatt braucht eine Place ID, unabhängig von Google-Rezensionen.
 - `google.snapshot` enthält ausschließlich die bereits unabhängig belegten Momentaufnahmen einschließlich Originalquelle und Prüfzeitpunkt. Nur fünf Sternebewertungen sind numerisch belegt. Unbekannte Sterne oder Anzahlen bleiben `null`.
 - Aktuelle API-Sterne und Rezensionen werden live geladen und weder in dieser Datei noch in Git, D1 oder R2 abgelegt.
 
@@ -23,7 +23,7 @@ npm run catalog:merge -- /absoluter/pfad/zum/import.json --write
 
 Eine Importdatei enthält ein `workshops`-Array mit vollständigen Datensätzen im selben Format. Der erste merge-Aufruf zeigt nur den geplanten Abgleich. `--write` aktualisiert die zentrale Datei atomar. Ungültige Quellen, doppelte IDs/Place IDs, Angaben aus der Zukunft oder unvollständige Datensätze werden zurückgewiesen.
 
-Bestehende Kennungen bleiben stabil. Eine übereinstimmende Place ID bzw. exakt passender Name, internationale Telefonnummer, Ort und Adresse verhindern einen zweiten Datensatz. Gemeinsame Telefonnummern allein führen zu keiner Zusammenführung: Die Eurogoma-Filialen in Gjakova und Mitrovica bleiben getrennt. Ältere Revisionen und ältere Google-Momentaufnahmen ersetzen keine neueren Angaben. Unklare Betriebe bleiben ausdrücklich als `draft` gespeichert; Leistungen und Marken werden nicht aus Google-Sternen oder aus einem Namen erfunden.
+Bestehende Kennungen bleiben stabil. Eine übereinstimmende Place ID bzw. exakt passender Name, internationale Telefonnummer, Ort und Adresse verhindern einen zweiten Datensatz. Gemeinsame Telefonnummern allein führen zu keiner Zusammenführung: Die Eurogoma-Filialen in Gjakova und Mitrovica bleiben getrennt. Ältere Revisionen und ältere Google-Momentaufnahmen ersetzen keine neueren Angaben. Unklare Betriebe bleiben ausdrücklich als `draft` gespeichert. `data/workshop-scope.json` dokumentiert die sechs wegen Nutzfahrzeug-/Tachograf-Fokus oder fehlendem konkreten Pkw-Servicebeleg ausgeblendeten Einträge; Auto Electronics bleibt wegen ungeklärter Google-Identität ebenfalls als Entwurf erhalten. Diese Datensätze und vorhandene Riparim-Bewertungen werden nicht gelöscht; Leistungen und Marken werden nicht aus Google-Sternen oder aus einem Namen erfunden.
 
 Nach Prüfung und Commit wird die Site wie üblich veröffentlicht. Der Runtime-Import verwendet den Inhalts-Hash der zentralen Datei als Abschlusskennung. Er ergänzt neue IDs und übernimmt nur jüngere Profilrevisionen; spätere Admin-Änderungen, Entwürfe, Besuche und Riparim-Bewertungen bleiben geschützt. Der Import arbeitet mit höchstens 95 SQL-Bindings pro Statement und 50 Statements pro Batch, kann nach einem Teilfehler wiederholt werden und löscht keine Profile.
 

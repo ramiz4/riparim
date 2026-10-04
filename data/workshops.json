@@ -1,21 +1,21 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-04T06:50:11.092Z",
+  "updatedAt": "2026-10-04T07:26:35.861Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 78,
-    "drafts": 85,
+    "published": 71,
+    "drafts": 92,
     "estimatedTotal": 1700,
     "estimateSource": "user",
     "complete": false
   },
   "googleImport": {
-    "status": "partial",
-    "reason": "unmatched_profiles",
-    "matchedPlaceIds": 55,
+    "status": "completed",
+    "reason": "Alle veröffentlichten Pkw-Werkstätten sind zugeordnet. Auto Electronics bleibt bis zur eindeutigen Bestätigung als Entwurf erhalten; Lkw-/Bus- und unklare Pkw-Serviceeinträge sind ausgeblendet.",
+    "matchedPlaceIds": 77,
     "numericSnapshotRatings": 5,
-    "pendingPublishedMatches": 23
+    "pendingPublishedMatches": 0
   },
   "workshops": [
     {
@@ -211,8 +211,8 @@
         }
       ],
       "checkedAt": "2026-10-03",
-      "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "status": "draft",
+      "updatedAt": "2026-10-04T07:26:35.861Z",
       "google": {
         "placeId": "ChIJG3VcI02NVBMRhghUZ9dLb0U",
         "matchedAt": "2026-10-04T06:38:16.160Z",
@@ -387,8 +387,8 @@
         }
       ],
       "checkedAt": "2026-10-02",
-      "status": "published",
-      "updatedAt": "2026-10-02T16:15:00.000Z",
+      "status": "draft",
+      "updatedAt": "2026-10-04T07:26:35.861Z",
       "google": {
         "placeId": null,
         "matchedAt": null,
@@ -1170,16 +1170,23 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJs2t2ydx_VBMR7o5UGmJb778",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Ngjyros%C3%ABs%20SHYPI%2095Q7%2B872%2C%20Talinoc%20i%20Jerlive%2070000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Ngjyros%C3%ABs+SHYPI+95Q7%2B872%2C+Talinoc+i+Jerlive+70000&query_place_id=ChIJs2t2ydx_VBMR7o5UGmJb778",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.cybo.com/XK/ferizaj/car-repair"
+          ],
+          "note": "Telefonnummer, individueller Name und Plus Code stimmen mit der unabhängigen Quelle überein. Der Dorfname im Google-Adressfeld ist kein anderer Betrieb."
         }
       }
     },
@@ -1214,16 +1221,23 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJ7ehTfgZ_VBMRNjghZHjasXA",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Ngjyrosje%20Egzoni%2095MC%2BX3%2C%20Talinoc%20i%20Muhaxher%C3%ABve%2070000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Ngjyrosje+Egzoni+95MC%2BX3%2C+Talinoc+i+Muhaxher%C3%ABve+70000&query_place_id=ChIJ7ehTfgZ_VBMRNjghZHjasXA",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.cybo.com/XK/ferizaj/car-repair"
+          ],
+          "note": "Telefonnummer und Plus Code bestätigen genau diese Lackierwerkstatt; ähnlich benannte Servicebetriebe wurden ausgeschlossen."
         }
       }
     },
@@ -1666,16 +1680,24 @@
       "status": "published",
       "updatedAt": "2026-10-02T16:15:00.000Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJd92tlvaVUxMRnBlwgnMwk-M",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Service%20DEMI%20Rruga%20tranzit%2C%20kyqja%20n%C3%AB%20autostrad%C3%ABn%20e%20re%2C%20Prizren%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Service+DEMI+Rruga+tranzit%2C+kyqja+n%C3%AB+autostrad%C3%ABn+e+re%2C+Prizren%2C+Kosovo&query_place_id=ChIJd92tlvaVUxMRnBlwgnMwk-M",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "official_website",
+          "sourceUrls": [
+            "https://servicedemi.com/our-services/",
+            "https://servicedemi.com/contact-us-2/"
+          ],
+          "note": "Die eigene Betriebsdomain bestätigt die Identität trotz unterschiedlicher Termin- und allgemeiner Geschäftstelefonnummern."
         }
       }
     },
@@ -1716,16 +1738,23 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJkdpjeWSfVBMRUs4aGzpE3SE",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": 5,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Service%20Express%20Rr.%20Ahmet%20Krasniqi%2C%20Arb%C3%ABri%2C%20Prishtin%C3%AB%2010000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Service+Express+Rr.+Ahmet+Krasniqi%2C+Arb%C3%ABri%2C+Prishtin%C3%AB+10000&query_place_id=ChIJkdpjeWSfVBMRUs4aGzpE3SE",
           "sourceUrl": "https://autoserviceexpress.net/kontakt",
           "sourceLabel": "Betriebswebsite: ausdrücklich als Google Reviews ausgewiesen",
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://autoserviceexpress.net/kontakt"
+          ],
+          "note": "Der Maps-Link auf der offiziellen Kontaktseite identifiziert dieselbe CID. Telefonnummer und Adresse bestätigen die Zuordnung zusätzlich."
         }
       }
     },
@@ -2047,16 +2076,23 @@
       "status": "published",
       "updatedAt": "2026-10-03T12:08:07.696318+00:00",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJ2S8OegBhVBMRdt5MHMLUkqA",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20Bashkimi%20Ramnisht%C3%AB%2C%20Viti%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Bashkimi+Ramnisht%C3%AB%2C+Viti%2C+Kosovo&query_place_id=ChIJ2S8OegBhVBMRdt5MHMLUkqA",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "name_and_address",
+          "sourceUrls": [
+            "https://servis-bashkimi.com/"
+          ],
+          "note": "Individueller Werkstattname und Ramnishtë/Viti stimmen mit der offiziellen Website überein. Eine Google-Telefonnummer ist dafür nicht erforderlich."
         }
       }
     },
@@ -2367,16 +2403,23 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJZ5Wsu-pBUxMRTFrP2jiQn0g",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": 5,
           "count": 8,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20Doni%20QQVM%2B5VX%2C%20R101%2C%20Klin%C3%AB%20e%20Ep%C3%ABrme%2041000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Doni+QQVM%2B5VX%2C+R101%2C+Klin%C3%AB+e+Ep%C3%ABrme+41000&query_place_id=ChIJZ5Wsu-pBUxMRTFrP2jiQn0g",
           "sourceUrl": "https://www.top-rated.online/cities/Klin%C3%AB+e+Ep%C3%ABrme/place/p/10916121/Auto+Servis+Doni",
           "sourceLabel": "Top-Rated.online: ausdrücklich auf Google-Maps-Bewertungen basierend",
-          "checkedAt": "2026-10-03T19:15:01Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": "2026-09-05"
+        },
+        "verification": {
+          "method": "name_and_address",
+          "sourceUrls": [
+            "https://www.top-rated.online/cities/Klin%C3%AB%2Be%2BEp%C3%ABrme/place/p/10916121/Auto%2BServis%2BDoni"
+          ],
+          "note": "Individueller Werkstattname und vollständiger Plus Code stimmen überein. Klinë e Epërme und Gornja Klina bezeichnen denselben Ort; die alte Telefonnummer allein wurde nicht als Beweis verwendet."
         }
       }
     },
@@ -3096,16 +3139,23 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJv4FJP0V_VBMRiq_V3C5Yh2k",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20P%C3%ABrparimi%2095Q3%2B7VQ%2C%20Driton%20Islami%2C%20Talinoc%20i%20Jerlive%2070000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+P%C3%ABrparimi+95Q3%2B7VQ%2C+Driton+Islami%2C+Talinoc+i+Jerlive+70000&query_place_id=ChIJv4FJP0V_VBMRiq_V3C5Yh2k",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.cybo.com/XK/ferizaj/car-repair"
+          ],
+          "note": "Telefonnummer, individueller Name und vollständiger Plus Code stimmen mit der unabhängigen Quelle überein."
         }
       }
     },
@@ -3147,16 +3197,24 @@
       "status": "published",
       "updatedAt": "2026-10-03T12:23:44.809366+00:00",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJU_Y9YNSdVBMRGMevqCLSIzA",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Servis%20POTERA%20Magjistralja%20Prishtin%C3%AB%E2%80%93Ferizaj%2C%20km%207%2C%20Gra%C3%A7anic%C3%AB%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+POTERA+Magjistralja+Prishtin%C3%AB%E2%80%93Ferizaj%2C+km+7%2C+Gra%C3%A7anic%C3%AB%2C+Kosovo&query_place_id=ChIJU_Y9YNSdVBMRGMevqCLSIzA",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://kosovajob.com/jobs?id=44373",
+            "https://superpuna.rks-gov.net/job-seeker/job-post/kerkojm-ndihmes-mekanik-2"
+          ],
+          "note": "Die Werkstatttelefonnummer und der Standort an der Straße Prishtinë–Ferizaj bestätigen diese Filiale; der gleichnamige Betrieb mit anderer Telefonnummer wurde ausgeschlossen."
         }
       }
     },
@@ -3552,16 +3610,23 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJky7CLnQCUxMRHPwWCLRZ9Q0",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=AutoAvangarde%20-%20BMW%20Service%20Magjistralia%20Peje-Prishtine%20KM1%2C%20Pej%C3%AB%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=AutoAvangarde+-+BMW+Service+Magjistralia+Peje-Prishtine+KM1%2C+Pej%C3%AB&query_place_id=ChIJky7CLnQCUxMRHPwWCLRZ9Q0",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "name_and_address",
+          "sourceUrls": [
+            "https://www.cybo.com/XK-biz/autoavangarde-bmw-service"
+          ],
+          "note": "Individueller Name, BMW-Service und Standort an der Magjistralja Pejë–Prishtinë stimmen mit dem unabhängigen Betriebsnachweis überein."
         }
       }
     },
@@ -3640,16 +3705,23 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJkbvtE2meVBMRvu2LFtwxfho",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autodiagnoza%20Kosove%20M533%2BXMW%2C%20Prishtina%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autodiagnoza+Kosove+M533%2BXMW%2C+Prishtina&query_place_id=ChIJkbvtE2meVBMRvu2LFtwxfho",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.cybo.com/XK/pristina/car-repair"
+          ],
+          "note": "Die Werkstatttelefonnummer und die eigene Unternehmensseite bestätigen den abgekürzten Namen und den Standort in Prishtina."
         }
       }
     },
@@ -3772,16 +3844,23 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJoxQpM6GNVBMRQIa-9VcGmHc",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Automehanicarska%20radnja%20Koretiste%2C%20Gjilan%2038250%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Automehanicarska+radnja+Koretiste%2C+Gjilan+38250&query_place_id=ChIJoxQpM6GNVBMRQIa-9VcGmHc",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "name_and_address",
+          "sourceUrls": [
+            "https://www.cybo.com/XK/gjilan/car-repair/"
+          ],
+          "note": "Vollständiger Name und genaue Adresse Koretiste/Gjilan 38250 stimmen mit dem unabhängigen Verzeichniseintrag überein."
         }
       }
     },
@@ -3966,16 +4045,23 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJhduIqz1_VBMR1pQy7eVfBok",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autopjes%C3%AB%20%26%20Service%20Nazi%20959P%2BXV6%2C%20Bibaj%2070000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autopjes%C3%AB+%26+Service+Nazi+959P%2BXV6%2C+Bibaj+70000&query_place_id=ChIJhduIqz1_VBMR1pQy7eVfBok",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.cybo.com/XK/ferizaj/car-repair"
+          ],
+          "note": "Telefonnummer, individueller Name und Plus Code stimmen mit der unabhängigen Quelle überein."
         }
       }
     },
@@ -4325,16 +4411,26 @@
       "status": "published",
       "updatedAt": "2026-10-02T18:21:53.000Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJH0SPWa6dVBMRf0OmWIysKpY",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autotrade%20sh.p.k.%20%E2%80%93%20Toyota%20Magjistralja%20Prishtin%C3%AB%E2%80%93Ferizaj%20p.n.%2C%2010520%20Prishtin%C3%AB%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autotrade+sh.p.k.+%E2%80%93+Toyota+Magjistralja+Prishtin%C3%AB%E2%80%93Ferizaj+p.n.%2C+10520+Prishtin%C3%AB%2C+Kosovo&query_place_id=ChIJH0SPWa6dVBMRf0OmWIysKpY",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "official_website",
+          "sourceUrls": [
+            "https://www.toyota-kosovo.com/contact",
+            "https://www.toyota-kosovo.com/content/dam/toyota/nmsc/slovenia/cross-model/owners/as2024/winter/WinterKOS.pdf",
+            "https://www.toyota-kosovo.com/owners/maintenance/express-service",
+            "https://www.toyota-kosovo.com/owners/maintenance/hybrid-service"
+          ],
+          "note": "Die offizielle Toyota-Kosovo-Domain, Händlername und Filialstandort bestätigen die Identität. Historische Landesvorwahlen werden nicht pauschal gleichgesetzt."
         }
       }
     },
@@ -4505,8 +4601,8 @@
         }
       ],
       "checkedAt": "2026-10-03",
-      "status": "published",
-      "updatedAt": "2026-10-03T12:08:07.696318+00:00",
+      "status": "draft",
+      "updatedAt": "2026-10-04T07:26:35.861Z",
       "google": {
         "placeId": "ChIJdXtZEM0OUxMRHhYLUY4CKmA",
         "matchedAt": "2026-10-04T06:38:30.334Z",
@@ -4703,16 +4799,26 @@
       "status": "published",
       "updatedAt": "2026-10-02T18:21:53.000Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJ8yhMypyxUxMRZNo8r3oXeTM",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=DD%20Auto%20Service%20Gasper%20Karaqi%2C%2050000%20Gjakov%C3%AB%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=DD+Auto+Service+Gasper+Karaqi%2C+50000+Gjakov%C3%AB%2C+Kosovo&query_place_id=ChIJ8yhMypyxUxMRZNo8r3oXeTM",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://ddautoservice.com/",
+            "https://ddautoservice.com/hostinger-backend/api/index.php?resource=settings",
+            "https://ddautoservice.com/hostinger-backend/api/index.php?resource=services&lang=sq",
+            "https://maps.app.goo.gl/nciwJW6yFBoGpzqs9"
+          ],
+          "note": "Offizielle Telefonnummer und unabhängig veröffentlichte Betriebskoordinaten bestätigen die Identität trotz zusammengezogener Namensschreibweise."
         }
       }
     },
@@ -4754,16 +4860,24 @@
       "status": "published",
       "updatedAt": "2026-10-03T12:08:07.696318+00:00",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJtYw5tSmcVBMR3OOyiyQ76Us",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Delfin%20Auto%20SH.P.K.%20%E2%80%93%20Citro%C3%ABn%20Magjistralja%20Prishtin%C3%AB%E2%80%93Ferizaj%20km%207%2C%20Llapllasell%C3%AB%2C%2010500%20Gra%C3%A7anic%C3%AB%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Delfin+Auto+SH.P.K.+%E2%80%93+Citro%C3%ABn+Magjistralja+Prishtin%C3%AB%E2%80%93Ferizaj+km+7%2C+Llapllasell%C3%AB%2C+10500+Gra%C3%A7anic%C3%AB%2C+Kosovo&query_place_id=ChIJtYw5tSmcVBMR3OOyiyQ76Us",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.citroen-ks.com/ndihmese/gjeni-nje-pike-shitje.html",
+            "https://www.citroen-ks.com/"
+          ],
+          "note": "Die eingebettete Karte des offiziellen Citroën-Händlerportals bestätigt die CID 5469968250566796252. Die andere Delfin-Filiale wurde ausgeschlossen."
         }
       }
     },
@@ -4981,16 +5095,25 @@
       "status": "published",
       "updatedAt": "2026-10-02T18:21:53.000Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJEcRJbrJFUxMRkldi0D6KZXc",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Eurogoma%20%E2%80%93%20Mitrovic%C3%AB%20Magjistralja%20Mitrovic%C3%AB%E2%80%93Prishtin%C3%AB%2C%20Shupkovc%2C%20Mitrovic%C3%AB%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Eurogoma+%E2%80%93+Mitrovic%C3%AB+Magjistralja+Mitrovic%C3%AB%E2%80%93Prishtin%C3%AB%2C+Shupkovc%2C+Mitrovic%C3%AB%2C+Kosovo&query_place_id=ChIJEcRJbrJFUxMRkldi0D6KZXc",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "official_website",
+          "sourceUrls": [
+            "https://www.eurogoma.net/locations/",
+            "https://www.eurogoma.net/contact/",
+            "https://www.eurogoma.net/services/"
+          ],
+          "note": "Die eigene Standortseite bestätigt die Filiale in Shupkovc/Mitrovica. Die zentrale Telefonnummer identifiziert nicht die abweichende Filiale in Shkabaj."
         }
       }
     },
@@ -5195,16 +5318,23 @@
       "status": "published",
       "updatedAt": "2026-10-03T12:08:07.696318+00:00",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJi4CvOMidVBMRhkOafAGLO1s",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Foleja%20Motors%20Magjistralja%20Prishtin%C3%AB%E2%80%93Ferizaj%2C%20km%205%2C%2010000%20Prishtina%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Foleja+Motors+Magjistralja+Prishtin%C3%AB%E2%80%93Ferizaj%2C+km+5%2C+10000+Prishtina%2C+Kosovo&query_place_id=ChIJi4CvOMidVBMRhkOafAGLO1s",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://b2b.foleja.com/foleja-motors/"
+          ],
+          "note": "Die Karte der offiziellen Motors-Seite bestätigt die CID 6574000919579083654. Der veröffentlichte Servicekontakt bleibt erhalten."
         }
       }
     },
@@ -5453,19 +5583,26 @@
         }
       ],
       "checkedAt": "2026-10-03",
-      "status": "published",
-      "updatedAt": "2026-10-03T12:04:35.346588+00:00",
+      "status": "draft",
+      "updatedAt": "2026-10-04T07:26:35.861Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJiWvm59WVUxMRQAR6NUL2eA8",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Isuzu%20%E2%80%93%20Servis%20Kosovo%20Rruga%20Uk%C3%AB%20Bytyqi%20Nr.%202%2C%20Prizren%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Isuzu+%E2%80%93+Servis+Kosovo+Rruga+Uk%C3%AB+Bytyqi+Nr.+2%2C+Prizren%2C+Kosovo&query_place_id=ChIJiWvm59WVUxMRQAR6NUL2eA8",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://isuzu.co.rs/kontakt-kosovo/"
+          ],
+          "note": "Die offizielle Isuzu-Kosovo-Karte bestätigt die CID 1114911671999661120 des Betriebes unter seinem Unternehmensnamen. Die dort veröffentlichte Mobilnummer bestätigt die Zuordnung zusätzlich."
         }
       }
     },
@@ -5587,16 +5724,24 @@
       "status": "published",
       "updatedAt": "2026-10-03T12:23:44.809366+00:00",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJhTwIS8KWUxMRLrTcMsrUbYI",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Mercedes-Benz%20BAAF%20Lutogllav%C3%AB%20p.n.%2C%2020000%20Prizren%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Mercedes-Benz+BAAF+Lutogllav%C3%AB+p.n.%2C+20000+Prizren%2C+Kosovo&query_place_id=ChIJhTwIS8KWUxMRLrTcMsrUbYI",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://baaf-ks.com/sip/kontakt.php",
+            "https://baaf-ks.com/sip/garanti.php"
+          ],
+          "note": "Offizielle Telefonnummer, individuelle Firmenkennung und der von der eigenen Kontaktseite verlinkte Kartenstandort bestätigen die Werkstatt."
         }
       }
     },
@@ -5667,16 +5812,23 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJI21YCwB_VBMRU22CO97yQLU",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Mercedes%20Isa%2095QF%2B28%2C%20Talinoc%20i%20Muhaxher%C3%ABve%2070000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Mercedes+Isa+95QF%2B28%2C+Talinoc+i+Muhaxher%C3%ABve+70000&query_place_id=ChIJI21YCwB_VBMRU22CO97yQLU",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.cybo.com/XK/ferizaj/car-repair"
+          ],
+          "note": "Telefonnummer, individueller Name und vollständiger Plus Code stimmen mit der unabhängigen Quelle überein."
         }
       }
     },
@@ -5731,16 +5883,25 @@
       "status": "published",
       "updatedAt": "2026-10-03T12:14:46.131Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJg7Y__z8DUxMREKzArlVm3mw",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Mercedes%20Service%20Ballkan%2094%20Mustaf%C3%AB%20Nimoni%2C%20Pej%C3%AB%2030000%2C%20Kosovo%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Mercedes+Service+Ballkan+94+Mustaf%C3%AB+Nimoni%2C+Pej%C3%AB+30000%2C+Kosovo&query_place_id=ChIJg7Y__z8DUxMREKzArlVm3mw",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://mercedesballkan.com/en/homepage/",
+            "https://www.google.com/maps?cid=7844820119116098576&output=embed",
+            "https://www.facebook.com/MercedesBenzServiceBallkan/"
+          ],
+          "note": "Die eigene Website bettet genau CID 7844820119116098576 ein. Die Händler-Duplikatkarte und andere gleichnamige Betriebe wurden ausgeschlossen."
         }
       }
     },
@@ -6251,8 +6412,8 @@
         }
       ],
       "checkedAt": "2026-10-03",
-      "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "status": "draft",
+      "updatedAt": "2026-10-04T07:26:35.861Z",
       "google": {
         "placeId": "ChIJ74s4yeVFUxMRSQjRkEpj7uU",
         "matchedAt": "2026-10-04T06:39:12.147Z",
@@ -6471,8 +6632,8 @@
         }
       ],
       "checkedAt": "2026-10-03",
-      "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "status": "draft",
+      "updatedAt": "2026-10-04T07:26:35.861Z",
       "google": {
         "placeId": "ChIJO7PBcNp_VBMR638RbvzJZts",
         "matchedAt": "2026-10-04T06:39:13.579Z",
@@ -6515,8 +6676,8 @@
         }
       ],
       "checkedAt": "2026-10-03",
-      "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "status": "draft",
+      "updatedAt": "2026-10-04T07:26:35.861Z",
       "google": {
         "placeId": "ChIJ0ykW1rWfVBMRVWmPUwPgbKI",
         "matchedAt": "2026-10-04T06:39:13.929Z",
@@ -6562,16 +6723,23 @@
       "status": "published",
       "updatedAt": "2026-10-03T17:13:16.309374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJ-6adEa-fVBMRKH2q9koRSAI",
+        "matchedAt": "2026-10-04T07:26:35.861Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=TITANS%20Auto%20Repair%20Pristina%2015000%20Kosovo",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=TITANS+Auto+Repair+Pristina+15000&query_place_id=ChIJ-6adEa-fVBMRKH2q9koRSAI",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
+          "checkedAt": "2026-10-04T07:26:35.861Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "name_and_address",
+          "sourceUrls": [
+            "https://www.cybo.com/XK/pristina/car-repair"
+          ],
+          "note": "Individueller Betriebsname, Stadt und Postadresse 15000 stimmen mit dem unabhängigen Kontaktverzeichnis überein."
         }
       }
     },

@@ -8,7 +8,17 @@ await writeFile('.test-runtime/workshop-source/source.mjs',bundle.outputFiles[0]
 const {validateWorkshopCatalogue,catalogueStats,mergeWorkshopCatalogue}=await import(new URL('../.test-runtime/workshop-source/source.mjs',import.meta.url));
 const catalogue=validateWorkshopCatalogue(JSON.parse(await readFile('data/workshops.json','utf8')));
 const stats=catalogueStats(catalogue.workshops);
-assert.equal(stats.published,78);assert.equal(stats.drafts,85);assert.equal(stats.numericSnapshotRatings,5);assert.equal(stats.pendingPublishedMatches,catalogue.googleImport.pendingPublishedMatches);assert.equal(stats.matchedPlaceIds+stats.pendingPublishedMatches,78);
+assert.equal(stats.published,71);assert.equal(stats.drafts,92);assert.equal(stats.numericSnapshotRatings,5);assert.equal(stats.pendingPublishedMatches,catalogue.googleImport.pendingPublishedMatches);assert.equal(stats.matchedPlaceIds,77);
+assert.equal(stats.pendingPublishedMatches,0);
+assert(catalogue.workshops.filter(w=>w.status==='published').every(w=>w.google.placeId&&w.google.matchedAt),'every public entry has a stable identity independently of ratings');
+const unconfirmed=structuredClone(catalogue);unconfirmed.workshops.find(w=>w.id==='auto-electronics').status='published';
+assert.throws(()=>validateWorkshopCatalogue(unconfirmed),/bestätigte Google-Zuordnung/);
+const trucks=structuredClone(catalogue);trucks.workshops.find(w=>w.id==='auto-ballkan-gjilan').status='published';
+assert.throws(()=>validateWorkshopCatalogue(trucks),/Pkw-Werkstatteinträge/);
+const mismatchedLink=structuredClone(catalogue);mismatchedLink.workshops.find(w=>w.status==='published').google.snapshot.mapsUrl='https://www.google.com/maps/?query_place_id=ChIJUnrelatedFixture';
+assert.throws(()=>validateWorkshopCatalogue(mismatchedLink),/denselben Eintrag/);
+const noReviews=catalogue.workshops.find(w=>w.id==='mercedes-service-ballkan-peja');
+assert.equal(noReviews.status,'published');assert(noReviews.google.placeId);assert.equal(noReviews.google.snapshot.rating,null);assert.equal(noReviews.google.snapshot.count,null);
 assert.equal(catalogue.coverage.complete,false);assert.equal(catalogue.coverage.estimateSource,'user');
 assert.deepEqual(stats.sharedPhones,[['eurogoma-gjakova','eurogoma-mitrovica']]);
 assert(catalogue.workshops.every(w=>!('rating' in w)&&!('count' in w)),'own reviews remain outside the profile source');
@@ -29,7 +39,7 @@ const deduplicated=mergeWorkshopCatalogue(catalogue,[renamedId]);
 assert.deepEqual(deduplicated.report.deduplicated,[{incomingId:renamedId.id,keptId:mita.id}]);assert.equal(deduplicated.catalogue.workshops.length,163);
 const oldProfile=structuredClone(mita);oldProfile.name='Older fixture profile';oldProfile.updatedAt='2026-09-01T00:00:00Z';
 assert.equal(mergeWorkshopCatalogue(catalogue,[oldProfile]).catalogue.workshops.find(w=>w.id===mita.id).name,mita.name);
-const googleOnly=structuredClone(mita);googleOnly.google.placeId='ChIJfixtureOnlyTestPlaceId';googleOnly.google.matchedAt=new Date().toISOString();
+const googleOnly=structuredClone(mita);googleOnly.google.placeId='ChIJfixtureOnlyTestPlaceId';googleOnly.google.matchedAt=new Date().toISOString();const changedMap=new URL(googleOnly.google.snapshot.mapsUrl);changedMap.searchParams.set('query_place_id',googleOnly.google.placeId);googleOnly.google.snapshot.mapsUrl=changedMap.href;
 const googleMerge=mergeWorkshopCatalogue(catalogue,[googleOnly]);
 assert.equal(googleMerge.catalogue.workshops.find(w=>w.id===mita.id).google.placeId,googleOnly.google.placeId,'new identity imports without replacing a profile');
 const duplicatePlace=structuredClone(googleMerge.catalogue);duplicatePlace.workshops.find(w=>w.id==='sonic-garage').google={...googleOnly.google};duplicatePlace.googleImport.matchedPlaceIds++;
@@ -40,8 +50,8 @@ const fabricatedComplete=structuredClone(catalogue);fabricatedComplete.coverage.
 assert.throws(()=>validateWorkshopCatalogue(fabricatedComplete));
 // A larger independently sourced fixture uses the same import, with no production writes.
 const base=catalogue.workshops.find(w=>w.id==='sonic-garage');
-const large=Array.from({length:1700},(_,i)=>({...structuredClone(base),id:`fixture-workshop-${i}`,name:`Fixture workshop ${i}`,phone:`+383490${String(i).padStart(4,'0')}`,google:{placeId:null,matchedAt:null,snapshot:null}}));
+const large=Array.from({length:1700},(_,i)=>({...structuredClone(base),id:`fixture-workshop-${i}`,name:`Fixture workshop ${i}`,status:'draft',phone:`+383490${String(i).padStart(4,'0')}`,google:{placeId:null,matchedAt:null,snapshot:null}}));
 const largeImport=mergeWorkshopCatalogue(catalogue,large);
 assert.equal(largeImport.report.added.length,1700);assert.equal(largeImport.catalogue.workshops.length,1863);
 assert.equal(mergeWorkshopCatalogue(largeImport.catalogue,large).report.added.length,0,'repeat bulk import is idempotent');
-console.log(JSON.stringify({publicSource:78,draftsPreserved:85,duplicateDetection:true,googleRatingsSeparate:true,bulkFixture:1700,actualGoogleRequests:0}));
+console.log(JSON.stringify({publicSource:71,draftsPreserved:92,duplicateDetection:true,googleRatingsSeparate:true,bulkFixture:1700,actualGoogleRequests:0}));

@@ -32,21 +32,28 @@ assert.equal(oldProfiles.length,113);
 assert.equal(new Set(curated.map(w=>w.id)).size,163);
 const oldPhones=new Set(oldProfiles.map(w=>w.phone));
 assert.equal(new Set(newProfiles.map(w=>w.phone)).size,50);
-for(const w of newProfiles){assert(!oldPhones.has(w.phone),'new workshop has a distinct phone');assert.equal(directory.validateProfile(w,w.id).status,'published');}
+for(const w of newProfiles){assert(!oldPhones.has(w.phone),'new workshop has a distinct phone');assert.equal(directory.validateProfile(w,w.id).status,w.status);}
 
-// Reproduce an already seeded installation with 28 public profiles and 85 drafts.
+// Reproduce an installation seeded with the retained original profiles.
 const insert=sqlite.prepare(`INSERT INTO workshops (${directory.profileColumns.join(',')}) VALUES (${directory.profileColumns.map(()=>'?').join(',')})`);
 for(const profile of oldProfiles)insert.run(...directory.profileValues(profile));
 sqlite.prepare('INSERT INTO catalog_state (key,value) VALUES (?,?)').run('initial-catalog-v3-113','2026-10-02');
 const before=sqlite.prepare('SELECT * FROM workshops ORDER BY id').all();
 let workshops=await directory.listWorkshops();
-assert.equal(workshops.length,78,'old seeded installation gains exactly 50 public workshops');
+assert.equal(workshops.length,71,'only confirmed passenger-workshop profiles become public');
 assert.equal((await directory.listWorkshops(true)).length,163);
-assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM workshops WHERE status='draft'").get().n,85);
+for(const entry of JSON.parse(await readFile('data/workshop-scope.json','utf8')).excluded){
+ assert(!workshops.some(w=>w.id===entry.workshopId),'out-of-scope entries are absent from the public catalogue');
+ const retained=(await directory.listWorkshops(true)).find(w=>w.id===entry.workshopId);assert.equal(retained.status,'draft');
+ assert.throws(()=>directory.validateProfile({...retained,status:'published'},retained.id),/Pkw/,'administrators cannot accidentally republish excluded truck entries');
+}
+assert(!workshops.some(w=>w.id==='auto-electronics'),'unconfirmed Google identity remains a draft');
+
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM workshops WHERE status='draft'").get().n,92);
 const after=sqlite.prepare('SELECT * FROM workshops ORDER BY id').all().filter(w=>!added.has(w.id));
 assert.deepEqual(after,before,'existing profile fields and publication state are preserved');
 assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM workshop_google_ratings').get().n,78);
-assert(manifest.originalPublishedWorkshopIds.every(id=>workshops.find(w=>w.id===id)?.googleRating),'all 28 old public profiles get separate Google metadata');
+assert(manifest.originalPublishedWorkshopIds.every(id=>(catalogue.workshops.find(w=>w.id===id)?.google.snapshot)),'all original profiles retain their separate Google metadata, including hidden profiles');
 assert.equal(workshops.filter(w=>w.googleRating.rating!==null).length,5,'only sourced Google scores are numeric');
 assert.equal(workshops.filter(w=>w.googleRating.count!==null).length,4);
 assert(workshops.every(w=>w.rating===null&&w.count===0),'Google stars never create Riparim reviews');
@@ -107,4 +114,4 @@ assert.equal(edited.googleRating.rating,4.9,'older imported snapshot never overw
 assert.equal(edited.rating,3,'Google import does not modify visit aggregate');
 assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM workshops').get().n,163);
 sqlite.close();
-console.log(JSON.stringify({newWorkshops:50,publicWorkshops:78,existingDraftsPreserved:85,verifiedGoogleScores:5,independentRatingRevision:true,independentRatings:true,idempotentImport:true,storage:'isolated SQLite fixture',productionTouched:false}));
+console.log(JSON.stringify({newWorkshops:50,publicWorkshops:71,existingDraftsPreserved:92,verifiedGoogleScores:5,independentRatingRevision:true,independentRatings:true,idempotentImport:true,storage:'isolated SQLite fixture',productionTouched:false}));

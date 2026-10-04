@@ -3,10 +3,22 @@ import {storage} from "./storage";
 import {verifiedGooglePlace,verifiedGooglePlaceFromMapsLink,googleMapsLinkSearchRequest,validGooglePlaceId,workshopIdentityHash,googlePlaceSearchRequest,normalizeWorkshopPhone,type GooglePlaceCandidate} from "@/lib/google-place-identity";
 import {googlePlaceIdFromMapsUrl,googleMapsCid} from "@/lib/google-maps-link";
 import type {Workshop} from "@/lib/workshops";
+import type {ProfileInput} from "./directory";
 
 export function googlePlacesConfiguration(){const browserKey=(env.GOOGLE_MAPS_BROWSER_API_KEY??"").trim(),serverKey=(env.GOOGLE_PLACES_SERVER_API_KEY??"").trim();return {enabled:!!browserKey&&!!serverKey,browserKey,serverKey};}
 type MatchRow={place_id:string|null;profile_hash:string;checked_at:number;retry_after:number};
 const DAY=86400000;
+const identityFields=["name","phone","city","address","lat","lng"] as const;
+// Existing identity links are reusable only while the business identity stays unchanged.
+// New/changed profiles must pass the same strict matcher as public widgets.
+export async function confirmedPublicationPlace(profile:ProfileInput,existing?:Workshop):Promise<string|null>{
+ const unchanged=!!existing&&identityFields.every(field=>existing[field]===profile[field]);
+ const workshop:Workshop={...profile,initials:"",color:"green",rating:null,count:0,googleRating:unchanged?existing.googleRating:null};
+ const id=(unchanged?googlePlaceIdFromMapsUrl(existing.googleRating?.mapsUrl):null)??await resolveWorkshopGooglePlace(workshop);
+ if(!id)return null;
+ const other=await storage().db.prepare("SELECT g.workshop_id FROM workshop_google_places g INNER JOIN workshops w ON w.id=g.workshop_id WHERE g.place_id=? AND g.workshop_id<>? LIMIT 1").bind(id,profile.id).first();
+ return other?null:id;
+}
 export async function resolveWorkshopGooglePlace(workshop:Workshop):Promise<string|null>{
  const config=googlePlacesConfiguration();if(!config.enabled)return null;
  const {db}=storage(),now=Date.now(),hash=await workshopIdentityHash(workshop);

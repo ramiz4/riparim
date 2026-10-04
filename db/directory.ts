@@ -2,6 +2,7 @@ import { storage } from "./storage";
 import canonical from "@/data/workshops.json";
 import {validateWorkshopCatalogue,workshopCatalogueSchema} from "@/lib/workshop-source";
 import {workshopIdentityHash} from "@/lib/google-place-identity";
+import {workshopScopeExclusion} from "@/lib/workshop-scope";
 import {services,cities,type Workshop,type Source,type GoogleRating} from "@/lib/workshops";
 export const profileColumns=["id","name","city","address","phone","phone_note","whatsapp","brands","services","service_details","languages","specialty","description","lat","lng","sources","checked_at","status","updated_at"];
 export type ProfileInput=Omit<Workshop,"initials"|"color"|"rating"|"count"|"googleRating">;
@@ -52,6 +53,7 @@ export function validateProfile(body:Record<string,unknown>,id:string):ProfileIn
  const inputSources=Array.isArray(body.sources)?body.sources:[];const sources:Source[]=inputSources.slice(0,8).map(item=>{if(!item||typeof item!=="object")throw Error("Bitte ergänze gültige Quellen.");const r=item as Record<string,unknown>;const u=new URL(String(r.url));if(u.protocol!=="https:"||u.username||u.password)throw Error("Quellen müssen HTTPS-Links ohne Zugangsdaten sein.");const directorySource=r.kind==="directory"||/(^|\.)(cybo\.com|gjirafa\.biz|mapcarta\.com)$/.test(u.hostname);return {url:u.href,title:String(r.title??u.hostname).slice(0,150),...(directorySource?{kind:"directory" as const}:r.kind==="official"?{kind:"official" as const}:{})};});
  const today=new Date().toISOString().slice(0,10);if(name.length<3||!cities.slice(1).includes(city)||address.length<5||!/^\+[1-9]\d{7,14}$/.test(phone)||!serviceList.length||!serviceDetails.length||serviceList.some(v=>!services.slice(1).includes(v))||description.length<20||specialty.length<3||!/^\d{4}-\d{2}-\d{2}$/.test(checkedAt)||!Number.isFinite(Date.parse(checkedAt))||new Date(checkedAt).toISOString().slice(0,10)!==checkedAt||checkedAt>today)throw Error("Bitte prüfe Name, Ort, Adresse, Telefonnummer, Marke, Leistungen, Beschreibung und Prüfdatum.");
  if(whatsapp&&!/^\+[1-9]\d{7,14}$/.test(whatsapp))throw Error("Bitte ergänze WhatsApp als internationale Telefonnummer oder lasse das Feld leer.");if(status==="published"&&!sources.length)throw Error("Ein veröffentlichtes Profil braucht mindestens eine nachvollziehbare Quelle.");
+ if(status==="published"&&workshopScopeExclusion({id,name}))throw Error("Riparim veröffentlicht Pkw-Werkstätten. "+workshopScopeExclusion({id,name})+" Bitte als Entwurf speichern.");
  const lat=body.lat===null||body.lat===undefined||body.lat===""?null:Number(body.lat),lng=body.lng===null||body.lng===undefined||body.lng===""?null:Number(body.lng);if((lat===null)!==(lng===null)||(lat!==null&&(!Number.isFinite(lat)||lat<41.8||lat>43.3||!Number.isFinite(lng)||lng!<19.8||lng!>21.9)))throw Error("Bitte ergänze gültige Koordinaten in Kosovo oder lasse beide Felder leer.");
  return {id,name,city,address,phone,phoneNote:text("phoneNote",150),whatsapp,brands:brandList,services:serviceList,serviceDetails,languages,specialty,description,lat,lng,sources,checkedAt,status,updatedAt:new Date().toISOString()};
 }

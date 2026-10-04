@@ -1,6 +1,8 @@
 import {z} from "zod";
 import {normalizeWorkshopPhone,validGooglePlaceId} from "./google-place-identity";
+import {googlePlaceIdFromMapsUrl,googleMapsPlaceUrl} from "./google-maps-link";
 import {services} from "./workshops";
+import {workshopScopeExclusion} from "./workshop-scope";
 
 const https=z.string().url().refine(value=>{const u=new URL(value);return u.protocol==="https:"&&!u.username&&!u.password;},"HTTPS-Quelle ohne Zugangsdaten erforderlich");
 const timestamp=z.string().refine(value=>Number.isFinite(Date.parse(value)),"Ungültiges Datum");
@@ -12,11 +14,16 @@ export const workshopSourceEntrySchema=z.object({
  id:z.string().regex(/^[a-z0-9][a-z0-9-]{1,99}$/),name:z.string().min(3).max(120),city:z.string().min(2).max(80),address:z.string().min(5).max(250),phone:z.string().regex(/^\+[1-9]\d{7,14}$/),phoneNote:z.string().max(150),whatsapp:z.union([z.literal(""),z.string().regex(/^\+[1-9]\d{7,14}$/)]),
  brands:texts,services:texts.min(1),serviceDetails:texts.min(1),languages:texts.max(8),specialty:z.string().min(3).max(100),description:z.string().min(20).max(2000),lat:z.number().min(41.8).max(43.3).nullable(),lng:z.number().min(19.8).max(21.9).nullable(),
  sources:z.array(z.object({url:https,title:z.string().min(1).max(150),kind:z.enum(["official","directory"]).optional()}).strict()).min(1).max(8),checkedAt:date,status:z.enum(["draft","published"]),updatedAt:timestamp,
- google:z.object({placeId:z.string().refine(validGooglePlaceId).nullable(),matchedAt:timestamp.nullable(),snapshot:snapshot.nullable()}).strict()
+ google:z.object({placeId:z.string().refine(validGooglePlaceId).nullable(),matchedAt:timestamp.nullable(),snapshot:snapshot.nullable(),verification:z.object({method:z.enum(["official_maps","official_website","phone_and_location","name_and_address"]),sourceUrls:z.array(https).min(1).max(8),note:z.string().min(10).max(500)}).strict().optional()}).strict()
 }).strict().superRefine((w,ctx)=>{
  if(w.services.some(service=>!services.slice(1).includes(service)))ctx.addIssue({code:z.ZodIssueCode.custom,message:"Unbekannte Leistungskategorie"});
  if((w.lat===null)!==(w.lng===null))ctx.addIssue({code:z.ZodIssueCode.custom,message:"Koordinaten müssen paarweise vorliegen"});
  if((w.google.placeId===null)!==(w.google.matchedAt===null))ctx.addIssue({code:z.ZodIssueCode.custom,message:"Place-ID und Zuordnungsdatum müssen zusammen vorliegen"});
+ if(w.status==="published"&&!w.google.placeId)ctx.addIssue({code:z.ZodIssueCode.custom,message:"Veröffentlichte Werkstätten brauchen eine bestätigte Google-Zuordnung"});
+ if(w.status==="published"&&workshopScopeExclusion(w))ctx.addIssue({code:z.ZodIssueCode.custom,message:"Nur bestätigte Pkw-Werkstatteinträge veröffentlichen: "+workshopScopeExclusion(w)});
+ const linkedId=googlePlaceIdFromMapsUrl(w.google.snapshot?.mapsUrl);
+ if(linkedId&&linkedId!==w.google.placeId)ctx.addIssue({code:z.ZodIssueCode.custom,message:"Google-Kartenlink und Place-ID müssen denselben Eintrag bezeichnen"});
+ if(w.google.verification&&!w.google.placeId)ctx.addIssue({code:z.ZodIssueCode.custom,message:"Ein Zuordnungsnachweis braucht eine Place-ID"});
 });
 export type WorkshopSourceEntry=z.infer<typeof workshopSourceEntrySchema>;
 export const workshopCatalogueSchema=z.object({
@@ -65,7 +72,12 @@ export function mergeWorkshopCatalogue(current:WorkshopCatalogue,incoming:unknow
   const newerSnapshot=!!candidate.google.snapshot&&(!existing.google.snapshot||Date.parse(candidate.google.snapshot.checkedAt)>Date.parse(existing.google.snapshot.checkedAt));
   const identityChanged=newerProfile&&(["name","phone","city","address","lat","lng"] as const).some(key=>candidate[key]!==existing[key]);
   if(!newerProfile&&!newerIdentity&&!newerSnapshot){report.unchanged.push(existing.id);continue;}
-  const merged={...(newerProfile?candidate:existing),id:existing.id,google:{placeId:newerIdentity?candidate.google.placeId:identityChanged?null:existing.google.placeId,matchedAt:newerIdentity?candidate.google.matchedAt:identityChanged?null:existing.google.matchedAt,snapshot:newerSnapshot?candidate.google.snapshot:existing.google.snapshot}};
+  const merged={...(newerProfile?candidate:existing),id:existing.id,google:{placeId:newerIdentity?candidate.google.placeId:identityChanged?null:existing.google.placeId,matchedAt:newerIdentity?candidate.google.matchedAt:identityChanged?null:existing.google.matchedAt,snapshot:newerSnapshot?candidate.google.snapshot:existing.google.snapshot,verification:newerIdentity?candidate.google.verification:identityChanged?undefined:existing.google.verification}};
+  if(merged.google.snapshot){
+   merged.google.snapshot={...merged.google.snapshot};
+   if(merged.google.placeId)merged.google.snapshot.mapsUrl=googleMapsPlaceUrl(merged.google.placeId,`${merged.name} ${merged.address}`);
+   else if(identityChanged)merged.google.snapshot.mapsUrl=`https://www.google.com/maps/search/?${new URLSearchParams({api:"1",query:`${merged.name} ${merged.address} Kosovo`})}`;
+  }
   workshops[workshops.indexOf(existing)]=merged;report.updated.push(existing.id);
  }
  workshops.sort((a,b)=>a.id.localeCompare(b.id));const stats=catalogueStats(workshops);
