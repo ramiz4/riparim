@@ -18,7 +18,7 @@ globalThis.fetch=async(path,options)=>{
 };
 
 const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
-const bundle=await build({stdin:{contents:`export {SiteHeader} from './components/site-header';export {default as AdminPanel} from './app/verwaltung/panel';export {default as AdminReviews} from './app/verwaltung/bewertungen/reviews';export {default as AdminUsers} from './app/verwaltung/benutzer/users';export {default as AuthSetup} from './app/verwaltung/anmeldung/setup';`,resolveDir:process.cwd(),loader:'tsx'},bundle:true,platform:'node',format:'esm',outfile:'.test-runtime/admin-menu/header.mjs',write:false,packages:'external',loader:{'.css':'empty'},define:{'process.env.__VINEXT_HAS_PAGES_ROUTER':'"false"','process.env.__VINEXT_HAS_CLIENT_REWRITES':'"false"'},plugins:[{name:'app-router-boundary',setup(b){
+const bundle=await build({stdin:{contents:`export {SiteHeader} from './components/site-header';export {default as RouterLink} from 'next/link';export {default as AdminPanel} from './app/verwaltung/panel';export {default as AdminReviews} from './app/verwaltung/bewertungen/reviews';export {default as AdminUsers} from './app/verwaltung/benutzer/users';export {default as AuthSetup} from './app/verwaltung/anmeldung/setup';`,resolveDir:process.cwd(),loader:'tsx'},bundle:true,platform:'node',format:'esm',outfile:'.test-runtime/admin-menu/header.mjs',write:false,packages:'external',loader:{'.css':'empty'},define:{'process.env.__VINEXT_HAS_PAGES_ROUTER':'"false"','process.env.__VINEXT_HAS_CLIENT_REWRITES':'"false"'},plugins:[{name:'app-router-boundary',setup(b){
  b.onResolve({filter:/^next\/link$/},()=>({path:new URL('../node_modules/vinext/dist/shims/link.js',import.meta.url).pathname}));
  // Exercise the real Link and Radix menu with an App Router that never commits.
  b.onResolve({filter:/^\.\/navigation\.js$/},args=>args.importer.endsWith('/shims/link.js')?{path:'stalled-router',namespace:'fixture'}:undefined);
@@ -28,13 +28,13 @@ await mkdir('.test-runtime/admin-menu',{recursive:true});
 await writeFile('.test-runtime/admin-menu/header.mjs',bundle.outputFiles[0].contents);
 const {createElement,act}=await import('react');
 const {createRoot}=await import('react-dom/client');
-const {SiteHeader,AdminPanel,AdminReviews,AdminUsers,AuthSetup}=await import(new URL('../.test-runtime/admin-menu/header.mjs',import.meta.url));
+const {SiteHeader,RouterLink,AdminPanel,AdminReviews,AdminUsers,AuthSetup}=await import(new URL('../.test-runtime/admin-menu/header.mjs',import.meta.url));
 window[Symbol.for('vinext.navigationRuntime')]={bootstrap:{routeManifest:null,rsc:undefined},functions:{navigate:()=>new Promise(()=>{})}};
 globalThis.routerAttempts=[];
 const documents=[];
 document.addEventListener('click',event=>{
  const link=event.target.closest('a');
- if(link&&!event.defaultPrevented){documents.push(new URL(link.href).pathname);event.preventDefault();}
+ if(link&&!event.defaultPrevented){const url=new URL(link.href);documents.push(url.pathname+url.search+url.hash);event.preventDefault();}
 });
 
 const root=createRoot(document.getElementById('root'));
@@ -46,34 +46,41 @@ async function openMenu(){
 }
 
 try{
- for(const email of ['first-admin@example.test','second-admin@example.test']){
-  await render(email,true);
-  for(const [label,path] of [['Verwaltung','/verwaltung'],['Bewertungen prüfen','/verwaltung/bewertungen']]){
+ const destinations=[['Mein Betrieb','/betrieb'],['Meine Bewertungen','/?besuche=1'],['Bewerten','/?nachweis=neu'],['Einstellungen','/einstellungen']];
+ for(const [email,isAdmin] of [['customer@example.test',false],['first-admin@example.test',true],['second-admin@example.test',true]]){
+  await render(email,isAdmin);
+  for(const [label,path] of [...destinations,...(isAdmin?[['Verwalten','/verwaltung']]:[])]){
    for(const input of ['click','Enter']){
     await openMenu();
-    const item=[...document.querySelectorAll('[role="menuitem"]')].find(node=>node.textContent===label);
+    const items=[...document.querySelectorAll('[role="menuitem"]')];
+    assert.equal(items.filter(node=>node.textContent==='Verwalten').length,isAdmin?1:0,'only admins receive the single management entry');
+    assert(!items.some(node=>node.textContent==='Bewertungen prüfen'),'the redundant review shortcut is absent from the user menu');
+    const item=items.find(node=>node.textContent===label);
     assert(item,`${label} is available to ${email}`);
     assert.equal(item.getAttribute('href'),path);
-    const before=documents.length;
-    await act(async()=>{
-     if(input==='Enter'){item.focus();item.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true}));}
-     else item.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,button:0}));
-    });
-    assert.equal(documents.length,before+1,`${email}: ${input} on ${label} must open the destination even when the client router stalls`);
-    assert.equal(documents.at(-1),path);
+    await activate(item,input);
     assert.equal(document.querySelector('[role="menu"]'),null,'selection closes the menu');
    }
   }
  }
- await render('customer@example.test',false);
- await openMenu();
- assert(![...document.querySelectorAll('[role="menuitem"]')].some(node=>['Verwaltung','Bewertungen prüfen'].includes(node.textContent)),'customers do not receive admin entries');
- assert.deepEqual(routerAttempts,[],'admin navigation does not depend on the stalled client router');
- const control=[...document.querySelectorAll('[role="menuitem"]')].find(node=>node.textContent==='Meine Bewertungen');
+ assert.deepEqual(routerAttempts,[],'header destinations do not depend on the stalled client router');
+ let visits=0,reviews=0;
+ await act(async()=>root.render(createElement(SiteHeader,{account:{email:'customer@example.test',displayName:'Fixture account',provider:'Google'},onVisits:()=>visits++,onNewVisit:()=>reviews++})));
+ for(const label of ['Meine Bewertungen','Bewerten']){
+  await openMenu();
+  const item=[...document.querySelectorAll('[role="menuitem"]')].find(node=>node.textContent===label),before=documents.length;
+  await act(async()=>{item.focus();item.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true}));});
+  assert.equal(documents.length,before,'page-owned review actions preserve their local dialogs');
+  assert.equal(document.querySelector('[role="menu"]'),null);
+ }
+ assert.equal(visits,1);assert.equal(reviews,1);
+ // The real Link control demonstrates that the fixture can detect a consumed
+ // click, so the document-navigation assertions above cannot pass vacuously.
+ await act(async()=>root.render(createElement(RouterLink,{href:'/betrieb'},'Router control')));
  const before=documents.length;
- await act(async()=>control.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,button:0})));
- assert.deepEqual(routerAttempts,['/?besuche=1'],'the control link exercises the real client-router boundary');
- assert.equal(documents.length,before,'the stalled client-router control cannot load a document');
+ await act(async()=>document.querySelector('a').click());
+ assert.deepEqual(routerAttempts,['/betrieb'],'the control exercises the actual client-router boundary');
+ assert.equal(documents.length,before,'a stalled client-router control cannot load a document');
  routerAttempts.length=0;
  const sections=[['Werkstätten','/verwaltung','workshops'],['Bewertungen prüfen','/verwaltung/bewertungen','reviews'],['Benutzer','/verwaltung/benutzer','users'],['Betriebe','/verwaltung/betriebe','business'],['Login & Registrierung','/verwaltung/anmeldung','login']];
  async function activate(link,input){
@@ -86,7 +93,7 @@ try{
    }else link.click();
   });
   assert.equal(documents.length,before+1,`${input} on ${link.textContent} must load the destination when the client router stalls`);
-  assert.equal(documents.at(-1),new URL(link.href).pathname);
+  assert.equal(documents.at(-1),new URL(link.href).pathname+new URL(link.href).search+new URL(link.href).hash);
  }
  for(const email of ['first-admin@example.test','second-admin@example.test']){
   for(const [Page,active] of [[AdminPanel,'workshops'],[AdminReviews,'reviews'],[AdminUsers,'users'],[AuthSetup,'login']]){
@@ -125,7 +132,7 @@ try{
    await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));
   }
  }finally{globalThis.fetch=originalFetch;}
- console.log('Admin navigation: both accounts, all existing pages and business link, mouse/keyboard, shortcuts, active section and customer visibility passed');
+ console.log('Header and admin navigation: business, account and single management entry, page-owned review actions, all admin sections, mouse/keyboard and role visibility passed');
 }finally{
  await act(async()=>root.unmount());
  dom.window.close();

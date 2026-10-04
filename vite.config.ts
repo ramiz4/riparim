@@ -7,37 +7,9 @@ import { sites } from "./build/sites-vite-plugin";
 import { connectorPreview } from "./build/connector-preview-plugin.mjs";
 import { releaseBuildTarget, sitesBuildConfiguration } from "./scripts/release-policy.mjs";
 
-const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
-  "00000000-0000-4000-8000-000000000000";
-
-const { d1, r2 } = hostingConfig;
-
 // macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
 const managedLinux = readExecutionProfile() === "managed-linux";
-
-const localBindingConfig = {
-  triggers: { crons: ["*/5 * * * *"] },
-  main: "./build/sites-worker.ts",
-  compatibility_flags: ["nodejs_compat"],
-  d1_databases: d1
-    ? [
-        {
-          binding: d1,
-          database_name: "site-creator-d1",
-          database_id: SITE_CREATOR_PLACEHOLDER_DATABASE_ID,
-        },
-      ]
-    : [],
-  r2_buckets: r2
-    ? [
-        {
-          binding: r2,
-          bucket_name: "site-creator-r2",
-        },
-      ]
-    : [],
-};
 
 export default defineConfig(async ({ command }) => {
   const buildTarget = releaseBuildTarget(process.env.BUILD_TARGET);
@@ -73,15 +45,14 @@ export default defineConfig(async ({ command }) => {
       sites({ mockAuth: !managedLinux }),
       connectorPreview(),
       cloudflare({
-        configPath: command === "build" && buildTarget === "sites" ? "./wrangler.sites.jsonc" : "./wrangler.jsonc",
+        configPath: command === "serve" || buildTarget === "sites" ? "./wrangler.sites.jsonc" : "./wrangler.jsonc",
         viteEnvironment: { name: "rsc", childEnvironments: ["ssr"] },
         inspectorPort: false,
-        // Sites builds start from a separate Wrangler file because the plugin
-        // merges binding arrays with those already in the source configuration.
-        config: command === "serve" ? (config) => ({
-          ...config,
-          ...localBindingConfig,
-          vars: { ...config.vars, SITE_ORIGIN: process.env.SITE_ORIGIN ?? "http://127.0.0.1:5174" },
+        // The plugin concatenates arrays. Local previews and Sites builds use
+        // the same logical bindings over a base without production resources.
+        config: command === "serve" ? () => ({
+          ...sitesBuildConfiguration(hostingConfig),
+          vars: { SITE_ORIGIN: process.env.SITE_ORIGIN ?? "http://127.0.0.1:5174" },
           services: [{ binding: "CONNECTORS", service: "sites-connector-preview", entrypoint: "ConnectorPreview" }],
         }) : buildTarget === "sites" ? () => sitesBuildConfiguration(hostingConfig) : undefined,
         ...(command === "serve"

@@ -1,0 +1,11 @@
+.navbar{position:sticky;top:0;z-index:30;background:#fff;border-bottom:0;backdrop-filter:none}
+.navbar .header.wrap{width:min(1440px,calc(100% - 112px))}
+.navbar .header-right{margin-left:auto;flex-shrink:0}
+.navbar .header-auth{font-size:15px}
+.navbar a:focus-visible{outline:3px solid #00857b;outline-offset:5px;border-radius:4px}
+@media(max-width:1000px){
+ .navbar .header.wrap{width:calc(100% - 64px)}
+}
+@media(max-width:720px){
+ .navbar .header.wrap{width:calc(100% - 2*var(--page-gutter))}
+}
