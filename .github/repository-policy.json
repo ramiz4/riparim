@@ -1,0 +1,24 @@
+{
+  "repository": "ramiz4/riparim",
+  "merge": {
+    "allow_squash_merge": true,
+    "allow_merge_commit": false,
+    "allow_rebase_merge": false,
+    "squash_merge_commit_title": "PR_TITLE",
+    "squash_merge_commit_message": "PR_BODY"
+  },
+  "main": {
+    "required_status_checks": {
+      "strict": true,
+      "contexts": ["Tests, types, lint and build", "Conventional PR title"]
+    },
+    "enforce_admins": true,
+    "required_pull_request_reviews": {
+      "required_approving_review_count": 0
+    },
+    "restrictions": null,
+    "required_linear_history": true,
+    "allow_force_pushes": false,
+    "allow_deletions": false
+  }
+}

@@ -15,7 +15,7 @@ Website: [riparim.com](https://riparim.com)
 
 ## Lokal starten
 
-Voraussetzungen: Node.js ab 22.13 und npm.
+Voraussetzungen: Node.js 22 ab 22.14 oder ab 24.10 und npm. CI verwendet Node.js 24.
 
 ```sh
 npm run install:ci
@@ -57,10 +57,10 @@ npm run build
 
 Die ergänzende Live- und Browserprüfung steht in [docs/customer-flow-qa.md](docs/customer-flow-qa.md). Die dokumentierte Bestandsprüfung in `data/catalogue-review-2026-10-04.json` führt die unabhängigen Quellen und zurückgestellten Standortkonflikte auf.
 
-GitHub Actions führt Katalogprüfung, Tests, TypeScript, Lint und Worker-Build bei Pull Requests und nach Änderungen an `main` mit dem bestehenden Lockfile aus. Die Prüfung benötigt keine Produktionsgeheimnisse und veröffentlicht die Site nicht automatisch.
+GitHub Actions prüft Katalog, Tests, TypeScript, Lint und Worker-Build bei Pull Requests. Nach einem Squash-Merge nach `main` erstellt `semantic-release` bei relevanten Conventional Commits einen versionierten GitHub Release mit dem geprüften Worker-Artefakt. Details stehen in [docs/releases.md](docs/releases.md).
 
 ## Veröffentlichung
 
-Das Projekt wird über OpenAI Sites veröffentlicht. `.openai/hosting.json` enthält die bestehende Projektzuordnung und die logischen D1-/R2-Bindungen. Laufzeitwerte und Geheimnisse werden außerhalb von Git verwaltet. Ein GitHub-Push löst keine automatische Veröffentlichung aus.
+Das Projekt wird über OpenAI Sites veröffentlicht. `.openai/hosting.json` enthält die bestehende Projektzuordnung und die logischen D1-/R2-Bindungen. Laufzeitwerte und Geheimnisse werden außerhalb von Git verwaltet. Produktion darf nur einen erfolgreich geprüften GitHub Release aus dem gemergten `main` übernehmen; offene PRs werden nicht veröffentlicht. Das aktuelle Sites-Hosting bietet noch keinen dokumentierten Deploy-Zugang aus GitHub Actions.
 
 Sites-Veröffentlichungen verwenden den passenden Sites-Workflow: geprüften Quellstand speichern, Worker-Artefakt bauen und die gespeicherte Version deployen. Produktionsmigrationen werden dabei über Sites angewendet. Ein lokaler Worker kann mit `npm start -- --port 5175` geprüft werden.

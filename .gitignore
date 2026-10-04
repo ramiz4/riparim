@@ -47,3 +47,6 @@ next-env.d.ts
 /outputs/
 /work/
 /.test-runtime/
+
+# CI release archives
+/artifacts/
