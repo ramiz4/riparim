@@ -173,6 +173,8 @@ bleiben erhalten.
 Die freigegebene Rückfallphase ist beendet. Die alte **öffentliche** Veröffentlichung
 ist kontrolliert stillgelegt; das aktive Hostingprojekt und seine physischen
 Ressourcen bleiben zur Aufbewahrung erhalten. Dies ist keine Projektlöschung.
+Die Ausführung lief von 09:52:54 bis 09:58:38 Europe/Belgrade; danach folgte
+die Nachprüfung ohne öffentliche Wartungspause.
 
 | Tatsächlich ausgeführt | Ergebnis |
 | --- | --- |
