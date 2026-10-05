@@ -1,19 +1,19 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-05T09:14:49.418Z",
+  "updatedAt": "2026-10-05T10:08:45.026Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 112,
-    "drafts": 51,
+    "published": 125,
+    "drafts": 38,
     "estimatedTotal": 1700,
     "estimateSource": "user",
     "complete": false
   },
   "googleImport": {
     "status": "completed",
-    "reason": "Alle 112 veröffentlichten Pkw-Werkstätten sind eindeutig zugeordnet. 45 Entwürfe benötigen weiterhin eine bestätigte Place ID; sechs fachlich ausgeschlossene Einträge bleiben ausgeblendet. Beide früheren Standortkonflikte wurden anhand aktueller Betriebsquellen gelöst.",
-    "matchedPlaceIds": 118,
+    "reason": "Alle 125 veröffentlichten Pkw-Werkstätten sind eindeutig zugeordnet. Weitere Entwürfe benötigen bestätigte Identitäts- oder Filialbelege; sechs fachliche Ausschlüsse und ein belegter geschlossener Betrieb bleiben ausgeblendet.",
+    "matchedPlaceIds": 131,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -405,19 +405,28 @@
         }
       ],
       "checkedAt": "2026-10-05",
-      "status": "draft",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "status": "published",
+      "updatedAt": "2026-10-05T10:08:45.026Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJox3Nl9OfVBMRe4yWuczSZZw",
+        "matchedAt": "2026-10-05T10:08:45.026Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/?cid=11269645419293346939",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto-Diagnostika+Lord+Bajron+77%2C+Prishtina+10000&query_place_id=ChIJox3Nl9OfVBMRe4yWuczSZZw",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "checkedAt": "2026-10-05T10:08:45.026Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.njoftime.com/threads/prishtine-auto-diagnostika-prishtin%C3%AB.378447/",
+            "https://www.gjithebiznesi.com/XK/auto-servis-auto-diagnostika-044-112-914",
+            "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJox3Nl9OfVBMRe4yWuczSZZw"
+          ],
+          "note": "Eigene Anzeige belegt ausschließlich Pkw-Fehlerdiagnose. Unabhängige aktuelle Anschrift und Telefon bestätigen denselben direkt geprüften Karten-Eintrag."
         }
       }
     },
@@ -946,13 +955,29 @@
           "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "checkedAt": "2026-10-05",
+      "status": "published",
+      "updatedAt": "2026-10-05T10:08:45.026Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJebOcSQCfVBMRenUNUpgt-kA",
+        "matchedAt": "2026-10-05T10:08:45.026Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "sourceUpdatedAt": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Laker+Kimi+V%C3%ABll%C3%ABz%C3%ABrit+Fazliu%2C+Prishtin%C3%AB&query_place_id=ChIJebOcSQCfVBMRenUNUpgt-kA",
+          "checkedAt": "2026-10-05T10:08:45.026Z"
+        },
+        "verification": {
+          "method": "name_and_address",
+          "sourceUrls": [
+            "https://stgres.gjirafa.biz/auto-laker-kimi-1",
+            "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJebOcSQCfVBMRenUNUpgt-kA"
+          ],
+          "note": "Betriebsname, eigener Foto-/Leistungsbeleg und der profilspezifische Marker im unabhängigen Verzeichnis bestätigen den präzisen Standort des gültigen Google-Eintrags. Dort fehlt eine Telefonnummer; der Verzeichniskontakt bleibt als solcher gekennzeichnet."
+        }
       }
     },
     {
@@ -1476,24 +1501,28 @@
     },
     {
       "id": "auto-pjese-service-inovator-group-ferizaj",
-      "name": "Auto Pjesë&Service INOVATOR group",
+      "name": "INOVATOR Automotive",
       "city": "Ferizaj",
-      "address": "Rr.Remzi Hoxha, Ferizaj",
-      "phone": "+38344907224",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
+      "address": "Rr. Brahim Ademi, Ferizaj 70000",
+      "phone": "+38349929000",
+      "phoneNote": "Aktueller Kontakt aus der eigenen Betriebswebsite",
       "whatsapp": "",
       "brands": [],
       "services": [
         "Inspektion & Wartung",
-        "Motor & Getriebe"
+        "Diagnose & Elektronik",
+        "Bremsen & Fahrwerk",
+        "Reifen & Klima"
       ],
       "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen.",
-        "Verzeichnis führt ausdrücklich Turboladerservice."
+        "Allgemeiner Pkw-Service laut eigener Betriebswebsite.",
+        "Elektronische Fahrzeugdiagnose.",
+        "Reparatur von Bremsen und Fahrwerk.",
+        "Service der Fahrzeugklimaanlage."
       ],
       "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Auto Pjesë&Service INOVATOR group in Ferizaj als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
+      "specialty": "Pkw-Service · Diagnose · Bremsen und Fahrwerk",
+      "description": "INOVATOR Automotive führt den früheren Auto Servis INOVATOR in Ferizaj fort. Die eigene Website beschreibt allgemeine Wartung, elektronische Diagnose, Bremsen- und Fahrwerksreparatur sowie Klimaservice. Kontakt und Standort stammen aus der aktuellen Betriebswebsite.",
       "lat": null,
       "lng": null,
       "sources": [
@@ -1501,15 +1530,48 @@
           "url": "https://stgres.gjirafa.biz/autoserviceinovatorgroup-1",
           "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://inovatorautomotive.com/historiku/",
+          "title": "Aktueller Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "official"
+        },
+        {
+          "url": "https://inovatorautomotive.com/kontakti/",
+          "title": "Aktueller Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "official"
+        },
+        {
+          "url": "https://maps.app.goo.gl/ekKSvRLUMb5tv1GKA",
+          "title": "Aktueller Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "checkedAt": "2026-10-05",
+      "status": "published",
+      "updatedAt": "2026-10-05T10:08:45.026Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJx-kdM1l-VBMRwc2PmJdYa4Q",
+        "matchedAt": "2026-10-05T10:08:45.026Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "sourceUpdatedAt": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=INOVATOR+Automotive+Rr.+Brahim+Ademi%2C+Ferizaj+70000&query_place_id=ChIJx-kdM1l-VBMRwc2PmJdYa4Q",
+          "checkedAt": "2026-10-05T10:08:45.026Z"
+        },
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://inovatorautomotive.com/historiku/",
+            "https://inovatorautomotive.com/kontakti/",
+            "https://maps.app.goo.gl/ekKSvRLUMb5tv1GKA",
+            "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJx-kdM1l-VBMRwc2PmJdYa4Q"
+          ],
+          "note": "Die eigene Unternehmensgeschichte belegt die Fortführung von Auto Servis INOVATOR als INOVATOR Automotive. Der eigene Kontakt und direkte Kartenlink bestätigen dieselbe Google-Identität auch ohne dort veröffentlichte Telefonnummer."
+        }
       }
     },
     {
@@ -2728,35 +2790,70 @@
       "name": "Auto Servis Cufa",
       "city": "Ferizaj",
       "address": "Bibaj-Ferizaj",
-      "phone": "+38344503560",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
+      "phone": "+38344453222",
+      "phoneNote": "Aktueller Kontakt aus Betriebsprofil und unabhängigem Verzeichnis",
       "whatsapp": "",
       "brands": [],
       "services": [
-        "Inspektion & Wartung"
+        "Inspektion & Wartung",
+        "Motor & Getriebe"
       ],
       "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
+        "Pkw-Wartung und Reparatur laut eigenem Betriebsprofil.",
+        "Steuerkettenwechsel am Audi A6 laut veröffentlichtem Betriebsbeitrag."
       ],
       "languages": [],
       "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Auto Servis Cufa in Ferizaj als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
+      "description": "Auto Servis Cufa in Bibaj bei Ferizaj bietet Pkw-Wartung und Reparatur an. Ein eigener Betriebsbeitrag dokumentiert Motorarbeiten und den Steuerkettenwechsel am Audi A6. Aktueller Kontakt und genauer Standort stammen aus dem Betriebsprofil; Termine und konkreten Umfang direkt bestätigen.",
+      "lat": 42.369790044229,
+      "lng": 21.192236004495,
       "sources": [
         {
           "url": "https://stgres.gjirafa.biz/auto-servis-cufa-2",
           "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://www.gjithebiznesi.com/XK/auto-servis-cufa-044-453-222",
+          "title": "Aktueller Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/people/Autoservis-Cufa/100066490786217/",
+          "title": "Aktueller Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/reel/931922949996718/",
+          "title": "Aktueller Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "checkedAt": "2026-10-05",
+      "status": "published",
+      "updatedAt": "2026-10-05T10:08:45.026Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJFTS-BHR_VBMRLDRPsHW-ogI",
+        "matchedAt": "2026-10-05T10:08:45.026Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "sourceUpdatedAt": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Cufa+Bibaj-Ferizaj&query_place_id=ChIJFTS-BHR_VBMRLDRPsHW-ogI",
+          "checkedAt": "2026-10-05T10:08:45.026Z"
+        },
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-servis-cufa-044-453-222",
+            "https://www.facebook.com/people/Autoservis-Cufa/100066490786217/",
+            "https://www.facebook.com/reel/931922949996718/",
+            "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJFTS-BHR_VBMRLDRPsHW-ogI"
+          ],
+          "note": "Aktuelles Betriebsprofil und unabhängiges Verzeichnis bestätigen Kontakt und Bibaj. Der vom Betrieb veröffentlichte Directions-Zielpunkt liegt höchstens 300 Meter vom selben Google-Eintrag entfernt; ein eigener Beitrag belegt Pkw-Motorarbeiten."
+        }
       }
     },
     {
@@ -2872,15 +2969,37 @@
           "url": "https://stgres.gjirafa.biz/auto-servis-ford-jashanica-1",
           "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://www.merrjep.com/shpallja/ford-servis-jashanica-autopjes-servisim/7226795",
+          "title": "Aktueller Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "checkedAt": "2026-10-05",
+      "status": "published",
+      "updatedAt": "2026-10-05T10:08:45.026Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJgxoAFyKfVBMRJOYQKh2Gejs",
+        "matchedAt": "2026-10-05T10:08:45.026Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "sourceUpdatedAt": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Ford+Jashanica+Lidhja+e+Prizrenit%2C+Prishtin%C3%AB&query_place_id=ChIJgxoAFyKfVBMRJOYQKh2Gejs",
+          "checkedAt": "2026-10-05T10:08:45.026Z"
+        },
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.merrjep.com/shpallja/ford-servis-jashanica-autopjes-servisim/7226795",
+            "https://stgres.gjirafa.biz/auto-servis-ford-jashanica-1",
+            "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJgxoAFyKfVBMRJOYQKh2Gejs"
+          ],
+          "note": "Die eigene Anzeige nennt die veröffentlichte Mobilnummer und dieselbe lokale Festnetznummer wie der Google-Eintrag unter historischer Vorwahl. Pkw-Service, Name und Straße sind unabhängig belegt."
+        }
       }
     },
     {
@@ -2966,13 +3085,29 @@
           "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:47:07.000Z",
+      "checkedAt": "2026-10-05",
+      "status": "published",
+      "updatedAt": "2026-10-05T10:08:45.026Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJPTLT0Z-vUxMRruPkPVs7l0Y",
+        "matchedAt": "2026-10-05T10:08:45.026Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "sourceUpdatedAt": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Gazi+Wesley+Clark%2C+Gjakov%C3%AB&query_place_id=ChIJPTLT0Z-vUxMRruPkPVs7l0Y",
+          "checkedAt": "2026-10-05T10:08:45.026Z"
+        },
+        "verification": {
+          "method": "name_and_address",
+          "sourceUrls": [
+            "https://stgres.gjirafa.biz/auto-servis-gazi-1",
+            "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJPTLT0Z-vUxMRruPkPVs7l0Y"
+          ],
+          "note": "Betriebsname, Reparaturfoto und der genaue profilspezifische Marker im unabhängigen Verzeichnis bestätigen genau diesen gültigen Google-Eintrag. Dort fehlt die Telefonnummer; der unabhängig belegte Verzeichniskontakt bleibt gekennzeichnet."
+        }
       }
     },
     {
@@ -3458,19 +3593,23 @@
       "name": "Auto Servis Maloku",
       "city": "Deçan",
       "address": "Lan dobraj, Deçan 51000",
-      "phone": "+38344178620",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
+      "phone": "+38348919694",
+      "phoneNote": "Aktueller sichtbarer Kontakt aus der eigenen Betriebswebsite",
       "whatsapp": "",
       "brands": [],
       "services": [
-        "Inspektion & Wartung"
+        "Inspektion & Wartung",
+        "Diagnose & Elektronik",
+        "Bremsen & Fahrwerk",
+        "Motor & Getriebe"
       ],
       "serviceDetails": [
-        "Kfz-Mechanik laut öffentlichem Verzeichnis Cybo; konkrete Reparaturarten bitte direkt bestätigen."
+        "Öl- und Filterwechsel für Pkw laut eigener Betriebswebsite.",
+        "Bremsen-, Motor-, Getriebe- und Elektrikreparatur sowie Fahrzeugdiagnose; konkreten Umfang direkt bestätigen."
       ],
       "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Cybo listet Auto Servis Maloku in Deçan als Kfz-Servicebetrieb. Die Kontaktdaten stammen aus einem öffentlichen Kategorie-Listeneintrag und sind nicht vom Betrieb bestätigt.",
+      "specialty": "Pkw-Wartung · Diagnose · Reparatur",
+      "description": "Auto Servis Maloku in Deçan/Gramaqel bietet laut eigener Betriebswebsite Pkw-Wartung und Reparatur an. Veröffentlicht sind Öl- und Filterwechsel, Bremsenservice, Diagnose sowie Motor-, Getriebe- und Elektrikarbeiten. Termine und passenden Reparaturumfang direkt beim Betrieb klären.",
       "lat": null,
       "lng": null,
       "sources": [
@@ -3478,15 +3617,36 @@
           "url": "https://galego.cybo.com/XK/pej%C3%AB/mechanic",
           "title": "Cybo: einzelner Listeneintrag „Auto Servis Maloku“ mit Name · Adresse · Telefon · Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://auto-servis-pjese-maloku.base44.app/",
+          "title": "Aktueller Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "official"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:47:07.000Z",
+      "checkedAt": "2026-10-05",
+      "status": "published",
+      "updatedAt": "2026-10-05T10:08:45.026Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJu_fNLeFVUhMRsFdcOUdpo7Y",
+        "matchedAt": "2026-10-05T10:08:45.026Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "sourceUpdatedAt": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Maloku+Lan+dobraj%2C+De%C3%A7an+51000&query_place_id=ChIJu_fNLeFVUhMRsFdcOUdpo7Y",
+          "checkedAt": "2026-10-05T10:08:45.026Z"
+        },
+        "verification": {
+          "method": "official_website",
+          "sourceUrls": [
+            "https://auto-servis-pjese-maloku.base44.app/",
+            "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJu_fNLeFVUhMRsFdcOUdpo7Y"
+          ],
+          "note": "Die eigene Website verbindet bisherigen und aktuellen Kontakt und bestätigt Lan Dobraj sowie konkrete Pkw-Reparaturen. Der gültige Google-Eintrag hat dieselbe aktuelle Telefonnummer und Anschrift. Fehlerhafte Telefonlink-Vorlagen wurden nicht übernommen."
+        }
       }
     },
     {
@@ -3565,19 +3725,28 @@
         }
       ],
       "checkedAt": "2026-10-05",
-      "status": "draft",
-      "updatedAt": "2026-10-05T09:14:49.418Z",
+      "status": "published",
+      "updatedAt": "2026-10-05T10:08:45.026Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
+        "placeId": "ChIJCz9-2W6fVBMRuVUellpelNw",
+        "matchedAt": "2026-10-05T10:08:45.026Z",
         "snapshot": {
           "rating": null,
           "count": null,
-          "mapsUrl": "https://www.google.com/maps/?cid=15894432728055961017",
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Mercedes+Benz+Vedati+M5W6%2BGC5%2C+Prishtina+10520&query_place_id=ChIJCz9-2W6fVBMRuVUellpelNw",
           "sourceUrl": null,
           "sourceLabel": null,
-          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "checkedAt": "2026-10-05T10:08:45.026Z",
           "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.merrjep.com/shpallja/service-mercedes-benz-vedati/10609892",
+            "https://www.gjithebiznesi.com/XK/mercedes-benz-vedati-044-496-496",
+            "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJCz9-2W6fVBMRuVUellpelNw"
+          ],
+          "note": "Die aktuelle Betriebsanzeige verbindet den bisherigen und aktuellen Kontakt. Direkter Kartenlink und gültige Place ID wählen denselben Betrieb mit bestätigter Anschrift aus."
         }
       }
     },
@@ -3992,9 +4161,9 @@
       "id": "auto-servis-xhelali-prizren",
       "name": "Auto Servis Xhelali",
       "city": "Prizren",
-      "address": "Lubizhdë, Lubizhdë, Komuna e Prizrenit",
-      "phone": "+38345355624",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
+      "address": "Jusuf Ramadani, Lubizhdë, Prizren",
+      "phone": "+38343525525",
+      "phoneNote": "Aktueller Kontakt aus dem eigenen Betriebsprofil",
       "whatsapp": "",
       "brands": [],
       "services": [
@@ -4007,23 +4176,56 @@
       ],
       "languages": [],
       "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Auto Servis Xhelali in Prizren als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
+      "description": "Auto Folje Xhelali in Lubizhdë bei Prizren bietet Pkw-Karosseriearbeiten, Lackierung und Fahrzeugfolierung an. Der unabhängige Betriebsbeleg verbindet den bisherigen Auto Servis Xhelali mit dem heutigen Betriebsprofil. Kontakt und genauer Standort stammen aus dem eigenen Profil; konkrete Arbeiten und Termine direkt klären.",
+      "lat": 42.241853133938,
+      "lng": 20.764869001041,
       "sources": [
         {
           "url": "https://stgres.gjirafa.biz/auto-servis-xhelali-1",
           "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://biznisinfo.online/listing/xhelali-autosevice/",
+          "title": "Aktueller Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/AutoFoljeXhelali/",
+          "title": "Aktueller Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.autoyas.com/XK/Prizren/439576746129205/Auto-Folje-Xhelali",
+          "title": "Aktueller Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "checkedAt": "2026-10-05",
+      "status": "published",
+      "updatedAt": "2026-10-05T10:08:45.026Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJgc9JBjKUUxMRoP3PNI5Eo-U",
+        "matchedAt": "2026-10-05T10:08:45.026Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "sourceUpdatedAt": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Xhelali+Jusuf+Ramadani%2C+Lubizhd%C3%AB%2C+Prizren&query_place_id=ChIJgc9JBjKUUxMRoP3PNI5Eo-U",
+          "checkedAt": "2026-10-05T10:08:45.026Z"
+        },
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://biznisinfo.online/listing/xhelali-autosevice/",
+            "https://www.facebook.com/AutoFoljeXhelali/",
+            "https://www.autoyas.com/XK/Prizren/439576746129205/Auto-Folje-Xhelali",
+            "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJgc9JBjKUUxMRoP3PNI5Eo-U"
+          ],
+          "note": "Unabhängiger Betriebsbeleg verbindet den bisherigen Kontakt ausdrücklich mit Auto Folje Xhelali. Das eigene Betriebsprofil bestätigt aktuellen Kontakt, Anschrift und genauen Directions-Zielpunkt innerhalb von 300 Metern zum selben Google-Eintrag."
+        }
       }
     },
     {
@@ -5372,9 +5574,9 @@
       "id": "bmw-prishtina-prishtina",
       "name": "BMW Prishtina",
       "city": "Prishtina",
-      "address": "Lidhja e Prizrenit, Prishtinë",
-      "phone": "+38344202898",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
+      "address": "Lidhja e Lezhës, Prishtina 10000",
+      "phone": "+38346160902",
+      "phoneNote": "Aktueller Kontakt aus Betriebsbeiträgen und unabhängigem Verzeichnis",
       "whatsapp": "",
       "brands": [],
       "services": [
@@ -5385,7 +5587,7 @@
       ],
       "languages": [],
       "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt BMW Prishtina in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
+      "description": "Auto Servis BMW Prishtina bietet laut Betriebsbeiträgen und unabhängigem Verzeichnis Pkw-Service für BMW an. Aktueller Kontakt und Anschrift an der Lidhja e Lezhës stammen aus den Betriebsbeiträgen. Konkrete Reparaturarbeiten und Termine direkt beim Betrieb bestätigen.",
       "lat": null,
       "lng": null,
       "sources": [
@@ -5393,15 +5595,43 @@
           "url": "https://stgres.gjirafa.biz/bmw-prishtina-1",
           "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://www.autoyas.com/XK/Pristina/100693254989894/Auto-Servis-BMW-Prishtina",
+          "title": "Aktueller Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.gjithebiznesi.com/XK/bmw-prishtina-046-160-902",
+          "title": "Aktueller Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "checkedAt": "2026-10-05",
+      "status": "published",
+      "updatedAt": "2026-10-05T10:08:45.026Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJqXQcgJufVBMROGwBj_-gtXU",
+        "matchedAt": "2026-10-05T10:08:45.026Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "sourceUpdatedAt": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=BMW+Prishtina+Lidhja+e+Lezh%C3%ABs%2C+Prishtina+10000&query_place_id=ChIJqXQcgJufVBMROGwBj_-gtXU",
+          "checkedAt": "2026-10-05T10:08:45.026Z"
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.autoyas.com/XK/Pristina/100693254989894/Auto-Servis-BMW-Prishtina",
+            "https://www.gjithebiznesi.com/XK/bmw-prishtina-046-160-902",
+            "https://stgres.gjirafa.biz/bmw-prishtina-1",
+            "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJqXQcgJufVBMROGwBj_-gtXU"
+          ],
+          "note": "Betriebsbeiträge bestätigen den früheren Straßenstandort und die aktuelle Anschrift an der Lidhja e Lezhës sowie den neuen Kontakt. Ein unabhängiges Verzeichnis und der gültige Google-Eintrag stimmen bei Name und neuer Telefonnummer überein."
+        }
       }
     },
     {
@@ -6018,9 +6248,9 @@
     },
     {
       "id": "fiat-prishtina",
-      "name": "Fiat",
+      "name": "Auto Servis Mentori",
       "city": "Prishtina",
-      "address": "Norbert JokI , Bregu i Diellit, Prishtinë",
+      "address": "273 Isa Kastrati, Matiqan, Prishtina 10000",
       "phone": "+38344254528",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
       "whatsapp": "",
@@ -6033,7 +6263,7 @@
       ],
       "languages": [],
       "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Fiat in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
+      "description": "Auto Servis Mentori in Matiqan bei Prishtina bietet Pkw-Service an. Die unabhängigen Betriebsverzeichnisse nennen Service für Fiat, Alfa Romeo, Lancia und Volkswagen sowie die unveränderte Telefonnummer. Termine und konkreten Leistungsumfang direkt beim Betrieb klären.",
       "lat": null,
       "lng": null,
       "sources": [
@@ -6041,15 +6271,43 @@
           "url": "https://stgres.gjirafa.biz/fiat-1",
           "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://www.filikaqa.com/en/listings/1394-auto-servis-mentori",
+          "title": "Aktueller Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
+        },
+        {
+          "url": "https://yellowpages-tl.cybo.com/XK-biz/autoservis-mentori",
+          "title": "Aktueller Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "checkedAt": "2026-10-05",
+      "status": "published",
+      "updatedAt": "2026-10-05T10:08:45.026Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJqdYqioGfVBMRibazGbBsjTU",
+        "matchedAt": "2026-10-05T10:08:45.026Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "sourceUpdatedAt": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Mentori+273+Isa+Kastrati%2C+Matiqan%2C+Prishtina+10000&query_place_id=ChIJqdYqioGfVBMRibazGbBsjTU",
+          "checkedAt": "2026-10-05T10:08:45.026Z"
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://stgres.gjirafa.biz/fiat-1",
+            "https://www.filikaqa.com/en/listings/1394-auto-servis-mentori",
+            "https://yellowpages-tl.cybo.com/XK-biz/autoservis-mentori",
+            "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJqdYqioGfVBMRibazGbBsjTU"
+          ],
+          "note": "Unveränderte Telefonnummer und Fiat-Spezialisierung verbinden den bisherigen Verzeichniseintrag mit Auto Servis Mentori. Der aktuelle Name und die genaue Anschrift sind unabhängig belegt und wählen denselben gültigen Google-Eintrag."
+        }
       }
     },
     {
@@ -6817,15 +7075,42 @@
           "url": "https://www.cybo.com/XK-biz/nero_2Z",
           "title": "Cybo: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://biznisinfo.online/biznis-informator-6/",
+          "title": "Aktueller Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
+        },
+        {
+          "url": "https://faqet-e-verdha.cybo.com/XK/prizreni/riparimi-i-makinave-",
+          "title": "Aktueller Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "checkedAt": "2026-10-05",
+      "status": "published",
+      "updatedAt": "2026-10-05T10:08:45.026Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJmXwWcEuUUxMRO19gku2sp8U",
+        "matchedAt": "2026-10-05T10:08:45.026Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "sourceUpdatedAt": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Nero+Meriman+Jakupi%2C+Prizren+20000&query_place_id=ChIJmXwWcEuUUxMRO19gku2sp8U",
+          "checkedAt": "2026-10-05T10:08:45.026Z"
+        },
+        "verification": {
+          "method": "name_and_address",
+          "sourceUrls": [
+            "https://biznisinfo.online/biznis-informator-6/",
+            "https://faqet-e-verdha.cybo.com/XK/prizreni/riparimi-i-makinave-",
+            "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJmXwWcEuUUxMRO19gku2sp8U"
+          ],
+          "note": "Aktueller unabhängiger Reparaturbeleg bestätigt Telefonnummer und Prizren; Name und genaue Straße stimmen mit dem gültigen Google-Eintrag überein. Dort steht dieselbe lokale Nummer mit der früheren Kosovo-Vorwahl; der aktuelle unabhängig belegte Kontakt bleibt erhalten."
+        }
       }
     },
     {
@@ -7012,9 +7297,9 @@
     },
     {
       "id": "peugeot-te-beda-prishtina",
-      "name": "Peugeot te Beda",
+      "name": "Auto Servis BEDA SH.P.K.",
       "city": "Prishtina",
-      "address": "Rr. Zagrebit, Prishtinë",
+      "address": "Zagrebit 100, Prishtina 10000",
       "phone": "+38344171570",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
       "whatsapp": "",
@@ -7027,7 +7312,7 @@
       ],
       "languages": [],
       "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Peugeot te Beda in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
+      "description": "Auto Servis BEDA in Prishtina wird in unabhängigen Betriebsverzeichnissen als Pkw-Service geführt. Kontakt und die Anschrift an der Zagrebit sind mehrfach belegt. Termine und konkrete Wartungs- oder Reparaturarbeiten direkt beim Betrieb bestätigen.",
       "lat": null,
       "lng": null,
       "sources": [
@@ -7035,15 +7320,37 @@
           "url": "https://stgres.gjirafa.biz/auto-servis-beda-1",
           "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://pagini-aurii.cybo.com/XK-biz/auto-sevice-beda-shpk",
+          "title": "Aktueller Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "checkedAt": "2026-10-05",
+      "status": "published",
+      "updatedAt": "2026-10-05T10:08:45.026Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJoaIikxGfVBMR-sPTTKaGVLc",
+        "matchedAt": "2026-10-05T10:08:45.026Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "sourceUpdatedAt": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+BEDA+SH.P.K.+Zagrebit+100%2C+Prishtina+10000&query_place_id=ChIJoaIikxGfVBMR-sPTTKaGVLc",
+          "checkedAt": "2026-10-05T10:08:45.026Z"
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://stgres.gjirafa.biz/auto-servis-beda-1",
+            "https://pagini-aurii.cybo.com/XK-biz/auto-sevice-beda-shpk",
+            "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJoaIikxGfVBMR-sPTTKaGVLc"
+          ],
+          "note": "Gleiche internationale Telefonnummer, Betriebsname und genaue Straße bestätigen den heutigen BEDA-Eintrag. Pkw-Reparatur ist unabhängig belegt."
+        }
       }
     },
     {
