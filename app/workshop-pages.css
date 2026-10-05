@@ -5,15 +5,19 @@
 /* Compact workshop profiles; shared moderation styles remain above. */
 .workshop-page{padding-top:24px;padding-bottom:64px}
 .profile-back{margin-bottom:20px;font-size:14px}
-.workshop-overview{align-items:flex-start;gap:24px;padding-bottom:22px}
-.workshop-overview-identity{flex:1;min-width:0}
-.workshop-overview-identity>div{width:100%;min-width:0}
+.workshop-overview{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:22px 28px;padding-bottom:24px}
+.workshop-overview-identity{display:block;min-width:0}
 .profile-place{font-size:14px;line-height:1.5;margin-bottom:8px;flex-wrap:wrap}
-.workshop-overview h1{font-size:clamp(28px,2.7vw,36px);line-height:1.2;letter-spacing:-.7px}
-.workshop-overview-actions{padding-top:25px}
+.profile-specialty{border-left:1px solid var(--border);padding-left:10px;margin-left:5px}
+.workshop-overview h1{font-size:clamp(28px,2.8vw,36px);font-weight:650;line-height:1.2;letter-spacing:-.7px;text-wrap:balance}
+.workshop-overview-actions{padding-top:0;max-width:330px}
 .workshop-overview-actions>a{min-height:46px;white-space:nowrap}
-.profile-section-nav{gap:28px;margin-bottom:25px}
-.profile-section-nav>a{font-size:14px;padding:12px 0;min-height:46px}
+.profile-overview-details{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,.85fr);gap:20px 24px;padding:16px 20px;background:var(--theme-surface);border:1px solid var(--border);border-radius:12px}
+.profile-overview-details>.workshop-ratings{align-content:center;align-items:center;margin:0}
+.profile-overview-details>.workshop-ratings>.workshop-rating-row{padding:0;border:0;background:transparent;min-height:30px}
+.profile-overview-details>.workshop-ratings>.google-rating{border-left:1px solid var(--border);padding-left:16px;margin-left:6px}
+.profile-overview-details>.profile-opening-hours{margin:0;max-width:none;border-left:1px solid var(--border);padding-left:24px}
+.workshop-page-grid{margin-top:28px}
 .profile-page-section{padding-bottom:25px;margin-bottom:25px}
 .profile-section-heading h2{font-size:22px}
 .profile-section-heading .text-action{font-size:14px!important;min-height:36px}
@@ -29,7 +33,7 @@
 .profile-review-empty{display:block;font-size:16px;color:#5f7370;line-height:1.6;margin:14px 0 0;padding:0}
 .public-review-text{font-size:16px;line-height:1.65}
 .profile-google-reviews{border-top:1px solid #e0e8e9;padding-top:22px;margin-top:24px;scroll-margin-top:100px}
-.profile-google-reviews .google-reviews-panel{margin-top:12px}
+.profile-google-reviews .google-reviews-panel{margin:0}
 #bewertungen.profile-page-section{border-bottom:0;margin-bottom:0}
 .profile-sources{border-top:1px solid #e0e8e9;scroll-margin-top:100px}
 .profile-sources>summary,.profile-map>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;list-style:none;cursor:pointer;min-height:48px;font-size:14px;color:#52736b}
@@ -53,10 +57,15 @@ a.profile-phone-summary{display:flex;flex-direction:row;align-items:center;gap:8
 .profile-map>summary{min-height:46px}
 .profile-google-map{display:block;width:100%;height:240px;border-radius:8px;background:#e7eeeb;margin-top:4px}
 .profile-share{font-size:14px;min-height:46px}
+.profile-owner{border-top:1px solid var(--border);padding-top:8px;text-align:center}
+.profile-owner>a{display:inline-flex;align-items:center;min-height:44px;font-size:13px;line-height:1.5;color:var(--muted-foreground);text-decoration:underline;text-underline-offset:3px}
+.profile-owner>a:hover{color:var(--theme-accent)}
 .profile-mobile-actions{display:none}
 @media(max-width:960px){
- .workshop-overview{gap:16px}
- .workshop-overview-actions{padding-top:0}
+ .workshop-overview{grid-template-columns:1fr;gap:18px}
+ .workshop-overview-actions{max-width:none}
+ .profile-overview-details{grid-template-columns:1fr}
+ .profile-overview-details>.profile-opening-hours{border-left:0;border-top:1px solid var(--border);padding:14px 0 0}
 }
 @media(max-width:720px){
  .workshop-page{padding-top:18px;padding-bottom:calc(108px + env(safe-area-inset-bottom))}
@@ -64,8 +73,10 @@ a.profile-phone-summary{display:flex;flex-direction:row;align-items:center;gap:8
  .workshop-overview{padding-bottom:18px}
  .workshop-overview h1{font-size:28px}
  .workshop-overview-actions{display:none}
- .profile-section-nav{gap:24px;margin-bottom:20px}
- .profile-section-nav>a{font-size:14px}
+ .profile-overview-details{padding:14px 16px;gap:12px}
+ .profile-overview-details>.workshop-ratings{column-gap:16px;row-gap:8px}
+ .profile-overview-details>.workshop-ratings>.google-rating{border:0;padding-left:0;margin-left:0}
+ .profile-overview-details>.profile-opening-hours{padding-top:12px}
  .workshop-page-grid{gap:20px}
  .profile-contact-summary{padding:18px}
  .profile-contact-summary h2{font-size:18px;margin-bottom:12px}
@@ -102,7 +113,7 @@ a.profile-phone-summary{display:flex;flex-direction:row;align-items:center;gap:8
 .profile-week-hours p{font-size:12px;line-height:1.5;margin:8px 0 0;color:#687b72}
 .profile-week-hours a,.profile-hours-fallback{text-decoration:underline;text-underline-offset:3px}
 .profile-hours-fallback{display:inline-block;min-height:36px;padding-top:7px;font-size:13px}
-.profile-photo-section{margin:2px 0 10px;scroll-margin-top:100px}
+.profile-photo-section{margin:2px 0 0;scroll-margin-top:100px}
 .profile-photo-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .profile-photo-strip figure{min-width:0;margin:0}
 .profile-photo-strip figure button{display:block;width:100%;padding:0;overflow:hidden;border-radius:11px;background:#edf3ef;cursor:zoom-in}
@@ -147,8 +158,8 @@ a.profile-phone-summary{display:flex;flex-direction:row;align-items:center;gap:8
 .profile-review-stream{display:flex;flex-direction:column;gap:23px}
 .profile-review-stream>.profile-google-reviews{border:0;padding:0;margin:0}
 .profile-review-stream>div+div{border-top:1px solid #e0e8e9;padding-top:21px}
-.profile-riparim-reviews.empty{display:flex;flex-wrap:wrap;align-items:center;gap:6px 13px}
-.profile-riparim-reviews.empty .profile-review-empty{font-size:14px;margin:0;color:#687b72}
+.profile-review-stream>.profile-riparim-reviews.is-empty{display:flex;flex-wrap:wrap;align-items:center;gap:6px 13px;padding:14px 16px;background:var(--theme-surface);border:1px dashed var(--border);border-radius:10px}
+.profile-riparim-reviews.is-empty .profile-review-empty{font-size:14px;line-height:1.6;margin:0;padding:0;color:var(--muted-foreground)}
 .profile-route-short{display:none}
 .profile-week-hours summary:focus-visible,.profile-photo-strip button:focus-visible,.profile-section-nav a:focus-visible{outline:3px solid #57a88b;outline-offset:3px;border-radius:4px}
 @media(max-width:960px){
