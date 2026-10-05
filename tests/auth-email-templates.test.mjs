@@ -9,7 +9,7 @@ await mkdir('.test-runtime/auth-email-templates',{recursive:true});await writeFi
 const templates=await import(new URL('../.test-runtime/auth-email-templates/templates.mjs',import.meta.url));
 const origin='https://riparim.example.test',token='fixture&"<token>';
 const cases=[...['de','sq','en'].map(locale=>({name:locale,locale,redirect:`${origin}/auth/bestaetigen?locale=${locale}&weiter=%2F${locale}%2Fpasswort-neu`})),
- {name:'empty',locale:'de',redirect:''},{name:'short',locale:'de',redirect:'x'},
+ {name:'empty',locale:'de',redirect:''},{name:'absent redirect',locale:'de',redirect:'',omitRedirect:true},{name:'short',locale:'de',redirect:'x'},
  {name:'legacy',locale:'de',redirect:origin+'/auth/bestaetigen?weiter=%2F'},
  {name:'wrong origin',locale:'de',redirect:'https://other.example.test/auth/bestaetigen?locale=sq&weiter=%2F'},
  {name:'slash redirect',locale:'de',redirect:origin+'//auth/bestaetigen?locale=sq&weiter=%2F'},
@@ -18,7 +18,7 @@ const cases=[...['de','sq','en'].map(locale=>({name:locale,locale,redirect:`${or
  {name:'wrong order',locale:'de',redirect:origin+'/auth/bestaetigen?weiter=%2F&locale=sq'},
  {name:'trailing site slash',locale:'de',site:origin+'/',redirect:origin+'/auth/bestaetigen?locale=sq&weiter=%2F'}];
 const subjects={confirmation:{de:'Bestätige deine E-Mail-Adresse bei Riparim',sq:'Konfirmo adresën tënde të emailit në Riparim',en:'Confirm your email address for Riparim'},recovery:{de:'Setze dein Riparim-Passwort zurück',sq:'Rivendos fjalëkalimin tënd të Riparim',en:'Reset your Riparim password'}};
-const fixtures=Object.keys(subjects).flatMap(kind=>cases.map(entry=>({Subject:templates[kind+'EmailSubject']??'MISSING SUBJECT',Body:templates[kind+'EmailTemplate'],Data:{SiteURL:entry.site??origin,RedirectTo:entry.redirect,TokenHash:token}})));
+const fixtures=Object.keys(subjects).flatMap(kind=>cases.map(entry=>({Subject:templates[kind+'EmailSubject']??'MISSING SUBJECT',Body:templates[kind+'EmailTemplate'],Data:{SiteURL:entry.site??origin,...(entry.omitRedirect?{}:{RedirectTo:entry.redirect}),TokenHash:token}})));
 const rendered=renderAuthEmails(fixtures);let passed=0;
 for(const [index,result] of rendered.entries()){
  const kind=Object.keys(subjects)[Math.floor(index/cases.length)],entry=cases[index%cases.length];

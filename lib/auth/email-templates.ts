@@ -5,7 +5,7 @@ import type {Locale} from "@/lib/i18n/locale";
 // functions. `and` short-circuits before slice; legacy links remain German.
 const localeGuard='{{ $sq := printf "%s/auth/bestaetigen?locale=sq&" .SiteURL }}{{ $en := printf "%s/auth/bestaetigen?locale=en&" .SiteURL }}';
 function localizedTemplate(render:(locale:Locale)=>string){
- return `${localeGuard}{{ if and (ge (len .RedirectTo) (len $sq)) (eq (slice .RedirectTo 0 (len $sq)) $sq) }}${render("sq")}{{ else if and (ge (len .RedirectTo) (len $en)) (eq (slice .RedirectTo 0 (len $en)) $en) }}${render("en")}{{ else }}${render("de")}{{ end }}`;
+ return `${localeGuard}{{ if and .RedirectTo (ge (len .RedirectTo) (len $sq)) (eq (slice .RedirectTo 0 (len $sq)) $sq) }}${render("sq")}{{ else if and .RedirectTo (ge (len .RedirectTo) (len $en)) (eq (slice .RedirectTo 0 (len $en)) $en) }}${render("en")}{{ else }}${render("de")}{{ end }}`;
 }
 export const confirmationEmailSubject=localizedTemplate(locale=>emailCopy[locale].confirmation.title);
 export const recoveryEmailSubject=localizedTemplate(locale=>emailCopy[locale].recovery.title);
