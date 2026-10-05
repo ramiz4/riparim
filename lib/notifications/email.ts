@@ -1,11 +1,13 @@
 import {env} from "cloudflare:workers";
 import {z} from "zod";
 import {siteOrigin} from "@/lib/auth/config";
-import {emailCopy,emailHtml,emailText} from "@/lib/email-content";
+import {emailCopy,emailHtml} from "@/lib/email-content";
 import {localizeHref,type Locale} from "@/lib/i18n/locale";
 import type {ReviewDecision} from "./contract";
 
-export const deliveryPayloadSchema=z.object({from:z.string().max(320),to:z.array(z.string().email()).length(1),subject:z.string().max(200),html:z.string().max(12000),text:z.string().max(6000)}).strict();
+// New messages are HTML-only. Valid historical frozen requests may still
+// contain text; accepting it preserves their exact idempotent retry bytes.
+export const deliveryPayloadSchema=z.object({from:z.string().max(320),to:z.array(z.string().email()).length(1),subject:z.string().max(200),html:z.string().max(12000),text:z.string().max(6000).optional()}).strict();
 export type DeliveryPayload=z.infer<typeof deliveryPayloadSchema>;
 export function emailConfiguration(){
  const key=env.RESEND_API_KEY?.trim(),from=env.TRANSACTIONAL_EMAIL_FROM?.trim();
@@ -20,7 +22,7 @@ export function notificationLink(id:string,locale:Locale="de"){
 }
 export function reviewEmail(decision:ReviewDecision,id:string,from:string,to:string,locale:Locale):DeliveryPayload{
  const copy=emailCopy[locale][decision],url=notificationLink(id,locale);
- return deliveryPayloadSchema.parse({from,to:[to],subject:copy.title,html:emailHtml(locale,copy,url),text:emailText(copy,url)});
+ return deliveryPayloadSchema.parse({from,to:[to],subject:copy.title,html:emailHtml(locale,copy,url)});
 }
 export class DeliveryError extends Error{constructor(public code:string,public retryable:boolean){super(code);}}
 export async function sendReviewEmail(body:string,key:string,id:string){

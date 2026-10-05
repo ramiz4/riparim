@@ -29,9 +29,10 @@ try{
  assert.equal((await db.prepare('SELECT COUNT(*) AS n FROM fixture_sends').first()).n,1);passed++;
  const payload=JSON.parse((await db.prepare('SELECT payload FROM fixture_sends').first()).payload);
  assert.equal(payload.to[0],'fixture@example.test');passed++;
- assert(!payload.text.includes('Fixture Car'));passed++;
+ assert(!payload.html.includes('Fixture Car'));passed++;
+ assert(!Object.hasOwn(payload,'text'));passed++;
  assert(payload.html.includes('lang="'+locale+'"'));passed++;
- const link=new URL(payload.text.match(/https:\/\/[^\s]+/)[0]);assert.equal(link.pathname,(locale==='de'?'':'/'+locale)+'/anmelden');passed++;
+ const link=new URL(payload.html.match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));assert.equal(link.pathname,(locale==='de'?'':'/'+locale)+'/anmelden');passed++;
  await runtime.dispatchFetch('http://127.0.0.1/cdn-cgi/handler/scheduled?cron=*+*+*+*+*');
  assert.equal((await db.prepare('SELECT COUNT(*) AS n FROM fixture_sends').first()).n,1);passed++;
 }finally{await runtime.dispose();}

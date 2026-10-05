@@ -121,8 +121,10 @@ Die Freigabe erfordert sowohl das geprüfte Release als auch diese Providerabnah
 Ein Code-Rollback stellt Providerfelder nicht wieder her; dafür die gesicherten
 vier Felder verwenden. Bestehende SMTP-Werte und Callbackpfade erhalten.
 
-Reviewmails verwenden beim ersten Versand die validierte Empfängerpräferenz.
+Neue Reviewmails versenden nur Betreff und HTML und verwenden beim ersten
+Versand die validierte Empfängerpräferenz.
 Bereits eingefrorene Nachrichten behalten bei Retries ihre ursprüngliche
-Sprache und identische Requestbytes; sie benötigen keine Datenübernahme.
+Sprache und identische Requestbytes einschließlich historischer Klartextteile;
+sie benötigen keine Datenübernahme.
 Der Supabase-SMTP-Quellvertrag bietet HTML ohne eigenen MIME-Klartextteil; dieser
 dokumentierte Providerumfang bleibt bei der Empfangsabnahme sichtbar.

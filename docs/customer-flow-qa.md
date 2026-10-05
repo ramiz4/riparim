@@ -154,7 +154,11 @@ Konfigurationswechsel. Historische deutsche Payloads behalten sogar
 JSON-Reihenfolge und Leerraum. Empfänger-/Credentialwechsel, 23-Stunden-Grenze,
 Backoff und kontrollierte Wiederholungen bleiben geschützt.
 
-Reviewmails liefern tatsächlich HTML und `text/plain` an Resend. Beim
+Neue Reviewmails liefern auf ausdrücklichen Projektwunsch ausschließlich Betreff
+und HTML an Resend; das tatsächliche Requestbody enthält kein `text`-Feld.
+Die Tests prüfen dies für beide Entscheidungen und alle drei Locales sowie
+bytegleiche HTML-only-Retries. Bereits eingefrorene historische Payloads mit
+`text` bleiben unverändert, damit ihr Idempotenzvertrag erhalten bleibt. Beim
 [geprüften Supabase-SMTP-Client](https://github.com/supabase/auth/blob/ce9a8eee0cc042be8c7a42981a7ddae631e41d91/internal/mailer/mailmeclient/mailmeclient.go)
 setzt `SetBody("text/html", body)` ausschließlich HTML; die Providerfelder
 können keinen zusätzlichen MIME-Klartextteil konfigurieren. Auth-HTML ist
