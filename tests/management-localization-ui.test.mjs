@@ -93,13 +93,15 @@ try{
    const exports=[['confirmation-subject',mailSources.confirmationEmailSubject],['confirmation-body',mailSources.confirmationEmailTemplate],['recovery-subject',mailSources.recoveryEmailSubject],['recovery-body',mailSources.recoveryEmailTemplate]],copied=[];
    Object.defineProperty(navigator,'clipboard',{configurable:true,value:{async writeText(value){copied.push(value);}}});
    for(const [index,[id,source]] of exports.entries()){
-    const section=document.querySelector('[data-auth-mail-field="'+id+'"]');check(section&&section.querySelector('h3').textContent===labels[index],'Every provider subject/body field has its own active-locale visible label');
+    const section=document.querySelector('[data-auth-mail-field="'+id+'"]');check(section&&!section.open&&section.querySelector('summary').textContent===labels[index],'Every provider subject/body field has its own closed active-locale disclosure');
+    const outer=section.parentElement.closest('details');if(!outer.open)await act(async()=>outer.querySelector('summary').click());
+    await act(async()=>section.querySelector('summary').click());check(section.open,'Each central mail field is reachable through its native disclosure');
     check(section.querySelector('pre').textContent===source,'Auth setup shows the exact central Go source without translating or rendering it');
     await act(async()=>section.querySelector('button').click());check(copied.at(-1)===source,'Copying a provider field retains the exact central subject or body source');
    }
    const instructions=document.querySelector('.setup-instructions').textContent;
-   for(const value of ['SITE_ORIGIN','Site URL','--provider-site-url','--site-origin','auth/bestaetigen?**','confirmation.subject.txt','confirmation.body.html','recovery.subject.txt','recovery.body.html'])check(instructions.includes(value),'The operator sees the complete origin, allowlist, release export and paired field activation contract');
-   check(!instructions.includes('auth/bestaetigen**'),'The old broad callback pattern is replaced by the documented physical callback query pattern');
+   for(const value of ['SITE_ORIGIN','Site URL','--provider-site-url','--site-origin','auth/bestaetigen\\?**','confirmation.subject.txt','confirmation.body.html','recovery.subject.txt','recovery.body.html'])check(instructions.includes(value),'The operator sees the complete origin, allowlist, release export and paired field activation contract');
+   check(!instructions.includes('auth/bestaetigen**')&&!instructions.includes('auth/bestaetigen?**'),'Broad and unescaped callback patterns are replaced by the literal-query physical callback glob');
    Object.defineProperty(navigator,'clipboard',{configurable:true,value:{async writeText(){throw new Error('Raw private clipboard failure');}}});
    await act(async()=>document.querySelector('[data-auth-mail-field="confirmation-subject"] button').click());
    check(document.querySelector('.setup-instructions [role="alert"]').textContent===getMessages(locale).management.mailCopyFailed&&!document.body.textContent.includes('Raw private clipboard failure'),'Clipboard rejection shows only the active-locale manual-copy guidance');
