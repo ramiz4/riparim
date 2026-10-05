@@ -1,6 +1,6 @@
 # Zentrale Werkstattdaten
 
-`data/workshops.json` ist die versionierte Quelle für Werkstattimporte. Sie enthält den exportierten aktuellen Bestand: **128 veröffentlichte Pkw-Werkstätten und 35 Entwürfe**. Der Status jedes Datensatzes ist ausdrücklich gespeichert. Die Schätzung von ungefähr 1.700 Werkstätten stammt vom Nutzer; sie ist kein recherchierter Gesamtbestand und keine Vollständigkeitsbehauptung.
+`data/workshops.json` ist die versionierte Quelle für Werkstattimporte. Sie enthält den exportierten aktuellen Bestand: **128 veröffentlichte Pkw-Werkstätten und 8 Entwürfe**. Der Status jedes Datensatzes ist ausdrücklich gespeichert. Die Schätzung von ungefähr 1.700 Werkstätten stammt vom Nutzer; sie ist kein recherchierter Gesamtbestand und keine Vollständigkeitsbehauptung.
 
 Die bisherigen getrennten Dateien für Profile und Google-Momentaufnahmen wurden in diese Quelle übernommen und entfernt. Namen, Kontakte, Quellen, Prüfzeitpunkte und stabile Riparim-Kennungen bleiben erhalten. Es werden keine Platzhalter für fehlende Werkstätten erzeugt.
 
@@ -23,7 +23,7 @@ npm run catalog:merge -- /absoluter/pfad/zum/import.json --write
 
 Eine Importdatei enthält ein `workshops`-Array mit vollständigen Datensätzen im selben Format. Der erste merge-Aufruf zeigt nur den geplanten Abgleich. `--write` aktualisiert die zentrale Datei atomar. Ungültige Quellen, doppelte IDs/Place IDs, Angaben aus der Zukunft oder unvollständige Datensätze werden zurückgewiesen.
 
-Bestehende Kennungen bleiben stabil. Eine übereinstimmende Place ID bzw. exakt passender Name, internationale Telefonnummer, Ort und Adresse verhindern einen zweiten Datensatz. Gemeinsame Telefonnummern allein führen zu keiner Zusammenführung: Die Eurogoma-Filialen in Gjakova und Mitrovica bleiben getrennt. Ältere Revisionen und ältere Google-Momentaufnahmen ersetzen keine neueren Angaben. Unklare Betriebe bleiben ausdrücklich als `draft` gespeichert. `data/workshop-scope.json` dokumentiert sechs fachlich ausgeschlossene Einträge sowie den unabhängig als geschlossen belegten Opel-Rakovica-Betrieb; Auto Electronics bleibt wegen ungeklärter Google-Identität ebenfalls als Entwurf erhalten. Diese Datensätze und vorhandene Riparim-Bewertungen werden nicht gelöscht; Leistungen und Marken werden nicht aus Google-Sternen oder aus einem Namen erfunden.
+Bestehende Kennungen bleiben stabil. Eine übereinstimmende Place ID bzw. exakt passender Name, internationale Telefonnummer, Ort und Adresse verhindern einen zweiten Datensatz. Gemeinsame Telefonnummern allein führen zu keiner Zusammenführung: Die Eurogoma-Filialen in Gjakova und Mitrovica bleiben getrennt. Ältere Revisionen und ältere Google-Momentaufnahmen ersetzen keine neueren Angaben. Unklare Betriebe bleiben ausdrücklich als `draft` gespeichert. `data/workshop-scope.json` dokumentiert sechs fachlich ausgeschlossene Einträge sowie den unabhängig als geschlossen belegten Opel-Rakovica-Betrieb; Die 27 verworfenen Profile einschließlich Auto Electronics sind aus dem aktuellen Katalog entfernt. Diese Datensätze und vorhandene Riparim-Bewertungen werden nicht gelöscht; Leistungen und Marken werden nicht aus Google-Sternen oder aus einem Namen erfunden.
 
 Nach Prüfung und Commit wird die Site wie üblich veröffentlicht. Der Runtime-Import verwendet den Inhalts-Hash der zentralen Datei als Abschlusskennung. Er ergänzt neue IDs und übernimmt nur jüngere Profilrevisionen; spätere Admin-Änderungen, Entwürfe, Besuche und Riparim-Bewertungen bleiben geschützt. Der Import arbeitet mit höchstens 95 SQL-Bindings pro Statement und 50 Statements pro Batch, kann nach einem Teilfehler wiederholt werden und löscht keine Profile.
 
@@ -62,6 +62,14 @@ Sfishta Auto Homes eigene Serviceanzeige führt den bisherigen Kontakt weiter. A
 Die Google-Prüfung erfolgte im vom Nutzer vorgegebenen Browserprofil. Jede Place ID wurde mit einer absichtlich unpassenden Ersatzsuche auf genau denselben Eintrag zurückgeprüft. Es gab keine zusätzlichen serverseitigen Places-Abfragen, keine Übernahme von Google-Bewertungen und keine Lockerung der Veröffentlichungssperre. Neue öffentliche Profilangaben stammen aus unabhängigen Betriebsquellen; Google-Koordinaten wurden nicht gespeichert.
 
 `data/catalogue-identity-2026-10-05.json` dokumentiert alle 30 Ergebnisse und die zusätzlichen Recherchewege. **27 Identitäten bleiben ungeklärt.** Die acht übrigen Entwürfe dieser Stufe bleiben unverändert: ein Reno-Filialkonflikt, der geschlossen belegte Opel-Betrieb und sechs fachliche Ausschlüsse. Die früheren Berichte mit 34 und 13 Freigaben bleiben unverändert; Tests gleichen alle drei aufeinanderfolgenden Prüfungen ab.
+
+## Vom Nutzer verworfene 27 Entwürfe
+
+Auf ausdrücklichen Nutzerauftrag werden genau die 27 zuletzt ungeklärten Identitäten entfernt. `data/workshop-removals.json` hält ausschließlich die entfernten Kennungen, den Auftrag und die Bestandsänderung fest: **163 → 136 Profile**, weiterhin **128 öffentlich**, **35 → 8 Entwürfe**. Die historischen Prüfberichte bleiben unverändert; ihre früheren Bestandszahlen sind keine aktuellen Katalogzahlen. Der ungemergte Quellenprüfungs-PR #72 wurde verworfen.
+
+Vor der produktiven Entfernung werden die Katalogtabellen geschützt gesichert und ihre Wiederherstellung geprüft. Die atomare Löschoperation verlangt alle 27 unveränderten, nicht veröffentlichten und nicht Google-zugeordneten Profile ohne verknüpfte Besuche, Besitzrechte, Übernahmeanträge oder Änderungsentwürfe. Ein Konflikt unterdrückt die gesamte Entfernung. Kundentabellen und private Nachweise werden nicht beschrieben oder gelöscht.
+
+Entfernungsmarker in `catalog_state` bleiben erhalten. Neue Migration `0013_prevent_retired_workshop_reimport.sql` verhindert, dass ältere Seeder die Profile oder ihre Google-Metadaten wieder einfügen. Frische Installationen erhalten dieselben Marker; Importvalidator und Verwaltung weisen entfernte Kennungen zurück. Die Löschung wird nach dem geprüften Release separat und kontrolliert ausgeführt. Eine spätere Wiederherstellung braucht einen ausdrücklichen Auftrag und muss Manifest sowie Marker berücksichtigen; ein Code-Rollback stellt die Daten nicht wieder her.
 
 ## Bestandsprüfung vom 5. Oktober 2026
 

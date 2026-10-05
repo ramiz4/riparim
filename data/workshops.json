@@ -1,11 +1,11 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-05T12:08:22.374Z",
+  "updatedAt": "2026-10-05T13:58:49.122Z",
   "coverage": {
     "countryCode": "XK",
     "published": 128,
-    "drafts": 35,
+    "drafts": 8,
     "estimatedTotal": 1700,
     "estimateSource": "user",
     "complete": false
@@ -431,56 +431,6 @@
       }
     },
     {
-      "id": "auto-electronics",
-      "name": "Auto Electronics",
-      "city": "Prizren",
-      "address": "Rr. Bekim Berisha 55, Prizren, Kosovo",
-      "phone": "+38349611690",
-      "phoneNote": "Allgemeiner Werkstattkontakt",
-      "whatsapp": "",
-      "brands": [
-        "Audi",
-        "BMW",
-        "Mercedes-Benz",
-        "Volkswagen"
-      ],
-      "services": [
-        "Diagnose & Elektronik"
-      ],
-      "serviceDetails": [
-        "Elektronische Fahrzeugdiagnose",
-        "ECU-/EMS-Kodierung und Programmierung",
-        "Reparatur an BSI-, ABS- und Airbagsystemen"
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugelektronik",
-      "description": "Auto Electronics veröffentlicht elektronische Fahrzeugdiagnose, ECU-Programmierung und Reparaturen an BSI-, ABS- und Airbagsystemen. Die Werkstatt liegt in der Bekim-Berisha-Straße in Prizren.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://www.autoelectronics-ks.com/",
-          "title": "Name · Adresse · Telefon"
-        }
-      ],
-      "checkedAt": "2026-10-02",
-      "status": "draft",
-      "updatedAt": "2026-10-04T07:26:35.861Z",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": {
-          "rating": null,
-          "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto%20Electronics%20Rr.%20Bekim%20Berisha%2055%2C%20Prizren%2C%20Kosovo%20Kosovo",
-          "sourceUrl": null,
-          "sourceLabel": null,
-          "checkedAt": "2026-10-03T17:13:16.309374Z",
-          "sourceUpdatedAt": null
-        }
-      }
-    },
-    {
       "id": "auto-elektricist-ermiri-prizren",
       "name": "Auto elektricist Ermiri",
       "city": "Prizren",
@@ -735,46 +685,6 @@
           ],
           "note": "Eigene Anzeige verbindet Nikis unveränderten Kontakt ausdrücklich mit Enesi Moto Gjilan. Aktuelle Niki-Betriebsbeiträge bestätigen weiterhin Pkw-Elektrik/Diagnose und Avdullah Presheva Nr. 82; der zusätzlich gemeinsam veröffentlichte Kontakt und genaue Geschäftspunkt entsprechen dem bestätigten Google-Eintrag. Der Pkw-Werkstattname bleibt erhalten; Transportwerbung allein wurde nicht als Reparaturnachweis gewertet."
         }
-      }
-    },
-    {
-      "id": "auto-elektro-start-prishtina",
-      "name": "Auto elektro Start",
-      "city": "Prishtina",
-      "address": "Haxhi Zeka , Prishtinë",
-      "phone": "+38344740722",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung",
-        "Diagnose & Elektronik",
-        "Reifen & Klima"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen.",
-        "Fahrzeugdiagnose oder Elektrikservice in der Verzeichnisbeschreibung genannt.",
-        "Klima- oder Reifenmontage/-service in der Verzeichnisbeschreibung genannt; konkreten Umfang direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Auto elektro Start in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/auto-elektro-start-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
       }
     },
     {
@@ -1605,42 +1515,6 @@
           ],
           "note": "Die eigene Unternehmensgeschichte belegt die Fortführung von Auto Servis INOVATOR als INOVATOR Automotive. Der eigene Kontakt und direkte Kartenlink bestätigen dieselbe Google-Identität auch ohne dort veröffentlichte Telefonnummer."
         }
-      }
-    },
-    {
-      "id": "auto-pjese-servis-dubova-ferizaj",
-      "name": "Auto Pjesë & Servis DUBOVA",
-      "city": "Ferizaj",
-      "address": "Bibaj-Ferizaj",
-      "phone": "+38344353206",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Auto Pjesë & Servis DUBOVA in Ferizaj als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/auto-pjes--servis-dubova-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
       }
     },
     {
@@ -2581,42 +2455,6 @@
       }
     },
     {
-      "id": "auto-servis-beni-prishtina",
-      "name": "Auto Servis Beni",
-      "city": "Prishtina",
-      "address": "Lidhja e Prizerenit, Prishtinë",
-      "phone": "+38344467210",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Auto Servis Beni in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/auto-servis-beni-2",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
-      }
-    },
-    {
       "id": "auto-servis-bledi-kline",
       "name": "Auto Servis BLEDI",
       "city": "Klinë",
@@ -2982,42 +2820,6 @@
       }
     },
     {
-      "id": "auto-servis-fia-prishtina",
-      "name": "Auto Servis Fia",
-      "city": "Prishtina",
-      "address": "Bajram Bahtiri, Prishtinë",
-      "phone": "+38344185948",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Auto Servis Fia in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/auto-servis-fia-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
-      }
-    },
-    {
       "id": "auto-servis-ford-jashanica-prishtina",
       "name": "Auto Servis Ford Jashanica",
       "city": "Prishtina",
@@ -3348,80 +3150,6 @@
       }
     },
     {
-      "id": "auto-servis-hoda-ferizaj",
-      "name": "Auto Servis Hoda",
-      "city": "Ferizaj",
-      "address": "Bibaj-Ferizaj , Ferizaj",
-      "phone": "+38344981058",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Auto Servis Hoda in Ferizaj als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/auto-servis-hoda-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
-      }
-    },
-    {
-      "id": "auto-servis-karabeg-prishtina",
-      "name": "Auto servis Karabeg",
-      "city": "Prishtina",
-      "address": "Herri Baric 6, Prishtinë",
-      "phone": "+38344149948",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung",
-        "Motor & Getriebe"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen.",
-        "Motor-, Getriebe- oder Turboladerarbeiten in der Verzeichnisbeschreibung genannt."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Auto servis Karabeg in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/auto-servis-karabeg-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
-      }
-    },
-    {
       "id": "auto-servis-kema",
       "name": "Auto Servis KEMA",
       "city": "Fushë Kosovë",
@@ -3479,42 +3207,6 @@
       }
     },
     {
-      "id": "auto-servis-kiki-ferizaj",
-      "name": "Auto Servis Kiki",
-      "city": "Ferizaj",
-      "address": "Bibaj-Ferizaj, Ferizaj",
-      "phone": "+38344273962",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Auto Servis Kiki in Ferizaj als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/auto-servis-kiki-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
-      }
-    },
-    {
       "id": "auto-servis-klima-peja",
       "name": "Auto Servis Klima",
       "city": "Peja",
@@ -3565,42 +3257,6 @@
           ],
           "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
         }
-      }
-    },
-    {
-      "id": "auto-servis-lavdrimi-ferizaj",
-      "name": "Auto Servis Lavdrimi",
-      "city": "Ferizaj",
-      "address": "Bibaj-Ferizaj, Ferizaj",
-      "phone": "+38344219531",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Auto Servis Lavdrimi in Ferizaj als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/auto-servis-lavdrimi-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
       }
     },
     {
@@ -3720,42 +3376,6 @@
           ],
           "note": "Die eigene Website verbindet bisherigen und aktuellen Kontakt und bestätigt Lan Dobraj sowie konkrete Pkw-Reparaturen. Der gültige Google-Eintrag hat dieselbe aktuelle Telefonnummer und Anschrift. Fehlerhafte Telefonlink-Vorlagen wurden nicht übernommen."
         }
-      }
-    },
-    {
-      "id": "auto-servis-mendi-ferizaj",
-      "name": "Auto Servis Mendi",
-      "city": "Ferizaj",
-      "address": "Bibaj-Ferizaj",
-      "phone": "+38344144935",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Auto Servis Mendi in Ferizaj als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/auto-servis-mendi-2",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
       }
     },
     {
@@ -4136,42 +3756,6 @@
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
-      }
-    },
-    {
-      "id": "auto-servis-valoni-feroda-prishtina",
-      "name": "Auto Servis Valoni - Feroda",
-      "city": "Prishtina",
-      "address": "Ahmet Krasniqi, Prishtinë",
-      "phone": "+38344149947",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Auto Servis Valoni - Feroda in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/auto-servis-valoni---feroda-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
       }
     },
     {
@@ -4781,82 +4365,6 @@
       }
     },
     {
-      "id": "automekanik-leoni-prishtina",
-      "name": "Automekanik Leoni",
-      "city": "Prishtina",
-      "address": "Isa Kastrati , Prishtinë",
-      "phone": "+38344344979",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung",
-        "Diagnose & Elektronik",
-        "Karosserie & Lack"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen.",
-        "Fahrzeugdiagnose oder Elektrikservice in der Verzeichnisbeschreibung genannt.",
-        "Karosserie- oder Lackierarbeiten in der Verzeichnisbeschreibung genannt."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Automekanik Leoni in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/automekanik--leoni-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
-      }
-    },
-    {
-      "id": "automekanik-muja-prishtina",
-      "name": "Automekanik Muja",
-      "city": "Prishtina",
-      "address": "Zagrebi, Prishtinë",
-      "phone": "+38344611369",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Automekanik Muja in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/automekanik-muja-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
-      }
-    },
-    {
       "id": "automex-gjakova",
       "name": "Automex",
       "city": "Gjakova",
@@ -5080,114 +4588,6 @@
       }
     },
     {
-      "id": "autoservis-bekteshi-prishtina",
-      "name": "Autoservis Bekteshi",
-      "city": "Prishtina",
-      "address": "Ali Hadri, Prishtinë",
-      "phone": "+38344111384",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Autoservis Bekteshi in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/autoservis-bekteshi-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
-      }
-    },
-    {
-      "id": "autoservis-difa-prishtina",
-      "name": "Autoservis Difa",
-      "city": "Prishtina",
-      "address": "Lidhja e Prizrenit , Prishtinë",
-      "phone": "+38344161031",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Autoservis Difa in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/autoservis-difa-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
-      }
-    },
-    {
-      "id": "autoservis-irfi-prishtina",
-      "name": "Autoservis Irfi",
-      "city": "Prishtina",
-      "address": "Abedin Rexha , Prishtinë",
-      "phone": "+38344133012",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Autoservis Irfi in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/autoservis-irfi-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
-      }
-    },
-    {
       "id": "autoservis-keni-prishtina",
       "name": "Autoservis KENI",
       "city": "Prishtina",
@@ -5241,46 +4641,6 @@
           ],
           "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
         }
-      }
-    },
-    {
-      "id": "autoservis-naser-minushi-prishtina",
-      "name": "AutoServis Naser Minushi",
-      "city": "Prishtina",
-      "address": "Hajdar Dushi , Prishtinë",
-      "phone": "+38344141834",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung",
-        "Bremsen & Fahrwerk",
-        "Motor & Getriebe"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen.",
-        "Bremsen-, Fahrwerks- oder Achsvermessungsarbeiten in der Verzeichnisbeschreibung genannt.",
-        "Motor-, Getriebe- oder Turboladerarbeiten in der Verzeichnisbeschreibung genannt."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt AutoServis Naser Minushi in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/autoservis-naser-minushi-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
       }
     },
     {
@@ -5458,42 +4818,6 @@
           ],
           "note": "Die offizielle Toyota-Kosovo-Domain, Händlername und Filialstandort bestätigen die Identität. Historische Landesvorwahlen werden nicht pauschal gleichgesetzt."
         }
-      }
-    },
-    {
-      "id": "axha-prishtina",
-      "name": "Axha",
-      "city": "Prishtina",
-      "address": "Ferat Dragaj , Bregu i Diellit, Prishtinë",
-      "phone": "+38344216061",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Axha in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/axha-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
       }
     },
     {
@@ -6384,42 +5708,6 @@
       }
     },
     {
-      "id": "firi-prishtina",
-      "name": "Firi",
-      "city": "Prishtina",
-      "address": "Hajrullah Abdullahu , Bregu i Diellit, Prishtinë",
-      "phone": "+38344832285",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Firi in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/firi-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
-      }
-    },
-    {
       "id": "foleja-motors",
       "name": "Foleja Motors",
       "city": "Prishtina",
@@ -6470,42 +5758,6 @@
           ],
           "note": "Die Karte der offiziellen Motors-Seite bestätigt die CID 6574000919579083654. Der veröffentlichte Servicekontakt bleibt erhalten."
         }
-      }
-    },
-    {
-      "id": "g-b-prishtina",
-      "name": "G & B",
-      "city": "Prishtina",
-      "address": "Ferat Dragaj , Bregu i Diellit, Prishtinë",
-      "phone": "+38344405969",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt G & B in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/g--b-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
       }
     },
     {
@@ -6649,44 +5901,6 @@
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
-      }
-    },
-    {
-      "id": "ibra-prishtina",
-      "name": "Ibra",
-      "city": "Prishtina",
-      "address": "Abdyl Frashëri, Prishtinë",
-      "phone": "+38344300519",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung",
-        "Reifen & Klima"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen.",
-        "Klima- oder Reifenmontage/-service in der Verzeichnisbeschreibung genannt; konkreten Umfang direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Ibra in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/ibra-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
       }
     },
     {
@@ -7088,42 +6302,6 @@
       }
     },
     {
-      "id": "moto-stanki-gjilan",
-      "name": "Moto Stanki",
-      "city": "Gjilan",
-      "address": "Afrim Zhitia, Gjilan",
-      "phone": "+38344704107",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Moto Stanki in Gjilan als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/moto-stanki-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
-      }
-    },
-    {
       "id": "nero-prizren",
       "name": "Nero",
       "city": "Prizren",
@@ -7290,46 +6468,6 @@
           ],
           "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
         }
-      }
-    },
-    {
-      "id": "opel-prishtina-prishtina",
-      "name": "Opel Prishtina",
-      "city": "Prishtina",
-      "address": "Nazim Gafurri nr 41, Prishtinë",
-      "phone": "+38344111824",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung",
-        "Diagnose & Elektronik",
-        "Motor & Getriebe"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen.",
-        "Fahrzeugdiagnose oder Elektrikservice in der Verzeichnisbeschreibung genannt.",
-        "Motor-, Getriebe- oder Turboladerarbeiten in der Verzeichnisbeschreibung genannt."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Opel Prishtina in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/opel-prishtina-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
       }
     },
     {
@@ -7786,42 +6924,6 @@
       }
     },
     {
-      "id": "skifti-prishtina",
-      "name": "Skifti",
-      "city": "Prishtina",
-      "address": "Shefqet Shkupi, Prishtinë",
-      "phone": "+38349122194",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Skifti in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/skifti-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
-      }
-    },
-    {
       "id": "sonic-garage",
       "name": "Sonic Garage Ferizaj",
       "city": "Ferizaj",
@@ -8133,44 +7235,6 @@
       }
     },
     {
-      "id": "turbo-servis-turbo-klinika-prishtina",
-      "name": "Turbo Servis Turbo Klinika",
-      "city": "Prishtina",
-      "address": "Xhavit Ahmeti, Prishtinë",
-      "phone": "+38345577316",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung",
-        "Motor & Getriebe"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen.",
-        "Motor-, Getriebe- oder Turboladerarbeiten in der Verzeichnisbeschreibung genannt."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Turbo Servis Turbo Klinika in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/turbo-klinika-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
-      }
-    },
-    {
       "id": "universal-auto-pjese-servis-gjilan",
       "name": "Universal Auto Pjese & Servis",
       "city": "Gjilan",
@@ -8215,42 +7279,6 @@
       }
     },
     {
-      "id": "univerzall-prishtina",
-      "name": "Univerzall",
-      "city": "Prishtina",
-      "address": "Norbert Jokl , Bregu i Diellit, Prishtinë",
-      "phone": "+38344340290",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Univerzall in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/univerzall-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
-      }
-    },
-    {
       "id": "valoni-i-mitrovica",
       "name": "Valoni-I",
       "city": "Mitrovica",
@@ -8292,42 +7320,6 @@
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
         }
-      }
-    },
-    {
-      "id": "xhema-auto-servis-prishtina",
-      "name": "Xhema Auto Servis",
-      "city": "Prishtina",
-      "address": "Vllezerit Fazliu, Prishtinë",
-      "phone": "+38344900238",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Xhema Auto Servis in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/xhema-auto-servis-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
       }
     },
     {

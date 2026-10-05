@@ -14,11 +14,18 @@ const research=JSON.parse(await readFile('data/catalogue-review-2026-10-04.json'
 const latestResearch=JSON.parse(await readFile('data/catalogue-review-2026-10-05.json','utf8'));
 const followupResearch=JSON.parse(await readFile('data/catalogue-followup-2026-10-05.json','utf8'));
 const identityResearch=JSON.parse(await readFile('data/catalogue-identity-2026-10-05.json','utf8'));
+const removals=JSON.parse(await readFile('data/workshop-removals.json','utf8'));
+const removedIds=new Set(removals.workshopIds);
+assert.equal(removedIds.size,27);
+assert.deepEqual(removedIds,new Set(identityResearch.draftAssessments.filter(p=>p.assessment==='needs_identity').map(p=>p.workshopId)),'only the user-rejected 27 identities are removed');
+assert.deepEqual(removals.before,{total:163,published:128,drafts:35});assert.deepEqual(removals.after,{total:136,published:128,drafts:8});
+assert.equal(stats.published,128);assert.equal(stats.drafts,8);
 const effectiveAssessments=new Map([...latestResearch.draftAssessments,...followupResearch.draftAssessments,...identityResearch.draftAssessments].map(proof=>[proof.workshopId,proof]));
 const importManifest=JSON.parse(await readFile('data/import-2026-10-03.json','utf8'));
 const expectedCatalogueIds=new Set([...research.draftAssessments.map(proof=>proof.workshopId),...importManifest.importedWorkshopIds,...importManifest.originalPublishedWorkshopIds]);
-assert.deepEqual(new Set(catalogue.workshops.map(w=>w.id)),expectedCatalogueIds,'draft review preserves every existing workshop ID and adds no profiles');
-assert.equal(catalogue.workshops.length,163);assert.equal(new Set(catalogue.workshops.map(w=>w.id)).size,catalogue.workshops.length,'all existing workshop IDs remain unique');
+for(const id of removedIds)expectedCatalogueIds.delete(id);
+assert.deepEqual(new Set(catalogue.workshops.map(w=>w.id)),expectedCatalogueIds,'only explicitly rejected IDs are removed; all other IDs remain');
+assert.equal(catalogue.workshops.length,136);assert.equal(new Set(catalogue.workshops.map(w=>w.id)).size,catalogue.workshops.length,'all existing workshop IDs remain unique');
 const expectedReviewIds=new Set([...research.draftAssessments.filter(proof=>proof.assessment!=='candidate').map(proof=>proof.workshopId),...research.coordinateChecks.filter(proof=>!proof.confirmed).map(proof=>proof.id)]);
 assert.equal(latestResearch.reviewedDrafts,85);
 assert.equal(latestResearch.draftAssessments.length,85);
@@ -30,6 +37,7 @@ assert.equal(latestResearch.after.drafts,latestResearch.before.drafts-promotionC
 assert.deepEqual(latestResearch.draftSummary,{published:promotionCount,needsIdentity:latestResearch.draftAssessments.filter(proof=>proof.assessment==='needs_identity').length,excluded:latestResearch.draftAssessments.filter(proof=>proof.assessment==='excluded').length});
 for(const proof of latestResearch.draftAssessments){
  const workshop=catalogue.workshops.find(w=>w.id===proof.workshopId);
+ if(!workshop){assert(removedIds.has(proof.workshopId));assert.equal(proof.resultingStatus,'draft');continue;}
  assert(['published','needs_identity','excluded'].includes(proof.assessment));
  assert.equal(proof.resultingStatus,proof.assessment==='published'?'published':'draft');
  assert.equal(workshop.status,effectiveAssessments.get(proof.workshopId).resultingStatus,'only positively verified drafts are promoted');
@@ -61,8 +69,9 @@ assert.deepEqual(identityResearch.draftSummary,{published:identityPromotions,nee
 assert.equal(identityResearch.draftSummary.needsIdentity,27);
 assert.deepEqual(identityResearch.after,{published:128,drafts:35});
 assert.equal(stats.published,identityResearch.before.published+identityPromotions,'all previously public profiles remain published');
-assert.equal(stats.drafts,identityResearch.before.drafts-identityPromotions);
-assert.equal(identityResearch.after.published,stats.published);assert.equal(identityResearch.after.drafts,stats.drafts);
+assert.equal(identityResearch.after.drafts,identityResearch.before.drafts-identityPromotions);
+assert.equal(stats.drafts,identityResearch.after.drafts-removedIds.size);
+assert.equal(identityResearch.after.published,stats.published);
 assert.equal(identityResearch.googleApiRequests,0,'the third review does not bypass the exhausted server quota');assert.equal(identityResearch.dailyRequestLimit,100);
 for(const proof of unchangedDrafts){
  assert.equal(catalogue.workshops.find(w=>w.id===proof.workshopId).status,'draft','branch conflicts, closed businesses and scope exclusions remain private');
@@ -83,6 +92,7 @@ for(const proof of identityResearch.draftAssessments){
 }
 for(const proof of [...followupResearch.draftAssessments,...identityResearch.draftAssessments]){
  const workshop=catalogue.workshops.find(w=>w.id===proof.workshopId);
+ if(!workshop){assert(removedIds.has(proof.workshopId));assert.equal(proof.resultingStatus,'draft');continue;}
  assert(['published','needs_identity','identity_conflict','branch_conflict','closed','excluded'].includes(proof.assessment));
  assert.equal(proof.resultingStatus,proof.assessment==='published'?'published':'draft');
  assert.equal(workshop.status,effectiveAssessments.get(proof.workshopId).resultingStatus,'a later positive identity review determines the current status');
@@ -114,6 +124,7 @@ assert.equal(research.draftAssessments.length,92);
 assert.equal(research.draftAssessments.filter(proof=>proof.assessment==='candidate').length,9);
 for(const proof of research.draftAssessments){
  const workshop=catalogue.workshops.find(w=>w.id===proof.workshopId);
+ if(!workshop){assert(removedIds.has(proof.workshopId));assert.notEqual(proof.assessment,'candidate');continue;}
  if(proof.assessment==='candidate'){
   assert.equal(workshop.status,'published','historically verified profiles remain public');
   assert.equal(workshop.google.placeId,proof.googleIdentity.placeId);
