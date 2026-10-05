@@ -2,15 +2,16 @@
 
 Diese Anleitung setzt [#20](https://github.com/ramiz4/riparim/issues/20) nach der
 [technischen Produktionsabnahme](domain-cutover-2026-10-05.md) um. Stand vom
-5. Oktober 2026: Inventar und geschütztes Gesamtarchiv sind geprüft; die eigentliche
-Stilllegung ist noch nicht ausgeführt. Das Ende der gesonderten Rückfallphase
-ist nicht vereinbart. Der Vorschlag 6. Oktober, 05:00 Europe/Belgrade gilt deshalb
-nicht als Freigabe. Die folgenden Änderungen beginnen erst nach der ausdrücklich
-dokumentierten Entscheidung zum Phasenende.
+5. Oktober 2026: Inventar, geschütztes Gesamtarchiv und Stilllegung sind geprüft.
+Der Nutzer beendete die gesonderte Rückfallphase ausdrücklich mit
+„Ja, jetzt stilllegen.“; die Betreiberentscheidung wurde um 09:51:01
+Europe/Belgrade (07:51:01 UTC) festgehalten. Die Ausführung und Nachprüfung stehen
+im Abschlussnachweis unten. Der frühere Terminvorschlag 6. Oktober, 05:00 Uhr
+wurde dadurch ersetzt; er löst keine weitere automatische Änderung aus.
 
 ## Bestand und Unabhängigkeit des neuen Betriebs
 
-| Alter Bestand | Nachgewiesener Zustand |
+| Alter Bestand | Inventar vor der Ausführung |
 | --- | --- |
 | Hostingprojekt | `appgprj_6abfd028b7e48191822a15d44cbbda8d`, aktiv, Betreiber ist Owner |
 | Generierte URL | `https://mjeshter-kosovo.r-loki.chatgpt.site`, HTTP 503 mit tatsächlichem Wartungstext und `no-store` |
@@ -93,7 +94,7 @@ Archiv, Wiederherstellungsschlüssel und alte Plattformressourcen. Das Datum lö
 keine automatische Löschung aus. Eine endgültige Löschung benötigt danach eine
 gesonderte ausdrückliche Beauftragung. Verlängerte Aufbewahrung bleibt möglich.
 
-## Ausführungsplan nach vereinbartem Rückfallende
+## Geprüfter Ausführungsplan
 
 Die verfügbaren nativen Werkzeuge bieten kein Unpublish, Suspend oder Löschen
 des gesamten Projekts. Der ausführbare Plan sperrt deshalb die alte öffentliche
@@ -165,5 +166,58 @@ Zurückrouten auf ihren veralteten Bestand ist nicht freigegeben.
 Bei einer fehlenden Bestätigung oder einer unbekannten API-/Vault-Antwort den
 abhängigen Schritt anhalten, vorhandene Journale/Objekte frisch prüfen und keine
 blinde Wiederholung ausführen. Eigene Worker-Ressourcen und neue Nutzerdaten
-bleiben erhalten. Der bisherige Zustand der alten Site ist aktuell weiterhin
-**öffentlich, eingefroren und nicht stillgelegt**.
+bleiben erhalten.
+
+## Abschlussnachweis vom 5. Oktober 2026
+
+Die freigegebene Rückfallphase ist beendet. Die alte **öffentliche** Veröffentlichung
+ist kontrolliert stillgelegt; das aktive Hostingprojekt und seine physischen
+Ressourcen bleiben zur Aufbewahrung erhalten. Dies ist keine Projektlöschung.
+
+| Tatsächlich ausgeführt | Ergebnis |
+| --- | --- |
+| Source-Zugriff | `custom`, Policyrevision 3; genau ein Owner, null Nicht-Owner und Gruppen; aktueller Betreiber bleibt Owner |
+| Alte Domainzuordnungen | ausschließlich beide inventarisierten Source-IDs entfernt; frische Source-Liste leer |
+| Eigene Domainkonfiguration | beide ursprünglichen eigenen Worker-Domain-IDs, Zone, aktivierter Zustand und ausgeschaltete Previews unverändert |
+| Alte Exportwerte | ausschließlich `MIGRATION_EXPORT_TOKEN_SHA256`, `MIGRATION_EXPORT_EXPIRES_AT`, `MIGRATION_SOURCE_COMMIT` entfernt |
+| Aktive Source-Laufzeit | Environmentrevision 18; `MIGRATION_READ_ONLY=true`; übrige Einträge unverändert |
+| Private Übernahme | gespeicherte geprüfte Version 42 / BF0; Deployment `appgdep_6ac358569efc8191b9841848bccea8b5` erfolgreich mit Revision 18 |
+| Alte öffentliche Zugänge | generierte Root-URL und Exportpfad antworten anonym mit HTTP 401 |
+| Erhaltene Source-Ressourcen | Projekt aktiv und Owner-zugänglich, Versionen unverändert, logisches D1-Binding mit allen 17 Anwendungstabellen vorhanden; private Dateien vollständig archiviert, keine Ressourcen gelöscht |
+| Hintergrundarbeit | null verknüpfte Sites-Automationen; physischer Source-Cron bleibt archiviert, sämtliche Geschäftsarbeit durch Read-only gesperrt |
+
+Die neue Produktion lieferte nach jedem Routing-Schritt weiterhin HTTP 200
+am Apex und HTTP 308 mit erhaltener Query auf www, jeweils mit dem unveränderten
+Release-Commit von v1.2.9. Es gab keine weitere öffentliche Wartungspause.
+
+**Nachprüfung tatsächlich bestanden:** fünf Produktions-Preflights und 15
+Auth-/Berechtigungsprüfungen um 10:02:59 Europe/Belgrade. E-Mail-/Passwort-Anmeldung,
+Sitzungswiderruf bei Sperre und Abmeldung, erneute Anmeldung nach Entsperrung,
+Verwaltungsrechte, private PNG-Datei für Owner/Admin sowie verweigerter fremder/
+anonymer Zugriff und Ausschluss des Pending-Besuchs aus öffentlichen Bewertungen
+funktionieren auf dem eigenen Worker. Es wurden keine echten E-Mails versandt.
+
+Drei markierte synthetische Konten, ihre Daten und die private Datei sind
+vollständig entfernt: null verbleibende Konten, null Bereinigungsfehler,
+R2-Inventar danach null Objekte. Gemeinsame IP-Limits blieben erhalten.
+Privates Prüfjournal: `1ed4fac9-7739-42da-ae97-709d36d7b6f8`.
+
+Zusätzlich wurde die echte Google-Anmeldung auf riparim.com wiederholt:
+Rücksprung zu `/werkstaetten?ort=prishtina`, vorhandener Admin-Menüeintrag,
+erreichbare Verwaltungsseite und anschließende Abmeldung zur Gast-Anmeldeseite.
+Browserlog: null Fehler, kein Navigationsfehler aus #33. Es wurden keine echten
+Benutzer- oder Moderationsdaten verändert.
+
+Gemeinsame Supabase-, Google-, Resend- und eigene CI-Zugänge wurden nicht
+widerrufen oder umkonfiguriert. Ausschließlich der alte Source-Exportzugang ist
+aus der aktiven Laufzeit entfernt. Die allgemeine Sites-Verbindung und native
+Owner-Identität bleiben für andere Sites und die Wiederherstellung erhalten.
+Kurzlebige frühere Git-Schreibzugänge werden nicht als dauerhaft widerrufen
+behauptet; es wurde für die Stilllegung kein neuer Source-Schreibzugang erzeugt.
+Der produktive Betrieb benötigt diese alte Git-Verbindung nicht.
+
+Die Archiv- und Ressourcenaufbewahrung bis mindestens 4. November bleibt gültig.
+Es wurde keine endgültige Löschung beauftragt oder ausgeführt. Nach sicherer
+Übergabe können eigene Aufgaben-Worktrees archiviert werden; benötigte ignorierte
+Backups bleiben vorher gesondert gesichert. Die tatsächliche Archivierung und
+die verbleibenden Ressourcen sind damit die dokumentierte Übergabe für #20.

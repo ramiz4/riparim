@@ -49,7 +49,7 @@ Die Anwendung verarbeitet fällige Bewertungsnachrichten alle fünf Minuten übe
 
 ## Einmaliger Wechsel von Sites
 
-Die [Datenübernahme](data-transfer-2026-10-04.md) und die [Produktionsumstellung](domain-cutover-2026-10-05.md) sind abgeschlossen. D1-Daten einschließlich Auth-Konfiguration, Identitäten, Rollen, Sessions, Besitzrechten und Freigabestatus wurden abgeglichen; privates R2 und Migrationshistorie sind geprüft. Der eigene Worker ist der alleinige Writer. Die alte Site bleibt bis zum vereinbarten Rückfallende eingefroren und wird nach [sites-retirement.md](sites-retirement.md) kontrolliert außer Betrieb genommen. Eine leere neue Datenbank mit angewendeter Schema-Migration ist keine Übernahme bestehender Nutzerdaten.
+Die [Datenübernahme](data-transfer-2026-10-04.md), [Produktionsumstellung](domain-cutover-2026-10-05.md) und [kontrollierte öffentliche Sites-Stilllegung](sites-retirement.md) sind abgeschlossen. D1-Daten einschließlich Auth-Konfiguration, Identitäten, Rollen, Sessions, Besitzrechten und Freigabestatus wurden abgeglichen; privates R2 und Migrationshistorie sind geprüft. Der eigene Worker ist der alleinige Writer. Die alte Site ist Owner-only und bleibt schreibgesperrt; ihre Daten, Versionen und gesicherten Archive werden gemäß dokumentierter Aufbewahrung erhalten. Eine leere neue Datenbank mit angewendeter Schema-Migration ist keine Übernahme bestehender Nutzerdaten.
 
 Der erste Worker-Release erlaubt zunächst die Prüfung des Deployments. Anmeldung und Verwaltung benötigen die übernommene aktive `auth_settings`-Zeile und die zum bestehenden Supabase-Projekt gehörenden Werte. `REVIEW_MODERATOR_EMAIL` und `SUPABASE_SECRET_KEY` allein legen diese Konfiguration nicht an; eine ungeschützte Bootstrap-Route wird nicht bereitgestellt.
 
