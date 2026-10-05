@@ -36,6 +36,7 @@ try{
    }finally{dom.window.close();}
   }
  }
+ const albanianX=await runtime.dispatchFetch('https://riparim.test/sq/werkstaetten?q=Auto%20Servis%20X'),albanianXDom=new JSDOM(await albanianX.text());try{assert.deepEqual([...albanianXDom.window.document.querySelectorAll('.catalogue-card h2')].map(node=>node.textContent),['Auto servis XONI','Auto Servis Xhelali'],'actual built SQ SSR catalogue keeps the full-ICU X before Xh ordering');}finally{albanianXDom.window.close();}
  const www=await runtime.dispatchFetch("http://www.riparim.com/en/werkstaetten?ort=prizren&sprache=sq",{redirect:"manual"});assert.equal(www.status,308);assert.equal(www.headers.get("Location"),"https://riparim.com/en/werkstaetten?ort=prizren&sprache=sq");
  for(const [path,target] of [['/de','/'],['/de/werkstaetten?ort=prizren','/werkstaetten?ort=prizren']]){const response=await runtime.dispatchFetch('https://riparim.test'+path,{redirect:'manual'});assert.equal(response.status,308);assert.equal(new URL(response.headers.get('Location'),'https://riparim.test').href,'https://riparim.test'+target);}
  for(const path of ['/fr','/sq/missing','/en/missing','/werkstatt/unknown-profile','/en/werkstatt/unknown-profile','/sq/werkstatt/x','/sq/missing.html','/en/missing.txt','/sq/missing.svg','/en/missing.png','/fr/missing.png','/missing.html','/missing.png']){const response=await runtime.dispatchFetch('https://riparim.test'+path);assert.equal(response.status,404,path);};

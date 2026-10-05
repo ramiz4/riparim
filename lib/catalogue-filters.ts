@@ -1,3 +1,4 @@
+import {displayComparator} from "@/lib/i18n/collation";
 import {valueLabel} from "@/lib/i18n/values";
 import {localizeHref,type Locale} from "@/lib/i18n/locale";
 import {brands,cities,services,cityCoordinates,findWorkshops,type Workshop} from "@/lib/workshops";
@@ -14,7 +15,7 @@ export function catalogueSlug(value:string){const language={Albanisch:"sq",Deuts
 export function catalogueQuery(value:string){return value.replace(/[\u0000-\u001f\u007f]/g,"").trim().replace(/\s+/g," ").slice(0,100);}
 const searchText=(value:string)=>value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("de");
 const unique=(values:string[])=>[...new Set(values)].sort((a,b)=>a.localeCompare(b,"de"));
-export function catalogueOptions(directory:Workshop[],locale:Locale="de"){const sorted=(values:string[],language=false)=>[...new Set(values)].sort((a,b)=>(language?valueLabel(locale,"language",a):a).localeCompare(language?valueLabel(locale,"language",b):b,locale));return {cities:[cities[0],...sorted(directory.map(w=>w.city))],brands:[brands[0],...sorted(directory.flatMap(w=>w.brands).filter(value=>value!==brands[0]))],languages:["Alle Sprachen",...sorted(directory.flatMap(w=>w.languages),true)]};}
+export function catalogueOptions(directory:Workshop[],locale:Locale="de"){const compare=displayComparator(locale),sorted=(values:string[],language=false)=>[...new Set(values)].sort((a,b)=>compare(language?valueLabel(locale,"language",a):a,language?valueLabel(locale,"language",b):b));return {cities:[cities[0],...sorted(directory.map(w=>w.city))],brands:[brands[0],...sorted(directory.flatMap(w=>w.brands).filter(value=>value!==brands[0]))],languages:["Alle Sprachen",...sorted(directory.flatMap(w=>w.languages),true)]};}
 const validRating=(value:number|null|undefined)=>value!=null&&Number.isFinite(value)&&value>=1&&value<=5;
 export function hasPublishedRatings(directory:Workshop[]){return directory.some(w=>w.status==="published"&&validRating(w.rating)&&w.count>0);}
 export function hasGoogleRatings(directory:Workshop[],live:CatalogueGoogleRatings={}){return directory.some(w=>w.status==="published"&&validRating(live[w.id]?.rating));}
@@ -43,6 +44,7 @@ export function catalogueHref(filters:CatalogueFilters,locale:Locale="de"){
  return localizeHref(`/werkstaetten${params.size?`?${params.toString()}`:""}`,locale);
 }
 export function matchCatalogue(directory:Workshop[],filters:CatalogueFilters,context:SearchContext|null=null,privateMatchingActive=false,live:CatalogueGoogleRatings={},locale:Locale="de"){
+ const compareNames=displayComparator(locale);
  const geography=privateMatchingActive&&context&&context.city===filters.city?context:null;
  const words=searchText(catalogueQuery(filters.query??"")).split(" ").filter(Boolean);
  return findWorkshops(directory,filters.service,filters.city,filters.brand,geography?.radius??0,filters.language,geography?.additionalCity??"").filter(w=>w.status==="published"&&(filters.brand===brands[0]||w.brands.includes(filters.brand)||w.brands.includes(brands[0]))&&words.every(word=>searchText(w.name).includes(word))).sort((a,b)=>{
@@ -58,7 +60,7 @@ export function matchCatalogue(directory:Workshop[],filters:CatalogueFilters,con
    if((ad===null)!==(bd===null))return ad===null?1:-1;
    if(ad!==null&&bd!==null&&ad!==bd)return ad-bd;
   }
-  return a.name.localeCompare(b.name,filters.sort==="name"?locale:"de");
+  return filters.sort==="name"?compareNames(a.name,b.name):a.name.localeCompare(b.name,"de");
  });
 }
 export function activeCatalogueFilters(filters:CatalogueFilters){return (["query","service","city","brand","language"] as const).filter(key=>key==="query"?!!catalogueQuery(filters.query??""):filters[key]!==defaultCatalogueFilters[key]);}
