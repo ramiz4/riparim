@@ -11,21 +11,21 @@ globalThis.IS_REACT_ACT_ENVIRONMENT=true;
 // jsdom has no layout; dialogs still exercise their real keyboard/focus behavior.
 globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
 const out='.test-runtime/admin-workshops-ui';await mkdir(out,{recursive:true});
-const bundle=await build({entryPoints:['app/[locale]/verwaltung/panel.tsx'],outfile:out+'/ui.mjs',bundle:true,write:false,format:'esm',platform:'node',packages:'external'});
+const bundle=await build({stdin:{contents:"export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {default} from './app/[locale]/verwaltung/panel';",resolveDir:process.cwd(),loader:'tsx'},outfile:out+'/ui.mjs',bundle:true,write:false,format:'esm',platform:'node',packages:'external'});
 await writeFile(out+'/ui.mjs',bundle.outputFiles[0].contents);
-const {createElement,act}=await import('react'),{createRoot}=await import('react-dom/client'),{default:AdminPanel}=await import(new URL('../'+out+'/ui.mjs',import.meta.url));
+const {createElement,act}=await import('react'),{createRoot}=await import('react-dom/client'),{default:AdminPanel,I18nProvider,getMessages}=await import(new URL('../'+out+'/ui.mjs',import.meta.url));
 const workshop={id:'fixture-published',name:'Fiktive Werkstatt',city:'Prishtina',address:'Fixture Street 10',phone:'+38344123456',phoneNote:'Betrieb',whatsapp:'',brands:[],services:['Inspektion & Wartung'],serviceDetails:['Inspektion'],languages:[],specialty:'Fahrzeugdiagnose',description:'A sufficiently detailed fictional passenger-car workshop description.',lat:null,lng:null,sources:[],checkedAt:'2026-10-04',status:'published',updatedAt:'2026-10-04T09:00:00Z'};
 let records=[workshop,{...workshop,id:'fixture-draft',name:'Entwurfswerkstatt',city:'Peja',status:'draft'}],pendingCount=0,mode='success',resolveLoad;
 const requests=[];
 globalThis.fetch=async(url,options)=>{
  assert(!options?.method||options.method==='GET','This view-only fixture never mutates workshop or moderation data');requests.push(url);
- if(url==='/api/workshops?admin=1'){if(mode==='loading')return new Promise(resolve=>{resolveLoad=()=>resolve(Response.json({workshops:records}));});if(mode==='error')return Response.json({error:'Fixture directory unavailable'},{status:503});return Response.json({workshops:records});}
+ if(url==='/api/workshops?admin=1'){if(mode==='loading')return new Promise(resolve=>{resolveLoad=()=>resolve(Response.json({workshops:records}));});if(mode==='error')return Response.json({error:'Fixture directory unavailable',errorCode:'unavailable'},{status:503});return Response.json({workshops:records});}
  if(url==='/api/visits?moderation=1')return Response.json({pendingCount});
  if(url==='/api/notifications')return Response.json({notifications:[],nextCursor:null,configured:true});
  throw Error('Unexpected fixture request: '+url);
 };
 let root=createRoot(document.getElementById('root'));
-const render=async()=>act(async()=>root.render(createElement(AdminPanel,{account:{email:'admin@example.test',displayName:'Fixture admin',provider:'Google'}})));
+const render=async()=>act(async()=>root.render(fixtureMessages(createElement(AdminPanel,{account:{email:'admin@example.test',displayName:'Fixture admin',provider:'Google'}}))));
 const button=label=>[...document.querySelectorAll('button')].find(node=>node.textContent===label);
 const click=async node=>{assert(node,'Expected UI action exists');await act(async()=>{node.focus();node.click();});};
 const type=async(node,value)=>act(async()=>{Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(node,value);node.dispatchEvent(new Event('input',{bubbles:true}));});
@@ -64,7 +64,7 @@ try{
  mode='loading';await remount();assert(document.querySelector('main [role="status"]').textContent.includes('Werkstätten werden geladen'),'Loading remains announced');
  assert.equal(document.querySelector('.empty'),null,'Loading does not display a misleading empty state');
  await act(async()=>resolveLoad());assert.deepEqual(names(),['Fiktive Werkstatt','Entwurfswerkstatt']);
- mode='error';await remount();assert.equal(document.querySelector('main [role="alert"]').textContent,'Fixture directory unavailable','Load failures remain accessible');
+ mode='error';await remount();assert.equal(document.querySelector('main [role="alert"]').textContent,getMessages('de').common.unavailable,'Load failures remain accessible');
  assert.equal(document.querySelector('.empty'),null,'A failed load is not described as an empty directory');
  mode='success';records=[];await remount();assert(document.querySelector('.empty').textContent.includes('Keine Werkstätten gefunden.'),'An empty directory retains its add action');
  assert.equal(document.querySelector('.empty button').textContent,'Werkstatt hinzufügen');
@@ -99,3 +99,5 @@ async function assertTableStyles(){
   }
  }finally{control.remove();style.remove();document.documentElement.classList.remove('dark');}
 }
+
+function fixtureMessages(element){return createElement(I18nProvider,{locale:"de",messages:getMessages("de",["common","customer","management"])},element);}

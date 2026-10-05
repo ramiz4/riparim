@@ -1,3 +1,4 @@
+import type {Translator,MessageKey} from "@/lib/i18n/messages";
 export type ReviewDecision="published"|"needs_more";
 export type NotificationState="pending"|"sending"|"sent"|"blocked"|"failed"|"unknown"|"suppressed";
 export type NotificationRow={
@@ -6,11 +7,7 @@ export type NotificationRow={
  first_attempt_at:number|null;payload:string|null;provider_key_hash:string|null;provider_id:string|null;last_error:string|null;
 };
 export type NotificationView={id:string;visitId:string;workshopName:string;decision:ReviewDecision;state:NotificationState;attempts:number;nextAttemptAt:number;createdAt:string;error:string|null;retryable:boolean};
-export const notificationStateLabels:Record<NotificationState,string>={pending:"Versand vorgemerkt",sending:"Versand wird geprüft",sent:"An Versanddienst übergeben",blocked:"Versand blockiert",failed:"Versand fehlgeschlagen",unknown:"Versandstatus unklar",suppressed:"Benachrichtigung entfällt"};
-export const notificationErrorLabels:Record<string,string>={
- configuration_missing:"Der serverseitige E-Mail-Versand ist noch nicht eingerichtet.",auth_configuration_missing:"Der Zugriff auf bestätigte Kontoadressen ist nicht eingerichtet.",
- no_verified_contact:"Für diese Einreichung ist keine bestätigte Kontaktadresse verfügbar.",account_blocked:"Das zugehörige Konto ist gesperrt oder wird gelöscht.",superseded:"Die Einreichung wurde inzwischen geändert oder gelöscht.",
- recipient_changed:"Die bestätigte Kontoadresse hat sich seit dem ersten Versandversuch geändert.",credential_changed:"Die Versandverbindung hat sich seit dem ersten Versuch geändert; prüfe den bisherigen Versand beim Dienst.",
- provider_unavailable:"Der Versanddienst ist vorübergehend nicht erreichbar.",rate_limited:"Der Versanddienst begrenzt weitere Nachrichten vorübergehend.",provider_rejected:"Der Versanddienst hat die Nachricht abgewiesen. Prüfe die Absender- und Serverkonfiguration.",
- retry_limit:"Die automatischen Versuche sind ausgeschöpft. Eine kontrollierte Wiederholung ist noch möglich.",idempotency_window_expired:"Der sichere Wiederholungszeitraum ist abgelaufen. Prüfe die Nachricht beim Versanddienst, bevor du weitere Maßnahmen ergreifst.",invalid_payload:"Die gespeicherte Nachricht konnte nicht sicher geprüft werden."
-};
+const stateKeys={pending:"management.notification_pending",sending:"management.notification_sending",sent:"management.notification_sent",blocked:"management.notification_blocked",failed:"management.notification_failed",unknown:"management.notification_unknown",suppressed:"management.notification_suppressed"} as const satisfies Record<NotificationState,MessageKey>;
+const errorKeys={configuration_missing:"management.notification_configuration_missing",auth_configuration_missing:"management.notification_auth_configuration_missing",no_verified_contact:"management.notification_no_verified_contact",account_blocked:"management.notification_account_blocked",superseded:"management.notification_superseded",recipient_changed:"management.notification_recipient_changed",credential_changed:"management.notification_credential_changed",provider_unavailable:"management.notification_provider_unavailable",rate_limited:"management.notification_rate_limited",provider_rejected:"management.notification_provider_rejected",retry_limit:"management.notification_retry_limit",idempotency_window_expired:"management.notification_idempotency_window_expired",invalid_payload:"management.notification_invalid_payload"} as const satisfies Record<string,MessageKey>;
+export function notificationStateLabel(t:Translator,value:unknown){return t(typeof value==="string"&&Object.hasOwn(stateKeys,value)?stateKeys[value as NotificationState]:"management.notificationNeedsReview");}
+export function notificationErrorLabel(t:Translator,value:unknown){return t(typeof value==="string"&&Object.hasOwn(errorKeys,value)?errorKeys[value as keyof typeof errorKeys]:"management.notificationNeedsReview");}

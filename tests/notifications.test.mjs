@@ -53,6 +53,10 @@ globalThis.fetch=async(url,options)=>{
 };
 let passed=0;const check=(condition,label)=>{assert(condition,label);passed++;};
 try{
+ for(const locale of ['de','sq','en']){
+  const invalid=await queue.GET(request('GET',null,'/api/notifications?cursor=invalid',{'Accept-Language':locale})),data=await invalid.json();
+  check(invalid.status===400&&data.errorCode==='invalid_page'&&data.error==='Ungültige Seitenangabe.','Notification cursor errors keep their stable code, legacy text and status across languages');
+ }
  for(const preference of ['de','sq','en',undefined,'fr',null,{},['sq'],'SQ']){
   preferredLocale=preference;const locale=['de','sq','en'].includes(preference)?preference:'de',prefix=locale==='de'?'':'/'+locale;
   for(const decision of ['published','needs_more']){

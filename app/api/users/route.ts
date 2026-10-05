@@ -1,3 +1,4 @@
+import {ValidationError} from "@/lib/validation-error";
 import {getAdminUser} from "@/app/auth";
 import {getAuthAdmin} from "@/lib/auth/admin";
 import {blockAccount} from "@/lib/auth/account-status";
@@ -9,9 +10,9 @@ export const dynamic="force-dynamic";
 
 export async function GET(request:Request){
  try{
-  const admin=await getAdminUser();if(!admin)return json({error:"Bitte melde dich an."},401);if(!admin.isModerator)return json({error:"Kein Zugriff auf die Benutzerverwaltung."},403);
+  const admin=await getAdminUser();if(!admin)return json({error:"Bitte melde dich an.",errorCode:"authentication_required"},401);if(!admin.isModerator)return json({error:"Kein Zugriff auf die Benutzerverwaltung.",errorCode:"forbidden"},403);
   const params=new URL(request.url).searchParams,page=Number(params.get("page")??1),perPage=Number(params.get("perPage")??20);
-  if(!Number.isSafeInteger(page)||page<1||page>100000||!Number.isInteger(perPage)||perPage<1||perPage>100)return json({error:"Ungültige Seitenangabe."},400);
+  if(!Number.isSafeInteger(page)||page<1||page>100000||!Number.isInteger(perPage)||perPage<1||perPage>100)return json({error:"Ungültige Seitenangabe.",errorCode:"invalid_page"},400);
   const auth=await getAuthAdmin();if(!auth)return json({users:[],page,perPage,hasMore:false,configured:false});
   const {data,error}=await auth.client.auth.admin.listUsers({page,perPage});if(error)return providerFailure(error);
   const users=await Promise.all(data.users.map(user=>userView(user,admin,auth.projectUrl)));
@@ -24,14 +25,14 @@ export async function GET(request:Request){
 
 export async function POST(request:Request){
  try{
-  const admin=await getAdminUser();if(!admin)return json({error:"Bitte melde dich an."},401);if(!admin.isModerator||!sameOrigin(request))return json({error:"Kein Zugriff auf die Benutzerverwaltung."},403);
-  if(!request.headers.get("content-type")?.includes("application/json"))return json({error:"Ungültige Anfrage."},400);
-  let fields;try{fields=parseUserFields(await readJson(request,8192),true);}catch(e){return json({error:e instanceof Error?e.message:"Bitte prüfe die Eingaben."},400);}
-  if(fields.email===moderatorEmail())return json({error:"Diese E-Mail-Adresse ist für die Verwaltung reserviert."},403);
+  const admin=await getAdminUser();if(!admin)return json({error:"Bitte melde dich an.",errorCode:"authentication_required"},401);if(!admin.isModerator||!sameOrigin(request))return json({error:"Kein Zugriff auf die Benutzerverwaltung.",errorCode:"forbidden"},403);
+  if(!request.headers.get("content-type")?.includes("application/json"))return json({error:"Ungültige Anfrage.",errorCode:"invalid_request"},400);
+  let fields;try{fields=parseUserFields(await readJson(request,8192),true);}catch(e){return json({error:e instanceof ValidationError?e.message:"Bitte prüfe die Eingaben.",errorCode:e instanceof ValidationError?e.code:"invalid_request"},400);}
+  if(fields.email===moderatorEmail())return json({error:"Diese E-Mail-Adresse ist für die Verwaltung reserviert.",errorCode:"user_email_reserved"},403);
   const auth=await getAuthAdmin();if(!auth)return notConfigured();
   const {data,error}=await auth.client.auth.admin.createUser({email:fields.email,password:fields.password,user_metadata:{full_name:fields.name},email_confirm:true,...(fields.active===false?{ban_duration:"876000h"}:{})});
   if(error||!data.user)return providerFailure(error);
   if(fields.active===false)await blockAccount(providerAccountId(auth.projectUrl,data.user.id),"inactive");
-  return json({user:await userView(data.user,admin,auth.projectUrl)},201);
+  return json({user:await userView(data.user,admin,auth.projectUrl),messageCode:"saved"},201);
  }catch{return providerFailure(null);}
 }

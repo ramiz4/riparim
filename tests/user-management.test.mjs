@@ -126,6 +126,21 @@ check((await update(ids.member,{active:false},{'sec-fetch-site':'cross-site'})).
 check((await remove(ids.member,{Origin:'https://other.example.test'})).status===403,'Deletion rejects cross-origin requests');
 check((await update(ids.member,{role:'admin'},{Origin:'https://other.example.test'})).status===403,'Role changes reject cross-origin requests');
 check(calls.length===0,'Cross-origin requests never call the provider');
+for(const locale of ['de','sq','en']){
+ const invalid=await update(ids.member,{name:'x'},{'Accept-Language':locale}),data=await invalid.json();
+ check(invalid.status===400&&data.errorCode==='invalid_name'&&data.error==='Bitte gib einen Namen mit 2 bis 80 Zeichen ein.','Management input codes preserve the same legacy status/text in every language');
+}
+const originalMetadataUpdate=authAdmin.updateUserById;
+try{
+ users.set(ids.member,{...users.get(ids.member),user_metadata:{full_name:'Fixture Member',preferred_locale:'de',unrelated:'original'}});
+ authAdmin.updateUserById=async(id,attributes)=>{
+  const current=users.get(id);users.set(id,{...current,user_metadata:{...current.user_metadata,preferred_locale:'sq',unrelated:'new independent value'}});
+  return originalMetadataUpdate.call(authAdmin,id,attributes);
+ };
+ const updated=await update(ids.member,{name:'Fixture Member'});check(updated.ok,'A valid administrative rename succeeds with a concurrent preference edit');
+ const metadata=users.get(ids.member).user_metadata;check(metadata.preferred_locale==='sq'&&metadata.unrelated==='new independent value','An administrative rename must not replay an old language preference or unrelated metadata');
+ assert.deepEqual(calls.at(-1).body.user_metadata,{full_name:'Fixture Member'});passed++;
+}finally{authAdmin.updateUserById=originalMetadataUpdate;}
 
 let response=await list('page=1&perPage=2'),body=await response.json();
 check(response.status===200&&body.configured&&body.page===1&&body.perPage===2&&body.hasMore&&body.users.length===2,'Account listing uses requested pagination and declares configured administration');

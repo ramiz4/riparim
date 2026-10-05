@@ -4,7 +4,7 @@ import {createRequire} from 'node:module';
 import {DatabaseSync} from 'node:sqlite';
 const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
 const output='.test-runtime/business';await mkdir(output,{recursive:true});
-const bundle=await build({entryPoints:{route:'app/api/business/route.ts',directory:'db/directory.ts',cleanup:'lib/auth/delete-account.ts'},outdir:output,bundle:true,write:false,format:'esm',platform:'node',plugins:[{name:'business-boundaries',setup(b){b.onResolve({filter:/^(cloudflare:workers|@\/app\/auth|@\/db\/google-places)$/},args=>({path:args.path,namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',contents:args.path==='cloudflare:workers'?'export const env=globalThis.fixtureEnv;':args.path==='@/app/auth'?'export async function getAppUser(){return globalThis.fixtureUser;} export async function getAdminUser(){return globalThis.fixtureUser;} export function ownerPair(user){return [user.ownerKeys[0],user.ownerKeys[1]??user.ownerKeys[0]];} export function providerAccountId(url,id){return `supabase:${new URL(url).hostname}:${id}`;}':'export async function confirmedPublicationPlace(...args){return globalThis.fixtureConfirmPlace(...args);}'}));}}]});
+const bundle=await build({entryPoints:{route:'app/api/business/route.ts',workshops:'app/api/workshops/route.ts',settings:'app/api/auth-settings/route.ts',directory:'db/directory.ts',cleanup:'lib/auth/delete-account.ts'},outdir:output,bundle:true,write:false,format:'esm',platform:'node',plugins:[{name:'business-boundaries',setup(b){b.onResolve({filter:/^(cloudflare:workers|@\/app\/auth|@\/db\/google-places)$/},args=>({path:args.path,namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',contents:args.path==='cloudflare:workers'?'export const env=globalThis.fixtureEnv;':args.path==='@/app/auth'?'export async function getAppUser(){return globalThis.fixtureUser;} export async function getAdminUser(){return globalThis.fixtureUser;} export function ownerPair(user){return [user.ownerKeys[0],user.ownerKeys[1]??user.ownerKeys[0]];} export function providerAccountId(url,id){return `supabase:${new URL(url).hostname}:${id}`;}':'export async function confirmedPublicationPlace(...args){return globalThis.fixtureConfirmPlace(...args);}'}));}}]});
 for(const file of bundle.outputFiles)await writeFile(file.path.replace(/\.js$/,'.mjs'),file.contents);
 const db=new DatabaseSync(':memory:');for(const file of (await readdir('drizzle')).filter(file=>file.endsWith('.sql')).sort())db.exec(await readFile('drizzle/'+file,'utf8'));
 let beforeBatch=null,beforeRun=null,holdBatch=null,batchTail=Promise.resolve(),failDb=false;
@@ -18,16 +18,29 @@ globalThis.fixtureEnv={DB:d1,BUCKET:{list:async()=>({objects:[],truncated:false}
 let googleAvailable=true,googleCalls=[];
 globalThis.fixtureConfirmPlace=(profile,existing,persist)=>{googleCalls.push({profile,existing,persist});return googleAvailable?'ChIJfixture-owner-match-'+profile.id:null;};
 const [route,directory,cleanup]=await Promise.all(['route','directory','cleanup'].map(file=>import(new URL(`../${output}/${file}.mjs`,import.meta.url))));
+const workshops=await import(new URL(`../${output}/workshops.mjs`,import.meta.url));
+const settings=await import(new URL(`../${output}/settings.mjs`,import.meta.url));
 const publicProfiles=await directory.listWorkshops(),first=publicProfiles[0],second=publicProfiles[1],third=publicProfiles[2],fourth=publicProfiles[3];
 const evidence='This fictional registered operator can be independently verified through its company register and official contact.';
 const profile=workshop=>({phone:workshop.phone,phoneNote:workshop.phoneNote,whatsapp:workshop.whatsapp,services:workshop.services,serviceDetails:workshop.serviceDetails,description:workshop.description});
-const request=(method,body,headers={})=>new Request(origin+'/api/business',{method,headers:{Origin:origin,'Content-Type':'application/json',...headers},...(body?{body:JSON.stringify(body)}:{})});
+const request=(method,body,headers={},path='/api/business')=>new Request(origin+path,{method,headers:{Origin:origin,'Content-Type':'application/json',...headers},...(body?{body:JSON.stringify(body)}:{})});
 async function post(actor,body){globalThis.fixtureUser=actors[actor]??null;return route.POST(request('POST',body));}
 async function state(actor,moderation=false){globalThis.fixtureUser=actors[actor]??null;return route.GET(new Request(origin+'/api/business'+(moderation?'?moderation=1':'')));}
 const claim=(actor,workshopId,extra={})=>post(actor,{kind:'claim',input:{workshopId,evidence,evidenceLinks:['https://business.example.test/proof'],...extra}});
 async function decide(actor,kind,id,decision='approved',revision=0,note='The independently checked operator proof is sufficient.'){globalThis.fixtureUser=actors[actor]??null;return route.PATCH(request('PATCH',{kind,id,revision,decision,note}));}
 const change=(actor,workshopId,fields)=>post(actor,{kind:'change',workshopId,profile:fields});
 let passed=0;const check=(condition,label)=>{assert(condition,label);passed++;};
+for(const locale of ['de','sq','en']){
+ globalThis.fixtureUser=actors.a;
+ const invalid=await route.POST(request('POST',{kind:'claim',input:{workshopId:first.id,evidence:'short',evidenceLinks:[]}},{'Accept-Language':locale}));
+ const data=await invalid.json();check(invalid.status===400&&data.errorCode==='business_invalid_input'&&data.error==='Bitte prüfe deine Eingaben, den Nachweis und die Beleglinks.','Business input codes and legacy status/text are identical for all UI languages');
+ assert.throws(()=>directory.validateProfile({...first,phone:'invalid'},first.id),error=>error.code==='workshop_invalid_profile');passed++;
+ globalThis.fixtureUser=actors.admin;
+ const profileResponse=await workshops.PATCH(request('PATCH',{...first,phone:'invalid'},{'Accept-Language':locale},'/api/workshops')),profileError=await profileResponse.json();
+ check(profileResponse.status===400&&profileError.errorCode==='workshop_invalid_profile','Actual workshop mutation responses carry the source-owned validation code without changing authorization');
+ const configResponse=await settings.POST(request('POST',{projectUrl:'not-a-url',publicKey:'invalid',enabled:false},{'Accept-Language':locale},'/api/auth-settings')),configError=await configResponse.json();
+ check(configResponse.status===400&&configError.errorCode==='auth_project_url','The actual protected configuration API exposes only a stable source-owned URL validation code');
+}
 check((await state('guest')).status===401&&(await claim('guest',first.id)).status===401,'Anonymous users cannot read or submit private ownership requests');
 check((await state('a',true)).status===403,'A customer cannot read other applicants’ evidence');
 check((await decide('a','claim',crypto.randomUUID())).status===403,'Customer accounts cannot approve themselves');
