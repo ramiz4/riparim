@@ -9,3 +9,9 @@
 @media(max-width:720px){
  .navbar .header.wrap{width:calc(100% - 2*var(--page-gutter))}
 }
+
+.language-switcher{display:flex;align-items:center;gap:.35rem;flex-shrink:0;color:var(--foreground);font-size:.82rem;min-height:2.25rem}
+.language-switcher select{font:inherit;color:inherit;background:var(--background);border:1px solid var(--border);border-radius:.55rem;padding:.4rem .2rem;max-width:6rem;min-height:2.25rem}
+.language-switcher select:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
+.language-switcher select:disabled{opacity:.55;cursor:wait}
+@media(max-width:480px){.language-switcher{gap:.15rem}.language-switcher>svg{display:none}.language-switcher select{font-size:.75rem;max-width:5rem}.header-right{gap:.4rem}}

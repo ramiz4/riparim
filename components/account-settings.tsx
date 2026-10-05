@@ -1,6 +1,7 @@
 "use client";
+import {useNavigationGuard} from "@/lib/i18n/navigation-guard";
 
-import Link from "next/link";
+import Link from "@/components/locale-link";
 import {useRouter} from "next/navigation";
 import {useCallback,useEffect,useId,useState,type FormEvent} from "react";
 import {AlertDialog,AlertDialogTrigger,AlertDialogContent,AlertDialogHeader,AlertDialogTitle,AlertDialogDescription,AlertDialogFooter,AlertDialogCancel} from "@/components/ui/alert-dialog";
@@ -14,6 +15,7 @@ export function AccountSettings(){
  const [state,setState]=useState<AccountState|null>(null),[name,setName]=useState(""),[password,setPassword]=useState("");
  const [loading,setLoading]=useState(true),[busy,setBusy]=useState(false),[error,setError]=useState(""),[message,setMessage]=useState("");
  const [open,setOpen]=useState(false),[confirmation,setConfirmation]=useState("");
+ useNavigationGuard({busy,dirty:!!password||!!confirmation||!!state?.account&&name!==state.account.name});
  const load=useCallback(async(signal?:AbortSignal)=>{
   setLoading(true);setError("");
   try{
@@ -46,16 +48,16 @@ export function AccountSettings(){
  }
  async function reauthenticate(){
   if(busy||!state?.account)return;
-  setBusy(true);setError("");setMessage("");
+  setBusy(true);setError("");setMessage("");let navigating=false;
   try{
    if(state.account.provider==="Google"){
     const data=await mutate("POST",{reauthenticate:true},"/api/auth/google");
-    window.location.assign(data.url!);
+    navigating=true;window.location.assign(data.url!);
    }else{
     await mutate("POST",{password});setPassword("");setState(old=>old?{...old,deletionReady:true}:old);
    }
-  }catch(e){setPassword("");setError(e instanceof TypeError?networkError:e instanceof Error?e.message:networkError);}
-  finally{setBusy(false);}
+  }catch(e){navigating=false;setPassword("");setError(e instanceof TypeError?networkError:e instanceof Error?e.message:networkError);}
+  finally{if(!navigating)setBusy(false);}
  }
  async function remove(){
   if(busy||confirmation!=="KONTO LÖSCHEN")return;

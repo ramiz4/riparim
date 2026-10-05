@@ -27,7 +27,7 @@ globalThis.fetch=async url=>{assert.equal(url,'/api/google-places','Docking fixt
 const require=createRequire(import.meta.url),{build}=require('esbuild');
 const {transform}=createRequire(require.resolve('vite/package.json'))('lightningcss');
 const output='.test-runtime/catalogue-docking';await mkdir(output,{recursive:true});
-const bundle=await build({stdin:{contents:"export {default as Catalogue} from './app/werkstaetten/catalogue';export {defaultCatalogueFilters} from './lib/catalogue-filters';",resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/ui.mjs',bundle:true,write:false,platform:'node',format:'esm',packages:'external',plugins:[{name:'navigation-boundary',setup(b){
+const bundle=await build({stdin:{contents:"export {default as Catalogue} from './app/[locale]/werkstaetten/catalogue';export {defaultCatalogueFilters} from './lib/catalogue-filters';",resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/ui.mjs',bundle:true,write:false,platform:'node',format:'esm',packages:'external',plugins:[{name:'navigation-boundary',setup(b){
  b.onResolve({filter:/^next\/(link|navigation)$/},args=>({path:args.path,namespace:'fixture'}));
  b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',resolveDir:process.cwd(),contents:args.path==='next/link'?"import React from 'react';export default function Link({children,href,...props}){return React.createElement('a',{...props,href},children);}":"export function useRouter(){return {push(){},replace(){},refresh(){}};}export function useSearchParams(){return new URLSearchParams();}export function usePathname(){return '/werkstaetten';}"}));
 }}]});await writeFile(output+'/ui.mjs',bundle.outputFiles[0].contents);

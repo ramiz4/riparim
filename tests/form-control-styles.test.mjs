@@ -18,7 +18,7 @@ const bundle=await build({
 assert.equal(bundle.errors.length,0);
 const {Checkbox}=await import(pathToFileURL('.test-runtime/form-controls/checkbox.mjs').href);
 const {Switch}=await import(pathToFileURL('.test-runtime/form-controls/switch.mjs').href);
-const files=['globals.css','ui-refresh.css','auth.css','catalogue.css','workshop-pages.css','ratings.css','form-controls.css','theme.css','verwaltung/benutzer/users.css'];
+const files=['globals.css','ui-refresh.css','auth.css','catalogue.css','workshop-pages.css','ratings.css','form-controls.css','theme.css','[locale]/verwaltung/benutzer/users.css'];
 const css=(await Promise.all(files.map(file=>readFile(new URL(`../app/${file}`,import.meta.url),'utf8'))))
  .join('\n').replace(/^@(?:import|custom-variant).*;$/gm,'').replace(/@theme inline\{[^}]*\}/g,'');
 // Empty :is() rules from unrelated pseudo-element selectors never match in a

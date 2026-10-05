@@ -22,7 +22,7 @@ export function vinextNavigation() {
         build: {
           rolldownOptions: {
             output: {
-              codeSplitting: { groups: [createVinextNavigationChunkGroup()] },
+              codeSplitting: { groups: [createVinextNavigationChunkGroup(), {name: "link", test: /[/\\]vinext[/\\]dist[/\\]shims[/\\]link\.js$/, minSize: 0}] },
             },
           },
         },

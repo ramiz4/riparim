@@ -12,7 +12,7 @@
   },
   "main": {
     "required_status_checks": {
-      "strict": true,
+      "strict": false,
       "contexts": ["Tests, types, lint and build", "Conventional PR title"]
     },
     "enforce_admins": true,

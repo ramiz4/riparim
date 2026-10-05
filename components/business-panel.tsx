@@ -1,4 +1,6 @@
 "use client";
+import {useNavigationGuard} from "@/lib/i18n/navigation-guard";
+import {LocaleAnchor} from "@/components/locale-anchor";
 
 import {useCallback,useEffect,useId,useState,type FormEvent} from "react";
 import {services,type Workshop} from "@/lib/workshops";
@@ -12,6 +14,7 @@ export function BusinessPanel({directory=[],initialWorkshop,moderation=false}:{d
  const [workshopId,setWorkshopId]=useState(directory.some(workshop=>workshop.id===initialWorkshop)?initialWorkshop!:directory[0]?.id??""),[evidence,setEvidence]=useState(""),[links,setLinks]=useState("");
  const [editing,setEditing]=useState<Workshop|null>(null),[profile,setProfile]=useState<BusinessProfile|null>(null);
  const [decision,setDecision]=useState<{request:BusinessRequest;kind:"claim"|"change";approve:boolean}|null>(null),[note,setNote]=useState("");
+ useNavigationGuard({busy,dirty:!!evidence||!!links||!!note||!!editing&&!!profile&&JSON.stringify(profile)!==JSON.stringify(editableBusinessProfile(editing))});
  const load=useCallback(async(signal?:AbortSignal)=>{
   setLoading(true);setError("");
   try{
@@ -54,7 +57,7 @@ export function BusinessPanel({directory=[],initialWorkshop,moderation=false}:{d
   return requests.map(request=><article className="business-request" key={request.id}>
    <div className="business-request-heading"><h3>{request.workshopName}</h3><span className={`business-status ${request.status}`}>{statusLabels[request.status]??request.status}</span></div>
    <p className="business-meta">{kind==="claim"?"Übernahme-Antrag":"Änderungsentwurf"} · {new Date(request.createdAt).toLocaleDateString("de-DE")}</p>
-   {moderation&&kind==="claim"&&<><p className="business-meta">Antragstellendes Konto: {request.owner}</p><p className="business-evidence">{request.evidence}</p>{request.evidenceLinks?.length?<ul>{request.evidenceLinks.map(link=><li key={link}><a href={link} target="_blank" rel="noopener noreferrer">{link}</a></li>)}</ul>:<p>Keine zusätzlichen Beleglinks. Nachweis vor Bestätigung unabhängig prüfen.</p>}</>}
+   {moderation&&kind==="claim"&&<><p className="business-meta">Antragstellendes Konto: {request.owner}</p><p className="business-evidence">{request.evidence}</p>{request.evidenceLinks?.length?<ul>{request.evidenceLinks.map(link=><li key={link}><LocaleAnchor href={link} target="_blank" rel="noopener noreferrer">{link}</LocaleAnchor></li>)}</ul>:<p>Keine zusätzlichen Beleglinks. Nachweis vor Bestätigung unabhängig prüfen.</p>}</>}
    {request.profile&&<dl className="business-proposal"><dt>Telefon</dt><dd>{request.profile.phone}</dd><dt>Kontakt-Hinweis</dt><dd>{request.profile.phoneNote||"–"}</dd><dt>WhatsApp</dt><dd>{request.profile.whatsapp||"–"}</dd><dt>Leistungen</dt><dd>{request.profile.services.join(", ")} · {request.profile.serviceDetails.join(", ")}</dd><dt>Beschreibung</dt><dd>{request.profile.description}</dd></dl>}
    {moderation&&kind==="change"&&<><details className="business-current"><summary>Aktuell freigegebene Angaben ansehen</summary>{state?.workshops.filter(workshop=>workshop.id===request.workshopId).map(workshop=><dl className="business-proposal" key={workshop.id}><dt>Telefon</dt><dd>{workshop.phone}</dd><dt>Kontakt-Hinweis</dt><dd>{workshop.phoneNote||"–"}</dd><dt>WhatsApp</dt><dd>{workshop.whatsapp||"–"}</dd><dt>Leistungen</dt><dd>{workshop.services.join(", ")} · {workshop.serviceDetails.join(", ")}</dd><dt>Beschreibung</dt><dd>{workshop.description}</dd></dl>)}</details><p>Prüfe die Änderungen gegen das aktuelle Profil. Geänderte Telefonnummern benötigen eine neue bestätigte Google-Zuordnung.</p></>}
    {request.moderatorNote&&<p className="business-note">Prüfvermerk: {request.moderatorNote}</p>}

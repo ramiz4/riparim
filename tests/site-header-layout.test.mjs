@@ -8,11 +8,11 @@ const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild
 const output='.test-runtime/site-header-layout';
 await build({stdin:{contents:`
  export {default as Finder} from './app/finder';
- export {default as Catalogue} from './app/werkstaetten/catalogue';
- export {default as AdminPanel} from './app/verwaltung/panel';
+ export {default as Catalogue} from './app/[locale]/werkstaetten/catalogue';
+ export {default as AdminPanel} from './app/[locale]/verwaltung/panel';
  export {default as AuthForm} from './app/auth-form';
- export {default as PrivacyPage} from './app/datenschutz/page';
- export {default as BusinessPage} from './app/betrieb/page';
+ export {default as PrivacyPage} from './app/[locale]/datenschutz/page';
+ export {default as BusinessPage} from './app/[locale]/betrieb/page';
  export {defaultCatalogueFilters} from './lib/catalogue-filters';`,resolveDir:process.cwd(),loader:'tsx'},bundle:true,platform:'node',format:'esm',outfile:output+'/pages.mjs',packages:'external',loader:{'.css':'empty'},plugins:[{name:'page-boundaries',setup(b){
  b.onResolve({filter:/^(next\/(link|navigation)|@\/app\/auth|@\/db\/directory)$/},args=>({path:args.path,namespace:'fixture'}));
  b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',resolveDir:process.cwd(),contents:args.path==='next/link'?`import {createElement} from 'react';export default function Link({href,children}){return createElement('a',{href},children);}`:args.path==='next/navigation'?`export function useRouter(){return {push(){},replace(){},refresh(){}};}export function useSearchParams(){return new URLSearchParams();}export function usePathname(){return '/';}`:args.path==='@/app/auth'?`export async function getAppUser(){return globalThis.headerAccount;}export async function getAdminUser(){return globalThis.headerIsAdmin?{isModerator:true}:null;}`:`export async function listWorkshops(){return [];}`}));
@@ -35,6 +35,7 @@ for(const account of [null,{email:'customer@example.test',displayName:'Fixture a
     const wrapper=header.parentElement;
     // Ignore generated Radix IDs; compare the visible header and its wrapper.
     for(const node of header.querySelectorAll('[id]'))node.removeAttribute('id');
+    for(const node of header.querySelectorAll('[for]'))node.removeAttribute('for');
     const signature=JSON.stringify({wrapper:wrapper.className,header:header.outerHTML});
     if(reference)assert(signature===reference,`${page} must present the same header as the landing page for this account`);
     else reference=signature;

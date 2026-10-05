@@ -1,3 +1,4 @@
+import {localizeHref,type Locale} from "@/lib/i18n/locale";
 import {brands,cities,services,cityCoordinates,findWorkshops,type Workshop} from "@/lib/workshops";
 import type {SearchContext} from "@/app/journeys";
 
@@ -33,12 +34,12 @@ export function parseCatalogueFilters(query:Record<string,string|string[]|undefi
  const sort=requested==="rating"&&!hasPublishedRatings(directory)||requested==="distance"&&!cityCoordinates[city]?"name":requested;
  return {query:catalogueQuery(get("q")??""),service:pick("leistung",services,services[0]),city,brand:pick("marke",unique([...brands,...options.brands]),brands[0]),language:pick("sprache",unique(["Alle Sprachen",...knownLanguages,...options.languages]),"Alle Sprachen"),sort};
 }
-export function catalogueHref(filters:CatalogueFilters){
+export function catalogueHref(filters:CatalogueFilters,locale:Locale="de"){
  const params=new URLSearchParams();
  const query=catalogueQuery(filters.query??"");if(query)params.set("q",query);
  for(const [field,key] of [["service","leistung"],["city","ort"],["brand","marke"],["language","sprache"]] as const){if(filters[field]!==defaultCatalogueFilters[field])params.set(key,catalogueSlug(filters[field]));}
  if(filters.sort!=="name")params.set("sort",sortSlugs[filters.sort]);
- return `/werkstaetten${params.size?`?${params.toString()}`:""}`;
+ return localizeHref(`/werkstaetten${params.size?`?${params.toString()}`:""}`,locale);
 }
 export function matchCatalogue(directory:Workshop[],filters:CatalogueFilters,context:SearchContext|null=null,privateMatchingActive=false,live:CatalogueGoogleRatings={}){
  const geography=privateMatchingActive&&context&&context.city===filters.city?context:null;
