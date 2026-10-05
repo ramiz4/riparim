@@ -228,3 +228,5 @@ html.dark :is(.moderation-search svg, .admin-tools>label, .location-details summ
 @media (prefers-reduced-motion: reduce) {
   .theme-switch, .theme-switch [data-slot=switch-thumb], .theme-switch-glyph, .theme-switch-glyph svg { transition: none; }
 }
+
+html.dark .admin-workshops-page .directory-table,html.dark .admin-workshops-page .directory-table [data-slot=table-row]{border-color:#214045}

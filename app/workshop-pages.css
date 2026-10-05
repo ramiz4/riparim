@@ -194,3 +194,10 @@ a.profile-phone-summary{display:flex;flex-direction:row;align-items:center;gap:8
  .profile-gallery-stage>img,.profile-gallery-stage>button,.profile-gallery-thumbnails>button{transition:none}
  .profile-sources>summary>svg,.profile-map>summary>svg{transition:none}
 }
+
+.admin-workshops-page .admin-title h1{margin:0}
+.admin-workshops-page .admin-overview{grid-template-columns:repeat(2, minmax(0, 1fr));margin:24px 0}
+.admin-workshops-page .admin-tools>label{width:100%;min-width:0;margin-right:0}
+.admin-workshops-page .admin-tools input{width:100%}
+.admin-workshops-page .directory-table,.admin-workshops-page .directory-table [data-slot=table-row]{border-color:#e5edef}
+@media(max-width:720px){.admin-workshops-page .admin-overview{grid-template-columns:1fr}}
