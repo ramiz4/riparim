@@ -5,7 +5,8 @@ import {emailCopy,emailHtml} from "@/lib/email-content";
 import {localizeHref,type Locale} from "@/lib/i18n/locale";
 import type {ReviewDecision} from "./contract";
 
-// New messages are HTML-only. Valid historical frozen requests may still
+// New messages opt out of Resend's generated plaintext with text: "".
+// Valid historical frozen requests may still
 // contain text; accepting it preserves their exact idempotent retry bytes.
 export const deliveryPayloadSchema=z.object({from:z.string().max(320),to:z.array(z.string().email()).length(1),subject:z.string().max(200),html:z.string().max(12000),text:z.string().max(6000).optional()}).strict();
 export type DeliveryPayload=z.infer<typeof deliveryPayloadSchema>;
@@ -22,7 +23,7 @@ export function notificationLink(id:string,locale:Locale="de"){
 }
 export function reviewEmail(decision:ReviewDecision,id:string,from:string,to:string,locale:Locale):DeliveryPayload{
  const copy=emailCopy[locale][decision],url=notificationLink(id,locale);
- return deliveryPayloadSchema.parse({from,to:[to],subject:copy.title,html:emailHtml(locale,copy,url)});
+ return deliveryPayloadSchema.parse({from,to:[to],subject:copy.title,html:emailHtml(locale,copy,url),text:""});
 }
 export class DeliveryError extends Error{constructor(public code:string,public retryable:boolean){super(code);}}
 export async function sendReviewEmail(body:string,key:string,id:string){

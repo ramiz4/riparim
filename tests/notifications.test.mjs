@@ -58,7 +58,7 @@ try{
   for(const decision of ['published','needs_more']){
    const localizedId=fixtureVisit();await moderate(localizedId,0,decision);await outbox.processNotifications({id:event(localizedId).id});
    const payload=attempts.at(-1).payload,link=new URL(payload.html.match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));
-   check(!Object.hasOwn(payload,'text'),'New review first attempts send HTML only, with no text field in the actual provider body');
+   check(Object.hasOwn(payload,'text')&&payload.text==='','New review first attempts explicitly opt out of generated plaintext with text empty in the actual provider body');
    check(payload.html.includes('lang="'+locale+'"')&&payload.html.includes('<div lang="'+locale+'" dir="ltr"'),'The verified recipient preference controls all email language containers');
    check(link.pathname===prefix+'/anmelden'&&link.searchParams.get('weiter')===(prefix||'/')+'?besuche=1&einreichung='+localizedId,'Recipient locale controls both authentication and the protected return destination');
    check(payload.subject===({de:{published:'Deine Riparim-Bewertung wurde freigegeben',needs_more:'Bitte ergänze deinen Besuchsnachweis'},sq:{published:'Vlerësimi yt në Riparim u miratua',needs_more:'Plotëso dëshminë e vizitës tënde'},en:{published:'Your Riparim review was approved',needs_more:'Please add to your visit evidence'}})[locale][decision],'Both review decisions use the correct recipient subject');
@@ -81,7 +81,7 @@ try{
  const url=new URL(attempts.at(-1).payload.html.match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));
  check(url.origin===origin&&url.pathname==='/anmelden'&&url.searchParams.get('weiter')===`/?besuche=1&einreichung=${id}`,'The email links to authentication and the precise owned submission without an access token');
  assert.throws(()=>email.notificationLink('unsafe-target'),/INVALID_VISIT_ID/);passed++;
- check(attempts.at(-1).payload.html.includes('lang="de"')&&attempts.at(-1).payload.html.includes('<title>')&&!Object.hasOwn(attempts.at(-1).payload,'text'),'The HTML-only template has explicit language, a title and readable link text');
+ check(attempts.at(-1).payload.html.includes('lang="de"')&&attempts.at(-1).payload.html.includes('<title>')&&attempts.at(-1).payload.text==='','The HTML-only template has explicit language, a title and readable link text');
  await outbox.processNotifications({id:event(id).id,force:true});check(sent.size===1&&attempts.length===1,'Completed events cannot be sent again');
  response=await visits.GET(new Request(origin+'/api/visits?id='+id));check(response.ok&&(await response.json()).visits.length===1,'The authenticated notification link selects its own single submission');
  globalThis.fixtureUser={...member,userId:accountId(otherId),ownerKeys:[accountId(otherId)]};check((await visits.GET(new Request(origin+'/api/visits?id='+id))).status===404,'A foreign account cannot use the notification link to read the submission');globalThis.fixtureUser=member;
@@ -102,15 +102,18 @@ try{
  await outbox.processNotifications({id:event(id).id});check(event(id).state==='pending'&&sent.size===beforeCommitLoss+1,'A lost local success commit remains retryable without discarding the accepted payload');
  const beforeLanguageChange=attempts.at(-1);preferredLocale='en';globalThis.fixtureEnv.TRANSACTIONAL_EMAIL_FROM='New release <new@auth.example.test>';
  await outbox.processNotifications({id:event(id).id,force:true});check(event(id).state==='sent'&&sent.size===beforeCommitLoss+1,'A local acknowledgement-loss retry does not send a duplicate');
- check(attempts.at(-1).body===beforeLanguageChange.body&&attempts.at(-1).key===beforeLanguageChange.key&&attempts.at(-1).payload.html.includes('lang="sq"')&&!Object.hasOwn(attempts.at(-1).payload,'text'),'Preference and release configuration changes preserve exact request bytes and key after provider acceptance');globalThis.fixtureEnv.TRANSACTIONAL_EMAIL_FROM='Riparim <no-reply@auth.example.test>';preferredLocale=undefined;
+ check(attempts.at(-1).body===beforeLanguageChange.body&&attempts.at(-1).key===beforeLanguageChange.key&&attempts.at(-1).payload.html.includes('lang="sq"')&&attempts.at(-1).payload.text==='','Preference and release configuration changes preserve exact request bytes and key after provider acceptance');globalThis.fixtureEnv.TRANSACTIONAL_EMAIL_FROM='Riparim <no-reply@auth.example.test>';preferredLocale=undefined;
+ for(const includesText of [true,false]){
  id=fixtureVisit();await moderate(id);preferredLocale='sq';
  const historical={text:'Historical German body from an earlier release.\nhttps://riparim.example.test/anmelden',html:'<!doctype html><html lang="de" dir="ltr"><head><title>Historische Nachricht</title></head><body><div lang="de" dir="ltr">Historische Nachricht</div></body></html>',subject:'Historische deutsche Nachricht',to:[confirmedEmail],from:globalThis.fixtureEnv.TRANSACTIONAL_EMAIL_FROM};
+ if(!includesText)delete historical.text;
  const historicalBody=JSON.stringify(historical,null,2)+'\n';
  const historicalKey=event(id).id,credentialHash=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(globalThis.fixtureEnv.RESEND_API_KEY));
  db.prepare('UPDATE review_notifications SET payload=?,first_attempt_at=?,provider_key_hash=? WHERE id=?').run(historicalBody,Date.now(),Array.from(new Uint8Array(credentialHash),byte=>byte.toString(16).padStart(2,'0')).join(''),historicalKey);
  await email.sendReviewEmail(historicalBody,globalThis.fixtureEnv.RESEND_API_KEY,historicalKey);const historicalFirst=attempts.at(-1);
  await outbox.processNotifications({id:historicalKey,force:true});
- check(event(id).state==='sent'&&attempts.at(-1).body===historicalFirst.body&&attempts.at(-1).key===historicalFirst.key&&attempts.at(-1).payload.text===historical.text,'Historical frozen German bytes including order and whitespace are preserved after a locale and release change');preferredLocale=undefined;
+ check(event(id).state==='sent'&&attempts.at(-1).body===historicalFirst.body&&attempts.at(-1).key===historicalFirst.key&&attempts.at(-1).payload.text===historical.text&&Object.hasOwn(attempts.at(-1).payload,'text')===includesText,'Historical frozen German bytes including order and whitespace are preserved after a locale and release change');preferredLocale=undefined;
+ }
  id=fixtureVisit();await moderate(id);deliveryMode='pending';const started=new Promise(resolve=>pause=resolve),job=outbox.processNotifications({id:event(id).id});await started;
  const beforeParallel=attempts.length;await outbox.processNotifications({id:event(id).id,force:true});check(attempts.length===beforeParallel,'A fresh processing lease prevents concurrent retries from posting twice');
  release();await job;deliveryMode='success';pause=null;

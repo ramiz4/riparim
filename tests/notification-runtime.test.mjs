@@ -30,7 +30,7 @@ try{
  const payload=JSON.parse((await db.prepare('SELECT payload FROM fixture_sends').first()).payload);
  assert.equal(payload.to[0],'fixture@example.test');passed++;
  assert(!payload.html.includes('Fixture Car'));passed++;
- assert(!Object.hasOwn(payload,'text'));passed++;
+ assert.equal(payload.text,'');passed++;
  assert(payload.html.includes('lang="'+locale+'"'));passed++;
  const link=new URL(payload.html.match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));assert.equal(link.pathname,(locale==='de'?'':'/'+locale)+'/anmelden');passed++;
  await runtime.dispatchFetch('http://127.0.0.1/cdn-cgi/handler/scheduled?cron=*+*+*+*+*');

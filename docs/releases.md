@@ -121,7 +121,8 @@ Die Freigabe erfordert sowohl das geprüfte Release als auch diese Providerabnah
 Ein Code-Rollback stellt Providerfelder nicht wieder her; dafür die gesicherten
 vier Felder verwenden. Bestehende SMTP-Werte und Callbackpfade erhalten.
 
-Neue Reviewmails versenden nur Betreff und HTML und verwenden beim ersten
+Neue Reviewmails versenden nur Betreff und HTML; `text: ""` schaltet Resends
+automatische Klartexterzeugung aus. Sie verwenden beim ersten
 Versand die validierte Empfängerpräferenz.
 Bereits eingefrorene Nachrichten behalten bei Retries ihre ursprüngliche
 Sprache und identische Requestbytes einschließlich historischer Klartextteile;

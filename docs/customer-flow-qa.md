@@ -155,10 +155,15 @@ JSON-Reihenfolge und Leerraum. Empfänger-/Credentialwechsel, 23-Stunden-Grenze,
 Backoff und kontrollierte Wiederholungen bleiben geschützt.
 
 Neue Reviewmails liefern auf ausdrücklichen Projektwunsch ausschließlich Betreff
-und HTML an Resend; das tatsächliche Requestbody enthält kein `text`-Feld.
+und HTML an Resend; der tatsächliche Requestbody enthält `text: ""` als
+expliziten Opt-out. Bei fehlendem Feld erzeugt Resend automatisch Klartext,
+wie die [Send-Email-API](https://resend.com/docs/api-reference/emails/send-email)
+und der [Changelog](https://resend.com/changelog/automatic-plain-text-emails)
+beschreiben.
 Die Tests prüfen dies für beide Entscheidungen und alle drei Locales sowie
 bytegleiche HTML-only-Retries. Bereits eingefrorene historische Payloads mit
-`text` bleiben unverändert, damit ihr Idempotenzvertrag erhalten bleibt. Beim
+`text` sowie alte Payloads ohne `text` bleiben unverändert, damit ihr
+Idempotenzvertrag erhalten bleibt. Beim
 [geprüften Supabase-SMTP-Client](https://github.com/supabase/auth/blob/ce9a8eee0cc042be8c7a42981a7ddae631e41d91/internal/mailer/mailmeclient/mailmeclient.go)
 setzt `SetBody("text/html", body)` ausschließlich HTML; die Providerfelder
 können keinen zusätzlichen MIME-Klartextteil konfigurieren. Auth-HTML ist
