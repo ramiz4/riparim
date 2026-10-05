@@ -63,7 +63,7 @@ try {
   await writeFile(join(root, "uncommitted-source.mjs"), "/* isolated uncommitted source */\n");
   await assert.rejects(() => packageRelease({ projectRoot: root, target: "sites", workflowCommit: commit }), /clean committed source/);
   await rm(join(root, "uncommitted-source.mjs"));
-  await json("dist/server/wrangler.json", { ...cloudflareSource, main: "index.js", no_bundle: true, assets: { directory: "../client" } });
+  await json("dist/server/wrangler.json", { ...cloudflareSource, main: "index.js", no_bundle: true, assets: { ...cloudflareSource.assets, directory: "../client" } });
   const owned = await packageRelease({ projectRoot: root, target: "cloudflare", workflowCommit: commit });
   const ownedArchive = await readFile(owned.archive);
   const ownedProvenance = await readFile(owned.provenancePath);
