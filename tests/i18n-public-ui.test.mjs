@@ -41,6 +41,10 @@ try{
    assert(catalogue.includes(t('public.workshopCount',{count})),`${locale}: 0/1/2 result copy`);
    assert.equal((catalogue.match(/class="catalogue-card"/g)??[]).length,count);
   }
+  for(const query of ['Ganz Kosovo','Alle Marken','Alle Sprachen','Alle Leistungen','Kein weiterer Ort','Nur im Ort']){
+   const collisionFilters={...api.defaultCatalogueFilters,query},chipDom=new JSDOM(renderToStaticMarkup(wrap(locale,h(api.Catalogue,{...props,initialFilters:collisionFilters}))));
+   try{const chip=chipDom.window.document.querySelector('.catalogue-filter-chip');assert.equal(chip.textContent,`${t('public.workshopName')}: ${query}`,`${locale}: free search text cannot collide with canonical sentinel labels`);assert.equal(chip.getAttribute('aria-label'),t('public.removeFilter',{label:t('public.workshopName'),value:query}),'search chip ARIA preserves original user input');assert.equal(new URL(api.catalogueHref(collisionFilters,locale),'https://fixture.test').searchParams.get('q'),query,'search URL keeps original canonical user query');}finally{chipDom.window.close();}
+  }
   const privateContext={brand:'Alle Marken',model:'Fixture Private Car',year:'2019',problem:'Original private problem text',service:'Alle Leistungen',city:'Prishtina',additionalCity:'',radius:0,from:'',to:''},privateFilters={...api.defaultCatalogueFilters,city:'Prishtina'};
   api.rememberSearchSession({...privateFilters,searched:true,context:privateContext,privateMatchingActive:true,catalogueHref:api.catalogueHref(privateFilters,locale),visibleCount:12,scrollY:0});
   await React.act(async()=>root.render(wrap(locale,h(api.Catalogue,{...props,initialFilters:privateFilters}))));
@@ -87,10 +91,16 @@ try{
   await React.act(async()=>gallery.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true,cancelable:true})));
   assert(gallery.textContent.includes('2 / 2'),'arrow key selects next actual photo');
   assert(gallery.querySelector('img').getAttribute('alt')===t('public.largePhotoAlt',{count:2,name:workshop.name}));
-  await React.act(async()=>gallery.querySelector('.profile-gallery-stage img').dispatchEvent(new Event('error')));assert(gallery.textContent.includes(t('public.photoFailed'))&&gallery.textContent.includes(t('public.chooseAnotherPhoto')),'photo failure has localized safe choices');
+  await React.act(async()=>gallery.querySelector('.profile-gallery-stage img').dispatchEvent(new Event('error')));assert.equal(gallery.querySelector('.profile-photo-error').textContent,`${t('public.photoFailed')} ${t('public.chooseAnotherPhoto')}`,'complete multiple-photo error paragraph separates its sentences');
   await React.act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));
   await React.act(async()=>new Promise(resolve=>setTimeout(resolve,0)));
   assert(!document.querySelector('[role="dialog"]')&&document.activeElement===opener,'Escape returns focus to originating photo');
+  for(const photoCount of [1,2]){
+   await React.act(async()=>root.render(wrap(locale,h(api.WorkshopPhotos,{name:workshop.name,profile:{...profile,photos:profile.photos.slice(0,photoCount)},identity,status:'ready'}))));await click(document.querySelector('button[aria-haspopup="dialog"]'));
+   const errorDialog=document.querySelector('[role="dialog"]');await React.act(async()=>errorDialog.querySelector('.profile-gallery-stage img').dispatchEvent(new Event('error')));
+   assert.equal(errorDialog.querySelector('.profile-photo-error').textContent,`${t('public.photoFailed')} ${t(photoCount===1?'public.reopenPhoto':'public.chooseAnotherPhoto')}`,`${locale}: complete error paragraph has an explicit sentence separator for ${photoCount} photos`);
+   await React.act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));await React.act(async()=>new Promise(resolve=>setTimeout(resolve,0)));
+  }
   await React.act(async()=>root.render(wrap(locale,h(api.DirectoryFooter))));
   await click(document.querySelector('footer button'));
   const dialog=document.querySelector('[role="dialog"]');assert(dialog.textContent.includes(t('public.businessInfoHelp'))&&dialog.textContent.includes(t('public.yourDataHelp')));
