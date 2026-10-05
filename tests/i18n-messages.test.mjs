@@ -57,6 +57,8 @@ assert.equal(formatNumber('sq',1234.5),'1234,5');
 assert.equal(formatNumber('sq',12345.5),'12\u00a0345,5');
 assert.equal(formatNumber('sq',9999.9999),'10\u00a0000','rounding carries into the Albanian grouping threshold');
 assert.equal(formatDate('en','2026-01-01T23:30:00Z'),'02/01/2026','Kosovo timestamps use Europe/Belgrade');
+assert.equal(formatDate('en','2026-10-05T23:30:00Z',{withTime:true}),'06/10/2026, 01:30','Delivery retries show the actual Kosovo time and date in the active locale');
+assert.equal(formatDate('de','2026-10-25T00:30:00Z',{withTime:true}),'25.10.2026, 02:30','Retry timestamps preserve Kosovo daylight saving time');
 assert.equal(formatDate('en','2026-10-25',{dateOnly:true}),'25/10/2026','a date-only value keeps its calendar day');
 assert.equal(formatDate('de','2026-01-01',{dateOnly:true}),'01.01.2026');
 assert.equal(formatDate('sq','2026-01-01',{dateOnly:true}),'01.01.2026');
@@ -87,3 +89,5 @@ for(const locale of ['de','sq','en']){
 assert.ok(!clientBundle.outputFiles[0].text.includes('Your visits and reviews in one place.'),'client translator does not bundle inactive customer catalogs');
 assert.ok(!clientBundle.outputFiles[0].text.includes('Vizitat dhe vlerësimet e tua në një vend.'),'Albanian customer catalogs stay server-side until requested');
 assert.ok(!clientBundle.outputFiles[0].text.includes('Deine Besuche und Bewertungen an einem Ort.'),'German feature catalogs are not a global fallback');
+assert.ok(!clientBundle.outputFiles[0].text.includes('Connect authentication.'),'Management English messages are serialized only for the active requested namespace');
+assert.ok(!clientBundle.outputFiles[0].text.includes('Lidh hyrjen.'),'Management Albanian messages never enter the shared client translator bundle');

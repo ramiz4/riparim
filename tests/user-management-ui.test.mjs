@@ -26,14 +26,14 @@ function resolveTokens(styles,dark){
 }
 const styleNode=document.createElement('style');document.head.append(styleNode);
 const output='.test-runtime/user-management-ui';
-const bundle=await build({entryPoints:['app/[locale]/verwaltung/benutzer/users.tsx'],outfile:output+'/users.mjs',bundle:true,write:false,platform:'node',format:'esm',packages:'external',loader:{'.css':'empty'},plugins:[{name:'page-shell-boundaries',setup(b){
+const bundle=await build({stdin:{contents:"export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {default} from './app/[locale]/verwaltung/benutzer/users';",resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/users.mjs',bundle:true,write:false,platform:'node',format:'esm',packages:'external',loader:{'.css':'empty'},plugins:[{name:'page-shell-boundaries',setup(b){
  b.onResolve({filter:/^(next\/link|@\/components\/site-header|@\/components\/admin-navigation)$/},args=>({path:args.path,namespace:'fixture'}));
  b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',resolveDir:process.cwd(),contents:args.path==='next/link'?`import React from 'react';export default function Link({children,href,...props}){return React.createElement('a',{...props,href},children);}`:args.path.includes('site-header')?'export function SiteHeader(){return null;}':'export function AdminNavigation(){return null;}'}));
 }}]});
 await mkdir(output,{recursive:true});await writeFile(output+'/users.mjs',bundle.outputFiles[0].contents);
 const {createElement,act}=await import('react');
 const {createRoot}=await import('react-dom/client');
-const {default:AdminUsers}=await import(new URL('../'+output+'/users.mjs',import.meta.url));
+const {default:AdminUsers,I18nProvider,getMessages}=await import(new URL('../'+output+'/users.mjs',import.meta.url));
 const fixtureUser=(id,name,options={})=>({id,name,email:id+'@example.test',role:'user',protected:false,active:true,confirmed:true,providers:['email'],createdAt:'2026-10-04',lastSignInAt:null,...options});
 let users=[fixtureUser('self','Current Admin',{role:'admin',protected:true}),fixtureUser('member','Fixture Member'),fixtureUser('other-admin','Other Admin',{role:'admin'}),fixtureUser('inactive','Inactive Member',{active:false})];
 let pendingDeletions=[],configured=true,mode='success',pending=null;
@@ -41,7 +41,7 @@ const requests=[];
 globalThis.fetch=async(url,options)=>{
  const request={url,method:options?.method??'GET',body:options?.body?JSON.parse(options.body):null};requests.push(request);
  const respond=()=>{
-  if(request.method==='GET')return mode==='load-error'?Response.json({error:'Fixture: Laden fehlgeschlagen'},{status:503}):Response.json({users,pendingDeletions,page:1,perPage:20,hasMore:false,configured});
+  if(request.method==='GET')return mode==='load-error'?Response.json({error:'Fixture: Laden fehlgeschlagen',errorCode:'users_unavailable'},{status:503}):Response.json({users,pendingDeletions,page:1,perPage:20,hasMore:false,configured});
   const user=users.find(item=>'/api/users/'+item.id===url);assert(user,'Only fictional listed users can be changed');
   Object.assign(user,request.body);return Response.json({user});
  };
@@ -57,7 +57,7 @@ const icon=(control,name)=>{
  const svg=control?.querySelector('svg');
  check(svg&&control.firstElementChild===svg&&svg.getAttribute('aria-hidden')==='true'&&svg.getAttribute('width')==='15'&&svg.getAttribute('height')==='15'&&svg.classList.contains('lucide-'+name),'The '+control?.textContent+' action leads with a consistently sized decorative '+name+' icon');
 };
-const mount=async()=>act(async()=>root.render(createElement(AdminUsers,{account:{email:'current-admin@example.test',displayName:'Current Admin',provider:'E-Mail'}})));
+const mount=async()=>act(async()=>root.render(fixtureMessages(createElement(AdminUsers,{account:{email:'current-admin@example.test',displayName:'Current Admin',provider:'E-Mail'}}))));
 const remount=async()=>{await act(async()=>root.unmount());root=createRoot(document.getElementById('root'));await mount();};
 try{
  await mount();
@@ -108,7 +108,7 @@ try{
  await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));
  check(!document.querySelector('[role=dialog]'),'The editor still supports keyboard dismissal');
  mode='load-error';await remount();
- check(document.querySelector('[role=alert]').textContent==='Fixture: Laden fehlgeschlagen'&&!document.querySelector('.users-empty'),'Failed initial loading displays the server error without claiming an empty account list');
+ check(document.querySelector('[role=alert]').textContent===getMessages('de').management.users_unavailable&&!document.querySelector('.users-empty'),'Failed initial loading displays the server error without claiming an empty account list');
  mode='success';users=[];await remount();
  check(document.querySelector('.users-empty h2').textContent==='Noch keine Benutzer auf dieser Seite.'&&document.querySelector('.users-empty button').textContent==='Benutzer anlegen','An empty account list retains its account creation action and explanatory state');
  check(document.querySelector('.users-pagination')&&!document.querySelector('.admin-note'),'The empty list still retains pagination without the removed note');
@@ -117,3 +117,5 @@ try{
  check(document.querySelector('.admin-title button').disabled&&document.querySelector('.users-search input').disabled&&!document.querySelector('table'),'Unconfigured management exposes no enabled account actions');
  console.log(JSON.stringify({userManagementUiChecksPassed:passed,liveRequests:false}));
 }finally{await act(async()=>root.unmount());dom.window.close();}
+
+function fixtureMessages(element){return createElement(I18nProvider,{locale:"de",messages:getMessages("de",["common","customer","management"])},element);}

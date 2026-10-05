@@ -62,6 +62,10 @@ try{
   }
  }
  const callback=await runtime.dispatchFetch('https://riparim.test/auth/bestaetigen?token_hash=fixture',{redirect:'manual'});assert.equal(callback.status,303);assert.equal(callback.headers.get('Referrer-Policy'),'no-referrer');
+ for(const locale of ['de','sq','en'])for(const path of ['/betrieb','/verwaltung','/verwaltung/bewertungen','/verwaltung/benutzer','/verwaltung/betriebe','/verwaltung/anmeldung']){
+  const prefix=locale==='de'?'':'/'+locale,response=await runtime.dispatchFetch('https://riparim.test'+prefix+path);assert.equal(response.status,200,'Actual management guest page stays reachable');const html=await response.text();
+  assert.match(html,new RegExp('<html lang="'+locale+'"'));assert.match(html,/<meta[^>]*name="robots"[^>]*content="noindex[^">]*nofollow/);assert(!html.includes('hreflang='),'Actual business/administration documents advertise no private alternates');
+ }
  for(const file of (await readdir('public')).filter(file=>/\.(?:png|jpg|svg)$/.test(file))){const response=await runtime.dispatchFetch('https://riparim.test/'+file,{redirect:'manual'});assert.equal(response.status,200,'physical unprefixed asset '+file+' stays reachable');}
  // Run Intl in native workerd as well, using the same public formatter/translator.
  const fixture=await build({stdin:{contents:`import {getMessages,createTranslator} from './lib/i18n/messages';import {formatDate,formatNumber} from './lib/i18n/format';export default {fetch(){const t=createTranslator(getMessages('sq',['common']));return Response.json({counts:[0,1,2].map(count=>t('common.reviewCount',{count})),number:formatNumber('sq',1234.5),rounded:formatNumber('sq',9999.9999),date:formatDate('sq','2026-03-29',{dateOnly:true}),timestamp:formatDate('en','2026-10-05T23:30:00Z')});}};`,resolveDir:process.cwd(),loader:'ts'},bundle:true,write:false,format:'esm',platform:'neutral'});

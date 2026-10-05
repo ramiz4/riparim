@@ -1,3 +1,4 @@
+import {ValidationError} from "@/lib/validation-error";
 import {getAdminUser} from "@/app/auth";
 import {storage} from "@/db/storage";
 import {listWorkshops,validateProfile,profileColumns,profileValues} from "@/db/directory";
@@ -10,24 +11,24 @@ export async function POST(request:Request){return save(request,false);}
 export async function PATCH(request:Request){return save(request,true);}
 async function save(request:Request,update:boolean){
  const user=await getAdminUser();
- if(!user)return json({error:"Bitte melde dich an."},401);
- if(!user.isModerator)return json({error:"Kein Zugriff auf die Verwaltung."},403);
- if(!sameOrigin(request))return json({error:"Ungültige Anfrage."},403);
+ if(!user)return json({error:"Bitte melde dich an.",errorCode:"authentication_required"},401);
+ if(!user.isModerator)return json({error:"Kein Zugriff auf die Verwaltung.",errorCode:"forbidden"},403);
+ if(!sameOrigin(request))return json({error:"Ungültige Anfrage.",errorCode:"invalid_request"},403);
  let body:Record<string,unknown>;
- try{body=await readJson(request);}catch{return json({error:"Ungültige Eingaben."},400);}
+ try{body=await readJson(request);}catch{return json({error:"Ungültige Eingaben.",errorCode:"invalid_request"},400);}
  let profile;
  try{
   const id=update?String(body.id??""):String(body.id??crypto.randomUUID());
-  if(!/^[a-z0-9][a-z0-9-]{2,80}$/.test(id))return json({error:"Ungültige Profilkennung."},400);
+  if(!/^[a-z0-9][a-z0-9-]{2,80}$/.test(id))return json({error:"Ungültige Profilkennung.",errorCode:"workshop_invalid_id"},400);
   profile=validateProfile(body,id);
- }catch(e){return json({error:e instanceof Error?e.message:"Bitte prüfe die Eingaben."},400);}
+ }catch(e){return json({error:e instanceof ValidationError?e.message:"Bitte prüfe die Eingaben.",errorCode:e instanceof ValidationError?e.code:"invalid_request"},400);}
  try{
   const all=await listWorkshops(true),existing=all.find(w=>w.id===profile.id);
-  const conflict=()=>json({error:"Das Profil wurde zwischenzeitlich geändert. Lade die Liste neu und prüfe deine Änderungen."},409);
+  const conflict=()=>json({error:"Das Profil wurde zwischenzeitlich geändert. Lade die Liste neu und prüfe deine Änderungen.",errorCode:"workshop_conflict"},409);
   if(update&&(!existing||existing.updatedAt!==String(body.previousUpdatedAt??"")))return conflict();
-  if(!update&&existing)return json({error:"Diese Profilkennung ist bereits vergeben."},409);
+  if(!update&&existing)return json({error:"Diese Profilkennung ist bereits vergeben.",errorCode:"workshop_id_exists"},409);
   const placeId=profile.status==="published"?await confirmedPublicationPlace(profile,existing):null;
-  if(profile.status==="published"&&!placeId)return json({error:"Für dieses Profil fehlt eine eindeutige bestätigte Google-Zuordnung oder der Google-Eintrag gehört bereits zu einem anderen Profil. Bitte als Entwurf speichern und die Zuordnung prüfen."},422);
+  if(profile.status==="published"&&!placeId)return json({error:"Für dieses Profil fehlt eine eindeutige bestätigte Google-Zuordnung oder der Google-Eintrag gehört bereits zu einem anderen Profil. Bitte als Entwurf speichern und die Zuordnung prüfen.",errorCode:"workshop_google_required"},422);
   const {db}=storage(),statements=[];
   if(update){
    const fields=profileColumns.slice(1),values=profileValues(profile).slice(1);
@@ -42,6 +43,6 @@ async function save(request:Request,update:boolean){
   }
   const result=await db.batch(statements);
   if(update&&!result[0].meta.changes)return conflict();
-  return json({id:profile.id},update?200:201);
- }catch(e){console.error("directory-save",e);return json({error:"Speichern fehlgeschlagen. Deine Eingaben bleiben erhalten."},503);}
+  return json({id:profile.id,messageCode:"saved"},update?200:201);
+ }catch(e){console.error("directory-save",e instanceof Error?e.name:"unknown");return json({error:"Speichern fehlgeschlagen. Deine Eingaben bleiben erhalten.",errorCode:"workshop_save_failed"},503);}
 }
