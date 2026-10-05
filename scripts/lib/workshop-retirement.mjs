@@ -1,15 +1,16 @@
 import {readFileSync} from 'node:fs';
 
-const allowedIds=new Set(JSON.parse(readFileSync(new URL('../../data/workshop-removals.json',import.meta.url),'utf8')).workshopIds);
+const reviewedGroups=['workshop-removals.json','workshop-final-removals.json'].map(file=>JSON.parse(readFileSync(new URL('../../data/'+file,import.meta.url),'utf8')));
 const relations=[['visits','workshop'],['workshop_claims','workshop_id'],['workshop_owners','workshop_id'],['workshop_changes','workshop_id']];
 const noRelations=relations.map(([table,column])=>`NOT EXISTS (SELECT 1 FROM ${table} r WHERE r.${column}=w.id)`).join(' AND ');
-const wanted="wanted AS (SELECT json_extract(value,'$.id') AS id,json_extract(value,'$.updatedAt') AS updated_at FROM json_each(?))";
-const eligible=`w.status='draft' AND w.updated_at=t.updated_at AND NOT EXISTS (SELECT 1 FROM workshop_google_places g WHERE g.workshop_id=w.id AND g.place_id IS NOT NULL) AND ${noRelations}`;
+const wanted="wanted AS (SELECT json_extract(value,'$.id') AS id,json_extract(value,'$.updatedAt') AS updated_at,json_extract(value,'$.placeId') AS place_id FROM json_each(?))";
+const eligible=`w.status='draft' AND w.updated_at=t.updated_at AND (SELECT place_id FROM workshop_google_places g WHERE g.workshop_id=w.id) IS t.place_id AND ${noRelations}`;
 
-// One atomic D1 batch: a stale, published, mapped or customer-linked target
+// One atomic D1 batch: a stale, published, newly mapped or customer-linked target
 // suppresses the whole removal; private relation tables are never written.
 export function workshopRetirementBatch(targets,operationId,removedAt){
- if(targets.length!==allowedIds.size||new Set(targets.map(t=>t.id)).size!==targets.length||targets.some(t=>!allowedIds.has(t.id)||!Number.isFinite(Date.parse(t.updatedAt))))throw Error('Removal must cover exactly the reviewed 27 drafts');
+ const group=reviewedGroups.find(g=>g.workshopIds.length===targets.length&&g.workshopIds.every(id=>targets.some(t=>t.id===id)));
+ if(!group||new Set(targets.map(t=>t.id)).size!==targets.length||targets.some(t=>!Number.isFinite(Date.parse(t.updatedAt))||(t.placeId??null)!==(group.confirmedPlaceIds?.[t.id]??null)))throw Error('Removal must cover exactly one reviewed draft group with its confirmed identities');
  if(!/^[a-zA-Z0-9-]{10,100}$/.test(operationId)||!Number.isFinite(Date.parse(removedAt)))throw Error('Invalid removal operation metadata');
  const input=JSON.stringify(targets),operationKey=`workshop-removal-run:${operationId}`;
  const operation="EXISTS (SELECT 1 FROM catalog_state WHERE key=? AND value=?)";

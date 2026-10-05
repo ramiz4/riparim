@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "removedAt": "2026-10-05T15:22:26.058Z",
+  "reason": "Vom Nutzer freigegebener Abschluss der acht Entwürfe: sechs fachlich ungeeignete oder geschlossen belegte Einträge, altes Reno-Südprofil und nach abschließender Prüfung weiterhin nicht konkret als Pkw-Werkstatt belegter Isuzu/Burak-Eintrag.",
+  "issueUrl": "https://github.com/ramiz4/riparim/issues/53",
+  "previousReview": "./catalogue-final-2026-10-05.json",
+  "before": {
+    "total": 136,
+    "published": 128,
+    "drafts": 8
+  },
+  "after": {
+    "total": 129,
+    "published": 129,
+    "drafts": 0
+  },
+  "workshopIds": [
+    "auto-ballkan-gjilan",
+    "benita-company-kline",
+    "isuzu-servis-prizren",
+    "opel-rakovica-prishtina",
+    "reno-center-muciqi-prishtina",
+    "scania-trans-mitrovica",
+    "tachograf-kienzle-ferizaj",
+    "tahograf-prishtina"
+  ],
+  "confirmedPlaceIds": {
+    "auto-ballkan-gjilan": "ChIJG3VcI02NVBMRhghUZ9dLb0U",
+    "benita-company-kline": "ChIJdXtZEM0OUxMRHhYLUY4CKmA",
+    "isuzu-servis-prizren": "ChIJiWvm59WVUxMRQAR6NUL2eA8",
+    "scania-trans-mitrovica": "ChIJ74s4yeVFUxMRSQjRkEpj7uU",
+    "tachograf-kienzle-ferizaj": "ChIJO7PBcNp_VBMR638RbvzJZts",
+    "tahograf-prishtina": "ChIJ0ykW1rWfVBMRVWmPUwPgbKI"
+  }
+}
