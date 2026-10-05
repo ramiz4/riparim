@@ -63,6 +63,10 @@ Die Google-Prüfung erfolgte im vom Nutzer vorgegebenen Browserprofil. Jede Plac
 
 `data/catalogue-identity-2026-10-05.json` dokumentiert alle 30 Ergebnisse und die zusätzlichen Recherchewege. **27 Identitäten bleiben ungeklärt.** Die acht übrigen Entwürfe dieser Stufe bleiben unverändert: ein Reno-Filialkonflikt, der geschlossen belegte Opel-Betrieb und sechs fachliche Ausschlüsse. Die früheren Berichte mit 34 und 13 Freigaben bleiben unverändert; Tests gleichen alle drei aufeinanderfolgenden Prüfungen ab.
 
+## Quellenprüfung der 27 verbleibenden Profile
+
+Die weitere Quellenprüfung der 27 ungeklärten Profile steht in `data/catalogue-source-review-2026-10-05.json`. Alle ursprünglichen Quellen sind erreichbar und nennen weiterhin die gespeicherten Kontakte sowie Pkw-Service. STARTs eigene Betriebsbeiträge wurden ergänzt; FIAs eigenes Betriebsprofil bestätigt die genaue Hausnummer 71 und wurde ebenfalls ergänzt. Beide bleiben Entwürfe. Ein lesbarer Verzeichniseintrag ist kein Nachweis heutiger Betriebsaktivität oder einer Google-Identität. Die vorgeschlagene Freigabe anhand unabhängiger Quellen benötigt eine ausdrückliche Entscheidung über die bisherige Google-Pflicht; der aktuelle Bestand bleibt **128 öffentlich / 35 Entwürfe**.
+
 ## Bestandsprüfung vom 5. Oktober 2026
 
 Alle 85 offenen Entwürfe wurden gegen den aktuellen Produktionsbestand abgeglichen. Bei 77 fehlte eine gespeicherte Place ID; die acht bereits zugeordneten Entwürfe waren sechs fachlich ausgeschlossene Einträge und zwei zurückgestellte Standortkonflikte. Doppelte Place IDs wurden nicht gefunden. Die 422-Freigabesperre ist bei fehlender eindeutiger Identität beabsichtigt; sie wurde nicht abgeschwächt.

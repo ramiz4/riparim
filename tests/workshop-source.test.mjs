@@ -14,6 +14,7 @@ const research=JSON.parse(await readFile('data/catalogue-review-2026-10-04.json'
 const latestResearch=JSON.parse(await readFile('data/catalogue-review-2026-10-05.json','utf8'));
 const followupResearch=JSON.parse(await readFile('data/catalogue-followup-2026-10-05.json','utf8'));
 const identityResearch=JSON.parse(await readFile('data/catalogue-identity-2026-10-05.json','utf8'));
+const sourceResearch=JSON.parse(await readFile('data/catalogue-source-review-2026-10-05.json','utf8'));
 const effectiveAssessments=new Map([...latestResearch.draftAssessments,...followupResearch.draftAssessments,...identityResearch.draftAssessments].map(proof=>[proof.workshopId,proof]));
 const importManifest=JSON.parse(await readFile('data/import-2026-10-03.json','utf8'));
 const expectedCatalogueIds=new Set([...research.draftAssessments.map(proof=>proof.workshopId),...importManifest.importedWorkshopIds,...importManifest.originalPublishedWorkshopIds]);
@@ -64,6 +65,24 @@ assert.equal(stats.published,identityResearch.before.published+identityPromotion
 assert.equal(stats.drafts,identityResearch.before.drafts-identityPromotions);
 assert.equal(identityResearch.after.published,stats.published);assert.equal(identityResearch.after.drafts,stats.drafts);
 assert.equal(identityResearch.googleApiRequests,0,'the third review does not bypass the exhausted server quota');assert.equal(identityResearch.dailyRequestLimit,100);
+assert.equal(sourceResearch.reviewedDrafts,27);assert.equal(sourceResearch.draftAssessments.length,27);
+assert.deepEqual(new Set(sourceResearch.draftAssessments.map(proof=>proof.workshopId)),new Set(identityResearch.draftAssessments.filter(proof=>proof.assessment==='needs_identity').map(proof=>proof.workshopId)),'the source review covers exactly the 27 remaining identities');
+assert.deepEqual(sourceResearch.before,identityResearch.after);assert.deepEqual(sourceResearch.after,sourceResearch.before,'source checks alone do not alter publication requirements');
+assert.equal(sourceResearch.googleApiRequests,0);assert.equal(sourceResearch.publicationPolicyDecision,'pending');
+assert.deepEqual(sourceResearch.summary,{independentSourcesChecked:27,confirmedNewGoogleIdentities:0,published:0,otherDraftsUntouched:8});
+for(const proof of sourceResearch.draftAssessments){
+ const workshop=catalogue.workshops.find(w=>w.id===proof.workshopId);
+ assert.equal(workshop.status,'draft');assert.equal(proof.resultingStatus,'draft');assert.equal(workshop.google.placeId,null);assert.deepEqual(proof.googleIdentity,{placeId:null,confirmed:false});
+ assert.equal(proof.publicationBlockedBy,'mandatory_confirmed_google_identity');
+ assert.equal(proof.independentEvidence.contactMatchesStoredProfile,true);assert.equal(proof.independentEvidence.passengerCarScopeVerified,true);
+ assert.equal(proof.independentEvidence.operatorContactVerified,false,'a matching directory contact is not an operator verification');assert.equal(proof.independentEvidence.sourceAvailabilityDoesNotProveCurrentOperation,true);
+ assert(proof.independentEvidence.sourceUrls.some(url=>workshop.sources.some(source=>source.url===url)),'source checks retain the original business evidence');
+ assert(proof.independentEvidence.sourceUrls.every(url=>!/(^|\.)google\.[a-z.]+$/.test(new URL(url).hostname)),'independent evidence never masquerades as a Google identity');
+ if(proof.profileCorrection){
+  if(proof.profileCorrection.address)assert.equal(workshop.address,proof.profileCorrection.address);
+  for(const url of proof.profileCorrection.addedSourceUrls)assert(workshop.sources.some(source=>source.url===url));
+ }
+}
 for(const proof of unchangedDrafts){
  assert.equal(catalogue.workshops.find(w=>w.id===proof.workshopId).status,'draft','branch conflicts, closed businesses and scope exclusions remain private');
  assert.equal(effectiveAssessments.get(proof.workshopId),proof,'the third review does not reassess unrelated drafts');

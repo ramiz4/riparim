@@ -1,7 +1,7 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-05T12:08:22.374Z",
+  "updatedAt": "2026-10-05T13:22:47.938Z",
   "coverage": {
     "countryCode": "XK",
     "published": 128,
@@ -766,11 +766,16 @@
           "url": "https://stgres.gjirafa.biz/auto-elektro-start-1",
           "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://www.autoyas.com/XK/Pristina/305160826275054/Auto-Servis-START",
+          "title": "Eigene START-Betriebsbeiträge: Kontakt, Haxhi Zeka und Pkw-Elektrik",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
+      "checkedAt": "2026-10-05",
       "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "updatedAt": "2026-10-05T13:22:47.938Z",
       "google": {
         "placeId": null,
         "matchedAt": null,
@@ -2985,7 +2990,7 @@
       "id": "auto-servis-fia-prishtina",
       "name": "Auto Servis Fia",
       "city": "Prishtina",
-      "address": "Bajram Bahtiri, Prishtinë",
+      "address": "Bajram Bahtiri Nr. 71, Prishtina",
       "phone": "+38344185948",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
       "whatsapp": "",
@@ -3006,11 +3011,16 @@
           "url": "https://stgres.gjirafa.biz/auto-servis-fia-1",
           "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://www.autoyas.com/XK/Pristina/1020135634693665/Auto-Servis-%22FIA%22",
+          "title": "Eigenes FIA-Betriebsprofil: Hausnummer 71, Kontakt und Pkw-Service",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
+      "checkedAt": "2026-10-05",
       "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "updatedAt": "2026-10-05T13:22:47.938Z",
       "google": {
         "placeId": null,
         "matchedAt": null,
