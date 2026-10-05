@@ -75,3 +75,14 @@ for(const locale of ['de','sq','en']){
  assert.equal(messageCodeMessage(t,'preference_not_saved'),messages.common.preferenceNotSaved);
 }
 console.log('i18n message contracts passed');
+
+for(const locale of ['de','sq','en']){
+ const copy=getMessages(locale).customer,t=createTranslator(getMessages(locale,['common','customer']));
+ assert.equal(t('customer.enterDeletePhrase',{phrase:'SAFE PHRASE'}),copy.enterDeletePhrase.replace('{phrase}','SAFE PHRASE'));
+ assert.equal(errorCodeMessage(t,'invalid_email'),copy.invalidEmail);
+ assert.equal(messageCodeMessage(t,'confirm_email'),copy.confirmEmailMessage);
+ assert.equal(t('customer.stars',{count:1}),copy.stars.one.replace('{count}','1'));
+}
+assert.ok(!clientBundle.outputFiles[0].text.includes('Your visits and reviews in one place.'),'client translator does not bundle inactive customer catalogs');
+assert.ok(!clientBundle.outputFiles[0].text.includes('Vizitat dhe vlerësimet e tua në një vend.'),'Albanian customer catalogs stay server-side until requested');
+assert.ok(!clientBundle.outputFiles[0].text.includes('Deine Besuche und Bewertungen an einem Ort.'),'German feature catalogs are not a global fallback');

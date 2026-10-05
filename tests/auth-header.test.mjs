@@ -26,6 +26,6 @@ for(const provider of ['Google','E-Mail']){
  assert.match(html,/Abmelden/);
 }
 const legacy=render('ChatGPT');
-assert.match(legacy,/href="\/signout-with-chatgpt\?return_to=%2F"/);
+assert.match(legacy,/href="\/signout-with-chatgpt\?return_to=%2Fanmelden"/);
 assert(!legacy.includes('data-session-logout="true"'));
 console.log('Account header: Google and email use session logout; ChatGPT uses native logout');

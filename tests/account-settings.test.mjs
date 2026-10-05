@@ -28,15 +28,15 @@ const accountId=(uid=id)=>`supabase:fixture-project.supabase.co:${uid}`;
 let user={userId:accountId(),email:'member@example.test',provider:'E-Mail',displayName:'Fixture Member',ownerKeys:[accountId()],isModerator:false};
 let providerUser={id,email:user.email,email_confirmed_at:'2026-10-04',user_metadata:{full_name:user.displayName,unrelated:'preserved'}};
 const objects=new Map();let failBucket=false,failProvider=false,missingProvider=false,allowCurrent=true;
-let reachedPut=null,releasePut=null;
+let reachedPut=null,releasePut=null,heldMetadataUpdate=null,releaseMetadataUpdate=null;
 const bucket={async put(key,bytes,options){if(options?.onlyIf&&reachedPut){reachedPut(key);await new Promise(resolve=>releasePut=resolve);}if(options?.onlyIf&&!objects.has(key))return null;objects.set(key,bytes??false);return {etag:key};},async head(key){return objects.has(key)?{key}:null;},async list({prefix,cursor}){if(failBucket)throw Error('Fixture R2 unavailable');const keys=[...objects.keys()].filter(key=>key.startsWith(prefix)&&(!cursor||key>cursor)).sort(),page=keys.slice(0,1);return {objects:page.map(key=>({key})),truncated:keys.length>page.length,cursor:page.at(-1)};},async delete(keys){if(failBucket)throw Error('Fixture R2 unavailable');for(const key of Array.isArray(keys)?keys:[keys])objects.delete(key);}};
 globalThis.fixtureEnv={DB:d1,BUCKET:bucket,SITE_ORIGIN:origin,REVIEW_MODERATOR_EMAIL:'owner@example.test'};
-globalThis.fixtureCurrent=()=>allowCurrent&&!db.prepare('SELECT account_id FROM auth_account_status WHERE account_id=?').get(user.userId)?user:null;
+globalThis.fixtureCurrent=()=>allowCurrent&&!db.prepare('SELECT account_id FROM auth_account_status WHERE account_id=?').get(user.userId)?{...user,displayName:providerUser.user_metadata.full_name??user.displayName}:null;
 const cookieMap=new Map(),cookieOptions=new Map();
 globalThis.fixtureCookies={get(name){const value=cookieMap.get(name);return value?{value}:undefined;},set(name,value,options){cookieOptions.set(name,options);if(options?.maxAge===0)cookieMap.delete(name);else cookieMap.set(name,value);}};
 globalThis.fixtureClient={auth:{getUser:async()=>({data:{user:providerUser},error:null}),signOut:async()=>({error:null})}};
 const writes=[];
-const authAdmin={getUserById:async uid=>{assert.equal(uid,id,'Provider targets come from the authenticated identity');return missingProvider?{data:{user:null},error:{status:404,code:'user_not_found'}}:{data:{user:providerUser},error:failProvider?{status:503}:null};},updateUserById:async(uid,attributes)=>{writes.push({method:'update',uid,attributes});if(failProvider)return {data:{user:null},error:{status:503}};providerUser={...providerUser,user_metadata:attributes.user_metadata};return {data:{user:providerUser},error:null};},deleteUser:async uid=>{writes.push({method:'delete',uid});if(failProvider)return {error:{status:503}};missingProvider=true;return {error:null};}};
+const authAdmin={getUserById:async uid=>{assert.equal(uid,id,'Provider targets come from the authenticated identity');return missingProvider?{data:{user:null},error:{status:404,code:'user_not_found'}}:{data:{user:providerUser},error:failProvider?{status:503}:null};},updateUserById:async(uid,attributes)=>{writes.push({method:'update',uid,attributes});if(failProvider)return {data:{user:null},error:{status:503}};if(heldMetadataUpdate){const held=heldMetadataUpdate;heldMetadataUpdate=null;held();await new Promise(resolve=>releaseMetadataUpdate=resolve);}const metadata={...providerUser.user_metadata};for(const [key,value] of Object.entries(attributes.user_metadata)){if(value===null)delete metadata[key];else metadata[key]=value;}providerUser={...providerUser,user_metadata:metadata};return {data:{user:providerUser},error:null};},deleteUser:async uid=>{writes.push({method:'delete',uid});if(failProvider)return {error:{status:503}};missingProvider=true;return {error:null};}};
 globalThis.fixtureAdmin={client:{auth:{admin:authAdmin}},projectUrl};
 let proofUser=providerUser,proofError=false,proofUserError=false,proofCalls=0,proofSignouts=0,proofConfig=null;
 globalThis.fixtureCreateClient=(...args)=>{proofConfig=args;return {auth:{signInWithPassword:async credentials=>{proofCalls++;assert.equal(credentials.email,user.email);return {data:{user:proofUser},error:proofError?{status:400}:null};},getUser:async()=>({data:{user:proofUser},error:proofUserError?{status:503}:null}),signOut:async options=>{assert.equal(options.scope,'local');proofSignouts++;return {error:null};}}};};
@@ -62,9 +62,33 @@ check(writes.length===0,'Invalid requests never write provider data');
 check((await account.PATCH(request('PATCH',{name:'Another Name'},{Origin:'https://other.example.test'}))).status===400,'Cross-origin name changes are denied');
 response=await patch({name:'  Another Name  '});data=await response.json();
 check(response.ok&&data.name==='Another Name'&&writes.at(-1).uid===id,'Validated names update only the session identity');
-check(writes.at(-1).attributes.user_metadata.unrelated==='preserved'&&Object.keys(writes.at(-1).attributes).length===1,'Name updates preserve unrelated profile metadata without writing identity or roles');
+check(providerUser.user_metadata.unrelated==='preserved'&&Object.keys(writes.at(-1).attributes).length===1,'Name updates preserve unrelated profile metadata without writing identity or roles');
 providerUser={...providerUser,id:otherId};check((await patch({name:'Other Name'})).status===401,'A mismatched verified provider subject fails closed');providerUser={...providerUser,id};
 user={...user,provider:'ChatGPT'};check((await account.GET().then(r=>r.json())).account===null&&(await patch({name:'Another Name'})).status===401,'Native-only sessions cannot act on a Supabase account');user={...user,provider:'E-Mail'};
+for(const locale of ['de','sq','en']){
+ const response=await patch({preferredLocale:locale}),data=await response.json();
+ check(response.ok&&data.preferredLocale===locale&&providerUser.user_metadata.preferred_locale===locale,'Own confirmed account can set a presentation locale');
+ check(writes.at(-1).uid===id&&providerUser.user_metadata.unrelated==='preserved'&&providerUser.user_metadata.full_name==='Another Name','Preference preserves unrelated metadata and name');
+}
+for(const payload of [{preferredLocale:'fr'},{preferredLocale:null},{preferredLocale:'en',name:'Another Name'},{preferredLocale:'en',id:otherId},{preferredLocale:'en',role:'admin'},{preferred_locale:'en'}])check((await patch(payload)).status===400,'Preference accepts only the exact independent allowlisted payload');
+providerUser={...providerUser,email_confirmed_at:null};check((await patch({preferredLocale:'sq'})).status===401,'Unconfirmed account cannot set a preference');providerUser={...providerUser,email_confirmed_at:'2026-10-04'};
+failProvider=true;check((await patch({preferredLocale:'sq'})).status===503,'Provider failure is reported without false preference success');failProvider=false;
+const raceResults=[];
+for(const first of ['preference','name']){
+ providerUser={...providerUser,user_metadata:{full_name:'Original Name',preferred_locale:'de',unrelated:'preserved',nested:{fixture:'kept'}}};
+ const reached=new Promise(resolve=>heldMetadataUpdate=resolve);
+ const early=patch(first==='preference'?{preferredLocale:'en'}:{name:'New Name'});
+ await reached;
+ const later=await patch(first==='preference'?{name:'New Name'}:{preferredLocale:'sq'});
+ check(later.ok,'The later own-account request may commit while an earlier provider request is paused');
+ // A separate provider metadata edit must also survive the stale request.
+ await authAdmin.updateUserById(id,{user_metadata:{unrelated:'updated concurrently',added:'new independent metadata'}});
+ releaseMetadataUpdate();const earlyResponse=await early;
+ check(earlyResponse.ok,'Both valid own-account PATCH requests report successful commits');
+ const result=await account.GET(),current=await result.json(),metadata=(await authAdmin.getUserById(id)).data.user.user_metadata;
+ raceResults.push({first,name:current.account.name,locale:metadata.preferred_locale,unrelated:metadata.unrelated,added:metadata.added,nested:metadata.nested});
+}
+assert.deepEqual(raceResults,[{first:'preference',name:'New Name',locale:'en',unrelated:'updated concurrently',added:'new independent metadata',nested:{fixture:'kept'}},{first:'name',name:'New Name',locale:'sq',unrelated:'updated concurrently',added:'new independent metadata',nested:{fixture:'kept'}}],'Both request completion orders preserve independent name, language and unrelated metadata');passed+=2;
 proofError=true;check((await confirm({password:'incorrect'})).status===401&&!grantRow(),'Incorrect passwords cannot authorize deletion');proofError=false;
 proofUser={...providerUser,id:otherId};check((await confirm({password:'fixture-password'})).status===401&&!grantRow(),'Fresh proof for another subject cannot authorize this account');proofUser=providerUser;
 proofUserError=true;check((await confirm({password:'fixture-password'})).status===401&&!grantRow(),'A failed server-side proof lookup cannot authorize deletion');proofUserError=false;

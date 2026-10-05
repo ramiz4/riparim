@@ -25,7 +25,7 @@ function checkCatalog(base,translated,prefix){
 for(const locale of ['de','sq','en']){
  const messages=getMessages(locale),base=getMessages('de');
  assert.equal(messages.locale,locale);
- for(const namespace of ['common','metadata'])checkCatalog(base[namespace],messages[namespace],`${locale}.${namespace}`);
+ for(const namespace of Object.keys(base).filter(key=>key!=='locale'))checkCatalog(base[namespace],messages[namespace],`${locale}.${namespace}`);
  assert.deepEqual(JSON.parse(JSON.stringify(messages)),messages,`${locale}: JSON serialization`);
  assert.equal(Intl.PluralRules.supportedLocalesOf([locale]).length,1,`${locale}: Intl.PluralRules support`);
  assert.equal(Intl.NumberFormat.supportedLocalesOf([locale]).length,1,`${locale}: Intl.NumberFormat support`);
@@ -43,6 +43,11 @@ import {createTranslator,getMessages} from './lib/i18n/messages';
 import {type CodedResponse} from './lib/i18n/codes';
 const t=createTranslator(getMessages('sq',['common']));
 t('common.login');
+t('customer.stars',{count:2});
+// @ts-expect-error customer rich text needs its named parameter
+t('customer.enterDeletePhrase');
+// @ts-expect-error missing stars count fails
+t('customer.stars');
 t('common.reviewCount',{count:2});
 const response:CodedResponse={errorCode:'forbidden',error:'Legacy compatible text'};
 void response;

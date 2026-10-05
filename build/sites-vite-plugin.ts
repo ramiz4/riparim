@@ -1,3 +1,4 @@
+import {validatedReturnPath} from "../lib/auth/return-path";
 // Vendored from @openai/sites-vite-plugin 0.2.0 (openai/sites#9).
 // See sites-vite-plugin.LICENSE for the upstream MIT license.
 import { access, cp, mkdir, rm } from "node:fs/promises";
@@ -216,15 +217,5 @@ function respond(response: ServerResponse, status: number): void {
 }
 
 function safeReturn(value: string | null): string {
-  if (!value?.startsWith("/") || value.startsWith("//")) return "/";
-
-  try {
-    const url = new URL(value, "http://localhost");
-    if (url.origin !== "http://localhost" || authPaths.has(url.pathname)) {
-      return "/";
-    }
-    return `${url.pathname}${url.search}${url.hash}`;
-  } catch {
-    return "/";
-  }
+  return validatedReturnPath(value,"http://localhost","/");
 }
