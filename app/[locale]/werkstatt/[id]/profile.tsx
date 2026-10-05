@@ -1,6 +1,7 @@
 "use client";
 import {publicDataError} from "@/lib/i18n/public-errors";
 import {useI18n} from "@/lib/i18n/client";
+import {useNavigationGuard} from "@/lib/i18n/navigation-guard";
 import {formatDate,formatNumber} from "@/lib/i18n/format";
 import {valueLabel} from "@/lib/i18n/values";
 import {localizeHref} from "@/lib/i18n/locale";
@@ -29,7 +30,8 @@ import {WorkshopNavigationLink} from "@/components/workshop-navigation-link";
 type Props={display?:WorkshopDisplayContent;workshop:Workshop;directory:Workshop[];reviews:Review[];reviewError:string;signedIn:boolean;account:AccountIdentity|null;isAdmin:boolean};
 export default function WorkshopProfile({workshop:w,directory,reviews,reviewError,signedIn,account,isAdmin,display}:Props){
  const {locale,t}=useI18n();
- const router=useRouter();const [reviewOpen,setReviewOpen]=useState(false),[reviewBusy,setReviewBusy]=useState(false),[myReviews,setMyReviews]=useState(false),[editing,setEditing]=useState<Visit|null>(null),[contact,setContact]=useState(false),[message,setMessage]=useState(""),[feedback,setFeedback]=useState(""),[backHref,setBackHref]=useState("/werkstaetten");
+ const router=useRouter();const [reviewOpen,setReviewOpen]=useState(false),[reviewBusy,setReviewBusy]=useState(false),[myReviews,setMyReviews]=useState(false),[editing,setEditing]=useState<Visit|null>(null),[contact,setContact]=useState(false),[message,setMessage]=useState(""),[initialMessage,setInitialMessage]=useState(""),[feedback,setFeedback]=useState(""),[backHref,setBackHref]=useState("/werkstaetten");
+ useNavigationGuard({dirty:contact&&message!==initialMessage});
  const {profile,identity,status}=useGoogleWorkshopProfile(w.id);
  const [selection,setSelection]=useState<ProfileSelection>({brand:null,service:null,vehicle:null});
  const path=localizeHref(`/werkstatt/${encodeURIComponent(w.id)}`,locale);
@@ -46,7 +48,7 @@ export default function WorkshopProfile({workshop:w,directory,reviews,reviewErro
  function openReview(){setReviewOpen(true);requestAnimationFrame(()=>document.getElementById("bewerten")?.scrollIntoView({behavior:"smooth",block:"start"}));}
  function startWhatsApp(){
   setFeedback("");const session=readSearchSession(),context=session?.privateMatchingActive?session.context:null;
-  setMessage(t("public.whatsAppHello",{name:w.name})+(context?t("public.messageVehicle",{vehicle:`${valueLabel(locale,"sentinel",context.brand)} ${context.model}${context.year?` (${context.year})`:""}`})+t("public.messageWork",{problem:context.problem})+(context.from||context.to?t("public.messageTravel",{from:context.from?formatDate(locale,context.from,{dateOnly:true}):t("public.unspecified"),to:context.to?formatDate(locale,context.to,{dateOnly:true}):t("public.unspecified")}):""):"")+t("public.messageAsk"));setContact(true);
+  const draft=t("public.whatsAppHello",{name:w.name})+(context?t("public.messageVehicle",{vehicle:`${valueLabel(locale,"sentinel",context.brand)} ${context.model}${context.year?` (${context.year})`:""}`})+t("public.messageWork",{problem:context.problem})+(context.from||context.to?t("public.messageTravel",{from:context.from?formatDate(locale,context.from,{dateOnly:true}):t("public.unspecified"),to:context.to?formatDate(locale,context.to,{dateOnly:true}):t("public.unspecified")}):""):"")+t("public.messageAsk");setInitialMessage(draft);setMessage(draft);setContact(true);
  }
  async function copy(value:string,label:string){try{await navigator.clipboard.writeText(value);setFeedback(label);}catch{setFeedback(t("public.copyManual"));}}
  const googleReviews=<div className="profile-google-reviews" id="google-bewertungen"><GooglePlaceReviews key={w.id} workshop={w} identity={identity} liveRating={profile?.rating??null} status={status}/></div>;
