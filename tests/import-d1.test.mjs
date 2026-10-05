@@ -138,7 +138,7 @@ try {
     const snapshot = await snapshotDestination({ token, expectedCommit, request: api.request });
     assert.equal(snapshot.projectId, d1Destination.databaseId);
     assert.deepEqual(snapshot.excludedProviderTables, ["_cf_KV"]);
-    assert.equal(snapshot.tables.find((item) => item.name === "d1_migrations").rows.length, 13);
+    assert.equal(snapshot.tables.find((item) => item.name === "d1_migrations").rows.length, migrations.length);
     assert(snapshot.tables.some((item) => item.name === "sqlite_sequence"));
     assert.equal(api.writeBatches.length, 0);
     const report = await backupDestination(snapshot, join(parent, `destination-${++sequence}`));
@@ -168,7 +168,7 @@ try {
     assert(probes >= 4);
     assert.equal(api.db.prepare("SELECT owner FROM visits LIMIT 1").get().owner, "legacy-owner-fixture");
     assert.deepEqual(api.db.prepare("SELECT status FROM visits ORDER BY id").all().map((row) => row.status), ["published", "needs_more"]);
-    assert.equal(api.db.prepare("SELECT COUNT(*) AS n FROM d1_migrations").get().n, 13);
+    assert.equal(api.db.prepare("SELECT COUNT(*) AS n FROM d1_migrations").get().n, migrations.length);
     assert.equal(api.db.prepare("SELECT COUNT(*) AS n FROM _cf_KV").get().n, 1);
     const fresh = await targetBaseline(api);
     const retry = await applyDataPlan(callOptions(api, fresh, { execute: true }));
