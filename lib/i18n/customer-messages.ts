@@ -594,4 +594,3 @@ export const customerSq=/* @__PURE__ */checked({
  "downloadMissing": "Dokumenti nuk është i disponueshëm",
  "downloadUnavailable": "Dokumenti nuk është i disponueshëm për momentin."
 } as const satisfies MessageShape<typeof customerDe>);
-

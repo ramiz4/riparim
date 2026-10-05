@@ -54,6 +54,8 @@ try{
   check(document.querySelector('[role="alert"]').textContent===copy.reviewConflict&&!document.body.textContent.includes('Deutscher Originalfehler'),'Review conflicts localize by code while keeping edits');
   mode='network';await submit();check(document.querySelector('[role="alert"]').textContent===copy.reviewUnavailable,'Review network failures retain input and localize safely');
   await render(locale,MyVisits,{open:true,onClose(){},directory:[{id:'fixture-workshop'}],signedIn:true,account:{provider:'E-Mail',email:'fixture@example.test'},onResubmit(){}});
+  check(document.querySelector('[data-slot="dialog-body"]').getAttribute('aria-label')==={de:'Dialoginhalt',sq:'Përmbajtja e dialogut',en:'Dialog content'}[locale],'The actual customer dialog region has an active-locale accessible label');
+  check(document.querySelector('button[data-slot="dialog-close"] .sr-only').textContent==={de:'Schließen',sq:'Mbyll',en:'Close'}[locale],'The actual X-close control has an active-locale screen reader name');
   check(document.querySelector('.visit-status').textContent==={de:'Ergänzung nötig',sq:'Nevojitet plotësim',en:'More information needed'}[locale],'Canonical needs_more uses the exact localized status label');
   check(document.querySelector('.evidence-details a').getAttribute('href').endsWith('?locale='+locale),'Customer evidence links use the shared explicit locale download helper');
   check(document.querySelector('.visit').textContent.includes('Original unchanged customer review text.')&&document.querySelector('.visit').textContent.includes('Original private note'),'Free text is never translated');

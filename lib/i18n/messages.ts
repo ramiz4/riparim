@@ -6,6 +6,7 @@ import type {MessageValue,ParameterNames,MessageShape,CheckedMessages} from "./m
 
 const deBase={
  common:{
+  close:"Schließen",dialogContent:"Dialoginhalt",
   languageLabel:"Sprache wählen",discardDraft:"Deine nicht gespeicherten Eingaben gehen beim Sprachwechsel verloren. Sprache trotzdem wechseln?",
   preferenceNotSaved:"Deine Sprachpräferenz konnte nicht gespeichert werden. Die ausgewählte Sprache gilt für diese Seite.",
   homeLabel:"Riparim Startseite",login:"Anmelden",register:"Registrieren",userMenu:"Benutzermenü öffnen",myAccount:"Mein Konto",signedIn:"Angemeldet",admin:"Admin",
@@ -27,6 +28,7 @@ const sq=/* @__PURE__ */ defineCatalog({
  public:publicSq,
  customer:customerSq,
  common:{
+  close:"Mbyll",dialogContent:"Përmbajtja e dialogut",
   languageLabel:"Zgjidh gjuhën",discardDraft:"Të dhënat që nuk i ke ruajtur do të humbasin kur të ndërrosh gjuhën. Dëshiron të vazhdosh?",
   preferenceNotSaved:"Preferenca jote e gjuhës nuk mund të ruhej. Gjuha e zgjedhur vlen për këtë faqe.",
   homeLabel:"Faqja kryesore e Riparim",login:"Hyr",register:"Regjistrohu",userMenu:"Hap menynë e përdoruesit",myAccount:"Llogaria ime",signedIn:"I identifikuar",admin:"Administrator",
@@ -42,6 +44,7 @@ const en=/* @__PURE__ */ defineCatalog({
  public:publicEn,
  customer:customerEn,
  common:{
+  close:"Close",dialogContent:"Dialog content",
   languageLabel:"Choose language",discardDraft:"Your unsaved entries will be lost when you change language. Change language anyway?",
   preferenceNotSaved:"Your language preference could not be saved. The selected language applies to this page.",
   homeLabel:"Riparim home",login:"Log in",register:"Register",userMenu:"Open user menu",myAccount:"My account",signedIn:"Signed in",admin:"Admin",
