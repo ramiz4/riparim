@@ -3,8 +3,8 @@
 Dieser Bericht hält die tatsächlich ausgeführte Umstellung aus
 [#19](https://github.com/ramiz4/riparim/issues/19) fest. Die technische
 Betreiberabnahme ist abgeschlossen. Die gesonderte Rückfallphase für #20
-bleibt offen; die alte Sites-Instanz und ihre Sicherungen bleiben eingefroren
-erhalten, während Inventar und Stilllegungsplan vorbereitet werden können.
+wurde danach um 09:51:01 ausdrücklich beendet. Die [öffentliche Stilllegung](sites-retirement.md)
+ist ausgeführt; alte Ressourcen und Sicherungen bleiben schreibgesperrt erhalten.
 
 ## Verantwortung und Betriebsfenster
 
@@ -200,9 +200,10 @@ Main-Releases. Die erfolgreiche technische Abnahme erlaubt den Abschluss
 dieses Domainwechsel-Issues. Die weitere Betriebsbeobachtung kann fortgeführt
 werden, ohne die abgeschlossene technische Umstellung erneut zu öffnen.
 
-**Das vereinbarte Ende der gesonderten Rückfallphase für #20 ist weiterhin
-offen.** Der Vorschlag 6. Oktober, 05:00 Uhr ist nicht bestätigt. Eine persönliche
-Nutzerabnahme wird nicht als erteilt behauptet. Die technische Betreiberabnahme
+**Zum Zeitpunkt dieser Betreiberabnahme war das vereinbarte Ende der
+gesonderten Rückfallphase für #20 noch offen.** Der frühere Vorschlag
+6. Oktober, 05:00 Uhr war nicht bestätigt. Eine persönliche Nutzerabnahme
+wird nicht als erteilt behauptet. Die technische Betreiberabnahme
 aus #19 ersetzt weder diese Vereinbarung noch eine Freigabe zur endgültigen
 Löschung. Alte Veröffentlichung, Domainzuordnungen, Zugänge und Sicherungen
 werden bis zum nachgewiesenen Ende der Rückfallphase erhalten; Inventar,
@@ -222,3 +223,8 @@ Domainzuordnungen und alten Hintergrundarbeiten sowie gezielter Widerruf
 ausschließlich alter Zugänge. Gemeinsam genutzte Supabase-/Google-/Maildienste
 bleiben bestehen. Eine endgültige Ressourcenlöschung benötigt nach Ablauf der
 Aufbewahrung eine separate Freigabe.
+
+Der spätere Nutzerentscheid „Ja, jetzt stilllegen.“ beendete diese Phase um
+09:51:01. Der [Stilllegungsnachweis](sites-retirement.md#abschlussnachweis-vom-5-oktober-2026)
+dokumentiert die Ausführung bis 09:58:38, anschließende Auth-/Datei-QA,
+erhaltene Ressourcen und die Mindestaufbewahrung bis 4. November 2026.
