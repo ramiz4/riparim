@@ -42,8 +42,10 @@ const contrast=(first,second)=>{const a=luminance(first),b=luminance(second);ret
 for(const result of rendered.slice(0,3)){
  const dom=new JSDOM(result.body),doc=dom.window.document,action=doc.querySelector('a'),style=doc.querySelector('style').sheet;
  const light=(color)=>color.startsWith('#')?color.slice(1):color.match(/\d+/g).slice(0,3).map(value=>Number(value).toString(16).padStart(2,'0')).join('');
- assert(contrast(light(doc.body.style.color),light(doc.body.style.background))>=4.5);assert(contrast(light(action.style.color),light(action.style.background))>=4.5);passed+=2;
- for(const rule of style.cssRules[0].cssRules){const color=rule.style.getPropertyValue('color'),background=rule.style.getPropertyValue('background');assert(contrast(color,background)>=4.5);passed++;}
+ // JSDOM's element.style may omit inline declarations; the parsed HTML
+ // attributes remain the actual email source rather than a fabricated palette.
+ for(const element of [doc.body,action]){const source=element.getAttribute('style'),color=source.match(/(?:^|;)color:([^;]+)/)[1],background=source.match(/(?:^|;)background:([^;]+)/)[1];assert(contrast(light(color),light(background))>=4.5);passed++;}
+ for(const rule of style.cssRules[0].cssRules){const color=rule.style.getPropertyValue('color'),background=rule.style.getPropertyValue('background');assert(contrast(light(color),light(background))>=4.5);passed++;}
  dom.window.close();
 }
 console.log(JSON.stringify({authEmailGoChecksPassed:passed,actualGoHtmlTemplate:true,realEmailsSent:false,productionTouched:false}));
