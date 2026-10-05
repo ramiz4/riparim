@@ -71,10 +71,24 @@ html.dark .theme-control[data-mounted=false] [data-slot=switch-thumb] { translat
 .theme-control[data-mounted=false] .theme-switch { opacity: 1; }
 .footer>a:not(.brand) { display: inline-flex; align-items: center; min-height: 44px; font-size: 13px; }
 .footer>a:not(.brand):hover { color: var(--theme-accent); }
-.google-official-widget gmp-place-details { color-scheme: inherit; }
+.google-official-widget gmp-place-details {
+  color-scheme: inherit;
+  --gmp-mat-color-surface: var(--theme-surface);
+  --gmp-mat-color-on-surface: var(--foreground);
+  --gmp-mat-color-on-surface-variant: var(--muted-foreground);
+  --gmp-mat-color-primary: var(--theme-accent);
+  --gmp-mat-color-secondary-container: var(--primary);
+  --gmp-mat-color-on-secondary-container: var(--primary-foreground);
+  --gmp-mat-color-neutral-container: var(--muted);
+  --gmp-mat-color-on-neutral-container: var(--muted-foreground);
+  --gmp-mat-color-outline-decorative: var(--border);
+  --gmp-mat-font-family: Inter, Arial, Helvetica, sans-serif;
+  --gmp-mat-font-display-small: normal 600 20px/28px Inter, Arial, Helvetica, sans-serif;
+  --gmp-mat-font-body-medium: normal 400 14px/22px Inter, Arial, Helvetica, sans-serif;
+}
 /* Page surfaces and navigation. Hero photography retains its own overlay. */
 html.dark :is(.landing-page, .search-band, .trust-section) { background: var(--background); }
-html.dark .navbar { background: var(--background); border-color: var(--border); }
+html.dark .navbar { background: #102a30; border-color: var(--border); box-shadow: inset 0 -1px 0 #29494e; }
 html.dark :is(.hero-band, .results-band, .footer-band, .pilotbar) { background: var(--theme-surface); border-color: var(--border); }
 html.dark :is(.brand, .footer .brand) { color: var(--foreground); }
 html.dark :is(nav, .nav-section, .pilotbar, .footer, .hero-copy>p, .hero-points, .section-heading p, .directory-count, .trust-title p, .trust-steps p, .popular, .search-tabs button, .search-box label>span, .results-note, .results-filters>button, .empty p, .review-loading, .wizard-labels, .access-page>p) { color: var(--muted-foreground); }
@@ -128,6 +142,7 @@ html.dark :is(.profile-rating>strong, .profile-phone-summary strong, .profile-se
 html.dark :is(.profile-section-nav>a, .profile-section-heading>span, .profile-source-list a, .profile-sources>summary, .profile-map>summary, .profile-week-hours>summary, .profile-service-list>li, .profile-about summary) { color: #c0e1d7; }
 html.dark :is(.profile-section-nav>a:hover, .profile-sources>a, .profile-week-hours li.today, .profile-opening-summary strong, .rating-source a) { color: var(--theme-accent); }
 html.dark :is(.profile-contact-summary, .profile-contact, .profile-service-tags>li, .profile-week-hours ul, .workshop-ratings-detailed, .workshop-ratings-compact>.workshop-rating-row, .inline-review-toggle, .no-reviews, .call-box, .source-status, .context-summary) { background: var(--theme-surface); border-color: var(--border); color: #c0e1d7; }
+html.dark .profile-overview-details>.workshop-ratings>.workshop-rating-row { background: transparent; }
 html.dark :is(.context-summary p, .context-summary span, .no-reviews>span, .call-box>span, .profile-source-list span, .profile-service-group ul) { color: var(--muted-foreground); }
 html.dark :is(.rating-provider, .google-rating .rating-provider) { color: #c0e1d7; }
 html.dark .google-rating .google-maps-attribution { color: #fff; }
@@ -141,7 +156,7 @@ html.dark .profile-selection-label { color: #b6efcf; background: #225445; }
 html.dark .profile-service-group li::marker { color: #82bba4; }
 html.dark :is(.profile-photo-strip figure button, .profile-google-map) { background: var(--secondary); }
 html.dark .profile-mobile-actions { background: #0b1d20f5; border-color: var(--border); box-shadow: 0 -4px 18px #00000026; }
-html.dark .profile-riparim-reviews.empty .profile-review-empty { color: var(--muted-foreground); }
+html.dark .profile-riparim-reviews.is-empty .profile-review-empty { color: var(--muted-foreground); }
 html.dark .review-submission-success p { color: var(--muted-foreground); }
 
 /* Dialogs, forms and account flows. */
