@@ -38,7 +38,7 @@ globalThis.fetch=async(url,options)=>{
  if(mode==='noop'){assert.equal(user.role,request.body.role,'Another request already assigned the desired role');return Response.json({user,roleChanged:false});}
  return commit();
 };
-const root=createRoot(document.getElementById('root'));
+let root=createRoot(document.getElementById('root'));
 let passed=0;
 const check=(condition,label)=>{assert(condition,label);passed++;};
 const button=label=>document.querySelector(`button[aria-label="${label}"]`);
@@ -101,7 +101,8 @@ try{
  check(!dialog()&&row('member').querySelector('.users-role').textContent==='Benutzer','A stale demotion confirmation reflects an already removed role');
  check(!/Sitzungen|anmelden/.test(document.querySelector('[role="status"]').textContent),'An unchanged demotion does not claim session revocation or require another login');
  pendingDeletions=[fixtureUser('00000000-0000-4000-8000-000000000099','Begonnene Löschung','user')];
- await click([...document.querySelectorAll('button')].find(button=>button.textContent==='Aktualisieren'));
+ await act(async()=>root.unmount());root=createRoot(document.getElementById('root'));
+ await act(async()=>root.render(fixtureMessages(createElement(AdminUsers,{account:{email:'current-admin@example.test',displayName:'Current Admin',provider:'E-Mail'}}))));
  const finish=button('Löschung für 00000000-0000-4000-8000-000000000099 abschließen');
  check(finish&&document.querySelector('#pending-deletions-title').textContent==='Unvollständige Kontolöschungen','Incomplete local deletions are recoverable in the administrative UI');
  await click(finish);check(dialog().textContent.includes('Begonnene Löschung'),'Administrative recovery still requires an explicit deletion confirmation');

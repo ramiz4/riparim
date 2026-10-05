@@ -1,4 +1,5 @@
-.users-toolbar{display:flex;align-items:center;gap:14px;margin:28px 0 22px}
+.admin-users-page .admin-title h1{margin:0}
+.users-toolbar{display:flex;align-items:center;margin:22px 0}
 .users-search{display:flex;align-items:center;gap:9px;flex:1;min-width:0;border:1px solid var(--border);border-radius:9px;padding:11px 14px;background:var(--card);color:var(--muted-foreground)}
 .users-search input{width:100%;min-width:0;border:0;outline:none;background:transparent;color:var(--foreground);font-size:14px}
 .users-search:focus-within{outline:2px solid #35866a;outline-offset:2px}
@@ -8,6 +9,7 @@
 .users-setup-note>svg{margin-top:4px;color:#35866a}
 .users-setup-note h2{font-size:20px;font-weight:600;margin-bottom:8px}
 .users-setup-note p{font-size:14px;color:var(--muted-foreground);max-width:660px}
+.users-table,.users-table [data-slot=table-row]{border-color:var(--border)}
 .users-table [data-slot=table-cell]{vertical-align:top}
 .users-table [data-slot=table-cell]:first-child{min-width:225px;max-width:320px;white-space:normal;overflow-wrap:anywhere}
 .users-table [data-slot=table-cell]>strong{display:block;font-weight:600}
@@ -20,14 +22,13 @@
 .users-role{display:inline-flex;align-items:center;gap:5px;border-radius:5px;padding:3px 9px;font-size:12px;white-space:nowrap;background:var(--secondary);color:var(--muted-foreground)}
 .users-role.admin{background:#e8f2ef;color:#216f55}
 .users-actions{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
-.users-actions .text-action{display:inline-flex;align-items:center;gap:6px}
-.users-delete{display:inline-flex;align-items:center;gap:5px;color:#a13d35;font-size:13px;font-weight:550;white-space:nowrap}
+.users-actions button{display:inline-flex;align-items:center;gap:6px}
+.users-delete{color:#a13d35;font-size:13px;font-weight:550;white-space:nowrap}
 .users-delete:hover:not(:disabled){text-decoration:underline;text-underline-offset:3px}
 .users-empty{margin-top:18px}
 .users-empty h2{font-size:20px;font-weight:600}
 .users-pagination{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-top:22px}
 .users-pagination>span{font-size:13px;text-align:center;color:var(--muted-foreground)}
-.users-protection-note p{font-size:13px;line-height:1.7}
 .users-form>fieldset{display:flex;flex-direction:column;gap:18px;border:0;padding:0;margin:0;min-width:0}
 .users-form input:disabled{background:var(--secondary);color:var(--muted-foreground);cursor:not-allowed}
 .users-form .help{margin-top:-9px;font-size:13px!important}
@@ -44,9 +45,7 @@ html.dark .users-delete{color:#e6a89b}
 @media(max-width:720px){
  .admin-users-page .admin-title{align-items:flex-start;gap:18px}
  .admin-users-page .admin-title>button{width:100%}
- .users-toolbar{flex-wrap:wrap;gap:10px;margin-top:22px}
  .users-search{flex-basis:100%;padding:12px}
- .users-toolbar>.outline{margin-left:auto}
  .users-setup-note{padding:19px;gap:12px}
  .users-setup-note h2{font-size:18px}
  .users-pagination{gap:10px;flex-wrap:wrap}
