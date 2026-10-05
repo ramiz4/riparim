@@ -1,19 +1,19 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-05T10:08:45.026Z",
+  "updatedAt": "2026-10-05T12:08:22.374Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 125,
-    "drafts": 38,
+    "published": 128,
+    "drafts": 35,
     "estimatedTotal": 1700,
     "estimateSource": "user",
     "complete": false
   },
   "googleImport": {
     "status": "completed",
-    "reason": "Alle 125 veröffentlichten Pkw-Werkstätten sind eindeutig zugeordnet. Weitere Entwürfe benötigen bestätigte Identitäts- oder Filialbelege; sechs fachliche Ausschlüsse und ein belegter geschlossener Betrieb bleiben ausgeblendet.",
-    "matchedPlaceIds": 131,
+    "reason": "Alle 128 veröffentlichten Pkw-Werkstätten sind eindeutig zugeordnet. Weitere Entwürfe benötigen bestätigte Identitäts- oder Filialbelege; sechs fachliche Ausschlüsse und ein belegter geschlossener Betrieb bleiben ausgeblendet.",
+    "matchedPlaceIds": 134,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -672,20 +672,20 @@
       "id": "auto-elektro-servis-niki-gjilan",
       "name": "Auto Elektro Servis Niki",
       "city": "Gjilan",
-      "address": "Afrim Zhitia, Gjilan",
+      "address": "Avdullah Presheva Nr. 82, Gjilan 60000",
       "phone": "+38344164468",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
+      "phoneNote": "Kontakt aus eigener Betriebsanzeige und aktuellen Betriebsbeiträgen",
       "whatsapp": "",
       "brands": [],
       "services": [
-        "Inspektion & Wartung"
+        "Diagnose & Elektronik"
       ],
       "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
+        "Pkw-Elektrik und Fahrzeugdiagnose laut eigener Betriebsanzeige und aktuellen Betriebsbeiträgen."
       ],
       "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Auto Elektro Servis Niki in Gjilan als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
+      "specialty": "Pkw-Elektrik · Diagnose",
+      "description": "Auto Elektro Servis Niki in Gjilan bietet Pkw-Elektrik und Fahrzeugdiagnose an. Eigene Anzeigen und aktuelle Betriebsbeiträge bestätigen den Kontakt und die Anschrift Avdullah Presheva Nr. 82. Der kombinierte Geschäftspunkt wird auf Google unter Enesi Moto Gjilan geführt. Termine und konkreten Reparaturumfang direkt beim Betrieb klären.",
       "lat": null,
       "lng": null,
       "sources": [
@@ -693,15 +693,48 @@
           "url": "https://stgres.gjirafa.biz/auto-elektro-servis-niki-1",
           "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://www.filikaqa.com/en/listings/434-auto-elektro-servis-city",
+          "title": "Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.merrjep.com/shpallja/yamaha-jog-50-kubik-i-sapo-ardhur-nga-zvicra/12580078",
+          "title": "Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.findglocal.com/XK/Gjilan/1759871737615916/Auto-elektricist--Niki",
+          "title": "Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "checkedAt": "2026-10-05",
+      "status": "published",
+      "updatedAt": "2026-10-05T12:08:22.374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJv-KrCHaNVBMRzYjAlm90dtQ",
+        "matchedAt": "2026-10-05T12:08:22.374Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "sourceUpdatedAt": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Elektro+Servis+Niki+Avdullah+Presheva+Nr.+82%2C+Gjilan+60000&query_place_id=ChIJv-KrCHaNVBMRzYjAlm90dtQ",
+          "checkedAt": "2026-10-05T12:08:22.374Z"
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.filikaqa.com/en/listings/434-auto-elektro-servis-city",
+            "https://www.merrjep.com/shpallja/yamaha-jog-50-kubik-i-sapo-ardhur-nga-zvicra/12580078",
+            "https://www.findglocal.com/XK/Gjilan/1759871737615916/Auto-elektricist--Niki",
+            "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJv-KrCHaNVBMRzYjAlm90dtQ"
+          ],
+          "note": "Eigene Anzeige verbindet Nikis unveränderten Kontakt ausdrücklich mit Enesi Moto Gjilan. Aktuelle Niki-Betriebsbeiträge bestätigen weiterhin Pkw-Elektrik/Diagnose und Avdullah Presheva Nr. 82; der zusätzlich gemeinsam veröffentlichte Kontakt und genaue Geschäftspunkt entsprechen dem bestätigten Google-Eintrag. Der Pkw-Werkstattname bleibt erhalten; Transportwerbung allein wurde nicht als Reparaturnachweis gewertet."
+        }
       }
     },
     {
@@ -1616,7 +1649,7 @@
       "city": "Graçanicë",
       "address": "Magjistralja Ferizaj-Prishtinë , Llapnasellë, Komuna e Prishtinës",
       "phone": "+38344668508",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
+      "phoneNote": "Kontakt aus eigenen Fatosi-Anzeigen, zusätzlich im unabhängigen Werkstattverzeichnis bestätigt",
       "whatsapp": "",
       "brands": [],
       "services": [
@@ -1629,7 +1662,7 @@
       ],
       "languages": [],
       "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Auto Pjesë & Servis Fatosi in Graçanicë als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
+      "description": "Auto Pjesë & Servis Fatosi in Llapnasellë bietet laut unabhängigem Werkstattverzeichnis Pkw-Service und Ersatzteile an. Reparaturfotos und die Verzeichnisbeschreibung belegen den Werkstattbetrieb; eigene Anzeigen verbinden die Kontakte mit dem am selben Standort geführten Auto Larje Fatosi. Termine und konkreten Reparaturumfang direkt beim Betrieb bestätigen.",
       "lat": null,
       "lng": null,
       "sources": [
@@ -1637,15 +1670,55 @@
           "url": "https://stgres.gjirafa.biz/auto-pjes--servis-fatosi-1",
           "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://www.merrjep.com/shpallja/bmw-mercedes-audi-passat-golf-tiguan-touran/2881955",
+          "title": "Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.merrjep.com/shpallja/vetura-rks-me-defekte-te-aksidentuara-pa-dogan/2942229",
+          "title": "Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
+        },
+        {
+          "url": "https://punaime.org/konkursi/punetore-ne-autolarje-4/",
+          "title": "Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-larje-fatosi",
+          "title": "Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "checkedAt": "2026-10-05",
+      "status": "published",
+      "updatedAt": "2026-10-05T12:08:22.374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJU2coyzCdVBMR9MLuvMnBqHM",
+        "matchedAt": "2026-10-05T12:08:22.374Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "sourceUpdatedAt": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Pjes%C3%AB+%26+Servis+Fatosi+Magjistralja+Ferizaj-Prishtin%C3%AB+%2C+Llapnasell%C3%AB%2C+Komuna+e+Prishtin%C3%ABs&query_place_id=ChIJU2coyzCdVBMR9MLuvMnBqHM",
+          "checkedAt": "2026-10-05T12:08:22.374Z"
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://stgres.gjirafa.biz/auto-pjes--servis-fatosi-1",
+            "https://www.merrjep.com/shpallja/bmw-mercedes-audi-passat-golf-tiguan-touran/2881955",
+            "https://www.merrjep.com/shpallja/vetura-rks-me-defekte-te-aksidentuara-pa-dogan/2942229",
+            "https://punaime.org/konkursi/punetore-ne-autolarje-4/",
+            "https://www.cybo.com/XK-biz/auto-larje-fatosi",
+            "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJU2coyzCdVBMR9MLuvMnBqHM"
+          ],
+          "note": "Eigene Fatosi-Anzeigen verbinden den vorhandenen Kontakt mit der Google-Telefonnummer; eine eigene Stellenanzeige verbindet einen weiteren Verzeichniskontakt mit Auto Larje Fatosi in Llapnasellë. Der unabhängig belegte Pkw-Reparaturstandort und gültige Google-Eintrag liegen am selben Geschäftspunkt. Der Pkw-Service bleibt durch die ursprüngliche Quelle und Reparaturfotos belegt; der Waschbetrieb wird nicht allein aufgrund des Namens zugeordnet."
+        }
       }
     },
     {
@@ -7416,24 +7489,26 @@
     },
     {
       "id": "prishtina-auto-home-prishtina",
-      "name": "Prishtina Auto Home",
+      "name": "Sfishta Auto Home",
       "city": "Prishtina",
-      "address": "Lidhja e Prizrenit, Prishtinë",
+      "address": "Bardhosh, Prishtina",
       "phone": "+38344949888",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
+      "phoneNote": "Kontakt aus eigener Serviceanzeige und Betriebsbeiträgen",
       "whatsapp": "",
       "brands": [],
       "services": [
         "Inspektion & Wartung",
-        "Reifen & Klima"
+        "Motor & Getriebe",
+        "Bremsen & Fahrwerk"
       ],
       "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen.",
-        "Klima- oder Reifenmontage/-service in der Verzeichnisbeschreibung genannt; konkreten Umfang direkt bestätigen."
+        "Pkw-Wartung und Reparatur laut eigenen Betriebsbeiträgen.",
+        "Zahnriemenservice für Volkswagen, Audi, Škoda und Seat laut eigener Serviceanzeige.",
+        "Motor- und Fahrwerksarbeiten laut veröffentlichten Betriebsbeiträgen; konkreten Umfang direkt bestätigen."
       ],
       "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Prishtina Auto Home in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
+      "specialty": "Pkw-Wartung · Zahnriemenservice",
+      "description": "Sfishta Auto Home in Bardhosh bei Prishtina bietet Pkw-Wartung und Reparatur an. Die eigene Serviceanzeige nennt Zahnriemenservice für Volkswagen, Audi, Škoda und Seat; Betriebsbeiträge dokumentieren Motor- und Fahrwerksarbeiten. Kontakt und heutiger Ort stammen aus den Betriebsquellen. Termine und konkreten Umfang direkt beim Betrieb bestätigen.",
       "lat": null,
       "lng": null,
       "sources": [
@@ -7441,15 +7516,54 @@
           "url": "https://stgres.gjirafa.biz/prishtina-auto-home-1",
           "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
           "kind": "directory"
+        },
+        {
+          "url": "https://www.merrjep.com/shpallja/oferte-e-rrypit-dhembzor-per-vw-audi-shkoda-seat/8736462",
+          "title": "Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.autoyas.com/XK/B%C3%ABrnice-E-Ep%C3%ABrme/387979811560412/Sfishta-Auto-Home",
+          "title": "Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
+        },
+        {
+          "url": "https://prishtinaonline.com/uploads/b08_njoftim_per_dhenje_te_kontrates%20%28202%29.pdf",
+          "title": "Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
+        },
+        {
+          "url": "https://prishtinaonline.com/uploads/nr._616_19_165_221_servisimi_dhe_mirembajtja_e_automjeteve_te_qkmf-se_dhe_qmu-se.pdf",
+          "title": "Kontakt-, Standort- und Pkw-Servicebeleg",
+          "kind": "directory"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "checkedAt": "2026-10-05",
+      "status": "published",
+      "updatedAt": "2026-10-05T12:08:22.374Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJ-5d0UsmhVBMRBQBORVPLs7A",
+        "matchedAt": "2026-10-05T12:08:22.374Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "sourceUpdatedAt": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sfishta+Auto+Home+Bardhosh%2C+Prishtina&query_place_id=ChIJ-5d0UsmhVBMRBQBORVPLs7A",
+          "checkedAt": "2026-10-05T12:08:22.374Z"
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.merrjep.com/shpallja/oferte-e-rrypit-dhembzor-per-vw-audi-shkoda-seat/8736462",
+            "https://www.autoyas.com/XK/B%C3%ABrnice-E-Ep%C3%ABrme/387979811560412/Sfishta-Auto-Home",
+            "https://prishtinaonline.com/uploads/b08_njoftim_per_dhenje_te_kontrates%20%28202%29.pdf",
+            "https://prishtinaonline.com/uploads/nr._616_19_165_221_servisimi_dhe_mirembajtja_e_automjeteve_te_qkmf-se_dhe_qmu-se.pdf",
+            "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJ-5d0UsmhVBMRBQBORVPLs7A"
+          ],
+          "note": "Eigene Serviceanzeige verbindet den bestehenden Kontakt mit Sfishta Auto Home in Bardhosh. Amtliche Auftragsbelege nennen Auto Home und N.T.SH. Sfishta gemeinsam mit dem zusätzlichen Betriebsnummernkontakt; dieser stimmt unter historischer Kosovo-Vorwahl mit dem bestätigten Google-Eintrag überein. Pkw-Service, operative Kontinuität und die direkt geprüfte Place ID sind belegt; keine rechtliche Verschmelzung wird behauptet."
+        }
       }
     },
     {
