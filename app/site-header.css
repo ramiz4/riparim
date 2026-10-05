@@ -1,4 +1,4 @@
-.navbar{position:sticky;top:0;z-index:30;background:#fff;border-bottom:0;backdrop-filter:none}
+.navbar{position:sticky;top:0;z-index:30;background:#fff;border-bottom:0;box-shadow:inset 0 -1px 0 #d9e5e5;backdrop-filter:none}
 .navbar .header.wrap{width:min(1440px,calc(100% - 112px))}
 .navbar .header-right{margin-left:auto;flex-shrink:0}
 .navbar .header-auth{font-size:15px}
