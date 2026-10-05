@@ -10,8 +10,10 @@ Prüfsummen, Ressourcenkennungen und Prüfergebnisse.
 
 Der tatsächlich ausgeführte Wechsel vom 5. Oktober und seine technischen
 Prüfergebnisse stehen im [Abnahmebericht](domain-cutover-2026-10-05.md).
-Die dort nachgewiesene technische Betreiberabnahme und die gesonderte,
-noch offene Rückfallphase für #20 werden getrennt behandelt.
+Die dort nachgewiesene technische Betreiberabnahme und die gesonderte
+Rückfallphase für #20 wurden getrennt behandelt. Letztere ist auf ausdrücklichen
+Nutzerentscheid beendet; die [öffentliche Sites-Stilllegung](sites-retirement.md)
+ist ausgeführt.
 
 ## Ausgangslage und Verantwortung
 

@@ -28,7 +28,43 @@ Der automatisch bereitgestellte `GITHUB_TOKEN` erhält ausschließlich im Releas
 
 Release-Läufe werden serialisiert und nicht während einer Veröffentlichung abgebrochen. Ein vor der Release-Erstellung überholter Commit erzeugt keinen Release; der neuere `main`-Lauf übernimmt die Änderungen. Ein bereits veröffentlichter Release wird auch dann deployt, wenn inzwischen ein reiner Dokumentations- oder Wartungscommit auf `main` liegt. Erst ein neuerer vollständig veröffentlichter Release verhindert das Deployment einer älteren Version, auch bei einer Wiederholung nur des Deploy-Jobs. Ein erneuter Lauf desselben Commits verwendet einen bereits vollständig veröffentlichten Release wieder.
 
-Wenn eine GitHub-Veröffentlichung nach dem Anlegen des Tags scheitert, bleibt der Workflow ausdrücklich fehlerhaft. Vor dem erneuten Lauf den vorhandenen Release samt beiden Assets vervollständigen; kein zusätzliches Versions-Tag erzeugen. Ein fehlender, als Entwurf gespeicherter oder unvollständiger Release wird nicht als Erfolg ausgegeben.
+Wenn eine GitHub-Veröffentlichung nach dem Anlegen des Tags scheitert, bleibt der Workflow ausdrücklich fehlerhaft. Vor dem erneuten Lauf den vorhandenen Release samt allen vier Assets (Cloudflare- und Sites-Archiv mit jeweils eigener Provenienz) vervollständigen; kein zusätzliches Versions-Tag erzeugen. Ein fehlender, als Entwurf gespeicherter oder unvollständiger Release wird nicht als Erfolg ausgegeben.
+
+## Produktionsmigrationen, Wiederholung und Rollback
+
+Der Deploy-Job wendet D1-Migrationen **vor** dem Worker-Upload an. Währenddessen
+bedienen der bisherige Worker und sein Scheduled-Handler weiterhin Anfragen;
+Schema und Code werden nicht gemeinsam atomar umgeschaltet. Neue Migrationen
+müssen deshalb mit der noch aktiven Version und dem vorgesehenen Code-Rückweg
+verträglich sein. Angewendete SQL-Dateien bleiben unverändert; jede Änderung
+bekommt eine neue Drizzle-Migration.
+
+Für inkompatible Änderungen mehrere Releases verwenden: zuerst das Schema
+additiv erweitern, dann Daten mit geprüftem, wiederholbarem Backfill übernehmen
+und Leser/Schreiber umstellen. Alte Spalten oder Tabellen erst in einer späteren,
+gesondert geprüften Migration entfernen, wenn kein aktiver oder für Rollback
+vorgesehener Code sie benötigt. Vor produktiven Datenänderungen eine geschützte,
+geprüft wiederherstellbare Sicherung erstellen; eine nötige Schreibpause vorher
+mit Zeitraum und Wiederaufnahme ankündigen.
+
+Bei einem Fehler Schema und `d1_migrations` frisch prüfen. Bereits erfolgreiche
+Migrationen bleiben angewandt, auch wenn der anschließende Code-Upload scheitert.
+Die Historie nicht löschen und SQL nicht ungeprüft erneut ausführen. Bei
+unbekanntem Ausgang oder abweichendem Schema den Lauf stoppen und den Bestand
+klären. Nach behobenem Fehler denselben veröffentlichten Release-Lauf erneut
+starten: er prüft Provenienz und Reihenfolge erneut, überspringt angewandte
+Migrationen und verwendet unveränderte Archivbytes. Vorher tatsächlich aktive
+Worker-Version, Secrets, Bindings und Wartungszustand prüfen. Ein neuerer
+vollständig veröffentlichter Release hat weiterhin Vorrang.
+
+Ein Code-Rollback ist nur mit dem aktuellen Schema und den vorhandenen Daten
+zulässig; er setzt D1 und R2 nicht zurück. Der übliche Korrekturweg ist ein
+geprüfter Forward-Fix über Main. Eine Rückkehr zu Sites folgt dem
+[gesonderten Abgleichplan](domain-cutover.md#wiederherstellung-nach-dem-routingwechsel)
+und der [Archiv-Wiederherstellung](sites-retirement.md#wiederherstellung-und-sichere-unterbrechung).
+Ein Backup-Restore, der neue Schreibvorgänge verlieren würde, ist kein sicherer
+Rollback. [D1-Migrationen](https://developers.cloudflare.com/d1/reference/migrations/),
+[Worker-Rollbacks](https://developers.cloudflare.com/workers/versions-and-deployments/rollbacks/).
 
 ## Cloudflare-Produktion
 
@@ -57,7 +93,7 @@ Die technische Abnahme umfasst tatsächliche E-Mail-/Google-Anmeldung, Verwaltun
 
 Der eigene Worker entfernt eingehende `oai-authenticated-user-*`-Header. Diese können auf OpenAI Sites eine native Plattform-Identität darstellen, auf dem eigenen öffentlich erreichbaren Worker stammen sie vom Client und dürfen keine Anmeldung oder Adminrechte begründen. Supabase-Anmeldung und Session-Prüfung bleiben bestehen.
 
-Die Produktionsumstellung wird in [Issue #17](https://github.com/ramiz4/riparim/issues/17) verfolgt: [Datenübernahme #18](https://github.com/ramiz4/riparim/issues/18), anschließend [Domain-/Auth-Umstellung #19](https://github.com/ramiz4/riparim/issues/19) und nach abgenommener Umstellung sowie beendeter Rückfallphase [Sites-Stilllegung #20](https://github.com/ramiz4/riparim/issues/20).
+Der Gesamtabschluss der Produktionsumstellung steht im [Abschlussbericht](release-handover-2026-10-05.md). Die zugehörigen Arbeiten sind in [Issue #17](https://github.com/ramiz4/riparim/issues/17) verfolgt: [Datenübernahme #18](https://github.com/ramiz4/riparim/issues/18), anschließend [Domain-/Auth-Umstellung #19](https://github.com/ramiz4/riparim/issues/19) und nach abgenommener Umstellung sowie beendeter Rückfallphase [Sites-Stilllegung #20](https://github.com/ramiz4/riparim/issues/20).
 
 Referenzen: [semantic-release](https://semantic-release.org/recipes/ci-configurations/github-actions/), [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/), [GitHub Squash-Merges](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests), [Cloudflare CI](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/), [Workers-Berechtigungen](https://developers.cloudflare.com/workers/authorization/workers/).
 
