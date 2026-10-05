@@ -1,3 +1,4 @@
+import {workshopDisplayById} from "@/lib/workshop-display.server";
 import {I18nMessages} from "@/lib/i18n/client";
 import {getMessages,createTranslator} from "@/lib/i18n/messages";
 import {isLocale} from "@/lib/i18n/locale";
@@ -25,10 +26,11 @@ export default async function WorkshopPage({params,searchParams=Promise.resolve(
  const {id,locale:value}=await params,locale=isLocale(value)?value:"de";if(!/^[a-z0-9][a-z0-9-]{2,80}$/.test(id))notFound();
  const [directory,user]=await Promise.all([listWorkshops(),getAppUser()]);
  const workshop=directory.find(w=>w.id===id);if(!workshop)notFound();
+ const displayById=await workshopDisplayById([workshop],locale);
  const query=await searchParams,initialSearchHref=profileSearchHref(typeof query.suche==="string"?query.suche:null,directory);
  const admin=await getAdminUser(user);
  let reviews:Review[]=[],reviewError="";
  try{const result=await storage().db.prepare("SELECT v.display_name,v.vehicle,v.service,v.date,v.rating,v.review FROM visits v JOIN workshops w ON w.id=v.workshop AND w.status='published' WHERE v.workshop=? AND v.status='published' ORDER BY v.created_at DESC LIMIT 100").bind(id).all<Review>();reviews=result.results;}
  catch(e){console.error("profile-reviews",e);reviewError="unavailable";}
- return <I18nMessages messages={getMessages(locale,["public","customer"])}><WorkshopProfile initialSearchHref={initialSearchHref} workshop={workshop} directory={directory} reviews={reviews} reviewError={reviewError} signedIn={!!user} account={user?{email:user.email,displayName:user.displayName,provider:user.provider}:null} isAdmin={!!admin?.isModerator}/></I18nMessages>;
+ return <I18nMessages messages={getMessages(locale,["public","customer"])}><WorkshopProfile display={displayById[workshop.id]} initialSearchHref={initialSearchHref} workshop={workshop} directory={directory} reviews={reviews} reviewError={reviewError} signedIn={!!user} account={user?{email:user.email,displayName:user.displayName,provider:user.provider}:null} isAdmin={!!admin?.isModerator}/></I18nMessages>;
 }

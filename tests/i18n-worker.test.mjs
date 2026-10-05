@@ -4,6 +4,8 @@ import {resolve} from 'node:path';
 import {Miniflare} from 'miniflare';
 import {build} from 'esbuild';
 import {JSDOM} from 'jsdom';
+const overlay=JSON.parse(await readFile('data/workshop-translations.json','utf8'));
+const canonical=JSON.parse(await readFile('data/workshops.json','utf8'));
 const config=JSON.parse(await readFile('dist/server/wrangler.json','utf8'));
 const modules=(await readdir('dist/server',{recursive:true})).filter(file=>file.endsWith('.js')).sort((a,b)=>a==='index.js'?-1:b==='index.js'?1:a.localeCompare(b)).map(file=>({type:'ESModule',path:resolve('dist/server',file)}));
 const runtime=new Miniflare({modules,modulesRoot:resolve('dist/server'),compatibilityDate:config.compatibility_date,compatibilityFlags:config.compatibility_flags,d1Databases:['DB'],r2Buckets:['BUCKET'],bindings:{SITE_ORIGIN:'https://riparim.test'},assets:{directory:resolve('dist/client'),binding:'ASSETS',routerConfig:{has_user_worker:true}},outboundService:()=>new Response('Live provider access forbidden',{status:502})});
@@ -38,6 +40,27 @@ try{
    }finally{dom.window.close();}
   }
  }
+ // Actual native D1, API and document SSR use the same current source revision.
+ const translatedSource=canonical.workshops.find(w=>w.id===published.id),translatedEntry=overlay.workshops.find(w=>w.id===published.id);assert(translatedEntry);
+ for(const locale of ['de','sq','en']){
+  const prefix=locale==='de'?'':`/${locale}`,payload=await(await runtime.dispatchFetch(`https://riparim.test/api/workshops?locale=${locale}`)).json();
+  assert(payload.workshops.every(w=>w.status==='published'));assert.deepEqual(Object.keys(payload.displayById).sort(),payload.workshops.map(w=>w.id).sort());
+  const canonicalRow=payload.workshops.find(w=>w.id===published.id);assert.equal(canonicalRow.description,translatedSource.description,'public canonical record never becomes translated data');
+  const display=payload.displayById[published.id];assert.equal(display.description,locale==='de'?translatedSource.description:translatedEntry[locale].description);assert.equal(display.fallback,undefined);
+  const profileResponse=await runtime.dispatchFetch(`https://riparim.test${prefix}/werkstatt/${published.id}`),profileDom=new JSDOM(await profileResponse.text());
+  try{const doc=profileDom.window.document;assert.equal(doc.querySelector('.profile-description').textContent,display.description,'native SSR and API share active display revision');assert.deepEqual([...doc.querySelectorAll('.profile-source-list > li strong')].slice(0,translatedSource.sources.length).map(el=>el.textContent),display.sourceTitles);assert.equal(doc.querySelector('.workshop-translation-notice'),null);}finally{profileDom.window.close();}
+ }
+ const liveDescription='Fresh operator text <img src=x onerror=alert(1)> ëç',livePhoneNote='Fresh contact availability warning';
+ await db.prepare('UPDATE workshops SET description=?,phone_note=? WHERE id=?').bind(liveDescription,livePhoneNote,published.id).run();
+ for(const locale of ['sq','en']){
+  const payload=await(await runtime.dispatchFetch(`https://riparim.test/api/workshops?locale=${locale}`)).json(),display=payload.displayById[published.id];assert.equal(display.description,liveDescription);assert.equal(display.phoneNote,livePhoneNote);assert.equal(display.fallback,'stale');assert.equal(display.originalLanguage,undefined);
+  const response=await runtime.dispatchFetch(`https://riparim.test/${locale}/werkstatt/${published.id}`),liveDom=new JSDOM(await response.text());
+  try{const doc=liveDom.window.document;assert.equal(doc.querySelector('.profile-description').textContent,liveDescription);assert.equal(doc.querySelector('.profile-description').getAttribute('lang'),'');assert(doc.querySelector('.workshop-translation-notice'));assert.equal(doc.querySelector('.profile-description img'),null,'React escapes original and translated strings');assert(!doc.querySelector('.profile-description').textContent.includes(translatedEntry[locale].description));}finally{liveDom.window.close();}
+ }
+ await db.prepare('UPDATE workshops SET description=?,phone_note=? WHERE id=?').bind(translatedSource.description,translatedSource.phoneNote,published.id).run();
+ assert.equal((await runtime.dispatchFetch('https://riparim.test/api/workshops?locale=fr')).status,400);
+ const clientAssets=(await readdir('dist/client',{recursive:true})).filter(file=>file.endsWith('.js'));const clientCode=(await Promise.all(clientAssets.map(file=>readFile('dist/client/'+file,'utf8')))).join('\n');
+ for(const entry of overlay.workshops)assert(!clientCode.includes(entry.sourceHash),'static translation collection and revision hashes stay server-side');
  const albanianX=await runtime.dispatchFetch('https://riparim.test/sq/werkstaetten?q=Auto%20Servis%20X'),albanianXDom=new JSDOM(await albanianX.text());try{assert.deepEqual([...albanianXDom.window.document.querySelectorAll('.catalogue-card h2')].map(node=>node.textContent),['Auto servis XONI','Auto Servis Xhelali'],'actual built SQ SSR catalogue keeps the full-ICU X before Xh ordering');}finally{albanianXDom.window.close();}
  for(const locale of ['de','sq','en']){
   const prefix=locale==='de'?'':`/${locale}`,returnTarget=`${prefix}/werkstaetten?q=Auto+Mita`,response=await runtime.dispatchFetch(`https://riparim.test${prefix}/werkstatt/auto-mita?${new URLSearchParams({suche:returnTarget})}`),dom=new JSDOM(await response.text());
