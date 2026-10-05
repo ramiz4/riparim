@@ -8,6 +8,11 @@ in einem eigenen Abnahmebericht festgehalten. Private Berichte und Backups
 bleiben außerhalb von Git; öffentliche Nachweise enthalten nur Mengen,
 Prüfsummen, Ressourcenkennungen und Prüfergebnisse.
 
+Der tatsächlich ausgeführte Wechsel vom 5. Oktober und seine technischen
+Prüfergebnisse stehen im [Abnahmebericht](domain-cutover-2026-10-05.md).
+Die dort noch offene Nutzerabnahme und Beobachtungsphase werden durch diese
+Durchführungsanleitung nicht ersetzt.
+
 ## Ausgangslage und Verantwortung
 
 Bei der Vorbereitung am 4. Oktober 2026 ist Sites-Version 42 mit dem geprüften
