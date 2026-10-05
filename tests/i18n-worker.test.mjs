@@ -3,6 +3,7 @@ import {readFile,readdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {Miniflare} from 'miniflare';
 import {build} from 'esbuild';
+import {JSDOM} from 'jsdom';
 const config=JSON.parse(await readFile('dist/server/wrangler.json','utf8'));
 const modules=(await readdir('dist/server',{recursive:true})).filter(file=>file.endsWith('.js')).sort((a,b)=>a==='index.js'?-1:b==='index.js'?1:a.localeCompare(b)).map(file=>({type:'ESModule',path:resolve('dist/server',file)}));
 const runtime=new Miniflare({modules,modulesRoot:resolve('dist/server'),compatibilityDate:config.compatibility_date,compatibilityFlags:config.compatibility_flags,d1Databases:['DB'],r2Buckets:['BUCKET'],bindings:{SITE_ORIGIN:'https://riparim.test'},assets:{directory:resolve('dist/client'),binding:'ASSETS',routerConfig:{has_user_worker:true}},outboundService:()=>new Response('Live provider access forbidden',{status:502})});
@@ -16,6 +17,25 @@ try{
  for(const locale of ["de","sq","en"]){const prefix=locale==="de"?"":`/${locale}`;const response=await runtime.dispatchFetch(`https://riparim.test${prefix}/werkstatt/${draft.id}`);assert.equal(response.status,404,"unpublished profile stays private in "+locale);}
  const published=await db.prepare("SELECT id FROM workshops WHERE status='published' LIMIT 1").first();assert(published);
  for(const locale of ["de","sq","en"]){const prefix=locale==="de"?"":`/${locale}`;const response=await runtime.dispatchFetch(`https://riparim.test${prefix}/werkstatt/${published.id}?suche=${encodeURIComponent(prefix+"/werkstaetten?ort=prizren&sprache=sq")}`);assert.equal(response.status,200);assert((await response.text()).includes(`data-workshop-id="${published.id}"`));}
+ for(const locale of ['de','sq','en']){
+  const prefix=locale==='de'?'':`/${locale}`;
+  for(const identity of ['/', '/werkstaetten','/datenschutz',`/werkstatt/${published.id}`]){
+   const path=identity==='/'?prefix||'/':prefix+identity;
+   const response=await runtime.dispatchFetch(`https://riparim.test${path}?q=private-secret&ort=prizren&token=fixture`);assert.equal(response.status,200);
+   const dom=new JSDOM(await response.text());try{
+    const doc=dom.window.document;assert.equal(doc.documentElement.lang,locale);assert(doc.title);
+    assert.equal(doc.querySelector('link[rel="canonical"]').href,`https://riparim.test${path}`,'canonical contains clean localized page identity');
+    const alternatives=Object.fromEntries([...doc.querySelectorAll('link[rel="alternate"][hreflang]')].map(link=>[link.hreflang,link.href]));
+    assert.deepEqual(alternatives,Object.fromEntries(['de','sq','en','x-default'].map(language=>[language,`https://riparim.test${language==='de'||language==='x-default'?'':`/${language}`}${identity==='/'?(language==='de'||language==='x-default'?'/':''):identity}`])),'all locales emit identical reciprocal sets');
+    assert(!JSON.stringify(alternatives).includes('private-secret'));
+   }finally{dom.window.close();}
+  }
+  for(const query of ['besuche=1','einreichung=fixture-private-id','nachweis=neu']){
+   const response=await runtime.dispatchFetch(`https://riparim.test${prefix||'/'}?${query}`),dom=new JSDOM(await response.text());try{
+    assert.match(dom.window.document.querySelector('meta[name="robots"]').content,/noindex/);assert.equal(dom.window.document.querySelectorAll('link[rel="alternate"][hreflang]').length,0);assert.equal(dom.window.document.querySelectorAll('link[rel="canonical"]').length,0,'private modes do not export deep links');
+   }finally{dom.window.close();}
+  }
+ }
  const www=await runtime.dispatchFetch("http://www.riparim.com/en/werkstaetten?ort=prizren&sprache=sq",{redirect:"manual"});assert.equal(www.status,308);assert.equal(www.headers.get("Location"),"https://riparim.com/en/werkstaetten?ort=prizren&sprache=sq");
  for(const [path,target] of [['/de','/'],['/de/werkstaetten?ort=prizren','/werkstaetten?ort=prizren']]){const response=await runtime.dispatchFetch('https://riparim.test'+path,{redirect:'manual'});assert.equal(response.status,308);assert.equal(new URL(response.headers.get('Location'),'https://riparim.test').href,'https://riparim.test'+target);}
  for(const path of ['/fr','/sq/missing','/en/missing','/werkstatt/unknown-profile','/en/werkstatt/unknown-profile','/sq/werkstatt/x','/sq/missing.html','/en/missing.txt','/sq/missing.svg','/en/missing.png','/fr/missing.png','/missing.html','/missing.png']){const response=await runtime.dispatchFetch('https://riparim.test'+path);assert.equal(response.status,404,path);};

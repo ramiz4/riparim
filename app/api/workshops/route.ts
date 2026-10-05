@@ -5,7 +5,7 @@ import {confirmedPublicationPlace} from "@/db/google-places";
 import {googleMapsPlaceUrl} from "@/lib/google-maps-link";
 import {json,sameOrigin,readJson} from "@/lib/http";
 export const dynamic="force-dynamic";
-export async function GET(request:Request){try{const admin=new URL(request.url).searchParams.get("admin")==="1";if(admin){const user=await getAdminUser();if(!user)return json({error:"Bitte melde dich an."},401);if(!user.isModerator)return json({error:"Kein Zugriff auf die Verwaltung."},403);}return json({workshops:await listWorkshops(admin)});}catch(e){console.error("directory-read",e);return json({error:"Die Werkstattdaten sind gerade nicht verfügbar. Bitte versuche es erneut."},503);}}
+export async function GET(request:Request){try{const admin=new URL(request.url).searchParams.get("admin")==="1";if(admin){const user=await getAdminUser();if(!user)return json({errorCode:"authentication_required",error:"Bitte melde dich an."},401);if(!user.isModerator)return json({errorCode:"forbidden",error:"Kein Zugriff auf die Verwaltung."},403);}return json({workshops:await listWorkshops(admin)});}catch(e){console.error("directory-read",e);return json({errorCode:"unavailable",error:"Die Werkstattdaten sind gerade nicht verfügbar. Bitte versuche es erneut."},503);}}
 export async function POST(request:Request){return save(request,false);}
 export async function PATCH(request:Request){return save(request,true);}
 async function save(request:Request,update:boolean){

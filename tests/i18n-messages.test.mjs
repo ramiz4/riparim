@@ -20,6 +20,7 @@ for(const [locale,login,title] of [['de','Anmelden','Riparim – Werkstätten in
 assert.equal(createTranslator(defaultMessages)('common.login'),'Anmelden','isolated clients have a German common fallback');
 assert.equal(getMessages('unexpected').locale,'de','unexpected runtime locales fall back to German');
 const clientBundle=await build({stdin:{contents:"import {createTranslator,defaultMessages} from './lib/i18n/messages'; export const t=createTranslator(defaultMessages);",resolveDir:process.cwd()},bundle:true,platform:'browser',format:'esm',write:false,minify:true});
+assert.ok(!clientBundle.outputFiles[0].text.includes('Dein Auto.'),'a common-only fallback client must not bundle the whole public German catalog');
 assert.ok(!clientBundle.outputFiles[0].text.includes('Regjistrohu'),'client translator imports omit the Albanian catalog');
 assert.ok(!clientBundle.outputFiles[0].text.includes('Open user menu'),'client translator imports omit the English catalog');
 const codeBundle=await build({stdin:{contents:"import {errorCodeMessage} from './lib/i18n/codes'; export {errorCodeMessage};",resolveDir:process.cwd()},bundle:true,platform:'browser',format:'esm',write:false,minify:true});

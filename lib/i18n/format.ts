@@ -2,16 +2,16 @@ import {defaultLocale,isLocale,type Locale} from "./locale";
 
 export const intlLocales={de:"de-DE",sq:"sq-AL",en:"en-GB"} as const;
 export const kosovoTimeZone="Europe/Belgrade";
-export function formatNumber(locale:Locale,value:number):string{
+export function formatNumber(locale:Locale,value:number,options:Intl.NumberFormatOptions={}):string{
  if(!Number.isFinite(value))return "—";
  const active=isLocale(locale)?locale:defaultLocale;
  // Local workerd ships sq plural rules but omits its number/date ICU data.
  // Native Intl still performs rounding/grouping; only sq separators need a fallback.
  if(active==="sq"&&!Intl.NumberFormat.supportedLocalesOf([intlLocales.sq]).length){
-  const parts=new Intl.NumberFormat("en-GB").formatToParts(value),grouped=parts.filter(part=>part.type==="integer").map(part=>part.value).join("").length>=5;
+  const parts=new Intl.NumberFormat("en-GB",options).formatToParts(value),grouped=parts.filter(part=>part.type==="integer").map(part=>part.value).join("").length>=5;
   return parts.map(part=>part.type==="decimal"?",":part.type==="group"?grouped?"\u00a0":"":part.value).join("");
  }
- return new Intl.NumberFormat(intlLocales[active]).format(value);
+ return new Intl.NumberFormat(intlLocales[active],options).format(value);
 }
 export function formatDate(locale:Locale,value:string|number|Date,{dateOnly=false}:{dateOnly?:boolean}={}):string{
  let date:Date;

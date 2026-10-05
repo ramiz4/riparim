@@ -8,8 +8,8 @@ const {build}=require('esbuild');
 const React=require('react');
 const {renderToStaticMarkup}=require('react-dom/server');
 const output='.test-runtime/workshop-import';
-const result=await build({entryPoints:['db/directory.ts','lib/workshop-source.ts','lib/catalogue-filters.ts','components/workshop-ratings.tsx'],outdir:output,bundle:true,write:false,format:'esm',platform:'node',jsx:'automatic',external:['react','react-dom','lucide-react'],plugins:[{name:'fixture-storage',setup(b){b.onResolve({filter:/^cloudflare:workers$/},a=>({path:a.path,namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},()=>({loader:'js',contents:'export const env=globalThis.fixtureEnv;'}));}}]});
-for(const file of result.outputFiles){await mkdir(file.path.slice(0,file.path.lastIndexOf('/')),{recursive:true});await writeFile(file.path.replace(/\.js$/,'.mjs'),file.contents);}
+const result=await build({entryPoints:['db/directory.ts','lib/workshop-source.ts','lib/catalogue-filters.ts','components/workshop-ratings.tsx','lib/i18n/client.tsx','lib/i18n/messages.ts'],outdir:output,bundle:true,write:false,format:'esm',splitting:true,platform:'node',jsx:'automatic',external:['react','react-dom','lucide-react'],plugins:[{name:'fixture-storage',setup(b){b.onResolve({filter:/^cloudflare:workers$/},a=>({path:a.path,namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},()=>({loader:'js',contents:'export const env=globalThis.fixtureEnv;'}));}}]});
+for(const file of result.outputFiles){await mkdir(file.path.slice(0,file.path.lastIndexOf('/')),{recursive:true});await writeFile(file.path,file.contents);}
 const sqlite=new DatabaseSync(':memory:');
 for(const file of (await readdir('drizzle')).filter(file=>file.endsWith('.sql')).sort())sqlite.exec(await readFile('drizzle/'+file,'utf8'));
 const d1={prepare(sql){const statement=sqlite.prepare(sql);const adapter=(values=[])=>({bind:(...v)=>{assert(v.length<=95,'import respects D1 binding limits');return adapter(v);},first:async()=>statement.get(...values)??null,all:async()=>({results:statement.all(...values)}),run:async()=>({meta:statement.run(...values)})});return adapter();},async batch(statements){assert(statements.length<=50,'large imports use bounded batches');sqlite.exec('BEGIN');try{const result=[];for(const statement of statements)result.push(await statement.run());sqlite.exec('COMMIT');return result;}catch(error){sqlite.exec('ROLLBACK');throw error;}}};
@@ -17,10 +17,12 @@ globalThis.fixtureEnv={DB:d1,BUCKET:{}};
 const load=file=>import(new URL(output+'/'+file,'file://'+process.cwd()+'/').href);
 const realNow=Date.now;
 let directory;
-try{Date.now=()=>0;directory=await load('db/directory.mjs');}finally{Date.now=realNow;}
-const filters=await load('lib/catalogue-filters.mjs');
-const {WorkshopRatings}=await load('components/workshop-ratings.mjs');
-const {validateWorkshopCatalogue}=await load('lib/workshop-source.mjs');
+try{Date.now=()=>0;directory=await load('db/directory.js');}finally{Date.now=realNow;}
+const filters=await load('lib/catalogue-filters.js');
+const {WorkshopRatings}=await load('components/workshop-ratings.js');
+const {I18nProvider}=await load('lib/i18n/client.js'),{getMessages}=await load('lib/i18n/messages.js');
+const renderRatings=props=>renderToStaticMarkup(React.createElement(I18nProvider,{locale:'de',messages:getMessages('de',['common','public'])},React.createElement(WorkshopRatings,props)));
+const {validateWorkshopCatalogue}=await load('lib/workshop-source.js');
 const catalogue=validateWorkshopCatalogue(JSON.parse(await readFile('data/workshops.json','utf8')));
 const curated=catalogue.workshops.map(({google,...profile})=>profile);
 const manifest=JSON.parse(await readFile('data/import-2026-10-03.json','utf8'));
@@ -62,10 +64,10 @@ assert.equal(filters.hasPublishedRatings(workshops),false);
 assert.equal(filters.parseCatalogueFilters(new URLSearchParams('sort=bewertung'),workshops).sort,'name','Google scores do not enable Riparim sorting');
 const unknown=workshops.find(w=>w.googleRating.rating===null&&w.googleRating.count===null);
 assert.equal(unknown.googleRating.rating,null,'missing Google score stays null');
-const unknownMarkup=renderToStaticMarkup(React.createElement(WorkshopRatings,{workshop:unknown,details:true}));
+const unknownMarkup=renderRatings({workshop:unknown,details:true});
 assert(unknownMarkup.includes('Google wird geladen …'),'unloaded Google ratings are not reported as absent');
 assert(!unknownMarkup.includes('0,0'));
-const emptyCardRatings=renderToStaticMarkup(React.createElement(WorkshopRatings,{workshop:unknown,hideUnavailable:true}));
+const emptyCardRatings=renderRatings({workshop:unknown,hideUnavailable:true});
 assert(!emptyCardRatings.includes('Google wird geladen')&&!emptyCardRatings.includes('Noch keine'),'list cards preserve the absence of empty rating placeholders');
 const sonic=workshops.find(w=>w.id==='sonic-garage');
 assert.equal(sonic.googleRating.rating,null,'star icons do not establish an exact Google aggregate');

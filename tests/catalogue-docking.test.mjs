@@ -27,12 +27,12 @@ globalThis.fetch=async url=>{assert.equal(url,'/api/google-places','Docking fixt
 const require=createRequire(import.meta.url),{build}=require('esbuild');
 const {transform}=createRequire(require.resolve('vite/package.json'))('lightningcss');
 const output='.test-runtime/catalogue-docking';await mkdir(output,{recursive:true});
-const bundle=await build({stdin:{contents:"export {default as Catalogue} from './app/[locale]/werkstaetten/catalogue';export {defaultCatalogueFilters} from './lib/catalogue-filters';",resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/ui.mjs',bundle:true,write:false,platform:'node',format:'esm',packages:'external',plugins:[{name:'navigation-boundary',setup(b){
+const bundle=await build({stdin:{contents:"export {default as Catalogue} from './app/[locale]/werkstaetten/catalogue';export {defaultCatalogueFilters} from './lib/catalogue-filters';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/ui.mjs',bundle:true,write:false,platform:'node',format:'esm',packages:'external',plugins:[{name:'navigation-boundary',setup(b){
  b.onResolve({filter:/^next\/(link|navigation)$/},args=>({path:args.path,namespace:'fixture'}));
  b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',resolveDir:process.cwd(),contents:args.path==='next/link'?"import React from 'react';export default function Link({children,href,...props}){return React.createElement('a',{...props,href},children);}":"export function useRouter(){return {push(){},replace(){},refresh(){}};}export function useSearchParams(){return new URLSearchParams();}export function usePathname(){return '/werkstaetten';}"}));
 }}]});await writeFile(output+'/ui.mjs',bundle.outputFiles[0].contents);
 const {createElement,act}=await import('react'),{createRoot}=await import('react-dom/client');
-const {Catalogue,defaultCatalogueFilters}=await import(new URL('../'+output+'/ui.mjs',import.meta.url));
+const {Catalogue,defaultCatalogueFilters,I18nProvider,getMessages}=await import(new URL('../'+output+'/ui.mjs',import.meta.url));
 const files=['globals.css','ui-refresh.css','site-header.css','catalogue.css','form-controls.css','theme.css'];
 const css=(await Promise.all(files.map(file=>readFile(new URL('../app/'+file,import.meta.url),'utf8')))).join('\n').replace(/^@(?:import|custom-variant).*;$/gm,'').replace(/@theme inline\{[^}]*\}/g,'');
 const production=transform({filename:'catalogue.css',code:Buffer.from(css),minify:true}).code.toString().replace(/[^{}]*:is\(\)\{[^}]*\}/g,'');
@@ -64,7 +64,7 @@ const panel=()=>document.querySelector('[aria-label="Werkstätten suchen"]');
 let cases=0;
 try{
  styles();
- await act(async()=>root.render(createElement(Catalogue,{initialWorkshops:[],initialError:'',initialFilters:defaultCatalogueFilters,signedIn:false,account:null,isAdmin:false})));
+ await act(async()=>root.render(createElement(I18nProvider,{locale:'de',messages:getMessages('de',['common','public'])},createElement(Catalogue,{initialWorkshops:[],initialError:'',initialFilters:defaultCatalogueFilters,signedIn:false,account:null,isAdmin:false}))));
  const observer=observers.at(-1);
  assert(observer,'The mobile search detects when it reaches the site header');
  assert.equal(observer.options.root,document,'Docking measures the viewport of the search document, including embedded previews');

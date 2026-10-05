@@ -49,6 +49,13 @@ const configResponse=await config.GET(request('/api/google-places'));
 const body=await configResponse.text();assert(body.includes('fixture-browser-key')&&!body.includes('fixture-server-key'),'the private server key never crosses the HTTP boundary');
 assert.equal(configResponse.headers.get('Cache-Control'),'no-store');
 assert.equal((await config.GET(new Request(origin+'/api/google-places',{headers:{Origin:'https://other.example.test'}}))).status,403);
+for(const locale of ['de','sq','en']){
+ globalThis.fixtureAdmin=null;let response=await save.GET(request(`/api/workshops?admin=1&locale=${locale}`));assert.equal(response.status,401);assert.equal((await response.json()).errorCode,'authentication_required');
+ globalThis.fixtureAdmin={isModerator:false};response=await save.GET(request(`/api/workshops?admin=1&locale=${locale}`));assert.equal(response.status,403);assert.equal((await response.json()).errorCode,'forbidden');
+ response=await save.GET(request(`/api/workshops?locale=${locale}`));assert.equal(response.status,200);assert((await response.json()).workshops.every(w=>w.status==='published'),'locale never relaxes public publication rights');
+ const forbidden=await config.GET(new Request(origin+`/api/google-places?locale=${locale}`,{headers:{Origin:'https://other.example.test'}}));assert.equal(forbidden.status,403);assert.equal((await forbidden.json()).errorCode,'invalid_request');
+}
+globalThis.fixtureAdmin=null;
 const draft=all.find(w=>w.status==='draft');assert.equal((await match.GET(request('/api/google-places/'+draft.id),params(draft.id))).status,404,'drafts cannot trigger a Google lookup');
 assert.equal((await match.GET(request('/api/google-places/bad/id'),params('bad/id'))).status,404);
 const legacyHash=createHash('sha256').update(JSON.stringify([mita.name,mita.phone,mita.city,mita.address,mita.lat,mita.lng])).digest('hex');
