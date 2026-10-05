@@ -34,6 +34,11 @@ jobs:
           cache-dependency-path: package-lock.json
       - name: Install locked dependencies
         run: npm run install:ci
+      - name: Set up Go for actual Auth email template rendering
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version: "1.27.1"
+          cache: false
       - name: Validate workshop catalogue
         run: npm run catalog:check
       - name: Test customer journeys and catalogue

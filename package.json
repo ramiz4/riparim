@@ -13,6 +13,7 @@
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
     "test": "node tests/run.mjs",
+    "auth:email-templates": "node scripts/auth-email-templates.mjs",
     "test:client-build": "node tests/production-navigation.test.mjs",
     "catalog:check": "node scripts/workshop-catalogue.mjs check",
     "catalog:merge": "node scripts/workshop-catalogue.mjs merge",

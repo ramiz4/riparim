@@ -107,3 +107,25 @@ ist dafür ungeeignet. Die reguläre Veröffentlichung auf den eigenen Worker bl
 automatisiert. Die einmalige Quellenveröffentlichung übernimmt ausschließlich
 das unveränderte, geprüfte Sites-Release-Archiv. Die erforderliche Schreibpause,
 geschützte Sicherung und Go/No-Go-Prüfung stehen in [data-transfer.md](data-transfer.md).
+
+### Locale-Mailvorlagen übernehmen
+
+Issue #52 benötigt keine Migration und keine neuen Secrets. Der Main-Release
+enthält die zentralen Go-Betreff-/Bodyvorlagen für Bestätigung und Recovery;
+das Worker-Deployment verändert die Supabase-Vorlagen nicht automatisch.
+Die [Provideraktivierung](customer-flow-qa.md#lokalisierte-mailvorlagen-und-provideraktivierung-issue-52)
+verlangt den exakten Abgleich von `SITE_ORIGIN` und tatsächlich gelesener Site URL,
+Export/Go-Vorschau vom Release-Checkout, private Sicherung und Übernahme aller
+vier Providerfelder, erneutes Lesen und isolierten Empfangstest in DE/SQ/EN.
+Die Freigabe erfordert sowohl das geprüfte Release als auch diese Providerabnahme.
+Ein Code-Rollback stellt Providerfelder nicht wieder her; dafür die gesicherten
+vier Felder verwenden. Bestehende SMTP-Werte und Callbackpfade erhalten.
+
+Neue Reviewmails versenden nur Betreff und HTML; `text: ""` schaltet Resends
+automatische Klartexterzeugung aus. Sie verwenden beim ersten
+Versand die validierte Empfängerpräferenz.
+Bereits eingefrorene Nachrichten behalten bei Retries ihre ursprüngliche
+Sprache und identische Requestbytes einschließlich historischer Klartextteile;
+sie benötigen keine Datenübernahme.
+Der Supabase-SMTP-Quellvertrag bietet HTML ohne eigenen MIME-Klartextteil; dieser
+dokumentierte Providerumfang bleibt bei der Empfangsabnahme sichtbar.
