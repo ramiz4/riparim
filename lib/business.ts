@@ -37,7 +37,11 @@ export async function businessState(user:AppUser,moderation=false,cursors:{claim
  };
  const owned=moderation?await listWorkshops(true):(await db.prepare("SELECT w.* FROM workshops w JOIN workshop_owners o ON o.workshop_id=w.id WHERE o.account_id IN (?,?) ORDER BY w.name").bind(...owners).all<Record<string,unknown>>()).results.map(decodeProfile);
  const claims=await read("workshop_claims","claim",cursors.claims),changes=await read("workshop_changes","change",cursors.changes);
- return {claims:claims.items,changes:changes.items,workshops:owned,nextClaimCursor:claims.next,nextChangeCursor:changes.next};
+ // Current guidance and edit locks must not depend on a page of historical decisions.
+ const pendingClaims=moderation?[]:(await db.prepare("SELECT r.id,r.workshop_id,w.name AS workshop_name,r.created_at FROM workshop_claims r JOIN workshops w ON w.id=r.workshop_id WHERE r.owner IN (?,?) AND r.status='pending' ORDER BY r.created_at DESC,r.id DESC").bind(...owners).all<Record<string,unknown>>()).results.map(row=>({id:String(row.id),workshopId:String(row.workshop_id),workshopName:String(row.workshop_name),createdAt:String(row.created_at)}));
+ const pendingChangeWorkshopIds=moderation?[]:(await db.prepare("SELECT DISTINCT c.workshop_id FROM workshop_changes c JOIN workshop_owners o ON o.workshop_id=c.workshop_id WHERE o.account_id IN (?,?) AND c.status='pending' ORDER BY c.workshop_id").bind(...owners).all<Record<string,unknown>>()).results.map(row=>String(row.workshop_id));
+ const pendingChangeRequestIds=moderation?[]:(await db.prepare("SELECT id FROM workshop_changes WHERE owner IN (?,?) AND status='pending' ORDER BY created_at DESC,id DESC").bind(...owners).all<Record<string,unknown>>()).results.map(row=>String(row.id));
+ return {pendingClaims,pendingChangeWorkshopIds,pendingChangeRequestIds,claims:claims.items,changes:changes.items,workshops:owned,nextClaimCursor:claims.next,nextChangeCursor:changes.next};
 }
 export async function requestWorkshopClaim(user:AppUser,body:unknown){
  const input=claimSchema.parse(body),db=storage().db;await ensureInitialCatalog();
