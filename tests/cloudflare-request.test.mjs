@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { pathToFileURL } from 'node:url';
 
@@ -232,4 +232,24 @@ try {
     }
   }
 } finally { await nativeRuntime.dispose(); }
+
+// The real asset service must keep Google's exact verification URL. Its
+// default HTML normalization redirects .html to an extensionless path.
+const assetConfig = JSON.parse(await readFile(new URL('../wrangler.jsonc', import.meta.url), 'utf8'));
+const assetsRuntime = new Miniflare({ modules: true,
+  script: 'export default {fetch(request){return new URL(request.url).pathname==="/"?new Response("dynamic home"):new Response("not found",{status:404});}}',
+  compatibilityDate: assetConfig.compatibility_date,
+  compatibilityFlags: assetConfig.compatibility_flags,
+  assets: { directory: new URL('../public/', import.meta.url).pathname, routerConfig: { has_user_worker: true }, assetConfig: { html_handling: assetConfig.assets?.html_handling } },
+});
+try {
+  for (const method of ['GET', 'HEAD']) {
+    const result = await assetsRuntime.dispatchFetch('http://fixture/googled8cf505b6c63892b.html', { method, redirect: 'manual' });
+    assert.equal(result.status, 200, 'Google ownership verification must return the file directly without HTML normalization');
+    assert.equal(result.headers.get('Location'), null);
+    assert.equal(await result.text(), method === 'GET' ? await readFile(new URL('../public/googled8cf505b6c63892b.html', import.meta.url), 'utf8') : '');
+  }
+  assert.equal(await (await assetsRuntime.dispatchFetch('http://fixture/')).text(), 'dynamic home', 'application routes still reach the Worker');
+  assert.equal((await assetsRuntime.dispatchFetch('http://fixture/missing-verification.html')).status, 404);
+} finally { await assetsRuntime.dispose(); }
 console.log('Cloudflare request boundary: immutable release provenance preserves streams, cookies and redirects; canonical www routing, forged identity removal and Sites identity behavior passed');
