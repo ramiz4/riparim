@@ -88,6 +88,42 @@ diese Grenze. Keine dieser Fixtures nutzt persönliche Konten, echte Belege,
 Live-E-Mails oder Produktionsänderungen. Browsergeometrie/Themes/Zoom werden
 vor der PR-Freigabe gesondert koordiniert.
 
+## Betrieb und Verwaltung in drei Sprachen (Issue #51)
+
+Die isolierten React-/Radix-Prüfungen verwenden die tatsächlich aktiven
+DE/SQ/EN-Kataloge: Verwaltungsnavigation, Betreiberentwurf, Werkstatteditor,
+Benutzer-/Rollenbestätigung, Bewertungsmoderation und Auth-Konfiguration.
+Originaltexte, bestehende Leistungen/Beratungssprachen, Rollen, Status,
+Einreichungsrevisionen und technische Projektwerte bleiben in den Requests
+unverändert. Lokale Fehler behalten Entwürfe und zeigen keine rohen Providertexte.
+Bestehende Prüfungen bewahren Tastaturfokus, Escape, gesperrte Aktionen bei
+laufenden Mutationen, Rollen-/Sitzungswiderruf und geschützte Konten.
+
+Die tatsächlichen Business-, Workshop-, Benutzer-, Konfigurations- und
+Versandrouten werden mit isolierter SQLite-Datenbank und abgefangenen
+Providergrenzen geprüft. Stabile Fehlercodes und ursprüngliche HTTP-/Textverträge
+gelten auch für SQ-/EN-Anfragen. Ein verzögerter administrativer Anzeigenamenpatch
+darf keine inzwischen geänderte Sprachpräferenz oder andere Metadaten zurücksetzen.
+Dieser Test prüft den API-Keymerge-Vertrag, keine produktive Providerkonkurrenz.
+
+Versanddiagnosen übersetzen Zustände und Ursachen und lokalisieren Versuchszähler
+sowie Kosovo-Zeit einschließlich Sommerzeit. „An Versanddienst übergeben“
+bestätigt weiterhin keine Zustellung. Metadatenfixtures und beide tatsächlichen
+Worker-Builds prüfen alle sechs geschützten Routen auf `noindex,nofollow` ohne
+private Sprachalternativen. Browsergeometrie, Themes und Zoom werden vor der
+PR-Freigabe getrennt mit einem temporären Harness der echten Komponenten und
+fiktiven Daten geprüft. Keine persönlichen Konten, echten Nachweise oder
+Live-E-Mails dienen als Fixtures; Providerkonfiguration und Mailaktivierung
+bleiben dem Folgeissue und dem geprüften Main-Release vorbehalten.
+
+Nach Integration von Issue #52 prüfen die tatsächlichen AuthSetup-Komponenten
+in allen drei Locales vier getrennte Betreff-/HTML-Felder und deren
+Clipboardaufrufe bytegenau gegen die zentralen Go-Exporte. Technischer Quellcode
+wird angezeigt, nicht als HTML ausgeführt oder übersetzt. Abgewiesene
+Clipboardaufrufe zeigen nur lokale manuelle Kopierhinweise. Der angezeigte
+Übernahmevertrag umfasst tatsächliche kanonische Originwerte, erhaltene
+Callbackfreigaben, Release-Export und Go-Vorschauen, alle vier Providerdateien,
+erneutes Lesen sowie Empfangstest/Rückweg; keine reine Bodyübernahme.
 ## Lokalisierte Mailvorlagen und Provideraktivierung (Issue #52)
 
 Die zentralen Bestätigungs- und Recoveryvorlagen enthalten DE/SQ/EN-Betreff
@@ -205,10 +241,15 @@ Google benötigt weiterhin Website-Origin, den Callback des Supabase-Projekts
 und die Providerkonfiguration gemäß der [offiziellen Anleitung](https://supabase.com/docs/guides/auth/social-login/auth-google).
 
 `tests/auth-setup-ui.test.mjs` prüft die tatsächlichen React-/Radix-Komponenten:
-kompakte anfängliche Anleitung, erreichbare native Details, beide zentralen
-Mailfelder, Wiederverwendung gespeicherter Verbindung sowie unveränderte
-Entwurfs-/Aktivierungs-/SMTP-Verträge, Vorschauziele und Lade-/Fehlerzustände.
-Die API-Fixtures haben keine externen Effekte.
+kompakte anfängliche Anleitung in DE/SQ/EN, erreichbare native Details, vier
+zentrale kopierbare Betreff-/HTML-Felder, Wiederverwendung gespeicherter
+Verbindung sowie unveränderte Entwurfs-/Aktivierungs-/SMTP-Verträge,
+Vorschauziele und Lade-/Fehlerzustände. Die API-Fixtures haben keine externen
+Effekte. Bei der Integration der Verwaltungslokalisierung aus Issue #51 blieben
+Formular, Fehlercodes und Sperren während laufender Speicherung erhalten.
+Originabgleich, Releaseexport, Backup, Readback und Rollback-Hilfe sind in
+allen drei Sprachen in der geschlossenen Mailhilfe erreichbar; die
+Management-UI-Suite prüft weiterhin Quellenkopie und lokale Copy-Fehler.
 
 Die ergänzende native Prüfung im vorgegebenen Chrome-Profil verwendete die
 tatsächliche Komponente und Projekt-CSS mit ausschließlich abgefangenem

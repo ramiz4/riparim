@@ -24,7 +24,7 @@ for(const account of [null,{email:'customer@example.test',displayName:'Fixture a
  for(const isAdmin of account?[false,true]:[false]){
   globalThis.headerAccount=account;globalThis.headerIsAdmin=isAdmin;
   const props={account,isAdmin,signedIn:!!account,initialWorkshops:[],initialError:'',initialFilters:defaultCatalogueFilters};
-  const pages=[['landing',createElement(Finder,props)],['catalogue',createElement(Catalogue,props)],['login',createElement(AuthForm,{...props,isOwner:isAdmin,screen:'login',emailReady:false,googleReady:false,returnTo:'/'})],['privacy',await PrivacyPage()],['business',await BusinessPage({searchParams:Promise.resolve({})})]];
+  const pages=[['landing',createElement(Finder,props)],['catalogue',createElement(Catalogue,props)],['login',createElement(AuthForm,{...props,isOwner:isAdmin,screen:'login',emailReady:false,googleReady:false,returnTo:'/'})],['privacy',await PrivacyPage()],['business',await BusinessPage({params:Promise.resolve({locale:'de'}),searchParams:Promise.resolve({})})]];
   if(isAdmin)pages.push(['admin',createElement(AdminPanel,props)]);
   let reference;
   for(const [page,element] of pages){

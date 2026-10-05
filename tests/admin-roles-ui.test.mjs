@@ -12,14 +12,14 @@ globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
 
 const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
 const output='.test-runtime/admin-roles-ui';
-const bundle=await build({entryPoints:['app/[locale]/verwaltung/benutzer/users.tsx'],outfile:output+'/users.mjs',bundle:true,write:false,platform:'node',format:'esm',packages:'external',loader:{'.css':'empty'},plugins:[{name:'page-shell-boundaries',setup(b){
+const bundle=await build({stdin:{contents:"export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {default} from './app/[locale]/verwaltung/benutzer/users';",resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/users.mjs',bundle:true,write:false,platform:'node',format:'esm',packages:'external',loader:{'.css':'empty'},plugins:[{name:'page-shell-boundaries',setup(b){
  b.onResolve({filter:/^(next\/link|@\/components\/site-header|@\/components\/admin-navigation)$/},args=>({path:args.path,namespace:'fixture'}));
  b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',resolveDir:process.cwd(),contents:args.path==='next/link'?`import React from 'react';export default function Link({children,href,...props}){return React.createElement('a',{...props,href},children);}`:args.path.includes('site-header')?'export function SiteHeader(){return null;}':'export function AdminNavigation(){return null;}'}));
 }}]});
 await mkdir(output,{recursive:true});await writeFile(output+'/users.mjs',bundle.outputFiles[0].contents);
 const {createElement,act}=await import('react');
 const {createRoot}=await import('react-dom/client');
-const {default:AdminUsers}=await import(new URL('../'+output+'/users.mjs',import.meta.url));
+const {default:AdminUsers,I18nProvider,getMessages}=await import(new URL('../'+output+'/users.mjs',import.meta.url));
 const fixtureUser=(id,name,role,protectedAccount=false)=>({id,name,email:name.toLowerCase().replaceAll(' ','-')+'@example.test',role,protected:protectedAccount,active:true,confirmed:true,providers:['email'],createdAt:'2026-10-04',lastSignInAt:null});
 const users=[fixtureUser('self','Current Admin','admin',true),fixtureUser('bootstrap','Emergency Admin','admin',true),fixtureUser('member','Fixture Member','user'),fixtureUser('other-admin','Other Admin','admin')];
 const requests=[];
@@ -34,7 +34,7 @@ globalThis.fetch=async(url,options)=>{
  const user=users.find(item=>'/api/users/'+item.id===url);assert(user,'Only fictional listed users may be edited');
  const commit=()=>{const roleChanged=user.role!==request.body.role;user.role=request.body.role;return Response.json({user,roleChanged});};
  if(mode==='pending')return new Promise(resolve=>{pending={resolve,commit};});
- if(mode==='uncertain'){user.role=request.body.role;return Response.json({error:'Fixture: Rollenänderung konnte nicht bestätigt werden.'},{status:503});}
+ if(mode==='uncertain'){user.role=request.body.role;return Response.json({error:'Fixture: Rollenänderung konnte nicht bestätigt werden.',errorCode:'users_unavailable'},{status:503});}
  if(mode==='noop'){assert.equal(user.role,request.body.role,'Another request already assigned the desired role');return Response.json({user,roleChanged:false});}
  return commit();
 };
@@ -49,7 +49,7 @@ const row=id=>[...document.querySelectorAll('tbody tr')].find(item=>item.textCon
 const click=async control=>{assert(control,'Requested control exists');await act(async()=>{control.focus();control.click();});};
 
 try{
- await act(async()=>root.render(createElement(AdminUsers,{account:{email:'current-admin@example.test',displayName:'Current Admin',provider:'E-Mail'}})));
+ await act(async()=>root.render(fixtureMessages(createElement(AdminUsers,{account:{email:'current-admin@example.test',displayName:'Current Admin',provider:'E-Mail'}}))));
  check(document.querySelector('table').textContent.includes('Rolle'),'The account table exposes the role column');
  check(row('member').querySelector('.users-role').textContent==='Benutzer'&&row('other-admin').querySelector('.users-role').textContent==='Admin','User and admin roles have visible labels');
  for(const name of ['Current Admin','Emergency Admin']){
@@ -82,7 +82,7 @@ try{
  await click(demote());
  check(dialog().textContent.includes('Adminrechte entziehen?')&&dialog().textContent.includes('reguläre Kundenrechte'),'Demotion confirmation describes the remaining customer access');
  mode='uncertain';await click(dialogButton('Adminrechte entziehen'));
- check(!dialog()&&document.querySelector('[role="alert"]').textContent.includes('nicht bestätigt'),'An uncertain server result closes the old confirmation and reports the failure');
+ check(!dialog()&&document.querySelector('[role="alert"]').textContent===getMessages('de').management.users_unavailable,'An uncertain server result closes the old confirmation and reports the failure');
  check(requests.filter(request=>request.method==='GET').length===2&&row('member').querySelector('.users-role').textContent==='Benutzer','An uncertain result reloads roles and reflects a completed server change');
  check(!document.querySelector('[role="status"]'),'An uncertain result never announces a successful role change');
 
@@ -102,7 +102,7 @@ try{
  check(!/Sitzungen|anmelden/.test(document.querySelector('[role="status"]').textContent),'An unchanged demotion does not claim session revocation or require another login');
  pendingDeletions=[fixtureUser('00000000-0000-4000-8000-000000000099','Begonnene Löschung','user')];
  await act(async()=>root.unmount());root=createRoot(document.getElementById('root'));
- await act(async()=>root.render(createElement(AdminUsers,{account:{email:'current-admin@example.test',displayName:'Current Admin',provider:'E-Mail'}})));
+ await act(async()=>root.render(fixtureMessages(createElement(AdminUsers,{account:{email:'current-admin@example.test',displayName:'Current Admin',provider:'E-Mail'}}))));
  const finish=button('Löschung für 00000000-0000-4000-8000-000000000099 abschließen');
  check(finish&&document.querySelector('#pending-deletions-title').textContent==='Unvollständige Kontolöschungen','Incomplete local deletions are recoverable in the administrative UI');
  await click(finish);check(dialog().textContent.includes('Begonnene Löschung'),'Administrative recovery still requires an explicit deletion confirmation');
@@ -112,3 +112,5 @@ try{
 }finally{
  await act(async()=>root.unmount());dom.window.close();
 }
+
+function fixtureMessages(element){return createElement(I18nProvider,{locale:"de",messages:getMessages("de",["common","customer","management"])},element);}

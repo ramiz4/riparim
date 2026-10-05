@@ -13,7 +13,7 @@ export function formatNumber(locale:Locale,value:number):string{
  }
  return new Intl.NumberFormat(intlLocales[active]).format(value);
 }
-export function formatDate(locale:Locale,value:string|number|Date,{dateOnly=false}:{dateOnly?:boolean}={}):string{
+export function formatDate(locale:Locale,value:string|number|Date,{dateOnly=false,withTime=false}:{dateOnly?:boolean;withTime?:boolean}={}):string{
  let date:Date;
  if(dateOnly){
   if(typeof value!=="string"||!/^\d{4}-\d{2}-\d{2}$/.test(value))return "—";
@@ -24,6 +24,6 @@ export function formatDate(locale:Locale,value:string|number|Date,{dateOnly=fals
  const active=isLocale(locale)?locale:defaultLocale,requested=intlLocales[active];
  const supported=Intl.DateTimeFormat.supportedLocalesOf([requested]).length?requested:active==="sq"?"de-DE":requested;
  return new Intl.DateTimeFormat(supported,{
-  day:"2-digit",month:"2-digit",year:"numeric",timeZone:dateOnly?"UTC":kosovoTimeZone
+  day:"2-digit",month:"2-digit",year:"numeric",...(withTime?{hour:"2-digit",minute:"2-digit"} as const:{}),timeZone:dateOnly?"UTC":kosovoTimeZone
  }).format(date);
 }

@@ -12,27 +12,27 @@ globalThis.IS_REACT_ACT_ENVIRONMENT=true;
 globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
 HTMLElement.prototype.scrollIntoView=function(){};
 const out='.test-runtime/admin-reviews-ui';await mkdir(out,{recursive:true});
-const bundle=await build({entryPoints:['app/[locale]/verwaltung/bewertungen/reviews.tsx'],outfile:out+'/ui.mjs',bundle:true,write:false,format:'esm',platform:'node',packages:'external',plugins:[{name:'navigation-boundary',setup(b){
+const bundle=await build({stdin:{contents:"export {default} from './app/[locale]/verwaltung/bewertungen/reviews';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",resolveDir:process.cwd(),loader:'tsx'},outfile:out+'/ui.mjs',bundle:true,write:false,format:'esm',platform:'node',packages:'external',plugins:[{name:'navigation-boundary',setup(b){
  b.onResolve({filter:/^next\/link$/},()=>({path:'link',namespace:'fixture'}));
  b.onLoad({filter:/.*/,namespace:'fixture'},()=>({loader:'js',resolveDir:process.cwd(),contents:"import React from 'react';export default function Link({href,children,...props}){return React.createElement('a',{...props,href},children)}"}));
 }}]});
 await writeFile(out+'/ui.mjs',bundle.outputFiles[0].contents);
-const {createElement,act}=await import('react'),{createRoot}=await import('react-dom/client'),{default:AdminReviews}=await import(new URL('../'+out+'/ui.mjs',import.meta.url));
+const {createElement,act}=await import('react'),{createRoot}=await import('react-dom/client'),{default:AdminReviews,I18nProvider,getMessages}=await import(new URL('../'+out+'/ui.mjs',import.meta.url));
 const visit={id:'00000000-0000-4000-8000-000000000001',workshop:'fixture-workshop',workshop_name:'Fiktive Werkstatt',date:'2026-10-04',vehicle:'Fixture Car',service:'Inspektion',evidence_type:'Dokument',evidence_note:'Private fictional evidence',status:'pending',moderator_note:'',display_name:'Fixture Driver',rating:4,review:'A sufficiently detailed fictional review of a workshop visit.',created_at:'2026-10-04',file_name:'fixture.pdf',revision:1};
 let records=[visit],pendingCount=7,mode='success',mutationMode='success',nextCursor=null,resolveLoad;const requests=[];
 globalThis.fetch=async(url,options)=>{
  const method=options?.method??'GET',body=options?.body?JSON.parse(options.body):null;requests.push({url,method,body});
  if(method==='PATCH'){
   assert.equal(url,'/api/visits');assert.equal(body.action,'moderate');
-  if(mutationMode==='error')return Response.json({error:'Fixture decision conflict'},{status:409});
+  if(mutationMode==='error')return Response.json({error:'Fixture decision conflict',errorCode:'review_conflict'},{status:409});
   records=records.map(record=>record.id===body.id?{...record,status:body.status,revision:record.revision+1}:record);
   if(mutationMode==='reload-error')mode='error';
   return Response.json({updated:true});
  }
  if(url.startsWith('/api/visits?moderation=1')){
   if(mode==='loading')return new Promise(resolve=>{resolveLoad=()=>resolve(Response.json({visits:records,nextCursor,pendingCount}));});
-  if(mode==='error')return Response.json({error:'Fixture moderation unavailable'},{status:503});
-  if(mode==='forbidden')return Response.json({error:'Fixture access revoked'},{status:403});
+  if(mode==='error')return Response.json({error:'Fixture moderation unavailable',errorCode:'review_unavailable'},{status:503});
+  if(mode==='forbidden')return Response.json({error:'Fixture access revoked',errorCode:'forbidden'},{status:403});
   if(url.includes('cursor='))return Response.json({visits:[{...visit,id:'00000000-0000-4000-8000-000000000002',workshop_name:'Ältere Werkstatt'}],nextCursor:null,pendingCount});
   return Response.json({visits:records,nextCursor,pendingCount});
  }
@@ -40,7 +40,7 @@ globalThis.fetch=async(url,options)=>{
  throw Error('Unexpected fixture request: '+url);
 };
 let root=createRoot(document.getElementById('root'));
-const render=async()=>act(async()=>root.render(createElement(AdminReviews,{account:{email:'admin@example.test',displayName:'Fixture admin',provider:'Google'}})));
+const render=async()=>act(async()=>root.render(fixtureMessages(createElement(AdminReviews,{account:{email:'admin@example.test',displayName:'Fixture admin',provider:'Google'}}))));
 const remount=async()=>{await act(async()=>root.unmount());root=createRoot(document.getElementById('root'));await render();};
 const button=label=>[...document.querySelectorAll('button')].find(node=>node.textContent===label);
 const click=async node=>{assert(node,'Expected accessible UI action exists');await act(async()=>{node.focus();node.click();});};
@@ -70,7 +70,7 @@ try{
  assert(!document.querySelector('.notification-panel'),'The complete notification delivery area is absent from moderation');
  assert(!requests.some(request=>request.url.startsWith('/api/notifications')),'The compact moderation page does not read or dispatch the delivery queue');
  mode='error';await remount();
- assert.equal(document.querySelector('main [role="alert"]').textContent,'Fixture moderation unavailable','A failed initial load remains announced');
+ assert.equal(document.querySelector('main [role="alert"]').textContent,getMessages('de').customer.reviewUnavailable,'A failed initial load remains announced');
  assert(!document.querySelector('.empty'),'A failed load is not presented as an empty queue');
  assert(button('Einreichungen erneut laden'),'A failed initial load offers a focused recovery action');
  mode='success';await click(button('Einreichungen erneut laden'));
@@ -82,7 +82,7 @@ try{
  await type(note,'Fiktiver Nachweis wurde geprüft.');mutationMode='reload-error';
  await click(button('Prüfen & veröffentlichen'));
  assert.equal(document.querySelector('main [role="status"]').textContent,'Bewertung veröffentlicht.','An accepted decision remains confirmed even when its queue refresh fails');
- assert.equal(document.querySelector('main [role="alert"]').textContent,'Fixture moderation unavailable');
+ assert.equal(document.querySelector('main [role="alert"]').textContent,getMessages('de').customer.reviewUnavailable);
  assert(button('Einreichungen erneut laden'),'A failed queue refresh after successful moderation remains recoverable');
  const decisions=requests.filter(request=>request.method==='PATCH').length;
  mode='success';mutationMode='success';await click(button('Einreichungen erneut laden'));
@@ -98,7 +98,7 @@ try{
  assert.equal(document.querySelector('.visit-status').textContent,'Ergänzung nötig');
  await type(document.querySelector('textarea'),'Fiktiver Vermerk bleibt erhalten.');mutationMode='error';
  await click(button('Prüfen & veröffentlichen'));
- assert.equal(document.querySelector('main [role="alert"]').textContent,'Fixture decision conflict','Decision conflicts remain announced');
+ assert.equal(document.querySelector('main [role="alert"]').textContent,getMessages('de').customer.reviewConflict,'Decision conflicts remain announced');
  await click(button('Einreichungen erneut laden'));
  assert.equal(document.querySelector('textarea').value,'Fiktiver Vermerk bleibt erhalten.','Reading the queue after a failed decision preserves the private draft');
  mutationMode='success';await filter('Alle Status');
@@ -121,7 +121,9 @@ try{
  // A failed decision gives the user a safe read path; the next GET revokes access.
  mutationMode='error';await click(button('Ergänzung anfordern'));await click(button('Einreichungen erneut laden'));
  assert.equal(document.querySelectorAll('.moderation-entry').length,0,'Lost access clears previously loaded private reviews');
- assert.equal(document.querySelector('main [role="alert"]').textContent,'Fixture access revoked');
+ assert.equal(document.querySelector('main [role="alert"]').textContent,getMessages('de').common.forbidden);
  assert(!requests.some(request=>request.url.startsWith('/api/notifications')),'Preserved decisions and recovery never dispatch delivery from this page');
  console.log('Review administration: compact layout, absent delivery panel, search, keyboard filter, evidence, decisions, pagination, recovery and load/access states passed');
 }finally{await act(async()=>root.unmount());dom.window.close();}
+
+function fixtureMessages(element){return createElement(I18nProvider,{locale:"de",messages:getMessages("de",["common","customer","management"])},element);}
