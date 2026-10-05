@@ -7,7 +7,7 @@ import type {MessageValue,ParameterNames,MessageShape,CheckedMessages} from "./m
 
 const deBase={
  common:{
-  close:"Schließen",dialogContent:"Dialoginhalt",
+  retry:"Erneut laden",darkMode:"Dark Mode",themeSystem:"Dark Mode · folgt dem System",themeToggle:"Dark Mode umschalten",close:"Schließen",dialogContent:"Dialoginhalt",workshops:"Werkstätten",loadingWorkshops:"Werkstätten werden geladen …",loadingProfile:"Werkstattprofil wird geladen …",profileNotAvailable:"Dieses Profil ist nicht verfügbar.",profileNotAvailableHelp:"Die Werkstatt ist nicht veröffentlicht oder der Link ist nicht mehr aktuell.",findWorkshops:"Werkstätten finden",
   languageLabel:"Sprache wählen",discardDraft:"Deine nicht gespeicherten Eingaben gehen beim Sprachwechsel verloren. Sprache trotzdem wechseln?",
   preferenceNotSaved:"Deine Sprachpräferenz konnte nicht gespeichert werden. Die ausgewählte Sprache gilt für diese Seite.",
   homeLabel:"Riparim Startseite",login:"Anmelden",register:"Registrieren",userMenu:"Benutzermenü öffnen",myAccount:"Mein Konto",signedIn:"Angemeldet",admin:"Admin",
@@ -30,7 +30,7 @@ const sq=/* @__PURE__ */ defineCatalog({
  customer:customerSq,
  management:managementSq,
  common:{
-  close:"Mbyll",dialogContent:"Përmbajtja e dialogut",
+  retry:"Ngarko përsëri",darkMode:"Mënyra e errët",themeSystem:"Mënyra e errët · ndjek sistemin",themeToggle:"Ndërro mënyrën e errët",close:"Mbyll",dialogContent:"Përmbajtja e dialogut",workshops:"Servise",loadingWorkshops:"Duke ngarkuar serviset …",loadingProfile:"Duke ngarkuar profilin e servisit …",profileNotAvailable:"Ky profil nuk është i disponueshëm.",profileNotAvailableHelp:"Servisi nuk është i publikuar ose lidhja nuk është më aktuale.",findWorkshops:"Gjej servise",
   languageLabel:"Zgjidh gjuhën",discardDraft:"Të dhënat që nuk i ke ruajtur do të humbasin kur të ndërrosh gjuhën. Dëshiron të vazhdosh?",
   preferenceNotSaved:"Preferenca jote e gjuhës nuk mund të ruhej. Gjuha e zgjedhur vlen për këtë faqe.",
   homeLabel:"Faqja kryesore e Riparim",login:"Hyr",register:"Regjistrohu",userMenu:"Hap menynë e përdoruesit",myAccount:"Llogaria ime",signedIn:"I identifikuar",admin:"Administrator",
@@ -47,7 +47,7 @@ const en=/* @__PURE__ */ defineCatalog({
  customer:customerEn,
  management:managementEn,
  common:{
-  close:"Close",dialogContent:"Dialog content",
+  retry:"Reload",darkMode:"Dark mode",themeSystem:"Dark mode · follows system",themeToggle:"Toggle dark mode",close:"Close",dialogContent:"Dialog content",workshops:"Workshops",loadingWorkshops:"Loading workshops …",loadingProfile:"Loading workshop profile …",profileNotAvailable:"This profile is unavailable.",profileNotAvailableHelp:"The workshop is unpublished or the link is no longer current.",findWorkshops:"Find workshops",
   languageLabel:"Choose language",discardDraft:"Your unsaved entries will be lost when you change language. Change language anyway?",
   preferenceNotSaved:"Your language preference could not be saved. The selected language applies to this page.",
   homeLabel:"Riparim home",login:"Log in",register:"Register",userMenu:"Open user menu",myAccount:"My account",signedIn:"Signed in",admin:"Admin",

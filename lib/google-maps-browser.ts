@@ -14,7 +14,7 @@ export async function workshopGoogleIdentity(id:string){
  let pending=identities.get(id);if(!pending){pending=(async()=>{const config=await googlePlacesClientConfig();if(!config.enabled||!config.browserKey)return null;const response=await fetch(`/api/google-places/${encodeURIComponent(id)}`,{credentials:"same-origin",cache:"no-store",signal:AbortSignal.timeout(20000)});if(!response.ok)throw Error("Google unavailable");const result=await response.json() as {placeId?:string|null};return result.placeId?{placeId:result.placeId,browserKey:config.browserKey!}:null;})();identities.set(id,pending);pending.catch(()=>identities.delete(id));}
  return pending;
 }
-function browserLocale():Locale{const value=typeof document==="undefined"?"de":document.documentElement?.lang;return isLocale(value)?value:"de";}
+export function browserLocale():Locale{const value=typeof document==="undefined"?"de":document.documentElement?.lang;return isLocale(value)?value:"de";}
 export function loadGooglePlaces(browserKey:string):Promise<GooglePlacesLibrary>{
  if(libraryPromise)return libraryPromise;
  const win=window as GoogleWindow;
@@ -31,19 +31,21 @@ export function loadGooglePlaces(browserKey:string):Promise<GooglePlacesLibrary>
  })();
  return libraryPromise;
 }
-export async function currentGoogleRating(placeId:string,browserKey:string){
- let pending=liveRequests.get(placeId);if(!pending){pending=(async()=>{const library=await loadGooglePlaces(browserKey),place=new library.Place({id:placeId,requestedLanguage:browserLocale()});await place.fetchFields({fields:["rating","userRatingCount","googleMapsURI","attributions"]});return {rating:typeof place.rating==="number"&&place.rating>=1&&place.rating<=5?place.rating:null,count:typeof place.userRatingCount==="number"&&Number.isInteger(place.userRatingCount)&&place.userRatingCount>=0?place.userRatingCount:null,mapsUrl:safeHttps(place.googleMapsURI)??`https://www.google.com/maps/search/?api=1&query=Werkstatt&query_place_id=${encodeURIComponent(placeId)}`,attributions:(place.attributions??[]).filter(a=>a.provider).map(a=>({provider:a.provider,providerURI:safeHttps(a.providerURI)}))};})();liveRequests.set(placeId,pending);void pending.finally(()=>liveRequests.delete(placeId)).catch(()=>{});}
+export async function currentGoogleRating(placeId:string,browserKey:string,locale:Locale=browserLocale()){
+ const providerLocale=isLocale(locale)?locale:"de",requestKey=`${placeId}:${providerLocale}`;
+ let pending=liveRequests.get(requestKey);if(!pending){pending=(async()=>{const library=await loadGooglePlaces(browserKey),place=new library.Place({id:placeId,requestedLanguage:providerLocale});await place.fetchFields({fields:["rating","userRatingCount","googleMapsURI","attributions"]});return {rating:typeof place.rating==="number"&&place.rating>=1&&place.rating<=5?place.rating:null,count:typeof place.userRatingCount==="number"&&Number.isInteger(place.userRatingCount)&&place.userRatingCount>=0?place.userRatingCount:null,mapsUrl:safeHttps(place.googleMapsURI)??`https://www.google.com/maps/search/?api=1&query=Werkstatt&query_place_id=${encodeURIComponent(placeId)}`,attributions:(place.attributions??[]).filter(a=>a.provider).map(a=>({provider:a.provider,providerURI:safeHttps(a.providerURI)}))};})();liveRequests.set(requestKey,pending);void pending.finally(()=>liveRequests.delete(requestKey)).catch(()=>{});}
  return pending;
 }
-export async function currentGoogleProfile(placeId:string,browserKey:string):Promise<LiveGoogleProfile>{
- let pending=profileRequests.get(placeId);
+export async function currentGoogleProfile(placeId:string,browserKey:string,locale:Locale=browserLocale()):Promise<LiveGoogleProfile>{
+ const providerLocale=isLocale(locale)?locale:"de",requestKey=`${placeId}:${providerLocale}`;
+ let pending=profileRequests.get(requestKey);
  if(!pending){
   pending=(async()=>{
-   const response=await fetch(`https://places.googleapis.com/v1/places/${encodeURIComponent(placeId)}?languageCode=${browserLocale()}`,{headers:{"X-Goog-Api-Key":browserKey,"X-Goog-FieldMask":"id,rating,userRatingCount,currentOpeningHours,regularOpeningHours,businessStatus,location,photos,googleMapsUri,attributions"},credentials:"omit",cache:"no-store",signal:AbortSignal.timeout(12000)});
+   const response=await fetch(`https://places.googleapis.com/v1/places/${encodeURIComponent(placeId)}?languageCode=${providerLocale}`,{headers:{"X-Goog-Api-Key":browserKey,"X-Goog-FieldMask":"id,rating,userRatingCount,currentOpeningHours,regularOpeningHours,businessStatus,location,photos,googleMapsUri,attributions"},credentials:"omit",cache:"no-store",signal:AbortSignal.timeout(12000)});
    if(!response.ok)throw Error("Google profile unavailable");
    return normalizeGoogleProfile(await response.json() as GoogleProfileResponse,placeId);
   })();
-  profileRequests.set(placeId,pending);void pending.finally(()=>profileRequests.delete(placeId)).catch(()=>{});
+  profileRequests.set(requestKey,pending);void pending.finally(()=>profileRequests.delete(requestKey)).catch(()=>{});
  }
  return pending;
 }
