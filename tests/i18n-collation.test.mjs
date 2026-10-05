@@ -1,0 +1,28 @@
+import assert from 'node:assert/strict';
+import {build} from 'esbuild';
+import {readFile} from 'node:fs/promises';
+import {Miniflare} from 'miniflare';
+const source=JSON.parse(await readFile('data/workshops.json','utf8'));
+const directory=source.workshops.map(w=>({...w,rating:null,count:0}));
+const result=await build({stdin:{contents:`export {matchCatalogue,defaultCatalogueFilters,catalogueOptions} from './lib/catalogue-filters';export {valueLabel} from './lib/i18n/values';export {displayComparator} from './lib/i18n/collation';`,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'node'});
+const {matchCatalogue,defaultCatalogueFilters,catalogueOptions,valueLabel,displayComparator}=await import(`data:text/javascript;base64,${Buffer.from(result.outputFiles[0].contents).toString('base64')}`);
+const selected={...defaultCatalogueFilters,query:'Auto Servis X'},ids=matchCatalogue(directory,selected,null,false,{},'sq').map(w=>w.id);
+const names=matchCatalogue(directory,selected,null,false,{},'sq').map(w=>w.name);
+assert.deepEqual(names,['Auto servis XONI','Auto Servis Xhelali'],'full ICU Albanian X precedes the Xh contraction');
+const reference=new Intl.Collator('sq-AL'),numericReference=new Intl.Collator('sq-AL',{numeric:true});
+const fullExpected=directory.filter(w=>w.status==='published').sort((a,b)=>reference.compare(a.name,b.name)).map(w=>w.id);
+assert.deepEqual(matchCatalogue(directory,defaultCatalogueFilters,null,false,{},'sq').map(w=>w.id),fullExpected,'entire current published catalogue matches independent full-ICU Albanian ordering');
+const cases=['Cani','Çani','Dani','Dhani','Eri','Ëri','Fani','Gani','Gjani','Hani','Lani','Llani','Mani','Nani','Njani','Oni','Rani','Rrani','Sani','Shani','Tani','Thani','Uni','Xoni','Xhani','Yni','Zani','Zhani','xHani','XHani','xhAni','Auto A-B','Auto A B','Auto A/B','Auto A.B','AUTO A B','auto A B','Čani','Éri','Servis 2','Servis 10','Servis 1'];
+assert.deepEqual([...cases].sort(displayComparator('sq')),[...cases].sort(reference.compare),'Albanian letters/digraphs, standard case variants, punctuation and ordinary Latin accents match ICU');
+assert.deepEqual([...cases].sort(displayComparator('sq',true)),[...cases].sort(numericReference.compare),'numeric display options preserve natural order');
+const germanTieExpected=directory.filter(w=>w.status==='published').sort((a,b)=>a.name.localeCompare(b.name,'de')).map(w=>w.id);
+assert.deepEqual(matchCatalogue(directory,{...defaultCatalogueFilters,sort:'rating'},null,false,{},'sq').map(w=>w.id),germanTieExpected,'missing rating ties retain the original German rule');
+assert.deepEqual(matchCatalogue(directory,{...defaultCatalogueFilters,sort:'distance'},null,false,{},'sq').map(w=>w.id),germanTieExpected,'missing distance ties retain the original German rule');
+const options=catalogueOptions(directory,'sq');
+for(const values of Object.values(options))assert.deepEqual(values.slice(1).map(value=>valueLabel('sq','language',value)),values.slice(1).map(value=>valueLabel('sq','language',value)).sort(reference.compare),'complete current option sets match ICU in active labels');
+for(const locale of ['de','en'])assert.deepEqual([...cases].sort(displayComparator(locale)),[...cases].sort(new Intl.Collator(locale).compare),'supported DE/EN ordering remains native');
+const originalNames=['Ω Original','А Original','Æ Original','İ Original','Fixture 02','Fixture 2'];const unchanged=[...originalNames];assert.equal([...originalNames].sort(displayComparator('sq',true)).length,originalNames.length);assert.deepEqual(originalNames,unchanged,'other original scripts/names are sortable without modifying facts');
+const worker=await build({stdin:{contents:`import {matchCatalogue,defaultCatalogueFilters,catalogueOptions} from './lib/catalogue-filters';import {displayComparator} from './lib/i18n/collation';import source from './data/workshops.json';export default {fetch(){return Response.json({support:Intl.Collator.supportedLocalesOf(['sq-AL']),ids:matchCatalogue(source.workshops,{...defaultCatalogueFilters,query:'Auto Servis X'},null,false,{},'sq').map(w=>w.id),fullIds:matchCatalogue(source.workshops,defaultCatalogueFilters,null,false,{},'sq').map(w=>w.id),options:catalogueOptions(source.workshops,'sq'),cases:${JSON.stringify(cases)}.sort(displayComparator('sq')),numericCases:${JSON.stringify(cases)}.sort(displayComparator('sq',true)),otherNames:${JSON.stringify(originalNames)}.sort(displayComparator('sq',true))});}};`,resolveDir:process.cwd()},bundle:true,write:false,format:'esm',platform:'neutral'});
+const runtime=new Miniflare({modules:true,script:worker.outputFiles[0].text,compatibilityDate:'2026-05-15'});
+try{const native=await(await runtime.dispatchFetch('https://fixture.test')).json();assert.deepEqual(native.support,[],'regression explicitly exercises native workerd without SQ ICU');assert.deepEqual(native.ids,ids,'shared catalogue path orders the current X/Xh businesses identically during SSR and client render');assert.deepEqual(native.fullIds,fullExpected,'native entire catalogue equals full-ICU reference');assert.deepEqual(native.options,options,'native complete canonical option order equals client');assert.deepEqual(native.cases,[...cases].sort(reference.compare));assert.deepEqual(native.numericCases,[...cases].sort(numericReference.compare));assert.deepEqual(native.otherNames,[...originalNames].sort(displayComparator('sq',true)),'other original names have deterministic native/client fallback');}finally{await runtime.dispose();}
+console.log('Albanian catalogue collation is deterministic across full ICU and native workerd');

@@ -11,7 +11,7 @@ globalThis.IS_REACT_ACT_ENVIRONMENT=true;
 
 const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
 const output='.test-runtime/footer-ui';
-const bundle=await build({entryPoints:['components/directory-footer.tsx'],outfile:output+'/footer.mjs',bundle:true,write:false,platform:'node',format:'esm',jsx:'automatic',packages:'external',external:['react','react/jsx-runtime'],plugins:[{name:'footer-boundaries',setup(b){
+const bundle=await build({stdin:{contents:"export {DirectoryFooter} from './components/directory-footer';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",resolveDir:process.cwd()},outfile:output+'/footer.mjs',bundle:true,write:false,platform:'node',format:'esm',jsx:'automatic',packages:'external',external:['react','react/jsx-runtime'],plugins:[{name:'footer-boundaries',setup(b){
  b.onResolve({filter:/^next\/link$/},()=>({path:'link',namespace:'fixture'}));
  b.onLoad({filter:/.*/,namespace:'fixture'},()=>({loader:'js',contents:"import {createElement} from 'react';export default function Link({href,children,...props}){return createElement('a',{...props,href},children);}"}));
  b.onResolve({filter:/\.module\.css$/},args=>({path:args.path,namespace:'css-fixture'}));
@@ -21,7 +21,7 @@ await mkdir(output,{recursive:true});
 await writeFile(output+'/footer.mjs',bundle.outputFiles[0].contents);
 const {createElement,act,useState}=await import('react');
 const {createRoot}=await import('react-dom/client');
-const {DirectoryFooter}=await import(new URL('../'+output+'/footer.mjs',import.meta.url));
+const {DirectoryFooter,I18nProvider,getMessages}=await import(new URL('../'+output+'/footer.mjs',import.meta.url));
 const changes=[];
 function ControlledFooter(){const [open,setOpen]=useState(false);return createElement(DirectoryFooter,{open,onOpenChange:value=>{changes.push(value);setOpen(value);}});}
 const root=createRoot(document.getElementById('root'));
@@ -33,7 +33,7 @@ let checks=0;
 const check=(condition,label)=>{assert(condition,label);checks++;};
 try{
  for(const [mode,Component] of [['uncontrolled',DirectoryFooter],['controlled',ControlledFooter]]){
-  await act(async()=>root.render(createElement(Component)));
+  await act(async()=>root.render(createElement(I18nProvider,{locale:'de',messages:getMessages('de',['common','public'])},createElement(Component))));
   const source=opener();
   check(source&&!source.disabled&&source.tabIndex>=0,`${mode}: the source opener is a keyboard-focusable button`);
   source.focus();

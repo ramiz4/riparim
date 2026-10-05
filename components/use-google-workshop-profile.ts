@@ -1,14 +1,17 @@
 "use client";
+import {useI18n} from "@/lib/i18n/client";
 import {useEffect,useState} from "react";
 import {currentGoogleProfile,workshopGoogleIdentity} from "@/lib/google-maps-browser";
 import {googleProfileRefreshDelay,type GoogleProfileStatus,type LiveGoogleProfile} from "@/lib/google-workshop-profile";
 
 export type GoogleWorkshopIdentity={placeId:string;browserKey:string};
 export function useGoogleWorkshopProfile(id:string){
- const [profile,setProfile]=useState<LiveGoogleProfile|null>(null),[identity,setIdentity]=useState<GoogleWorkshopIdentity|null>(null),[status,setStatus]=useState<GoogleProfileStatus>("loading"),[loadedFor,setLoadedFor]=useState(id);
+ const {locale}=useI18n();
+ const requestKey=`${id}:${locale}`;
+ const [profile,setProfile]=useState<LiveGoogleProfile|null>(null),[identity,setIdentity]=useState<GoogleWorkshopIdentity|null>(null),[status,setStatus]=useState<GoogleProfileStatus>("loading"),[loadedFor,setLoadedFor]=useState(requestKey);
  useEffect(()=>{
   // eslint-disable-next-line react-hooks/set-state-in-effect -- Reset live Google content when navigating to a different workshop; the ID guard prevents displaying the previous business.
-  setProfile(null);setIdentity(null);setStatus("loading");setLoadedFor(id);
+  setProfile(null);setIdentity(null);setStatus("loading");setLoadedFor(requestKey);
   let active=true,timer:ReturnType<typeof setTimeout>|undefined,pending=false,lastLoaded=0,nextRefresh=0;
   const refresh=async()=>{
    if(pending||document.visibilityState==="hidden")return;
@@ -17,7 +20,7 @@ export function useGoogleWorkshopProfile(id:string){
     const match=await workshopGoogleIdentity(id);if(!active)return;
     if(!match){setStatus("unavailable");return;}
     setIdentity(previous=>previous?.placeId===match.placeId&&previous.browserKey===match.browserKey?previous:match);
-    const result=await currentGoogleProfile(match.placeId,match.browserKey);if(!active)return;
+    const result=await currentGoogleProfile(match.placeId,match.browserKey,locale);if(!active)return;
     setProfile(result);setStatus("ready");lastLoaded=result.loadedAt;
     const delay=googleProfileRefreshDelay(result);nextRefresh=Date.now()+delay;
     clearTimeout(timer);timer=setTimeout(()=>void refresh(),delay);
@@ -27,6 +30,6 @@ export function useGoogleWorkshopProfile(id:string){
   const visible=()=>{if(document.visibilityState==="visible"&&(Date.now()>=nextRefresh||Date.now()-lastLoaded>300000))void refresh();};
   void refresh();document.addEventListener("visibilitychange",visible);
   return()=>{active=false;clearTimeout(timer);document.removeEventListener("visibilitychange",visible);};
- },[id]);
- return loadedFor===id?{profile,identity,status}:{profile:null,identity:null,status:"loading" as GoogleProfileStatus};
+ },[id,locale,requestKey]);
+ return loadedFor===requestKey?{profile,identity,status}:{profile:null,identity:null,status:"loading" as GoogleProfileStatus};
 }
