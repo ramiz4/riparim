@@ -1,6 +1,6 @@
 # Zentrale Werkstattdaten
 
-`data/workshops.json` ist die versionierte Quelle für Werkstattimporte. Sie enthält den exportierten aktuellen Bestand: **78 veröffentlichte Pkw-Werkstätten und 85 Entwürfe**. Der Status jedes Datensatzes ist ausdrücklich gespeichert. Die Schätzung von ungefähr 1.700 Werkstätten stammt vom Nutzer; sie ist kein recherchierter Gesamtbestand und keine Vollständigkeitsbehauptung.
+`data/workshops.json` ist die versionierte Quelle für Werkstattimporte. Sie enthält den exportierten aktuellen Bestand: **112 veröffentlichte Pkw-Werkstätten und 51 Entwürfe**. Der Status jedes Datensatzes ist ausdrücklich gespeichert. Die Schätzung von ungefähr 1.700 Werkstätten stammt vom Nutzer; sie ist kein recherchierter Gesamtbestand und keine Vollständigkeitsbehauptung.
 
 Die bisherigen getrennten Dateien für Profile und Google-Momentaufnahmen wurden in diese Quelle übernommen und entfernt. Namen, Kontakte, Quellen, Prüfzeitpunkte und stabile Riparim-Kennungen bleiben erhalten. Es werden keine Platzhalter für fehlende Werkstätten erzeugt.
 
@@ -40,6 +40,18 @@ npm run catalog:google-match -- --fetch --write --links --limit 100
 Ohne `--fetch` werden keinerlei API-Anfragen ausgeführt. Mit `--fetch` wird nach Name und Ort nur für bestehende veröffentlichte Werkstätten gesucht; höchstens 100 Such- und Detailabfragen je Lauf. Der Schlüssel wird ausschließlich aus `GOOGLE_PLACES_SERVER_API_KEY` gelesen und nie ausgegeben oder gespeichert. Ein Treffer braucht passende Telefonnummer, Name, Kosovo und Standort. Mehrdeutige Treffer werden nicht zugeordnet. Bei Authentifizierungs-, Quoten- oder Place-ID-Konflikten wird der Fehler mit Werkstattkennung protokolliert; API-Inhalte und Schlüssel erscheinen nicht im Bericht. Nur erfolgreich zugeordnete Place IDs und eigene Zuordnungszeitpunkte werden mit `--write` übernommen.
 
 Die Live-Darstellung benötigt zusätzlich `GOOGLE_MAPS_BROWSER_API_KEY`; Einrichtung und Schlüsselbeschränkungen stehen in `docs/google-places.md`.
+
+## Bestandsprüfung vom 5. Oktober 2026
+
+Alle 85 offenen Entwürfe wurden gegen den aktuellen Produktionsbestand abgeglichen. Bei 77 fehlte eine gespeicherte Place ID; die acht bereits zugeordneten Entwürfe waren sechs fachlich ausgeschlossene Einträge und zwei zurückgestellte Standortkonflikte. Doppelte Place IDs wurden nicht gefunden. Die 422-Freigabesperre ist bei fehlender eindeutiger Identität beabsichtigt; sie wurde nicht abgeschwächt.
+
+32 Entwürfe erhielten eine neue, eindeutig gegen unabhängig belegtes Telefon, charakteristischen Namen und Ort bestätigte Google-Zuordnung. Lesbare unabhängige Verzeichnisse, Betriebsanzeigen und gegebenenfalls OpenStreetMap belegen den Pkw-Service. Zwei weitere Entwürfe konnten nach Auflösung veralteter Verzeichnisadressen veröffentlicht werden: Autodiagnozas eigene Kontaktseite nennt Zona Industriale Nr. 98 und den Plus Code M42G+74; ein Betriebsbeitrag belegt ACC-/ADAS-Kalibrierung an einem Pkw. BMW Service Ferizajs eigenes Betriebsprofil nennt Brahim Ademi und einen ausdrücklich veröffentlichten Directions-Zielpunkt. Beide aktuellen Standorte liegen höchstens 300 Meter vom jeweils unverändert erhaltenen Google-Eintrag entfernt. Die Koordinaten stammen aus den unabhängigen Betriebsquellen; Kartenansichts-Mittelpunkte wurden nicht übernommen.
+
+Die **34 Freigaben sind live veröffentlicht**. Der öffentliche Bestand umfasst jetzt **112 Profile und 51 Entwürfe**, davon 21 öffentliche Profile mit genauen Koordinaten. Alle 112 veröffentlichten Profile besitzen eine eindeutige Place ID. Kennungen, Besitzrechte, private Nachweise und Riparim-Bewertungen wurden bewahrt. Vor den Datenänderungen wurde eine geschützte Sicherung der betroffenen Katalogtabellen erstellt und ihre Wiederherstellbarkeit in einer isolierten SQLite-Datenbank geprüft. Die Live-Übernahme prüfte Profilrevision und Place-ID-Konflikte; der öffentliche API-Bestand wurde anschließend mit der zentralen Quelle verglichen.
+
+**45 Entwürfe benötigen weiterhin eine bestätigte Place ID, sechs bleiben fachlich ausgeschlossen.** Bei Vedati wurden aktuelles Telefon, Adresse und belegter Google-CID-Link vorbereitet. Auto-Diagnostikas Adresse und Leistungsumfang wurden anhand der Betriebsanzeige auf reine Fehlerdiagnose korrigiert; dort sind keine Reparaturen belegt. Beide bleiben bis zur Place-ID-Auflösung als Entwurf erhalten. Opel Rakovica ist im aktuellen unabhängigen Verzeichnis als geschlossen markiert. Die serverseitigen Google-Abfragen erreichten das gemeinsame Tageslimit von 100; die Grenze wurde nicht erhöht oder umgangen. Eigene Prüfergebnisse und der Status jedes der 85 ursprünglichen Entwürfe stehen in `data/catalogue-review-2026-10-05.json`; [Issue #53](https://github.com/ramiz4/riparim/issues/53) bleibt für die offenen Zuordnungen bestehen.
+
+Google-Antworten wurden nur vorübergehend für den Identitätsvergleich verarbeitet. Dauerhaft gespeichert werden ausschließlich Place IDs und eigene Prüfmetadaten; neue Google-Sterne, Rezensionen, Öffnungszeiten oder Google-Geschäftskoordinaten wurden weder in Git noch in D1 übernommen. Es sind keine Schemaänderung und keine neue Drizzle-Migration erforderlich.
 
 ## Bestandsprüfung vom 4. Oktober 2026
 
