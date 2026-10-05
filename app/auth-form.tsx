@@ -1,4 +1,6 @@
 "use client";
+import {useNavigationGuard} from "@/lib/i18n/navigation-guard";
+import {LocaleAnchor} from "@/components/locale-anchor";
 import {useState,type FormEvent} from "react";
 import {Mail,LockKeyhole,LoaderCircle,Eye,EyeOff} from "lucide-react";
 import {SiteHeader} from "@/components/site-header";
@@ -12,13 +14,14 @@ function GoogleMark(){return <svg viewBox="0 0 48 48" width="20" height="20" ari
 
 export default function AuthForm({screen,emailReady,googleReady,isOwner,returnTo,errorHint,notice,account}:Props){
  const [error,setError]=useState(errorHint??""),[message,setMessage]=useState(""),[busy,setBusy]=useState<"email"|"google"|null>(null),[showPassword,setShowPassword]=useState(false);
+ const [dirty,setDirty]=useState(false);useNavigationGuard({dirty:dirty&&!message,busy:!!busy});
  const social=screen==="login"||screen==="register";
  async function submit(e:FormEvent<HTMLFormElement>){
   e.preventDefault();if(!emailReady||busy)return;const f=new FormData(e.currentTarget);
   if(screen==="reset"&&f.get("password")!==f.get("passwordRepeat")){setError("Die Passwörter stimmen nicht überein.");return;}
-  setBusy("email");setError("");
-  try{const r=await fetch(`/api/auth/${screen}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:f.get("email"),password:f.get("password"),returnTo})});const d=await r.json() as {error?:string;message?:string;returnTo?:string};if(!r.ok)throw Error(d.error);if(d.returnTo)window.location.assign(d.returnTo);else setMessage(d.message??"Anfrage eingereicht.");}
-  catch(e){setError(e instanceof Error?e.message:"Bitte versuche es erneut.");}finally{setBusy(null);}
+  setBusy("email");setError("");let navigating=false;
+  try{const r=await fetch(`/api/auth/${screen}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:f.get("email"),password:f.get("password"),returnTo})});const d=await r.json() as {error?:string;message?:string;returnTo?:string};if(!r.ok)throw Error(d.error);if(d.returnTo){navigating=true;window.location.assign(d.returnTo);}else setMessage(d.message??"Anfrage eingereicht.");}
+  catch(e){navigating=false;setError(e instanceof Error?e.message:"Bitte versuche es erneut.");}finally{if(!navigating)setBusy(null);}
  }
  async function google(){
   if(!googleReady||busy)return;setBusy("google");setError("");
@@ -28,18 +31,18 @@ export default function AuthForm({screen,emailReady,googleReady,isOwner,returnTo
  return <><SiteHeader account={account} isAdmin={isOwner}/><main className="auth-page"><section className="auth-card auth-compact" aria-labelledby="auth-title">
  <h1 id="auth-title">{headings[screen]}</h1><p className="auth-intro">{screen==="login"?"Deine Besuche und Bewertungen an einem Ort.":screen==="register"?"Bewerte deinen Werkstattbesuch.":screen==="recovery"?"Wir senden dir einen Link per E-Mail.":"Wähle ein Passwort mit mindestens 12 Zeichen."}</p>
  {notice&&<p className="admin-feedback" role="status">{notice}</p>}
- {message?<div className="auth-success" role="status"><Mail size={24}/><p>{message}</p><a className="outline" href={`/anmelden?weiter=${encodeURIComponent(returnTo)}`}>Zur Anmeldung</a></div>:<>
+ {message?<div className="auth-success" role="status"><Mail size={24}/><p>{message}</p><LocaleAnchor className="outline" href={`/anmelden?weiter=${encodeURIComponent(returnTo)}`}>Zur Anmeldung</LocaleAnchor></div>:<>
  {social&&<><button className="auth-google" type="button" disabled={!googleReady||!!busy} onClick={()=>void google()}>{busy==="google"?<LoaderCircle className="spin" size={20}/>:<GoogleMark/>}Mit Google fortfahren</button>{!googleReady&&<p className="auth-unavailable">Google-Anmeldung wird eingerichtet.</p>}<div className="auth-divider"><span>oder mit E-Mail</span></div></>}
- <form onSubmit={submit} className="journey-form auth-email-form">
+ <form onChange={()=>setDirty(true)} onSubmit={submit} className="journey-form auth-email-form">
  {screen!=="reset"&&<label>E-Mail<input name="email" type="email" autoComplete="email" required maxLength={254} placeholder="name@beispiel.de" disabled={!emailReady||!!busy}/></label>}
- {screen!=="recovery"&&<label><span className="auth-label-row">Passwort{screen==="login"&&<a href="/passwort-vergessen">Vergessen?</a>}</span><span className="auth-password-field"><input name="password" type={showPassword?"text":"password"} autoComplete={screen==="login"?"current-password":"new-password"} required minLength={screen==="login"?1:12} maxLength={128} placeholder={screen==="login"?"Dein Passwort":"Mindestens 12 Zeichen"} disabled={!emailReady||!!busy}/><button type="button" onClick={()=>setShowPassword(v=>!v)} aria-label={showPassword?"Passwort verbergen":"Passwort anzeigen"} aria-pressed={showPassword} disabled={!emailReady}>{showPassword?<EyeOff size={18}/>:<Eye size={18}/>}</button></span></label>}
+ {screen!=="recovery"&&<label><span className="auth-label-row">Passwort{screen==="login"&&<LocaleAnchor href="/passwort-vergessen">Vergessen?</LocaleAnchor>}</span><span className="auth-password-field"><input name="password" type={showPassword?"text":"password"} autoComplete={screen==="login"?"current-password":"new-password"} required minLength={screen==="login"?1:12} maxLength={128} placeholder={screen==="login"?"Dein Passwort":"Mindestens 12 Zeichen"} disabled={!emailReady||!!busy}/><button type="button" onClick={()=>setShowPassword(v=>!v)} aria-label={showPassword?"Passwort verbergen":"Passwort anzeigen"} aria-pressed={showPassword} disabled={!emailReady}>{showPassword?<EyeOff size={18}/>:<Eye size={18}/>}</button></span></label>}
  {screen==="reset"&&<label>Passwort wiederholen<input name="passwordRepeat" type={showPassword?"text":"password"} autoComplete="new-password" required minLength={12} maxLength={128} disabled={!emailReady||!!busy}/></label>}
  <button className="primary" disabled={!emailReady||!!busy} type="submit">{busy==="email"?<><LoaderCircle className="spin" size={17}/>Einen Moment …</>:screen==="login"?"Anmelden":screen==="register"?"Konto erstellen":screen==="recovery"?"Link senden":"Passwort speichern"}</button>
  {!emailReady&&<p className="auth-unavailable">{screen==="register"?"Die Registrierung ist derzeit noch nicht verfügbar.":screen==="recovery"?"Die Passwort-Wiederherstellung ist derzeit noch nicht verfügbar.":"E-Mail-Anmeldung wird eingerichtet."}</p>}
  </form>
  {error&&<p className="error auth-error" role="alert">{error}</p>}
- <p className="auth-switch">{screen==="login"?<>Noch kein Konto? <a href={`/registrieren?weiter=${encodeURIComponent(returnTo)}`}>Registrieren</a></>:screen==="register"?<>Schon ein Konto? <a href={`/anmelden?weiter=${encodeURIComponent(returnTo)}`}>Anmelden</a></>:<a href="/anmelden">Zur Anmeldung</a>}</p>
+ <p className="auth-switch">{screen==="login"?<>Noch kein Konto? <LocaleAnchor href={`/registrieren?weiter=${encodeURIComponent(returnTo)}`}>Registrieren</LocaleAnchor></>:screen==="register"?<>Schon ein Konto? <LocaleAnchor href={`/anmelden?weiter=${encodeURIComponent(returnTo)}`}>Anmelden</LocaleAnchor></>:<LocaleAnchor href="/anmelden">Zur Anmeldung</LocaleAnchor>}</p>
  </>}
- <div className="auth-privacy"><LockKeyhole size={14}/><p>Deine Belege bleiben privat. <a href="/datenschutz">Datenschutz</a></p></div>
+ <div className="auth-privacy"><LockKeyhole size={14}/><p>Deine Belege bleiben privat. <LocaleAnchor href="/datenschutz">Datenschutz</LocaleAnchor></p></div>
  </section></main></>;
 }

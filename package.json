@@ -8,7 +8,7 @@
   "scripts": {
     "install:ci": "node scripts/install-ci.mjs",
     "dev": "node scripts/run-framework.mjs dev",
-    "build": "node scripts/run-framework.mjs build && npm run test:client-build",
+    "build": "node scripts/run-framework.mjs build && npm run test:client-build && npm run test:i18n-worker",
     "start": "node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js dev --config dist/server/wrangler.json --local --persist-to .wrangler/state --ip 127.0.0.1 --inspector-port 0",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate",
@@ -23,7 +23,9 @@
     "repo:configure": "node scripts/configure-repository.mjs",
     "repo:check": "node scripts/configure-repository.mjs --check",
     "deploy:cloudflare": "node scripts/deploy-cloudflare.mjs",
-    "cf:types": "wrangler types cloudflare-env.d.ts --config wrangler.jsonc --include-runtime false --strict-vars false"
+    "cf:types": "wrangler types cloudflare-env.d.ts --config wrangler.jsonc --include-runtime false --strict-vars false",
+    "i18n:check": "node scripts/check-i18n.mjs",
+    "test:i18n-worker": "node tests/i18n-worker.test.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

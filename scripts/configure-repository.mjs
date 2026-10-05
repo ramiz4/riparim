@@ -18,7 +18,7 @@ if (process.argv.includes("--check")) {
   }
   const branch = github("GET", `${path}/branches/main/protection`);
   const contexts = branch.required_status_checks?.contexts ?? [];
-  if (!branch.enforce_admins?.enabled || !branch.required_pull_request_reviews || !branch.required_status_checks?.strict || !branch.required_linear_history?.enabled || !policy.main.required_status_checks.contexts.every(context => contexts.includes(context))) {
+  if (!branch.enforce_admins?.enabled || !branch.required_pull_request_reviews || branch.required_status_checks?.strict !== policy.main.required_status_checks.strict || !branch.required_linear_history?.enabled || !policy.main.required_status_checks.contexts.every(context => contexts.includes(context))) {
     throw new Error("Main branch protection does not match the policy.");
   }
   const environment = github("GET", `${path}/environments/production`);

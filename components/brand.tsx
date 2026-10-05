@@ -1,4 +1,6 @@
+"use client";
+import {useI18n} from "@/lib/i18n/client";
+import {LocaleAnchor} from "@/components/locale-anchor";
 import styles from "./brand.module.css";
 // Home remains reachable even if a client-side route transition stalls.
-// eslint-disable-next-line @next/next/no-html-link-for-pages -- This home escape deliberately uses document navigation.
-export function Brand(){return <a className="brand" href="/" aria-label="Riparim Startseite"><img className={styles.logo} src="/riparim-logo-display.png" width={512} height={195} alt="riparim"/></a>;}
+export function Brand(){const {t}=useI18n();return <LocaleAnchor className="brand" href="/" aria-label={t("common.homeLabel")}><img className={styles.logo} src="/riparim-logo-display.png" width={512} height={195} alt="riparim"/></LocaleAnchor>;}
