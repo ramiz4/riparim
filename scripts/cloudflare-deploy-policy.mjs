@@ -101,6 +101,9 @@ export function assertCloudflareDeployConfig(source, generated) {
   if (generated.no_bundle !== true || posix.normalize(generated.main ?? "") !== "index.js" || posix.normalize(generated.assets?.directory ?? "") !== "../client" || !isDeepStrictEqual(source.vars ?? {}, generated.vars ?? {}) || !isDeepStrictEqual(source.triggers ?? {}, generated.triggers ?? {})) {
     throw new Error("Generated configuration must deploy the released Worker and client assets with the checked-in runtime variables.");
   }
+  if (source.assets?.html_handling !== "none" || generated.assets?.html_handling !== "none") {
+    throw new Error("Production static assets must preserve exact HTML filenames for ownership verification.");
+  }
   if (!isDeepStrictEqual(source.routes ?? [], generated.routes ?? []) || source.workers_dev !== generated.workers_dev || source.preview_urls !== generated.preview_urls) {
     throw new Error("Generated routing and technical-host settings must match the checked-in production configuration.");
   }

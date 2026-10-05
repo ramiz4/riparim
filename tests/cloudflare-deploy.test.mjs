@@ -37,12 +37,13 @@ const source = {
   workers_dev: true,
   preview_urls: false,
   routes: [],
+  assets: { html_handling: "none" },
   triggers: {crons:["*/5 * * * *"]},
   vars: { SITE_ORIGIN: cloudflareProduction.origin },
   d1_databases: [{ binding: "DB", database_id: cloudflareProduction.database, database_name: cloudflareProduction.databaseName, migrations_dir: "drizzle", remote: false }],
   r2_buckets: [{ binding: "BUCKET", bucket_name: cloudflareProduction.bucket, remote: false }],
 };
-const generated = { ...source, main: "index.js", no_bundle: true, assets: { directory: "../client" } };
+const generated = { ...source, main: "index.js", no_bundle: true, assets: { directory: "../client", html_handling: "none" } };
 assert.doesNotThrow(() => assertCloudflareDeployContext(env, commit, commit));
 for (const change of [{ GITHUB_ACTIONS: "false" }, { GITHUB_EVENT_NAME: "pull_request" }, { GITHUB_EVENT_NAME: "workflow_dispatch" }, { GITHUB_REF: "refs/heads/codex/feature" }, { GITHUB_REPOSITORY: "someone/fork" }, { GITHUB_SHA: "b".repeat(40) }, { RELEASE_TAG: "v1.2.3-beta.1" }, { RELEASE_TAG: "v01.2.3" }, { RELEASE_TAG: "main" }]) {
   assert.throws(() => assertCloudflareDeployContext({ ...env, ...change }, commit, commit));
@@ -53,6 +54,14 @@ const checkedInConfig = JSON.parse(readFileSync(new URL("../wrangler.jsonc", imp
 assert.equal(checkedInConfig.vars.SITE_ORIGIN, cloudflareProduction.origin);
 assert.equal(checkedInConfig.workers_dev, true, "the protected final transfer still needs its technical host");
 assert.equal(checkedInConfig.preview_urls, false);
+assert.equal(checkedInConfig.assets.html_handling, "none");
+for (const html_handling of [undefined, "auto-trailing-slash", "force-trailing-slash", "drop-trailing-slash"]) {
+  const input = { ...source, assets: { html_handling } };
+  const output = { ...generated, assets: { ...generated.assets, html_handling } };
+  for (const [a, b] of [[input, generated], [source, output], [input, output]]) {
+    assert.throws(() => assertCloudflareDeployConfig(a, b), /exact HTML filenames/);
+  }
+}
 // The final routing release binds only the two approved production hosts.
 // Source/generated agreement must not authorize a foreign or wider route.
 const productionRoutes = [
