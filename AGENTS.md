@@ -5,6 +5,13 @@ Diese Regeln gelten für das gesamte Repository. Lies vor einer neuen Aufgabe
 Commit-/Release-Konventionen. Lies zusätzliche `AGENTS.md` im betroffenen Teilbaum
 vor dessen Bearbeitung.
 
+## Issues autonom ausführen
+
+Bei `Execute Issue <NUMMER>` lies [docs/issue-execution.md](docs/issue-execution.md)
+und führe den dort definierten Ablauf vollständig aus. Er regelt Rollenwahl,
+TDD, unabhängige Reviews und den Abschluss mit geprüftem PR, Merge und
+geschlossenem Issue.
+
 ## Aufgabenstart und Isolation
 
 1. Ermittle mit `git worktree list --porcelain` den primären Checkout und bestehende
