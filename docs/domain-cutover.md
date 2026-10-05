@@ -10,8 +10,8 @@ Prüfsummen, Ressourcenkennungen und Prüfergebnisse.
 
 Der tatsächlich ausgeführte Wechsel vom 5. Oktober und seine technischen
 Prüfergebnisse stehen im [Abnahmebericht](domain-cutover-2026-10-05.md).
-Die dort noch offene Nutzerabnahme und Beobachtungsphase werden durch diese
-Durchführungsanleitung nicht ersetzt.
+Die dort nachgewiesene technische Betreiberabnahme und die gesonderte,
+noch offene Rückfallphase für #20 werden getrennt behandelt.
 
 ## Ausgangslage und Verantwortung
 
@@ -222,13 +222,20 @@ abgegrenzte Testdaten; anschließend Bereinigung nachweisen.
   derselben Produktionsdomain, unveränderte Bindings/Routes, nachvollziehbarer
   Release-Commit und Archiv-SHA-256. Wiederholung nutzt exakt denselben Release.
 
-Die Beobachtungsdauer wird vor Abschluss mit dem Nutzer festgehalten, mit
-konkretem Start und Ende. Sie ist noch nicht vereinbart und wird hier nicht
-erfunden. Der Abschlussbericht nennt tatsächlich beobachtete Fehler und die
-durchgeführten Fachabläufe. #19 wird erst nach dieser nachgewiesenen Abnahme
-geschlossen. #20 beginnt erst nach abgeschlossener Beobachtung, Nutzerabnahme
-und bestätigter Sicherung; erhaltene Rückfallressourcen sind bis dahin keine
-zweite Schreibquelle.
+Der beauftragte Betreiber führt die technische Abnahme aus und dokumentiert
+den tatsächlich beobachteten Zeitraum mit konkretem Start, Ende, Prüfkriterien
+und Ergebnis. Der Abschlussbericht nennt beobachtete Fehler, ihre geprüften
+Korrekturen und die durchgeführten Fachabläufe. #19 wird nach dieser
+nachgewiesenen technischen Betreiberabnahme geschlossen.
+
+Die gesonderte Rückfallphase für #20 bleibt davon unabhängig. Ihr vereinbartes
+Ende und die Entscheidung zur Stilllegung werden ausdrücklich dokumentiert,
+bevor Veröffentlichung, Domainzuordnungen, Hintergrundabläufe oder alte Zugänge
+deaktiviert werden. Eine vorgeschlagene Frist gilt nicht als vereinbartes Ende.
+Inventar, geschütztes Archiv und ein reviewbarer Stilllegungsplan können bereits
+bei eingefrorener Quelle vorbereitet werden. Rückfallressourcen bleiben bis zur
+Freigabe erhalten und sind keine zweite Schreibquelle. Eine endgültige
+Ressourcenlöschung benötigt nach Ablauf der Aufbewahrung eine separate Freigabe.
 
 ## Wiederherstellung nach dem Routingwechsel
 
@@ -254,4 +261,5 @@ vernichten.
 Der Abnahmebericht hält mindestens Release/Commit/Archivhash und Deployment,
 DNS-/TLS-/Routing-Nachweise, angekündigte und tatsächliche Zeiten, geschützte
 Backup-/Delta-Referenzen, Go/No-Go mit Verantwortlichem, Fachprüfungen,
-Beobachtungszeitraum, Nutzerabnahme und verbleibende Arbeit für #20 fest.
+technischen Beobachtungszeitraum, Betreiberabnahme und den gesonderten Stand
+der Rückfallphase sowie verbleibende Arbeit für #20 fest.
