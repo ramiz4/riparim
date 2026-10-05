@@ -13,10 +13,12 @@ assert.equal(stats.pendingPublishedMatches,0);
 const research=JSON.parse(await readFile('data/catalogue-review-2026-10-04.json','utf8'));
 const latestResearch=JSON.parse(await readFile('data/catalogue-review-2026-10-05.json','utf8'));
 const followupResearch=JSON.parse(await readFile('data/catalogue-followup-2026-10-05.json','utf8'));
-const effectiveAssessments=new Map([...latestResearch.draftAssessments,...followupResearch.draftAssessments].map(proof=>[proof.workshopId,proof]));
+const identityResearch=JSON.parse(await readFile('data/catalogue-identity-2026-10-05.json','utf8'));
+const effectiveAssessments=new Map([...latestResearch.draftAssessments,...followupResearch.draftAssessments,...identityResearch.draftAssessments].map(proof=>[proof.workshopId,proof]));
 const importManifest=JSON.parse(await readFile('data/import-2026-10-03.json','utf8'));
 const expectedCatalogueIds=new Set([...research.draftAssessments.map(proof=>proof.workshopId),...importManifest.importedWorkshopIds,...importManifest.originalPublishedWorkshopIds]);
 assert.deepEqual(new Set(catalogue.workshops.map(w=>w.id)),expectedCatalogueIds,'draft review preserves every existing workshop ID and adds no profiles');
+assert.equal(catalogue.workshops.length,163);assert.equal(new Set(catalogue.workshops.map(w=>w.id)).size,catalogue.workshops.length,'all existing workshop IDs remain unique');
 const expectedReviewIds=new Set([...research.draftAssessments.filter(proof=>proof.assessment!=='candidate').map(proof=>proof.workshopId),...research.coordinateChecks.filter(proof=>!proof.confirmed).map(proof=>proof.id)]);
 assert.equal(latestResearch.reviewedDrafts,85);
 assert.equal(latestResearch.draftAssessments.length,85);
@@ -41,17 +43,49 @@ for(const proof of latestResearch.draftAssessments){
 assert.equal(followupResearch.reviewedDrafts,51);assert.equal(followupResearch.draftAssessments.length,51);
 assert.deepEqual(new Set(followupResearch.draftAssessments.map(proof=>proof.workshopId)),new Set(latestResearch.draftAssessments.filter(proof=>proof.resultingStatus==='draft').map(proof=>proof.workshopId)),'every remaining draft is assessed exactly once');
 assert.deepEqual(followupResearch.before,latestResearch.after,'the follow-up preserves the initial review as historical evidence');
-assert.equal(followupResearch.after.published,stats.published);assert.equal(followupResearch.after.drafts,stats.drafts);
 const followupPromotions=followupResearch.draftAssessments.filter(proof=>proof.assessment==='published').length;
-assert.equal(stats.published,followupResearch.before.published+followupPromotions,'all previously public profiles remain published');
-assert.equal(stats.drafts,followupResearch.before.drafts-followupPromotions);
+assert.equal(followupResearch.after.published,followupResearch.before.published+followupPromotions,'the historical follow-up retains its own totals');
+assert.equal(followupResearch.after.drafts,followupResearch.before.drafts-followupPromotions);
 assert.deepEqual(followupResearch.draftSummary,{published:followupPromotions,needsIdentity:followupResearch.draftAssessments.filter(proof=>['needs_identity','identity_conflict'].includes(proof.assessment)).length,branchConflicts:followupResearch.draftAssessments.filter(proof=>proof.assessment==='branch_conflict').length,closed:followupResearch.draftAssessments.filter(proof=>proof.assessment==='closed').length,excluded:followupResearch.draftAssessments.filter(proof=>proof.assessment==='excluded').length});
 assert.equal(followupResearch.googleApiRequests,0,'individual Maps verification does not bypass the exhausted server quota');
-for(const proof of followupResearch.draftAssessments){
+assert.deepEqual(identityResearch.before,followupResearch.after,'the third review continues the historical 51-draft follow-up');
+assert.deepEqual(identityResearch.before,{published:125,drafts:38});
+assert.equal(identityResearch.reviewedDrafts,30);assert.equal(identityResearch.draftAssessments.length,30);
+const expectedIdentityReviewIds=new Set(followupResearch.draftAssessments.filter(proof=>['needs_identity','identity_conflict'].includes(proof.assessment)).map(proof=>proof.workshopId));
+assert.equal(expectedIdentityReviewIds.size,30);
+assert.deepEqual(new Set(identityResearch.draftAssessments.map(proof=>proof.workshopId)),expectedIdentityReviewIds,'the third review assesses each unresolved identity exactly once');
+const identityPromotions=identityResearch.draftAssessments.filter(proof=>proof.assessment==='published').length;
+const unchangedDrafts=followupResearch.draftAssessments.filter(proof=>proof.resultingStatus==='draft'&&!expectedIdentityReviewIds.has(proof.workshopId));
+assert.equal(identityPromotions,3);assert.equal(unchangedDrafts.length,8);
+assert.deepEqual(identityResearch.draftSummary,{published:identityPromotions,needsIdentity:identityResearch.draftAssessments.filter(proof=>['needs_identity','identity_conflict'].includes(proof.assessment)).length,otherUnchangedDrafts:unchangedDrafts.length});
+assert.equal(identityResearch.draftSummary.needsIdentity,27);
+assert.deepEqual(identityResearch.after,{published:128,drafts:35});
+assert.equal(stats.published,identityResearch.before.published+identityPromotions,'all previously public profiles remain published');
+assert.equal(stats.drafts,identityResearch.before.drafts-identityPromotions);
+assert.equal(identityResearch.after.published,stats.published);assert.equal(identityResearch.after.drafts,stats.drafts);
+assert.equal(identityResearch.googleApiRequests,0,'the third review does not bypass the exhausted server quota');assert.equal(identityResearch.dailyRequestLimit,100);
+for(const proof of unchangedDrafts){
+ assert.equal(catalogue.workshops.find(w=>w.id===proof.workshopId).status,'draft','branch conflicts, closed businesses and scope exclusions remain private');
+ assert.equal(effectiveAssessments.get(proof.workshopId),proof,'the third review does not reassess unrelated drafts');
+}
+for(const proof of identityResearch.draftAssessments){
+ assert(['published','needs_identity','identity_conflict'].includes(proof.assessment));
+ if(proof.assessment==='published'){
+  const workshop=catalogue.workshops.find(w=>w.id===proof.workshopId);
+  assert.equal(workshop.google.snapshot.rating,null,'a new identity does not invent a Google rating');assert.equal(workshop.google.snapshot.count,null,'a new identity does not invent a review count');
+  for(const [field,value] of Object.entries(proof.profileCorrection??{}))assert.deepEqual(workshop[field],value,'only independently sourced profile corrections are applied');
+  if(proof.independentMapMarker){
+   assert.equal(proof.independentMapMarker.within300m,true);
+   assert(workshop.sources.some(source=>source.url===proof.independentMapMarker.sourceUrl),'the original precise marker remains an independent profile source');
+   assert(new URL(proof.independentMapMarker.sourceUrl).pathname.endsWith('/'+proof.independentMapMarker.markerAlt),'the business marker belongs to the promoted profile');
+  }
+ }
+}
+for(const proof of [...followupResearch.draftAssessments,...identityResearch.draftAssessments]){
  const workshop=catalogue.workshops.find(w=>w.id===proof.workshopId);
  assert(['published','needs_identity','identity_conflict','branch_conflict','closed','excluded'].includes(proof.assessment));
  assert.equal(proof.resultingStatus,proof.assessment==='published'?'published':'draft');
- assert.equal(workshop.status,proof.resultingStatus);
+ assert.equal(workshop.status,effectiveAssessments.get(proof.workshopId).resultingStatus,'a later positive identity review determines the current status');
  if(proof.assessment==='published'){
   const identity=proof.googleIdentity;
   assert(proof.sourceUrls.length>0,'a promotion retains independent sources');
@@ -103,6 +137,7 @@ for(const proof of research.coordinateChecks){
 }
 assert(catalogue.workshops.filter(w=>w.status==='published').every(w=>w.google.placeId&&w.google.matchedAt),'every public entry has a stable identity independently of ratings');
 const publicPlaceIds=catalogue.workshops.filter(w=>w.status==='published').map(w=>w.google.placeId);assert.equal(new Set(publicPlaceIds).size,publicPlaceIds.length,'public profiles have distinct Google identities');
+const allPlaceIds=catalogue.workshops.map(w=>w.google.placeId).filter(Boolean);assert.equal(new Set(allPlaceIds).size,allPlaceIds.length,'draft and public profiles never share a Google identity');
 const unconfirmed=structuredClone(catalogue);unconfirmed.workshops.find(w=>w.status==='draft'&&!w.google.placeId).status='published';
 assert.throws(()=>validateWorkshopCatalogue(unconfirmed),/bestätigte Google-Zuordnung/);
 const trucks=structuredClone(catalogue);trucks.workshops.find(w=>w.id==='auto-ballkan-gjilan').status='published';
@@ -146,4 +181,4 @@ const large=Array.from({length:1700},(_,i)=>({...structuredClone(base),id:`fixtu
 const largeImport=mergeWorkshopCatalogue(catalogue,large);
 assert.equal(largeImport.report.added.length,1700);assert.equal(largeImport.catalogue.workshops.length,catalogue.workshops.length+1700);
 assert.equal(mergeWorkshopCatalogue(largeImport.catalogue,large).report.added.length,0,'repeat bulk import is idempotent');
-console.log(JSON.stringify({publicSource:stats.published,draftsPreserved:stats.drafts,reviewedDrafts:latestResearch.reviewedDrafts,followupDrafts:followupResearch.reviewedDrafts,duplicateDetection:true,googleRatingsSeparate:true,bulkFixture:1700,actualGoogleRequests:0}));
+console.log(JSON.stringify({publicSource:stats.published,draftsPreserved:stats.drafts,reviewedDrafts:latestResearch.reviewedDrafts,followupDrafts:followupResearch.reviewedDrafts,identityDrafts:identityResearch.reviewedDrafts,identityPromotions,duplicateDetection:true,googleRatingsSeparate:true,bulkFixture:1700,actualGoogleRequests:0}));
