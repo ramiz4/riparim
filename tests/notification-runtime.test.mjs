@@ -6,10 +6,10 @@ import {Miniflare} from 'miniflare';
 // Exercise the real Worker scheduled handler and D1 implementation. Every
 // provider request is intercepted inside the isolated Worker, not sent online.
 let passed=0;
-for(const workerPath of ['./build/sites-worker','./build/cloudflare-worker']){
+for(const locale of ['de','sq','en'])for(const workerPath of ['./build/sites-worker','./build/cloudflare-worker']){
 const bundled=await build({stdin:{contents:`import worker from '${workerPath}';import {env} from 'cloudflare:workers';globalThis.fetch=async(input,init)=>{if(String(input)!=='https://api.resend.com/emails')throw Error('Live provider access is forbidden in fixtures');const key=init.headers['Idempotency-Key'];await env.DB.prepare('INSERT OR IGNORE INTO fixture_sends (id,payload) VALUES (?,?)').bind(key,init.body).run();return Response.json({id:'fixture-provider-accepted'});};export default worker;`,resolveDir:process.cwd(),loader:'ts'},bundle:true,write:false,format:'esm',platform:'neutral',external:['cloudflare:workers','node:async_hooks'],define:{'import.meta.env.DEV':'false'},plugins:[{name:'scheduled-fixtures',setup(b){
  b.onResolve({filter:/^(vinext\/server\/fetch-handler|@\/app\/auth|@\/lib\/auth\/admin)$/},args=>({path:args.path,namespace:'fixture'}));
- b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',contents:args.path==='vinext/server/fetch-handler'?'export default {fetch(){return new Response("isolated fixture");}}':args.path==='@/app/auth'?"export function providerAccountId(url,id){return 'supabase:'+new URL(url).hostname+':'+id;}":"export async function getAuthAdmin(){return {projectUrl:'https://fixture-project.supabase.co',client:{auth:{admin:{getUserById:async id=>({data:{user:{id,email:'fixture@example.test',email_confirmed_at:'2026-10-04'}},error:null})}}}};}"}));
+ b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',contents:args.path==='vinext/server/fetch-handler'?'export default {fetch(){return new Response("isolated fixture");}}':args.path==='@/app/auth'?"export function providerAccountId(url,id){return 'supabase:'+new URL(url).hostname+':'+id;}":`export async function getAuthAdmin(){return {projectUrl:'https://fixture-project.supabase.co',client:{auth:{admin:{getUserById:async id=>({data:{user:{id,email:'fixture@example.test',email_confirmed_at:'2026-10-04',user_metadata:{preferred_locale:${JSON.stringify(locale)}}}},error:null})}}}};}`}));
 }}]});
 const runtime=new Miniflare({modules:true,unsafeTriggerHandlers:true,script:bundled.outputFiles[0].text,compatibilityDate:'2026-05-15',compatibilityFlags:['nodejs_compat'],d1Databases:['DB'],r2Buckets:['BUCKET'],bindings:{SITE_ORIGIN:'https://riparim.example.test',RESEND_API_KEY:'re_fixture_runtime_key',TRANSACTIONAL_EMAIL_FROM:'Riparim <no-reply@auth.example.test>'}});
 try{
@@ -30,6 +30,8 @@ try{
  const payload=JSON.parse((await db.prepare('SELECT payload FROM fixture_sends').first()).payload);
  assert.equal(payload.to[0],'fixture@example.test');passed++;
  assert(!payload.text.includes('Fixture Car'));passed++;
+ assert(payload.html.includes('lang="'+locale+'"'));passed++;
+ const link=new URL(payload.text.match(/https:\/\/[^\s]+/)[0]);assert.equal(link.pathname,(locale==='de'?'':'/'+locale)+'/anmelden');passed++;
  await runtime.dispatchFetch('http://127.0.0.1/cdn-cgi/handler/scheduled?cron=*+*+*+*+*');
  assert.equal((await db.prepare('SELECT COUNT(*) AS n FROM fixture_sends').first()).n,1);passed++;
 }finally{await runtime.dispose();}

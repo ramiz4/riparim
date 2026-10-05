@@ -4,6 +4,7 @@ import {getAuthAdmin} from "@/lib/auth/admin";
 import {getAuthConfig} from "@/lib/auth/config";
 import {providerAccountId} from "@/app/auth";
 import {accountBlocked,providerBlocked} from "@/lib/auth/account-status";
+import {callbackLocale} from "@/lib/auth/locale";
 import {validUserId} from "@/lib/admin-users";
 import {DeliveryError,deliveryPayloadSchema,emailConfiguration,reviewEmail,sendReviewEmail} from "./email";
 import type {NotificationRow,NotificationView} from "./contract";
@@ -27,7 +28,7 @@ async function recipient(owner:string){
  if(result.error){if(result.error.status===401||result.error.status===403)throw new DeliveryError("auth_configuration_missing",false);if(result.error.status===404)throw new DeliveryError("no_verified_contact",false);throw new DeliveryError("provider_unavailable",true);}
  if(!user||user.id!==id||!user.email_confirmed_at||!user.email||!deliveryPayloadSchema.shape.to.element.safeParse(user.email).success||user.email.length>254)throw new DeliveryError("no_verified_contact",false);
  if(providerBlocked(user))throw new DeliveryError("account_blocked",false);
- return user.email;
+ return {email:user.email,locale:callbackLocale(user.user_metadata?.preferred_locale)};
 }
 async function stillCurrent(row:NotificationRow){
  if(await accountBlocked(row.owner))return false;
@@ -41,20 +42,23 @@ async function deliver(row:NotificationRow){
   if(!withinWindow(row)){await setState(row,"unknown","idempotency_window_expired");return;}
   if(!await stillCurrent(row)){await setState(row,"suppressed","superseded");return;}
   const config=emailConfiguration();if(!config)throw new DeliveryError("configuration_missing",false);
-  const email=await recipient(row.owner),fingerprint=await keyHash(config.key);
-  let payload;
+  const contact=await recipient(row.owner),fingerprint=await keyHash(config.key);
+  let body:string;
   if(row.first_attempt_at!==null){
    if(row.provider_key_hash!==fingerprint)throw new DeliveryError("credential_changed",false);
    let stored:unknown;try{stored=row.payload?JSON.parse(row.payload):null;}catch{throw new DeliveryError("invalid_payload",false);}
    const parsed=deliveryPayloadSchema.safeParse(stored);if(!parsed.success)throw new DeliveryError("invalid_payload",false);
-   payload=parsed.data;if(payload.to[0]!==email)throw new DeliveryError("recipient_changed",false);
-  }else payload=reviewEmail(row.decision,row.visit_id,config.from,email);
+   if(parsed.data.to[0]!==contact.email)throw new DeliveryError("recipient_changed",false);
+   // Validate stored content without reserializing it: historical ordering and
+   // whitespace also belong to the provider idempotency request.
+   body=row.payload!;
+  }else body=JSON.stringify(reviewEmail(row.decision,row.visit_id,config.from,contact.email,contact.locale));
   // Freeze the exact payload and credential scope before the first provider
   // call. A lost acknowledgement must retry the same idempotent request.
   if(!await stillCurrent(row)){await setState(row,"suppressed","superseded");return;}
-  const committed=await storage().db.prepare("UPDATE review_notifications SET payload=?,provider_key_hash=?,first_attempt_at=COALESCE(first_attempt_at,?) WHERE id=? AND lease_token=? AND state='sending'").bind(JSON.stringify(payload),fingerprint,Date.now(),row.id,row.lease_token).run();
+  const committed=await storage().db.prepare("UPDATE review_notifications SET payload=?,provider_key_hash=?,first_attempt_at=COALESCE(first_attempt_at,?) WHERE id=? AND lease_token=? AND state='sending'").bind(body,fingerprint,Date.now(),row.id,row.lease_token).run();
   if(!committed.meta.changes)return;
-  const providerId=await sendReviewEmail(payload,config.key,row.id);
+  const providerId=await sendReviewEmail(body,config.key,row.id);
   await storage().db.prepare("UPDATE review_notifications SET state='sent',provider_id=?,payload=NULL,last_error=NULL,lease_until=NULL,lease_token=NULL WHERE id=? AND lease_token=? AND state='sending'").bind(providerId,row.id,row.lease_token).run();
  }catch(error){
   const code=error instanceof DeliveryError?error.code:"provider_unavailable",retry=error instanceof DeliveryError?error.retryable:true;

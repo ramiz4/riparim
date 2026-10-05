@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {renderAuthEmails} from './helpers/auth-email-render.mjs';
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createRequire} from 'node:module';
 import {DatabaseSync} from 'node:sqlite';
@@ -161,8 +162,8 @@ method='password';sessionId='email-confirmation';
 registration=await post('register',{email:'confirmation@example.test',password:'fixture-password-123',returnTo:reviewDestination});
 check(registration.status===200,'Email registration begins the confirmation journey');
 function emailLink(template,redirectTo,token){
- const rendered=template.replace('{{ .RedirectTo }}',redirectTo).replace('{{ .TokenHash }}',token).replaceAll('&amp;','&');
- return new URL(rendered.match(/href="([^"]+)"/)[1]);
+ const [{body}]=renderAuthEmails([{Subject:template===templates.recoveryEmailTemplate?templates.recoveryEmailSubject:templates.confirmationEmailSubject,Body:template,Data:{SiteURL:origin,RedirectTo:redirectTo,TokenHash:token}}]);
+ return new URL(body.match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));
 }
 let link=emailLink(templates.confirmationEmailTemplate,lastSignup.options.emailRedirectTo,'fixture-confirmation-token');
 check(link.origin===origin&&link.pathname==='/auth/bestaetigen'&&link.searchParams.get('weiter')===reviewDestination,'Rendered signup email preserves profile, filters and review anchor');
@@ -265,7 +266,8 @@ for(const locale of ['de','sq','en']){
  check(r.ok&&(await r.json()).messageCode==='confirm_email'&&lastSignup.options.data.preferred_locale===locale,'Signup stores only the validated presentation preference');
  const confirmation=new URL(lastSignup.options.emailRedirectTo);
  check([...confirmation.searchParams.keys()].join(',')==='locale,weiter'&&confirmation.searchParams.get('locale')===locale&&confirmation.searchParams.get('weiter')===target,'Canonical locale-first confirmation retains the safe target and explicit locale wins');
- r=await callbackRequest({locale,token_hash:'localized-signup-token',type:'signup',weiter:'/sq/werkstatt/fixture-workshop?suche=wartung#bewerten'});
+ const localizedConfirmation=emailLink(templates.confirmationEmailTemplate,confirmation.href,'localized-signup-token');
+ r=await callback.GET(new Request(localizedConfirmation));
  let destination=new URL(r.headers.get('Location'));
  check(destination.pathname===prefix+'/anmelden'&&destination.searchParams.get('weiter')===target,'Signup verification stays in the chosen language');
  const invalidEmail=await post('login',{locale,email:'invalid',password:'fixture-password-123'});check(invalidEmail.status===400&&(await invalidEmail.json()).errorCode==='invalid_email','Auth error codes and statuses stay identical across locales');
@@ -273,6 +275,9 @@ for(const locale of ['de','sq','en']){
  check(r.ok&&(await r.json()).returnTo===target,'Localized separate login resumes the review target');
  r=await post('recovery',{locale,email:'localized-recovery-'+locale+'@example.test'});
  check(r.ok&&new URL(lastRecovery.options.redirectTo).searchParams.get('weiter')===prefix+'/passwort-neu','Recovery uses a localized reset page without metadata writes');
+ const localizedRecovery=emailLink(templates.recoveryEmailTemplate,lastRecovery.options.redirectTo,'localized-recovery-token');
+ r=await callback.GET(new Request(localizedRecovery));
+ check(lastOtp.type==='recovery'&&lastOtp.token_hash==='localized-recovery-token','Rendered localized recovery email reaches the original token verifier');
  r=await callbackRequest({locale,code:'localized-pkce-code',weiter:prefix+'/passwort-neu?source=email'});
  check(new URL(r.headers.get('Location')).pathname===prefix+'/passwort-neu','PKCE reset comparison ignores locale prefix and query');
  r=await post('reset',{locale,password:'fixture-new-password-123'});
