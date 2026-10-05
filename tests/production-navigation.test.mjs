@@ -126,7 +126,12 @@ try {
   assert.equal(navigation.mode, "replace", "Replace links retain their history mode.");
   assert.equal(window.location.pathname + window.location.search, "/werkstaetten?ort=prizren");
 
-  anchor = render({ href: "/einstellungen?prefetch=fixture", prefetch: true });
+  for (const locale of ["sq", "en"]) {
+    anchor = render({ href: `/${locale}/werkstaetten?ort=prizren&sprache=sq#bewertungen`, prefetch: false });
+    navigation = await click(anchor, {detail:0});
+    assert.equal(navigation.href, `/${locale}/werkstaetten?ort=prizren&sprache=sq#bewertungen`, "The actual bundled Link retains locale, canonical filters and hash");
+  }
+  anchor = render({ href: "/en/einstellungen?prefetch=fixture", prefetch: true });
   await waitFor(() => [...observers].some(observer => observer.targets.has(anchor)), "Production Link registers viewport prefetch");
   for (const observer of observers) {
     if (observer.targets.has(anchor)) observer.callback([{ target: anchor, isIntersecting: true, intersectionRatio: 1 }]);
@@ -134,14 +139,14 @@ try {
   await waitFor(() => requests.length > 0, "Viewport prefetch reaches the local request fixture");
   assert(requests.every(request => request.options.purpose === "prefetch"), "Only speculative fixture requests are sent.");
   for (const { url, options } of requests) {
-    assert.equal(url.pathname, "/einstellungen");
+    assert.equal(url.pathname, "/en/einstellungen");
     assert.equal(url.searchParams.get("prefetch"), "fixture", "Prefetch preserves the target query.");
     assert.equal(new Headers(options.headers).get("RSC"), "1", "Prefetch uses the RSC request contract.");
     assert.equal(new Headers(options.headers).get("Accept"), "text/x-component");
   }
   await new Promise(resolve => setTimeout(resolve, 20));
   navigation = await click(anchor);
-  assert.equal(navigation.href, "/einstellungen?prefetch=fixture", "Failed prefetch preserves intentional navigation.");
+  assert.equal(navigation.href, "/en/einstellungen?prefetch=fixture", "Failed prefetch preserves intentional navigation.");
   assert.deepEqual(errors, [], "Prefetch setup and navigation have no production runtime errors.");
   console.log("Production navigation: bundled Link push/replace, keyboard activation, modified click and viewport prefetch failure passed; no live requests executed.");
 } finally {

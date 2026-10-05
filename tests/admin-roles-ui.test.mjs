@@ -12,7 +12,7 @@ globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
 
 const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
 const output='.test-runtime/admin-roles-ui';
-const bundle=await build({entryPoints:['app/verwaltung/benutzer/users.tsx'],outfile:output+'/users.mjs',bundle:true,write:false,platform:'node',format:'esm',packages:'external',loader:{'.css':'empty'},plugins:[{name:'page-shell-boundaries',setup(b){
+const bundle=await build({entryPoints:['app/[locale]/verwaltung/benutzer/users.tsx'],outfile:output+'/users.mjs',bundle:true,write:false,platform:'node',format:'esm',packages:'external',loader:{'.css':'empty'},plugins:[{name:'page-shell-boundaries',setup(b){
  b.onResolve({filter:/^(next\/link|@\/components\/site-header|@\/components\/admin-navigation)$/},args=>({path:args.path,namespace:'fixture'}));
  b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',resolveDir:process.cwd(),contents:args.path==='next/link'?`import React from 'react';export default function Link({children,href,...props}){return React.createElement('a',{...props,href},children);}`:args.path.includes('site-header')?'export function SiteHeader(){return null;}':'export function AdminNavigation(){return null;}'}));
 }}]});

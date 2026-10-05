@@ -1,4 +1,6 @@
 "use client";
+import {useNavigationGuard} from "@/lib/i18n/navigation-guard";
+import {LocaleAnchor} from "@/components/locale-anchor";
 
 import {useCallback,useEffect,useRef,useState} from "react";
 import {notificationErrorLabels,notificationStateLabels,type NotificationView} from "@/lib/notifications/contract";
@@ -6,6 +8,7 @@ import {notificationErrorLabels,notificationStateLabels,type NotificationView} f
 type Queue={notifications:NotificationView[];nextCursor:string|null;configured:boolean;error?:string};
 export function NotificationStatus({refreshKey=0}:{refreshKey?:number}){
  const [queue,setQueue]=useState<Queue|null>(null),[loading,setLoading]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(""),[feedback,setFeedback]=useState("");
+ useNavigationGuard({busy});
  const current=useRef<Queue|null>(null),generation=useRef(0),controller=useRef<AbortController|null>(null),expanded=useRef(false);
  const load=useCallback(async(append=false)=>{
   if(!append)expanded.current=false;else expanded.current=true;
@@ -35,6 +38,6 @@ export function NotificationStatus({refreshKey=0}:{refreshKey?:number}){
   {error&&<p className="error" role="alert">{error}</p>}{feedback&&<p className="admin-feedback" role="status">{feedback}</p>}
   {loading&&!queue&&<p role="status">Versandübersicht wird geladen …</p>}
   {queue&&!queue.configured&&<p className="note">Der serverseitige E-Mail-Versand ist noch nicht eingerichtet. Moderationsentscheidungen bleiben gespeichert; die Benachrichtigungen warten auf die Einrichtung.</p>}
-  {queue&&<><div className="notification-list">{queue.notifications.map(item=><article key={item.id} className="notification-entry"><div><h3>{item.workshopName}</h3><p>{item.decision==="published"?"Bewertungsfreigabe":"Nachweisergänzung"} · {notificationStateLabels[item.state]}</p>{item.error&&<p className="notification-reason">{notificationErrorLabels[item.error]??"Der Versand benötigt eine Prüfung durch die Verwaltung."}</p>}<p className="help">{item.attempts} {item.attempts===1?"Versandprüfung":"Versandprüfungen"}{item.state==="pending"?` · Nächste Prüfung ab ${new Date(item.nextAttemptAt).toLocaleString("de-DE",{timeZone:"Europe/Belgrade"})}`:""}</p><a className="text-action" href={`/verwaltung/bewertungen?einreichung=${encodeURIComponent(item.visitId)}`}>Zugehörige Einreichung prüfen</a></div><button className="outline small" disabled={busy||loading||!item.retryable} onClick={()=>void retry(item.id)}>Benachrichtigung erneut prüfen</button></article>)}</div>{!loading&&!queue.notifications.length&&<p>Keine offenen Versandereignisse. Erfolgreich an den Versanddienst übergebene Nachrichten sind hier nicht mehr aufgeführt; dies bestätigt noch keine Zustellung.</p>}{queue.nextCursor&&<button className="outline small" disabled={busy||loading} onClick={()=>void load(true)}>Weitere Versandereignisse laden</button>}<button className="outline small" disabled={busy||loading||!queue.configured} onClick={()=>void retry()}>Fällige Benachrichtigungen prüfen</button></>}
+  {queue&&<><div className="notification-list">{queue.notifications.map(item=><article key={item.id} className="notification-entry"><div><h3>{item.workshopName}</h3><p>{item.decision==="published"?"Bewertungsfreigabe":"Nachweisergänzung"} · {notificationStateLabels[item.state]}</p>{item.error&&<p className="notification-reason">{notificationErrorLabels[item.error]??"Der Versand benötigt eine Prüfung durch die Verwaltung."}</p>}<p className="help">{item.attempts} {item.attempts===1?"Versandprüfung":"Versandprüfungen"}{item.state==="pending"?` · Nächste Prüfung ab ${new Date(item.nextAttemptAt).toLocaleString("de-DE",{timeZone:"Europe/Belgrade"})}`:""}</p><LocaleAnchor className="text-action" href={`/verwaltung/bewertungen?einreichung=${encodeURIComponent(item.visitId)}`}>Zugehörige Einreichung prüfen</LocaleAnchor></div><button className="outline small" disabled={busy||loading||!item.retryable} onClick={()=>void retry(item.id)}>Benachrichtigung erneut prüfen</button></article>)}</div>{!loading&&!queue.notifications.length&&<p>Keine offenen Versandereignisse. Erfolgreich an den Versanddienst übergebene Nachrichten sind hier nicht mehr aufgeführt; dies bestätigt noch keine Zustellung.</p>}{queue.nextCursor&&<button className="outline small" disabled={busy||loading} onClick={()=>void load(true)}>Weitere Versandereignisse laden</button>}<button className="outline small" disabled={busy||loading||!queue.configured} onClick={()=>void retry()}>Fällige Benachrichtigungen prüfen</button></>}
  </section>;
 }

@@ -1,4 +1,5 @@
 "use client";
+import {LocaleAnchor} from "@/components/locale-anchor";
 import {useEffect,useRef,useState} from "react";
 import {loadGooglePlaces} from "@/lib/google-maps-browser";
 import type {LiveGoogleRating} from "@/lib/google-maps-browser";
@@ -21,5 +22,5 @@ export function GooglePlaceReviews({workshop,identity,liveRating,status}:{worksh
   })().catch(fail);
   return()=>{active=false;clearTimer();element?.remove();};
  },[identity,visible,empty]);
- return <div ref={ref} className="google-reviews-panel">{!empty&&<div ref={container} className={`google-official-widget${widgetFailed?" google-widget-unavailable":""}`} aria-label={`Google-Rezensionen zu ${workshop.name}`}/>} {empty?<p className="help">Noch keine Google-Rezensionen.</p>:widgetFailed||status==="unavailable"&&!identity?<p className="help" role="status">Google-Rezensionen konnten nicht geladen werden.</p>:!widgetReady&&visible&&<p className="help" role="status">Google-Rezensionen werden geladen …</p>}<a className="text-action" href={mapsUrl} target="_blank" rel="noopener noreferrer">{widgetReady?"Alle Rezensionen auf Google Maps":"Rezensionen auf Google Maps ansehen"}</a></div>;
+ return <div ref={ref} className="google-reviews-panel">{!empty&&<div ref={container} className={`google-official-widget${widgetFailed?" google-widget-unavailable":""}`} aria-label={`Google-Rezensionen zu ${workshop.name}`}/>} {empty?<p className="help">Noch keine Google-Rezensionen.</p>:widgetFailed||status==="unavailable"&&!identity?<p className="help" role="status">Google-Rezensionen konnten nicht geladen werden.</p>:!widgetReady&&visible&&<p className="help" role="status">Google-Rezensionen werden geladen …</p>}<LocaleAnchor className="text-action" href={mapsUrl} target="_blank" rel="noopener noreferrer">{widgetReady?"Alle Rezensionen auf Google Maps":"Rezensionen auf Google Maps ansehen"}</LocaleAnchor></div>;
 }

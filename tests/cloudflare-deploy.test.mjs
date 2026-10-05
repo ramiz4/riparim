@@ -102,7 +102,7 @@ for (const [input, output] of [
   [{ ...source, preview_urls: undefined }, { ...generated, preview_urls: undefined }],
   [{ ...source, vars: { SITE_ORIGIN: "https://fixture.workers.dev" } }, { ...generated, vars: { SITE_ORIGIN: "https://fixture.workers.dev" } }],
 ]) assert.throws(() => assertCloudflareDeployConfig(input, output));
-for (const change of [{ name: "another-worker" }, { account_id: "wrong-account" }, { services: [{ binding: "CONNECTORS", service: "sites-connector-preview" }] }, { main: "../../app/page.tsx" }, { no_bundle: false }, { build: { command: "npm run build" } }, { vars: {} }, { triggers: {} }, { assets: { directory: "../../../" } }, { env: { preview: {} } }, { d1_databases: [{ ...source.d1_databases[0], database_id: "00000000-0000-4000-8000-000000000000" }] }, { r2_buckets: [{ ...source.r2_buckets[0], bucket_name: "preview-bucket" }] }]) {
+for (const change of [{ name: "another-worker" }, { account_id: "wrong-account" }, { services: [{ binding: "CONNECTORS", service: "sites-connector-preview" }] }, { main: "../../app/[locale]/page.tsx" }, { no_bundle: false }, { build: { command: "npm run build" } }, { vars: {} }, { triggers: {} }, { assets: { directory: "../../../" } }, { env: { preview: {} } }, { d1_databases: [{ ...source.d1_databases[0], database_id: "00000000-0000-4000-8000-000000000000" }] }, { r2_buckets: [{ ...source.r2_buckets[0], bucket_name: "preview-bucket" }] }]) {
   assert.throws(() => assertCloudflareDeployConfig(source, { ...generated, ...change }));
 }
 assert.throws(() => assertCloudflareDeployConfig({ ...source, main: "build/sites-worker.ts" }, generated));
