@@ -1,0 +1,665 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-05",
+  "issueUrl": "https://github.com/ramiz4/riparim/issues/53",
+  "previousReview": "./catalogue-followup-2026-10-05.json",
+  "before": {
+    "published": 125,
+    "drafts": 38
+  },
+  "after": {
+    "published": 128,
+    "drafts": 35
+  },
+  "reviewedDrafts": 30,
+  "method": "Deeper first-party contact and alias research, source-linked workshop photos and precise independently sourced business markers. Exact Google Place IDs verified in the user-requested Gmail browser profile by a neutral unrelated-query roundtrip. No further server Places calls, copied Google business data or bypass of publication safeguards.",
+  "googleApiRequests": 0,
+  "dailyRequestLimit": 100,
+  "draftSummary": {
+    "published": 3,
+    "needsIdentity": 27,
+    "otherUnchangedDrafts": 8
+  },
+  "draftAssessments": [
+    {
+      "workshopId": "auto-electronics",
+      "name": "Auto Electronics",
+      "city": "Prizren",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://www.autoelectronics-ks.com/"
+      ],
+      "reason": "Eigene Website bestätigt Kontakt, Adresse und Pkw-Elektronik. Aktuelle Namens- und exakte Telefonsuche liefern keinen passenden Google-Eintrag; einen anderen AES-Betrieb nicht zuordnen.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "auto-elektro-servis-niki-gjilan",
+      "name": "Auto Elektro Servis Niki",
+      "city": "Gjilan",
+      "assessment": "published",
+      "resultingStatus": "published",
+      "sourceUrls": [
+        "https://www.filikaqa.com/en/listings/434-auto-elektro-servis-city",
+        "https://www.merrjep.com/shpallja/yamaha-jog-50-kubik-i-sapo-ardhur-nga-zvicra/12580078",
+        "https://www.findglocal.com/XK/Gjilan/1759871737615916/Auto-elektricist--Niki"
+      ],
+      "reason": "Eigene Anzeige verbindet Nikis unveränderten Kontakt ausdrücklich mit Enesi Moto Gjilan. Aktuelle Niki-Betriebsbeiträge bestätigen weiterhin Pkw-Elektrik/Diagnose und Avdullah Presheva Nr. 82; der zusätzlich gemeinsam veröffentlichte Kontakt und genaue Geschäftspunkt entsprechen dem bestätigten Google-Eintrag. Der Pkw-Werkstattname bleibt erhalten; Transportwerbung allein wurde nicht als Reparaturnachweis gewertet.",
+      "researchMethods": [
+        "independent_business_contacts",
+        "business_alias_continuity",
+        "precise_business_location",
+        "official_maps_neutral_id_roundtrip"
+      ],
+      "googleIdentity": {
+        "placeId": "ChIJv-KrCHaNVBMRzYjAlm90dtQ",
+        "uniqueInCatalogue": true,
+        "providerRoundtripVerified": true,
+        "sameFeaturePair": true,
+        "unrelatedFallbackQuery": true,
+        "independentContactVerified": true,
+        "sameIndependentLocation": true,
+        "passengerCarScopeVerified": true,
+        "profileContinuityVerified": true,
+        "googlePhoneAvailable": true,
+        "method": "phone_and_location",
+        "sourceFeaturePair": "0x13548d7608abe2bf:0xd476746f96c088cd",
+        "verificationUrl": "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJv-KrCHaNVBMRzYjAlm90dtQ"
+      },
+      "previousUpdatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "independentMapMarker": {
+        "sourceUrl": "https://stgres.gjirafa.biz/auto-elektro-servis-niki-1",
+        "markerAlt": "auto-elektro-servis-niki-1",
+        "sourceCoordinates": {
+          "lat": 42.471242228,
+          "lng": 21.470246315
+        },
+        "within300m": true,
+        "note": "Profilspezifischer Verzeichnismarker, nicht Kartenmittelpunkt; derselbe Geschäftspunkt wird zusätzlich durch die aktuell veröffentlichte Hausnummer belegt."
+      },
+      "profileCorrection": {
+        "address": "Avdullah Presheva Nr. 82, Gjilan 60000",
+        "phoneNote": "Kontakt aus eigener Betriebsanzeige und aktuellen Betriebsbeiträgen",
+        "services": [
+          "Diagnose & Elektronik"
+        ],
+        "serviceDetails": [
+          "Pkw-Elektrik und Fahrzeugdiagnose laut eigener Betriebsanzeige und aktuellen Betriebsbeiträgen."
+        ],
+        "specialty": "Pkw-Elektrik · Diagnose",
+        "description": "Auto Elektro Servis Niki in Gjilan bietet Pkw-Elektrik und Fahrzeugdiagnose an. Eigene Anzeigen und aktuelle Betriebsbeiträge bestätigen den Kontakt und die Anschrift Avdullah Presheva Nr. 82. Der kombinierte Geschäftspunkt wird auf Google unter Enesi Moto Gjilan geführt. Termine und konkreten Reparaturumfang direkt beim Betrieb klären."
+      }
+    },
+    {
+      "workshopId": "auto-elektro-start-prishtina",
+      "name": "Auto elektro Start",
+      "city": "Prishtina",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-elektro-start-1"
+      ],
+      "reason": "Profilspezifischer Verzeichnispin, Pkw-Elektrik und Kontakt sind unabhängig belegt. Kein passender aktueller Kartenbetrieb oder Kontaktbrücke zur Betriebsmail.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "auto-pjese-servis-dubova-ferizaj",
+      "name": "Auto Pjesë & Servis DUBOVA",
+      "city": "Ferizaj",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-pjes--servis-dubova-1",
+        "https://www.merrjep.com/shpallja/dubova-autopjes-servis/7717840",
+        "https://serbia.worldplaces.me/places-in-biba/56683031-auto-pjes-dubova.html",
+        "https://www.facebook.com/1459821160996504/"
+      ],
+      "reason": "Eigene Pkw-Serviceanzeige bestätigt den bestehenden Kontakt. Weitere Verzeichnis- und Facebook-Spuren liefern keine eindeutige aktuelle Google-Verknüpfung; andere Betriebe an der Bibaj-Straße nicht allein wegen Nähe zuordnen.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "auto-pjese-servis-fatosi-gracanice",
+      "name": "Auto Pjesë & Servis Fatosi",
+      "city": "Graçanicë",
+      "assessment": "published",
+      "resultingStatus": "published",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-pjes--servis-fatosi-1",
+        "https://www.merrjep.com/shpallja/bmw-mercedes-audi-passat-golf-tiguan-touran/2881955",
+        "https://www.merrjep.com/shpallja/vetura-rks-me-defekte-te-aksidentuara-pa-dogan/2942229",
+        "https://punaime.org/konkursi/punetore-ne-autolarje-4/",
+        "https://www.cybo.com/XK-biz/auto-larje-fatosi"
+      ],
+      "reason": "Eigene Fatosi-Anzeigen verbinden den vorhandenen Kontakt mit der Google-Telefonnummer; eine eigene Stellenanzeige verbindet einen weiteren Verzeichniskontakt mit Auto Larje Fatosi in Llapnasellë. Der unabhängig belegte Pkw-Reparaturstandort und gültige Google-Eintrag liegen am selben Geschäftspunkt. Der Pkw-Service bleibt durch die ursprüngliche Quelle und Reparaturfotos belegt; der Waschbetrieb wird nicht allein aufgrund des Namens zugeordnet.",
+      "researchMethods": [
+        "independent_business_contacts",
+        "business_alias_continuity",
+        "precise_business_location",
+        "official_maps_neutral_id_roundtrip"
+      ],
+      "googleIdentity": {
+        "placeId": "ChIJU2coyzCdVBMR9MLuvMnBqHM",
+        "uniqueInCatalogue": true,
+        "providerRoundtripVerified": true,
+        "sameFeaturePair": true,
+        "unrelatedFallbackQuery": true,
+        "independentContactVerified": true,
+        "sameIndependentLocation": true,
+        "passengerCarScopeVerified": true,
+        "profileContinuityVerified": true,
+        "googlePhoneAvailable": true,
+        "method": "phone_and_location",
+        "sourceFeaturePair": "0x13549d30cb286753:0x73a8c1c9bceec2f4",
+        "verificationUrl": "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJU2coyzCdVBMR9MLuvMnBqHM"
+      },
+      "previousUpdatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "independentMapMarker": {
+        "sourceUrl": "https://stgres.gjirafa.biz/auto-pjes--servis-fatosi-1",
+        "markerAlt": "auto-pjes--servis-fatosi-1",
+        "sourceCoordinates": {
+          "lat": 42.58514408289668,
+          "lng": 21.13142967224121
+        },
+        "within300m": true,
+        "note": "Benannter Geschäftspin mit Pkw-Reparaturfotos, nicht Kartenmittelpunkt. Markerfuß bei 218/463 über eigener sichtbarer Web-Mercator-Kachel 17/73229/48368 lokalisiert."
+      },
+      "profileCorrection": {
+        "phoneNote": "Kontakt aus eigenen Fatosi-Anzeigen, zusätzlich im unabhängigen Werkstattverzeichnis bestätigt",
+        "description": "Auto Pjesë & Servis Fatosi in Llapnasellë bietet laut unabhängigem Werkstattverzeichnis Pkw-Service und Ersatzteile an. Reparaturfotos und die Verzeichnisbeschreibung belegen den Werkstattbetrieb; eigene Anzeigen verbinden die Kontakte mit dem am selben Standort geführten Auto Larje Fatosi. Termine und konkreten Reparaturumfang direkt beim Betrieb bestätigen."
+      }
+    },
+    {
+      "workshopId": "auto-servis-beni-prishtina",
+      "name": "Auto Servis Beni",
+      "city": "Prishtina",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-beni-2"
+      ],
+      "reason": "Der unabhängig belegte profilspezifische Kartenmarker und Kontakt passen nicht zum aktuellen Google-Namensvetter; etwa drei Kilometer Abstand. Keine Identitätsbrücke belegt.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "auto-servis-fia-prishtina",
+      "name": "Auto Servis Fia",
+      "city": "Prishtina",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-fia-1"
+      ],
+      "reason": "Pkw-Service und Kontakt sowie der profilspezifische unabhängige Kartenmarker sind belegt; dort ist kein entsprechender aktueller Google-Eintrag nachgewiesen. Auto Servis FIAT an einem anderen Standort nicht gleichsetzen.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "auto-servis-hoda-ferizaj",
+      "name": "Auto Servis Hoda",
+      "city": "Ferizaj",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-hoda-1"
+      ],
+      "reason": "Unabhängige Quelle belegt Pkw-Kupplungs- und Bremsarbeiten; aktuelle Kartenergebnisse betreffen andere Betriebe.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "auto-servis-karabeg-prishtina",
+      "name": "Auto servis Karabeg",
+      "city": "Prishtina",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-karabeg-1"
+      ],
+      "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "auto-servis-kiki-ferizaj",
+      "name": "Auto Servis Kiki",
+      "city": "Ferizaj",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-kiki-1"
+      ],
+      "reason": "Unabhängiger Pkw-Servicebeleg vorhanden; Reno Servis Kiki in Nordmazedonien hat ein anderes Land und einen anderen Kontakt und wird nicht zugeordnet.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "auto-servis-lavdrimi-ferizaj",
+      "name": "Auto Servis Lavdrimi",
+      "city": "Ferizaj",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-lavdrimi-1"
+      ],
+      "reason": "Echter Verzeichnismarker ist belegt. Transmission Lavdimi liegt über vier Kilometer entfernt; näherer LABI-Betrieb hat anderen Namen/Kontakt. Keine Kontinuitätsbrücke.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "auto-servis-mendi-ferizaj",
+      "name": "Auto Servis Mendi",
+      "city": "Ferizaj",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-mendi-2",
+        "https://www.autoyas.com/XK/Ferizaj/100383270089981/Auto-Servis-Mendi",
+        "https://www.facebook.com/100383270089981/about/"
+      ],
+      "reason": "Eigener Betriebsauftritt bestätigt Mendi in Bibaj; öffentliche Facebook-Prüfung liefert keine Kontakt- oder Google-Verknüpfung. Der nahe Auto-Bibaj-Eintrag hat einen anderen Kontakt; eine Umbenennung ist nicht belegt.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "auto-servis-valoni-feroda-prishtina",
+      "name": "Auto Servis Valoni - Feroda",
+      "city": "Prishtina",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-valoni---feroda-1",
+        "https://onlycar.rs/pristina/auto-servis/autoservis-valoni",
+        "https://mapcarta.com/W442391389"
+      ],
+      "reason": "Zusatzkontakt und alternativer unabhängig genannter Valoni-Standort an der Selim Berisha wurden geprüft. Aktuelle Google-Namensvetter haben andere Kontakte oder Orte; keine belegte Verbindung zum heutigen WBM-Betrieb.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "automekanik-leoni-prishtina",
+      "name": "Automekanik Leoni",
+      "city": "Prishtina",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/automekanik--leoni-1"
+      ],
+      "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "automekanik-muja-prishtina",
+      "name": "Automekanik Muja",
+      "city": "Prishtina",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/automekanik-muja-1",
+        "https://i6tk28sbcv.gjirafa.net/businessdirectoryphotos/large/ea8e852f40b4ec335fc0dee9ba69e9a3_20160620_124941.jpg"
+      ],
+      "reason": "Zusätzliche Kontakte auf dem eigenen Werkstattschild und die Betriebsmail wurden geprüft. Aktuelle Google-Treffer haben andere Kontakte und Orte; keine eigenständige Zuordnung oder belegte Kontinuität.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison",
+        "source_linked_workshop_sign_contacts"
+      ]
+    },
+    {
+      "workshopId": "autoservis-bekteshi-prishtina",
+      "name": "Autoservis Bekteshi",
+      "city": "Prishtina",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/autoservis-bekteshi-1",
+        "https://i6tk28sbcv.gjirafa.net/businessdirectoryphotos/large/b8263837d922fa2c3255e15e13054e02_20160506_114514.jpg"
+      ],
+      "reason": "Pkw-Motor-/Getriebeservice, genaue Betriebsanschrift und ein weiterer Telefonkontakt auf dem Werkstattschild sind belegt. Auch die Zusatznummer liefert keinen passenden aktuellen Google-Eintrag; mögliche Namensvetter nicht zuordnen.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison",
+        "source_linked_workshop_sign_contacts"
+      ]
+    },
+    {
+      "workshopId": "autoservis-difa-prishtina",
+      "name": "Autoservis Difa",
+      "city": "Prishtina",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/autoservis-difa-1"
+      ],
+      "reason": "Originalquelle nennt einen zusätzlichen Telefonkontakt; auch mit dieser Nummer und dem profilspezifischen Standort kein passender Google-Betrieb belegt.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "autoservis-irfi-prishtina",
+      "name": "Autoservis Irfi",
+      "city": "Prishtina",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/autoservis-irfi-1",
+        "https://www.autoyas.com/XK/Pristina/109419524893144/Auto-Servis-IRFI",
+        "https://www.facebook.com/109419524893144/"
+      ],
+      "reason": "Eigenes Betriebsprofil bestätigt den vorhandenen Kontakt. Kein passender aktueller Google-Eintrag; direkte öffentliche Facebook-Standortangaben sind nicht zugänglich. Eine nicht öffentlich lesbare Seite ist kein Schließungsnachweis.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "autoservis-naser-minushi-prishtina",
+      "name": "AutoServis Naser Minushi",
+      "city": "Prishtina",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/autoservis-naser-minushi-1"
+      ],
+      "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "axha-prishtina",
+      "name": "Axha",
+      "city": "Prishtina",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/axha-1"
+      ],
+      "reason": "Nähe zum öffentlichen BMW-balia-Profil ersetzt keine Namens-/Kontaktkontinuität. Keine passende eigene Google-Identität; bestehende öffentliche Zuordnung nicht überschreiben.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "firi-prishtina",
+      "name": "Firi",
+      "city": "Prishtina",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/firi-1"
+      ],
+      "reason": "Nähe zum öffentlichen BMW-balia-Profil ersetzt keine Namens-/Kontaktkontinuität. Keine passende eigene Google-Identität; bestehende öffentliche Zuordnung nicht überschreiben.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "g-b-prishtina",
+      "name": "G & B",
+      "city": "Prishtina",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/g--b-1",
+        "https://i6tk28sbcv.gjirafa.net/businessdirectoryphotos/large/22ca5dc81faabd73b7e0506b92b86973_20160610_151338.jpg"
+      ],
+      "reason": "Eigenes Werkstattschild belegt G & B als eigenen Betrieb und einen zusätzlichen Telefonkontakt. Aktuelle Google-Prüfung liefert keinen eindeutig zugehörigen Eintrag; Nähe zum öffentlichen BMW-balia-Profil ist keine Identitätsbrücke.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison",
+        "source_linked_workshop_sign_contacts"
+      ]
+    },
+    {
+      "workshopId": "ibra-prishtina",
+      "name": "Ibra",
+      "city": "Prishtina",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/ibra-1"
+      ],
+      "reason": "Auto Elektro Ibra hat einen anderen Kontakt und einen Standort außerhalb von 300 Metern vom tatsächlichen Verzeichnispin. Keine belegte Kontinuitätsbrücke.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "moto-stanki-gjilan",
+      "name": "Moto Stanki",
+      "city": "Gjilan",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/moto-stanki-1"
+      ],
+      "reason": "Originalquelle bestätigt ausdrücklich Pkw- und Motorradservice; kein korrespondierender aktueller Google-Eintrag.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "opel-prishtina-prishtina",
+      "name": "Opel Prishtina",
+      "city": "Prishtina",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/opel-prishtina-1"
+      ],
+      "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "prishtina-auto-home-prishtina",
+      "name": "Prishtina Auto Home",
+      "city": "Prishtina",
+      "assessment": "published",
+      "resultingStatus": "published",
+      "sourceUrls": [
+        "https://www.merrjep.com/shpallja/oferte-e-rrypit-dhembzor-per-vw-audi-shkoda-seat/8736462",
+        "https://www.autoyas.com/XK/B%C3%ABrnice-E-Ep%C3%ABrme/387979811560412/Sfishta-Auto-Home",
+        "https://prishtinaonline.com/uploads/b08_njoftim_per_dhenje_te_kontrates%20%28202%29.pdf",
+        "https://prishtinaonline.com/uploads/nr._616_19_165_221_servisimi_dhe_mirembajtja_e_automjeteve_te_qkmf-se_dhe_qmu-se.pdf"
+      ],
+      "reason": "Eigene Serviceanzeige verbindet den bestehenden Kontakt mit Sfishta Auto Home in Bardhosh. Amtliche Auftragsbelege nennen Auto Home und N.T.SH. Sfishta gemeinsam mit dem zusätzlichen Betriebsnummernkontakt; dieser stimmt unter historischer Kosovo-Vorwahl mit dem bestätigten Google-Eintrag überein. Pkw-Service, operative Kontinuität und die direkt geprüfte Place ID sind belegt; keine rechtliche Verschmelzung wird behauptet.",
+      "researchMethods": [
+        "independent_business_contacts",
+        "business_alias_continuity",
+        "precise_business_location",
+        "official_maps_neutral_id_roundtrip"
+      ],
+      "googleIdentity": {
+        "placeId": "ChIJ-5d0UsmhVBMRBQBORVPLs7A",
+        "uniqueInCatalogue": true,
+        "providerRoundtripVerified": true,
+        "sameFeaturePair": true,
+        "unrelatedFallbackQuery": true,
+        "independentContactVerified": true,
+        "sameIndependentLocation": true,
+        "passengerCarScopeVerified": true,
+        "profileContinuityVerified": true,
+        "googlePhoneAvailable": true,
+        "method": "phone_and_location",
+        "sourceFeaturePair": "0x1354a1c9527497fb:0xb0b3cb53454e0005",
+        "verificationUrl": "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJ-5d0UsmhVBMRBQBORVPLs7A"
+      },
+      "previousUpdatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "profileCorrection": {
+        "name": "Sfishta Auto Home",
+        "address": "Bardhosh, Prishtina",
+        "phoneNote": "Kontakt aus eigener Serviceanzeige und Betriebsbeiträgen",
+        "services": [
+          "Inspektion & Wartung",
+          "Motor & Getriebe",
+          "Bremsen & Fahrwerk"
+        ],
+        "serviceDetails": [
+          "Pkw-Wartung und Reparatur laut eigenen Betriebsbeiträgen.",
+          "Zahnriemenservice für Volkswagen, Audi, Škoda und Seat laut eigener Serviceanzeige.",
+          "Motor- und Fahrwerksarbeiten laut veröffentlichten Betriebsbeiträgen; konkreten Umfang direkt bestätigen."
+        ],
+        "specialty": "Pkw-Wartung · Zahnriemenservice",
+        "description": "Sfishta Auto Home in Bardhosh bei Prishtina bietet Pkw-Wartung und Reparatur an. Die eigene Serviceanzeige nennt Zahnriemenservice für Volkswagen, Audi, Škoda und Seat; Betriebsbeiträge dokumentieren Motor- und Fahrwerksarbeiten. Kontakt und heutiger Ort stammen aus den Betriebsquellen. Termine und konkreten Umfang direkt beim Betrieb bestätigen."
+      }
+    },
+    {
+      "workshopId": "skifti-prishtina",
+      "name": "Skifti",
+      "city": "Prishtina",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/skifti-1"
+      ],
+      "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "turbo-servis-turbo-klinika-prishtina",
+      "name": "Turbo Servis Turbo Klinika",
+      "city": "Prishtina",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/turbo-klinika-1",
+        "https://api.openstreetmap.org/api/0.6/node/4450890389",
+        "https://i6tk28sbcv.gjirafa.net/businessdirectoryphotos/medium/337670fb5779fb82fd29454ab491fb0a_20160620_132443.jpg"
+      ],
+      "reason": "Originalkontakt, zusätzliche Verzeichnisnummer, Mail und ein weiterer Telefonkontakt auf dem Werkstattschild sind belegt. Primäre OSM-Daten bestätigen Vreshtat. Aktuelle Google-Prüfung dieser Kontakte und des Standorts liefert andere Betriebe; kein eigener gültiger Eintrag oder belegter Umzug.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison",
+        "source_linked_workshop_sign_contacts"
+      ]
+    },
+    {
+      "workshopId": "univerzall-prishtina",
+      "name": "Univerzall",
+      "city": "Prishtina",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/univerzall-1"
+      ],
+      "reason": "Direktes Quellprofil bestätigt Pkw-Service. Widersprechender Waschbetrieb-Kategorieeintrag reicht nicht für einen Ausschluss; aktueller Universal-Eintrag in Vragoli passt nicht zum belegten Geschäftspin.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison"
+      ]
+    },
+    {
+      "workshopId": "xhema-auto-servis-prishtina",
+      "name": "Xhema Auto Servis",
+      "city": "Prishtina",
+      "assessment": "needs_identity",
+      "resultingStatus": "draft",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/xhema-auto-servis-1",
+        "https://i6tk28sbcv.gjirafa.net/businessdirectoryphotos/medium/af88c56cbd6bfeba7f87c35810eacfeb_20160812_130641.jpg"
+      ],
+      "reason": "Eigene Werkstattbeschilderung belegt Xhema Auto Folje & Carbon und einen weiteren Kontakt. Aktuelle Google-Suche passt dennoch nicht zu diesen Kontakten; Auto Color Xhema liegt an einem anderen Standort. Keine belastbare Umzugs- oder Kontaktbrücke.",
+      "researchMethods": [
+        "original_business_source",
+        "exact_business_contacts",
+        "first_party_ads_and_business_posts",
+        "current_maps_candidate_comparison",
+        "source_linked_workshop_sign_contacts"
+      ]
+    }
+  ]
+}
