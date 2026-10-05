@@ -153,6 +153,9 @@ neue Anmeldung nach Entsperrung. Keine echte Bewertung wurde moderiert; die
 Entscheidungs-/Benachrichtigungsverträge sind durch isolierte Tests abgedeckt.
 Bestätigte Legacy-Verknüpfungen wurden im finalen Bestand mitgezählt: null
 bestehende Datensätze; die Zuordnungs- und Besitzrechte sind in Fixtures geprüft.
+Zusätzliche schreibfreie Probes mit gefälschten Sites-Headern lieferten HTTP 401
+für `/api/auth-settings` und `/api/business`; `/api/account` lieferte ausschließlich
+`account: null` und `deletionReady: false`.
 
 **Bereinigung bestätigt:** alle drei Testkonten, ihre Rollen/Status/Sessions,
 der Pending-Besuch und seine private Datei wurden entfernt. Null verbleibende
