@@ -7,6 +7,7 @@
 
 .catalogue-card{position:relative}.catalogue-card-target::after{content:"";position:absolute;inset:0;z-index:1;border-radius:inherit}.catalogue-card-target:focus-visible{outline:none}.catalogue-card-target:focus-visible::after{outline:3px solid #096e61;outline-offset:3px}.catalogue-card .rating-source a{position:relative;z-index:2}
 
+.catalogue-search-sentinel { height: 1px; margin-bottom: -1px; pointer-events: none; }
 .catalogue-search-panel { display: grid; grid-template-columns: minmax(12rem, 1fr) minmax(0, 2fr); gap: 14px; padding: 18px; background: #f6f9f7; border: 1px solid #d8e3df; border-radius: 12px; margin-bottom: 14px; }
 .catalogue-search-panel>.catalogue-filter-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .catalogue-name-search { min-width: 0; }
@@ -58,4 +59,9 @@ html.dark .catalogue-search-panel>.catalogue-filter-button>.catalogue-filter-lab
 @media (max-height: 600px) {
   .catalogue-search-panel { position: static; }
   .catalogue-result-count { scroll-margin-top: calc(var(--site-header-height) + 16px); }
+}
+
+@media (max-width: 720px) and (min-height: 601px) {
+  /* Keep the controls in place while the docked frame reaches both viewport edges. */
+  .catalogue-search-panel[data-docked=true] { width: calc(100% + 2 * var(--page-gutter)); margin-inline: calc(-1 * var(--page-gutter)); padding-inline: calc(8px + var(--page-gutter)); border-top-left-radius: 0px; border-top-right-radius: 0px; }
 }

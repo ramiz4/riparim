@@ -25,12 +25,27 @@ function SortControl({id,filters,onChange,ratingAvailable,googleAvailable,distan
 
 export default function Catalogue({initialWorkshops,initialError,initialFilters,signedIn,account,isAdmin}:Props){
  const [directory,setDirectory]=useState(initialWorkshops),[filters,setFilters]=useState(initialFilters),[draft,setDraft]=useState(initialFilters),[ready,setReady]=useState(!initialError),[error,setError]=useState(initialError),[refreshing,setRefreshing]=useState(false),[visibleCount,setVisibleCount]=useState(12),[context,setContext]=useState<SearchContext|null>(null),[privateMatchingActive,setPrivateMatchingActive]=useState(false),[hydrated,setHydrated]=useState(false),[filterOpen,setFilterOpen]=useState(false),[detailOpen,setDetailOpen]=useState(false),[liveGoogleRatings,setLiveGoogleRatings]=useState<Record<string,LiveGoogleRating>>({}),[googleEnabled,setGoogleEnabled]=useState(false),[googleLoading,setGoogleLoading]=useState(false);
- const filterButton=useRef<HTMLButtonElement>(null),resultsHeading=useRef<HTMLParagraphElement>(null),restoreScroll=useRef<number|null>(null),sortId=useId();
+ const filterButton=useRef<HTMLButtonElement>(null),resultsHeading=useRef<HTMLParagraphElement>(null),restoreScroll=useRef<number|null>(null),searchSentinel=useRef<HTMLDivElement>(null),sortId=useId();
+ const [searchDocked,setSearchDocked]=useState(false);
  const matches=matchCatalogue(directory,filters,context,privateMatchingActive,liveGoogleRatings),chips=activeCatalogueFilters(filters),ratingAvailable=hasPublishedRatings(directory),activeContext=privateMatchingActive&&context?.city===filters.city?context:null;
  const draftMatches=matchCatalogue(directory,draft,context,privateMatchingActive,liveGoogleRatings);
  const googleAvailable=hasGoogleRatings(directory,liveGoogleRatings)||googleEnabled,distanceAvailable=hasCatalogueDistances(matches,filters.city),advancedCount=chips.filter(key=>key==="brand"||key==="language").length;
  const googleCandidates=matchCatalogue(directory,{...filters,sort:"name"},context,privateMatchingActive).map(w=>w.id).join("|");
  const rememberGoogleRating=useCallback((id:string,rating:LiveGoogleRating)=>setLiveGoogleRatings(previous=>JSON.stringify(previous[id])===JSON.stringify(rating)?previous:{...previous,[id]:rating}),[]);
+ useEffect(()=>{
+  const sentinel=searchSentinel.current;if(!sentinel)return;
+  let observer:IntersectionObserver|null=null;
+  const update=()=>{
+   observer?.disconnect();observer=null;
+   if(!window.matchMedia("(max-width: 720px) and (min-height: 601px)").matches){setSearchDocked(false);return;}
+   const headerHeight=parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--site-header-height"));
+   setSearchDocked(sentinel.getBoundingClientRect().top<headerHeight);
+   observer=new IntersectionObserver(([entry])=>setSearchDocked(!entry.isIntersecting&&entry.boundingClientRect.top<headerHeight),{root:document,rootMargin:`-${headerHeight}px 0px 0px 0px`,threshold:0});
+   observer.observe(sentinel);
+  };
+  update();window.addEventListener("resize",update);
+  return()=>{observer?.disconnect();window.removeEventListener("resize",update);};
+ },[]);
  useEffect(()=>{let active=true;void googlePlacesClientConfig().then(config=>{if(active)setGoogleEnabled(config.enabled);}).catch(()=>{});return()=>{active=false;};},[]);
  useEffect(()=>{
   let active=true;
@@ -64,7 +79,8 @@ export default function Catalogue({initialWorkshops,initialError,initialFilters,
  return <><SiteHeader account={account} isAdmin={isAdmin} onVisits={personal.onVisits} onNewVisit={personal.onNewVisit}/><main className="catalogue-page wrap">
   <header className="catalogue-heading"><div><h1>Werkstätten</h1></div><button className="catalogue-detail-search" onClick={()=>setDetailOpen(true)}><CarFront size={18}/>Mit Fahrzeug & Problem suchen</button></header>
   {activeContext&&<div className="catalogue-private-context"><CarFront size={18}/><div><strong>Privater Suchkontext · {activeContext.brand} {activeContext.model}</strong><p>{activeContext.radius>0?`${activeContext.radius} km Umkreis · `:""}{activeContext.additionalCity?`${activeContext.additionalCity} · `:""}Fahrzeug und Problem bleiben nur in diesem Browserlauf.</p></div><button onClick={()=>setDetailOpen(true)}>Suchkontext ändern</button></div>}
-  <Dialog open={filterOpen} onOpenChange={setFilterOpen}><section className="catalogue-search-panel" aria-label="Werkstätten suchen">
+  <div className="catalogue-search-sentinel" ref={searchSentinel} aria-hidden="true"/>
+  <Dialog open={filterOpen} onOpenChange={setFilterOpen}><section className="catalogue-search-panel" data-docked={searchDocked} aria-label="Werkstätten suchen">
    <div className="catalogue-name-search"><label htmlFor={`${sortId}-name`}>Werkstattname</label><div><Search size={18} aria-hidden="true"/><Input id={`${sortId}-name`} type="search" maxLength={100} autoComplete="off" placeholder="Werkstatt suchen …" value={filters.query} onChange={event=>change("query",event.target.value)}/></div></div>
    <CatalogueFilterFields filters={filters} onChange={change} directory={directory} fields={["city","service"]}/>
    <DialogTrigger asChild><button className="outline catalogue-filter-button" ref={filterButton} aria-label={advancedCount>0?`Weitere Filter · ${advancedCount} aktiv`:"Weitere Filter"} onClick={()=>setDraft({...filters})}><Filter size={18} aria-hidden="true"/><span className="catalogue-filter-label-desktop">Weitere Filter</span><span className="catalogue-filter-label-mobile">Filter</span>{advancedCount>0&&<span className="catalogue-filter-badge">{advancedCount}</span>}</button></DialogTrigger>
