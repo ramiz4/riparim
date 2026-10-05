@@ -55,9 +55,9 @@ const bundleOptions = {
     builder.onLoad({filter:/.*/,namespace:'notification-fixture'},()=>({loader:'js',contents:'export async function processNotifications(){return []; }'}));
     builder.onResolve({filter:/^(next\/server|@\/lib\/auth\/config|@supabase\/ssr)$/},args=>({path:args.path,namespace:'proxy-fixture'}));
     builder.onLoad({filter:/.*/,namespace:'proxy-fixture'},args=>({loader:'js',contents:args.path==='next/server'
-      ? 'export const NextResponse={redirect:(url,status)=>new Response(null,{status,headers:{Location:String(url)}}),next:()=>new Response(null)};'
-      : args.path==='@/lib/auth/config' ? 'export async function getAuthConfig(){return null;}'
-      : 'export function createServerClient(){throw new Error("Canonical routing must not access the provider");}'}));
+      ? 'export const NextResponse={redirect:(url,status)=>new Response(null,{status,headers:{Location:String(url)}}),next:()=>{const response=new Response(null);response.cookies={set:(name,value)=>response.headers.append("Set-Cookie",name+"="+value+"; Path=/; HttpOnly; Secure; SameSite=Lax")};return response;}};'
+      : args.path==='@/lib/auth/config' ? 'export async function getAuthConfig(){return globalThis.fixtureProxyAuthConfig??null;}'
+      : 'export function createServerClient(project,key,options){if(!globalThis.fixtureProxyAuthConfig)throw new Error("Canonical routing must not access the provider");return {auth:{async getUser(){options.cookies.setAll([{name:"sb-fixture-auth-token",value:"refreshed",options:{}}]);}}};}'}));
     builder.onResolve({ filter: /^(vinext\/server\/fetch-handler|next\/headers|next\/navigation)$/ }, args => ({ path: args.path, namespace: 'fixture' }));
     builder.onLoad({ filter: /.*/, namespace: 'fixture' }, args => ({
       loader: 'js',
@@ -89,6 +89,23 @@ for (const url of ['https://www.riparim.com/', 'http://www.riparim.com/werkstatt
 }
 assert.equal((await proxy(new Request('https://riparim.com/einstellungen?weiter=%2Fbetrieb'))).status, 200, 'the canonical host must not loop');
 assert.equal((await proxy(new Request('https://riparim.riparim-ec181b.workers.dev/'))).status, 200, 'the technical transfer host keeps its existing routing');
+
+for (const enabled of [false, true]) {
+  globalThis.fixtureProxyAuthConfig = enabled ? { enabled: true, projectUrl: 'https://fixture.supabase.co', publicKey: 'fixture-public-key' } : null;
+  for (const [path, policy] of [['/auth/bestaetigen', 'no-referrer'], ['/auth/bestaetigen/', 'no-referrer'], ['/einstellungen', 'strict-origin-when-cross-origin']]) {
+    const updatedCookies = [];
+    const request = { url: `https://riparim.com${path}?token_hash=fixture-secret`, cookies: { getAll: () => [], set: (name, value) => updatedCookies.push([name, value]) } };
+    const response = await proxy(request);
+    assert.equal(response.headers.get('Referrer-Policy'), policy, 'callback token URLs must remain private, including after session-cookie refresh');
+    assert.equal(response.headers.get('Cache-Control'), 'private, no-store');
+    assert.equal(response.headers.get('X-Content-Type-Options'), 'nosniff');
+    if (enabled) {
+      assert.equal(updatedCookies.length, 1);
+      assert.match(response.headers.get('Set-Cookie'), /sb-fixture-auth-token=refreshed/);
+    }
+  }
+}
+globalThis.fixtureProxyAuthConfig = null;
 
 const forgedHeaders = {
   'OAI-Authenticated-User-ID': 'forged-owner-id',
