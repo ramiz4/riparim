@@ -115,6 +115,15 @@ PR-Freigabe getrennt mit einem temporären Harness der echten Komponenten und
 fiktiven Daten geprüft. Keine persönlichen Konten, echten Nachweise oder
 Live-E-Mails dienen als Fixtures; Providerkonfiguration und Mailaktivierung
 bleiben dem Folgeissue und dem geprüften Main-Release vorbehalten.
+
+Nach Integration von Issue #52 prüfen die tatsächlichen AuthSetup-Komponenten
+in allen drei Locales vier getrennte Betreff-/HTML-Felder und deren
+Clipboardaufrufe bytegenau gegen die zentralen Go-Exporte. Technischer Quellcode
+wird angezeigt, nicht als HTML ausgeführt oder übersetzt. Abgewiesene
+Clipboardaufrufe zeigen nur lokale manuelle Kopierhinweise. Der angezeigte
+Übernahmevertrag umfasst tatsächliche kanonische Originwerte, erhaltene
+Callbackfreigaben, Release-Export und Go-Vorschauen, alle vier Providerdateien,
+erneutes Lesen sowie Empfangstest/Rückweg; keine reine Bodyübernahme.
 ## Lokalisierte Mailvorlagen und Provideraktivierung (Issue #52)
 
 Die zentralen Bestätigungs- und Recoveryvorlagen enthalten DE/SQ/EN-Betreff
