@@ -44,7 +44,7 @@ export async function PATCH(request:Request){
   let fields;try{fields=preference?{}:parseUserFields(body);}catch(e){return json({error:e instanceof ValidationError?e.message:"Bitte prüfe den Namen.",errorCode:e instanceof ValidationError?e.code:"invalid_request"},400);}
   if(await accountBlocked(current.user.userId))return json({error:"Die Kontolöschung wurde bereits begonnen.",errorCode:"account_blocked"},409);
   const auth=await getAuthAdmin();if(!auth||auth.projectUrl!==current.config.projectUrl)return unavailable();
-  const {data,error}=await auth.client.auth.admin.updateUserById(current.providerUser.id,{user_metadata:{...current.providerUser.user_metadata,...(preference?{preferred_locale:body.preferredLocale}:{full_name:fields.name})}});
+  const {data,error}=await auth.client.auth.admin.updateUserById(current.providerUser.id,{user_metadata:preference?{preferred_locale:body.preferredLocale}:{full_name:fields.name}});
   if(error||!data.user)return unavailable();
   return json(preference?{preferredLocale:body.preferredLocale,messageCode:"saved"}:{name:fields.name,messageCode:"saved"});
  }catch(e){logFailure("rename",e);return unavailable();}
