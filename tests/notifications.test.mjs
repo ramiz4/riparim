@@ -23,8 +23,8 @@ const userId='00000000-0000-4000-8000-000000000001',otherId='00000000-0000-4000-
 const accountId=id=>`supabase:fixture-project.supabase.co:${id}`;
 const member={userId:accountId(userId),email:'member@example.test',displayName:'Fixture Member',provider:'E-Mail',ownerKeys:[accountId(userId)],isModerator:false};
 const admin={...member,userId:accountId('00000000-0000-4000-8000-000000000009'),email:'admin@example.test',isModerator:true,ownerKeys:[accountId('00000000-0000-4000-8000-000000000009')]};
-let confirmedEmail='member@example.test',emailConfirmed=true,providerBlocked=false,lookupFailure=false;
-const users={getUserById:async id=>({data:{user:{id,email:id===userId?confirmedEmail:'other@example.test',email_confirmed_at:emailConfirmed?'2026-10-04':null,banned_until:providerBlocked?'2099-01-01':null}},error:lookupFailure?{status:503}:null})};
+let confirmedEmail='member@example.test',emailConfirmed=true,providerBlocked=false,lookupFailure=false,preferredLocale;
+const users={getUserById:async id=>({data:{user:{id,email:id===userId?confirmedEmail:'other@example.test',email_confirmed_at:emailConfirmed?'2026-10-04':null,user_metadata:{preferred_locale:preferredLocale},banned_until:providerBlocked?'2099-01-01':null}},error:lookupFailure?{status:503}:null})};
 globalThis.fixtureAuthAdmin={projectUrl,client:{auth:{admin:users}}};
 globalThis.fixtureEnv={DB:d1,BUCKET:{head:async()=>({key:'fixture'}),delete:async()=>{},list:async()=>({objects:[],truncated:false})},SITE_ORIGIN:origin,REVIEW_MODERATOR_EMAIL:admin.email,RESEND_API_KEY:'re_fixture_secret',TRANSACTIONAL_EMAIL_FROM:'Riparim <no-reply@auth.example.test>'};
 globalThis.fixtureUser=member;globalThis.fixtureAdmin=admin;globalThis.fixtureTriggers=[];
@@ -40,19 +40,34 @@ const sent=new Map(),attempts=[];let deliveryMode='success',pause=null,release=n
 const nativeFetch=globalThis.fetch;
 globalThis.fetch=async(url,options)=>{
  assert.equal(String(url),'https://api.resend.com/emails','Email fixtures never make live provider requests');assert.equal(options.method,'POST');assert(options.headers.Authorization.startsWith('Bearer re_'));
- const key=options.headers['Idempotency-Key'],payload=JSON.parse(options.body);attempts.push({key,payload});
+ const key=options.headers['Idempotency-Key'],payload=JSON.parse(options.body);attempts.push({key,payload,body:options.body});
  if(deliveryMode==='pending'){pause?.();await new Promise(resolve=>release=resolve);}
  if(deliveryMode==='rate')return Response.json({name:'rate_limit_exceeded'},{status:429});
  if(deliveryMode==='outage')return Response.json({name:'application_error'},{status:503});
  if(deliveryMode==='rejected')return Response.json({name:'validation_error'},{status:422});
  if(deliveryMode==='conflict')return Response.json({name:'concurrent_idempotent_requests'},{status:409});
- if(sent.has(key)){assert.deepEqual(payload,sent.get(key).payload,'Retries reuse the exact immutable payload');return Response.json({id:sent.get(key).id});}
- const result={id:'fixture-provider-'+(sent.size+1),payload};sent.set(key,result);
+ if(sent.has(key)){assert.deepEqual(payload,sent.get(key).payload,'Retries reuse the exact immutable payload');assert.equal(options.body,sent.get(key).body,'Retries reuse byte-identical fetch init.body');return Response.json({id:sent.get(key).id});}
+ const result={id:'fixture-provider-'+(sent.size+1),payload,body:options.body};sent.set(key,result);
  if(deliveryMode==='uncertain'){deliveryMode='success';throw Error('Fixture provider accepted before network failure');}
  return Response.json({id:result.id});
 };
 let passed=0;const check=(condition,label)=>{assert(condition,label);passed++;};
 try{
+ for(const preference of ['de','sq','en',undefined,'fr',null,{},['sq'],'SQ']){
+  preferredLocale=preference;const locale=['de','sq','en'].includes(preference)?preference:'de',prefix=locale==='de'?'':'/'+locale;
+  for(const decision of ['published','needs_more']){
+   const localizedId=fixtureVisit();await moderate(localizedId,0,decision);await outbox.processNotifications({id:event(localizedId).id});
+   const payload=attempts.at(-1).payload,link=new URL(payload.html.match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));
+   check(Object.hasOwn(payload,'text')&&payload.text==='','New review first attempts explicitly opt out of generated plaintext with text empty in the actual provider body');
+   check(payload.html.includes('lang="'+locale+'"')&&payload.html.includes('<div lang="'+locale+'" dir="ltr"'),'The verified recipient preference controls all email language containers');
+   check(link.pathname===prefix+'/anmelden'&&link.searchParams.get('weiter')===(prefix||'/')+'?besuche=1&einreichung='+localizedId,'Recipient locale controls both authentication and the protected return destination');
+   check(payload.subject===({de:{published:'Deine Riparim-Bewertung wurde freigegeben',needs_more:'Bitte ergänze deinen Besuchsnachweis'},sq:{published:'Vlerësimi yt në Riparim u miratua',needs_more:'Plotëso dëshminë e vizitës tënde'},en:{published:'Your Riparim review was approved',needs_more:'Please add to your visit evidence'}})[locale][decision],'Both review decisions use the correct recipient subject');
+  }
+ }
+ const newPayload=attempts.at(-1).payload;
+ for(const extra of [{text:null},{text:false},{text:'x'.repeat(6001)},{bcc:['foreign@example.test']},{unknown:'untrusted'}])check(!email.deliveryPayloadSchema.safeParse({...newPayload,...extra}).success,'HTML-only and historical payload validation rejects invalid text and unknown recipient/content fields');
+ check(email.deliveryPayloadSchema.safeParse({...newPayload,text:'Historical valid plain text.'}).success,'Valid historical text remains permitted solely to preserve stored retry requests');
+ preferredLocale=undefined;sent.clear();attempts.length=0;
  let id=fixtureVisit();let response=await moderate(id,0,'published',{to:'foreign@example.test',from:'forged@example.test'});
  check(response.ok&&record(id).status==='published'&&event(id).state==='pending','Moderation durably commits its status and a separate notification event');
  check(event(id).owner===member.userId&&event(id).revision===1&&event(id).decision==='published','The event takes owner, decision and revision exclusively from server data');
@@ -63,10 +78,10 @@ try{
  check(event(id).state==='sent'&&sent.size===1&&event(id).provider_id,'Provider acceptance is persisted separately from the review decision');
  check(attempts.at(-1).payload.to[0]===confirmedEmail&&!JSON.stringify(attempts.at(-1).payload).includes('PRIVATE'),'The confirmed account receives only generic status and a safe link, ignoring recipient overrides');
  check(event(id).payload===null,'Accepted messages discard their frozen address/content payload');
- const url=new URL(attempts.at(-1).payload.text.match(/https:\/\/[^\s]+/)[0]);
+ const url=new URL(attempts.at(-1).payload.html.match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));
  check(url.origin===origin&&url.pathname==='/anmelden'&&url.searchParams.get('weiter')===`/?besuche=1&einreichung=${id}`,'The email links to authentication and the precise owned submission without an access token');
  assert.throws(()=>email.notificationLink('unsafe-target'),/INVALID_VISIT_ID/);passed++;
- check(attempts.at(-1).payload.html.includes('lang="de"')&&attempts.at(-1).payload.html.includes('<title>')&&attempts.at(-1).payload.text,'The template has explicit language, a title, readable link text and a plain-text alternative');
+ check(attempts.at(-1).payload.html.includes('lang="de"')&&attempts.at(-1).payload.html.includes('<title>')&&attempts.at(-1).payload.text==='','The HTML-only template has explicit language, a title and readable link text');
  await outbox.processNotifications({id:event(id).id,force:true});check(sent.size===1&&attempts.length===1,'Completed events cannot be sent again');
  response=await visits.GET(new Request(origin+'/api/visits?id='+id));check(response.ok&&(await response.json()).visits.length===1,'The authenticated notification link selects its own single submission');
  globalThis.fixtureUser={...member,userId:accountId(otherId),ownerKeys:[accountId(otherId)]};check((await visits.GET(new Request(origin+'/api/visits?id='+id))).status===404,'A foreign account cannot use the notification link to read the submission');globalThis.fixtureUser=member;
@@ -83,9 +98,22 @@ try{
  const firstPayload=event(id).payload,firstKey=event(id).id;
  await outbox.processNotifications({id:firstKey,force:true});check(event(id).state==='sent'&&sent.size===acceptedBefore+1,'Retry of a network acknowledgement loss returns the same accepted email');
  assert.deepEqual(attempts.at(-1).payload,JSON.parse(firstPayload));passed++;
- id=fixtureVisit();await moderate(id);failSuccessCommit=true;const beforeCommitLoss=sent.size;
+ preferredLocale='sq'; id=fixtureVisit();await moderate(id);failSuccessCommit=true;const beforeCommitLoss=sent.size;
  await outbox.processNotifications({id:event(id).id});check(event(id).state==='pending'&&sent.size===beforeCommitLoss+1,'A lost local success commit remains retryable without discarding the accepted payload');
+ const beforeLanguageChange=attempts.at(-1);preferredLocale='en';globalThis.fixtureEnv.TRANSACTIONAL_EMAIL_FROM='New release <new@auth.example.test>';
  await outbox.processNotifications({id:event(id).id,force:true});check(event(id).state==='sent'&&sent.size===beforeCommitLoss+1,'A local acknowledgement-loss retry does not send a duplicate');
+ check(attempts.at(-1).body===beforeLanguageChange.body&&attempts.at(-1).key===beforeLanguageChange.key&&attempts.at(-1).payload.html.includes('lang="sq"')&&attempts.at(-1).payload.text==='','Preference and release configuration changes preserve exact request bytes and key after provider acceptance');globalThis.fixtureEnv.TRANSACTIONAL_EMAIL_FROM='Riparim <no-reply@auth.example.test>';preferredLocale=undefined;
+ for(const includesText of [true,false]){
+ id=fixtureVisit();await moderate(id);preferredLocale='sq';
+ const historical={text:'Historical German body from an earlier release.\nhttps://riparim.example.test/anmelden',html:'<!doctype html><html lang="de" dir="ltr"><head><title>Historische Nachricht</title></head><body><div lang="de" dir="ltr">Historische Nachricht</div></body></html>',subject:'Historische deutsche Nachricht',to:[confirmedEmail],from:globalThis.fixtureEnv.TRANSACTIONAL_EMAIL_FROM};
+ if(!includesText)delete historical.text;
+ const historicalBody=JSON.stringify(historical,null,2)+'\n';
+ const historicalKey=event(id).id,credentialHash=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(globalThis.fixtureEnv.RESEND_API_KEY));
+ db.prepare('UPDATE review_notifications SET payload=?,first_attempt_at=?,provider_key_hash=? WHERE id=?').run(historicalBody,Date.now(),Array.from(new Uint8Array(credentialHash),byte=>byte.toString(16).padStart(2,'0')).join(''),historicalKey);
+ await email.sendReviewEmail(historicalBody,globalThis.fixtureEnv.RESEND_API_KEY,historicalKey);const historicalFirst=attempts.at(-1);
+ await outbox.processNotifications({id:historicalKey,force:true});
+ check(event(id).state==='sent'&&attempts.at(-1).body===historicalFirst.body&&attempts.at(-1).key===historicalFirst.key&&attempts.at(-1).payload.text===historical.text&&Object.hasOwn(attempts.at(-1).payload,'text')===includesText,'Historical frozen German bytes including order and whitespace are preserved after a locale and release change');preferredLocale=undefined;
+ }
  id=fixtureVisit();await moderate(id);deliveryMode='pending';const started=new Promise(resolve=>pause=resolve),job=outbox.processNotifications({id:event(id).id});await started;
  const beforeParallel=attempts.length;await outbox.processNotifications({id:event(id).id,force:true});check(attempts.length===beforeParallel,'A fresh processing lease prevents concurrent retries from posting twice');
  release();await job;deliveryMode='success';pause=null;

@@ -3,7 +3,7 @@ import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createRequire} from 'node:module';
 import {DatabaseSync} from 'node:sqlite';
 const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
-const bundle=await build({entryPoints:['lib/auth/config.ts'],bundle:true,format:'esm',platform:'node',write:false,plugins:[{name:'email-settings-fixture',setup(b){
+const bundle=await build({stdin:{contents:"export * from './lib/auth/config';export {validateAuthEmailOrigins} from './lib/auth/email-templates';",resolveDir:process.cwd(),loader:'ts'},bundle:true,format:'esm',platform:'node',write:false,plugins:[{name:'email-settings-fixture',setup(b){
  b.onResolve({filter:/^cloudflare:workers$/},()=>({path:'env',namespace:'fixture'}));
  b.onLoad({filter:/.*/,namespace:'fixture'},()=>({contents:'export const env=globalThis.fixtureEnv;',loader:'js'}));
 }}]});
@@ -22,6 +22,9 @@ let passed=0;const check=(ok,message)=>{assert(ok,message);passed++;};
 const row=()=>db.prepare("SELECT * FROM auth_settings WHERE id='main'").get();
 const draft=()=>{db.exec('DELETE FROM auth_settings');db.prepare("INSERT INTO auth_settings VALUES ('main',?,?,0,0,?)").run(projectUrl,key,'2026-10-02T00:00:00.000Z');};
 draft();
+check(cfg.validateAuthEmailOrigins(globalThis.fixtureEnv.SITE_ORIGIN,globalThis.fixtureEnv.SITE_ORIGIN)===globalThis.fixtureEnv.SITE_ORIGIN,'Mail activation checks the actual provider and application origins before copying templates');
+for(const value of [globalThis.fixtureEnv.SITE_ORIGIN+'/','https://other.example.test']){assert.throws(()=>cfg.validateAuthEmailOrigins(globalThis.fixtureEnv.SITE_ORIGIN,value),/AUTH_EMAIL_ORIGIN/);passed++;}
+check(row().enabled===0&&row().email_delivery_confirmed===0,'Failed template origin validation never activates login or claims delivery');
 check(!(await cfg.getAuthConfig()).enabled,'A saved draft remains disabled without a requested activation');
 globalThis.fixtureEnv.EMAIL_LOGIN_ACTIVATION_PROJECT='https://other-project.supabase.co';
 globalThis.fixtureEnv.EMAIL_LOGIN_ACTIVATION_TIME='2026-10-03T00:00:00.000Z';
