@@ -7,15 +7,15 @@
 .profile-back{margin-bottom:20px;font-size:14px}
 .workshop-overview{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:22px 28px;padding-bottom:24px}
 .workshop-overview-identity{display:block;min-width:0}
-.profile-place{font-size:14px;line-height:1.5;margin-bottom:8px;flex-wrap:wrap}
+.profile-place{font-size:14px;line-height:1.5;margin:10px 0 0;flex-wrap:wrap}
 .profile-specialty{border-left:1px solid var(--border);padding-left:10px;margin-left:5px}
 .workshop-overview h1{font-size:clamp(28px,2.8vw,36px);font-weight:650;line-height:1.2;letter-spacing:-.7px;text-wrap:balance}
 .workshop-overview-actions{padding-top:0;max-width:330px}
 .workshop-overview-actions>a{min-height:46px;white-space:nowrap}
 .profile-overview-details{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(240px,.85fr);gap:20px 24px;padding:16px 20px;background:var(--theme-surface);border:1px solid var(--border);border-radius:12px}
-.profile-overview-details>.workshop-ratings{align-content:center;align-items:center;margin:0}
-.profile-overview-details>.workshop-ratings>.workshop-rating-row{padding:0;border:0;background:transparent;min-height:30px}
-.profile-overview-details>.workshop-ratings>.google-rating{border-left:1px solid var(--border);padding-left:16px;margin-left:6px}
+.profile-overview-details>.workshop-ratings{flex-direction:column;flex-wrap:nowrap;align-items:flex-start;justify-content:center;gap:8px;margin:0}
+.profile-overview-details .rating-provider{font-size:14px;line-height:1.45}
+.profile-overview-details>.workshop-ratings>.workshop-rating-row{max-width:100%;padding:0;border:0;border-radius:0;background:transparent;min-height:30px}
 .profile-overview-details>.profile-opening-hours{margin:0;max-width:none;border-left:1px solid var(--border);padding-left:24px}
 .workshop-page-grid{margin-top:28px}
 .profile-page-section{padding-bottom:25px;margin-bottom:25px}
@@ -75,7 +75,6 @@ a.profile-phone-summary{display:flex;flex-direction:row;align-items:center;gap:8
  .workshop-overview-actions{display:none}
  .profile-overview-details{padding:14px 16px;gap:12px}
  .profile-overview-details>.workshop-ratings{column-gap:16px;row-gap:8px}
- .profile-overview-details>.workshop-ratings>.google-rating{border:0;padding-left:0;margin-left:0}
  .profile-overview-details>.profile-opening-hours{padding-top:12px}
  .workshop-page-grid{gap:20px}
  .profile-contact-summary{padding:18px}
