@@ -8,7 +8,7 @@ const {build}=require('esbuild');
 const React=require('react');
 const {renderToStaticMarkup}=require('react-dom/server');
 const output='.test-runtime/workshop-import';
-const result=await build({entryPoints:['db/directory.ts','lib/catalogue-filters.ts','components/workshop-ratings.tsx'],outdir:output,bundle:true,write:false,format:'esm',platform:'node',jsx:'automatic',external:['react','react-dom','lucide-react'],plugins:[{name:'fixture-storage',setup(b){b.onResolve({filter:/^cloudflare:workers$/},a=>({path:a.path,namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},()=>({loader:'js',contents:'export const env=globalThis.fixtureEnv;'}));}}]});
+const result=await build({entryPoints:['db/directory.ts','lib/workshop-source.ts','lib/catalogue-filters.ts','components/workshop-ratings.tsx'],outdir:output,bundle:true,write:false,format:'esm',platform:'node',jsx:'automatic',external:['react','react-dom','lucide-react'],plugins:[{name:'fixture-storage',setup(b){b.onResolve({filter:/^cloudflare:workers$/},a=>({path:a.path,namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},()=>({loader:'js',contents:'export const env=globalThis.fixtureEnv;'}));}}]});
 for(const file of result.outputFiles){await mkdir(file.path.slice(0,file.path.lastIndexOf('/')),{recursive:true});await writeFile(file.path.replace(/\.js$/,'.mjs'),file.contents);}
 const sqlite=new DatabaseSync(':memory:');
 for(const file of (await readdir('drizzle')).filter(file=>file.endsWith('.sql')).sort())sqlite.exec(await readFile('drizzle/'+file,'utf8'));
@@ -20,7 +20,8 @@ let directory;
 try{Date.now=()=>0;directory=await load('db/directory.mjs');}finally{Date.now=realNow;}
 const filters=await load('lib/catalogue-filters.mjs');
 const {WorkshopRatings}=await load('components/workshop-ratings.mjs');
-const catalogue=JSON.parse(await readFile('data/workshops.json','utf8'));
+const {validateWorkshopCatalogue}=await load('lib/workshop-source.mjs');
+const catalogue=validateWorkshopCatalogue(JSON.parse(await readFile('data/workshops.json','utf8')));
 const curated=catalogue.workshops.map(({google,...profile})=>profile);
 const manifest=JSON.parse(await readFile('data/import-2026-10-03.json','utf8'));
 const added=new Set(manifest.importedWorkshopIds);
@@ -40,19 +41,19 @@ for(const profile of oldProfiles)insert.run(...directory.profileValues(profile))
 sqlite.prepare('INSERT INTO catalog_state (key,value) VALUES (?,?)').run('initial-catalog-v3-113','2026-10-02');
 const before=sqlite.prepare('SELECT * FROM workshops ORDER BY id').all();
 let workshops=await directory.listWorkshops();
-assert.equal(workshops.length,78,'only confirmed passenger-workshop profiles become public');
-assert.equal((await directory.listWorkshops(true)).length,163);
+assert.equal(workshops.length,catalogue.coverage.published,'only confirmed passenger-workshop profiles become public');
+assert.equal((await directory.listWorkshops(true)).length,catalogue.workshops.length);
 for(const entry of JSON.parse(await readFile('data/workshop-scope.json','utf8')).excluded){
  assert(!workshops.some(w=>w.id===entry.workshopId),'out-of-scope entries are absent from the public catalogue');
  const retained=(await directory.listWorkshops(true)).find(w=>w.id===entry.workshopId);assert.equal(retained.status,'draft');
  assert.throws(()=>directory.validateProfile({...retained,status:'published'},retained.id),/Pkw/,'administrators cannot accidentally republish excluded truck entries');
 }
-assert(!workshops.some(w=>w.id==='auto-electronics'),'unconfirmed Google identity remains a draft');
+assert(catalogue.workshops.filter(w=>!w.google.placeId).every(w=>!workshops.some(publicWorkshop=>publicWorkshop.id===w.id)),'unconfirmed Google identities remain private');
 
-assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM workshops WHERE status='draft'").get().n,85);
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM workshops WHERE status='draft'").get().n,catalogue.coverage.drafts);
 const after=sqlite.prepare('SELECT * FROM workshops ORDER BY id').all().filter(w=>!added.has(w.id));
 assert.deepEqual(after,before,'existing profile fields and publication state are preserved');
-assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM workshop_google_ratings').get().n,87);
+assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM workshop_google_ratings').get().n,catalogue.workshops.filter(w=>w.google.snapshot).length);
 assert(manifest.originalPublishedWorkshopIds.every(id=>(catalogue.workshops.find(w=>w.id===id)?.google.snapshot)),'all original profiles retain their separate Google metadata, including hidden profiles');
 assert.equal(workshops.filter(w=>w.googleRating.rating!==null).length,5,'only sourced Google scores are numeric');
 assert.equal(workshops.filter(w=>w.googleRating.count!==null).length,4);
@@ -86,7 +87,7 @@ assert.equal(sqlite.prepare("SELECT review_count FROM workshop_google_ratings WH
 assert.equal(sqlite.prepare("SELECT review_count FROM workshop_google_ratings WHERE workshop_id='auto-servis-doni-skenderaj'").get().review_count,8);
 
 await directory.ensureInitialCatalog();
-assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM workshops').get().n,163,'repeated import adds no duplicates');
+assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM workshops').get().n,catalogue.workshops.length,'repeated import adds no duplicates');
 const insertVisit=sqlite.prepare('INSERT INTO visits (id,owner,workshop,date,vehicle,service,evidence_type,evidence_note,status,display_name,rating,review,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)');
 for(const [id,rating,status] of [['a',2,'published'],['b',4,'published'],['c',5,'pending']])insertVisit.run(id,'fixture-owner','auto-mita','2026-10-02','Fixture car','Service','Rechnung','Fixture evidence',status,'Fixture reviewer',rating,'Fixture repair review','2026-10-03');
 workshops=await directory.listWorkshops();
@@ -112,6 +113,6 @@ assert.equal(edited.name,'Edited profile');
 assert.equal(edited.status,'draft');
 assert.equal(edited.googleRating.rating,4.9,'older imported snapshot never overwrites newer data');
 assert.equal(edited.rating,3,'Google import does not modify visit aggregate');
-assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM workshops').get().n,163);
+assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM workshops').get().n,catalogue.workshops.length);
 sqlite.close();
-console.log(JSON.stringify({newWorkshops:50,publicWorkshops:78,existingDraftsPreserved:85,verifiedGoogleScores:5,independentRatingRevision:true,independentRatings:true,idempotentImport:true,storage:'isolated SQLite fixture',productionTouched:false}));
+console.log(JSON.stringify({newWorkshops:newProfiles.length,publicWorkshops:catalogue.coverage.published,existingDraftsPreserved:catalogue.coverage.drafts,verifiedGoogleScores:5,independentRatingRevision:true,independentRatings:true,idempotentImport:true,storage:'isolated SQLite fixture',productionTouched:false}));

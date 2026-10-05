@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-04",
+  "checkedAt": "2026-10-05",
   "focus": "Pkw-Werkstätten mit belegtem Pkw-Service und eindeutigem Standort; keine reinen Lkw-, Bus- oder Truck-Teilebetriebe",
   "excluded": [
     {
@@ -43,22 +43,6 @@
       "reason": "Tankstelle mit ausdrücklich beworbenem Schwerfahrzeug-Service. Der allgemeine Express-Service belegt keinen konkreten Pkw-Werkstattumfang.",
       "sourceUrls": [
         "https://benita-ks.com/"
-      ]
-    },
-    {
-      "workshopId": "autodiagnoza-kosove-prishtina",
-      "reason": "Ungeklärter Standort: Die unabhängig belegte Plus-Code-Adresse weicht mehr als 300 Meter vom aktuellen Eintrag der gespeicherten Google-Identität ab. Bis zur unabhängigen Bestätigung des heutigen Standorts als Entwurf behalten.",
-      "sourceUrls": [
-        "https://www.google.com/maps/search/?api=1&query=Autodiagnoza+Kosove+M533%2BXMW%2C+Prishtina&query_place_id=ChIJkbvtE2meVBMRvu2LFtwxfho",
-        "https://www.cybo.com/XK/pristina/car-repair"
-      ]
-    },
-    {
-      "workshopId": "bmw-service-ferizaj",
-      "reason": "Ungeklärter Standort: Die unabhängig belegte Plus-Code-Adresse weicht mehr als 300 Meter vom aktuellen Eintrag der gespeicherten Google-Identität ab. Bis zur unabhängigen Bestätigung des heutigen Standorts als Entwurf behalten.",
-      "sourceUrls": [
-        "https://www.google.com/maps/search/?api=1&query=BMW+Service+95R6%2BP8J%2C+Driton+Islami%2C+Talinoc+i+Jerlive+70000&query_place_id=ChIJb6GZpCd_VBMRi_bRC-yoNhI",
-        "https://www.cybo.com/XK/ferizaj/car-repair"
       ]
     }
   ]
