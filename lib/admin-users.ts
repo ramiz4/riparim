@@ -30,9 +30,9 @@ export function parseUserFields(body:Record<string,unknown>,creating=false){
  return fields;
 }
 export function providerFailure(error:{code?:string;status?:number}|null){
- if(error?.code==="email_exists"||error?.code==="user_already_exists")return json({error:"Diese E-Mail-Adresse wird bereits verwendet."},409);
- if(error?.code==="user_not_found"||error?.status===404)return json({error:"Benutzer nicht gefunden."},404);
- if(error?.code==="weak_password")return json({error:"Bitte wähle ein stärkeres Passwort."},400);
- return json({error:"Die Benutzerverwaltung ist gerade nicht verfügbar. Bitte versuche es erneut."},503);
+ if(error?.code==="email_exists"||error?.code==="user_already_exists")return json({error:"Diese E-Mail-Adresse wird bereits verwendet.",errorCode:"user_email_exists"},409);
+ if(error?.code==="user_not_found"||error?.status===404)return json({error:"Benutzer nicht gefunden.",errorCode:"user_not_found"},404);
+ if(error?.code==="weak_password")return json({error:"Bitte wähle ein stärkeres Passwort.",errorCode:"user_password_weak"},400);
+ return json({error:"Die Benutzerverwaltung ist gerade nicht verfügbar. Bitte versuche es erneut.",errorCode:"users_unavailable"},503);
 }
-export const notConfigured=()=>json({error:"Für die Benutzerverwaltung muss der geheime Supabase-Schlüssel in der Serverkonfiguration hinterlegt sein."},503);
+export const notConfigured=()=>json({error:"Für die Benutzerverwaltung muss der geheime Supabase-Schlüssel in der Serverkonfiguration hinterlegt sein.",errorCode:"users_configuration_missing"},503);

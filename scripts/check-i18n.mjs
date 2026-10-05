@@ -44,6 +44,12 @@ import {type CodedResponse} from './lib/i18n/codes';
 const t=createTranslator(getMessages('sq',['common']));
 t('common.login');
 t('customer.stars',{count:2});
+t('management.deliveryAttempts',{count:2});
+// @ts-expect-error private draft titles still require their explicit name
+t('management.draftFor');
+// @ts-expect-error roles and statuses are displayed separately from payload data
+const unknownManagementCode:CodedResponse={errorCode:'translated role'};
+void unknownManagementCode;
 // @ts-expect-error customer rich text needs its named parameter
 t('customer.enterDeletePhrase');
 // @ts-expect-error missing stars count fails

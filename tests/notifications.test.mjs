@@ -53,6 +53,10 @@ globalThis.fetch=async(url,options)=>{
 };
 let passed=0;const check=(condition,label)=>{assert(condition,label);passed++;};
 try{
+ for(const locale of ['de','sq','en']){
+  const invalid=await queue.GET(request('GET',null,'/api/notifications?cursor=invalid',{'Accept-Language':locale})),data=await invalid.json();
+  check(invalid.status===400&&data.errorCode==='invalid_page'&&data.error==='Ungültige Seitenangabe.','Notification cursor errors keep their stable code, legacy text and status across languages');
+ }
  let id=fixtureVisit();let response=await moderate(id,0,'published',{to:'foreign@example.test',from:'forged@example.test'});
  check(response.ok&&record(id).status==='published'&&event(id).state==='pending','Moderation durably commits its status and a separate notification event');
  check(event(id).owner===member.userId&&event(id).revision===1&&event(id).decision==='published','The event takes owner, decision and revision exclusively from server data');

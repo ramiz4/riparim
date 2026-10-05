@@ -18,7 +18,7 @@ globalThis.fetch=async(path,options)=>{
 };
 
 const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
-const bundle=await build({stdin:{contents:`export {SiteHeader} from './components/site-header';export {default as RouterLink} from 'next/link';export {default as AdminPanel} from './app/[locale]/verwaltung/panel';export {default as AdminReviews} from './app/[locale]/verwaltung/bewertungen/reviews';export {default as AdminUsers} from './app/[locale]/verwaltung/benutzer/users';export {default as AuthSetup} from './app/[locale]/verwaltung/anmeldung/setup';`,resolveDir:process.cwd(),loader:'tsx'},bundle:true,platform:'node',format:'esm',outfile:'.test-runtime/admin-menu/header.mjs',write:false,packages:'external',loader:{'.css':'empty'},define:{'process.env.__VINEXT_HAS_PAGES_ROUTER':'"false"','process.env.__VINEXT_HAS_CLIENT_REWRITES':'"false"'},plugins:[{name:'app-router-boundary',setup(b){
+const bundle=await build({stdin:{contents:`export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {SiteHeader} from './components/site-header';export {default as RouterLink} from 'next/link';export {default as AdminPanel} from './app/[locale]/verwaltung/panel';export {default as AdminReviews} from './app/[locale]/verwaltung/bewertungen/reviews';export {default as AdminUsers} from './app/[locale]/verwaltung/benutzer/users';export {default as AuthSetup} from './app/[locale]/verwaltung/anmeldung/setup';`,resolveDir:process.cwd(),loader:'tsx'},bundle:true,platform:'node',format:'esm',outfile:'.test-runtime/admin-menu/header.mjs',write:false,packages:'external',loader:{'.css':'empty'},define:{'process.env.__VINEXT_HAS_PAGES_ROUTER':'"false"','process.env.__VINEXT_HAS_CLIENT_REWRITES':'"false"'},plugins:[{name:'app-router-boundary',setup(b){
  b.onResolve({filter:/^next\/link$/},()=>({path:new URL('../node_modules/vinext/dist/shims/link.js',import.meta.url).pathname}));
  // Exercise the real Link and Radix menu with an App Router that never commits.
  b.onResolve({filter:/^\.\/navigation\.js$/},args=>args.importer.endsWith('/shims/link.js')?{path:'stalled-router',namespace:'fixture'}:undefined);
@@ -28,7 +28,7 @@ await mkdir('.test-runtime/admin-menu',{recursive:true});
 await writeFile('.test-runtime/admin-menu/header.mjs',bundle.outputFiles[0].contents);
 const {createElement,act}=await import('react');
 const {createRoot}=await import('react-dom/client');
-const {SiteHeader,RouterLink,AdminPanel,AdminReviews,AdminUsers,AuthSetup}=await import(new URL('../.test-runtime/admin-menu/header.mjs',import.meta.url));
+const {SiteHeader,RouterLink,AdminPanel,AdminReviews,AdminUsers,AuthSetup,I18nProvider,getMessages}=await import(new URL('../.test-runtime/admin-menu/header.mjs',import.meta.url));
 window[Symbol.for('vinext.navigationRuntime')]={bootstrap:{routeManifest:null,rsc:undefined},functions:{navigate:()=>new Promise(()=>{})}};
 globalThis.routerAttempts=[];
 const documents=[];
@@ -38,7 +38,7 @@ document.addEventListener('click',event=>{
 });
 
 const root=createRoot(document.getElementById('root'));
-async function render(email,isAdmin,provider='Google'){await act(async()=>root.render(createElement(SiteHeader,{account:{email,displayName:'Fixture account',provider},isAdmin})));}
+async function render(email,isAdmin,provider='Google'){await act(async()=>root.render(fixtureMessages(createElement(SiteHeader,{account:{email,displayName:'Fixture account',provider},isAdmin}))));}
 async function openMenu(){
  const trigger=document.querySelector('[aria-label="Benutzermenü öffnen"]');
  await act(async()=>trigger.dispatchEvent(new MouseEvent('pointerdown',{bubbles:true,cancelable:true,button:0})));
@@ -65,7 +65,7 @@ try{
  }
  assert.deepEqual(routerAttempts,[],'header destinations do not depend on the stalled client router');
  let visits=0,reviews=0;
- await act(async()=>root.render(createElement(SiteHeader,{account:{email:'customer@example.test',displayName:'Fixture account',provider:'Google'},onVisits:()=>visits++,onNewVisit:()=>reviews++})));
+ await act(async()=>root.render(fixtureMessages(createElement(SiteHeader,{account:{email:'customer@example.test',displayName:'Fixture account',provider:'Google'},onVisits:()=>visits++,onNewVisit:()=>reviews++}))));
  for(const label of ['Meine Bewertungen','Bewerten']){
   await openMenu();
   const item=[...document.querySelectorAll('[role="menuitem"]')].find(node=>node.textContent===label),before=documents.length;
@@ -76,7 +76,7 @@ try{
  assert.equal(visits,1);assert.equal(reviews,1);
  // The real Link control demonstrates that the fixture can detect a consumed
  // click, so the document-navigation assertions above cannot pass vacuously.
- await act(async()=>root.render(createElement(RouterLink,{href:'/betrieb'},'Router control')));
+ await act(async()=>root.render(fixtureMessages(createElement(RouterLink,{href:'/betrieb'},'Router control'))));
  const before=documents.length;
  await act(async()=>document.querySelector('a').click());
  assert.deepEqual(routerAttempts,['/betrieb'],'the control exercises the actual client-router boundary');
@@ -97,7 +97,7 @@ try{
  }
  for(const email of ['first-admin@example.test','second-admin@example.test']){
   for(const [Page,active] of [[AdminPanel,'workshops'],[AdminReviews,'reviews'],[AdminUsers,'users'],[AuthSetup,'login']]){
-   await act(async()=>root.render(createElement(Page,{account:{email,displayName:'Fixture account',provider:'Google'}})));
+   await act(async()=>root.render(fixtureMessages(createElement(Page,{account:{email,displayName:'Fixture account',provider:'Google'}}))));
    const navigation=document.querySelector('nav[aria-label="Verwaltung"]');
    assert(navigation,`${active} includes the shared admin navigation`);
    assert.equal(navigation.querySelectorAll('[aria-current="page"]').length,1);
@@ -137,3 +137,5 @@ try{
  await act(async()=>root.unmount());
  dom.window.close();
 }
+
+function fixtureMessages(element){return createElement(I18nProvider,{locale:"de",messages:getMessages("de",["common","customer","management"])},element);}
