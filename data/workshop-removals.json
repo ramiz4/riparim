@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "removedAt": "2026-10-05T13:58:49.122Z",
+  "reason": "Auf ausdrücklichen Nutzerauftrag verworfene Entwürfe ohne eindeutige bestätigte Google-Zuordnung.",
+  "issueUrl": "https://github.com/ramiz4/riparim/issues/53",
+  "previousReview": "./catalogue-identity-2026-10-05.json",
+  "before": {
+    "total": 163,
+    "published": 128,
+    "drafts": 35
+  },
+  "after": {
+    "total": 136,
+    "published": 128,
+    "drafts": 8
+  },
+  "workshopIds": [
+    "auto-electronics",
+    "auto-elektro-start-prishtina",
+    "auto-pjese-servis-dubova-ferizaj",
+    "auto-servis-beni-prishtina",
+    "auto-servis-fia-prishtina",
+    "auto-servis-hoda-ferizaj",
+    "auto-servis-karabeg-prishtina",
+    "auto-servis-kiki-ferizaj",
+    "auto-servis-lavdrimi-ferizaj",
+    "auto-servis-mendi-ferizaj",
+    "auto-servis-valoni-feroda-prishtina",
+    "automekanik-leoni-prishtina",
+    "automekanik-muja-prishtina",
+    "autoservis-bekteshi-prishtina",
+    "autoservis-difa-prishtina",
+    "autoservis-irfi-prishtina",
+    "autoservis-naser-minushi-prishtina",
+    "axha-prishtina",
+    "firi-prishtina",
+    "g-b-prishtina",
+    "ibra-prishtina",
+    "moto-stanki-gjilan",
+    "opel-prishtina-prishtina",
+    "skifti-prishtina",
+    "turbo-servis-turbo-klinika-prishtina",
+    "univerzall-prishtina",
+    "xhema-auto-servis-prishtina"
+  ]
+}
