@@ -52,7 +52,14 @@ const workshop={id:'fixture',name:'Fixture Pkw Werkstatt',city:'Prishtina',addre
 assert.equal(new URL(links.workshopRouteUrl(workshop)).searchParams.get('destination_place_id'),placeId,'route always targets the confirmed ID even before live Google details arrive');
 assert.equal(new URL(links.workshopMapsUrl(workshop)).searchParams.get('query_place_id'),placeId);
 const groups=content.groupWorkshopServices(workshop);
-assert.deepEqual(groups,[{title:'Diagnose & Elektronik',items:['Elektronische Diagnose']},{title:'Bremsen & Fahrwerk',items:['Bremsenservice']}]);
+assert.deepEqual(groups,[{title:'Diagnose & Elektronik',items:[{text:'Elektronische Diagnose',sourceIndex:0}]},{title:'Bremsen & Fahrwerk',items:[{text:'Bremsenservice',sourceIndex:2}]}]);
+const aligned={services:['Diagnose & Elektronik','Bremsen & Fahrwerk'],serviceDetails:['Elektronische Diagnose laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären.','Elektronische Diagnose','Konkreten Umfang direkt klären.','Bremsenservice','Weitere Hilfe']};
+const alignedGroups=content.groupWorkshopServices(aligned);
+assert.deepEqual(alignedGroups.map(group=>group.items.map(item=>item.sourceIndex)),[[0],[3],[4]],'normalize first-index duplicates, drop empty detail, and preserve other-services index');
+const translated={serviceDetails:['Diagnostikë e parë','NEVER SHOW DUPLICATE','NEVER SHOW EMPTY','Frena','Ndihmë tjetër']};
+assert.deepEqual(alignedGroups.map(group=>group.items.map(item=>content.displayServiceDetail(item,translated,'sq'))),[['Diagnostikë e parë'],['Frena'],['Ndihmë tjetër']],'translation arrays use original indices after classification and normalization');
+assert.equal(content.displayServiceDetail(alignedGroups[0].items[0],{serviceDetails:aligned.serviceDetails},'de'),'Elektronische Diagnose','DE keeps established visible detail normalization even with an additive display map');
+assert.deepEqual(alignedGroups.map(group=>group.title),['Diagnose & Elektronik','Bremsen & Fahrwerk','Weitere Leistungen'],'translated words never determine service groups');
 assert.equal(content.workshopSelectionMatches(workshop,{brand:'BMW',service:'Motor & Getriebe',vehicle:null}).brand,false);
 assert.equal(content.workshopSelectionMatches(workshop,{brand:'Volvo',service:'Diagnose & Elektronik',vehicle:null}).service,true);
 assert.equal(content.workshopSelectionMatches({...workshop,brands:[]},{brand:'Volvo',service:null,vehicle:null}).brand,false,'unknown brand coverage is not presented as a match');

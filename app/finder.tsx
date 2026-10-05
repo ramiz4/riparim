@@ -14,15 +14,17 @@ import type {AccountIdentity} from "@/components/account-storage-notice";
 import {DetailSearch,type SearchContext} from "./journeys";
 import {catalogueHref,defaultCatalogueFilters,matchCatalogue} from "@/lib/catalogue-filters";
 import {readSearchSession,rememberSearchSession,deactivatePrivateMatching} from "@/lib/search-session";
+import type {WorkshopDisplayById} from "@/lib/workshop-profile-content";
 import {cities,services,type Workshop} from "@/lib/workshops";
 
-type Props={initialWorkshops:Workshop[];initialError:string;signedIn:boolean;account:AccountIdentity|null;isAdmin:boolean};
-export default function Finder({initialWorkshops,initialError,signedIn,account,isAdmin}:Props){
+type Props={initialDisplayById?:WorkshopDisplayById;initialWorkshops:Workshop[];initialError:string;signedIn:boolean;account:AccountIdentity|null;isAdmin:boolean};
+export default function Finder({initialDisplayById={},initialWorkshops,initialError,signedIn,account,isAdmin}:Props){
  const {locale,t}=useI18n();
- const router=useRouter(),id=useId();const [directory,setDirectory]=useState(initialWorkshops),[directoryReady,setDirectoryReady]=useState(!initialError),[service,setService]=useState(services[0]),[city,setCity]=useState(cities[0]),[detailed,setDetailed]=useState(false),[context,setContext]=useState<SearchContext|null>(null),[info,setInfo]=useState(false);
+ const router=useRouter(),id=useId();const [directoryData,setDirectoryData]=useState({workshops:initialWorkshops,displayById:initialDisplayById}),[directoryReady,setDirectoryReady]=useState(!initialError),[service,setService]=useState(services[0]),[city,setCity]=useState(cities[0]),[detailed,setDetailed]=useState(false),[context,setContext]=useState<SearchContext|null>(null),[info,setInfo]=useState(false);
+ const directory=directoryData.workshops;
  // eslint-disable-next-line react-hooks/set-state-in-effect -- A new landing entry preserves only the private RAM draft, never prior results.
  useEffect(()=>{setContext(readSearchSession()?.context??null);deactivatePrivateMatching();},[]);
- const refresh=useCallback(async()=>{try{const response=await fetch("/api/workshops"),data=await response.json() as {workshops:Workshop[]};if(response.ok){setDirectory(data.workshops.filter(w=>w.status==="published"));setDirectoryReady(true);}}catch{/* The landing entry has no result list to replace with a false empty state. */}},[]);
+ const refresh=useCallback(async()=>{try{const response=await fetch(`/api/workshops?locale=${locale}`),data=await response.json() as {workshops:Workshop[];displayById?:WorkshopDisplayById};if(response.ok){setDirectoryData({workshops:data.workshops.filter(w=>w.status==="published"),displayById:data.displayById??{}});setDirectoryReady(true);}}catch{/* The landing entry has no result list to replace with a false empty state. */}},[locale]);
  const personal=useDirectoryAccountActions({directory,signedIn,account,onRefresh:()=>void refresh(),observePrivateQuery:true});
  function navigateQuick(nextService=service,nextCity=city){const filters={...defaultCatalogueFilters,service:nextService,city:nextCity},href=catalogueHref(filters,locale);rememberSearchSession({...filters,searched:true,context:readSearchSession()?.context??context,privateMatchingActive:false,catalogueHref:href,visibleCount:12,scrollY:0});router.push(href);}
  function applyContext(value:SearchContext){const filters={...defaultCatalogueFilters,service:value.service,city:value.city,brand:value.brand},href=catalogueHref(filters,locale);rememberSearchSession({...filters,searched:true,context:value,privateMatchingActive:true,catalogueHref:href,visibleCount:12,scrollY:0});router.push(href);}
