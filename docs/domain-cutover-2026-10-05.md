@@ -1,9 +1,10 @@
 # Produktionsumstellung vom 5. Oktober 2026
 
 Dieser Bericht hält die tatsächlich ausgeführte Umstellung aus
-[#19](https://github.com/ramiz4/riparim/issues/19) fest. Technische Abnahme,
-Nutzerabnahme und Beobachtungsphase werden getrennt nachgewiesen. Die alte
-Sites-Instanz bleibt eingefroren erhalten; die Voraussetzungen zum Beginn von #20 sind noch offen.
+[#19](https://github.com/ramiz4/riparim/issues/19) fest. Die technische
+Betreiberabnahme ist abgeschlossen. Die gesonderte Rückfallphase für #20
+bleibt offen; die alte Sites-Instanz und ihre Sicherungen bleiben eingefroren
+erhalten, während Inventar und Stilllegungsplan vorbereitet werden können.
 
 ## Verantwortung und Betriebsfenster
 
@@ -176,9 +177,36 @@ geprüfte App-Seite war darunter. Im Browser wurden keine Navigations- oder
 Google-Autorisierungsfehler erfasst. Dies belegt den genannten Zeitraum, keine
 beliebige künftige Verfügbarkeit. Es wurden nur Mengen und Kategorien gespeichert.
 
-**Nutzerabnahme und vereinbartes Ende der Beobachtungs-/Rückfallphase sind noch
-offen.** #19 bleibt offen; die alte Site und alle benötigten Sicherungen bleiben
-erhalten. #20 beginnt erst nach diesen Voraussetzungen.
+**Technische Betreiberabnahme: Go am 5. Oktober um 07:16:24.** Verantwortlich
+ist der in diesem Chat autonom beauftragte Betreiber-Agent. Die technische
+Beobachtung lief von 04:57:35 bis 07:16:24, also **2 Stunden, 18 Minuten und
+49 Sekunden**. Der letzte vollständige Aggregatabgleich umfasst 584 Fetch-
+und 27 Scheduled-Aufrufe mit Outcome `ok`, keine Worker-Ausführungsfehler und
+keine HTTP-5xx. Die HTTP-201-Antwort gehört zum oben dokumentierten privaten
+Testbesuch, dessen Bereinigung bestätigt wurde. Berechtigungsablehnungen und
+nicht vorhandene Pfade wurden nicht als erfolgreiche Fachaktionen gezählt.
+
+Fünf frische Abschlussprobes bestätigen HTTP 200 und den Release-Commit auf
+Apex und technischem Host, die kanonische www-Weiterleitung mit erhaltener Query,
+die direkte Google-Eigentumsdatei sowie den tatsächlichen Wartungstext mit
+`no-store` auf der alten generierten URL. Die authentifizierte Sites-Abfrage
+bestätigt weiterhin `MIGRATION_READ_ONLY=true`, Umgebungsrevision 17.
+
+Alle Anforderungen aus #19 sind damit technisch nachgewiesen: geschützte
+Konfiguration und Identitäten, produktive Auth-/Berechtigungsprüfung, DNS/TLS,
+vollständiger finaler Abgleich, alleiniger Writer, begründetes Go/No-Go mit
+geprüftem Forward-Fix, beobachtete Fachabläufe und weitere automatische
+Main-Releases. Die erfolgreiche technische Abnahme erlaubt den Abschluss
+dieses Domainwechsel-Issues. Die weitere Betriebsbeobachtung kann fortgeführt
+werden, ohne die abgeschlossene technische Umstellung erneut zu öffnen.
+
+**Das vereinbarte Ende der gesonderten Rückfallphase für #20 ist weiterhin
+offen.** Der Vorschlag 6. Oktober, 05:00 Uhr ist nicht bestätigt. Eine persönliche
+Nutzerabnahme wird nicht als erteilt behauptet. Die technische Betreiberabnahme
+aus #19 ersetzt weder diese Vereinbarung noch eine Freigabe zur endgültigen
+Löschung. Alte Veröffentlichung, Domainzuordnungen, Zugänge und Sicherungen
+werden bis zum nachgewiesenen Ende der Rückfallphase erhalten; Inventar,
+Archiv und Stilllegungsplan dürfen vorbereitet werden.
 
 Ein Codefehler wird bevorzugt durch einen geprüften Forward-Fix über Main
 behoben; die erfolgreichen Abnahmefixes zeigen diesen Weg bereits produktiv.
