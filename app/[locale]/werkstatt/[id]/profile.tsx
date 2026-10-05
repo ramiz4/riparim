@@ -17,7 +17,7 @@ import {ReviewForm} from "@/components/review-form";
 import {ModalContent} from "@/components/modal-shell";
 import {Dialog} from "@/components/ui/dialog";
 import type {AccountIdentity} from "@/components/account-storage-notice";
-import {MyVisits,VisitForm,type Review,type Visit} from "@/app/journeys";
+import type {Review} from "@/app/journeys";
 import {contactHref,type Workshop} from "@/lib/workshops";
 import {readSearchSession} from "@/lib/search-session";
 import {profileSearchHref} from "@/lib/profile-navigation";
@@ -26,7 +26,7 @@ import {WorkshopNavigationLink} from "@/components/workshop-navigation-link";
 type Props={workshop:Workshop;directory:Workshop[];reviews:Review[];reviewError:string;signedIn:boolean;account:AccountIdentity|null;isAdmin:boolean};
 export default function WorkshopProfile({workshop:w,directory,reviews,reviewError,signedIn,account,isAdmin}:Props){
  const {locale}=useI18n();
- const router=useRouter();const [reviewOpen,setReviewOpen]=useState(false),[reviewBusy,setReviewBusy]=useState(false),[myReviews,setMyReviews]=useState(false),[editing,setEditing]=useState<Visit|null>(null),[contact,setContact]=useState(false),[message,setMessage]=useState(""),[feedback,setFeedback]=useState(""),[backHref,setBackHref]=useState("/werkstaetten");
+ const router=useRouter();const [reviewOpen,setReviewOpen]=useState(false),[reviewBusy,setReviewBusy]=useState(false),[contact,setContact]=useState(false),[message,setMessage]=useState(""),[feedback,setFeedback]=useState(""),[backHref,setBackHref]=useState("/werkstaetten");
  const {profile,identity,status}=useGoogleWorkshopProfile(w.id);
  const [selection,setSelection]=useState<ProfileSelection>({brand:null,service:null,vehicle:null});
  const path=localizeHref(`/werkstatt/${encodeURIComponent(w.id)}`,locale);
@@ -48,7 +48,7 @@ export default function WorkshopProfile({workshop:w,directory,reviews,reviewErro
  async function copy(value:string,label:string){try{await navigator.clipboard.writeText(value);setFeedback(label);}catch{setFeedback("Bitte wähle den Text aus und kopiere ihn manuell.");}}
  const googleReviews=<div className="profile-google-reviews" id="google-bewertungen"><GooglePlaceReviews key={w.id} workshop={w} identity={identity} liveRating={profile?.rating??null} status={status}/></div>;
  const riparimReviews=<div className={`profile-riparim-reviews${!reviews.length&&!reviewError?" is-empty":""}`}><div className="profile-review-provider"><h3><ShieldCheck size={18}/>Riparim</h3>{reviews.length>0&&<p>Bewertungen mit geprüftem Besuchsnachweis.</p>}</div>{reviewError?<p className="error" role="alert">{reviewError}</p>:reviews.length?<div className="public-review-list">{reviews.map((review,index)=><article className="public-review" key={`${review.display_name}:${review.date}:${index}`}><div className="review-title"><strong>{review.display_name}</strong><span><Star size={14} fill="currentColor"/>{review.rating} / 5</span></div><p className="review-meta">{review.vehicle} · {review.service} · {new Date(review.date+"T12:00:00").toLocaleDateString("de-DE")}</p><p className="public-review-text">{review.review}</p><span className="proof-badge"><ShieldCheck size={13}/>Besuchsnachweis geprüft</span></article>)}{w.count>reviews.length&&<p className="help">Die neuesten {reviews.length} Bewertungen werden angezeigt.</p>}</div>:<p className="profile-review-empty">Noch keine Bewertungen mit Besuchsnachweis.</p>}</div>;
- return <><SiteHeader account={account} isAdmin={isAdmin} onVisits={()=>setMyReviews(true)} onNewVisit={openReview}/>
+ return <><SiteHeader account={account} isAdmin={isAdmin} onNewVisit={openReview}/>
  <main className="workshop-page wrap" data-workshop-id={w.id}>
   <WorkshopNavigationLink className="profile-back" href={backHref}><ArrowLeft size={16}/>Zurück zur Suche</WorkshopNavigationLink>
   <header className="workshop-overview"><div className="workshop-overview-identity"><h1>{w.name}</h1><p className="profile-place"><MapPin size={15}/><span>{w.city}</span>{specialty&&<span className="profile-specialty">{specialty}</span>}</p></div><div className="workshop-overview-actions">{w.whatsapp&&<button className="primary" onClick={startWhatsApp}><MessageCircle size={17}/>WhatsApp</button>}{phoneHref&&<LocaleAnchor className={w.whatsapp?"outline":"primary"} href={phoneHref}><Phone size={17}/>Anrufen</LocaleAnchor>}<LocaleAnchor className="outline" href={routeHref} target="_blank" rel="noopener noreferrer"><Navigation size={17}/>Route planen</LocaleAnchor></div><div className="profile-overview-details"><WorkshopRatings key={w.id} workshop={w} compact googleState={{live:profile?.rating??null,status}}/><WorkshopOpeningHours profile={profile} status={status} mapsUrl={mapHref}/></div></header>
@@ -77,7 +77,5 @@ export default function WorkshopProfile({workshop:w,directory,reviews,reviewErro
  <Dialog open={contact} onOpenChange={setContact}><ModalContent title="Nachricht vorbereiten" description={w.name} footer={<><button className="outline" onClick={()=>void copy(message,"Nachricht kopiert.")}><Copy size={16}/>Text kopieren</button><LocaleAnchor className="primary" href={contactHref(w,"whatsapp",message)??undefined} target="_blank" rel="noopener noreferrer"><MessageCircle size={18}/>WhatsApp öffnen</LocaleAnchor></>}>
   <label className="message-label">Deine Nachricht<textarea rows={5} value={message} maxLength={3000} onChange={e=>setMessage(e.target.value)}/></label><p className="help">Du sendest die Nachricht selbst in WhatsApp.</p>{feedback&&<p className="help" role="status">{feedback}</p>}
  </ModalContent></Dialog>
- <MyVisits open={myReviews} onClose={()=>{setMyReviews(false);router.refresh();}} directory={directory} signedIn={signedIn} account={account} onResubmit={visit=>{setMyReviews(false);setEditing(visit);}}/>
- <VisitForm open={!!editing} existing={editing} workshop={directory.find(workshop=>workshop.id===editing?.workshop)??null} directory={directory} signedIn={signedIn} account={account} onClose={()=>{setEditing(null);router.refresh();}} onDone={()=>setMyReviews(true)}/>
  </>;
 }

@@ -78,7 +78,7 @@ export default function Catalogue({initialWorkshops,initialError,initialFilters,
  function applyDraft(){commit(draft);setFilterOpen(false);requestAnimationFrame(()=>{filterButton.current?.focus({preventScroll:true});resultsHeading.current?.scrollIntoView({block:"start",behavior:"auto"});});}
  function applyContext(value:SearchContext){const next={...defaultCatalogueFilters,service:value.service,city:value.city,brand:value.brand,sort:filters.sort};setContext(value);setPrivateMatchingActive(true);setFilters(next);setVisibleCount(12);window.history.replaceState(window.history.state,"",catalogueHref(next,locale));}
 
- return <><SiteHeader account={account} isAdmin={isAdmin} onVisits={personal.onVisits} onNewVisit={personal.onNewVisit}/><main className="catalogue-page wrap">
+ return <><SiteHeader account={account} isAdmin={isAdmin} onNewVisit={personal.onNewVisit}/><main className="catalogue-page wrap">
   <header className="catalogue-heading"><div><h1>Werkstätten</h1></div><button className="catalogue-detail-search" onClick={()=>setDetailOpen(true)}><CarFront size={18}/>Mit Fahrzeug & Problem suchen</button></header>
   {activeContext&&<div className="catalogue-private-context"><CarFront size={18}/><div><strong>Privater Suchkontext · {activeContext.brand} {activeContext.model}</strong><p>{activeContext.radius>0?`${activeContext.radius} km Umkreis · `:""}{activeContext.additionalCity?`${activeContext.additionalCity} · `:""}Fahrzeug und Problem bleiben nur in diesem Browserlauf.</p></div><button onClick={()=>setDetailOpen(true)}>Suchkontext ändern</button></div>}
   <div className="catalogue-search-sentinel" ref={searchSentinel} aria-hidden="true"/>

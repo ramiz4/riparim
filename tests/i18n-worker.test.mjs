@@ -22,15 +22,20 @@ try{
  for(const [path,target] of [['/de','/'],['/de/werkstaetten?ort=prizren','/werkstaetten?ort=prizren']]){const response=await runtime.dispatchFetch('https://riparim.test'+path,{redirect:'manual'});assert.equal(response.status,308);assert.equal(new URL(response.headers.get('Location'),'https://riparim.test').href,'https://riparim.test'+target);}
  for(const path of ['/fr','/sq/missing','/en/missing','/werkstatt/unknown-profile','/en/werkstatt/unknown-profile','/sq/werkstatt/x','/sq/missing.html','/en/missing.txt','/sq/missing.svg','/en/missing.png','/fr/missing.png','/missing.html','/missing.png']){const response=await runtime.dispatchFetch('https://riparim.test'+path);assert.equal(response.status,404,path);};
  for(const path of ['/api/workshops','/api/google-places']){const response=await runtime.dispatchFetch('https://riparim.test'+path);assert.equal(response.status,200);assert.match(response.headers.get('Content-Type'),/application\/json/);}
- for(const [locale,login,settings] of [['de','Anmelden','Einstellungen'],['sq','Hyr','Cilësimet'],['en','Log in','Settings']]){
+ for(const [locale,login,settings,ownReviews] of [['de','Anmelden','Einstellungen','Meine Bewertungen'],['sq','Hyr','Cilësimet','Vlerësimet e mia'],['en','Log in','Settings','My reviews']]){
   const prefix=locale==='de'?'':'/'+locale;
-  for(const [path,label] of [['/anmelden',login],['/einstellungen',settings]]){
+  for(const [path,label] of [['/anmelden',login],['/einstellungen',settings],['/bewertungen',ownReviews]]){
    const response=await runtime.dispatchFetch('https://riparim.test'+prefix+path);assert.equal(response.status,200);const html=await response.text();assert(html.includes(label),'Built private page has active customer copy');assert.match(html,/<meta[^>]*name="robots"[^>]*content="noindex[^">]*nofollow/);assert(!html.includes('hreflang='),'Private customer page has no public alternate');
   }
   const notice=await runtime.dispatchFetch('https://riparim.test'+prefix+'/anmelden?localeNotice=preference_not_saved');const noticeHtml=await notice.text();assert(noticeHtml.includes({de:'Deine Sprachpräferenz konnte nicht gespeichert werden.',sq:'Preferenca jote e gjuhës nuk mund të ruhej.',en:'Your language preference could not be saved.'}[locale]),'Preference failure notice is localized on an actual fresh document');
-  for(const query of ['besuche=1','einreichung=11111111-1111-4111-8111-111111111111','nachweis=neu']){
+  for(const query of ['nachweis=neu']){
    const response=await runtime.dispatchFetch('https://riparim.test'+prefix+'?'+query);assert.equal(response.status,200);const html=await response.text();assert.match(html,/<meta[^>]*name="robots"[^>]*content="noindex[^">]*nofollow/);assert(!html.includes('hreflang='),'Private landing modes have no alternate deep links');
   }
+  const submission='11111111-1111-4111-8111-111111111111';
+  for(const [query,target] of [['besuche=1',prefix+'/bewertungen'],['einreichung='+submission,prefix+'/bewertungen?einreichung='+submission],['besuche=1&einreichung='+submission,prefix+'/bewertungen?einreichung='+submission]]){
+   const response=await runtime.dispatchFetch('https://riparim.test'+prefix+'?'+query,{redirect:'manual'});assert.equal(response.status,307,'Built legacy own-history link redirects to a regular page');assert.equal(new URL(response.headers.get('Location'),'https://riparim.test').pathname,new URL(target,'https://riparim.test').pathname);assert.equal(new URL(response.headers.get('Location'),'https://riparim.test').search,new URL(target,'https://riparim.test').search);
+  }
+  const own=await runtime.dispatchFetch('https://riparim.test'+prefix+'/bewertungen?einreichung='+submission),ownHtml=await own.text();assert.equal(own.status,200);assert.match(ownHtml,/<main[^>]*class="my-reviews-page wrap"/);assert.match(ownHtml,/<meta[^>]*name="robots"[^>]*content="noindex[^">]*nofollow/);assert(!ownHtml.includes('hreflang='),'Targeted own-review documents have no private alternates');assert(ownHtml.includes(encodeURIComponent(prefix+'/bewertungen?einreichung='+submission)),'The built guest page preserves the exact localized page return through sign-in');assert(!ownHtml.includes('data-slot="dialog-overlay"'),'The independently addressable page has no modal overlay');
  }
  const callback=await runtime.dispatchFetch('https://riparim.test/auth/bestaetigen?token_hash=fixture',{redirect:'manual'});assert.equal(callback.status,303);assert.equal(callback.headers.get('Referrer-Policy'),'no-referrer');
  for(const locale of ['de','sq','en'])for(const path of ['/betrieb','/verwaltung','/verwaltung/bewertungen','/verwaltung/benutzer','/verwaltung/betriebe','/verwaltung/anmeldung']){
