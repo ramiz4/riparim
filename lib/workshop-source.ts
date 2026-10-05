@@ -3,6 +3,7 @@ import {normalizeWorkshopPhone,validGooglePlaceId} from "./google-place-identity
 import {googlePlaceIdFromMapsUrl,googleMapsPlaceUrl} from "./google-maps-link";
 import {services} from "./workshops";
 import {workshopScopeExclusion} from "./workshop-scope";
+import {workshopRetired} from "./workshop-retirement";
 
 const https=z.string().url().refine(value=>{const u=new URL(value);return u.protocol==="https:"&&!u.username&&!u.password;},"HTTPS-Quelle ohne Zugangsdaten erforderlich");
 const timestamp=z.string().refine(value=>Number.isFinite(Date.parse(value)),"Ungültiges Datum");
@@ -16,6 +17,7 @@ export const workshopSourceEntrySchema=z.object({
  sources:z.array(z.object({url:https,title:z.string().min(1).max(150),kind:z.enum(["official","directory"]).optional()}).strict()).min(1).max(8),checkedAt:date,status:z.enum(["draft","published"]),updatedAt:timestamp,
  google:z.object({placeId:z.string().refine(validGooglePlaceId).nullable(),matchedAt:timestamp.nullable(),snapshot:snapshot.nullable(),verification:z.object({method:z.enum(["official_maps","official_website","phone_and_location","name_and_address"]),sourceUrls:z.array(https).min(1).max(8),note:z.string().min(10).max(500)}).strict().optional()}).strict()
 }).strict().superRefine((w,ctx)=>{
+ if(workshopRetired(w.id))ctx.addIssue({code:z.ZodIssueCode.custom,message:"Entfernte Werkstattkennung darf nicht erneut importiert werden"});
  if(w.services.some(service=>!services.slice(1).includes(service)))ctx.addIssue({code:z.ZodIssueCode.custom,message:"Unbekannte Leistungskategorie"});
  if((w.lat===null)!==(w.lng===null))ctx.addIssue({code:z.ZodIssueCode.custom,message:"Koordinaten müssen paarweise vorliegen"});
  if((w.google.placeId===null)!==(w.google.matchedAt===null))ctx.addIssue({code:z.ZodIssueCode.custom,message:"Place-ID und Zuordnungsdatum müssen zusammen vorliegen"});

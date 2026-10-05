@@ -13,8 +13,10 @@ try{
   const response=await runtime.dispatchFetch('https://riparim.test'+path,{headers:{'x-riparim-locale':locale==='de'?'sq':'de'}});assert.equal(response.status,200,path);const html=await response.text();assert.match(html,new RegExp('<html lang="'+locale+'"'));assert.match(html,new RegExp('<title>[^<]*'+title));assert.match(html,new RegExp('<select[^>]*>[\\s\\S]*<option[^>]*value="'+locale+'"[^>]*selected'));
   const rsc=await runtime.dispatchFetch('https://riparim.test'+path+'?ort=prizren&_rsc',{headers:{RSC:'1',Accept:'text/x-component'}});assert.equal(rsc.status,200);assert.match(rsc.headers.get('Content-Type'),/text\/x-component/);assert((await rsc.text()).includes(locale),'RSC uses the route locale');
  }));
- const draft=await db.prepare("SELECT id FROM workshops WHERE status='draft' LIMIT 1").first();assert(draft,"isolated catalog has a draft fixture");
+ const draft=await db.prepare("SELECT id FROM workshops WHERE status='published' LIMIT 1").first();assert(draft,"isolated catalog has a workshop fixture");
+ await db.prepare("UPDATE workshops SET status='draft' WHERE id=?").bind(draft.id).run();
  for(const locale of ["de","sq","en"]){const prefix=locale==="de"?"":`/${locale}`;const response=await runtime.dispatchFetch(`https://riparim.test${prefix}/werkstatt/${draft.id}`);assert.equal(response.status,404,"unpublished profile stays private in "+locale);}
+ await db.prepare("UPDATE workshops SET status='published' WHERE id=?").bind(draft.id).run();
  const published=await db.prepare("SELECT id FROM workshops WHERE status='published' LIMIT 1").first();assert(published);
  for(const locale of ["de","sq","en"]){const prefix=locale==="de"?"":`/${locale}`;const response=await runtime.dispatchFetch(`https://riparim.test${prefix}/werkstatt/${published.id}?suche=${encodeURIComponent(prefix+"/werkstaetten?ort=prizren&sprache=sq")}`);assert.equal(response.status,200);assert((await response.text()).includes(`data-workshop-id="${published.id}"`));}
  for(const locale of ['de','sq','en']){

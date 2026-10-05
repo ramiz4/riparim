@@ -56,7 +56,11 @@ for(const locale of ['de','sq','en']){
  const forbidden=await config.GET(new Request(origin+`/api/google-places?locale=${locale}`,{headers:{Origin:'https://other.example.test'}}));assert.equal(forbidden.status,403);assert.equal((await forbidden.json()).errorCode,'invalid_request');
 }
 globalThis.fixtureAdmin=null;
-const draft=all.find(w=>w.status==='draft');assert.equal((await match.GET(request('/api/google-places/'+draft.id),params(draft.id))).status,404,'drafts cannot trigger a Google lookup');
+const draft={...actualMita,id:'lookup-draft-fixture',status:'draft'};
+const insertFixture=sqlite.prepare(`INSERT INTO workshops (${directory.profileColumns.join(',')}) VALUES (${directory.profileColumns.map(()=>'?').join(',')})`);
+insertFixture.run(...directory.profileValues(draft));
+assert.equal((await match.GET(request('/api/google-places/'+draft.id),params(draft.id))).status,404,'drafts cannot trigger a Google lookup even when the live source has no drafts');
+assert.equal(calls,0);sqlite.prepare('DELETE FROM workshops WHERE id=?').run(draft.id);
 assert.equal((await match.GET(request('/api/google-places/bad/id'),params('bad/id'))).status,404);
 const legacyHash=createHash('sha256').update(JSON.stringify([mita.name,mita.phone,mita.city,mita.address,mita.lat,mita.lng])).digest('hex');
 sqlite.prepare('INSERT INTO workshop_google_places (workshop_id,place_id,profile_hash,checked_at,retry_after) VALUES (?,NULL,?,?,?)').run(mita.id,legacyHash,Date.now(),Date.now()+7*86400000);
@@ -122,7 +126,9 @@ assert.equal(links.googlePlaceIdFromMapsUrl((await directory.listWorkshops()).fi
 assert.equal((await save.PATCH(sendProfile({...withoutReviews,previousUpdatedAt:'stale'},'PATCH'))).status,409,'a stale edit cannot change profile or identity metadata');
 sqlite.prepare('INSERT INTO workshop_google_places (workshop_id,place_id,profile_hash,checked_at,retry_after) VALUES (?,?,?,?,?)').run('sonic-garage',expectedId,'duplicate-fixture',Date.now(),Date.now()+86400000);
 assert.equal(await places.confirmedPublicationPlace(directory.validateProfile(withoutReviews,withoutReviews.id),withoutReviews),null,'a Google identity already used by another real profile cannot be published twice');
-assert.equal((await save.PATCH(sendProfile({...all.find(w=>w.id==='auto-ballkan-gjilan'),status:'published',previousUpdatedAt:all.find(w=>w.id==='auto-ballkan-gjilan').updatedAt},'PATCH'))).status,400,'truck entries cannot be republished through the management API');
+const truck={...actualMita,id:'truck-management-fixture',name:'Scania Truck Fixture',status:'draft'};insertFixture.run(...directory.profileValues(truck));
+assert.equal((await save.PATCH(sendProfile({...truck,status:'published',previousUpdatedAt:truck.updatedAt},'PATCH'))).status,400,'truck entries cannot be republished through the management API');
+sqlite.prepare('DELETE FROM workshops WHERE id=?').run(truck.id);
 // Owner drafts validate a changed identity without replacing live metadata.
 sqlite.prepare('UPDATE catalog_state SET value=? WHERE key=?').run('0',quotaKey);
 const cacheBeforeDraft=sqlite.prepare('SELECT * FROM workshop_google_places WHERE workshop_id=?').get(actualMita.id);

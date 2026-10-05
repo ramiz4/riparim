@@ -26,15 +26,19 @@ const {validateWorkshopCatalogue}=await load('lib/workshop-source.js');
 const catalogue=validateWorkshopCatalogue(JSON.parse(await readFile('data/workshops.json','utf8')));
 const curated=catalogue.workshops.map(({google,...profile})=>profile);
 const manifest=JSON.parse(await readFile('data/import-2026-10-03.json','utf8'));
+const removals=JSON.parse(await readFile('data/workshop-removals.json','utf8'));
+const finalRemovals=JSON.parse(await readFile('data/workshop-final-removals.json','utf8'));
+const finalResearch=JSON.parse(await readFile('data/catalogue-final-2026-10-05.json','utf8'));
+const retired=new Set([...removals.workshopIds,...finalRemovals.workshopIds]);
 const added=new Set(manifest.importedWorkshopIds);
-const oldProfiles=curated.filter(w=>!added.has(w.id));
+const oldProfiles=curated.filter(w=>!added.has(w.id)&&w.id!==finalResearch.newPublishedWorkshop.workshopId);
 const newProfiles=curated.filter(w=>added.has(w.id));
-assert.equal(newProfiles.length,50);
+assert.equal(newProfiles.length,50-manifest.importedWorkshopIds.filter(id=>retired.has(id)).length);
 assert.equal(added.size,50);
-assert.equal(oldProfiles.length,113);
-assert.equal(new Set(curated.map(w=>w.id)).size,163);
+assert.equal(oldProfiles.length,113-[...retired].filter(id=>!added.has(id)).length);
+assert.equal(new Set(curated.map(w=>w.id)).size,129);
 const oldPhones=new Set(oldProfiles.map(w=>w.phone));
-assert.equal(new Set(newProfiles.map(w=>w.phone)).size,50);
+assert.equal(new Set(newProfiles.map(w=>w.phone)).size,newProfiles.length);
 for(const w of newProfiles){assert(!oldPhones.has(w.phone),'new workshop has a distinct phone');assert.equal(directory.validateProfile(w,w.id).status,w.status);}
 
 // Reproduce an installation seeded with the retained original profiles.
@@ -45,18 +49,19 @@ const before=sqlite.prepare('SELECT * FROM workshops ORDER BY id').all();
 let workshops=await directory.listWorkshops();
 assert.equal(workshops.length,catalogue.coverage.published,'only confirmed passenger-workshop profiles become public');
 assert.equal((await directory.listWorkshops(true)).length,catalogue.workshops.length);
+assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM catalog_state WHERE key LIKE 'workshop-retired:%'").get().n,35,'fresh catalogue installations preserve all retirement markers');
 for(const entry of JSON.parse(await readFile('data/workshop-scope.json','utf8')).excluded){
  assert(!workshops.some(w=>w.id===entry.workshopId),'out-of-scope entries are absent from the public catalogue');
- const retained=(await directory.listWorkshops(true)).find(w=>w.id===entry.workshopId);assert.equal(retained.status,'draft');
- assert.throws(()=>directory.validateProfile({...retained,status:'published'},retained.id),/Pkw/,'administrators cannot accidentally republish excluded truck entries');
+ assert(retired.has(entry.workshopId));
+ assert.throws(()=>directory.validateProfile({...curated[0],status:'published'},entry.workshopId),/entfernt/,'administrators cannot accidentally reintroduce retired excluded entries');
 }
 assert(catalogue.workshops.filter(w=>!w.google.placeId).every(w=>!workshops.some(publicWorkshop=>publicWorkshop.id===w.id)),'unconfirmed Google identities remain private');
 
 assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM workshops WHERE status='draft'").get().n,catalogue.coverage.drafts);
-const after=sqlite.prepare('SELECT * FROM workshops ORDER BY id').all().filter(w=>!added.has(w.id));
+const after=sqlite.prepare('SELECT * FROM workshops ORDER BY id').all().filter(w=>!added.has(w.id)&&w.id!==finalResearch.newPublishedWorkshop.workshopId);
 assert.deepEqual(after,before,'existing profile fields and publication state are preserved');
 assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM workshop_google_ratings').get().n,catalogue.workshops.filter(w=>w.google.snapshot).length);
-assert(manifest.originalPublishedWorkshopIds.every(id=>(catalogue.workshops.find(w=>w.id===id)?.google.snapshot)),'all original profiles retain their separate Google metadata, including hidden profiles');
+assert(manifest.originalPublishedWorkshopIds.filter(id=>!retired.has(id)).every(id=>(catalogue.workshops.find(w=>w.id===id)?.google.snapshot)),'all original profiles retain their separate Google metadata, including hidden profiles');
 assert.equal(workshops.filter(w=>w.googleRating.rating!==null).length,5,'only sourced Google scores are numeric');
 assert.equal(workshops.filter(w=>w.googleRating.count!==null).length,4);
 assert(workshops.every(w=>w.rating===null&&w.count===0),'Google stars never create Riparim reviews');

@@ -14,11 +14,22 @@ const research=JSON.parse(await readFile('data/catalogue-review-2026-10-04.json'
 const latestResearch=JSON.parse(await readFile('data/catalogue-review-2026-10-05.json','utf8'));
 const followupResearch=JSON.parse(await readFile('data/catalogue-followup-2026-10-05.json','utf8'));
 const identityResearch=JSON.parse(await readFile('data/catalogue-identity-2026-10-05.json','utf8'));
+const removals=JSON.parse(await readFile('data/workshop-removals.json','utf8'));
+const finalRemovals=JSON.parse(await readFile('data/workshop-final-removals.json','utf8'));
+const finalResearch=JSON.parse(await readFile('data/catalogue-final-2026-10-05.json','utf8'));
+const removedIds=new Set([...removals.workshopIds,...finalRemovals.workshopIds]);
+assert.equal(removedIds.size,35);
+assert.deepEqual(new Set(removals.workshopIds),new Set(identityResearch.draftAssessments.filter(p=>p.assessment==='needs_identity').map(p=>p.workshopId)),'the historical removal still covers exactly 27 identities');
+assert.deepEqual(removals.before,{total:163,published:128,drafts:35});assert.deepEqual(removals.after,{total:136,published:128,drafts:8});
+assert.deepEqual(finalRemovals.before,removals.after);assert.deepEqual(finalRemovals.after,{total:129,published:129,drafts:0});
+assert.equal(stats.published,129);assert.equal(stats.drafts,0);
 const effectiveAssessments=new Map([...latestResearch.draftAssessments,...followupResearch.draftAssessments,...identityResearch.draftAssessments].map(proof=>[proof.workshopId,proof]));
 const importManifest=JSON.parse(await readFile('data/import-2026-10-03.json','utf8'));
 const expectedCatalogueIds=new Set([...research.draftAssessments.map(proof=>proof.workshopId),...importManifest.importedWorkshopIds,...importManifest.originalPublishedWorkshopIds]);
-assert.deepEqual(new Set(catalogue.workshops.map(w=>w.id)),expectedCatalogueIds,'draft review preserves every existing workshop ID and adds no profiles');
-assert.equal(catalogue.workshops.length,163);assert.equal(new Set(catalogue.workshops.map(w=>w.id)).size,catalogue.workshops.length,'all existing workshop IDs remain unique');
+for(const id of removedIds)expectedCatalogueIds.delete(id);
+expectedCatalogueIds.add(finalResearch.newPublishedWorkshop.workshopId);
+assert.deepEqual(new Set(catalogue.workshops.map(w=>w.id)),expectedCatalogueIds,'only explicitly rejected IDs are removed; all other IDs remain');
+assert.equal(catalogue.workshops.length,129);assert.equal(new Set(catalogue.workshops.map(w=>w.id)).size,catalogue.workshops.length,'all existing workshop IDs remain unique');
 const expectedReviewIds=new Set([...research.draftAssessments.filter(proof=>proof.assessment!=='candidate').map(proof=>proof.workshopId),...research.coordinateChecks.filter(proof=>!proof.confirmed).map(proof=>proof.id)]);
 assert.equal(latestResearch.reviewedDrafts,85);
 assert.equal(latestResearch.draftAssessments.length,85);
@@ -30,6 +41,7 @@ assert.equal(latestResearch.after.drafts,latestResearch.before.drafts-promotionC
 assert.deepEqual(latestResearch.draftSummary,{published:promotionCount,needsIdentity:latestResearch.draftAssessments.filter(proof=>proof.assessment==='needs_identity').length,excluded:latestResearch.draftAssessments.filter(proof=>proof.assessment==='excluded').length});
 for(const proof of latestResearch.draftAssessments){
  const workshop=catalogue.workshops.find(w=>w.id===proof.workshopId);
+ if(!workshop){assert(removedIds.has(proof.workshopId));assert.equal(proof.resultingStatus,'draft');continue;}
  assert(['published','needs_identity','excluded'].includes(proof.assessment));
  assert.equal(proof.resultingStatus,proof.assessment==='published'?'published':'draft');
  assert.equal(workshop.status,effectiveAssessments.get(proof.workshopId).resultingStatus,'only positively verified drafts are promoted');
@@ -60,12 +72,14 @@ assert.equal(identityPromotions,3);assert.equal(unchangedDrafts.length,8);
 assert.deepEqual(identityResearch.draftSummary,{published:identityPromotions,needsIdentity:identityResearch.draftAssessments.filter(proof=>['needs_identity','identity_conflict'].includes(proof.assessment)).length,otherUnchangedDrafts:unchangedDrafts.length});
 assert.equal(identityResearch.draftSummary.needsIdentity,27);
 assert.deepEqual(identityResearch.after,{published:128,drafts:35});
-assert.equal(stats.published,identityResearch.before.published+identityPromotions,'all previously public profiles remain published');
-assert.equal(stats.drafts,identityResearch.before.drafts-identityPromotions);
-assert.equal(identityResearch.after.published,stats.published);assert.equal(identityResearch.after.drafts,stats.drafts);
+assert.equal(stats.published,identityResearch.before.published+identityPromotions+1,'all previously public profiles remain published, plus the new north branch');
+assert.equal(identityResearch.after.drafts,identityResearch.before.drafts-identityPromotions);
+assert.equal(stats.drafts,identityResearch.after.drafts-removedIds.size);
+assert.equal(identityResearch.after.published+1,stats.published);
 assert.equal(identityResearch.googleApiRequests,0,'the third review does not bypass the exhausted server quota');assert.equal(identityResearch.dailyRequestLimit,100);
 for(const proof of unchangedDrafts){
- assert.equal(catalogue.workshops.find(w=>w.id===proof.workshopId).status,'draft','branch conflicts, closed businesses and scope exclusions remain private');
+ assert(finalRemovals.workshopIds.includes(proof.workshopId),'the final removal covers exactly the eight other drafts');
+ assert(!catalogue.workshops.some(w=>w.id===proof.workshopId),'the removed drafts stay absent');
  assert.equal(effectiveAssessments.get(proof.workshopId),proof,'the third review does not reassess unrelated drafts');
 }
 for(const proof of identityResearch.draftAssessments){
@@ -83,6 +97,7 @@ for(const proof of identityResearch.draftAssessments){
 }
 for(const proof of [...followupResearch.draftAssessments,...identityResearch.draftAssessments]){
  const workshop=catalogue.workshops.find(w=>w.id===proof.workshopId);
+ if(!workshop){assert(removedIds.has(proof.workshopId));assert.equal(proof.resultingStatus,'draft');continue;}
  assert(['published','needs_identity','identity_conflict','branch_conflict','closed','excluded'].includes(proof.assessment));
  assert.equal(proof.resultingStatus,proof.assessment==='published'?'published':'draft');
  assert.equal(workshop.status,effectiveAssessments.get(proof.workshopId).resultingStatus,'a later positive identity review determines the current status');
@@ -114,6 +129,7 @@ assert.equal(research.draftAssessments.length,92);
 assert.equal(research.draftAssessments.filter(proof=>proof.assessment==='candidate').length,9);
 for(const proof of research.draftAssessments){
  const workshop=catalogue.workshops.find(w=>w.id===proof.workshopId);
+ if(!workshop){assert(removedIds.has(proof.workshopId));assert.notEqual(proof.assessment,'candidate');continue;}
  if(proof.assessment==='candidate'){
   assert.equal(workshop.status,'published','historically verified profiles remain public');
   assert.equal(workshop.google.placeId,proof.googleIdentity.placeId);
@@ -138,9 +154,16 @@ for(const proof of research.coordinateChecks){
 assert(catalogue.workshops.filter(w=>w.status==='published').every(w=>w.google.placeId&&w.google.matchedAt),'every public entry has a stable identity independently of ratings');
 const publicPlaceIds=catalogue.workshops.filter(w=>w.status==='published').map(w=>w.google.placeId);assert.equal(new Set(publicPlaceIds).size,publicPlaceIds.length,'public profiles have distinct Google identities');
 const allPlaceIds=catalogue.workshops.map(w=>w.google.placeId).filter(Boolean);assert.equal(new Set(allPlaceIds).size,allPlaceIds.length,'draft and public profiles never share a Google identity');
-const unconfirmed=structuredClone(catalogue);unconfirmed.workshops.find(w=>w.status==='draft'&&!w.google.placeId).status='published';
+const reno=catalogue.workshops.find(w=>w.id===finalResearch.newPublishedWorkshop.workshopId);
+assert.equal(finalResearch.reviewedDrafts,8);assert.deepEqual(new Set(finalResearch.draftAssessments.map(w=>w.workshopId)),new Set(finalRemovals.workshopIds));
+assert.equal(finalResearch.googleApiRequests,0);assert.equal(finalResearch.newPublishedWorkshop.oldProfileContinuityAsserted,false);assert.equal(finalResearch.newPublishedWorkshop.privateRelationsTransferred,false);
+assert.equal(reno.city,'Obiliq');assert.equal(reno.status,'published');assert.deepEqual(reno.brands,['Renault','Nissan','Dacia']);
+assert.equal(reno.google.placeId,finalResearch.newPublishedWorkshop.googleIdentity.placeId);assert.equal(reno.google.snapshot.rating,null);assert.equal(reno.google.snapshot.count,null);
+assert.deepEqual([reno.lat,reno.lng],[finalResearch.newPublishedWorkshop.independentLocation.latitude,finalResearch.newPublishedWorkshop.independentLocation.longitude]);
+assert(reno.sources.some(s=>s.url===finalResearch.newPublishedWorkshop.independentLocation.sourceUrl));
+const unconfirmed=structuredClone(catalogue);unconfirmed.workshops[0].google={placeId:null,matchedAt:null,snapshot:null};
 assert.throws(()=>validateWorkshopCatalogue(unconfirmed),/bestätigte Google-Zuordnung/);
-const trucks=structuredClone(catalogue);trucks.workshops.find(w=>w.id==='auto-ballkan-gjilan').status='published';
+const trucks=structuredClone(catalogue);trucks.workshops[0].name='Scania Truck Fixture';
 assert.throws(()=>validateWorkshopCatalogue(trucks),/Pkw-Werkstatteinträge/);
 const mismatchedLink=structuredClone(catalogue);mismatchedLink.workshops.find(w=>w.status==='published').google.snapshot.mapsUrl='https://www.google.com/maps/?query_place_id=ChIJUnrelatedFixture';
 assert.throws(()=>validateWorkshopCatalogue(mismatchedLink),/denselben Eintrag/);
