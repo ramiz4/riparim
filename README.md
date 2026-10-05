@@ -20,6 +20,10 @@ Semantic Release als Release-Prozess.
 ## Lokal starten
 
 Voraussetzungen: Node.js 22 ab 22.14 oder ab 24.10 und npm. CI verwendet Node.js 24.
+Für `npm test` und den Auth-Mailvorlagenexport ist zusätzlich Go 1.27.1 nötig;
+CI richtet diese Version fest ein. Die Templates werden mit echtem Go
+`html/template` geprüft, ohne Module oder weitere Go-Abhängigkeiten. Ist Go
+nicht auf dem `PATH`, kann `RIPARIM_GO_BINARY` auf die ausführbare Datei zeigen.
 
 ```sh
 npm run install:ci
@@ -49,7 +53,13 @@ D1-Migration `0011` ergänzt `workshop_claims`, `workshop_owners` und `workshop_
 
 Bei Bewertungsfreigabe und angeforderter Nachweisergänzung speichert die Moderation zusammen mit der Statusänderung ein dauerhaftes Ereignis in `review_notifications`. Die Nachricht enthält ausschließlich den Status und einen Link über die Anmeldung zur eigenen Einreichung; Namen, Bewertungstext, Fahrzeugdaten, private Nachweise und Prüfvermerke werden nicht versendet. Empfänger kommen aus dem serverseitig geprüften Supabase-Konto; bestätigte Altverknüpfungen werden berücksichtigt. Fehlende bestätigte Adressen und gesperrte Konten bleiben ausdrücklich in der Versandübersicht erkennbar.
 
-Der Versand verwendet den bestehenden Resend-Dienst und die bestätigte Domain `auth.riparim.com`. `RESEND_API_KEY` ist ein serverseitiges Geheimnis aus dem vorhandenen geschützten Projektzugang, `TRANSACTIONAL_EMAIL_FROM` der Absender, beispielsweise `Riparim <no-reply@auth.riparim.com>`. `SUPABASE_SECRET_KEY` wird zur Prüfung bestätigter Kontoadressen benötigt. Vorlagen für Freigabe und Ergänzungsanfrage liegen zentral in `lib/notifications/email.ts`, jeweils als HTML mit Sprache, Titel, beschriftetem Link und Klartextalternative. Keine zusätzlichen Pakete oder Änderungen an den bestehenden Auth-E-Mailvorlagen sind erforderlich.
+Der Versand verwendet den bestehenden Resend-Dienst und die bestätigte Domain `auth.riparim.com`. `RESEND_API_KEY` ist ein serverseitiges Geheimnis aus dem vorhandenen geschützten Projektzugang, `TRANSACTIONAL_EMAIL_FROM` der Absender, beispielsweise `Riparim <no-reply@auth.riparim.com>`. `SUPABASE_SECRET_KEY` wird zur Prüfung bestätigter Kontoadressen benötigt. Gemeinsame DE/SQ/EN-Mailcopy liegt in `lib/email-content.ts`; `lib/notifications/email.ts` rendert die Reviewmails mit Betreff und ausschließlich HTML mit Sprache, Titel und beschriftetem Link. `text: ""` deaktiviert die automatische Klartexterzeugung von Resend. Der erste Versuch verwendet ausschließlich die validierte Präferenz des bestätigten Empfängers; fehlende oder ungültige Werte bleiben deutsch. Gespeicherte Retries behalten ihre ursprüngliche Sprache und sämtliche Versandbytes auch nach einer Präferenz- oder Releaseänderung. Das gilt auch für historische Payloads, die noch einen Klartextteil enthalten.
+
+Bestätigungs-/Recoverybetreff und HTML-Vorlage liegen in
+`lib/auth/email-templates.ts`. Die Anwendung erzeugt weiterhin den stabilen
+Callback mit `?locale=…&weiter=…`. Die gesonderte Providerübernahme nach einem
+geprüften Main-Release steht in [der Mailaktivierung](docs/customer-flow-qa.md#lokalisierte-mailvorlagen-und-provideraktivierung-issue-52).
+Es gibt keine neue Mailplattform, Migration oder Auth-Hook-Infrastruktur.
 
 Migration `0012` ergänzt die private Versandtabelle und muss vor Veröffentlichung angewendet werden; historische Moderationsentscheidungen werden nicht nachträglich benachrichtigt. Der erste Versand wird an den Worker-Kontext gebunden. Ein deklarierter Worker-Cron prüft fällige Ereignisse alle fünf Minuten; im lokalen Betrieb wird der Scheduled-Handler ausschließlich über die lokale Testfunktion ausgelöst. Die Verwaltung kann Ereignisse unter „Bewertungen prüfen“ kontrolliert erneut prüfen. Providerfehler widerrufen die erfolgreiche Moderation nicht. Die konfigurierte Produktion muss den Scheduled-Handler und den Cron aus dem Worker-Artefakt übernehmen.
 

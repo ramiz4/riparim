@@ -87,3 +87,94 @@ indexierbar. Metadatenfixtures und beide tatsächlichen Worker-Builds prüfen
 diese Grenze. Keine dieser Fixtures nutzt persönliche Konten, echte Belege,
 Live-E-Mails oder Produktionsänderungen. Browsergeometrie/Themes/Zoom werden
 vor der PR-Freigabe gesondert koordiniert.
+
+## Lokalisierte Mailvorlagen und Provideraktivierung (Issue #52)
+
+Die zentralen Bestätigungs- und Recoveryvorlagen enthalten DE/SQ/EN-Betreff
+und HTML-Body. Nur der exakte locale-first Redirectprefix wählt SQ/EN;
+leere, kurze, alte oder abweichende URLs bleiben deutsch. Der Längenguard
+verhindert einen Slice-Fehler. `tests/auth-email-templates.test.mjs` führt
+beide zentralen Felder mit Go `html/template` ohne `FuncMap` aus und prüft
+Sonderzeichen, Token-URLescaping, Sprache, direkte Bodycontainer, Titel und CTA.
+Der [geprüfte Supabase-Mailer](https://github.com/supabase/auth/blob/ce9a8eee0cc042be8c7a42981a7ddae631e41d91/internal/mailer/templatemailer/template.go)
+parst beide Felder mit `html/template` und ruft erst `subject.Execute`, dann
+`body.Execute` auf. Die lokale Go-Prüfung beweist diesen Quellvertrag; die
+gehostete Betreffauswertung wird erst durch den Empfangstest bestätigt.
+
+Die Providerübernahme erfolgt separat aus einem geprüften Main-Release:
+
+1. Im bestehenden Supabase-Projekt die tatsächliche Site URL, Redirect-Allowlist
+   und die bisherigen vier Betreff-/Bodyfelder als privaten Rückweg sichern.
+   SMTP-Zugangsdaten bleiben unverändert und außerhalb des Exports.
+2. Worker-`SITE_ORIGIN` und tatsächlich gelesene Supabase Site URL müssen exakt
+   dieselbe kanonische Origin ohne abschließenden Slash enthalten. Vom
+   Release-Checkout mit dem tatsächlich gelesenen Providerwert exportieren:
+
+   ```sh
+   npm run auth:email-templates -- \
+     --site-origin https://riparim.com \
+     --provider-site-url https://riparim.com \
+     --output-dir /tmp/riparim-auth-mail-release
+   ```
+
+   Das Zielverzeichnis muss neu sein. Slash-/Pfad-/Originabweichungen führen
+   vor der Ausgabe zu `AUTH_EMAIL_ORIGIN_NOT_CANONICAL` oder
+   `AUTH_EMAIL_ORIGIN_MISMATCH`. Ein deutscher Fallback ist kein erfolgreicher
+   SQ-/EN-Test. Der Export enthält vier Providerquellen, sechs synthetische
+   tatsächliche Go-Vorschauen mit erwarteter/gerenderter Locale und Prüfsummen.
+   Er ändert keinen Provider und enthält keine realen Tokens oder Empfänger.
+3. Nur den physischen Callback erlauben: Produktion
+   `https://riparim.com/auth/bestaetigen?**`, bei Bedarf getrennt die tatsächlich
+   verwendete lokale Callback-Origin. Keine Host-/Seitenwildcards und keine
+   `/sq/auth/…`- oder `/en/auth/…`-Callbacks. Bestehende alte Callbacklinks und
+   notwendige Freigaben erhalten; die Site URL bleibt eine reine Origin.
+4. Unter Authentication → Email Templates gemeinsam `confirmation.subject.txt`
+   und `confirmation.body.html` bei „Confirm sign up“ sowie
+   `recovery.subject.txt` und `recovery.body.html` bei „Reset password“ übernehmen.
+   Alternativ die [Management-API-Felder](https://supabase.com/docs/guides/auth/auth-email-templates)
+   `mailer_subjects_confirmation`, `mailer_templates_confirmation_content`,
+   `mailer_subjects_recovery`, `mailer_templates_recovery_content` verwenden.
+   Anschließend beide Felder erneut lesen und bytegenau mit dem Export vergleichen.
+5. Providerpreview und isolierte, ausdrücklich freigegebene Testkonten je Locale
+   verwenden: tatsächlichen Betreff/Body empfangen, Bestätigung → separate
+   Anmeldung zum ursprünglichen Profil sowie Recovery → Reset → Anmeldung und
+   alte DE-Links prüfen. Keine echten Kunden anschreiben; Adressen, Passwörter
+   und Tokens bleiben privat. Recovery schreibt keine fremden Metadaten.
+   Scheitert die Prüfung, die vier gesicherten bisherigen Felder zurückspielen
+   und Mailfreigabe nicht als bestätigt kennzeichnen.
+
+Reviewmails verwenden beim ersten Versuch ausschließlich die allowlisted
+`user_metadata.preferred_locale` des geprüften bestätigten Empfängers.
+Moderator-/Cron-/Browserlocale ist ohne Einfluss. Beide Entscheidungen haben
+lokalisierte Login-/Einreichungsziele. Die Route-, React- und nativen
+D1/Scheduled-Fixtures prüfen DE/SQ/EN und fremde/private Zielgrenzen.
+`tests/notifications.test.mjs` vergleicht das tatsächliche `fetch init.body`
+und den Idempotenzschlüssel nach verlorener lokaler Bestätigung, Sprach- und
+Konfigurationswechsel. Historische deutsche Payloads behalten sogar
+JSON-Reihenfolge und Leerraum. Empfänger-/Credentialwechsel, 23-Stunden-Grenze,
+Backoff und kontrollierte Wiederholungen bleiben geschützt.
+
+Neue Reviewmails liefern auf ausdrücklichen Projektwunsch ausschließlich Betreff
+und HTML an Resend; der tatsächliche Requestbody enthält `text: ""` als
+expliziten Opt-out. Bei fehlendem Feld erzeugt Resend automatisch Klartext,
+wie die [Send-Email-API](https://resend.com/docs/api-reference/emails/send-email)
+und der [Changelog](https://resend.com/changelog/automatic-plain-text-emails)
+beschreiben.
+Die Tests prüfen dies für beide Entscheidungen und alle drei Locales sowie
+bytegleiche HTML-only-Retries. Bereits eingefrorene historische Payloads mit
+`text` sowie alte Payloads ohne `text` bleiben unverändert, damit ihr
+Idempotenzvertrag erhalten bleibt. Beim
+[geprüften Supabase-SMTP-Client](https://github.com/supabase/auth/blob/ce9a8eee0cc042be8c7a42981a7ddae631e41d91/internal/mailer/mailmeclient/mailmeclient.go)
+setzt `SetBody("text/html", body)` ausschließlich HTML; die Providerfelder
+können keinen zusätzlichen MIME-Klartextteil konfigurieren. Auth-HTML ist
+vollständig textbasiert und zugänglich. Die `.preview.txt`-Dateien des Exports
+sind nur Lesbarkeitsvorschauen, keine behauptete SMTP-Alternative. Content-Type
+und tatsächliches Verhalten des gehosteten Mailers beim Empfangstest prüfen.
+Diese Providergrenze wird nicht durch Headertricks, Hooks oder eine neue
+Mailplattform umgangen.
+
+Automatisierte Fixtures und Vorschauen senden keine realen Nachrichten und
+ändern keine Produktion. Native Prüfung bei 390/1280 Pixeln, 200 Prozent Zoom
+und heller/dunkler Darstellung sowie tatsächlicher Empfang und Providerübernahme
+werden vor der Gesamtfreigabe separat protokolliert. Ohne diesen Nachweis ist
+die neue Providerkonfiguration noch nicht als live abgenommen zu bezeichnen.
