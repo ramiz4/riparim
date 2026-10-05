@@ -1,4 +1,5 @@
 "use client";
+import {useI18n} from "@/lib/i18n/client";
 
 import { Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -6,21 +7,23 @@ import { useSyncExternalStore } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 const subscribe = () => () => {};
-const options = [
-  { value: "light", label: "Hell", description: "Helles Erscheinungsbild.", Icon: Sun },
-  { value: "dark", label: "Dunkel", description: "Dunkles Erscheinungsbild.", Icon: Moon },
-  { value: "system", label: "System", description: "Folgt der Einstellung deines Geräts.", Icon: Monitor },
-];
+
 
 export function ThemeSettings() {
+ const {t}=useI18n();
+ const options = [
+  { value: "light", label: t("customer.themeLight"), description: t("customer.themeLightNote"), Icon: Sun },
+  { value: "dark", label: t("customer.themeDark"), description: t("customer.themeDarkNote"), Icon: Moon },
+  { value: "system", label: t("customer.themeSystem"), description: t("customer.themeSystemNote"), Icon: Monitor },
+];
   const { theme, setTheme } = useTheme();
   const mounted = useSyncExternalStore(subscribe, () => true, () => false);
   const selected = mounted ? theme ?? "system" : "system";
 
   return (
     <section className="theme-settings" aria-labelledby="appearance-title">
-      <h2 id="appearance-title">Darstellung</h2>
-      <p id="appearance-description">Wähle das Erscheinungsbild von Riparim.</p>
+      <h2 id="appearance-title">{t("customer.appearance")}</h2>
+      <p id="appearance-description">{t("customer.appearanceNote")}</p>
       <RadioGroup className="theme-options" value={selected} onValueChange={setTheme} disabled={!mounted} aria-labelledby="appearance-title" aria-describedby="appearance-description">
         {options.map(({ value, label, description, Icon }) => (
           <label key={value} className="theme-option" data-selected={selected === value} htmlFor={`theme-${value}`}>
@@ -33,7 +36,7 @@ export function ThemeSettings() {
           </label>
         ))}
       </RadioGroup>
-      <p className="settings-save-note">Deine Auswahl wird automatisch in diesem Browser gespeichert.</p>
+      <p className="settings-save-note">{t("customer.themeSaved")}</p>
     </section>
   );
 }

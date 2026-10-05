@@ -45,6 +45,11 @@ import {createTranslator,getMessages} from './lib/i18n/messages';
 import {type CodedResponse} from './lib/i18n/codes';
 const t=createTranslator(getMessages('sq',['common']));
 t('common.login');
+t('customer.stars',{count:2});
+// @ts-expect-error customer rich text needs its named parameter
+t('customer.enterDeletePhrase');
+// @ts-expect-error missing stars count fails
+t('customer.stars');
 t('common.reviewCount',{count:2});
 const response:CodedResponse={errorCode:'forbidden',error:'Legacy compatible text'};
 void response;

@@ -1,6 +1,7 @@
 import {defaultLocale,isLocale,type Locale} from "./locale";
 import {formatNumber} from "./format";
 import {publicDe,publicSq,publicEn} from "./public-messages";
+import {customerDe,customerSq,customerEn} from "./customer-messages";
 import type {MessageValue,ParameterNames,MessageShape,CheckedMessages} from "./message-contract";
 
 const deBase={
@@ -17,7 +18,7 @@ const deBase={
  metadata:{title:"Riparim – Werkstätten in Kosovo",description:"Finde Werkstätten in Kosovo, vergleiche Leistungen und kontaktiere den passenden Betrieb."}
 } as const;
 
-const de=/* @__PURE__ */ Object.assign({},deBase,{public:publicDe});
+const de=/* @__PURE__ */ Object.assign({},deBase,{public:publicDe,customer:customerDe});
 
 type CatalogNamespaces={-readonly [N in keyof typeof de]:MessageShape<typeof de[N]>};
 type CheckedCatalog<C extends CatalogNamespaces>={[N in keyof CatalogNamespaces]:CheckedMessages<typeof de[N],C[N]>};
@@ -25,6 +26,7 @@ function defineCatalog<const C extends CatalogNamespaces>(catalog:C & CheckedCat
 
 const sq=/* @__PURE__ */ defineCatalog({
  public:publicSq,
+ customer:customerSq,
  common:{
   retry:"Ngarko përsëri",darkMode:"Mënyra e errët",themeSystem:"Mënyra e errët · ndjek sistemin",themeToggle:"Ndërro mënyrën e errët",close:"Mbyll",dialogContent:"Përmbajtja e dialogut",workshops:"Servise",loadingWorkshops:"Duke ngarkuar serviset …",loadingProfile:"Duke ngarkuar profilin e servisit …",profileNotAvailable:"Ky profil nuk është i disponueshëm.",profileNotAvailableHelp:"Servisi nuk është i publikuar ose lidhja nuk është më aktuale.",findWorkshops:"Gjej servise",
   languageLabel:"Zgjidh gjuhën",discardDraft:"Të dhënat që nuk i ke ruajtur do të humbasin kur të ndërrosh gjuhën. Dëshiron të vazhdosh?",
@@ -40,6 +42,7 @@ const sq=/* @__PURE__ */ defineCatalog({
 
 const en=/* @__PURE__ */ defineCatalog({
  public:publicEn,
+ customer:customerEn,
  common:{
   retry:"Reload",darkMode:"Dark mode",themeSystem:"Dark mode · follows system",themeToggle:"Toggle dark mode",close:"Close",dialogContent:"Dialog content",workshops:"Workshops",loadingWorkshops:"Loading workshops …",loadingProfile:"Loading workshop profile …",profileNotAvailable:"This profile is unavailable.",profileNotAvailableHelp:"The workshop is unpublished or the link is no longer current.",findWorkshops:"Find workshops",
   languageLabel:"Choose language",discardDraft:"Your unsaved entries will be lost when you change language. Change language anyway?",
@@ -92,13 +95,14 @@ export function createTranslator(messages:MessageCatalog):Translator{
 
 export function getMessages(locale:Locale):{locale:Locale}&CatalogNamespaces;
 export function getMessages<const N extends readonly MessageNamespace[]>(locale:Locale,namespaces:N):{locale:Locale}&Pick<CatalogNamespaces,N[number]>;
-export function getMessages(locale:Locale,namespaces:readonly MessageNamespace[]=["common","metadata","public"]):MessageCatalog{
+export function getMessages(locale:Locale,namespaces:readonly MessageNamespace[]=["common","metadata","public","customer"]):MessageCatalog{
  const active=isLocale(locale)?locale:defaultLocale;
  const catalog={de,sq,en}[active];
  const result:MessageCatalog={locale:active};
  for(const namespace of namespaces){
   if(namespace==="common")result.common=catalog.common;
   if(namespace==="metadata")result.metadata=catalog.metadata;
+  if(namespace==="customer")result.customer=catalog.customer;
   if(namespace==="public")result.public=catalog.public;
  }
  return result;

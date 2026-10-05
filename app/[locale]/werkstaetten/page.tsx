@@ -15,5 +15,5 @@ export default async function CataloguePage({searchParams,params}:{searchParams:
  const {locale:value}=await params,locale=isLocale(value)?value:"de";
  const [query,user]=await Promise.all([searchParams,getAppUser()]);const admin=await getAdminUser(user);let directory:Workshop[]=[],error="";
  try{directory=await listWorkshops();}catch(e){console.error("catalogue-page",e);error="unavailable";}
- return <I18nMessages messages={getMessages(locale,["public"])}><Catalogue initialWorkshops={directory} initialError={error} initialFilters={parseCatalogueFilters(query,directory)} signedIn={!!user} account={user?{email:user.email,displayName:user.displayName,provider:user.provider}:null} isAdmin={!!admin?.isModerator}/></I18nMessages>;
+ return <I18nMessages messages={getMessages(locale,["public","customer"])}><Catalogue initialWorkshops={directory} initialError={error} initialFilters={parseCatalogueFilters(query,directory)} signedIn={!!user} account={user?{email:user.email,displayName:user.displayName,provider:user.provider}:null} isAdmin={!!admin?.isModerator}/></I18nMessages>;
 }

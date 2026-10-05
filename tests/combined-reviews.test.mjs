@@ -54,6 +54,21 @@ await expect(await moderate(legacy,'published',0),400,'incomplete legacy record 
 await expect(await call('PUT','a',form(legacy)),200,'legacy review completed through combined form');await expect(await moderate(legacy,'published',1),200,'legacy bundle published only by admin');await expect(await call('DELETE','a',{id:legacy}),200,'legacy fixture removed');
 const fid=crypto.randomUUID();await expect(await call('POST','a',form(fid,{file:true})),201,'file and review submitted together');let row=sqlite.prepare('SELECT * FROM visits WHERE id=?').get(fid);
 globalThis.fixtureUser=roles.b;await expect(await evidence.GET(new Request('https://fixture.example/api/evidence/'+fid),{params:Promise.resolve({id:fid})}),404,'other owner denied file');
+for(const [locale,text] of [['de','Nicht gefunden'],['sq','Nuk u gjet'],['en','Not found']]){
+ const denied=await evidence.GET(new Request('https://fixture.example/api/evidence/'+fid+'?locale='+locale),{params:Promise.resolve({id:fid})});
+ check(denied.status===404&&await denied.text()===text&&denied.headers.get('X-Riparim-Error-Code')==='evidence_not_found','Foreign evidence remains 404 plain text with localized copy and stable code');
+}
+globalThis.fixtureUser=null;
+let denied=await evidence.GET(new Request('https://fixture.example/api/evidence/'+fid+'?locale=en'),{params:Promise.resolve({id:fid})});
+check(denied.status===401&&await denied.text()==='Login required'&&denied.headers.get('X-Riparim-Error-Code')==='authentication_required','Anonymous direct download localizes its existing plain text 401');
+globalThis.fixtureUser=roles.a;
+for(const locale of ['de','sq','en','fr']){
+ const receipt=await evidence.GET(new Request('https://fixture.example/api/evidence/'+fid+'?locale='+locale),{params:Promise.resolve({id:fid})});
+ check(receipt.ok&&receipt.headers.get('Content-Type')==='image/png'&&receipt.headers.get('Content-Disposition')==='attachment; filename="besuchsnachweis.png"'&&receipt.headers.get('Cache-Control')==='private, no-store'&&receipt.headers.get('X-Content-Type-Options')==='nosniff'&&!receipt.headers.has('X-Riparim-Error-Code'),'Successful evidence keeps binary/download/privacy headers');
+ assert.deepEqual([...new Uint8Array(await receipt.arrayBuffer())],[137,80,78,71,13,10,26,10]);passed++;
+}
+globalThis.fixtureUser=roles.b;
+denied=await evidence.GET(new Request('https://fixture.example/api/evidence/'+fid+'?locale=fr'),{params:Promise.resolve({id:fid})});check(await denied.text()==='Nicht gefunden','Invalid evidence locale safely defaults to German');
 objects.delete(row.file_key);await expect(await moderate(fid,'published',0),409,'missing stored file blocks publication');await expect(await call('PUT','a',form(fid,{proof:false,keep:true})),400,'missing retained file requires upload');
 await expect(await call('PUT','a',form(fid,{file:true})),200,'owner supplies replacement file');await expect(await moderate(fid,'published',1),200,'admin can publish replacement bundle');await expect(await call('DELETE','a',{id:fid}),200,'file fixture deleted');check(objects.size===0,'all private file fixture objects removed');
 const race=crypto.randomUUID();await expect(await call('POST','a',form(race,{file:true})),201,'concurrency fixture submitted');const original=sqlite.prepare('SELECT file_key FROM visits WHERE id=?').get(race).file_key;blockedKey=original;const started=new Promise(r=>deleteStarted=r);const first=call('PUT','a',form(race,{file:true,revision:0}));await started;await expect(await call('PUT','a',form(race,{file:true,revision:1})),200,'newer revision commits during old cleanup');releaseDelete();await expect(await first,200,'older cleanup completes');row=sqlite.prepare('SELECT * FROM visits WHERE id=?').get(race);check(objects.has(row.file_key)&&row.revision===2,'older cleanup preserves newest referenced evidence');await expect(await call('DELETE','a',{id:race}),200,'race fixture and full namespace removed');

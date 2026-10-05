@@ -28,5 +28,5 @@ export default async function WorkshopPage({params}:{params:Promise<{id:string;l
  let reviews:Review[]=[],reviewError="";
  try{const result=await storage().db.prepare("SELECT v.display_name,v.vehicle,v.service,v.date,v.rating,v.review FROM visits v JOIN workshops w ON w.id=v.workshop AND w.status='published' WHERE v.workshop=? AND v.status='published' ORDER BY v.created_at DESC LIMIT 100").bind(id).all<Review>();reviews=result.results;}
  catch(e){console.error("profile-reviews",e);reviewError="unavailable";}
- return <I18nMessages messages={getMessages(locale,["public"])}><WorkshopProfile workshop={workshop} directory={directory} reviews={reviews} reviewError={reviewError} signedIn={!!user} account={user?{email:user.email,displayName:user.displayName,provider:user.provider}:null} isAdmin={!!admin?.isModerator}/></I18nMessages>;
+ return <I18nMessages messages={getMessages(locale,["public","customer"])}><WorkshopProfile workshop={workshop} directory={directory} reviews={reviews} reviewError={reviewError} signedIn={!!user} account={user?{email:user.email,displayName:user.displayName,provider:user.provider}:null} isAdmin={!!admin?.isModerator}/></I18nMessages>;
 }
