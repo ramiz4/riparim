@@ -124,7 +124,7 @@ Die Providerübernahme erfolgt separat aus einem geprüften Main-Release:
    tatsächliche Go-Vorschauen mit erwarteter/gerenderter Locale und Prüfsummen.
    Er ändert keinen Provider und enthält keine realen Tokens oder Empfänger.
 3. Nur den physischen Callback erlauben: Produktion
-   `https://riparim.com/auth/bestaetigen?**`, bei Bedarf getrennt die tatsächlich
+   `https://riparim.com/auth/bestaetigen\?**`, bei Bedarf getrennt die tatsächlich
    verwendete lokale Callback-Origin. Keine Host-/Seitenwildcards und keine
    `/sq/auth/…`- oder `/en/auth/…`-Callbacks. Bestehende alte Callbacklinks und
    notwendige Freigaben erhalten; die Site URL bleibt eine reine Origin.
@@ -178,3 +178,49 @@ Automatisierte Fixtures und Vorschauen senden keine realen Nachrichten und
 und heller/dunkler Darstellung sowie tatsächlicher Empfang und Providerübernahme
 werden vor der Gesamtfreigabe separat protokolliert. Ohne diesen Nachweis ist
 die neue Providerkonfiguration noch nicht als live abgenommen zu bezeichnen.
+
+## Kompakte Anmeldeeinrichtung (Issue #59)
+
+Die Verwaltung zeigt vier kurze Prüfschritte und öffnet URL-Werte, SMTP-Hilfe,
+Google-Einstellungen sowie die langen Mailquellen bei Bedarf mit nativen
+`details`/`summary`-Elementen. Ein bereits konfiguriertes Projekt und erfolgreich
+getestete Einstellungen werden weiterverwendet. Dadurch bleibt die Verbindung
+rechts direkt erreichbar; eine neue Projekterstellung oder Wiederholung
+bereits abgenommener Einrichtung wird nicht verlangt.
+
+Site URL und der physische Callback `https://riparim.com/auth/bestaetigen\?**`
+bleiben erforderlich. Die [Redirect-Dokumentation](https://supabase.com/docs/guides/auth/redirect-urls)
+empfiehlt einen festgelegten Produktionspfad. Der einzelne Backslash maskiert
+das Fragezeichen als Querytrenner; ein unmaskiertes `?` wäre ein
+Einzeichen-Wildcard. `**` erhält die bestehenden Sprach-/Rücksprungparameter.
+Die Allowlist ersetzt keine App-Zielvalidierung: Supabase akzeptiert bereits
+Redirects zur Site-Origin, während die serverseitige Zielvalidierung der
+Anwendung unverändert maßgeblich bleibt. Die [SMTP-Dokumentation](https://supabase.com/docs/guides/auth/auth-smtp)
+beschränkt den Standardversand auf nichtproduktive Zwecke. Deshalb steht die
+eigene SMTP-Einrichtung vor der Vorlagenübernahme: Bei neuen Free-Projekten seit
+3. Juni 2026 ist [Vorlagenbearbeitung erst mit eigenem SMTP möglich](https://supabase.com/changelog/46599-changes-to-email-template-customisation-on-free-tier).
+Bestätigungs- und Recoveryvorlagen bleiben direkt aus
+`lib/auth/email-templates.ts` bezogen und enthalten jeweils Betreff und HTML-Body.
+Google benötigt weiterhin Website-Origin, den Callback des Supabase-Projekts
+und die Providerkonfiguration gemäß der [offiziellen Anleitung](https://supabase.com/docs/guides/auth/social-login/auth-google).
+
+`tests/auth-setup-ui.test.mjs` prüft die tatsächlichen React-/Radix-Komponenten:
+kompakte anfängliche Anleitung, erreichbare native Details, beide zentralen
+Mailfelder, Wiederverwendung gespeicherter Verbindung sowie unveränderte
+Entwurfs-/Aktivierungs-/SMTP-Verträge, Vorschauziele und Lade-/Fehlerzustände.
+Die API-Fixtures haben keine externen Effekte.
+
+Die ergänzende native Prüfung im vorgegebenen Chrome-Profil verwendete die
+tatsächliche Komponente und Projekt-CSS mit ausschließlich abgefangenem
+`GET /api/auth-settings`: 390 Pixel mit Systemtheme (auf diesem Rechner dunkel),
+1280 Pixel hell und 390 Pixel dunkel mit geöffneter URL-/SMTP-/Mailhilfe.
+Dokumentbreite und Scrollbreite waren jeweils identisch (390/1280 Pixel);
+alle vier Quellen blieben bei 390 Pixeln innerhalb ihrer 287 Pixel breiten
+Scrollbereiche. Leere Konfiguration, Ladezustand mit gesperrtem Speicherbutton
+und Fehler waren lesbar; die Anleitung blieb erreichbar. Leertaste schloss
+die Hilfe, Enter öffnete sie. Tab erreichte SMTP-Link, verschachtelte
+Bestätigungshilfe sowie Betreff und HTML-Body; End scrollte die Quelle bis zum
+abschließenden `{{ end }}` mit sichtbarem Fokusring. Die Prüfung änderte keine
+Providerkonfiguration und löste keine Live-E-Mails aus. Der korrigierte
+Dashboardwert wurde anschließend nativ mit genau einem Backslash bestätigt;
+auch bei 1336 Pixeln blieb die Dokumentbreite gleich der Scrollbreite.
