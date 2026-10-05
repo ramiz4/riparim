@@ -25,6 +25,7 @@ try{
   for(const [path,label] of [['/anmelden',login],['/einstellungen',settings]]){
    const response=await runtime.dispatchFetch('https://riparim.test'+prefix+path);assert.equal(response.status,200);const html=await response.text();assert(html.includes(label),'Built private page has active customer copy');assert.match(html,/<meta[^>]*name="robots"[^>]*content="noindex[^">]*nofollow/);assert(!html.includes('hreflang='),'Private customer page has no public alternate');
   }
+  const notice=await runtime.dispatchFetch('https://riparim.test'+prefix+'/anmelden?localeNotice=preference_not_saved');const noticeHtml=await notice.text();assert(noticeHtml.includes({de:'Deine Sprachpräferenz konnte nicht gespeichert werden.',sq:'Preferenca jote e gjuhës nuk mund të ruhej.',en:'Your language preference could not be saved.'}[locale]),'Preference failure notice is localized on an actual fresh document');
   for(const query of ['besuche=1','einreichung=11111111-1111-4111-8111-111111111111','nachweis=neu']){
    const response=await runtime.dispatchFetch('https://riparim.test'+prefix+'?'+query);assert.equal(response.status,200);const html=await response.text();assert.match(html,/<meta[^>]*name="robots"[^>]*content="noindex[^">]*nofollow/);assert(!html.includes('hreflang='),'Private landing modes have no alternate deep links');
   }
