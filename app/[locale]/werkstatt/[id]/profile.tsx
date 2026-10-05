@@ -27,10 +27,10 @@ import {readSearchSession} from "@/lib/search-session";
 import {profileSearchHref} from "@/lib/profile-navigation";
 import {WorkshopNavigationLink} from "@/components/workshop-navigation-link";
 
-type Props={display?:WorkshopDisplayContent;workshop:Workshop;directory:Workshop[];reviews:Review[];reviewError:string;signedIn:boolean;account:AccountIdentity|null;isAdmin:boolean};
-export default function WorkshopProfile({workshop:w,directory,reviews,reviewError,signedIn,account,isAdmin,display}:Props){
+type Props={initialSearchHref?:string|null;display?:WorkshopDisplayContent;workshop:Workshop;directory:Workshop[];reviews:Review[];reviewError:string;signedIn:boolean;account:AccountIdentity|null;isAdmin:boolean};
+export default function WorkshopProfile({workshop:w,directory,reviews,reviewError,signedIn,account,isAdmin,display,initialSearchHref=null}:Props){
  const {locale,t}=useI18n();
- const router=useRouter();const [reviewOpen,setReviewOpen]=useState(false),[reviewBusy,setReviewBusy]=useState(false),[myReviews,setMyReviews]=useState(false),[editing,setEditing]=useState<Visit|null>(null),[contact,setContact]=useState(false),[message,setMessage]=useState(""),[initialMessage,setInitialMessage]=useState(""),[feedback,setFeedback]=useState(""),[backHref,setBackHref]=useState("/werkstaetten");
+ const router=useRouter();const [reviewOpen,setReviewOpen]=useState(false),[reviewBusy,setReviewBusy]=useState(false),[myReviews,setMyReviews]=useState(false),[editing,setEditing]=useState<Visit|null>(null),[contact,setContact]=useState(false),[message,setMessage]=useState(""),[initialMessage,setInitialMessage]=useState(""),[feedback,setFeedback]=useState(""),[backHref,setBackHref]=useState(()=>localizeHref(initialSearchHref??"/werkstaetten",locale));
  useNavigationGuard({dirty:contact&&message!==initialMessage});
  const {profile,identity,status}=useGoogleWorkshopProfile(w.id);
  const [selection,setSelection]=useState<ProfileSelection>({brand:null,service:null,vehicle:null});
@@ -41,8 +41,9 @@ export default function WorkshopProfile({workshop:w,directory,reviews,reviewErro
  const serviceGroups=groupWorkshopServices(w),matches=workshopSelectionMatches(w,selection);
  const description=/^Öffentlicher Werkstatteintrag\./.test(w.description)?"":display?.description??w.description;
  const specialty=(display?.specialty??w.specialty).replace(/\s*·\s*Verzeichniseintrag\s*$/i,"");
+ // The server validates the public document return target; RAM only recovers client navigation.
  // eslint-disable-next-line react-hooks/set-state-in-effect -- Search details stay in browser memory; only validated public filters enter URLs.
- useEffect(()=>{const session=readSearchSession(),explicit=profileSearchHref(new URLSearchParams(window.location.search).get("suche"),directory),remembered=profileSearchHref(session?.catalogueHref??null,directory),href=explicit??remembered;setBackHref(localizeHref(href??"/werkstaetten",locale));const filters=href?parseCatalogueFilters(new URL(href,window.location.origin).searchParams,directory):defaultCatalogueFilters;setSelection(profileSelection(filters,session?.privateMatchingActive&&(!explicit||explicit===remembered)?session.context:null));},[directory,w.id,locale]);
+ useEffect(()=>{const session=readSearchSession(),explicit=profileSearchHref(new URLSearchParams(window.location.search).get("suche"),directory),remembered=profileSearchHref(session?.catalogueHref??null,directory),href=initialSearchHref??explicit??remembered;setBackHref(localizeHref(href??"/werkstaetten",locale));const filters=href?parseCatalogueFilters(new URL(href,window.location.origin).searchParams,directory):defaultCatalogueFilters;setSelection(profileSelection(filters,session?.privateMatchingActive&&href===remembered?session.context:null));},[directory,w.id,locale,initialSearchHref]);
  // eslint-disable-next-line react-hooks/set-state-in-effect -- A login return may target the inline review section.
  useEffect(()=>{if(window.location.hash==="#bewerten"||new URLSearchParams(window.location.search).get("bewerten")==="1")setReviewOpen(true);},[]);
  function openReview(){setReviewOpen(true);requestAnimationFrame(()=>document.getElementById("bewerten")?.scrollIntoView({behavior:"smooth",block:"start"}));}
