@@ -59,4 +59,9 @@ check(parseCatalogueFilters(new URLSearchParams('sort=entfernung&ort=prishtina')
 const skenderaj=record('Fixture Skenderaj',{city:'Skenderaj',lat:42.74667,lng:20.78861});
 check(catalogueDistance(skenderaj,'Skenderaj')===0,'Skenderaj has a verified city origin');
 check(parseCatalogueFilters(new URLSearchParams('sort=entfernung&ort=skenderaj'),[skenderaj]).sort==='distance','Skenderaj distance sorting survives a public link');
+const north=record('North branch fixture',{city:'Obiliq',lat:42.6796125,lng:21.116046875}),south=record('South branch fixture',{city:'Graçanicë'});
+const northFilters=parseCatalogueFilters(new URLSearchParams('ort=obiliq&sort=entfernung'),[north,south]);
+check(northFilters.city==='Obiliq'&&northFilters.sort==='distance','the north branch has a valid city filter and distance origin');
+check(matchCatalogue([north,south],northFilters).map(w=>w.id).join('|')===north.id,'selecting the north municipality does not mix in the old south branch');
+check(catalogueDistance(north,'Obiliq')>3&&catalogueDistance(north,'Obiliq')<5,'independently sourced workshop and city coordinates produce a useful distance');
 console.log(`Catalogue filter contracts: ${passed} passed`);

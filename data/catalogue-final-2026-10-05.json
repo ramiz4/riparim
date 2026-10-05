@@ -1,0 +1,136 @@
+{
+  "checkedAt": "2026-10-05T15:22:26.058Z",
+  "reviewedDrafts": 8,
+  "before": {
+    "total": 136,
+    "published": 128,
+    "drafts": 8
+  },
+  "after": {
+    "total": 129,
+    "published": 129,
+    "drafts": 0
+  },
+  "googleApiRequests": 0,
+  "dailyRequestLimit": 100,
+  "draftAssessments": [
+    {
+      "workshopId": "auto-ballkan-gjilan",
+      "assessment": "removed",
+      "previousStatus": "draft",
+      "reason": "Vom Nutzer als Truck-Teilelieferant bestätigt; kein konkreter Pkw-Werkstattnachweis.",
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-ballkan-044-177-327"
+      ]
+    },
+    {
+      "workshopId": "benita-company-kline",
+      "assessment": "removed",
+      "previousStatus": "draft",
+      "reason": "Tankstelle mit ausdrücklich beworbenem Schwerfahrzeug-Service. Der allgemeine Express-Service belegt keinen konkreten Pkw-Werkstattumfang.",
+      "sourceUrls": [
+        "https://benita-ks.com/"
+      ]
+    },
+    {
+      "workshopId": "isuzu-servis-prizren",
+      "assessment": "removed",
+      "previousStatus": "draft",
+      "reason": "Die allgemeine Serviceseite enthält wiederholte englische Pkw-Reparaturtexte. Die konkrete Betreiberbeschreibung und der aktuelle Betriebsauftritt belegen Lkw-/Bus-Teilehandel sowie Motorradservice; ein konkreter Pkw-Werkstattumfang am zugeordneten Prizren-Geschäftspunkt bleibt unbestätigt. Auf Nutzerauftrag nach erfolgloser abschließender Prüfung entfernt.",
+      "sourceUrls": [
+        "https://www.burak-ks.com/en/service",
+        "https://www.burak-ks.com/en/about",
+        "https://burakmoto.com/SERVISI/",
+        "https://www.autoyas.com/XK/Prizren/200046986712010/BURAK-Truck-%26-Bus",
+        "https://isuzu.co.rs/kontakt-kosovo/"
+      ]
+    },
+    {
+      "workshopId": "opel-rakovica-prishtina",
+      "assessment": "removed",
+      "previousStatus": "draft",
+      "reason": "Unabhängiges Verzeichnis markiert den zugeordneten Betrieb als geschlossen und den Kontakt als historisch. Keine bestätigte Wiedereröffnung; nicht veröffentlichen.",
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/opel-rakovica"
+      ]
+    },
+    {
+      "workshopId": "reno-center-muciqi-prishtina",
+      "assessment": "removed",
+      "previousStatus": "draft",
+      "reason": "Veraltetes Südprofil auf Nutzerauftrag entfernt; Nordfiliale wird unter neuer Kennung geführt, ohne Übertragung von Kundendaten.",
+      "sourceUrls": [
+        "https://www.autoyas.com/XK/Pristina/100327432881928/Reno-Mu%C3%A7iqi%26Bllaca",
+        "https://dogana.rks-gov.net/sharedfolder/AnnouncementFiles/2026_b0c9a4d9-6eaf-4463-9a1f-f6b4d67d9c49.Pdf",
+        "https://www.merrjep.com/shpallja/reno-center-muciqi/10545304"
+      ]
+    },
+    {
+      "workshopId": "scania-trans-mitrovica",
+      "assessment": "removed",
+      "previousStatus": "draft",
+      "reason": "Unternehmensauftritt als Truck & Bus Scania Service; aus dem Pkw-Verzeichnis entfernt.",
+      "sourceUrls": [
+        "https://www.facebook.com/TruckBus-Scania-Service-113881273360473/"
+      ]
+    },
+    {
+      "workshopId": "tachograf-kienzle-ferizaj",
+      "assessment": "removed",
+      "previousStatus": "draft",
+      "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis.",
+      "sourceUrls": [
+        "https://www.kienzle-ks.com/"
+      ]
+    },
+    {
+      "workshopId": "tahograf-prishtina",
+      "assessment": "removed",
+      "previousStatus": "draft",
+      "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis.",
+      "sourceUrls": [
+        "https://www.cybo.com/XK/pristina/car-repair"
+      ]
+    }
+  ],
+  "newPublishedWorkshop": {
+    "workshopId": "reno-muciqi-bllaca-obiliq",
+    "replacesDraftId": "reno-center-muciqi-prishtina",
+    "oldProfileContinuityAsserted": false,
+    "privateRelationsTransferred": false,
+    "sourceUrls": [
+      "https://www.autoyas.com/XK/Pristina/100327432881928/Reno-Mu%C3%A7iqi%26Bllaca",
+      "https://dogana.rks-gov.net/sharedfolder/AnnouncementFiles/2026_b0c9a4d9-6eaf-4463-9a1f-f6b4d67d9c49.Pdf",
+      "https://www.merrjep.com/shpallja/reno-center-muciqi/10545304"
+    ],
+    "independentLocation": {
+      "sourceUrl": "https://www.autoyas.com/XK/Pristina/100327432881928/Reno-Mu%C3%A7iqi%26Bllaca",
+      "publishedCode": "M4H8+RCV",
+      "recoveredFullCode": "8GJ3M4H8+RCV",
+      "method": "Open Location Code decoding using the independent Obiliq origin",
+      "latitude": 42.6796125,
+      "longitude": 21.116046875,
+      "within300m": true
+    },
+    "googleIdentity": {
+      "placeId": "ChIJhxuISoKdVBMRjzIZ8rKjdEc",
+      "method": "phone_and_location",
+      "uniqueInCatalogue": true,
+      "providerRoundtripVerified": true,
+      "sameFeaturePair": true,
+      "unrelatedFallbackQuery": true,
+      "independentContactVerified": true,
+      "sameIndependentLocation": true,
+      "passengerCarScopeVerified": true,
+      "verificationUrl": "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJhxuISoKdVBMRjzIZ8rKjdEc"
+    }
+  },
+  "cityOrigin": {
+    "city": "Obiliq",
+    "sourceUrl": "https://sws.geonames.org/787534/about.rdf",
+    "featureType": "populated_place",
+    "latitude": 42.68694,
+    "longitude": 21.07028,
+    "license": "CC BY 4.0"
+  }
+}
