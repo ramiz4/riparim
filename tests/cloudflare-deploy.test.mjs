@@ -51,19 +51,31 @@ assert.throws(() => assertCloudflareDeployContext(env, commit, "b".repeat(40)));
 assert.doesNotThrow(() => assertCloudflareDeployConfig(source, generated));
 const checkedInConfig = JSON.parse(readFileSync(new URL("../wrangler.jsonc", import.meta.url), "utf8"));
 assert.equal(checkedInConfig.vars.SITE_ORIGIN, cloudflareProduction.origin);
-assert.deepEqual(checkedInConfig.routes, [], "preparing the origin must not activate production routing");
 assert.equal(checkedInConfig.workers_dev, true, "the protected final transfer still needs its technical host");
 assert.equal(checkedInConfig.preview_urls, false);
-// Domain activation belongs to a later checked-in main release. Packaging and
-// deployment reject any generated route that was not in that exact source.
+// The final routing release binds only the two approved production hosts.
+// Source/generated agreement must not authorize a foreign or wider route.
 const productionRoutes = [
-  { pattern: "riparim.com", custom_domain: true },
-  { pattern: "www.riparim.com", custom_domain: true },
+  { pattern: "riparim.com", zone_id: cloudflareProduction.zone, custom_domain: true, enabled: true, previews_enabled: false },
+  { pattern: "www.riparim.com", zone_id: cloudflareProduction.zone, custom_domain: true, enabled: true, previews_enabled: false },
 ];
+assert.deepEqual(checkedInConfig.routes, productionRoutes, "the owned production zone must bind only enabled apex/www domains without previews");
 const routedSource = { ...source, routes: productionRoutes };
 const routedGenerated = { ...generated, routes: productionRoutes };
 assert.doesNotThrow(() => assertCloudflareDeployConfig(routedSource, routedGenerated));
 assert.doesNotThrow(() => assertCloudflareDeployConfig({ ...routedSource, workers_dev: false }, { ...routedGenerated, workers_dev: false }));
+for (const routes of [
+  productionRoutes.slice(0, 1),
+  [...productionRoutes, { ...productionRoutes[0], pattern: "api.riparim.com" }],
+  [productionRoutes[0], productionRoutes[0]],
+  productionRoutes.map(route => ({ ...route, pattern: `${route.pattern}/*` })),
+  productionRoutes.map(route => ({ ...route, pattern: "*.riparim.com" })),
+  productionRoutes.map(route => ({ ...route, zone_id: "foreign-zone" })),
+  productionRoutes.map(route => ({ ...route, custom_domain: false })),
+  productionRoutes.map(route => ({ ...route, enabled: false })),
+  productionRoutes.map(route => ({ ...route, previews_enabled: true })),
+  ["riparim.com", "www.riparim.com"],
+]) assert.throws(() => assertCloudflareDeployConfig({ ...source, routes }, { ...generated, routes }), /production routing/i);
 for (const [input, output] of [
   [source, routedGenerated],
   [routedSource, generated],

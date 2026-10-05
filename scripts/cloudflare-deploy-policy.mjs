@@ -8,6 +8,7 @@ export const cloudflareProduction = {
   account: "ec181b3a61c7c3da13910600953fc3ea",
   worker: "riparim",
   origin: "https://riparim.com",
+  zone: "cb2470c7a7d49b8a3e6aa3e697c3355e",
   database: "b395ea3a-5316-4b0b-bdee-533bdb68d6a0",
   databaseName: "riparim-production",
   bucket: "riparim-evidence-production",
@@ -83,6 +84,11 @@ function assertProductionTarget(config) {
   }
   if (config.vars?.SITE_ORIGIN !== cloudflareProduction.origin || typeof config.workers_dev !== "boolean" || config.preview_urls !== false || (config.routes !== undefined && !Array.isArray(config.routes)) || config.route !== undefined) {
     throw new Error("Production must use its canonical origin and explicit technical-host settings, without preview URLs or singular route overrides.");
+  }
+  const routes = config.routes ?? [];
+  const hosts = [new URL(cloudflareProduction.origin).hostname, `www.${new URL(cloudflareProduction.origin).hostname}`];
+  if (routes.length && (routes.length !== hosts.length || new Set(routes.map(route => route?.pattern)).size !== hosts.length || routes.some(route => !route || !hosts.includes(route.pattern) || route.zone_id !== cloudflareProduction.zone || route.custom_domain !== true || route.enabled !== true || route.previews_enabled !== false))) {
+    throw new Error("Production routing must contain only the enabled apex and www Custom Domains in the owned zone, with previews disabled.");
   }
 }
 

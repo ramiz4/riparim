@@ -6,7 +6,10 @@
   "compatibility_date": "2026-05-15",
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": true,
-  "routes": [],
+  "routes": [
+    {"pattern": "riparim.com", "zone_id": "cb2470c7a7d49b8a3e6aa3e697c3355e", "custom_domain": true, "enabled": true, "previews_enabled": false},
+    {"pattern": "www.riparim.com", "zone_id": "cb2470c7a7d49b8a3e6aa3e697c3355e", "custom_domain": true, "enabled": true, "previews_enabled": false}
+  ],
   "triggers": {"crons": ["*/5 * * * *"]},
   "preview_urls": false,
   "vars": {
