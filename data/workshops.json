@@ -1,11 +1,11 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-05T13:58:49.122Z",
+  "updatedAt": "2026-10-05T15:22:26.058Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 128,
-    "drafts": 8,
+    "published": 129,
+    "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
     "complete": false
@@ -13,7 +13,7 @@
   "googleImport": {
     "status": "completed",
     "reason": "Alle 128 veröffentlichten Pkw-Werkstätten sind eindeutig zugeordnet. Weitere Entwürfe benötigen bestätigte Identitäts- oder Filialbelege; sechs fachliche Ausschlüsse und ein belegter geschlossener Betrieb bleiben ausgeblendet.",
-    "matchedPlaceIds": 134,
+    "matchedPlaceIds": 129,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -219,50 +219,6 @@
             "https://www.gjithebiznesi.com/XK/auspuh-servis-kurti-td-045-651-784"
           ],
           "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
-        }
-      }
-    },
-    {
-      "id": "auto-ballkan-gjilan",
-      "name": "Auto Ballkan",
-      "city": "Gjilan",
-      "address": "Nato 99, Gjilan 60000",
-      "phone": "+38344177327",
-      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://www.cybo.com/XK/gjilan/car-repair/",
-          "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-04T07:26:35.861Z",
-      "google": {
-        "placeId": "ChIJG3VcI02NVBMRhghUZ9dLb0U",
-        "matchedAt": "2026-10-04T06:38:16.160Z",
-        "snapshot": {
-          "rating": null,
-          "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Ballkan+Nato+99%2C+Gjilan+60000&query_place_id=ChIJG3VcI02NVBMRhghUZ9dLb0U",
-          "sourceUrl": null,
-          "sourceLabel": null,
-          "checkedAt": "2026-10-04T06:50:11.092Z",
-          "sourceUpdatedAt": null
         }
       }
     },
@@ -4924,50 +4880,6 @@
       }
     },
     {
-      "id": "benita-company-kline",
-      "name": "Benita Company – Fahrzeugservice Klinë",
-      "city": "Klinë",
-      "address": "Gremnik Klinë, 9-1, 32000 Klinë, Kosovo",
-      "phone": "+38349777481",
-      "phoneNote": "Allgemeiner Geschäftskontakt Benita Company",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Express-Fahrzeugservice",
-        "Service für schwere Fahrzeuge am Standort Gremnik-Klinë"
-      ],
-      "languages": [],
-      "specialty": "Express-Fahrzeugservice",
-      "description": "Benita Company veröffentlicht am Standort Gremnik-Klinë Express-Fahrzeugservice und Service für schwere Fahrzeuge. Die weiteren Kraftstoffstandorte werden hier nicht als Werkstätten aufgeführt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://benita-ks.com/",
-          "title": "Eigene Standortseite: Adresse · Telefon · Fahrzeugservice ausdrücklich für Klinë"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-04T07:26:35.861Z",
-      "google": {
-        "placeId": "ChIJdXtZEM0OUxMRHhYLUY4CKmA",
-        "matchedAt": "2026-10-04T06:38:30.334Z",
-        "snapshot": {
-          "rating": null,
-          "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Benita+Company+%E2%80%93+Fahrzeugservice+Klin%C3%AB+Gremnik+Klin%C3%AB%2C+9-1%2C+32000+Klin%C3%AB%2C+Kosovo&query_place_id=ChIJdXtZEM0OUxMRHhYLUY4CKmA",
-          "sourceUrl": null,
-          "sourceLabel": null,
-          "checkedAt": "2026-10-04T06:50:11.092Z",
-          "sourceUpdatedAt": null
-        }
-      }
-    },
-    {
       "id": "bmw-prishtina-prishtina",
       "name": "BMW Prishtina",
       "city": "Prishtina",
@@ -5904,58 +5816,6 @@
       }
     },
     {
-      "id": "isuzu-servis-prizren",
-      "name": "Isuzu – Servis Kosovo",
-      "city": "Prizren",
-      "address": "Rruga Ukë Bytyqi Nr. 2, Prizren, Kosovo",
-      "phone": "+38329210310",
-      "phoneNote": "Telefon des offiziellen Isuzu-Servicestandorts",
-      "whatsapp": "",
-      "brands": [
-        "Isuzu"
-      ],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Isuzu-Fahrzeugservice laut offizieller Servicestandort-Seite"
-      ],
-      "languages": [],
-      "specialty": "Isuzu-Service",
-      "description": "Die offizielle Isuzu-Website führt in Prizren einen Servicestandort für Kosovo an der Ukë-Bytyqi-Straße Nr. 2. Einzelne Reparaturleistungen sind dort nicht aufgeschlüsselt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://isuzu.co.rs/kontakt-kosovo/",
-          "title": "Offizieller Isuzu-Servicestandort · Adresse · Telefon"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-04T07:26:35.861Z",
-      "google": {
-        "placeId": "ChIJiWvm59WVUxMRQAR6NUL2eA8",
-        "matchedAt": "2026-10-04T07:26:35.861Z",
-        "snapshot": {
-          "rating": null,
-          "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Isuzu+%E2%80%93+Servis+Kosovo+Rruga+Uk%C3%AB+Bytyqi+Nr.+2%2C+Prizren%2C+Kosovo&query_place_id=ChIJiWvm59WVUxMRQAR6NUL2eA8",
-          "sourceUrl": null,
-          "sourceLabel": null,
-          "checkedAt": "2026-10-04T07:26:35.861Z",
-          "sourceUpdatedAt": null
-        },
-        "verification": {
-          "method": "official_maps",
-          "sourceUrls": [
-            "https://isuzu.co.rs/kontakt-kosovo/"
-          ],
-          "note": "Die offizielle Isuzu-Kosovo-Karte bestätigt die CID 1114911671999661120 des Betriebes unter seinem Unternehmensnamen. Die dort veröffentlichte Mobilnummer bestätigt die Zuordnung zusätzlich."
-        }
-      }
-    },
-    {
       "id": "kio-garage-prizren",
       "name": "KIO Garage",
       "city": "Prizren",
@@ -6471,42 +6331,6 @@
       }
     },
     {
-      "id": "opel-rakovica-prishtina",
-      "name": "Opel Rakovica",
-      "city": "Prishtina",
-      "address": "Hajrullah Abdullahu , Bregu i Diellit, Prishtinë",
-      "phone": "+38344130035",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Opel Rakovica in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://stgres.gjirafa.biz/opel-rakovica-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
-      "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
-      }
-    },
-    {
       "id": "peugeot-te-beda-prishtina",
       "name": "Auto Servis BEDA SH.P.K.",
       "city": "Prishtina",
@@ -6705,39 +6529,71 @@
       }
     },
     {
-      "id": "reno-center-muciqi-prishtina",
-      "name": "Reno Center MUÇIQI",
-      "city": "Graçanicë",
-      "address": "Magjistralja Prishtine-Ferizaj Km.7 Te rrethi i Qarshis, Prishtinë",
+      "id": "reno-muciqi-bllaca-obiliq",
+      "name": "Reno Muçiqi & Bllaca",
+      "city": "Obiliq",
+      "address": "Magjistralja Prishtinë–Mitrovicë km 2, Shkabaj, Obiliq, Kosovo",
       "phone": "+38344201301",
-      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
+      "phoneNote": "Geschäftskontakt aus eigenen Betriebsbeiträgen und amtlichem Wartungsauftrag",
       "whatsapp": "",
-      "brands": [],
+      "brands": [
+        "Renault",
+        "Nissan",
+        "Dacia"
+      ],
       "services": [
         "Inspektion & Wartung"
       ],
       "serviceDetails": [
-        "Kfz-Wartung/Reparatur laut Kategorie im öffentlichen Verzeichnis Gjirafa.biz; konkrete Reparaturarten bitte direkt bestätigen."
+        "Pkw-Wartung für Renault, Nissan und Dacia laut eigenen Betriebsbeiträgen",
+        "Regelmäßige Wartung von Renault Megane laut amtlichem Auftrag vom April 2026"
       ],
       "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Gjirafa.biz führt Reno Center MUÇIQI in Prishtina als Betrieb für Kfz-Wartung oder Reparatur. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; die Angaben sind nicht vom Betrieb bestätigt.",
-      "lat": null,
-      "lng": null,
+      "specialty": "Pkw-Wartung · Renault, Nissan & Dacia",
+      "description": "Pkw-Werkstatt am nördlichen Standort Shkabaj in der Gemeinde Obiliq, an der Magistrale Prishtinë–Mitrovicë km 2. Eigene Betriebsbeiträge belegen Wartung für Renault, Nissan und Dacia. Ein amtlicher Auftrag von April 2026 bestätigt die Wartung von Renault Megane am selben Standort. Leistungen und Termine direkt beim Betrieb klären.",
+      "lat": 42.6796125,
+      "lng": 21.116046875,
       "sources": [
         {
-          "url": "https://stgres.gjirafa.biz/renaultcentermuciqi-1",
-          "title": "Gjirafa.biz: veröffentlichter Name · Adresse · Telefon · Kfz-Servicekategorie",
-          "kind": "directory"
+          "url": "https://www.autoyas.com/XK/Pristina/100327432881928/Reno-Mu%C3%A7iqi%26Bllaca",
+          "title": "Eigene Betriebsbeiträge: Nordstandort · Kontakt · Pkw-Wartung · veröffentlichter Standortcode",
+          "kind": "official"
+        },
+        {
+          "url": "https://dogana.rks-gov.net/sharedfolder/AnnouncementFiles/2026_b0c9a4d9-6eaf-4463-9a1f-f6b4d67d9c49.Pdf",
+          "title": "Kosovarischer Zoll: Wartungsauftrag Renault Megane · Betreiber · Nordstandort · Kontakt",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.merrjep.com/shpallja/reno-center-muciqi/10545304",
+          "title": "Eigene Betriebsanzeige: zwei getrennte Standorte · Kontakt · Pkw-Service",
+          "kind": "official"
         }
       ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-03T12:48:00.111888+00:00",
+      "checkedAt": "2026-10-05",
+      "status": "published",
+      "updatedAt": "2026-10-05T15:22:26.058Z",
       "google": {
-        "placeId": null,
-        "matchedAt": null,
-        "snapshot": null
+        "placeId": "ChIJhxuISoKdVBMRjzIZ8rKjdEc",
+        "matchedAt": "2026-10-05T15:22:26.058Z",
+        "snapshot": {
+          "rating": null,
+          "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Reno+Mu%C3%A7iqi+%26+Bllaca+Shkabaj+Obiliq&query_place_id=ChIJhxuISoKdVBMRjzIZ8rKjdEc",
+          "sourceUrl": null,
+          "sourceLabel": null,
+          "checkedAt": "2026-10-05T15:22:26.058Z",
+          "sourceUpdatedAt": null
+        },
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.autoyas.com/XK/Pristina/100327432881928/Reno-Mu%C3%A7iqi%26Bllaca",
+            "https://dogana.rks-gov.net/sharedfolder/AnnouncementFiles/2026_b0c9a4d9-6eaf-4463-9a1f-f6b4d67d9c49.Pdf",
+            "https://www.merrjep.com/shpallja/reno-center-muciqi/10545304"
+          ],
+          "note": "Neue Kennung ausschließlich für den belegten Nordstandort. Betriebsbeiträge und amtlicher Auftrag bestätigen Kontakt und Pkw-Service. Der unabhängig veröffentlichte Standortcode liegt innerhalb von 300 m desselben Google-Geschäftspunkts. Place-ID mit unpassender Ersatzsuche direkt zurückgeprüft; keine Übertragung vom alten Südprofil."
+        }
       }
     },
     {
@@ -6828,50 +6684,6 @@
           "rating": null,
           "count": null,
           "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Ridvan+R206%2C+Ferizaj+70000&query_place_id=ChIJ8zFU5C9_VBMRg0d-nCiUDv4",
-          "sourceUrl": null,
-          "sourceLabel": null,
-          "checkedAt": "2026-10-04T06:50:11.092Z",
-          "sourceUpdatedAt": null
-        }
-      }
-    },
-    {
-      "id": "scania-trans-mitrovica",
-      "name": "Scania Trans",
-      "city": "Mitrovica",
-      "address": "VVGJ+GGC, Minatorët e Trepçës, Mitrovicë 40000",
-      "phone": "+38349172737",
-      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/",
-          "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-04T07:26:35.861Z",
-      "google": {
-        "placeId": "ChIJ74s4yeVFUxMRSQjRkEpj7uU",
-        "matchedAt": "2026-10-04T06:39:12.147Z",
-        "snapshot": {
-          "rating": null,
-          "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Scania+Trans+VVGJ%2BGGC%2C+Minator%C3%ABt+e+Trep%C3%A7%C3%ABs%2C+Mitrovic%C3%AB+40000&query_place_id=ChIJ74s4yeVFUxMRSQjRkEpj7uU",
           "sourceUrl": null,
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
@@ -7034,94 +6846,6 @@
             "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/"
           ],
           "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
-        }
-      }
-    },
-    {
-      "id": "tachograf-kienzle-ferizaj",
-      "name": "Tachograf service Kienzle",
-      "city": "Ferizaj",
-      "address": "Magjistralja Ferizaj-Shkup, 2 km nga ura, Ferizaj",
-      "phone": "+38344113580",
-      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://www.cybo.com/XK/ferizaj/car-repair",
-          "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-04T07:26:35.861Z",
-      "google": {
-        "placeId": "ChIJO7PBcNp_VBMR638RbvzJZts",
-        "matchedAt": "2026-10-04T06:39:13.579Z",
-        "snapshot": {
-          "rating": null,
-          "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Tachograf+service+Kienzle+Magjistralja+Ferizaj-Shkup%2C+2+km+nga+ura%2C+Ferizaj&query_place_id=ChIJO7PBcNp_VBMR638RbvzJZts",
-          "sourceUrl": null,
-          "sourceLabel": null,
-          "checkedAt": "2026-10-04T06:50:11.092Z",
-          "sourceUpdatedAt": null
-        }
-      }
-    },
-    {
-      "id": "tahograf-prishtina",
-      "name": "Tahograf SH.P.K",
-      "city": "Prishtina",
-      "address": "Zona Industriale, Lidhja e Pejës, Prishtina 10000",
-      "phone": "+38344258295",
-      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
-      "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
-      "serviceDetails": [
-        "Fahrzeugservice und Reparatur laut öffentlichem Verzeichnis. Konkreten Umfang direkt klären."
-      ],
-      "languages": [],
-      "specialty": "Fahrzeugservice · Verzeichniseintrag",
-      "description": "Öffentlicher Werkstatteintrag. Leistungsumfang, Erreichbarkeit und Termine direkt beim Betrieb bestätigen.",
-      "lat": null,
-      "lng": null,
-      "sources": [
-        {
-          "url": "https://www.cybo.com/XK/pristina/car-repair",
-          "title": "Öffentliches Verzeichnis: Name, Kontakt und Kfz-Servicekategorie",
-          "kind": "directory"
-        }
-      ],
-      "checkedAt": "2026-10-03",
-      "status": "draft",
-      "updatedAt": "2026-10-04T07:26:35.861Z",
-      "google": {
-        "placeId": "ChIJ0ykW1rWfVBMRVWmPUwPgbKI",
-        "matchedAt": "2026-10-04T06:39:13.929Z",
-        "snapshot": {
-          "rating": null,
-          "count": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Tahograf+SH.P.K+Zona+Industriale%2C+Lidhja+e+Pej%C3%ABs%2C+Prishtina+10000&query_place_id=ChIJ0ykW1rWfVBMRVWmPUwPgbKI",
-          "sourceUrl": null,
-          "sourceLabel": null,
-          "checkedAt": "2026-10-04T06:50:11.092Z",
-          "sourceUpdatedAt": null
         }
       }
     },
