@@ -7,8 +7,8 @@ const output='.test-runtime/business';await mkdir(output,{recursive:true});
 const bundle=await build({entryPoints:{route:'app/api/business/route.ts',directory:'db/directory.ts',cleanup:'lib/auth/delete-account.ts'},outdir:output,bundle:true,write:false,format:'esm',platform:'node',plugins:[{name:'business-boundaries',setup(b){b.onResolve({filter:/^(cloudflare:workers|@\/app\/auth|@\/db\/google-places)$/},args=>({path:args.path,namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',contents:args.path==='cloudflare:workers'?'export const env=globalThis.fixtureEnv;':args.path==='@/app/auth'?'export async function getAppUser(){return globalThis.fixtureUser;} export async function getAdminUser(){return globalThis.fixtureUser;} export function ownerPair(user){return [user.ownerKeys[0],user.ownerKeys[1]??user.ownerKeys[0]];} export function providerAccountId(url,id){return `supabase:${new URL(url).hostname}:${id}`;}':'export async function confirmedPublicationPlace(...args){return globalThis.fixtureConfirmPlace(...args);}'}));}}]});
 for(const file of bundle.outputFiles)await writeFile(file.path.replace(/\.js$/,'.mjs'),file.contents);
 const db=new DatabaseSync(':memory:');for(const file of (await readdir('drizzle')).filter(file=>file.endsWith('.sql')).sort())db.exec(await readFile('drizzle/'+file,'utf8'));
-let beforeBatch=null,beforeRun=null,batchTail=Promise.resolve(),failDb=false;
-const d1={prepare(sql){const statement=db.prepare(sql);const adapter=(values=[])=>({bind:(...next)=>adapter(next),first:async()=>{if(failDb)throw Error('Fixture storage unavailable');return statement.get(...values)??null;},all:async()=>({results:statement.all(...values)}),run:async()=>{if(beforeRun)beforeRun(sql);return {meta:statement.run(...values)};}});return adapter();},batch(statements){const result=batchTail.then(async()=>{if(beforeBatch){const fn=beforeBatch;beforeBatch=null;fn();}db.exec('BEGIN');try{const results=[];for(const statement of statements)results.push(await statement.run());db.exec('COMMIT');return results;}catch(e){db.exec('ROLLBACK');throw e;}});batchTail=result.catch(()=>{});return result;}};
+let beforeBatch=null,beforeRun=null,holdBatch=null,batchTail=Promise.resolve(),failDb=false;
+const d1={prepare(sql){const statement=db.prepare(sql);const adapter=(values=[])=>({fixtureValues:values,bind:(...next)=>adapter(next),first:async()=>{if(failDb)throw Error('Fixture storage unavailable');return statement.get(...values)??null;},all:async()=>({results:statement.all(...values)}),run:async()=>{if(beforeRun)beforeRun(sql);return {meta:statement.run(...values)};}});return adapter();},batch(statements){const execute=()=>{const result=batchTail.then(async()=>{if(beforeBatch){const fn=beforeBatch;beforeBatch=null;fn();}db.exec('BEGIN');try{const results=[];for(const statement of statements)results.push(await statement.run());db.exec('COMMIT');return results;}catch(e){db.exec('ROLLBACK');throw e;}});batchTail=result.catch(()=>{});return result;};return holdBatch?holdBatch(statements,execute):execute();}};
 const origin='https://riparim.example.test',projectUrl='https://fixture-project.supabase.co';
 const aId='00000000-0000-4000-8000-000000000001',bId='00000000-0000-4000-8000-000000000002',cId='00000000-0000-4000-8000-000000000003';
 const accountId=id=>`supabase:fixture-project.supabase.co:${id}`;
@@ -101,14 +101,36 @@ const delegated={...actors.admin,email:'delegated@example.test'};actors.delegate
 const duplicateClaim=db.prepare("SELECT id FROM workshop_claims WHERE workshop_id=? AND status='pending'").get(fourth.id).id;
 beforeBatch=()=>db.prepare('DELETE FROM auth_account_roles WHERE account_id=?').run(delegated.userId);
 check((await decide('delegated','claim',duplicateClaim)).status===409&&!db.prepare('SELECT workshop_id FROM workshop_owners WHERE workshop_id=?').get(fourth.id),'Authority removed between read and commit cannot confirm ownership');
-// A losing concurrent decision must not publish its Google result or profile.
-latest=(await directory.listWorkshops()).find(w=>w.id===first.id);
-response=await change('a',first.id,{...profile(latest),description:latest.description+' Concurrent operator approval fixture.'});const concurrentChange=(await response.json()).id;
-let validationSequence=0;
-globalThis.fixtureConfirmPlace=async()=>`ChIJConcurrentOperatorResult${++validationSequence}`;
-const concurrentDecisions=await Promise.all([decide('admin','change',concurrentChange),decide('admin','change',concurrentChange)]);
-check(concurrentDecisions.filter(response=>response.ok).length===1,'Concurrent moderation can approve a draft only once');
-check(db.prepare('SELECT place_id FROM workshop_google_places WHERE workshop_id=?').get(first.id).place_id==='ChIJConcurrentOperatorResult1','A losing optimistic decision cannot overwrite the winner’s identity metadata');
+// Async identity hashing can reorder transaction arrival. Both Google results
+// may legitimately win; a late loser must preserve the actual winner's data.
+for(const winningValidation of [1,2]){
+ latest=(await directory.listWorkshops()).find(w=>w.id===first.id);
+ response=await change('a',first.id,{...profile(latest),description:latest.description+' Concurrent operator approval fixture.'});const concurrentChange=(await response.json()).id;
+ let validationSequence=0,ready;const bothBatches=new Promise(resolve=>{ready=resolve;}),batches=[];
+ globalThis.fixtureConfirmPlace=async()=>`ChIJConcurrentOperatorResult${++validationSequence}`;
+ holdBatch=(statements,execute)=>new Promise((resolve,reject)=>{batches.push({values:statements.flatMap(statement=>statement.fixtureValues),execute:()=>execute().then(resolve,reject)});if(batches.length===2)ready();});
+ const originalNow=Date.now,fixedTime=Date.parse(latest.updatedAt)+1;
+ Date.now=()=>fixedTime;
+ try{
+  const notes=['Concurrent decision from request A.','Concurrent decision from request B.'];
+  const attempts=notes.map(note=>decide('admin','change',concurrentChange,'approved',0,note));
+  await bothBatches;
+  const placeId=`ChIJConcurrentOperatorResult${winningValidation}`,winner=batches.find(batch=>batch.values.includes(placeId)),loser=batches.find(batch=>batch!==winner);
+  assert(winner&&loser,'Both real SQLite transactions must reach the controlled admission point');
+  check(batches.every(batch=>batch.values.includes(new Date(fixedTime).toISOString())),'Both prepared decisions share the exact publication timestamp');
+  const winnerNote=notes.find(note=>winner.values.includes(note));
+  await winner.execute();const winnerResponse=await attempts[notes.indexOf(winnerNote)];
+  check(winnerResponse.status===200,'The deliberately admitted transaction wins moderation');
+  const readWinner=()=>({change:db.prepare('SELECT * FROM workshop_changes WHERE id=?').get(concurrentChange),profile:db.prepare('SELECT * FROM workshops WHERE id=?').get(first.id),place:db.prepare('SELECT * FROM workshop_google_places WHERE workshop_id=?').get(first.id),rating:db.prepare('SELECT * FROM workshop_google_ratings WHERE workshop_id=?').get(first.id)});
+  const committed=readWinner();
+  check(committed.change.moderator_note===winnerNote&&committed.change.revision===1&&typeof committed.change.decision_token==='string','The actual winner owns the decision revision and operation token');
+  check(committed.profile.updated_at===new Date(fixedTime).toISOString(),'Both candidates use the same publication timestamp');
+  check(committed.place.place_id===placeId&&new URL(committed.rating.maps_url).searchParams.get('query_place_id')===placeId,'Google identity and Maps URL come from the winning transaction');
+  await loser.execute();const concurrentDecisions=await Promise.all(attempts);
+  check(concurrentDecisions.filter(response=>response.status===200).length===1&&concurrentDecisions.filter(response=>response.status===409).length===1,'Concurrent moderation approves exactly one candidate and rejects its stale competitor');
+  assert.deepEqual(readWinner(),committed,'A losing optimistic decision cannot overwrite the winner’s profile, audit data or Google identity');passed++;
+ }finally{Date.now=originalNow;holdBatch=null;}
+}
 const deleteAuth={projectUrl,client:{auth:{admin:{deleteUser:async()=>({error:null})}}}};
 await cleanup.deleteAccount(deleteAuth,aId);
 check(db.prepare('SELECT COUNT(*) AS n FROM workshop_claims WHERE owner=?').get(actors.a.userId).n===0&&db.prepare('SELECT COUNT(*) AS n FROM workshop_changes WHERE owner IN (?,?)').get(actors.a.userId,'legacy-a').n===0,'Account deletion removes private ownership evidence and drafts, including linked legacy records');
