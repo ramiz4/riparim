@@ -3,3 +3,22 @@
 .auth-compact .auth-privacy a{color:var(--theme-accent);font-size:14px;text-decoration:underline;text-underline-offset:3px}
 
 .auth-page{width:min(980px,calc(100% - 2*var(--page-gutter)));padding-inline:0}
+
+.auth-setup-layout{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;gap:24px;margin-top:24px}
+.setup-instructions>p{margin:0 0 18px;line-height:1.6}
+.setup-steps{list-style:decimal;padding-left:22px;margin:0;display:grid;gap:16px}
+.setup-steps>li{padding-left:4px;min-width:0}
+.setup-steps>li::marker{font-weight:650;color:var(--foreground)}
+.setup-steps h3{font-size:15px;font-weight:650;color:var(--foreground);margin:0}
+.setup-steps p{margin:5px 0;line-height:1.6}
+.setup-instructions details{margin-top:8px;border-top:1px solid var(--border)}
+.setup-instructions summary{padding:11px 2px;min-height:44px;font-size:13px;font-weight:600;color:var(--foreground);cursor:pointer;overflow-wrap:anywhere}
+.setup-instructions :is(summary,pre):focus-visible{outline:3px solid var(--theme-accent);outline-offset:3px;border-radius:3px}
+.setup-help{padding:0 2px 10px;font-size:13px;line-height:1.6}
+.setup-help>p{font-size:13px;margin:8px 0 12px}
+.setup-help>a{display:inline-block;font-size:13px;line-height:1.6;margin-bottom:8px;text-underline-offset:3px}
+.setup-help h4{font-size:12px;font-weight:650;margin:8px 0 5px;color:var(--foreground)}
+.setup-instructions pre{max-height:240px;overflow:auto;line-height:1.6}
+.setup-instructions .note{margin-top:20px}
+@media(max-width:900px){.auth-setup-layout{grid-template-columns:1fr}}
+@media(max-width:720px){.auth-setup-layout{gap:18px}.setup-instructions,.auth-settings-form{padding:21px}.setup-steps{padding-left:19px}}
