@@ -46,3 +46,44 @@ Der neue Betriebsablauf wird mit isolierten Konten und einer privaten SQLite-Dat
 Isolierte Versand-Fixtures prüfen atomare Moderation/Ereignisspeicherung, verifizierte Empfänger und bestätigte Altverknüpfungen, private Inhalte, sichere gezielte Anmeldelinks, gleichzeitige Entscheidungen und Versandversuche, dauerhafte Backoffs einschließlich der Begrenzung fehlgeschlagener Empfängerabfragen, fehlende Konfiguration/Kontakte sowie Netzwerk- und Datenbankfehler nach einer bereits angenommenen Nachricht. Wiederholungen verwenden exakt denselben Inhalt und Idempotenzschlüssel; abgelaufene Schlüssel und geänderte Empfänger oder Zugangsdaten führen zu einer sichtbaren Blockade. Die Admin-UI unterscheidet Vormerkung, Übergabe und unklare Ergebnisse und erlaubt keine blinde Wiederholung nach Ablauf.
 
 Ein zusätzlicher Miniflare-Test führt den tatsächlichen Worker-Scheduled-Handler mit nativer D1-Datenbank aus. Sämtliche Provideranfragen werden innerhalb dieses isolierten Workers abgefangen; es werden keine echten E-Mails verschickt. Der Scheduler übergibt ein Ereignis einmalig und überspringt es beim nächsten Lauf. Vor Veröffentlichung ist Migration `0012` erforderlich, außerdem die serverseitige Resend-Konfiguration und der im Artefakt deklarierte Fünf-Minuten-Cron. Die bestehende Auth-Domain wurde beim Dienst als bestätigt und für Versand aktiviert gelesen; eine echte Zustellung der neuen Vorlagen wurde nicht geprüft.
+
+## Kundenabläufe in drei Sprachen (Issue #50)
+
+Die isolierte DE/SQ/EN-Matrix prüft Signup → Bestätigung → separate Anmeldung
+mit ursprünglichem Werkstattziel, Recovery → Reset → Anmeldung, Google-Erfolg
+und Abbruch, eigene Google-Löschreauth sowie Abmeldung. APIs erhalten explizit
+`locale`; fehlende Werte bleiben deutsch kompatibel, ungültige Werte liefern
+400 vor Provider-/Konfigurationszugriff. Der physische Callback und seine
+Cookiepfade bleiben `/auth/bestaetigen`. Sein gemeinsamer Mailvertrag beginnt
+mit `?locale=…&weiter=…`; alte `type=signup`-Callbacks bleiben gültig.
+
+`tests/google-auth.test.mjs` verwendet echte Routen und eine private SQLite-
+Fixture mit abgefangenen Provideraufrufen. `tests/account-settings.test.mjs`
+prüft die eigenständige Sprachpräferenz am bestätigten eigenen Konto,
+Metadatenerhalt, fremde Ziele, Mischpayloads, Rollenfelder und Providerfehler.
+Der Sprachwähler wartet höchstens drei Sekunden auf das Speichern; bei Fehler
+oder Timeout navigiert er trotzdem und zeigt nach Reload die sichere lokale
+Notice. Native ChatGPT-Konten überspringen den Schreibversuch.
+`tests/i18n-switcher.test.mjs` deckt diesen Vertrag ab; die lokale native
+Simulation behält Loopback-/Header-/Prefetchgrenzen in
+`tests/i18n-native-auth.test.mjs`.
+
+Die tatsächlichen React-/Radix-Komponenten werden durch
+`tests/customer-localization-ui.test.mjs` und
+`tests/account-settings-ui.test.mjs` mit aktiven Katalogen geprüft: lokale
+Beschriftungen und Fehler, Passwortanzeige, Sternbedienung per Tastatur,
+Dialogfokus/Escape, erhaltene Originalinhalte und bestehende kanonische
+Leistungs-/Nachweiswerte. Kontolöschung verlangt exakt `KONTO LÖSCHEN`,
+`DELETE ACCOUNT` beziehungsweise `FSHI LLOGARINË`; erst danach sendet der
+Client den bestehenden deutschen Sentinel. Die serverseitigen eigenen
+Deletion-Grants und Schutzregeln bleiben maßgeblich.
+
+`tests/combined-reviews.test.mjs` vergleicht erfolgreiche Downloadbytes und
+Header und prüft lokale Plaintextfehler mit identischen 401/404-Statuscodes und
+`X-Riparim-Error-Code`. Kunden- und Administrationslinks verwenden denselben
+Downloadhelfer. Auth-/Kontometadaten und private Landing-Querymodi sind
+`noindex,nofollow` ohne öffentliche Alternates; die normale Landing bleibt
+indexierbar. Metadatenfixtures und beide tatsächlichen Worker-Builds prüfen
+diese Grenze. Keine dieser Fixtures nutzt persönliche Konten, echte Belege,
+Live-E-Mails oder Produktionsänderungen. Browsergeometrie/Themes/Zoom werden
+vor der PR-Freigabe gesondert koordiniert.

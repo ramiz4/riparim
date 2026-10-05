@@ -5,9 +5,9 @@ import {JSDOM,VirtualConsole} from 'jsdom';
 import {createElement,act} from 'react';
 import {createRoot} from 'react-dom/client';
 const out=new URL('../.test-runtime/i18n-switcher.mjs',import.meta.url);
-const source=`export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {LanguageSwitcher} from './components/language-switcher';export {useNavigationGuard} from './lib/i18n/navigation-guard';export {languageSwitchHref} from './lib/i18n/navigation';`;
+const source=`export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {LanguageSwitcher} from './components/language-switcher';export {useNavigationGuard} from './lib/i18n/navigation-guard';export {languageSwitchHref} from './lib/i18n/navigation';export {preferredLanguageHref} from './lib/i18n/preference';`;
 const result=await build({stdin:{contents:source,resolveDir:process.cwd(),loader:'tsx'},bundle:true,format:'esm',platform:'node',jsx:'automatic',write:false,external:['react','react/jsx-runtime','lucide-react']});await mkdir(new URL('.',out),{recursive:true});await writeFile(out,result.outputFiles[0].text);
-const {I18nProvider,getMessages,LanguageSwitcher,useNavigationGuard,languageSwitchHref}=await import(out);
+const {I18nProvider,getMessages,LanguageSwitcher,useNavigationGuard,languageSwitchHref,preferredLanguageHref}=await import(out);
 assert.equal(languageSwitchHref('/sq#suche','en'),'/en#suche');
 assert.equal(languageSwitchHref('/#so-gehts','sq'),'/sq#so-gehts');
 assert.equal(languageSwitchHref('/sq/werkstatt/test-id?suche=%2Fsq%2Fwerkstaetten%3Fort%3Dprizren%26sprache%3Dsq&token_hash=secret&vehicle=private#bewerten','en'),'/en/werkstatt/test-id?suche=%2Fen%2Fwerkstaetten%3Fort%3Dprizren%26sprache%3Dsq#bewerten');
@@ -28,3 +28,16 @@ try{
  await render({dirty:false,busy:false});assert.equal(document.querySelector('select').disabled,false,'Clearly finished mutation releases the selector');
 }finally{await act(async()=>root.unmount());dom.window.close();}
 process.stdout.write('Language switch: public URL sanitization, safe return, keyboard control, localized draft cancellation and mutation guard passed\n');
+
+const originalFetch=globalThis.fetch;let writes=[];
+try{
+ globalThis.fetch=async(url,init)=>{writes.push({url,init});return Response.json({preferredLocale:'sq'});};
+ assert.equal(await preferredLanguageHref('/en/werkstaetten?ort=prizren&sprache=sq','sq',true),'/sq/werkstaetten?ort=prizren&sprache=sq');
+ assert.equal(writes[0].url,'/api/account');assert.equal(writes[0].init.method,'PATCH');assert.deepEqual(JSON.parse(writes[0].init.body),{preferredLocale:'sq'});
+ globalThis.fetch=async()=>Response.json({errorCode:'unavailable'},{status:503});
+ assert.equal(await preferredLanguageHref('/en/werkstatt/test-id#bewerten','sq',true),'/sq/werkstatt/test-id?localeNotice=preference_not_saved#bewerten');
+ const before=writes.length;assert.equal(await preferredLanguageHref('/en?besuche=1','de',false),'/?besuche=1');assert.equal(writes.length,before,'Legacy accounts skip provider preference writes');
+ const start=Date.now();globalThis.fetch=async()=>new Promise(()=>{});
+ assert.equal(await preferredLanguageHref('/sq/einstellungen','en',true),'/en/einstellungen?localeNotice=preference_not_saved');
+ assert.ok(Date.now()-start<4500,'Even an unresponsive provider cannot indefinitely block document navigation');
+}finally{globalThis.fetch=originalFetch;}

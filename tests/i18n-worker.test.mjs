@@ -20,6 +20,15 @@ try{
  for(const [path,target] of [['/de','/'],['/de/werkstaetten?ort=prizren','/werkstaetten?ort=prizren']]){const response=await runtime.dispatchFetch('https://riparim.test'+path,{redirect:'manual'});assert.equal(response.status,308);assert.equal(new URL(response.headers.get('Location'),'https://riparim.test').href,'https://riparim.test'+target);}
  for(const path of ['/fr','/sq/missing','/en/missing','/werkstatt/unknown-profile','/en/werkstatt/unknown-profile','/sq/werkstatt/x','/sq/missing.html','/en/missing.txt','/sq/missing.svg','/en/missing.png','/fr/missing.png','/missing.html','/missing.png']){const response=await runtime.dispatchFetch('https://riparim.test'+path);assert.equal(response.status,404,path);};
  for(const path of ['/api/workshops','/api/google-places']){const response=await runtime.dispatchFetch('https://riparim.test'+path);assert.equal(response.status,200);assert.match(response.headers.get('Content-Type'),/application\/json/);}
+ for(const [locale,login,settings] of [['de','Anmelden','Einstellungen'],['sq','Hyr','Cilësimet'],['en','Log in','Settings']]){
+  const prefix=locale==='de'?'':'/'+locale;
+  for(const [path,label] of [['/anmelden',login],['/einstellungen',settings]]){
+   const response=await runtime.dispatchFetch('https://riparim.test'+prefix+path);assert.equal(response.status,200);const html=await response.text();assert(html.includes(label),'Built private page has active customer copy');assert.match(html,/<meta[^>]*name="robots"[^>]*content="noindex[^">]*nofollow/);assert(!html.includes('hreflang='),'Private customer page has no public alternate');
+  }
+  for(const query of ['besuche=1','einreichung=11111111-1111-4111-8111-111111111111','nachweis=neu']){
+   const response=await runtime.dispatchFetch('https://riparim.test'+prefix+'?'+query);assert.equal(response.status,200);const html=await response.text();assert.match(html,/<meta[^>]*name="robots"[^>]*content="noindex[^">]*nofollow/);assert(!html.includes('hreflang='),'Private landing modes have no alternate deep links');
+  }
+ }
  const callback=await runtime.dispatchFetch('https://riparim.test/auth/bestaetigen?token_hash=fixture',{redirect:'manual'});assert.equal(callback.status,303);assert.equal(callback.headers.get('Referrer-Policy'),'no-referrer');
  for(const file of (await readdir('public')).filter(file=>/\.(?:png|jpg|svg)$/.test(file))){const response=await runtime.dispatchFetch('https://riparim.test/'+file,{redirect:'manual'});assert.equal(response.status,200,'physical unprefixed asset '+file+' stays reachable');}
  // Run Intl in native workerd as well, using the same public formatter/translator.

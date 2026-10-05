@@ -1,3 +1,4 @@
+import {ValidationError} from "@/lib/validation-error";
 import type {User} from "@supabase/supabase-js";
 import type {AppUser} from "@/app/auth";
 import {providerAccountId} from "@/app/auth";
@@ -18,14 +19,14 @@ export async function userView(user:User,admin:AppUser,projectUrl:string):Promis
 export function validUserId(id:string){return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);}
 export function parseUserFields(body:Record<string,unknown>,creating=false){
  const allowed=creating?["name","email","password","active"]:["name","email","password","active","role"];
- if(!Object.keys(body).length||Object.keys(body).some(key=>!allowed.includes(key)))throw Error("Bitte prüfe die Eingaben.");
- if(!creating&&("active" in body||"role" in body)&&Object.keys(body).length!==1)throw Error("Bitte ändere Rolle und Kontostatus getrennt von den Benutzerdaten.");
+ if(!Object.keys(body).length||Object.keys(body).some(key=>!allowed.includes(key)))throw new ValidationError("invalid_request","Bitte prüfe die Eingaben.");
+ if(!creating&&("active" in body||"role" in body)&&Object.keys(body).length!==1)throw new ValidationError("account_fields_separate","Bitte ändere Rolle und Kontostatus getrennt von den Benutzerdaten.");
  const fields:{name?:string;email?:string;password?:string;active?:boolean;role?:AccountRole}={};
- if(creating||"name" in body){if(typeof body.name!=="string"||body.name.trim().length<2||body.name.trim().length>80)throw Error("Bitte gib einen Namen mit 2 bis 80 Zeichen ein.");fields.name=body.name.trim();}
- if(creating||"email" in body){if(typeof body.email!=="string"||body.email.trim().length>254||! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email.trim()))throw Error("Bitte gib eine gültige E-Mail-Adresse ein.");fields.email=body.email.trim().toLowerCase();}
- if(creating||"password" in body){if(typeof body.password!=="string"||body.password.length<12||body.password.length>128)throw Error("Bitte nutze ein Passwort mit 12 bis 128 Zeichen.");fields.password=body.password;}
- if("active" in body){if(typeof body.active!=="boolean")throw Error("Bitte wähle einen gültigen Kontostatus.");fields.active=body.active;}else if(creating)fields.active=true;
- if("role" in body){if(body.role!=="admin"&&body.role!=="user")throw Error("Bitte wähle die Rolle Benutzer oder Admin.");fields.role=body.role;}
+ if(creating||"name" in body){if(typeof body.name!=="string"||body.name.trim().length<2||body.name.trim().length>80)throw new ValidationError("invalid_name","Bitte gib einen Namen mit 2 bis 80 Zeichen ein.");fields.name=body.name.trim();}
+ if(creating||"email" in body){if(typeof body.email!=="string"||body.email.trim().length>254||! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email.trim()))throw new ValidationError("invalid_email","Bitte gib eine gültige E-Mail-Adresse ein.");fields.email=body.email.trim().toLowerCase();}
+ if(creating||"password" in body){if(typeof body.password!=="string"||body.password.length<12||body.password.length>128)throw new ValidationError("invalid_password","Bitte nutze ein Passwort mit 12 bis 128 Zeichen.");fields.password=body.password;}
+ if("active" in body){if(typeof body.active!=="boolean")throw new ValidationError("account_status_invalid","Bitte wähle einen gültigen Kontostatus.");fields.active=body.active;}else if(creating)fields.active=true;
+ if("role" in body){if(body.role!=="admin"&&body.role!=="user")throw new ValidationError("account_role_invalid","Bitte wähle die Rolle Benutzer oder Admin.");fields.role=body.role;}
  return fields;
 }
 export function providerFailure(error:{code?:string;status?:number}|null){

@@ -181,7 +181,7 @@ otpError=null;
 db.prepare("UPDATE auth_settings SET email_delivery_confirmed=1 WHERE id='main'").run();
 response=await post('recovery',{email:' RECOVERY@example.test ',returnTo:'//outside.example.test'});
 check(response.status===200&&(await response.json()).message.includes('Wenn ein Konto existiert'),'Recovery does not reveal whether an account exists');
-check(lastRecovery.email==='recovery@example.test'&&lastRecovery.options.redirectTo===origin+'/auth/bestaetigen?weiter=/passwort-neu','Recovery normalizes email and uses only the canonical reset destination');
+check(lastRecovery.email==='recovery@example.test'&&lastRecovery.options.redirectTo===origin+'/auth/bestaetigen?locale=de&weiter=%2Fpasswort-neu','Recovery normalizes email and uses only the canonical reset destination');
 link=emailLink(templates.recoveryEmailTemplate,lastRecovery.options.redirectTo,'fixture-recovery-token');
 const signoutsBeforeRecovery=signouts.length;
 response=await callback.GET(new Request(link));
@@ -246,5 +246,57 @@ response=await callbackRequest({anbieter:'google',code:'fixture-code',fluss:flow
 check(new URL(response.headers.get('Location')).searchParams.get('fehler')==='google'&&!cookieMap.has('riparim-account-deletion'),'Expired Google deletion intent cannot grant permission');
 sessionId='deletion-google-fresh';db.prepare("INSERT INTO auth_account_roles VALUES (?,'admin','2026-10-04','fixture-admin')").run(auth.providerAccountId(projectUrl,user.id));
 check((await post('google',{reauthenticate:true})).status===403,'Delegated administrators cannot start self-deletion OAuth');
+// Locale is an explicit API contract, checked before provider/config work.
+for (const action of ['login','register','recovery','reset','logout','google']) {
+ const before={passwordCalls,signupCalls,oauthCalls,codeExchanges};
+ const invalid=await post(action,{locale:'fr',email:'invalid-locale@example.test',password:'fixture-password-123'});
+ check(invalid.status===400&&(await invalid.json()).errorCode==='invalid_locale',`Invalid locale is rejected by ${action}`);
+ check(JSON.stringify(before)===JSON.stringify({passwordCalls,signupCalls,oauthCalls,codeExchanges}),'Invalid locale cannot call a provider');
+}
+db.prepare("UPDATE auth_settings SET enabled=0").run();
+for(const value of [null,'DE','fr',{},['en'],1])check((await post('google',{locale:value})).status===400,'Invalid locale fails before disabled provider configuration');
+db.prepare("UPDATE auth_settings SET enabled=1").run();
+db.prepare('DELETE FROM auth_account_roles').run();db.prepare('DELETE FROM auth_attempts').run();
+for(const locale of ['de','sq','en']){
+ const prefix=locale==='de'?'':'/'+locale;
+ const target=prefix+'/werkstatt/fixture-workshop?suche=wartung#bewerten';
+ method='password';sessionId='localized-'+locale;
+ let r=await post('register',{locale,email:'localized-'+locale+'@example.test',password:'fixture-password-123',returnTo:'/sq/werkstatt/fixture-workshop?suche=wartung#bewerten'});
+ check(r.ok&&(await r.json()).messageCode==='confirm_email'&&lastSignup.options.data.preferred_locale===locale,'Signup stores only the validated presentation preference');
+ const confirmation=new URL(lastSignup.options.emailRedirectTo);
+ check([...confirmation.searchParams.keys()].join(',')==='locale,weiter'&&confirmation.searchParams.get('locale')===locale&&confirmation.searchParams.get('weiter')===target,'Canonical locale-first confirmation retains the safe target and explicit locale wins');
+ r=await callbackRequest({locale,token_hash:'localized-signup-token',type:'signup',weiter:'/sq/werkstatt/fixture-workshop?suche=wartung#bewerten'});
+ let destination=new URL(r.headers.get('Location'));
+ check(destination.pathname===prefix+'/anmelden'&&destination.searchParams.get('weiter')===target,'Signup verification stays in the chosen language');
+ const invalidEmail=await post('login',{locale,email:'invalid',password:'fixture-password-123'});check(invalidEmail.status===400&&(await invalidEmail.json()).errorCode==='invalid_email','Auth error codes and statuses stay identical across locales');
+ r=await post('login',{locale,email:user.email,password:'fixture-password-123',returnTo:target});
+ check(r.ok&&(await r.json()).returnTo===target,'Localized separate login resumes the review target');
+ r=await post('recovery',{locale,email:'localized-recovery-'+locale+'@example.test'});
+ check(r.ok&&new URL(lastRecovery.options.redirectTo).searchParams.get('weiter')===prefix+'/passwort-neu','Recovery uses a localized reset page without metadata writes');
+ r=await callbackRequest({locale,code:'localized-pkce-code',weiter:prefix+'/passwort-neu?source=email'});
+ check(new URL(r.headers.get('Location')).pathname===prefix+'/passwort-neu','PKCE reset comparison ignores locale prefix and query');
+ r=await post('reset',{locale,password:'fixture-new-password-123'});
+ check(r.ok&&(await r.json()).returnTo===prefix+'/anmelden?hinweis=passwort-geaendert','Reset returns to localized login');
+ method='oauth';sessionId='localized-google-'+locale;
+ r=await post('google',{locale,returnTo:target});flow=cookieMap.get('riparim-google-flow');
+ check(r.ok&&[...new URL(lastOAuth.options.redirectTo).searchParams.keys()].slice(0,2).join(',')==='locale,weiter','OAuth shares the locale-first callback contract');
+ r=await callbackRequest({locale,anbieter:'google',code:'fixture-code',fluss:flow,weiter:target});
+ check(new URL(r.headers.get('Location')).pathname===prefix+'/werkstatt/fixture-workshop','Google success returns in the requested language');
+ r=await callbackRequest({locale,anbieter:'google',error:'access_denied',weiter:target});
+ check(new URL(r.headers.get('Location')).pathname===prefix+'/anmelden','Google cancellation returns in the requested language');
+ await auth.recordGoogleSession(projectUrl,providerSession(),globalThis.fixtureClient);
+ r=await post('google',{locale,reauthenticate:true});flow=cookieMap.get('riparim-google-flow');
+ check(r.ok&&new URL(lastOAuth.options.redirectTo).searchParams.get('weiter')===prefix+'/einstellungen','Deletion reauth keeps the settings language');
+ sessionId='localized-deletion-'+locale;
+ r=await callbackRequest({locale,anbieter:'google',code:'fixture-code',fluss:flow});
+ check(new URL(r.headers.get('Location')).pathname===prefix+'/einstellungen','Verified own deletion grant returns to localized settings');
+ r=await post('logout',{locale});check(r.ok&&(await r.json()).returnTo===prefix+'/anmelden','Logout returns to localized login');
+ db.prepare('DELETE FROM auth_attempts').run();
+}
+for(const locale of [undefined,'fr']){
+ const r=await callbackRequest({...(locale?{locale}:{}),token_hash:'legacy-token',type:'signup',weiter:'/en/werkstatt/fixture-workshop'});
+ const destination=new URL(r.headers.get('Location'));
+ check(destination.pathname==='/anmelden'&&destination.searchParams.get('weiter')==='/werkstatt/fixture-workshop','Missing or invalid callback locale safely defaults to German');
+}
 globalThis.fetch=originalFetch;
 console.log(JSON.stringify({authBoundaryChecksPassed:passed,emailJourneyChecksPassed,googleLogoutChecksPassed:2,liveProviderCalls:false,realEmailsSent:false}));

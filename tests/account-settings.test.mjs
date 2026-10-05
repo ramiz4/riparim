@@ -65,6 +65,14 @@ check(response.ok&&data.name==='Another Name'&&writes.at(-1).uid===id,'Validated
 check(writes.at(-1).attributes.user_metadata.unrelated==='preserved'&&Object.keys(writes.at(-1).attributes).length===1,'Name updates preserve unrelated profile metadata without writing identity or roles');
 providerUser={...providerUser,id:otherId};check((await patch({name:'Other Name'})).status===401,'A mismatched verified provider subject fails closed');providerUser={...providerUser,id};
 user={...user,provider:'ChatGPT'};check((await account.GET().then(r=>r.json())).account===null&&(await patch({name:'Another Name'})).status===401,'Native-only sessions cannot act on a Supabase account');user={...user,provider:'E-Mail'};
+for(const locale of ['de','sq','en']){
+ const response=await patch({preferredLocale:locale}),data=await response.json();
+ check(response.ok&&data.preferredLocale===locale&&providerUser.user_metadata.preferred_locale===locale,'Own confirmed account can set a presentation locale');
+ check(writes.at(-1).uid===id&&writes.at(-1).attributes.user_metadata.unrelated==='preserved'&&providerUser.user_metadata.full_name==='Another Name','Preference preserves unrelated metadata and name');
+}
+for(const payload of [{preferredLocale:'fr'},{preferredLocale:null},{preferredLocale:'en',name:'Another Name'},{preferredLocale:'en',id:otherId},{preferredLocale:'en',role:'admin'},{preferred_locale:'en'}])check((await patch(payload)).status===400,'Preference accepts only the exact independent allowlisted payload');
+providerUser={...providerUser,email_confirmed_at:null};check((await patch({preferredLocale:'sq'})).status===401,'Unconfirmed account cannot set a preference');providerUser={...providerUser,email_confirmed_at:'2026-10-04'};
+failProvider=true;check((await patch({preferredLocale:'sq'})).status===503,'Provider failure is reported without false preference success');failProvider=false;
 proofError=true;check((await confirm({password:'incorrect'})).status===401&&!grantRow(),'Incorrect passwords cannot authorize deletion');proofError=false;
 proofUser={...providerUser,id:otherId};check((await confirm({password:'fixture-password'})).status===401&&!grantRow(),'Fresh proof for another subject cannot authorize this account');proofUser=providerUser;
 proofUserError=true;check((await confirm({password:'fixture-password'})).status===401&&!grantRow(),'A failed server-side proof lookup cannot authorize deletion');proofUserError=false;

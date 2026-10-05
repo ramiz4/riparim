@@ -1,4 +1,6 @@
 "use client";
+import {useI18n} from "@/lib/i18n/client";
+import {evidenceHref} from "@/lib/i18n/evidence";
 import {useNavigationGuard} from "@/lib/i18n/navigation-guard";
 import {LocaleAnchor} from "@/components/locale-anchor";
 import {useCallback,useEffect,useRef,useState} from "react";
@@ -11,6 +13,7 @@ import {NotificationStatus} from "@/components/notification-status";
 import {statusLabels,type Visit} from "@/app/journeys";
 
 export default function AdminReviews({account}:{account:AccountIdentity}){
+ const {locale}=useI18n();
  const [items,setItems]=useState<Visit[]>([]),[loading,setLoading]=useState(true),[loaded,setLoaded]=useState(false),[cursor,setCursor]=useState<string|null>(null),[pending,setPending]=useState<number|null>(null),[error,setError]=useState(""),[feedback,setFeedback]=useState(""),[mutating,setMutating]=useState<string|null>(null),[notes,setNotes]=useState<Record<string,string>>({}),[filter,setFilter]=useState("open"),[query,setQuery]=useState("");
  useNavigationGuard({busy:!!mutating,dirty:Object.values(notes).some(Boolean)});
  const [notificationRefresh,setNotificationRefresh]=useState(0);
@@ -46,7 +49,7 @@ export default function AdminReviews({account}:{account:AccountIdentity}){
    const complete=!!visit.display_name&&visit.display_name.trim().length>=2&&visit.display_name.trim().length<=40&&!!visit.review&&visit.review.trim().length>=30&&visit.review.trim().length<=2000&&Number.isInteger(visit.rating)&&Number(visit.rating)>=1&&Number(visit.rating)<=5;
    return <details className="moderation-entry" key={visit.id}><summary><div><strong>{visit.workshop_name??"Ehemaliges Werkstattprofil"}</strong><span>{visit.display_name??"Bewertung fehlt"} · {new Date(visit.date+"T12:00:00").toLocaleDateString("de-DE")}{visit.rating?` · ${visit.rating}/5`:""}</span></div><span className={`visit-status ${visit.status}`}>{statusLabels[visit.status]??visit.status}</span><ChevronDown size={18}/></summary><div className="moderation-entry-body">
     <section><h2>Bewertung</h2><p className="review-meta">{visit.vehicle} · {visit.service}</p>{visit.review?<><p className="moderation-review-rating"><Star size={16} fill="currentColor"/>{visit.rating} / 5 · {visit.display_name}</p><p className="public-review-text">{visit.review}</p></>:<p className="note">Die ältere Einreichung enthält noch keine vollständige Bewertung. Fordere eine Ergänzung an.</p>}</section>
-    <section className="moderation-evidence"><h2><FileCheck2 size={18}/>Privater Besuchsnachweis</h2><p>{visit.evidence_type}</p>{visit.file_name&&<LocaleAnchor className="outline small" href={`/api/evidence/${visit.id}`}><FileCheck2 size={16}/>Beleg herunterladen</LocaleAnchor>}{visit.evidence_note&&<p className="evidence-note">{visit.evidence_note}</p>}{!visit.file_name&&!visit.evidence_note&&<p className="help">Kein Nachweis vorhanden.</p>}</section>
+    <section className="moderation-evidence"><h2><FileCheck2 size={18}/>Privater Besuchsnachweis</h2><p>{visit.evidence_type}</p>{visit.file_name&&<LocaleAnchor className="outline small" href={evidenceHref(visit.id,locale)}><FileCheck2 size={16}/>Beleg herunterladen</LocaleAnchor>}{visit.evidence_note&&<p className="evidence-note">{visit.evidence_note}</p>}{!visit.file_name&&!visit.evidence_note&&<p className="help">Kein Nachweis vorhanden.</p>}</section>
     <section className="moderation-decision"><h2>Prüfentscheidung</h2>{visit.moderator_note&&<p className="help">Bisheriger Vermerk: {visit.moderator_note}</p>}<label htmlFor={`moderation-note-${visit.id}`}>Prüfvermerk</label><textarea id={`moderation-note-${visit.id}`} rows={3} maxLength={1000} value={notes[visit.id]??""} onChange={e=>setNotes(old=>({...old,[visit.id]:e.target.value}))} placeholder="Was belegen Bewertung und Nachweis? Was fehlt? Mindestens 10 Zeichen."/><p className="help">Werkstatt, Datum, Arbeit und mögliche doppelte Einreichungen prüfen. Der Vermerk bleibt privat.</p><div className="moderation-decision-actions">{["pending","approved","needs_more"].includes(visit.status)&&<button className="primary" disabled={busy||!complete||(notes[visit.id]??"").trim().length<10} onClick={()=>void moderate(visit,"published")}><ShieldCheck size={16}/>Prüfen & veröffentlichen</button>}<button className="outline" disabled={busy||visit.status==="deleting"||(notes[visit.id]??"").trim().length<10} onClick={()=>void moderate(visit,"needs_more")}>{visit.status==="published"?"Ausblenden & Ergänzung anfordern":"Ergänzung anfordern"}</button></div></section>
    </div></details>;
   })}</div>
