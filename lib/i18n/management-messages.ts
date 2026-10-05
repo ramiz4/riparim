@@ -417,6 +417,7 @@ export const managementDe={
  "authFieldPairHelp":"Übernimm bei Confirm sign up gemeinsam confirmation.subject.txt und confirmation.body.html; bei Reset password gemeinsam recovery.subject.txt und recovery.body.html. Die vier Quellen unten sind zentral definiert und enthalten unveränderten technischen Go-Code.",
  "authReadbackHelp":"Lies anschließend alle vier Providerfelder erneut und vergleiche sie bytegenau mit dem Export. Prüfe Providerpreview und tatsächlichen Empfang von Betreff/HTML in DE/SQ/EN sowie Bestätigung → separate Anmeldung zum ursprünglichen Ziel und Recovery → Reset → Anmeldung mit getrennten freigegebenen Testkonten.",
  "authActivationFailure":"Versand erst nach diesen Nachweisen bestätigen. Bei Fehlern die vier gesicherten Felder wiederherstellen und die Mailfreigabe nicht als bestätigt markieren. Vorschauen ersetzen keinen Empfangstest; echte Kunden werden nicht angeschrieben.",
+ "retrySubmissions":"Einreichungen erneut laden",
 } as const;
 const checked=defineMessages<typeof managementDe>();
 export const managementSq=/* @__PURE__ */checked({
@@ -836,6 +837,7 @@ export const managementSq=/* @__PURE__ */checked({
  "authFieldPairHelp":"Te Confirm sign up vendos së bashku confirmation.subject.txt dhe confirmation.body.html; te Reset password së bashku recovery.subject.txt dhe recovery.body.html. Katër burimet më poshtë përcaktohen në qendër dhe përmbajnë kod teknik Go të pandryshuar.",
  "authReadbackHelp":"Pastaj lexo përsëri të katër fushat e ofruesit dhe krahasoji byte për byte me eksportin. Kontrollo parapamjen e ofruesit dhe marrjen reale të subjektit/HTML në DE/SQ/EN, si dhe konfirmimin → hyrjen e veçantë te qëllimi fillestar dhe recovery → reset → hyrje me llogari testimi të veçanta të autorizuara.",
  "authActivationFailure":"Konfirmo dërgimin vetëm pas këtyre provave. Në rast gabimi rikthe katër fushat e ruajtura dhe mos e shëno dërgimin si të konfirmuar. Parapamjet nuk zëvendësojnë testin e marrjes; klientët realë nuk kontaktohen.",
+ "retrySubmissions":"Ngarko përsëri dorëzimet",
 } as const satisfies MessageShape<typeof managementDe>);
 export const managementEn=/* @__PURE__ */checked({
  administration:"Administration",workshops:"Workshops",moderateReviews:"Review moderation",users:"Users",businesses:"Businesses",loginRegistration:"Login & registration",
@@ -1254,4 +1256,5 @@ export const managementEn=/* @__PURE__ */checked({
  "authFieldPairHelp":"For Confirm sign up, apply confirmation.subject.txt and confirmation.body.html together; for Reset password, apply recovery.subject.txt and recovery.body.html together. The four sources below are centrally defined and contain unchanged technical Go code.",
  "authReadbackHelp":"Read all four provider fields back and compare them byte for byte with the export. Check the provider preview and actual receipt of subject/HTML in DE/SQ/EN, plus confirmation → separate login to the original destination and recovery → reset → login with separate authorized test accounts.",
  "authActivationFailure":"Confirm sending only after these checks. On failure, restore the four backed-up fields and do not mark mail delivery as confirmed. Previews do not replace a receipt test; do not email real customers.",
+ "retrySubmissions":"Reload submissions",
 } as const satisfies MessageShape<typeof managementDe>);

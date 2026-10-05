@@ -200,8 +200,8 @@ html.dark :is(.auth-compact input:disabled, .setup-instructions pre) { backgroun
 html.dark :is(.admin-navigation, .admin-tools>label, .moderation-entry-body, .moderation-entry-body>.moderation-decision, .moderation-evidence) { border-color: var(--border); }
 html.dark :is(.admin-navigation>a, .admin-title p, .admin-overview span, .table-specialty, .moderation-entry>summary>div>span, .moderation-evidence>p, .moderation-decision label) { color: var(--muted-foreground); }
 html.dark .admin-navigation>a[aria-current=page] { color: var(--theme-accent); border-bottom-color: var(--theme-accent); }
-html.dark :is(.admin-overview>div, .admin-overview>button, .admin-overview>a, .moderation-count) { background: var(--theme-surface); border-color: var(--border); color: var(--foreground); }
-html.dark :is(.admin-overview svg, .moderation-count strong) { color: var(--theme-positive); }
+html.dark :is(.admin-overview>div, .admin-overview>button, .admin-overview>a) { background: var(--theme-surface); border-color: var(--border); color: var(--foreground); }
+html.dark .admin-overview svg { color: var(--theme-positive); }
 html.dark :is(.directory-table [data-slot=table-head], .moderation-entry[open]>summary) { background: var(--secondary); color: var(--muted-foreground); }
 html.dark :is(.moderation-search, .moderation-entry, .moderation-toolbar>[data-slot=select-trigger]) { background: var(--card); border-color: var(--border)!important; }
 html.dark :is(.moderation-entry>summary strong, .moderation-entry-body h2) { color: var(--foreground); }
