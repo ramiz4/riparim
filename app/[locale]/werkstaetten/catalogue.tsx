@@ -8,7 +8,6 @@ import {useCallback,useEffect,useId,useRef,useState} from "react";
 import {CarFront,Filter,LoaderCircle,RefreshCw,Search,X} from "lucide-react";
 import {SiteHeader} from "@/components/site-header";
 import {DirectoryFooter} from "@/components/directory-footer";
-import {useDirectoryAccountActions} from "@/components/directory-account-actions";
 import {CatalogueFilterFields} from "@/components/catalogue-filter-fields";
 import {WorkshopCard} from "@/components/workshop-card";
 import {Picker} from "@/components/picker";
@@ -23,14 +22,14 @@ import {cities,services,type Workshop} from "@/lib/workshops";
 import type {WorkshopDisplayById} from "@/lib/workshop-profile-content";
 import type {AccountIdentity} from "@/components/account-storage-notice";
 
-type Props={reviewEntry?:boolean;initialDisplayById?:WorkshopDisplayById;initialWorkshops:Workshop[];initialError:string;initialFilters:CatalogueFilters;signedIn:boolean;account:AccountIdentity|null;isAdmin:boolean};
+type Props={reviewEntry?:boolean;initialDisplayById?:WorkshopDisplayById;initialWorkshops:Workshop[];initialError:string;initialFilters:CatalogueFilters;account:AccountIdentity|null;isAdmin:boolean};
 function SortControl({id,filters,onChange,ratingAvailable,googleAvailable,distanceAvailable}:{id:string;filters:CatalogueFilters;onChange:(sort:CatalogueFilters["sort"])=>void;ratingAvailable:boolean;googleAvailable:boolean;distanceAvailable:boolean}){
  const {t}=useI18n();
  const disabledValues=[...(ratingAvailable?[]:["rating"]),...(googleAvailable?[]:["google"]),...(distanceAvailable?[]:["distance"])];
  return <div className="catalogue-sort"><label htmlFor={id}>{t("public.sort")}</label><Picker id={id} value={filters.sort} onChange={value=>onChange(value as CatalogueFilters["sort"])} values={["name","google","rating","distance"]} displayLabels={{name:t("public.sortName"),google:t("public.sortGoogle"),rating:t("public.sortRiparim"),distance:distanceAvailable?t("public.sortDistance"):filters.city===defaultCatalogueFilters.city?t("public.sortChooseCity"):t("public.sortNoLocation")}} disabledValues={disabledValues} label={t("public.sort")}/></div>;
 }
 
-export default function Catalogue({reviewEntry=false,initialDisplayById={},initialWorkshops,initialError,initialFilters,signedIn,account,isAdmin}:Props){
+export default function Catalogue({reviewEntry=false,initialDisplayById={},initialWorkshops,initialError,initialFilters,account,isAdmin}:Props){
  const {locale,t}=useI18n();
  const [displayById,setDisplayById]=useState(initialDisplayById);
  const [directory,setDirectory]=useState(initialWorkshops),[filters,setFilters]=useState(initialFilters),[draft,setDraft]=useState(initialFilters),[ready,setReady]=useState(!initialError),[error,setError]=useState(initialError),[refreshing,setRefreshing]=useState(false),[visibleCount,setVisibleCount]=useState(12),[context,setContext]=useState<SearchContext|null>(null),[privateMatchingActive,setPrivateMatchingActive]=useState(false),[hydrated,setHydrated]=useState(false),[filterOpen,setFilterOpen]=useState(false),[detailOpen,setDetailOpen]=useState(false),[liveGoogleRatings,setLiveGoogleRatings]=useState<Record<string,LiveGoogleRating>>({}),[googleEnabled,setGoogleEnabled]=useState(false),[googleLoading,setGoogleLoading]=useState(false);
@@ -71,7 +70,6 @@ export default function Catalogue({reviewEntry=false,initialDisplayById={},initi
   return()=>{active=false;};
  },[googleEnabled,filters.sort,googleCandidates,locale]);
  const refresh=useCallback(async()=>{setRefreshing(true);setError("");try{const response=await fetch(`/api/workshops?locale=${locale}`),data=await response.json() as {workshops:Workshop[];displayById?:WorkshopDisplayById;errorCode?:string};if(!response.ok){setError(isErrorCode(data.errorCode)?data.errorCode:"unknown");return;}const records=data.workshops.filter(w=>w.status==="published");setDirectory(records);setDisplayById(data.displayById??{});setFilters(parseCatalogueFilters(new URLSearchParams(window.location.search),records));setReady(true);}catch{setError("unavailable");}finally{setRefreshing(false);}},[locale]);
- const personal=useDirectoryAccountActions({directory,signedIn,account,onRefresh:()=>void refresh()});
  // eslint-disable-next-line react-hooks/set-state-in-effect -- Private context and paging are read only after hydration, never from server props.
  useEffect(()=>{const saved=readSearchSession();setFilters(initialFilters);setVisibleCount(12);if(saved){setContext(saved.context);setPrivateMatchingActive(saved.privateMatchingActive&&saved.context?.city===initialFilters.city);if(saved.catalogueHref===catalogueHref(initialFilters,locale)){setVisibleCount(Math.max(12,saved.visibleCount));restoreScroll.current=saved.scrollY;}}setHydrated(true);},[initialFilters,locale]);
  useEffect(()=>{if(!hydrated)return;const persist=()=>rememberSearchSession({...filters,searched:true,context,privateMatchingActive,catalogueHref:catalogueHref(filters,locale),visibleCount,scrollY:window.scrollY});persist();window.addEventListener("scroll",persist,{passive:true});return()=>window.removeEventListener("scroll",persist);},[hydrated,filters,context,privateMatchingActive,visibleCount,locale]);
@@ -85,7 +83,7 @@ export default function Catalogue({reviewEntry=false,initialDisplayById={},initi
  function applyDraft(){commit(draft);setFilterOpen(false);requestAnimationFrame(()=>{filterButton.current?.focus({preventScroll:true});resultsHeading.current?.scrollIntoView({block:"start",behavior:"auto"});});}
  function applyContext(value:SearchContext){const next={...defaultCatalogueFilters,service:value.service,city:value.city,brand:value.brand,sort:filters.sort};setContext(value);setPrivateMatchingActive(true);setFilters(next);setVisibleCount(12);window.history.replaceState(window.history.state,"",catalogueHref(next,locale));}
 
- return <><SiteHeader account={account} isAdmin={isAdmin} onVisits={personal.onVisits}/><main className="catalogue-page wrap">
+ return <><SiteHeader account={account} isAdmin={isAdmin}/><main className="catalogue-page wrap">
   {reviewEntry&&<p className="note" role="status">{t("public.reviewEntryHelp")}</p>}
   <header className="catalogue-heading"><div><h1>{t("public.workshops")}</h1></div><button className="catalogue-detail-search" onClick={()=>setDetailOpen(true)}><CarFront size={18}/>{t("public.detailSearch")}</button></header>
   {activeContext&&<div className="catalogue-private-context"><CarFront size={18}/><div><strong>{t("public.privateContext")} · {valueLabel(locale,"sentinel",activeContext.brand)} {activeContext.model}</strong><p>{activeContext.radius>0?t("public.radiusSummary",{distance:activeContext.radius}):""}{activeContext.additionalCity?`${activeContext.additionalCity} · `:""}{t("public.ramOnly")}</p></div><button onClick={()=>setDetailOpen(true)}>{t("public.changeContext")}</button></div>}
@@ -103,5 +101,5 @@ export default function Catalogue({reviewEntry=false,initialDisplayById={},initi
    {error&&<div className="error catalogue-refresh-error" role="alert">{t("public.refreshFailed")}<button disabled={refreshing} onClick={()=>void refresh()}>{t("public.reload")}</button></div>}
    {directory.length===0?<div className="empty catalogue-empty"><Search size={27}/><h2>{t("public.directoryEmpty")}</h2><p>{t("public.directoryEmptyHelp")}</p></div>:matches.length===0?<div className="empty catalogue-empty"><Search size={27}/><h2>{filters.query?t("public.noNameMatch"):t("public.noMatch")}</h2><p>{filters.language!==defaultCatalogueFilters.language?t("public.noLanguageMatch"):t("public.changeFilter")}</p><div>{filters.language!==defaultCatalogueFilters.language&&<button className="primary" onClick={()=>change("language",defaultCatalogueFilters.language)}>{t("public.removeLanguage")}</button>}<button className="outline" onClick={reset}>{t("public.resetAll")}</button></div></div>:<><div className="catalogue-grid">{matches.slice(0,visibleCount).map(workshop=><WorkshopCard display={displayById[workshop.id]} key={workshop.id} workshop={workshop} selectedBrand={filters.brand} selectedService={filters.service} searchHref={catalogueHref(filters,locale)} distanceKm={catalogueDistance(workshop,filters.city)} distanceOrigin={filters.city} liveGoogleRating={liveGoogleRatings[workshop.id]} onGoogleRating={rememberGoogleRating}/>)}</div><div className="catalogue-pagination"><p>{t("public.shownCount",{shown:Math.min(visibleCount,matches.length),total:matches.length})}</p>{visibleCount<matches.length&&<button className="outline" onClick={()=>setVisibleCount(count=>count+12)}>{t("public.showMore")}</button>}</div></>}
   </>}
- </main><DirectoryFooter/><DetailSearch open={detailOpen} onClose={()=>setDetailOpen(false)} onSearch={applyContext} initialContext={context}/>{personal.dialogs}</>;
+ </main><DirectoryFooter/><DetailSearch open={detailOpen} onClose={()=>setDetailOpen(false)} onSearch={applyContext} initialContext={context}/></>;
 }

@@ -46,7 +46,7 @@ async function openMenu(){
 }
 
 try{
- const destinations=[['Mein Betrieb','/betrieb'],['Meine Bewertungen','/?besuche=1'],['Einstellungen','/einstellungen']];
+ const destinations=[['Mein Betrieb','/betrieb'],['Meine Bewertungen','/bewertungen'],['Einstellungen','/einstellungen']];
  for(const [email,isAdmin] of [['customer@example.test',false],['first-admin@example.test',true],['second-admin@example.test',true]]){
   await render(email,isAdmin);
   for(const [label,path] of [...destinations,...(isAdmin?[['Verwalten','/verwaltung']]:[])]){
@@ -65,16 +65,6 @@ try{
   }
  }
  assert.deepEqual(routerAttempts,[],'header destinations do not depend on the stalled client router');
- let visits=0;
- await act(async()=>root.render(fixtureMessages(createElement(SiteHeader,{account:{email:'customer@example.test',displayName:'Fixture account',provider:'Google'},onVisits:()=>visits++}))));
- for(const label of ['Meine Bewertungen']){
-  await openMenu();
-  const item=[...document.querySelectorAll('[role="menuitem"]')].find(node=>node.textContent===label),before=documents.length;
-  await act(async()=>{item.focus();item.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true}));});
-  assert.equal(documents.length,before,'page-owned review actions preserve their local dialogs');
-  assert.equal(document.querySelector('[role="menu"]'),null);
- }
- assert.equal(visits,1);
  // The real Link control demonstrates that the fixture can detect a consumed
  // click, so the document-navigation assertions above cannot pass vacuously.
  await act(async()=>root.render(fixtureMessages(createElement(RouterLink,{href:'/betrieb'},'Router control'))));
@@ -133,7 +123,7 @@ try{
    await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));
   }
  }finally{globalThis.fetch=originalFetch;}
- console.log('Header and admin navigation: business, account and single management entry, page-owned review actions, all admin sections, mouse/keyboard and role visibility passed');
+ console.log('Header and admin navigation: own review documents, absent general creation action, business/account/management entries, all admin sections, mouse/keyboard and role visibility passed');
 }finally{
  await act(async()=>root.unmount());
  dom.window.close();

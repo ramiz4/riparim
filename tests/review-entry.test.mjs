@@ -17,6 +17,9 @@ for(const locale of ['de','sq','en']){
  globalThis.directoryUnavailable=true;
  const originalError=console.error;console.error=()=>{};
  try{assert.equal(await target(locale,{nachweis:'fixture-workshop'}),prefix+'/werkstaetten?bewerten=1','an unavailable catalogue leads to the finder retry flow');}finally{globalThis.directoryUnavailable=false;console.error=originalError;}
+ const ownSubmission='11111111-1111-4111-8111-111111111111';
+ assert.equal(await target(locale,{besuche:'1',einreichung:ownSubmission,nachweis:'fixture-workshop'}),prefix+'/bewertungen?einreichung='+ownSubmission,'Legacy own-submission links retain their private target when a public review entry is also present');
+ assert.equal(await target(locale,{besuche:'1',einreichung:[ownSubmission,'ambiguous'],nachweis:'fixture-workshop'}),prefix+'/bewertungen','Mixed old links cannot turn an ambiguous private submission into a public review draft');
  assert.equal(await target(locale,{}),null,'normal landing remains available');
 }
 console.log('Review entry routes: localized public profiles, safe finder fallback and unchanged landing passed');

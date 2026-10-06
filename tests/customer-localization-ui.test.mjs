@@ -70,14 +70,13 @@ try{
   const workshopSelect=[...document.querySelectorAll('select')].find(node=>[...node.options].some(option=>option.value==='other-workshop'));
   await act(async()=>{workshopSelect.value='other-workshop';workshopSelect.dispatchEvent(new Event('change',{bubbles:true}));});
   check(document.querySelector('form > .note strong').textContent.includes('New selected workshop')&&!document.querySelector('form > .note strong').textContent.includes('Original unavailable workshop'),'Existing workshop selection keeps the displayed identity aligned with its assigned submission');
-  await render(locale,VisitForm,{open:true,onClose(){},onDone(){},workshop:{id:'fixture-workshop',name:'Original workshop',services:['Inspektion & Wartung']},directory:[{id:'fixture-workshop'}],signedIn:false,existing});
+  await render(locale,VisitForm,{open:true,onClose(){},workshop:{id:'fixture-workshop',name:'Original workshop',services:['Inspektion & Wartung']},directory:[{id:'fixture-workshop'}],signedIn:false,existing});
   const editLogin=new URL(document.querySelector('.login-prompt a').href);
-  check(editLogin.pathname===prefix+'/anmelden'&&editLogin.searchParams.get('weiter')===(prefix||'/')+'?besuche=1&einreichung='+existing.id,'Editing auth returns to the localized targeted own submission instead of a new review');
-  await render(locale,VisitForm,{open:true,onClose(){},onDone(){},workshop:null,directory:[{id:'fixture-workshop'}],signedIn:false,existing:null});
+  check(editLogin.pathname===prefix+'/anmelden'&&editLogin.searchParams.get('weiter')===prefix+'/bewertungen?einreichung='+existing.id,'Editing auth returns to the localized targeted own submission instead of a new review');
+  await render(locale,VisitForm,{open:true,onClose(){},workshop:null,directory:[{id:'fixture-workshop'}],signedIn:false,existing:null});
   check(!document.querySelector('[role="dialog"]'),'The retained edit dialog cannot open an unassigned new review');
-  await render(locale,MyVisits,{open:true,onClose(){},directory:[{id:'fixture-workshop'}],signedIn:true,account:{provider:'E-Mail',email:'fixture@example.test'},onResubmit(){}});
-  check(document.querySelector('[data-slot="dialog-body"]').getAttribute('aria-label')==={de:'Dialoginhalt',sq:'Përmbajtja e dialogut',en:'Dialog content'}[locale],'The actual customer dialog region has an active-locale accessible label');
-  check(document.querySelector('button[data-slot="dialog-close"] .sr-only').textContent==={de:'Schließen',sq:'Mbyll',en:'Close'}[locale],'The actual X-close control has an active-locale screen reader name');
+  await render(locale,MyVisits,{directory:[{id:'fixture-workshop'}],signedIn:true,account:{provider:'E-Mail',email:'fixture@example.test'}});
+  check(document.querySelector('main h1').textContent===copy.myReviews&&!document.querySelector('[role="dialog"]'),'The actual own review page has an active-locale heading without a modal frame');
   check(document.querySelector('.visit-status').textContent==={de:'Ergänzung nötig',sq:'Nevojitet plotësim',en:'More information needed'}[locale],'Canonical needs_more uses the exact localized status label');
   check(document.querySelector('.evidence-details a').getAttribute('href').endsWith('?locale='+locale),'Customer evidence links use the shared explicit locale download helper');
   check(document.querySelector('.visit').textContent.includes('Original unchanged customer review text.')&&document.querySelector('.visit').textContent.includes('Original private note'),'Free text is never translated');
@@ -86,6 +85,7 @@ try{
    await render(locale,SiteHeader,{account:{email:'fixture@example.test',displayName:'Fixture Customer',provider}});
    const trigger=document.querySelector('[aria-label="'+getMessages(locale).common.userMenu+'"]');
    await act(async()=>trigger.dispatchEvent(new MouseEvent('pointerdown',{bubbles:true,cancelable:true,button:0})));
+   const ownReviews=[...document.querySelectorAll('a[role="menuitem"]')].find(node=>node.textContent===getMessages(locale).common.myReviews);check(ownReviews?.getAttribute('href')===prefix+'/bewertungen','Every account menu navigates to the independently addressable localized review page');
    const logout=[...document.querySelectorAll('[role="menuitem"]')].find(node=>node.textContent===getMessages(locale).common.logout);check(logout,'The actual localized account menu exposes the canonical session logout');
    mode='network';await click(logout);
    check(document.querySelector('.header-error[role="alert"]').textContent===getMessages(locale).common.logoutFailed&&!document.body.textContent.includes('Raw provider/internal failure'),'Header network failures show only the active-locale logout message');

@@ -21,7 +21,7 @@ import {ReviewForm} from "@/components/review-form";
 import {ModalContent} from "@/components/modal-shell";
 import {Dialog} from "@/components/ui/dialog";
 import type {AccountIdentity} from "@/components/account-storage-notice";
-import {MyVisits,VisitForm,type Review,type Visit} from "@/app/journeys";
+import type {Review} from "@/app/journeys";
 import {contactHref,type Workshop} from "@/lib/workshops";
 import {readSearchSession} from "@/lib/search-session";
 import {profileSearchHref} from "@/lib/profile-navigation";
@@ -30,7 +30,7 @@ import {WorkshopNavigationLink} from "@/components/workshop-navigation-link";
 type Props={initialSearchHref?:string|null;display?:WorkshopDisplayContent;workshop:Workshop;directory:Workshop[];reviews:Review[];reviewError:string;signedIn:boolean;account:AccountIdentity|null;isAdmin:boolean};
 export default function WorkshopProfile({workshop:w,directory,reviews,reviewError,signedIn,account,isAdmin,display,initialSearchHref=null}:Props){
  const {locale,t}=useI18n();
- const router=useRouter();const [reviewOpen,setReviewOpen]=useState(false),[reviewBusy,setReviewBusy]=useState(false),[myReviews,setMyReviews]=useState(false),[editing,setEditing]=useState<Visit|null>(null),[contact,setContact]=useState(false),[message,setMessage]=useState(""),[initialMessage,setInitialMessage]=useState(""),[feedback,setFeedback]=useState(""),[backHref,setBackHref]=useState(()=>localizeHref(initialSearchHref??"/werkstaetten",locale));
+ const router=useRouter();const [reviewOpen,setReviewOpen]=useState(false),[reviewBusy,setReviewBusy]=useState(false),[contact,setContact]=useState(false),[message,setMessage]=useState(""),[initialMessage,setInitialMessage]=useState(""),[feedback,setFeedback]=useState(""),[backHref,setBackHref]=useState(()=>localizeHref(initialSearchHref??"/werkstaetten",locale));
  useNavigationGuard({dirty:contact&&message!==initialMessage});
  const {profile,identity,status}=useGoogleWorkshopProfile(w.id);
  const [selection,setSelection]=useState<ProfileSelection>({brand:null,service:null,vehicle:null});
@@ -54,7 +54,7 @@ export default function WorkshopProfile({workshop:w,directory,reviews,reviewErro
  async function copy(value:string,label:string){try{await navigator.clipboard.writeText(value);setFeedback(label);}catch{setFeedback(t("public.copyManual"));}}
  const googleReviews=<div className="profile-google-reviews" id="google-bewertungen"><GooglePlaceReviews key={w.id} workshop={w} identity={identity} liveRating={profile?.rating??null} status={status}/></div>;
  const riparimReviews=<div className={`profile-riparim-reviews${!reviews.length&&!reviewError?" is-empty":""}`}><div className="profile-review-provider"><h3><ShieldCheck size={18}/>Riparim</h3>{reviews.length>0&&<p>{t("public.reviewsProof")}</p>}</div>{reviewError?<p className="error" role="alert">{publicDataError(t,reviewError,"reviews")}</p>:reviews.length?<div className="public-review-list">{reviews.map((review,index)=><article className="public-review" key={`${review.display_name}:${review.date}:${index}`}><div className="review-title"><strong>{review.display_name}</strong><span><Star size={14} fill="currentColor"/>{formatNumber(locale,review.rating)} / 5</span></div><p className="review-meta">{review.vehicle} · {review.service} · {formatDate(locale,review.date,{dateOnly:true})}</p><p className="public-review-text">{review.review}</p><span className="proof-badge"><ShieldCheck size={13}/>{t("public.proofChecked")}</span></article>)}{w.count>reviews.length&&<p className="help">{t("public.latestReviews",{count:reviews.length})}</p>}</div>:<p className="profile-review-empty">{t("public.noProofReviews")}</p>}</div>;
- return <><SiteHeader account={account} isAdmin={isAdmin} onVisits={()=>setMyReviews(true)}/>
+ return <><SiteHeader account={account} isAdmin={isAdmin}/>
  <main className="workshop-page wrap" data-workshop-id={w.id}>
   <WorkshopNavigationLink className="profile-back" href={backHref}><ArrowLeft size={16}/>{t("public.backSearch")}</WorkshopNavigationLink>
   {display?.fallback&&<p className="help workshop-translation-notice">{t("public.translationFallback")}</p>}
@@ -84,7 +84,5 @@ export default function WorkshopProfile({workshop:w,directory,reviews,reviewErro
  <Dialog open={contact} onOpenChange={setContact}><ModalContent title={t("public.prepareMessage")} description={w.name} footer={<><button className="outline" onClick={()=>void copy(message,t("public.messageCopied"))}><Copy size={16}/>{t("public.copyText")}</button><LocaleAnchor className="primary" href={contactHref(w,"whatsapp",message)??undefined} target="_blank" rel="noopener noreferrer"><MessageCircle size={18}/>{t("public.openWhatsApp")}</LocaleAnchor></>}>
   <label className="message-label">{t("public.yourMessage")}<textarea rows={5} value={message} maxLength={3000} onChange={e=>setMessage(e.target.value)}/></label><p className="help">{t("public.sendWhatsApp")}</p>{feedback&&<p className="help" role="status">{feedback}</p>}
  </ModalContent></Dialog>
- <MyVisits open={myReviews} onClose={()=>{setMyReviews(false);router.refresh();}} directory={directory} signedIn={signedIn} account={account} onResubmit={visit=>{setMyReviews(false);setEditing(visit);}}/>
- <VisitForm open={!!editing} existing={editing} workshop={directory.find(workshop=>workshop.id===editing?.workshop)??null} directory={directory} signedIn={signedIn} account={account} onClose={()=>{setEditing(null);router.refresh();}} onDone={()=>setMyReviews(true)}/>
  </>;
 }
