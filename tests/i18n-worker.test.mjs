@@ -17,7 +17,7 @@ try{
  }));
  const draft=await db.prepare("SELECT id FROM workshops WHERE status='published' LIMIT 1").first();assert(draft,"isolated catalog has a workshop fixture");
  await db.prepare("UPDATE workshops SET status='draft' WHERE id=?").bind(draft.id).run();
- for(const locale of ["de","sq","en"]){const prefix=locale==="de"?"":`/${locale}`;const response=await runtime.dispatchFetch(`https://riparim.test${prefix}/werkstatt/${draft.id}`);assert.equal(response.status,404,"unpublished profile stays private in "+locale);}
+ for(const locale of ["de","sq","en"]){const prefix=locale==="de"?"":`/${locale}`;const response=await runtime.dispatchFetch(`https://riparim.test${prefix}/werkstatt/${draft.id}`);assert.equal(response.status,404,"unpublished profile stays private in "+locale);const legacy=await runtime.dispatchFetch(`https://riparim.test${prefix||"/"}?nachweis=${draft.id}`,{redirect:"manual"});assert.equal(legacy.status,307);assert.equal(legacy.headers.get("Location"),`${prefix}/werkstaetten?bewerten=1`,"old links cannot reveal an unpublished workshop");}
  await db.prepare("UPDATE workshops SET status='published' WHERE id=?").bind(draft.id).run();
  const published=await db.prepare("SELECT id FROM workshops WHERE status='published' LIMIT 1").first();assert(published);
  for(const locale of ["de","sq","en"]){const prefix=locale==="de"?"":`/${locale}`;const response=await runtime.dispatchFetch(`https://riparim.test${prefix}/werkstatt/${published.id}?suche=${encodeURIComponent(prefix+"/werkstaetten?ort=prizren&sprache=sq")}`);assert.equal(response.status,200);assert((await response.text()).includes(`data-workshop-id="${published.id}"`));}
@@ -32,11 +32,6 @@ try{
     const alternatives=Object.fromEntries([...doc.querySelectorAll('link[rel="alternate"][hreflang]')].map(link=>[link.hreflang,link.href]));
     assert.deepEqual(alternatives,Object.fromEntries(['de','sq','en','x-default'].map(language=>[language,`https://riparim.test${language==='de'||language==='x-default'?'':`/${language}`}${identity==='/'?(language==='de'||language==='x-default'?'/':''):identity}`])),'all locales emit identical reciprocal sets');
     assert(!JSON.stringify(alternatives).includes('private-secret'));
-   }finally{dom.window.close();}
-  }
-  for(const query of ['besuche=1','einreichung=fixture-private-id','nachweis=neu']){
-   const response=await runtime.dispatchFetch(`https://riparim.test${prefix||'/'}?${query}`),dom=new JSDOM(await response.text());try{
-    assert.match(dom.window.document.querySelector('meta[name="robots"]').content,/noindex/);assert.equal(dom.window.document.querySelectorAll('link[rel="alternate"][hreflang]').length,0);assert.equal(dom.window.document.querySelectorAll('link[rel="canonical"]').length,0,'private modes do not export deep links');
    }finally{dom.window.close();}
   }
  }
@@ -70,6 +65,13 @@ try{
   }
 
  }
+ for(const locale of ['de','sq','en']){
+  const prefix=locale==='de'?'':`/${locale}`;
+  for(const [value,target] of [[published.id,`${prefix}/werkstatt/${published.id}#bewerten`],['neu',`${prefix}/werkstaetten?bewerten=1`],['unknown-workshop',`${prefix}/werkstaetten?bewerten=1`],['//outside.test',`${prefix}/werkstaetten?bewerten=1`]]){
+   const response=await runtime.dispatchFetch(`https://riparim.test${prefix||'/'}?${new URLSearchParams({nachweis:value})}`,{redirect:'manual'});assert.equal(response.status,307,'actual worker redirects old review entry in '+locale);assert.equal(response.headers.get('Location'),target);
+  }
+  const finder=await runtime.dispatchFetch(`https://riparim.test${prefix}/werkstaetten?bewerten=1`),finderDom=new JSDOM(await finder.text());try{assert.equal(finder.status,200);assert(finderDom.window.document.querySelector('.catalogue-page > .note[role="status"]').textContent.includes({de:'Öffne das Profil der Werkstatt',sq:'Hap profilin e servisit',en:'Open the profile of the workshop'}[locale]),'actual document caller retains localized review-entry context');assert.equal(finderDom.window.document.querySelector('[role="dialog"]'),null);}finally{finderDom.window.close();}
+ }
  const www=await runtime.dispatchFetch("http://www.riparim.com/en/werkstaetten?ort=prizren&sprache=sq",{redirect:"manual"});assert.equal(www.status,308);assert.equal(www.headers.get("Location"),"https://riparim.com/en/werkstaetten?ort=prizren&sprache=sq");
  for(const [path,target] of [['/de','/'],['/de/werkstaetten?ort=prizren','/werkstaetten?ort=prizren']]){const response=await runtime.dispatchFetch('https://riparim.test'+path,{redirect:'manual'});assert.equal(response.status,308);assert.equal(new URL(response.headers.get('Location'),'https://riparim.test').href,'https://riparim.test'+target);}
  for(const path of ['/fr','/sq/missing','/en/missing','/werkstatt/unknown-profile','/en/werkstatt/unknown-profile','/sq/werkstatt/x','/sq/missing.html','/en/missing.txt','/sq/missing.svg','/en/missing.png','/fr/missing.png','/missing.html','/missing.png']){const response=await runtime.dispatchFetch('https://riparim.test'+path);assert.equal(response.status,404,path);};
@@ -80,9 +82,6 @@ try{
    const response=await runtime.dispatchFetch('https://riparim.test'+prefix+path);assert.equal(response.status,200);const html=await response.text();assert(html.includes(label),'Built private page has active customer copy');assert.match(html,/<meta[^>]*name="robots"[^>]*content="noindex[^">]*nofollow/);assert(!html.includes('hreflang='),'Private customer page has no public alternate');
   }
   const notice=await runtime.dispatchFetch('https://riparim.test'+prefix+'/anmelden?localeNotice=preference_not_saved');const noticeHtml=await notice.text();assert(noticeHtml.includes({de:'Deine Sprachpräferenz konnte nicht gespeichert werden.',sq:'Preferenca jote e gjuhës nuk mund të ruhej.',en:'Your language preference could not be saved.'}[locale]),'Preference failure notice is localized on an actual fresh document');
-  for(const query of ['nachweis=neu']){
-   const response=await runtime.dispatchFetch('https://riparim.test'+prefix+'?'+query);assert.equal(response.status,200);const html=await response.text();assert.match(html,/<meta[^>]*name="robots"[^>]*content="noindex[^">]*nofollow/);assert(!html.includes('hreflang='),'Private landing modes have no alternate deep links');
-  }
   const submission='11111111-1111-4111-8111-111111111111';
   for(const [query,target] of [['besuche=1',prefix+'/bewertungen'],['einreichung='+submission,prefix+'/bewertungen?einreichung='+submission],['besuche=1&einreichung='+submission,prefix+'/bewertungen?einreichung='+submission]]){
    const response=await runtime.dispatchFetch('https://riparim.test'+prefix+'?'+query,{redirect:'manual'});assert.equal(response.status,307,'Built legacy own-history link redirects to a regular page');assert.equal(new URL(response.headers.get('Location'),'https://riparim.test').pathname,new URL(target,'https://riparim.test').pathname);assert.equal(new URL(response.headers.get('Location'),'https://riparim.test').search,new URL(target,'https://riparim.test').search);

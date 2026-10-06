@@ -20,6 +20,7 @@ export function ReviewForm({workshop,directory,signedIn,existing=null,formId,sho
  const [wid,setWid]=useState(existing?.workshop??workshop?.id??directory[0]?.id??""),[kind,setKind]=useState(existing?.evidence_type??"Rechnung"),[service,setService]=useState(existing?.service??workshop?.services[0]??directory[0]?.services[0]??services[1]);
  const [vehicle,setVehicle]=useState(existing?.vehicle??""),[date,setDate]=useState(existing?.date??""),[note,setNote]=useState(existing?.evidence_note??""),[rating,setRating]=useState(existing?.rating??0),[name,setName]=useState(existing?.display_name??""),[review,setReview]=useState(existing?.review??"");
  const [consent,setConsent]=useState(false),[consentError,setConsentError]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(""),[done,setDone]=useState(false);
+ const workshopName=directory.find(w=>w.id===wid)?.name??workshop?.name??existing?.workshop_name;
  const [fileSelected,setFileSelected]=useState(false);
  useNavigationGuard({busy,dirty:signedIn&&!done&&(fileSelected||wid!==(existing?.workshop??workshop?.id??directory[0]?.id??"")||service!==(existing?.service??workshop?.services[0]??directory[0]?.services[0]??services[1])||vehicle!==(existing?.vehicle??"")||date!==(existing?.date??"")||note!==(existing?.evidence_note??"")||rating!==(existing?.rating??0)||name!==(existing?.display_name??"")||review!==(existing?.review??"")||kind!==(existing?.evidence_type??"Rechnung")||consent)});
  function changeBusy(value:boolean){setBusy(value);onBusyChange?.(value);}
@@ -28,10 +29,11 @@ export function ReviewForm({workshop,directory,signedIn,existing=null,formId,sho
   changeBusy(true);setError("");const f=new FormData(e.currentTarget);f.set("id",submissionId);f.set("workshop",wid);f.set("service",service);f.set("evidenceType",kind);f.set("rating",String(rating));f.set("revision",String(existing?.revision??0));f.set("consent","true");if(existing?.file_name)f.set("keepEvidence","true");
   try{const r=await fetch("/api/visits",{method:existing?"PUT":"POST",body:f}),d=await r.json() as CodedResponse;if(!r.ok)throw responseError(t,d);setDone(true);onSubmitted?.();}catch(e){setError(e instanceof LocalizedError?e.message:t("customer.reviewUnavailable"));}finally{changeBusy(false);}
  }
- if(!signedIn)return <div className="login-prompt"><ShieldCheck size={25}/><p>{t("customer.reviewLogin")}</p><LocaleAnchor className="primary" href={`/anmelden?weiter=${encodeURIComponent(returnTo)}`}>{t("customer.loginOrRegister")}</LocaleAnchor><p className="help">{t("customer.reviewPrivacy")}</p></div>;
+ if(!signedIn)return <div className="login-prompt"><ShieldCheck size={25}/><p>{t("customer.reviewLogin")}</p>{workshopName&&<p><strong>{t("customer.workshop")}: {workshopName}</strong></p>}<LocaleAnchor className="primary" href={`/anmelden?weiter=${encodeURIComponent(returnTo)}`}>{t("customer.loginOrRegister")}</LocaleAnchor><p className="help">{t("customer.reviewPrivacy")}</p></div>;
  if(done)return <div className="review-submission-success" role="status"><FileCheck2 size={30}/><h3>{t("customer.reviewSubmitted")}</h3><p>{t("customer.reviewSubmittedNote")}</p><AccountStorageNotice/></div>;
  if(!directory.length)return <p className="help">{t("customer.noWorkshop")}</p>;
  return <form id={id} className="journey-form combined-review-form" onSubmit={submit} aria-label={t("customer.reviewForm")}>
+  {workshopName&&<p className="note"><strong>{t("customer.workshop")}: {workshopName}</strong></p>}
   {existing?.moderator_note&&<div className="note"><p>{t("customer.moderationNote",{note:existing.moderator_note})}</p></div>}{existing?.status==="published"&&<p className="note">{t("customer.reviewRechecked")}</p>}
   {!workshop&&<div className="field"><label>{t("customer.workshop")}</label><Picker value={wid} onChange={setWid} values={directory.map(w=>w.id)} label={t("customer.reviewedWorkshop")} displayLabels={Object.fromEntries(directory.map(w=>[w.id,w.name]))}/></div>}
   <fieldset className="review-section"><legend>{t("customer.experience")}</legend>

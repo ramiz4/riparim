@@ -15,6 +15,8 @@ assert.equal(languageSwitchHref('/anmelden?weiter=%2Fsq%2Fauth%2Fbestaetigen%3Ft
 assert.equal(languageSwitchHref('/sq/anmelden?weiter=%2Fsq%2Fwerkstatt%2Ftest-id%3Fvehicle%3Dprivate%23bewerten&access_token=secret','en'),'/en/anmelden?weiter=%2Fen%2Fwerkstatt%2Ftest-id%23bewerten');
 assert.equal(languageSwitchHref('/?besuche=1&einreichung=11111111-1111-1111-1111-111111111111&problem=private','sq'),'/sq?besuche=1');
 assert.equal(languageSwitchHref('/werkstaetten?sprache=sq&ort=prizren&localeNotice=preference_not_saved','en'),'/en/werkstaetten?ort=prizren&sprache=sq');
+assert.equal(languageSwitchHref('/werkstaetten?bewerten=1','sq'),'/sq/werkstaetten?bewerten=1','Language navigation retains the public review-selection context');
+assert.equal(languageSwitchHref('/?nachweis=fixture-workshop','en'),'/en?nachweis=fixture-workshop','An old workshop link retains its assignment across languages before redirect');
 const errors=[],console=new VirtualConsole();console.on('jsdomError',error=>errors.push(error.message));
 const dom=new JSDOM('<div id="root"></div>',{url:'https://riparim.test/en/werkstatt/test-id#bewerten',virtualConsole:console});
 for(const key of ['window','document','navigator','HTMLElement','Element','Node','Event','MouseEvent'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});globalThis.IS_REACT_ACT_ENVIRONMENT=true;

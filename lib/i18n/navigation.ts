@@ -15,12 +15,13 @@ function publicNavigationHref(href:string,locale:Locale,allowReturn:boolean):str
  const path=stripLocalePrefix(url.pathname),query=new URLSearchParams();
  if(/^\/(?:api|auth|signin-with-chatgpt|signout-with-chatgpt|callback|__sites_connector_preview|__migration|_next)(?:\/|$)/.test(path)||/\.[a-z0-9]+$/i.test(path))return localizeHref("/",locale);
  if(path==="/werkstaetten"){
+  if(url.searchParams.get("bewerten")==="1")query.set("bewerten","1");
   const name=catalogueQuery(url.searchParams.get("q")??"");if(name)query.set("q",name);
   for(const key of ["leistung","ort","marke","sprache","sort"]){const value=url.searchParams.get(key);if(value&&slug.test(value)&&value.length<=100)query.set(key,value);}
  }
  if(path==="/"){
   if(url.searchParams.get("besuche")==="1")query.set("besuche","1");
-  if(url.searchParams.get("nachweis")==="neu")query.set("nachweis","neu");
+  const workshop=url.searchParams.get("nachweis");if(workshop&&profileId.test(workshop))query.set("nachweis",workshop);
 
  }
  if(path==="/betrieb"){const id=url.searchParams.get("werkstatt");if(id&&profileId.test(id))query.set("werkstatt",id);}

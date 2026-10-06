@@ -46,7 +46,7 @@ async function openMenu(){
 }
 
 try{
- const destinations=[['Mein Betrieb','/betrieb'],['Meine Bewertungen','/bewertungen'],['Bewerten','/?nachweis=neu'],['Einstellungen','/einstellungen']];
+ const destinations=[['Mein Betrieb','/betrieb'],['Meine Bewertungen','/bewertungen'],['Einstellungen','/einstellungen']];
  for(const [email,isAdmin] of [['customer@example.test',false],['first-admin@example.test',true],['second-admin@example.test',true]]){
   await render(email,isAdmin);
   for(const [label,path] of [...destinations,...(isAdmin?[['Verwalten','/verwaltung']]:[])]){
@@ -54,6 +54,7 @@ try{
     await openMenu();
     const items=[...document.querySelectorAll('[role="menuitem"]')];
     assert.equal(items.filter(node=>node.textContent==='Verwalten').length,isAdmin?1:0,'only admins receive the single management entry');
+    assert(!items.some(node=>node.textContent==='Bewerten'),'new reviews start at the workshop profile, without a general user-menu entry');
     assert(!items.some(node=>node.textContent==='Bewertungen prüfen'),'the redundant review shortcut is absent from the user menu');
     const item=items.find(node=>node.textContent===label);
     assert(item,`${label} is available to ${email}`);
@@ -64,21 +65,6 @@ try{
   }
  }
  assert.deepEqual(routerAttempts,[],'header destinations do not depend on the stalled client router');
- let reviews=0;
- await act(async()=>root.render(fixtureMessages(createElement(SiteHeader,{account:{email:'customer@example.test',displayName:'Fixture account',provider:'Google'},onNewVisit:()=>reviews++}))));
- await openMenu();
- const ownReviews=[...document.querySelectorAll('[role="menuitem"]')].find(node=>node.textContent==='Meine Bewertungen');
- await activate(ownReviews,'Enter');
- assert.equal(documents.at(-1),'/bewertungen','own reviews always use regular document navigation even on a page with a local creation action');
- assert.equal(reviews,0,'opening own reviews does not create a new submission');
- for(const label of ['Bewerten']){
-  await openMenu();
-  const item=[...document.querySelectorAll('[role="menuitem"]')].find(node=>node.textContent===label),before=documents.length;
-  await act(async()=>{item.focus();item.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true}));});
-  assert.equal(documents.length,before,'the page-owned creation action preserves its existing local dialog');
-  assert.equal(document.querySelector('[role="menu"]'),null);
- }
- assert.equal(reviews,1);
  // The real Link control demonstrates that the fixture can detect a consumed
  // click, so the document-navigation assertions above cannot pass vacuously.
  await act(async()=>root.render(fixtureMessages(createElement(RouterLink,{href:'/betrieb'},'Router control'))));
@@ -137,7 +123,7 @@ try{
    await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));
   }
  }finally{globalThis.fetch=originalFetch;}
- console.log('Header and admin navigation: own review documents, local creation action, business/account/management entries, all admin sections, mouse/keyboard and role visibility passed');
+ console.log('Header and admin navigation: own review documents, absent general creation action, business/account/management entries, all admin sections, mouse/keyboard and role visibility passed');
 }finally{
  await act(async()=>root.unmount());
  dom.window.close();

@@ -43,12 +43,12 @@ export type Visit={id:string;workshop:string;workshop_name?:string;date:string;v
 export const statusLabels:Record<string,string>={pending:"In Prüfung",approved:"Bewertung vervollständigen",needs_more:"Ergänzung nötig",published:"Veröffentlicht",deleting:"Löschung ausstehend"};
 
 export function VisitForm({open,onClose,onCloseAutoFocus,workshop,directory,signedIn,existing}:{open:boolean;onClose:()=>void;onCloseAutoFocus?:(event:Event)=>void;workshop:Workshop|null;directory:Workshop[];signedIn:boolean;account?:AccountIdentity|null;existing:Visit|null}){
- const {t}=useI18n();
+ const {locale,t}=useI18n();
  const formId=useId();const [busy,setBusy]=useState(false),[done,setDone]=useState(false);
  // eslint-disable-next-line react-hooks/set-state-in-effect -- Each controlled opening starts a fresh form session.
  useEffect(()=>{if(open){setBusy(false);setDone(false);}},[open,existing?.id,workshop?.id]);
- const returnTo=`/?nachweis=${encodeURIComponent(workshop?.id??"neu")}`;
- return <Dialog open={open} onOpenChange={v=>{if(!v&&!busy)onClose();}}><ModalContent className="review-submission-modal" onCloseAutoFocus={onCloseAutoFocus} closeDisabled={busy} title={done?t("customer.reviewSubmitted"):existing?t("customer.editReview"):t("customer.reviewWorkshop")} description={done?t("customer.publishedAfterApproval"):t("customer.combinedSubmission")} footer={<><DialogClose asChild><button className="outline" disabled={busy}>{done?t("customer.close"):t("customer.cancel")}</button></DialogClose>{signedIn&&done?<LocaleAnchor className="primary" href={ownReviewsHref(existing?.id)}>{t("customer.myReviews")}</LocaleAnchor>:signedIn&&directory.length>0?<button type="submit" form={formId} disabled={busy} className="primary">{busy?<><LoaderCircle className="spin" size={17}/>{t("customer.submitting")}</>:t("customer.submitReview")}</button>:null}</>}>
+ const returnTo=localizeHref(ownReviewsHref(existing?.id),locale);
+ return <Dialog open={open&&!!existing} onOpenChange={v=>{if(!v&&!busy)onClose();}}><ModalContent className="review-submission-modal" onCloseAutoFocus={onCloseAutoFocus} closeDisabled={busy} title={done?t("customer.reviewSubmitted"):t("customer.editReview")} description={done?t("customer.publishedAfterApproval"):t("customer.combinedSubmission")} footer={<><DialogClose asChild><button className="outline" disabled={busy}>{done?t("customer.close"):t("customer.cancel")}</button></DialogClose>{signedIn&&done?<LocaleAnchor className="primary" href={ownReviewsHref(existing?.id)}>{t("customer.myReviews")}</LocaleAnchor>:signedIn&&directory.length>0?<button type="submit" form={formId} disabled={busy} className="primary">{busy?<><LoaderCircle className="spin" size={17}/>{t("customer.submitting")}</>:t("customer.submitReview")}</button>:null}</>}>
   {open&&<ReviewForm key={`${existing?.id??workshop?.id??"new"}:${existing?.revision??0}`} formId={formId} showSubmit={false} workshop={workshop} directory={directory} signedIn={signedIn} existing={existing} returnTo={returnTo} onBusyChange={setBusy} onSubmitted={()=>setDone(true)}/>}
  </ModalContent></Dialog>;
 }
