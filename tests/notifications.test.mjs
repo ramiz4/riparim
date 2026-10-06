@@ -64,7 +64,7 @@ try{
    const payload=attempts.at(-1).payload,link=new URL(payload.html.match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));
    check(Object.hasOwn(payload,'text')&&payload.text==='','New review first attempts explicitly opt out of generated plaintext with text empty in the actual provider body');
    check(payload.html.includes('lang="'+locale+'"')&&payload.html.includes('<div lang="'+locale+'" dir="ltr"'),'The verified recipient preference controls all email language containers');
-   check(link.pathname===prefix+'/anmelden'&&link.searchParams.get('weiter')===(prefix||'/')+'?besuche=1&einreichung='+localizedId,'Recipient locale controls both authentication and the protected return destination');
+   check(link.pathname===prefix+'/anmelden'&&link.searchParams.get('weiter')===prefix+'/bewertungen?einreichung='+localizedId,'Recipient locale controls both authentication and the protected return destination');
    check(payload.subject===({de:{published:'Deine Riparim-Bewertung wurde freigegeben',needs_more:'Bitte ergänze deinen Besuchsnachweis'},sq:{published:'Vlerësimi yt në Riparim u miratua',needs_more:'Plotëso dëshminë e vizitës tënde'},en:{published:'Your Riparim review was approved',needs_more:'Please add to your visit evidence'}})[locale][decision],'Both review decisions use the correct recipient subject');
   }
  }
@@ -83,7 +83,7 @@ try{
  check(attempts.at(-1).payload.to[0]===confirmedEmail&&!JSON.stringify(attempts.at(-1).payload).includes('PRIVATE'),'The confirmed account receives only generic status and a safe link, ignoring recipient overrides');
  check(event(id).payload===null,'Accepted messages discard their frozen address/content payload');
  const url=new URL(attempts.at(-1).payload.html.match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));
- check(url.origin===origin&&url.pathname==='/anmelden'&&url.searchParams.get('weiter')===`/?besuche=1&einreichung=${id}`,'The email links to authentication and the precise owned submission without an access token');
+ check(url.origin===origin&&url.pathname==='/anmelden'&&url.searchParams.get('weiter')===`/bewertungen?einreichung=${id}`,'The email links to authentication and the precise owned submission without an access token');
  assert.throws(()=>email.notificationLink('unsafe-target'),/INVALID_VISIT_ID/);passed++;
  check(attempts.at(-1).payload.html.includes('lang="de"')&&attempts.at(-1).payload.html.includes('<title>')&&attempts.at(-1).payload.text==='','The HTML-only template has explicit language, a title and readable link text');
  await outbox.processNotifications({id:event(id).id,force:true});check(sent.size===1&&attempts.length===1,'Completed events cannot be sent again');

@@ -28,5 +28,5 @@ export function localizeHref(href: string, locale: Locale): string {
  return `${locale === "de" ? "" : `/${locale}`}${path === "/" && locale !== "de" ? "" : path}${url.search}${url.hash}`;
 }
 
-const pagePaths=new Set(["/","/werkstaetten","/anmelden","/registrieren","/passwort-vergessen","/passwort-neu","/einstellungen","/datenschutz","/betrieb","/verwaltung","/verwaltung/anmeldung","/verwaltung/benutzer","/verwaltung/betriebe","/verwaltung/bewertungen"]);
+const pagePaths=new Set(["/","/werkstaetten","/anmelden","/registrieren","/passwort-vergessen","/passwort-neu","/einstellungen","/bewertungen","/datenschutz","/betrieb","/verwaltung","/verwaltung/anmeldung","/verwaltung/benutzer","/verwaltung/betriebe","/verwaltung/bewertungen"]);
 export function isPagePath(path:string):boolean{const value=stripLocalePrefix(path).replace(/\/$/,"")||"/";return pagePaths.has(value)||/^\/werkstatt\/[^/]+$/.test(value);}

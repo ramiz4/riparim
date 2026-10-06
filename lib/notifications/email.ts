@@ -3,6 +3,7 @@ import {z} from "zod";
 import {siteOrigin} from "@/lib/auth/config";
 import {emailCopy,emailHtml} from "@/lib/email-content";
 import {localizeHref,type Locale} from "@/lib/i18n/locale";
+import {ownReviewsHref,reviewSubmissionId} from "@/lib/own-reviews";
 import type {ReviewDecision} from "./contract";
 
 // New messages opt out of Resend's generated plaintext with text: "".
@@ -17,9 +18,9 @@ export function emailConfiguration(){
  return {key,from};
 }
 export function notificationLink(id:string,locale:Locale="de"){
- if(!/^[0-9a-f-]{36}$/.test(id))throw Error("INVALID_VISIT_ID");
+ if(!reviewSubmissionId(id))throw Error("INVALID_VISIT_ID");
  const origin=new URL(siteOrigin());if(origin.protocol!=="https:"||origin.username||origin.password)throw Error("INVALID_SITE_ORIGIN");
- const link=new URL(localizeHref("/anmelden",locale),origin.origin);link.searchParams.set("weiter",localizeHref(`/?besuche=1&einreichung=${id}`,locale));return link.href;
+ const link=new URL(localizeHref("/anmelden",locale),origin.origin);link.searchParams.set("weiter",localizeHref(ownReviewsHref(id),locale));return link.href;
 }
 export function reviewEmail(decision:ReviewDecision,id:string,from:string,to:string,locale:Locale):DeliveryPayload{
  const copy=emailCopy[locale][decision],url=notificationLink(id,locale);

@@ -28,9 +28,9 @@ try{
   document.documentElement.lang=locale;
   const t=api.createTranslator(api.getMessages(locale));
   globalThis.fixturePublicDirectory=[workshop];
-  const homePage=await api.HomePage({params:Promise.resolve({locale}),searchParams:Promise.resolve({})});window.history.replaceState({},'',`${locale==='de'?'':`/${locale}`}?besuche=1`);
+  const homePage=await api.HomePage({params:Promise.resolve({locale}),searchParams:Promise.resolve({})});window.history.replaceState({},'',`${locale==='de'?'':`/${locale}`}?nachweis=neu`);
   await React.act(async()=>root.render(h(api.I18nProvider,{locale,messages:api.getMessages(locale,['common'])},homePage)));
-  assert(document.querySelector('h1').textContent.includes(t('public.heroCar'))&&document.querySelector('[role="dialog"]').textContent.includes(t('customer.myReviewsLogin')),'actual landing caller retains public copy and customer dialog namespace together');
+  assert(document.querySelector('h1').textContent.includes(t('public.heroCar'))&&document.querySelector('[role="dialog"]').textContent.includes(t('customer.reviewLogin')),'actual landing caller retains public copy and customer creation dialog namespace together');
   await React.act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));window.history.replaceState({},'',locale==='de'?'/':`/${locale}`);
   const returnTarget=`${locale==='de'?'':`/${locale}`}/werkstaetten?q=Auto+Mita`,documentProfile=await api.ProfilePage({params:Promise.resolve({locale,id:workshop.id}),searchParams:Promise.resolve({suche:returnTarget})}),documentHtml=renderToStaticMarkup(h(api.I18nProvider,{locale,messages:api.getMessages(locale,['common'])},documentProfile)),documentDom=new JSDOM(documentHtml);
   try{assert.equal(documentDom.window.document.querySelector('.profile-back').getAttribute('href'),returnTarget,'actual profile document response must include validated name-search return before client hydration');}finally{documentDom.window.close();}

@@ -85,7 +85,7 @@ export default function Catalogue({initialDisplayById={},initialWorkshops,initia
  function applyDraft(){commit(draft);setFilterOpen(false);requestAnimationFrame(()=>{filterButton.current?.focus({preventScroll:true});resultsHeading.current?.scrollIntoView({block:"start",behavior:"auto"});});}
  function applyContext(value:SearchContext){const next={...defaultCatalogueFilters,service:value.service,city:value.city,brand:value.brand,sort:filters.sort};setContext(value);setPrivateMatchingActive(true);setFilters(next);setVisibleCount(12);window.history.replaceState(window.history.state,"",catalogueHref(next,locale));}
 
- return <><SiteHeader account={account} isAdmin={isAdmin} onVisits={personal.onVisits} onNewVisit={personal.onNewVisit}/><main className="catalogue-page wrap">
+ return <><SiteHeader account={account} isAdmin={isAdmin} onNewVisit={personal.onNewVisit}/><main className="catalogue-page wrap">
   <header className="catalogue-heading"><div><h1>{t("public.workshops")}</h1></div><button className="catalogue-detail-search" onClick={()=>setDetailOpen(true)}><CarFront size={18}/>{t("public.detailSearch")}</button></header>
   {activeContext&&<div className="catalogue-private-context"><CarFront size={18}/><div><strong>{t("public.privateContext")} · {valueLabel(locale,"sentinel",activeContext.brand)} {activeContext.model}</strong><p>{activeContext.radius>0?t("public.radiusSummary",{distance:activeContext.radius}):""}{activeContext.additionalCity?`${activeContext.additionalCity} · `:""}{t("public.ramOnly")}</p></div><button onClick={()=>setDetailOpen(true)}>{t("public.changeContext")}</button></div>}
   <div className="catalogue-search-sentinel" ref={searchSentinel} aria-hidden="true"/>
