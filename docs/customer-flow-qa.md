@@ -129,7 +129,16 @@ erneutes Lesen sowie Empfangstest/Rückweg; keine reine Bodyübernahme.
 Die zentralen Bestätigungs- und Recoveryvorlagen enthalten DE/SQ/EN-Betreff
 und HTML-Body. Nur der exakte locale-first Redirectprefix wählt SQ/EN;
 leere, kurze, alte oder abweichende URLs bleiben deutsch. Der Längenguard
-verhindert einen Slice-Fehler. `tests/auth-email-templates.test.mjs` führt
+verhindert einen Slice-Fehler im unveränderten Body. Die Betreffquellen müssen
+bereits vor dem Rendering in das 255-Zeichen-Feld des Supabase-Dashboards passen.
+Sie verwenden kompakte zentrale Betreffcopy und einen vollständigen Prefixvergleich
+mit Go-`printf`-Stringpräzision statt `slice`. Die kanonisch validierte Origin ist
+ASCII (internationale Hosts stehen in Punycode); daher entspricht die Runenpräzision
+hier der Prefix-Bytelänge. Kurze oder fehlende Redirects bleiben sicher deutsch.
+Die HTML-Titel behalten ihre ausführliche Copy; sie müssen nicht dem kürzeren
+Betreff entsprechen. `tests/auth-email-export.test.mjs` prüft die tatsächlichen
+exportierten Betreffquellen gegen die 255-Zeichen-Grenze.
+`tests/auth-email-templates.test.mjs` führt
 beide zentralen Felder mit Go `html/template` ohne `FuncMap` aus und prüft
 Sonderzeichen, Token-URLescaping, Sprache, direkte Bodycontainer, Titel und CTA.
 Der [geprüfte Supabase-Mailer](https://github.com/supabase/auth/blob/ce9a8eee0cc042be8c7a42981a7ddae631e41d91/internal/mailer/templatemailer/template.go)
