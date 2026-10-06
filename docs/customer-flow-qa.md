@@ -325,3 +325,48 @@ Beschriftungen und Layout blieben lesbar. Alle API-Schreibversuche wurden mit
 synthetischen Daten abgefangen; Produktion und echte Konten blieben unverändert.
 Lade-, Fehler- und fehlgeschlagene Nachladezustände sind zusätzlich automatisiert
 geprüft und werden hier nicht als nativ abgenommen behauptet.
+
+## Bewertungseinstieg am Werkstattprofil (Issue #62)
+
+Variante A verwendet ausschließlich das jeweilige öffentliche Werkstattprofil
+für neue Bewertungen. Dort ist die Werkstatt bereits ausgewählt und das
+vollständige Formular für Bewertung und privaten Nachweis vorhanden. Der
+allgemeine Dialog und „Bewerten“ im Benutzermenü entfallen. Eigene Einreichungen
+können weiterhin gezielt bearbeitet oder ergänzt werden.
+
+`tests/review-entry.test.mjs` prüft alte `nachweis`-Links in DE/SQ/EN: bekannte
+öffentliche Werkstätten führen zu ihrem Profil mit `#bewerten`; allgemeine,
+unbekannte, ungültige oder mehrdeutige Ziele führen zum Werkstattfinder mit
+einem lokalisierten Hinweis. Ein Katalogfehler nutzt dessen vorhandenen
+Wiederholungsablauf. Der tatsächliche Worker-Test prüft zusätzlich die
+Weiterleitungen und schützt nicht veröffentlichte Profile. Der Finderhinweis
+bleibt beim Neuladen und Sprachwechsel erhalten.
+
+Die React-Prüfungen bestätigen den fehlenden allgemeinen Menüeintrag, den
+sichtbaren Werkstattnamen am Formular, Profil-Anmelderücksprünge, das gemeinsame
+POST von Bewertung und privatem Nachweis, Sterne-/Einwilligungsvalidierung,
+lokalisierte Fehler und die Freigabeerklärung im Erfolgszustand. Bearbeitungen
+verwenden weiterhin PUT mit Revision und erhaltenem privaten Beleg; ihr
+Anmeldeziel ist die eigene gezielte Einreichung. Die bestehenden isolierten
+API-/SQLite-/R2-Prüfungen schützen Upload, Besitzrechte und Moderation.
+
+Diese Prüfungen verwenden fiktive Daten und abgefangene Providergrenzen.
+Die native Prüfung erfolgte in Chrome mit dem bestätigten Projektprofil
+`ramizloki82@googlemail.com`, echten Komponenten, Projekt-CSS und synthetischen,
+abgefangenen Requests. Bei 390 Pixeln waren System-Theme (hier hell), Light und
+Dark ohne horizontale Überbreite; bei 1280 Pixeln wurde das geöffnete Formular
+im dunklen Theme mit Werkstattname neben den Feldern geprüft. Viewport und
+Dokumentbreite betrugen jeweils 390 beziehungsweise 1280 Pixel.
+
+Das Benutzermenü enthält keinen allgemeinen Bewertungslink; Escape stellt den
+Fokus am Auslöser wieder her. Leertaste bedient den Inline-Toggle, Tab erreicht
+das beschriftete Datum und die Pfeiltaste wählt den nächsten Stern samt Fokus.
+Die ausgeloggte SQ-Profilprüfung bestätigt den Namen und den lokalisierten
+Anmeldelink mit Rückkehr zu `#bewerten`. Der EN-Finderhinweis und Profilzugang
+waren bei 390 Pixeln und tatsächlich auf 200 Prozent gestelltem Chrome-Zoom
+sichtbar, weiterhin ohne horizontale Überbreite; anschließend wurde der Zoom
+auf 100 Prozent zurückgesetzt.
+
+Diese native Prüfung bestätigt keine vollständige Anmeldung, Einreichung oder
+Dateiübertragung; diese Verträge decken die oben genannten isolierten Tests ab.
+Es gibt keine neue Migration oder Providerkonfiguration.

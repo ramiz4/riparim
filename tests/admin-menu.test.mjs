@@ -46,7 +46,7 @@ async function openMenu(){
 }
 
 try{
- const destinations=[['Mein Betrieb','/betrieb'],['Meine Bewertungen','/?besuche=1'],['Bewerten','/?nachweis=neu'],['Einstellungen','/einstellungen']];
+ const destinations=[['Mein Betrieb','/betrieb'],['Meine Bewertungen','/?besuche=1'],['Einstellungen','/einstellungen']];
  for(const [email,isAdmin] of [['customer@example.test',false],['first-admin@example.test',true],['second-admin@example.test',true]]){
   await render(email,isAdmin);
   for(const [label,path] of [...destinations,...(isAdmin?[['Verwalten','/verwaltung']]:[])]){
@@ -54,6 +54,7 @@ try{
     await openMenu();
     const items=[...document.querySelectorAll('[role="menuitem"]')];
     assert.equal(items.filter(node=>node.textContent==='Verwalten').length,isAdmin?1:0,'only admins receive the single management entry');
+    assert(!items.some(node=>node.textContent==='Bewerten'),'new reviews start at the workshop profile, without a general user-menu entry');
     assert(!items.some(node=>node.textContent==='Bewertungen prüfen'),'the redundant review shortcut is absent from the user menu');
     const item=items.find(node=>node.textContent===label);
     assert(item,`${label} is available to ${email}`);
@@ -64,16 +65,16 @@ try{
   }
  }
  assert.deepEqual(routerAttempts,[],'header destinations do not depend on the stalled client router');
- let visits=0,reviews=0;
- await act(async()=>root.render(fixtureMessages(createElement(SiteHeader,{account:{email:'customer@example.test',displayName:'Fixture account',provider:'Google'},onVisits:()=>visits++,onNewVisit:()=>reviews++}))));
- for(const label of ['Meine Bewertungen','Bewerten']){
+ let visits=0;
+ await act(async()=>root.render(fixtureMessages(createElement(SiteHeader,{account:{email:'customer@example.test',displayName:'Fixture account',provider:'Google'},onVisits:()=>visits++}))));
+ for(const label of ['Meine Bewertungen']){
   await openMenu();
   const item=[...document.querySelectorAll('[role="menuitem"]')].find(node=>node.textContent===label),before=documents.length;
   await act(async()=>{item.focus();item.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true}));});
   assert.equal(documents.length,before,'page-owned review actions preserve their local dialogs');
   assert.equal(document.querySelector('[role="menu"]'),null);
  }
- assert.equal(visits,1);assert.equal(reviews,1);
+ assert.equal(visits,1);
  // The real Link control demonstrates that the fixture can detect a consumed
  // click, so the document-navigation assertions above cannot pass vacuously.
  await act(async()=>root.render(fixtureMessages(createElement(RouterLink,{href:'/betrieb'},'Router control'))));
