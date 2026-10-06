@@ -17,6 +17,11 @@ try{
  const metadata=JSON.parse(await readFile(join(directory,'manifest.json'),'utf8'));
  assert.equal(metadata.siteOrigin,origin);assert.equal(metadata.providerSiteURL,origin);assert.equal(metadata.actualGoHtmlTemplate,true);assert.equal(metadata.productionChanged,false);
  passed+=4;
+ for(const kind of ['confirmation','recovery']){
+  const subject=await readFile(join(directory,`${kind}.subject.txt`),'utf8');
+  assert(subject.length<=255,`${kind} source must fit Supabase's 255-character subject field; got ${subject.length}`);
+  passed++;
+ }
  for(const kind of ['confirmation','recovery'])for(const locale of ['de','sq','en']){
   const preview=await readFile(join(directory,`${kind}-${locale}.html`),'utf8');assert(preview.includes(`<html lang="${locale}" dir="ltr">`));
   assert(metadata.previews.some(item=>item.kind===kind&&item.locale===locale&&item.renderedLocale===locale));
