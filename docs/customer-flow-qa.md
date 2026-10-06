@@ -279,3 +279,63 @@ abschließenden `{{ end }}` mit sichtbarem Fokusring. Die Prüfung änderte kein
 Providerkonfiguration und löste keine Live-E-Mails aus. Der korrigierte
 Dashboardwert wurde anschließend nativ mit genau einem Backslash bestätigt;
 auch bei 1336 Pixeln blieb die Dokumentbreite gleich der Scrollbreite.
+
+## Kompakte Betriebsverwaltung (Issue #60)
+
+„Mein Betrieb“ führt beim ersten Besuch direkt zum Antrag auf ein vorhandenes
+Werkstattprofil. Ohne bestätigtes Profil oder laufenden Antrag gilt das auch nach
+älteren Entscheidungen. Leere Profil-, Antrags- und Änderungskästen entfallen.
+Bestätigte Profile bieten „Profil bearbeiten“; Anträge und Änderungen erklären
+je nach aktuellem Prüfstand den nächsten Schritt. Historische Ablehnungen
+zeigen ihr Ergebnis und den Prüfvermerk, ohne eine inzwischen gesperrte
+Einreichung zu empfehlen. Eingereichte Änderungsdetails und der
+Antrag auf ein weiteres Profil lassen sich mit nativen `details`/`summary`
+Elementen öffnen. Inhabernachweise und Beleglinks bleiben privat; manuelle
+Inhaberprüfung und gesonderte Veröffentlichungsfreigabe bleiben erhalten.
+
+„Aktualisieren“ bleibt am Seitentitel erreichbar, weil Entscheidungen der
+Verwaltung außerhalb der geöffneten Seite erfolgen. Der Abruf zeigt einen
+Ladezustand und sperrt konkurrierende Einreichungen. Scheitert nur das Nachladen
+nach einer erfolgreichen Einreichung, bestätigt die Seite die Speicherung und
+fordert zum Aktualisieren statt zum erneuten Einreichen auf.
+
+`tests/business-ui.test.mjs` prüft an den tatsächlichen React-Komponenten den
+direkten Einstieg, private und erhaltene Eingaben, Prüfstände und nächste Schritte,
+kompakte Details, gesperrte Aktionen, initiales Laden, Aktualisierung sowie die
+Wiederholung eines fehlgeschlagenen Listenabrufs nach erfolgreicher Einreichung.
+`tests/business.test.mjs` prüft zusätzlich die autoritative Liste laufender
+Anträge und Änderungssperren eigener Profile unter mehr als 100 neueren
+historischen Entscheidungen sowie die Trennung fremder Konten. Die UI-Fixtures
+prüfen diese aktuellen Hinweise ohne vorheriges Blättern, Historie ohne laufenden
+Antrag, alte Ablehnungen mit laufendem Ersatzentwurf und automatisch abgelehnte
+konkurrierende Anträge. Beim Nachladen einer Folgeseite werden aktuelle Zuordnung
+und Sperren gemeinsam übernommen; die beiden Historien bleiben unabhängig.
+Aktuelle Änderungsanträge besitzen zusätzlich eigene IDs. Beim Nachladen beider
+Listen verschwinden veraltete Prüfungskarten auch nach externer Freigabe,
+Ablehnung oder einem Ersatzentwurf für dasselbe Profil. Der Client errät keine
+Entscheidung; der vollständige Abruf zeigt den neuen Prüfstand und gegebenenfalls
+den aktuellen Ersatzentwurf.
+Die bestehenden Moderationsprüfungen schützen Dialogfokus, Escape, begründete
+Entscheidungen und getrennte Folgeseiten. `tests/management-localization-ui.test.mjs`
+prüft weiterhin DE/SQ/EN mit ursprünglichen Beschreibungen und kanonischen
+Leistungswerten. Die gesamte Testsuite nutzt isolierte Konten und abgefangene
+Provideranfragen; sie sendet keine echten Nachrichten und ändert keine
+Produktionsdaten.
+
+Die ergänzende native Prüfung im vorgegebenen Chrome-Profil verwendete ein
+eigenes QA-Fenster mit geprüftem Profil und kontrolliertem Fokus sowie die
+aktuellen Komponenten, ThemeProvider, Header, Footer, CSS und Assets. Bei
+1280 × 844 Pixeln im hellen deutschen Desktop-Layout waren der direkte Antrag,
+„Aktualisieren“ am Titel und die Hinweise zum laufenden Antrag verständlich;
+Tab und Leertaste öffneten den weiteren Antrag mit sichtbarem Fokusring. Bei
+390 × 844 Pixeln zeigte Albanisch im dunklen Theme die Änderungssperre und den
+Wartehinweis; Tab und Enter öffneten die eingereichten Originalangaben ohne
+horizontale Beschneidung. Englisch im hellen Mobil-Layout erlaubte den
+Editoraufruf per Tastatur, den Zugriff auf das beschriftete Telefonfeld und eine
+isolierte Einreichung: Erfolgsmeldung, unveränderter öffentlicher Stand,
+geschlossener Editor und gesperrte weitere Bearbeitung waren sichtbar. Deutsch
+im mobilen Systemtheme folgte dem System und löste dunkel auf; Antrag,
+Beschriftungen und Layout blieben lesbar. Alle API-Schreibversuche wurden mit
+synthetischen Daten abgefangen; Produktion und echte Konten blieben unverändert.
+Lade-, Fehler- und fehlgeschlagene Nachladezustände sind zusätzlich automatisiert
+geprüft und werden hier nicht als nativ abgenommen behauptet.

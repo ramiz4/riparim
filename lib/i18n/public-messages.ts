@@ -107,6 +107,7 @@ export const publicDe={
  "noProofReviews": "Noch keine Bewertungen mit Besuchsnachweis.",
  "sourcesDate": "Quellen & Datenstand",
  "checkedAt": "Abgeglichen am {date}. Angaben aus öffentlichen Quellen; keine unabhängige Qualitätsprüfung.",
+ "phoneContact": "Telefonkontakt:",
  "phoneNote": "Telefonkontakt: {note}.",
  "googleSource": "Google-Angaben: {source}",
  "ratingSource": "Quelle der Bewertung",
@@ -237,6 +238,7 @@ export const publicDe={
  "sunday": "Sonntag",
  "searchToolTitle": "Werkstattsuche einstellen",
  "searchToolDescription": "Öffne das öffentliche Werkstattverzeichnis in Kosovo mit Leistungs- und Ortsfiltern. Kontaktiert keinen Betrieb, sendet keine Nachricht und bucht keine Reparatur.",
+ "translationFallback": "Diese Angaben werden in der Originalsprache angezeigt. Eine aktuelle Übersetzung ist noch nicht verfügbar.",
  "reviewUnavailable": "Bewertungen sind gerade nicht verfügbar.",
  "workshopCount": {
   "one": "{count} Werkstatt",
@@ -351,6 +353,7 @@ export const publicSq=/* @__PURE__ */ check({
  "noProofReviews": "Ende pa vlerësime me dëshmi vizite.",
  "sourcesDate": "Burimet & data e të dhënave",
  "checkedAt": "Kontrolluar më {date}. Të dhëna nga burime publike; pa kontroll të pavarur të cilësisë.",
+ "phoneContact": "Kontakti telefonik:",
  "phoneNote": "Kontakti telefonik: {note}.",
  "googleSource": "Të dhënat e Google: {source}",
  "ratingSource": "Burimi i vlerësimit",
@@ -481,6 +484,7 @@ export const publicSq=/* @__PURE__ */ check({
  "sunday": "E diel",
  "searchToolTitle": "Vendos kërkimin e serviseve",
  "searchToolDescription": "Hap listën publike të serviseve në Kosovë me filtra shërbimi dhe vendi. Nuk kontakton biznes, dërgon mesazh apo rezervon riparim.",
+ "translationFallback": "Këto të dhëna shfaqen në gjuhën origjinale. Një përkthim aktual ende nuk është i disponueshëm.",
  "reviewUnavailable": "Vlerësimet nuk janë të disponueshme për momentin.",
  "workshopCount": {
   "one": "{count} servis",
@@ -594,6 +598,7 @@ export const publicEn=/* @__PURE__ */ check({
  "noProofReviews": "No reviews with visit evidence yet.",
  "sourcesDate": "Sources & data date",
  "checkedAt": "Cross-checked on {date}. Information from public sources; no independent quality assessment.",
+ "phoneContact": "Phone contact:",
  "phoneNote": "Phone contact: {note}.",
  "googleSource": "Google information: {source}",
  "ratingSource": "Rating source",
@@ -724,6 +729,7 @@ export const publicEn=/* @__PURE__ */ check({
  "sunday": "Sunday",
  "searchToolTitle": "Configure workshop search",
  "searchToolDescription": "Open the published Kosovo workshop catalogue with service and city filters. Does not contact a business, send a message, or book a repair.",
+ "translationFallback": "This information is shown in its original language. A current translation is not yet available.",
  "reviewUnavailable": "Reviews are currently unavailable.",
  "workshopCount": {
   "one": "{count} workshop",

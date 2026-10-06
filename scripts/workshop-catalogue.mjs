@@ -7,13 +7,14 @@ const root=fileURLToPath(new URL('../',import.meta.url));
 const runtime=resolve(root,'.sites-runtime/catalogue-cli');
 await mkdir(runtime,{recursive:true});
 const output=resolve(runtime,'source.mjs');
-await build({absWorkingDir:root,entryPoints:['lib/workshop-source.ts'],bundle:true,platform:'node',format:'esm',outfile:output});
-const {validateWorkshopCatalogue,catalogueStats,mergeWorkshopCatalogue}=await import(pathToFileURL(output));
+await build({absWorkingDir:root,stdin:{contents:"export * from './lib/workshop-source';export {validateWorkshopTranslations} from './lib/workshop-translations';",resolveDir:root,loader:'ts'},bundle:true,platform:'node',format:'esm',outfile:output});
+const {validateWorkshopCatalogue,catalogueStats,mergeWorkshopCatalogue,validateWorkshopTranslations}=await import(pathToFileURL(output));
 const path=resolve(root,'data/workshops.json');
 const current=validateWorkshopCatalogue(JSON.parse(await readFile(path,'utf8')));
 const [action='check',inputPath,...flags]=process.argv.slice(2);
 if(action==='check'){
  if(inputPath)throw Error('check benötigt keine zusätzlichen Argumente');
+ await validateWorkshopTranslations(JSON.parse(await readFile(resolve(root,'data/workshop-translations.json'),'utf8')),current.workshops);
  console.log(JSON.stringify({file:'data/workshops.json',total:current.workshops.length,...catalogueStats(current.workshops),estimatedTotal:current.coverage.estimatedTotal,complete:current.coverage.complete},null,2));
 }else if(action==='merge'){
  if(!inputPath||flags.some(flag=>flag!=='--write'))throw Error('Verwendung: npm run catalog:merge -- datei.json [--write]');

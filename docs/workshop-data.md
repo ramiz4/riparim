@@ -29,6 +29,50 @@ Nach Prüfung und Commit wird die Site wie üblich veröffentlicht. Der Runtime-
 
 Änderungen aus der Admin-Oberfläche müssen vor der nächsten Katalogänderung wieder exportiert und in diese Datei übernommen werden. Die vorhandene Admin-Oberfläche schreibt weiterhin in die laufende Datenbank; sie kann keinen Git-Commit erzeugen. Bei einem Konflikt bleibt die jüngere Datenbankrevision erhalten, bis der Export die zentrale Datei aktualisiert.
 
+## Kuratierte SQ-/EN-Anzeigen
+
+`data/workshop-translations.json` enthält ausschließlich redaktionelle SQ-/EN-
+Anzeigen nach stabiler Werkstattkennung: `specialty`, `description`, geordnete
+`serviceDetails`, `phoneNote` und geordnete `sourceTitles`. Alle 129 beim Start
+veröffentlichten versionierten Profile sind abgedeckt. Namen, Adressen, Kontakte,
+Marken, Beratungssprachen, Source-URLs, Google-Inhalte und Nutzerdaten bleiben
+Originale. Die Datei beeinflusst weder D1-Import/Seedkennung noch Identityhash,
+Freigabestatus oder Migrationen.
+
+Der zentrale Vertrag `workshopTranslationSourceHash` in
+`lib/workshop-translations.ts` bildet SHA-256 über UTF-8-`JSON.stringify` des
+Objekts in dieser festen Reihenfolge: `specialty`, `description`, `serviceDetails`,
+`phoneNote`, `sources`. Jede Quelle ist in Originalreihenfolge ausschließlich
+`{url,title}`; Arrayreihenfolge, Leerraum und Satzzeichen bleiben Bestandteil
+der Revision. Kontakte, Zeitstempel, Quellenart und andere Metadaten fließen
+nicht ein. Hashlogik in Pflegeskripten nicht kopieren.
+
+Bei Katalogpflege zuerst aktuelle freigegebene Admin-/Betriebsänderungen in die
+Canonicalquelle übernehmen. Dann die fünf Displayfelder für SQ und EN fachlich
+prüfen und ihre Arrays in derselben Originalreihenfolge aktualisieren. Besonders
+Verzeichnisherkunft, unbestätigte Erreichbarkeit und unbekannte Leistungen/Marken
+müssen erhalten bleiben. Den Hash mit dem zentralen Vertrag berechnen, nicht
+bloß die Revision austauschen, um alte Übersetzungen weiterzuverwenden.
+`npm run catalog:check` verweigert unbekannte/doppelte IDs, zusätzliche Felder oder
+Sprachen, veraltete Hashes, falsche Arraylängen, leere Übersetzungen nicht leerer
+Originale und fehlende SQ-/EN-Abdeckung veröffentlichter versionierter Profile.
+Entwürfe erzeugen keine Abdeckungspflicht. Die Zuordnung jedes Arraytexts zum
+Originalindex wird außerdem redaktionell geprüft; die Hashprüfung kann keine
+semantisch vertauschten Übersetzungen erkennen.
+
+Der reine Serveradapter prüft den Hash nochmals gegen die tatsächlich gelesenen
+Livefelder und liefert `displayById` getrennt von Canonical-`workshops`. Ein
+geändertes oder neues Liveprofil zeigt sein aktuelles Original mit einem lokalen
+sichtbaren Hinweis bis zum nächsten geprüften Katalog-/Releaseupdate. Nur ein
+Original mit bekanntem, exakt passendem deutschen Kataloghash bekommt `lang=de`;
+neue Betreiber-/Livefreitexte werden nicht pauschal als Deutsch gekennzeichnet.
+Fehlende APIlocale bewahrt die deutsche Legacyantwort; explizite `de|sq|en`
+liefert die zusätzliche öffentliche Displaymap. Die autorisierte Verwaltungs-
+antwort behält Canonicaldaten ohne Overlay. Deutsche Originaldetails bestimmen
+weiterhin Leistungsgruppen und Suchhervorhebung; ihre ursprünglichen Indizes
+bleiben vor Normalisierung/Deduplizierung erhalten. Es gibt keine automatische
+Übersetzung von Betreibertexten, Reviews, Belegen oder privaten Nutzerdaten.
+
 ## Google-Zuordnungen für den vorhandenen Bestand
 
 ```sh

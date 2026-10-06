@@ -22,9 +22,9 @@ try{
   check(links[2].getAttribute('aria-current')==='page'&&links.filter(link=>link.hasAttribute('aria-current')).length===1,'The canonical active section is independent from display language');
  }
  const originalFetch=globalThis.fetch,requests=[],workshop={id:'fixture-workshop',name:'Original workshop',city:'Prishtina',address:'Original address',phone:'+38344123456',phoneNote:'Original note',whatsapp:'',services:['Inspektion & Wartung'],serviceDetails:['Original specific work'],description:'Original unchanged description of the workshop.',updatedAt:'2026-10-04T09:00:00Z'};
- globalThis.fetch=async(url,init)=>{requests.push({url,init});return init?.method?Response.json({error:'Private raw provider detail',errorCode:'business_unavailable'},{status:503}):Response.json({workshops:[workshop],claims:[],changes:[],nextClaimCursor:null,nextChangeCursor:null});};
+ globalThis.fetch=async(url,init)=>{requests.push({url,init});return init?.method?Response.json({error:'Private raw provider detail',errorCode:'business_unavailable'},{status:503}):Response.json({workshops:[workshop],claims:[],changes:[],pendingClaims:[],pendingChangeWorkshopIds:[],pendingChangeRequestIds:[],nextClaimCursor:null,nextChangeCursor:null});};
  try{
-  for(const [locale,title,edit,description] of [['de','Bestätigte Profile','Angaben als Entwurf bearbeiten','Beschreibung'],['sq','Profilet e konfirmuara','Ndrysho të dhënat si draft','Përshkrimi'],['en','Confirmed profiles','Edit information as a draft','Description']]){
+  for(const [locale,title,edit,description] of [['de','Deine Profile','Profil bearbeiten','Beschreibung'],['sq','Profilet e tua','Ndrysho profilin','Përshkrimi'],['en','Your profiles','Edit profile','Description']]){
    await render(locale,BusinessPanel,{directory:[workshop]});
    check(document.querySelector('h2').textContent===title,'The actual owner screen shows active-locale headings');
    const editButton=[...document.querySelectorAll('button')].find(button=>button.textContent===edit);await act(async()=>editButton.click());
@@ -33,6 +33,19 @@ try{
    await act(async()=>field.form.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));
    const payload=JSON.parse(requests.at(-1).init.body);check(payload.kind==='change'&&payload.profile.services[0]==='Inspektion & Wartung'&&payload.profile.description===workshop.description,'Localized service labels retain canonical server payloads');
    check(!document.body.textContent.includes('Private raw provider detail'),'Provider error text never reaches the localized owner screen');
+  }
+
+  let businessFixture;
+  globalThis.fetch=async()=>Response.json(businessFixture);
+  for(const [locale,edit,claimOutcome,changeOutcome,waiting,privateCheck] of [['de','Profil bearbeiten','Dieser Antrag wurde abgelehnt. Beachte den Prüfvermerk.','Diese Änderungen wurden abgelehnt. Beachte den Prüfvermerk.','Warte auf die Freigabe','privaten Nachweis manuell'],['sq','Ndrysho profilin','Kjo kërkesë është refuzuar. Lexo shënimin e shqyrtimit.','Këto ndryshime janë refuzuar. Lexo shënimin e shqyrtimit.','Prit miratimin','manualisht dëshminë tënde private'],['en','Edit profile','This request was rejected. Read the review note.','These changes were rejected. Read the review note.','Wait for approval','private evidence manually']]){
+   const historical={id:'fixture-old-request',workshopId:workshop.id,workshopName:workshop.name,owner:'fixture-owner',status:'rejected',moderatorNote:'A newer decision applies.',revision:1,createdAt:'2020-01-01T00:00:00Z'};
+   businessFixture={workshops:[workshop],claims:[historical],changes:[{...historical,id:'fixture-old-change'}],pendingClaims:[],pendingChangeWorkshopIds:[workshop.id],pendingChangeRequestIds:[],nextClaimCursor:null,nextChangeCursor:null};
+   await render(locale,BusinessPanel,{directory:[workshop]});
+   const editButton=[...document.querySelectorAll('button')].find(button=>button.textContent===edit);
+   check(editButton.disabled&&document.body.textContent.includes(waiting),'Each locale bases its current edit lock and guidance on the authoritative pending change summary');
+   check(document.body.textContent.includes(claimOutcome)&&document.body.textContent.includes(changeOutcome),'Each locale reports historical rejection outcomes without a conflicting retry instruction');
+   businessFixture={...businessFixture,workshops:[],claims:[],changes:[],pendingChangeWorkshopIds:[],pendingClaims:[{id:'fixture-current-claim',workshopId:workshop.id,workshopName:workshop.name,createdAt:'2020-01-01T00:00:00Z'}]};
+   await render(locale,BusinessPanel,{directory:[workshop]});check(document.querySelector('.business-request').textContent.includes(privateCheck),'Each locale visibly explains manual private ownership verification for the current claim');
   }
 
   const canonical={...workshop,brands:['Audi'],languages:['Albanisch'],specialty:'Original specialty',sources:[{url:'https://workshop.example.test/contact',title:'Original source'}],lat:null,lng:null,checkedAt:'2026-10-04',status:'draft'};
