@@ -16,8 +16,19 @@ const cases=[...['de','sq','en'].map(locale=>({name:locale,locale,redirect:`${or
  {name:'no ampersand',locale:'de',redirect:origin+'/auth/bestaetigen?locale=en'},
  {name:'locale prefix attack',locale:'de',redirect:origin+'/auth/bestaetigen?locale=english&weiter=%2F'},
  {name:'wrong order',locale:'de',redirect:origin+'/auth/bestaetigen?weiter=%2F&locale=sq'},
+ {name:'prefix one byte short',locale:'de',redirect:origin+'/auth/bestaetigen?locale=sq'},
+ {name:'partial callback',locale:'de',redirect:origin+'/auth/bestaetigen?locale='},
+ {name:'origin suffix attack',locale:'de',redirect:origin+'.attacker.test/auth/bestaetigen?locale=sq&weiter=%2F'},
+ {name:'encoded callback slash',locale:'de',redirect:origin+'/auth%2Fbestaetigen?locale=sq&weiter=%2F'},
+ {name:'fragment locale',locale:'de',redirect:origin+'/auth/bestaetigen#?locale=sq&weiter=%2F'},
+ {name:'uppercase locale',locale:'de',redirect:origin+'/auth/bestaetigen?locale=SQ&weiter=%2F'},
+ {name:'encoded locale',locale:'de',redirect:origin+'/auth/bestaetigen?locale=%73%71&weiter=%2F'},
+ {name:'unicode before locale',locale:'de',redirect:origin+'/auth/bestaetigen?locale=ësq&weiter=%2F'},
+ {name:'unicode after canonical prefix',locale:'sq',redirect:origin+'/auth/bestaetigen?locale=sq&weiter=ë'},
+ {name:'canonical IDN origin',locale:'en',site:'https://xn--bcher-kva.example',redirect:'https://xn--bcher-kva.example/auth/bestaetigen?locale=en&weiter=%2F'},
  {name:'trailing site slash',locale:'de',site:origin+'/',redirect:origin+'/auth/bestaetigen?locale=sq&weiter=%2F'}];
-const subjects={confirmation:{de:'Bestätige deine E-Mail-Adresse bei Riparim',sq:'Konfirmo adresën tënde të emailit në Riparim',en:'Confirm your email address for Riparim'},recovery:{de:'Setze dein Riparim-Passwort zurück',sq:'Rivendos fjalëkalimin tënd të Riparim',en:'Reset your Riparim password'}};
+const titles={confirmation:{de:'Bestätige deine E-Mail-Adresse bei Riparim',sq:'Konfirmo adresën tënde të emailit në Riparim',en:'Confirm your email address for Riparim'},recovery:{de:'Setze dein Riparim-Passwort zurück',sq:'Rivendos fjalëkalimin tënd të Riparim',en:'Reset your Riparim password'}};
+const subjects={confirmation:{de:'Riparim: E-Mail bestätigen',sq:'Riparim: Konfirmo emailin',en:'Riparim: Confirm email'},recovery:{de:'Riparim: Passwort zurücksetzen',sq:'Riparim: Rivendos fjalëkalimin',en:'Riparim: Reset password'}};
 const fixtures=Object.keys(subjects).flatMap(kind=>cases.map(entry=>({Subject:templates[kind+'EmailSubject']??'MISSING SUBJECT',Body:templates[kind+'EmailTemplate'],Data:{SiteURL:entry.site??origin,...(entry.omitRedirect?{}:{RedirectTo:entry.redirect}),TokenHash:token}})));
 const rendered=renderAuthEmails(fixtures);let passed=0;
 for(const [index,result] of rendered.entries()){
@@ -25,14 +36,15 @@ for(const [index,result] of rendered.entries()){
  assert.equal(result.subject,subjects[kind][entry.locale],kind+' '+entry.name+' subject');passed++;
  const dom=new JSDOM(result.body),doc=dom.window.document;
  assert.equal(doc.documentElement.lang,entry.locale);assert.equal(doc.documentElement.dir,'ltr');passed+=2;
- assert.equal(doc.querySelector('title').textContent,result.subject);assert.equal(doc.querySelectorAll('h1').length,1);passed+=2;
+ assert.equal(doc.querySelector('title').textContent,titles[kind][entry.locale]);assert.equal(doc.querySelectorAll('h1').length,1);passed+=2;
  for(const child of doc.body.children){assert.equal(child.lang,entry.locale);assert.equal(child.dir,'ltr');passed+=2;}
  const link=doc.querySelector('a');assert(link.textContent.trim().length>10);assert(!result.body.includes('<token>'));passed+=2;
- if(entry.redirect.includes('?')){const url=new URL(link.href,origin);assert.equal(url.searchParams.get('token_hash'),token);assert.equal(url.searchParams.get('type'),kind==='confirmation'?'signup':'recovery');passed+=2;}
+ if(new URL(entry.redirect,origin).search){const url=new URL(link.href,origin);assert.equal(url.searchParams.get('token_hash'),token);assert.equal(url.searchParams.get('type'),kind==='confirmation'?'signup':'recovery');passed+=2;}
  assert(!result.body.includes('ZgotmplZ'));passed++;dom.window.close();
 }
 assert.equal(templates.validateAuthEmailOrigins(origin,origin),origin);passed++;
-for(const site of [origin+'/',origin+'/path',origin+'?x=1',origin+'#fragment','https://other.example.test','https://user:password@riparim.example.test']){assert.throws(()=>templates.validateAuthEmailOrigins(origin,site),/AUTH_EMAIL_ORIGIN/);passed++;}
+assert.equal(templates.validateAuthEmailOrigins('https://xn--bcher-kva.example','https://xn--bcher-kva.example'),'https://xn--bcher-kva.example');passed++;
+for(const site of [origin+'/',origin+'/path',origin+'?x=1',origin+'#fragment','https://other.example.test','https://user:password@riparim.example.test','https://bücher.example']){assert.throws(()=>templates.validateAuthEmailOrigins(origin,site),/AUTH_EMAIL_ORIGIN/);passed++;}
 assert.throws(()=>templates.validateAuthEmailOrigins(origin+'/',origin),/AUTH_EMAIL_ORIGIN/);passed++;
 const specialCopy={title:'<script>unsafe</script> & Ç Ë',copy:'<b>Original & text</b>',action:'Open "protected" link',note:"Don't <img>"},specialUrl=origin+'/?value="<&';
 const escaped=new JSDOM(templates.emailHtml('sq',specialCopy,specialUrl));

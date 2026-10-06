@@ -4,6 +4,13 @@ type EmailCopy={title:string;copy:string;action:string;note:string};
 type EmailKind="confirmation"|"recovery"|"published"|"needs_more";
 // Only generic transactional copy belongs here. Recipient/account details and
 // private review content never become template parameters.
+// Compact Auth subjects leave room for the Go locale selector in Supabase's
+// 255-character source field; the detailed HTML titles remain unchanged.
+export const authEmailSubjectCopy:Record<Locale,{confirmation:string;recovery:string}>={
+ de:{confirmation:"E-Mail bestätigen",recovery:"Passwort zurücksetzen"},
+ sq:{confirmation:"Konfirmo emailin",recovery:"Rivendos fjalëkalimin"},
+ en:{confirmation:"Confirm email",recovery:"Reset password"},
+};
 export const emailCopy:Record<Locale,Record<EmailKind,EmailCopy>>={
  de:{
   confirmation:{title:"Bestätige deine E-Mail-Adresse bei Riparim",copy:"Bestätige deine E-Mail-Adresse, um die Registrierung abzuschließen. Melde dich anschließend separat an.",action:"E-Mail-Adresse bestätigen",note:"Wenn du kein Konto angelegt hast, kannst du diese Nachricht ignorieren."},

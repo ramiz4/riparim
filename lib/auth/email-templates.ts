@@ -1,4 +1,4 @@
-import {emailCopy,emailHtml} from "@/lib/email-content";
+import {authEmailSubjectCopy,emailCopy,emailHtml} from "@/lib/email-content";
 import type {Locale} from "@/lib/i18n/locale";
 
 // Supabase parses both subject and body with Go html/template and no custom
@@ -7,8 +7,16 @@ const localeGuard='{{ $sq := printf "%s/auth/bestaetigen?locale=sq&" .SiteURL }}
 function localizedTemplate(render:(locale:Locale)=>string){
  return `${localeGuard}{{ if and .RedirectTo (ge (len .RedirectTo) (len $sq)) (eq (slice .RedirectTo 0 (len $sq)) $sq) }}${render("sq")}{{ else if and .RedirectTo (ge (len .RedirectTo) (len $en)) (eq (slice .RedirectTo 0 (len $en)) $en) }}${render("en")}{{ else }}${render("de")}{{ end }}`;
 }
-export const confirmationEmailSubject=localizedTemplate(locale=>emailCopy[locale].confirmation.title);
-export const recoveryEmailSubject=localizedTemplate(locale=>emailCopy[locale].recovery.title);
+// Origins are canonical ASCII URL origins (validated below). printf's string
+// precision therefore compares the same full prefix as the guarded body slice,
+// without risking a slice panic on short/missing RedirectTo or exceeding the
+// hosted subject source limit. SQ and EN prefixes have equal length.
+function localizedSubject(kind:"confirmation"|"recovery"){
+ const copy=authEmailSubjectCopy;
+ return `{{$p:=print .SiteURL "/auth/bestaetigen?locale="}}{{$r:=printf "%.*s" (len (print $p "sq&")) .RedirectTo}}Riparim: {{if eq $r (print $p "sq&")}}${copy.sq[kind]}{{else if eq $r (print $p "en&")}}${copy.en[kind]}{{else}}${copy.de[kind]}{{end}}`;
+}
+export const confirmationEmailSubject=localizedSubject("confirmation");
+export const recoveryEmailSubject=localizedSubject("recovery");
 // Auth requests provide locale FIRST and a `weiter` query. Token hash and type
 // continue to reach the stable physical callback; Go escapes dynamic values.
 export const confirmationEmailTemplate=localizedTemplate(locale=>emailHtml(locale,emailCopy[locale].confirmation,"{{ .RedirectTo }}&token_hash={{ .TokenHash | urlquery }}&type=signup"));
