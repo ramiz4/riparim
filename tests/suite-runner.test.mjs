@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import {spawn,spawnSync} from 'node:child_process';
 import {copyFile,mkdtemp,mkdir,readFile,rm,stat,writeFile} from 'node:fs/promises';
+import {rmSync} from 'node:fs';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -10,6 +11,21 @@ const root=await mkdtemp(join(tmpdir(),'riparim-suite-runner-'));
 const fixture=fileURLToPath(new URL('./fixtures/suite-runner.mjs',import.meta.url));
 const processFixture=new URL('./fixtures/suite-process.mjs',import.meta.url);
 let sequence=0;
+const fixtures=new Set();
+function killFixture(child){
+ // Nested runner fixtures own further groups; keep the regression itself safe
+ // when the real npm-test runner cancels it halfway through an assertion.
+ const table=spawnSync('ps',['-eo','pid=,ppid=,pgid='],{encoding:'utf8'});
+ if(table.error)throw table.error;
+ const rows=table.stdout.trim().split('\n').map(line=>line.trim().split(/\s+/).map(Number));
+ const descendants=new Set([child.pid]);
+ for(let changed=true;changed;){changed=false;for(const [pid,parent] of rows)if(descendants.has(parent)&&!descendants.has(pid)){descendants.add(pid);changed=true;}}
+ const groups=new Set(rows.filter(([pid])=>descendants.has(pid)).map(([, ,group])=>group));
+ for(const group of groups)try{process.kill(-group,'SIGKILL');}catch(error){if(error.code!=='ESRCH')throw error;}
+}
+const abort=code=>{for(const child of fixtures)killFixture(child);rmSync(root,{recursive:true,force:true});process.exit(code);};
+const interrupted=()=>abort(130),terminated=()=>abort(143);
+process.on('SIGINT',interrupted);process.on('SIGTERM',terminated);
 async function setup({concurrency=2,count=4,contractFails=false,fail=false,hang=false,hangContract=false,orphan=false}={}){
  const cwd=join(root,String(++sequence)),runtime=join(cwd,'.test-runtime'),events=join(cwd,'events.jsonl');
  await mkdir(cwd);await mkdir(runtime);await writeFile(join(runtime,'stale'),'stale');
@@ -22,9 +38,10 @@ async function setup({concurrency=2,count=4,contractFails=false,fail=false,hang=
 }
 function launch(config){
  const child=spawn(process.execPath,[fixture,config],{detached:true,stdio:['ignore','pipe','pipe']});
+ fixtures.add(child);
  let stdout='',stderr='';child.stdout.on('data',chunk=>{stdout+=chunk;});child.stderr.on('data',chunk=>{stderr+=chunk;});
  const result=new Promise((resolve,reject)=>{child.on('error',reject);child.on('close',(code,signal)=>resolve({code,signal,stdout,stderr}));});
- const timeout=setTimeout(()=>process.kill(-child.pid,'SIGKILL'),10000);result.finally(()=>clearTimeout(timeout));
+ const timeout=setTimeout(()=>killFixture(child),10000);result.finally(()=>{clearTimeout(timeout);fixtures.delete(child);});
  return {child,result};
 }
 const records=async events=>(await readFile(events,'utf8')).trim().split('\n').map(line=>JSON.parse(line));
@@ -78,4 +95,8 @@ try{
   await stopped(await records(state.events));assert.equal(result.code,code,result.stdout+result.stderr);await cleaned(state);
  }
  console.log('Suite runner: bounded parallelism, serial diagnostics, gate, attributed logs and cleanup passed');
-}finally{await rm(root,{recursive:true,force:true});}
+}finally{
+ for(const child of fixtures)killFixture(child);
+ process.removeListener('SIGINT',interrupted);process.removeListener('SIGTERM',terminated);
+ await rm(root,{recursive:true,force:true});
+}
