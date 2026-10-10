@@ -1,6 +1,6 @@
 # Zentrale Werkstattdaten
 
-`data/workshops.json` ist die versionierte Quelle für Werkstattimporte. Sie enthält den aktuellen Bestand: **158 veröffentlichte Kfz-Servicebetriebe einschließlich Fahrzeugaufbereitung und keine Entwürfe**. Der Status jedes Datensatzes ist ausdrücklich gespeichert. Die Schätzung von ungefähr 1.700 Werkstätten stammt vom Nutzer; sie ist kein recherchierter Gesamtbestand und keine Vollständigkeitsbehauptung.
+`data/workshops.json` ist die versionierte Quelle für Werkstattimporte. Sie enthält den aktuellen Bestand: **160 veröffentlichte Kfz-Servicebetriebe einschließlich Fahrzeugaufbereitung und keine Entwürfe**. Der Status jedes Datensatzes ist ausdrücklich gespeichert. Die Schätzung von ungefähr 1.700 Werkstätten stammt vom Nutzer; sie ist kein recherchierter Gesamtbestand und keine Vollständigkeitsbehauptung.
 
 Die bisherigen getrennten Dateien für Profile und Google-Momentaufnahmen wurden in diese Quelle übernommen und entfernt. Namen, Kontakte, Quellen, Prüfzeitpunkte und stabile Riparim-Kennungen bleiben erhalten. Es werden keine Platzhalter für fehlende Werkstätten erzeugt.
 
@@ -170,3 +170,27 @@ Auf Nutzerauftrag werden alle in dieser Recherche eindeutig belegten neuen Betri
 Betriebsangaben stammen aus eigenen Websites, selbst veröffentlichten Betriebsbeiträgen und unabhängigen Verzeichnissen. Jeder neue Betrieb besitzt eine direkt aufgelöste Google-Place-ID mit einzeln geprüftem Telefon-/Namens-/Standortbeleg. Gleichlautende Detailer und abweichende Kontakte wurden nicht automatisch übernommen. Bei Opel Zh-Sh bestätigt der konkrete unabhängige Plus-Code die richtige Filiale trotz gemeinsamem Telefonkontakt; bei Sokoli stimmt trotz Namenszusatz derselbe Kontakt und genaue Plus-Code überein. Luxury Auto Detailings aktuelle eigene Beiträge ersetzen einen abweichenden älteren Verzeichnisstandort.
 
 Alle 29 neuen Profile besitzen kuratierte SQ-/EN-Anzeigen und Google-Zuordnungsmetadaten, aber keine kopierten Google-Geschäftsdaten, Sterne oder Koordinaten. Detailing wird unter der vorhandenen Kategorie Karosserie & Lack mit ausdrücklicher Spezialisierung geführt; mechanische Leistungen werden dafür nicht erfunden. Es ist keine Migration nötig. Das geprüfte Main-Release übernimmt die Einträge über den bestehenden Runtime-Import. `data/import-2026-10-10.json` dokumentiert die 29 Freigaben und die nicht übernommenen Kandidaten.
+
+## Erster täglicher Lauf am 11. Oktober 2026
+
+Auto Enzo Detailing und Shine Detailing Studio ergänzen den versionierten
+Katalog um zwei Google-eindeutig zugeordnete Detailing-Betriebe in Prishtina:
+**158 → 160 Profile, weiterhin keine Entwürfe**. Eigene Betriebsbeiträge in
+einem nachvollziehbaren unabhängigen Spiegel belegen Kontakte, Straßen und
+konkrete Leistungen; Shine hat zusätzlich einen unabhängigen Kontaktbeleg.
+Beide aktiven Google-Einträge wurden im vorgeschriebenen Gmail-Profil über
+den offiziellen Place-ID-Finder und anschließend direkt per ID mit
+absichtlich unpassender Ersatzsuche geprüft. Telefon und Straße stimmen
+überein. Es werden keine Google-Geschäftsdaten oder neuen Bewertungen
+kopiert und keine Inhaberbestätigung behauptet.
+
+17 unabhängig recherchierte Kandidaten und sechs Bestandsdubletten wurden
+gesichtet. Nur zwei Kandidaten erfüllen derzeit alle Freigabebedingungen;
+fehlende eindeutige IDs, fehlender Google-Telefonkontakt und ein ungeklärter
+Standortwechsel führen zur Rückstellung. Der Dry Run ergänzt genau zwei
+IDs und aktualisiert kein bestehendes Profil. DE/SQ/EN-Inhalte und zentrale
+Übersetzungshashes sind geprüft. Das Manifest
+`data/import-2026-10-11-daily.json` unterscheidet den geprüften Quellimport
+von noch zu bestätigender Live-Veröffentlichung. Die ursprünglichen 158
+Profile sind vor dem Import vollständig ohne Profilfeldabweichung mit D1
+abgeglichen und geschützt gesichert worden.

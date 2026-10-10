@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "localDate": "2026-10-11",
+  "timezone": "Europe/Berlin",
+  "checkedAt": "2026-10-10T22:14:48.055Z",
+  "status": "prepared_for_verified_release",
+  "automation": {
+    "id": "riparim-t-glicher-gepr-fter-werkstattimport",
+    "model": "gpt-6.1-sol",
+    "reasoning": "high",
+    "status": "PAUSED",
+    "activationGate": "Successful verified release deployment and complete live profile check"
+  },
+  "before": {
+    "total": 158,
+    "published": 158,
+    "drafts": 0
+  },
+  "after": {
+    "total": 160,
+    "published": 160,
+    "drafts": 0
+  },
+  "importedWorkshopIds": [
+    "auto-enzo-detailing-prishtina",
+    "shine-detailing-studio-prishtina"
+  ],
+  "publishedCountConfirmed": 0,
+  "liveReconciliation": {
+    "canonicalProfiles": 158,
+    "liveProfiles": 158,
+    "accessibleDrafts": 0,
+    "differences": 0,
+    "livePlaceIdMatchesForCandidates": 0,
+    "livePhoneMatchesForCandidates": 0,
+    "liveNameMatchesForCandidates": 0,
+    "retiredIdsChecked": 35
+  },
+  "coverage": {
+    "independentCandidates": 17,
+    "cities": [
+      "Prishtina",
+      "Pejë",
+      "Shtime",
+      "Skenderaj",
+      "Istog",
+      "Klinë",
+      "Rahovec",
+      "Malishevë",
+      "Suharekë",
+      "Mazgit"
+    ],
+    "targetMaximum": 30,
+    "belowTenReason": "Only two candidates completed the independent contact/location/service proof and direct active Google identity check. Other leads remain unconfirmed or conflicting; no minimum quantity overrides evidence."
+  },
+  "profiles": [
+    {
+      "id": "auto-enzo-detailing-prishtina",
+      "placeId": "ChIJe9Xt6_WfVBMRLIa5AID6zyg",
+      "sourceUrls": [
+        "https://www.autoyas.com/XK/Pristina/100237179537543/Auto-Enzo-Detailing"
+      ],
+      "checkedAt": "2026-10-10T22:12:28.577Z",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "operational": true,
+      "uniqueInCatalogue": true,
+      "ownershipVerificationClaimed": false,
+      "method": "Official Google Place ID Finder UI plus direct Maps URL with deliberately incorrect fallback query; native Gmail profile confirmed."
+    },
+    {
+      "id": "shine-detailing-studio-prishtina",
+      "placeId": "ChIJs1UsfN6ZVBMRgsSud-YzyZo",
+      "sourceUrls": [
+        "https://www.autoyas.com/XK/Pristina/982725325082851/Shine-Detailing-Studio",
+        "https://www.gjithebiznesi.com/XK/shine-detailing-studio-049-757-144"
+      ],
+      "checkedAt": "2026-10-10T22:12:28.577Z",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "operational": true,
+      "uniqueInCatalogue": true,
+      "ownershipVerificationClaimed": false,
+      "method": "Official Google Place ID Finder UI plus direct Maps URL with deliberately incorrect fallback query; native Gmail profile confirmed."
+    }
+  ],
+  "deduplication": {
+    "added": 2,
+    "updatedExisting": 0,
+    "duplicatePlaceIds": 0,
+    "existingBusinessesRediscovered": 6,
+    "existingDuplicateIds": [
+      "waxon-auto-detailing-mitrovica",
+      "greensteam-detailing-prishtina",
+      "auto-picasso-prishtina",
+      "shala-detailing-gjakova",
+      "auto-glass-kosovo-fushe-kosove",
+      "titans-auto-repair-prishtina"
+    ],
+    "existingSharedPhoneProfiles": [
+      "eurogoma-gjakova",
+      "eurogoma-mitrovica"
+    ]
+  },
+  "notImported": [
+    {
+      "name": "AutoGermia",
+      "placeId": "ChIJr6I_-CyfVBMRWVeWFnzFmGE",
+      "reason": "Direct ID resolved to the correct name/street, but no business telephone is displayed on Maps; strict telephone comparison incomplete."
+    },
+    {
+      "name": "Auto Xhama Center",
+      "placeId": "ChIJdYdrILGfVBMR8Y5NQKtzx4g",
+      "reason": "Independent current source names km4 while Maps ID shows km5; current exact site continuity remains unresolved."
+    },
+    {
+      "names": [
+        "Auto Detailing Niti",
+        "Auto Servis Idrizi",
+        "Auto Servis Fulga",
+        "Auto Servis XILI",
+        "Mercedes Benz Viki&Laura",
+        "Auto servis Durguti"
+      ],
+      "reason": "Official finder did not offer a unique corresponding entry in the attempted searches. No substitute business was accepted."
+    },
+    {
+      "names": [
+        "Auto Servis Gjinovci",
+        "Auto Larje Soni",
+        "Autoservis Lordi",
+        "Auto Servis Isa",
+        "Auto servis Beka",
+        "Auto Service Vali",
+        "Autoservis Faredini-A"
+      ],
+      "reason": "Independent leads retained for a later complete Google/contact/site check; not yet publication candidates."
+    }
+  ],
+  "googleVerification": {
+    "serverPlacesRequests": 0,
+    "userProjectApiRequests": 0,
+    "interactiveOfficialFinder": true,
+    "directMapsIdChecks": 3,
+    "persistedGoogleBusinessFields": [],
+    "numericRatingsImported": 0
+  },
+  "catalogueImport": {
+    "dryRun": {
+      "mode": "dry-run",
+      "added": [
+        "auto-enzo-detailing-prishtina",
+        "shine-detailing-studio-prishtina"
+      ],
+      "updated": [],
+      "deduplicated": []
+    },
+    "validatedWrite": {
+      "mode": "write",
+      "added": [
+        "auto-enzo-detailing-prishtina",
+        "shine-detailing-studio-prishtina"
+      ],
+      "updated": [],
+      "deduplicated": []
+    },
+    "translations": {
+      "locales": [
+        "de",
+        "sq",
+        "en"
+      ],
+      "centralHashContract": "workshopTranslationSourceHash",
+      "validated": true
+    }
+  },
+  "backup": {
+    "protectedLocal": true,
+    "privateUserTables": false,
+    "tables": [
+      "workshops",
+      "workshop_google_places",
+      "workshop_google_ratings",
+      "catalog_state"
+    ],
+    "restoreVerified": true,
+    "retainedOutsideGit": true
+  },
+  "resourceDiagnosis": {
+    "activeReleaseBefore": "v1.11.1",
+    "plan": "Workers Free",
+    "cpuLimitMs": 10,
+    "confirmedFailure": "exceededCpu / HTTP503 Error1102",
+    "costsAuthorized": false,
+    "solution": "Static release documents with live status/revision guards, data-free shells for newer admin changes and external D1 release import"
+  },
+  "release": {
+    "pr": null,
+    "tag": null,
+    "deployed": false
+  },
+  "liveVerification": {
+    "complete": false,
+    "reason": "Awaiting verified main release"
+  },
+  "errors": [
+    {
+      "stage": "preflight",
+      "message": "Repeated HTTP503/Error1102 on catalogue/API and English profiles before correction."
+    },
+    {
+      "stage": "access",
+      "message": "Cloudflare detail-log and billing API calls returned authentication error10000; Free plan was confirmed through the authorized browser UI."
+    },
+    {
+      "stage": "local-tools",
+      "message": "Go initially absent; official pinned Go1.27.1 installed in ignored task runtime and tests rerun."
+    },
+    {
+      "stage": "browser",
+      "message": "Native pipe closed during Maps navigation; CUA runtime reset restored access."
+    }
+  ]
+}

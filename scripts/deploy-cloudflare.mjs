@@ -1,3 +1,4 @@
+import {applyCatalogueRelease} from "./apply-catalogue-release.mjs";
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { appendFile, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
@@ -14,7 +15,7 @@ function runCommand(command, args, options) {
   return result.stdout;
 }
 
-export async function deployCloudflare({ env = process.env, root = fileURLToPath(new URL("../", import.meta.url)), run = runCommand, request = fetch } = {}) {
+export async function deployCloudflare({ env = process.env, root = fileURLToPath(new URL("../", import.meta.url)), run = runCommand, request = fetch, importCatalogue=applyCatalogueRelease } = {}) {
   const options = { cwd: root, env: { ...env, CI: "true", WRANGLER_SEND_METRICS: "false", WRANGLER_WRITE_LOGS: "false" } };
   delete options.env.CLOUDFLARE_WORKER_SECRETS;
   delete options.env.GITHUB_TOKEN;
@@ -81,6 +82,9 @@ export async function deployCloudflare({ env = process.env, root = fileURLToPath
     if (await newerPublishedRelease()) return { deployed: false, reason: "superseded" };
     try { run(process.execPath, [cli, "d1", "migrations", "apply", "DB", "--remote", "--config", sourceConfig], options); }
     catch { throw new Error("Cloudflare D1 migrations failed; the Worker was not deployed."); }
+    if (await newerPublishedRelease()) return { deployed: false, reason: "superseded" };
+    try { await importCatalogue({planPath:join(extracted,"dist/catalogue-import.json"),root,commit,cli,config:sourceConfig,directory:extracted,run,options}); }
+    catch { throw new Error("Cloudflare catalogue import failed; the Worker was not deployed. Retry the same published release."); }
     if (await newerPublishedRelease()) return { deployed: false, reason: "superseded" };
     try { run(process.execPath, deployArgs, options); }
     catch { throw new Error("Cloudflare Worker deployment failed. Retry the same published release."); }

@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-10T20:59:53.955Z",
+  "updatedAt": "2026-10-10T22:13:27.726Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 158,
+    "published": 160,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -13,7 +13,7 @@
   "googleImport": {
     "status": "completed",
     "reason": "Alle 158 veröffentlichten Kfz-Servicebetriebe einschließlich Fahrzeugaufbereitung besitzen einzeln bestätigte Google-Place-IDs. 29 neue Betriebe wurden anhand unabhängiger Kontakt-, Standort- und Leistungsbelege ergänzt; keine offenen Entwürfe.",
-    "matchedPlaceIds": 158,
+    "matchedPlaceIds": 160,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -881,6 +881,52 @@
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
+        }
+      }
+    },
+    {
+      "id": "auto-enzo-detailing-prishtina",
+      "name": "Auto Enzo Detailing",
+      "city": "Prishtina",
+      "address": "Ferid Curri, Prishtina",
+      "phone": "+38345524633",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Karosserie & Lack"
+      ],
+      "serviceDetails": [
+        "Fahrzeug- und Lederreinigung",
+        "Polieren und Keramikversiegelung",
+        "Scheinwerferaufbereitung",
+        "Folienentfernung und PPF-Folierung"
+      ],
+      "languages": [],
+      "specialty": "Detailing · Polieren · Lackschutz",
+      "description": "Detailing und Lackschutz in Prishtina laut veröffentlichten Betriebsbeiträgen.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.autoyas.com/XK/Pristina/100237179537543/Auto-Enzo-Detailing",
+          "title": "Betriebsbeiträge über AutoYas: Kontakt und Leistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T22:12:28.577Z",
+      "google": {
+        "placeId": "ChIJe9Xt6_WfVBMRLIa5AID6zyg",
+        "matchedAt": "2026-10-10T22:12:28.577Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.autoyas.com/XK/Pristina/100237179537543/Auto-Enzo-Detailing"
+          ],
+          "note": "Name, unabhängig veröffentlichtes Telefon und Straße mit aktivem Maps-Eintrag abgeglichen. Place ID über offiziellen Finder gelesen und mit absichtlich unpassender Ersatzsuche direkt rückgeprüft. Keine Inhaberschaft behauptet."
         }
       }
     },
@@ -7805,6 +7851,58 @@
             "https://shaladetailing.com/"
           ],
           "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+        }
+      }
+    },
+    {
+      "id": "shine-detailing-studio-prishtina",
+      "name": "Shine Detailing Studio",
+      "city": "Prishtina",
+      "address": "Skënder Matallari Nr. 25, Matiçan, Prishtina",
+      "phone": "+38349757144",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Karosserie & Lack"
+      ],
+      "serviceDetails": [
+        "Innenreinigung",
+        "Polieren",
+        "Keramikschutz für Lack und Glas",
+        "Schutzfolien für Scheinwerfer"
+      ],
+      "languages": [],
+      "specialty": "Detailing · Polieren · Keramikschutz",
+      "description": "Fahrzeugaufbereitung in Matiçan mit Innenreinigung, Polieren und Keramikschutz laut eigenen Betriebsbeiträgen.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.autoyas.com/XK/Pristina/982725325082851/Shine-Detailing-Studio",
+          "title": "Betriebsbeiträge über AutoYas: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.gjithebiznesi.com/XK/shine-detailing-studio-049-757-144",
+          "title": "Unabhängiges Verzeichnis: Kontakt und Straße",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T22:12:28.577Z",
+      "google": {
+        "placeId": "ChIJs1UsfN6ZVBMRgsSud-YzyZo",
+        "matchedAt": "2026-10-10T22:12:28.577Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.autoyas.com/XK/Pristina/982725325082851/Shine-Detailing-Studio",
+            "https://www.gjithebiznesi.com/XK/shine-detailing-studio-049-757-144"
+          ],
+          "note": "Name, unabhängig veröffentlichtes Telefon und Straße mit aktivem Maps-Eintrag abgeglichen. Place ID über offiziellen Finder gelesen und mit absichtlich unpassender Ersatzsuche direkt rückgeprüft. Keine Inhaberschaft behauptet."
         }
       }
     },
