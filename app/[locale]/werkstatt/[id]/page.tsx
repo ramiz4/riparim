@@ -1,3 +1,5 @@
+import PublicWorkshopShell from "@/components/public-workshop-shell";
+import {publicReleaseRender,publicReleaseShell} from "@/lib/public-release";
 import {workshopDisplayById} from "@/lib/workshop-display.server";
 import {I18nMessages} from "@/lib/i18n/client";
 import {getMessages,createTranslator} from "@/lib/i18n/messages";
@@ -15,6 +17,7 @@ import WorkshopProfile from "./profile";
 export const dynamic="force-dynamic";
 export async function generateMetadata({params}:{params:Promise<{id:string;locale:string}>}){
  const {id,locale:value}=await params,locale=isLocale(value)?value:"de",t=createTranslator(getMessages(locale,["public"]));
+ if(publicReleaseShell())return publicMetadata(locale,`/werkstatt/${id}`,siteOrigin(),{title:createTranslator(getMessages(locale,["metadata"]))("metadata.title"),description:createTranslator(getMessages(locale,["metadata"]))("metadata.description")});
  const unavailable={title:t("public.notFoundTitle"),robots:{index:false,follow:false},alternates:null};
  // Page-level notFound keeps HTTP404; streamed metadata signals can become HTTP200.
  if(!/^[a-z0-9][a-z0-9-]{2,80}$/.test(id))return unavailable;
@@ -24,6 +27,7 @@ export async function generateMetadata({params}:{params:Promise<{id:string;local
 }
 export default async function WorkshopPage({params,searchParams=Promise.resolve({})}:{params:Promise<{id:string;locale:string}>;searchParams?:Promise<Record<string,string|string[]|undefined>>}){
  const {id,locale:value}=await params,locale=isLocale(value)?value:"de";if(!/^[a-z0-9][a-z0-9-]{2,80}$/.test(id))notFound();
+ if(publicReleaseShell())return <I18nMessages messages={getMessages(locale,["public","customer"])}><PublicWorkshopShell id={id}/></I18nMessages>;
  const [directory,user]=await Promise.all([listWorkshops(),getAppUser()]);
  const workshop=directory.find(w=>w.id===id);if(!workshop)notFound();
  const displayById=await workshopDisplayById([workshop],locale);
@@ -32,5 +36,5 @@ export default async function WorkshopPage({params,searchParams=Promise.resolve(
  let reviews:Review[]=[],reviewError="";
  try{const result=await storage().db.prepare("SELECT v.display_name,v.vehicle,v.service,v.date,v.rating,v.review FROM visits v JOIN workshops w ON w.id=v.workshop AND w.status='published' WHERE v.workshop=? AND v.status='published' ORDER BY v.created_at DESC LIMIT 100").bind(id).all<Review>();reviews=result.results;}
  catch(e){console.error("profile-reviews",e);reviewError="unavailable";}
- return <I18nMessages messages={getMessages(locale,["public","customer"])}><WorkshopProfile display={displayById[workshop.id]} initialSearchHref={initialSearchHref} workshop={workshop} directory={directory} reviews={reviews} reviewError={reviewError} signedIn={!!user} account={user?{email:user.email,displayName:user.displayName,provider:user.provider}:null} isAdmin={!!admin?.isModerator}/></I18nMessages>;
+ return <I18nMessages messages={getMessages(locale,["public","customer"])}><WorkshopProfile publicSnapshot={publicReleaseRender()} display={displayById[workshop.id]} initialSearchHref={initialSearchHref} workshop={workshop} directory={publicReleaseRender()?[workshop]:directory} reviews={reviews} reviewError={reviewError} signedIn={!!user} account={user?{email:user.email,displayName:user.displayName,provider:user.provider}:null} isAdmin={!!admin?.isModerator}/></I18nMessages>;
 }

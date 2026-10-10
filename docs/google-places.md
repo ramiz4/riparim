@@ -1,6 +1,6 @@
 # Google-Bewertungen für Riparim
 
-Die Google-Schlüssel sind in der gehosteten Laufzeit eingerichtet. Sterne und Anzahl werden ausschließlich aktuell von Google geladen; alte Momentaufnahmen werden nicht mehr angezeigt oder zur Sortierung verwendet. Alle **158 veröffentlichten Kfz-Servicebetriebe einschließlich Fahrzeugaufbereitung** besitzen eine eindeutig bestätigte Place ID. Die Zuordnungen werden einzeln anhand offizieller Karten, eigener Betriebswebsites oder übereinstimmender unabhängiger Kontakt-/Standortnachweise geprüft. Am 5. Oktober kamen 32 bestätigte IDs hinzu; zwei bestehende Identitäten konnten nach Korrektur überholter Verzeichnisstandorte veröffentlicht werden. `google.verification` dokumentiert Methode, Beleglinks und eigene Prüfnotiz. Auto Electronics gehört zu den 27 auf Nutzerauftrag entfernten, nicht eindeutig zugeordneten Entwürfen. Die sechs in `data/workshop-scope.json` begründeten fachlichen Ausschlüsse, der unabhängig als geschlossen belegte Opel-Rakovica-Betrieb und das alte Reno-Südprofil wurden nach abschließender Prüfung auf Nutzerauftrag entfernt. Der belegte Reno-Nordstandort wird als neues öffentliches Profil geführt. Die tatsächliche Anzeige hängt zusätzlich von der verfügbaren Google-Anbindung im Browser ab.
+Die Google-Schlüssel sind in der gehosteten Laufzeit eingerichtet. Sterne und Anzahl werden ausschließlich aktuell von Google geladen; alte Momentaufnahmen werden nicht mehr angezeigt oder zur Sortierung verwendet. Alle **160 veröffentlichten Kfz-Servicebetriebe einschließlich Fahrzeugaufbereitung** besitzen eine eindeutig bestätigte Place ID. Die Zuordnungen werden einzeln anhand offizieller Karten, eigener Betriebswebsites oder übereinstimmender unabhängiger Kontakt-/Standortnachweise geprüft. Am 5. Oktober kamen 32 bestätigte IDs hinzu; zwei bestehende Identitäten konnten nach Korrektur überholter Verzeichnisstandorte veröffentlicht werden. `google.verification` dokumentiert Methode, Beleglinks und eigene Prüfnotiz. Auto Electronics gehört zu den 27 auf Nutzerauftrag entfernten, nicht eindeutig zugeordneten Entwürfen. Die sechs in `data/workshop-scope.json` begründeten fachlichen Ausschlüsse, der unabhängig als geschlossen belegte Opel-Rakovica-Betrieb und das alte Reno-Südprofil wurden nach abschließender Prüfung auf Nutzerauftrag entfernt. Der belegte Reno-Nordstandort wird als neues öffentliches Profil geführt. Die tatsächliche Anzeige hängt zusätzlich von der verfügbaren Google-Anbindung im Browser ab.
 
 Die zentrale Importquelle ist `data/workshops.json`; sie enthält Profile, stabile Riparim-IDs, Google-Zuordnungen und belegte Momentaufnahmen getrennt. Datenformat, Bestandsprüfung und Importbefehle stehen in `docs/workshop-data.md`. API-Inhalte werden nicht dauerhaft in Git gespeichert; ein Google-Bulkexport benötigt passende Datenrechte.
 
@@ -70,3 +70,27 @@ Der Bestand nach dem Abschluss am 5. Oktober umfasste **129 eindeutig Google-zug
 ## Erweiterung am 10. Oktober 2026
 
 29 neue Kfz-Servicebetriebe, darunter zehn Betriebe mit Detailing oder Lackaufbereitung, erweitern den Katalog auf 158 öffentliche Profile. Alle neuen Place IDs wurden über den offiziellen Maps-JavaScript-SDK direkt mit Place Details aufgelöst und einzeln mit unabhängig veröffentlichtem Kontakt, Namen und Standort abgeglichen. Es gab 45 Browser-Textsuchabfragen und 29 direkte ID-Prüfungen, aber keine serverseitigen Places-Abfragen. Google-Bewertungen, Adressen, Telefonnummern und Koordinaten wurden nicht in Git oder D1 kopiert. Neue Profile erhalten keine Google-Momentaufnahme. Die Prüfung belegt die Geschäftszuordnung, keinen Inhaber-Verifizierungsstatus bei Google. Eigene Belege und Prüfergebnisse stehen in `data/import-2026-10-10.json`.
+
+## Erster täglicher Lauf am 11. Oktober 2026
+
+Auto Enzo Detailing und Shine Detailing Studio ergänzen den versionierten
+Katalog um zwei Google-eindeutig zugeordnete Detailing-Betriebe in Prishtina:
+**158 → 160 Profile, weiterhin keine Entwürfe**. Eigene Betriebsbeiträge in
+einem nachvollziehbaren unabhängigen Spiegel belegen Kontakte, Straßen und
+konkrete Leistungen; Shine hat zusätzlich einen unabhängigen Kontaktbeleg.
+Beide aktiven Google-Einträge wurden im vorgeschriebenen Gmail-Profil über
+den offiziellen Place-ID-Finder und anschließend direkt per ID mit
+absichtlich unpassender Ersatzsuche geprüft. Telefon und Straße stimmen
+überein. Es werden keine Google-Geschäftsdaten oder neuen Bewertungen
+kopiert und keine Inhaberbestätigung behauptet.
+
+17 unabhängig recherchierte Kandidaten und sechs Bestandsdubletten wurden
+gesichtet. Nur zwei Kandidaten erfüllen derzeit alle Freigabebedingungen;
+fehlende eindeutige IDs, fehlender Google-Telefonkontakt und ein ungeklärter
+Standortwechsel führen zur Rückstellung. Der Dry Run ergänzt genau zwei
+IDs und aktualisiert kein bestehendes Profil. DE/SQ/EN-Inhalte und zentrale
+Übersetzungshashes sind geprüft. Das Manifest
+`data/import-2026-10-11-daily.json` unterscheidet den geprüften Quellimport
+von noch zu bestätigender Live-Veröffentlichung. Die ursprünglichen 158
+Profile sind vor dem Import vollständig ohne Profilfeldabweichung mit D1
+abgeglichen und geschützt gesichert worden.

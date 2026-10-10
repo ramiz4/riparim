@@ -129,3 +129,27 @@ Sprache und identische Requestbytes einschließlich historischer Klartextteile;
 sie benötigen keine Datenübernahme.
 Der Supabase-SMTP-Quellvertrag bietet HTML ohne eigenen MIME-Klartextteil; dieser
 dokumentierte Providerumfang bleibt bei der Empfangsabnahme sichtbar.
+
+## Öffentliche statische Katalog-Releases
+
+Der Cloudflare-Build rendert Katalog und veröffentlichte Profile in DE/SQ/EN
+mit einem isolierten lokalen workerd. Dabei werden ausschließlich geprüfte
+Canonicaldaten verwendet; Runtimekonten und Bewertungen gelangen nicht in
+die HTML-Artefakte. Für geänderte Liveprofile liegen datenfreie Shells bei.
+Der kleine öffentliche Requestpfad prüft Status/Revision gegen D1, bevor er
+ein Asset ausliefert. Private Seiten und RSC bleiben im bestehenden Worker.
+
+Das geprüfte Archiv enthält außerdem `dist/catalogue-import.json`. Der
+Deploymentjob vergleicht den Plan mit derselben zentralen Statementfactory
+und der Canonicalquelle des Releasecommits. Nach D1-Migrationen werden die
+begrenzten, revisionsgeschützten Upserts extern ausgeführt, anschließend
+kommt der Abschlussmarker und erst danach der Workerupload. Ein Fehler
+unterdrückt den Upload; derselbe veröffentlichte Release bleibt wiederholbar.
+Das verhindert, dass der erste HTTP-Aufruf den gesamten Katalog unter dem
+Workers-Free-CPU-Limit importieren muss. Neuere Adminrevisionen, bestehende
+Kundenverknüpfungen und Entfernungsmarker bleiben geschützt. Es gibt keine
+neue Migration oder zusätzliche kostenpflichtige Ressource.
+
+Bei Katalogänderungen vor dem Merge eine geschützte lokale Sicherung der
+betroffenen Katalogtabellen samt isolierter Wiederherstellungsprüfung
+erhalten. Die tägliche Routine folgt [dem Laufvertrag](daily-workshop-import.md).
