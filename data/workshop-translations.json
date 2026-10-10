@@ -168,6 +168,60 @@
       }
     },
     {
+      "id": "auto-detailing-besi-prizren",
+      "sourceHash": "bcb1348b609ee4444e64dee2d1a15493210c8e7bbe729acc905fe5ac6a8ae819",
+      "sq": {
+        "specialty": "Servis automjetesh",
+        "description": "Mirëmbajtje dhe riparim sipas direktorisë publike. Sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing",
+        "description": "Maintenance and repair according to a public directory. Confirm services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair; confirm the specific scope directly."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "auto-detailing-meti-mitrovica",
+      "sourceHash": "67848dce97269590f5be31b2be2ab4d703ddc79361b437d2e9f44f5ad9b214bb",
+      "sq": {
+        "specialty": "Detailing · Pastrim · Mbrojtje boje",
+        "description": "Biznesi publikon detailing dhe mbrojtje boje. Dakordoni trajtimin dhe terminin drejtpërdrejt.",
+        "serviceDetails": [
+          "Pastrim i brendshëm dhe detailing automjetesh",
+          "Polirim dhe veshje qeramike"
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Detailing · Cleaning · Paint protection",
+        "description": "The business lists vehicle detailing and paint protection. Arrange the treatment and appointment directly.",
+        "serviceDetails": [
+          "Interior cleaning and vehicle detailing",
+          "Polishing and ceramic coating"
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
       "id": "auto-diagnostika-prishtina",
       "sourceHash": "32cd7dabbab696f1c905541eb219aa2107c2a141ae23e6f83999585e4e02a56d",
       "sq": {
@@ -222,6 +276,32 @@
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category",
           "Contact, location and passenger-car service cross-check dated 5 October 2026"
+        ]
+      }
+    },
+    {
+      "id": "auto-elektricist-xhaviti-gjakova",
+      "sourceHash": "f1e93639ed94d80c49d930dab28085c7700aed77a0caeef3414dc56f0ceb54bf",
+      "sq": {
+        "specialty": "Servis automjetesh",
+        "description": "Mirëmbajtje dhe riparim sipas direktorisë publike. Sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing",
+        "description": "Maintenance and repair according to a public directory. Confirm services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair; confirm the specific scope directly."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services"
         ]
       }
     },
@@ -300,6 +380,32 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Public directory: name, contact and vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "auto-elektro-servis-a-plus-prizren",
+      "sourceHash": "4837d310d4947d15410f50c2db971f5e6e473d88a1b9309b9efed0ecd05f744a",
+      "sq": {
+        "specialty": "Servis automjetesh",
+        "description": "Mirëmbajtje dhe riparim sipas direktorisë publike. Sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing",
+        "description": "Maintenance and repair according to a public directory. Confirm services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair; confirm the specific scope directly."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services"
         ]
       }
     },
@@ -424,6 +530,34 @@
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category",
           "Contact, location and passenger-car service cross-check dated 5 October 2026"
+        ]
+      }
+    },
+    {
+      "id": "auto-glass-kosovo-fushe-kosove",
+      "sourceHash": "09daa7cb58be0deebd99ede4e66c541414ef69abed3bb5c67e82d664d8606566",
+      "sq": {
+        "specialty": "Xhama automjetesh · Montim · Riparim",
+        "description": "Auto Glass Kosovo në Fushë Kosovë ofron montim dhe riparim xhamash automjetesh sipas faqes së vet.",
+        "serviceDetails": [
+          "Montim dhe riparim xhamash automjetesh"
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet",
+          "Faqja e biznesit: xhama automjetesh dhe vendndodhja"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle glass · Installation · Repair",
+        "description": "Auto Glass Kosovo in Fushë Kosovë offers vehicle glass installation and repair according to its own website.",
+        "serviceDetails": [
+          "Vehicle glass installation and repair"
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services",
+          "Business website: vehicle glass and location"
         ]
       }
     },
@@ -738,6 +872,62 @@
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category",
           "Contact, location and passenger-car service cross-check dated 5 October 2026"
+        ]
+      }
+    },
+    {
+      "id": "auto-ngjyrosje-naseri-suhareke",
+      "sourceHash": "051260b6f57d204d5230502519b81072f2145dccf0d46e30f37b54dfc851e1eb",
+      "sq": {
+        "specialty": "Lyerje · Riparim pas aksidentit · Polirim",
+        "description": "Naseri në Greikoc pranë Suharekë publikon riparim pas aksidentit, lyerje, restaurim boje dhe polirim në faqen e vet.",
+        "serviceDetails": [
+          "Riparim pas aksidentit dhe lyerje",
+          "Korrigjim boje dhe polirim"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e biznesit: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Painting · Collision repair · Polishing",
+        "description": "Naseri in Greikoc near Suharekë lists collision repair, painting, paint restoration and polishing on its website.",
+        "serviceDetails": [
+          "Collision repair and painting",
+          "Paint correction and polishing"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Business website: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "auto-picasso-prishtina",
+      "sourceHash": "936ad343435a26edcad3019729ab883e29bf2f73c273005db8a1dddb2ce32560",
+      "sq": {
+        "specialty": "Riparim pas aksidentit · Detailing",
+        "description": "Auto Picasso në Prishtina përmend riparim pas aksidentit, detailing të brendshëm e të jashtëm, polirim dhe veshje qeramike në faqen e vet.",
+        "serviceDetails": [
+          "Riparim pas aksidentit",
+          "Detailing i brendshëm dhe i jashtëm, polirim dhe veshje qeramike"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e biznesit: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Collision repair · Detailing",
+        "description": "Auto Picasso in Prishtina lists collision repair, interior and exterior detailing, polishing and ceramic coating on its website.",
+        "serviceDetails": [
+          "Collision repair",
+          "Interior and exterior detailing, polishing and ceramic coating"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Business website: contact, location and services"
         ]
       }
     },
@@ -1292,6 +1482,36 @@
       }
     },
     {
+      "id": "auto-servis-blerti-podujeve",
+      "sourceHash": "986f1a48185c9abf502c78a08cbfd3d1571ec818f8d6d60244cc93ce147e44f0",
+      "sq": {
+        "specialty": "Mekanikë · Elektrikë · Diagnostikim",
+        "description": "BLERTI në Podujevë publikon mirëmbajtje, riparime mekanike, elektrikë dhe diagnostikim automjetesh në faqen e vet.",
+        "serviceDetails": [
+          "Servis vaji dhe filtrash",
+          "Punime motori, transmisioni dhe shasie",
+          "Elektrikë dhe diagnostikim automjetesh"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e biznesit: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical repairs · Electrics · Diagnostics",
+        "description": "BLERTI in Podujevë lists maintenance, mechanical repairs, vehicle electrics and diagnostics on its website.",
+        "serviceDetails": [
+          "Oil and filter servicing",
+          "Engine, transmission and suspension work",
+          "Vehicle electrics and diagnostics"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Business website: contact, location and services"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-bmw-balia-prishtina",
       "sourceHash": "18decb4bb083fd6500561fe7378b3b29673258aedf3c72547003156ea969f060",
       "sq": {
@@ -1454,6 +1674,58 @@
         "phoneNote": "The directory lists 049 255 770; the source uses an older international dialling code",
         "sourceTitles": [
           "Public directory: name, contact and vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-edi-fushe-kosove",
+      "sourceHash": "1a43d424ac39cc810b649bea7a10ce5509da37f4c92a99dc455d1b829aefe89f",
+      "sq": {
+        "specialty": "Servis automjetesh",
+        "description": "Mirëmbajtje dhe riparim sipas direktorisë publike. Sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing",
+        "description": "Maintenance and repair according to a public directory. Confirm services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair; confirm the specific scope directly."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-enisi-obiliq",
+      "sourceHash": "f0a3fad712d5f2572e11ba3d7c3b1d610d7157a982e4e3eaf2a91eefd44d91da",
+      "sq": {
+        "specialty": "Servis automjetesh",
+        "description": "Mirëmbajtje dhe riparim sipas direktorisë publike. Sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing",
+        "description": "Maintenance and repair according to a public directory. Confirm services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair; confirm the specific scope directly."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services"
         ]
       }
     },
@@ -1684,6 +1956,32 @@
       }
     },
     {
+      "id": "auto-servis-lirimi-podujeve",
+      "sourceHash": "e246ce7d3fc78a4192448142ea460622a7d31cef417f3e779cf4608d57b44caf",
+      "sq": {
+        "specialty": "Servis automjetesh",
+        "description": "Mirëmbajtje dhe riparim sipas direktorisë publike. Sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing",
+        "description": "Maintenance and repair according to a public directory. Confirm services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair; confirm the specific scope directly."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-lumi-m-gjakova",
       "sourceHash": "8c99634a77efb7b45d1862858098846de1475eb4e757a1c4e908bfdf9ca551fa",
       "sq": {
@@ -1744,6 +2042,36 @@
       }
     },
     {
+      "id": "auto-servis-megi-drenas",
+      "sourceHash": "49d1747fb70d65825fe9ae437c001f862a13698149a7e7b238e2a79ba723c7bc",
+      "sq": {
+        "specialty": "Mirëmbajtje · Diagnostikim",
+        "description": "MEGI në Drenas dokumenton ndërrim vaji e filtrash dhe elektronikë automjetesh në publikimet e veta.",
+        "serviceDetails": [
+          "Ndërrim vaji dhe filtrash",
+          "Diagnostikim dhe elektronikë automjetesh"
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet",
+          "Direktori e pavarur: adresa e servisit"
+        ]
+      },
+      "en": {
+        "specialty": "Maintenance · Diagnostics",
+        "description": "MEGI in Drenas documents oil and filter servicing and vehicle electronics in its own business posts.",
+        "serviceDetails": [
+          "Oil and filter changes",
+          "Diagnostics and vehicle electronics"
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services",
+          "Independent directory: workshop address"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-mercedes-benz-vedati-prishtina",
       "sourceHash": "fd0a49ded11d3dc37a735ed5dcc1475900da717575403fbb05cdb1e83a5926af",
       "sq": {
@@ -1776,6 +2104,58 @@
       }
     },
     {
+      "id": "auto-servis-meti-rahovec",
+      "sourceHash": "f7b475043956f5de11808bc116316267158832a2f2e417f084be40f33522c35c",
+      "sq": {
+        "specialty": "Servis automjetesh",
+        "description": "Mirëmbajtje dhe riparim sipas direktorisë publike. Sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing",
+        "description": "Maintenance and repair according to a public directory. Confirm services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair; confirm the specific scope directly."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-montimi-rahovec",
+      "sourceHash": "21bcf78ef08530b4d76d30ee82a2f93bfc106bfb6797cf6f16cda84610d36627",
+      "sq": {
+        "specialty": "Servis automjetesh",
+        "description": "Mirëmbajtje dhe riparim sipas direktorisë publike. Sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing",
+        "description": "Maintenance and repair according to a public directory. Confirm services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair; confirm the specific scope directly."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-muriqi-prizren",
       "sourceHash": "2f8aeabf4165e2290860e8a3cc2e79aa39a5c821a305412d8cd7af94f5aa2ec3",
       "sq": {
@@ -1798,6 +2178,58 @@
         "phoneNote": "Public directory contact (Cybo); not confirmed by the business",
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-nazi-drenas",
+      "sourceHash": "8bbef3d3a03ffe7aca86ed638e5022bb57002e85b1f08f567e78fec8cadc9236",
+      "sq": {
+        "specialty": "Servis automjetesh",
+        "description": "Mirëmbajtje dhe riparim sipas direktorisë publike. Sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing",
+        "description": "Maintenance and repair according to a public directory. Confirm services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair; confirm the specific scope directly."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-nexhi-lipjan",
+      "sourceHash": "61978ff7af3975dc1637427c46880f454a8b11615ce392b33378e61ab3267b4a",
+      "sq": {
+        "specialty": "Servis automjetesh",
+        "description": "Mirëmbajtje dhe riparim sipas direktorisë publike. Sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing",
+        "description": "Maintenance and repair according to a public directory. Confirm services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair; confirm the specific scope directly."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services"
         ]
       }
     },
@@ -1826,6 +2258,32 @@
         "sourceTitles": [
           "Public directory: name, contact and vehicle service category",
           "Directory: name, phone and Plus Code address checked again"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-pirqi-vushtrri",
+      "sourceHash": "ee0778eaf2f6b2ee06c337b850056930170fee459ad434e287beee89b88d1489",
+      "sq": {
+        "specialty": "Servis automjetesh",
+        "description": "Mirëmbajtje dhe riparim sipas direktorisë publike. Sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing",
+        "description": "Maintenance and repair according to a public directory. Confirm services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair; confirm the specific scope directly."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services"
         ]
       }
     },
@@ -1940,6 +2398,32 @@
       }
     },
     {
+      "id": "auto-servis-univerzal-lipjan",
+      "sourceHash": "ba0faf3b4d904a827d7235dee1455d2a83f2241ff8b1f667260d5ea8975f2123",
+      "sq": {
+        "specialty": "Servis automjetesh",
+        "description": "Mirëmbajtje dhe riparim sipas direktorisë publike. Sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing",
+        "description": "Maintenance and repair according to a public directory. Confirm services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair; confirm the specific scope directly."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-visari-prizren",
       "sourceHash": "120f8af3e60491c06c29ab152ba78e2cf787b3b9cd370bfe0d7edc84118eb72f",
       "sq": {
@@ -1964,6 +2448,32 @@
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category",
           "Contact, location and passenger-car service cross-check dated 5 October 2026"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-visco-prizren",
+      "sourceHash": "62d3e5f838ecbbe38631af780b1c70d3f9bf2c6dd79acd3720c9527e88f6d200",
+      "sq": {
+        "specialty": "Servis automjetesh",
+        "description": "Mirëmbajtje dhe riparim sipas direktorisë publike. Sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing",
+        "description": "Maintenance and repair according to a public directory. Confirm services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair; confirm the specific scope directly."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services"
         ]
       }
     },
@@ -3068,6 +3578,36 @@
       }
     },
     {
+      "id": "greensteam-detailing-prishtina",
+      "sourceHash": "8a6745ebe263f6e9199a56a8065d02bf510f1719c25903e67191b4e5258a1d51",
+      "sq": {
+        "specialty": "Detailing · Pastrim me avull · Mbrojtje boje",
+        "description": "GreenSteam pranë Prishtina publikon detailing me avull, polirim, veshje qeramike dhe folje mbrojtëse për bojën.",
+        "serviceDetails": [
+          "Detailing i brendshëm dhe i jashtëm me avull",
+          "Polirim, veshje qeramike dhe folje mbrojtëse (PPF)"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e biznesit: kontakti, vendndodhja dhe shërbimet",
+          "Faqja e biznesit: detailing dhe mbrojtje boje"
+        ]
+      },
+      "en": {
+        "specialty": "Detailing · Steam cleaning · Paint protection",
+        "description": "GreenSteam near Prishtina lists steam detailing, polishing, ceramic coating and paint protection film.",
+        "serviceDetails": [
+          "Interior and exterior steam detailing",
+          "Polishing, ceramic coating and paint protection film (PPF)"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Business website: contact, location and services",
+          "Business website: detailing and paint protection"
+        ]
+      }
+    },
+    {
       "id": "kio-garage-prizren",
       "sourceHash": "a424f9610e6403a309d90359e597f99d4c7fbf6dd95edb42eece087f05dad4c9",
       "sq": {
@@ -3118,6 +3658,62 @@
         "phoneNote": "Public directory contact (Gjirafa.biz); not confirmed by the business",
         "sourceTitles": [
           "Gjirafa.biz: published name · address · telephone · vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "lipjani-coding-lipjan",
+      "sourceHash": "40ea3a8e8e95f6c22c1a46bf46818709f4afcb17026a177615215d749ff03803",
+      "sq": {
+        "specialty": "Kodim automjetesh · CarPlay · Navigacion",
+        "description": "Lipjani Coding në Lipjan publikon kodim automjetesh, aktivizim CarPlay dhe përshtatje navigacioni. Sqaroni drejtpërdrejt përputhshmërinë e modelit.",
+        "serviceDetails": [
+          "Kodim automjetesh dhe aktivizim CarPlay",
+          "Përditësim navigacioni dhe ndryshim rajoni"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e biznesit: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle coding · CarPlay · Navigation",
+        "description": "Lipjani Coding in Lipjan lists vehicle coding, CarPlay activation and navigation adjustments. Confirm model compatibility directly.",
+        "serviceDetails": [
+          "Vehicle coding and CarPlay activation",
+          "Navigation updates and region conversion"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Business website: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "luxury-auto-detailing-gjilan",
+      "sourceHash": "3233953c3e3c366fb514fe81f7189f4ab2bb711cac0985bcf456784b018ad18c",
+      "sq": {
+        "specialty": "Detailing · Pastrim · Mbrojtje boje",
+        "description": "Biznesi publikon detailing dhe mbrojtje boje. Dakordoni trajtimin dhe terminin drejtpërdrejt.",
+        "serviceDetails": [
+          "Pastrim i brendshëm dhe detailing automjetesh",
+          "Polirim dhe veshje qeramike"
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Detailing · Cleaning · Paint protection",
+        "description": "The business lists vehicle detailing and paint protection. Arrange the treatment and appointment directly.",
+        "serviceDetails": [
+          "Interior cleaning and vehicle detailing",
+          "Polishing and ceramic coating"
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services"
         ]
       }
     },
@@ -3336,6 +3932,32 @@
       }
     },
     {
+      "id": "opel-zh-sh-gjakova",
+      "sourceHash": "009fcfba6bfaa26642f32779dcec01254a94fc15168286b2e10052e6e99fb34b",
+      "sq": {
+        "specialty": "Servis automjetesh",
+        "description": "Mirëmbajtje dhe riparim sipas direktorisë publike. Sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing",
+        "description": "Maintenance and repair according to a public directory. Confirm services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair; confirm the specific scope directly."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
       "id": "peugeot-te-beda-prishtina",
       "sourceHash": "32e52182edd394229f3da1ffedf4733b98c1fefa960b5413f67fe0a0caf7e9d9",
       "sq": {
@@ -3546,6 +4168,60 @@
       }
     },
     {
+      "id": "shala-detailing-gjakova",
+      "sourceHash": "b46337669fdba8db6d246317b6262968a78e000d19a9d7be587914602866f2a1",
+      "sq": {
+        "specialty": "Detailing · Pastrim · Veshje qeramike",
+        "description": "Shala Detailing në Smaq pranë Gjakova ofron pastrim automjetesh dhe veshje qeramike sipas faqes së vet.",
+        "serviceDetails": [
+          "Pastrim i brendshëm dhe i jashtëm",
+          "Veshje qeramike"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e biznesit: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Detailing · Cleaning · Ceramic coating",
+        "description": "Shala Detailing in Smaq near Gjakova offers vehicle cleaning and ceramic coating according to its own website.",
+        "serviceDetails": [
+          "Interior and exterior cleaning",
+          "Ceramic coating"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Business website: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "sokoli-autoelectronic-peja",
+      "sourceHash": "1f185a2f8dd5ebf70cd32d63ad872ff0a780bc1c99945999d28d0e6f913a3f0a",
+      "sq": {
+        "specialty": "Servis automjetesh",
+        "description": "Mirëmbajtje dhe riparim sipas direktorisë publike. Sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing",
+        "description": "Maintenance and repair according to a public directory. Confirm services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair; confirm the specific scope directly."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
       "id": "sonic-garage",
       "sourceHash": "181e86699faadb59a1a5e857cf6e5b315d322d0d3386ba1f8d22aefd4b25fc7f",
       "sq": {
@@ -3610,6 +4286,58 @@
           "Public directory: name, contact and vehicle service category",
           "Directory: name, phone and Plus Code address checked again",
           "Directory: name, phone and Plus Code address checked again"
+        ]
+      }
+    },
+    {
+      "id": "superclean-prishtina",
+      "sourceHash": "1e0b38dfdfdac30738470646bef66ea9b27000072e0433f4bf2ea6d61880c26f",
+      "sq": {
+        "specialty": "Kujdes automjetesh · Detailing",
+        "description": "Biznes i regjistruar publikisht për kujdes automjetesh. Sqaroni drejtpërdrejt pastrimin, trajtimet dhe terminet.",
+        "serviceDetails": [
+          "Kujdes automjetesh sipas direktorisë së pavarur; konfirmoni drejtpërdrejt trajtimet konkrete."
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle care · Detailing",
+        "description": "Publicly listed vehicle detailing business. Confirm cleaning, available treatments and appointments directly.",
+        "serviceDetails": [
+          "Vehicle detailing according to an independent directory; confirm specific treatments directly."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "tiptop-detailing-gjakova",
+      "sourceHash": "14d52bb0f3be45d14254fa32f6e7ed4745cd5452ad4ec66371f91d778998f0ba",
+      "sq": {
+        "specialty": "Kujdes automjetesh · Detailing",
+        "description": "Biznes i regjistruar publikisht për kujdes automjetesh. Sqaroni drejtpërdrejt pastrimin, trajtimet dhe terminet.",
+        "serviceDetails": [
+          "Kujdes automjetesh sipas direktorisë së pavarur; konfirmoni drejtpërdrejt trajtimet konkrete."
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle care · Detailing",
+        "description": "Publicly listed vehicle detailing business. Confirm cleaning, available treatments and appointments directly.",
+        "serviceDetails": [
+          "Vehicle detailing according to an independent directory; confirm specific treatments directly."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Independent business source: contact, location and services"
         ]
       }
     },
@@ -3718,6 +4446,64 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Public directory: name, contact and vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "waxon-auto-detailing-mitrovica",
+      "sourceHash": "aec4d9df8cc04043333a08e7ecf3ad626359f66e314702271b86c9fe1d7f1237",
+      "sq": {
+        "specialty": "Detailing · Polirim · Veshje qeramike",
+        "description": "WaxOn në Mitrovica ofron pastrim të brendshëm e të jashtëm, korrigjim boje dhe veshje qeramike sipas faqes së vet.",
+        "serviceDetails": [
+          "Pastrim i brendshëm dhe i jashtëm",
+          "Polirim boje dhe veshje qeramike",
+          "Restaurim fenerësh"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e biznesit: kontakti, vendndodhja dhe shërbimet",
+          "Faqja e biznesit: detailing dhe mbrojtje boje"
+        ]
+      },
+      "en": {
+        "specialty": "Detailing · Polishing · Ceramic coating",
+        "description": "WaxOn in Mitrovica offers interior and exterior detailing, paint correction and ceramic coating on its website.",
+        "serviceDetails": [
+          "Interior and exterior cleaning",
+          "Paint polishing and ceramic coating",
+          "Headlight restoration"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Business website: contact, location and services",
+          "Business website: detailing and paint protection"
+        ]
+      }
+    },
+    {
+      "id": "xhela-polir-mitrovica",
+      "sourceHash": "a37a5e78a4db7632206fbccb56c52ae97624093d1b62c679c526e0a46385a743",
+      "sq": {
+        "specialty": "Lyerje · Polirim",
+        "description": "Xhela në Shipol pranë Mitrovica ofron lyerje dhe polirim automjetesh sipas faqes së vet.",
+        "serviceDetails": [
+          "Lyerje dhe polirim boje"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e biznesit: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Painting · Polishing",
+        "description": "Xhela in Shipol near Mitrovica offers painting and vehicle polishing according to its own website.",
+        "serviceDetails": [
+          "Painting and paint polishing"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Business website: contact, location and services"
         ]
       }
     },

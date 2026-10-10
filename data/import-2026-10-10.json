@@ -1,0 +1,589 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-10",
+  "request": "Zusätzliche veröffentlichbare Kfz-Werkstätten und Detailing-Betriebe im Kosovo recherchieren und importieren; alle bestätigten Treffer über 20 hinaus aufnehmen, Dubletten vermeiden.",
+  "before": {
+    "total": 129,
+    "published": 129,
+    "drafts": 0
+  },
+  "after": {
+    "total": 158,
+    "published": 158,
+    "drafts": 0
+  },
+  "liveReconciliation": {
+    "publishedProfiles": 129,
+    "canonicalProfiles": 129,
+    "comparedFields": [
+      "id",
+      "name",
+      "city",
+      "address",
+      "phone",
+      "phoneNote",
+      "whatsapp",
+      "brands",
+      "services",
+      "serviceDetails",
+      "languages",
+      "specialty",
+      "description",
+      "lat",
+      "lng",
+      "sources",
+      "checkedAt",
+      "status",
+      "updatedAt"
+    ],
+    "differences": 0
+  },
+  "importedWorkshopIds": [
+    "auto-detailing-besi-prizren",
+    "auto-detailing-meti-mitrovica",
+    "auto-elektricist-xhaviti-gjakova",
+    "auto-elektro-servis-a-plus-prizren",
+    "auto-glass-kosovo-fushe-kosove",
+    "auto-ngjyrosje-naseri-suhareke",
+    "auto-picasso-prishtina",
+    "auto-servis-blerti-podujeve",
+    "auto-servis-edi-fushe-kosove",
+    "auto-servis-enisi-obiliq",
+    "auto-servis-lirimi-podujeve",
+    "auto-servis-megi-drenas",
+    "auto-servis-meti-rahovec",
+    "auto-servis-montimi-rahovec",
+    "auto-servis-nazi-drenas",
+    "auto-servis-nexhi-lipjan",
+    "auto-servis-pirqi-vushtrri",
+    "auto-servis-univerzal-lipjan",
+    "auto-servis-visco-prizren",
+    "greensteam-detailing-prishtina",
+    "lipjani-coding-lipjan",
+    "luxury-auto-detailing-gjilan",
+    "opel-zh-sh-gjakova",
+    "shala-detailing-gjakova",
+    "sokoli-autoelectronic-peja",
+    "superclean-prishtina",
+    "tiptop-detailing-gjakova",
+    "waxon-auto-detailing-mitrovica",
+    "xhela-polir-mitrovica"
+  ],
+  "detailingWorkshopIds": [
+    "auto-detailing-meti-mitrovica",
+    "auto-ngjyrosje-naseri-suhareke",
+    "auto-picasso-prishtina",
+    "greensteam-detailing-prishtina",
+    "luxury-auto-detailing-gjilan",
+    "shala-detailing-gjakova",
+    "superclean-prishtina",
+    "tiptop-detailing-gjakova",
+    "waxon-auto-detailing-mitrovica",
+    "xhela-polir-mitrovica"
+  ],
+  "googleVerification": {
+    "method": "Official Google Maps JavaScript SDK: independent name/contact/location comparison followed by direct Place Details fetch by Place ID.",
+    "serverPlacesRequests": 0,
+    "browserTextSearchRequests": 45,
+    "browserDirectPlaceChecks": 29,
+    "persistedGoogleBusinessFields": [],
+    "ownershipVerificationClaimed": false
+  },
+  "profiles": [
+    {
+      "id": "auto-detailing-besi-prizren",
+      "placeId": "ChIJkevGspSXUxMRXbVZsyaYY4o",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:22.546Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://halaman-kuning.cybo.com/XK/kori%C5%A1a/membaiki-kereta-?d=c"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "auto-detailing-meti-mitrovica",
+      "placeId": "ChIJiex-kthFUxMRBH4rM-JOjzo",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:22.958Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://www.autoyas.com/XK/Mitrovica/309155915624453/Auto-Detailing-Meti"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "auto-elektricist-xhaviti-gjakova",
+      "placeId": "ChIJk5w4t3ivUxMR7UuusItcDv4",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:22.803Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://halaman-kuning.cybo.com/XK/gjakov%C3%AB/membaiki-kereta-?d=c"
+      ],
+      "note": "Identischer Name und Telefonkontakt. Der Google-Standortmarker liegt innerhalb der unabhängig veröffentlichten Plus-Code-Zelle 9CVV+6CW an der Wesley-Clark-Straße. Direkte Place-Details-ID-Prüfung bestanden."
+    },
+    {
+      "id": "auto-elektro-servis-a-plus-prizren",
+      "placeId": "ChIJ5XK4m7eVUxMR87VAFJ28z7I",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:21.540Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-elektro-servis-a-044-205-111"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "auto-glass-kosovo-fushe-kosove",
+      "placeId": "ChIJsZKayDhjUxMR1Ec5xgLX1gk",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:22.224Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/auto-glass-kosovo-auto-xhama",
+        "https://autoglasskosovo.com/location"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "auto-ngjyrosje-naseri-suhareke",
+      "placeId": "ChIJm4wk31CXUxMR0Jnhlh_gzBo",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:22.594Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://autongjyrosjenaseri.com/"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "auto-picasso-prishtina",
+      "placeId": "ChIJhcvV72WfVBMRoto0vySDQPs",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:22.413Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://autopicasso.net/"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "auto-servis-blerti-podujeve",
+      "placeId": "ChIJLR88RQCvVBMRCepTvT5qORU",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:22.118Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://autoservisblerti.com/"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "auto-servis-edi-fushe-kosove",
+      "placeId": "ChIJLfh83WRjUxMRu_3vwydW44s",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:21.933Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-servis-edi-045-411-022"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "auto-servis-enisi-obiliq",
+      "placeId": "ChIJoQAbQi1gUxMR1LOibq_lh_U",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:21.874Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-servis-enisi-044-809-246"
+      ],
+      "note": "Name, Telefon und Straßenadresse stimmen überein; Kastriot und Obiliq bezeichnen hier denselben Ort. Direkte Place-Details-ID-Prüfung bestanden."
+    },
+    {
+      "id": "auto-servis-lirimi-podujeve",
+      "placeId": "ChIJU6HJFWSvVBMRN2CX9P9ENYM",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:21.323Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-servis-lirimi-045-533-746"
+      ],
+      "note": "Name, Telefon und Straßenadresse stimmen überein; Besianë und Podujevë bezeichnen hier denselben Ort. Direkte Place-Details-ID-Prüfung bestanden."
+    },
+    {
+      "id": "auto-servis-megi-drenas",
+      "placeId": "ChIJ6TXf-pNvUxMRzrykhCIIrJI",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:22.068Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://www.autoyas.com/XK/Drenas/122648967802001/Auto-Servis-MEGI---Drenas",
+        "https://www.gjithebiznesi.com/XK/auto-servis-megi-044-609-224"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "auto-servis-meti-rahovec",
+      "placeId": "ChIJtSiJIpulUxMRqDpESTRYQWw",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:21.996Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-servis-meti_1J-044-385-480"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "auto-servis-montimi-rahovec",
+      "placeId": "ChIJUWdUKV-jUxMRUPw9_gBnEgs",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:21.392Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-servis-montimi-044-269-197"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "auto-servis-nazi-drenas",
+      "placeId": "ChIJF76CzqR6UxMRWI0WKlx0-c0",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:21.755Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-servis-nazi-044-405-002"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "auto-servis-nexhi-lipjan",
+      "placeId": "ChIJh0VUWA6DVBMRUJX-YMmG0qE",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:21.611Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-servis-nexhi_1n-044-736-933"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "auto-servis-pirqi-vushtrri",
+      "placeId": "ChIJuUm_gSRbUxMRJDrySRYvJV4",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:21.246Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-servis-pirqi-044-444-556"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "auto-servis-univerzal-lipjan",
+      "placeId": "ChIJp_ETv_-CVBMRFzoGDAgPqUE",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:21.816Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-servis-univerzal_1s-044-269-491"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "auto-servis-visco-prizren",
+      "placeId": "ChIJa4mLzfOVUxMRsDb9IqPAVkY",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:21.465Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-servis-visco-044-122-498"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "greensteam-detailing-prishtina",
+      "placeId": "ChIJyT5aBNKdVBMRYnZ624qTZPE",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:22.357Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://mygreensteam.com/wp-content/uploads/2025/07/Company-Profile-GreenSteam-Detailing.pdf",
+        "https://mygreensteam.com/"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "lipjani-coding-lipjan",
+      "placeId": "ChIJqcamjDqDVBMRkSBTblVoqbk",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:22.857Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://lipjanicoding.com/en"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "luxury-auto-detailing-gjilan",
+      "placeId": "ChIJaTWZ1RqNVBMRQ0eBE9gCOec",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:23.020Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://www.findglocal.com/XK/Gjilan/1168160443205697/Luxury-Auto-Detailing"
+      ],
+      "note": "Aktuelle eigene Betriebsbeiträge bestätigen denselben Telefonkontakt und Mulla Idrizi III in Gjilan. Der abweichende ältere Verzeichnis-Plus-Code wird nicht übernommen. Direkte Place-Details-ID-Prüfung bestanden."
+    },
+    {
+      "id": "opel-zh-sh-gjakova",
+      "placeId": "ChIJhxKlqlqxUxMRagYBac6qJx4",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:22.749Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://faqet-e-verdha.cybo.com/XK/gjakov%C3%AB/riparimi-i-makinave-"
+      ],
+      "note": "Zwei Google-Geschäftspunkte teilen die Telefonnummer. Nur die Place ID mit passendem Namen und exakt dem unabhängigen Plus-Code 9CGP+R24 an der Skënderbeu-Straße wird übernommen. Direkte Place-Details-ID-Prüfung bestanden."
+    },
+    {
+      "id": "shala-detailing-gjakova",
+      "placeId": "ChIJ9XGLP2KxUxMR3WRa1Azbhss",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:23.076Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://shaladetailing.com/"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "sokoli-autoelectronic-peja",
+      "placeId": "ChIJE6T4PF79UhMRRgCM6ZQIuxQ",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:22.646Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/sokoli-autoelectronic-049-326-545"
+      ],
+      "note": "Abweichender Namenszusatz im Google-Auftritt; identische internationale Telefonnummer und exakt derselbe unabhängige Plus-Code M843+28 bestätigen die Paarung. Verzeichnisname bleibt erhalten. Direkte Place-Details-ID-Prüfung bestanden."
+    },
+    {
+      "id": "superclean-prishtina",
+      "placeId": "ChIJc2i7p8qdVBMRWHjikePrNjc",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:22.475Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/superclean-prishtin%C3%AB-045-677-633"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "tiptop-detailing-gjakova",
+      "placeId": "ChIJGRcrk_qtUxMRp0Xr0ws6eG4",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:23.136Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/tiptop-vullkanizer-detailing-car-wash-049-323-545"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "waxon-auto-detailing-mitrovica",
+      "placeId": "ChIJATQ_altFUxMRu2tObrV3C60",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:22.295Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://autowaxon.com/contact",
+        "https://autowaxon.com/"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    },
+    {
+      "id": "xhela-polir-mitrovica",
+      "placeId": "ChIJHUU43hZFUxMR_WC4zXj2pEQ",
+      "directIdResolved": true,
+      "independentPhoneMatched": true,
+      "operational": true,
+      "checkedAt": "2026-10-10T20:59:22.907Z",
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "uniqueInCatalogue": true,
+      "sourceUrls": [
+        "https://www.autoxhela.com/"
+      ],
+      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+    }
+  ],
+  "notImported": [
+    {
+      "names": [
+        "Auto Servis Kollari",
+        "Auto servis BEKA",
+        "Auto Servis XHETI",
+        "Auto Service BELTI",
+        "BEXHI",
+        "Autobokshi"
+      ],
+      "reason": "Fehlender eindeutiger Kontakt-/Standortabgleich oder unzureichender unabhängiger Kfz-Leistungsnachweis."
+    },
+    {
+      "names": [
+        "Trimi Auto Servis",
+        "AutoServis & Pjesë Mergimi",
+        "Auto Servis Makolli",
+        "Auto Servis Diagro",
+        "Cartex Kosova",
+        "IBEX CarCare",
+        "AUTO ROYAL Car Styling & Detailing",
+        "BULI Auto Dekor"
+      ],
+      "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang."
+    },
+    {
+      "names": [
+        "Autobahn Motors SHPK"
+      ],
+      "reason": "Google meldet vorübergehende Schließung; kein geeigneter aktueller Veröffentlichungskandidat."
+    },
+    {
+      "names": [
+        "Auto Detailing Pacolli",
+        "Auto Detailing Rexhepi",
+        "CarWash Detailing E2",
+        "Auto Ngjyroses Gjuka",
+        "Auto Detailing Niti",
+        "AutoDetailingBerlin",
+        "Auto Detailing SWISS",
+        "Auto Detailing LARDI",
+        "Niku Detailing",
+        "Auto Detailing EDI"
+      ],
+      "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+    }
+  ],
+  "deduplication": {
+    "added": 29,
+    "updatedExisting": 0,
+    "duplicatePlaceIds": 0,
+    "existingSharedPhoneProfiles": [
+      "eurogoma-gjakova",
+      "eurogoma-mitrovica"
+    ]
+  }
+}
