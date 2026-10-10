@@ -4,7 +4,7 @@ import {publicDataError} from "@/lib/i18n/public-errors";
 import {valueLabel} from "@/lib/i18n/values";
 import {formatNumber} from "@/lib/i18n/format";
 import {useI18n} from "@/lib/i18n/client";
-import {useCallback,useEffect,useId,useRef,useState} from "react";
+import {useCallback,useEffect,useId,useLayoutEffect,useRef,useState} from "react";
 import {CarFront,Filter,LoaderCircle,RefreshCw,Search,X} from "lucide-react";
 import {SiteHeader} from "@/components/site-header";
 import {DirectoryFooter} from "@/components/directory-footer";
@@ -15,7 +15,7 @@ import {Input} from "@/components/ui/input";
 import {currentGoogleRating,googlePlacesClientConfig,workshopGoogleIdentity,type LiveGoogleRating} from "@/lib/google-maps-browser";
 import {Dialog,DialogTrigger} from "@/components/ui/dialog";
 import {ModalContent} from "@/components/modal-shell";
-import {DetailSearch,type SearchContext} from "@/app/journeys";
+import {DetailSearch,type SearchContext} from "@/components/detail-search";
 import {activeCatalogueFilters,catalogueHref,defaultCatalogueFilters,hasPublishedRatings,hasGoogleRatings,hasCatalogueDistances,catalogueDistance,matchCatalogue,parseCatalogueFilters,type CatalogueFilters} from "@/lib/catalogue-filters";
 import {readSearchSession,rememberSearchSession} from "@/lib/search-session";
 import {cities,services,type Workshop} from "@/lib/workshops";
@@ -35,6 +35,12 @@ export default function Catalogue({reviewEntry=false,initialDisplayById={},initi
  const [directory,setDirectory]=useState(initialWorkshops),[filters,setFilters]=useState(initialFilters),[draft,setDraft]=useState(initialFilters),[ready,setReady]=useState(!initialError),[error,setError]=useState(initialError),[refreshing,setRefreshing]=useState(false),[visibleCount,setVisibleCount]=useState(12),[context,setContext]=useState<SearchContext|null>(null),[privateMatchingActive,setPrivateMatchingActive]=useState(false),[hydrated,setHydrated]=useState(false),[filterOpen,setFilterOpen]=useState(false),[detailOpen,setDetailOpen]=useState(false),[liveGoogleRatings,setLiveGoogleRatings]=useState<Record<string,LiveGoogleRating>>({}),[googleEnabled,setGoogleEnabled]=useState(false),[googleLoading,setGoogleLoading]=useState(false);
  const filterButton=useRef<HTMLButtonElement>(null),resultsHeading=useRef<HTMLParagraphElement>(null),restoreScroll=useRef<number|null>(null),searchSentinel=useRef<HTMLDivElement>(null),sortId=useId();
  const [searchDocked,setSearchDocked]=useState(false);
+ const resultsGrid=useRef<HTMLDivElement>(null),firstNewResult=useRef<number|null>(null);
+ useLayoutEffect(()=>{
+  if(firstNewResult.current===null)return;
+  const index=firstNewResult.current;firstNewResult.current=null;
+  resultsGrid.current?.querySelectorAll<HTMLAnchorElement>(".catalogue-card-target")[index]?.focus();
+ },[visibleCount]);
  const matches=matchCatalogue(directory,filters,context,privateMatchingActive,liveGoogleRatings,locale),chips=activeCatalogueFilters(filters),ratingAvailable=hasPublishedRatings(directory),activeContext=privateMatchingActive&&context?.city===filters.city?context:null;
  const draftMatches=matchCatalogue(directory,draft,context,privateMatchingActive,liveGoogleRatings,locale);
  const googleAvailable=hasGoogleRatings(directory,liveGoogleRatings)||googleEnabled,distanceAvailable=hasCatalogueDistances(matches,filters.city),advancedCount=chips.filter(key=>key==="brand"||key==="language").length;
@@ -80,6 +86,7 @@ export default function Catalogue({reviewEntry=false,initialDisplayById={},initi
  function commit(next:CatalogueFilters,resetPrivate=false){if(resetPrivate||next.city!==filters.city)setPrivateMatchingActive(false);const value=next.sort==="distance"&&!hasCatalogueDistances(directory,next.city)?{...next,sort:"name" as const}:next;setFilters(value);setVisibleCount(12);window.history.replaceState(window.history.state,"",catalogueHref(value,locale));}
  function change(field:"query"|"service"|"city"|"brand"|"language",value:string){commit({...filters,[field]:value});}
  function reset(){commit({...defaultCatalogueFilters,sort:filters.sort},true);}
+ function showMore(){firstNewResult.current=visibleCount;setVisibleCount(count=>count+12);}
  function applyDraft(){commit(draft);setFilterOpen(false);requestAnimationFrame(()=>{filterButton.current?.focus({preventScroll:true});resultsHeading.current?.scrollIntoView({block:"start",behavior:"auto"});});}
  function applyContext(value:SearchContext){const next={...defaultCatalogueFilters,service:value.service,city:value.city,brand:value.brand,sort:filters.sort};setContext(value);setPrivateMatchingActive(true);setFilters(next);setVisibleCount(12);window.history.replaceState(window.history.state,"",catalogueHref(next,locale));}
 
@@ -99,7 +106,7 @@ export default function Catalogue({reviewEntry=false,initialDisplayById={},initi
    <div className="catalogue-results-toolbar"><p className="catalogue-result-count" ref={resultsHeading} role="status" aria-live="polite" aria-atomic="true">{t("public.workshopCount",{count:matches.length})}</p><div className="catalogue-results-sort"><SortControl id={`${sortId}-results-sort`} filters={filters} onChange={sort=>commit({...filters,sort})} ratingAvailable={ratingAvailable} googleAvailable={googleAvailable} distanceAvailable={distanceAvailable}/></div>{googleEnabled&&filters.sort==="google"&&googleLoading&&<span className="catalogue-refreshing" role="status"><LoaderCircle size={15} className="spin"/>{t("public.googleUpdating")}</span>}{refreshing&&<span className="catalogue-refreshing" role="status"><LoaderCircle size={15} className="spin"/>{t("public.updating")}</span>}</div>
    {filters.sort==="distance"&&<p className="catalogue-distance-note">{t("public.distanceNote",{city:filters.city})}</p>}
    {error&&<div className="error catalogue-refresh-error" role="alert">{t("public.refreshFailed")}<button disabled={refreshing} onClick={()=>void refresh()}>{t("public.reload")}</button></div>}
-   {directory.length===0?<div className="empty catalogue-empty"><Search size={27}/><h2>{t("public.directoryEmpty")}</h2><p>{t("public.directoryEmptyHelp")}</p></div>:matches.length===0?<div className="empty catalogue-empty"><Search size={27}/><h2>{filters.query?t("public.noNameMatch"):t("public.noMatch")}</h2><p>{filters.language!==defaultCatalogueFilters.language?t("public.noLanguageMatch"):t("public.changeFilter")}</p><div>{filters.language!==defaultCatalogueFilters.language&&<button className="primary" onClick={()=>change("language",defaultCatalogueFilters.language)}>{t("public.removeLanguage")}</button>}<button className="outline" onClick={reset}>{t("public.resetAll")}</button></div></div>:<><div className="catalogue-grid">{matches.slice(0,visibleCount).map(workshop=><WorkshopCard display={displayById[workshop.id]} key={workshop.id} workshop={workshop} selectedBrand={filters.brand} selectedService={filters.service} searchHref={catalogueHref(filters,locale)} distanceKm={catalogueDistance(workshop,filters.city)} distanceOrigin={filters.city} liveGoogleRating={liveGoogleRatings[workshop.id]} onGoogleRating={rememberGoogleRating}/>)}</div><div className="catalogue-pagination"><p>{t("public.shownCount",{shown:Math.min(visibleCount,matches.length),total:matches.length})}</p>{visibleCount<matches.length&&<button className="outline" onClick={()=>setVisibleCount(count=>count+12)}>{t("public.showMore")}</button>}</div></>}
+   {directory.length===0?<div className="empty catalogue-empty"><Search size={27}/><h2>{t("public.directoryEmpty")}</h2><p>{t("public.directoryEmptyHelp")}</p></div>:matches.length===0?<div className="empty catalogue-empty"><Search size={27}/><h2>{filters.query?t("public.noNameMatch"):t("public.noMatch")}</h2><p>{filters.language!==defaultCatalogueFilters.language?t("public.noLanguageMatch"):t("public.changeFilter")}</p><div>{filters.language!==defaultCatalogueFilters.language&&<button className="primary" onClick={()=>change("language",defaultCatalogueFilters.language)}>{t("public.removeLanguage")}</button>}<button className="outline" onClick={reset}>{t("public.resetAll")}</button></div></div>:<><div className="catalogue-grid" ref={resultsGrid}>{matches.slice(0,visibleCount).map(workshop=><WorkshopCard display={displayById[workshop.id]} key={workshop.id} workshop={workshop} selectedBrand={filters.brand} selectedService={filters.service} searchHref={catalogueHref(filters,locale)} distanceKm={catalogueDistance(workshop,filters.city)} distanceOrigin={filters.city} liveGoogleRating={liveGoogleRatings[workshop.id]} onGoogleRating={rememberGoogleRating}/>)}</div><div className="catalogue-pagination"><p>{t("public.shownCount",{shown:Math.min(visibleCount,matches.length),total:matches.length})}</p>{visibleCount<matches.length&&<button className="outline" onClick={showMore}>{t("public.showMore")}</button>}</div></>}
   </>}
  </main><DirectoryFooter/><DetailSearch open={detailOpen} onClose={()=>setDetailOpen(false)} onSearch={applyContext} initialContext={context}/></>;
 }

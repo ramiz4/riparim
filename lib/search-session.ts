@@ -1,4 +1,4 @@
-import type {SearchContext} from "@/app/journeys";
+import type {SearchContext} from "@/components/detail-search";
 import type {CatalogueFilters} from "@/lib/catalogue-filters";
 
 export type SearchSession=CatalogueFilters&{searched:boolean;context:SearchContext|null;privateMatchingActive:boolean;catalogueHref:string;visibleCount:number;scrollY:number};

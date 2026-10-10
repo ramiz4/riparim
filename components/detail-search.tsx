@@ -1,0 +1,30 @@
+"use client";
+import {useI18n} from "@/lib/i18n/client";
+import {searchService} from "@/lib/search-service";
+import {useNavigationGuard} from "@/lib/i18n/navigation-guard";
+import {useState,useEffect,useId,useRef,type FormEvent} from "react";
+import {CarFront,ShieldCheck} from "lucide-react";
+import {ModalContent} from "@/components/modal-shell";
+import {Dialog} from "@/components/ui/dialog";
+import {Progress} from "@/components/ui/progress";
+import {Picker} from "@/components/picker";
+import {services,cities,brands} from "@/lib/workshops";
+export type SearchContext={brand:string;model:string;year:string;problem:string;service:string;city:string;additionalCity:string;radius:number;from:string;to:string};
+
+const initial:SearchContext={brand:"Alle Marken",model:"",year:"",problem:"",service:services[0],city:cities[1],additionalCity:"",radius:0,from:"",to:""};
+export function DetailSearch({open,onClose,onSearch,initialContext=null}:{open:boolean;onClose:()=>void;onSearch:(c:SearchContext)=>void;initialContext?:SearchContext|null}){
+ const {locale,t}=useI18n();
+ const searchFormId=useId();
+ const opener=useRef<HTMLElement|null>(null);
+ const [step,setStep]=useState(0),[ctx,setCtx]=useState(initial),[error,setError]=useState("");
+ // eslint-disable-next-line react-hooks/set-state-in-effect -- An explicit opening resumes a private in-memory draft.
+ useEffect(()=>{if(open){setCtx(initialContext??initial);setStep(0);setError("");}},[open,initialContext]);
+ useNavigationGuard({dirty:open&&JSON.stringify(ctx)!==JSON.stringify(initialContext??initial)});
+ const change=(key:keyof SearchContext,value:string|number)=>{setCtx(c=>({...c,[key]:value}));setError("");};
+ function submit(e:FormEvent){e.preventDefault();if(step===0){if(!ctx.model.trim()){setError(t("public.modelRequired"));return;}setStep(1);}else if(step===1){if(ctx.problem.trim().length<10){setError(t("public.problemRequired"));return;}setStep(2);}else{if(ctx.from&&ctx.to&&ctx.from>ctx.to){setError(t("public.travelInvalid"));return;}const service=searchService(locale,ctx.service,ctx.problem);onSearch({...ctx,service});onClose();}}
+ return <Dialog open={open} onOpenChange={v=>{if(!v)onClose();}}><ModalContent onOpenAutoFocus={()=>{opener.current=document.activeElement instanceof HTMLElement?document.activeElement:null;}} onCloseAutoFocus={event=>{const target=opener.current;opener.current=null;if(target?.isConnected){event.preventDefault();target.focus({preventScroll:true});}}} title={t("public.wizardTitle")} description={t("public.wizardDescription")} footer={<>{step>0&&<button type="button" className="outline" onClick={()=>{setStep(s=>s-1);setError("");}}>{t("public.back")}</button>}<button className="primary" type="submit" form={searchFormId}>{step===2?t("public.showWorkshops"):t("public.next")}</button></>}><div className="wizard-labels">{[t("public.vehicle"),t("public.work"),t("public.locationTravel")].map((s,i)=><span className={step===i?"current":""} key={s}>{i+1} · {s}</span>)}</div><Progress value={(step+1)/3*100} aria-label={t("public.wizardStep",{count:step+1})} className="h-1.5"/><form id={searchFormId} onSubmit={submit} className="journey-form">
+ {step===0&&<><div className="field"><label>{t("public.vehicleBrand")}</label><Picker sortLabels value={ctx.brand} onChange={v=>change("brand",v)} values={brands} valueCategory="sentinel" label={t("public.vehicleBrand")}/></div><div className="form-grid"><label>{t("public.model")}<input required maxLength={80} placeholder={t("public.modelExample")} value={ctx.model} onChange={e=>change("model",e.target.value)}/></label><label>{t("public.year")}<span>{t("public.optional")}</span><input type="number" min="1950" max={new Date().getFullYear()+1} placeholder={t("public.yearExample")} value={ctx.year} onChange={e=>change("year",e.target.value)}/></label></div><div className="note"><CarFront size={20}/><p>{t("public.vehicleHelp")}</p></div></>}
+ {step===1&&<><label>{t("public.desiredWork")}<textarea required minLength={10} maxLength={2000} rows={4} placeholder={t("public.problemExample")} value={ctx.problem} onChange={e=>change("problem",e.target.value)}/></label><div className="field"><label>{t("public.serviceCategory")}</label><Picker sortLabels value={ctx.service} onChange={v=>change("service",v)} values={services} valueCategory="service" label={t("public.serviceCategory")}/></div><p className="help">{locale==="de"?t("public.heuristicHelp"):t("public.manualServiceHelp")}</p></>}
+ {step===2&&<><div className="form-grid"><div className="field"><label>{t("public.yourCity")}</label><Picker sortLabels value={ctx.city} onChange={v=>change("city",v)} values={cities.slice(1)} label={t("public.yourCity")}/></div><div className="field"><label>{t("public.additionalCity")}<span>{t("public.optional")}</span></label><Picker sortLabels value={ctx.additionalCity||"Kein weiterer Ort"} onChange={v=>change("additionalCity",v==="Kein weiterer Ort"?"":v)} valueCategory="sentinel" values={["Kein weiterer Ort",...cities.slice(1).filter(c=>c!==ctx.city)]} label={t("public.additionalCity")}/></div></div><div className="field"><label>{t("public.radiusCity")}</label><Picker sortLabels value={ctx.radius===0?"Nur im Ort":`${ctx.radius} km`} onChange={v=>change("radius",v==="Nur im Ort"?0:parseInt(v))} valueCategory="sentinel" values={["Nur im Ort","25 km","50 km","100 km"]} label={t("public.radius")}/></div><p className="help">{t("public.radiusHelp")}</p><div className="form-grid"><label>{t("public.travelStart")}<span>{t("public.optional")}</span><input type="date" value={ctx.from} onChange={e=>change("from",e.target.value)}/></label><label>{t("public.travelEnd")}<span>{t("public.optional")}</span><input type="date" min={ctx.from||undefined} value={ctx.to} onChange={e=>change("to",e.target.value)}/></label></div><p className="help">{t("public.travelHelp")}</p></>}
+ <div className="private-caption"><ShieldCheck size={16}/>{t("public.privateSearch")}</div>{error&&<p role="alert" className="error">{error}</p>}</form></ModalContent></Dialog>;
+}

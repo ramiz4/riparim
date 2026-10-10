@@ -2,7 +2,7 @@ import {displayComparator} from "@/lib/i18n/collation";
 import {valueLabel} from "@/lib/i18n/values";
 import {localizeHref,type Locale} from "@/lib/i18n/locale";
 import {brands,cities,services,cityCoordinates,findWorkshops,type Workshop} from "@/lib/workshops";
-import type {SearchContext} from "@/app/journeys";
+import type {SearchContext} from "@/components/detail-search";
 
 export type CatalogueSort="name"|"rating"|"google"|"distance";
 export type CatalogueFilters={query:string;service:string;city:string;brand:string;language:string;sort:CatalogueSort};
