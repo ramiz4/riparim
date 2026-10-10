@@ -3,13 +3,21 @@
   "localDate": "2026-10-11",
   "timezone": "Europe/Berlin",
   "checkedAt": "2026-10-10T22:14:48.055Z",
-  "status": "prepared_for_verified_release",
+  "status": "completed_and_live_verified",
   "automation": {
     "id": "riparim-t-glicher-gepr-fter-werkstattimport",
     "model": "gpt-6.1-sol",
     "reasoning": "high",
-    "status": "PAUSED",
-    "activationGate": "Successful verified release deployment and complete live profile check"
+    "status": "ACTIVE",
+    "activationGate": "Successful verified release deployment and complete live profile check",
+    "activatedAt": "2026-10-10T23:03:46.216Z",
+    "nextScheduledLocal": "2026-10-11T09:00:00+02:00",
+    "nextScheduledUTC": "2026-10-11T07:00:00Z",
+    "executionEnvironment": "local",
+    "requiresComputerAndAppRunning": true,
+    "storedTimezone": null,
+    "desktopTimezone": "Europe/Zurich",
+    "timezoneLimitation": "Local 09:00 currently matches Europe/Berlin; no separate timezone field is supported. Recheck if desktop timezone changes."
   },
   "before": {
     "total": 158,
@@ -25,7 +33,7 @@
     "auto-enzo-detailing-prishtina",
     "shine-detailing-studio-prishtina"
   ],
-  "publishedCountConfirmed": 0,
+  "publishedCountConfirmed": 2,
   "liveReconciliation": {
     "canonicalProfiles": 158,
     "liveProfiles": 158,
@@ -135,10 +143,14 @@
         "Autoservis Lordi",
         "Auto Servis Isa",
         "Auto servis Beka",
-        "Auto Service Vali",
-        "Autoservis Faredini-A"
+        "Auto Service Vali"
       ],
-      "reason": "Independent leads retained for a later complete Google/contact/site check; not yet publication candidates."
+      "reason": "Official finder searches for all six leads yielded generic, ambiguous or wrong-city entries; no corresponding unique identity was accepted."
+    },
+    {
+      "name": "Autoservis Faredini-A",
+      "placeId": "ChIJabvnmcWjUxMRFvBkzjze_1o",
+      "reason": "Official finder offered the matching name but a town street conflicts with the independent highway location. Exact site continuity and telephone comparison remain incomplete."
     }
   ],
   "googleVerification": {
@@ -147,7 +159,9 @@
     "interactiveOfficialFinder": true,
     "directMapsIdChecks": 3,
     "persistedGoogleBusinessFields": [],
-    "numericRatingsImported": 0
+    "numericRatingsImported": 0,
+    "officialFinderCandidateSearches": 17,
+    "apiRequestScope": "Candidate identity research only; official demo and public Maps UI, no requests billed to the user project were initiated for this research."
   },
   "catalogueImport": {
     "dryRun": {
@@ -196,33 +210,313 @@
     "cpuLimitMs": 10,
     "confirmedFailure": "exceededCpu / HTTP503 Error1102",
     "costsAuthorized": false,
-    "solution": "Static release documents with live status/revision guards, data-free shells for newer admin changes and external D1 release import"
+    "solution": "Static release documents with live status/revision guards, data-free shells for newer admin changes and external D1 release import",
+    "liveCorrectionVerified": true,
+    "paidPlanActivated": false
   },
   "release": {
-    "pr": null,
-    "tag": null,
-    "deployed": false
+    "pr": "https://github.com/ramiz4/riparim/pull/99",
+    "tag": "v1.12.0",
+    "url": "https://github.com/ramiz4/riparim/releases/tag/v1.12.0",
+    "commit": "54549c17df92aecde2d5a7562a7106913e5a8bf0",
+    "workflow": "https://github.com/ramiz4/riparim/actions/runs/38093081018",
+    "workflowConclusion": "success",
+    "deployed": true,
+    "deploymentId": "85d54bef-8518-4555-bbc9-7acd85d1ad2d",
+    "workerVersion": "9e3a920f-c45d-4bf4-bad0-622f62b6afdb",
+    "trafficPercent": 100,
+    "deployedAt": "2026-10-10T23:01:50.381582Z",
+    "fourAssetsConfirmed": true,
+    "provenanceCommitMatched": true,
+    "archiveSHA256Matched": true,
+    "cloudflareArchiveSHA256": "40363b16555647478f3ec4b6b85a12bb0b9fb743022961e649b4833a812b8ac2",
+    "sitesArchiveSHA256": "1daf055dd611f18e2a1279bd753de3a040106a980aadbe0d507e8b5ba852f9b7",
+    "catalogueCompletionKey": "workshop-source:c0ba66d81180f0b577efc82f3b3f02da566f991596ec1772dc41f206b6d6b61e",
+    "catalogueCompletedAt": "2026-10-10T23:01:37.347Z"
   },
   "liveVerification": {
-    "complete": false,
-    "reason": "Awaiting verified main release"
+    "complete": true,
+    "healthRuns": [
+      {
+        "checkedAt": "2026-10-10T23:02:27.775Z",
+        "published": 160,
+        "checks": [
+          {
+            "path": "/werkstaetten",
+            "status": 200,
+            "bytes": 405468,
+            "ray": "a48940a6d871739d-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/werkstatt/auto-enzo-detailing-prishtina",
+            "status": 200,
+            "bytes": 64406,
+            "ray": "a48940a8ed32739d-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/werkstatt/shine-detailing-studio-prishtina",
+            "status": 200,
+            "bytes": 65299,
+            "ray": "a48940ab39d2739d-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/sq/werkstaetten",
+            "status": 200,
+            "bytes": 421671,
+            "ray": "a48940acbcb9739d-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/sq/werkstatt/auto-enzo-detailing-prishtina",
+            "status": 200,
+            "bytes": 64093,
+            "ray": "a48940ae8ff7739d-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/sq/werkstatt/shine-detailing-studio-prishtina",
+            "status": 200,
+            "bytes": 64980,
+            "ray": "a48940afba25739d-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/en/werkstaetten",
+            "status": 200,
+            "bytes": 410728,
+            "ray": "a48940b1ee53739d-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/en/werkstatt/auto-enzo-detailing-prishtina",
+            "status": 200,
+            "bytes": 61804,
+            "ray": "a48940b4fd4a739d-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/en/werkstatt/shine-detailing-studio-prishtina",
+            "status": 200,
+            "bytes": 62681,
+            "ray": "a48940b61fea739d-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          }
+        ],
+        "healthy": true
+      },
+      {
+        "checkedAt": "2026-10-10T23:02:48.455Z",
+        "published": 160,
+        "checks": [
+          {
+            "path": "/werkstaetten",
+            "status": 200,
+            "bytes": 405468,
+            "ray": "a489413329ba0204-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/werkstatt/auto-enzo-detailing-prishtina",
+            "status": 200,
+            "bytes": 64406,
+            "ray": "a4894133da080204-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/werkstatt/shine-detailing-studio-prishtina",
+            "status": 200,
+            "bytes": 65299,
+            "ray": "a4894134da6b0204-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/sq/werkstaetten",
+            "status": 200,
+            "bytes": 421671,
+            "ray": "a48941354a8f0204-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/sq/werkstatt/auto-enzo-detailing-prishtina",
+            "status": 200,
+            "bytes": 64093,
+            "ray": "a4894135fae40204-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/sq/werkstatt/shine-detailing-studio-prishtina",
+            "status": 200,
+            "bytes": 64980,
+            "ray": "a48941368b320204-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/en/werkstaetten",
+            "status": 200,
+            "bytes": 410728,
+            "ray": "a4894136fb7f0204-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/en/werkstatt/auto-enzo-detailing-prishtina",
+            "status": 200,
+            "bytes": 61804,
+            "ray": "a48941382c170204-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/en/werkstatt/shine-detailing-studio-prishtina",
+            "status": 200,
+            "bytes": 62681,
+            "ray": "a48941389c5e0204-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          }
+        ],
+        "healthy": true
+      }
+    ],
+    "previousProfilesPreserved": 158,
+    "previousProfileFieldsCompared": 19,
+    "previousProfileDifferences": 0,
+    "previousPlaceMappingsCompared": 158,
+    "previousPlaceMappingDifferences": 0,
+    "previousRatingRowsCompared": 129,
+    "previousRatingDifferences": 0,
+    "previousCatalogueStateRowsCompared": 49,
+    "previousCatalogueStateDifferences": 0,
+    "drafts": 0,
+    "newPlaceIdsMatched": 2,
+    "duplicatePlaceIds": 0,
+    "publicSnapshotHeaderConfirmed": true,
+    "releaseCommitHeaderMatched": true,
+    "internalAssetPathStatus": 404,
+    "anonymousSessionEndpointStatus": 200,
+    "observability": {
+      "from": "2026-10-10T23:01:50Z",
+      "to": "2026-10-10T23:04:10Z",
+      "workerVersion": "9e3a920f-c45d-4bf4-bad0-622f62b6afdb",
+      "observedOkInvocations": 18,
+      "observedExceededCpuInvocations": 0,
+      "maxObservedCpuMs": 60,
+      "limitation": "Observed interval only; aggregate includes all triggers. Does not promise future absence of resource errors."
+    }
   },
   "errors": [
     {
       "stage": "preflight",
-      "message": "Repeated HTTP503/Error1102 on catalogue/API and English profiles before correction."
+      "message": "Repeated HTTP503/Error1102 on catalogue/API and English profiles before correction.",
+      "status": "resolved",
+      "resolution": "Verified static main release; two full health runs passed in all locales, observed new-version outcomes are ok."
     },
     {
       "stage": "access",
-      "message": "Cloudflare detail-log and billing API calls returned authentication error10000; Free plan was confirmed through the authorized browser UI."
+      "message": "Cloudflare detail-log and billing API calls returned authentication error10000; Free plan was confirmed through the authorized browser UI.",
+      "status": "partial_access_limitation_remains",
+      "impact": "Aggregate observability, readonly catalogue D1 and release deployment are available. Restricted billing/detail-log APIs remain unavailable; no paid resource was activated."
     },
     {
       "stage": "local-tools",
-      "message": "Go initially absent; official pinned Go1.27.1 installed in ignored task runtime and tests rerun."
+      "message": "Go initially absent; official pinned Go1.27.1 installed in ignored task runtime and tests rerun.",
+      "status": "resolved"
     },
     {
       "stage": "browser",
-      "message": "Native pipe closed during Maps navigation; CUA runtime reset restored access."
+      "message": "Native pipe closed during Maps navigation; CUA runtime reset restored access.",
+      "status": "resolved"
     }
-  ]
+  ],
+  "completedAt": "2026-10-10T23:04:10Z"
 }

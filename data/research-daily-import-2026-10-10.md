@@ -50,3 +50,16 @@ Bei der Recherche erneut gefunden, deshalb keine neuen Kandidaten: WaxOn Auto De
 ## Einschränkungen
 
 Die Suche berücksichtigte Prishtina, Pejë, Ferizaj, Mazgit, Shtime, Skenderaj, Istog, Klinë/Zllakuqan, Rahovec, Malishevë, Suharekë und Kaçanik. Die Trefferzahl ist keine Vollständigkeitsbehauptung und keine Landeszählung. Name/Telefon/Standort/Leistungen sind unabhängig recherchiert; Google-Zuordnung und Veröffentlichung sind noch nicht bestätigt. Keine numerischen Google-Bewertungen oder tatsächliche Inhaberschaft behauptet. Wegen fehlender Browseraktionen war keine Profilwahl erforderlich.
+
+## Nachfolgende Identitätsprüfung und Veröffentlichung
+
+Der ausführende Agent prüfte anschließend alle 17 Kandidaten im offiziellen
+Place ID Finder und führte direkte Maps-ID-Prüfungen im bestätigten
+Browserprofil durch. Enzo und Shine bestanden den unabhängigen Telefon-,
+Standort- und Leistungsabgleich und sind mit geprüftem Release v1.12.0
+veröffentlicht. Für sechs spätere kleinere-Orte-Leads bot der Finder nur
+mehrdeutige oder geografisch abweichende Einträge. Faredini-A lieferte eine
+passende Namenskennung, aber die Ortsangabe widerspricht der unabhängigen
+Quelle; Standortkontinuität und Telefonnummer bleiben ungeklärt.
+Das [datierte Importmanifest](import-2026-10-11-daily.json) enthält die
+abschließenden Identitätsnachweise, Rückstellungen und bestätigte Live-Abnahme.
