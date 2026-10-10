@@ -36,6 +36,8 @@ jobs:
           go-version: "1.27.1"
           cache: false
       - name: Measure identical suites on the same runner
+        env:
+          GITHUB_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
           git rev-parse HEAD
           node -e 'const os=require("node:os"); console.log(JSON.stringify({node:process.version,cpus:os.availableParallelism(),memoryBytes:os.totalmem()}))'
