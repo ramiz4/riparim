@@ -95,6 +95,16 @@ npm run build
 
 `npm test` prüft den Bewertungsablauf, Besitzrechte, Benutzerverwaltung, Katalogfilter sowie Google-Sitzungen und OAuth-Callbacks mit isolierten SQLite-/R2-/Provider-Fixtures. Dabei werden keine echten E-Mails gesendet und keine Produktionsdaten verändert.
 
+Auf Linux, macOS und WSL laufen unabhängige Test-Suites in vier getrennten
+Node-Prozessen gleichzeitig. `TEST_CONCURRENCY=1 npm test` erhält die serielle
+Diagnose; Werte von 1 bis 4 sind erlaubt. Für Windows verwende WSL: Native
+Windows-Ausführung wird vor dem Start von Suites abgelehnt, da dort die sichere
+Bereinigung über POSIX-Prozessgruppen fehlt.
+Logs tragen den Namen ihrer Suite. Die i18n-Prüfung läuft zuerst; Fehler oder
+Abbruch stoppen laufende Suites, bevor das gemeinsame Testverzeichnis entfernt
+wird. Ressourcenprüfung und Laufzeitmessung stehen in
+[der Test-Runner-Dokumentation](docs/test-suite-concurrency.md).
+
 `npm run build` prüft zusätzlich den erzeugten Browser-Code: Der echte gebündelte Link muss die Navigation auslösen und auch nach einem fehlgeschlagenen Prefetch funktionieren. Die Prüfung läuft für Cloudflare- und Sites-Builds mit isolierten Browser-/Netzwerk-Fixtures. Nach einem vorhandenen Build lässt sie sich mit `npm run test:client-build` einzeln wiederholen.
 
 Die ergänzende Live- und Browserprüfung steht in [docs/customer-flow-qa.md](docs/customer-flow-qa.md). Die dokumentierte Bestandsprüfung in `data/catalogue-review-2026-10-04.json` führt die unabhängigen Quellen und zurückgestellten Standortkonflikte auf.
