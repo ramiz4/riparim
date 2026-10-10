@@ -4,7 +4,7 @@ import {basename} from 'node:path';
 import {createInterface} from 'node:readline';
 import {setTimeout as delay} from 'node:timers/promises';
 
-export async function runSuites({cwd,runtime,contract,suites,concurrency=Number(process.env.TEST_CONCURRENCY??2)}){
+export async function runSuites({cwd,runtime,contract,suites,concurrency=Number(process.env.TEST_CONCURRENCY??4)}){
  if(process.platform==='win32')throw Error('Native Windows test execution is unsupported: use WSL (Linux), Linux or macOS for safe process-group cleanup.');
  if(!Number.isInteger(concurrency)||concurrency<1||concurrency>4)throw Error('TEST_CONCURRENCY must be an integer from 1 to 4');
  const active=new Set(),started=performance.now();

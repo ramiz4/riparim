@@ -95,7 +95,7 @@ npm run build
 
 `npm test` prüft den Bewertungsablauf, Besitzrechte, Benutzerverwaltung, Katalogfilter sowie Google-Sitzungen und OAuth-Callbacks mit isolierten SQLite-/R2-/Provider-Fixtures. Dabei werden keine echten E-Mails gesendet und keine Produktionsdaten verändert.
 
-Auf Linux, macOS und WSL laufen unabhängige Test-Suites in zwei getrennten
+Auf Linux, macOS und WSL laufen unabhängige Test-Suites in vier getrennten
 Node-Prozessen gleichzeitig. `TEST_CONCURRENCY=1 npm test` erhält die serielle
 Diagnose; Werte von 1 bis 4 sind erlaubt. Für Windows verwende WSL: Native
 Windows-Ausführung wird vor dem Start von Suites abgelehnt, da dort die sichere

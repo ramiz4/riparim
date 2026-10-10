@@ -1,10 +1,9 @@
 # Begrenzte Test-Parallelität (Issue 91)
 
 `npm test` prüft zuerst den i18n-Vertrag und führt anschließend jede registrierte
-Suite in einem eigenen Node-Prozess aus. Auf Linux/macOS/WSL ist die vorläufige
-Standardparallelität zwei. `TEST_CONCURRENCY=1 npm test` führt dieselben Suites
+Suite in einem eigenen Node-Prozess aus. Auf Linux/macOS/WSL ist die
+Standardparallelität vier. `TEST_CONCURRENCY=1 npm test` führt dieselben Suites
 seriell aus; `2`, `3` oder `4` erlauben entsprechend viele gleichzeitige Suites.
-Die endgültige Wahl wird auf demselben Commit mit GitHub-Actions-Messungen geprüft.
 Native Windows-Ausführung wird vor jeder Suite und jeder Änderung am
 Testverzeichnis mit einer WSL-Empfehlung abgelehnt. POSIX-Prozessgruppen sichern
 die Bereinigung auch dann, wenn ein beendeter Node-Prozess Nachfahren mit offenen
@@ -46,8 +45,34 @@ Testverzeichnis. Diese Plattform-Vertragsprüfung ist kein nativer Windows-Test.
 
 ## Messung
 
-Serielle und parallele Vergleichsläufe verwenden denselben Commit und dieselben
-Suites. Die letzte Logzeile nennt Parallelitätsgrad, Exitcode und gesamte
-Testlaufzeit einschließlich i18n-Prüfung und Bereinigung. Queue-/Setup-Zeit von
-GitHub Actions zählt nicht als Testlaufzeit. Ergebnisse werden vor dem Merge
-hier ergänzt; ein schnellerer Lauf muss weiterhin sämtliche Suites bestehen.
+[Actions-Lauf 38096027955, Job 114341991218](https://github.com/ramiz4/riparim/actions/runs/38096027955/job/114341991218)
+verglich am 11. Oktober 2026 alle 75 Suites einschließlich i18n-Sperre im selben
+Checkout und auf demselben Ubuntu-Runner: Node.js 24.21.0, vier CPUs,
+16.766.414.848 Bytes RAM. Gemessener Merge-Commit:
+`4e7be6ccf67d07fc09938ca0d33ae52b862a46e8`, PR-HEAD `dd046d0`.
+
+| Parallelität | Reihenfolge | Testlaufzeit | GNU-time-RSS (KiB) |
+| --- | --- | ---: | ---: |
+| 1 | erster Lauf | 77,67 s | 602.380 |
+| 2 | zweiter Lauf | 45,17 s | 602.084 |
+| 4 | dritter Lauf | 36,93 s | 605.520 |
+| 1 | Wiederholung | 70,88 s | 604.356 |
+| 2 | Wiederholung | 45,09 s | 608.324 |
+
+Alle fünf vollständigen Läufe bestanden: 380 erfolgreiche Prozess-Endmeldungen
+(75 Suites plus i18n-Sperre je Lauf), keine Fehler oder beobachteten OOM-Abbrüche.
+Vier Prozesse sparen gegenüber dem wiederholten seriellen Lauf **47,9 %**,
+gegenüber dem ersten seriellen Lauf **52,5 %** und gegenüber der wiederholten
+Zweierausführung **18,1 %** Testlaufzeit. Deshalb ist vier der Standard.
+
+Die Laufzeit umfasst i18n-Prüfung und Bereinigung, ohne Actions-Queue und Setup.
+GNU time `%M` ist die maximale einzelne RSS aus Prozess-/Kind-Rusage, **kein
+summierter Spitzenwert des gleichzeitig laufenden Prozessbaums**. Die Zahlen
+belegen keine entsprechende Gesamtspeichergrenze.
+
+Nach der Messung wurde der unsichere native Windows-Pfad entfernt und die
+Fail-fast-Vertragsprüfung ergänzt. Der POSIX-Scheduler und sämtliche bisherigen
+Suite-Registrierungen bleiben erhalten; der finale Linux-Stand wird mit der
+Standardparallelität vier und der vollständigen CI geprüft. Der nur zur Messung
+verwendete zusätzliche Workflow ist entfernt. Die letzte Runner-Logzeile nennt
+auch lokal Parallelitätsgrad, Exitcode und gesamte Testlaufzeit.
