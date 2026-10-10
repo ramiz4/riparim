@@ -41,7 +41,26 @@ Es werden nur Place IDs und eigene Prüf-/Wiederholungsmetadaten dauerhaft gespe
 
 Sichtbare Karten laden aktuelle Sterne und Anzahl direkt über die Google Places JavaScript API. Es gibt keine Speicherung dieser API-Sterne oder Rezensionen in D1, R2 oder Browser Storage. Google Maps erhält seine Quellenkennzeichnung; zusätzliche Providerattribution wird angezeigt. Google-Werte fließen weder in Riparim-Mittelwerte noch in Riparim-Sortierungen ein.
 
-Bei der Sortierung „Google-Bewertung“ werden die zur aktuellen Suche passenden Werkstätten in Gruppen von höchstens vier gleichzeitig geladen. Die Sterne und Anzahl bleiben nur im Arbeitsspeicher der geöffneten Liste. Die Liste sortiert Google und Riparim getrennt nach Sternen; bei gleichem Wert folgt die höhere Anzahl zuerst, fehlende Sterne stehen am Ende. Ohne aktuelle Google-Werte stehen Werkstätten alphabetisch am Ende; historische Momentaufnahmen werden nicht verwendet. Eine Änderung der zentralen JSON-Quelle löst über deren Inhalts-Hash den Import aus; Profile und recherchierte Google-Angaben werden anhand ihrer getrennten Zeitstempel aktualisiert. Neuere manuell gepflegte Angaben bleiben erhalten.
+Der Katalog bietet ausschließlich Name, Riparim-Bewertung und Entfernung als Sortierungen an. Alte Links mit `sort=google` werden auf die Standardsortierung Name normalisiert; Suchbegriff, Leistung, Ort, Marke, Sprache und Locale bleiben erhalten. Es gibt keine globale oder auf die ersten zwölf Ergebnisse begrenzte Google-Sortierung. Historische Google-Momentaufnahmen werden weiterhin weder als aktuell angezeigt noch zur Sortierung verwendet.
+
+Google-Sterne werden ausschließlich bei Sichtbarkeit einer Karte geladen (bestehender Vorlauf von 120 Pixeln). Bereits dargestellte Werte derselben Riparim-ID und Locale gehören nur zum Komponenten-Zustand der aktiven Liste. Bei Filteränderungen und erneutem Einblenden nutzt die Karte diesen Wert ohne identischen Zusatzabruf. Ein Localewechsel verwirft diesen Zustand; neue IDs und Sprachen laden ihre eigenen Werte. Verspätete Antworten einer vorherigen ID/Locale werden nicht angezeigt. Schließen/Neuladen der Liste verwirft die Werte. Es gibt keinen zusätzlichen Content-Cache, TTL, Hintergrundrefresh oder Schreiben in D1, R2, Redis, CDN oder Browser Storage. Die bestehende Place-ID-Zuordnung, Providerattribution und Maps-Fallbacks bleiben erhalten.
+
+Eine Änderung der zentralen JSON-Quelle löst über deren Inhalts-Hash den Import aus; Profile und recherchierte Google-Angaben werden anhand ihrer getrennten Zeitstempel aktualisiert. Neuere manuell gepflegte Angaben bleiben erhalten.
+
+### Isolierter Anfragenachweis für Issue #94
+
+`tests/catalogue-google-requests.test.mjs` verwendet 158 synthetische öffentliche Werkstätten, kontrollierte Sichtbarkeit und einen Google-SDK-Fixture ohne echte Provideraufrufe. Der Red-Lauf vor der Änderung zählte bei `sort=google` **158 Places-Abfragen**, obwohl keine Karte sichtbar war. Der gleiche Lauf nach der Änderung prüft in DE/SQ/EN:
+
+| Auslöser | Places-Abfragen nach Änderung |
+| --- | ---: |
+| Initialrender mit 158 Treffern und unsichtbaren Karten | 0 |
+| Alte URL `sort=google` | 0 |
+| Filteränderung, neue Karten weiterhin unsichtbar | 0 |
+| Erste sichtbare Karte | 1 |
+| Passende Karte nach Filterwechsel erneut sichtbar | 0 zusätzliche |
+| Localewechsel und erste erneut sichtbare Karte | 1 zusätzliche |
+
+Die gezählten Aufrufe sind SDK-`fetchFields`-Anfragen, keine Kostenmessung oder Aussage zur Abrechnungskategorie. Auch reguläre URL-/Sortierverträge, Lade-/Leer-/Fehlerfälle und verspätete Antworten werden ohne Live-Google-Verbindungen geprüft.
 
 Im Profil lädt der offizielle `gmp-place-details`-Baustein mit `gmp-place-rating` und `gmp-place-reviews`, sobald sein Bereich sichtbar wird. Er nutzt die volle Inhaltsspalte und einen kompakten Bereich mit interner Scrollfunktion. Farben und Schriftgrößen werden über die offiziellen CSS-Eigenschaften an das helle und dunkle Riparim-Theme angepasst. Die eingebauten Google- und Autorenattributionen werden beibehalten. Bei fehlender Konfiguration, fehlender Zuordnung oder einem Providerfehler steht der direkte Google-Maps-Link bereit.
 
