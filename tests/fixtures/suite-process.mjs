@@ -17,17 +17,18 @@ if(name==='contract.mjs'){
  const suite=Number(name.match(/suite-(\d+)/)[1]);
  mkdirSync(config.runtime,{recursive:true});record('start',{suite});
  console.log('stdout fixture');console.error('stderr fixture');
- if(config.hang||config.fail&&suite===1||config.orphan){
+ if(config.hang||config.fail&&!config.simpleFailure&&suite===1||config.orphan){
   spawn(process.execPath,['grandchild.mjs'],{stdio:'inherit'}).unref();
  }
- if(config.hang||config.fail&&suite===1){
+ if(config.hang||config.fail&&!config.simpleFailure&&suite===1){
   process.on('SIGTERM',()=>{});setInterval(()=>{},1000);
  }else{
-  if(!config.fail&&!config.orphan&&suite<config.concurrency){
+  const limit=process.platform==='win32'?1:config.concurrency;
+  if(!config.fail&&!config.orphan&&suite<limit){
    // A handshake, rather than timing assumptions, proves the first batch overlaps.
    for(let attempt=0;attempt<250;attempt++){
     const started=readFileSync(config.events,'utf8').trim().split('\n').map(line=>JSON.parse(line)).filter(e=>e.type==='start').length;
-    if(started>=Math.min(config.concurrency,config.suites.length))break;
+    if(started>=Math.min(limit,config.suites.length))break;
     if(attempt===249)throw Error('first batch did not overlap');
     await delay(20);
    }

@@ -8,11 +8,13 @@ import {fileURLToPath} from 'node:url';
 import {setTimeout as delay} from 'node:timers/promises';
 
 const root=await mkdtemp(join(tmpdir(),'riparim-suite-runner-'));
+const windows=process.platform==='win32';
 const fixture=fileURLToPath(new URL('./fixtures/suite-runner.mjs',import.meta.url));
 const processFixture=new URL('./fixtures/suite-process.mjs',import.meta.url);
 let sequence=0;
 const fixtures=new Set();
 function killFixture(child){
+ if(windows){spawnSync('taskkill',['/PID',String(child.pid),'/T','/F'],{stdio:'ignore'});return;}
  // Nested runner fixtures own further groups; keep the regression itself safe
  // when the real npm-test runner cancels it halfway through an assertion.
  const table=spawnSync('ps',['-eo','pid=,ppid=,pgid='],{encoding:'utf8'});
@@ -26,18 +28,18 @@ function killFixture(child){
 const abort=code=>{for(const child of fixtures)killFixture(child);rmSync(root,{recursive:true,force:true});process.exit(code);};
 const interrupted=()=>abort(130),terminated=()=>abort(143);
 process.on('SIGINT',interrupted);process.on('SIGTERM',terminated);
-async function setup({concurrency=2,count=4,contractFails=false,fail=false,hang=false,hangContract=false,orphan=false}={}){
+async function setup({concurrency=2,count=4,contractFails=false,fail=false,simpleFailure=false,hang=false,hangContract=false,orphan=false}={}){
  const cwd=join(root,String(++sequence)),runtime=join(cwd,'.test-runtime'),events=join(cwd,'events.jsonl');
  await mkdir(cwd);await mkdir(runtime);await writeFile(join(runtime,'stale'),'stale');
  const contract=join(cwd,'contract.mjs');await copyFile(processFixture,contract);
  await copyFile(processFixture,join(cwd,'grandchild.mjs'));
  const suites=[];
  for(let i=0;i<count;i++){const suite=join(cwd,`suite-${i}.mjs`);suites.push(suite);await copyFile(processFixture,suite);}
- const config=join(cwd,'config.json');await writeFile(config,JSON.stringify({cwd,runtime,events,contract,suites,concurrency,contractFails,fail,hang,hangContract,orphan}));
+ const config=join(cwd,'config.json');await writeFile(config,JSON.stringify({cwd,runtime,events,contract,suites,concurrency,contractFails,fail,simpleFailure,hang,hangContract,orphan}));
  return {cwd,runtime,events,config};
 }
 function launch(config){
- const child=spawn(process.execPath,[fixture,config],{detached:true,stdio:['ignore','pipe','pipe']});
+ const child=spawn(process.execPath,[fixture,config],{detached:!windows,stdio:['ignore','pipe','pipe']});
  fixtures.add(child);
  let stdout='',stderr='';child.stdout.on('data',chunk=>{stdout+=chunk;});child.stderr.on('data',chunk=>{stderr+=chunk;});
  const result=new Promise((resolve,reject)=>{child.on('error',reject);child.on('close',(code,signal)=>resolve({code,signal,stdout,stderr}));});
@@ -56,19 +58,23 @@ async function stopped(events){
 }
 try{
  for(const concurrency of [2,1,4]){
+  const limit=windows?1:concurrency;
   const state=await setup({concurrency}),result=await launch(state.config).result;
   assert.equal(result.code,0,result.stdout+result.stderr);const events=await records(state.events);
   assert.equal(events[0].type,'contract','i18n gate finishes before any suite starts');
-  let active=0,peak=0;for(const event of events){if(event.type==='start'){active++;peak=Math.max(peak,active);}if(event.type==='end')active--;assert(active<=concurrency,'bounded suite processes');}
-  assert.equal(peak,concurrency,'independent suites overlap up to the configured limit');assert.equal(active,0);
+  let active=0,peak=0;for(const event of events){if(event.type==='start'){active++;peak=Math.max(peak,active);}if(event.type==='end')active--;assert(active<=limit,'bounded suite processes');}
+  assert.equal(peak,limit,'independent suites overlap up to the configured limit');assert.equal(active,0);
   assert.deepEqual(events.filter(e=>e.type==='start').map(e=>e.suite).sort(),[0,1,2,3]);
-  if(concurrency===1)assert.deepEqual(events.filter(e=>e.type==='start').map(e=>e.suite),[0,1,2,3],'serial queue order retained');
+  if(limit===1)assert.deepEqual(events.filter(e=>e.type==='start').map(e=>e.suite),[0,1,2,3],'serial queue order retained');
   assert.equal(events.filter(e=>e.type==='end').length,4,'every suite executed');
   assert.match(result.stdout,/\[suite-0\.mjs\] stdout fixture/);assert.match(result.stderr,/\[suite-0\.mjs\] stderr fixture/);
   await cleaned(state);
  }
  const gated=await setup({contractFails:true}),gateResult=await launch(gated.config).result;
  assert.equal(gateResult.code,9);assert.deepEqual((await records(gated.events)).map(e=>e.type),['contract']);await cleaned(gated);
+ const simple=await setup({concurrency:1,fail:true,simpleFailure:true}),simpleResult=await launch(simple.config).result;
+ assert.equal(simpleResult.code,7);assert.deepEqual((await records(simple.events)).filter(e=>e.type==='start').map(e=>e.suite),[0]);await cleaned(simple);
+ if(!windows){
  const failed=await setup({fail:true}),failure=await launch(failed.config).result;
  await stopped(await records(failed.events));
  assert.equal(failure.code,7,failure.stdout+failure.stderr);
@@ -93,6 +99,7 @@ try{
   assert.equal((await records(state.events)).filter(e=>e.type==='grandchild').length,2);
   running.child.kill(signal);const result=await running.result;
   await stopped(await records(state.events));assert.equal(result.code,code,result.stdout+result.stderr);await cleaned(state);
+ }
  }
  console.log('Suite runner: bounded parallelism, serial diagnostics, gate, attributed logs and cleanup passed');
 }finally{

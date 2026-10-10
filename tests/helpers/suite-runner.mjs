@@ -23,7 +23,7 @@ export async function runSuites({cwd,runtime,contract,suites,concurrency=Number(
  async function run(suite){
   const label=basename(suite),started=performance.now();
   console.log(`[${label}] Running`);
-  // Every suite owns its group, including Go, esbuild and workerd descendants.
+  // POSIX suites own their group, including Go, esbuild and workerd descendants.
   const child=spawn(process.execPath,[suite],{cwd,detached:!windows,stdio:['ignore','pipe','pipe']});
   let stopping;
   child.stop=()=>stopping??=Promise.resolve().then(async()=>{
