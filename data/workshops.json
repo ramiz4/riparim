@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-05T15:22:26.058Z",
+  "updatedAt": "2026-10-10T20:59:53.955Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 129,
+    "published": 158,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "Alle 128 veröffentlichten Pkw-Werkstätten sind eindeutig zugeordnet. Weitere Entwürfe benötigen bestätigte Identitäts- oder Filialbelege; sechs fachliche Ausschlüsse und ein belegter geschlossener Betrieb bleiben ausgeblendet.",
-    "matchedPlaceIds": 129,
+    "reason": "Alle 158 veröffentlichten Kfz-Servicebetriebe einschließlich Fahrzeugaufbereitung besitzen einzeln bestätigte Google-Place-IDs. 29 neue Betriebe wurden anhand unabhängiger Kontakt-, Standort- und Leistungsbelege ergänzt; keine offenen Entwürfe.",
+    "matchedPlaceIds": 158,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -207,11 +207,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auspuh+Servis+Kurti+TD+9CRH%2BQM7%2C+Rr.+Tivari%2C+Gjakov%C3%AB+50000&query_place_id=ChIJHbbn9DuvUxMRoaZzRH_bQYY",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auspuh+Servis+Kurti+TD+9CRH%2BQM7%2C+Rr.+Tivari%2C+Gjakov%C3%AB+50000&query_place_id=ChIJHbbn9DuvUxMRoaZzRH_bQYY",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -324,6 +324,93 @@
       }
     },
     {
+      "id": "auto-detailing-besi-prizren",
+      "name": "Auto Detailing BESI",
+      "city": "Prizren",
+      "address": "Malësi e Re 20550",
+      "phone": "+38349990013",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Kfz-Wartung und Reparatur; konkreten Umfang direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice",
+      "description": "Wartung und Reparatur laut öffentlichem Verzeichnis. Leistungen und Termine direkt beim Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://halaman-kuning.cybo.com/XK/kori%C5%A1a/membaiki-kereta-?d=c",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJkevGspSXUxMRXbVZsyaYY4o",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://halaman-kuning.cybo.com/XK/kori%C5%A1a/membaiki-kereta-?d=c"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+        }
+      }
+    },
+    {
+      "id": "auto-detailing-meti-mitrovica",
+      "name": "Auto Detailing Meti",
+      "city": "Mitrovica",
+      "address": "Mitrovica 40000",
+      "phone": "+38343509444",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Karosserie & Lack"
+      ],
+      "serviceDetails": [
+        "Innenreinigung und Fahrzeugaufbereitung",
+        "Politur und Keramikversiegelung"
+      ],
+      "languages": [],
+      "specialty": "Detailing · Reinigung · Lackschutz",
+      "description": "Der Betrieb veröffentlicht Fahrzeugaufbereitung und Lackschutz. Behandlung und Termin direkt vereinbaren.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.autoyas.com/XK/Mitrovica/309155915624453/Auto-Detailing-Meti",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJiex-kthFUxMRBH4rM-JOjzo",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.autoyas.com/XK/Mitrovica/309155915624453/Auto-Detailing-Meti"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+        }
+      }
+    },
+    {
       "id": "auto-diagnostika-prishtina",
       "name": "Auto-Diagnostika",
       "city": "Prishtina",
@@ -427,11 +514,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+elektricist+Ermiri+1+William+Walker%2C+Prizren+20000&query_place_id=ChIJW80AN8qVUxMRCOCtwrht_qg",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+elektricist+Ermiri+1+William+Walker%2C+Prizren+20000&query_place_id=ChIJW80AN8qVUxMRCOCtwrht_qg",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -439,6 +526,49 @@
             "https://faqet-e-verdha.cybo.com/XK/prizreni/riparimi-i-makinave-"
           ],
           "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+        }
+      }
+    },
+    {
+      "id": "auto-elektricist-xhaviti-gjakova",
+      "name": "Auto elektriçist Xhaviti",
+      "city": "Gjakova",
+      "address": "9CVV+6CW, Wesley Clark, Gjakovë 50000",
+      "phone": "+38345273122",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Kfz-Wartung und Reparatur; konkreten Umfang direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice",
+      "description": "Wartung und Reparatur laut öffentlichem Verzeichnis. Leistungen und Termine direkt beim Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://halaman-kuning.cybo.com/XK/gjakov%C3%AB/membaiki-kereta-?d=c",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJk5w4t3ivUxMR7UuusItcDv4",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://halaman-kuning.cybo.com/XK/gjakov%C3%AB/membaiki-kereta-?d=c"
+          ],
+          "note": "Identischer Name und Telefonkontakt. Der Google-Standortmarker liegt innerhalb der unabhängig veröffentlichten Plus-Code-Zelle 9CVV+6CW an der Wesley-Clark-Straße. Direkte Place-Details-ID-Prüfung bestanden."
         }
       }
     },
@@ -575,6 +705,49 @@
       }
     },
     {
+      "id": "auto-elektro-servis-a-plus-prizren",
+      "name": "Auto Elektro & Servis A+",
+      "city": "Prizren",
+      "address": "Ismail Kryeziu, Prizren 20000",
+      "phone": "+38344205111",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Kfz-Wartung und Reparatur; konkreten Umfang direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice",
+      "description": "Wartung und Reparatur laut öffentlichem Verzeichnis. Leistungen und Termine direkt beim Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.gjithebiznesi.com/XK/auto-elektro-servis-a-044-205-111",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJ5XK4m7eVUxMR87VAFJ28z7I",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-elektro-servis-a-044-205-111"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+        }
+      }
+    },
+    {
       "id": "auto-elektro-servis-niki-gjilan",
       "name": "Auto Elektro Servis Niki",
       "city": "Gjilan",
@@ -625,11 +798,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Elektro+Servis+Niki+Avdullah+Presheva+Nr.+82%2C+Gjilan+60000&query_place_id=ChIJv-KrCHaNVBMRzYjAlm90dtQ",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Elektro+Servis+Niki+Avdullah+Presheva+Nr.+82%2C+Gjilan+60000&query_place_id=ChIJv-KrCHaNVBMRzYjAlm90dtQ",
-          "checkedAt": "2026-10-05T12:08:22.374Z"
+          "checkedAt": "2026-10-05T12:08:22.374Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -752,11 +925,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Fati+Mirman+jakupi+Muhamet+%C3%A7ami+no+51%2C+Prizren+20000&query_place_id=ChIJQwaI3PyVUxMRimoFEn3CgKw",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Fati+Mirman+jakupi+Muhamet+%C3%A7ami+no+51%2C+Prizren+20000&query_place_id=ChIJQwaI3PyVUxMRimoFEn3CgKw",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -808,11 +981,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Ford+service+6MRX%2BJVQ%2C+Prizren+20000&query_place_id=ChIJ-cAhrOC_UxMR9xXSyq8Uzi8",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Ford+service+6MRX%2BJVQ%2C+Prizren+20000&query_place_id=ChIJ-cAhrOC_UxMR9xXSyq8Uzi8",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -820,6 +993,55 @@
             "https://faqet-e-verdha.cybo.com/XK/prizreni/riparimi-i-makinave-"
           ],
           "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+        }
+      }
+    },
+    {
+      "id": "auto-glass-kosovo-fushe-kosove",
+      "name": "Auto Glass Kosovo - Auto Xhama",
+      "city": "Fushë Kosovë",
+      "address": "460 Rruga e Pejës, Fushë Kosovë 12000",
+      "phone": "+38349219999",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Karosserie & Lack"
+      ],
+      "serviceDetails": [
+        "Montage und Reparatur von Fahrzeugglas"
+      ],
+      "languages": [],
+      "specialty": "Autoglas · Montage · Reparatur",
+      "description": "Auto Glass Kosovo in Fushë Kosovë bietet laut eigener Website Montage und Reparatur von Fahrzeugglas.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-glass-kosovo-auto-xhama",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        },
+        {
+          "url": "https://autoglasskosovo.com/location",
+          "title": "Betriebswebsite: Fahrzeugglas und Standort",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJsZKayDhjUxMR1Ec5xgLX1gk",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.cybo.com/XK-biz/auto-glass-kosovo-auto-xhama",
+            "https://autoglasskosovo.com/location"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
         }
       }
     },
@@ -863,11 +1085,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Laker+Kimi+V%C3%ABll%C3%ABz%C3%ABrit+Fazliu%2C+Prishtin%C3%AB&query_place_id=ChIJebOcSQCfVBMRenUNUpgt-kA",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Laker+Kimi+V%C3%ABll%C3%ABz%C3%ABrit+Fazliu%2C+Prishtin%C3%AB&query_place_id=ChIJebOcSQCfVBMRenUNUpgt-kA",
-          "checkedAt": "2026-10-05T10:08:45.026Z"
+          "checkedAt": "2026-10-05T10:08:45.026Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "name_and_address",
@@ -920,11 +1142,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Limar+%22Alajdini%22+Besim+Shala%2C+Prizren+20000&query_place_id=ChIJMwN0fPS_UxMRoh3Tb99-LHw",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Limar+%22Alajdini%22+Besim+Shala%2C+Prizren+20000&query_place_id=ChIJMwN0fPS_UxMRoh3Tb99-LHw",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -1015,11 +1237,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Llamarist+Valoni+11+maji%2C+Pej%C3%AB+30000&query_place_id=ChIJS1Fl-7b9UhMR-9NWY7yjRk4",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Llamarist+Valoni+11+maji%2C+Pej%C3%AB+30000&query_place_id=ChIJS1Fl-7b9UhMR-9NWY7yjRk4",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -1383,11 +1605,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Ngjyrosje+Fadili+Rruga+Braim+Ademi%2C+Ferizaj+70000&query_place_id=ChIJOS5ZJ9F_VBMRRzJ7_AfKgiU",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Ngjyrosje+Fadili+Rruga+Braim+Ademi%2C+Ferizaj+70000&query_place_id=ChIJOS5ZJ9F_VBMRRzJ7_AfKgiU",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -1395,6 +1617,94 @@
             "https://de.cybo.com/XK/ferizaj/autoreparatur"
           ],
           "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+        }
+      }
+    },
+    {
+      "id": "auto-ngjyrosje-naseri-suhareke",
+      "name": "Auto Ngjyrosje Naseri",
+      "city": "Suharekë",
+      "address": "Greikoc, Theranda, Kosovë",
+      "phone": "+38349491331",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Karosserie & Lack"
+      ],
+      "serviceDetails": [
+        "Unfallreparatur und Lackierung",
+        "Lackkorrektur und Politur"
+      ],
+      "languages": [],
+      "specialty": "Lackierung · Unfallreparatur · Politur",
+      "description": "Naseri in Greikoc bei Suharekë veröffentlicht Unfallreparatur, Lackierung, Lackaufbereitung und Politur auf seiner Website.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://autongjyrosjenaseri.com/",
+          "title": "Betriebswebsite: Kontakt, Standort und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJm4wk31CXUxMR0Jnhlh_gzBo",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_website",
+          "sourceUrls": [
+            "https://autongjyrosjenaseri.com/"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+        }
+      }
+    },
+    {
+      "id": "auto-picasso-prishtina",
+      "name": "Auto Picasso",
+      "city": "Prishtina",
+      "address": "Kodra e Trimave, Prishtinë, Kosovë",
+      "phone": "+38344113775",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Karosserie & Lack"
+      ],
+      "serviceDetails": [
+        "Unfallreparatur",
+        "Innen- und Außenaufbereitung, Politur und Keramikversiegelung"
+      ],
+      "languages": [],
+      "specialty": "Unfallreparatur · Detailing",
+      "description": "Auto Picasso in Prishtina nennt Unfallreparatur, Innen- und Außenaufbereitung, Politur und Keramikversiegelung auf seiner Website.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://autopicasso.net/",
+          "title": "Betriebswebsite: Kontakt, Standort und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJhcvV72WfVBMRoto0vySDQPs",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_website",
+          "sourceUrls": [
+            "https://autopicasso.net/"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
         }
       }
     },
@@ -1455,11 +1765,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=INOVATOR+Automotive+Rr.+Brahim+Ademi%2C+Ferizaj+70000&query_place_id=ChIJx-kdM1l-VBMRwc2PmJdYa4Q",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=INOVATOR+Automotive+Rr.+Brahim+Ademi%2C+Ferizaj+70000&query_place_id=ChIJx-kdM1l-VBMRwc2PmJdYa4Q",
-          "checkedAt": "2026-10-05T10:08:45.026Z"
+          "checkedAt": "2026-10-05T10:08:45.026Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "official_maps",
@@ -1531,11 +1841,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Pjes%C3%AB+%26+Servis+Fatosi+Magjistralja+Ferizaj-Prishtin%C3%AB+%2C+Llapnasell%C3%AB%2C+Komuna+e+Prishtin%C3%ABs&query_place_id=ChIJU2coyzCdVBMR9MLuvMnBqHM",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Pjes%C3%AB+%26+Servis+Fatosi+Magjistralja+Ferizaj-Prishtin%C3%AB+%2C+Llapnasell%C3%AB%2C+Komuna+e+Prishtin%C3%ABs&query_place_id=ChIJU2coyzCdVBMR9MLuvMnBqHM",
-          "checkedAt": "2026-10-05T12:08:22.374Z"
+          "checkedAt": "2026-10-05T12:08:22.374Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -2141,11 +2451,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Service+%22MUSLIJA%22+William+walker%2C+Prizren+20000&query_place_id=ChIJwSzqwuC_UxMR8b_sOv-3H7c",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Service+%22MUSLIJA%22+William+walker%2C+Prizren+20000&query_place_id=ChIJwSzqwuC_UxMR8b_sOv-3H7c",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -2197,11 +2507,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+servis+%22Agimi%22+Muhamet+Ukshini%2C+Gjakov%C3%AB+50000&query_place_id=ChIJQR1mzhWvUxMReJEjFpctCH0",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+servis+%22Agimi%22+Muhamet+Ukshini%2C+Gjakov%C3%AB+50000&query_place_id=ChIJQR1mzhWvUxMReJEjFpctCH0",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -2341,11 +2651,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Bajrami+Selman+Laj%C3%A7i+Peja+XK%2C+30000&query_place_id=ChIJ2R7FnZT9UhMRSyn1OzKZEmo",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Bajrami+Selman+Laj%C3%A7i+Peja+XK%2C+30000&query_place_id=ChIJ2R7FnZT9UhMRSyn1OzKZEmo",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -2461,6 +2771,54 @@
             "https://www.google.com/maps/?cid=9746007481171612760"
           ],
           "note": "Individuelle Google-Karte anhand unabhängig belegter Telefonnummer, Werkstattname und präziser Adresse bestätigt; CID und tatsächliche Place ID bezeichnen denselben Eintrag. Keine Google-Geschäftsangaben oder Bewertungen in die Profilquelle übernommen."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-blerti-podujeve",
+      "name": "Auto Servis BLERTI",
+      "city": "Podujevë",
+      "address": "Podujevë, Kosovë",
+      "phone": "+38343530001",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung",
+        "Diagnose & Elektronik",
+        "Motor & Getriebe",
+        "Bremsen & Fahrwerk"
+      ],
+      "serviceDetails": [
+        "Öl- und Filterservice",
+        "Motor-, Getriebe- und Fahrwerksarbeiten",
+        "Fahrzeugelektrik und Diagnose"
+      ],
+      "languages": [],
+      "specialty": "Mechanik · Elektrik · Diagnose",
+      "description": "BLERTI in Podujevë führt Wartung, mechanische Reparaturen, Fahrzeugelektrik und Diagnose auf seiner Website auf.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://autoservisblerti.com/",
+          "title": "Betriebswebsite: Kontakt, Standort und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJLR88RQCvVBMRCepTvT5qORU",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_website",
+          "sourceUrls": [
+            "https://autoservisblerti.com/"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
         }
       }
     },
@@ -2593,11 +2951,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+BULI+Hajvali%2C+Prishtina+10510&query_place_id=ChIJMdXx3nGdVBMRC6tqZjasSd0",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+BULI+Hajvali%2C+Prishtina+10510&query_place_id=ChIJMdXx3nGdVBMRC6tqZjasSd0",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -2705,11 +3063,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Cufa+Bibaj-Ferizaj&query_place_id=ChIJFTS-BHR_VBMRLDRPsHW-ogI",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Cufa+Bibaj-Ferizaj&query_place_id=ChIJFTS-BHR_VBMRLDRPsHW-ogI",
-          "checkedAt": "2026-10-05T10:08:45.026Z"
+          "checkedAt": "2026-10-05T10:08:45.026Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "official_maps",
@@ -2776,6 +3134,92 @@
       }
     },
     {
+      "id": "auto-servis-edi-fushe-kosove",
+      "name": "Auto servis Edi",
+      "city": "Fushë Kosovë",
+      "address": "Vragoli, Fushë 10000",
+      "phone": "+38345411022",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Kfz-Wartung und Reparatur; konkreten Umfang direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice",
+      "description": "Wartung und Reparatur laut öffentlichem Verzeichnis. Leistungen und Termine direkt beim Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.gjithebiznesi.com/XK/auto-servis-edi-045-411-022",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJLfh83WRjUxMRu_3vwydW44s",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-servis-edi-045-411-022"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-enisi-obiliq",
+      "name": "Auto Servis Enisi",
+      "city": "Obiliq",
+      "address": "Hasan Prishtina - Obiliq, R220, Kastriot 15000",
+      "phone": "+38344809246",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Kfz-Wartung und Reparatur; konkreten Umfang direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice",
+      "description": "Wartung und Reparatur laut öffentlichem Verzeichnis. Leistungen und Termine direkt beim Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.gjithebiznesi.com/XK/auto-servis-enisi-044-809-246",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJoQAbQi1gUxMR1LOibq_lh_U",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-servis-enisi-044-809-246"
+          ],
+          "note": "Name, Telefon und Straßenadresse stimmen überein; Kastriot und Obiliq bezeichnen hier denselben Ort. Direkte Place-Details-ID-Prüfung bestanden."
+        }
+      }
+    },
+    {
       "id": "auto-servis-ford-jashanica-prishtina",
       "name": "Auto Servis Ford Jashanica",
       "city": "Prishtina",
@@ -2816,11 +3260,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Ford+Jashanica+Lidhja+e+Prizrenit%2C+Prishtin%C3%AB&query_place_id=ChIJgxoAFyKfVBMRJOYQKh2Gejs",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Ford+Jashanica+Lidhja+e+Prizrenit%2C+Prishtin%C3%AB&query_place_id=ChIJgxoAFyKfVBMRJOYQKh2Gejs",
-          "checkedAt": "2026-10-05T10:08:45.026Z"
+          "checkedAt": "2026-10-05T10:08:45.026Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "official_maps",
@@ -2874,11 +3318,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+%22Gashi%22+J8G3%2BGWQ%2C+Pej%C3%AB+30000&query_place_id=ChIJAXLDOLH_UhMRvfYFH9KdYus",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+%22Gashi%22+J8G3%2BGWQ%2C+Pej%C3%AB+30000&query_place_id=ChIJAXLDOLH_UhMRvfYFH9KdYus",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -2925,11 +3369,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Gazi+Wesley+Clark%2C+Gjakov%C3%AB&query_place_id=ChIJPTLT0Z-vUxMRruPkPVs7l0Y",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Gazi+Wesley+Clark%2C+Gjakov%C3%AB&query_place_id=ChIJPTLT0Z-vUxMRruPkPVs7l0Y",
-          "checkedAt": "2026-10-05T10:08:45.026Z"
+          "checkedAt": "2026-10-05T10:08:45.026Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "name_and_address",
@@ -3034,11 +3478,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Goni+M89C%2BPH+Peja%2C+Peje+30000&query_place_id=ChIJRwwqY4D9UhMRNPiF5qFtm6Q",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Goni+M89C%2BPH+Peja%2C+Peje+30000&query_place_id=ChIJRwwqY4D9UhMRNPiF5qFtm6Q",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -3090,11 +3534,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Good%26Year+CC4M%2BPXQ%2C+Gjakov%C3%AB+50000&query_place_id=ChIJX_RIpvavUxMRlbkyN9HMZ_g",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Good%26Year+CC4M%2BPXQ%2C+Gjakov%C3%AB+50000&query_place_id=ChIJX_RIpvavUxMRlbkyN9HMZ_g",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -3200,11 +3644,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Klima+Katundi+i+Ri+%2C+Katund+i+Ri%2C+Komuna+e+Pej%C3%ABs&query_place_id=ChIJxY9iysoDUxMRCboJvh9k78o",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Klima+Katundi+i+Ri+%2C+Katund+i+Ri%2C+Komuna+e+Pej%C3%ABs&query_place_id=ChIJxY9iysoDUxMRCboJvh9k78o",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -3212,6 +3656,49 @@
             "https://stgres.gjirafa.biz/auto-servis-klima-1"
           ],
           "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-lirimi-podujeve",
+      "name": "Auto Servis Lirimi",
+      "city": "Podujevë",
+      "address": "Podujeve - Merdare, 2 km, Besianë 11000",
+      "phone": "+38345533746",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Kfz-Wartung und Reparatur; konkreten Umfang direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice",
+      "description": "Wartung und Reparatur laut öffentlichem Verzeichnis. Leistungen und Termine direkt beim Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.gjithebiznesi.com/XK/auto-servis-lirimi-045-533-746",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJU6HJFWSvVBMRN2CX9P9ENYM",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-servis-lirimi-045-533-746"
+          ],
+          "note": "Name, Telefon und Straßenadresse stimmen überein; Besianë und Podujevë bezeichnen hier denselben Ort. Direkte Place-Details-ID-Prüfung bestanden."
         }
       }
     },
@@ -3258,11 +3745,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Lumi-M+9+Nentori%2C+Gjakov%C3%AB&query_place_id=ChIJOWz_2iSxUxMRs9MLdusHbKA",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Lumi-M+9+Nentori%2C+Gjakov%C3%AB&query_place_id=ChIJOWz_2iSxUxMRs9MLdusHbKA",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -3318,11 +3805,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Maloku+Lan+dobraj%2C+De%C3%A7an+51000&query_place_id=ChIJu_fNLeFVUhMRsFdcOUdpo7Y",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Maloku+Lan+dobraj%2C+De%C3%A7an+51000&query_place_id=ChIJu_fNLeFVUhMRsFdcOUdpo7Y",
-          "checkedAt": "2026-10-05T10:08:45.026Z"
+          "checkedAt": "2026-10-05T10:08:45.026Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "official_website",
@@ -3331,6 +3818,57 @@
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJu_fNLeFVUhMRsFdcOUdpo7Y"
           ],
           "note": "Die eigene Website verbindet bisherigen und aktuellen Kontakt und bestätigt Lan Dobraj sowie konkrete Pkw-Reparaturen. Der gültige Google-Eintrag hat dieselbe aktuelle Telefonnummer und Anschrift. Fehlerhafte Telefonlink-Vorlagen wurden nicht übernommen."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-megi-drenas",
+      "name": "Auto Servis MEGI",
+      "city": "Drenas",
+      "address": "Nr. 3 Rruga Jasharajve, Drenas 13000",
+      "phone": "+38344979970",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344979970",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung",
+        "Diagnose & Elektronik"
+      ],
+      "serviceDetails": [
+        "Öl- und Filterwechsel",
+        "Diagnose und Fahrzeugelektronik"
+      ],
+      "languages": [],
+      "specialty": "Wartung · Diagnose",
+      "description": "MEGI in Drenas dokumentiert Öl- und Filterservice sowie Fahrzeugelektronik in eigenen Betriebsbeiträgen.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.autoyas.com/XK/Drenas/122648967802001/Auto-Servis-MEGI---Drenas",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.gjithebiznesi.com/XK/auto-servis-megi-044-609-224",
+          "title": "Unabhängiges Verzeichnis: Werkstattadresse",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJ6TXf-pNvUxMRzrykhCIIrJI",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.autoyas.com/XK/Drenas/122648967802001/Auto-Servis-MEGI---Drenas",
+            "https://www.gjithebiznesi.com/XK/auto-servis-megi-044-609-224"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
         }
       }
     },
@@ -3400,6 +3938,92 @@
       }
     },
     {
+      "id": "auto-servis-meti-rahovec",
+      "name": "Auto Servis METI",
+      "city": "Rahovec",
+      "address": "Ratkoc, Rahovec 21050",
+      "phone": "+38344385480",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Kfz-Wartung und Reparatur; konkreten Umfang direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice",
+      "description": "Wartung und Reparatur laut öffentlichem Verzeichnis. Leistungen und Termine direkt beim Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.gjithebiznesi.com/XK/auto-servis-meti_1J-044-385-480",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJtSiJIpulUxMRqDpESTRYQWw",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-servis-meti_1J-044-385-480"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-montimi-rahovec",
+      "name": "Auto Servis Montimi",
+      "city": "Rahovec",
+      "address": "Magjistralja, Rruga UÇK, Rahovec 21000",
+      "phone": "+38344269197",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Kfz-Wartung und Reparatur; konkreten Umfang direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice",
+      "description": "Wartung und Reparatur laut öffentlichem Verzeichnis. Leistungen und Termine direkt beim Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.gjithebiznesi.com/XK/auto-servis-montimi-044-269-197",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJUWdUKV-jUxMRUPw9_gBnEgs",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-servis-montimi-044-269-197"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+        }
+      }
+    },
+    {
       "id": "auto-servis-muriqi-prizren",
       "name": "Auto Servis Muriqi",
       "city": "Prizren",
@@ -3435,11 +4059,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Muriqi+2%29+Rr+Flamuri.+Petrove+Tranzit%2C+Prizren+20000&query_place_id=ChIJA9n0Hr6VUxMRkUy6Qw7PcJ8",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Muriqi+2%29+Rr+Flamuri.+Petrove+Tranzit%2C+Prizren+20000&query_place_id=ChIJA9n0Hr6VUxMRkUy6Qw7PcJ8",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -3447,6 +4071,92 @@
             "https://www.cybo.com/XK-biz/auto-servis-muriqi"
           ],
           "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-nazi-drenas",
+      "name": "Auto Servis Nazi",
+      "city": "Drenas",
+      "address": "Autostrada Ibrahim Rugova, Drenas Komoran 13050",
+      "phone": "+38344405002",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Kfz-Wartung und Reparatur; konkreten Umfang direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice",
+      "description": "Wartung und Reparatur laut öffentlichem Verzeichnis. Leistungen und Termine direkt beim Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.gjithebiznesi.com/XK/auto-servis-nazi-044-405-002",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJF76CzqR6UxMRWI0WKlx0-c0",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-servis-nazi-044-405-002"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-nexhi-lipjan",
+      "name": "Auto-Servis NEXHI",
+      "city": "Lipjan",
+      "address": "Bajram Gashi 320, Banullë, Lipjan 14000",
+      "phone": "+38344736933",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Kfz-Wartung und Reparatur; konkreten Umfang direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice",
+      "description": "Wartung und Reparatur laut öffentlichem Verzeichnis. Leistungen und Termine direkt beim Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.gjithebiznesi.com/XK/auto-servis-nexhi_1n-044-736-933",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJh0VUWA6DVBMRUJX-YMmG0qE",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-servis-nexhi_1n-044-736-933"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
         }
       }
     },
@@ -3504,6 +4214,49 @@
             "https://www.cybo.com/XK/ferizaj/car-repair"
           ],
           "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-pirqi-vushtrri",
+      "name": "Auto Servis Pirqi",
+      "city": "Vushtrri",
+      "address": "RXM6+4FR, Gjergj Kastrioti Skenderbeu, Vushtrri 42000",
+      "phone": "+38344444556",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Kfz-Wartung und Reparatur; konkreten Umfang direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice",
+      "description": "Wartung und Reparatur laut öffentlichem Verzeichnis. Leistungen und Termine direkt beim Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.gjithebiznesi.com/XK/auto-servis-pirqi-044-444-556",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJuUm_gSRbUxMRJDrySRYvJV4",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-servis-pirqi-044-444-556"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
         }
       }
     },
@@ -3602,11 +4355,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Rizvanolli+Aleksan%C3%ABr+Moisiu%2C+Gjakov%C3%AB+50000&query_place_id=ChIJHY-JYe6xUxMR6O1WWZKP5xc",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Rizvanolli+Aleksan%C3%ABr+Moisiu%2C+Gjakov%C3%AB+50000&query_place_id=ChIJHY-JYe6xUxMR6O1WWZKP5xc",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -3655,11 +4408,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+SEJDA+Avduall+Presheva+%2C+Gjilan&query_place_id=ChIJnz-VYLuNVBMROs4-vKcMxzw",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+SEJDA+Avduall+Presheva+%2C+Gjilan&query_place_id=ChIJnz-VYLuNVBMROs4-vKcMxzw",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -3715,6 +4468,49 @@
       }
     },
     {
+      "id": "auto-servis-univerzal-lipjan",
+      "name": "Auto Servis UNIVERZAL",
+      "city": "Lipjan",
+      "address": "lipjan-banull, R120, Lipjan 14000",
+      "phone": "+38344269491",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Kfz-Wartung und Reparatur; konkreten Umfang direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice",
+      "description": "Wartung und Reparatur laut öffentlichem Verzeichnis. Leistungen und Termine direkt beim Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.gjithebiznesi.com/XK/auto-servis-univerzal_1s-044-269-491",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJp_ETv_-CVBMRFzoGDAgPqUE",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-servis-univerzal_1s-044-269-491"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+        }
+      }
+    },
+    {
       "id": "auto-servis-visari-prizren",
       "name": "Auto Servis Visari",
       "city": "Prizren",
@@ -3755,11 +4551,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Visari+Enver+Hadri+PN+Prizren+XK%2C+20000&query_place_id=ChIJ45EnXQCVUxMREe66dnqtplE",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Visari+Enver+Hadri+PN+Prizren+XK%2C+20000&query_place_id=ChIJ45EnXQCVUxMREe66dnqtplE",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -3767,6 +4563,49 @@
             "https://faqet-e-verdha.cybo.com/XK/prizreni/riparimi-i-makinave-"
           ],
           "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-visco-prizren",
+      "name": "Auto Servis Visco",
+      "city": "Prizren",
+      "address": "Rruga e Transitit Petrovë, Prizren 20000",
+      "phone": "+38344122498",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Kfz-Wartung und Reparatur; konkreten Umfang direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice",
+      "description": "Wartung und Reparatur laut öffentlichem Verzeichnis. Leistungen und Termine direkt beim Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.gjithebiznesi.com/XK/auto-servis-visco-044-122-498",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJa4mLzfOVUxMRsDb9IqPAVkY",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-servis-visco-044-122-498"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
         }
       }
     },
@@ -3823,11 +4662,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Xhelali+Jusuf+Ramadani%2C+Lubizhd%C3%AB%2C+Prizren&query_place_id=ChIJgc9JBjKUUxMRoP3PNI5Eo-U",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Xhelali+Jusuf+Ramadani%2C+Lubizhd%C3%AB%2C+Prizren&query_place_id=ChIJgc9JBjKUUxMRoP3PNI5Eo-U",
-          "checkedAt": "2026-10-05T10:08:45.026Z"
+          "checkedAt": "2026-10-05T10:08:45.026Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "official_maps",
@@ -3948,11 +4787,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Mercedes-Benz+%7C+Auto+Star+Xharra+Besim+Bishtazhini%2C+Gjakova&query_place_id=ChIJ2zjWiu-xUxMR6w7XAMmr0wk",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Mercedes-Benz+%7C+Auto+Star+Xharra+Besim+Bishtazhini%2C+Gjakova&query_place_id=ChIJ2zjWiu-xUxMR6w7XAMmr0wk",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -4361,11 +5200,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Automex+Selman+riza%2C+Gjakov%C3%AB+10000&query_place_id=ChIJtU1fjeyxUxMRtyTwvpO-XpU",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Automex+Selman+riza%2C+Gjakov%C3%AB+10000&query_place_id=ChIJtU1fjeyxUxMRtyTwvpO-XpU",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -4419,11 +5258,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=AutoNgjyrosje%22HASKUKA%22+Brigada+125%2C+Prizren+20000&query_place_id=ChIJ19tbe5C_UxMR8sk4_2w7Q6A",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=AutoNgjyrosje%22HASKUKA%22+Brigada+125%2C+Prizren+20000&query_place_id=ChIJ19tbe5C_UxMR8sk4_2w7Q6A",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -4584,11 +5423,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autoservis+KENI+2+Eduard+Lir%2C+Prishtina+10000&query_place_id=ChIJ-ROy75SfVBMR7yDOPsnQ-IQ",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Autoservis+KENI+2+Eduard+Lir%2C+Prishtina+10000&query_place_id=ChIJ-ROy75SfVBMR7yDOPsnQ-IQ",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -4692,11 +5531,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=AutoServis+Semini+Hasjanja-Gjonaj%2C+Prizren+20000&query_place_id=ChIJWwIf51q_UxMRQAyT9x5ndbs",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=AutoServis+Semini+Hasjanja-Gjonaj%2C+Prizren+20000&query_place_id=ChIJWwIf51q_UxMRQAyT9x5ndbs",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -4925,11 +5764,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=BMW+Prishtina+Lidhja+e+Lezh%C3%ABs%2C+Prishtina+10000&query_place_id=ChIJqXQcgJufVBMROGwBj_-gtXU",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=BMW+Prishtina+Lidhja+e+Lezh%C3%ABs%2C+Prishtina+10000&query_place_id=ChIJqXQcgJufVBMROGwBj_-gtXU",
-          "checkedAt": "2026-10-05T10:08:45.026Z"
+          "checkedAt": "2026-10-05T10:08:45.026Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -5224,11 +6063,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Dida+Service+6QJ4%2B7HQ%2C+Bekim+Berisha-Abeja%2C+Prizren&query_place_id=ChIJyQejR72VUxMRfwEdsQQLf5Q",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Dida+Service+6QJ4%2B7HQ%2C+Bekim+Berisha-Abeja%2C+Prizren&query_place_id=ChIJyQejR72VUxMRfwEdsQQLf5Q",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -5280,11 +6119,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=DPF+Auto+Gjini+pn+Rrust%C3%AB+Kabashi%2C+Prizren+20000&query_place_id=ChIJuxYqBCGVUxMRDAkoncPsVC4",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=DPF+Auto+Gjini+pn+Rrust%C3%AB+Kabashi%2C+Prizren+20000&query_place_id=ChIJuxYqBCGVUxMRDAkoncPsVC4",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -5601,11 +6440,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Mentori+273+Isa+Kastrati%2C+Matiqan%2C+Prishtina+10000&query_place_id=ChIJqdYqioGfVBMRibazGbBsjTU",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Mentori+273+Isa+Kastrati%2C+Matiqan%2C+Prishtina+10000&query_place_id=ChIJqdYqioGfVBMRibazGbBsjTU",
-          "checkedAt": "2026-10-05T10:08:45.026Z"
+          "checkedAt": "2026-10-05T10:08:45.026Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -5816,6 +6655,56 @@
       }
     },
     {
+      "id": "greensteam-detailing-prishtina",
+      "name": "GreenSteam Detailing",
+      "city": "Prishtina",
+      "address": "Magjistralja Prishtinë - Gjilan km 4, Prishtinë",
+      "phone": "+38349880777",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Karosserie & Lack"
+      ],
+      "serviceDetails": [
+        "Innen- und Außenaufbereitung mit Dampf",
+        "Politur, Keramikversiegelung und Lackschutzfolie (PPF)"
+      ],
+      "languages": [],
+      "specialty": "Detailing · Dampfreinigung · Lackschutz",
+      "description": "GreenSteam bei Prishtina veröffentlicht Fahrzeugaufbereitung mit Dampf, Politur, Keramikversiegelung und Lackschutzfolie.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://mygreensteam.com/wp-content/uploads/2025/07/Company-Profile-GreenSteam-Detailing.pdf",
+          "title": "Betriebswebsite: Kontakt, Standort und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://mygreensteam.com/",
+          "title": "Betriebswebsite: Fahrzeugaufbereitung und Lackschutz",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJyT5aBNKdVBMRYnZ624qTZPE",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_website",
+          "sourceUrls": [
+            "https://mygreensteam.com/wp-content/uploads/2025/07/Company-Profile-GreenSteam-Detailing.pdf",
+            "https://mygreensteam.com/"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+        }
+      }
+    },
+    {
       "id": "kio-garage-prizren",
       "name": "KIO Garage",
       "city": "Prizren",
@@ -5897,11 +6786,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Koli+V%C3%ABll%C3%ABz%C3%ABrit+Fazliu%2C+Prishtin%C3%AB&query_place_id=ChIJzbQZKx2fVBMRt0kf7QWjCF4",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Koli+V%C3%ABll%C3%ABz%C3%ABrit+Fazliu%2C+Prishtin%C3%AB&query_place_id=ChIJzbQZKx2fVBMRt0kf7QWjCF4",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -5909,6 +6798,103 @@
             "https://stgres.gjirafa.biz/koli-1"
           ],
           "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+        }
+      }
+    },
+    {
+      "id": "lipjani-coding-lipjan",
+      "name": "Lipjani Coding",
+      "city": "Lipjan",
+      "address": "Rruga Isa Olluri, Lipjan, Kosovë",
+      "phone": "+38344415621",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344415621",
+      "brands": [
+        "BMW",
+        "Audi",
+        "Volkswagen",
+        "SEAT",
+        "Skoda",
+        "BYD",
+        "Mercedes-Benz",
+        "Porsche"
+      ],
+      "services": [
+        "Diagnose & Elektronik"
+      ],
+      "serviceDetails": [
+        "Fahrzeugcodierung und CarPlay-Aktivierung",
+        "Navigationsupdates und Regionsumstellung"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugcodierung · CarPlay · Navigation",
+      "description": "Lipjani Coding in Lipjan veröffentlicht Fahrzeugcodierung, CarPlay-Aktivierung und Navigationsanpassungen. Modellkompatibilität direkt klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://lipjanicoding.com/en",
+          "title": "Betriebswebsite: Kontakt, Standort und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJqcamjDqDVBMRkSBTblVoqbk",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_website",
+          "sourceUrls": [
+            "https://lipjanicoding.com/en"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+        }
+      }
+    },
+    {
+      "id": "luxury-auto-detailing-gjilan",
+      "name": "Luxury Auto Detailing",
+      "city": "Gjilan",
+      "address": "Mulla Idrizi III, Gjilan 60000",
+      "phone": "+38345585263",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Karosserie & Lack"
+      ],
+      "serviceDetails": [
+        "Innenreinigung und Fahrzeugaufbereitung",
+        "Politur und Keramikversiegelung"
+      ],
+      "languages": [],
+      "specialty": "Detailing · Reinigung · Lackschutz",
+      "description": "Der Betrieb veröffentlicht Fahrzeugaufbereitung und Lackschutz. Behandlung und Termin direkt vereinbaren.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.findglocal.com/XK/Gjilan/1168160443205697/Luxury-Auto-Detailing",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJaTWZ1RqNVBMRQ0eBE9gCOec",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.findglocal.com/XK/Gjilan/1168160443205697/Luxury-Auto-Detailing"
+          ],
+          "note": "Aktuelle eigene Betriebsbeiträge bestätigen denselben Telefonkontakt und Mulla Idrizi III in Gjilan. Der abweichende ältere Verzeichnis-Plus-Code wird nicht übernommen. Direkte Place-Details-ID-Prüfung bestanden."
         }
       }
     },
@@ -6015,11 +7001,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Mercedes-Benz-Limi-Service+R101+Lidhja+e+Pejes151+XK%2C+Istog+31020&query_place_id=ChIJ2RZCo9UbUxMRRYjsUK8r0is",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Mercedes-Benz-Limi-Service+R101+Lidhja+e+Pejes151+XK%2C+Istog+31020&query_place_id=ChIJ2RZCo9UbUxMRRYjsUK8r0is",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -6207,11 +7193,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Nero+Meriman+Jakupi%2C+Prizren+20000&query_place_id=ChIJmXwWcEuUUxMRO19gku2sp8U",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Nero+Meriman+Jakupi%2C+Prizren+20000&query_place_id=ChIJmXwWcEuUUxMRO19gku2sp8U",
-          "checkedAt": "2026-10-05T10:08:45.026Z"
+          "checkedAt": "2026-10-05T10:08:45.026Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "name_and_address",
@@ -6314,11 +7300,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=OPEL+E.Rafuna+M25-2%2C+Prishtina+10000&query_place_id=ChIJjRb_d52eVBMRj228W5KeTb8",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=OPEL+E.Rafuna+M25-2%2C+Prishtina+10000&query_place_id=ChIJjRb_d52eVBMRj228W5KeTb8",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -6327,6 +7313,49 @@
             "https://www.autoyas.com/XK/Pristina/116827828191779/Opel-E.Rafuna"
           ],
           "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+        }
+      }
+    },
+    {
+      "id": "opel-zh-sh-gjakova",
+      "name": "Opel Zh-Sh",
+      "city": "Gjakova",
+      "address": "9CGP+R24, Skënderbeu, Gjakovë 50000",
+      "phone": "+38343730111",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Kfz-Wartung und Reparatur; konkreten Umfang direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice",
+      "description": "Wartung und Reparatur laut öffentlichem Verzeichnis. Leistungen und Termine direkt beim Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://faqet-e-verdha.cybo.com/XK/gjakov%C3%AB/riparimi-i-makinave-",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJhxKlqlqxUxMRagYBac6qJx4",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://faqet-e-verdha.cybo.com/XK/gjakov%C3%AB/riparimi-i-makinave-"
+          ],
+          "note": "Zwei Google-Geschäftspunkte teilen die Telefonnummer. Nur die Place ID mit passendem Namen und exakt dem unabhängigen Plus-Code 9CGP+R24 an der Skënderbeu-Straße wird übernommen. Direkte Place-Details-ID-Prüfung bestanden."
         }
       }
     },
@@ -6371,11 +7400,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+BEDA+SH.P.K.+Zagrebit+100%2C+Prishtina+10000&query_place_id=ChIJoaIikxGfVBMR-sPTTKaGVLc",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Auto+Servis+BEDA+SH.P.K.+Zagrebit+100%2C+Prishtina+10000&query_place_id=ChIJoaIikxGfVBMR-sPTTKaGVLc",
-          "checkedAt": "2026-10-05T10:08:45.026Z"
+          "checkedAt": "2026-10-05T10:08:45.026Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -6509,11 +7538,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sfishta+Auto+Home+Bardhosh%2C+Prishtina&query_place_id=ChIJ-5d0UsmhVBMRBQBORVPLs7A",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sfishta+Auto+Home+Bardhosh%2C+Prishtina&query_place_id=ChIJ-5d0UsmhVBMRBQBORVPLs7A",
-          "checkedAt": "2026-10-05T12:08:22.374Z"
+          "checkedAt": "2026-10-05T12:08:22.374Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -6632,11 +7661,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=REX+Automobile+7QCP%2BGJ2%2C+M25%2C+Prizren+20550&query_place_id=ChIJCyVBgsGWUxMRQ11i9tCO8q4",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=REX+Automobile+7QCP%2BGJ2%2C+M25%2C+Prizren+20550&query_place_id=ChIJCyVBgsGWUxMRQ11i9tCO8q4",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -6732,6 +7761,93 @@
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
+        }
+      }
+    },
+    {
+      "id": "shala-detailing-gjakova",
+      "name": "Shala Detailing",
+      "city": "Gjakova",
+      "address": "Rruga Kështjella, Smaq, Gjakovë",
+      "phone": "+38345425689",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Karosserie & Lack"
+      ],
+      "serviceDetails": [
+        "Innen- und Außenreinigung",
+        "Keramikversiegelung"
+      ],
+      "languages": [],
+      "specialty": "Detailing · Reinigung · Keramikversiegelung",
+      "description": "Shala Detailing in Smaq bei Gjakova bietet Fahrzeugreinigung und Keramikversiegelung laut eigener Website.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://shaladetailing.com/",
+          "title": "Betriebswebsite: Kontakt, Standort und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJ9XGLP2KxUxMR3WRa1Azbhss",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_website",
+          "sourceUrls": [
+            "https://shaladetailing.com/"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+        }
+      }
+    },
+    {
+      "id": "sokoli-autoelectronic-peja",
+      "name": "Sokoli AutoElectronic",
+      "city": "Peja",
+      "address": "M843+28, Pejë",
+      "phone": "+38349326545",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Kfz-Wartung und Reparatur; konkreten Umfang direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice",
+      "description": "Wartung und Reparatur laut öffentlichem Verzeichnis. Leistungen und Termine direkt beim Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.gjithebiznesi.com/XK/sokoli-autoelectronic-049-326-545",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJE6T4PF79UhMRRgCM6ZQIuxQ",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/sokoli-autoelectronic-049-326-545"
+          ],
+          "note": "Abweichender Namenszusatz im Google-Auftritt; identische internationale Telefonnummer und exakt derselbe unabhängige Plus-Code M843+28 bestätigen die Paarung. Verzeichnisname bleibt erhalten. Direkte Place-Details-ID-Prüfung bestanden."
         }
       }
     },
@@ -6850,6 +7966,92 @@
       }
     },
     {
+      "id": "superclean-prishtina",
+      "name": "SuperClean Prishtinë",
+      "city": "Prishtina",
+      "address": "Prishtinë - Ferizaj (Çagllavicë) Kilometri i 3, Prishtina 10000",
+      "phone": "+38345677633",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Karosserie & Lack"
+      ],
+      "serviceDetails": [
+        "Fahrzeugaufbereitung laut unabhängigem Verzeichnis; konkrete Behandlungen direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugaufbereitung · Detailing",
+      "description": "Öffentlich gelisteter Betrieb für Fahrzeugaufbereitung. Reinigung, Behandlungsmöglichkeiten und Termine direkt klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.gjithebiznesi.com/XK/superclean-prishtin%C3%AB-045-677-633",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJc2i7p8qdVBMRWHjikePrNjc",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/superclean-prishtin%C3%AB-045-677-633"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+        }
+      }
+    },
+    {
+      "id": "tiptop-detailing-gjakova",
+      "name": "TipTop Vullkanizer & Detailing Car Wash",
+      "city": "Gjakova",
+      "address": "34 Nënë Tereza, Gjakovë 50000",
+      "phone": "+38349323545",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Karosserie & Lack"
+      ],
+      "serviceDetails": [
+        "Fahrzeugaufbereitung laut unabhängigem Verzeichnis; konkrete Behandlungen direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugaufbereitung · Detailing",
+      "description": "Öffentlich gelisteter Betrieb für Fahrzeugaufbereitung. Reinigung, Behandlungsmöglichkeiten und Termine direkt klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.gjithebiznesi.com/XK/tiptop-vullkanizer-detailing-car-wash-049-323-545",
+          "title": "Unabhängiger Betriebsbeleg: Kontakt, Standort und Leistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJGRcrk_qtUxMRp0Xr0ws6eG4",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/tiptop-vullkanizer-detailing-car-wash-049-323-545"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+        }
+      }
+    },
+    {
       "id": "titans-auto-repair-prishtina",
       "name": "TITANS Auto Repair",
       "city": "Prishtina",
@@ -6943,11 +8145,11 @@
         "snapshot": {
           "rating": null,
           "count": null,
+          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Turbo+Service+Engineering+Rr.7+Shtatori%2C+Prishtin%C3%AB&query_place_id=ChIJ5ac28s-fVBMRCQrodfvS-F0",
           "sourceUrl": null,
           "sourceLabel": null,
-          "sourceUpdatedAt": null,
-          "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Turbo+Service+Engineering+Rr.7+Shtatori%2C+Prishtin%C3%AB&query_place_id=ChIJ5ac28s-fVBMRCQrodfvS-F0",
-          "checkedAt": "2026-10-05T09:06:46.192Z"
+          "checkedAt": "2026-10-05T09:06:46.192Z",
+          "sourceUpdatedAt": null
         },
         "verification": {
           "method": "phone_and_location",
@@ -7043,6 +8245,100 @@
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
+        }
+      }
+    },
+    {
+      "id": "waxon-auto-detailing-mitrovica",
+      "name": "WaxOn Auto Detailing",
+      "city": "Mitrovica",
+      "address": "Rr. Agim Ramadani, Mitrovicë, Kosovë",
+      "phone": "+38343800098",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Karosserie & Lack"
+      ],
+      "serviceDetails": [
+        "Innen- und Außenreinigung",
+        "Lackpolitur und Keramikversiegelung",
+        "Scheinwerferaufbereitung"
+      ],
+      "languages": [],
+      "specialty": "Detailing · Politur · Keramikversiegelung",
+      "description": "WaxOn in Mitrovica bietet Innen- und Außenaufbereitung, Lackkorrektur und Keramikversiegelung laut eigener Website.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://autowaxon.com/contact",
+          "title": "Betriebswebsite: Kontakt, Standort und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://autowaxon.com/",
+          "title": "Betriebswebsite: Fahrzeugaufbereitung und Lackschutz",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJATQ_altFUxMRu2tObrV3C60",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_website",
+          "sourceUrls": [
+            "https://autowaxon.com/contact",
+            "https://autowaxon.com/"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+        }
+      }
+    },
+    {
+      "id": "xhela-polir-mitrovica",
+      "name": "Xhela",
+      "city": "Mitrovica",
+      "address": "Shipol, Mitrovicë, Kosovë",
+      "phone": "+38349227726",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349227726",
+      "brands": [],
+      "services": [
+        "Karosserie & Lack"
+      ],
+      "serviceDetails": [
+        "Lackierung und Lackpolitur"
+      ],
+      "languages": [],
+      "specialty": "Lackierung · Politur",
+      "description": "Xhela in Shipol bei Mitrovica bietet Lackierung und Fahrzeugpolitur laut eigener Website.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.autoxhela.com/",
+          "title": "Betriebswebsite: Kontakt, Standort und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-10",
+      "status": "published",
+      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "google": {
+        "placeId": "ChIJHUU43hZFUxMR_WC4zXj2pEQ",
+        "matchedAt": "2026-10-10T20:59:53.578Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_website",
+          "sourceUrls": [
+            "https://www.autoxhela.com/"
+          ],
+          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
         }
       }
     },
