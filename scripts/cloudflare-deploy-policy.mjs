@@ -104,6 +104,7 @@ export function assertCloudflareDeployConfig(source, generated) {
   if (source.assets?.html_handling !== "none" || generated.assets?.html_handling !== "none") {
     throw new Error("Production static assets must preserve exact HTML filenames for ownership verification.");
   }
+  if(source.assets?.binding!=="ASSETS"||generated.assets?.binding!=="ASSETS"||!Array.isArray(source.assets?.run_worker_first)||!source.assets.run_worker_first.includes("/__public/*")||!isDeepStrictEqual(source.assets.run_worker_first,generated.assets.run_worker_first))throw new Error("Public release assets require the checked status-guard routing and ASSETS binding.");
   if (!isDeepStrictEqual(source.routes ?? [], generated.routes ?? []) || source.workers_dev !== generated.workers_dev || source.preview_urls !== generated.preview_urls) {
     throw new Error("Generated routing and technical-host settings must match the checked-in production configuration.");
   }

@@ -37,13 +37,13 @@ const source = {
   workers_dev: true,
   preview_urls: false,
   routes: [],
-  assets: { html_handling: "none" },
+  assets: { html_handling: "none", binding:"ASSETS",run_worker_first:["/__public/*"] },
   triggers: {crons:["*/5 * * * *"]},
   vars: { SITE_ORIGIN: cloudflareProduction.origin },
   d1_databases: [{ binding: "DB", database_id: cloudflareProduction.database, database_name: cloudflareProduction.databaseName, migrations_dir: "drizzle", remote: false }],
   r2_buckets: [{ binding: "BUCKET", bucket_name: cloudflareProduction.bucket, remote: false }],
 };
-const generated = { ...source, main: "index.js", no_bundle: true, assets: { directory: "../client", html_handling: "none" } };
+const generated = { ...source, main: "index.js", no_bundle: true, assets: { ...source.assets, directory: "../client", html_handling: "none" } };
 assert.doesNotThrow(() => assertCloudflareDeployContext(env, commit, commit));
 for (const change of [{ GITHUB_ACTIONS: "false" }, { GITHUB_EVENT_NAME: "pull_request" }, { GITHUB_EVENT_NAME: "workflow_dispatch" }, { GITHUB_REF: "refs/heads/codex/feature" }, { GITHUB_REPOSITORY: "someone/fork" }, { GITHUB_SHA: "b".repeat(40) }, { RELEASE_TAG: "v1.2.3-beta.1" }, { RELEASE_TAG: "v01.2.3" }, { RELEASE_TAG: "main" }]) {
   assert.throws(() => assertCloudflareDeployContext({ ...env, ...change }, commit, commit));
@@ -146,6 +146,7 @@ async function makeRelease() {
     tarEntry("dist/server/index.js", expectedCode),
     tarEntry("dist/server/wrangler.json", JSON.stringify(fixtureConfig)),
     tarEntry("dist/client/fixture.js", "published-client-bytes"),
+    tarEntry("dist/catalogue-import.json", JSON.stringify({schemaVersion:1,commit})),
     ...extraEntries,
     Buffer.alloc(1024),
   ]));
@@ -209,7 +210,7 @@ function fixtureRun(command, args, options) {
   if (failOperation === remoteOperations.at(-1)) throw new Error("fixture-private-value: provider failure");
   return "";
 }
-const deploy = overrides => deployCloudflare({ root: fixtureRoot, env: { ...env, ...overrides }, run: fixtureRun, request: fixtureRequest });
+const deploy = overrides => deployCloudflare({ root: fixtureRoot, env: { ...env, ...overrides }, run: fixtureRun, request: fixtureRequest, importCatalogue:async ({planPath,commit:sourceCommit})=>{assert.deepEqual(JSON.parse(await readFile(planPath,"utf8")),{schemaVersion:1,commit:sourceCommit});remoteOperations.push("catalogue");if(failOperation==="catalogue")throw Error("fixture-private-value");} });
 
 try {
   await mkdir(join(fixtureRoot, "artifacts"), { recursive: true });
@@ -222,17 +223,17 @@ try {
   const output = join(fixtureRoot, "github-output");
   const withSecrets = { CLOUDFLARE_WORKER_SECRETS: '{"GOOGLE_PLACES_SERVER_API_KEY":"fixture-private-value"}', GITHUB_OUTPUT: output };
   assert.deepEqual(await deploy(withSecrets), { deployed: true, tag, commit });
-  assert.deepEqual(remoteOperations, ["migrations", "deploy"]);
+  assert.deepEqual(remoteOperations, ["migrations", "catalogue", "deploy"]);
   assert.equal(existsSync(secretFile), false, "secrets must be removed after successful deployment");
   assert.match(await readFile(output, "utf8"), /deployed=true/);
   remoteOperations = [];
   assert.equal((await deploy()).deployed, true, "retry must deploy the same downloaded release without rebuilding");
-  assert.deepEqual(remoteOperations, ["migrations", "deploy"]);
+  assert.deepEqual(remoteOperations, ["migrations", "catalogue", "deploy"]);
 
   remoteOperations = [];
   currentMain = "b".repeat(40);
   assert.deepEqual(await deploy(), { deployed: true, tag, commit }, "new docs/chore commits on main must not strand an already published release");
-  assert.deepEqual(remoteOperations, ["migrations", "deploy"]);
+  assert.deepEqual(remoteOperations, ["migrations", "catalogue", "deploy"]);
   remoteOperations = [];
   latestRelease = publishedRelease("v1.2.4");
   assert.deepEqual(await deploy(), { deployed: false, reason: "superseded" });
@@ -322,7 +323,7 @@ try {
   failOperation = "deploy";
   await assert.rejects(deploy(withSecrets), error => /Worker deployment failed/.test(error.message) && !error.message.includes("fixture-private-value"));
   assert.equal(existsSync(secretFile), false, "secrets must be removed after failed deployment");
-  assert.deepEqual(remoteOperations, ["migrations", "deploy"]);
+  assert.deepEqual(remoteOperations, ["migrations", "catalogue", "deploy"]);
   console.log("Cloudflare deployment: main/release gating, published-release ordering, archive integrity, safe extraction, production bindings, ordered migrations and secret cleanup passed; no remote operations executed.");
 } finally {
   await rm(fixtureRoot, { recursive: true, force: true });

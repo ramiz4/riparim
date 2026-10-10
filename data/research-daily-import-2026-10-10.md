@@ -1,0 +1,65 @@
+# Zusätzliche Kosovo-Kandidaten für den ersten täglichen Lauf
+
+Prüfdatum: 2026-10-10. Recherche im isolierten Aufgaben-Worktree. Keine Kontaktaufnahme und keine Google-Geschäftsdaten übernommen. Dieser Bericht ist eine unabhängige Kandidatenrecherche, kein Freigabe- oder Veröffentlichungsnachweis. Google-Place-ID, aktiver Geschäftsstatus, Live-/Entwurfsbestand und Standortabgleich werden im Importmanifest durch den ausführenden Agent ergänzt.
+
+## Prüfumfang und Quellenqualität
+
+Gelesen: `CONTRIBUTING.md`, `docs/workshop-data.md`, der 158 Profile umfassende Katalog, die beiden Entfernungsmanifeste (35 verworfene Kennungen), `workshop-scope.json` und historische JSON-Prüf-/Importberichte. Ein Namens-/Telefon-Suchabgleich aller unten genannten Kandidaten über sämtliche vorhandenen JSON-Berichte ergab keine Übereinstimmung. Eine vollständige Live-/Place-ID-Prüfung ist dadurch nicht ersetzt. Gleichnamige Betriebe in anderen Orten bleiben getrennt; genaue Betriebsmarker müssen vor Freigabe bestätigt werden.
+
+Primärquellen wurden bevorzugt. Auto Xhama Center ist über seine eigene Website bestätigt. Bei AutoGermia, Niti, Enzo und Shine sind konkrete selbst veröffentlichte Arbeiten und Betriebskontakte über AutoYas lesbar; die verknüpften Facebook-Ursprungsseiten wurden direkt aufgerufen, aber vom Fetch-Dienst gedrosselt. Deshalb ist die Spiegelherkunft ausdrücklich offengelegt. Gjirafa enthält eigenständige, Google-unabhängige Betriebsprofile, teils in Ich-/Wir-Form, mit öffentlichen Geschäftskontakten und Leistungsbeschreibungen; die Identität des redaktionellen Autors wurde nicht separat bestätigt. Es wurden keine Öffnungszeiten, Sterne, Kontaktsprachen, Markenbetreuung allein aus Fahrzeugbeispielen oder WhatsApp-Funktionen ohne gesonderten Beleg ergänzt.
+
+## 17 belegte Recherchekandidaten; Google-Freigabe noch offen
+
+| Kandidat | Öffentliches Geschäftstelefon | Unabhängig belegter Standort | Ausschließlich belegte Leistungen | Quellen und Prüfhinweise |
+|---|---|---|---|---|
+| Auto Xhama Center / Glass - Servis | +38344340859; zusätzlich +38344656116 | Magjistralja Prishtinë–Mitrovicë, km 4, Mazgit | Front-, Panorama- und Heckscheiben; eigene Beiträge belegen Ersatz/Montage und ADAS-Kalibrierung | [Eigene Website](https://autoxhamacenter.com/); [eigene Betriebsbeiträge über AutoYas](https://www.autoyas.com/XK/Pristina/205946122756284/Auto-Xhama-Center-%22Glass---Servis%22). Eigene Beiträge 27.06./02.07.2026. Ein älterer Beitrag nennt km 5; aktueller eigener Webauftritt und neuere Beiträge nennen km 4. Google-Marker muss Mazgit bestätigen. |
+| Auto Detailing Niti / Auto Larje Niti | +38349314679 | Rruga Adem Jashari, Pejë | Professionelles Polieren, Keramikversiegelung, Innenraum-/Motorreinigung, Felgenlackierung | [Betriebsbeiträge über AutoYas](https://www.autoyas.com/XK/Pej%C3%AB/110253888122530/Auto-Larje-Niti). Leistungsangebot 25.02.2025 und Kontakt/Adresse in mehreren Arbeiten 2022–2024. [Facebook-Ursprung](https://www.facebook.com/110253888122530/) war beim Direktabruf gedrosselt. |
+| Auto Servis Idrizi | +38344747056 | Adem Jashari, Shtime | Pkw-Service; keine weiteren Spezialleistungen belegt | [Gjirafa-Betriebsprofil](https://stgres.gjirafa.biz/auto-servis-idrizi-1). Ausdrückliche Pkw-Servicebeschreibung. |
+| AutoGermia | +38344345414 | Shpetim Robaj Street, Prishtina | Innenraumreinigung, Lackkorrektur/Polieren, Keramikschutz, Motorreinigung, Glas-/Scheinwerferschutz; Entfernung von Kratzern auf Glas | [Eigene Arbeiten über AutoYas](https://www.autoyas.com/XK/Pristina/150954931922346/AutoGermia). Konkrete Behandlung 29.09.2026 und Glasarbeit 04.10.2026. [Facebook-Ursprung](https://www.facebook.com/150954931922346/) war gedrosselt. Fahrzeugbeispiele begründen keine mechanische Markenbetreuung. |
+| Auto Enzo Detailing | +38345524633 | Ferid Curri, Prishtina | Innen-/Lederreinigung und Schutz, Polieren, Keramikschutz, Scheinwerferaufbereitung, Folienentfernung/PPF | [Eigene Beiträge über AutoYas](https://www.autoyas.com/XK/Pristina/100237179537543/Auto-Enzo-Detailing). Eigene Arbeiten April–August 2026 und veröffentlichter Kontakt. [Facebook-Ursprung](https://www.facebook.com/100237179537543/) war gedrosselt. |
+| Shine Detailing Studio | +38349757144 | Skënder Matallari Nr. 25, Matiçan, Prishtina | Innen-/Gesamtreinigung, professionelles Polieren, Lackdekontamination, Kratzer-/Hologrammentfernung | [Eigene Beiträge über AutoYas](https://www.autoyas.com/XK/Pristina/982725325082851/Shine-Detailing-Studio); [unabhängiges Kontakt-/Straßenprofil](https://www.gjithebiznesi.com/XK/shine-detailing-studio-049-757-144). Arbeiten Februar 2025. [Facebook-Ursprung](https://www.facebook.com/982725325082851/) war gedrosselt. Nicht mit mehreren weiteren ähnlich benannten Shine-Profilen gleichsetzen. |
+| Auto Servis Fulga | +38344228702; zusätzlich +38349117423 | Azem Bejta, Skenderaj | Service für Pkw verschiedener Arten | [Gjirafa-Betriebsprofil](https://stgres.gjirafa.biz/auto-servis-fulga-1/?p360=1). Beide Kontakte ausdrücklich aufgeführt. |
+| Auto Servis Gjinovci | +38344192517 | Magjistralja Skenderaj–Klinë, Skenderaj | Pkw-Service und computergestützte Achsvermessung | [Gjirafa-Betriebsprofil](https://stgres.gjirafa.biz/auto-servis-gjinolli-1/?p360=1); [Filikaqa-Betriebsprofil](https://www.filikaqa.com/en/listings/476-auto-servis-gjinovci). Nicht mit AutoYas-Profil an Rr. Rezistenca und +355-Telefon vermischen. |
+| Auto Larje Soni | +38349327873 | Azem Bejta, Skenderaj | Chemische Innenreinigung, Polieren von Pkw und Scheinwerfern | [Gjirafa-Betriebsprofil](https://stgres.gjirafa.biz/auto-larje-soni-1). Leistungsbeschreibung belegt mehr als gewöhnliche Außenwäsche. |
+| Autoservis Lordi / Auto Lordi | +38344414690 | Alush Gashi, Skenderaj | Pkw-Service, Reifenarbeiten, Achsvermessung, Schweißen; Teilehandel separat | [Gjirafa-Betriebsprofil](https://stgres.gjirafa.biz/autoservis-lordi-1); [eigene Verkäuferanzeige mit identischem Kontakt](https://www.merrjep.com/shpallja/kositese-elektrike/11145782). Die konkrete verlinkte Anzeige verkauft ein Gartengerät und ist nur Kontakt-/Identitätsbeleg, kein Pkw-Reparaturnachweis. |
+| Auto Servis Isa | +38349121259 | Arben Haliti, Skenderaj | Pkw-Service, Motorölwechsel | [Gjirafa-Betriebsprofil](https://stgres.gjirafa.biz/auto-servis-isa-2). Nicht Mercedes Isa in Ferizaj (+38349999343). |
+| Auto servis Beka | +38344232705; zusätzlich +38344473320 | Hysen Bujupi, Duskaja, Gemeinde Istog | Pkw-Service, Schweißen, Polieren und Innenraumreinigung; daneben Motorrad-/Nutzfahrzeugservice | [Gjirafa-Betriebsprofil](https://stgres.gjirafa.biz/auto-servis-beka-4). Konkreter Pkw-Service ist ausdrücklich vorhanden. |
+| Auto Servis XILI | +38344252782 | Dëshmorët e Kombit, Istog | Service für Audi und Volkswagen | [Gjirafa-Betriebsprofil](https://stgres.gjirafa.biz/auto-servis-xili-1). Markenbetreuung ausdrücklich genannt. |
+| Auto Service Vali | +38344920210; zusätzlich +38349334471 | Dëshmorët e Kombit, Istog | Service und Reparatur von Automobilen | [Gjirafa-Betriebsprofil](https://stgres.gjirafa.biz/autoservicevali-1). National publizierte Telefonnummern wurden lediglich mit Kosovo-Vorwahl normalisiert. |
+| Mercedes Benz Viki&Laura | +38349323366 | Magjistralja Istog–Klinë, Zllakuqan, Gemeinde Klinë | Mercedes-Pkw-Service, Elektrik, Glasreparatur/-montage, Klimaservice, Auspuffservice | [Gjirafa-Betriebsprofil](https://stgres.gjirafa.biz/mercedes-benz-vikilaura-1). Pkw-/Markenspezialisierung ausdrücklich belegt. Zllakuqan liegt hier laut Quellprofil in Gemeinde Klinë; nicht ungeprüft zu Istog umetikettieren. |
+| Auto servis Durguti | +38344659761 | Rruga Xhelal Hajda–Toni, Rahovec | Pkw-Service; keine Spezialisierung ergänzt | [Gjirafa-Betriebsprofil](https://stgres.gjirafa.biz/auto-servis-durguti-1). |
+| Autoservis Faredini-A | +38344968497; zusätzlich +38344563892 | Magjistralja Rahovec–Malishevë, Rahovec | Klimabefüllung, technische Kontrolle, computergestütztes Auswuchten, Achsvermessung | [Gjirafa-Betriebsprofil](https://stgres.gjirafa.biz/autoservis-faredini-a-1). Keine deutsche gesetzliche HU-Zulassung aus „kontrollim teknik“ ableiten. |
+
+## Zurückgestellt: kein Import aus dieser Recherche
+
+| Kandidat | Belegter Kontakt/Ort | Konkreter Grund |
+|---|---|---|
+| Omni Detailing Center | Beiträge nennen +38343888628 und +38345333978; Profilfeld nennt dagegen +38345666446. Magjistralja Prishtinë–Ferizaj km 8 | [Lesbare Betriebsbeiträge](https://www.cleaners10.com/XK/Pristina/327464513774490/Omni-Detailing-Center) belegen Innen-/Außendetailing, Polieren/Keramik, aber drei abweichende Kontakte ohne belastbare zeitliche Verbindung. Erst Kontinuität/Google-Kontakt klären. |
+| ULA detailing | +38343579908, Agim Çela, Prishtina | [AutoYas](https://www.autoyas.com/XK/Pristina/100456162539672/ULA-detailing) liefert nur Kategorie und Kontakt, keine konkreten Leistungen oder eigenen aktuellen Arbeitsbeiträge. |
+| Prishtina Pro Detailing | +38349532536, Mehmet Akif Ersoy Nr. 57, Prishtina | [AutoYas](https://www.autoyas.com/XK/Pristina/105579041778298/Prishtina-Pro-Detailing) belegt Innenraumreinigung/-desinfektion, aber keine aktuellen eigenen Arbeiten; als zusätzlicher Lead vorgesehen, zunächst Rückstellung für aktuelle Betriebs-/Identitätsprüfung. |
+| Auto Servis Spark | +37744396396, Agim Osaj, Prishtina | [AutoYas](https://www.autoyas.com/XK/Pristina/1528838830468083/Auto-Servis-Spark) belegt Elektrik/Elektronik, aber nur alten +377-Kontakt ohne aktuellen Kosovo-Telefonnachweis. Keine Umwandlung in +383 aus Vermutung. |
+| Auto Servis Genci | +38344653026, Topliçan, Suharekë | [Eigene Website](https://asgenci.com/our-shop/) bestätigt Kontakt; [Verzeichnis](https://www.cybo.com/XK/brezovica-kosovo/car-repair?p=2) verknüpft Topliçan. Eigene Website derzeit nur „Coming soon“, keine konkret lesbaren Leistungen. |
+| Auto Servis Gjinovci, Rr. Rezistenca | AutoYas nennt +35549549698 und Rr. Rezistenca, Skënderaj | [Abweichendes Profil](https://www.autoyas.com/AL/Sk%C3%ABnderaj/377215662423835/Auto-Servis---Gjinovci) enthält inkonsistente Landes-/Telefonangaben und andere Adresse. Kein Identitätsbeleg für den obigen Gjinovci-Kandidaten. |
+| Auto servis DONI Malishevë | +38349535211; Name Malishevë, Adressfeld Qendra Qytetit/Rahovec | [Betriebsbeiträge](https://www.autoyas.com/XK/Rahovec/555051834580557/Auto-servis-DONI-Malishev%C3%AB) sind überwiegend 2019–2021; Ortswiderspruch, kein aktueller eindeutig belegter Standort. |
+| Auto Servis GENTI Malishevë | +38344860019, Adem Jashari, FPQW+WH9 Malishevë | [Cybo](https://www.cybo.com/XK-biz/auto-servis%22genti%22-mlishev%C3%AB) nur allgemeine Reparaturkategorie, keine detaillierte unabhängige Pkw-Leistungsquelle. Nicht mit Genti Prishtina verschmelzen. |
+
+## Erkannte Bestandsdubletten
+
+Bei der Recherche erneut gefunden, deshalb keine neuen Kandidaten: WaxOn Auto Detailing (+38343800098, Mitrovica), GreenSteam (+38349880777, Prishtina), Auto Picasso (+38344113775, Prishtina), Shala Detailing (+38345425689, Gjakova), Auto Glass Kosovo (+38349219999, Fushë Kosovë) und TITANS Auto Repair/Auto Detailing (+38349116411, Prishtina). Alle sind bereits im 158er kanonischen Bestand. Keine weitere eigenständige Filiale wird daraus abgeleitet.
+
+## Einschränkungen
+
+Die Suche berücksichtigte Prishtina, Pejë, Ferizaj, Mazgit, Shtime, Skenderaj, Istog, Klinë/Zllakuqan, Rahovec, Malishevë, Suharekë und Kaçanik. Die Trefferzahl ist keine Vollständigkeitsbehauptung und keine Landeszählung. Name/Telefon/Standort/Leistungen sind unabhängig recherchiert; Google-Zuordnung und Veröffentlichung sind noch nicht bestätigt. Keine numerischen Google-Bewertungen oder tatsächliche Inhaberschaft behauptet. Wegen fehlender Browseraktionen war keine Profilwahl erforderlich.
+
+## Nachfolgende Identitätsprüfung und Veröffentlichung
+
+Der ausführende Agent prüfte anschließend alle 17 Kandidaten im offiziellen
+Place ID Finder und führte direkte Maps-ID-Prüfungen im bestätigten
+Browserprofil durch. Enzo und Shine bestanden den unabhängigen Telefon-,
+Standort- und Leistungsabgleich und sind mit geprüftem Release v1.12.0
+veröffentlicht. Für sechs spätere kleinere-Orte-Leads bot der Finder nur
+mehrdeutige oder geografisch abweichende Einträge. Faredini-A lieferte eine
+passende Namenskennung, aber die Ortsangabe widerspricht der unabhängigen
+Quelle; Standortkontinuität und Telefonnummer bleiben ungeklärt.
+Das [datierte Importmanifest](import-2026-10-11-daily.json) enthält die
+abschließenden Identitätsnachweise, Rückstellungen und bestätigte Live-Abnahme.

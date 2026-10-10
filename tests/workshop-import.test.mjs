@@ -1,3 +1,4 @@
+import {dailyCatalogueManifests} from "./helpers/daily-catalogue-manifests.mjs";
 import assert from 'node:assert/strict';
 import {readFile,writeFile,mkdir,readdir} from 'node:fs/promises';
 import {createRequire} from 'node:module';
@@ -8,7 +9,7 @@ const {build}=require('esbuild');
 const React=require('react');
 const {renderToStaticMarkup}=require('react-dom/server');
 const output='.test-runtime/workshop-import';
-const result=await build({entryPoints:['db/directory.ts','lib/workshop-source.ts','lib/catalogue-filters.ts','components/workshop-ratings.tsx','lib/i18n/client.tsx','lib/i18n/messages.ts'],outdir:output,bundle:true,write:false,format:'esm',splitting:true,platform:'node',jsx:'automatic',external:['react','react-dom','lucide-react'],plugins:[{name:'fixture-storage',setup(b){b.onResolve({filter:/^cloudflare:workers$/},a=>({path:a.path,namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},()=>({loader:'js',contents:'export const env=globalThis.fixtureEnv;'}));}}]});
+const result=await build({entryPoints:['db/directory.ts','lib/workshop-source.ts','lib/catalogue-filters.ts','components/workshop-ratings.tsx','lib/i18n/client.tsx','lib/i18n/messages.ts'],outdir:output,bundle:true,write:false,format:'esm',splitting:true,platform:'node',jsx:'automatic',external:['react','react-dom','lucide-react'],plugins:[{name:'fixture-storage',setup(b){b.onLoad({filter:/lib\/workshop-source\.ts$/},async args=>({loader:'ts',contents:(await readFile(args.path,'utf8')).replace('export function validateWorkshopCatalogue(input:unknown):WorkshopCatalogue{','export function validateWorkshopCatalogue(input:unknown):WorkshopCatalogue{globalThis.fixtureCatalogueValidationCalls=(globalThis.fixtureCatalogueValidationCalls??0)+1;')}));b.onResolve({filter:/^cloudflare:workers$/},a=>({path:a.path,namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},()=>({loader:'js',contents:'export const env=globalThis.fixtureEnv;'}));}}]});
 for(const file of result.outputFiles){await mkdir(file.path.slice(0,file.path.lastIndexOf('/')),{recursive:true});await writeFile(file.path,file.contents);}
 const sqlite=new DatabaseSync(':memory:');
 for(const file of (await readdir('drizzle')).filter(file=>file.endsWith('.sql')).sort())sqlite.exec(await readFile('drizzle/'+file,'utf8'));
@@ -30,7 +31,8 @@ const removals=JSON.parse(await readFile('data/workshop-removals.json','utf8'));
 const finalRemovals=JSON.parse(await readFile('data/workshop-final-removals.json','utf8'));
 const finalResearch=JSON.parse(await readFile('data/catalogue-final-2026-10-05.json','utf8'));
 const newImport=JSON.parse(await readFile('data/import-2026-10-10.json','utf8'));
-const newlyAdded=new Set(newImport.importedWorkshopIds);
+const dailyImports=await dailyCatalogueManifests(),dailyIds=dailyImports.flatMap(m=>m.importedWorkshopIds),latestImport=dailyImports.at(-1)??newImport;
+const newlyAdded=new Set([...newImport.importedWorkshopIds,...dailyIds]);
 const retired=new Set([...removals.workshopIds,...finalRemovals.workshopIds]);
 const added=new Set(manifest.importedWorkshopIds);
 const oldProfiles=curated.filter(w=>!added.has(w.id)&&!newlyAdded.has(w.id)&&w.id!==finalResearch.newPublishedWorkshop.workshopId);
@@ -38,7 +40,7 @@ const newProfiles=curated.filter(w=>added.has(w.id));
 assert.equal(newProfiles.length,50-manifest.importedWorkshopIds.filter(id=>retired.has(id)).length);
 assert.equal(added.size,50);
 assert.equal(oldProfiles.length,113-[...retired].filter(id=>!added.has(id)).length);
-assert.equal(new Set(curated.map(w=>w.id)).size,newImport.after.total);
+assert.equal(new Set(curated.map(w=>w.id)).size,latestImport.after.total);
 const oldPhones=new Set(oldProfiles.map(w=>w.phone));
 assert.equal(new Set(newProfiles.map(w=>w.phone)).size,newProfiles.length);
 for(const w of newProfiles){assert(!oldPhones.has(w.phone),'new workshop has a distinct phone');assert.equal(directory.validateProfile(w,w.id).status,w.status);}
@@ -123,5 +125,11 @@ assert.equal(edited.status,'draft');
 assert.equal(edited.googleRating.rating,4.9,'older imported snapshot never overwrites newer data');
 assert.equal(edited.rating,3,'Google import does not modify visit aggregate');
 assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM workshops').get().n,catalogue.workshops.length);
+
+await directory.ensureInitialCatalog();
+const validationCalls=globalThis.fixtureCatalogueValidationCalls;
+await directory.listWorkshops();await directory.listWorkshops();
+assert.equal(globalThis.fixtureCatalogueValidationCalls,validationCalls,"Completed catalogue reads do not revalidate the immutable source");
+
 sqlite.close();
 console.log(JSON.stringify({newWorkshops:newProfiles.length,publicWorkshops:catalogue.coverage.published,existingDraftsPreserved:catalogue.coverage.drafts,verifiedGoogleScores:5,independentRatingRevision:true,independentRatings:true,idempotentImport:true,storage:'isolated SQLite fixture',productionTouched:false}));

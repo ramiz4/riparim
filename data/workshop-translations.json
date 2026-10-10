@@ -478,6 +478,38 @@
       }
     },
     {
+      "id": "auto-enzo-detailing-prishtina",
+      "sq": {
+        "specialty": "Detailing · Polirim · Mbrojtje e llakut",
+        "description": "Detailing dhe mbrojtje e llakut në Prishtinë sipas postimeve të biznesit.",
+        "serviceDetails": [
+          "Pastrim i automjetit dhe i lëkurës",
+          "Polirim dhe veshje qeramike",
+          "Restaurim i fenerëve",
+          "Heqje e folieve dhe vendosje e PPF-së"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Postime të biznesit në AutoYas: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Detailing · Polishing · Paint protection",
+        "description": "Detailing and paint protection in Prishtina according to published business posts.",
+        "serviceDetails": [
+          "Vehicle and leather cleaning",
+          "Polishing and ceramic coating",
+          "Headlight restoration",
+          "Film removal and PPF installation"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Business posts on AutoYas: contact and services"
+        ]
+      },
+      "sourceHash": "9f7012f772ebf4693915002c1a96ade7cd208706e08efee87482323fd6fa9268"
+    },
+    {
       "id": "auto-fati-prizren",
       "sourceHash": "86406d948072a1e041aa7ccc25e830478cea1e3baaeba87626021c4218d51fa4",
       "sq": {
@@ -4194,6 +4226,40 @@
           "Business website: contact, location and services"
         ]
       }
+    },
+    {
+      "id": "shine-detailing-studio-prishtina",
+      "sq": {
+        "specialty": "Detailing · Polirim · Mbrojtje qeramike",
+        "description": "Përgatitje e automjeteve në Matiçan me pastrim të brendshëm, polirim dhe mbrojtje qeramike sipas postimeve të biznesit.",
+        "serviceDetails": [
+          "Pastrim i brendshëm",
+          "Polirim",
+          "Mbrojtje qeramike për llakun dhe xhamat",
+          "Folie mbrojtëse për fenerët"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Postime të biznesit në AutoYas: kontakti, vendndodhja dhe shërbimet",
+          "Direktori e pavarur: kontakti dhe rruga"
+        ]
+      },
+      "en": {
+        "specialty": "Detailing · Polishing · Ceramic protection",
+        "description": "Vehicle preparation in Matiçan with interior cleaning, polishing and ceramic protection according to business posts.",
+        "serviceDetails": [
+          "Interior cleaning",
+          "Polishing",
+          "Ceramic protection for paint and glass",
+          "Protective film for headlights"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Business posts on AutoYas: contact, location and services",
+          "Independent directory: contact and street"
+        ]
+      },
+      "sourceHash": "9abedf0f359f6e3faf34b6d415a62339e2a8c8a54d079a2c440878b84724950b"
     },
     {
       "id": "sokoli-autoelectronic-peja",
