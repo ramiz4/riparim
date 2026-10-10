@@ -1,12 +1,15 @@
 # Begrenzte Test-Parallelität (Issue 91)
 
 `npm test` prüft zuerst den i18n-Vertrag und führt anschließend jede registrierte
-Suite in einem eigenen Node-Prozess aus. Auf Linux/macOS ist die vorläufige
+Suite in einem eigenen Node-Prozess aus. Auf Linux/macOS/WSL ist die vorläufige
 Standardparallelität zwei. `TEST_CONCURRENCY=1 npm test` führt dieselben Suites
 seriell aus; `2`, `3` oder `4` erlauben entsprechend viele gleichzeitige Suites.
 Die endgültige Wahl wird auf demselben Commit mit GitHub-Actions-Messungen geprüft.
-Windows behält serielle Ausführung und verwendet `taskkill /PID … /T /F` für
-noch laufende eigene Prozessbäume. Der Windows-Pfad wurde hier nicht ausgeführt.
+Native Windows-Ausführung wird vor jeder Suite und jeder Änderung am
+Testverzeichnis mit einer WSL-Empfehlung abgelehnt. POSIX-Prozessgruppen sichern
+die Bereinigung auch dann, wenn ein beendeter Node-Prozess Nachfahren mit offenen
+Ausgabekanälen hinterlässt. `taskkill` kann diesen Fall nach Ende des Elternprozesses
+nicht zuverlässig abdecken; deshalb gibt es keinen nativen Windows-Testpfad.
 
 ## Geprüfte Ressourcen
 
@@ -37,6 +40,9 @@ Die Runner-Regression prüft Parallelitätsgrenze, den seriellen Modus, alle
 Suite-Starts, die i18n-Sperre, zugeordnete Logs, Fehler, beide Signale und auch
 Nachfahren, die SIGTERM ignorieren. Sie verwendet eigene temporäre Verzeichnisse
 und einen Handshake statt Zeitannahmen zur Prüfung gleichzeitiger Starts.
+Ein isolierter Kindprozess simuliert zusätzlich `process.platform = 'win32'`
+und prüft den sofortigen Fehler, fehlende Suite-Starts und das unveränderte
+Testverzeichnis. Diese Plattform-Vertragsprüfung ist kein nativer Windows-Test.
 
 ## Messung
 

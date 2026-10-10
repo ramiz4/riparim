@@ -23,7 +23,7 @@ if(name==='contract.mjs'){
  if(config.hang||config.fail&&!config.simpleFailure&&suite===1){
   process.on('SIGTERM',()=>{});setInterval(()=>{},1000);
  }else{
-  const limit=process.platform==='win32'?1:config.concurrency;
+  const limit=config.concurrency;
   if(!config.fail&&!config.orphan&&suite<limit){
    // A handshake, rather than timing assumptions, proves the first batch overlaps.
    for(let attempt=0;attempt<250;attempt++){
