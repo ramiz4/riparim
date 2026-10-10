@@ -17,7 +17,10 @@ UTC-Offsets und Sommerzeitwechsel mit Europe/Berlin übereinstimmen. Der
 Zeitplan wird deshalb lokal auf 09:00 gespeichert. Das ist keine separat
 gespeicherte Berlin-Zeitzone: bei Änderung der Desktopzeitzone den Zeitplan
 vor weiterer Aktivierung erneut prüfen. Am 11.10.2026 entspricht der Termin
-07:00 UTC. Eine pausierte Automation hat keinen ausführbaren nächsten Lauf.
+07:00 UTC. Die Automation wurde nach erfolgreicher Live-Abnahme am
+11.10.2026 lokal als **ACTIVE** bestätigt; nächster Termin ist 11.10.2026
+09:00 lokal beziehungsweise 07:00 UTC. Eine pausierte Automation hat keinen
+ausführbaren nächsten Lauf.
 
 Das ist ein ausführbarer lokaler Agentenauftrag, kein Cloud-Cron. Computer
 und Codex-App müssen laufen und auf Repository und benötigte Verbindungen
@@ -89,7 +92,7 @@ Providerbedingungen gelten weiterhin.
 Am 10.10.2026 wurde im Cloudflare-Dashboard **Workers Free / 10 ms CPU pro
 Anfrage** bestätigt. Die öffentliche SSR-Anwendung überschreitet diese
 Grenze; auch Version v1.11.1 erzeugt `exceededCpu` und HTTP503/Error1102.
-Die Routine bleibt bis zur bestätigten Live-Abnahme pausiert. Der Nutzer
+Bis zur bestätigten Live-Abnahme war die Routine pausiert. Der Nutzer
 hat den kostenfreien Umbau auf öffentliche HTML-Release-Artefakte autorisiert.
 Die Umsetzung rendert Katalog und Profile in DE/SQ/EN ausschließlich in
 einem lokalen workerd mit isolierter D1-Datenbank aus der Canonicalquelle.
@@ -182,3 +185,31 @@ Nach dem Deployment alle neuen Profile in DE/SQ/EN mit der Vorprüfung
 prüfen; Livebestand, eindeutige Place-IDs und vorherige Profilrevisionen
 abgleichen. Erfolg erst danach melden. Bei Nullkandidaten oder Fehlern
 Manifest und konkreten Grund sichern; weder Import noch Release erfinden.
+
+## Abnahme des ersten kontrollierten Laufs
+
+[PR #99](https://github.com/ramiz4/riparim/pull/99) wurde nach erfolgreicher
+CI und unabhängigem Review per Squash integriert.
+[Release v1.12.0](https://github.com/ramiz4/riparim/releases/tag/v1.12.0)
+aus `54549c17df92aecde2d5a7562a7106913e5a8bf0` enthält vier bestätigte
+Artefakte mit passenden Commit- und SHA-256-Provenienzen.
+Der [Release-/Deploy-Lauf](https://github.com/ramiz4/riparim/actions/runs/38093081018)
+war vollständig erfolgreich; Cloudflare bestätigt die neue Version für 100 Prozent
+des Traffics. Workers Free bleibt bestehen.
+
+Zwei neue Betriebe sind veröffentlicht, der Livebestand beträgt 160.
+Zwei vollständige Healthläufe bestätigten Katalog und beide Profile in
+DE/SQ/EN mit HTTP200, korrekter Identität und vollständigem HTML ohne
+Error1102. Die 19 öffentlichen Felder aller 158 vorherigen Profile,
+158 Google-Zuordnungen, 129 gespeicherten Ratingzeilen und 49 vorherigen
+Katalogzustände stimmen weiterhin mit der geschützten Sicherung überein.
+Sechs recherchierte Bestandsdubletten wurden nicht erneut importiert.
+Die übrigen Kandidaten bleiben wegen fehlender eindeutiger Identität,
+fehlendem Telefonabgleich oder widersprüchlichem Standort zurückgestellt.
+
+Das [Importmanifest](../data/import-2026-10-11-daily.json) enthält Quellen,
+Rückstellungen, aktive Automation, Release und Live-Abnahme. Die beobachteten
+Outcomes der neuen Worker-Version im Abnahmeintervall waren ausschließlich
+`ok`; das ist eine zeitlich begrenzte Beobachtung. Der Connector verweigert
+weiterhin Billing-/Detail-Log-Endpunkte mit Fehler10000. Aggregierte
+Observability, schreibfreier D1-Abgleich und Deploymentzugriff funktionieren.
