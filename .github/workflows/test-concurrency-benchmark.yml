@@ -1,0 +1,44 @@
+name: Test concurrency benchmark
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: test-benchmark-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  benchmark:
+    name: Compare serial and bounded suite execution
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out identical benchmark source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install locked dependencies
+        run: npm run install:ci
+      - name: Set up Go
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version: "1.27.1"
+          cache: false
+      - name: Measure identical suites on the same runner
+        run: |
+          git rev-parse HEAD
+          node -e 'const os=require("node:os"); console.log(JSON.stringify({node:process.version,cpus:os.availableParallelism(),memoryBytes:os.totalmem()}))'
+          for parallelism in 1 2 4 1 2; do
+            /usr/bin/time -f "BENCHMARK concurrency=$parallelism wall_seconds=%e max_child_rss_kib=%M" env TEST_CONCURRENCY="$parallelism" npm test
+          done
