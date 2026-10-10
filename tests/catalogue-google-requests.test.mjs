@@ -12,7 +12,7 @@ globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
 const observations=new Map();globalThis.IntersectionObserver=class{constructor(callback){this.callback=callback;}observe(element){observations.set(this,element);}disconnect(){observations.delete(this);}};
 window.scrollTo=()=>{};window.HTMLElement.prototype.scrollIntoView=()=>{};window.HTMLElement.prototype.hasPointerCapture=()=>false;window.HTMLElement.prototype.setPointerCapture=()=>{};window.HTMLElement.prototype.releasePointerCapture=()=>{};
 window.matchMedia=()=>({matches:false,addEventListener(){},removeEventListener(){}});
-const placeRequests=[];let providerError=false,releaseLate;window.google={maps:{importLibrary:async()=>({Place:class{constructor(options){this.options=options;}async fetchFields(){placeRequests.push(this.options);if(this.options.id==='ChIJlate')await new Promise(resolve=>{releaseLate=resolve;});if(providerError)throw Error('fixture unavailable');this.rating=this.options.requestedLanguage==='sq'?4.7:4.6;this.userRatingCount=10;this.googleMapsURI='https://www.google.com/maps/search/?api=1&query_place_id='+this.options.id;this.attributions=[{provider:'Fixture attribution',providerURI:'https://provider.example.test'}];}}})}};globalThis.fetch=async url=>{if(url==='/api/google-places')return Response.json({enabled:true,browserKey:'fixture-key'});assert(String(url).startsWith('/api/google-places/'));return Response.json({placeId:'ChIJ'+String(url).split('/').at(-1)});};
+const placeRequests=[],catalogueRefreshRequests=[];let providerError=false,releaseLate;window.google={maps:{importLibrary:async()=>({Place:class{constructor(options){this.options=options;}async fetchFields(){placeRequests.push(this.options);if(this.options.id==='ChIJlate')await new Promise(resolve=>{releaseLate=resolve;});if(providerError)throw Error('fixture unavailable');this.rating=this.options.requestedLanguage==='sq'?4.7:4.6;this.userRatingCount=10;this.googleMapsURI='https://www.google.com/maps/search/?api=1&query_place_id='+this.options.id;this.attributions=[{provider:'Fixture attribution',providerURI:'https://provider.example.test'}];}}})}};globalThis.fetch=async url=>{if(url==='/api/session')return Response.json({account:null,isAdmin:false});if(String(url).startsWith('/api/workshops?locale=')){catalogueRefreshRequests.push(String(url));return Response.json({workshops,displayById:{}});}if(url==='/api/google-places')return Response.json({enabled:true,browserKey:'fixture-key'});assert(String(url).startsWith('/api/google-places/'));return Response.json({placeId:'ChIJ'+String(url).split('/').at(-1)});};
 
 const output='.test-runtime/catalogue-google-requests';await mkdir(output,{recursive:true});
 await build({stdin:{contents:`export {default as Catalogue} from './app/[locale]/werkstaetten/catalogue';export {I18nProvider} from './lib/i18n/client';export {getMessages,createTranslator} from './lib/i18n/messages';export {defaultCatalogueFilters,parseCatalogueFilters} from './lib/catalogue-filters';export {WorkshopRatings} from './components/workshop-ratings';`,resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/ui.mjs',bundle:true,platform:'node',format:'esm',packages:'external',loader:{'.css':'empty'},plugins:[{name:'navigation-fixture',setup(b){
@@ -58,6 +58,24 @@ try{
   assert.equal(placeRequests.at(-1).requestedLanguage,locale==='sq'?'en':'sq');
   await render(locale,null);
  }
+ for(const locale of ['de','sq','en']){
+  const start=placeRequests.length,refreshes=catalogueRefreshRequests.length;
+  const path=locale==='de'?'/werkstaetten':`/${locale}/werkstaetten`;
+  window.history.replaceState(null,'',`${path}?sort=google&q=Fixture+00&ort=prishtina&leistung=bremsen-fahrwerk&marke=volvo&sprache=de`);
+  await render(locale,h(Catalogue,{...props,publicSnapshot:true,initialWorkshops:[]}));
+  assert.equal(catalogueRefreshRequests.length,refreshes+1,'the static shell retains its locale-specific live directory refresh');
+  assert.equal(catalogueRefreshRequests.at(-1),`/api/workshops?locale=${locale}`);
+  assert.equal(document.querySelectorAll('.catalogue-card').length,11,'static shell hydrates the real public filters after the live catalogue arrives');
+  const actual=new URLSearchParams(window.location.search);
+  assert.equal(window.location.pathname,path,'the static route retains its locale');
+  assert.equal(actual.get('sort'),null,'static legacy Google sorting normalizes to Name');
+  assert.equal(actual.get('q'),'Fixture 00');assert.equal(actual.get('ort'),'prishtina');assert.equal(actual.get('leistung'),'bremsen-fahrwerk');assert.equal(actual.get('marke'),'volvo');assert.equal(actual.get('sprache'),'de');
+  assert.equal(placeRequests.length,start,'snapshot hydration and directory refresh do not request invisible Google values');
+  await intersect();assert.equal(placeRequests.length,start+1,'only the visible hydrated card loads');
+  await search('No fixture match');assert.equal(document.querySelectorAll('.catalogue-card').length,0);assert.equal(placeRequests.length,start+1);
+  await search('Fixture 00');await intersect();assert.equal(placeRequests.length,start+1,'active-list reuse survives static-shell filter changes');
+  await render(locale,null);
+ }
  const fixture=workshops[0],provided={rating:4.9,count:6,mapsUrl:'https://www.google.com/maps/',attributions:[]};
  const before=placeRequests.length;
  await render('de',h(WorkshopRatings,{workshop:fixture,liveGoogleRating:provided}));
@@ -78,5 +96,5 @@ try{
  assert(document.querySelector('.google-rating').textContent.includes('4,7'));
  await act(async()=>{releaseLate();await settle();});
  assert(document.querySelector('.google-rating').textContent.includes('4,7'),'late old ID/locale answer cannot replace current content');
- console.log(JSON.stringify({catalogueSize:158,initialGlobalRequests:0,filterGlobalRequests:0,legacyGlobalRequests:0,firstVisibleRequests:1,matchingRemountAdditionalRequests:0,locales:['de','sq','en'],liveProviderCalls:false}));
+ console.log(JSON.stringify({catalogueSize:158,initialGlobalRequests:0,filterGlobalRequests:0,legacyGlobalRequests:0,firstVisibleRequests:1,matchingRemountAdditionalRequests:0,locales:['de','sq','en'],staticShellLocales:['de','sq','en'],liveProviderCalls:false}));
 }finally{await act(async()=>root.unmount());dom.window.close();}

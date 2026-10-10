@@ -6,14 +6,16 @@ import {valueLabel} from "@/lib/i18n/values";
 import {localizeHref} from "@/lib/i18n/locale";
 import {useNavigationGuard} from "@/lib/i18n/navigation-guard";
 import {useState} from "react";
+import {usePublicSession} from "./use-public-session";
 import {ChevronDown,UserRound,LayoutDashboard,LogOut,LoaderCircle,Settings,Building2,LogIn} from "lucide-react";
 import {DropdownMenu,DropdownMenuTrigger,DropdownMenuContent,DropdownMenuLabel,DropdownMenuItem,DropdownMenuSeparator} from "@/components/ui/dropdown-menu";
 import {Brand} from "./brand";
 import {ThemeToggle} from "./theme-toggle";
 import type {AccountIdentity} from "./account-storage-notice";
 
-type Props={account:AccountIdentity|null;isAdmin?:boolean};
-export function SiteHeader({account,isAdmin=false}:Props){
+type Props={account:AccountIdentity|null;isAdmin?:boolean;publicSnapshot?:boolean};
+export function SiteHeader({account:initialAccount,isAdmin:initialAdmin=false,publicSnapshot=false}:Props){
+ const {account,isAdmin}=usePublicSession({account:initialAccount,isAdmin:initialAdmin},publicSnapshot);
  const {locale,t}=useI18n();
  const [busy,setBusy]=useState(false),[error,setError]=useState("");
  useNavigationGuard({busy});

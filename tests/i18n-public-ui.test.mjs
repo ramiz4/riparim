@@ -10,6 +10,7 @@ const bundle=await build({stdin:{contents:`export {default as HomePage} from './
  b.onResolve({filter:/^next\/(navigation|link)$/},a=>({path:a.path,namespace:'next-fixture'}));b.onLoad({filter:/.*/,namespace:'next-fixture'},a=>({loader:'js',contents:a.path==='next/link'?`import React from 'react';export default function Link({href,children,...props}){return React.createElement('a',{...props,href},children);}`:`export function redirect(){throw Error('Unexpected fixture redirect');}export function notFound(){throw Error('Unexpected fixture notFound');}export function useRouter(){return {push(){},refresh(){},prefetch(){}};}export function usePathname(){return '/';}export function useSearchParams(){return new URLSearchParams();}`}));
  b.onResolve({filter:/^@\/app\/auth$/},()=>({path:'auth',namespace:'server-fixture'}));b.onResolve({filter:/^@\/lib\/auth\/config$/},()=>({path:'config',namespace:'server-fixture'}));b.onLoad({filter:/.*/,namespace:'server-fixture'},a=>({loader:'js',contents:a.path==='auth'?`export async function getAppUser(){return null;}export async function getAdminUser(){return null;}`:`export function siteOrigin(){return 'https://riparim.example.test';}`}));
  b.onResolve({filter:/^@\/db\/(directory|storage)$/},a=>({path:a.path,namespace:'public-data-fixture'}));b.onLoad({filter:/.*/,namespace:'public-data-fixture'},a=>({loader:'js',contents:a.path.endsWith('/directory')?`export async function listWorkshops(){return globalThis.fixturePublicDirectory;}`:`export function storage(){return {db:{prepare(){return {bind(){return this;},async all(){return {results:[]};}}}}};}`}));
+ b.onResolve({filter:/^cloudflare:workers$/},()=>({path:'env',namespace:'render-fixture'}));b.onLoad({filter:/.*/,namespace:'render-fixture'},()=>({loader:'js',contents:'export const env={};'}));
  b.onLoad({filter:/\.css$/},()=>({loader:'js',contents:`export default {logo:'brand-logo'};`}));
 }}]});
 await mkdir('.test-runtime',{recursive:true});await writeFile('.test-runtime/i18n-public-ui.mjs',bundle.outputFiles[0].text);
@@ -155,6 +156,28 @@ try{
   await click(document.querySelector('footer button'));
   const dialog=document.querySelector('[role="dialog"]');assert(dialog.textContent.includes(t('public.businessInfoHelp'))&&dialog.textContent.includes(t('public.yourDataHelp')));
   await React.act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));
+ }
+ // Released public HTML starts anonymous; account and reviews come from live APIs.
+ const account={email:'private-fixture@example.test',displayName:'Private Fixture',provider:'Google'};
+ const review={display_name:'Public reviewer',vehicle:'Fixture vehicle',service:'Fixture service',date:'2026-10-10',rating:5,review:'Current approved review'};
+ globalThis.fetch=async url=>{
+  if(url==='/api/session')return Response.json({account,isAdmin:true});
+  if(String(url).startsWith('/api/reviews?'))return Response.json({reviews:[review]});
+  if(String(url).startsWith('/api/workshops?'))return Response.json({workshops:[workshop],displayById:{}});
+  return Response.json({enabled:false});
+ };
+ for(const locale of ['de','sq','en']){
+  const prefix=locale==='de'?'':`/${locale}`;
+  window.history.replaceState({},'',prefix+'/werkstaetten?q=Fixture');
+  await React.act(async()=>root.render(wrap(locale,h(api.Catalogue,{...props,publicSnapshot:true,initialFilters:api.defaultCatalogueFilters}))));
+  assert.equal(document.querySelector('input[type="search"]').value,'Fixture','Static catalogue restores URL filters after hydration');
+  assert(document.querySelector('[aria-label="'+api.createTranslator(api.getMessages(locale))('common.userMenu')+'"]'),'Authenticated account menu is restored from the private session');
+  window.history.replaceState({},'',prefix+'/werkstatt/'+workshop.id);
+  const snapshotProps={workshop,directory:[workshop],reviews:[],reviewError:'',signedIn:false,account:null,isAdmin:false,publicSnapshot:true};
+  const snapshotHtml=renderToStaticMarkup(wrap(locale,h(api.Profile,snapshotProps)));
+  assert(!snapshotHtml.includes(account.email)&&!snapshotHtml.includes(review.review),'Private session and runtime reviews never enter release HTML');
+  await React.act(async()=>root.render(wrap(locale,h(api.Profile,snapshotProps))));
+  assert(document.querySelector('.public-review-text').textContent.includes(review.review),'Approved runtime reviews load into released profiles');
  }
 }finally{await React.act(async()=>root.unmount());globalThis.fetch=nativeFetch;dom.window.close();}
 console.log('DE/SQ/EN public UI: results, stable canonical filters/permissions, original facts, error fallbacks, full privacy and real gallery/footer keyboard focus passed');

@@ -1,3 +1,4 @@
+import {publicReleaseRender,publicReleaseShell} from "@/lib/public-release";
 import {workshopDisplayById} from "@/lib/workshop-display.server";
 import {I18nMessages} from "@/lib/i18n/client";
 import {getMessages,createTranslator} from "@/lib/i18n/messages";
@@ -15,6 +16,6 @@ export async function generateMetadata({params}:{params:Promise<{locale:string}>
 export default async function CataloguePage({searchParams,params}:{searchParams:Promise<Record<string,string|string[]|undefined>>;params:Promise<{locale:string}>}){
  const {locale:value}=await params,locale=isLocale(value)?value:"de";
  const [query,user]=await Promise.all([searchParams,getAppUser()]);const admin=await getAdminUser(user);let directory:Workshop[]=[],error="";
- try{directory=await listWorkshops();}catch(e){console.error("catalogue-page",e);error="unavailable";}
- return <I18nMessages messages={getMessages(locale,["public"])}><Catalogue initialDisplayById={await workshopDisplayById(directory,locale)} initialWorkshops={directory} initialError={error} reviewEntry={query.bewerten==="1"} initialFilters={parseCatalogueFilters(query,directory)} account={user?{email:user.email,displayName:user.displayName,provider:user.provider}:null} isAdmin={!!admin?.isModerator}/></I18nMessages>;
+ try{if(!publicReleaseShell())directory=await listWorkshops();}catch(e){console.error("catalogue-page",e);error="unavailable";}
+ return <I18nMessages messages={getMessages(locale,["public"])}><Catalogue publicSnapshot={publicReleaseRender()} initialDisplayById={await workshopDisplayById(directory,locale)} initialWorkshops={directory} initialError={error} reviewEntry={query.bewerten==="1"} initialFilters={parseCatalogueFilters(query,directory)} account={user?{email:user.email,displayName:user.displayName,provider:user.provider}:null} isAdmin={!!admin?.isModerator}/></I18nMessages>;
 }

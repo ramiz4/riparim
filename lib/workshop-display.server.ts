@@ -1,12 +1,11 @@
 import catalogue from "@/data/workshops.json";
 import overlay from "@/data/workshop-translations.json";
-import {workshopCatalogueSchema} from "./workshop-source";
+
 import type {Locale} from "./i18n/locale";
 import type {WorkshopDisplayById} from "./workshop-profile-content";
-import {workshopTranslationSourceHash,parseWorkshopTranslations,type WorkshopTranslationSource} from "./workshop-translations";
+import {workshopTranslationSourceHash,parseWorkshopTranslations,type WorkshopTranslationSource,type WorkshopTranslations} from "./workshop-translations";
 // This module is imported only by server pages/routes. Canonical data never changes.
-export function createWorkshopDisplayAdapter(sources:WorkshopTranslationSource[],input:unknown){
- const translations=parseWorkshopTranslations(input,sources);
+function displayAdapter(sources:WorkshopTranslationSource[],translations:WorkshopTranslations){
  const originals=new Map(sources.map(w=>[w.id,w])),entries=new Map(translations.workshops.map(w=>[w.id,w]));
  const knownHashes=new Map<string,Promise<string>>();
  return async(workshops:WorkshopTranslationSource[],locale:Locale):Promise<WorkshopDisplayById>=>{
@@ -21,4 +20,6 @@ export function createWorkshopDisplayAdapter(sources:WorkshopTranslationSource[]
   return displayById;
  };
 }
-export const workshopDisplayById=createWorkshopDisplayAdapter(workshopCatalogueSchema.parse(catalogue).workshops,overlay);
+export function createWorkshopDisplayAdapter(sources:WorkshopTranslationSource[],input:unknown){return displayAdapter(sources,parseWorkshopTranslations(input,sources));}
+// CI validates both immutable collections. Live text still receives a fresh hash below.
+export const workshopDisplayById=displayAdapter(catalogue.workshops as WorkshopTranslationSource[],overlay as WorkshopTranslations);
