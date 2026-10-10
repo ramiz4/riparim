@@ -1,0 +1,100 @@
+import assert from 'node:assert/strict';
+import {build} from 'esbuild';
+import {mkdir} from 'node:fs/promises';
+import {JSDOM,VirtualConsole} from 'jsdom';
+
+const dom=new JSDOM('<div id="root"></div>',{url:'https://riparim.example.test/werkstaetten',pretendToBeVisual:true,virtualConsole:new VirtualConsole()});
+for(const key of ['window','document','navigator','HTMLElement','HTMLButtonElement','HTMLInputElement','HTMLTextAreaElement','HTMLFormElement','HTMLSelectElement','DocumentFragment','Element','Node','NodeFilter','MutationObserver','CustomEvent','Event','MouseEvent','KeyboardEvent','getComputedStyle'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});
+globalThis.requestAnimationFrame=dom.window.requestAnimationFrame.bind(dom.window);
+globalThis.cancelAnimationFrame=dom.window.cancelAnimationFrame.bind(dom.window);
+globalThis.IS_REACT_ACT_ENVIRONMENT=true;
+globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
+const observations=new Map();globalThis.IntersectionObserver=class{constructor(callback){this.callback=callback;}observe(element){observations.set(this,element);}disconnect(){observations.delete(this);}};
+window.scrollTo=()=>{};window.HTMLElement.prototype.scrollIntoView=()=>{};window.HTMLElement.prototype.hasPointerCapture=()=>false;window.HTMLElement.prototype.setPointerCapture=()=>{};window.HTMLElement.prototype.releasePointerCapture=()=>{};
+window.matchMedia=()=>({matches:false,addEventListener(){},removeEventListener(){}});
+const placeRequests=[],catalogueRefreshRequests=[];let providerError=false,releaseLate;window.google={maps:{importLibrary:async()=>({Place:class{constructor(options){this.options=options;}async fetchFields(){placeRequests.push(this.options);if(this.options.id==='ChIJlate')await new Promise(resolve=>{releaseLate=resolve;});if(providerError)throw Error('fixture unavailable');this.rating=this.options.requestedLanguage==='sq'?4.7:4.6;this.userRatingCount=10;this.googleMapsURI='https://www.google.com/maps/search/?api=1&query_place_id='+this.options.id;this.attributions=[{provider:'Fixture attribution',providerURI:'https://provider.example.test'}];}}})}};globalThis.fetch=async url=>{if(url==='/api/session')return Response.json({account:null,isAdmin:false});if(String(url).startsWith('/api/workshops?locale=')){catalogueRefreshRequests.push(String(url));return Response.json({workshops,displayById:{}});}if(url==='/api/google-places')return Response.json({enabled:true,browserKey:'fixture-key'});assert(String(url).startsWith('/api/google-places/'));return Response.json({placeId:'ChIJ'+String(url).split('/').at(-1)});};
+
+const output='.test-runtime/catalogue-google-requests';await mkdir(output,{recursive:true});
+await build({stdin:{contents:`export {default as Catalogue} from './app/[locale]/werkstaetten/catalogue';export {I18nProvider} from './lib/i18n/client';export {getMessages,createTranslator} from './lib/i18n/messages';export {defaultCatalogueFilters,parseCatalogueFilters} from './lib/catalogue-filters';export {WorkshopRatings} from './components/workshop-ratings';`,resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/ui.mjs',bundle:true,platform:'node',format:'esm',packages:'external',loader:{'.css':'empty'},plugins:[{name:'navigation-fixture',setup(b){
+ b.onResolve({filter:/^next\/(link|navigation)$/},args=>({path:args.path,namespace:'fixture'}));
+ b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',resolveDir:process.cwd(),contents:args.path==='next/link'?`import React from 'react';export default function Link({href,children,...props}){return React.createElement('a',{...props,href},children);}`:`export function useRouter(){return {push(){},replace(){},refresh(){}};}export function usePathname(){return '/werkstaetten';}export function useSearchParams(){return new URLSearchParams();}`}));
+}}]});
+const {Catalogue,I18nProvider,getMessages,createTranslator,defaultCatalogueFilters,parseCatalogueFilters,WorkshopRatings}=await import(new URL('../'+output+'/ui.mjs',import.meta.url));
+const {createElement:h,act}=await import('react'),{createRoot}=await import('react-dom/client');
+const workshops=Array.from({length:158},(_,i)=>({id:`fixture-${String(i).padStart(3,'0')}`,name:`Fixture ${String(i).padStart(3,'0')}`,city:'Prishtina',address:'Fixture address',phone:'+38349123456',whatsapp:'',lat:42.6629,lng:21.1655,rating:4,count:1,specialty:'Fixture',description:'Fixture description',services:['Bremsen & Fahrwerk'],serviceDetails:[],brands:['Volvo'],languages:['Deutsch'],sources:[],checkedAt:'2026-10-04',status:'published',googleRating:{rating:1,count:999}}));
+const props={initialWorkshops:workshops,initialError:'',account:null,isAdmin:false,initialFilters:defaultCatalogueFilters};
+const wrap=(locale,node)=>h(I18nProvider,{locale,messages:getMessages(locale,['common','public'])},node);
+const root=createRoot(document.getElementById('root'));
+const settle=()=>new Promise(resolve=>setTimeout(resolve,0));
+const render=async(locale,node)=>{document.documentElement.lang=locale;await act(async()=>{root.render(wrap(locale,node));await settle();});};
+const intersect=async(index=0)=>{const card=document.querySelectorAll('.catalogue-card')[index];await act(async()=>{for(const [observer,element] of [...observations])if(element===card)observer.callback([{isIntersecting:true}]);await settle();});};
+const intersectRating=async()=>{await act(async()=>{for(const [observer,element] of [...observations])if(element.classList.contains('workshop-ratings'))observer.callback([{isIntersecting:true}]);await settle();});};
+const search=async(value)=>{const input=document.querySelector('input[type="search"]');await act(async()=>{Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype,'value').set.call(input,value);input.dispatchEvent(new Event('input',{bubbles:true}));await settle();});};
+try{
+ for(const locale of ['de','sq','en']){
+  const start=placeRequests.length;
+  const initialFilters=parseCatalogueFilters(new URLSearchParams('sort=google'),workshops);
+  window.history.replaceState(null,'',`/${locale}/werkstaetten?sort=google`);
+  await render(locale,h(Catalogue,{...props,initialFilters}));
+  assert.equal(placeRequests.length,start,'158 matches with legacy sort do not trigger any global Places requests');
+  assert(!window.location.search.includes('sort=google'),'legacy sort is removed from the URL');
+  assert.equal(document.querySelectorAll('.catalogue-card').length,12);
+  const sort=document.querySelector('.catalogue-panel-sort [role="combobox"]');
+  await act(async()=>sort.click());
+  const options=[...document.querySelectorAll('[role="option"]')].map(element=>element.textContent);
+  const t=createTranslator(getMessages(locale));
+  assert.deepEqual(options,[t('public.sortName'),t('public.sortRiparim'),t('public.sortChooseCity')],'only supported sort choices remain');
+  await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true})));
+  const firstObserver=[...observations].find(([,element])=>element===document.querySelector('.catalogue-card'))?.[0];
+  await intersect();assert.equal(placeRequests.length,start+1,'only the first intersecting card loads');
+  await act(async()=>{firstObserver.callback([{isIntersecting:true}]);await settle();});assert.equal(placeRequests.length,start+1,'a queued observer callback cannot trigger another request');
+  assert(document.querySelector('.google-rating').textContent.includes('Google Maps'));
+  assert(document.querySelector('.rating-source').textContent.includes('Fixture attribution'));
+  await search('Fixture 001');assert.equal(placeRequests.length,start+1,'filter changes cannot request hidden cards');assert.equal(document.querySelectorAll('.catalogue-card').length,1);
+  await search('');await intersect();assert.equal(placeRequests.length,start+1,'remounted matching ID/locale uses its active list value');
+  await render(locale==='sq'?'en':'sq',h(Catalogue,{...props,initialFilters}));
+  assert(!document.querySelector('.google-rating'),'old locale content is cleared before new visibility');
+  await intersect();assert.equal(placeRequests.length,start+2,'a locale change requests the matching language');
+  assert.equal(placeRequests.at(-1).requestedLanguage,locale==='sq'?'en':'sq');
+  await render(locale,null);
+ }
+ for(const locale of ['de','sq','en']){
+  const start=placeRequests.length,refreshes=catalogueRefreshRequests.length;
+  const path=locale==='de'?'/werkstaetten':`/${locale}/werkstaetten`;
+  window.history.replaceState(null,'',`${path}?sort=google&q=Fixture+00&ort=prishtina&leistung=bremsen-fahrwerk&marke=volvo&sprache=de`);
+  await render(locale,h(Catalogue,{...props,publicSnapshot:true,initialWorkshops:[]}));
+  assert.equal(catalogueRefreshRequests.length,refreshes+1,'the static shell retains its locale-specific live directory refresh');
+  assert.equal(catalogueRefreshRequests.at(-1),`/api/workshops?locale=${locale}`);
+  assert.equal(document.querySelectorAll('.catalogue-card').length,11,'static shell hydrates the real public filters after the live catalogue arrives');
+  const actual=new URLSearchParams(window.location.search);
+  assert.equal(window.location.pathname,path,'the static route retains its locale');
+  assert.equal(actual.get('sort'),null,'static legacy Google sorting normalizes to Name');
+  assert.equal(actual.get('q'),'Fixture 00');assert.equal(actual.get('ort'),'prishtina');assert.equal(actual.get('leistung'),'bremsen-fahrwerk');assert.equal(actual.get('marke'),'volvo');assert.equal(actual.get('sprache'),'de');
+  assert.equal(placeRequests.length,start,'snapshot hydration and directory refresh do not request invisible Google values');
+  await intersect();assert.equal(placeRequests.length,start+1,'only the visible hydrated card loads');
+  await search('No fixture match');assert.equal(document.querySelectorAll('.catalogue-card').length,0);assert.equal(placeRequests.length,start+1);
+  await search('Fixture 00');await intersect();assert.equal(placeRequests.length,start+1,'active-list reuse survives static-shell filter changes');
+  await render(locale,null);
+ }
+ const fixture=workshops[0],provided={rating:4.9,count:6,mapsUrl:'https://www.google.com/maps/',attributions:[]};
+ const before=placeRequests.length;
+ await render('de',h(WorkshopRatings,{workshop:fixture,liveGoogleRating:provided}));
+ assert.equal(placeRequests.length,before,'a supplied active-list value suppresses a duplicate provider request');
+ assert(document.querySelector('.google-rating').textContent.includes('4,9'));
+ await render('de',h(WorkshopRatings,{workshop:fixture,liveGoogleRating:{...provided,rating:null,count:0}}));
+ assert(document.querySelector('.google-rating').textContent.includes(createTranslator(getMessages('de'))('public.googleNoReviews')),'empty Google reviews are distinct from unavailable');assert.equal(placeRequests.length,before,'empty live data is also reused');
+ await render('de',null);
+ providerError=true;
+ await render('de',h(WorkshopRatings,{workshop:{...fixture,id:'error'},hideUnavailable:false}));await intersectRating();
+ assert(document.querySelector('a.google-maps-attribution')===null,'failures never use stored snapshots');
+ assert(document.querySelector('.google-rating a').href.includes('google'),'Maps fallback remains available on error');
+ assert(document.querySelector('.rating-unavailable'),'error has an honest unavailable label');
+ providerError=false;
+ await render('de',h(WorkshopRatings,{workshop:{...fixture,id:'late'}}));await intersectRating();
+ assert(document.querySelector('.google-rating').textContent.includes(createTranslator(getMessages('de'))('public.googleLoading')),'pending response has a loading state');
+ await render('sq',h(WorkshopRatings,{workshop:{...fixture,id:'new'}}));await intersectRating();
+ assert(document.querySelector('.google-rating').textContent.includes('4,7'));
+ await act(async()=>{releaseLate();await settle();});
+ assert(document.querySelector('.google-rating').textContent.includes('4,7'),'late old ID/locale answer cannot replace current content');
+ console.log(JSON.stringify({catalogueSize:158,initialGlobalRequests:0,filterGlobalRequests:0,legacyGlobalRequests:0,firstVisibleRequests:1,matchingRemountAdditionalRequests:0,locales:['de','sq','en'],staticShellLocales:['de','sq','en'],liveProviderCalls:false}));
+}finally{await act(async()=>root.unmount());dom.window.close();}

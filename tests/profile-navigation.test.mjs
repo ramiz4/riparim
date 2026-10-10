@@ -54,5 +54,5 @@ const laterPage=fixture();laterPage.navigation.isPageReady=()=>false;
 navigateToWorkshopPage(searchTarget,laterPage.navigation);laterPage.setHref('https://riparim.com/anmelden');laterPage.runTimers();
 assert.deepEqual(laterPage.hardVisits,[],'a later navigation cannot be replaced by a pending return to search');
 
-assert.equal(profileSearchHref(searchTarget,[]),'/werkstaetten?q=AHP&leistung=diagnose-elektronik&ort=prizren&sort=google','name, city, service and Google sorting survive the return link');
+assert.equal(profileSearchHref(searchTarget,[]),'/werkstaetten?q=AHP&leistung=diagnose-elektronik&ort=prizren','legacy Google sort normalizes on return while name, city and service survive');
 console.log('Workshop navigation: profiles, search returns, stalled rendering, completed, superseded, cancelled and safe-filter scenarios passed');

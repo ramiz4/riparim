@@ -4,13 +4,12 @@ import {localizeHref,type Locale} from "@/lib/i18n/locale";
 import {brands,cities,services,cityCoordinates,findWorkshops,type Workshop} from "@/lib/workshops";
 import type {SearchContext} from "@/components/detail-search";
 
-export type CatalogueSort="name"|"rating"|"google"|"distance";
+export type CatalogueSort="name"|"rating"|"distance";
 export type CatalogueFilters={query:string;service:string;city:string;brand:string;language:string;sort:CatalogueSort};
-export type CatalogueGoogleRatings=Record<string,{rating:number|null;count:number|null}>;
 export const defaultCatalogueFilters:CatalogueFilters={query:"",service:services[0],city:cities[0],brand:brands[0],language:"Alle Sprachen",sort:"name"};
 export const filterLabels={query:"Name",service:"Leistung",city:"Ort",brand:"Marke",language:"Sprache"};
 export const knownLanguages=["Albanisch","Deutsch","Englisch"];
-const sortSlugs:Record<CatalogueSort,string>={name:"name",rating:"bewertung",google:"google",distance:"entfernung"};
+const sortSlugs:Record<CatalogueSort,string>={name:"name",rating:"bewertung",distance:"entfernung"};
 export function catalogueSlug(value:string){const language={Albanisch:"sq",Deutsch:"de",Englisch:"en"}[value as "Albanisch"|"Deutsch"|"Englisch"];return language??value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");}
 export function catalogueQuery(value:string){return value.replace(/[\u0000-\u001f\u007f]/g,"").trim().replace(/\s+/g," ").slice(0,100);}
 const searchText=(value:string)=>value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("de");
@@ -18,7 +17,6 @@ const unique=(values:string[])=>[...new Set(values)].sort((a,b)=>a.localeCompare
 export function catalogueOptions(directory:Workshop[],locale:Locale="de"){const compare=displayComparator(locale),sorted=(values:string[],language=false)=>[...new Set(values)].sort((a,b)=>compare(language?valueLabel(locale,"language",a):a,language?valueLabel(locale,"language",b):b));return {cities:[cities[0],...sorted(directory.map(w=>w.city))],brands:[brands[0],...sorted(directory.flatMap(w=>w.brands).filter(value=>value!==brands[0]))],languages:["Alle Sprachen",...sorted(directory.flatMap(w=>w.languages),true)]};}
 const validRating=(value:number|null|undefined)=>value!=null&&Number.isFinite(value)&&value>=1&&value<=5;
 export function hasPublishedRatings(directory:Workshop[]){return directory.some(w=>w.status==="published"&&validRating(w.rating)&&w.count>0);}
-export function hasGoogleRatings(directory:Workshop[],live:CatalogueGoogleRatings={}){return directory.some(w=>w.status==="published"&&validRating(live[w.id]?.rating));}
 
 export function catalogueDistance(w:Workshop,city:string):number|null{
  const origin=cityCoordinates[city];
@@ -43,15 +41,15 @@ export function catalogueHref(filters:CatalogueFilters,locale:Locale="de"){
  if(filters.sort!=="name")params.set("sort",sortSlugs[filters.sort]);
  return localizeHref(`/werkstaetten${params.size?`?${params.toString()}`:""}`,locale);
 }
-export function matchCatalogue(directory:Workshop[],filters:CatalogueFilters,context:SearchContext|null=null,privateMatchingActive=false,live:CatalogueGoogleRatings={},locale:Locale="de"){
+export function matchCatalogue(directory:Workshop[],filters:CatalogueFilters,context:SearchContext|null=null,privateMatchingActive=false,locale:Locale="de"){
  const compareNames=displayComparator(locale);
  const geography=privateMatchingActive&&context&&context.city===filters.city?context:null;
  const words=searchText(catalogueQuery(filters.query??"")).split(" ").filter(Boolean);
  return findWorkshops(directory,filters.service,filters.city,filters.brand,geography?.radius??0,filters.language,geography?.additionalCity??"").filter(w=>w.status==="published"&&(filters.brand===brands[0]||w.brands.includes(filters.brand)||w.brands.includes(brands[0]))&&words.every(word=>searchText(w.name).includes(word))).sort((a,b)=>{
-  if(filters.sort==="rating"||filters.sort==="google"){
-   const av=filters.sort==="google"?live[a.id]:{rating:a.rating,count:a.count};
-   const bv=filters.sort==="google"?live[b.id]:{rating:b.rating,count:b.count};
-   const ar=validRating(av?.rating)&&(filters.sort==="google"||(av?.count??0)>0),br=validRating(bv?.rating)&&(filters.sort==="google"||(bv?.count??0)>0);
+  if(filters.sort==="rating"){
+   const av={rating:a.rating,count:a.count};
+   const bv={rating:b.rating,count:b.count};
+   const ar=validRating(av.rating)&&av.count>0,br=validRating(bv.rating)&&bv.count>0;
    if(ar!==br)return Number(br)-Number(ar);
    if(ar&&br){const difference=(bv?.rating??0)-(av?.rating??0)||(bv?.count??-1)-(av?.count??-1);if(difference)return difference;}
   }

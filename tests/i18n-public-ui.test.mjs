@@ -127,7 +127,7 @@ try{
   assert.equal(api.searchService(locale,'Alle Leistungen','Bremsen prüfen bitte'),locale==='de'?'Bremsen & Fahrwerk':'Alle Leistungen','only DE applies the existing heuristic');
   assert.equal(api.searchService(locale,'Motor & Getriebe','Bremsen prüfen bitte'),'Motor & Getriebe','manual canonical selection always wins');
   const filters={...api.defaultCatalogueFilters,service:'Bremsen & Fahrwerk',language:'Deutsch'};
-  assert.deepEqual(api.matchCatalogue([workshop,{...workshop,id:'draft-workshop',status:'draft'}],filters,null,false,{},locale).map(w=>w.id),['fixture-workshop']);
+  assert.deepEqual(api.matchCatalogue([workshop,{...workshop,id:'draft-workshop',status:'draft'}],filters,null,false,locale).map(w=>w.id),['fixture-workshop']);
   const href=api.catalogueHref(filters,locale);assert(href.includes('leistung=bremsen-fahrwerk')&&href.includes('sprache=de')&&!href.includes('frena'));
   let search;
   const context={brand:'Volvo',model:'Fixture model',year:'',problem:'Bremsen prüfen bitte',service:'Alle Leistungen',city:'Prishtina',additionalCity:'',radius:0,from:'',to:''};

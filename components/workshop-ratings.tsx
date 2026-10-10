@@ -12,8 +12,8 @@ import {googleRatingEmptyLabel,type GoogleProfileStatus} from "@/lib/google-work
 
 
 export function WorkshopRatings({workshop:w,details=false,hideUnavailable=false,linkGoogle=true,compact=false,liveGoogleRating,onGoogleRating,googleState}:{workshop:Workshop;details?:boolean;hideUnavailable?:boolean;linkGoogle?:boolean;compact?:boolean;liveGoogleRating?:LiveGoogleRating;onGoogleRating?:(id:string,rating:LiveGoogleRating)=>void;googleState?:{live:LiveGoogleRating|null;status:GoogleProfileStatus}}){
-const {locale,t}=useI18n();const decimal=(value:number)=>formatNumber(locale,value,{minimumFractionDigits:1,maximumFractionDigits:1}); const {ref,live:observed,status:observedStatus}=useVisibleGooglePlace(w.id,true,!googleState);
- const live=googleState?googleState.live:liveGoogleRating??observed,status=googleState?.status??observedStatus;
+const {locale,t}=useI18n();const decimal=(value:number)=>formatNumber(locale,value,{minimumFractionDigits:1,maximumFractionDigits:1}); const {ref,live:observed,status:observedStatus}=useVisibleGooglePlace(w.id,true,!googleState&&!liveGoogleRating);
+ const live=googleState?googleState.live:liveGoogleRating??observed,status=googleState?.status??(liveGoogleRating?"ready":observedStatus);
  useEffect(()=>{if(observed)onGoogleRating?.(w.id,observed);},[w.id,observed,onGoogleRating]);
  const google=live;
  const mapsUrl=google?.mapsUrl??workshopMapsUrl(w);

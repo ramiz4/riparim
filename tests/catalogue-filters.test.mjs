@@ -5,7 +5,7 @@ const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild
 const bundle=await build({entryPoints:['lib/catalogue-filters.ts'],bundle:true,platform:'node',format:'esm',write:false});
 await mkdir('.test-runtime/catalogue',{recursive:true});
 await writeFile('.test-runtime/catalogue/filters.mjs',bundle.outputFiles[0].contents);
-const {defaultCatalogueFilters:defaults,parseCatalogueFilters,matchCatalogue,catalogueHref,activeCatalogueFilters,hasPublishedRatings,hasGoogleRatings,catalogueDistance}=await import(new URL('../.test-runtime/catalogue/filters.mjs',import.meta.url));
+const {defaultCatalogueFilters:defaults,parseCatalogueFilters,matchCatalogue,catalogueHref,activeCatalogueFilters,hasPublishedRatings,catalogueDistance}=await import(new URL('../.test-runtime/catalogue/filters.mjs',import.meta.url));
 let passed=0;
 const check=(condition,label)=>{assert(condition,label);passed++;};
 const record=(name,overrides={})=>({id:name,name,city:'Prishtina',status:'published',services:['Inspektion & Wartung'],brands:[],languages:[],rating:null,count:0,lat:null,lng:null,...overrides});
@@ -41,15 +41,15 @@ check(matchCatalogue(named,{...defaults,query:' BARDHE ',city:'Prishtina',brand:
 check(matchCatalogue(named,{...defaults,query:'Bardhe Auto'}).length===2,'multiple name words can match independently of their order');
 check(matchCatalogue(named,{...defaults,query:'not-a-workshop'}).length===0,'unknown names produce honest empty results');
 const search=parseCatalogueFilters(new URLSearchParams('q=Auto+%26+Bardh%C3%AB&sort=google'),named);
-check(search.query==='Auto & Bardhë'&&search.sort==='google','name and Google sort survive a public link');
-check(catalogueHref(search).includes('q=Auto+%26+Bardh%C3%AB')&&catalogueHref(search).includes('sort=google'),'special characters in names are URL-encoded');
+check(search.query==='Auto & Bardhë'&&search.sort==='name','legacy Google sort falls back without losing name search');
+check(catalogueHref(search).includes('q=Auto+%26+Bardh%C3%AB')&&!catalogueHref(search).includes('sort='),'special characters are URL-encoded and legacy sort is removed');
 check(activeCatalogueFilters(search).includes('query'),'name search can be removed using an active filter');
 check(parseCatalogueFilters(new URLSearchParams('q='+encodeURIComponent('x'.repeat(250))),named).query.length===100,'public name search is bounded');
 const googleData=[record('Alpha missing',{rating:5,count:80}),record('Beta 4.8',{googleRating:{rating:4.8,count:150}}),record('Gamma 4.8',{googleRating:{rating:4.8,count:12}}),record('Delta 4.9',{googleRating:{rating:4.9,count:null}})];
-check(matchCatalogue(googleData,{...defaults,sort:'google'}).map(w=>w.name).join('|')==='Alpha missing|Beta 4.8|Delta 4.9|Gamma 4.8','stored Google snapshots are excluded from sorting');
+check(matchCatalogue(googleData,defaults).map(w=>w.name).join('|')==='Alpha missing|Beta 4.8|Delta 4.9|Gamma 4.8','stored Google snapshots are excluded from sorting');
 check(matchCatalogue(googleData,{...defaults,sort:'rating'})[0].name==='Alpha missing','Riparim sorting remains independent of Google');
-check(!hasPublishedRatings(googleData.slice(1))&&!hasGoogleRatings(googleData),'stored snapshots cannot enable live Google ratings');
-check(matchCatalogue(googleData,{...defaults,sort:'google'},null,false,{'Alpha missing':{rating:5,count:1}})[0].name==='Alpha missing','current API ratings replace old snapshots for Google sorting');
+check(!hasPublishedRatings(googleData.slice(1)),'stored snapshots cannot enable Riparim sorting');
+for(const locale of ['de','sq','en']){const legacy=parseCatalogueFilters(new URLSearchParams('sort=google&q=Auto&ort=prishtina&leistung=diagnose-elektronik&marke=volkswagen&sprache=de'),data);check(legacy.sort==='name'&&legacy.query==='Auto'&&legacy.city==='Prishtina'&&legacy.service==='Diagnose & Elektronik'&&legacy.brand==='Volkswagen'&&legacy.language==='Deutsch','legacy Google sort preserves every public filter');check(catalogueHref(legacy,locale).startsWith(locale==='de'?'/werkstaetten':`/${locale}/werkstaetten`)&&!catalogueHref(legacy,locale).includes('sort='),'legacy fallback preserves locale');}
 const distances=[record('Alpha unknown'),record('Beta far',{lat:42.7129,lng:21.1655}),record('Gamma near',{lat:42.6629,lng:21.1655})];
 check(matchCatalogue(distances,{...defaults,city:'Prishtina',sort:'distance'}).map(w=>w.name).join('|')==='Gamma near|Beta far|Alpha unknown','known distances sort near first and missing coordinates stay at the end');
 check(catalogueDistance(distances[0],'Prishtina')===null&&catalogueDistance(distances[2],'Prishtina')===0,'unknown coordinates are not represented as zero distance');
