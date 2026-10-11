@@ -69,6 +69,10 @@ Adapteränderung. Der Wechsel ist kein Ein-Klick-Vorgang.
    auch neue Datei-Bytes, Authkonfiguration oder Identitätsverknüpfung, stoppt
    den alten Import. Es gibt keine Einfügungen in ein bereits benutztes Ziel
    und keine automatische Wiederbelebung gelöschter Bewertungen.
+   Nach einem Prozesscrash können `.restore-lock` und das private Staging-
+   Verzeichnis zurückbleiben. Retry löscht sie bewusst nicht blind. Der Betreiber
+   prüft und bereinigt ausschließlich eigene Reste, nachdem Restore-/App-Prozesse
+   sicher gestoppt und das vollständige Backup gesichert sind.
 5. Authkonten separat auf einer tatsächlich kompatiblen Zielversion übernehmen
    und die Passwort-Hash-/Google-Verträge mit isolierten Konten prüfen. Eine
    Admin-Liste exportiert keine vollständigen Passwort-Hashes. Die offizielle
