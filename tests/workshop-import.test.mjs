@@ -110,7 +110,8 @@ assert.equal(mita.googleRating.count,null,'unpublished Google count is not guess
 const sorted=filters.matchCatalogue(workshops,{...filters.defaultCatalogueFilters,sort:'rating'});
 assert.equal(sorted[0].id,'auto-mita','independent Google 5.0 scores do not outrank a Riparim rating');
 const markup=renderToStaticMarkup(React.createElement(WorkshopRatings,{workshop:mita,details:true}));
-for(const text of ['Riparim','Google','3,0'])assert(markup.includes(text),`rating display includes ${text}`);
+for(const text of ['Riparim','3,0'])assert(markup.includes(text),`rating display includes ${text}`);
+assert(markup.includes('google-rating-panel'),'rating display retains the native Google widget slot');
 for(const text of ['4,8','Anzahl nicht veröffentlicht','automita.com'])assert(!markup.includes(text),`historical Google content is not displayed: ${text}`);
 
 
