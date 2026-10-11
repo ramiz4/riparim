@@ -153,6 +153,10 @@ Kindern `gmp-place-rating` und `gmp-place-attribution`. Die benutzerdefinierte
 Konfiguration enthält weder `gmp-place-name` noch `gmp-place-link`, sodass der
 doppelte Werkstattname und Maps-Button entfallen. Seine Höhe
 folgt dem Inhalt; eine feste Höhe oder abgeschnittene Pflichtinhalte gibt es nicht.
+In Katalogkarten entfällt der innere Rahmen. Der Baustein übernimmt die
+Kartenfläche; Bewertungsschrift und Abstände verwenden ausschließlich die
+offiziellen CSS-Eigenschaften. Google-Quellenhinweis und Infofunktion bleiben
+sichtbar, die Profilbausteine behalten ihre eigene Gestaltung.
 Die zusätzliche Riparim-Überschrift, Ladezeit und Maps-Aktion entfallen bei
 erfolgreicher Kataloganzeige; Fehler- und Veraltungsfälle behalten den Maps-Fallback.
 Das Profil verwendet die oben beschriebenen getrennten Advanced-Bausteine für

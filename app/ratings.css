@@ -18,3 +18,4 @@
 
 .google-overview-panel .google-official-widget gmp-advanced-place-details{height:152px;max-width:none;border:0;border-radius:0;--gmp-mat-spacing-large:8px;--gmp-mat-spacing-medium:8px;--gmp-mat-spacing-extra-large:0px;--gmp-mat-spacing-two-extra-large:0px}
 .profile-google-reviews .google-official-widget gmp-advanced-place-details{max-width:none;--gmp-mat-spacing-large:8px;--gmp-mat-spacing-medium:8px;--gmp-mat-spacing-extra-large:0px;--gmp-mat-spacing-two-extra-large:0px}
+.catalogue-card .google-rating-panel .google-official-widget gmp-advanced-place-details-compact{border:0;border-radius:0;--gmp-mat-color-surface:var(--card);--gmp-mat-font-body-small:normal 500 14px/20px Inter,Arial,Helvetica,sans-serif;--gmp-mat-spacing-large:0px;--gmp-mat-spacing-medium:4px}
