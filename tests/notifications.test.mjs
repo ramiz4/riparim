@@ -70,7 +70,7 @@ try{
   }
  }
  const newPayload=attempts.at(-1).payload;
- for(const extra of [{text:null},{text:false},{text:'x'.repeat(6001)},{bcc:['foreign@example.test']},{unknown:'untrusted'}])check(!email.deliveryPayloadSchema.safeParse({...newPayload,...extra}).success,'HTML-only and historical payload validation rejects invalid text and unknown recipient/content fields');
+ for(const extra of [{from:'Sender <member@example.test>\r\nBcc: foreign@example.test'},{text:null},{text:false},{text:'x'.repeat(6001)},{bcc:['foreign@example.test']},{unknown:'untrusted'}])check(!email.deliveryPayloadSchema.safeParse({...newPayload,...extra}).success,'HTML-only and historical payload validation rejects invalid text and unknown recipient/content fields');
  check(email.deliveryPayloadSchema.safeParse({...newPayload,text:'Historical valid plain text.'}).success,'Valid historical text remains permitted solely to preserve stored retry requests');
  preferredLocale=undefined;sent.clear();attempts.length=0;
  let id=fixtureVisit();let response=await moderate(id,0,'published',{to:'foreign@example.test',from:'forged@example.test'});
@@ -167,5 +167,7 @@ try{
  await background.withNotificationContext({waitUntil:task=>backgroundTask=task},()=>background.triggerNotifications({id:queued,limit:1}));
  check(backgroundTask instanceof Promise,'Background sends are tied to the Worker execution-context lifetime');await backgroundTask;check(event(id).state==='sent','Attached background work completes the durable event');
  check((await visits.DELETE(request('DELETE',{id}))).ok&&!event(id),'Deleting a submission removes its private notification records');
+ id=fixtureVisit();await moderate(id);globalThis.fixtureEnv.EMAIL_TRANSPORT='smtp';const beforeUnsupported=attempts.length;
+ await outbox.processNotifications({id:event(id).id});check(event(id).state==='blocked'&&event(id).last_error==='configuration_missing'&&attempts.length===beforeUnsupported,'SMTP selection on Worker never falls back to a different provider');delete globalThis.fixtureEnv.EMAIL_TRANSPORT;
  console.log(JSON.stringify({notificationChecksPassed:passed,providerMessagesAccepted:sent.size,realEmailsSent:false,productionTouched:false}));
 }finally{globalThis.fetch=nativeFetch;}
