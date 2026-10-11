@@ -35,9 +35,9 @@
 .public-review-list{display:flex;flex-direction:column;gap:14px;margin-top:18px}
 .public-review{min-width:0;padding:20px;border:1px solid var(--border);border-radius:14px;background:var(--card)}
 .public-review .review-title{align-items:flex-start;gap:12px;font-size:15px}
-.public-review-author{display:flex;flex-direction:column;gap:4px;min-width:0}
-.public-review-author strong{overflow-wrap:anywhere;line-height:1.5}
-.public-review-author time{font-size:12px;line-height:1.5;color:var(--muted-foreground)}
+.public-review-author{min-width:0;overflow-wrap:anywhere;line-height:1.5}
+.public-review-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.public-review-footer time{margin-left:auto;white-space:nowrap;font-size:12px;line-height:1.5;color:var(--muted-foreground)}
 .public-review .public-review-score{flex-shrink:0;gap:5px;white-space:nowrap;padding:5px 9px;border-radius:8px;background:color-mix(in srgb,var(--theme-warning) 10%,var(--card));color:var(--theme-warning);font-size:13px;font-weight:650;line-height:1.5}
 .public-review .review-meta{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0!important;color:var(--muted-foreground)!important}
 .public-review .review-meta>span{max-width:100%;padding:4px 8px;background:var(--theme-surface);border-radius:6px;line-height:1.5;overflow-wrap:anywhere}
