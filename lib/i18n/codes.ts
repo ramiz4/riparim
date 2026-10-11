@@ -28,6 +28,9 @@ const errorKeys={
  user_delete_protected:"management.user_delete_protected",
  user_delete_incomplete:"management.user_delete_incomplete",
 
+ business_documents_required:"management.business_documents_required",
+ business_documents_limit:"management.business_documents_limit",
+ business_documents_too_large:"management.business_documents_too_large",
  business_invalid_input:"management.business_invalid_input",
  business_claim_unavailable:"management.business_claim_unavailable",
  business_not_owner:"management.business_not_owner",

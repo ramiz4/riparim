@@ -253,15 +253,24 @@ export function validateEvidenceManifest(snapshot, manifest) {
     keys.add(object.key); files.add(object.file);
   }
   let referenced = 0;
-  for (const name of ["visits", "evidence_uploads"]) {
+  const referencedKeys = new Set();
+  for (const name of ["visits", "evidence_uploads", "workshop_claims"]) {
     for (const row of snapshot.tables.find((table) => table.name === name)?.rows ?? []) {
-      if (row.file_key !== null && row.file_key !== undefined) {
-        if (typeof row.file_key !== "string" || !keys.has(row.file_key)) fail(`Referenced evidence is missing from the manifest (${name}).`);
+      const rowKeys = new Set(row.file_key == null ? [] : [row.file_key]);
+      if (name === "workshop_claims" && row.documents !== undefined) {
+        let documents;
+        try { documents = JSON.parse(row.documents); } catch { fail("Invalid workshop claim document inventory."); }
+        if (!Array.isArray(documents) || documents.some((document) => !document || typeof document.fileKey !== "string" || !document.fileKey)) fail("Invalid workshop claim document inventory.");
+        for (const document of documents) rowKeys.add(document.fileKey);
+      }
+      for (const key of rowKeys) {
+        if (typeof key !== "string" || !keys.has(key)) fail(`Referenced evidence is missing from the manifest (${name}).`);
+        referencedKeys.add(key);
         referenced++;
       }
     }
   }
-  return { objects: keys.size, references: referenced, unreferenced: [...keys].filter((key) => !snapshot.tables.some((table) => ["visits", "evidence_uploads"].includes(table.name) && table.rows.some((row) => row.file_key === key))).length };
+  return { objects: keys.size, references: referenced, unreferenced: [...keys].filter((key) => !referencedKeys.has(key)).length };
 }
 
 export async function verifyEvidenceFiles(manifest, directory) {

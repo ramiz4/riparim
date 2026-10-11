@@ -165,3 +165,22 @@ neue Migration oder zusätzliche kostenpflichtige Ressource.
 Bei Katalogänderungen vor dem Merge eine geschützte lokale Sicherung der
 betroffenen Katalogtabellen samt isolierter Wiederherstellungsprüfung
 erhalten. Die tägliche Routine folgt [dem Laufvertrag](daily-workshop-import.md).
+
+## Verpflichtende Dokumente für Inhaberansprüche
+
+Migration `0015_noisy_rockslide.sql` ergänzt `workshop_claims.documents` additiv
+als JSON-Liste mit Default `[]`. Es gibt keinen Datenverlust und keinen Backfill:
+Leser verwenden für alte Einzeldateien weiterhin `file_key`, `file_name` und
+`file_type`; dies gilt auch für Schreibvorgänge des bisherigen Workers während
+des Deployments. Neue Anträge speichern alle Dokumente und spiegeln die erste
+Datei in diesen alten Spalten. Der vorherige Worker kann nach einem Code-Rollback
+weiterarbeiten, zeigt aber nur das erste Dokument. Alle Dateien bleiben im
+privaten Bucket; Kontolöschung entfernt sämtliche Dateien über die vorhandene
+Upload-Inventur und den Konto-Präfix. Export/Restore prüfen alle JSON-Referenzen.
+
+Nur neue Anträge benötigen 1–5 Dokumente: PDF, JPG oder PNG, jeweils bis 5 MiB,
+zusammen bis 10 MiB. Historische Anträge ohne Datei bleiben prüfbar. Die
+Multipart-Route begrenzt den tatsächlich gelesenen Body auf 11 MiB und akzeptiert
+mehrere `file`-Parts; Textfelder bleiben eindeutig. JSON-Anträge können die
+Dokumentpflicht nicht umgehen. Downloads autorisieren den Antrag vor der
+Auswahl eines Dokuments mit dessen ID.

@@ -267,6 +267,18 @@ test("invalid scalars, unsafe integers, and malformed blobs do not silently chan
 const evidence = Buffer.from("isolated evidence fixture");
 const object = { key: "private/receipt-fixture", file: "objects/0001.bin", size: evidence.length, sha256: createHash("sha256").update(evidence).digest("hex"), httpMetadata: { contentType: "image/png", contentDisposition: "attachment" }, customMetadata: { fixture: "true" } };
 const manifest = { format: 1, projectId: metadata.projectId, exportedAt: metadata.exportedAt, objects: [object] };
+test("claim evidence manifests include every attachment and legacy single files", () => {
+  const snapshot = upgradeSnapshot(source, migrations).snapshot;
+  const claims = snapshot.tables.find((table) => table.name === "workshop_claims").rows;
+  claims.push({ ...Object.fromEntries(snapshot.tables.find((table) => table.name === "workshop_claims").columns.map(column => [column.name,null])), file_key: object.key, documents: JSON.stringify([{fileKey: object.key}, {fileKey: "private/second-proof"}]) });
+  const second = { ...object, key: "private/second-proof", file: "objects/0002.bin" };
+  assert.throws(() => validateEvidenceManifest(snapshot, manifest), /Referenced evidence is missing.*workshop_claims/);
+  assert.deepEqual(validateEvidenceManifest(snapshot, { ...manifest, objects: [object,second] }), { objects: 2, references: 3, unreferenced: 0 });
+  claims[0].documents = "[]";
+  assert.deepEqual(validateEvidenceManifest(snapshot, manifest), { objects: 1, references: 2, unreferenced: 0 });
+  claims[0].documents = "invalid";
+  assert.throws(() => validateEvidenceManifest(snapshot, manifest), /Invalid workshop claim document inventory/);
+});
 test("manifest verifies exact references and retains private HTTP/custom metadata", () => {
   assert.deepEqual(validateEvidenceManifest(source, manifest), { objects: 1, references: 1, unreferenced: 0 });
 });

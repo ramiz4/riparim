@@ -2,7 +2,7 @@ import {ValidationError} from "@/lib/validation-error";
 import {z} from "zod";
 import {getAppUser,getAdminUser} from "@/app/auth";
 import {json,readJson,readFormData,sameOrigin} from "@/lib/http";
-import {businessProfileSchema,claimSchema} from "@/lib/business-contract";
+import {businessProfileSchema,claimSchema,claimUploadRequestLimit} from "@/lib/business-contract";
 import {BusinessError,businessState,requestWorkshopClaim,requestWorkshopChange,decideClaim,decideChange} from "@/lib/business";
 
 export const dynamic="force-dynamic";
@@ -33,10 +33,10 @@ export async function POST(request:Request){
  try{
   const user=await getAppUser();if(!user)return json({error:"Bitte melde dich an.",errorCode:"authentication_required"},401);
   if(request.headers.get("content-type")?.includes("multipart/form-data")){
-   let form:FormData;try{form=await readFormData(request,6*1024*1024);}catch(error){if(error instanceof Error&&error.message==="INPUT_TOO_LARGE")throw new ValidationError("file_too_large","Die Datei ist zu groß. Maximal 5 MB.");throw new BusinessError("Ungültige Eingaben.",400,"invalid_request");}
-   if([...form.keys()].some(key=>!["workshopId","evidence","file"].includes(key))||["workshopId","evidence","file"].some(key=>form.getAll(key).length>1))throw new BusinessError("Ungültige Eingaben.",400,"business_invalid_input");
-   const file=form.get("file");if(typeof file==="string")throw new ValidationError("invalid_file","Bitte lade eine gültige Datei hoch.");
-   const created=await requestWorkshopClaim(user,{workshopId:form.get("workshopId"),evidence:form.get("evidence")},file);
+   let form:FormData;try{form=await readFormData(request,claimUploadRequestLimit);}catch(error){if(error instanceof Error&&error.message==="INPUT_TOO_LARGE")throw new BusinessError("Die Dokumente sind zusammen zu groß. Maximal 10 MB.",413,"business_documents_too_large");throw new BusinessError("Ungültige Eingaben.",400,"invalid_request");}
+   if([...form.keys()].some(key=>!["workshopId","evidence","file"].includes(key))||["workshopId","evidence"].some(key=>form.getAll(key).length>1))throw new BusinessError("Ungültige Eingaben.",400,"business_invalid_input");
+   const files=form.getAll("file");if(files.some(file=>typeof file==="string"))throw new ValidationError("invalid_file","Bitte lade eine gültige Datei hoch.");
+   const created=await requestWorkshopClaim(user,{workshopId:form.get("workshopId"),evidence:form.get("evidence")},files as File[]);
    return json({id:created,status:"pending",messageCode:"saved"},201);
   }
   const body=createSchema.parse(await input(request,16000));

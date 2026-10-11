@@ -35,7 +35,7 @@ export const evidenceUploads=sqliteTable("evidence_uploads",{
 },table=>[index("idx_evidence_uploads_owner").on(table.owner)]);
 export const workshopClaims=sqliteTable("workshop_claims",{
  id:text("id").primaryKey(),workshopId:text("workshop_id").notNull(),owner:text("owner").notNull(),
- fileKey:text("file_key"),fileName:text("file_name"),fileType:text("file_type"),
+ fileKey:text("file_key"),fileName:text("file_name"),fileType:text("file_type"),documents:text("documents").notNull().default("[]"),
  evidence:text("evidence").notNull(),evidenceLinks:text("evidence_links").notNull().default("[]"),status:text("status").notNull().default("pending"),
  moderatorNote:text("moderator_note").notNull().default(""),revision:integer("revision").notNull().default(0),createdAt:text("created_at").notNull(),moderatedAt:text("moderated_at"),moderatedBy:text("moderated_by")
 },table=>[index("idx_workshop_claims_owner").on(table.owner),index("idx_workshop_claims_status").on(table.status)]);
