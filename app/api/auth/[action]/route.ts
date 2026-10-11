@@ -1,3 +1,4 @@
+import {validAccountName} from "@/lib/account-name";
 import {requestLocale,localizedReturnPath,authCallbackUrl} from "@/lib/auth/locale";
 import {localizeHref} from "@/lib/i18n/locale";
 import {getAuthConfig,siteOrigin,providerAvailability} from "@/lib/auth/config";
@@ -36,7 +37,8 @@ export async function POST(request:Request,{params}:{params:Promise<{action:stri
  const email=String(body.email??"").trim().toLowerCase(),password=String(body.password??""),next=localizedReturnPath(body.returnTo,siteOrigin(),locale);if(["login","register","recovery"].includes(action)&&(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||email.length>254))return json({error:"Bitte gib eine gültige E-Mail-Adresse ein.",errorCode:"invalid_email"},400);if(["register","reset"].includes(action)&&(password.length<12||password.length>128))return json({error:"Bitte nutze ein Passwort mit 12 bis 128 Zeichen.",errorCode:"invalid_password"},400);
  if(action==="login"){const {data,error}=await client.auth.signInWithPassword({email,password});if(error||!data.user?.email_confirmed_at)return json({error:"Anmeldung fehlgeschlagen. Prüfe E-Mail und Passwort und bestätige deine E-Mail-Adresse.",errorCode:"login_failed"},401);try{await recordPasswordSession(c.projectUrl,data.user,client);}catch(e){await client.auth.signOut({scope:"local"});if(e instanceof Error&&e.message==="ACCOUNT_DISABLED")return json({error:"Dieses Konto ist gesperrt. Bitte wende dich an die Verwaltung.",errorCode:"account_blocked"},403);throw e;}return json({returnTo:next});}
  if(action==="register"){
-  const name=String(body.name??"").trim().slice(0,80);
+  const name=validAccountName(body.name);
+  if(!name)return json({error:"Bitte gib einen Namen mit 2 bis 80 Zeichen ein.",errorCode:"invalid_name"},400);
   const {data,error}=await client.auth.signUp({email,password,options:{data:{full_name:name,preferred_locale:locale},emailRedirectTo:authCallbackUrl(siteOrigin(),locale,next)}});
   if(error){
    if(error.status===429||error.code==="over_email_send_rate_limit"||error.code==="over_request_rate_limit")return json({error:"Zu viele Registrierungsversuche. Bitte warte einige Minuten und versuche es erneut.",errorCode:"rate_limited"},429);
