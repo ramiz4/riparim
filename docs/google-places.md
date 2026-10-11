@@ -117,12 +117,15 @@ Sichtbarkeit wird auch nach asynchronem SDK-Laden erneut geprüft. Themewechsel
 und normale Profilzustandsänderungen
 bewahren dieselbe Widgetinstanz; Farben und Schriften werden ausschließlich
 über die offiziellen CSS-Eigenschaften und `color-scheme` geändert. Der
-Rezensionenbaustein erhält höchstens 400 Pixel Breite mit interner Scrollfunktion;
-der Profilkopf erhält 180 Pixel Höhe und dieselbe interne Scrollfunktion für
+Rezensionenbaustein nutzt die gesamte Hauptspaltenbreite mit interner Scrollfunktion;
+der rahmenlose Profilkopf erhält 152 Pixel Höhe und dieselbe interne Scrollfunktion für
 ausgeklappte Wochenzeiten. Der vollständige Baustein ist nötig, weil
 `gmp-place-opening-hours` laut Inhaltsreferenz nur dort unterstützt ist; das
 kompakte Beispiel in Googles Advanced-Anleitung zeigt diese Zeiten im Live-SDK
-nicht an. Katalogratings behalten den kompakten Baustein mit Inhaltshöhe.
+nicht an. Abstände werden ausschließlich über die dokumentierten
+`--gmp-mat-spacing-*`-Eigenschaften reduziert. Quellenhinweis und Infofunktion
+bleiben sichtbar; deren native Reihenfolge wird nicht verändert. Katalogratings
+behalten den kompakten Baustein mit Inhaltshöhe.
 Die Google- und Autorenattribution des Bausteins bleibt vollständig erhalten.
 Das Profil verwendet keine Zusammenfassungen oder `all-content`.
 
