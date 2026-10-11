@@ -63,6 +63,8 @@ Callback mit `?locale=…&weiter=…`. Die gesonderte Providerübernahme nach ei
 geprüften Main-Release steht in [der Mailaktivierung](docs/customer-flow-qa.md#lokalisierte-mailvorlagen-und-provideraktivierung-issue-52).
 Es gibt keine neue Mailplattform, Migration oder Auth-Hook-Infrastruktur.
 
+Der reproduzierbare Anbieterwechsel mit geschütztem App-/Dateibackup, frischem Node-Restore und Daten erhaltendem Rückweg steht in [provider-exit.md](docs/provider-exit.md).
+
 Der portable Node-Betrieb unterstützt zusätzlich SMTP über `EMAIL_TRANSPORT=smtp`, `SMTP_URL` und `SMTP_SECRET_ORIGIN`. Migration `0017_mail_transports.sql` ergänzt Transportbindung, eingefrorene MIME-Bytes und eine dauerhafte SMTP-Startmarkierung. Unklare SMTP-Übergaben werden auch bei administrativem Retry nicht erneut gesendet. Konfiguration, TLS-Prüfung und der kontrollierte Wechselweg stehen in [mail-transports.md](docs/mail-transports.md). Der Worker behält den HTTP-Versand über Resend.
 
 Migration `0012` ergänzt die private Versandtabelle und muss vor Veröffentlichung angewendet werden; historische Moderationsentscheidungen werden nicht nachträglich benachrichtigt. Der erste Versand wird an den Worker-Kontext gebunden. Ein deklarierter Worker-Cron prüft fällige Ereignisse alle fünf Minuten; im lokalen Betrieb wird der Scheduled-Handler ausschließlich über die lokale Testfunktion ausgelöst. Die geschützte API `/api/notifications` bleibt für kontrollierte Versandprüfungen verfügbar. „Bewertungen prüfen“ konzentriert sich auf die Moderation und enthält keinen zusätzlichen Versandbereich. Providerfehler widerrufen die erfolgreiche Moderation nicht. Die konfigurierte Produktion muss den Scheduled-Handler und den Cron aus dem Worker-Artefakt übernehmen.

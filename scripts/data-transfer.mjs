@@ -1,3 +1,4 @@
+import {nodeMigrationSchema} from '../lib/runtime/node-schema.mjs';
 import { createHash } from "node:crypto";
 import { createReadStream } from "node:fs";
 import { readFile, realpath, stat } from "node:fs/promises";
@@ -6,7 +7,7 @@ import { DatabaseSync } from "node:sqlite";
 import { fileURLToPath } from "node:url";
 import { workshopIdentityInput } from "../lib/google-identity-fingerprint.mjs";
 
-const historyNames = new Set(["__drizzle_migrations", "d1_migrations", "__appgarden_migrations"]);
+const historyNames = new Set(["__drizzle_migrations", "d1_migrations", "__appgarden_migrations", "riparim_node_migrations"]);
 const schemaTypes = new Set(["table", "index", "trigger", "view"]);
 const blob = (value) => value && typeof value === "object" && !Array.isArray(value) && Object.keys(value).length === 2 && value.type === "blob" && typeof value.base64 === "string" && Buffer.from(value.base64, "base64").toString("base64") === value.base64;
 const scalar = (value) => value === null || typeof value === "string" || blob(value) || (typeof value === "number" && Number.isFinite(value) && (!Number.isInteger(value) || Number.isSafeInteger(value)));
@@ -106,6 +107,15 @@ function checkedPrefix(snapshot, migrations) {
   const prefix = matches[0];
   const history = snapshot.tables.filter((item) => historyNames.has(item.name));
   for (const table of history) {
+    if (table.name === "riparim_node_migrations") {
+      const definition = snapshot.schema.find((item) => item.name === table.name && item.type === "table");
+      const expected = nodeMigrationSchema.replace('IF NOT EXISTS ','');
+      const expectedColumns=[{name:"name",type:"TEXT",notnull:0,dflt_value:null,pk:1},{name:"sha256",type:"TEXT",notnull:1,dflt_value:null,pk:0},{name:"applied_at",type:"TEXT",notnull:1,dflt_value:null,pk:0}];
+      if (!definition || normalizedSql(definition.sql) !== normalizedSql(expected) || JSON.stringify(columnsShape(table.columns)) !== JSON.stringify(expectedColumns)) fail("Node migration history schema does not match its verified runtime contract.");
+      const rows = [...table.rows].sort((a, b) => a.name.localeCompare(b.name));
+      if (rows.length !== prefix || rows.some((row, index) => row.name !== migrations[index].name || row.sha256 !== migrations[index].sha256 || typeof row.applied_at !== "string" || !Number.isFinite(Date.parse(row.applied_at)))) fail("Node migration history does not match checked-in migrations.");
+      continue;
+    }
     if (table.name === "__appgarden_migrations") {
       // OpenAI Sites records these same ordered migration filenames in a known
       // provider table. Accept this exact alias, never an arbitrary name prefix.

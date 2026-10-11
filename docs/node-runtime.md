@@ -86,6 +86,9 @@ Migration und ihr Beleg bilden eine Transaktion. Wiederholungen überspringen
 identische angewendete Dateien; geänderte angewendete Dateien führen zum Abbruch.
 Es gibt keine neue Drizzle-Migration und keine automatische Datenübernahme aus D1.
 Die initiale Katalogübernahme verwendet weiterhin den vorhandenen Import.
+Der geprüfte vollständige D1/R2-Export kann mit dem kleinen Offline-Restore in
+ein neues Node-Verzeichnis übernommen werden. Ablauf, sichere Retrygrenze und
+frischer Rücktransfer stehen in [provider-exit.md](provider-exit.md).
 
 SQL-Batches bleiben atomar. Private Dateiinhalte und deren ETag stehen gemeinsam
 in einer Blobstore-Zeile: bedingte Uploads aktualisieren sie ausschließlich,

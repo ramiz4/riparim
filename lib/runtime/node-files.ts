@@ -1,3 +1,4 @@
+import {privateObjectsSchema} from './node-schema.mjs';
 import {randomUUID} from 'node:crypto';
 import type {DatabaseSync} from 'node:sqlite';
 import type {PrivateFiles,PrivateObject,PrivateObjectBody,PutOptions} from './contracts';
@@ -7,9 +8,12 @@ function validKey(key:string,prefix=false){
  const parts=key.split('/');
  if(key.length>1024||/[\\\x00-\x1f\x7f]/.test(key)||parts.some((part,index)=>part==='.'||part==='..'||(!part&&!(prefix&&index===parts.length-1))))throw new Error('Invalid private object key');
 }
-function metadata(row:FileRow):PrivateObject{return {key:row.key,etag:row.etag,size:row.size,uploaded:new Date(row.uploaded),httpMetadata:JSON.parse(row.http_metadata),customMetadata:JSON.parse(row.custom_metadata)};}
+function metadata(row:FileRow):PrivateObject{
+ const httpMetadata=JSON.parse(row.http_metadata);if(httpMetadata.cacheExpiry)httpMetadata.cacheExpiry=new Date(httpMetadata.cacheExpiry);
+ return {key:row.key,etag:row.etag,size:row.size,uploaded:new Date(row.uploaded),httpMetadata,customMetadata:JSON.parse(row.custom_metadata)};
+}
 export function privateFiles(connection:DatabaseSync):PrivateFiles{
- connection.exec('CREATE TABLE IF NOT EXISTS private_objects (key TEXT PRIMARY KEY,etag TEXT NOT NULL,bytes BLOB NOT NULL,uploaded INTEGER NOT NULL,http_metadata TEXT NOT NULL,custom_metadata TEXT NOT NULL)');
+ connection.exec(privateObjectsSchema);
  async function put(key:string,value:ArrayBuffer|Uint8Array|string|null,options:PutOptions={}):Promise<PrivateObject|null>{
   validKey(key);
   const bytes=value===null?new Uint8Array():typeof value==='string'?new TextEncoder().encode(value):new Uint8Array(value),etag=randomUUID(),uploaded=Date.now();
