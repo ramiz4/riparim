@@ -48,7 +48,7 @@ Telefonabfragen verwenden ein Leerzeichen nach der Vorwahl und den dazugehörige
 
 Es werden nur Place IDs und eigene Prüf-/Wiederholungsmetadaten dauerhaft gespeichert. Ungeklärte Treffer werden nach sieben Tagen erneut geprüft, Providerfehler frühestens nach 15 Minuten. Gleichzeitige Aufrufe teilen eine kurze Lease. Eine Änderung des Profils löst eine neue Zuordnung aus; erfolgreiche Zuordnungen werden nach einem Jahr erneut geprüft.
 
-Sichtbare Karten stellen aktuelle Sterne und Anzahl im nativen Google Standard-
+Sichtbare Karten stellen aktuelle Sterne und Anzahl im nativen Google Advanced-
 UI-Kit-Widget dar. Die App exportiert keine Ratingwerte und speichert keine
 API-Sterne oder Rezensionen in D1, R2 oder Browser Storage. Google- und
 Providerattribution bleiben im Baustein erhalten. Google-Werte fließen weder in
@@ -56,7 +56,7 @@ Riparim-Mittelwerte noch in Riparim-Sortierungen ein.
 
 Der Katalog bietet ausschließlich Name, Riparim-Bewertung und Entfernung als Sortierungen an. Alte Links mit `sort=google` werden auf die Standardsortierung Name normalisiert; Suchbegriff, Leistung, Ort, Marke, Sprache und Locale bleiben erhalten. Es gibt keine globale oder auf die ersten zwölf Ergebnisse begrenzte Google-Sortierung. Historische Google-Momentaufnahmen werden weiterhin weder als aktuell angezeigt noch zur Sortierung verwendet.
 
-Google-Standard-Bausteine starten ausschließlich bei Sichtbarkeit und aktivem Tab
+Google-Bausteine starten ausschließlich bei Sichtbarkeit und aktivem Tab
 (120-Pixel-Vorlauf). Ein unverändertes Widget bleibt im aktuellen Komponentenstand
 verbunden; Filter blenden die ganze bereits montierte Karte aus und wieder ein.
 Die IDs dieser Karten bleiben auf den aktuellen veröffentlichten Katalog begrenzt;
@@ -82,7 +82,7 @@ Bei Abschluss von #94 verwendete `tests/catalogue-google-requests.test.mjs` 158 
 | Passende Karte nach Filterwechsel erneut sichtbar | 0 zusätzliche |
 | Localewechsel und erste erneut sichtbare Karte | 1 zusätzliche |
 
-Damals prüfte dieselbe Fixture zusätzlich in DE/SQ/EN die datenfreie statische Katalog-Shell: Die Hydration liest alle Filter und die Locale aus der echten URL, der bestehende Live-Katalogabruf bleibt erhalten und verursacht keine Google-Abfrage für unsichtbare Karten. Sichtbare Karten und ihre Wiederverwendung behalten dieselben Anfragezahlen. Der aktuelle Test verwendet 160 synthetische Datensätze und den unten beschriebenen Standard-Widget-Vertrag; die obigen Zählungen beschreiben den damaligen SDK-Einzelratingpfad.
+Damals prüfte dieselbe Fixture zusätzlich in DE/SQ/EN die datenfreie statische Katalog-Shell: Die Hydration liest alle Filter und die Locale aus der echten URL, der bestehende Live-Katalogabruf bleibt erhalten und verursacht keine Google-Abfrage für unsichtbare Karten. Sichtbare Karten und ihre Wiederverwendung behalten dieselben Anfragezahlen. Der aktuelle Test verwendet 160 synthetische Datensätze und den unten beschriebenen UI-Kit-Vertrag; die obigen Zählungen beschreiben den damaligen SDK-Einzelratingpfad.
 
 Die damals gezählten Aufrufe waren SDK-`fetchFields`-Anfragen, keine Kostenmessung oder Aussage zur Abrechnungskategorie. Auch reguläre URL-/Sortierverträge, Lade-/Leer-/Fehlerfälle und verspätete Antworten werden ohne Live-Google-Verbindungen geprüft.
 
@@ -114,7 +114,7 @@ bewahren dieselbe Widgetinstanz; Farben und Schriften werden ausschließlich
 über die offiziellen CSS-Eigenschaften und `color-scheme` geändert. Der
 Standardbaustein erhält höchstens 400 Pixel Breite mit interner Scrollfunktion.
 Die Google- und Autorenattribution des Bausteins bleibt vollständig erhalten.
-Advanced-/Pro-Elemente, Zusammenfassungen und `all-content` werden nicht verwendet.
+Das Profil verwendet keine Advanced-/Pro-Elemente, Zusammenfassungen oder `all-content`.
 
 Die App zeigt den Ladezeitpunkt in Kosovo-Ortszeit (`Europe/Belgrade`, inklusive
 Sommerzeit). Nach 30 Minuten wird der alte Baustein ausgeblendet und eine klare
@@ -134,9 +134,11 @@ ein Widgetfehler durch die sichtbare Aktualisierungsaktion erneut versucht werde
 ### Kostenfreier Anzeigeweg nach der Browserpause (#96)
 
 Der Nutzer verlangt weiterhin keine zusätzlichen Google-Gebühren. Katalogkarten
-verwenden deshalb den offiziellen **Standard-UI-Kit**-Baustein
-`gmp-place-details-compact` in horizontaler Orientierung, mit
-`gmp-place-content-config` und ausschließlich `gmp-place-rating`. Seine Höhe
+verwenden den offiziellen **Advanced-UI-Kit**-Baustein
+`gmp-advanced-place-details-compact` in horizontaler Orientierung, mit direkten
+Kindern `gmp-place-rating` und `gmp-place-attribution`. Die benutzerdefinierte
+Konfiguration enthält weder `gmp-place-name` noch `gmp-place-link`, sodass der
+doppelte Werkstattname und Maps-Button entfallen. Seine Höhe
 folgt dem Inhalt; eine feste Höhe oder abgeschnittene Pflichtinhalte gibt es nicht.
 Die zusätzliche Riparim-Überschrift, Ladezeit und Maps-Aktion entfallen bei
 erfolgreicher Kataloganzeige; Fehler- und Veraltungsfälle behalten den Maps-Fallback.
@@ -164,9 +166,15 @@ Retirierte Profile werden beim Liveabgleich entfernt; aktualisierte Betriebsdate
 und bestätigte Identitäten stammen immer aus dem frischen Verzeichnis. Ein
 Geschäftsdatenwechsel invalidiert die alte Identität auch ohne Google-Momentaufnahme.
 Nur Karten-IDs bleiben im Ansichtsstate, keine ausgelesenen Google-Werte.
-Das Ziel-Tageslimit 250 betrifft zusammen Karten und Profile; danach bleibt der Maps-Link.
+Karten teilen das Advanced-Tageslimit von 100, Profile das Standard-Tageslimit
+von 250. Danach bleibt der Maps-Link. Advanced benötigt den gemeinsamen
+JavaScript-SDK-Kanal `v=beta`; Standard-Profile verwenden denselben SDK ohne
+einen zweiten Ladevorgang. Google kennzeichnet Advanced als Pro-Preview mit
+möglichen inkompatiblen Änderungen. Die Fehleranzeige bleibt deshalb erhalten.
+Die [offizielle Konfiguration](https://developers.google.com/maps/documentation/javascript/places-ui-kit/advanced-place-details)
+unterstützt das Weglassen von Namen und Aktionen; Attribution bleibt sichtbar.
 
-Die isolierten DE/SQ/EN-Fixtures zählen sichtbare Standard-Montagen und verbieten
+Die isolierten DE/SQ/EN-Fixtures zählen sichtbare Advanced-Katalogmontagen und verbieten
 individuelle Enterprise- und REST-Fotoabrufe. Zwölf sichtbare Karten ergeben zwölf
 Montagen, Filterweg/zurück null zusätzliche, reine Pagination null zusätzliche und
 zwölf weitere sichtbare Karten zwölf zusätzliche. Das sind App-Verträge, keine
@@ -175,7 +183,7 @@ Google-Baustein. Ausgeschaltete Konfiguration, Identitäts-HTTP-429/Timeout,
 Widgetfehler/-Timeout, schnelle Identitäts-/Sprachwechsel und SDK-Laderaces erhalten
 eigene Angaben und den bestätigten Maps-Link ohne automatische Retryschleife.
 Der 30-Minuten-Timer ändert nur die Anzeige; nur die sichtbare explizite Aktion
-fordert einen neuen Standard-Baustein an. Jede Montage einschließlich Refresh
+fordert einen neuen Baustein derselben Variante an. Jede Montage einschließlich Refresh
 verbraucht gegebenenfalls dieselbe projektweite Tagesquote.
 
 Bestätigte WhatsApp-Kontakte erhalten eine mobile Aktion. Marken- und Leistungshervorhebungen beziehen sich nur auf bereits belegte Profilangaben. Private Fahrzeugdetails stammen ausschließlich aus der aktiven Suche im Arbeitsspeicher; sie werden nicht in Links oder Google-Anfragen übernommen.
@@ -190,21 +198,23 @@ wies **2,73 CHF** aus, davon Enterprise Details mit **1164 Ereignissen** bei ein
 freien Kontostufe bis 1000. #94/#95 sind lokale Anfrageoptimierungen; ihr
 Produktionskosten-Nachherwert ist wegen Billing-Verzug noch nicht belegt.
 
-### Providerfreigabe: ausschließlich Standard-Widgets
+### Providerfreigabe: begrenzte Standard- und Advanced-Widgets
 
 Der datierte #96-Bericht bleibt unverändert als historischer Beleg der ersten
 Browserpause. Beim Beginn dieser Korrektur war der Browser-Key noch auf
-`https://riparim-google-paused.invalid/*` beschränkt. Die folgende Freigabe wird
-**erst nach geprüftem Main-Release und frischer Freimengenprüfung** vorgenommen;
-diese Dokumentation behauptet keine bereits durchgeführte Provideränderung.
+`https://riparim-google-paused.invalid/*` beschränkt. Die Standard-Freigabe ist
+seit v1.12.7 aktiv. Advanced war bisher mit Tagesquote
+0 gesperrt. Die Advanced-Freigabe auf 100 pro Tag erfolgt erst nach frischer
+Kontopreis-/Nutzungsprüfung und geprüftem Main-Release; diese Dokumentation
+behauptet keine bereits durchgeführte Advanced-Provideränderung.
 
 | Dienst / Methode | Ziel-Tageslimit | Wirkung |
 | --- | ---: | --- |
 | Places (New): GetPlaceRequest | **0** | Einzel-Details bleiben gesperrt |
 | Places (New): SearchTextRequest | **20** | nur getrennte serverseitige Identitätsprüfung bei bestätigter freier Restmenge |
 | Places (New): PhotoMedia | **0** | öffentliche App verwendet einen direkten Maps-Fotolink |
-| UI-Kit Standard Query | **250** | gemeinsame Quote für Katalogratings und Profilwidgets |
-| UI-Kit Advanced | **0** | nicht verwendet und gesperrt |
+| UI-Kit Standard Query | **250** | Profilwidgets und noch offene ältere Katalogansichten |
+| UI-Kit Advanced Query | **100** | nur Katalograting mit Google-Attribution, ohne Name/Aktionen |
 | UI-Kit Sessions | **0** | nicht verwendet und gesperrt |
 | Maps JavaScript: Map loads | **0** | keine eingebetteten Karten; direkte Maps-/Routenlinks |
 
@@ -215,9 +225,9 @@ SDK-GetPlace-Quotenzuordnung. Der amtliche UI-Kit-Setupvertrag benötigt Maps
 JavaScript und UI Kit; `PlaceDetailsPlaceRequestElement.place` akzeptiert einen
 `Place`-Identitätsgegenstand oder eine ID. Das Erzeugen von `Place({id,
 requestedLanguage})` lädt keine Details; `fetchFields` wird nicht aufgerufen.
-Standard-Widgets verwenden eigene Quoten; laut Google werden deren zugrunde
+UI-Kit-Widgets verwenden eigene Quoten; laut Google werden deren zugrunde
 liegende Places-/Geocoding-Abfragen nicht gegen die jeweiligen Projektquoten
-gezählt. Die GetPlace- und Map-loads-Sperren verhindern den Standard-Baustein deshalb
+gezählt. Die GetPlace- und Map-loads-Sperren verhindern die UI-Kit-Bausteine deshalb
 nicht. Pflichtinhalte und Google-Attribution bleiben vollständig im nativen Widget.
 
 Das Schweizer Kontopreismodell aus #96 hat 10.000 freie Standard-UI-Kit-Ereignisse
@@ -235,6 +245,24 @@ werden. Kein anderer Projekt-Key darf die Quote erhöhen oder einen kostenpflich
 Ausweichpfad öffnen. Eine Tagesquote ist keine globale Geldobergrenze und kein
 Monatsbudget; bei unbestätigter kostenloser Restmenge bleibt die Referrerpause.
 Tagesreset-Zeitzone und Reporting-Verzug sind beim Provider zu prüfen.
+
+Advanced verwendet die separate SKU **Places UI Kit Pro (42AB-1FB3-B56A)**.
+Die [offizielle Preisliste](https://developers.google.com/maps/billing-and-pricing/pricing)
+nennt **5000 freie Ereignisse pro Monat**, darüber 5 USD pro 1000. Vor Aktivierung
+müssen die tatsächliche kostenlose Schweizer Kontostufe und bisherige kontoweite
+Pro-Nutzung frisch bestätigt sein. Die native Kontopreisliste vom 11.10.2026
+bestätigt 0 CHF bis zur Staffelgrenze 5000 und danach 4,159249999 CHF pro 1000.
+Der aktuelle Monatsbericht enthält neun SKUs, keine Pro-UI-Kit-Zeile; Gesamt
+4,34 CHF bleiben ausschließlich den historischen Enterprise-Details zugeordnet.
+Das Rechnungskonto ist nur mit `riparim-510521` verknüpft. Diese Billinganzeige
+allein beweist wegen Reporting-Verzug keine Nullnutzung; die bisherige
+Advanced-Tagesquote 0 und deren Nutzungsreadback werden zusätzlich geprüft. 100 pro Tag erlauben selbst über 31 Tage
+höchstens 3100 Advanced-Queries; andere Kontoverbraucher und Reporting-Verzug
+müssen zusätzlich in die freie Restmenge passen. Bei unbestätigter Restmenge
+bleibt Advanced auf 0; es gibt keinen kostenpflichtigen Ausweichpfad.
+Standard- und Pro-SKUs besitzen getrennte freie Mengen. Die Pro-Quote darf
+keine Sessions oder Zusatzinhalte freigeben. Diese Begrenzung ist keine
+allgemeine Geldobergrenze des Google-Kontos.
 
 Der getrennte Server-Key bleibt auf Places API (New) beschränkt, ohne behauptete
 feste Cloudflare-Ausgangs-IP. Öffentliche bestätigte Identitätsrouten starten keine
@@ -255,14 +283,14 @@ Momentaufnahmen bleiben unverändert und werden nicht als aktuelle Werte angezei
    wirksame Methoden-/Tages-/Minutenquoten und API-/Referrer-Beschränkungen lesen.
    UI-Kit über IAM Quotas mit `placewidgets.googleapis.com` prüfen. Das App-Limit
    **100/UTC-Tag** betrifft nur Identitätssuche und ergänzende Land-Details;
-   Standard-Widgets fallen nicht darunter; individuelle Browserratings und Bilder sind entfernt. Vor einer Änderung
+   UI-Kit-Widgets fallen nicht darunter; individuelle Browserratings und Bilder sind entfernt. Vor einer Änderung
    alten Wert, Soll, kostenlose Restmenge und Auswirkungen festhalten. Das
    [konservative Restmengenmodell](google-places-cost-audit-2026-10-11.md#begrenzungsmodell-und-offene-kontrollen)
    ist keine Rechnung oder Gesamtgeldgrenze. Der Warnweg ist **tägliche manuelle
    Billingprüfung** gegenüber zuletzt belegten 4,34 CHF und den relevanten SKUs.
    Manuelle Warnschwellen: **50/80/100 %** der bestätigten freien SKU-Menge;
    Enterprise Details/Text Search Enterprise/Fotos jeweils **500/800/1000**,
-   Standard-UI-Kit **5000/8000/10000**. Bei 80 % Restmenge/Verzug und Tagesgrenzen
+   Standard-UI-Kit **5000/8000/10000**, Pro-UI-Kit **2500/4000/5000**. Bei 80 % Restmenge/Verzug und Tagesgrenzen
    prüfen, bei 100 % den betreffenden API-Pfad pausieren. Enterprise Details
    liegt mit 1261 bereits darüber; dieser alte Pfad bleibt gesperrt. Diese
    Beobachtungsgrenzen sind keine eingeschalteten Budgetalarme oder Geldbudgets.
@@ -277,7 +305,7 @@ Momentaufnahmen bleiben unverändert und werden nicht als aktuelle Werte angezei
    in Git/Logs schreiben. Dies deaktiviert auch neue Identitätsprüfungen für
    Veröffentlichungen. Browser behalten Konfiguration/SDK bis zum Neuladen;
    die Runtime-Abschaltung beendet keine bereits offenen SDK-Instanzen.
-4. **Wiederherstellung mit Standard-Widgets:** Vor Freigabe den vollständigen
+4. **Wiederherstellung mit UI-Kit-Widgets:** Vor Freigabe den vollständigen
    geprüften Main-Release kontrollieren: keine produktiven `fetchFields`- oder
    REST-Fotoabrufe. Aktuelles Billing einschließlich gemeinsam genutzter
    Kontofreimenge prüfen. Tagesgrenzen gemäß obiger Tabelle speichern und frisch
