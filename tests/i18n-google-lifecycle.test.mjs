@@ -4,13 +4,11 @@ import {mkdir,writeFile} from 'node:fs/promises';
 import {JSDOM} from 'jsdom';
 const dom=new JSDOM('<html lang="de"><body><div id="root"></div></body></html>',{url:'https://riparim.example.test',pretendToBeVisual:true});
 for(const key of ['window','document','navigator','HTMLElement'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});globalThis.IS_REACT_ACT_ENVIRONMENT=true;
-const result=await build({stdin:{contents:`import React from 'react';import {useGoogleWorkshopProfile} from './components/use-google-workshop-profile';import {useGoogleVisibility} from './components/use-google-visibility';import {useVisibleGooglePlace} from './components/use-google-place';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export function Probe(){const a=useGoogleWorkshopProfile('fixture-workshop'),b=useVisibleGooglePlace('fixture-workshop'),visibility=useGoogleVisibility();React.useEffect(()=>{if(visibility.canLoad)return a.requestIdentity(visibility.isVisible);},[a.requestIdentity,visibility.canLoad,visibility.isVisible]);return <div ref={visibility.ref} data-profile={a.identity?.placeId??''} data-profile-status={a.status} data-rating={b.live?.rating??''} data-rating-status={b.status}/>;}`,resolveDir:process.cwd(),loader:'tsx'},bundle:true,write:false,format:'esm',platform:'node',packages:'external',external:['react','react/jsx-runtime']});
+const result=await build({stdin:{contents:`import React from 'react';import {useGoogleWorkshopProfile} from './components/use-google-workshop-profile';import {useGoogleVisibility} from './components/use-google-visibility';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export function Probe(){const a=useGoogleWorkshopProfile('fixture-workshop'),b=useGoogleWorkshopProfile('fixture-workshop'),visibility=useGoogleVisibility();React.useEffect(()=>{if(visibility.canLoad){const releaseA=a.requestIdentity(visibility.isVisible),releaseB=b.requestIdentity(visibility.isVisible);return()=>{releaseA();releaseB();};}},[a.requestIdentity,b.requestIdentity,visibility.canLoad,visibility.isVisible]);return <div ref={visibility.ref} data-profile={a.identity?.placeId??''} data-profile-status={a.status} data-rating={b.identity?.placeId??''} data-rating-status={b.status}/>;}`,resolveDir:process.cwd(),loader:'tsx'},bundle:true,write:false,format:'esm',platform:'node',packages:'external',external:['react','react/jsx-runtime']});
 await mkdir('.test-runtime',{recursive:true});await writeFile('.test-runtime/i18n-google-lifecycle.mjs',result.outputFiles[0].text);
 const {I18nProvider,getMessages,Probe}=await import(new URL('../.test-runtime/i18n-google-lifecycle.mjs',import.meta.url));
 const React=await import('react'),{createRoot}=await import('react-dom/client'),root=createRoot(document.getElementById('root'));
-let releaseRating;const ratingGate=new Promise(resolve=>{releaseRating=resolve;});
-const requests=[],placeRequests=[];
-window.google={maps:{importLibrary:async()=>({Place:class{constructor(options){this.locale=options.requestedLanguage;placeRequests.push(options);}async fetchFields(){if(this.locale==='de')await ratingGate;this.rating=this.locale==='de'?1:4;this.userRatingCount=2;this.attributions=[];}}})}};
+const requests=[];
 const nativeFetch=globalThis.fetch;globalThis.fetch=async(url)=>{
  requests.push(String(url));if(url==='/api/google-places')return Response.json({enabled:true,browserKey:'fixture-key'});
  if(url==='/api/google-places/fixture-workshop')return Response.json({placeId:'ChIJFixture'});
@@ -21,9 +19,9 @@ const probe=()=>document.querySelector('[data-profile]');
 try{
  await render('de');assert.equal(probe().dataset.profile,'ChIJFixture');
  await render('sq');await React.act(async()=>new Promise(resolve=>setTimeout(resolve,0)));
- assert.equal(probe().dataset.profile,'ChIJFixture','new locale retains the same canonical identity without a provider profile request');assert.equal(probe().dataset.rating,'4','new locale rating resolves independently');
- await React.act(async()=>{releaseRating();await new Promise(resolve=>setTimeout(resolve,0));});
- assert.equal(probe().dataset.profile,'ChIJFixture','identity stays canonical while an old rating resolves');assert.equal(probe().dataset.rating,'4','late DE rating cannot overwrite SQ display');
- assert.deepEqual(placeRequests.map(value=>value.requestedLanguage),['de','sq']);assert.equal(requests.filter(url=>url==='/api/google-places/fixture-workshop').length,1,'canonical identity is independent of UI locale');
-}finally{releaseRating();await React.act(async()=>root.unmount());globalThis.fetch=nativeFetch;dom.window.close();}
-console.log('Live Google profile/rating lifecycle: locale requests and late-answer guards passed without live provider calls');
+ assert.equal(probe().dataset.profile,'ChIJFixture','new locale retains the same canonical identity without a provider profile request');assert.equal(probe().dataset.rating,'ChIJFixture','both consumers share only canonical identity');
+ assert.equal(requests.filter(url=>url==='/api/google-places/fixture-workshop').length,1,'canonical identity is shared and independent of locale');
+ assert.equal(probe().dataset.profileStatus,'ready');assert.equal(probe().dataset.ratingStatus,'ready');
+
+}finally{await React.act(async()=>root.unmount());globalThis.fetch=nativeFetch;dom.window.close();}
+console.log('Shared Google identity lifecycle: locale-safe identity passed without live provider calls');

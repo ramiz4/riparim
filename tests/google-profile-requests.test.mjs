@@ -8,16 +8,16 @@ globalThis.requestAnimationFrame=dom.window.requestAnimationFrame.bind(dom.windo
 window.matchMedia=()=>({matches:false,addEventListener(){},removeEventListener(){}});window.scrollTo=()=>{};window.HTMLElement.prototype.scrollIntoView=()=>{};window.HTMLElement.prototype.hasPointerCapture=()=>false;window.HTMLElement.prototype.setPointerCapture=()=>{};window.HTMLElement.prototype.releasePointerCapture=()=>{};globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
 const observations=new Map();globalThis.IntersectionObserver=class{constructor(callback){this.callback=callback;}observe(element){observations.set(this,element);}disconnect(){observations.delete(this);}};
 let visibleTab=true;Object.defineProperty(document,'visibilityState',{get:()=>visibleTab?'visible':'hidden'});
-const counters={configs:[],individualDetails:[],individualRatings:[],widgets:[],widgetConnections:[],widgetDisconnections:[],photoResources:[]},identities=[],photoGates=new Map();
+const counters={configs:[],individualDetails:[],individualRatings:[],widgets:[],widgetConnections:[],widgetDisconnections:[],photoResources:[]},identities=[];
 const seenPhotos=new WeakSet();const photoObserver=new MutationObserver(records=>{for(const record of records)for(const node of record.addedNodes)if(node instanceof Element)for(const image of [...(node.matches('img')?[node]:[]),...node.querySelectorAll('img')])if(image.src.includes('places.googleapis.com')&&!seenPhotos.has(image)){seenPhotos.add(image);counters.photoResources.push(image.src);}});photoObserver.observe(document.body,{childList:true,subtree:true});
 const nativeTimeout=globalThis.setTimeout,nativeClearTimeout=globalThis.clearTimeout,expiries=new Map(),timeouts=new Map();let timerId=100000;
 globalThis.setTimeout=(fn,delay,...args)=>{if(delay===1800000||delay===12000){const id=++timerId;(delay===1800000?expiries:timeouts).set(id,()=>fn(...args));return id;}return nativeTimeout(fn,delay,...args);};globalThis.clearTimeout=id=>{expiries.delete(id);timeouts.delete(id);return nativeClearTimeout(id);};
 window.google={maps:{importLibrary:async()=>({Place:class{constructor(options){this.options=options;}async fetchFields(options){counters.individualRatings.push({place:this.options,fields:options.fields});}}})}};
 customElements.define('gmp-place-details',class extends HTMLElement{connectedCallback(){counters.widgetConnections.push(this);if(!counters.widgets.includes(this))counters.widgets.push(this);}disconnectedCallback(){counters.widgetDisconnections.push(this);}});
-globalThis.fetch=async(url,options)=>{
+globalThis.fetch=async url=>{
  if(url==='/api/google-places'){counters.configs.push(url);return Response.json({enabled:true,browserKey:'fixture-key'});}
  if(String(url).startsWith('/api/google-places/')){identities.push(String(url));if(String(url).endsWith('disabled'))return Response.json({placeId:null});return Response.json({placeId:'ChIJ'+String(url).split('/').at(-1)});}
- if(String(url).startsWith('https://places.googleapis.com/v1/places/')){counters.individualDetails.push({url:String(url),fields:options.headers['X-Goog-FieldMask']});const id=new URL(url).pathname.split('/').at(-1),locale=new URL(url).searchParams.get('languageCode');if(photoGates.has(`${id}:${locale}`))await photoGates.get(`${id}:${locale}`);if(id==='ChIJphoto-error')return new Response('{}',{status:429});if(id==='ChIJphoto-empty')return Response.json({id,photos:[]});return Response.json({id,rating:4,userRatingCount:2,photos:[{name:`places/${id}/photos/first`,authorAttributions:[{displayName:'First author',uri:'https://author.example.test/first'}]},{name:`places/${id}/photos/second`,authorAttributions:[{displayName:'Second author',uri:'https://author.example.test/second'}]},{name:`places/${id}/photos/third`,authorAttributions:[{displayName:'Third author',uri:'https://author.example.test/third'}]}],attributions:[{provider:'Fixture provider',providerUri:'https://provider.example.test'}]});}
+ if(String(url).startsWith('https://places.googleapis.com/')){counters.individualDetails.push({url:String(url)});throw Error('Browser REST photos are prohibited');}
  throw Error('Unexpected fixture request '+url);
 };
 const output='.test-runtime/google-profile-requests';await mkdir(output,{recursive:true});
@@ -55,8 +55,8 @@ try{
  for(const locale of ['de','sq','en']){
   const details=counters.individualDetails.length,widgets=counters.widgets.length,identityCount=identities.length,configCount=counters.configs.length;
   await mount(locale,locale);
-  assert.equal(counters.configs.length,configCount,'both Google areas outside viewport must not start client configuration');
-  assert.equal(identities.length,identityCount,'both Google areas outside viewport must not start potentially billable identity resolution');
+  assert.equal(counters.configs.length,configCount,'the Google area outside viewport must not start client configuration');
+  assert.equal(identities.length,identityCount,'the Google area outside viewport must not start potentially billable identity resolution');
   assert.equal(counters.individualDetails.length,details,'an ordinary profile mount must not request the duplicate Enterprise profile');
   assert.equal(counters.individualRatings.length,0,'profile header must not start an individual rating request');
   assert.equal(counters.widgets.length,widgets,'invisible Google details remain unloaded');
@@ -68,9 +68,9 @@ try{
   const summary={details:counters.individualDetails.length,widgets:counters.widgets.length};
   document.documentElement.classList.toggle('dark');await click(document.querySelector('.inline-review-toggle'));await render(locale,h(api.Profile,{...props,workshop:{...workshop,id:locale,googleRating:{...workshop.googleRating,mapsUrl:`https://www.google.com/maps/search/?api=1&query_place_id=ChIJ${locale}`}},directory:[workshop]}));
   assert.equal(counters.widgets.length,summary.widgets,'ordinary state/prop/theme changes preserve the mounted widget');assert.equal(counters.individualDetails.length,summary.details);
-  await show('profile-google-photos');assert.equal(counters.individualDetails.length,details+1);assert.equal(identities.length,identityCount+1,'the second visible area shares the existing identity');
-  assert.equal(counters.individualDetails.at(-1).fields,'id,photos,attributions');
-  assert.equal(document.querySelectorAll('.profile-photo-strip img').length,3);
+  await show('profile-google-photos');assert.equal(counters.individualDetails.length,details,'the photo link starts no REST metadata query');assert.equal(identities.length,identityCount+1);
+  assert.equal(document.querySelectorAll('.profile-photo-strip img').length,0);
+  assert(document.querySelector('.profile-google-photos a').href.includes('query_place_id=ChIJ'+locale));
   const reviewStateWorkshop={...workshop,id:locale,googleRating:{...workshop.googleRating,mapsUrl:`https://www.google.com/maps/search/?api=1&query_place_id=ChIJ${locale}`}},reviewBefore={widgets:counters.widgets.length,details:counters.individualDetails.length,photos:counters.photoResources.length},reviewLifecycle=widgetLifecycle(element);
   for(const reviews of [[ownReview],[]]){
    await render(locale,h(api.Profile,{...props,workshop:reviewStateWorkshop,directory:[reviewStateWorkshop],reviews}));await show('google-reviews-panel');await show('profile-google-photos');
@@ -80,17 +80,6 @@ try{
   }
 
   assert.equal(document.querySelectorAll('img[src*="maxWidthPx=1600"]').length,0,'large photo is not mounted before user action');
-  const opener=document.querySelector('.profile-photo-strip button');await click(opener);
-  let gallery=document.querySelector('[role="dialog"]');assert(gallery,'user action opens gallery');
-  assert.equal(gallery.querySelectorAll('.profile-gallery-stage img').length,1);
-  assert(gallery.querySelector('.profile-gallery-stage img').src.includes('maxWidthPx=1600'));
-  assert(gallery.querySelector('.profile-gallery-attribution').textContent.includes('First author'));
-  for(const [i,author] of ['First author','Second author','Third author'].entries())assert(gallery.querySelectorAll('.profile-gallery-thumbnails figcaption')[i].textContent.includes(author),'every displayed thumbnail keeps its own author');
-  assert(gallery.querySelector('.profile-gallery-attribution').textContent.includes('Fixture provider'));
-  await React.act(async()=>gallery.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true})));
-  assert(gallery.querySelector('.profile-gallery-attribution').textContent.includes('Second author'));
-  await React.act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));await React.act(async()=>settle());
-  assert(!document.querySelector('[role="dialog"]'));assert.equal(document.activeElement,opener);
   await tab(false);const before={widgets:counters.widgets.length,details:counters.individualDetails.length};
   await React.act(async()=>{for(const expire of [...expiries.values()])expire();await settle();});
   assert(document.querySelector('.google-official-widget').classList.contains('google-widget-unavailable'),'30-minute expiry hides the stale native opening status');
@@ -107,35 +96,23 @@ try{
  assert.equal(identities.length,identityBefore,'a hidden tab cannot start a potentially billable identity resolution');
  await show('google-reviews-panel');await show('profile-google-photos');const hiddenWidgets=counters.widgets.length,hiddenDetails=counters.individualDetails.length;
  assert.equal(counters.widgets.length,hiddenWidgets);assert.equal(counters.individualDetails.length,hiddenDetails);
- await tab(true);assert.equal(identities.length,identityBefore+1);await show('google-reviews-panel');await show('profile-google-photos');assert.equal(counters.widgets.length,hiddenWidgets+1);assert.equal(counters.individualDetails.length,hiddenDetails+1);
+ await tab(true);assert.equal(identities.length,identityBefore+1);await show('google-reviews-panel');await show('profile-google-photos');assert.equal(counters.widgets.length,hiddenWidgets+1);assert.equal(counters.individualDetails.length,hiddenDetails);
  // An async SDK definition cannot mount a widget after the tab becomes hidden.
  const nativeWhenDefined=customElements.whenDefined.bind(customElements);let releaseWidget;customElements.whenDefined=()=>new Promise(resolve=>{releaseWidget=resolve;});
  await mount('de','sdk-race');await show('google-reviews-panel');await tab(false);const sdkBefore=counters.widgets.length;
  await React.act(async()=>{releaseWidget();await settle();});assert.equal(counters.widgets.length,sdkBefore);
  customElements.whenDefined=nativeWhenDefined;await tab(true);assert.equal(counters.widgets.length,sdkBefore+1,'deferred widget initializes when visibility returns');
- // Hidden photo responses retain metadata in the current component but mount no images.
- let releasePhotos;photoGates.set('ChIJphoto-hidden:de',new Promise(resolve=>{releasePhotos=resolve;}));
- await mount('de','photo-hidden');await show('profile-google-photos');const photoHiddenDetails=counters.individualDetails.length;await tab(false);
- await React.act(async()=>{releasePhotos();await settle();});assert.equal(document.querySelectorAll('.profile-photo-strip img').length,0);
- await tab(true);assert.equal(document.querySelectorAll('.profile-photo-strip img').length,3);assert.equal(counters.individualDetails.length,photoHiddenDetails,'visibility return reuses only the active component metadata');
- // A previous locale response cannot reopen a gallery or display its photo references.
- let releaseOld;photoGates.set('ChIJphoto-late:de',new Promise(resolve=>{releaseOld=resolve;}));
- await mount('de','photo-late');await show('profile-google-photos');await render('sq',h(api.Profile,{...props,workshop:{...workshop,id:'photo-current',googleRating:{...workshop.googleRating,mapsUrl:'https://www.google.com/maps/search/?api=1&query_place_id=ChIJphoto-current'}}}));await show('profile-google-photos');
- await click(document.querySelector('.profile-photo-strip button'));assert(document.querySelector('[role="dialog"]'));
- await render('en',h(api.Profile,{...props,workshop:{...workshop,id:'photo-current',googleRating:{...workshop.googleRating,mapsUrl:'https://www.google.com/maps/search/?api=1&query_place_id=ChIJphoto-current'}}}));assert(!document.querySelector('[role="dialog"]'),'locale switch closes old gallery');
- await show('profile-google-photos');await React.act(async()=>{releaseOld();await settle();});
- assert([...document.querySelectorAll('.profile-photo-strip img')].every(img=>img.src.includes('/ChIJphoto-current/')),'late old place and locale cannot show foreign photo resources');
- await mount('de','strict',true);await show('profile-google-photos');assert.equal(document.querySelectorAll('.profile-photo-strip img').length,3,'StrictMode effect replay retains the current photo result');
- await mount('de','photo-error');await show('profile-google-photos');assert(document.querySelector('.profile-google-photos').textContent.includes('Google-Fotos konnten nicht geladen werden'));assert(!document.querySelector('.profile-google-photos').textContent.includes('Keine Google-Fotos'));
- await mount('de','preview-error');await show('profile-google-photos');await React.act(async()=>{for(const image of [...document.querySelectorAll('.profile-photo-strip img')])image.dispatchEvent(new Event('error'));});
- assert(document.querySelector('.profile-google-photos').textContent.includes('Google-Fotos konnten nicht geladen werden'),'failed preview resources remain visibly distinct from a photo-less business');
- assert(document.querySelector('.profile-google-photos a').href.includes('query_place_id=ChIJpreview-error'),'photo failure retains the same confirmed Maps fallback');
- await mount('de','photo-empty');await show('profile-google-photos');assert(document.querySelector('.profile-google-photos').textContent.includes('Keine Google-Fotos hinterlegt'));
+ await mount('de','strict',true);await show('google-reviews-panel');assert(document.querySelector('gmp-place-details'),'StrictMode replay preserves the Standard widget');
  await mount('de','disabled');await show('google-reviews-panel');assert(document.querySelector('.google-reviews-panel').textContent.includes('Google-Angaben konnten nicht geladen werden'));assert(document.querySelector('.google-reviews-panel a').href.includes('google.com/maps'));
- await mount('de','changeIdentity');await show('google-reviews-panel');await loadWidget();await show('profile-google-photos');await click(document.querySelector('.profile-photo-strip button'));
+ await mount('de','changeIdentity');await show('google-reviews-panel');await loadWidget();const priorWidget=document.querySelector('gmp-place-details');
  await render('de',h(api.Profile,{...props,workshop:{...workshop,id:'changeIdentity',googleRating:{...workshop.googleRating,mapsUrl:'https://www.google.com/maps/search/?api=1&query_place_id=ChIJotherIdentity'}}}));
- assert(!document.querySelector('[role="dialog"]'),'a changed confirmed Place ID for the same workshop closes the old gallery');
- assert(document.querySelector('.workshop-overview-actions a[href*="maps/dir"]').href.includes('destination_place_id=ChIJotherIdentity'),'same-ID live profile refresh cannot retain the old Maps identity');
+ assert(!priorWidget.isConnected,'changed confirmed identity removes the old provider content');
+ assert(document.querySelector('.workshop-overview-actions a[href*="maps/dir"]').href.includes('destination_place_id=ChIJotherIdentity'));
+ assert(document.querySelector('.profile-google-photos a').href.includes('query_place_id=ChIJotherIdentity'));
+ // Changed business data without a historical Google snapshot must invalidate the old confirmed identity.
+ await render('de',null);const originalBusiness={...workshop,id:'business-update',googleRating:null};await render('de',h(api.Profile,{...props,workshop:originalBusiness,directory:[originalBusiness]}));await show('google-reviews-panel');const businessWidget=document.querySelector('gmp-place-details'),businessFetch=globalThis.fetch;
+ globalThis.fetch=async(url,options)=>String(url).endsWith('/business-update')?Response.json({placeId:'ChIJbusiness-updated'}):businessFetch(url,options);
+ try{const updatedBusiness={...originalBusiness,address:'Confirmed new workshop street'};await render('de',h(api.Profile,{...props,workshop:updatedBusiness,directory:[updatedBusiness]}));await show('google-reviews-panel');assert(!businessWidget.isConnected,'new business identity discards old provider content even without a historical Maps snapshot');assert.equal(document.querySelector('gmp-place-details-place-request').place.options.id,'ChIJbusiness-updated');assert(document.querySelector('.profile-google-photos a').href.includes('query_place_id=ChIJbusiness-updated'));}finally{globalThis.fetch=businessFetch;}
  await mount('de','timeout');await show('google-reviews-panel');const timeoutWidgets=counters.widgets.length;await React.act(async()=>{for(const fail of [...timeouts.values()])fail();await settle();});await tab(false);await tab(true);assert.equal(counters.widgets.length,timeoutWidgets,'load timeout has no automatic retry loop');assert(document.querySelector('.google-reviews-panel').textContent.includes('Google-Angaben konnten nicht geladen werden'));
  // Configuration may resolve after a previously visible tab was hidden.
  await render('de',null);const identityApi=await import(new URL('../'+output+'/ui.mjs?identity-hidden-race',import.meta.url)),fixtureFetch=globalThis.fetch;let releaseConfig;const configGate=new Promise(resolve=>{releaseConfig=resolve;}),identityCount=identities.length;
@@ -143,8 +120,8 @@ try{
  await React.act(async()=>{root.render(h(identityApi.I18nProvider,{locale:'de',messages:identityApi.getMessages('de',['common','public'])},h(identityApi.Profile,{...props,workshop:{...workshop,id:'identity-hidden-race',googleRating:null}})));await settle();});await show('google-reviews-panel');await tab(false);
  await React.act(async()=>{releaseConfig();await settle();});assert.equal(identities.length,identityCount,'a late configuration response cannot start identity resolution in a hidden tab');
  await tab(true);assert.equal(identities.length,identityCount+1,'deferred identity resolution starts once when the tab returns');globalThis.fetch=fixtureFetch;
- // Visible panels share one lazy identity, even when visibility or the current profile changes during configuration.
- for(const scenario of ['handoff','offscreen','key-change']){
+ // The lazy identity is deferred when its panel disappears or the profile changes during configuration.
+ for(const scenario of ['offscreen','key-change']){
   await render('de',null);
   const scopedApi=await import(new URL('../'+output+'/ui.mjs?identity-'+scenario,import.meta.url)),baseFetch=globalThis.fetch;
   let resolveConfig;const pendingConfig=new Promise(resolve=>{resolveConfig=resolve;}),beforeIdentity=identities.length;let configurations=0;
@@ -153,17 +130,16 @@ try{
   try{
    await scopedRender('de','visibility-'+scenario);assert.equal(configurations,0,'StrictMode offscreen mount starts no configuration');assert.equal(identities.length,beforeIdentity);
    await show('google-reviews-panel');assert.equal(configurations,1,'first visible panel starts configuration once');await show('google-reviews-panel',false);
-   if(scenario==='handoff')await show('profile-google-photos');
    if(scenario==='key-change')await scopedRender('sq','visibility-current');
    await React.act(async()=>{resolveConfig();await settle();});
-   assert.equal(identities.length,beforeIdentity+(scenario==='handoff'?1:0),scenario==='handoff'?'the visible photo panel takes over a hidden details panel during configuration':'no identity starts after both panels disappear or the profile key changes');
-   await show('profile-google-photos');assert.equal(identities.length,beforeIdentity+1,'visibility return resolves the current identity exactly once');
-   await show('google-reviews-panel');assert.equal(identities.length,beforeIdentity+1,'both visible areas share one identity');assert.equal(configurations,1,'configuration is not repeated');
+   assert.equal(identities.length,beforeIdentity,'no identity starts after the panel disappears or the profile key changes');
+   await show('google-reviews-panel');assert.equal(identities.length,beforeIdentity+1,'visibility return resolves the current identity exactly once');
+   await show('google-reviews-panel');assert.equal(identities.length,beforeIdentity+1,'repeated visibility reuses the canonical identity');assert.equal(configurations,1,'configuration is not repeated');
    if(scenario==='key-change')assert(identities.at(-1).endsWith('/visibility-current'),'late old-key configuration cannot resolve the previous identity');
   }finally{resolveConfig();globalThis.fetch=baseFetch;}
  }
- // Exercise the actual config switch and separate identity/photo quota and deadline failures in every locale.
- for(const mode of ['disabled','identity-quota','identity-timeout','photo-quota','photo-timeout']){
+ // Exercise the actual config switch and identity quota/deadline failures in every locale.
+ for(const mode of ['disabled','identity-quota','identity-timeout']){
   await render('de',null);
   const scoped=await import(new URL('../'+output+'/ui.mjs?cost-fallback-'+mode,import.meta.url)),baseFetch=globalThis.fetch;
   let identityCalls=0,photoCalls=0;const widgetStart=counters.widgets.length,ratingStart=counters.individualRatings.length;
@@ -173,10 +149,6 @@ try{
     identityCalls++;
     if(mode==='identity-timeout')throw new DOMException('Fixture identity deadline','TimeoutError');
     if(mode==='identity-quota')return new Response('{}',{status:429});
-   }
-   if(String(url).startsWith('https://places.googleapis.com/')){
-    photoCalls++;if(mode==='photo-timeout')throw new DOMException('Fixture photo deadline','TimeoutError');
-    if(mode==='photo-quota')return new Response('{}',{status:429});
    }
    return baseFetch(url,options);
   };
@@ -191,8 +163,8 @@ try{
     assert(document.querySelector('.workshop-overview-actions a[href*="maps/dir"]').href.includes('destination_place_id=ChIJcost-'+mode+'-'+locale),'route fallback keeps the independently confirmed Place ID');
     assert(panel.querySelector('a').href.includes('query_place_id=ChIJcost-'+mode+'-'+locale));
     assert(!panel.textContent.includes(t('public.googleReviewsEmpty')),'unavailable provider does not imply zero reviews');
-    if(mode.startsWith('photo')){assert(photos.textContent.includes(t('public.photosFailed')));assert(!photos.textContent.includes(t('public.photosEmpty')));assert.equal(photoCalls-photoStart,1);await loadWidget();}
-    else{assert(panel.textContent.includes(t('public.googleDetailsFailed')));assert.equal(counters.widgets.length,widgets);assert.equal(photoCalls,photoStart);}
+    assert(photos.querySelector('a').href.includes('google.com/maps'));assert.equal(photoCalls,photoStart);
+    {assert(panel.textContent.includes(t('public.googleDetailsFailed')));assert.equal(counters.widgets.length,widgets);assert.equal(photoCalls,photoStart);}
     const stable={identityCalls,photoCalls,widgets:counters.widgets.length};
     await tab(false);await tab(true);await show('google-reviews-panel');await show('profile-google-photos');
     assert.deepEqual({identityCalls,photoCalls,widgets:counters.widgets.length},stable,'provider failures must never auto-retry on tab/visibility changes');
@@ -207,5 +179,5 @@ try{
  await render('de',null);const sdkApi=await import(new URL('../'+output+'/ui.mjs?sdk-failure',import.meta.url));let sdkAttempts=0;window.google={maps:{importLibrary:async()=>{sdkAttempts++;throw Error('Fictional SDK authorization failure');}}};
  await React.act(async()=>root.render(h(sdkApi.I18nProvider,{locale:'de',messages:sdkApi.getMessages('de',['common','public'])},h(sdkApi.GooglePlaceReviews,{workshop,identity:{placeId:'ChIJfixture',browserKey:'fixture-key'},status:'ready'}))));await show('google-reviews-panel');
  assert.equal(document.querySelector('.google-details-refresh').textContent,'Seite neu laden','SDK failures provide a real fresh-browser recovery action');assert.equal(sdkAttempts,1);await tab(false);await tab(true);assert.equal(sdkAttempts,1,'SDK failures do not automatically retry');
- console.log(JSON.stringify({locales:['de','sq','en'],duplicateEnterpriseDetails:0,individualRatings:0,firstVisibleStandardWidgets:1,photoMetadataMask:'id,photos,attributions',previewPhotos:3,largePhotosBeforeAction:0,staleMinutes:30,hiddenIdentityRequests:0,offscreenConfigurationRequests:0,sharedVisibilityIdentity:true,configurationVisibilityHandoff:true,reviewPresenceStableElement:true,asyncPublicReviewHydration:true,nativeWidgetReconnectsOnOwnReviews:0,providerFallbackModes:['disabled','identity-quota','identity-timeout','photo-quota','photo-timeout'],photoRefreshes:0,lateLocalePlaceGuards:true,strictMode:true,liveProviderCalls:false}));
+ console.log(JSON.stringify({locales:['de','sq','en'],duplicateEnterpriseDetails:0,individualRatings:0,firstVisibleStandardWidgets:1,photoMetadataRequests:0,previewPhotos:0,largePhotosBeforeAction:0,staleMinutes:30,hiddenIdentityRequests:0,offscreenConfigurationRequests:0,sharedCanonicalIdentity:true,reviewPresenceStableElement:true,asyncPublicReviewHydration:true,nativeWidgetReconnectsOnOwnReviews:0,providerFallbackModes:['disabled','identity-quota','identity-timeout'],photoRefreshes:0,lateLocalePlaceGuards:true,strictMode:true,liveProviderCalls:false}));
 }finally{photoObserver.disconnect();await React.act(async()=>root.unmount());globalThis.setTimeout=nativeTimeout;globalThis.clearTimeout=nativeClearTimeout;dom.window.close();}

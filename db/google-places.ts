@@ -19,6 +19,14 @@ export async function confirmedPublicationPlace(profile:ProfileInput,existing?:W
  const other=await storage().db.prepare("SELECT g.workshop_id FROM workshop_google_places g INNER JOIN workshops w ON w.id=g.workshop_id WHERE g.place_id=? AND g.workshop_id<>? LIMIT 1").bind(id,profile.id).first();
  return other?null:id;
 }
+// Public display reuses confirmed identities; research and cache refresh belong to publication workflows.
+export async function readConfirmedWorkshopGooglePlace(workshop:Workshop):Promise<string|null>{
+ const linkedId=googlePlaceIdFromMapsUrl(workshop.googleRating?.mapsUrl);if(linkedId)return linkedId;
+ const existing=await storage().db.prepare("SELECT place_id,profile_hash FROM workshop_google_places WHERE workshop_id=?").bind(workshop.id).first<Pick<MatchRow,"place_id"|"profile_hash">>();
+ if(!existing||!validGooglePlaceId(existing.place_id))return null;
+ const hash=await workshopIdentityHash(workshop);
+ return existing.profile_hash===hash?existing.place_id:null;
+}
 export async function resolveWorkshopGooglePlace(workshop:Workshop,persist=true):Promise<string|null>{
  const config=googlePlacesConfiguration();if(!config.enabled)return null;
  const {db}=storage(),now=Date.now(),hash=await workshopIdentityHash(workshop);

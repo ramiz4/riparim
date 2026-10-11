@@ -14,6 +14,6 @@ export function useGoogleVisibility(){
   if(ref.current)observer.observe(ref.current);
   return()=>{observer.disconnect();document.removeEventListener("visibilitychange",updateTab);};
  },[]);
- const isVisible=useCallback(()=>inView.current&&document.visibilityState!=="hidden",[]);
+ const isVisible=useCallback(()=>!!ref.current&&!ref.current.closest("[hidden]")&&inView.current&&document.visibilityState!=="hidden",[]);
  return {ref,canLoad:visible&&activeTab,isVisible};
 }

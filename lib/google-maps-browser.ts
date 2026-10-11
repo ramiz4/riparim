@@ -1,18 +1,15 @@
 import {googlePlaceIdFromMapsUrl} from "./google-maps-link";
 import {isLocale,type Locale} from "@/lib/i18n/locale";
 export type LiveGoogleRating={rating:number|null;count:number|null;mapsUrl:string;attributions:{provider?:string;providerURI?:string}[]};
-type GooglePlace={rating?:number|null;userRatingCount?:number|null;googleMapsURI?:string;attributions?:LiveGoogleRating["attributions"];fetchFields(options:{fields:string[]}):Promise<unknown>};
+type GooglePlace=object;
 export type GooglePlacesLibrary={Place:new(options:{id:string;requestedLanguage?:string})=>GooglePlace};
 type GoogleWindow=Window&{google?:{maps?:{importLibrary:(name:string)=>Promise<GooglePlacesLibrary>}};__riparimGoogleMapsLoaded?:()=>void;gm_authFailure?:()=>void};
 type ClientConfig={enabled:boolean;browserKey?:string};
-function safeHttps(value:string|undefined):string|undefined{if(!value)return undefined;try{const url=new URL(value);return url.protocol==="https:"&&!url.username&&!url.password?url.href:undefined;}catch{return undefined;}}
 let configPromise:Promise<ClientConfig>|undefined,libraryPromise:Promise<GooglePlacesLibrary>|undefined;
 const identities=new Map<string,Promise<{placeId:string;browserKey:string}|null>>();
-const liveRequests=new Map<string,Promise<LiveGoogleRating>>();
-const photoRequests=new Map<string,Promise<LiveGooglePhotos>>();
 export function googlePlacesClientConfig(){return configPromise??=fetch("/api/google-places",{credentials:"same-origin",cache:"no-store",signal:AbortSignal.timeout(12000)}).then(async response=>{if(!response.ok)throw Error("Google unavailable");return response.json() as Promise<ClientConfig>;});}
-export async function workshopGoogleIdentity(id:string,sourceMapsUrl?:string|null){
- const identityKey=sourceMapsUrl?`${id}:${sourceMapsUrl}`:id,expectedPlaceId=googlePlaceIdFromMapsUrl(sourceMapsUrl);
+export async function workshopGoogleIdentity(id:string,sourceMapsUrl?:string|null,identityRevision=""){
+ const identityKey=`${id}:${sourceMapsUrl??""}:${identityRevision}`,expectedPlaceId=googlePlaceIdFromMapsUrl(sourceMapsUrl);
  let pending=identities.get(identityKey);if(!pending){pending=(async()=>{const config=await googlePlacesClientConfig();if(!config.enabled||!config.browserKey)return null;const response=await fetch(`/api/google-places/${encodeURIComponent(id)}`,{credentials:"same-origin",cache:"no-store",signal:AbortSignal.timeout(20000)});if(!response.ok)throw Error("Google unavailable");const result=await response.json() as {placeId?:string|null};return result.placeId&&(!expectedPlaceId||result.placeId===expectedPlaceId)?{placeId:result.placeId,browserKey:config.browserKey!}:null;})();identities.set(identityKey,pending);pending.catch(()=>identities.delete(identityKey));}
  return pending;
 }
@@ -33,24 +30,6 @@ export function loadGooglePlaces(browserKey:string):Promise<GooglePlacesLibrary>
  })();
  return libraryPromise;
 }
-export async function currentGoogleRating(placeId:string,browserKey:string,locale:Locale=browserLocale()){
- const providerLocale=isLocale(locale)?locale:"de",requestKey=`${placeId}:${providerLocale}`;
- let pending=liveRequests.get(requestKey);if(!pending){pending=(async()=>{const library=await loadGooglePlaces(browserKey),place=new library.Place({id:placeId,requestedLanguage:providerLocale});await place.fetchFields({fields:["rating","userRatingCount","googleMapsURI","attributions"]});return {rating:typeof place.rating==="number"&&place.rating>=1&&place.rating<=5?place.rating:null,count:typeof place.userRatingCount==="number"&&Number.isInteger(place.userRatingCount)&&place.userRatingCount>=0?place.userRatingCount:null,mapsUrl:safeHttps(place.googleMapsURI)??`https://www.google.com/maps/search/?api=1&query=Werkstatt&query_place_id=${encodeURIComponent(placeId)}`,attributions:(place.attributions??[]).filter(a=>a.provider).map(a=>({provider:a.provider,providerURI:safeHttps(a.providerURI)}))};})();liveRequests.set(requestKey,pending);void pending.finally(()=>liveRequests.delete(requestKey)).catch(()=>{});}
- return pending;
-}
-export async function currentGooglePhotos(placeId:string,browserKey:string,locale:Locale=browserLocale()):Promise<LiveGooglePhotos>{
- const providerLocale=isLocale(locale)?locale:"de",requestKey=`${placeId}:${providerLocale}`;
- let pending=photoRequests.get(requestKey);
- if(!pending){
-  pending=(async()=>{
-   const response=await fetch(`https://places.googleapis.com/v1/places/${encodeURIComponent(placeId)}?languageCode=${providerLocale}`,{headers:{"X-Goog-Api-Key":browserKey,"X-Goog-FieldMask":"id,photos,attributions"},credentials:"omit",cache:"no-store",signal:AbortSignal.timeout(12000)});
-   if(!response.ok)throw Error("Google photos unavailable");
-   return normalizeGooglePhotos(await response.json() as GooglePhotoResponse,placeId);
-  })();
-  photoRequests.set(requestKey,pending);void pending.finally(()=>photoRequests.delete(requestKey)).catch(()=>{});
- }
- return pending;
-}
 type MapInstance=object;
 type MapLibrary={Map:new(element:HTMLElement,options:Record<string,unknown>)=>MapInstance};
 type MarkerLibrary={AdvancedMarkerElement:new(options:Record<string,unknown>)=>{map:MapInstance|null}};
@@ -64,4 +43,4 @@ export async function showConfirmedGoogleMap(element:HTMLElement,profile:Pick<Li
  const marker=new markerLibrary.AdvancedMarkerElement({map,position:profile.location,title});
  return ()=>{marker.map=null;element.replaceChildren();};
 }
-import {normalizeGooglePhotos,type GooglePhotoResponse,type LiveGooglePhotos,type LiveGoogleProfile} from "./google-workshop-profile";
+import {type LiveGoogleProfile} from "./google-workshop-profile";

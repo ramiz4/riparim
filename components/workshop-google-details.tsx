@@ -7,10 +7,10 @@ import {useEffect,useId,useRef,useState} from "react";
 import {useTheme} from "next-themes";
 import {Camera,ChevronDown,ChevronLeft,ChevronRight,Clock3,LoaderCircle,MapPin} from "lucide-react";
 import {googleOpeningPresentation,googlePhotoUrl,type GooglePhoto,type GoogleProfileStatus,type LiveGoogleProfile,type LiveGooglePhotos} from "@/lib/google-workshop-profile";
-import {currentGooglePhotos,showConfirmedGoogleMap} from "@/lib/google-maps-browser";
-import {useGoogleVisibility} from "./use-google-visibility";
+import {showConfirmedGoogleMap} from "@/lib/google-maps-browser";
+import {workshopMapsUrl} from "@/lib/google-maps-link";
 import type {Workshop} from "@/lib/workshops";
-import type {GoogleWorkshopIdentity,RequestGoogleIdentity} from "./use-google-workshop-profile";
+import type {GoogleWorkshopIdentity} from "./use-google-workshop-profile";
 import {Dialog,DialogContent,DialogTitle} from "./ui/dialog";
 
 export function WorkshopOpeningHours({profile,status,mapsUrl}:{profile:LiveGoogleProfile|null;status:GoogleProfileStatus;mapsUrl:string}){
@@ -20,26 +20,10 @@ export function WorkshopOpeningHours({profile,status,mapsUrl}:{profile:LiveGoogl
  return <div className={`profile-opening-hours ${hours.tone}`}><div className="profile-opening-summary" role="status"><Clock3 size={17}/><div><strong>{t(hours.label)}</strong>{hours.detail&&<span>{t(hours.detail.message,{when:t(hours.detail.when),time:hours.detail.time})}</span>}{showToday&&<span className="profile-hours-today">{t("public.todayHours",{hours:hours.today!})}</span>}</div></div>{hours.rows.length>0?<details className="profile-week-hours"><summary>{t("public.weekHours")}<ChevronDown size={15}/></summary><ul>{hours.rows.map(row=><li key={row.day} className={row.today?"today":""}><span>{row.day}</span><span>{row.text}</span></li>)}</ul><p>{t("public.localTime")}<LocaleAnchor href={mapsUrl} target="_blank" rel="noopener noreferrer" translate="no">Google Maps</LocaleAnchor></p>{profile?.rating.attributions.map((a,i)=><p key={i}>{a.providerURI?<LocaleAnchor href={a.providerURI} target="_blank" rel="noopener noreferrer">{a.provider}</LocaleAnchor>:a.provider}</p>)}</details>:status!=="loading"&&<LocaleAnchor className="profile-hours-fallback" href={mapsUrl} target="_blank" rel="noopener noreferrer">{t("public.checkMaps")}</LocaleAnchor>}</div>;
 }
 
-export function LazyWorkshopPhotos({workshop,identity,status,requestIdentity}:{workshop:Workshop;identity:GoogleWorkshopIdentity|null;status:GoogleProfileStatus;requestIdentity?:RequestGoogleIdentity}){
- const {locale}=useI18n();
- return <GooglePhotosPanel key={`${workshop.id}:${locale}:${identity?.placeId??""}`} name={workshop.name} identity={identity} status={status} requestIdentity={requestIdentity}/>;
-}
-function GooglePhotosPanel({name,identity,status,requestIdentity}:{name:string;identity:GoogleWorkshopIdentity|null;status:GoogleProfileStatus;requestIdentity?:RequestGoogleIdentity}){
- const {locale,t}=useI18n(),{ref,canLoad,isVisible}=useGoogleVisibility();
- const alive=useRef(true),started=useRef(false),[photos,setPhotos]=useState<LiveGooglePhotos|null>(null),[photoStatus,setPhotoStatus]=useState<GoogleProfileStatus>("loading"),[displayed,setDisplayed]=useState(false);
- useEffect(()=>{alive.current=true;return()=>{alive.current=false;};},[]);
- useEffect(()=>{if(canLoad)return requestIdentity?.(isVisible);},[canLoad,isVisible,requestIdentity]);
- useEffect(()=>{
-  if(!canLoad||!isVisible()||!identity||started.current)return;
-  started.current=true;
-  void currentGooglePhotos(identity.placeId,identity.browserKey,locale).then(value=>{if(alive.current){setPhotos(value);setPhotoStatus("ready");}}).catch(()=>{if(alive.current)setPhotoStatus("unavailable");});
- },[canLoad,isVisible,identity,locale]);
- // eslint-disable-next-line react-hooks/set-state-in-effect -- A response received in a hidden tab must not mount image resources until visibility returns.
- useEffect(()=>{if(canLoad&&photos&&isVisible())setDisplayed(true);},[canLoad,photos,isVisible]);
- const failed=photoStatus==="unavailable"||status==="unavailable";
- return <div ref={ref} className="profile-google-photos">
-  {failed?<p className="help" role="status">{t("public.photosFailed")}</p>:photos?.photos.length===0?<p className="help">{t("public.photosEmpty")}</p>:displayed?<WorkshopPhotos name={name} profile={photos} identity={identity} status={photoStatus}/>:canLoad&&<div className="profile-photo-loading" role="status">{t("public.photosLoading")}</div>}
- </div>;
+// Photos remain on Google Maps; the public app never fetches REST photo metadata or media.
+export function WorkshopMapsPhotos({workshop,identity}:{workshop:Workshop;identity?:GoogleWorkshopIdentity|null}){
+ const {t}=useI18n();
+ return <div className="profile-google-photos"><LocaleAnchor className="text-action" href={workshopMapsUrl(workshop,identity?.placeId)} target="_blank" rel="noopener noreferrer"><Camera size={17}/>{t("public.googlePhotosOnMaps")}</LocaleAnchor></div>;
 }
 function PhotoAttribution({photo,attributions,mapsUrl}:{photo:GooglePhoto;attributions:LiveGooglePhotos["attributions"];mapsUrl:string}){
  return <span className="profile-photo-attribution"><LocaleAnchor href={photo.mapsUrl??mapsUrl} target="_blank" rel="noopener noreferrer" translate="no">Google Maps</LocaleAnchor>{photo.authors.map((author,i)=><span key={i}>{" · "}{author.url?<LocaleAnchor href={author.url} target="_blank" rel="noopener noreferrer">{author.name}</LocaleAnchor>:author.name}</span>)}{attributions.map((source,i)=><span key={i}>{" · "}{source.providerURI?<LocaleAnchor href={source.providerURI} target="_blank" rel="noopener noreferrer">{source.provider}</LocaleAnchor>:source.provider}</span>)}</span>;
