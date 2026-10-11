@@ -9,11 +9,11 @@ export const businessProfileSchema=z.object({
 }).strict();
 export const claimSchema=z.object({
  workshopId:text(3,81).regex(/^[a-z0-9][a-z0-9-]{2,80}$/),evidence:text(40,4000),
- evidenceLinks:z.array(z.string().max(1000).url().refine(value=>{const url=new URL(value);return url.protocol==="https:"&&!url.username&&!url.password;})).max(5)
+ evidenceLinks:z.array(z.string().max(1000).url().refine(value=>{const url=new URL(value);return url.protocol==="https:"&&!url.username&&!url.password;})).max(5).default([])
 }).strict();
 export type BusinessProfile=z.infer<typeof businessProfileSchema>;
 export type BusinessDecision="approved"|"rejected";
-export type BusinessRequest={id:string;workshopId:string;workshopName:string;status:string;moderatorNote:string;revision:number;createdAt:string;owner:string;evidence?:string;evidenceLinks?:string[];profile?:BusinessProfile;baseUpdatedAt?:string};
-export type PendingBusinessClaim=Pick<BusinessRequest,"id"|"workshopId"|"workshopName"|"createdAt">;
+export type BusinessRequest={id:string;workshopId:string;workshopName:string;status:string;moderatorNote:string;revision:number;createdAt:string;owner:string;evidence?:string;evidenceLinks?:string[];fileName?:string|null;profile?:BusinessProfile;baseUpdatedAt?:string};
+export type PendingBusinessClaim=Pick<BusinessRequest,"id"|"workshopId"|"workshopName"|"createdAt"|"fileName">;
 export type BusinessState={pendingClaims:PendingBusinessClaim[];pendingChangeWorkshopIds:string[];pendingChangeRequestIds:string[];claims:BusinessRequest[];changes:BusinessRequest[];workshops:Workshop[];nextClaimCursor:string|null;nextChangeCursor:string|null;error?:string};
 export function editableBusinessProfile(workshop:Pick<Workshop,"phone"|"phoneNote"|"whatsapp"|"services"|"serviceDetails"|"description">):BusinessProfile{return {phone:workshop.phone,phoneNote:workshop.phoneNote,whatsapp:workshop.whatsapp,services:workshop.services,serviceDetails:workshop.serviceDetails,description:workshop.description};}

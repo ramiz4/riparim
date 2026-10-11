@@ -402,3 +402,41 @@ und Abschlusslink; seine Fokuswiederherstellung bleibt erhalten. Alte
 gleichzeitigem `nachweis`-Parameter. Der ungenutzte allgemeine Dialog-Hook ist
 entfernt. Die ergänzenden Integrationstests prüfen beide Linkverträge und die
 bestehenden eigenen Seitenaktionen mit fiktiven Daten.
+
+## Profilgebundener Übernahme-Antrag mit Dokument
+
+Der Antrag übernimmt ausschließlich die über `werkstatt` verlinkte öffentliche
+Werkstatt und zeigt Name und Standort an. Eine Auswahl anderer Profile und der
+permanente Button „Aktualisieren“ entfallen. Ohne gültiges, eindeutiges Ziel
+führt ein Hinweis zum Werkstattfinder. Der Antrag enthält einen privaten
+Nachweistext und einen optionalen Upload für PDF, JPG oder PNG bis 5 MB.
+Nach erfolgreicher Einreichung lädt die Seite automatisch nach; nur ein
+Ladefehler bietet „Erneut versuchen“. Bestehende Beleglinks bleiben in der
+Verwaltungsprüfung erhalten. Dokumente lassen sich über eine geschützte Route
+nur vom Antragsteller und der Verwaltung herunterladen.
+
+Migration `0014` erweitert `workshop_claims` additiv um nullable Dateimetadaten.
+Bestehende Anträge brauchen keine Übernahme. Der Releaseprozess wendet die
+Migration vor dem neuen Worker an. Dokumente verwenden den bestehenden privaten
+R2-Bucket und das Upload-Inventar. Kontolöschung entfernt auch Dokumente und
+verwaiste Uploads; bedingte R2-Schreibvorgänge verhindern verspätete Inhalte
+nach dem Entfernen ihrer Reservierung.
+
+`tests/business-ui.test.mjs` prüft den festen Namen statt Profilauswahl, genau ein
+Textfeld und den beschrifteten Upload, erhaltene Eingaben nach Fehlern, den
+fehlenden Aktualisieren-Button, automatische Statusübernahme und Wiederholung
+bei Ladefehlern sowie ungültige und mehrdeutige Ziele. Die API-/SQLite-/R2-Fixtures
+in `tests/business.test.mjs` prüfen private Downloads, MIME-/Signaturprüfung,
+Größenlimits ohne Content-Length, Fehlerbereinigung, historische Beleglinks und
+Kontolöschung während eines Uploads. Alle Daten sind fiktiv.
+
+Die native Prüfung am 11.10.2026 nutzte Chrome mit zuvor bestätigtem Profil
+`ramizloki82@googlemail.com`, die tatsächliche BusinessPanel-Komponente,
+ThemeProvider und gebautes Projekt-CSS. Die lokale Vorschau verwendete
+synthetische Antworten statt Livekonten. Bei 1282 Pixeln hell und 390 Pixeln
+dunkel (SQ) war das Formular lesbar; Viewport- und Dokumentbreite waren gleich.
+Tab erreichte vom Nachweistext den Upload und anschließend den Einreichen-Button
+mit sichtbarem Fokus. Englisch im mobilen Systemtheme löste dunkel auf und
+zeigte den Ladefehler mit „Try again“ ohne Aktualisieren-Button. Diese native
+Prüfung bestätigt keine echte Dateiübertragung oder Produktionsübernahme;
+die Uploadverträge decken die isolierten Tests ab.
