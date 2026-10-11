@@ -41,11 +41,9 @@ export function catalogueHref(filters:CatalogueFilters,locale:Locale="de"){
  if(filters.sort!=="name")params.set("sort",sortSlugs[filters.sort]);
  return localizeHref(`/werkstaetten${params.size?`?${params.toString()}`:""}`,locale);
 }
-export function matchCatalogue(directory:Workshop[],filters:CatalogueFilters,context:SearchContext|null=null,privateMatchingActive=false,locale:Locale="de"){
+function catalogueComparator(filters:CatalogueFilters,locale:Locale){
  const compareNames=displayComparator(locale);
- const geography=privateMatchingActive&&context&&context.city===filters.city?context:null;
- const words=searchText(catalogueQuery(filters.query??"")).split(" ").filter(Boolean);
- return findWorkshops(directory,filters.service,filters.city,filters.brand,geography?.radius??0,filters.language,geography?.additionalCity??"").filter(w=>w.status==="published"&&(filters.brand===brands[0]||w.brands.includes(filters.brand)||w.brands.includes(brands[0]))&&words.every(word=>searchText(w.name).includes(word))).sort((a,b)=>{
+ return (a:Workshop,b:Workshop)=>{
   if(filters.sort==="rating"){
    const av={rating:a.rating,count:a.count};
    const bv={rating:b.rating,count:b.count};
@@ -59,6 +57,15 @@ export function matchCatalogue(directory:Workshop[],filters:CatalogueFilters,con
    if(ad!==null&&bd!==null&&ad!==bd)return ad-bd;
   }
   return filters.sort==="name"?compareNames(a.name,b.name):a.name.localeCompare(b.name,"de");
- });
+ };
 }
+export function orderedCatalogue(directory:Workshop[],filters:CatalogueFilters,locale:Locale="de"){
+ return directory.filter(w=>w.status==="published").sort(catalogueComparator(filters,locale));
+}
+export function matchCatalogue(directory:Workshop[],filters:CatalogueFilters,context:SearchContext|null=null,privateMatchingActive=false,locale:Locale="de"){
+ const geography=privateMatchingActive&&context&&context.city===filters.city?context:null;
+ const words=searchText(catalogueQuery(filters.query??"")).split(" ").filter(Boolean);
+ return findWorkshops(directory,filters.service,filters.city,filters.brand,geography?.radius??0,filters.language,geography?.additionalCity??"").filter(w=>w.status==="published"&&(filters.brand===brands[0]||w.brands.includes(filters.brand)||w.brands.includes(brands[0]))&&words.every(word=>searchText(w.name).includes(word))).sort(catalogueComparator(filters,locale));
+}
+
 export function activeCatalogueFilters(filters:CatalogueFilters){return (["query","service","city","brand","language"] as const).filter(key=>key==="query"?!!catalogueQuery(filters.query??""):filters[key]!==defaultCatalogueFilters[key]);}

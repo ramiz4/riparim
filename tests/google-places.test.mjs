@@ -16,6 +16,8 @@ const [identity,places,directory,config,match,browser,links,save]=await Promise.
 const {validateWorkshopCatalogue}=await load('source');
 const catalogue=validateWorkshopCatalogue(JSON.parse(await readFile('data/workshops.json','utf8')));
 const all=await directory.listWorkshops(true),actualMita=all.find(w=>w.id==='auto-mita'),mita={...actualMita,googleRating:{...actualMita.googleRating,mapsUrl:'https://www.google.com/maps/search/?api=1&query=Auto+Mita+Prishtina'}};
+const initialIdentityFetch=globalThis.fetch,identityWrites=sqlWrites;globalThis.fetch=async()=>{throw Error('Confirmed public display must not query a provider');};
+try{for(const workshop of all.filter(w=>w.status==='published'))assert.equal(await places.readConfirmedWorkshopGooglePlace(workshop),catalogue.workshops.find(w=>w.id===workshop.id).google.placeId,'all 160 public profiles retain their canonical confirmed identity');assert.equal(sqlWrites,identityWrites,'confirmed identity coverage is read-only after the existing catalogue bootstrap');}finally{globalThis.fetch=initialIdentityFetch;}
 sqlite.exec('DELETE FROM workshop_google_places');
 const candidate={id:'ChIJFixtureAutoMitaOnly',displayName:{text:'Auto Mita'},internationalPhoneNumber:'+383 45 686 868',formattedAddress:'Prishtina, Kosovo',addressComponents:[{types:['country'],shortText:'XK',longText:'Kosovo'}],location:{latitude:mita.lat,longitude:mita.lng}};
 assert.equal(identity.verifiedGooglePlace(mita,[candidate]),candidate.id);
@@ -51,6 +53,12 @@ const body=await configResponse.text();assert(body.includes('fixture-browser-key
 assert.equal(configResponse.headers.get('Cache-Control'),'no-store');
 assert.equal((await config.GET(new Request(origin+'/api/google-places',{headers:{Origin:'https://other.example.test'}}))).status,403);
 const writesBeforePublicReads=sqlWrites;
+const publicIdentity=await (await match.GET(request('/api/google-places/auto-mita'),params('auto-mita'))).json();assert.equal(publicIdentity.placeId,links.googlePlaceIdFromMapsUrl(actualMita.googleRating.mapsUrl));assert.equal(calls,0,'public confirmed identities never search Google');assert.equal(sqlWrites,writesBeforePublicReads,'public identity display never refreshes or writes a Google identity record');
+const idOnlyWorkshop=all.find(w=>!w.googleRating),idOnlyPlace=catalogue.workshops.find(w=>w.id===idOnlyWorkshop.id).google.placeId;
+sqlite.prepare('INSERT INTO workshop_google_places(workshop_id,place_id,profile_hash,checked_at,retry_after) VALUES(?,?,?,?,?)').run(idOnlyWorkshop.id,idOnlyPlace,await identity.workshopIdentityHash(idOnlyWorkshop),1,0);
+const publicIdOnly=await (await match.GET(request('/api/google-places/'+idOnlyWorkshop.id),params(idOnlyWorkshop.id))).json();assert.equal(publicIdOnly.placeId,idOnlyPlace,'new profiles without historical Google snapshots use their existing confirmed ID without provider research');assert.equal(calls,0);assert.equal(sqlWrites,writesBeforePublicReads);
+sqlite.prepare('UPDATE workshop_google_places SET profile_hash=? WHERE workshop_id=?').run('outdated-business-fixture',idOnlyWorkshop.id);assert.equal((await(await match.GET(request('/api/google-places/'+idOnlyWorkshop.id),params(idOnlyWorkshop.id))).json()).placeId,null,'changed business identity never reuses stale association or starts research');assert.equal(calls,0);assert.equal(sqlWrites,writesBeforePublicReads);sqlite.prepare('DELETE FROM workshop_google_places WHERE workshop_id=?').run(idOnlyWorkshop.id);
+
 for(const locale of ['de','sq','en']){
  globalThis.fixtureAdmin=null;let response=await save.GET(request(`/api/workshops?admin=1&locale=${locale}`));assert.equal(response.status,401);assert.equal((await response.json()).errorCode,'authentication_required');
  globalThis.fixtureAdmin={isModerator:false};response=await save.GET(request(`/api/workshops?admin=1&locale=${locale}`));assert.equal(response.status,403);assert.equal((await response.json()).errorCode,'forbidden');
@@ -112,9 +120,7 @@ sqlite.prepare('UPDATE catalog_state SET value=? WHERE key=?').run('100',quotaKe
 const linked={...mita,id:'direct-link-fixture',googleRating:{...mita.googleRating,mapsUrl:directUrl}};
 const before=calls;assert.equal(await places.resolveWorkshopGooglePlace(linked),candidate.id);assert.equal(calls,before,'direct links require no API lookup even with exhausted quota');
 assert.equal(links.workshopMapsUrl(linked),directUrl.replace('query=Auto+Mita','query='+new URLSearchParams({query:`${linked.name} ${linked.address}`}).toString().slice(6)),'profile and widget use the same ID');
-let requestedFields=null,requestedPlace=null;
-globalThis.window={google:{maps:{importLibrary:async()=>({Place:class{constructor(options){requestedPlace=options;this.rating=4.6;this.userRatingCount=123;this.googleMapsURI='https://maps.google.com/?cid=123';this.attributions=[];}async fetchFields(options){requestedFields=options.fields;}}})}}};
-const live=await browser.currentGoogleRating(candidate.id,'fixture-browser-key');assert.equal(live.rating,4.6);assert.equal(live.count,123);assert.equal(requestedPlace.id,candidate.id);assert.deepEqual(requestedFields,['rating','userRatingCount','googleMapsURI','attributions']);
+assert.equal(browser.currentGoogleRating,undefined,'individual Enterprise ratings are removed from the public browser API');assert.equal(browser.currentGooglePhotos,undefined,'public browser has no REST photo requests');
 assert.equal(sqlite.prepare('SELECT rating FROM workshop_google_ratings WHERE workshop_id=?').get(mita.id).rating,4.8,'current API data is displayed, not written over sourced snapshots');
 // Publication enforces Google identity separately from review availability.
 globalThis.fixtureAdmin={isModerator:true};
@@ -150,4 +156,4 @@ globalThis.fetch=async()=>Response.json({error:'fixture unavailable'},{status:50
 await assert.rejects(places.confirmedPublicationPlace({...operatorDraft,phone:'+383441234568'},actualMita,false));
 assert.deepEqual(sqlite.prepare('SELECT * FROM workshop_google_places WHERE workshop_id=?').get(actualMita.id),cacheBeforeDraft,'failed staging also preserves the publicly confirmed identity');
 globalThis.fetch=originalFetch;delete globalThis.window;sqlite.close();
-console.log(JSON.stringify({googleIdentityChecks:9,explicitSearchGeography:true,negativeCacheUpgrade:true,apiBoundaries:true,dailyBudget:100,existingPublicWorkshops:catalogue.coverage.published,existingDraftsPreserved:catalogue.coverage.drafts,currentGoogleRatings:true,googleRatingsPersisted:false,liveProviderCalls:false}));
+console.log(JSON.stringify({googleIdentityChecks:9,explicitSearchGeography:true,negativeCacheUpgrade:true,apiBoundaries:true,dailyBudget:100,existingPublicWorkshops:catalogue.coverage.published,existingDraftsPreserved:catalogue.coverage.drafts,nativeGoogleRatingWidgets:true,googleRatingsPersisted:false,liveProviderCalls:false}));

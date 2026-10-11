@@ -65,3 +65,5 @@ html.dark .catalogue-search-panel>.catalogue-filter-button>.catalogue-filter-lab
   /* Keep the controls in place while the docked frame reaches both viewport edges. */
   .catalogue-search-panel[data-docked=true] { width: calc(100% + 2 * var(--page-gutter)); margin-inline: calc(-1 * var(--page-gutter)); padding-inline: calc(8px + var(--page-gutter)); border-top-left-radius: 0px; border-top-right-radius: 0px; }
 }
+
+.catalogue-card[hidden],.catalogue-grid[hidden]{display:none}

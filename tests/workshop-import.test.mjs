@@ -25,7 +25,7 @@ const {I18nProvider}=await load('lib/i18n/client.js'),{getMessages}=await load('
 const renderRatings=props=>renderToStaticMarkup(React.createElement(I18nProvider,{locale:'de',messages:getMessages('de',['common','public'])},React.createElement(WorkshopRatings,props)));
 const {validateWorkshopCatalogue}=await load('lib/workshop-source.js');
 const catalogue=validateWorkshopCatalogue(JSON.parse(await readFile('data/workshops.json','utf8')));
-const curated=catalogue.workshops.map(({google,...profile})=>profile);
+const curated=catalogue.workshops.map(record=>Object.fromEntries(Object.entries(record).filter(([key])=>key!=="google")));
 const manifest=JSON.parse(await readFile('data/import-2026-10-03.json','utf8'));
 const removals=JSON.parse(await readFile('data/workshop-removals.json','utf8'));
 const finalRemovals=JSON.parse(await readFile('data/workshop-final-removals.json','utf8'));
@@ -74,7 +74,7 @@ assert.equal(filters.parseCatalogueFilters(new URLSearchParams('sort=bewertung')
 const unknown=workshops.find(w=>w.googleRating.rating===null&&w.googleRating.count===null);
 assert.equal(unknown.googleRating.rating,null,'missing Google score stays null');
 const unknownMarkup=renderRatings({workshop:unknown,details:true});
-assert(unknownMarkup.includes('Google wird geladen …'),'unloaded Google ratings are not reported as absent');
+assert(unknownMarkup.includes('google-rating-panel')&&unknownMarkup.includes('Google-Bewertung zu'),'unloaded Google ratings reserve the native Standard widget without reporting zero or absent');
 assert(!unknownMarkup.includes('0,0'));
 const emptyCardRatings=renderRatings({workshop:unknown,hideUnavailable:true});
 assert(!emptyCardRatings.includes('Google wird geladen')&&!emptyCardRatings.includes('Noch keine'),'list cards preserve the absence of empty rating placeholders');
@@ -112,7 +112,7 @@ assert.equal(sorted[0].id,'auto-mita','independent Google 5.0 scores do not outr
 const markup=renderToStaticMarkup(React.createElement(WorkshopRatings,{workshop:mita,details:true}));
 for(const text of ['Riparim','Google','3,0'])assert(markup.includes(text),`rating display includes ${text}`);
 for(const text of ['4,8','Anzahl nicht veröffentlicht','automita.com'])assert(!markup.includes(text),`historical Google content is not displayed: ${text}`);
-const liveMarkup=renderToStaticMarkup(React.createElement(WorkshopRatings,{workshop:mita,liveGoogleRating:{rating:4.6,count:123,mapsUrl:'https://maps.google.com/',attributions:[]}}));assert(liveMarkup.includes('4,6')&&liveMarkup.includes('123'),'current Google data is displayed');
+
 
 // A later snapshot and an administrator's edits survive re-running the seed.
 sqlite.prepare("UPDATE workshops SET name='Edited profile',status='draft' WHERE id='auto-mita'").run();

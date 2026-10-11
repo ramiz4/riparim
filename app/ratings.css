@@ -13,3 +13,5 @@
 }
 
 .profile-google-heading{font-size:16px;margin:0 0 12px}.google-details-time{margin:10px 0 0}.google-details-refresh{margin:8px 12px 8px 0}.google-reviews-panel>.text-action{margin:8px 0}.profile-google-photos .help{margin:10px 0}.profile-photo-attribution{font-size:12px;line-height:1.6;overflow-wrap:anywhere}.profile-photo-attribution a{text-decoration:underline;text-underline-offset:2px}.profile-photo-strip figcaption{padding:7px 2px;color:var(--muted-foreground)}.profile-gallery-attribution{padding:6px 22px 12px;min-width:0}.profile-photo-viewer[data-slot=dialog-content]{grid-template-rows:auto minmax(0,1fr) auto auto}
+
+.google-rating-panel .google-official-widget gmp-place-details{height:180px;max-width:none}.google-rating-panel .profile-google-heading{font-size:14px;margin:8px 0}.google-rating-panel .help{font-size:12px;line-height:1.5}.google-rating-panel>.text-action{font-size:13px;min-height:36px;align-items:center}.profile-google-photos>.text-action{display:inline-flex;align-items:center;gap:7px;min-height:44px}

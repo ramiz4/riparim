@@ -17,7 +17,7 @@ Die anschließend vom Nutzer verworfenen 27 Identitäten sind in `data/workshop-
 ## Konfiguration im bestehenden Google-Cloud-Projekt Riparim
 
 1. Maps JavaScript API, Places API (New) und Places UI Kit API sind bereits aktiviert. Vor Änderungen an vorhandener Nutzung gelten die unten dokumentierten Billing-/Freimengen-/Quotenprüfungen; keine zusätzlichen Dienste oder kostenpflichtigen Tarife aktivieren.
-2. Den Produktions-Browser-Key nur für tatsächlich benötigte HTTPS-Referrer und die drei genannten APIs freigeben. Maßgeblich ist die belegte produktive Runtime-Zuordnung; ein alter Sites-Host oder lokale Fixtures begründen keine Freigabe des Produktionskeys.
+2. Den Produktions-Browser-Key nur für tatsächlich benötigte HTTPS-Referrer und Maps JavaScript und Places UI Kit (kein Places API (New) im Browser-Key) freigeben. Maßgeblich ist die belegte produktive Runtime-Zuordnung; ein alter Sites-Host oder lokale Fixtures begründen keine Freigabe des Produktionskeys.
 3. Der separate private Server-Key darf ausschließlich Places API (New) verwenden und bleibt im geschützten Server-Runtime-Secret. Ohne feste belegte Cloudflare-Ausgangs-IP wird keine ungeprüfte IP-Beschränkung eingerichtet.
 4. `GOOGLE_MAPS_BROWSER_API_KEY` und `GOOGLE_PLACES_SERVER_API_KEY` gehören ausschließlich in die geschützte Laufzeitkonfiguration. App-Veröffentlichungen erfolgen über den geprüften Main-Release gemäß `docs/releases.md`; keine Schlüssel in Git oder `.openai/hosting.json`, keine manuelle Feature-Branch-Veröffentlichung.
 5. Tatsächlich unterstützte Quoten und vorhandene Billing-Warnungen prüfen. Ein Benachrichtigungsbudget stoppt keine Nutzung; das App-Limit von 100/Tag begrenzt ausschließlich serverseitige Identitätsabfragen. Wirksame Istwerte, Solländerungen und Rückweg stehen im Betriebsrunbook unten.
@@ -31,25 +31,47 @@ Für Suchlinks wird deren vorhandene Suchanfrage einschließlich Adresse verwend
 
 ## Zuordnung und Darstellung
 
-Ein veröffentlichtes Profil benötigt eine bestätigte Google-Identität, auch wenn keine Rezensionen oder Sterne vorhanden sind. Importvalidator und Verwaltungsroute prüfen diese Voraussetzung. Ein unverändertes bestätigtes Profil behält seine Identität; Änderungen an Name, Telefon, Ort, Adresse oder Koordinaten benötigen eine neue Bestätigung. Doppelt verwendete Place IDs werden zurückgewiesen. Kartenlink, Route, Bewertungen, Öffnungszeiten und Fotos verwenden dieselbe ID. Öffnungszeiten und Fotos werden ausschließlich live geladen, nicht in die Importquelle übernommen.
+Ein veröffentlichtes Profil benötigt eine bestätigte Google-Identität, auch wenn keine Rezensionen oder Sterne vorhanden sind. Importvalidator und Verwaltungsroute prüfen diese Voraussetzung. Ein unverändertes bestätigtes Profil behält seine Identität; Änderungen an Name, Telefon, Ort, Adresse oder Koordinaten benötigen eine neue Bestätigung. Doppelt verwendete Place IDs werden zurückgewiesen. Kartenlink, Route, Bewertungen, Öffnungszeiten und Maps-Fotolink verwenden dieselbe ID. Öffnungszeiten werden ausschließlich im Standard-Widget dargestellt; Fotos bleiben auf Google Maps. Inhalte werden nicht in die Importquelle übernommen.
 
-Die öffentliche Zuordnungsroute nimmt ausschließlich eine vorhandene veröffentlichte Werkstattkennung entgegen. Die Suchanfrage stammt aus deren veröffentlichtem Kontakt. Eine Zuordnung braucht dieselbe internationale Telefonnummer, einen charakteristischen Namensbestandteil und passende bekannte Koordinaten bzw. den Ort in Kosovo. Ein ausdrücklich anderes Land wird abgewiesen. Google lässt das Land bei Kosovo-Einträgen teilweise auch in Place Details weg: Dann braucht es entweder höchstens 300 Meter Abstand zu den unabhängig belegten Werkstattkoordinaten oder den passenden Ort im Google-Adressfeld und höchstens 15 Kilometer Abstand zu dessen bekanntem Zentrum. Mehrere geeignete Place IDs werden zurückgewiesen.
+Die öffentliche Zuordnungsroute nimmt ausschließlich eine vorhandene veröffentlichte
+Werkstattkennung entgegen und liest deren bereits bestätigte Place ID aus dem
+direkten Maps-Link oder dem vorhandenen `workshop_google_places`-Datensatz mit
+gültiger ID und passendem Geschäftsdatenhash. Auch Profile ohne historische
+Google-Momentaufnahme behalten dadurch ihre bestätigte Identität. Sie startet
+keine Google-Suche, aktualisiert keinen Zuordnungsdatensatz (der bestehende Katalog-Bootstrap bleibt unverändert) und verwendet keine
+neuen Google-Details. Ohne bestätigte unveränderte ID liefert sie `placeId:null` und die
+Oberfläche bietet den vorhandenen Maps-Link. Neue oder geänderte Geschäftsdaten
+werden ausschließlich im gesonderten geprüften Veröffentlichungs-/Rechercheweg
+bestätigt. Die nachfolgenden Suchregeln gelten für diesen serverseitigen Weg.
 
 Telefonabfragen verwenden ein Leerzeichen nach der Vorwahl und den dazugehörigen Regionscode: `+383`/`XK`, vorhandene `+381`-Nummern unverändert mit `RS`. Bekannte Werkstattkoordinaten setzen einen Suchbias von drei Kilometern; ohne Koordinaten wird das Gebiet Kosovo verwendet. So hängt die Suche nicht von der Ausgangs-IP des Servers ab. Die abschließende Landes- und Standortprüfung bleibt davon unabhängig; bei einer erfolglosen Telefonsuche folgt eine Suche nach Werkstattname und Ort, mit denselben strikten Identitätsprüfungen. Fehlende strukturierte Länderangaben werden für Kandidaten mit passender Telefonnummer über Place Details geprüft. Alle Such- und Detailanfragen zählen zum gemeinsamen Limit von 100/Tag. Zusammengezogene Namen wie AutoMita werden erkannt; Ladestationen, Parkplätze und reine Waschanlagen werden ausgeschlossen. Bei einer Änderung der Suchstrategie macht deren Versionskennung frühere erfolglose Zuordnungen erneut prüfbar.
 
 Es werden nur Place IDs und eigene Prüf-/Wiederholungsmetadaten dauerhaft gespeichert. Ungeklärte Treffer werden nach sieben Tagen erneut geprüft, Providerfehler frühestens nach 15 Minuten. Gleichzeitige Aufrufe teilen eine kurze Lease. Eine Änderung des Profils löst eine neue Zuordnung aus; erfolgreiche Zuordnungen werden nach einem Jahr erneut geprüft.
 
-Sichtbare Karten laden aktuelle Sterne und Anzahl direkt über die Google Places JavaScript API. Es gibt keine Speicherung dieser API-Sterne oder Rezensionen in D1, R2 oder Browser Storage. Google Maps erhält seine Quellenkennzeichnung; zusätzliche Providerattribution wird angezeigt. Google-Werte fließen weder in Riparim-Mittelwerte noch in Riparim-Sortierungen ein.
+Sichtbare Karten stellen aktuelle Sterne und Anzahl im nativen Google Standard-
+UI-Kit-Widget dar. Die App exportiert keine Ratingwerte und speichert keine
+API-Sterne oder Rezensionen in D1, R2 oder Browser Storage. Google- und
+Providerattribution bleiben im Baustein erhalten. Google-Werte fließen weder in
+Riparim-Mittelwerte noch in Riparim-Sortierungen ein.
 
 Der Katalog bietet ausschließlich Name, Riparim-Bewertung und Entfernung als Sortierungen an. Alte Links mit `sort=google` werden auf die Standardsortierung Name normalisiert; Suchbegriff, Leistung, Ort, Marke, Sprache und Locale bleiben erhalten. Es gibt keine globale oder auf die ersten zwölf Ergebnisse begrenzte Google-Sortierung. Historische Google-Momentaufnahmen werden weiterhin weder als aktuell angezeigt noch zur Sortierung verwendet.
 
-Google-Sterne werden ausschließlich bei Sichtbarkeit einer Karte geladen (bestehender Vorlauf von 120 Pixeln). Bereits dargestellte Werte derselben Riparim-ID und Locale gehören nur zum Komponenten-Zustand der aktiven Liste. Bei Filteränderungen und erneutem Einblenden nutzt die Karte diesen Wert ohne identischen Zusatzabruf. Ein Localewechsel verwirft diesen Zustand; neue IDs und Sprachen laden ihre eigenen Werte. Verspätete Antworten einer vorherigen ID/Locale werden nicht angezeigt. Schließen/Neuladen der Liste verwirft die Werte. Es gibt keinen zusätzlichen Content-Cache, TTL, Hintergrundrefresh oder Schreiben in D1, R2, Redis, CDN oder Browser Storage. Die bestehende Place-ID-Zuordnung, Providerattribution und Maps-Fallbacks bleiben erhalten.
+Google-Standard-Bausteine starten ausschließlich bei Sichtbarkeit und aktivem Tab
+(120-Pixel-Vorlauf). Ein unverändertes Widget bleibt im aktuellen Komponentenstand
+verbunden; Filter blenden die ganze bereits montierte Karte aus und wieder ein.
+Die IDs dieser Karten bleiben auf den aktuellen veröffentlichten Katalog begrenzt;
+es werden keine Google-Werte extrahiert. Locale-/Identitätswechsel entfernen alte
+Google-Inhalte. Neue Sortierung, geänderter Entfernungsursprung oder geänderte
+Sortierfolge des Livekatalogs beginnen eine neue Ansicht, damit DOM- und
+Tastaturreihenfolge der sichtbaren Sortierung entsprechen. Es gibt keinen Content-
+Cache, TTL, Hintergrundrefresh oder Schreiben in D1, R2, Redis, CDN oder Browser
+Storage. Place-ID-Zuordnung und direkte Maps-Fallbacks bleiben erhalten.
 
 Eine Änderung der zentralen JSON-Quelle löst über deren Inhalts-Hash den Import aus; Profile und recherchierte Google-Angaben werden anhand ihrer getrennten Zeitstempel aktualisiert. Neuere manuell gepflegte Angaben bleiben erhalten.
 
-### Isolierter Anfragenachweis für Issue #94
+### Historischer Anfragenachweis für Issue #94
 
-`tests/catalogue-google-requests.test.mjs` verwendet 158 synthetische öffentliche Werkstätten, kontrollierte Sichtbarkeit und einen Google-SDK-Fixture ohne echte Provideraufrufe. Der Red-Lauf vor der Änderung zählte bei `sort=google` **158 Places-Abfragen**, obwohl keine Karte sichtbar war. Der gleiche Lauf nach der Änderung prüft in DE/SQ/EN:
+Bei Abschluss von #94 verwendete `tests/catalogue-google-requests.test.mjs` 158 synthetische öffentliche Werkstätten, kontrollierte Sichtbarkeit und einen Google-SDK-Fixture ohne echte Provideraufrufe. Der Red-Lauf vor der Änderung zählte bei `sort=google` **158 Places-Abfragen**, obwohl keine Karte sichtbar war. Der gleiche Lauf nach der Änderung prüft in DE/SQ/EN:
 
 | Auslöser | Places-Abfragen nach Änderung |
 | --- | ---: |
@@ -60,9 +82,9 @@ Eine Änderung der zentralen JSON-Quelle löst über deren Inhalts-Hash den Impo
 | Passende Karte nach Filterwechsel erneut sichtbar | 0 zusätzliche |
 | Localewechsel und erste erneut sichtbare Karte | 1 zusätzliche |
 
-Zusätzlich prüft dieselbe Fixture in DE/SQ/EN die datenfreie statische Katalog-Shell: Die Hydration liest alle Filter und die Locale aus der echten URL, der bestehende Live-Katalogabruf bleibt erhalten und verursacht keine Google-Abfrage für unsichtbare Karten. Sichtbare Karten und ihre Wiederverwendung behalten dieselben Anfragezahlen. Der reale Canonicalbestand enthält inzwischen 160 Profile; die 158 Datensätze im Test sind weiterhin ausschließlich synthetisch.
+Damals prüfte dieselbe Fixture zusätzlich in DE/SQ/EN die datenfreie statische Katalog-Shell: Die Hydration liest alle Filter und die Locale aus der echten URL, der bestehende Live-Katalogabruf bleibt erhalten und verursacht keine Google-Abfrage für unsichtbare Karten. Sichtbare Karten und ihre Wiederverwendung behalten dieselben Anfragezahlen. Der aktuelle Test verwendet 160 synthetische Datensätze und den unten beschriebenen Standard-Widget-Vertrag; die obigen Zählungen beschreiben den damaligen SDK-Einzelratingpfad.
 
-Die gezählten Aufrufe sind SDK-`fetchFields`-Anfragen, keine Kostenmessung oder Aussage zur Abrechnungskategorie. Auch reguläre URL-/Sortierverträge, Lade-/Leer-/Fehlerfälle und verspätete Antworten werden ohne Live-Google-Verbindungen geprüft.
+Die damals gezählten Aufrufe waren SDK-`fetchFields`-Anfragen, keine Kostenmessung oder Aussage zur Abrechnungskategorie. Auch reguläre URL-/Sortierverträge, Lade-/Leer-/Fehlerfälle und verspätete Antworten werden ohne Live-Google-Verbindungen geprüft.
 
 ## Live-Daten im Werkstattprofil
 
@@ -81,15 +103,13 @@ enthält lediglich ID, Standort und Viewport. Ein fehlgeschlagener Provideraufru
 wird als Ladefehler angezeigt, niemals als null Bewertungen ausgegeben.
 
 Der Baustein startet nur bei Sichtbarkeit (120-Pixel-Vorlauf) und aktivem Tab.
-Konfiguration und gemeinsame Zuordnungsroute starten erst, wenn mindestens der
-Google- oder Fotobereich sichtbar und der Tab aktiv ist; die Zuordnungsroute kann
-serverseitig eine Google-Identitätsprüfung auslösen. Beide Bereiche teilen genau
-eine Identität für die aktuelle Werkstatt, Sprache und Maps-Zuordnung. Beim
-Verschwinden meldet sich die jeweilige Sichtbarkeitsquelle ab. Nach wartender
-Konfiguration wird die aktuelle Sichtbarkeit erneut geprüft; ein inzwischen
-sichtbarer anderer Bereich kann übernehmen. Sind beide unsichtbar, wird die
-Zuordnung bis zum nächsten sichtbaren Bereich zurückgestellt. Sichtbarkeit wird
-auch nach asynchronem SDK-Laden erneut geprüft. Themewechsel und normale Profilzustandsänderungen
+Konfiguration und Zuordnungsroute starten erst bei Sichtbarkeit des Google-Bereichs
+und aktivem Tab. Der Fotolink startet keine Konfiguration oder Identitätsprüfung.
+Die öffentliche Zuordnungsroute liest nur die bereits bestätigte ID. Nach wartender
+Konfiguration wird die aktuelle Sichtbarkeit erneut geprüft; ist der Bereich
+unsichtbar, wird die Zuordnung bis zur erneuten Sichtbarkeit zurückgestellt.
+Sichtbarkeit wird auch nach asynchronem SDK-Laden erneut geprüft. Themewechsel
+und normale Profilzustandsänderungen
 bewahren dieselbe Widgetinstanz; Farben und Schriften werden ausschließlich
 über die offiziellen CSS-Eigenschaften und `color-scheme` geändert. Der
 Standardbaustein erhält höchstens 400 Pixel Breite mit interner Scrollfunktion.
@@ -111,83 +131,48 @@ bietet ausdrücklich **Seite neu laden**, da der SDK-Lader seinen Fehlversuch
 innerhalb desselben Browserlaufs behält. Bei einem bereits geladenen SDK kann
 ein Widgetfehler durch die sichtbare Aktualisierungsaktion erneut versucht werden.
 
-### Fotos separat und nur bei Bedarf
+### Kostenfreier Anzeigeweg nach der Browserpause (#96)
 
-Der Standard-UI-Kit-Inhaltsbaustein `gmp-place-media` bietet laut Google einen
-Einzelfoto-/Lightbox-Vertrag. Er ersetzt die bestehende gemeinsame Dreiergalerie
-mit direkt auswählbaren Fotos, Pfeiltasten, Wischgeste und vergrößerten Dateien
-nicht gleichwertig. Deshalb bleibt eine eigene minimale Place-Details-Abfrage
-mit **`id,photos,attributions`** bei Sichtbarkeit des Fotobereichs und aktivem Tab.
-Diese Feldmaske gehört laut offizieller REST-Feldtabelle zu **Essentials IDs Only**;
-`googleMapsUri` würde Pro anfordern und wird nicht hinzugefügt. Es gibt keine
-zusätzlichen Rating-, Stunden-, Status- oder Standortfelder. Die Antwort-ID und
-jede Fotoreferenz müssen zum bestätigten Place passen. Gleichzeitige Abfragen
-teilen ausschließlich die laufende Anfrage; Komponenten behalten ihre angezeigten
-Metadaten nur im Arbeitsspeicher des offenen Profils. Es gibt keinen allgemeinen
-Content-Cache, keine TTL und keine Speicherung in Git, D1, R2 oder Browser Storage.
+Der Nutzer verlangt weiterhin keine zusätzlichen Google-Gebühren. Katalogkarten
+verwenden deshalb denselben offiziellen **Standard-UI-Kit**-Baustein
+`gmp-place-details` wie das Profil, mit `gmp-place-content-config` und ausschließlich
+`gmp-place-rating`. Das Profil behält Rating, Öffnungszeiten und Rezensionen.
+Die Karten stellen einen eigenen Google-Widgetblock in voller Kartenbreite bereit;
+Provider-Pflichtinhalte und Attribution werden weder versteckt noch ausgelesen.
+Riparim-Bewertungen bleiben eine getrennte eigene Bewertungszeile. Es gibt keine
+numerischen Google-Exporte für Listen-/Sortierzustand, keinen Contentcache und
+keine `Place.fetchFields`-Einzelratings. Die Widget-Anfrage nimmt eine bestätigte
+Place-ID und die aktive DE/SQ/EN-Sprache entgegen, ohne eine Provider-Suche.
 
-Bis zu drei Vorschauen laden direkt von Google mit nativer Bild-Lazy-Loading-
-Unterstützung (maximal 1000×700 Pixel). Die größere Datei (maximal 1600×1200 Pixel)
-wird erst bei Fotoauswahl im Dialog geladen. Vorschauen, Großansicht und jedes
-Galerie-Vorschaubild tragen Google-/Providerlinks und ihre jeweiligen erhaltenen
-Autorenattributionen. Tastatur, Fokus-Rückgabe, Wischgeste und Galerie bleiben
-bestehen. Ein Place-/Localewechsel schließt die alte Galerie und verwirft deren
-Anzeigestand; verspätete Antworten eines vorherigen Profils erscheinen nicht.
-Auch eine neue bestätigte Place ID im Liveprofil derselben Riparim-ID verwirft
-den alten Identitäts-/Widget-/Fotostand. Die Identitätsantwort muss zur aktuellen
-bestätigten Maps-ID passen; bei Abweichung steht ausschließlich der neue Maps-Link
-als ehrlicher Fallback bereit.
-Eine Antwort im versteckten Tab darf noch keine Bildressourcen mounten. Fehlende
-Fotos und fehlgeschlagene Fotoabfragen erhalten unterschiedliche Anzeigen.
-Auch wenn sämtliche Vorschaudateien fehlschlagen, bleibt ein Ladefehler mit dem
-bestätigten Maps-Fallback sichtbar.
-Standort und Route bleiben direkte Maps-Links mit bestätigter Place ID, ohne
-zusätzliche eingebettete Karte. Eigene belegte Betriebsdaten bleiben unverändert.
+Der öffentliche Fotobereich verweist direkt auf das bestätigte Geschäft in
+Google Maps. REST-Foto-Metadaten und Medien werden vom Browser nicht mehr geladen.
+Der Link startet keine API-Abfrage und bleibt auch bei ausgeschöpfter Widgetquote
+verfügbar. Standort und Route bleiben ebenfalls direkte Maps-Links.
 
-### Compact-Prüfung für Katalogkarten
+Konfiguration, bestätigte Identität und Widgetmontage beginnen erst bei Sichtbarkeit
+und aktivem Tab. Unsichtbare Karten, Filter und „Mehr anzeigen“ erzeugen keine
+vorauseilenden Widgetmontagen. Ein unverändertes sichtbares Widget bleibt bei
+Theme-/Stateänderungen verbunden. Bereits montierte Karten bleiben innerhalb
+dieser Ansicht auch bei Filteränderungen und leeren Treffern verbunden: HTML
+`hidden` blendet die gesamte Karte aus; Pflichtinhalte des Google-Bausteins werden
+nicht einzeln versteckt. Zurückfiltern verursacht keine neue Widgetmontage.
+Retirierte Profile werden beim Liveabgleich entfernt; aktualisierte Betriebsdaten
+und bestätigte Identitäten stammen immer aus dem frischen Verzeichnis. Ein
+Geschäftsdatenwechsel invalidiert die alte Identität auch ohne Google-Momentaufnahme.
+Nur Karten-IDs bleiben im Ansichtsstate, keine ausgelesenen Google-Werte.
+Das Ziel-Tageslimit 250 betrifft zusammen Karten und Profile; danach bleibt der Maps-Link.
 
-`gmp-place-details-compact` unterstützt einen eigenen Widgetblock mit festem
-Inhaltslayout, integriertem Namen/Adresse und Maps-Schaltfläche; horizontal
-empfiehlt Google 180–500 Pixel Breite, unter 160 Pixeln ist die Darstellung nicht
-zuverlässig. Die bestehende Katalogkarte besitzt bereits einen belegten
-Riparim-Namen/-Ort mit Profilnavigation und zwei schmale gemeinsame
-Bewertungszeilen (Riparim und Google). Der Standard-Compact-Vertrag kann nicht
-nur die benötigten Provider-/Sterne-/Anzahl-Zellen in dieser Zeile liefern und
-hat keinen unterstützten öffentlichen Rating-/Count-Datenzugriff. CSS darf seine
-Pflichtinhalte und Attribution nicht verbergen. Deshalb bleiben die durch #94
-begrenzten individuellen Ratingabrufe für sichtbare Katalogkarten bestehen;
-Filterremounts derselben ID/Locale verwenden den aktiven Listenstand. Es gibt
-keinen zusätzlichen Compact-Baustein und keine DOM-Auslesung für Daten oder Sortierung.
-
-### Isolierter Anfragenachweis für Issue #95
-
-`tests/google-profile-requests.test.mjs` zählt einzelne REST-Feldmasken,
-SDK-Ratingabrufe und Standard-Widgetmontagen getrennt. Der Red-Lauf vor dem Umbau
-zählte bereits beim gewöhnlichen unsichtbaren Profilmount eine vollständige
-Enterprise-Abfrage. Die isolierten DE/SQ/EN-Szenarien prüfen nach dem Umbau:
-
-| Auslöser | Einzel-Details | Standard-Widgetmontagen | Foto-Bildressourcen |
-| --- | ---: | ---: | --- |
-| Profilmount, Google-Bereiche unsichtbar | 0 | 0 | 0 |
-| Erster sichtbarer Google-Bereich | 0 | 1 | 0 |
-| Theme-/Stateänderung | +0 | +0 | +0 |
-| Erster sichtbarer Fotobereich | 1, nur `id,photos,attributions` | +0 | bis zu 3 Vorschauen |
-| Fotoauswahl | +0 | +0 | ausgewählte Großdatei |
-| 30-Minuten-Veraltung oder Rückkehr in den Tab | +0 | +0 | +0 |
-| Explizites sichtbares Aktualisieren | +0 | +1 | +0 |
-
-Weitere Fixtures prüfen null Konfigurations-/Zuordnungsabrufe beim unsichtbaren
-Profilmount, genau eine gemeinsame Zuordnung für beide sichtbaren Bereiche,
-Sichtbarkeitsübergabe während wartender Konfiguration, Rückstellung bei zwei
-unsichtbaren Bereichen, versteckte Tabs, SDK-/Foto-Laderaces, schnellen Place-/
-Localewechsel, StrictMode, Quotenfehler, Timeout ohne Retryschleife, leere Fotos,
-Maps-Fallback und Attribution für jede dargestellte Fotoquelle. Dabei entsteht
-keine echte Google-Verbindung. Gezählt werden App-Aufrufverträge und gemountete
-Bildressourcen, keine gemessenen Produktionskosten. Der aktuelle Standard-
-UI-Kit-SKU-Vertrag (Essentials, SKU `0678-4F72-DA7C`) zählt Requests der Standard-
-Place-Details-Elemente unabhängig von den ausgewählten Feldern; tatsächliche
-Kontingente, anwendbarer Kontotarif und Billing-Belege stehen im folgenden
-Betriebsrunbook und datierten Prüfbericht von #96.
+Die isolierten DE/SQ/EN-Fixtures zählen sichtbare Standard-Montagen und verbieten
+individuelle Enterprise- und REST-Fotoabrufe. Zwölf sichtbare Karten ergeben zwölf
+Montagen, Filterweg/zurück null zusätzliche, reine Pagination null zusätzliche und
+zwölf weitere sichtbare Karten zwölf zusätzliche. Das sind App-Verträge, keine
+Produktions-SKU-Messungen. Profil-Hydration eigener Rezensionen erhält den verbundenen
+Google-Baustein. Ausgeschaltete Konfiguration, Identitäts-HTTP-429/Timeout,
+Widgetfehler/-Timeout, schnelle Identitäts-/Sprachwechsel und SDK-Laderaces erhalten
+eigene Angaben und den bestätigten Maps-Link ohne automatische Retryschleife.
+Der 30-Minuten-Timer ändert nur die Anzeige; nur die sichtbare explizite Aktion
+fordert einen neuen Standard-Baustein an. Jede Montage einschließlich Refresh
+verbraucht gegebenenfalls dieselbe projektweite Tagesquote.
 
 Bestätigte WhatsApp-Kontakte erhalten eine mobile Aktion. Marken- und Leistungshervorhebungen beziehen sich nur auf bereits belegte Profilangaben. Private Fahrzeugdetails stammen ausschließlich aus der aktiven Suche im Arbeitsspeicher; sie werden nicht in Links oder Google-Anfragen übernommen.
 
@@ -196,63 +181,64 @@ Bestätigte WhatsApp-Kontakte erhalten eine mobile Aktion. Marken- und Leistungs
 Der [datierte Prüfbericht vom 11.10.2026](google-places-cost-audit-2026-10-11.md)
 enthält den reproduzierten Vorher-/Nachher-Abrufvergleich, alle neun tatsächlich
 beobachteten SKU-Mengen/Kosten, die Schweizer Konto-Preisstufen in CHF,
-Key-/Quoten-Vorherwerte und die Grenzen der Messung. Der Projekt-Billing-Bericht
-weist **2,73 CHF** aus, davon Enterprise Details mit **1164 Ereignissen** bei einer
+Key-/Quoten-Vorherwerte und die Grenzen der Messung. Der damalige Projekt-Billing-Bericht
+wies **2,73 CHF** aus, davon Enterprise Details mit **1164 Ereignissen** bei einer
 freien Kontostufe bis 1000. #94/#95 sind lokale Anfrageoptimierungen; ihr
 Produktionskosten-Nachherwert ist wegen Billing-Verzug noch nicht belegt.
 
-### Aktueller Kontrollstand
+### Providerfreigabe: ausschließlich Standard-Widgets
 
-Manuell gespeicherte Tagesgrenzen; die Minutenlimits bleiben unverändert:
+Der datierte #96-Bericht bleibt unverändert als historischer Beleg der ersten
+Browserpause. Beim Beginn dieser Korrektur war der Browser-Key noch auf
+`https://riparim-google-paused.invalid/*` beschränkt. Die folgende Freigabe wird
+**erst nach geprüftem Main-Release und frischer Freimengenprüfung** vorgenommen;
+diese Dokumentation behauptet keine bereits durchgeführte Provideränderung.
 
-| Dienst / Methode | Tageslimit | Minutenlimit | Wirkung |
-| --- | ---: | ---: | --- |
-| Places (New): GetPlaceRequest | **0** | 600 | REST-Foto-Metadaten und ergänzende Land-Details gesperrt; SDK-Wirkung siehe unten |
-| Places (New): SearchTextRequest | **20** | 600 | Identitätssuche, zusätzlich App-Limit 100/UTC-Tag |
-| Places (New): PhotoMedia | **20** | 600 | einzelne Vorschau-/Großbildabrufe |
-| UI-Kit Standard Query | **30** | 6000 | gemeinsame Profilangaben inklusive Rezensionen |
-| UI-Kit Advanced | **0** | Unbegrenzt | von der aktuellen App ungenutzt |
-| UI-Kit Sessions | **0** | 6000 | von der aktuellen App ungenutzt |
-| Maps JavaScript: Map loads | **30** | 30000, pro Nutzer 300 | aktuelle App nutzt direkte Maps-/Routenlinks |
+| Dienst / Methode | Ziel-Tageslimit | Wirkung |
+| --- | ---: | --- |
+| Places (New): GetPlaceRequest | **0** | Einzel-Details bleiben gesperrt |
+| Places (New): SearchTextRequest | **20** | nur getrennte serverseitige Identitätsprüfung bei bestätigter freier Restmenge |
+| Places (New): PhotoMedia | **0** | öffentliche App verwendet einen direkten Maps-Fotolink |
+| UI-Kit Standard Query | **250** | gemeinsame Quote für Katalogratings und Profilwidgets |
+| UI-Kit Advanced | **0** | nicht verwendet und gesperrt |
+| UI-Kit Sessions | **0** | nicht verwendet und gesperrt |
+| Maps JavaScript: Map loads | **0** | keine eingebetteten Karten; direkte Maps-/Routenlinks |
 
-Frische persistierte GCP-Readbacks am **11.10.2026 UTC** bestätigen Maps um
-**01:07:21**, UI-Kit um **01:07:43** und Places (New) um **01:10:06** mit diesen
-Werten, jeweils nach angekündigter Propagationszeit. Diese Konfigurationsnachweise
-sind keine Live-SDK-Probe oder globale Geldobergrenze. Andere Billing-Verbraucher
-und SKU-/Quota-Zuordnung bleiben zu prüfen; Minutenquoten sind kein Monatsbudget.
-Die GetPlace-Sperre ist auch für SDK-Einzelratings vorgesehen, deren tatsächliche
-Enforcement-Zuordnung wurde ohne potenziell kostenpflichtige Live-Probe nicht
-bestätigt. Standard-UI-Kit nutzt eigene Quoten: Seine zugrunde liegenden Places-/
-Geocoding-Anfragen verbrauchen laut amtlicher Dokumentation keine entsprechenden
-Projektquoten. GetPlace 0 ist deshalb keine belegte Abschaltung des UI-Kit oder
-eine nachgewiesene Gesamtkostensperre.
+Der Browser-Key erhält ausschließlich **Maps JavaScript API und Places UI Kit API**
+und genau `https://riparim.com/*`. **Places API (New) wird aus diesem Key entfernt**:
+Das sperrt den bisherigen Einzel-Details-Pfad unabhängig von seiner ungeprüften
+SDK-GetPlace-Quotenzuordnung. Der amtliche UI-Kit-Setupvertrag benötigt Maps
+JavaScript und UI Kit; `PlaceDetailsPlaceRequestElement.place` akzeptiert einen
+`Place`-Identitätsgegenstand oder eine ID. Das Erzeugen von `Place({id,
+requestedLanguage})` lädt keine Details; `fetchFields` wird nicht aufgerufen.
+Standard-Widgets verwenden eigene Quoten; laut Google werden deren zugrunde
+liegende Places-/Geocoding-Abfragen nicht gegen die jeweiligen Projektquoten
+gezählt. Die GetPlace- und Map-loads-Sperren verhindern den Standard-Baustein deshalb
+nicht. Pflichtinhalte und Google-Attribution bleiben vollständig im nativen Widget.
 
-Der produktive Browser-Key ist per ausschließlich internem Hashvergleich dem
-GCP-Browser-Key zugeordnet. Nach Entfernen der sechs Loopback-/Legacy-Referrer
-war nur `https://riparim.com/*` erlaubt. Wegen der ungeprüften SDK-Quotenzuordnung
-und des Auftrags ohne Zusatzkosten ist er nun **vorläufig pausiert**: Der einzige
-Website-Referrer ist **`https://riparim-google-paused.invalid/*`**, weiterhin nur
-Maps JavaScript API, Places API (New) und Places UI Kit API erlaubt. Speichern
-am **11.10.2026 01:11:45 UTC**, frische Navigation von der Credentials-Liste und
-persistierter Readback um **01:12:07 UTC** bestätigen diesen Zustand. GCP nennt
-bis zu fünf Minuten Propagation; eine Kontrolle ab 01:16:45 UTC ist vom
-Konfigurationsbeleg getrennt zu bewerten. Es wurde kein Live-SDK-Sperrnachweis
-durch eine potenziell kostenpflichtige Probe erhoben.
+Das Schweizer Kontopreismodell aus #96 hat 10.000 freie Standard-UI-Kit-Ereignisse
+pro Monat. 250 pro Tag ergeben selbst über 31 volle Tage höchstens 7750 zusätzliche
+Standard-Queries dieses Projekts. Der frisch gelesene Billingbericht vom
+11.10.2026 08:42:27 UTC meldet 38 Standard-UI-Kit-Ereignisse mit 0 CHF,
+also 9962 Einheiten gegenüber der dokumentierten freien Kontostufe. Konservativ
+38 + 22 weitere Tagesfenster × 250 = 5538 Standard-Ereignisse im laufenden Monat.
+Dies ist ein Kontrollmodell, keine Live-Nachherabrechnung. Derselbe Bericht weist
+1261 Enterprise-Ereignisse mit 4,34 CHF aus; diese historischen Kosten und der
+Billingnachlauf beweisen keinen kostenlosen Enterprise-Rückweg. Bereits
+verbrauchte, verspätet gemeldete und
+andere gemeinsame Billing-Verbraucher müssen vor Freigabe separat berücksichtigt
+werden. Kein anderer Projekt-Key darf die Quote erhöhen oder einen kostenpflichtigen
+Ausweichpfad öffnen. Eine Tagesquote ist keine globale Geldobergrenze und kein
+Monatsbudget; bei unbestätigter kostenloser Restmenge bleibt die Referrerpause.
+Tagesreset-Zeitzone und Reporting-Verzug sind beim Provider zu prüfen.
 
-Damit wird der reguläre Produktionsbrowserpfad unabhängig von der unklaren
-GetPlace-SDK-Zuordnung gesperrt: Google-Sterne, Öffnungszeiten, Rezensionen,
-Fotos und Widgets sind vorläufig nicht verfügbar. Eigene Profile/Bewertungen
-und direkte Maps-/Routenlinks bleiben verfügbar. Die Runtime-Schlüssel sind
-unverändert, `/api/google-places` bleibt `enabled:true`; dies ist eine Provider-
-Referrerpause, keine Runtime-Konfigabschaltung. Bereits offene Anzeigen und
-Billing-Nachlauf bleiben Grenzen; eine Referrerregel ist keine globale Geldgrenze.
-Der getrennte Server-Key erlaubt nur Places API (New), ohne unbelegte feste
-Cloudflare-Ausgangs-IP; sein Wert bleibt ausschließlich im Runtime-Secret.
-Budgetliste leer: keine Budgetwarnung/automatische Maps-Kostensperre. Die aktuell
-angebotene GCP-Ausgabenobergrenze unterstützt ausschließlich Cloud Run,
-Cloud Run Functions, Gemini API und Vertex AI; Maps/Places waren nicht auswählbar.
-Der nur inspizierte Entwurf wurde abgebrochen. Keine Budget-/Alert-Neuanlage,
-automatischen E-Mails oder neuen Benachrichtigungsdienste.
+Der getrennte Server-Key bleibt auf Places API (New) beschränkt, ohne behauptete
+feste Cloudflare-Ausgangs-IP. Öffentliche bestätigte Identitätsrouten starten keine
+neue Provider-Suche. Recherche/Neuzuordnung darf die serverseitige Suche nur mit
+belegtem kostenlosem Restkontingent verwenden; sonst offizielle Maps-Oberfläche
+oder Rückstellung. Keine geheimen Werte, echte Kontodetails oder Google-Inhalte
+werden in Git, D1, R2 oder Browser Storage übertragen. Historische Google-
+Momentaufnahmen bleiben unverändert und werden nicht als aktuelle Werte angezeigt.
 
 ### Prüfschritte und Rückweg
 
@@ -265,16 +251,16 @@ automatischen E-Mails oder neuen Benachrichtigungsdienste.
    wirksame Methoden-/Tages-/Minutenquoten und API-/Referrer-Beschränkungen lesen.
    UI-Kit über IAM Quotas mit `placewidgets.googleapis.com` prüfen. Das App-Limit
    **100/UTC-Tag** betrifft nur Identitätssuche und ergänzende Land-Details;
-   Browserratings, Widgets und Bilder fallen nicht darunter. Vor einer Änderung
+   Standard-Widgets fallen nicht darunter; individuelle Browserratings und Bilder sind entfernt. Vor einer Änderung
    alten Wert, Soll, kostenlose Restmenge und Auswirkungen festhalten. Das
    [konservative Restmengenmodell](google-places-cost-audit-2026-10-11.md#begrenzungsmodell-und-offene-kontrollen)
    ist keine Rechnung oder Gesamtgeldgrenze. Der Warnweg ist **tägliche manuelle
-   Billingprüfung** gegenüber zuletzt belegten 2,73 CHF und den relevanten SKUs.
+   Billingprüfung** gegenüber zuletzt belegten 4,34 CHF und den relevanten SKUs.
    Manuelle Warnschwellen: **50/80/100 %** der bestätigten freien SKU-Menge;
    Enterprise Details/Text Search Enterprise/Fotos jeweils **500/800/1000**,
    Standard-UI-Kit **5000/8000/10000**. Bei 80 % Restmenge/Verzug und Tagesgrenzen
    prüfen, bei 100 % den betreffenden API-Pfad pausieren. Enterprise Details
-   liegt mit 1164 bereits darüber; die Browserpause ist umgesetzt. Diese
+   liegt mit 1261 bereits darüber; dieser alte Pfad bleibt gesperrt. Diese
    Beobachtungsgrenzen sind keine eingeschalteten Budgetalarme oder Geldbudgets.
    Ein Anstieg erfordert Prüfung von Ereignisdatum/Reporting-Verzug sowie Quoten/
    fremden Verbrauchern und gegebenenfalls die geprüfte Abschaltung. Ein
@@ -287,26 +273,33 @@ automatischen E-Mails oder neuen Benachrichtigungsdienste.
    in Git/Logs schreiben. Dies deaktiviert auch neue Identitätsprüfungen für
    Veröffentlichungen. Browser behalten Konfiguration/SDK bis zum Neuladen;
    die Runtime-Abschaltung beendet keine bereits offenen SDK-Instanzen.
-4. **Wiederherstellung:** Die Browserpause nur manuell auf exakt
-   `https://riparim.com/*` aufheben: zuvor kostenlose Restmenge und belastbaren
-   SDK-Quotenvertrag oder einen anderen bestätigten kostenlosen Anzeigeweg
-   nachweisen. Die sechs alten Dev-/Legacy-Referrer bleiben entfernt. Keine
-   automatische Aufhebung. Nach erneuter Konto-/Freimengen-/Propagationsprüfung
-   gegebenenfalls ursprüngliches Secret bzw. gezielt geprüfte Quoten zurücksetzen;
-   hohe Vorherlimits aus dem Prüfbericht sind kein pauschaler Rücksetzauftrag.
-   Die GetPlace-Sperre wird auch beim Monatswechsel nicht automatisch aufgehoben.
-   Nach SDK-Autorisierungsfehlern ist nach Wiederfreigabe bewusstes Neuladen
-   erforderlich; die App startet keine automatische Retryschleife. Neue
-   Browserinstanz: zuerst eigenes Verzeichnis/eigene Bewertung und direkte
-   Maps-/Routenlinks ohne Providerprobe prüfen. Nur mit bestätigter kostenloser
-   Restmenge einen sichtbaren Bereich als begrenzte Live-Validierung öffnen.
-   App-Veröffentlichungen nur als geprüfter Main-Release gemäß `docs/releases.md`.
+4. **Wiederherstellung mit Standard-Widgets:** Vor Freigabe den vollständigen
+   geprüften Main-Release kontrollieren: keine produktiven `fetchFields`- oder
+   REST-Fotoabrufe. Aktuelles Billing einschließlich gemeinsam genutzter
+   Kontofreimenge prüfen. Tagesgrenzen gemäß obiger Tabelle speichern und frisch
+   lesen. Browser-Key nur Maps JavaScript und UI Kit zuordnen, dann exakt
+   `https://riparim.com/*` freigeben; die sechs alten Dev-/Legacy-Referrer bleiben
+   entfernt. Bis zu fünf Minuten Providerpropagation abwarten, erneut lesen und
+   mit einer neuen Browserinstanz höchstens einen sichtbaren Bereich innerhalb
+   der bestätigten freien Quote prüfen. Nach SDK-Autorisierungsfehlern bewusst
+   neu laden; keine automatische Retryschleife. Keine Paid-Tarife, Abonnements,
+   Budget-/Alertdienste oder automatische Nachrichten einrichten.
+5. **Rückweg:** Bei fehlender kostenloser Restmenge, unerwartetem SKU-Verbrauch
+   oder ungeklärter Quotenwirkung den Browser-Referrer wieder auf exakt
+   `https://riparim-google-paused.invalid/*` setzen. Niedrige Methodenquoten und
+   Ausschluss von Places (New) im Browser-Key beibehalten. GetPlace und Fotos
+   werden auch bei Monatswechsel nicht automatisch wieder freigegeben.
+   Eigene Profile/Bewertungen und direkte Maps-/Routen-/Fotolinks zuerst prüfen;
+   eine potenziell kostenpflichtige Providerprobe ist kein Abschaltnachweis.
+   Änderungen/Readbacks getrennt von tatsächlichem Live- und Billingnachweis
+   dokumentieren. Veröffentlichung nur als geprüfter Main-Release nach
+   `docs/releases.md`.
 
 Google-Ausfälle dürfen eigene Profile/Bewertungen und bestätigte Maps-/Routenlinks
 nicht unterbrechen. Die App zeigt Ladefehler statt null Google-Bewertungen und
 startet im selben Bereich keine automatische Retryschleife; neue Navigation oder
 explizite Aktualisierung kann neu anfordern. Die isolierten DE/SQ/EN-Fixtures
-prüfen `enabled:false`, HTTP 429, Identity-/Foto-Timeouts und Widget-Timeouts ohne
+prüfen `enabled:false`, HTTP 429, Identitäts-/Widget-Timeouts ohne
 echte Providerverbindungen. API-Recherche nur mit belegtem kostenlosen
 Restkontingent, sonst offizielle Maps-Oberfläche oder Rückstellung; keine Betriebe
 kontaktieren. Dauerhaft bleiben eigene/unabhängig belegte Geschäftsdaten, Place IDs

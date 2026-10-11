@@ -63,19 +63,8 @@ assert.equal(content.workshopSelectionMatches({...workshop,brands:[]},{brand:'Vo
 assert.equal(content.workshopSelectionMatches({...workshop,brands:['Alle Marken']},{brand:'Volvo',service:null,vehicle:null}).brand,true);
 assert(!content.groupWorkshopServices({services:['Diagnose & Elektronik'],serviceDetails:[]}).some(g=>g.title==='Motor & Getriebe'),'service categories are not invented');
 
-const nativeFetch=globalThis.fetch,requests=[];
-globalThis.fetch=async(url,options)=>{requests.push({url,options});await Promise.resolve();return new Response(JSON.stringify(response),{status:200});};
-try{
- const [a,b]=await Promise.all([browser.currentGooglePhotos(placeId,'browser-fixture-key'),browser.currentGooglePhotos(placeId,'browser-fixture-key')]);
- assert.equal(requests.length,1,'concurrent profile consumers share the same live request');assert.equal(a,b);
- assert.equal(new URL(requests[0].url).pathname,`/v1/places/${placeId}`);
- assert.equal(requests[0].options.headers['X-Goog-Api-Key'],'browser-fixture-key');
- assert.equal(requests[0].options.headers['X-Goog-FieldMask'],'id,photos,attributions','photos do not request rating, opening hours, location or Pro maps URI');
- assert.equal(requests[0].options.credentials,'omit');assert.equal(requests[0].options.cache,'no-store');
- await browser.currentGooglePhotos(placeId,'browser-fixture-key');assert.equal(requests.length,2,'Google content is not kept in a persistent response cache');
- globalThis.fetch=async()=>new Response('{}',{status:503});await assert.rejects(browser.currentGooglePhotos(placeId,'browser-fixture-key'),/unavailable/);
- globalThis.fetch=async()=>new Response(JSON.stringify({...response,id:'ChIJOtherFixture'}));await assert.rejects(browser.currentGooglePhotos(placeId,'browser-fixture-key'),/identity/);
-}finally{globalThis.fetch=nativeFetch;}
+assert.equal(browser.currentGoogleRating,undefined,'profile cannot start an Enterprise rating request');
+assert.equal(browser.currentGooglePhotos,undefined,'profile cannot start REST photo metadata or media requests');
 const nativeWindow=globalThis.window,maps=[],markers=[];
 class FakeMap{constructor(element,options){maps.push({element,options,map:this});}}
 class FakeMarker{constructor(options){Object.assign(this,options);markers.push(this);}}
@@ -96,15 +85,15 @@ try{
 }finally{if(nativeWindow===undefined)delete globalThis.window;else globalThis.window=nativeWindow;}
 
 const render=(component,props)=>renderToStaticMarkup(React.createElement(I18nProvider,{locale:'de',messages:getMessages('de',['common','public'])},React.createElement(component,props)));
-const identity={placeId,browserKey:'browser-fixture-key'},mapsUrl=links.workshopMapsUrl(workshop);
+const identity={placeId,browserKey:'browser-fixture-key'};
 const photoMarkup=render(details.WorkshopPhotos,{name:workshop.name,profile,identity,status:'ready'});
 assert(photoMarkup.includes('<figcaption')&&photoMarkup.includes('Fixture Photographer')&&photoMarkup.includes('https://example.test/photographer')&&photoMarkup.includes('Google Maps')&&photoMarkup.includes('aria-haspopup="dialog"'),'in-profile photo dialogs retain visible Google and author attribution');
 assert(!photoMarkup.includes('wrongWorkshop'));
 assert.equal(render(details.WorkshopPhotos,{name:workshop.name,profile:{...profile,photos:[]},identity,status:'ready'}),'','a photo-less business does not receive a symbolic photo');
-const zeroMarkup=render(ratings.WorkshopRatings,{workshop,googleState:{live:{...profile.rating,rating:null,count:0},status:'ready'}});
-assert(zeroMarkup.includes('Noch keine Google-Rezensionen')&&!zeroMarkup.includes('4,1'),'old Google snapshots are never a fallback');
-const failedMarkup=render(ratings.WorkshopRatings,{workshop,googleState:{live:null,status:'unavailable'}});
-assert(failedMarkup.includes('Google konnte nicht geladen werden')&&!failedMarkup.includes('Noch keine Google-Rezensionen'));
+const ownMarkup=render(ratings.WorkshopRatings,{workshop,showGoogle:false});
+assert(!ownMarkup.includes('Google')&&!ownMarkup.includes('4,1'),'own rating rendering never uses a historical Google snapshot');
+const photoLink=render(details.WorkshopMapsPhotos,{workshop});assert(photoLink.includes('Fotos auf Google Maps ansehen')&&photoLink.includes('query_place_id'),'photos use the confirmed free Maps link');
+assert(!photoLink.includes('<img'),'the public photo display starts no media resource request');
 const failedDetails=render(reviews.GooglePlaceReviews,{workshop,identity:null,status:'unavailable'});
 assert(failedDetails.includes('Google-Angaben konnten nicht geladen werden')&&!failedDetails.includes('Noch keine Google-Rezensionen'),'provider failures are distinct from native widget empty states');
 const props={workshop,directory:[workshop],reviews:[],reviewError:'',signedIn:false,account:null,isAdmin:false};

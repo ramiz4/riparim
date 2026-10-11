@@ -17,16 +17,8 @@ for(const locale of ['de','sq','en']){
  assert.deepEqual(metadata.alternates.languages,{de:'https://example.test/werkstaetten',sq:'https://example.test/sq/werkstaetten',en:'https://example.test/en/werkstaetten','x-default':'https://example.test/werkstaetten'});
 }
 const browser=await load('lib/google-maps-browser.ts');
-const nativeFetch=globalThis.fetch,requests=[];
-let release;const gate=new Promise(resolve=>{release=resolve;});
-globalThis.fetch=async(url,options)=>{requests.push({url,options});await gate;return new Response(JSON.stringify({id:'ChIJFixture'}));};
-try{
- const pending=[browser.currentGooglePhotos('ChIJFixture','fixture-key','de'),browser.currentGooglePhotos('ChIJFixture','fixture-key','de'),browser.currentGooglePhotos('ChIJFixture','fixture-key','sq'),browser.currentGooglePhotos('ChIJFixture','fixture-key','en')];
- await Promise.resolve();
- assert.equal(requests.length,3,'provider requests deduplicate by confirmed place AND provider locale');
- release();await Promise.all(pending);
- assert.deepEqual(requests.map(r=>new URL(r.url).searchParams.get('languageCode')).sort(),['de','en','sq']);
-}finally{release();globalThis.fetch=nativeFetch;}
+assert.equal(browser.currentGoogleRating,undefined,'individual rating requests are absent from the public browser API');
+assert.equal(browser.currentGooglePhotos,undefined,'photo metadata requests are absent from the public browser API');
 
 for(const [query,expected] of [[{},false],[{besuche:'0'},false],[{einreichung:''},false],[{nachweis:'alt'},false],[{besuche:['0','1']},true],[{einreichung:'private-submission'},true],[{nachweis:'neu'},true]])assert.equal(seo.isPrivateLandingMode(query),expected);
 for(const privatePath of ['/anmelden','/registrieren','/einstellungen','/betrieb','/verwaltung','/verwaltung/benutzer']){
