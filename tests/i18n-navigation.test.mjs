@@ -19,6 +19,8 @@ assert.equal(safeReturnPath('//evil.example/private'), '/?besuche=1');
 assert.equal(profileSearchHref('/sq/werkstaetten?sprache=sq&ort=prizren',[]),'/sq/werkstaetten?ort=prizren&sprache=sq','Catalogue return targets retain locale and canonical filter values');
 for(const locale of ['de','sq','en']){
  const prefix=locale==='de'?'':'/'+locale;
+ assert.equal(languageSwitchHref('/betrieb?werkstatt=fixture-workshop',locale),prefix+'/betrieb','The overview no longer carries a workshop claim target');
+ assert.equal(languageSwitchHref('/anmelden?weiter='+encodeURIComponent('/betrieb?werkstatt=fixture-workshop'),locale),prefix+'/anmelden?weiter='+encodeURIComponent(prefix+'/betrieb'),'Overview auth navigation discards unsupported workshop parameters');
  assert.equal(languageSwitchHref('/betrieb/beanspruchen?werkstatt=fixture-workshop&evidence=private',locale),prefix+'/betrieb/beanspruchen?werkstatt=fixture-workshop');
  assert.equal(languageSwitchHref('/betrieb/beanspruchen?werkstatt=fixture-workshop&werkstatt=other',locale),prefix+'/betrieb/beanspruchen');
  assert.equal(languageSwitchHref('/anmelden?weiter='+encodeURIComponent('/betrieb/beanspruchen?werkstatt=fixture-workshop'),locale),prefix+'/anmelden?weiter='+encodeURIComponent(prefix+'/betrieb/beanspruchen?werkstatt=fixture-workshop'));

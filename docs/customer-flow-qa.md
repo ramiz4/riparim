@@ -488,8 +488,7 @@ ausschließlich Nachweistext plus optionalen privaten Upload. Nach erfolgreicher
 Einreichung ersetzt eine Bestätigung das Formular und verlinkt „Mein Betrieb“.
 Es gibt keine automatische Rückleitung und keinen eingebetteten Übersichtsteil.
 
-Alte `/betrieb?werkstatt=…`-Links leiten mit Sprache und Ziel zur Antragsseite
-weiter. Anmeldung und Sprachwechsel behalten die neue Seite mit eindeutigem
+Anmeldung und Sprachwechsel behalten die Antragsseite mit eindeutigem
 Werkstattziel bei. Mehrdeutige, fehlende oder nicht veröffentlichte Werkstätten
 zeigen kein Formular für ein anderes Profil. Ein Katalogfehler bietet einen
 gezielten Wiederholungslink. Beide Seiten bleiben `noindex,nofollow`; das
@@ -497,8 +496,8 @@ Benutzermenü führt weiterhin zur Übersicht. APIs, private Dokumente, Besitzre
 und manuelle Freigaben verwenden die bestehenden Verträge; es gibt keine neue
 Migration oder Providerkonfiguration.
 
-`tests/business-pages.test.mjs` prüft die tatsächlichen Seitendokumente und
-Legacy-Weiterleitungen in DE/SQ/EN, die getrennten Titel, Gast-Anmelderücksprünge,
+`tests/business-pages.test.mjs` prüft die tatsächlichen Seitendokumente
+in DE/SQ/EN, die getrennten Titel, Gast-Anmelderücksprünge,
 ungültige/mehrdeutige/unveröffentlichte Ziele und den Katalogfehler.
 `tests/business-claim-ui.test.mjs` prüft den beschrifteten Upload, Multipartdaten,
 erhaltene private Eingaben, gesperrte konkurrierende Einreichungen sowie die

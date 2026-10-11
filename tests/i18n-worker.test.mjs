@@ -95,8 +95,8 @@ await withWorkerRuntime({modules,modulesRoot:resolve('dist/server'),compatibilit
  }
  for(const locale of ['de','sq','en']){
   const prefix=locale==='de'?'':'/'+locale,claimId='ahp-volkswagen-prizren';
-  const legacy=await dispatchFetch('https://riparim.test'+prefix+'/betrieb?werkstatt='+claimId,{redirect:'manual'});
-  assert.equal(legacy.status,307);assert.equal(new URL(legacy.headers.get('Location'),'https://riparim.test').pathname,prefix+'/betrieb/beanspruchen');assert.equal(new URL(legacy.headers.get('Location'),'https://riparim.test').search,'?werkstatt='+claimId);
+  const overview=await dispatchFetch('https://riparim.test'+prefix+'/betrieb?werkstatt='+claimId,{redirect:'manual'});
+  assert.equal(overview.status,200,'Unsupported workshop parameters do not redirect the overview');assert.equal(overview.headers.get('Location'),null);assert((await overview.text()).includes(encodeURIComponent(prefix+'/betrieb')),'Guest overview login returns to the overview');
   const claim=await dispatchFetch('https://riparim.test'+prefix+'/betrieb/beanspruchen?werkstatt='+claimId),html=await claim.text();
   assert.equal(claim.status,200);assert(html.includes(encodeURIComponent(prefix+'/betrieb/beanspruchen?werkstatt='+claimId)),'Built guest claim preserves workshop and locale through sign-in');
  }
