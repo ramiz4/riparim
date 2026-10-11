@@ -91,7 +91,7 @@ Die damals gezählten Aufrufe waren SDK-`fetchFields`-Anfragen, keine Kostenmess
 Eigene Riparim-Bewertungen beziehungsweise ihr leerer Hinweis stehen immer vor Google. Der Google-Host bleibt dadurch auch während des Nachladens an derselben DOM-Position und wird nicht verschoben oder erneut verbunden; seine eigene Panelsichtbarkeit steuert weiterhin den Abruf. Daraus wird keine Aussage über Googles internes Abrechnungsverhalten abgeleitet.
 
 Das Profil verwendet zwei getrennte Advanced-UI-Kit-Bausteine: Im Profilkopf
-zeigt `gmp-advanced-place-details-compact` nur `gmp-place-rating`,
+zeigt `gmp-advanced-place-details` nur `gmp-place-rating`,
 `gmp-place-opening-hours` und `gmp-place-attribution`. Unter den eigenen
 Rezensionen zeigt `gmp-advanced-place-details` nur `gmp-place-reviews` und
 `gmp-place-attribution`. Beide verwenden dieselbe bestätigte Identität und die
@@ -118,7 +118,11 @@ und normale Profilzustandsänderungen
 bewahren dieselbe Widgetinstanz; Farben und Schriften werden ausschließlich
 über die offiziellen CSS-Eigenschaften und `color-scheme` geändert. Der
 Rezensionenbaustein erhält höchstens 400 Pixel Breite mit interner Scrollfunktion;
-der kompakte Profilkopf folgt seiner Inhaltshöhe.
+der Profilkopf erhält 180 Pixel Höhe und dieselbe interne Scrollfunktion für
+ausgeklappte Wochenzeiten. Der vollständige Baustein ist nötig, weil
+`gmp-place-opening-hours` laut Inhaltsreferenz nur dort unterstützt ist; das
+kompakte Beispiel in Googles Advanced-Anleitung zeigt diese Zeiten im Live-SDK
+nicht an. Katalogratings behalten den kompakten Baustein mit Inhaltshöhe.
 Die Google- und Autorenattribution des Bausteins bleibt vollständig erhalten.
 Das Profil verwendet keine Zusammenfassungen oder `all-content`.
 
