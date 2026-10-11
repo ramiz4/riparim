@@ -71,9 +71,12 @@ nur innerhalb von 23 Stunden; der Provider hält die Idempotenzschlüssel 24
 Stunden. Bei SMTP gibt es diese Provider-Idempotenz **nicht**. Die dauerhafte
 Markierung `smtp_in_flight=1` wird vor Verbindungsbeginn gesetzt:
 
-- Eine vollständige negative SMTP-Antwort beweist Nichtannahme. 4xx erhalten
-  Backoff; 5xx bleiben für eine kontrollierte Reparatur blockiert. Nur eine
-  erfolgreich gespeicherte Nichtannahme löscht den Marker.
+- Nur vom SMTP-Client eindeutig verarbeitete AUTH-/Envelope-/DATA-Ablehnungen
+  (`EAUTH`, `EENVELOPE`, `EMESSAGE` mit 4xx/5xx) beweisen Nichtannahme. 4xx
+  erhalten Backoff; 5xx bleiben für kontrollierte Reparatur blockiert. Nur eine
+  erfolgreich gespeicherte Nichtannahme löscht den Marker. Connection-, Socket-,
+  Timeout- und Protocolfehler bleiben `unknown`, auch mit `responseCode`: Eine
+  unterminierte oder unvollständige Mehrzeilenantwort beweist keine Ablehnung.
 - Verbindungsabbruch, Timeout, Prozessverlust, abgelaufene Lease und verlorene
   Erfolgs-/Start-Acknowledgements ergeben `unknown`. Auch administratives
   `force` darf daraus keine neue Sendung machen.
@@ -106,11 +109,13 @@ zum ungeprüften Freischalten solcher Ereignisse.
    zurücksetzen, um einen Retry zu erzwingen.
 
 Die reguläre Testsuite prüft tatsächliches lokales SMTP, negative RCPT-/DATA-
-Antworten, Socketverlust nach DATA, Datenbank-Ack-Verlust, Konkurrenz und Lease-
+Antworten, unterminierte 4xx/5xx- und Mehrzeilenantworten, Socketverlust nach
+DATA, Datenbank-Ack-Verlust, Konkurrenz und Lease-
 Verlust sowie TLS-Authentifizierung mit einer isolierten CA, Ablehnung eines
 unvertrauten Zertifikats und Credentialzielbindung. Alle Testdaten sind fiktiv;
 es werden keine echten E-Mails gesendet und keine Live-Provider verändert.
 
 Primäre Verträge: [Nodemailer SMTP](https://nodemailer.com/smtp),
-[SMTPConnection](https://nodemailer.com/extras/smtp-connection) und
+[SMTPConnection](https://nodemailer.com/extras/smtp-connection),
+[Nodemailer-Fehlervertrag](https://nodemailer.com/errors) und
 [Resend Idempotency](https://resend.com/docs/dashboard/emails/idempotency-keys).

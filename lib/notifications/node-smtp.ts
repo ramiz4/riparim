@@ -23,15 +23,18 @@ export async function sendSmtp(config:SmtpConfiguration,body:string,wire:string|
    if(settled)return;settled=true;clearTimeout(timer);connection.close();
    if(!error){resolve(id);return;}
    if(error instanceof DeliveryError){reject(error);return;}
-   // A complete negative SMTP response proves non-acceptance. Socket errors
-   // (including setup) are conservatively uncertain after the durable marker.
-   const response=(error as {responseCode?:unknown})?.responseCode;
-   reject(typeof response==="number"&&response>=400&&response<600?new DeliveryError(response<500?"provider_unavailable":"provider_rejected",response<500):new DeliveryError("delivery_uncertain",false,true));
+   // Nodemailer also attaches responseCode to unterminated socket replies.
+   // Only its AUTH/envelope/DATA rejection codes prove non-acceptance;
+   // connection, timeout and protocol errors must retain the durable marker.
+   const {code,responseCode:response}=error as {code?:unknown;responseCode?:unknown};
+   const rejected=typeof code==="string"&&["EAUTH","EENVELOPE","EMESSAGE"].includes(code);
+   reject(rejected&&typeof response==="number"&&response>=400&&response<600?new DeliveryError(response<500?"provider_unavailable":"provider_rejected",response<500):new DeliveryError("delivery_uncertain",false,true));
   }
   connection.on("error",finish);
   connection.on("end",()=>{if(!settled)finish(new DeliveryError("delivery_uncertain",false,true));});
   const send=()=>connection.send({from:senderAddress(payload.from),to:payload.to},Buffer.from(wire,"base64"),(error,result)=>finish(error??(result?.accepted.length===1?undefined:new DeliveryError("provider_rejected",false))));
-  connection.connect(()=>{
+  connection.connect(error=>{
+   if(error){finish(error);return;}
    if(!config.local&&!connection.secure){finish(new DeliveryError("delivery_uncertain",false,true));return;}
    if(config.user)connection.login({user:config.user,pass:config.pass},error=>error?finish(error):send());else send();
   });

@@ -7,10 +7,12 @@ import {build} from 'esbuild';
 
 // Only this loopback protocol fixture receives SMTP. No DNS or live email.
 let mode='success',started,release;
+const partialReplies={'partial-data-451':'451 partial response','partial-data-550':'550 partial response','partial-data-multiline':'451-continue\r\n451 partial response','partial-data-continuation':'451-continue\r\n','partial-data-421':'421 partial connection','closing-greeting-421':'421 closing connection\r\n','rejected-greeting-550':'550 rejected greeting\r\n','partial-greeting-451':'451 partial greeting','partial-greeting-550':'550 partial greeting'};
 const sockets=new Set(),messages=[],envelopes=[];let connections=0;
 const server=createServer(socket=>{
  connections++;sockets.add(socket);socket.on('close',()=>sockets.delete(socket));socket.on('error',()=>{});
  if(mode==='greeting-timeout')return;
+ if(mode.includes('greeting')){socket.end(partialReplies[mode]);return;}
  socket.write('220 fixture.example.test ESMTP\r\n');let buffer='',data=false,current=[];
  socket.on('data',chunk=>{
   buffer+=chunk.toString();let newline;
@@ -20,6 +22,7 @@ const server=createServer(socket=>{
     data=false;messages.push(current.join('\r\n')+'\r\n');current=[];
     const row=event();assert.equal(row.state,'sending');assert.equal(row.smtp_in_flight,1,'The SMTP start marker is durable before DATA');assert(row.payload&&row.wire_payload&&row.transport==='smtp');
     if(mode==='data-rejected'){socket.write('554 content rejected\r\n');continue;}
+    if(partialReplies[mode]){socket.end(partialReplies[mode]);continue;}
     if(mode==='disconnect'){socket.destroy();continue;}
     if(mode==='pause'){started?.();new Promise(resolve=>release=resolve).then(()=>socket.write('250 accepted\r\n'));continue;}
     socket.write('250 accepted\r\n');continue;
@@ -82,6 +85,12 @@ try{
  check(JSON.parse(frozenBody).from==='Riparim <no-reply@auth.example.test>'&&envelopes.at(-1).from==='MAIL FROM:<no-reply@auth.example.test>','The original sender bytes and envelope remain pinned');globalThis.fixtureEnv.TRANSACTIONAL_EMAIL_FROM='Riparim <no-reply@auth.example.test>';
  enqueue();mode='rejected';await run();check(event().state==='blocked'&&event().last_error==='provider_rejected'&&event().smtp_in_flight===0,'SMTP 550 is an explicit non-acceptance visible for repair');mode='success';await run(true);check(event().state==='sent','Only known non-acceptance can be explicitly retried');
  enqueue();mode='data-rejected';await run();check(event().state==='blocked'&&event().smtp_in_flight===0&&event().last_error==='provider_rejected','An explicit negative final DATA response proves non-acceptance after bytes');mode='success';await run(true);check(event().state==='sent','A final DATA rejection permits an explicit repair retry of frozen bytes');
+ for(const responseMode of Object.keys(partialReplies)){
+  enqueue();mode=responseMode;const beforePartial=connections,beforeBytes=messages.length;await run();const first=event();
+  mode='success';await run(true);
+  check(first.state==='unknown'&&first.smtp_in_flight===1&&!outbox.canRetryNotification(first),'Partial and connection responses remain uncertain despite an SMTP-looking status: '+responseMode);
+  check(event().state==='unknown'&&connections===beforePartial+1&&messages.length===beforeBytes+(responseMode.includes('greeting')?0:1),'Force never resends after a partial reply or connection failure: '+responseMode);
+ }
  enqueue();mode='disconnect';const beforeDisconnect=messages.length;await run();check(event().state==='unknown'&&event().last_error==='delivery_uncertain'&&messages.length===beforeDisconnect+1,'Acceptance followed by socket loss is never automatically retried');
  const uncertain=event();mode='success';await run(true);check(event().state==='unknown'&&messages.length===beforeDisconnect+1&&!outbox.canRetryNotification(event()),'Force cannot resend an uncertain SMTP event');
  enqueue();failSuccess=true;const beforeSuccessLoss=messages.length;await run();check(event().state==='unknown'&&messages.length===beforeSuccessLoss+1,'A lost successful DB write after SMTP acceptance stays unknown');await run(true);check(messages.length===beforeSuccessLoss+1,'A lost successful write cannot be repaired by sending twice');
