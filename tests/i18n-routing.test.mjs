@@ -20,7 +20,16 @@ for(const enabled of [false,true]){
   if(enabled)assert.match(response.headers.get('Set-Cookie'),/fixture-session=renewed/,'Cookie refresh retains the rewrite');
  }
 }
-for(const path of ['/sq','/en/werkstaetten','/api/account','/auth/bestaetigen?token_hash=fixture','/signin-with-chatgpt','/callback','/__sites_connector_preview/invoke','/_next/test','/favicon.svg','/robots.txt','/sitemap.xml'])assert.equal((await proxy(request(path))).headers.get('x-middleware-rewrite'),null,path+' is not rewritten');
+for(const [path,identity] of [['/en/workshops','/en/werkstaetten'],['/sq/serviset','/sq/werkstaetten'],['/en/workshop/test-id','/en/werkstatt/test-id'],['/sq/servis/test-id','/sq/werkstatt/test-id'],['/en/login','/en/anmelden'],['/sq/biznesi/kerko-pronesine','/sq/betrieb/beanspruchen'],['/en/admin/users','/en/verwaltung/benutzer']]){
+ const response=await proxy(request(path+'?ort=prizren'));
+ assert.equal(response.headers.get('x-middleware-rewrite'),'https://riparim.com'+identity+'?ort=prizren','Translated browser paths resolve the existing page tree');
+ assert.match(response.headers.get('Set-Cookie'),/fixture-session=renewed/,'Session renewal preserves localized rewrites');
+}
+for(const [path,target] of [['/en/werkstaetten','/en/workshops'],['/sq/werkstatt/test-id','/sq/servis/test-id'],['/en/betrieb/beanspruchen','/en/business/claim'],['/sq/verwaltung/benutzer','/sq/administrimi/perdoruesit']]){
+ const response=await proxy(request(path+'?werkstatt=test-id'));
+ assert.equal(response.status,308);assert.equal(response.headers.get('Location'),'https://riparim.com'+target+'?werkstatt=test-id');
+}
+for(const path of ['/sq','/en','/api/account','/auth/bestaetigen?token_hash=fixture','/signin-with-chatgpt','/callback','/__sites_connector_preview/invoke','/_next/test','/favicon.svg','/robots.txt','/sitemap.xml'])assert.equal((await proxy(request(path))).headers.get('x-middleware-rewrite'),null,path+' is not rewritten');
 for(const path of ['/de','/de/werkstaetten?ort=prizren']){const response=await proxy(request(path));assert.equal(response.status,308);assert.equal(response.headers.get('Location'),'https://riparim.com'+(path==='/de'?'/':path.slice(3)));}
 for(const path of ['/sq/missing.html','/en/missing.txt','/sq/missing.svg','/en/missing.png','/fr/missing.png','/missing.html','/missing.png']){const response=await proxy(request(path));assert.equal(response.status,404,path+' cannot bypass locale-page404 via a dotted suffix');assert.equal(response.headers.get('X-Content-Type-Options'),'nosniff');}
 globalThis.fixtureDatabaseUnavailable=true;

@@ -1,3 +1,4 @@
+import {localizeHref} from '../scripts/lib/locale.mjs';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {mkdir,writeFile} from 'node:fs/promises';
@@ -16,22 +17,21 @@ const check=(value,label)=>{assert(value,label);passed++;};
 const props=(locale,query={})=>({params:Promise.resolve({locale}),searchParams:Promise.resolve(query)});
 function documentOf(locale,page){return new JSDOM(renderToStaticMarkup(createElement(I18nProvider,{locale,messages:getMessages(locale,['common'])},page))).window.document;}
 for(const locale of ['de','sq','en']){
- const prefix=locale==='de'?'':'/'+locale;
- check(isPagePath(prefix+'/betrieb')&&isPagePath(prefix+'/betrieb/beanspruchen'),'Both independent pages pass the locale route boundary');
+ check(isPagePath(localizeHref('/betrieb',locale))&&isPagePath(localizeHref('/betrieb/beanspruchen',locale)),'Both independent pages pass the locale route boundary');
  const metadata=await generateMetadata(props(locale));check(metadata.title===getMessages(locale).management.claimProfile+' · Riparim'&&metadata.robots.index===false&&metadata.robots.follow===false&&metadata.alternates===null,'Claim metadata has a distinct private localized title');
  for(const account of [null,{userId:'fixture-owner',displayName:'Fixture Member',email:'fixture@example.test',provider:'E-Mail'}]){
   globalThis.fixtureAccount=account;
   for(const query of [{werkstatt:'fixture-workshop'},{werkstatt:['fixture-workshop','other-workshop']},{werkstatt:'unknown'}]){
    const overview=documentOf(locale,await BusinessPage(props(locale,query)));
    check(overview.querySelector('main h1').textContent===getMessages(locale).management.myBusiness&&!overview.querySelector('main form'),'Workshop query parameters do not turn the business overview into a claim entry');
-   if(!account)check(overview.querySelector('main a').getAttribute('href')===prefix+'/anmelden?weiter='+encodeURIComponent(prefix+'/betrieb'),'Overview login never preserves workshop query parameters');
+   if(!account)check(overview.querySelector('main a').getAttribute('href')===localizeHref('/anmelden?weiter=',locale)+encodeURIComponent(localizeHref('/betrieb',locale)),'Overview login never preserves workshop query parameters');
   }
   let document=documentOf(locale,await BusinessPage(props(locale)));check(document.querySelector('main h1').textContent===getMessages(locale).management.myBusiness&&!document.querySelector('main form'),'The overview is its own document and never renders a claim form');
-  if(!account){const before=globalThis.catalogueReads;document=documentOf(locale,await ClaimPage(props(locale,{werkstatt:'fixture-workshop'})));check(document.querySelector('main h1').textContent===getMessages(locale).management.claimTitle&&!document.querySelector('form')&&globalThis.catalogueReads===before,'The guest claim has its own title and reads no account or catalogue details');check(document.querySelector('main a').getAttribute('href')===prefix+'/anmelden?weiter='+encodeURIComponent(prefix+'/betrieb/beanspruchen?werkstatt=fixture-workshop'),'Login preserves the exact claim page, workshop and locale');}
+  if(!account){const before=globalThis.catalogueReads;document=documentOf(locale,await ClaimPage(props(locale,{werkstatt:'fixture-workshop'})));check(document.querySelector('main h1').textContent===getMessages(locale).management.claimTitle&&!document.querySelector('form')&&globalThis.catalogueReads===before,'The guest claim has its own title and reads no account or catalogue details');check(document.querySelector('main a').getAttribute('href')===localizeHref('/anmelden?weiter=',locale)+encodeURIComponent(localizeHref('/betrieb/beanspruchen?werkstatt=fixture-workshop',locale)),'Login preserves the exact claim page, workshop and locale');}
   else{
    document=documentOf(locale,await ClaimPage(props(locale,{werkstatt:'fixture-workshop'})));check(document.querySelector('main h1').textContent===getMessages(locale).management.claimTitle&&document.querySelector('main h2').textContent==='Fiktive Werkstatt'&&document.querySelector('form'),'Authenticated claim documents render the fixed selected workshop and form');check(!document.body.textContent.includes('Another public workshop')&&!document.querySelector('.business-request'),'The claim contains no alternate workshop or business overview');
-   for(const target of [undefined,'unknown','draft-workshop',['fixture-workshop','other-workshop']]){document=documentOf(locale,await ClaimPage(props(locale,{werkstatt:target})));check(!document.querySelector('form')&&!document.body.textContent.includes('Private draft workshop')&&document.querySelector('main a[href="'+prefix+'/werkstaetten"]'),'Missing, unpublished and ambiguous targets never expose or select another workshop');}
-   globalThis.directoryFailure=true;document=documentOf(locale,await ClaimPage(props(locale,{werkstatt:'fixture-workshop'})));check(document.querySelector('[role=alert]')&&!document.querySelector('form')&&document.querySelector('main a').getAttribute('href')===prefix+'/betrieb/beanspruchen?werkstatt=fixture-workshop','Catalogue failure offers a retry preserving the selected claim target');globalThis.directoryFailure=false;
+   for(const target of [undefined,'unknown','draft-workshop',['fixture-workshop','other-workshop']]){document=documentOf(locale,await ClaimPage(props(locale,{werkstatt:target})));check(!document.querySelector('form')&&!document.body.textContent.includes('Private draft workshop')&&document.querySelector('main a[href="'+localizeHref('/werkstaetten',locale)+'"]'),'Missing, unpublished and ambiguous targets never expose or select another workshop');}
+   globalThis.directoryFailure=true;document=documentOf(locale,await ClaimPage(props(locale,{werkstatt:'fixture-workshop'})));check(document.querySelector('[role=alert]')&&!document.querySelector('form')&&document.querySelector('main a').getAttribute('href')===localizeHref('/betrieb/beanspruchen?werkstatt=fixture-workshop',locale),'Catalogue failure offers a retry preserving the selected claim target');globalThis.directoryFailure=false;
   }
  }
 }

@@ -1,3 +1,4 @@
+import {localizeHref} from '../scripts/lib/locale.mjs';
 import assert from 'node:assert/strict';
 import {readFile,readdir} from 'node:fs/promises';
 import {build} from 'esbuild';
@@ -32,7 +33,7 @@ try{
  assert(!payload.html.includes('Fixture Car'));passed++;
  assert.equal(payload.text,'');passed++;
  assert(payload.html.includes('lang="'+locale+'"'));passed++;
- const link=new URL(payload.html.match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));assert.equal(link.pathname,(locale==='de'?'':'/'+locale)+'/anmelden');passed++;
+ const link=new URL(payload.html.match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));assert.equal(link.pathname,localizeHref('/anmelden',locale));passed++;
  await runtime.dispatchFetch('http://127.0.0.1/cdn-cgi/handler/scheduled?cron=*+*+*+*+*');
  assert.equal((await db.prepare('SELECT COUNT(*) AS n FROM fixture_sends').first()).n,1);passed++;
 }finally{await runtime.dispose();}

@@ -1,5 +1,5 @@
 import {callbackLocale,localizedReturnPath} from "@/lib/auth/locale";
-import {localizeHref,stripLocalePrefix} from "@/lib/i18n/locale";
+import {localizeHref,pageIdentityPath} from "@/lib/i18n/locale";
 import {getAuthConfig,siteOrigin} from "@/lib/auth/config";
 import {authClient} from "@/lib/auth/client";
 import {getAppUser,recordGoogleSession,providerAccountId} from "@/app/auth";
@@ -45,7 +45,7 @@ export async function GET(request:Request){
    client=await authClient(c);
    const {data,error}=code?await client.auth.exchangeCodeForSession(code):await client.auth.verifyOtp({token_hash:token!,type:type as "signup"|"recovery"});
    if(!error&&data.user?.email_confirmed_at){
-    if(type==="recovery"||stripLocalePrefix(new URL(next,siteOrigin()).pathname)==="/passwort-neu")return redirectTo(next);
+    if(type==="recovery"||pageIdentityPath(new URL(next,siteOrigin()).pathname)==="/passwort-neu")return redirectTo(next);
     await client.auth.signOut({scope:"local"});
     return redirectTo(localizeHref(`/anmelden?hinweis=email-bestaetigt&weiter=${encodeURIComponent(next)}`,locale));
    }

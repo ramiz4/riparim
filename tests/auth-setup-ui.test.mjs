@@ -1,3 +1,4 @@
+import {localizeHref} from '../scripts/lib/locale.mjs';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {mkdir,writeFile} from 'node:fs/promises';
@@ -49,7 +50,7 @@ const screens=[
 try{
  for(const screen of screens){
   locale=screen.locale;config=null;loadMode='success';saveMode='success';requests.length=0;copied.length=0;await remount();
-  const copy=getMessages(locale).management,prefix=locale==='de'?'':'/'+locale;
+  const copy=getMessages(locale).management;
   assert.equal(document.querySelector('main h1').textContent,screen.title,'The current localized page title remains');
   assert.equal(document.querySelector('main h1+p').textContent,screen.subtitle,'The current localized subtitle remains');
   assert(!document.querySelector('main .eyebrow'),'The redundant account eyebrow stays absent in every locale');
@@ -85,7 +86,7 @@ try{
   assert.equal(form().querySelector('h2').textContent,copy.connectProject,'The current connection form remains localized');
   const url=form().querySelector('input[type="url"]'),key=form().querySelector('textarea');
   assert(url.required&&url.closest('label').textContent===copy.projectUrl&&key.required&&key.closest('label').textContent===copy.publishableKey,'Required fields keep current accessible labels');
-  assert.deepEqual([...form().querySelectorAll('.auth-preview-links a')].map(node=>[node.textContent,node.getAttribute('href')]),[[copy.previewLogin,prefix+'/anmelden'],[copy.previewRegistration,prefix+'/registrieren'],[copy.previewRecovery,prefix+'/passwort-vergessen']],'All localized customer previews keep their destinations');
+  assert.deepEqual([...form().querySelectorAll('.auth-preview-links a')].map(node=>[node.textContent,node.getAttribute('href')]),[[copy.previewLogin,localizeHref('/anmelden',locale)],[copy.previewRegistration,localizeHref('/registrieren',locale)],[copy.previewRecovery,localizeHref('/passwort-vergessen',locale)]],'All localized customer previews keep their destinations');
   await type(url,'https://fixture.supabase.co');await type(key,'sb_publishable_fixture');await submit();
   assert.deepEqual(requests.at(-1).body,{projectUrl:'https://fixture.supabase.co',publicKey:'sb_publishable_fixture',enabled:false,emailDeliveryConfirmed:false},'Draft submission preserves the four-field provider settings contract');
   assert.equal(form().querySelector('[role="status"]').textContent,copy.authDraftSaved,'Draft success is announced in the active locale');

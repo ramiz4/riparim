@@ -1,3 +1,4 @@
+import {localizeHref} from '../scripts/lib/locale.mjs';
 import assert from 'node:assert/strict';
 import {readFile,readdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
@@ -17,88 +18,91 @@ await withWorkerRuntime({modules,modulesRoot:resolve('dist/server'),compatibilit
  }));
  const draft=await db.prepare("SELECT id FROM workshops WHERE status='published' LIMIT 1").first();assert(draft,"isolated catalog has a workshop fixture");
  await db.prepare("UPDATE workshops SET status='draft' WHERE id=?").bind(draft.id).run();
- for(const locale of ["de","sq","en"]){const prefix=locale==="de"?"":`/${locale}`;const response=await dispatchFetch(`https://riparim.test${prefix}/werkstatt/${draft.id}`);assert.equal(response.status,404,"unpublished profile stays private in "+locale);const legacy=await dispatchFetch(`https://riparim.test${prefix||"/"}?nachweis=${draft.id}`,{redirect:"manual"});assert.equal(legacy.status,307);assert.equal(legacy.headers.get("Location"),`${prefix}/werkstaetten?bewerten=1`,"old links cannot reveal an unpublished workshop");}
+ for(const locale of ["de","sq","en"]){const prefix=locale==="de"?"":`/${locale}`;const response=await dispatchFetch(`https://riparim.test${localizeHref('/werkstatt/'+draft.id,locale)}`);assert.equal(response.status,404,"unpublished profile stays private in "+locale);const legacy=await dispatchFetch(`https://riparim.test${prefix||"/"}?nachweis=${draft.id}`,{redirect:"manual"});assert.equal(legacy.status,307);assert.equal(legacy.headers.get("Location"),`${localizeHref('/werkstaetten',locale)}?bewerten=1`,"old links cannot reveal an unpublished workshop");}
  await db.prepare("UPDATE workshops SET status='published' WHERE id=?").bind(draft.id).run();
  const published=await db.prepare("SELECT id FROM workshops WHERE status='published' LIMIT 1").first();assert(published);
- for(const locale of ["de","sq","en"]){const prefix=locale==="de"?"":`/${locale}`;const response=await dispatchFetch(`https://riparim.test${prefix}/werkstatt/${published.id}?suche=${encodeURIComponent(prefix+"/werkstaetten?ort=prizren&sprache=sq")}`);assert.equal(response.status,200);assert((await response.text()).includes(`data-workshop-id="${published.id}"`));}
+ for(const locale of ["de","sq","en"]){const response=await dispatchFetch(`https://riparim.test${localizeHref('/werkstatt/'+published.id,locale)}?suche=${encodeURIComponent(localizeHref("/werkstaetten?ort=prizren&sprache=sq",locale))}`);assert.equal(response.status,200);assert((await response.text()).includes(`data-workshop-id="${published.id}"`));}
  for(const locale of ['de','sq','en']){
   const prefix=locale==='de'?'':`/${locale}`;
   for(const identity of ['/', '/werkstaetten','/datenschutz',`/werkstatt/${published.id}`]){
-   const path=identity==='/'?prefix||'/':prefix+identity;
+   const path=identity==='/'?prefix||'/':localizeHref(identity,locale);
    const response=await dispatchFetch(`https://riparim.test${path}?q=private-secret&ort=prizren&token=fixture`);assert.equal(response.status,200);
    const dom=new JSDOM(await response.text());try{
     const doc=dom.window.document;assert.equal(doc.documentElement.lang,locale);assert(doc.title);
     assert.equal(doc.querySelector('link[rel="canonical"]').href,`https://riparim.test${path}`,'canonical contains clean localized page identity');
     const alternatives=Object.fromEntries([...doc.querySelectorAll('link[rel="alternate"][hreflang]')].map(link=>[link.hreflang,link.href]));
-    assert.deepEqual(alternatives,Object.fromEntries(['de','sq','en','x-default'].map(language=>[language,`https://riparim.test${language==='de'||language==='x-default'?'':`/${language}`}${identity==='/'?(language==='de'||language==='x-default'?'/':''):identity}`])),'all locales emit identical reciprocal sets');
+    assert.deepEqual(alternatives,Object.fromEntries(['de','sq','en','x-default'].map(language=>[language,'https://riparim.test'+localizeHref(identity,language==='x-default'?'de':language)])),'all locales emit identical reciprocal sets');
     assert(!JSON.stringify(alternatives).includes('private-secret'));
    }finally{dom.window.close();}
   }
+  const rsc=await dispatchFetch('https://riparim.test'+localizeHref('/werkstaetten',locale)+'?_rsc',{headers:{RSC:'1',Accept:'text/x-component'}});
+  assert.equal(rsc.status,200);assert.match(rsc.headers.get('Content-Type'),/text\/x-component/);assert((await rsc.text()).includes(locale),'Translated page RSC retains its request locale');
  }
  // Actual native D1, API and document SSR use the same current source revision.
  const translatedSource=canonical.workshops.find(w=>w.id===published.id),translatedEntry=overlay.workshops.find(w=>w.id===published.id);assert(translatedEntry);
  for(const locale of ['de','sq','en']){
-  const prefix=locale==='de'?'':`/${locale}`,payload=await(await dispatchFetch(`https://riparim.test/api/workshops?locale=${locale}`)).json();
+  const payload=await(await dispatchFetch(`https://riparim.test/api/workshops?locale=${locale}`)).json();
   assert(payload.workshops.every(w=>w.status==='published'));assert.deepEqual(Object.keys(payload.displayById).sort(),payload.workshops.map(w=>w.id).sort());
   const canonicalRow=payload.workshops.find(w=>w.id===published.id);assert.equal(canonicalRow.description,translatedSource.description,'public canonical record never becomes translated data');
   const display=payload.displayById[published.id];assert.equal(display.description,locale==='de'?translatedSource.description:translatedEntry[locale].description);assert.equal(display.fallback,undefined);
-  const profileResponse=await dispatchFetch(`https://riparim.test${prefix}/werkstatt/${published.id}`),profileDom=new JSDOM(await profileResponse.text());
+  const profileResponse=await dispatchFetch(`https://riparim.test${localizeHref('/werkstatt/'+published.id,locale)}`),profileDom=new JSDOM(await profileResponse.text());
   try{const doc=profileDom.window.document;assert.equal(doc.querySelector('.profile-description').textContent,display.description,'native SSR and API share active display revision');assert.deepEqual([...doc.querySelectorAll('.profile-source-list > li strong')].slice(0,translatedSource.sources.length).map(el=>el.textContent),display.sourceTitles);assert.equal(doc.querySelector('.workshop-translation-notice'),null);}finally{profileDom.window.close();}
  }
  const liveDescription='Fresh operator text <img src=x onerror=alert(1)> ëç',livePhoneNote='Fresh contact availability warning';
  await db.prepare('UPDATE workshops SET description=?,phone_note=? WHERE id=?').bind(liveDescription,livePhoneNote,published.id).run();
  for(const locale of ['sq','en']){
   const payload=await(await dispatchFetch(`https://riparim.test/api/workshops?locale=${locale}`)).json(),display=payload.displayById[published.id];assert.equal(display.description,liveDescription);assert.equal(display.phoneNote,livePhoneNote);assert.equal(display.fallback,'stale');assert.equal(display.originalLanguage,undefined);
-  const response=await dispatchFetch(`https://riparim.test/${locale}/werkstatt/${published.id}`),liveDom=new JSDOM(await response.text());
+  const response=await dispatchFetch('https://riparim.test'+localizeHref('/werkstatt/'+published.id,locale)),liveDom=new JSDOM(await response.text());
   try{const doc=liveDom.window.document;assert.equal(doc.querySelector('.profile-description').textContent,liveDescription);assert.equal(doc.querySelector('.profile-description').getAttribute('lang'),'');assert(doc.querySelector('.workshop-translation-notice'));assert.equal(doc.querySelector('.profile-description img'),null,'React escapes original and translated strings');assert(!doc.querySelector('.profile-description').textContent.includes(translatedEntry[locale].description));}finally{liveDom.window.close();}
  }
  await db.prepare('UPDATE workshops SET description=?,phone_note=? WHERE id=?').bind(translatedSource.description,translatedSource.phoneNote,published.id).run();
  assert.equal((await dispatchFetch('https://riparim.test/api/workshops?locale=fr')).status,400);
  const clientAssets=(await readdir('dist/client',{recursive:true})).filter(file=>file.endsWith('.js'));const clientCode=(await Promise.all(clientAssets.map(file=>readFile('dist/client/'+file,'utf8')))).join('\n');
  for(const entry of overlay.workshops)assert(!clientCode.includes(entry.sourceHash),'static translation collection and revision hashes stay server-side');
- const albanianX=await dispatchFetch('https://riparim.test/sq/werkstaetten?q=Auto%20Servis%20X'),albanianXDom=new JSDOM(await albanianX.text());try{assert.deepEqual([...albanianXDom.window.document.querySelectorAll('.catalogue-card h2')].map(node=>node.textContent).filter(name=>['Auto servis XONI','Auto Servis Xhelali'].includes(name)),['Auto servis XONI','Auto Servis Xhelali'],'actual built SQ SSR catalogue keeps the full-ICU X before Xh ordering');}finally{albanianXDom.window.close();}
+ const albanianX=await dispatchFetch('https://riparim.test/sq/serviset?q=Auto%20Servis%20X'),albanianXDom=new JSDOM(await albanianX.text());try{assert.deepEqual([...albanianXDom.window.document.querySelectorAll('.catalogue-card h2')].map(node=>node.textContent).filter(name=>['Auto servis XONI','Auto Servis Xhelali'].includes(name)),['Auto servis XONI','Auto Servis Xhelali'],'actual built SQ SSR catalogue keeps the full-ICU X before Xh ordering');}finally{albanianXDom.window.close();}
  for(const locale of ['de','sq','en']){
-  const prefix=locale==='de'?'':`/${locale}`,returnTarget=`${prefix}/werkstaetten?q=Auto+Mita`,response=await dispatchFetch(`https://riparim.test${prefix}/werkstatt/auto-mita?${new URLSearchParams({suche:returnTarget})}`),dom=new JSDOM(await response.text());
+  const returnTarget=`${localizeHref('/werkstaetten',locale)}?q=Auto+Mita`,response=await dispatchFetch(`https://riparim.test${localizeHref('/werkstatt/auto-mita',locale)}?${new URLSearchParams({suche:returnTarget})}`),dom=new JSDOM(await response.text());
   try{assert.equal(response.status,200);assert.equal(dom.window.document.querySelector('.profile-back').getAttribute('href'),returnTarget,'native actual full document response preserves name-search return in '+locale);}finally{dom.window.close();}
-  for(const source of ['https://outside.test/werkstaetten?q=private','//outside.test/werkstaetten','/anmelden?weiter=private',`${prefix}/werkstaetten?q=Auto+Mita&model=private&problem=private&access_token=secret`]){
-   const safeResponse=await dispatchFetch(`https://riparim.test${prefix}/werkstatt/auto-mita?${new URLSearchParams({suche:source})}`),safeDom=new JSDOM(await safeResponse.text());try{assert.equal(safeResponse.status,200);assert.equal(safeDom.window.document.querySelector('.profile-back').getAttribute('href'),source.includes('model=private')?returnTarget:`${prefix}/werkstaetten`,'native document return rejects unsafe/private fields');}finally{safeDom.window.close();}
+  for(const source of ['https://outside.test/werkstaetten?q=private','//outside.test/werkstaetten','/anmelden?weiter=private',`${localizeHref('/werkstaetten',locale)}?q=Auto+Mita&model=private&problem=private&access_token=secret`]){
+   const safeResponse=await dispatchFetch(`https://riparim.test${localizeHref('/werkstatt/auto-mita',locale)}?${new URLSearchParams({suche:source})}`),safeDom=new JSDOM(await safeResponse.text());try{assert.equal(safeResponse.status,200);assert.equal(safeDom.window.document.querySelector('.profile-back').getAttribute('href'),source.includes('model=private')?returnTarget:`${localizeHref('/werkstaetten',locale)}`,'native document return rejects unsafe/private fields');}finally{safeDom.window.close();}
   }
 
  }
  for(const locale of ['de','sq','en']){
   const prefix=locale==='de'?'':`/${locale}`;
-  for(const [value,target] of [[published.id,`${prefix}/werkstatt/${published.id}#bewerten`],['neu',`${prefix}/werkstaetten?bewerten=1`],['unknown-workshop',`${prefix}/werkstaetten?bewerten=1`],['//outside.test',`${prefix}/werkstaetten?bewerten=1`]]){
+  for(const [value,target] of [[published.id,`${localizeHref('/werkstatt/'+published.id,locale)}#bewerten`],['neu',`${localizeHref('/werkstaetten',locale)}?bewerten=1`],['unknown-workshop',`${localizeHref('/werkstaetten',locale)}?bewerten=1`],['//outside.test',`${localizeHref('/werkstaetten',locale)}?bewerten=1`]]){
    const response=await dispatchFetch(`https://riparim.test${prefix||'/'}?${new URLSearchParams({nachweis:value})}`,{redirect:'manual'});assert.equal(response.status,307,'actual worker redirects old review entry in '+locale);assert.equal(response.headers.get('Location'),target);
   }
-  const finder=await dispatchFetch(`https://riparim.test${prefix}/werkstaetten?bewerten=1`),finderDom=new JSDOM(await finder.text());try{assert.equal(finder.status,200);assert(finderDom.window.document.querySelector('.catalogue-page > .note[role="status"]').textContent.includes({de:'Öffne das Profil der Werkstatt',sq:'Hap profilin e servisit',en:'Open the profile of the workshop'}[locale]),'actual document caller retains localized review-entry context');assert.equal(finderDom.window.document.querySelector('[role="dialog"]'),null);}finally{finderDom.window.close();}
+  const finder=await dispatchFetch(`https://riparim.test${localizeHref('/werkstaetten',locale)}?bewerten=1`),finderDom=new JSDOM(await finder.text());try{assert.equal(finder.status,200);assert(finderDom.window.document.querySelector('.catalogue-page > .note[role="status"]').textContent.includes({de:'Öffne das Profil der Werkstatt',sq:'Hap profilin e servisit',en:'Open the profile of the workshop'}[locale]),'actual document caller retains localized review-entry context');assert.equal(finderDom.window.document.querySelector('[role="dialog"]'),null);}finally{finderDom.window.close();}
  }
- const www=await dispatchFetch("http://www.riparim.com/en/werkstaetten?ort=prizren&sprache=sq",{redirect:"manual"});assert.equal(www.status,308);assert.equal(www.headers.get("Location"),"https://riparim.com/en/werkstaetten?ort=prizren&sprache=sq");
+ const www=await dispatchFetch("http://www.riparim.com/en/workshops?ort=prizren&sprache=sq",{redirect:"manual"});assert.equal(www.status,308);assert.equal(www.headers.get("Location"),"https://riparim.com/en/workshops?ort=prizren&sprache=sq");
  for(const [path,target] of [['/de','/'],['/de/werkstaetten?ort=prizren','/werkstaetten?ort=prizren']]){const response=await dispatchFetch('https://riparim.test'+path,{redirect:'manual'});assert.equal(response.status,308);assert.equal(new URL(response.headers.get('Location'),'https://riparim.test').href,'https://riparim.test'+target);}
- for(const path of ['/fr','/sq/missing','/en/missing','/werkstatt/unknown-profile','/en/werkstatt/unknown-profile','/sq/werkstatt/x','/sq/missing.html','/en/missing.txt','/sq/missing.svg','/en/missing.png','/fr/missing.png','/missing.html','/missing.png']){const response=await dispatchFetch('https://riparim.test'+path);assert.equal(response.status,404,path);};
+ for(const [path,target] of [['/en/werkstaetten','/en/workshops'],['/sq/werkstaetten','/sq/serviset'],['/en/anmelden','/en/login'],['/sq/betrieb/beanspruchen','/sq/biznesi/kerko-pronesine']]){const response=await dispatchFetch('https://riparim.test'+path+'?werkstatt=fixture-id',{redirect:'manual'});assert.equal(response.status,308);assert.equal(new URL(response.headers.get('Location'),'https://riparim.test').href,'https://riparim.test'+target+'?werkstatt=fixture-id');}
+ for(const path of ['/fr','/sq/missing','/en/missing','/werkstatt/unknown-profile','/en/workshop/unknown-profile','/sq/servis/x','/sq/missing.html','/en/missing.txt','/sq/missing.svg','/en/missing.png','/fr/missing.png','/missing.html','/missing.png']){const response=await dispatchFetch('https://riparim.test'+path);assert.equal(response.status,404,path);};
  for(const path of ['/api/workshops','/api/google-places']){const response=await dispatchFetch('https://riparim.test'+path);assert.equal(response.status,200);assert.match(response.headers.get('Content-Type'),/application\/json/);}
  for(const [locale,login,settings,ownReviews] of [['de','Anmelden','Einstellungen','Meine Bewertungen'],['sq','Hyr','Cilësimet','Vlerësimet e mia'],['en','Log in','Settings','My reviews']]){
   const prefix=locale==='de'?'':'/'+locale;
   for(const [path,label] of [['/anmelden',login],['/einstellungen',settings],['/bewertungen',ownReviews]]){
-   const response=await dispatchFetch('https://riparim.test'+prefix+path);assert.equal(response.status,200);const html=await response.text();assert(html.includes(label),'Built private page has active customer copy');assert.match(html,/<meta[^>]*name="robots"[^>]*content="noindex[^">]*nofollow/);assert(!html.includes('hreflang='),'Private customer page has no public alternate');
+   const response=await dispatchFetch('https://riparim.test'+localizeHref(path,locale));assert.equal(response.status,200);const html=await response.text();assert(html.includes(label),'Built private page has active customer copy');assert.match(html,/<meta[^>]*name="robots"[^>]*content="noindex[^">]*nofollow/);assert(!html.includes('hreflang='),'Private customer page has no public alternate');
   }
-  const notice=await dispatchFetch('https://riparim.test'+prefix+'/anmelden?localeNotice=preference_not_saved');const noticeHtml=await notice.text();assert(noticeHtml.includes({de:'Deine Sprachpräferenz konnte nicht gespeichert werden.',sq:'Preferenca jote e gjuhës nuk mund të ruhej.',en:'Your language preference could not be saved.'}[locale]),'Preference failure notice is localized on an actual fresh document');
+  const notice=await dispatchFetch('https://riparim.test'+localizeHref('/anmelden?localeNotice=preference_not_saved',locale));const noticeHtml=await notice.text();assert(noticeHtml.includes({de:'Deine Sprachpräferenz konnte nicht gespeichert werden.',sq:'Preferenca jote e gjuhës nuk mund të ruhej.',en:'Your language preference could not be saved.'}[locale]),'Preference failure notice is localized on an actual fresh document');
   const submission='11111111-1111-4111-8111-111111111111';
-  for(const [query,target] of [['besuche=1',prefix+'/bewertungen'],['einreichung='+submission,prefix+'/bewertungen?einreichung='+submission],['besuche=1&einreichung='+submission,prefix+'/bewertungen?einreichung='+submission]]){
+  for(const [query,target] of [['besuche=1',localizeHref('/bewertungen',locale)],['einreichung='+submission,localizeHref('/bewertungen?einreichung=',locale)+submission],['besuche=1&einreichung='+submission,localizeHref('/bewertungen?einreichung=',locale)+submission]]){
    const response=await dispatchFetch('https://riparim.test'+prefix+'?'+query,{redirect:'manual'});assert.equal(response.status,307,'Built legacy own-history link redirects to a regular page');assert.equal(new URL(response.headers.get('Location'),'https://riparim.test').pathname,new URL(target,'https://riparim.test').pathname);assert.equal(new URL(response.headers.get('Location'),'https://riparim.test').search,new URL(target,'https://riparim.test').search);
   }
-  const own=await dispatchFetch('https://riparim.test'+prefix+'/bewertungen?einreichung='+submission),ownHtml=await own.text();assert.equal(own.status,200);assert.match(ownHtml,/<main[^>]*class="my-reviews-page wrap"/);assert.match(ownHtml,/<meta[^>]*name="robots"[^>]*content="noindex[^">]*nofollow/);assert(!ownHtml.includes('hreflang='),'Targeted own-review documents have no private alternates');assert(ownHtml.includes(encodeURIComponent(prefix+'/bewertungen?einreichung='+submission)),'The built guest page preserves the exact localized page return through sign-in');assert(!ownHtml.includes('data-slot="dialog-overlay"'),'The independently addressable page has no modal overlay');
+  const own=await dispatchFetch('https://riparim.test'+localizeHref('/bewertungen?einreichung=',locale)+submission),ownHtml=await own.text();assert.equal(own.status,200);assert.match(ownHtml,/<main[^>]*class="my-reviews-page wrap"/);assert.match(ownHtml,/<meta[^>]*name="robots"[^>]*content="noindex[^">]*nofollow/);assert(!ownHtml.includes('hreflang='),'Targeted own-review documents have no private alternates');assert(ownHtml.includes(encodeURIComponent(localizeHref('/bewertungen?einreichung=',locale)+submission)),'The built guest page preserves the exact localized page return through sign-in');assert(!ownHtml.includes('data-slot="dialog-overlay"'),'The independently addressable page has no modal overlay');
  }
  const callback=await dispatchFetch('https://riparim.test/auth/bestaetigen?token_hash=fixture',{redirect:'manual'});assert.equal(callback.status,303);assert.equal(callback.headers.get('Referrer-Policy'),'no-referrer');
  for(const locale of ['de','sq','en'])for(const path of ['/betrieb','/betrieb/beanspruchen','/verwaltung','/verwaltung/bewertungen','/verwaltung/benutzer','/verwaltung/betriebe','/verwaltung/anmeldung']){
-  const prefix=locale==='de'?'':'/'+locale,response=await dispatchFetch('https://riparim.test'+prefix+path);assert.equal(response.status,200,'Actual management guest page stays reachable');const html=await response.text();
+  const response=await dispatchFetch('https://riparim.test'+localizeHref(path,locale));assert.equal(response.status,200,'Actual management guest page stays reachable');const html=await response.text();
   assert.match(html,new RegExp('<html lang="'+locale+'"'));assert.match(html,/<meta[^>]*name="robots"[^>]*content="noindex[^">]*nofollow/);assert(!html.includes('hreflang='),'Actual business/administration documents advertise no private alternates');
  }
  for(const locale of ['de','sq','en']){
-  const prefix=locale==='de'?'':'/'+locale,claimId='ahp-volkswagen-prizren';
-  const overview=await dispatchFetch('https://riparim.test'+prefix+'/betrieb?werkstatt='+claimId,{redirect:'manual'});
-  assert.equal(overview.status,200,'Unsupported workshop parameters do not redirect the overview');assert.equal(overview.headers.get('Location'),null);assert((await overview.text()).includes(encodeURIComponent(prefix+'/betrieb')),'Guest overview login returns to the overview');
-  const claim=await dispatchFetch('https://riparim.test'+prefix+'/betrieb/beanspruchen?werkstatt='+claimId),html=await claim.text();
-  assert.equal(claim.status,200);assert(html.includes(encodeURIComponent(prefix+'/betrieb/beanspruchen?werkstatt='+claimId)),'Built guest claim preserves workshop and locale through sign-in');
+  const claimId='ahp-volkswagen-prizren';
+  const overview=await dispatchFetch('https://riparim.test'+localizeHref('/betrieb?werkstatt=',locale)+claimId,{redirect:'manual'});
+  assert.equal(overview.status,200,'Unsupported workshop parameters do not redirect the overview');assert.equal(overview.headers.get('Location'),null);assert((await overview.text()).includes(encodeURIComponent(localizeHref('/betrieb',locale))),'Guest overview login returns to the overview');
+  const claim=await dispatchFetch('https://riparim.test'+localizeHref('/betrieb/beanspruchen?werkstatt=',locale)+claimId),html=await claim.text();
+  assert.equal(claim.status,200);assert(html.includes(encodeURIComponent(localizeHref('/betrieb/beanspruchen?werkstatt=',locale)+claimId)),'Built guest claim preserves workshop and locale through sign-in');
  }
  for(const file of (await readdir('public')).filter(file=>/\.(?:png|jpg|webp|svg)$/.test(file))){const response=await dispatchFetch('https://riparim.test/'+file,{redirect:'manual'});assert.equal(response.status,200,'physical unprefixed asset '+file+' stays reachable');}
  // Run Intl in native workerd as well, using the same public formatter/translator.

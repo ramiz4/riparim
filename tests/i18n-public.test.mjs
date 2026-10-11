@@ -1,3 +1,4 @@
+import {localizeHref} from '../scripts/lib/locale.mjs';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 async function load(file){const result=await build({entryPoints:[file],bundle:true,platform:'node',format:'esm',write:false});return import(`data:text/javascript;base64,${Buffer.from(result.outputFiles[0].contents).toString('base64')}`);}
@@ -13,8 +14,8 @@ const seo=await load('lib/i18n/public-metadata.ts');
 assert.equal(seo.isPrivateLandingMode({besuche:'1'}),true,'private landing visits are noindex');
 for(const locale of ['de','sq','en']){
  const metadata=seo.publicMetadata(locale,'/werkstaetten?q=secret&ort=peja#modal','https://example.test',{title:'Fixture',description:'Fixture description'});
- assert.equal(metadata.alternates.canonical,`https://example.test${locale==='de'?'':`/${locale}`}/werkstaetten`);
- assert.deepEqual(metadata.alternates.languages,{de:'https://example.test/werkstaetten',sq:'https://example.test/sq/werkstaetten',en:'https://example.test/en/werkstaetten','x-default':'https://example.test/werkstaetten'});
+ assert.equal(metadata.alternates.canonical,'https://example.test'+localizeHref('/werkstaetten',locale));
+ assert.deepEqual(metadata.alternates.languages,{de:'https://example.test/werkstaetten',sq:'https://example.test/sq/serviset',en:'https://example.test/en/workshops','x-default':'https://example.test/werkstaetten'});
 }
 const browser=await load('lib/google-maps-browser.ts');
 assert.equal(browser.currentGoogleRating,undefined,'individual rating requests are absent from the public browser API');

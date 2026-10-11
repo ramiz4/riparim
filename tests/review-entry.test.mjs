@@ -1,3 +1,4 @@
+import {localizeHref} from '../scripts/lib/locale.mjs';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {mkdir,writeFile} from 'node:fs/promises';
@@ -11,15 +12,14 @@ const bundle=await build({stdin:{contents:`export {default as Home} from './app/
 const {Home,Catalogue,I18nProvider,getMessages,defaultCatalogueFilters}=await import(new URL('../'+out,import.meta.url));
 async function target(locale,query){try{await Home({params:Promise.resolve({locale}),searchParams:Promise.resolve(query)});return null;}catch(error){if(error.href)return error.href;throw error;}}
 for(const locale of ['de','sq','en']){
- const prefix=locale==='de'?'':`/${locale}`;
- assert.equal(await target(locale,{nachweis:'fixture-workshop'}),prefix+'/werkstatt/fixture-workshop#bewerten','old workshop review links reach the matching public profile');
- for(const value of ['neu','unknown-workshop','//outside.test','', ['fixture-workshop','neu']])assert.equal(await target(locale,{nachweis:value}),prefix+'/werkstaetten?bewerten=1','generic, missing, malformed and ambiguous old links reach workshop selection');
+ assert.equal(await target(locale,{nachweis:'fixture-workshop'}),localizeHref('/werkstatt/fixture-workshop#bewerten',locale),'old workshop review links reach the matching public profile');
+ for(const value of ['neu','unknown-workshop','//outside.test','', ['fixture-workshop','neu']])assert.equal(await target(locale,{nachweis:value}),localizeHref('/werkstaetten?bewerten=1',locale),'generic, missing, malformed and ambiguous old links reach workshop selection');
  globalThis.directoryUnavailable=true;
  const originalError=console.error;console.error=()=>{};
- try{assert.equal(await target(locale,{nachweis:'fixture-workshop'}),prefix+'/werkstaetten?bewerten=1','an unavailable catalogue leads to the finder retry flow');}finally{globalThis.directoryUnavailable=false;console.error=originalError;}
+ try{assert.equal(await target(locale,{nachweis:'fixture-workshop'}),localizeHref('/werkstaetten?bewerten=1',locale),'an unavailable catalogue leads to the finder retry flow');}finally{globalThis.directoryUnavailable=false;console.error=originalError;}
  const ownSubmission='11111111-1111-4111-8111-111111111111';
- assert.equal(await target(locale,{besuche:'1',einreichung:ownSubmission,nachweis:'fixture-workshop'}),prefix+'/bewertungen?einreichung='+ownSubmission,'Legacy own-submission links retain their private target when a public review entry is also present');
- assert.equal(await target(locale,{besuche:'1',einreichung:[ownSubmission,'ambiguous'],nachweis:'fixture-workshop'}),prefix+'/bewertungen','Mixed old links cannot turn an ambiguous private submission into a public review draft');
+ assert.equal(await target(locale,{besuche:'1',einreichung:ownSubmission,nachweis:'fixture-workshop'}),localizeHref('/bewertungen?einreichung=',locale)+ownSubmission,'Legacy own-submission links retain their private target when a public review entry is also present');
+ assert.equal(await target(locale,{besuche:'1',einreichung:[ownSubmission,'ambiguous'],nachweis:'fixture-workshop'}),localizeHref('/bewertungen',locale),'Mixed old links cannot turn an ambiguous private submission into a public review draft');
  assert.equal(await target(locale,{}),null,'normal landing remains available');
 }
 console.log('Review entry routes: localized public profiles, safe finder fallback and unchanged landing passed');
