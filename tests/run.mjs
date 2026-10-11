@@ -11,6 +11,7 @@ suites.push('tool-install.test.mjs');
 suites.push('tool-policy.test.mjs');
 suites.push('release-retry.test.mjs');
 suites.push('node-storage.test.mjs');
+suites.push('node-restore.test.mjs');
 suites.push('node-runtime.test.mjs');
 suites.push('node-evidence.test.mjs');
 suites.push('account-identities.test.mjs');

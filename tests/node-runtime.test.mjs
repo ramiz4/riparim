@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {providerExitHttp} from './helpers/provider-exit-http.mjs';
 import {spawn,execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 import {mkdtemp,rm,readFile} from 'node:fs/promises';
@@ -11,12 +12,12 @@ import {setTimeout as delay} from 'node:timers/promises';
 
 const run=promisify(execFile),directory=await mkdtemp(join(tmpdir(),'riparim-node-http-'));
 let server,logs='';
-async function start(environment,port,hostname='127.0.0.1'){
- server=spawn(process.execPath,['--import','./tests/fixtures/node-auth-provider.mjs','.node-runtime/server.mjs','--hostname',hostname,'--port',String(port)],{env:environment,stdio:['ignore','pipe','pipe']});
+async function start(environment,port,hostname='127.0.0.1',fixture=true){
+ server=spawn(process.execPath,[...(fixture?['--import','./tests/fixtures/node-auth-provider.mjs']:[]),'.node-runtime/server.mjs','--hostname',hostname,'--port',String(port)],{env:environment,stdio:['ignore','pipe','pipe']});
  server.stdout.on('data',data=>logs+=data);server.stderr.on('data',data=>logs+=data);
  for(let attempt=0;attempt<100;attempt++){
   if(server.exitCode!==null)throw new Error(logs);
-  try{const response=await fetch(`http://127.0.0.1:${port}/api/session`);if(response.ok)return;}catch{}
+  try{const response=await fetch(`http://127.0.0.1:${port}/api/session`);if(response.ok||response.status===503)return;}catch{}
   await delay(100);
  }
  throw new Error('Node server did not start: '+logs);
@@ -99,8 +100,15 @@ try{
  // The executable retry path awaits all work and does not need a Worker context.
  await run(process.execPath,['.node-runtime/command.mjs','notifications'],{env:environment});
  await stop();
+ const maintenance={...environment,MIGRATION_READ_ONLY:'true',MIGRATION_SOURCE_COMMIT:'b'.repeat(40),MIGRATION_EXPORT_TOKEN_SHA256:createHash('sha256').update('a'.repeat(64)).digest('hex'),MIGRATION_EXPORT_EXPIRES_AT:new Date(Date.now()+3600000).toISOString()};
+ await start(maintenance,port);
+ assert.equal((await fetch(origin+'/api/session')).status,503,'Node cutover blocks even GET writers before application authentication');
+ assert.equal((await fetch(origin+'/__migration/export?operation=schema')).status,404);
+ const exportResponse=await fetch(origin+'/__migration/export?operation=schema',{headers:{Authorization:'Bearer '+'a'.repeat(64)}});assert.equal(exportResponse.status,200);assert((await exportResponse.json()).schema.some(item=>item.name==='riparim_node_migrations'));
+ await stop();
+ await providerExitHttp({directory,port,start,stop});
  console.log('Actual Node production server: synthetic public pages/APIs, drafts, forged identity, auth refusal, private storage, socket/proxy rate limits, async isolation and outbox command passed');
-}catch(error){throw new Error(`${error.stack}\n${error.cause?.stack??''}\n${logs}`);}
+}catch(error){throw new Error(`${error.stack}\n${error.stdout??''}\n${error.cause?.stack??''}\n${logs}`);}
 finally{
  await stop();
  await rm(directory,{recursive:true,force:true});

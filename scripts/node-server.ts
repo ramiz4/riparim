@@ -1,6 +1,10 @@
 import {createServer} from 'node:http';
 import {parseArgs} from 'node:util';
 import next from 'next';
+import {Readable} from 'node:stream';
+import {pipeline} from 'node:stream/promises';
+import {handleMigrationRequest,migrationReadOnly} from '../lib/migration-export';
+import {env} from '../lib/runtime/node-env';
 import {peerClientAddress,trustedProxyAddresses,withNodeClientAddress} from '../lib/runtime/node-request';
 
 const {values}=parseArgs({options:{port:{type:'string',default:process.env.PORT??'3000'},hostname:{type:'string',default:'127.0.0.1'}}});
@@ -21,7 +25,15 @@ const server=createServer(async(request,response)=>{
  request.headers['x-forwarded-host']=origin.host;
  request.headers['x-forwarded-proto']=origin.protocol.slice(0,-1);
  request.headers['x-forwarded-port']=String(publicPort);
- try{await withNodeClientAddress(address,()=>handle(request,response));}
+ try{
+  if(migrationReadOnly(env)||new URL(request.url??'/',origin).pathname==='/__migration/export'){
+   const headers=new Headers();for(const [name,value] of Object.entries(request.headers)){if(Array.isArray(value))value.forEach(item=>headers.append(name,item));else if(value!==undefined)headers.set(name,value);}
+   const method=request.method??'GET',body=['GET','HEAD'].includes(method)?undefined:Readable.toWeb(request) as ReadableStream<Uint8Array>;
+   const result=await handleMigrationRequest(new Request(new URL(request.url??'/',origin),{method,headers,...(body?{body,duplex:'half'}:{})} as RequestInit),env);
+   if(result){response.writeHead(result.status,Object.fromEntries(result.headers));if(result.body&&method!=='HEAD')await pipeline(Readable.fromWeb(result.body as import('node:stream/web').ReadableStream),response);else response.end();return;}
+  }
+  await withNodeClientAddress(address,()=>handle(request,response));
+ }
  catch{console.error('node-request-failed');if(response.headersSent)response.destroy();else{response.writeHead(500);response.end('Internal Server Error');}}
 });
 server.listen(port,hostname,()=>console.log(`Riparim Node server listening on ${hostname}:${port}`));

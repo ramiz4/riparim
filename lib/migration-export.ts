@@ -1,4 +1,5 @@
 import hosting from "../.openai/hosting.json";
+import type {RuntimeEnv,SqlDatabase,PrivateObject} from "./runtime/contracts";
 
 const prefix = "/__migration/export";
 const pageSize = 5;
@@ -17,7 +18,7 @@ export function stampReleaseCommit(result: Response) {
   return new Response(result.body, { status: result.status, statusText: result.statusText, headers });
 }
 
-export function migrationReadOnly(env: Cloudflare.Env) {
+export function migrationReadOnly(env: RuntimeEnv) {
   // Expiring the export credential must never silently reopen the old writer.
   return env.MIGRATION_READ_ONLY === "true";
 }
@@ -26,7 +27,7 @@ function response(value: unknown, status = 200) {
   return Response.json(value, { status, headers: { "Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff" } });
 }
 
-async function authorized(request: Request, env: Cloudflare.Env) {
+async function authorized(request: Request, env: RuntimeEnv) {
   const expires = Date.parse(env.MIGRATION_EXPORT_EXPIRES_AT ?? "");
   if (!migrationReadOnly(env) || !/^[a-f0-9]{64}$/.test(env.MIGRATION_EXPORT_TOKEN_SHA256 ?? "") ||
       !/^[a-f0-9]{40}$/.test(env.MIGRATION_SOURCE_COMMIT ?? "") ||
@@ -52,26 +53,26 @@ function scalar(value: unknown): unknown {
   throw new Error("Unsupported SQLite value");
 }
 
-async function schema(db: D1Database) {
+async function schema(db: SqlDatabase) {
   const result = await db.prepare("SELECT name,type,tbl_name,sql FROM sqlite_schema WHERE sql IS NOT NULL AND name NOT GLOB '_cf_*' AND tbl_name NOT GLOB '_cf_*' AND type IN ('table','index','trigger','view') ORDER BY type,name").all<SchemaEntry>();
   if (!result.success) throw new Error("Schema export failed");
   return result.results;
 }
 
-async function columns(db: D1Database, name: string) {
+async function columns(db: SqlDatabase, name: string) {
   const result = await db.prepare(`PRAGMA table_info(${identifier(name)})`).all<Column>();
   if (!result.success || !result.results.length) throw new Error("Column export failed");
   return result.results.map(({ name, type, notnull, dflt_value, pk }) => ({ name, type, notnull, dflt_value, pk }));
 }
 
-function objectMetadata(object: R2Object) {
+function objectMetadata(object: PrivateObject) {
   return { key: object.key, size: object.size, etag: object.etag, uploaded: object.uploaded.toISOString(),
-    version: object.version, storageClass: "storageClass" in object ? object.storageClass : "Standard",
-    httpMetadata: object.httpMetadata ?? {}, customMetadata: object.customMetadata ?? {}, checksums: object.checksums.toJSON() };
+    version: object.version, storageClass: object.storageClass ?? "Standard",
+    httpMetadata: object.httpMetadata ?? {}, customMetadata: object.customMetadata ?? {}, checksums: object.checksums?.toJSON() ?? {} };
 }
 
 /** Intercept before application code: GETs and scheduled jobs can also write. */
-export async function handleMigrationRequest(request: Request, env: Cloudflare.Env): Promise<Response | null> {
+export async function handleMigrationRequest(request: Request, env: RuntimeEnv): Promise<Response | null> {
   const url = new URL(request.url);
   if (url.pathname !== prefix) {
     if (!migrationReadOnly(env)) return null;
@@ -108,7 +109,7 @@ export async function handleMigrationRequest(request: Request, env: Cloudflare.E
       return response({ name, columns: fields, rows, nextOffset: result.results.length > pageSize ? Number(offsetText) + pageSize : null });
     }
     if (request.method === "GET" && url.searchParams.get("operation") === "objects") {
-      const options: R2ListOptions & { include: ("httpMetadata" | "customMetadata")[] } = { limit: 100, cursor: url.searchParams.get("cursor") ?? undefined, include: ["httpMetadata", "customMetadata"] };
+      const options = { limit: 100, cursor: url.searchParams.get("cursor") ?? undefined, include: ["httpMetadata", "customMetadata"] as ("httpMetadata" | "customMetadata")[] };
       const result = await env.BUCKET.list(options);
       return response({ objects: result.objects.map(objectMetadata), cursor: result.truncated ? result.cursor : null });
     }
@@ -128,7 +129,7 @@ export async function handleMigrationRequest(request: Request, env: Cloudflare.E
           !("etag" in value) || typeof value.etag !== "string" || !value.etag || Object.keys(value).length !== 3) return response({ error: "Invalid request" }, 400);
       const object = await env.BUCKET.get(value.key, { onlyIf: { etagMatches: value.etag } });
       if (!object || !("body" in object)) return response({ error: "Snapshot changed" }, 409);
-      return new Response(object.body, { headers: { "Content-Type": "application/octet-stream", "Content-Length": String(object.size), "ETag": object.httpEtag, "Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff" } });
+      return new Response(object.body, { headers: { "Content-Type": "application/octet-stream", "Content-Length": String(object.size), "ETag": `"${object.etag}"`, "Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff" } });
     }
     return response({ error: "Invalid operation" }, 400);
   } catch {

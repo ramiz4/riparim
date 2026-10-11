@@ -138,3 +138,13 @@ Anmeldung/Abmeldung, Moderation und erlaubte sowie fremde/anonyme Nachweisabrufe
 Gleiche E-Mail-Adressen erzeugen keine Besitzrechte. Mit echten Konten benötigte
 Anmeldeschritte werden getrennt von isolierten Tests dokumentiert. Ohne diese
 Abnahme keine Domainumstellung und keine Schließung von #18.
+
+Für einen Anbieterwechsel auf Node verwendet [provider-exit.md](provider-exit.md)
+denselben geschützten Export und dessen Schema-/Dateinachweise. Der neue
+Offline-Restore veröffentlicht beide Datenbanken nur als vollständiges neues
+Verzeichnis. Ein Retry prüft ausschließlich den gesamten unveränderten Stand;
+Änderungen und Löschungen stoppen ihn. Der bisherige D1-Einfügeplan ist kein
+allgemeiner Rückweg in einen bereits benutzten Bestand. Der Node-Export kann
+einen frischen Rücktransfer einschließlich neuer Löschungen und Versandzustände
+belegen; seine exakte `riparim_node_migrations`-Historie wird gegen die
+eingecheckten Migrationen geprüft.
