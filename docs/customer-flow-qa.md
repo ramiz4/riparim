@@ -518,6 +518,32 @@ Antragsbreite entsprach dem Viewport (390 beziehungsweise 1282 Pixel).
 Die Vorschau fing Schreibanfragen mit fiktiven Antworten ab. Diese Abnahme
 bestätigt keine echte Authentifizierung oder Dateispeicherung in Produktion.
 
+## Vereinfachtes Bewertungsformular (11. Oktober 2026)
+
+Sterne sind für eine Bewertung ausreichend; der Text ist optional und hat keine
+Mindestlänge. Bewertungstext und optionale Belegnotiz beginnen eingeklappt.
+Vorhandene Texte bleiben beim Bearbeiten sichtbar. Wiederholte Einleitungen,
+Namens- und Speichererklärungen entfallen; der private Nachweis, Besuchsangaben,
+Einwilligung und manuelle Freigabe bleiben erforderlich. Die Texte sind in
+DE/SQ/EN angepasst. Es ist keine Migration oder Datenübernahme nötig.
+
+`tests/combined-reviews.test.mjs` prüft leere, fehlende, kurze und lange Texte,
+ungültige Sterne, nicht textuelle Eingaben, Freigabe und öffentliche Aggregate
+sowie das Entfernen eines Texts mit erneuter Freigabe. Die tatsächlichen
+Kunden- und Verwaltungsoberflächen behandeln Sternebewertungen als vollständig.
+Die CSS-Prüfung schützt die schrumpfenden Formulargruppen und Grid-Spalten sowie
+die maximale Breite nativer Datumsfelder in Quell- und Produktions-CSS.
+
+Die native Prüfung im bestätigten Chrome-Profil `ramizloki82@googlemail.com`
+verwendete die tatsächliche React-Komponente und kompiliertes Projekt-CSS mit
+fiktiven Daten. Bei 320/390 Pixeln mobil und 1280 Pixeln Desktop entsprachen
+Dokument- und Viewportbreite einander. Das Datumsfeld blieb innerhalb seines
+Labels (262/332/600 Pixel). Helles und dunkles Theme sowie Sterneauswahl mit
+Pfeiltasten/End und das Aufklappen des optionalen Texts per Tab/Enter wurden
+geprüft. Ein echtes iPhone mit Safari wurde nicht geprüft; die automatisierten
+CSS-Grenzen ersetzen keine Abnahme auf diesem Gerät. Die Vorschau fängt
+Schreibanfragen ab und verändert keine Produktionsdaten.
+
 ## Flache Antragsseite
 
 Die Beanspruchung verwendet auf Desktop und Mobil keine äußere Formular-Card.

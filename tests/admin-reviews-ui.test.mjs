@@ -18,7 +18,7 @@ const bundle=await build({stdin:{contents:"export {default} from './app/[locale]
 }}]});
 await writeFile(out+'/ui.mjs',bundle.outputFiles[0].contents);
 const {createElement,act}=await import('react'),{createRoot}=await import('react-dom/client'),{default:AdminReviews,I18nProvider,getMessages}=await import(new URL('../'+out+'/ui.mjs',import.meta.url));
-const visit={id:'00000000-0000-4000-8000-000000000001',workshop:'fixture-workshop',workshop_name:'Fiktive Werkstatt',date:'2026-10-04',vehicle:'Fixture Car',service:'Inspektion',evidence_type:'Dokument',evidence_note:'Private fictional evidence',status:'pending',moderator_note:'',display_name:'Fixture Driver',rating:4,review:'A sufficiently detailed fictional review of a workshop visit.',created_at:'2026-10-04',file_name:'fixture.pdf',revision:1};
+const visit={id:'00000000-0000-4000-8000-000000000001',workshop:'fixture-workshop',workshop_name:'Fiktive Werkstatt',date:'2026-10-04',vehicle:'Fixture Car',service:'Inspektion',evidence_type:'Dokument',evidence_note:'Private fictional evidence',status:'pending',moderator_note:'',display_name:'Fixture Driver',rating:4,review:'',created_at:'2026-10-04',file_name:'fixture.pdf',revision:1};
 let records=[visit],pendingCount=7,mode='success',mutationMode='success',nextCursor=null,resolveLoad;const requests=[];
 globalThis.fetch=async(url,options)=>{
  const method=options?.method??'GET',body=options?.body?JSON.parse(options.body):null;requests.push({url,method,body});
@@ -79,6 +79,7 @@ try{
  assert(button('Prüfen & veröffentlichen').disabled&&button('Ergänzung anfordern').disabled,'Moderation still requires a private reason');
  const note=document.querySelector('textarea');
  assert.equal(document.querySelector('label[for="'+note.id+'"]').textContent,'Prüfvermerk','The reason remains explicitly labelled');
+ assert(document.querySelector('.moderation-review-rating').textContent.includes('4 / 5')&&!document.body.textContent.includes(getMessages('de').management.oldIncompleteReview),'Stars-only reviews show their rating and are eligible for moderation');
  await type(note,'Fiktiver Nachweis wurde geprüft.');mutationMode='reload-error';
  await click(button('Prüfen & veröffentlichen'));
  assert.equal(document.querySelector('main [role="status"]').textContent,'Bewertung veröffentlicht.','An accepted decision remains confirmed even when its queue refresh fails');
