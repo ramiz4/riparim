@@ -69,6 +69,15 @@ Jede Entscheidung besitzt einen eindeutigen Idempotenzschlüssel je Einreichung 
 
 Der portable Entwicklungsserver bietet eine lokale ChatGPT-Testidentität unter `/signin-with-chatgpt?return_to=/`. Diese Simulation gilt nur auf Loopback und wird nicht in den Produktionsbuild übernommen. Verwende sie nicht als Ersatz für Tests der echten Anmeldung.
 
+## Portabler Node-Server
+
+Zusätzlich zum Cloudflare-Worker kann derselbe App-Code mit Next.js auf Node
+laufen. `npm run build:node`, `npm run db:migrate:node` und
+`npm run start:node -- --port 5174` verwenden SQLite und einen privaten lokalen
+Blob-Dateispeicher. Konfiguration, Sicherung, Hintergrundversand und Grenzen
+stehen in [docs/node-runtime.md](docs/node-runtime.md). Der bestehende
+Produktions- und Releaseweg bleibt unverändert.
+
 ## Datenbank und Prüfung
 
 Migrationen liegen in `drizzle/`. Nach Änderungen am Schema:

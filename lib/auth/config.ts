@@ -1,6 +1,6 @@
 import {ValidationError} from "@/lib/validation-error";
 import {validatedReturnPath} from "@/lib/auth/return-path";
-import {env} from "cloudflare:workers";
+import {env} from "@/lib/runtime/env";
 import {storage} from "@/db/storage";
 export type AuthConfig={projectUrl:string;publicKey:string;enabled:boolean;emailDeliveryConfirmed:boolean;updatedAt:string};
 export async function getAuthConfig():Promise<AuthConfig|null>{
