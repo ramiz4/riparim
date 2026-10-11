@@ -52,6 +52,13 @@ try{
   for(const [label,path] of [...destinations,...(isAdmin?[['Verwalten','/verwaltung']]:[])]){
    for(const input of ['click','Enter']){
     await openMenu();
+    const identity=document.querySelector('.user-menu-identity');
+    const emailLink=identity.querySelector('a');
+    assert(emailLink,'the email has an explicit link boundary instead of relying on browser auto-linking');
+    assert.equal(emailLink.getAttribute('href'),`mailto:${email}`);
+    assert.equal(emailLink.textContent,email,'only the email belongs to the mailto link');
+    assert(!identity.querySelector('strong').closest('a'),'the full name remains plain text');
+    assert(!identity.querySelector('small').closest('a'),'the role remains plain text');
     const items=[...document.querySelectorAll('[role="menuitem"]')];
     assert.equal(items.filter(node=>node.textContent==='Verwalten').length,isAdmin?1:0,'only admins receive the single management entry');
     assert(!items.some(node=>node.textContent==='Bewerten'),'new reviews start at the workshop profile, without a general user-menu entry');
