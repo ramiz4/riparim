@@ -1,27 +1,59 @@
 "use client";
 import {useI18n} from "@/lib/i18n/client";
+import {formatDate} from "@/lib/i18n/format";
 import {LocaleAnchor} from "@/components/locale-anchor";
 import {useEffect,useRef,useState} from "react";
 import {loadGooglePlaces} from "@/lib/google-maps-browser";
-import type {LiveGoogleRating} from "@/lib/google-maps-browser";
 import type {GoogleProfileStatus} from "@/lib/google-workshop-profile";
-import type {GoogleWorkshopIdentity} from "./use-google-workshop-profile";
+import type {GoogleWorkshopIdentity,RequestGoogleIdentity} from "./use-google-workshop-profile";
+import {useGoogleVisibility} from "./use-google-visibility";
 import {workshopMapsUrl} from "@/lib/google-maps-link";
 import type {Workshop} from "@/lib/workshops";
-export function GooglePlaceReviews({workshop,identity,liveRating,status}:{workshop:Workshop;identity:GoogleWorkshopIdentity|null;liveRating:LiveGoogleRating|null;status:GoogleProfileStatus}){
-const {locale,t}=useI18n(); const ref=useRef<HTMLDivElement>(null),container=useRef<HTMLDivElement>(null),[visible,setVisible]=useState(false),[widgetReady,setWidgetReady]=useState(false),[widgetFailed,setWidgetFailed]=useState(false);
- const empty=liveRating?.count===0;
+
+type Props={workshop:Workshop;identity:GoogleWorkshopIdentity|null;status:GoogleProfileStatus;requestIdentity?:RequestGoogleIdentity};
+export function GooglePlaceReviews(props:Props){
+ const {locale}=useI18n();
+ return <GoogleDetails key={`${props.workshop.id}:${locale}:${props.identity?.placeId??""}`} {...props}/>;
+}
+function GoogleDetails({workshop,identity,status,requestIdentity}:Props){
+ const {locale,t}=useI18n(),{ref,canLoad,isVisible}=useGoogleVisibility();
+ const container=useRef<HTMLDivElement>(null),[started,setStarted]=useState(false),[revision,setRevision]=useState(0);
+ const [widgetStatus,setWidgetStatus]=useState<GoogleProfileStatus>("loading"),[loadedAt,setLoadedAt]=useState<number|null>(null),[expired,setExpired]=useState(false),[needsReload,setNeedsReload]=useState(false);
  const mapsUrl=workshopMapsUrl(workshop,identity?.placeId);
- // eslint-disable-next-line react-hooks/set-state-in-effect -- Older browsers without an observer must still load the Google widget after hydration.
- useEffect(()=>{if(typeof IntersectionObserver==="undefined"){setVisible(true);return;}const observer=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){setVisible(true);observer.disconnect();}},{rootMargin:"120px"});if(ref.current)observer.observe(ref.current);return()=>observer.disconnect();},[]);
- useEffect(()=>{if(!visible||empty||!identity||!container.current)return;let active=true,element:HTMLElement|null=null,timer:ReturnType<typeof setTimeout>|null=null;const host=container.current;
-  const clearTimer=()=>{if(timer!==null)clearTimeout(timer);};
-  const fail=()=>{if(active){clearTimer();setWidgetFailed(true);active=false;}};
-  void (async()=>{const library=await loadGooglePlaces(identity.browserKey);if(!active)return;timer=setTimeout(fail,12000);await customElements.whenDefined("gmp-place-details");if(!active)return;
-   element=document.createElement("gmp-place-details");const request=document.createElement("gmp-place-details-place-request");(request as HTMLElement&{place:unknown}).place=new library.Place({id:identity.placeId,requestedLanguage:locale});const config=document.createElement("gmp-place-content-config");config.appendChild(document.createElement("gmp-place-rating"));config.appendChild(document.createElement("gmp-place-reviews"));element.appendChild(request);element.appendChild(config);
-   element.addEventListener("gmp-load",()=>{if(active){clearTimer();setWidgetReady(true);}},{once:true});element.addEventListener("gmp-error",fail,{once:true});host.appendChild(element);
+ useEffect(()=>{if(canLoad)return requestIdentity?.(isVisible);},[canLoad,isVisible,requestIdentity]);
+ // eslint-disable-next-line react-hooks/set-state-in-effect -- Start a provider widget only after both its panel and browser tab become visible.
+ useEffect(()=>{if(canLoad&&identity&&!started)setStarted(true);},[canLoad,identity,started]);
+ useEffect(()=>{
+  if(!started||!identity||!container.current)return;
+  let active=true,element:HTMLElement|null=null,expiry:ReturnType<typeof setTimeout>|undefined;
+  const host=container.current;
+  setWidgetStatus("loading");setLoadedAt(null);setExpired(false);setNeedsReload(false);
+  const fail=()=>{if(active){clearTimeout(timeout);setWidgetStatus("unavailable");setNeedsReload(!element);element?.remove();active=false;}};
+  const timeout=setTimeout(fail,12000);
+  void (async()=>{
+   const library=await loadGooglePlaces(identity.browserKey);if(!active)return;
+   await customElements.whenDefined("gmp-place-details");if(!active)return;
+   // Visibility may change while the SDK loads; defer mounting the billable widget.
+   if(!isVisible()){clearTimeout(timeout);setStarted(false);return;}
+   element=document.createElement("gmp-place-details");
+   const request=document.createElement("gmp-place-details-place-request");
+   (request as HTMLElement&{place:unknown}).place=new library.Place({id:identity.placeId,requestedLanguage:locale});
+   const config=document.createElement("gmp-place-content-config");
+   for(const name of ["gmp-place-rating","gmp-place-opening-hours","gmp-place-reviews"])config.appendChild(document.createElement(name));
+   element.appendChild(request);element.appendChild(config);
+   element.addEventListener("gmp-load",()=>{if(active){clearTimeout(timeout);setWidgetStatus("ready");setLoadedAt(Date.now());expiry=setTimeout(()=>{if(active)setExpired(true);},1800000);}},{once:true});
+   element.addEventListener("gmp-error",fail,{once:true});host.appendChild(element);
   })().catch(fail);
-  return()=>{active=false;clearTimer();element?.remove();};
- },[identity,visible,empty,locale]);
- return <div ref={ref} className="google-reviews-panel">{!empty&&<div ref={container} className={`google-official-widget${widgetFailed?" google-widget-unavailable":""}`} aria-label={t("public.googleReviewsAria",{name:workshop.name})}/>} {empty?<p className="help">{t("public.googleReviewsEmpty")}</p>:widgetFailed||status==="unavailable"&&!identity?<p className="help" role="status">{t("public.googleReviewsFailed")}</p>:!widgetReady&&visible&&<p className="help" role="status">{t("public.googleReviewsLoading")}</p>}<LocaleAnchor className="text-action" href={mapsUrl} target="_blank" rel="noopener noreferrer">{widgetReady?t("public.allGoogleReviews"):t("public.viewGoogleReviews")}</LocaleAnchor></div>;
+  return()=>{active=false;clearTimeout(timeout);clearTimeout(expiry);element?.remove();};
+ },[identity,locale,started,revision,isVisible]);
+ const unavailable=widgetStatus==="unavailable"||status==="unavailable"&&!identity;
+ return <div ref={ref} className="google-reviews-panel">
+  <h3 className="profile-google-heading" translate="no">Google Maps</h3>
+  <div ref={container} className={`google-official-widget${expired||unavailable?" google-widget-unavailable":""}`} aria-label={t("public.googleDetailsAria",{name:workshop.name})}/>
+  {unavailable?<p className="help" role="status">{t("public.googleDetailsFailed")}</p>:!loadedAt&&canLoad&&<p className="help" role="status">{t("public.googleDetailsLoading")}</p>}
+  {loadedAt!==null&&<p className="help google-details-time">{t("public.googleDetailsLoadedAt",{time:formatDate(locale,loadedAt,{withTime:true})})}</p>}
+  {expired&&<p className="help" role="status">{t("public.googleDetailsStale")}</p>}
+  {(expired||unavailable)&&identity&&<button type="button" className="outline google-details-refresh" disabled={!canLoad} onClick={()=>{if(isVisible()){if(needsReload)window.location.reload();else setRevision(value=>value+1);}}}>{t(needsReload?"public.googleDetailsReload":"public.googleDetailsRefresh")}</button>}
+  <LocaleAnchor className="text-action" href={mapsUrl} target="_blank" rel="noopener noreferrer">{t("public.checkMaps")}</LocaleAnchor>
+ </div>;
 }

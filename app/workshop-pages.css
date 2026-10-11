@@ -133,9 +133,9 @@ a.profile-phone-summary{display:flex;flex-direction:row;align-items:center;gap:8
 .profile-gallery-loading{position:absolute;display:flex;align-items:center;gap:10px;color:#f4faf6;font-size:14px;line-height:1.5}
 .profile-photo-error{display:grid;place-items:center;width:100%;height:100%;margin:0;text-align:center;padding:24px 65px;font-size:16px;line-height:1.6;color:#fff}
 .profile-gallery-thumbnails{display:flex;justify-content:center;gap:12px;padding:14px 20px 18px;border-top:1px solid #ffffff1f;background:#ffffff05}
-.profile-gallery-thumbnails>button{width:84px;height:60px;padding:3px;border:2px solid transparent;border-radius:11px;background:#ffffff12;opacity:.65;transition:opacity .15s,border-color .15s;overflow:hidden}
-.profile-gallery-thumbnails>button:hover{opacity:1}
-.profile-gallery-thumbnails>button[aria-pressed=true]{border-color:#fff;opacity:1;background:#ffffff30;box-shadow:0 0 0 3px #ffffff0c}
+.profile-gallery-thumbnails figure>button{width:84px;height:60px;padding:3px;border:2px solid transparent;border-radius:11px;background:#ffffff12;opacity:.65;transition:opacity .15s,border-color .15s;overflow:hidden}
+.profile-gallery-thumbnails figure>button:hover{opacity:1}
+.profile-gallery-thumbnails figure>button[aria-pressed=true]{border-color:#fff;opacity:1;background:#ffffff30;box-shadow:0 0 0 3px #ffffff0c}
 .profile-gallery-thumbnails img{display:block;width:100%;height:100%;object-fit:cover;border-radius:6px}
 .profile-photo-viewer button:focus-visible{outline:3px solid #d9f2e3;outline-offset:3px}
 .profile-photo-loading{display:flex;align-items:center;gap:9px;min-height:58px;color:#667d6f;font-size:14px}
@@ -180,7 +180,7 @@ a.profile-phone-summary{display:flex;flex-direction:row;align-items:center;gap:8
  .profile-gallery-stage>button{width:44px;height:44px}
  .profile-gallery-prev{left:5px}.profile-gallery-next{right:5px}
  .profile-gallery-thumbnails{gap:10px;padding:12px 14px 15px}
- .profile-gallery-thumbnails>button{width:74px;height:54px}
+ .profile-gallery-thumbnails figure>button{width:74px;height:54px}
  .profile-photo-loading{min-height:46px}
  .profile-service-groups{gap:17px}
  .profile-mobile-actions{gap:7px}
@@ -191,7 +191,7 @@ a.profile-phone-summary{display:flex;flex-direction:row;align-items:center;gap:8
  .profile-contact-actions:empty{display:none}
 }
 @media(prefers-reduced-motion:reduce){
- .profile-gallery-stage>img,.profile-gallery-stage>button,.profile-gallery-thumbnails>button{transition:none}
+ .profile-gallery-stage>img,.profile-gallery-stage>button,.profile-gallery-thumbnails figure>button{transition:none}
  .profile-sources>summary>svg,.profile-map>summary>svg{transition:none}
 }
 
@@ -201,3 +201,5 @@ a.profile-phone-summary{display:flex;flex-direction:row;align-items:center;gap:8
 .admin-workshops-page .admin-tools input{width:100%}
 .admin-workshops-page .directory-table,.admin-workshops-page .directory-table [data-slot=table-row]{border-color:#e5edef}
 @media(max-width:720px){.admin-workshops-page .admin-overview{grid-template-columns:1fr}}
+
+.profile-gallery-thumbnails figure{margin:0;min-width:0;max-width:120px}.profile-gallery-thumbnails figcaption{padding-top:5px;font-size:11px;line-height:1.4}.profile-gallery-thumbnails{flex-wrap:wrap;overflow:auto;max-height:160px}

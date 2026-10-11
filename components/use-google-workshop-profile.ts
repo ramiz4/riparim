@@ -1,35 +1,36 @@
 "use client";
 import {useI18n} from "@/lib/i18n/client";
-import {useEffect,useState} from "react";
-import {currentGoogleProfile,workshopGoogleIdentity} from "@/lib/google-maps-browser";
-import {googleProfileRefreshDelay,type GoogleProfileStatus,type LiveGoogleProfile} from "@/lib/google-workshop-profile";
+import {useEffect,useMemo,useState} from "react";
+import {googlePlacesClientConfig,workshopGoogleIdentity} from "@/lib/google-maps-browser";
+import type {GoogleProfileStatus} from "@/lib/google-workshop-profile";
 
 export type GoogleWorkshopIdentity={placeId:string;browserKey:string};
-export function useGoogleWorkshopProfile(id:string){
- const {locale}=useI18n();
- const requestKey=`${id}:${locale}`;
- const [profile,setProfile]=useState<LiveGoogleProfile|null>(null),[identity,setIdentity]=useState<GoogleWorkshopIdentity|null>(null),[status,setStatus]=useState<GoogleProfileStatus>("loading"),[loadedFor,setLoadedFor]=useState(requestKey);
- useEffect(()=>{
-  // eslint-disable-next-line react-hooks/set-state-in-effect -- Reset live Google content when navigating to a different workshop; the ID guard prevents displaying the previous business.
-  setProfile(null);setIdentity(null);setStatus("loading");setLoadedFor(requestKey);
-  let active=true,timer:ReturnType<typeof setTimeout>|undefined,pending=false,lastLoaded=0,nextRefresh=0;
-  const refresh=async()=>{
-   if(pending||document.visibilityState==="hidden")return;
-   pending=true;
-   try{
-    const match=await workshopGoogleIdentity(id);if(!active)return;
-    if(!match){setStatus("unavailable");return;}
-    setIdentity(previous=>previous?.placeId===match.placeId&&previous.browserKey===match.browserKey?previous:match);
-    const result=await currentGoogleProfile(match.placeId,match.browserKey,locale);if(!active)return;
-    setProfile(result);setStatus("ready");lastLoaded=result.loadedAt;
-    const delay=googleProfileRefreshDelay(result);nextRefresh=Date.now()+delay;
-    clearTimeout(timer);timer=setTimeout(()=>void refresh(),delay);
-   }catch{if(active){setProfile(null);setStatus("unavailable");}}
-   finally{pending=false;}
-  };
-  const visible=()=>{if(document.visibilityState==="visible"&&(Date.now()>=nextRefresh||Date.now()-lastLoaded>300000))void refresh();};
-  void refresh();document.addEventListener("visibilitychange",visible);
-  return()=>{active=false;clearTimeout(timer);document.removeEventListener("visibilitychange",visible);};
- },[id,locale,requestKey]);
- return loadedFor===requestKey?{profile,identity,status}:{profile:null,identity:null,status:"loading" as GoogleProfileStatus};
+export type RequestGoogleIdentity=(isVisible:()=>boolean)=>()=>void;
+function identityRequest(id:string,sourceMapsUrl:string|null|undefined,onResult:(identity:GoogleWorkshopIdentity|null)=>void){
+ let active=true,started=false;
+ const sources=new Set<()=>boolean>();
+ const visible=()=>document.visibilityState!=="hidden"&&[...sources].some(source=>source());
+ const requestIdentity:RequestGoogleIdentity=isVisible=>{
+  sources.add(isVisible);
+  if(!started&&visible()){
+   started=true;
+   void (async()=>{
+    try{
+     await googlePlacesClientConfig();if(!active)return;
+     // The first panel may disappear while configuration loads; another visible panel can take over.
+     if(!visible()){started=false;return;}
+     const identity=await workshopGoogleIdentity(id,sourceMapsUrl);if(active)onResult(identity);
+    }catch{if(active)onResult(null);}
+   })();
+  }
+  return()=>{sources.delete(isVisible);};
+ };
+ return {requestIdentity,activate:()=>{active=true;},deactivate:()=>{active=false;sources.clear();}};
+}
+export function useGoogleWorkshopProfile(id:string,sourceMapsUrl?:string|null){
+ const {locale}=useI18n(),requestKey=`${id}:${locale}:${sourceMapsUrl??""}`;
+ const [result,setResult]=useState<{key:string;identity:GoogleWorkshopIdentity|null;status:GoogleProfileStatus}>({key:requestKey,identity:null,status:"loading"});
+ const request=useMemo(()=>identityRequest(id,sourceMapsUrl,identity=>setResult({key:requestKey,identity,status:identity?"ready":"unavailable"})),[id,requestKey,sourceMapsUrl]);
+ useEffect(()=>{request.activate();return()=>request.deactivate();},[request]);
+ return {...(result.key===requestKey?{identity:result.identity,status:result.status}:{identity:null,status:"loading" as GoogleProfileStatus}),requestIdentity:request.requestIdentity};
 }
