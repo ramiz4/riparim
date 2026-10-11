@@ -89,9 +89,16 @@ await withWorkerRuntime({modules,modulesRoot:resolve('dist/server'),compatibilit
   const own=await dispatchFetch('https://riparim.test'+prefix+'/bewertungen?einreichung='+submission),ownHtml=await own.text();assert.equal(own.status,200);assert.match(ownHtml,/<main[^>]*class="my-reviews-page wrap"/);assert.match(ownHtml,/<meta[^>]*name="robots"[^>]*content="noindex[^">]*nofollow/);assert(!ownHtml.includes('hreflang='),'Targeted own-review documents have no private alternates');assert(ownHtml.includes(encodeURIComponent(prefix+'/bewertungen?einreichung='+submission)),'The built guest page preserves the exact localized page return through sign-in');assert(!ownHtml.includes('data-slot="dialog-overlay"'),'The independently addressable page has no modal overlay');
  }
  const callback=await dispatchFetch('https://riparim.test/auth/bestaetigen?token_hash=fixture',{redirect:'manual'});assert.equal(callback.status,303);assert.equal(callback.headers.get('Referrer-Policy'),'no-referrer');
- for(const locale of ['de','sq','en'])for(const path of ['/betrieb','/verwaltung','/verwaltung/bewertungen','/verwaltung/benutzer','/verwaltung/betriebe','/verwaltung/anmeldung']){
+ for(const locale of ['de','sq','en'])for(const path of ['/betrieb','/betrieb/beanspruchen','/verwaltung','/verwaltung/bewertungen','/verwaltung/benutzer','/verwaltung/betriebe','/verwaltung/anmeldung']){
   const prefix=locale==='de'?'':'/'+locale,response=await dispatchFetch('https://riparim.test'+prefix+path);assert.equal(response.status,200,'Actual management guest page stays reachable');const html=await response.text();
   assert.match(html,new RegExp('<html lang="'+locale+'"'));assert.match(html,/<meta[^>]*name="robots"[^>]*content="noindex[^">]*nofollow/);assert(!html.includes('hreflang='),'Actual business/administration documents advertise no private alternates');
+ }
+ for(const locale of ['de','sq','en']){
+  const prefix=locale==='de'?'':'/'+locale,claimId='ahp-volkswagen-prizren';
+  const legacy=await dispatchFetch('https://riparim.test'+prefix+'/betrieb?werkstatt='+claimId,{redirect:'manual'});
+  assert.equal(legacy.status,307);assert.equal(new URL(legacy.headers.get('Location'),'https://riparim.test').pathname,prefix+'/betrieb/beanspruchen');assert.equal(new URL(legacy.headers.get('Location'),'https://riparim.test').search,'?werkstatt='+claimId);
+  const claim=await dispatchFetch('https://riparim.test'+prefix+'/betrieb/beanspruchen?werkstatt='+claimId),html=await claim.text();
+  assert.equal(claim.status,200);assert(html.includes(encodeURIComponent(prefix+'/betrieb/beanspruchen?werkstatt='+claimId)),'Built guest claim preserves workshop and locale through sign-in');
  }
  for(const file of (await readdir('public')).filter(file=>/\.(?:png|jpg|webp|svg)$/.test(file))){const response=await dispatchFetch('https://riparim.test/'+file,{redirect:'manual'});assert.equal(response.status,200,'physical unprefixed asset '+file+' stays reachable');}
  // Run Intl in native workerd as well, using the same public formatter/translator.

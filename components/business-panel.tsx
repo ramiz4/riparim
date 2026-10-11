@@ -6,21 +6,19 @@ import {formatDate} from "@/lib/i18n/format";
 import {useNavigationGuard} from "@/lib/i18n/navigation-guard";
 import {LocaleAnchor} from "@/components/locale-anchor";
 
-import {useCallback,useEffect,useId,useRef,useState,type FormEvent} from "react";
+import {useCallback,useEffect,useState,type FormEvent} from "react";
 import {services,type Workshop} from "@/lib/workshops";
 import {editableBusinessProfile,type BusinessProfile,type BusinessRequest,type BusinessState} from "@/lib/business-contract";
 import {AlertDialog,AlertDialogContent,AlertDialogTitle,AlertDialogDescription,AlertDialogHeader,AlertDialogFooter,AlertDialogCancel} from "@/components/ui/alert-dialog";
 
-export function BusinessPanel({directory=[],initialWorkshop,moderation=false}:{directory?:Workshop[];initialWorkshop?:string;moderation?:boolean}){
+export function BusinessPanel({moderation=false}:{moderation?:boolean}){
  const {locale,t}=useI18n();
  const statusLabels:Record<string,string>={pending:t("management.businessPending"),approved:t("management.businessApproved"),rejected:t("management.businessRejected")};
  const errorMessage=useCallback((error:unknown)=>error instanceof LocalizedError?error.message:t("management.businessNetwork"),[t]);
- const id=useId(),[state,setState]=useState<BusinessState|null>(null),[loading,setLoading]=useState(true),[loadFailed,setLoadFailed]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(""),[feedback,setFeedback]=useState("");
- const selectedWorkshop=directory.find(workshop=>workshop.id===initialWorkshop),workshopId=selectedWorkshop?.id??"";
- const [evidence,setEvidence]=useState(""),[file,setFile]=useState<File|null>(null),fileInput=useRef<HTMLInputElement>(null);
+ const [state,setState]=useState<BusinessState|null>(null),[loading,setLoading]=useState(true),[loadFailed,setLoadFailed]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(""),[feedback,setFeedback]=useState("");
  const [editing,setEditing]=useState<Workshop|null>(null),[profile,setProfile]=useState<BusinessProfile|null>(null);
  const [decision,setDecision]=useState<{request:BusinessRequest;kind:"claim"|"change";approve:boolean}|null>(null),[note,setNote]=useState("");
- useNavigationGuard({busy,dirty:!!evidence||!!file||!!note||!!editing&&!!profile&&JSON.stringify(profile)!==JSON.stringify(editableBusinessProfile(editing))});
+ useNavigationGuard({busy,dirty:!!note||!!editing&&!!profile&&JSON.stringify(profile)!==JSON.stringify(editableBusinessProfile(editing))});
  const load=useCallback(async(signal?:AbortSignal)=>{
   setLoading(true);setLoadFailed(false);setError("");
   try{
@@ -43,17 +41,6 @@ export function BusinessPanel({directory=[],initialWorkshop,moderation=false}:{d
  async function mutate(method:string,body:unknown){
   const response=await fetch("/api/business",{method,headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}),data=await response.json() as CodedResponse;
   if(!response.ok)throw responseError(t,data);
- }
- async function claim(event:FormEvent){
-  event.preventDefault();if(busy||loading)return;setBusy(true);setError("");setFeedback("");
-  try{
-   const body=new FormData();body.set("workshopId",workshopId);body.set("evidence",evidence);if(file)body.set("file",file);
-   const response=await fetch("/api/business",{method:"POST",body}),data=await response.json() as CodedResponse;
-   if(!response.ok)throw responseError(t,data);
-   setEvidence("");setFile(null);if(fileInput.current)fileInput.current.value="";
-   const refreshed=await load();setFeedback(t("management.claimSubmitted"));if(!refreshed)setError(t("management.businessSavedReloadFailed"));
-  }
-  catch(e){setError(errorMessage(e));}finally{setBusy(false);}
  }
  async function save(event:FormEvent){
   event.preventDefault();if(!editing||!profile||busy||loading)return;setBusy(true);setError("");setFeedback("");
@@ -83,8 +70,6 @@ export function BusinessPanel({directory=[],initialWorkshop,moderation=false}:{d
  const visibleClaims=state?.claims.filter(request=>moderation||request.status!=="pending")??[];
  const pendingChangeRequestIds=state?.pendingChangeRequestIds??[];
  const visibleChanges=state?.changes.filter(request=>moderation||request.status!=="pending"||pendingChangeRequestIds.includes(request.id))??[];
- const hasActiveBusiness=!!state&&(state.workshops.length>0||state.pendingClaims.length>0);
- const claimForm=<section className="business-section"><h2>{t("management.claimProfile")}</h2>{selectedWorkshop?<><h3>{selectedWorkshop.name}</h3><p>{selectedWorkshop.city} · {selectedWorkshop.address}</p><p>{t("management.claimHelp")}</p><form className="business-form" onSubmit={claim}><fieldset disabled={busy||loading}><label htmlFor={`${id}-evidence`}>{t("management.privateOwnership")}<textarea id={`${id}-evidence`} required minLength={40} maxLength={4000} value={evidence} onChange={event=>setEvidence(event.target.value)}/></label><label htmlFor={`${id}-file`}>{t("management.ownershipDocument")}<input ref={fileInput} id={`${id}-file`} type="file" accept="application/pdf,image/jpeg,image/png" aria-describedby={`${id}-file-help`} onChange={event=>setFile(event.target.files?.[0]??null)}/></label><p id={`${id}-file-help`}>{t("management.ownershipDocumentHelp")}</p><button className="primary" type="submit">{t("management.submitClaim")}</button></fieldset></form></>:<><p>{t("management.claimFromProfile")}</p><LocaleAnchor className="outline small" href="/werkstaetten">{t("management.findWorkshop")}</LocaleAnchor></>}</section>;
  return <div className="business-panel" aria-busy={busy||loading}>
   {!moderation&&<header className="business-heading"><div><h1>{t("management.myBusiness")}</h1><p>{t("management.businessIntro")}</p></div></header>}
   {error&&!decision&&<p className="error" role="alert">{error}</p>}{feedback&&<p className="success" role="status">{feedback}</p>}
@@ -92,12 +77,12 @@ export function BusinessPanel({directory=[],initialWorkshop,moderation=false}:{d
   {moderation&&<button className="outline small" disabled={busy||loading} onClick={()=>{setFeedback("");void load();}}>{t("management.refresh")}</button>}
   {loading&&state&&<p role="status">{t("management.businessRefreshing")}</p>}
   {loading&&!state?<p role="status">{t("management.businessLoading")}</p>:state?<>
-   {!moderation&&!hasActiveBusiness&&claimForm}
+   {!moderation&&state.workshops.length===0&&state.pendingClaims.length===0&&visibleClaims.length===0&&visibleChanges.length===0&&!state.nextClaimCursor&&!state.nextChangeCursor&&<p>{t("management.businessEmpty")}</p>}
    {!moderation&&state.workshops.length>0&&<section className="business-section"><h2>{t("management.confirmedProfiles")}</h2><p>{t("management.profilesHelp")}</p>{state.workshops.map(workshop=><article className="business-request" key={workshop.id}><h3>{workshop.name}</h3><p>{workshop.city} · {workshop.address}</p><button className="outline small" disabled={busy||loading||state.pendingChangeWorkshopIds.includes(workshop.id)} onClick={()=>{setEditing(workshop);setProfile(editableBusinessProfile(workshop));setError("");}}>{t("management.editDraft")}</button>{state.pendingChangeWorkshopIds.includes(workshop.id)&&<p>{t("management.draftPending")}</p>}</article>)}</section>}
    {editing&&profile&&<section className="business-section"><h2>{t("management.draftFor",{name:editing.name})}</h2><p>{t("management.identityProtected")}</p><form className="business-form" onSubmit={save}><fieldset disabled={busy||loading}><label>{t("management.phone")}<input required maxLength={30} value={profile.phone} onChange={event=>setProfile({...profile,phone:event.target.value})}/></label><label>{t("management.phoneNote")}<input maxLength={150} value={profile.phoneNote} onChange={event=>setProfile({...profile,phoneNote:event.target.value})}/></label><label>{t("management.whatsAppOptional")}<input maxLength={30} value={profile.whatsapp} onChange={event=>setProfile({...profile,whatsapp:event.target.value})}/></label><fieldset className="business-services"><legend>{t("management.services")}</legend>{services.slice(1).map(service=><label key={service}><input type="checkbox" checked={profile.services.includes(service)} onChange={event=>setProfile({...profile,services:event.target.checked?[...profile.services,service]:profile.services.filter(value=>value!==service)})}/>{valueLabel(locale,"service",service)}</label>)}</fieldset><label>{t("management.specificWork")}<textarea required maxLength={6030} value={profile.serviceDetails.join("\n")} onChange={event=>setProfile({...profile,serviceDetails:event.target.value.split("\n")})}/></label><label>{t("management.description")}<textarea required minLength={20} maxLength={2000} value={profile.description} onChange={event=>setProfile({...profile,description:event.target.value})}/></label><div className="business-actions"><button className="primary" type="submit">{t("management.submitDraft")}</button><button className="outline" type="button" onClick={()=>{setEditing(null);setProfile(null);}}>{t("management.cancel")}</button></div></fieldset></form></section>}
    {(moderation||state.pendingClaims.length>0||visibleClaims.length>0||state.nextClaimCursor)&&<section className="business-section"><h2>{moderation?t("management.claimsReview"):t("management.ownClaims")}</h2>{!moderation&&state.pendingClaims.map(request=><article className="business-request" key={request.id}><div className="business-request-heading"><h3>{request.workshopName}</h3><span className="business-status pending">{t("management.businessPending")}</span></div><p className="business-meta">{t("management.claimType")} · {formatDate(locale,request.createdAt)}</p><p>{t("management.claimPendingHelp")}</p>{request.fileName&&<p><LocaleAnchor href={`/api/business/evidence/${request.id}?locale=${locale}`}>{t("management.ownershipDownload",{name:request.fileName})}</LocaleAnchor></p>}</article>)}{visibleClaims.length?requestList(visibleClaims,"claim"):moderation?<p>{t("management.noClaimsReview")}</p>:null}{state.nextClaimCursor&&<button className="outline small" disabled={busy||loading} onClick={()=>void loadMore("claim")}>{t("management.moreClaims")}</button>}</section>}
    {(moderation||visibleChanges.length>0||state.nextChangeCursor)&&<section className="business-section"><h2>{moderation?t("management.draftsReview"):t("management.ownDrafts")}</h2>{visibleChanges.length?requestList(visibleChanges,"change"):<p>{t("management.noDrafts")}</p>}{state.nextChangeCursor&&<button className="outline small" disabled={busy||loading} onClick={()=>void loadMore("change")}>{t("management.moreDrafts")}</button>}</section>}
-   {!moderation&&hasActiveBusiness&&(!selectedWorkshop||!state.workshops.some(workshop=>workshop.id===workshopId)&&!state.pendingClaims.some(request=>request.workshopId===workshopId))&&<details className="business-section business-claim" open={!!initialWorkshop&&!state.workshops.some(workshop=>workshop.id===initialWorkshop)&&!state.pendingClaims.some(request=>request.workshopId===initialWorkshop)}><summary>{t("management.additionalProfile")}</summary>{claimForm}</details>}
+   {!moderation&&<div className="business-actions"><LocaleAnchor className="outline small" href="/werkstaetten">{t("management.findWorkshop")}</LocaleAnchor></div>}
   </>:<p>{t("management.businessReload")}</p>}
   <AlertDialog open={!!decision} onOpenChange={open=>{if(!open&&!busy){setDecision(null);setNote("");setError("");}}}><AlertDialogContent onEscapeKeyDown={event=>{if(busy)event.preventDefault();}}><AlertDialogHeader><AlertDialogTitle>{decision?.approve?t("management.approveRequest"):t("management.rejectRequest")}</AlertDialogTitle><AlertDialogDescription>{decision?.request.workshopName}: {decision?.approve?decision.kind==="claim"?t("management.claimDecisionHelp"):t("management.changeDecisionHelp"):t("management.rejectDecisionHelp")}</AlertDialogDescription></AlertDialogHeader><label className="business-decision-note">{t("management.reason")}<textarea required minLength={10} maxLength={2000} value={note} disabled={busy} onChange={event=>setNote(event.target.value)}/></label>{error&&<p className="error" role="alert">{error}</p>}<AlertDialogFooter><AlertDialogCancel disabled={busy}>{t("management.cancel")}</AlertDialogCancel><button className="primary" disabled={busy||note.trim().length<10} onClick={()=>void decide()}>{busy?t("management.savingDecision"):t("management.saveDecision")}</button></AlertDialogFooter></AlertDialogContent></AlertDialog>
  </div>;

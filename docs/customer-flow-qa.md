@@ -440,3 +440,46 @@ mit sichtbarem Fokus. Englisch im mobilen Systemtheme löste dunkel auf und
 zeigte den Ladefehler mit „Try again“ ohne Aktualisieren-Button. Diese native
 Prüfung bestätigt keine echte Dateiübertragung oder Produktionsübernahme;
 die Uploadverträge decken die isolierten Tests ab.
+
+## Getrennte Betriebsübersicht und Beanspruchung
+
+`/betrieb` ist die private Übersicht für eigene Profile, Anträge und Änderungen.
+Sie enthält kein Antragsformular und keinen permanenten Aktualisieren-Button.
+Bei leerer Übersicht erklärt ein Hinweis den Einstieg über das öffentliche
+Werkstattprofil; ein Link öffnet den Werkstattfinder. Der Inhaberlink im Profil
+führt direkt zur eigenständigen Seite `/betrieb/beanspruchen?werkstatt=…`.
+Diese hat „Werkstattprofil beanspruchen“ als Seitentitel, die feste Werkstatt und
+ausschließlich Nachweistext plus optionalen privaten Upload. Nach erfolgreicher
+Einreichung ersetzt eine Bestätigung das Formular und verlinkt „Mein Betrieb“.
+Es gibt keine automatische Rückleitung und keinen eingebetteten Übersichtsteil.
+
+Alte `/betrieb?werkstatt=…`-Links leiten mit Sprache und Ziel zur Antragsseite
+weiter. Anmeldung und Sprachwechsel behalten die neue Seite mit eindeutigem
+Werkstattziel bei. Mehrdeutige, fehlende oder nicht veröffentlichte Werkstätten
+zeigen kein Formular für ein anderes Profil. Ein Katalogfehler bietet einen
+gezielten Wiederholungslink. Beide Seiten bleiben `noindex,nofollow`; das
+Benutzermenü führt weiterhin zur Übersicht. APIs, private Dokumente, Besitzrechte
+und manuelle Freigaben verwenden die bestehenden Verträge; es gibt keine neue
+Migration oder Providerkonfiguration.
+
+`tests/business-pages.test.mjs` prüft die tatsächlichen Seitendokumente und
+Legacy-Weiterleitungen in DE/SQ/EN, die getrennten Titel, Gast-Anmelderücksprünge,
+ungültige/mehrdeutige/unveröffentlichte Ziele und den Katalogfehler.
+`tests/business-claim-ui.test.mjs` prüft den beschrifteten Upload, Multipartdaten,
+erhaltene private Eingaben, gesperrte konkurrierende Einreichungen sowie die
+Bestätigung ohne Formular und ohne zusätzliche Übersichtsanfrage.
+`tests/business-ui.test.mjs` schützt die leere Übersicht, laufende Anträge,
+Profilbearbeitung und Moderation ohne eingebetteten neuen Antrag. Sprachwechsel,
+Header und beide tatsächlich gebauten Worker werden zusätzlich geprüft.
+Alle Fixtures verwenden fiktive Konten und abgefangene Netzwerkanfragen.
+
+Die ergänzende native Prüfung im bestätigten Chrome-Profil
+`ramizloki82@googlemail.com` nutzte ein eigenes QA-Fenster, die tatsächlichen
+Komponenten, ThemeProvider, Header, Footer, Assets und gebautes Projekt-CSS.
+Bei 1282 Pixeln hell wurden Antrag, synthetische Einreichung per Tastatur,
+Bestätigung ohne Formular und der Dokumentlink zur leeren Übersicht geprüft.
+Bei 390 Pixeln zeigte Englisch im dunklen Theme nur die Antragsseite;
+Albanisch im Systemtheme (hier dunkel) zeigte nur die Übersicht. Die gemessene
+Antragsbreite entsprach dem Viewport (390 beziehungsweise 1282 Pixel).
+Die Vorschau fing Schreibanfragen mit fiktiven Antworten ab. Diese Abnahme
+bestätigt keine echte Authentifizierung oder Dateispeicherung in Produktion.
