@@ -15,8 +15,9 @@ ALTER TABLE `auth_sessions` ADD `identity_subject` text;
 --> statement-breakpoint
 -- Preserve every historical key as an opaque internal account ID. The parser
 -- is confined to this one-time compatibility backfill; ownership is unchanged.
+-- A fixed backfill marker keeps upgrades of old export snapshots deterministic.
 INSERT OR IGNORE INTO auth_identities (provider,issuer,subject,account_id,created_at)
-SELECT 'supabase','https://' || substr(tail,1,instr(tail,':')-1),substr(tail,instr(tail,':')+1),account_id,strftime('%Y-%m-%dT%H:%M:%fZ','now')
+SELECT 'supabase','https://' || substr(tail,1,instr(tail,':')-1),substr(tail,instr(tail,':')+1),account_id,'2026-10-11T00:00:00.000Z'
 FROM (
  SELECT account_id,substr(account_id,10) AS tail FROM (
   SELECT account_id FROM (

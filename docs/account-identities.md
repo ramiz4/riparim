@@ -29,6 +29,10 @@ Besitzschlüssel und Dateien werden nicht umgeschrieben. Alte Writer können
 nach der Migration weiterarbeiten; der Resolver registriert deren spätere
 Konten bei Bedarf. Alte Sitzungen und Löschgrants ohne Issuerfelder gelten
 ausschließlich an ihrer historischen Ursprungsidentität.
+Backfill-Zuordnungen verwenden den festen Migrationsmarker
+`2026-10-11T00:00:00.000Z` als `created_at`, damit wiederholte Aufrüstungen
+derselben historischen Exportquelle dieselben übertragbaren Zeilen ergeben.
+Spätere neue Zuordnungen verwenden ihren tatsächlichen Erstellungszeitpunkt.
 
 Neue Sitzungseinträge speichern Provider, Issuer und Subject getrennt vom
 Anmeldeverfahren Passwort/Google. Eine gleichlautende externe Session-ID

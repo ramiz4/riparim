@@ -55,6 +55,19 @@ test("exact old schema upgrades only its proven missing migration suffix", () =>
   assert.equal(result.snapshot.tables.find((table) => table.name === "visits").rows[0].owner, "native-owner-fixture");
 });
 const plan = planDataTransfer(source, target, { migrations });
+test("upgrading the same authentic historical identity produces stable transfer rows", () => {
+  const authentic = structuredClone(source);
+  authentic.tables.find(table => table.name === "auth_links").rows[0].account_id = "supabase:historical-fixture.supabase.co:00000000-0000-4000-8000-000000000001";
+  const first = upgradeSnapshot(authentic, migrations).snapshot;
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 20);
+  const repeated = upgradeSnapshot(authentic, migrations).snapshot;
+  assert.deepEqual(first.tables.find(table => table.name === "auth_identities").rows, repeated.tables.find(table => table.name === "auth_identities").rows, "Backfill metadata cannot change an unchanged account snapshot between retries");
+  const initial = planDataTransfer(authentic, target, { migrations });
+  const destination = fixture(migrations.length);
+  for (const statement of initial.statements) destination.prepare(statement.sql).run(...statement.params);
+  assert.equal(planDataTransfer(authentic, snapshotDatabase(destination, { ...metadata, projectId: "target-fixture" }), { migrations }).statements.length, 0);
+  destination.close();
+});
 test("destination plan inserts business data and preserves owner/status links", () => {
   assert.equal(plan.statements.length, 3);
   assert(!plan.statements.some((statement) => statement.table.startsWith("_cf_") || statement.table === "d1_migrations"));
