@@ -1,7 +1,7 @@
 import {NextResponse,type NextRequest} from "next/server";
 import {createServerClient} from "@supabase/ssr";
 import {getAuthConfig} from "@/lib/auth/config";
-import {isTechnicalPath,isPagePath,isStaticOrMetadataPath} from "@/lib/i18n/locale";
+import {isTechnicalPath,isPagePath,isStaticOrMetadataPath,localeFromPath,localizeHref,pageIdentityPath} from "@/lib/i18n/locale";
 
 export async function proxy(request:NextRequest){
  const canonical=new URL(request.url);
@@ -16,9 +16,17 @@ export async function proxy(request:NextRequest){
  // Vinext beta.5 can return a rewritten route miss as a 200 text response.
  // Reject unknown page paths before handing the native locale route to Vinext.
  if(!isTechnicalPath(canonical.pathname)&&!isPagePath(canonical.pathname))return new Response("Not Found",{status:404,headers:{"X-Content-Type-Options":"nosniff","Referrer-Policy":"strict-origin-when-cross-origin","Cache-Control":"private, no-store"}});
- const rewrite=!/^\/(?:sq|en)(?:\/|$)/.test(canonical.pathname)&&!isTechnicalPath(canonical.pathname);
+ const page=!isTechnicalPath(canonical.pathname);
+ if(page){
+  const localized=localizeHref(canonical.pathname,localeFromPath(canonical.pathname));
+  if(localized!==canonical.pathname){
+   canonical.pathname=localized;
+   const redirect=NextResponse.redirect(canonical,308);redirect.headers.set("Cache-Control","private, no-store");return redirect;
+  }
+ }
  const destination=new URL(canonical);
- if(rewrite)destination.pathname=`/de${canonical.pathname==="/"?"":canonical.pathname}`;
+ if(page){const identity=pageIdentityPath(canonical.pathname);destination.pathname=`/${localeFromPath(canonical.pathname)}${identity==="/"?"":identity}`;}
+ const rewrite=destination.pathname!==canonical.pathname;
  const referrerPolicy=["/auth/bestaetigen","/auth/bestaetigen/"].includes(canonical.pathname)?"no-referrer":"strict-origin-when-cross-origin";
  // Cookie renewal must reconstruct the same response plan, including its rewrite.
  const createResponse=()=>{

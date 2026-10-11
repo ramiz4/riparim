@@ -1,3 +1,4 @@
+import {localizeHref} from '../scripts/lib/locale.mjs';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {mkdir,writeFile} from 'node:fs/promises';
@@ -11,10 +12,10 @@ function request(path,{host='127.0.0.1:5178',address='127.0.0.1',headers={},meth
  middleware(req,res,()=>next=true);return {req,status:res.statusCode,headers:values,ended,next};
 }
 for(const locale of ['de','sq','en']){
- const prefix=locale==='de'?'':'/'+locale,target=prefix+'/verwaltung?ort=prizren#konto';
+ const target=localizeHref('/verwaltung?ort=prizren#konto',locale);
  const login=request('/signin-with-chatgpt?return_to='+encodeURIComponent(target));assert.equal(login.status,302);assert.equal(login.headers.get('location'),target);assert.match(login.headers.get('set-cookie'),/__sites_local_auth=1; Path=\/; HttpOnly; SameSite=Lax/);
- const cancel=request('/signout-with-chatgpt?return_to='+encodeURIComponent(prefix+'/anmelden'));assert.equal(cancel.status,302);assert.equal(cancel.headers.get('location'),prefix+'/anmelden');assert.match(cancel.headers.get('set-cookie'),/Max-Age=0/);
- const post=request('/signout-with-chatgpt?return_to='+encodeURIComponent(prefix+'/anmelden'),{method:'POST'});assert.equal(post.status,303);assert.equal(post.headers.get('location'),prefix+'/anmelden');
+ const cancel=request('/signout-with-chatgpt?return_to='+encodeURIComponent(localizeHref('/anmelden',locale)));assert.equal(cancel.status,302);assert.equal(cancel.headers.get('location'),localizeHref('/anmelden',locale));assert.match(cancel.headers.get('set-cookie'),/Max-Age=0/);
+ const post=request('/signout-with-chatgpt?return_to='+encodeURIComponent(localizeHref('/anmelden',locale)),{method:'POST'});assert.equal(post.status,303);assert.equal(post.headers.get('location'),localizeHref('/anmelden',locale));
 }
 for(const target of ['//outside.test','/\\outside.test','/en/callback','/sq/auth/bestaetigen?token_hash=secret','/en/signin-with-chatgpt','/en/%63allback','/%5coutside.test'])assert.equal(request('/signin-with-chatgpt?return_to='+encodeURIComponent(target)).headers.get('location'),'/','Native return boundary rejects external/encoded/prefixed loops');
 const forged=request('/en',{headers:{'oai-authenticated-user-id':'forged','oai-authenticated-user-email':'forged@example.test'}});assert(forged.next);assert(!Object.keys(forged.req.headers).some(k=>k.startsWith('oai-authenticated-user-')));assert(!forged.req.rawHeaders.includes('forged'));

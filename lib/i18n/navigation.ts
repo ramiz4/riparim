@@ -1,5 +1,5 @@
 import {validatedReturnPath} from "@/lib/auth/return-path";
-import {localizeHref,stripLocalePrefix,type Locale} from "./locale";
+import {localizeHref,pageIdentityPath,type Locale} from "./locale";
 import {catalogueQuery} from "@/lib/catalogue-filters";
 
 const origin="https://riparim.invalid";
@@ -12,7 +12,7 @@ function publicNavigationHref(href:string,locale:Locale,allowReturn:boolean):str
  if(!href.startsWith("/")||href.startsWith("//"))return localizeHref("/",locale);
  let url:URL;try{url=new URL(href,origin);}catch{return localizeHref("/",locale);}
  if(url.origin!==origin||url.username||url.password)return localizeHref("/",locale);
- const path=stripLocalePrefix(url.pathname),query=new URLSearchParams();
+ const path=pageIdentityPath(url.pathname),query=new URLSearchParams();
  if(/^\/(?:api|auth|signin-with-chatgpt|signout-with-chatgpt|callback|__sites_connector_preview|__migration|_next)(?:\/|$)/.test(path)||/\.[a-z0-9]+$/i.test(path))return localizeHref("/",locale);
  if(path==="/werkstaetten"){
   if(url.searchParams.get("bewerten")==="1")query.set("bewerten","1");
@@ -27,7 +27,7 @@ function publicNavigationHref(href:string,locale:Locale,allowReturn:boolean):str
  if(path==="/betrieb"||path==="/betrieb/beanspruchen"){const ids=url.searchParams.getAll("werkstatt"),id=ids.length===1?ids[0]:null;if(id&&profileId.test(id))query.set("werkstatt",id);}
  if(/^\/werkstatt\/[^/]+$/.test(path)){
   const search=url.searchParams.get("suche");
-  if(search){const target=languageSwitchHref(search,locale);if(stripLocalePrefix(target).startsWith("/werkstaetten"))query.set("suche",target);}
+  if(search){const target=languageSwitchHref(search,locale);if(pageIdentityPath(new URL(target,origin).pathname)==="/werkstaetten")query.set("suche",target);}
   if(url.searchParams.get("bewerten")==="1")query.set("bewerten","1");
  }
  if(["/anmelden","/registrieren","/passwort-vergessen","/passwort-neu"].includes(path)){

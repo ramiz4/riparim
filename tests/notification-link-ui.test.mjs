@@ -1,3 +1,4 @@
+import {localizeHref} from '../scripts/lib/locale.mjs';
 import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {createRequire} from 'node:module';
@@ -21,10 +22,10 @@ try{
  mode='member';requests.length=0;dom.reconfigure({url:'https://riparim.example.test'+(locale==='de'?'':'/'+locale)+'/bewertungen?einreichung='+id});
  await render();check(requests[0]==='/api/visits?id='+id&&document.querySelectorAll('.visit').length===1,'The authenticated return opens the exact owned submission instead of an unrelated history page');
  check(!document.querySelector('[role="dialog"], [data-slot="dialog-overlay"]')&&document.querySelector('main h1')?.textContent===getMessages(locale).customer.myReviews,'Own reviews render as a regular page with a heading and no modal frame');
- check(document.querySelector('main nav a')?.getAttribute('href')===(locale==='de'?'':'/'+locale)+'/werkstaetten','The own reviews page has independent localized navigation back to workshops');
+ check(document.querySelector('main nav a')?.getAttribute('href')===localizeHref('/werkstaetten',locale),'The own reviews page has independent localized navigation back to workshops');
  check(document.querySelector('.visit-status').textContent===({de:'Ergänzung nötig',sq:'Nevojitet plotësim',en:'More information needed'})[locale]&&button(getMessages(locale).customer.supplement),'The owner can act on the requested proof supplement');
- check(link(getMessages(locale).customer.allMyReviews)?.getAttribute('href')===(locale==='de'?'':'/'+locale)+'/bewertungen','All reviews uses an independent page link that supports reload and browser history');
- dom.reconfigure({url:'https://riparim.example.test'+(locale==='de'?'':'/'+locale)+'/bewertungen'});await render();check(requests.at(-1)==='/api/visits'&&document.querySelectorAll('.visit').length===2,'Following the all-reviews destination loads the complete owned history');
+ check(link(getMessages(locale).customer.allMyReviews)?.getAttribute('href')===localizeHref('/bewertungen',locale),'All reviews uses an independent page link that supports reload and browser history');
+ dom.reconfigure({url:'https://riparim.example.test'+localizeHref('/bewertungen',locale)});await render();check(requests.at(-1)==='/api/visits'&&document.querySelectorAll('.visit').length===2,'Following the all-reviews destination loads the complete owned history');
  dom.reconfigure({url:'https://riparim.example.test'+(locale==='de'?'':'/'+locale)+'/bewertungen?einreichung='+id});await render();check(requests.at(-1)==='/api/visits?id='+id&&document.querySelectorAll('.visit').length===1,'Returning through browser history restores the targeted submission');
  await act(async()=>root.unmount());mode='foreign';root=createRoot(document.getElementById('root'));await render();
  check(document.querySelectorAll('.visit').length===0&&document.querySelector('[role="alert"]').textContent===getMessages(locale).common.notFound,'A different login sees no private submission behind a copied notification link');
