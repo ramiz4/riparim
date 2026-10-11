@@ -1,0 +1,51 @@
+name: Tool installation benchmark
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tool-benchmark-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  benchmark:
+    name: Compare locked app and tool installs
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out identical source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: "24"
+      - name: Compare cold and warm locked installations
+        run: |
+          source_commit=$(git rev-parse HEAD)
+          node -e 'const os=require("node:os"); console.log(JSON.stringify({node:process.version,cpus:os.availableParallelism(),memoryBytes:os.totalmem()}))'
+          echo "BENCHMARK_SOURCE=$source_commit"
+          task_benchmark_root=$(mktemp -d "$RUNNER_TEMP/tool-install-benchmark.XXXXXX")
+          for tool in app title release deploy; do
+            task_fixture="$task_benchmark_root/$tool"
+            git clone --quiet --local --no-hardlinks . "$task_fixture"
+            test "$(git -C "$task_fixture" rev-parse HEAD)" = "$source_commit"
+            for cache_state in cold warm; do
+              (
+                cd "$task_fixture"
+                if [ "$tool" = app ]; then
+                  /usr/bin/time -f "TOOL_BENCHMARK tool=$tool cache=$cache_state wall_seconds=%e" env npm_config_cache="$task_benchmark_root/cache-$tool" npm run install:ci
+                  for smoke_tool in title release deploy; do node scripts/check-tool-install.mjs "$smoke_tool"; done
+                else
+                  /usr/bin/time -f "TOOL_BENCHMARK tool=$tool cache=$cache_state wall_seconds=%e" env npm_config_cache="$task_benchmark_root/cache-$tool" npm run install:tool -- "$tool"
+                  node scripts/check-tool-install.mjs "$tool"
+                fi
+                node -e 'const fs=require("node:fs"); fs.rmSync("node_modules",{recursive:true,force:true}); if(process.argv[1]!=="app") fs.rmSync(".github/tools/"+process.argv[1]+"/node_modules",{recursive:true,force:true})' "$tool"
+              )
+            done
+          done
