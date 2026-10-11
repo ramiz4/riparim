@@ -26,9 +26,10 @@ try{
  await storage.db.prepare('INSERT INTO catalog_state VALUES (?,?)').bind(marker,'fixture').run();
  const publicId='fixture-public';
  await storage.db.prepare("INSERT INTO workshops (id,name,city,address,phone,brands,services,specialty,description,sources,checked_at,status,updated_at) VALUES (?, 'Fictional workshop','Prishtina','Synthetic road 1','+38344123456','[]','[\"Inspektion & Wartung\"]','Synthetic','Fictional workshop for isolated integration','[]','2026-10-01','published','2026-10-01T00:00:00Z')").bind(publicId).run();
- const body=()=>{const form=new FormData();for(const [key,value] of Object.entries({id:crypto.randomUUID(),workshop:publicId,date:'2026-10-01',vehicle:'Fixture car',service:'Inspektion & Wartung',evidenceType:'Rechnung',rating:'5',review:'Fictional review with sufficient characters for validation.',consent:'true'}))form.set(key,value);form.set('file',new File(['%PDF-1.7 fictional private file'],'fixture.pdf',{type:'application/pdf'}));return form;};
+ const body=()=>{const form=new FormData();for(const [key,value] of Object.entries({id:crypto.randomUUID(),workshop:publicId,date:'2026-10-01',vehicle:'Fixture car',service:'Inspektion & Wartung',evidenceType:'Rechnung',rating:'5',review:'',consent:'true'}))form.set(key,value);form.set('file',new File(['%PDF-1.7 fictional private file'],'fixture.pdf',{type:'application/pdf'}));return form;};
  const response=await api.visits.POST(new Request(origin+'/api/visits',{method:'POST',headers:{Origin:origin},body:body()}));
  assert.equal(response.status,201);const id=(await response.json()).id;
+ assert.equal((await storage.db.prepare('SELECT review FROM visits WHERE id=?').bind(id).first()).review,'','rating-only reviews use the current shared submission contract');
  const download=await api.download.GET(new Request(origin+'/api/evidence/'+id),{params:Promise.resolve({id})});
  assert.equal(download.status,200);assert.equal(download.headers.get('cache-control'),'private, no-store');assert.equal(await download.text(),'%PDF-1.7 fictional private file');
  globalThis.fixtureUser={...globalThis.fixtureUser,userId:'other'};
