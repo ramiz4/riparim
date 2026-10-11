@@ -8,9 +8,6 @@
 .business-heading>div{min-width:0}.business-heading h1{margin-top:0}.business-heading p{margin-bottom:0}
 .business-page>.business-panel{margin-top:18px}
 .business-section{padding:24px;border:1px solid var(--border);background:var(--card);border-radius:14px;margin-top:24px}
-.business-claim>summary{font-size:16px;font-weight:600;cursor:pointer;padding:4px 0;min-height:36px}
-.business-claim>summary:focus-visible{outline:3px solid var(--ring);outline-offset:4px}
-.business-claim>.business-section{border:0;padding:0;margin-top:16px;border-radius:0}
 .business-request{padding:18px;background:var(--background);border:1px solid var(--border);border-radius:10px;margin-top:16px;overflow-wrap:anywhere}
 .business-request-heading{display:flex;gap:12px;align-items:start;justify-content:space-between}
 .business-status{font-size:12px;white-space:nowrap;padding:4px 9px;border-radius:20px;background:var(--accent);color:var(--foreground)}

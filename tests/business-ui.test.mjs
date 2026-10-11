@@ -37,24 +37,17 @@ const control=label=>[...document.querySelectorAll('label')].find(node=>node.tex
 const click=async node=>{assert(node,'Expected UI control exists');await act(async()=>{node.focus();node.click();});};
 const type=async(node,value)=>{const prototype=node instanceof HTMLTextAreaElement?HTMLTextAreaElement.prototype:HTMLInputElement.prototype;await act(async()=>{Object.getOwnPropertyDescriptor(prototype,'value').set.call(node,value);node.dispatchEvent(new Event('input',{bubbles:true}));});};
 const submit=async form=>act(async()=>form.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));
-const render=async(moderation=false,initialWorkshop=workshop.id)=>act(async()=>root.render(fixtureMessages(createElement(BusinessPanel,{directory:[{...workshop,id:'other-workshop',name:'Other workshop'},workshop],initialWorkshop,moderation}))));
-const remount=async(moderation=false,initialWorkshop=workshop.id)=>{await act(async()=>root.unmount());root=createRoot(document.getElementById('root'));await render(moderation,initialWorkshop);};
+const render=async(moderation=false)=>act(async()=>root.render(fixtureMessages(createElement(BusinessPanel,{moderation}))));
+const remount=async(moderation=false)=>{await act(async()=>root.unmount());root=createRoot(document.getElementById('root'));await render(moderation);};
 const dialog=()=>document.querySelector('[role="alertdialog"]');
 try{
  loadFailure=true;await render();check(document.querySelector('[role="alert"]').textContent===getMessages('de').management.businessUnavailable&&button('Erneut versuchen'),'Loading failure exposes an accessible refresh action');
  check(document.querySelector('header h1')?.textContent==='Mein Betrieb'&&!document.querySelector('header button')&&!button('Aktualisieren'),'The page title has no redundant refresh action');
  loadFailure=false;await click(button('Erneut versuchen'));
- check([...document.querySelectorAll('h2')].map(heading=>heading.textContent).join('|')==='Werkstattprofil beanspruchen','The first visit leads directly to the claim form without empty profile or history panels');
- check(!document.querySelector('select')&&document.querySelector('.business-section h3').textContent===workshop.name,'The linked workshop is fixed and no profile selector is available');
- const proof=control('Privater Inhabernachweis');check(proof.minLength===40&&proof.maxLength===4000&&proof.required,'The private proof field is labelled and bounded');
- await type(proof,'A sufficiently detailed fictional register explanation proving operator ownership.');const fileControl=control('Dokument hochladen');const documentFile=new File(['%PDF-1.7 fictional proof'],'fixture.pdf',{type:'application/pdf'});await act(async()=>{Object.defineProperty(fileControl,'files',{value:[documentFile],configurable:true});fileControl.dispatchEvent(new Event('change',{bubbles:true}));});check(document.querySelectorAll('.business-form textarea').length===1&&fileControl.accept==='application/pdf,image/jpeg,image/png'&&document.getElementById(fileControl.getAttribute('aria-describedby')).textContent.includes('5 MB'),'The claim has one text field and a labelled private file input');mode='failure';await submit(proof.form);
- check(document.querySelector('[role="alert"]').textContent===getMessages('de').management.business_draft_conflict&&control('Privater Inhabernachweis').value.includes('register explanation')&&requests.at(-1).body.input.file.name==='fixture.pdf','Rejected submission preserves the private draft and announces its error');
- mode='success';await submit(proof.form);
- check(document.querySelector('[role="status"]').textContent.includes('privater Inhabernachweis')&&document.querySelector('.business-status').textContent==='In Prüfung','Successful submission announces review without granting ownership');
- check(!control('Privater Inhabernachweis')&&!button('Bestätigen'),'Customer views clear submitted proof and offer no moderation action');
+ check(document.querySelector('h1').textContent==='Mein Betrieb'&&!document.querySelector('form')&&!document.querySelector('h2')&&document.querySelector('a[href="/werkstaetten"]'),'An empty business overview offers the finder without embedding a claim form');
+ records.claims=[requestView('00000000-0000-4000-8000-000000000001','claim')];await remount();
+ check(document.querySelector('.business-status').textContent==='In Prüfung'&&!document.querySelector('form'),'The overview shows a pending claim without the application form');
  check(document.querySelector('.business-panel').textContent.includes('Warte auf die Entscheidung')&&document.querySelector('.business-panel').textContent.includes('separate Freigabe'),'A pending claim explains manual review and the next step without implying publication');
- check(!document.querySelector('.business-form'),'A pending applicant cannot duplicate a claim for the fixed workshop');
- check(!document.querySelector('.business-evidence')&&!document.querySelector('.business-request a'),'Customer request cards do not expose evidence or review links belonging to other applicants');
  records.workshops=[workshop];await remount();
  check(document.querySelector('h2').textContent==='Deine Profile'&&document.querySelector('.business-panel').textContent.includes('Änderungen werden erst nach Freigabe öffentlich'),'Owners can find profile editing and understand the separate publication approval');
  await click(button('Profil bearbeiten'));
@@ -90,20 +83,20 @@ try{
  await click(button('Weitere Änderungen laden'));
  check(document.querySelectorAll('.business-request').length===4&&!button('Weitere Änderungen laden'),'Draft pagination appends older proposals and stops at the last page');
  records={workshops:[],claims:[{...requestView('00000000-0000-4000-8000-000000000020','claim'),status:'rejected',moderatorNote:'Please supplement the fictional register entry.'}],changes:[]};await remount();
- check(document.querySelector('h2').textContent==='Werkstattprofil beanspruchen'&&!document.querySelector('.business-form').closest('details'),'A history-only applicant returns directly to the claim form');
+ check(document.querySelector('h2').textContent==='Deine Anträge'&&!document.querySelector('form'),'A history-only overview shows its decisions without an embedded claim form');
  check(document.querySelector('.business-request').textContent.includes('Dieser Antrag wurde abgelehnt. Beachte den Prüfvermerk.')&&document.querySelector('.business-note').textContent.includes('supplement'),'Historical rejected claims report their outcome and retain the private review note');
  records={workshops:[workshop],claims:[{...requestView('00000000-0000-4000-8000-000000000021','claim'),status:'approved'}],changes:[{...requestView('00000000-0000-4000-8000-000000000022','change'),status:'rejected',moderatorNote:'Please correct the fictional contact number.'},{...requestView('00000000-0000-4000-8000-000000000023','change'),status:'approved'}]};await remount();
  check(document.querySelector('.business-panel').textContent.includes('Dieser Inhabernachweis wurde bestätigt')&&button('Profil bearbeiten')&&!button('Profil bearbeiten').disabled,'Confirmed ownership points to the assigned profile editor');
  check(document.querySelector('.business-panel').textContent.includes('Diese Änderungen wurden abgelehnt. Beachte den Prüfvermerk.')&&[...document.querySelectorAll('.business-status')].some(node=>node.textContent==='Freigegeben'),'Historical rejected changes report their outcome while approved changes clearly indicate publication approval');
- records={workshops:[],claims:[],changes:[]};await remount();await type(control('Privater Inhabernachweis'),'Another sufficiently detailed and isolated fictional register explanation.');loadFailure=true;await submit(control('Privater Inhabernachweis').form);
- check(document.querySelector('[role="status"]').textContent.includes('eingereicht')&&document.querySelector('[role="alert"]').textContent.includes('bereits eingereicht')&&document.querySelector('[role="alert"]').textContent.includes('Erneut versuchen'),'A saved claim with a failed follow-up reload is clearly saved and asks for refresh instead of resubmission');
- loadFailure=false;await click(button('Erneut versuchen'));check(document.querySelector('.business-status').textContent==='In Prüfung','Refresh recovers the saved request after a follow-up reload failure');
+ records={workshops:[workshop],claims:[],changes:[]};await remount();await click(button('Profil bearbeiten'));loadFailure=true;await submit(control('Telefon').form);
+ check(document.querySelector('[role="status"]').textContent.includes('eingereicht')&&document.querySelector('[role="alert"]').textContent.includes('bereits eingereicht')&&document.querySelector('[role="alert"]').textContent.includes('Erneut versuchen'),'A saved draft with failed reload remains saved and offers a retry');
+ loadFailure=false;await click(button('Erneut versuchen'));check(document.querySelector('.business-status').textContent==='In Prüfung','Retry recovers a saved change without resubmission');
  records={workshops:[],claims:[],changes:[]};holdLoad=true;await remount();
  check(document.querySelector('[role="status"]').textContent==='Betriebsdaten werden geladen …'&&!button('Aktualisieren')&&document.querySelector('header h1').textContent==='Mein Betrieb','Initial loading keeps the page title visible and prevents a duplicate reload');
  holdLoad=false;await act(async()=>resolveLoad(Response.json(currentState())));resolveLoad=null;
  records={workshops:[],claims:Array.from({length:50},(_,index)=>({...requestView(`history-${index}`,'claim'),status:'approved'})),changes:[],pendingClaims:[{id:'older-pending-claim',workshopId:workshop.id,workshopName:workshop.name,createdAt:'2020-01-01T00:00:00Z'}],pendingChangeWorkshopIds:[],nextClaimCursor:'older-history'};await remount();
  check(document.querySelector('h2').textContent==='Deine Anträge'&&document.querySelector('.business-status').textContent==='In Prüfung'&&document.querySelector('.business-request').textContent.includes('Warte auf die Entscheidung')&&!document.querySelector('.business-claim'),'An older current claim remains the visible next step without paging through historical decisions');
- records={...records,pendingClaims:[]};await remount();check(document.querySelector('h2').textContent==='Werkstattprofil beanspruchen'&&button('Weitere Anträge laden'),'A history cursor alone does not imply an ongoing claim or hide direct claim entry');
+ records={...records,pendingClaims:[]};await remount();check(document.querySelector('h2').textContent==='Deine Anträge'&&button('Weitere Anträge laden')&&!document.querySelector('form'),'Historical pagination remains available without showing the claim form');
  records={workshops:[workshop],claims:[],changes:Array.from({length:50},(_,index)=>({...requestView(`change-history-${index}`,'change'),status:'approved'})),pendingClaims:[],pendingChangeWorkshopIds:[workshop.id],nextChangeCursor:'older-change-history'};await remount();
  check(button('Profil bearbeiten').disabled&&document.querySelector('.business-request').textContent.includes('Warte auf die Freigabe'),'An older pending change locks editing and explains the current next step before history is loaded');
  records={workshops:[workshop],claims:[],changes:[requestView('replacement-pending','change'),{...requestView('old-rejected-change','change'),status:'rejected',moderatorNote:'Replaced with a corrected draft.'}]};await remount();
@@ -123,8 +116,6 @@ try{
   check(!document.body.textContent.includes('Obsolete pending proposal')&&button('Profil bearbeiten').disabled===(outcome==='replacement'),`Pagination in the ${kind} queue reconciles an obsolete pending card after external ${outcome} without guessing its decision`);
   if(outcome==='replacement'){await remount();check(document.body.textContent.includes('The replacement proposal is the current pending change.'),'A full refresh reveals the current replacement proposal rather than the obsolete one');}
  }
- records={workshops:[],claims:[],changes:[]};
- for(const target of ['', 'unknown-workshop', ['fixture-workshop','other-workshop']]){await remount(false,target);check(!document.querySelector('.business-form')&&!document.querySelector('select')&&document.querySelector('a[href="/werkstaetten"]'),'Missing, invalid or ambiguous workshop links cannot silently claim another profile');}
  console.log(JSON.stringify({businessUiChecksPassed:passed,liveRequests:false}));
 }finally{await act(async()=>root.unmount());dom.window.close();}
 
