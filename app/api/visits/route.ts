@@ -1,4 +1,6 @@
 import {publicAccountName,accountNameMaxLength} from "@/lib/account-name";
+import {ValidationError} from "@/lib/validation-error";
+import {validateEvidenceFile} from "@/lib/evidence-file";
 import {getAppUser,getAdminUser,ownsVisit,ownerPair} from "@/app/auth";
 import {storage,cleanupVisitEvidence} from "@/db/storage";
 import {publishedWorkshop} from "@/db/directory";
@@ -26,7 +28,7 @@ async function submitEvidence(request:Request,replacing:boolean){const user=awai
  // A block or account deletion can overtake an in-flight evidence upload.
  const accountGuard="NOT EXISTS (SELECT 1 FROM auth_account_status WHERE status IN ('inactive','deleted') AND (account_id IN (?,?) OR account_id IN (SELECT account_id FROM auth_links WHERE legacy_owner IN (?,?))))",accountKeys=[...ownerPair(user),...ownerPair(user)];
  const file=f.get("file");let fileName:string|null=null,fileType:string|null=null;
- if(file&&typeof file!=="string"&&file.size){if(file.size>5*1024*1024)return json({error:"Die Datei ist zu groß. Maximal 5 MB.",errorCode:"file_too_large"},413);const bytes=await file.arrayBuffer(),b=new Uint8Array(bytes);const valid=(file.type==="application/pdf"&&String.fromCharCode(...b.slice(0,5))==="%PDF-")||(file.type==="image/jpeg"&&b[0]===255&&b[1]===216&&b[2]===255)||(file.type==="image/png"&&b[0]===137&&b[1]===80&&b[2]===78&&b[3]===71);if(!valid)return json({error:"Bitte lade eine gültige PDF-, JPG- oder PNG-Datei hoch.",errorCode:"invalid_file"},400);key=`evidence/${recordOwner}/${id}/${crypto.randomUUID()}`;fileName=file.name.replace(/[^\p{L}\p{N}._ -]/gu,"_").slice(0,120);fileType=file.type;const tracked=await db.prepare(`INSERT INTO evidence_uploads (file_key,owner) SELECT ?,? WHERE ${accountGuard}`).bind(key,user.userId,...accountKeys).run();if(!tracked.meta.changes){key=null;return json({error:"Dein Konto ist gesperrt. Bitte melde dich bei der Verwaltung.",errorCode:"account_blocked"},401);}uploadKey=key;
+ if(file&&typeof file!=="string"&&file.size){let validated;try{validated=await validateEvidenceFile(file);}catch(error){if(error instanceof ValidationError)return json({error:error.message,errorCode:error.code},error.code==="file_too_large"?413:400);throw error;}const {bytes}=validated;key=`evidence/${recordOwner}/${id}/${crypto.randomUUID()}`;fileName=validated.fileName;fileType=validated.fileType;const tracked=await db.prepare(`INSERT INTO evidence_uploads (file_key,owner) SELECT ?,? WHERE ${accountGuard}`).bind(key,user.userId,...accountKeys).run();if(!tracked.meta.changes){key=null;return json({error:"Dein Konto ist gesperrt. Bitte melde dich bei der Verwaltung.",errorCode:"account_blocked"},401);}uploadKey=key;
  // A delayed payload can only replace its own empty reservation. Deletion
  // removes that reservation, so R2 rejects a write arriving after cleanup.
  const reservation=await bucket.put(key,null,{customMetadata:{kind:"upload-reservation"}});

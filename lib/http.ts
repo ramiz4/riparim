@@ -2,3 +2,11 @@ export function json(data:unknown,status=200){return Response.json(data,{status,
 export function sameOrigin(r:Request){const origin=r.headers.get("origin");return (!origin||origin===new URL(r.url).origin)&&r.headers.get("sec-fetch-site")!=="cross-site";}
 export async function readJson(request:Request,maxBytes=32768){if(Number(request.headers.get("content-length")??0)>maxBytes)throw Error("INPUT_TOO_LARGE");const reader=request.body?.getReader();if(!reader)throw Error("INVALID_INPUT");const chunks:Uint8Array[]=[];let size=0;while(true){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>maxBytes){await reader.cancel();throw Error("INPUT_TOO_LARGE");}chunks.push(value);}const data=new Uint8Array(size);let offset=0;for(const c of chunks){data.set(c,offset);offset+=c.byteLength;}const body=JSON.parse(new TextDecoder().decode(data));if(!body||typeof body!=="object"||Array.isArray(body))throw new Error("INVALID_INPUT");return body as Record<string,unknown>;}
 export function validDate(value:string){return /^\d{4}-\d{2}-\d{2}$/.test(value)&&Number.isFinite(Date.parse(value))&&new Date(value).toISOString().slice(0,10)===value;}
+// Bound multipart bodies even when Content-Length is absent or inaccurate.
+export async function readFormData(request:Request,maxBytes:number){
+ const reader=request.body?.getReader();if(!reader)throw Error("INVALID_INPUT");
+ const chunks:Uint8Array[]=[];let size=0;
+ while(true){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>maxBytes){await reader.cancel();throw Error("INPUT_TOO_LARGE");}chunks.push(value);}
+ const body=new Uint8Array(size);let offset=0;for(const chunk of chunks){body.set(chunk,offset);offset+=chunk.byteLength;}
+ return new Response(body,{headers:{"Content-Type":request.headers.get("content-type")??""}}).formData();
+}
