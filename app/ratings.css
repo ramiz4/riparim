@@ -17,5 +17,6 @@
 .google-rating-panel .google-official-widget gmp-advanced-place-details-compact{display:block;width:100%;max-width:500px;min-width:0;border:1px solid var(--border);border-radius:12px}.google-rating-panel .help{font-size:12px;line-height:1.5}.google-rating-panel>.text-action{font-size:13px;min-height:36px;align-items:center}.profile-google-photos>.text-action{display:inline-flex;align-items:center;gap:7px;min-height:44px}
 
 .google-overview-panel .google-official-widget gmp-advanced-place-details{height:152px;max-width:none;border:0;border-radius:0;--gmp-mat-spacing-large:8px;--gmp-mat-spacing-medium:8px;--gmp-mat-spacing-extra-large:0px;--gmp-mat-spacing-two-extra-large:0px}
-.profile-google-reviews .google-official-widget gmp-advanced-place-details{max-width:none;--gmp-mat-spacing-large:8px;--gmp-mat-spacing-medium:8px;--gmp-mat-spacing-extra-large:0px;--gmp-mat-spacing-two-extra-large:0px}
+/* Reviews retain Google's native header, attribution and content insets. */
+.profile-google-reviews .google-official-widget gmp-advanced-place-details{max-width:none}
 .catalogue-card .google-rating-panel .google-official-widget gmp-advanced-place-details-compact{border:0;border-radius:0;--gmp-mat-color-surface:var(--card);--gmp-mat-font-body-small:normal 500 14px/20px Inter,Arial,Helvetica,sans-serif;--gmp-mat-spacing-large:0px;--gmp-mat-spacing-medium:4px}
