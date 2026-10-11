@@ -31,7 +31,7 @@ Für Suchlinks wird deren vorhandene Suchanfrage einschließlich Adresse verwend
 
 ## Zuordnung und Darstellung
 
-Ein veröffentlichtes Profil benötigt eine bestätigte Google-Identität, auch wenn keine Rezensionen oder Sterne vorhanden sind. Importvalidator und Verwaltungsroute prüfen diese Voraussetzung. Ein unverändertes bestätigtes Profil behält seine Identität; Änderungen an Name, Telefon, Ort, Adresse oder Koordinaten benötigen eine neue Bestätigung. Doppelt verwendete Place IDs werden zurückgewiesen. Kartenlink, Route, Bewertungen, Öffnungszeiten und Maps-Fotolink verwenden dieselbe ID. Öffnungszeiten werden ausschließlich im nativen Google-Baustein des Profilkopfs dargestellt; Fotos bleiben auf Google Maps. Inhalte werden nicht in die Importquelle übernommen.
+Ein veröffentlichtes Profil benötigt eine bestätigte Google-Identität, auch wenn keine Rezensionen oder Sterne vorhanden sind. Importvalidator und Verwaltungsroute prüfen diese Voraussetzung. Ein unverändertes bestätigtes Profil behält seine Identität; Änderungen an Name, Telefon, Ort, Adresse oder Koordinaten benötigen eine neue Bestätigung. Doppelt verwendete Place IDs werden zurückgewiesen. Kartenlink, Route, Bewertungen und Öffnungszeiten verwenden dieselbe ID. Öffnungszeiten werden ausschließlich im nativen Google-Baustein des Profilkopfs dargestellt; Fotos bleiben auf Google Maps. Inhalte werden nicht in die Importquelle übernommen.
 
 Die öffentliche Zuordnungsroute nimmt ausschließlich eine vorhandene veröffentlichte
 Werkstattkennung entgegen und liest deren bereits bestätigte Place ID aus dem
@@ -109,7 +109,7 @@ wird als Ladefehler angezeigt, niemals als null Bewertungen ausgegeben.
 
 Jeder Baustein startet nur bei Sichtbarkeit (120-Pixel-Vorlauf) und aktivem Tab.
 Konfiguration und Zuordnungsroute starten erst bei Sichtbarkeit des Google-Bereichs
-und aktivem Tab. Der Fotolink startet keine Konfiguration oder Identitätsprüfung.
+und aktivem Tab.
 Die öffentliche Zuordnungsroute liest nur die bereits bestätigte ID. Nach wartender
 Konfiguration wird die aktuelle Sichtbarkeit erneut geprüft; ist der Bereich
 unsichtbar, wird die Zuordnung bis zur erneuten Sichtbarkeit zurückgestellt.
@@ -131,7 +131,9 @@ Das Profil verwendet keine Zusammenfassungen oder `all-content`.
 
 Der Ladezeitpunkt bleibt internes Veraltungsmetadatum. Nach 30 Minuten wird der
 jeweilige alte Baustein ausgeblendet und eine klare
-Veraltungsanzeige mit Aktion **Google-Angaben aktualisieren** angeboten. Der
+Veraltungsanzeige angeboten. Status, die kompakte Aktion **Erneut laden** und
+der Maps-Fallback stehen in einer umbrechenden Zeile. Bei SDK-Ladefehlern heißt
+die Aktion weiterhin **Seite neu laden** und lädt den Browser tatsächlich neu. Der
 Timer ändert ausschließlich die Anzeige: Er startet keine Google-Abfrage.
 Auch ein Wechsel zurück in den Tab aktualisiert nicht automatisch. Erst die
 explizite Aktion im sichtbaren Bereich und aktiven Tab ersetzt die Widgetinstanz;
@@ -168,10 +170,10 @@ numerischen Google-Exporte für Listen-/Sortierzustand, keinen Contentcache und
 keine `Place.fetchFields`-Einzelratings. Die Widget-Anfrage nimmt eine bestätigte
 Place-ID und die aktive DE/SQ/EN-Sprache entgegen, ohne eine Provider-Suche.
 
-Der öffentliche Fotobereich verweist direkt auf das bestätigte Geschäft in
-Google Maps. REST-Foto-Metadaten und Medien werden vom Browser nicht mehr geladen.
-Der Link startet keine API-Abfrage und bleibt auch bei ausgeschöpfter Widgetquote
-verfügbar. Standort und Route bleiben ebenfalls direkte Maps-Links.
+Das öffentliche Profil hat keinen separaten Fotobereich oder Maps-Fotolink.
+REST-Foto-Metadaten und Medien werden vom Browser nicht geladen.
+Standort, Route und der kompakte Fehler-/Veraltungszustand bieten direkte Maps-Links,
+auch bei ausgeschöpfter Widgetquote.
 
 Konfiguration, bestätigte Identität und Widgetmontage beginnen erst bei Sichtbarkeit
 und aktivem Tab. Unsichtbare Karten, Filter und „Mehr anzeigen“ erzeugen keine
@@ -230,7 +232,7 @@ Readback vom 11.10.2026 bestätigt Advanced 100, Standard 250 und Sessions 0.
 | --- | ---: | --- |
 | Places (New): GetPlaceRequest | **0** | Einzel-Details bleiben gesperrt |
 | Places (New): SearchTextRequest | **20** | nur getrennte serverseitige Identitätsprüfung bei bestätigter freier Restmenge |
-| Places (New): PhotoMedia | **0** | öffentliche App verwendet einen direkten Maps-Fotolink |
+| Places (New): PhotoMedia | **0** | öffentliche App lädt keine Google-Fotos |
 | UI-Kit Standard Query | **250** | nur noch offene ältere Profil-/Katalogansichten |
 | UI-Kit Advanced Query | **100** | Katalograting und getrennte Profilbausteine, ohne Name/Aktionen |
 | UI-Kit Sessions | **0** | nicht verwendet und gesperrt |
@@ -339,7 +341,7 @@ Momentaufnahmen bleiben unverändert und werden nicht als aktuelle Werte angezei
    `https://riparim-google-paused.invalid/*` setzen. Niedrige Methodenquoten und
    Ausschluss von Places (New) im Browser-Key beibehalten. GetPlace und Fotos
    werden auch bei Monatswechsel nicht automatisch wieder freigegeben.
-   Eigene Profile/Bewertungen und direkte Maps-/Routen-/Fotolinks zuerst prüfen;
+   Eigene Profile/Bewertungen und direkte Maps-/Routenlinks zuerst prüfen;
    eine potenziell kostenpflichtige Providerprobe ist kein Abschaltnachweis.
    Änderungen/Readbacks getrennt von tatsächlichem Live- und Billingnachweis
    dokumentieren. Veröffentlichung nur als geprüfter Main-Release nach
