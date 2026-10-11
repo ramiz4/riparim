@@ -91,8 +91,9 @@ müssen alle alten Writer beendet sein. Eine alte Version würde sonst beim
 Zielprojekt weiterhin andere Besitzschlüssel erzeugen. Nach der Zuordnung
 verifiziert der Migrationsprozess jeden erwarteten Quell-/Zielbezug über den
 Resolver, vergleicht Bestandszahlen und prüft Kunden-, Admin-, Sperr- und
-Löschabläufe mit isolierten Konten. Der bestehende Supabase-Loginadapter
-wechselt weiterhin nur zwischen dessen unterstützten Projekten.
+Löschabläufe mit isolierten Konten. Der Auth-Adapter unterstützt zusätzlich ausdrücklich serverseitig freigegebene
+kompatible HTTPS-Hosts. Seine Konfiguration ersetzt keine Kontoübernahme; siehe
+[Auth-Anbieter und Wechsel](auth-provider.md).
 
 ## Löschung, Versand und Rückweg
 

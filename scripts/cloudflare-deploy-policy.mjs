@@ -16,6 +16,8 @@ export const cloudflareProduction = {
 
 const workerSecretNames = new Set([
   "REVIEW_MODERATOR_EMAIL",
+  "AUTH_TRUSTED_ORIGIN",
+  "SUPABASE_SECRET_KEY_ORIGIN",
   "SUPABASE_SECRET_KEY",
   "RESEND_API_KEY",
   "TRANSACTIONAL_EMAIL_FROM",

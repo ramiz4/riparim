@@ -57,11 +57,11 @@ const bundleOptions = {
     builder.onLoad({filter:/.*/,namespace:'notification-fixture'},()=>({loader:'js',contents:'export async function processNotifications(){return []; }'}));
     builder.onResolve({filter:/^@\/db\/directory$/},args=>({path:args.path,namespace:'catalogue-fixture'}));
     builder.onLoad({filter:/.*/,namespace:'catalogue-fixture'},()=>({loader:'js',contents:'export async function publishedWorkshop(id){return {id};}'}));
-    builder.onResolve({filter:/^(next\/server|@\/lib\/auth\/config|@supabase\/ssr)$/},args=>({path:args.path,namespace:'proxy-fixture'}));
+    builder.onResolve({filter:/^(next\/server|@\/lib\/auth\/config|@\/lib\/auth\/provider)$/},args=>({path:args.path,namespace:'proxy-fixture'}));
     builder.onLoad({filter:/.*/,namespace:'proxy-fixture'},args=>({loader:'js',contents:args.path==='next/server'
       ? 'export const NextResponse={redirect:(url,status)=>new Response(null,{status,headers:{Location:String(url)}}),rewrite:(url)=>{const response=new Response(null,{headers:{"x-middleware-rewrite":String(url)}});response.cookies={set:(name,value)=>response.headers.append("Set-Cookie",name+"="+value+"; Path=/; HttpOnly; Secure; SameSite=Lax")};return response;},next:()=>{const response=new Response(null);response.cookies={set:(name,value)=>response.headers.append("Set-Cookie",name+"="+value+"; Path=/; HttpOnly; Secure; SameSite=Lax")};return response;}};'
       : args.path==='@/lib/auth/config' ? 'export async function getAuthConfig(){return globalThis.fixtureProxyAuthConfig??null;}'
-      : 'export function createServerClient(project,key,options){if(!globalThis.fixtureProxyAuthConfig)throw new Error("Canonical routing must not access the provider");return {auth:{async getUser(){options.cookies.setAll([{name:"sb-fixture-auth-token",value:"refreshed",options:{}}]);}}};}'}));
+      : 'export function createAuthClient(config,cookies){if(!globalThis.fixtureProxyAuthConfig)throw new Error("Canonical routing must not access the provider");return {auth:{async getUser(){cookies.setAll([{name:"sb-fixture-auth-token",value:"refreshed",options:{}}]);}}};}'}));
     builder.onResolve({ filter: /^(vinext\/server\/fetch-handler|next\/headers|next\/navigation)$/ }, args => ({ path: args.path, namespace: 'fixture' }));
     builder.onLoad({ filter: /.*/, namespace: 'fixture' }, args => ({
       loader: 'js',

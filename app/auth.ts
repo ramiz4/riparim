@@ -4,7 +4,7 @@ import {authClient} from "@/lib/auth/client";
 import {getAuthConfig} from "@/lib/auth/config";
 import {allowsLegacyAccess,allowsGoogleModeration,googleIdentityMatches,verifiedGoogleProfile,type LegacyLink,type SessionGrant} from "@/lib/auth/policy";
 import {storage,moderatorEmail} from "@/db/storage";
-import type {User,SupabaseClient,Session} from "@supabase/supabase-js";
+import type {AuthUser as User,AuthClient,AuthSession as Session} from "@/lib/auth/contract";
 import {resolveSupabaseAccount,supabaseIdentity,sessionIdentityMatches} from "@/lib/auth/identities";
 import {accountBlocked,providerBlocked} from "@/lib/auth/account-status";
 
@@ -23,7 +23,7 @@ export async function linkLegacyAccount(projectUrl:string,u:User,source:"passwor
  if(source==="password")await db.prepare("UPDATE auth_links SET password_access=1 WHERE account_id=? AND legacy_owner=?").bind(accountId,old.userId).run();
 }
 
-async function verifiedSessionId(client:SupabaseClient,user:User,method:"password"|"oauth"){
+async function verifiedSessionId(client:AuthClient,user:User,method:"password"|"oauth"){
  const {data,error}=await client.auth.getClaims(),claims=data?.claims;
  if(error||!user.email_confirmed_at||claims?.sub!==user.id||typeof claims.session_id!=="string"||!Array.isArray(claims.amr)||!claims.amr.some(proof=>typeof proof==="object"&&proof!==null&&proof.method===method))throw Error("INVALID_AUTH_SESSION");
  return claims.session_id;
@@ -38,7 +38,7 @@ async function enrollSession(projectUrl:string,user:User,sessionId:string,grant:
  if(await accountBlocked(accountId))throw Error("ACCOUNT_DISABLED");
 }
 
-export async function recordPasswordSession(projectUrl:string,user:User,client:SupabaseClient){
+export async function recordPasswordSession(projectUrl:string,user:User,client:AuthClient){
  if(providerBlocked(user)||await accountBlocked(await resolveSupabaseAccount(projectUrl,user.id)))throw Error("ACCOUNT_DISABLED");
  const sessionId=await verifiedSessionId(client,user,"password");
  await linkLegacyAccount(projectUrl,user,"password");
@@ -46,7 +46,7 @@ export async function recordPasswordSession(projectUrl:string,user:User,client:S
  await enrollSession(projectUrl,user,sessionId,{provider:"password",legacyAccess:link?.password_access===1});
 }
 
-export async function recordGoogleSession(projectUrl:string,session:Session,client:SupabaseClient){
+export async function recordGoogleSession(projectUrl:string,session:Session,client:AuthClient){
  // The provider token comes exclusively from a successful server-side PKCE exchange.
  // Linked account metadata or a previous Google identity cannot prove this session.
  if(!session.provider_token)throw Error("INVALID_GOOGLE_SESSION");
@@ -64,7 +64,7 @@ export async function recordGoogleSession(projectUrl:string,session:Session,clie
  await enrollSession(projectUrl,user,sessionId,{provider:"google",googleSubject:google.sub,moderator:google.email.toLowerCase()===moderatorEmail(),legacyAccess:!!link});
 }
 
-export async function revokeCurrentSession(client:SupabaseClient){const {data}=await client.auth.getClaims();if(typeof data?.claims?.session_id==="string")await storage().db.prepare("UPDATE auth_sessions SET revoked=1 WHERE id=?").bind(data.claims.session_id).run();}
+export async function revokeCurrentSession(client:AuthClient){const {data}=await client.auth.getClaims();if(typeof data?.claims?.session_id==="string")await storage().db.prepare("UPDATE auth_sessions SET revoked=1 WHERE id=?").bind(data.claims.session_id).run();}
 
 export async function getAppUser():Promise<AppUser|null>{
  const c=await getAuthConfig();if(!c?.enabled){const u=await getChatGPTUser();return u&&!await accountBlocked(u.userId)?legacy(u):null;}

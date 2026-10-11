@@ -6,7 +6,7 @@ import {authClient} from "@/lib/auth/client";
 import {getAppUser,recordGoogleSession} from "@/app/auth";
 import {cookies} from "next/headers";
 import {issueDeletionGrant} from "@/lib/auth/deletion-grant";
-import type {SupabaseClient} from "@supabase/supabase-js";
+import type {AuthClient} from "@/lib/auth/contract";
 
 export const dynamic="force-dynamic";
 function redirectTo(path:string){return new Response(null,{status:303,headers:{Location:new URL(path,siteOrigin()).href,"Cache-Control":"no-store","Referrer-Policy":"no-referrer"}});}
@@ -15,7 +15,7 @@ export async function GET(request:Request){
  const p=new URL(request.url).searchParams,token=p.get("token_hash"),code=p.get("code"),type=p.get("type"),google=p.get("anbieter")==="google";
  const locale=callbackLocale(p.get("locale"));
  const next=localizedReturnPath(p.get("weiter"),siteOrigin(),locale,type==="recovery"?"/passwort-neu":"/?besuche=1");
- let client:SupabaseClient|undefined;
+ let client:AuthClient|undefined;
  try{
   const c=await getAuthConfig();if(!c?.enabled||p.has("error"))throw Error("AUTH_CALLBACK_UNAVAILABLE");
   if(google){
