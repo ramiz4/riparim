@@ -15,7 +15,7 @@ window.matchMedia=()=>({matches:false,addEventListener(){},removeEventListener()
 let visibleTab=true;Object.defineProperty(document,'visibilityState',{get:()=>visibleTab?'visible':'hidden'});
 const placeRequests=[],widgets=[],connections=[],disconnections=[],catalogueRefreshRequests=[],identityRequests=[];
 window.google={maps:{importLibrary:async()=>({Place:class{constructor(options){this.options=options;}async fetchFields(){placeRequests.push(this.options);throw Error('Enterprise details are prohibited');}}})}};
-customElements.define('gmp-place-details',class extends HTMLElement{connectedCallback(){connections.push(this);if(!widgets.includes(this))widgets.push(this);}disconnectedCallback(){disconnections.push(this);}});
+customElements.define('gmp-place-details-compact',class extends HTMLElement{connectedCallback(){connections.push(this);if(!widgets.includes(this))widgets.push(this);}disconnectedCallback(){disconnections.push(this);}});
 globalThis.fetch=async url=>{if(url==='/api/session')return Response.json({account:null,isAdmin:false});if(String(url).startsWith('/api/workshops?locale=')){catalogueRefreshRequests.push(String(url));return Response.json({workshops,displayById:{}});}if(url==='/api/google-places')return Response.json({enabled:true,browserKey:'fixture-key'});assert(String(url).startsWith('/api/google-places/'),'no browser REST photos or provider identity search');identityRequests.push(String(url));return Response.json({placeId:'ChIJ'+String(url).split('/').at(-1)});};
 
 const output='.test-runtime/catalogue-google-requests';await mkdir(output,{recursive:true});
@@ -51,16 +51,20 @@ try{
   await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true})));
   await tab(false);await intersect();assert.equal(widgets.length,start,'hidden tabs cannot request Standard widgets');
   await tab(true);await intersect();assert.equal(widgets.length,start+1);
-  const first=document.querySelector('gmp-place-details'),firstConnections=connections.filter(x=>x===first).length,firstDisconnections=disconnections.filter(x=>x===first).length;assert(first,'visible catalogue rating uses the official Standard UI Kit, without Enterprise details');
+  const first=document.querySelector('gmp-place-details-compact'),firstConnections=connections.filter(x=>x===first).length,firstDisconnections=disconnections.filter(x=>x===first).length;assert(first,'visible catalogue rating uses the official Standard UI Kit, without Enterprise details');
   assert.deepEqual([...first.querySelector('gmp-place-content-config').children].map(x=>x.localName),['gmp-place-rating'],'the rating content configuration omits all Advanced/session fields');
   assert.equal(first.querySelector('gmp-place-details-place-request').place.options.requestedLanguage,locale);
   await load();await intersect();assert.equal(widgets.length,start+1,'visibility changes preserve the native element');
-  assert.equal(document.querySelector('gmp-place-details'),first);assert(!first.hasAttribute('truncation-preferred'));
+  const ratingPanel=first.closest('.google-rating-panel');
+  assert(!ratingPanel.querySelector('.profile-google-heading'),'catalogue ratings use the native Google attribution without a duplicate heading');
+  assert(!ratingPanel.querySelector('.google-details-time'),'catalogue ratings omit the extra loaded-time line');
+  assert(!ratingPanel.querySelector('a.text-action'),'ready catalogue ratings rely on the native Maps button');
+  assert.equal(document.querySelector('gmp-place-details-compact'),first);assert(!first.hasAttribute('truncation-preferred'));assert.equal(first.getAttribute('orientation'),'horizontal');
   assert(document.querySelector('.riparim-rating .rating-value'),'own ratings remain independent');
   await search('Fixture 001');assert.equal(widgets.length,start+1,'filter changes cannot request hidden cards');
-  await search('');await intersect();assert.equal(widgets.length,start+1,'filtering away and back keeps the same native widget without a new Standard query');assert.equal(document.querySelector('gmp-place-details'),first,'the connected native provider element survives filtering');assert(first.isConnected);assert.equal(connections.filter(x=>x===first).length,firstConnections);assert.equal(disconnections.filter(x=>x===first).length,firstDisconnections,'filter changes do not disconnect or reconnect the native provider');
+  await search('');await intersect();assert.equal(widgets.length,start+1,'filtering away and back keeps the same native widget without a new Standard query');assert.equal(document.querySelector('gmp-place-details-compact'),first,'the connected native provider element survives filtering');assert(first.isConnected);assert.equal(connections.filter(x=>x===first).length,firstConnections);assert.equal(disconnections.filter(x=>x===first).length,firstDisconnections,'filter changes do not disconnect or reconnect the native provider');
   const nextLocale=locale==='sq'?'en':'sq';await render(nextLocale,h(Catalogue,{...props,initialFilters}));
-  assert.equal(document.querySelector('gmp-place-details'),null,'locale changes remove old native provider content before visibility');
+  assert.equal(document.querySelector('gmp-place-details-compact'),null,'locale changes remove old native provider content before visibility');
   await intersect();assert.equal(widgets.at(-1).querySelector('gmp-place-details-place-request').place.options.requestedLanguage,nextLocale);
  }
  for(const locale of ['de','sq','en']){
@@ -77,7 +81,7 @@ try{
  for(const locale of ['de','sq','en']){
   await render(locale,null);window.sessionStorage.clear();const start=widgets.length;
   await render(locale,h(Catalogue,props));for(let i=0;i<12;i++)await intersect(i);assert.equal(widgets.length-start,12);
-  const retainedBefore=[...document.querySelectorAll('gmp-place-details')],connectionBefore=connections.length,disconnectionBefore=disconnections.length;await search('No fixture match');assert.equal(document.querySelectorAll('.catalogue-card:not([hidden])').length,0);assert(retainedBefore.every(widget=>widget.isConnected),'no-results keeps the native widgets connected in hidden whole cards');await search('');assert.equal(connections.length,connectionBefore);assert.equal(disconnections.length,disconnectionBefore);for(let i=0;i<12;i++)await intersect(i);assert.equal(widgets.length-start,12,'filter changes keep all twelve connected widgets without extra Standard queries');
+  const retainedBefore=[...document.querySelectorAll('gmp-place-details-compact')],connectionBefore=connections.length,disconnectionBefore=disconnections.length;await search('No fixture match');assert.equal(document.querySelectorAll('.catalogue-card:not([hidden])').length,0);assert(retainedBefore.every(widget=>widget.isConnected),'no-results keeps the native widgets connected in hidden whole cards');await search('');assert.equal(connections.length,connectionBefore);assert.equal(disconnections.length,disconnectionBefore);for(let i=0;i<12;i++)await intersect(i);assert.equal(widgets.length-start,12,'filter changes keep all twelve connected widgets without extra Standard queries');
   await act(async()=>{document.querySelector('.catalogue-pagination button').click();await settle();});assert.equal(document.querySelectorAll('.catalogue-card:not([hidden])').length,24);assert.equal(widgets.length-start,12);
   for(let i=12;i<24;i++)await intersect(i);assert.equal(widgets.length-start,24);
   scenarioCounts.push({locale,firstTwelve:12,filterAdditional:0,showMoreHiddenAdditional:0,nextTwelveAdditional:12});
@@ -88,7 +92,7 @@ try{
  // A late live catalogue response removes retired/hidden profiles, including retained native widgets.
  await render('de',null);window.sessionStorage.clear();const initialFetch=globalThis.fetch;let releaseLive;const liveGate=new Promise(resolve=>{releaseLive=resolve;});
  globalThis.fetch=async(url,options)=>{if(String(url).startsWith('/api/workshops?locale=')){await liveGate;return Response.json({workshops:workshops.filter(w=>w.id!==workshops[0].id),displayById:{}});}return initialFetch(url,options);};
- try{await render('de',h(Catalogue,{...props,publicSnapshot:true}));await intersect();const retiredWidget=document.querySelector('gmp-place-details');assert(retiredWidget);await search('No fixture match');assert(retiredWidget.isConnected);await act(async()=>{releaseLive();await settle();});assert(!retiredWidget.isConnected,'live retirement unmounts retained provider content');assert(!document.querySelector('.catalogue-card-target[href*="'+workshops[0].id+'"]'),'a retired profile is removed even while filtered away');await search('');assert(!document.querySelector('.catalogue-card-target[href*="'+workshops[0].id+'"]'));}finally{releaseLive();globalThis.fetch=initialFetch;}
+ try{await render('de',h(Catalogue,{...props,publicSnapshot:true}));await intersect();const retiredWidget=document.querySelector('gmp-place-details-compact');assert(retiredWidget);await search('No fixture match');assert(retiredWidget.isConnected);await act(async()=>{releaseLive();await settle();});assert(!retiredWidget.isConnected,'live retirement unmounts retained provider content');assert(!document.querySelector('.catalogue-card-target[href*="'+workshops[0].id+'"]'),'a retired profile is removed even while filtered away');await search('');assert(!document.querySelector('.catalogue-card-target[href*="'+workshops[0].id+'"]'));}finally{releaseLive();globalThis.fetch=initialFetch;}
  for(const mode of ['disabled','quota','timeout']){
   await render('de',null);const scoped=await import(new URL('../'+output+'/ui.mjs?fallback-'+mode,import.meta.url)),baseFetch=globalThis.fetch;let identityCalls=0;
   globalThis.fetch=async(url,options)=>{if(url==='/api/google-places')return Response.json(mode==='disabled'?{enabled:false}:{enabled:true,browserKey:'fixture-key'});if(String(url).startsWith('/api/google-places/')){identityCalls++;if(mode==='timeout')throw new DOMException('Fixture deadline','TimeoutError');return new Response('{}',{status:429});}return baseFetch(url,options);};
@@ -102,7 +106,7 @@ try{
  }
  await render('de',h(WorkshopRatings,{workshop:workshops[0]}));await intersectRating();const failed=widgets.at(-1);await act(async()=>failed.dispatchEvent(new Event('gmp-error')));
  assert(document.querySelector('.google-rating-panel').textContent.includes(createTranslator(getMessages('de'))('public.googleDetailsFailed')));
- assert(document.querySelector('.google-rating-panel a').href.includes('google.com/maps'));assert(!document.querySelector('gmp-place-details'),'failed provider content is removed');
+ assert(document.querySelector('.google-rating-panel a').href.includes('google.com/maps'));assert(!document.querySelector('gmp-place-details-compact'),'failed provider content is removed');
  const failedCount=widgets.length;await tab(false);await tab(true);assert.equal(widgets.length,failedCount,'widget quota failure has no automatic retry');
  assert.equal(placeRequests.length,0,'no Enterprise fetchFields is called anywhere in the catalogue');
  console.log(JSON.stringify({catalogueSize:160,individualDetails:0,standardVisibleOnly:true,scenarioCounts,providerFallbackModes:['disabled','quota','timeout'],liveProviderCalls:false}));

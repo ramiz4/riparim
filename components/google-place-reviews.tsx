@@ -32,10 +32,12 @@ function GoogleDetails({workshop,identity,status,requestIdentity,ratingOnly=fals
   const timeout=setTimeout(fail,12000);
   void (async()=>{
    const library=await loadGooglePlaces(identity.browserKey);if(!active)return;
-   await customElements.whenDefined("gmp-place-details");if(!active)return;
+   const tag=ratingOnly?"gmp-place-details-compact":"gmp-place-details";
+   await customElements.whenDefined(tag);if(!active)return;
    // Visibility may change while the SDK loads; defer mounting the billable widget.
    if(!isVisible()){clearTimeout(timeout);setStarted(false);return;}
-   element=document.createElement("gmp-place-details");
+   element=document.createElement(tag);
+   if(ratingOnly)element.setAttribute("orientation","horizontal");
    const request=document.createElement("gmp-place-details-place-request");
    (request as HTMLElement&{place:unknown}).place=new library.Place({id:identity.placeId,requestedLanguage:locale});
    const config=document.createElement("gmp-place-content-config");
@@ -48,12 +50,12 @@ function GoogleDetails({workshop,identity,status,requestIdentity,ratingOnly=fals
  },[identity,locale,started,revision,isVisible,ratingOnly]);
  const unavailable=widgetStatus==="unavailable"||status==="unavailable"&&!identity;
  return <div ref={ref} className={`google-reviews-panel${ratingOnly?" google-rating-panel":""}`}>
-  <h3 className="profile-google-heading" translate="no">Google Maps</h3>
+  {!ratingOnly&&<h3 className="profile-google-heading" translate="no">Google Maps</h3>}
   <div ref={container} className={`google-official-widget${expired||unavailable?" google-widget-unavailable":""}`} aria-label={t(ratingOnly?"public.googleRatingWidgetAria":"public.googleDetailsAria",{name:workshop.name})}/>
   {unavailable?<p className="help" role="status">{t("public.googleDetailsFailed")}</p>:!loadedAt&&canLoad&&<p className="help" role="status">{t("public.googleDetailsLoading")}</p>}
-  {loadedAt!==null&&<p className="help google-details-time">{t("public.googleDetailsLoadedAt",{time:formatDate(locale,loadedAt,{withTime:true})})}</p>}
+  {!ratingOnly&&loadedAt!==null&&<p className="help google-details-time">{t("public.googleDetailsLoadedAt",{time:formatDate(locale,loadedAt,{withTime:true})})}</p>}
   {expired&&<p className="help" role="status">{t(ratingOnly?"public.googleRatingStale":"public.googleDetailsStale")}</p>}
   {(expired||unavailable)&&identity&&<button type="button" className="outline google-details-refresh" disabled={!canLoad} onClick={()=>{if(isVisible()){if(needsReload)window.location.reload();else setRevision(value=>value+1);}}}>{t(needsReload?"public.googleDetailsReload":"public.googleDetailsRefresh")}</button>}
-  <LocaleAnchor className="text-action" href={mapsUrl} target="_blank" rel="noopener noreferrer">{t("public.checkMaps")}</LocaleAnchor>
+  {(!ratingOnly||unavailable||expired)&&<LocaleAnchor className="text-action" href={mapsUrl} target="_blank" rel="noopener noreferrer">{t("public.checkMaps")}</LocaleAnchor>}
  </div>;
 }

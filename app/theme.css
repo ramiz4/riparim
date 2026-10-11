@@ -71,7 +71,7 @@ html.dark .theme-control[data-mounted=false] [data-slot=switch-thumb] { translat
 .theme-control[data-mounted=false] .theme-switch { opacity: 1; }
 .footer>a:not(.brand) { display: inline-flex; align-items: center; min-height: 44px; font-size: 13px; }
 .footer>a:not(.brand):hover { color: var(--theme-accent); }
-.google-official-widget gmp-place-details {
+.google-official-widget :is(gmp-place-details,gmp-place-details-compact) {
   color-scheme: inherit;
   --gmp-mat-color-surface: var(--theme-surface);
   --gmp-mat-color-on-surface: var(--foreground);
