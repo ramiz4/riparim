@@ -52,3 +52,7 @@ next-env.d.ts
 
 # CI release archives
 /artifacts/
+
+# Portable Node build and private local databases
+/.node-runtime/
+/.riparim/

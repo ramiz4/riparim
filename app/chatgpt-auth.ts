@@ -1,3 +1,4 @@
+import {nativeIdentityEnabled} from "@/lib/runtime/env";
 import {publicAccountName} from "@/lib/account-name";
 import {validatedReturnPath} from "@/lib/auth/return-path";
 import { headers } from "next/headers";
@@ -20,6 +21,7 @@ const SIGN_IN_PATH = "/signin-with-chatgpt";
 const SIGN_OUT_PATH = "/signout-with-chatgpt";
 
 export async function getChatGPTUser(): Promise<ChatGPTUser | null> {
+  if (!nativeIdentityEnabled()) return null;
   const requestHeaders = await headers();
   const userId = requestHeaders.get(USER_ID_HEADER);
   const email = requestHeaders.get(USER_EMAIL_HEADER);

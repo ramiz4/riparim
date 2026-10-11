@@ -27,7 +27,12 @@
     "deploy:cloudflare": "node scripts/deploy-cloudflare.mjs",
     "cf:types": "wrangler types cloudflare-env.d.ts --config wrangler.jsonc --include-runtime false --strict-vars false",
     "i18n:check": "node scripts/check-i18n.mjs",
-    "test:i18n-worker": "node tests/i18n-worker.test.mjs && node tests/public-release-worker.test.mjs && node tests/workshop-not-found-worker.test.mjs"
+    "test:i18n-worker": "node tests/i18n-worker.test.mjs && node tests/public-release-worker.test.mjs && node tests/workshop-not-found-worker.test.mjs",
+    "build:node": "node scripts/build-node.mjs",
+    "start:node": "node --env-file-if-exists=.env .node-runtime/server.mjs",
+    "db:migrate:node": "node --env-file-if-exists=.env .node-runtime/command.mjs migrate",
+    "notifications:node": "node --env-file-if-exists=.env .node-runtime/command.mjs notifications",
+    "test:node": "node tests/node-runtime.test.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

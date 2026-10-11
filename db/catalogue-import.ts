@@ -1,9 +1,10 @@
+import type {SqlDatabase,SqlStatement} from "@/lib/runtime/contracts";
 import type {WorkshopCatalogue} from "@/lib/workshop-source";
 import {profileColumns,profileValues} from "./workshop-record";
 import {workshopIdentityHash} from "@/lib/google-place-identity";
 import {retiredWorkshopIds,workshopRetirementDate} from "@/lib/workshop-retirement";
-export async function catalogueImportStatements(db:D1Database,catalogue:WorkshopCatalogue){
- const profiles=catalogue.workshops,googleSnapshots=catalogue.workshops.flatMap(w=>w.google.snapshot?[{workshopId:w.id,...w.google.snapshot}]:[]),statements:D1PreparedStatement[]=[];
+export async function catalogueImportStatements(db:SqlDatabase,catalogue:WorkshopCatalogue){
+ const profiles=catalogue.workshops,googleSnapshots=catalogue.workshops.flatMap(w=>w.google.snapshot?[{workshopId:w.id,...w.google.snapshot}]:[]),statements:SqlStatement[]=[];
  // Fresh installations also retain deletion markers. Existing records are
  // removed separately by the guarded operation, after checking private links.
  for(const id of retiredWorkshopIds())statements.push(db.prepare("INSERT OR IGNORE INTO catalog_state(key,value) SELECT ?,? WHERE NOT EXISTS (SELECT 1 FROM workshops WHERE id=?)").bind(`workshop-retired:${id}`,workshopRetirementDate,id));

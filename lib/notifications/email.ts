@@ -1,4 +1,4 @@
-import {env} from "cloudflare:workers";
+import {env} from "@/lib/runtime/env";
 import {z} from "zod";
 import {siteOrigin} from "@/lib/auth/config";
 import {emailCopy,emailHtml} from "@/lib/email-content";

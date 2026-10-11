@@ -51,6 +51,8 @@ const bundleOptions = {
   write: false,
   define: { 'import.meta.env.DEV': 'false', __RIPARIM_RELEASE_COMMIT__: JSON.stringify(releaseCommit) },
   plugins: [{ name: 'request-auth-boundaries', setup(builder) {
+    builder.onResolve({filter:/^@\/lib\/runtime\/env$/},args=>({path:args.path,namespace:'runtime-fixture'}));
+    builder.onLoad({filter:/.*/,namespace:'runtime-fixture'},()=>({loader:'js',contents:'export const env={};export function nativeIdentityEnabled(){return true;}'}));
     builder.onResolve({filter:/(?:notifications\/outbox|^\.\/outbox)$/},args=>({path:args.path,namespace:'notification-fixture'}));
     builder.onLoad({filter:/.*/,namespace:'notification-fixture'},()=>({loader:'js',contents:'export async function processNotifications(){return []; }'}));
     builder.onResolve({filter:/^@\/db\/directory$/},args=>({path:args.path,namespace:'catalogue-fixture'}));
