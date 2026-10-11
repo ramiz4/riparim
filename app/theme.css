@@ -99,7 +99,7 @@ html.dark :is(.user-menu-trigger, .user-menu, .search-box, .workshop-card, .all-
 html.dark :is(.user-menu-trigger:hover, .user-menu-trigger[data-state=open], .outline:hover:not(:disabled), .all-button:hover, .directory-table [data-slot=table-row]:hover) { background: var(--theme-hover); border-color: var(--input); }
 html.dark .user-menu [data-slot=dropdown-menu-item]:is(:focus, [data-highlighted]) { background: var(--accent); color: var(--theme-accent); }
 html.dark .user-menu [data-slot=dropdown-menu-separator] { background: var(--border); }
-html.dark :is(.user-menu-identity span, .user-menu [data-slot=dropdown-menu-item] svg) { color: var(--muted-foreground); }
+html.dark :is(.user-menu-identity .user-menu-email, .user-menu [data-slot=dropdown-menu-item] svg) { color: var(--muted-foreground); }
 html.dark :is(.user-avatar, .trust-steps>div>span) { background: var(--accent); color: var(--theme-accent); border-color: var(--border); }
 html.dark .user-menu-identity small { color: var(--theme-accent); }
 html.dark .primary { background: var(--primary); border-color: var(--primary); color: var(--primary-foreground); }
