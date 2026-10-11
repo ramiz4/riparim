@@ -32,7 +32,7 @@ function GoogleDetails({workshop,identity,status,requestIdentity,ratingOnly=fals
   const timeout=setTimeout(fail,12000);
   void (async()=>{
    const library=await loadGooglePlaces(identity.browserKey);if(!active)return;
-   const tag=ratingOnly?"gmp-place-details-compact":"gmp-place-details";
+   const tag=ratingOnly?"gmp-advanced-place-details-compact":"gmp-place-details";
    await customElements.whenDefined(tag);if(!active)return;
    // Visibility may change while the SDK loads; defer mounting the billable widget.
    if(!isVisible()){clearTimeout(timeout);setStarted(false);return;}
@@ -40,9 +40,16 @@ function GoogleDetails({workshop,identity,status,requestIdentity,ratingOnly=fals
    if(ratingOnly)element.setAttribute("orientation","horizontal");
    const request=document.createElement("gmp-place-details-place-request");
    (request as HTMLElement&{place:unknown}).place=new library.Place({id:identity.placeId,requestedLanguage:locale});
-   const config=document.createElement("gmp-place-content-config");
-   for(const name of ratingOnly?["gmp-place-rating"]:["gmp-place-rating","gmp-place-opening-hours","gmp-place-reviews"])config.appendChild(document.createElement(name));
-   element.appendChild(request);element.appendChild(config);
+   element.appendChild(request);
+   if(ratingOnly){
+    // Advanced custom content omits the duplicate name and actions, preserving native attribution.
+    element.appendChild(document.createElement("gmp-place-rating"));
+    element.appendChild(document.createElement("gmp-place-attribution"));
+   }else{
+    const config=document.createElement("gmp-place-content-config");
+    for(const name of ["gmp-place-rating","gmp-place-opening-hours","gmp-place-reviews"])config.appendChild(document.createElement(name));
+    element.appendChild(config);
+   }
    element.addEventListener("gmp-load",()=>{if(active){clearTimeout(timeout);setWidgetStatus("ready");setLoadedAt(Date.now());expiry=setTimeout(()=>{if(active)setExpired(true);},1800000);}},{once:true});
    element.addEventListener("gmp-error",fail,{once:true});host.appendChild(element);
   })().catch(fail);

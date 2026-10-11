@@ -23,7 +23,8 @@ export function loadGooglePlaces(browserKey:string):Promise<GooglePlacesLibrary>
    const finish=(error?:Error)=>{clearTimeout(timeout);delete win.__riparimGoogleMapsLoaded;win.gm_authFailure=previousAuthFailure;if(error)reject(error);else resolve();};
    const timeout=setTimeout(()=>finish(Error("Google load timeout")),12000);
    win.__riparimGoogleMapsLoaded=()=>finish();win.gm_authFailure=()=>finish(Error("Google authorization unavailable"));
-   const params=new URLSearchParams({key:browserKey,v:"weekly",loading:"async",libraries:"places",language:browserLocale(),region:"XK",callback:"__riparimGoogleMapsLoaded"});
+   // Rating-only Advanced UI Kit requires beta; one shared SDK also serves Standard profile widgets.
+   const params=new URLSearchParams({key:browserKey,v:"beta",loading:"async",libraries:"places",language:browserLocale(),region:"XK",callback:"__riparimGoogleMapsLoaded"});
    script.src=`https://maps.googleapis.com/maps/api/js?${params}`;script.async=true;script.onerror=()=>finish(Error("Google unavailable"));document.head.appendChild(script);
   });
   if(!win.google?.maps?.importLibrary)throw Error("Google unavailable");return win.google.maps.importLibrary("places");
