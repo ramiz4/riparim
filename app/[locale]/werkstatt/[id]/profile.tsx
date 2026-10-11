@@ -68,7 +68,7 @@ export default function WorkshopProfile({publicSnapshot=false,workshop:initialWo
   {reviewsLoading?<p role="status">{t("public.loading")}</p>:reviewError?<p className="error" role="alert">{publicDataError(t,reviewError,"reviews")}</p>:reviews.length?<div className="public-review-list">{reviews.map((review,index)=><article className="public-review" key={`${review.display_name}:${review.date}:${index}`}>
    <div className="review-title"><div className="public-review-author"><strong>{review.display_name}</strong><time dateTime={review.date}>{formatDate(locale,review.date,{dateOnly:true})}</time></div><span className="public-review-score"><Star size={15} fill="currentColor" aria-hidden="true"/>{formatNumber(locale,review.rating)} / 5</span></div>
    <p className="review-meta"><span>{review.vehicle}</span><span>{review.service}</span></p>
-   <p className="public-review-text">{review.review}</p>
+   {review.review&&<p className="public-review-text">{review.review}</p>}
    <span className="proof-badge"><ShieldCheck size={14} aria-hidden="true"/>{t("public.proofChecked")}</span>
   </article>)}{w.count>reviews.length&&<p className="help">{t("public.latestReviews",{count:reviews.length})}</p>}</div>:<p className="profile-review-empty">{t("public.noProofReviews")}</p>}
  </div>;
@@ -83,7 +83,7 @@ export default function WorkshopProfile({publicSnapshot=false,workshop:initialWo
    <section className="profile-page-section" id="bewertungen"><div className="profile-section-heading"><h2>{t("public.reviews")}</h2><button className="text-action" onClick={openReview}>{t("public.writeReview")}</button></div><div className="profile-review-stream">
     {riparimReviews}{googleReviews}
     </div>
-    <section className="inline-review" id="bewerten"><button type="button" className="inline-review-toggle" aria-expanded={reviewOpen} aria-controls="review-editor" disabled={reviewBusy} onClick={()=>setReviewOpen(value=>!value)}><span><Star size={19}/><strong>{t("public.experience")}</strong></span><ChevronDown size={19}/></button>{reviewOpen&&<div className="inline-review-body" id="review-editor"><p className="help">{t("public.reviewHelp")}</p><ReviewForm workshop={w} directory={directory} signedIn={signedIn} account={account} returnTo={`${path}#bewerten`} onBusyChange={setReviewBusy} onSubmitted={()=>publicSnapshot?setReviewRevision(value=>value+1):router.refresh()}/></div>}</section>
+    <section className="inline-review" id="bewerten"><button type="button" className="inline-review-toggle" aria-expanded={reviewOpen} aria-controls="review-editor" disabled={reviewBusy} onClick={()=>setReviewOpen(value=>!value)}><span><Star size={19}/><strong>{t("public.experience")}</strong></span><ChevronDown size={19}/></button>{reviewOpen&&<div className="inline-review-body" id="review-editor"><ReviewForm workshop={w} directory={directory} signedIn={signedIn} account={account} returnTo={`${path}#bewerten`} onBusyChange={setReviewBusy} onSubmitted={()=>publicSnapshot?setReviewRevision(value=>value+1):router.refresh()}/></div>}</section>
    </section>
    <details className="profile-sources" id="quellen">
     <summary><span><FileCheck2 size={17}/>{t("public.sourcesDate")}</span><ChevronDown size={18}/></summary>

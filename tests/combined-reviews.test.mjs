@@ -31,7 +31,24 @@ const aggregate=async()=>(await directory.listWorkshops()).find(w=>w.id===worksh
 let id=crypto.randomUUID();
 await expect(await call('POST','guest',form(id)),401,'guest cannot submit');
 await expect(await call('POST','a',form(id,{proof:false})),400,'review without proof rejected');
-await expect(await call('POST','a',form(id,{review:false})),400,'proof without review rejected');
+const missingStars=form(id,{review:false});missingStars.delete('rating');
+await expect(await call('POST','a',missingStars),400,'proof without stars rejected');
+for(const text of ['', '   ', 'Gut.', 'x'.repeat(2000)]){
+ const starsOnly=crypto.randomUUID();
+ await expect(await call('POST','a',form(starsOnly,{text})),201,'stars suffice with optional text of any length up to the limit');
+ check(sqlite.prepare('SELECT review FROM visits WHERE id=?').get(starsOnly).review===text.trim(),'optional text is normalized');
+ check(!(await publicReviews()).reviews.length,'stars-only submissions remain private before moderation');
+ await expect(await moderateStarsOnly(starsOnly,0),200,'admin can publish stars without a minimum text length');
+ check((await publicReviews()).reviews.some(review=>review.review===text.trim()&&review.rating===4)&&(await aggregate()).count===1,'published stars count in the public list and aggregate');
+ await expect(await call('PUT','a',form(starsOnly,{review:false,revision:1})),200,'owner may remove optional text');
+ check(!(await publicReviews()).reviews.length,'removing text still requires renewed moderation');
+ await expect(await moderateStarsOnly(starsOnly,2),200,'admin can republish a review with no text');
+ await expect(await call('DELETE','a',{id:starsOnly}),200,'optional-text fixture removed');
+}
+async function moderateStarsOnly(id,revision){return call('PATCH','admin',{action:'moderate',id,status:'published',revision,note:'The fictional visit evidence was checked.'});}
+await expect(await call('POST','a',form(crypto.randomUUID(),{text:'x'.repeat(2001)})),400,'overlong optional text rejected');
+for(const rating of ['0','6','2.5','invalid']){const invalid=form(crypto.randomUUID(),{review:false});invalid.set('rating',rating);await expect(await call('POST','a',invalid),400,'only integer stars between 1 and 5 are accepted');}
+const invalidText=form(crypto.randomUUID());invalidText.set('review',new File(['fixture'],'fixture.txt'));await expect(await call('POST','a',invalidText),400,'optional review text must be text');
 await expect(await call('POST','a',form(id,{consent:false})),400,'consent required by server');
 await expect(await call('POST','a',form(id)),201,'combined bundle submitted');
 check(sqlite.prepare('SELECT status,review,rating FROM visits WHERE id=?').get(id).status==='pending','bundle pending');
