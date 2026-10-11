@@ -25,7 +25,7 @@ const request=async url=>{
 };
 assert.equal((await checkLive({request})).healthy,true);
 for(const response of [new Response('Error 1102: Worker exceeded resource limits',{status:503}),new Response('<html lang="en"><h1>Truncated stream'),new Response('<html lang="en"><p>Error</p></html>'),new Response('<html lang="en"><h1>Profile unavailable</h1><main data-public-profile-id="verified-profile"></main></html>')]){
- const broken=await checkLive({request:async url=>url.includes('/en/werkstatt/')?response.clone():request(url)});
+ const broken=await checkLive({request:async url=>url.includes('/en/workshop/')?response.clone():request(url)});
  assert.equal(broken.healthy,false,'Resource errors and HTTP200 stream failures must block publication');
 }
 await assert.rejects(checkLive({profileIds:['absent'],request}),/Published profile missing/);

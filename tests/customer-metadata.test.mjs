@@ -18,5 +18,5 @@ for(const locale of ['de','sq','en']){
 }
 process.stdout.write('Customer metadata: auth/settings and private landing modes noindex with no private alternates; ordinary landing remains public\n');
 
-const url=new URL(pages.authCallbackUrl('https://riparim.example.test','en','/sq/werkstatt/fixture#bewerten',{token_hash:'fixture-hash',type:'signup',locale:'sq',weiter:'//outside.test',unsafe:'discard'}));
-assert.equal(url.href,'https://riparim.example.test/auth/bestaetigen?locale=en&weiter=%2Fen%2Fwerkstatt%2Ffixture%23bewerten&token_hash=fixture-hash&type=signup');
+const url=new URL(pages.authCallbackUrl('https://riparim.example.test','en','/sq/servis/fixture#bewerten',{token_hash:'fixture-hash',type:'signup',locale:'sq',weiter:'//outside.test',unsafe:'discard'}));
+assert.equal(url.href,'https://riparim.example.test/auth/bestaetigen?locale=en&weiter=%2Fen%2Fworkshop%2Ffixture%23bewerten&token_hash=fixture-hash&type=signup');

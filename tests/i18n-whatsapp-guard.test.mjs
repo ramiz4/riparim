@@ -1,3 +1,4 @@
+import {localizeHref} from '../scripts/lib/locale.mjs';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {mkdir,writeFile} from 'node:fs/promises';
@@ -16,7 +17,7 @@ const props={workshop,directory:[workshop],reviews:[],reviewError:'',signedIn:tr
 const click=async node=>{assert(node);await React.act(async()=>{node.focus();node.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,button:0}));});},dirty=()=>document.querySelector('[data-guard-dirty]').dataset.guardDirty;
 let checks=0;
 try{for(const locale of ['de','sq','en'])for(const mode of ['cancel','confirm','untouched','closed','reopened']){
- const next=locale==='de'?'sq':locale==='sq'?'en':'de',current=`https://riparim.test${locale==='de'?'':`/${locale}`}/werkstatt/fixture-workshop`;
+ const next=locale==='de'?'sq':locale==='sq'?'en':'de',current='https://riparim.test'+localizeHref('/werkstatt/fixture-workshop',locale);
  dom.reconfigure({url:current});navigations.length=0;let finish,writes=[],confirmations=[];
  globalThis.fetch=async(url,init)=>{if(url==='/api/account'){writes.push({url,init});return new Promise(resolve=>{finish=resolve;});}if(url==='/api/google-places')return Response.json({enabled:false});throw Error('Unexpected fixture request: '+url);};
  window.confirm=text=>{confirmations.push(text);return mode==='confirm';};
@@ -28,7 +29,7 @@ try{for(const locale of ['de','sq','en'])for(const mode of ['cancel','confirm','
  if(mode==='closed'||mode==='reopened'){await React.act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));await React.act(async()=>new Promise(resolve=>setTimeout(resolve,0)));assert.equal(dirty(),'false','closing unregisters the private draft');if(mode==='reopened'){await click(document.querySelector('.workshop-overview-actions button'));textarea=document.querySelector('[role="dialog"] textarea');assert.equal(textarea.value,initial,'reopening resets to a new generated baseline');assert.equal(dirty(),'false');}}
  if(mode==='cancel')textarea.focus();await React.act(async()=>finish(Response.json({preferredLocale:next})));
  if(mode==='cancel'){assert.equal(navigations.length,0,'declining the latest WhatsApp edit prevents the already pending language navigation');assert.equal(window.location.href,current);assert.equal(textarea.value,edited);assert.equal(document.activeElement,textarea,'declining preserves focus in the edited modal');assert.equal(selector.value,locale);assert.equal(selector.disabled,false);assert.equal(dirty(),'true');}
- else{assert.equal(navigations.length,1,'confirmed or unmodified/closed/reset drafts retain sensible existing navigation');assert.equal(navigations[0],`${next==='de'?'':`/${next}`}/werkstatt/fixture-workshop`);assert(!navigations[0].includes('Private')&&!JSON.stringify(writes).includes('Private'),'private message never enters URL or provider writes');}
+ else{assert.equal(navigations.length,1,'confirmed or unmodified/closed/reset drafts retain sensible existing navigation');assert.equal(navigations[0],localizeHref('/werkstatt/fixture-workshop',next));assert(!navigations[0].includes('Private')&&!JSON.stringify(writes).includes('Private'),'private message never enters URL or provider writes');}
  assert.equal(confirmations.length,['cancel','confirm'].includes(mode)?1:0,'only currently edited open drafts require confirmation');if(confirmations.length)assert.equal(confirmations[0],getMessages(locale).common.discardDraft,'confirmation uses current document locale');
  assert.equal(window.localStorage.length,0);assert.equal(window.sessionStorage.length,0,'message remains in RAM');checks++;await React.act(async()=>root.render(null));
 }}finally{await React.act(async()=>root.unmount());globalThis.fetch=nativeFetch;dom.window.close();}

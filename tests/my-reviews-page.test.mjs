@@ -1,3 +1,4 @@
+import {localizeHref} from '../scripts/lib/locale.mjs';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {mkdir,writeFile,readFile,readdir} from 'node:fs/promises';
@@ -20,17 +21,16 @@ await mkdir(out,{recursive:true});await writeFile(out+'/server.mjs',result.outpu
 const {Home,ReviewsPage,generateMetadata,isPagePath,I18nProvider,getMessages}=await import(new URL('../'+out+'/server.mjs',import.meta.url));
 try{
  for(const locale of ['de','sq','en']){
-  const prefix=locale==='de'?'':'/'+locale;
-  await assert.rejects(()=>Home({params:Promise.resolve({locale}),searchParams:Promise.resolve({besuche:'1',einreichung:id})}),error=>error.location===prefix+'/bewertungen?einreichung='+id,'Legacy own-review links navigate to the independent localized page with the exact submission');
-  for(const [query,destination] of [[{besuche:'1'},prefix+'/bewertungen'],[{einreichung:id},prefix+'/bewertungen?einreichung='+id],[{besuche:['0','1'],einreichung:'//outside.example.test'},prefix+'/bewertungen'],[{besuche:'1',einreichung:[id,'other-private-id'],weiter:'//outside.example.test'},prefix+'/bewertungen']])await assert.rejects(()=>Home({params:Promise.resolve({locale}),searchParams:Promise.resolve(query)}),error=>error.location===destination,'Legacy navigation retains locale and only an unambiguous safe own-submission target');
-  assert(isPagePath(prefix+'/bewertungen'),'The independently addressable review page passes the locale request guard');
+  await assert.rejects(()=>Home({params:Promise.resolve({locale}),searchParams:Promise.resolve({besuche:'1',einreichung:id})}),error=>error.location===localizeHref('/bewertungen?einreichung=',locale)+id,'Legacy own-review links navigate to the independent localized page with the exact submission');
+  for(const [query,destination] of [[{besuche:'1'},localizeHref('/bewertungen',locale)],[{einreichung:id},localizeHref('/bewertungen?einreichung=',locale)+id],[{besuche:['0','1'],einreichung:'//outside.example.test'},localizeHref('/bewertungen',locale)],[{besuche:'1',einreichung:[id,'other-private-id'],weiter:'//outside.example.test'},localizeHref('/bewertungen',locale)]])await assert.rejects(()=>Home({params:Promise.resolve({locale}),searchParams:Promise.resolve(query)}),error=>error.location===destination,'Legacy navigation retains locale and only an unambiguous safe own-submission target');
+  assert(isPagePath(localizeHref('/bewertungen',locale)),'The independently addressable review page passes the locale request guard');
   const metadata=await generateMetadata({params:Promise.resolve({locale}),searchParams:Promise.resolve({einreichung:id})});assert.deepEqual(metadata.robots,{index:false,follow:false});assert.equal(metadata.alternates,null);assert(!JSON.stringify(metadata).includes(id),'Private page metadata never advertises a submission target');
   for(const target of [id,'https://outside.example.test/private']){
    const guest=await ReviewsPage({params:Promise.resolve({locale}),searchParams:Promise.resolve({einreichung:target})});
    const dom=new JSDOM(renderToStaticMarkup(createElement(I18nProvider,{locale,messages:getMessages(locale,['common'])},guest)));
    try{
     const document=dom.window.document;assert.equal(document.querySelectorAll('main').length,1);assert.equal(document.querySelector('main h1').textContent,getMessages(locale).customer.myReviews);assert(!document.querySelector('[role="dialog"], [data-slot="dialog-overlay"]'),'Direct guest page has a regular document frame');
-    assert.equal(document.querySelector('.login-prompt a').getAttribute('href'),prefix+'/anmelden?weiter='+encodeURIComponent(prefix+'/bewertungen'+(target===id?'?einreichung='+id:'')),'Logged-out direct calls preserve only their localized validated page destination through sign-in');
+    assert.equal(document.querySelector('.login-prompt a').getAttribute('href'),localizeHref('/anmelden?weiter=',locale)+encodeURIComponent(localizeHref('/bewertungen',locale)+(target===id?'?einreichung='+id:'')),'Logged-out direct calls preserve only their localized validated page destination through sign-in');
     assert(!document.querySelector('.visit, .evidence-details'),'Guests never render private reviews or evidence');assert(document.querySelector('footer'),'The private page retains standard site navigation');
    }finally{dom.window.close();}
   }
