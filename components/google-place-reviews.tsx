@@ -2,6 +2,7 @@
 import {useI18n} from "@/lib/i18n/client";
 import {LocaleAnchor} from "@/components/locale-anchor";
 import {useEffect,useRef,useState} from "react";
+import {RefreshCw} from "lucide-react";
 import {loadGooglePlaces} from "@/lib/google-maps-browser";
 import type {GoogleProfileStatus} from "@/lib/google-workshop-profile";
 import type {GoogleWorkshopIdentity,RequestGoogleIdentity} from "./use-google-workshop-profile";
@@ -51,9 +52,12 @@ function GoogleDetails({workshop,identity,status,requestIdentity,variant="review
  const unavailable=widgetStatus==="unavailable"||status==="unavailable"&&!identity;
  return <div ref={ref} className={`google-reviews-panel${compact?" google-rating-panel":""}${variant==="overview"?" google-overview-panel":""}`}>
   <div ref={container} className={`google-official-widget${expired||unavailable?" google-widget-unavailable":""}`} aria-label={t(variant==="rating"?"public.googleRatingWidgetAria":variant==="overview"?"public.googleDetailsAria":"public.googleReviewsAria",{name:workshop.name})}/>
-  {unavailable?<p className="help" role="status">{t("public.googleDetailsFailed")}</p>:!loadedAt&&canLoad&&<p className="help" role="status">{t("public.googleDetailsLoading")}</p>}
-  {expired&&<p className="help" role="status">{t(variant==="rating"?"public.googleRatingStale":"public.googleDetailsStale")}</p>}
-  {(expired||unavailable)&&identity&&<button type="button" className="outline google-details-refresh" disabled={!canLoad} onClick={()=>{if(isVisible()){if(needsReload)window.location.reload();else setRevision(value=>value+1);}}}>{t(needsReload?"public.googleDetailsReload":"public.googleDetailsRefresh")}</button>}
-  {(unavailable||expired)&&<LocaleAnchor className="text-action" href={mapsUrl} target="_blank" rel="noopener noreferrer">{t("public.checkMaps")}</LocaleAnchor>}
+  {(unavailable||expired)?<div className="google-details-fallback">
+   <p role="status">{t(unavailable?"public.googleDetailsFailed":variant==="rating"?"public.googleRatingStale":"public.googleDetailsStale")}</p>
+   <div className="google-details-actions">
+    {identity&&<button type="button" className="text-action google-details-refresh" aria-label={needsReload?t("public.googleDetailsReload"):`${t("public.reload")}: ${t("public.googleDetailsRefresh")}`} disabled={!canLoad} onClick={()=>{if(isVisible()){if(needsReload)window.location.reload();else setRevision(value=>value+1);}}}><RefreshCw size={14} aria-hidden="true"/>{t(needsReload?"public.googleDetailsReload":"public.reload")}</button>}
+    <LocaleAnchor className="text-action" href={mapsUrl} target="_blank" rel="noopener noreferrer">{t("public.checkMaps")}</LocaleAnchor>
+   </div>
+  </div>:!loadedAt&&canLoad&&<p className="google-details-loading" role="status">{t("public.googleDetailsLoading")}</p>}
  </div>;
 }
