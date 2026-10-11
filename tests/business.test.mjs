@@ -34,10 +34,10 @@ const profile=workshop=>({phone:workshop.phone,phoneNote:workshop.phoneNote,what
 const request=(method,body,headers={},path='/api/business')=>new Request(origin+path,{method,headers:{Origin:origin,'Content-Type':'application/json',...headers},...(body?{body:JSON.stringify(body)}:{})});
 async function post(actor,body){globalThis.fixtureUser=actors[actor]??null;return route.POST(request('POST',body));}
 async function state(actor,moderation=false){globalThis.fixtureUser=actors[actor]??null;return route.GET(new Request(origin+'/api/business'+(moderation?'?moderation=1':'')));}
-const claim=(actor,workshopId,extra={})=>post(actor,{kind:'claim',input:{workshopId,evidence,evidenceLinks:['https://business.example.test/proof'],...extra}});
+const claim=(actor,workshopId,extra={})=>Object.keys(extra).length?post(actor,{kind:'claim',input:{workshopId,evidence,evidenceLinks:['https://business.example.test/proof'],...extra}}):upload(actor,workshopId);
 const pdf=()=>new File(['%PDF-1.7 fictional operator proof'],'fixture-proof.pdf',{type:'application/pdf'});
-async function upload(actor,workshopId,file=pdf(),extra={}){globalThis.fixtureUser=actors[actor]??null;const body=new FormData();body.set('workshopId',workshopId);body.set('evidence',evidence);if(file)body.set('file',file);for(const [key,value] of Object.entries(extra))body.set(key,value);return route.POST(new Request(origin+'/api/business',{method:'POST',headers:{Origin:origin},body}));}
-async function download(actor,id){globalThis.fixtureUser=actors[actor]??null;return evidenceRoute.GET(new Request(origin+'/api/business/evidence/'+id),{params:Promise.resolve({id})});}
+async function upload(actor,workshopId,file=pdf(),extra={}){globalThis.fixtureUser=actors[actor]??null;const body=new FormData();body.set('workshopId',workshopId);body.set('evidence',evidence);for(const document of (Array.isArray(file)?file:file?[file]:[]))body.append('file',document);for(const [key,value] of Object.entries(extra))body.set(key,value);const serialized=new Response(body);return route.POST(new Request(origin+'/api/business',{method:'POST',headers:{Origin:origin,'Content-Type':serialized.headers.get('Content-Type')},body:await serialized.arrayBuffer()}));}
+async function download(actor,id,document){globalThis.fixtureUser=actors[actor]??null;return evidenceRoute.GET(new Request(origin+'/api/business/evidence/'+id+(document?'?document='+document:'')),{params:Promise.resolve({id})});}
 async function decide(actor,kind,id,decision='approved',revision=0,note='The independently checked operator proof is sufficient.'){globalThis.fixtureUser=actors[actor]??null;return route.PATCH(request('PATCH',{kind,id,revision,decision,note}));}
 const change=(actor,workshopId,fields)=>post(actor,{kind:'change',workshopId,profile:fields});
 let passed=0;const check=(condition,label)=>{assert(condition,label);passed++;};
@@ -59,7 +59,14 @@ globalThis.fixtureUser=actors.a;
 check((await route.POST(request('POST',{kind:'claim',input:{workshopId:first.id,evidence,evidenceLinks:[]}},{Origin:'https://other.example.test'}))).status===403,'Claim submission rejects cross-origin requests');
 for(const extra of [{owner:actors.b.userId},{status:'approved'},{evidence:'short'},{evidenceLinks:['http://business.example.test/proof']},{evidenceLinks:['https://password:secret@business.example.test/proof']}])check((await claim('a',first.id,extra)).status===400,'Claims validate proof and reject authority fields or unsafe links');
 check((await claim('a','missing-profile')).status===409,'Claims require an existing public profile');
-let response=await upload('a',first.id),body=await response.json(),claimA=body.id;
+for(const request of [()=>upload('a',first.id,null),()=>post('a',{kind:'claim',input:{workshopId:first.id,evidence}})]){
+ const response=await request();check(response.status===400&&(await response.json()).errorCode==='business_documents_required','New claims require at least one document in multipart and JSON requests');
+}
+check((await upload('a',first.id,Array.from({length:6},pdf))).status===400,'Claims reject more than five documents');
+const largePdf=()=>new File(['%PDF-',new Uint8Array(3.5*1024*1024)],'large.pdf',{type:'application/pdf'});
+const totalLimitResponse=await upload('a',first.id,Array.from({length:3},largePdf));check(totalLimitResponse.status===413&&(await totalLimitResponse.json()).errorCode==='business_documents_too_large','Claims reject selections over the aggregate limit even when each file is valid');
+check(objects.size===0,'Missing, excessive and oversized selections write no private objects');
+let response=await upload('a',first.id,[pdf(),new File([new Uint8Array([137,80,78,71])],'register.png',{type:'image/png'})]),body=await response.json(),claimA=body.id;
 check(response.status===201&&body.status==='pending','A current account can submit a private ownership claim');
 check(db.prepare('SELECT owner,evidence,status FROM workshop_claims WHERE id=?').get(claimA).owner===actors.a.userId,'Claim ownership derives only from the verified session');
 check((await claim('a',first.id)).status===409,'The same account cannot create a duplicate pending claim');
@@ -72,19 +79,32 @@ check((await download('guest',claimA)).status===401&&(await download('b',claimA)
 for(const actor of ['a','admin']){const document=await download(actor,claimA);check(document.ok&&document.headers.get('Cache-Control')==='private, no-store'&&document.headers.get('Content-Disposition').startsWith('attachment;')&&(await document.text()).startsWith('%PDF-'),'Only the applicant and authorized administration can download the private attachment');}
 check(!(await state('a').then(r=>r.json())).claims[0].fileKey,'The list exposes the filename but no private object key');
 check(db.prepare('SELECT COUNT(*) AS n FROM evidence_uploads').get().n===0,'Successful uploads leave no unfinished inventory');
+const documents=(await state('a').then(r=>r.json())).claims[0].documents;
+check(documents.length===2&&documents[1].fileName==='register.png'&&!JSON.stringify(documents).includes('fileKey'),'Private claim lists expose all filenames and opaque IDs without object keys');
+check((await state('a').then(r=>r.json())).pendingClaims[0].documents.length===2,'Pending guidance includes every attachment');
+for(const document of documents)for(const actor of ['a','admin'])check((await download(actor,claimA,document.id)).ok,'Every document is individually downloadable by its applicant and administration');
+check((await download('b',claimA,documents[1].id)).status===404&&(await download('a',claimA,crypto.randomUUID())).status===404,'Foreign users and unknown document selectors cannot retrieve evidence');
+const persisted=JSON.parse(db.prepare('SELECT documents FROM workshop_claims WHERE id=?').get(claimA).documents);
+check(persisted.length===2&&persisted.every(document=>objects.has(document.fileKey)),'Successful claims persist all private object references');
+const legacyId=crypto.randomUUID();db.prepare('INSERT INTO workshop_claims (id,workshop_id,owner,evidence,file_key,file_name,file_type,created_at,status) VALUES (?,?,?,?,?,?,?,?,?)').run(legacyId,first.id,actors.a.userId,evidence,persisted[0].fileKey,persisted[0].fileName,persisted[0].fileType,'2000-01-01','rejected');
+check((await download('a',legacyId,legacyId)).ok,'Single-file claims from the previous writer remain downloadable after the additive migration');
+db.prepare('DELETE FROM workshop_claims WHERE id=?').run(legacyId);
 const storedCount=objects.size;
 for(const file of [new File(['not a pdf'],'fake.pdf',{type:'application/pdf'}),new File(['%PDF-1.7'],'bad.html',{type:'text/html'}),new File([],'empty.pdf',{type:'application/pdf'})]){const invalid=await upload('a',second.id,file);check(invalid.status===400&&(await invalid.json()).errorCode==='invalid_file','Ownership uploads validate content signatures, MIME types and empty files');}
 check((await upload('a',second.id,new File([new Uint8Array(5*1024*1024+1)],'huge.pdf',{type:'application/pdf'}))).status===413,'Ownership evidence rejects files over 5 MB');
 check((await upload('a',second.id,pdf(),{owner:actors.b.userId})).status===400,'Multipart claims reject client-supplied authority');
 check((await upload('a',first.id)).status===409&&objects.size===storedCount,'A duplicate claim compensates its unused private upload');
+check((await upload('a',second.id,[pdf(),new File(['invalid'],'invalid.pdf',{type:'application/pdf'})])).status===400&&objects.size===storedCount,'All document signatures are validated before the first upload');
+uploadHook=()=>{uploadHook=()=>{throw Error('Fixture second upload failed');};};
+check((await upload('a',second.id,[pdf(),pdf()])).status===503&&objects.size===storedCount&&db.prepare('SELECT COUNT(*) AS n FROM evidence_uploads').get().n===0,'A later upload failure compensates every uploaded object and reservation');
 failUpload=true;check((await upload('a',second.id)).status===503,'Storage upload failures return an explicit retryable error');failUpload=false;
 check(objects.size===storedCount&&db.prepare('SELECT COUNT(*) AS n FROM evidence_uploads').get().n===0,'Failed uploads remove the reservation and inventory');
 failDelete=true;check((await upload('a',first.id)).status===409,'A claim conflict still reports failure when compensating cleanup fails');failDelete=false;
 check(db.prepare('SELECT COUNT(*) AS n FROM evidence_uploads').get().n===1,'Failed compensation retains inventory for account cleanup');
-const oversizedBody=new FormData();oversizedBody.set('file',new File([new Uint8Array(6*1024*1024+1)],'huge.pdf',{type:'application/pdf'}));
+const oversizedBody=new FormData();oversizedBody.set('file',new File([new Uint8Array(11*1024*1024+1)],'huge.pdf',{type:'application/pdf'}));
 const serializedOversized=new Response(oversizedBody);
 check((await route.POST(new Request(origin+'/api/business',{method:'POST',headers:{Origin:origin,'Content-Type':serializedOversized.headers.get('Content-Type')},body:await serializedOversized.arrayBuffer()}))).status===413,'Multipart requests are bounded without a Content-Length header');
-response=await claim('b',first.id);const claimB=(await response.json()).id;
+response=await upload('b',first.id,Array.from({length:5},pdf));const claimB=(await response.json()).id;
 check(response.ok,'Another account may submit a competing claim for independent review');
 check((await decide('admin','claim',claimA,'approved',0,'short')).status===400,'A moderator must provide a meaningful reason');
 const firstBefore=db.prepare('SELECT * FROM workshops WHERE id=?').get(first.id),googleBefore=db.prepare('SELECT * FROM workshop_google_places WHERE workshop_id=?').get(first.id);
@@ -201,8 +221,9 @@ failDb=true;check((await state('admin',true)).status===503,'Storage failure does
 const uploadWorkshop=publicProfiles[5];
 for(const [type,bytes] of [['image/png',new Uint8Array([137,80,78,71,13,10,26,10])],['image/jpeg',new Uint8Array([255,216,255,0])]]){const uploaded=await upload('c',uploadWorkshop.id,new File([bytes],'fixture-image',{type}));check(uploaded.status===201,'PNG and JPEG documents use the same private upload contract');const id=(await uploaded.json()).id;await decide('admin','claim',id,'rejected');}
 // Deletion overtakes an in-flight payload; its removed reservation cannot be recreated.
-uploadHook=()=>cleanup.deleteAccount(deleteAuth,cId);
-const late=await upload('c',uploadWorkshop.id);
-check(late.status===409&&!objects.size,'Concurrent account deletion fences a delayed claim payload and removes all private objects');
+const foreignKeys=[...objects.keys()].filter(key=>!key.startsWith('evidence/'+actors.c.userId+'/'));
+uploadHook=()=>{uploadHook=()=>cleanup.deleteAccount(deleteAuth,cId);};
+const late=await upload('c',uploadWorkshop.id,[pdf(),pdf()]);
+check(late.status===409&&objects.size===foreignKeys.length&&foreignKeys.every(key=>objects.has(key)),'Concurrent account deletion fences a delayed claim payload and removes all private objects');
 check(db.prepare('SELECT COUNT(*) AS n FROM workshop_claims WHERE owner=?').get(actors.c.userId).n===0,'Deleted applicants cannot persist a claim after the upload completes');
 console.log(JSON.stringify({businessContractChecksPassed:passed,liveProviderCalls:false,productionTouched:false}));

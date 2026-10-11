@@ -9,14 +9,14 @@ import {decodeProfile,ensureInitialCatalog,listWorkshops,validateProfile} from "
 import {confirmedPublicationPlace} from "@/db/google-places";
 import {workshopIdentityHash} from "@/lib/google-place-identity";
 import {googleMapsPlaceUrl} from "@/lib/google-maps-link";
-import {businessProfileSchema,claimSchema,editableBusinessProfile,type BusinessRequest,type BusinessDecision,type BusinessState} from "@/lib/business-contract";
+import {businessProfileSchema,claimSchema,claimDocumentsError,claimDocumentViews,type StoredClaimDocument,editableBusinessProfile,type BusinessRequest,type BusinessDecision,type BusinessState} from "@/lib/business-contract";
 
 export class BusinessError extends ValidationError{constructor(message:string,public status=409,code:ErrorCode="conflict"){super(code,message);}}
 function activeOwnerSql(owner="?"){return `NOT EXISTS (SELECT 1 FROM auth_account_status WHERE status IN ('inactive','deleted') AND (account_id=${owner} OR account_id IN (SELECT legacy_owner FROM auth_links WHERE account_id=${owner}) OR account_id IN (SELECT account_id FROM auth_links WHERE legacy_owner=${owner})))`;}
 const activeOwner=activeOwnerSql();
 const activeBindings=(owner:string)=>[owner,owner,owner];
 function view(row:Record<string,unknown>,kind:"claim"|"change"):BusinessRequest{
- return {id:String(row.id),workshopId:String(row.workshop_id),workshopName:String(row.workshop_name??row.workshop_id),owner:String(row.owner),status:String(row.status),moderatorNote:String(row.moderator_note),revision:Number(row.revision),createdAt:String(row.created_at),...(kind==="claim"?{fileName:row.file_name?String(row.file_name):null,evidence:String(row.evidence),evidenceLinks:claimSchema.shape.evidenceLinks.parse(JSON.parse(String(row.evidence_links)))}:{profile:businessProfileSchema.parse(JSON.parse(String(row.profile))),baseUpdatedAt:String(row.base_updated_at)})};
+ return {id:String(row.id),workshopId:String(row.workshop_id),workshopName:String(row.workshop_name??row.workshop_id),owner:String(row.owner),status:String(row.status),moderatorNote:String(row.moderator_note),revision:Number(row.revision),createdAt:String(row.created_at),...(kind==="claim"?{fileName:row.file_name?String(row.file_name):null,documents:claimDocumentViews(row),evidence:String(row.evidence),evidenceLinks:claimSchema.shape.evidenceLinks.parse(JSON.parse(String(row.evidence_links)))}:{profile:businessProfileSchema.parse(JSON.parse(String(row.profile))),baseUpdatedAt:String(row.base_updated_at)})};
 }
 function validatedProfile(body:Record<string,unknown>,id:string){
  try{return validateProfile(body,id);}catch(error){throw new BusinessError(error instanceof ValidationError?error.message:"Bitte prüfe die Profilangaben.",400,error instanceof ValidationError?error.code:"workshop_invalid_profile");}
@@ -39,18 +39,21 @@ export async function businessState(user:AppUser,moderation=false,cursors:{claim
  const owned=moderation?await listWorkshops(true):(await db.prepare("SELECT w.* FROM workshops w JOIN workshop_owners o ON o.workshop_id=w.id WHERE o.account_id IN (?,?) ORDER BY w.name").bind(...owners).all<Record<string,unknown>>()).results.map(decodeProfile);
  const claims=await read("workshop_claims","claim",cursors.claims),changes=await read("workshop_changes","change",cursors.changes);
  // Current guidance and edit locks must not depend on a page of historical decisions.
- const pendingClaims=moderation?[]:(await db.prepare("SELECT r.id,r.workshop_id,w.name AS workshop_name,r.created_at,r.file_name FROM workshop_claims r JOIN workshops w ON w.id=r.workshop_id WHERE r.owner IN (?,?) AND r.status='pending' ORDER BY r.created_at DESC,r.id DESC").bind(...owners).all<Record<string,unknown>>()).results.map(row=>({id:String(row.id),workshopId:String(row.workshop_id),workshopName:String(row.workshop_name),createdAt:String(row.created_at),fileName:row.file_name?String(row.file_name):null}));
+ const pendingClaims=moderation?[]:(await db.prepare("SELECT r.id,r.workshop_id,w.name AS workshop_name,r.created_at,r.file_name,r.file_key,r.file_type,r.documents FROM workshop_claims r JOIN workshops w ON w.id=r.workshop_id WHERE r.owner IN (?,?) AND r.status='pending' ORDER BY r.created_at DESC,r.id DESC").bind(...owners).all<Record<string,unknown>>()).results.map(row=>({id:String(row.id),workshopId:String(row.workshop_id),workshopName:String(row.workshop_name),createdAt:String(row.created_at),fileName:row.file_name?String(row.file_name):null,documents:claimDocumentViews(row)}));
  const pendingChangeWorkshopIds=moderation?[]:(await db.prepare("SELECT DISTINCT c.workshop_id FROM workshop_changes c JOIN workshop_owners o ON o.workshop_id=c.workshop_id WHERE o.account_id IN (?,?) AND c.status='pending' ORDER BY c.workshop_id").bind(...owners).all<Record<string,unknown>>()).results.map(row=>String(row.workshop_id));
  const pendingChangeRequestIds=moderation?[]:(await db.prepare("SELECT id FROM workshop_changes WHERE owner IN (?,?) AND status='pending' ORDER BY created_at DESC,id DESC").bind(...owners).all<Record<string,unknown>>()).results.map(row=>String(row.id));
  return {pendingClaims,pendingChangeWorkshopIds,pendingChangeRequestIds,claims:claims.items,changes:changes.items,workshops:owned,nextClaimCursor:claims.next,nextChangeCursor:changes.next};
 }
-export async function requestWorkshopClaim(user:AppUser,body:unknown,file:File|null=null){
- const input=claimSchema.parse(body),{db,bucket}=storage();await ensureInitialCatalog();
- const id=crypto.randomUUID(),document=file?await validateEvidenceFile(file):null;
- let key:string|null=null;
+export async function requestWorkshopClaim(user:AppUser,body:unknown,files:File[]=[]){
+ const input=claimSchema.parse(body),selectionError=claimDocumentsError(files);
+ if(selectionError)throw new BusinessError("Bitte prüfe die Dokumente.",selectionError==="file_too_large"||selectionError==="business_documents_too_large"?413:400,selectionError);
+ // Validate the entire bounded selection before writing any private objects.
+ const validated=[];for(const file of files)validated.push(await validateEvidenceFile(file));
+ const {db,bucket}=storage();await ensureInitialCatalog();
+ const id=crypto.randomUUID(),documents:StoredClaimDocument[]=[],keys:string[]=[];
  try{
-  if(document){
-   key=`evidence/${user.userId}/claims/${id}/${crypto.randomUUID()}`;
+  for(const document of validated){
+   const documentId=crypto.randomUUID(),key=`evidence/${user.userId}/claims/${id}/${documentId}`;keys.push(key);
    const tracked=await db.prepare(`INSERT INTO evidence_uploads (file_key,owner) SELECT ?,? WHERE ${activeOwner}`).bind(key,user.userId,...activeBindings(user.userId)).run();
    if(!tracked.meta.changes)throw new BusinessError("Dein Konto ist gesperrt.",401,"account_blocked");
    // Account deletion removes the reservation, fencing a delayed private payload.
@@ -59,13 +62,15 @@ export async function requestWorkshopClaim(user:AppUser,body:unknown,file:File|n
    if(!permitted)throw new BusinessError("Dein Konto ist gesperrt.",401,"account_blocked");
    const uploaded=await bucket.put(key,document.bytes,{httpMetadata:{contentType:document.fileType},onlyIf:{etagMatches:reservation.etag}});
    if(!uploaded)throw new BusinessError("Der Upload wurde inzwischen abgebrochen. Bitte versuche es erneut.",409,"business_claim_conflict");
+   documents.push({id:documentId,fileKey:key,fileName:document.fileName,fileType:document.fileType as StoredClaimDocument["fileType"]});
   }
-  const result=await db.prepare(`INSERT INTO workshop_claims (id,workshop_id,owner,evidence,evidence_links,file_key,file_name,file_type,created_at) SELECT ?,?,?,?,?,?,?,?,? WHERE EXISTS (SELECT 1 FROM workshops WHERE id=? AND status='published') AND NOT EXISTS (SELECT 1 FROM workshop_owners WHERE workshop_id=?) AND NOT EXISTS (SELECT 1 FROM workshop_claims WHERE workshop_id=? AND owner IN (?,?) AND status='pending') AND ${activeOwner}`).bind(id,input.workshopId,user.userId,input.evidence,JSON.stringify(input.evidenceLinks),key,document?.fileName??null,document?.fileType??null,new Date().toISOString(),input.workshopId,input.workshopId,input.workshopId,...ownerPair(user),...activeBindings(user.userId)).run();
+  const first=documents[0];
+  const result=await db.prepare(`INSERT INTO workshop_claims (id,workshop_id,owner,evidence,evidence_links,file_key,file_name,file_type,documents,created_at) SELECT ?,?,?,?,?,?,?,?,?,? WHERE EXISTS (SELECT 1 FROM workshops WHERE id=? AND status='published') AND NOT EXISTS (SELECT 1 FROM workshop_owners WHERE workshop_id=?) AND NOT EXISTS (SELECT 1 FROM workshop_claims WHERE workshop_id=? AND owner IN (?,?) AND status='pending') AND ${activeOwner}`).bind(id,input.workshopId,user.userId,input.evidence,JSON.stringify(input.evidenceLinks),first.fileKey,first.fileName,first.fileType,JSON.stringify(documents),new Date().toISOString(),input.workshopId,input.workshopId,input.workshopId,...ownerPair(user),...activeBindings(user.userId)).run();
   if(!result.meta.changes)throw new BusinessError("Das Profil ist nicht verfügbar, bereits zugeordnet oder dein Antrag wird schon geprüft.",409,"business_claim_unavailable");
   return id;
  }finally{
-  if(key)try{
-   const referenced=await db.prepare("SELECT id FROM workshop_claims WHERE file_key=?").bind(key).first();
+  for(const key of keys)try{
+   const referenced=await db.prepare("SELECT id FROM workshop_claims WHERE id=? AND (file_key=? OR EXISTS (SELECT 1 FROM json_each(documents) WHERE json_extract(value,'$.fileKey')=?))").bind(id,key,key).first();
    if(!referenced)await bucket.delete(key);
    await db.prepare("DELETE FROM evidence_uploads WHERE file_key=?").bind(key).run();
   }catch{console.error("claim-upload-cleanup-pending");}

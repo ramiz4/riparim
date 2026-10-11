@@ -1,0 +1,1 @@
+ALTER TABLE `workshop_claims` ADD `documents` text DEFAULT '[]' NOT NULL;
