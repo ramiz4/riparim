@@ -154,7 +154,9 @@ export function restoreSnapshot(snapshot, migrations) {
       for (const table of snapshot.tables.filter((item) => !archiveName(item.name))) {
         const columns = table.columns.map((column) => column.name);
         const statement = database.prepare(`INSERT INTO ${quote(table.name)} (${columns.map(quote).join(",")}) VALUES (${columns.map(() => "?").join(",")})`);
-        for (const row of table.rows) statement.run(...columns.map((column) => decode(row[column])));
+        for (const row of table.rows) {
+          if (statement.run(...columns.map((column) => decode(row[column]))).changes !== 1) throw new Error("A checked-in trigger omitted a snapshot row.");
+        }
       }
       database.exec("COMMIT");
     } catch { database.exec("ROLLBACK"); fail("Snapshot rows violate the checked-in schema; restore stopped."); }
@@ -235,7 +237,7 @@ export function planDataTransfer(source, target, { migrations, retainValidatedCa
         } else {
           const sql = `INSERT INTO ${quote(table.name)} (${columns.map(quote).join(",")}) VALUES (${columns.map(() => "?").join(",")})`;
           const params = columns.map((column) => row[column]);
-          try { restoredTarget.database.prepare(sql).run(...params.map(decode)); }
+          try { if (restoredTarget.database.prepare(sql).run(...params.map(decode)).changes !== 1) throw new Error("A destination trigger omitted a planned row."); }
           catch { fail(`Destination constraint conflict in table ${table.name}; no writes planned.`); }
           statements.push({ table: table.name, sql, params });
           insert++;

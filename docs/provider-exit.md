@@ -79,8 +79,11 @@ Adapteränderung. Der Wechsel ist kein Ein-Klick-Vorgang.
    Ziel gesondert einrichten. Alle exakten Quell-/Zieltuples einschließlich
    Sperren/Tombstones mit dem vorhandenen `linkAccountIdentity` und unabhängig
    geprüften Provideridentitäten an dieselben internen IDs binden; nie per
-   gleicher E-Mail oder Rollenmetadaten. Danach Authsettings und separat gebundene
-   Zielsecrets nach [auth-provider.md](auth-provider.md) konfigurieren.
+   gleicher E-Mail oder Rollenmetadaten. Bei weiterhin gestoppten Zielprozessen
+   Mapping, Ziel-Authsettings und separat gebundene Secrets kontrolliert
+   serverseitig/offline nach [auth-provider.md](auth-provider.md) konfigurieren.
+   Eine deaktivierte oder noch an den alten Customhost gebundene Anmeldung
+   setzt keinen verfügbaren Admin-UI-Zugang für den Wechsel voraus.
 6. SMTP/Absender/TLS und den einzelnen Outbox-Timer nach
    [mail-transports.md](mail-transports.md) konfigurieren. Bereits
    begonnene Ereignisse behalten Transport und Credentialbindung. `unknown`

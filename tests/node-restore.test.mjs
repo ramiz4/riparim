@@ -17,7 +17,7 @@ try {
  console.log('Node restore recognizes and verifies actual applied migration receipts');
 }finally{db.close();}
 
-const {mkdtemp,rm,stat,readFile,writeFile}=await import('node:fs/promises');
+const {mkdtemp,mkdir,rm,stat,readFile,writeFile}=await import('node:fs/promises');
 const {tmpdir}=await import('node:os'),{join}=await import('node:path');
 const {backupFixture}=await import('./helpers/provider-exit-backup.mjs');
 const parent=await mkdtemp(join(tmpdir(),'riparim-exit-restore-'));
@@ -28,6 +28,15 @@ try {
   await storage.db.prepare('INSERT INTO evidence_uploads VALUES (?,?)').bind(reserve.key,'stable-account').run();
  });
  const {restoreNodeBackup}=await import('../scripts/restore-node.mjs');
+ const historical=join(parent,'historical-trigger');await mkdir(historical,{mode:0o700});
+ const ignored=await backupFixture(historical,async storage=>{
+  await storage.db.prepare("INSERT INTO workshops(id,name,city,address,phone,brands,services,specialty,description,sources,checked_at,updated_at) VALUES ('retired-existing','Synthetic workshop','Prishtina','Synthetic road','+38344123456','[]','[]','Synthetic','Synthetic','[]','2026-10-11','2026-10-11')").run();
+  await storage.db.prepare("INSERT INTO catalog_state VALUES ('workshop-retired:retired-existing','2026-10-11')").run();
+ });
+ assert.equal(ignored.snapshot.tables.find(table=>table.name==='workshops').rows.length,1);
+ const refusedDirectory=join(historical,'target');
+ await assert.rejects(restoreNodeBackup({sourceDirectory:ignored.backupDirectory,expectedProjectId:ignored.snapshot.projectId,expectedCommit:ignored.snapshot.sourceCommit,directory:refusedDirectory}),/rows.*checked-in schema/,'A schema-valid trigger-ignored row must stop the protected restore');
+ await assert.rejects(stat(refusedDirectory),/ENOENT/,'Silent row loss cannot publish either destination database or a completion receipt');
  const options={sourceDirectory:source.backupDirectory,expectedProjectId:source.snapshot.projectId,expectedCommit:source.snapshot.sourceCommit,directory:join(parent,'target')};
  const result=await restoreNodeBackup(options);assert.equal(result.restored,true);
  assert.equal((await stat(options.directory)).mode&0o777,0o700);

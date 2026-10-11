@@ -110,6 +110,27 @@ test("schema alteration beyond a known migration prefix blocks restore", () => {
   altered.schema.find((item) => item.name === "visits").sql += "; ATTACH '/private-file' AS stolen";
   assert.throws(() => restoreSnapshot(altered, migrations), /does not match one unique/);
 });
+test("checked-in triggers cannot silently omit source rows during restore", () => {
+  const db = fixture(migrations.length);
+  try {
+    db.prepare("INSERT INTO workshops(id,name,city,address,phone,brands,services,specialty,description,sources,checked_at,updated_at) VALUES ('retired-existing','Synthetic workshop','Prishtina','Synthetic road','+38344123456','[]','[]','Synthetic','Synthetic','[]','2026-10-11','2026-10-11')").run();
+    db.prepare("INSERT INTO catalog_state VALUES ('workshop-retired:retired-existing','2026-10-11')").run();
+    const snapshot = snapshotDatabase(db, metadata);
+    assert.equal(snapshot.tables.find(table => table.name === "workshops").rows.length, 1);
+    assert.throws(() => restoreSnapshot(snapshot, migrations), /rows.*checked-in schema/);
+    assert.equal(db.prepare("SELECT COUNT(*) AS count FROM workshops").get().count, 1, "Refusing an inconsistent historical snapshot never changes its source");
+  } finally { db.close(); }
+});
+test("transfer planning rejects rows ignored by a destination migration trigger", () => {
+  // This older proven schema predates the retirement triggers. Upgrading it
+  // must not produce a writable plan whose inserts the current target ignores.
+  const db = fixture(13);
+  try {
+    db.prepare("INSERT INTO workshops(id,name,city,address,phone,brands,services,specialty,description,sources,checked_at,updated_at) VALUES ('retired-existing','Synthetic workshop','Prishtina','Synthetic road','+38344123456','[]','[]','Synthetic','Synthetic','[]','2026-10-11','2026-10-11')").run();
+    db.prepare("INSERT INTO catalog_state VALUES ('workshop-retired:retired-existing','2026-10-11')").run();
+    assert.throws(() => planDataTransfer(snapshotDatabase(db, metadata), target, { migrations }), /Destination constraint conflict in table workshops/);
+  } finally { db.close(); }
+});
 test("missing column inventory is rejected even when CREATE SQL matches", () => {
   const altered = structuredClone(source);
   altered.tables.find((item) => item.name === "visits").columns[0].type = "INTEGER";
