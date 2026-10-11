@@ -33,6 +33,13 @@ Der automatisch bereitgestellte `GITHUB_TOKEN` erhält ausschließlich im Releas
 
 Release-Läufe werden serialisiert und nicht während einer Veröffentlichung abgebrochen. Ein vor der Release-Erstellung überholter Commit erzeugt keinen Release; der neuere `main`-Lauf übernimmt die Änderungen. Ein bereits veröffentlichter Release wird auch dann deployt, wenn inzwischen ein reiner Dokumentations- oder Wartungscommit auf `main` liegt. Erst ein neuerer vollständig veröffentlichter Release verhindert das Deployment einer älteren Version, auch bei einer Wiederholung nur des Deploy-Jobs. Ein erneuter Lauf desselben Commits verwendet einen bereits vollständig veröffentlichten Release wieder.
 
+Die erneute Messung nach den Laufzeitoptimierungen und die Entscheidung gegen
+einen vorsorglichen Queue-Umbau stehen in
+[release-queue-analysis.md](release-queue-analysis.md). Vollständige Retries prüfen
+weiterhin beide Builds und deren Provenienz; ein vorhandener veröffentlichter
+Tag wird vor dem Remote-Main-Vergleich wiederverwendet. Nur neue Veröffentlichungen
+werden von einem neueren Main-Commit verdrängt.
+
 Wenn eine GitHub-Veröffentlichung nach dem Anlegen des Tags scheitert, bleibt der Workflow ausdrücklich fehlerhaft. Vor dem erneuten Lauf den vorhandenen Release samt allen vier Assets (Cloudflare- und Sites-Archiv mit jeweils eigener Provenienz) vervollständigen; kein zusätzliches Versions-Tag erzeugen. Ein fehlender, als Entwurf gespeicherter oder unvollständiger Release wird nicht als Erfolg ausgegeben.
 
 ## Produktionsmigrationen, Wiederholung und Rollback
