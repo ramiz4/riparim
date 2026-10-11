@@ -17,6 +17,11 @@ GitHub erlaubt ausschließlich Squash-Merges. `main` erfordert einen PR, einen a
 
 ## GitHub Actions
 
+Die Titel-, Semantic-Release- und Deploy-Jobs installieren ausschließlich ihre
+separat gelockten Werkzeuge. Die volle App-Installation bleibt im Prüfjob.
+Abhängigkeitsaudit, Pin-Aktualisierung und Messnachweise stehen in
+[ci-tool-installs.md](ci-tool-installs.md).
+
 Der Workflow **Release** startet nur bei `push` auf `main` im Repository `ramiz4/riparim`. Er verwendet Node.js 24 und arbeitet mit dem exakten Merge-Commit:
 
 1. Wiederverwendbare CI führt Katalogprüfung, Tests, TypeScript, Lint und den Worker-Build aus.
