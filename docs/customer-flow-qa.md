@@ -567,3 +567,27 @@ keine äußere Card und keine horizontalen Überbreiten. Auf 390 × 844 Pixeln w
 Systemtheme löste dunkel auf; Tab erreichte den sichtbaren Upload-Fokusring,
 anschließend den Sende-Button. Eine lokale Einreichung per Enter führte zum
 Bestätigungstitel mit Fokus. Die Vorschau verwendet fiktive Antworten und bestätigt keine reale Dokumentübertragung.
+
+## Verpflichtende Dokumente und Mehrfachauswahl
+
+Neue Inhaberansprüche brauchen mindestens ein Dokument; der Hinweis „Optional“
+entfällt. Die Auswahl erlaubt bis zu fünf PDF-, JPG- oder PNG-Dateien, jeweils
+bis 5 MiB und zusammen bis 10 MiB. Zusätzliche Auswahlen ergänzen die Liste;
+jedes Dokument kann einzeln entfernt werden. Ein abgebrochener Dateidialog
+bewahrt die Auswahl. Alte Anträge ohne Datei bleiben lesbar. Migration und
+Rollout-Verträglichkeit stehen in [releases.md](releases.md).
+
+Die Routen-Fixtures prüfen Pflichtprüfung inklusive JSON-Umgehungsversuch,
+Anzahl-/Größen-/Signaturgrenzen, private Downloads aller Dokumente, alte
+Einzeldateien, Kompensation bei späterem Uploadfehler und Kontolöschung während
+des zweiten Uploads. Die UI-Fixtures prüfen Mehrfachauswahl, Ergänzen, Entfernen,
+Fehler mit erhaltenem Entwurf, Downloads in Übersicht und Verwaltung sowie
+Bestätigung mit Fokuswechsel in DE/SQ/EN. Die vollständige Testsuite besteht.
+
+Native Prüfung im bestätigten Profil `ramizloki82@googlemail.com`: Desktop
+(1282 px, Light Mode) und schmal (390 px, Dark Mode) zeigen beide Dateien
+ohne horizontalen Überlauf. Der native Dateidialog wählt zwei isolierte
+Testdateien gleichzeitig; Tastaturfokus erreicht die Auswahl. Nach dem
+lokal abgefangenen Einreichen erhält die Bestätigungsüberschrift den Fokus.
+Die Vorschau verwendet fiktive Konten und lokale Testdateien. Es wurden keine
+Produktionsanträge oder Nachweise erzeugt.
