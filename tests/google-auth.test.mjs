@@ -59,19 +59,25 @@ const config=await cfg.getAuthConfig();
 await cfg.verifyProvider(config,false);passed++;
 let availability=await cfg.providerAvailability(config);
 check(availability.google&&availability.email&&availability.emailSignup&&!availability.emailRecovery,'Provider-enabled registration no longer needs local SMTP attestation');
-let registration=await post('register',{email:'new-account@example.test',password:'fixture-password-123',returnTo:'//other.example.test'});
+for(const name of [undefined,null,123,'','   ','x','x'.repeat(81)]){
+ const before=signupCalls;
+ const invalid=await post('register',{name,email:'invalid-name@example.test',password:'fixture-password-123'});
+ check(invalid.status===400&&(await invalid.json()).errorCode==='invalid_name'&&signupCalls===before,'Registration rejects invalid names before invoking signup');
+}
+let registration=await post('register',{name:'  Fixture Member  ',email:'new-account@example.test',password:'fixture-password-123',returnTo:'//other.example.test'});
+check(lastSignup.options.data.full_name==='Fixture Member','Registration trims and stores the required name');
 check(registration.status===200&&signupCalls===1,'Registration invokes signup while local delivery attestation is false');
 check((await registration.json()).message.includes('bestätige deine E-Mail-Adresse'),'Successful signup requires checking the confirmation email');
 check(new URL(lastSignup.options.emailRedirectTo).origin===origin&&new URL(lastSignup.options.emailRedirectTo).pathname==='/auth/bestaetigen','Confirmation uses the canonical callback');
 check(new URL(lastSignup.options.emailRedirectTo).searchParams.get('weiter')==='/?besuche=1','Confirmation callback rejects an external destination');
 check(db.prepare('SELECT COUNT(*) AS n FROM auth_sessions').get().n===0,'Signup cannot enroll a session or grant app access');
 signupError={code:'email_address_not_authorized',status:400};
-registration=await post('register',{email:'new-account@example.test',password:'fixture-password-123'});
+registration=await post('register',{name:'  Fixture Member  ',email:'new-account@example.test',password:'fixture-password-123'});
 check(registration.status===503&&!(await registration.json()).message,'SMTP rejection produces no false success');
 signupError={code:'over_email_send_rate_limit',status:429};
-check((await post('register',{email:'new-account@example.test',password:'fixture-password-123'})).status===429,'Provider email limit is reported as a retryable rate limit');
+check((await post('register',{name:'  Fixture Member  ',email:'new-account@example.test',password:'fixture-password-123'})).status===429,'Provider email limit is reported as a retryable rate limit');
 signupError=null;signupSession=providerSession();
-check((await post('register',{email:'new-account@example.test',password:'fixture-password-123'})).status===503,'An unexpected auto-confirmed session fails closed');
+check((await post('register',{name:'  Fixture Member  ',email:'new-account@example.test',password:'fixture-password-123'})).status===503,'An unexpected auto-confirmed session fails closed');
 signupSession=null;
 check((await post('recovery',{email:user.email})).status===503,'SMTP-unconfirmed recovery cannot send live mail');
 sessionId='email-without-smtp';method='password';
@@ -111,10 +117,20 @@ globalThis.fixtureNative=null;
 let current=await auth.getAppUser();
 check(current.isModerator&&current.provider==='Google'&&current.ownerKeys.includes('legacy-owner'),'Verified Google session can own legacy records and administer without native ChatGPT');
 check((await auth.getAdminUser(current)).isModerator,'Configured owner is reachable through verified Google identity');
+const originalName=user.user_metadata.full_name;
+for(const name of [undefined,null,'','  ','x',123,'x'.repeat(81),'  Public Member  ']){
+ user={...user,user_metadata:{...user.user_metadata,full_name:name}};
+ current=await auth.getAppUser();
+ check(current.displayName===(name==='  Public Member  '?'Public Member':'Anonym')&&current.displayName!==user.email,'Verified Google profiles normalize names and never use email as fallback');
+}
+user={...user,user_metadata:{...user.user_metadata,full_name:originalName}};
+
 sessionId='preclaimed-password-session';method='password';
 await auth.recordPasswordSession(projectUrl,user,globalThis.fixtureClient);
 current=await auth.getAppUser();
 check(current.provider==='E-Mail'&&!current.isModerator&&current.ownerKeys.length===1,'Password on linked account cannot inherit Google role or Google-created legacy link');
+user={...user,user_metadata:{}};check((await auth.getAppUser()).displayName==='Anonym','Older email accounts with no name remain private');
+user={...user,user_metadata:{full_name:originalName}};
 check(row().legacy_access===0&&row().moderator===0,'Password session stores no Google grants');
 globalThis.fixtureNative={userId:'someone-else',email:'other@example.test',displayName:'Other',fullName:null};
 sessionId='password-mismatched-native';
@@ -159,7 +175,7 @@ check(!row(),'OAuth callback requires fresh provider proof, not account metadata
 const emailChecksStart=passed;
 const reviewDestination='/werkstatt/fixture-workshop?suche=wartung#bewerten';
 method='password';sessionId='email-confirmation';
-registration=await post('register',{email:'confirmation@example.test',password:'fixture-password-123',returnTo:reviewDestination});
+registration=await post('register',{name:'Fixture Member',email:'confirmation@example.test',password:'fixture-password-123',returnTo:reviewDestination});
 check(registration.status===200,'Email registration begins the confirmation journey');
 function emailLink(template,redirectTo,token){
  const [{body}]=renderAuthEmails([{Subject:template===templates.recoveryEmailTemplate?templates.recoveryEmailSubject:templates.confirmationEmailSubject,Body:template,Data:{SiteURL:origin,RedirectTo:redirectTo,TokenHash:token}}]);
@@ -262,7 +278,7 @@ for(const locale of ['de','sq','en']){
  const prefix=locale==='de'?'':'/'+locale;
  const target=prefix+'/werkstatt/fixture-workshop?suche=wartung#bewerten';
  method='password';sessionId='localized-'+locale;
- let r=await post('register',{locale,email:'localized-'+locale+'@example.test',password:'fixture-password-123',returnTo:'/sq/werkstatt/fixture-workshop?suche=wartung#bewerten'});
+ let r=await post('register',{name:'Fixture Member',locale,email:'localized-'+locale+'@example.test',password:'fixture-password-123',returnTo:'/sq/werkstatt/fixture-workshop?suche=wartung#bewerten'});
  check(r.ok&&(await r.json()).messageCode==='confirm_email'&&lastSignup.options.data.preferred_locale===locale,'Signup stores only the validated presentation preference');
  const confirmation=new URL(lastSignup.options.emailRedirectTo);
  check([...confirmation.searchParams.keys()].join(',')==='locale,weiter'&&confirmation.searchParams.get('locale')===locale&&confirmation.searchParams.get('weiter')===target,'Canonical locale-first confirmation retains the safe target and explicit locale wins');

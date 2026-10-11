@@ -1,4 +1,5 @@
 "use client";
+import {publicAccountName} from "@/lib/account-name";
 import {useI18n} from "@/lib/i18n/client";
 import {responseError,LocalizedError,type CodedResponse} from "@/lib/i18n/codes";
 import {useNavigationGuard} from "@/lib/i18n/navigation-guard";
@@ -7,22 +8,22 @@ import {useId,useRef,useState,type FormEvent} from "react";
 import {FileCheck2,LoaderCircle,ShieldCheck,Star,Upload} from "lucide-react";
 import {Checkbox} from "@/components/ui/checkbox";
 import {Picker} from "@/components/picker";
-import {AccountStorageNotice} from "@/components/account-storage-notice";
+import {AccountStorageNotice,type AccountIdentity} from "@/components/account-storage-notice";
 import {services,type Workshop} from "@/lib/workshops";
 import type {Visit} from "@/app/journeys";
 
-type Props={workshop:Workshop|null;directory:Workshop[];signedIn:boolean;existing?:Visit|null;formId?:string;showSubmit?:boolean;returnTo:string;onSubmitted?:()=>void;onBusyChange?:(busy:boolean)=>void};
-export function ReviewForm({workshop,directory,signedIn,existing=null,formId,showSubmit=true,returnTo,onSubmitted,onBusyChange}:Props){
+type Props={workshop:Workshop|null;directory:Workshop[];signedIn:boolean;account?:AccountIdentity|null;existing?:Visit|null;formId?:string;showSubmit?:boolean;returnTo:string;onSubmitted?:()=>void;onBusyChange?:(busy:boolean)=>void};
+export function ReviewForm({workshop,directory,signedIn,account=null,existing=null,formId,showSubmit=true,returnTo,onSubmitted,onBusyChange}:Props){
  const {t}=useI18n();
  const generatedId=useId(),id=formId??generatedId,consentId=useId();
  const consentCheckbox=useRef<HTMLButtonElement>(null),ratingGroup=useRef<HTMLDivElement>(null);
  const [submissionId]=useState(()=>existing?.id??crypto.randomUUID());
  const [wid,setWid]=useState(existing?.workshop??workshop?.id??directory[0]?.id??""),[kind,setKind]=useState(existing?.evidence_type??"Rechnung"),[service,setService]=useState(existing?.service??workshop?.services[0]??directory[0]?.services[0]??services[1]);
- const [vehicle,setVehicle]=useState(existing?.vehicle??""),[date,setDate]=useState(existing?.date??""),[note,setNote]=useState(existing?.evidence_note??""),[rating,setRating]=useState(existing?.rating??0),[name,setName]=useState(existing?.display_name??""),[review,setReview]=useState(existing?.review??"");
+ const [vehicle,setVehicle]=useState(existing?.vehicle??""),[date,setDate]=useState(existing?.date??""),[note,setNote]=useState(existing?.evidence_note??""),[rating,setRating]=useState(existing?.rating??0),[review,setReview]=useState(existing?.review??"");
  const [consent,setConsent]=useState(false),[consentError,setConsentError]=useState(false),[busy,setBusy]=useState(false),[error,setError]=useState(""),[done,setDone]=useState(false);
  const workshopName=directory.find(w=>w.id===wid)?.name??workshop?.name??existing?.workshop_name;
  const [fileSelected,setFileSelected]=useState(false);
- useNavigationGuard({busy,dirty:signedIn&&!done&&(fileSelected||wid!==(existing?.workshop??workshop?.id??directory[0]?.id??"")||service!==(existing?.service??workshop?.services[0]??directory[0]?.services[0]??services[1])||vehicle!==(existing?.vehicle??"")||date!==(existing?.date??"")||note!==(existing?.evidence_note??"")||rating!==(existing?.rating??0)||name!==(existing?.display_name??"")||review!==(existing?.review??"")||kind!==(existing?.evidence_type??"Rechnung")||consent)});
+ useNavigationGuard({busy,dirty:signedIn&&!done&&(fileSelected||wid!==(existing?.workshop??workshop?.id??directory[0]?.id??"")||service!==(existing?.service??workshop?.services[0]??directory[0]?.services[0]??services[1])||vehicle!==(existing?.vehicle??"")||date!==(existing?.date??"")||note!==(existing?.evidence_note??"")||rating!==(existing?.rating??0)||review!==(existing?.review??"")||kind!==(existing?.evidence_type??"Rechnung")||consent)});
  function changeBusy(value:boolean){setBusy(value);onBusyChange?.(value);}
  async function submit(e:FormEvent<HTMLFormElement>){
   e.preventDefault();if(!rating){setError(t("customer.chooseStars"));ratingGroup.current?.querySelector<HTMLButtonElement>("button")?.focus();return;}if(!consent){setConsentError(true);consentCheckbox.current?.focus();return;}
@@ -41,7 +42,7 @@ export function ReviewForm({workshop,directory,signedIn,existing=null,formId,sho
    <div className="field"><label>{t("customer.completedWork")}</label><Picker value={service} onChange={setService} values={services.slice(1)} valueCategory="service" label={t("customer.completedWork")}/></div>
    <div><label id={`${id}-rating`}>{t("customer.yourStars")}</label><div className="star-rating" role="radiogroup" aria-labelledby={`${id}-rating`} aria-required="true" ref={ratingGroup}>{[1,2,3,4,5].map(value=><button key={value} type="button" role="radio" aria-checked={rating===value} aria-label={t("customer.stars",{count:value})} tabIndex={rating===value||(!rating&&value===1)?0:-1} onClick={()=>{setRating(value);setError("");}} onKeyDown={e=>{if(["ArrowRight","ArrowUp","ArrowLeft","ArrowDown","Home","End"].includes(e.key)){e.preventDefault();const next=e.key==="Home"?1:e.key==="End"?5:Math.max(1,Math.min(5,value+(["ArrowRight","ArrowUp"].includes(e.key)?1:-1)));setRating(next);e.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>("button")[next-1]?.focus();}}}><Star size={26} fill={value<=rating?"currentColor":"none"}/></button>)}<span>{rating?`${rating} / 5`:t("customer.choose")}</span></div></div>
    <label>{t("customer.yourReview")}<textarea required name="review" minLength={30} maxLength={2000} rows={3} placeholder={t("customer.reviewPlaceholder")} value={review} onChange={e=>setReview(e.target.value)}/></label>
-   <label>{t("customer.publicName")}<input required name="name" minLength={2} maxLength={40} placeholder={t("customer.nameExample")} value={name} onChange={e=>setName(e.target.value)}/></label><p className="help">{t("customer.publicReviewFields")}</p>
+   <p className="note review-account-name">{t("customer.publicName")}: <strong>{publicAccountName(account?.displayName)}</strong></p><p className="help">{t("customer.reviewAccountNameNote")}</p><p className="help">{t("customer.publicReviewFields")}</p>
   </fieldset>
   <fieldset className="review-section"><legend>{t("customer.privateEvidence")}</legend><AccountStorageNotice/><div className="field"><label>{t("customer.evidenceType")}</label><Picker value={kind} onChange={setKind} values={["Rechnung","Service- oder Arbeitsbeleg","Anderer Nachweis"]} valueCategory="evidence" label={t("customer.evidenceType")}/></div>
    {existing?.file_name&&<p className="existing-evidence"><FileCheck2 size={17}/>{t("customer.existingReceipt",{name:existing.file_name})}<span>{t("customer.keepReceipt")}</span></p>}
