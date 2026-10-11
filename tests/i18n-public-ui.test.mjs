@@ -22,7 +22,7 @@ const profile=api.normalizeGoogleProfile({id:'ChIJFixture',businessStatus:'OPERA
 const identity={placeId:'ChIJFixture',browserKey:'fixture-public-key'},props={initialWorkshops:[workshop],initialError:'',signedIn:false,account:null,isAdmin:false};
 const nativeFetch=globalThis.fetch;globalThis.fetch=async()=>Response.json({enabled:false,workshops:[workshop]});
 const placeOptions=[];window.google={maps:{importLibrary:async()=>({Place:class{constructor(options){this.options=options;placeOptions.push(options);}async fetchFields(){}}})}};
-for(const tag of ['gmp-place-details','gmp-advanced-place-details-compact'])customElements.define(tag,class extends HTMLElement{connectedCallback(){queueMicrotask(()=>this.dispatchEvent(new Event('gmp-load')));}});
+for(const tag of ['gmp-advanced-place-details','gmp-advanced-place-details-compact'])customElements.define(tag,class extends HTMLElement{connectedCallback(){queueMicrotask(()=>this.dispatchEvent(new Event('gmp-load')));}});
 const root=createRoot(document.getElementById('root')),click=async el=>{assert(el,'control exists');await React.act(async()=>el.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,button:0})));};
 try{
  for(const locale of ['de','sq','en']){

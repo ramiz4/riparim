@@ -31,7 +31,7 @@ Für Suchlinks wird deren vorhandene Suchanfrage einschließlich Adresse verwend
 
 ## Zuordnung und Darstellung
 
-Ein veröffentlichtes Profil benötigt eine bestätigte Google-Identität, auch wenn keine Rezensionen oder Sterne vorhanden sind. Importvalidator und Verwaltungsroute prüfen diese Voraussetzung. Ein unverändertes bestätigtes Profil behält seine Identität; Änderungen an Name, Telefon, Ort, Adresse oder Koordinaten benötigen eine neue Bestätigung. Doppelt verwendete Place IDs werden zurückgewiesen. Kartenlink, Route, Bewertungen, Öffnungszeiten und Maps-Fotolink verwenden dieselbe ID. Öffnungszeiten werden ausschließlich im Standard-Widget dargestellt; Fotos bleiben auf Google Maps. Inhalte werden nicht in die Importquelle übernommen.
+Ein veröffentlichtes Profil benötigt eine bestätigte Google-Identität, auch wenn keine Rezensionen oder Sterne vorhanden sind. Importvalidator und Verwaltungsroute prüfen diese Voraussetzung. Ein unverändertes bestätigtes Profil behält seine Identität; Änderungen an Name, Telefon, Ort, Adresse oder Koordinaten benötigen eine neue Bestätigung. Doppelt verwendete Place IDs werden zurückgewiesen. Kartenlink, Route, Bewertungen, Öffnungszeiten und Maps-Fotolink verwenden dieselbe ID. Öffnungszeiten werden ausschließlich im nativen Google-Baustein des Profilkopfs dargestellt; Fotos bleiben auf Google Maps. Inhalte werden nicht in die Importquelle übernommen.
 
 Die öffentliche Zuordnungsroute nimmt ausschließlich eine vorhandene veröffentlichte
 Werkstattkennung entgegen und liest deren bereits bestätigte Place ID aus dem
@@ -90,19 +90,24 @@ Die damals gezählten Aufrufe waren SDK-`fetchFields`-Anfragen, keine Kostenmess
 
 Eigene Riparim-Bewertungen beziehungsweise ihr leerer Hinweis stehen immer vor Google. Der Google-Host bleibt dadurch auch während des Nachladens an derselben DOM-Position und wird nicht verschoben oder erneut verbunden; seine eigene Panelsichtbarkeit steuert weiterhin den Abruf. Daraus wird keine Aussage über Googles internes Abrechnungsverhalten abgeleitet.
 
-Ein sichtbarer gemeinsamer Google-Bereich verwendet genau einen Standard-
-`gmp-place-details`-Baustein mit `gmp-place-rating`,
-`gmp-place-opening-hours` und `gmp-place-reviews`. Der Profilkopf zeigt die
-eigene Riparim-Bewertung und verlinkt diesen Bereich; er löst keinen separaten
-Google-Ratingabruf aus. Es gibt weder eine parallele Enterprise-Profilabfrage
-noch einen vollständigen REST-Refresh zum nächsten Öffnungs-/Schließwechsel.
+Das Profil verwendet zwei getrennte Advanced-UI-Kit-Bausteine: Im Profilkopf
+zeigt `gmp-advanced-place-details-compact` nur `gmp-place-rating`,
+`gmp-place-opening-hours` und `gmp-place-attribution`. Unter den eigenen
+Rezensionen zeigt `gmp-advanced-place-details` nur `gmp-place-reviews` und
+`gmp-place-attribution`. Beide verwenden dieselbe bestätigte Identität und die
+aktive Sprache; die Zuordnungsroute wird gemeinsam genutzt. Jeder Baustein
+startet erst bei seiner eigenen Sichtbarkeit. Die zusätzliche App-Überschrift,
+der wiederholte Werkstattname und native Maps-Aktionen entfallen. Öffnungszeiten
+stehen ausschließlich oben, Google-Kommentare ausschließlich im Rezensionenbereich.
+Es gibt weder eine parallele Enterprise-Profilabfrage noch einen vollständigen
+REST-Refresh zum nächsten Öffnungs-/Schließwechsel.
 Die native Google-Darstellung unterscheidet fehlende Rezensionen, unbekannte
 Öffnungszeiten und Schließstatus. Die App liest diese Daten nicht aus dem DOM,
 Shadow-DOM oder dem Widget aus. Die dokumentierte öffentliche `place`-Property
 enthält lediglich ID, Standort und Viewport. Ein fehlgeschlagener Provideraufruf
 wird als Ladefehler angezeigt, niemals als null Bewertungen ausgegeben.
 
-Der Baustein startet nur bei Sichtbarkeit (120-Pixel-Vorlauf) und aktivem Tab.
+Jeder Baustein startet nur bei Sichtbarkeit (120-Pixel-Vorlauf) und aktivem Tab.
 Konfiguration und Zuordnungsroute starten erst bei Sichtbarkeit des Google-Bereichs
 und aktivem Tab. Der Fotolink startet keine Konfiguration oder Identitätsprüfung.
 Die öffentliche Zuordnungsroute liest nur die bereits bestätigte ID. Nach wartender
@@ -112,12 +117,13 @@ Sichtbarkeit wird auch nach asynchronem SDK-Laden erneut geprüft. Themewechsel
 und normale Profilzustandsänderungen
 bewahren dieselbe Widgetinstanz; Farben und Schriften werden ausschließlich
 über die offiziellen CSS-Eigenschaften und `color-scheme` geändert. Der
-Standardbaustein erhält höchstens 400 Pixel Breite mit interner Scrollfunktion.
+Rezensionenbaustein erhält höchstens 400 Pixel Breite mit interner Scrollfunktion;
+der kompakte Profilkopf folgt seiner Inhaltshöhe.
 Die Google- und Autorenattribution des Bausteins bleibt vollständig erhalten.
-Das Profil verwendet keine Advanced-/Pro-Elemente, Zusammenfassungen oder `all-content`.
+Das Profil verwendet keine Zusammenfassungen oder `all-content`.
 
-Die App zeigt den Ladezeitpunkt in Kosovo-Ortszeit (`Europe/Belgrade`, inklusive
-Sommerzeit). Nach 30 Minuten wird der alte Baustein ausgeblendet und eine klare
+Der Ladezeitpunkt bleibt internes Veraltungsmetadatum. Nach 30 Minuten wird der
+jeweilige alte Baustein ausgeblendet und eine klare
 Veraltungsanzeige mit Aktion **Google-Angaben aktualisieren** angeboten. Der
 Timer ändert ausschließlich die Anzeige: Er startet keine Google-Abfrage.
 Auch ein Wechsel zurück in den Tab aktualisiert nicht automatisch. Erst die
@@ -142,7 +148,8 @@ doppelte Werkstattname und Maps-Button entfallen. Seine Höhe
 folgt dem Inhalt; eine feste Höhe oder abgeschnittene Pflichtinhalte gibt es nicht.
 Die zusätzliche Riparim-Überschrift, Ladezeit und Maps-Aktion entfallen bei
 erfolgreicher Kataloganzeige; Fehler- und Veraltungsfälle behalten den Maps-Fallback.
-Das Profil behält `gmp-place-details` mit Rating, Öffnungszeiten und Rezensionen.
+Das Profil verwendet die oben beschriebenen getrennten Advanced-Bausteine für
+Bewertung/Öffnungszeiten im Kopf und Kommentare unter den eigenen Rezensionen.
 Die Karten stellen einen eigenen Google-Widgetblock in voller Kartenbreite bereit;
 Provider-Pflichtinhalte und Attribution werden weder versteckt noch ausgelesen.
 Riparim-Bewertungen bleiben eine getrennte eigene Bewertungszeile. Es gibt keine
@@ -166,10 +173,10 @@ Retirierte Profile werden beim Liveabgleich entfernt; aktualisierte Betriebsdate
 und bestätigte Identitäten stammen immer aus dem frischen Verzeichnis. Ein
 Geschäftsdatenwechsel invalidiert die alte Identität auch ohne Google-Momentaufnahme.
 Nur Karten-IDs bleiben im Ansichtsstate, keine ausgelesenen Google-Werte.
-Karten teilen das Advanced-Tageslimit von 100, Profile das Standard-Tageslimit
-von 250. Danach bleibt der Maps-Link. Advanced benötigt den gemeinsamen
-JavaScript-SDK-Kanal `v=beta`; Standard-Profile verwenden denselben SDK ohne
-einen zweiten Ladevorgang. Google kennzeichnet Advanced als Pro-Preview mit
+Katalogkarten und beide Profilbausteine teilen das bestehende Advanced-Tageslimit
+von 100; die Aufteilung erhöht diese Quote nicht. Danach bleibt der Maps-Link.
+Advanced benötigt den gemeinsamen JavaScript-SDK-Kanal `v=beta` ohne einen
+zweiten Ladevorgang. Google kennzeichnet Advanced als Pro-Preview mit
 möglichen inkompatiblen Änderungen. Die Fehleranzeige bleibt deshalb erhalten.
 Die [offizielle Konfiguration](https://developers.google.com/maps/documentation/javascript/places-ui-kit/advanced-place-details)
 unterstützt das Weglassen von Namen und Aktionen; Attribution bleibt sichtbar.
@@ -203,18 +210,18 @@ Produktionskosten-Nachherwert ist wegen Billing-Verzug noch nicht belegt.
 Der datierte #96-Bericht bleibt unverändert als historischer Beleg der ersten
 Browserpause. Beim Beginn dieser Korrektur war der Browser-Key noch auf
 `https://riparim-google-paused.invalid/*` beschränkt. Die Standard-Freigabe ist
-seit v1.12.7 aktiv. Advanced war bisher mit Tagesquote
-0 gesperrt. Die Advanced-Freigabe auf 100 pro Tag erfolgt erst nach frischer
-Kontopreis-/Nutzungsprüfung und geprüftem Main-Release; diese Dokumentation
-behauptet keine bereits durchgeführte Advanced-Provideränderung.
+seit v1.12.7 aktiv. Advanced wurde nach frischer Kontopreis-/Nutzungsprüfung und
+geprüftem Main-Release v1.12.9 auf 100 pro Tag freigegeben. Die Profilaufteilung
+verwendet diese bestehende Quote ohne weitere Provideränderung. Der native
+Readback vom 11.10.2026 bestätigt Advanced 100, Standard 250 und Sessions 0.
 
 | Dienst / Methode | Ziel-Tageslimit | Wirkung |
 | --- | ---: | --- |
 | Places (New): GetPlaceRequest | **0** | Einzel-Details bleiben gesperrt |
 | Places (New): SearchTextRequest | **20** | nur getrennte serverseitige Identitätsprüfung bei bestätigter freier Restmenge |
 | Places (New): PhotoMedia | **0** | öffentliche App verwendet einen direkten Maps-Fotolink |
-| UI-Kit Standard Query | **250** | Profilwidgets und noch offene ältere Katalogansichten |
-| UI-Kit Advanced Query | **100** | nur Katalograting mit Google-Attribution, ohne Name/Aktionen |
+| UI-Kit Standard Query | **250** | nur noch offene ältere Profil-/Katalogansichten |
+| UI-Kit Advanced Query | **100** | Katalograting und getrennte Profilbausteine, ohne Name/Aktionen |
 | UI-Kit Sessions | **0** | nicht verwendet und gesperrt |
 | Maps JavaScript: Map loads | **0** | keine eingebetteten Karten; direkte Maps-/Routenlinks |
 
@@ -255,8 +262,8 @@ bestätigt 0 CHF bis zur Staffelgrenze 5000 und danach 4,159249999 CHF pro 1000.
 Der aktuelle Monatsbericht enthält neun SKUs, keine Pro-UI-Kit-Zeile; Gesamt
 4,34 CHF bleiben ausschließlich den historischen Enterprise-Details zugeordnet.
 Das Rechnungskonto ist nur mit `riparim-510521` verknüpft. Diese Billinganzeige
-allein beweist wegen Reporting-Verzug keine Nullnutzung; die bisherige
-Advanced-Tagesquote 0 und deren Nutzungsreadback werden zusätzlich geprüft. 100 pro Tag erlauben selbst über 31 Tage
+allein beweist wegen Reporting-Verzug keine Nullnutzung; vor der Freigabe
+wurde zusätzlich die bisherige Advanced-Tagesquote 0 mit Nutzungsreadback geprüft. 100 pro Tag erlauben selbst über 31 Tage
 höchstens 3100 Advanced-Queries; andere Kontoverbraucher und Reporting-Verzug
 müssen zusätzlich in die freie Restmenge passen. Bei unbestätigter Restmenge
 bleibt Advanced auf 0; es gibt keinen kostenpflichtigen Ausweichpfad.
