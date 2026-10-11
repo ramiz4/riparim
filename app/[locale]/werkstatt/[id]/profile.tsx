@@ -66,10 +66,10 @@ export default function WorkshopProfile({publicSnapshot=false,workshop:initialWo
  const riparimReviews=<div key="riparim" className={`profile-riparim-reviews${!reviews.length&&!reviewError&&!reviewsLoading?" is-empty":""}`}>
   <div className="profile-review-provider"><h3><ShieldCheck size={18}/>Riparim</h3>{reviews.length>0&&<p>{t("public.reviewsProof")}</p>}</div>
   {reviewsLoading?<p role="status">{t("public.loading")}</p>:reviewError?<p className="error" role="alert">{publicDataError(t,reviewError,"reviews")}</p>:reviews.length?<div className="public-review-list">{reviews.map((review,index)=><article className="public-review" key={`${review.display_name}:${review.date}:${index}`}>
-   <div className="review-title"><div className="public-review-author"><strong>{review.display_name}</strong><time dateTime={review.date}>{formatDate(locale,review.date,{dateOnly:true})}</time></div><span className="public-review-score"><Star size={15} fill="currentColor" aria-hidden="true"/>{formatNumber(locale,review.rating)} / 5</span></div>
+   <div className="review-title"><strong className="public-review-author">{review.display_name}</strong><span className="public-review-score"><Star size={15} fill="currentColor" aria-hidden="true"/>{formatNumber(locale,review.rating)} / 5</span></div>
    <p className="review-meta"><span>{review.vehicle}</span><span>{review.service}</span></p>
    <p className="public-review-text">{review.review}</p>
-   <span className="proof-badge"><ShieldCheck size={14} aria-hidden="true"/>{t("public.proofChecked")}</span>
+   <footer className="public-review-footer"><span className="proof-badge"><ShieldCheck size={14} aria-hidden="true"/>{t("public.proofChecked")}</span><time dateTime={review.date}>{formatDate(locale,review.date,{dateOnly:true})}</time></footer>
   </article>)}{w.count>reviews.length&&<p className="help">{t("public.latestReviews",{count:reviews.length})}</p>}</div>:<p className="profile-review-empty">{t("public.noProofReviews")}</p>}
  </div>;
  return <><SiteHeader account={account} isAdmin={isAdmin}/>
