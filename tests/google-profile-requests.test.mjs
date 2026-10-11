@@ -13,7 +13,7 @@ const seenPhotos=new WeakSet();const photoObserver=new MutationObserver(records=
 const nativeTimeout=globalThis.setTimeout,nativeClearTimeout=globalThis.clearTimeout,expiries=new Map(),timeouts=new Map();let timerId=100000;
 globalThis.setTimeout=(fn,delay,...args)=>{if(delay===1800000||delay===12000){const id=++timerId;(delay===1800000?expiries:timeouts).set(id,()=>fn(...args));return id;}return nativeTimeout(fn,delay,...args);};globalThis.clearTimeout=id=>{expiries.delete(id);timeouts.delete(id);return nativeClearTimeout(id);};
 window.google={maps:{importLibrary:async()=>({Place:class{constructor(options){this.options=options;}async fetchFields(options){counters.individualRatings.push({place:this.options,fields:options.fields});}}})}};
-customElements.define('gmp-place-details',class extends HTMLElement{connectedCallback(){counters.widgetConnections.push(this);if(!counters.widgets.includes(this))counters.widgets.push(this);}disconnectedCallback(){counters.widgetDisconnections.push(this);}});
+for(const tag of ['gmp-advanced-place-details','gmp-advanced-place-details-compact'])customElements.define(tag,class extends HTMLElement{connectedCallback(){counters.widgetConnections.push(this);if(!counters.widgets.includes(this))counters.widgets.push(this);}disconnectedCallback(){counters.widgetDisconnections.push(this);}});
 globalThis.fetch=async url=>{
  if(url==='/api/google-places'){counters.configs.push(url);return Response.json({enabled:true,browserKey:'fixture-key'});}
  if(String(url).startsWith('/api/google-places/')){identities.push(String(url));if(String(url).endsWith('disabled'))return Response.json({placeId:null});return Response.json({placeId:'ChIJ'+String(url).split('/').at(-1)});}
@@ -26,7 +26,7 @@ const api=await import(new URL('../'+output+'/ui.mjs',import.meta.url)),React=aw
 const workshop={id:'fixture',name:'Fixture',city:'Prishtina',address:'Fixture street',phone:'+38349123456',whatsapp:'',lat:42.66,lng:21.16,rating:4,count:1,specialty:'',description:'',services:[],serviceDetails:[],brands:[],languages:[],sources:[],checkedAt:'2026-10-10',status:'published',googleRating:{mapsUrl:'https://www.google.com/maps/search/?api=1&query_place_id=ChIJfixture',rating:1,count:999}};
 const props={workshop,directory:[workshop],reviews:[],reviewError:'',signedIn:false,account:null,isAdmin:false};
 const settle=()=>new Promise(resolve=>setTimeout(resolve,0));const render=async(locale,node)=>{document.documentElement.lang=locale;await React.act(async()=>{root.render(h(api.I18nProvider,{locale,messages:api.getMessages(locale,['common','public'])},node));await settle();});};
-const show=async(className,visible=true)=>{for(let pass=0;pass<3;pass++)await React.act(async()=>{for(const [observer,element] of [...observations])if(element.classList.contains(className))observer.callback([{target:element,isIntersecting:visible}]);await settle();});};
+const show=async(className,visible=true)=>{for(let pass=0;pass<3;pass++)await React.act(async()=>{for(const [observer,element] of [...observations])if(element.classList.contains(className)&&!(className==='google-reviews-panel'&&element.classList.contains('google-overview-panel')))observer.callback([{target:element,isIntersecting:visible}]);await settle();});};
 const tab=async(value)=>{await React.act(async()=>{visibleTab=value;document.dispatchEvent(new Event('visibilitychange'));await settle();});};
 const click=async(element)=>{assert(element,'control exists');await React.act(async()=>{element.dispatchEvent(new MouseEvent('click',{bubbles:true}));await settle();});};
 const widgetLifecycle=element=>({connected:counters.widgetConnections.filter(value=>value===element).length,disconnected:counters.widgetDisconnections.filter(value=>value===element).length});
@@ -41,11 +41,11 @@ try{
  try{
   await render('de',h(api.Profile,{...props,workshop:hydratedWorkshop,directory:[hydratedWorkshop],publicSnapshot:true}));
   await show('google-reviews-panel');await loadWidget();await show('profile-google-photos');
-  const original=document.querySelector('gmp-place-details'),before={widgets:counters.widgets.length,details:counters.individualDetails.length,photos:counters.photoResources.length},lifecycleBefore=widgetLifecycle(original);
+  const original=document.querySelector('gmp-advanced-place-details'),before={widgets:counters.widgets.length,details:counters.individualDetails.length,photos:counters.photoResources.length},lifecycleBefore=widgetLifecycle(original);
   assert(original?.isConnected);assert(!document.querySelector('.public-review-list'),'own reviews are still pending while Google is visible');
   await React.act(async()=>{releaseReviews();await settle();});await show('google-reviews-panel');await show('profile-google-photos');
   assert(document.querySelector('.public-review-list').textContent.includes(ownReview.review),'the actual asynchronous own-review response hydrated');
-  const current=document.querySelector('gmp-place-details');
+  const current=document.querySelector('gmp-advanced-place-details');
   if(current!==original||JSON.stringify(widgetLifecycle(original))!==JSON.stringify(lifecycleBefore))console.log(JSON.stringify({trigger:'publicSnapshot-review-hydration',lifecycleBefore,lifecycleAfter:widgetLifecycle(original),sameElement:current===original,firstConnected:original.isConnected,widgetMontagesBefore:before.widgets-hydrationWidgetStart,widgetMontagesAfter:counters.widgets.length-hydrationWidgetStart,detailsBefore:before.details,detailsAfter:counters.individualDetails.length,photosBefore:before.photos,photosAfter:counters.photoResources.length}));
   assert.equal(current,original,'late publicSnapshot review hydration must preserve the same Google element');assert(original.isConnected);
   assert.deepEqual(widgetLifecycle(original),lifecycleBefore,'late own-review hydration must never disconnect or reconnect the native Google widget');
@@ -63,8 +63,8 @@ try{
   await show('google-reviews-panel');assert.equal(counters.widgets.length,widgets+1);assert.equal(identities.length,identityCount+1,'first visible Google area starts one shared identity');
   const element=counters.widgets.at(-1),request=element.querySelector('gmp-place-details-place-request');
   assert.equal(request.place.options.id,'ChIJ'+locale);assert.equal(request.place.options.requestedLanguage,locale);
-  assert.deepEqual([...element.querySelector('gmp-place-content-config').children].map(x=>x.localName),['gmp-place-rating','gmp-place-opening-hours','gmp-place-reviews']);
-  await loadWidget();assert.equal(document.querySelector('.google-details-time').textContent,api.createTranslator(api.getMessages(locale))('public.googleDetailsLoadedAt',{time:api.formatDate(locale,Date.now(),{withTime:true})}),'loaded time is displayed explicitly in Kosovo local time');
+  assert.deepEqual([...element.children].map(x=>x.localName),['gmp-place-details-place-request','gmp-place-reviews','gmp-place-attribution'],'lower provider contains only reviews and attribution');
+  await loadWidget();assert(!document.querySelector('.profile-google-heading'));assert(!document.querySelector('.google-details-time'));
   const summary={details:counters.individualDetails.length,widgets:counters.widgets.length};
   document.documentElement.classList.toggle('dark');await click(document.querySelector('.inline-review-toggle'));await render(locale,h(api.Profile,{...props,workshop:{...workshop,id:locale,googleRating:{...workshop.googleRating,mapsUrl:`https://www.google.com/maps/search/?api=1&query_place_id=ChIJ${locale}`}},directory:[workshop]}));
   assert.equal(counters.widgets.length,summary.widgets,'ordinary state/prop/theme changes preserve the mounted widget');assert.equal(counters.individualDetails.length,summary.details);
@@ -74,7 +74,7 @@ try{
   const reviewStateWorkshop={...workshop,id:locale,googleRating:{...workshop.googleRating,mapsUrl:`https://www.google.com/maps/search/?api=1&query_place_id=ChIJ${locale}`}},reviewBefore={widgets:counters.widgets.length,details:counters.individualDetails.length,photos:counters.photoResources.length},reviewLifecycle=widgetLifecycle(element);
   for(const reviews of [[ownReview],[]]){
    await render(locale,h(api.Profile,{...props,workshop:reviewStateWorkshop,directory:[reviewStateWorkshop],reviews}));await show('google-reviews-panel');await show('profile-google-photos');
-   assert.equal(document.querySelector('gmp-place-details'),element,'[] -> [Review] -> [] must preserve the same Google element');assert(element.isConnected);assert.deepEqual(widgetLifecycle(element),reviewLifecycle,'[] -> [Review] -> [] cannot disconnect or reconnect the native Google widget');
+   assert.equal(document.querySelector('gmp-advanced-place-details'),element,'[] -> [Review] -> [] must preserve the same Google element');assert(element.isConnected);assert.deepEqual(widgetLifecycle(element),reviewLifecycle,'[] -> [Review] -> [] cannot disconnect or reconnect the native Google widget');
    assert.deepEqual({widgets:counters.widgets.length,details:counters.individualDetails.length,photos:counters.photoResources.length},reviewBefore,'changing own-review presence must preserve all provider request/resource counters');
    assert(document.querySelector('.profile-review-stream').firstElementChild.classList.contains('profile-riparim-reviews'),'the provider reading order remains Riparim then Google');
   }
@@ -82,15 +82,30 @@ try{
   assert.equal(document.querySelectorAll('img[src*="maxWidthPx=1600"]').length,0,'large photo is not mounted before user action');
   await tab(false);const before={widgets:counters.widgets.length,details:counters.individualDetails.length};
   await React.act(async()=>{for(const expire of [...expiries.values()])expire();await settle();});
-  assert(document.querySelector('.google-official-widget').classList.contains('google-widget-unavailable'),'30-minute expiry hides the stale native opening status');
+  assert(document.querySelector('.profile-google-reviews .google-official-widget').classList.contains('google-widget-unavailable'),'30-minute expiry hides the stale native opening status');
   const refresh=document.querySelector('.google-details-refresh');assert(refresh.disabled);await click(refresh);
   assert.equal(counters.widgets.length,before.widgets);assert.equal(counters.individualDetails.length,before.details,'expiry never reloads photos or a complete profile');
   await tab(true);assert.equal(counters.widgets.length,before.widgets,'returning to tab does not refresh automatically');
-  await click(document.querySelector('.google-details-refresh'));assert.equal(counters.widgets.length,before.widgets+1,'explicit visible refresh creates exactly one Standard widget');
+  await click(document.querySelector('.google-details-refresh'));assert.equal(counters.widgets.length,before.widgets+1,'explicit visible refresh creates exactly one Advanced widget');
   assert.equal(counters.individualDetails.length,before.details,'explicit status refresh never requests photos');
   await React.act(async()=>counters.widgets.at(-1).dispatchEvent(new Event('gmp-error')));
-  const t=api.createTranslator(api.getMessages(locale));assert(document.querySelector('.google-reviews-panel').textContent.includes(t('public.googleDetailsFailed')));assert(!document.querySelector('.google-reviews-panel').textContent.includes(t('public.googleReviewsEmpty')));
-  assert(document.querySelector('.google-reviews-panel a').href.includes('query_place_id=ChIJ'+locale),'Maps fallback preserves confirmed identity on quota/provider failures');
+  const t=api.createTranslator(api.getMessages(locale));assert(document.querySelector('.profile-google-reviews .google-reviews-panel').textContent.includes(t('public.googleDetailsFailed')));assert(!document.querySelector('.profile-google-reviews .google-reviews-panel').textContent.includes(t('public.googleReviewsEmpty')));
+  assert(document.querySelector('.profile-google-reviews .google-reviews-panel a').href.includes('query_place_id=ChIJ'+locale),'Maps fallback preserves confirmed identity on quota/provider failures');
+ }
+ // The upper summary and lower comments share one identity but independent visible-only widgets.
+ for(const locale of ['de','sq','en']){
+  const start=counters.widgets.length,identityStart=identities.length;await mount(locale,'sections-'+locale);
+  await tab(false);await show('google-overview-panel');assert.equal(counters.widgets.length,start);
+  await tab(true);await show('google-overview-panel');assert.equal(counters.widgets.length,start+1);
+  const overview=document.querySelector('gmp-advanced-place-details-compact');assert(overview.closest('.profile-overview-details'));
+  assert.deepEqual([...overview.children].map(x=>x.localName),['gmp-place-details-place-request','gmp-place-rating','gmp-place-opening-hours','gmp-place-attribution']);
+  assert.equal(document.querySelector('gmp-advanced-place-details'),null,'invisible comments do not load with the upper summary');
+  await loadWidget();await show('google-reviews-panel');assert.equal(counters.widgets.length,start+2);assert.equal(identities.length,identityStart+1,'both visible panels share the same identity route');
+  const comments=document.querySelector('gmp-advanced-place-details');assert(comments.closest('#google-bewertungen'));
+  assert.deepEqual([...comments.children].map(x=>x.localName),['gmp-place-details-place-request','gmp-place-reviews','gmp-place-attribution']);
+  for(const element of [overview,comments]){assert(!element.querySelector('gmp-place-name,gmp-place-link,gmp-place-all-content,gmp-place-standard-content'));assert.equal(element.querySelector('gmp-place-details-place-request').place.options.requestedLanguage,locale);}
+  assert.equal(overview.querySelector('gmp-place-details-place-request').place.options.id,comments.querySelector('gmp-place-details-place-request').place.options.id);
+  assert(!document.querySelector('.profile-google-heading'));await loadWidget();await show('google-overview-panel');await show('google-reviews-panel');assert.equal(counters.widgets.length,start+2,'repeated visibility preserves both native widgets');
  }
  const identityBefore=identities.length;await tab(false);await mount('de','hidden');
  assert.equal(identities.length,identityBefore,'a hidden tab cannot start a potentially billable identity resolution');
@@ -102,18 +117,18 @@ try{
  await mount('de','sdk-race');await show('google-reviews-panel');await tab(false);const sdkBefore=counters.widgets.length;
  await React.act(async()=>{releaseWidget();await settle();});assert.equal(counters.widgets.length,sdkBefore);
  customElements.whenDefined=nativeWhenDefined;await tab(true);assert.equal(counters.widgets.length,sdkBefore+1,'deferred widget initializes when visibility returns');
- await mount('de','strict',true);await show('google-reviews-panel');assert(document.querySelector('gmp-place-details'),'StrictMode replay preserves the Standard widget');
- await mount('de','disabled');await show('google-reviews-panel');assert(document.querySelector('.google-reviews-panel').textContent.includes('Google-Angaben konnten nicht geladen werden'));assert(document.querySelector('.google-reviews-panel a').href.includes('google.com/maps'));
- await mount('de','changeIdentity');await show('google-reviews-panel');await loadWidget();const priorWidget=document.querySelector('gmp-place-details');
+ await mount('de','strict',true);await show('google-reviews-panel');assert(document.querySelector('gmp-advanced-place-details'),'StrictMode replay preserves the Advanced widget');
+ await mount('de','disabled');await show('google-reviews-panel');assert(document.querySelector('.profile-google-reviews .google-reviews-panel').textContent.includes('Google-Angaben konnten nicht geladen werden'));assert(document.querySelector('.profile-google-reviews .google-reviews-panel a').href.includes('google.com/maps'));
+ await mount('de','changeIdentity');await show('google-reviews-panel');await loadWidget();const priorWidget=document.querySelector('gmp-advanced-place-details');
  await render('de',h(api.Profile,{...props,workshop:{...workshop,id:'changeIdentity',googleRating:{...workshop.googleRating,mapsUrl:'https://www.google.com/maps/search/?api=1&query_place_id=ChIJotherIdentity'}}}));
  assert(!priorWidget.isConnected,'changed confirmed identity removes the old provider content');
  assert(document.querySelector('.workshop-overview-actions a[href*="maps/dir"]').href.includes('destination_place_id=ChIJotherIdentity'));
  assert(document.querySelector('.profile-google-photos a').href.includes('query_place_id=ChIJotherIdentity'));
  // Changed business data without a historical Google snapshot must invalidate the old confirmed identity.
- await render('de',null);const originalBusiness={...workshop,id:'business-update',googleRating:null};await render('de',h(api.Profile,{...props,workshop:originalBusiness,directory:[originalBusiness]}));await show('google-reviews-panel');const businessWidget=document.querySelector('gmp-place-details'),businessFetch=globalThis.fetch;
+ await render('de',null);const originalBusiness={...workshop,id:'business-update',googleRating:null};await render('de',h(api.Profile,{...props,workshop:originalBusiness,directory:[originalBusiness]}));await show('google-reviews-panel');const businessWidget=document.querySelector('gmp-advanced-place-details'),businessFetch=globalThis.fetch;
  globalThis.fetch=async(url,options)=>String(url).endsWith('/business-update')?Response.json({placeId:'ChIJbusiness-updated'}):businessFetch(url,options);
  try{const updatedBusiness={...originalBusiness,address:'Confirmed new workshop street'};await render('de',h(api.Profile,{...props,workshop:updatedBusiness,directory:[updatedBusiness]}));await show('google-reviews-panel');assert(!businessWidget.isConnected,'new business identity discards old provider content even without a historical Maps snapshot');assert.equal(document.querySelector('gmp-place-details-place-request').place.options.id,'ChIJbusiness-updated');assert(document.querySelector('.profile-google-photos a').href.includes('query_place_id=ChIJbusiness-updated'));}finally{globalThis.fetch=businessFetch;}
- await mount('de','timeout');await show('google-reviews-panel');const timeoutWidgets=counters.widgets.length;await React.act(async()=>{for(const fail of [...timeouts.values()])fail();await settle();});await tab(false);await tab(true);assert.equal(counters.widgets.length,timeoutWidgets,'load timeout has no automatic retry loop');assert(document.querySelector('.google-reviews-panel').textContent.includes('Google-Angaben konnten nicht geladen werden'));
+ await mount('de','timeout');await show('google-reviews-panel');const timeoutWidgets=counters.widgets.length;await React.act(async()=>{for(const fail of [...timeouts.values()])fail();await settle();});await tab(false);await tab(true);assert.equal(counters.widgets.length,timeoutWidgets,'load timeout has no automatic retry loop');assert(document.querySelector('.profile-google-reviews .google-reviews-panel').textContent.includes('Google-Angaben konnten nicht geladen werden'));
  // Configuration may resolve after a previously visible tab was hidden.
  await render('de',null);const identityApi=await import(new URL('../'+output+'/ui.mjs?identity-hidden-race',import.meta.url)),fixtureFetch=globalThis.fetch;let releaseConfig;const configGate=new Promise(resolve=>{releaseConfig=resolve;}),identityCount=identities.length;
  globalThis.fetch=async(url,options)=>{if(url==='/api/google-places'){await configGate;return Response.json({enabled:true,browserKey:'fixture-key'});}return fixtureFetch(url,options);};
@@ -157,7 +172,7 @@ try{
     const value={...workshop,id:'cost-'+mode+'-'+locale,googleRating:{...workshop.googleRating,mapsUrl:`https://www.google.com/maps/search/?api=1&query_place_id=ChIJcost-${mode}-${locale}`}},identityStart=identityCalls,photoStart=photoCalls,widgets=counters.widgets.length;
     await React.act(async()=>{root.render(h(scoped.I18nProvider,{locale,messages:scoped.getMessages(locale,['common','public'])},h(scoped.Profile,{...props,workshop:value,directory:[value],reviews:[ownReview]})));await settle();});
     await show('google-reviews-panel');await show('profile-google-photos');
-    const t=scoped.createTranslator(scoped.getMessages(locale)),panel=document.querySelector('.google-reviews-panel'),photos=document.querySelector('.profile-google-photos');
+    const t=scoped.createTranslator(scoped.getMessages(locale)),panel=document.querySelector('.profile-google-reviews .google-reviews-panel'),photos=document.querySelector('.profile-google-photos');
     assert(document.querySelector('.profile-riparim-reviews').textContent.includes(ownReview.review),'provider failures preserve own reviews');
     assert(document.querySelector('.profile-overview-details .riparim-rating .rating-value'),'provider failures preserve the own average');
     assert(document.querySelector('.workshop-overview-actions a[href*="maps/dir"]').href.includes('destination_place_id=ChIJcost-'+mode+'-'+locale),'route fallback keeps the independently confirmed Place ID');
@@ -179,5 +194,5 @@ try{
  await render('de',null);const sdkApi=await import(new URL('../'+output+'/ui.mjs?sdk-failure',import.meta.url));let sdkAttempts=0;window.google={maps:{importLibrary:async()=>{sdkAttempts++;throw Error('Fictional SDK authorization failure');}}};
  await React.act(async()=>root.render(h(sdkApi.I18nProvider,{locale:'de',messages:sdkApi.getMessages('de',['common','public'])},h(sdkApi.GooglePlaceReviews,{workshop,identity:{placeId:'ChIJfixture',browserKey:'fixture-key'},status:'ready'}))));await show('google-reviews-panel');
  assert.equal(document.querySelector('.google-details-refresh').textContent,'Seite neu laden','SDK failures provide a real fresh-browser recovery action');assert.equal(sdkAttempts,1);await tab(false);await tab(true);assert.equal(sdkAttempts,1,'SDK failures do not automatically retry');
- console.log(JSON.stringify({locales:['de','sq','en'],duplicateEnterpriseDetails:0,individualRatings:0,firstVisibleStandardWidgets:1,photoMetadataRequests:0,previewPhotos:0,largePhotosBeforeAction:0,staleMinutes:30,hiddenIdentityRequests:0,offscreenConfigurationRequests:0,sharedCanonicalIdentity:true,reviewPresenceStableElement:true,asyncPublicReviewHydration:true,nativeWidgetReconnectsOnOwnReviews:0,providerFallbackModes:['disabled','identity-quota','identity-timeout'],photoRefreshes:0,lateLocalePlaceGuards:true,strictMode:true,liveProviderCalls:false}));
+ console.log(JSON.stringify({locales:['de','sq','en'],duplicateEnterpriseDetails:0,individualRatings:0,firstVisibleAdvancedWidgets:1,photoMetadataRequests:0,previewPhotos:0,largePhotosBeforeAction:0,staleMinutes:30,hiddenIdentityRequests:0,offscreenConfigurationRequests:0,sharedCanonicalIdentity:true,reviewPresenceStableElement:true,asyncPublicReviewHydration:true,nativeWidgetReconnectsOnOwnReviews:0,providerFallbackModes:['disabled','identity-quota','identity-timeout'],photoRefreshes:0,lateLocalePlaceGuards:true,strictMode:true,liveProviderCalls:false}));
 }finally{photoObserver.disconnect();await React.act(async()=>root.unmount());globalThis.setTimeout=nativeTimeout;globalThis.clearTimeout=nativeClearTimeout;dom.window.close();}

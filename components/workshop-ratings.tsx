@@ -10,7 +10,7 @@ import {useGoogleWorkshopProfile} from "./use-google-workshop-profile";
 
 function GoogleRating({workshop}:{workshop:Workshop}){
  const {identity,status,requestIdentity}=useGoogleWorkshopProfile(workshop.id,workshop.googleRating?.mapsUrl,workshopIdentityInput(workshop));
- return <GooglePlaceReviews workshop={workshop} identity={identity} status={status} requestIdentity={requestIdentity} ratingOnly/>;
+ return <GooglePlaceReviews workshop={workshop} identity={identity} status={status} requestIdentity={requestIdentity} variant="rating"/>;
 }
 export function WorkshopRatings({workshop:w,details=false,hideUnavailable=false,compact=false,showGoogle=true}:{workshop:Workshop;details?:boolean;hideUnavailable?:boolean;compact?:boolean;showGoogle?:boolean}){
  const {locale,t}=useI18n();const decimal=(value:number)=>formatNumber(locale,value,{minimumFractionDigits:1,maximumFractionDigits:1});
