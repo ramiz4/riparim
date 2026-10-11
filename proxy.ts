@@ -1,6 +1,7 @@
 import {NextResponse,type NextRequest} from "next/server";
 import {createServerClient} from "@supabase/ssr";
 import {getAuthConfig} from "@/lib/auth/config";
+import {publishedWorkshop} from "@/db/directory";
 import {isTechnicalPath,isPagePath,isStaticOrMetadataPath,localeFromPath,localizeHref,pageIdentityPath} from "@/lib/i18n/locale";
 
 export async function proxy(request:NextRequest){
@@ -27,10 +28,13 @@ export async function proxy(request:NextRequest){
  const destination=new URL(canonical);
  if(page){const identity=pageIdentityPath(canonical.pathname);destination.pathname=`/${localeFromPath(canonical.pathname)}${identity==="/"?"":identity}`;}
  const rewrite=destination.pathname!==canonical.pathname;
+ const profileId=page?pageIdentityPath(canonical.pathname).match(/^\/werkstatt\/([^/]+)$/)?.[1]:undefined;
+ // Decide before RSC streaming starts; keep the route's localized not-found UI.
+ const status=profileId&&(!/^[a-z0-9][a-z0-9-]{2,80}$/.test(profileId)||!await publishedWorkshop(profileId))?404:undefined;
  const referrerPolicy=["/auth/bestaetigen","/auth/bestaetigen/"].includes(canonical.pathname)?"no-referrer":"strict-origin-when-cross-origin";
  // Cookie renewal must reconstruct the same response plan, including its rewrite.
  const createResponse=()=>{
-  const response=rewrite?NextResponse.rewrite(destination,{request}):NextResponse.next({request});
+  const response=rewrite?NextResponse.rewrite(destination,{request,status}):NextResponse.next({request,status});
   response.headers.set("X-Content-Type-Options","nosniff");response.headers.set("Referrer-Policy",referrerPolicy);response.headers.set("Cache-Control","private, no-store");
   return response;
  };

@@ -28,8 +28,9 @@ APIs verwenden dieselben Geschäftsregeln und SQL-Abfragen wie der Worker.
 Die Option `skipProxyUrlNormalize` erhält die ursprüngliche Request-Origin:
 sonst können interne Sprach-Rewrites von `127.0.0.1` auf `localhost` als
 externe Selbstanfragen ausgeführt werden. Der kanonische `/de`-Redirect bleibt.
-Next kann bei bereits begonnenen HTML-Streams eine Nicht-gefunden-Seite mit
-HTTP 200 ausliefern; private Entwürfe werden auch dabei nicht ausgegeben.
+Die gemeinsame Verfügbarkeitsprüfung entscheidet vor dem Streaming:
+fehlende, ungültige und unveröffentlichte Werkstattprofile erhalten HTTP 404
+für HTML, RSC-Navigation und HEAD. Private Entwürfe bleiben verborgen.
 
 Für den Betrieb hinter einem HTTPS-Reverse-Proxy muss `SITE_ORIGIN` die
 öffentliche HTTPS-Origin sein. Der Starter validiert HTTP/HTTPS ohne Zugangsdaten,

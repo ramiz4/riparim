@@ -47,7 +47,13 @@ try{
  for(const [alias,target] of [['/en/werkstaetten?ort=Prizren','/en/workshops?ort=Prizren'],['/sq/werkstatt/fixture-public?suche=%2Fsq%2Fserviset','/sq/servis/fixture-public?suche=%2Fsq%2Fserviset']]){
   const response=await fetch(origin+alias,{redirect:'manual'});assert.equal(response.status,308);assert.equal(new URL(response.headers.get('location'),origin).href,origin+target,'public aliases preserve their query and use the localized canonical path');
  }
- const draft=await fetch(origin+'/werkstatt/fixture-draft');assert([200,404].includes(draft.status));assert(! (await draft.text()).includes('Private Draft Workshop'),'streamed not-found pages never expose draft data');
+ for(const [prefix,profile] of [['','/werkstatt/'],['/en','/workshop/'],['/sq','/servis/']])for(const id of ['fixture-draft','unknown-profile','x'])for(const init of [{},{method:'HEAD'},{headers:{RSC:'1',Accept:'text/x-component'}}]){
+  const unavailable=await fetch(origin+prefix+profile+id,init);assert.equal(unavailable.status,404,'unavailable profiles retain the shared pre-streaming status');
+  const body=await unavailable.text();assert(!body.includes('Private Draft Workshop'));
+  if(init.method==='HEAD')assert.equal(body,'');
+  else if(init.headers)assert.match(unavailable.headers.get('content-type'),/text\/x-component/);
+  else assert.match(body,/noindex/);
+ }
  assert.equal((await fetch(origin+'/de/werkstaetten',{redirect:'manual'})).status,308);
  const forged={'oai-authenticated-user-id':'fixture-native','oai-authenticated-user-email':'moderator@fixture.invalid','oai-authenticated-user-full-name':'Fixture Admin'};
  assert.deepEqual(await (await fetch(origin+'/api/session',{headers:forged})).json(),{account:null,isAdmin:false});

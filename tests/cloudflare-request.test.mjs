@@ -55,6 +55,8 @@ const bundleOptions = {
     builder.onLoad({filter:/.*/,namespace:'runtime-fixture'},()=>({loader:'js',contents:'export const env={};export function nativeIdentityEnabled(){return true;}'}));
     builder.onResolve({filter:/(?:notifications\/outbox|^\.\/outbox)$/},args=>({path:args.path,namespace:'notification-fixture'}));
     builder.onLoad({filter:/.*/,namespace:'notification-fixture'},()=>({loader:'js',contents:'export async function processNotifications(){return []; }'}));
+    builder.onResolve({filter:/^@\/db\/directory$/},args=>({path:args.path,namespace:'catalogue-fixture'}));
+    builder.onLoad({filter:/.*/,namespace:'catalogue-fixture'},()=>({loader:'js',contents:'export async function publishedWorkshop(id){return {id};}'}));
     builder.onResolve({filter:/^(next\/server|@\/lib\/auth\/config|@supabase\/ssr)$/},args=>({path:args.path,namespace:'proxy-fixture'}));
     builder.onLoad({filter:/.*/,namespace:'proxy-fixture'},args=>({loader:'js',contents:args.path==='next/server'
       ? 'export const NextResponse={redirect:(url,status)=>new Response(null,{status,headers:{Location:String(url)}}),rewrite:(url)=>{const response=new Response(null,{headers:{"x-middleware-rewrite":String(url)}});response.cookies={set:(name,value)=>response.headers.append("Set-Cookie",name+"="+value+"; Path=/; HttpOnly; Secure; SameSite=Lax")};return response;},next:()=>{const response=new Response(null);response.cookies={set:(name,value)=>response.headers.append("Set-Cookie",name+"="+value+"; Path=/; HttpOnly; Secure; SameSite=Lax")};return response;}};'

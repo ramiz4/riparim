@@ -24,20 +24,26 @@ async function submit(form){await act(async()=>form.dispatchEvent(new Event('sub
 try{
  for(const locale of ['de','sq','en']){
   await render(locale);const messages=getMessages(locale).management;
-  check(document.querySelector('h1').textContent===messages.claimProfile&&document.querySelector('h2').textContent===workshop.name,'The claim page has its own localized title and fixed workshop');
+  check(document.querySelector('h1').textContent===messages.claimTitle&&document.querySelector('h2').textContent===workshop.name,'The claim page has its own localized title and fixed workshop');
   check(!document.querySelector('select')&&document.querySelectorAll('textarea').length===1&&!document.querySelector('.business-request'),'The application contains one text field and no overview or workshop selector');
-  check(document.querySelector('a[href="'+localizeHref('/werkstatt/'+workshop.id,locale)+'"]')&&document.querySelector('a[href="'+localizeHref('/betrieb',locale)+'"]'),'The claim offers document navigation back to profile and overview');
+  check(document.querySelector('a[href="'+localizeHref('/werkstatt/'+workshop.id,locale)+'"]')&&!document.querySelector('.business-section'),'The flat claim page offers one back link without a surrounding card');
   const proof=document.querySelector('textarea'),upload=document.querySelector('input[type=file]');
-  check(proof.required&&proof.minLength===40&&proof.maxLength===4000&&document.querySelector('label[for="'+upload.id+'"]')&&document.getElementById(upload.getAttribute('aria-describedby')).textContent===messages.ownershipDocumentHelp,'Text and document fields retain their labelled bounded contract');
+  check(proof.required&&proof.minLength===40&&proof.maxLength===4000&&document.querySelector('label[for="'+upload.id+'"]')&&document.getElementById(upload.getAttribute('aria-describedby')).textContent===messages.claimFileTypes,'Text and document fields retain their labelled bounded contract');
   await type(proof,'A sufficiently detailed fictional registered operator ownership explanation.');
   const file=new File(['%PDF-1.7 fictional evidence'],'fixture.pdf',{type:'application/pdf'});
   await act(async()=>{Object.defineProperty(upload,'files',{value:[file],configurable:true});upload.dispatchEvent(new Event('change',{bubbles:true}));});
+  check(document.querySelector('.claim-upload strong').textContent===messages.claimReplaceDocument&&document.querySelector('.claim-selected-file span').textContent==='fixture.pdf','The localized upload shows its selected file and replacement action');
+  const remove=document.querySelector('.claim-remove-file');check(remove.getAttribute('aria-label')===messages.claimRemoveDocument,'File removal has a localized accessible name');
+  await act(async()=>remove.click());check(!document.querySelector('.claim-selected-file')&&document.activeElement===upload&&proof.value.includes('ownership'),'Removing the optional document preserves text and restores focus to the chooser');
+  check(document.querySelector('.claim-upload strong').textContent===messages.claimChooseDocument,'Clearing a document restores the localized empty upload state');
+  await act(async()=>upload.dispatchEvent(new Event('change',{bubbles:true})));
   mode='failure';await submit(proof.form);check(document.querySelector('[role=alert]').textContent===messages.business_claim_unavailable&&proof.value.includes('ownership'),'Rejected claims retain evidence and show a localized error');
   check(requests.at(-1).get('workshopId')===workshop.id&&requests.at(-1).get('file').name==='fixture.pdf'&&[...requests.at(-1).keys()].join('|')==='workshopId|evidence|file','A claim sends only the fixed workshop, text and private document');
-  mode='pending';const form=proof.form;await submit(form);check(form.querySelector('fieldset').disabled&&document.querySelector('.business-panel').getAttribute('aria-busy')==='true','Pending submission announces busy and freezes the fields');
+  mode='pending';const form=proof.form;await submit(form);check(document.querySelector('.claim-submit button').textContent===messages.claimSending&&form.querySelector('fieldset').disabled&&document.querySelector('.business-panel').getAttribute('aria-busy')==='true','Pending submission announces busy and freezes the fields');
   const count=requests.length;await submit(form);check(requests.length===count,'Pending submissions cannot be duplicated');
   await act(async()=>finish(Response.json({status:'pending'},{status:201})));
   check(!document.querySelector('form')&&document.querySelector('[role=status]').textContent===messages.claimSubmitted&&document.querySelector('a[href="'+localizeHref('/betrieb',locale)+'"]'),'Successful claims replace the form with confirmation and a link to the separate overview');
+  check(document.activeElement===document.querySelector('.claim-confirmation h2'),'Successful submission moves focus to the confirmation');
   await submit(form);check(requests.length===count,'A saved application cannot be resubmitted from a stale form');
  }
  for(const modeValue of ['auth','network']){await render('de');mode=modeValue;await type(document.querySelector('textarea'),'A fictional ownership description with enough detail for this isolated test.');await submit(document.querySelector('form'));check(document.querySelector('[role=alert]')&&document.querySelector('textarea').value.includes('fictional'),'Expired sessions and network failures preserve the private draft');}
