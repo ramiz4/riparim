@@ -23,7 +23,7 @@ npm run start:node -- --port 5174
 ```
 
 Der Build erzeugt `.next/` und `.node-runtime/command.mjs`. Ein kleiner `node:http`-Starter übergibt Requests an das vorhandene Next.js.
-Nexts Webpack-Build ersetzt ausschließlich `lib/runtime/env` durch den Node-Adapter. Seiten und
+Nexts Webpack-Build ersetzt `lib/runtime/env` durch den Node-Adapter und den Worker-SMTP-Stub durch den kleinen Node-Versandadapter. Seiten und
 APIs verwenden dieselben Geschäftsregeln und SQL-Abfragen wie der Worker.
 Die Option `skipProxyUrlNormalize` erhält die ursprüngliche Request-Origin:
 sonst können interne Sprach-Rewrites von `127.0.0.1` auf `localhost` als

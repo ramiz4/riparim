@@ -6,13 +6,14 @@ import {accountIdentity} from "@/lib/auth/identities";
 import {accountBlocked,providerBlocked} from "@/lib/auth/account-status";
 import {callbackLocale} from "@/lib/auth/locale";
 import {validUserId} from "@/lib/admin-users";
-import {DeliveryError,deliveryPayloadSchema,emailConfiguration,reviewEmail,sendReviewEmail} from "./email";
+import {DeliveryError,deliveryPayloadSchema,reviewEmail} from "./email";
+import {emailConfiguration} from "./transports";
 import type {NotificationRow,NotificationView} from "./contract";
 
 const retryWindow=23*3600000,maxAutomaticAttempts=5;
 const retryDelays=[60000,300000,1800000,7200000,21600000];
 const withinWindow=(row:NotificationRow)=>row.first_attempt_at===null||Date.now()-row.first_attempt_at<retryWindow;
-export function canRetryNotification(row:NotificationRow){return !["sent","suppressed","unknown"].includes(row.state)&&withinWindow(row)&&(row.state!=="sending"||(row.lease_until??0)<=Date.now());}
+export function canRetryNotification(row:NotificationRow){return !row.smtp_in_flight&&!["sent","suppressed","unknown"].includes(row.state)&&withinWindow(row)&&(row.state!=="sending"||(row.lease_until??0)<=Date.now());}
 async function keyHash(value:string){return Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(value))),byte=>byte.toString(16).padStart(2,"0")).join("");}
 async function recipient(owner:string){
  const config=await getAuthConfig(),auth=await getAuthAdmin();
@@ -30,17 +31,19 @@ async function stillCurrent(row:NotificationRow){
  if(await accountBlocked(row.owner))return false;
  return !!await storage().db.prepare("SELECT id FROM visits WHERE id=? AND owner=? AND revision=? AND status=?").bind(row.visit_id,row.owner,row.revision,row.decision).first();
 }
-async function setState(row:NotificationRow,state:NotificationRow["state"],error:string|null,next=Date.now()){
- await storage().db.prepare("UPDATE review_notifications SET state=?,last_error=?,next_attempt_at=?,lease_until=NULL,lease_token=NULL WHERE id=? AND lease_token=? AND state='sending'").bind(state,error,next,row.id,row.lease_token).run();
+async function setState(row:NotificationRow,state:NotificationRow["state"],error:string|null,next=Date.now(),knownNonAcceptance=false){
+ await storage().db.prepare("UPDATE review_notifications SET state=?,last_error=?,next_attempt_at=?,smtp_in_flight=CASE WHEN ? THEN 0 ELSE smtp_in_flight END,lease_until=NULL,lease_token=NULL WHERE id=? AND lease_token=? AND state='sending'").bind(state,error,next,knownNonAcceptance?1:0,row.id,row.lease_token).run();
 }
 async function deliver(row:NotificationRow){
+ let smtpStarted=false,knownNonAcceptance=false;
  try{
   if(!withinWindow(row)){await setState(row,"unknown","idempotency_window_expired");return;}
   if(!await stillCurrent(row)){await setState(row,"suppressed","superseded");return;}
   const config=emailConfiguration();if(!config)throw new DeliveryError("configuration_missing",false);
-  const contact=await recipient(row.owner),fingerprint=await keyHash(config.key);
+  const contact=await recipient(row.owner),fingerprint=await keyHash(config.scope);
   let body:string;
   if(row.first_attempt_at!==null){
+   if((row.transport??"resend")!==config.kind)throw new DeliveryError("credential_changed",false);
    if(row.provider_key_hash!==fingerprint)throw new DeliveryError("credential_changed",false);
    let stored:unknown;try{stored=row.payload?JSON.parse(row.payload):null;}catch{throw new DeliveryError("invalid_payload",false);}
    const parsed=deliveryPayloadSchema.safeParse(stored);if(!parsed.success)throw new DeliveryError("invalid_payload",false);
@@ -49,17 +52,23 @@ async function deliver(row:NotificationRow){
    // whitespace also belong to the provider idempotency request.
    body=row.payload!;
   }else body=JSON.stringify(reviewEmail(row.decision,row.visit_id,config.from,contact.email,contact.locale));
+  const wire=config.kind==="smtp"?(row.first_attempt_at===null?await config.prepare(body,row.id):row.wire_payload):null;
+  if(config.kind==="smtp"&&!wire)throw new DeliveryError("invalid_payload",false);
   // Freeze the exact payload and credential scope before the first provider
-  // call. A lost acknowledgement must retry the same idempotent request.
+  // call. Resend may retry that exact idempotent request; SMTP requires
+  // reconciliation after any uncertain handover.
   if(!await stillCurrent(row)){await setState(row,"suppressed","superseded");return;}
-  const committed=await storage().db.prepare("UPDATE review_notifications SET payload=?,provider_key_hash=?,first_attempt_at=COALESCE(first_attempt_at,?) WHERE id=? AND lease_token=? AND state='sending'").bind(body,fingerprint,Date.now(),row.id,row.lease_token).run();
+  smtpStarted=!config.idempotent;
+  const committed=await storage().db.prepare("UPDATE review_notifications SET payload=?,provider_key_hash=?,transport=?,wire_payload=?,smtp_in_flight=?,first_attempt_at=COALESCE(first_attempt_at,?) WHERE id=? AND lease_token=? AND state='sending' AND lease_until>?").bind(body,fingerprint,config.kind,wire,smtpStarted?1:0,Date.now(),row.id,row.lease_token,Date.now()).run();
   if(!committed.meta.changes)return;
-  const providerId=await sendReviewEmail(body,config.key,row.id);
-  await storage().db.prepare("UPDATE review_notifications SET state='sent',provider_id=?,payload=NULL,last_error=NULL,lease_until=NULL,lease_token=NULL WHERE id=? AND lease_token=? AND state='sending'").bind(providerId,row.id,row.lease_token).run();
+  let providerId:string;
+  try{providerId=await config.send(body,wire,row.id);}catch(error){knownNonAcceptance=error instanceof DeliveryError&&!error.uncertain;throw error;}
+  await storage().db.prepare("UPDATE review_notifications SET state='sent',provider_id=?,payload=NULL,wire_payload=NULL,smtp_in_flight=0,last_error=NULL,lease_until=NULL,lease_token=NULL WHERE id=? AND lease_token=? AND state='sending'").bind(providerId,row.id,row.lease_token).run();
  }catch(error){
   const code=error instanceof DeliveryError?error.code:"provider_unavailable",retry=error instanceof DeliveryError?error.retryable:true;
-  if(retry){await setState(row,row.attempts>=maxAutomaticAttempts?"failed":"pending",row.attempts>=maxAutomaticAttempts?"retry_limit":code,Date.now()+retryDelays[Math.max(0,Math.min(row.attempts-1,retryDelays.length-1))]);}
-  else await setState(row,"blocked",code);
+  if(smtpStarted&&!knownNonAcceptance){await setState(row,"unknown","delivery_uncertain");}
+  else if(retry){await setState(row,row.attempts>=maxAutomaticAttempts?"failed":"pending",row.attempts>=maxAutomaticAttempts?"retry_limit":code,Date.now()+retryDelays[Math.max(0,Math.min(row.attempts-1,retryDelays.length-1))],knownNonAcceptance);}
+  else await setState(row,"blocked",code,Date.now(),knownNonAcceptance);
   console.error("review-notification-deferred",{event:row.id,reason:code});
  }
 }
@@ -67,12 +76,17 @@ export async function processNotifications({id,force=false,limit=4}:{id?:string;
  const db=storage().db,now=Date.now();
  const candidates=await db.prepare(`SELECT * FROM review_notifications WHERE ${id?"id=? AND ":""}((state='pending' AND (next_attempt_at<=? OR ?=1)) OR (state='sending' AND lease_until<=?)${force?" OR state IN ('blocked','failed')":""}) ORDER BY next_attempt_at,id LIMIT ?`).bind(...(id?[id]:[]),now,force?1:0,now,Math.min(4,Math.max(1,limit))).all<NotificationRow>();
  for(const candidate of candidates.results){
+  // An expired SMTP lease cannot prove whether the old process handed DATA
+  // over. Recover to unknown before claiming, even for administrator retries.
+  if(candidate.smtp_in_flight){
+   await db.prepare("UPDATE review_notifications SET state='unknown',last_error='delivery_uncertain',lease_until=NULL,lease_token=NULL WHERE id=? AND smtp_in_flight=1 AND (state IN ('pending','blocked','failed') OR (state='sending' AND lease_until<=?))").bind(candidate.id,now).run();continue;
+  }
   if(!withinWindow(candidate)){
    await db.prepare("UPDATE review_notifications SET state='unknown',last_error='idempotency_window_expired' WHERE id=? AND (state IN ('pending','blocked','failed') OR (state='sending' AND lease_until<=?))").bind(candidate.id,now).run();continue;
   }
   if(!force&&candidate.attempts>=maxAutomaticAttempts){await db.prepare("UPDATE review_notifications SET state='failed',last_error='retry_limit' WHERE id=? AND (state='pending' OR (state='sending' AND lease_until<=?))").bind(candidate.id,now).run();continue;}
   const token=crypto.randomUUID();
-  const claimed=await db.prepare(`UPDATE review_notifications SET state='sending',lease_token=?,lease_until=?,attempts=attempts+1 WHERE id=? AND ((state='pending' AND (next_attempt_at<=? OR ?=1)) OR (state='sending' AND lease_until<=?)${force?" OR state IN ('blocked','failed')":""}) RETURNING *`).bind(token,Date.now()+120000,candidate.id,now,force?1:0,now).first<NotificationRow>();
+  const claimed=await db.prepare(`UPDATE review_notifications SET state='sending',lease_token=?,lease_until=?,attempts=attempts+1 WHERE id=? AND smtp_in_flight=0 AND ((state='pending' AND (next_attempt_at<=? OR ?=1)) OR (state='sending' AND lease_until<=?)${force?" OR state IN ('blocked','failed')":""}) RETURNING *`).bind(token,Date.now()+120000,candidate.id,now,force?1:0,now).first<NotificationRow>();
   if(claimed)await deliver(claimed);
  }
 }

@@ -52,5 +52,5 @@ export const workshopChanges=sqliteTable("workshop_changes",{
 export const reviewNotifications=sqliteTable("review_notifications",{
  id:text("id").primaryKey(),visitId:text("visit_id").notNull(),owner:text("owner").notNull(),revision:integer("revision").notNull(),decision:text("decision").notNull(),operationToken:text("operation_token").notNull(),
  state:text("state").notNull().default("pending"),attempts:integer("attempts").notNull().default(0),nextAttemptAt:integer("next_attempt_at").notNull(),createdAt:text("created_at").notNull(),
- leaseUntil:integer("lease_until"),leaseToken:text("lease_token"),firstAttemptAt:integer("first_attempt_at"),payload:text("payload"),providerKeyHash:text("provider_key_hash"),providerId:text("provider_id"),lastError:text("last_error")
+ leaseUntil:integer("lease_until"),leaseToken:text("lease_token"),firstAttemptAt:integer("first_attempt_at"),payload:text("payload"),providerKeyHash:text("provider_key_hash"),providerId:text("provider_id"),lastError:text("last_error"),transport:text("transport"),wirePayload:text("wire_payload"),smtpInFlight:integer("smtp_in_flight").notNull().default(0)
 },table=>[index("idx_review_notifications_due").on(table.state,table.nextAttemptAt),index("idx_review_notifications_owner").on(table.owner)]);

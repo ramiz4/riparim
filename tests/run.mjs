@@ -15,6 +15,8 @@ suites.push('node-runtime.test.mjs');
 suites.push('node-evidence.test.mjs');
 suites.push('account-identities.test.mjs');
 suites.push('account-identities-worker.test.mjs');
+suites.push('mail-transports.test.mjs');
+suites.push('smtp-tls.test.mjs');
 process.exitCode=await runSuites({
  cwd:root,runtime,contract:fileURLToPath(new URL('../scripts/check-i18n.mjs',import.meta.url)),
  suites:suites.map(suite=>fileURLToPath(new URL(suite,import.meta.url))),
