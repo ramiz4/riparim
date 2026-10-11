@@ -1,5 +1,5 @@
 import {NextResponse,type NextRequest} from "next/server";
-import {createServerClient} from "@supabase/ssr";
+import {createAuthClient} from "@/lib/auth/provider";
 import {getAuthConfig} from "@/lib/auth/config";
 import {publishedWorkshop} from "@/db/directory";
 import {isTechnicalPath,isPagePath,isStaticOrMetadataPath,localeFromPath,localizeHref,pageIdentityPath} from "@/lib/i18n/locale";
@@ -43,7 +43,7 @@ export async function proxy(request:NextRequest){
  if(isStaticOrMetadataPath(canonical.pathname))return response;
  const c=await getAuthConfig();if(!c?.enabled)return response;
  const local=["localhost","127.0.0.1"].includes(canonical.hostname);
- const client=createServerClient(c.projectUrl,c.publicKey,{cookieOptions:{httpOnly:true,secure:!local,sameSite:"lax",path:"/"},cookies:{getAll(){return request.cookies.getAll();},setAll(values){values.forEach(({name,value})=>request.cookies.set(name,value));response=createResponse();values.forEach(({name,value,options})=>response.cookies.set(name,value,options));}}});
+ const client=createAuthClient(c,{getAll(){return request.cookies.getAll();},setAll(values){values.forEach(({name,value})=>request.cookies.set(name,value));response=createResponse();values.forEach(({name,value,options})=>response.cookies.set(name,value,options));}},!local);
  await client.auth.getUser();return response;
 }
 export const config={matcher:["/((?!_next/static|_next/image).*)"]};

@@ -19,7 +19,7 @@ export async function GET(request:Request){
   await registerHistoricalDeletedAccounts(auth.projectUrl);
   const pending=await storage().db.prepare("SELECT s.account_id,i.subject FROM auth_account_status s JOIN auth_identities i ON i.account_id=s.account_id AND i.provider='supabase' AND i.issuer=? WHERE s.status='deleted' AND (EXISTS (SELECT 1 FROM auth_links WHERE account_id=s.account_id) OR EXISTS (SELECT 1 FROM auth_sessions WHERE account_id=s.account_id) OR EXISTS (SELECT 1 FROM auth_account_deletions WHERE account_id=s.account_id) OR EXISTS (SELECT 1 FROM evidence_uploads WHERE owner=s.account_id)) ORDER BY s.account_id LIMIT 100").bind(new URL(auth.projectUrl).origin).all<{account_id:string;subject:string}>();
   const pendingDeletions=pending.results.map(row=>({id:row.subject,email:"",name:`Begonnene Löschung (${row.subject})`,role:"user",active:false,confirmed:false,createdAt:null,lastSignInAt:null,providers:[],protected:row.account_id===admin.userId})).filter(row=>validUserId(row.id));
-  return json({users,pendingDeletions,page,perPage,hasMore:data.total>0?page*perPage<data.total:data.users.length===perPage,configured:true});
+  return json({users,pendingDeletions,page,perPage,hasMore:data.total!==undefined&&data.total>0?page*perPage<data.total:data.users.length===perPage,configured:true});
  }catch{return providerFailure(null);}
 }
 

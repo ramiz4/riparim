@@ -393,7 +393,7 @@ check(!(await list().then(response=>response.json())).pendingDeletions.some(user
 
 // Exercise the privileged client boundary without sending any SDK network requests.
 const clientConfigurations=[];
-globalThis.fixtureCreateClient=(...args)=>{clientConfigurations.push(args);return {fixture:true};};
+globalThis.fixtureCreateClient=(...args)=>{clientConfigurations.push(args);return {fixture:true,auth:{admin:{}}};};
 check(await adminProvider.getAuthAdmin()===null,'No privileged client is created without a server secret');
 globalThis.fixtureEnv.SUPABASE_SECRET_KEY='sb_publishable_fixture_public_key_1234567890';
 check(await adminProvider.getAuthAdmin()===null,'A public publishable key cannot authorize user administration');

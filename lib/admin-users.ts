@@ -1,6 +1,6 @@
 import {validAccountName} from "@/lib/account-name";
 import {ValidationError} from "@/lib/validation-error";
-import type {User} from "@supabase/supabase-js";
+import type {AuthUser as User} from "@/lib/auth/contract";
 import type {AppUser} from "@/app/auth";
 import {resolveSupabaseAccount} from "@/lib/auth/identities";
 import {storage} from "@/db/storage";

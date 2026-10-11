@@ -8,7 +8,7 @@ import {storage,moderatorEmail} from "@/db/storage";
 import {deleteAccount} from "@/lib/auth/delete-account";
 import {json,readJson,sameOrigin} from "@/lib/http";
 import {protectedUser,userView,validUserId,parseUserFields,providerFailure,notConfigured} from "@/lib/admin-users";
-import type {AdminUserAttributes} from "@supabase/supabase-js";
+import type {AuthUserAttributes} from "@/lib/auth/contract";
 export const dynamic="force-dynamic";
 type Context={params:Promise<{id:string}>};
 
@@ -31,7 +31,7 @@ export async function PATCH(request:Request,{params}:Context){
    if(roleChanged)try{await changeAccountRole(accountId,fields.role,admin);}catch(e){if(e instanceof Error&&e.message==="ROLE_CHANGE_FORBIDDEN")return json({error:"Die Rollenänderung ist nicht mehr erlaubt. Bitte aktualisiere die Benutzerverwaltung und melde dich bei Bedarf erneut an.",errorCode:"role_change_forbidden"},403);throw e;}
    return json({user:await userView(user,admin,auth.projectUrl),roleChanged,messageCode:"saved"});
   }
-  const attributes:AdminUserAttributes={};
+  const attributes:AuthUserAttributes={};
   if(fields.name!==undefined)attributes.user_metadata={full_name:fields.name};
   if(fields.email!==undefined&&fields.email!==user.email?.toLowerCase())attributes.email=fields.email;
   if(fields.password!==undefined)attributes.password=fields.password;

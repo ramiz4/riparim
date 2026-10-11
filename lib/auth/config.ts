@@ -2,6 +2,7 @@ import {ValidationError} from "@/lib/validation-error";
 import {validatedReturnPath} from "@/lib/auth/return-path";
 import {env} from "@/lib/runtime/env";
 import {storage} from "@/db/storage";
+import {trustedAuthOrigin,providerFetch} from "./origin";
 export type AuthConfig={projectUrl:string;publicKey:string;enabled:boolean;emailDeliveryConfirmed:boolean;updatedAt:string};
 export async function getAuthConfig():Promise<AuthConfig|null>{
  const db=storage().db;
@@ -15,13 +16,21 @@ export async function getAuthConfig():Promise<AuthConfig|null>{
    row=await db.prepare("SELECT * FROM auth_settings WHERE id='main'").first<Record<string,unknown>>();
   }catch{/* Keep the saved settings when provider verification is unavailable. */}
  }
- return row?{projectUrl:String(row.project_url),publicKey:String(row.public_key),enabled:row.enabled===1,emailDeliveryConfirmed:row.email_delivery_confirmed===1,updatedAt:String(row.updated_at)}:null;
+ if(!row)return null;
+ let config;try{config=validatePublicConfig(String(row.project_url),String(row.public_key));}catch{return null;}
+ return {...config,enabled:row.enabled===1,emailDeliveryConfirmed:row.email_delivery_confirmed===1,updatedAt:String(row.updated_at)};
 }
 export function siteOrigin(){return env.SITE_ORIGIN||"https://riparim.com";}
 export function safeReturnPath(value:unknown,fallback="/?besuche=1"){return validatedReturnPath(value,siteOrigin(),fallback);}
-export function validatePublicConfig(url:string,key:string){let u:URL;try{u=new URL(url);}catch{throw new ValidationError("auth_project_url","Bitte nutze die HTTPS-Projektadresse aus deinem Supabase-Projekt.");}if(u.protocol!=="https:"||! /^[a-z0-9-]+\.supabase\.co$/.test(u.hostname)||u.port||u.username||u.password||u.search||u.hash||(u.pathname!=="/"&&u.pathname!==""))throw new ValidationError("auth_project_url","Bitte nutze die HTTPS-Projektadresse aus deinem Supabase-Projekt.");if(key.startsWith("sb_secret_")||key.length>1800)throw new ValidationError("auth_public_key","Hier darf nur ein öffentlicher Publishable- oder Anon-Key eingetragen werden, kein geheimer Schlüssel.");if(!/^sb_publishable_[a-zA-Z0-9_-]{20,}$/.test(key)){try{const p=JSON.parse(atob(key.split(".")[1].replace(/-/g,"+").replace(/_/g,"/")));if(p.role!=="anon")throw Error();}catch{throw new ValidationError("auth_public_key","Bitte nutze den öffentlichen Publishable-Key oder den bisherigen Anon-Key.");}}return {projectUrl:u.origin,publicKey:key};}
+export function validatePublicConfig(url:string,key:string){let origin:string;try{origin=trustedAuthOrigin(url);}catch{throw new ValidationError("auth_project_url","Bitte nutze die HTTPS-Projektadresse aus deinem Supabase-Projekt oder die serverseitig freigegebene Auth-Adresse.");}if(key.startsWith("sb_secret_")||key.length>1800)throw new ValidationError("auth_public_key","Hier darf nur ein öffentlicher Publishable- oder Anon-Key eingetragen werden, kein geheimer Schlüssel.");if(!/^sb_publishable_[a-zA-Z0-9_-]{20,}$/.test(key)){try{const p=JSON.parse(atob(key.split(".")[1].replace(/-/g,"+").replace(/_/g,"/")));if(p.role!=="anon")throw Error();}catch{throw new ValidationError("auth_public_key","Bitte nutze den öffentlichen Publishable-Key oder den bisherigen Anon-Key.");}}return {projectUrl:origin,publicKey:key};}
 type ProviderSettings={external?:{email?:boolean;google?:boolean};mailer_autoconfirm?:boolean;disable_signup?:boolean};
-async function providerSettings(config:{projectUrl:string;publicKey:string}):Promise<ProviderSettings>{const r=await fetch(`${config.projectUrl}/auth/v1/settings`,{headers:{apikey:config.publicKey},cache:"no-store",signal:AbortSignal.timeout(5000)});if(!r.ok)throw new ValidationError("auth_provider_connection","Die Projektverbindung konnte nicht bestätigt werden. Prüfe Projektadresse und öffentlichen Schlüssel.");return r.json();}
+async function providerSettings(config:{projectUrl:string;publicKey:string}):Promise<ProviderSettings>{
+ try{
+  const origin=trustedAuthOrigin(config.projectUrl),response=await providerFetch(origin,5000)(`${origin}/auth/v1/settings`,{headers:{apikey:config.publicKey},cache:"no-store"});
+  if(!response.ok)throw Error("AUTH_PROVIDER_UNAVAILABLE");
+  return response.json();
+ }catch{throw new ValidationError("auth_provider_connection","Die Projektverbindung konnte nicht bestätigt werden. Prüfe Projektadresse und öffentlichen Schlüssel.");}
+}
 export async function providerAvailability(config:AuthConfig|null){
  const unavailable={email:false,emailSignup:false,emailRecovery:false,google:false};
  if(!config?.enabled)return unavailable;

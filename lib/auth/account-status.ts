@@ -1,5 +1,5 @@
 import {storage} from "@/db/storage";
-import type {User} from "@supabase/supabase-js";
+import type {AuthUser as User} from "@/lib/auth/contract";
 
 export function providerBlocked(user:User){
  const until=user.banned_until;

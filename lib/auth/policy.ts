@@ -1,4 +1,4 @@
-import type {User} from "@supabase/supabase-js";
+import type {AuthUser as User} from "@/lib/auth/contract";
 
 export type GoogleProfile={sub:string;email:string;email_verified:true};
 export type SessionGrant={provider:string;google_subject:string|null;moderator:number;legacy_access:number};
