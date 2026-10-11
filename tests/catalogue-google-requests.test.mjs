@@ -21,6 +21,7 @@ await build({stdin:{contents:`export {default as Catalogue} from './app/[locale]
 }}]});
 const {Catalogue,I18nProvider,getMessages,createTranslator,defaultCatalogueFilters,parseCatalogueFilters,WorkshopRatings}=await import(new URL('../'+output+'/ui.mjs',import.meta.url));
 const {createElement:h,act}=await import('react'),{createRoot}=await import('react-dom/client');
+const scenarioCounts=[];
 const workshops=Array.from({length:158},(_,i)=>({id:`fixture-${String(i).padStart(3,'0')}`,name:`Fixture ${String(i).padStart(3,'0')}`,city:'Prishtina',address:'Fixture address',phone:'+38349123456',whatsapp:'',lat:42.6629,lng:21.1655,rating:4,count:1,specialty:'Fixture',description:'Fixture description',services:['Bremsen & Fahrwerk'],serviceDetails:[],brands:['Volvo'],languages:['Deutsch'],sources:[],checkedAt:'2026-10-04',status:'published',googleRating:{rating:1,count:999}}));
 const props={initialWorkshops:workshops,initialError:'',account:null,isAdmin:false,initialFilters:defaultCatalogueFilters};
 const wrap=(locale,node)=>h(I18nProvider,{locale,messages:getMessages(locale,['common','public'])},node);
@@ -76,6 +77,55 @@ try{
   await search('Fixture 00');await intersect();assert.equal(placeRequests.length,start+1,'active-list reuse survives static-shell filter changes');
   await render(locale,null);
  }
+ // Reproducible cost model: only cards actually made visible count, regardless of pagination.
+ for(const locale of ['de','sq','en']){
+  await render(locale,null);window.sessionStorage.clear();
+  const start=placeRequests.length;
+  await render(locale,h(Catalogue,{...props,initialFilters:defaultCatalogueFilters}));
+  for(let index=0;index<12;index++)await intersect(index);
+  assert.equal(placeRequests.length-start,12,'twelve visible cards produce twelve individual rating requests');
+  await search('No fixture match');assert.equal(document.querySelectorAll('.catalogue-card').length,0);await search('');
+  for(let index=0;index<12;index++)await intersect(index);
+  assert.equal(placeRequests.length-start,12,'filtering away and back reuses all twelve active-list values');
+  await act(async()=>{document.querySelector('.catalogue-pagination button').click();await settle();});
+  assert.equal(document.querySelectorAll('.catalogue-card').length,24);
+  assert.equal(placeRequests.length-start,12,'show more alone does not fetch hidden new cards');
+  for(let index=12;index<24;index++)await intersect(index);
+  assert.equal(placeRequests.length-start,24,'another twelve visible cards fetch only their twelve new ratings');
+  scenarioCounts.push({locale,firstTwelve:12,filterAdditional:0,showMoreHiddenAdditional:0,nextTwelveAdditional:12});
+  await render(locale,null);
+ }
+ // Fresh browser modules model the real configuration switch, HTTP quota rejection and a timed-out identity call.
+ for(const mode of ['disabled','quota','timeout']){
+  const scoped=await import(new URL('../'+output+'/ui.mjs?cost-fallback-'+mode,import.meta.url)),baseFetch=globalThis.fetch;
+  let identityCalls=0;const start=placeRequests.length;
+  globalThis.fetch=async(url,options)=>{
+   if(url==='/api/google-places')return Response.json(mode==='disabled'?{enabled:false}:{enabled:true,browserKey:'fixture-key'});
+   if(String(url).startsWith('/api/google-places/')){identityCalls++;if(mode==='timeout')throw new DOMException('Fixture deadline','TimeoutError');return new Response('{}',{status:429});}
+   return baseFetch(url,options);
+  };
+  try{
+   for(const locale of ['de','sq','en']){
+    window.sessionStorage.clear();const requestStart=identityCalls;
+    await act(async()=>{root.render(h(scoped.I18nProvider,{locale,messages:scoped.getMessages(locale,['common','public'])},h(scoped.Catalogue,{...props,initialFilters:defaultCatalogueFilters})));await settle();});
+    await intersect();
+    const card=document.querySelector('.catalogue-card'),google=card.querySelector('.google-rating'),t=scoped.createTranslator(scoped.getMessages(locale));
+    assert.equal(document.querySelectorAll('.catalogue-card').length,12,'Google failure preserves the own directory');
+    assert(card.querySelector('.riparim-rating .rating-value'),'the own rating remains available');
+    assert.equal(google,null,'compact cards hide unavailable Google content instead of showing a false zero');
+    assert(!card.textContent.includes(t('public.googleNoReviews')));assert(card.querySelector('.catalogue-card-target').href.includes('/werkstatt/'));
+    document.dispatchEvent(new Event('visibilitychange'));await intersect();await settle();
+    assert.equal(identityCalls-requestStart,mode==='disabled'?0:1,'visibility callbacks do not retry failed identity calls');
+    assert.equal(placeRequests.length,start,'failed/disabled identity never starts a billable SDK rating call');
+    await act(async()=>{root.render(null);await settle();});
+    await act(async()=>{root.render(h(scoped.I18nProvider,{locale,messages:scoped.getMessages(locale,['common','public'])},h(scoped.WorkshopRatings,{workshop:{...workshops[0],id:'fallback-'+mode+'-'+locale},hideUnavailable:false})));await settle();});await intersectRating();
+    const fallback=document.querySelector('.google-rating');
+    assert(fallback.textContent.includes(t('public.googleUnavailable')));assert(!fallback.textContent.includes(t('public.googleNoReviews')));
+    assert(fallback.querySelector('a').href.includes('google.com/maps'),'the expanded rating source retains its direct Maps fallback');
+    await act(async()=>{root.render(null);await settle();});
+   }
+  }finally{globalThis.fetch=baseFetch;}
+ }
  const fixture=workshops[0],provided={rating:4.9,count:6,mapsUrl:'https://www.google.com/maps/',attributions:[]};
  const before=placeRequests.length;
  await render('de',h(WorkshopRatings,{workshop:fixture,liveGoogleRating:provided}));
@@ -96,5 +146,5 @@ try{
  assert(document.querySelector('.google-rating').textContent.includes('4,7'));
  await act(async()=>{releaseLate();await settle();});
  assert(document.querySelector('.google-rating').textContent.includes('4,7'),'late old ID/locale answer cannot replace current content');
- console.log(JSON.stringify({catalogueSize:158,initialGlobalRequests:0,filterGlobalRequests:0,legacyGlobalRequests:0,firstVisibleRequests:1,matchingRemountAdditionalRequests:0,locales:['de','sq','en'],staticShellLocales:['de','sq','en'],liveProviderCalls:false}));
+ console.log(JSON.stringify({catalogueSize:158,initialGlobalRequests:0,filterGlobalRequests:0,legacyGlobalRequests:0,firstVisibleRequests:1,matchingRemountAdditionalRequests:0,locales:['de','sq','en'],staticShellLocales:['de','sq','en'],scenarioCounts,providerFallbackModes:['disabled','quota','timeout'],liveProviderCalls:false}));
 }finally{await act(async()=>root.unmount());dom.window.close();}
