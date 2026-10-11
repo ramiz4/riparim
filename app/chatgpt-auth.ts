@@ -1,3 +1,4 @@
+import {publicAccountName} from "@/lib/account-name";
 import {validatedReturnPath} from "@/lib/auth/return-path";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -33,7 +34,7 @@ export async function getChatGPTUser(): Promise<ChatGPTUser | null> {
 
   return {
     userId,
-    displayName: fullName ?? email,
+    displayName: publicAccountName(fullName),
     email,
     fullName,
   };

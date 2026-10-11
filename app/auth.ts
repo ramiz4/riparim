@@ -1,3 +1,4 @@
+import {publicAccountName} from "@/lib/account-name";
 import {getChatGPTUser,type ChatGPTUser} from "./chatgpt-auth";
 import {authClient} from "@/lib/auth/client";
 import {getAuthConfig} from "@/lib/auth/config";
@@ -79,7 +80,7 @@ export async function getAppUser():Promise<AppUser|null>{
  if(!session||!["password","google"].includes(session.provider))return null;
  if(session.provider==="google"&&(!googleIdentityMatches(user,session.google_subject)||!claims.data?.claims?.amr?.some(proof=>typeof proof==="object"&&proof!==null&&proof.method==="oauth")))return null;
  const fullName=typeof user.user_metadata?.full_name==="string"?user.user_metadata.full_name:null;
- return {userId:id,email:user.email,fullName,displayName:fullName??user.email,provider:session.provider==="google"?"Google":"E-Mail",ownerKeys:allowsLegacyAccess(session,link)?[id,link!.legacy_owner]:[id],isModerator:allowsGoogleModeration(user,session,moderatorEmail())||session.account_role==="admin"};
+ return {userId:id,email:user.email,fullName,displayName:publicAccountName(fullName),provider:session.provider==="google"?"Google":"E-Mail",ownerKeys:allowsLegacyAccess(session,link)?[id,link!.legacy_owner]:[id],isModerator:allowsGoogleModeration(user,session,moderatorEmail())||session.account_role==="admin"};
 }
 
 export async function getAdminUser(current?:AppUser|null):Promise<AppUser|null>{const platform=await getChatGPTUser();if(platform&&platform.email.toLowerCase()===moderatorEmail())return legacy(platform);return current!==undefined?current:getAppUser();}

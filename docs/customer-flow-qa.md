@@ -440,3 +440,38 @@ mit sichtbarem Fokus. Englisch im mobilen Systemtheme löste dunkel auf und
 zeigte den Ladefehler mit „Try again“ ohne Aktualisieren-Button. Diese native
 Prüfung bestätigt keine echte Dateiübertragung oder Produktionsübernahme;
 die Uploadverträge decken die isolierten Tests ab.
+
+## Kontoname für Bewertungen
+
+Die E-Mail-Registrierung verlangt einen Namen mit 2–80 Zeichen und speichert
+ihn getrimmt als `full_name`. `tests/google-auth.test.mjs` prüft fehlende, leere,
+zu kurze, zu lange und nicht textuelle Namen vor dem Provideraufruf sowie
+Google- und ältere E-Mail-Konten ohne Namen. Verifizierte Sitzungen verwenden
+bei ungültigem Profilnamen „Anonym“ statt einer E-Mail-Adresse.
+
+`tests/combined-reviews.test.mjs` prüft tatsächliche POST-/PUT-Routen mit
+SQLite: Mitgesendete Bewertungsnamen werden ignoriert, neue und bearbeitete
+Bewertungen übernehmen den aktuellen Kontonamen. Anonyme und 80 Zeichen lange
+Namen können weiterhin moderiert und veröffentlicht werden. Die bestehende
+Besitz-, Nachweis- und Freigabeprüfung bleibt erhalten. Änderungen nur am
+Kontonamen schreiben bestehende Bewertungen nicht um; die nächste Bearbeitung
+übernimmt den Namen mit erneuter Moderation. Keine Migration oder
+Providerkonfigurationsänderung ist erforderlich.
+
+Die tatsächlichen React-Komponenten prüfen in DE/SQ/EN das verpflichtende,
+beschriftete Registrierungsfeld mit zugeordneter Hilfe, die Namensübertragung
+und den angezeigten Kontonamen ohne editierbares Bewertungsfeld. Neue und
+bearbeitete Bewertungen senden kein Namensfeld. Fehler, erhaltene Eingaben,
+Sternbedienung und Einwilligung bleiben durch die Kunden-UI-Suite geprüft.
+
+Die native Prüfung im bestätigten Chrome-Profil
+`ramizloki82@googlemail.com` verwendete echte Komponenten und Projekt-CSS in
+einem lokalen Harness mit fiktiven Daten und abgefangenen API-Anfragen. Die
+Registrierung war im hellen Desktop-Layout und bei 390 × 844 Pixeln lesbar;
+Tab wechselte vom Anzeigenamen zur E-Mail. Das albanische Bewertungsformular
+zeigte bei 390 Pixeln im dunklen Theme den Kontonamen ohne Eingabefeld; die
+Pfeiltaste änderte Sternwert und Fokus. Englisch zeigte im Systemtheme den
+Fallback „Anonym“; ein 80 Zeichen langer Name ohne Leerzeichen brach innerhalb
+der mobilen Namensanzeige um. Diese Prüfung bestätigt keine Live-Registrierung
+oder echte Dateiübertragung. Es wurden keine Produktionsdaten geändert und
+keine E-Mails versendet.

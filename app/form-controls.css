@@ -73,3 +73,8 @@
 @media (prefers-reduced-motion: reduce) {
   [data-slot=switch], [data-slot=switch-thumb] { transition: none; }
 }
+
+.combined-review-form .review-account-name {
+  display: block;
+  overflow-wrap: anywhere;
+}

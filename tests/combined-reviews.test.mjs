@@ -35,6 +35,7 @@ await expect(await call('POST','a',form(id,{review:false})),400,'proof without r
 await expect(await call('POST','a',form(id,{consent:false})),400,'consent required by server');
 await expect(await call('POST','a',form(id)),201,'combined bundle submitted');
 check(sqlite.prepare('SELECT status,review,rating FROM visits WHERE id=?').get(id).status==='pending','bundle pending');
+check(sqlite.prepare('SELECT display_name FROM visits WHERE id=?').get(id).display_name===roles.a.displayName,'POST ignores a forged reviewer name and stores the authenticated account name');
 check((await publicReviews()).reviews.length===0&&(await aggregate()).count===0,'pending review excluded from public list and aggregate');
 const others=await (await call('GET','b',undefined,'/api/visits')).json();check(!others.visits.some(v=>v.id===id),'other owner cannot read private bundle');
 await expect(await call('PATCH','a',{action:'review',id,name:'Fixture Reviewer',rating:4,review:'An attempted direct publication must never bypass administrator review.'}),409,'legacy direct publish blocked');
@@ -44,7 +45,9 @@ await expect(await moderate(id,'published',0),200,'admin publishes complete bund
 let pub=(await publicReviews()).reviews;check(pub.length===1&&!('file_key' in pub[0])&&!('evidence_note' in pub[0])&&(await aggregate()).count===1,'published review public, evidence private');
 await expect(await moderate(id,'needs_more',0),409,'stale moderation rejected');
 await expect(await call('PUT','b',form(id,{revision:1})),409,'other owner cannot replace');
+roles.a.displayName='Updated Account Name';
 await expect(await call('PUT','a',form(id,{revision:1,text:'Updated review after considering the completed repair and communication.'})),200,'owner edits published bundle');
+check(sqlite.prepare('SELECT display_name FROM visits WHERE id=?').get(id).display_name==='Updated Account Name','PUT takes the current authenticated name instead of the posted name');
 check((await publicReviews()).reviews.length===0&&(await aggregate()).count===0,'editing immediately removes public review and rating');
 await expect(await moderate(id,'published',2),200,'edited bundle needs and receives fresh admin publication');
 await expect(await moderate(id,'needs_more',3),200,'admin can unpublish and request revision');
@@ -95,6 +98,17 @@ const lateEdit=call('PUT','a',form(deletingRace,{file:true,revision:0})),lateKey
 await expect(await call('DELETE','a',{id:deletingRace}),200,'deletion finishes before replacement upload');releasePut();await expect(await lateEdit,409,'stale edit cannot recreate a deleted visit');
 check(!objects.has(lateKey)&&!sqlite.prepare('SELECT id FROM visits WHERE id=?').get(deletingRace),'late upload is cleaned and the deleted row stays absent');
 
+for(const name of ['', '   ', null, 123, 'x', 'x'.repeat(81), 'A'.repeat(80)]){
+ const fallback=crypto.randomUUID();roles.a.displayName=name;
+ const payload=form(fallback);payload.delete('name');
+ await expect(await call('POST','a',payload),201,'review requires no client name even for an older unnamed account');
+ const expected=name==='A'.repeat(80)?name:'Anonym';
+ check(sqlite.prepare('SELECT display_name FROM visits WHERE id=?').get(fallback).display_name===expected,'Valid account names survive and invalid names use Anonym without leaking email');
+ await expect(await moderate(fallback,'published',0),200,'full account name range and anonymous fallback can be moderated');
+ check((await publicReviews()).reviews.some(review=>review.display_name===expected),'Public reviews expose the server-chosen name');
+ await expect(await call('DELETE','a',{id:fallback}),200,'name fixture removed');
+}
+roles.a.displayName='Fixture A';
 const hidden=crypto.randomUUID();await expect(await call('POST','a',form(hidden)),201,'hidden-workshop fixture submitted');sqlite.prepare("UPDATE workshops SET status='draft' WHERE id=?").run(workshop);await expect(await moderate(hidden,'published',0),409,'hidden workshop cannot publish review');await expect(await call('DELETE','a',{id:hidden}),200,'hidden fixture removed');
 check(sqlite.prepare('SELECT COUNT(*) AS n FROM visits').get().n===0&&objects.size===0,'all ephemeral review and evidence data removed');
 console.log(JSON.stringify({checksPassed:passed,storage:'isolated in-memory SQLite and R2 fixture',realEmailsSent:false,productionTouched:false}));
