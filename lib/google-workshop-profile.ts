@@ -27,6 +27,12 @@ export function normalizeGoogleProfile(body:GoogleProfileResponse,placeId:string
   hours:{openNow:typeof current?.openNow==="boolean"?current.openNow:null,weekdays:weekdays.filter(value=>typeof value==="string").slice(0,7),nextOpenTime:validTimestamp(current?.nextOpenTime),nextCloseTime:validTimestamp(current?.nextCloseTime),periods:safePeriods(current?current.periods:body.regularOpeningHours?.periods)},
   photos:(body.photos??[]).filter(p=>typeof p.name==="string"&&p.name.startsWith(`places/${placeId}/photos/`)&&/^[A-Za-z0-9_/-]+$/.test(p.name)).slice(0,3).map(p=>({resource:p.name!,mapsUrl:safeGoogleHttps(p.googleMapsUri),authors:(p.authorAttributions??[]).filter(a=>a.displayName).map(a=>({name:a.displayName!,url:safeGoogleHttps(a.uri)}))}))};
 }
+export type GooglePhotoResponse=Pick<GoogleProfileResponse,"id"|"photos"|"attributions">;
+export type LiveGooglePhotos={placeId:string;photos:GooglePhoto[];attributions:LiveGoogleRating["attributions"]};
+export function normalizeGooglePhotos(body:GooglePhotoResponse,placeId:string):LiveGooglePhotos{
+ const value=normalizeGoogleProfile(body,placeId);
+ return {placeId,photos:value.photos,attributions:value.rating.attributions};
+}
 export function googlePhotoUrl(photo:GooglePhoto,browserKey:string,size:"preview"|"large"="preview"){return `https://places.googleapis.com/v1/${photo.resource}/media?${new URLSearchParams({maxWidthPx:size==="large"?"1600":"1000",maxHeightPx:size==="large"?"1200":"700",key:browserKey})}`;}
 export function googleRatingEmptyLabel(live:LiveGoogleRating|null|undefined,status:GoogleProfileStatus|"idle"):"public.googleNoReviews"|"public.googleNoRating"|"public.googleUnavailable"|"public.googleLoading"{
  if(live?.count===0)return "public.googleNoReviews";
@@ -42,11 +48,6 @@ function validPoint(point:GooglePoint|undefined):point is GooglePoint{
 function safePeriods(periods:GooglePeriod[]|undefined):GooglePeriod[]{return Array.isArray(periods)?periods.filter(p=>validPoint(p?.open)&&(!p.close||validPoint(p.close))).slice(0,32):[];}
 const dayKey=(date:Date)=>{const parts=new Intl.DateTimeFormat("en-CA",{timeZone:zone,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(date);return ["year","month","day"].map(type=>parts.find(part=>part.type===type)!.value).join("-");};
 const tomorrowKey=(date:Date)=>{const [year,month,day]=dayKey(date).split("-").map(Number);return dayKey(new Date(Date.UTC(year,month-1,day+1,12)));};
-export function googleProfileRefreshDelay(profile:LiveGoogleProfile,now=Date.now()){
- const next=profile.hours.openNow?profile.hours.nextCloseTime:profile.hours.nextOpenTime;
- const remaining=next?Date.parse(next)-now:NaN;
- return Number.isFinite(remaining)&&remaining>0?Math.min(1800000,remaining+1500):300000;
-}
 // Weekday descriptions may be in any provider fallback language and order.
 // Only structured periods can describe today; provider text stays untouched.
 function todayIntervals(periods:GooglePeriod[],now:Date):string|null{

@@ -21,7 +21,7 @@ const nativeFetch=globalThis.fetch,requests=[];
 let release;const gate=new Promise(resolve=>{release=resolve;});
 globalThis.fetch=async(url,options)=>{requests.push({url,options});await gate;return new Response(JSON.stringify({id:'ChIJFixture'}));};
 try{
- const pending=[browser.currentGoogleProfile('ChIJFixture','fixture-key','de'),browser.currentGoogleProfile('ChIJFixture','fixture-key','de'),browser.currentGoogleProfile('ChIJFixture','fixture-key','sq'),browser.currentGoogleProfile('ChIJFixture','fixture-key','en')];
+ const pending=[browser.currentGooglePhotos('ChIJFixture','fixture-key','de'),browser.currentGooglePhotos('ChIJFixture','fixture-key','de'),browser.currentGooglePhotos('ChIJFixture','fixture-key','sq'),browser.currentGooglePhotos('ChIJFixture','fixture-key','en')];
  await Promise.resolve();
  assert.equal(requests.length,3,'provider requests deduplicate by confirmed place AND provider locale');
  release();await Promise.all(pending);

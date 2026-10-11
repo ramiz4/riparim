@@ -6,9 +6,11 @@ import {LocaleAnchor} from "@/components/locale-anchor";
 import {useEffect,useId,useRef,useState} from "react";
 import {useTheme} from "next-themes";
 import {Camera,ChevronDown,ChevronLeft,ChevronRight,Clock3,LoaderCircle,MapPin} from "lucide-react";
-import {googleOpeningPresentation,googlePhotoUrl,type GooglePhoto,type GoogleProfileStatus,type LiveGoogleProfile} from "@/lib/google-workshop-profile";
-import {showConfirmedGoogleMap} from "@/lib/google-maps-browser";
-import type {GoogleWorkshopIdentity} from "./use-google-workshop-profile";
+import {googleOpeningPresentation,googlePhotoUrl,type GooglePhoto,type GoogleProfileStatus,type LiveGoogleProfile,type LiveGooglePhotos} from "@/lib/google-workshop-profile";
+import {currentGooglePhotos,showConfirmedGoogleMap} from "@/lib/google-maps-browser";
+import {useGoogleVisibility} from "./use-google-visibility";
+import type {Workshop} from "@/lib/workshops";
+import type {GoogleWorkshopIdentity,RequestGoogleIdentity} from "./use-google-workshop-profile";
 import {Dialog,DialogContent,DialogTitle} from "./ui/dialog";
 
 export function WorkshopOpeningHours({profile,status,mapsUrl}:{profile:LiveGoogleProfile|null;status:GoogleProfileStatus;mapsUrl:string}){
@@ -18,19 +20,47 @@ export function WorkshopOpeningHours({profile,status,mapsUrl}:{profile:LiveGoogl
  return <div className={`profile-opening-hours ${hours.tone}`}><div className="profile-opening-summary" role="status"><Clock3 size={17}/><div><strong>{t(hours.label)}</strong>{hours.detail&&<span>{t(hours.detail.message,{when:t(hours.detail.when),time:hours.detail.time})}</span>}{showToday&&<span className="profile-hours-today">{t("public.todayHours",{hours:hours.today!})}</span>}</div></div>{hours.rows.length>0?<details className="profile-week-hours"><summary>{t("public.weekHours")}<ChevronDown size={15}/></summary><ul>{hours.rows.map(row=><li key={row.day} className={row.today?"today":""}><span>{row.day}</span><span>{row.text}</span></li>)}</ul><p>{t("public.localTime")}<LocaleAnchor href={mapsUrl} target="_blank" rel="noopener noreferrer" translate="no">Google Maps</LocaleAnchor></p>{profile?.rating.attributions.map((a,i)=><p key={i}>{a.providerURI?<LocaleAnchor href={a.providerURI} target="_blank" rel="noopener noreferrer">{a.provider}</LocaleAnchor>:a.provider}</p>)}</details>:status!=="loading"&&<LocaleAnchor className="profile-hours-fallback" href={mapsUrl} target="_blank" rel="noopener noreferrer">{t("public.checkMaps")}</LocaleAnchor>}</div>;
 }
 
-export function WorkshopPhotos({name,profile,identity,status}:{name:string;profile:LiveGoogleProfile|null;identity:GoogleWorkshopIdentity|null;status:GoogleProfileStatus}){
+export function LazyWorkshopPhotos({workshop,identity,status,requestIdentity}:{workshop:Workshop;identity:GoogleWorkshopIdentity|null;status:GoogleProfileStatus;requestIdentity?:RequestGoogleIdentity}){
+ const {locale}=useI18n();
+ return <GooglePhotosPanel key={`${workshop.id}:${locale}:${identity?.placeId??""}`} name={workshop.name} identity={identity} status={status} requestIdentity={requestIdentity}/>;
+}
+function GooglePhotosPanel({name,identity,status,requestIdentity}:{name:string;identity:GoogleWorkshopIdentity|null;status:GoogleProfileStatus;requestIdentity?:RequestGoogleIdentity}){
+ const {locale,t}=useI18n(),{ref,canLoad,isVisible}=useGoogleVisibility();
+ const alive=useRef(true),started=useRef(false),[photos,setPhotos]=useState<LiveGooglePhotos|null>(null),[photoStatus,setPhotoStatus]=useState<GoogleProfileStatus>("loading"),[displayed,setDisplayed]=useState(false);
+ useEffect(()=>{alive.current=true;return()=>{alive.current=false;};},[]);
+ useEffect(()=>{if(canLoad)return requestIdentity?.(isVisible);},[canLoad,isVisible,requestIdentity]);
+ useEffect(()=>{
+  if(!canLoad||!isVisible()||!identity||started.current)return;
+  started.current=true;
+  void currentGooglePhotos(identity.placeId,identity.browserKey,locale).then(value=>{if(alive.current){setPhotos(value);setPhotoStatus("ready");}}).catch(()=>{if(alive.current)setPhotoStatus("unavailable");});
+ },[canLoad,isVisible,identity,locale]);
+ // eslint-disable-next-line react-hooks/set-state-in-effect -- A response received in a hidden tab must not mount image resources until visibility returns.
+ useEffect(()=>{if(canLoad&&photos&&isVisible())setDisplayed(true);},[canLoad,photos,isVisible]);
+ const failed=photoStatus==="unavailable"||status==="unavailable";
+ return <div ref={ref} className="profile-google-photos">
+  {failed?<p className="help" role="status">{t("public.photosFailed")}</p>:photos?.photos.length===0?<p className="help">{t("public.photosEmpty")}</p>:displayed?<WorkshopPhotos name={name} profile={photos} identity={identity} status={photoStatus}/>:canLoad&&<div className="profile-photo-loading" role="status">{t("public.photosLoading")}</div>}
+ </div>;
+}
+function PhotoAttribution({photo,attributions,mapsUrl}:{photo:GooglePhoto;attributions:LiveGooglePhotos["attributions"];mapsUrl:string}){
+ return <span className="profile-photo-attribution"><LocaleAnchor href={photo.mapsUrl??mapsUrl} target="_blank" rel="noopener noreferrer" translate="no">Google Maps</LocaleAnchor>{photo.authors.map((author,i)=><span key={i}>{" · "}{author.url?<LocaleAnchor href={author.url} target="_blank" rel="noopener noreferrer">{author.name}</LocaleAnchor>:author.name}</span>)}{attributions.map((source,i)=><span key={i}>{" · "}{source.providerURI?<LocaleAnchor href={source.providerURI} target="_blank" rel="noopener noreferrer">{source.provider}</LocaleAnchor>:source.provider}</span>)}</span>;
+}
+
+export function WorkshopPhotos({name,profile,identity,status}:{name:string;profile:(Pick<LiveGoogleProfile,"photos">&{attributions?:LiveGooglePhotos["attributions"]})|null;identity:GoogleWorkshopIdentity|null;status:GoogleProfileStatus}){
  const {locale,t}=useI18n();
  const [failed,setFailed]=useState<string[]>([]),[largeFailed,setLargeFailed]=useState<string[]>([]);
  const [gallery,setGallery]=useState<{photos:GooglePhoto[];index:number}|null>(null),[loaded,setLoaded]=useState<string[]>([]);
  const opener=useRef<HTMLButtonElement|null>(null),touch=useRef<{x:number;y:number}|null>(null),galleryId=useId();
  const photos=profile?.photos.filter(photo=>!failed.includes(photo.resource))??[];
  const selected=gallery?.photos[gallery.index];
+ const mapsUrl=identity?`https://www.google.com/maps/search/?api=1&query=Workshop&query_place_id=${encodeURIComponent(identity.placeId)}`:"";
+ const attributions=profile?.attributions??[];
  function move(direction:number){setGallery(current=>current?{...current,index:(current.index+direction+current.photos.length)%current.photos.length}:null);}
  if(status==="loading"&&!gallery)return <div className="profile-photo-loading" aria-label={t("public.photosLoadingAria")} role="status"><Camera size={20}/><span>{t("public.photosLoading")}</span></div>;
- if(!identity||(!photos.length&&!gallery))return null;
+ if(!identity)return null;
+ if(!photos.length&&!gallery)return profile?.photos.length?<p className="help" role="status">{t("public.photosFailed")}{" "}<LocaleAnchor href={mapsUrl} target="_blank" rel="noopener noreferrer">{t("public.checkMaps")}</LocaleAnchor></p>:null;
  return <section className="profile-photo-section" id="fotos" aria-label={t("public.photosAria",{name})}>
   <Dialog open={!!gallery} onOpenChange={open=>{if(!open)setGallery(null);}}>
-   <div className="profile-photo-strip">{photos.map((photo,i)=><figure key={photo.resource}><button type="button" aria-label={t("public.enlargePhoto",{count:i+1,name})} aria-haspopup="dialog" aria-controls={gallery?galleryId:undefined} onClick={event=>{opener.current=event.currentTarget;setLargeFailed([]);setLoaded([]);setGallery({photos:[...photos],index:i});}}><img src={googlePhotoUrl(photo,identity.browserKey)} alt={t("public.photoAlt",{count:i+1,name})} width={600} height={380} loading="lazy" decoding="async" referrerPolicy="strict-origin-when-cross-origin" onError={()=>setFailed(value=>value.includes(photo.resource)?value:[...value,photo.resource])}/></button></figure>)}</div>
+   <div className="profile-photo-strip">{photos.map((photo,i)=><figure key={photo.resource}><button type="button" aria-label={t("public.enlargePhoto",{count:i+1,name})} aria-haspopup="dialog" aria-controls={gallery?galleryId:undefined} onClick={event=>{opener.current=event.currentTarget;setLargeFailed([]);setLoaded([]);setGallery({photos:[...photos],index:i});}}><img src={googlePhotoUrl(photo,identity.browserKey)} alt={t("public.photoAlt",{count:i+1,name})} width={600} height={380} loading="lazy" decoding="async" referrerPolicy="strict-origin-when-cross-origin" onError={()=>setFailed(value=>value.includes(photo.resource)?value:[...value,photo.resource])}/></button><figcaption><PhotoAttribution photo={photo} attributions={attributions} mapsUrl={mapsUrl}/></figcaption></figure>)}</div>
    <DialogContent id={galleryId} className="profile-photo-viewer" overlayClassName="profile-gallery-overlay" aria-describedby={undefined} onCloseAutoFocus={event=>{event.preventDefault();opener.current?.focus();}} onKeyDown={event=>{if(event.altKey||event.ctrlKey||event.metaKey)return;if(event.key==="ArrowLeft"||event.key==="ArrowRight"){event.preventDefault();move(event.key==="ArrowLeft"?-1:1);}}}>
     {gallery&&selected&&<>
      <header className="profile-gallery-header"><DialogTitle className="profile-gallery-title">{name}</DialogTitle><span className="profile-gallery-counter" role="status" aria-label={t("public.photoCount",{count:gallery.index+1,total:gallery.photos.length})}>{formatNumber(locale,gallery.index+1)} / {formatNumber(locale,gallery.photos.length)}</span></header>
@@ -41,7 +71,8 @@ export function WorkshopPhotos({name,profile,identity,status}:{name:string;profi
       </>}
       {gallery.photos.length>1&&<><button type="button" className="profile-gallery-prev" aria-label={t("public.previousPhoto")} onClick={()=>move(-1)}><ChevronLeft size={25}/></button><button type="button" className="profile-gallery-next" aria-label={t("public.nextPhoto")} onClick={()=>move(1)}><ChevronRight size={25}/></button></>}
      </div>
-     {gallery.photos.length>1&&<div className="profile-gallery-thumbnails" aria-label={t("public.photoSelection")}>{gallery.photos.map((photo,i)=><button key={photo.resource} type="button" aria-label={t("public.showPhoto",{count:i+1})} aria-pressed={gallery.index===i} onClick={()=>setGallery(current=>current?{...current,index:i}:null)}><img src={googlePhotoUrl(photo,identity.browserKey)} alt="" width={80} height={56} decoding="async" referrerPolicy="strict-origin-when-cross-origin"/></button>)}</div>}
+     <footer className="profile-gallery-attribution"><PhotoAttribution photo={selected} attributions={attributions} mapsUrl={mapsUrl}/></footer>
+     {gallery.photos.length>1&&<div className="profile-gallery-thumbnails" aria-label={t("public.photoSelection")}>{gallery.photos.map((photo,i)=><figure key={photo.resource}><button type="button" aria-label={t("public.showPhoto",{count:i+1})} aria-pressed={gallery.index===i} onClick={()=>setGallery(current=>current?{...current,index:i}:null)}><img src={googlePhotoUrl(photo,identity.browserKey)} alt="" width={80} height={56} decoding="async" referrerPolicy="strict-origin-when-cross-origin"/></button><figcaption><PhotoAttribution photo={photo} attributions={attributions} mapsUrl={mapsUrl}/></figcaption></figure>)}</div>}
     </>}
    </DialogContent>
   </Dialog>

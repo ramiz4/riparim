@@ -64,15 +64,129 @@ Zusätzlich prüft dieselbe Fixture in DE/SQ/EN die datenfreie statische Katalog
 
 Die gezählten Aufrufe sind SDK-`fetchFields`-Anfragen, keine Kostenmessung oder Aussage zur Abrechnungskategorie. Auch reguläre URL-/Sortierverträge, Lade-/Leer-/Fehlerfälle und verspätete Antworten werden ohne Live-Google-Verbindungen geprüft.
 
-Im Profil lädt der offizielle `gmp-place-details`-Baustein mit `gmp-place-rating` und `gmp-place-reviews`, sobald sein Bereich sichtbar wird. Er nutzt die volle Inhaltsspalte und einen kompakten Bereich mit interner Scrollfunktion. Farben und Schriftgrößen werden über die offiziellen CSS-Eigenschaften an das helle und dunkle Riparim-Theme angepasst. Die eingebauten Google- und Autorenattributionen werden beibehalten. Bei fehlender Konfiguration, fehlender Zuordnung oder einem Providerfehler steht der direkte Google-Maps-Link bereit.
-
 ## Live-Daten im Werkstattprofil
 
-Das Profil lädt mit dem bestehenden, für die Website eingeschränkten Browser-Schlüssel Place Details (New): aktuelle Sterne/Anzahl, `currentOpeningHours`, reguläre Wochenzeiten als Ersatz, Geschäftsstatus, Standort und bis zu drei Fotos. Die zurückgelieferte ID muss exakt stimmen. Gleichzeitige Aufrufe teilen nur die laufende Anfrage; Antworten bleiben im Arbeitsspeicher des offenen Profils. Keine API-Öffnungszeiten oder Fotoreferenzen werden in Git, Datenbank oder Browser Storage geschrieben. Der Server-Schlüssel wird nicht an den Browser weitergereicht.
+Eigene Riparim-Bewertungen beziehungsweise ihr leerer Hinweis stehen immer vor Google. Der Google-Host bleibt dadurch auch während des Nachladens an derselben DOM-Position und wird nicht verschoben oder erneut verbunden; seine eigene Panelsichtbarkeit steuert weiterhin den Abruf. Daraus wird keine Aussage über Googles internes Abrechnungsverhalten abgeleitet.
 
-`openNow` und nächste Öffnungs-/Schließzeit kommen direkt von Google; die Darstellung verwendet Kosovo-Ortszeit (`Europe/Belgrade`) einschließlich Sommerzeit. Die aktuelle Wochenbeschreibung berücksichtigt abweichende Zeiten, sofern Google sie bereitstellt. Fehlende Öffnungszeiten, keine Rezensionen und Ladefehler haben unterschiedliche Anzeigen. Das Profil aktualisiert sich zum nächsten Statuswechsel bzw. in begrenzten Abständen; unsichtbare Tabs stellen keine neuen Anfragen.
+Ein sichtbarer gemeinsamer Google-Bereich verwendet genau einen Standard-
+`gmp-place-details`-Baustein mit `gmp-place-rating`,
+`gmp-place-opening-hours` und `gmp-place-reviews`. Der Profilkopf zeigt die
+eigene Riparim-Bewertung und verlinkt diesen Bereich; er löst keinen separaten
+Google-Ratingabruf aus. Es gibt weder eine parallele Enterprise-Profilabfrage
+noch einen vollständigen REST-Refresh zum nächsten Öffnungs-/Schließwechsel.
+Die native Google-Darstellung unterscheidet fehlende Rezensionen, unbekannte
+Öffnungszeiten und Schließstatus. Die App liest diese Daten nicht aus dem DOM,
+Shadow-DOM oder dem Widget aus. Die dokumentierte öffentliche `place`-Property
+enthält lediglich ID, Standort und Viewport. Ein fehlgeschlagener Provideraufruf
+wird als Ladefehler angezeigt, niemals als null Bewertungen ausgegeben.
 
-Fotos werden mit frischen Google-Fotoreferenzen direkt in einer unbeschrifteten Bildleiste geladen. Ein Klick öffnet eine gemeinsame Galerie mit transparentem Glashintergrund, ohne externe Navigation. Alle verfügbaren Fotos sind per Vor-/Zurück-Button, Pfeiltaste, Vorschaubild und horizontaler Wischgeste erreichbar. Die größere Fotodatei wird erst bei ihrer Auswahl geladen. Die geöffnete Galerie behält ihre Fotoreferenzen im Arbeitsspeicher, auch wenn die Profildaten zwischenzeitlich aktualisiert werden. Der Dialog lässt sich per Schließen, Escape oder Klick außerhalb schließen und gibt den Tastaturfokus an das ursprünglich gewählte Vorschaubild zurück. Fehlen Fotos oder schlagen sie fehl, verschwindet der Fotobereich. Standort und Route öffnen Google Maps direkt; im öffentlichen Profil gibt es keine zusätzliche eingebettete Karte. Routenlinks tragen `destination_place_id` und bleiben an denselben bestätigten Eintrag gebunden.
+Der Baustein startet nur bei Sichtbarkeit (120-Pixel-Vorlauf) und aktivem Tab.
+Konfiguration und gemeinsame Zuordnungsroute starten erst, wenn mindestens der
+Google- oder Fotobereich sichtbar und der Tab aktiv ist; die Zuordnungsroute kann
+serverseitig eine Google-Identitätsprüfung auslösen. Beide Bereiche teilen genau
+eine Identität für die aktuelle Werkstatt, Sprache und Maps-Zuordnung. Beim
+Verschwinden meldet sich die jeweilige Sichtbarkeitsquelle ab. Nach wartender
+Konfiguration wird die aktuelle Sichtbarkeit erneut geprüft; ein inzwischen
+sichtbarer anderer Bereich kann übernehmen. Sind beide unsichtbar, wird die
+Zuordnung bis zum nächsten sichtbaren Bereich zurückgestellt. Sichtbarkeit wird
+auch nach asynchronem SDK-Laden erneut geprüft. Themewechsel und normale Profilzustandsänderungen
+bewahren dieselbe Widgetinstanz; Farben und Schriften werden ausschließlich
+über die offiziellen CSS-Eigenschaften und `color-scheme` geändert. Der
+Standardbaustein erhält höchstens 400 Pixel Breite mit interner Scrollfunktion.
+Die Google- und Autorenattribution des Bausteins bleibt vollständig erhalten.
+Advanced-/Pro-Elemente, Zusammenfassungen und `all-content` werden nicht verwendet.
+
+Die App zeigt den Ladezeitpunkt in Kosovo-Ortszeit (`Europe/Belgrade`, inklusive
+Sommerzeit). Nach 30 Minuten wird der alte Baustein ausgeblendet und eine klare
+Veraltungsanzeige mit Aktion **Google-Angaben aktualisieren** angeboten. Der
+Timer ändert ausschließlich die Anzeige: Er startet keine Google-Abfrage.
+Auch ein Wechsel zurück in den Tab aktualisiert nicht automatisch. Erst die
+explizite Aktion im sichtbaren Bereich und aktiven Tab ersetzt die Widgetinstanz;
+sie lädt weder individuelle Details noch Fotoreferenzen. Interne Abfragen des
+Google-Bausteins gehören zum Providervertrag und lassen sich aus App-Mocks nicht
+als tatsächliche Abrechnungsereignisse ableiten. Bei deaktiviertem Provider,
+Timeout oder Quotenfehler bleibt der bestätigte direkte Maps-Link verfügbar;
+Fehler verursachen keine automatische Wiederholungsschleife. Ein SDK-Ladefehler
+bietet ausdrücklich **Seite neu laden**, da der SDK-Lader seinen Fehlversuch
+innerhalb desselben Browserlaufs behält. Bei einem bereits geladenen SDK kann
+ein Widgetfehler durch die sichtbare Aktualisierungsaktion erneut versucht werden.
+
+### Fotos separat und nur bei Bedarf
+
+Der Standard-UI-Kit-Inhaltsbaustein `gmp-place-media` bietet laut Google einen
+Einzelfoto-/Lightbox-Vertrag. Er ersetzt die bestehende gemeinsame Dreiergalerie
+mit direkt auswählbaren Fotos, Pfeiltasten, Wischgeste und vergrößerten Dateien
+nicht gleichwertig. Deshalb bleibt eine eigene minimale Place-Details-Abfrage
+mit **`id,photos,attributions`** bei Sichtbarkeit des Fotobereichs und aktivem Tab.
+Diese Feldmaske gehört laut offizieller REST-Feldtabelle zu **Essentials IDs Only**;
+`googleMapsUri` würde Pro anfordern und wird nicht hinzugefügt. Es gibt keine
+zusätzlichen Rating-, Stunden-, Status- oder Standortfelder. Die Antwort-ID und
+jede Fotoreferenz müssen zum bestätigten Place passen. Gleichzeitige Abfragen
+teilen ausschließlich die laufende Anfrage; Komponenten behalten ihre angezeigten
+Metadaten nur im Arbeitsspeicher des offenen Profils. Es gibt keinen allgemeinen
+Content-Cache, keine TTL und keine Speicherung in Git, D1, R2 oder Browser Storage.
+
+Bis zu drei Vorschauen laden direkt von Google mit nativer Bild-Lazy-Loading-
+Unterstützung (maximal 1000×700 Pixel). Die größere Datei (maximal 1600×1200 Pixel)
+wird erst bei Fotoauswahl im Dialog geladen. Vorschauen, Großansicht und jedes
+Galerie-Vorschaubild tragen Google-/Providerlinks und ihre jeweiligen erhaltenen
+Autorenattributionen. Tastatur, Fokus-Rückgabe, Wischgeste und Galerie bleiben
+bestehen. Ein Place-/Localewechsel schließt die alte Galerie und verwirft deren
+Anzeigestand; verspätete Antworten eines vorherigen Profils erscheinen nicht.
+Auch eine neue bestätigte Place ID im Liveprofil derselben Riparim-ID verwirft
+den alten Identitäts-/Widget-/Fotostand. Die Identitätsantwort muss zur aktuellen
+bestätigten Maps-ID passen; bei Abweichung steht ausschließlich der neue Maps-Link
+als ehrlicher Fallback bereit.
+Eine Antwort im versteckten Tab darf noch keine Bildressourcen mounten. Fehlende
+Fotos und fehlgeschlagene Fotoabfragen erhalten unterschiedliche Anzeigen.
+Auch wenn sämtliche Vorschaudateien fehlschlagen, bleibt ein Ladefehler mit dem
+bestätigten Maps-Fallback sichtbar.
+Standort und Route bleiben direkte Maps-Links mit bestätigter Place ID, ohne
+zusätzliche eingebettete Karte. Eigene belegte Betriebsdaten bleiben unverändert.
+
+### Compact-Prüfung für Katalogkarten
+
+`gmp-place-details-compact` unterstützt einen eigenen Widgetblock mit festem
+Inhaltslayout, integriertem Namen/Adresse und Maps-Schaltfläche; horizontal
+empfiehlt Google 180–500 Pixel Breite, unter 160 Pixeln ist die Darstellung nicht
+zuverlässig. Die bestehende Katalogkarte besitzt bereits einen belegten
+Riparim-Namen/-Ort mit Profilnavigation und zwei schmale gemeinsame
+Bewertungszeilen (Riparim und Google). Der Standard-Compact-Vertrag kann nicht
+nur die benötigten Provider-/Sterne-/Anzahl-Zellen in dieser Zeile liefern und
+hat keinen unterstützten öffentlichen Rating-/Count-Datenzugriff. CSS darf seine
+Pflichtinhalte und Attribution nicht verbergen. Deshalb bleiben die durch #94
+begrenzten individuellen Ratingabrufe für sichtbare Katalogkarten bestehen;
+Filterremounts derselben ID/Locale verwenden den aktiven Listenstand. Es gibt
+keinen zusätzlichen Compact-Baustein und keine DOM-Auslesung für Daten oder Sortierung.
+
+### Isolierter Anfragenachweis für Issue #95
+
+`tests/google-profile-requests.test.mjs` zählt einzelne REST-Feldmasken,
+SDK-Ratingabrufe und Standard-Widgetmontagen getrennt. Der Red-Lauf vor dem Umbau
+zählte bereits beim gewöhnlichen unsichtbaren Profilmount eine vollständige
+Enterprise-Abfrage. Die isolierten DE/SQ/EN-Szenarien prüfen nach dem Umbau:
+
+| Auslöser | Einzel-Details | Standard-Widgetmontagen | Foto-Bildressourcen |
+| --- | ---: | ---: | --- |
+| Profilmount, Google-Bereiche unsichtbar | 0 | 0 | 0 |
+| Erster sichtbarer Google-Bereich | 0 | 1 | 0 |
+| Theme-/Stateänderung | +0 | +0 | +0 |
+| Erster sichtbarer Fotobereich | 1, nur `id,photos,attributions` | +0 | bis zu 3 Vorschauen |
+| Fotoauswahl | +0 | +0 | ausgewählte Großdatei |
+| 30-Minuten-Veraltung oder Rückkehr in den Tab | +0 | +0 | +0 |
+| Explizites sichtbares Aktualisieren | +0 | +1 | +0 |
+
+Weitere Fixtures prüfen null Konfigurations-/Zuordnungsabrufe beim unsichtbaren
+Profilmount, genau eine gemeinsame Zuordnung für beide sichtbaren Bereiche,
+Sichtbarkeitsübergabe während wartender Konfiguration, Rückstellung bei zwei
+unsichtbaren Bereichen, versteckte Tabs, SDK-/Foto-Laderaces, schnellen Place-/
+Localewechsel, StrictMode, Quotenfehler, Timeout ohne Retryschleife, leere Fotos,
+Maps-Fallback und Attribution für jede dargestellte Fotoquelle. Dabei entsteht
+keine echte Google-Verbindung. Gezählt werden App-Aufrufverträge und gemountete
+Bildressourcen, keine gemessenen Produktionskosten. Der aktuelle Standard-
+UI-Kit-SKU-Vertrag (Essentials, SKU `0678-4F72-DA7C`) zählt Requests der Standard-
+Place-Details-Elemente unabhängig von den ausgewählten Feldern; tatsächliche
+Kontingente, anwendbarer Tarif und Rechnung bleiben Aufgabe von #96.
 
 Bestätigte WhatsApp-Kontakte erhalten eine mobile Aktion. Marken- und Leistungshervorhebungen beziehen sich nur auf bereits belegte Profilangaben. Private Fahrzeugdetails stammen ausschließlich aus der aktiven Suche im Arbeitsspeicher; sie werden nicht in Links oder Google-Anfragen übernommen.
 
@@ -81,6 +195,11 @@ Bestätigte WhatsApp-Kontakte erhalten eine mobile Aktion. Marken- und Leistungs
 - https://developers.google.com/maps/documentation/javascript/places-ui-kit/get-started
 - https://developers.google.com/maps/documentation/javascript/places-ui-kit/place-details
 - https://developers.google.com/maps/documentation/javascript/reference/place
+- https://developers.google.com/maps/documentation/javascript/reference/places-widget
+- https://developers.google.com/maps/documentation/javascript/places-ui-kit/custom-styling
+- https://developers.google.com/maps/documentation/places/web-service/place-details
+- https://developers.google.com/maps/documentation/places/web-service/place-photos
+- https://developers.google.com/maps/billing-and-pricing/sku-details#places-ui-kit-query
 - https://developers.google.com/maps/documentation/places/web-service/text-search
 - https://developers.google.com/maps/documentation/places/web-service/policies
 
