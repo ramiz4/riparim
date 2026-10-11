@@ -40,6 +40,9 @@ try{
  check(document.querySelector('.storage-notice')&&button(copy.loading).disabled&&!document.querySelector('[role="dialog"]'),'Loading keeps the privacy notice and disables conflicting refresh without an overlay');
  await act(async()=>deferred(Response.json({visits:items,nextCursor:null})));mode='success';
  check(document.querySelectorAll('.visit').length===1&&document.querySelector('.evidence-details a').getAttribute('href')==='/api/evidence/'+id+'?locale=sq','Loaded own reviews retain private evidence download links in the active locale');
+ items=[{...visit(),review:''}];await click(button(copy.refresh));
+ check(document.querySelector('.submitted-review').textContent.includes('4 / 5')&&button(copy.supplement)&&!button(copy.completeReview)&&!document.body.textContent.includes(copy.oldReview),'Stars-only submissions display their rating and offer the regular supplement action');
+ items=[visit()];await click(button(copy.refresh));
  mode='error';await click(button(copy.refresh));check(document.querySelector('[role="alert"]').textContent===copy.reviewUnavailable&&!document.body.textContent.includes('Private raw error'),'Failed refresh keeps a localized error and hides raw private/provider details');
  check(document.querySelectorAll('.visit').length===1&&!button(copy.refresh).disabled,'A transient refresh failure retains the prior history and offers retry');
  mode='empty';await click(button(copy.refresh));check(document.querySelector('.empty h3').textContent===copy.noReviews&&!document.querySelector('[role="alert"]'),'A successful empty history has a coherent localized empty state');

@@ -1,4 +1,5 @@
 import {publicAccountName,accountNameMaxLength} from "@/lib/account-name";
+import {completeReview,validReviewRating,validReviewText,reviewTextMaxLength} from "@/lib/review";
 import {ValidationError} from "@/lib/validation-error";
 import {validateEvidenceFile} from "@/lib/evidence-file";
 import {getAppUser,getAdminUser,ownsVisit,ownerPair} from "@/app/auth";
@@ -16,8 +17,8 @@ export async function GET(request:Request){const params=new URL(request.url).sea
 export async function POST(request:Request){return submitEvidence(request,false);}
 export async function PUT(request:Request){return submitEvidence(request,true);}
 async function submitEvidence(request:Request,replacing:boolean){const user=await getAppUser();if(!user)return json({error:"Bitte melde dich an, bevor du eine Bewertung einreichst.",errorCode:"authentication_required"},401);if(!sameOrigin(request))return json({error:"Ungültige Anfrage.",errorCode:"invalid_request"},403);if(Number(request.headers.get("content-length")??0)>6*1024*1024)return json({error:"Die Datei ist zu groß. Maximal 5 MB.",errorCode:"file_too_large"},413);let key:string|null=null,uploadKey:string|null=null;
- try{const {db,bucket}=storage(),f=await request.formData(),str=(key:string,max=100)=>String(f.get(key)??"").trim().slice(0,max);const id=str("id"),workshop=str("workshop"),date=str("date"),vehicle=str("vehicle"),service=str("service"),evidenceType=str("evidenceType"),evidenceNote=str("evidenceNote",3000),displayName=publicAccountName(user.displayName),review=String(f.get("review")??"").trim(),rating=Number(f.get("rating"));
- if(review.length<30||review.length>2000||!Number.isInteger(rating)||rating<1||rating>5)return json({error:"Bitte ergänze 1–5 Sterne und eine Bewertung mit mindestens 30 Zeichen.",errorCode:"invalid_review"},400);
+ try{const {db,bucket}=storage(),f=await request.formData(),str=(key:string,max=100)=>String(f.get(key)??"").trim().slice(0,max);const id=str("id"),workshop=str("workshop"),date=str("date"),vehicle=str("vehicle"),service=str("service"),evidenceType=str("evidenceType"),evidenceNote=str("evidenceNote",3000),displayName=publicAccountName(user.displayName),reviewValue=f.get("review"),review=typeof reviewValue==="string"?reviewValue.trim():"",rating=Number(f.get("rating"));
+ if(!validReviewText(reviewValue)||!validReviewRating(rating))return json({error:"Bitte wähle 1–5 Sterne. Der optionale Text darf höchstens 2000 Zeichen enthalten.",errorCode:"invalid_review"},400);
  if(f.get("consent")!=="true")return json({error:"Bitte bestätige die Checkbox zur privaten Prüfung.",errorCode:"consent_required"},400);
  if(!/^[0-9a-f-]{36}$/.test(id)||!validDate(date)||date>new Date().toISOString().slice(0,10)||vehicle.length<3||!services.slice(1).includes(service)||!["Rechnung","Service- oder Arbeitsbeleg","Anderer Nachweis"].includes(evidenceType))return json({error:"Bitte prüfe Werkstatt, Besuchsdatum, Fahrzeug, Leistung und Nachweisart.",errorCode:"invalid_visit"},400);
  if(!(await publishedWorkshop(workshop)))return json({error:"Bitte wähle eine veröffentlichte Werkstatt.",errorCode:"invalid_visit"},400);
@@ -63,12 +64,12 @@ export async function PATCH(request:Request){if(!sameOrigin(request))return json
  const prior=await db.prepare("SELECT file_key,evidence_type,evidence_note,display_name,rating,review,revision,status FROM visits WHERE id=?").bind(id).first<{file_key:string|null;evidence_type:string;evidence_note:string;display_name:string|null;rating:number|null;review:string|null;revision:number;status:string}>();
  if(!prior||prior.revision!==revision||prior.status==="deleting")return json({error:"Die Bewertung wurde zwischenzeitlich geändert. Bitte aktualisiere die Liste.",errorCode:"review_conflict"},409);
  if(status==="published"){
- if(!prior.display_name||prior.display_name.length<2||prior.display_name.length>accountNameMaxLength||!prior.review||prior.review.length<30||prior.review.length>2000||!Number.isInteger(prior.rating)||Number(prior.rating)<1||Number(prior.rating)>5)return json({error:"Diese ältere Einreichung enthält noch keine vollständige Bewertung. Sie muss zuerst ergänzt werden.",errorCode:"invalid_review"},400);
+ if(!completeReview(prior))return json({error:"Diese ältere Einreichung enthält noch keine vollständige Bewertung. Sie muss zuerst ergänzt werden.",errorCode:"invalid_review"},400);
  if(prior.file_key){if(!(await storage().bucket.head(prior.file_key)))return json({error:"Der Besuchsbeleg fehlt. Fordere einen neuen Nachweis an.",errorCode:"evidence_missing"},409);}
  else if(prior.evidence_type!=="Anderer Nachweis"||prior.evidence_note.trim().length<40)return json({error:"Ein nachvollziehbarer Besuchsnachweis ist erforderlich.",errorCode:"evidence_required"},409);
  }
  const allowed=status==="published"?"('pending','needs_more','approved')":"('pending','needs_more','approved','published')";
- const complete=status==="published"?` AND length(trim(display_name)) BETWEEN 2 AND ${accountNameMaxLength} AND rating BETWEEN 1 AND 5 AND length(trim(review)) BETWEEN 30 AND 2000 AND (file_key IS NOT NULL OR (evidence_type='Anderer Nachweis' AND length(trim(evidence_note))>=40)) AND EXISTS (SELECT 1 FROM workshops WHERE workshops.id=visits.workshop AND workshops.status='published')`:"";
+ const complete=status==="published"?` AND length(trim(display_name)) BETWEEN 2 AND ${accountNameMaxLength} AND rating BETWEEN 1 AND 5 AND rating=CAST(rating AS INTEGER) AND COALESCE(length(trim(review)),0)<=${reviewTextMaxLength} AND (file_key IS NOT NULL OR (evidence_type='Anderer Nachweis' AND length(trim(evidence_note))>=40)) AND EXISTS (SELECT 1 FROM workshops WHERE workshops.id=visits.workshop AND workshops.status='published')`:"";
  const eventId=`riparim-review-${id}-revision-${revision+1}`,operation=crypto.randomUUID(),now=new Date().toISOString();
  // Reserve the decision event before its status write, in one transaction.
  // A stale retry cannot borrow a different request's event or emit a new mail.
