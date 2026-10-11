@@ -11,21 +11,24 @@ const archiveHash = createHash("sha256").update(await readFile("artifacts/ripari
 assertReleaseBuildProvenance(JSON.parse(await readFile("artifacts/provenance.json", "utf8")), commit, archiveHash, "cloudflare");
 const sitesArchiveHash = createHash("sha256").update(await readFile("artifacts/riparim-sites.tar.gz")).digest("hex");
 assertReleaseBuildProvenance(JSON.parse(await readFile("artifacts/sites-provenance.json", "utf8")), commit, sitesArchiveHash, "sites");
-const latestMain = execFileSync("git", ["ls-remote", "origin", "refs/heads/main"], { encoding: "utf8" }).trim().split(/\s+/)[0];
-
 let release;
-if (latestMain !== commit) {
-  console.log("A newer main commit exists; its queued workflow will create the release.");
+const tags = execFileSync("git", ["tag", "--points-at", "HEAD"], { encoding: "utf8" }).trim().split("\n").filter(tag => /^v\d+\.\d+\.\d+$/.test(tag));
+if (tags.length > 1) throw new Error("Multiple version tags point at this commit; select the intended release before retrying.");
+// Published bytes remain deployable after newer docs/chore commits. Deployment
+// separately fences against a newer complete release before any production write.
+if (tags.length) {
+  const response = await fetch(`https://api.github.com/repos/ramiz4/riparim/releases/tags/${tags[0]}`, { headers: { Accept: "application/vnd.github+json", Authorization: `Bearer ${process.env.GITHUB_TOKEN}` } });
+  if (!response.ok) throw new Error(`The existing ${tags[0]} tag has no readable GitHub release (HTTP ${response.status}). Complete its publication before retrying.`);
+  const publishedRelease = await response.json();
+  assertSitesReleaseAssets(publishedRelease, tags[0], commit);
+  release = existingReleaseMetadata(publishedRelease, tags[0], commit);
+  console.log(`Reusing published release ${release.gitTag} for the exact workflow commit.`);
 } else {
-  const tags = execFileSync("git", ["tag", "--points-at", "HEAD"], { encoding: "utf8" }).trim().split("\n").filter(tag => /^v\d+\.\d+\.\d+$/.test(tag));
-  if (tags.length > 1) throw new Error("Multiple version tags point at this commit; select the intended release before retrying.");
-  if (tags.length) {
-    const response = await fetch(`https://api.github.com/repos/ramiz4/riparim/releases/tags/${tags[0]}`, { headers: { Accept: "application/vnd.github+json", Authorization: `Bearer ${process.env.GITHUB_TOKEN}` } });
-    if (!response.ok) throw new Error(`The existing ${tags[0]} tag has no readable GitHub release (HTTP ${response.status}). Complete its publication before retrying.`);
-    const publishedRelease = await response.json();
-    assertSitesReleaseAssets(publishedRelease, tags[0], commit);
-    release = existingReleaseMetadata(publishedRelease, tags[0], commit);
-    console.log(`Reusing published release ${release.gitTag} for the exact workflow commit.`);
+  const remoteMain = execFileSync("git", ["ls-remote", "origin", "refs/heads/main"], { encoding: "utf8" }).trim();
+  if (!/^[a-f0-9]{40}\s+refs\/heads\/main$/.test(remoteMain)) throw new Error("The current remote main commit could not be verified.");
+  const latestMain = remoteMain.split(/\s+/)[0];
+  if (latestMain !== commit) {
+    console.log("A newer main commit exists; its queued workflow will create the release.");
   } else {
     const result = await semanticRelease(releaseConfig);
     release = result?.nextRelease;
