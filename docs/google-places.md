@@ -134,9 +134,13 @@ ein Widgetfehler durch die sichtbare Aktualisierungsaktion erneut versucht werde
 ### Kostenfreier Anzeigeweg nach der Browserpause (#96)
 
 Der Nutzer verlangt weiterhin keine zusätzlichen Google-Gebühren. Katalogkarten
-verwenden deshalb denselben offiziellen **Standard-UI-Kit**-Baustein
-`gmp-place-details` wie das Profil, mit `gmp-place-content-config` und ausschließlich
-`gmp-place-rating`. Das Profil behält Rating, Öffnungszeiten und Rezensionen.
+verwenden deshalb den offiziellen **Standard-UI-Kit**-Baustein
+`gmp-place-details-compact` in horizontaler Orientierung, mit
+`gmp-place-content-config` und ausschließlich `gmp-place-rating`. Seine Höhe
+folgt dem Inhalt; eine feste Höhe oder abgeschnittene Pflichtinhalte gibt es nicht.
+Die zusätzliche Riparim-Überschrift, Ladezeit und Maps-Aktion entfallen bei
+erfolgreicher Kataloganzeige; Fehler- und Veraltungsfälle behalten den Maps-Fallback.
+Das Profil behält `gmp-place-details` mit Rating, Öffnungszeiten und Rezensionen.
 Die Karten stellen einen eigenen Google-Widgetblock in voller Kartenbreite bereit;
 Provider-Pflichtinhalte und Attribution werden weder versteckt noch ausgelesen.
 Riparim-Bewertungen bleiben eine getrennte eigene Bewertungszeile. Es gibt keine

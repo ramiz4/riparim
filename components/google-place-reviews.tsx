@@ -32,10 +32,12 @@ function GoogleDetails({workshop,identity,status,requestIdentity,ratingOnly=fals
   const timeout=setTimeout(fail,12000);
   void (async()=>{
    const library=await loadGooglePlaces(identity.browserKey);if(!active)return;
-   await customElements.whenDefined("gmp-place-details");if(!active)return;
+   const tag=ratingOnly?"gmp-place-details-compact":"gmp-place-details";
+   await customElements.whenDefined(tag);if(!active)return;
    // Visibility may change while the SDK loads; defer mounting the billable widget.
    if(!isVisible()){clearTimeout(timeout);setStarted(false);return;}
-   element=document.createElement("gmp-place-details");
+   element=document.createElement(tag);
+   if(ratingOnly)element.setAttribute("orientation","horizontal");
    const request=document.createElement("gmp-place-details-place-request");
    (request as HTMLElement&{place:unknown}).place=new library.Place({id:identity.placeId,requestedLanguage:locale});
    const config=document.createElement("gmp-place-content-config");
