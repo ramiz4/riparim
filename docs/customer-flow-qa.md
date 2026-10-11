@@ -517,3 +517,27 @@ Albanisch im Systemtheme (hier dunkel) zeigte nur die Übersicht. Die gemessene
 Antragsbreite entsprach dem Viewport (390 beziehungsweise 1282 Pixel).
 Die Vorschau fing Schreibanfragen mit fiktiven Antworten ab. Diese Abnahme
 bestätigt keine echte Authentifizierung oder Dateispeicherung in Produktion.
+
+## Flache Antragsseite
+
+Die Beanspruchung verwendet auf Desktop und Mobil keine äußere Formular-Card.
+„Profil beanspruchen“, der kompakte Werkstattkontext und ein kurzer Einstieg
+führen direkt zu Nachweistext und optionalem Dokument. Die Dateiauswahl besitzt
+in DE/SQ/EN eigene sichtbare Beschriftungen; native Browsertexte werden visuell
+ersetzt, während der echte Dateiinput für Tastatur und Dateidialog erhalten
+bleibt. Dateiname, Ersetzen und Entfernen sind sichtbar. Entfernen bewahrt den
+Text und setzt den Fokus auf die Auswahl zurück. Während der Einreichung sind
+die Felder gesperrt und der Button zeigt den Sendezustand. Die Bestätigung
+erhält Fokus und verlinkt die separate Betriebsübersicht.
+
+Die bestehenden Multipart-, Größen-, Besitz- und Freigabeverträge bleiben
+unverändert; neue Migrationen oder Providerkonfigurationen sind nicht nötig.
+Die tatsächlichen React-Prüfungen decken zusätzlich Auswahlzustand, Entfernen,
+Fokus, erhaltene Fehlerentwürfe, Sendezustand und Bestätigungsfokus in allen drei
+Sprachen ab. Die native Vorschau im bestätigten Chrome-Profil
+`ramizloki82@googlemail.com` zeigte bei 1282 Pixeln hell und 390 Pixeln dunkel
+keine äußere Card und keine horizontalen Überbreiten. Auf 390 × 844 Pixeln war
+„Antrag einreichen“ vollständig im sichtbaren Formularbereich. Englisch mit
+Systemtheme löste dunkel auf; Tab erreichte den sichtbaren Upload-Fokusring,
+anschließend den Sende-Button. Eine lokale Einreichung per Enter führte zum
+Bestätigungstitel mit Fokus. Die Vorschau verwendet fiktive Antworten und bestätigt keine reale Dokumentübertragung.

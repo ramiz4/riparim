@@ -32,3 +32,47 @@
 @media(max-width:720px){.business-page h1{font-size:27px}.business-section{padding:18px}.business-request{padding:14px}.business-request-heading{display:block}.business-status{display:inline-block;margin-top:8px}.business-services{grid-template-columns:1fr}.business-proposal{grid-template-columns:1fr;gap:3px}.business-proposal dd{margin-bottom:10px}}
 
 .business-form input[type=file]{max-width:100%;overflow:hidden;font-weight:400}
+
+.business-claim-page{max-width:680px;padding-top:16px;padding-bottom:36px}
+.business-claim-page>.business-claim{margin-top:0}
+.business-claim{overflow-wrap:anywhere}
+.claim-back{display:inline-flex;align-items:center;gap:7px;min-height:40px;font-size:13px;color:var(--muted-foreground)}
+.claim-back:hover{color:var(--foreground)}
+.business-claim h1{font-size:28px;line-height:1.25;margin:8px 0 18px}
+.claim-workshop{display:flex;align-items:start;gap:12px;padding:0 0 16px;border-bottom:1px solid var(--border)}
+.claim-workshop>svg{flex-shrink:0;color:var(--theme-accent);margin-top:2px}
+.claim-workshop>div{min-width:0}
+.business-claim .claim-workshop h2{font-size:17px;line-height:1.4;margin:0;font-weight:600}
+.business-claim .claim-workshop p{font-size:12px;line-height:1.5;margin:4px 0 0}
+.business-claim .claim-intro{margin:16px 0;font-size:14px;line-height:1.5}
+.claim-form fieldset{gap:18px}
+.claim-field{display:grid;gap:7px;min-width:0}
+.claim-field>label{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.claim-field label>span{font-size:12px;font-weight:400;color:var(--muted-foreground);margin-left:0}
+.claim-field small,.claim-submit>small{font-size:12px;font-weight:400;line-height:1.5;color:var(--muted-foreground)}
+.business-claim .claim-form textarea{min-height:92px;font-size:14px;line-height:1.5}
+.claim-form textarea::placeholder{color:var(--muted-foreground);opacity:1}
+.claim-upload{position:relative;display:flex;align-items:center;gap:12px;padding:14px;border:1px dashed var(--input);border-radius:10px;background:var(--card);min-height:76px}
+.claim-upload>svg{color:var(--theme-accent);flex-shrink:0}
+.claim-upload>div{display:grid;gap:4px;min-width:0}
+.claim-upload strong{font-size:14px;font-weight:600}
+.claim-upload:hover{border-color:var(--theme-accent)}
+.claim-upload:focus-within,.claim-back:focus-visible,.claim-remove-file:focus-visible{outline:3px solid var(--ring);outline-offset:3px}
+.business-claim .claim-form .claim-upload input[type=file]{position:absolute;inset:0;opacity:0;width:100%;height:100%;padding:0;cursor:pointer}
+.claim-upload:has(input:disabled){opacity:.65}
+.claim-selected-file{display:flex;align-items:center;gap:8px;min-width:0;color:var(--foreground);font-size:13px}
+.claim-selected-file>svg{flex-shrink:0;color:var(--theme-accent)}
+.claim-selected-file>span{flex:1;min-width:0;overflow-wrap:anywhere}
+.claim-remove-file{display:grid;place-items:center;flex-shrink:0;min-width:44px;min-height:44px;border-radius:8px;color:var(--muted-foreground)}
+.claim-remove-file:hover{background:var(--accent);color:var(--foreground)}
+.claim-submit{display:grid;gap:9px}
+.business-claim .claim-private{display:flex;align-items:start;gap:7px;font-size:12px;line-height:1.5;margin:0}
+.claim-private>svg{flex-shrink:0;margin-top:1px;color:var(--theme-accent)}
+.claim-submit>.primary{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;min-height:46px}
+.claim-submit>small{text-align:center}
+.claim-confirmation{padding-top:24px}
+.claim-confirmation>svg{color:var(--theme-accent)}
+.business-claim .claim-confirmation h2{font-size:22px;margin:12px 0;line-height:1.35}
+.claim-confirmation h2:focus{outline:none}
+.claim-confirmation>.primary{display:inline-flex;margin-top:8px}
+@media(max-width:720px){.business-claim h1{font-size:26px}.business-claim-page{padding-top:10px}.claim-workshop{padding-bottom:14px}.business-claim .claim-workshop h2{font-size:16px}}
