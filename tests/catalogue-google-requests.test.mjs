@@ -55,6 +55,10 @@ try{
   assert.deepEqual([...first.querySelector('gmp-place-content-config').children].map(x=>x.localName),['gmp-place-rating'],'the rating content configuration omits all Advanced/session fields');
   assert.equal(first.querySelector('gmp-place-details-place-request').place.options.requestedLanguage,locale);
   await load();await intersect();assert.equal(widgets.length,start+1,'visibility changes preserve the native element');
+  const ratingPanel=first.closest('.google-rating-panel');
+  assert(!ratingPanel.querySelector('.profile-google-heading'),'catalogue ratings use the native Google attribution without a duplicate heading');
+  assert(!ratingPanel.querySelector('.google-details-time'),'catalogue ratings omit the extra loaded-time line');
+  assert(!ratingPanel.querySelector('a.text-action'),'ready catalogue ratings rely on the native Maps button');
   assert.equal(document.querySelector('gmp-place-details'),first);assert(!first.hasAttribute('truncation-preferred'));
   assert(document.querySelector('.riparim-rating .rating-value'),'own ratings remain independent');
   await search('Fixture 001');assert.equal(widgets.length,start+1,'filter changes cannot request hidden cards');
