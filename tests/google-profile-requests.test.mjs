@@ -41,11 +41,11 @@ try{
  try{
   await render('de',h(api.Profile,{...props,workshop:hydratedWorkshop,directory:[hydratedWorkshop],publicSnapshot:true}));
   await show('google-reviews-panel');await loadWidget();await show('profile-google-photos');
-  const original=document.querySelector('gmp-advanced-place-details'),before={widgets:counters.widgets.length,details:counters.individualDetails.length,photos:counters.photoResources.length},lifecycleBefore=widgetLifecycle(original);
+  const original=document.querySelector('.profile-google-reviews gmp-advanced-place-details'),before={widgets:counters.widgets.length,details:counters.individualDetails.length,photos:counters.photoResources.length},lifecycleBefore=widgetLifecycle(original);
   assert(original?.isConnected);assert(!document.querySelector('.public-review-list'),'own reviews are still pending while Google is visible');
   await React.act(async()=>{releaseReviews();await settle();});await show('google-reviews-panel');await show('profile-google-photos');
   assert(document.querySelector('.public-review-list').textContent.includes(ownReview.review),'the actual asynchronous own-review response hydrated');
-  const current=document.querySelector('gmp-advanced-place-details');
+  const current=document.querySelector('.profile-google-reviews gmp-advanced-place-details');
   if(current!==original||JSON.stringify(widgetLifecycle(original))!==JSON.stringify(lifecycleBefore))console.log(JSON.stringify({trigger:'publicSnapshot-review-hydration',lifecycleBefore,lifecycleAfter:widgetLifecycle(original),sameElement:current===original,firstConnected:original.isConnected,widgetMontagesBefore:before.widgets-hydrationWidgetStart,widgetMontagesAfter:counters.widgets.length-hydrationWidgetStart,detailsBefore:before.details,detailsAfter:counters.individualDetails.length,photosBefore:before.photos,photosAfter:counters.photoResources.length}));
   assert.equal(current,original,'late publicSnapshot review hydration must preserve the same Google element');assert(original.isConnected);
   assert.deepEqual(widgetLifecycle(original),lifecycleBefore,'late own-review hydration must never disconnect or reconnect the native Google widget');
@@ -74,7 +74,7 @@ try{
   const reviewStateWorkshop={...workshop,id:locale,googleRating:{...workshop.googleRating,mapsUrl:`https://www.google.com/maps/search/?api=1&query_place_id=ChIJ${locale}`}},reviewBefore={widgets:counters.widgets.length,details:counters.individualDetails.length,photos:counters.photoResources.length},reviewLifecycle=widgetLifecycle(element);
   for(const reviews of [[ownReview],[]]){
    await render(locale,h(api.Profile,{...props,workshop:reviewStateWorkshop,directory:[reviewStateWorkshop],reviews}));await show('google-reviews-panel');await show('profile-google-photos');
-   assert.equal(document.querySelector('gmp-advanced-place-details'),element,'[] -> [Review] -> [] must preserve the same Google element');assert(element.isConnected);assert.deepEqual(widgetLifecycle(element),reviewLifecycle,'[] -> [Review] -> [] cannot disconnect or reconnect the native Google widget');
+   assert.equal(document.querySelector('.profile-google-reviews gmp-advanced-place-details'),element,'[] -> [Review] -> [] must preserve the same Google element');assert(element.isConnected);assert.deepEqual(widgetLifecycle(element),reviewLifecycle,'[] -> [Review] -> [] cannot disconnect or reconnect the native Google widget');
    assert.deepEqual({widgets:counters.widgets.length,details:counters.individualDetails.length,photos:counters.photoResources.length},reviewBefore,'changing own-review presence must preserve all provider request/resource counters');
    assert(document.querySelector('.profile-review-stream').firstElementChild.classList.contains('profile-riparim-reviews'),'the provider reading order remains Riparim then Google');
   }
@@ -82,7 +82,7 @@ try{
   assert.equal(document.querySelectorAll('img[src*="maxWidthPx=1600"]').length,0,'large photo is not mounted before user action');
   await tab(false);const before={widgets:counters.widgets.length,details:counters.individualDetails.length};
   await React.act(async()=>{for(const expire of [...expiries.values()])expire();await settle();});
-  assert(document.querySelector('.profile-google-reviews .google-official-widget').classList.contains('google-widget-unavailable'),'30-minute expiry hides the stale native opening status');
+  assert(document.querySelector('.profile-google-reviews .google-official-widget').classList.contains('google-widget-unavailable'),'30-minute expiry hides stale native comments');
   const refresh=document.querySelector('.google-details-refresh');assert(refresh.disabled);await click(refresh);
   assert.equal(counters.widgets.length,before.widgets);assert.equal(counters.individualDetails.length,before.details,'expiry never reloads photos or a complete profile');
   await tab(true);assert.equal(counters.widgets.length,before.widgets,'returning to tab does not refresh automatically');
@@ -97,11 +97,11 @@ try{
   const start=counters.widgets.length,identityStart=identities.length;await mount(locale,'sections-'+locale);
   await tab(false);await show('google-overview-panel');assert.equal(counters.widgets.length,start);
   await tab(true);await show('google-overview-panel');assert.equal(counters.widgets.length,start+1);
-  const overview=document.querySelector('gmp-advanced-place-details-compact');assert(overview.closest('.profile-overview-details'));
+  const overview=document.querySelector('.google-overview-panel gmp-advanced-place-details');assert(overview.closest('.profile-overview-details'));assert(!overview.hasAttribute('orientation'),'full opening hours require the full provider widget');
   assert.deepEqual([...overview.children].map(x=>x.localName),['gmp-place-details-place-request','gmp-place-rating','gmp-place-opening-hours','gmp-place-attribution']);
-  assert.equal(document.querySelector('gmp-advanced-place-details'),null,'invisible comments do not load with the upper summary');
+  assert.equal(document.querySelector('.profile-google-reviews gmp-advanced-place-details'),null,'invisible comments do not load with the upper summary');
   await loadWidget();await show('google-reviews-panel');assert.equal(counters.widgets.length,start+2);assert.equal(identities.length,identityStart+1,'both visible panels share the same identity route');
-  const comments=document.querySelector('gmp-advanced-place-details');assert(comments.closest('#google-bewertungen'));
+  const comments=document.querySelector('.profile-google-reviews gmp-advanced-place-details');assert(comments.closest('#google-bewertungen'));
   assert.deepEqual([...comments.children].map(x=>x.localName),['gmp-place-details-place-request','gmp-place-reviews','gmp-place-attribution']);
   for(const element of [overview,comments]){assert(!element.querySelector('gmp-place-name,gmp-place-link,gmp-place-all-content,gmp-place-standard-content'));assert.equal(element.querySelector('gmp-place-details-place-request').place.options.requestedLanguage,locale);}
   assert.equal(overview.querySelector('gmp-place-details-place-request').place.options.id,comments.querySelector('gmp-place-details-place-request').place.options.id);
@@ -117,15 +117,15 @@ try{
  await mount('de','sdk-race');await show('google-reviews-panel');await tab(false);const sdkBefore=counters.widgets.length;
  await React.act(async()=>{releaseWidget();await settle();});assert.equal(counters.widgets.length,sdkBefore);
  customElements.whenDefined=nativeWhenDefined;await tab(true);assert.equal(counters.widgets.length,sdkBefore+1,'deferred widget initializes when visibility returns');
- await mount('de','strict',true);await show('google-reviews-panel');assert(document.querySelector('gmp-advanced-place-details'),'StrictMode replay preserves the Advanced widget');
+ await mount('de','strict',true);await show('google-reviews-panel');assert(document.querySelector('.profile-google-reviews gmp-advanced-place-details'),'StrictMode replay preserves the Advanced widget');
  await mount('de','disabled');await show('google-reviews-panel');assert(document.querySelector('.profile-google-reviews .google-reviews-panel').textContent.includes('Google-Angaben konnten nicht geladen werden'));assert(document.querySelector('.profile-google-reviews .google-reviews-panel a').href.includes('google.com/maps'));
- await mount('de','changeIdentity');await show('google-reviews-panel');await loadWidget();const priorWidget=document.querySelector('gmp-advanced-place-details');
+ await mount('de','changeIdentity');await show('google-reviews-panel');await loadWidget();const priorWidget=document.querySelector('.profile-google-reviews gmp-advanced-place-details');
  await render('de',h(api.Profile,{...props,workshop:{...workshop,id:'changeIdentity',googleRating:{...workshop.googleRating,mapsUrl:'https://www.google.com/maps/search/?api=1&query_place_id=ChIJotherIdentity'}}}));
  assert(!priorWidget.isConnected,'changed confirmed identity removes the old provider content');
  assert(document.querySelector('.workshop-overview-actions a[href*="maps/dir"]').href.includes('destination_place_id=ChIJotherIdentity'));
  assert(document.querySelector('.profile-google-photos a').href.includes('query_place_id=ChIJotherIdentity'));
  // Changed business data without a historical Google snapshot must invalidate the old confirmed identity.
- await render('de',null);const originalBusiness={...workshop,id:'business-update',googleRating:null};await render('de',h(api.Profile,{...props,workshop:originalBusiness,directory:[originalBusiness]}));await show('google-reviews-panel');const businessWidget=document.querySelector('gmp-advanced-place-details'),businessFetch=globalThis.fetch;
+ await render('de',null);const originalBusiness={...workshop,id:'business-update',googleRating:null};await render('de',h(api.Profile,{...props,workshop:originalBusiness,directory:[originalBusiness]}));await show('google-reviews-panel');const businessWidget=document.querySelector('.profile-google-reviews gmp-advanced-place-details'),businessFetch=globalThis.fetch;
  globalThis.fetch=async(url,options)=>String(url).endsWith('/business-update')?Response.json({placeId:'ChIJbusiness-updated'}):businessFetch(url,options);
  try{const updatedBusiness={...originalBusiness,address:'Confirmed new workshop street'};await render('de',h(api.Profile,{...props,workshop:updatedBusiness,directory:[updatedBusiness]}));await show('google-reviews-panel');assert(!businessWidget.isConnected,'new business identity discards old provider content even without a historical Maps snapshot');assert.equal(document.querySelector('gmp-place-details-place-request').place.options.id,'ChIJbusiness-updated');assert(document.querySelector('.profile-google-photos a').href.includes('query_place_id=ChIJbusiness-updated'));}finally{globalThis.fetch=businessFetch;}
  await mount('de','timeout');await show('google-reviews-panel');const timeoutWidgets=counters.widgets.length;await React.act(async()=>{for(const fail of [...timeouts.values()])fail();await settle();});await tab(false);await tab(true);assert.equal(counters.widgets.length,timeoutWidgets,'load timeout has no automatic retry loop');assert(document.querySelector('.profile-google-reviews .google-reviews-panel').textContent.includes('Google-Angaben konnten nicht geladen werden'));

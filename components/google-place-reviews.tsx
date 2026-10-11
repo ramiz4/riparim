@@ -15,7 +15,7 @@ export function GooglePlaceReviews(props:Props){
  return <GoogleDetails key={`${props.workshop.id}:${locale}:${props.identity?.placeId??""}:${props.variant??"reviews"}`} {...props}/>;
 }
 function GoogleDetails({workshop,identity,status,requestIdentity,variant="reviews"}:Props){
- const {locale,t}=useI18n(),{ref,canLoad,isVisible}=useGoogleVisibility(),compact=variant!=="reviews";
+ const {locale,t}=useI18n(),{ref,canLoad,isVisible}=useGoogleVisibility(),compact=variant==="rating";
  const container=useRef<HTMLDivElement>(null),[started,setStarted]=useState(false),[revision,setRevision]=useState(0);
  const [widgetStatus,setWidgetStatus]=useState<GoogleProfileStatus>("loading"),[loadedAt,setLoadedAt]=useState<number|null>(null),[expired,setExpired]=useState(false),[needsReload,setNeedsReload]=useState(false);
  const mapsUrl=workshopMapsUrl(workshop,identity?.placeId);
