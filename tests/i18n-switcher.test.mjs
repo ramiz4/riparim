@@ -10,15 +10,15 @@ const result=await build({stdin:{contents:source,resolveDir:process.cwd(),loader
 const {I18nProvider,getMessages,LanguageSwitcher,useNavigationGuard,languageSwitchHref,preferredLanguageHref}=await import(out);
 assert.equal(languageSwitchHref('/sq#suche','en'),'/en#suche');
 assert.equal(languageSwitchHref('/#so-gehts','sq'),'/sq#so-gehts');
-assert.equal(languageSwitchHref('/sq/werkstatt/test-id?suche=%2Fsq%2Fwerkstaetten%3Fort%3Dprizren%26sprache%3Dsq&token_hash=secret&vehicle=private#bewerten','en'),'/en/werkstatt/test-id?suche=%2Fen%2Fwerkstaetten%3Fort%3Dprizren%26sprache%3Dsq#bewerten');
-assert.equal(languageSwitchHref('/anmelden?weiter=%2Fsq%2Fauth%2Fbestaetigen%3Ftoken_hash%3Dsecret','en'),'/en/anmelden');
-assert.equal(languageSwitchHref('/sq/anmelden?weiter=%2Fsq%2Fwerkstatt%2Ftest-id%3Fvehicle%3Dprivate%23bewerten&access_token=secret','en'),'/en/anmelden?weiter=%2Fen%2Fwerkstatt%2Ftest-id%23bewerten');
+assert.equal(languageSwitchHref('/sq/servis/test-id?suche=%2Fsq%2Fserviset%3Fort%3Dprizren%26sprache%3Dsq&token_hash=secret&vehicle=private#bewerten','en'),'/en/workshop/test-id?suche=%2Fen%2Fworkshops%3Fort%3Dprizren%26sprache%3Dsq#bewerten');
+assert.equal(languageSwitchHref('/anmelden?weiter=%2Fsq%2Fauth%2Fbestaetigen%3Ftoken_hash%3Dsecret','en'),'/en/login');
+assert.equal(languageSwitchHref('/sq/hyr?weiter=%2Fsq%2Fservis%2Ftest-id%3Fvehicle%3Dprivate%23bewerten&access_token=secret','en'),'/en/login?weiter=%2Fen%2Fworkshop%2Ftest-id%23bewerten');
 assert.equal(languageSwitchHref('/?besuche=1&einreichung=11111111-1111-1111-1111-111111111111&problem=private','sq'),'/sq?besuche=1');
-assert.equal(languageSwitchHref('/werkstaetten?sprache=sq&ort=prizren&localeNotice=preference_not_saved','en'),'/en/werkstaetten?ort=prizren&sprache=sq');
-assert.equal(languageSwitchHref('/werkstaetten?bewerten=1','sq'),'/sq/werkstaetten?bewerten=1','Language navigation retains the public review-selection context');
+assert.equal(languageSwitchHref('/werkstaetten?sprache=sq&ort=prizren&localeNotice=preference_not_saved','en'),'/en/workshops?ort=prizren&sprache=sq');
+assert.equal(languageSwitchHref('/werkstaetten?bewerten=1','sq'),'/sq/serviset?bewerten=1','Language navigation retains the public review-selection context');
 assert.equal(languageSwitchHref('/?nachweis=fixture-workshop','en'),'/en?nachweis=fixture-workshop','An old workshop link retains its assignment across languages before redirect');
 const errors=[],console=new VirtualConsole();console.on('jsdomError',error=>errors.push(error.message));
-const dom=new JSDOM('<div id="root"></div>',{url:'https://riparim.test/en/werkstatt/test-id#bewerten',virtualConsole:console});
+const dom=new JSDOM('<div id="root"></div>',{url:'https://riparim.test/en/workshop/test-id#bewerten',virtualConsole:console});
 for(const key of ['window','document','navigator','HTMLElement','Element','Node','Event','MouseEvent'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});globalThis.IS_REACT_ACT_ENVIRONMENT=true;
 const root=createRoot(document.getElementById('root'));let confirmations=[];window.confirm=message=>{confirmations.push(message);return false;};
 function FormState({dirty,busy}){useNavigationGuard({dirty,busy});return createElement("input",{"aria-label":"Private fixture draft",defaultValue:"Original in-memory fixture draft"});}
@@ -66,12 +66,12 @@ process.stdout.write('Language switch: public URL sanitization, safe return, key
 const originalFetch=globalThis.fetch;let writes=[];
 try{
  globalThis.fetch=async(url,init)=>{writes.push({url,init});return Response.json({preferredLocale:'sq'});};
- assert.equal(await preferredLanguageHref('/en/werkstaetten?ort=prizren&sprache=sq','sq',true),'/sq/werkstaetten?ort=prizren&sprache=sq');
+ assert.equal(await preferredLanguageHref('/en/workshops?ort=prizren&sprache=sq','sq',true),'/sq/serviset?ort=prizren&sprache=sq');
  assert.equal(writes[0].url,'/api/account');assert.equal(writes[0].init.method,'PATCH');assert.deepEqual(JSON.parse(writes[0].init.body),{preferredLocale:'sq'});
  globalThis.fetch=async()=>Response.json({errorCode:'unavailable'},{status:503});
- assert.equal(await preferredLanguageHref('/en/werkstatt/test-id#bewerten','sq',true),'/sq/werkstatt/test-id?localeNotice=preference_not_saved#bewerten');
+ assert.equal(await preferredLanguageHref('/en/workshop/test-id#bewerten','sq',true),'/sq/servis/test-id?localeNotice=preference_not_saved#bewerten');
  const before=writes.length;assert.equal(await preferredLanguageHref('/en?besuche=1','de',false),'/?besuche=1');assert.equal(writes.length,before,'Legacy accounts skip provider preference writes');
  const start=Date.now();globalThis.fetch=async()=>new Promise(()=>{});
- assert.equal(await preferredLanguageHref('/sq/einstellungen','en',true),'/en/einstellungen?localeNotice=preference_not_saved');
+ assert.equal(await preferredLanguageHref('/sq/cilesimet','en',true),'/en/settings?localeNotice=preference_not_saved');
  assert.ok(Date.now()-start<4500,'Even an unresponsive provider cannot indefinitely block document navigation');
 }finally{globalThis.fetch=originalFetch;}

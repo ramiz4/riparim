@@ -3,7 +3,7 @@ import {LocaleAnchor} from "@/components/locale-anchor";
 import {useEffect,useRef,type AnchorHTMLAttributes,type MouseEvent} from "react";
 import {useRouter} from "next/navigation";
 import {useI18n} from "@/lib/i18n/client";
-import {localizeHref,stripLocalePrefix} from "@/lib/i18n/locale";
+import {localizeHref,pageIdentityPath} from "@/lib/i18n/locale";
 import {navigateToWorkshopPage} from "@/lib/profile-navigation";
 
 export function WorkshopNavigationLink({href,children,...props}:AnchorHTMLAttributes<HTMLAnchorElement>&{href:string}){
@@ -17,7 +17,7 @@ export function WorkshopNavigationLink({href,children,...props}:AnchorHTMLAttrib
   cancel.current=navigateToWorkshopPage(localizedHref,{
    readHref:()=>window.location.href,
    isPageReady:target=>{
-    const pathname=stripLocalePrefix(new URL(target,window.location.href).pathname);
+    const pathname=pageIdentityPath(new URL(target,window.location.href).pathname);
     if(pathname==="/werkstaetten")return document.querySelector(".catalogue-page")!==null;
     const page=document.querySelector<HTMLElement>(".workshop-page");
     return page?.dataset.workshopId===decodeURIComponent(pathname.slice("/werkstatt/".length));

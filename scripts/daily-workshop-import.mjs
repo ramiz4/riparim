@@ -3,6 +3,7 @@ import {execFileSync} from 'node:child_process';
 import {randomUUID} from 'node:crypto';
 import {resolve,join} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {localizeHref} from './lib/locale.mjs';
 
 // The common Git directory is shared by every task worktree on this host.
 export async function acquireRun(lockPath,owner){
@@ -32,13 +33,13 @@ export async function checkLive({origin='https://riparim.com',profileIds=[],requ
  }
  const selected=profileIds.length?profileIds:body.workshops.slice(0,2).map(w=>w.id);
  for(const id of selected)if(!ids.has(id))throw Error(`Published profile missing: ${id}`);
- for(const [prefix,locale] of [['','de'],['/sq','sq'],['/en','en']]){
+ for(const locale of ['de','sq','en']){
   for(const path of ['/werkstaetten',...selected.map(id=>'/werkstatt/'+id)]){
-   const response=await request(origin+prefix+path,{signal:AbortSignal.timeout(30000)});
+   const localized=localizeHref(path,locale),response=await request(origin+localized,{signal:AbortSignal.timeout(30000)});
    const html=await response.text();
    const profileId=path.startsWith("/werkstatt/")?path.slice(11):null,profile=profileId?body.workshops.find(w=>w.id===profileId):null;
    const expectedName=profile&&typeof profile.name==="string"?profile.name.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#x27;"):null;
-   const check={path:prefix+path,status:response.status,bytes:Buffer.byteLength(html),ray:response.headers.get('cf-ray'),error1102:/Error\s*1102|Worker exceeded resource limits/i.test(html),complete:/<\/html>\s*$/.test(html),locale:html.includes(`lang="${locale}"`),heading:/<h1(?:\s|>)/.test(html),shell:html.includes("data-public-profile-id="),profileIdentity:!profileId||(html.includes(`data-workshop-id="${profileId}"`)&&expectedName!==null&&html.includes(expectedName))};
+   const check={path:localized,status:response.status,bytes:Buffer.byteLength(html),ray:response.headers.get('cf-ray'),error1102:/Error\s*1102|Worker exceeded resource limits/i.test(html),complete:/<\/html>\s*$/.test(html),locale:html.includes(`lang="${locale}"`),heading:/<h1(?:\s|>)/.test(html),shell:html.includes("data-public-profile-id="),profileIdentity:!profileId||(html.includes(`data-workshop-id="${profileId}"`)&&expectedName!==null&&html.includes(expectedName))};
    checks.push(check);
   }
  }

@@ -1,4 +1,4 @@
-import {localeFromPath,localizeHref,stripLocalePrefix} from "@/lib/i18n/locale";
+import {localeFromPath,localizeHref,pageIdentityPath} from "@/lib/i18n/locale";
 import {catalogueHref,parseCatalogueFilters} from "@/lib/catalogue-filters";
 import type {Workshop} from "@/lib/workshops";
 
@@ -6,7 +6,7 @@ export function profileSearchHref(value:string|null,directory:Workshop[]){
  if(!value?.startsWith("/")||value.startsWith("//"))return null;
  try{
   const url=new URL(value,"https://riparim.invalid");
-  if(url.origin!=="https://riparim.invalid"||stripLocalePrefix(url.pathname)!=="/werkstaetten")return null;
+  if(url.origin!=="https://riparim.invalid"||pageIdentityPath(url.pathname)!=="/werkstaetten")return null;
   return localizeHref(catalogueHref(parseCatalogueFilters(url.searchParams,directory)),localeFromPath(url.pathname));
  }catch{return null;}
 }
