@@ -162,9 +162,50 @@ try{
    if(scenario==='key-change')assert(identities.at(-1).endsWith('/visibility-current'),'late old-key configuration cannot resolve the previous identity');
   }finally{resolveConfig();globalThis.fetch=baseFetch;}
  }
+ // Exercise the actual config switch and separate identity/photo quota and deadline failures in every locale.
+ for(const mode of ['disabled','identity-quota','identity-timeout','photo-quota','photo-timeout']){
+  await render('de',null);
+  const scoped=await import(new URL('../'+output+'/ui.mjs?cost-fallback-'+mode,import.meta.url)),baseFetch=globalThis.fetch;
+  let identityCalls=0,photoCalls=0;const widgetStart=counters.widgets.length,ratingStart=counters.individualRatings.length;
+  globalThis.fetch=async(url,options)=>{
+   if(url==='/api/google-places')return Response.json(mode==='disabled'?{enabled:false}:{enabled:true,browserKey:'fixture-key'});
+   if(String(url).startsWith('/api/google-places/')){
+    identityCalls++;
+    if(mode==='identity-timeout')throw new DOMException('Fixture identity deadline','TimeoutError');
+    if(mode==='identity-quota')return new Response('{}',{status:429});
+   }
+   if(String(url).startsWith('https://places.googleapis.com/')){
+    photoCalls++;if(mode==='photo-timeout')throw new DOMException('Fixture photo deadline','TimeoutError');
+    if(mode==='photo-quota')return new Response('{}',{status:429});
+   }
+   return baseFetch(url,options);
+  };
+  try{
+   for(const locale of ['de','sq','en']){
+    const value={...workshop,id:'cost-'+mode+'-'+locale,googleRating:{...workshop.googleRating,mapsUrl:`https://www.google.com/maps/search/?api=1&query_place_id=ChIJcost-${mode}-${locale}`}},identityStart=identityCalls,photoStart=photoCalls,widgets=counters.widgets.length;
+    await React.act(async()=>{root.render(h(scoped.I18nProvider,{locale,messages:scoped.getMessages(locale,['common','public'])},h(scoped.Profile,{...props,workshop:value,directory:[value],reviews:[ownReview]})));await settle();});
+    await show('google-reviews-panel');await show('profile-google-photos');
+    const t=scoped.createTranslator(scoped.getMessages(locale)),panel=document.querySelector('.google-reviews-panel'),photos=document.querySelector('.profile-google-photos');
+    assert(document.querySelector('.profile-riparim-reviews').textContent.includes(ownReview.review),'provider failures preserve own reviews');
+    assert(document.querySelector('.profile-overview-details .riparim-rating .rating-value'),'provider failures preserve the own average');
+    assert(document.querySelector('.workshop-overview-actions a[href*="maps/dir"]').href.includes('destination_place_id=ChIJcost-'+mode+'-'+locale),'route fallback keeps the independently confirmed Place ID');
+    assert(panel.querySelector('a').href.includes('query_place_id=ChIJcost-'+mode+'-'+locale));
+    assert(!panel.textContent.includes(t('public.googleReviewsEmpty')),'unavailable provider does not imply zero reviews');
+    if(mode.startsWith('photo')){assert(photos.textContent.includes(t('public.photosFailed')));assert(!photos.textContent.includes(t('public.photosEmpty')));assert.equal(photoCalls-photoStart,1);await loadWidget();}
+    else{assert(panel.textContent.includes(t('public.googleDetailsFailed')));assert.equal(counters.widgets.length,widgets);assert.equal(photoCalls,photoStart);}
+    const stable={identityCalls,photoCalls,widgets:counters.widgets.length};
+    await tab(false);await tab(true);await show('google-reviews-panel');await show('profile-google-photos');
+    assert.deepEqual({identityCalls,photoCalls,widgets:counters.widgets.length},stable,'provider failures must never auto-retry on tab/visibility changes');
+    assert.equal(identityCalls-identityStart,mode==='disabled'?0:1,'one shared identity for both panels, zero while disabled');
+    await React.act(async()=>{root.render(null);await settle();});
+   }
+   if(!mode.startsWith('photo'))assert.equal(counters.widgets.length,widgetStart);
+   assert.equal(counters.individualRatings.length,ratingStart,'fallback scenarios never fetch a duplicate profile-header rating');
+  }finally{globalThis.fetch=baseFetch;}
+ }
  // A failed SDK keeps its rejected promise; the UI offers an honest page reload instead of a futile widget refresh.
  await render('de',null);const sdkApi=await import(new URL('../'+output+'/ui.mjs?sdk-failure',import.meta.url));let sdkAttempts=0;window.google={maps:{importLibrary:async()=>{sdkAttempts++;throw Error('Fictional SDK authorization failure');}}};
  await React.act(async()=>root.render(h(sdkApi.I18nProvider,{locale:'de',messages:sdkApi.getMessages('de',['common','public'])},h(sdkApi.GooglePlaceReviews,{workshop,identity:{placeId:'ChIJfixture',browserKey:'fixture-key'},status:'ready'}))));await show('google-reviews-panel');
  assert.equal(document.querySelector('.google-details-refresh').textContent,'Seite neu laden','SDK failures provide a real fresh-browser recovery action');assert.equal(sdkAttempts,1);await tab(false);await tab(true);assert.equal(sdkAttempts,1,'SDK failures do not automatically retry');
- console.log(JSON.stringify({locales:['de','sq','en'],duplicateEnterpriseDetails:0,individualRatings:0,firstVisibleStandardWidgets:1,photoMetadataMask:'id,photos,attributions',previewPhotos:3,largePhotosBeforeAction:0,staleMinutes:30,hiddenIdentityRequests:0,offscreenConfigurationRequests:0,sharedVisibilityIdentity:true,configurationVisibilityHandoff:true,reviewPresenceStableElement:true,asyncPublicReviewHydration:true,nativeWidgetReconnectsOnOwnReviews:0,photoRefreshes:0,lateLocalePlaceGuards:true,strictMode:true,liveProviderCalls:false}));
+ console.log(JSON.stringify({locales:['de','sq','en'],duplicateEnterpriseDetails:0,individualRatings:0,firstVisibleStandardWidgets:1,photoMetadataMask:'id,photos,attributions',previewPhotos:3,largePhotosBeforeAction:0,staleMinutes:30,hiddenIdentityRequests:0,offscreenConfigurationRequests:0,sharedVisibilityIdentity:true,configurationVisibilityHandoff:true,reviewPresenceStableElement:true,asyncPublicReviewHydration:true,nativeWidgetReconnectsOnOwnReviews:0,providerFallbackModes:['disabled','identity-quota','identity-timeout','photo-quota','photo-timeout'],photoRefreshes:0,lateLocalePlaceGuards:true,strictMode:true,liveProviderCalls:false}));
 }finally{photoObserver.disconnect();await React.act(async()=>root.unmount());globalThis.setTimeout=nativeTimeout;globalThis.clearTimeout=nativeClearTimeout;dom.window.close();}

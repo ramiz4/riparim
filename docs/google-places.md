@@ -14,14 +14,14 @@ Die vertiefte Prüfung dieser 30 Identitäten bestätigt **drei weitere bestehen
 
 Die anschließend vom Nutzer verworfenen 27 Identitäten sind in `data/workshop-removals.json` dokumentiert. Der Bestand nach dieser ersten Entfernung umfasste **128 öffentliche Profile und 8 Entwürfe**, insgesamt **136 Profile**. Der Katalog umfasste nach dem Abschluss am 5. Oktober **129 öffentliche Profile und keine Entwürfe**. Zugehörige Cache-/Kartenmetadaten werden entfernt; Entfernungsmarker schützen vor erneutem Import. Die früheren Prüfergebnisse und ihre damaligen Zahlen bleiben als Historie erhalten.
 
-## Aktivierung im bestehenden Google-Cloud-Projekt Riparim
+## Konfiguration im bestehenden Google-Cloud-Projekt Riparim
 
-1. Maps JavaScript API, Places API (New) und Places UI Kit API aktivieren. Das bestehende Abrechnungskonto verwenden.
-2. Einen Browser-Schlüssel auf die HTTP-Referrer `https://riparim.com/*` und den bestätigten generierten Site-Host beschränken. Nur Maps JavaScript API, Places API (New) und Places UI Kit API zulassen. Keine allgemeinen Wildcard-Domains freigeben.
-3. Einen separaten Server-Schlüssel erstellen, nur für Places API (New). Dieser Schlüssel bleibt ausschließlich im Server-Runtime-Secret.
-4. `GOOGLE_MAPS_BROWSER_API_KEY` und `GOOGLE_PLACES_SERVER_API_KEY` als Sites-Runtime-Werte speichern und eine neue Version veröffentlichen. Keine Schlüssel in Git oder `.openai/hosting.json` aufnehmen.
-5. Für browserseitige Places-Aufrufe und das UI Kit im Cloud-Projekt geeignete niedrige Quoten setzen und die Abrechnung beobachten. Ein Abrechnungsbudget allein ist kein harter Ausgabenstopp. Die Anwendung begrenzt serverseitige Identitätssuchen unabhängig davon auf 100/Tag.
-6. Mehrere reale Profile prüfen und Zuordnungsabdeckung feststellen. Fehler oder mehrdeutige Treffer bleiben als Maps-Link verfügbar und werden nicht als fehlende Google-Bewertungen ausgegeben.
+1. Maps JavaScript API, Places API (New) und Places UI Kit API sind bereits aktiviert. Vor Änderungen an vorhandener Nutzung gelten die unten dokumentierten Billing-/Freimengen-/Quotenprüfungen; keine zusätzlichen Dienste oder kostenpflichtigen Tarife aktivieren.
+2. Den Produktions-Browser-Key nur für tatsächlich benötigte HTTPS-Referrer und die drei genannten APIs freigeben. Maßgeblich ist die belegte produktive Runtime-Zuordnung; ein alter Sites-Host oder lokale Fixtures begründen keine Freigabe des Produktionskeys.
+3. Der separate private Server-Key darf ausschließlich Places API (New) verwenden und bleibt im geschützten Server-Runtime-Secret. Ohne feste belegte Cloudflare-Ausgangs-IP wird keine ungeprüfte IP-Beschränkung eingerichtet.
+4. `GOOGLE_MAPS_BROWSER_API_KEY` und `GOOGLE_PLACES_SERVER_API_KEY` gehören ausschließlich in die geschützte Laufzeitkonfiguration. App-Veröffentlichungen erfolgen über den geprüften Main-Release gemäß `docs/releases.md`; keine Schlüssel in Git oder `.openai/hosting.json`, keine manuelle Feature-Branch-Veröffentlichung.
+5. Tatsächlich unterstützte Quoten und vorhandene Billing-Warnungen prüfen. Ein Benachrichtigungsbudget stoppt keine Nutzung; das App-Limit von 100/Tag begrenzt ausschließlich serverseitige Identitätsabfragen. Wirksame Istwerte, Solländerungen und Rückweg stehen im Betriebsrunbook unten.
+6. Live-Validierung nur als begrenzter Schritt mit bestätigtem kostenlosem Restkontingent. Ohne dieses Kontingent genügen isolierte Ausfall-/Anfragefixtures und die lesende Providerkonfiguration; direkte Maps-Links bleiben verfügbar und Fehler werden nicht als fehlende Bewertungen ausgegeben.
 
 ## Vorhandene Google-Maps-Links als Identität
 
@@ -186,12 +186,138 @@ keine echte Google-Verbindung. Gezählt werden App-Aufrufverträge und gemountet
 Bildressourcen, keine gemessenen Produktionskosten. Der aktuelle Standard-
 UI-Kit-SKU-Vertrag (Essentials, SKU `0678-4F72-DA7C`) zählt Requests der Standard-
 Place-Details-Elemente unabhängig von den ausgewählten Feldern; tatsächliche
-Kontingente, anwendbarer Tarif und Rechnung bleiben Aufgabe von #96.
+Kontingente, anwendbarer Kontotarif und Billing-Belege stehen im folgenden
+Betriebsrunbook und datierten Prüfbericht von #96.
 
 Bestätigte WhatsApp-Kontakte erhalten eine mobile Aktion. Marken- und Leistungshervorhebungen beziehen sich nur auf bereits belegte Profilangaben. Private Fahrzeugdetails stammen ausschließlich aus der aktiven Suche im Arbeitsspeicher; sie werden nicht in Links oder Google-Anfragen übernommen.
 
+## Betrieb: Kosten und Ausfallweg (#96)
+
+Der [datierte Prüfbericht vom 11.10.2026](google-places-cost-audit-2026-10-11.md)
+enthält den reproduzierten Vorher-/Nachher-Abrufvergleich, alle neun tatsächlich
+beobachteten SKU-Mengen/Kosten, die Schweizer Konto-Preisstufen in CHF,
+Key-/Quoten-Vorherwerte und die Grenzen der Messung. Der Projekt-Billing-Bericht
+weist **2,73 CHF** aus, davon Enterprise Details mit **1164 Ereignissen** bei einer
+freien Kontostufe bis 1000. #94/#95 sind lokale Anfrageoptimierungen; ihr
+Produktionskosten-Nachherwert ist wegen Billing-Verzug noch nicht belegt.
+
+### Aktueller Kontrollstand
+
+Manuell gespeicherte Tagesgrenzen; die Minutenlimits bleiben unverändert:
+
+| Dienst / Methode | Tageslimit | Minutenlimit | Wirkung |
+| --- | ---: | ---: | --- |
+| Places (New): GetPlaceRequest | **0** | 600 | REST-Foto-Metadaten und ergänzende Land-Details gesperrt; SDK-Wirkung siehe unten |
+| Places (New): SearchTextRequest | **20** | 600 | Identitätssuche, zusätzlich App-Limit 100/UTC-Tag |
+| Places (New): PhotoMedia | **20** | 600 | einzelne Vorschau-/Großbildabrufe |
+| UI-Kit Standard Query | **30** | 6000 | gemeinsame Profilangaben inklusive Rezensionen |
+| UI-Kit Advanced | **0** | Unbegrenzt | von der aktuellen App ungenutzt |
+| UI-Kit Sessions | **0** | 6000 | von der aktuellen App ungenutzt |
+| Maps JavaScript: Map loads | **30** | 30000, pro Nutzer 300 | aktuelle App nutzt direkte Maps-/Routenlinks |
+
+Frische persistierte GCP-Readbacks am **11.10.2026 UTC** bestätigen Maps um
+**01:07:21**, UI-Kit um **01:07:43** und Places (New) um **01:10:06** mit diesen
+Werten, jeweils nach angekündigter Propagationszeit. Diese Konfigurationsnachweise
+sind keine Live-SDK-Probe oder globale Geldobergrenze. Andere Billing-Verbraucher
+und SKU-/Quota-Zuordnung bleiben zu prüfen; Minutenquoten sind kein Monatsbudget.
+Die GetPlace-Sperre ist auch für SDK-Einzelratings vorgesehen, deren tatsächliche
+Enforcement-Zuordnung wurde ohne potenziell kostenpflichtige Live-Probe nicht
+bestätigt. Standard-UI-Kit nutzt eigene Quoten: Seine zugrunde liegenden Places-/
+Geocoding-Anfragen verbrauchen laut amtlicher Dokumentation keine entsprechenden
+Projektquoten. GetPlace 0 ist deshalb keine belegte Abschaltung des UI-Kit oder
+eine nachgewiesene Gesamtkostensperre.
+
+Der produktive Browser-Key ist per ausschließlich internem Hashvergleich dem
+GCP-Browser-Key zugeordnet. Nach Entfernen der sechs Loopback-/Legacy-Referrer
+war nur `https://riparim.com/*` erlaubt. Wegen der ungeprüften SDK-Quotenzuordnung
+und des Auftrags ohne Zusatzkosten ist er nun **vorläufig pausiert**: Der einzige
+Website-Referrer ist **`https://riparim-google-paused.invalid/*`**, weiterhin nur
+Maps JavaScript API, Places API (New) und Places UI Kit API erlaubt. Speichern
+am **11.10.2026 01:11:45 UTC**, frische Navigation von der Credentials-Liste und
+persistierter Readback um **01:12:07 UTC** bestätigen diesen Zustand. GCP nennt
+bis zu fünf Minuten Propagation; eine Kontrolle ab 01:16:45 UTC ist vom
+Konfigurationsbeleg getrennt zu bewerten. Es wurde kein Live-SDK-Sperrnachweis
+durch eine potenziell kostenpflichtige Probe erhoben.
+
+Damit wird der reguläre Produktionsbrowserpfad unabhängig von der unklaren
+GetPlace-SDK-Zuordnung gesperrt: Google-Sterne, Öffnungszeiten, Rezensionen,
+Fotos und Widgets sind vorläufig nicht verfügbar. Eigene Profile/Bewertungen
+und direkte Maps-/Routenlinks bleiben verfügbar. Die Runtime-Schlüssel sind
+unverändert, `/api/google-places` bleibt `enabled:true`; dies ist eine Provider-
+Referrerpause, keine Runtime-Konfigabschaltung. Bereits offene Anzeigen und
+Billing-Nachlauf bleiben Grenzen; eine Referrerregel ist keine globale Geldgrenze.
+Der getrennte Server-Key erlaubt nur Places API (New), ohne unbelegte feste
+Cloudflare-Ausgangs-IP; sein Wert bleibt ausschließlich im Runtime-Secret.
+Budgetliste leer: keine Budgetwarnung/automatische Maps-Kostensperre. Die aktuell
+angebotene GCP-Ausgabenobergrenze unterstützt ausschließlich Cloud Run,
+Cloud Run Functions, Gemini API und Vertex AI; Maps/Places waren nicht auswählbar.
+Der nur inspizierte Entwurf wurde abgebrochen. Keine Budget-/Alert-Neuanlage,
+automatischen E-Mails oder neuen Benachrichtigungsdienste.
+
+### Prüfschritte und Rückweg
+
+1. **Projekt-/Billing-Verantwortlicher:** Billing-Berichte nach Projekt, Datum und
+   SKU filtern; Brutto-Nutzung, Credits/Rabatte und Kosten trennen. Konto-Schweiz/CHF,
+   Tarifstufen, Zeitzone und Reporting-Verzug mitprüfen. API-Dashboardzahlen und
+   fehlende SKU-Zeilen sind kein Nullkosten-/Restkontingent-Nachweis. Nach Release
+   denselben Traffic/Zeitraum vergleichen; keine zusätzliche Backend-Telemetrie nötig.
+2. **Projekt-/Quota-Verantwortlicher:** Im bestehenden Projekt `riparim-510521`
+   wirksame Methoden-/Tages-/Minutenquoten und API-/Referrer-Beschränkungen lesen.
+   UI-Kit über IAM Quotas mit `placewidgets.googleapis.com` prüfen. Das App-Limit
+   **100/UTC-Tag** betrifft nur Identitätssuche und ergänzende Land-Details;
+   Browserratings, Widgets und Bilder fallen nicht darunter. Vor einer Änderung
+   alten Wert, Soll, kostenlose Restmenge und Auswirkungen festhalten. Das
+   [konservative Restmengenmodell](google-places-cost-audit-2026-10-11.md#begrenzungsmodell-und-offene-kontrollen)
+   ist keine Rechnung oder Gesamtgeldgrenze. Der Warnweg ist **tägliche manuelle
+   Billingprüfung** gegenüber zuletzt belegten 2,73 CHF und den relevanten SKUs.
+   Manuelle Warnschwellen: **50/80/100 %** der bestätigten freien SKU-Menge;
+   Enterprise Details/Text Search Enterprise/Fotos jeweils **500/800/1000**,
+   Standard-UI-Kit **5000/8000/10000**. Bei 80 % Restmenge/Verzug und Tagesgrenzen
+   prüfen, bei 100 % den betreffenden API-Pfad pausieren. Enterprise Details
+   liegt mit 1164 bereits darüber; die Browserpause ist umgesetzt. Diese
+   Beobachtungsgrenzen sind keine eingeschalteten Budgetalarme oder Geldbudgets.
+   Ein Anstieg erfordert Prüfung von Ereignisdatum/Reporting-Verzug sowie Quoten/
+   fremden Verbrauchern und gegebenenfalls die geprüfte Abschaltung. Ein
+   Benachrichtigungsbudget allein stoppt keine Maps-Nutzung; ohne beauftragten
+   Benachrichtigungsweg werden keine automatischen Warnungen eingerichtet.
+3. **Runtime-/Release-Verantwortlicher:** Für die bestehende Konfigabschaltung
+   `GOOGLE_PLACES_SERVER_API_KEY` oder `GOOGLE_MAPS_BROWSER_API_KEY` in der geschützten
+   Runtime leer setzen/entfernen; die Google-Routen liefern `enabled:false`.
+   Vorher Wiederherstellung im vorhandenen geschützten Secret-Weg sichern, nichts
+   in Git/Logs schreiben. Dies deaktiviert auch neue Identitätsprüfungen für
+   Veröffentlichungen. Browser behalten Konfiguration/SDK bis zum Neuladen;
+   die Runtime-Abschaltung beendet keine bereits offenen SDK-Instanzen.
+4. **Wiederherstellung:** Die Browserpause nur manuell auf exakt
+   `https://riparim.com/*` aufheben: zuvor kostenlose Restmenge und belastbaren
+   SDK-Quotenvertrag oder einen anderen bestätigten kostenlosen Anzeigeweg
+   nachweisen. Die sechs alten Dev-/Legacy-Referrer bleiben entfernt. Keine
+   automatische Aufhebung. Nach erneuter Konto-/Freimengen-/Propagationsprüfung
+   gegebenenfalls ursprüngliches Secret bzw. gezielt geprüfte Quoten zurücksetzen;
+   hohe Vorherlimits aus dem Prüfbericht sind kein pauschaler Rücksetzauftrag.
+   Die GetPlace-Sperre wird auch beim Monatswechsel nicht automatisch aufgehoben.
+   Nach SDK-Autorisierungsfehlern ist nach Wiederfreigabe bewusstes Neuladen
+   erforderlich; die App startet keine automatische Retryschleife. Neue
+   Browserinstanz: zuerst eigenes Verzeichnis/eigene Bewertung und direkte
+   Maps-/Routenlinks ohne Providerprobe prüfen. Nur mit bestätigter kostenloser
+   Restmenge einen sichtbaren Bereich als begrenzte Live-Validierung öffnen.
+   App-Veröffentlichungen nur als geprüfter Main-Release gemäß `docs/releases.md`.
+
+Google-Ausfälle dürfen eigene Profile/Bewertungen und bestätigte Maps-/Routenlinks
+nicht unterbrechen. Die App zeigt Ladefehler statt null Google-Bewertungen und
+startet im selben Bereich keine automatische Retryschleife; neue Navigation oder
+explizite Aktualisierung kann neu anfordern. Die isolierten DE/SQ/EN-Fixtures
+prüfen `enabled:false`, HTTP 429, Identity-/Foto-Timeouts und Widget-Timeouts ohne
+echte Providerverbindungen. API-Recherche nur mit belegtem kostenlosen
+Restkontingent, sonst offizielle Maps-Oberfläche oder Rückstellung; keine Betriebe
+kontaktieren. Dauerhaft bleiben eigene/unabhängig belegte Geschäftsdaten, Place IDs
+und Prüfmetadaten; kein neuer allgemeiner API-Contentcache/Bulkimport für Sterne,
+Rezensionen, Öffnungszeiten oder Fotos. Vorhandene historische Momentaufnahmen
+bleiben unverändert und werden nicht als Live-Google-Werte ausgegeben.
+
 ## Primäre Dokumentation
 
+- https://developers.google.com/maps/documentation/javascript/usage-and-billing
+- https://developers.google.com/maps/documentation/places/web-service/usage-and-billing
 - https://developers.google.com/maps/documentation/javascript/places-ui-kit/get-started
 - https://developers.google.com/maps/documentation/javascript/places-ui-kit/place-details
 - https://developers.google.com/maps/documentation/javascript/reference/place
