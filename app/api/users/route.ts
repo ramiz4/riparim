@@ -2,7 +2,7 @@ import {ValidationError} from "@/lib/validation-error";
 import {getAdminUser} from "@/app/auth";
 import {getAuthAdmin} from "@/lib/auth/admin";
 import {blockAccount} from "@/lib/auth/account-status";
-import {providerAccountId} from "@/app/auth";
+import {resolveSupabaseAccount,registerHistoricalDeletedAccounts} from "@/lib/auth/identities";
 import {moderatorEmail,storage} from "@/db/storage";
 import {json,readJson,sameOrigin} from "@/lib/http";
 import {userView,validUserId,parseUserFields,providerFailure,notConfigured} from "@/lib/admin-users";
@@ -16,9 +16,9 @@ export async function GET(request:Request){
   const auth=await getAuthAdmin();if(!auth)return json({users:[],page,perPage,hasMore:false,configured:false});
   const {data,error}=await auth.client.auth.admin.listUsers({page,perPage});if(error)return providerFailure(error);
   const users=await Promise.all(data.users.map(user=>userView(user,admin,auth.projectUrl)));
-  const prefix=providerAccountId(auth.projectUrl,"");
-  const pending=await storage().db.prepare("SELECT s.account_id FROM auth_account_status s WHERE s.status='deleted' AND substr(s.account_id,1,?)=? AND (EXISTS (SELECT 1 FROM auth_links WHERE account_id=s.account_id) OR EXISTS (SELECT 1 FROM auth_sessions WHERE account_id=s.account_id) OR EXISTS (SELECT 1 FROM auth_account_deletions WHERE account_id=s.account_id) OR EXISTS (SELECT 1 FROM evidence_uploads WHERE owner=s.account_id)) ORDER BY s.account_id LIMIT 100").bind(prefix.length,prefix).all<{account_id:string}>();
-  const pendingDeletions=pending.results.map(row=>({id:row.account_id.slice(prefix.length),email:"",name:`Begonnene Löschung (${row.account_id.slice(prefix.length)})`,role:"user",active:false,confirmed:false,createdAt:null,lastSignInAt:null,providers:[],protected:row.account_id===admin.userId})).filter(row=>validUserId(row.id));
+  await registerHistoricalDeletedAccounts(auth.projectUrl);
+  const pending=await storage().db.prepare("SELECT s.account_id,i.subject FROM auth_account_status s JOIN auth_identities i ON i.account_id=s.account_id AND i.provider='supabase' AND i.issuer=? WHERE s.status='deleted' AND (EXISTS (SELECT 1 FROM auth_links WHERE account_id=s.account_id) OR EXISTS (SELECT 1 FROM auth_sessions WHERE account_id=s.account_id) OR EXISTS (SELECT 1 FROM auth_account_deletions WHERE account_id=s.account_id) OR EXISTS (SELECT 1 FROM evidence_uploads WHERE owner=s.account_id)) ORDER BY s.account_id LIMIT 100").bind(new URL(auth.projectUrl).origin).all<{account_id:string;subject:string}>();
+  const pendingDeletions=pending.results.map(row=>({id:row.subject,email:"",name:`Begonnene Löschung (${row.subject})`,role:"user",active:false,confirmed:false,createdAt:null,lastSignInAt:null,providers:[],protected:row.account_id===admin.userId})).filter(row=>validUserId(row.id));
   return json({users,pendingDeletions,page,perPage,hasMore:data.total>0?page*perPage<data.total:data.users.length===perPage,configured:true});
  }catch{return providerFailure(null);}
 }
@@ -32,7 +32,7 @@ export async function POST(request:Request){
   const auth=await getAuthAdmin();if(!auth)return notConfigured();
   const {data,error}=await auth.client.auth.admin.createUser({email:fields.email,password:fields.password,user_metadata:{full_name:fields.name},email_confirm:true,...(fields.active===false?{ban_duration:"876000h"}:{})});
   if(error||!data.user)return providerFailure(error);
-  if(fields.active===false)await blockAccount(providerAccountId(auth.projectUrl,data.user.id),"inactive");
+  if(fields.active===false)await blockAccount(await resolveSupabaseAccount(auth.projectUrl,data.user.id),"inactive");
   return json({user:await userView(data.user,admin,auth.projectUrl),messageCode:"saved"},201);
  }catch{return providerFailure(null);}
 }

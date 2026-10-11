@@ -1,12 +1,13 @@
 import {ValidationError} from "@/lib/validation-error";
 import {isLocale} from "@/lib/i18n/locale";
-import {getAppUser,providerAccountId} from "@/app/auth";
+import {getAppUser} from "@/app/auth";
+import {resolveSupabaseAccount} from "@/lib/auth/identities";
 import {authClient} from "@/lib/auth/client";
 import {getAuthConfig} from "@/lib/auth/config";
 import {getAuthAdmin} from "@/lib/auth/admin";
 import {accountBlocked} from "@/lib/auth/account-status";
 import {isBootstrapAccount} from "@/lib/auth/roles";
-import {clearDeletionGrant,deletionProtected,issueDeletionGrant,readDeletionGrant,startDeletion} from "@/lib/auth/deletion-grant";
+import {clearDeletionGrant,deletionProtected,issueDeletionGrant,matchesDeletionGrant,readDeletionGrant,startDeletion} from "@/lib/auth/deletion-grant";
 import {deleteAccount} from "@/lib/auth/delete-account";
 import {verifyPassword} from "@/lib/auth/password-proof";
 import {rateLimit} from "@/lib/auth/rate-limit";
@@ -20,7 +21,7 @@ async function currentAccount(){
  const user=await getAppUser(),config=await getAuthConfig();
  if(!user||!config?.enabled||!["Google","E-Mail"].includes(user.provider))return null;
  const client=await authClient(config),{data,error}=await client.auth.getUser();
- if(error||!data.user?.email_confirmed_at||user.userId!==providerAccountId(config.projectUrl,data.user.id))return null;
+ if(error||!data.user?.email_confirmed_at||user.userId!==await resolveSupabaseAccount(config.projectUrl,data.user.id))return null;
  return {user,config,client,providerUser:data.user};
 }
 async function input(request:Request){
@@ -30,7 +31,7 @@ async function input(request:Request){
 export async function GET(){
  try{
   const current=await currentAccount(),grant=await readDeletionGrant(),config=await getAuthConfig();
-  const validGrant=grant&&config?.enabled&&grant.account_id===providerAccountId(config.projectUrl,grant.user_id)?grant:null;
+  const validGrant=grant&&config?.enabled&&await matchesDeletionGrant(grant,config.projectUrl)?grant:null;
   if(!current||validGrant?.started)return json({account:null,deletionReady:false,deletionStarted:!!validGrant?.started});
   return json({account:{email:current.user.email,name:current.user.displayName,provider:current.user.provider,protected:await deletionProtected(current.user)},deletionReady:!!validGrant&&validGrant.account_id===current.user.userId,deletionStarted:!!validGrant?.started});
  }catch(e){logFailure("read",e);return unavailable();}
@@ -67,7 +68,7 @@ export async function DELETE(request:Request){
  if(Object.keys(body).length!==1||body.confirmation!=="KONTO LÖSCHEN")return json({error:"Bitte bestätige die Kontolöschung ausdrücklich.",errorCode:"deletion_confirmation_required"},400);
  try{
   const grant=await readDeletionGrant(),config=await getAuthConfig();
-  if(!grant||!config?.enabled||grant.account_id!==providerAccountId(config.projectUrl,grant.user_id))return json({error:"Bitte bestätige deine Identität erneut.",errorCode:"reauthentication_required"},401);
+  if(!grant||!config?.enabled||!await matchesDeletionGrant(grant,config.projectUrl))return json({error:"Bitte bestätige deine Identität erneut.",errorCode:"reauthentication_required"},401);
   if(!grant.started){
    const current=await currentAccount();
    if(!current||current.user.userId!==grant.account_id)return json({error:"Bitte bestätige deine Identität erneut.",errorCode:"reauthentication_required"},401);

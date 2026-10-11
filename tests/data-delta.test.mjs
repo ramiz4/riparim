@@ -69,7 +69,7 @@ test("revocations, moderation changes and source deletions never resurrect rows"
 });
 test("new rows copy only exact source identities and grant/deletion state", () => {
   const state = fixture();
-  rows(state.currentSource, "auth_account_deletions").push({ account_id: "supabase:fixture:owner", user_id: "owner", token_hash: "fixture-token-hash", expires_at: 99999999999, started: 1 });
+  rows(state.currentSource, "auth_account_deletions").push({ account_id: "supabase:fixture:owner", user_id: "owner", token_hash: "fixture-token-hash", expires_at: 99999999999, started: 1, identity_issuer: null });
   const result = plan(state);
   assert.equal(result.statements.length, 1); assert.equal(result.statements[0].operation, "insert");
   assert.equal(result.statements[0].after.started, 1);

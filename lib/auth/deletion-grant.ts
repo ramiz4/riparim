@@ -1,11 +1,17 @@
 import {cookies,headers} from "next/headers";
 import {storage} from "@/db/storage";
-import {providerAccountId,type AppUser} from "@/app/auth";
+import type {AppUser} from "@/app/auth";
+import {resolveSupabaseAccount,supabaseIdentity,legacyIdentityMatches} from "@/lib/auth/identities";
 import {isBootstrapAccount,hasAdminRole} from "@/lib/auth/roles";
 
 const cookieName="riparim-account-deletion";
 const retrySeconds=7*86400;
-export type DeletionGrant={account_id:string;user_id:string;token_hash:string;expires_at:number;started:number};
+export type DeletionGrant={account_id:string;user_id:string;token_hash:string;expires_at:number;started:number;identity_issuer:string|null};
+export async function matchesDeletionGrant(grant:DeletionGrant,projectUrl:string){
+ const identity=supabaseIdentity(projectUrl,grant.user_id);
+ if(grant.identity_issuer===null)return legacyIdentityMatches(grant.account_id,identity);
+ return grant.identity_issuer===identity.issuer&&grant.account_id===await resolveSupabaseAccount(projectUrl,grant.user_id);
+}
 async function digest(token:string){
  const hash=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(token));
  return Array.from(new Uint8Array(hash),byte=>byte.toString(16).padStart(2,"0")).join("");
@@ -19,10 +25,10 @@ export async function deletionProtected(user:AppUser){
  return !!await storage().db.prepare("SELECT account_id FROM auth_links WHERE account_id=? AND owner_admin=1").bind(user.userId).first();
 }
 export async function issueDeletionGrant(user:AppUser,projectUrl:string,id:string){
- if(user.userId!==providerAccountId(projectUrl,id)||await deletionProtected(user))throw Error("DELETION_FORBIDDEN");
+ if(user.userId!==await resolveSupabaseAccount(projectUrl,id)||await deletionProtected(user))throw Error("DELETION_FORBIDDEN");
  const token=crypto.randomUUID()+crypto.randomUUID(),hash=await digest(token),db=storage().db;
  await db.prepare("DELETE FROM auth_account_deletions WHERE expires_at<?").bind(Date.now()).run();
- const row=await db.prepare("INSERT INTO auth_account_deletions (account_id,user_id,token_hash,expires_at,started) VALUES (?,?,?,?,0) ON CONFLICT(account_id) DO UPDATE SET token_hash=excluded.token_hash,expires_at=excluded.expires_at WHERE auth_account_deletions.started=0 RETURNING account_id").bind(user.userId,id,hash,Date.now()+600000).first();
+ const row=await db.prepare("INSERT INTO auth_account_deletions (account_id,user_id,token_hash,expires_at,started,identity_issuer) VALUES (?,?,?,?,0,?) ON CONFLICT(account_id) DO UPDATE SET token_hash=excluded.token_hash,expires_at=excluded.expires_at,user_id=excluded.user_id,identity_issuer=excluded.identity_issuer WHERE auth_account_deletions.started=0 RETURNING account_id").bind(user.userId,id,hash,Date.now()+600000,new URL(projectUrl).origin).first();
  if(!row)throw Error("DELETION_STARTED");
  await setCookie(token,retrySeconds);
 }

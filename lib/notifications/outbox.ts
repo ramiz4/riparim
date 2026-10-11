@@ -2,7 +2,7 @@ import {z} from "zod";
 import {storage} from "@/db/storage";
 import {getAuthAdmin} from "@/lib/auth/admin";
 import {getAuthConfig} from "@/lib/auth/config";
-import {providerAccountId} from "@/app/auth";
+import {accountIdentity} from "@/lib/auth/identities";
 import {accountBlocked,providerBlocked} from "@/lib/auth/account-status";
 import {callbackLocale} from "@/lib/auth/locale";
 import {validUserId} from "@/lib/admin-users";
@@ -17,14 +17,10 @@ async function keyHash(value:string){return Array.from(new Uint8Array(await cryp
 async function recipient(owner:string){
  const config=await getAuthConfig(),auth=await getAuthAdmin();
  if(!config?.enabled||!auth||auth.projectUrl!==config.projectUrl)throw new DeliveryError("auth_configuration_missing",false);
- const prefix=providerAccountId(config.projectUrl,"");let account=owner;
- if(!account.startsWith(prefix)){
-  const link=await storage().db.prepare("SELECT account_id FROM auth_links WHERE legacy_owner=?").bind(owner).first<{account_id:string}>();
-  account=link?.account_id??"";
- }
- if(!account.startsWith(prefix)||!validUserId(account.slice(prefix.length)))throw new DeliveryError("no_verified_contact",false);
- if(await accountBlocked(account)||await accountBlocked(owner))throw new DeliveryError("account_blocked",false);
- const id=account.slice(prefix.length),result=await auth.client.auth.admin.getUserById(id),user=result.data.user;
+ const identity=await accountIdentity(owner,"supabase",config.projectUrl);
+ if(!identity||!validUserId(identity.subject))throw new DeliveryError("no_verified_contact",false);
+ if(await accountBlocked(owner))throw new DeliveryError("account_blocked",false);
+ const id=identity.subject,result=await auth.client.auth.admin.getUserById(id),user=result.data.user;
  if(result.error){if(result.error.status===401||result.error.status===403)throw new DeliveryError("auth_configuration_missing",false);if(result.error.status===404)throw new DeliveryError("no_verified_contact",false);throw new DeliveryError("provider_unavailable",true);}
  if(!user||user.id!==id||!user.email_confirmed_at||!user.email||!deliveryPayloadSchema.shape.to.element.safeParse(user.email).success||user.email.length>254)throw new DeliveryError("no_verified_contact",false);
  if(providerBlocked(user))throw new DeliveryError("account_blocked",false);

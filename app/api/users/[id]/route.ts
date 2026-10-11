@@ -1,5 +1,6 @@
 import {ValidationError} from "@/lib/validation-error";
-import {getAdminUser,providerAccountId} from "@/app/auth";
+import {getAdminUser} from "@/app/auth";
+import {resolveSupabaseAccount} from "@/lib/auth/identities";
 import {getAuthAdmin} from "@/lib/auth/admin";
 import {blockAccount} from "@/lib/auth/account-status";
 import {changeAccountRole} from "@/lib/auth/roles";
@@ -19,8 +20,8 @@ export async function PATCH(request:Request,{params}:Context){
   let fields;try{fields=parseUserFields(await readJson(request,8192));}catch(e){return json({error:e instanceof ValidationError?e.message:"Bitte prüfe die Eingaben.",errorCode:e instanceof ValidationError?e.code:"invalid_request"},400);}
   const auth=await getAuthAdmin();if(!auth)return notConfigured();
   const {data:current,error:lookupError}=await auth.client.auth.admin.getUserById(id);if(lookupError||!current.user)return providerFailure(lookupError);
-  const user=current.user,accountId=providerAccountId(auth.projectUrl,id),db=storage().db;
-  if(protectedUser(user,admin,auth.projectUrl)&&("role" in fields||"active" in fields||fields.email!==undefined&&fields.email!==user.email?.toLowerCase()))return json({error:"Dein eigener und der ursprüngliche Verwaltungszugang sind geschützt: Rolle, Kontostatus und E-Mail-Adresse können nicht geändert werden.",errorCode:"user_protected"},403);
+  const user=current.user,accountId=await resolveSupabaseAccount(auth.projectUrl,id),db=storage().db;
+  if(await protectedUser(user,admin,auth.projectUrl)&&("role" in fields||"active" in fields||fields.email!==undefined&&fields.email!==user.email?.toLowerCase()))return json({error:"Dein eigener und der ursprüngliche Verwaltungszugang sind geschützt: Rolle, Kontostatus und E-Mail-Adresse können nicht geändert werden.",errorCode:"user_protected"},403);
   if(fields.email===moderatorEmail()&&fields.email!==user.email?.toLowerCase())return json({error:"Diese E-Mail-Adresse ist für die Verwaltung reserviert.",errorCode:"user_email_reserved"},403);
   const status=await db.prepare("SELECT status FROM auth_account_status WHERE account_id=?").bind(accountId).first<{status:string}>();
   if(status?.status==="deleted")return json({error:"Die Löschung dieses Kontos wurde bereits begonnen. Bitte schließe sie über Löschen ab.",errorCode:"user_deletion_started"},409);
@@ -52,12 +53,12 @@ export async function DELETE(request:Request,{params}:Context){
   const auth=await getAuthAdmin();if(!auth)return notConfigured();
   const {data,error}=await auth.client.auth.admin.getUserById(id);
   if(error?.status===404||error?.code==="user_not_found"){
-   const accountId=providerAccountId(auth.projectUrl,id);
+   const accountId=await resolveSupabaseAccount(auth.projectUrl,id);
    if(accountId===admin.userId)return json({error:"Das Administratorkonto kann nicht gelöscht werden.",errorCode:"user_delete_protected"},403);
    const tombstone=await storage().db.prepare("SELECT account_id FROM auth_account_status WHERE account_id=? AND status='deleted'").bind(accountId).first();
    if(!tombstone)return providerFailure(error);
   }else if(error||!data.user)return providerFailure(error);
-  if(data.user&&protectedUser(data.user,admin,auth.projectUrl))return json({error:"Das Administratorkonto kann nicht gelöscht werden.",errorCode:"user_delete_protected"},403);
+  if(data.user&&await protectedUser(data.user,admin,auth.projectUrl))return json({error:"Das Administratorkonto kann nicht gelöscht werden.",errorCode:"user_delete_protected"},403);
   await deleteAccount(auth,id);
   return json({ok:true,messageCode:"saved"});
  }catch{return json({error:"Der Benutzer konnte nicht vollständig gelöscht werden. Eine begonnene Löschung hält das Konto gesperrt. Bitte versuche es erneut.",errorCode:"user_delete_incomplete"},503);}

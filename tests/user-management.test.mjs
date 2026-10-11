@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {mkdir,readFile,readdir,writeFile} from 'node:fs/promises';
 import {createRequire} from 'node:module';
 import {DatabaseSync} from 'node:sqlite';
 
@@ -28,7 +28,7 @@ for(const [kind,entryPoints] of [['routes',{collection:'app/api/users/route.ts',
 
 const db=new DatabaseSync(':memory:');
 // Include the visit table because account deletion must remove owned visits and files.
-for(const name of ['0000_handy_black_queen','0001_polite_killmonger','0002_exotic_slayback','0003_magenta_boom_boom','0004_ambiguous_morbius','0007_pink_tyrannus','0008_stormy_blazing_skull','0009_fine_sister_grimm','0010_handy_luminals','0011_funny_echo','0012_unique_wolfsbane'])db.exec(await readFile(`drizzle/${name}.sql`,'utf8'));
+for(const file of (await readdir('drizzle')).filter(file=>file.endsWith('.sql')).sort())db.exec(await readFile('drizzle/'+file,'utf8'));
 let failDatabase=false;
 let beforeRun=null;
 let beforeFirst=null;
