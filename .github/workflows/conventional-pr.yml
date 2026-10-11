@@ -23,8 +23,9 @@ jobs:
         with:
           node-version: "24"
           cache: npm
+          cache-dependency-path: .github/tools/title/package-lock.json
       - name: Install locked dependencies
-        run: npm run install:ci
+        run: npm run install:tool -- title
       - name: Validate squash commit subject
         env:
           PR_TITLE: ${{ github.event.pull_request.title }}

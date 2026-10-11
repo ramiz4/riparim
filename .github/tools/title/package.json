@@ -1,0 +1,9 @@
+{
+  "name": "riparim-ci-title",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@commitlint/cli": "21.2.3",
+    "@commitlint/config-conventional": "21.2.3"
+  }
+}
