@@ -24,3 +24,18 @@ for(const [variant,styles] of [['source',css],['production',production]]){
  }
 }
 console.log('Google review box: normal provider insets survive source and production CSS in both themes');
+
+const controls=await readFile(new URL('../app/form-controls.css',import.meta.url),'utf8');
+const compactControls=transform({filename:'form-controls.css',code:Buffer.from(controls),minify:true}).code.toString();
+for(const [variant,styles] of [['source',controls],['production',compactControls]]){
+ const dom=new JSDOM(`<style>${styles}</style><form class="journey-form combined-review-form"><fieldset class="review-section"><div class="form-grid"><label>Visit date<input type="date"></label><label>Vehicle<input></label></div></fieldset></form>`);
+ try{
+  const style=node=>dom.window.getComputedStyle(dom.window.document.querySelector(node));
+  assert.equal(parseFloat(style('fieldset').minWidth),0,`${variant}: fieldsets must shrink below their native min-content width`);
+  assert.equal(parseFloat(style('label').minWidth),0,`${variant}: date grid cells must shrink below their intrinsic width`);
+  assert.equal(parseFloat(style('input[type=date]').minWidth),0,`${variant}: native date inputs must be able to shrink`);
+  assert.equal(style('input[type=date]').maxWidth,'100%',`${variant}: native date inputs stay within their grid cell`);
+  assert.equal(style('input[type=date]').boxSizing,'border-box',`${variant}: date padding stays inside the available width`);
+ }finally{dom.window.close();}
+}
+console.log('Review date controls: source and production CSS constrain native fieldset, grid and input widths');

@@ -1,8 +1,9 @@
+import {localizeHref} from '../scripts/lib/locale.mjs';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {JSDOM,VirtualConsole} from 'jsdom';
-const dom=new JSDOM('<div id="root"></div>',{url:'https://riparim.example.test/en/verwaltung',pretendToBeVisual:true,virtualConsole:new VirtualConsole()});
+const dom=new JSDOM('<div id="root"></div>',{url:'https://riparim.example.test/en/admin',pretendToBeVisual:true,virtualConsole:new VirtualConsole()});
 for(const key of ['window','document','navigator','HTMLElement','HTMLButtonElement','HTMLFormElement','HTMLInputElement','HTMLTextAreaElement','HTMLSelectElement','DocumentFragment','Element','Node','NodeFilter','MutationObserver','CustomEvent','Event','MouseEvent','KeyboardEvent','getComputedStyle'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});
 globalThis.requestAnimationFrame=dom.window.requestAnimationFrame.bind(dom.window);globalThis.cancelAnimationFrame=dom.window.cancelAnimationFrame.bind(dom.window);globalThis.IS_REACT_ACT_ENVIRONMENT=true;globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
 const out='.test-runtime/management-localization-ui.mjs';
@@ -15,10 +16,10 @@ async function render(locale,Component,props={}){await act(async()=>root.unmount
 try{
  for(const [locale,name,labels] of [['de','Verwaltung',['Werkstätten','Bewertungen prüfen','Benutzer','Betriebe','Login & Registrierung']],['sq','Administrimi',['Serviset','Kontrollo vlerësimet','Përdoruesit','Bizneset','Hyrja & regjistrimi']],['en','Administration',['Workshops','Review moderation','Users','Businesses','Login & registration']]]){
   await render(locale,AdminNavigation,{active:'users'});
-  const nav=document.querySelector('nav'),links=[...nav.querySelectorAll('a')],prefix=locale==='de'?'':'/'+locale;
+  const nav=document.querySelector('nav'),links=[...nav.querySelectorAll('a')];
   check(nav.getAttribute('aria-label')===name,'Administration navigation has the active locale accessible name');
   assert.deepEqual(links.map(link=>link.textContent),labels);passed++;
-  assert.deepEqual(links.map(link=>link.getAttribute('href')),['/verwaltung','/verwaltung/bewertungen','/verwaltung/benutzer','/verwaltung/betriebe','/verwaltung/anmeldung'].map(path=>prefix+path));passed++;
+  assert.deepEqual(links.map(link=>link.getAttribute('href')),['/verwaltung','/verwaltung/bewertungen','/verwaltung/benutzer','/verwaltung/betriebe','/verwaltung/anmeldung'].map(path=>localizeHref(path,locale)));passed++;
   check(links[2].getAttribute('aria-current')==='page'&&links.filter(link=>link.hasAttribute('aria-current')).length===1,'The canonical active section is independent from display language');
  }
  const originalFetch=globalThis.fetch,requests=[],workshop={id:'fixture-workshop',name:'Original workshop',city:'Prishtina',address:'Original address',phone:'+38344123456',phoneNote:'Original note',whatsapp:'',services:['Inspektion & Wartung'],serviceDetails:['Original specific work'],description:'Original unchanged description of the workshop.',updatedAt:'2026-10-04T09:00:00Z'};

@@ -1,3 +1,4 @@
+import {localizeHref} from '../scripts/lib/locale.mjs';
 import assert from 'node:assert/strict';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {createRequire} from 'node:module';
@@ -49,7 +50,7 @@ const googleData=[record('Alpha missing',{rating:5,count:80}),record('Beta 4.8',
 check(matchCatalogue(googleData,defaults).map(w=>w.name).join('|')==='Alpha missing|Beta 4.8|Delta 4.9|Gamma 4.8','stored Google snapshots are excluded from sorting');
 check(matchCatalogue(googleData,{...defaults,sort:'rating'})[0].name==='Alpha missing','Riparim sorting remains independent of Google');
 check(!hasPublishedRatings(googleData.slice(1)),'stored snapshots cannot enable Riparim sorting');
-for(const locale of ['de','sq','en']){const legacy=parseCatalogueFilters(new URLSearchParams('sort=google&q=Auto&ort=prishtina&leistung=diagnose-elektronik&marke=volkswagen&sprache=de'),data);check(legacy.sort==='name'&&legacy.query==='Auto'&&legacy.city==='Prishtina'&&legacy.service==='Diagnose & Elektronik'&&legacy.brand==='Volkswagen'&&legacy.language==='Deutsch','legacy Google sort preserves every public filter');check(catalogueHref(legacy,locale).startsWith(locale==='de'?'/werkstaetten':`/${locale}/werkstaetten`)&&!catalogueHref(legacy,locale).includes('sort='),'legacy fallback preserves locale');}
+for(const locale of ['de','sq','en']){const legacy=parseCatalogueFilters(new URLSearchParams('sort=google&q=Auto&ort=prishtina&leistung=diagnose-elektronik&marke=volkswagen&sprache=de'),data);check(legacy.sort==='name'&&legacy.query==='Auto'&&legacy.city==='Prishtina'&&legacy.service==='Diagnose & Elektronik'&&legacy.brand==='Volkswagen'&&legacy.language==='Deutsch','legacy Google sort preserves every public filter');check(catalogueHref(legacy,locale).startsWith(localizeHref('/werkstaetten',locale))&&!catalogueHref(legacy,locale).includes('sort='),'legacy fallback preserves locale');}
 const distances=[record('Alpha unknown'),record('Beta far',{lat:42.7129,lng:21.1655}),record('Gamma near',{lat:42.6629,lng:21.1655})];
 check(matchCatalogue(distances,{...defaults,city:'Prishtina',sort:'distance'}).map(w=>w.name).join('|')==='Gamma near|Beta far|Alpha unknown','known distances sort near first and missing coordinates stay at the end');
 check(catalogueDistance(distances[0],'Prishtina')===null&&catalogueDistance(distances[2],'Prishtina')===0,'unknown coordinates are not represented as zero distance');

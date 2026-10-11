@@ -1,3 +1,4 @@
+import {localizeHref} from '../scripts/lib/locale.mjs';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {mkdir,writeFile} from 'node:fs/promises';
@@ -33,23 +34,23 @@ try{
   await React.act(async()=>root.render(h(api.I18nProvider,{locale,messages:api.getMessages(locale,['common'])},homePage)));
   assert(document.querySelector('h1').textContent.includes(t('public.heroCar'))&&!document.querySelector('[role="dialog"]'),'actual landing keeps public content without a general review dialog');
   await React.act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));window.history.replaceState({},'',locale==='de'?'/':`/${locale}`);
-  const returnTarget=`${locale==='de'?'':`/${locale}`}/werkstaetten?q=Auto+Mita`,documentProfile=await api.ProfilePage({params:Promise.resolve({locale,id:workshop.id}),searchParams:Promise.resolve({suche:returnTarget})}),documentHtml=renderToStaticMarkup(h(api.I18nProvider,{locale,messages:api.getMessages(locale,['common'])},documentProfile)),documentDom=new JSDOM(documentHtml);
+  const returnTarget=`${localizeHref('/werkstaetten',locale)}?q=Auto+Mita`,documentProfile=await api.ProfilePage({params:Promise.resolve({locale,id:workshop.id}),searchParams:Promise.resolve({suche:returnTarget})}),documentHtml=renderToStaticMarkup(h(api.I18nProvider,{locale,messages:api.getMessages(locale,['common'])},documentProfile)),documentDom=new JSDOM(documentHtml);
   try{assert.equal(documentDom.window.document.querySelector('.profile-back').getAttribute('href'),returnTarget,'actual profile document response must include validated name-search return before client hydration');}finally{documentDom.window.close();}
-  window.history.replaceState({},'',`${locale==='de'?'':`/${locale}`}/werkstatt/${workshop.id}?${new URLSearchParams({suche:returnTarget})}`);await React.act(async()=>root.render(h(api.I18nProvider,{locale,messages:api.getMessages(locale,['common'])},documentProfile)));assert.equal(document.querySelector('.profile-back').getAttribute('href'),returnTarget,'actual fully mounted document caller preserves name query after locale document navigation');
-  for(const source of ['https://outside.test/werkstaetten?q=secret','//outside.test/werkstaetten','/anmelden?weiter=private','/werkstaetten/../anmelden','/fr/werkstaetten?q=secret',`${locale==='de'?'':`/${locale}`}/werkstaetten?q=Auto+Mita&model=private&problem=private&access_token=secret`]){
+  window.history.replaceState({},'',`${localizeHref('/werkstatt/'+workshop.id,locale)}?${new URLSearchParams({suche:returnTarget})}`);await React.act(async()=>root.render(h(api.I18nProvider,{locale,messages:api.getMessages(locale,['common'])},documentProfile)));assert.equal(document.querySelector('.profile-back').getAttribute('href'),returnTarget,'actual fully mounted document caller preserves name query after locale document navigation');
+  for(const source of ['https://outside.test/werkstaetten?q=secret','//outside.test/werkstaetten','/anmelden?weiter=private','/werkstaetten/../anmelden','/fr/werkstaetten?q=secret',`${localizeHref('/werkstaetten',locale)}?q=Auto+Mita&model=private&problem=private&access_token=secret`]){
    const safePage=await api.ProfilePage({params:Promise.resolve({locale,id:workshop.id}),searchParams:Promise.resolve({suche:source})}),safeDom=new JSDOM(renderToStaticMarkup(h(api.I18nProvider,{locale,messages:api.getMessages(locale,['common'])},safePage)));
-   try{const back=safeDom.window.document.querySelector('.profile-back').getAttribute('href');assert.equal(back,source.includes('model=private')?returnTarget:`${locale==='de'?'':`/${locale}`}/werkstaetten`,'actual server caller rejects unsafe targets and sanitizes private query keys');assert(!back.includes('secret')&&!back.includes('private'));}finally{safeDom.window.close();}
+   try{const back=safeDom.window.document.querySelector('.profile-back').getAttribute('href');assert.equal(back,source.includes('model=private')?returnTarget:`${localizeHref('/werkstaetten',locale)}`,'actual server caller rejects unsafe targets and sanitizes private query keys');assert(!back.includes('secret')&&!back.includes('private'));}finally{safeDom.window.close();}
   }
   window.history.replaceState({},'',locale==='de'?'/':`/${locale}`);
 
-  const integratedProfile=await api.ProfilePage({params:Promise.resolve({locale,id:workshop.id})});await React.act(async()=>root.render(h(api.I18nProvider,{locale,messages:api.getMessages(locale,['common'])},integratedProfile)));assert.equal(document.querySelector('.profile-owner a').getAttribute('href'),`${locale==='de'?'':`/${locale}`}/betrieb/beanspruchen?werkstatt=${encodeURIComponent(workshop.id)}`,'The actual workshop owner link opens the independent claim page in the active locale');await click(document.querySelector('.inline-review-toggle'));
-  assert(document.querySelector('.inline-review-body').textContent.includes(t('public.reviewHelp'))&&document.querySelector('.inline-review-body').textContent.includes(t('customer.reviewLogin')),'actual profile caller retains public introduction and customer form namespace together');
+  const integratedProfile=await api.ProfilePage({params:Promise.resolve({locale,id:workshop.id})});await React.act(async()=>root.render(h(api.I18nProvider,{locale,messages:api.getMessages(locale,['common'])},integratedProfile)));assert.equal(document.querySelector('.profile-owner a').getAttribute('href'),localizeHref('/betrieb/beanspruchen?werkstatt='+encodeURIComponent(workshop.id),locale),'The actual workshop owner link opens the independent claim page in the active locale');await click(document.querySelector('.inline-review-toggle'));
+  assert(document.querySelector('.inline-review-toggle').textContent.includes(t('public.experience'))&&document.querySelector('.inline-review-body').textContent.includes(t('customer.reviewLogin'))&&!document.querySelector('.inline-review-body').textContent.includes(t('public.reviewHelp')),'actual profile caller keeps localized entry and login without a repeated introduction');
   assert(document.querySelector('.inline-review-body').textContent.includes(workshop.name),'The workshop stays identifiable beside the profile review fields');
-  assert.equal(new URL(document.querySelector('.inline-review-body .login-prompt a').href).searchParams.get('weiter'),`${locale==='de'?'':`/${locale}`}/werkstatt/${workshop.id}#bewerten`,'Profile login returns to its localized inline form');
+  assert.equal(new URL(document.querySelector('.inline-review-body .login-prompt a').href).searchParams.get('weiter'),localizeHref('/werkstatt/'+workshop.id+'#bewerten',locale),'Profile login returns to its localized inline form');
   const settingsPage=await api.SettingsPage({params:Promise.resolve({locale})}),settingsDom=new JSDOM(renderToStaticMarkup(h(api.I18nProvider,{locale,messages:api.getMessages(locale,['common'])},settingsPage)));
-  try{const footer=settingsDom.window.document.querySelector('footer');assert(footer.textContent.includes(t('public.tagline'))&&footer.textContent.includes(t('public.sourcesProof'))&&footer.textContent.includes(t('public.privacy')),'actual settings caller supplies localized public footer messages');assert(!footer.textContent.includes(t('common.unavailable')),'settings footer cannot render missing-namespace fallbacks');assert.equal(footer.querySelector('a[href$="/datenschutz"]').getAttribute('href'),locale==='de'?'/datenschutz':`/${locale}/datenschutz`);}finally{settingsDom.window.close();}
+  try{const footer=settingsDom.window.document.querySelector('footer');assert(footer.textContent.includes(t('public.tagline'))&&footer.textContent.includes(t('public.sourcesProof'))&&footer.textContent.includes(t('public.privacy')),'actual settings caller supplies localized public footer messages');assert(!footer.textContent.includes(t('common.unavailable')),'settings footer cannot render missing-namespace fallbacks');assert.equal(footer.querySelector('a[href="'+localizeHref('/datenschutz',locale)+'"]').getAttribute('href'),localizeHref('/datenschutz',locale));}finally{settingsDom.window.close();}
   const pageError=renderToStaticMarkup(wrap(locale,h(api.PageError,{error:new Error('provider-personal-error'),reset(){}})));assert(pageError.includes(t('common.unavailable'))&&!pageError.includes('provider-personal-error'),'SSR error boundary displays stable localized fallback');
-  window.history.replaceState({},'',`${locale==='de'?'':`/${locale}`}/werkstaetten?bewerten=1`);
+  window.history.replaceState({},'',`${localizeHref('/werkstaetten',locale)}?bewerten=1`);
   const reviewFinder=await api.CataloguePage({params:Promise.resolve({locale}),searchParams:Promise.resolve({bewerten:'1'})});
   await React.act(async()=>root.render(h(api.I18nProvider,{locale,messages:api.getMessages(locale,['common'])},reviewFinder)));
   assert(document.querySelector('.catalogue-page > .note').textContent.includes(t('public.reviewEntryHelp'))&&new URLSearchParams(window.location.search).get('bewerten')==='1','The actual finder caller explains the new profile entry and retains context through hydration');
@@ -111,7 +112,7 @@ try{
   await click(document.querySelector('.profile-share'));
   assert(document.querySelector('.workshop-page-aside > p[role="status"]').textContent.includes(t('public.copyManual')),'clipboard failure gets localized fallback');
   let copied;Object.defineProperty(navigator,'clipboard',{value:{async writeText(value){copied=value;}},configurable:true});
-  await click(document.querySelector('.profile-share'));assert.equal(copied,`https://riparim.example.test${locale==='de'?'':`/${locale}`}/werkstatt/${workshop.id}`,'share contains clean locale profile URL only');
+  await click(document.querySelector('.profile-share'));assert.equal(copied,'https://riparim.example.test'+localizeHref('/werkstatt/'+workshop.id,locale),'share contains clean locale profile URL only');
   assert(document.querySelector('.workshop-page-aside > p[role="status"]').textContent.includes(t('public.profileCopied')));
   delete navigator.clipboard;
   await click(document.querySelector('.workshop-overview-actions button'));
@@ -167,12 +168,11 @@ try{
   return Response.json({enabled:false});
  };
  for(const locale of ['de','sq','en']){
-  const prefix=locale==='de'?'':`/${locale}`;
-  window.history.replaceState({},'',prefix+'/werkstaetten?q=Fixture');
+  window.history.replaceState({},'',localizeHref('/werkstaetten?q=Fixture',locale));
   await React.act(async()=>root.render(wrap(locale,h(api.Catalogue,{...props,publicSnapshot:true,initialFilters:api.defaultCatalogueFilters}))));
   assert.equal(document.querySelector('input[type="search"]').value,'Fixture','Static catalogue restores URL filters after hydration');
   assert(document.querySelector('[aria-label="'+api.createTranslator(api.getMessages(locale))('common.userMenu')+'"]'),'Authenticated account menu is restored from the private session');
-  window.history.replaceState({},'',prefix+'/werkstatt/'+workshop.id);
+  window.history.replaceState({},'',localizeHref('/werkstatt/'+workshop.id,locale));
   const snapshotProps={workshop,directory:[workshop],reviews:[],reviewError:'',signedIn:false,account:null,isAdmin:false,publicSnapshot:true};
   const snapshotHtml=renderToStaticMarkup(wrap(locale,h(api.Profile,snapshotProps)));
   assert(!snapshotHtml.includes(account.email)&&!snapshotHtml.includes(review.review),'Private session and runtime reviews never enter release HTML');

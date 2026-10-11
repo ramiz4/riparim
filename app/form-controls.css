@@ -78,3 +78,36 @@
   display: block;
   overflow-wrap: anywhere;
 }
+
+/* Native date controls and fieldsets must shrink inside narrow profile columns. */
+.combined-review-form .review-section,
+.combined-review-form .form-grid > label {
+  min-width: 0;
+}
+.combined-review-form .form-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.combined-review-form input[type=date] {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  min-height: 46px;
+  appearance: none;
+}
+.combined-review-form input[type=date]::-webkit-date-and-time-value {
+  min-width: 0;
+  text-align: left;
+}
+.combined-review-form .review-optional > summary {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  padding-block: 6px;
+}
+.combined-review-form .review-optional > summary:focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 3px;
+}
+@media (max-width: 720px) {
+  .combined-review-form .form-grid { grid-template-columns: minmax(0, 1fr); }
+}

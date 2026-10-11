@@ -8,8 +8,6 @@ import {useTheme} from "next-themes";
 import {Camera,ChevronDown,ChevronLeft,ChevronRight,Clock3,LoaderCircle,MapPin} from "lucide-react";
 import {googleOpeningPresentation,googlePhotoUrl,type GooglePhoto,type GoogleProfileStatus,type LiveGoogleProfile,type LiveGooglePhotos} from "@/lib/google-workshop-profile";
 import {showConfirmedGoogleMap} from "@/lib/google-maps-browser";
-import {workshopMapsUrl} from "@/lib/google-maps-link";
-import type {Workshop} from "@/lib/workshops";
 import type {GoogleWorkshopIdentity} from "./use-google-workshop-profile";
 import {Dialog,DialogContent,DialogTitle} from "./ui/dialog";
 
@@ -20,11 +18,6 @@ export function WorkshopOpeningHours({profile,status,mapsUrl}:{profile:LiveGoogl
  return <div className={`profile-opening-hours ${hours.tone}`}><div className="profile-opening-summary" role="status"><Clock3 size={17}/><div><strong>{t(hours.label)}</strong>{hours.detail&&<span>{t(hours.detail.message,{when:t(hours.detail.when),time:hours.detail.time})}</span>}{showToday&&<span className="profile-hours-today">{t("public.todayHours",{hours:hours.today!})}</span>}</div></div>{hours.rows.length>0?<details className="profile-week-hours"><summary>{t("public.weekHours")}<ChevronDown size={15}/></summary><ul>{hours.rows.map(row=><li key={row.day} className={row.today?"today":""}><span>{row.day}</span><span>{row.text}</span></li>)}</ul><p>{t("public.localTime")}<LocaleAnchor href={mapsUrl} target="_blank" rel="noopener noreferrer" translate="no">Google Maps</LocaleAnchor></p>{profile?.rating.attributions.map((a,i)=><p key={i}>{a.providerURI?<LocaleAnchor href={a.providerURI} target="_blank" rel="noopener noreferrer">{a.provider}</LocaleAnchor>:a.provider}</p>)}</details>:status!=="loading"&&<LocaleAnchor className="profile-hours-fallback" href={mapsUrl} target="_blank" rel="noopener noreferrer">{t("public.checkMaps")}</LocaleAnchor>}</div>;
 }
 
-// Photos remain on Google Maps; the public app never fetches REST photo metadata or media.
-export function WorkshopMapsPhotos({workshop,identity}:{workshop:Workshop;identity?:GoogleWorkshopIdentity|null}){
- const {t}=useI18n();
- return <div className="profile-google-photos"><LocaleAnchor className="text-action" href={workshopMapsUrl(workshop,identity?.placeId)} target="_blank" rel="noopener noreferrer"><Camera size={17}/>{t("public.googlePhotosOnMaps")}</LocaleAnchor></div>;
-}
 function PhotoAttribution({photo,attributions,mapsUrl}:{photo:GooglePhoto;attributions:LiveGooglePhotos["attributions"];mapsUrl:string}){
  return <span className="profile-photo-attribution"><LocaleAnchor href={photo.mapsUrl??mapsUrl} target="_blank" rel="noopener noreferrer" translate="no">Google Maps</LocaleAnchor>{photo.authors.map((author,i)=><span key={i}>{" · "}{author.url?<LocaleAnchor href={author.url} target="_blank" rel="noopener noreferrer">{author.name}</LocaleAnchor>:author.name}</span>)}{attributions.map((source,i)=><span key={i}>{" · "}{source.providerURI?<LocaleAnchor href={source.providerURI} target="_blank" rel="noopener noreferrer">{source.provider}</LocaleAnchor>:source.provider}</span>)}</span>;
 }

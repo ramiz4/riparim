@@ -1,9 +1,10 @@
+import {localeFromPath,localizeHref,pageIdentityPath} from "./i18n/locale";
 type Revision={id:string;updatedAt:string};
 declare const __RIPARIM_PUBLIC_REVISIONS__:Revision[];
 export function publicAssetPath(url:URL){
- const match=url.pathname.match(/^\/(?:((?:sq|en))\/)?(werkstaetten|werkstatt\/([a-z0-9][a-z0-9-]{2,80}))\/?$/);
+ const match=pageIdentityPath(url.pathname).match(/^\/(werkstaetten|werkstatt\/([a-z0-9][a-z0-9-]{2,80}))$/);
  if(!match)return null;
- const locale=match[1]??"de",id=match[3];
+ const locale=localeFromPath(url.pathname),id=match[2];
  if(id&&!__RIPARIM_PUBLIC_REVISIONS__.some(w=>w.id===id))return null;
  return `/__public/${locale}/${id?"werkstatt/"+id:"werkstaetten"}.html`;
 }
@@ -11,9 +12,10 @@ export async function servePublicRelease(request:Request,env:Cloudflare.Env){
  const url=new URL(request.url);
  if(url.pathname.startsWith("/__public/"))return new Response("Not found",{status:404});
  const asset=publicAssetPath(url);
+ if(asset){const localized=localizeHref(url.pathname,localeFromPath(url.pathname));if(localized!==url.pathname){url.pathname=localized;return new Response(null,{status:308,headers:{Location:url.href,"Cache-Control":"private, no-store"}});}}
  if(!asset||!["GET","HEAD"].includes(request.method)||request.headers.get("RSC")==="1"||request.headers.get("Accept")?.includes("text/x-component")||Reflect.get(env,"PUBLIC_RELEASE_RENDER"))return null;
  // A changed profile uses a data-free shell until its next approved release.
- const id=url.pathname.match(/\/werkstatt\/([a-z0-9-]+)\/?$/)?.[1];
+ const id=pageIdentityPath(url.pathname).match(/^\/werkstatt\/([a-z0-9-]+)$/)?.[1];
  let current=false;
  if(id){
   const row=await env.DB.prepare("SELECT status,updated_at FROM workshops WHERE id=?").bind(id).first<{status:string;updated_at:string}>();

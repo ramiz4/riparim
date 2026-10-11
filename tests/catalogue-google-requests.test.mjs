@@ -1,3 +1,4 @@
+import {localizeHref} from '../scripts/lib/locale.mjs';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {mkdir} from 'node:fs/promises';
@@ -69,7 +70,7 @@ try{
  }
  for(const locale of ['de','sq','en']){
   await render(locale,null);window.sessionStorage.clear();const start=widgets.length,refreshes=catalogueRefreshRequests.length;
-  const path=locale==='de'?'/werkstaetten':`/${locale}/werkstaetten`;
+  const path=localizeHref('/werkstaetten',locale);
   window.history.replaceState(null,'',`${path}?sort=google&q=Fixture+00&ort=prishtina&leistung=bremsen-fahrwerk&marke=volvo&sprache=de`);
   await render(locale,h(Catalogue,{...props,publicSnapshot:true,initialWorkshops:[]}));
   assert.equal(catalogueRefreshRequests.length,refreshes+1);assert.equal(catalogueRefreshRequests.at(-1),`/api/workshops?locale=${locale}`);

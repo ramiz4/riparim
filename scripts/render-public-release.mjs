@@ -2,6 +2,7 @@ import {readFile,readdir,mkdir,writeFile,rm} from 'node:fs/promises';
 import {resolve,dirname} from 'node:path';
 import {Miniflare} from 'miniflare';
 import {execFileSync} from 'node:child_process';
+import {localizeHref} from './lib/locale.mjs';
 import {catalogueReleasePlan} from './catalogue-release-plan.mjs';
 import {releaseBuildTarget} from './release-policy.mjs';
 
@@ -26,7 +27,7 @@ if(releaseBuildTarget(process.env.BUILD_TARGET)==='cloudflare'){
    const prefix=locale==='de'?'':'/'+locale;
    for(const id of [null,...published.map(w=>w.id)]){
     const path=id?`/werkstatt/${id}`:'/werkstaetten';
-    const response=await runtime.dispatchFetch('https://riparim.com'+prefix+path);
+    const response=await runtime.dispatchFetch('https://riparim.com'+localizeHref(path,locale));
     const html=await response.text();
     if(response.status!==200||response.headers.has('set-cookie')||!html.includes(`<html lang="${locale}"`)||!/<\/html>\s*$/.test(html)||!/<h1(?:\s|>)/.test(html)||/Worker exceeded resource limits/.test(html)||html.includes('data-slot="dropdown-menu-label"'))throw Error(`Public release rendering failed: ${prefix+path}`);
     if(id&&!html.includes(`data-workshop-id="${id}"`))throw Error('Public release profile identity differs');
@@ -36,8 +37,8 @@ if(releaseBuildTarget(process.env.BUILD_TARGET)==='cloudflare'){
   }
   await runtime.setOptions({...options,bindings:{SITE_ORIGIN:'https://riparim.com',PUBLIC_RELEASE_RENDER:'shell'}});
   for(const locale of ['de','sq','en'])for(const id of [null,...published.map(w=>w.id)]){
-   const path=id?`/werkstatt/${id}`:'/werkstaetten',prefix=locale==='de'?'':'/'+locale;
-   const response=await runtime.dispatchFetch('https://riparim.com'+prefix+path),html=await response.text();
+   const path=id?`/werkstatt/${id}`:'/werkstaetten';
+   const response=await runtime.dispatchFetch('https://riparim.com'+localizeHref(path,locale)),html=await response.text();
    if(response.status!==200||response.headers.has('set-cookie')||!html.includes(`<html lang="${locale}"`)||!/<\/html>\s*$/.test(html)||html.includes('data-workshop-id='))throw Error('Public shell rendering failed: '+path);
    const file=resolve('dist/client/__public',locale,path.slice(1)+'-shell.html');await mkdir(dirname(file),{recursive:true});await writeFile(file,html);
   }
