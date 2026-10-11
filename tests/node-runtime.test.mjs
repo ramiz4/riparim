@@ -45,7 +45,7 @@ try{
   const response=await fetch(origin+path,{redirect:'manual'});assert.equal(response.status,200,path+logs);assert.match(await response.text(),/Synthetic Node Workshop/);
  }
  for(const [alias,target] of [['/en/werkstaetten?ort=Prizren','/en/workshops?ort=Prizren'],['/sq/werkstatt/fixture-public?suche=%2Fsq%2Fserviset','/sq/servis/fixture-public?suche=%2Fsq%2Fserviset']]){
-  const response=await fetch(origin+alias,{redirect:'manual'});assert.equal(response.status,308);assert.equal(response.headers.get('location'),origin+target,'public aliases preserve their query and use the localized canonical path');
+  const response=await fetch(origin+alias,{redirect:'manual'});assert.equal(response.status,308);assert.equal(new URL(response.headers.get('location'),origin).href,origin+target,'public aliases preserve their query and use the localized canonical path');
  }
  const draft=await fetch(origin+'/werkstatt/fixture-draft');assert([200,404].includes(draft.status));assert(! (await draft.text()).includes('Private Draft Workshop'),'streamed not-found pages never expose draft data');
  assert.equal((await fetch(origin+'/de/werkstaetten',{redirect:'manual'})).status,308);
