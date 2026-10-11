@@ -1,4 +1,4 @@
-import {providerAccountId} from "@/app/auth";
+import {resolveSupabaseAccount} from "@/lib/auth/identities";
 import {storage,cleanupVisitEvidence} from "@/db/storage";
 import {blockAccount} from "@/lib/auth/account-status";
 import type {getAuthAdmin} from "@/lib/auth/admin";
@@ -6,7 +6,7 @@ import type {getAuthAdmin} from "@/lib/auth/admin";
 // Keep the ownership link until provider deletion succeeds. It is the retry
 // inventory even if every visit has already been removed.
 export async function deleteAccount(auth:NonNullable<Awaited<ReturnType<typeof getAuthAdmin>>>,id:string){
- const accountId=providerAccountId(auth.projectUrl,id),{db,bucket}=storage();
+ const accountId=await resolveSupabaseAccount(auth.projectUrl,id),{db,bucket}=storage();
  await blockAccount(accountId,"deleted");
  const link=await db.prepare("SELECT legacy_owner FROM auth_links WHERE account_id=?").bind(accountId).first<{legacy_owner:string}>();
  if(link)await blockAccount(link.legacy_owner,"deleted");

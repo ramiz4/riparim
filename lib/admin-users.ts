@@ -2,20 +2,20 @@ import {validAccountName} from "@/lib/account-name";
 import {ValidationError} from "@/lib/validation-error";
 import type {User} from "@supabase/supabase-js";
 import type {AppUser} from "@/app/auth";
-import {providerAccountId} from "@/app/auth";
+import {resolveSupabaseAccount} from "@/lib/auth/identities";
 import {storage} from "@/db/storage";
 import {providerBlocked} from "@/lib/auth/account-status";
 import {isBootstrapAccount} from "@/lib/auth/roles";
 import {json} from "@/lib/http";
 import type {AccountRole,ManagedUser} from "@/lib/user-contract";
 
-export function protectedUser(user:User,admin:AppUser,projectUrl:string){
- return providerAccountId(projectUrl,user.id)===admin.userId||isBootstrapAccount(user.email);
+export async function protectedUser(user:User,admin:AppUser,projectUrl:string){
+ return await resolveSupabaseAccount(projectUrl,user.id)===admin.userId||isBootstrapAccount(user.email);
 }
 export async function userView(user:User,admin:AppUser,projectUrl:string):Promise<ManagedUser>{
- const accountId=providerAccountId(projectUrl,user.id);
+ const accountId=await resolveSupabaseAccount(projectUrl,user.id);
  const state=await storage().db.prepare("SELECT (SELECT status FROM auth_account_status WHERE account_id=?) AS status,(SELECT role FROM auth_account_roles WHERE account_id=?) AS role").bind(accountId,accountId).first<{status:string|null;role:string|null}>();
- return {id:user.id,email:user.email??"",name:typeof user.user_metadata?.full_name==="string"?user.user_metadata.full_name:"",role:isBootstrapAccount(user.email)||state?.role==="admin"?"admin":"user",active:!state?.status&&!providerBlocked(user),confirmed:!!user.email_confirmed_at,createdAt:user.created_at??null,lastSignInAt:user.last_sign_in_at??null,providers:[...new Set(user.identities?.map(identity=>identity.provider)??[])],protected:protectedUser(user,admin,projectUrl)};
+ return {id:user.id,email:user.email??"",name:typeof user.user_metadata?.full_name==="string"?user.user_metadata.full_name:"",role:isBootstrapAccount(user.email)||state?.role==="admin"?"admin":"user",active:!state?.status&&!providerBlocked(user),confirmed:!!user.email_confirmed_at,createdAt:user.created_at??null,lastSignInAt:user.last_sign_in_at??null,providers:[...new Set(user.identities?.map(identity=>identity.provider)??[])],protected:await protectedUser(user,admin,projectUrl)};
 }
 export function validUserId(id:string){return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);}
 export function parseUserFields(body:Record<string,unknown>,creating=false){

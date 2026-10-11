@@ -1,8 +1,9 @@
 import {callbackLocale,localizedReturnPath} from "@/lib/auth/locale";
 import {localizeHref,pageIdentityPath} from "@/lib/i18n/locale";
 import {getAuthConfig,siteOrigin} from "@/lib/auth/config";
+import {resolveSupabaseAccount} from "@/lib/auth/identities";
 import {authClient} from "@/lib/auth/client";
-import {getAppUser,recordGoogleSession,providerAccountId} from "@/app/auth";
+import {getAppUser,recordGoogleSession} from "@/app/auth";
 import {cookies} from "next/headers";
 import {issueDeletionGrant} from "@/lib/auth/deletion-grant";
 import type {SupabaseClient} from "@supabase/supabase-js";
@@ -29,7 +30,7 @@ export async function GET(request:Request){
    let deletion: {flow:string;accountId:string;expiresAt:number}|null=null;
    if(deletionFlow){
     const intent:unknown=JSON.parse(deletionFlow);
-    if(!intent||typeof intent!=="object"||!("flow" in intent)||!("accountId" in intent)||!("expiresAt" in intent)||typeof intent.flow!=="string"||typeof intent.accountId!=="string"||typeof intent.expiresAt!=="number"||!Number.isFinite(intent.expiresAt)||intent.flow!==flow||intent.expiresAt<=Date.now()||intent.accountId!==providerAccountId(c.projectUrl,data.session.user.id))throw Error("INVALID_DELETION_IDENTITY");
+    if(!intent||typeof intent!=="object"||!("flow" in intent)||!("accountId" in intent)||!("expiresAt" in intent)||typeof intent.flow!=="string"||typeof intent.accountId!=="string"||typeof intent.expiresAt!=="number"||!Number.isFinite(intent.expiresAt)||intent.flow!==flow||intent.expiresAt<=Date.now()||intent.accountId!==await resolveSupabaseAccount(c.projectUrl,data.session.user.id))throw Error("INVALID_DELETION_IDENTITY");
     deletion={flow:intent.flow,accountId:intent.accountId,expiresAt:intent.expiresAt};
    }
    await recordGoogleSession(c.projectUrl,data.session,client);

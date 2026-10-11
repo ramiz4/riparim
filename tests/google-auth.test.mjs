@@ -1,7 +1,7 @@
 import {localizeHref} from '../scripts/lib/locale.mjs';
 import assert from 'node:assert/strict';
 import {renderAuthEmails} from './helpers/auth-email-render.mjs';
-import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {readFile,readdir,writeFile,mkdir} from 'node:fs/promises';
 import {createRequire} from 'node:module';
 import {DatabaseSync} from 'node:sqlite';
 const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
@@ -12,7 +12,7 @@ const bundle=await build({entryPoints:{auth:'app/auth.ts',config:'lib/auth/confi
 await mkdir('.test-runtime/google-auth',{recursive:true});
 for(const file of bundle.outputFiles)await writeFile(file.path.replace(/\.js$/,'.mjs'),file.contents);
 const db=new DatabaseSync(':memory:');
-for(const file of ['0002_exotic_slayback','0003_magenta_boom_boom','0004_ambiguous_morbius','0007_pink_tyrannus','0008_stormy_blazing_skull','0009_fine_sister_grimm'])db.exec(await readFile('drizzle/'+file+'.sql','utf8'));
+for(const file of (await readdir('drizzle')).filter(file=>file.endsWith('.sql')).sort())db.exec(await readFile('drizzle/'+file,'utf8'));
 const d1={prepare(sql){const statement=db.prepare(sql);const adapter=(values=[])=>({first:async()=>statement.get(...values)??null,run:async()=>({meta:statement.run(...values)}),all:async()=>({results:statement.all(...values)}),bind:(...next)=>adapter(next)});return adapter();}};
 const projectUrl='https://fixture-project.supabase.co',origin='https://riparim.example.test';
 globalThis.fixtureEnv={DB:d1,BUCKET:{},REVIEW_MODERATOR_EMAIL:'owner@example.test',SITE_ORIGIN:origin};
@@ -54,7 +54,7 @@ let passed=0;
 const check=(value,label)=>{assert(value,label);passed++;};
 const post=(action,body={},requestOrigin=origin)=>actions.POST(new Request(origin+'/api/auth/'+action,{method:'POST',headers:{'content-type':'application/json',Origin:requestOrigin,'cf-connecting-ip':'fixture-ip'},body:JSON.stringify(body)}),{params:Promise.resolve({action})});
 const callbackRequest=(query)=>callback.GET(new Request(origin+'/auth/bestaetigen?'+new URLSearchParams(query)));
-const accountId=auth.providerAccountId(projectUrl,user.id);
+const accountId=`supabase:${new URL(projectUrl).hostname}:${user.id}`;
 const row=()=>db.prepare('SELECT * FROM auth_sessions WHERE id=?').get(sessionId);
 const config=await cfg.getAuthConfig();
 await cfg.verifyProvider(config,false);passed++;
@@ -248,7 +248,7 @@ await auth.recordGoogleSession(projectUrl,providerSession(),globalThis.fixtureCl
 response=await post('google',{reauthenticate:true,returnTo:'https://outside.example.test'});
 check(response.ok&&new URL(lastOAuth.options.redirectTo).searchParams.get('weiter')==='/einstellungen','Google deletion proof uses a canonical settings destination');
 let deletionIntent=JSON.parse(cookieMap.get('riparim-deletion-flow'));
-check(deletionIntent.accountId===auth.providerAccountId(projectUrl,user.id)&&cookieOptions.get('riparim-deletion-flow').httpOnly,'Google deletion intent is bound to the verified current account in a private cookie');
+check(deletionIntent.accountId===`supabase:${new URL(projectUrl).hostname}:${user.id}`&&cookieOptions.get('riparim-deletion-flow').httpOnly,'Google deletion intent is bound to the verified current account in a private cookie');
 const originalMember=user;flow=cookieMap.get('riparim-google-flow');
 user={...user,id:'00000000-0000-4000-8000-000000000004'};
 response=await callbackRequest({anbieter:'google',code:'fixture-code',fluss:flow});
@@ -257,12 +257,12 @@ user=originalMember;sessionId='deletion-google-original';
 await post('google',{reauthenticate:true});flow=cookieMap.get('riparim-google-flow');sessionId='deletion-google-fresh';
 response=await callbackRequest({anbieter:'google',code:'fixture-code',fluss:flow});
 check(new URL(response.headers.get('Location')).pathname==='/einstellungen'&&cookieMap.has('riparim-account-deletion'),'Fresh same-account OAuth proof returns to settings with deletion-only permission');
-check(!cookieMap.has('riparim-deletion-flow')&&db.prepare('SELECT started FROM auth_account_deletions WHERE account_id=?').get(auth.providerAccountId(projectUrl,user.id)).started===0,'Google proof consumes its intent and cannot start deletion automatically');
+check(!cookieMap.has('riparim-deletion-flow')&&db.prepare('SELECT started FROM auth_account_deletions WHERE account_id=?').get(`supabase:${new URL(projectUrl).hostname}:${user.id}`).started===0,'Google proof consumes its intent and cannot start deletion automatically');
 sessionId='deletion-google-fresh';await post('google',{reauthenticate:true});
 flow=cookieMap.get('riparim-google-flow');deletionIntent=JSON.parse(cookieMap.get('riparim-deletion-flow'));cookieMap.set('riparim-deletion-flow',JSON.stringify({...deletionIntent,expiresAt:0}));cookieMap.delete('riparim-account-deletion');
 response=await callbackRequest({anbieter:'google',code:'fixture-code',fluss:flow});
 check(new URL(response.headers.get('Location')).searchParams.get('fehler')==='google'&&!cookieMap.has('riparim-account-deletion'),'Expired Google deletion intent cannot grant permission');
-sessionId='deletion-google-fresh';db.prepare("INSERT INTO auth_account_roles VALUES (?,'admin','2026-10-04','fixture-admin')").run(auth.providerAccountId(projectUrl,user.id));
+sessionId='deletion-google-fresh';db.prepare("INSERT INTO auth_account_roles VALUES (?,'admin','2026-10-04','fixture-admin')").run(`supabase:${new URL(projectUrl).hostname}:${user.id}`);
 check((await post('google',{reauthenticate:true})).status===403,'Delegated administrators cannot start self-deletion OAuth');
 // Locale is an explicit API contract, checked before provider/config work.
 for (const action of ['login','register','recovery','reset','logout','google']) {

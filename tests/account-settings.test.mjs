@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import {mkdir,readFile,writeFile} from 'node:fs/promises';
+import {mkdir,readFile,readdir,writeFile} from 'node:fs/promises';
 import {createRequire} from 'node:module';
 import {DatabaseSync} from 'node:sqlite';
 const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
@@ -19,7 +19,7 @@ const bundle=await build({entryPoints:{account:'app/api/account/route.ts',grant:
 }}]});
 for(const file of bundle.outputFiles)await writeFile(file.path.replace(/\.js$/,'.mjs'),file.contents);
 const db=new DatabaseSync(':memory:');
-for(const file of ['0000_handy_black_queen','0001_polite_killmonger','0002_exotic_slayback','0003_magenta_boom_boom','0004_ambiguous_morbius','0007_pink_tyrannus','0008_stormy_blazing_skull','0009_fine_sister_grimm','0010_handy_luminals','0011_funny_echo','0012_unique_wolfsbane'])db.exec(await readFile(`drizzle/${file}.sql`,'utf8'));
+for(const file of (await readdir('drizzle')).filter(file=>file.endsWith('.sql')).sort())db.exec(await readFile('drizzle/'+file,'utf8'));
 let beforeBatch=null,batchTail=Promise.resolve(),failDb=false;
 const d1={prepare(sql){const s=db.prepare(sql);const adapter=(values=[])=>({bind:(...next)=>adapter(next),first:async()=>{if(failDb)throw Error('Fixture DB unavailable');return s.get(...values)??null;},all:async()=>({results:s.all(...values)}),run:async()=>({meta:s.run(...values)})});return adapter();},batch(statements){const result=batchTail.then(async()=>{if(beforeBatch){const fn=beforeBatch;beforeBatch=null;fn();}db.exec('BEGIN');try{const results=[];for(const statement of statements)results.push(await statement.run());db.exec('COMMIT');return results;}catch(e){db.exec('ROLLBACK');throw e;}});batchTail=result.catch(()=>{});return result;}};
 const origin='https://riparim.example.test',projectUrl='https://fixture-project.supabase.co';
@@ -100,6 +100,9 @@ check(!grantRow().token_hash.includes(cookieMap.get('riparim-account-deletion'))
 check(cookieOptions.get('riparim-account-deletion').httpOnly&&cookieOptions.get('riparim-account-deletion').secure&&cookieOptions.get('riparim-account-deletion').sameSite==='strict','Deletion permission uses a protected same-site cookie');
 check(db.prepare('SELECT revoked FROM auth_sessions').get().revoked===0,'Password confirmation does not revoke the enrolled browser session');
 check((await account.GET().then(r=>r.json())).deletionReady,'A fresh proof is shown as ready for explicit confirmation');
+db.prepare('UPDATE auth_account_deletions SET identity_issuer=NULL').run();
+check((await account.GET().then(r=>r.json())).deletionReady,'A deletion grant written by the predecessor after migration remains valid for its original issuer');
+db.prepare('UPDATE auth_account_deletions SET identity_issuer=?').run(projectUrl);
 for(const body of [{},{confirmation:'yes'},{confirmation:'KONTO LÖSCHEN',id:otherId}])check((await remove(body)).status===400&&!status(),'Deletion requires the exact confirmation and accepts no account target');
 check((await account.DELETE(request('DELETE',{confirmation:'KONTO LÖSCHEN'},{Origin:'https://other.example.test'}))).status===400&&!status(),'Cross-origin deletion is denied');
 db.prepare('UPDATE auth_account_deletions SET expires_at=0').run();check((await remove()).status===401&&!status(),'An expired identity proof cannot start deletion');

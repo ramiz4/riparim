@@ -78,6 +78,11 @@ Blob-Dateispeicher. Konfiguration, Sicherung, Hintergrundversand und Grenzen
 stehen in [docs/node-runtime.md](docs/node-runtime.md). Der bestehende
 Produktions- und Releaseweg bleibt unverändert.
 
+Interne Konto-IDs werden über eine private, additive Identitätszuordnung von
+externen Anmeldekonten getrennt. Bestehende Besitzschlüssel und Dateipfade
+bleiben erhalten. Rollout, geprüfte Anbieterzuordnung, Sperrerhalt und Rückweg
+stehen in [docs/account-identities.md](docs/account-identities.md).
+
 ## Datenbank und Prüfung
 
 Migrationen liegen in `drizzle/`. Nach Änderungen am Schema:

@@ -1,4 +1,4 @@
-import { integer, real, sqliteTable, text, index } from "drizzle-orm/sqlite-core";
+import { integer, real, sqliteTable, text, index, uniqueIndex, primaryKey } from "drizzle-orm/sqlite-core";
 export const visits = sqliteTable("visits", {
  id:text("id").primaryKey(),owner:text("owner").notNull(),workshop:text("workshop").notNull(),date:text("date").notNull(),vehicle:text("vehicle").notNull(),service:text("service").notNull(),
  evidenceType:text("evidence_type").notNull(),evidenceNote:text("evidence_note").notNull().default(""),fileKey:text("file_key"),fileName:text("file_name"),fileType:text("file_type"),
@@ -22,13 +22,16 @@ export const workshopGooglePlaces=sqliteTable("workshop_google_places",{
 });
 export const authSettings=sqliteTable("auth_settings",{id:text("id").primaryKey(),projectUrl:text("project_url").notNull(),publicKey:text("public_key").notNull(),enabled:integer("enabled").notNull().default(0),emailDeliveryConfirmed:integer("email_delivery_confirmed").notNull().default(0),updatedAt:text("updated_at").notNull()});
 export const authLinks=sqliteTable("auth_links",{accountId:text("account_id").primaryKey(),legacyOwner:text("legacy_owner").notNull().unique(),ownerAdmin:integer("owner_admin").notNull().default(0),createdAt:text("created_at").notNull(),passwordAccess:integer("password_access").notNull().default(1)});
+export const authIdentities=sqliteTable("auth_identities",{
+ provider:text("provider").notNull(),issuer:text("issuer").notNull(),subject:text("subject").notNull(),accountId:text("account_id").notNull(),createdAt:text("created_at").notNull()
+},table=>[primaryKey({columns:[table.provider,table.issuer,table.subject]}),uniqueIndex("idx_auth_identity_account").on(table.accountId,table.provider,table.issuer)]);
 export const authAttempts=sqliteTable("auth_attempts",{key:text("key").primaryKey(),attempts:integer("attempts").notNull().default(0),expiresAt:integer("expires_at").notNull()},table=>[index("idx_auth_attempts_expiry").on(table.expiresAt)]);
-export const authSessions=sqliteTable("auth_sessions",{id:text("id").primaryKey(),accountId:text("account_id").notNull(),revoked:integer("revoked").notNull().default(0),legacyAccess:integer("legacy_access").notNull().default(0),expiresAt:integer("expires_at").notNull(),createdAt:text("created_at").notNull(),provider:text("provider").notNull().default("password"),googleSubject:text("google_subject"),moderator:integer("moderator").notNull().default(0)},table=>[index("idx_auth_sessions_account").on(table.accountId),index("idx_auth_sessions_expiry").on(table.expiresAt)]);
+export const authSessions=sqliteTable("auth_sessions",{id:text("id").primaryKey(),accountId:text("account_id").notNull(),revoked:integer("revoked").notNull().default(0),legacyAccess:integer("legacy_access").notNull().default(0),expiresAt:integer("expires_at").notNull(),createdAt:text("created_at").notNull(),provider:text("provider").notNull().default("password"),googleSubject:text("google_subject"),moderator:integer("moderator").notNull().default(0),identityProvider:text("identity_provider"),identityIssuer:text("identity_issuer"),identitySubject:text("identity_subject")},table=>[index("idx_auth_sessions_account").on(table.accountId),index("idx_auth_sessions_expiry").on(table.expiresAt)]);
 export const authAccountStatus=sqliteTable("auth_account_status",{accountId:text("account_id").primaryKey(),status:text("status").notNull(),updatedAt:text("updated_at").notNull()});
 export const authAccountRoles=sqliteTable("auth_account_roles",{accountId:text("account_id").primaryKey(),role:text("role",{enum:["admin"]}).notNull().default("admin"),assignedAt:text("assigned_at").notNull(),assignedBy:text("assigned_by").notNull()});
 export const authAccountDeletions=sqliteTable("auth_account_deletions",{
  accountId:text("account_id").primaryKey(),userId:text("user_id").notNull(),tokenHash:text("token_hash").notNull().unique(),
- expiresAt:integer("expires_at").notNull(),started:integer("started").notNull().default(0)
+ expiresAt:integer("expires_at").notNull(),started:integer("started").notNull().default(0),identityIssuer:text("identity_issuer")
 });
 export const evidenceUploads=sqliteTable("evidence_uploads",{
  fileKey:text("file_key").primaryKey(),owner:text("owner").notNull()
