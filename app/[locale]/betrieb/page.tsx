@@ -13,11 +13,12 @@ import "./business.css";
 
 export const dynamic="force-dynamic";
 
-export default async function BusinessPage({searchParams,params}:{params:Promise<{locale:string}>;searchParams:Promise<{werkstatt?:string}>}){
+export default async function BusinessPage({searchParams,params}:{params:Promise<{locale:string}>;searchParams:Promise<{werkstatt?:string|string[]}>}){
  const {locale:value}=await params,locale=callbackLocale(value);
  const user=await getAppUser(),admin=await getAdminUser(user),query=await searchParams;
- const directory=user?await listWorkshops():[];const messages=managementMessages(locale,true),t=createTranslator(messages);
- return <I18nMessages messages={messages}><><SiteHeader account={user?{email:user.email,displayName:user.displayName,provider:user.provider}:null} isAdmin={!!admin?.isModerator}/><main className="business-page wrap">{!user&&<><h1>{t("management.myBusiness")}</h1><p>{t("management.businessIntro")}</p></>}{user?<BusinessPanel directory={directory} initialWorkshop={query.werkstatt}/>:<p><Link className="primary" href={`/anmelden?weiter=${encodeURIComponent(`/betrieb${query.werkstatt?`?werkstatt=${encodeURIComponent(query.werkstatt)}`:""}`)}`}>{t("management.login")}</Link> {t("management.businessLogin")}</p>}</main><DirectoryFooter/></></I18nMessages>;
+ const workshopId=typeof query.werkstatt==="string"?query.werkstatt:undefined;
+ const directory=user&&workshopId?(await listWorkshops()).filter(workshop=>workshop.id===workshopId):[];const messages=managementMessages(locale,true),t=createTranslator(messages);
+ return <I18nMessages messages={messages}><><SiteHeader account={user?{email:user.email,displayName:user.displayName,provider:user.provider}:null} isAdmin={!!admin?.isModerator}/><main className="business-page wrap">{!user&&<><h1>{t("management.myBusiness")}</h1><p>{t("management.businessIntro")}</p></>}{user?<BusinessPanel directory={directory} initialWorkshop={workshopId}/>:<p><Link className="primary" href={`/anmelden?weiter=${encodeURIComponent(`/betrieb${workshopId?`?werkstatt=${encodeURIComponent(workshopId)}`:""}`)}`}>{t("management.login")}</Link> {t("management.businessLogin")}</p>}</main><DirectoryFooter/></></I18nMessages>;
 }
 
 export async function generateMetadata({params}:{params:Promise<{locale:string}>}){const {locale}=await params;return managementMetadata(callbackLocale(locale),"business");}
