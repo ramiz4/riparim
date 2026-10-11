@@ -40,12 +40,36 @@ Commitlint config; release plugin loading, semantic analysis and rendered notes;
 deploy exact versions, Wrangler `--version`, and real catalogue-plan compilation.
 It performs no release, deployment, migration or provider API request.
 
-Initial isolated cloud-host installs used empty per-tool npm caches, then
-reinstalled from the same warm caches. Cold values were title 17.89 s,
-release 23.79 s and deploy 21.43 s. These installs ran concurrently and serve as
-reproducibility evidence, not comparable speed claims. The full root install
-reported 1,041 packages. Controlled GitHub Actions comparisons and final timing
-results are recorded after the read-only benchmark, before merge.
+The read-only [Actions benchmark](https://github.com/ramiz4/riparim/actions/runs/38097121619/job/114345209368)
+installed the complete app and each tool tree serially on the same Ubuntu
+runner with Node 24.21.0, four CPUs and 16,766,414,848 bytes RAM. Every fixture
+used the exact same PR merge commit
+`f82fac09f00a0cb56043d59b4440188e5eabf285` (PR head `d3811ae`). Each profile had
+its own initially empty npm cache, then repeated `npm ci` against that warm
+cache. All twelve offline smoke completions passed: the three tool checks in
+each app-install state, plus each corresponding isolated tool check in both
+states. The temporary benchmark workflow was removed before merge.
+
+| Install | Cold wall time | Warm wall time | npm-reported installed packages |
+| --- | ---: | ---: | ---: |
+| Complete app | 18.91 s | 14.29 s | 1,037 |
+| Title tools | 2.03 s | 1.68 s | 76 |
+| Release tools | 2.90 s | 2.09 s | 302 |
+| Deploy tools | 2.73 s | 2.17 s | 39 |
+
+Against installing the full app in every tool job, title installation saved
+16.88 s cold / 12.61 s warm. Release plus deploy saved 32.19 s cold / 24.32 s
+warm. These measurements describe installation work, excluding job queueing,
+runner setup, artifact transfers and publication. The actual new
+[Conventional PR title job](https://github.com/ramiz4/riparim/actions/runs/38097121600/job/114345209248)
+completed in 10 s with a 3 s installation step.
+
+Separate cloud-host cold/warm installs also passed with all offline smokes.
+They reported 1,041 app packages and 42 deploy packages; installed counts vary
+with optional platform dependencies. Their concurrent cold install timings
+(title 17.89 s, release 23.79 s, deploy 21.43 s) demonstrate reproducibility,
+not a comparable speed measurement. All direct root pins and release plugin
+versions matched the root lock.
 
 Production permissions, secrets, serial `production-release` concurrency,
 exact source checkout, four release assets, SHA-256 validation, retry behavior,
