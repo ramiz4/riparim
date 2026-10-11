@@ -29,7 +29,7 @@
     "i18n:check": "node scripts/check-i18n.mjs",
     "test:i18n-worker": "node tests/i18n-worker.test.mjs && node tests/public-release-worker.test.mjs",
     "build:node": "node scripts/build-node.mjs",
-    "start:node": "next start --hostname 127.0.0.1",
+    "start:node": "node --env-file-if-exists=.env .node-runtime/server.mjs",
     "db:migrate:node": "node --env-file-if-exists=.env .node-runtime/command.mjs migrate",
     "notifications:node": "node --env-file-if-exists=.env .node-runtime/command.mjs notifications",
     "test:node": "node tests/node-runtime.test.mjs"

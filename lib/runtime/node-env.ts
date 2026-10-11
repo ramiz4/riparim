@@ -1,3 +1,4 @@
+import {currentNodeClientAddress} from "./node-request";
 import {createNodeStorage} from './node-storage';
 import type {RuntimeEnv} from './contracts';
 let storage:ReturnType<typeof createNodeStorage>|undefined;
@@ -10,3 +11,5 @@ export const env:RuntimeEnv=new Proxy({}, {get(_target,key){
  return configuration.includes(key as typeof configuration[number])?process.env[String(key)]:undefined;
 }});
 export function nativeIdentityEnabled(){return false;}
+
+export function clientAddress(){return currentNodeClientAddress();}

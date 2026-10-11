@@ -5,3 +5,5 @@ export const env:RuntimeEnv=cloudflareEnv;
 // Only Sites has a trusted native identity edge. The owned Worker strips its
 // headers before application dispatch; the Node adapter disables it entirely.
 export function nativeIdentityEnabled(){return true;}
+
+export function clientAddress(request:Request){return request.headers.get("cf-connecting-ip")??"unknown";}

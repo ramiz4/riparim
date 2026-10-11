@@ -22,8 +22,8 @@ npm run db:migrate:node
 npm run start:node -- --port 5174
 ```
 
-Der Build erzeugt `.next/` und `.node-runtime/command.mjs`. Nexts Webpack-Build
-ersetzt ausschließlich `lib/runtime/env` durch den Node-Adapter. Seiten und
+Der Build erzeugt `.next/` und `.node-runtime/command.mjs`. Ein kleiner `node:http`-Starter übergibt Requests an das vorhandene Next.js.
+Nexts Webpack-Build ersetzt ausschließlich `lib/runtime/env` durch den Node-Adapter. Seiten und
 APIs verwenden dieselben Geschäftsregeln und SQL-Abfragen wie der Worker.
 Die Option `skipProxyUrlNormalize` erhält die ursprüngliche Request-Origin:
 sonst können interne Sprach-Rewrites von `127.0.0.1` auf `localhost` als
@@ -32,10 +32,34 @@ Next kann bei bereits begonnenen HTML-Streams eine Nicht-gefunden-Seite mit
 HTTP 200 ausliefern; private Entwürfe werden auch dabei nicht ausgegeben.
 
 Für den Betrieb hinter einem HTTPS-Reverse-Proxy muss `SITE_ORIGIN` die
-öffentliche HTTPS-Origin sein. Der Server bindet standardmäßig nur Loopback;
-Port und Host lassen sich als Next-CLI-Argumente übergeben. Next lädt `.env`
-beim Start; die beiden Kommandos laden sie mit Nodes `--env-file-if-exists`.
-Secrets bleiben serverseitig und gehören nicht in Git oder Build-Artefakte.
+öffentliche HTTPS-Origin sein. Der Starter validiert HTTP/HTTPS ohne Zugangsdaten,
+Pfad, Query oder Fragment und erzeugt daraus Nexts öffentliche Request-Metadaten.
+Socket-Bindhost und Port bleiben davon getrennt. Eingehende Host- und
+Forwarded-Host/-Proto/-Port-Header überschreiben diese Konfiguration nicht.
+Der Reverse-Proxy übernimmt TLS und öffentliche Hostweiterleitungen.
+Der Server bindet standardmäßig nur Loopback; `--hostname` und `--port` können
+über `npm run start:node -- ...` übergeben werden. Starter und Kommandos laden
+`.env` mit Nodes `--env-file-if-exists`. Secrets bleiben serverseitig und gehören
+nicht in Git oder Build-Artefakte.
+
+Für IP-Limits verwendet der Node-Adapter die verifizierte Socketadresse aus
+einem `AsyncLocalStorage`-Kontext. Starter und Next-Bundle teilen ausschließlich
+den Kontextcontainer; gleichzeitig bearbeitete Requests behalten getrennte
+Adressen. Frei übergebene `cf-connecting-ip`, `X-Forwarded-For` oder interne
+Fakeheader begründen keinen neuen Rate-Limit-Scope. Der Cloudflare-Adapter
+verwendet weiterhin den vom eigenen Edge bereitgestellten Header.
+
+Wenn ein Reverse-Proxy vorgeschaltet ist, enthält `RIPARIM_TRUSTED_PROXIES`
+ausschließlich seine expliziten IP-Adressen, kommagetrennt. Nur ein Socketpeer
+aus dieser Liste darf ein gültiges einzelnes `X-Real-IP` liefern. Der Proxy muss
+diesen Header mit der tatsächlich verbundenen Clientadresse **überschreiben**;
+ungeprüftes Weiterreichen eines Browserheaders erfüllt diese Grenze nicht.
+IPv4-mapped IPv6 und äquivalente IP-Schreibweisen werden normalisiert. Fehlende,
+mehrdeutige oder ungültige weitergeleitete Clientadressen fallen auf den Socketpeer
+zurück. Ungültige Einträge in der Proxy-Allowlist brechen den Start ab.
+Ohne Allowlist werden sämtliche Forwarding-IP-Header ignoriert. Starte über
+`start:node`; direktes `next start` stellt keinen Socketkontext bereit und
+verwendet konservativ den gemeinsamen `unknown`-Scope.
 
 ## Daten und private Dateien
 
@@ -108,7 +132,8 @@ dieser Umbau richtet keinen externen Scheduler oder Maildienst automatisch ein.
   Kontolöschung während Upload bereinigt Inhalt und Inventar.
 - `node-runtime`: tatsächlicher Next-Produktionsbuild und gestarteter HTTP-Server
   mit synthetischen öffentlichen und privaten Profilen; Seiten in DE/SQ/EN,
-  APIs, private Zugriffsverweigerung und gefälschte Sites-Adminheader sowie beide
+  APIs, private Zugriffsverweigerung, gefälschte Sites-Adminheader, echte Socket-IP-
+  Limits, parallele vertrauenswürdige Proxyclients und konfigurierte HTTPS-Origins sowie beide
   ausführbaren Migration-/Outbox-Kommandos.
 
 Diese Prüfungen ändern keine Live-Provider und senden keine echten E-Mails.
@@ -116,5 +141,6 @@ Der Test baut Node selbst; `npm run test:node` wiederholt die HTTP-Abnahme einze
 Die bisherigen Cloudflare-/Sites-Builds und Releasepakete bleiben Pflichtchecks.
 
 API-Grundlagen: [Node SQLite](https://nodejs.org/api/sqlite.html),
-[Next CLI](https://nextjs.org/docs/app/api-reference/cli/next) und
+[Next-Server](https://nextjs.org/docs/app/guides/custom-server),
+[AsyncLocalStorage](https://nodejs.org/api/async_context.html) und
 [Proxy-URL-Normalisierung](https://nextjs.org/docs/app/api-reference/file-conventions/proxy#advanced-proxy-flags).
