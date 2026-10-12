@@ -17,7 +17,7 @@ globalThis.fetch=async url=>{assert.equal(url,'/api/google-places');return Respo
 const output='.test-runtime/public-performance';await mkdir(output,{recursive:true});
 await build({stdin:{contents:`export {default as CatalogueLoading} from './app/[locale]/werkstaetten/loading';export {default as Finder} from './app/finder';export {default as Catalogue} from './app/[locale]/werkstaetten/catalogue';export {I18nProvider} from './lib/i18n/client';export {getMessages,createTranslator} from './lib/i18n/messages';export {defaultCatalogueFilters} from './lib/catalogue-filters';`,resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/ui.mjs',bundle:true,platform:'node',format:'esm',packages:'external',loader:{'.css':'empty'},plugins:[{name:'navigation-fixture',setup(b){
  b.onResolve({filter:/^next\/(link|navigation)$/},args=>({path:args.path,namespace:'fixture'}));
- b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',resolveDir:process.cwd(),contents:args.path==='next/link'?`import React from 'react';export default function Link({href,children,...props}){return React.createElement('a',{...props,href},children);}`:`export function useRouter(){return {push(){},replace(){},refresh(){}};}export function usePathname(){return '/werkstaetten';}export function useSearchParams(){return new URLSearchParams();}`}));
+ b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',resolveDir:process.cwd(),contents:args.path==='next/link'?`import React from 'react';export default function Link({href,children,...props}){return React.createElement('a',{...props,href},children);}`:`export function useRouter(){return {push(href){globalThis.fixtureNavigations.push(href);},replace(){},refresh(){}};}export function usePathname(){return '/werkstaetten';}export function useSearchParams(){return new URLSearchParams();}`}));
 }}]});
 const {CatalogueLoading,Finder,Catalogue,I18nProvider,getMessages,createTranslator,defaultCatalogueFilters}=await import(new URL('../'+output+'/ui.mjs',import.meta.url));
 const {createElement:h,act}=await import('react'),{renderToStaticMarkup}=await import('react-dom/server'),{createRoot}=await import('react-dom/client');
@@ -25,6 +25,7 @@ const workshops=Array.from({length:25},(_,i)=>({id:`fixture-${String(i).padStart
 const props={initialWorkshops:workshops,initialError:'',account:null,isAdmin:false,initialFilters:defaultCatalogueFilters};
 const wrap=(locale,node)=>h(I18nProvider,{locale,messages:getMessages(locale,['common','public'])},node);
 const root=createRoot(document.getElementById('root'));
+globalThis.fixtureNavigations=[];
 try{
  for(const locale of ['de','sq','en']){
   const t=createTranslator(getMessages(locale));
@@ -52,6 +53,35 @@ try{
    assert.equal(status.querySelector('svg').getAttribute('aria-hidden'),'true');
    assert.equal(status.querySelectorAll('[role="status"]').length,0,'The shared graphic creates no nested status announcement');
   }finally{pendingDom.window.close();}
+  await act(async()=>root.render(wrap(locale,h(Finder,props))));
+  const form=document.querySelector('.search-box'),before=fixtureNavigations.length;
+  await act(async()=>{form.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));form.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));});
+  assert.equal(fixtureNavigations.length,before+1,'Rapid repeated submission starts only one navigation');
+  assert.equal(fixtureNavigations.at(-1),locale==='de'?'/werkstaetten':locale==='sq'?'/sq/serviset':'/en/workshops');
+  const immediateStatus=document.querySelector('main [role="status"]');
+  assert.equal(immediateStatus?.textContent,loadingLabels[locale],'Search responds before the router returns any data');
+  assert(!document.querySelector('.landing-hero'),'Pending navigation immediately shows the destination loading view');
+  assert.equal(document.activeElement,document.querySelector('main'),'Keyboard focus follows the immediate loading view');
+  await act(async()=>form.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));
+  assert.equal(fixtureNavigations.length,before+1,'Repeated submission cannot start another navigation');
+  await act(async()=>new Promise(resolve=>setTimeout(resolve,20)));
+  assert.equal(document.querySelector('main [role="status"]').textContent,loadingLabels[locale],'Feedback stays visible while navigation is stalled');
+  await act(async()=>root.render(null));
+  await act(async()=>root.render(wrap(locale,h(Finder,props))));
+  await act(async()=>document.querySelector('.search-tabs button').click());
+  const submitDetail=()=>document.querySelector('.journey-form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));
+  await act(async()=>{const input=document.querySelector('.journey-form input[maxlength="80"]');Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(input,'Fixture car');input.dispatchEvent(new Event('input',{bubbles:true}));});
+  await act(async()=>submitDetail());
+  await act(async()=>{const input=document.querySelector('.journey-form textarea');Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype,'value').set.call(input,'Fixture repair request');input.dispatchEvent(new Event('input',{bubbles:true}));});
+  await act(async()=>submitDetail());
+  const detailedBefore=fixtureNavigations.length;
+  await act(async()=>submitDetail());
+  await act(async()=>new Promise(resolve=>setTimeout(resolve,30)));
+  assert.equal(fixtureNavigations.length,detailedBefore+1);
+  assert.equal(document.querySelector('main [role="status"]')?.textContent,loadingLabels[locale],'Vehicle search also responds before server data arrives');
+  assert(!document.querySelector('[role="dialog"]'),'Vehicle dialog closes while navigation is pending');
+  assert.equal(document.activeElement,document.querySelector('main'),'Vehicle dialog closing preserves loading-view focus');
+  await act(async()=>root.render(null));
   await act(async()=>root.render(wrap(locale,h(Catalogue,props))));
   assert.equal(document.querySelectorAll('.catalogue-card').length,12);
   const more=()=>[...document.querySelectorAll('button')].find(button=>button.textContent===t('public.showMore'));
@@ -74,5 +104,5 @@ try{
    await act(async()=>root.render(null));
   }
  }
- console.log('Public performance UI: accessible catalogue loading, SSR selections, keyboard pagination and vehicle-dialog focus passed in DE/SQ/EN; no live requests.');
+ console.log('Public performance UI: accessible catalogue loading, SSR selections, instant quick/vehicle navigation, duplicate submission protection, keyboard pagination and vehicle-dialog focus passed in DE/SQ/EN; no live requests.');
 }finally{await act(async()=>root.unmount());dom.window.close();}
