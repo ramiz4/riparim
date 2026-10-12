@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
-import {createServer,request} from 'node:https';
+import {createServer} from 'node:https';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
@@ -10,8 +10,8 @@ import {createHash} from 'node:crypto';
 export async function pocketbaseNodeHttp({directory,port,start,stop}){
  const target=join(directory,'pocketbase-http');await mkdir(target);
  await promisify(execFile)(process.execPath,['.node-runtime/command.mjs','migrate'],{env:{...process.env,RIPARIM_DATA_DIR:target}});
- const module=join(directory,'pocketbase-storage.mjs'),bundled=await build({entryPoints:['lib/runtime/node-storage.ts'],bundle:true,platform:'node',format:'esm',write:false,packages:'external'});await writeFile(module,bundled.outputFiles[0].contents);
- const {createNodeStorage}=await import(module),storage=createNodeStorage(target);
+ const storageModule=join(directory,'pocketbase-storage.mjs'),bundled=await build({entryPoints:['lib/runtime/node-storage.ts'],bundle:true,platform:'node',format:'esm',write:false,packages:'external'});await writeFile(storageModule,bundled.outputFiles[0].contents);
+ const {createNodeStorage}=await import(storageModule),storage=createNodeStorage(target);
  const member='memberrecord001',admin='adminrecord0001',key='synthetic-pb-admin-key',owner='supabase:previous-fixture.supabase.co:00000000-0000-4000-8000-000000000001',adminOwner='opaque-pb-admin',visit='10000000-0000-4000-8000-000000000001';
  const records=new Map([[member,{id:member,collectionId:'_pb_users_auth_',collectionName:'users',email:'member@example.test',verified:true,name:'Synthetic PB Node member',preferredLocale:'en',role:'admin',isAdmin:true}],[admin,{id:admin,collectionId:'_pb_users_auth_',collectionName:'users',email:'admin@example.test',verified:true,name:'Synthetic PB Node admin',preferredLocale:'en'}]]),tokens=new Map();let sequence=0;
  const tls={key:await readFile('tests/fixtures/smtp/key.pem'),cert:await readFile('tests/fixtures/smtp/cert.pem')},sockets=new Set();
