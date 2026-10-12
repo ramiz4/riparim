@@ -9,6 +9,7 @@ suites.push('suite-runner.test.mjs');
 suites.push('premium-workshops.test.mjs');
 suites.push('premium-partner-ui.test.mjs');
 suites.push('workshop-review-styles.test.mjs');
+suites.push('google-opening-hours-styles.test.mjs');
 suites.push('tool-install.test.mjs');
 suites.push('tool-policy.test.mjs');
 suites.push('release-retry.test.mjs');
