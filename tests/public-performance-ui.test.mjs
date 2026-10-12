@@ -49,6 +49,20 @@ try{
     assert(!doc.querySelector('.catalogue-detail-search,.catalogue-private-context,.search-tabs'),'public pages have a single search path without the vehicle wizard');
     if(Page===Finder){
      assert(doc.querySelector('.landing-hero').nextElementSibling.matches('.discover-section'),'discovery sits directly after the hero');
+     const shortcuts=doc.querySelector('.shortcuts-section');
+     assert(shortcuts.previousElementSibling.matches('.discover-section'),'shortcuts follow the workshop cards');
+     assert.equal(shortcuts.querySelector('h2').textContent,t('public.shortcutsTitle'));
+     const links=[...shortcuts.querySelectorAll('a')];
+     assert.equal(links.length,12,'six locations and all six service categories are available');
+     for(const link of links){
+      const url=new URL(link.getAttribute('href'),'https://riparim.example.test');
+      assert.equal(url.pathname,locale==='de'?'/werkstaetten':locale==='sq'?'/sq/serviset':'/en/workshops','shortcut preserves the active locale');
+      assert.equal(url.searchParams.size,1,'each shortcut starts with exactly one public filter');
+      assert(['ort','leistung'].includes([...url.searchParams.keys()][0]));
+      assert(link.textContent.trim(),'shortcut has a visible accessible label');
+     }
+     assert(links.some(link=>link.getAttribute('href').endsWith('?ort=prishtina')));
+     assert(links.some(link=>link.getAttribute('href').endsWith('?leistung=diagnose-elektronik')));
      assert(doc.querySelector('.landing-hero #suche form'),'quick search is inside the hero before JavaScript loads');
      assert.equal(doc.querySelector('.landing-hero-content>p').textContent,t('public.heroBenefit'));
      assert.equal(doc.querySelectorAll('main form').length,1,'landing has one search form');

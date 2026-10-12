@@ -2,6 +2,9 @@ import {defineMessages,type MessageShape} from "./message-contract";
 
 export const publicDe={
  "heroCar": "Dein Auto.",
+ "shortcutsTitle": "Nach Ort oder Leistung suchen",
+ "shortcutsCities": "Nach Ort",
+ "shortcutsServices": "Nach Leistung",
  "discoverTitle": "Werkstätten entdecken",
  "discoverHelp": "Eine Auswahl veröffentlichter Werkstätten in Kosovo.",
  "discoverAll": "Alle Werkstätten ansehen",
@@ -218,6 +221,9 @@ export const publicDe={
 const check=defineMessages<typeof publicDe>();
 export const publicSq=/* @__PURE__ */ check({
  "heroCar": "Makina jote.",
+ "shortcutsTitle": "Kërko sipas vendit ose shërbimit",
+ "shortcutsCities": "Sipas vendit",
+ "shortcutsServices": "Sipas shërbimit",
  "discoverTitle": "Zbulo servise",
  "discoverHelp": "Një përzgjedhje e serviseve të publikuara në Kosovë.",
  "discoverAll": "Shiko të gjitha serviset",
@@ -433,6 +439,9 @@ export const publicSq=/* @__PURE__ */ check({
 } as const satisfies MessageShape<typeof publicDe>);
 export const publicEn=/* @__PURE__ */ check({
  "heroCar": "Your car.",
+ "shortcutsTitle": "Search by location or service",
+ "shortcutsCities": "By location",
+ "shortcutsServices": "By service",
  "discoverTitle": "Discover workshops",
  "discoverHelp": "A selection of published workshops in Kosovo.",
  "discoverAll": "View all workshops",

@@ -56,3 +56,23 @@ html.dark .discover-grid .catalogue-card h3{color:var(--foreground)}
  .discover-all{min-height:48px}
  .discover-grid{grid-template-columns:minmax(0,1fr)}
 }
+
+.shortcuts-section{padding:48px 0;border-bottom:1px solid var(--border)}
+.shortcuts-section>h2{font-size:28px;font-weight:650;letter-spacing:-.7px;line-height:1.25;margin-bottom:24px}
+.shortcuts-groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.shortcuts-group{display:block;min-width:0;padding:24px;border:1px solid var(--border);border-radius:16px;background:var(--theme-surface)}
+.shortcuts-group h3{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:650;margin-bottom:16px;color:var(--foreground)}
+.shortcuts-group h3>svg{color:var(--theme-accent)}
+.shortcuts-group ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.shortcuts-group li{min-width:0}
+.shortcuts-group a{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:48px;padding:12px 14px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--card-foreground);font-size:14px;line-height:1.5;overflow-wrap:anywhere}
+.shortcuts-group a:hover{border-color:var(--theme-accent);background:var(--theme-hover)}
+.shortcuts-group a>svg{color:var(--theme-accent)}
+@media(max-width:1000px){.shortcuts-group ul{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:720px){
+ .shortcuts-section{padding:32px 0}
+ .shortcuts-section>h2{font-size:26px;margin-bottom:20px}
+ .shortcuts-groups{grid-template-columns:minmax(0,1fr);gap:16px}
+ .shortcuts-group{padding:20px}
+ .shortcuts-group a{font-size:16px}
+}
