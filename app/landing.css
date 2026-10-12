@@ -7,9 +7,18 @@
 .landing-hero-content h1{max-width:100%;margin:0;font-size:clamp(2.75rem,4.6vw,4.5rem);font-weight:750;line-height:1.06;letter-spacing:-.045em;color:#fff}
 .landing-hero-content h1>span{display:block;color:#b7e0d3}
 .landing-hero-content>p{max-width:660px;margin:20px 0 28px;font-size:1.125rem;line-height:1.55;color:#f4f8f7}
-.landing-page .landing-hero-search{width:min(100%,960px);min-width:0;margin:0;padding:16px;background:var(--card);color:var(--card-foreground);border:1px solid var(--border);border-radius:16px;box-shadow:0 10px 32px #00000020;scroll-margin-top:96px;outline-offset:4px}
-.landing-hero-search .search-box{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+.landing-page .landing-hero-search{width:min(100%,960px);min-width:0;margin:0;padding:16px;background:rgba(255,255,255,.96);color:var(--card-foreground);border:1px solid rgba(255,255,255,.7);border-radius:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 10px 32px #00000020;scroll-margin-top:96px;outline-offset:4px}
+.landing-page .landing-hero-search .search-box{padding:0;border:0;border-radius:0;background:transparent;box-shadow:none}
+html.dark .landing-page .landing-hero-search{background:rgba(16,43,47,.96);border-color:rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 10px 32px #00000030}
+html.dark .landing-page .landing-hero-search .search-box{background:transparent}
+.landing-page .landing-hero-search .search-box label>span{color:#40565b}
+html.dark .landing-page .landing-hero-search .search-box label>span{color:var(--muted-foreground)}
 .landing-hero-search:focus-visible{outline:3px solid var(--ring)}
+/* One static blur surface; controls and menus do not add compositing layers. */
+@supports ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+ .landing-page .landing-hero-search{background:rgba(255,255,255,.86);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+ html.dark .landing-page .landing-hero-search{background:rgba(16,43,47,.86)}
+}
 @media(max-width:1000px){
  .landing-hero-shade{background:linear-gradient(90deg,rgba(3,24,26,.94),rgba(3,24,26,.74) 47%,rgba(3,24,26,.18))}
 }
@@ -19,10 +28,13 @@
  .landing-hero-content{padding:28px 0 32px}
  .landing-hero-content h1{font-size:clamp(2.125rem,8.4vw,2.75rem);line-height:1.1;letter-spacing:-.035em}
  .landing-hero-content>p{margin:16px 0 20px;font-size:1rem;line-height:1.55}
- .landing-page .landing-hero-search{padding:14px;scroll-margin-top:86px}
+ .landing-page .landing-hero-search{padding:14px;scroll-margin-top:86px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
  .landing-hero-search .search-box{grid-template-columns:minmax(0,1fr)}
  .landing-hero-search .search-button{white-space:normal}
 }
 @media(prefers-reduced-motion:reduce){
  html:has(.landing-page){scroll-behavior:auto}
+}
+@media(prefers-reduced-transparency:reduce){
+ .landing-page .landing-hero-search,html.dark .landing-page .landing-hero-search{background:var(--card);-webkit-backdrop-filter:none;backdrop-filter:none}
 }
