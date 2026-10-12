@@ -245,7 +245,8 @@ nicht wieder aktivieren. Diese Zugriffssperre wird beibehalten; es gibt keine
 
 Für Node ist der konkrete Betreiberweg:
 
-1. Im alten Profil deaktivieren; Appdienst, Timer und sonstige Writer stoppen.
+1. Im alten Profil deaktivieren; Appdienst und sonstige Writer stoppen. Alte
+   Mailtimer oder Crons stoppen und dauerhaft deaktivieren.
    Ein geprüftes Backup **beider** SQLite-Datenbanken einschließlich nötiger
    WAL-/SHM-Dateien sichern und Wiederherstellung vorher prüfen. Der Dienst
    bleibt während der folgenden Schritte gestoppt.
@@ -264,9 +265,11 @@ Für Node ist der konkrete Betreiberweg:
    öffentliche Profilangaben; Geheimnisse bleiben in `runtime.env`.
 4. Den Dienst mit dem geprüften Release neu starten. Alte Cookiegläser müssen
    verweigert werden; mit den geprüften Zielkonten neu anmelden und Admin,
-   Besitzrechte, Sperren und private Nachweise prüfen. Timer erst danach
-   starten. Bei Fehlern gestoppt bleiben und den dokumentierten Daten
-   erhaltenden Rückweg verwenden.
+   Besitzrechte, Sperren und private Nachweise prüfen. Alte Mailtimer oder
+   Crons bleiben deaktiviert. Nur ein einzelnes gespeichertes Ereignis nach dem
+   [Vertrag für manuellen Versand](node-runtime.md#hintergrundversand) wiederholen.
+   Bei Fehlern gestoppt bleiben und den dokumentierten Daten erhaltenden Rückweg
+   verwenden.
 
 Beispiel für bewusstes Aktivieren eines **bereits vollständig zugeordneten und
 geprüften** PocketBase-Ziels. Platzhalter und Pfad durch die überprüften Werte

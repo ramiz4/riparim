@@ -104,6 +104,7 @@ const status=id=>db.prepare('SELECT status FROM auth_account_status WHERE accoun
 const enroll=id=>{const key='session-'+id;db.prepare('INSERT INTO auth_sessions (id,account_id,revoked,legacy_access,expires_at,created_at,provider) VALUES (?,?,0,1,?,?,?) ON CONFLICT(id) DO UPDATE SET revoked=0').run(key,accountId(id),Date.now()+86400000,'2026-10-04','password');return key;};
 const sessionRevoked=id=>db.prepare('SELECT revoked FROM auth_sessions WHERE account_id=?').get(accountId(id))?.revoked;
 const noActiveSessions=id=>db.prepare('SELECT COUNT(*) AS n FROM auth_sessions WHERE account_id=? AND revoked=0').get(accountId(id)).n===0;
+const modernGrant=(sid,id)=>db.prepare('SELECT id,account_id,revoked,identity_provider,identity_issuer,identity_subject FROM auth_sessions WHERE id=? AND account_id=?').get(JSON.stringify(['supabase',projectUrl,sid]),accountId(id));
 const accountRole=id=>db.prepare('SELECT role FROM auth_account_roles WHERE account_id=?').get(accountId(id))?.role??'user';
 const seedAdmin=id=>db.prepare('INSERT INTO auth_account_roles (account_id,role,assigned_at,assigned_by) VALUES (?,?,?,?) ON CONFLICT(account_id) DO UPDATE SET role=excluded.role').run(accountId(id),'admin','2026-10-04',accountId(ids.current));
 const visit=(id,owner)=>{db.prepare('INSERT INTO visits (id,owner,workshop,date,vehicle,service,evidence_type,file_key,created_at) VALUES (?,?,?,?,?,?,?,?,?)').run(id,owner,'fixture-workshop','2026-10-04','Fixture Car','Repair','document',`evidence/${owner}/${id}/document.pdf`,'2026-10-04');objects.set(`evidence/${owner}/${id}/document.pdf`,true);objects.set(`evidence/${owner}/${id}/older.pdf`,true);};
@@ -246,6 +247,7 @@ signedInUser={...users.get(ids.member),user_metadata:{...users.get(ids.member).u
 check(await auth.getAppUser()===null,'Demotion immediately denies a previously authenticated admin session');
 sessionId='roles-password-demoted';await auth.recordPasswordSession(authUser(signedInUser,projectUrl),globalThis.fixtureClient);
 const demotedUser=await auth.getAppUser();
+const positiveGrant=modernGrant(sessionId,ids.member);check(positiveGrant?.revoked===0&&positiveGrant.identity_provider==='supabase'&&positiveGrant.identity_issuer===projectUrl&&positiveGrant.identity_subject===ids.member,'The enrollment assertions find the actual successfully enrolled namespaced grant of this account');
 check(!demotedUser.isModerator&&JSON.stringify(demotedUser.ownerKeys)===JSON.stringify(ownershipBefore),'After demotion a new login has ordinary rights with unchanged legacy ownership');
 response=await update(ids.member,{role:'user'});body=await response.json();
 check(response.ok&&(await auth.getAppUser())?.userId===demotedUser.userId,'An unchanged ordinary role preserves the current customer session');
@@ -285,10 +287,10 @@ signedInUser={...users.get(ids.member),banned_until:null};sessionId=memberSessio
 check(await auth.getAppUser()===null,'Deactivated account is denied even with a valid provider identity');
 sessionId='disabled-password-session';
 await assert.rejects(auth.recordPasswordSession(authUser(signedInUser,projectUrl),globalThis.fixtureClient));passed++;
-check(!db.prepare('SELECT id FROM auth_sessions WHERE id=?').get(sessionId),'Password sign-in cannot enroll a deactivated account');
+check(!modernGrant(sessionId,ids.member)&&noActiveSessions(ids.member),'Password sign-in cannot enroll a deactivated account');
 method='oauth';sessionId='disabled-google-session';
 await assert.rejects(auth.recordGoogleSession(authSession({user:signedInUser,provider_token:'fixture-token'},projectUrl),globalThis.fixtureClient));passed++;
-check(!db.prepare('SELECT id FROM auth_sessions WHERE id=?').get(sessionId),'Google sign-in cannot enroll a deactivated account');
+check(!modernGrant(sessionId,ids.member)&&noActiveSessions(ids.member),'Google sign-in cannot enroll a deactivated account');
 method='password';
 globalThis.fixtureNative={userId:'legacy-member',email:signedInUser.email,displayName:'Legacy Member',fullName:null};
 db.prepare("UPDATE auth_settings SET enabled=0 WHERE id='main'").run();
@@ -355,7 +357,7 @@ failDatabase=false;
 signedInUser=users.get(ids.current);method='password';sessionId='raced-password-session';
 beforeRun=(sql)=>{if(/INSERT INTO auth_sessions/i.test(sql)){beforeRun=null;db.prepare('INSERT INTO auth_account_status (account_id,status,updated_at) VALUES (?,?,?)').run(accountId(ids.current),'inactive','2026-10-04');}};
 await assert.rejects(auth.recordPasswordSession(authUser(signedInUser,projectUrl),globalThis.fixtureClient));passed++;
-check(!db.prepare('SELECT id FROM auth_sessions WHERE id=?').get(sessionId),'A deactivation between verification and enrollment cannot create a new authorized session');
+check(!modernGrant(sessionId,ids.current)&&noActiveSessions(ids.current),'A deactivation between verification and enrollment cannot create a new authorized session');
 beforeRun=null;db.prepare('DELETE FROM auth_account_status WHERE account_id=?').run(accountId(ids.current));
 
 globalThis.fixtureVisitor=moderator;

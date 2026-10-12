@@ -163,4 +163,19 @@ const realmAccount=await identities.resolveAccount(realmOne);assert.notEqual(awa
 assert.deepEqual({...await identities.accountIdentity(realmAccount,'oidc',realmOne.issuer)},realmOne);assert.equal(await identities.accountIdentity(realmAccount,'oidc',realmTwo.issuer),null);
 await grant.issueDeletionGrant({userId:realmAccount,email:'realm-member@example.test',displayName:'Realm fixture',fullName:null,provider:'E-Mail',ownerKeys:[realmAccount],isModerator:false},{provider:'oidc',projectUrl:realmOne.issuer},realmOne.subject);
 const realmGrant=await grant.readDeletionGrant();assert.equal(realmGrant.identity_issuer,realmOne.issuer,'New grants preserve the complete verified issuer instead of collapsing its realm');assert.equal(await grant.matchesDeletionGrant(realmGrant,{provider:'oidc',projectUrl:realmOne.issuer}),true);
+// A generic issuer contract can carry realms even under the Supabase label.
+// Only the historical origin + UUID combination may reuse predecessor keys.
+const pathSubject='00000000-0000-4000-8000-000000000098',pathOrigin='https://supabase-realms.example.test';
+const pathOne={provider:'supabase',issuer:pathOrigin+'/realms/one',subject:pathSubject},pathTwo={...pathOne,issuer:pathOrigin+'/realms/two'};
+const pathOwner=await identities.resolveAccount(pathOne),otherPathOwner=await identities.resolveAccount(pathTwo);
+assert.notEqual(pathOwner,otherPathOwner,'Two full Supabase issuer paths with the same subject never share an account without proof');
+assert.match(pathOwner,/^account:/);assert.match(otherPathOwner,/^account:/);assert.equal(await identities.resolveAccount(pathOne),pathOwner,'Each exact realm retains its own stable mapping');
+const originOwner=await identities.resolveSupabaseAccount(pathOrigin,pathSubject);assert.equal(originOwner,'supabase:supabase-realms.example.test:'+pathSubject,'Historical origin-only UUID ownership remains compatible');
+assert.equal(identities.legacyIdentityMatches(originOwner,pathOne),false,'A path issuer cannot inherit an origin-only legacy key or session');
+const nonUuid=await identities.resolveAccount({provider:'supabase',issuer:pathOrigin,subject:'opaque-external-subject'});assert.match(nonUuid,/^account:/,'A nonlegacy subject uses an opaque account instead of a predecessor key');
+db.prepare("INSERT INTO auth_account_roles VALUES (?,'admin','2026-10-12','fixture-admin')").run(pathOwner);
+assert.equal(await roles.hasAdminRole(pathOwner),true);assert.equal(await roles.hasAdminRole(otherPathOwner),false,'A role assigned in one realm never authorizes the other realm');assert.equal(await roles.hasAdminRole(originOwner),false);
+db.prepare("INSERT INTO visits (id,owner,workshop,date,vehicle,service,evidence_type,status,created_at) VALUES ('realm-private-visit',?,'fixture','2026-10-12','Fixture car','Repair','document','draft','2026-10-12')").run(pathOwner);
+const privateOwner=db.prepare("SELECT owner FROM visits WHERE id='realm-private-visit'").get().owner;
+assert.equal(auth.ownsVisit({ownerKeys:[pathOwner]},privateOwner),true);assert.equal(auth.ownsVisit({ownerKeys:[otherPathOwner]},privateOwner),false,'Private ownership stays separated between same-subject realms');
 console.log('Provider-independent accounts: ownership, verified linking, races, blocks, roles, private evidence, administration, outbox and deletion retries passed');
