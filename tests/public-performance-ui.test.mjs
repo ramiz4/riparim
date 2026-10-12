@@ -15,11 +15,11 @@ window.matchMedia=()=>({matches:false,addEventListener(){},removeEventListener()
 globalThis.fetch=async url=>{assert.equal(url,'/api/google-places');return Response.json({enabled:false});};
 
 const output='.test-runtime/public-performance';await mkdir(output,{recursive:true});
-await build({stdin:{contents:`export {default as Finder} from './app/finder';export {default as Catalogue} from './app/[locale]/werkstaetten/catalogue';export {I18nProvider} from './lib/i18n/client';export {getMessages,createTranslator} from './lib/i18n/messages';export {defaultCatalogueFilters} from './lib/catalogue-filters';`,resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/ui.mjs',bundle:true,platform:'node',format:'esm',packages:'external',loader:{'.css':'empty'},plugins:[{name:'navigation-fixture',setup(b){
+await build({stdin:{contents:`export {default as CatalogueLoading} from './app/[locale]/werkstaetten/loading';export {default as Finder} from './app/finder';export {default as Catalogue} from './app/[locale]/werkstaetten/catalogue';export {I18nProvider} from './lib/i18n/client';export {getMessages,createTranslator} from './lib/i18n/messages';export {defaultCatalogueFilters} from './lib/catalogue-filters';`,resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/ui.mjs',bundle:true,platform:'node',format:'esm',packages:'external',loader:{'.css':'empty'},plugins:[{name:'navigation-fixture',setup(b){
  b.onResolve({filter:/^next\/(link|navigation)$/},args=>({path:args.path,namespace:'fixture'}));
  b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',resolveDir:process.cwd(),contents:args.path==='next/link'?`import React from 'react';export default function Link({href,children,...props}){return React.createElement('a',{...props,href},children);}`:`export function useRouter(){return {push(){},replace(){},refresh(){}};}export function usePathname(){return '/werkstaetten';}export function useSearchParams(){return new URLSearchParams();}`}));
 }}]});
-const {Finder,Catalogue,I18nProvider,getMessages,createTranslator,defaultCatalogueFilters}=await import(new URL('../'+output+'/ui.mjs',import.meta.url));
+const {CatalogueLoading,Finder,Catalogue,I18nProvider,getMessages,createTranslator,defaultCatalogueFilters}=await import(new URL('../'+output+'/ui.mjs',import.meta.url));
 const {createElement:h,act}=await import('react'),{renderToStaticMarkup}=await import('react-dom/server'),{createRoot}=await import('react-dom/client');
 const workshops=Array.from({length:25},(_,i)=>({id:`fixture-${String(i).padStart(2,'0')}`,name:`Fixture ${String(i).padStart(2,'0')}`,city:'Prishtina',address:'Fixture address',phone:'+38349123456',whatsapp:'',lat:null,lng:null,rating:null,count:0,specialty:'Fixture',description:'Fixture description',services:['Bremsen & Fahrwerk'],serviceDetails:[],brands:['Volvo'],languages:['Deutsch'],sources:[],checkedAt:'2026-10-04',status:'published',googleRating:null}));
 const props={initialWorkshops:workshops,initialError:'',account:null,isAdmin:false,initialFilters:defaultCatalogueFilters};
@@ -28,10 +28,30 @@ const root=createRoot(document.getElementById('root'));
 try{
  for(const locale of ['de','sq','en']){
   const t=createTranslator(getMessages(locale));
+  const loadingLabels={de:'Werkstätten werden geladen …',sq:'Duke ngarkuar serviset …',en:'Loading workshops …'};
+  const loadingDom=new JSDOM(renderToStaticMarkup(wrap(locale,h(CatalogueLoading))));
+  try{
+   const main=loadingDom.window.document.querySelector('main');
+   assert.equal(main.querySelectorAll('h1,h2,[class*="placeholder"]').length,0,`${locale}: pending catalogue has no repeated title or skeleton cards`);
+   assert.equal(main.textContent,loadingLabels[locale]);
+   assert.equal(main.querySelectorAll('[role="status"]').length,1,'One status announces loading without a second English spinner label');
+   const status=main.querySelector('[role="status"]');
+   assert.equal(status.textContent,t('common.loadingWorkshops'));
+   assert.equal(status.querySelector('svg').getAttribute('aria-hidden'),'true','The loading graphic is decorative beside localized text');
+   assert.equal(main.querySelectorAll('button,a,input,[tabindex]').length,0,'A passive loading indicator adds no keyboard stop');
+  }finally{loadingDom.window.close();}
   for(const Page of [Finder,Catalogue]){
    const ssr=new JSDOM(renderToStaticMarkup(wrap(locale,h(Page,props))));
    try{for(const picker of ssr.window.document.querySelectorAll('[role="combobox"]'))assert(picker.querySelector('[data-slot="select-value"]').textContent.trim(),`${locale}: selected values must be readable before JavaScript loads`);}finally{ssr.window.close();}
   }
+  const pendingDom=new JSDOM(renderToStaticMarkup(wrap(locale,h(Catalogue,{...props,publicSnapshot:true,initialWorkshops:[]}))));
+  try{
+   const main=pendingDom.window.document.querySelector('main');
+   const status=[...main.querySelectorAll('[role="status"]')].find(node=>node.textContent===loadingLabels[locale]);
+   assert(status,'The catalogue live-data loading state uses localized status text');
+   assert.equal(status.querySelector('svg').getAttribute('aria-hidden'),'true');
+   assert.equal(status.querySelectorAll('[role="status"]').length,0,'The shared graphic creates no nested status announcement');
+  }finally{pendingDom.window.close();}
   await act(async()=>root.render(wrap(locale,h(Catalogue,props))));
   assert.equal(document.querySelectorAll('.catalogue-card').length,12);
   const more=()=>[...document.querySelectorAll('button')].find(button=>button.textContent===t('public.showMore'));
@@ -54,5 +74,5 @@ try{
    await act(async()=>root.render(null));
   }
  }
- console.log('Public performance UI: SSR selections, keyboard pagination and vehicle-dialog focus passed in DE/SQ/EN; no live requests.');
+ console.log('Public performance UI: accessible catalogue loading, SSR selections, keyboard pagination and vehicle-dialog focus passed in DE/SQ/EN; no live requests.');
 }finally{await act(async()=>root.unmount());dom.window.close();}
