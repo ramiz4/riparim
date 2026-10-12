@@ -231,8 +231,9 @@ drei, ohne Duplikate. Zufällige Auswahlen können sich wiederholen. Sobald
 veröffentlichte aktive Partner existieren, besteht die Auswahl ausschließlich
 aus diesen und wird als Anzeige gekennzeichnet. Ohne aktive veröffentlichte
 Partner werden auf ausdrücklichen Nutzerwunsch drei veröffentlichte Betriebe
-als sichtbar gekennzeichnete Beispielplatzierungen gezeigt. Weder ein Beispiel
-noch eine bezahlte Platzierung ist eine Qualitätsprüfung.
+als zufällige Auswahl gezeigt; auf Nutzerwunsch ohne „Beispielplatzierung“-Text.
+Diese Auswahl aktiviert keinen Premium-Status. Weder die Auswahl noch eine
+bezahlte Platzierung ist eine Qualitätsprüfung.
 
 Beim Deployment des geprüften Main-Releases wird die additive Migration vor
 der neuen Anwendung angewendet. Produktionspartner werden nicht automatisch aktiviert. Die Tests verwenden ausschließlich

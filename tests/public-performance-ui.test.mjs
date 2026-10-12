@@ -49,6 +49,10 @@ try{
     assert(!doc.querySelector('.catalogue-detail-search,.catalogue-private-context,.search-tabs'),'public pages have a single search path without the vehicle wizard');
     if(Page===Finder){
      assert(doc.querySelector('.landing-hero').nextElementSibling.matches('.discover-section'),'discovery sits directly after the hero');
+     const partnerHeader=doc.querySelector('.discover-heading');
+     assert.equal(partnerHeader.textContent,t('public.partnerTitle'),'partner header contains only the title');
+     assert(partnerHeader.querySelector('h2 svg'),'partner title includes its decorative icon');
+     assert.equal(partnerHeader.querySelectorAll('p,button,a').length,0,'partner header has no extra copy or actions');
      const shortcuts=doc.querySelector('.shortcuts-section');
      assert(shortcuts.previousElementSibling.matches('.discover-section'),'shortcuts follow the workshop cards');
      assert.equal(shortcuts.querySelector('h2').textContent,t('public.shortcutsTitle'));
@@ -121,8 +125,7 @@ try{
   await act(async()=>finish(Response.json({preview:true,workshops:[{...workshops[0],id:'hidden',name:'AAA hidden',status:'draft'},...published]})));
   assert.equal(document.querySelectorAll('.discover-grid .catalogue-card').length,3,'discovery is bounded to three published cards');
   assert([...document.querySelectorAll('.discover-grid h3')].every(node=>/^Fixture 0[0-4]$/.test(node.textContent)),'random discovery includes published records only');
-  assert([...document.querySelectorAll('.partner-label')].every(node=>node.textContent===t('public.partnerExample')),'unpaid examples are labelled honestly');
-  assert.equal(document.querySelector('.discover-all').getAttribute('href'),locale==='de'?'/werkstaetten':locale==='sq'?'/sq/serviset':'/en/workshops');
+  assert.equal(document.querySelectorAll('.partner-label').length,0,'fallback workshop cards have no example-placement label');
   assert([...document.querySelectorAll('.discover-grid a')].every(node=>published.some(workshop=>node.getAttribute('href').includes(workshop.id))),'cards link to actual selected profiles');
   await act(async()=>root.render(null));
   globalThis.fetch=async()=>Response.json({workshops:[],preview:true});
