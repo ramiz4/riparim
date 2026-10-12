@@ -2,6 +2,7 @@ import { handleMigrationRequest, stampReleaseCommit } from "../lib/migration-exp
 import {servePublicRelease} from "../lib/public-release-routing";
 import {isPagePath,isTechnicalPath} from "../lib/i18n/locale";
 import { stripSitesIdentityHeaders } from "../lib/cloudflare-request";
+import {withAuthRequest} from "../lib/auth/request-context";
 
 export default {
   async fetch(request: Request, env: Cloudflare.Env, ctx: ExecutionContext) {
@@ -18,7 +19,7 @@ export default {
     if(url.pathname==="/api/session"&&request.method==="GET"&&!request.headers.has("Cookie"))return stampReleaseCommit(Response.json({account:null,isAdmin:false},{headers:{"Cache-Control":"private, no-store","X-Content-Type-Options":"nosniff","Referrer-Policy":"strict-origin-when-cross-origin"}}));
     if(url.pathname==="/api/workshops"&&request.method==="GET"&&url.searchParams.get("admin")!=="1")return stampReleaseCommit(await (await import("../lib/public-workshops")).publicWorkshopResponse(request));
     const handler=(await import("vinext/server/fetch-handler")).default;
-    const result = await handler.fetch(stripSitesIdentityHeaders(request), env, ctx);
+    const result = await withAuthRequest(()=>handler.fetch(stripSitesIdentityHeaders(request), env, ctx));
     return stampReleaseCommit(result);
   },
 };

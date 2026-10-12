@@ -22,9 +22,13 @@ export function authSecretMatchesOrigin(origin:string){
 
 // No credentials or tokens may follow redirects, even from an approved host.
 export function providerFetch(origin:string,timeout=8000):typeof fetch{
- return (input,init)=>{
+ return async(input,init)=>{
   const url=new URL(input instanceof Request?input.url:String(input));
   if(url.origin!==origin||!url.pathname.startsWith('/auth/v1/'))throw Error('UNTRUSTED_AUTH_REQUEST');
-  return fetch(input,{...init,redirect:'error',signal:init?.signal?AbortSignal.any([init.signal,AbortSignal.timeout(timeout)]):AbortSignal.timeout(timeout)});
+  // Workers reject redirect:'error' before sending a request. Manual mode is
+  // portable and lets us reject redirects without forwarding any credentials.
+  const response=await fetch(input,{...init,redirect:'manual',signal:init?.signal?AbortSignal.any([init.signal,AbortSignal.timeout(timeout)]):AbortSignal.timeout(timeout)});
+  if(response.status>=300&&response.status<400){await response.body?.cancel();throw Error('AUTH_PROVIDER_REDIRECT');}
+  return response;
  };
 }

@@ -2,6 +2,7 @@ import { handleMigrationRequest } from "../lib/migration-export";
 import handler from "vinext/server/fetch-handler";
 import { runWithConnectorBinding } from "../lib/connector-context";
 import type { ConnectorBinding } from "../lib/connector-contract.mjs";
+import {withAuthRequest} from "../lib/auth/request-context";
 
 export default {
   async fetch(request: Request, env: Cloudflare.Env, ctx: ExecutionContext<{ CONNECTORS?: ConnectorBinding }>) {
@@ -26,6 +27,6 @@ export default {
         },
       };
     }
-    return runWithConnectorBinding(binding, () => handler.fetch(request, env, ctx));
+    return withAuthRequest(()=>runWithConnectorBinding(binding, () => handler.fetch(request, env, ctx)));
   },
 };

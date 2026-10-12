@@ -55,6 +55,27 @@ bestehen. Bei Customhosts enthält der Cookie-Name die gesamte Origin, damit
 unterschiedliche Hosts oder Ports keine alten Sitzungs-/PKCE-Tokens teilen.
 Hosted Cookie-Namen bleiben kompatibel. Eine aktive Instanz kann im Formular nicht direkt gewechselt werden.
 
+Der Transport verwendet `redirect: "manual"` und weist jede 3xx-Antwort zurück,
+bevor ein weiteres Ziel kontaktiert wird. `redirect: "error"` wirft im verwendeten
+Workers-Runtime bereits vor dem Netzwerkaufruf eine Exception. Bei einer anstehenden
+Session-Erneuerung führte die SDK-Wiederholung dadurch zu 25,4 Sekunden Wartezeit
+pro Auth-Prüfung und zu 50,8 beziehungsweise 76,2 Sekunden bei wiederholten Prüfungen.
+Die native Workerprüfung schützt deshalb sowohl den erfolgreichen Provideraufruf
+als auch die Redirect-Sperre.
+
+Cookiebasierte Auth-Clients teilen innerhalb eines HTTP-Requests ein Zeitbudget
+von 1,5 Sekunden ab dem ersten Provideraufruf, einschließlich Antwortkörper.
+Netzwerkfehler, 5xx, Redirects und ungültige Antworten beenden die Prüfung ohne
+SDK-Wiederholung; weitere Clients desselben Requests übernehmen diesen Ausfall.
+Dabei werden keine Session-Cookies gelöscht oder überschrieben. Ein späterer
+Request kann erneut prüfen. Eine eindeutige Ablehnung abgelaufener Credentials
+bleibt hingegen wirksam. Provider- und App-Prüfungen sind weiterhin Voraussetzung
+für private Rechte; der Ausfallzustand wird niemals zwischen Requests geteilt.
+Explizite Anmelde- und Kontoänderungsoperationen beginnen eine neue Auth-Phase,
+damit lokale Datenbank-/Dateiarbeit vor einer Mutation deren Budget nicht verbraucht.
+Passwortclients ohne gespeicherte Sitzung und Adminclients behalten ihren
+bisherigen Transport-Timeout.
+
 ## Kontoübernahme vor dem Cutover
 
 Ein URL-Wechsel migriert weder Konten noch Zugangsdaten. Zuerst die Quelle und
