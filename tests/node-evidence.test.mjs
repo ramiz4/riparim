@@ -37,7 +37,7 @@ try{
  globalThis.fixtureUser={...globalThis.fixtureUser,userId:owner};
  const started=new Promise(resolve=>paused=resolve),upload=api.visits.POST(new Request(origin+'/api/visits',{method:'POST',headers:{Origin:origin},body:body()}));
  await started;
- const auth={projectUrl,client:{auth:{admin:{async deleteUser(){return {error:null};}}}}};
+ const auth={projectUrl,provider:"supabase",client:{async deleteUser(){return {error:null};}}};
  await api.deleteAccount(auth,account);release();
  assert.equal((await upload).status,401);
  assert.equal((await storage.bucket.list({prefix:'evidence/'+owner+'/'})).objects.length,0);

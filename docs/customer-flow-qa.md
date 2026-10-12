@@ -591,3 +591,24 @@ Testdateien gleichzeitig; Tastaturfokus erreicht die Auswahl. Nach dem
 lokal abgefangenen Einreichen erhält die Bestätigungsüberschrift den Fokus.
 Die Vorschau verwendet fiktive Konten und lokale Testdateien. Es wurden keine
 Produktionsanträge oder Nachweise erzeugt.
+
+
+## Auth-Anbieterprüfung (Issue #139, 12. Oktober 2026)
+
+Die tatsächliche Setupkomponente und sämtliche bestehenden Layoutstyles wurden
+im bestätigten Chrome-Profil geprüft: DE Light auf 1280 Pixeln, SQ Dark und EN
+System auf 390 Pixeln sowie Lade-, Busy- und Fehlerzustände. Tastaturauswahl,
+Tabfokus, Anbieterwechsel im Entwurf, gesperrte Felder/Sprachnavigation und
+anbieterspezifische Hilfe funktionierten ohne horizontalen Dokumentüberlauf.
+PocketBase zeigt kein Public-Keyfeld; die Speicherfehlermeldung nennt neutral
+Adresse und Konfiguration des Anmeldedienstes. Requests hatten ausschließlich
+synthetische Antworten und lösten keine echten Providerwrites oder E-Mails aus.
+
+Automatisiert sprechen die tatsächlichen Adapter und App-Routen unabhängige
+Supabase-/PocketBase-Protokollserver. Der echte Node-HTTP-Test prüft zusätzlich
+PocketBase über eine lokale TLS-Instanz, Runtimebindings, bestehende private
+Besitzpfade, Profil-/Reauthablauf, Rollen, kontrollierten Wechsel, Datenschutz
+und Logout. Eine separate lokale PocketBase-0.40.5-Probe bestätigt dessen
+aktuelle REST-/ExternalAuth-Verträge mit synthetischen Konten. Ein echter
+Googleclient, produktiver SMTP-Versand und eine Live-Hash-/Kontoübernahme waren
+nicht Gegenstand dieser Probe; Voraussetzungen stehen in [auth-provider.md](auth-provider.md).
