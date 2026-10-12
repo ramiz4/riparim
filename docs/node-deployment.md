@@ -49,7 +49,7 @@ weder Quellcheckout noch Build-/Restore-Abhängigkeiten.
 Der ausführbare Installer liegt unter `node/.node-runtime/install.mjs` im
 veröffentlichten Archiv. Ein Administrator übernimmt ihn einmal aus dem
 geprüften Main-Release in ein geschütztes Werkzeugverzeichnis. Zum Beispiel auf
-der Administrationsmaschine das Nodepaar über `gh release download --repo
+der Administrationsmaschine das Nodepaar über `gh release download vX.Y.Z --repo
 ramiz4/riparim --pattern 'riparim-node-vX.Y.Z.*'` herunterladen, GitHubrelease und
 Provenienz prüfen, dessen Archiv-SHA-256 abgleichen und dann nur den benannten
 Installer mit `tar -xOzf riparim-node-vX.Y.Z.tar.gz

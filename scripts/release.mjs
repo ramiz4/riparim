@@ -27,7 +27,7 @@ if (tags.length) {
   if (!response.ok) throw new Error(`The existing ${tags[0]} tag has no readable GitHub release (HTTP ${response.status}). Complete its publication before retrying.`);
   const publishedRelease = await response.json();
   assertSitesReleaseAssets(publishedRelease, tags[0], commit);
-  if (publishedRelease.body?.includes(nodeReleaseMarker) || publishedRelease.assets?.some(asset => asset.name.startsWith("riparim-node-"))) assertNodeReleaseAssets(publishedRelease, tags[0], commit);
+  if (includesNode || publishedRelease.body?.includes(nodeReleaseMarker) || publishedRelease.assets?.some(asset => asset.name.startsWith("riparim-node-"))) assertNodeReleaseAssets(publishedRelease, tags[0], commit);
   release = existingReleaseMetadata(publishedRelease, tags[0], commit);
   console.log(`Reusing published release ${release.gitTag} for the exact workflow commit.`);
 } else {

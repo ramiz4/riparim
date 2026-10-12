@@ -28,10 +28,10 @@ try {
   await writeFile(join(root, "node_modules/semantic-release/package.json"), JSON.stringify({ type: "module", exports: "./index.mjs" }));
   await writeFile(join(root, "node_modules/semantic-release/index.mjs"), `import {writeFile} from 'node:fs/promises';
 export default async()=>{await writeFile('semantic-called','yes');return {nextRelease:{version:'1.2.4',gitTag:'v1.2.4',gitHead:process.env.GITHUB_SHA}};};`);
-  for (const [provider, archive, provenance] of [["cloudflare", "riparim-worker.tar.gz", "provenance.json"], ["sites", "riparim-sites.tar.gz", "sites-provenance.json"]]) {
+  for (const [provider, archive, provenance] of [["cloudflare", "riparim-worker.tar.gz", "provenance.json"], ["sites", "riparim-sites.tar.gz", "sites-provenance.json"], ["node", "riparim-node.tar.gz", "node-provenance.json"]]) {
     const bytes = Buffer.from(`${provider} verified fixture bytes`);
     await writeFile(join(root, "artifacts", archive), bytes);
-    await writeFile(join(root, "artifacts", provenance), JSON.stringify({ repository: "ramiz4/riparim", commit, provider, sha256: createHash("sha256").update(bytes).digest("hex"), ...(provider === "sites" ? { project_id: "appgprj_6abfd028b7e48191822a15d44cbbda8d" } : {}) }));
+    await writeFile(join(root, "artifacts", provenance), JSON.stringify({ repository: "ramiz4/riparim", commit, provider, sha256: createHash("sha256").update(bytes).digest("hex"), ...(provider === "node" ? { format: 1 } : {}), ...(provider === "sites" ? { project_id: "appgprj_6abfd028b7e48191822a15d44cbbda8d" } : {}) }));
   }
   const preload = join(root, "fixture-preload.mjs");
   await writeFile(preload, `import childProcess from 'node:child_process';import {syncBuiltinESMExports} from 'node:module';
@@ -74,6 +74,20 @@ globalThis.fetch=async(url)=>{
   }
   const partialNode = await run({ FIXTURE_PUBLICATION: JSON.stringify({ ...publication, assets: [...publication.assets, { name: `riparim-node-${tag}.tar.gz`, state: "uploaded", size: 123 }] }) }); assert.notEqual(partialNode.status, 0); assert.equal(partialNode.outputs, "");
   const completeNode = await run({ FIXTURE_PUBLICATION: JSON.stringify({ ...publication, body: "<!-- riparim-release: node-v1 -->", assets: [...publication.assets, { name: `riparim-node-${tag}.tar.gz`, state: "uploaded", size: 123 }, { name: `riparim-node-${tag}.json`, state: "uploaded", size: 123 }] }) }); assert.equal(completeNode.status, 0, completeNode.stderr);
+  // The checked source configuration defines publication completeness even if
+  // a failed/manual publication omitted both its marker and all Node assets.
+  await copyFile(resolve("release.config.mjs"), join(root, "release.config.mjs"));
+  for (const target of ["cloudflare", "node"]) {
+    const incompleteCurrent = await run({ DEPLOYMENT_TARGET: target });
+    assert.notEqual(incompleteCurrent.status, 0, "current Node release configuration must reject four remote assets without a marker");
+    assert.equal(incompleteCurrent.outputs, ""); assert.equal(incompleteCurrent.published, false);
+    assert.match(incompleteCurrent.stderr, /complete Node archive and provenance/);
+    const completeCurrent = await run({ DEPLOYMENT_TARGET: target, FIXTURE_PUBLICATION: JSON.stringify({ ...publication, assets: [...publication.assets, { name: `riparim-node-${tag}.tar.gz`, state: "uploaded", size: 123 }, { name: `riparim-node-${tag}.json`, state: "uploaded", size: 123 }] }) });
+    assert.equal(completeCurrent.status, 0, completeCurrent.stderr); assert.equal(completeCurrent.published, false);
+    assert.match(completeCurrent.outputs, /released=true/); assert(completeCurrent.outputs.includes(`deployment_target=${target}`));
+  }
+  await writeFile(join(root, "release.config.mjs"), "export default {};\n");
+  const historical = await run(); assert.equal(historical.status, 0, historical.stderr); assert.match(historical.outputs, /released=true/); assert.equal(historical.published, false);
   const provenancePath = join(root, "artifacts/provenance.json"), verifiedProvenance = await readFile(provenancePath, "utf8");
   await writeFile(provenancePath, JSON.stringify({ ...JSON.parse(verifiedProvenance), commit: "f".repeat(40) }));
   const wrongBuild = await run(); assert.notEqual(wrongBuild.status, 0); assert.equal(wrongBuild.outputs, ""); assert.equal(wrongBuild.published, false);
