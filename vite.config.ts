@@ -6,6 +6,7 @@ import hostingConfig from "./.openai/hosting.json";
 import { readExecutionProfile } from "./scripts/execution-profile.mjs";
 import { sites } from "./build/sites-vite-plugin";
 import { connectorPreview } from "./build/connector-preview-plugin.mjs";
+import {vinextLazyHandler} from "./build/vinext-lazy-handler.mjs";
 import { vinextNavigation } from "./build/vinext-navigation.mjs";
 import { releaseBuildTarget, sitesBuildConfiguration } from "./scripts/release-policy.mjs";
 
@@ -45,6 +46,7 @@ export default defineConfig(async ({ command }) => {
     plugins: [
       vinext(),
       vinextNavigation(),
+      vinextLazyHandler(),
       sites({ mockAuth: !managedLinux }),
       connectorPreview(),
       cloudflare({

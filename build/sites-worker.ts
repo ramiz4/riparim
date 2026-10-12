@@ -1,12 +1,9 @@
-import { handleMigrationRequest, migrationReadOnly } from "../lib/migration-export";
-import {withNotificationContext} from "../lib/notifications/background";
-import {processNotifications} from "../lib/notifications/outbox";
+import { handleMigrationRequest } from "../lib/migration-export";
 import handler from "vinext/server/fetch-handler";
 import { runWithConnectorBinding } from "../lib/connector-context";
 import type { ConnectorBinding } from "../lib/connector-contract.mjs";
 
 export default {
-  scheduled(_controller:ScheduledController,_env:Cloudflare.Env,ctx:ExecutionContext){if (!migrationReadOnly(_env)) ctx.waitUntil(processNotifications());},
   async fetch(request: Request, env: Cloudflare.Env, ctx: ExecutionContext<{ CONNECTORS?: ConnectorBinding }>) {
     const migration = await handleMigrationRequest(request, env);
     if (migration) return migration;
@@ -29,6 +26,6 @@ export default {
         },
       };
     }
-    return withNotificationContext(ctx,()=>runWithConnectorBinding(binding, () => handler.fetch(request, env, ctx)));
+    return runWithConnectorBinding(binding, () => handler.fetch(request, env, ctx));
   },
 };

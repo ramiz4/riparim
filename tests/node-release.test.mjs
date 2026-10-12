@@ -87,7 +87,7 @@ try{
  const envfile=await readFile(join(host,'shared/runtime.env'));
  const db=new DatabaseSync(join(host,'shared/data/app.sqlite'));assert(db.prepare('SELECT COUNT(*) AS n FROM riparim_node_migrations').get().n>10);db.exec("CREATE TABLE release_fixture(value TEXT); INSERT INTO release_fixture VALUES ('preserve me')");db.close();
  const files=new DatabaseSync(join(host,'shared/data/files.sqlite'));files.exec("CREATE TABLE release_fixture(value BLOB); INSERT INTO release_fixture VALUES (X'000102ff')");files.close();
- await run(process.execPath,['.node-runtime/command.mjs','notifications'],{cwd:prepared.path,env:{PATH:process.env.PATH,RIPARIM_DATA_DIR:join(host,'shared/data')}});
+ await run(process.execPath,['.node-runtime/command.mjs','notifications','riparim-review-missing-event'],{cwd:prepared.path,env:{PATH:process.env.PATH,RIPARIM_DATA_DIR:join(host,'shared/data')}});
  assert.equal((await prepareNodeRelease({root:host,tag,request})).reused,true);
  await activateNodeRelease({root:host,tag,request,stopped:true});
  assert.deepEqual(await readFile(join(host,'shared/runtime.env')),envfile);

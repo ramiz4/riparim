@@ -25,22 +25,22 @@ if(releaseBuildTarget(process.env.BUILD_TARGET)==='cloudflare'){
   let pages=0;
   for(const locale of ['de','sq','en']){
    const prefix=locale==='de'?'':'/'+locale;
-   for(const id of [null,...published.map(w=>w.id)]){
-    const path=id?`/werkstatt/${id}`:'/werkstaetten';
+   for(const id of ["home","privacy",null,...published.map(w=>w.id)]){
+    const path=id==="privacy"?"/datenschutz":id==="home"?"/":id?`/werkstatt/${id}`:'/werkstaetten';
     const response=await runtime.dispatchFetch('https://riparim.com'+localizeHref(path,locale));
     const html=await response.text();
     if(response.status!==200||response.headers.has('set-cookie')||!html.includes(`<html lang="${locale}"`)||!/<\/html>\s*$/.test(html)||!/<h1(?:\s|>)/.test(html)||/Worker exceeded resource limits/.test(html)||html.includes('data-slot="dropdown-menu-label"'))throw Error(`Public release rendering failed: ${prefix+path}`);
-    if(id&&!html.includes(`data-workshop-id="${id}"`))throw Error('Public release profile identity differs');
-    const file=resolve('dist/client/__public',locale,path.slice(1)+'.html');
+    if(id&&!["home","privacy"].includes(id)&&!html.includes(`data-workshop-id="${id}"`))throw Error('Public release profile identity differs');
+    const file=resolve('dist/client/__public',locale,(['home','privacy'].includes(id)?id:path.slice(1))+'.html');
     await mkdir(dirname(file),{recursive:true});await writeFile(file,html);pages++;
    }
   }
   await runtime.setOptions({...options,bindings:{SITE_ORIGIN:'https://riparim.com',PUBLIC_RELEASE_RENDER:'shell'}});
-  for(const locale of ['de','sq','en'])for(const id of [null,...published.map(w=>w.id)]){
-   const path=id?`/werkstatt/${id}`:'/werkstaetten';
+  for(const locale of ['de','sq','en'])for(const id of ["home","privacy",null,...published.map(w=>w.id)]){
+   const path=id==="privacy"?"/datenschutz":id==="home"?"/":id?`/werkstatt/${id}`:'/werkstaetten';
    const response=await runtime.dispatchFetch('https://riparim.com'+localizeHref(path,locale)),html=await response.text();
    if(response.status!==200||response.headers.has('set-cookie')||!html.includes(`<html lang="${locale}"`)||!/<\/html>\s*$/.test(html)||html.includes('data-workshop-id='))throw Error('Public shell rendering failed: '+path);
-   const file=resolve('dist/client/__public',locale,path.slice(1)+'-shell.html');await mkdir(dirname(file),{recursive:true});await writeFile(file,html);
+   const file=resolve('dist/client/__public',locale,(['home','privacy'].includes(id)?id:path.slice(1))+'-shell.html');await mkdir(dirname(file),{recursive:true});await writeFile(file,html);
   }
   await writeFile('dist/public-release.json' ,JSON.stringify({schemaVersion:1,commit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),pages,shells:pages,published:published.length,locales:['de','sq','en'],source:'isolated-canonical-catalogue',privateData:false},null,2)+'\n');
   console.log(`Rendered ${pages} public release documents from isolated canonical data; no production or provider access`);

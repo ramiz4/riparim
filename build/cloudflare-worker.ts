@@ -1,20 +1,24 @@
-import { handleMigrationRequest, migrationReadOnly, stampReleaseCommit } from "../lib/migration-export";
-import handler from "vinext/server/fetch-handler";
+import { handleMigrationRequest, stampReleaseCommit } from "../lib/migration-export";
 import {servePublicRelease} from "../lib/public-release-routing";
+import {isPagePath,isTechnicalPath} from "../lib/i18n/locale";
 import { stripSitesIdentityHeaders } from "../lib/cloudflare-request";
 
 export default {
-  scheduled(_controller: ScheduledController, _env: Cloudflare.Env, ctx: ExecutionContext) {
-    if (!migrationReadOnly(_env)) ctx.waitUntil(import("../lib/notifications/outbox").then(({processNotifications})=>processNotifications()));
-  },
   async fetch(request: Request, env: Cloudflare.Env, ctx: ExecutionContext) {
     const url=new URL(request.url);
     if(url.hostname==="www.riparim.com")return Response.redirect("https://riparim.com"+url.pathname+url.search,308);
+    if(/^\/de(?:\/|$)/.test(url.pathname)){url.pathname=url.pathname.slice(3)||"/";return stampReleaseCommit(new Response(null,{status:308,headers:{Location:url.href,"Cache-Control":"private, no-store"}}));}
     const publicRelease=await servePublicRelease(request,env);
     if(publicRelease)return stampReleaseCommit(publicRelease);
-    const {withNotificationContext}=await import("../lib/notifications/background");
     const migration = await handleMigrationRequest(request, env);
-    const result = migration ?? await withNotificationContext(ctx, () => handler.fetch(stripSitesIdentityHeaders(request), env, ctx));
+    if(migration)return stampReleaseCommit(migration);
+    if(!isTechnicalPath(url.pathname)&&!isPagePath(url.pathname))return stampReleaseCommit(new Response("Not Found",{status:404,headers:{"Cache-Control":"private, no-store","X-Content-Type-Options":"nosniff","Referrer-Policy":"strict-origin-when-cross-origin"}}));
+    // The owned Worker has no header-based native identity. With no cookies
+    // there can be no authenticated session; avoid loading React for guests.
+    if(url.pathname==="/api/session"&&request.method==="GET"&&!request.headers.has("Cookie"))return stampReleaseCommit(Response.json({account:null,isAdmin:false},{headers:{"Cache-Control":"private, no-store","X-Content-Type-Options":"nosniff","Referrer-Policy":"strict-origin-when-cross-origin"}}));
+    if(url.pathname==="/api/workshops"&&request.method==="GET"&&url.searchParams.get("admin")!=="1")return stampReleaseCommit(await (await import("../lib/public-workshops")).publicWorkshopResponse(request));
+    const handler=(await import("vinext/server/fetch-handler")).default;
+    const result = await handler.fetch(stripSitesIdentityHeaders(request), env, ctx);
     return stampReleaseCommit(result);
   },
 };

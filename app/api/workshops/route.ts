@@ -1,5 +1,5 @@
 import {isLocale} from "@/lib/i18n/locale";
-import {workshopDisplayById} from "@/lib/workshop-display.server";
+import {publicWorkshopResponse} from "@/lib/public-workshops";
 import {ValidationError} from "@/lib/validation-error";
 import {getAdminUser} from "@/app/auth";
 import {storage} from "@/db/storage";
@@ -10,10 +10,11 @@ import {json,sameOrigin,readJson} from "@/lib/http";
 export const dynamic="force-dynamic";
 export async function GET(request:Request){try{
  const query=new URL(request.url).searchParams,admin=query.get("admin")==="1",locale=query.get("locale");
+ if(!admin)return publicWorkshopResponse(request);
  if(admin){const user=await getAdminUser();if(!user)return json({errorCode:"authentication_required",error:"Bitte melde dich an."},401);if(!user.isModerator)return json({errorCode:"forbidden",error:"Kein Zugriff auf die Verwaltung."},403);}
  if(locale!==null&&!isLocale(locale))return json({errorCode:"invalid_request",error:"Ungültige Sprache."},400);
  const workshops=await listWorkshops(admin);
- return json({workshops,...(!admin&&locale!==null&&isLocale(locale)?{displayById:await workshopDisplayById(workshops,locale)}:{})});
+ return json({workshops});
  }catch(e){console.error("directory-read",e);return json({errorCode:"unavailable",error:"Die Werkstattdaten sind gerade nicht verfügbar. Bitte versuche es erneut."},503);}}
 
 export async function POST(request:Request){return save(request,false);}

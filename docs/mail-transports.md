@@ -1,7 +1,7 @@
 # Bewertungsnachrichten und Anbieterwechsel
 
 Die bestehende Outbox übernimmt weiterhin Moderationsereignisse, Leases,
-Backoff und Verarbeitung alle fünf Minuten. Die Moderationsentscheidung bleibt
+Backoff und sofortigen Einzelversand. Wiederholungen erfolgen ausschließlich manuell, höchstens fünfmal zusätzlich zum Erstversand. Die Wartezeiten betragen 1, 5, 15, 30 und 60 Minuten; Claim, Wartezeit und Gesamtlimit von sechs Versuchen werden zusammen geprüft. Die Moderationsentscheidung bleibt
 auch bei Versandfehlern erfolgreich. Der kleine Vertrag in
 `lib/notifications/transports.ts` wählt Resend oder SMTP; es gibt keinen
 zusätzlichen Queue-Dienst und keinen automatischen Provider-Fallback.
@@ -78,8 +78,7 @@ Markierung `smtp_in_flight=1` wird vor Verbindungsbeginn gesetzt:
   Timeout- und Protocolfehler bleiben `unknown`, auch mit `responseCode`: Eine
   unterminierte oder unvollständige Mehrzeilenantwort beweist keine Ablehnung.
 - Verbindungsabbruch, Timeout, Prozessverlust, abgelaufene Lease und verlorene
-  Erfolgs-/Start-Acknowledgements ergeben `unknown`. Auch administratives
-  `force` darf daraus keine neue Sendung machen.
+  Erfolgs-/Start-Acknowledgements ergeben `unknown`. Auch eine administrative Wiederholung darf daraus keine neue Sendung machen.
 - Eine positive Providerantwort bedeutet Übergabe, keine endgültige Zustellung.
   Nach gespeichertem Erfolg werden private Payload und MIME-Inhalt entfernt.
 
@@ -101,7 +100,8 @@ zum ungeprüften Freischalten solcher Ereignisse.
 3. SMTP-Host, TLS, Domainfreigabe und Authentifizierung in isolierter Umgebung
    prüfen. Zugangskonfiguration im geschützten Node-Betrieb setzen. Die bestehende
    geschützte Notification-API zeigt Fehler ohne Empfänger, Nachrichten oder Keys.
-4. `npm run notifications:node` im Node-Betrieb alle fünf Minuten ausführen.
+4. Im Node-Betrieb keinen Timer/Cron einrichten. Eine ausdrückliche Wiederholung
+   verwendet `npm run notifications:node -- <ereignis-id>` und dieselben Limits.
    Kein zusätzliches Queue-Produkt ist nötig. Nach dem Wechsel nur neue oder
    noch unbegonnene Ereignisse durch den neuen Anbieter verarbeiten lassen.
 5. Bei Rückkehr zum alten Transport dessen ursprünglichen Scope wiederherstellen;

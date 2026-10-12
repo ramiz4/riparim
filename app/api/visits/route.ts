@@ -9,7 +9,7 @@ import {services} from "@/lib/workshops";
 import {json,sameOrigin,readJson,validDate} from "@/lib/http";
 import {accountBlocked} from "@/lib/auth/account-status";
 import {moderationAuthority} from "@/lib/auth/moderation-authority";
-import {triggerNotifications} from "@/lib/notifications/background";
+import {triggerNotifications} from "@/lib/notifications/dispatch";
 export const dynamic="force-dynamic";
 const failure=()=>json({error:"Die Bewertung konnte gerade nicht verarbeitet werden. Deine Eingaben bleiben erhalten.",errorCode:"review_unavailable"},503);
 const fields="v.id, v.workshop, v.date, v.vehicle, v.service, v.evidence_type, v.evidence_note, v.status, v.moderator_note, v.display_name, v.rating, v.review, v.created_at, v.file_name, v.revision, w.name AS workshop_name";
@@ -81,7 +81,7 @@ export async function PATCH(request:Request){if(!sameOrigin(request))return json
  if(!result[1].meta.changes)return json({error:"Die Bewertung wurde geändert oder die Werkstatt ist ausgeblendet. Bitte aktualisiere die Liste.",errorCode:"review_conflict"},409);
  // Delivery runs separately from the committed moderation decision. Provider
  // outages retain the durable event; they never roll back a published review.
- try{await triggerNotifications({id:eventId,limit:1});}catch{console.error("review-notification-dispatch-deferred");}
+ try{await triggerNotifications({id:eventId});}catch{console.error("review-notification-dispatch-deferred");}
  return json({status});
  }
  if(body.action==="review")return json({error:"Bitte reiche Bewertung und Nachweis gemeinsam ein. Nur die Verwaltung kann veröffentlichen.",errorCode:"invalid_request"},409);

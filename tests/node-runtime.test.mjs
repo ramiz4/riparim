@@ -98,7 +98,8 @@ try{
  assert.equal((await fetch(origin+'/api/auth/google',{method:'POST',headers:{Origin:'https://foreign.invalid','Content-Type':'application/json','x-forwarded-host':'foreign.invalid','x-forwarded-proto':'https'},body:JSON.stringify({locale:'de'})})).status,403,'foreign Origin is denied behind the configured HTTPS origin');
  for(const value of ['https://node-fixture.invalid/path','https://node-fixture.invalid?query=1','https://fixture:secret@node-fixture.invalid','ftp://node-fixture.invalid'])await assert.rejects(run(process.execPath,['.node-runtime/server.mjs','--port',String(port)],{env:{...environment,SITE_ORIGIN:value},timeout:10000}),/SITE_ORIGIN must be an HTTP/);
  // The executable retry path awaits all work and does not need a Worker context.
- await run(process.execPath,['.node-runtime/command.mjs','notifications'],{env:environment});
+ await assert.rejects(run(process.execPath,['.node-runtime/command.mjs','notifications'],{env:environment}),/Provide the notification event ID/);
+ await run(process.execPath,['.node-runtime/command.mjs','notifications','riparim-review-missing-event'],{env:environment});
  await stop();
  const maintenance={...environment,MIGRATION_READ_ONLY:'true',MIGRATION_SOURCE_COMMIT:'b'.repeat(40),MIGRATION_EXPORT_TOKEN_SHA256:createHash('sha256').update('a'.repeat(64)).digest('hex'),MIGRATION_EXPORT_EXPIRES_AT:new Date(Date.now()+3600000).toISOString()};
  await start(maintenance,port);

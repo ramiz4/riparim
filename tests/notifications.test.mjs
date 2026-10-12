@@ -5,13 +5,13 @@ import {createRequire} from 'node:module';
 import {DatabaseSync} from 'node:sqlite';
 const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
 const out='.test-runtime/notifications';await mkdir(out,{recursive:true});
-const bundle=await build({entryPoints:{visits:'app/api/visits/route.ts',queue:'app/api/notifications/route.ts',outbox:'lib/notifications/outbox.ts',email:'lib/notifications/email.ts',background:'lib/notifications/background.ts'},outdir:out,bundle:true,write:false,format:'esm',platform:'node',plugins:[{name:'notification-boundaries',setup(b){
- b.onResolve({filter:/^(cloudflare:workers|@\/app\/auth|@\/lib\/auth\/admin|@\/lib\/notifications\/background|@\/db\/directory)$/},args=>({path:args.path,namespace:'fixture'}));
+const bundle=await build({entryPoints:{visits:'app/api/visits/route.ts',queue:'app/api/notifications/route.ts',outbox:'lib/notifications/outbox.ts',email:'lib/notifications/email.ts',background:'lib/notifications/dispatch.ts'},outdir:out,bundle:true,write:false,format:'esm',platform:'node',plugins:[{name:'notification-boundaries',setup(b){
+ b.onResolve({filter:/^(cloudflare:workers|@\/app\/auth|@\/lib\/auth\/admin|@\/lib\/notifications\/dispatch|@\/db\/directory)$/},args=>({path:args.path,namespace:'fixture'}));
  b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',contents:
  args.path==='cloudflare:workers'?'export const env=globalThis.fixtureEnv;':
  args.path==='@/app/auth'?"export async function getAppUser(){return globalThis.fixtureUser;} export async function getAdminUser(){return globalThis.fixtureAdmin;} export function providerAccountId(url,id){return 'supabase:'+new URL(url).hostname+':'+id;} export function ownerPair(user){return [user.ownerKeys[0],user.ownerKeys[1]??user.ownerKeys[0]];} export function ownsVisit(user,owner){return user.ownerKeys.includes(owner);}":
  args.path==='@/lib/auth/admin'?'export async function getAuthAdmin(){return globalThis.fixtureAuthAdmin;}':
- args.path==='@/lib/notifications/background'?'export async function triggerNotifications(options){globalThis.fixtureTriggers.push(options);}':
+ args.path==='@/lib/notifications/dispatch'?'export async function triggerNotifications(options){globalThis.fixtureTriggers.push(options);}':
  'export async function publishedWorkshop(){return {id:"fixture-workshop"};}'
  }));
 }}]});
@@ -30,7 +30,9 @@ globalThis.fixtureAuthAdmin={projectUrl,client:{auth:{admin:users}}};
 globalThis.fixtureEnv={DB:d1,BUCKET:{head:async()=>({key:'fixture'}),delete:async()=>{},list:async()=>({objects:[],truncated:false})},SITE_ORIGIN:origin,REVIEW_MODERATOR_EMAIL:admin.email,RESEND_API_KEY:'re_fixture_secret',TRANSACTIONAL_EMAIL_FROM:'Riparim <no-reply@auth.example.test>'};
 globalThis.fixtureUser=member;globalThis.fixtureAdmin=admin;globalThis.fixtureTriggers=[];
 db.prepare("INSERT INTO auth_settings VALUES ('main',?,?,1,1,'2026-10-04')").run(projectUrl,'sb_publishable_fixture_key_12345678901234567890');
-const [visits,queue,outbox,email,background]=await Promise.all(['visits','queue','outbox','email','background'].map(file=>import(new URL(`../${out}/${file}.mjs`,import.meta.url))));
+const [visits,queue,outboxModule,email,background]=await Promise.all(['visits','queue','outbox','email','background'].map(file=>import(new URL(`../${out}/${file}.mjs`,import.meta.url))));
+// Existing transport scenarios explicitly advance the persisted cooldown.
+const outbox={...outboxModule,async processNotifications(options={}){if(options.force){db.prepare('UPDATE review_notifications SET next_attempt_at=0 WHERE id=?').run(options.id);return outboxModule.processNotifications({id:options.id,manual:true});}return outboxModule.processNotifications(options);}};
 const request=(method,body,path='/api/visits',headers={})=>new Request(origin+path,{method,headers:{Origin:origin,'Content-Type':'application/json',...headers},...(body?{body:JSON.stringify(body)}:{})});
 const moderate=(id,revision=0,status='published',extra={})=>visits.PATCH(request('PATCH',{action:'moderate',id,revision,status,note:'PRIVATE moderator detail never belongs in an email.',...extra}));
 const record=id=>db.prepare('SELECT * FROM visits WHERE id=?').get(id);
@@ -122,6 +124,18 @@ try{
  id=fixtureVisit();await moderate(id);deliveryMode='pending';const started=new Promise(resolve=>pause=resolve),job=outbox.processNotifications({id:event(id).id});await started;
  const beforeParallel=attempts.length;await outbox.processNotifications({id:event(id).id,force:true});check(attempts.length===beforeParallel,'A fresh processing lease prevents concurrent retries from posting twice');
  release();await job;deliveryMode='success';pause=null;
+ // Simulate a terminated second attempt: its provider call remains unfinished,
+ // and its lease expires before the five-minute retry cooldown.
+ id=fixtureVisit();await moderate(id);deliveryMode='outage';await outboxModule.processNotifications({id:event(id).id});
+ db.prepare('UPDATE review_notifications SET next_attempt_at=0 WHERE visit_id=?').run(id);
+ deliveryMode='pending';const interruptedStarted=new Promise(resolve=>pause=resolve),interruptedJob=outboxModule.processNotifications({id:event(id).id,manual:true});await interruptedStarted;
+ db.prepare('UPDATE review_notifications SET lease_until=0 WHERE visit_id=?').run(id);
+ const interruptedRow=event(id),beforeInterruptedRetry=attempts.length;
+ check(interruptedRow.attempts===2&&interruptedRow.next_attempt_at-Date.now()>295000,'The second attempt persists its five-minute cooldown before provider access');
+ check(!outboxModule.canRetryNotification(interruptedRow),'An expired processing lease cannot shorten the persisted retry delay');
+ await outboxModule.processNotifications({id:interruptedRow.id,manual:true});
+ check(attempts.length===beforeInterruptedRetry,'Interrupted second attempts cannot be re-sent after only the lease timeout');
+ release();await interruptedJob;deliveryMode='success';pause=null;
  id=fixtureVisit();await moderate(id);delete globalThis.fixtureEnv.RESEND_API_KEY;const beforeMissing=attempts.length;
  await outbox.processNotifications({id:event(id).id});check(event(id).state==='blocked'&&event(id).last_error==='configuration_missing'&&attempts.length===beforeMissing,'Missing sending credentials are explicitly blocked without pretending delivery');globalThis.fixtureEnv.RESEND_API_KEY='re_fixture_secret';
  await outbox.processNotifications({id:event(id).id,force:true});check(event(id).state==='sent','Configured blocked events can be explicitly rechecked');
@@ -134,7 +148,7 @@ try{
  id=fixtureVisit();await moderate(id);deliveryMode='outage';await outbox.processNotifications({id:event(id).id});
  check(event(id).state==='pending'&&event(id).next_attempt_at>Date.now(),'Temporary errors schedule a future controlled retry');
  const beforeBackoff=attempts.length;await outbox.processNotifications({id:event(id).id});check(attempts.length===beforeBackoff,'Automatic processing respects its persisted backoff');
- deliveryMode='success';await outbox.processNotifications({id:event(id).id,force:true});check(event(id).state==='sent','An explicit retry can safely bypass backoff within the provider window');
+ deliveryMode='success';await outbox.processNotifications({id:event(id).id,force:true});check(event(id).state==='sent','A manual retry succeeds after its persisted cooldown');
  id=fixtureVisit();await moderate(id);deliveryMode='rate';await outbox.processNotifications({id:event(id).id});check(event(id).last_error==='rate_limited'&&event(id).state==='pending','Provider rate limits retain the event for controlled retry');
  deliveryMode='rejected';await outbox.processNotifications({id:event(id).id,force:true});check(event(id).state==='blocked'&&event(id).last_error==='provider_rejected','Permanent provider rejection is visible and never reported as success');deliveryMode='success';
  id=fixtureVisit();await moderate(id);deliveryMode='outage';await outbox.processNotifications({id:event(id).id});
@@ -152,20 +166,45 @@ try{
  const lookupOutage=fixtureVisit();await moderate(lookupOutage);lookupFailure=true;
  for(let index=0;index<7;index++){
   db.prepare('UPDATE review_notifications SET next_attempt_at=0 WHERE visit_id=?').run(lookupOutage);
-  await outbox.processNotifications({id:event(lookupOutage).id});
+  await outboxModule.processNotifications({id:event(lookupOutage).id,manual:index>0});
   if(index===1)check(event(lookupOutage).next_attempt_at-Date.now()>240000,'Recipient lookup failures use the increasing backoff rather than restarting at one minute');
  }
- check(event(lookupOutage).attempts===5&&event(lookupOutage).state==='failed'&&event(lookupOutage).last_error==='retry_limit','Recipient lookup failures are counted and stop at the automatic processing limit');
+ check(event(lookupOutage).attempts===6&&event(lookupOutage).state==='failed'&&event(lookupOutage).last_error==='retry_limit','Recipient lookup failures are counted and stop at the automatic processing limit');
  check(event(lookupOutage).first_attempt_at===null&&event(lookupOutage).payload===null,'Processing retries do not falsely start the provider deduplication window before any mail API request');
  lookupFailure=false;await outbox.processNotifications({id:event(lookupOutage).id,force:true});
- check(event(lookupOutage).state==='sent'&&event(lookupOutage).attempts===6,'An administrator can safely recover a failed contact lookup once the service is restored');
+ check(event(lookupOutage).state==='failed'&&event(lookupOutage).attempts===6,'Even an administrator cannot bypass the six-attempt budget');
+ const limited=fixtureVisit();await moderate(limited);deliveryMode='outage';await outboxModule.processNotifications({id:event(limited).id});
+ const beforeManual=attempts.length;
+ check(!outboxModule.canRetryNotification(event(limited)),'The initial failure disables retry during cooldown');
+ check((await queue.POST(request('POST',{action:'retry',id:event(limited).id},'/api/notifications'))).status===409,'The API cannot bypass the initial cooldown');
+ await outboxModule.processNotifications({id:event(limited).id,manual:true});
+ await outboxModule.processNotifications();
+ check(attempts.length===beforeManual,'Neither early manual retry nor an untargeted drain sends mail');
+ const expectedDelays=[60000,300000,900000,1800000,3600000];
+ for(let retry=1;retry<=5;retry++){
+  const row=event(limited);check(row.next_attempt_at-Date.now()>expectedDelays[retry-1]-5000,'Persisted cooldown grows between manual retries');
+  db.prepare('UPDATE review_notifications SET next_attempt_at=0 WHERE id=?').run(row.id);
+  await outboxModule.processNotifications({id:row.id,manual:true});
+ }
+ check(event(limited).attempts===6&&event(limited).state==='failed'&&!outboxModule.canRetryNotification(event(limited)),'First send plus five manual retries exhaust the budget');
+ db.prepare('UPDATE review_notifications SET next_attempt_at=0 WHERE visit_id=?').run(limited);
+ await outboxModule.processNotifications({id:event(limited).id,manual:true});
+ check(event(limited).attempts===6&&attempts.length===beforeManual+5,'An additional manual retry cannot send or increment attempts');
+ check((await queue.POST(request('POST',{action:'dispatch'},'/api/notifications'))).status===400,'Bulk dispatch is no longer supported');deliveryMode='success';
+ const expiredView=fixtureVisit();await moderate(expiredView);db.prepare("UPDATE review_notifications SET attempts=1,state='pending',first_attempt_at=?,last_error='provider_unavailable' WHERE visit_id=?").run(Date.now()-24*3600000,expiredView);
+ db.prepare("UPDATE review_notifications SET state='pending',last_error='provider_unavailable' WHERE visit_id=?").run(limited);
+ const projected=await outboxModule.notificationQueue();
+ const expiredItem=projected.notifications.find(item=>item.visitId===expiredView),limitedItem=projected.notifications.find(item=>item.visitId===limited);
+ check(expiredItem.state==='unknown'&&expiredItem.error==='idempotency_window_expired'&&!expiredItem.retryable,'Reading expired legacy events explains why manual retry is disabled');
+ check(limitedItem.state==='failed'&&limitedItem.error==='retry_limit'&&!limitedItem.retryable,'Reading an exhausted historical pending event exposes the attempt limit');
+ check(event(expiredView).state==='pending'&&event(limited).state==='pending','Status projection never writes or starts background cleanup');
  const view=await queue.GET(request('GET',null,'/api/notifications')).then(r=>r.json());
  check(view.notifications.length>0&&!JSON.stringify(view).includes('re_fixture_secret')&&!JSON.stringify(view).includes('member@example.test')&&!JSON.stringify(view).includes('payload'),'The admin queue returns useful status without secrets or recipient/content payloads');
  check((await queue.POST(request('POST',{action:'retry',id:event(id).id,to:'other@example.test'},'/api/notifications'))).status===400,'Retry actions cannot override recipient or message content');
  check((await queue.POST(request('POST',{action:'retry',id:event(id).id},'/api/notifications',{Origin:'https://other.example.test'}))).status===403,'Retry actions reject cross-origin requests');
- id=fixtureVisit();await moderate(id);const queued=event(id).id;let backgroundTask;
- await background.withNotificationContext({waitUntil:task=>backgroundTask=task},()=>background.triggerNotifications({id:queued,limit:1}));
- check(backgroundTask instanceof Promise,'Background sends are tied to the Worker execution-context lifetime');await backgroundTask;check(event(id).state==='sent','Attached background work completes the durable event');
+ id=fixtureVisit();await moderate(id);const queued=event(id).id;
+ await background.triggerNotifications({id:queued});
+ check(event(id).state==='sent','The immediate send is awaited before the triggering action completes');
  check((await visits.DELETE(request('DELETE',{id}))).ok&&!event(id),'Deleting a submission removes its private notification records');
  id=fixtureVisit();await moderate(id);globalThis.fixtureEnv.EMAIL_TRANSPORT='smtp';const beforeUnsupported=attempts.length;
  await outbox.processNotifications({id:event(id).id});check(event(id).state==='blocked'&&event(id).last_error==='configuration_missing'&&attempts.length===beforeUnsupported,'SMTP selection on Worker never falls back to a different provider');delete globalThis.fixtureEnv.EMAIL_TRANSPORT;

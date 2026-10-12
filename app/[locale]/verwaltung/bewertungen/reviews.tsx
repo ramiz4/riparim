@@ -7,6 +7,7 @@ import {useI18n} from "@/lib/i18n/client";
 import {evidenceHref} from "@/lib/i18n/evidence";
 import {useNavigationGuard} from "@/lib/i18n/navigation-guard";
 import {LocaleAnchor} from "@/components/locale-anchor";
+import {NotificationStatus} from "@/components/notification-status";
 import {useCallback,useEffect,useRef,useState} from "react";
 import {ChevronDown,FileCheck2,LoaderCircle,Search,ShieldCheck,Star} from "lucide-react";
 import {SiteHeader} from "@/components/site-header";
@@ -19,7 +20,7 @@ export default function AdminReviews({account}:{account:AccountIdentity}){
  const {locale,t}=useI18n();
  const [items,setItems]=useState<Visit[]>([]),[loading,setLoading]=useState(true),[loaded,setLoaded]=useState(false),[cursor,setCursor]=useState<string|null>(null),[error,setError]=useState(""),[feedback,setFeedback]=useState(""),[mutating,setMutating]=useState<string|null>(null),[notes,setNotes]=useState<Record<string,string>>({}),[filter,setFilter]=useState("open"),[query,setQuery]=useState("");
  useNavigationGuard({busy:!!mutating,dirty:Object.values(notes).some(Boolean)});
- const [targeted,setTargeted]=useState(false);
+ const [targeted,setTargeted]=useState(false),[showNotifications,setShowNotifications]=useState(false),[notificationRefresh,setNotificationRefresh]=useState(0);
  const selectedVisit=useRef<string|null|undefined>(undefined);
  const requestGeneration=useRef(0),controller=useRef<AbortController|null>(null),nextCursor=useRef<string|null>(null);
  const cancelLoad=useCallback(()=>{controller.current?.abort();requestGeneration.current++;},[]);
@@ -36,7 +37,7 @@ export default function AdminReviews({account}:{account:AccountIdentity}){
  useEffect(()=>{void load();return cancelLoad;},[load,cancelLoad]);
  async function moderate(visit:Visit,status:"published"|"needs_more"){
   if(mutating)return;setMutating(visit.id);setError("");setFeedback("");
-  try{const r=await fetch("/api/visits",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"moderate",id:visit.id,status,revision:visit.revision,note:notes[visit.id]??""})}),d=await r.json() as CodedResponse;if(!r.ok)throw responseError(t,d);setFeedback(status==="published"?t("management.reviewPublished"):t("management.reviewHidden"));setNotes(old=>{const next={...old};delete next[visit.id];return next;});await load();}
+  try{const r=await fetch("/api/visits",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"moderate",id:visit.id,status,revision:visit.revision,note:notes[visit.id]??""})}),d=await r.json() as CodedResponse;if(!r.ok)throw responseError(t,d);setNotificationRefresh(value=>value+1);setFeedback(status==="published"?t("management.reviewPublished"):t("management.reviewHidden"));setNotes(old=>{const next={...old};delete next[visit.id];return next;});await load();}
   catch(e){setError(e instanceof LocalizedError?e.message:t("management.reviewSaveFailed"));}
   finally{setMutating(null);}
  }
@@ -57,5 +58,6 @@ export default function AdminReviews({account}:{account:AccountIdentity}){
   })}</div>
   {loaded&&!loading&&!error&&!shown.length&&<div className="empty"><ShieldCheck size={27}/><h2>{t("management.noSubmissions")}</h2><p>{cursor?t("management.moreSubmissionsPossible"):t("management.filterEmpty")}</p></div>}
   {cursor&&<button className="outline moderation-load-more" disabled={busy} onClick={()=>void load(true)}>{loading?<><LoaderCircle className="spin" size={16}/>{t("management.loading")}</>:t("management.loadMoreSubmissions")}</button>}{loaded&&<p className="help moderation-loaded-count">{t("management.submissionsCount",{count:items.length,shown:shown.length})}</p>}
+ <details className="notification-details" onToggle={event=>setShowNotifications(event.currentTarget.open)}><summary>{t("management.notificationsTitle")}</summary>{showNotifications&&<NotificationStatus refreshKey={notificationRefresh}/>}</details>
  </main></>;
 }
