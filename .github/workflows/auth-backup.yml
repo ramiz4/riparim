@@ -15,7 +15,7 @@ concurrency:
 jobs:
   backup:
     if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     environment: auth-backup
     steps:
@@ -24,6 +24,8 @@ jobs:
           persist-credentials: false
       - name: Install PostgreSQL 17 client
         run: |
+          curl --fail --silent --show-error https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo tee /usr/share/keyrings/postgresql.asc > /dev/null
+          echo 'deb [signed-by=/usr/share/keyrings/postgresql.asc] https://apt.postgresql.org/pub/repos/apt noble-pgdg main' | sudo tee /etc/apt/sources.list.d/pgdg.list > /dev/null
           sudo apt-get update -qq
           sudo apt-get install -y postgresql-client-17
       - name: Create validated encrypted auth archive
