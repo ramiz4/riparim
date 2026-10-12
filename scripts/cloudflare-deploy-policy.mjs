@@ -55,7 +55,7 @@ export function assertCloudflareProvenance(provenance, commit, sha256) {
 
 // Read names separately from permissions: filenames may contain spaces, while
 // tar's verbose listing exposes links and special files by their first character.
-export function assertSafeTarListing(listing, verbose) {
+export function assertSafeTarListing(listing, verbose, {directory = "dist", required = ["dist/server/index.js", "dist/server/wrangler.json"], assets = "dist/client/"} = {}) {
   const names = listing.split("\n").filter(Boolean);
   const details = verbose.split("\n").filter(Boolean);
   if (!names.length || names.length !== details.length) throw new Error("The release archive listing is incomplete.");
@@ -64,16 +64,16 @@ export function assertSafeTarListing(listing, verbose) {
     const path = name.endsWith("/") ? name.slice(0, -1) : name;
     const parts = path.split("/");
     const type = details[index][0];
-    if (parts[0] !== "dist" || parts.some(part => !part || part === "." || part === "..") || /[\x00-\x1f\x7f\\]/.test(name) || !["-", "d"].includes(type) || seen.has(path)) {
+    if (parts[0] !== directory || parts.some(part => !part || part === "." || part === "..") || /[\x00-\x1f\x7f\\]/.test(name) || !["-", "d"].includes(type) || seen.has(path)) {
       throw new Error("The release archive contains an unsafe path, duplicate, link or special file.");
     }
     seen.add(path);
     return { path, type };
   });
-  for (const required of ["dist/server/index.js", "dist/server/wrangler.json"]) {
-    if (!entries.some(entry => entry.path === required && entry.type === "-")) throw new Error("The release archive has no complete Worker build.");
+  for (const file of required) {
+    if (!entries.some(entry => entry.path === file && entry.type === "-")) throw new Error("The release archive has no complete Worker build.");
   }
-  if (!entries.some(entry => entry.path.startsWith("dist/client/") && entry.type === "-")) throw new Error("The release archive has no client assets.");
+  if (!entries.some(entry => entry.path.startsWith(assets) && entry.type === "-")) throw new Error("The release archive has no client assets.");
 }
 
 function assertProductionTarget(config) {

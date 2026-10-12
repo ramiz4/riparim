@@ -3,14 +3,20 @@ import { createHash } from "node:crypto";
 import { appendFile, readFile } from "node:fs/promises";
 import semanticRelease from "semantic-release";
 import releaseConfig from "../release.config.mjs";
-import { assertReleaseBuildProvenance, assertReleaseContext, assertSitesReleaseAssets, existingReleaseMetadata } from "./release-policy.mjs";
+import { assertReleaseBuildProvenance, assertReleaseContext, assertSitesReleaseAssets, assertNodeReleaseAssets, deploymentTarget, nodeReleaseMarker, existingReleaseMetadata } from "./release-policy.mjs";
 
 const commit = execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
 assertReleaseContext(process.env, commit);
+const target = deploymentTarget(process.env.DEPLOYMENT_TARGET);
 const archiveHash = createHash("sha256").update(await readFile("artifacts/riparim-worker.tar.gz")).digest("hex");
 assertReleaseBuildProvenance(JSON.parse(await readFile("artifacts/provenance.json", "utf8")), commit, archiveHash, "cloudflare");
 const sitesArchiveHash = createHash("sha256").update(await readFile("artifacts/riparim-sites.tar.gz")).digest("hex");
 assertReleaseBuildProvenance(JSON.parse(await readFile("artifacts/sites-provenance.json", "utf8")), commit, sitesArchiveHash, "sites");
+const includesNode = releaseConfig.plugins?.some(plugin => Array.isArray(plugin) && plugin[1]?.assets?.some(asset => asset.path === "artifacts/riparim-node.tar.gz"));
+if (includesNode) {
+  const nodeHash = createHash("sha256").update(await readFile("artifacts/riparim-node.tar.gz")).digest("hex");
+  assertReleaseBuildProvenance(JSON.parse(await readFile("artifacts/node-provenance.json", "utf8")), commit, nodeHash, "node");
+}
 let release;
 const tags = execFileSync("git", ["tag", "--points-at", "HEAD"], { encoding: "utf8" }).trim().split("\n").filter(tag => /^v\d+\.\d+\.\d+$/.test(tag));
 if (tags.length > 1) throw new Error("Multiple version tags point at this commit; select the intended release before retrying.");
@@ -21,6 +27,7 @@ if (tags.length) {
   if (!response.ok) throw new Error(`The existing ${tags[0]} tag has no readable GitHub release (HTTP ${response.status}). Complete its publication before retrying.`);
   const publishedRelease = await response.json();
   assertSitesReleaseAssets(publishedRelease, tags[0], commit);
+  if (publishedRelease.body?.includes(nodeReleaseMarker) || publishedRelease.assets?.some(asset => asset.name.startsWith("riparim-node-"))) assertNodeReleaseAssets(publishedRelease, tags[0], commit);
   release = existingReleaseMetadata(publishedRelease, tags[0], commit);
   console.log(`Reusing published release ${release.gitTag} for the exact workflow commit.`);
 } else {
@@ -37,7 +44,7 @@ if (tags.length) {
 
 if (release) {
   if (release.gitHead !== commit) throw new Error("Semantic release selected an unexpected commit.");
-  if (process.env.GITHUB_OUTPUT) await appendFile(process.env.GITHUB_OUTPUT, `released=true\nversion=${release.version}\ntag=${release.gitTag}\ncommit=${commit}\n`);
+  if (process.env.GITHUB_OUTPUT) await appendFile(process.env.GITHUB_OUTPUT, `released=true\nversion=${release.version}\ntag=${release.gitTag}\ncommit=${commit}\ndeployment_target=${target}\n`);
 } else {
   if (process.env.GITHUB_OUTPUT) await appendFile(process.env.GITHUB_OUTPUT, "released=false\n");
   console.log("No new semantic release created.");

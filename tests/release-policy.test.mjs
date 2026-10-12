@@ -1,9 +1,11 @@
 import assert from "node:assert/strict";
+import {readFile} from "node:fs/promises";
+import loadPlugins from "../node_modules/semantic-release/lib/plugins/index.js";
 import { spawnSync } from "node:child_process";
 import { analyzeCommits } from "@semantic-release/commit-analyzer";
 import { generateNotes } from "@semantic-release/release-notes-generator";
 import config from "../release.config.mjs";
-import { assertBuildProvenance, assertReleaseBuildProvenance, assertReleaseContext, assertSitesReleaseAssets, existingReleaseMetadata, sitesProjectId } from "../scripts/release-policy.mjs";
+import { assertBuildProvenance, assertReleaseBuildProvenance, assertReleaseContext, assertSitesReleaseAssets, existingReleaseMetadata, sitesProjectId, nodeReleaseMarker, deploymentTarget, assertNodeReleaseAssets } from "../scripts/release-policy.mjs";
 
 const commit = "a".repeat(40), sha256 = "b".repeat(64);
 const env = { GITHUB_ACTIONS: "true", GITHUB_EVENT_NAME: "push", GITHUB_REF: "refs/heads/main", GITHUB_REPOSITORY: "ramiz4/riparim", GITHUB_SHA: commit };
@@ -15,6 +17,7 @@ const provenance = { repository: env.GITHUB_REPOSITORY, commit, sha256 };
 assert.doesNotThrow(() => assertBuildProvenance(provenance, commit, sha256));
 for (const change of [{ repository: "someone/fork" }, { commit: "c".repeat(40) }, { sha256: "d".repeat(64) }]) assert.throws(() => assertBuildProvenance({ ...provenance, ...change }, commit, sha256));
 assert.doesNotThrow(() => assertReleaseBuildProvenance({ ...provenance, provider: "cloudflare" }, commit, sha256, "cloudflare"));
+assert.doesNotThrow(() => assertReleaseBuildProvenance({ ...provenance, provider: "node", format: 1 }, commit, sha256, "node"));
 const sitesProvenance = { ...provenance, provider: "sites", project_id: sitesProjectId };
 assert.doesNotThrow(() => assertReleaseBuildProvenance(sitesProvenance, commit, sha256, "sites"));
 for (const change of [{ provider: "cloudflare" }, { project_id: "different-site" }, { commit: "c".repeat(40) }, { sha256: "d".repeat(64) }]) assert.throws(() => assertReleaseBuildProvenance({ ...sitesProvenance, ...change }, commit, sha256, "sites"));
@@ -28,8 +31,15 @@ assert.throws(() => assertSitesReleaseAssets(release, tag, commit), "Historical 
 const companionRelease = { ...release, assets: [...release.assets, { name: `riparim-sites-${tag}.tar.gz`, state: "uploaded", size: 321 }, { name: `riparim-sites-${tag}.json`, state: "uploaded", size: 150 }] };
 assert.doesNotThrow(() => assertSitesReleaseAssets(companionRelease, tag, commit));
 for (const assets of [companionRelease.assets.slice(0, 3), [...release.assets, { ...companionRelease.assets[2], state: "new" }, companionRelease.assets[3]], [...release.assets, companionRelease.assets[2], { ...companionRelease.assets[3], size: 0 }]]) assert.throws(() => assertSitesReleaseAssets({ ...companionRelease, assets }, tag, commit));
+assert.equal(deploymentTarget(), "cloudflare"); assert.equal(deploymentTarget("node"), "node");
+for (const invalid of ["", "sites", "unknown", "NODE"]) assert.throws(() => deploymentTarget(invalid));
+const nodeRelease = { ...companionRelease, body: nodeReleaseMarker, assets: [...companionRelease.assets, { name: `riparim-node-${tag}.tar.gz`, state: "uploaded", size: 123 }, { name: `riparim-node-${tag}.json`, state: "uploaded", size: 100 }] };
+assert.doesNotThrow(() => assertNodeReleaseAssets(nodeRelease, tag, commit));
+assert.doesNotThrow(() => existingReleaseMetadata(companionRelease, tag, commit));
+for (const assets of [nodeRelease.assets.slice(0, 4), nodeRelease.assets.slice(0, 5)]) assert.throws(() => existingReleaseMetadata({ ...nodeRelease, assets }, tag, commit));
+assert.throws(() => assertNodeReleaseAssets(companionRelease, tag, commit));
 const publishedAssets = config.plugins[2][1].assets;
-for (const expected of ["artifacts/riparim-worker.tar.gz", "artifacts/provenance.json", "artifacts/riparim-sites.tar.gz", "artifacts/sites-provenance.json"]) assert(publishedAssets.some(asset => asset.path === expected));
+for (const expected of ["artifacts/riparim-worker.tar.gz", "artifacts/provenance.json", "artifacts/riparim-sites.tar.gz", "artifacts/sites-provenance.json", "artifacts/riparim-node.tar.gz", "artifacts/node-provenance.json"]) assert(publishedAssets.some(asset => asset.path === expected));
 
 for (const [message, expected] of [["fix: repair theme", "patch"], ["feat: add settings", "minor"], ["feat!: replace API", "major"], ["fix: replace API\n\nBREAKING CHANGE: remove old API", "major"], ["docs: update guide", null], ["chore: update tools", null]]) {
   const lint = spawnSync(process.execPath, ["node_modules/@commitlint/cli/cli.js"], { input: message, encoding: "utf8" });
@@ -62,3 +72,10 @@ for (const subject of ["add fixture filters", "restore fixture session", "replac
 assert(notes.includes("https://github.com/ramiz4/riparim/compare/v1.2.2...v2.0.0"), "release notes must link the previous and next version tags");
 for (const subject of ["revise fixture maintenance guide", "refresh fixture tooling"]) assert(!notes.includes(subject), "maintenance-only commits must stay out of release notes");
 console.log("Release policy: main-only context, exact build, retries, Conventional Commit versioning and rendered release notes passed.");
+
+const releaseWorkflow=await readFile('.github/workflows/release.yml','utf8');
+assert.match(releaseWorkflow,/DEPLOYMENT_TARGET: \$\{\{ vars\.DEPLOYMENT_TARGET \|\| 'cloudflare' \}\}/);
+assert.match(releaseWorkflow,/needs\.release\.outputs\.deployment_target == 'cloudflare'/,'Node releases must never enter the Cloudflare deploy job');
+const plugins=await loadPlugins({options:config,cwd:process.cwd(),logger:{log(){},success(){},error(){},scope(){return this;}}},new Map());
+const combinedNotes=await plugins.generateNotes({env:{},options:config,cwd:process.cwd(),commits:noteMessages.map(message=>({message,hash:commit})),lastRelease:{gitTag:'v1.2.2',gitHead:'f'.repeat(40)},nextRelease:{version:'2.0.0',gitTag:'v2.0.0',gitHead:'6'.repeat(40)},logger:{log(){}}});
+assert(combinedNotes.includes(nodeReleaseMarker),'the actual Semantic Release notes pipeline records the new six-asset profile');

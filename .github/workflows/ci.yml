@@ -47,6 +47,11 @@ jobs:
         run: npx tsc --noEmit
       - name: Lint
         run: npm run lint
+      - name: Build portable Node application from the same checked source
+        run: npm run build:node
+        timeout-minutes: 10
+      - name: Package verified Node application
+        run: node scripts/package-release.mjs node
       - name: Build Cloudflare Worker
         env:
           BUILD_TARGET: cloudflare

@@ -80,7 +80,7 @@ laufen. `npm run build:node`, `npm run db:migrate:node` und
 `npm run start:node -- --port 5174` verwenden SQLite und einen privaten lokalen
 Blob-Dateispeicher. Konfiguration, Sicherung, Hintergrundversand und Grenzen
 stehen in [docs/node-runtime.md](docs/node-runtime.md). Der bestehende
-Produktions- und Releaseweg bleibt unverändert.
+Cloudflare-Default bleibt bestehen. Geprüfte vorgebaute Nodepakete und der hostlokale Installations-/Deploymentweg stehen in [docs/node-deployment.md](docs/node-deployment.md).
 
 Interne Konto-IDs werden über eine private, additive Identitätszuordnung von
 externen Anmeldekonten getrennt. Bestehende Besitzschlüssel und Dateipfade

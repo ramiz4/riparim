@@ -3,7 +3,7 @@
 Riparim kann neben dem bestehenden Vinext-/Cloudflare-Build denselben
 App-Router-Code mit dem bereits installierten Next.js auf einem gewöhnlichen
 Node-Server ausführen. Es gibt keine neue Framework- oder Storage-Abhängigkeit.
-Cloudflare-Produktion, D1, R2 und deren Releaseweg bleiben unverändert.
+Cloudflare bleibt das Deployment-Default. Der [Node-Release-/Deploymentweg](node-deployment.md) installiert vorgebaute geprüfte Main-Releases auf einem einzelnen Host ohne App-Neubuild.
 
 ## Build, Migrationen und Start
 

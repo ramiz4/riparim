@@ -1,3 +1,4 @@
+import {packageNodeRelease} from "./node-release.mjs";
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { lstat, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
@@ -18,12 +19,13 @@ async function assertRegularTree(path) {
 }
 
 export async function packageRelease({ target = "cloudflare", projectRoot = process.cwd(), workflowCommit = process.env.GITHUB_SHA } = {}) {
-  releaseBuildTarget(target);
+  if (target !== "node") releaseBuildTarget(target);
   const commit = execFileSync("git", ["rev-parse", "HEAD"], { cwd: projectRoot, encoding: "utf8" }).trim();
   if (workflowCommit && commit !== workflowCommit) throw new Error("Build checkout does not match the workflow commit.");
   if (execFileSync("git", ["status", "--porcelain", "--untracked-files=all"], { cwd: projectRoot, encoding: "utf8" }).trim()) {
     throw new Error("Release packaging requires clean committed source; local changes do not represent the release commit.");
   }
+  if (target === "node") return packageNodeRelease(projectRoot, commit);
   const hosting = JSON.parse(await readFile(join(projectRoot, ".openai/hosting.json"), "utf8"));
   const builtHosting = JSON.parse(await readFile(join(projectRoot, "dist/.openai/hosting.json"), "utf8"));
   if (!isDeepStrictEqual(hosting, builtHosting)) throw new Error("Built Site identity and logical bindings do not match the source.");
@@ -47,6 +49,6 @@ export async function packageRelease({ target = "cloudflare", projectRoot = proc
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  if (process.argv.length > 3) throw new Error("Usage: package-release.mjs [cloudflare|sites]");
+  if (process.argv.length > 3) throw new Error("Usage: package-release.mjs [cloudflare|sites|node]");
   await packageRelease({ target: process.argv[2] });
 }

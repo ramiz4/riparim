@@ -58,7 +58,8 @@ export function assertBuildProvenance(provenance, commit, sha256) {
 
 export function assertReleaseBuildProvenance(provenance, commit, sha256, provider) {
   assertBuildProvenance(provenance, commit, sha256);
-  if (provenance.provider !== releaseBuildTarget(provider) || (provider === "sites" && provenance.project_id !== sitesProjectId)) {
+  if (provider === "node" && provenance.format !== 1) throw new Error("Unknown Node release format.");
+  if (provenance.provider !== (provider === "node" ? "node" : releaseBuildTarget(provider)) || (provider === "sites" && provenance.project_id !== sitesProjectId)) {
     throw new Error("Verified archive provider or Sites project does not match the release target.");
   }
 }
@@ -76,5 +77,21 @@ export function existingReleaseMetadata(release, tag, commit) {
   if (!/^v\d+\.\d+\.\d+$/.test(tag) || release.tag_name !== tag || release.draft || release.prerelease || !names.has(`riparim-${tag}.tar.gz`) || !names.has(`riparim-${tag}.json`)) {
     throw new Error("Existing release publication is incomplete. Finish its release assets before retrying deployment.");
   }
+  if (release.body?.includes(nodeReleaseMarker)) {
+    for (const name of [`riparim-sites-${tag}.tar.gz`, `riparim-sites-${tag}.json`, `riparim-node-${tag}.tar.gz`, `riparim-node-${tag}.json`]) if (!names.has(name)) throw new Error("Node release publication is incomplete. Finish all six assets before retrying.");
+  }
   return { version: tag.slice(1), gitTag: tag, gitHead: commit };
+}
+
+export const nodeReleaseMarker = "<!-- riparim-release: node-v1 -->";
+
+export function assertNodeReleaseAssets(release, tag, commit) {
+  assertSitesReleaseAssets(release, tag, commit);
+  const names = new Set(release.assets?.filter(asset => asset.state === "uploaded" && asset.size > 0).map(asset => asset.name));
+  if (!names.has(`riparim-node-${tag}.tar.gz`) || !names.has(`riparim-node-${tag}.json`)) throw new Error("Published release has no complete Node archive and provenance.");
+}
+
+export function deploymentTarget(value = "cloudflare") {
+  if (!["cloudflare", "node"].includes(value)) throw new Error("DEPLOYMENT_TARGET must be cloudflare or node.");
+  return value;
 }

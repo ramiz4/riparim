@@ -66,12 +66,14 @@ globalThis.fetch=async(url)=>{
     git("checkout", "main"); await writeFile(join(root, "fixture"), message); git("add", "fixture"); git("commit", "-m", message); git("push", "origin", "main"); git("checkout", "--detach", commit);
     const retry = await run();
     assert.equal(retry.status, 0, retry.stderr);
-    assert.equal(retry.outputs, `released=true\nversion=1.2.3\ntag=${tag}\ncommit=${commit}\n`, "a full workflow retry must retain a published release after newer docs/chore main");
+    assert.equal(retry.outputs, `released=true\nversion=1.2.3\ntag=${tag}\ncommit=${commit}\ndeployment_target=cloudflare\n`, "a full workflow retry must retain a published release after newer docs/chore main");
     assert.equal(retry.published, false, "retries must reuse the tag without invoking semantic publication");
   }
-  for (const extra of [{ FIXTURE_HTTP: "404" }, { FIXTURE_HTTP: "network" }, { FIXTURE_PUBLICATION: JSON.stringify({ ...publication, draft: true }) }, { FIXTURE_PUBLICATION: JSON.stringify({ ...publication, assets: publication.assets.slice(0, 3) }) }]) {
+  for (const extra of [{ FIXTURE_HTTP: "404" }, { FIXTURE_HTTP: "network" }, { FIXTURE_PUBLICATION: JSON.stringify({ ...publication, draft: true }) }, { FIXTURE_PUBLICATION: JSON.stringify({ ...publication, assets: publication.assets.slice(0, 3) }) }, { FIXTURE_PUBLICATION: JSON.stringify({ ...publication, body: "<!-- riparim-release: node-v1 -->" }) }]) {
     const incomplete = await run(extra); assert.notEqual(incomplete.status, 0); assert.equal(incomplete.outputs, ""); assert.equal(incomplete.published, false);
   }
+  const partialNode = await run({ FIXTURE_PUBLICATION: JSON.stringify({ ...publication, assets: [...publication.assets, { name: `riparim-node-${tag}.tar.gz`, state: "uploaded", size: 123 }] }) }); assert.notEqual(partialNode.status, 0); assert.equal(partialNode.outputs, "");
+  const completeNode = await run({ FIXTURE_PUBLICATION: JSON.stringify({ ...publication, body: "<!-- riparim-release: node-v1 -->", assets: [...publication.assets, { name: `riparim-node-${tag}.tar.gz`, state: "uploaded", size: 123 }, { name: `riparim-node-${tag}.json`, state: "uploaded", size: 123 }] }) }); assert.equal(completeNode.status, 0, completeNode.stderr);
   const provenancePath = join(root, "artifacts/provenance.json"), verifiedProvenance = await readFile(provenancePath, "utf8");
   await writeFile(provenancePath, JSON.stringify({ ...JSON.parse(verifiedProvenance), commit: "f".repeat(40) }));
   const wrongBuild = await run(); assert.notEqual(wrongBuild.status, 0); assert.equal(wrongBuild.outputs, ""); assert.equal(wrongBuild.published, false);
@@ -84,7 +86,9 @@ globalThis.fetch=async(url)=>{
     const failure = await run({ FIXTURE_REMOTE: mode }); assert.notEqual(failure.status, 0, `remote ${mode} must fail rather than appear superseded`); assert.equal(failure.outputs, ""); assert.equal(failure.published, false);
   }
   execFileSync("git", ["--git-dir", remote, "update-ref", "refs/heads/main", commit]); // Only the owned, temporary local bare fixture.
-  const current = await run(); assert.equal(current.status, 0, current.stderr); assert.equal(current.published, true); assert.equal(current.outputs, `released=true\nversion=1.2.4\ntag=v1.2.4\ncommit=${commit}\n`);
+  const invalidTarget = await run({ DEPLOYMENT_TARGET: "unknown-host" }); assert.notEqual(invalidTarget.status, 0); assert.equal(invalidTarget.published, false); assert.equal(invalidTarget.outputs, "");
+  const nodeTarget = await run({ DEPLOYMENT_TARGET: "node", CLOUDFLARE_API_TOKEN: "", CLOUDFLARE_WORKER_SECRETS: "" }); assert.equal(nodeTarget.status, 0, nodeTarget.stderr); assert.match(nodeTarget.outputs, /deployment_target=node\n/); assert.equal(nodeTarget.published, true);
+  const current = await run(); assert.equal(current.status, 0, current.stderr); assert.equal(current.published, true); assert.equal(current.outputs, `released=true\nversion=1.2.4\ntag=v1.2.4\ncommit=${commit}\ndeployment_target=cloudflare\n`);
   git("push", "origin", "main"); // Simulate another merge before the next publication decision.
   const supersededAgain = await run(); assert.equal(supersededAgain.status, 0, supersededAgain.stderr); assert.equal(supersededAgain.outputs, "released=false\n"); assert.equal(supersededAgain.published, false);
   console.log("Release CLI: exact published retries survive docs/chore main; obsolete untagged sources, incomplete publications and remote errors are handled safely; no provider operations executed.");
