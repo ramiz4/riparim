@@ -63,7 +63,14 @@ try{
    assert.equal(status.querySelector('svg').getAttribute('aria-hidden'),'true');
    assert.equal(status.querySelectorAll('[role="status"]').length,0,'The shared graphic creates no nested status announcement');
   }finally{pendingDom.window.close();}
+  Object.defineProperty(window,'scrollY',{value:96,configurable:true});
   await act(async()=>root.render(wrap(locale,h(Finder,props))));
+  assert.equal(document.querySelector('.navbar').dataset.scrolled,'true','header restores its glass state when entering an already scrolled page');
+  for(const [position,expected] of [[0,'false'],[20,'true'],[0,'false']]){
+   Object.defineProperty(window,'scrollY',{value:position,configurable:true});
+   await act(async()=>window.dispatchEvent(new Event('scroll')));
+   assert.equal(document.querySelector('.navbar').dataset.scrolled,expected,'header glass follows scroll and clears at the top');
+  }
   const form=document.querySelector('.search-box'),before=fixtureNavigations.length;
   await act(async()=>{form.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));form.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));});
   assert.equal(fixtureNavigations.length,before+1,'Rapid repeated submission starts only one navigation');
