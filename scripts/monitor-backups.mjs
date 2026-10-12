@@ -1,0 +1,314 @@
+import {setTimeout as delay} from 'node:timers/promises';
+import {constants} from 'node:fs';
+import {lstat, mkdir, open, rename, unlink} from 'node:fs/promises';
+import {dirname, isAbsolute} from 'node:path';
+import {randomUUID} from 'node:crypto';
+import {pathToFileURL} from 'node:url';
+
+const repository = 'ramiz4/riparim';
+const workflows = [
+  {file: 'auth-backup.yml', name: 'Supabase Auth Backup', prefix: 'supabase-auth'},
+  {file: 'platform-backup.yml', name: 'Platform Backup', prefix: 'platform'},
+];
+const hour = 60 * 60 * 1000;
+const runStatuses = new Set(['completed', 'in_progress', 'queued', 'requested', 'waiting', 'pending']);
+const conclusions = new Set(['success', 'failure', 'cancelled', 'timed_out', 'skipped', 'neutral', 'action_required', 'stale', 'startup_failure']);
+function timestamp(value) {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$/.test(value) || !Number.isFinite(Date.parse(value))) throw Error('Invalid timestamp.');
+  if (new Date(value).toISOString().slice(0, 19) !== value.slice(0, 19)) throw Error('Invalid calendar date.');
+  return Date.parse(value);
+}
+function validateRun(run, now) {
+  if (!Number.isSafeInteger(run.id) || run.id < 1 || !Number.isSafeInteger(run.run_attempt) || run.run_attempt < 1 ||
+    typeof run.head_branch !== 'string' || !runStatuses.has(run.status) || (run.conclusion !== null && !conclusions.has(run.conclusion))) throw Error('Invalid run metadata.');
+  const created = timestamp(run.created_at), updated = timestamp(run.updated_at);
+  if (created > updated || updated > now ||
+    (run.status === 'completed' || run.status === 'in_progress') &&
+    (timestamp(run.run_started_at) < created || timestamp(run.run_started_at) > updated)) throw Error('Invalid run chronology.');
+}
+
+export function createGitHubReader({fetch = globalThis.fetch, token, now} = {}) {
+  const base = `https://api.github.com/repos/${repository}/actions`;
+  const headers = {Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2026-03-10',
+    ...(token ? {Authorization: `Bearer ${token}`} : {})};
+  async function request(path, allowMissing = false) {
+    const response = await fetch(base + path, {headers, signal: AbortSignal.timeout(10000), redirect: 'error'});
+    if (allowMissing && response.status === 404) return null;
+    if (!response.ok) throw Error('GitHub metadata request failed.');
+    return response.json();
+  }
+  async function list(path, field) {
+    const items = [];
+    for (let page = 1; page <= 5; page++) {
+      const value = await request(`${path}${path.includes('?') ? '&' : '?'}per_page=100&page=${page}`);
+      if (!Number.isSafeInteger(value.total_count) || value.total_count < 0 || !Array.isArray(value[field]) || value[field].length > 100) throw Error('Invalid GitHub list.');
+      items.push(...value[field]);
+      if (items.length >= value.total_count) return items;
+      if (!value[field].length) throw Error('Incomplete GitHub list.');
+    }
+    throw Error('GitHub metadata exceeds the bounded history.');
+  }
+  return async workflow => {
+    const metadata = await request(`/workflows/${workflow.file}`, true);
+    if (!metadata) return {state: 'missing', runs: []};
+    if (!['active', 'deleted', 'disabled_manually', 'disabled_inactivity', 'disabled_fork'].includes(metadata.state)) throw Error('Invalid workflow metadata.');
+    // GitHub permits retries of runs created up to 30 days ago; include the 36h backup grace too.
+    const since = encodeURIComponent(`>=${new Date((now ?? Date.now()) - 32 * 24 * hour).toISOString()}`);
+    const runs = await list(`/workflows/${workflow.file}/runs?branch=main&exclude_pull_requests=true&created=${since}`, 'workflow_runs');
+    const observedAt = now ?? Date.now();
+    for (const run of runs) {validateRun(run, observedAt); run.artifacts = [];}
+    if (new Set(runs.map(run => run.id)).size !== runs.length) throw Error('Duplicate workflow history.');
+    runs.sort((a, b) => timestamp(b.updated_at) - timestamp(a.updated_at));
+    let inspected = 0;
+    for (const run of runs) {
+      if (run.head_branch === 'main' && run.status === 'completed' && run.conclusion === 'success') {
+        if (++inspected > 20) throw Error('Too many unverifiable backup attempts.');
+        run.artifacts = await list(`/runs/${run.id}/artifacts`, 'artifacts');
+        if (validBackup(workflow, run, observedAt)) break;
+      }
+    }
+    return {state: metadata.state, runs};
+  };
+}
+
+function validBackup(workflow, run, now) {
+  return run.status === 'completed' && run.conclusion === 'success' &&
+    run.artifacts.some(artifact => {
+      if (artifact.name !== `${workflow.prefix}-${run.id}-${run.run_attempt}`) return false;
+      if (typeof artifact.expired !== 'boolean' || !Number.isSafeInteger(artifact.size_in_bytes) || artifact.size_in_bytes < 0) throw Error('Invalid artifact metadata.');
+      const created = timestamp(artifact.created_at), expires = timestamp(artifact.expires_at);
+      return artifact.expired === false && artifact.size_in_bytes > 0 && expires > now && expires > created &&
+        created <= timestamp(run.updated_at) && created >= timestamp(run.run_started_at);
+    });
+}
+
+function evaluate(workflow, snapshot, now) {
+  const runs = snapshot.runs.filter(run => run.head_branch === 'main').sort((a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at));
+  const successful = runs.find(run => validBackup(workflow, run, now));
+  let linkedRun = runs[0];
+  let status = 'healthy';
+  if (!successful || now - Date.parse(successful.updated_at) >= 36 * hour) status = 'missing';
+  // Inspect everything after the verified backup: a queued retry must not hide a failure.
+  for (const run of runs) {
+    if (run === successful) break;
+    if (run.status === 'completed') {
+      status = run.conclusion === 'success' ? 'invalid_artifact' : run.conclusion ?? 'incomplete';
+      linkedRun = run;
+      break;
+    }
+    const started = run.status === 'in_progress' ? run.run_started_at : run.created_at;
+    if (now - Date.parse(started) >= (run.status === 'in_progress' ? hour / 2 : 2 * hour)) {
+      status = 'stuck';
+      linkedRun = run;
+      break;
+    }
+  }
+  if (snapshot.state !== 'active') {status = snapshot.state === 'missing' ? 'missing' : 'disabled'; linkedRun = null;}
+  return {job: workflow.name, status, lastSuccessAt: successful ? new Date(successful.updated_at).toISOString() : null,
+    url: linkedRun ? `https://github.com/${repository}/actions/runs/${linkedRun.id}` : `https://github.com/${repository}/actions/workflows/${workflow.file}`};
+}
+
+const statusLabels = {healthy: 'Gesund', failure: 'Sicherung fehlgeschlagen', cancelled: 'Sicherung abgebrochen',
+  timed_out: 'Sicherung abgelaufen', skipped: 'Sicherung übersprungen', neutral: 'Sicherung ohne Erfolg',
+  action_required: 'Sicherung benötigt Eingriff', stale: 'Sicherung veraltet', startup_failure: 'Sicherung nicht gestartet',
+  incomplete: 'Sicherung nicht abgeschlossen', invalid_artifact: 'Gültiges Backup-Artefakt fehlt', missing: 'Sicherung fehlt',
+  disabled: 'Workflow deaktiviert', stuck: 'Sicherung hängt', monitor_error: 'Prüfung fehlgeschlagen',
+  awaiting_backup: 'Neue Sicherung ausstehend', recovered: 'Entwarnung: Sicherung erfolgreich'};
+export function createResendNotifier({apiKey, from, to, fetch = globalThis.fetch, wait = delay} = {}) {
+  if (!apiKey || /[\r\n]/.test(apiKey) || typeof from !== 'string' || !/^[^\r\n]+@[^\r\n]+$/.test(from) ||
+    typeof to !== 'string' || !/^[^\s<>@,;]+@[^\s<>@,;]+\.[^\s<>@,;]+$/.test(to)) throw Error('Invalid email configuration.');
+  const headers = {Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json'};
+  let lastRequest = 0;
+  async function request(path, options = {}) {
+    await wait(Math.max(0, 600 - (Date.now() - lastRequest)));
+    lastRequest = Date.now();
+    const response = await fetch(`https://api.resend.com${path}`, {...options, headers: {...headers, ...options.headers},
+      redirect: 'error', signal: AbortSignal.timeout(10000)});
+    if (!response.ok) throw Error('Email provider request failed.');
+    return response.json();
+  }
+  return {
+    async send(message, key) {
+      if (!statusLabels[message.status]) throw Error('Invalid notification status.');
+      const text = `Job: ${message.job}\nStatus: ${statusLabels[message.status]}\nLetzte erfolgreiche Sicherung: ${message.lastSuccessAt ?? 'keine verifiziert'}\nLink: ${message.url}`;
+      const value = await request('/emails', {method: 'POST', headers: {'Idempotency-Key': key},
+        body: JSON.stringify({from, to: [to], subject: `${message.job}: ${statusLabels[message.status]}`, text})});
+      if (typeof value.id !== 'string' || !/^[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i.test(value.id)) throw Error('Invalid email receipt.');
+      return value.id;
+    },
+    async delivery(id) {
+      const value = await request(`/emails/${encodeURIComponent(id)}`);
+      return ['delivered', 'opened', 'clicked'].includes(value.last_event) ? 'delivered' : 'unknown';
+    },
+  };
+}
+
+function validateState(state, now) {
+  const object = value => value && typeof value === 'object' && !Array.isArray(value);
+  const date = value => value === null || timestamp(value) <= now;
+  const time = value => Number.isSafeInteger(value) && value >= 0 && value <= now;
+  if (!object(state) || state.version !== 1 || !object(state.jobs)) throw Error('Invalid monitor state.');
+  for (const [file, job] of Object.entries(state.jobs)) {
+    const workflow = workflows.find(workflow => workflow.file === file);
+    if (!workflow || !object(job) || !date(job.lastSuccessAt) || !Number.isSafeInteger(job.generation) || job.generation < 0) throw Error('Invalid job state.');
+    if (job.incident !== null && (!object(job.incident) || !time(job.incident.openedAt) || !date(job.incident.backupAt) ||
+      !date(job.incident.recoveredAt) || !Number.isSafeInteger(job.incident.generation) || job.incident.generation < 1 || job.incident.generation !== job.generation ||
+      !statusLabels[job.incident.kind] || !(job.incident.lastNotificationAt === null || time(job.incident.lastNotificationAt)))) throw Error('Invalid incident state.');
+    if (job.pending !== null) {
+      const pending = job.pending, message = pending?.message;
+      if (!job.incident || !object(pending) || !time(pending.createdAt) || !Number.isSafeInteger(pending.generation) || pending.generation < 1 || pending.generation > job.generation || typeof pending.key !== 'string' ||
+        !new RegExp(`^${file.replaceAll('.', '\\.')}-\\d+-\\d+-(?:\\d+|recovered)$`).test(pending.key) ||
+        !(pending.id === null || typeof pending.id === 'string' && /^[a-zA-Z0-9-]{1,100}$/.test(pending.id)) ||
+        !object(message) || message.job !== workflow.name || !statusLabels[message.status] || !date(message.lastSuccessAt) ||
+        !(message.url === `https://github.com/${repository}/actions/workflows/${file}` ||
+          typeof message.url === 'string' && /^https:\/\/github\.com\/ramiz4\/riparim\/actions\/runs\/\d+$/.test(message.url))) throw Error('Invalid pending notification.');
+    }
+  }
+}
+
+export async function runBackupMonitor({now = Date.now(), readWorkflow, store, notifier, heartbeat}) {
+  const jobs = [];
+  let monitorHealthy = true;
+  try {
+    const state = await store.load() ?? {version: 1, jobs: {}};
+    validateState(state, now);
+    for (const workflow of workflows) {
+      const job = state.jobs[workflow.file] ??= {lastSuccessAt: null, generation: 0, incident: null, pending: null};
+      let result;
+      try {
+        result = evaluate(workflow, await readWorkflow(workflow), now);
+      } catch {
+        monitorHealthy = false;
+        result = {job: workflow.name, status: 'monitor_error', lastSuccessAt: null,
+          url: `https://github.com/${repository}/actions/workflows/${workflow.file}`};
+      }
+      const verifiedBackupAt = result.lastSuccessAt;
+      if (verifiedBackupAt && (!job.lastSuccessAt || timestamp(verifiedBackupAt) > timestamp(job.lastSuccessAt))) job.lastSuccessAt = verifiedBackupAt;
+      result.lastSuccessAt = job.lastSuccessAt;
+      jobs.push(result);
+      const hasNewBackup = verifiedBackupAt && (!job.incident?.backupAt || timestamp(verifiedBackupAt) > timestamp(job.incident.backupAt));
+      // Observations are independent of the immutable notification being retried.
+      if (result.status !== 'healthy') {
+        if (!job.incident || job.incident.recoveredAt || hasNewBackup || job.incident.kind === 'monitor_error' && result.status !== 'monitor_error') {
+          job.incident = {generation: ++job.generation, openedAt: now, backupAt: result.lastSuccessAt,
+            kind: result.status, recoveredAt: null, lastNotificationAt: null};
+        }
+      } else if (job.incident && (hasNewBackup || job.incident.kind === 'monitor_error')) {
+        job.incident.recoveredAt = verifiedBackupAt;
+      }
+      await store.save(state);
+      async function flushPending() {
+        if (!job.pending) return;
+        try {
+          if (!job.pending.id) {
+            // Resend retains keys for 24h. An ambiguous older send needs operator reconciliation.
+            if (now - job.pending.createdAt >= 23 * hour) throw Error('Uncertain notification expired.');
+            job.pending.id = await notifier.send(job.pending.message, job.pending.key);
+            await store.save(state);
+          }
+          if (await notifier.delivery(job.pending.id) === 'delivered') {
+            // A delayed receipt can only update the incident that created it.
+            if (job.incident?.generation === job.pending.generation) {
+              if (job.pending.message.status === 'recovered') job.incident = null;
+              else job.incident.lastNotificationAt = job.pending.createdAt;
+            }
+            job.pending = null;
+          } else monitorHealthy = false;
+        } catch {
+          monitorHealthy = false;
+        }
+      }
+      await flushPending();
+      if (result.status === 'healthy' && job.incident && !job.incident.recoveredAt) result.status = 'awaiting_backup';
+      if (!job.pending && job.incident) {
+        let message;
+        if (job.incident.recoveredAt) message = {...result, status: 'recovered'};
+        else if (job.incident.lastNotificationAt === null || now - job.incident.lastNotificationAt >= 24 * hour) message = {...result};
+        if (message) {
+          const key = `${workflow.file}-${job.incident.openedAt}-${job.incident.generation}-${message.status === 'recovered' ? 'recovered' : Math.floor((now - job.incident.openedAt) / (24 * hour))}`;
+          job.pending = {key, message, generation: job.incident.generation, createdAt: now, id: null};
+          // Store the exact retry payload before the provider can accept the email.
+          await store.save(state);
+          await flushPending();
+        }
+      }
+      await store.save(state);
+    }
+  } catch {
+    monitorHealthy = false;
+  }
+  try {await heartbeat(monitorHealthy);} catch {monitorHealthy = false;}
+  return {monitorHealthy, backupsHealthy: monitorHealthy && jobs.length === workflows.length && jobs.every(job => job.status === 'healthy'), jobs};
+}
+
+async function privateDirectory(path) {
+  await mkdir(path, {recursive: true, mode: 0o700});
+  const stat = await lstat(path);
+  if (!stat.isDirectory() || (stat.mode & 0o077)) throw Error('State directory must be private.');
+}
+
+export function createFileStore({path}) {
+  if (!isAbsolute(path)) throw Error('State path must be absolute.');
+  return {
+    async load() {
+      let file;
+      try {file = await open(path, constants.O_RDONLY | constants.O_NOFOLLOW);} catch (error) {if (error.code === 'ENOENT') return; throw error;}
+      try {
+        const stat = await file.stat();
+        if (!stat.isFile() || (stat.mode & 0o077) || stat.size > 128 * 1024) throw Error('Invalid private state file.');
+        return JSON.parse(await file.readFile('utf8'));
+      } finally {await file.close();}
+    },
+    async save(value) {
+      const directory = dirname(path);
+      await privateDirectory(directory);
+      const temporary = `${path}.${randomUUID()}.tmp`;
+      const file = await open(temporary, 'wx', 0o600);
+      try {
+        await file.writeFile(JSON.stringify(value) + '\n');
+        await file.sync();
+        await file.close();
+        await rename(temporary, path);
+        const parent = await open(directory, 'r');
+        try {await parent.sync();} finally {await parent.close();}
+      } finally {
+        await file.close();
+        await unlink(temporary).catch(error => {if (error.code !== 'ENOENT') throw error;});
+      }
+    },
+  };
+}
+
+export function createHeartbeat({url, fetch = globalThis.fetch}) {
+  if (!/^https:\/\/hc-ping\.com\/[a-f0-9]{8}(?:-[a-f0-9]{4}){3}-[a-f0-9]{12}$/i.test(url)) throw Error('Invalid watchdog URL.');
+  return async healthy => {
+    const response = await fetch(url + (healthy ? '' : '/fail'), {method: 'POST', body: '', redirect: 'error', signal: AbortSignal.timeout(10000)});
+    if (!response.ok) throw Error('Watchdog request failed.');
+  };
+}
+
+export async function runMonitorCli({env = process.env, fetch = globalThis.fetch, output = value => console.log(JSON.stringify(value))} = {}) {
+  if (env.BACKUP_MONITOR_ENABLED !== 'true') {output({status: 'inactive'}); return 0;}
+  let lock, heartbeat;
+  const statePath = env.BACKUP_MONITOR_STATE_PATH;
+  try {
+    heartbeat = createHeartbeat({url: env.BACKUP_MONITOR_HEARTBEAT_URL, fetch});
+    const notifier = createResendNotifier({apiKey: env.BACKUP_MONITOR_RESEND_API_KEY, from: env.BACKUP_MONITOR_EMAIL_FROM, to: env.BACKUP_MONITOR_EMAIL_TO, fetch});
+    const store = createFileStore({path: statePath});
+    await privateDirectory(dirname(statePath));
+    lock = await open(statePath + '.lock', 'wx', 0o600);
+    const result = await runBackupMonitor({store, notifier, heartbeat, readWorkflow: createGitHubReader({fetch, token: env.BACKUP_MONITOR_GITHUB_TOKEN})});
+    output(result);
+    return result.monitorHealthy ? 0 : 1;
+  } catch {
+    if (heartbeat) await heartbeat(false).catch(() => {});
+    output({status: 'monitor_error', monitorHealthy: false});
+    return 1;
+  } finally {
+    if (lock) {await lock.close(); await unlink(statePath + '.lock');}
+  }
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  process.exitCode = await runMonitorCli();
+}

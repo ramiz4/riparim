@@ -1,0 +1,11 @@
+[Unit]
+Description=Check Riparim backups independently of GitHub schedules
+
+[Timer]
+OnBootSec=2min
+OnUnitInactiveSec=15min
+AccuracySec=30s
+Unit=riparim-backup-monitor.service
+
+[Install]
+WantedBy=timers.target

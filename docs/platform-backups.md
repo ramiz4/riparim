@@ -80,6 +80,10 @@ kleinen Datenmenge ist reichlich Reserve vorhanden. Andere Kontoverbräuche trot
 berücksichtigen. GitHub-Zeitpläne können verzögert oder nach 60 Tagen ohne
 Repositoryaktivität deaktiviert werden; Backupalter und Runstatus kontrollieren.
 
+Die unabhängige [E-Mail-Überwachung beider Backup-Jobs](backup-monitoring.md) ist
+vorbereitet und auf Betreiberwunsch deaktiviert. Ihre spätere Aktivierung und
+Empfangsabnahme sind getrennt dokumentiert.
+
 ## Wiederherstellung
 
 1. Erfolgreiches Artifact in ein privates Verzeichnis herunterladen und den

@@ -1,0 +1,20 @@
+[Unit]
+Description=Riparim independent backup monitor
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=riparim-backup-monitor
+Group=riparim-backup-monitor
+EnvironmentFile=/etc/riparim-backup-monitor.env
+WorkingDirectory=/opt/riparim-monitor/current
+ExecStart=/usr/bin/node /opt/riparim-monitor/current/scripts/monitor-backups.mjs
+TimeoutStartSec=5min
+StateDirectory=riparim-backup-monitor
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true

@@ -15,6 +15,7 @@ Semantic Release als Release-Prozess.
 - Eigener Auth-Vertrag mit Supabase als Default und konkret austauschbarem PocketBase-Adapter für E-Mail/Passwort und Google OAuth
 - Tägliche verschlüsselte Supabase-Auth-Sicherung: [Betrieb und Wiederherstellung](docs/auth-backups.md)
 - Ergänzende Sicherung von Authkonfiguration und D1/R2: [Plattformbackups](docs/platform-backups.md)
+- Vorbereitete, deaktivierte E-Mail-Überwachung beider Jobs: [Backup-Monitor](docs/backup-monitoring.md)
 - Drizzle für Schema und SQL-Migrationen
 
 Öffentlich sichtbar sind ausschließlich freigegebene Werkstätten und Bewertungen. Nachweise und Kontodaten werden nicht im Repository gespeichert. Werkstattdaten enthalten Quellen; Einträge aus Verzeichnissen bleiben bis zur Freigabe Entwürfe.

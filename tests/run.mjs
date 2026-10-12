@@ -22,6 +22,7 @@ suites.push('smtp-tls.test.mjs');
 suites.push('auth-privacy-routing.test.mjs');
 suites.push('auth-backup.test.mjs');
 suites.push('platform-backup.test.mjs');
+suites.push('backup-monitor.test.mjs');
 suites.push('auth-request-latency.test.mjs');
 suites.push('auth-provider-worker.test.mjs');
 process.exitCode=await runSuites({
