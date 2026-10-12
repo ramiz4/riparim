@@ -18,7 +18,6 @@ import {AlertDialog,AlertDialogContent,AlertDialogTitle,AlertDialogDescription,A
 import {AccountStorageNotice,type AccountIdentity} from "@/components/account-storage-notice";
 import {ReviewForm} from "@/components/review-form";
 import type {Workshop} from "@/lib/workshops";
-export {DetailSearch,type SearchContext} from "@/components/detail-search";
 export type Review={display_name:string;vehicle:string;service:string;date:string;rating:number;review:string|null};
 export type Visit={id:string;workshop:string;workshop_name?:string;date:string;vehicle:string;service:string;evidence_type:string;evidence_note:string;status:string;moderator_note:string;display_name:string|null;rating:number|null;review:string|null;created_at:string;file_name:string|null;revision:number};
 export const statusLabels:Record<string,string>={pending:"In Prüfung",approved:"Bewertung vervollständigen",needs_more:"Ergänzung nötig",published:"Veröffentlicht",deleting:"Löschung ausstehend"};

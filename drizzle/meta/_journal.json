@@ -134,6 +134,13 @@
       "when": 1791790321809,
       "tag": "0018_auth_providers",
       "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "6",
+      "when": 1791813993945,
+      "tag": "0019_rare_molecule_man",
+      "breakpoints": true
     }
   ]
 }

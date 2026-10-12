@@ -1,0 +1,9 @@
+{
+  "generator": "Built-in image_gen",
+  "file": "public/review-experience-1280.webp",
+  "responsiveFiles": [
+    "public/review-experience-640.webp",
+    "public/review-experience-1024.webp"
+  ],
+  "prompt": "Use case: photorealistic-natural. Asset type: editorial photograph for a Riparim landing-page section about sharing one's workshop experience after a visit. Create one standalone horizontal landscape image 3:2 approximately 1536x1024. Scene: quiet, authentic independent automotive workshop entrance or waiting area, daylight, a parked unbranded graphite car softly blurred in the background. Subject: close medium over-the-shoulder view of an anonymous customer's hands holding a smartphone and calmly tapping it, as if sharing their experience after collecting their vehicle. Frame only hands, forearms and a small part of a neutral jacket, no visible face or identifiable person. Phone screen angled away and softly reflective, not legible, no visible ratings, no star scores or fabricated testimonial. Composition: hands and phone occupy center-right, atmosphere and gentle depth visible left; believable anatomy, correctly held modern phone, relaxed natural posture. Style: refined candid automotive lifestyle photography, realistic textures and authentic details, soft daylight, warm approachable mood. Cohesive restrained charcoal, muted petrol-green and natural gray-beige palette, no flashy color grading. Avoid recognizable logos, car badges, number plates, written text, watermarks, readable phone UI, five-star graphics, flat icons, vector illustrations, UI mockup, card border or overlaid copy. This is a generic symbolic scene, not an actual Riparim customer or real workshop profile."
+}

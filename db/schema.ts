@@ -54,3 +54,7 @@ export const reviewNotifications=sqliteTable("review_notifications",{
  state:text("state").notNull().default("pending"),attempts:integer("attempts").notNull().default(0),nextAttemptAt:integer("next_attempt_at").notNull(),createdAt:text("created_at").notNull(),
  leaseUntil:integer("lease_until"),leaseToken:text("lease_token"),firstAttemptAt:integer("first_attempt_at"),payload:text("payload"),providerKeyHash:text("provider_key_hash"),providerId:text("provider_id"),lastError:text("last_error"),transport:text("transport"),wirePayload:text("wire_payload"),smtpInFlight:integer("smtp_in_flight").notNull().default(0)
 },table=>[index("idx_review_notifications_due").on(table.state,table.nextAttemptAt),index("idx_review_notifications_owner").on(table.owner)]);
+export const workshopPremium=sqliteTable("workshop_premium",{
+ workshopId:text("workshop_id").primaryKey().references(()=>workshopProfiles.id,{onDelete:"cascade"}),
+ active:integer("active").notNull().default(0),updatedAt:text("updated_at").notNull()
+});

@@ -27,7 +27,7 @@ const api=await import(new URL('../.test-runtime/public-review-refresh/ui.mjs',i
 const {createElement:h,act}=await import('react'),{createRoot}=await import('react-dom/client');
 const root=createRoot(document.getElementById('root'));
 try{
- const session={catalogueHref:'/werkstaetten',context:{problem:'Private fixture stays in memory'},privateMatchingActive:true};api.rememberSearchSession(session);
+ const session={catalogueHref:'/werkstaetten',visibleCount:24,scrollY:300};api.rememberSearchSession(session);
  window.history.replaceState({},'','/werkstatt/fixture-profile#bewerten');
  await act(async()=>root.render(h(api.I18nProvider,{locale:'de',messages:api.getMessages('de',['common','public','customer'])},h(api.Profile,{publicSnapshot:true,workshop:directory[0],directory,reviews:[],reviewError:'',signedIn:false,account:null,isAdmin:false}))));
  assert.equal(typeof globalThis.completePublicReview,'function');
@@ -36,7 +36,7 @@ try{
  await act(async()=>globalThis.completePublicReview());
  assert(loads>before,'Successful submission refreshes the live public review data');
  assert(document.querySelector('.public-review-text').textContent.includes('Fresh approved review'));
- assert.equal(api.readSearchSession(),session,'Public review refresh preserves the private RAM search context');
+ assert.equal(api.readSearchSession(),session,'Public review refresh preserves the catalogue paging and scroll');
  assert.equal(globalThis.dynamicRefreshes,undefined,'Snapshot refresh uses the live API instead of a document/RSC refresh');
- console.log('Public review completion refreshes approved data and preserves private RAM context');
+ console.log('Public review completion refreshes approved data and preserves catalogue paging and scroll');
 }finally{await act(async()=>root.unmount());globalThis.fetch=nativeFetch;dom.window.close();delete globalThis.completePublicReview;}

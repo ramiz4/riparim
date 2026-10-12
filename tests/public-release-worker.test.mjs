@@ -19,6 +19,11 @@ if(config.name==='riparim'){
   for(const file of (await readdir('drizzle')).filter(file=>file.endsWith('.sql')).sort())for(const sql of (await readFile('drizzle/'+file,'utf8')).split('--> statement-breakpoint').filter(sql=>sql.trim()))await db.prepare(sql).run();
   const seed=await runtime.dispatchFetch('https://riparim.com/api/workshops');assert.equal(seed.status,200);await seed.text();
   const first=published[0];
+  const previewResponse=await runtime.dispatchFetch('https://riparim.com/api/premium-workshops?locale=sq');assert.equal(previewResponse.status,200);const preview=await previewResponse.json();assert.equal(preview.preview,true);assert(preview.workshops.every(workshop=>workshop.status==='published'));
+  const forgedPromotion=await runtime.dispatchFetch('https://riparim.com/api/premium-workshops',{method:'PUT',headers:{Origin:'https://riparim.com','Content-Type':'application/json'},body:JSON.stringify({workshop:first.id,active:true})});assert.equal(forgedPromotion.status,401);await forgedPromotion.text();
+  await db.prepare('INSERT INTO workshop_premium (workshop_id,active,updated_at) VALUES (?,1,?)').bind(first.id,'fixture').run();
+  const paidResponse=await runtime.dispatchFetch('https://riparim.com/api/premium-workshops?locale=en');assert.equal(paidResponse.status,200);const paid=await paidResponse.json();assert.equal(paid.preview,false);assert.deepEqual(paid.workshops.map(workshop=>workshop.id),[first.id]);
+  await db.prepare('DELETE FROM workshop_premium WHERE workshop_id=?').bind(first.id).run();
   for(const locale of ['de','sq','en'])for(const path of ['/','/datenschutz','/werkstaetten',`/werkstatt/${first.id}`]){
    const response=await runtime.dispatchFetch('https://riparim.com'+localizeHref(path,locale)+'?q=private-secret',{headers:{'oai-authenticated-user-email':'private-user@example.test',cookie:'untrusted=fixture'}});
    assert.equal(response.status,200);assert.equal(response.headers.get('X-Riparim-Public-Snapshot'),'1');assert.equal(response.headers.has('set-cookie'),false);assert.equal(response.headers.get('Cache-Control'),'no-store');

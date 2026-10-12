@@ -1,10 +1,5 @@
-import type {SearchContext} from "@/components/detail-search";
-import type {CatalogueFilters} from "@/lib/catalogue-filters";
-
-export type SearchSession=CatalogueFilters&{searched:boolean;context:SearchContext|null;privateMatchingActive:boolean;catalogueHref:string;visibleCount:number;scrollY:number};
-// Browser memory only: a client-side route change can retain search context.
-// A reload clears it; private vehicle/problem data never enters URLs or storage.
+export type SearchSession={catalogueHref:string;visibleCount:number;scrollY:number};
+// Retain catalogue paging and scroll during client navigation; reloads clear it.
 let current:SearchSession|null=null;
 export function readSearchSession(){return typeof window==="undefined"?null:current;}
 export function rememberSearchSession(value:SearchSession){if(typeof window!=="undefined")current=value;}
-export function deactivatePrivateMatching(){if(typeof window!=="undefined"&&current)current={...current,privateMatchingActive:false};}
