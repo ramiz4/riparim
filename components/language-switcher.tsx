@@ -1,6 +1,6 @@
 "use client";
 import {useId,useState,useRef,useLayoutEffect} from "react";
-import {Globe} from "lucide-react";
+import {Globe,ChevronDown} from "lucide-react";
 import {useI18n} from "@/lib/i18n/client";
 import {isLocale,locales} from "@/lib/i18n/locale";
 import {preferredLanguageHref} from "@/lib/i18n/preference";
@@ -10,7 +10,7 @@ export function LanguageSwitcher({verifiedAccount=false}:{verifiedAccount?:boole
  const [saving,setSaving]=useState(false);
  const {locale,t}=useI18n(),state=useNavigationState(),id=useId(),latest=useRef(state);
  useLayoutEffect(()=>{latest.current=state;},[state]);
- return <label className="language-switcher" htmlFor={id}><Globe size={16} aria-hidden="true"/><span className="sr-only">{t("common.languageLabel")}</span><select id={id} value={locale} disabled={state.busy||saving} onChange={async event=>{
+ return <label className="language-switcher" htmlFor={id}><Globe className="language-switcher-globe" size={16} aria-hidden="true"/><span className="sr-only">{t("common.languageLabel")}</span><select id={id} value={locale} disabled={state.busy||saving} onChange={async event=>{
   const next=event.target.value;if(!isLocale(next)||next===locale||state.busy||saving)return;
   if(state.dirty&&!window.confirm(t("common.discardDraft")))return;
   setSaving(true);
@@ -24,5 +24,5 @@ export function LanguageSwitcher({verifiedAccount=false}:{verifiedAccount?:boole
    if(latest.current.busy)return;
    window.location.assign(destination);navigating=true;
   }finally{if(!navigating)setSaving(false);}
- }}>{locales.map(value=><option key={value} value={value} lang={value}>{names[value]}</option>)}</select></label>;
+ }}>{locales.map(value=><option key={value} value={value} lang={value}>{names[value]}</option>)}</select><ChevronDown className="language-switcher-chevron" size={14} aria-hidden="true"/></label>;
 }
