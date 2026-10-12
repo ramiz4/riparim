@@ -64,8 +64,11 @@ export async function recordGoogleSession(session:Session,client:AuthClient){
 }
 
 export async function revokeCurrentSession(client:AuthClient){
- const [{data,error},{data:verified,error:userError}]=await Promise.all([client.getSessionProof(),client.getUser()]);
- if(error||userError||!verified.user||!data.proof||data.proof.subject!==verified.user.identity.subject)return;
+ const {data,error}=await client.getSessionProof();
+ if(error)throw Error("AUTH_SESSION_REVOCATION_UNAVAILABLE");
+ if(!data.proof)return;
+ const {data:verified,error:userError}=await client.getUser();
+ if(userError||!verified.user||data.proof.subject!==verified.user.identity.subject)throw Error("AUTH_SESSION_REVOCATION_UNAVAILABLE");
  const identity=verified.user.identity,account=await resolveAccount(identity),id=appSessionId(identity,data.proof.id),old=legacySessionId(identity,data.proof.id);
  await storage().db.prepare("UPDATE auth_sessions SET revoked=1 WHERE account_id=? AND (id=? OR (id=? AND ((identity_provider=? AND identity_issuer=? AND identity_subject=?) OR (identity_provider IS NULL AND identity_issuer IS NULL AND identity_subject IS NULL))))").bind(account,id,old??id,identity.provider,identity.issuer,identity.subject).run();
 }

@@ -23,7 +23,7 @@ const auth=await import(new URL('../'+output+'/auth.mjs',import.meta.url));
 assert.equal(auth.validatePublicConfig(providerOrigin,'','pocketbase').provider,'pocketbase','A concrete independent protocol can be selected without Supabase public keys');
 db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at,provider) VALUES ('main',?,'',1,1,'2026-10-12','pocketbase')").run(providerOrigin);
 const member={id,collectionId:'_pb_users_auth_',collectionName:'users',email:'member@example.test',verified:true,name:'PocketBase Member',preferredLocale:'en',created:'2026-10-12 00:00:00Z',role:'admin',isAdmin:true};
-const members=new Map([[id,member]]),tokens=new Map(),requests=[];let sequence=0,failRefresh=false,fixedToken=null,googleEnabled=true,googleSubject="google-pocketbase-member",googleProof=true,failDelete=false,redirectAdmin=false;
+const members=new Map([[id,member]]),tokens=new Map(),requests=[];let sequence=0,failRefresh=false,fixedToken=null,googleEnabled=true,googleSubject="google-pocketbase-member",googleProof=true,failDelete=false,redirectAdmin=false,redirectGoogle=false,wrongAdminSubject=false,wrongWriteSubject=false,wrongDeleteSubject=false;
 const googleState="fixture-pb-state",googleVerifier="fixture-pb-verifier-123456789012345678901234567890";
 const resetToken=Buffer.from(JSON.stringify({alg:"HS256"})).toString("base64url")+"."+Buffer.from(JSON.stringify({id,collectionId:"_pb_users_auth_",type:"passwordReset",exp:Math.floor(Date.now()/1000)+600})).toString("base64url")+".fixture-signature";
 const session=()=>{const token=fixedToken??'independent-token-'+(++sequence);tokens.set(token,id);return {token,record:members.get(id)};};
@@ -31,6 +31,8 @@ const server=createServer(async(request,response)=>{
  const url=new URL(request.url,'http://fixture'),chunks=[];for await(const chunk of request)chunks.push(chunk);
  const body=chunks.length?JSON.parse(Buffer.concat(chunks).toString()):null;requests.push({path:url.pathname,query:url.searchParams,method:request.method,headers:request.headers,body});
  const json=(value,status=200)=>{response.writeHead(status,{'content-type':'application/json'});response.end(JSON.stringify(value));};
+ if(url.pathname==='/google/userinfo'){assert.equal(request.headers.authorization,'Bearer fixture-google-proof');if(redirectGoogle){response.writeHead(307,{location:transport+'/google/redirect-sink'});return response.end();}return json({sub:googleSubject,email:member.email,email_verified:true});}
+ if(url.pathname==='/google/redirect-sink')return json({sub:googleSubject,email:member.email,email_verified:true});
  if(url.pathname==='/api/collections/users/auth-methods')return json({password:{enabled:true,identityFields:['email']},oauth2:{enabled:googleEnabled,providers:googleEnabled?[{name:'google',state:googleState,codeVerifier:googleVerifier,codeChallenge:'fixture-s256-challenge',codeChallengeMethod:'S256',authURL:'https://accounts.google.com/o/oauth2/v2/auth?client_id=fixture-google-client&response_type=code&scope=openid%20email%20profile&code_challenge=fixture-s256-challenge&code_challenge_method=S256&state='+googleState+'&redirect_uri='}]:[]},mfa:{enabled:false},otp:{enabled:false}});
  if(url.pathname==='/api/collections/users/auth-with-password'){if(body.identity!==member.email||body.password!=='fixture-password-123')return json({status:400,message:'Invalid credentials',data:{}},400);return json(session());}
  if(url.pathname==='/api/collections/users/auth-refresh'){if(failRefresh||!tokens.has(request.headers.authorization))return json({status:401,message:'Invalid token',data:{}},401);return json({token:'refreshed-token',record:members.get(tokens.get(request.headers.authorization))});}
@@ -45,9 +47,9 @@ const server=createServer(async(request,response)=>{
  if(url.pathname.startsWith('/api/collections/users/records/')){
   if(request.headers.authorization!==globalThis.fixtureEnv.AUTH_ADMIN_KEY)return json({status:403,data:{}},403);
   const subject=url.pathname.split('/').at(-1),found=members.get(subject);if(!found)return json({status:404,data:{}},404);
-  if(request.method==='PATCH'){Object.assign(found,body);return json(found);}
-  if(request.method==='DELETE'){if(failDelete)return json({status:503,data:{}},503);members.delete(subject);return json(null,204);}
-  return json(found);
+  if(request.method==='PATCH'){Object.assign(found,body);return json(wrongWriteSubject?{...found,id}:found);}
+  if(request.method==='DELETE'){if(failDelete)return json({status:503,data:{}},503);members.delete(subject);return wrongDeleteSubject?json({...found,id}):json(null,204);}
+  return json(wrongAdminSubject?{...found,id:createdId,email:'foreign@example.test'}:found);
  }
  if(url.pathname==='/api/collections/users/request-verification')return json(null,204);
  if(url.pathname==='/api/collections/users/confirm-verification'){if(body.token!=='fixture-confirmation')return json({status:400,data:{}},400);members.get(createdId).verified=true;return json(null,204);}
@@ -56,7 +58,7 @@ const server=createServer(async(request,response)=>{
  return json({status:404,message:'Missing fixture',data:{}},404);
 });
 await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const transport='http://127.0.0.1:'+server.address().port,originalFetch=globalThis.fetch;
-globalThis.fetch=(input,init)=>{const url=new URL(input instanceof Request?input.url:String(input));if(url.origin==='https://openidconnect.googleapis.com'){assert(googleProof);assert.equal(init.headers.Authorization,'Bearer fixture-google-proof');return Response.json({sub:googleSubject,email:member.email,email_verified:true});}assert.equal(url.origin,providerOrigin);assert.equal(init.redirect,'error');return originalFetch(new URL(url.pathname+url.search,transport),init);};
+globalThis.fetch=(input,init)=>{const url=new URL(input instanceof Request?input.url:String(input));if(url.origin==='https://openidconnect.googleapis.com'){assert(googleProof);assert.equal(init.headers.Authorization,'Bearer fixture-google-proof');return originalFetch(new URL('/google/userinfo',transport),init);}assert.equal(url.origin,providerOrigin);assert.equal(init.redirect,'error');return originalFetch(new URL(url.pathname+url.search,transport),init);};
 const post=(action,body={})=>auth.authPost(new Request(origin+'/api/auth/'+action,{method:'POST',headers:{origin,'content-type':'application/json'},body:JSON.stringify(body)}),{params:Promise.resolve({action})});
 try{
  const source=auth.supabaseIdentity('https://previous-fixture.supabase.co','00000000-0000-4000-8000-000000000099'),destination={provider:'pocketbase',issuer:providerOrigin,subject:id};
@@ -69,7 +71,10 @@ try{
  const current=await auth.getAppUser();assert.equal(current.userId,oldAccount,'A mapped non-UUID target login retains the prior stable source account');assert.equal(current.displayName,'PocketBase Member');assert.equal(current.isModerator,false);
  assert.equal((await auth.ownReviews(new Request(origin+'/api/visits'))).status,200);assert.equal(await (await auth.evidenceGet(new Request(origin+'/api/evidence/'+visit),{params:Promise.resolve({id:visit})})).text(),'%PDF-private synthetic source evidence','Private file paths and ownership remain unchanged across the independent protocol switch');
  assert.equal((await auth.getAppUser()).userId,current.userId,'Server refresh preserves enrolled session identity');
- failRefresh=true;assert.equal(await auth.getAppUser(),null,'Server-side revocation denies the old token');failRefresh=false;
+ const oldCookies=new Map(cookieMap);failRefresh=true;assert.equal(await auth.getAppUser(),null,'Server-side revocation denies the old token');
+ assert.equal((await post('logout')).status,503,'Logout must report a refresh/proof outage instead of success without revoking its local grant');failRefresh=false;
+ assert.equal((await post('logout')).status,200);cookieMap.clear();for(const [name,value] of oldCookies)cookieMap.set(name,value);assert.equal(await auth.getAppUser(),null,'A copied cookie remains denied after a successful retry logout');cookieMap.clear();assert.equal((await post('logout')).status,200,'An anonymous logout with no proof remains harmless');
+ assert.equal((await post('login',{email:member.email,password:'fixture-password-123'})).status,200);
  assert.equal((await post('login',{email:member.email,password:'wrong-password'})).status,401);
  assert.equal((await post('recovery',{email:member.email})).status,200);
  let result=await auth.callback(new Request(origin+'/auth/bestaetigen?'+new URLSearchParams({type:'recovery',token_hash:resetToken,weiter:'/passwort-neu'})));
@@ -91,6 +96,7 @@ try{
  const callback=new URL(authorization.searchParams.get('redirect_uri'));callback.searchParams.set('code','fixture-google-code');callback.searchParams.set('state','forged-state');
  result=await auth.callback(new Request(callback));assert.equal(new URL(result.headers.get('Location')).searchParams.get('fehler'),'google');
  assert(!requests.some(request=>request.path.endsWith('/auth-with-oauth2')),'Mismatched Google state cannot exchange an authorization code');
+ redirectGoogle=true;google=await post('google',{locale:'en',returnTo:'/en/bewertungen'});const rejected=new URL(new URL((await google.json()).url).searchParams.get('redirect_uri'));rejected.searchParams.set('code','fixture-redirect-code');rejected.searchParams.set('state',googleState);result=await auth.callback(new Request(rejected));assert.equal(new URL(result.headers.get('Location')).searchParams.get('fehler'),'google');assert(!requests.some(value=>value.path==='/google/redirect-sink'),'Google proof tokens never follow even a same-host redirect to a different endpoint');redirectGoogle=false;
  google=await post('google',{locale:'en',returnTo:'/en/bewertungen'});const target=new URL(new URL((await google.json()).url).searchParams.get('redirect_uri'));target.searchParams.set('code','fixture-google-code');target.searchParams.set('state',googleState);
  result=await auth.callback(new Request(target));assert.equal(new URL(result.headers.get('Location')).pathname,'/en/reviews');assert.equal((await auth.getAppUser()).provider,'Google');
  assert(![...cookieMap.values()].some(value=>value.includes('fixture-google-proof')),'Google proof never persists in the browser session');
@@ -111,10 +117,14 @@ try{
  assert((await auth.getAppUser()).isModerator);
  assert.equal((await auth.listUsers(apiRequest('GET'))).status,200);
  globalThis.fixtureEnv.AUTH_ADMIN_KEY_PROVIDER='supabase';assert.equal(await auth.getAuthAdmin(),null,'A key bound to another protocol cannot exercise administration on the approved endpoint');globalThis.fixtureEnv.AUTH_ADMIN_KEY_PROVIDER='pocketbase';
+ wrongAdminSubject=true;const beforeWrong=requests.length;
+ assert.equal((await auth.removeUser(apiRequest('DELETE'),{params:Promise.resolve({id})})).status,503,'A different valid response subject cannot bypass protected-account deletion');assert(!requests.slice(beforeWrong).some(value=>value.method==='DELETE'));wrongAdminSubject=false;
  redirectAdmin=true;assert.equal((await auth.listUsers(apiRequest('GET'))).status,503);redirectAdmin=false;
  assert.equal((await auth.addUser(apiRequest('POST',{name:'PB Managed Member',email:'managed@example.test',password:'fixture-password-123'}))).status,201);
  const context={params:Promise.resolve({id:createdId})};assert.equal((await auth.editUser(apiRequest('PATCH',{name:'PB Edited Member'}),context)).status,200);assert.equal(members.get(createdId).name,'PB Edited Member');
  assert.equal((await auth.editUser(apiRequest('PATCH',{active:false}),context)).status,200);assert.equal(db.prepare("SELECT status FROM auth_account_status WHERE account_id=(SELECT account_id FROM auth_identities WHERE provider='pocketbase' AND subject=?)").get(createdId).status,'inactive');
+ const privileged=(await auth.getAuthAdmin()).client;wrongWriteSubject=true;assert.equal((await privileged.updateUserById(createdId,{name:'Binding Probe'})).error.code,'invalid_response');wrongWriteSubject=false;
+ const restoredManaged={...members.get(createdId)};wrongDeleteSubject=true;assert.equal((await privileged.deleteUser(createdId)).error.code,'invalid_response');wrongDeleteSubject=false;members.set(createdId,restoredManaged);
  assert.equal((await auth.removeUser(apiRequest('DELETE'),context)).status,200);assert(!members.has(createdId));
  assert.equal((await post('register',{locale:'sq',name:'PB Signup',email:'signup@example.test',password:'fixture-password-123',returnTo:'/sq/vleresimet'})).status,200);
  result=await auth.callback(new Request(origin+'/auth/bestaetigen?type=signup&token_hash=fixture-confirmation'));

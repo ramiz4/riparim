@@ -104,11 +104,12 @@ export function pocketbaseClient(config:AuthConfig,cookies:AuthCookies|null,secu
 export function pocketbaseAdmin(origin:string,key:string):AuthAdminClient{
  const api=requestApi(origin,key),attributes=(input:AuthUserAttributes)=>({...input.email!==undefined?{email:input.email}:{},...input.password!==undefined?{password:input.password,passwordConfirm:input.password}:{},...input.name!==undefined?{name:input.name}:{},...input.preferredLocale!==undefined?{preferredLocale:input.preferredLocale}:{},...input.emailVerified!==undefined?{verified:input.emailVerified}:{}});
  const path=(id:string)=>collection+'/records/'+subject(id);
+ const bound=(value:unknown,id:string)=>{const user=normalize(value,origin);if(user.identity.subject!==subject(id))throw new ProviderFailure({code:'invalid_response'});return user;};
  return {
   listUsers:params=>attempt({users:[] as AuthUser[],total:0},async()=>{const data=object(await api(collection+'/records?page='+params.page+'&perPage='+params.perPage));if(!Array.isArray(data.items)||!Number.isSafeInteger(data.totalItems)||Number(data.totalItems)<0)throw new ProviderFailure({code:'invalid_response'});return {users:data.items.map(user=>normalize(user,origin)),total:Number(data.totalItems)};}),
-  getUserById:id=>attempt({user:null as AuthUser|null},async()=>({user:normalize(await api(path(id)),origin)})),
+  getUserById:id=>attempt({user:null as AuthUser|null},async()=>({user:bound(await api(path(id)),id)})),
   createUser:input=>attempt({user:null as AuthUser|null},async()=>({user:normalize(await api(collection+'/records','POST',attributes(input)),origin)})),
-  updateUserById:(id,input)=>attempt({user:null as AuthUser|null},async()=>{const user=normalize(await api(path(id),'PATCH',attributes(input)),origin);if(input.name!==undefined&&user.name!==input.name||input.preferredLocale!==undefined&&user.preferredLocale!==input.preferredLocale)throw new ProviderFailure({code:'invalid_response'});return {user};}),
-  deleteUser:id=>attempt({user:null},async()=>{await api(path(id),'DELETE');return {user:null};})
+  updateUserById:(id,input)=>attempt({user:null as AuthUser|null},async()=>{const user=bound(await api(path(id),'PATCH',attributes(input)),id);if(input.name!==undefined&&user.name!==input.name||input.preferredLocale!==undefined&&user.preferredLocale!==input.preferredLocale)throw new ProviderFailure({code:'invalid_response'});return {user};}),
+  deleteUser:id=>attempt({user:null},async()=>{const returned=await api(path(id),'DELETE');if(returned!==null)bound(returned,id);return {user:null};})
  };
 }

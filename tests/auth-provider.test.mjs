@@ -35,10 +35,10 @@ const cookieMap=new Map(),cookieOptions=new Map();
 globalThis.fixtureCookies={getAll:()=>[...cookieMap].map(([name,value])=>({name,value})),get:name=>cookieMap.has(name)?{value:cookieMap.get(name)}:undefined,set(name,value,options){cookieOptions.set(name,options);if(options?.maxAge===0)cookieMap.delete(name);else cookieMap.set(name,value);}};
 const member={id,aud:'authenticated',role:'authenticated',email:'member@example.test',email_confirmed_at:'2026-10-11T00:00:00Z',created_at:'2026-10-11T00:00:00Z',app_metadata:{provider:'email',providers:['email']},user_metadata:{full_name:'Fixture Member',role:'admin',is_admin:true},identities:[]};
 const members=new Map([[id,member]]),tokens=new Map(),requests=[];
-let nextSession=0,redirectAdmin=false,redirectRecovery=false,failUser=false,claimsSubject=null,providerBlocked=false,googleProof=false;
+let nextSession=0,redirectAdmin=false,redirectRecovery=false,failUser=false,claimsSubject=null,providerBlocked=false,googleProof=false,wrongAdminSubject=false,sessionOverride=null,amrOverride=undefined,wrongWriteSubject=false,wrongDeleteSubject=false;
 const encode=value=>Buffer.from(JSON.stringify(value)).toString('base64url');
 function session(method='password'){
- const header=encode({alg:'HS256',typ:'JWT'}),payload=encode({sub:claimsSubject??id,iss:alternate+'/auth/v1',aud:'authenticated',exp:Math.floor(Date.now()/1000)+3600,iat:Math.floor(Date.now()/1000),session_id:'sdk-session-'+(++nextSession),amr:[{method}]});
+ const header=encode({alg:'HS256',typ:'JWT'}),payload=encode({sub:claimsSubject??id,iss:alternate+'/auth/v1',aud:'authenticated',exp:Math.floor(Date.now()/1000)+3600,iat:Math.floor(Date.now()/1000),session_id:sessionOverride??'sdk-session-'+(++nextSession),...(amrOverride===null?{}:{amr:amrOverride??[{method}]})});
  const signature=createHmac('sha256','isolated-fixture-key').update(header+'.'+payload).digest('base64url'),access_token=header+'.'+payload+'.'+signature;
  tokens.set(access_token,id);
  return {access_token,refresh_token:'fixture-refresh-'+nextSession,token_type:'bearer',expires_in:3600,user:members.get(id),...(method==='oauth'?{provider_token:'fixture-google-proof'}:{})};
@@ -59,9 +59,9 @@ const server=createServer(async(request,response)=>{
    const created={...member,...body,id:newId,email_confirmed_at:'2026-10-11T00:00:00Z'};members.set(newId,created);return json(created);
   }
   const found=members.get(subject);if(!found)return json({msg:'Fixture missing',error_code:'user_not_found'},404);
-  if(request.method==='PUT'){Object.assign(found,body);return json(found);}
-  if(request.method==='DELETE'){members.delete(subject);return json(found);}
-  return json(found);
+  if(request.method==='PUT'){Object.assign(found,body);return json(wrongWriteSubject?{...found,id:id}:found);}
+  if(request.method==='DELETE'){members.delete(subject);return json(wrongDeleteSubject?{...found,id:id}:found);}
+  return json(wrongAdminSubject?{...found,id:newId,email:'foreign@example.test'}:found);
  }
  if(url.pathname==='/auth/v1/token'){
   if(url.searchParams.get('grant_type')==='password'&&body.password!=='fixture-password-123')return json({msg:'Fixture invalid credentials',error_code:'invalid_credentials'},400);
@@ -138,13 +138,20 @@ try{
  result=await post('google',{returnTo:'//untrusted.example'});assert.equal(result.status,200);
  const authorization=new URL((await result.json()).url);assert.equal(authorization.origin,alternate);assert.equal(authorization.pathname,'/auth/v1/authorize');assert(authorization.searchParams.get('code_challenge'));
  assert([...cookieMap.keys()].some(name=>name.includes('code-verifier')));
- member.identities=[{provider:'google',identity_data:{sub:'fixture-google-member',email:member.email,email_verified:true}}];googleProof=true;
+ globalThis.fixtureEnv.REVIEW_MODERATOR_EMAIL=member.email;member.identities=[{provider:'google',identity_data:{sub:'fixture-google-member',email:member.email,email_verified:true}}];googleProof=true;
  const callback=new URL(authorization.searchParams.get('redirect_to'));callback.searchParams.set('code','fixture-code');
  result=await auth.callback(new Request(callback));assert.equal(result.status,303);assert.equal(googleRequests,1);
  const exchange=requests.findLast(request=>request.path==='/auth/v1/token'&&request.query.get('grant_type')==='pkce');assert(exchange.body.code_verifier);assert.equal(exchange.body.auth_code,'fixture-code');
- assert.equal((await auth.getAppUser()).provider,'Google');
+ assert.equal((await auth.getAppUser()).provider,'Google');assert.equal((await auth.getAppUser()).isModerator,true,'Independent Google proof established a real bootstrap moderation grant before testing AMR regressions');
  assert(![...cookieMap.values()].some(value=>(value.startsWith('base64-')?Buffer.from(value.slice(7),'base64url').toString():value).includes('fixture-google-proof')),'Provider token is removed from persistent session cookies');
- assert.equal((await post('logout')).status,200);assert.equal(await auth.getAppUser(),null);
+ const realNow=Date.now;let shifted=0;const oauthSid='sdk-session-'+nextSession;sessionOverride=oauthSid;
+ try{
+  amrOverride=null;shifted=3601000;Date.now=()=>realNow()+shifted;assert.equal(await auth.getAppUser(),null,'A previously enrolled Supabase Google grant cannot survive missing OAuth AMR');
+  amrOverride=[{method:'password'}];shifted+=3601000;assert.equal(await auth.getAppUser(),null,'A password proof cannot claim an existing Google grant');
+  amrOverride=[{method:'unrecognized-provider-method'}];shifted+=3601000;assert.equal(await auth.getAppUser(),null,'Unknown Supabase AMR is distinct from a privately nonce-bound PocketBase session');
+  assert.equal((await post('logout')).status,200,'A verified session ID can still be revoked despite unknown authentication method');
+ }finally{Date.now=realNow;sessionOverride=null;amrOverride=undefined;}
+ assert.equal(await auth.getAppUser(),null);
  assert.equal(db.prepare("SELECT COUNT(*) n FROM auth_sessions WHERE provider='google' AND revoked=0").get().n,0);
  // Administrative routes use the actual separate privileged SDK and internal account role.
  db.prepare("INSERT INTO auth_account_roles VALUES (?,'admin','2026-10-11','fixture-bootstrap')").run(stable);
@@ -153,7 +160,12 @@ try{
  result=await auth.listUsers(apiRequest('/api/users','GET'));assert.equal(result.status,200);assert.equal((await result.json()).users[0].protected,true);
  result=await auth.addUser(apiRequest('/api/users','POST',{name:'Managed Fixture',email:'managed@example.test',password:'fixture-password-123'}));assert.equal(result.status,201);
  result=await auth.editUser(apiRequest('/api/users/'+newId,'PATCH',{name:'Edited Fixture'}),context(newId));assert.equal(result.status,200);assert.equal(members.get(newId).user_metadata.full_name,'Edited Fixture');
+ const privileged=(await auth.getAuthAdmin()).client;wrongWriteSubject=true;assert.equal((await privileged.updateUserById(newId,{name:'Binding Probe'})).error.code,'invalid_response','A successful HTTP write cannot report another requested identity as its result');wrongWriteSubject=false;
+ const restoredManaged={...members.get(newId)};wrongDeleteSubject=true;assert.equal((await privileged.deleteUser(newId)).error.code,'invalid_response','Delete userdata is checked against the requested subject');wrongDeleteSubject=false;members.set(newId,restoredManaged);
  result=await auth.removeUser(apiRequest('/api/users/'+newId,'DELETE'),context(newId));assert.equal(result.status,200);assert(!members.has(newId));
+ wrongAdminSubject=true;const beforeWrong=requests.length;
+ result=await auth.removeUser(apiRequest('/api/users/'+id,'DELETE'),context(id));assert.equal(result.status,503,'A valid but different provider subject cannot bypass own-account deletion protection');
+ assert(!requests.slice(beforeWrong).some(value=>value.method==='DELETE'),'A mismatched lookup cannot produce a deletion request');wrongAdminSubject=false;
  const adminRequests=requests.filter(request=>request.path.startsWith('/auth/v1/admin/'));
  assert(adminRequests.length>=5);assert(adminRequests.every(request=>request.headers.apikey===globalThis.fixtureEnv.SUPABASE_SECRET_KEY&&request.headers.authorization==='Bearer '+globalThis.fixtureEnv.SUPABASE_SECRET_KEY));
  assert(requests.filter(request=>!request.path.startsWith('/auth/v1/admin/')).every(request=>request.headers.apikey===key),'Ordinary requests never receive the privileged credential');

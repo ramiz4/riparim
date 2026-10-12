@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {createServer} from 'node:https';
-import {readFile,mkdir,writeFile} from 'node:fs/promises';
+import {readFile,mkdir,writeFile,cp} from 'node:fs/promises';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 import {join} from 'node:path';
@@ -10,12 +10,13 @@ import {createHash} from 'node:crypto';
 export async function pocketbaseNodeHttp({directory,port,start,stop}){
  const target=join(directory,'pocketbase-http');await mkdir(target);
  await promisify(execFile)(process.execPath,['.node-runtime/command.mjs','migrate'],{env:{...process.env,RIPARIM_DATA_DIR:target}});
- const storageModule=join(directory,'pocketbase-storage.mjs'),bundled=await build({entryPoints:['lib/runtime/node-storage.ts'],bundle:true,platform:'node',format:'esm',write:false,packages:'external'});await writeFile(storageModule,bundled.outputFiles[0].contents);
- const {createNodeStorage}=await import(storageModule),storage=createNodeStorage(target);
+ globalThis.pocketbaseNodeEnv={};
+ const storageModule=join(directory,'pocketbase-storage.mjs'),bundled=await build({stdin:{contents:"export * from './lib/runtime/node-storage';export {linkAccountIdentity} from './lib/auth/identities';",resolveDir:process.cwd(),loader:'ts'},bundle:true,platform:'node',format:'esm',write:false,packages:'external',plugins:[{name:'private-operator-runtime',setup(b){b.onResolve({filter:/^@\/lib\/runtime\/env$/},()=>({path:'env',namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},()=>({loader:'js',contents:'export const env=globalThis.pocketbaseNodeEnv;'}));}}]});await writeFile(storageModule,bundled.outputFiles[0].contents);
+ const {createNodeStorage,linkAccountIdentity}=await import(storageModule),storage=createNodeStorage(target);
  const member='memberrecord001',admin='adminrecord0001',key='synthetic-pb-admin-key',owner='supabase:previous-fixture.supabase.co:00000000-0000-4000-8000-000000000001',adminOwner='opaque-pb-admin',visit='10000000-0000-4000-8000-000000000001';
  const records=new Map([[member,{id:member,collectionId:'_pb_users_auth_',collectionName:'users',email:'member@example.test',verified:true,name:'Synthetic PB Node member',preferredLocale:'en',role:'admin',isAdmin:true}],[admin,{id:admin,collectionId:'_pb_users_auth_',collectionName:'users',email:'admin@example.test',verified:true,name:'Synthetic PB Node admin',preferredLocale:'en'}]]),tokens=new Map();let sequence=0;
  const tls={key:await readFile('tests/fixtures/smtp/key.pem'),cert:await readFile('tests/fixtures/smtp/cert.pem')},sockets=new Set();
- const provider=createServer(tls,async(req,res)=>{
+ const handler=(records,key)=>async(req,res)=>{
   const url=new URL(req.url,'https://'+req.headers.host),chunks=[];for await(const chunk of req)chunks.push(chunk);const body=chunks.length?JSON.parse(Buffer.concat(chunks).toString()):{};
   const json=(value,status=200)=>{res.writeHead(status,{'content-type':'application/json'});res.end(JSON.stringify(value));};
   if(url.pathname==='/api/collections/users/auth-methods')return json({password:{enabled:true,identityFields:['email']},oauth2:{enabled:false,providers:[]},mfa:{enabled:false}});
@@ -26,7 +27,8 @@ export async function pocketbaseNodeHttp({directory,port,start,stop}){
   if(url.pathname==='/api/collections/users/records')return json({items:[...records.values()],totalItems:records.size});
   const id=url.pathname.split('/').at(-1),record=records.get(id);if(!record)return json({status:404,data:{}},404);
   if(req.method==='PATCH')Object.assign(record,body);return json(record);
- });provider.on('connection',socket=>{sockets.add(socket);socket.on('close',()=>sockets.delete(socket));});await new Promise(resolve=>provider.listen(0,'127.0.0.1',resolve));
+ };const provider=createServer(tls,handler(records,key));provider.on('connection',socket=>{sockets.add(socket);socket.on('close',()=>sockets.delete(socket));});await new Promise(resolve=>provider.listen(0,'127.0.0.1',resolve));
+ let targetProvider;
  const issuer='https://127.0.0.1:'+provider.address().port,publicOrigin='https://pocketbase-node.fixture.invalid',origin='http://127.0.0.1:'+port;
  try{
   const catalogue=JSON.parse(await readFile('data/workshops.json','utf8')),marker='workshop-source:'+createHash('sha256').update(JSON.stringify(catalogue)).digest('hex');await storage.db.prepare('INSERT INTO catalog_state VALUES (?,?)').bind(marker,'fixture').run();
@@ -48,8 +50,32 @@ export async function pocketbaseNodeHttp({directory,port,start,stop}){
   assert.equal((await call('/api/account',{method:'POST',body:{password:'synthetic-password-123'}})).status,200,'Password proof uses an isolated provider session on the true Node HTTP path');
   assert.equal((await login('admin@example.test',adminJar)).status,200);assert.equal((await call('/api/users',{jar:adminJar})).status,200);
   assert.equal((await call('/api/auth-settings',{method:'POST',body:{provider:'supabase',projectUrl:'https://replacement.supabase.co',publicKey:'sb_publishable_fixture_key_1234567890',enabled:false},jar:adminJar})).status,400,'An active protocol switch is rejected before deactivation');
+  assert.equal((await call('/api/auth-settings',{method:'POST',body:{provider:'pocketbase',projectUrl:issuer,publicKey:'',enabled:false,emailDeliveryConfirmed:false},jar:adminJar})).status,200);
+  assert.equal((await call('/api/auth-settings',{jar:adminJar})).status,401,'Disabling customer auth also removes a Node web administrator with no separate native identity');
+  assert.equal((await call('/api/auth-settings',{method:'POST',body:{provider:'pocketbase',projectUrl:issuer,publicKey:'',enabled:true},jar:adminJar})).status,401,'The disabled Node profile cannot be reactivated through a hidden public bootstrap');
+  await stop();
+  await cp(target,join(directory,'pocketbase-before-cutover'),{recursive:true});
+  const targetKey='synthetic-pb-target-admin-key',targetMember='memberrecord002',targetAdmin='adminrecord0002',targetRecords=new Map([[targetMember,{...records.get(member),id:targetMember}],[targetAdmin,{...records.get(admin),id:targetAdmin}]]);
+  targetProvider=createServer(tls,handler(targetRecords,targetKey));targetProvider.on('connection',socket=>{sockets.add(socket);socket.on('close',()=>sockets.delete(socket));});await new Promise(resolve=>targetProvider.listen(0,'127.0.0.1',resolve));
+  const nextIssuer='https://127.0.0.1:'+targetProvider.address().port,privateStorage=createNodeStorage(target);Object.assign(globalThis.pocketbaseNodeEnv,{DB:privateStorage.db,BUCKET:privateStorage.bucket});
+  const verify=identity=>new Promise((resolve,reject)=>{
+   const credential=identity.issuer===issuer?key:identity.issuer===nextIssuer?targetKey:null;if(!credential||identity.provider!=='pocketbase')return resolve(false);
+   import('node:https').then(({request})=>{const req=request(new URL('/api/collections/users/records/'+identity.subject,identity.issuer),{ca:tls.cert,headers:{Authorization:credential}},res=>{const chunks=[];res.on('data',chunk=>chunks.push(chunk));res.on('end',()=>{try{resolve(res.statusCode===200&&JSON.parse(Buffer.concat(chunks)).id===identity.subject);}catch(error){reject(error);}});});req.on('error',reject);req.end();}).catch(reject);
+  });
+  for(const [sourceSubject,targetSubject,account] of [[member,targetMember,owner],[admin,targetAdmin,adminOwner]])assert.equal(await linkAccountIdentity({provider:'pocketbase',issuer,subject:sourceSubject},{provider:'pocketbase',issuer:nextIssuer,subject:targetSubject},verify),account);
+  privateStorage.close();delete globalThis.pocketbaseNodeEnv;
+  const instructions=await readFile('docs/auth-provider.md','utf8'),operator=instructions.match(/node --input-type=module <<'NODE'\n([\s\S]*?)\nNODE/)[1];
+  const checkedOperation=operator.replace("provider:'supabase',issuer:'https://source.example.test'",`provider:'pocketbase',issuer:'${issuer}'`).replace('https://target.example.test',nextIssuer).replace('/opt/riparim/shared/data/app.sqlite',join(target,'app.sqlite'));
+  const {spawn}=await import('node:child_process'),configure=spawn(process.execPath,['--input-type=module'],{stdio:['pipe','pipe','pipe']});let output='';configure.stderr.on('data',chunk=>output+=chunk);configure.stdin.end(checkedOperation);assert.equal(await new Promise(resolve=>configure.on('close',resolve)),0,output);
+
+  await start({...environment,AUTH_TRUSTED_ORIGIN:nextIssuer,AUTH_ADMIN_KEY:targetKey,AUTH_ADMIN_KEY_ORIGIN:nextIssuer},port,'127.0.0.1',false);
+  assert.equal((await (await call('/api/session',{jar:adminJar})).json()).isAdmin,false,'Old issuer cookies cannot reuse even an unchanged internal admin role');
+  assert.equal((await call('/api/evidence/'+visit)).status,401,'Old source browser grants remain revoked');memberJar.clear();adminJar.clear();
+  assert.equal((await login('member@example.test',memberJar)).status,200);assert.equal((await (await call('/api/session')).json()).isAdmin,false);
+  assert.equal(await (await call('/api/evidence/'+visit)).text(),'%PDF-private synthetic PB Node evidence','Private operator cutover retains the original stable ownership and file path');
+  assert.equal((await login('admin@example.test',adminJar)).status,200);assert.equal((await (await call('/api/session',{jar:adminJar})).json()).isAdmin,true);assert.equal((await call('/api/users',{jar:adminJar})).status,200,'A fresh target-provider login restores the existing independently held administrative role');
   const links=await call('/en/privacy');assert((await links.text()).includes('PocketBase'),'Actual Node privacy page describes the selected provider');
   assert.equal((await call('/api/auth/logout',{method:'POST',body:{}})).status,200);assert.equal((await call('/api/evidence/'+visit)).status,401);
-  console.log('Actual Node HTTPS PocketBase: independent REST, new runtime bindings, stable refresh, mapped private ownership, profile/re-auth, internal admin role, controlled switch, privacy and logout passed.');
- }finally{await stop();for(const socket of sockets)socket.destroy();await new Promise(resolve=>provider.close(resolve));try{storage.close();}catch{}}
+  console.log('Actual Node HTTPS PocketBase: independent REST, new runtime bindings, stable refresh, mapped private ownership, profile/re-auth, internal admin role, disabled web-admin refusal, private checked operator cutover, privacy and logout passed.');
+ }finally{await stop();for(const socket of sockets)socket.destroy();await new Promise(resolve=>provider.close(resolve));if(targetProvider)await new Promise(resolve=>targetProvider.close(resolve));delete globalThis.pocketbaseNodeEnv;try{storage.close();}catch{}}
 }

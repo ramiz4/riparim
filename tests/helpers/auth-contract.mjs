@@ -11,7 +11,7 @@ export function authClient(raw,issuer){
  const result=value=>({...value,error:failure(value.error),data:{...value.data,user:authUser(value.data?.user,issuer),session:authSession(value.data?.session,issuer)}});
  return {
   getUser:async()=>result(await client.getUser()),
-  getSessionProof:async()=>{const value=await client.getClaims(),claims=value.data?.claims;return {error:failure(value.error),data:{proof:claims?{id:claims.session_id,subject:claims.sub,method:claims.amr?.some(entry=>entry?.method==='oauth')?'google':claims.amr?.some(entry=>entry?.method==='password')?'password':claims.amr?.some(entry=>entry?.method==='recovery')?'recovery':null}:null}};},
+  getSessionProof:async()=>{const value=await client.getClaims(),claims=value.data?.claims;return {error:failure(value.error),data:{proof:claims?{id:claims.session_id,subject:claims.sub,method:claims.amr?.some(entry=>entry?.method==='oauth')?'google':claims.amr?.some(entry=>entry?.method==='password')?'password':claims.amr?.some(entry=>entry?.method==='recovery')?'recovery':'unknown'}:null}};},
   signInWithPassword:async value=>result(await client.signInWithPassword(value)),
   signUp:async value=>result(await client.signUp({email:value.email,password:value.password,options:{data:{full_name:value.name,preferred_locale:value.preferredLocale},emailRedirectTo:value.redirectTo}})),
   beginGoogle:redirectTo=>client.signInWithOAuth({provider:'google',options:{redirectTo,scopes:'openid email profile',skipBrowserRedirect:true,queryParams:{prompt:'select_account'}}}),

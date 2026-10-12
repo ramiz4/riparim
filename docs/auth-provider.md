@@ -25,7 +25,9 @@ Einstellungen, Kontoschlüssel und Hosted-SSR-Cookies funktionieren weiter.
 Alte und neue Sitzungen werden anhand der exakten Identität geprüft. Neue
 App-Sitzungsschlüssel trennen auch gleiche Provider-SIDs verschiedener Issuer;
 vorhandene Supabase-SIDs besitzen eine ausdrücklich begrenzte Lesekompatibilität.
-Angewendete Migrationen wurden nicht verändert. Der alte zeitgesteuerte
+Fehlende oder unbekannte Supabase-AMR bleibt als unbekannte Methode markiert
+und kann keinen bestehenden Google-Grant bestätigen; eine belegte Sitzungs-ID
+kann weiterhin sicher widerrufen werden. Angewendete Migrationen wurden nicht verändert. Der alte zeitgesteuerte
 Supabase-Aktivierungswert kann kein PocketBase-Profil aktivieren.
 
 Hosted Supabase unter einer portlosen `*.supabase.co`-Origin bleibt der Standard.
@@ -216,3 +218,69 @@ Google-OAuthclient, produktiver Mailversand oder Import realer Passwort-Hashes
 wurde damit betrieben. Die bisherigen Native-/Google-/Konto-/Kunden- und
 Providerwechseltests bleiben registriert. Dieses Issue stellt keine Live-
 Authinstanz bereit und verändert keinen produktiven Provider oder Kontobestand.
+
+## Privater Betreiberweg ohne Native-Administration
+
+Auf Node und dem eigenen Worker gibt es keinen Sites-Nativezugang. Nach
+Deaktivierung von `auth_settings.enabled` verliert dort auch der bisherige
+Webadmin den Zugriff auf die Konfiguration. Der Formularweg allein kann dann
+nicht wieder aktivieren. Diese Zugriffssperre wird beibehalten; es gibt keine
+öffentliche Bootstraproute.
+
+Für Node ist der konkrete Betreiberweg:
+
+1. Im alten Profil deaktivieren; Appdienst, Timer und sonstige Writer stoppen.
+   Ein geprüftes Backup **beider** SQLite-Datenbanken einschließlich nötiger
+   WAL-/SHM-Dateien sichern und Wiederherstellung vorher prüfen. Der Dienst
+   bleibt während der folgenden Schritte gestoppt.
+2. Zielkonten und vollständige Quell-/Zielzuordnungen privat prüfen, mit der
+   vorhandenen `linkAccountIdentity`-Operation auf einer geschützten
+   Administrationsmaschine vorbereiten und deren unveränderte Konto-IDs,
+   Rollen, Sperren, Löschzustände sowie private Dateien vergleichen. Die
+   geprüften SQLite-Dateien anschließend bei gestoppten Writern geschützt
+   übernehmen. [account-identities.md](account-identities.md) beschreibt die
+   Verträge; bloße Listenabfrage oder gleiche E-Mail ist kein Identitätsbeweis.
+3. Zielorigin/Provider sowie den **Ziel**-Adminschlüssel mit seinen Bindungen
+   in der geschützten `shared/runtime.env` hinterlegen. Zielsettings, SMTP,
+   Google und Callback separat prüfen. Den untenstehenden vorhandenen
+   Node-24-/SQLite-Befehl auf dem Host als berechtigter Dienstbetreiber
+   ausführen. Er benötigt weder Sourcecheckout noch Build und enthält nur
+   öffentliche Profilangaben; Geheimnisse bleiben in `runtime.env`.
+4. Den Dienst mit dem geprüften Release neu starten. Alte Cookiegläser müssen
+   verweigert werden; mit den geprüften Zielkonten neu anmelden und Admin,
+   Besitzrechte, Sperren und private Nachweise prüfen. Timer erst danach
+   starten. Bei Fehlern gestoppt bleiben und den dokumentierten Daten
+   erhaltenden Rückweg verwenden.
+
+Beispiel für bewusstes Aktivieren eines **bereits vollständig zugeordneten und
+geprüften** PocketBase-Ziels. Platzhalter und Pfad durch die überprüften Werte
+ersetzen; `email_delivery_confirmed=0` erteilt keine ungetestete Versandfreigabe:
+
+```sh
+node --input-type=module <<'NODE'
+import {DatabaseSync} from 'node:sqlite';
+const previous={provider:'supabase',issuer:'https://source.example.test'};
+const next={provider:'pocketbase',issuer:'https://target.example.test',publicKey:''};
+const database=new DatabaseSync('/opt/riparim/shared/data/app.sqlite');
+database.exec('BEGIN IMMEDIATE');
+try{
+ const saved=database.prepare("SELECT provider,project_url,enabled FROM auth_settings WHERE id='main'").get();
+ if(!saved||saved.enabled!==0||saved.provider!==previous.provider||saved.project_url!==previous.issuer)throw Error('Unexpected source profile or running auth configuration');
+ const missing=database.prepare("SELECT COUNT(*) n FROM auth_identities s WHERE s.provider=? AND s.issuer=? AND NOT EXISTS (SELECT 1 FROM auth_identities t WHERE t.account_id=s.account_id AND t.provider=? AND t.issuer=?)").get(previous.provider,previous.issuer,next.provider,next.issuer);
+ const known=database.prepare("SELECT COUNT(*) n FROM auth_identities WHERE provider=? AND issuer=?").get(previous.provider,previous.issuer);
+ if(!known.n||missing.n)throw Error('Complete reviewed identity mapping is required');
+ database.prepare('UPDATE auth_sessions SET revoked=1').run();
+ database.prepare("UPDATE auth_settings SET provider=?,project_url=?,public_key=?,enabled=1,email_delivery_confirmed=0,updated_at=? WHERE id='main'").run(next.provider,next.issuer,next.publicKey,new Date().toISOString());
+ database.exec('COMMIT');
+}catch(error){database.exec('ROLLBACK');throw error;}
+finally{database.close();}
+NODE
+```
+
+Der Vollständigkeitscheck ersetzt keine unabhängige Identitätsprüfung oder
+Provider-Vorabnahme; er verweigert lediglich fehlende Zuordnungen. Für den
+eigenen Worker erfolgt die gleichwertige private Konfigurations-/Grantänderung
+über die berechtigten D1-Betriebswerkzeuge bei gesperrten Writern und geprüftem
+Backup. Einen fremden Provider oder Kontobestand nicht im Webformular erraten.
+Ein Rückweg führt dieselben kontrollierten Schritte mit dem erhaltenen,
+geprüften Quellprofil aus und verlangt neue Anmeldung.

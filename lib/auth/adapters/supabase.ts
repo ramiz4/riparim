@@ -17,7 +17,7 @@ export function validSupabaseSecret(key:string){
 }
 function normalize(user:User|null,origin:string):AuthUser|null{
  if(!user)return null;
- const identity=supabaseIdentity(origin,user.id);
+ const identity=supabaseIdentity(origin,user.id.toLowerCase());
  if(user.email!==undefined&&typeof user.email!=='string')throw Error('INVALID_PROVIDER_USER');
  const metadata=user.user_metadata??{};
  return {identity,email:user.email,emailVerified:typeof user.email_confirmed_at==='string'&&Number.isFinite(Date.parse(user.email_confirmed_at)),name:typeof metadata.full_name==='string'?metadata.full_name:undefined,preferredLocale:typeof metadata.preferred_locale==='string'?metadata.preferred_locale:undefined,createdAt:user.created_at,lastSignInAt:user.last_sign_in_at,blocked:!!user.banned_until&&Date.parse(user.banned_until)>Date.now(),loginProviders:[...new Set(user.identities?.map(value=>value.provider)??[])],googleIdentities:(user.identities??[]).flatMap(value=>value.provider==='google'&&typeof value.identity_data?.sub==='string'&&typeof value.identity_data?.email==='string'?[{subject:value.identity_data.sub,email:value.identity_data.email,emailVerified:value.identity_data.email_verified===true}]:[])};
@@ -46,7 +46,9 @@ export function supabaseClient(config:AuthConfig,cookies:AuthCookies|null,secure
   async getUser(){const result=await client.auth.getUser();return {data:{user:normalize(result.data.user,origin)},error:error(result.error)};},
   async getSessionProof(){
    const result=await client.auth.getClaims(),claims=result.data?.claims;
-   const method=claims?.amr?.some(value=>typeof value==='object'&&value!==null&&value.method==='oauth')?'google':claims?.amr?.some(value=>typeof value==='object'&&value!==null&&value.method==='password')?'password':claims?.amr?.some(value=>typeof value==='object'&&value!==null&&value.method==='recovery')?'recovery':null;
+   if(!result.error&&!claims)return {data:{proof:null},error:null};
+   const methods=Array.isArray(claims?.amr)?claims.amr:[];
+   const method=methods.some(value=>typeof value==='object'&&value!==null&&value.method==='oauth')?'google':methods.some(value=>typeof value==='object'&&value!==null&&value.method==='password')?'password':methods.some(value=>typeof value==='object'&&value!==null&&value.method==='recovery')?'recovery':'unknown';
    if(result.error||typeof claims?.sub!=='string'||typeof claims.session_id!=='string'||claims.iss!==origin+'/auth/v1')return {data:{proof:null},error:error(result.error)??{code:'invalid_response'}};
    return {data:{proof:{id:claims.session_id,subject:claims.sub,method}},error:null};
   },
@@ -66,12 +68,18 @@ export function supabaseClient(config:AuthConfig,cookies:AuthCookies|null,secure
 }
 export function supabaseAdmin(origin:string,key:string):AuthAdminClient{
  const client=createClient(origin,key,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false},global:{fetch:providerFetch(origin)}}).auth.admin;
+ function response(result:{data:{user:User|null};error:ProviderError|null},id?:string,optional=false){
+  if(result.error)return {data:{user:null},error:error(result.error)};
+  const user=normalize(result.data.user,origin);
+  if(id!==undefined&&(user?user.identity.subject!==normalizeSupabaseSubject(id):!optional))return {data:{user:null},error:{code:'invalid_response' as const}};
+  return {data:{user},error:null};
+ }
  return {
   async listUsers(params){const result=await client.listUsers(params);return {data:{users:result.data.users.map(user=>normalize(user,origin)!),...('total'in result.data?{total:result.data.total}:{})},error:error(result.error)};},
-  async getUserById(id){const result=await client.getUserById(id);return {data:{user:normalize(result.data.user,origin)},error:error(result.error)};},
-  async createUser(input){const result=await client.createUser(attributes(input));return {data:{user:normalize(result.data.user,origin)},error:error(result.error)};},
-  async updateUserById(id,input){const result=await client.updateUserById(id,attributes(input));return {data:{user:normalize(result.data.user,origin)},error:error(result.error)};},
-  async deleteUser(id){const result=await client.deleteUser(id);return {data:{user:normalize(result.data.user,origin)},error:error(result.error)};}
+  async getUserById(id){return response(await client.getUserById(id),id);},
+  async createUser(input){return response(await client.createUser(attributes(input)));},
+  async updateUserById(id,input){return response(await client.updateUserById(id,attributes(input)),id);},
+  async deleteUser(id){return response(await client.deleteUser(id),id,true);}
  };
 }
 

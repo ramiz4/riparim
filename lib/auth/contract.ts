@@ -7,7 +7,7 @@ export type AuthUser={
  googleIdentities:{subject:string;email:string;emailVerified:boolean}[];
 };
 export type AuthMethod='password'|'google'|'recovery';
-export type SessionProof={id:string;subject:string;method:AuthMethod|null};
+export type SessionProof={id:string;subject:string;method:AuthMethod|'unknown'|null};
 export type AuthSession={user:AuthUser;googleAccessToken?:string|null};
 export type AuthError={code:'invalid_credentials'|'not_found'|'email_exists'|'weak_password'|'rate_limited'|'email_unavailable'|'unavailable'|'invalid_response';status?:number};
 export type AuthResult<T>={data:T;error:AuthError|null};

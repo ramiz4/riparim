@@ -10,14 +10,15 @@ keine Zuordnungsnachweise.
 
 Historische Schlüssel wie `supabase:projekt.supabase.co:<uuid>` bleiben
 unverändert. Ihr lesbares Format ist keine fachliche Bedeutung. Nur die
-Migration und die Kompatibilitätsgrenze in `lib/auth/identities.ts` kennen
+Migration und die Kompatibilitätsgrenze in `lib/auth/legacy-supabase.ts` kennen
 dieses Format. Auch neue Supabase-Konten erhalten während der kompatiblen
 Einführungsphase solche Schlüssel, damit eine noch laufende Vorgängerversion
 dieselben Konten beschreibt. Die vollständige normalisierte Issuer-Authority
 unterscheidet dabei verschiedene Ports; Standard-HTTPS behält alte Schlüssel.
 Andere Provider können einen neuen zufälligen internen Schlüssel erhalten.
-Das Identitätsmodul bereitet deren Zuordnung vor; ein weiterer Login-Adapter
-ist kein Bestandteil dieser Änderung.
+Das Identitätsmodul verwendet dieselbe Zuordnung auch für den konkreten
+PocketBase-Adapter; Konfiguration und private Betreiberübernahme stehen in
+[auth-provider.md](auth-provider.md).
 
 ## Migration und Einführung
 
