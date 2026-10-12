@@ -8,7 +8,7 @@ if(config.name==='riparim'){
  const manifest=JSON.parse(await readFile('dist/public-release.json','utf8'));
  const canonical=JSON.parse(await readFile('data/workshops.json','utf8'));
  const published=canonical.workshops.filter(w=>w.status==='published');
- assert.equal(manifest.pages,3*(published.length+3));assert.equal(manifest.privateData,false);
+ assert.equal(manifest.pages,3*(published.length+3));assert.equal(manifest.privateData,false);assert.equal(manifest.privacyVariants,3);
  const modules=(await readdir('dist/server',{recursive:true})).filter(file=>file.endsWith('.js')).sort((a,b)=>a==='index.js'?-1:b==='index.js'?1:a.localeCompare(b)).map(file=>({type:'ESModule',path:resolve('dist/server',file)}));
  const runtime=new Miniflare({modules,modulesRoot:resolve('dist/server'),compatibilityDate:config.compatibility_date,compatibilityFlags:config.compatibility_flags,d1Databases:['DB'],r2Buckets:['BUCKET'],bindings:{SITE_ORIGIN:'https://riparim.com'},assets:{directory:resolve('dist/client'),binding:'ASSETS',routerConfig:{has_user_worker:true,static_routing:{user_worker:config.assets.run_worker_first}},assetConfig:{html_handling:config.assets.html_handling}},outboundService:()=>new Response('No external access',{status:502})});
  try{
@@ -21,6 +21,12 @@ if(config.name==='riparim'){
    assert.equal(response.status,200);assert.equal(response.headers.get('X-Riparim-Public-Snapshot'),'1');assert.equal(response.headers.has('set-cookie'),false);assert.equal(response.headers.get('Cache-Control'),'no-store');
    const html=await response.text();assert(html.includes(`<html lang="${locale}"`));assert(!html.includes('private-secret'));assert(!html.includes('private-user@example.test'));
   }
+  await db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at,provider) VALUES ('main','https://auth.fixture.test','',0,0,'fixture','pocketbase')").run();
+  for(const locale of ['de','sq','en']){
+   const privacy=await runtime.dispatchFetch('https://riparim.com'+localizeHref('/datenschutz',locale)),html=await privacy.text();assert.equal(privacy.status,200);assert.equal(privacy.headers.get('X-Riparim-Public-Snapshot'),'1');assert.equal(privacy.headers.has('set-cookie'),false);assert(html.includes('https://pocketbase.io/docs/authentication/'));assert(!html.includes('https://supabase.com/privacy'),'Even the prebuilt public document names the selected independent provider');
+  }
+  const head=await runtime.dispatchFetch('https://riparim.com/en/privacy',{method:'HEAD'});assert.equal(head.status,200);assert.equal(await head.text(),'');
+  await db.prepare("UPDATE auth_settings SET provider='supabase' WHERE id='main'").run();const rolledBack=await runtime.dispatchFetch('https://riparim.com/en/privacy');assert((await rolledBack.text()).includes('https://supabase.com/privacy'),'Rollback updates the snapshot choice immediately');await db.prepare("DELETE FROM auth_settings WHERE id='main'").run();
   const admin=await runtime.dispatchFetch('https://riparim.com/api/workshops?admin=1');assert.equal(admin.status,401);await admin.text();
   const invalidLocale=await runtime.dispatchFetch('https://riparim.com/api/workshops?locale=fr');assert.equal(invalidLocale.status,400);await invalidLocale.text();
   const anonymous=await runtime.dispatchFetch('https://riparim.com/',{headers:{cookie:'untrusted=fixture'}});const landing=await anonymous.text();assert(!landing.includes(first.description),'The landing document does not serialize the workshop catalogue');

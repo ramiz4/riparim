@@ -18,7 +18,7 @@ export function authClient(raw,issuer){
   completeGoogle:async code=>{const value=await client.exchangeCodeForSession(code);if(value.data?.session&&!value.error)await client.setSession?.({access_token:value.data.session.access_token,refresh_token:value.data.session.refresh_token});return result(value);},
   confirmEmail:async(token,format='token')=>{const value=format==='code'?await client.exchangeCodeForSession(token):await client.verifyOtp({token_hash:token,type:'signup'});return {data:{confirmed:!!value.data?.user?.email_confirmed_at},error:failure(value.error)};},
   acceptRecovery:async(token,format='token')=>{const value=format==='code'?await client.exchangeCodeForSession(token):await client.verifyOtp({token_hash:token,type:'recovery'});return {data:{ready:!!value.data?.user?.email_confirmed_at},error:failure(value.error)};},
-  confirmationReturn:()=>null,
+  callbackReturn:()=>null,
   recoveryReady:async()=>{const value=await client.getUser();return !value.error&&!!value.data?.user?.email_confirmed_at;},
   requestRecovery:async(email,redirectTo)=>{const value=await client.resetPasswordForEmail(email,{redirectTo});return {error:failure(value.error)};},
   resetPassword:async password=>{const value=await client.updateUser({password});return {data:{identity:authUser(value.data?.user,issuer)?.identity??null},error:failure(value.error)};},

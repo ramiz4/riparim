@@ -21,8 +21,11 @@ export async function GET(request:Request){
   if(google){
    const cookieStore=await cookies(),flow=cookieStore.get("riparim-google-flow")?.value;
    cookieStore.set("riparim-google-flow","",{httpOnly:true,secure:!["localhost","127.0.0.1"].includes(new URL(request.url).hostname),sameSite:"lax",path:"/auth/bestaetigen",maxAge:0});
-   if(!code||!flow||p.get("fluss")!==flow||token||type)throw Error("INVALID_GOOGLE_FLOW");
    client=await authClient(c);
+   const saved=client.callbackReturn("google");
+   let callback=p;
+   if(saved){const intent=new URL(saved);if(intent.origin!==new URL(siteOrigin()).origin||intent.pathname!=="/auth/bestaetigen"||intent.searchParams.get("anbieter")!=="google"||intent.searchParams.has("token_hash")||intent.searchParams.has("type"))throw Error("INVALID_GOOGLE_INTENT");callback=intent.searchParams;locale=callbackLocale(callback.get("locale"));next=localizedReturnPath(callback.get("weiter"),siteOrigin(),locale);}
+   if(!code||!flow||callback.get("fluss")!==flow||token||type)throw Error("INVALID_GOOGLE_FLOW");
    const {data,error}=await client.completeGoogle(code,p.get("state"));
    if(error||!data.session)throw Error("INVALID_GOOGLE_CODE");
    const deletionFlow=cookieStore.get("riparim-deletion-flow")?.value;
@@ -44,7 +47,7 @@ export async function GET(request:Request){
   }
   if(code||(token&&["signup","recovery"].includes(type??""))){
    client=await authClient(c);
-   const saved=client.confirmationReturn(type==="recovery"?"recovery":"signup");
+   const saved=client.callbackReturn(type==="recovery"?"recovery":"signup");
    if(saved&&!p.has("weiter")){const callback=new URL(saved);if(callback.origin===new URL(siteOrigin()).origin&&callback.pathname==="/auth/bestaetigen"){locale=callbackLocale(callback.searchParams.get("locale"));next=localizedReturnPath(callback.searchParams.get("weiter"),siteOrigin(),locale,type==="recovery"?"/passwort-neu":"/?besuche=1");}}
    if(type==="recovery"||pageIdentityPath(new URL(next,siteOrigin()).pathname)==="/passwort-neu"){const result=await client.acceptRecovery(code??token!,code?"code":"token");if(!result.error&&result.data.ready)return redirectTo(next);}
    else{const result=await client.confirmEmail(code??token!,code?"code":"token");if(!result.error&&result.data.confirmed){await client.signOut({scope:"local"});return redirectTo(localizeHref(`/anmelden?hinweis=email-bestaetigt&weiter=${encodeURIComponent(next)}`,locale));}}

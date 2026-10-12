@@ -17,6 +17,18 @@ Providerclaims. Google wird zusätzlich über Googles serverseitiges `userinfo`
 geprüft. Profildaten, gleichlautende E-Mail-Adressen und editierbare Rollenfelder
 verleihen keine Rechte.
 
+Die öffentliche Datenschutzseite benennt das gewählte Profil auch während der
+Deaktivierung. Der Worker wählt zwischen zwei beim Release isoliert erzeugten
+Dokumenten anhand der privaten Authsettings; der Node-Server rendert denselben
+Textvertrag. Dafür werden weder Konten noch Providernetzwerk benötigt.
+
+Die bestehenden automatisierten [Authbackups](auth-backups.md) und der
+Authkonfigurationsteil der [Plattformsicherung](platform-backups.md) sichern
+weiterhin die vorhandene Supabase-Installation. Sie sichern keine
+PocketBase-Konten, Passwort-Hashes oder Konfiguration. Bei einem Cutover muss
+der Betreiber die eigene providerseitige Sicherung und Wiederherstellung für
+PocketBase prüfen; Appdaten bleiben im vorhandenen Transfer-/Restore-Vertrag.
+
 ## Bestehende Supabase-Installation
 
 Migration `0018_auth_providers.sql` ergänzt `auth_settings.provider` und die
@@ -94,12 +106,16 @@ Der Betreiber richtet diese konkrete Instanz ein:
   eigene Site-Origin verwenden. Locale/Rückweg werden im gleichen Browser über
   ein privates kurzlebiges Intentcookie erhalten; auf einem anderen Gerät gilt
   der sichere Standardrückweg. Bestätigung erfordert danach eine neue Anmeldung.
-- Google-OAuth im Provider einrichten. Google erhält die **vollständige**
-  Rücksprungadresse der App unter `/auth/bestaetigen`, inklusive Locale und
-  Flowquery. Der Adapter erhält State und PKCE-Verifier von `auth-methods`,
-  erlaubt nur Googles HTTPS-Autorisierungsadresse und hält den Austauschzustand
-  privat. Die serverseitigen Providerlinks und ein unabhängiger Google-Proof
-  müssen dieselbe Google-Identität und bestätigte E-Mail ergeben.
+- Google-OAuth im Provider einrichten und beim Googleclient exakt
+  `https://riparim.com/auth/bestaetigen?anbieter=google` als Rücksprungadresse
+  registrieren (bei Tests die eigene Site-Origin). Diese Adresse bleibt bei
+  Locale-, Rückweg- und Reauthwechsel gleich; deren Appintent bleibt privat im
+  kurzlebigen Browsercookie. Der Adapter erhält State und PKCE-Verifier von
+  `auth-methods`, erlaubt nur Googles HTTPS-Autorisierungsadresse und setzt
+  `openid email profile` für den unabhängigen Identitätsnachweis. Die
+  serverseitigen Providerlinks und ein unabhängiger Google-Proof müssen dieselbe
+  Google-Identität und bestätigte E-Mail ergeben. Fehlende, abgelaufene oder
+  fremde Intentdaten verweigern den Callback vor dem Codeaustausch.
 - Einen privaten PocketBase-Superuser-Authtoken betreiberseitig ausstellen,
   geschützt hinterlegen, dessen Ablauf und Erneuerung planen. Er wird nie als
   Browsertoken oder Public-Key verwendet. Fehlende, abgelaufene oder falsch

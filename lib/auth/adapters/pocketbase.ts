@@ -76,8 +76,9 @@ export function pocketbaseClient(config:AuthConfig,cookies:AuthCookies|null,secu
    const url=new URL(text(google.authURL,4096)),state=text(google.state),verifier=text(google.codeVerifier);
    if(url.origin!=='https://accounts.google.com'||!/^\/o\/oauth2\/(?:v2\/)?auth$/.test(url.pathname)||url.username||url.password||url.searchParams.get('state')!==state||url.searchParams.get('code_challenge_method')!=='S256'||google.codeChallengeMethod!=='S256'||url.searchParams.get('code_challenge')!==google.codeChallenge||url.searchParams.get('response_type')!=='code')throw new ProviderFailure({code:'invalid_response'});
    const callback=new URL(redirectTo);if(callback.protocol!=='https:'||callback.username||callback.password||callback.pathname!=='/auth/bestaetigen')throw new ProviderFailure({code:'invalid_response'});
-   url.searchParams.set('redirect_uri',redirectTo);url.searchParams.set('prompt','select_account');
-   set(flowCookie,JSON.stringify({state,verifier,redirectTo,expiresAt:Date.now()+600000}),600);return {url:url.href};
+   const registered=new URL('/auth/bestaetigen',callback.origin);registered.searchParams.set('anbieter','google');
+   url.searchParams.set('redirect_uri',registered.href);url.searchParams.set('scope','openid email profile');url.searchParams.set('prompt','select_account');
+   set(flowCookie,JSON.stringify({state,verifier,redirectTo:registered.href,appCallback:redirectTo,expiresAt:Date.now()+600000}),600);return {url:url.href};
   }),
   completeGoogle:(code,state)=>attempt<SessionResult['data']>({user:null,session:null},async()=>{
    const raw=cookie(flowCookie);set(flowCookie,'',0);if(!raw)throw new ProviderFailure({code:'invalid_credentials'});
@@ -88,7 +89,7 @@ export function pocketbaseClient(config:AuthConfig,cookies:AuthCookies|null,secu
   }),
   confirmEmail:(token,format='token')=>attempt<{confirmed:boolean}>({confirmed:false},async()=>{if(format!=='token')throw new ProviderFailure({code:'invalid_credentials'});await api(collection+'/confirm-verification','POST',{token});return {confirmed:true};}),
   acceptRecovery:(recovery,format='token')=>attempt<{ready:boolean}>({ready:false},async()=>{if(format!=='token')throw new ProviderFailure({code:'invalid_credentials'});resetSubject(recovery);token='';nonce='';method=null;set(sessionCookie,'',0);set(recoveryCookie,recovery,600);return {ready:true};}),
-  confirmationReturn(type){try{const raw=cookie(prefix+'-email-'+type);if(!raw)return null;const value=object(JSON.parse(raw));if(typeof value.expiresAt!=='number'||value.expiresAt<=Date.now())return null;set(prefix+'-email-'+type,'',0);return text(value.redirectTo,4096);}catch{return null;}},
+  callbackReturn(type){try{const name=type==='google'?flowCookie:prefix+'-email-'+type,raw=cookie(name);if(!raw)return null;const value=object(JSON.parse(raw));if(typeof value.expiresAt!=='number'||value.expiresAt<=Date.now())return null;if(type!=='google')set(name,'',0);return text(type==='google'?value.appCallback:value.redirectTo,4096);}catch{return null;}},
   async recoveryReady(){try{const recovery=cookie(recoveryCookie);if(!recovery)return false;resetSubject(recovery);return true;}catch{return false;}},
   async requestRecovery(email,redirectTo){try{await api(collection+'/request-password-reset','POST',{email});set(prefix+'-email-recovery',JSON.stringify({redirectTo,expiresAt:Date.now()+3600000}),3600);return {error:null};}catch(e){return {error:failure(e)};}},
   resetPassword:password=>attempt<{identity:AuthUser['identity']|null}>({identity:null},async()=>{

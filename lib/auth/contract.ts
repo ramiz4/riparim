@@ -23,7 +23,7 @@ export type AuthClient={
  completeGoogle(code:string,state?:string|null):Promise<SessionResult>;
  confirmEmail(token:string,format?:'token'|'code'):Promise<AuthResult<{confirmed:boolean}>>;
  acceptRecovery(token:string,format?:'token'|'code'):Promise<AuthResult<{ready:boolean}>>;
- confirmationReturn(type:'signup'|'recovery'):string|null;
+ callbackReturn(type:'signup'|'recovery'|'google'):string|null;
  recoveryReady():Promise<boolean>;
  requestRecovery(email:string,redirectTo:string):Promise<{error:AuthError|null}>;
  resetPassword(password:string):Promise<AuthResult<{identity:AccountIdentity|null}>>;
