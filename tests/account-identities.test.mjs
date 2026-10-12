@@ -156,7 +156,11 @@ assert.deepEqual({links:predecessor.prepare('SELECT * FROM auth_links').all(),se
 // The unmodified predecessor still writes successfully against the new schema.
 predecessor.prepare("INSERT INTO auth_sessions (id,account_id,expires_at,created_at) VALUES ('late-old-session',?,9999999999999,'2026-10-11')").run(historical);
 predecessor.close();
+const legacyGrant={account_id:'supabase:'+new URL(projectUrl).host+':'+subject,user_id:subject,identity_provider:'pocketbase',identity_issuer:null};
+assert.equal(await grant.matchesDeletionGrant(legacyGrant,{provider:'supabase',projectUrl}),false,'Legacy null-issuer compatibility cannot bypass a conflicting explicit provider binding');
 const realmOne={provider:'oidc',issuer:'https://identity.example.test/realms/one',subject:'opaque-member'},realmTwo={...realmOne,issuer:'https://identity.example.test/realms/two'};
 const realmAccount=await identities.resolveAccount(realmOne);assert.notEqual(await identities.resolveAccount(realmTwo),realmAccount,'Exact issuer paths distinguish provider realms');
 assert.deepEqual({...await identities.accountIdentity(realmAccount,'oidc',realmOne.issuer)},realmOne);assert.equal(await identities.accountIdentity(realmAccount,'oidc',realmTwo.issuer),null);
+await grant.issueDeletionGrant({userId:realmAccount,email:'realm-member@example.test',displayName:'Realm fixture',fullName:null,provider:'E-Mail',ownerKeys:[realmAccount],isModerator:false},{provider:'oidc',projectUrl:realmOne.issuer},realmOne.subject);
+const realmGrant=await grant.readDeletionGrant();assert.equal(realmGrant.identity_issuer,realmOne.issuer,'New grants preserve the complete verified issuer instead of collapsing its realm');assert.equal(await grant.matchesDeletionGrant(realmGrant,{provider:'oidc',projectUrl:realmOne.issuer}),true);
 console.log('Provider-independent accounts: ownership, verified linking, races, blocks, roles, private evidence, administration, outbox and deletion retries passed');

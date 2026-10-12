@@ -9,8 +9,9 @@ const retrySeconds=7*86400;
 export type DeletionGrant={account_id:string;user_id:string;token_hash:string;expires_at:number;started:number;identity_issuer:string|null;identity_provider:string};
 export async function matchesDeletionGrant(grant:DeletionGrant,config:{provider:string;projectUrl:string}){
  const identity=configuredIdentity(config,grant.user_id);
+ if(grant.identity_provider!==identity.provider)return false;
  if(grant.identity_issuer===null)return legacyIdentityMatches(grant.account_id,identity);
- return grant.identity_provider===identity.provider&&grant.identity_issuer===identity.issuer&&grant.account_id===await resolveProviderAccount(config,grant.user_id);
+ return grant.identity_issuer===identity.issuer&&grant.account_id===await resolveProviderAccount(config,grant.user_id);
 }
 async function digest(token:string){
  const hash=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(token));
@@ -28,7 +29,7 @@ export async function issueDeletionGrant(user:AppUser,config:{provider:string;pr
  if(user.userId!==await resolveProviderAccount(config,id)||await deletionProtected(user))throw Error("DELETION_FORBIDDEN");
  const token=crypto.randomUUID()+crypto.randomUUID(),hash=await digest(token),db=storage().db;
  await db.prepare("DELETE FROM auth_account_deletions WHERE expires_at<?").bind(Date.now()).run();
- const row=await db.prepare("INSERT INTO auth_account_deletions (account_id,user_id,token_hash,expires_at,started,identity_issuer,identity_provider) VALUES (?,?,?,?,0,?,?) ON CONFLICT(account_id) DO UPDATE SET token_hash=excluded.token_hash,expires_at=excluded.expires_at,user_id=excluded.user_id,identity_issuer=excluded.identity_issuer,identity_provider=excluded.identity_provider WHERE auth_account_deletions.started=0 RETURNING account_id").bind(user.userId,id,hash,Date.now()+600000,new URL(config.projectUrl).origin,config.provider).first();
+ const row=await db.prepare("INSERT INTO auth_account_deletions (account_id,user_id,token_hash,expires_at,started,identity_issuer,identity_provider) VALUES (?,?,?,?,0,?,?) ON CONFLICT(account_id) DO UPDATE SET token_hash=excluded.token_hash,expires_at=excluded.expires_at,user_id=excluded.user_id,identity_issuer=excluded.identity_issuer,identity_provider=excluded.identity_provider WHERE auth_account_deletions.started=0 RETURNING account_id").bind(user.userId,id,hash,Date.now()+600000,configuredIdentity(config,id).issuer,config.provider).first();
  if(!row)throw Error("DELETION_STARTED");
  await setCookie(token,retrySeconds);
 }
