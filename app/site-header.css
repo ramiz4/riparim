@@ -10,11 +10,19 @@
  .navbar .header.wrap{width:calc(100% - 2*var(--page-gutter))}
 }
 
-.language-switcher{display:flex;align-items:center;gap:.35rem;flex-shrink:0;color:var(--foreground);font-size:.82rem;min-height:2.25rem}
-.language-switcher select{font:inherit;color:inherit;background:var(--background);border:1px solid var(--border);border-radius:.55rem;padding:.4rem .2rem;max-width:6rem;min-height:2.25rem}
-.language-switcher select:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
+/* Keep native selection and keyboard support inside a shared header surface. */
+.language-switcher{position:relative;display:flex;align-items:center;flex-shrink:0;color:var(--foreground);font-size:.8125rem}
+.language-switcher select{appearance:none;width:124px;min-height:40px;padding:8px 29px 8px 35px;font:inherit;font-weight:550;line-height:1.25;color:inherit;background:var(--theme-surface);border:1px solid var(--border);border-radius:999px;cursor:pointer;transition:background .15s ease,border-color .15s ease}
+.language-switcher select:hover:not(:disabled){background:var(--theme-hover);border-color:var(--theme-accent)}
+.language-switcher select:focus-visible{outline:3px solid var(--ring);outline-offset:3px}
 .language-switcher select:disabled{opacity:.55;cursor:wait}
-@media(max-width:480px){.language-switcher{gap:.15rem}.language-switcher>svg{display:none}.language-switcher select{font-size:.75rem;max-width:5rem}.header-right{gap:.4rem}}
+.language-switcher>svg{position:absolute;pointer-events:none;color:var(--theme-accent)}
+.language-switcher-globe{left:12px}
+.language-switcher-chevron{right:10px}
+.language-switcher:has(select:disabled)>svg{opacity:.55}
+@media(max-width:480px){.language-switcher-globe{display:none}.language-switcher select{width:88px;min-height:44px;padding-left:12px;padding-right:25px;font-size:.75rem}.header-right{gap:.4rem}}
+@media(max-width:380px){.language-switcher select{width:76px;padding-left:8px;padding-right:20px}.language-switcher-chevron{right:6px}}
+@media(prefers-reduced-motion:reduce){.language-switcher select{transition:none}}
 
 @media(max-width:480px){
  .navbar .header-login-mobile{width:44px;padding:0;flex-shrink:0}
