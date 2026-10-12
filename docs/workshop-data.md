@@ -1,6 +1,6 @@
 # Zentrale Werkstattdaten
 
-`data/workshops.json` ist die versionierte Quelle für Werkstattimporte. Sie enthält den aktuellen Bestand: **160 veröffentlichte Kfz-Servicebetriebe einschließlich Fahrzeugaufbereitung und keine Entwürfe**. Der Status jedes Datensatzes ist ausdrücklich gespeichert. Die Schätzung von ungefähr 1.700 Werkstätten stammt vom Nutzer; sie ist kein recherchierter Gesamtbestand und keine Vollständigkeitsbehauptung.
+`data/workshops.json` ist die versionierte Quelle für Werkstattimporte. Sie enthält den aktuellen Bestand: **162 veröffentlichte Kfz-Servicebetriebe einschließlich Fahrzeugaufbereitung und keine Entwürfe**. Der Status jedes Datensatzes ist ausdrücklich gespeichert. Die Schätzung von ungefähr 1.700 Werkstätten stammt vom Nutzer; sie ist kein recherchierter Gesamtbestand und keine Vollständigkeitsbehauptung.
 
 Die bisherigen getrennten Dateien für Profile und Google-Momentaufnahmen wurden in diese Quelle übernommen und entfernt. Namen, Kontakte, Quellen, Prüfzeitpunkte und stabile Riparim-Kennungen bleiben erhalten. Es werden keine Platzhalter für fehlende Werkstätten erzeugt.
 
@@ -194,3 +194,22 @@ IDs und aktualisiert kein bestehendes Profil. DE/SQ/EN-Inhalte und zentrale
 von noch zu bestätigender Live-Veröffentlichung. Die ursprünglichen 158
 Profile sind vor dem Import vollständig ohne Profilfeldabweichung mit D1
 abgeglichen und geschützt gesichert worden.
+
+## Täglicher Import am 12. Oktober 2026
+
+Auto Elektro Service AGRONI in Vushtrri und Auto Servis JONI in Sadovinë e
+Jerlive/Viti ergänzen den geprüften Quellbestand von 160 auf 162 Profile.
+Ihre eigenen Websites belegen Namen, Telefonnummern, Standorte und Leistungen.
+Die öffentlichen Maps-Einträge wurden einzeln gegen diese Angaben abgeglichen
+und ihre Place-IDs mit absichtlich unpassender Ersatzsuche direkt rückgeprüft.
+Es gab keine eigenen Google-API-/SDK-Aufrufe und keine Inhaberbestätigung.
+
+Der Dry Run ergänzt zwei IDs und aktualisiert keine bestehenden Profile.
+DE-Originale und SQ-/EN-Overlays verwenden den zentralen Übersetzungshash.
+Der vorherige Livebestand mit 160 Profilen und Place-IDs ist ohne Abweichung
+abgeglichen; vier Katalogtabellen sind geschützt gesichert und isoliert
+wiederhergestellt. BEXHI bleibt ohne Maps-Telefon, BELTI wegen eines
+Telefonkonflikts zurückgestellt. Weitere Rechercheergebnisse und der genaue
+PR-/Release-/Liveabnahmestatus stehen im
+[heutigen Manifest](../data/import-2026-10-12-daily.json). Die tägliche Routine
+verwendet gemäß Nutzerentscheidung immer die öffentliche Maps-Oberfläche.

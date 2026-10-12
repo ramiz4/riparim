@@ -19,7 +19,7 @@ export function sitesBuildConfiguration(hosting) {
     workers_dev: false,
     preview_urls: false,
     vars: { SITE_ORIGIN: "https://riparim.com" },
-    triggers: { crons: ["*/5 * * * *"] },
+    triggers: { crons: [] },
     d1_databases: [{ binding: hosting.d1, database_name: "site-creator-d1", database_id: "00000000-0000-4000-8000-000000000000", remote: false }],
     r2_buckets: [{ binding: hosting.r2, bucket_name: "site-creator-r2", remote: false }],
   };
@@ -37,7 +37,7 @@ export function assertSitesBuildConfig(hosting, generated) {
     throw new Error("Sites output must not contain owned-account resources, routes, preview services or alternate deployments.");
   }
   if (generated.main !== "index.js" || generated.no_bundle !== true || generated.assets?.directory !== "../client" || generated.compatibility_date !== expected.compatibility_date || !isDeepStrictEqual(generated.compatibility_flags, expected.compatibility_flags) || !isDeepStrictEqual(generated.vars, expected.vars) || !isDeepStrictEqual(generated.triggers, expected.triggers)) {
-    throw new Error("Sites output must preserve its compiled adapter, client assets, source origin and scheduled handler.");
+    throw new Error("Sites output must preserve its compiled adapter, client assets, source origin and disabled schedules.");
   }
 }
 

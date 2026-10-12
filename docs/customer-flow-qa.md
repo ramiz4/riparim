@@ -592,6 +592,14 @@ lokal abgefangenen Einreichen erhält die Bestätigungsüberschrift den Fokus.
 Die Vorschau verwendet fiktive Konten und lokale Testdateien. Es wurden keine
 Produktionsanträge oder Nachweise erzeugt.
 
+## CPU-Schnellpfade und manueller Einzelversand (12. Oktober 2026)
+
+Startseite und Datenschutz werden wie Katalog/Profile aus dem geprüften Release ausgeliefert; persönliche Kontodaten kommen ausschließlich aus der geschützten Session-API. Landing-Dokumente enthalten keinen vollständigen Werkstattkatalog mehr. Legacy-Einreichungs-/Nachweislinks, DE/SQ/EN, RSC, Live-Entöffentlichung und administrative Katalogleserechte bleiben durch echte Worker-Tests geschützt. Öffentliche Katalog-GETs verwenden denselben Datenvertrag ohne das React-Seitenframework; administrative Abfragen und alle Schreibzugriffe bleiben im autorisierten Requestpfad.
+
+Die Moderation wartet den ersten Mailversuch ab. Die native D1-Fixture bestätigt die tatsächliche sofortige Übergabe ohne Scheduled-Handler. Fehler erlauben maximal fünf manuelle Wiederholungen, nach Wartezeiten von 1/5/15/30/60 Minuten. Tests prüfen frühe Anfragen, erschöpfte Budgets, parallele Claims, unveränderte Payloadbytes, Empfänger-/Credentialänderungen, Resend-Fristen, SMTP-Unklarheit und den fehlenden Sammelversand. Die aufklappbare Versandübersicht lädt erst auf Anforderung und pollt nicht. React-Prüfungen schützen Beschriftungen, deaktivierte Aktionen, Status-/Fehlermeldungen und die erhaltenen Moderationsabläufe in DE/SQ/EN.
+
+Der lokale CPU-Profiler verwendet ausschließlich einen isolierten workerd, Canonical-Fixtures und blockierte Providerzugriffe. Er misst Stichproben der aktiven CPU, keine Cloudflare-Abrechnung oder verbindliche Produktionsobergrenze. Die Messung nach einem geprüften Main-Release bleibt für seltene/private Aufrufpfade nötig. Die native Browserprüfung war in dieser Sitzung wegen wiederholter Meldungen „The user changed Google Chrome“ nicht zuverlässig ausführbar; es wird keine erfolgreiche native Layout-/Theme-Abnahme behauptet.
+
 
 ## Auth-Anbieterprüfung (Issue #139, 12. Oktober 2026)
 

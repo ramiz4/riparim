@@ -38,7 +38,7 @@ const source = {
   preview_urls: false,
   routes: [],
   assets: { html_handling: "none", binding:"ASSETS",run_worker_first:["/__public/*"] },
-  triggers: {crons:["*/5 * * * *"]},
+  triggers: {crons:[]},
   vars: { SITE_ORIGIN: cloudflareProduction.origin },
   d1_databases: [{ binding: "DB", database_id: cloudflareProduction.database, database_name: cloudflareProduction.databaseName, migrations_dir: "drizzle", remote: false }],
   r2_buckets: [{ binding: "BUCKET", bucket_name: cloudflareProduction.bucket, remote: false }],

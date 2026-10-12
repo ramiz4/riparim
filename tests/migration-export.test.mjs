@@ -25,7 +25,7 @@ for(const workerPath of ['./build/sites-worker','./build/cloudflare-worker']) {
   const call=(operation,query={})=>runtime.dispatchFetch('http://fixture/__migration/export?'+new URLSearchParams({operation,...query}),{headers:{Authorization:'Bearer '+token}});
   for(const method of ['GET','POST','DELETE']) {const blocked=await runtime.dispatchFetch('http://fixture/api/visits',{method});assert.equal(blocked.status,503);assert.equal(blocked.headers.get('X-Riparim-Migration-Read-Only'),'true');assert.equal(blocked.headers.get('X-Riparim-Release-Commit'),commit);passed++;}
   assert.equal((await db.prepare('SELECT COUNT(*) AS n FROM application_writes').first()).n,0);passed++;
-  const scheduled=await runtime.dispatchFetch('http://fixture/cdn-cgi/handler/scheduled?cron=*+*+*+*+*');assert(scheduled.ok);passed++;
+  const scheduled=await runtime.dispatchFetch('http://fixture/cdn-cgi/handler/scheduled?cron=*+*+*+*+*');assert.equal(scheduled.status,500,"There is no scheduled handler or automatic writer");passed++;
   for(const Authorization of [undefined,'Bearer wrong','Bearer '+hash]) {assert.equal((await runtime.dispatchFetch('http://fixture/__migration/export?operation=schema',{headers:Authorization?{Authorization}:{}})).status,404);passed++;}
   const meta=await (await call('schema')).json();assert.equal(meta.sourceCommit,commit);assert.equal(meta.readOnly,true);assert(meta.schema.some(item=>item.name==='accounts'));passed++;
   const first=await (await call('table',{table:'accounts'})).json();assert.equal(first.rows.length,5);assert.equal(first.nextOffset,5);assert.deepEqual(first.rows[0].secret,{type:'blob',base64:'AP8A'});passed++;

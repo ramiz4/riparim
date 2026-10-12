@@ -24,7 +24,7 @@ try{
  loadError=true;await render(0);check(document.querySelector('[role="alert"]').textContent===getMessages('de').management.notifications_unavailable,'A failed outbox read announces a recoverable error');
  loadError=false;await click(button('Versandübersicht aktualisieren'));
  check(document.querySelector('.note').textContent.includes('noch nicht eingerichtet'),'Missing server configuration is explicit and does not undo moderation');
- check(button('Fällige Benachrichtigungen prüfen').disabled,'Unconfigured global delivery cannot be started from the UI');
+ check(!button('Fällige Benachrichtigungen prüfen'),'There is no global delivery action');
  const entries=()=>document.querySelectorAll('.notification-entry');
  check(entries().length===2&&entries()[0].textContent.includes('Versand blockiert')&&entries()[1].textContent.includes('Versandstatus unklar'),'The queue distinguishes blocked and uncertain delivery');
  check(entries()[1].querySelector('button').disabled&&entries()[1].textContent.includes('sichere Wiederholungszeitraum'),'Uncertain expired events prohibit a blind resend and explain reconciliation');
@@ -33,7 +33,7 @@ try{
  check([...document.querySelectorAll('button')].every(control=>control.disabled),'A pending retry prevents conflicting UI actions');
  check(requests.at(-1).body.id==='fixture-blocked','Retry targets only the stored event identity');
  await act(async()=>pending.resolve(pending.commit()));pending=null;mode='success';
- check(document.querySelector('[role="status"]').textContent.includes('Versandprüfung gestartet')&&!document.querySelector('[role="status"]').textContent.includes('zugestellt'),'Starting retry never falsely announces delivered mail');
+ check(document.querySelector('[role="status"]').textContent.includes('Versandversuch abgeschlossen')&&!document.querySelector('[role="status"]').textContent.includes('zugestellt'),'Starting retry never falsely announces delivered mail');
  check(entries().length===1,'Accepted processing refreshes the pending inventory');
  data={notifications:[item('fixture-failed','failed','provider_unavailable',3)],configured:true,nextCursor:'fixture-cursor'};await render(1);
  await click(button('Weitere Versandereignisse laden'));

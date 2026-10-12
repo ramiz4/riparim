@@ -79,15 +79,22 @@ allein reicht wegen möglicher Streamingabbrüche nicht. Vor Aktivierung und
 nach jedem Release außerdem Cloudflare-Outcome und aktive Version abgleichen.
 Die Prüfung schreibt keine Produktionsdaten und sendet keine Nachrichten.
 
-Der Nutzer wünscht **keine zusätzlichen Kosten**. Keine kostenpflichtigen
-Tarife aktivieren, keine neuen API-Abonnements oder bezahlten Ressourcen
-anlegen. Bestehende Codex-Kontingente verwenden. Google-API-Aufrufe nur,
-wenn die aktuelle kostenlose Quote und passende harte Begrenzungen geprüft
-sind; ein Abrechnungsbudget allein verhindert keine Kosten. Bei unbekannter
-Restquote keine potenziell zahlungspflichtigen Aufrufe ausführen. Das
-gemeinsame Serverlimit von 100 Such-/Detailanfragen pro Tag bleibt zusätzlich
-verbindlich. Öffentliche Maps-UI-Prüfung ohne API-Export ist möglich;
-Providerbedingungen gelten weiterhin.
+Der Nutzer wünscht **keine zusätzlichen Kosten**. Neue Google-Identitäten
+werden **immer ausschließlich über die öffentliche Google-Maps-Oberfläche**
+im bestätigten Browserprofil geprüft. Die Place-ID aus dem sichtbaren
+offiziellen Maps-Link lesen und direkt mit einer absichtlich unpassenden
+Ersatzsuche zurückprüfen; Name, normalisierte Telefonnummer, Standort und
+aktiven Geschäftsstatus gegen unabhängige Quellen abgleichen. Ein fehlender
+oder widersprüchlicher Nachweis führt zur Rückstellung des Kandidaten.
+
+Die Routine verwendet keine eigenen API-Schlüssel, Places-/Maps-API- oder
+SDK-Aufrufe, eingebetteten Karten oder API-Finder. Eine unbekannte kostenlose
+API-Restquote sperrt diese API-Wege, aber nicht die öffentliche Maps-Prüfung.
+Keine Quoten, produktiven Widgets oder Providerfreigaben für den Import ändern.
+Providerbedingungen gelten weiterhin; kein Scraping oder Proxy-Umweg.
+Keine kostenpflichtigen Tarife, neuen API-Abonnements oder bezahlten Ressourcen
+anlegen. Bestehende Codex-Kontingente verwenden. Dauerhaft bleiben nur Place-ID
+und eigene Prüfmetadaten; Geschäftsdaten werden unabhängig von Google belegt.
 
 Am 10.10.2026 wurde im Cloudflare-Dashboard **Workers Free / 10 ms CPU pro
 Anfrage** bestätigt. Die öffentliche SSR-Anwendung überschreitet diese
@@ -178,8 +185,9 @@ Diff, `git diff --check` und unabhängiges Review sind verbindlich. PR und
 Commits folgen Conventional Commits. Ein neuer Katalogimport verwendet
 `feat(catalogue)`, damit Semantic Release eine Veröffentlichung erzeugt.
 Nach erfolgreichen aktuellen Checks ausschließlich Squash-Merge nach main.
-GitHub-Release mit vier Artefakten/Provenienz und erfolgreichem Deploy-Job
-bestätigen. Kein Featurebranchdeployment und keine Sites-Veröffentlichung.
+GitHub-Release mit allen laut `docs/releases.md` für das aktuelle Format
+erforderlichen Artefakten/Provenienzen und erfolgreichem Deploy-Job bestätigen.
+Kein Featurebranchdeployment und keine Sites-Veröffentlichung.
 
 Nach dem Deployment alle neuen Profile in DE/SQ/EN mit der Vorprüfung
 prüfen; Livebestand, eindeutige Place-IDs und vorherige Profilrevisionen
