@@ -1,3 +1,4 @@
+import {authUser,authSession,authClient as neutralClient,authAdmin as neutralAdmin} from './helpers/auth-contract.mjs';
 import assert from 'node:assert/strict';
 import {mkdir,readFile,readdir,writeFile} from 'node:fs/promises';
 import {createRequire} from 'node:module';
@@ -87,8 +88,8 @@ const authAdmin={
  async updateUserById(id,body){calls.push({method:'updateUserById',id,body});if(providerError)return result({user:null});const before=users.get(id),user={...before,...(body.email?{email:body.email}:{}),...(body.user_metadata?{user_metadata:{...before.user_metadata,...body.user_metadata}}:{})};if(body.ban_duration)user.banned_until=body.ban_duration==='none'?null:'2126-10-04T08:00:00Z';users.set(id,user);return result({user});},
  async deleteUser(id){calls.push({method:'deleteUser',id});if(providerError)return result({user:null});const user=users.get(id);users.delete(id);return result({user});},
 };
-globalThis.fixtureAuthAdmin={client:{auth:{admin:authAdmin}},projectUrl};
-db.prepare("INSERT INTO auth_settings VALUES ('main',?,?,1,1,?)").run(projectUrl,'sb_publishable_fixture_public_key_1234567890','2026-10-04');
+globalThis.fixtureAuthAdmin={client:neutralAdmin(authAdmin,projectUrl),projectUrl,provider:"supabase"};
+db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at) VALUES ('main',?,?,1,1,?)").run(projectUrl,'sb_publishable_fixture_public_key_1234567890','2026-10-04');
 const load=name=>import(new URL(`../${output}/${name}.mjs`,import.meta.url));
 const [collection,item,auth,visits]=await Promise.all(['collection','item','auth','visits'].map(load));
 const adminProvider=await load('adminProvider');
@@ -108,7 +109,7 @@ const seedAdmin=id=>db.prepare('INSERT INTO auth_account_roles (account_id,role,
 const visit=(id,owner)=>{db.prepare('INSERT INTO visits (id,owner,workshop,date,vehicle,service,evidence_type,file_key,created_at) VALUES (?,?,?,?,?,?,?,?,?)').run(id,owner,'fixture-workshop','2026-10-04','Fixture Car','Repair','document',`evidence/${owner}/${id}/document.pdf`,'2026-10-04');objects.set(`evidence/${owner}/${id}/document.pdf`,true);objects.set(`evidence/${owner}/${id}/older.pdf`,true);};
 seedAdmin(ids.current);
 let signedInUser=null,sessionId='fixture-password-session',method='password';
-globalThis.fixtureClient={auth:{getUser:async()=>({data:{user:signedInUser},error:null}),getClaims:async()=>({data:{claims:{sub:signedInUser.id,session_id:sessionId,amr:[{method}]}},error:null}),setSession:async()=>({error:null})}};
+globalThis.fixtureClient=neutralClient({auth:{getUser:async()=>({data:{user:signedInUser},error:null}),getClaims:async()=>({data:{claims:{sub:signedInUser.id,session_id:sessionId,amr:[{method}]}},error:null}),setSession:async()=>({error:null})}},projectUrl);
 
 globalThis.fixtureAdmin=null;
 check((await list()).status===401,'Anonymous visitors cannot list accounts');
@@ -199,16 +200,16 @@ for(const protectedId of [ids.current,ids.moderator]){
 // Role authority comes from D1, independently of provider metadata and login method.
 db.prepare('INSERT INTO auth_links (account_id,legacy_owner,owner_admin,created_at,password_access) VALUES (?,?,0,?,1)').run(accountId(ids.member),'legacy-member','2026-10-04');
 signedInUser={...users.get(ids.member),user_metadata:{...users.get(ids.member).user_metadata,role:'admin',is_admin:true},app_metadata:{...users.get(ids.member).app_metadata,role:'admin',is_admin:true}};
-sessionId='roles-password-before';method='password';await auth.recordPasswordSession(projectUrl,signedInUser,globalThis.fixtureClient);
+sessionId='roles-password-before';method='password';await auth.recordPasswordSession(authUser(signedInUser,projectUrl),globalThis.fixtureClient);
 const ordinaryUser=await auth.getAppUser(),ownershipBefore=ordinaryUser.ownerKeys;
 check(!ordinaryUser.isModerator&&ownershipBefore.includes('legacy-member'),'Mutable provider metadata cannot grant admin authority or change account ownership');
 beforeFirst=sql=>{if(/SELECT legacy_owner,password_access FROM auth_links/i.test(sql)){beforeFirst=null;seedAdmin(ids.member);db.prepare('UPDATE auth_sessions SET revoked=1 WHERE account_id=?').run(accountId(ids.member));}};
 check(await auth.getAppUser()===null,'An old customer session cannot acquire admin rights when promotion revokes it after the initial session read');
-beforeFirst=null;db.prepare('DELETE FROM auth_account_roles WHERE account_id=?').run(accountId(ids.member));db.prepare('UPDATE auth_sessions SET revoked=0 WHERE id=?').run(sessionId);
+beforeFirst=null;db.prepare('DELETE FROM auth_account_roles WHERE account_id=?').run(accountId(ids.member));db.prepare('UPDATE auth_sessions SET revoked=0 WHERE id=?').run(JSON.stringify(['supabase',projectUrl,sessionId]));
 seedAdmin(ids.member);
 beforeFirst=sql=>{if(/SELECT legacy_owner,password_access FROM auth_links/i.test(sql)){beforeFirst=null;db.prepare('DELETE FROM auth_account_roles WHERE account_id=?').run(accountId(ids.member));db.prepare('UPDATE auth_sessions SET revoked=1 WHERE account_id=?').run(accountId(ids.member));}};
 check(await auth.getAppUser()===null,'A demotion that revokes an admin session after the initial read also denies that request');
-beforeFirst=null;db.prepare('UPDATE auth_sessions SET revoked=0 WHERE id=?').run(sessionId);
+beforeFirst=null;db.prepare('UPDATE auth_sessions SET revoked=0 WHERE id=?').run(JSON.stringify(['supabase',projectUrl,sessionId]));
 const providerWritesBeforeRole=calls.filter(call=>['updateUserById','createUser','deleteUser'].includes(call.method)).length;
 response=await update(ids.member.toUpperCase(),{role:'admin'});body=await response.json();
 check(response.ok&&body.user.role==='admin'&&accountRole(ids.member)==='admin','An administrator can grant a verified email account the admin role');
@@ -216,7 +217,7 @@ check(body.roleChanged===true,'An actual promotion reports that the role changed
 const assignment=db.prepare('SELECT assigned_by,assigned_at FROM auth_account_roles WHERE account_id=?').get(accountId(ids.member));
 check(assignment.assigned_by===moderator.userId&&assignment.assigned_at,'Role assignments retain the authorized actor and assignment time');
 check(await auth.getAppUser()===null&&noActiveSessions(ids.member),'Granting a role revokes every existing session and requires a fresh login');
-sessionId='roles-password-admin';await auth.recordPasswordSession(projectUrl,signedInUser,globalThis.fixtureClient);
+sessionId='roles-password-admin';await auth.recordPasswordSession(authUser(signedInUser,projectUrl),globalThis.fixtureClient);
 const memberAdmin=await auth.getAppUser();
 check(memberAdmin.isModerator&&memberAdmin.provider==='E-Mail','A fresh verified password session receives its assigned admin role');
 check(JSON.stringify(memberAdmin.ownerKeys)===JSON.stringify(ownershipBefore)&&!auth.ownsVisit(memberAdmin,accountId(ids.other)),'Admin promotion preserves private ownership keys and does not grant another account’s visit ownership');
@@ -233,7 +234,7 @@ const nativeFetch=globalThis.fetch;
 signedInUser={...users.get(ids.other),identities:[{provider:'google',identity_data:{sub:'fixture-other-google',email:'other@example.test',email_verified:true}}]};
 sessionId='roles-google-admin';method='oauth';
 globalThis.fetch=async url=>{assert.equal(String(url),'https://openidconnect.googleapis.com/v1/userinfo','Role fixtures never send live requests');return Response.json({sub:'fixture-other-google',email:signedInUser.email,email_verified:true});};
-try{await auth.recordGoogleSession(projectUrl,{user:signedInUser,provider_token:'fixture-google-proof',access_token:'fixture-access',refresh_token:'fixture-refresh'},globalThis.fixtureClient);}
+try{await auth.recordGoogleSession(authSession({user:signedInUser,provider_token:'fixture-google-proof',access_token:'fixture-access',refresh_token:'fixture-refresh'},projectUrl),globalThis.fixtureClient);}
 finally{globalThis.fetch=nativeFetch;}
 const otherAdmin=await auth.getAppUser();
 check(otherAdmin.isModerator&&otherAdmin.provider==='Google'&&otherAdmin.ownerKeys.length===1,'A fresh independently verified Google session receives its assigned admin role');
@@ -243,7 +244,7 @@ check(response.ok&&body.user.role==='user'&&accountRole(ids.member)==='user'&&no
 check(body.roleChanged===true,'An actual demotion reports that the role changed');
 signedInUser={...users.get(ids.member),user_metadata:{...users.get(ids.member).user_metadata,role:'admin'},app_metadata:{role:'admin'}};method='password';sessionId='roles-password-admin';
 check(await auth.getAppUser()===null,'Demotion immediately denies a previously authenticated admin session');
-sessionId='roles-password-demoted';await auth.recordPasswordSession(projectUrl,signedInUser,globalThis.fixtureClient);
+sessionId='roles-password-demoted';await auth.recordPasswordSession(authUser(signedInUser,projectUrl),globalThis.fixtureClient);
 const demotedUser=await auth.getAppUser();
 check(!demotedUser.isModerator&&JSON.stringify(demotedUser.ownerKeys)===JSON.stringify(ownershipBefore),'After demotion a new login has ordinary rights with unchanged legacy ownership');
 response=await update(ids.member,{role:'user'});body=await response.json();
@@ -283,10 +284,10 @@ check(!db.prepare('SELECT account_id FROM auth_account_status WHERE account_id=?
 signedInUser={...users.get(ids.member),banned_until:null};sessionId=memberSession;method='password';
 check(await auth.getAppUser()===null,'Deactivated account is denied even with a valid provider identity');
 sessionId='disabled-password-session';
-await assert.rejects(auth.recordPasswordSession(projectUrl,signedInUser,globalThis.fixtureClient));passed++;
+await assert.rejects(auth.recordPasswordSession(authUser(signedInUser,projectUrl),globalThis.fixtureClient));passed++;
 check(!db.prepare('SELECT id FROM auth_sessions WHERE id=?').get(sessionId),'Password sign-in cannot enroll a deactivated account');
 method='oauth';sessionId='disabled-google-session';
-await assert.rejects(auth.recordGoogleSession(projectUrl,{user:signedInUser,provider_token:'fixture-token'},globalThis.fixtureClient));passed++;
+await assert.rejects(auth.recordGoogleSession(authSession({user:signedInUser,provider_token:'fixture-token'},projectUrl),globalThis.fixtureClient));passed++;
 check(!db.prepare('SELECT id FROM auth_sessions WHERE id=?').get(sessionId),'Google sign-in cannot enroll a deactivated account');
 method='password';
 globalThis.fixtureNative={userId:'legacy-member',email:signedInUser.email,displayName:'Legacy Member',fullName:null};
@@ -301,7 +302,7 @@ providerError=null;
 response=await update(ids.member,{active:true});body=await response.json();
 check(response.ok&&body.user.active&&!status(ids.member),'Successful provider activation clears the local access block');
 sessionId='reactivated-password-session';
-await auth.recordPasswordSession(projectUrl,signedInUser,globalThis.fixtureClient);
+await auth.recordPasswordSession(authUser(signedInUser,projectUrl),globalThis.fixtureClient);
 check((await auth.getAppUser()).userId===accountId(ids.member),'Reactivated account can sign in with a new app session');
 check(sessionRevoked(ids.member)===1,'Activation does not revive earlier sessions');
 
@@ -318,7 +319,7 @@ check(db.prepare('SELECT status FROM auth_account_status WHERE account_id=?').ge
 sessionId=deletionSession;
 check(await auth.getAppUser()===null,'Deleted account remains blocked with an old provider cookie');
 sessionId='deleted-password-session';
-await assert.rejects(auth.recordPasswordSession(projectUrl,signedInUser,globalThis.fixtureClient));passed++;
+await assert.rejects(auth.recordPasswordSession(authUser(signedInUser,projectUrl),globalThis.fixtureClient));passed++;
 globalThis.fixtureNative={userId:'legacy-member',email:signedInUser.email,displayName:'Legacy Member',fullName:null};
 db.prepare("UPDATE auth_settings SET enabled=0 WHERE id='main'").run();
 check(await auth.getAppUser()===null,'Deleted native owner cannot return through legacy fallback');
@@ -346,14 +347,14 @@ providerError=null;globalThis.fixtureAuthAdmin=null;
 response=await list();body=await response.json();
 check(body.configured===false,'Missing server-side administration is visibly unconfigured');
 check(!(await create({name:'New',email:'another@example.test',password:'fixture-password-123',active:true})).ok,'Missing admin credentials cannot create accounts');
-globalThis.fixtureAuthAdmin={client:{auth:{admin:authAdmin}},projectUrl};
+globalThis.fixtureAuthAdmin={client:neutralAdmin(authAdmin,projectUrl),projectUrl,provider:"supabase"};
 failDatabase=true;
 let failedClosed=false;try{failedClosed=await auth.getAppUser()===null;}catch{failedClosed=true;}
 check(failedClosed,'Account-status storage failures deny authentication');
 failDatabase=false;
 signedInUser=users.get(ids.current);method='password';sessionId='raced-password-session';
 beforeRun=(sql)=>{if(/INSERT INTO auth_sessions/i.test(sql)){beforeRun=null;db.prepare('INSERT INTO auth_account_status (account_id,status,updated_at) VALUES (?,?,?)').run(accountId(ids.current),'inactive','2026-10-04');}};
-await assert.rejects(auth.recordPasswordSession(projectUrl,signedInUser,globalThis.fixtureClient));passed++;
+await assert.rejects(auth.recordPasswordSession(authUser(signedInUser,projectUrl),globalThis.fixtureClient));passed++;
 check(!db.prepare('SELECT id FROM auth_sessions WHERE id=?').get(sessionId),'A deactivation between verification and enrollment cannot create a new authorized session');
 beforeRun=null;db.prepare('DELETE FROM auth_account_status WHERE account_id=?').run(accountId(ids.current));
 

@@ -1,3 +1,4 @@
+import {authClient as neutralClient,authAdmin as neutralAdmin} from './helpers/auth-contract.mjs';
 import assert from 'node:assert/strict';
 import {mkdir,readFile,readdir,writeFile} from 'node:fs/promises';
 import {createRequire} from 'node:module';
@@ -34,13 +35,13 @@ globalThis.fixtureEnv={DB:d1,BUCKET:bucket,SITE_ORIGIN:origin,REVIEW_MODERATOR_E
 globalThis.fixtureCurrent=()=>allowCurrent&&!db.prepare('SELECT account_id FROM auth_account_status WHERE account_id=?').get(user.userId)?{...user,displayName:providerUser.user_metadata.full_name??user.displayName}:null;
 const cookieMap=new Map(),cookieOptions=new Map();
 globalThis.fixtureCookies={get(name){const value=cookieMap.get(name);return value?{value}:undefined;},set(name,value,options){cookieOptions.set(name,options);if(options?.maxAge===0)cookieMap.delete(name);else cookieMap.set(name,value);}};
-globalThis.fixtureClient={auth:{getUser:async()=>({data:{user:providerUser},error:null}),signOut:async()=>({error:null})}};
+globalThis.fixtureClient=neutralClient({auth:{getUser:async()=>({data:{user:providerUser},error:null}),signOut:async()=>({error:null})}},projectUrl);
 const writes=[];
 const authAdmin={getUserById:async uid=>{assert.equal(uid,id,'Provider targets come from the authenticated identity');return missingProvider?{data:{user:null},error:{status:404,code:'user_not_found'}}:{data:{user:providerUser},error:failProvider?{status:503}:null};},updateUserById:async(uid,attributes)=>{writes.push({method:'update',uid,attributes});if(failProvider)return {data:{user:null},error:{status:503}};if(heldMetadataUpdate){const held=heldMetadataUpdate;heldMetadataUpdate=null;held();await new Promise(resolve=>releaseMetadataUpdate=resolve);}const metadata={...providerUser.user_metadata};for(const [key,value] of Object.entries(attributes.user_metadata)){if(value===null)delete metadata[key];else metadata[key]=value;}providerUser={...providerUser,user_metadata:metadata};return {data:{user:providerUser},error:null};},deleteUser:async uid=>{writes.push({method:'delete',uid});if(failProvider)return {error:{status:503}};missingProvider=true;return {error:null};}};
-globalThis.fixtureAdmin={client:{auth:{admin:authAdmin}},projectUrl};
+globalThis.fixtureAdmin={client:neutralAdmin(authAdmin,projectUrl),projectUrl,provider:"supabase"};
 let proofUser=providerUser,proofError=false,proofUserError=false,proofCalls=0,proofSignouts=0,proofConfig=null;
 globalThis.fixtureCreateClient=(...args)=>{proofConfig=args;return {auth:{signInWithPassword:async credentials=>{proofCalls++;assert.equal(credentials.email,user.email);return {data:{user:proofUser},error:proofError?{status:400}:null};},getUser:async()=>({data:{user:proofUser},error:proofUserError?{status:503}:null}),signOut:async options=>{assert.equal(options.scope,'local');proofSignouts++;return {error:null};}}};};
-db.prepare("INSERT INTO auth_settings VALUES ('main',?,?,1,1,?)").run(projectUrl,'sb_publishable_fixture_key_12345678901234567890','2026-10-04');
+db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at) VALUES ('main',?,?,1,1,?)").run(projectUrl,'sb_publishable_fixture_key_12345678901234567890','2026-10-04');
 const seed=()=>{db.prepare('DELETE FROM auth_account_status').run();db.prepare('DELETE FROM auth_account_deletions').run();db.prepare('DELETE FROM auth_account_roles').run();db.prepare('DELETE FROM auth_links').run();db.prepare('DELETE FROM auth_sessions').run();cookieMap.clear();missingProvider=false;user={...user,provider:'E-Mail',isModerator:false,email:'member@example.test',userId:accountId()};providerUser={...providerUser,id,email:user.email,email_confirmed_at:'2026-10-04'};proofUser=providerUser;allowCurrent=true;db.prepare('INSERT INTO auth_sessions (id,account_id,expires_at,created_at) VALUES (?,?,?,?)').run('fixture-current',accountId(),Date.now()+600000,'2026-10-04');};
 seed();
 const [account,grant]=await Promise.all(['account','grant'].map(file=>import(new URL(`../${output}/${file}.mjs`,import.meta.url))));
@@ -118,7 +119,7 @@ beforeBatch=()=>db.prepare('UPDATE auth_account_deletions SET token_hash=?').run
 check((await remove()).status===403&&!status(),'A rotated grant cannot be consumed after its earlier read');
 seed();user={...user,provider:'Google'};
 check((await confirm({password:'fixture-password'})).status===403,'Google sessions use the OAuth proof flow rather than password metadata');
-await grant.issueDeletionGrant(user,projectUrl,id);
+await grant.issueDeletionGrant(user,{provider:"supabase",projectUrl},id);
 check((await account.GET().then(r=>r.json())).deletionReady,'A verified Google callback can issue the same scoped deletion grant');
 seed();await confirm({password:'fixture-password'});
 db.prepare("INSERT INTO auth_links (account_id,legacy_owner,created_at) VALUES (?,'legacy-member','2026-10-04')").run(accountId());
@@ -154,7 +155,7 @@ seed();await confirm({password:'fixture-password'});await grant.startDeletion(aw
 check((await remove()).ok,'A provider account already deleted after an uncertain result is idempotently cleaned up');
 seed();globalThis.fixtureAdmin=null;
 check((await patch({name:'Name'})).status===503,'Missing server credentials cannot report a successful update');
-globalThis.fixtureAdmin={client:{auth:{admin:authAdmin}},projectUrl};failDb=true;
+globalThis.fixtureAdmin={client:neutralAdmin(authAdmin,projectUrl),projectUrl,provider:"supabase"};failDb=true;
 check((await account.GET()).status===503,'Database failures fail closed without exposing an unverified account');failDb=false;
 seed();for(let attempt=0;attempt<13;attempt++)response=await confirm({password:'incorrect'});
 check(response.status===429,'Repeated proof attempts are rate limited by server-side identity');

@@ -1,3 +1,4 @@
+import {authAdmin as neutralAdmin} from './helpers/auth-contract.mjs';
 import {localizeHref} from '../scripts/lib/locale.mjs';
 import assert from 'node:assert/strict';
 import {mkdir,readFile,readdir,writeFile} from 'node:fs/promises';
@@ -26,10 +27,10 @@ const member={userId:accountId(userId),email:'member@example.test',displayName:'
 const admin={...member,userId:accountId('00000000-0000-4000-8000-000000000009'),email:'admin@example.test',isModerator:true,ownerKeys:[accountId('00000000-0000-4000-8000-000000000009')]};
 let confirmedEmail='member@example.test',emailConfirmed=true,providerBlocked=false,lookupFailure=false,preferredLocale;
 const users={getUserById:async id=>({data:{user:{id,email:id===userId?confirmedEmail:'other@example.test',email_confirmed_at:emailConfirmed?'2026-10-04':null,user_metadata:{preferred_locale:preferredLocale},banned_until:providerBlocked?'2099-01-01':null}},error:lookupFailure?{status:503}:null})};
-globalThis.fixtureAuthAdmin={projectUrl,client:{auth:{admin:users}}};
+globalThis.fixtureAuthAdmin={projectUrl,provider:"supabase",client:neutralAdmin(users,projectUrl)};
 globalThis.fixtureEnv={DB:d1,BUCKET:{head:async()=>({key:'fixture'}),delete:async()=>{},list:async()=>({objects:[],truncated:false})},SITE_ORIGIN:origin,REVIEW_MODERATOR_EMAIL:admin.email,RESEND_API_KEY:'re_fixture_secret',TRANSACTIONAL_EMAIL_FROM:'Riparim <no-reply@auth.example.test>'};
 globalThis.fixtureUser=member;globalThis.fixtureAdmin=admin;globalThis.fixtureTriggers=[];
-db.prepare("INSERT INTO auth_settings VALUES ('main',?,?,1,1,'2026-10-04')").run(projectUrl,'sb_publishable_fixture_key_12345678901234567890');
+db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at) VALUES ('main',?,?,1,1,'2026-10-04')").run(projectUrl,'sb_publishable_fixture_key_12345678901234567890');
 const [visits,queue,outbox,email,background]=await Promise.all(['visits','queue','outbox','email','background'].map(file=>import(new URL(`../${out}/${file}.mjs`,import.meta.url))));
 const request=(method,body,path='/api/visits',headers={})=>new Request(origin+path,{method,headers:{Origin:origin,'Content-Type':'application/json',...headers},...(body?{body:JSON.stringify(body)}:{})});
 const moderate=(id,revision=0,status='published',extra={})=>visits.PATCH(request('PATCH',{action:'moderate',id,revision,status,note:'PRIVATE moderator detail never belongs in an email.',...extra}));

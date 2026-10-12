@@ -25,7 +25,7 @@ function dbFixture() {
 }
 function sourceFixture() {
   const db = dbFixture();
-  db.prepare("INSERT INTO auth_settings VALUES(?,?,?,?,?,?)").run("fixture", "https://fixture.supabase.co", "publishable-fixture", 1, 1, baselineAt);
+  db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at) VALUES(?,?,?,?,?,?)").run("fixture", "https://fixture.supabase.co", "publishable-fixture", 1, 1, baselineAt);
   db.prepare("INSERT INTO auth_account_roles VALUES(?,?,?,?)").run("supabase:fixture:owner", "admin", baselineAt, "bootstrap-fixture");
   db.prepare("INSERT INTO auth_sessions(id,account_id,expires_at,created_at) VALUES(?,?,?,?)").run("session-fixture", "supabase:fixture:owner", 9999999999999, baselineAt);
   db.prepare("INSERT INTO visits(id,owner,workshop,date,vehicle,service,evidence_type,status,created_at) VALUES(?,?,?,?,?,?,?,?,?)").run("visit-fixture", "supabase:fixture:owner", "workshop-fixture", "2020-01-01", "fixture", "repair", "note", "published", baselineAt);

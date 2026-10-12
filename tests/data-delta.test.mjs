@@ -69,7 +69,7 @@ test("revocations, moderation changes and source deletions never resurrect rows"
 });
 test("new rows copy only exact source identities and grant/deletion state", () => {
   const state = fixture();
-  rows(state.currentSource, "auth_account_deletions").push({ account_id: "supabase:fixture:owner", user_id: "owner", token_hash: "fixture-token-hash", expires_at: 99999999999, started: 1, identity_issuer: null });
+  rows(state.currentSource, "auth_account_deletions").push({ account_id: "supabase:fixture:owner", user_id: "owner", token_hash: "fixture-token-hash", expires_at: 99999999999, started: 1, identity_issuer: null, identity_provider: "supabase" });
   const result = plan(state);
   assert.equal(result.statements.length, 1); assert.equal(result.statements[0].operation, "insert");
   assert.equal(result.statements[0].after.started, 1);
@@ -188,3 +188,5 @@ test("drift diagnostics disclose only table counts and fingerprints", () => {
   assert(!JSON.stringify(diagnostic).includes("PRIVATE-IDENTITY"));
 });
 console.log(`${checks} three-way data delta checks passed.`);
+
+test("a same-origin provider-protocol switch is also a domain-delta No-Go",()=>{const state=fixture();rows(state.currentSource,"auth_settings")[0].provider="pocketbase";assert.throws(()=>plan(state),/Auth project identity changed/);});

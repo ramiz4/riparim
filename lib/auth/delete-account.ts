@@ -1,4 +1,4 @@
-import {resolveSupabaseAccount} from "@/lib/auth/identities";
+import {resolveProviderAccount} from "@/lib/auth/identities";
 import {storage,cleanupVisitEvidence} from "@/db/storage";
 import {blockAccount} from "@/lib/auth/account-status";
 import type {getAuthAdmin} from "@/lib/auth/admin";
@@ -6,7 +6,7 @@ import type {getAuthAdmin} from "@/lib/auth/admin";
 // Keep the ownership link until provider deletion succeeds. It is the retry
 // inventory even if every visit has already been removed.
 export async function deleteAccount(auth:NonNullable<Awaited<ReturnType<typeof getAuthAdmin>>>,id:string){
- const accountId=await resolveSupabaseAccount(auth.projectUrl,id),{db,bucket}=storage();
+ const accountId=await resolveProviderAccount(auth,id),{db,bucket}=storage();
  await blockAccount(accountId,"deleted");
  const link=await db.prepare("SELECT legacy_owner FROM auth_links WHERE account_id=?").bind(accountId).first<{legacy_owner:string}>();
  if(link)await blockAccount(link.legacy_owner,"deleted");
@@ -27,8 +27,8 @@ export async function deleteAccount(auth:NonNullable<Awaited<ReturnType<typeof g
   }while(cursor);
  }
  await db.prepare("DELETE FROM visits WHERE owner IN (?,?) AND status='deleting'").bind(...owners).run();
- const deleted=await auth.client.auth.admin.deleteUser(id);
- if(deleted.error&&deleted.error.status!==404&&deleted.error.code!=="user_not_found")throw Error("PROVIDER_DELETE_FAILED");
+ const deleted=await auth.client.deleteUser(id);
+ if(deleted.error&&deleted.error.status!==404&&deleted.error.code!=="not_found")throw Error("PROVIDER_DELETE_FAILED");
  await db.batch([
   db.prepare("DELETE FROM auth_sessions WHERE account_id IN (?,?)").bind(...owners),
   db.prepare("DELETE FROM auth_account_roles WHERE account_id=?").bind(accountId),

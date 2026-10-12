@@ -21,11 +21,11 @@ const auth=await import(new URL('../'+output+'/auth.mjs',import.meta.url));
 assert.equal(auth.validatePublicConfig(alternate,key).projectUrl,alternate,'An exact runtime-approved alternative HTTPS origin is supported');
 for(const url of ['https://untrusted.example','http://auth.fixture.example:8443',alternate+'/auth/v1',alternate+'/?next=evil',alternate+'/#evil','https://user:password@auth.fixture.example:8443','https://auth.fixture.example','https://auth.fixture.example:8444'])assert.throws(()=>auth.validatePublicConfig(url,key));
 assert.equal(auth.validatePublicConfig(hosted,key).projectUrl,hosted,'Existing hosted Supabase configuration remains supported');
-db.prepare("INSERT INTO auth_settings VALUES ('main',?,?,1,1,?)").run(alternate,key,'2026-10-11');
+db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at) VALUES ('main',?,?,1,1,?)").run(alternate,key,'2026-10-11');
 assert.equal(await auth.getAuthAdmin(),null,'Existing server credentials cannot be sent to a newly approved alternate origin without explicit credential binding');
 globalThis.fixtureEnv.SUPABASE_SECRET_KEY_ORIGIN=hosted;
 assert.equal(await auth.getAuthAdmin(),null,'A server credential bound to the old project cannot target the alternate host');
-assert.throws(()=>auth.createAuthAdminClient(alternate,globalThis.fixtureEnv.SUPABASE_SECRET_KEY),/AUTH_SECRET_ORIGIN_MISMATCH/,'Direct adapter construction also enforces credential binding');
+assert.throws(()=>auth.createAuthAdminClient({provider:"supabase",projectUrl:alternate},globalThis.fixtureEnv.SUPABASE_SECRET_KEY),/AUTH_SECRET_ORIGIN_MISMATCH/,'Direct adapter construction also enforces credential binding');
 globalThis.fixtureEnv.SUPABASE_SECRET_KEY_ORIGIN=alternate;
 assert.equal((await auth.getAuthAdmin()).projectUrl,alternate,'Explicit matching runtime credential binding enables alternate administration');
 
@@ -163,7 +163,7 @@ try{
  assert((await auth.getAppUser()).isModerator,'An enrolled SDK session exists before checking origin isolation');
  const beforeOtherOrigin=requests.length;globalThis.fixtureEnv.AUTH_TRUSTED_ORIGIN=alternateNext;
  const other=auth.createAuthClient({projectUrl:alternateNext,publicKey:key,enabled:true,emailDeliveryConfirmed:true,updatedAt:'2026-10-11'},{getAll:globalThis.fixtureCookies.getAll,setAll:values=>values.forEach(({name,value,options})=>globalThis.fixtureCookies.set(name,value,options))},true);
- assert.equal((await other.auth.getUser()).data.user,null,'A different custom HTTPS origin starts without the old enrolled SDK session');
+ assert.equal((await other.getUser()).data.user,null,'A different custom HTTPS origin starts without the old enrolled SDK session');
  assert.equal(requests.length,beforeOtherOrigin,'Old tokens never reach an alternate origin sharing its hostname');globalThis.fixtureEnv.AUTH_TRUSTED_ORIGIN=alternate;
  // Revoking runtime trust blocks saved custom settings before any provider request.
  const before=requests.length;

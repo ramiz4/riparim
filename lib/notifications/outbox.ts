@@ -17,15 +17,15 @@ export function canRetryNotification(row:NotificationRow){return !row.smtp_in_fl
 async function keyHash(value:string){return Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(value))),byte=>byte.toString(16).padStart(2,"0")).join("");}
 async function recipient(owner:string){
  const config=await getAuthConfig(),auth=await getAuthAdmin();
- if(!config?.enabled||!auth||auth.projectUrl!==config.projectUrl)throw new DeliveryError("auth_configuration_missing",false);
- const identity=await accountIdentity(owner,"supabase",config.projectUrl);
+ if(!config?.enabled||!auth||(auth.projectUrl!==config.projectUrl||auth.provider!==config.provider))throw new DeliveryError("auth_configuration_missing",false);
+ const identity=await accountIdentity(owner,config.provider,config.projectUrl);
  if(!identity||!validUserId(identity.subject))throw new DeliveryError("no_verified_contact",false);
  if(await accountBlocked(owner))throw new DeliveryError("account_blocked",false);
- const id=identity.subject,result=await auth.client.auth.admin.getUserById(id),user=result.data.user;
+ const id=identity.subject,result=await auth.client.getUserById(id),user=result.data.user;
  if(result.error){if(result.error.status===401||result.error.status===403)throw new DeliveryError("auth_configuration_missing",false);if(result.error.status===404)throw new DeliveryError("no_verified_contact",false);throw new DeliveryError("provider_unavailable",true);}
- if(!user||user.id!==id||!user.email_confirmed_at||!user.email||!deliveryPayloadSchema.shape.to.element.safeParse(user.email).success||user.email.length>254)throw new DeliveryError("no_verified_contact",false);
+ if(!user||user.identity.subject!==id||user.identity.provider!==identity.provider||user.identity.issuer!==identity.issuer||!user.emailVerified||!user.email||!deliveryPayloadSchema.shape.to.element.safeParse(user.email).success||user.email.length>254)throw new DeliveryError("no_verified_contact",false);
  if(providerBlocked(user))throw new DeliveryError("account_blocked",false);
- return {email:user.email,locale:callbackLocale(user.user_metadata?.preferred_locale)};
+ return {email:user.email,locale:callbackLocale(user.preferredLocale)};
 }
 async function stillCurrent(row:NotificationRow){
  if(await accountBlocked(row.owner))return false;

@@ -146,3 +146,5 @@ Bindungs-/Konfliktprüfung außerdem gegen die tatsächliche D1-Implementierung
 aus. Die Migration verwendet kleine verschachtelte Selects; die Bindung prüft
 Referenzen mit direkten `NOT EXISTS`, damit beide Wege auch deren SQL-Limits
 einhalten.
+
+Die eigenen Identitätsverträge erhalten mögliche HTTPS-Issuerpfade (z.B. Realms). Die konkreten Supabase-/PocketBase-Adapter verwenden ihre geprüfte Origin. Unterschiedliche Pfade werden nicht auf dieselbe Origin reduziert. Authprofile, neue Sessiongrants und begonnene Löschgrants sind ausdrücklich providergebunden; siehe [auth-provider.md](auth-provider.md).

@@ -1,10 +1,7 @@
 import {storage} from "@/db/storage";
 import type {AuthUser as User} from "@/lib/auth/contract";
 
-export function providerBlocked(user:User){
- const until=user.banned_until;
- return !!until&&Date.parse(until)>Date.now();
-}
+export function providerBlocked(user:User){return user.blocked;}
 
 // Native access must honor a linked account's block, including after Auth is disabled.
 export async function accountBlocked(accountId:string){

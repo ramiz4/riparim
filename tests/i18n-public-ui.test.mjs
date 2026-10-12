@@ -125,6 +125,7 @@ try{
   assert.equal((privacy.match(/<section/g)??[]).length,9);
   assert(privacy.includes('<code>openid</code>')&&privacy.includes('<strong>')&&privacy.includes('mailto:')&&!privacy.match(/\{(?:contact|publishedFields|openid|google)\}/));
   assert(privacy.includes(api.privacyMessages[locale].date)&&privacy.includes('Resend')&&privacy.includes('Supabase'));
+  const alternatePrivacy=renderToStaticMarkup(wrap(locale,h(api.PrivacyContent,{text:api.privacyMessages[locale],authProvider:'pocketbase'})));assert(alternatePrivacy.includes('PocketBase')&&!alternatePrivacy.includes('Supabase'),'Privacy describes the configured auth provider');
   assert.equal(api.searchService(locale,'Alle Leistungen','Bremsen prüfen bitte'),locale==='de'?'Bremsen & Fahrwerk':'Alle Leistungen','only DE applies the existing heuristic');
   assert.equal(api.searchService(locale,'Motor & Getriebe','Bremsen prüfen bitte'),'Motor & Getriebe','manual canonical selection always wins');
   const filters={...api.defaultCatalogueFilters,service:'Bremsen & Fahrwerk',language:'Deutsch'};

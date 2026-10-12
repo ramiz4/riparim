@@ -1,3 +1,4 @@
+import {authUser,authClient as neutralClient,authAdmin as neutralAdmin} from './helpers/auth-contract.mjs';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {mkdir,readFile,readdir,writeFile} from 'node:fs/promises';
@@ -16,8 +17,8 @@ const objects=new Map(),origin='https://riparim.example.test';
 const bucket={async get(key){return objects.has(key)?{body:objects.get(key)}:null;},async list({prefix}){return {objects:[...objects.keys()].filter(key=>key.startsWith(prefix)).map(key=>({key})),truncated:false};},async delete(keys){for(const key of Array.isArray(keys)?keys:[keys])objects.delete(key);}};
 globalThis.fixtureEnv={DB:d1,BUCKET:bucket,SITE_ORIGIN:origin,REVIEW_MODERATOR_EMAIL:'owner@example.test',RESEND_API_KEY:'re_fixture_secret',TRANSACTIONAL_EMAIL_FROM:'Riparim <no-reply@auth.example.test>'};
 let user={id:subject,email:'member@example.test',email_confirmed_at:'2026-10-11',user_metadata:{full_name:'Fixture Member'}},sessionId='replacement-session';
-globalThis.fixtureClient={auth:{getUser:async()=>({data:{user},error:null}),getClaims:async()=>({data:{claims:{sub:user.id,session_id:sessionId,amr:[{method:'password'}]}},error:null}),signOut:async()=>({error:null})}};
-db.prepare("INSERT INTO auth_settings VALUES ('main',?,?,1,1,'2026-10-11')").run(projectUrl,'sb_publishable_fixture_key_12345678901234567890');
+globalThis.fixtureClient=neutralClient({auth:{getUser:async()=>({data:{user},error:null}),getClaims:async()=>({data:{claims:{sub:user.id,session_id:sessionId,amr:[{method:'password'}]}},error:null}),signOut:async()=>({error:null})}},()=>db.prepare("SELECT project_url FROM auth_settings WHERE id='main'").get()?.project_url??projectUrl);
+db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at) VALUES ('main',?,?,1,1,'2026-10-11')").run(projectUrl,'sb_publishable_fixture_key_12345678901234567890');
 db.prepare('INSERT INTO auth_identities VALUES (?,?,?,?,?)').run('supabase',projectUrl,subject,accountId,'2026-10-11');
 db.prepare('INSERT INTO auth_sessions (id,account_id,expires_at,created_at,identity_provider,identity_issuer,identity_subject) VALUES (?,?,?,?,?,?,?)').run('replacement-session',accountId,Date.now()+600000,'2026-10-11','supabase',projectUrl,subject);
 const load=name=>import(new URL('../'+output+'/'+name+'.mjs',import.meta.url));
@@ -36,8 +37,8 @@ const proofs=[];
 assert.equal(await identities.linkAccountIdentity(source,target,async identity=>{proofs.push(identity);return true;}),accountId);
 assert.deepEqual(proofs,[source,target],'Both external identities require explicit independent proof');
 assert.equal(await auth.getAppUser(),null,'A linking operation revokes existing application sessions');
-db.prepare('UPDATE auth_settings SET project_url=?').run(targetUrl);user={...user,id:targetSubject};sessionId='target-password-session';
-await auth.recordPasswordSession(targetUrl,user,globalThis.fixtureClient);
+db.prepare('UPDATE auth_settings SET project_url=?').run(targetUrl);user={...user,id:targetSubject};sessionId='replacement-session';
+await auth.recordPasswordSession(authUser(user,targetUrl),globalThis.fixtureClient);
 assert.equal((await auth.getAppUser()).userId,accountId,'A fresh replacement-provider login keeps the account key');
 const visit='00000000-0000-4000-8000-000000000010',key=`evidence/${accountId}/${visit}/fixture.pdf`;
 db.prepare('INSERT INTO visits (id,owner,workshop,date,vehicle,service,evidence_type,file_key,file_type,status,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?)').run(visit,accountId,'fixture','2026-10-11','Fixture car','Repair','document',key,'application/pdf','published','2026-10-11');objects.set(key,'%PDF-fixture private proof');
@@ -45,25 +46,25 @@ const download=()=>evidence.GET(new Request(origin+'/api/evidence/'+visit),{para
 assert.equal(await (await download()).text(),'%PDF-fixture private proof','Provider change preserves private file paths and ownership');
 const foreignSubject='00000000-0000-4000-8000-000000000004';
 user={...user,id:foreignSubject,user_metadata:{...user.user_metadata,account_id:accountId,role:'admin'}};sessionId='foreign-password-session';
-await auth.recordPasswordSession(targetUrl,user,globalThis.fixtureClient);
+await auth.recordPasswordSession(authUser(user,targetUrl),globalThis.fixtureClient);
 assert.notEqual((await auth.getAppUser()).userId,accountId,'The same email and editable metadata cannot link accounts');
 assert.equal((await download()).status,404,'An unlinked identity cannot download another account evidence');
 assert.equal((await auth.getAppUser()).isModerator,false);
 await assert.rejects(identities.linkAccountIdentity(source,identities.supabaseIdentity(targetUrl,foreignSubject),async()=>true),/IDENTITY_CONFLICT/,'Already registered accounts are never merged');
-user={...user,id:targetSubject};sessionId='target-password-session';
+user={...user,id:targetSubject};sessionId='replacement-session';
 db.prepare("INSERT INTO auth_account_roles VALUES (?,'admin','2026-10-11','fixture-admin')").run(accountId);
 assert.equal((await auth.getAppUser()).isModerator,true,'Delegated roles belong to the stable account');
 await roles.changeAccountRole(accountId,'user',{userId:'bootstrap-fixture',email:'owner@example.test',isModerator:true});
 assert.equal(await auth.getAppUser(),null,'Role revocation invalidates replacement-provider sessions immediately');
-sessionId='target-after-revocation';await auth.recordPasswordSession(targetUrl,user,globalThis.fixtureClient);
+sessionId='target-after-revocation';await auth.recordPasswordSession(authUser(user,targetUrl),globalThis.fixtureClient);
 assert.equal((await auth.getAppUser()).isModerator,false,'Reauthentication cannot restore a revoked internal role');
 // A coincidentally equal session ID from another issuer cannot reuse a grant.
-db.prepare('UPDATE auth_sessions SET identity_issuer=? WHERE id=?').run(projectUrl,sessionId);
+db.prepare('UPDATE auth_sessions SET identity_issuer=? WHERE id=?').run(projectUrl,JSON.stringify(['supabase',targetUrl,sessionId]));
 assert.equal(await auth.getAppUser(),null);
-db.prepare('UPDATE auth_sessions SET identity_issuer=? WHERE id=?').run(targetUrl,sessionId);
+db.prepare('UPDATE auth_sessions SET identity_issuer=? WHERE id=?').run(targetUrl,JSON.stringify(['supabase',targetUrl,sessionId]));
 db.prepare("INSERT INTO auth_account_status VALUES (?,'inactive','2026-10-11')").run(accountId);
 assert.equal(await auth.getAppUser(),null,'An internal block applies to every linked provider');
-await assert.rejects(auth.recordPasswordSession(targetUrl,user,globalThis.fixtureClient),/ACCOUNT_DISABLED/);
+await assert.rejects(auth.recordPasswordSession(authUser(user,targetUrl),globalThis.fixtureClient),/ACCOUNT_DISABLED/);
 const blockedTarget=identities.supabaseIdentity('https://blocked-target.supabase.co','00000000-0000-4000-8000-000000000005');
 assert.equal(await identities.linkAccountIdentity(source,blockedTarget,async()=>true),accountId,'An explicitly verified migration can preserve an inactive account');
 assert.equal(await identities.resolveAccount(blockedTarget),accountId,'The migrated identity cannot become an independent unblocked account');
@@ -91,10 +92,10 @@ assert.equal(await identities.linkAccountIdentity(source,raced,async()=>true),ac
 assert.equal(await identities.resolveAccount(raced),accountId,'A concurrently blocked account retains the same blocked identity after linking');
 assert.equal(db.prepare('SELECT status FROM auth_account_status WHERE account_id=?').get(accountId).status,'inactive');
 db.prepare('DELETE FROM auth_account_status WHERE account_id=?').run(accountId);
-sessionId='current-management-session';await auth.recordPasswordSession(targetUrl,user,globalThis.fixtureClient);
+sessionId='current-management-session';await auth.recordPasswordSession(authUser(user,targetUrl),globalThis.fixtureClient);
 const providerUsers=new Map([[targetSubject,user]]),providerCalls=[];let failDelete=false;
 const providerAdmin={async listUsers(){return {data:{users:[...providerUsers.values()],total:providerUsers.size},error:null};},async getUserById(id){providerCalls.push(['get',id]);return providerUsers.has(id)?{data:{user:providerUsers.get(id)},error:null}:{data:{user:null},error:{status:404,code:'user_not_found'}};},async updateUserById(id,attributes){providerCalls.push(['update',id]);const next={...providerUsers.get(id),user_metadata:{...providerUsers.get(id).user_metadata,...attributes.user_metadata}};providerUsers.set(id,next);user=next;return {data:{user:next},error:null};},async deleteUser(id){providerCalls.push(['delete',id]);if(failDelete)return {error:{status:503}};providerUsers.delete(id);return {error:null};}};
-globalThis.fixtureAuthAdmin={projectUrl:targetUrl,client:{auth:{admin:providerAdmin}}};
+globalThis.fixtureAuthAdmin={projectUrl:targetUrl,provider:"supabase",client:neutralAdmin(providerAdmin,targetUrl)};
 const cookieMap=new Map();globalThis.fixtureCookies={get:name=>cookieMap.has(name)?{value:cookieMap.get(name)}:undefined,set(name,value,options){if(options.maxAge===0)cookieMap.delete(name);else cookieMap.set(name,value);}};
 const request=(path,method='GET',body)=>new Request(origin+path,{method,headers:{Origin:origin,'Content-Type':'application/json'},...(body?{body:JSON.stringify(body)}:{})});
 assert.equal((await account.PATCH(request('/api/account','PATCH',{name:'Updated fixture name'}))).status,200,'Own profile edits use the mapped current external subject');
@@ -102,7 +103,7 @@ assert.deepEqual(providerCalls.at(-1),['update',targetSubject]);
 db.prepare("INSERT INTO auth_account_roles VALUES (?,'admin','2026-10-11','fixture-admin')").run(accountId);
 assert.equal((await users.GET(request('/api/users')).then(response=>response.json())).users[0].protected,true,'An alternate identity of the current administrator is protected');
 assert.equal((await userRoute.DELETE(request('/api/users/'+targetSubject,'DELETE'),{params:Promise.resolve({id:targetSubject})})).status,403,'Mapped self-deletion remains protected in administration');
-await assert.rejects(grant.issueDeletionGrant(await auth.getAppUser(),targetUrl,targetSubject),/DELETION_FORBIDDEN/,'Stable admin roles also protect own deletion grants');
+await assert.rejects(grant.issueDeletionGrant(await auth.getAppUser(),{provider:"supabase",projectUrl:targetUrl},targetSubject),/DELETION_FORBIDDEN/,'Stable admin roles also protect own deletion grants');
 db.prepare('DELETE FROM auth_account_roles WHERE account_id=?').run(accountId);
 // The outbox resolves the current alias, including a private native legacy owner.
 db.prepare("INSERT INTO auth_links (account_id,legacy_owner,created_at) VALUES (?,'native-owner','2026-10-11')").run(accountId);
@@ -112,7 +113,7 @@ globalThis.fetch=async(url,options)=>{assert.equal(String(url),'https://api.rese
 try{await outbox.processNotifications({id:'fixture-message'});}finally{globalThis.fetch=nativeFetch;}
 assert.equal(delivered.to[0],'member@example.test');assert(providerCalls.some(([operation,id])=>operation==='get'&&id===targetSubject),'Outbox looks up the new provider subject without parsing the internal ID');
 assert.equal((await identities.accountIdentity('native-owner','supabase',targetUrl)).subject,targetSubject);
-await grant.issueDeletionGrant(await auth.getAppUser(),targetUrl,targetSubject);
+await grant.issueDeletionGrant(await auth.getAppUser(),{provider:"supabase",projectUrl:targetUrl},targetSubject);
 failDelete=true;
 assert.equal((await account.DELETE(request('/api/account','DELETE',{confirmation:'KONTO LÖSCHEN'}))).status,503,'Provider failure retains a stable-account deletion retry');
 assert.equal((await account.GET().then(response=>response.json())).deletionStarted,true);
@@ -155,4 +156,7 @@ assert.deepEqual({links:predecessor.prepare('SELECT * FROM auth_links').all(),se
 // The unmodified predecessor still writes successfully against the new schema.
 predecessor.prepare("INSERT INTO auth_sessions (id,account_id,expires_at,created_at) VALUES ('late-old-session',?,9999999999999,'2026-10-11')").run(historical);
 predecessor.close();
+const realmOne={provider:'oidc',issuer:'https://identity.example.test/realms/one',subject:'opaque-member'},realmTwo={...realmOne,issuer:'https://identity.example.test/realms/two'};
+const realmAccount=await identities.resolveAccount(realmOne);assert.notEqual(await identities.resolveAccount(realmTwo),realmAccount,'Exact issuer paths distinguish provider realms');
+assert.deepEqual({...await identities.accountIdentity(realmAccount,'oidc',realmOne.issuer)},realmOne);assert.equal(await identities.accountIdentity(realmAccount,'oidc',realmTwo.issuer),null);
 console.log('Provider-independent accounts: ownership, verified linking, races, blocks, roles, private evidence, administration, outbox and deletion retries passed');

@@ -38,7 +38,7 @@ export function compareSnapshotTables(expected, actual) {
 }
 
 function stableAuthProject(previous, current) {
-  const settings = (snapshot) => snapshot.tables.find((table) => table.name === "auth_settings")?.rows.map((row) => [row.id, row.project_url]).sort((a, b) => String(a[0]).localeCompare(String(b[0]))) ?? [];
+  const settings = (snapshot) => snapshot.tables.find((table) => table.name === "auth_settings")?.rows.map((row) => [row.id, row.project_url, row.provider??"supabase"]).sort((a, b) => String(a[0]).localeCompare(String(b[0]))) ?? [];
   if (JSON.stringify(settings(previous)) !== JSON.stringify(settings(current))) fail("Auth project identity changed; domain delta cannot migrate between providers.");
 }
 
