@@ -13,6 +13,7 @@ Semantic Release als Release-Prozess.
 - React, TypeScript und Vinext mit App Router
 - Cloudflare Worker, D1-Datenbank und privater R2-Dateispeicher; die neue Release-Pipeline verwendet den eigenen Cloudflare-Account
 - Supabase Auth für E-Mail/Passwort und Google OAuth
+- Tägliche verschlüsselte Supabase-Auth-Sicherung: [Betrieb und Wiederherstellung](docs/auth-backups.md)
 - Drizzle für Schema und SQL-Migrationen
 
 Öffentlich sichtbar sind ausschließlich freigegebene Werkstätten und Bewertungen. Nachweise und Kontodaten werden nicht im Repository gespeichert. Werkstattdaten enthalten Quellen; Einträge aus Verzeichnissen bleiben bis zur Freigabe Entwürfe.
