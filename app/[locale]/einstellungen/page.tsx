@@ -1,3 +1,5 @@
+import {publicReleaseRender} from "@/lib/public-release";
+import {deferredManagementPage} from "@/lib/deferred-page";
 import {I18nMessages} from "@/lib/i18n/client";
 import {getMessages,createTranslator} from "@/lib/i18n/messages";
 import {callbackLocale} from "@/lib/auth/locale";
@@ -14,6 +16,7 @@ export const dynamic = "force-dynamic";
 
 export default async function SettingsPage({params}:{params:Promise<{locale:string}>}) {
  const {locale:value}=await params,locale=callbackLocale(value),messages=getMessages(locale,["customer","public"]),t=createTranslator(messages);
+ if(publicReleaseRender())return deferredManagementPage("settings",locale);
   const user = await getAppUser();
   const admin = await getAdminUser(user);
 

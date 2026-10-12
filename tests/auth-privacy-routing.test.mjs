@@ -13,7 +13,7 @@ try{
  for(const path of ['/datenschutz','/sq/privatesia','/en/privacy'])for(const method of ['GET','HEAD']){
   response=await servePublicRelease(new Request('https://riparim.test'+path,{method}),env);assert.equal(await response.text(),'PocketBase','The static privacy route follows the selected protocol even while auth is disabled');assert.equal(response.headers.get('X-Riparim-Public-Snapshot'),'1');assert.equal(response.headers.has('set-cookie'),false);
  }
- assert.equal(await servePublicRelease(new Request('https://riparim.test/datenschutz',{headers:{RSC:'1'}}),env),null,'React navigation still renders the existing dynamic provider contract');
+ const rsc=await servePublicRelease(new Request('https://riparim.test/datenschutz',{headers:{RSC:'1'}}),env);assert.equal(await rsc.text(),'PocketBase','React navigation selects the current provider release variant');assert.match(rsc.headers.get('Content-Type'),/text\/x-component/);
  db.prepare("UPDATE auth_settings SET provider='supabase' WHERE id='main'").run();response=await servePublicRelease(new Request('https://riparim.test/en/privacy'),env);assert.equal(await response.text(),'Supabase','A rollback immediately restores the selected provider text');
- assert.equal(requested.length,8);console.log('Static privacy selection: default, disabled PocketBase, all locales, HEAD, React navigation and rollback passed');
+ assert.equal(requested.length,9);console.log('Static privacy selection: default, disabled PocketBase, all locales, HEAD, React navigation and rollback passed');
 }finally{db.close();}

@@ -6,7 +6,7 @@ import {Miniflare} from 'miniflare';
 const token='a'.repeat(64), hash=createHash('sha256').update(token).digest('hex'), commit='b'.repeat(40);
 let passed=0;
 for(const workerPath of ['./build/sites-worker','./build/cloudflare-worker']) {
- const bundle=await build({stdin:{contents:`import worker from '${workerPath}';export default worker;`,resolveDir:process.cwd(),loader:'ts'},bundle:true,write:false,format:'esm',platform:'neutral',external:['cloudflare:workers','node:async_hooks'],define:{'import.meta.env.DEV':'false',__RIPARIM_RELEASE_COMMIT__:JSON.stringify(commit)},plugins:[{name:'isolated-migration',setup(b){
+ const bundle=await build({stdin:{contents:`import worker from '${workerPath}';export default worker;`,resolveDir:process.cwd(),loader:'ts'},bundle:true,write:false,format:'esm',platform:'neutral',mainFields:['module','main'],external:['cloudflare:workers','node:async_hooks','node:buffer'],define:{'import.meta.env.DEV':'false',__RIPARIM_RELEASE_COMMIT__:JSON.stringify(commit)},plugins:[{name:'isolated-migration',setup(b){
   b.onResolve({filter:/(?:notifications\/outbox|^\.\/outbox)$/},args=>({path:args.path,namespace:'scheduled'}));
   b.onLoad({filter:/.*/,namespace:'scheduled'},()=>({loader:'js',contents:'export async function processNotifications(){throw Error("Scheduled writes must remain frozen");}'}));
   b.onResolve({filter:/^vinext\/server\/fetch-handler$/},args=>({path:args.path,namespace:'application'}));

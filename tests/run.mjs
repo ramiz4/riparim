@@ -27,6 +27,8 @@ suites.push('platform-backup.test.mjs');
 suites.push('backup-monitor.test.mjs');
 suites.push('auth-request-latency.test.mjs');
 suites.push('auth-provider-worker.test.mjs');
+suites.push('session-cookie-reads.test.mjs');
+suites.push('deferred-pages-ui.test.mjs');
 process.exitCode=await runSuites({
  cwd:root,runtime,contract:fileURLToPath(new URL('../scripts/check-i18n.mjs',import.meta.url)),
  suites:suites.map(suite=>fileURLToPath(new URL(suite,import.meta.url))),

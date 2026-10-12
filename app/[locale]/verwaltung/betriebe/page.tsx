@@ -1,3 +1,5 @@
+import {publicReleaseRender} from "@/lib/public-release";
+import {deferredManagementPage} from "@/lib/deferred-page";
 import {I18nMessages} from "@/lib/i18n/client";
 import {createTranslator} from "@/lib/i18n/messages";
 import {managementMessages,managementMetadata} from "@/lib/i18n/management";
@@ -12,7 +14,7 @@ import "@/app/[locale]/betrieb/business.css";
 export const dynamic="force-dynamic";
 export default async function BusinessModerationPage({params}:{params:Promise<{locale:string}>}){
  const {locale:value}=await params,locale=callbackLocale(value);
- const user=await getAdminUser();const messages=managementMessages(locale,false),t=createTranslator(messages);
+ if(publicReleaseRender())return deferredManagementPage("claims",locale);const user=await getAdminUser();const messages=managementMessages(locale,false),t=createTranslator(messages);
  if(!user?.isModerator)return <I18nMessages messages={messages}><main className="access-page"><h1>{t("management.businessModeration")}</h1><p>{user?t("management.noReviewAccess"):t("management.pleaseManagementLogin")}</p><Link href="/anmelden?weiter=/verwaltung/betriebe">{t("management.login")}</Link></main></I18nMessages>;
  return <I18nMessages messages={messages}><><SiteHeader account={{email:user.email,displayName:user.displayName,provider:user.provider}} isAdmin/><AdminNavigation active="business"/><main className="business-page wrap"><h1>{t("management.businessModeration")}</h1><p>{t("management.businessModerationHelp")}</p><BusinessPanel moderation/></main></></I18nMessages>;
 }
