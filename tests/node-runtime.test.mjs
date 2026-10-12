@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict';
+import {assertPrivacyOutput} from './helpers/privacy-output.mjs';
+import {localizeHref} from '../scripts/lib/locale.mjs';
 import {pocketbaseNodeHttp} from './helpers/pocketbase-node-http.mjs';
 import {providerExitHttp} from './helpers/provider-exit-http.mjs';
 import {spawn,execFile} from 'node:child_process';
@@ -41,6 +43,12 @@ try{
  db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at) VALUES ('main',?,?,1,0,?)").run('https://node-auth-fixture.supabase.co','sb_publishable_synthetic_fixture_1234567890','2026-10-01T00:00:00Z');
  db.close();
  await start(environment,port);
+ for(const locale of ['de','sq','en'])for(const init of [{},{method:'HEAD'},{headers:{RSC:'1',Accept:'text/x-component'}}]){
+  const response=await fetch(origin+localizeHref('/datenschutz',locale)+(init.headers?'?_rsc':''),init);assert.equal(response.status,200);
+  const output=await response.text();
+  if(init.method==='HEAD')assert.equal(output,'');
+  else {assertPrivacyOutput(output,locale,'supabase');if(init.headers)assert.match(response.headers.get('content-type'),/text\/x-component/);}
+ }
  const workshops=await (await fetch(origin+'/api/workshops')).json();
  assert.deepEqual(workshops.workshops.map(workshop=>workshop.id),['fixture-public']);
  for(const path of ['/werkstaetten','/en/workshops','/sq/servis/fixture-public']){

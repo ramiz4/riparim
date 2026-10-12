@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict';
+import {assertPrivacyOutput} from './privacy-output.mjs';
+import {localizeHref} from '../../scripts/lib/locale.mjs';
 import {build} from 'esbuild';
 import {createServer} from 'node:https';
 import {readFile,mkdir,writeFile,cp} from 'node:fs/promises';
@@ -74,7 +76,10 @@ export async function pocketbaseNodeHttp({directory,port,start,stop}){
   assert.equal((await login('member@example.test',memberJar)).status,200);assert.equal((await (await call('/api/session')).json()).isAdmin,false);
   assert.equal(await (await call('/api/evidence/'+visit)).text(),'%PDF-private synthetic PB Node evidence','Private operator cutover retains the original stable ownership and file path');
   assert.equal((await login('admin@example.test',adminJar)).status,200);assert.equal((await (await call('/api/session',{jar:adminJar})).json()).isAdmin,true);assert.equal((await call('/api/users',{jar:adminJar})).status,200,'A fresh target-provider login restores the existing independently held administrative role');
-  const links=await call('/en/privacy');assert((await links.text()).includes('PocketBase'),'Actual Node privacy page describes the selected provider');
+  for(const locale of ['de','sq','en'])for(const init of [{},{method:'HEAD'},{extra:{RSC:'1',Accept:'text/x-component'}}]){
+   const response=await call(localizeHref('/datenschutz',locale)+(init.extra?'?_rsc':''),init);assert.equal(response.status,200,`${locale} ${JSON.stringify(init)} ${response.headers.get('location')}`);
+   const output=await response.text();if(init.method==='HEAD')assert.equal(output,'');else {assertPrivacyOutput(output,locale,'pocketbase');if(init.extra)assert.match(response.headers.get('content-type'),/text\/x-component/);}
+  }
   assert.equal((await call('/api/auth/logout',{method:'POST',body:{}})).status,200);assert.equal((await call('/api/evidence/'+visit)).status,401);
   console.log('Actual Node HTTPS PocketBase: independent REST, new runtime bindings, stable refresh, mapped private ownership, profile/re-auth, internal admin role, disabled web-admin refusal, private checked operator cutover, privacy and logout passed.');
  }finally{await stop();for(const socket of sockets)socket.destroy();await new Promise(resolve=>provider.close(resolve));if(targetProvider)await new Promise(resolve=>targetProvider.close(resolve));delete globalThis.pocketbaseNodeEnv;try{storage.close();}catch{}}

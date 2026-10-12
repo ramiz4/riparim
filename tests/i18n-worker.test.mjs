@@ -1,5 +1,6 @@
 import {localizeHref} from '../scripts/lib/locale.mjs';
 import assert from 'node:assert/strict';
+import {assertPrivacyOutput} from './helpers/privacy-output.mjs';
 import {readFile,readdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {Miniflare} from 'miniflare';
@@ -10,7 +11,7 @@ const overlay=JSON.parse(await readFile('data/workshop-translations.json','utf8'
 const canonical=JSON.parse(await readFile('data/workshops.json','utf8'));
 const config=JSON.parse(await readFile('dist/server/wrangler.json','utf8'));
 const modules=(await readdir('dist/server',{recursive:true})).filter(file=>file.endsWith('.js')).sort((a,b)=>a==='index.js'?-1:b==='index.js'?1:a.localeCompare(b)).map(file=>({type:'ESModule',path:resolve('dist/server',file)}));
-await withWorkerRuntime({modules,modulesRoot:resolve('dist/server'),compatibilityDate:config.compatibility_date,compatibilityFlags:config.compatibility_flags,d1Databases:['DB'],r2Buckets:['BUCKET'],bindings:{SITE_ORIGIN:'https://riparim.test',PUBLIC_RELEASE_RENDER:'skip-assets'},assets:{directory:resolve('dist/client'),binding:'ASSETS',routerConfig:{has_user_worker:true}},outboundService:()=>new Response('Live provider access forbidden',{status:502})},async(runtime,dispatchFetch)=>{
+await withWorkerRuntime({modules,modulesRoot:resolve('dist/server'),compatibilityDate:config.compatibility_date,compatibilityFlags:config.compatibility_flags,d1Databases:['DB'],r2Buckets:['BUCKET'],bindings:{SITE_ORIGIN:'https://riparim.test',PUBLIC_RELEASE_RENDER:'skip-assets',AUTH_TRUSTED_ORIGIN:'https://auth.fixture.test',AUTH_TRUSTED_PROVIDER:'pocketbase'},assets:{directory:resolve('dist/client'),binding:'ASSETS',routerConfig:{has_user_worker:true}},outboundService:()=>new Response('Live provider access forbidden',{status:502})},async(runtime,dispatchFetch)=>{
  const db=await runtime.getD1Database('DB');for(const file of (await readdir('drizzle')).filter(file=>file.endsWith('.sql')).sort())for(const statement of (await readFile('drizzle/'+file,'utf8')).split('--> statement-breakpoint').filter(sql=>sql.trim()))await db.prepare(statement).run();
  await (await dispatchFetch('https://riparim.test/api/workshops')).text();
  for(let round=0;round<2;round++)await settleWorkerRequests([['/','de','Werkstätten'],['/sq','sq','Servise'],['/en','en','Workshops']].map(async([path,locale,title])=>{
@@ -38,6 +39,15 @@ await withWorkerRuntime({modules,modulesRoot:resolve('dist/server'),compatibilit
   }
   const rsc=await dispatchFetch('https://riparim.test'+localizeHref('/werkstaetten',locale)+'?_rsc',{headers:{RSC:'1',Accept:'text/x-component'}});
   assert.equal(rsc.status,200);assert.match(rsc.headers.get('Content-Type'),/text\/x-component/);assert((await rsc.text()).includes(locale),'Translated page RSC retains its request locale');
+ }
+ // Both built targets render the real privacy page for each selected auth protocol.
+ for(const provider of ['supabase','pocketbase']){
+  await db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at,provider) VALUES ('main',?,?,0,0,'fixture',?)").bind(provider==='pocketbase'?'https://auth.fixture.test':'https://fixture-project.supabase.co',provider==='pocketbase'?'':'sb_publishable_fixture_public_key_1234567890',provider).run();
+  for(const locale of ['de','sq','en'])for(const init of [{},{method:'HEAD'},{headers:{RSC:'1',Accept:'text/x-component'}}]){
+   const response=await dispatchFetch('https://riparim.test'+localizeHref('/datenschutz',locale)+(init.headers?'?_rsc':''),init);assert.equal(response.status,200);
+   const output=await response.text();if(init.method==='HEAD')assert.equal(output,'');else {assertPrivacyOutput(output,locale,provider);if(init.headers)assert.match(response.headers.get('Content-Type'),/text\/x-component/);}
+  }
+  await db.prepare("DELETE FROM auth_settings WHERE id='main'").run();
  }
  // Actual native D1, API and document SSR use the same current source revision.
  const translatedSource=canonical.workshops.find(w=>w.id===published.id),translatedEntry=overlay.workshops.find(w=>w.id===published.id);assert(translatedEntry);
