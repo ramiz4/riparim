@@ -1,3 +1,4 @@
+import {accountReadResponse} from "@/lib/account-read";
 import {ValidationError} from "@/lib/validation-error";
 import {isLocale} from "@/lib/i18n/locale";
 import {getAppUser} from "@/app/auth";
@@ -28,14 +29,7 @@ async function input(request:Request){
  if(!sameOrigin(request)||!request.headers.get("content-type")?.includes("application/json"))throw Error("INVALID_REQUEST");
  return readJson(request,2048);
 }
-export async function GET(){
- try{
-  const current=await currentAccount(),grant=await readDeletionGrant(),config=await getAuthConfig();
-  const validGrant=grant&&config?.enabled&&await matchesDeletionGrant(grant,config)?grant:null;
-  if(!current||validGrant?.started)return json({account:null,deletionReady:false,deletionStarted:!!validGrant?.started});
-  return json({account:{email:current.user.email,name:current.user.displayName,provider:current.user.provider,protected:await deletionProtected(current.user)},deletionReady:!!validGrant&&validGrant.account_id===current.user.userId,deletionStarted:!!validGrant?.started});
- }catch(e){logFailure("read",e);return unavailable();}
-}
+export async function GET(){return accountReadResponse({currentAccount,readDeletionGrant,getAuthConfig});}
 export async function PATCH(request:Request){
  let body;try{body=await input(request);}catch{return json({error:"Ungültige Anfrage.",errorCode:"invalid_request"},400);}
  try{

@@ -27,6 +27,6 @@ export default {
         },
       };
     }
-    return withAuthRequest(()=>runWithConnectorBinding(binding, () => handler.fetch(request, env, ctx)));
+    return withAuthRequest(()=>runWithConnectorBinding(binding, () => handler.fetch(request, env, ctx)),request.headers.get("RSC")==="1"||!!request.headers.get("Accept")?.includes("text/x-component"));
   },
 };

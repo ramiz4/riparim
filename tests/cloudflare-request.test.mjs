@@ -56,7 +56,7 @@ const bundleOptions = {
     builder.onResolve({filter:/(?:notifications\/outbox|^\.\/outbox)$/},args=>({path:args.path,namespace:'notification-fixture'}));
     builder.onLoad({filter:/.*/,namespace:'notification-fixture'},()=>({loader:'js',contents:'export async function processNotifications(){return []; }'}));
     builder.onResolve({filter:/^@\/db\/directory$/},args=>({path:args.path,namespace:'catalogue-fixture'}));
-    builder.onLoad({filter:/.*/,namespace:'catalogue-fixture'},()=>({loader:'js',contents:'export async function publishedWorkshop(id){return {id};} export async function listWorkshops(){return [];}'}));
+    builder.onLoad({filter:/.*/,namespace:'catalogue-fixture'},()=>({loader:'js',contents:'export async function publishedWorkshop(id){return {id};} export async function listWorkshops(){return [];} export async function ensureInitialCatalog(){} export function decodeProfile(row){return row;}'}));
     builder.onResolve({filter:/^(next\/server|@\/lib\/auth\/config|@\/lib\/auth\/provider)$/},args=>({path:args.path,namespace:'proxy-fixture'}));
     builder.onLoad({filter:/.*/,namespace:'proxy-fixture'},args=>({loader:'js',contents:args.path==='next/server'
       ? 'export const NextResponse={redirect:(url,status)=>new Response(null,{status,headers:{Location:String(url)}}),rewrite:(url)=>{const response=new Response(null,{headers:{"x-middleware-rewrite":String(url)}});response.cookies={set:(name,value)=>response.headers.append("Set-Cookie",name+"="+value+"; Path=/; HttpOnly; Secure; SameSite=Lax")};return response;},next:()=>{const response=new Response(null);response.cookies={set:(name,value)=>response.headers.append("Set-Cookie",name+"="+value+"; Path=/; HttpOnly; Secure; SameSite=Lax")};return response;}};'
@@ -165,12 +165,15 @@ assert.equal(native.nativeUser.userId, 'forged-owner-id', 'the existing native S
 assert.equal(native.nativeUser.email, 'owner@example.test');
 assert.equal(native.nativeUser.displayName, 'Forged Owner');
 
-const sessionOnly = await (await cloudflareWorker.fetch(new Request(url, { headers: sessionHeaders }), env, ctx)).json();
+// Actual private GET authorization is exercised by private-read-worker. Keep
+// this synthetic forwarding/provenance fixture on an unchanged framework GET.
+const frameworkGetUrl = 'https://riparim.com/api/auth-settings?moderation=1';
+const sessionOnly = await (await cloudflareWorker.fetch(new Request(frameworkGetUrl, { headers: sessionHeaders }), env, ctx)).json();
 assert.equal(sessionOnly.nativeUser, null);
 assert.equal(sessionOnly.headers.cookie, sessionHeaders.Cookie);
 
 for (const mode of ['html', 'json', 'redirect', 'unavailable']) {
-  const result = await cloudflareWorker.fetch(new Request(`${url}&fixture-response=${mode}`, { headers: { 'X-Riparim-Release-Commit': 'f'.repeat(40) } }), env, ctx);
+  const result = await cloudflareWorker.fetch(new Request(`${frameworkGetUrl}&fixture-response=${mode}`, { headers: { 'X-Riparim-Release-Commit': 'f'.repeat(40) } }), env, ctx);
   assert.equal(result.headers.get('X-Riparim-Release-Commit'), releaseCommit, 'response identity must come from baked release bytes, never a client marker');
   assert.equal(result.status, mode === 'redirect' ? 303 : mode === 'unavailable' ? 503 : 200);
   if (mode === 'redirect') {
@@ -187,7 +190,7 @@ for (const mode of ['html', 'json', 'redirect', 'unavailable']) {
     else assert.equal(await result.text(), '<!doctype html><title>Fixture</title>');
   }
 }
-const streamed = await cloudflareWorker.fetch(new Request(`${url}&fixture-response=stream`), env, ctx);
+const streamed = await cloudflareWorker.fetch(new Request(`${frameworkGetUrl}&fixture-response=stream`), env, ctx);
 assert.equal(streamed.status, 202);
 assert.equal(streamed.statusText, 'Fixture Accepted');
 assert.equal(streamed.headers.get('X-Riparim-Release-Commit'), releaseCommit);
@@ -210,7 +213,7 @@ for (const [name, define] of [
   await mkdir(new URL('.', pathToFileURL(filename)), { recursive: true });
   await writeFile(filename, variant.outputFiles[0].contents);
   const { default: worker } = await import(pathToFileURL(filename));
-  const result = await worker.fetch(new Request(`${url}&fixture-response=html`, { headers: { 'X-Riparim-Release-Commit': 'f'.repeat(40) } }), { ...env, MIGRATION_SOURCE_COMMIT: 'f'.repeat(40) }, ctx);
+  const result = await worker.fetch(new Request(`${frameworkGetUrl}&fixture-response=html`, { headers: { 'X-Riparim-Release-Commit': 'f'.repeat(40) } }), { ...env, MIGRATION_SOURCE_COMMIT: 'f'.repeat(40) }, ctx);
   assert.equal(result.status, 200);
   assert.equal(result.headers.get('X-Riparim-Release-Commit'), null, 'unbaked and invalid builds must not claim a client or environment commit');
   const unavailable = await worker.fetch(new Request(url), { ...env, MIGRATION_READ_ONLY: 'true', MIGRATION_SOURCE_COMMIT: 'f'.repeat(40) }, ctx);

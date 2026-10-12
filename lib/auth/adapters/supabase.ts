@@ -4,6 +4,7 @@ import type {AuthConfig} from '../config';
 import type {AuthClient,AuthAdminClient,AuthCookies,AuthUser,AuthUserAttributes,AuthError,SessionResult,AuthAvailability} from '../contract';
 import {trustedAuthOrigin,providerFetch,hostedAuthOrigin} from '../origin';
 import {authRequestState} from '../request-context';
+import {sessionCookieReads} from '../session-cookie-reads';
 import {supabaseIdentity} from '../legacy-supabase';
 
 export function validateSupabaseKey(key:string){
@@ -41,9 +42,10 @@ export async function supabaseAvailability(config:Pick<AuthConfig,'projectUrl'|'
 }
 export function supabaseClient(config:AuthConfig,cookies:AuthCookies|null,secure:boolean):AuthClient{
  const origin=trustedAuthOrigin(config.projectUrl,'supabase');
+ const cookieName=hostedAuthOrigin(origin)?undefined:'riparim-auth-'+encodeURIComponent(origin);
  const state=authRequestState(),transport=providerFetch(origin);
  const unavailable=()=>Response.json({msg:'Authentication provider unavailable',error_code:'auth_provider_unavailable'},{status:499});
- const serverFetch:typeof fetch=async(input,init)=>{
+ const fetchOnce:typeof fetch=async(input,init)=>{
   if(state.failed)return unavailable();
   state.deadline??=Date.now()+1500;
   const remaining=state.deadline-Date.now();
@@ -64,8 +66,19 @@ export function supabaseClient(config:AuthConfig,cookies:AuthCookies|null,secure
    return new Response(bytes,{status:response.status,headers:response.headers});
   }catch{state.failed=true;return unavailable();}
  };
- const rawClient=cookies?createServerClient(origin,config.publicKey,{cookieOptions:{...(!hostedAuthOrigin(origin)?{name:'riparim-auth-'+encodeURIComponent(origin)}:{}),httpOnly:true,secure,sameSite:'lax',path:'/'},cookies:{getAll:()=>cookies.getAll(),setAll:values=>{if(!state.failed)cookies.setAll(values);}},global:{fetch:serverFetch}}):createClient(origin,config.publicKey,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false},global:{fetch:providerFetch(origin)}});
- const client=cookies?{auth:new Proxy(rawClient.auth,{get(target,key){const value=Reflect.get(target,key);if(typeof value!=='function')return value;return (...args:unknown[])=>{if(key!=='getUser'&&key!=='getClaims'){state.failed=false;state.deadline=undefined;}return Reflect.apply(value,target,args);};}})}:rawClient;
+ // SDK getClaims revalidates symmetric tokens with getUser. Share that bounded
+ // response only for this bearer token and HTTP request; mutations clear it.
+ const serverFetch:typeof fetch=async(input,init)=>{
+  const url=new URL(input instanceof Request?input.url:String(input)),authorization=new Headers(init?.headers??(input instanceof Request?input.headers:undefined)).get('authorization');
+  if(url.pathname!=='/auth/v1/user'||url.search||(init?.method??(input instanceof Request?input.method:'GET')).toUpperCase()!=='GET'||!authorization)return fetchOnce(input,init);
+  const key=url.origin+':'+authorization;
+  state.verifiedUsers??=new Map();
+  let pending=state.verifiedUsers.get(key);
+  if(!pending){pending=fetchOnce(input,init);state.verifiedUsers.set(key,pending);}
+  return (await pending).clone();
+ };
+ const rawClient=cookies?createServerClient(origin,config.publicKey,{cookieOptions:{...(cookieName?{name:cookieName}:{}),httpOnly:true,secure,sameSite:'lax',path:'/'},cookies:{getAll:sessionCookieReads(cookies,cookieName??'sb-'+new URL(origin).hostname.split('.')[0]+'-auth-token'),setAll:values=>{if(!state.failed)cookies.setAll(values);}},global:{fetch:serverFetch}}):createClient(origin,config.publicKey,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false},global:{fetch:providerFetch(origin)}});
+ const client=cookies?{auth:new Proxy(rawClient.auth,{get(target,key){const value=Reflect.get(target,key);if(typeof value!=='function')return value;return (...args:unknown[])=>{if(key!=='getUser'&&key!=='getClaims'){state.failed=false;state.deadline=undefined;state.verifiedUsers?.clear();}return Reflect.apply(value,target,args);};}})}:rawClient;
  const sessionResult=(data:{user:User|null;session:{user:User;provider_token?:string|null}|null},failure:ProviderError|null):SessionResult=>({data:{user:normalize(data.user,origin),session:data.session?{user:normalize(data.session.user,origin)!,googleAccessToken:data.session.provider_token}:null},error:error(failure)});
  return {
   async getUser(){const result=await client.auth.getUser();return {data:{user:normalize(result.data.user,origin)},error:error(result.error)};},
@@ -87,7 +100,7 @@ export function supabaseClient(config:AuthConfig,cookies:AuthCookies|null,secure
   callbackReturn(){return null;},
   async recoveryReady(){const result=await client.auth.getUser();return !result.error&&!!normalize(result.data.user,origin)?.emailVerified;},
   async requestRecovery(email,redirectTo){return {error:error((await client.auth.resetPasswordForEmail(email,{redirectTo})).error)};},
-  async resetPassword(password){state.failed=false;state.deadline=undefined;const current=await client.auth.getUser(),user=normalize(current.data.user,origin);if(current.error||!user?.emailVerified||user.blocked)return {data:{identity:null},error:error(current.error)??{code:'invalid_credentials'}};const result=await client.auth.updateUser({password});return {data:{identity:result.error?null:user.identity},error:error(result.error)};},
+  async resetPassword(password){state.failed=false;state.deadline=undefined;state.verifiedUsers?.clear();const current=await client.auth.getUser(),user=normalize(current.data.user,origin);if(current.error||!user?.emailVerified||user.blocked)return {data:{identity:null},error:error(current.error)??{code:'invalid_credentials'}};const result=await client.auth.updateUser({password});return {data:{identity:result.error?null:user.identity},error:error(result.error)};},
   async signOut(options){return {error:error((await client.auth.signOut(options)).error)};}
  };
 }
