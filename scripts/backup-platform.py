@@ -171,6 +171,8 @@ def collect_cloudflare(directory, token):
     (directory / "r2").mkdir(mode=0o700)
     records = []
     for index, obj in enumerate(before):
+        if any(part in (".", "..") for part in obj["key"].split("/")):
+            raise RuntimeError("Unsupported R2 object key")
         path = "/r2/buckets/" + BUCKET + "/objects/" + urllib.parse.quote(obj["key"], safe="/")
         data, headers = request(CF_BASE + path, token)
         if len(data) != obj["size"] or headers.get("ETag", "").strip('"') != obj["etag"]:
