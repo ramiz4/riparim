@@ -5,6 +5,7 @@
   "main": "./build/cloudflare-worker.ts",
   "compatibility_date": "2026-05-15",
   "compatibility_flags": ["nodejs_compat"],
+  "limits": {"cpu_ms": 500},
   "assets": {"html_handling": "none", "binding": "ASSETS", "run_worker_first": ["/werkstaetten", "/sq/werkstaetten", "/en/werkstaetten", "/werkstatt/*", "/sq/werkstatt/*", "/en/werkstatt/*", "/__public/*"]},
   "workers_dev": true,
   "routes": [
