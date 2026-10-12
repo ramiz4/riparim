@@ -7,9 +7,9 @@ import type {AuthConfig} from "@/lib/auth/config";
 export async function verifyPassword(config:AuthConfig,id:string,email:string,password:string){
  const client=createPasswordClient(config);
  try{
-  const {data,error}=await client.auth.signInWithPassword({email,password});
-  if(error||!data.user?.email_confirmed_at||data.user.id!==id)return false;
-  const verified=await client.auth.getUser();
-  return !verified.error&&verified.data.user?.id===id&&!!verified.data.user.email_confirmed_at&&!providerBlocked(verified.data.user);
- }finally{const {error}=await client.auth.signOut({scope:"local"});if(error)throw Error("PASSWORD_PROOF_SIGNOUT_FAILED");}
+  const {data,error}=await client.signInWithPassword({email,password});
+  if(error||!data.user?.emailVerified||data.user.identity.subject!==id)return false;
+  const verified=await client.getUser();
+  return !verified.error&&verified.data.user?.identity.subject===id&&!!verified.data.user.emailVerified&&!providerBlocked(verified.data.user);
+ }finally{const {error}=await client.signOut({scope:"local"});if(error)throw Error("PASSWORD_PROOF_SIGNOUT_FAILED");}
 }

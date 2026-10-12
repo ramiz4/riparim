@@ -1,7 +1,7 @@
 import {ValidationError} from "@/lib/validation-error";
 import {isLocale} from "@/lib/i18n/locale";
 import {getAppUser} from "@/app/auth";
-import {resolveSupabaseAccount} from "@/lib/auth/identities";
+import {resolveProviderAccount} from "@/lib/auth/identities";
 import {authClient} from "@/lib/auth/client";
 import {getAuthConfig} from "@/lib/auth/config";
 import {getAuthAdmin} from "@/lib/auth/admin";
@@ -20,8 +20,8 @@ const unavailable=()=>json({error:"Die Kontoverwaltung ist gerade nicht verfügb
 async function currentAccount(){
  const user=await getAppUser(),config=await getAuthConfig();
  if(!user||!config?.enabled||!["Google","E-Mail"].includes(user.provider))return null;
- const client=await authClient(config),{data,error}=await client.auth.getUser();
- if(error||!data.user?.email_confirmed_at||user.userId!==await resolveSupabaseAccount(config.projectUrl,data.user.id))return null;
+ const client=await authClient(config),{data,error}=await client.getUser();
+ if(error||!data.user?.emailVerified||user.userId!==await resolveProviderAccount(config,data.user.identity.subject))return null;
  return {user,config,client,providerUser:data.user};
 }
 async function input(request:Request){
@@ -31,7 +31,7 @@ async function input(request:Request){
 export async function GET(){
  try{
   const current=await currentAccount(),grant=await readDeletionGrant(),config=await getAuthConfig();
-  const validGrant=grant&&config?.enabled&&await matchesDeletionGrant(grant,config.projectUrl)?grant:null;
+  const validGrant=grant&&config?.enabled&&await matchesDeletionGrant(grant,config)?grant:null;
   if(!current||validGrant?.started)return json({account:null,deletionReady:false,deletionStarted:!!validGrant?.started});
   return json({account:{email:current.user.email,name:current.user.displayName,provider:current.user.provider,protected:await deletionProtected(current.user)},deletionReady:!!validGrant&&validGrant.account_id===current.user.userId,deletionStarted:!!validGrant?.started});
  }catch(e){logFailure("read",e);return unavailable();}
@@ -44,8 +44,8 @@ export async function PATCH(request:Request){
   const preference="preferredLocale" in body;
   let fields;try{fields=preference?{}:parseUserFields(body);}catch(e){return json({error:e instanceof ValidationError?e.message:"Bitte prüfe den Namen.",errorCode:e instanceof ValidationError?e.code:"invalid_request"},400);}
   if(await accountBlocked(current.user.userId))return json({error:"Die Kontolöschung wurde bereits begonnen.",errorCode:"account_blocked"},409);
-  const auth=await getAuthAdmin();if(!auth||auth.projectUrl!==current.config.projectUrl)return unavailable();
-  const {data,error}=await auth.client.auth.admin.updateUserById(current.providerUser.id,{user_metadata:preference?{preferred_locale:body.preferredLocale}:{full_name:fields.name}});
+  const auth=await getAuthAdmin();if(!auth||(auth.projectUrl!==current.config.projectUrl||auth.provider!==current.config.provider))return unavailable();
+  const {data,error}=await auth.client.updateUserById(current.providerUser.identity.subject,preference?{preferredLocale:String(body.preferredLocale)}:{name:fields.name});
   if(error||!data.user)return unavailable();
   return json(preference?{preferredLocale:body.preferredLocale,messageCode:"saved"}:{name:fields.name,messageCode:"saved"});
  }catch(e){logFailure("rename",e);return unavailable();}
@@ -57,9 +57,9 @@ export async function POST(request:Request){
   if(current.user.provider!=="E-Mail"||await deletionProtected(current.user))return json({error:"Dieses Konto kann hier nicht gelöscht werden.",errorCode:"deletion_protected"},403);
   if(Object.keys(body).length!==1||typeof body.password!=="string"||!body.password.length||body.password.length>128)return json({error:"Bitte gib dein aktuelles Passwort ein.",errorCode:"current_password_required"},400);
   if(await rateLimit(request,"account-reauth",current.user.userId))return json({error:"Zu viele Versuche. Bitte warte einige Minuten.",errorCode:"rate_limited"},429);
-  if(!await verifyPassword(current.config,current.providerUser.id,current.providerUser.email!,body.password))return json({error:"Das Passwort konnte nicht bestätigt werden.",errorCode:"password_proof_failed"},401);
+  if(!await verifyPassword(current.config,current.providerUser.identity.subject,current.providerUser.email!,body.password))return json({error:"Das Passwort konnte nicht bestätigt werden.",errorCode:"password_proof_failed"},401);
   if(await accountBlocked(current.user.userId))return json({error:"Dieses Konto ist gesperrt.",errorCode:"account_blocked"},403);
-  await issueDeletionGrant(current.user,current.config.projectUrl,current.providerUser.id);
+  await issueDeletionGrant(current.user,current.config,current.providerUser.identity.subject);
   return json({ok:true});
  }catch(e){logFailure("reauthenticate",e);return unavailable();}
 }
@@ -68,21 +68,21 @@ export async function DELETE(request:Request){
  if(Object.keys(body).length!==1||body.confirmation!=="KONTO LÖSCHEN")return json({error:"Bitte bestätige die Kontolöschung ausdrücklich.",errorCode:"deletion_confirmation_required"},400);
  try{
   const grant=await readDeletionGrant(),config=await getAuthConfig();
-  if(!grant||!config?.enabled||!await matchesDeletionGrant(grant,config.projectUrl))return json({error:"Bitte bestätige deine Identität erneut.",errorCode:"reauthentication_required"},401);
+  if(!grant||!config?.enabled||!await matchesDeletionGrant(grant,config))return json({error:"Bitte bestätige deine Identität erneut.",errorCode:"reauthentication_required"},401);
   if(!grant.started){
    const current=await currentAccount();
    if(!current||current.user.userId!==grant.account_id)return json({error:"Bitte bestätige deine Identität erneut.",errorCode:"reauthentication_required"},401);
    if(await deletionProtected(current.user))return json({error:"Administrationszugänge sind gegen eigene Löschung geschützt.",errorCode:"deletion_protected"},403);
   }
-  const auth=await getAuthAdmin();if(!auth||auth.projectUrl!==config.projectUrl)return unavailable();
-  const lookup=await auth.client.auth.admin.getUserById(grant.user_id);
-  if(lookup.error&&lookup.error.status!==404&&lookup.error.code!=="user_not_found")return unavailable();
+  const auth=await getAuthAdmin();if(!auth||(auth.projectUrl!==config.projectUrl||auth.provider!==config.provider))return unavailable();
+  const lookup=await auth.client.getUserById(grant.user_id);
+  if(lookup.error&&lookup.error.status!==404&&lookup.error.code!=="not_found")return unavailable();
   if(isBootstrapAccount(lookup.data.user?.email))return json({error:"Der ursprüngliche Verwaltungszugang ist geschützt.",errorCode:"deletion_protected"},403);
   await startDeletion(grant);
   await deleteAccount(auth,grant.user_id);
   await clearDeletionGrant(grant);
   // Local tombstones and removed session grants deny any surviving provider JWT.
-  try{await (await authClient(config)).auth.signOut({scope:"local"});}catch{}
+  try{await (await authClient(config)).signOut({scope:"local"});}catch{}
   return json({ok:true});
  }catch(e){
   if(e instanceof Error&&e.message==="DELETION_FORBIDDEN")return json({error:"Administrationszugänge sind gegen eigene Löschung geschützt.",errorCode:"deletion_protected"},403);

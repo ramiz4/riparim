@@ -88,7 +88,7 @@ try{
   assert(url.required&&url.closest('label').textContent===copy.projectUrl&&key.required&&key.closest('label').textContent===copy.publishableKey,'Required fields keep current accessible labels');
   assert.deepEqual([...form().querySelectorAll('.auth-preview-links a')].map(node=>[node.textContent,node.getAttribute('href')]),[[copy.previewLogin,localizeHref('/anmelden',locale)],[copy.previewRegistration,localizeHref('/registrieren',locale)],[copy.previewRecovery,localizeHref('/passwort-vergessen',locale)]],'All localized customer previews keep their destinations');
   await type(url,'https://fixture.supabase.co');await type(key,'sb_publishable_fixture');await submit();
-  assert.deepEqual(requests.at(-1).body,{projectUrl:'https://fixture.supabase.co',publicKey:'sb_publishable_fixture',enabled:false,emailDeliveryConfirmed:false},'Draft submission preserves the four-field provider settings contract');
+  assert.deepEqual(requests.at(-1).body,{projectUrl:'https://fixture.supabase.co',publicKey:'sb_publishable_fixture',provider:'supabase',enabled:false,emailDeliveryConfirmed:false},'Draft submission preserves the four-field provider settings contract');
   assert.equal(form().querySelector('[role="status"]').textContent,copy.authDraftSaved,'Draft success is announced in the active locale');
   await click(form().querySelector('[role="switch"]'));assert.equal(submitButton().textContent,copy.checkActivate);await submit();
   assert(requests.at(-1).body.enabled&&!requests.at(-1).body.emailDeliveryConfirmed,'Activation cannot claim untested SMTP delivery');
@@ -106,6 +106,14 @@ try{
   await act(async()=>pendingLoad());loadMode='success';assert.equal(form().querySelector('input[type="url"]').value,config.projectUrl);assert.equal(form().querySelector('textarea').value,config.publicKey);
   assert.equal(form().querySelector('[role="switch"]').getAttribute('aria-checked'),'true');assert.equal(form().querySelector('[role="checkbox"]').getAttribute('aria-checked'),'true');assert(!submitButton().disabled,'Saved configuration is reused');
   loadMode='failure';await remount();assert.equal(form().querySelector('[role="alert"]').textContent,copy.auth_config_unavailable,'Load failure codes remain localized');assert(!document.body.textContent.includes('Private raw load failure'));
+ }
+ for(const nextLocale of ['de','sq','en']){
+  locale=nextLocale;config={provider:'pocketbase',projectUrl:'https://pb.example.test',publicKey:'',enabled:false,emailDeliveryConfirmed:false};loadMode='success';saveMode='success';await remount();
+  const selector=form().querySelector('select[data-auth-provider]');assert(selector,'The operator can choose a concrete auth provider');assert.equal(selector.value,'pocketbase');
+  assert(!form().querySelector('textarea'),'PocketBase has no misleading Supabase public-key field');
+  assert(document.querySelector('main h1+p').textContent.includes('PocketBase'));
+  assert(!document.querySelector('section.setup-instructions').textContent.includes('Supabase'),'Help matches the chosen provider');
+  await submit();assert.equal(requests.at(-1).body.provider,'pocketbase');assert.equal(requests.at(-1).body.publicKey,'');
  }
  console.log('Auth setup UI: DE/SQ/EN compact native guidance, central copy sources, current form/guard/error contracts, previews and saved state passed; no live requests');
 }finally{await act(async()=>root.unmount());dom.window.close();}

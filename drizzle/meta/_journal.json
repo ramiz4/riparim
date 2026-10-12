@@ -127,6 +127,13 @@
       "when": 1791750009333,
       "tag": "0017_mail_transports",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "6",
+      "when": 1791790321809,
+      "tag": "0018_auth_providers",
+      "breakpoints": true
     }
   ]
 }

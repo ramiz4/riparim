@@ -10,7 +10,7 @@ const bundle=await build({stdin:{contents:"export * from './lib/auth/config';exp
 await mkdir('.test-runtime/email-activation',{recursive:true});
 await writeFile('.test-runtime/email-activation/config.mjs',bundle.outputFiles[0].contents);
 const db=new DatabaseSync(':memory:');
-db.exec(await readFile('drizzle/0002_exotic_slayback.sql','utf8'));
+db.exec(await readFile('drizzle/0002_exotic_slayback.sql','utf8'));db.exec("ALTER TABLE auth_settings ADD provider TEXT NOT NULL DEFAULT 'supabase'");
 const d1={prepare(sql){const s=db.prepare(sql);const a=(values=[])=>({first:async()=>s.get(...values)??null,run:async()=>s.run(...values),bind:(...next)=>a(next)});return a();}};
 const projectUrl='https://fixture-project.supabase.co',key='sb_publishable_fixture_public_key_1234567890';
 globalThis.fixtureEnv={DB:d1,BUCKET:{},SITE_ORIGIN:'https://riparim.example.test'};
@@ -20,7 +20,7 @@ globalThis.fetch=async url=>{assert.equal(String(url),projectUrl+'/auth/v1/setti
 const cfg=await import(new URL('../.test-runtime/email-activation/config.mjs',import.meta.url));
 let passed=0;const check=(ok,message)=>{assert(ok,message);passed++;};
 const row=()=>db.prepare("SELECT * FROM auth_settings WHERE id='main'").get();
-const draft=()=>{db.exec('DELETE FROM auth_settings');db.prepare("INSERT INTO auth_settings VALUES ('main',?,?,0,0,?)").run(projectUrl,key,'2026-10-02T00:00:00.000Z');};
+const draft=()=>{db.exec('DELETE FROM auth_settings');db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at) VALUES ('main',?,?,0,0,?)").run(projectUrl,key,'2026-10-02T00:00:00.000Z');};
 draft();
 check(cfg.validateAuthEmailOrigins(globalThis.fixtureEnv.SITE_ORIGIN,globalThis.fixtureEnv.SITE_ORIGIN)===globalThis.fixtureEnv.SITE_ORIGIN,'Mail activation checks the actual provider and application origins before copying templates');
 for(const value of [globalThis.fixtureEnv.SITE_ORIGIN+'/','https://other.example.test']){assert.throws(()=>cfg.validateAuthEmailOrigins(globalThis.fixtureEnv.SITE_ORIGIN,value),/AUTH_EMAIL_ORIGIN/);passed++;}
@@ -57,5 +57,8 @@ check(!ready.email&&!ready.emailSignup&&!ready.emailRecovery&&!ready.google,'Una
 available=true;
 db.prepare("UPDATE auth_settings SET enabled=0,updated_at=? WHERE id='main'").run('2026-10-03T01:00:00.000Z');
 check(!(await cfg.getAuthConfig()).enabled,'Later owner deactivation is never overridden');
+db.prepare("UPDATE auth_settings SET enabled=0,updated_at='2026-10-02',provider='pocketbase',public_key='' WHERE id='main'").run();
+globalThis.fixtureEnv.AUTH_TRUSTED_ORIGIN=projectUrl;globalThis.fixtureEnv.AUTH_TRUSTED_PROVIDER='pocketbase';
+check(!(await cfg.getAuthConfig()).enabled,'An old Supabase scheduled activation cannot activate another protocol on the same endpoint');
 globalThis.fetch=originalFetch;
 console.log(JSON.stringify({emailActivationChecksPassed:passed,realEmailsSent:false}));

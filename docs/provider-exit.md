@@ -1,9 +1,9 @@
 # Anbieterwechsel mit geprüftem Rückweg
 
 Riparim kann auf einem gewöhnlichen Node-Host mit lokaler SQLite und privatem
-Dateispeicher laufen. Auth bleibt ein kleiner Adapter für das tatsächlich
-verwendete Supabase-/GoTrue-Protokoll; eine kompatible selbst betriebene Instanz
-ist möglich. Benachrichtigungen können über SMTP statt Resend gehen. Ein beliebiger
+Dateispeicher laufen. Auth verwendet den eigenen App-Vertrag mit zwei konkreten
+Adaptern für Supabase Auth (auch eine kompatible selbst betriebene Instanz) und
+PocketBase. Benachrichtigungen können über SMTP statt Resend gehen. Ein beliebiger
 OIDC-Anbieter oder ein anderer Datenbanktyp benötigt weiterhin eine gezielte
 Adapteränderung. Der Wechsel ist kein Ein-Klick-Vorgang.
 
@@ -88,7 +88,7 @@ Adapteränderung. Der Wechsel ist kein Ein-Klick-Vorgang.
    serverseitig/offline nach [auth-provider.md](auth-provider.md) konfigurieren.
    Eine deaktivierte oder noch an den alten Customhost gebundene Anmeldung
    setzt keinen verfügbaren Admin-UI-Zugang für den Wechsel voraus.
-6. SMTP/Absender/TLS und den einzelnen Outbox-Timer nach
+6. SMTP/Absender/TLS und den unmittelbaren Ereignisversand nach
    [mail-transports.md](mail-transports.md) konfigurieren. Bereits
    begonnene Ereignisse behalten Transport und Credentialbindung. `unknown`
    beziehungsweise unklare SMTP-Annahmen benötigen externe Klärung; sie dürfen
@@ -100,14 +100,15 @@ Adapteränderung. Der Wechsel ist kein Ein-Klick-Vorgang.
    native Header dürfen keine Verwaltungsrechte geben. Die neue Anmeldung
    ersetzt alte Provider- und App-Sitzungen; deren Stilllegung separat prüfen.
    Quelle bleibt gesperrt. Erst dann Domain/TLS/Proxy umstellen und das Ziel als
-   **einzigen Writer** samt einem Versandjob freigeben. Freigabe und Domainwechsel
+   **einzigen Writer** freigeben. Freigabe und Domainwechsel
    sind Betriebsaktionen und gehören nicht zum automatisierten Wechseltest.
 
 ## Daten erhaltender Rückweg
 
 Vor erster Zieländerung kann auf den unveränderten geprüften Quellbestand
 zurückgegangen werden. Nach Betriebsaufnahme wird die alte Quelle niemals
-blind wieder geöffnet. Zuerst den neuen Writer und seinen Versandjob stoppen,
+blind wieder geöffnet. Zuerst den neuen Writer einschließlich laufender
+Versandanfragen stoppen,
 alle laufenden Arbeiten abfließen lassen und einen **frischen vollständigen
 Zielbestand** über denselben geschützten Export sichern. Node unterstützt diesen
 Export inklusive seiner Runtimehistorie und privaten Objekte.

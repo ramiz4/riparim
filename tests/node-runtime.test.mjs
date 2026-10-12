@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {pocketbaseNodeHttp} from './helpers/pocketbase-node-http.mjs';
 import {providerExitHttp} from './helpers/provider-exit-http.mjs';
 import {spawn,execFile} from 'node:child_process';
 import {promisify} from 'node:util';
@@ -37,7 +38,7 @@ try{
  const marker='workshop-source:'+createHash('sha256').update(JSON.stringify(canonical)).digest('hex');
  db.prepare('INSERT INTO catalog_state VALUES (?,?)').run(marker,'fixture');
  for(const [id,name,status] of [['fixture-public','Synthetic Node Workshop','published'],['fixture-draft','Private Draft Workshop','draft']])db.prepare("INSERT INTO workshops (id,name,city,address,phone,brands,services,specialty,description,sources,checked_at,status,updated_at) VALUES (?,?, 'Prishtina','Synthetic road 1','+38344123456','[]','[\"Inspektion\"]','Synthetic','Fictional workshop for isolated integration','[]','2026-10-01',?,'2026-10-01T00:00:00Z')").run(id,name,status);
- db.prepare("INSERT INTO auth_settings VALUES ('main',?,?,1,0,?)").run('https://node-auth-fixture.supabase.co','sb_publishable_synthetic_fixture_1234567890','2026-10-01T00:00:00Z');
+ db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at) VALUES ('main',?,?,1,0,?)").run('https://node-auth-fixture.supabase.co','sb_publishable_synthetic_fixture_1234567890','2026-10-01T00:00:00Z');
  db.close();
  await start(environment,port);
  const workshops=await (await fetch(origin+'/api/workshops')).json();
@@ -108,6 +109,7 @@ try{
  const exportResponse=await fetch(origin+'/__migration/export?operation=schema',{headers:{Authorization:'Bearer '+'a'.repeat(64)}});assert.equal(exportResponse.status,200);assert((await exportResponse.json()).schema.some(item=>item.name==='riparim_node_migrations'));
  await stop();
  await providerExitHttp({directory,port,start,stop});
+ await pocketbaseNodeHttp({directory,port,start,stop});
  console.log('Actual Node production server: synthetic public pages/APIs, drafts, forged identity, auth refusal, private storage, socket/proxy rate limits, async isolation and outbox command passed');
 }catch(error){throw new Error(`${error.stack}\n${error.stdout??''}\n${error.cause?.stack??''}\n${logs}`);}
 finally{

@@ -2,22 +2,22 @@ import {validAccountName} from "@/lib/account-name";
 import {ValidationError} from "@/lib/validation-error";
 import type {AuthUser as User} from "@/lib/auth/contract";
 import type {AppUser} from "@/app/auth";
-import {resolveSupabaseAccount} from "@/lib/auth/identities";
+import {resolveProviderAccount} from "@/lib/auth/identities";
 import {storage} from "@/db/storage";
 import {providerBlocked} from "@/lib/auth/account-status";
 import {isBootstrapAccount} from "@/lib/auth/roles";
 import {json} from "@/lib/http";
 import type {AccountRole,ManagedUser} from "@/lib/user-contract";
 
-export async function protectedUser(user:User,admin:AppUser,projectUrl:string){
- return await resolveSupabaseAccount(projectUrl,user.id)===admin.userId||isBootstrapAccount(user.email);
+export async function protectedUser(user:User,admin:AppUser,config:{provider:string;projectUrl:string}){
+ return await resolveProviderAccount(config,user.identity.subject)===admin.userId||isBootstrapAccount(user.email);
 }
-export async function userView(user:User,admin:AppUser,projectUrl:string):Promise<ManagedUser>{
- const accountId=await resolveSupabaseAccount(projectUrl,user.id);
+export async function userView(user:User,admin:AppUser,config:{provider:string;projectUrl:string}):Promise<ManagedUser>{
+ const accountId=await resolveProviderAccount(config,user.identity.subject);
  const state=await storage().db.prepare("SELECT (SELECT status FROM auth_account_status WHERE account_id=?) AS status,(SELECT role FROM auth_account_roles WHERE account_id=?) AS role").bind(accountId,accountId).first<{status:string|null;role:string|null}>();
- return {id:user.id,email:user.email??"",name:typeof user.user_metadata?.full_name==="string"?user.user_metadata.full_name:"",role:isBootstrapAccount(user.email)||state?.role==="admin"?"admin":"user",active:!state?.status&&!providerBlocked(user),confirmed:!!user.email_confirmed_at,createdAt:user.created_at??null,lastSignInAt:user.last_sign_in_at??null,providers:[...new Set(user.identities?.map(identity=>identity.provider)??[])],protected:await protectedUser(user,admin,projectUrl)};
+ return {id:user.identity.subject,email:user.email??"",name:typeof user.name==="string"?user.name:"",role:isBootstrapAccount(user.email)||state?.role==="admin"?"admin":"user",active:!state?.status&&!providerBlocked(user),confirmed:!!user.emailVerified,createdAt:user.createdAt??null,lastSignInAt:user.lastSignInAt??null,providers:[...new Set(user.loginProviders)],protected:await protectedUser(user,admin,config)};
 }
-export function validUserId(id:string){return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);}
+export function validUserId(id:string){return !!id&&id.length<=512&&!/[\s\x00-\x1f]/.test(id);}
 export function parseUserFields(body:Record<string,unknown>,creating=false){
  const allowed=creating?["name","email","password","active"]:["name","email","password","active","role"];
  if(!Object.keys(body).length||Object.keys(body).some(key=>!allowed.includes(key)))throw new ValidationError("invalid_request","Bitte prüfe die Eingaben.");
@@ -31,9 +31,9 @@ export function parseUserFields(body:Record<string,unknown>,creating=false){
  return fields;
 }
 export function providerFailure(error:{code?:string;status?:number}|null){
- if(error?.code==="email_exists"||error?.code==="user_already_exists")return json({error:"Diese E-Mail-Adresse wird bereits verwendet.",errorCode:"user_email_exists"},409);
- if(error?.code==="user_not_found"||error?.status===404)return json({error:"Benutzer nicht gefunden.",errorCode:"user_not_found"},404);
+ if(error?.code==="email_exists")return json({error:"Diese E-Mail-Adresse wird bereits verwendet.",errorCode:"user_email_exists"},409);
+ if(error?.code==="not_found"||error?.status===404)return json({error:"Benutzer nicht gefunden.",errorCode:"user_not_found"},404);
  if(error?.code==="weak_password")return json({error:"Bitte wähle ein stärkeres Passwort.",errorCode:"user_password_weak"},400);
  return json({error:"Die Benutzerverwaltung ist gerade nicht verfügbar. Bitte versuche es erneut.",errorCode:"users_unavailable"},503);
 }
-export const notConfigured=()=>json({error:"Für die Benutzerverwaltung muss der geheime Supabase-Schlüssel in der Serverkonfiguration hinterlegt sein.",errorCode:"users_configuration_missing"},503);
+export const notConfigured=()=>json({error:"Für die Benutzerverwaltung muss der passend gebundene Auth-Adminschlüssel in der Serverkonfiguration hinterlegt sein.",errorCode:"users_configuration_missing"},503);
