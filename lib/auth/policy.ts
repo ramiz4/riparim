@@ -6,8 +6,8 @@ export type LegacyLink={legacy_owner:string;password_access:number};
 const normalized=(email:string)=>email.trim().toLowerCase();
 
 export function googleIdentityMatches(user:User,subject:string|null,email=user.email):boolean{
- if(!subject||!email||!user.email_confirmed_at||!user.email||normalized(email)!==normalized(user.email))return false;
- return !!user.identities?.some(identity=>identity.provider==="google"&&identity.identity_data?.sub===subject&&identity.identity_data?.email_verified===true&&typeof identity.identity_data?.email==="string"&&normalized(identity.identity_data.email)===normalized(email));
+ if(!subject||!email||!user.emailVerified||!user.email||normalized(email)!==normalized(user.email))return false;
+ return !!user.googleIdentities.some(identity=>identity.subject===subject&&identity.emailVerified&&normalized(identity.email)===normalized(email));
 }
 
 export function verifiedGoogleProfile(user:User,profile:unknown):GoogleProfile{

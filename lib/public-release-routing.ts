@@ -36,7 +36,13 @@ export async function servePublicRelease(request:Request,env:Cloudflare.Env){
   const result=await env.DB.prepare("SELECT group_concat(id || '@' || updated_at, '|') AS revisions FROM (SELECT id,updated_at FROM workshops WHERE status='published' ORDER BY id)").first<{revisions:string|null}>();
   current=(result?.revisions??"")===__RIPARIM_PUBLIC_REVISIONS__.map(w=>w.id+"@"+w.updatedAt).join("|");
  }
- const selected=current?asset:asset.replace(/\.html$/,"-shell.html");
+ let selected=current?asset:asset.replace(/\.html$/,"-shell.html");
+ // The provider name follows even a disabled draft; one settings read keeps
+ // privacy accurate without rendering React or contacting the auth provider.
+ if(identity==="/datenschutz"){
+  const config=await env.DB.prepare("SELECT provider FROM auth_settings WHERE id='main'").first<{provider:string}>();
+  if(config?.provider==="pocketbase")selected=asset.replace(/\.html$/,"-pocketbase.html");
+ }
  const target=new URL(selected,url.origin);
  const response=await env.ASSETS.fetch(new Request(target,{method:request.method}));
  if(response.status!==200){await response.body?.cancel();return null;}

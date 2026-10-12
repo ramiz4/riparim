@@ -340,3 +340,11 @@ try {
   } finally { await rm(outside, { recursive: true, force: true }); }
 } finally { await rm(directory, { recursive: true, force: true }); }
 console.log(`${checks} data transfer checks passed.`);
+
+test("provider selection and started deletion identities survive a complete protected snapshot restore",()=>{
+ const source=fixture(migrations.length);source.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at,provider) VALUES ('main','https://auth.fixture.example','',1,1,'2026-10-12','pocketbase')").run();
+ source.prepare("INSERT INTO auth_account_deletions (account_id,user_id,token_hash,expires_at,started,identity_provider,identity_issuer) VALUES ('opaque-stable-account','memberrecord001','synthetic-private-grant-hash',9999999999999,1,'pocketbase','https://auth.fixture.example')").run();
+ const restored=restoreSnapshot(snapshotDatabase(source,metadata),migrations).database;
+ assert.equal(restored.prepare("SELECT provider FROM auth_settings").get().provider,'pocketbase');
+ assert.equal(restored.prepare("SELECT identity_provider FROM auth_account_deletions WHERE started=1").get().identity_provider,'pocketbase');restored.close();source.close();
+});

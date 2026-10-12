@@ -44,6 +44,6 @@ export async function proxy(request:NextRequest){
  const c=await getAuthConfig();if(!c?.enabled)return response;
  const local=["localhost","127.0.0.1"].includes(canonical.hostname);
  const client=createAuthClient(c,{getAll(){return request.cookies.getAll();},setAll(values){values.forEach(({name,value})=>request.cookies.set(name,value));response=createResponse();values.forEach(({name,value,options})=>response.cookies.set(name,value,options));}},!local);
- await client.auth.getUser();return response;
+ await client.getUser();return response;
 }
 export const config={matcher:["/((?!_next/static|_next/image).*)"]};

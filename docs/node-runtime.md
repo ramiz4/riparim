@@ -78,7 +78,7 @@ exklusiven administrativen Zugriff auf das Verzeichnis. Downloads laufen
 weiterhin ausschließlich durch die bestehenden APIs mit Besitz-/Adminprüfung
 und `Cache-Control: private, no-store`. Sites-Identitätsheader begründen im
 Node-Betrieb weder Kunden- noch Adminrechte, auch bei fehlender Auth-Konfiguration.
-Die echte Anmeldung verwendet den konfigurierten Auth-Host: standardmäßig Supabase, alternativ eine ausdrücklich freigegebene kompatible Instanz gemäß [auth-provider.md](auth-provider.md). `AUTH_TRUSTED_ORIGIN`, `SUPABASE_SECRET_KEY_ORIGIN` und `SUPABASE_SECRET_KEY` werden auch im Node-Weg ausschließlich aus der geschützten Laufzeitumgebung gelesen.
+Die echte Anmeldung verwendet den konfigurierten Auth-Host: standardmäßig Supabase, alternativ eine ausdrücklich freigegebene Supabase-kompatible Instanz oder das konkrete PocketBase-Profil gemäß [auth-provider.md](auth-provider.md). `AUTH_TRUSTED_ORIGIN`/`AUTH_TRUSTED_PROVIDER`, die `AUTH_ADMIN_KEY`-Credentialbindings sowie die kompatiblen `SUPABASE_SECRET_KEY`-Werte werden auch im Node-Weg ausschließlich aus der geschützten Laufzeitumgebung gelesen.
 
 `db:migrate:node` führt die SQL-Dateien in aufsteigender Reihenfolge aus.
 `riparim_node_migrations` speichert Dateiname, SHA-256 und Zeitpunkt. Jede

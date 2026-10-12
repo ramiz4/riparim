@@ -99,7 +99,7 @@ try{
   for(const [locale,sent] of [['de','An Versanddienst übergeben'],['sq','I është dorëzuar shërbimit të dërgimit'],['en','Handed to the email service']]){
    await render(locale,NotificationStatus);check(document.querySelector('.notification-entry').textContent.includes(sent),'Retained delivery diagnostics still distinguish service acceptance from delivery in every locale');
   }
-  const config={projectUrl:'https://fixture-project.supabase.co',publicKey:'sb_publishable_fixture_public_key_1234567890',enabled:false,emailDeliveryConfirmed:false};
+  const config={provider:'supabase',projectUrl:'https://fixture-project.supabase.co',publicKey:'sb_publishable_fixture_public_key_1234567890',enabled:false,emailDeliveryConfirmed:false};
   globalThis.fetch=async(url,init)=>{requests.push({url,init});return init?.method?Response.json({error:'Private raw configuration error',errorCode:'auth_provider_connection'},{status:400}):Response.json({config});};
   for(const [locale,title] of [['de','Anmeldung verbinden.'],['sq','Lidh hyrjen.'],['en','Connect authentication.']]){
    await render(locale,AuthSetup,{account:{email:'admin@example.test',displayName:'Fixture Admin',provider:'E-Mail'}});check(document.querySelector('h1').textContent===title,'Auth setup has active-locale labels and instructions');

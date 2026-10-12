@@ -599,3 +599,24 @@ Startseite und Datenschutz werden wie Katalog/Profile aus dem geprüften Release
 Die Moderation wartet den ersten Mailversuch ab. Die native D1-Fixture bestätigt die tatsächliche sofortige Übergabe ohne Scheduled-Handler. Fehler erlauben maximal fünf manuelle Wiederholungen, nach Wartezeiten von 1/5/15/30/60 Minuten. Tests prüfen frühe Anfragen, erschöpfte Budgets, parallele Claims, unveränderte Payloadbytes, Empfänger-/Credentialänderungen, Resend-Fristen, SMTP-Unklarheit und den fehlenden Sammelversand. Die aufklappbare Versandübersicht lädt erst auf Anforderung und pollt nicht. React-Prüfungen schützen Beschriftungen, deaktivierte Aktionen, Status-/Fehlermeldungen und die erhaltenen Moderationsabläufe in DE/SQ/EN.
 
 Der lokale CPU-Profiler verwendet ausschließlich einen isolierten workerd, Canonical-Fixtures und blockierte Providerzugriffe. Er misst Stichproben der aktiven CPU, keine Cloudflare-Abrechnung oder verbindliche Produktionsobergrenze. Die Messung nach einem geprüften Main-Release bleibt für seltene/private Aufrufpfade nötig. Die native Browserprüfung war in dieser Sitzung wegen wiederholter Meldungen „The user changed Google Chrome“ nicht zuverlässig ausführbar; es wird keine erfolgreiche native Layout-/Theme-Abnahme behauptet.
+
+
+## Auth-Anbieterprüfung (Issue #139, 12. Oktober 2026)
+
+Die tatsächliche Setupkomponente und sämtliche bestehenden Layoutstyles wurden
+im bestätigten Chrome-Profil geprüft: DE Light auf 1280 Pixeln, SQ Dark und EN
+System auf 390 Pixeln sowie Lade-, Busy- und Fehlerzustände. Tastaturauswahl,
+Tabfokus, Anbieterwechsel im Entwurf, gesperrte Felder/Sprachnavigation und
+anbieterspezifische Hilfe funktionierten ohne horizontalen Dokumentüberlauf.
+PocketBase zeigt kein Public-Keyfeld; die Speicherfehlermeldung nennt neutral
+Adresse und Konfiguration des Anmeldedienstes. Requests hatten ausschließlich
+synthetische Antworten und lösten keine echten Providerwrites oder E-Mails aus.
+
+Automatisiert sprechen die tatsächlichen Adapter und App-Routen unabhängige
+Supabase-/PocketBase-Protokollserver. Der echte Node-HTTP-Test prüft zusätzlich
+PocketBase über eine lokale TLS-Instanz, Runtimebindings, bestehende private
+Besitzpfade, Profil-/Reauthablauf, Rollen, kontrollierten Wechsel, Datenschutz
+und Logout. Eine separate lokale PocketBase-0.40.5-Probe bestätigt dessen
+aktuelle REST-/ExternalAuth-Verträge mit synthetischen Konten. Ein echter
+Googleclient, produktiver SMTP-Versand und eine Live-Hash-/Kontoübernahme waren
+nicht Gegenstand dieser Probe; Voraussetzungen stehen in [auth-provider.md](auth-provider.md).

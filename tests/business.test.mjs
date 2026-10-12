@@ -191,7 +191,7 @@ for(const winningValidation of [1,2]){
   assert.deepEqual(readWinner(),committed,'A losing optimistic decision cannot overwrite the winner’s profile, audit data or Google identity');passed++;
  }finally{Date.now=originalNow;holdBatch=null;}
 }
-const deleteAuth={projectUrl,client:{auth:{admin:{deleteUser:async()=>({error:null})}}}};
+const deleteAuth={projectUrl,provider:"supabase",client:{deleteUser:async()=>({error:null})}};
 await cleanup.deleteAccount(deleteAuth,aId);
 check(![...objects.keys()].some(key=>key.startsWith('evidence/'+actors.a.userId+'/'))&&db.prepare('SELECT COUNT(*) AS n FROM evidence_uploads WHERE owner=?').get(actors.a.userId).n===0,'Account deletion removes claim documents and failed-upload inventory');
 check(db.prepare('SELECT COUNT(*) AS n FROM workshop_claims WHERE owner=?').get(actors.a.userId).n===0&&db.prepare('SELECT COUNT(*) AS n FROM workshop_changes WHERE owner IN (?,?)').get(actors.a.userId,'legacy-a').n===0,'Account deletion removes private ownership evidence and drafts, including linked legacy records');

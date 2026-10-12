@@ -1,3 +1,4 @@
+import {authAdmin as neutralAdmin} from './helpers/auth-contract.mjs';
 import {localizeHref} from '../scripts/lib/locale.mjs';
 import assert from 'node:assert/strict';
 import {mkdir,readFile,readdir,writeFile} from 'node:fs/promises';
@@ -53,10 +54,10 @@ const d1={prepare(sql){const statement=db.prepare(sql);const adapter=(values=[])
  return {meta:result};}});return adapter();}};
 const projectUrl='https://fixture-project.supabase.co',subject='00000000-0000-4000-8000-000000000001',owner=`supabase:fixture-project.supabase.co:${subject}`;
 let locale='de',contact='member@example.test',currentEvent;
-globalThis.fixtureAuthAdmin={projectUrl,client:{auth:{admin:{getUserById:async id=>({data:{user:{id,email:contact,email_confirmed_at:'2026-10-04',user_metadata:{preferred_locale:locale}}},error:null})}}}};
+globalThis.fixtureAuthAdmin={projectUrl,provider:"supabase",client:neutralAdmin({getUserById:async id=>({data:{user:{id,email:contact,email_confirmed_at:'2026-10-04',user_metadata:{preferred_locale:locale}}},error:null})},projectUrl)};
 const smtpUrl=`smtp://127.0.0.1:${server.address().port}`;
 globalThis.fixtureEnv={DB:d1,BUCKET:{},SITE_ORIGIN:'https://riparim.example.test',EMAIL_TRANSPORT:'smtp',SMTP_URL:smtpUrl,TRANSACTIONAL_EMAIL_FROM:'Riparim <no-reply@auth.example.test>',RESEND_API_KEY:'re_fixture_secret'};
-db.prepare("INSERT INTO auth_settings VALUES ('main',?,?,1,1,'2026-10-04')").run(projectUrl,'sb_publishable_fixture_key_12345678901234567890');
+db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at) VALUES ('main',?,?,1,1,'2026-10-04')").run(projectUrl,'sb_publishable_fixture_key_12345678901234567890');
 const outbox=await import(new URL(`../${out}/outbox.mjs`,import.meta.url));
 const event=()=>db.prepare('SELECT * FROM review_notifications WHERE id=?').get(currentEvent);
 function enqueue(){

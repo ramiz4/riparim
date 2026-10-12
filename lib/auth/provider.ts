@@ -1,33 +1,21 @@
-import {createServerClient} from '@supabase/ssr';
-import {createClient} from '@supabase/supabase-js';
 import type {AuthConfig} from './config';
 import type {AuthClient,AuthAdminClient,AuthCookies} from './contract';
-import {trustedAuthOrigin,authSecretMatchesOrigin,providerFetch,hostedAuthOrigin} from './origin';
+import {supabaseClient,supabaseAdmin,supabaseAvailability,validateSupabaseKey,validSupabaseSecret,normalizeSupabaseSubject} from './adapters/supabase';
+import {pocketbaseClient,pocketbaseAdmin,pocketbaseAvailability} from './adapters/pocketbase';
+import {trustedAuthOrigin,authSecretMatchesOrigin} from './origin';
 
+export {validateSupabaseKey,validSupabaseSecret};
 export function createAuthClient(config:AuthConfig,cookies:AuthCookies,secure:boolean):AuthClient{
- const origin=trustedAuthOrigin(config.projectUrl);
- const client=createServerClient(origin,config.publicKey,{
-  // Hosted cookie names remain compatible. Custom instances include the complete
-  // origin: SDK defaults only use the first hostname label and collide on ports.
-  cookieOptions:{...(!hostedAuthOrigin(origin)?{name:'riparim-auth-'+encodeURIComponent(origin)}:{}),httpOnly:true,secure,sameSite:'lax',path:'/'},cookies,
-  global:{fetch:providerFetch(origin)}
- });
- return {auth:client.auth};
+ return config.provider==='pocketbase'?pocketbaseClient(config,cookies,secure):supabaseClient(config,cookies,secure);
 }
 export function createPasswordClient(config:AuthConfig):AuthClient{
- const origin=trustedAuthOrigin(config.projectUrl);
- const client=createClient(origin,config.publicKey,{
-  auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false},
-  global:{fetch:providerFetch(origin)}
- });
- return {auth:client.auth};
+ return config.provider==='pocketbase'?pocketbaseClient(config,null,true):supabaseClient(config,null,true);
 }
-export function createAuthAdminClient(projectUrl:string,key:string):AuthAdminClient{
- const origin=trustedAuthOrigin(projectUrl);
- if(!authSecretMatchesOrigin(origin))throw Error('AUTH_SECRET_ORIGIN_MISMATCH');
- const client=createClient(origin,key,{
-  auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false},
-  global:{fetch:providerFetch(origin)}
- });
- return {auth:{admin:client.auth.admin}};
+export function createAuthAdminClient(config:Pick<AuthConfig,'provider'|'projectUrl'>,key:string):AuthAdminClient{
+ const origin=trustedAuthOrigin(config.projectUrl,config.provider);
+ if(!authSecretMatchesOrigin(origin,config.provider))throw Error('AUTH_SECRET_ORIGIN_MISMATCH');
+ return config.provider==='pocketbase'?pocketbaseAdmin(origin,key):supabaseAdmin(origin,key);
 }
+export function authAvailability(config:Pick<AuthConfig,'provider'|'projectUrl'|'publicKey'>){return config.provider==='pocketbase'?pocketbaseAvailability(config):supabaseAvailability(config);}
+
+export function normalizeAuthSubject(provider:string,id:string){return provider==='supabase'?normalizeSupabaseSubject(id):provider==='pocketbase'&&/^[a-z0-9]{15}$/.test(id)?id:null;}
