@@ -10,7 +10,7 @@ try{
  mkdirSync(certs,{recursive:true});mkdirSync(bin);
  copyFileSync(new URL('../scripts/backup-supabase-auth.py',import.meta.url),join(scripts,'backup.py'));
  copyFileSync(new URL('../scripts/certs/supabase-prod-ca-2021.crt',import.meta.url),join(certs,'supabase-prod-ca-2021.crt'));
- const key=join(root,'private.pem'),cert=join(certs,'auth-backup-recipient.pem');
+ const key=join(root,'private.pem'),cert=join(certs,'auth-backup-recipient.crt');
  assert.equal(spawnSync('openssl',['req','-x509','-newkey','rsa:3072','-nodes','-keyout',key,'-out',cert,'-days','1','-subj','/CN=synthetic-backup']).status,0);
  writeFileSync(join(bin,'pg_dump'),`#!/usr/bin/env python3
 import os,sys

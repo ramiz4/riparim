@@ -50,7 +50,7 @@ def backup(destination):
         encrypted = Path(temporary) / "auth.dump.cms"
         run(["openssl", "cms", "-encrypt", "-binary", "-aes-256-gcm",
              "-in", str(dump), "-out", str(encrypted), "-outform", "DER",
-             str(ROOT / "certs/auth-backup-recipient.pem")])
+             str(ROOT / "certs/auth-backup-recipient.crt")])
         # Publish only after dump validation and encryption both succeeded.
         destination.mkdir(mode=0o700)
         try:
