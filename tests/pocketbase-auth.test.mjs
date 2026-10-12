@@ -58,7 +58,7 @@ const server=createServer(async(request,response)=>{
  return json({status:404,message:'Missing fixture',data:{}},404);
 });
 await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const transport='http://127.0.0.1:'+server.address().port,originalFetch=globalThis.fetch;
-globalThis.fetch=(input,init)=>{const url=new URL(input instanceof Request?input.url:String(input));if(url.origin==='https://openidconnect.googleapis.com'){assert(googleProof);assert.equal(init.headers.Authorization,'Bearer fixture-google-proof');return originalFetch(new URL('/google/userinfo',transport),init);}assert.equal(url.origin,providerOrigin);assert.equal(init.redirect,'error');return originalFetch(new URL(url.pathname+url.search,transport),init);};
+globalThis.fetch=(input,init)=>{const url=new URL(input instanceof Request?input.url:String(input));if(url.origin==='https://openidconnect.googleapis.com'){assert(googleProof);assert.equal(init.headers.Authorization,'Bearer fixture-google-proof');return originalFetch(new URL('/google/userinfo',transport),init);}assert.equal(url.origin,providerOrigin);assert.equal(init.redirect,'manual');return originalFetch(new URL(url.pathname+url.search,transport),init);};
 const post=(action,body={})=>auth.authPost(new Request(origin+'/api/auth/'+action,{method:'POST',headers:{origin,'content-type':'application/json'},body:JSON.stringify(body)}),{params:Promise.resolve({action})});
 try{
  const source=auth.supabaseIdentity('https://previous-fixture.supabase.co','00000000-0000-4000-8000-000000000099'),destination={provider:'pocketbase',issuer:providerOrigin,subject:id};
