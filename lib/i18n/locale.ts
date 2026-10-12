@@ -41,7 +41,7 @@ export function pageIdentityPath(path:string):string{
 }
 // Current physical public files, independently checked against public/ in tests.
 // Exact paths prevent unknown dotted page routes bypassing Vinext's 404 guard.
-export const publicAssetPaths:readonly string[]=["/diagnostics.jpg","/diagnostics-640.webp","/diagnostics-1024.webp","/diagnostics-1536.webp","/favicon.svg","/googled8cf505b6c63892b.html","/logo.png","/riparim-icon-display.png","/riparim-icon.png","/riparim-logo-display.png","/riparim-logo.png","/workshop.jpg","/workshop-640.webp","/workshop-1024.webp","/workshop-1536.webp"];
+export const publicAssetPaths:readonly string[]=["/diagnostics.jpg","/diagnostics-640.webp","/diagnostics-1024.webp","/diagnostics-1536.webp","/favicon.svg","/googled8cf505b6c63892b.html","/logo.png","/partner-bodywork-bg.webp","/partner-diagnostics-bg.webp","/partner-maintenance-bg-v2.webp","/review-experience-640.webp","/review-experience-1024.webp","/review-experience-1280.webp","/riparim-icon-display.png","/riparim-icon.png","/riparim-logo-display.png","/riparim-logo.png","/workshop.jpg","/workshop-640.webp","/workshop-1024.webp","/workshop-1536.webp"];
 const technicalMetadataPaths=new Set(["/robots.txt","/sitemap.xml","/favicon.ico"]);
 export function isStaticOrMetadataPath(path:string):boolean{return publicAssetPaths.includes(path)||technicalMetadataPaths.has(path);}
 export function isTechnicalPath(path: string): boolean {

@@ -235,6 +235,13 @@ als zufällige Auswahl gezeigt; auf Nutzerwunsch ohne „Beispielplatzierung“-
 Diese Auswahl aktiviert keinen Premium-Status. Weder die Auswahl noch eine
 bezahlte Platzierung ist eine Qualitätsprüfung.
 
+Die drei Kartenhintergründe sind generierte Symbolbilder; sie stammen nicht
+aus den angezeigten Betrieben. Die Karten kennzeichnen sie entsprechend.
+Ein statischer dunkler Verlauf hält Name, Leistung und Ort in beiden Themes
+lesbar. Die Bildmotive werden je Kartenplatz vergeben, nicht als Profilfotos
+in den Werkstattdaten gespeichert. Die Prompts stehen unter
+`assets/partner-background-prompts.json`.
+
 Beim Deployment des geprüften Main-Releases wird die additive Migration vor
 der neuen Anwendung angewendet. Produktionspartner werden nicht automatisch aktiviert. Die Tests verwenden ausschließlich
 isolierte Datenbanken und fiktive Administration, ohne Zahlungen oder Livewrites.

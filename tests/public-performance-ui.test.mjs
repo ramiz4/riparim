@@ -53,20 +53,11 @@ try{
      assert.equal(partnerHeader.textContent,t('public.partnerTitle'),'partner header contains only the title');
      assert(partnerHeader.querySelector('h2 svg'),'partner title includes its decorative icon');
      assert.equal(partnerHeader.querySelectorAll('p,button,a').length,0,'partner header has no extra copy or actions');
-     const shortcuts=doc.querySelector('.shortcuts-section');
-     assert(shortcuts.previousElementSibling.matches('.discover-section'),'shortcuts follow the workshop cards');
-     assert.equal(shortcuts.querySelector('h2').textContent,t('public.shortcutsTitle'));
-     const links=[...shortcuts.querySelectorAll('a')];
-     assert.equal(links.length,12,'six locations and all six service categories are available');
-     for(const link of links){
-      const url=new URL(link.getAttribute('href'),'https://riparim.example.test');
-      assert.equal(url.pathname,locale==='de'?'/werkstaetten':locale==='sq'?'/sq/serviset':'/en/workshops','shortcut preserves the active locale');
-      assert.equal(url.searchParams.size,1,'each shortcut starts with exactly one public filter');
-      assert(['ort','leistung'].includes([...url.searchParams.keys()][0]));
-      assert(link.textContent.trim(),'shortcut has a visible accessible label');
-     }
-     assert(links.some(link=>link.getAttribute('href').endsWith('?ort=prishtina')));
-     assert(links.some(link=>link.getAttribute('href').endsWith('?leistung=diagnose-elektronik')));
+     assert(!doc.querySelector('.shortcuts-section'),'the old location and service link section is removed');
+     const invitation=doc.querySelector('.review-invitation');
+     assert(invitation.previousElementSibling.matches('.discover-section'),'review invitation follows the workshop cards');
+     assert.equal(invitation.querySelector('a').getAttribute('href'),locale==='de'?'/werkstaetten':locale==='sq'?'/sq/serviset':'/en/workshops','review invitation selects a public workshop in the active locale');
+     assert.equal(invitation.querySelector('a').textContent,t('public.reviewInviteAction'),'review action clearly asks visitors to select the workshop they visited');
      assert(doc.querySelector('.landing-hero #suche form'),'quick search is inside the hero before JavaScript loads');
      assert.equal(doc.querySelector('.landing-hero-content>p').textContent,t('public.heroBenefit'));
      assert.equal(doc.querySelectorAll('main form').length,1,'landing has one search form');
