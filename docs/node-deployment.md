@@ -9,6 +9,11 @@ führt ausschließlich `npm ci --omit=dev --ignore-scripts` aus; Node.js **24 ab
 24.10**, npm und POSIX `tar` sind erforderlich. Linux/systemd ist das folgende
 Betriebsbeispiel; der hostlokale Installer benötigt keine Hostinganbieter-API.
 
+## Abgeschlossene Hosting-Evaluierung
+
+Oracle Always Free wurde am 11.–12. Oktober 2026 für Riparim evaluiert und
+als Hostingziel verworfen.
+
 ## Veröffentlichung und Zielauswahl
 
 CI prüft und paketiert alle drei Ziele aus demselben unveränderten Commit.
