@@ -213,3 +213,35 @@ Telefonkonflikts zurückgestellt. Weitere Rechercheergebnisse und der genaue
 PR-/Release-/Liveabnahmestatus stehen im
 [heutigen Manifest](../data/import-2026-10-12-daily.json). Die tägliche Routine
 verwendet gemäß Nutzerentscheidung immer die öffentliche Maps-Oberfläche.
+
+## Premium-Partnerplätze
+
+Migration `0019_rare_molecule_man.sql` ergänzt `workshop_premium` unabhängig
+von den importierten Profilfeldern. Bestehende Werkstätten werden nicht zu
+Premium-Partnern; es gibt keine Datenübernahme und keine Zahlungsintegration.
+Die Verwaltung aktiviert einen Platz nach extern bestätigter Zahlung über
+„Premium-Partner“ in der Werkstattliste und entfernt ihn bei Ende der Vereinbarung.
+Nur die serverseitig autorisierte Administration darf den Status ändern.
+Aktivierung verlangt im Schreibstatement ein veröffentlichtes Profil; öffentliche
+Partnerdaten schließen Entwürfe immer aus. Profilimporte überschreiben den
+Premium-Status nicht; Profillöschung entfernt ihn per Fremdschlüssel.
+
+Die Startseite mischt die zulässigen Partner bei jedem Laden und zeigt höchstens
+drei, ohne Duplikate. Zufällige Auswahlen können sich wiederholen. Sobald
+veröffentlichte aktive Partner existieren, besteht die Auswahl ausschließlich
+aus diesen und wird als Anzeige gekennzeichnet. Ohne aktive veröffentlichte
+Partner werden auf ausdrücklichen Nutzerwunsch drei veröffentlichte Betriebe
+als zufällige Auswahl gezeigt; auf Nutzerwunsch ohne „Beispielplatzierung“-Text.
+Diese Auswahl aktiviert keinen Premium-Status. Weder die Auswahl noch eine
+bezahlte Platzierung ist eine Qualitätsprüfung.
+
+Die drei Kartenhintergründe sind generierte Symbolbilder; sie stammen nicht
+aus den angezeigten Betrieben. Die Karten kennzeichnen sie entsprechend.
+Ein statischer dunkler Verlauf hält Name, Leistung und Ort in beiden Themes
+lesbar. Die Bildmotive werden je Kartenplatz vergeben, nicht als Profilfotos
+in den Werkstattdaten gespeichert. Die Prompts stehen unter
+`assets/partner-background-prompts.json`.
+
+Beim Deployment des geprüften Main-Releases wird die additive Migration vor
+der neuen Anwendung angewendet. Produktionspartner werden nicht automatisch aktiviert. Die Tests verwenden ausschließlich
+isolierte Datenbanken und fiktive Administration, ohne Zahlungen oder Livewrites.

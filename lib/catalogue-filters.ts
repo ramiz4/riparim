@@ -2,7 +2,6 @@ import {displayComparator} from "@/lib/i18n/collation";
 import {valueLabel} from "@/lib/i18n/values";
 import {localizeHref,type Locale} from "@/lib/i18n/locale";
 import {brands,cities,services,cityCoordinates,findWorkshops,type Workshop} from "@/lib/workshops";
-import type {SearchContext} from "@/components/detail-search";
 
 export type CatalogueSort="name"|"rating"|"distance";
 export type CatalogueFilters={query:string;service:string;city:string;brand:string;language:string;sort:CatalogueSort};
@@ -62,10 +61,9 @@ function catalogueComparator(filters:CatalogueFilters,locale:Locale){
 export function orderedCatalogue(directory:Workshop[],filters:CatalogueFilters,locale:Locale="de"){
  return directory.filter(w=>w.status==="published").sort(catalogueComparator(filters,locale));
 }
-export function matchCatalogue(directory:Workshop[],filters:CatalogueFilters,context:SearchContext|null=null,privateMatchingActive=false,locale:Locale="de"){
- const geography=privateMatchingActive&&context&&context.city===filters.city?context:null;
+export function matchCatalogue(directory:Workshop[],filters:CatalogueFilters,locale:Locale="de"){
  const words=searchText(catalogueQuery(filters.query??"")).split(" ").filter(Boolean);
- return findWorkshops(directory,filters.service,filters.city,filters.brand,geography?.radius??0,filters.language,geography?.additionalCity??"").filter(w=>w.status==="published"&&(filters.brand===brands[0]||w.brands.includes(filters.brand)||w.brands.includes(brands[0]))&&words.every(word=>searchText(w.name).includes(word))).sort(catalogueComparator(filters,locale));
+ return findWorkshops(directory,filters.service,filters.city,filters.brand,filters.language).filter(w=>w.status==="published"&&(filters.brand===brands[0]||w.brands.includes(filters.brand)||w.brands.includes(brands[0]))&&words.every(word=>searchText(w.name).includes(word))).sort(catalogueComparator(filters,locale));
 }
 
 export function activeCatalogueFilters(filters:CatalogueFilters){return (["query","service","city","brand","language"] as const).filter(key=>key==="query"?!!catalogueQuery(filters.query??""):filters[key]!==defaultCatalogueFilters[key]);}

@@ -1,6 +1,12 @@
 import {defineMessages,type MessageShape} from "./message-contract";
 
 export const managementDe={
+ "premiumManage": "Premium-Partner",
+ "premiumSave": "Speichern",
+ "premiumHelp": "Nur nach bestätigter Zahlung aktivieren. Die Zahlungsabwicklung erfolgt extern. Die Platzierung ist keine Qualitätsprüfung.",
+ "premiumActive": "Als zahlenden Premium-Partner anzeigen",
+ "premiumPublishedOnly": "Nur veröffentlichte Werkstätten können als Premium-Partner erscheinen.",
+
  administration:"Verwaltung",workshops:"Werkstätten",moderateReviews:"Bewertungen prüfen",users:"Benutzer",businesses:"Betriebe",loginRegistration:"Login & Registrierung",
  "confirmedProfiles":"Deine Profile",
  "profilesHelp":"Bearbeite Kontakt, Leistungen und Beschreibung. Änderungen werden erst nach Freigabe öffentlich.",
@@ -476,6 +482,12 @@ export const managementDe={
 } as const;
 const checked=defineMessages<typeof managementDe>();
 export const managementSq=/* @__PURE__ */checked({
+ "premiumManage": "Partner Premium",
+ "premiumSave": "Ruaj",
+ "premiumHelp": "Aktivizo vetëm pas konfirmimit të pagesës. Pagesat trajtohen jashtë platformës. Vendosja nuk është kontroll cilësie.",
+ "premiumActive": "Shfaq si partner Premium që paguan",
+ "premiumPublishedOnly": "Vetëm serviset e publikuara mund të shfaqen si partnerë Premium.",
+
  administration:"Administrimi",workshops:"Serviset",moderateReviews:"Kontrollo vlerësimet",users:"Përdoruesit",businesses:"Bizneset",loginRegistration:"Hyrja & regjistrimi",
  "confirmedProfiles":"Profilet e tua",
  "profilesHelp":"Ndrysho kontaktin, shërbimet dhe përshkrimin. Ndryshimet publikohen vetëm pas miratimit.",
@@ -950,6 +962,12 @@ export const managementSq=/* @__PURE__ */checked({
  "retrySubmissions":"Ngarko përsëri dorëzimet",
 } as const satisfies MessageShape<typeof managementDe>);
 export const managementEn=/* @__PURE__ */checked({
+ "premiumManage": "Premium partner",
+ "premiumSave": "Save",
+ "premiumHelp": "Activate only after payment is confirmed. Payments are handled externally. Placement is not a quality assessment.",
+ "premiumActive": "Display as a paying Premium partner",
+ "premiumPublishedOnly": "Only published workshops can appear as Premium partners.",
+
  administration:"Administration",workshops:"Workshops",moderateReviews:"Review moderation",users:"Users",businesses:"Businesses",loginRegistration:"Login & registration",
  "confirmedProfiles":"Your profiles",
  "profilesHelp":"Edit contact details, services and description. Changes become public only after approval.",

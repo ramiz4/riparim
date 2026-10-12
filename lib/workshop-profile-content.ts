@@ -1,6 +1,5 @@
 import type {Locale} from "./i18n/locale";
 import type {Workshop} from "./workshops";
-import type {SearchContext} from "@/app/journeys";
 import type {CatalogueFilters} from "./catalogue-filters";
 
 // Display overlays are independent of factual/stored values and selection rules.
@@ -28,9 +27,9 @@ export function groupWorkshopServices(workshop:Pick<Workshop,"services"|"service
  }
  return [...groups,...(other.items.length?[other]:[])];
 }
-export type ProfileSelection={brand:string|null;service:string|null;vehicle:string|null};
-export function profileSelection(filters:Pick<CatalogueFilters,"brand"|"service">,context?:SearchContext|null):ProfileSelection{
- const brand=context?.brand??filters.brand,service=context?.service??filters.service;
- return {brand:brand&&brand!=="Alle Marken"?brand:null,service:service&&service!=="Alle Leistungen"?service:null,vehicle:context?.model?[brand!=="Alle Marken"?brand:null,context.model,context.year?`(${context.year})`:null].filter(Boolean).join(" "):null};
+export type ProfileSelection={brand:string|null;service:string|null};
+export function profileSelection(filters:Pick<CatalogueFilters,"brand"|"service">):ProfileSelection{
+ const {brand,service}=filters;
+ return {brand:brand&&brand!=="Alle Marken"?brand:null,service:service&&service!=="Alle Leistungen"?service:null};
 }
 export function workshopSelectionMatches(workshop:Pick<Workshop,"brands"|"services">,selection:ProfileSelection){return {brand:!!selection.brand&&(workshop.brands.includes(selection.brand)||workshop.brands.includes("Alle Marken")),service:!!selection.service&&workshop.services.includes(selection.service)};}

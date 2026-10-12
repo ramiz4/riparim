@@ -26,11 +26,9 @@ check(!/private|Golf|problem|model|year|radius|2026/.test(url),'private fields n
 const parsed=parseCatalogueFilters(new URLSearchParams(url.split('?')[1]),data);
 check(parsed.brand==='Volkswagen'&&parsed.city==='Fushë Kosovë'&&parsed.language==='Englisch'&&parsed.sort==='rating','public URL filters round-trip independently of memory');
 check(JSON.stringify(parseCatalogueFilters(new URLSearchParams(),data))===JSON.stringify(defaults),'empty URL means standard filters');
-const context={brand:'Alle Marken',model:'private model',year:'2019',problem:'private problem',service:'Inspektion & Wartung',city:'Prishtina',additionalCity:'Peja',radius:0,from:'2026-10-03',to:'2026-10-10'};
 const city={...defaults,city:'Prishtina'};
-check(matchCatalogue(data,city,context,true).some(w=>w.city==='Peja'),'explicit active private second-city matching works in the same context city');
-check(!matchCatalogue(data,city,context,false).some(w=>w.city==='Peja'),'inactive private draft cannot affect geographic matches');
-check(matchCatalogue(data,{...city,city:'Peja'},context,true).every(w=>w.city==='Peja'),'changing public city prevents the old private geographic rules');
+check(matchCatalogue(data,city).every(w=>w.city==='Prishtina'),'city selection matches only the public location filter');
+check(matchCatalogue(data,{...city,city:'Peja'}).every(w=>w.city==='Peja'),'changing city immediately selects the new location');
 const sorted=matchCatalogue(data,{...defaults,sort:'rating'});
 check(sorted[0].name==='Gamma fixture'&&sorted[1].name==='Alpha fixture','real published ratings precede unreviewed workshops, with alphabetical fallback');
 check(!hasPublishedRatings([record('Unreviewed fixture',{rating:5,count:0})]),'a number without published review count cannot enable rating sorting');
