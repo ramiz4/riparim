@@ -88,8 +88,9 @@ export async function processNotifications({id,manual=false}:{id?:string;manual?
  if(manual?!canRetryNotification(candidate):candidate.attempts!==0||candidate.state!=="pending")return false;
  const token=crypto.randomUUID();
  // The persisted cooldown and attempt budget are checked again while claiming.
- // Concurrent requests cannot bypass either by racing the initial read.
- const claimed=await db.prepare(`UPDATE review_notifications SET state='sending',lease_token=?,lease_until=?,attempts=attempts+1 WHERE id=? AND smtp_in_flight=0 AND attempts<? AND next_attempt_at<=? AND (state IN (${manual?"'pending','blocked','failed'":"'pending'"}) OR (state='sending' AND lease_until<=?)) RETURNING *`).bind(token,now+120000,id,manual?maxNotificationAttempts:1,now,now).first<NotificationRow>();
+ // Persist cooldown before provider access so interrupted attempts retain it.
+ // Matching the attempt count prevents a stale read from choosing a shorter delay.
+ const claimed=await db.prepare(`UPDATE review_notifications SET state='sending',lease_token=?,lease_until=?,next_attempt_at=?,attempts=attempts+1 WHERE id=? AND smtp_in_flight=0 AND attempts<? AND attempts=? AND next_attempt_at<=? AND (state IN (${manual?"'pending','blocked','failed'":"'pending'"}) OR (state='sending' AND lease_until<=?)) RETURNING *`).bind(token,now+120000,now+retryDelays[Math.min(candidate.attempts,retryDelays.length-1)],id,manual?maxNotificationAttempts:1,candidate.attempts,now,now).first<NotificationRow>();
  if(!claimed)return false;
  await deliver(claimed);return true;
 }

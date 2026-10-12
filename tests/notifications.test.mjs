@@ -124,6 +124,18 @@ try{
  id=fixtureVisit();await moderate(id);deliveryMode='pending';const started=new Promise(resolve=>pause=resolve),job=outbox.processNotifications({id:event(id).id});await started;
  const beforeParallel=attempts.length;await outbox.processNotifications({id:event(id).id,force:true});check(attempts.length===beforeParallel,'A fresh processing lease prevents concurrent retries from posting twice');
  release();await job;deliveryMode='success';pause=null;
+ // Simulate a terminated second attempt: its provider call remains unfinished,
+ // and its lease expires before the five-minute retry cooldown.
+ id=fixtureVisit();await moderate(id);deliveryMode='outage';await outboxModule.processNotifications({id:event(id).id});
+ db.prepare('UPDATE review_notifications SET next_attempt_at=0 WHERE visit_id=?').run(id);
+ deliveryMode='pending';const interruptedStarted=new Promise(resolve=>pause=resolve),interruptedJob=outboxModule.processNotifications({id:event(id).id,manual:true});await interruptedStarted;
+ db.prepare('UPDATE review_notifications SET lease_until=0 WHERE visit_id=?').run(id);
+ const interruptedRow=event(id),beforeInterruptedRetry=attempts.length;
+ check(interruptedRow.attempts===2&&interruptedRow.next_attempt_at-Date.now()>295000,'The second attempt persists its five-minute cooldown before provider access');
+ check(!outboxModule.canRetryNotification(interruptedRow),'An expired processing lease cannot shorten the persisted retry delay');
+ await outboxModule.processNotifications({id:interruptedRow.id,manual:true});
+ check(attempts.length===beforeInterruptedRetry,'Interrupted second attempts cannot be re-sent after only the lease timeout');
+ release();await interruptedJob;deliveryMode='success';pause=null;
  id=fixtureVisit();await moderate(id);delete globalThis.fixtureEnv.RESEND_API_KEY;const beforeMissing=attempts.length;
  await outbox.processNotifications({id:event(id).id});check(event(id).state==='blocked'&&event(id).last_error==='configuration_missing'&&attempts.length===beforeMissing,'Missing sending credentials are explicitly blocked without pretending delivery');globalThis.fixtureEnv.RESEND_API_KEY='re_fixture_secret';
  await outbox.processNotifications({id:event(id).id,force:true});check(event(id).state==='sent','Configured blocked events can be explicitly rechecked');
