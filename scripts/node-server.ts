@@ -6,6 +6,7 @@ import {pipeline} from 'node:stream/promises';
 import {handleMigrationRequest,migrationReadOnly} from '../lib/migration-export';
 import {env} from '../lib/runtime/node-env';
 import {peerClientAddress,trustedProxyAddresses,withNodeClientAddress} from '../lib/runtime/node-request';
+import {withAuthRequest} from '../lib/auth/request-context';
 
 const {values}=parseArgs({options:{port:{type:'string',default:process.env.PORT??'3000'},hostname:{type:'string',default:'127.0.0.1'}}});
 const port=Number(values.port),hostname=values.hostname;
@@ -32,7 +33,7 @@ const server=createServer(async(request,response)=>{
    const result=await handleMigrationRequest(new Request(new URL(request.url??'/',origin),{method,headers,...(body?{body,duplex:'half'}:{})} as RequestInit),env);
    if(result){response.writeHead(result.status,Object.fromEntries(result.headers));if(result.body&&method!=='HEAD')await pipeline(Readable.fromWeb(result.body as import('node:stream/web').ReadableStream),response);else response.end();return;}
   }
-  await withNodeClientAddress(address,()=>handle(request,response));
+  await withNodeClientAddress(address,()=>withAuthRequest(()=>handle(request,response)));
  }
  catch{console.error('node-request-failed');if(response.headersSent)response.destroy();else{response.writeHead(500);response.end('Internal Server Error');}}
 });

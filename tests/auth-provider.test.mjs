@@ -95,7 +95,7 @@ globalThis.fetch=async(input,init)=>{
   return Response.json({sub:'fixture-google-member',email:member.email,email_verified:true});
  }
  assert([alternate,alternateNext].includes(url.origin),'All SDK calls target a fixture HTTPS auth origin');
- assert.equal(init.redirect,'error','Native HTTP transport must reject redirects before sending credentials elsewhere');
+ assert.equal(init.redirect,'manual','Native HTTP transport must inspect redirects without sending credentials elsewhere');
  return originalFetch(new URL(url.pathname+url.search,transportOrigin),init);
 };
 const post=(action,body={})=>auth.authPost(new Request(origin+'/api/auth/'+action,{method:'POST',headers:{origin,'content-type':'application/json'},body:JSON.stringify(body)}),{params:Promise.resolve({action})});

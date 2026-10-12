@@ -3,6 +3,7 @@ import {createClient,type User,type AuthError as ProviderError} from '@supabase/
 import type {AuthConfig} from '../config';
 import type {AuthClient,AuthAdminClient,AuthCookies,AuthUser,AuthUserAttributes,AuthError,SessionResult,AuthAvailability} from '../contract';
 import {trustedAuthOrigin,providerFetch,hostedAuthOrigin} from '../origin';
+import {authRequestState} from '../request-context';
 import {supabaseIdentity} from '../legacy-supabase';
 
 export function validateSupabaseKey(key:string){
@@ -40,7 +41,31 @@ export async function supabaseAvailability(config:Pick<AuthConfig,'projectUrl'|'
 }
 export function supabaseClient(config:AuthConfig,cookies:AuthCookies|null,secure:boolean):AuthClient{
  const origin=trustedAuthOrigin(config.projectUrl,'supabase');
- const client=cookies?createServerClient(origin,config.publicKey,{cookieOptions:{...(!hostedAuthOrigin(origin)?{name:'riparim-auth-'+encodeURIComponent(origin)}:{}),httpOnly:true,secure,sameSite:'lax',path:'/'},cookies,global:{fetch:providerFetch(origin)}}):createClient(origin,config.publicKey,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false},global:{fetch:providerFetch(origin)}});
+ const state=authRequestState(),transport=providerFetch(origin);
+ const unavailable=()=>Response.json({msg:'Authentication provider unavailable',error_code:'auth_provider_unavailable'},{status:499});
+ const serverFetch:typeof fetch=async(input,init)=>{
+  if(state.failed)return unavailable();
+  state.deadline??=Date.now()+1500;
+  const remaining=state.deadline-Date.now();
+  if(remaining<=0){state.failed=true;return unavailable();}
+  try{
+   const signal=AbortSignal.timeout(remaining);
+   const response=await transport(input,{...init,signal:init?.signal?AbortSignal.any([init.signal,signal]):signal});
+   if(response.status>=500){state.failed=true;await response.body?.cancel();return unavailable();}
+   if(!response.body)return response;
+   // Include body reads in the deadline. A stalled or malformed refresh body
+   // would otherwise become another retryable SDK error outside this adapter.
+   const reader=response.body.getReader(),chunks:Uint8Array[]=[];let size=0;
+   try{for(;;){const {done,value}=await reader.read();if(done)break;size+=value.byteLength;if(size>1024*1024)throw Error('Auth response too large');chunks.push(value);}}
+   catch(error){await reader.cancel().catch(()=>{});throw error;}
+   finally{reader.releaseLock();}
+   const bytes=new Uint8Array(size);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.byteLength;}
+   JSON.parse(new TextDecoder().decode(bytes));
+   return new Response(bytes,{status:response.status,headers:response.headers});
+  }catch{state.failed=true;return unavailable();}
+ };
+ const rawClient=cookies?createServerClient(origin,config.publicKey,{cookieOptions:{...(!hostedAuthOrigin(origin)?{name:'riparim-auth-'+encodeURIComponent(origin)}:{}),httpOnly:true,secure,sameSite:'lax',path:'/'},cookies:{getAll:()=>cookies.getAll(),setAll:values=>{if(!state.failed)cookies.setAll(values);}},global:{fetch:serverFetch}}):createClient(origin,config.publicKey,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false},global:{fetch:providerFetch(origin)}});
+ const client=cookies?{auth:new Proxy(rawClient.auth,{get(target,key){const value=Reflect.get(target,key);if(typeof value!=='function')return value;return (...args:unknown[])=>{if(key!=='getUser'&&key!=='getClaims'){state.failed=false;state.deadline=undefined;}return Reflect.apply(value,target,args);};}})}:rawClient;
  const sessionResult=(data:{user:User|null;session:{user:User;provider_token?:string|null}|null},failure:ProviderError|null):SessionResult=>({data:{user:normalize(data.user,origin),session:data.session?{user:normalize(data.session.user,origin)!,googleAccessToken:data.session.provider_token}:null},error:error(failure)});
  return {
   async getUser(){const result=await client.auth.getUser();return {data:{user:normalize(result.data.user,origin)},error:error(result.error)};},
@@ -62,7 +87,7 @@ export function supabaseClient(config:AuthConfig,cookies:AuthCookies|null,secure
   callbackReturn(){return null;},
   async recoveryReady(){const result=await client.auth.getUser();return !result.error&&!!normalize(result.data.user,origin)?.emailVerified;},
   async requestRecovery(email,redirectTo){return {error:error((await client.auth.resetPasswordForEmail(email,{redirectTo})).error)};},
-  async resetPassword(password){const current=await client.auth.getUser(),user=normalize(current.data.user,origin);if(current.error||!user?.emailVerified||user.blocked)return {data:{identity:null},error:error(current.error)??{code:'invalid_credentials'}};const result=await client.auth.updateUser({password});return {data:{identity:result.error?null:user.identity},error:error(result.error)};},
+  async resetPassword(password){state.failed=false;state.deadline=undefined;const current=await client.auth.getUser(),user=normalize(current.data.user,origin);if(current.error||!user?.emailVerified||user.blocked)return {data:{identity:null},error:error(current.error)??{code:'invalid_credentials'}};const result=await client.auth.updateUser({password});return {data:{identity:result.error?null:user.identity},error:error(result.error)};},
   async signOut(options){return {error:error((await client.auth.signOut(options)).error)};}
  };
 }

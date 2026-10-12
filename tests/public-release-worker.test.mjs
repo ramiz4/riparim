@@ -10,7 +10,8 @@ if(config.name==='riparim'){
  const published=canonical.workshops.filter(w=>w.status==='published');
  assert.equal(manifest.pages,3*(published.length+3));assert.equal(manifest.privateData,false);assert.equal(manifest.privacyVariants,3);
  const modules=(await readdir('dist/server',{recursive:true})).filter(file=>file.endsWith('.js')).sort((a,b)=>a==='index.js'?-1:b==='index.js'?1:a.localeCompare(b)).map(file=>({type:'ESModule',path:resolve('dist/server',file)}));
- const runtime=new Miniflare({modules,modulesRoot:resolve('dist/server'),compatibilityDate:config.compatibility_date,compatibilityFlags:config.compatibility_flags,d1Databases:['DB'],r2Buckets:['BUCKET'],bindings:{SITE_ORIGIN:'https://riparim.com'},assets:{directory:resolve('dist/client'),binding:'ASSETS',routerConfig:{has_user_worker:true,static_routing:{user_worker:config.assets.run_worker_first}},assetConfig:{html_handling:config.assets.html_handling}},outboundService:()=>new Response('No external access',{status:502})});
+ let providerCalls=0;
+ const runtime=new Miniflare({modules,modulesRoot:resolve('dist/server'),compatibilityDate:config.compatibility_date,compatibilityFlags:config.compatibility_flags,d1Databases:['DB'],r2Buckets:['BUCKET'],bindings:{SITE_ORIGIN:'https://riparim.com'},assets:{directory:resolve('dist/client'),binding:'ASSETS',routerConfig:{has_user_worker:true,static_routing:{user_worker:config.assets.run_worker_first}},assetConfig:{html_handling:config.assets.html_handling}},outboundService:()=>{providerCalls++;return new Response('No external access',{status:502});}});
  try{
   const db=await runtime.getD1Database('DB');
   for(const file of (await readdir('drizzle')).filter(file=>file.endsWith('.sql')).sort())for(const sql of (await readFile('drizzle/'+file,'utf8')).split('--> statement-breakpoint').filter(sql=>sql.trim()))await db.prepare(sql).run();
@@ -39,6 +40,18 @@ if(config.name==='riparim'){
   const unpublished=await runtime.dispatchFetch('https://riparim.com/werkstatt/'+first.id);assert.equal(unpublished.status,404);assert.equal(unpublished.headers.get('X-Riparim-Public-Snapshot'),null);await unpublished.text();
   const directory=await runtime.dispatchFetch('https://riparim.com/werkstaetten');assert.equal(directory.headers.get('X-Riparim-Public-Snapshot'),'1');const html=await directory.text();assert(!html.includes(`data-workshop-id="${first.id}"`));
   const session=await runtime.dispatchFetch('https://riparim.com/api/session',{headers:{'oai-authenticated-user-email':'private-user@example.test'}});assert.equal(session.status,200);assert.deepEqual(await session.json(),{account:null,isAdmin:false});assert.match(session.headers.get('Cache-Control'),/no-store/);
+  await db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at) VALUES ('main',?,?,1,1,'2026-10-11')").bind('https://fixture-project.supabase.co','sb_publishable_fixture_public_key_1234567890').run();
+  const stale={access_token:'fixture.access.token',refresh_token:'fixture-refresh',expires_at:1,token_type:'bearer',user:{id:'fixture-user'}};
+  const cookie='sb-fixture-project-auth-token=base64-'+Buffer.from(JSON.stringify(stale)).toString('base64url');
+  for(const path of ['/api/session','/werkstaetten?_rsc','/datenschutz?_rsc']){
+   const before=providerCalls,start=performance.now();
+   const response=await runtime.dispatchFetch('https://riparim.com'+path,{headers:{cookie,...(path.includes('_rsc')?{RSC:'1',Accept:'text/x-component'}:{})}});
+   assert.equal(response.status,200);assert(!response.headers.get('set-cookie'),'Provider outage must not erase session cookies');
+   if(path==='/api/session')assert.deepEqual(await response.json(),{account:null,isAdmin:false});else await response.text();
+   assert.equal(providerCalls-before,1,'Proxy and RSC/API share the outage state');
+   assert(performance.now()-start<2000,'Built Worker handles expired cookies without SDK backoff');
+   console.log(JSON.stringify({path,elapsedMs:Math.round(performance.now()-start),providerCalls:providerCalls-before}));
+  }
   console.log('Public release: all locales, private isolation, RSC, newer admin edits and immediate unpublishing passed');
  }finally{await runtime.dispose();}
 }

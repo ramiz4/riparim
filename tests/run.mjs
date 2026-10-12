@@ -22,6 +22,8 @@ suites.push('smtp-tls.test.mjs');
 suites.push('auth-privacy-routing.test.mjs');
 suites.push('auth-backup.test.mjs');
 suites.push('platform-backup.test.mjs');
+suites.push('auth-request-latency.test.mjs');
+suites.push('auth-provider-worker.test.mjs');
 process.exitCode=await runSuites({
  cwd:root,runtime,contract:fileURLToPath(new URL('../scripts/check-i18n.mjs',import.meta.url)),
  suites:suites.map(suite=>fileURLToPath(new URL(suite,import.meta.url))),
