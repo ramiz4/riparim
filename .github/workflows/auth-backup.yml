@@ -1,0 +1,44 @@
+name: Supabase Auth Backup
+
+on:
+  schedule:
+    - cron: '23 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: supabase-auth-backup
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: auth-backup
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Install PostgreSQL 17 client
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y postgresql-client-17
+      - name: Create validated encrypted auth archive
+        env:
+          PGPASSWORD: ${{ secrets.SUPABASE_AUTH_BACKUP_DATABASE_PASSWORD }}
+          PATH: /usr/lib/postgresql/17/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+        run: python3 scripts/backup-supabase-auth.py "$RUNNER_TEMP/auth-backup"
+      - name: Retain encrypted backup
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: supabase-auth-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/auth-backup/
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0
+      - name: Remove runner copy
+        if: always()
+        run: rm -rf -- "$RUNNER_TEMP/auth-backup"
