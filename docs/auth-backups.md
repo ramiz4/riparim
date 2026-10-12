@@ -34,6 +34,10 @@ Dies ist kein Export der Admin-Userliste, die keine vollständigen Passwort-Hash
   die vorhandenen GitHub-Actions-Benachrichtigungen nutzen. Keine weitere Automation
   oder Mailgebühr eingerichtet.
 
+Die unabhängige [E-Mail-Überwachung beider Backup-Jobs](backup-monitoring.md) ist
+vorbereitet und auf Betreiberwunsch deaktiviert. Ihre spätere Aktivierung und
+Empfangsabnahme sind getrennt dokumentiert.
+
 ## Wiederherstellung
 
 1. Artifact eines erfolgreichen Runs herunterladen. Im privaten Verzeichnis
