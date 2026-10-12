@@ -12,14 +12,14 @@ globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
 globalThis.IntersectionObserver=class{observe(){}disconnect(){}};
 window.scrollTo=()=>{};
 window.matchMedia=()=>({matches:false,addEventListener(){},removeEventListener(){}});
-globalThis.fetch=async url=>{assert.equal(url,'/api/google-places');return Response.json({enabled:false});};
+globalThis.fetch=async url=>{if(String(url).startsWith('/api/workshops?'))return Response.json({workshops:[]});assert.equal(url,'/api/google-places');return Response.json({enabled:false});};
 
 const output='.test-runtime/public-performance';await mkdir(output,{recursive:true});
-await build({stdin:{contents:`export {default as CatalogueLoading} from './app/[locale]/werkstaetten/loading';export {default as Finder} from './app/finder';export {default as Catalogue} from './app/[locale]/werkstaetten/catalogue';export {I18nProvider} from './lib/i18n/client';export {getMessages,createTranslator} from './lib/i18n/messages';export {defaultCatalogueFilters} from './lib/catalogue-filters';`,resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/ui.mjs',bundle:true,platform:'node',format:'esm',packages:'external',loader:{'.css':'empty'},plugins:[{name:'navigation-fixture',setup(b){
+await build({stdin:{contents:`export {DiscoverWorkshops} from './components/discover-workshops';export {default as CatalogueLoading} from './app/[locale]/werkstaetten/loading';export {default as Finder} from './app/finder';export {default as Catalogue} from './app/[locale]/werkstaetten/catalogue';export {I18nProvider} from './lib/i18n/client';export {getMessages,createTranslator} from './lib/i18n/messages';export {defaultCatalogueFilters} from './lib/catalogue-filters';`,resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/ui.mjs',bundle:true,platform:'node',format:'esm',packages:'external',loader:{'.css':'empty'},plugins:[{name:'navigation-fixture',setup(b){
  b.onResolve({filter:/^next\/(link|navigation)$/},args=>({path:args.path,namespace:'fixture'}));
  b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',resolveDir:process.cwd(),contents:args.path==='next/link'?`import React from 'react';export default function Link({href,children,...props}){return React.createElement('a',{...props,href},children);}`:`export function useRouter(){return {push(href){globalThis.fixtureNavigations.push(href);},replace(){},refresh(){}};}export function usePathname(){return '/werkstaetten';}export function useSearchParams(){return new URLSearchParams();}`}));
 }}]});
-const {CatalogueLoading,Finder,Catalogue,I18nProvider,getMessages,createTranslator,defaultCatalogueFilters}=await import(new URL('../'+output+'/ui.mjs',import.meta.url));
+const {DiscoverWorkshops,CatalogueLoading,Finder,Catalogue,I18nProvider,getMessages,createTranslator,defaultCatalogueFilters}=await import(new URL('../'+output+'/ui.mjs',import.meta.url));
 const {createElement:h,act}=await import('react'),{renderToStaticMarkup}=await import('react-dom/server'),{createRoot}=await import('react-dom/client');
 const workshops=Array.from({length:25},(_,i)=>({id:`fixture-${String(i).padStart(2,'0')}`,name:`Fixture ${String(i).padStart(2,'0')}`,city:'Prishtina',address:'Fixture address',phone:'+38349123456',whatsapp:'',lat:null,lng:null,rating:null,count:0,specialty:'Fixture',description:'Fixture description',services:['Bremsen & Fahrwerk'],serviceDetails:[],brands:['Volvo'],languages:['Deutsch'],sources:[],checkedAt:'2026-10-04',status:'published',googleRating:null}));
 const props={initialWorkshops:workshops,initialError:'',account:null,isAdmin:false,initialFilters:defaultCatalogueFilters};
@@ -48,6 +48,7 @@ try{
     for(const picker of doc.querySelectorAll('[role="combobox"]'))assert(picker.querySelector('[data-slot="select-value"]').textContent.trim(),`${locale}: selected values must be readable before JavaScript loads`);
     assert(!doc.querySelector('.catalogue-detail-search,.catalogue-private-context,.search-tabs'),'public pages have a single search path without the vehicle wizard');
     if(Page===Finder){
+     assert(doc.querySelector('.landing-hero').nextElementSibling.matches('.discover-section'),'discovery sits directly after the hero');
      assert(doc.querySelector('.landing-hero #suche form'),'quick search is inside the hero before JavaScript loads');
      assert.equal(doc.querySelector('.landing-hero-content>p').textContent,t('public.heroBenefit'));
      assert.equal(doc.querySelectorAll('main form').length,1,'landing has one search form');
@@ -95,6 +96,33 @@ try{
   assert.equal(document.activeElement,document.querySelectorAll('.catalogue-card-target')[24],'Focus survives the removal of the final show-more button');
   await act(async()=>root.render(null));
 
+ }
+ for(const locale of ['de','sq','en']){
+  const t=createTranslator(getMessages(locale));
+  let finish;
+  globalThis.fetch=async url=>String(url).startsWith('/api/workshops?')?new Promise(resolve=>{finish=resolve;}):Response.json({enabled:false});
+  await act(async()=>root.render(wrap(locale,h(DiscoverWorkshops))));
+  assert.equal(document.querySelector('.discover-section [role="status"]').textContent,t('public.loadingWorkshops'));
+  const published=[...workshops.slice(0,5)].reverse();
+  await act(async()=>finish(Response.json({workshops:[{...workshops[0],id:'hidden',name:'AAA hidden',status:'draft'},...published]})));
+  assert.equal(document.querySelectorAll('.discover-grid .catalogue-card').length,3,'discovery is bounded to three published cards');
+  assert.deepEqual([...document.querySelectorAll('.discover-grid h3')].map(node=>node.textContent),['Fixture 00','Fixture 01','Fixture 02'],'discovery uses alphabetical order without drafts');
+  assert.equal(document.querySelector('.discover-all').getAttribute('href'),locale==='de'?'/werkstaetten':locale==='sq'?'/sq/serviset':'/en/workshops');
+  assert(document.querySelector('.discover-grid a').getAttribute('href').includes(workshops[0].id),'cards link to the actual public profile');
+  await act(async()=>root.render(null));
+  globalThis.fetch=async()=>Response.json({workshops:[]});
+  await act(async()=>root.render(wrap(locale,h(DiscoverWorkshops))));
+  assert(document.querySelector('.discover-message').textContent.includes(t('public.directoryEmpty')));
+  assert.equal(document.querySelectorAll('.catalogue-card').length,0,'empty catalogues never fabricate workshops');
+  await act(async()=>root.render(null));
+  let fail=true;
+  globalThis.fetch=async url=>String(url).startsWith('/api/workshops?')?fail?Response.json({error:'private provider detail'},{status:503}):Response.json({workshops:[workshops[0]]}):Response.json({enabled:false});
+  await act(async()=>root.render(wrap(locale,h(DiscoverWorkshops))));
+  assert(document.querySelector('[role="alert"]').textContent.includes(t('public.directoryUnavailable')));
+  assert(!document.body.textContent.includes('private provider detail'));
+  fail=false;await act(async()=>document.querySelector('.discover-message button').click());
+  assert.equal(document.querySelectorAll('.discover-grid .catalogue-card').length,1,'retry replaces the safe error with current profiles');
+  await act(async()=>root.render(null));
  }
  console.log('Public performance UI: accessible catalogue loading, SSR selections, integrated quick search without vehicle wizard, instant navigation, duplicate submission protection and keyboard pagination passed in DE/SQ/EN; no live requests.');
 }finally{await act(async()=>root.unmount());dom.window.close();}

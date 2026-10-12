@@ -5,6 +5,8 @@ import {useRouter} from "next/navigation";
 import {useState,useEffect,useId,useRef} from "react";
 import {Wrench,MapPin,Search,ShieldCheck} from "lucide-react";
 import "./landing.css";
+import "./catalogue.css";
+import {DiscoverWorkshops} from "@/components/discover-workshops";
 import {LoadingIndicator} from "@/components/loading-indicator";
 import {SiteHeader} from "@/components/site-header";
 import {Picker} from "@/components/picker";
@@ -34,6 +36,7 @@ export default function Finder({initialWorkshops,initialError,account,isAdmin,pu
    <section id="suche" className="search-section landing-hero-search" aria-label={t("public.searchLabel")} tabIndex={-1}><form className="search-box" onSubmit={event=>{event.preventDefault();navigateQuick();}}><label htmlFor={`${id}-service`}><span><Wrench size={16}/>{t("public.service")}</span><Picker sortLabels id={`${id}-service`} value={service} onChange={setService} values={services} valueCategory="service" label={t("public.service")}/></label><label htmlFor={`${id}-city`}><span><MapPin size={16}/>{t("public.city")}</span><Picker sortLabels id={`${id}-city`} value={city} onChange={setCity} values={cities} valueCategory="sentinel" label={t("public.city")}/></label><button type="submit" className="primary search-button"><Search size={18}/>{t("public.findWorkshops")}</button></form>{!directoryReady&&<p className="error" role="alert">{publicDataError(t,initialError,"directory")}</p>}</section>
   </div>
  </section>
+ <DiscoverWorkshops/>
  <section id="so-gehts" className="trust-section wrap" aria-labelledby="trust-title"><figure className="trust-visual"><img src="/diagnostics-1024.webp" srcSet="/diagnostics-640.webp 640w, /diagnostics-1024.webp 1024w, /diagnostics-1536.webp 1536w" sizes="(max-width: 720px) calc(100vw - 32px), (max-width: 1280px) 50vw, 600px" width="1536" height="1024" loading="lazy" decoding="async" alt={t("public.mechanicAlt")}/></figure><div className="trust-content"><div className="trust-title"><span className="hero-kicker"><ShieldCheck size={16}/> {t("public.verifiedReviews")}</span><h2 id="trust-title">{t("public.stepsTitle")}</h2></div><div className="trust-steps"><div><span>1</span><div><h3>{t("public.chooseWorkshop")}</h3><p>{t("public.compare")}</p></div></div><div><span>2</span><div><h3>{t("public.contactDirect")}</h3><p>{t("public.arrange")}</p></div></div><div><span>3</span><div><h3>{t("public.reviewAfter")}</h3><p>{t("public.submitReview")}</p></div></div></div></div></section>
  </main>}<DirectoryFooter open={info} onOpenChange={setInfo}/></>;
 }

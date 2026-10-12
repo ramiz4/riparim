@@ -38,3 +38,21 @@ html.dark .landing-page .landing-hero-search .search-box label>span{color:var(--
 @media(prefers-reduced-transparency:reduce){
  .landing-page .landing-hero-search,html.dark .landing-page .landing-hero-search{background:var(--card);-webkit-backdrop-filter:none;backdrop-filter:none}
 }
+
+.discover-section{padding:48px 0;border-bottom:1px solid var(--border)}
+.discover-heading{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:24px}
+.discover-heading h2{font-size:28px;font-weight:650;letter-spacing:-.7px;line-height:1.25}
+.discover-heading p{margin-top:10px;font-size:15px;color:var(--muted-foreground)}
+.discover-all{flex-shrink:0;white-space:normal;text-align:center}
+.discover-grid .catalogue-card h3{font-size:1.125rem;line-height:1.45;font-weight:650;color:#254a38;margin:0;overflow-wrap:anywhere;letter-spacing:-.15px}
+html.dark .discover-grid .catalogue-card h3{color:var(--foreground)}
+.discover-message{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:24px 0;color:var(--muted-foreground)}
+@media(max-width:1000px) and (min-width:721px){.discover-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){
+ .discover-section{padding:32px 0}
+ .discover-heading{align-items:flex-start;flex-direction:column;gap:16px;margin-bottom:20px}
+ .discover-heading h2{font-size:26px}
+ .discover-heading p{font-size:14px}
+ .discover-all{min-height:48px}
+ .discover-grid{grid-template-columns:minmax(0,1fr)}
+}
