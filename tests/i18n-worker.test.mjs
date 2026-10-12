@@ -1,5 +1,6 @@
 import {localizeHref} from '../scripts/lib/locale.mjs';
 import assert from 'node:assert/strict';
+import {assertPrivacyOutput} from './helpers/privacy-output.mjs';
 import {readFile,readdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {Miniflare} from 'miniflare';
@@ -38,6 +39,15 @@ await withWorkerRuntime({modules,modulesRoot:resolve('dist/server'),compatibilit
   }
   const rsc=await dispatchFetch('https://riparim.test'+localizeHref('/werkstaetten',locale)+'?_rsc',{headers:{RSC:'1',Accept:'text/x-component'}});
   assert.equal(rsc.status,200);assert.match(rsc.headers.get('Content-Type'),/text\/x-component/);assert((await rsc.text()).includes(locale),'Translated page RSC retains its request locale');
+ }
+ // Both built targets render the real privacy page for each selected auth protocol.
+ for(const provider of ['supabase','pocketbase']){
+  await db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at,provider) VALUES ('main','https://auth.fixture.test','',0,0,'fixture',?)").bind(provider).run();
+  for(const locale of ['de','sq','en'])for(const init of [{},{method:'HEAD'},{headers:{RSC:'1',Accept:'text/x-component'}}]){
+   const response=await dispatchFetch('https://riparim.test'+localizeHref('/datenschutz',locale)+(init.headers?'?_rsc':''),init);assert.equal(response.status,200);
+   const output=await response.text();if(init.method==='HEAD')assert.equal(output,'');else {assertPrivacyOutput(output,locale,provider);if(init.headers)assert.match(response.headers.get('Content-Type'),/text\/x-component/);}
+  }
+  await db.prepare("DELETE FROM auth_settings WHERE id='main'").run();
  }
  // Actual native D1, API and document SSR use the same current source revision.
  const translatedSource=canonical.workshops.find(w=>w.id===published.id),translatedEntry=overlay.workshops.find(w=>w.id===published.id);assert(translatedEntry);

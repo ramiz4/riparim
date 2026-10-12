@@ -1,5 +1,6 @@
 import {localizeHref} from '../scripts/lib/locale.mjs';
 import assert from 'node:assert/strict';
+import {assertPrivacyOutput} from './helpers/privacy-output.mjs';
 import {readFile,readdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {Miniflare} from 'miniflare';
@@ -11,7 +12,8 @@ if(config.name==='riparim'){
  assert.equal(manifest.pages,3*(published.length+3));assert.equal(manifest.privateData,false);assert.equal(manifest.privacyVariants,3);
  const modules=(await readdir('dist/server',{recursive:true})).filter(file=>file.endsWith('.js')).sort((a,b)=>a==='index.js'?-1:b==='index.js'?1:a.localeCompare(b)).map(file=>({type:'ESModule',path:resolve('dist/server',file)}));
  let providerCalls=0;
- const runtime=new Miniflare({modules,modulesRoot:resolve('dist/server'),compatibilityDate:config.compatibility_date,compatibilityFlags:config.compatibility_flags,d1Databases:['DB'],r2Buckets:['BUCKET'],bindings:{SITE_ORIGIN:'https://riparim.com'},assets:{directory:resolve('dist/client'),binding:'ASSETS',routerConfig:{has_user_worker:true,static_routing:{user_worker:config.assets.run_worker_first}},assetConfig:{html_handling:config.assets.html_handling}},outboundService:()=>{providerCalls++;return new Response('No external access',{status:502});}});
+ const options={modules,modulesRoot:resolve('dist/server'),compatibilityDate:config.compatibility_date,compatibilityFlags:config.compatibility_flags,d1Databases:['DB'],r2Buckets:['BUCKET'],bindings:{SITE_ORIGIN:'https://riparim.com'},assets:{directory:resolve('dist/client'),binding:'ASSETS',routerConfig:{has_user_worker:true,static_routing:{user_worker:config.assets.run_worker_first}},assetConfig:{html_handling:config.assets.html_handling}},outboundService:()=>{providerCalls++;return new Response('No external access',{status:502});}};
+ const runtime=new Miniflare(options);
  try{
   const db=await runtime.getD1Database('DB');
   for(const file of (await readdir('drizzle')).filter(file=>file.endsWith('.sql')).sort())for(const sql of (await readFile('drizzle/'+file,'utf8')).split('--> statement-breakpoint').filter(sql=>sql.trim()))await db.prepare(sql).run();
@@ -20,14 +22,14 @@ if(config.name==='riparim'){
   for(const locale of ['de','sq','en'])for(const path of ['/','/datenschutz','/werkstaetten',`/werkstatt/${first.id}`]){
    const response=await runtime.dispatchFetch('https://riparim.com'+localizeHref(path,locale)+'?q=private-secret',{headers:{'oai-authenticated-user-email':'private-user@example.test',cookie:'untrusted=fixture'}});
    assert.equal(response.status,200);assert.equal(response.headers.get('X-Riparim-Public-Snapshot'),'1');assert.equal(response.headers.has('set-cookie'),false);assert.equal(response.headers.get('Cache-Control'),'no-store');
-   const html=await response.text();assert(html.includes(`<html lang="${locale}"`));assert(!html.includes('private-secret'));assert(!html.includes('private-user@example.test'));
+   const html=await response.text();assert(html.includes(`<html lang="${locale}"`));assert(!html.includes('private-secret'));assert(!html.includes('private-user@example.test'));if(path==='/datenschutz')assertPrivacyOutput(html,locale,'supabase');
   }
   await db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at,provider) VALUES ('main','https://auth.fixture.test','',0,0,'fixture','pocketbase')").run();
   for(const locale of ['de','sq','en']){
-   const privacy=await runtime.dispatchFetch('https://riparim.com'+localizeHref('/datenschutz',locale)),html=await privacy.text();assert.equal(privacy.status,200);assert.equal(privacy.headers.get('X-Riparim-Public-Snapshot'),'1');assert.equal(privacy.headers.has('set-cookie'),false);assert(html.includes('https://pocketbase.io/docs/authentication/'));assert(!html.includes('https://supabase.com/privacy'),'Even the prebuilt public document names the selected independent provider');
+   const privacy=await runtime.dispatchFetch('https://riparim.com'+localizeHref('/datenschutz',locale)),html=await privacy.text();assert.equal(privacy.status,200);assert.equal(privacy.headers.get('X-Riparim-Public-Snapshot'),'1');assert.equal(privacy.headers.has('set-cookie'),false);assert(html.includes('https://pocketbase.io/docs/authentication/'));assert(!html.includes('https://supabase.com/privacy'),'Even the prebuilt public document names the selected independent provider');assertPrivacyOutput(html,locale,'pocketbase');
   }
-  const head=await runtime.dispatchFetch('https://riparim.com/en/privacy',{method:'HEAD'});assert.equal(head.status,200);assert.equal(await head.text(),'');
-  await db.prepare("UPDATE auth_settings SET provider='supabase' WHERE id='main'").run();const rolledBack=await runtime.dispatchFetch('https://riparim.com/en/privacy');assert((await rolledBack.text()).includes('https://supabase.com/privacy'),'Rollback updates the snapshot choice immediately');await db.prepare("DELETE FROM auth_settings WHERE id='main'").run();
+  for(const locale of ['de','sq','en']){const head=await runtime.dispatchFetch('https://riparim.com'+localizeHref('/datenschutz',locale),{method:'HEAD'});assert.equal(head.status,200);assert.equal(head.headers.get('X-Riparim-Public-Snapshot'),'1');assert.equal(await head.text(),'');}
+  await db.prepare("UPDATE auth_settings SET provider='supabase' WHERE id='main'").run();const rolledBack=await runtime.dispatchFetch('https://riparim.com/en/privacy');assertPrivacyOutput(await rolledBack.text(),'en','supabase');await db.prepare("DELETE FROM auth_settings WHERE id='main'").run();
   const admin=await runtime.dispatchFetch('https://riparim.com/api/workshops?admin=1');assert.equal(admin.status,401);await admin.text();
   const invalidLocale=await runtime.dispatchFetch('https://riparim.com/api/workshops?locale=fr');assert.equal(invalidLocale.status,400);await invalidLocale.text();
   const anonymous=await runtime.dispatchFetch('https://riparim.com/',{headers:{cookie:'untrusted=fixture'}});const landing=await anonymous.text();assert(!landing.includes(first.description),'The landing document does not serialize the workshop catalogue');
@@ -52,6 +54,9 @@ if(config.name==='riparim'){
    assert(performance.now()-start<2000,'Built Worker handles expired cookies without SDK backoff');
    console.log(JSON.stringify({path,elapsedMs:Math.round(performance.now()-start),providerCalls:providerCalls-before}));
   }
-  console.log('Public release: all locales, private isolation, RSC, newer admin edits and immediate unpublishing passed');
+  // Exercise the renderer's data-free privacy shell over the actual built Worker.
+  await runtime.setOptions({...options,bindings:{SITE_ORIGIN:'https://riparim.com',PUBLIC_RELEASE_RENDER:'shell'}});
+  for(const locale of ['de','sq','en']){const response=await runtime.dispatchFetch('https://riparim.com'+localizeHref('/datenschutz',locale));assert.equal(response.status,200);assertPrivacyOutput(await response.text(),locale,'supabase');}
+  console.log('Public release: all locales, private isolation, privacy providers/shells, RSC, newer admin edits and immediate unpublishing passed');
  }finally{await runtime.dispose();}
 }
