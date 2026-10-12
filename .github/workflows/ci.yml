@@ -47,6 +47,8 @@ jobs:
         run: npx tsc --noEmit
       - name: Lint
         run: npm run lint
+      - name: Verify portable backup monitor Worker and binding types
+        run: npm run backups:worker:check
       - name: Build portable Node application from the same checked source
         run: npm run build:node
         timeout-minutes: 10

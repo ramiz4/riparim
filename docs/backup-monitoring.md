@@ -6,12 +6,21 @@ Monitorzugänge, externen Checks, Dienste oder Timer eingerichtet und keine echt
 Benachrichtigungen verschickt. Der tatsächliche Empfangstest steht bei der
 späteren Aktivierung aus.
 
-`scripts/monitor-backups.mjs` prüft `Supabase Auth Backup` und `Platform Backup`
-getrennt über GitHub-Metadaten. Der kleine Node-Prozess benötigt keine zusätzlichen
-npm-Pakete. Ein unabhängiger Linux/systemd-Timer auf einem vorhandenen, ständig
-erreichbaren Betreiberhost soll ihn alle 15 Minuten aufrufen. Ein separater
-Healthchecks.io-Check überwacht das Ausbleiben des Monitors. Ein weiterer
-GitHub-Zeitplan wäre für diese Aufgabe nicht ausreichend.
+Der gemeinsame Kern in `scripts/lib/backup-monitor-core.mjs` prüft
+`Supabase Auth Backup` und `Platform Backup` getrennt über GitHub-Metadaten.
+Prüfung, Alarmgrenzen, Versand, Vorfallgenerationen und Wiederholungsschlüssel
+werden für beide Betriebswege nur einmal gepflegt:
+
+| Betriebsweg | Zeitplan und Zustand |
+| --- | --- |
+| Cloudflare | Eigener Worker `riparim-backup-monitor`, später 15-Minuten-Cron und ein SQLite-backed Durable Object je Repository. Website und D1/R2-Bindings bleiben getrennt. |
+| Node | Bestehender Aufruf `scripts/monitor-backups.mjs`, später Linux/systemd-Timer und private JSON-Datei. Keine zusätzlichen npm-Pakete zur Ausführung. |
+
+Beide Varianten sind vorbereitet und standardmäßig deaktiviert. Ein separater
+Healthchecks.io-Check überwacht das Ausbleiben des Monitors, auch bei einem
+Cloudflare- oder Hostausfall. Ein weiterer GitHub-Zeitplan wäre dafür nicht
+ausreichend. Der Zustand lässt sich im pausierten Betrieb zwischen beiden
+Varianten übertragen; Details stehen unten.
 
 ## Erfolg, Alarmgrenzen und Zustellung
 
@@ -75,6 +84,20 @@ prüfen. Keine Paid-Pläne oder kostenpflichtigen Overages einschalten.
   vorhandenen ständig laufenden Hosts. Ein solcher Host ist für Riparim noch
   nicht bestätigt. Neue Hardware, ein VPS und dessen Betrieb sind nicht durch
   diese Implementierung als kostenlos nachgewiesen.
+- **Cloudflare:** Der separate Worker kann den Linux-Host ersetzen. Erwartet sind
+  96 geplante Prüfungen täglich. SQLite-backed Durable Objects stehen im Free-Tarif
+  bereit; Kontoverbrauch, Speicher, Laufzeit und tatsächliche CPU-Werte vor
+  Aktivierung prüfen. Der Prüfkern läuft im Durable Object, der vorgeschaltete
+  Worker übernimmt Auslösung und geschützten Zugriff. Die Free-Grenze von 50
+  externen Subrequests gilt weiterhin: Der Adapter begrenzt einen Prüflauf auf
+  45 externe Aufrufe einschließlich Versand und Heartbeat und reserviert einen
+  Aufruf für die Fehlermeldung. Erreichte Grenzen bleiben Fehler, niemals ein
+  gesunder Status. Node behält seine größere Abfragegrenze.
+  Externe Prüfungen haben eine Vier-Minuten-Frist und einen separat begrenzten
+  Fehler-Heartbeat. Gleichzeitige Prüfungen werden zusammengeführt; die interne
+  Operationswarteschlange ist begrenzt.
+  [Workers-Limits](https://developers.cloudflare.com/workers/platform/limits/#subrequests),
+  [Durable-Objects-Kontingente](https://developers.cloudflare.com/durable-objects/platform/pricing/).
 - **GitHub:** Im Normalfall sechs Metadatenabfragen pro Aufruf, also 24 pro Stunde.
   Öffentlich unauthentifiziert gelten 60 pro Stunde und IP; andere Nutzung und
   Pagination können das überschreiten. Optional einen Fine-grained Token nur für
@@ -98,13 +121,86 @@ prüfen. Keine Paid-Pläne oder kostenpflichtigen Overages einschalten.
 
 Ein separater Resend-Schlüssel muss Senden und Abrufen des Zustellstatus erlauben;
 ein `sending_access`-Schlüssel genügt nicht. Das erforderliche `full_access`
-gewährt weitergehenden Resend-Zugriff und gehört ausschließlich auf den privaten
-Monitorhost. Der Monitor braucht keine Supabase-, D1-, R2- oder Git-Schreibrechte.
+gewährt weitergehenden Resend-Zugriff und gehört ausschließlich in die private
+Monitorlaufzeit: Node-Envdatei oder Worker-Secret. Der Monitor braucht keine
+Supabase-, D1-, R2- oder Git-Schreibrechte.
 Neue Schlüssel und die geheime Heartbeat-URL im bestehenden
 1Password-Projekteintrag `mkp7xa42clfbreiv2q3b3nrq5y` aufbewahren; niemals
 Entschlüsselungsschlüssel an den Monitor übergeben.
 
 ## Spätere Einrichtung und Aktivierung
+
+### Cloudflare
+
+`wrangler.backup-monitor.jsonc` ist vom Website-Deployment getrennt. Seine
+Vorgaben sind `BACKUP_MONITOR_ENABLED=false`, `BACKUP_MONITOR_PAUSED=true`,
+leerer `BACKUP_MONITOR_SCHEDULE` und keine Cron-Trigger. Es gibt keinen
+automatisch aktivierenden CI-Deploy-Job und keinen Zugriff auf App-D1/R2.
+
+Die Konfiguration verwendet `compatibility_date=2026-05-22`, das neueste Datum,
+das der gelockte Wrangler-/workerd-Stand tatsächlich lokal unterstützt. Ein
+Datums- oder Werkzeugupdate erhält eigene Laufzeit- und Typprüfungen.
+`npm run backups:worker:check` vergleicht die separat generierten Bindingtypen,
+prüft TypeScript und führt einen lokalen Wrangler-Dry-Run aus. Die reguläre
+Suite prüft den Worker samt SQLite-Zustand im echten workerd. Ein Dry-Run
+bestätigt keine Remote-Berechtigungen, Kontingente oder E-Mail-Zustellung.
+
+Für die spätere Einrichtung:
+
+1. Den vollständig veröffentlichten, geprüften GitHub-Main-Release auswählen
+   und dessen exakten Quellcheckout bereitstellen; Tag und Commit prüfen.
+   Der Monitor liegt im Release-Quellcheckout, nicht im Website-/Node-Apparchiv.
+   Gelockte Werkzeuge installieren und `npm run backups:worker:check` ausführen.
+   Keine Veröffentlichung eines Featurebranches oder offenen PRs.
+2. Kontingente und einen eigenen Zugang zum Deployment dieses Workers prüfen.
+   Er braucht keine Supabase-, D1-, R2-, DNS- oder Billing-Schreibrechte.
+   Einen Healthchecks.io-Check mit 15 Minuten Periode, 15 Minuten Grace,
+   eigener E-Mail-Integration und begrenzten Erinnerungen einrichten und testen.
+3. Nur Monitorgeheimnisse in einer privaten JSON-Datei (`0600`) bereitstellen:
+   `BACKUP_MONITOR_RESEND_API_KEY`, `BACKUP_MONITOR_HEARTBEAT_URL`,
+   `BACKUP_MONITOR_EMAIL_FROM`, `BACKUP_MONITOR_EMAIL_TO` und
+   `BACKUP_MONITOR_TRANSFER_TOKEN` mit 32–256 Zeichen. Optional kommt der
+   GitHub-Token hinzu. Website-Secrets und Entschlüsselungsschlüssel gehören
+   nicht in diesen Worker. Neue Zugänge im bestehenden 1Password-Eintrag sichern;
+   Werte nicht als CLI-Argumente oder in Logs ausgeben.
+4. Ausschließlich diesen geprüften Release mit dem privaten Secretsfile
+   bereitstellen. Der folgende Aufruf behält alle Pausenvorgaben bei und würde
+   erstmals den separaten Worker/SQLite-Namespace anlegen; er wurde in dieser
+   Vorbereitung **nicht** ausgeführt:
+
+   ```sh
+   node node_modules/wrangler/bin/wrangler.js deploy \
+     --config wrangler.backup-monitor.jsonc \
+     --secrets-file /private/riparim-monitor-secrets.json
+   ```
+
+5. Ungefährliche Alarm-/Entwarnungsmails für beide Jobs und den externen
+   Ausbleibealarm tatsächlich empfangen. Dazu synthetische Lauf-/Artefaktdaten
+   und den realen Mailadapter verwenden, ohne reale Backups zu verändern.
+   Providerannahme allein reicht nicht. Ungültige Zustellung, unterbrochene
+   Heartbeats, doppelte Aufrufe und die Free-Abfragegrenze ebenfalls prüfen.
+6. Erst nach dokumentierter Abnahme und ausdrücklichem Aktivierungsauftrag
+   die bereits implementierte 15-Minuten-Einstellung verwenden. Die gelockten
+   Wrangler-Optionen setzen nicht geheime Betriebsparameter, während der Code
+   der exakte geprüfte Release bleibt:
+
+   ```sh
+   node node_modules/wrangler/bin/wrangler.js deploy \
+     --config wrangler.backup-monitor.jsonc \
+     --secrets-file /private/riparim-monitor-secrets.json \
+     --var BACKUP_MONITOR_ENABLED:true \
+     --var BACKUP_MONITOR_PAUSED:false \
+     --var 'BACKUP_MONITOR_SCHEDULE:*/15 * * * *' \
+     --triggers '*/15 * * * *'
+   ```
+
+   Diese Optionen bei weiteren aktiven Deployments bewusst beibehalten und
+   dokumentieren. Ein Deployment nur mit der ursprünglichen Konfiguration
+   pausiert die Überwachung und entfernt den Zeitplan. Es löscht keinen Zustand.
+   Der geschützte `POST /run` erlaubt bei vollständig aktiver Konfiguration
+   einen manuellen Prüflauf; derselbe private Zugang ist auch dafür privilegiert.
+
+### Node
 
 Verantwortlich ist der Riparim-Betreiber. Diese Schritte sind vorbereitet und
 werden erst nach einem eigenen Aktivierungsauftrag ausgeführt:
@@ -127,7 +223,9 @@ werden erst nach einem eigenen Aktivierungsauftrag ausgeführt:
    [Env-Vorlage](examples/backup-monitor.env.example) geschützt nach
    `/etc/riparim-backup-monitor.env` übernehmen (`root`, Modus `0600`). Schlüssel
    aus 1Password einsetzen, ohne sie in Befehlsargumenten, Shellhistorie oder Logs
-   auszugeben. `BACKUP_MONITOR_ENABLED=false` zunächst beibehalten.
+   auszugeben. `BACKUP_MONITOR_ENABLED=false` und `BACKUP_MONITOR_PAUSED=true`
+   zunächst beibehalten. Alte Node-Konfigurationen ohne Pausevariable bleiben
+   kompatibel.
 5. [Service](examples/riparim-backup-monitor.service) und
    [Timer](examples/riparim-backup-monitor.timer) nach Prüfung der Hostpfade
    bereitstellen; zunächst nicht aktivieren. Das Stateverzeichnis hat Modus
@@ -148,7 +246,8 @@ werden erst nach einem eigenen Aktivierungsauftrag ausgeführt:
    Auch der externe Check und das Betreiberpostfach brauchen wiederkehrende
    manuelle Empfangsprüfungen; ein vollständiger Ausfall aller Alarmwege bleibt
    eine ausdrücklich dokumentierte Betriebsgrenze.
-8. Erst nach dokumentierter Abnahme `BACKUP_MONITOR_ENABLED=true` setzen und
+8. Erst nach dokumentierter Abnahme `BACKUP_MONITOR_ENABLED=true` und
+   `BACKUP_MONITOR_PAUSED=false` setzen und
    den Timer aktivieren. Er läuft außerhalb von GitHub; ein deaktivierter
    Backup-Zeitplan bleibt erkennbar. Aktuellen Status und nächsten Timertermin
    kontrollieren. Die reine Installation und der folgende Standardaufruf
@@ -158,6 +257,68 @@ werden erst nach einem eigenen Aktivierungsauftrag ausgeführt:
    npm run backups:monitor
    # {"status":"inactive"}
    ```
+
+## Zustand zwischen Cloudflare und Node übertragen
+
+`scripts/lib/backup-monitor-state.mjs` erzeugt ein gemeinsames JSON-Format mit
+`format`, `version`, `repository` und `state`, begrenzt auf 128 KiB. Unbekannte
+Felder, fremde Repositories, inkompatible Versionen, ungültige oder zukünftige
+Zeitwerte werden vor jeder Übernahme abgewiesen. Vorfälle, Generationen,
+Warteschlangenbeobachtungen und ausstehende Nachricht mit Payload, Provider-ID
+und Wiederholungsschlüssel bleiben erhalten. Zugangsdaten werden nicht exportiert.
+
+Zuerst den Quellmonitor pausieren, laufende Prüfungen abwarten und auch das Ziel
+deaktiviert/pausiert halten. Absender, Empfänger und Resend-Konto dürfen bei
+offenen Nachrichten nicht wechseln. Beide Uhren müssen stimmen. Ein vorhandener
+Zielzustand wird standardmäßig nicht überschrieben. `--replace` beziehungsweise
+`X-Monitor-Replace: true` ist nur nach privater Sicherung und bewusstem Abgleich
+zulässig. Nie beide Betriebswege gleichzeitig einschalten: Das wäre kein Failover
+und könnte neue Vorfälle doppelt versenden.
+
+Node-Übertragungen müssen als derselbe Betriebssystembenutzer wie der Dienst
+laufen, damit der importierte Zustand für ihn lesbar bleibt. Sie brauchen nur
+die nicht geheimen Pausenvorgaben und den Zustandsdateipfad, keine Envdatei mit
+Providerzugängen. Die Befehle verwenden die bestehende exklusive Lockdatei;
+Dateien (`0600`) und Elternverzeichnis (`0700`) bleiben privat. Ein von Cloudflare
+empfangenes Transferfile vorher geschützt diesem Benutzer zugänglich machen.
+Es gibt keine Provider-/Heartbeat-Aufrufe:
+
+```sh
+sudo -u riparim-backup-monitor env \
+  BACKUP_MONITOR_ENABLED=false BACKUP_MONITOR_PAUSED=true \
+  BACKUP_MONITOR_STATE_PATH=/var/lib/riparim-backup-monitor/state.json \
+  /usr/bin/node /opt/riparim-monitor/current/scripts/monitor-backups.mjs \
+  export-state /var/lib/riparim-backup-monitor/transfer/state.json
+sudo -u riparim-backup-monitor env \
+  BACKUP_MONITOR_ENABLED=false BACKUP_MONITOR_PAUSED=true \
+  BACKUP_MONITOR_STATE_PATH=/var/lib/riparim-backup-monitor/state.json \
+  /usr/bin/node /opt/riparim-monitor/current/scripts/monitor-backups.mjs \
+  import-state /var/lib/riparim-backup-monitor/transfer/state.json
+# Nur nach Sicherung eines vorhandenen Zielzustands: --replace
+```
+
+Cloudflare bietet auf der ausgegebenen Worker-URL `GET /state` und `PUT /state`.
+Beide verlangen `Authorization: Bearer …` mit dem privaten Transfer-Token und
+denselben pausierten Zustand. Aktive Aufrufe werden mit 409 abgewiesen. Der
+Token gehört in eine private Curl-Konfigurationsdatei (`0600`), nicht in
+Befehlsargumente oder die URL. Beispiel mit nicht geheimem `MONITOR_URL`:
+
+```sh
+umask 077
+curl --fail --config /private/monitor-transfer.curl \
+  "$MONITOR_URL/state" --output /private/monitor-state.json
+curl --fail --config /private/monitor-transfer.curl \
+  --request PUT --data-binary @/private/monitor-state.json \
+  "$MONITOR_URL/state"
+```
+
+Bei einem vorhandenen Zielzustand kommt nur nach Sicherung der nicht geheime
+Header `X-Monitor-Replace: true` hinzu. Exportantworten werden mit
+`Cache-Control: no-store` ausgeliefert.
+Nach der Übernahme erst den Zielzustand und ausstehende Zustellbelege prüfen,
+dann ausschließlich das Ziel aktivieren. Die Quelle bleibt pausiert. Für den
+Rückweg dieselben Schritte verwenden. Entschlüsselung oder Rückübernahme von
+Supabase-/D1-/R2-Daten ist nicht Teil dieses Wechsels.
 
 ## Fehler beheben und sicher fortsetzen
 
@@ -192,6 +353,9 @@ Die reguläre Testsuite führt die Offline-Regressionen aus:
 
 ```sh
 node tests/backup-monitor.test.mjs
+node tests/backup-monitor-portable.test.mjs
+node tests/backup-monitor-worker.test.mjs
+npm run backups:worker:check
 npm test
 ```
 

@@ -1,0 +1,19 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "riparim-backup-monitor",
+  "account_id": "ec181b3a61c7c3da13910600953fc3ea",
+  "main": "monitor/worker.ts",
+  "compatibility_date": "2026-05-22",
+  "workers_dev": true,
+  "preview_urls": false,
+  "triggers": {"crons": []},
+  "vars": {
+    "BACKUP_MONITOR_ENABLED": "false",
+    "BACKUP_MONITOR_PAUSED": "true",
+    "BACKUP_MONITOR_SCHEDULE": ""
+  },
+  "secrets": {"required": ["BACKUP_MONITOR_TRANSFER_TOKEN", "BACKUP_MONITOR_RESEND_API_KEY", "BACKUP_MONITOR_HEARTBEAT_URL", "BACKUP_MONITOR_EMAIL_FROM", "BACKUP_MONITOR_EMAIL_TO"]},
+  "durable_objects": {"bindings": [{"name": "BACKUP_MONITOR", "class_name": "BackupMonitor"}]},
+  "migrations": [{"tag": "v1", "new_sqlite_classes": ["BackupMonitor"]}],
+  "observability": {"enabled": true, "traces": {"enabled": true}}
+}
