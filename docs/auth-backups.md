@@ -59,7 +59,9 @@ Dies ist kein Export der Admin-Userliste, die keine vollständigen Passwort-Hash
    `--clean` gegen Produktion ausführen. Migrationstand, Tabellenverträge,
    Benutzer-IDs, Passwort-Hashes, Provideridentitäten und MFA prüfen.
 4. Authkonfiguration, OAuth-/SMTP-Zugangsdaten, Redirects und JWT/API-Keys sind
-   **kein Bestandteil dieses Datenbanksnapshots**. Bestehende 1Password-Konfiguration
+   **kein Bestandteil dieses Datenbanksnapshots**. Die ergänzende
+   [Plattformsicherung](platform-backups.md) sichert Authkonfiguration sowie D1/R2.
+   Bestehende 1Password-Konfiguration
    und [Auth-Provider-Anleitung](auth-provider.md) separat abgleichen. Auch
    Cloudflare-D1/R2-Appdaten brauchen ihren eigenen konsistenten Restore; alte
    Authkonten dürfen keine zwischenzeitlich gelöschten Appkonten wieder aktivieren.
