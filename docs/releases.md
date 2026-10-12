@@ -24,10 +24,10 @@ Abhängigkeitsaudit, Pin-Aktualisierung und Messnachweise stehen in
 
 Der Workflow **Release** startet nur bei `push` auf `main` im Repository `ramiz4/riparim`. Er verwendet Node.js 24 und arbeitet mit dem exakten Merge-Commit:
 
-1. Wiederverwendbare CI führt Katalogprüfung, Tests, TypeScript, Lint und den Worker-Build aus.
+1. Wiederverwendbare CI führt Katalogprüfung, Tests, TypeScript, Lint sowie Cloudflare-, Sites- und Node-Builds aus.
 2. Der geprüfte Build wird als unveränderliches Actions-Artefakt an den Release-Job übergeben. Repository, Commit und SHA-256 müssen übereinstimmen.
-3. `semantic-release` analysiert die Conventional Commits seit dem letzten `v*`-Tag und erstellt Tag, Release Notes sowie einen GitHub Release mit Worker-Archiv und Provenienzdatei.
-4. Der Deploy-Job lädt beide Dateien aus diesem veröffentlichten GitHub Release. Er prüft Tag, Commit, Prüfsumme und Zielbindings, wendet ausstehende D1-Migrationen an und veröffentlicht genau die geprüften Artefaktbytes auf Cloudflare. Ein erneuter Deploy verwendet denselben Release, keinen neuen Build.
+3. `semantic-release` analysiert die Conventional Commits seit dem letzten `v*`-Tag und erstellt Tag, Release Notes sowie einen GitHub Release mit drei Archiven und jeweils eigener Provenienzdatei.
+4. Die validierte Repositoryvariable `DEPLOYMENT_TARGET` wählt `cloudflare` (Default) oder `node`. Node startet keinen Cloudflare-Deploy und benötigt keine Cloudflare-Secrets; Installation erfolgt über den [hostlokalen Nodeweg](node-deployment.md). Bei Cloudflare lädt der Deploy-Job beide Dateien aus diesem veröffentlichten GitHub Release. Er prüft Tag, Commit, Prüfsumme und Zielbindings, wendet ausstehende D1-Migrationen an und veröffentlicht genau die geprüften Artefaktbytes auf Cloudflare. Ein erneuter Deploy verwendet denselben Release, keinen neuen Build.
 
 Der automatisch bereitgestellte `GITHUB_TOKEN` erhält ausschließlich im Release-Job `contents: write`. Es werden keine npm-Pakete veröffentlicht, keine Release-Commits nach `main` geschrieben und keine zusätzlichen PATs benötigt. Der erste Release beginnt ohne vorhandenes Versions-Tag bei `1.0.0`; danach gelten SemVer-Bumps. Tags und GitHub Releases sind die Versionsquelle, die private `package.json` wird nicht bei jeder Veröffentlichung geändert.
 
@@ -36,11 +36,11 @@ Release-Läufe werden serialisiert und nicht während einer Veröffentlichung ab
 Die erneute Messung nach den Laufzeitoptimierungen und die Entscheidung gegen
 einen vorsorglichen Queue-Umbau stehen in
 [release-queue-analysis.md](release-queue-analysis.md). Vollständige Retries prüfen
-weiterhin beide Builds und deren Provenienz; ein vorhandener veröffentlichter
+weiterhin die zum jeweiligen Releaseformat gehörenden Builds und deren Provenienz; ein vorhandener veröffentlichter
 Tag wird vor dem Remote-Main-Vergleich wiederverwendet. Nur neue Veröffentlichungen
 werden von einem neueren Main-Commit verdrängt.
 
-Wenn eine GitHub-Veröffentlichung nach dem Anlegen des Tags scheitert, bleibt der Workflow ausdrücklich fehlerhaft. Vor dem erneuten Lauf den vorhandenen Release samt allen vier Assets (Cloudflare- und Sites-Archiv mit jeweils eigener Provenienz) vervollständigen; kein zusätzliches Versions-Tag erzeugen. Ein fehlender, als Entwurf gespeicherter oder unvollständiger Release wird nicht als Erfolg ausgegeben.
+Wenn eine GitHub-Veröffentlichung nach dem Anlegen des Tags scheitert, bleibt der Workflow ausdrücklich fehlerhaft. Vor dem erneuten Lauf den vorhandenen Release samt zugehörigen Assets vervollständigen: historische Releases haben vier Assets (Cloudflare-/Sites-Paar), neue Releases mit `riparim-release: node-v1` zusätzlich das Nodepaar und damit sechs; kein zusätzliches Versions-Tag erzeugen. Ein fehlender, als Entwurf gespeicherter oder unvollständiger Release wird nicht als Erfolg ausgegeben.
 
 ## Produktionsmigrationen, Wiederholung und Rollback
 

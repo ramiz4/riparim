@@ -1,3 +1,5 @@
+import {nodeReleaseMarker} from "./scripts/release-policy.mjs";
+
 const config = {
   branches: ["main"],
   repositoryUrl: "https://github.com/ramiz4/riparim.git",
@@ -13,9 +15,12 @@ const config = {
         { path: "artifacts/riparim-worker.tar.gz", name: "riparim-${nextRelease.gitTag}.tar.gz", label: "Cloudflare Worker and Sites migrations" },
         { path: "artifacts/provenance.json", name: "riparim-${nextRelease.gitTag}.json", label: "Release commit and archive SHA-256" },
         { path: "artifacts/riparim-sites.tar.gz", name: "riparim-sites-${nextRelease.gitTag}.tar.gz", label: "Sites companion Worker and migrations" },
+        { path: "artifacts/riparim-node.tar.gz", name: "riparim-node-${nextRelease.gitTag}.tar.gz", label: "Prebuilt portable Node application" },
+        { path: "artifacts/node-provenance.json", name: "riparim-node-${nextRelease.gitTag}.json", label: "Node release commit and archive SHA-256" },
         { path: "artifacts/sites-provenance.json", name: "riparim-sites-${nextRelease.gitTag}.json", label: "Sites project, release commit and archive SHA-256" },
       ],
     }],
+    { generateNotes: async () => nodeReleaseMarker },
   ],
 };
 export default config;
