@@ -3,7 +3,7 @@ import {defaultLocale,isLocale,type Locale} from "./locale";
 // Keys are existing stored/form values. Only the labels are translated.
 const de={
  service:{"Alle Leistungen":"Alle Leistungen","Inspektion & Wartung":"Inspektion & Wartung","Diagnose & Elektronik":"Diagnose & Elektronik","Bremsen & Fahrwerk":"Bremsen & Fahrwerk","Motor & Getriebe":"Motor & Getriebe","Karosserie & Lack":"Karosserie & Lack","Reifen & Klima":"Reifen & Klima"},
- sentinel:{"Alle Leistungen":"Alle Leistungen","Ganz Kosovo":"Ganz Kosovo","Alle Marken":"Alle Marken","Alle Sprachen":"Alle Sprachen","Kein weiterer Ort":"Kein weiterer Ort","Nur im Ort":"Nur im Ort"},
+ sentinel:{"Alle Leistungen":"Alle Leistungen","Ganz Kosovo":"Ganz Kosovo","Alle Marken":"Alle Marken","Alle Sprachen":"Alle Sprachen"},
  evidence:{"Rechnung":"Rechnung","Service- oder Arbeitsbeleg":"Service- oder Arbeitsbeleg","Anderer Nachweis":"Anderer Nachweis"},
  status:{pending:"In Prüfung",approved:"Bewertung vervollständigen",needs_more:"Ergänzung nötig",published:"Veröffentlicht",deleting:"Löschung ausstehend",draft:"Entwurf",rejected:"Abgelehnt",revoked:"Widerrufen"},
  language:{Albanisch:"Albanisch",Deutsch:"Deutsch",Englisch:"Englisch"},
@@ -13,7 +13,7 @@ export type ValueCategory=keyof typeof de;
 type ValueCatalog={[C in ValueCategory]:{[V in keyof typeof de[C]]:string}};
 const sq={
  service:{"Alle Leistungen":"Të gjitha shërbimet","Inspektion & Wartung":"Kontroll & mirëmbajtje","Diagnose & Elektronik":"Diagnostikë & elektronikë","Bremsen & Fahrwerk":"Frena & shasi","Motor & Getriebe":"Motor & transmision","Karosserie & Lack":"Karroceri & ngjyrosje","Reifen & Klima":"Goma & klimatizim"},
- sentinel:{"Alle Leistungen":"Të gjitha shërbimet","Ganz Kosovo":"E gjithë Kosova","Alle Marken":"Të gjitha markat","Alle Sprachen":"Të gjitha gjuhët","Kein weiterer Ort":"Pa vend tjetër","Nur im Ort":"Vetëm në vend"},
+ sentinel:{"Alle Leistungen":"Të gjitha shërbimet","Ganz Kosovo":"E gjithë Kosova","Alle Marken":"Të gjitha markat","Alle Sprachen":"Të gjitha gjuhët"},
  evidence:{"Rechnung":"Faturë","Service- oder Arbeitsbeleg":"Dëshmi shërbimi ose pune","Anderer Nachweis":"Dëshmi tjetër"},
  status:{pending:"Në shqyrtim",approved:"Plotëso vlerësimin",needs_more:"Nevojitet plotësim",published:"Publikuar",deleting:"Fshirja në pritje",draft:"Draft",rejected:"Refuzuar",revoked:"Revokuar"},
  language:{Albanisch:"Shqip",Deutsch:"Gjermanisht",Englisch:"Anglisht"},
@@ -21,7 +21,7 @@ const sq={
 } as const satisfies ValueCatalog;
 const en={
  service:{"Alle Leistungen":"All services","Inspektion & Wartung":"Inspection & maintenance","Diagnose & Elektronik":"Diagnostics & electronics","Bremsen & Fahrwerk":"Brakes & suspension","Motor & Getriebe":"Engine & transmission","Karosserie & Lack":"Bodywork & paint","Reifen & Klima":"Tyres & air conditioning"},
- sentinel:{"Alle Leistungen":"All services","Ganz Kosovo":"All of Kosovo","Alle Marken":"All brands","Alle Sprachen":"All languages","Kein weiterer Ort":"No additional location","Nur im Ort":"Only in this location"},
+ sentinel:{"Alle Leistungen":"All services","Ganz Kosovo":"All of Kosovo","Alle Marken":"All brands","Alle Sprachen":"All languages"},
  evidence:{"Rechnung":"Invoice","Service- oder Arbeitsbeleg":"Service or work receipt","Anderer Nachweis":"Other evidence"},
  status:{pending:"Under review",approved:"Complete your review",needs_more:"More information needed",published:"Published",deleting:"Deletion pending",draft:"Draft",rejected:"Rejected",revoked:"Revoked"},
  language:{Albanisch:"Albanian",Deutsch:"German",Englisch:"English"},

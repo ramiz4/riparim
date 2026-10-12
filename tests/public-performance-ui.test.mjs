@@ -43,7 +43,17 @@ try{
   }finally{loadingDom.window.close();}
   for(const Page of [Finder,Catalogue]){
    const ssr=new JSDOM(renderToStaticMarkup(wrap(locale,h(Page,props))));
-   try{for(const picker of ssr.window.document.querySelectorAll('[role="combobox"]'))assert(picker.querySelector('[data-slot="select-value"]').textContent.trim(),`${locale}: selected values must be readable before JavaScript loads`);}finally{ssr.window.close();}
+   try{
+    const doc=ssr.window.document;
+    for(const picker of doc.querySelectorAll('[role="combobox"]'))assert(picker.querySelector('[data-slot="select-value"]').textContent.trim(),`${locale}: selected values must be readable before JavaScript loads`);
+    assert(!doc.querySelector('.catalogue-detail-search,.catalogue-private-context,.search-tabs'),'public pages have a single search path without the vehicle wizard');
+    if(Page===Finder){
+     assert(doc.querySelector('.landing-hero #suche form'),'quick search is inside the hero before JavaScript loads');
+     assert.equal(doc.querySelector('.landing-hero-content>p').textContent,t('public.heroBenefit'));
+     assert.equal(doc.querySelectorAll('main form').length,1,'landing has one search form');
+     assert.equal(doc.querySelectorAll('#suche [role="combobox"]').length,2,'only service and location are requested');
+    }
+   }finally{ssr.window.close();}
   }
   const pendingDom=new JSDOM(renderToStaticMarkup(wrap(locale,h(Catalogue,{...props,publicSnapshot:true,initialWorkshops:[]}))));
   try{
@@ -67,21 +77,6 @@ try{
   await act(async()=>new Promise(resolve=>setTimeout(resolve,20)));
   assert.equal(document.querySelector('main [role="status"]').textContent,loadingLabels[locale],'Feedback stays visible while navigation is stalled');
   await act(async()=>root.render(null));
-  await act(async()=>root.render(wrap(locale,h(Finder,props))));
-  await act(async()=>document.querySelector('.search-tabs button').click());
-  const submitDetail=()=>document.querySelector('.journey-form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));
-  await act(async()=>{const input=document.querySelector('.journey-form input[maxlength="80"]');Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(input,'Fixture car');input.dispatchEvent(new Event('input',{bubbles:true}));});
-  await act(async()=>submitDetail());
-  await act(async()=>{const input=document.querySelector('.journey-form textarea');Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype,'value').set.call(input,'Fixture repair request');input.dispatchEvent(new Event('input',{bubbles:true}));});
-  await act(async()=>submitDetail());
-  const detailedBefore=fixtureNavigations.length;
-  await act(async()=>submitDetail());
-  await act(async()=>new Promise(resolve=>setTimeout(resolve,30)));
-  assert.equal(fixtureNavigations.length,detailedBefore+1);
-  assert.equal(document.querySelector('main [role="status"]')?.textContent,loadingLabels[locale],'Vehicle search also responds before server data arrives');
-  assert(!document.querySelector('[role="dialog"]'),'Vehicle dialog closes while navigation is pending');
-  assert.equal(document.activeElement,document.querySelector('main'),'Vehicle dialog closing preserves loading-view focus');
-  await act(async()=>root.render(null));
   await act(async()=>root.render(wrap(locale,h(Catalogue,props))));
   assert.equal(document.querySelectorAll('.catalogue-card').length,12);
   const more=()=>[...document.querySelectorAll('button')].find(button=>button.textContent===t('public.showMore'));
@@ -92,17 +87,7 @@ try{
   assert.equal(document.querySelectorAll('.catalogue-card').length,25);
   assert.equal(document.activeElement,document.querySelectorAll('.catalogue-card-target')[24],'Focus survives the removal of the final show-more button');
   await act(async()=>root.render(null));
-  for(const Page of [Finder,Catalogue]){
-   await act(async()=>root.render(wrap(locale,h(Page,props))));
-   const opener=document.querySelector(Page===Finder?'.search-tabs button':'.catalogue-detail-search');
-   opener.focus();await act(async()=>opener.click());
-   assert(document.querySelector('[role="dialog"]'),'The vehicle search opens');
-   await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));
-   await act(async()=>new Promise(resolve=>setTimeout(resolve,30)));
-   assert(!document.querySelector('[role="dialog"]'));
-   assert.equal(document.activeElement,opener,'Closing vehicle search returns keyboard focus to its opener');
-   await act(async()=>root.render(null));
-  }
+
  }
- console.log('Public performance UI: accessible catalogue loading, SSR selections, instant quick/vehicle navigation, duplicate submission protection, keyboard pagination and vehicle-dialog focus passed in DE/SQ/EN; no live requests.');
+ console.log('Public performance UI: accessible catalogue loading, SSR selections, integrated quick search without vehicle wizard, instant navigation, duplicate submission protection and keyboard pagination passed in DE/SQ/EN; no live requests.');
 }finally{await act(async()=>root.unmount());dom.window.close();}

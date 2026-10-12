@@ -57,10 +57,10 @@ const translated={serviceDetails:['Diagnostikë e parë','NEVER SHOW DUPLICATE',
 assert.deepEqual(alignedGroups.map(group=>group.items.map(item=>content.displayServiceDetail(item,translated,'sq'))),[['Diagnostikë e parë'],['Frena'],['Ndihmë tjetër']],'translation arrays use original indices after classification and normalization');
 assert.equal(content.displayServiceDetail(alignedGroups[0].items[0],{serviceDetails:aligned.serviceDetails},'de'),'Elektronische Diagnose','DE keeps established visible detail normalization even with an additive display map');
 assert.deepEqual(alignedGroups.map(group=>group.title),['Diagnose & Elektronik','Bremsen & Fahrwerk','Weitere Leistungen'],'translated words never determine service groups');
-assert.equal(content.workshopSelectionMatches(workshop,{brand:'BMW',service:'Motor & Getriebe',vehicle:null}).brand,false);
-assert.equal(content.workshopSelectionMatches(workshop,{brand:'Volvo',service:'Diagnose & Elektronik',vehicle:null}).service,true);
-assert.equal(content.workshopSelectionMatches({...workshop,brands:[]},{brand:'Volvo',service:null,vehicle:null}).brand,false,'unknown brand coverage is not presented as a match');
-assert.equal(content.workshopSelectionMatches({...workshop,brands:['Alle Marken']},{brand:'Volvo',service:null,vehicle:null}).brand,true);
+assert.equal(content.workshopSelectionMatches(workshop,{brand:'BMW',service:'Motor & Getriebe'}).brand,false);
+assert.equal(content.workshopSelectionMatches(workshop,{brand:'Volvo',service:'Diagnose & Elektronik'}).service,true);
+assert.equal(content.workshopSelectionMatches({...workshop,brands:[]},{brand:'Volvo',service:null}).brand,false,'unknown brand coverage is not presented as a match');
+assert.equal(content.workshopSelectionMatches({...workshop,brands:['Alle Marken']},{brand:'Volvo',service:null}).brand,true);
 assert(!content.groupWorkshopServices({services:['Diagnose & Elektronik'],serviceDetails:[]}).some(g=>g.title==='Motor & Getriebe'),'service categories are not invented');
 
 assert.equal(browser.currentGoogleRating,undefined,'profile cannot start an Enterprise rating request');
