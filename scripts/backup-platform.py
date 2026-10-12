@@ -118,6 +118,7 @@ def export_d1(token):
     schema_select = "SELECT type,name,tbl_name,sql FROM sqlite_schema WHERE sql IS NOT NULL AND name NOT GLOB '_cf_*' AND name NOT GLOB 'sqlite_*' ORDER BY type,name"
     planned = query(schema_select)
     tables = [entry for entry in planned if entry["type"] == "table"]
+    auto_tables = [entry["name"] for entry in tables if "AUTOINCREMENT" in entry["sql"].upper()]
     selections = ["json_object('kind','SCHEMA','name','','statement',(SELECT json_group_array(json_object('type',type,'name',name,'tbl_name',tbl_name,'sql',sql)) FROM (" + schema_select + ")), 'total',0)"]
     for table in tables:
         name = table["name"]
@@ -133,6 +134,9 @@ def export_d1(token):
         insert = f'INSERT INTO "{name}"({identifier_list}) VALUES('
         # Scalar subqueries avoid D1's very small compound-SELECT limit.
         selections.append(f"json_object('kind','TABLE','name','{name}','statement',(SELECT json_group_array('{insert}'||" + "||','||".join(values) + f"||');') FROM \"{name}\"),'total',(SELECT count(*) FROM \"{name}\"))")
+    if auto_tables:
+        allowed = ','.join("'" + name + "'" for name in auto_tables)
+        selections.append("json_object('kind','SEQUENCE','name','sqlite_sequence','statement',(SELECT json_group_array('INSERT INTO sqlite_sequence(name,seq) VALUES('||quote(name)||','||quote(seq)||');') FROM sqlite_sequence WHERE name IN (" + allowed + ")),'total',0)")
     # A single read statement gives schema, all rows, and counts one SQLite snapshot.
     rows = json.loads(query("SELECT json_array(" + ','.join(selections) + ") AS snapshot")[0]["snapshot"])
     actual = rows[0]["statement"]
@@ -152,6 +156,10 @@ def export_d1(token):
         if len(data) != row["total"]:
             raise RuntimeError("D1 snapshot rows are incomplete")
         statements.extend(data)
+    for row in rows:
+        if row["kind"] == "SEQUENCE":
+            data = row["statement"]
+            statements += ['DELETE FROM sqlite_sequence;'] + (json.loads(data) if isinstance(data, str) else data)
     statements += [entry["sql"] + ';' for entry in planned if entry["type"] != "table"]
     return ('\n'.join(statements) + '\n').encode(), None
 

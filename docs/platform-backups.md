@@ -32,7 +32,8 @@ Das neue Archiv enthält:
   Felder, ohne deren Werte in Metadaten oder Logs auszugeben.
 - Einen konsistenten SQL-Lesesnapshot des D1-Anwendungsschemas einschließlich
   Anwendungs- und Migrationsdaten. Cloudflare- und SQLite-interne Tabellen
-  sind ausdrücklich ausgenommen.
+  sind ausdrücklich ausgenommen; `sqlite_sequence`-Zähler der gesicherten
+  AUTOINCREMENT-Tabellen werden zusätzlich erhalten.
 - Alle R2-Objekte, auch ohne aktuellen Besuchsverweis: Bytes, Schlüssel,
   Größe, ETag, Änderungszeit, HTTP-/Custom-Metadaten und SHA-256. Objektpfade
   werden nicht als lokale Dateinamen verwendet.

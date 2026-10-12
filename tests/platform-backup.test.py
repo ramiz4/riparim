@@ -67,6 +67,7 @@ class PlatformBackupTests(unittest.TestCase):
             source.executescript(SQL.decode())
             source.execute("CREATE TABLE synthetic(payload TEXT, bytes BLOB, missing TEXT)")
             source.execute("INSERT INTO synthetic VALUES(?,?,NULL)", ("a\0'尾", b"\x00\xff"))
+            source.executescript("CREATE TABLE counter(id INTEGER PRIMARY KEY AUTOINCREMENT); INSERT INTO counter DEFAULT VALUES; DELETE FROM counter;")
             def cf(path, token, body=None):
                 self.assertTrue(path.endswith('/query'))
                 return {"result": [{"success": True, "results": [dict(row) for row in source.execute(body['sql'])]}]}
@@ -75,6 +76,7 @@ class PlatformBackupTests(unittest.TestCase):
             with sqlite3.connect(":memory:") as restored:
                 restored.executescript(exported.decode())
                 self.assertEqual(restored.execute("SELECT * FROM synthetic").fetchone(), ("a\0'尾", b"\x00\xff", None))
+                self.assertEqual(restored.execute("INSERT INTO counter DEFAULT VALUES").lastrowid, 2)
 
 
 if __name__ == "__main__":
