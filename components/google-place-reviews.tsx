@@ -50,6 +50,7 @@ function GoogleDetails({workshop,identity,status,requestIdentity,variant="review
   return()=>{active=false;clearTimeout(timeout);clearTimeout(expiry);element?.remove();};
  },[identity,locale,started,revision,isVisible,variant,compact]);
  const unavailable=widgetStatus==="unavailable"||status==="unavailable"&&!identity;
+ if(compact&&(unavailable||expired))return null;
  return <div ref={ref} className={`google-reviews-panel${compact?" google-rating-panel":""}${variant==="overview"?" google-overview-panel":""}`}>
   <div ref={container} className={`google-official-widget${expired||unavailable?" google-widget-unavailable":""}`} aria-label={t(variant==="rating"?"public.googleRatingWidgetAria":variant==="overview"?"public.googleDetailsAria":"public.googleReviewsAria",{name:workshop.name})}/>
   {(unavailable||expired)?<div className="google-details-fallback">

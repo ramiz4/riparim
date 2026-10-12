@@ -101,14 +101,24 @@ try{
    window.sessionStorage.clear();const before=widgets.length,requests=identityCalls;
    await act(async()=>{root.render(h(scoped.I18nProvider,{locale,messages:scoped.getMessages(locale,['common','public'])},h(scoped.Catalogue,props)));await settle();});await intersect();
    const card=document.querySelector('.catalogue-card:not([hidden])'),panel=card.querySelector('.google-rating-panel'),t=scoped.createTranslator(scoped.getMessages(locale));
-   assert(card.querySelector('.riparim-rating .rating-value'));assert(panel.textContent.includes(t('public.googleDetailsFailed')));assert(!panel.textContent.includes(t('public.googleNoReviews')));assert(panel.querySelector('a').href.includes('google.com/maps'));
+   assert(card.querySelector('.riparim-rating .rating-value'));assert.equal(panel,null,'unavailable Google ratings omit the entire panel');assert(!card.textContent.includes(t('public.googleDetailsFailed')));assert(!card.querySelector('a[href*="google.com/maps"]'));assert(card.querySelector('.catalogue-card-target'),'the workshop profile remains accessible');
    await tab(false);await tab(true);await intersect();assert.equal(identityCalls-requests,mode==='disabled'?0:1);assert.equal(widgets.length,before,'failure never mounts a widget or retries automatically');await render(locale,null);
   }}finally{globalThis.fetch=baseFetch;}
  }
  await render('de',h(WorkshopRatings,{workshop:workshops[0]}));await intersectRating();const failed=widgets.at(-1);await act(async()=>failed.dispatchEvent(new Event('gmp-error')));
- assert(document.querySelector('.google-rating-panel').textContent.includes(createTranslator(getMessages('de'))('public.googleDetailsFailed')));
- assert(document.querySelector('.google-rating-panel a').href.includes('google.com/maps'));assert(!document.querySelector('gmp-advanced-place-details-compact'),'failed provider content is removed');
+ assert.equal(document.querySelector('.google-rating-panel'),null,'widget failure removes the entire Google rating panel');
+ assert(!document.querySelector('a[href*="google.com/maps"]'));assert(!document.querySelector('gmp-advanced-place-details-compact'),'failed provider content is removed');
  const failedCount=widgets.length;await tab(false);await tab(true);assert.equal(widgets.length,failedCount,'widget quota failure has no automatic retry');
+ await render('de',null);
+ const originalSetTimeout=globalThis.setTimeout;let expireRating;
+ globalThis.setTimeout=(callback,delay,...args)=>{if(delay===1800000){expireRating=callback;return originalSetTimeout(()=>{},delay);}return originalSetTimeout(callback,delay,...args);};
+ try{
+  await render('de',h(WorkshopRatings,{workshop:workshops[0]}));await intersectRating();await load();
+  assert(document.querySelector('.google-rating-panel'),'loaded Google ratings remain visible');assert(expireRating);
+  const beforeExpiry=widgets.length;await act(async()=>expireRating());
+  assert.equal(document.querySelector('.google-rating-panel'),null,'expired Google ratings omit the panel and its Maps fallback');assert(!document.querySelector('a[href*="google.com/maps"]'));assert(document.querySelector('.riparim-rating .rating-value'));
+  await tab(false);await tab(true);assert.equal(widgets.length,beforeExpiry,'expiry does not automatically request another widget');
+ }finally{globalThis.setTimeout=originalSetTimeout;}
  assert.equal(placeRequests.length,0,'no Enterprise fetchFields is called anywhere in the catalogue');
  console.log(JSON.stringify({catalogueSize:160,individualDetails:0,advancedVisibleOnly:true,scenarioCounts,providerFallbackModes:['disabled','quota','timeout'],liveProviderCalls:false}));
 }finally{await act(async()=>root.unmount());dom.window.close();}
