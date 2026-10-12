@@ -56,7 +56,7 @@ const bundleOptions = {
     builder.onResolve({filter:/(?:notifications\/outbox|^\.\/outbox)$/},args=>({path:args.path,namespace:'notification-fixture'}));
     builder.onLoad({filter:/.*/,namespace:'notification-fixture'},()=>({loader:'js',contents:'export async function processNotifications(){return []; }'}));
     builder.onResolve({filter:/^@\/db\/directory$/},args=>({path:args.path,namespace:'catalogue-fixture'}));
-    builder.onLoad({filter:/.*/,namespace:'catalogue-fixture'},()=>({loader:'js',contents:'export async function publishedWorkshop(id){return {id};}'}));
+    builder.onLoad({filter:/.*/,namespace:'catalogue-fixture'},()=>({loader:'js',contents:'export async function publishedWorkshop(id){return {id};} export async function listWorkshops(){return [];}'}));
     builder.onResolve({filter:/^(next\/server|@\/lib\/auth\/config|@\/lib\/auth\/provider)$/},args=>({path:args.path,namespace:'proxy-fixture'}));
     builder.onLoad({filter:/.*/,namespace:'proxy-fixture'},args=>({loader:'js',contents:args.path==='next/server'
       ? 'export const NextResponse={redirect:(url,status)=>new Response(null,{status,headers:{Location:String(url)}}),rewrite:(url)=>{const response=new Response(null,{headers:{"x-middleware-rewrite":String(url)}});response.cookies={set:(name,value)=>response.headers.append("Set-Cookie",name+"="+value+"; Path=/; HttpOnly; Secure; SameSite=Lax")};return response;},next:()=>{const response=new Response(null);response.cookies={set:(name,value)=>response.headers.append("Set-Cookie",name+"="+value+"; Path=/; HttpOnly; Secure; SameSite=Lax")};return response;}};'
@@ -223,7 +223,7 @@ const nativeRuntime = new Miniflare({ modules: true, script: bundle.outputFiles.
   compatibilityDate: '2026-05-15', compatibilityFlags: ['nodejs_compat'] });
 try {
   for (const mode of ['html', 'json', 'redirect', 'unavailable']) {
-    const result = await nativeRuntime.dispatchFetch(`http://fixture/?fixture-response=${mode}`, { redirect: 'manual', headers: { 'X-Riparim-Release-Commit': 'f'.repeat(40) } });
+    const result = await nativeRuntime.dispatchFetch(`http://fixture/einstellungen?fixture-response=${mode}`, { redirect: 'manual', headers: { 'X-Riparim-Release-Commit': 'f'.repeat(40) } });
     assert.equal(result.headers.get('X-Riparim-Release-Commit'), releaseCommit);
     assert.equal(result.status, mode === 'redirect' ? 303 : mode === 'unavailable' ? 503 : 200);
     if (mode === 'redirect') assert.equal(result.headers.get('Location'), 'https://riparim.com/einstellungen?weiter=%2Fbetrieb');

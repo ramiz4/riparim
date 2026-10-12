@@ -110,20 +110,13 @@ statt einfacher Kopien aktiver Dateien erforderlich.
 
 ## Hintergrundversand
 
-Ohne Worker-Kontext wartet die vorhandene Moderationsroute ihren ersten
-Versandversuch ab. Das dauerhafte Outbox-Ereignis bleibt bei Teilfehlern erhalten.
-Es gibt keine ungebundenen Fire-and-forget-Promises.
+Die Moderationsroute wartet ihren ersten Versandversuch ab. Das dauerhafte Ereignis bleibt bei Teilfehlern erhalten. Es gibt keine Fire-and-forget-Promises und keinen periodischen Maildienst.
 
 ```sh
-npm run notifications:node
+npm run notifications:node -- riparim-review-<einreichung>-revision-<revision>
 ```
 
-Dieses Kommando verarbeitet und erwartet fällige Ereignisse mit der vorhandenen
-Lease-/Idempotenzlogik. Der Betreiber führt es mit demselben Datenverzeichnis,
-der gleichen `.env` und aus dem Release-Verzeichnis alle fünf Minuten aus,
-beispielsweise über einen systemd-Timer oder Cron. Der Worker-Cron bleibt für
-Cloudflare bestehen. Timer-Ausgaben und Fehler müssen im Betrieb erfasst werden;
-dieser Umbau richtet keinen externen Scheduler oder Maildienst automatisch ein.
+Dieses Betreiberkommando wiederholt ausschließlich das benannte Ereignis und wartet den Versuch ab. Es respektiert dieselbe Lease, das sichere Idempotenzfenster, die Wartezeiten von 1/5/15/30/60 Minuten und das Limit eines Erstversands plus fünf manueller Wiederholungen. Datenverzeichnis, `.env` und Release-Verzeichnis bleiben identisch. Die geschützte Notification-API bietet dieselbe Einzelaktion; eine Sammelverarbeitung gibt es nicht. Vorhandene systemd-Mailtimer oder Crons vor Aktivierung dieses Releases stoppen und deaktivieren.
 
 ## Abnahme
 

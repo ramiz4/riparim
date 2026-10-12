@@ -67,7 +67,7 @@ try{
  const style=document.createElement('style');style.textContent=await readFile(new URL('../app/workshop-pages.css',import.meta.url),'utf8');document.head.append(style);
  assert.equal(getComputedStyle(document.querySelector('.admin-title h1')).marginTop,'0px','The heading does not reserve spacing for its removed eyebrow');
  style.remove();
- assert(!document.querySelector('.notification-panel'),'The complete notification delivery area is absent from moderation');
+ assert(!document.querySelector('.notification-panel'),'Notification diagnostics stay collapsed until explicitly opened');
  assert(!requests.some(request=>request.url.startsWith('/api/notifications')),'The compact moderation page does not read or dispatch the delivery queue');
  mode='error';await remount();
  assert.equal(document.querySelector('main [role="alert"]').textContent,getMessages('de').customer.reviewUnavailable,'A failed initial load remains announced');
@@ -124,6 +124,10 @@ try{
  assert.equal(document.querySelectorAll('.moderation-entry').length,0,'Lost access clears previously loaded private reviews');
  assert.equal(document.querySelector('main [role="alert"]').textContent,getMessages('de').common.forbidden);
  assert(!requests.some(request=>request.url.startsWith('/api/notifications')),'Preserved decisions and recovery never dispatch delivery from this page');
+ mode='success';await remount();
+ await act(async()=>{const details=document.querySelector('.notification-details');details.open=true;details.dispatchEvent(new Event('toggle'));});
+ assert(document.querySelector('.notification-panel'),'The explicit diagnostics disclosure exposes manual retry controls');
+ assert(requests.some(request=>request.url==='/api/notifications'),'Opening diagnostics reads the durable delivery state');
  console.log('Review administration: compact layout, absent delivery panel, search, keyboard filter, evidence, decisions, pagination, recovery and load/access states passed');
 }finally{await act(async()=>root.unmount());dom.window.close();}
 

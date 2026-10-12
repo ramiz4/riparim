@@ -106,7 +106,7 @@ Produktionsabhängigkeiten. Erst nach erfolgreicher Prüfung wird daraus
 geprüften vollständigen Bestand. Die vorbereiteten Anwendungsdateien werden
 beim Aktivieren erneut mit dem veröffentlichten Archiv verglichen.
 
-## Dienst und Timer
+## Dienst und manueller Versand
 
 TLS und öffentliche Hostweiterleitungen liegen beim Reverse-Proxy. Der Server
 bindet an Loopback. Der Proxy überschreibt `X-Real-IP` und erlaubt nur die
@@ -137,34 +137,7 @@ WantedBy=multi-user.target
 
 `/usr/bin/node` muss die dokumentierte Node24-Version sein. Dienste dürfen keinen
 GitHubtoken erben. Beim Service enthält `runtime.env` den Port; als Benutzer ist
-keine öffentliche Portbindung nötig. Eine Oneshot-Unit `riparim-notifications.service`
-verwendet dieselben `User`, `Group`, `WorkingDirectory`, `Environment`, `UMask`
-und statt des Serverstarts:
-
-```ini
-Type=oneshot
-ExecStart=/usr/bin/node --env-file=/opt/riparim/shared/runtime.env .node-runtime/command.mjs notifications
-```
-
-Dazugehörige `riparim-notifications.timer`:
-
-```ini
-[Unit]
-Description=Process Riparim notification outbox
-
-[Timer]
-OnCalendar=*:0/5
-Persistent=true
-Unit=riparim-notifications.service
-
-[Install]
-WantedBy=timers.target
-```
-
-Service-/Timerfehler und Ausgaben kontrollieren. Die durable Outbox wird im
-Kommando vollständig abgewartet; [Versand-/Retrygrenzen](mail-transports.md)
-bleiben erhalten. Der Installer richtet keinen Maildienst, Authprovider,
-Reverse-Proxy oder systemd automatisch ein.
+keine öffentliche Portbindung nötig. Mailversuche werden von der Moderationsroute abgewartet. Ein periodischer Notification-Dienst oder Timer wird nicht eingerichtet. Vorhandene `riparim-notifications.timer` und `.service` vor dem Wechsel stoppen/deaktivieren. Der Betreiber kann ein einzelnes gespeichertes Ereignis mit `node --env-file=/opt/riparim/shared/runtime.env .node-runtime/command.mjs notifications <ereignis-id>` manuell wiederholen; die serverseitigen Limits aus [Nodebetrieb](node-runtime.md) bleiben verbindlich. Der Installer richtet keinen Maildienst, Authprovider oder Reverse-Proxy automatisch ein.
 
 ## Migration, Aktivierung und HTTP-Prüfung
 
@@ -175,12 +148,11 @@ sichern und Wiederherstellbarkeit prüfen. Das bewusste `--stopped` bestätigt
 diese Betreiberbedingung; der Installer steuert keine beliebigen Hostdienste.
 
 ```sh
-sudo systemctl stop riparim-notifications.timer riparim-notifications.service riparim.service
+sudo systemctl stop riparim.service
 node /opt/riparim-tools/install.mjs activate --root /opt/riparim --tag vX.Y.Z --stopped
 sudo systemctl start riparim.service
 curl --fail --silent http://127.0.0.1:3000/api/session
 curl --fail --silent http://127.0.0.1:3000/en/workshops > /dev/null
-sudo systemctl start riparim-notifications.timer
 ```
 
 `activate` prüft Release, Archiv und Code erneut, lädt ausschließlich die private
@@ -191,7 +163,7 @@ wird `current` durch atomaren Symlinkwechsel aktiviert. Der Befehl meldet den
 vorherigen Codepfad. Eine fehlgeschlagene Migration oder HTTP-Vorprüfung erhält bisherigen Code;
 bereits erfolgreich angewendete additive Migrationen bleiben erhalten. Kein
 automatischer Datenbank-Downgrade. Bei fehlgeschlagenem HTTP-/Kundencheck den
-Timer gestoppt lassen und Schema/Logs ohne Secrets prüfen. Die HTTP-Smokechecks
+Dienst gestoppt lassen und Schema/Logs ohne Secrets prüfen. Die HTTP-Smokechecks
 ersetzen nicht Anmeldung, Moderation und private Downloadabnahme der Zieldomain.
 
 ## Daten erhaltender Code-Rückweg
@@ -202,11 +174,10 @@ Release vorbereiten und nach erneutem Writerstopp aktivieren:
 
 ```sh
 node /opt/riparim-tools/install.mjs prepare --root /opt/riparim --tag vPREVIOUS
-sudo systemctl stop riparim-notifications.timer riparim-notifications.service riparim.service
+sudo systemctl stop riparim.service
 node /opt/riparim-tools/install.mjs rollback --root /opt/riparim --tag vPREVIOUS --stopped --schema-compatible
 sudo systemctl start riparim.service
 curl --fail --silent http://127.0.0.1:3000/api/session
-sudo systemctl start riparim-notifications.timer
 ```
 
 `vPREVIOUS` durch einen echten Stable-Tag ersetzen. `rollback` wechselt nur den
