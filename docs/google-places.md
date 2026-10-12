@@ -1,6 +1,6 @@
 # Google-Bewertungen für Riparim
 
-Die Google-Schlüssel sind in der gehosteten Laufzeit eingerichtet. Sterne und Anzahl werden ausschließlich aktuell von Google geladen; alte Momentaufnahmen werden nicht mehr angezeigt oder zur Sortierung verwendet. Alle **160 veröffentlichten Kfz-Servicebetriebe einschließlich Fahrzeugaufbereitung** besitzen eine eindeutig bestätigte Place ID. Die Zuordnungen werden einzeln anhand offizieller Karten, eigener Betriebswebsites oder übereinstimmender unabhängiger Kontakt-/Standortnachweise geprüft. Am 5. Oktober kamen 32 bestätigte IDs hinzu; zwei bestehende Identitäten konnten nach Korrektur überholter Verzeichnisstandorte veröffentlicht werden. `google.verification` dokumentiert Methode, Beleglinks und eigene Prüfnotiz. Auto Electronics gehört zu den 27 auf Nutzerauftrag entfernten, nicht eindeutig zugeordneten Entwürfen. Die sechs in `data/workshop-scope.json` begründeten fachlichen Ausschlüsse, der unabhängig als geschlossen belegte Opel-Rakovica-Betrieb und das alte Reno-Südprofil wurden nach abschließender Prüfung auf Nutzerauftrag entfernt. Der belegte Reno-Nordstandort wird als neues öffentliches Profil geführt. Die tatsächliche Anzeige hängt zusätzlich von der verfügbaren Google-Anbindung im Browser ab.
+Die Google-Schlüssel sind in der gehosteten Laufzeit eingerichtet. Sterne und Anzahl werden ausschließlich aktuell von Google geladen; alte Momentaufnahmen werden nicht mehr angezeigt oder zur Sortierung verwendet. Alle **162 veröffentlichten Kfz-Servicebetriebe einschließlich Fahrzeugaufbereitung** besitzen eine eindeutig bestätigte Place ID. Die Zuordnungen werden einzeln anhand offizieller Karten, eigener Betriebswebsites oder übereinstimmender unabhängiger Kontakt-/Standortnachweise geprüft. Am 5. Oktober kamen 32 bestätigte IDs hinzu; zwei bestehende Identitäten konnten nach Korrektur überholter Verzeichnisstandorte veröffentlicht werden. `google.verification` dokumentiert Methode, Beleglinks und eigene Prüfnotiz. Auto Electronics gehört zu den 27 auf Nutzerauftrag entfernten, nicht eindeutig zugeordneten Entwürfen. Die sechs in `data/workshop-scope.json` begründeten fachlichen Ausschlüsse, der unabhängig als geschlossen belegte Opel-Rakovica-Betrieb und das alte Reno-Südprofil wurden nach abschließender Prüfung auf Nutzerauftrag entfernt. Der belegte Reno-Nordstandort wird als neues öffentliches Profil geführt. Die tatsächliche Anzeige hängt zusätzlich von der verfügbaren Google-Anbindung im Browser ab.
 
 Die zentrale Importquelle ist `data/workshops.json`; sie enthält Profile, stabile Riparim-IDs, Google-Zuordnungen und belegte Momentaufnahmen getrennt. Datenformat, Bestandsprüfung und Importbefehle stehen in `docs/workshop-data.md`. API-Inhalte werden nicht dauerhaft in Git gespeichert; ein Google-Bulkexport benötigt passende Datenrechte.
 
@@ -405,3 +405,13 @@ IDs und aktualisiert kein bestehendes Profil. DE/SQ/EN-Inhalte und zentrale
 von noch zu bestätigender Live-Veröffentlichung. Die ursprünglichen 158
 Profile sind vor dem Import vollständig ohne Profilfeldabweichung mit D1
 abgeglichen und geschützt gesichert worden.
+
+## Verbindlicher Rechercheweg der täglichen Routine
+
+Seit der Nutzerentscheidung vom 12. Oktober 2026 prüft die tägliche
+Importautomation neue Identitäten immer ausschließlich über die öffentliche
+Google-Maps-Oberfläche. Sie verwendet keine eigenen API-Schlüssel,
+Places-/Maps-API- oder SDK-Aufrufe, Einbettungen oder API-Finder.
+Der vollständige Ablauf und die Rückstellungsbedingungen stehen in
+[daily-workshop-import.md](daily-workshop-import.md). Bestehende produktive
+Widgets und deren Providerquoten bleiben von dieser Rechercheregel unberührt.

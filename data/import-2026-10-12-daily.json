@@ -1,0 +1,495 @@
+{
+  "date": "2026-10-12",
+  "startedAt": "2026-10-12T07:02:08.362Z",
+  "checkedAt": "2026-10-12T07:34:44.678190Z",
+  "status": "prepared_pr_pending_build_release",
+  "baseCommit": "ddd9997989fdb289923bc5ee11265d8674d4400e",
+  "branch": "codex/daily-import-2026-10-12",
+  "reason": "Two candidates satisfy all independent source and public Maps identity requirements. No API/SDK calls. Remaining leads deferred for incomplete or conflicting identity proof.",
+  "municipalitiesInvestigated": [
+    "Vushtrri",
+    "Podujevë",
+    "Lipjan",
+    "Drenas",
+    "Skenderaj",
+    "Istog",
+    "Deçan",
+    "Klinë",
+    "Rahovec",
+    "Suharekë",
+    "Viti",
+    "Kamenicë",
+    "Pejë"
+  ],
+  "candidates": [
+    {
+      "id": "auto-elektro-service-agroni-vushtrri",
+      "name": "Auto Elektro Service AGRONI",
+      "city": "Vushtrri",
+      "sourceUrls": [
+        "https://aesagroni.com/rreth-nesh"
+      ],
+      "placeId": "ChIJbT1QoXtbUxMRVVAT8u2M2Rc",
+      "checkedAt": "2026-10-12T07:32:35.413040Z",
+      "mapsMethod": "Public Maps result official !19s Place ID; direct ID URL with deliberately incorrect fallback query",
+      "nameMatched": true,
+      "normalizedPhoneMatched": true,
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "activeEntry": true,
+      "directIdResolved": true,
+      "ownershipVerificationClaimed": false,
+      "status": "imported-locally"
+    },
+    {
+      "id": "auto-servis-joni-viti",
+      "name": "Auto Servis JONI",
+      "city": "Viti",
+      "sourceUrls": [
+        "https://www.autojoni.com/"
+      ],
+      "placeId": "ChIJI_GV5zljVBMRmtSQSVzYftU",
+      "checkedAt": "2026-10-12T07:32:35.413040Z",
+      "mapsMethod": "Public Maps result official !19s Place ID; direct ID URL with deliberately incorrect fallback query",
+      "nameMatched": true,
+      "normalizedPhoneMatched": true,
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "activeEntry": true,
+      "directIdResolved": true,
+      "ownershipVerificationClaimed": false,
+      "status": "imported-locally"
+    }
+  ],
+  "duplicates": [
+    {
+      "id": "auto-servis-megi-drenas",
+      "reason": "Existing published business rediscovered during independent source research; not imported again.",
+      "sourceUrls": [
+        "https://www.autoyas.com/XK/Drenas/122648967802001/Auto-Servis-MEGI---Drenas",
+        "https://www.gjithebiznesi.com/XK/auto-servis-megi-044-609-224"
+      ]
+    },
+    {
+      "id": "auto-servis-pirqi-vushtrri",
+      "reason": "Existing published business rediscovered during independent source research; not imported again.",
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-servis-pirqi-044-444-556"
+      ]
+    },
+    {
+      "id": "auto-servis-bashkimi-viti",
+      "reason": "Existing published business rediscovered during independent source research; not imported again.",
+      "sourceUrls": [
+        "https://servis-bashkimi.com/"
+      ]
+    },
+    {
+      "id": "auto-servis-blerti-podujeve",
+      "reason": "Existing published business rediscovered during independent source research; not imported again.",
+      "sourceUrls": [
+        "https://autoservisblerti.com/"
+      ]
+    },
+    {
+      "id": "auto-servis-lirimi-podujeve",
+      "reason": "Existing published business rediscovered during independent source research; not imported again.",
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-servis-lirimi-045-533-746"
+      ]
+    },
+    {
+      "id": "auto-servis-maloku-decan",
+      "reason": "Existing published business rediscovered during independent source research; not imported again.",
+      "sourceUrls": [
+        "https://galego.cybo.com/XK/pej%C3%AB/mechanic",
+        "https://auto-servis-pjese-maloku.base44.app/"
+      ]
+    },
+    {
+      "id": "mercedes-benz-limi-service-istog",
+      "reason": "Existing published business rediscovered during independent source research; not imported again.",
+      "sourceUrls": [
+        "https://www.cybo.com/XK/%C5%BEa%C4%8D/car-repair/",
+        "https://de.cybo.com/XK/zhaq/autoreparatur/?p=8",
+        "https://www.openstreetmap.org/way/889901834"
+      ]
+    },
+    {
+      "id": "auto-servis-meti-rahovec",
+      "reason": "Existing published business rediscovered during independent source research; not imported again.",
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-servis-meti_1J-044-385-480"
+      ]
+    },
+    {
+      "id": "auto-servis-montimi-rahovec",
+      "reason": "Existing published business rediscovered during independent source research; not imported again.",
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-servis-montimi-044-269-197"
+      ]
+    },
+    {
+      "id": "auto-servis-bledi-kline",
+      "reason": "Existing published business rediscovered during independent source research; not imported again.",
+      "sourceUrls": [
+        "https://www.cybo.com/XK/klina/car-repair/"
+      ]
+    },
+    {
+      "id": "auto-rally-90-kline",
+      "reason": "Existing published business rediscovered during independent source research; not imported again.",
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-rally-049-138-886"
+      ]
+    }
+  ],
+  "uncertainties": [
+    {
+      "name": "Auto Servis & Pjesë BEXHI",
+      "sourceUrls": [
+        "https://autoservispjesbexhi.com/"
+      ],
+      "placeId": "ChIJm3DAYABfUxMR7HJj8JlPHAE",
+      "reason": "Public Maps profile has no telephone; strict phone comparison incomplete."
+    },
+    {
+      "name": "Auto Service BELTI",
+      "sourceUrls": [
+        "https://belti-service.com/",
+        "https://www.autoyas.com/XK/Suharek%C3%AB/251321245051560/AutoServis-BELTI"
+      ],
+      "reason": "Maps telephone differs from independently published business telephone; alternative Maps number not independently confirmed."
+    },
+    {
+      "name": "Wolf Detailing",
+      "sourceUrls": [
+        "https://www.autoyas.com/XK/Lipjan/705728559510841/Wolf-Detailing"
+      ],
+      "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+    },
+    {
+      "name": "Auto Servis Gashi",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/autoservisgashi-1/?p360=1"
+      ],
+      "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+    },
+    {
+      "name": "Autoservis Erjoni",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/autoservis-erjoni-1/?p360=1"
+      ],
+      "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+    },
+    {
+      "name": "Auto Servis Gjinovci",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-gjinolli-1/?p360=1"
+      ],
+      "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+    },
+    {
+      "name": "Auto Servis Fulga",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-fulga-1/?p360=1"
+      ],
+      "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+    },
+    {
+      "name": "Autoservis Lordi",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/autoservis-lordi-1/?p360=1"
+      ],
+      "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+    },
+    {
+      "name": "Auto Servis Isa",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-isa-2"
+      ],
+      "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+    },
+    {
+      "name": "Auto servis llaker LATI TUNING",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/lati--tunning-1"
+      ],
+      "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+    },
+    {
+      "name": "Auto Servis TOTI",
+      "reason": "Phone appears in towing advertisement; identity pending."
+    },
+    {
+      "name": "Auto Servis ABEDINI",
+      "reason": "Historical phone prefixes and current site continuity need independent confirmation."
+    },
+    {
+      "name": "Auto Servis BURIMI",
+      "reason": "Old advertisement names predecessor site; exact current site unconfirmed."
+    }
+  ],
+  "exclusions": [
+    {
+      "name": "Auto Servis UNIVERZAL Kamenicë",
+      "reason": "Directory proves car rental, not current car repair."
+    }
+  ],
+  "previousCatalogue": {
+    "published": 160,
+    "drafts": 0,
+    "canonicalProfileFieldsCompared": 19,
+    "placeIdsCompared": 160,
+    "profileMismatches": [],
+    "extraIds": [],
+    "duplicatePlaceIds": [],
+    "retirementMarkers": 35,
+    "pendingChanges": 0,
+    "protectedCustomerTables": "not read or modified"
+  },
+  "preflight": {
+    "healthReceipt": ".sites-runtime/daily-import-2026-10-12/resumed-health.json",
+    "apiComparisonReceipt": ".sites-runtime/daily-import-2026-10-12/catalogue-backup.json",
+    "healthy": true,
+    "publicHttpStatus": 200,
+    "checkedPages": 9,
+    "locales": [
+      "de",
+      "sq",
+      "en"
+    ],
+    "error1102": false,
+    "completeHtml": true,
+    "activeVersion": "d948bb07-7125-46b3-a6f0-eb8891de9583",
+    "trafficPercentage": 100,
+    "observability": {
+      "from": "2026-10-12T07:16:00Z",
+      "to": "2026-10-12T07:21:00Z",
+      "okInvocations": 11,
+      "otherObservedOutcomes": 0,
+      "workerVersion": "d948bb07-7125-46b3-a6f0-eb8891de9583",
+      "limitation": "Bounded observation only."
+    }
+  },
+  "provider": {
+    "profileConfirmed": true,
+    "googleServerRequests": 0,
+    "googleBrowserSdkRequests": 0,
+    "mapsIdentityQueries": 6,
+    "sharedServerDailyLimit": 100,
+    "freeRemainingQuotaConfirmed": false,
+    "quotaReadback": {
+      "getPlacePerDay": 0,
+      "getPhotoMediaPerDay": 0,
+      "searchTextPerDay": 20,
+      "searchNearbyPerDay": 75000,
+      "displayedCurrentUsage": 0
+    },
+    "billingReadback": {
+      "period": "2026-10-01/2026-10-12",
+      "reportedChf": 4.34,
+      "placeDetailsEnterpriseEvents": 1261,
+      "note": "Existing reported historical charge, unchanged from prior evidence; this invocation made no billable Google request. Reporting delay prevents treating zero current daily usage as free monthly remainder."
+    },
+    "changesMade": false,
+    "identityMethod": "Public Google Maps UI in confirmed project profile; no API keys, SDK calls or provider configuration changes.",
+    "mapsDirectIdChecks": 2,
+    "persistedGoogleBusinessFields": [],
+    "routineUpdated": {
+      "alwaysPublicMapsUi": true,
+      "automationReadbackConfirmed": true,
+      "schedulePreserved": "daily 09:00 local Europe/Zurich",
+      "modelPreserved": "gpt-6.1-sol high",
+      "historicalApiQuotaStopSupersededForPublicUi": true
+    },
+    "nonMapsGoogleWebNavigation": 1
+  },
+  "dryRun": {
+    "status": "passed",
+    "mode": "dry-run",
+    "addedIds": [
+      "auto-elektro-service-agroni-vushtrri",
+      "auto-servis-joni-viti"
+    ],
+    "updatedIds": [],
+    "deduplicated": [],
+    "before": 160,
+    "after": 162
+  },
+  "import": {
+    "status": "written-to-canonical",
+    "addedIds": [
+      "auto-elektro-service-agroni-vushtrri",
+      "auto-servis-joni-viti"
+    ],
+    "updatedIds": [],
+    "publishedNewCount": 0,
+    "canonicalAfter": 162
+  },
+  "translationCheck": {
+    "status": "passed",
+    "command": "npm run catalog:check",
+    "locales": [
+      "de",
+      "sq",
+      "en"
+    ],
+    "centralHashContract": "workshopTranslationSourceHash",
+    "newOverlays": 2,
+    "orderedFieldsEditoriallyChecked": true
+  },
+  "validation": {
+    "catalogueCheck": "passed",
+    "diffCheck": "passed; manifest JSON parsed and checked against saved live health/API receipts",
+    "ci": {
+      "catalogue": "passed",
+      "tests": "passed: complete npm test, 69460ms, exit0",
+      "types": "passed: npx tsc --noEmit",
+      "lint": "passed: npm run lint",
+      "builds": "pending clean committed builds/package for Node, Cloudflare and Sites"
+    },
+    "independentReview": {
+      "status": "passed",
+      "reviewer": "independent_import_review",
+      "sourcesIndependentlyRead": true,
+      "previous160ProfilesPreserved": true,
+      "translationSemanticsReviewed": true,
+      "finding": "Old handoff API quota sentence corrected and reread."
+    },
+    "runtime": {
+      "node": "v24.21.0",
+      "ciNodeMajor": "24",
+      "go": "go1.27.1 darwin/arm64",
+      "ciGo": "1.27.1",
+      "goOfficialArchiveSha256": "ee215d57e0ec269c60cc9ceca68e6bda321ba9ee5afe24f4b0988703c2d87d12",
+      "officialChecksumMatched": true
+    }
+  },
+  "publication": {
+    "newPr": null,
+    "newRelease": null,
+    "newDeploy": null,
+    "currentRelease": "https://github.com/ramiz4/riparim/releases/tag/v1.19.0",
+    "currentReleaseRun": "https://github.com/ramiz4/riparim/actions/runs/38215619507",
+    "currentReleaseJobs": "all successful",
+    "assetsConfirmed": 6,
+    "provenanceCommitMatches": true,
+    "archiveDigestsMatchGithubAssetMetadata": true,
+    "currentPrs": [],
+    "openImportPrs": 0,
+    "activeReleaseJobs": 0
+  },
+  "handoff": {
+    "state": "Two local canonical additions pending complete CI, independent review, PR, squash merge and release/live acceptance.",
+    "lock": "Held by resumed run until safe PR/release/live acceptance.",
+    "resume": "Reuse this worktree and dated manifest; reacquire repository lock before synchronization/research. Recheck live health, full D1 catalogue and required browser profile. Perform new identities only in public Maps UI without own API/SDK calls; API free quota does not gate this UI path."
+  },
+  "runHistory": [
+    {
+      "finishedAt": "2026-10-12T07:12:12.810223Z",
+      "status": "stopped-before-research",
+      "reason": "No new import: current GetPlaceRequest daily quota is 0. Free remaining quota and a permitted complete API identity-validation path are not confirmed. User requires stopping when free remaining quota is unknown; no API/SDK requests or quota changes were made. This is a precondition stop, not a finding that Kosovo has no suitable new businesses."
+    }
+  ],
+  "resumedAt": "2026-10-12T07:20:16.975167+00:00",
+  "coverage": {
+    "independentCandidates": 15,
+    "additionalDeferredLeads": 8,
+    "targetMaximum": 30,
+    "belowTenReason": "Only two businesses completed all required source, phone, location and active direct-ID checks. BEXHI has no Maps telephone; BELTI has a conflicting phone. Remaining leads need further public Maps identity proof; native Chrome repeatedly switched to other live work, so no unverified lead was promoted."
+  },
+  "backup": {
+    "protectedLocal": true,
+    "tables": [
+      "workshops",
+      "workshop_google_places",
+      "workshop_google_ratings",
+      "catalog_state"
+    ],
+    "counts": [
+      160,
+      160,
+      129,
+      57
+    ],
+    "privateUserTables": false,
+    "restoredInIsolatedSqlite": true,
+    "restoredRowsEqualBackup": true,
+    "retainedOutsideGit": true
+  },
+  "schemaVersion": 1,
+  "localDate": "2026-10-12",
+  "timezone": "Europe/Zurich",
+  "before": {
+    "total": 160,
+    "published": 160,
+    "drafts": 0
+  },
+  "after": {
+    "total": 162,
+    "published": 162,
+    "drafts": 0
+  },
+  "importedWorkshopIds": [
+    "auto-elektro-service-agroni-vushtrri",
+    "auto-servis-joni-viti"
+  ],
+  "profiles": [
+    {
+      "id": "auto-elektro-service-agroni-vushtrri",
+      "name": "Auto Elektro Service AGRONI",
+      "city": "Vushtrri",
+      "sourceUrls": [
+        "https://aesagroni.com/rreth-nesh"
+      ],
+      "placeId": "ChIJbT1QoXtbUxMRVVAT8u2M2Rc",
+      "checkedAt": "2026-10-12T07:32:35.413040Z",
+      "mapsMethod": "Public Maps result official !19s Place ID; direct ID URL with deliberately incorrect fallback query",
+      "nameMatched": true,
+      "normalizedPhoneMatched": true,
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "activeEntry": true,
+      "directIdResolved": true,
+      "ownershipVerificationClaimed": false,
+      "status": "imported-locally"
+    },
+    {
+      "id": "auto-servis-joni-viti",
+      "name": "Auto Servis JONI",
+      "city": "Viti",
+      "sourceUrls": [
+        "https://www.autojoni.com/"
+      ],
+      "placeId": "ChIJI_GV5zljVBMRmtSQSVzYftU",
+      "checkedAt": "2026-10-12T07:32:35.413040Z",
+      "mapsMethod": "Public Maps result official !19s Place ID; direct ID URL with deliberately incorrect fallback query",
+      "nameMatched": true,
+      "normalizedPhoneMatched": true,
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "activeEntry": true,
+      "directIdResolved": true,
+      "ownershipVerificationClaimed": false,
+      "status": "imported-locally"
+    }
+  ],
+  "errors": [
+    {
+      "stage": "local-tests",
+      "message": "Initial full suite rejected missing conventional importedWorkshopIds/after fields in new daily manifest; canonical data unchanged. Manifest contract corrected before rerun.",
+      "status": "resolved-full-suite-passed"
+    },
+    {
+      "stage": "local-tests",
+      "message": "Host TMPDIR /var path and canonical /private/var differed in tool-install fixture. Rerun uses isolated worktree TMPDIR; fixture passed without code/test changes.",
+      "status": "resolved-full-suite-passed"
+    },
+    {
+      "stage": "local-packaging",
+      "message": "Initial Node archive packaging correctly rejected dirty uncommitted source. Rebuild and package will run from clean committed source after review. No deployment attempted.",
+      "status": "pending-clean-commit-rerun"
+    }
+  ]
+}

@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-10T22:13:27.726Z",
+  "updatedAt": "2026-10-12T07:33:03.101Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 160,
+    "published": 162,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "Alle 158 veröffentlichten Kfz-Servicebetriebe einschließlich Fahrzeugaufbereitung besitzen einzeln bestätigte Google-Place-IDs. 29 neue Betriebe wurden anhand unabhängiger Kontakt-, Standort- und Leistungsbelege ergänzt; keine offenen Entwürfe.",
-    "matchedPlaceIds": 160,
+    "reason": "Alle 162 veröffentlichten Kfz-Servicebetriebe besitzen einzeln bestätigte Google-Place-IDs. Neue Identitäten werden über die öffentliche Maps-Oberfläche gegen unabhängige Kontakt-, Standort- und Leistungsbelege geprüft; keine offenen Entwürfe.",
+    "matchedPlaceIds": 162,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -701,6 +701,53 @@
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
+        }
+      }
+    },
+    {
+      "id": "auto-elektro-service-agroni-vushtrri",
+      "name": "Auto Elektro Service AGRONI",
+      "city": "Vushtrri",
+      "address": "22 Maji, Vushtrri",
+      "phone": "+38344900333",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Diagnose & Elektronik"
+      ],
+      "serviceDetails": [
+        "Fahrzeugdiagnose",
+        "Autoelektrik",
+        "Reparatur von Steuergeräten",
+        "Schlüsselprogrammierung",
+        "Airbag-Service"
+      ],
+      "languages": [],
+      "specialty": "Autoelektrik · Fahrzeugdiagnose",
+      "description": "Autoelektrik in Vushtrri mit Fahrzeugdiagnose, Steuergerätereparatur und Schlüsselprogrammierung laut Betriebswebsite.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://aesagroni.com/rreth-nesh",
+          "title": "Betriebswebsite: Kontakt, Standort und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-12",
+      "status": "published",
+      "updatedAt": "2026-10-12T07:32:35.413040Z",
+      "google": {
+        "placeId": "ChIJbT1QoXtbUxMRVVAT8u2M2Rc",
+        "matchedAt": "2026-10-12T07:32:35.413040Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://aesagroni.com/rreth-nesh"
+          ],
+          "note": "Name, normalisierte Telefonnummer und Standort unabhängig abgeglichen. Aktiver öffentlicher Maps-Eintrag; Place-ID aus offiziellem sichtbarem Maps-Link direkt mit absichtlich unpassender Ersatzsuche rückgeprüft. Keine Google-Inhaberbestätigung und keine eigenen API-/SDK-Aufrufe."
         }
       }
     },
@@ -3592,6 +3639,53 @@
             "https://www.gjithebiznesi.com/XK/auto-servis-good-year-044-371-634"
           ],
           "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-joni-viti",
+      "name": "Auto Servis JONI",
+      "city": "Viti",
+      "address": "Rr. Dushku nr. 130, Sadovinë e Jerlive, Viti",
+      "phone": "+38349866660",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung",
+        "Diagnose & Elektronik",
+        "Reifen & Klima"
+      ],
+      "serviceDetails": [
+        "Fahrzeugservice und Reparaturen",
+        "Fahrzeugdiagnose",
+        "Klimaservice"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice · Diagnose · Klima",
+      "description": "Pkw-Service in Sadovinë e Jerlive mit Reparaturen, Fahrzeugdiagnose und Klimaservice laut Betriebswebsite.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.autojoni.com/",
+          "title": "Betriebswebsite: Kontakt, Standort und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-12",
+      "status": "published",
+      "updatedAt": "2026-10-12T07:32:35.413040Z",
+      "google": {
+        "placeId": "ChIJI_GV5zljVBMRmtSQSVzYftU",
+        "matchedAt": "2026-10-12T07:32:35.413040Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.autojoni.com/"
+          ],
+          "note": "Name, normalisierte Telefonnummer und Standort unabhängig abgeglichen. Aktiver öffentlicher Maps-Eintrag; Place-ID aus offiziellem sichtbarem Maps-Link direkt mit absichtlich unpassender Ersatzsuche rückgeprüft. Keine Google-Inhaberbestätigung und keine eigenen API-/SDK-Aufrufe."
         }
       }
     },

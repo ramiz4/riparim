@@ -384,6 +384,40 @@
       }
     },
     {
+      "id": "auto-elektro-service-agroni-vushtrri",
+      "sourceHash": "7d17ec4f71f86f90f4f010cdfcb5ef634f413136bec14e142c20317f9fb7c603",
+      "sq": {
+        "specialty": "Autoelektrikë · Diagnostikim automjetesh",
+        "description": "Autoelektrikë në Vushtrri me diagnostikim automjetesh, riparim të njësive të kontrollit dhe programim çelësash sipas faqes së biznesit.",
+        "serviceDetails": [
+          "Diagnostikim automjetesh",
+          "Autoelektrikë",
+          "Riparim i njësive të kontrollit",
+          "Programim çelësash",
+          "Servis i airbagëve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia për ta kontaktuar nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e biznesit: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Auto electrics · Vehicle diagnostics",
+        "description": "Auto electrics in Vushtrri with vehicle diagnostics, control unit repair and key programming according to the business website.",
+        "serviceDetails": [
+          "Vehicle diagnostics",
+          "Auto electrics",
+          "Control unit repair",
+          "Key programming",
+          "Airbag servicing"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Business website: contact, location and services"
+        ]
+      }
+    },
+    {
       "id": "auto-elektro-servis-a-plus-prizren",
       "sourceHash": "4837d310d4947d15410f50c2db971f5e6e473d88a1b9309b9efed0ecd05f744a",
       "sq": {
@@ -1922,6 +1956,36 @@
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category",
           "Contact, location and passenger-car service cross-check dated 5 October 2026"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-joni-viti",
+      "sourceHash": "8b2efe72a9eb34d7b25cc3d7c9598fd467352db8bd0152621c8383255f8077b8",
+      "sq": {
+        "specialty": "Servis automjetesh · Diagnostikim · Klimatizim",
+        "description": "Servis për vetura në Sadovinë e Jerlive me riparime, diagnostikim automjetesh dhe servis të klimatizimit sipas faqes së biznesit.",
+        "serviceDetails": [
+          "Servis dhe riparime automjetesh",
+          "Diagnostikim automjetesh",
+          "Servis i klimatizimit"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia për ta kontaktuar nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e biznesit: kontakti, vendndodhja dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing · Diagnostics · Air conditioning",
+        "description": "Car servicing in Sadovinë e Jerlive with repairs, vehicle diagnostics and air conditioning servicing according to the business website.",
+        "serviceDetails": [
+          "Vehicle servicing and repairs",
+          "Vehicle diagnostics",
+          "Air conditioning servicing"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Business website: contact, location and services"
         ]
       }
     },
