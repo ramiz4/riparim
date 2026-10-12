@@ -159,8 +159,9 @@ In Katalogkarten entfällt der innere Rahmen. Der Baustein übernimmt die
 Kartenfläche; Bewertungsschrift und Abstände verwenden ausschließlich die
 offiziellen CSS-Eigenschaften. Google-Quellenhinweis und Infofunktion bleiben
 sichtbar, die Profilbausteine behalten ihre eigene Gestaltung.
-Die zusätzliche Riparim-Überschrift, Ladezeit und Maps-Aktion entfallen bei
-erfolgreicher Kataloganzeige; Fehler- und Veraltungsfälle behalten den Maps-Fallback.
+Die zusätzliche Riparim-Überschrift, Ladezeit und Maps-Aktion entfallen in
+Katalogkarten. Bei nicht verfügbaren oder veralteten Google-Daten entfällt dort
+der gesamte Google-Block ohne Fehlermeldung; der Kartenlink führt zum Profil.
 Das Profil verwendet die oben beschriebenen getrennten Advanced-Bausteine für
 Bewertung/Öffnungszeiten im Kopf und Kommentare unter den eigenen Rezensionen.
 Die Karten stellen einen eigenen Google-Widgetblock in voller Kartenbreite bereit;
