@@ -179,6 +179,13 @@ try{
  await outboxModule.processNotifications({id:event(limited).id,manual:true});
  check(event(limited).attempts===6&&attempts.length===beforeManual+5,'An additional manual retry cannot send or increment attempts');
  check((await queue.POST(request('POST',{action:'dispatch'},'/api/notifications'))).status===400,'Bulk dispatch is no longer supported');deliveryMode='success';
+ const expiredView=fixtureVisit();await moderate(expiredView);db.prepare("UPDATE review_notifications SET attempts=1,state='pending',first_attempt_at=?,last_error='provider_unavailable' WHERE visit_id=?").run(Date.now()-24*3600000,expiredView);
+ db.prepare("UPDATE review_notifications SET state='pending',last_error='provider_unavailable' WHERE visit_id=?").run(limited);
+ const projected=await outboxModule.notificationQueue();
+ const expiredItem=projected.notifications.find(item=>item.visitId===expiredView),limitedItem=projected.notifications.find(item=>item.visitId===limited);
+ check(expiredItem.state==='unknown'&&expiredItem.error==='idempotency_window_expired'&&!expiredItem.retryable,'Reading expired legacy events explains why manual retry is disabled');
+ check(limitedItem.state==='failed'&&limitedItem.error==='retry_limit'&&!limitedItem.retryable,'Reading an exhausted historical pending event exposes the attempt limit');
+ check(event(expiredView).state==='pending'&&event(limited).state==='pending','Status projection never writes or starts background cleanup');
  const view=await queue.GET(request('GET',null,'/api/notifications')).then(r=>r.json());
  check(view.notifications.length>0&&!JSON.stringify(view).includes('re_fixture_secret')&&!JSON.stringify(view).includes('member@example.test')&&!JSON.stringify(view).includes('payload'),'The admin queue returns useful status without secrets or recipient/content payloads');
  check((await queue.POST(request('POST',{action:'retry',id:event(id).id,to:'other@example.test'},'/api/notifications'))).status===400,'Retry actions cannot override recipient or message content');

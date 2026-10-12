@@ -1,4 +1,5 @@
 import type {Translator,MessageKey} from "@/lib/i18n/messages";
+export const maxNotificationAttempts=6; // One initial send plus five manual retries.
 export type ReviewDecision="published"|"needs_more";
 export type NotificationState="pending"|"sending"|"sent"|"blocked"|"failed"|"unknown"|"suppressed";
 export type NotificationRow={

@@ -8,12 +8,12 @@ import {callbackLocale} from "@/lib/auth/locale";
 import {validUserId} from "@/lib/admin-users";
 import {DeliveryError,deliveryPayloadSchema,reviewEmail} from "./email";
 import {emailConfiguration} from "./transports";
-import type {NotificationRow,NotificationView} from "./contract";
+import {maxNotificationAttempts,type NotificationRow,type NotificationView} from "./contract";
 
-const retryWindow=23*3600000,maxDeliveryAttempts=6;
+const retryWindow=23*3600000;
 const retryDelays=[60000,300000,900000,1800000,3600000];
 const withinWindow=(row:NotificationRow)=>row.first_attempt_at===null||Date.now()-row.first_attempt_at<retryWindow;
-export function canRetryNotification(row:NotificationRow){return row.attempts<maxDeliveryAttempts&&row.next_attempt_at<=Date.now()&&!row.smtp_in_flight&&!["sent","suppressed","unknown"].includes(row.state)&&withinWindow(row)&&(row.state!=="sending"||(row.lease_until??0)<=Date.now());}
+export function canRetryNotification(row:NotificationRow){return row.attempts<maxNotificationAttempts&&row.next_attempt_at<=Date.now()&&!row.smtp_in_flight&&!["sent","suppressed","unknown"].includes(row.state)&&withinWindow(row)&&(row.state!=="sending"||(row.lease_until??0)<=Date.now());}
 async function keyHash(value:string){return Array.from(new Uint8Array(await crypto.subtle.digest("SHA-256",new TextEncoder().encode(value))),byte=>byte.toString(16).padStart(2,"0")).join("");}
 async function recipient(owner:string){
  const config=await getAuthConfig(),auth=await getAuthAdmin();
@@ -67,8 +67,8 @@ async function deliver(row:NotificationRow){
  }catch(error){
   const code=error instanceof DeliveryError?error.code:"provider_unavailable",retry=error instanceof DeliveryError?error.retryable:true;
   if(smtpStarted&&!knownNonAcceptance){await setState(row,"unknown","delivery_uncertain");}
-  else if(retry){await setState(row,row.attempts>=maxDeliveryAttempts?"failed":"pending",row.attempts>=maxDeliveryAttempts?"retry_limit":code,Date.now()+retryDelays[Math.max(0,Math.min(row.attempts-1,retryDelays.length-1))],knownNonAcceptance);}
-  else await setState(row,row.attempts>=maxDeliveryAttempts?"failed":"blocked",row.attempts>=maxDeliveryAttempts?"retry_limit":code,Date.now()+retryDelays[Math.min(row.attempts-1,retryDelays.length-1)],knownNonAcceptance);
+  else if(retry){await setState(row,row.attempts>=maxNotificationAttempts?"failed":"pending",row.attempts>=maxNotificationAttempts?"retry_limit":code,Date.now()+retryDelays[Math.max(0,Math.min(row.attempts-1,retryDelays.length-1))],knownNonAcceptance);}
+  else await setState(row,row.attempts>=maxNotificationAttempts?"failed":"blocked",row.attempts>=maxNotificationAttempts?"retry_limit":code,Date.now()+retryDelays[Math.min(row.attempts-1,retryDelays.length-1)],knownNonAcceptance);
   console.error("review-notification-deferred",{event:row.id,reason:code});
  }
 }
@@ -89,7 +89,7 @@ export async function processNotifications({id,manual=false}:{id?:string;manual?
  const token=crypto.randomUUID();
  // The persisted cooldown and attempt budget are checked again while claiming.
  // Concurrent requests cannot bypass either by racing the initial read.
- const claimed=await db.prepare(`UPDATE review_notifications SET state='sending',lease_token=?,lease_until=?,attempts=attempts+1 WHERE id=? AND smtp_in_flight=0 AND attempts<? AND next_attempt_at<=? AND (state IN (${manual?"'pending','blocked','failed'":"'pending'"}) OR (state='sending' AND lease_until<=?)) RETURNING *`).bind(token,now+120000,id,manual?maxDeliveryAttempts:1,now,now).first<NotificationRow>();
+ const claimed=await db.prepare(`UPDATE review_notifications SET state='sending',lease_token=?,lease_until=?,attempts=attempts+1 WHERE id=? AND smtp_in_flight=0 AND attempts<? AND next_attempt_at<=? AND (state IN (${manual?"'pending','blocked','failed'":"'pending'"}) OR (state='sending' AND lease_until<=?)) RETURNING *`).bind(token,now+120000,id,manual?maxNotificationAttempts:1,now,now).first<NotificationRow>();
  if(!claimed)return false;
  await deliver(claimed);return true;
 }
@@ -99,6 +99,12 @@ export async function notificationQueue(cursor?:string|null){
  if(cursor){try{if(cursor.length>512)throw Error();page=z.object({date:z.string().max(30).refine(value=>Number.isFinite(Date.parse(value))),id:z.string().min(1).max(100).regex(/^[a-z0-9-]+$/)}).strict().parse(JSON.parse(atob(cursor)));}catch{throw Error("INVALID_CURSOR");}}
  const rows=await db.prepare(`SELECT n.*,w.name AS workshop_name FROM review_notifications n LEFT JOIN visits v ON v.id=n.visit_id LEFT JOIN workshops w ON w.id=v.workshop WHERE n.state NOT IN ('sent','suppressed')${page?" AND (n.created_at<? OR (n.created_at=? AND n.id<?))":""} ORDER BY n.created_at DESC,n.id DESC LIMIT 51`).bind(...(page?[page.date,page.date,page.id]:[])).all<NotificationRow&{workshop_name:string|null}>();
  const items=rows.results.slice(0,50),last=items.at(-1);
- const notifications:NotificationView[]=items.map(row=>({id:row.id,visitId:row.visit_id,workshopName:row.workshop_name??"Ehemalige Einreichung",decision:row.decision,state:row.state,attempts:row.attempts,nextAttemptAt:row.next_attempt_at,createdAt:row.created_at,error:row.last_error,retryable:canRetryNotification(row)}));
+ const notifications:NotificationView[]=items.map(row=>{
+  const leased=row.state==="sending"&&(row.lease_until??0)>Date.now(),finished=["sent","suppressed","unknown"].includes(row.state);
+  const error=!leased&&!finished?(row.smtp_in_flight?"delivery_uncertain":!withinWindow(row)?"idempotency_window_expired":row.attempts>=maxNotificationAttempts?"retry_limit":row.last_error):row.last_error;
+  const state=!leased&&!finished&&["delivery_uncertain","idempotency_window_expired"].includes(error??"")?"unknown":!leased&&!finished&&error==="retry_limit"?"failed":row.state;
+  // Report expired/historical limits on reads; no periodic cleanup is needed.
+  return {id:row.id,visitId:row.visit_id,workshopName:row.workshop_name??"Ehemalige Einreichung",decision:row.decision,state,attempts:row.attempts,nextAttemptAt:row.next_attempt_at,createdAt:row.created_at,error,retryable:canRetryNotification(row)};
+ });
  return {notifications,nextCursor:rows.results.length>50&&last?btoa(JSON.stringify({date:last.created_at,id:last.id})):null,configured:!!emailConfiguration()};
 }
