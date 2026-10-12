@@ -2,6 +2,13 @@ import {defineMessages,type MessageShape} from "./message-contract";
 
 export const publicDe={
  "heroCar": "Dein Auto.",
+ "partnerTitle": "Premium-Partner",
+ "partnerKicker": "Partnerplätze",
+ "partnerHelp": "Werkstätten im Fokus.",
+ "partnerPreviewHelp": "Aktuell sind noch keine Premium-Partner gelistet. Diese Beispielplätze zeigen zufällig ausgewählte Werkstätten.",
+ "partnerPaidHelp": "Bezahlte Platzierungen bestätigter Premium-Partner. Die Auswahl wechselt zufällig.",
+ "partnerExample": "Beispielplatzierung",
+ "partnerAd": "Anzeige · Premium-Partner",
  "shortcutsTitle": "Nach Ort oder Leistung suchen",
  "shortcutsCities": "Nach Ort",
  "shortcutsServices": "Nach Leistung",
@@ -221,6 +228,13 @@ export const publicDe={
 const check=defineMessages<typeof publicDe>();
 export const publicSq=/* @__PURE__ */ check({
  "heroCar": "Makina jote.",
+ "partnerTitle": "Partnerë Premium",
+ "partnerKicker": "Vende për partnerë",
+ "partnerHelp": "Servise në fokus.",
+ "partnerPreviewHelp": "Aktualisht nuk ka partnerë Premium të listuar. Këto vende ilustruese tregojnë servise të zgjedhura rastësisht.",
+ "partnerPaidHelp": "Vendosje me pagesë të partnerëve Premium të konfirmuar. Përzgjedhja ndryshon rastësisht.",
+ "partnerExample": "Vendosje ilustruese",
+ "partnerAd": "Reklamë · Partner Premium",
  "shortcutsTitle": "Kërko sipas vendit ose shërbimit",
  "shortcutsCities": "Sipas vendit",
  "shortcutsServices": "Sipas shërbimit",
@@ -439,6 +453,13 @@ export const publicSq=/* @__PURE__ */ check({
 } as const satisfies MessageShape<typeof publicDe>);
 export const publicEn=/* @__PURE__ */ check({
  "heroCar": "Your car.",
+ "partnerTitle": "Premium partners",
+ "partnerKicker": "Partner placements",
+ "partnerHelp": "Workshops in focus.",
+ "partnerPreviewHelp": "No Premium partners are currently listed. These example placements show randomly selected workshops.",
+ "partnerPaidHelp": "Paid placements from confirmed Premium partners. The selection rotates randomly.",
+ "partnerExample": "Example placement",
+ "partnerAd": "Ad · Premium partner",
  "shortcutsTitle": "Search by location or service",
  "shortcutsCities": "By location",
  "shortcutsServices": "By service",

@@ -12,7 +12,7 @@ globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
 globalThis.IntersectionObserver=class{observe(){}disconnect(){}};
 window.scrollTo=()=>{};
 window.matchMedia=()=>({matches:false,addEventListener(){},removeEventListener(){}});
-globalThis.fetch=async url=>{if(String(url).startsWith('/api/workshops?'))return Response.json({workshops:[]});assert.equal(url,'/api/google-places');return Response.json({enabled:false});};
+globalThis.fetch=async url=>{if(String(url).startsWith('/api/premium-workshops?'))return Response.json({workshops:[],preview:true});assert.equal(url,'/api/google-places');return Response.json({enabled:false});};
 
 const output='.test-runtime/public-performance';await mkdir(output,{recursive:true});
 await build({stdin:{contents:`export {DiscoverWorkshops} from './components/discover-workshops';export {default as CatalogueLoading} from './app/[locale]/werkstaetten/loading';export {default as Finder} from './app/finder';export {default as Catalogue} from './app/[locale]/werkstaetten/catalogue';export {I18nProvider} from './lib/i18n/client';export {getMessages,createTranslator} from './lib/i18n/messages';export {defaultCatalogueFilters} from './lib/catalogue-filters';`,resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/ui.mjs',bundle:true,platform:'node',format:'esm',packages:'external',loader:{'.css':'empty'},plugins:[{name:'navigation-fixture',setup(b){
@@ -114,28 +114,30 @@ try{
  for(const locale of ['de','sq','en']){
   const t=createTranslator(getMessages(locale));
   let finish;
-  globalThis.fetch=async url=>String(url).startsWith('/api/workshops?')?new Promise(resolve=>{finish=resolve;}):Response.json({enabled:false});
+  globalThis.fetch=async url=>String(url).startsWith('/api/premium-workshops?')?new Promise(resolve=>{finish=resolve;}):Response.json({enabled:false});
   await act(async()=>root.render(wrap(locale,h(DiscoverWorkshops))));
   assert.equal(document.querySelector('.discover-section [role="status"]').textContent,t('public.loadingWorkshops'));
   const published=[...workshops.slice(0,5)].reverse();
-  await act(async()=>finish(Response.json({workshops:[{...workshops[0],id:'hidden',name:'AAA hidden',status:'draft'},...published]})));
+  await act(async()=>finish(Response.json({preview:true,workshops:[{...workshops[0],id:'hidden',name:'AAA hidden',status:'draft'},...published]})));
   assert.equal(document.querySelectorAll('.discover-grid .catalogue-card').length,3,'discovery is bounded to three published cards');
-  assert.deepEqual([...document.querySelectorAll('.discover-grid h3')].map(node=>node.textContent),['Fixture 00','Fixture 01','Fixture 02'],'discovery uses alphabetical order without drafts');
+  assert([...document.querySelectorAll('.discover-grid h3')].every(node=>/^Fixture 0[0-4]$/.test(node.textContent)),'random discovery includes published records only');
+  assert([...document.querySelectorAll('.partner-label')].every(node=>node.textContent===t('public.partnerExample')),'unpaid examples are labelled honestly');
   assert.equal(document.querySelector('.discover-all').getAttribute('href'),locale==='de'?'/werkstaetten':locale==='sq'?'/sq/serviset':'/en/workshops');
-  assert(document.querySelector('.discover-grid a').getAttribute('href').includes(workshops[0].id),'cards link to the actual public profile');
+  assert([...document.querySelectorAll('.discover-grid a')].every(node=>published.some(workshop=>node.getAttribute('href').includes(workshop.id))),'cards link to actual selected profiles');
   await act(async()=>root.render(null));
-  globalThis.fetch=async()=>Response.json({workshops:[]});
+  globalThis.fetch=async()=>Response.json({workshops:[],preview:true});
   await act(async()=>root.render(wrap(locale,h(DiscoverWorkshops))));
   assert(document.querySelector('.discover-message').textContent.includes(t('public.directoryEmpty')));
   assert.equal(document.querySelectorAll('.catalogue-card').length,0,'empty catalogues never fabricate workshops');
   await act(async()=>root.render(null));
   let fail=true;
-  globalThis.fetch=async url=>String(url).startsWith('/api/workshops?')?fail?Response.json({error:'private provider detail'},{status:503}):Response.json({workshops:[workshops[0]]}):Response.json({enabled:false});
+  globalThis.fetch=async url=>String(url).startsWith('/api/premium-workshops?')?fail?Response.json({error:'private provider detail'},{status:503}):Response.json({workshops:[workshops[0]],preview:false}):Response.json({enabled:false});
   await act(async()=>root.render(wrap(locale,h(DiscoverWorkshops))));
   assert(document.querySelector('[role="alert"]').textContent.includes(t('public.directoryUnavailable')));
   assert(!document.body.textContent.includes('private provider detail'));
   fail=false;await act(async()=>document.querySelector('.discover-message button').click());
   assert.equal(document.querySelectorAll('.discover-grid .catalogue-card').length,1,'retry replaces the safe error with current profiles');
+  assert.equal(document.querySelector('.partner-label').textContent,t('public.partnerAd'),'confirmed paid placement is labelled as advertising');
   await act(async()=>root.render(null));
  }
  console.log('Public performance UI: accessible catalogue loading, SSR selections, integrated quick search without vehicle wizard, instant navigation, duplicate submission protection and keyboard pagination passed in DE/SQ/EN; no live requests.');

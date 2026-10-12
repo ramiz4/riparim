@@ -76,3 +76,15 @@ html.dark .discover-grid .catalogue-card h3{color:var(--foreground)}
  .shortcuts-group{padding:20px}
  .shortcuts-group a{font-size:16px}
 }
+
+.partner-section{margin-top:40px;padding:32px;border:1px solid var(--border);border-radius:24px;background:linear-gradient(135deg,#edf7f4,#fff)}
+.partner-kicker{display:inline-flex;align-items:center;gap:8px;margin-bottom:10px;color:var(--theme-accent);font-size:13px;font-weight:650}
+.partner-slot{position:relative;display:flex;min-width:0}
+.partner-slot .catalogue-card{width:100%;border-color:#bcd8c6;box-shadow:0 8px 24px #173b3310}
+.partner-slot .catalogue-card-link{padding-top:56px}
+.partner-label{position:absolute;top:16px;left:20px;z-index:1;pointer-events:none;max-width:calc(100% - 40px);padding:4px 9px;border-radius:999px;background:#fff4cf;color:#805f1d;font-size:12px;font-weight:650;line-height:1.5}
+html.dark .partner-section{background:linear-gradient(135deg,#102b2f,#0b1d20)}
+html.dark .partner-slot .catalogue-card{border-color:var(--border)}
+html.dark .partner-label{background:#423824;color:#f2d385}
+.premium-control{display:block;margin-top:10px}
+@media(max-width:720px){.partner-section{margin-top:24px;padding:24px 16px;border-radius:16px}.partner-label{left:16px;max-width:calc(100% - 32px)}}
