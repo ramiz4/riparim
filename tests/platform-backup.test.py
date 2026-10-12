@@ -2,6 +2,7 @@ import importlib.util
 import json
 from pathlib import Path
 import tempfile
+import sqlite3
 import unittest
 from unittest.mock import patch
 
@@ -25,7 +26,7 @@ class PlatformBackupTests(unittest.TestCase):
                 self.assertIsNone(token)
                 return SQL, {}
             return b"123", {"ETag": '"abc"'}
-        with tempfile.TemporaryDirectory() as directory, patch.object(backup, "request", request):
+        with tempfile.TemporaryDirectory() as directory, patch.object(backup, "request", request), patch.object(backup, "export_d1", return_value=(SQL, None)):
             backup.collect_cloudflare(Path(directory), "synthetic-token")
             manifest = json.loads((Path(directory) / "cloudflare.json").read_text())
             self.assertEqual(manifest["objects"][0]["metadata"], OBJECT)
@@ -59,11 +60,21 @@ class PlatformBackupTests(unittest.TestCase):
             backup.collect_auth_config(Path(directory), "synthetic")
             self.assertEqual(json.loads((Path(directory) / "supabase-auth-config.json").read_text()), config)
 
-    def test_export_origin_and_polling(self):
-        responses = [{"result": {"status": "active", "at_bookmark": "snapshot"}}, {"result": {"status": "complete", "success": True, "result": {"signed_url": "https://untrusted.invalid/dump"}}}]
-        with patch.object(backup, "cf", side_effect=responses), patch.object(backup.time, "sleep"):
-            with self.assertRaises(RuntimeError):
-                backup.export_d1("synthetic")
+    def test_read_snapshot_preserves_blob_and_nul_text(self):
+        with sqlite3.connect(":memory:") as source:
+            source.row_factory = sqlite3.Row
+            source.setlimit(sqlite3.SQLITE_LIMIT_COMPOUND_SELECT, 1)
+            source.executescript(SQL.decode())
+            source.execute("CREATE TABLE synthetic(payload TEXT, bytes BLOB, missing TEXT)")
+            source.execute("INSERT INTO synthetic VALUES(?,?,NULL)", ("a\0'尾", b"\x00\xff"))
+            def cf(path, token, body=None):
+                self.assertTrue(path.endswith('/query'))
+                return {"result": [{"success": True, "results": [dict(row) for row in source.execute(body['sql'])]}]}
+            with patch.object(backup, "cf", cf):
+                exported, _ = backup.export_d1("synthetic")
+            with sqlite3.connect(":memory:") as restored:
+                restored.executescript(exported.decode())
+                self.assertEqual(restored.execute("SELECT * FROM synthetic").fetchone(), ("a\0'尾", b"\x00\xff", None))
 
 
 if __name__ == "__main__":

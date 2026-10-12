@@ -10,7 +10,6 @@ import subprocess
 import sys
 import tarfile
 import tempfile
-import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -110,22 +109,51 @@ def validate_d1(sql, keys):
 
 
 def export_d1(token):
-    body = {"output_format": "polling"}
-    for _ in range(60):
-        response = cf(f"/d1/database/{DATABASE}/export", token, body)["result"]
-        if response.get("status") == "complete" and response.get("success") is True:
-            url = response["result"]["signed_url"]
-            parsed = urllib.parse.urlparse(url)
-            if parsed.scheme != "https" or parsed.username or parsed.password or not (
-                    parsed.hostname.endswith(".r2.cloudflarestorage.com") or
-                    parsed.hostname.endswith(".cloudflarestorage.com")):
-                raise RuntimeError("Unexpected D1 export download origin")
-            return request(url)[0], response.get("at_bookmark")
-        if response.get("status") != "active" or not response.get("at_bookmark"):
-            raise RuntimeError("D1 export did not complete")
-        body["current_bookmark"] = response["at_bookmark"]
-        time.sleep(1)
-    raise RuntimeError("D1 export polling timed out")
+    def query(sql):
+        result = cf(f"/d1/database/{DATABASE}/query", token, {"sql": sql})["result"]
+        if len(result) != 1 or result[0].get("success") is not True:
+            raise RuntimeError("D1 snapshot query failed")
+        return result[0]["results"]
+
+    schema_select = "SELECT type,name,tbl_name,sql FROM sqlite_schema WHERE sql IS NOT NULL AND name NOT GLOB '_cf_*' AND name NOT GLOB 'sqlite_*' ORDER BY type,name"
+    planned = query(schema_select)
+    tables = [entry for entry in planned if entry["type"] == "table"]
+    selections = ["json_object('kind','SCHEMA','name','','statement',(SELECT json_group_array(json_object('type',type,'name',name,'tbl_name',tbl_name,'sql',sql)) FROM (" + schema_select + ")), 'total',0)"]
+    for table in tables:
+        name = table["name"]
+        if not name.replace("_", "").isalnum():
+            raise RuntimeError("Unsupported D1 table identifier")
+        columns = query(f'PRAGMA table_xinfo("{name}")')
+        names = [c["name"] for c in columns if c["hidden"] == 0]
+        if not names or any(not c.replace("_", "").isalnum() for c in names):
+            raise RuntimeError("Unsupported D1 column identifier")
+        identifier_list = ','.join('"' + c + '"' for c in names)
+        # quote(TEXT) truncates at embedded NUL; hex plus CAST preserves every byte.
+        values = [f"CASE typeof(\"{c}\") WHEN 'text' THEN 'CAST(X'''||hex(\"{c}\")||''' AS TEXT)' ELSE quote(\"{c}\") END" for c in names]
+        insert = f'INSERT INTO "{name}"({identifier_list}) VALUES('
+        # Scalar subqueries avoid D1's very small compound-SELECT limit.
+        selections.append(f"json_object('kind','TABLE','name','{name}','statement',(SELECT json_group_array('{insert}'||" + "||','||".join(values) + f"||');') FROM \"{name}\"),'total',(SELECT count(*) FROM \"{name}\"))")
+    # A single read statement gives schema, all rows, and counts one SQLite snapshot.
+    rows = json.loads(query("SELECT json_array(" + ','.join(selections) + ") AS snapshot")[0]["snapshot"])
+    actual = rows[0]["statement"]
+    if isinstance(actual, str):
+        actual = json.loads(actual)
+    if actual != planned:
+        raise RuntimeError("D1 schema changed while preparing snapshot")
+    statements = ["PRAGMA foreign_keys=OFF;"] + [t["sql"] + ';' for t in tables]
+    records = {r["name"]: r for r in rows if r["kind"] == "TABLE"}
+    for table in tables:
+        row = records.get(table["name"])
+        if row is None:
+            raise RuntimeError("D1 snapshot table is missing")
+        data = row["statement"]
+        if isinstance(data, str):
+            data = json.loads(data)
+        if len(data) != row["total"]:
+            raise RuntimeError("D1 snapshot rows are incomplete")
+        statements.extend(data)
+    statements += [entry["sql"] + ';' for entry in planned if entry["type"] != "table"]
+    return ('\n'.join(statements) + '\n').encode(), None
 
 
 def collect_cloudflare(directory, token):
@@ -158,6 +186,12 @@ def collect_auth_config(directory, token):
         raise RuntimeError("Supabase auth configuration is incomplete")
     # Retain exactly what the API returns, including templates/provider/SMTP settings.
     (directory / "supabase-auth-config.json").write_bytes(data)
+    # Provider secret representations must not be replayed as actual passwords.
+    (directory / "supabase-auth-recovery.json").write_text(json.dumps({
+        "project": PROJECT, "vaultItem": "mkp7xa42clfbreiv2q3b3nrq5y",
+        "secretFields": {"external_google_secret": "GOOGLE_OAUTH_CLIENT_SECRET",
+                         "smtp_pass": "api key"},
+        "instruction": "Use the original secrets from 1Password; validate OAuth and SMTP before enabling restored auth."}))
 
 
 def backup(destination):

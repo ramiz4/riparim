@@ -21,12 +21,18 @@ Das neue Archiv enthält:
 - Die vollständige Antwort von Supabase `GET /v1/projects/<ref>/config/auth`:
   Site URL, Redirects, aktivierte Provider, SMTP-Einstellungen, Mailvorlagen,
   Registrierungs-, Sitzungs-, Sicherheits- und Rate-Limit-Einstellungen.
-  Geheimnisse bleiben im verschlüsselten Archiv. Was die API maskiert oder
+  Alle zurückgegebenen Werte bleiben im verschlüsselten Archiv. Die live
+  gelesenen OAuth-/SMTP-Geheimnisfelder waren keine direkt mit den originalen
+  Vault-Schlüsseln übereinstimmenden Werte. Solche API-Repräsentationen dürfen
+  nicht als Passwort wieder eingespielt werden. Was die API maskiert oder
   nicht exportiert, wird dadurch nicht rekonstruiert; OAuth-/SMTP-Secrets im
   bestehenden 1Password-Eintrag und neu anzulegende Signing-/API-Keys bleiben
   Teil des Wiederherstellungsplans. Keine automatischen PATCHs gegen Produktion.
-- Den vollständigen nativen D1-SQL-Export einschließlich Anwendungs- und
-  Migrationsdaten. Cloudflare-interne, nicht exportierte Daten sind nicht umfasst.
+  `supabase-auth-recovery.json` benennt den Vault-Eintrag und die zugehörigen
+  Felder, ohne deren Werte in Metadaten oder Logs auszugeben.
+- Einen konsistenten SQL-Lesesnapshot des D1-Anwendungsschemas einschließlich
+  Anwendungs- und Migrationsdaten. Cloudflare- und SQLite-interne Tabellen
+  sind ausdrücklich ausgenommen.
 - Alle R2-Objekte, auch ohne aktuellen Besuchsverweis: Bytes, Schlüssel,
   Größe, ETag, Änderungszeit, HTTP-/Custom-Metadaten und SHA-256. Objektpfade
   werden nicht als lokale Dateinamen verwendet.
@@ -37,8 +43,12 @@ R2 wird vor dem D1-Snapshot inventarisiert. Downloads müssen Größe und ETag
 erhalten; eine zweite vollständige Inventarisierung muss exakt übereinstimmen.
 Bei Änderungen, fehlenden Seiten oder Dateien bricht der Run ab und veröffentlicht
 kein fertiges Backup. Bei aktivem Upload oder einer Löschung später erneut starten.
-Das native D1-Exportverfahren kann Datenbankanfragen kurzzeitig blockieren;
-es wird keine dauerhafte App-Schreibpause und keine automatische Datenänderung gesetzt.
+Alle D1-Zeilen, Zeilenzahlen und das Schema werden in einer einzigen SQL-Leseanweisung
+erfasst. Spalten werden vorher ermittelt, das Schema muss im Snapshot unverändert
+sein. Scalar-Subqueries umgehen die kleine D1-Grenze für Compound-SELECTs.
+Text inklusive Nullbytes und BLOBs wird verlustfrei über Hexwerte gesichert.
+Der native, weitergehende Rechte benötigende Export wird nicht verwendet;
+es gibt keine App-Schreibpause und keine automatische Datenänderung.
 
 Vor Verschlüsselung wird D1 in einer isolierten SQLite-Datenbank im Speicher
 wiederhergestellt und auf Integrität, Fremdschlüssel und Vollständigkeit der
@@ -49,13 +59,13 @@ ein anbieterübergreifend atomarer Snapshot wird nicht behauptet.
 ## Zugänge, Schutz und kostenlose Grenzen
 
 Das GitHub-Environment `platform-backup` erlaubt nur `main`. Erforderlich sind
-`CLOUDFLARE_BACKUP_TOKEN` (D1-Export und R2-Lesezugriff im Riparim-Account) und
+`CLOUDFLARE_BACKUP_TOKEN` (D1 Read und Workers R2 Storage Read im Riparim-Account) und
 `SUPABASE_AUTH_CONFIG_TOKEN` (nur Auth Config Read, nur das bestehende Projekt).
 Beide Zugangsschlüssel werden zusätzlich im selben 1Password-Projekteintrag
 aufbewahrt. Sie werden nicht in Git oder öffentlichen Logs gespeichert.
 
-Transport verwendet geprüftes HTTPS. Redirects werden abgewiesen, und der
-Cloudflare-Bearer wird niemals an den separat signierten D1-Downloadlink gesendet.
+Transport verwendet geprüftes HTTPS; Redirects werden abgewiesen. Die API-Zugänge
+haben ausschließlich die bestätigten Leserechte und werden nicht für andere Ziele verwendet.
 Klartext existiert nur im privaten temporären Runnerverzeichnis. Das gesamte
 Archiv wird vor Upload mit RSA-3072/AES-256-GCM (CMS) verschlüsselt.
 GitHub erhält nur `platform.tar.gz.cms` und den öffentlichen SHA-256-Beleg.
@@ -95,5 +105,5 @@ Repositoryaktivität deaktiviert werden; Backupalter und Runstatus kontrollieren
    Wiederherstellungsauftrag und eine Schreibpause gemäß [Providerexit](provider-exit.md).
 
 Quellen: [D1 Time Travel](https://developers.cloudflare.com/d1/reference/time-travel/),
-[D1-Export](https://developers.cloudflare.com/api/resources/d1/subresources/database/methods/export/),
+[D1 SQL](https://developers.cloudflare.com/d1/sql-api/sql-statements/),
 [Supabase Auth Config](https://supabase.com/docs/reference/api/v1-get-auth-service-config).
