@@ -451,3 +451,125 @@ for (const [status, conclusion, started, expected] of [
     new URL(request.url).searchParams.get('created') === '>=2026-09-10T12:00:00.000Z'));
 }
 console.log('Backup monitor: old-created current rerun attempts are included in the bounded window passed');
+function queuedRetryFetch(status, started) {
+  let updated = '2026-10-12T11:59:00Z';
+  const api = githubFetch({}, {}, (url, value) => {
+    const path = new URL(url).pathname;
+    if (/\/runs\/200\/attempts\/2$/.test(path)) return Response.json({id: 200, run_attempt: 2,
+      created_at: started, run_started_at: started});
+    if (value.workflow_runs && String(url).includes('auth-backup.yml')) {
+      const backup = {...value.workflow_runs[0], created_at: '2026-10-12T10:00:00Z',
+        run_started_at: '2026-10-12T10:01:00Z', updated_at: '2026-10-12T10:05:00Z'};
+      return Response.json({total_count: 2, workflow_runs: [{...backup, id: 200, run_attempt: 2,
+        created_at: '2026-09-20T10:00:00Z', status, conclusion: null, run_started_at: started, updated_at: updated}, backup]});
+    }
+    if (value.artifacts && path.includes('/100/')) return Response.json({...value,
+      artifacts: value.artifacts.map(artifact => ({...artifact, created_at: '2026-10-12T10:04:00Z'}))});
+  });
+  return {...api, update: value => {updated = value;}};
+}
+for (const status of ['queued', 'requested', 'waiting', 'pending']) {
+  for (const [started, expected] of [['2026-10-12T11:55:00Z', 'healthy'], ['2026-10-12T10:00:01Z', 'healthy'],
+    ['2026-10-12T10:00:00Z', 'stuck']]) {
+    const api = queuedRetryFetch(status, started), test = fixture();
+    test.options.readWorkflow = createGitHubReader({fetch: api.fetch, now});
+    assert.equal((await runBackupMonitor(test.options)).jobs[0].status, expected,
+      `${status} retry age follows its current attempt, not original creation`);
+  }
+  for (const [started, expected] of [['2026-10-12T10:00:01Z', 'healthy'], ['2026-10-12T10:00:00Z', 'stuck']]) {
+    const run = success(0, {id: 200, status, conclusion: null, created_at: started, run_started_at: null,
+      updated_at: '2026-10-12T11:59:00Z', artifacts: []});
+    const test = fixture([{state: 'active', runs: [run, success(0)]}, {state: 'active', runs: [success(1)]}]);
+    assert.equal((await runBackupMonitor(test.options)).jobs[0].status, expected, `${status} first-attempt queues retain creation-based grace`);
+  }
+}
+console.log('Backup monitor: queue grace follows the current retry attempt passed');
+for (const status of ['queued', 'requested', 'waiting', 'pending']) {
+  for (const absent of ['missing_timestamp', 'original_timestamp', 'missing_attempt']) {
+    const api = queuedRetryFetch(status, '2026-09-20T10:01:00Z'), test = fixture();
+    const fetch = async (url, options) => {
+      const response = await api.fetch(url, options);
+      if (!/\/runs\/200\/attempts\/2$/.test(new URL(url).pathname)) return response;
+      if (absent === 'missing_attempt') return new Response('', {status: 404});
+      return Response.json({id: 200, run_attempt: 2, created_at: absent === 'original_timestamp' ? '2026-09-20T10:00:00Z' : null,
+        run_started_at: '2026-09-20T10:01:00Z'});
+    };
+    async function check(at) {
+      api.update(new Date(at).toISOString());
+      return runBackupMonitor({...test.options, now: at, readWorkflow: createGitHubReader({fetch, now: at})});
+    }
+    assert.equal((await check(now)).jobs[0].status, 'healthy', 'ambiguous retry timestamps start a conservative observation grace');
+    assert.equal((await check(now + 119 * 60 * 1000)).jobs[0].status, 'healthy');
+    assert.equal((await check(now + 120 * 60 * 1000)).jobs[0].status, 'stuck',
+      'durable first observation survives new invocations and updated_at churn');
+  }
+}
+console.log('Backup monitor: ambiguous queue timestamps use durable observation grace passed');
+{
+  const api = queuedRetryFetch('queued', '2026-09-20T10:01:00Z'), test = fixture();
+  const fetch = async (url, options) => {
+    const response = await api.fetch(url, options);
+    return /\/runs\/200\/attempts\/2$/.test(new URL(url).pathname)
+      ? Response.json({id: 200, run_attempt: 2, created_at: '2026-10-12T11:55:00Z', run_started_at: '2026-10-12T11:54:59Z'}) : response;
+  };
+  test.options.readWorkflow = createGitHubReader({fetch, now});
+  assert.equal((await runBackupMonitor(test.options)).jobs[0].status, 'healthy',
+    'attempt-specific creation is current even if the parent retains its original start and the attempt start precedes creation by one second');
+}
+for (const invalid of [401, 403, 429, 500, {id: 999, run_attempt: 2, created_at: '2026-10-12T11:55:00Z'},
+  {id: 200, run_attempt: 1, created_at: '2026-10-12T11:55:00Z'}, {id: 200, run_attempt: 2, created_at: 'private-invalid-timestamp'},
+  {id: 200, run_attempt: 2, created_at: '2026-10-13T00:00:00Z'}]) {
+  const api = queuedRetryFetch('queued', '2026-10-12T11:55:00Z'), test = fixture();
+  const fetch = async (url, options) => {
+    const response = await api.fetch(url, options);
+    if (!/\/runs\/200\/attempts\/2$/.test(new URL(url).pathname)) return response;
+    return typeof invalid === 'number' ? new Response('private-attempt-error', {status: invalid}) : Response.json(invalid);
+  };
+  test.options.readWorkflow = createGitHubReader({fetch, now});
+  const result = await runBackupMonitor(test.options);
+  assert.equal(result.monitorHealthy, false, 'attempt metadata failures remain inconclusive');
+  assert.equal(result.jobs[0].status, 'monitor_error');
+  assert(!JSON.stringify({result, state: test.state()}).includes('private-'));
+}
+{
+  let queued = true;
+  const api = githubFetch({}, {}, (url, value) => {
+    const match = /\/runs\/(\d+)\/attempts\/2$/.exec(new URL(url).pathname);
+    if (match) return Response.json({id: Number(match[1]), run_attempt: 2, created_at: null});
+    if (queued && value.workflow_runs && String(url).includes('auth-backup.yml')) return Response.json({total_count: 101,
+      workflow_runs: new URL(url).searchParams.get('page') === '1' ? Array.from({length: 100}, (_, index) => ({...value.workflow_runs[0], id: 200 + index, run_attempt: 2,
+        created_at: '2026-09-20T10:00:00Z', run_started_at: '2026-09-20T10:01:00Z', updated_at: '2026-10-12T11:59:00Z',
+        status: 'queued', conclusion: null})) : value.workflow_runs});
+  });
+  const test = fixture(); test.options.readWorkflow = createGitHubReader({fetch: api.fetch, now});
+  assert.equal((await runBackupMonitor(test.options)).backupsHealthy, true);
+  assert.equal(api.requests.filter(request => /\/attempts\/2$/.test(new URL(request.url).pathname)).length, 20, 'queue-attempt metadata reads are bounded per workflow');
+  assert.equal(Object.keys(test.state().jobs[workflows[0]].queueStartedAt).length, 100);
+  queued = false;
+  await runBackupMonitor({...test.options, now: now + 15 * 60 * 1000});
+  assert.deepEqual(test.state().jobs[workflows[0]].queueStartedAt, {}, 'observations are pruned when attempts leave the queued snapshot');
+}
+{
+  const test = fixture(); await runBackupMonitor(test.options);
+  test.state().jobs[workflows[0]].queueStartedAt = Object.fromEntries(Array.from({length: 501}, (_, index) => [`${200 + index}-2`, now]));
+  assert.equal((await runBackupMonitor(test.options)).monitorHealthy, false, 'persisted queue observations cannot exceed the workflow history bound');
+}
+console.log('Backup monitor: retry metadata failures, bounded reads and pruned durable observations passed');
+{
+  const savedClock = Date.now;
+  let clock = now;
+  try {
+    Date.now = () => clock;
+    const api = queuedRetryFetch('queued', '2026-10-12T12:00:01Z'), test = fixture();
+    api.update('2026-10-12T12:00:02Z');
+    const options = {...test.options}; delete options.now;
+    options.readWorkflow = createGitHubReader({fetch: async (url, config) => {
+      if (new URL(url).pathname.endsWith('/auth-backup.yml/runs')) clock = now + 3000;
+      return api.fetch(url, config);
+    }});
+    const result = await runBackupMonitor(options);
+    assert.equal(result.monitorHealthy, true);
+    assert.equal(result.backupsHealthy, true, 'a current attempt created during API reads is assessed against the refreshed real clock');
+  } finally {Date.now = savedClock;}
+}
+console.log('Backup monitor: assessment clock advances with metadata reads passed');

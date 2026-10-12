@@ -12,6 +12,7 @@ const workflows = [
 ];
 const hour = 60 * 60 * 1000;
 const runStatuses = new Set(['completed', 'in_progress', 'queued', 'requested', 'waiting', 'pending']);
+const queueStatuses = new Set(['queued', 'requested', 'waiting', 'pending']);
 const conclusions = new Set(['success', 'failure', 'cancelled', 'timed_out', 'skipped', 'neutral', 'action_required', 'stale', 'startup_failure']);
 function timestamp(value) {
   if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z$/.test(value) || !Number.isFinite(Date.parse(value))) throw Error('Invalid timestamp.');
@@ -22,9 +23,9 @@ function validateRun(run, now) {
   if (!Number.isSafeInteger(run.id) || run.id < 1 || !Number.isSafeInteger(run.run_attempt) || run.run_attempt < 1 ||
     typeof run.head_branch !== 'string' || !runStatuses.has(run.status) || (run.conclusion !== null && !conclusions.has(run.conclusion))) throw Error('Invalid run metadata.');
   const created = timestamp(run.created_at), updated = timestamp(run.updated_at);
-  if (created > updated || updated > now ||
-    (run.status === 'completed' || run.status === 'in_progress') &&
-    (timestamp(run.run_started_at) < created || timestamp(run.run_started_at) > updated)) throw Error('Invalid run chronology.');
+  const started = run.run_started_at == null ? null : timestamp(run.run_started_at);
+  if (created > updated || updated > now || started !== null && (started < created || started > updated) ||
+    (run.status === 'completed' || run.status === 'in_progress') && started === null) throw Error('Invalid run chronology.');
 }
 
 export function createGitHubReader({fetch = globalThis.fetch, token, now} = {}) {
@@ -59,8 +60,24 @@ export function createGitHubReader({fetch = globalThis.fetch, token, now} = {}) 
     for (const run of runs) {validateRun(run, observedAt); run.artifacts = [];}
     if (new Set(runs.map(run => run.id)).size !== runs.length) throw Error('Duplicate workflow history.');
     runs.sort((a, b) => timestamp(b.updated_at) - timestamp(a.updated_at));
-    let inspected = 0;
+    let inspected = 0, queueAttempts = 0;
     for (const run of runs) {
+      if (run.head_branch === 'main' && queueStatuses.has(run.status) && run.run_attempt > 1) {
+        run.queue_started_at = null;
+        if (queueAttempts < 20) {
+          queueAttempts++;
+          const attempt = await request(`/runs/${run.id}/attempts/${run.run_attempt}`, true);
+          if (attempt) {
+            if (attempt.id !== run.id || attempt.run_attempt !== run.run_attempt) throw Error('Invalid queue attempt.');
+            if (attempt.created_at != null) {
+              const created = timestamp(attempt.created_at);
+              if (created < timestamp(run.created_at) || created > (now ?? Date.now())) throw Error('Invalid queue attempt chronology.');
+              // Attempt-specific creation is distinct from the parent run's original creation.
+              if (created > timestamp(run.created_at)) run.queue_started_at = attempt.created_at;
+            }
+          }
+        }
+      }
       if (run.head_branch === 'main' && run.status === 'completed' && run.conclusion === 'success') {
         if (++inspected > 20) throw Error('Too many unverifiable backup attempts.');
         run.artifacts = await list(`/runs/${run.id}/artifacts`, 'artifacts');
@@ -82,8 +99,18 @@ function validBackup(workflow, run, now) {
     });
 }
 
-function evaluate(workflow, snapshot, now) {
+function evaluate(workflow, snapshot, now, job) {
   const runs = snapshot.runs.filter(run => run.head_branch === 'main').sort((a, b) => Date.parse(b.updated_at) - Date.parse(a.updated_at));
+  const retryQueues = runs.filter(run => run.run_attempt > 1 && queueStatuses.has(run.status));
+  const queuedKeys = new Set(retryQueues.map(run => `${run.id}-${run.run_attempt}`));
+  if (queuedKeys.size > 500) throw Error('Too many queue observations.');
+  for (const key of Object.keys(job.queueStartedAt)) if (!queuedKeys.has(key)) delete job.queueStartedAt[key];
+  for (const run of retryQueues) {
+    const key = `${run.id}-${run.run_attempt}`, started = run.queue_started_at ? timestamp(run.queue_started_at) : now;
+    if (started > now) throw Error('Future queue observation.');
+    // Keep the earliest trusted time, so metadata churn or a restart cannot renew grace.
+    job.queueStartedAt[key] = Math.min(job.queueStartedAt[key] ?? now, started);
+  }
   const successful = runs.find(run => validBackup(workflow, run, now));
   let linkedRun = runs[0];
   let status = 'healthy';
@@ -96,8 +123,9 @@ function evaluate(workflow, snapshot, now) {
       linkedRun = run;
       break;
     }
-    const started = run.status === 'in_progress' ? run.run_started_at : run.created_at;
-    if (now - Date.parse(started) >= (run.status === 'in_progress' ? hour / 2 : 2 * hour)) {
+    const started = run.status === 'in_progress' ? timestamp(run.run_started_at) :
+      run.run_attempt === 1 ? timestamp(run.created_at) : job.queueStartedAt[`${run.id}-${run.run_attempt}`];
+    if (now - started >= (run.status === 'in_progress' ? hour / 2 : 2 * hour)) {
       status = 'stuck';
       linkedRun = run;
       break;
@@ -151,6 +179,8 @@ function validateState(state, now) {
   for (const [file, job] of Object.entries(state.jobs)) {
     const workflow = workflows.find(workflow => workflow.file === file);
     if (!workflow || !object(job) || !date(job.lastSuccessAt) || !Number.isSafeInteger(job.generation) || job.generation < 0) throw Error('Invalid job state.');
+    if (job.queueStartedAt !== undefined && (!object(job.queueStartedAt) || Object.keys(job.queueStartedAt).length > 500 ||
+      Object.entries(job.queueStartedAt).some(([key, started]) => !/^[1-9]\d*-[1-9]\d*$/.test(key) || !time(started)))) throw Error('Invalid queue observations.');
     if (job.incident !== null && (!object(job.incident) || !time(job.incident.openedAt) || !date(job.incident.backupAt) ||
       !date(job.incident.recoveredAt) || !Number.isSafeInteger(job.incident.generation) || job.incident.generation < 1 || job.incident.generation !== job.generation ||
       !statusLabels[job.incident.kind] || !(job.incident.lastNotificationAt === null || time(job.incident.lastNotificationAt)))) throw Error('Invalid incident state.');
@@ -166,7 +196,8 @@ function validateState(state, now) {
   }
 }
 
-export async function runBackupMonitor({now = Date.now(), readWorkflow, store, notifier, heartbeat}) {
+export async function runBackupMonitor({now: requestedAt, readWorkflow, store, notifier, heartbeat}) {
+  let now = requestedAt ?? Date.now();
   const jobs = [];
   let monitorHealthy = true;
   try {
@@ -174,10 +205,14 @@ export async function runBackupMonitor({now = Date.now(), readWorkflow, store, n
     validateState(state, now);
     for (const workflow of workflows) {
       const job = state.jobs[workflow.file] ??= {lastSuccessAt: null, generation: 0, incident: null, pending: null};
+      job.queueStartedAt ??= {};
       let result;
       try {
-        result = evaluate(workflow, await readWorkflow(workflow), now);
+        const snapshot = await readWorkflow(workflow);
+        now = requestedAt ?? Date.now();
+        result = evaluate(workflow, snapshot, now, job);
       } catch {
+        now = requestedAt ?? Date.now();
         monitorHealthy = false;
         result = {job: workflow.name, status: 'monitor_error', lastSuccessAt: null,
           url: `https://github.com/${repository}/actions/workflows/${workflow.file}`};

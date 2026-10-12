@@ -27,7 +27,7 @@ herunter und besitzt keine Entschlüsselungsschlüssel.
 | Fehler, Abbruch, Timeout, Überspringen, ungültiges Artefakt oder deaktivierter Workflow | Alarm beim nächsten Aufruf, normalerweise binnen 15 Minuten. Beide Jobs bleiben unabhängig. |
 | Kein gültiges Backup | Ab 36 Stunden seit dem letzten verifizierten Abschluss: täglicher Abstand von 24 Stunden plus zwölf Stunden Spielraum für GitHub-Verzögerungen. Ohne verifizierte Sicherung sofort alarmieren. |
 | Lauf hängt | Ab 30 Minuten seit Laufstart. Beide Backup-Jobs haben ein Zehn-Minuten-Limit; die zusätzlichen 20 Minuten tolerieren verzögerte Statusmeldungen. |
-| Lauf wartet | Ab zwei Stunden seit Erstellung. Das gibt verzögertem Runnerstart mehr Spielraum als der eigentlichen Ausführung. |
+| Lauf wartet | Ab zwei Stunden seit Erstellung des aktuellen Versuchs. Fehlt ein eindeutiger Zeitwert einer Wiederholung, gilt ihre erste dauerhaft gespeicherte Beobachtung. Das gibt verzögertem Runnerstart mehr Spielraum als der eigentlichen Ausführung. |
 | Unveränderter Vorfall | Höchstens eine Erinnerung pro Job und 24 Stunden. Eine neue gültige Folgesicherung ermöglicht eine Entwarnung. |
 | Monitor oder Versand nicht verifiziert | Kein Erfolgs-Heartbeat; Fehlerstatus und Exitcode 1. Unbekannte Zustellung zählt nicht als Erfolg. |
 
@@ -51,7 +51,15 @@ Monitorstatus erzeugen. Healthchecks erhält einen leeren POST beziehungsweise
 Die GitHub-Abfrage berücksichtigt die letzten 32 Tage erstellter Läufe. Das
 umfasst GitHubs 30-Tage-Fenster für Wiederholungen zuzüglich der 36-Stunden-Grenze
 für frische Sicherungen. Sie paginiert bis 500 Läufe und 500 Artefakte pro Lauf
-und prüft höchstens 20 erfolgreiche Kandidaten. Überschrittene Grenzen und
+und prüft höchstens 20 erfolgreiche Kandidaten. Wartende Wiederholungen verwenden
+zusätzlich die Metadaten ihres aktuellen Versuchs, höchstens 20 Abfragen je Job.
+Die ursprüngliche Erstellung des übergeordneten Laufs bestimmt nicht deren
+Wartefrist. Ein fehlender aktueller Zeitwert erhält eine dauerhaft gespeicherte
+Beobachtungsfrist; ebenso weitere Wiederholungen oberhalb der 20 Abfragen.
+Spätere Statusupdates und Neustarts verschieben diese Frist nicht. Je Job sind
+höchstens 500 Beobachtungseinträge erlaubt; nicht mehr wartende Versuche werden
+entfernt. [Metadaten eines Versuchs](https://docs.github.com/en/rest/actions/workflow-runs#get-a-workflow-run-attempt).
+API-Ausfälle bleiben Prüfungsfehler. Überschrittene Listen-/Kandidatengrenzen und
 unvollständige oder ungültige Antworten sind Prüfungsfehler. Eine neue Wiederholung
 eines älteren Laufs wird anhand ihres aktuellen Versuchs und Artefakts geprüft.
 [GitHub-Wiederholungsfenster](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs).
@@ -71,7 +79,7 @@ prüfen. Keine Paid-Pläne oder kostenpflichtigen Overages einschalten.
   Öffentlich unauthentifiziert gelten 60 pro Stunde und IP; andere Nutzung und
   Pagination können das überschreiten. Optional einen Fine-grained Token nur für
   `ramiz4/riparim`, ausschließlich **Actions: Read**, einsetzen; üblicherweise
-  5.000 Requests pro Stunde. Die implementierte Obergrenze liegt bei 848
+  5.000 Requests pro Stunde. Die implementierte Obergrenze liegt bei 1.008
   Metadatenrequests pro Stunde bei vier Aufrufen. Bei Limits bleibt der Monitor
   fehlerhaft. [GitHub-API-Limits](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api).
 - **Resend Free:** 3.000 Nachrichten pro Monat, 100 pro Tag, gemeinsam mit den
