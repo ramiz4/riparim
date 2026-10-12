@@ -1,3 +1,5 @@
+import {publicReleaseRender} from "@/lib/public-release";
+import {DeferredReviews} from "@/components/deferred-reviews";
 import type {Metadata} from "next";
 import {getAppUser,getAdminUser} from "@/app/auth";
 import {MyVisits} from "@/app/journeys";
@@ -16,6 +18,7 @@ export async function generateMetadata({params}:{params:Promise<{locale:string}>
 
 export default async function ReviewsPage({params,searchParams}:{params:Promise<{locale:string}>;searchParams:Promise<Record<string,string|string[]|undefined>>}){
  const {locale:value}=await params,locale=callbackLocale(value),query=await searchParams;
+ if(publicReleaseRender())return <I18nMessages messages={getMessages(locale,["customer","public"])}><DeferredReviews/></I18nMessages>;
  const user=await getAppUser(),admin=await getAdminUser(user);
  let directory:Workshop[]=[],directoryUnavailable=false;
  if(user)try{directory=await listWorkshops();}catch{console.error("own-reviews-directory-unavailable");directoryUnavailable=true;}

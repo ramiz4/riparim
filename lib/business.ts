@@ -1,7 +1,5 @@
 import {validateEvidenceFile} from "@/lib/evidence-file";
 import {ValidationError} from "@/lib/validation-error";
-import type {ErrorCode} from "@/lib/i18n/codes";
-import {z} from "zod";
 import {storage} from "@/db/storage";
 import {moderationAuthority} from "@/lib/auth/moderation-authority";
 import {ownerPair,type AppUser} from "@/app/auth";
@@ -9,40 +7,16 @@ import {decodeProfile,ensureInitialCatalog,listWorkshops,validateProfile} from "
 import {confirmedPublicationPlace} from "@/db/google-places";
 import {workshopIdentityHash} from "@/lib/google-place-identity";
 import {googleMapsPlaceUrl} from "@/lib/google-maps-link";
-import {businessProfileSchema,claimSchema,claimDocumentsError,claimDocumentViews,type StoredClaimDocument,editableBusinessProfile,type BusinessRequest,type BusinessDecision,type BusinessState} from "@/lib/business-contract";
+import {businessProfileSchema,claimSchema,claimDocumentsError,type StoredClaimDocument,editableBusinessProfile,type BusinessDecision} from "@/lib/business-contract";
 
-export class BusinessError extends ValidationError{constructor(message:string,public status=409,code:ErrorCode="conflict"){super(code,message);}}
+import {BusinessError} from "./business-error";
+export {BusinessError} from "./business-error";
+export {businessState} from "./business-read";
 function activeOwnerSql(owner="?"){return `NOT EXISTS (SELECT 1 FROM auth_account_status WHERE status IN ('inactive','deleted') AND (account_id=${owner} OR account_id IN (SELECT legacy_owner FROM auth_links WHERE account_id=${owner}) OR account_id IN (SELECT account_id FROM auth_links WHERE legacy_owner=${owner})))`;}
 const activeOwner=activeOwnerSql();
 const activeBindings=(owner:string)=>[owner,owner,owner];
-function view(row:Record<string,unknown>,kind:"claim"|"change"):BusinessRequest{
- return {id:String(row.id),workshopId:String(row.workshop_id),workshopName:String(row.workshop_name??row.workshop_id),owner:String(row.owner),status:String(row.status),moderatorNote:String(row.moderator_note),revision:Number(row.revision),createdAt:String(row.created_at),...(kind==="claim"?{fileName:row.file_name?String(row.file_name):null,documents:claimDocumentViews(row),evidence:String(row.evidence),evidenceLinks:claimSchema.shape.evidenceLinks.parse(JSON.parse(String(row.evidence_links)))}:{profile:businessProfileSchema.parse(JSON.parse(String(row.profile))),baseUpdatedAt:String(row.base_updated_at)})};
-}
 function validatedProfile(body:Record<string,unknown>,id:string){
  try{return validateProfile(body,id);}catch(error){throw new BusinessError(error instanceof ValidationError?error.message:"Bitte prüfe die Profilangaben.",400,error instanceof ValidationError?error.code:"workshop_invalid_profile");}
-}
-function parseCursor(value?:string|null){
- if(!value)return null;
- try{
-  if(value.length>512)throw Error();
-  return z.object({date:z.string().max(30).refine(value=>Number.isFinite(Date.parse(value))),id:z.string().uuid()}).strict().parse(JSON.parse(atob(value)));
- }catch{throw new BusinessError("Ungültige Seitenangabe.",400,"invalid_page");}
-}
-export async function businessState(user:AppUser,moderation=false,cursors:{claims?:string|null;changes?:string|null}={}):Promise<BusinessState>{
- await ensureInitialCatalog();const db=storage().db,owners=ownerPair(user);
- const read=async(table:"workshop_claims"|"workshop_changes",kind:"claim"|"change",cursorValue?:string|null)=>{
-  const cursor=parseCursor(cursorValue),predicate=moderation?"r.status='pending'":"r.owner IN (?,?)";
-  const rows=await db.prepare(`SELECT r.*,w.name AS workshop_name FROM ${table} r JOIN workshops w ON w.id=r.workshop_id WHERE ${predicate}${cursor?" AND (r.created_at<? OR (r.created_at=? AND r.id<?))":""} ORDER BY r.created_at DESC,r.id DESC LIMIT 51`).bind(...(moderation?[]:owners),...(cursor?[cursor.date,cursor.date,cursor.id]:[])).all<Record<string,unknown>>();
-  const items=rows.results.slice(0,50).map(row=>view(row,kind)),last=items.at(-1);
-  return {items,next:rows.results.length>50&&last?btoa(JSON.stringify({date:last.createdAt,id:last.id})):null};
- };
- const owned=moderation?await listWorkshops(true):(await db.prepare("SELECT w.* FROM workshops w JOIN workshop_owners o ON o.workshop_id=w.id WHERE o.account_id IN (?,?) ORDER BY w.name").bind(...owners).all<Record<string,unknown>>()).results.map(decodeProfile);
- const claims=await read("workshop_claims","claim",cursors.claims),changes=await read("workshop_changes","change",cursors.changes);
- // Current guidance and edit locks must not depend on a page of historical decisions.
- const pendingClaims=moderation?[]:(await db.prepare("SELECT r.id,r.workshop_id,w.name AS workshop_name,r.created_at,r.file_name,r.file_key,r.file_type,r.documents FROM workshop_claims r JOIN workshops w ON w.id=r.workshop_id WHERE r.owner IN (?,?) AND r.status='pending' ORDER BY r.created_at DESC,r.id DESC").bind(...owners).all<Record<string,unknown>>()).results.map(row=>({id:String(row.id),workshopId:String(row.workshop_id),workshopName:String(row.workshop_name),createdAt:String(row.created_at),fileName:row.file_name?String(row.file_name):null,documents:claimDocumentViews(row)}));
- const pendingChangeWorkshopIds=moderation?[]:(await db.prepare("SELECT DISTINCT c.workshop_id FROM workshop_changes c JOIN workshop_owners o ON o.workshop_id=c.workshop_id WHERE o.account_id IN (?,?) AND c.status='pending' ORDER BY c.workshop_id").bind(...owners).all<Record<string,unknown>>()).results.map(row=>String(row.workshop_id));
- const pendingChangeRequestIds=moderation?[]:(await db.prepare("SELECT id FROM workshop_changes WHERE owner IN (?,?) AND status='pending' ORDER BY created_at DESC,id DESC").bind(...owners).all<Record<string,unknown>>()).results.map(row=>String(row.id));
- return {pendingClaims,pendingChangeWorkshopIds,pendingChangeRequestIds,claims:claims.items,changes:changes.items,workshops:owned,nextClaimCursor:claims.next,nextChangeCursor:changes.next};
 }
 export async function requestWorkshopClaim(user:AppUser,body:unknown,files:File[]=[]){
  const input=claimSchema.parse(body),selectionError=claimDocumentsError(files);

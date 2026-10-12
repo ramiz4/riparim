@@ -98,3 +98,24 @@ try{
  assert.equal((await withAuthRequest(()=>createAuthClient(sdkConfig,cookieApi,true).getUser())).data.user,null);
  assert.equal(cookies.size,0,'Definitive provider rejection retains the SDK invalidation behavior');
 }finally{globalThis.fetch=originalFetch;console.error=originalConsoleError;}
+
+// One remote validation is shared by the proxy, page and symmetric JWT proof;
+// it never becomes a cross-request identity cache.
+const subject='00000000-0000-4000-8000-000000000001';
+const accessToken=[{alg:'HS256',typ:'JWT'},{sub:subject,iss:origin+'/auth/v1',session_id:'fixture-shared-session',amr:[{method:'password'}],exp:Math.floor(Date.now()/1000)+3600},'fixture-signature'].map(value=>Buffer.from(typeof value==='string'?value:JSON.stringify(value)).toString('base64url')).join('.');
+const validCookies={getAll:()=>[{name:'sb-fixture-project-auth-token',value:'base64-'+Buffer.from(JSON.stringify({access_token:accessToken,refresh_token:'fixture-refresh',expires_at:Math.floor(Date.now()/1000)+3600,token_type:'bearer',user:{id:subject}})).toString('base64url')}],setAll(){}};
+let verifiedCalls=0,rejected=false;
+globalThis.fetch=async input=>{assert.equal(new URL(String(input)).href,origin+'/auth/v1/user');verifiedCalls++;return rejected?Response.json({msg:'Rejected',error_code:'bad_jwt'},{status:401}):Response.json({id:subject,email:'fixture@example.test',email_confirmed_at:'2026-10-11',app_metadata:{provider:'email'},user_metadata:{}});};
+try{
+ await withAuthRequest(async()=>{
+  const first=createAuthClient(sdkConfig,validCookies,true),second=createAuthClient(sdkConfig,validCookies,true);
+  assert.equal((await first.getUser()).data.user.identity.subject,subject);
+  assert.equal((await second.getUser()).data.user.identity.subject,subject);
+  assert.equal((await second.getSessionProof()).data.proof.id,'fixture-shared-session');
+ });
+ assert.equal(verifiedCalls,1,'One HTTP request validates its unchanged bearer token only once');
+ rejected=true;
+ assert.equal((await withAuthRequest(()=>createAuthClient(sdkConfig,validCookies,true).getUser())).data.user,null,'A subsequent request must observe provider revocation');
+ assert.equal(verifiedCalls,2,'Verified identity cannot survive its HTTP request');
+}finally{globalThis.fetch=originalFetch;}
+console.log('Request-local validation: repeated client/claims reads share proof; a fresh request observes revocation');

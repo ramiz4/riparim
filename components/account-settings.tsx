@@ -1,4 +1,5 @@
 "use client";
+import {invalidatePublicSession} from "./use-public-session";
 import {useI18n} from "@/lib/i18n/client";
 import {responseError,LocalizedError,type CodedResponse} from "@/lib/i18n/codes";
 import {useNavigationGuard} from "@/lib/i18n/navigation-guard";
@@ -46,7 +47,7 @@ export function AccountSettings(){
   try{
    const data=await mutate("PATCH",{name});
    setState(old=>old?.account?{...old,account:{...old.account,name:data.name!}}:old);setName(data.name!);
-   setMessage(t("customer.nameSaved"));router.refresh();
+   setMessage(t("customer.nameSaved"));invalidatePublicSession({displayName:data.name});router.refresh();
   }catch(e){setError(e instanceof TypeError?networkError:e instanceof LocalizedError?e.message:networkError);}
   finally{setBusy(false);}
  }
@@ -68,7 +69,7 @@ export function AccountSettings(){
   setBusy(true);setError("");setMessage("");
   try{
    await mutate("DELETE",{confirmation:deleteConfirmation(locale,confirmation)});setOpen(false);setState({account:null,deletionReady:false,deletionStarted:false});
-   setMessage(t("customer.accountDeleted"));router.refresh();
+   setMessage(t("customer.accountDeleted"));invalidatePublicSession({signedOut:true});router.refresh();
   }catch(e){
    const failure=e instanceof TypeError?networkError:e instanceof LocalizedError?e.message:networkError;
    await load();setError(failure);

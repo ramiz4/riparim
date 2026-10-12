@@ -1,9 +1,10 @@
+import {businessReadResponse,businessFailure as failure} from "@/lib/business-read";
 import {ValidationError} from "@/lib/validation-error";
 import {z} from "zod";
 import {getAppUser,getAdminUser} from "@/app/auth";
 import {json,readJson,readFormData,sameOrigin} from "@/lib/http";
 import {businessProfileSchema,claimSchema,claimUploadRequestLimit} from "@/lib/business-contract";
-import {BusinessError,businessState,requestWorkshopClaim,requestWorkshopChange,decideClaim,decideChange} from "@/lib/business";
+import {BusinessError,requestWorkshopClaim,requestWorkshopChange,decideClaim,decideChange} from "@/lib/business";
 
 export const dynamic="force-dynamic";
 const id=z.string().uuid();
@@ -13,21 +14,7 @@ const createSchema=z.discriminatedUnion("kind",[
 ]);
 const decisionSchema=z.object({kind:z.enum(["claim","change"]),id,revision:z.number().int().nonnegative(),decision:z.enum(["approved","rejected"]),note:z.string().trim().min(10).max(2000)}).strict();
 async function input(request:Request,maxBytes:number){try{return await readJson(request,maxBytes);}catch{throw new BusinessError("Ungültige Eingaben.",400,"invalid_request");}}
-function failure(error:unknown){
- if(error instanceof BusinessError)return json({error:error.message,errorCode:error.code},error.status);
- if(error instanceof ValidationError)return json({error:error.message,errorCode:error.code},error.code==="file_too_large"?413:400);
- if(error instanceof z.ZodError)return json({error:"Bitte prüfe deine Eingaben und den Inhabernachweis.",errorCode:"business_invalid_input"},400);
- console.error("business-operation-failed",error instanceof Error?error.name:"unknown");
- return json({error:"Der Betriebsbereich ist gerade nicht verfügbar. Deine Eingaben bleiben erhalten.",errorCode:"business_unavailable"},503);
-}
-export async function GET(request:Request){
- try{
-  const params=new URL(request.url).searchParams,moderation=params.get("moderation")==="1",user=moderation?await getAdminUser():await getAppUser();
-  if(!user)return json({error:"Bitte melde dich an.",errorCode:"authentication_required"},401);
-  if(moderation&&!user.isModerator)return json({error:"Kein Zugriff auf die Prüfung.",errorCode:"forbidden"},403);
-  return json(await businessState(user,moderation,{claims:params.get("claimCursor"),changes:params.get("changeCursor")}));
- }catch(e){return failure(e);}
-}
+export async function GET(request:Request){return businessReadResponse(request,{getAppUser,getAdminUser});}
 export async function POST(request:Request){
  if(!sameOrigin(request)||!["application/json","multipart/form-data"].some(type=>request.headers.get("content-type")?.includes(type)))return json({error:"Ungültige Anfrage.",errorCode:"invalid_request"},403);
  try{

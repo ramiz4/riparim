@@ -1,3 +1,5 @@
+import {publicReleaseRender} from "@/lib/public-release";
+import {deferredManagementPage} from "@/lib/deferred-page";
 import {I18nMessages} from "@/lib/i18n/client";
 import {createTranslator} from "@/lib/i18n/messages";
 import {managementMessages,managementMetadata} from "@/lib/i18n/management";
@@ -15,6 +17,7 @@ export const dynamic="force-dynamic";
 export default async function BusinessClaimPage({searchParams,params}:{params:Promise<{locale:string}>;searchParams:Promise<{werkstatt?:string|string[]}>}){
  const {locale:value}=await params,locale=callbackLocale(value),query=await searchParams;
  const workshopId=typeof query.werkstatt==="string"?query.werkstatt:undefined;
+ if(publicReleaseRender())return deferredManagementPage("claim",locale);
  const user=await getAppUser(),admin=await getAdminUser(user);
  let workshop:Awaited<ReturnType<typeof listWorkshops>>[number]|null=null,directoryUnavailable=false;
  if(user&&workshopId)try{workshop=(await listWorkshops()).find(workshop=>workshop.id===workshopId)??null;}catch{directoryUnavailable=true;console.error("business-claim-directory-unavailable");}

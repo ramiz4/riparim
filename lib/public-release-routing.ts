@@ -1,3 +1,4 @@
+import {setReleaseRscHeaders} from "./release-rsc";
 import {localeFromPath,localizeHref,pageIdentityPath} from "./i18n/locale";
 import {ownReviewsHref} from "./own-reviews";
 type Revision={id:string;updatedAt:string};
@@ -24,7 +25,8 @@ export async function servePublicRelease(request:Request,env:Cloudflare.Env){
  }
  const asset=publicAssetPath(url);
  if(asset){const localized=localizeHref(url.pathname,localeFromPath(url.pathname));if(localized!==url.pathname){url.pathname=localized;return new Response(null,{status:308,headers:{Location:url.href,"Cache-Control":"private, no-store"}});}}
- if(!asset||!["GET","HEAD"].includes(request.method)||request.headers.get("RSC")==="1"||request.headers.get("Accept")?.includes("text/x-component")||Reflect.get(env,"PUBLIC_RELEASE_RENDER"))return null;
+ const rsc=request.headers.get("RSC")==="1"||!!request.headers.get("Accept")?.includes("text/x-component");
+ if(!asset||!["GET","HEAD"].includes(request.method)||Reflect.get(env,"PUBLIC_RELEASE_RENDER"))return null;
  // A changed profile uses a data-free shell until its next approved release.
  const id=pageIdentityPath(url.pathname).match(/^\/werkstatt\/([a-z0-9-]+)$/)?.[1];
  let current=["/","/datenschutz"].includes(identity);
@@ -32,7 +34,7 @@ export async function servePublicRelease(request:Request,env:Cloudflare.Env){
   const row=await env.DB.prepare("SELECT status,updated_at FROM workshops WHERE id=?").bind(id).first<{status:string;updated_at:string}>();
   if(!row||row.status!=="published")return new Response("Not found",{status:404});
   current=row.updated_at===__RIPARIM_PUBLIC_REVISIONS__.find(w=>w.id===id)?.updatedAt;
- }else if(!current){
+ }else if(!current&&!rsc){
   const result=await env.DB.prepare("SELECT group_concat(id || '@' || updated_at, '|') AS revisions FROM (SELECT id,updated_at FROM workshops WHERE status='published' ORDER BY id)").first<{revisions:string|null}>();
   current=(result?.revisions??"")===__RIPARIM_PUBLIC_REVISIONS__.map(w=>w.id+"@"+w.updatedAt).join("|");
  }
@@ -43,9 +45,10 @@ export async function servePublicRelease(request:Request,env:Cloudflare.Env){
   const config=await env.DB.prepare("SELECT provider FROM auth_settings WHERE id='main'").first<{provider:string}>();
   if(config?.provider==="pocketbase")selected=asset.replace(/\.html$/,"-pocketbase.html");
  }
+ if(rsc)selected=selected.replace(/\.html$/,".rsc");
  const target=new URL(selected,url.origin);
  const response=await env.ASSETS.fetch(new Request(target,{method:request.method}));
  if(response.status!==200){await response.body?.cancel();return null;}
- const headers=new Headers(response.headers);headers.set("Cache-Control","no-store");headers.set("X-Riparim-Public-Snapshot","1");headers.set("X-Content-Type-Options","nosniff");headers.set("Referrer-Policy","strict-origin-when-cross-origin");
+ const headers=new Headers(response.headers);headers.set("Cache-Control","no-store");headers.set("X-Riparim-Public-Snapshot","1");if(rsc)setReleaseRscHeaders(headers,request);headers.set("X-Content-Type-Options","nosniff");headers.set("Referrer-Policy","strict-origin-when-cross-origin");
  return new Response(response.body,{status:200,headers});
 }

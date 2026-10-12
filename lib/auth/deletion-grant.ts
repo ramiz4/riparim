@@ -1,29 +1,15 @@
 import {cookies,headers} from "next/headers";
 import {storage} from "@/db/storage";
 import type {AppUser} from "@/app/auth";
-import {resolveProviderAccount,configuredIdentity,legacyIdentityMatches} from "@/lib/auth/identities";
-import {isBootstrapAccount,hasAdminRole} from "@/lib/auth/roles";
+import {resolveProviderAccount,configuredIdentity} from "@/lib/auth/identities";
 
-const cookieName="riparim-account-deletion";
+import {accountDeletionCookie as cookieName,deletionTokenHash as digest,deletionProtected,readDeletionGrantToken,type DeletionGrant} from "./deletion-read";
+export {matchesDeletionGrant,deletionProtected} from "./deletion-read";
+export type {DeletionGrant} from "./deletion-read";
 const retrySeconds=7*86400;
-export type DeletionGrant={account_id:string;user_id:string;token_hash:string;expires_at:number;started:number;identity_issuer:string|null;identity_provider:string};
-export async function matchesDeletionGrant(grant:DeletionGrant,config:{provider:string;projectUrl:string}){
- const identity=configuredIdentity(config,grant.user_id);
- if(grant.identity_provider!==identity.provider)return false;
- if(grant.identity_issuer===null)return legacyIdentityMatches(grant.account_id,identity);
- return grant.identity_issuer===identity.issuer&&grant.account_id===await resolveProviderAccount(config,grant.user_id);
-}
-async function digest(token:string){
- const hash=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(token));
- return Array.from(new Uint8Array(hash),byte=>byte.toString(16).padStart(2,"0")).join("");
-}
 async function setCookie(token:string,maxAge:number){
  const host=(await headers()).get("host")??"";
  (await cookies()).set(cookieName,token,{httpOnly:true,secure:!/^(localhost|127\.0\.0\.1)(:\d+)?$/.test(host),sameSite:"strict",path:"/",maxAge});
-}
-export async function deletionProtected(user:AppUser){
- if(user.isModerator||isBootstrapAccount(user.email)||await hasAdminRole(user.userId))return true;
- return !!await storage().db.prepare("SELECT account_id FROM auth_links WHERE account_id=? AND owner_admin=1").bind(user.userId).first();
 }
 export async function issueDeletionGrant(user:AppUser,config:{provider:string;projectUrl:string},id:string){
  if(user.userId!==await resolveProviderAccount(config,id)||await deletionProtected(user))throw Error("DELETION_FORBIDDEN");
@@ -33,11 +19,7 @@ export async function issueDeletionGrant(user:AppUser,config:{provider:string;pr
  if(!row)throw Error("DELETION_STARTED");
  await setCookie(token,retrySeconds);
 }
-export async function readDeletionGrant(){
- const token=(await cookies()).get(cookieName)?.value;
- if(!token||! /^[0-9a-f-]{72}$/.test(token))return null;
- return storage().db.prepare("SELECT * FROM auth_account_deletions WHERE token_hash=? AND expires_at>?").bind(await digest(token),Date.now()).first<DeletionGrant>();
-}
+export async function readDeletionGrant(){return readDeletionGrantToken((await cookies()).get(cookieName)?.value);}
 export async function startDeletion(grant:DeletionGrant){
  const db=storage().db;
  // Role checks and the access block share one transaction. A concurrent
