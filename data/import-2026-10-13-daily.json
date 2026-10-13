@@ -1,0 +1,343 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-13",
+  "localDate": "2026-10-13",
+  "timezone": "Europe/Zurich",
+  "startedAt": "2026-10-13T01:01:16.946Z",
+  "checkedAt": "2026-10-13T01:08:27Z",
+  "status": "prepared-ci-review",
+  "baseCommit": "3b89d6d3e837f31499c6691be72f74988129c3bb",
+  "branch": "codex/daily-import-2026-10-13",
+  "reason": "Two independently sourced Malishevë workshops satisfy name, normalized telephone, street/location and active public Maps entry requirements. Incomplete and conflicting leads remain deferred.",
+  "municipalitiesInvestigated": [
+    "Malishevë",
+    "Kamenicë",
+    "Shtime",
+    "Kaçanik",
+    "Hani i Elezit",
+    "Shtërpcë",
+    "Dragash",
+    "Gjakovë",
+    "Prizren"
+  ],
+  "coverage": {
+    "targetMaximum": 30,
+    "belowTenReason": "Only two candidates completed all required independent source and active Maps identity checks. Other leads lack a unique entry, telephone, active status, reliable service scope or consistent continuity. Search coverage is partial; no completeness claim."
+  },
+  "before": {
+    "total": 162,
+    "published": 162,
+    "drafts": 0
+  },
+  "after": {
+    "total": 164,
+    "published": 164,
+    "drafts": 0
+  },
+  "importedWorkshopIds": [
+    "auto-servis-berati-malisheve",
+    "auto-servis-diagnoz-opel-malisheve"
+  ],
+  "profiles": [
+    {
+      "id": "auto-servis-berati-malisheve",
+      "name": "Auto servis ‘BERATI’ BMW",
+      "city": "Malishevë",
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-servis-%E2%80%98berati%E2%80%99-bmw-049-378-051"
+      ],
+      "placeId": "ChIJR0jrutd1UxMRlemhiDV-aUA",
+      "checkedAt": "2026-10-13T01:08:27Z",
+      "nameMatched": true,
+      "normalizedPhoneMatched": true,
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "activeEntry": true,
+      "directIdResolved": true,
+      "mapsMethod": "Public Maps visible !19s result link, direct-ID return with deliberately incorrect query",
+      "ownershipVerificationClaimed": false,
+      "status": "prepared"
+    },
+    {
+      "id": "auto-servis-diagnoz-opel-malisheve",
+      "name": "Auto Servis & Diagnoz \"OPEL\"",
+      "city": "Malishevë",
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-servis-diagnoz-%22opel%22-049-284-990"
+      ],
+      "placeId": "ChIJ35tXXoOfUxMRZEfRxbLnlrc",
+      "checkedAt": "2026-10-13T01:08:27Z",
+      "nameMatched": true,
+      "normalizedPhoneMatched": true,
+      "independentLocationMatched": true,
+      "independentServiceScopeVerified": true,
+      "activeEntry": true,
+      "directIdResolved": true,
+      "mapsMethod": "Public Maps visible !19s result link, direct-ID return with deliberately incorrect query",
+      "ownershipVerificationClaimed": false,
+      "status": "prepared"
+    }
+  ],
+  "duplicates": [
+    {
+      "id": "auto-servis-genti-prishtina",
+      "sourceUrls": [
+        "https://www.google.com/maps/search/Auto+Servis+Genti+Kosovo"
+      ],
+      "reason": "Existing Prishtina identity rediscovered; distinct from unconfirmed Malishevë namesake."
+    },
+    {
+      "id": "auto-moto-universum-gjilan",
+      "sourceUrls": [
+        "https://www.cybo.com/XK/kamenica-kosovo/car-repair/"
+      ],
+      "reason": "Existing published identity rediscovered; excluded from new import."
+    },
+    {
+      "id": "garage-fita-gjilan",
+      "sourceUrls": [
+        "https://www.cybo.com/XK/kamenica-kosovo/car-repair/"
+      ],
+      "reason": "Existing published identity rediscovered; excluded from new import."
+    },
+    {
+      "id": "luxury-auto-detailing-gjilan",
+      "sourceUrls": [
+        "https://www.cybo.com/XK/kamenica-kosovo/car-repair/"
+      ],
+      "reason": "Existing published identity rediscovered; excluded from new import."
+    },
+    {
+      "id": "auto-elektricist-xhaviti-gjakova",
+      "sourceUrls": [
+        "https://telefon-kitab.cybo.com/XK/gjakov%C3%AB/avtomobil"
+      ],
+      "reason": "Existing published identity rediscovered; excluded from new import."
+    }
+  ],
+  "uncertainties": [
+    {
+      "name": "Auto Servis Idrizi",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-idrizi-1"
+      ],
+      "reason": "Public Maps searches with explicit Kosovo returned other businesses; no unique matching identity."
+    },
+    {
+      "name": "Auto Servis\"GENTI\" Malishevë",
+      "sourceUrls": [
+        "https://www.merrjep.com/shpallja/auto-servis-genti/8494972",
+        "https://www.cybo.com/XK-biz/auto-servis%22genti%22-mlishev%C3%AB"
+      ],
+      "placeId": "ChIJUdsbEVl1UxMRa4sSZd1PSNE",
+      "reason": "Independent phone/name/street match, but current active business status lacks corroboration; not published."
+    },
+    {
+      "name": "Auto Servis Xeni",
+      "sourceUrls": [
+        "https://www.cybo.com/XK/mali%C5%A1evo/car-repair/"
+      ],
+      "placeId": "ChIJ3VTUMRGfUxMRTNkDwna5d-8",
+      "reason": "Name/phone/street and direct ID match, but no regular business status shown; active status unconfirmed."
+    },
+    {
+      "name": "Auto Servis F&S Skender Hoxha",
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-servis-f-s-skender-hoxha-049-151-054",
+        "https://arbk.atlas-studio.eu/business/skender-a-hoxha-bi-811447855"
+      ],
+      "placeId": "ChIJzznvDr2fUxMRmacT2v2PgbA",
+      "reason": "Maps matches active hours/contact/location, but historical register mirror records dissolved Auto Servis F&S at this street. Continuity unresolved; conflicting directory categories."
+    },
+    {
+      "name": "Auto servis \"Tigri\"",
+      "sourceUrls": [
+        "https://www.findglocal.com/XK/Malishev%C3%AB/237401469797522/Auto-servis-%22Tigri%22"
+      ],
+      "reason": "Own published posts prove repair/alignment/phone/street; Maps offers different Tigri-L identity and other workshops. No substitute accepted."
+    },
+    {
+      "name": "Go Clean Auto Detailing",
+      "sourceUrls": [
+        "https://germin.org/team/leonora-cerreti/",
+        "https://www.cybo.com/XK/draga%C5%A1/car-wash-and-detail/"
+      ],
+      "reason": "Independent service/business evidence; no independently verified public phone and complete Maps check."
+    },
+    {
+      "name": "Auto Servis TONI",
+      "sourceUrls": [
+        "https://mapcarta.com/N4864543421"
+      ],
+      "reason": "Independent Shtime repair/location evidence; telephone and Maps identity unconfirmed."
+    },
+    {
+      "name": "Auto Servis Vëllezërit Luta",
+      "sourceUrls": [
+        "https://sk.cybo.com/XK/ka%C4%8Danik/autoservis"
+      ],
+      "reason": "Kaçanik repair lead lacks public phone and full Maps proof."
+    },
+    {
+      "name": "Auto Servis Luli",
+      "sourceUrls": [
+        "https://www.cybo.com/XK/bostane/car-repair"
+      ],
+      "reason": "Kamenicë repair lead; complete public Maps identity check still outstanding."
+    },
+    {
+      "name": "Auto Basha",
+      "sourceUrls": [
+        "https://www.cybo.com/XK/kamenica-kosovo/car-repair/"
+      ],
+      "reason": "Hodonoc/Kamenicë repair lead; complete public Maps identity check still outstanding."
+    }
+  ],
+  "exclusions": [
+    {
+      "name": "Auto Servis \"UNIVERZAL\" Kamenicë",
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-servis-univerzal-044-350-558"
+      ],
+      "reason": "Independent contact listing categorizes car rental; current repair scope unconfirmed."
+    },
+    {
+      "name": "Ekipa Zez / Auto club Dragshi / Self Service CAR WASH",
+      "sourceUrls": [
+        "https://www.cybo.com/XK/draga%C5%A1/car-wash-and-detail/"
+      ],
+      "reason": "Wash listings alone do not prove detailing, polishing, ceramic coating or repair."
+    }
+  ],
+  "previousCatalogue": {
+    "published": 162,
+    "drafts": 0,
+    "canonicalProfileFieldsCompared": 19,
+    "placeIdsCompared": 162,
+    "profileMismatches": [],
+    "extraIds": [],
+    "duplicatePlaceIds": [],
+    "retirementMarkers": 35,
+    "pendingChanges": 0,
+    "protectedCustomerTables": "not read or modified"
+  },
+  "preflight": {
+    "healthy": true,
+    "publicHttpStatus": 200,
+    "checkedPages": 9,
+    "locales": [
+      "de",
+      "sq",
+      "en"
+    ],
+    "error1102": false,
+    "completeHtml": true,
+    "healthReceipt": ".sites-runtime/daily-import-2026-10-13/health.json",
+    "activeVersion": "a2b076ad-007f-4a47-ad45-6e6d8b6d80de",
+    "trafficPercentage": 100,
+    "observability": {
+      "method": "Native Cloudflare public log dashboard in required profile",
+      "checkedAt": "2026-10-13T01:04:00Z",
+      "window": "Last 1 hour",
+      "successEntries": 54,
+      "errorEntries": 0,
+      "preflightRequestsObserved": "all catalogue/API/newest-profile GETs 200; D1 OK",
+      "limitation": "Bounded browser observation; connector events/invocations reject current schema without requestId. Direct detail endpoint denies with10000. Not a resource error."
+    }
+  },
+  "provider": {
+    "profileConfirmed": true,
+    "identityMethod": "Public Google Maps UI only",
+    "googleServerRequests": 0,
+    "googleBrowserSdkRequests": 0,
+    "mapsIdentityQueries": 6,
+    "mapsDirectIdChecks": 4,
+    "freeRemainingQuotaConfirmed": false,
+    "publicUiNotGatedByApiQuota": true,
+    "persistedGoogleBusinessFields": [],
+    "changesMade": false,
+    "additionalCosts": 0,
+    "contactsSent": 0
+  },
+  "backup": {
+    "protectedLocal": true,
+    "receipt": ".sites-runtime/daily-import-2026-10-13/catalogue-backup.json",
+    "tables": [
+      "workshops",
+      "workshop_google_places",
+      "workshop_google_ratings",
+      "catalog_state"
+    ],
+    "counts": [
+      162,
+      162,
+      129,
+      58
+    ],
+    "restoredInIsolatedSqlite": true,
+    "restoredRowsEqualBackup": true,
+    "privateUserTables": false,
+    "retainedOutsideGit": true
+  },
+  "dryRun": {
+    "status": "passed",
+    "mode": "dry-run",
+    "addedIds": [
+      "auto-servis-berati-malisheve",
+      "auto-servis-diagnoz-opel-malisheve"
+    ],
+    "updatedIds": [],
+    "deduplicated": [],
+    "before": 162,
+    "after": 164
+  },
+  "import": {
+    "status": "written-to-canonical",
+    "addedIds": [
+      "auto-servis-berati-malisheve",
+      "auto-servis-diagnoz-opel-malisheve"
+    ],
+    "updatedIds": [],
+    "publishedNewCount": 0,
+    "canonicalAfter": 164
+  },
+  "translationCheck": {
+    "status": "passed",
+    "centralHashContract": "workshopTranslationSourceHash",
+    "locales": [
+      "de",
+      "sq",
+      "en"
+    ]
+  },
+  "validation": {
+    "ci": "pending",
+    "independentReview": "pending",
+    "runtime": {
+      "node": "v24.21.0",
+      "ciNodeMajor": "24",
+      "go": "go1.27.1 darwin/arm64",
+      "ciGo": "1.27.1",
+      "goCacheVersionVerified": true
+    }
+  },
+  "publication": {
+    "newPr": null,
+    "newRelease": null,
+    "newDeploy": null,
+    "currentRelease": "https://github.com/ramiz4/riparim/releases/tag/v1.24.0",
+    "currentReleaseRun": "https://github.com/ramiz4/riparim/actions/runs/38298361123",
+    "currentReleaseJobs": "all successful",
+    "assetsConfirmed": 6,
+    "provenanceCommitMatches": true,
+    "archiveDigestsMatchGithubAssetMetadata": true,
+    "openImportPrs": 0,
+    "activeReleaseJobs": 0
+  },
+  "handoff": {
+    "state": "Prepared candidates pending write, full CI, independent review, PR/squash/release/live acceptance.",
+    "lock": "Held until safe handoff.",
+    "resume": "Continue this dated manifest and isolated worktree. Never create a second import/PR/release. Recheck live revisions and required profile before continuation."
+  },
+  "errors": []
+}
