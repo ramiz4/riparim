@@ -51,6 +51,12 @@ const filter=async label=>{
  const option=[...document.querySelectorAll('[role="option"]')].find(node=>node.textContent===label);assert(option,'Expected status option remains');
  await act(async()=>{option.focus();option.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true}));});
 };
+const chooseReason=async label=>{
+ const trigger=document.querySelector('.moderation-decision [role="combobox"]');
+ await act(async()=>{trigger.focus();trigger.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true,cancelable:true}));});
+ const option=[...document.querySelectorAll('[role="option"]')].find(node=>node.textContent===label);assert(option,'Expected moderation reason exists');
+ await act(async()=>{option.focus();option.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true}));});
+};
 try{
  for(pendingCount of [0,7]){
   await remount();
@@ -77,11 +83,21 @@ try{
  assert.equal(document.querySelectorAll('.moderation-entry').length,1,'Recovery loads the same moderation queue');
  assert(!document.querySelector('main [role="alert"]')&&!button('Einreichungen erneut laden'),'Recovery removes its error and retry action');
  assert(button('Prüfen & veröffentlichen').disabled&&button('Ergänzung anfordern').disabled,'Moderation still requires a private reason');
- const note=document.querySelector('textarea');
- assert.equal(document.querySelector('label[for="'+note.id+'"]').textContent,'Prüfvermerk','The reason remains explicitly labelled');
+ const reason=document.querySelector('.moderation-decision [role="combobox"]');
+ assert.equal(document.querySelector('label[for="'+reason.id+'"]').textContent,'Prüfvermerk','The select is explicitly labelled');
+ assert(!document.querySelector('textarea'),'Free text is initially absent');
  assert(document.querySelector('.moderation-review-rating').textContent.includes('4 / 5')&&!document.body.textContent.includes(getMessages('de').management.oldIncompleteReview),'Stars-only reviews show their rating and are eligible for moderation');
- await type(note,'Fiktiver Nachweis wurde geprüft.');mutationMode='reload-error';
+ const beforeSelection=requests.filter(request=>request.method==='PATCH').length;
+ for(const label of ['Werkstatt nicht erkennbar','Datum fehlt','Durchgeführte Arbeit unklar','Mögliche doppelte Einreichung']){
+  await chooseReason(label);assert(button('Prüfen & veröffentlichen').disabled&&!button('Ergänzung anfordern').disabled,'Missing-information reasons only enable requesting a supplement');assert(!document.querySelector('textarea'),'Standard reasons never require free text');
+ }
+ await chooseReason('Anderer Grund');const detail=document.querySelector('textarea');assert.equal(document.querySelector('label[for="'+detail.id+'"]').textContent,'Eigene Begründung');
+ await type(detail,'kurz');assert(button('Prüfen & veröffentlichen').disabled&&button('Ergänzung anfordern').disabled,'Other reasons require a meaningful private explanation');
+ await type(detail,'Fiktiver sonstiger Prüfvermerk.');await chooseReason('Datum fehlt');assert(!document.querySelector('textarea'));await chooseReason('Anderer Grund');assert.equal(document.querySelector('textarea').value,'Fiktiver sonstiger Prüfvermerk.','Changing reasons preserves the unfinished other-reason text');
+ await chooseReason('Nachweis bestätigt Werkstattbesuch');assert(!document.querySelector('textarea')&&!button('Prüfen & veröffentlichen').disabled&&button('Ergänzung anfordern').disabled,'Confirmation reasons only enable publication');
+ assert.equal(requests.filter(request=>request.method==='PATCH').length,beforeSelection,'Choosing reasons never sends a decision');mutationMode='reload-error';
  await click(button('Prüfen & veröffentlichen'));
+ assert.equal(requests.filter(request=>request.method==='PATCH').at(-1).body.note,'Nachweis bestätigt Werkstattbesuch','Standard reasons are sent as the private note through the existing API');
  assert.equal(document.querySelector('main [role="status"]').textContent,'Bewertung veröffentlicht.','An accepted decision remains confirmed even when its queue refresh fails');
  assert.equal(document.querySelector('main [role="alert"]').textContent,getMessages('de').customer.reviewUnavailable);
  assert(button('Einreichungen erneut laden'),'A failed queue refresh after successful moderation remains recoverable');
@@ -92,12 +108,12 @@ try{
  await filter('Veröffentlicht');
  assert.equal(document.querySelector('.visit-status').textContent,'Veröffentlicht','The real status picker remains operable by keyboard');
  assert.equal(document.querySelector('.moderation-evidence a').getAttribute('href'),'/api/evidence/'+visit.id+'?locale=de','Private evidence retains its authorized localized download destination');
- await type(document.querySelector('textarea'),'Fiktive Ergänzung wird benötigt.');
+ await chooseReason('Datum fehlt');
  await click(button('Ausblenden & Ergänzung anfordern'));
  assert.equal(requests.filter(request=>request.method==='PATCH').at(-1).body.status,'needs_more','Published reviews retain the hide and supplement decision');
  await filter('Ergänzung nötig');
  assert.equal(document.querySelector('.visit-status').textContent,'Ergänzung nötig');
- await type(document.querySelector('textarea'),'Fiktiver Vermerk bleibt erhalten.');mutationMode='error';
+ await chooseReason('Anderer Grund');await type(document.querySelector('textarea'),'Fiktiver Vermerk bleibt erhalten.');mutationMode='error';
  await click(button('Prüfen & veröffentlichen'));
  assert.equal(document.querySelector('main [role="alert"]').textContent,getMessages('de').customer.reviewConflict,'Decision conflicts remain announced');
  await click(button('Einreichungen erneut laden'));
@@ -118,7 +134,7 @@ try{
  assert(!document.querySelector('.empty'),'Loading does not suggest an empty queue');
  await act(async()=>resolveLoad());mode='success';
  records=[];await remount();assert(document.querySelector('.empty').textContent.includes('Für diesen Filter liegt keine Einreichung vor.'),'An empty queue keeps the filter-specific guidance');
- records=[visit];await remount();mode='forbidden';await type(document.querySelector('textarea'),'Fiktive Ergänzung wird benötigt.');
+ records=[visit];await remount();mode='forbidden';await chooseReason('Anderer Grund');await type(document.querySelector('textarea'),'Fiktive Ergänzung wird benötigt.');
  // A failed decision gives the user a safe read path; the next GET revokes access.
  mutationMode='error';await click(button('Ergänzung anfordern'));await click(button('Einreichungen erneut laden'));
  assert.equal(document.querySelectorAll('.moderation-entry').length,0,'Lost access clears previously loaded private reviews');

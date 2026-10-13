@@ -20,8 +20,8 @@ import AdminUsers from "@/app/[locale]/verwaltung/benutzer/users";
 import AdminReviews from "@/app/[locale]/verwaltung/bewertungen/reviews";
 import AuthSetup from "@/app/[locale]/verwaltung/anmeldung/setup";
 
-export type DeferredManagementKind="settings"|"business"|"claim"|"workshops"|"users"|"reviews"|"claims"|"auth";
-const paths={settings:'/einstellungen',business:'/betrieb',claim:'/betrieb/beanspruchen',workshops:'/verwaltung',users:'/verwaltung/benutzer',reviews:'/verwaltung/bewertungen',claims:'/verwaltung/betriebe',auth:'/verwaltung/anmeldung'};
+export type DeferredManagementKind="settings"|"applications"|"business"|"claim"|"workshops"|"users"|"reviews"|"claims"|"auth";
+const paths={applications:'/antraege',settings:'/einstellungen',business:'/betriebe',claim:'/betriebe/beanspruchen',workshops:'/verwaltung',users:'/verwaltung/benutzer',reviews:'/verwaltung/bewertungen',claims:'/verwaltung/betriebe',auth:'/verwaltung/anmeldung'};
 
 export function DeferredManagement({kind}:{kind:DeferredManagementKind}){
  const {locale,t}=useI18n(),query=usePageQuery(),{session,error,pending,retry}=useDeferredSession();
@@ -39,11 +39,11 @@ export function DeferredManagement({kind}:{kind:DeferredManagementKind}){
   return()=>{active=false;};
  },[kind,accountKey,workshopId,directoryKey,directoryAttempt]);
  const currentDirectory=directory?.key===directoryKey?directory:null,directoryPending=!!workshopId&&(!currentDirectory||pendingDirectory===directoryKey),directoryReady=!workshopId||currentDirectory?.state==='ready'&&!directoryPending;
- const title={settings:t('customer.settings'),business:t('management.myBusiness'),claim:t('management.claimTitle'),workshops:t('management.workshopAdministration'),users:t('management.manageUsers'),reviews:t('management.moderateReviews'),claims:t('management.businessModeration'),auth:t('management.authSetupTitle')}[kind];
+ const title={applications:t('management.myApplications'),settings:t('customer.settings'),business:t('management.myBusiness'),claim:t('management.claimTitle'),workshops:t('management.workshopAdministration'),users:t('management.manageUsers'),reviews:t('management.moderateReviews'),claims:t('management.businessModeration'),auth:t('management.authSetupTitle')}[kind];
  const returnTo=localizeHref(paths[kind]+(kind==='claim'&&workshopId?'?werkstatt='+encodeURIComponent(workshopId):''),locale);
  const header=<SiteHeader account={session?.account??null} isAdmin={session?.isAdmin??false} publicSnapshot={!session}/>;
  const administrative=['workshops','users','reviews','claims','auth'].includes(kind);
- const footer=['settings','business','claim'].includes(kind)?<DirectoryFooter/>:null;
+ const footer=['settings','business','applications','claim'].includes(kind)?<DirectoryFooter/>:null;
  if(!session)return <>{header}<main className={administrative?'admin-main wrap':kind==='settings'?'settings-page wrap':'business-page wrap'}><h1>{title}</h1><DeferredStatus error={error} pending={pending} retry={retry} loadingIndicator={administrative?<AdminLoading>{t("customer.loading")}</AdminLoading>:undefined}/></main>{footer}</>;
  if(kind==='settings')return <>{header}<main className="settings-page wrap"><h1>{title}</h1><ThemeSettings/><AccountSettings/></main>{footer}</>;
  if(!session.account||administrative&&!session.isAdmin)return <>{header}<main className="access-page"><h1>{title}</h1>{session.account&&administrative?<p>{t('management.noReviewAccess')}</p>:<p><Link className="primary" href={'/anmelden?weiter='+encodeURIComponent(returnTo)}>{t('management.login')}</Link> {t('management.businessLogin')}</p>}<Link href="/">{t('management.backWorkshops')}</Link></main>{footer}</>;
@@ -53,5 +53,5 @@ export function DeferredManagement({kind}:{kind:DeferredManagementKind}){
  if(kind==='auth')return <AuthSetup account={session.account}/>;
  if(kind==='claim')return <>{header}<main ref={claimMain} tabIndex={-1} className="business-page business-claim-page wrap">{!directoryReady&&<h1>{title}</h1>}<DeferredStatus error={currentDirectory?.state==='error'} pending={directoryPending} errorText={t('management.businessUnavailable')} retryText={t('management.retryBusiness')} completedFocusRef={claimMain} retry={()=>{setPendingDirectory(directoryKey);setDirectoryAttempt(value=>value+1);}}/>{directoryReady&&<BusinessClaimForm key={directoryKey} workshop={workshopId?currentDirectory?.workshop??null:null}/>}</main>{footer}</>;
 
- return <>{header}{kind==='claims'&&<AdminNavigation active="business"/>}<main className={kind==='claims'?"business-page admin-main admin-business-page wrap":"business-page wrap"}>{kind==='claims'&&<><h1>{title}</h1><p>{t('management.businessModerationHelp')}</p></>}<BusinessPanel moderation={kind==='claims'}/></main>{footer}</>;
+ return <>{header}{kind==='claims'&&<AdminNavigation active="business"/>}<main className={kind==='claims'?"business-page admin-main admin-business-page wrap":"business-page wrap"}>{kind==='claims'&&<><h1>{title}</h1><p>{t('management.businessModerationHelp')}</p></>}<BusinessPanel key={kind} moderation={kind==='claims'} view={kind==='applications'?'requests':'businesses'}/></main>{footer}</>;
 }
