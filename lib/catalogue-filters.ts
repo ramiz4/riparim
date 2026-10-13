@@ -1,10 +1,14 @@
 import {displayComparator} from "@/lib/i18n/collation";
 import {valueLabel} from "@/lib/i18n/values";
 import {localizeHref,type Locale} from "@/lib/i18n/locale";
-import {brands,cities,services,cityCoordinates,findWorkshops,type Workshop} from "@/lib/workshops";
+import {brands,cities,services,cityCoordinates,type Workshop} from "@/lib/workshops";
 
 export type CatalogueSort="name"|"rating"|"distance";
-export type CatalogueFilters={query:string;service:string;city:string;brand:string;language:string;sort:CatalogueSort};
+export type CatalogueChoice=string|string[];
+export const catalogueValues=(value:CatalogueChoice)=>Array.isArray(value)?value:[value];
+export const catalogueChoice=(values:string[],fallback:string):CatalogueChoice=>{const selected=[...new Set(values)].filter(value=>value!==fallback);return selected.length>1?selected:selected[0]??fallback;};
+export const catalogueChoiceLabel=(value:CatalogueChoice)=>catalogueValues(value).join(", ");
+export type CatalogueFilters={query:string;service:CatalogueChoice;city:CatalogueChoice;brand:CatalogueChoice;language:string;sort:CatalogueSort};
 export const defaultCatalogueFilters:CatalogueFilters={query:"",service:services[0],city:cities[0],brand:brands[0],language:"Alle Sprachen",sort:"name"};
 export const filterLabels={query:"Name",service:"Leistung",city:"Ort",brand:"Marke",language:"Sprache"};
 export const knownLanguages=["Albanisch","Deutsch","Englisch"];
@@ -17,26 +21,29 @@ export function catalogueOptions(directory:Workshop[],locale:Locale="de"){const 
 const validRating=(value:number|null|undefined)=>value!=null&&Number.isFinite(value)&&value>=1&&value<=5;
 export function hasPublishedRatings(directory:Workshop[]){return directory.some(w=>w.status==="published"&&validRating(w.rating)&&w.count>0);}
 
-export function catalogueDistance(w:Workshop,city:string):number|null{
- const origin=cityCoordinates[city];
+export function catalogueDistance(w:Workshop,city:CatalogueChoice):number|null{
+ const selected=catalogueValues(city);
+ const origin=selected.length===1?cityCoordinates[selected[0]]:undefined;
  if(!origin||w.lat==null||w.lng==null||!Number.isFinite(w.lat)||!Number.isFinite(w.lng))return null;
  const rad=Math.PI/180,a=Math.sin((w.lat-origin[0])*rad/2)**2+Math.cos(origin[0]*rad)*Math.cos(w.lat*rad)*Math.sin((w.lng-origin[1])*rad/2)**2;
  return Math.round(6371*2*Math.atan2(Math.sqrt(a),Math.sqrt(Math.max(0,1-a)))*10)/10;
 }
-export function hasCatalogueDistances(directory:Workshop[],city:string){return directory.some(w=>catalogueDistance(w,city)!==null);}
+export function hasCatalogueDistances(directory:Workshop[],city:CatalogueChoice){return directory.some(w=>catalogueDistance(w,city)!==null);}
 
 export function parseCatalogueFilters(query:Record<string,string|string[]|undefined>|URLSearchParams,directory:Workshop[]):CatalogueFilters{
  const get=(key:string)=>query instanceof URLSearchParams?query.get(key):typeof query[key]==="string"?query[key]:null;
+ const all=(key:string)=>query instanceof URLSearchParams?query.getAll(key):Array.isArray(query[key])?query[key]:typeof query[key]==="string"?[query[key]]:[];
  const options=catalogueOptions(directory),pick=(key:string,values:string[],fallback:string)=>values.find(value=>catalogueSlug(value)===get(key))??fallback;
- const city=pick("ort",unique([...cities,...options.cities]),cities[0]);
+ const pickMany=(key:string,values:string[],fallback:string)=>catalogueChoice(all(key).slice(0,100).flatMap(slug=>values.find(value=>catalogueSlug(value)===slug)??[]),fallback);
+ const city=pickMany("ort",unique([...cities,...options.cities]),cities[0]);
  const requested=(Object.keys(sortSlugs) as CatalogueSort[]).find(sort=>sortSlugs[sort]===get("sort"))??"name";
- const sort=requested==="rating"&&!hasPublishedRatings(directory)||requested==="distance"&&!cityCoordinates[city]?"name":requested;
- return {query:catalogueQuery(get("q")??""),service:pick("leistung",services,services[0]),city,brand:pick("marke",unique([...brands,...options.brands]),brands[0]),language:pick("sprache",unique(["Alle Sprachen",...knownLanguages,...options.languages]),"Alle Sprachen"),sort};
+ const sort=requested==="rating"&&!hasPublishedRatings(directory)||requested==="distance"&&!(catalogueValues(city).length===1&&cityCoordinates[catalogueValues(city)[0]])?"name":requested;
+ return {query:catalogueQuery(get("q")??""),service:pickMany("leistung",services,services[0]),city,brand:pickMany("marke",unique([...brands,...options.brands]),brands[0]),language:pick("sprache",unique(["Alle Sprachen",...knownLanguages,...options.languages]),"Alle Sprachen"),sort};
 }
 export function catalogueHref(filters:CatalogueFilters,locale:Locale="de"){
  const params=new URLSearchParams();
  const query=catalogueQuery(filters.query??"");if(query)params.set("q",query);
- for(const [field,key] of [["service","leistung"],["city","ort"],["brand","marke"],["language","sprache"]] as const){if(filters[field]!==defaultCatalogueFilters[field])params.set(key,catalogueSlug(filters[field]));}
+ for(const [field,key] of [["service","leistung"],["city","ort"],["brand","marke"],["language","sprache"]] as const){if(filters[field]!==defaultCatalogueFilters[field])for(const value of catalogueValues(filters[field]))if(value!==defaultCatalogueFilters[field])params.append(key,catalogueSlug(value));}
  if(filters.sort!=="name")params.set("sort",sortSlugs[filters.sort]);
  return localizeHref(`/werkstaetten${params.size?`?${params.toString()}`:""}`,locale);
 }
@@ -63,7 +70,7 @@ export function orderedCatalogue(directory:Workshop[],filters:CatalogueFilters,l
 }
 export function matchCatalogue(directory:Workshop[],filters:CatalogueFilters,locale:Locale="de"){
  const words=searchText(catalogueQuery(filters.query??"")).split(" ").filter(Boolean);
- return findWorkshops(directory,filters.service,filters.city,filters.brand,filters.language).filter(w=>w.status==="published"&&(filters.brand===brands[0]||w.brands.includes(filters.brand)||w.brands.includes(brands[0]))&&words.every(word=>searchText(w.name).includes(word))).sort(catalogueComparator(filters,locale));
+ return directory.filter(w=>w.status==="published"&&catalogueValues(filters.service).some(value=>value===services[0]||w.services.includes(value))&&catalogueValues(filters.city).some(value=>value===cities[0]||w.city===value)&&catalogueValues(filters.brand).some(value=>value===brands[0]||w.brands.includes(value)||w.brands.includes(brands[0]))&&(filters.language==="Alle Sprachen"||w.languages.includes(filters.language))&&words.every(word=>searchText(w.name).includes(word))).sort(catalogueComparator(filters,locale));
 }
 
 export function activeCatalogueFilters(filters:CatalogueFilters){return (["query","service","city","brand","language"] as const).filter(key=>key==="query"?!!catalogueQuery(filters.query??""):filters[key]!==defaultCatalogueFilters[key]);}

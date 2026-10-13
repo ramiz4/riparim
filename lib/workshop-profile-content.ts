@@ -29,7 +29,7 @@ export function groupWorkshopServices(workshop:Pick<Workshop,"services"|"service
 }
 export type ProfileSelection={brand:string|null;service:string|null};
 export function profileSelection(filters:Pick<CatalogueFilters,"brand"|"service">):ProfileSelection{
- const {brand,service}=filters;
+ const brand=typeof filters.brand==="string"?filters.brand:null,service=typeof filters.service==="string"?filters.service:null;
  return {brand:brand&&brand!=="Alle Marken"?brand:null,service:service&&service!=="Alle Leistungen"?service:null};
 }
 export function workshopSelectionMatches(workshop:Pick<Workshop,"brands"|"services">,selection:ProfileSelection){return {brand:!!selection.brand&&(workshop.brands.includes(selection.brand)||workshop.brands.includes("Alle Marken")),service:!!selection.service&&workshop.services.includes(selection.service)};}
