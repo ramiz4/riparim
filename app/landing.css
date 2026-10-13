@@ -1,6 +1,6 @@
 .landing-page{background:#fff}
 .landing-hero{position:relative;isolation:isolate;display:flex;align-items:center;background:#071e20;color:#fff}
-.landing-hero-image,.landing-hero-shade{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.landing-hero-image,.landing-hero-shade{position:absolute;inset:calc(-1 * var(--site-header-height)) 0 0;width:100%;height:calc(100% + var(--site-header-height));pointer-events:none}
 .landing-hero-image{z-index:-2;object-fit:cover;object-position:center 44%}
 .landing-hero-shade{z-index:-1;background:linear-gradient(90deg,rgba(3,24,26,.96) 0%,rgba(3,24,26,.92) 24%,rgba(3,24,26,.78) 39%,rgba(3,24,26,.22) 63%,rgba(3,24,26,.03) 100%),linear-gradient(0deg,rgba(3,24,26,.2),transparent 50%)}
 .landing-hero-content{min-width:0;min-height:calc(100svh - var(--site-header-height));display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;padding:56px 0 104px}
