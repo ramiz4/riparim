@@ -27,7 +27,7 @@ function validateRun(run, now) {
 /** @param {{fetch?: typeof globalThis.fetch, token?: string, now?: number}} [options] */
 export function createGitHubReader({fetch = globalThis.fetch, token, now} = {}) {
   const base = `https://api.github.com/repos/${repository}/actions`;
-  const headers = {Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2026-03-10',
+  const headers = {Accept: 'application/vnd.github+json', 'User-Agent': 'Riparim-Backup-Monitor', 'X-GitHub-Api-Version': '2026-03-10',
     ...(token ? {Authorization: `Bearer ${token}`} : {})};
   async function request(path, allowMissing = false) {
     const response = await fetch(base + path, {headers, signal: AbortSignal.timeout(10000), redirect: 'manual'});
