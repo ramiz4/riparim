@@ -41,3 +41,5 @@ export function valueLabel(locale:Locale,category:ValueCategory,value:string):st
 export function displayLabels(locale:Locale,category:ValueCategory,values:readonly string[]):Record<string,string>{
  return Object.fromEntries(values.map(value=>[value,valueLabel(locale,category,value)]));
 }
+
+export function reviewServicesLabel(locale:Locale,review:{service:string;services?:string[]}){return (review.services?.length?review.services:[review.service]).map(service=>valueLabel(locale,"service",service)).join(" · ");}

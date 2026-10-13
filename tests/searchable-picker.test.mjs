@@ -1,0 +1,44 @@
+import assert from 'node:assert/strict';
+import {mkdir} from 'node:fs/promises';
+import {build} from 'esbuild';
+import {JSDOM} from 'jsdom';
+const dom=new JSDOM('<div id="root"></div>',{url:'https://riparim.example.test',pretendToBeVisual:true});
+for(const key of ['window','document','navigator','HTMLElement','HTMLInputElement','Element','Node','NodeFilter','DocumentFragment','MutationObserver','CustomEvent','Event','MouseEvent','KeyboardEvent','getComputedStyle'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});
+globalThis.IS_REACT_ACT_ENVIRONMENT=true;
+globalThis.requestAnimationFrame=dom.window.requestAnimationFrame.bind(dom.window);globalThis.cancelAnimationFrame=dom.window.cancelAnimationFrame.bind(dom.window);
+globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
+HTMLElement.prototype.scrollIntoView=()=>{};
+const output='.test-runtime/searchable-picker';await mkdir(output,{recursive:true});
+await build({stdin:{contents:"export {SearchablePicker} from './components/searchable-picker';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/ui.mjs',bundle:true,platform:'node',format:'esm',packages:'external'});
+const {SearchablePicker,I18nProvider,getMessages}=await import(new URL('../'+output+'/ui.mjs',import.meta.url));
+const {createElement:h,useState,act}=await import('react'),{createRoot}=await import('react-dom/client');
+const root=createRoot(document.getElementById('root'));let selection;
+function Fixture(){const [value,setValue]=useState('Alle');selection=value;return h(SearchablePicker,{label:'Ort',multiple:true,allValue:'Alle',value,onChange:setValue,values:['Alle','Peja','Prishtina','Prizren','Graçanicë']});}
+const settle=()=>new Promise(resolve=>setTimeout(resolve,0));
+const click=async el=>act(async()=>{el.click();await settle();});
+const search=async text=>act(async()=>{const input=document.querySelector('input[type=search]');Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(input,text);input.dispatchEvent(new Event('input',{bubbles:true}));await settle();});
+const option=text=>[...document.querySelectorAll('[role=option]')].find(el=>el.textContent===text);
+try{
+ await act(async()=>root.render(h(I18nProvider,{locale:'de',messages:getMessages('de',['common'])},h(Fixture))));
+ await click(document.querySelector('[role=combobox]'));
+ assert.equal(document.activeElement,document.querySelector('input[type=search]'),'Opening focuses the labelled search input');
+ await search('gracanice');assert.equal(document.querySelectorAll('[role=option]').length,1,'Search ignores diacritics');
+ await click(option('Graçanicë'));assert.deepEqual(selection,['Graçanicë'],'Choosing a value replaces the all option');
+ assert(document.querySelector('[role=listbox]'),'Multi-selection keeps the menu open');
+ await search('pri');assert.equal(document.querySelectorAll('[role=option]').length,2,'Search restricts the available options');
+ await act(async()=>document.querySelector('input').dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true})));
+ assert.equal(document.activeElement.getAttribute('role'),'option','Arrow keys move from search to the options');
+ await click(option('Prishtina'));assert.deepEqual(selection,['Graçanicë','Prishtina'],'Choosing a second option preserves the first');
+ await click(option('Prishtina'));assert.deepEqual(selection,['Graçanicë'],'Clicking a selected option deselects it');
+ await search('peja');await click(option('Peja'));await search('prizren');await click(option('Prizren'));assert.equal(document.querySelectorAll('.searchable-picker-chip').length,2,'Only two selected chips are shown');assert.equal(document.querySelector('.searchable-picker-more').textContent,'+1 weitere','Additional selections remain visible as a count');
+ await click(document.querySelector('.searchable-picker-chip button'));assert.deepEqual(selection,['Peja','Prizren'],'A chip removes only its own value');
+ assert.equal(document.activeElement.getAttribute('role'),'combobox','Removing a chip restores a stable focus target');
+ if(!document.querySelector('input[type=search]'))await click(document.querySelector('[role=combobox]'));
+ await search('unknown');assert(document.querySelector('[role=status]'),'No matches produce a labelled empty state');
+ await search('');await click(option('Alle'));assert.deepEqual(selection,['Alle'],'All clears specific selections');
+ await act(async()=>document.activeElement.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true})));
+ await act(settle);
+ assert(!document.querySelector('[role=listbox]'),'Escape closes the option menu');
+ assert.equal(document.activeElement.getAttribute('role'),'combobox','Closing restores trigger focus');
+ console.log('Searchable picker: focused search, accents, alternatives, deselection, all, empty state, keyboard and Escape passed');
+}finally{await act(async()=>root.unmount());dom.window.close();}

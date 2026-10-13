@@ -7,7 +7,7 @@ for(const key of ['window','document','navigator','HTMLElement','HTMLButtonEleme
 globalThis.requestAnimationFrame=dom.window.requestAnimationFrame.bind(dom.window);globalThis.cancelAnimationFrame=dom.window.cancelAnimationFrame.bind(dom.window);globalThis.IS_REACT_ACT_ENVIRONMENT=true;
 const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
 const out='.test-runtime/business-ui';await mkdir(out,{recursive:true});
-const bundle=await build({stdin:{contents:"export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {BusinessPanel} from './components/business-panel';",resolveDir:process.cwd(),loader:'tsx'},outfile:out+'/ui.mjs',bundle:true,write:false,format:'esm',platform:'node',packages:'external'});await writeFile(out+'/ui.mjs',bundle.outputFiles[0].contents);
+const bundle=await build({stdin:{contents:"export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {BusinessPanel} from './components/business-panel';",resolveDir:process.cwd(),loader:'tsx'},outfile:out+'/ui.mjs',bundle:true,write:false,format:'esm',platform:'node',packages:'external',alias:{'next/link':'vinext/shims/link'}});await writeFile(out+'/ui.mjs',bundle.outputFiles[0].contents);
 const {createElement,act}=await import('react'),{createRoot}=await import('react-dom/client'),{BusinessPanel,I18nProvider,getMessages}=await import(new URL('../'+out+'/ui.mjs',import.meta.url));
 const workshop={id:'fixture-workshop',name:'Fiktive Werkstatt',city:'Prishtina',address:'Fixture Street 10',phone:'+38344123456',phoneNote:'Betrieb',whatsapp:'',services:['Inspektion & Wartung'],serviceDetails:['Inspektion'],description:'A sufficiently detailed fictional passenger-car workshop description.',status:'published',updatedAt:'2026-10-04T09:00:00Z'};
 let records={claims:[],changes:[],workshops:[]},mode='success',pending=null,loadFailure=false,holdLoad=false,resolveLoad=null;
@@ -45,6 +45,8 @@ try{
  check(document.querySelector('header h1')?.textContent==='Mein Betrieb'&&!document.querySelector('header button')&&!button('Aktualisieren'),'The page title has no redundant refresh action');
  loadFailure=false;await click(button('Erneut versuchen'));
  check(document.querySelector('h1').textContent==='Mein Betrieb'&&!document.querySelector('form')&&!document.querySelector('h2')&&document.querySelector('a[href="/werkstaetten"]'),'An empty business overview offers the finder without embedding a claim form');
+ loadFailure=true;await remount(true);check(button('Erneut versuchen')&&!button('Aktualisieren'),'Moderation shows retry only when loading fails');
+ loadFailure=false;await click(button('Erneut versuchen'));check(!button('Erneut versuchen')&&!button('Aktualisieren'),'A recovered moderation queue has no redundant refresh button');await remount();
  records.claims=[{...requestView('00000000-0000-4000-8000-000000000001','claim'),documents:[{id:'00000000-0000-4000-8000-000000000021',fileName:'proof.pdf'},{id:'00000000-0000-4000-8000-000000000022',fileName:'register.png'}]}];await remount();
  check(document.querySelectorAll('a[href*="document="]').length===2,'The applicant overview links every document individually');await remount(true);check(document.querySelectorAll('a[href*="document="]').length===2,'The moderation queue links every private document individually');await remount();
  check(document.querySelector('.business-status').textContent==='In Prüfung'&&!document.querySelector('form'),'The overview shows a pending claim without the application form');

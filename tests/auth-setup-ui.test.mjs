@@ -12,7 +12,7 @@ globalThis.IS_REACT_ACT_ENVIRONMENT=true;
 // jsdom has no layout; native geometry and keyboard activation are checked separately.
 globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
 const output='.test-runtime/auth-setup-ui';
-const bundle=await build({stdin:{contents:"export {default as AuthSetup} from './app/[locale]/verwaltung/anmeldung/setup';export * from './lib/auth/email-templates';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/ui.mjs',bundle:true,write:false,platform:'node',format:'esm',packages:'external'});
+const bundle=await build({stdin:{contents:"export {default as AuthSetup} from './app/[locale]/verwaltung/anmeldung/setup';export * from './lib/auth/email-templates';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/ui.mjs',bundle:true,write:false,platform:'node',format:'esm',packages:'external',alias:{'next/link':'vinext/shims/link'}});
 await mkdir(output,{recursive:true});await writeFile(output+'/ui.mjs',bundle.outputFiles[0].contents);
 const {createElement,act}=await import('react'),{createRoot}=await import('react-dom/client');
 const {AuthSetup,I18nProvider,getMessages,confirmationEmailSubject,confirmationEmailTemplate,recoveryEmailSubject,recoveryEmailTemplate}=await import(new URL('../'+output+'/ui.mjs',import.meta.url));
@@ -101,7 +101,7 @@ try{
   saveMode='failure';await submit();assert.equal(form().querySelector('[role="alert"]').textContent,copy.auth_provider_connection,'Stable provider errors are localized');
   assert(!document.body.textContent.includes('Private raw connection failure')&&!form().querySelector('[role="status"]'),'Raw errors and stale success are not shown');
   config={projectUrl:'https://saved.supabase.co',publicKey:'sb_publishable_saved',enabled:true,emailDeliveryConfirmed:true};loadMode='pending';await remount();
-  assert(submitButton().disabled&&form().querySelector('[role="status"]').textContent===copy.configLoading,'Loading retains its localized announcement');
+  assert(submitButton().disabled&&document.querySelector('.admin-loading[role="status"]').textContent===copy.configLoading&&form().closest('.auth-setup-layout').hidden,'Shared loading indicator announces configuration loading while the form stays hidden');
   assert([...form().querySelectorAll('input,textarea,[role="checkbox"],[role="switch"]')].every(control=>control.disabled),'Loading freezes the current form controls');
   await act(async()=>pendingLoad());loadMode='success';assert.equal(form().querySelector('input[type="url"]').value,config.projectUrl);assert.equal(form().querySelector('textarea').value,config.publicKey);
   assert.equal(form().querySelector('[role="switch"]').getAttribute('aria-checked'),'true');assert.equal(form().querySelector('[role="checkbox"]').getAttribute('aria-checked'),'true');assert(!submitButton().disabled,'Saved configuration is reused');

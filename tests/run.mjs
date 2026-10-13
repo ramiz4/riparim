@@ -10,6 +10,10 @@ suites.push('opening-hours-import.test.mjs');
 suites.push('workshop-contacts.test.mjs');
 suites.push('workshop-emails.test.mjs');
 suites.push('workshop-emails-ui.test.mjs');
+suites.push('catalogue-drawer-resize.test.mjs');
+suites.push('searchable-picker.test.mjs');
+suites.push('profile-review-dialog.test.mjs');
+suites.push('review-services.test.mjs');
 suites.push('suite-runner.test.mjs');
 suites.push('premium-workshops.test.mjs');
 suites.push('premium-partner-ui.test.mjs');
@@ -38,6 +42,8 @@ suites.push('auth-request-latency.test.mjs');
 suites.push('auth-provider-worker.test.mjs');
 suites.push('session-cookie-reads.test.mjs');
 suites.push('deferred-pages-ui.test.mjs');
+suites.push('release-navigation-contract.test.mjs');
+suites.push('session-header-navigation.test.mjs');
 process.exitCode=await runSuites({
  cwd:root,runtime,contract:fileURLToPath(new URL('../scripts/check-i18n.mjs',import.meta.url)),
  suites:suites.map(suite=>fileURLToPath(new URL(suite,import.meta.url))),

@@ -8,6 +8,8 @@ import type {MessageValue,ParameterNames,MessageShape,CheckedMessages} from "./m
 
 const deBase={
  common:/* @__PURE__ */ Object.assign({},weekdayDe,{
+ moreSelections:"+{count} weitere",removeOption:"{value} entfernen",searchOptions: "{label} durchsuchen …",noOptions: "Keine passende Option gefunden.",selectedOptions: "{count} ausgewählt",
+
 
 workshopEmailActive:"Aktiv",workshopEmailInactive:"Deaktiviert",workshopEmailVerified:"Verifiziert",workshopEmailUnverified:"Nicht verifiziert",workshopEmailVerify:"Adresse verifizieren",workshopEmailEnable:"Adresse öffentlich anzeigen",workshopEmails:"E-Mail-Adressen",workshopEmailsHelp:"Bis zu zehn unterschiedliche Kontaktadressen. Entferne alle Adressen, um die E-Mail-Anzeige auszublenden.",workshopEmailNumber:"E-Mail-Adresse {number}",workshopEmailRemove:"E-Mail-Adresse {number} entfernen",workshopEmailAdd:"E-Mail-Adresse hinzufügen",workshopEmailsUnchanged:"E-Mail-Adressen bleiben unverändert.",
 hoursToday:"Heute",hoursWeek:"Wochenplan und Ausnahmen",
@@ -16,7 +18,7 @@ hoursUnchanged:"Öffnungszeiten bleiben unverändert.",hoursTitle:"Öffnungszeit
   retry:"Erneut laden",darkMode:"Dark Mode",themeSystem:"Dark Mode · folgt dem System",themeToggle:"Dark Mode umschalten",close:"Schließen",dialogContent:"Dialoginhalt",workshops:"Werkstätten",loadingWorkshops:"Werkstätten werden geladen …",loadingProfile:"Werkstattprofil wird geladen …",profileNotAvailable:"Dieses Profil ist nicht verfügbar.",profileNotAvailableHelp:"Die Werkstatt ist nicht veröffentlicht oder der Link ist nicht mehr aktuell.",findWorkshops:"Werkstätten finden",
   languageLabel:"Sprache wählen",discardDraft:"Deine nicht gespeicherten Eingaben gehen beim Sprachwechsel verloren. Sprache trotzdem wechseln?",
   preferenceNotSaved:"Deine Sprachpräferenz konnte nicht gespeichert werden. Die ausgewählte Sprache gilt für diese Seite.",
-  homeLabel:"Riparim Startseite",login:"Anmelden",register:"Registrieren",userMenu:"Benutzermenü öffnen",myAccount:"Mein Konto",signedIn:"Angemeldet",admin:"Admin",
+  checkingSession:"Anmeldestatus wird geprüft …",homeLabel:"Riparim Startseite",login:"Anmelden",register:"Registrieren",userMenu:"Benutzermenü öffnen",myAccount:"Mein Konto",signedIn:"Angemeldet",admin:"Admin",
   myReviews:"Meine Bewertungen",review:"Bewerten",settings:"Einstellungen",myBusiness:"Mein Betrieb",manage:"Verwalten",logout:"Abmelden",loggingOut:"Wird abgemeldet …",logoutFailed:"Abmelden fehlgeschlagen. Bitte versuche es erneut.",
   unavailable:"Diese Information ist momentan nicht verfügbar.",errorGeneric:"Die Aktion ist fehlgeschlagen. Bitte versuche es erneut.",messageGeneric:"Die Aktion wurde abgeschlossen.",
   authenticationRequired:"Bitte melde dich an.",forbidden:"Du hast keine Berechtigung für diese Aktion.",invalidRequest:"Bitte prüfe deine Eingaben.",notFound:"Der Eintrag wurde nicht gefunden.",conflict:"Der Eintrag wurde zwischenzeitlich geändert. Bitte lade ihn erneut.",saved:"Änderungen gespeichert.",
@@ -36,6 +38,8 @@ const sq=/* @__PURE__ */ defineCatalog({
  customer:customerSq,
  management:managementSq,
  common:/* @__PURE__ */ Object.assign({},weekdaySq,{
+ moreSelections:"+{count} të tjera",removeOption:"Hiq {value}",searchOptions: "Kërko në {label} …",noOptions: "Nuk u gjet asnjë opsion i përshtatshëm.",selectedOptions: "{count} të zgjedhura",
+
 
 workshopEmailActive:"Aktive",workshopEmailInactive:"Çaktivizuar",workshopEmailVerified:"E verifikuar",workshopEmailUnverified:"E paverifikuar",workshopEmailVerify:"Verifiko adresën",workshopEmailEnable:"Shfaq adresën publikisht",workshopEmails:"Adresat e emailit",workshopEmailsHelp:"Deri në dhjetë adresa të ndryshme kontakti. Hiqi të gjitha adresat për të fshehur emailin publik.",workshopEmailNumber:"Adresa e emailit {number}",workshopEmailRemove:"Hiq adresën e emailit {number}",workshopEmailAdd:"Shto adresë emaili",workshopEmailsUnchanged:"Adresat e emailit mbeten të pandryshuara.",
 hoursToday:"Sot",hoursWeek:"Orari javor dhe përjashtimet",
@@ -44,7 +48,7 @@ hoursUnchanged:"Orari mbetet i pandryshuar.",hoursTitle:"Orari i punës",hoursUn
   retry:"Ngarko përsëri",darkMode:"Mënyra e errët",themeSystem:"Mënyra e errët · ndjek sistemin",themeToggle:"Ndërro mënyrën e errët",close:"Mbyll",dialogContent:"Përmbajtja e dialogut",workshops:"Servise",loadingWorkshops:"Duke ngarkuar serviset …",loadingProfile:"Duke ngarkuar profilin e servisit …",profileNotAvailable:"Ky profil nuk është i disponueshëm.",profileNotAvailableHelp:"Servisi nuk është i publikuar ose lidhja nuk është më aktuale.",findWorkshops:"Gjej servise",
   languageLabel:"Zgjidh gjuhën",discardDraft:"Të dhënat që nuk i ke ruajtur do të humbasin kur të ndërrosh gjuhën. Dëshiron të vazhdosh?",
   preferenceNotSaved:"Preferenca jote e gjuhës nuk mund të ruhej. Gjuha e zgjedhur vlen për këtë faqe.",
-  homeLabel:"Faqja kryesore e Riparim",login:"Hyr",register:"Regjistrohu",userMenu:"Hap menynë e përdoruesit",myAccount:"Llogaria ime",signedIn:"I identifikuar",admin:"Administrator",
+  checkingSession:"Po kontrollohet hyrja …",homeLabel:"Faqja kryesore e Riparim",login:"Hyr",register:"Regjistrohu",userMenu:"Hap menynë e përdoruesit",myAccount:"Llogaria ime",signedIn:"I identifikuar",admin:"Administrator",
   myReviews:"Vlerësimet e mia",review:"Vlerëso",settings:"Cilësimet",myBusiness:"Biznesi im",manage:"Administro",logout:"Dil",loggingOut:"Duke dalë …",logoutFailed:"Dalja dështoi. Provo përsëri.",
   unavailable:"Ky informacion nuk është i disponueshëm për momentin.",errorGeneric:"Veprimi dështoi. Provo përsëri.",messageGeneric:"Veprimi përfundoi.",
   authenticationRequired:"Identifikohu për të vazhduar.",forbidden:"Nuk ke leje për këtë veprim.",invalidRequest:"Kontrollo të dhënat që ke dhënë.",notFound:"Ky regjistrim nuk u gjet.",conflict:"Ky regjistrim ka ndryshuar ndërkohë. Ngarkoje përsëri.",saved:"Ndryshimet u ruajtën.",
@@ -58,6 +62,8 @@ const en=/* @__PURE__ */ defineCatalog({
  customer:customerEn,
  management:managementEn,
  common:/* @__PURE__ */ Object.assign({},weekdayEn,{
+ moreSelections:"+{count} more",removeOption:"Remove {value}",searchOptions: "Search {label} …",noOptions: "No matching options found.",selectedOptions: "{count} selected",
+
 
 workshopEmailActive:"Active",workshopEmailInactive:"Disabled",workshopEmailVerified:"Verified",workshopEmailUnverified:"Unverified",workshopEmailVerify:"Verify address",workshopEmailEnable:"Show address publicly",workshopEmails:"Email addresses",workshopEmailsHelp:"Up to ten different contact addresses. Remove all addresses to hide public email contacts.",workshopEmailNumber:"Email address {number}",workshopEmailRemove:"Remove email address {number}",workshopEmailAdd:"Add email address",workshopEmailsUnchanged:"Email addresses remain unchanged.",
 hoursToday:"Today",hoursWeek:"Weekly schedule and exceptions",
@@ -66,7 +72,7 @@ hoursUnchanged:"Opening hours remain unchanged.",hoursTitle:"Opening hours",hour
   retry:"Reload",darkMode:"Dark mode",themeSystem:"Dark mode · follows system",themeToggle:"Toggle dark mode",close:"Close",dialogContent:"Dialog content",workshops:"Workshops",loadingWorkshops:"Loading workshops …",loadingProfile:"Loading workshop profile …",profileNotAvailable:"This profile is unavailable.",profileNotAvailableHelp:"The workshop is unpublished or the link is no longer current.",findWorkshops:"Find workshops",
   languageLabel:"Choose language",discardDraft:"Your unsaved entries will be lost when you change language. Change language anyway?",
   preferenceNotSaved:"Your language preference could not be saved. The selected language applies to this page.",
-  homeLabel:"Riparim home",login:"Log in",register:"Register",userMenu:"Open user menu",myAccount:"My account",signedIn:"Signed in",admin:"Admin",
+  checkingSession:"Checking sign-in status …",homeLabel:"Riparim home",login:"Log in",register:"Register",userMenu:"Open user menu",myAccount:"My account",signedIn:"Signed in",admin:"Admin",
   myReviews:"My reviews",review:"Write a review",settings:"Settings",myBusiness:"My business",manage:"Manage",logout:"Log out",loggingOut:"Logging out …",logoutFailed:"Log out failed. Please try again.",
   unavailable:"This information is currently unavailable.",errorGeneric:"The action failed. Please try again.",messageGeneric:"The action completed.",
   authenticationRequired:"Please log in.",forbidden:"You do not have permission for this action.",invalidRequest:"Please check your entries.",notFound:"The entry was not found.",conflict:"The entry has changed. Please reload it.",saved:"Changes saved.",

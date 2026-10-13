@@ -11,7 +11,7 @@ globalThis.IS_REACT_ACT_ENVIRONMENT=true;
 // jsdom has no layout; dialogs still exercise their real keyboard/focus behavior.
 globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
 const out='.test-runtime/admin-workshops-ui';await mkdir(out,{recursive:true});
-const bundle=await build({stdin:{contents:"export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {default} from './app/[locale]/verwaltung/panel';",resolveDir:process.cwd(),loader:'tsx'},outfile:out+'/ui.mjs',bundle:true,write:false,format:'esm',platform:'node',packages:'external'});
+const bundle=await build({stdin:{contents:"export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {default} from './app/[locale]/verwaltung/panel';",resolveDir:process.cwd(),loader:'tsx'},outfile:out+'/ui.mjs',bundle:true,write:false,format:'esm',platform:'node',packages:'external',alias:{'next/link':'vinext/shims/link'}});
 await writeFile(out+'/ui.mjs',bundle.outputFiles[0].contents);
 const {createElement,act}=await import('react'),{createRoot}=await import('react-dom/client'),{default:AdminPanel,I18nProvider,getMessages}=await import(new URL('../'+out+'/ui.mjs',import.meta.url));
 const workshop={id:'fixture-published',name:'Fiktive Werkstatt',city:'Prishtina',address:'Fixture Street 10',phone:'+38344123456',phoneNote:'Betrieb',whatsapp:'',brands:[],services:['Inspektion & Wartung'],serviceDetails:['Inspektion'],languages:[],specialty:'Fahrzeugdiagnose',description:'A sufficiently detailed fictional passenger-car workshop description.',lat:null,lng:null,sources:[],checkedAt:'2026-10-04',status:'published',updatedAt:'2026-10-04T09:00:00Z'};

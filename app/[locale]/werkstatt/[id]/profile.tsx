@@ -4,12 +4,12 @@ import {publicDataError} from "@/lib/i18n/public-errors";
 import {useI18n} from "@/lib/i18n/client";
 import {useNavigationGuard} from "@/lib/i18n/navigation-guard";
 import {formatDate,formatNumber} from "@/lib/i18n/format";
-import {valueLabel} from "@/lib/i18n/values";
+import {reviewServicesLabel,valueLabel} from "@/lib/i18n/values";
 import {localizeHref} from "@/lib/i18n/locale";
 import {LocaleAnchor} from "@/components/locale-anchor";
-import {useEffect,useState} from "react";
+import {useCallback,useEffect,useId,useRef,useState} from "react";
 import {useRouter} from "next/navigation";
-import {ArrowLeft,Check,ChevronDown,Copy,FileCheck2,Globe,Mail,MapPin,MessageCircle,Navigation,Phone,Share2,ShieldCheck,Star} from "lucide-react";
+import {ArrowLeft,Check,ChevronDown,Copy,LoaderCircle,FileCheck2,Globe,Mail,MapPin,MessageCircle,Navigation,Phone,Share2,ShieldCheck,Star} from "lucide-react";
 import {usePublicSession} from "@/components/use-public-session";
 import {SiteHeader} from "@/components/site-header";
 import {WorkshopRatings} from "@/components/workshop-ratings";
@@ -17,9 +17,10 @@ import {workshopMapsUrl,workshopRouteUrl} from "@/lib/google-maps-link";
 import {WorkshopOpeningHours} from "@/components/opening-hours";
 import {defaultCatalogueFilters,parseCatalogueFilters} from "@/lib/catalogue-filters";
 import {workshopDisplayLanguage,displayServiceDetail,type WorkshopDisplayContent,groupWorkshopServices,profileSelection,workshopSelectionMatches,type ProfileSelection} from "@/lib/workshop-profile-content";
-import {ReviewForm} from "@/components/review-form";
+import {reviewDialogHref,reviewDialogRequested} from "@/lib/review-dialog-route";
+import {ReviewForm,type ReviewFormDraft} from "@/components/review-form";
 import {ModalContent} from "@/components/modal-shell";
-import {Dialog} from "@/components/ui/dialog";
+import {Dialog,DialogTrigger} from "@/components/ui/dialog";
 import type {AccountIdentity} from "@/components/account-storage-notice";
 import type {Review} from "@/app/journeys";
 import {contactHref,type Workshop} from "@/lib/workshops";
@@ -39,9 +40,16 @@ export default function WorkshopProfile({publicSnapshot=false,workshop:initialWo
  const {workshop:w,directory,display}=publicSnapshot?live:{workshop:initialWorkshop,directory:initialDirectory,display:initialDisplay};
  useEffect(()=>{if(!publicSnapshot)return;let active=true;void fetch(`/api/workshops?locale=${locale}`,{cache:"no-store"}).then(async response=>{const value=await response.json() as {workshops?:Workshop[];displayById?:Record<string,WorkshopDisplayContent>};if(!response.ok||!Array.isArray(value.workshops))throw Error("Directory unavailable");const workshop=value.workshops.find(item=>item.id===initialWorkshop.id&&item.status==="published");if(!workshop){if(active)window.location.reload();return;}if(active)setLive({workshop,directory:value.workshops,display:value.displayById?.[workshop.id]});}).catch(()=>{});return()=>{active=false;};},[publicSnapshot,initialWorkshop.id,locale,reviewRevision]);
  const router=useRouter();const [reviewOpen,setReviewOpen]=useState(false),[reviewBusy,setReviewBusy]=useState(false),[contact,setContact]=useState(false),[message,setMessage]=useState(""),[initialMessage,setInitialMessage]=useState(""),[feedback,setFeedback]=useState(""),[backHref,setBackHref]=useState(()=>localizeHref(initialSearchHref??"/werkstaetten",locale));
- useNavigationGuard({dirty:contact&&message!==initialMessage});
+ const reviewFormId=useId(),reviewIdentity=`${w.id}:${account?.provider??"guest"}:${account?.email??"guest"}`;
+ const [reviewDraft,setReviewDraft]=useState<{identity:string;value:ReviewFormDraft}|null>(null),[reviewSubmitted,setReviewSubmitted]=useState<string|null>(null);
+ const reviewOpenRef=useRef(false);
+ // Busy-state URL resynchronization must preserve the success screen until a real reopen.
+ const applyReviewOpen=useCallback((open:boolean)=>{if(open&&!reviewOpenRef.current)setReviewSubmitted(null);reviewOpenRef.current=open;setReviewOpen(open);},[]);
+ const saveReviewDraft=useCallback((value:ReviewFormDraft)=>setReviewDraft({identity:reviewIdentity,value}),[reviewIdentity]);
+ useNavigationGuard({busy:reviewBusy,dirty:contact&&message!==initialMessage||reviewDraft?.identity===reviewIdentity&&reviewDraft.value.dirty});
  const [selection,setSelection]=useState<ProfileSelection>({brand:null,service:null});
  const path=localizeHref(`/werkstatt/${encodeURIComponent(w.id)}`,locale);
+ const reviewReturnTo=`${path}?${new URLSearchParams({bewerten:"1",suche:backHref})}`;
  const mapHref=workshopMapsUrl(w);
  const routeHref=workshopRouteUrl(w);
  const phoneHref=contactHref(w,"phone");
@@ -51,9 +59,23 @@ export default function WorkshopProfile({publicSnapshot=false,workshop:initialWo
  // The server validates the public document return target; RAM only recovers client navigation.
  // eslint-disable-next-line react-hooks/set-state-in-effect -- Restore the validated public filters for profile highlights and the return link.
  useEffect(()=>{const session=readSearchSession(),explicit=profileSearchHref(new URLSearchParams(window.location.search).get("suche"),directory),remembered=profileSearchHref(session?.catalogueHref??null,directory),href=initialSearchHref??explicit??remembered;setBackHref(localizeHref(href??"/werkstaetten",locale));const filters=href?parseCatalogueFilters(new URL(href,window.location.origin).searchParams,directory):defaultCatalogueFilters;setSelection(profileSelection(filters));},[directory,w.id,locale,initialSearchHref]);
- // eslint-disable-next-line react-hooks/set-state-in-effect -- A login return may target the inline review section.
- useEffect(()=>{if(window.location.hash==="#bewerten"||new URLSearchParams(window.location.search).get("bewerten")==="1")setReviewOpen(true);},[]);
- function openReview(){setReviewOpen(true);requestAnimationFrame(()=>document.getElementById("bewerten")?.scrollIntoView({behavior:"smooth",block:"start"}));}
+ // The URL owns modal state, including legacy login returns and browser navigation.
+ useEffect(()=>{
+  const sync=()=>{const open=reviewDialogRequested(window.location.href);if(reviewBusy&&!open){window.history.pushState({...window.history.state,riparimReviewDialog:window.location.pathname},"",reviewDialogHref(window.location.href,true));return;}applyReviewOpen(open);};
+  sync();window.addEventListener("popstate",sync);window.addEventListener("hashchange",sync);
+  return()=>{window.removeEventListener("popstate",sync);window.removeEventListener("hashchange",sync);};
+ },[reviewBusy,w.id,applyReviewOpen]);
+ function changeReviewOpen(open:boolean){
+  if(reviewBusy)return;
+  const href=reviewDialogHref(window.location.href,open),current=window.location.pathname+window.location.search+window.location.hash;
+  if(href!==current){
+   if(open)window.history.pushState({...window.history.state,riparimReviewDialog:window.location.pathname},"",href);
+   else if(window.history.state?.riparimReviewDialog===window.location.pathname)window.history.back();
+   else window.history.replaceState(window.history.state,"",href);
+  }
+  applyReviewOpen(open);
+ }
+ function openReview(){changeReviewOpen(true);}
  function startWhatsApp(){
   setFeedback("");
   const draft=t("public.whatsAppHello",{name:w.name})+t("public.messageAsk");setInitialMessage(draft);setMessage(draft);setContact(true);
@@ -63,23 +85,25 @@ export default function WorkshopProfile({publicSnapshot=false,workshop:initialWo
   <div className="profile-review-provider"><h3><ShieldCheck size={18}/>Riparim</h3>{reviews.length>0&&<p>{t("public.reviewsProof")}</p>}</div>
   {reviewsLoading?<p role="status">{t("public.loading")}</p>:reviewError?<p className="error" role="alert">{publicDataError(t,reviewError,"reviews")}</p>:reviews.length?<div className="public-review-list">{reviews.map((review,index)=><article className="public-review" key={`${review.display_name}:${review.date}:${index}`}>
    <div className="review-title"><strong className="public-review-author">{review.display_name}</strong><span className="public-review-score"><Star size={15} fill="currentColor" aria-hidden="true"/>{formatNumber(locale,review.rating)} / 5</span></div>
-   <p className="review-meta"><span>{review.vehicle}</span><span>{review.service}</span></p>
+   <p className="review-meta"><span>{review.vehicle}</span><span>{reviewServicesLabel(locale,review)}</span></p>
    {review.review&&<p className="public-review-text">{review.review}</p>}
    <footer className="public-review-footer"><span className="proof-badge"><ShieldCheck size={14} aria-hidden="true"/>{t("public.proofChecked")}</span><time dateTime={review.date}>{formatDate(locale,review.date,{dateOnly:true})}</time></footer>
   </article>)}{w.count>reviews.length&&<p className="help">{t("public.latestReviews",{count:reviews.length})}</p>}</div>:<p className="profile-review-empty">{t("public.noProofReviews")}</p>}
  </div>;
- return <><SiteHeader account={account} isAdmin={isAdmin}/>
+ return <><SiteHeader account={account} isAdmin={isAdmin} publicSnapshot={publicSnapshot}/>
  <main className="workshop-page wrap" data-workshop-id={w.id}>
   <WorkshopNavigationLink className="profile-back" href={backHref}><ArrowLeft size={16}/>{t("public.backSearch")}</WorkshopNavigationLink>
   {display?.fallback&&<p className="help workshop-translation-notice">{t("public.translationFallback")}</p>}
   <header className="workshop-overview"><div className="workshop-overview-identity"><h1>{w.name}</h1><p className="profile-place"><MapPin size={15}/><span>{w.city}</span>{specialty&&<span className="profile-specialty" lang={contentLanguage}>{specialty}</span>}</p></div><div className="workshop-overview-actions">{w.whatsapp&&<button className="primary" onClick={startWhatsApp}><MessageCircle size={17}/>WhatsApp</button>}{phoneHref&&<LocaleAnchor className={w.whatsapp?"outline":"primary"} href={phoneHref}><Phone size={17}/>{t("public.call")}</LocaleAnchor>}<LocaleAnchor className="outline" href={routeHref} target="_blank" rel="noopener noreferrer"><Navigation size={17}/>{t("public.route")}</LocaleAnchor></div><div className="profile-overview-details"><WorkshopRatings key={w.id} workshop={w} compact/><WorkshopOpeningHours importedHours={w.importedOpeningHours} hours={w.openingHours} confirmedAt={w.openingHoursConfirmedAt}/></div></header>
   <div className="workshop-page-grid"><div className="workshop-page-main">
    <section className="profile-page-section" id="leistungen"><div className="profile-section-heading"><h2>{w.brands.length?t("public.servicesBrands"):t("public.services")}</h2></div>{(selection.brand||selection.service)&&<div className="profile-search-match"><p>{t("public.yourSearch")}{selection.brand?`: ${selection.brand}`:""}</p><div>{matches.brand&&<span><Check size={14}/>{t("public.brandMatch",{brand:selection.brand!})}</span>}{matches.service&&<span><Check size={14}/>{t("public.serviceMatch",{service:valueLabel(locale,"service",selection.service!)})}</span>}</div></div>}{description&&<p className="profile-description" lang={contentLanguage}>{description}</p>}<div className="profile-service-groups" aria-label={t("public.offeredServices")}>{serviceGroups.map(group=><section key={group.title} className={`profile-service-group${matches.service&&group.title===selection.service?" selected":""}`}><h3>{group.title==="Weitere Leistungen"?t("public.otherServices"):valueLabel(locale,"service",group.title)}{matches.service&&group.title===selection.service&&<span className="profile-selection-label">{t("public.yourSelection")}</span>}</h3>{group.items.length>0&&<ul>{group.items.map(service=><li key={service.sourceIndex} lang={contentLanguage}>{displayServiceDetail(service,display,locale)}</li>)}</ul>}</section>)}</div>{(w.brands.length>0||w.languages.length>0)&&<div className="profile-facts">{w.brands.length>0&&<div><h3>{t("public.brands")}</h3><div className="brand-tags">{w.brands.map(brand=><span key={brand} className={matches.brand&&(brand===selection.brand||brand==="Alle Marken")?"profile-brand-selected":undefined}>{valueLabel(locale,"sentinel",brand)}{matches.brand&&(brand===selection.brand||brand==="Alle Marken")&&<span className="profile-selection-label">{t("public.yourSelection")}</span>}</span>)}</div></div>}{w.languages.length>0&&<div><h3>{t("public.consultationLanguages")}</h3><p><Globe size={15}/>{w.languages.map(language=>valueLabel(locale,"language",language)).join(" · ")}</p></div>}</div>}</section>
-   <section className="profile-page-section" id="bewertungen"><div className="profile-section-heading"><h2>{t("public.reviews")}</h2><button className="text-action" onClick={openReview}>{t("public.writeReview")}</button></div><div className="profile-review-stream">
+   <Dialog open={reviewOpen} onOpenChange={changeReviewOpen}><section className="profile-page-section" id="bewertungen"><div className="profile-section-heading"><h2>{t("public.reviews")}</h2><DialogTrigger asChild><button className="text-action" onClick={openReview}>{t("public.writeReview")}</button></DialogTrigger></div><div className="profile-review-stream">
     {riparimReviews}
     </div>
-    <section className="inline-review" id="bewerten"><button type="button" className="inline-review-toggle" aria-expanded={reviewOpen} aria-controls="review-editor" disabled={reviewBusy} onClick={()=>setReviewOpen(value=>!value)}><span><Star size={19}/><strong>{t("public.experience")}</strong></span><ChevronDown size={19}/></button>{reviewOpen&&<div className="inline-review-body" id="review-editor"><ReviewForm workshop={w} directory={directory} signedIn={signedIn} account={account} returnTo={`${path}#bewerten`} onBusyChange={setReviewBusy} onSubmitted={()=>publicSnapshot?setReviewRevision(value=>value+1):router.refresh()}/></div>}</section>
-   </section>
+    <ModalContent className="profile-review-dialog" title={t("public.writeReview")} description={w.name} closeDisabled={reviewBusy} onEscapeKeyDown={event=>{if(reviewBusy)event.preventDefault();}} onPointerDownOutside={event=>{if(reviewBusy)event.preventDefault();}} footer={<><button type="button" className="outline" disabled={reviewBusy} onClick={()=>changeReviewOpen(false)}>{t("common.close")}</button>{signedIn&&reviewSubmitted!==reviewIdentity&&<button type="submit" form={reviewFormId} className="primary" disabled={reviewBusy}>{reviewBusy?<><LoaderCircle className="spin" size={17}/>{t("customer.submitting")}</>:t("customer.submitReview")}</button>}</>}>
+     <ReviewForm key={reviewIdentity} formId={reviewFormId} showSubmit={false} workshop={w} directory={directory} signedIn={signedIn} account={account} draft={reviewDraft?.identity===reviewIdentity?reviewDraft.value:undefined} onDraftChange={saveReviewDraft} returnTo={reviewReturnTo} onBusyChange={setReviewBusy} onSubmitted={()=>{setReviewDraft(null);setReviewSubmitted(reviewIdentity);if(publicSnapshot)setReviewRevision(value=>value+1);else router.refresh();}}/>
+    </ModalContent>
+   </section></Dialog>
    <details className="profile-sources" id="quellen">
     <summary><span><FileCheck2 size={17}/>{t("public.sourcesDate")}</span><ChevronDown size={18}/></summary>
     <div className="profile-sources-content">

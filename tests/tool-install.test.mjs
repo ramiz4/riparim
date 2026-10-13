@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
-import {mkdtemp, mkdir, readFile, writeFile, rm, lstat} from 'node:fs/promises';
+import {mkdtemp, mkdir, readFile, writeFile, rm, lstat, realpath} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join, resolve} from 'node:path';
 
 const installer=resolve('scripts/install-tool.mjs');
-const directory=await mkdtemp(join(tmpdir(),'riparim-tools-'));
+const directory=await realpath(await mkdtemp(join(tmpdir(),'riparim-tools-')));
 const npm=join(directory,'fixture-npm.mjs');
 try {
  await writeFile(npm,`import {mkdir,writeFile} from 'node:fs/promises';

@@ -7,7 +7,7 @@ const dom=new JSDOM('<div id="root"></div>',{url:'https://riparim.example.test/b
 for(const key of ['window','document','navigator','HTMLElement','HTMLFormElement','HTMLInputElement','HTMLTextAreaElement','Node','Event','getComputedStyle'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});
 globalThis.IS_REACT_ACT_ENVIRONMENT=true;
 const out='.test-runtime/business-claim-ui';await mkdir(out,{recursive:true});
-const result=await build({stdin:{contents:"export {BusinessClaimForm} from './components/business-claim-form';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",resolveDir:process.cwd(),loader:'tsx'},outfile:out+'/ui.mjs',bundle:true,write:false,format:'esm',platform:'node',packages:'external'});await writeFile(out+'/ui.mjs',result.outputFiles[0].contents);
+const result=await build({stdin:{contents:"export {BusinessClaimForm} from './components/business-claim-form';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",resolveDir:process.cwd(),loader:'tsx'},outfile:out+'/ui.mjs',bundle:true,write:false,format:'esm',platform:'node',packages:'external',alias:{'next/link':'vinext/shims/link'}});await writeFile(out+'/ui.mjs',result.outputFiles[0].contents);
 const {createElement,act}=await import('react'),{createRoot}=await import('react-dom/client'),{BusinessClaimForm,I18nProvider,getMessages}=await import(new URL('../'+out+'/ui.mjs',import.meta.url));
 const workshop={id:'fixture-workshop',name:'Fiktive Werkstatt',city:'Prizren',address:'Teststraße 10'};
 let root=createRoot(document.getElementById('root')),mode='failure',finish,passed=0;const requests=[];

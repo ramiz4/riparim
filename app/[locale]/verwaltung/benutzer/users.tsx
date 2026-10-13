@@ -1,4 +1,5 @@
 "use client";
+import {AdminLoading} from "@/components/admin-loading";
 import {useI18n} from "@/lib/i18n/client";
 import {responseError,LocalizedError,type CodedResponse} from "@/lib/i18n/codes";
 import {valueLabel} from "@/lib/i18n/values";
@@ -129,9 +130,9 @@ export default function AdminUsers({account}:{account:AccountIdentity}){
    {error&&<p className="error users-error" role="alert">{error}</p>}
    {pendingDeletions.length>0&&<section className="users-setup-note" aria-labelledby="pending-deletions-title"><div><h2 id="pending-deletions-title">{t("management.unfinishedDeletions")}</h2><p>{t("management.unfinishedDeletionHelp")}</p>{pendingDeletions.map(user=><p key={user.id}><span>{user.id}</span> <button className="outline small" disabled={busy||user.protected} aria-label={t("management.finishDeletionLabel",{id:user.id})} onClick={()=>{setDeleteUser({...user,name:t("management.startedDeletion",{id:user.id})});setDeleteError("");}}>{t("management.finishDeletion")}</button></p>)}</div></section>}
    {configured===false&&<section className="users-setup-note" aria-labelledby="users-setup-title"><ShieldCheck size={24} aria-hidden="true"/><div><h2 id="users-setup-title">{t("management.serverMissing")}</h2><p>{t("management.usersSetupHelp")}</p><Link className="text-action" href="/verwaltung/anmeldung">{t("management.openLoginSettings")}</Link></div></section>}
-   {loading&&!loaded&&<div className="review-loading" role="status"><LoaderCircle size={20} className="spin" aria-hidden="true"/>{t("management.usersLoading")}</div>}
+   {loading&&!loaded&&<AdminLoading>{t("management.usersLoading")}</AdminLoading>}
    {configured===true&&<>
-    {loading&&loaded&&<p className="help users-refresh-status" role="status"><LoaderCircle size={16} className="spin" aria-hidden="true"/>{t("management.usersLoading")}</p>}
+    {loading&&loaded&&<AdminLoading compact>{t("management.usersLoading")}</AdminLoading>}
     <div className="directory-table users-table" aria-busy={loading}><Table aria-label={t("management.userAccounts")}><TableHeader><TableRow><TableHead>{t("management.users")}</TableHead><TableHead>{t("management.role")}</TableHead><TableHead>{t("management.status")}</TableHead><TableHead>{t("management.loginMethod")}</TableHead><TableHead>{t("management.created")}</TableHead><TableHead>{t("management.lastLogin")}</TableHead><TableHead><span className="sr-only">{t("management.actions")}</span></TableHead></TableRow></TableHeader><TableBody>{shown.map(user=><TableRow key={user.id}>
      <TableCell><strong>{user.name||t("management.unnamed")}</strong><span className="users-email">{user.email}</span>{user.protected&&<span className="users-protected"><ShieldCheck size={12} aria-hidden="true"/>{t("management.protectedAccess")}</span>}</TableCell>
      <TableCell><span className={`users-role ${user.role}`}>{user.role==="admin"?<><ShieldCheck size={13} aria-hidden="true"/>{t("management.adminRole")}</>:t("management.userRole")}</span></TableCell>
