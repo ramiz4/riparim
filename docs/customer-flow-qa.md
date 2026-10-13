@@ -703,3 +703,34 @@ Providerzugriffen geprüft. Vor der Headerkorrektur lösten Anmeldung und Logo
 zusätzliche Dokumentanfragen aus. Danach blieben Anmeldung, Logo per Tab/Enter
 und Einstellungen beim selben Dokumentzähler; nur RSC-Anfragen kamen hinzu.
 Die Prüfung hat keine echten Konten, E-Mails oder Produktionsdaten verändert.
+
+
+## Stabiler Anmeldestatus im Header (13. Oktober 2026)
+
+Die Live-Abnahme von v1.31.2 im bestätigten Chrome-Profil zeigte bei Startseite
+→ Einstellungen → Datenschutz dieselbe `performance.timeOrigin`: Die
+Navigation lud kein neues Dokument. Gleichzeitig stieg die Anzahl der
+`/api/session`-Anfragen von eins auf zwei auf drei; während jeder neuen
+Prüfung erschien kurz der Gastheader. Das neue Seitenexemplar begann mit
+`account:null`, obwohl die vorherige Seite das Konto bereits bestätigt hatte.
+
+Der Header behält nun die zuletzt bestätigte Identität ausschließlich als
+Anzeigevorschau im Arbeitsspeicher des aktuellen Browserdokuments. Der
+Serverrenderer liest diese Vorschau nie; Cookies und Browserstorage werden
+nicht ergänzt. Normale Seitenwechsel teilen die bestätigte Sitzung für
+höchstens 30 Sekunden. Der nächste Zugriff nach Ablauf, Tab-/Fensterrückkehr,
+BFCache-Wiederherstellung, Kontoänderungen und ein ausdrücklicher Retry prüfen
+sie erneut; gleichzeitige Verbraucher teilen dieselbe laufende Anfrage.
+Private Daten-APIs prüfen unabhängig davon jeden Zugriff serverseitig. Eine
+abgelaufene Anzeigevorschau reicht nicht zum Laden der privaten Seite. Beim ersten Laden zeigt der Header einen beschrifteten, nicht
+fokussierbaren Ladezustand statt unbestätigter Anmeldebuttons. Ein Fehler bleibt
+neutral; eine bestätigte Gastantwort oder lokale Kontolöschung entfernt das
+Kontomenü. Antworten von vor einer Invalidierung dürfen die Vorschau nicht
+wiederherstellen.
+
+`tests/session-header-navigation.test.mjs` prüft den echten Header und die
+private Bewertungswrapper-Komponente bei verzögerten/fehlgeschlagenen
+Sitzungsantworten, Client-Neumount, serverseitigem Rendering, Gastantwort,
+Invalidierung, Cacheablauf, Fokusrückkehr und verspäteter alter Antwort. Die bestehende Deferred-UI-Suite
+prüft weiterhin DE/SQ/EN, Rollenentzug, Umbenennung, Kontolöschung und
+konkurrierende Sitzungsabfragen. Alle Fixtures verwenden fiktive Konten.

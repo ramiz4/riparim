@@ -90,7 +90,7 @@ export default function WorkshopProfile({publicSnapshot=false,workshop:initialWo
    <footer className="public-review-footer"><span className="proof-badge"><ShieldCheck size={14} aria-hidden="true"/>{t("public.proofChecked")}</span><time dateTime={review.date}>{formatDate(locale,review.date,{dateOnly:true})}</time></footer>
   </article>)}{w.count>reviews.length&&<p className="help">{t("public.latestReviews",{count:reviews.length})}</p>}</div>:<p className="profile-review-empty">{t("public.noProofReviews")}</p>}
  </div>;
- return <><SiteHeader account={account} isAdmin={isAdmin}/>
+ return <><SiteHeader account={account} isAdmin={isAdmin} publicSnapshot={publicSnapshot}/>
  <main className="workshop-page wrap" data-workshop-id={w.id}>
   <WorkshopNavigationLink className="profile-back" href={backHref}><ArrowLeft size={16}/>{t("public.backSearch")}</WorkshopNavigationLink>
   {display?.fallback&&<p className="help workshop-translation-notice">{t("public.translationFallback")}</p>}

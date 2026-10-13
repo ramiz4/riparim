@@ -8,7 +8,7 @@ export function useDeferredSession(){
   let active=true,sequence=0;
   const refresh=(change:SessionChange={})=>{
    const current=++sequence;setPending(true);setSession(previous=>applyPublicSessionChange(previous,change));
-   void loadPublicSession().then(value=>{if(active&&current===sequence){setSession(value);setError(false);}}).catch(()=>{if(active&&current===sequence)setError(true);}).finally(()=>{if(active&&current===sequence)setPending(false);});
+   void loadPublicSession({force:attempt>0}).then(value=>{if(active&&current===sequence){setSession(value);setError(false);}}).catch(()=>{if(active&&current===sequence)setError(true);}).finally(()=>{if(active&&current===sequence)setPending(false);});
   };
   const unsubscribe=subscribePublicSession(refresh);refresh();
   return()=>{active=false;unsubscribe();};
