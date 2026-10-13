@@ -45,7 +45,10 @@ export function BusinessPanel({moderation=false}:{moderation?:boolean}){
  }
  async function save(event:FormEvent){
   event.preventDefault();if(!editing||!profile||busy||loading)return;setBusy(true);setError("");setFeedback("");
-  try{await mutate("POST",{kind:"change",workshopId:editing.id,profile});setEditing(null);setProfile(null);const refreshed=await load();setFeedback(t("management.draftSubmitted"));if(!refreshed)setError(t("management.businessSavedReloadFailed"));}
+  const proposal={...profile};
+  // An unchanged empty owner plan must not suppress imported fallback hours.
+  if(JSON.stringify(profile.openingHours??null)===JSON.stringify(editing.openingHours??null))delete proposal.openingHours;
+  try{await mutate("POST",{kind:"change",workshopId:editing.id,profile:proposal});setEditing(null);setProfile(null);const refreshed=await load();setFeedback(t("management.draftSubmitted"));if(!refreshed)setError(t("management.businessSavedReloadFailed"));}
   catch(e){setError(errorMessage(e));}finally{setBusy(false);}
  }
  async function decide(){

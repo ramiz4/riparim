@@ -21,7 +21,7 @@ globalThis.fetch=async(url,options)=>{
  if(method==='POST'){
   if(mode==='failure')return Response.json({error:'Fixture duplicate or invalid draft',errorCode:'business_draft_conflict'},{status:409});
   if(body.kind==='claim'){assert.deepEqual(Object.keys(body),['kind','input']);assert.deepEqual(Object.keys(body.input),body.input.file?['workshopId','evidence','file']:['workshopId','evidence']);records.claims.push(requestView('00000000-0000-4000-8000-000000000001','claim'));return Response.json({status:'pending'},{status:201});}
-  assert.equal(body.kind,'change');assert.deepEqual(Object.keys(body.profile).sort(),['description','openingHours','phone','phoneNote','serviceDetails','services','whatsapp'].sort());
+  assert.equal(body.kind,'change');assert.deepEqual(Object.keys(body.profile).sort(),['description','phone','phoneNote','serviceDetails','services','whatsapp'].sort());
   const commit=()=>{records.changes.push({...requestView('00000000-0000-4000-8000-000000000002','change'),profile:body.profile});return Response.json({status:'pending'},{status:201});};
   if(mode==='pending')return new Promise(resolve=>pending={resolve,commit});return commit();
  }

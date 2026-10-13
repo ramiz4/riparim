@@ -147,6 +147,11 @@ assert.deepEqual(hoursPublished.openingHours,ownerHours);check(!!hoursPublished.
 const legacyResponse=await change('a',first.id,profile(hoursPublished));check(legacyResponse.status===201,'Legacy drafts may omit hours');
 check((await decide('admin','change',(await legacyResponse.json()).id)).ok,'Legacy draft approval preserves existing hours');
 assert.deepEqual((await directory.listWorkshops()).find(w=>w.id===first.id).openingHours,ownerHours);
+db.prepare('INSERT INTO workshop_opening_hours_imports(workshop_id,opening_hours) VALUES(?,?)').run(first.id,JSON.stringify(ownerHours));
+let clearing=await change('a',first.id,{...profile((await directory.listWorkshops()).find(w=>w.id===first.id)),openingHours:null});
+check((await decide('admin','change',(await clearing.json()).id)).ok,'Explicit removal approved');
+const removedHours=(await directory.listWorkshops()).find(w=>w.id===first.id);assert.equal(removedHours.openingHours,null);assert.equal(removedHours.importedOpeningHours,null);
+assert.equal(db.prepare('SELECT suppressed FROM workshop_opening_hours_imports WHERE workshop_id=?').get(first.id).suppressed,1);
 let latest=(await directory.listWorkshops()).find(w=>w.id===first.id);
 response=await change('a',first.id,{...profile(latest),phone:'+383441234567'});changeA=(await response.json()).id;googleAvailable=false;
 const cachedBeforeFailure=db.prepare('SELECT * FROM workshop_google_places WHERE workshop_id=?').get(first.id);

@@ -43,6 +43,11 @@ try{
   await tab(false);await tab(true);
   await render(locale,h(api.Profile,{...props,workshop:{...value,openingHours:null}}));
   assert(document.querySelector('.workshop-opening-hours').textContent.includes(t('common.hoursMissing')));
+  await render(locale,h(api.Profile,{...props,workshop:{...workshop,openingHours:null,importedOpeningHours:hours}}));
+  const importedSection=document.querySelector('.workshop-opening-hours');
+  assert(importedSection.textContent.includes('08:00–12:00'));assert(!importedSection.querySelector('.opening-status'));assert(!importedSection.textContent.includes(t('common.hoursSource')));assert(!importedSection.querySelector('.help'));
+  await render(locale,h(api.Profile,{...props,workshop:{...value,importedOpeningHours:{week:Array(7).fill({mode:'closed'}),exceptions:[]}}}));
+  assert(document.querySelector('.opening-week').textContent.includes('08:00–12:00'));
  }
  const originalFetch=globalThis.fetch,review={display_name:'Fixture reviewer',vehicle:'Fixture vehicle',service:'Fixture service',date:'2026-10-10',rating:5,review:'Fixture own review'};
  globalThis.fetch=async url=>url==='/api/session'?Response.json({account:null,isAdmin:false}):String(url).startsWith('/api/workshops?')?Response.json({workshops:[{...workshop,openingHours:hours}]}):String(url).startsWith('/api/reviews?')?Response.json({reviews:[review]}):originalFetch(url);
