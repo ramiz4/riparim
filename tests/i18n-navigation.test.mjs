@@ -28,8 +28,9 @@ const routes=[
  ['/einstellungen','/sq/cilesimet','/en/settings'],
  ['/bewertungen','/sq/vleresimet','/en/reviews'],
  ['/datenschutz','/sq/privatesia','/en/privacy'],
- ['/betrieb','/sq/biznesi','/en/business'],
- ['/betrieb/beanspruchen','/sq/biznesi/kerko-pronesine','/en/business/claim'],
+ ['/betriebe','/sq/biznesi','/en/business'],
+ ['/antraege','/sq/kerkesat','/en/requests'],
+ ['/betriebe/beanspruchen','/sq/biznesi/kerko-pronesine','/en/business/claim'],
  ['/verwaltung','/sq/administrimi','/en/admin'],
  ['/verwaltung/anmeldung','/sq/administrimi/autentikimi','/en/admin/authentication'],
  ['/verwaltung/benutzer','/sq/administrimi/perdoruesit','/en/admin/users'],
@@ -47,10 +48,10 @@ for(const translations of routes)for(const source of translations)for(const [i,l
 for(const path of ['/api/account','/auth/bestaetigen','/favicon.svg','/sitemap.xml','https://outside.test/werkstaetten','//outside.test/werkstaetten'])assert.equal(localizeHref(path,'en'),path);
 for(const path of ['/en/serviset','/sq/workshops','/en/admin/unknown','/sq/servis/id/extra','/en/workshops.png'])assert.equal(isPagePath(path),false,'Unknown page shapes remain rejected');
 for(const locale of ['de','sq','en']){
- assert.equal(languageSwitchHref('/betrieb?werkstatt=fixture-workshop',locale),localizeHref('/betrieb',locale),'The overview no longer carries a workshop claim target');
- assert.equal(languageSwitchHref('/anmelden?weiter='+encodeURIComponent('/betrieb?werkstatt=fixture-workshop'),locale),localizeHref('/anmelden?weiter=',locale)+encodeURIComponent(localizeHref('/betrieb',locale)),'Overview auth navigation discards unsupported workshop parameters');
- assert.equal(languageSwitchHref('/betrieb/beanspruchen?werkstatt=fixture-workshop&evidence=private',locale),localizeHref('/betrieb/beanspruchen?werkstatt=fixture-workshop',locale));
- assert.equal(languageSwitchHref('/betrieb/beanspruchen?werkstatt=fixture-workshop&werkstatt=other',locale),localizeHref('/betrieb/beanspruchen',locale));
- assert.equal(languageSwitchHref('/anmelden?weiter='+encodeURIComponent('/betrieb/beanspruchen?werkstatt=fixture-workshop'),locale),localizeHref('/anmelden?weiter=',locale)+encodeURIComponent(localizeHref('/betrieb/beanspruchen?werkstatt=fixture-workshop',locale)));
+ assert.equal(languageSwitchHref('/betriebe?werkstatt=fixture-workshop',locale),localizeHref('/betriebe',locale),'The overview no longer carries a workshop claim target');
+ assert.equal(languageSwitchHref('/anmelden?weiter='+encodeURIComponent('/betriebe?werkstatt=fixture-workshop'),locale),localizeHref('/anmelden?weiter=',locale)+encodeURIComponent(localizeHref('/betriebe',locale)),'Overview auth navigation discards unsupported workshop parameters');
+ assert.equal(languageSwitchHref('/betriebe/beanspruchen?werkstatt=fixture-workshop&evidence=private',locale),localizeHref('/betriebe/beanspruchen?werkstatt=fixture-workshop',locale));
+ assert.equal(languageSwitchHref('/betriebe/beanspruchen?werkstatt=fixture-workshop&werkstatt=other',locale),localizeHref('/betriebe/beanspruchen',locale));
+ assert.equal(languageSwitchHref('/anmelden?weiter='+encodeURIComponent('/betriebe/beanspruchen?werkstatt=fixture-workshop'),locale),localizeHref('/anmelden?weiter=',locale)+encodeURIComponent(localizeHref('/betriebe/beanspruchen?werkstatt=fixture-workshop',locale)));
 }
 console.log('Locale navigation and auth return boundaries passed');

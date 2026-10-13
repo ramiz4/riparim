@@ -9,9 +9,10 @@
 .business-page>h1+p{margin-bottom:var(--content-page-gap)}
 .business-page>.business-panel{margin-top:0}
 .business-page.admin-business-page>.business-panel{margin-top:18px}
-.business-section{padding:var(--content-card-padding);border:1px solid var(--border);background:var(--card);border-radius:16px;margin-top:var(--content-page-gap)}
-.business-request{padding:18px;background:var(--background);border:1px solid var(--border);border-radius:10px;margin-top:16px;overflow-wrap:anywhere}
+.business-section{margin-top:var(--content-page-gap);min-width:0}
+.business-request{padding:24px;background:var(--card);border:1px solid var(--border);border-radius:10px;margin-top:16px;overflow-wrap:anywhere}
 .business-request-heading{display:flex;gap:12px;align-items:start;justify-content:space-between}
+.business-request-heading>h3{min-width:0}
 .business-status{font-size:12px;white-space:nowrap;padding:4px 9px;border-radius:20px;background:var(--accent);color:var(--foreground)}
 .business-status.rejected{color:var(--destructive)}
 .business-submitted>summary{font-size:14px;cursor:pointer;min-height:44px;padding:10px 0;color:var(--theme-accent)}
@@ -82,3 +83,17 @@
 .opening-editor{min-width:0;margin:20px 0;border:1px solid var(--border);padding:16px;border-radius:10px}.opening-days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.opening-day{min-width:0;padding:12px;border:1px solid var(--border);border-radius:8px}.opening-interval{display:flex;gap:8px;align-items:end;flex-wrap:wrap}.opening-interval label{flex:1;min-width:85px}.opening-interval input{width:100%;min-width:0}.opening-enabled{display:flex;align-items:center;gap:10px}.opening-exception{display:grid;gap:10px;padding:12px 0;border-bottom:1px solid var(--border)}.opening-week>div{display:flex;justify-content:space-between;gap:16px}.opening-week dd{margin:0;text-align:right}.opening-exceptions{margin-top:20px;min-width:0}.opening-editor button{margin-top:8px}@media(max-width:600px){.opening-days{grid-template-columns:1fr}.opening-editor{padding:12px}}
 
 .business-form .opening-enabled{display:flex;align-items:center;gap:10px}.business-form .opening-enabled input{width:20px;flex:0 0 20px}.opening-editor select{width:100%;min-height:44px;padding:10px 12px;background:var(--background);color:var(--foreground);border:1px solid var(--input);border-radius:8px;font:inherit}
+
+.business-claim-progress{display:flex;align-items:flex-start;gap:12px;margin-top:22px}
+.business-claim-progress>svg{color:var(--theme-accent);margin-top:3px}
+.business-claim-progress>div{min-width:0}
+.business-claim-progress strong{display:block;font-size:15px;font-weight:600;line-height:1.5}
+.business-page .business-claim-progress p{margin:4px 0 0}
+.business-page .business-claim-next{font-size:13px;margin:14px 0 0}
+.business-documents{list-style:none;padding:16px 0 0;margin:20px 0 0;border-top:1px solid var(--border);display:grid;gap:8px}
+.business-documents a{display:flex;align-items:center;gap:10px;min-height:44px;width:fit-content;max-width:100%;text-decoration:none;border-radius:4px}
+.business-documents a>span{min-width:0}
+.business-document-label{display:block;font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.business-document-name{display:block;font-size:12px;line-height:1.5;color:var(--muted-foreground);overflow-wrap:anywhere}
+.business-documents a:hover .business-document-label{text-decoration-thickness:2px}
+.business-documents a:focus-visible{outline:3px solid var(--ring);outline-offset:4px}

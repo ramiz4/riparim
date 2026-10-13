@@ -36,7 +36,7 @@ export function BusinessClaimForm({workshop}:{workshop:Workshop|null}){
   <h1>{t("management.claimTitle")}</h1>
   {workshop?<>
    <section className="claim-workshop"><Building2 size={22} aria-hidden="true"/><div><h2>{workshop.name}</h2><p>{workshop.city} · {workshop.address}</p></div></section>
-   {submitted?<section className="claim-confirmation"><CheckCircle2 size={30} aria-hidden="true"/><h2 ref={confirmation} tabIndex={-1}>{t("management.claimSuccessTitle")}</h2><p className="success" role="status">{t("management.claimSubmitted")}</p><p>{t("management.claimPendingHelp")}</p><LocaleAnchor className="primary" href="/betrieb">{t("management.myBusiness")}</LocaleAnchor></section>:<>
+   {submitted?<section className="claim-confirmation"><CheckCircle2 size={30} aria-hidden="true"/><h2 ref={confirmation} tabIndex={-1}>{t("management.claimSuccessTitle")}</h2><p className="success" role="status">{t("management.claimSubmitted")}</p><p>{t("management.claimPendingHelp")}</p><LocaleAnchor className="primary" href="/antraege">{t("management.myApplications")}</LocaleAnchor></section>:<>
     <p className="claim-intro">{t("management.claimIntro")}</p>
     <form className="business-form claim-form" onSubmit={submit}><fieldset disabled={busy}>
      <div className="claim-field"><label htmlFor={`${id}-evidence`}>{t("management.claimEvidenceLabel")}</label><textarea id={`${id}-evidence`} required rows={3} minLength={40} maxLength={4000} aria-describedby={`${id}-evidence-help`} placeholder={t("management.claimEvidencePlaceholder")} value={evidence} onChange={event=>setEvidence(event.target.value)}/><small id={`${id}-evidence-help`}>{t("management.claimEvidenceHint")}</small></div>

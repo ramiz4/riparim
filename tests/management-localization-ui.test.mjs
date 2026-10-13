@@ -44,9 +44,9 @@ try{
    await render(locale,BusinessPanel,{directory:[workshop]});
    const editButton=[...document.querySelectorAll('button')].find(button=>button.textContent===edit);
    check(editButton.disabled&&document.body.textContent.includes(waiting),'Each locale bases its current edit lock and guidance on the authoritative pending change summary');
-   check(document.body.textContent.includes(claimOutcome)&&document.body.textContent.includes(changeOutcome),'Each locale reports historical rejection outcomes without a conflicting retry instruction');
+   await render(locale,BusinessPanel,{view:'requests'});check(document.body.textContent.includes(claimOutcome)&&document.body.textContent.includes(changeOutcome),'Each locale reports historical rejection outcomes without a conflicting retry instruction');
    businessFixture={...businessFixture,workshops:[],claims:[],changes:[],pendingChangeWorkshopIds:[],pendingClaims:[{id:'fixture-current-claim',workshopId:workshop.id,workshopName:workshop.name,createdAt:'2020-01-01T00:00:00Z'}]};
-   await render(locale,BusinessPanel,{directory:[workshop]});check(document.querySelector('.business-request').textContent.includes(privateCheck),'Each locale visibly explains manual private ownership verification for the current claim');
+   await render(locale,BusinessPanel,{view:'requests'});check(document.querySelector('.business-request').textContent.includes(privateCheck),'Each locale visibly explains manual private ownership verification for the current claim');
   }
 
   const canonical={...workshop,brands:['Audi'],languages:['Albanisch'],specialty:'Original specialty',sources:[{url:'https://workshop.example.test/contact',title:'Original source'}],lat:null,lng:null,checkedAt:'2026-10-04',status:'draft'};

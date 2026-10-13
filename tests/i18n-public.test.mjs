@@ -22,7 +22,7 @@ assert.equal(browser.currentGoogleRating,undefined,'individual rating requests a
 assert.equal(browser.currentGooglePhotos,undefined,'photo metadata requests are absent from the public browser API');
 
 for(const [query,expected] of [[{},false],[{besuche:'0'},false],[{einreichung:''},false],[{nachweis:'alt'},false],[{besuche:['0','1']},true],[{einreichung:'private-submission'},true],[{nachweis:'neu'},true]])assert.equal(seo.isPrivateLandingMode(query),expected);
-for(const privatePath of ['/anmelden','/registrieren','/einstellungen','/betrieb','/verwaltung','/verwaltung/benutzer']){
+for(const privatePath of ['/anmelden','/registrieren','/einstellungen','/betriebe','/verwaltung','/verwaltung/benutzer']){
  const value=seo.publicMetadata('sq',privatePath,'https://example.test',{title:'Private',description:'Private'});assert.equal(value.robots.index,false);assert.equal(value.alternates,null,'private pages cannot emit public alternatives');
 }
 const sunday=new Date('2026-10-04T08:00:00Z');

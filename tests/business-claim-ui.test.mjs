@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {JSDOM,VirtualConsole} from 'jsdom';
-const dom=new JSDOM('<div id="root"></div>',{url:'https://riparim.example.test/betrieb/beanspruchen?werkstatt=fixture-workshop',pretendToBeVisual:true,virtualConsole:new VirtualConsole()});
+const dom=new JSDOM('<div id="root"></div>',{url:'https://riparim.example.test/betriebe/beanspruchen?werkstatt=fixture-workshop',pretendToBeVisual:true,virtualConsole:new VirtualConsole()});
 for(const key of ['window','document','navigator','HTMLElement','HTMLFormElement','HTMLInputElement','HTMLTextAreaElement','Node','Event','getComputedStyle'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});
 globalThis.IS_REACT_ACT_ENVIRONMENT=true;
 const out='.test-runtime/business-claim-ui';await mkdir(out,{recursive:true});
@@ -50,7 +50,7 @@ try{
   mode='pending';const form=proof.form;await submit(form);check(document.querySelector('.claim-submit button').textContent===messages.claimSending&&form.querySelector('fieldset').disabled&&document.querySelector('.business-panel').getAttribute('aria-busy')==='true','Pending submission announces busy and freezes the fields');
   const count=requests.length;await submit(form);check(requests.length===count,'Pending submissions cannot be duplicated');
   await act(async()=>finish(Response.json({status:'pending'},{status:201})));
-  check(!document.querySelector('form')&&document.querySelector('[role=status]').textContent===messages.claimSubmitted&&document.querySelector('a[href="'+localizeHref('/betrieb',locale)+'"]'),'Successful claims replace the form with confirmation and a link to the separate overview');
+  check(!document.querySelector('form')&&document.querySelector('[role=status]').textContent===messages.claimSubmitted&&document.querySelector('a[href="'+localizeHref('/antraege',locale)+'"]'),'Successful claims replace the form with confirmation and a link to the separate overview');
   check(document.activeElement===document.querySelector('.claim-confirmation h2'),'Successful submission moves focus to the confirmation');
   await submit(form);check(requests.length===count,'A saved application cannot be resubmitted from a stale form');
  }

@@ -32,12 +32,12 @@ for(const enabled of [false,true]){
   if(enabled)assert.match(response.headers.get('Set-Cookie'),/fixture-session=renewed/,'Cookie refresh retains the 404 status and rewrite');
  }
 }
-for(const [path,identity] of [['/en/workshops','/en/werkstaetten'],['/sq/serviset','/sq/werkstaetten'],['/en/workshop/test-id','/en/werkstatt/test-id'],['/sq/servis/test-id','/sq/werkstatt/test-id'],['/en/login','/en/anmelden'],['/sq/biznesi/kerko-pronesine','/sq/betrieb/beanspruchen'],['/en/admin/users','/en/verwaltung/benutzer']]){
+for(const [path,identity] of [['/en/workshops','/en/werkstaetten'],['/sq/serviset','/sq/werkstaetten'],['/en/workshop/test-id','/en/werkstatt/test-id'],['/sq/servis/test-id','/sq/werkstatt/test-id'],['/en/login','/en/anmelden'],['/sq/biznesi/kerko-pronesine','/sq/betriebe/beanspruchen'],['/en/admin/users','/en/verwaltung/benutzer']]){
  const response=await proxy(request(path+'?ort=prizren'));
  assert.equal(response.headers.get('x-middleware-rewrite'),'https://riparim.com'+identity+'?ort=prizren','Translated browser paths resolve the existing page tree');
  assert.match(response.headers.get('Set-Cookie'),/fixture-session=renewed/,'Session renewal preserves localized rewrites');
 }
-for(const [path,target] of [['/en/werkstaetten','/en/workshops'],['/sq/werkstatt/test-id','/sq/servis/test-id'],['/en/betrieb/beanspruchen','/en/business/claim'],['/sq/verwaltung/benutzer','/sq/administrimi/perdoruesit']]){
+for(const [path,target] of [['/betrieb','/betriebe'],['/betrieb/beanspruchen','/betriebe/beanspruchen'],['/en/werkstaetten','/en/workshops'],['/sq/werkstatt/test-id','/sq/servis/test-id'],['/en/betriebe/beanspruchen','/en/business/claim'],['/sq/verwaltung/benutzer','/sq/administrimi/perdoruesit']]){
  const response=await proxy(request(path+'?werkstatt=test-id'));
  assert.equal(response.status,308);assert.equal(response.headers.get('Location'),'https://riparim.com'+target+'?werkstatt=test-id');
 }

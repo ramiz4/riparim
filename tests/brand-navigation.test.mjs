@@ -43,7 +43,7 @@ window[Symbol.for('vinext.navigationRuntime')]={bootstrap:{routeManifest:null,rs
 await import('vinext/shims/navigation');
 
 const root=createRoot(document.getElementById('root'));
-const routes=['/anmelden?weiter=%2Fwerkstatt%2Ffixture#formular','/registrieren?weiter=%2Fwerkstaetten','/werkstaetten?ort=prizren&leistung=diagnose-elektronik','/werkstatt/fixture?suche=%2Fwerkstaetten#bewerten','/?besuche=1#nachweise','/betrieb','/betrieb/beanspruchen?werkstatt=fixture','/verwaltung','/verwaltung/betriebe','/einstellungen','/datenschutz','/'];
+const routes=['/anmelden?weiter=%2Fwerkstatt%2Ffixture#formular','/registrieren?weiter=%2Fwerkstaetten','/werkstaetten?ort=prizren&leistung=diagnose-elektronik','/werkstatt/fixture?suche=%2Fwerkstaetten#bewerten','/?besuche=1#nachweise','/betriebe','/betriebe/beanspruchen?werkstatt=fixture','/verwaltung','/verwaltung/betriebe','/einstellungen','/datenschutz','/'];
 let checks=0;
 try{
  for(const [caller,Component,props] of [['header',SiteHeader,{account:null}],['footer',DirectoryFooter,{}]]){
