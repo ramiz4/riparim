@@ -882,7 +882,7 @@
       "profileConfirmed": true,
       "updatedAt": "2026-10-13T07:09:21.901855+00:00",
       "emailPolicy": "Capture public business email when available, with source/date; missing email does not block publication; no contact messages.",
-      "browser": "Internal Codex browser; Google account ramizloki82@googlemail.com visibly confirmed before Maps checks. Earlier checks used the same confirmed Chrome account.",
+      "browser": "Internal Codex browser; required project Google profile visibly confirmed before Maps checks. Earlier checks used the same confirmed profile in Chrome.",
       "before": {
         "published": 164,
         "drafts": 0
