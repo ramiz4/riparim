@@ -24,7 +24,7 @@ export function WorkshopCard({workshop:w,selectedBrand="Alle Marken",selectedSer
  </article>;
  return <article className="catalogue-card" hidden={hidden}><div className="catalogue-card-link">
   <div className="catalogue-card-heading"><Heading><WorkshopNavigationLink className="catalogue-card-target" href={profileHref} aria-label={t("public.viewProfile",{name:w.name})}>{w.name}</WorkshopNavigationLink></Heading><p className="catalogue-card-place"><MapPin size={16} aria-hidden="true"/>{w.city}{distanceKm!=null&&<span className="catalogue-card-distance" title={t("public.distanceTitle",{city:distanceOrigin??w.city})}>{t("public.approxDistance",{distance:distanceKm})}</span>}</p></div>
-  <WorkshopRatings workshop={w} hideUnavailable/>
+  <WorkshopRatings workshop={w} showGoogle={false}/>
   {details.length>0&&<div className="catalogue-card-services">{details.map(detail=><span lang={w.services.includes(detail)?undefined:workshopDisplayLanguage(display,locale)} className={detail===selectedService?"selected-service":undefined} key={detail}>{w.services.includes(detail)?valueLabel(locale,"service",detail):display?.serviceDetails[w.serviceDetails.indexOf(detail)]??detail}</span>)}</div>}{shownBrands.length>0&&<div className="catalogue-card-brands">{shownBrands.map(brand=><span key={brand}>{valueLabel(locale,"sentinel",brand)}</span>)}</div>}
   {display?.fallback&&<p className="help workshop-translation-notice">{t("public.translationFallback")}</p>}
  </div></article>;
