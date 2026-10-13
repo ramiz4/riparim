@@ -8,7 +8,7 @@ import {catalogueImportStatements,catalogueImportKey,catalogueCompletionSql} fro
 import {workshopScopeExclusion} from "@/lib/workshop-scope";
 import {workshopRetired} from "@/lib/workshop-retirement";
 import {services,cities,type Workshop,type Source} from "@/lib/workshops";
-export {profileColumns} from "./workshop-record";
+export {profileColumns,profileValues} from "./workshop-profile-values";
 export type ProfileInput=Omit<Workshop,"initials"|"color"|"rating"|"count"|"googleRating">;
 // Workers have no reliable wall clock during module initialization.
 // Release CI validates this immutable source; avoid reparsing it in every isolate.
@@ -16,7 +16,7 @@ const catalogue=canonical as WorkshopCatalogue;
 const contacts=contactSource as WorkshopContacts;
 let seedKey:Promise<string>|undefined;
 export function catalogueSeedKey(){return seedKey??=catalogueImportKey(catalogue,contacts.contacts); }
-export {decodeProfile,profileValues} from "./workshop-record";
+export {decodeProfile} from "./workshop-record";
 import {decodeProfile} from "./workshop-record";
 // Canonical JSON is imported independently from immutable schema migrations.
 export async function ensureInitialCatalog(){
