@@ -1,3 +1,4 @@
+import {catalogueFixtureKey} from './catalogue-fixture-key.mjs';
 import assert from 'node:assert/strict';
 import {assertPrivacyOutput} from './privacy-output.mjs';
 import {localizeHref} from '../../scripts/lib/locale.mjs';
@@ -7,7 +8,6 @@ import {readFile,mkdir,writeFile,cp} from 'node:fs/promises';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
 import {join} from 'node:path';
-import {createHash} from 'node:crypto';
 
 export async function pocketbaseNodeHttp({directory,port,start,stop}){
  const target=join(directory,'pocketbase-http');await mkdir(target);
@@ -33,7 +33,7 @@ export async function pocketbaseNodeHttp({directory,port,start,stop}){
  let targetProvider;
  const issuer='https://127.0.0.1:'+provider.address().port,publicOrigin='https://pocketbase-node.fixture.invalid',origin='http://127.0.0.1:'+port;
  try{
-  const catalogue=JSON.parse(await readFile('data/workshops.json','utf8')),marker='workshop-source:'+createHash('sha256').update(JSON.stringify(catalogue)).digest('hex');await storage.db.prepare('INSERT INTO catalog_state VALUES (?,?)').bind(marker,'fixture').run();
+  const marker=await catalogueFixtureKey();await storage.db.prepare('INSERT INTO catalog_state VALUES (?,?)').bind(marker,'fixture').run();
   await storage.db.prepare("INSERT INTO workshops (id,name,city,address,phone,brands,services,specialty,description,sources,checked_at,status,updated_at) VALUES ('pb-node-public','Synthetic PB Node workshop','Prishtina','Fixture road','+38344123456','[]','[]','Fixture','Synthetic','[]','2026-10-12','published','2026-10-12')").run();
   await storage.db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at,provider) VALUES ('main',?,'',1,0,'2026-10-12','pocketbase')").bind(issuer).run();
   for(const [subject,account] of [[member,owner],[admin,adminOwner]])await storage.db.prepare('INSERT INTO auth_identities VALUES (?,?,?,?,?)').bind('pocketbase',issuer,subject,account,'2026-10-12').run();

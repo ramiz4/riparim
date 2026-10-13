@@ -20,7 +20,7 @@ assert.throws(()=>csvRows('a;b\n"unterminated;b'));
 assert.throws(()=>validateOpeningHoursImport({...manifest,revision:'forged'},catalogue,parse));
 const db=new DatabaseSync(':memory:');
 db.exec('PRAGMA foreign_keys=ON; CREATE TABLE workshops(id TEXT PRIMARY KEY,name TEXT,city TEXT,address TEXT,phone TEXT,status TEXT,opening_hours TEXT,opening_hours_confirmed_at TEXT);');
-db.exec(await readFile('drizzle/0021_silly_puck.sql','utf8'));
+db.exec(await readFile('drizzle/0022_daily_dreadnoughts.sql','utf8'));
 const insert=db.prepare('INSERT INTO workshops VALUES(?,?,?,?,?,?,?,?)');
 for(const r of manifest.records)insert.run(r.id,r.expected.name,r.expected.city,r.expected.address,r.expected.phone,'published',null,null);
 const first=manifest.records[0];db.prepare('UPDATE workshops SET opening_hours=?,opening_hours_confirmed_at=? WHERE id=?').run(JSON.stringify(first.hours),'2026-10-12',first.id);

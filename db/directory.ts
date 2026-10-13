@@ -1,6 +1,8 @@
 import {ValidationError} from "@/lib/validation-error";
 import { storage } from "./storage";
 import canonical from "@/data/workshops.json";
+import contactSource from "@/data/workshop-contacts.json";
+import {validateWorkshopContacts,type WorkshopContacts} from "@/lib/workshop-contacts";
 import {validateWorkshopCatalogue,type WorkshopCatalogue} from "@/lib/workshop-source";
 import {catalogueImportStatements,catalogueImportKey,catalogueCompletionSql} from "./catalogue-import";
 import {workshopScopeExclusion} from "@/lib/workshop-scope";
@@ -11,8 +13,9 @@ export type ProfileInput=Omit<Workshop,"initials"|"color"|"rating"|"count"|"goog
 // Workers have no reliable wall clock during module initialization.
 // Release CI validates this immutable source; avoid reparsing it in every isolate.
 const catalogue=canonical as WorkshopCatalogue;
+const contacts=contactSource as WorkshopContacts;
 let seedKey:Promise<string>|undefined;
-export function catalogueSeedKey(){return seedKey??=catalogueImportKey(catalogue); }
+export function catalogueSeedKey(){return seedKey??=catalogueImportKey(catalogue,contacts.contacts); }
 export {decodeProfile} from "./workshop-record";
 import {decodeProfile} from "./workshop-record";
 // Canonical JSON is imported independently from immutable schema migrations.
@@ -21,7 +24,8 @@ export async function ensureInitialCatalog(){
  const key=await catalogueSeedKey();
  const marker=await db.prepare("SELECT value FROM catalog_state WHERE key=?").bind(key).first();if(marker)return;
  validateWorkshopCatalogue(catalogue);
- const statements=await catalogueImportStatements(db,catalogue);
+ validateWorkshopContacts(contacts,catalogue.workshops);
+ const statements=await catalogueImportStatements(db,catalogue,contacts.contacts);
  // Bounded, repeatable batches also support large imports; the completion marker is last.
  for(let i=0;i<statements.length;i+=50)await db.batch(statements.slice(i,i+50));
  await db.prepare(catalogueCompletionSql).bind(key,new Date().toISOString()).run();

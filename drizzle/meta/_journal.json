@@ -152,8 +152,15 @@
     {
       "idx": 21,
       "version": "6",
-      "when": 1791897492653,
-      "tag": "0021_silly_puck",
+      "when": 1791897290909,
+      "tag": "0021_jazzy_master_chief",
+      "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "6",
+      "when": 1791898725217,
+      "tag": "0022_daily_dreadnoughts",
       "breakpoints": true
     }
   ]

@@ -1,10 +1,9 @@
+import {catalogueFixtureKey} from './helpers/catalogue-fixture-key.mjs';
 import assert from 'node:assert/strict';
 import {build} from 'esbuild';
 import {mkdir,writeFile,mkdtemp,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
-import {createHash} from 'node:crypto';
-import {readFile} from 'node:fs/promises';
 
 const output='.test-runtime/node-evidence';await mkdir(output,{recursive:true});
 const bundled=await build({stdin:{contents:`export {createNodeStorage} from './lib/runtime/node-storage';export {migrateNode} from './lib/runtime/node-migrations';export {deleteAccount} from './lib/auth/delete-account';export * as visits from './app/api/visits/route';export * as download from './app/api/evidence/[id]/route';export {requestWorkshopClaim} from './lib/business';export * as claimDownload from './app/api/business/evidence/[id]/route';`,resolveDir:process.cwd(),loader:'ts'},outfile:output+'/app.mjs',bundle:true,write:false,format:'esm',platform:'node',plugins:[{name:'synthetic-auth',setup(builder){
@@ -21,8 +20,7 @@ try{
  globalThis.fixtureEnv={DB:storage.db,BUCKET:{...storage.bucket,async put(key,value,options){if(options?.onlyIf&&paused){const started=paused;paused=null;started();await new Promise(resolve=>release=resolve);}return storage.bucket.put(key,value,options);}},SITE_ORIGIN:origin};
  globalThis.fixtureUser={userId:owner,ownerKeys:[owner],displayName:'Fixture Member',email:'fixture@fixture.invalid',isModerator:false};
  // Isolated synthetic public profile; the catalogue source stays unchanged.
- const canonical=JSON.parse(await readFile('data/workshops.json','utf8'));
- const marker='workshop-source:'+createHash('sha256').update(JSON.stringify(canonical)).digest('hex');
+ const marker=await catalogueFixtureKey();
  await storage.db.prepare('INSERT INTO catalog_state VALUES (?,?)').bind(marker,'fixture').run();
  const publicId='fixture-public';
  await storage.db.prepare("INSERT INTO workshops (id,name,city,address,phone,brands,services,specialty,description,sources,checked_at,status,updated_at) VALUES (?, 'Fictional workshop','Prishtina','Synthetic road 1','+38344123456','[]','[\"Inspektion & Wartung\"]','Synthetic','Fictional workshop for isolated integration','[]','2026-10-01','published','2026-10-01T00:00:00Z')").bind(publicId).run();

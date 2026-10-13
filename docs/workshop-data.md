@@ -29,6 +29,32 @@ Nach Prüfung und Commit wird die Site wie üblich veröffentlicht. Der Runtime-
 
 Änderungen aus der Admin-Oberfläche müssen vor der nächsten Katalogänderung wieder exportiert und in diese Datei übernommen werden. Die vorhandene Admin-Oberfläche schreibt weiterhin in die laufende Datenbank; sie kann keinen Git-Commit erzeugen. Bei einem Konflikt bleibt die jüngere Datenbankrevision erhalten, bis der Export die zentrale Datei aktualisiert.
 
+## Öffentlich belegte Kontaktdaten
+
+`data/workshop-contacts.json` ergänzt vorhandene Profile um die auf eigenen
+Betriebswebsites recherchierten E-Mail-Adressen und Websites. Die zehn am
+13. Oktober 2026 abgeglichenen Betriebe behalten ihre bisherigen Kennungen,
+Telefonnummern, Orte und Freigabestatus. Die separate Tabelle
+`workshop_contact_details` verknüpft jeden Kontakt per Fremdschlüssel mit dem
+Profil und speichert Quellen-URLs, Prüfdatum sowie den abgeglichenen Namen,
+Telefonkontakt und Ort. Bei JavaScript-Websites bleibt auch die konkrete
+öffentlich ausgelieferte Quelldatei im Nachweis erhalten.
+
+`email_verification = publicly_listed` bedeutet ausschließlich, dass der Betrieb
+die Adresse öffentlich aufführt. Es bestätigt weder Zustellung noch Einwilligung
+oder Betriebsbesitz. Ansprache, Antworten und Follow-up-Termine bleiben im
+bestehenden Google Sheet; dieser Datenimport löst keinen E-Mail-Versand aus.
+Die öffentliche Profil-API erhält durch die Erweiterung keine neuen Felder.
+
+`npm run catalog:check` prüft Kontaktformat, Quellen, Prüfdatum, eindeutige IDs
+und die Übereinstimmung mit dem veröffentlichten Katalog. Der Runtime-Import
+bezieht die Kontaktquelle in seine Abschlusskennung ein und prüft Name, Telefon,
+Ort und Veröffentlichung erneut im tatsächlichen SQL-Schreibvorgang. Abweichende
+Liveprofile werden übersprungen, neuere Kontaktprüfungen bleiben erhalten.
+Kontaktdaten ändern keine Profilrevisionen, Bewertungen oder Besitzrechte. Die
+additive Drizzle-Migration wird über den normalen geprüften Main-Release
+angewendet; der anschließende Katalogimport ergänzt die zehn Kontaktdatensätze.
+
 ## Kuratierte SQ-/EN-Anzeigen
 
 `data/workshop-translations.json` enthält ausschließlich redaktionelle SQ-/EN-
@@ -319,7 +345,7 @@ nicht geändert. Der Auftrag schließt die Speicherung der recherchierten
 Maps-Zeiten für diese konkrete Liste ein; daraus entsteht kein allgemeiner
 Google-Bulkimport oder automatischer Aktualisierungsauftrag.
 
-Migration `0021_silly_puck.sql` ergänzt `workshop_opening_hours_imports` separat
+Migration `0022_daily_dreadnoughts.sql` ergänzt `workshop_opening_hours_imports` separat
 von Inhaberzeiten. Herkunft, Recherchehinweise und ersetzte Originalpläne bleiben
 intern erhalten. Die öffentliche API liefert nur `importedOpeningHours`, keine
 Importmetadaten. Die UI zeigt bestätigte Inhaberzeiten vorrangig und sonst den

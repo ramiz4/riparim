@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "1f883a2c-88ff-4ae6-a933-fd1016da3dd9",
+  "id": "30832dde-471c-49d9-a938-79305b434e69",
   "prevId": "a6e70aa3-bc10-47ab-8831-220e7c9ccac8",
   "tables": {
     "auth_account_deletions": {
@@ -1119,6 +1119,93 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
+    "workshop_contact_details": {
+      "name": "workshop_contact_details",
+      "columns": {
+        "workshop_id": {
+          "name": "workshop_id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "website": {
+          "name": "website",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "source_urls": {
+          "name": "source_urls",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "checked_at": {
+          "name": "checked_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "matched_name": {
+          "name": "matched_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "matched_phone": {
+          "name": "matched_phone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "matched_city": {
+          "name": "matched_city",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "email_verification": {
+          "name": "email_verification",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "workshop_contact_details_workshop_id_workshops_id_fk": {
+          "name": "workshop_contact_details_workshop_id_workshops_id_fk",
+          "tableFrom": "workshop_contact_details",
+          "tableTo": "workshops",
+          "columnsFrom": [
+            "workshop_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
     "workshop_google_places": {
       "name": "workshop_google_places",
       "columns": {
@@ -1226,73 +1313,6 @@
       },
       "indexes": {},
       "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "checkConstraints": {}
-    },
-    "workshop_opening_hours_imports": {
-      "name": "workshop_opening_hours_imports",
-      "columns": {
-        "workshop_id": {
-          "name": "workshop_id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "opening_hours": {
-          "name": "opening_hours",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "source_metadata": {
-          "name": "source_metadata",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "import_revision": {
-          "name": "import_revision",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "imported_at": {
-          "name": "imported_at",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "suppressed": {
-          "name": "suppressed",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false,
-          "default": 0
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "workshop_opening_hours_imports_workshop_id_workshops_id_fk": {
-          "name": "workshop_opening_hours_imports_workshop_id_workshops_id_fk",
-          "tableFrom": "workshop_opening_hours_imports",
-          "tableTo": "workshops",
-          "columnsFrom": [
-            "workshop_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}
