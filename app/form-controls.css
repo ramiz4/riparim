@@ -141,3 +141,8 @@ html.dark .searchable-picker-check { color:var(--ring); }
 .searchable-picker-chip>button { display:grid; place-items:center; flex-shrink:0; width:26px; min-height:26px; border-radius:3px; }
 .searchable-picker-chip>button:hover { background:var(--secondary); }
 .searchable-picker-more { border-radius:5px; padding:4px 7px; min-height:30px; font-size:.8125rem; color:inherit; background:var(--theme-hover); white-space:nowrap; }
+
+/* Plain labeled pickers share a neutral container across forms and themes. */
+[data-slot=field].picker-field { min-width:0; gap:6px; padding:0; border:0; background:transparent; }
+.picker-field>[data-slot=field-label] { display:block; margin:0; font-size:14px; font-weight:600; color:var(--foreground); }
+.picker-field>.picker,.journey-form .picker { width:100%!important; min-height:46px!important; border:1px solid var(--input)!important; padding:10px 12px!important; border-radius:8px; background:var(--background)!important; color:var(--foreground); font-size:16px!important; }

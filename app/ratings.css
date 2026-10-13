@@ -33,3 +33,27 @@
 .workshop-opening-hours{min-width:0;flex:1}.workshop-opening-hours h2{font-size:16px;margin-bottom:8px}.opening-week{font-size:14px}.opening-week>div{display:flex;justify-content:space-between;gap:16px;padding:3px 0}.opening-week dt{flex-shrink:0}.opening-week dd{margin:0;text-align:right;overflow-wrap:anywhere}.opening-status{font-weight:600}.opening-status.open{color:var(--theme-accent)}.workshop-opening-hours .help{font-size:12px;margin-top:10px;color:var(--muted-foreground)}
 
 .workshop-opening-hours summary{cursor:pointer;min-height:44px;padding:10px 0;font-size:14px}.workshop-opening-hours summary:focus-visible{outline:2px solid var(--ring);outline-offset:3px}.workshop-opening-hours h3{font-size:14px;margin:12px 0 6px}
+
+.opening-hours-title { display:flex; align-items:center; flex-wrap:wrap; gap:6px 12px; }
+.opening-hours-title h2 { margin:0; font-size:14px; font-weight:500; color:var(--muted-foreground); }
+.opening-hours-title .opening-status { font-size:12px; }
+.opening-hours-trigger { display:inline-flex; align-items:center; gap:9px; max-width:100%; min-height:36px; text-align:left; font-size:14px; font-weight:600; color:inherit; border-radius:5px; }
+.opening-hours-trigger>svg { flex-shrink:0; transition:transform .15s; }
+.opening-hours-trigger[data-state=open]>svg:last-child { transform:rotate(180deg); }
+.opening-hours-trigger:focus-visible { outline:2px solid var(--ring); outline-offset:3px; }
+.opening-hours-trigger:hover { color:var(--theme-accent); }
+html.dark .opening-hours-trigger:hover { color:var(--ring); }
+.opening-hours-popover { width:min(360px,calc(100vw - 32px)); max-height:min(560px,var(--radix-popover-content-available-height,560px)); overflow-y:auto; overscroll-behavior:contain; padding:16px; border-color:var(--border); border-radius:12px; background:var(--popover); color:var(--popover-foreground); box-shadow:0 12px 36px #0003; }
+.opening-hours-popover-heading { display:flex; align-items:center; justify-content:space-between; gap:16px; padding-bottom:10px; margin-bottom:6px; border-bottom:1px solid var(--border); }
+.opening-hours-popover-heading h3 { display:flex; align-items:center; gap:8px; font-size:15px; font-weight:650; margin:0; }
+.opening-hours-popover-heading>button { display:grid; place-items:center; width:32px; height:32px; border-radius:6px; }
+.opening-hours-popover-heading>button:hover { background:var(--theme-hover); }
+.opening-hours-popover .opening-week { margin:0; }
+.opening-hours-popover .opening-week>div { align-items:baseline; gap:16px; padding:8px; border-radius:6px; }
+.opening-hours-popover .opening-week dt { color:var(--muted-foreground); }
+.opening-hours-popover .opening-week dd { font-variant-numeric:tabular-nums; }
+.opening-hours-popover .opening-week>.opening-day-today { background:var(--theme-hover); font-weight:650; }
+.opening-hours-popover .opening-week>.opening-day-today dt { color:inherit; }
+.opening-hours-popover>h3 { font-size:14px; font-weight:600; margin:14px 8px 4px; }
+.opening-hours-source { border-top:1px solid var(--border); padding-top:12px; margin:12px 8px 0; font-size:12px; line-height:1.6; color:var(--muted-foreground); }
+@media(prefers-reduced-motion:reduce) { .opening-hours-trigger>svg { transition:none; } }

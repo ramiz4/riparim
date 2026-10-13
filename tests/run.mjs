@@ -12,6 +12,8 @@ suites.push('workshop-emails.test.mjs');
 suites.push('workshop-emails-ui.test.mjs');
 suites.push('catalogue-drawer-resize.test.mjs');
 suites.push('searchable-picker.test.mjs');
+suites.push('profile-review-dialog.test.mjs');
+suites.push('review-services.test.mjs');
 suites.push('suite-runner.test.mjs');
 suites.push('premium-workshops.test.mjs');
 suites.push('premium-partner-ui.test.mjs');

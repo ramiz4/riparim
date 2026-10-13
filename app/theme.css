@@ -104,7 +104,7 @@ html.dark .user-menu-identity small { color: var(--theme-accent); }
 html.dark .primary { background: var(--primary); border-color: var(--primary); color: var(--primary-foreground); }
 html.dark .primary:hover:not(:disabled) { background: #0c685a; border-color: #0c685a; }
 html.dark :is(button, a, summary):focus-visible { outline-color: var(--ring); }
-html.dark :is(.popular button, .brand-tags>span, .specialty, .card-top .specialty, .demo-tag, .field) { background: var(--secondary); border-color: var(--border); color: var(--muted-foreground); }
+html.dark :is(.popular button, .brand-tags>span, .specialty, .card-top .specialty, .demo-tag) { background: var(--secondary); border-color: var(--border); color: var(--muted-foreground); }
 html.dark .popular button:hover { background: var(--accent); border-color: var(--input); color: var(--theme-accent); }
 html.dark .workshop-card:hover { border-color: var(--input); box-shadow: 0 9px 25px #00000026; }
 html.dark :is(.card-heading>span, .card-services, .card-footer>span, .rating>span, .rating.unrated>span, .rating.unrated) { color: var(--muted-foreground); }
@@ -173,7 +173,7 @@ html.dark :is(.journey-form input:focus, .journey-form textarea:focus, .moderati
 html.dark :is(.journey-form label>span, .account-identity span, .consent-block .consent>span>span, .upload, .call-box>span) { color: var(--muted-foreground); }
 html.dark :is(.note, .account-storage-notice, .consent-block, .upload, .evidence-note, .existing-evidence, .auth-settings-form, .auth-setup-needed, .auth-success) { background: var(--theme-surface); border-color: var(--border); color: var(--muted-foreground); }
 html.dark :is(.account-storage-copy, .auth-privacy) { border-color: var(--border); }
-html.dark :is(.help, .field>label, .review-meta, .account-session-note, .account-storage-copy p, .consent>span, .consent-help) { color: var(--muted-foreground)!important; }
+html.dark :is(.help, .review-meta, .account-session-note, .account-storage-copy p, .consent>span, .consent-help) { color: var(--muted-foreground)!important; }
 html.dark :is(.text-action, .trust-content>.text-action, .phone-number, .activation-switch span) { color: var(--theme-accent)!important; }
 html.dark :is(.phone-number>span, .existing-evidence span, .evidence-details summary) { color: var(--muted-foreground); }
 html.dark :is(.account-actions>a, .account-actions>button, .phone-display, .account-actions>span) { color: var(--theme-accent); }

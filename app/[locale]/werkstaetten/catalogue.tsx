@@ -1,7 +1,6 @@
 "use client";
 import {isErrorCode} from "@/lib/i18n/codes";
 import {publicDataError} from "@/lib/i18n/public-errors";
-import {valueLabel} from "@/lib/i18n/values";
 import {formatNumber} from "@/lib/i18n/format";
 import {useI18n} from "@/lib/i18n/client";
 import {useCallback,useEffect,useId,useLayoutEffect,useRef,useState} from "react";

@@ -78,8 +78,9 @@ try{
   width=viewportWidth;height=988;sentinelTop=120;document.documentElement.classList.toggle('dark',dark);styles(source);
   await act(async()=>window.dispatchEvent(new Event('resize')));
   const before=getComputedStyle(panel()),normal=geometry(before),headerHeight=pixels(getComputedStyle(document.documentElement).getPropertyValue('--site-header-height'));
-  assert.equal(pixels(before.borderRadius),12,'The normal mobile search preserves its rounded frame');
-  assert.equal(pixels(before.borderTopWidth),1,'The normal mobile frame retains its top border');
+  assert.equal(pixels(before.borderRadius),0,'The mobile search does not have an outer rounded box');
+  assert.equal(pixels(before.borderTopWidth),0,'The mobile search has no outer frame border');
+  assert.equal(before.backgroundColor,'rgba(0, 0, 0, 0)','The normal mobile search does not create a separate background box');
   assert.equal(normal.left,pixels(getComputedStyle(document.documentElement).getPropertyValue('--page-gutter')),'The normal search keeps the responsive page gutter');
   name.focus();
   await act(async()=>observers.at(-1).emit(headerHeight-1,false));
@@ -97,7 +98,7 @@ try{
   assert.equal(getComputedStyle(panel().querySelector('.catalogue-filter-fields')).display,'none','Mobile location and service controls move into the drawer');
   await act(async()=>observers.at(-1).emit(headerHeight+24,true));
   assert.deepEqual(geometry(getComputedStyle(panel())),normal,'Releasing restores the original frame without changing the controls');
-  assert.equal(pixels(getComputedStyle(panel()).borderTopLeftRadius||getComputedStyle(panel()).borderRadius),12,'Releasing restores the rounded mobile frame');
+  assert.equal(pixels(getComputedStyle(panel()).borderTopLeftRadius||getComputedStyle(panel()).borderRadius),0,'Releasing preserves the frameless mobile search');
   cases++;
  }
  await act(async()=>observers.at(-1).emit(2000,false));
@@ -110,7 +111,7 @@ try{
    assert.equal(getComputedStyle(panel()).position,'sticky','Desktop filters remain accessible beside the results');
    assert.equal(getComputedStyle(panel()).overflowY,'auto','Tall desktop filters remain scrollable');
   }else assert.notEqual(getComputedStyle(panel()).position,'sticky','Tablet and short mobile viewports preserve the static search');
-  assert.equal(pixels(getComputedStyle(panel()).borderTopLeftRadius||getComputedStyle(panel()).borderRadius),12);
+  assert.equal(pixels(getComputedStyle(panel()).borderTopLeftRadius||getComputedStyle(panel()).borderRadius),viewportWidth>1000?12:0);
  }
  console.log(JSON.stringify({catalogueDockingCasesPassed:cases,sourceAndProduction:true,liveRequests:false}));
 }finally{await act(async()=>root.unmount());dom.window.close();}

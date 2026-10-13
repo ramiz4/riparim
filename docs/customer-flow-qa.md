@@ -23,9 +23,9 @@ Die übrigen Freigabeprüfungen sind `npm run catalog:check`, `npx tsc --noEmit`
 
 ## Eigenständige eigene Bewertungen (Issue #61)
 
-`/bewertungen`, `/sq/bewertungen` und `/en/bewertungen` verwenden die reguläre Seitenstruktur mit Navigation, Überschrift und Aktualisieren. Die eigene Historie hat keinen Modalrahmen; Bearbeitung und Löschbestätigung behalten ihre vorhandenen Dialoge. Alte Landing-Links leiten serverseitig auf diese Seite weiter. Gültige `einreichung`-Ziele und die Sprache bleiben durch die bestehende Anmeldung erhalten; ungültige oder mehrdeutige Einreichungsziele werden verworfen.
+`/bewertungen`, `/sq/bewertungen` und `/en/bewertungen` verwenden die reguläre Seitenstruktur mit gemeinsamer Seitenbreite, Überschrift und einer Wiederholungsaktion bei Ladefehlern. Die eigene Historie hat keinen Modalrahmen; Bearbeitung und Löschbestätigung behalten ihre vorhandenen Dialoge. Alte Landing-Links leiten serverseitig auf diese Seite weiter. Gültige `einreichung`-Ziele und die Sprache bleiben durch die bestehende Anmeldung erhalten; ungültige oder mehrdeutige Einreichungsziele werden verworfen.
 
-Die beobachtbaren Testgrenzen sind die gerenderte React-Seite und Navigation sowie HTTP-, Authentifizierungs- und Metadatenverträge. `tests/my-reviews-page.test.mjs` prüft Direktaufruf, sicheren Anmelderückweg, Legacy-Weiterleitung, DE/SQ/EN-Metadaten und den Ladehinweis vor Hydration. `tests/notification-link-ui.test.mjs` prüft gezielte Einreichungen, die Rückkehr zur vollständigen Historie und erneut zum gezielten Ziel sowie abgewiesene fremde Einreichungen. `tests/my-reviews-ui.test.mjs` deckt Lade-, Leer- und Fehlerzustände, abgelaufene Sitzungen, private Downloads, Bearbeiten/Ergänzen/Vervollständigen, Pagination, Aktualisieren, Löschbestätigung einschließlich Fokus/Escape und Wiederholung sowie Kontoänderung mit verspäteter Antwort ab. Die vorhandenen API-Fixtures für Besitzrechte und Nachweise bleiben unverändert maßgeblich.
+Die beobachtbaren Testgrenzen sind die gerenderte React-Seite und Navigation sowie HTTP-, Authentifizierungs- und Metadatenverträge. `tests/my-reviews-page.test.mjs` prüft Direktaufruf, sicheren Anmelderückweg, Legacy-Weiterleitung, DE/SQ/EN-Metadaten und den Ladehinweis vor Hydration. `tests/notification-link-ui.test.mjs` prüft gezielte Einreichungen, die Rückkehr zur vollständigen Historie und erneut zum gezielten Ziel sowie abgewiesene fremde Einreichungen. `tests/my-reviews-ui.test.mjs` deckt Lade-, Leer- und Fehlerzustände, abgelaufene Sitzungen, private Downloads, Bearbeiten/Ergänzen/Vervollständigen, Pagination, Nachladen nach Dialogschluss und Fehlerwiederholung, Löschbestätigung einschließlich Fokus/Escape und Wiederholung sowie Kontoänderung mit verspäteter Antwort ab. Die vorhandenen API-Fixtures für Besitzrechte und Nachweise bleiben unverändert maßgeblich.
 
 Die Red-Schritte wurden mit `node tests/notification-link-ui.test.mjs`, `node tests/customer-localization-ui.test.mjs`, `node tests/my-reviews-page.test.mjs`, `node tests/notifications.test.mjs` und `node tests/my-reviews-ui.test.mjs` tatsächlich ausgeführt: Modalrahmen, alter Menü-/Mailrückweg, fehlende Weiterleitung, fehlender initialer Ladehinweis beziehungsweise fehlender Anmelderückweg nach Sitzungsablauf. Dieselben Befehle bestehen nach der Umsetzung. Alle Fixtures verwenden fiktive Konten und Inhalte; sie senden keine echten E-Mails und ändern keine Produktionsdaten. `tests/i18n-worker.test.mjs` prüft zusätzlich die privaten Dokumente und Legacy-Weiterleitungen in beiden tatsächlich gebauten Worker-Artefakten.
 
@@ -620,3 +620,57 @@ und Logout. Eine separate lokale PocketBase-0.40.5-Probe bestätigt dessen
 aktuelle REST-/ExternalAuth-Verträge mit synthetischen Konten. Ein echter
 Googleclient, produktiver SMTP-Versand und eine Live-Hash-/Kontoübernahme waren
 nicht Gegenstand dieser Probe; Voraussetzungen stehen in [auth-provider.md](auth-provider.md).
+
+## Bewertungsdialog und mehrere durchgeführte Arbeiten
+
+„Bewertung schreiben“ öffnet den Dialog auf dem Werkstattprofil mit `?bewerten=1`.
+Direktaufruf, Neuladen und Browser-Zurück/Vorwärts stellen dessen Zustand wieder
+her; bestehende `#bewerten`-Links bleiben gültig. Sprache und der geprüfte
+Suchrücksprung bleiben auch im Anmelderückweg erhalten. Geschlossene Entwürfe,
+einschließlich einer ausgewählten Datei, bleiben nur im Speicher der aktuellen
+Seite und sind an Konto und Werkstatt gebunden. Erfolgreiches Einreichen startet
+beim nächsten Öffnen einen leeren Entwurf. Der Anzeigename kommt weiterhin
+serverseitig aus dem bestätigten Konto; das Formular enthält keine Namenseingabe.
+
+Migration `0025_dark_pretty_boy.sql` ergänzt die nullable JSON-Spalte
+`visits.services` und übernimmt bestehende `service`-Werte als Einzelelementlisten.
+Die Migration muss vor dem neuen Anwendungscode angewendet werden. Das skalare
+`service`-Feld bleibt als primäre Leistung für ältere Clients bestehen. Neue
+Formulare senden `services` als JSON-Liste mit ein bis sechs bekannten Kategorien;
+der Server prüft jede Kategorie und entfernt Duplikate. Explizite Listen ersetzen
+die bisherige Auswahl. Ältere Bearbeitungsanfragen bewahren zusätzliche Kategorien,
+wenn die primäre Leistung unverändert bleibt. Eigene Einreichungen, Moderation und
+öffentliche Bewertungen zeigen sämtliche Leistungen in der gewählten Sprache.
+Berechtigungen, Besuchsnachweise und Freigabeanforderungen bleiben unverändert.
+
+`tests/profile-review-dialog.test.mjs` prüft URL-Zustand, Browsernavigation,
+Entwurf/File-Erhalt, Konto-/Werkstattgrenzen und den Anmelderückweg.
+`tests/combined-reviews.test.mjs` prüft Speichern, Lesen, Bearbeiten, Legacy-Clients,
+Moderation und abgewiesene Service-Listen mit isolierten SQLite-/R2-Fixtures.
+
+## Gemeinsamer Seitenrahmen und normale Auswahlfelder (13. Oktober 2026)
+
+Header, Inhaltsrahmen und Footer verwenden dieselbe `.wrap`-Breite: maximal
+1440 Pixel, mit 56 Pixeln Seitenrand auf Desktop, 32 bis 1000 Pixeln und 16
+bis 720 Pixeln Viewportbreite. Bewertungen, Einstellungen und Betriebsübersicht
+teilen Titel- und Abstandsvariablen. Die Einstellungen haben flache äußere
+Bereiche; die drei Theme-Karten bleiben erhalten. Der normale Bewertungskopf
+hat weder Zurück-Link noch Aktualisieren-Button. Ladefehler erlauben gezieltes
+Nachladen. Entfernt eine Löschung die auslösende Zeile, erhält die Überschrift
+Fokus; spätere Navigation und andere Fokusbewegungen werden weiterhin bewahrt.
+
+Formular-Picker verwenden `Field`/`FieldLabel` mit getrennten, zugeordneten Labels
+und umrandeten Controls. Die alten gefärbten `.field`-Container entfallen;
+das integrierte Suchlayout der Landingpage bleibt erhalten. Nur der Dialoginhalt
+scrollt. `overflow: clip` verhindert, dass Tastaturfokus den äußeren Dialograhmen
+verschiebt oder die Positionierung eines Select-Dropdowns in eine Größenschleife
+bringt.
+
+Die native lokale Abnahme prüfte Einstellungen, Bewertungen, Betrieb und Katalog
+bei 1491, 1030, 1000 und 390 Pixeln: Header, Inhalt und Footer hatten jeweils
+dieselben Kanten, ohne horizontales Überlaufen. Die Theme-Auswahl wurde mit Maus
+und Tastatur in Hell und System geprüft. Ort und Sichtbarkeit im Werkstatteditor
+hatten transparente Label-Container, verknüpfte Labels und umrandete Controls;
+die Sichtbarkeitsauswahl blieb mit Enter, Pfeiltasten und Escape stabil, mit
+unverschobenem Dialograhmen und ohne ResizeObserver-Meldung. Es wurden keine
+Werkstattänderungen gespeichert.
