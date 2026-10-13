@@ -1,6 +1,6 @@
 # Zentrale Werkstattdaten
 
-`data/workshops.json` ist die versionierte Quelle für Werkstattimporte. Sie enthält den aktuellen Bestand: **164 veröffentlichte Kfz-Servicebetriebe einschließlich Fahrzeugaufbereitung und keine Entwürfe**. Der Status jedes Datensatzes ist ausdrücklich gespeichert. Die Schätzung von ungefähr 1.700 Werkstätten stammt vom Nutzer; sie ist kein recherchierter Gesamtbestand und keine Vollständigkeitsbehauptung.
+`data/workshops.json` ist die versionierte Quelle für Werkstattimporte. Sie enthält den aktuellen Bestand: **172 veröffentlichte Kfz-Servicebetriebe einschließlich Fahrzeugaufbereitung und keine Entwürfe**. Der Status jedes Datensatzes ist ausdrücklich gespeichert. Die Schätzung von ungefähr 1.700 Werkstätten stammt vom Nutzer; sie ist kein recherchierter Gesamtbestand und keine Vollständigkeitsbehauptung.
 
 Die bisherigen getrennten Dateien für Profile und Google-Momentaufnahmen wurden in diese Quelle übernommen und entfernt. Namen, Kontakte, Quellen, Prüfzeitpunkte und stabile Riparim-Kennungen bleiben erhalten. Es werden keine Platzhalter für fehlende Werkstätten erzeugt.
 
@@ -257,3 +257,26 @@ WhatsApp und weitergehende Leistungen werden nicht aus Namen abgeleitet.
 Der Import ändert keine bisherigen Profile. Quellen, Rückstellungen und
 PR-/Release-/Liveabnahmestatus stehen im
 [Importmanifest](../data/import-2026-10-13-daily.json).
+
+## Manueller Zusatzlauf am 13. Oktober 2026
+
+Der Nutzer hat für einen manuellen Test der erweiterten Recherche eine Ausnahme
+von der Tagessperre beauftragt. Acht zusätzliche Betriebe in Vushtrri ergänzen
+den geprüften Quellbestand von 164 auf 172 Profile, ohne bestehende Profile zu
+ändern. Name, öffentliches Telefon, unabhängig belegter Standort und aktiver
+Maps-Eintrag wurden einzeln geprüft; alle Place-IDs stammen aus sichtbaren
+öffentlichen Maps-Links und wurden direkt mit unpassender Ersatzsuche geprüft.
+
+Bei ARDI belegt der öffentlich verlinkte Facebook-Routenpunkt denselben
+Geschäftspunkt trotz unterschiedlicher Straßenbezeichnungen. Daja nennt im
+eigenen Profil nur Vushtrri mit Postleitzahl; der Katalog übernimmt nur diesen
+Ort und weist auf die nicht unabhängig belegte genaue Straße hin. Es werden
+keine Google-Straßen, Koordinaten, Bewertungen oder Öffnungszeiten kopiert.
+
+DE-Originale und SQ-/EN-Overlays verwenden den zentralen Übersetzungsvertrag.
+Öffentlich belegte Geschäfts-E-Mails werden mit Quelle und Prüfzeit im
+Zusatzlauf des Tagesmanifests erfasst. Eine fehlende E-Mail sperrt die
+Veröffentlichung nicht; Zustellbarkeit und Werbeeinwilligung werden nicht
+behauptet. Nachrichten wurden nicht versendet. PR, Release und Live-Abnahme
+werden im [bestehenden Tagesmanifest](../data/import-2026-10-13-daily.json)
+beziehungsweise dem lokalen Abschlussreceipt dokumentiert.

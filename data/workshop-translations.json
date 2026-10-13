@@ -1182,6 +1182,36 @@
       }
     },
     {
+      "id": "auto-service-ardi-vushtrri",
+      "sourceHash": "1891f2a37c28d4ffd01eb4774bd3decf6ef338d26d77eb4e369156d5655506ff",
+      "sq": {
+        "specialty": "Zinxhirë motori · Servisim klime",
+        "description": "Servis në Vushtrri me ndërrime të dokumentuara të zinxhirëve të motorit dhe servisim klime sipas publikimeve të biznesit.",
+        "serviceDetails": [
+          "Ndërrim i zinxhirëve të motorit",
+          "Servisim klime me kontroll të rrjedhjeve dhe mbushje"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Profili publik i biznesit: kontakt dhe vendndodhje",
+          "Publikime të biznesit përmes AutoYas: ndërrim zinxhirësh motori dhe servisim klime"
+        ]
+      },
+      "en": {
+        "specialty": "Timing chains · Air conditioning",
+        "description": "Workshop in Vushtrri with documented timing-chain replacements and air-conditioning servicing according to published business posts.",
+        "serviceDetails": [
+          "Timing-chain replacement",
+          "Air-conditioning servicing with leak checks and refilling"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business profile: contact and location",
+          "Business posts via AutoYas: timing-chain replacement and air-conditioning servicing"
+        ]
+      }
+    },
+    {
       "id": "auto-service-bardhi-peja",
       "sourceHash": "1c3a77227a551189a7a8f808513a430490f89874bc93a3e2bdd33a63bc6c4da0",
       "sq": {
@@ -1204,6 +1234,32 @@
         "phoneNote": "Public directory contact (GjithëBiznesi); not confirmed by the business",
         "sourceTitles": [
           "GjithëBiznesi: published name · address · telephone · vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "auto-service-besi-vushtrri",
+      "sourceHash": "f1104831a7ad34d38f76e93f3a160e99b7eecf72df50843fae30e58dc64b6069",
+      "sq": {
+        "specialty": "Punime karrocerie · Regjistrim në direktori",
+        "description": "Regjistrim në direktori publike për punime karrocerie në Vushtrri. Konfirmoni drejtpërdrejt me biznesin kontaktin dhe shërbimet konkrete.",
+        "serviceDetails": [
+          "Punime karrocerie sipas direktorisë publike."
+        ],
+        "phoneNote": "Kontakt publik nga direktoria; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktoria publike: kontakt, vendndodhje dhe punime karrocerie"
+        ]
+      },
+      "en": {
+        "specialty": "Bodywork · Directory listing",
+        "description": "Public directory listing for vehicle bodywork in Vushtrri. Confirm contact availability and specific services directly with the business.",
+        "serviceDetails": [
+          "Vehicle bodywork according to the public directory."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public directory: contact, location and bodywork"
         ]
       }
     },
@@ -1380,6 +1436,62 @@
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category",
           "Contact, location and passenger-car service cross-check dated 5 October 2026"
+        ]
+      }
+    },
+    {
+      "id": "auto-service-prekazi-vushtrri",
+      "sourceHash": "6ec640298cfe3c1b4a288fb3b59ff93b075a4d11fbd9e1d878aa24f110642515",
+      "sq": {
+        "specialty": "Servisim automjetesh · Regjistrim në direktori",
+        "description": "Servis në Vushtrri me kontakt publik të biznesit. Direktoria e pavarur e rendit për mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt shërbimet konkrete.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh sipas direktorisë publike."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Profili publik i biznesit: kontakt dhe vendndodhje",
+          "Direktoria publike: kategori e servisit të automjeteve dhe telefon"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing · Directory listing",
+        "description": "Workshop in Vushtrri with a public business contact. The independent directory lists vehicle maintenance and repair; confirm the specific scope directly.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair according to the public directory."
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business profile: contact and location",
+          "Public directory: vehicle-service category and telephone"
+        ]
+      }
+    },
+    {
+      "id": "auto-service-rashani-vushtrri",
+      "sourceHash": "f49331d5ad05d3fd94ee94db969112b815636acadca8f1ed6e6cf26012ebc13f",
+      "sq": {
+        "specialty": "Servisim automjetesh · Regjistrim në direktori",
+        "description": "Regjistrim publik i një servisi në Vushtrri. Konfirmoni drejtpërdrejt me biznesin kontaktin dhe shërbimet konkrete.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh sipas direktorisë publike."
+        ],
+        "phoneNote": "Kontakt publik nga direktoria; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktoria publike: kontakt, vendndodhje dhe kategori e servisit të automjeteve",
+          "Regjistrimi i biznesit: emër, telefon dhe vendndodhje"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing · Directory listing",
+        "description": "Public workshop listing in Vushtrri. Confirm contact availability and specific services directly with the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair according to the public directory."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public directory: contact, location and vehicle-service category",
+          "Business listing: name, telephone and location"
         ]
       }
     },
@@ -2330,6 +2442,34 @@
       }
     },
     {
+      "id": "auto-servis-naimi-vushtrri",
+      "sourceHash": "8208c49d00b20dcd4357d3bdd28e2c5fb31106301e58984ca71223306e138872",
+      "sq": {
+        "specialty": "Servisim automjetesh · Diagnostikim",
+        "description": "Servisim dhe diagnostikim automjetesh në Vushtrri sipas profilit publik të biznesit.",
+        "serviceDetails": [
+          "Servisim automjetesh",
+          "Diagnostikim automjetesh"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Profili publik i biznesit: kontakt, vendndodhje dhe shërbime"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing · Diagnostics",
+        "description": "Vehicle servicing and diagnostics in Vushtrri according to the public business profile.",
+        "serviceDetails": [
+          "Vehicle servicing",
+          "Vehicle diagnostics"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business profile: contact, location and services"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-nazi-drenas",
       "sourceHash": "8bbef3d3a03ffe7aca86ed638e5022bb57002e85b1f08f567e78fec8cadc9236",
       "sq": {
@@ -2780,6 +2920,34 @@
       }
     },
     {
+      "id": "autodetailingdaja-vushtrri",
+      "sourceHash": "97a7cfdf5c0aa153bbb7feebf499abe5eb03ff3d21a85d867c30f8c4ba235f4a",
+      "sq": {
+        "specialty": "Polirim automjetesh · Kujdes për vetura",
+        "description": "Polirim dhe pastrim automjetesh sipas profilit publik të biznesit. Biznesi shënon Vushtrrinë si vendndodhje; adresa e saktë e rrugës nuk është vërtetuar në mënyrë të pavarur.",
+        "serviceDetails": [
+          "Polirim automjetesh",
+          "Pastrim automjetesh"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Profili publik i biznesit: kontakt, vendndodhje dhe polirim automjetesh"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle polishing · Car care",
+        "description": "Vehicle polishing and cleaning according to the public business profile. The business gives Vushtrri as its location; an exact street address has not been independently verified.",
+        "serviceDetails": [
+          "Vehicle polishing",
+          "Vehicle cleaning"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business profile: contact, location and vehicle polishing"
+        ]
+      }
+    },
+    {
       "id": "autodiagnoza-bardhi",
       "sourceHash": "b582c5169c05f5962c41193829b3b211c157c6312332c78ba4ce8d5f66912a4a",
       "sq": {
@@ -2998,6 +3166,32 @@
         "sourceTitles": [
           "Public directory: name, contact and vehicle service category",
           "Directory: name, phone and Plus Code address checked again"
+        ]
+      }
+    },
+    {
+      "id": "autoservice-a-m-vushtrri",
+      "sourceHash": "ec0aeb47d8c37b1a2dfbeca59051ec1afd463ca8020af83de3f74536299046ff",
+      "sq": {
+        "specialty": "Servisim automjetesh · Regjistrim në direktori",
+        "description": "Regjistrim publik i një servisi në Vushtrri. Konfirmoni drejtpërdrejt me biznesin kontaktin dhe shërbimet konkrete.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh sipas direktorisë publike."
+        ],
+        "phoneNote": "Kontakt publik nga direktoria; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktoria publike: kontakt, vendndodhje dhe kategori e servisit të automjeteve"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing · Directory listing",
+        "description": "Public workshop listing in Vushtrri. Confirm contact availability and specific services directly with the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair according to the public directory."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public directory: contact, location and vehicle-service category"
         ]
       }
     },
@@ -4340,6 +4534,32 @@
         "phoneNote": "Public business contact; reachability not confirmed",
         "sourceTitles": [
           "Business website: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "sheki-benz-vushtrri",
+      "sourceHash": "89bf088a4aa48d944b6f966da0a6e07172c9ccb81111f9bfd5a637d1e386b75a",
+      "sq": {
+        "specialty": "Servisim automjetesh · Regjistrim në direktori",
+        "description": "Regjistrim publik i një servisi në Vushtrri. Konfirmoni drejtpërdrejt me biznesin kontaktin dhe shërbimet konkrete.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh sipas direktorisë publike."
+        ],
+        "phoneNote": "Kontakt publik nga direktoria; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktoria publike: kontakt, vendndodhje dhe kategori e servisit të automjeteve"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing · Directory listing",
+        "description": "Public workshop listing in Vushtrri. Confirm contact availability and specific services directly with the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair according to the public directory."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public directory: contact, location and vehicle-service category"
         ]
       }
     },

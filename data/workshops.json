@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-13T01:09:57.859Z",
+  "updatedAt": "2026-10-13T07:47:21.252Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 164,
+    "published": 172,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "Alle 164 veröffentlichten Kfz-Servicebetriebe besitzen einzeln bestätigte Google-Place-IDs. Neue Identitäten werden über die öffentliche Maps-Oberfläche gegen unabhängige Kontakt-, Standort- und Leistungsbelege geprüft; keine offenen Entwürfe.",
-    "matchedPlaceIds": 164,
+    "reason": "Alle 172 veröffentlichten Kfz-Servicebetriebe besitzen einzeln bestätigte Google-Place-IDs. Neue Identitäten werden über die öffentliche Maps-Oberfläche gegen unabhängige Kontakt-, Standort- und Leistungsbelege geprüft; keine offenen Entwürfe.",
+    "matchedPlaceIds": 172,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -2169,6 +2169,57 @@
       }
     },
     {
+      "id": "auto-service-ardi-vushtrri",
+      "name": "Auto Service ARDI",
+      "city": "Vushtrri",
+      "address": "Luan Haradinaj, Vushtrri 42000",
+      "phone": "+38349400386",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Motor & Getriebe",
+        "Reifen & Klima"
+      ],
+      "serviceDetails": [
+        "Steuerkettenwechsel",
+        "Klimaservice mit Dichtheitsprüfung und Befüllung"
+      ],
+      "languages": [],
+      "specialty": "Steuerketten · Klimaservice",
+      "description": "Werkstatt in Vushtrri mit dokumentierten Steuerkettenwechseln und Klimaservice laut veröffentlichten Betriebsbeiträgen.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/AutoServiceArdi/",
+          "title": "Öffentliches Betriebsprofil: Kontakt und Standort",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.autoyas.com/XK/Vushtrri/108632047402437/Auto-Service-ARDI",
+          "title": "Betriebsbeiträge über AutoYas: Steuerkettenwechsel und Klimaservice",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-13",
+      "status": "published",
+      "updatedAt": "2026-10-13T07:42:24.004Z",
+      "google": {
+        "placeId": "ChIJx9DKuGFbUxMRYxVaw3g7KGw",
+        "matchedAt": "2026-10-13T07:42:24.004Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.facebook.com/AutoServiceArdi/",
+            "https://www.autoyas.com/XK/Vushtrri/108632047402437/Auto-Service-ARDI"
+          ],
+          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: Name, unabhängig veröffentlichtes Telefon und Standort stimmen überein; aktiver Eintrag. Place-ID aus sichtbarem !19s-Link direkt mit falscher Ersatzsuche rückgeprüft. Keine API-/SDK-Abfragen und keine Inhaberbestätigung."
+        }
+      }
+    },
+    {
       "id": "auto-service-bardhi-peja",
       "name": "Auto Service Bardhi",
       "city": "Peja",
@@ -2218,6 +2269,49 @@
             "https://www.google.com/maps/?cid=983827630900832330"
           ],
           "note": "Individuelle Google-Karte anhand unabhängig belegter Telefonnummer, Werkstattname und präziser Adresse bestätigt; CID und tatsächliche Place ID bezeichnen denselben Eintrag. Keine Google-Geschäftsangaben oder Bewertungen in die Profilquelle übernommen."
+        }
+      }
+    },
+    {
+      "id": "auto-service-besi-vushtrri",
+      "name": "Auto service BESI",
+      "city": "Vushtrri",
+      "address": "RXPH+QWF, Vushtrri 42000",
+      "phone": "+38349205441",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Karosserie & Lack"
+      ],
+      "serviceDetails": [
+        "Karosseriearbeiten laut öffentlichem Verzeichnis."
+      ],
+      "languages": [],
+      "specialty": "Karosseriearbeiten · Verzeichniseintrag",
+      "description": "Öffentlicher Verzeichniseintrag für Karosseriearbeiten in Vushtrri. Erreichbarkeit und konkreten Leistungsumfang direkt beim Betrieb bestätigen.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.gjithebiznesi.com/XK/auto-service-besi-049-205-441",
+          "title": "Öffentliches Verzeichnis: Kontakt, Standort und Karosseriearbeiten",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-13",
+      "status": "published",
+      "updatedAt": "2026-10-13T07:42:24.004Z",
+      "google": {
+        "placeId": "ChIJETVBwuZbUxMRaPlrks7hb24",
+        "matchedAt": "2026-10-13T07:42:24.004Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-service-besi-049-205-441"
+          ],
+          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: Name, unabhängig veröffentlichtes Telefon und Standort stimmen überein; aktiver Eintrag. Place-ID aus sichtbarem !19s-Link direkt mit falscher Ersatzsuche rückgeprüft. Keine API-/SDK-Abfragen und keine Inhaberbestätigung."
         }
       }
     },
@@ -2556,6 +2650,104 @@
             "https://faqet-e-verdha.cybo.com/XK-biz/auto-service-muslija"
           ],
           "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+        }
+      }
+    },
+    {
+      "id": "auto-service-prekazi-vushtrri",
+      "name": "Auto Servis PREKAZI",
+      "city": "Vushtrri",
+      "address": "Magjistralja Prishtinë-Vushtrri, Vushtrri 42000",
+      "phone": "+38344296650",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Wartung und Reparatur von Fahrzeugen laut öffentlichem Verzeichnis."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice · Verzeichniseintrag",
+      "description": "Werkstatt in Vushtrri mit öffentlichem Betriebskontakt. Das unabhängige Verzeichnis führt Fahrzeugwartung und Reparatur; den konkreten Umfang direkt klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/p/Auto-Servis-PREKAZI-100063530080689/",
+          "title": "Öffentliches Betriebsprofil: Kontakt und Standort",
+          "kind": "official"
+        },
+        {
+          "url": "https://bedrijvengids.cybo.com/XK/vushtrri/autogarage?d=c",
+          "title": "Öffentliches Verzeichnis: Kfz-Servicekategorie und Telefon",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-13",
+      "status": "published",
+      "updatedAt": "2026-10-13T07:42:24.004Z",
+      "google": {
+        "placeId": "ChIJo3BGCoRfUxMR4tyWK4gFYGU",
+        "matchedAt": "2026-10-13T07:42:24.004Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.facebook.com/p/Auto-Servis-PREKAZI-100063530080689/",
+            "https://bedrijvengids.cybo.com/XK/vushtrri/autogarage?d=c"
+          ],
+          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: Name, unabhängig veröffentlichtes Telefon und Standort stimmen überein; aktiver Eintrag. Place-ID aus sichtbarem !19s-Link direkt mit falscher Ersatzsuche rückgeprüft. Keine API-/SDK-Abfragen und keine Inhaberbestätigung."
+        }
+      }
+    },
+    {
+      "id": "auto-service-rashani-vushtrri",
+      "name": "Auto Service RASHANI",
+      "city": "Vushtrri",
+      "address": "RXFF+VP, Vushtrri 42000",
+      "phone": "+38349684954",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Wartung und Reparatur von Fahrzeugen laut öffentlichem Verzeichnis."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice · Verzeichniseintrag",
+      "description": "Öffentlicher Werkstatteintrag in Vushtrri. Erreichbarkeit und konkreten Leistungsumfang direkt beim Betrieb bestätigen.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.cybo.com/XK/vushtrri/car-repair/",
+          "title": "Öffentliches Verzeichnis: Kontakt, Standort und Kfz-Servicekategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.veturaneshitje.com/biznese/132/auto-service-rashani",
+          "title": "Betriebseintrag: Name, Telefon und Standort",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-13",
+      "status": "published",
+      "updatedAt": "2026-10-13T07:42:24.004Z",
+      "google": {
+        "placeId": "ChIJo0dV0UtbUxMRiQulO0Xp4cU",
+        "matchedAt": "2026-10-13T07:42:24.004Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.cybo.com/XK/vushtrri/car-repair/",
+            "https://www.veturaneshitje.com/biznese/132/auto-service-rashani"
+          ],
+          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: Name, unabhängig veröffentlichtes Telefon und Standort stimmen überein; aktiver Eintrag. Place-ID aus sichtbarem !19s-Link direkt mit falscher Ersatzsuche rückgeprüft. Keine API-/SDK-Abfragen und keine Inhaberbestätigung."
         }
       }
     },
@@ -4303,6 +4495,51 @@
       }
     },
     {
+      "id": "auto-servis-naimi-vushtrri",
+      "name": "Auto Servis Naimi",
+      "city": "Vushtrri",
+      "address": "Bedri Pejani, Vushtrri 42000",
+      "phone": "+38344198428",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung",
+        "Diagnose & Elektronik"
+      ],
+      "serviceDetails": [
+        "Fahrzeugservice",
+        "Fahrzeugdiagnose"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice · Diagnose",
+      "description": "Fahrzeugservice und Diagnose in Vushtrri laut öffentlichem Betriebsprofil.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/ServisNaimi/",
+          "title": "Öffentliches Betriebsprofil: Kontakt, Standort und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-13",
+      "status": "published",
+      "updatedAt": "2026-10-13T07:42:24.004Z",
+      "google": {
+        "placeId": "ChIJS-1TM8VbUxMR2JYNr3M3av4",
+        "matchedAt": "2026-10-13T07:42:24.004Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.facebook.com/ServisNaimi/"
+          ],
+          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: Name, unabhängig veröffentlichtes Telefon und Standort stimmen überein; aktiver Eintrag. Place-ID aus sichtbarem !19s-Link direkt mit falscher Ersatzsuche rückgeprüft. Keine API-/SDK-Abfragen und keine Inhaberbestätigung."
+        }
+      }
+    },
+    {
       "id": "auto-servis-nazi-drenas",
       "name": "Auto Servis Nazi",
       "city": "Drenas",
@@ -5135,6 +5372,50 @@
       }
     },
     {
+      "id": "autodetailingdaja-vushtrri",
+      "name": "Autodetailingdaja",
+      "city": "Vushtrri",
+      "address": "Vushtrri 42000",
+      "phone": "+38349457010",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Karosserie & Lack"
+      ],
+      "serviceDetails": [
+        "Polieren von Fahrzeugen",
+        "Fahrzeugreinigung"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugpolitur · Autopflege",
+      "description": "Fahrzeugpolitur und Reinigung laut öffentlichem Betriebsprofil. Der Betrieb nennt Vushtrri als Standort; eine genaue Straßenadresse ist nicht unabhängig belegt.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/61564172242981/",
+          "title": "Öffentliches Betriebsprofil: Kontakt, Ort und Fahrzeugpolitur",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-13",
+      "status": "published",
+      "updatedAt": "2026-10-13T07:42:24.004Z",
+      "google": {
+        "placeId": "ChIJBWVI9y9bUxMRqVLTgHMJyMc",
+        "matchedAt": "2026-10-13T07:42:24.004Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.facebook.com/61564172242981/"
+          ],
+          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: Name, unabhängig veröffentlichtes Telefon und Ort Vushtrri stimmen überein; aktiver Eintrag. Place-ID aus sichtbarem !19s-Link mit falscher Ersatzsuche rückgeprüft. Straßenangabe nicht übernommen, nur unabhängig belegter Ort veröffentlicht. Keine Inhaberbestätigung."
+        }
+      }
+    },
+    {
       "id": "autodiagnoza-bardhi",
       "name": "Autodiagnoza Bardhi",
       "city": "Ferizaj",
@@ -5555,6 +5836,49 @@
             "https://www.cybo.com/XK/ferizaj/car-repair"
           ],
           "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
+        }
+      }
+    },
+    {
+      "id": "autoservice-a-m-vushtrri",
+      "name": "Autoservice A&M",
+      "city": "Vushtrri",
+      "address": "Rr. Halit Cakaj 14, Vushtrri 42000",
+      "phone": "+38344151645",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Wartung und Reparatur von Fahrzeugen laut öffentlichem Verzeichnis."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice · Verzeichniseintrag",
+      "description": "Öffentlicher Werkstatteintrag in Vushtrri. Erreichbarkeit und konkreten Leistungsumfang direkt beim Betrieb bestätigen.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://bedrijvengids.cybo.com/XK/vushtrri/autogarage?d=c",
+          "title": "Öffentliches Verzeichnis: Kontakt, Standort und Kfz-Servicekategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-13",
+      "status": "published",
+      "updatedAt": "2026-10-13T07:42:24.004Z",
+      "google": {
+        "placeId": "ChIJ2X6qZsdfUxMR9yG24eMSxGk",
+        "matchedAt": "2026-10-13T07:42:24.004Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://bedrijvengids.cybo.com/XK/vushtrri/autogarage?d=c"
+          ],
+          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: Name, unabhängig veröffentlichtes Telefon und Standort stimmen überein; aktiver Eintrag. Place-ID aus sichtbarem !19s-Link direkt mit falscher Ersatzsuche rückgeprüft. Keine API-/SDK-Abfragen und keine Inhaberbestätigung."
         }
       }
     },
@@ -8033,6 +8357,49 @@
             "https://shaladetailing.com/"
           ],
           "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+        }
+      }
+    },
+    {
+      "id": "sheki-benz-vushtrri",
+      "name": "Sheki Benz- AutoMotive Body Shop",
+      "city": "Vushtrri",
+      "address": "RX5Q+HM2, Rr. Galip Badivuku, Vushtrri 42000",
+      "phone": "+38349196189",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Wartung und Reparatur von Fahrzeugen laut öffentlichem Verzeichnis."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice · Verzeichniseintrag",
+      "description": "Öffentlicher Werkstatteintrag in Vushtrri. Erreichbarkeit und konkreten Leistungsumfang direkt beim Betrieb bestätigen.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://gulesider-da.cybo.com/XK-biz/sheki-benz-automotive-body-shop",
+          "title": "Öffentliches Verzeichnis: Kontakt, Standort und Kfz-Servicekategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-13",
+      "status": "published",
+      "updatedAt": "2026-10-13T07:42:24.004Z",
+      "google": {
+        "placeId": "ChIJD8VgB2xdUxMRkwgUQ8ER2Go",
+        "matchedAt": "2026-10-13T07:42:24.004Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://gulesider-da.cybo.com/XK-biz/sheki-benz-automotive-body-shop"
+          ],
+          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: Name, unabhängig veröffentlichtes Telefon und Standort stimmen überein; aktiver Eintrag. Place-ID aus sichtbarem !19s-Link direkt mit falscher Ersatzsuche rückgeprüft. Keine API-/SDK-Abfragen und keine Inhaberbestätigung."
         }
       }
     },
