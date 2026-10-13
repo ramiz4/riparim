@@ -32,7 +32,7 @@ async function save(request:Request,update:boolean){
   const id=update?String(body.id??""):String(body.id??crypto.randomUUID());
   if(!/^[a-z0-9][a-z0-9-]{2,80}$/.test(id))return json({error:"Ungültige Profilkennung.",errorCode:"workshop_invalid_id"},400);
   profile=validateProfile(body,id);
-  if(body.emails!==undefined)emails=workshopEmailEditsSchema.parse(body.emails);
+  if(body.emailEntries!==undefined)emails=workshopEmailEditsSchema.parse(body.emailEntries);
  }catch(e){return json({error:e instanceof ValidationError?e.message:"Bitte prüfe die Eingaben.",errorCode:e instanceof ValidationError?e.code:"invalid_request"},400);}
  try{
   const all=await listWorkshops(true),existing=all.find(w=>w.id===profile.id);

@@ -88,6 +88,8 @@ können gleichzeitig verifiziert sein.
 
 Inhaberänderungen verwenden die vorhandenen Entwürfe und Moderation;
 Adminänderungen verwenden die bestehende Berechtigung und Profilrevision.
+Der Schreibvertrag verwendet `emailEntries` mit Statuswerten; die öffentliche
+Stringliste `emails` wird bei Profilupdates nicht als Schreibauftrag interpretiert.
 Beide Formulare beginnen mit der aktuell wirksamen Liste und erhalten auch
 deaktivierte redaktionelle Einträge. Unveränderte Listen werden ausgelassen.
 Ändert die UI eine Adresse, setzt sie deren vorherige Verifizierung zurück.
