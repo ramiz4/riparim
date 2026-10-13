@@ -22,6 +22,9 @@ html.dark .landing-page .landing-hero-search .search-box label>span{color:var(--
 }
 @media(max-width:1000px){
  .landing-hero-shade{background:linear-gradient(90deg,rgba(3,24,26,.94),rgba(3,24,26,.74) 47%,rgba(3,24,26,.18))}
+ .landing-hero-content h1{margin-top:auto}
+ .landing-hero-content>p{margin-bottom:64px}
+ .landing-page .landing-hero-search{margin-top:0}
 }
 @media(max-width:720px){
  .landing-hero-image{object-position:69% center}
