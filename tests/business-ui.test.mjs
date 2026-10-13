@@ -21,7 +21,7 @@ globalThis.fetch=async(url,options)=>{
  if(method==='POST'){
   if(mode==='failure')return Response.json({error:'Fixture duplicate or invalid draft',errorCode:'business_draft_conflict'},{status:409});
   if(body.kind==='claim'){assert.deepEqual(Object.keys(body),['kind','input']);assert.deepEqual(Object.keys(body.input),body.input.file?['workshopId','evidence','file']:['workshopId','evidence']);records.claims.push(requestView('00000000-0000-4000-8000-000000000001','claim'));return Response.json({status:'pending'},{status:201});}
-  assert.equal(body.kind,'change');assert.deepEqual(Object.keys(body.profile).sort(),['description','phone','phoneNote','serviceDetails','services','whatsapp'].sort());
+  assert.equal(body.kind,'change');assert.deepEqual(Object.keys(body.profile).sort(),['description','openingHours','phone','phoneNote','serviceDetails','services','whatsapp'].sort());
   const commit=()=>{records.changes.push({...requestView('00000000-0000-4000-8000-000000000002','change'),profile:body.profile});return Response.json({status:'pending'},{status:201});};
   if(mode==='pending')return new Promise(resolve=>pending={resolve,commit});return commit();
  }
@@ -53,6 +53,14 @@ try{
  check(document.querySelector('h2').textContent==='Deine Profile'&&document.querySelector('.business-panel').textContent.includes('Änderungen werden erst nach Freigabe öffentlich'),'Owners can find profile editing and understand the separate publication approval');
  await click(button('Profil bearbeiten'));
  check(control('Telefon').value===workshop.phone&&control('Beschreibung').value===workshop.description,'The owner editor uses the current approved contact and description');
+ check(document.querySelector('.opening-enabled input')&&!document.querySelector('.opening-day'),'Hours start explicitly unspecified');
+ await click(document.querySelector('.opening-enabled input'));check(document.querySelectorAll('.opening-day').length===7,'Owner can edit all seven weekdays');
+ const monday=document.querySelector('.opening-day select');await act(async()=>{Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype,'value').set.call(monday,'open');monday.dispatchEvent(new Event('change',{bubbles:true}));});
+ check(document.querySelectorAll('.opening-interval').length===1,'Opening a day starts one editable interval');
+ await click(button('Montag auf Montag–Freitag übernehmen'));check(document.querySelectorAll('.opening-interval').length===5,'Copy fills only weekdays');
+ await click(button('Ausnahme hinzufügen'));check(document.querySelector('.opening-exception input[type="date"]'),'Exception dates have an accessible native date control');
+ await click(document.querySelector('.opening-exception button'));
+ await click(document.querySelector('.opening-enabled input'));check(!document.querySelector('.opening-day'),'Owner can clear their hours');
  check(document.querySelector('.business-panel').textContent.includes('Quellen und Freigabestatus bleiben geschützt'),'The editor explains protected identity and publication fields');
  await type(control('Beschreibung'),workshop.description+' Additional documented repair services.');mode='pending';await submit(control('Telefon').form);
  check(document.querySelector('.business-form fieldset').disabled,'A pending draft disables conflicting editor actions');

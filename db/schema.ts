@@ -10,6 +10,7 @@ export const workshopProfiles = sqliteTable("workshops", {
  phone:text("phone").notNull(),phoneNote:text("phone_note").notNull().default(""),whatsapp:text("whatsapp").notNull().default(""),
  brands:text("brands").notNull(),services:text("services").notNull(),serviceDetails:text("service_details").notNull().default("[]"),languages:text("languages").notNull().default("[]"),
  specialty:text("specialty").notNull(),description:text("description").notNull(),lat:text("lat"),lng:text("lng"),
+ openingHours:text("opening_hours"),openingHoursConfirmedAt:text("opening_hours_confirmed_at"),
  sources:text("sources").notNull(),checkedAt:text("checked_at").notNull(),status:text("status").notNull().default("draft"),updatedAt:text("updated_at").notNull()
 },table=>[index("idx_workshops_status_city").on(table.status,table.city)]);
 export const catalogState=sqliteTable("catalog_state",{key:text("key").primaryKey(),value:text("value").notNull()});

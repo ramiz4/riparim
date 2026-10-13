@@ -1,6 +1,7 @@
+import {weekdayDe,weekdaySq,weekdayEn} from "./weekday-messages";
 import {defineMessages,type MessageShape} from "./message-contract";
 
-export const publicDe={
+export const publicDe=/* @__PURE__ */ Object.assign({},weekdayDe,{
  "heroCar": "Dein Auto.",
  "partnerTitle": "Premium-Partner",
  "partnerAd": "Anzeige · Premium-Partner",
@@ -78,7 +79,7 @@ export const publicDe={
  "ratingAria": "{rating} von 5 Sternen, {count} Riparim-Bewertungen",
  "googleRatingAria": "{rating} von 5 Sternen auf Google",
  "noReviews": "Noch keine Bewertungen",
- "ratingExplanation": "Riparim: freigegebene Bewertungen mit geprüftem Besuchsnachweis. Google Maps: aktuelle Sterne und Rezensionen direkt von Google.",
+ "ratingExplanation": "Riparim: freigegebene Bewertungen mit geprüftem Besuchsnachweis.",
  "googleRatingSource": "Sterne und Anzahl direkt von Google Maps.",
  "googleCheck": "Aktuelle Sterne und Rezensionen direkt auf Google Maps prüfen.",
  "googleNoReviews": "Noch keine Google-Rezensionen",
@@ -206,13 +207,6 @@ export const publicDe={
  "profileDescription": "Leistungen, Kontakt und freigegebene Bewertungen für {name} in {city}.",
  "privacyTitle": "Datenschutz · Riparim",
  "privacyDescription": "Informationen zur Anmeldung, Bewertungen, privaten Besuchsnachweisen und Google-Diensten bei Riparim.",
- "monday": "Montag",
- "tuesday": "Dienstag",
- "wednesday": "Mittwoch",
- "thursday": "Donnerstag",
- "friday": "Freitag",
- "saturday": "Samstag",
- "sunday": "Sonntag",
  "searchToolTitle": "Werkstattsuche einstellen",
  "searchToolDescription": "Öffne das öffentliche Werkstattverzeichnis in Kosovo mit Leistungs- und Ortsfiltern. Kontaktiert keinen Betrieb, sendet keine Nachricht und bucht keine Reparatur.",
  "translationFallback": "Diese Angaben werden in der Originalsprache angezeigt. Eine aktuelle Übersetzung ist noch nicht verfügbar.",
@@ -221,9 +215,9 @@ export const publicDe={
   "one": "{count} Werkstatt",
   "other": "{count} Werkstätten"
  }
-} as const;
+} as const);
 const check=defineMessages<typeof publicDe>();
-export const publicSq=/* @__PURE__ */ check({
+export const publicSq=/* @__PURE__ */ check(/* @__PURE__ */ Object.assign({},weekdaySq,{
  "heroCar": "Makina jote.",
  "partnerTitle": "Partnerë Premium",
  "partnerAd": "Reklamë · Partner Premium",
@@ -301,7 +295,7 @@ export const publicSq=/* @__PURE__ */ check({
  "ratingAria": "{rating} nga 5 yje, {count} vlerësime në Riparim",
  "googleRatingAria": "{rating} nga 5 yje në Google",
  "noReviews": "Ende pa vlerësime",
- "ratingExplanation": "Riparim: vlerësime të miratuara me dëshmi vizite të kontrolluar. Google Maps: yjet dhe recensionet aktuale drejtpërdrejt nga Google.",
+ "ratingExplanation": "Riparim: vlerësime të miratuara me dëshmi vizite të kontrolluar.",
  "googleRatingSource": "Yjet dhe numri drejtpërdrejt nga Google Maps.",
  "googleCheck": "Kontrollo yjet dhe recensionet aktuale drejtpërdrejt në Google Maps.",
  "googleNoReviews": "Ende pa recensione në Google",
@@ -429,13 +423,6 @@ export const publicSq=/* @__PURE__ */ check({
  "profileDescription": "Shërbimet, kontakti dhe vlerësimet e miratuara për {name} në {city}.",
  "privacyTitle": "Privatësia · Riparim",
  "privacyDescription": "Informacion mbi hyrjen, vlerësimet, dëshmitë private të vizitave dhe shërbimet e Google në Riparim.",
- "monday": "E hënë",
- "tuesday": "E martë",
- "wednesday": "E mërkurë",
- "thursday": "E enjte",
- "friday": "E premte",
- "saturday": "E shtunë",
- "sunday": "E diel",
  "searchToolTitle": "Vendos kërkimin e serviseve",
  "searchToolDescription": "Hap listën publike të serviseve në Kosovë me filtra shërbimi dhe vendi. Nuk kontakton biznes, dërgon mesazh apo rezervon riparim.",
  "translationFallback": "Këto të dhëna shfaqen në gjuhën origjinale. Një përkthim aktual ende nuk është i disponueshëm.",
@@ -444,8 +431,8 @@ export const publicSq=/* @__PURE__ */ check({
   "one": "{count} servis",
   "other": "{count} servise"
  }
-} as const satisfies MessageShape<typeof publicDe>);
-export const publicEn=/* @__PURE__ */ check({
+} as const satisfies MessageShape<Omit<typeof publicDe,keyof typeof weekdayDe>>));
+export const publicEn=/* @__PURE__ */ check(/* @__PURE__ */ Object.assign({},weekdayEn,{
  "heroCar": "Your car.",
  "partnerTitle": "Premium partners",
  "partnerAd": "Ad · Premium partner",
@@ -523,7 +510,7 @@ export const publicEn=/* @__PURE__ */ check({
  "ratingAria": "{rating} out of 5 stars, {count} Riparim reviews",
  "googleRatingAria": "{rating} out of 5 stars on Google",
  "noReviews": "No reviews yet",
- "ratingExplanation": "Riparim: approved reviews with verified visit evidence. Google Maps: current stars and reviews directly from Google.",
+ "ratingExplanation": "Riparim: approved reviews with verified visit evidence.",
  "googleRatingSource": "Stars and count directly from Google Maps.",
  "googleCheck": "Check current stars and reviews directly on Google Maps.",
  "googleNoReviews": "No Google reviews yet",
@@ -651,13 +638,6 @@ export const publicEn=/* @__PURE__ */ check({
  "profileDescription": "Services, contact and approved reviews for {name} in {city}.",
  "privacyTitle": "Privacy · Riparim",
  "privacyDescription": "Information about sign-in, reviews, private visit evidence and Google services at Riparim.",
- "monday": "Monday",
- "tuesday": "Tuesday",
- "wednesday": "Wednesday",
- "thursday": "Thursday",
- "friday": "Friday",
- "saturday": "Saturday",
- "sunday": "Sunday",
  "searchToolTitle": "Configure workshop search",
  "searchToolDescription": "Open the published Kosovo workshop catalogue with service and city filters. Does not contact a business, send a message, or book a repair.",
  "translationFallback": "This information is shown in its original language. A current translation is not yet available.",
@@ -666,4 +646,4 @@ export const publicEn=/* @__PURE__ */ check({
   "one": "{count} workshop",
   "other": "{count} workshops"
  }
-} as const satisfies MessageShape<typeof publicDe>);
+} as const satisfies MessageShape<Omit<typeof publicDe,keyof typeof weekdayDe>>));

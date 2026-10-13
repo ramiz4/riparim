@@ -1,3 +1,4 @@
+import {weekdayDe,weekdaySq,weekdayEn} from "./weekday-messages";
 import {defaultLocale,isLocale,type Locale} from "./locale";
 import {formatNumber} from "./format";
 import {publicDe,publicSq,publicEn} from "./public-messages";
@@ -6,7 +7,11 @@ import {managementDe,managementSq,managementEn} from "./management-messages";
 import type {MessageValue,ParameterNames,MessageShape,CheckedMessages} from "./message-contract";
 
 const deBase={
- common:{
+ common:/* @__PURE__ */ Object.assign({},weekdayDe,{
+
+hoursToday:"Heute",hoursWeek:"Wochenplan und Ausnahmen",
+hoursUnchanged:"Öffnungszeiten bleiben unverändert.",hoursTitle:"Öffnungszeiten",hoursUnknown:"Nicht angegeben",hoursClosed:"Geschlossen",hoursAppointment:"Nach Vereinbarung",hoursOpen:"Geöffnet",hoursNowOpen:"Jetzt geöffnet",hoursNowClosed:"Jetzt geschlossen",hoursMissing:"Öffnungszeiten noch nicht angegeben. Bitte direkt bei der Werkstatt nachfragen.",hoursSource:"Öffnungszeiten laut Werkstatt",hoursConfirmed:"Zuletzt bestätigt am {date}",hoursExceptions:"Feiertage und Ausnahmen",hoursDayStatus:"Tagesstatus",hoursFrom:"Von",hoursUntil:"Bis",hoursRemove:"Entfernen",hoursRemoveInterval:"Zeitfenster {number} für {day} entfernen",hoursAddInterval:"Weiteres Zeitfenster",hoursProvide:"Eigene Öffnungszeiten angeben",hoursEditingHelp:"Gib die Zeiten deiner Werkstatt an. Änderungen werden nach Freigabe veröffentlicht. Bis zu drei Zeitfenster je Tag, in zeitlicher Reihenfolge. Verwende HH:MM; 24:00 bedeutet Mitternacht. Für Öffnung über Mitternacht trage auf beiden Tagen ein Zeitfenster ein.",hoursCopyWeekdays:"Montag auf Montag–Freitag übernehmen",hoursDate:"Datum",hoursExceptionDay:"Abweichender Tagesplan",hoursAddException:"Ausnahme hinzufügen",
+
   retry:"Erneut laden",darkMode:"Dark Mode",themeSystem:"Dark Mode · folgt dem System",themeToggle:"Dark Mode umschalten",close:"Schließen",dialogContent:"Dialoginhalt",workshops:"Werkstätten",loadingWorkshops:"Werkstätten werden geladen …",loadingProfile:"Werkstattprofil wird geladen …",profileNotAvailable:"Dieses Profil ist nicht verfügbar.",profileNotAvailableHelp:"Die Werkstatt ist nicht veröffentlicht oder der Link ist nicht mehr aktuell.",findWorkshops:"Werkstätten finden",
   languageLabel:"Sprache wählen",discardDraft:"Deine nicht gespeicherten Eingaben gehen beim Sprachwechsel verloren. Sprache trotzdem wechseln?",
   preferenceNotSaved:"Deine Sprachpräferenz konnte nicht gespeichert werden. Die ausgewählte Sprache gilt für diese Seite.",
@@ -15,7 +20,7 @@ const deBase={
   unavailable:"Diese Information ist momentan nicht verfügbar.",errorGeneric:"Die Aktion ist fehlgeschlagen. Bitte versuche es erneut.",messageGeneric:"Die Aktion wurde abgeschlossen.",
   authenticationRequired:"Bitte melde dich an.",forbidden:"Du hast keine Berechtigung für diese Aktion.",invalidRequest:"Bitte prüfe deine Eingaben.",notFound:"Der Eintrag wurde nicht gefunden.",conflict:"Der Eintrag wurde zwischenzeitlich geändert. Bitte lade ihn erneut.",saved:"Änderungen gespeichert.",
   reviewCount:{one:"{count} Bewertung",other:"{count} Bewertungen"}
- },
+ } as const),
  metadata:{title:"Riparim – Werkstätten in Kosovo",description:"Finde Werkstätten in Kosovo, vergleiche Leistungen und kontaktiere den passenden Betrieb."}
 } as const;
 
@@ -29,7 +34,11 @@ const sq=/* @__PURE__ */ defineCatalog({
  public:publicSq,
  customer:customerSq,
  management:managementSq,
- common:{
+ common:/* @__PURE__ */ Object.assign({},weekdaySq,{
+
+hoursToday:"Sot",hoursWeek:"Orari javor dhe përjashtimet",
+hoursUnchanged:"Orari mbetet i pandryshuar.",hoursTitle:"Orari i punës",hoursUnknown:"Nuk është përcaktuar",hoursClosed:"Mbyllur",hoursAppointment:"Me marrëveshje",hoursOpen:"Hapur",hoursNowOpen:"Hapur tani",hoursNowClosed:"Mbyllur tani",hoursMissing:"Orari nuk është përcaktuar ende. Pyet direkt servisin.",hoursSource:"Orari sipas servisit",hoursConfirmed:"Konfirmuar për herë të fundit më {date}",hoursExceptions:"Festat dhe përjashtimet",hoursDayStatus:"Statusi i ditës",hoursFrom:"Nga",hoursUntil:"Deri",hoursRemove:"Hiq",hoursRemoveInterval:"Hiq intervalin {number} për {day}",hoursAddInterval:"Shto interval",hoursProvide:"Përcakto orarin e punës",hoursEditingHelp:"Jep orarin e servisit tënd. Ndryshimet publikohen pas miratimit. Deri në tre intervale në ditë, sipas rendit kohor. Përdor HH:MM; 24:00 është mesnatë. Për hapje pas mesnatës jep intervale në të dyja ditët.",hoursCopyWeekdays:"Kopjo të hënën në ditët e punës",hoursDate:"Data",hoursExceptionDay:"Orari i ndryshuar i ditës",hoursAddException:"Shto përjashtim",
+
   retry:"Ngarko përsëri",darkMode:"Mënyra e errët",themeSystem:"Mënyra e errët · ndjek sistemin",themeToggle:"Ndërro mënyrën e errët",close:"Mbyll",dialogContent:"Përmbajtja e dialogut",workshops:"Servise",loadingWorkshops:"Duke ngarkuar serviset …",loadingProfile:"Duke ngarkuar profilin e servisit …",profileNotAvailable:"Ky profil nuk është i disponueshëm.",profileNotAvailableHelp:"Servisi nuk është i publikuar ose lidhja nuk është më aktuale.",findWorkshops:"Gjej servise",
   languageLabel:"Zgjidh gjuhën",discardDraft:"Të dhënat që nuk i ke ruajtur do të humbasin kur të ndërrosh gjuhën. Dëshiron të vazhdosh?",
   preferenceNotSaved:"Preferenca jote e gjuhës nuk mund të ruhej. Gjuha e zgjedhur vlen për këtë faqe.",
@@ -38,7 +47,7 @@ const sq=/* @__PURE__ */ defineCatalog({
   unavailable:"Ky informacion nuk është i disponueshëm për momentin.",errorGeneric:"Veprimi dështoi. Provo përsëri.",messageGeneric:"Veprimi përfundoi.",
   authenticationRequired:"Identifikohu për të vazhduar.",forbidden:"Nuk ke leje për këtë veprim.",invalidRequest:"Kontrollo të dhënat që ke dhënë.",notFound:"Ky regjistrim nuk u gjet.",conflict:"Ky regjistrim ka ndryshuar ndërkohë. Ngarkoje përsëri.",saved:"Ndryshimet u ruajtën.",
   reviewCount:{one:"{count} vlerësim",other:"{count} vlerësime"}
- },
+ } as const),
  metadata:{title:"Riparim – Servise në Kosovë",description:"Gjej servise në Kosovë, krahaso shërbimet dhe kontakto biznesin e duhur."}
 } as const satisfies CatalogNamespaces);
 
@@ -46,7 +55,11 @@ const en=/* @__PURE__ */ defineCatalog({
  public:publicEn,
  customer:customerEn,
  management:managementEn,
- common:{
+ common:/* @__PURE__ */ Object.assign({},weekdayEn,{
+
+hoursToday:"Today",hoursWeek:"Weekly schedule and exceptions",
+hoursUnchanged:"Opening hours remain unchanged.",hoursTitle:"Opening hours",hoursUnknown:"Not specified",hoursClosed:"Closed",hoursAppointment:"By appointment",hoursOpen:"Open",hoursNowOpen:"Open now",hoursNowClosed:"Closed now",hoursMissing:"Opening hours have not been provided yet. Please contact the workshop.",hoursSource:"Opening hours provided by the workshop",hoursConfirmed:"Last confirmed on {date}",hoursExceptions:"Holidays and exceptions",hoursDayStatus:"Day status",hoursFrom:"From",hoursUntil:"Until",hoursRemove:"Remove",hoursRemoveInterval:"Remove interval {number} for {day}",hoursAddInterval:"Add interval",hoursProvide:"Provide opening hours",hoursEditingHelp:"Enter your workshop’s hours. Changes are published after approval. Up to three intervals per day, in time order. Use HH:MM; 24:00 means midnight. For overnight opening, enter intervals on both days.",hoursCopyWeekdays:"Copy Monday to Monday–Friday",hoursDate:"Date",hoursExceptionDay:"Exceptional day schedule",hoursAddException:"Add exception",
+
   retry:"Reload",darkMode:"Dark mode",themeSystem:"Dark mode · follows system",themeToggle:"Toggle dark mode",close:"Close",dialogContent:"Dialog content",workshops:"Workshops",loadingWorkshops:"Loading workshops …",loadingProfile:"Loading workshop profile …",profileNotAvailable:"This profile is unavailable.",profileNotAvailableHelp:"The workshop is unpublished or the link is no longer current.",findWorkshops:"Find workshops",
   languageLabel:"Choose language",discardDraft:"Your unsaved entries will be lost when you change language. Change language anyway?",
   preferenceNotSaved:"Your language preference could not be saved. The selected language applies to this page.",
@@ -55,7 +68,7 @@ const en=/* @__PURE__ */ defineCatalog({
   unavailable:"This information is currently unavailable.",errorGeneric:"The action failed. Please try again.",messageGeneric:"The action completed.",
   authenticationRequired:"Please log in.",forbidden:"You do not have permission for this action.",invalidRequest:"Please check your entries.",notFound:"The entry was not found.",conflict:"The entry has changed. Please reload it.",saved:"Changes saved.",
   reviewCount:{one:"{count} review",other:"{count} reviews"}
- },
+ } as const),
  metadata:{title:"Riparim – Workshops in Kosovo",description:"Find workshops in Kosovo, compare services and contact the right business."}
 } as const satisfies CatalogNamespaces);
 

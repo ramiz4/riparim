@@ -102,8 +102,8 @@ assert(mobile.includes('WhatsApp')&&mobile.includes('Anrufen')&&mobile.includes(
 const unconfirmed=render(profilePage.default,{...props,workshop:{...workshop,whatsapp:''}}).match(/<nav class="profile-mobile-actions[^]*?<\/nav>/)[0];
 assert(!unconfirmed.includes('WhatsApp'),'a phone number does not imply WhatsApp availability');
 const reviewArea=pageMarkup.slice(pageMarkup.indexOf('id="bewertungen"'));
-assert(reviewArea.indexOf('profile-riparim-reviews')<reviewArea.indexOf('id="google-bewertungen"'),'the empty Riparim hint precedes Google in the stable provider reading order');
+assert(reviewArea.includes('profile-riparim-reviews')&&!pageMarkup.includes('google-bewertungen'),'profiles contain only own reviews');
 const publishedMarkup=render(profilePage.default,{...props,reviews:[{display_name:'Fixture Driver',vehicle:'Fixture car',service:'Diagnose',date:'2026-10-03',rating:5,review:'Fixture published review'}]});
 const populatedReviewArea=publishedMarkup.slice(publishedMarkup.indexOf('id="bewertungen"'));
-assert(populatedReviewArea.indexOf('Fixture published review')<populatedReviewArea.indexOf('id="google-bewertungen"'),'published Riparim reviews precede the Google block in reading order');
+assert(populatedReviewArea.includes('Fixture published review')&&!publishedMarkup.includes('google-bewertungen'),'published Riparim reviews remain visible without Google');
 console.log('Workshop profiles: exact identity, live hours, Kosovo time/DST, in-profile photo dialogs, route/map, service evidence, review states and confirmed mobile actions passed (fictional fixtures only)');

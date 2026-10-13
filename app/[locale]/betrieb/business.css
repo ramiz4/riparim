@@ -76,3 +76,7 @@
 .claim-confirmation h2:focus{outline:none}
 .claim-confirmation>.primary{display:inline-flex;margin-top:8px}
 @media(max-width:720px){.business-claim h1{font-size:26px}.business-claim-page{padding-top:10px}.claim-workshop{padding-bottom:14px}.business-claim .claim-workshop h2{font-size:16px}}
+
+.opening-editor{min-width:0;margin:20px 0;border:1px solid var(--border);padding:16px;border-radius:10px}.opening-days{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.opening-day{min-width:0;padding:12px;border:1px solid var(--border);border-radius:8px}.opening-interval{display:flex;gap:8px;align-items:end;flex-wrap:wrap}.opening-interval label{flex:1;min-width:85px}.opening-interval input{width:100%;min-width:0}.opening-enabled{display:flex;align-items:center;gap:10px}.opening-exception{display:grid;gap:10px;padding:12px 0;border-bottom:1px solid var(--border)}.opening-week>div{display:flex;justify-content:space-between;gap:16px}.opening-week dd{margin:0;text-align:right}.opening-exceptions{margin-top:20px;min-width:0}.opening-editor button{margin-top:8px}@media(max-width:600px){.opening-days{grid-template-columns:1fr}.opening-editor{padding:12px}}
+
+.business-form .opening-enabled{display:flex;align-items:center;gap:10px}.business-form .opening-enabled input{width:20px;flex:0 0 20px}.opening-editor select{width:100%;min-height:44px;padding:10px 12px;background:var(--background);color:var(--foreground);border:1px solid var(--input);border-radius:8px;font:inherit}
