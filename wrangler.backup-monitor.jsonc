@@ -6,11 +6,11 @@
   "compatibility_date": "2026-05-22",
   "workers_dev": true,
   "preview_urls": false,
-  "triggers": {"crons": []},
+  "triggers": {"crons": ["*/15 * * * *"]},
   "vars": {
-    "BACKUP_MONITOR_ENABLED": "false",
-    "BACKUP_MONITOR_PAUSED": "true",
-    "BACKUP_MONITOR_SCHEDULE": ""
+    "BACKUP_MONITOR_ENABLED": "true",
+    "BACKUP_MONITOR_PAUSED": "false",
+    "BACKUP_MONITOR_SCHEDULE": "*/15 * * * *"
   },
   "secrets": {"required": ["BACKUP_MONITOR_TRANSFER_TOKEN", "BACKUP_MONITOR_RESEND_API_KEY", "BACKUP_MONITOR_HEARTBEAT_URL", "BACKUP_MONITOR_EMAIL_FROM", "BACKUP_MONITOR_EMAIL_TO"]},
   "durable_objects": {"bindings": [{"name": "BACKUP_MONITOR", "class_name": "BackupMonitor"}]},

@@ -80,6 +80,16 @@ Rollback. [D1-Migrationen](https://developers.cloudflare.com/d1/reference/migrat
 
 ## Cloudflare-Produktion
 
+Die Backup-Überwachung läuft im separaten Worker `riparim-backup-monitor`.
+Website-Releases deployen ausschließlich das App-Artefakt und verändern dessen
+Cron oder Secrets nicht. Für Monitor-Updates ist `wrangler.backup-monitor.jsonc`
+maßgeblich: Die freigegebenen aktiven Variablen und der 15-Minuten-Cron sind
+versioniert und bleiben bei einem normalen Deployment erhalten. CI prüft den
+automatischen Monitorlauf mit genau dieser Konfiguration im echten workerd.
+Auch Monitor-Updates dürfen ausschließlich einen geprüften, veröffentlichten
+Main-Release verwenden. Ablauf und gezielte Pausierung stehen in
+[backup-monitoring.md](backup-monitoring.md#cloudflare-aktive-deployments-und-updates).
+
 `wrangler.jsonc` enthält den eigenen Zielaccount, den Worker `riparim`, die verifizierte D1-Datenbank `riparim-production` und den privaten R2-Bucket `riparim-evidence-production`. Vite übernimmt diese Konfiguration für Produktionsbuilds. Lokale Vorschauen verwenden isolierte Bindings; Produktionsressourcen bleiben mit `remote: false` vom lokalen Entwicklungsserver getrennt. Die generierte `dist/server/wrangler.json` wird unverändert aus dem Release-Archiv deployt.
 
 D1 und R2 werden vor dem ersten Deployment angelegt und ihre exakten Bindings geprüft. Der Deploy-Aufruf deaktiviert Wranglers automatische Provisionierung mit `--experimental-provision=false`. Dadurch entfällt insbesondere die zusätzliche R2-Metadatenabfrage beim ersten Worker-Upload; der Deployment-Token benötigt keine R2-Lese- oder Objektrechte.

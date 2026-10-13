@@ -1,10 +1,12 @@
-# Backup-Überwachung vorbereiten
+# Backup-Überwachung
 
-**Stand 12.10.2026: implementiert, ausdrücklich deaktiviert.** Der Betreiber hat
-für Issue #144 E-Mail gewählt und die Aktivierung zurückgestellt. Es wurden keine
-Monitorzugänge, externen Checks, Dienste oder Timer eingerichtet und keine echten
-Benachrichtigungen verschickt. Der tatsächliche Empfangstest steht bei der
-späteren Aktivierung aus.
+**Stand 13.10.2026: Cloudflare-Überwachung aktiviert und live geprüft.**
+Der Betreiber hat die regelmäßige Prüfung im 15-Minuten-Takt und E-Mail-Alarme
+freigegeben. Der Hauptcheck in Healthchecks.io ist aktiv; der erste automatische
+Cron-Lauf und sein Erfolgs-Heartbeat wurden bestätigt. Alarm-/Entwarnungsmails
+und der Ausbleibealarm wurden im Betreiberpostfach empfangen. Der Vier-Minuten-
+Abbruch wurde mit isolierten, verzögerten Testantworten auf Cloudflare geprüft.
+Node bleibt eine vorbereitete, deaktivierte Alternative.
 
 Der gemeinsame Kern in `scripts/lib/backup-monitor-core.mjs` prüft
 `Supabase Auth Backup` und `Platform Backup` getrennt über GitHub-Metadaten.
@@ -13,10 +15,10 @@ werden für beide Betriebswege nur einmal gepflegt:
 
 | Betriebsweg | Zeitplan und Zustand |
 | --- | --- |
-| Cloudflare | Eigener Worker `riparim-backup-monitor`, später 15-Minuten-Cron und ein SQLite-backed Durable Object je Repository. Website und D1/R2-Bindings bleiben getrennt. |
+| Cloudflare | Eigener Worker `riparim-backup-monitor`, aktiver 15-Minuten-Cron und ein SQLite-backed Durable Object je Repository. Website und D1/R2-Bindings bleiben getrennt. |
 | Node | Bestehender Aufruf `scripts/monitor-backups.mjs`, später Linux/systemd-Timer und private JSON-Datei. Keine zusätzlichen npm-Pakete zur Ausführung. |
 
-Beide Varianten sind vorbereitet und standardmäßig deaktiviert. Ein separater
+Cloudflare ist aktiv; die Node-Vorlage bleibt standardmäßig deaktiviert. Ein separater
 Healthchecks.io-Check überwacht das Ausbleiben des Monitors, auch bei einem
 Cloudflare- oder Hostausfall. Ein weiterer GitHub-Zeitplan wäre dafür nicht
 ausreichend. Der Zustand lässt sich im pausierten Betrieb zwischen beiden
@@ -128,77 +130,69 @@ Neue Schlüssel und die geheime Heartbeat-URL im bestehenden
 1Password-Projekteintrag `mkp7xa42clfbreiv2q3b3nrq5y` aufbewahren; niemals
 Entschlüsselungsschlüssel an den Monitor übergeben.
 
-## Spätere Einrichtung und Aktivierung
+## Betrieb, Updates und alternative Einrichtung
 
-### Cloudflare
+### Cloudflare: aktive Deployments und Updates
 
-`wrangler.backup-monitor.jsonc` ist vom Website-Deployment getrennt. Seine
-Vorgaben sind `BACKUP_MONITOR_ENABLED=false`, `BACKUP_MONITOR_PAUSED=true`,
-leerer `BACKUP_MONITOR_SCHEDULE` und keine Cron-Trigger. Es gibt keinen
-automatisch aktivierenden CI-Deploy-Job und keinen Zugriff auf App-D1/R2.
+`wrangler.backup-monitor.jsonc` ist die maßgebliche Produktionskonfiguration
+für den separaten Worker. Sie enthält `BACKUP_MONITOR_ENABLED=true`,
+`BACKUP_MONITOR_PAUSED=false`, `BACKUP_MONITOR_SCHEDULE=*/15 * * * *` und genau
+einen gleichlautenden Cron-Trigger. Ein gewöhnliches Deployment mit dieser
+Konfiguration erhält damit die freigegebene Überwachung. Zusätzliche
+Aktivierungsflags sind nicht mehr nötig. Das Website-Deployment verwendet eine
+andere Konfiguration und berührt diesen Worker nicht. Der Monitor besitzt
+weiterhin keinen Zugriff auf App-D1/R2.
 
 Die Konfiguration verwendet `compatibility_date=2026-05-22`, das neueste Datum,
 das der gelockte Wrangler-/workerd-Stand tatsächlich lokal unterstützt. Ein
 Datums- oder Werkzeugupdate erhält eigene Laufzeit- und Typprüfungen.
 `npm run backups:worker:check` vergleicht die separat generierten Bindingtypen,
 prüft TypeScript und führt einen lokalen Wrangler-Dry-Run aus. Die reguläre
-Suite prüft den Worker samt SQLite-Zustand im echten workerd. Ein Dry-Run
-bestätigt keine Remote-Berechtigungen, Kontingente oder E-Mail-Zustellung.
+Suite verwendet die tatsächlichen Variablen und Cron-Trigger dieser
+Konfiguration im echten workerd und verlangt einen erfolgreichen automatischen
+Prüflauf. Unpassende Zeitpläne und ausdrücklich pausierte Laufzeiten führen
+weiterhin keine Provideraufrufe aus.
 
-Für die spätere Einrichtung:
+Für spätere Monitor-Updates:
 
-1. Den vollständig veröffentlichten, geprüften GitHub-Main-Release auswählen
-   und dessen exakten Quellcheckout bereitstellen; Tag und Commit prüfen.
-   Der Monitor liegt im Release-Quellcheckout, nicht im Website-/Node-Apparchiv.
-   Gelockte Werkzeuge installieren und `npm run backups:worker:check` ausführen.
-   Keine Veröffentlichung eines Featurebranches oder offenen PRs.
-2. Kontingente und einen eigenen Zugang zum Deployment dieses Workers prüfen.
-   Er braucht keine Supabase-, D1-, R2-, DNS- oder Billing-Schreibrechte.
-   Einen Healthchecks.io-Check mit 15 Minuten Periode, 15 Minuten Grace,
-   eigener E-Mail-Integration und begrenzten Erinnerungen einrichten und testen.
-3. Nur Monitorgeheimnisse in einer privaten JSON-Datei (`0600`) bereitstellen:
-   `BACKUP_MONITOR_RESEND_API_KEY`, `BACKUP_MONITOR_HEARTBEAT_URL`,
-   `BACKUP_MONITOR_EMAIL_FROM`, `BACKUP_MONITOR_EMAIL_TO` und
-   `BACKUP_MONITOR_TRANSFER_TOKEN` mit 32–256 Zeichen. Optional kommt der
-   GitHub-Token hinzu. Website-Secrets und Entschlüsselungsschlüssel gehören
-   nicht in diesen Worker. Neue Zugänge im bestehenden 1Password-Eintrag sichern;
-   Werte nicht als CLI-Argumente oder in Logs ausgeben.
-4. Ausschließlich diesen geprüften Release mit dem privaten Secretsfile
-   bereitstellen. Der folgende Aufruf behält alle Pausenvorgaben bei und würde
-   erstmals den separaten Worker/SQLite-Namespace anlegen; er wurde in dieser
-   Vorbereitung **nicht** ausgeführt:
+1. Ausschließlich den exakten Quellcheckout eines vollständig veröffentlichten,
+   geprüften GitHub-Main-Releases verwenden; Tag und Commit prüfen. Der Monitor
+   liegt im Release-Quellcheckout, nicht im Website-/Node-Apparchiv. Gelockte
+   Werkzeuge installieren und `npm run backups:worker:check` ausführen.
+2. Bestehenden Worker, dessen SQLite-Namespace, aktive Cron-Einstellung und den
+   Healthchecks-Hauptcheck prüfen. Healthchecks behält 15 Minuten Periode,
+   15 Minuten Grace und die bestätigte Betreiber-E-Mail-Integration. Kein neuer
+   Worker, Namespace oder Check ist für ein Update erforderlich.
+3. Ein Deployment ohne neue Geheimnisse bewahrt bestehende Worker-Secrets:
 
    ```sh
    node node_modules/wrangler/bin/wrangler.js deploy \
-     --config wrangler.backup-monitor.jsonc \
-     --secrets-file /private/riparim-monitor-secrets.json
+     --config wrangler.backup-monitor.jsonc
    ```
 
-5. Ungefährliche Alarm-/Entwarnungsmails für beide Jobs und den externen
-   Ausbleibealarm tatsächlich empfangen. Dazu synthetische Lauf-/Artefaktdaten
-   und den realen Mailadapter verwenden, ohne reale Backups zu verändern.
-   Providerannahme allein reicht nicht. Ungültige Zustellung, unterbrochene
-   Heartbeats, doppelte Aufrufe und die Free-Abfragegrenze ebenfalls prüfen.
-6. Erst nach dokumentierter Abnahme und ausdrücklichem Aktivierungsauftrag
-   die bereits implementierte 15-Minuten-Einstellung verwenden. Die gelockten
-   Wrangler-Optionen setzen nicht geheime Betriebsparameter, während der Code
-   der exakte geprüfte Release bleibt:
+   Falls Geheimnisse ausdrücklich aktualisiert werden, nur Monitorwerte aus
+   1Password in einer privaten JSON-Datei (`0600`) bereitstellen und zusätzlich
+   `--secrets-file /private/riparim-monitor-secrets.json` übergeben. Danach die
+   Datei entfernen. Werte niemals als CLI-Argumente oder in Logs ausgeben.
+   Der bestehende Fine-grained GitHub-Token mit `Actions: Read` bleibt erhalten;
+   der anonyme Zugriff wurde beim Live-Test von GitHub verweigert.
+4. Nach dem Deployment die drei aktiven Variablen, den einzigen
+   `*/15 * * * *`-Trigger und den unveränderten SQLite-Namespace erneut lesen.
+   Einen geschützten `POST /run`, den nächsten echten Cron-Lauf und dessen
+   Healthchecks-Heartbeat prüfen. Ein Dry-Run allein bestätigt weder Remote-
+   Berechtigungen noch Zustellung. Die Website und ihre Bindings bleiben getrennt.
 
-   ```sh
-   node node_modules/wrangler/bin/wrangler.js deploy \
-     --config wrangler.backup-monitor.jsonc \
-     --secrets-file /private/riparim-monitor-secrets.json \
-     --var BACKUP_MONITOR_ENABLED:true \
-     --var BACKUP_MONITOR_PAUSED:false \
-     --var 'BACKUP_MONITOR_SCHEDULE:*/15 * * * *' \
-     --triggers '*/15 * * * *'
-   ```
+### Cloudflare gezielt pausieren
 
-   Diese Optionen bei weiteren aktiven Deployments bewusst beibehalten und
-   dokumentieren. Ein Deployment nur mit der ursprünglichen Konfiguration
-   pausiert die Überwachung und entfernt den Zeitplan. Es löscht keinen Zustand.
-   Der geschützte `POST /run` erlaubt bei vollständig aktiver Konfiguration
-   einen manuellen Prüflauf; derselbe private Zugang ist auch dafür privilegiert.
+Eine Pausierung ist eine ausdrückliche Betriebsänderung: zuerst den
+Healthchecks-Hauptcheck pausieren, dann die Variablen auf
+`BACKUP_MONITOR_ENABLED=false`, `BACKUP_MONITOR_PAUSED=true`, einen leeren
+`BACKUP_MONITOR_SCHEDULE` und die Cron-Liste auf `[]` setzen. Der SQLite-Zustand
+bleibt erhalten. Dieselbe Änderung muss vor weiteren Deployments in der
+maßgeblichen Repository-Konfiguration über einen geprüften PR und Main-Release
+festgehalten werden; sonst würde der nächste aktive Release die Überwachung
+wieder aktivieren. Eine spätere Wiederaufnahme braucht ebenfalls einen
+Aktivierungsauftrag und einen fortgesetzten Healthchecks-Hauptcheck.
 
 ### Node
 

@@ -8,6 +8,7 @@ import {decodeMonitorState, encodeMonitorState} from '../scripts/lib/backup-moni
 import {createFileStore, createGitHubReader, createHeartbeat, createResendNotifier, runBackupMonitor, runMonitorCli} from '../scripts/monitor-backups.mjs';
 
 const built = await build({entryPoints: ['monitor/worker.ts'], bundle: true, write: false, format: 'esm', platform: 'neutral', external: ['cloudflare:workers']});
+const deploymentConfig = JSON.parse(await readFile(new URL('../wrangler.backup-monitor.jsonc', import.meta.url), 'utf8'));
 const directory = await mkdtemp(join(tmpdir(), 'riparim-monitor-worker-'));
 const token = 'synthetic-monitor-transfer-token-000000000000';
 let outbound = 0;
@@ -183,11 +184,15 @@ try {
     } finally {await runtime.dispose();}
   }
   {
-    const fake = provider(), runtime = start('scheduled', bindings, fake);
+    const fake = provider(), runtime = start('scheduled', {...bindings, ...deploymentConfig.vars}, fake);
     try {
       assert.equal((await request(runtime, '/__test/scheduled?cron=wrong')).status, 200); assert.equal(fake.calls.length, 0);
-      assert.equal((await request(runtime, '/__test/scheduled?cron=' + encodeURIComponent('*/15 * * * *'))).status, 200);
-      assert.equal(fake.pings.length, 1);
+      for (const cron of deploymentConfig.triggers.crons) {
+        assert.equal((await request(runtime, '/__test/scheduled?cron=' + encodeURIComponent(cron))).status, 200);
+      }
+      assert.equal(fake.pings.length, 1, 'the committed deployment must retain one active 15-minute monitor trigger');
+      assert.deepEqual(deploymentConfig.triggers.crons, ['*/15 * * * *'], 'the deployment registers only the authorized monitor schedule');
+      assert(!fake.pings[0].endsWith('/fail'), 'the deployed schedule completes a healthy monitor invocation');
     } finally {await runtime.dispose();}
   }
   {
