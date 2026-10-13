@@ -65,8 +65,8 @@ eine Recherchezeile für jede der 172 bestehenden Werkstattkennungen. Der am
 leeren Listen ergänzt insgesamt 24 Kontakte bei 23 weiteren Werkstätten. Eigene
 Websites, Facebook/Instagram und öffentliche Betriebsverzeichnisse einschließlich
 ARBK Open wurden abgeglichen. ARBK Open ist ein unabhängiges Verzeichnis, keine
-Behördenwebsite. 75 Listen bleiben leer; Arlindi ist weiterhin nicht sicher
-zugeordnet. Nicht passende Namensvettern, Vorlagenadressen und historische
+Behördenwebsite. 75 Listen bleiben leer; Arlindi und ein neu gefundener Bajrami-Mailkandidat
+sind weiterhin nicht sicher zugeordnet. Nicht passende Namensvettern, Vorlagenadressen und historische
 Facebook-Mailaliase werden nicht importiert. Register-Kontakte können auch
 Vertreter-/Buchhaltungspostfächer sein; dies bleibt pro Adresse intern dokumentiert.
 Jede Adresse besitzt eigene
