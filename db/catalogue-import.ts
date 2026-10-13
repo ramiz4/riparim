@@ -1,9 +1,10 @@
 import type {SqlDatabase,SqlStatement} from "@/lib/runtime/contracts";
 import type {WorkshopCatalogue} from "@/lib/workshop-source";
+import type {WorkshopContact} from "@/lib/workshop-contacts";
 import {profileColumns,profileValues} from "./workshop-record";
 import {workshopIdentityHash} from "@/lib/google-place-identity";
 import {retiredWorkshopIds,workshopRetirementDate} from "@/lib/workshop-retirement";
-export async function catalogueImportStatements(db:SqlDatabase,catalogue:WorkshopCatalogue){
+export async function catalogueImportStatements(db:SqlDatabase,catalogue:WorkshopCatalogue,contacts:WorkshopContact[]=[]){
  const profiles=catalogue.workshops,googleSnapshots=catalogue.workshops.flatMap(w=>w.google.snapshot?[{workshopId:w.id,...w.google.snapshot}]:[]),statements:SqlStatement[]=[];
  // Fresh installations also retain deletion markers. Existing records are
  // removed separately by the guarded operation, after checking private links.
@@ -23,7 +24,18 @@ export async function catalogueImportStatements(db:SqlDatabase,catalogue:Worksho
   const checkedAt=Date.parse(w.google.matchedAt),hash=await workshopIdentityHash(w);
   statements.push(db.prepare("INSERT INTO workshop_google_places (workshop_id,place_id,profile_hash,checked_at,retry_after) VALUES (?,?,?,?,?) ON CONFLICT(workshop_id) DO UPDATE SET place_id=excluded.place_id,profile_hash=excluded.profile_hash,checked_at=excluded.checked_at,retry_after=excluded.retry_after WHERE workshop_google_places.checked_at < excluded.checked_at").bind(w.id,w.google.placeId,hash,checkedAt,checkedAt+365*86400000));
  }
+ for(const contact of contacts){
+  // Match against the live profile as well: a newer owner edit must never be
+  // associated with contact evidence researched for a different identity.
+  statements.push(db.prepare(`INSERT INTO workshop_contact_details
+   (workshop_id,email,website,source_urls,checked_at,matched_name,matched_phone,matched_city,email_verification)
+   SELECT id,?,?,?,?,?,?,?,? FROM workshops WHERE id=? AND name=? AND phone=? AND city=? AND status='published'
+   ON CONFLICT(workshop_id) DO UPDATE SET email=excluded.email,website=excluded.website,source_urls=excluded.source_urls,checked_at=excluded.checked_at,
+    matched_name=excluded.matched_name,matched_phone=excluded.matched_phone,matched_city=excluded.matched_city,email_verification=excluded.email_verification
+   WHERE workshop_contact_details.checked_at < excluded.checked_at`)
+   .bind(contact.email,contact.website,JSON.stringify(contact.sourceUrls),contact.checkedAt,contact.matchedName,contact.matchedPhone,contact.matchedCity,contact.emailVerification,contact.workshopId,contact.matchedName,contact.matchedPhone,contact.matchedCity));
+ }
  return statements;
 }
-export async function catalogueImportKey(catalogue:WorkshopCatalogue){const digest=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(JSON.stringify(catalogue)));return "workshop-source:"+Array.from(new Uint8Array(digest),byte=>byte.toString(16).padStart(2,"0")).join("");}
+export async function catalogueImportKey(catalogue:WorkshopCatalogue,contacts:WorkshopContact[]=[]){const digest=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(JSON.stringify(contacts.length?{catalogue,contacts}:catalogue)));return "workshop-source:"+Array.from(new Uint8Array(digest),byte=>byte.toString(16).padStart(2,"0")).join("");}
 export const catalogueCompletionSql="INSERT OR IGNORE INTO catalog_state (key,value) VALUES (?,?)";

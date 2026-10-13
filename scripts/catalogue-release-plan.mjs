@@ -1,5 +1,5 @@
 import {build} from 'esbuild';
-import {mkdir,writeFile} from 'node:fs/promises';
+import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import {resolve,dirname} from 'node:path';
 import {pathToFileURL} from 'node:url';
 
@@ -7,9 +7,13 @@ export async function catalogueReleasePlan(catalogue,commit,root=process.cwd()){
  const output=resolve(root,'.sites-runtime/catalogue-release/import.mjs');await mkdir(dirname(output),{recursive:true});
  await build({absWorkingDir:root,entryPoints:['db/catalogue-import.ts'],outfile:output,bundle:true,platform:'node',format:'esm'});
  const {catalogueImportStatements,catalogueImportKey,catalogueCompletionSql}=await import(pathToFileURL(output));
+ // CI validates both immutable sources before packaging. Deployment uses only
+ // its locked esbuild/Wrangler tools, with no application validator dependency.
+ const {contacts}=JSON.parse(await readFile(resolve(root,'data/workshop-contacts.json'),'utf8'));
+ if(!Array.isArray(contacts))throw Error('Released contact source is missing');
  // The same statement factory powers runtime imports; this adapter records its plan.
  const recorder={prepare(sql){return {bind(...params){return {sql,params};}};}};
- return {schemaVersion:1,commit,key:await catalogueImportKey(catalogue),completionSql:catalogueCompletionSql,statements:await catalogueImportStatements(recorder,catalogue)};
+ return {schemaVersion:1,commit,key:await catalogueImportKey(catalogue,contacts),completionSql:catalogueCompletionSql,statements:await catalogueImportStatements(recorder,catalogue,contacts)};
 }
 export function statementSql({sql,params}){
  let index=0;
