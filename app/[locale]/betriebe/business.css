@@ -12,8 +12,13 @@
 .business-section{margin-top:var(--content-page-gap);min-width:0}
 .business-request{padding:24px;background:var(--card);border:1px solid var(--border);border-radius:10px;margin-top:16px;overflow-wrap:anywhere}
 .business-request-heading{display:flex;gap:12px;align-items:start;justify-content:space-between}
-.business-request-heading>h3{min-width:0}
-.business-status{font-size:12px;white-space:nowrap;padding:4px 9px;border-radius:20px;background:var(--accent);color:var(--foreground)}
+.business-request-heading>:is(h2,h3){min-width:0;margin:0;font-size:18px;line-height:1.4}
+.business-status{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;line-height:1.5;white-space:nowrap;padding:4px 10px;border-radius:20px;background:var(--accent);color:var(--foreground)}
+.business-status::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
+.business-status.pending{background:#fff1ce;color:#795510}
+.business-status.approved{background:#e5f4ea;color:#22663c}
+html.dark .business-status.pending{background:#3b3020;color:#f2ca75}
+html.dark .business-status.approved{background:#163e32;color:#85dbac}
 .business-status.rejected{color:var(--destructive)}
 .business-submitted>summary{font-size:14px;cursor:pointer;min-height:44px;padding:10px 0;color:var(--theme-accent)}
 .business-submitted>summary:focus-visible{outline:3px solid var(--ring);outline-offset:3px}
@@ -32,7 +37,7 @@
 .business-proposal dt{font-weight:600}.business-proposal dd{white-space:pre-wrap}
 .business-form input:focus-visible,.business-form textarea:focus-visible,.business-decision-note textarea:focus-visible{outline:3px solid var(--ring);outline-offset:3px}
 .business-decision-note{margin:12px 0}
-@media(max-width:720px){.business-request{padding:14px}.business-request-heading{display:block}.business-status{display:inline-block;margin-top:8px}.business-services{grid-template-columns:1fr}.business-proposal{grid-template-columns:1fr;gap:3px}.business-proposal dd{margin-bottom:10px}}
+@media(max-width:720px){.business-request{padding:14px}.business-request-heading{display:block}.business-status{display:inline-flex;margin-top:8px}.business-services{grid-template-columns:1fr}.business-proposal{grid-template-columns:1fr;gap:3px}.business-proposal dd{margin-bottom:10px}}
 
 .business-form input[type=file]{max-width:100%;overflow:hidden;font-weight:400}
 
@@ -97,3 +102,25 @@
 .business-document-name{display:block;font-size:12px;line-height:1.5;color:var(--muted-foreground);overflow-wrap:anywhere}
 .business-documents a:hover .business-document-label{text-decoration-thickness:2px}
 .business-documents a:focus-visible{outline:3px solid var(--ring);outline-offset:4px}
+
+.business-profiles{display:grid;gap:14px;margin-top:28px}
+.business-profile{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px 24px;align-items:center;margin:0;padding:24px;border-radius:14px;transition:border-color .15s}
+.business-profile:hover{border-color:color-mix(in srgb,var(--theme-accent) 45%,var(--border))}
+.business-profile-identity{display:flex;align-items:center;gap:18px;min-width:0}
+.business-profile-icon{display:grid;place-items:center;width:56px;height:56px;flex:0 0 56px;border-radius:50%;background:var(--accent);color:var(--theme-accent)}
+.business-profile-copy{min-width:0}
+.business-page .business-profile h2{font-size:19px;font-weight:650;line-height:1.4;letter-spacing:-.25px;margin:0}
+.business-page .business-profile-location{display:flex;align-items:flex-start;gap:6px;font-size:13px;line-height:1.5;margin:8px 0 0}
+.business-profile-location>svg{margin-top:2px}
+.business-profile-location strong{font-weight:500}
+.business-profile-address{display:block;margin-top:2px;font-size:12px;color:var(--muted-foreground)}
+.business-profile-edit{min-height:44px;white-space:nowrap;background:transparent}
+.business-page .business-profile-pending{display:flex;align-items:flex-start;gap:8px;grid-column:1/-1;font-size:13px;line-height:1.5;margin:0;padding-top:14px;border-top:1px solid var(--border)}
+.business-profile-pending>svg{margin-top:2px;color:var(--theme-warning)}
+@media(max-width:720px){.business-profile{grid-template-columns:minmax(0,1fr);gap:18px;padding:20px}.business-profile-identity{gap:12px;align-items:flex-start}.business-profile-icon{width:44px;height:44px;flex-basis:44px}.business-page .business-profile h2{font-size:17px}.business-profile-edit{justify-self:start;margin-left:56px}.business-profile-pending{grid-column:1}}
+@media(prefers-reduced-motion:reduce){.business-profile{transition:none}}
+
+.business-editor{max-width:min(750px,calc(100% - 32px))!important}
+.business-editor .business-form{min-width:0}
+.business-editor .business-form>fieldset{padding:0;border:0}
+.business-heading h1:focus{outline:none}

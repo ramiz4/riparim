@@ -25,9 +25,9 @@ try{
  const originalFetch=globalThis.fetch,requests=[],workshop={id:'fixture-workshop',name:'Original workshop',city:'Prishtina',address:'Original address',phone:'+38344123456',phoneNote:'Original note',whatsapp:'',services:['Inspektion & Wartung'],serviceDetails:['Original specific work'],description:'Original unchanged description of the workshop.',updatedAt:'2026-10-04T09:00:00Z'};
  globalThis.fetch=async(url,init)=>{requests.push({url,init});return init?.method?Response.json({error:'Private raw provider detail',errorCode:'business_unavailable'},{status:503}):Response.json({workshops:[workshop],claims:[],changes:[],pendingClaims:[],pendingChangeWorkshopIds:[],pendingChangeRequestIds:[],nextClaimCursor:null,nextChangeCursor:null});};
  try{
-  for(const [locale,title,edit,description] of [['de','Deine Profile','Profil bearbeiten','Beschreibung'],['sq','Profilet e tua','Ndrysho profilin','Përshkrimi'],['en','Your profiles','Edit profile','Description']]){
+  for(const [locale,edit,description] of [['de','Profil bearbeiten','Beschreibung'],['sq','Ndrysho profilin','Përshkrimi'],['en','Edit profile','Description']]){
    await render(locale,BusinessPanel,{directory:[workshop]});
-   check(document.querySelector('h2').textContent===title,'The actual owner screen shows active-locale headings');
+   check(document.querySelector('h2').textContent===workshop.name&&document.querySelector('h1').textContent===getMessages(locale).management.myBusiness,'The owner page retains its localized title while workshop names lead the cards');
    const editButton=[...document.querySelectorAll('button')].find(button=>button.textContent===edit);await act(async()=>editButton.click());
    const field=[...document.querySelectorAll('label')].find(label=>label.textContent.startsWith(description)).querySelector('textarea');
    check(field.value===workshop.description,'The owner edits original canonical text rather than public translations');
