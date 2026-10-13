@@ -108,6 +108,15 @@ def validate_d1(sql, keys):
                 if name.replace("_", "").isalnum()}
 
 
+def sql_concat(expressions):
+    # A balanced tree preserves byte concatenation without growing SQLite's
+    # expression depth linearly with the number of serialized columns.
+    if len(expressions) == 1:
+        return expressions[0]
+    middle = len(expressions) // 2
+    return '(' + sql_concat(expressions[:middle]) + '||' + sql_concat(expressions[middle:]) + ')'
+
+
 def export_d1(token):
     def query(sql):
         result = cf(f"/d1/database/{DATABASE}/query", token, {"sql": sql})["result"]
@@ -132,8 +141,10 @@ def export_d1(token):
         # quote(TEXT) truncates at embedded NUL; hex plus CAST preserves every byte.
         values = [f"CASE typeof(\"{c}\") WHEN 'text' THEN 'CAST(X'''||hex(\"{c}\")||''' AS TEXT)' ELSE quote(\"{c}\") END" for c in names]
         insert = f'INSERT INTO "{name}"({identifier_list}) VALUES('
+        serialized = sql_concat([value if index == 0 else "','||" + value
+                                 for index, value in enumerate(values)])
         # Scalar subqueries avoid D1's very small compound-SELECT limit.
-        selections.append(f"json_object('kind','TABLE','name','{name}','statement',(SELECT json_group_array('{insert}'||" + "||','||".join(values) + f"||');') FROM \"{name}\"),'total',(SELECT count(*) FROM \"{name}\"))")
+        selections.append(f"json_object('kind','TABLE','name','{name}','statement',(SELECT json_group_array('{insert}'||" + serialized + f"||');') FROM \"{name}\"),'total',(SELECT count(*) FROM \"{name}\"))")
     if auto_tables:
         allowed = ','.join("'" + name + "'" for name in auto_tables)
         selections.append("json_object('kind','SEQUENCE','name','sqlite_sequence','statement',(SELECT json_group_array('INSERT INTO sqlite_sequence(name,seq) VALUES('||quote(name)||','||quote(seq)||');') FROM sqlite_sequence WHERE name IN (" + allowed + ")),'total',0)")

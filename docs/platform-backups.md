@@ -47,6 +47,8 @@ kein fertiges Backup. Bei aktivem Upload oder einer Löschung später erneut sta
 Alle D1-Zeilen, Zeilenzahlen und das Schema werden in einer einzigen SQL-Leseanweisung
 erfasst. Spalten werden vorher ermittelt, das Schema muss im Snapshot unverändert
 sein. Scalar-Subqueries umgehen die kleine D1-Grenze für Compound-SELECTs.
+Die Spaltenwerte werden mit einem balancierten Verkettungsbaum serialisiert,
+damit breite Tabellen die SQLite-Grenze für Ausdruckstiefe nicht überschreiten.
 Text inklusive Nullbytes und BLOBs wird verlustfrei über Hexwerte gesichert.
 Der native, weitergehende Rechte benötigende Export wird nicht verwendet;
 es gibt keine App-Schreibpause und keine automatische Datenänderung.
