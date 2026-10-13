@@ -60,6 +60,24 @@ class PlatformBackupTests(unittest.TestCase):
             backup.collect_auth_config(Path(directory), "synthetic")
             self.assertEqual(json.loads((Path(directory) / "supabase-auth-config.json").read_text()), config)
 
+    def test_read_snapshot_stays_within_d1_expression_depth(self):
+        with sqlite3.connect(":memory:") as source:
+            source.row_factory = sqlite3.Row
+            source.setlimit(sqlite3.SQLITE_LIMIT_EXPR_DEPTH, 100)
+            source.setlimit(sqlite3.SQLITE_LIMIT_COMPOUND_SELECT, 1)
+            for index in range(24):
+                columns = ','.join(f'c{column} TEXT' for column in range(25))
+                source.execute(f'CREATE TABLE synthetic_{index}({columns})')
+                source.execute(f"INSERT INTO synthetic_{index}(c0) VALUES ('synthetic')")
+            def cf(path, token, body=None):
+                return {"result": [{"success": True, "results": [dict(row) for row in source.execute(body['sql'])]}]}
+            with patch.object(backup, "cf", cf):
+                exported, _ = backup.export_d1("synthetic")
+            with sqlite3.connect(":memory:") as restored:
+                restored.executescript(exported.decode())
+                for index in range(24):
+                    self.assertEqual(restored.execute(f'SELECT c0 FROM synthetic_{index}').fetchone(), ("synthetic",))
+
     def test_read_snapshot_preserves_blob_and_nul_text(self):
         with sqlite3.connect(":memory:") as source:
             source.row_factory = sqlite3.Row
