@@ -5,7 +5,7 @@
   "timezone": "Europe/Zurich",
   "startedAt": "2026-10-13T01:01:16.946Z",
   "checkedAt": "2026-10-13T01:08:27Z",
-  "status": "prepared-ci-review",
+  "status": "prepared-pr-ci-pending",
   "baseCommit": "3b89d6d3e837f31499c6691be72f74988129c3bb",
   "branch": "codex/daily-import-2026-10-13",
   "reason": "Two independently sourced Malishevë workshops satisfy name, normalized telephone, street/location and active public Maps entry requirements. Incomplete and conflicting leads remain deferred.",
@@ -311,8 +311,22 @@
     ]
   },
   "validation": {
-    "ci": "pending",
-    "independentReview": "pending",
+    "ci": {
+      "catalogue": "passed",
+      "tests": "passed: complete npm test, 82049ms, exit0",
+      "types": "passed: npx tsc --noEmit",
+      "lint": "passed: npm run lint",
+      "backupWorker": "passed: npm run backups:worker:check",
+      "builds": "passed: Node, Cloudflare and Sites clean committed builds and packages"
+    },
+    "independentReview": {
+      "standards": "passed after correcting stale handoff wording",
+      "spec": "passed; independent sources and semantics verified",
+      "reviewedCommit": "75d19ae6534adc1a2899a3a3cbb4d875b89404cb",
+      "previous162ProfilesPreserved": true,
+      "previousTranslationsPreserved": true,
+      "minorFinding": "Stale pending-write handoff corrected; no substantive blocker."
+    },
     "runtime": {
       "node": "v24.21.0",
       "ciNodeMajor": "24",
@@ -322,7 +336,7 @@
     }
   },
   "publication": {
-    "newPr": null,
+    "newPr": "https://github.com/ramiz4/riparim/pull/160",
     "newRelease": null,
     "newDeploy": null,
     "currentRelease": "https://github.com/ramiz4/riparim/releases/tag/v1.24.0",
@@ -332,12 +346,37 @@
     "provenanceCommitMatches": true,
     "archiveDigestsMatchGithubAssetMetadata": true,
     "openImportPrs": 0,
-    "activeReleaseJobs": 0
+    "activeReleaseJobs": 0,
+    "ciHead": "75d19ae6534adc1a2899a3a3cbb4d875b89404cb",
+    "currentCiStatus": "running; will recheck exact final head"
   },
   "handoff": {
-    "state": "Prepared candidates pending write, full CI, independent review, PR/squash/release/live acceptance.",
+    "state": "Two local canonical additions validated and independently reviewed; PR160 awaits current CI, squash merge and release/live acceptance.",
     "lock": "Held until safe handoff.",
     "resume": "Continue this dated manifest and isolated worktree. Never create a second import/PR/release. Recheck live revisions and required profile before continuation."
   },
-  "errors": []
+  "errors": [
+    {
+      "stage": "observability-connector",
+      "message": "Events and invocations reject current requestId schema; detail API denies10000. Native dashboard read succeeded with54success/0errors in boundedhour.",
+      "status": "browser-fallback-verified"
+    },
+    {
+      "stage": "source-fetch",
+      "message": "OPEL web reader could not open encoded URL; native sourcepage confirmed current phone/location/repair scope.",
+      "status": "resolved-independent-browser-read"
+    },
+    {
+      "stage": "local-api-compare",
+      "message": "Python host CA validation failed; Node verifiedHTTPS API comparison passed all162profiles/19fields. No TLS verification disabled.",
+      "status": "resolved"
+    }
+  ],
+  "runHistory": [
+    {
+      "checkedAt": "2026-10-13T01:12:00Z",
+      "stage": "prepared-source",
+      "result": "Two local additions, all local checks/builds/packages passed; PR160 created, no live publication claimed."
+    }
+  ]
 }
