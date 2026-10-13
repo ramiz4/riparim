@@ -46,7 +46,7 @@ async function openMenu(){
 }
 
 try{
- const destinations=[['Mein Betrieb','/betrieb'],['Meine Bewertungen','/bewertungen'],['Einstellungen','/einstellungen']];
+ const destinations=[['Meine Betriebe','/betriebe'],['Meine Anträge','/antraege'],['Meine Bewertungen','/bewertungen'],['Einstellungen','/einstellungen']];
  for(const [email,isAdmin] of [['customer@example.test',false],['first-admin@example.test',true],['second-admin@example.test',true]]){
   await render(email,isAdmin);
   for(const [label,path] of [...destinations,...(isAdmin?[['Verwalten','/verwaltung']]:[])]){

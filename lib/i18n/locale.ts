@@ -23,17 +23,20 @@ const pageRoutes:readonly Record<Locale,string>[]=[
  {de:"/einstellungen",sq:"/cilesimet",en:"/settings"},
  {de:"/bewertungen",sq:"/vleresimet",en:"/reviews"},
  {de:"/datenschutz",sq:"/privatesia",en:"/privacy"},
- {de:"/betrieb",sq:"/biznesi",en:"/business"},
- {de:"/betrieb/beanspruchen",sq:"/biznesi/kerko-pronesine",en:"/business/claim"},
+ {de:"/betriebe",sq:"/biznesi",en:"/business"},
+ {de:"/antraege",sq:"/kerkesat",en:"/requests"},
+ {de:"/betriebe/beanspruchen",sq:"/biznesi/kerko-pronesine",en:"/business/claim"},
  {de:"/verwaltung",sq:"/administrimi",en:"/admin"},
  {de:"/verwaltung/anmeldung",sq:"/administrimi/autentikimi",en:"/admin/authentication"},
  {de:"/verwaltung/benutzer",sq:"/administrimi/perdoruesit",en:"/admin/users"},
  {de:"/verwaltung/betriebe",sq:"/administrimi/bizneset",en:"/admin/businesses"},
  {de:"/verwaltung/bewertungen",sq:"/administrimi/vleresimet",en:"/admin/reviews"},
 ];
+const legacyPageRoutes:Record<string,string>={"/betrieb":"/betriebe","/betrieb/beanspruchen":"/betriebe/beanspruchen"};
 const profileRoute:Record<Locale,string>={de:"/werkstatt/",sq:"/servis/",en:"/workshop/"};
 export function pageIdentityPath(path:string):string{
  const locale=localeFromPath(path),value=stripLocalePrefix(path).replace(/\/$/,"")||"/";
+ if(legacyPageRoutes[value])return legacyPageRoutes[value];
  const route=pageRoutes.find(route=>route[locale]===value);
  if(route)return route.de;
  if(value.startsWith(profileRoute[locale]))return profileRoute.de+value.slice(profileRoute[locale].length);

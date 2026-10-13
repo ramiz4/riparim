@@ -6,6 +6,7 @@ import {JSDOM,VirtualConsole} from 'jsdom';
 const dom=new JSDOM('<div id="root"></div>',{url:'https://riparim.example.test/en/admin',pretendToBeVisual:true,virtualConsole:new VirtualConsole()});
 for(const key of ['window','document','navigator','HTMLElement','HTMLButtonElement','HTMLFormElement','HTMLInputElement','HTMLTextAreaElement','HTMLSelectElement','DocumentFragment','Element','Node','NodeFilter','MutationObserver','CustomEvent','Event','MouseEvent','KeyboardEvent','getComputedStyle'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});
 globalThis.requestAnimationFrame=dom.window.requestAnimationFrame.bind(dom.window);globalThis.cancelAnimationFrame=dom.window.cancelAnimationFrame.bind(dom.window);globalThis.IS_REACT_ACT_ENVIRONMENT=true;globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
+HTMLElement.prototype.scrollIntoView=function(){};
 const out='.test-runtime/management-localization-ui.mjs';
 const result=await build({stdin:{contents:"export {AdminNavigation} from './components/admin-navigation';export {BusinessPanel} from './components/business-panel';export {default as AdminPanel} from './app/[locale]/verwaltung/panel';export {default as AdminUsers} from './app/[locale]/verwaltung/benutzer/users';export {default as AdminReviews} from './app/[locale]/verwaltung/bewertungen/reviews';export {NotificationStatus} from './components/notification-status';export {default as AuthSetup} from './app/[locale]/verwaltung/anmeldung/setup';export * as mailSources from './lib/auth/email-templates';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",resolveDir:process.cwd(),loader:'tsx'},outfile:out,bundle:true,write:false,format:'esm',platform:'node',packages:'external',plugins:[{name:'router-boundary',setup(b){b.onResolve({filter:/^next\/link$/},args=>({path:args.path,namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},()=>({loader:'js',resolveDir:process.cwd(),contents:"import React from 'react';export default function Link({href,children,...props}){return React.createElement('a',{...props,href},children);}"}));}}]});await mkdir('.test-runtime',{recursive:true});await writeFile(out,result.outputFiles[0].contents);
 const {createElement,act}=await import('react'),{createRoot}=await import('react-dom/client');
@@ -13,6 +14,12 @@ const {AdminNavigation,BusinessPanel,AdminPanel,AdminUsers,AdminReviews,Notifica
 let root=createRoot(document.getElementById('root')),passed=0;
 const check=(condition,label)=>{assert(condition,label);passed++;};
 async function render(locale,Component,props={}){await act(async()=>root.unmount());root=createRoot(document.getElementById('root'));await act(async()=>root.render(createElement(I18nProvider,{locale,messages:getMessages(locale,['common','customer','management'])},createElement(Component,props))));}
+async function chooseReviewReason(label){
+ const trigger=document.querySelector('.moderation-decision [role="combobox"]');
+ await act(async()=>{trigger.focus();trigger.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true,cancelable:true}));});
+ const option=[...document.querySelectorAll('[role="option"]')].find(node=>node.textContent===label);assert(option);
+ await act(async()=>{option.focus();option.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true}));});
+}
 try{
  for(const [locale,name,labels] of [['de','Verwaltung',['Werkstätten','Bewertungen prüfen','Benutzer','Betriebe','Login & Registrierung']],['sq','Administrimi',['Serviset','Kontrollo vlerësimet','Përdoruesit','Bizneset','Hyrja & regjistrimi']],['en','Administration',['Workshops','Review moderation','Users','Businesses','Login & registration']]]){
   await render(locale,AdminNavigation,{active:'users'});
@@ -25,9 +32,9 @@ try{
  const originalFetch=globalThis.fetch,requests=[],workshop={id:'fixture-workshop',name:'Original workshop',city:'Prishtina',address:'Original address',phone:'+38344123456',phoneNote:'Original note',whatsapp:'',services:['Inspektion & Wartung'],serviceDetails:['Original specific work'],description:'Original unchanged description of the workshop.',updatedAt:'2026-10-04T09:00:00Z'};
  globalThis.fetch=async(url,init)=>{requests.push({url,init});return init?.method?Response.json({error:'Private raw provider detail',errorCode:'business_unavailable'},{status:503}):Response.json({workshops:[workshop],claims:[],changes:[],pendingClaims:[],pendingChangeWorkshopIds:[],pendingChangeRequestIds:[],nextClaimCursor:null,nextChangeCursor:null});};
  try{
-  for(const [locale,title,edit,description] of [['de','Deine Profile','Profil bearbeiten','Beschreibung'],['sq','Profilet e tua','Ndrysho profilin','Përshkrimi'],['en','Your profiles','Edit profile','Description']]){
+  for(const [locale,edit,description] of [['de','Profil bearbeiten','Beschreibung'],['sq','Ndrysho profilin','Përshkrimi'],['en','Edit profile','Description']]){
    await render(locale,BusinessPanel,{directory:[workshop]});
-   check(document.querySelector('h2').textContent===title,'The actual owner screen shows active-locale headings');
+   check(document.querySelector('h2').textContent===workshop.name&&document.querySelector('h1').textContent===getMessages(locale).management.myBusiness,'The owner page retains its localized title while workshop names lead the cards');
    const editButton=[...document.querySelectorAll('button')].find(button=>button.textContent===edit);await act(async()=>editButton.click());
    const field=[...document.querySelectorAll('label')].find(label=>label.textContent.startsWith(description)).querySelector('textarea');
    check(field.value===workshop.description,'The owner edits original canonical text rather than public translations');
@@ -44,9 +51,9 @@ try{
    await render(locale,BusinessPanel,{directory:[workshop]});
    const editButton=[...document.querySelectorAll('button')].find(button=>button.textContent===edit);
    check(editButton.disabled&&document.body.textContent.includes(waiting),'Each locale bases its current edit lock and guidance on the authoritative pending change summary');
-   check(document.body.textContent.includes(claimOutcome)&&document.body.textContent.includes(changeOutcome),'Each locale reports historical rejection outcomes without a conflicting retry instruction');
+   await render(locale,BusinessPanel,{view:'requests'});check(document.body.textContent.includes(claimOutcome)&&document.body.textContent.includes(changeOutcome),'Each locale reports historical rejection outcomes without a conflicting retry instruction');
    businessFixture={...businessFixture,workshops:[],claims:[],changes:[],pendingChangeWorkshopIds:[],pendingClaims:[{id:'fixture-current-claim',workshopId:workshop.id,workshopName:workshop.name,createdAt:'2020-01-01T00:00:00Z'}]};
-   await render(locale,BusinessPanel,{directory:[workshop]});check(document.querySelector('.business-request').textContent.includes(privateCheck),'Each locale visibly explains manual private ownership verification for the current claim');
+   await render(locale,BusinessPanel,{view:'requests'});check(document.querySelector('.business-request').textContent.includes(privateCheck),'Each locale visibly explains manual private ownership verification for the current claim');
   }
 
   const canonical={...workshop,brands:['Audi'],languages:['Albanisch'],specialty:'Original specialty',sources:[{url:'https://workshop.example.test/contact',title:'Original source'}],lat:null,lng:null,checkedAt:'2026-10-04',status:'draft'};
@@ -84,13 +91,14 @@ try{
    await render(locale,AdminReviews,{account:{email:'admin@example.test',displayName:'Fixture Admin',provider:'E-Mail'}});check(document.querySelector('h1').textContent===title,'The actual moderation queue has active-locale headings');
    check(document.querySelector('.moderation-list').textContent.includes(visit.review)&&document.querySelector('.moderation-list').textContent.includes(visit.evidence_note),'Customer and evidence free text remain unchanged during moderation');
    check(!document.querySelector('.notification-panel'),'The simplified review page preserves Main57 removal of the delivery panel');
+   const copy=getMessages(locale).management;check(!document.querySelector('.moderation-decision textarea'),'Every locale starts with a select without free text');await chooseReviewReason(copy.reviewReasonConfirmed);await act(async()=>[...document.querySelectorAll('button')].find(button=>button.textContent===publish).click());check(JSON.parse(requests.findLast(request=>request.init?.method==='PATCH').init.body).note===copy.reviewReasonConfirmed,'Standard moderation notes use the chosen locale without changing the decision contract');await chooseReviewReason(copy.otherReason);
    const field=document.querySelector('.moderation-decision textarea');await act(async()=>{Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype,'value').set.call(field,'Original private moderation reason.');field.dispatchEvent(new Event('input',{bubbles:true}));});
    await act(async()=>[...document.querySelectorAll('button')].find(button=>button.textContent===publish).click());
    const body=JSON.parse(requests.findLast(request=>request.init?.method==='PATCH').init.body);assert.deepEqual(body,{action:'moderate',id:visit.id,status:'published',revision:7,note:'Original private moderation reason.'});passed++;
    check(!document.body.textContent.includes('Private raw moderation error')&&field.value==='Original private moderation reason.','A moderation conflict uses local codes and keeps the private note');
    let finish;const previousFetch=globalThis.fetch;globalThis.fetch=async(url,init)=>init?.method?new Promise(resolve=>finish=resolve):previousFetch(url,init);
    await act(async()=>[...document.querySelectorAll('button')].find(button=>button.textContent===publish).click());
-   check(document.querySelector('.language-switcher select').disabled&&field.disabled,'A pending moderation decision blocks language changes and freezes private notes');
+   check(document.querySelector('.language-switcher select').disabled&&field.disabled&&document.querySelector('.moderation-decision [role="combobox"]').disabled,'A pending moderation decision blocks language changes and freezes private notes');
    await act(async()=>finish(Response.json({errorCode:'review_conflict'},{status:409})));globalThis.fetch=previousFetch;
 
   }

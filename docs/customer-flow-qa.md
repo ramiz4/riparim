@@ -734,3 +734,27 @@ Sitzungsantworten, Client-Neumount, serverseitigem Rendering, Gastantwort,
 Invalidierung, Cacheablauf, Fokusrückkehr und verspäteter alter Antwort. Die bestehende Deferred-UI-Suite
 prüft weiterhin DE/SQ/EN, Rollenentzug, Umbenennung, Kontolöschung und
 konkurrierende Sitzungsabfragen. Alle Fixtures verwenden fiktive Konten.
+
+
+## Header beim kalten Profilübergang (14. Oktober 2026)
+
+Der eingeloggte Live-Test wechselte vom Werkstattprofil über das Benutzermenü
+zu eigenen Bewertungen, Betrieb und Verwaltung sowie über Browser-Zurück
+wieder zum Profil. Die privaten Übergänge zeigten weder Gastbuttons noch
+Dokument-Reloads. Beim ersten Profilaufruf im frischen Browserdokument fehlte
+jedoch kurz der gesamte Header: Der tatsächliche Suspense-Fallback zeigte
+ausschließlich „Werkstattprofil wird geladen …“. Der Zustand wurde erneut
+mit einem zweiten Profil reproduziert und als Screenshot festgehalten.
+
+Der Profil-Fallback enthält jetzt denselben `SiteHeader` mit `publicSnapshot`
+wie die datenfreie Profilshell. Er übernimmt die bereits bestätigte Identität
+aus dem gemeinsamen Browser-Sitzungszustand; eine unbekannte Sitzung bleibt
+neutral. Die bestehende Anfrage-Deduplizierung gilt auch während des Übergangs
+zur geladenen Profilshell. Es gibt keine neue Autorisierung, Datenabfrage,
+Migration oder zusätzliche Browser-Speicherung.
+
+`tests/profile-loading-header.test.mjs` rendert den tatsächlichen
+Route-Fallback in DE/SQ/EN und prüft Header, Statusbeschriftung, serverseitige
+Identitätsisolation und Tastaturzugang. Der Client-Test wechselt von einem
+verifizierten Header in den Fallback und schützt den Kontomenü-Erhalt ohne
+zusätzliche Sitzungsabfrage. Fixtures verwenden ausschließlich fiktive Konten.
