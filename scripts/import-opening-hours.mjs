@@ -29,6 +29,7 @@ if(write){
   const run=(command,args)=>{const r=spawnSync(command,args,{encoding:'utf8'});if(r.status!==0)throw Error(`${command} failed`);return r.stdout.trim();};
   const head=run('git',['rev-parse','HEAD']);
   if(head!==run('git',['rev-parse',`${tag}^{commit}`]))throw Error('Checkout must match the release');
+  run('git',['merge-base','--is-ancestor',head,'origin/main']);
   const release=JSON.parse(run('gh',['release','view',tag,'--json','isDraft,isPrerelease,assets']));
   if(release.isDraft||release.isPrerelease||release.assets.length<6)throw Error('Release is not complete');
   if(run('git',['show','HEAD:data/opening-hours-import.json'])!==(await readFile('data/opening-hours-import.json','utf8')).trim())throw Error('Manifest differs from the release');
