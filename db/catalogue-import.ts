@@ -1,10 +1,12 @@
 import type {SqlDatabase,SqlStatement} from "@/lib/runtime/contracts";
 import type {WorkshopCatalogue} from "@/lib/workshop-source";
+import {workshopEmailImportStatements} from "./workshop-email-import";
+import type {WorkshopEmailContacts} from "@/lib/workshop-contacts";
 import type {WorkshopContact} from "@/lib/workshop-contacts";
 import {profileColumns,profileValues} from "./workshop-profile-values";
 import {workshopIdentityHash} from "@/lib/google-place-identity";
 import {retiredWorkshopIds,workshopRetirementDate} from "@/lib/workshop-retirement";
-export async function catalogueImportStatements(db:SqlDatabase,catalogue:WorkshopCatalogue,contacts:WorkshopContact[]=[]){
+export async function catalogueImportStatements(db:SqlDatabase,catalogue:WorkshopCatalogue,contacts:WorkshopContact[]=[],emails:WorkshopEmailContacts["contacts"]=[]){
  const profiles=catalogue.workshops,googleSnapshots=catalogue.workshops.flatMap(w=>w.google.snapshot?[{workshopId:w.id,...w.google.snapshot}]:[]),statements:SqlStatement[]=[];
  // Fresh installations also retain deletion markers. Existing records are
  // removed separately by the guarded operation, after checking private links.
@@ -35,7 +37,8 @@ export async function catalogueImportStatements(db:SqlDatabase,catalogue:Worksho
    WHERE workshop_contact_details.checked_at < excluded.checked_at`)
    .bind(contact.email,contact.website,JSON.stringify(contact.sourceUrls),contact.checkedAt,contact.matchedName,contact.matchedPhone,contact.matchedCity,contact.emailVerification,contact.workshopId,contact.matchedName,contact.matchedPhone,contact.matchedCity));
  }
+ statements.push(...workshopEmailImportStatements(db,emails,await catalogueImportKey(catalogue,contacts,emails)));
  return statements;
 }
-export async function catalogueImportKey(catalogue:WorkshopCatalogue,contacts:WorkshopContact[]=[]){const digest=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(JSON.stringify(contacts.length?{catalogue,contacts}:catalogue)));return "workshop-source:"+Array.from(new Uint8Array(digest),byte=>byte.toString(16).padStart(2,"0")).join("");}
+export async function catalogueImportKey(catalogue:WorkshopCatalogue,contacts:WorkshopContact[]=[],emails:WorkshopEmailContacts["contacts"]=[]){const digest=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(JSON.stringify(emails.length?{catalogue,contacts,emails}:contacts.length?{catalogue,contacts}:catalogue)));return "workshop-source:"+Array.from(new Uint8Array(digest),byte=>byte.toString(16).padStart(2,"0")).join("");}
 export const catalogueCompletionSql="INSERT OR IGNORE INTO catalog_state (key,value) VALUES (?,?)";

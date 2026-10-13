@@ -36,3 +36,12 @@
 .notification-entry>button,.notification-heading>button{flex-shrink:0}
 .notification-panel>button{margin-top:12px;margin-right:12px}
 @media(max-width:720px){.notification-heading,.notification-entry{flex-direction:column;gap:14px}.notification-entry>button,.notification-heading>button{max-width:100%;white-space:normal}}
+
+.workshop-email-editor {min-width:0;margin:1rem 0;padding:1rem;border:1px solid var(--border);border-radius:var(--radius);}
+.workshop-email-row {display:flex;flex-wrap:wrap;align-items:flex-end;gap:.75rem;margin:.75rem 0;}
+.workshop-email-row label {flex:1;min-width:0;}
+.workshop-email-row input[type="email"] {width:100%;min-width:0;}
+.workshop-email-flags {display:flex;gap:1rem;flex-wrap:wrap;width:100%;}
+.workshop-email-flags label {display:flex;gap:.4rem;align-items:center;flex:none;}
+.workshop-email-flags input[type="checkbox"] {width:auto;min-height:auto;}
+@media(max-width:480px){.workshop-email-row {flex-wrap:wrap;}.workshop-email-row label {flex-basis:100%;}}

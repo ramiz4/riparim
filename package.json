@@ -38,7 +38,8 @@
     "notifications:node": "node --env-file-if-exists=.env .node-runtime/command.mjs notifications",
     "test:node": "node tests/node-runtime.test.mjs",
     "test:node-release": "node tests/node-release.test.mjs",
-    "hours:import": "node scripts/import-opening-hours.mjs"
+    "hours:import": "node scripts/import-opening-hours.mjs",
+    "emails:import": "node scripts/import-workshop-emails.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

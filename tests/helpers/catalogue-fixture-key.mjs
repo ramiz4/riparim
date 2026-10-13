@@ -8,6 +8,7 @@ export function catalogueFixtureKey(){
   const {catalogueImportKey}=await import('data:text/javascript;base64,'+Buffer.from(bundled.outputFiles[0].contents).toString('base64'));
   const catalogue=JSON.parse(await readFile('data/workshops.json','utf8'));
   const {contacts}=JSON.parse(await readFile('data/workshop-contacts.json','utf8'));
-  return catalogueImportKey(catalogue,contacts);
+  const {contacts:emails}=JSON.parse(await readFile('data/workshop-emails.json','utf8'));
+  return catalogueImportKey(catalogue,contacts,emails);
  })();
 }
