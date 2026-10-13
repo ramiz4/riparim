@@ -12,7 +12,7 @@ globalThis.IS_REACT_ACT_ENVIRONMENT=true;
 // jsdom has no layout; native geometry and keyboard activation are checked separately.
 globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
 const output='.test-runtime/auth-setup-ui';
-const bundle=await build({stdin:{contents:"export {default as AuthSetup} from './app/[locale]/verwaltung/anmeldung/setup';export * from './lib/auth/email-templates';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/ui.mjs',bundle:true,write:false,platform:'node',format:'esm',packages:'external'});
+const bundle=await build({stdin:{contents:"export {default as AuthSetup} from './app/[locale]/verwaltung/anmeldung/setup';export * from './lib/auth/email-templates';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/ui.mjs',bundle:true,write:false,platform:'node',format:'esm',packages:'external',alias:{'next/link':'vinext/shims/link'}});
 await mkdir(output,{recursive:true});await writeFile(output+'/ui.mjs',bundle.outputFiles[0].contents);
 const {createElement,act}=await import('react'),{createRoot}=await import('react-dom/client');
 const {AuthSetup,I18nProvider,getMessages,confirmationEmailSubject,confirmationEmailTemplate,recoveryEmailSubject,recoveryEmailTemplate}=await import(new URL('../'+output+'/ui.mjs',import.meta.url));

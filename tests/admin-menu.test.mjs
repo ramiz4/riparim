@@ -18,17 +18,17 @@ globalThis.fetch=async(path,options)=>{
 };
 
 const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
-const bundle=await build({stdin:{contents:`export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {SiteHeader} from './components/site-header';export {default as RouterLink} from 'next/link';export {default as AdminPanel} from './app/[locale]/verwaltung/panel';export {default as AdminReviews} from './app/[locale]/verwaltung/bewertungen/reviews';export {default as AdminUsers} from './app/[locale]/verwaltung/benutzer/users';export {default as AuthSetup} from './app/[locale]/verwaltung/anmeldung/setup';`,resolveDir:process.cwd(),loader:'tsx'},bundle:true,platform:'node',format:'esm',outfile:'.test-runtime/admin-menu/header.mjs',write:false,packages:'external',loader:{'.css':'empty'},define:{'process.env.__VINEXT_HAS_PAGES_ROUTER':'"false"','process.env.__VINEXT_HAS_CLIENT_REWRITES':'"false"'},plugins:[{name:'app-router-boundary',setup(b){
+const bundle=await build({stdin:{contents:`export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {SiteHeader} from './components/site-header';export {default as AdminPanel} from './app/[locale]/verwaltung/panel';export {default as AdminReviews} from './app/[locale]/verwaltung/bewertungen/reviews';export {default as AdminUsers} from './app/[locale]/verwaltung/benutzer/users';export {default as AuthSetup} from './app/[locale]/verwaltung/anmeldung/setup';`,resolveDir:process.cwd(),loader:'tsx'},bundle:true,platform:'node',format:'esm',outfile:'.test-runtime/admin-menu/header.mjs',write:false,packages:'external',loader:{'.css':'empty'},define:{'process.env.__VINEXT_HAS_PAGES_ROUTER':'"false"','process.env.__VINEXT_HAS_CLIENT_REWRITES':'"false"'},plugins:[{name:'app-router-boundary',setup(b){
  b.onResolve({filter:/^next\/link$/},()=>({path:new URL('../node_modules/vinext/dist/shims/link.js',import.meta.url).pathname}));
- // Exercise the real Link and Radix menu with an App Router that never commits.
- b.onResolve({filter:/^\.\/navigation\.js$/},args=>args.importer.endsWith('/shims/link.js')?{path:'stalled-router',namespace:'fixture'}:undefined);
- b.onLoad({filter:/.*/,namespace:'fixture'},()=>({contents:'export function navigateClientSide(href){globalThis.routerAttempts.push(href);return new Promise(()=>{});}',loader:'js'}));
+ // Exercise the real Link and Radix menu at the client-router boundary.
+ b.onResolve({filter:/^\.\/navigation\.js$/},args=>args.importer.endsWith('/shims/link.js')?{path:'client-router',namespace:'fixture'}:undefined);
+ b.onLoad({filter:/.*/,namespace:'fixture'},()=>({contents:'export function navigateClientSide(href){globalThis.routerAttempts.push(href);return Promise.resolve();}',loader:'js'}));
 }}]});
 await mkdir('.test-runtime/admin-menu',{recursive:true});
 await writeFile('.test-runtime/admin-menu/header.mjs',bundle.outputFiles[0].contents);
 const {createElement,act}=await import('react');
 const {createRoot}=await import('react-dom/client');
-const {SiteHeader,RouterLink,AdminPanel,AdminReviews,AdminUsers,AuthSetup,I18nProvider,getMessages}=await import(new URL('../.test-runtime/admin-menu/header.mjs',import.meta.url));
+const {SiteHeader,AdminPanel,AdminReviews,AdminUsers,AuthSetup,I18nProvider,getMessages}=await import(new URL('../.test-runtime/admin-menu/header.mjs',import.meta.url));
 window[Symbol.for('vinext.navigationRuntime')]={bootstrap:{routeManifest:null,rsc:undefined},functions:{navigate:()=>new Promise(()=>{})}};
 globalThis.routerAttempts=[];
 const documents=[];
@@ -71,18 +71,12 @@ try{
    }
   }
  }
- assert.deepEqual(routerAttempts,[],'header destinations do not depend on the stalled client router');
- // The real Link control demonstrates that the fixture can detect a consumed
- // click, so the document-navigation assertions above cannot pass vacuously.
- await act(async()=>root.render(fixtureMessages(createElement(RouterLink,{href:'/betrieb'},'Router control'))));
- const before=documents.length;
- await act(async()=>document.querySelector('a').click());
- assert.deepEqual(routerAttempts,['/betrieb'],'the control exercises the actual client-router boundary');
- assert.equal(documents.length,before,'a stalled client-router control cannot load a document');
+ assert(routerAttempts.length>0,'header destinations reach the client router');
+ assert.deepEqual(documents,[],'header destinations never load a new document');
  routerAttempts.length=0;
  const sections=[['Werkstätten','/verwaltung','workshops'],['Bewertungen prüfen','/verwaltung/bewertungen','reviews'],['Benutzer','/verwaltung/benutzer','users'],['Betriebe','/verwaltung/betriebe','business'],['Login & Registrierung','/verwaltung/anmeldung','login']];
  async function activate(link,input){
-  const before=documents.length;
+  const before=routerAttempts.length,documentsBefore=documents.length;
   await act(async()=>{
    if(input==='Enter'){
     link.focus();
@@ -90,8 +84,9 @@ try{
     if(link.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true})))link.click();
    }else link.click();
   });
-  assert.equal(documents.length,before+1,`${input} on ${link.textContent} must load the destination when the client router stalls`);
-  assert.equal(documents.at(-1),new URL(link.href).pathname+new URL(link.href).search+new URL(link.href).hash);
+  assert.equal(routerAttempts.length,before+1,`${input} on ${link.textContent} must route without a document reload`);
+  assert.equal(routerAttempts.at(-1),new URL(link.href).pathname+new URL(link.href).search+new URL(link.href).hash);
+  assert.equal(documents.length,documentsBefore,'Client navigation suppresses the native document request');
  }
  for(const email of ['first-admin@example.test','second-admin@example.test']){
   for(const [Page,active] of [[AdminPanel,'workshops'],[AdminReviews,'reviews'],[AdminUsers,'users'],[AuthSetup,'login']]){
@@ -113,7 +108,8 @@ try{
    }
   }
  }
- assert.deepEqual(routerAttempts,[],'all admin section links work independently of the client router');
+ assert(routerAttempts.length>0,'all admin section links reach the client router');
+ assert.deepEqual(documents,[],'admin section links never load a new document');
  const originalFetch=globalThis.fetch,logoutRequests=[];
  try{
   // A retryable response avoids jsdom's unimplemented document navigation;
@@ -130,7 +126,7 @@ try{
    await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));
   }
  }finally{globalThis.fetch=originalFetch;}
- console.log('Header and admin navigation: own review documents, absent general creation action, business/account/management entries, all admin sections, mouse/keyboard and role visibility passed');
+ console.log('Header and admin navigation: own review routes, absent general creation action, business/account/management entries, all admin sections, mouse/keyboard and role visibility passed');
 }finally{
  await act(async()=>root.unmount());
  dom.window.close();

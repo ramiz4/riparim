@@ -680,3 +680,26 @@ hatten transparente Label-Container, verknüpfte Labels und umrandete Controls;
 die Sichtbarkeitsauswahl blieb mit Enter, Pfeiltasten und Escape stabil, mit
 unverschobenem Dialograhmen und ohne ResizeObserver-Meldung. Es wurden keine
 Werkstattänderungen gespeichert.
+
+
+## Client-Navigation ohne Dokument-Reload (13. Oktober 2026)
+
+Interne Seitenlinks in Logo, Benutzer-/Verwaltungsmenü und Kundenabläufen
+verwenden den Client-Router. Technische Endpunkte, Downloads, externe Ziele und
+ausdrückliche Fehlerwiederholungen behalten Dokumentnavigation. Der gemeinsame
+Release-RSC-Header enthält die von Vinext eingebettete Build-Kennung; ohne sie
+verwirft der Browser vorgebaute Antworten auch aus demselben Release und lädt
+das Zieldokument neu. Echte Buildwechsel behalten den sicheren Reload.
+
+Die Navigationstests verwenden den tatsächlichen Vinext-Link und prüfen
+DE/SQ/EN, Tastaturaktivierung, Menüschließen, native Linkausnahmen und
+abgebrochene Klicks. Der RSC-Regressionstest verwendet den tatsächlichen
+Routerplaner. Die gebaute Worker-Prüfung vergleicht öffentliche und private
+RSC-Antworten mit der unabhängig gelesenen Kennung des Frameworkrenderers.
+
+Im bestätigten Chrome-Profil `ramizloki82@googlemail.com` wurde der lokal
+gebaute Cloudflare-Worker mit isolierter Datenbank und blockierten
+Providerzugriffen geprüft. Vor der Headerkorrektur lösten Anmeldung und Logo
+zusätzliche Dokumentanfragen aus. Danach blieben Anmeldung, Logo per Tab/Enter
+und Einstellungen beim selben Dokumentzähler; nur RSC-Anfragen kamen hinzu.
+Die Prüfung hat keine echten Konten, E-Mails oder Produktionsdaten verändert.

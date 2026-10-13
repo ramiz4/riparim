@@ -20,8 +20,9 @@ globalThis.fetch=async url=>{
 await mkdir('.test-runtime/public-review-refresh',{recursive:true});
 await build({stdin:{contents:"export {default as Profile} from './app/[locale]/werkstatt/[id]/profile';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {rememberSearchSession,readSearchSession} from './lib/search-session';",resolveDir:process.cwd(),loader:'tsx'},outfile:'.test-runtime/public-review-refresh/ui.mjs',bundle:true,platform:'node',format:'esm',packages:'external',plugins:[{name:'review-completion-boundary',setup(b){
  b.onResolve({filter:/^@\/components\/review-form$/},()=>({path:'form',namespace:'fixture'}));
+ b.onResolve({filter:/^next\/link$/},()=>({path:'link',namespace:'fixture'}));
  b.onResolve({filter:/^next\/navigation$/},()=>({path:'navigation',namespace:'fixture'}));
- b.onLoad({filter:/.*/,namespace:'fixture'},a=>({loader:'js',contents:a.path==='form'?"export function ReviewForm(props){globalThis.completePublicReview=props.onSubmitted;return null;}":"export function useRouter(){return {refresh(){globalThis.dynamicRefreshes=(globalThis.dynamicRefreshes??0)+1;}};}export function usePathname(){return '/werkstatt/fixture-profile';}"}));
+ b.onLoad({filter:/.*/,namespace:'fixture'},a=>({loader:'js',resolveDir:process.cwd(),contents:a.path==='link'?"import {createElement} from 'react';export default function Link({href,children,...props}){return createElement('a',{...props,href},children);}":a.path==='form'?"export function ReviewForm(props){globalThis.completePublicReview=props.onSubmitted;return null;}":"export function useRouter(){return {refresh(){globalThis.dynamicRefreshes=(globalThis.dynamicRefreshes??0)+1;}};}export function usePathname(){return '/werkstatt/fixture-profile';}"}));
 }}]});
 const api=await import(new URL('../.test-runtime/public-review-refresh/ui.mjs',import.meta.url));
 const {createElement:h,act}=await import('react'),{createRoot}=await import('react-dom/client');
