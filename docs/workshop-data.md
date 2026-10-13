@@ -1,6 +1,6 @@
 # Zentrale Werkstattdaten
 
-`data/workshops.json` ist die versionierte Quelle für Werkstattimporte. Sie enthält den aktuellen Bestand: **162 veröffentlichte Kfz-Servicebetriebe einschließlich Fahrzeugaufbereitung und keine Entwürfe**. Der Status jedes Datensatzes ist ausdrücklich gespeichert. Die Schätzung von ungefähr 1.700 Werkstätten stammt vom Nutzer; sie ist kein recherchierter Gesamtbestand und keine Vollständigkeitsbehauptung.
+`data/workshops.json` ist die versionierte Quelle für Werkstattimporte. Sie enthält den aktuellen Bestand: **164 veröffentlichte Kfz-Servicebetriebe einschließlich Fahrzeugaufbereitung und keine Entwürfe**. Der Status jedes Datensatzes ist ausdrücklich gespeichert. Die Schätzung von ungefähr 1.700 Werkstätten stammt vom Nutzer; sie ist kein recherchierter Gesamtbestand und keine Vollständigkeitsbehauptung.
 
 Die bisherigen getrennten Dateien für Profile und Google-Momentaufnahmen wurden in diese Quelle übernommen und entfernt. Namen, Kontakte, Quellen, Prüfzeitpunkte und stabile Riparim-Kennungen bleiben erhalten. Es werden keine Platzhalter für fehlende Werkstätten erzeugt.
 
@@ -245,3 +245,15 @@ in den Werkstattdaten gespeichert. Die Prompts stehen unter
 Beim Deployment des geprüften Main-Releases wird die additive Migration vor
 der neuen Anwendung angewendet. Produktionspartner werden nicht automatisch aktiviert. Die Tests verwenden ausschließlich
 isolierte Datenbanken und fiktive Administration, ohne Zahlungen oder Livewrites.
+
+## Täglicher Import am 13. Oktober 2026
+
+Auto servis ‘BERATI’ BMW und Auto Servis & Diagnoz "OPEL" in Malishevë
+ergänzen den geprüften Quellbestand von 162 auf 164 Profile. Öffentliche
+Verzeichnisse belegen Kontakt, Straße und Fahrzeugwartung/-reparatur; die
+aktiven Maps-Einträge wurden ausschließlich über die öffentliche Oberfläche
+abgeglichen und direkt per Place-ID rückgeprüft. Marken, Beratungssprachen,
+WhatsApp und weitergehende Leistungen werden nicht aus Namen abgeleitet.
+Der Import ändert keine bisherigen Profile. Quellen, Rückstellungen und
+PR-/Release-/Liveabnahmestatus stehen im
+[Importmanifest](../data/import-2026-10-13-daily.json).

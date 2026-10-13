@@ -1522,6 +1522,32 @@
       }
     },
     {
+      "id": "auto-servis-berati-malisheve",
+      "sourceHash": "6925453ee7769afc4d3da29b6e1228062698bd59c7333b97b937917729ea0b08",
+      "sq": {
+        "specialty": "Servis automjetesh · Regjistrim në direktori",
+        "description": "GjithëBiznesi e rendit këtë biznes në Malishevë për mirëmbajtje dhe riparim automjetesh. Adresa dhe numri i telefonit vijnë nga regjistrimi në direktorinë publike; konfirmoni drejtpërdrejt me biznesin mundësinë e kontaktit dhe shërbimet konkrete.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh sipas direktorisë publike. Sqarojeni drejtpërdrejt gamën konkrete të shërbimeve."
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia për ta kontaktuar biznesin nuk është konfirmuar",
+        "sourceTitles": [
+          "GjithëBiznesi: emri, numri i telefonit, vendndodhja dhe mirëmbajtja/riparimi i automjeteve"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing · Directory listing",
+        "description": "GjithëBiznesi lists this business in Malishevë for vehicle maintenance and repair. The address and telephone number come from the public directory listing; confirm contact availability and specific services directly with the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair according to the public directory. Clarify the specific scope of services directly."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "GjithëBiznesi: name, telephone number, location and vehicle maintenance/repair"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-bledi-kline",
       "sourceHash": "1dd72c07003e3f17c78146aa6fc58228c17ded781a23741029da8f30239b0d43",
       "sq": {
@@ -1714,6 +1740,32 @@
           "Current evidence of contact details, location and passenger-car servicing",
           "Current evidence of contact details, location and passenger-car servicing",
           "Current evidence of contact details, location and passenger-car servicing"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-diagnoz-opel-malisheve",
+      "sourceHash": "6dabfec1d19e3253bfaaf6b9242349046763a7282acfbeaf19639c84c40349de",
+      "sq": {
+        "specialty": "Servis automjetesh · Regjistrim në direktori",
+        "description": "GjithëBiznesi e rendit këtë biznes në Malishevë për mirëmbajtje dhe riparim automjetesh. Adresa dhe numri i telefonit vijnë nga regjistrimi në direktorinë publike; konfirmoni drejtpërdrejt me biznesin mundësinë e kontaktit dhe shërbimet konkrete.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh sipas direktorisë publike. Sqarojeni drejtpërdrejt gamën konkrete të shërbimeve."
+        ],
+        "phoneNote": "Kontakt nga direktoria publike; mundësia për ta kontaktuar biznesin nuk është konfirmuar",
+        "sourceTitles": [
+          "GjithëBiznesi: emri, numri i telefonit, vendndodhja dhe mirëmbajtja/riparimi i automjeteve"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing · Directory listing",
+        "description": "GjithëBiznesi lists this business in Malishevë for vehicle maintenance and repair. The address and telephone number come from the public directory listing; confirm contact availability and specific services directly with the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair according to the public directory. Clarify the specific scope of services directly."
+        ],
+        "phoneNote": "Public directory contact; reachability not confirmed",
+        "sourceTitles": [
+          "GjithëBiznesi: name, telephone number, location and vehicle maintenance/repair"
         ]
       }
     },
