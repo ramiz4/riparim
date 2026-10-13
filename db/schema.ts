@@ -14,6 +14,11 @@ export const workshopProfiles = sqliteTable("workshops", {
  sources:text("sources").notNull(),checkedAt:text("checked_at").notNull(),status:text("status").notNull().default("draft"),updatedAt:text("updated_at").notNull()
 },table=>[index("idx_workshops_status_city").on(table.status,table.city)]);
 export const catalogState=sqliteTable("catalog_state",{key:text("key").primaryKey(),value:text("value").notNull()});
+export const workshopOpeningHoursImports=sqliteTable("workshop_opening_hours_imports",{
+ workshopId:text("workshop_id").primaryKey().references(()=>workshopProfiles.id,{onDelete:"cascade"}),
+ openingHours:text("opening_hours"),sourceMetadata:text("source_metadata"),importRevision:text("import_revision"),importedAt:text("imported_at"),
+ suppressed:integer("suppressed").notNull().default(0)
+});
 export const workshopGoogleRatings=sqliteTable("workshop_google_ratings",{
  workshopId:text("workshop_id").primaryKey(),rating:real("rating"),reviewCount:integer("review_count"),mapsUrl:text("maps_url").notNull(),
  sourceUrl:text("source_url"),sourceLabel:text("source_label"),checkedAt:text("checked_at").notNull(),sourceUpdatedAt:text("source_updated_at")

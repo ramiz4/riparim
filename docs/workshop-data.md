@@ -306,3 +306,42 @@ Zeiten; ein explizites `null` entfernt sie. Katalogimporte und die bestehenden
 Adminprofil-Upserts lassen diese getrennt gepflegten Spalten unverändert.
 Google-Zeiten werden nicht importiert. Direkte Angaben der Werkstätten können
 über deren bestätigte Inhaberfunktion erfasst werden.
+
+## Beauftragter Öffnungszeitenimport vom 13. Oktober 2026
+
+Auf ausdrücklichen Nutzerauftrag ergänzt `data/opening-hours-import.json` einmalig
+171 Wochenpläne aus der recherchierten CSV. 146 Pläne sind recherchiert;
+25 sind ausdrücklich angenommene Standards (Mo–Fr 08:00–18:00, Sa 08:00–16:00,
+Sonntag geschlossen). Die vier widersprüchlichen beziehungsweise veralteten
+Quellenpläne erhalten ebenfalls diesen Standard. TITANS bleibt wegen der
+gemeldeten dauerhaften Schließung ohne importierten Plan; sein Profilstatus wird
+nicht geändert. Der Auftrag schließt die Speicherung der recherchierten
+Maps-Zeiten für diese konkrete Liste ein; daraus entsteht kein allgemeiner
+Google-Bulkimport oder automatischer Aktualisierungsauftrag.
+
+Migration `0021_silly_puck.sql` ergänzt `workshop_opening_hours_imports` separat
+von Inhaberzeiten. Herkunft, Recherchehinweise und ersetzte Originalpläne bleiben
+intern erhalten. Die öffentliche API liefert nur `importedOpeningHours`, keine
+Importmetadaten. Die UI zeigt bestätigte Inhaberzeiten vorrangig und sonst den
+importierten Wochenplan ohne Herkunftshinweis oder erfundenes Bestätigungsdatum.
+Nur bestätigte Inhaberzeiten erhalten einen aktuellen Öffnungsstatus. Ein
+freigegebenes explizites Entfernen sperrt die Importzeiten atomar, auch vor dem
+ersten Import. Wiederholungen und neue Importrevisionen heben diese Sperre nicht
+auf. Ein Migrationstrigger bewahrt Entfernungen vorhandener Inhaberzeiten auch
+während des Übergangs von der vorherigen App-Version.
+
+Vorschau: `npm run hours:import`. Vorbereitung aus einer vollständigen CSV:
+`npm run hours:import -- --csv DATEI --prepare data/opening-hours-import.json`.
+Der veröffentlichte Manifeststand wird auf einer lokalen SQLite-Datenbank mit
+`--local-db DATEI --write` beziehungsweise im Checkout des geprüften Release mit
+`--release vX.Y.Z --write` angewendet. Vor produktiven Änderungen werden die
+betroffenen Tabellen gesichert und ihre Wiederherstellung isoliert geprüft.
+`--output DATEI` exportiert dieselbe parametrisierte Importabfrage für den
+authentifizierten Cloudflare-Verbindungsweg. Dessen Ausführung verlangt ebenfalls
+den geprüften Main-Release und einen Abgleich mit dessen unverändertem Manifest.
+
+Die einzige atomare Importabfrage prüft alle Werkstatt-IDs, Namen, Orte, Adressen,
+Telefone und Freigabestatus unmittelbar beim Schreiben. Ein abweichender oder
+fehlender Datensatz bricht die gesamte Abfrage ab. Die Importrevision verhindert
+erneutes Schreiben derselben Daten. Andere Profilfelder, Inhaberzeiten,
+Bewertungen und private Tabellen werden nicht geschrieben.
