@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-12T07:33:03.101Z",
+  "updatedAt": "2026-10-13T01:09:57.859Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 162,
+    "published": 164,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "Alle 162 veröffentlichten Kfz-Servicebetriebe besitzen einzeln bestätigte Google-Place-IDs. Neue Identitäten werden über die öffentliche Maps-Oberfläche gegen unabhängige Kontakt-, Standort- und Leistungsbelege geprüft; keine offenen Entwürfe.",
-    "matchedPlaceIds": 162,
+    "reason": "Alle 164 veröffentlichten Kfz-Servicebetriebe besitzen einzeln bestätigte Google-Place-IDs. Neue Identitäten werden über die öffentliche Maps-Oberfläche gegen unabhängige Kontakt-, Standort- und Leistungsbelege geprüft; keine offenen Entwürfe.",
+    "matchedPlaceIds": 164,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -2814,6 +2814,50 @@
       }
     },
     {
+      "id": "auto-servis-berati-malisheve",
+      "name": "Auto servis ‘BERATI’ BMW",
+      "city": "Malishevë",
+      "address": "Rruga Adem Jashari, Malishevë 24000",
+      "phone": "+38349378051",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Wartung und Reparatur von Fahrzeugen laut öffentlichem Verzeichnis. Konkreten Leistungsumfang direkt klären."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice · Verzeichniseintrag",
+      "description": "GjithëBiznesi führt diesen Betrieb in Malishevë für Wartung und Reparatur von Fahrzeugen. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; Erreichbarkeit und konkrete Leistungen direkt beim Betrieb bestätigen.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.gjithebiznesi.com/XK/auto-servis-%E2%80%98berati%E2%80%99-bmw-049-378-051",
+          "title": "GjithëBiznesi: Name, Telefonnummer, Standort und Fahrzeugwartung/-reparatur",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-13",
+      "status": "published",
+      "updatedAt": "2026-10-13T01:08:27Z",
+      "google": {
+        "placeId": "ChIJR0jrutd1UxMRlemhiDV-aUA",
+        "matchedAt": "2026-10-13T01:08:27Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-servis-%E2%80%98berati%E2%80%99-bmw-049-378-051",
+            "https://www.google.com/maps/search/?api=1&query=NOT_A_REAL_RIPARIM_BUSINESS&query_place_id=ChIJR0jrutd1UxMRlemhiDV-aUA"
+          ],
+          "note": "Öffentliche Maps-Oberfläche im bestätigten Projektprofil: Name, normalisiertes Telefon und unabhängige Straße/Ort stimmen überein; aktiver Eintrag mit regulärem Öffnungsstatus. Place-ID aus sichtbarem !19s-Ergebnislink direkt mit falscher Ersatzsuche rückgeprüft. Keine API-/SDK-Aufrufe, keine Inhaberbestätigung."
+        }
+      }
+    },
+    {
       "id": "auto-servis-bledi-kline",
       "name": "Auto Servis BLEDI",
       "city": "Klinë",
@@ -3171,6 +3215,50 @@
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJFTS-BHR_VBMRLDRPsHW-ogI"
           ],
           "note": "Aktuelles Betriebsprofil und unabhängiges Verzeichnis bestätigen Kontakt und Bibaj. Der vom Betrieb veröffentlichte Directions-Zielpunkt liegt höchstens 300 Meter vom selben Google-Eintrag entfernt; ein eigener Beitrag belegt Pkw-Motorarbeiten."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-diagnoz-opel-malisheve",
+      "name": "Auto Servis & Diagnoz \"OPEL\"",
+      "city": "Malishevë",
+      "address": "Rruga Pavaresia, Malishevë 24000",
+      "phone": "+38349284990",
+      "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Wartung und Reparatur von Fahrzeugen laut öffentlichem Verzeichnis. Konkreten Leistungsumfang direkt klären."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice · Verzeichniseintrag",
+      "description": "GjithëBiznesi führt diesen Betrieb in Malishevë für Wartung und Reparatur von Fahrzeugen. Adresse und Telefonnummer stammen aus dem öffentlichen Verzeichniseintrag; Erreichbarkeit und konkrete Leistungen direkt beim Betrieb bestätigen.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.gjithebiznesi.com/XK/auto-servis-diagnoz-%22opel%22-049-284-990",
+          "title": "GjithëBiznesi: Name, Telefonnummer, Standort und Fahrzeugwartung/-reparatur",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-13",
+      "status": "published",
+      "updatedAt": "2026-10-13T01:08:27Z",
+      "google": {
+        "placeId": "ChIJ35tXXoOfUxMRZEfRxbLnlrc",
+        "matchedAt": "2026-10-13T01:08:27Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-servis-diagnoz-%22opel%22-049-284-990",
+            "https://www.google.com/maps/search/?api=1&query=NOT_A_REAL_RIPARIM_BUSINESS&query_place_id=ChIJ35tXXoOfUxMRZEfRxbLnlrc"
+          ],
+          "note": "Öffentliche Maps-Oberfläche im bestätigten Projektprofil: Name, normalisiertes Telefon und unabhängige Straße/Ort stimmen überein; aktiver Eintrag mit regulärem Öffnungsstatus. Place-ID aus sichtbarem !19s-Ergebnislink direkt mit falscher Ersatzsuche rückgeprüft. Keine API-/SDK-Aufrufe, keine Inhaberbestätigung."
         }
       }
     },
