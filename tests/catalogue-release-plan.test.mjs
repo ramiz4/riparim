@@ -27,6 +27,7 @@ try{
  failAfter=Infinity;
  await apply('resume');
  assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM workshops').get().n,catalogue.workshops.length);
+ assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM workshop_contact_details').get().n,10,'the release imports the researched contact source before worker upload');
  const before=writes;
  assert.deepEqual(await apply('repeat'),{imported:false,reason:'complete'});assert.equal(writes,before,'Repeating a completed release performs no writes');
  const id=catalogue.workshops[0].id;

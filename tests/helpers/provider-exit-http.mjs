@@ -1,3 +1,4 @@
+import {catalogueFixtureKey} from './catalogue-fixture-key.mjs';
 import assert from 'node:assert/strict';
 import {execFile} from 'node:child_process';
 import {promisify} from 'node:util';
@@ -57,7 +58,7 @@ export async function providerExitHttp({directory,port,start,stop}){
  try{
   const backup=await backupFixture(parent,async storage=>{
    globalThis.providerExitEnv={DB:storage.db,BUCKET:storage.bucket};
-   const sourceData=JSON.parse(await readFile('data/workshops.json','utf8')),marker='workshop-source:'+createHash('sha256').update(JSON.stringify(sourceData)).digest('hex');await storage.db.prepare('INSERT INTO catalog_state VALUES (?,?)').bind(marker,'fixture').run();
+   const marker=await catalogueFixtureKey();await storage.db.prepare('INSERT INTO catalog_state VALUES (?,?)').bind(marker,'fixture').run();
    for(const [id,name,status] of [['exit-public','Synthetic Exit Workshop','published'],['exit-hidden','Synthetic Hidden Workshop','draft']])await storage.db.prepare("INSERT INTO workshops (id,name,city,address,phone,brands,services,specialty,description,sources,checked_at,status,updated_at) VALUES (?,?,'Prishtina','Synthetic road','+38344123456','[]','[\"Inspektion & Wartung\"]','Fixture','Synthetic isolated workshop','[]','2026-10-11',?,'2026-10-11')").bind(id,name,status).run();
    await storage.db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at) VALUES ('main',?,?,1,1,'2026-10-11')").bind(sourceOrigin,key).run();
    for(const [name,subject] of Object.entries(ids))await storage.db.prepare('INSERT INTO auth_identities VALUES (?,?,?,?,?)').bind('supabase',sourceOrigin,subject,stable(name),'2026-10-11').run();

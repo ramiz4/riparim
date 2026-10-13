@@ -14,6 +14,12 @@ export const workshopProfiles = sqliteTable("workshops", {
  sources:text("sources").notNull(),checkedAt:text("checked_at").notNull(),status:text("status").notNull().default("draft"),updatedAt:text("updated_at").notNull()
 },table=>[index("idx_workshops_status_city").on(table.status,table.city)]);
 export const catalogState=sqliteTable("catalog_state",{key:text("key").primaryKey(),value:text("value").notNull()});
+export const workshopContactDetails=sqliteTable("workshop_contact_details",{
+ workshopId:text("workshop_id").primaryKey().references(()=>workshopProfiles.id,{onDelete:"cascade"}),
+ email:text("email").notNull(),website:text("website").notNull(),sourceUrls:text("source_urls").notNull(),checkedAt:text("checked_at").notNull(),
+ matchedName:text("matched_name").notNull(),matchedPhone:text("matched_phone").notNull(),matchedCity:text("matched_city").notNull(),
+ emailVerification:text("email_verification",{enum:["publicly_listed"]}).notNull()
+});
 export const workshopGoogleRatings=sqliteTable("workshop_google_ratings",{
  workshopId:text("workshop_id").primaryKey(),rating:real("rating"),reviewCount:integer("review_count"),mapsUrl:text("maps_url").notNull(),
  sourceUrl:text("source_url"),sourceLabel:text("source_label"),checkedAt:text("checked_at").notNull(),sourceUpdatedAt:text("source_updated_at")
