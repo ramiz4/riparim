@@ -44,6 +44,7 @@ suites.push('session-cookie-reads.test.mjs');
 suites.push('deferred-pages-ui.test.mjs');
 suites.push('release-navigation-contract.test.mjs');
 suites.push('session-header-navigation.test.mjs');
+suites.push('profile-loading-header.test.mjs');
 process.exitCode=await runSuites({
  cwd:root,runtime,contract:fileURLToPath(new URL('../scripts/check-i18n.mjs',import.meta.url)),
  suites:suites.map(suite=>fileURLToPath(new URL(suite,import.meta.url))),
