@@ -63,4 +63,11 @@ const northFilters=parseCatalogueFilters(new URLSearchParams('ort=obiliq&sort=en
 check(northFilters.city==='Obiliq'&&northFilters.sort==='distance','the north branch has a valid city filter and distance origin');
 check(matchCatalogue([north,south],northFilters).map(w=>w.id).join('|')===north.id,'selecting the north municipality does not mix in the old south branch');
 check(catalogueDistance(north,'Obiliq')>3&&catalogueDistance(north,'Obiliq')<5,'independently sourced workshop and city coordinates produce a useful distance');
+const multi=parseCatalogueFilters(new URLSearchParams('ort=prishtina&ort=peja&marke=volkswagen&marke=audi&leistung=inspektion-wartung&leistung=bremsen-fahrwerk&sort=entfernung'),data);
+check(Array.isArray(multi.city)&&multi.city.length===2,'repeated URL fields preserve multiple cities');
+check(multi.sort==='name','distance sorting requires exactly one reference city');
+check(matchCatalogue(data,{...defaults,city:['Prishtina','Peja'],brand:['Volkswagen','Audi']}).map(w=>w.name).join('|')==='Alpha fixture|Gamma fixture','alternatives within a field use OR and different fields use AND');
+check(JSON.stringify(parseCatalogueFilters(new URLSearchParams(catalogueHref(multi).split('?')[1]),data))===JSON.stringify(multi),'multi-selection survives public URLs and profile returns');
+const duplicate=parseCatalogueFilters(new URLSearchParams('ort=peja&ort=unknown&ort=peja'),data);
+check(duplicate.city==='Peja','invalid and duplicate selections are dropped without widening valid selections');
 console.log(`Catalogue filter contracts: ${passed} passed`);

@@ -45,7 +45,7 @@ try{
    const ssr=new JSDOM(renderToStaticMarkup(wrap(locale,h(Page,props))));
    try{
     const doc=ssr.window.document;
-    for(const picker of doc.querySelectorAll('[role="combobox"]'))assert(picker.querySelector('[data-slot="select-value"]').textContent.trim(),`${locale}: selected values must be readable before JavaScript loads`);
+    for(const picker of doc.querySelectorAll('[role="combobox"]'))assert((picker.querySelector('[data-slot="select-value"]')??picker.closest('.searchable-picker-control')?.querySelector('.searchable-picker-selected'))?.textContent.trim(),`${locale}: selected values must be readable before JavaScript loads`);
     assert(!doc.querySelector('.catalogue-detail-search,.catalogue-private-context,.search-tabs'),'public pages have a single search path without the vehicle wizard');
     if(Page===Finder){
      assert(doc.querySelector('.landing-hero').nextElementSibling.matches('.discover-section'),'discovery sits directly after the hero');

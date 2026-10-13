@@ -8,6 +8,8 @@ import type {MessageValue,ParameterNames,MessageShape,CheckedMessages} from "./m
 
 const deBase={
  common:/* @__PURE__ */ Object.assign({},weekdayDe,{
+ moreSelections:"+{count} weitere",removeOption:"{value} entfernen",searchOptions: "{label} durchsuchen …",noOptions: "Keine passende Option gefunden.",selectedOptions: "{count} ausgewählt",
+
 
 workshopEmailActive:"Aktiv",workshopEmailInactive:"Deaktiviert",workshopEmailVerified:"Verifiziert",workshopEmailUnverified:"Nicht verifiziert",workshopEmailVerify:"Adresse verifizieren",workshopEmailEnable:"Adresse öffentlich anzeigen",workshopEmails:"E-Mail-Adressen",workshopEmailsHelp:"Bis zu zehn unterschiedliche Kontaktadressen. Entferne alle Adressen, um die E-Mail-Anzeige auszublenden.",workshopEmailNumber:"E-Mail-Adresse {number}",workshopEmailRemove:"E-Mail-Adresse {number} entfernen",workshopEmailAdd:"E-Mail-Adresse hinzufügen",workshopEmailsUnchanged:"E-Mail-Adressen bleiben unverändert.",
 hoursToday:"Heute",hoursWeek:"Wochenplan und Ausnahmen",
@@ -36,6 +38,8 @@ const sq=/* @__PURE__ */ defineCatalog({
  customer:customerSq,
  management:managementSq,
  common:/* @__PURE__ */ Object.assign({},weekdaySq,{
+ moreSelections:"+{count} të tjera",removeOption:"Hiq {value}",searchOptions: "Kërko në {label} …",noOptions: "Nuk u gjet asnjë opsion i përshtatshëm.",selectedOptions: "{count} të zgjedhura",
+
 
 workshopEmailActive:"Aktive",workshopEmailInactive:"Çaktivizuar",workshopEmailVerified:"E verifikuar",workshopEmailUnverified:"E paverifikuar",workshopEmailVerify:"Verifiko adresën",workshopEmailEnable:"Shfaq adresën publikisht",workshopEmails:"Adresat e emailit",workshopEmailsHelp:"Deri në dhjetë adresa të ndryshme kontakti. Hiqi të gjitha adresat për të fshehur emailin publik.",workshopEmailNumber:"Adresa e emailit {number}",workshopEmailRemove:"Hiq adresën e emailit {number}",workshopEmailAdd:"Shto adresë emaili",workshopEmailsUnchanged:"Adresat e emailit mbeten të pandryshuara.",
 hoursToday:"Sot",hoursWeek:"Orari javor dhe përjashtimet",
@@ -58,6 +62,8 @@ const en=/* @__PURE__ */ defineCatalog({
  customer:customerEn,
  management:managementEn,
  common:/* @__PURE__ */ Object.assign({},weekdayEn,{
+ moreSelections:"+{count} more",removeOption:"Remove {value}",searchOptions: "Search {label} …",noOptions: "No matching options found.",selectedOptions: "{count} selected",
+
 
 workshopEmailActive:"Active",workshopEmailInactive:"Disabled",workshopEmailVerified:"Verified",workshopEmailUnverified:"Unverified",workshopEmailVerify:"Verify address",workshopEmailEnable:"Show address publicly",workshopEmails:"Email addresses",workshopEmailsHelp:"Up to ten different contact addresses. Remove all addresses to hide public email contacts.",workshopEmailNumber:"Email address {number}",workshopEmailRemove:"Remove email address {number}",workshopEmailAdd:"Add email address",workshopEmailsUnchanged:"Email addresses remain unchanged.",
 hoursToday:"Today",hoursWeek:"Weekly schedule and exceptions",

@@ -126,6 +126,19 @@ for(const name of ['', '   ', null, 123, 'x', 'x'.repeat(81), 'A'.repeat(80)]){
  await expect(await call('DELETE','a',{id:fallback}),200,'name fixture removed');
 }
 roles.a.displayName='Fixture A';
+const multiId=crypto.randomUUID(),multiForm=form(multiId);multiForm.set('services',JSON.stringify(['Inspektion & Wartung','Bremsen & Fahrwerk']));
+await expect(await call('POST','a',multiForm),201,'multiple completed services can be submitted');
+check(JSON.stringify(JSON.parse(sqlite.prepare('SELECT services FROM visits WHERE id=?').get(multiId).services))===JSON.stringify(['Inspektion & Wartung','Bremsen & Fahrwerk']),'all completed services are persisted');
+const ownMulti=await(await call('GET','a',undefined,'/api/visits')).json();check(ownMulti.visits.find(v=>v.id===multiId).services.length===2,'owned read returns the complete selection');
+await expect(await call('PUT','a',form(multiId,{revision:0})),200,'legacy editor keeps the original primary service');
+check(JSON.parse(sqlite.prepare('SELECT services FROM visits WHERE id=?').get(multiId).services).length===2,'legacy edits preserve additional services when the primary service is unchanged');
+const explicitSingle=form(multiId,{revision:1});explicitSingle.set('services',JSON.stringify(['Bremsen & Fahrwerk']));await expect(await call('PUT','a',explicitSingle),200,'an explicit single selection replaces the previous multi-selection');
+check(sqlite.prepare('SELECT service FROM visits WHERE id=?').get(multiId).service==='Bremsen & Fahrwerk','the legacy field remains the canonical primary service');
+const updatedMulti=form(multiId,{revision:2});updatedMulti.set('services',JSON.stringify(['Bremsen & Fahrwerk','Diagnose & Elektronik']));await expect(await call('PUT','a',updatedMulti),200,'multi-selection survives review editing');
+await expect(await moderate(multiId,'published',3),200,'multiple services follow the existing moderation path');
+check((await publicReviews()).reviews.some(v=>v.services?.length===2&&v.services.includes('Diagnose & Elektronik')),'published reviews expose every selected service');
+for(const value of ['[]','["Unknown fixture"]','["Inspektion & Wartung",null]','invalid JSON',JSON.stringify(Array(7).fill('Inspektion & Wartung'))]){const invalid=form(crypto.randomUUID());invalid.set('services',value);await expect(await call('POST','a',invalid),400,'invalid service arrays are rejected');}
+await expect(await call('DELETE','a',{id:multiId}),200,'multi-service fixture removed');
 const hidden=crypto.randomUUID();await expect(await call('POST','a',form(hidden)),201,'hidden-workshop fixture submitted');sqlite.prepare("UPDATE workshops SET status='draft' WHERE id=?").run(workshop);await expect(await moderate(hidden,'published',0),409,'hidden workshop cannot publish review');await expect(await call('DELETE','a',{id:hidden}),200,'hidden fixture removed');
 check(sqlite.prepare('SELECT COUNT(*) AS n FROM visits').get().n===0&&objects.size===0,'all ephemeral review and evidence data removed');
 console.log(JSON.stringify({checksPassed:passed,storage:'isolated in-memory SQLite and R2 fixture',realEmailsSent:false,productionTouched:false}));

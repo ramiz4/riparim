@@ -12,6 +12,7 @@ import {listWorkshops} from "@/db/directory";
 import {storage} from "@/db/storage";
 import {getAppUser,getAdminUser} from "@/app/auth";
 import type {Review} from "@/app/journeys";
+import {decodeReviewServices} from "@/lib/review";
 import WorkshopProfile from "./profile";
 
 export const dynamic="force-dynamic";
@@ -34,7 +35,7 @@ export default async function WorkshopPage({params,searchParams=Promise.resolve(
  const query=await searchParams,initialSearchHref=profileSearchHref(typeof query.suche==="string"?query.suche:null,directory);
  const admin=await getAdminUser(user);
  let reviews:Review[]=[],reviewError="";
- try{const result=await storage().db.prepare("SELECT v.display_name,v.vehicle,v.service,v.date,v.rating,v.review FROM visits v JOIN workshops w ON w.id=v.workshop AND w.status='published' WHERE v.workshop=? AND v.status='published' ORDER BY v.created_at DESC LIMIT 100").bind(id).all<Review>();reviews=result.results;}
+ try{const result=await storage().db.prepare("SELECT v.display_name,v.vehicle,v.service,v.services,v.date,v.rating,v.review FROM visits v JOIN workshops w ON w.id=v.workshop AND w.status='published' WHERE v.workshop=? AND v.status='published' ORDER BY v.created_at DESC LIMIT 100").bind(id).all<Omit<Review,"services">&{services:string|null}>();reviews=result.results.map(value=>({...value,services:decodeReviewServices(value.service,value.services)}));}
  catch(e){console.error("profile-reviews",e);reviewError="unavailable";}
  return <I18nMessages messages={getMessages(locale,["public","customer"])}><WorkshopProfile publicSnapshot={publicReleaseRender()} display={displayById[workshop.id]} initialSearchHref={initialSearchHref} workshop={workshop} directory={publicReleaseRender()?[workshop]:directory} reviews={reviews} reviewError={reviewError} signedIn={!!user} account={user?{email:user.email,displayName:user.displayName,provider:user.provider}:null} isAdmin={!!admin?.isModerator}/></I18nMessages>;
 }

@@ -34,6 +34,7 @@ for(const account of [null,{email:'customer@example.test',displayName:'Fixture a
     const header=dom.window.document.querySelector('header');
     assert(header,`${page} has a site header`);
     const wrapper=header.parentElement;
+    assert.equal(wrapper.dataset.hero,page==='landing'?'true':'false',`${page} explicitly enables the initial glass only over a hero`);
     // Ignore generated Radix IDs; compare the visible header and its wrapper.
     for(const node of header.querySelectorAll('[id]'))node.removeAttribute('id');
     for(const node of header.querySelectorAll('[for]'))node.removeAttribute('for');

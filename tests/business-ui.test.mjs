@@ -45,6 +45,8 @@ try{
  check(document.querySelector('header h1')?.textContent==='Mein Betrieb'&&!document.querySelector('header button')&&!button('Aktualisieren'),'The page title has no redundant refresh action');
  loadFailure=false;await click(button('Erneut versuchen'));
  check(document.querySelector('h1').textContent==='Mein Betrieb'&&!document.querySelector('form')&&!document.querySelector('h2')&&document.querySelector('a[href="/werkstaetten"]'),'An empty business overview offers the finder without embedding a claim form');
+ loadFailure=true;await remount(true);check(button('Erneut versuchen')&&!button('Aktualisieren'),'Moderation shows retry only when loading fails');
+ loadFailure=false;await click(button('Erneut versuchen'));check(!button('Erneut versuchen')&&!button('Aktualisieren'),'A recovered moderation queue has no redundant refresh button');await remount();
  records.claims=[{...requestView('00000000-0000-4000-8000-000000000001','claim'),documents:[{id:'00000000-0000-4000-8000-000000000021',fileName:'proof.pdf'},{id:'00000000-0000-4000-8000-000000000022',fileName:'register.png'}]}];await remount();
  check(document.querySelectorAll('a[href*="document="]').length===2,'The applicant overview links every document individually');await remount(true);check(document.querySelectorAll('a[href*="document="]').length===2,'The moderation queue links every private document individually');await remount();
  check(document.querySelector('.business-status').textContent==='In Prüfung'&&!document.querySelector('form'),'The overview shows a pending claim without the application form');

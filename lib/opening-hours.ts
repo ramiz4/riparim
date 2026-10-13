@@ -31,6 +31,7 @@ function localMoment(now:Date){
  const date=`${part("year")}-${part("month")}-${part("day")}`;
  return {date,weekday:(new Date(date+"T12:00:00Z").getUTCDay()+6)%7,minute:Number(part("hour"))*60+Number(part("minute"))};
 }
+export function openingWeekday(now:Date){return localMoment(now).weekday;}
 export function todayOpeningDay(hours:OpeningHours,now:Date):OpeningDay{
  const moment=localMoment(now);return hours.exceptions.find(value=>value.date===moment.date)?.day??hours.week[moment.weekday];
 }

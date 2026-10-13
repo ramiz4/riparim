@@ -1,6 +1,6 @@
 import { integer, real, sqliteTable, text, index, uniqueIndex, primaryKey } from "drizzle-orm/sqlite-core";
 export const visits = sqliteTable("visits", {
- id:text("id").primaryKey(),owner:text("owner").notNull(),workshop:text("workshop").notNull(),date:text("date").notNull(),vehicle:text("vehicle").notNull(),service:text("service").notNull(),
+ id:text("id").primaryKey(),owner:text("owner").notNull(),workshop:text("workshop").notNull(),date:text("date").notNull(),vehicle:text("vehicle").notNull(),service:text("service").notNull(),services:text("services",{mode:"json"}).$type<string[]>(),
  evidenceType:text("evidence_type").notNull(),evidenceNote:text("evidence_note").notNull().default(""),fileKey:text("file_key"),fileName:text("file_name"),fileType:text("file_type"),
  status:text("status").notNull().default("pending"),moderatorNote:text("moderator_note").notNull().default(""),moderatedAt:text("moderated_at"),moderatedBy:text("moderated_by"),revision:integer("revision").notNull().default(0),
  displayName:text("display_name"),rating:integer("rating"),review:text("review"),createdAt:text("created_at").notNull()

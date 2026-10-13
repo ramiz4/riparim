@@ -74,37 +74,44 @@ try{
  assert.equal(docked.borderTopRightRadius,'0px','The docked search joins the header without a rounded top right corner');
  const name=panel().querySelector('input[type="search"]');
  await act(async()=>{Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(name,'Fixture search');name.dispatchEvent(new Event('input',{bubbles:true}));});
- for(const source of [css,production])for(const dark of [false,true])for(const viewportWidth of [320,390,689,720]){
+ for(const source of [css,production])for(const dark of [false,true])for(const viewportWidth of [320,390,689,720,1000]){
   width=viewportWidth;height=988;sentinelTop=120;document.documentElement.classList.toggle('dark',dark);styles(source);
   await act(async()=>window.dispatchEvent(new Event('resize')));
   const before=getComputedStyle(panel()),normal=geometry(before),headerHeight=pixels(getComputedStyle(document.documentElement).getPropertyValue('--site-header-height'));
-  assert.equal(before.borderRadius,'12px','The normal search preserves its rounded panel');
-  assert.equal(normal.left,16,'The normal search keeps the page gutter');
+  assert.equal(pixels(before.borderRadius),0,'The mobile search does not have an outer rounded box');
+  assert.equal(pixels(before.borderTopWidth),0,'The mobile search has no outer frame border');
+  assert.equal(before.backgroundColor,'rgba(0, 0, 0, 0)','The normal mobile search does not create a separate background box');
+  assert.equal(normal.left,pixels(getComputedStyle(document.documentElement).getPropertyValue('--page-gutter')),'The normal search keeps the responsive page gutter');
   name.focus();
   await act(async()=>observers.at(-1).emit(headerHeight-1,false));
   const style=getComputedStyle(panel()),after=geometry(style);
   assert.equal(after.left,0,'The docked frame reaches the left viewport edge');
   assert.equal(after.right,width,'The docked frame reaches the right edge without horizontal overflow');
   assert.deepEqual({...after,left:normal.left,right:normal.right},normal,'Docking preserves the controls position, available width and vertical spacing');
+  assert.equal(pixels(style.borderTopWidth),0,'Docking avoids a second border below the header');
   assert.equal(style.position,'sticky');assert.equal(pixels(resolved(style,'top')),headerHeight,'The docked search sits directly below the responsive header');
   assert.equal(pixels(style.borderTopLeftRadius||style.borderRadius),0);assert.equal(pixels(style.borderTopRightRadius||style.borderRadius),0);
-  assert.equal(style.borderBottomLeftRadius||style.borderRadius,'12px','Docking preserves the bottom corners');
+  assert.equal(pixels(style.borderBottomLeftRadius||style.borderRadius),0,'The docked mobile frame has no rounded bottom corners');
   assert.equal(document.activeElement,name,'Docking preserves keyboard focus');assert.equal(name.value,'Fixture search','Docking preserves the active query');
   for(const label of ['Ort','Leistung'])assert(panel().querySelector(`[role="combobox"][aria-label="${label}"]`),'The docked search retains labelled location/service controls');
-  assert(panel().querySelector('[aria-label="Weitere Filter"]'),'The docked search retains the advanced filter action');
+  assert(panel().querySelector('[aria-label="Filter"]'),'The docked search retains the drawer action');
+  assert.equal(getComputedStyle(panel().querySelector('.catalogue-filter-fields')).display,'none','Mobile location and service controls move into the drawer');
   await act(async()=>observers.at(-1).emit(headerHeight+24,true));
   assert.deepEqual(geometry(getComputedStyle(panel())),normal,'Releasing restores the original frame without changing the controls');
-  assert.equal(getComputedStyle(panel()).borderTopLeftRadius||getComputedStyle(panel()).borderRadius,'12px','Releasing restores rounded top corners');
+  assert.equal(pixels(getComputedStyle(panel()).borderTopLeftRadius||getComputedStyle(panel()).borderRadius),0,'Releasing preserves the frameless mobile search');
   cases++;
  }
  await act(async()=>observers.at(-1).emit(2000,false));
  assert.equal(panel().dataset.docked,'false','A search panel below the viewport is not treated as docked');
- for(const source of [css,production])for(const [viewportWidth,viewportHeight] of [[721,988],[1280,988],[689,600],[390,520]]){
+ for(const source of [css,production])for(const [viewportWidth,viewportHeight] of [[1001,988],[1280,988],[689,600],[390,520]]){
   width=viewportWidth;height=viewportHeight;sentinelTop=0;styles(source);
   await act(async()=>window.dispatchEvent(new Event('resize')));
   assert.equal(panel().dataset.docked,'false','Desktop and short viewports release the docked state');
-  assert.notEqual(getComputedStyle(panel()).position,'sticky','Desktop and short viewports preserve the static search');
-  assert.equal(getComputedStyle(panel()).borderTopLeftRadius||getComputedStyle(panel()).borderRadius,'12px');
+  if(viewportWidth>1000){
+   assert.equal(getComputedStyle(panel()).position,'sticky','Desktop filters remain accessible beside the results');
+   assert.equal(getComputedStyle(panel()).overflowY,'auto','Tall desktop filters remain scrollable');
+  }else assert.notEqual(getComputedStyle(panel()).position,'sticky','Tablet and short mobile viewports preserve the static search');
+  assert.equal(pixels(getComputedStyle(panel()).borderTopLeftRadius||getComputedStyle(panel()).borderRadius),viewportWidth>1000?12:0);
  }
  console.log(JSON.stringify({catalogueDockingCasesPassed:cases,sourceAndProduction:true,liveRequests:false}));
 }finally{await act(async()=>root.unmount());dom.window.close();}
