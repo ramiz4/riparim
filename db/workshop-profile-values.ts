@@ -1,0 +1,3 @@
+import type {ProfileInput} from "./directory";
+export const profileColumns=["id","name","city","address","phone","phone_note","whatsapp","brands","services","service_details","languages","specialty","description","lat","lng","sources","checked_at","status","updated_at"];
+export function profileValues(w:ProfileInput){return [w.id,w.name,w.city,w.address,w.phone,w.phoneNote,w.whatsapp,JSON.stringify(w.brands),JSON.stringify(w.services),JSON.stringify(w.serviceDetails),JSON.stringify(w.languages),w.specialty,w.description,w.lat===null?null:String(w.lat),w.lng===null?null:String(w.lng),JSON.stringify(w.sources),w.checkedAt,w.status,w.updatedAt];}
