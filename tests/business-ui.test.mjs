@@ -4,7 +4,7 @@ import {createRequire} from 'node:module';
 import {JSDOM,VirtualConsole} from 'jsdom';
 const dom=new JSDOM('<div id="root"></div>',{url:'https://riparim.example.test/betriebe',pretendToBeVisual:true,virtualConsole:new VirtualConsole()});
 for(const key of ['window','document','navigator','HTMLElement','HTMLButtonElement','HTMLFormElement','HTMLInputElement','HTMLSelectElement','HTMLTextAreaElement','DocumentFragment','Element','Node','NodeFilter','MutationObserver','CustomEvent','Event','MouseEvent','KeyboardEvent','getComputedStyle'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});
-globalThis.requestAnimationFrame=dom.window.requestAnimationFrame.bind(dom.window);globalThis.cancelAnimationFrame=dom.window.cancelAnimationFrame.bind(dom.window);globalThis.IS_REACT_ACT_ENVIRONMENT=true;
+globalThis.requestAnimationFrame=dom.window.requestAnimationFrame.bind(dom.window);globalThis.cancelAnimationFrame=dom.window.cancelAnimationFrame.bind(dom.window);globalThis.IS_REACT_ACT_ENVIRONMENT=true;globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};HTMLElement.prototype.scrollIntoView=function(){};
 const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
 const out='.test-runtime/business-ui';await mkdir(out,{recursive:true});
 const bundle=await build({stdin:{contents:"export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {BusinessPanel} from './components/business-panel';",resolveDir:process.cwd(),loader:'tsx'},outfile:out+'/ui.mjs',bundle:true,write:false,format:'esm',platform:'node',packages:'external',alias:{'next/link':'vinext/shims/link'}});await writeFile(out+'/ui.mjs',bundle.outputFiles[0].contents);
@@ -30,7 +30,7 @@ globalThis.fetch=async(url,options)=>{
  const commit=()=>{const list=body.kind==='claim'?records.claims:records.changes;const record=list.find(row=>row.id===body.id);record.status=body.decision;record.revision++;record.moderatorNote=body.note;return Response.json({ok:true});};
  if(mode==='pending')return new Promise(resolve=>pending={resolve,commit});return commit();
 };
-let root=createRoot(document.getElementById('root')),passed=0,view='businesses';
+let root=createRoot(document.getElementById('root')),passed=0,view='businesses',testLocale='de';
 const check=(value,label)=>{assert(value,label);passed++;};
 const button=label=>[...document.querySelectorAll('button')].find(node=>node.textContent===label);
 const control=label=>[...document.querySelectorAll('label')].find(node=>node.textContent.startsWith(label))?.querySelector('input,select,textarea')??document.getElementById([...document.querySelectorAll('label')].find(node=>node.textContent===label)?.htmlFor);
@@ -39,6 +39,12 @@ const type=async(node,value)=>{const prototype=node instanceof HTMLTextAreaEleme
 const submit=async form=>act(async()=>form.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));
 const render=async(moderation=false)=>act(async()=>root.render(fixtureMessages(createElement(BusinessPanel,{moderation,view}))));
 const remount=async(moderation=false)=>{await act(async()=>root.unmount());root=createRoot(document.getElementById('root'));await render(moderation);};
+async function chooseDecisionReason(label){
+ const trigger=document.querySelector('[role="alertdialog"] [role="combobox"]');
+ await act(async()=>{trigger.focus();trigger.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true,cancelable:true}));});
+ const option=[...document.querySelectorAll('[role="option"]')].find(node=>node.textContent===label);assert(option,'Expected decision reason exists');
+ await act(async()=>{option.focus();option.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true}));});
+}
 const dialog=()=>document.querySelector('[role="alertdialog"]');
 try{
  loadFailure=true;await render();check(document.querySelector('[role="alert"]').textContent===getMessages('de').management.businessUnavailable&&button('Erneut versuchen'),'Loading failure exposes an accessible refresh action');
@@ -76,16 +82,16 @@ try{
  check(document.querySelector('.business-evidence').textContent.includes('company-register')&&document.querySelector('.business-request a').getAttribute('rel')==='noopener noreferrer','The administrator sees private evidence with safe external links');
  check(document.querySelector('.business-current summary').textContent==='Aktuell freigegebene Angaben ansehen','Change review includes the approved profile for comparison');
  await click(button('Bestätigen'));check(dialog().contains(document.activeElement),'Moderation confirmation takes keyboard focus');
- check(button('Entscheidung speichern').disabled,'Moderation cannot be confirmed without a meaningful reason');
+ check(button('Entscheidung speichern').disabled&&!dialog().querySelector('textarea'),'Moderation starts with a required reason selection');check(dialog().classList.contains('app-dialog')&&dialog().querySelector('[data-slot=alert-dialog-header]')&&dialog().querySelector('[data-slot=dialog-body]')&&dialog().querySelector('[data-slot=alert-dialog-footer]'),'Decision dialogs use the shared header, scrolling body and footer');
  await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));
  check(!dialog()&&requests.filter(row=>row.method==='PATCH').length===0,'Escape cancels moderation without sending a decision');
- await click(button('Bestätigen'));await type(control('Begründung'),'Independent fictional operator proof was checked.');mode='pending';await click(button('Entscheidung speichern'));
+ await click(button('Bestätigen'));await chooseDecisionReason('Inhabernachweis geprüft und bestätigt');mode='pending';await click(button('Entscheidung speichern'));
  check([...dialog().querySelectorAll('button')].every(node=>node.disabled),'Pending moderation locks confirmation and cancellation');
  await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));
  check(dialog()&&requests.filter(row=>row.method==='PATCH').length===1,'A pending decision cannot be dismissed or duplicated');
  await act(async()=>pending.resolve(pending.commit()));pending=null;mode='success';
  check(!dialog()&&document.querySelector('[role="status"]').textContent==='Entscheidung gespeichert.','Confirmed ownership refreshes the queue and announces completion');
- await click(button('Ablehnen'));await type(control('Begründung'),'The proposed fictional changes require additional proof.');mode='failure';await click(button('Entscheidung speichern'));
+ await click(button('Ablehnen'));await chooseDecisionReason('Anderer Grund');await type(control('Eigene Begründung'),'The proposed fictional changes require additional proof.');mode='failure';await click(button('Entscheidung speichern'));
  check(dialog().querySelector('[role="alert"]').textContent===getMessages('de').management.business_claim_conflict,'A stale decision remains visible and is not announced as success');
  mode='success';await click(button('Entscheidung speichern'));
  check(!dialog()&&document.querySelector('.business-panel').textContent.includes('Keine Änderungsentwürfe vorhanden'),'A confirmed rejection clears the pending change queue');
@@ -130,7 +136,15 @@ try{
   if(outcome==='replacement'){await remount();check(document.body.textContent.includes('The replacement proposal is the current pending change.'),'A full refresh reveals the current replacement proposal rather than the obsolete one');}
  }
  view='businesses';records={workshops:[workshop,{...workshop,id:'second-workshop',name:'Second fictional workshop'}],claims:[requestView('other-pending','claim')],changes:[]};await remount();check(document.querySelectorAll('.business-request').length===2&&[...document.querySelectorAll('button')].filter(node=>node.textContent==='Profil bearbeiten').length===2&&!document.querySelector('.business-status'),'The businesses page supports multiple owned workshops without rendering applications');view='requests';await remount();check(document.querySelector('h1').textContent==='Meine Anträge'&&document.querySelectorAll('.business-request').length===1&&!button('Profil bearbeiten'),'The requests page excludes owned workshop profiles');
+ for(const locale of ['de','sq','en'])for(const kind of ['claim','change'])for(const approve of [true,false]){
+  testLocale=locale;const copy=getMessages(locale).management,request=requestView('localized-'+kind+'-'+approve,kind);
+  records={workshops:[workshop],claims:kind==='claim'?[request]:[],changes:kind==='change'?[request]:[]};await remount(true);
+  await click(button(approve?copy.approve:copy.reject));
+  const reason=kind==='claim'?(approve?copy.businessReasonOwnershipVerified:copy.businessReasonOwnershipUnproven):(approve?copy.businessReasonChangesVerified:copy.businessReasonContactUnverified);
+  await chooseDecisionReason(reason);check(!dialog().querySelector('textarea')&&!button(copy.saveDecision).disabled,'Every business decision context offers a localized standard reason without extra text');
+  await click(button(copy.saveDecision));check(requests.filter(row=>row.method==='PATCH').at(-1).body.note===reason,'The selected business reason is submitted through the existing private decision contract');
+ }
  console.log(JSON.stringify({businessUiChecksPassed:passed,liveRequests:false}));
 }finally{await act(async()=>root.unmount());dom.window.close();}
 
-function fixtureMessages(element){return createElement(I18nProvider,{locale:"de",messages:getMessages("de",["common","customer","management"])},element);}
+function fixtureMessages(element){return createElement(I18nProvider,{locale:testLocale,messages:getMessages(testLocale,["common","customer","management"])},element);}

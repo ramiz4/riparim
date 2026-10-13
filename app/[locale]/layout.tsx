@@ -10,6 +10,7 @@ import "../catalogue.css";
 import "../workshop-pages.css";
 import "../ratings.css";
 import "../form-controls.css";
+import "../select-with-other.css";
 import "../theme.css";
 import "../footer.css";
 import {getMessages,createTranslator} from "@/lib/i18n/messages";
