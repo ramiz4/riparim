@@ -219,3 +219,13 @@ a.profile-phone-summary{display:flex;flex-direction:row;align-items:center;gap:8
 @media(max-width:720px){.admin-workshops-page .admin-overview{grid-template-columns:1fr}}
 
 .profile-gallery-thumbnails figure{margin:0;min-width:0;max-width:120px}.profile-gallery-thumbnails figcaption{padding-top:5px;font-size:11px;line-height:1.4}.profile-gallery-thumbnails{flex-wrap:wrap;overflow:auto;max-height:160px}
+
+.profile-email-summary {margin:1.25rem 0;min-width:0;}
+.profile-email-summary h3 {font-size:.85rem;margin:0 0 .6rem;color:var(--muted-foreground);}
+.profile-email-summary a {font-size:14px;line-height:1.5;min-height:32px;display:flex;align-items:flex-start;gap:.5rem;margin:.5rem 0;}
+.profile-email-summary a span {overflow-wrap:anywhere;min-width:0;}
+.profile-email-summary svg {flex-shrink:0;margin-top:.15rem;}
+
+.profile-email-entry {margin:.7rem 0;}
+.profile-email-entry a {margin-bottom:.1rem;}
+.profile-email-status {display:block;padding-left:1.55rem;font-size:.75rem;color:var(--muted-foreground);}

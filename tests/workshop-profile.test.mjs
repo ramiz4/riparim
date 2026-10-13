@@ -106,4 +106,12 @@ assert(reviewArea.includes('profile-riparim-reviews')&&!pageMarkup.includes('goo
 const publishedMarkup=render(profilePage.default,{...props,reviews:[{display_name:'Fixture Driver',vehicle:'Fixture car',service:'Diagnose',date:'2026-10-03',rating:5,review:'Fixture published review'}]});
 const populatedReviewArea=publishedMarkup.slice(publishedMarkup.indexOf('id="bewertungen"'));
 assert(populatedReviewArea.includes('Fixture published review')&&!publishedMarkup.includes('google-bewertungen'),'published Riparim reviews remain visible without Google');
+for(const locale of ['de','sq','en']){
+ const emailContacts=[{address:'parts+prishtina@example.test',verified:false},{address:'service-ferizaj@example.test',verified:true}];
+ const html=renderToStaticMarkup(React.createElement(I18nProvider,{locale,messages:getMessages(locale,['common','public'])},React.createElement(profilePage.default,{...props,workshop:{...workshop,emails:emailContacts.map(e=>e.address),emailContacts}})));
+ assert(html.includes('mailto:parts%2Bprishtina%40example.test')&&html.includes('mailto:service-ferizaj%40example.test'));
+ assert(html.includes(getMessages(locale).common.workshopEmailUnverified)&&html.includes(getMessages(locale).common.workshopEmailVerified));
+ assert(!html.match(/<div class="workshop-overview-actions"[^]*?<\/div>/)[0].includes('mailto:'),'Email contacts add no top action');
+ assert(!pageMarkup.includes('profile-email-summary'),'Missing contacts omit the email section');
+}
 console.log('Workshop profiles: exact identity, live hours, Kosovo time/DST, in-profile photo dialogs, route/map, service evidence, review states and confirmed mobile actions passed (fictional fixtures only)');

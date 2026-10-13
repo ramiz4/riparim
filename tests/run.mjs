@@ -8,6 +8,8 @@ const suites=['worker-runtime.test.mjs','public-review-refresh.test.mjs','catalo
 suites.push('opening-hours.test.mjs');
 suites.push('opening-hours-import.test.mjs');
 suites.push('workshop-contacts.test.mjs');
+suites.push('workshop-emails.test.mjs');
+suites.push('workshop-emails-ui.test.mjs');
 suites.push('suite-runner.test.mjs');
 suites.push('premium-workshops.test.mjs');
 suites.push('premium-partner-ui.test.mjs');

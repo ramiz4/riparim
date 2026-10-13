@@ -1,21 +1,24 @@
 import {ValidationError} from "@/lib/validation-error";
 import { storage } from "./storage";
 import canonical from "@/data/workshops.json";
+import emailSource from "@/data/workshop-emails.json";
 import contactSource from "@/data/workshop-contacts.json";
-import {validateWorkshopContacts,type WorkshopContacts} from "@/lib/workshop-contacts";
+import {validateWorkshopContacts,validateWorkshopEmailContacts,type WorkshopContacts,type WorkshopEmailContacts} from "@/lib/workshop-contacts";
 import {validateWorkshopCatalogue,type WorkshopCatalogue} from "@/lib/workshop-source";
 import {catalogueImportStatements,catalogueImportKey,catalogueCompletionSql} from "./catalogue-import";
 import {workshopScopeExclusion} from "@/lib/workshop-scope";
 import {workshopRetired} from "@/lib/workshop-retirement";
 import {services,cities,type Workshop,type Source} from "@/lib/workshops";
+import {researchedEmailsSql} from "./workshop-email-values";
 export {profileColumns,profileValues} from "./workshop-profile-values";
 export type ProfileInput=Omit<Workshop,"initials"|"color"|"rating"|"count"|"googleRating">;
 // Workers have no reliable wall clock during module initialization.
 // Release CI validates this immutable source; avoid reparsing it in every isolate.
 const catalogue=canonical as WorkshopCatalogue;
 const contacts=contactSource as WorkshopContacts;
+const emails=emailSource as WorkshopEmailContacts;
 let seedKey:Promise<string>|undefined;
-export function catalogueSeedKey(){return seedKey??=catalogueImportKey(catalogue,contacts.contacts); }
+export function catalogueSeedKey(){return seedKey??=catalogueImportKey(catalogue,contacts.contacts,emails.contacts); }
 export {decodeProfile} from "./workshop-record";
 import {decodeProfile} from "./workshop-record";
 // Canonical JSON is imported independently from immutable schema migrations.
@@ -25,12 +28,13 @@ export async function ensureInitialCatalog(){
  const marker=await db.prepare("SELECT value FROM catalog_state WHERE key=?").bind(key).first();if(marker)return;
  validateWorkshopCatalogue(catalogue);
  validateWorkshopContacts(contacts,catalogue.workshops);
- const statements=await catalogueImportStatements(db,catalogue,contacts.contacts);
+ validateWorkshopEmailContacts(emails,catalogue.workshops);
+ const statements=await catalogueImportStatements(db,catalogue,contacts.contacts,emails.contacts);
  // Bounded, repeatable batches also support large imports; the completion marker is last.
  for(let i=0;i<statements.length;i+=50)await db.batch(statements.slice(i,i+50));
  await db.prepare(catalogueCompletionSql).bind(key,new Date().toISOString()).run();
 }
-export async function listWorkshops(includeDrafts=false){await ensureInitialCatalog();const {db}=storage();const result=await db.prepare(`SELECT w.*, CASE WHEN h.suppressed=0 THEN h.opening_hours END AS imported_opening_hours, ROUND(AVG(v.rating),1) AS rating, COUNT(v.id) AS count, g.workshop_id AS google_workshop_id, g.rating AS google_rating, g.review_count AS google_review_count, g.maps_url AS google_maps_url, g.source_url AS google_source_url, g.source_label AS google_source_label, g.checked_at AS google_checked_at, g.source_updated_at AS google_source_updated_at FROM workshops w LEFT JOIN workshop_opening_hours_imports h ON h.workshop_id=w.id LEFT JOIN visits v ON v.workshop=w.id AND v.status='published' LEFT JOIN workshop_google_ratings g ON g.workshop_id=w.id ${includeDrafts?"":"WHERE w.status='published'"} GROUP BY w.id ORDER BY w.name COLLATE NOCASE`).all<Record<string,unknown>>();return result.results.map(decodeProfile);}
+export async function listWorkshops(includeDrafts=false){await ensureInitialCatalog();const {db}=storage();const result=await db.prepare(`SELECT w.*, ${researchedEmailsSql} AS researched_emails, CASE WHEN h.suppressed=0 THEN h.opening_hours END AS imported_opening_hours, ROUND(AVG(v.rating),1) AS rating, COUNT(v.id) AS count, g.workshop_id AS google_workshop_id, g.rating AS google_rating, g.review_count AS google_review_count, g.maps_url AS google_maps_url, g.source_url AS google_source_url, g.source_label AS google_source_label, g.checked_at AS google_checked_at, g.source_updated_at AS google_source_updated_at FROM workshops w LEFT JOIN workshop_opening_hours_imports h ON h.workshop_id=w.id LEFT JOIN visits v ON v.workshop=w.id AND v.status='published' LEFT JOIN workshop_google_ratings g ON g.workshop_id=w.id ${includeDrafts?"":"WHERE w.status='published'"} GROUP BY w.id ORDER BY w.name COLLATE NOCASE`).all<Record<string,unknown>>();return result.results.map(row=>decodeProfile(row,{emailEditing:includeDrafts}));}
 export async function publishedWorkshop(id:string){await ensureInitialCatalog();return storage().db.prepare("SELECT id FROM workshops WHERE id=? AND status='published'").bind(id).first();}
 export function validateProfile(body:Record<string,unknown>,id:string):ProfileInput{
  if(workshopRetired(id))throw new ValidationError("workshop_retired","Diese Werkstattkennung wurde entfernt und darf nicht erneut verwendet werden.");

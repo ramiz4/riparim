@@ -1,3 +1,5 @@
+import {researchedEmailsSql} from "@/db/workshop-email-values";
+import {sameWorkshopEmailEdits} from "./workshop-emails";
 import {validateEvidenceFile} from "@/lib/evidence-file";
 import {ValidationError} from "@/lib/validation-error";
 import {storage} from "@/db/storage";
@@ -52,10 +54,11 @@ export async function requestWorkshopClaim(user:AppUser,body:unknown,files:File[
 }
 export async function requestWorkshopChange(user:AppUser,workshopId:string,body:unknown){
  const fields=businessProfileSchema.parse(body),db=storage().db;await ensureInitialCatalog();
- const current=await db.prepare("SELECT w.*,o.account_id AS business_owner FROM workshops w JOIN workshop_owners o ON o.workshop_id=w.id WHERE w.id=? AND o.account_id IN (?,?)").bind(workshopId,...ownerPair(user)).first<Record<string,unknown>>();
+ const current=await db.prepare(`SELECT w.*,${researchedEmailsSql} AS researched_emails,o.account_id AS business_owner FROM workshops w JOIN workshop_owners o ON o.workshop_id=w.id WHERE w.id=? AND o.account_id IN (?,?)`).bind(workshopId,...ownerPair(user)).first<Record<string,unknown>>();
  if(!current)throw new BusinessError("Dieses Profil ist deinem Konto nicht zugeordnet.",403,"business_not_owner");
- const workshop=decodeProfile(current),validated=validatedProfile({...workshop,...fields},workshopId);
- const profile=businessProfileSchema.parse({...editableBusinessProfile(validated),openingHours:fields.openingHours}),id=crypto.randomUUID();
+ const workshop=decodeProfile(current,{emailEditing:true}),validated=validatedProfile({...workshop,...fields},workshopId);
+ const profile=businessProfileSchema.parse({...editableBusinessProfile(validated),openingHours:fields.openingHours,emailEntries:fields.emailEntries}),id=crypto.randomUUID();
+ if(profile.emailEntries&&sameWorkshopEmailEdits(profile.emailEntries,workshop.editableEmailContacts??[]))delete profile.emailEntries;
  const result=await db.prepare(`INSERT INTO workshop_changes (id,workshop_id,owner,profile,base_updated_at,created_at) SELECT ?,?,?,?,?,? WHERE EXISTS (SELECT 1 FROM workshop_owners WHERE workshop_id=? AND account_id IN (?,?)) AND EXISTS (SELECT 1 FROM workshops WHERE id=? AND updated_at=?) AND NOT EXISTS (SELECT 1 FROM workshop_changes WHERE workshop_id=? AND status='pending') AND ${activeOwner}`).bind(id,workshopId,String(current.business_owner),JSON.stringify(profile),workshop.updatedAt,new Date().toISOString(),workshopId,...ownerPair(user),workshopId,workshop.updatedAt,workshopId,...activeBindings(user.userId)).run();
  if(!result.meta.changes)throw new BusinessError("Für dieses Profil liegt bereits ein Entwurf vor oder die Zuordnung wurde geändert.",409,"business_draft_conflict");
  return id;
@@ -87,13 +90,14 @@ export async function decideChange(admin:AppUser,id:string,revision:number,decis
  const placeId=profile.status==="published"?await confirmedPublicationPlace(profile,existing,false):null;
  if(profile.status==="published"&&!placeId)throw new BusinessError("Für diese Kontaktdaten fehlt eine eindeutige bestätigte Google-Zuordnung. Der bisherige öffentliche Stand bleibt erhalten.",422,"business_google_required");
  profile.updatedAt=new Date(Math.max(Date.now(),Date.parse(existing.updatedAt)+1)).toISOString();
+ if(fields.emailEntries&&sameWorkshopEmailEdits(fields.emailEntries,existing.editableEmailContacts??[]))delete fields.emailEntries;
  const operation=crypto.randomUUID();
  const availablePlace=placeId?" AND NOT EXISTS (SELECT 1 FROM workshop_google_places WHERE place_id=? AND workshop_id<>?)":"";
  // Reserve this exact decision inside the same transaction as publication.
  // The token prevents later statements from applying a concurrent decision's
  // values when the first optimistic write did not win.
  const statements=[db.prepare(`UPDATE workshop_changes SET status='approved',moderator_note=?,moderated_at=?,moderated_by=?,revision=revision+1,decision_token=? WHERE id=? AND revision=? AND status='pending' AND EXISTS (SELECT 1 FROM workshops WHERE id=workshop_changes.workshop_id AND updated_at=?) AND EXISTS (SELECT 1 FROM workshop_owners WHERE workshop_id=workshop_changes.workshop_id AND account_id=workshop_changes.owner) AND ${activeOwnerSql("workshop_changes.owner")} AND ${actor.sql}${availablePlace}`).bind(note,now,admin.userId,operation,id,revision,existing.updatedAt,...actor.values,...(placeId?[placeId,existing.id]:[])),
-  db.prepare("UPDATE workshops SET phone=?,phone_note=?,whatsapp=?,services=?,service_details=?,description=?,updated_at=?,opening_hours=CASE WHEN ? THEN ? ELSE opening_hours END,opening_hours_confirmed_at=CASE WHEN ? THEN ? ELSE opening_hours_confirmed_at END WHERE id=? AND updated_at=? AND EXISTS (SELECT 1 FROM workshop_changes WHERE id=? AND decision_token=? AND status='approved')").bind(fields.phone,fields.phoneNote,fields.whatsapp,JSON.stringify(fields.services),JSON.stringify(fields.serviceDetails),fields.description,profile.updatedAt,fields.openingHours!==undefined?1:0,fields.openingHours==null?null:JSON.stringify(fields.openingHours),fields.openingHours!==undefined?1:0,fields.openingHours==null?null:String(change.created_at),existing.id,existing.updatedAt,id,operation)
+  db.prepare("UPDATE workshops SET phone=?,phone_note=?,whatsapp=?,services=?,service_details=?,description=?,updated_at=?,opening_hours=CASE WHEN ? THEN ? ELSE opening_hours END,opening_hours_confirmed_at=CASE WHEN ? THEN ? ELSE opening_hours_confirmed_at END,editorial_emails=CASE WHEN ? THEN ? ELSE editorial_emails END WHERE id=? AND updated_at=? AND EXISTS (SELECT 1 FROM workshop_changes WHERE id=? AND decision_token=? AND status='approved')").bind(fields.phone,fields.phoneNote,fields.whatsapp,JSON.stringify(fields.services),JSON.stringify(fields.serviceDetails),fields.description,profile.updatedAt,fields.openingHours!==undefined?1:0,fields.openingHours==null?null:JSON.stringify(fields.openingHours),fields.openingHours!==undefined?1:0,fields.openingHours==null?null:String(change.created_at),fields.emailEntries!==undefined?1:0,fields.emailEntries===undefined?null:JSON.stringify(fields.emailEntries),existing.id,existing.updatedAt,id,operation)
  ];
  if(fields.openingHours===null)statements.push(db.prepare("INSERT INTO workshop_opening_hours_imports (workshop_id,suppressed) SELECT workshop_id,1 FROM workshop_changes WHERE id=? AND decision_token=? AND status='approved' ON CONFLICT(workshop_id) DO UPDATE SET suppressed=1").bind(id,operation));
  if(placeId){

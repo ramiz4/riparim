@@ -11,9 +11,11 @@ export async function catalogueReleasePlan(catalogue,commit,root=process.cwd()){
  // its locked esbuild/Wrangler tools, with no application validator dependency.
  const {contacts}=JSON.parse(await readFile(resolve(root,'data/workshop-contacts.json'),'utf8'));
  if(!Array.isArray(contacts))throw Error('Released contact source is missing');
+ const {contacts:emails}=JSON.parse(await readFile(resolve(root,'data/workshop-emails.json'),'utf8'));
+ if(!Array.isArray(emails))throw Error('Released email source is missing');
  // The same statement factory powers runtime imports; this adapter records its plan.
  const recorder={prepare(sql){return {bind(...params){return {sql,params};}};}};
- return {schemaVersion:1,commit,key:await catalogueImportKey(catalogue,contacts),completionSql:catalogueCompletionSql,statements:await catalogueImportStatements(recorder,catalogue,contacts)};
+ return {schemaVersion:1,commit,key:await catalogueImportKey(catalogue,contacts,emails),completionSql:catalogueCompletionSql,statements:await catalogueImportStatements(recorder,catalogue,contacts,emails)};
 }
 export function statementSql({sql,params}){
  let index=0;

@@ -44,7 +44,8 @@ Telefonkontakt und Ort. Bei JavaScript-Websites bleibt auch die konkrete
 die Adresse öffentlich aufführt. Es bestätigt weder Zustellung noch Einwilligung
 oder Betriebsbesitz. Ansprache, Antworten und Follow-up-Termine bleiben im
 bestehenden Google Sheet; dieser Datenimport löst keinen E-Mail-Versand aus.
-Die öffentliche Profil-API erhält durch die Erweiterung keine neuen Felder.
+Die ursprüngliche Einzeladressenspalte und Websiteangaben bleiben für ältere
+Releases erhalten. Mehrfachadressen ergänzen sie über den folgenden Vertrag.
 
 `npm run catalog:check` prüft Kontaktformat, Quellen, Prüfdatum, eindeutige IDs
 und die Übereinstimmung mit dem veröffentlichten Katalog. Der Runtime-Import
@@ -54,6 +55,74 @@ Liveprofile werden übersprungen, neuere Kontaktprüfungen bleiben erhalten.
 Kontaktdaten ändern keine Profilrevisionen, Bewertungen oder Besitzrechte. Die
 additive Drizzle-Migration wird über den normalen geprüften Main-Release
 angewendet; der anschließende Katalogimport ergänzt die zehn Kontaktdatensätze.
+
+## Mehrere E-Mail-Adressen
+
+`data/workshop-emails.json` verwendet Version 2 des Kontaktvertrags und enthält
+eine Recherchezeile für jede der 172 bestehenden Werkstattkennungen. Der am
+13. Oktober 2026 im internen Browser geprüfte Bestand umfasst 83 Adressen bei
+74 Werkstätten, davon acht mit mehreren Adressen. 98 Listen bleiben leer,
+einschließlich drei ungeklärter Zuordnungen. Jede Adresse besitzt eigene
+Quellen-URLs und ein Prüfdatum; erfolglose Prüfungen und ausgeschlossene
+Fremdtreffer sind dokumentiert. Die zehn vorhandenen Adressen und ihre
+Nachweise bleiben erhalten. Es werden keine Adressen aus Domains abgeleitet.
+
+Migrationen `0023` und `0024` ergänzen `workshop_email_addresses`, die nullable
+Spalte `workshops.editorial_emails` und den Revisionsnachweis
+`workshop_email_imports`. Die erste Migration übernimmt die zehn bestehenden
+Kontaktzeilen samt Nachweisen. Alte Spalten werden weder entfernt noch
+umgeschrieben. Eine Datenbankgrenze erlaubt höchstens zehn Rechercheadressen
+je Werkstatt. Der Katalogimport prüft die tatsächliche Betriebszuordnung und
+ergänzt nur neue oder jüngere Nachweise; die Deploymentplanung bleibt frei
+von Laufzeitdecodern und deren Validatorabhängigkeiten.
+
+`editorial_emails = null` verwendet die Rechercheadressen. Eine gespeicherte
+Liste hat dauerhaft Vorrang, auch eine leere Liste. Ihre Einträge besitzen
+`address`, `active` und `verified`. Deaktivierte Einträge bleiben ausschließlich
+für den berechtigten Inhaber und die Verwaltung sichtbar. Entfernte Einträge
+werden auch durch spätere Rechercheimporte nicht öffentlich wiederhergestellt.
+Recherchierte Adressen sind immer unbestätigt. Verifizierung ist die manuelle
+Bestätigung durch die berechtigte Verwaltung oder eine freigegebene
+Inhaberänderung; sie bestätigt keine technische Zustellung. Mehrere Adressen
+können gleichzeitig verifiziert sein.
+
+Inhaberänderungen verwenden die vorhandenen Entwürfe und Moderation;
+Adminänderungen verwenden die bestehende Berechtigung und Profilrevision.
+Der Schreibvertrag verwendet `emailEntries` mit Statuswerten; die öffentliche
+Stringliste `emails` wird bei Profilupdates nicht als Schreibauftrag interpretiert.
+Beide Formulare beginnen mit der aktuell wirksamen Liste und erhalten auch
+deaktivierte redaktionelle Einträge. Unveränderte Listen werden ausgelassen.
+Ändert die UI eine Adresse, setzt sie deren vorherige Verifizierung zurück.
+An den Systemgrenzen gelten zehn unterschiedliche Adressen, maximal
+254 Zeichen, entfernte äußere Leerzeichen und Dublettenprüfung ohne Beachtung
+der Groß-/Kleinschreibung. Reihenfolge und explizite Verifizierungs-/Aktivwerte
+bleiben erhalten.
+
+Die öffentliche API liefert `emails: string[]` und die zugehörigen aktiven
+`emailContacts: {address,verified}[]`. Sie zeigt keine Quellen, inaktiven
+Einträge oder Importmetadaten. „Kontakt & Standort“ enthält einzelne codierte
+`mailto:`-Links und den jeweiligen Verifizierungsstatus. Ohne aktive Adressen
+entfällt der E-Mail-Bereich. Der skalare Adressaggregate verändert weder
+Bewertungsanzahl noch Sterne; Konto-E-Mails und Öffnungszeiten werden nicht
+bearbeitet. Es erfolgt kein Mailversand.
+
+```sh
+npm run emails:import
+npm run emails:import -- --output /geschützter/pfad/query.json
+npm run emails:import -- --local-db /isolierte/kopie.sqlite --write
+# Nur mit dem veröffentlichten Main-Release ausgecheckt:
+npm run emails:import -- --release vX.Y.Z --write --revision <vorschau-hash>
+```
+
+Die Revision ist der SHA-256 des validierten vollständigen Manifests. Eine
+abweichende angegebene Revision wird abgewiesen. Vor jedem tatsächlichen
+Schreibvorgang prüft der Import alle Werkstattzuordnungen, einschließlich
+leerer Listen, und schreibt Revision und Adressen atomar. Gleiche Revisionen
+ändern keine bestehenden Daten; jüngere Nachweise und sämtliche redaktionellen
+Listen bleiben geschützt. Vor Produktionsmigrationen/-importen ist eine
+geschützte SQL-Sicherung mit erfolgreicher isolierter Wiederherstellung nötig.
+Veröffentlichung erfolgt ausschließlich über geprüften PR, Squash-Merge und
+den normalen Main-Release.
 
 ## Kuratierte SQ-/EN-Anzeigen
 

@@ -1,3 +1,4 @@
+import {researchedEmailsSql} from "@/db/workshop-email-values";
 import {z} from "zod";
 import {storage} from "@/db/storage";
 import {ownerPair,type AppUser} from "./auth/app-user";
@@ -25,7 +26,7 @@ export async function businessState(user:AppUser,moderation=false,cursors:{claim
   const items=rows.results.slice(0,50).map(row=>view(row,kind)),last=items.at(-1);
   return {items,next:rows.results.length>50&&last?btoa(JSON.stringify({date:last.createdAt,id:last.id})):null};
  };
- const owned=moderation?await listWorkshops(true):(await db.prepare("SELECT w.* FROM workshops w JOIN workshop_owners o ON o.workshop_id=w.id WHERE o.account_id IN (?,?) ORDER BY w.name").bind(...owners).all<Record<string,unknown>>()).results.map(decodeProfile);
+ const owned=moderation?await listWorkshops(true):(await db.prepare(`SELECT w.*, ${researchedEmailsSql} AS researched_emails FROM workshops w JOIN workshop_owners o ON o.workshop_id=w.id WHERE o.account_id IN (?,?) ORDER BY w.name`).bind(...owners).all<Record<string,unknown>>()).results.map(row=>decodeProfile(row,{emailEditing:true}));
  const claims=await read("workshop_claims","claim",cursors.claims),changes=await read("workshop_changes","change",cursors.changes);
  // Current guidance and edit locks must not depend on a page of historical decisions.
  const pendingClaims=moderation?[]:(await db.prepare("SELECT r.id,r.workshop_id,w.name AS workshop_name,r.created_at,r.file_name,r.file_key,r.file_type,r.documents FROM workshop_claims r JOIN workshops w ON w.id=r.workshop_id WHERE r.owner IN (?,?) AND r.status='pending' ORDER BY r.created_at DESC,r.id DESC").bind(...owners).all<Record<string,unknown>>()).results.map(row=>({id:String(row.id),workshopId:String(row.workshop_id),workshopName:String(row.workshop_name),createdAt:String(row.created_at),fileName:row.file_name?String(row.file_name):null,documents:claimDocumentViews(row)}));

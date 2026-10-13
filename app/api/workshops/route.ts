@@ -1,3 +1,4 @@
+import {workshopEmailEditsSchema,sameWorkshopEmailEdits,type WorkshopEmailEdit} from "@/lib/workshop-emails";
 import {isLocale} from "@/lib/i18n/locale";
 import {publicWorkshopResponse} from "@/lib/public-workshops";
 import {ValidationError} from "@/lib/validation-error";
@@ -26,11 +27,12 @@ async function save(request:Request,update:boolean){
  if(!sameOrigin(request))return json({error:"Ungültige Anfrage.",errorCode:"invalid_request"},403);
  let body:Record<string,unknown>;
  try{body=await readJson(request);}catch{return json({error:"Ungültige Eingaben.",errorCode:"invalid_request"},400);}
- let profile;
+ let profile,emails:WorkshopEmailEdit[]|undefined;
  try{
   const id=update?String(body.id??""):String(body.id??crypto.randomUUID());
   if(!/^[a-z0-9][a-z0-9-]{2,80}$/.test(id))return json({error:"Ungültige Profilkennung.",errorCode:"workshop_invalid_id"},400);
   profile=validateProfile(body,id);
+  if(body.emailEntries!==undefined)emails=workshopEmailEditsSchema.parse(body.emailEntries);
  }catch(e){return json({error:e instanceof ValidationError?e.message:"Bitte prüfe die Eingaben.",errorCode:e instanceof ValidationError?e.code:"invalid_request"},400);}
  try{
   const all=await listWorkshops(true),existing=all.find(w=>w.id===profile.id);
@@ -39,13 +41,17 @@ async function save(request:Request,update:boolean){
   if(!update&&existing)return json({error:"Diese Profilkennung ist bereits vergeben.",errorCode:"workshop_id_exists"},409);
   const placeId=profile.status==="published"?await confirmedPublicationPlace(profile,existing):null;
   if(profile.status==="published"&&!placeId)return json({error:"Für dieses Profil fehlt eine eindeutige bestätigte Google-Zuordnung oder der Google-Eintrag gehört bereits zu einem anderen Profil. Bitte als Entwurf speichern und die Zuordnung prüfen.",errorCode:"workshop_google_required"},422);
+  if(existing&&emails&&sameWorkshopEmailEdits(emails,existing.editableEmailContacts??[]))emails=undefined;
+  profile.updatedAt=new Date(Math.max(Date.now(),existing?Date.parse(existing.updatedAt)+1:0)).toISOString();
   const {db}=storage(),statements=[];
   if(update){
    const fields=profileColumns.slice(1),values=profileValues(profile).slice(1);
+   if(emails!==undefined){fields.push("editorial_emails");values.push(JSON.stringify(emails));}
    statements.push(db.prepare(`UPDATE workshops SET ${fields.map(x=>`${x}=?`).join(",")} WHERE id=? AND updated_at=?`).bind(...values,profile.id,String(body.previousUpdatedAt??"")));
   }else{
    statements.push(db.prepare(`INSERT INTO workshops (${profileColumns.join(",")}) VALUES (${profileColumns.map(()=>"?").join(",")})`).bind(...profileValues(profile)));
   }
+  if(!update&&emails!==undefined)statements.push(db.prepare("UPDATE workshops SET editorial_emails=? WHERE id=? AND updated_at=?").bind(JSON.stringify(emails),profile.id,profile.updatedAt));
   if(placeId){
    // Update the identity link together with the profile, without copying API stars/reviews.
    // The timestamp predicate also protects the metadata when an optimistic edit conflicts.

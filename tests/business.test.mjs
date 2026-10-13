@@ -213,6 +213,36 @@ for(const winningValidation of [1,2]){
   assert.deepEqual(readWinner(),committed,'A losing optimistic decision cannot overwrite the winner’s profile, audit data or Google identity');passed++;
  }finally{Date.now=originalNow;holdBatch=null;}
 }
+// Per-address verification stays moderated and fenced by the profile revision.
+latest=(await directory.listWorkshops()).find(w=>w.id===first.id);
+const emailEntries=[{address:'prishtina@example.test',active:true,verified:true},{address:'ferizaj@example.test',active:true,verified:true},{address:'old@example.test',active:false,verified:false}];
+for(const invalid of [[{address:'invalid',active:true,verified:false}],Array.from({length:11},(_,i)=>({address:`mail${i}@example.test`,active:true,verified:false})),[{address:'same@example.test',active:true,verified:false},{address:'SAME@example.test',active:false,verified:true}]])check((await change('a',first.id,{...profile(latest),emailEntries:invalid})).status===400,'Email contracts reject malformed, excessive and case-insensitive duplicate addresses');
+check((await change('b',first.id,{...profile(latest),emailEntries})).status===403,'Foreign owners cannot replace or verify contacts');
+response=await change('a',first.id,{...profile(latest),emailEntries});const emailChange=(await response.json()).id;
+check(response.status===201&&db.prepare('SELECT editorial_emails FROM workshops WHERE id=?').get(first.id).editorial_emails===null,'Pending email verification cannot publish contacts');
+check((await decide('admin','change',emailChange)).status===200,'The existing moderation decision publishes the per-address list');
+latest=(await directory.listWorkshops()).find(w=>w.id===first.id);
+assert.deepEqual(latest.emails,emailEntries.filter(e=>e.active).map(e=>e.address));
+check(latest.emailContacts.length===2&&latest.emailContacts.every(e=>e.verified)&&!Object.hasOwn(latest,'editableEmailContacts'),'Public responses expose both verified active addresses and hide inactive contacts');
+const ownedEmail=(await state('a').then(r=>r.json())).workshops.find(w=>w.id===first.id);
+assert.deepEqual(ownedEmail.editableEmailContacts,emailEntries,'The owner can edit and reactivate inactive addresses');passed++;
+response=await change('a',first.id,{...profile(latest),emailEntries});const unchangedEmails=(await response.json()).id;
+check(!Object.hasOwn(JSON.parse(db.prepare('SELECT profile FROM workshop_changes WHERE id=?').get(unchangedEmails).profile),'emailEntries'),'Unchanged contact lists are omitted server-side');await decide('admin','change',unchangedEmails,'rejected');
+globalThis.fixtureUser=actors.admin;
+response=await workshops.PATCH(request('PATCH',{...latest,previousUpdatedAt:latest.updatedAt,emailEntries:[]},{},'/api/workshops'));
+check(response.status===200&&db.prepare('SELECT editorial_emails FROM workshops WHERE id=?').get(first.id).editorial_emails==='[]','Administration can explicitly remove all contacts');
+latest=(await directory.listWorkshops()).find(w=>w.id===first.id);
+const importedBefore=db.prepare('SELECT count(*) AS n FROM workshop_email_addresses WHERE workshop_id=?').get(first.id).n;
+db.prepare('INSERT INTO workshop_email_addresses VALUES (?,?,?,?,?,?,?,?,?,?)').run(first.id,'new-research@example.test','new-research@example.test','["https://workshop.example.test/contact"]','2026-10-13',0,latest.name,latest.phone,latest.city,'fixture-email-import');
+check((await directory.listWorkshops()).find(w=>w.id===first.id).emails.length===0,'Later research cannot resurrect explicitly removed email contacts');
+response=await workshops.PATCH(request('PATCH',{...latest,previousUpdatedAt:latest.updatedAt,emailEntries},{},'/api/workshops'));check(response.status===200,'Administration can verify several contacts in one revision');
+check((await workshops.PATCH(request('PATCH',{...latest,previousUpdatedAt:latest.updatedAt,emailEntries:[]},{},'/api/workshops'))).status===409,'A stale administration save cannot clear a newer verified list');
+latest=(await directory.listWorkshops()).find(w=>w.id===first.id);
+response=await change('a',first.id,{...profile(latest),emailEntries:[]});const racedEmailChange=(await response.json()).id;
+beforeBatch=()=>db.prepare("UPDATE workshops SET updated_at='2099-01-01',editorial_emails=? WHERE id=?").run(JSON.stringify(emailEntries),first.id);
+check((await decide('admin','change',racedEmailChange)).status===409,'A concurrent profile revision fences the email moderation transaction');
+assert.deepEqual(JSON.parse(db.prepare('SELECT editorial_emails FROM workshops WHERE id=?').get(first.id).editorial_emails),emailEntries);passed++;
+check(db.prepare('SELECT count(*) AS n FROM workshop_email_addresses WHERE workshop_id=?').get(first.id).n===importedBefore+1,'Editorial actions preserve private research evidence');
 const deleteAuth={projectUrl,provider:"supabase",client:{deleteUser:async()=>({error:null})}};
 await cleanup.deleteAccount(deleteAuth,aId);
 check(![...objects.keys()].some(key=>key.startsWith('evidence/'+actors.a.userId+'/'))&&db.prepare('SELECT COUNT(*) AS n FROM evidence_uploads WHERE owner=?').get(actors.a.userId).n===0,'Account deletion removes claim documents and failed-upload inventory');
