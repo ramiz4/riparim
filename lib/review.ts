@@ -28,6 +28,8 @@ export function decodeReviewServices(primary:unknown,stored:unknown):string[]{
  if(stored==null)return [primary];
  let values:unknown=stored;if(typeof stored==='string'){try{values=JSON.parse(stored);}catch{throw Error('Invalid stored review services');}}
  if(!Array.isArray(values)||!values.length||values.length>services.length-1||values.some(value=>typeof value!=='string'))throw Error('Invalid stored review services');
+ // Previous workers update only the scalar during deployment or rollback.
+ if(values[0]!==primary)return [primary];
  return [...new Set(values.map(value=>String(value)))];
 }
 export function reviewServiceValues(review:{service:string;services?:string[]}):string[]{return review.services?.length?review.services:[review.service];}

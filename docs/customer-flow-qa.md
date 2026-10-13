@@ -629,7 +629,9 @@ her; bestehende `#bewerten`-Links bleiben gültig. Sprache und der geprüfte
 Suchrücksprung bleiben auch im Anmelderückweg erhalten. Geschlossene Entwürfe,
 einschließlich einer ausgewählten Datei, bleiben nur im Speicher der aktuellen
 Seite und sind an Konto und Werkstatt gebunden. Erfolgreiches Einreichen startet
-beim nächsten Öffnen einen leeren Entwurf. Der Anzeigename kommt weiterhin
+beim nächsten Öffnen einen leeren Entwurf, auch bei Browser-Vorwärts nach dem
+Schließen der Erfolgsansicht; der Submit-Button ist dann wieder vorhanden.
+Der Anzeigename kommt weiterhin
 serverseitig aus dem bestätigten Konto; das Formular enthält keine Namenseingabe.
 
 Migration `0025_dark_pretty_boy.sql` ergänzt die nullable JSON-Spalte
@@ -642,6 +644,10 @@ die bisherige Auswahl. Ältere Bearbeitungsanfragen bewahren zusätzliche Katego
 wenn die primäre Leistung unverändert bleibt. Eigene Einreichungen, Moderation und
 öffentliche Bewertungen zeigen sämtliche Leistungen in der gewählten Sprache.
 Berechtigungen, Besuchsnachweise und Freigabeanforderungen bleiben unverändert.
+Schreibt ein vorheriger Worker während Deployment oder Rollback nur `service`,
+hat ein geänderter skalarer Wert Vorrang vor der veralteten JSON-Liste. Nullable
+Legacy-Einfügungen bleiben lesbar. Diese Übergänge prüft
+`tests/review-services.test.mjs` nach Anwendung der echten Migrationen.
 
 `tests/profile-review-dialog.test.mjs` prüft URL-Zustand, Browsernavigation,
 Entwurf/File-Erhalt, Konto-/Werkstattgrenzen und den Anmelderückweg.

@@ -7,7 +7,7 @@ import {formatDate,formatNumber} from "@/lib/i18n/format";
 import {reviewServicesLabel,valueLabel} from "@/lib/i18n/values";
 import {localizeHref} from "@/lib/i18n/locale";
 import {LocaleAnchor} from "@/components/locale-anchor";
-import {useCallback,useEffect,useId,useState} from "react";
+import {useCallback,useEffect,useId,useRef,useState} from "react";
 import {useRouter} from "next/navigation";
 import {ArrowLeft,Check,ChevronDown,Copy,LoaderCircle,FileCheck2,Globe,Mail,MapPin,MessageCircle,Navigation,Phone,Share2,ShieldCheck,Star} from "lucide-react";
 import {usePublicSession} from "@/components/use-public-session";
@@ -42,6 +42,9 @@ export default function WorkshopProfile({publicSnapshot=false,workshop:initialWo
  const router=useRouter();const [reviewOpen,setReviewOpen]=useState(false),[reviewBusy,setReviewBusy]=useState(false),[contact,setContact]=useState(false),[message,setMessage]=useState(""),[initialMessage,setInitialMessage]=useState(""),[feedback,setFeedback]=useState(""),[backHref,setBackHref]=useState(()=>localizeHref(initialSearchHref??"/werkstaetten",locale));
  const reviewFormId=useId(),reviewIdentity=`${w.id}:${account?.provider??"guest"}:${account?.email??"guest"}`;
  const [reviewDraft,setReviewDraft]=useState<{identity:string;value:ReviewFormDraft}|null>(null),[reviewSubmitted,setReviewSubmitted]=useState<string|null>(null);
+ const reviewOpenRef=useRef(false);
+ // Busy-state URL resynchronization must preserve the success screen until a real reopen.
+ const applyReviewOpen=useCallback((open:boolean)=>{if(open&&!reviewOpenRef.current)setReviewSubmitted(null);reviewOpenRef.current=open;setReviewOpen(open);},[]);
  const saveReviewDraft=useCallback((value:ReviewFormDraft)=>setReviewDraft({identity:reviewIdentity,value}),[reviewIdentity]);
  useNavigationGuard({busy:reviewBusy,dirty:contact&&message!==initialMessage||reviewDraft?.identity===reviewIdentity&&reviewDraft.value.dirty});
  const [selection,setSelection]=useState<ProfileSelection>({brand:null,service:null});
@@ -58,10 +61,10 @@ export default function WorkshopProfile({publicSnapshot=false,workshop:initialWo
  useEffect(()=>{const session=readSearchSession(),explicit=profileSearchHref(new URLSearchParams(window.location.search).get("suche"),directory),remembered=profileSearchHref(session?.catalogueHref??null,directory),href=initialSearchHref??explicit??remembered;setBackHref(localizeHref(href??"/werkstaetten",locale));const filters=href?parseCatalogueFilters(new URL(href,window.location.origin).searchParams,directory):defaultCatalogueFilters;setSelection(profileSelection(filters));},[directory,w.id,locale,initialSearchHref]);
  // The URL owns modal state, including legacy login returns and browser navigation.
  useEffect(()=>{
-  const sync=()=>{const open=reviewDialogRequested(window.location.href);if(reviewBusy&&!open){window.history.pushState({...window.history.state,riparimReviewDialog:window.location.pathname},"",reviewDialogHref(window.location.href,true));return;}setReviewOpen(open);};
+  const sync=()=>{const open=reviewDialogRequested(window.location.href);if(reviewBusy&&!open){window.history.pushState({...window.history.state,riparimReviewDialog:window.location.pathname},"",reviewDialogHref(window.location.href,true));return;}applyReviewOpen(open);};
   sync();window.addEventListener("popstate",sync);window.addEventListener("hashchange",sync);
   return()=>{window.removeEventListener("popstate",sync);window.removeEventListener("hashchange",sync);};
- },[reviewBusy,w.id]);
+ },[reviewBusy,w.id,applyReviewOpen]);
  function changeReviewOpen(open:boolean){
   if(reviewBusy)return;
   const href=reviewDialogHref(window.location.href,open),current=window.location.pathname+window.location.search+window.location.hash;
@@ -70,9 +73,9 @@ export default function WorkshopProfile({publicSnapshot=false,workshop:initialWo
    else if(window.history.state?.riparimReviewDialog===window.location.pathname)window.history.back();
    else window.history.replaceState(window.history.state,"",href);
   }
-  setReviewOpen(open);
+  applyReviewOpen(open);
  }
- function openReview(){if(reviewSubmitted===reviewIdentity){setReviewDraft(null);setReviewSubmitted(null);}changeReviewOpen(true);}
+ function openReview(){changeReviewOpen(true);}
  function startWhatsApp(){
   setFeedback("");
   const draft=t("public.whatsAppHello",{name:w.name})+t("public.messageAsk");setInitialMessage(draft);setMessage(draft);setContact(true);

@@ -203,3 +203,22 @@ Inhaberentwürfe und Katalogimporte bewahren freigegebene Öffnungszeiten. Nach
 dem Release werden keine Google-Widgets in öffentlichen Profilen mehr geladen;
 bestehende externe Maps- und Routenlinks bleiben verfügbar. Bestätigte Inhaber
 reichen Wochenplan und Ausnahmen über die bestehende Moderation ein.
+
+## Mehrere Arbeiten pro Bewertung
+
+Migration `0025_dark_pretty_boy.sql` ergänzt `visits.services` als nullable
+JSON-Spalte und übernimmt vorhandene `service`-Werte als Einzelelementlisten.
+Vor dem produktiven Backfill eine geschützte Plattform-Sicherung mit erfolgreicher
+isolierter Wiederherstellungsprüfung erstellen. Der Deploymentjob wendet die
+Migration vor dem neuen Worker an; bestehende Migrationen bleiben unverändert.
+
+Neue Schreibvorgänge spiegeln die erste Kategorie weiterhin in `service`.
+Der bisherige Worker kann während des Deployments und nach einem Code-Rollback
+weiterarbeiten: neue Legacy-Zeilen ohne JSON lesen sich als Einzelkategorie.
+Ändert er nur das skalare Feld, hat dieses beim erneuten Lesen Vorrang vor einer
+abweichenden ersten JSON-Kategorie. Dadurch gehen alte Worker-Änderungen beim
+erneuten Upgrade nicht verloren; veraltete zusätzliche Kategorien werden in
+diesem Fall nicht weiter angezeigt. Bei übereinstimmender erster Kategorie bleibt
+die Mehrfachauswahl erhalten. Ein Code-Rollback entfernt die Spalte nicht und
+zeigt im alten Worker nur die primäre Kategorie. Besuchsnachweise und deren
+Zugriffsregeln bleiben unverändert.
