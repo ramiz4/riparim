@@ -41,7 +41,7 @@ export function DeferredManagement({kind}:{kind:DeferredManagementKind}){
  const currentDirectory=directory?.key===directoryKey?directory:null,directoryPending=!!workshopId&&(!currentDirectory||pendingDirectory===directoryKey),directoryReady=!workshopId||currentDirectory?.state==='ready'&&!directoryPending;
  const title={settings:t('customer.settings'),business:t('management.myBusiness'),claim:t('management.claimTitle'),workshops:t('management.workshopAdministration'),users:t('management.manageUsers'),reviews:t('management.moderateReviews'),claims:t('management.businessModeration'),auth:t('management.authSetupTitle')}[kind];
  const returnTo=localizeHref(paths[kind]+(kind==='claim'&&workshopId?'?werkstatt='+encodeURIComponent(workshopId):''),locale);
- const header=<SiteHeader account={session?.account??null} isAdmin={session?.isAdmin??false}/>;
+ const header=<SiteHeader account={session?.account??null} isAdmin={session?.isAdmin??false} publicSnapshot={!session}/>;
  const administrative=['workshops','users','reviews','claims','auth'].includes(kind);
  const footer=['settings','business','claim'].includes(kind)?<DirectoryFooter/>:null;
  if(!session)return <>{header}<main className={administrative?'admin-main wrap':kind==='settings'?'settings-page wrap':'business-page wrap'}><h1>{title}</h1><DeferredStatus error={error} pending={pending} retry={retry} loadingIndicator={administrative?<AdminLoading>{t("customer.loading")}</AdminLoading>:undefined}/></main>{footer}</>;

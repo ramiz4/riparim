@@ -40,3 +40,5 @@ html.dark .navbar:is([data-scrolled=true],[data-hero=true]){background:rgba(16,4
 @media(prefers-reduced-transparency:reduce){
  .navbar:is([data-scrolled=true],[data-hero=true]),html.dark .navbar:is([data-scrolled=true],[data-hero=true]){background:var(--card);-webkit-backdrop-filter:none;backdrop-filter:none}
 }
+
+.navbar .header-session-status{display:inline-flex;align-items:center;justify-content:center;width:44px;min-height:44px;flex-shrink:0;color:inherit}

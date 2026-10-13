@@ -1,0 +1,89 @@
+import assert from 'node:assert/strict';
+import {build} from 'esbuild';
+import {mkdir,writeFile} from 'node:fs/promises';
+import {JSDOM,VirtualConsole} from 'jsdom';
+
+const out='.test-runtime/session-header-navigation';await mkdir(out,{recursive:true});
+const result=await build({stdin:{contents:"export {SiteHeader} from './components/site-header';export {DeferredReviews} from './components/deferred-reviews';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {invalidatePublicSession} from './components/use-public-session';",resolveDir:process.cwd(),loader:'tsx'},outfile:out+'/ui.mjs',write:false,bundle:true,format:'esm',platform:'node',packages:'external',loader:{'.css':'empty'},plugins:[{name:'unrelated-ui',setup(b){
+ b.onResolve({filter:/^next\/navigation$/},()=>({path:'navigation',namespace:'fixture'}));
+ b.onResolve({filter:/^next\/link$/},()=>({path:'link',namespace:'fixture'}));
+ b.onResolve({filter:/^(?:@\/app\/journeys|\.\/directory-footer|\.\/theme-toggle|@\/components\/ui\/dropdown-menu)$/},args=>({path:args.path,namespace:'fixture'}));
+ b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',resolveDir:process.cwd(),contents:args.path==='navigation'?"export function usePathname(){return window.location.pathname;}export function useSearchParams(){return new URLSearchParams(window.location.search);}":args.path==='link'?"import {createElement} from 'react';export default function Link({href,children,...props}){return createElement('a',{href,...props},children);}":args.path==='@/app/journeys'?"import {createElement} from 'react';export function MyVisits({signedIn}){return createElement('main',{'data-private-content':signedIn?'member':'guest'},'Fixture reviews');}":args.path==='./directory-footer'?"export function DirectoryFooter(){return null;}":args.path==='./theme-toggle'?"export function ThemeToggle(){return null;}":"import {createElement} from 'react';const Wrapper=({children})=>createElement('div',null,children);export const DropdownMenu=Wrapper,DropdownMenuContent=Wrapper,DropdownMenuLabel=Wrapper,DropdownMenuSeparator=()=>null;export function DropdownMenuTrigger({children,...props}){return createElement('button',props,children);}export function DropdownMenuItem({children}){return children;}"}));
+}}]});await writeFile(out+'/ui.mjs',result.outputFiles[0].contents);
+const dom=new JSDOM('<div id="root"></div>',{url:'https://riparim.example.test/',pretendToBeVisual:true,virtualConsole:new VirtualConsole()});
+for(const key of ['window','document','navigator','HTMLElement','Element','Node','Event','MouseEvent'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});
+globalThis.IS_REACT_ACT_ENVIRONMENT=true;
+const {createElement:h,act}=await import('react'),{createRoot}=await import('react-dom/client'),{renderToStaticMarkup}=await import('react-dom/server');
+const {SiteHeader,DeferredReviews,I18nProvider,getMessages,invalidatePublicSession}=await import(new URL('../'+out+'/ui.mjs',import.meta.url));
+const member={account:{email:'fixture@example.test',displayName:'Fixture Member',provider:'E-Mail'},isAdmin:false};
+let requestCount=0,finish;
+globalThis.fetch=async input=>{
+ if(String(input)==='/api/workshops')return Response.json({workshops:[]});
+ assert.equal(input,'/api/session','Only the isolated session endpoint is contacted');requestCount++;
+ return new Promise(resolve=>{finish=resolve;});
+};
+const realNow=Date.now;let now=realNow();Date.now=()=>now;
+const root=createRoot(document.getElementById('root'));
+const wrap=(key,node)=>h(I18nProvider,{key,locale:'de',messages:getMessages('de',['common','customer'])},node);
+try{
+ await act(async()=>root.render(wrap('home',h(SiteHeader,{account:null,publicSnapshot:true}))));
+ assert.equal(!!document.querySelector('.header-auth'),false,'An unverified initial session is not a confirmed guest');
+ assert(document.querySelector('.header-session-status[role="status"]'),'The initial loading state is accessible without a keyboard stop');
+ await act(async()=>finish(new Response(null,{status:503})));
+ assert.equal(!!document.querySelector('.header-auth'),false,'A session service failure must not claim the visitor is signed out');
+ assert.equal(document.querySelector('.header-session-status').getAttribute('aria-label'),getMessages('de').common.unavailable);
+ await act(async()=>root.render(wrap('retry-home',h(SiteHeader,{account:null,publicSnapshot:true}))));
+ await act(async()=>{finish(Response.json(member));});
+ assert(document.querySelector('.user-menu-trigger'),'The initial verified session shows the account');
+ // A warmed browser preview must never leak into a separately rendered document.
+ delete globalThis.window;
+ try{
+  const html=renderToStaticMarkup(wrap('server',h(SiteHeader,{account:null,publicSnapshot:true})));
+  assert(!html.includes(member.account.email)&&!html.includes('user-menu-trigger'),'Server rendering cannot read the previous browser identity');
+ }finally{Object.defineProperty(globalThis,'window',{value:dom.window,configurable:true});}
+ await act(async()=>root.render(wrap('privacy',h(SiteHeader,{account:null,publicSnapshot:true}))));
+ assert.equal(!!document.querySelector('.header-auth'),false,'A client page change must not flash login/register before session revalidation finishes');
+ assert(document.querySelector('.user-menu-trigger'),'The known account remains visible during revalidation');
+ assert.equal(requestCount,2,'Normal client routing reuses the verified session instead of calling /api/session again');
+ await act(async()=>root.render(wrap('fresh-reviews',h(DeferredReviews))));
+ assert.equal(requestCount,2,'Private UI also shares the still-fresh session instead of duplicating the identity request');
+ assert.equal(document.querySelector('[data-private-content]').dataset.privateContent,'member');
+ now+=30_001;
+ await act(async()=>root.render(wrap('expired-preview',h(SiteHeader,{account:null,publicSnapshot:true}))));
+ assert(document.querySelector('.user-menu-trigger'),'Expired display state remains stable while the fresh check is pending');
+ assert.equal(requestCount,3,'The shared session has a bounded lifetime');
+ await act(async()=>finish(Response.json(member)));
+ now+=30_001;
+ await act(async()=>root.render(wrap('reviews',h(DeferredReviews))));
+ assert.equal(!!document.querySelector('.header-auth'),false,'A deferred private page retains the verified header during its loading state');
+ assert.equal(!!document.querySelector('[data-private-content]'),false,'The display preview cannot authorize private content before a fresh response');
+ await act(async()=>finish(new Response(null,{status:503})));
+ assert(document.querySelector('.user-menu-trigger'),'A failed private session check retains only the display preview');
+ assert.equal(!!document.querySelector('[data-private-content]'),false,'A failed check does not expose member content');
+ await act(async()=>document.querySelector('main button').click());
+ await act(async()=>finish(Response.json({account:null,isAdmin:false})));
+ assert(document.querySelector('.header-auth'),'An authoritative signed-out response shows login/register');
+ assert.equal(document.querySelector('[data-private-content]').dataset.privateContent,'guest');
+ await act(async()=>root.render(wrap('privacy-guest',h(SiteHeader,{account:null,publicSnapshot:true}))));
+ assert.equal(!!document.querySelector('.user-menu-trigger'),false,'A later page must not revive an expired account');
+ await act(async()=>finish(Response.json(member)));
+ await act(async()=>invalidatePublicSession({signedOut:true}));
+ assert.equal(!!document.querySelector('.user-menu-trigger'),false,'Local sign-out clears every retained header immediately');
+ await act(async()=>finish(Response.json({account:null,isAdmin:false})));
+ now+=30_001;
+ await act(async()=>root.render(wrap('late-old',h(SiteHeader,{account:null,publicSnapshot:true}))));
+ const oldResponse=finish;
+ await act(async()=>invalidatePublicSession({signedOut:true}));
+ await act(async()=>finish(Response.json({account:null,isAdmin:false})));
+ await act(async()=>oldResponse(Response.json(member)));
+ await act(async()=>root.render(wrap('after-race',h(SiteHeader,{account:null,publicSnapshot:true}))));
+ assert.equal(!!document.querySelector('.user-menu-trigger'),false,'A delayed pre-sign-out response cannot repopulate the preview for a new page');
+ await act(async()=>finish(Response.json({account:null,isAdmin:false})));
+ const beforeFocus=requestCount;
+ await act(async()=>window.dispatchEvent(new Event('focus')));
+ assert.equal(requestCount,beforeFocus+1,'Returning to the browser revalidates the shared session');
+ await act(async()=>window.dispatchEvent(new Event('focus')));
+ assert.equal(requestCount,beforeFocus+1,'Concurrent focus signals share the same request');
+ await act(async()=>finish(Response.json({account:null,isAdmin:false})));
+ console.log('Header navigation: shared route cache, expiry/focus revalidation, stable account preview, server isolation, private-data gating and authoritative sign-out passed');
+}finally{await act(async()=>root.unmount());dom.window.close();Date.now=realNow;}
