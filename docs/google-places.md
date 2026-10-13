@@ -1,6 +1,6 @@
 # Google-Bewertungen für Riparim
 
-Die Google-Schlüssel sind in der gehosteten Laufzeit eingerichtet. Sterne und Anzahl werden ausschließlich aktuell von Google geladen; alte Momentaufnahmen werden nicht mehr angezeigt oder zur Sortierung verwendet. Alle **172 veröffentlichten Kfz-Servicebetriebe einschließlich Fahrzeugaufbereitung** besitzen eine eindeutig bestätigte Place ID. Die Zuordnungen werden einzeln anhand offizieller Karten, eigener Betriebswebsites oder übereinstimmender unabhängiger Kontakt-/Standortnachweise geprüft. Am 5. Oktober kamen 32 bestätigte IDs hinzu; zwei bestehende Identitäten konnten nach Korrektur überholter Verzeichnisstandorte veröffentlicht werden. `google.verification` dokumentiert Methode, Beleglinks und eigene Prüfnotiz. Auto Electronics gehört zu den 27 auf Nutzerauftrag entfernten, nicht eindeutig zugeordneten Entwürfen. Die sechs in `data/workshop-scope.json` begründeten fachlichen Ausschlüsse, der unabhängig als geschlossen belegte Opel-Rakovica-Betrieb und das alte Reno-Südprofil wurden nach abschließender Prüfung auf Nutzerauftrag entfernt. Der belegte Reno-Nordstandort wird als neues öffentliches Profil geführt. Die tatsächliche Anzeige hängt zusätzlich von der verfügbaren Google-Anbindung im Browser ab.
+Die Google-Schlüssel sind in der gehosteten Laufzeit eingerichtet. Sterne und Anzahl werden ausschließlich aktuell von Google geladen; alte Momentaufnahmen werden nicht mehr angezeigt oder zur Sortierung verwendet. Alle **172 veröffentlichten Kfz-Servicebetriebe einschließlich Fahrzeugaufbereitung** besitzen eine eindeutig bestätigte Place ID. Die Zuordnungen werden einzeln anhand offizieller Karten, eigener Betriebswebsites oder übereinstimmender unabhängiger Kontakt-/Standortnachweise geprüft. Am 5. Oktober kamen 32 bestätigte IDs hinzu; zwei bestehende Identitäten konnten nach Korrektur überholter Verzeichnisstandorte veröffentlicht werden. `google.verification` dokumentiert Methode, Beleglinks und eigene Prüfnotiz. Auto Electronics gehört zu den 27 auf Nutzerauftrag entfernten, nicht eindeutig zugeordneten Entwürfen. Die sechs in `data/workshop-scope.json` begründeten fachlichen Ausschlüsse, der unabhängig als geschlossen belegte Opel-Rakovica-Betrieb und das alte Reno-Südprofil wurden nach abschließender Prüfung auf Nutzerauftrag entfernt. Der belegte Reno-Nordstandort wird als neues öffentliches Profil geführt. Google-Inhalte erscheinen ausschließlich im Werkstattprofil. Die tatsächliche Anzeige hängt zusätzlich von der verfügbaren Google-Anbindung im Browser ab.
 
 Die zentrale Importquelle ist `data/workshops.json`; sie enthält Profile, stabile Riparim-IDs, Google-Zuordnungen und belegte Momentaufnahmen getrennt. Datenformat, Bestandsprüfung und Importbefehle stehen in `docs/workshop-data.md`. API-Inhalte werden nicht dauerhaft in Git gespeichert; ein Google-Bulkexport benötigt passende Datenrechte.
 
@@ -82,7 +82,7 @@ Bei Abschluss von #94 verwendete `tests/catalogue-google-requests.test.mjs` 158 
 | Passende Karte nach Filterwechsel erneut sichtbar | 0 zusätzliche |
 | Localewechsel und erste erneut sichtbare Karte | 1 zusätzliche |
 
-Damals prüfte dieselbe Fixture zusätzlich in DE/SQ/EN die datenfreie statische Katalog-Shell: Die Hydration liest alle Filter und die Locale aus der echten URL, der bestehende Live-Katalogabruf bleibt erhalten und verursacht keine Google-Abfrage für unsichtbare Karten. Sichtbare Karten und ihre Wiederverwendung behalten dieselben Anfragezahlen. Der aktuelle Test verwendet 160 synthetische Datensätze und den unten beschriebenen UI-Kit-Vertrag; die obigen Zählungen beschreiben den damaligen SDK-Einzelratingpfad.
+Damals prüfte dieselbe Fixture zusätzlich in DE/SQ/EN die datenfreie statische Katalog-Shell: Die Hydration liest alle Filter und die Locale aus der echten URL, der bestehende Live-Katalogabruf bleibt erhalten und verursacht keine Google-Abfrage für unsichtbare Karten. Sichtbare Karten und ihre Wiederverwendung behalten dieselben Anfragezahlen. Der aktuelle Test verwendet 160 synthetische Datensätze und prüft null Google-Anfragen auch für sichtbare Katalogkarten; die obigen Zählungen beschreiben den damaligen SDK-Einzelratingpfad.
 
 Die damals gezählten Aufrufe waren SDK-`fetchFields`-Anfragen, keine Kostenmessung oder Aussage zur Abrechnungskategorie. Auch reguläre URL-/Sortierverträge, Lade-/Leer-/Fehlerfälle und verspätete Antworten werden ohne Live-Google-Verbindungen geprüft.
 
@@ -146,30 +146,22 @@ bietet ausdrücklich **Seite neu laden**, da der SDK-Lader seinen Fehlversuch
 innerhalb desselben Browserlaufs behält. Bei einem bereits geladenen SDK kann
 ein Widgetfehler durch die sichtbare Aktualisierungsaktion erneut versucht werden.
 
-### Kostenfreier Anzeigeweg nach der Browserpause (#96)
+### Google-Inhalte ausschließlich im Werkstattprofil
 
-Der Nutzer verlangt weiterhin keine zusätzlichen Google-Gebühren. Katalogkarten
-verwenden den offiziellen **Advanced-UI-Kit**-Baustein
-`gmp-advanced-place-details-compact` in horizontaler Orientierung, mit direkten
-Kindern `gmp-place-rating` und `gmp-place-attribution`. Die benutzerdefinierte
-Konfiguration enthält weder `gmp-place-name` noch `gmp-place-link`, sodass der
-doppelte Werkstattname und Maps-Button entfallen. Seine Höhe
-folgt dem Inhalt; eine feste Höhe oder abgeschnittene Pflichtinhalte gibt es nicht.
-In Katalogkarten entfällt der innere Rahmen. Der Baustein übernimmt die
-Kartenfläche; Bewertungsschrift und Abstände verwenden ausschließlich die
-offiziellen CSS-Eigenschaften. Google-Quellenhinweis und Infofunktion bleiben
-sichtbar, die Profilbausteine behalten ihre eigene Gestaltung.
-Die zusätzliche Riparim-Überschrift, Ladezeit und Maps-Aktion entfallen in
-Katalogkarten. Bei nicht verfügbaren oder veralteten Google-Daten entfällt dort
-der gesamte Google-Block ohne Fehlermeldung; der Kartenlink führt zum Profil.
-Das Profil verwendet die oben beschriebenen getrennten Advanced-Bausteine für
+Die Werkstattübersicht zeigt ausschließlich eigene Riparim-Bewertungen und bei
+fehlenden Bewertungen den bestehenden lokalisierten Leerhinweis. Katalogkarten
+laden weder Google-Widgets noch Google-Zuordnungen, auch bei Sichtbarkeit,
+Filterwechsel, Pagination oder Live-Hydration. Hervorgehobene Partnerkarten
+behalten ihre bestehende kompakte Darstellung ohne Google.
+
+Das Profil verwendet weiterhin die getrennten Advanced-Bausteine für
 Bewertung/Öffnungszeiten im Kopf und Kommentare unter den eigenen Rezensionen.
-Die Karten stellen einen eigenen Google-Widgetblock in voller Kartenbreite bereit;
-Provider-Pflichtinhalte und Attribution werden weder versteckt noch ausgelesen.
-Riparim-Bewertungen bleiben eine getrennte eigene Bewertungszeile. Es gibt keine
-numerischen Google-Exporte für Listen-/Sortierzustand, keinen Contentcache und
-keine `Place.fetchFields`-Einzelratings. Die Widget-Anfrage nimmt eine bestätigte
-Place-ID und die aktive DE/SQ/EN-Sprache entgegen, ohne eine Provider-Suche.
+Die bisherigen Sichtbarkeits-, Fehler-, Attribution- und Quotenregeln bleiben
+bestehen. Die Profilaufrufe verbrauchen weiterhin die gemeinsame Advanced-Quote.
+Google-Öffnungszeiten werden nicht in die eigene Datenbank übernommen oder
+periodisch synchronisiert. Die allgemeinen Places-Speicherausnahmen erlauben
+keinen solchen Öffnungszeiten-Cache; unabhängig von der Werkstatt bereitgestellte
+Öffnungszeiten wären eigene Daten mit eigener Quelle.
 
 Das öffentliche Profil hat keinen separaten Fotobereich oder Maps-Fotolink.
 REST-Foto-Metadaten und Medien werden vom Browser nicht geladen.
@@ -195,11 +187,10 @@ möglichen inkompatiblen Änderungen. Die Fehleranzeige bleibt deshalb erhalten.
 Die [offizielle Konfiguration](https://developers.google.com/maps/documentation/javascript/places-ui-kit/advanced-place-details)
 unterstützt das Weglassen von Namen und Aktionen; Attribution bleibt sichtbar.
 
-Die isolierten DE/SQ/EN-Fixtures zählen sichtbare Advanced-Katalogmontagen und verbieten
-individuelle Enterprise- und REST-Fotoabrufe. Zwölf sichtbare Karten ergeben zwölf
-Montagen, Filterweg/zurück null zusätzliche, reine Pagination null zusätzliche und
-zwölf weitere sichtbare Karten zwölf zusätzliche. Das sind App-Verträge, keine
-Produktions-SKU-Messungen. Profil-Hydration eigener Rezensionen erhält den verbundenen
+Die isolierten DE/SQ/EN-Fixtures prüfen für sichtbare Katalogkarten, Filterwechsel,
+Pagination und Live-Hydration null Google-Widget- und Zuordnungsanfragen und
+verbieten individuelle Enterprise- und REST-Fotoabrufe. Das sind App-Verträge,
+keine Produktions-SKU-Messungen. Profil-Hydration eigener Rezensionen erhält den verbundenen
 Google-Baustein. Ausgeschaltete Konfiguration, Identitäts-HTTP-429/Timeout,
 Widgetfehler/-Timeout, schnelle Identitäts-/Sprachwechsel und SDK-Laderaces erhalten
 eigene Angaben und den bestätigten Maps-Link ohne automatische Retryschleife.
@@ -235,7 +226,7 @@ Readback vom 11.10.2026 bestätigt Advanced 100, Standard 250 und Sessions 0.
 | Places (New): SearchTextRequest | **20** | nur getrennte serverseitige Identitätsprüfung bei bestätigter freier Restmenge |
 | Places (New): PhotoMedia | **0** | öffentliche App lädt keine Google-Fotos |
 | UI-Kit Standard Query | **250** | nur noch offene ältere Profil-/Katalogansichten |
-| UI-Kit Advanced Query | **100** | Katalograting und getrennte Profilbausteine, ohne Name/Aktionen |
+| UI-Kit Advanced Query | **100** | getrennte Profilbausteine, ohne Name/Aktionen |
 | UI-Kit Sessions | **0** | nicht verwendet und gesperrt |
 | Maps JavaScript: Map loads | **0** | keine eingebetteten Karten; direkte Maps-/Routenlinks |
 
