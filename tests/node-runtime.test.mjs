@@ -6,7 +6,7 @@ import {pocketbaseNodeHttp} from './helpers/pocketbase-node-http.mjs';
 import {providerExitHttp} from './helpers/provider-exit-http.mjs';
 import {spawn,execFile} from 'node:child_process';
 import {promisify} from 'node:util';
-import {mkdtemp,rm,readFile} from 'node:fs/promises';
+import {mkdtemp,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {createServer} from 'node:net';
