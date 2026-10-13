@@ -60,9 +60,13 @@ angewendet; der anschließende Katalogimport ergänzt die zehn Kontaktdatensätz
 
 `data/workshop-emails.json` verwendet Version 2 des Kontaktvertrags und enthält
 eine Recherchezeile für jede der 172 bestehenden Werkstattkennungen. Der am
-13. Oktober 2026 im internen Browser geprüfte Bestand umfasst 83 Adressen bei
-74 Werkstätten, davon acht mit mehreren Adressen. 98 Listen bleiben leer,
-einschließlich drei ungeklärter Zuordnungen. Jede Adresse besitzt eigene
+13. Oktober 2026 im internen Browser nachgeprüfte Bestand umfasst 94 Adressen bei
+85 Werkstätten, davon acht mit mehreren Adressen. Die Nachprüfung aller 98 zuvor
+leeren Listen ergänzt elf direkt belegte Kontakte. 87 Listen bleiben leer,
+einschließlich der weiterhin ungeklärten Betriebe Arlindi und Dida sowie zweier
+E-Mail-Suchtreffer für Muriqi und Koli, deren Facebook-Seiten aktuell eine Anmeldung
+verlangen. Diese Kandidaten werden vor einem direkten Nachweis nicht importiert.
+Jede Adresse besitzt eigene
 Quellen-URLs und ein Prüfdatum; erfolglose Prüfungen und ausgeschlossene
 Fremdtreffer sind dokumentiert. Die zehn vorhandenen Adressen und ihre
 Nachweise bleiben erhalten. Es werden keine Adressen aus Domains abgeleitet.

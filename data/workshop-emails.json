@@ -76,9 +76,10 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/auspuh-servis-kurti-td",
-        "https://www.facebook.com/KurtiTD/?locale=de_DE"
+        "https://www.facebook.com/KurtiTD/?locale=de_DE",
+        "https://www.google.com/search?q=Auspuh+Servis+Kurti+TD+Gjakova+email+kontakt+Facebook+Instagram"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-beli-ferizaj",
@@ -111,9 +112,10 @@
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/auto-cosmetic-te-fitimi",
         "https://www.facebook.com/TeFitimi/?locale=de_DE",
-        "https://www.instagram.com/explore/locations/250327775145787/auto-kozmetika-te-fitimi/"
+        "https://www.instagram.com/explore/locations/250327775145787/auto-kozmetika-te-fitimi/",
+        "https://www.google.com/search?q=Auto+Cosmetic+te+FITIMI+Mitrovica+email+kontakt+Facebook+Instagram"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-detailing-besi-prizren",
@@ -123,22 +125,33 @@
       "emails": [],
       "researchStatus": "not_found",
       "checkedUrls": [
-        "https://www.facebook.com/besmir.tutaj.9/"
+        "https://www.facebook.com/besmir.tutaj.9/",
+        "https://www.facebook.com/besmir.tutaj.9/about",
+        "https://www.google.com/search?q=Auto+Detailing+BESI+Prizren+email+kontakt+Facebook+Instagram"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-detailing-meti-mitrovica",
       "matchedName": "Auto Detailing Meti",
       "matchedPhone": "+38343509444",
       "matchedCity": "Mitrovica",
-      "emails": [],
-      "researchStatus": "not_found",
+      "emails": [
+        {
+          "address": "muhametad9@gmail.com",
+          "sourceUrls": [
+            "https://www.facebook.com/p/Auto-Detailing-Meti-61562521143329/"
+          ],
+          "checkedAt": "2026-10-13",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
       "checkedUrls": [
         "https://www.autoyas.com/XK/Mitrovica/309155915624453/Auto-Detailing-Meti",
         "https://www.facebook.com/p/Auto-Detailing-Meti-61562521143329/"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Facebook nennt E-Mail, Mitrovica und exakt die vorhandene Telefonnummer +383 43 509 444."
     },
     {
       "workshopId": "auto-diagnostika-prishtina",
@@ -172,9 +185,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/auto-elektricist-ermiri",
-        "https://www.facebook.com/p/Auto-service-Emiri-100054600002911/"
+        "https://www.facebook.com/p/Auto-service-Emiri-100054600002911/",
+        "https://www.facebook.com/people/Auto-service-Emiri/100054600002911/?sk=about",
+        "https://www.google.com/search?q=Auto+elektricist+Ermiri+Prizren+email+kontakt+Facebook+Instagram"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-elektricist-xhaviti-gjakova",
@@ -185,9 +200,10 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.facebook.com/tetalagjakove/",
-        "https://www.instagram.com/p/B888LF7lWYP/"
+        "https://www.instagram.com/p/B888LF7lWYP/",
+        "https://www.google.com/search?q=Auto+elektri%C3%A7ist+Xhaviti+Gjakova+email+kontakt+Facebook+Instagram"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-elektrika-dzogovic-mitrovica",
@@ -196,21 +212,33 @@
       "matchedCity": "Mitrovica",
       "emails": [],
       "researchStatus": "not_found",
-      "checkedUrls": [],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "checkedUrls": [
+        "https://www.google.com/search?q=Auto+elektrika+Dzogovic+Mitrovica+email+kontakt+Facebook+Instagram"
+      ],
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-elektrika-samko-mitrovica",
       "matchedName": "Auto Elektrika Samko",
       "matchedPhone": "+381669599440",
       "matchedCity": "Mitrovica",
-      "emails": [],
-      "researchStatus": "not_found",
+      "emails": [
+        {
+          "address": "elsamko@gmail.com",
+          "sourceUrls": [
+            "https://www.facebook.com/samkokm/"
+          ],
+          "checkedAt": "2026-10-13",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
       "checkedUrls": [
         "https://www.facebook.com/samkokm/",
-        "https://www.instagram.com/autoelektroservis028/"
+        "https://www.instagram.com/autoelektroservis028/",
+        "https://www.facebook.com/samkokm/about"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Facebook-Intro nennt E-Mail, Mitrovica und exakt die vorhandene Telefonnummer +381 66 9599440."
     },
     {
       "workshopId": "auto-elektro-blendi-ferizaj",
@@ -340,9 +368,12 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.autoyas.com/XK/Pristina/100237179537543/Auto-Enzo-Detailing",
-        "https://www.facebook.com/people/Auto-Enzo-Detailing/100086351409472/?locale=de_DE"
+        "https://www.facebook.com/people/Auto-Enzo-Detailing/100086351409472/?locale=de_DE",
+        "https://www.facebook.com/people/Auto-Enzo-Detailing/100086351409472/?sk=about&locale=de_DE",
+        "https://www.google.com/search?q=Auto+Enzo+Detailing+Prishtina+email+kontakt+Facebook+Instagram",
+        "https://www.instagram.com/auto_enzo_detailing/"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-fati-prizren",
@@ -354,9 +385,11 @@
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/auto-fati",
         "https://www.facebook.com/p/AutoFati-100063690871539/",
-        "https://www.instagram.com/fatiautotransport/"
+        "https://www.instagram.com/fatiautotransport/",
+        "https://www.facebook.com/people/AutoFati/100063690871539/?sk=about",
+        "https://www.google.com/search?q=Auto+Fati+Prizren+email+kontakt+Facebook+Instagram"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-ford-service-prizren",
@@ -367,9 +400,10 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/auto-ford-service",
-        "https://www.instagram.com/fordservicebashkimi/?hl=de"
+        "https://www.instagram.com/fordservicebashkimi/?hl=de",
+        "https://www.google.com/search?q=Auto+Ford+service+Prizren+email+kontakt+Facebook+Instagram"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-glass-kosovo-fushe-kosove",
@@ -404,9 +438,11 @@
       "checkedUrls": [
         "https://stgres.gjirafa.biz/auto-laker-kimi-1",
         "https://www.facebook.com/p/Auto-Llaker-GIMI-100088272767398/?locale=de_DE",
-        "https://www.instagram.com/autollakergimi/"
+        "https://www.instagram.com/autollakergimi/",
+        "https://www.facebook.com/people/Auto-Llaker-GIMI/100088272767398/?sk=about&locale=de_DE",
+        "https://www.google.com/search?q=Auto+Laker+Kimi+Prishtina+email+kontakt+Facebook+Instagram"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-limar-alajdini-prizren",
@@ -416,9 +452,10 @@
       "emails": [],
       "researchStatus": "not_found",
       "checkedUrls": [
-        "https://www.cybo.com/XK-biz/auto-limar-alajdini"
+        "https://www.cybo.com/XK-biz/auto-limar-alajdini",
+        "https://www.google.com/search?q=Auto+Limar+%22Alajdini%22+Prizren+email+kontakt+Facebook+Instagram"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-llamarinier-luani-mitrovica",
@@ -429,9 +466,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.facebook.com/p/Auto-Llamarinier-LUANI-100057408911563/",
-        "https://www.instagram.com/autollamaristluani/"
+        "https://www.instagram.com/autollamaristluani/",
+        "https://www.facebook.com/people/Auto-Llamarinier-LUANI/100057408911563/?sk=about",
+        "https://www.google.com/search?q=Auto+Llamarinier+LUANI+Mitrovica+email+kontakt+Facebook+Instagram"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-llamarist-valoni-peja",
@@ -442,9 +481,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/auto-llamarist-valoni",
-        "https://www.facebook.com/100057429610002/about/"
+        "https://www.facebook.com/100057429610002/about/",
+        "https://www.facebook.com/people/Auto-Llamarist-Valoni/100057429610002/?sk=about",
+        "https://www.google.com/search?q=Auto+Llamarist+Valoni+Peja+email+kontakt+Facebook+Instagram"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-mita",
@@ -507,9 +548,12 @@
       "emails": [],
       "researchStatus": "not_found",
       "checkedUrls": [
-        "https://www.facebook.com/p/Auto-ngjyroses-GOGA-100063628684099/"
+        "https://www.facebook.com/p/Auto-ngjyroses-GOGA-100063628684099/",
+        "https://www.facebook.com/people/Auto-ngjyroses-GOGA/100063628684099/?sk=about",
+        "https://www.google.com/search?q=Auto+Ngjyros%C3%ABs+GOGA+Ferizaj+email+kontakt+Facebook+Instagram",
+        "https://www.instagram.com/goga_auto_ngjyroses/"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-ngjyroses-izmiri-ferizaj",
@@ -519,9 +563,10 @@
       "emails": [],
       "researchStatus": "not_found",
       "checkedUrls": [
-        "https://www.facebook.com/autongjyrosessamiriferizaj/?locale=fo_FO"
+        "https://www.facebook.com/autongjyrosessamiriferizaj/?locale=fo_FO",
+        "https://www.google.com/search?q=Auto+Ngjyros%C3%ABs+IZMIRI+Ferizaj+email+kontakt+Facebook+Instagram"
       ],
-      "notes": "Suchtreffer gehört zu Auto Ngjyrosës Samiri mit anderer Telefonnummer; nicht übernommen."
+      "notes": "Suchtreffer gehört zu Auto Ngjyrosës Samiri mit anderer Telefonnummer; nicht übernommen. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-ngjyroses-shypi-ferizaj",
@@ -533,9 +578,11 @@
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/auto-ngjyros%C3%ABs-shypi",
         "https://www.facebook.com/autongjyrosesderguti/",
-        "https://www.instagram.com/p/DAjLFFftUjR/"
+        "https://www.instagram.com/p/DAjLFFftUjR/",
+        "https://www.google.com/search?q=Auto+Ngjyros%C3%ABs+SHYPI+Ferizaj+email+kontakt",
+        "https://www.instagram.com/autongjyroses_florenti/"
       ],
-      "notes": "Suchtreffer gehört zu Auto Ngjyrosës Derguti; nicht übernommen."
+      "notes": "Suchtreffer gehört zu Auto Ngjyrosës Derguti; nicht übernommen. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-ngjyrosje-egzoni-ferizaj",
@@ -569,9 +616,12 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/auto-ngjyrosje-fadili",
-        "https://www.facebook.com/FadilMuhaxheri/"
+        "https://www.facebook.com/FadilMuhaxheri/",
+        "https://www.facebook.com/FadilMuhaxheri/about",
+        "https://www.google.com/search?q=Auto+Ngjyrosje+Fadili+Ferizaj+email+kontakt",
+        "https://www.instagram.com/autongjyrosjefadili/"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-ngjyrosje-naseri-suhareke",
@@ -657,14 +707,25 @@
       "matchedName": "Auto Pjesë & Servis Fatosi",
       "matchedPhone": "+38344668508",
       "matchedCity": "Graçanicë",
-      "emails": [],
-      "researchStatus": "not_found",
+      "emails": [
+        {
+          "address": "autopjesefatosi@gmail.com",
+          "sourceUrls": [
+            "https://gjirafa.biz/auto-pjes--servis-fatosi-1"
+          ],
+          "checkedAt": "2026-10-13",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
       "checkedUrls": [
         "https://punaime.org/konkursi/punetore-ne-autolarje-4/",
         "https://www.facebook.com/sutoservisfatosi/?locale=sq_AL",
-        "https://www.instagram.com/autoservisfatosi8/?hl=de"
+        "https://www.instagram.com/autoservisfatosi8/?hl=de",
+        "https://gjirafa.biz/auto-pjes--servis-fatosi-1",
+        "https://www.google.com/search?q=Auto+Pjes%C3%AB+%26+Servis+Fatosi+Gra%C3%A7anic%C3%AB+email+kontakt"
       ],
-      "notes": "Facebook-Treffer aus Albanien mit +355-Nummer gehört nicht zum Kosovo-Betrieb."
+      "notes": "Gjirafa-Betriebsseite zeigt die E-Mail direkt und exakt die vorhandene Telefonnummer +383 44 668 508; Standort Llapnasellë an der Magjistrale Ferizaj–Prishtinë. Facebook-/Instagram-Treffer aus Cërrik/Albanien ausgeschlossen."
     },
     {
       "workshopId": "auto-pjese-servis-jaha-gjilan",
@@ -675,9 +736,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/auto-pjes%C3%AB-servis-jaha",
-        "https://www.facebook.com/p/Auto-Pjes%C3%AB-dhe-Servis-JAHA-100039106436166/"
+        "https://www.facebook.com/p/Auto-Pjes%C3%AB-dhe-Servis-JAHA-100039106436166/",
+        "https://www.facebook.com/people/Auto-Pjes%C3%AB-dhe-Servis-JAHA/100039106436166/?sk=about",
+        "https://www.google.com/search?q=Auto+Pjes%C3%AB+%26+Servis+JAHA+Gjilan+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-rally-90-kline",
@@ -710,9 +773,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.gjithebiznesi.com/XK/auto-regllazha-tabaku-049-141-187",
-        "https://www.facebook.com/Regllazha/"
+        "https://www.facebook.com/Regllazha/",
+        "https://www.facebook.com/Regllazha/about",
+        "https://www.google.com/search?q=Auto+Regllazha+TABAKU+Peja+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-service-adonisi-gjilan",
@@ -723,9 +788,10 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.facebook.com/p/Auto-service-Ardiani-100028835366842/",
-        "https://www.instagram.com/p/BvMPeSAnv1o/"
+        "https://www.instagram.com/p/BvMPeSAnv1o/",
+        "https://www.google.com/search?q=Auto+Service+Adonisi+Gjilan+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-service-ardi-vushtrri",
@@ -759,9 +825,11 @@
       "checkedUrls": [
         "https://www.gjithebiznesi.com/XK/auto-service-bardhi-049-666-755",
         "https://www.facebook.com/p/Auto-Servis-Bardhi-100089794923131/?locale=de_DE",
-        "https://www.instagram.com/autoservicebardhi/"
+        "https://www.instagram.com/autoservicebardhi/",
+        "https://www.facebook.com/people/Auto-Servis-Bardhi/100089794923131/?sk=about&locale=de_DE",
+        "https://www.google.com/search?q=Auto+Service+Bardhi+Peja+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-service-besi-vushtrri",
@@ -772,9 +840,10 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.gjithebiznesi.com/XK/auto-service-besi-049-205-441",
-        "https://www.facebook.com/pages/Auto-Servis-Besi/1086981918144257"
+        "https://www.facebook.com/pages/Auto-Servis-Besi/1086981918144257",
+        "https://www.google.com/search?q=Auto+service+BESI+Vushtrri+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Facebook verlangt Anmeldung; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-service-bmw-visari-peja",
@@ -786,22 +855,34 @@
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/auto-service-bmw-visari",
         "https://www.facebook.com/bmwVisari/",
-        "https://www.instagram.com/autoservicevisari/"
+        "https://www.instagram.com/autoservicevisari/",
+        "https://www.facebook.com/bmwVisari/about",
+        "https://www.google.com/search?q=Auto+Service+BMW-Visari+Peja+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-service-demi",
       "matchedName": "Auto Service DEMI",
       "matchedPhone": "+38349156789",
       "matchedCity": "Prizren",
-      "emails": [],
-      "researchStatus": "uncertain",
+      "emails": [
+        {
+          "address": "info@servicedemi.com",
+          "sourceUrls": [
+            "https://www.facebook.com/AutoServiceDEMI/about/"
+          ],
+          "checkedAt": "2026-10-13",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
       "checkedUrls": [
         "https://www.facebook.com/AutoServiceDEMI/?locale=de_DE",
-        "https://www.instagram.com/autoservicedemi/?hl=de"
+        "https://www.instagram.com/autoservicedemi/?hl=de",
+        "https://www.facebook.com/AutoServiceDEMI/about/"
       ],
-      "notes": "Betriebswebsite beim Abruf nicht erreichbar; E-Mail-Suchtreffer nicht direkt bestätigbar."
+      "notes": "E-Mail im Facebook-Kontaktbereich direkt bestätigt; Betriebsname, identische Tranzit-Adresse in Prizren und dieselbe offizielle Domain wie im vorhandenen Katalog. Allgemeines Geschäftstelefon unterscheidet sich vom Termintelefon im Profil."
     },
     {
       "workshopId": "auto-service-express-prishtina",
@@ -852,13 +933,24 @@
       "matchedName": "Auto Service Mali",
       "matchedPhone": "+38343799021",
       "matchedCity": "Prishtina",
-      "emails": [],
-      "researchStatus": "not_found",
+      "emails": [
+        {
+          "address": "asrmali21@gmail.com",
+          "sourceUrls": [
+            "https://arbk.org/biz/auto-service-mali-shpk/"
+          ],
+          "checkedAt": "2026-10-13",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
       "checkedUrls": [
         "https://www.facebook.com/autoservisprishtina/?locale=de_DE",
-        "https://www.instagram.com/autoberila/?hl=de"
+        "https://www.instagram.com/autoberila/?hl=de",
+        "https://arbk.org/biz/auto-service-mali-shpk/",
+        "https://www.google.com/search?q=Auto+Service+Mali+Prishtina+email+kontakt"
       ],
-      "notes": "Facebook-Suchtreffer Auto Servis Prishtina mit anderem Kontakt; nicht übernommen."
+      "notes": "Öffentliche Kontaktliste von ARBK Open (unabhängiges Verzeichnis, keine Behördenwebsite) nennt die E-Mail, den Betrieb in Prishtinë und exakt +38343799021. Generisches contact@gmail.com des anderen Atlas-Treffers ausgeschlossen."
     },
     {
       "workshopId": "auto-service-muslija-prizren",
@@ -913,9 +1005,11 @@
       "checkedUrls": [
         "https://www.veturaneshitje.com/biznese/132/auto-service-rashani",
         "https://www.facebook.com/AutoServiceRashani/",
-        "https://www.instagram.com/servicerashani/"
+        "https://www.instagram.com/servicerashani/",
+        "https://www.facebook.com/AutoServiceRashani/about",
+        "https://www.google.com/search?q=Auto+Service+RASHANI+Vushtrri+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-agimi-gjakova",
@@ -925,9 +1019,10 @@
       "emails": [],
       "researchStatus": "not_found",
       "checkedUrls": [
-        "https://www.autos1000.com/XK/Gjakova/209901509451149/Auto-servis-%22Agimi%22"
+        "https://www.autos1000.com/XK/Gjakova/209901509451149/Auto-servis-%22Agimi%22",
+        "https://www.google.com/search?q=Auto+servis+%22Agimi%22+Gjakova+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-anuari-prishtina",
@@ -938,9 +1033,10 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.facebook.com/autoanuari/?locale=be_BY",
-        "https://www.instagram.com/autoservisani/?hl=de"
+        "https://www.instagram.com/autoservisani/?hl=de",
+        "https://www.google.com/search?q=Auto+Servis+ANUARI+Prishtina+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-arlindi-prishtina",
@@ -951,9 +1047,11 @@
       "researchStatus": "uncertain",
       "checkedUrls": [
         "https://www.facebook.com/AutoServisArlindi/",
-        "https://www.instagram.com/auto.servis.arlindi/"
+        "https://www.instagram.com/auto.servis.arlindi/",
+        "https://www.facebook.com/AutoServisArlindi/about",
+        "https://www.google.com/search?q=%22044+848+728%22+Arlindi+email+Facebook+Instagram"
       ],
-      "notes": "Mehrere ähnlich benannte Facebook-/Instagram-Treffer mit abweichenden Telefonnummern; nicht sicher zugeordnet."
+      "notes": "Nachprüfung: Facebook nennt Arlind.sopa99@gmail.com, aber +383 48 454 542 ohne passenden Standort; Instagram gehört ausdrücklich zu Ferizaj, Rruga Driton Islami, +38344 287682. Kein Beleg für den Riparim-Betrieb Qëndresa/Prishtina, +38344 848728. Keine E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-bajrami-peja",
@@ -964,9 +1062,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/auto-servis-bajrami",
-        "https://www.instagram.com/autoservicebajrami/?hl=de"
+        "https://www.instagram.com/autoservicebajrami/?hl=de",
+        "https://www.google.com/search?q=Auto+Servis+Bajrami+Peja+email+kontakt",
+        "https://autopjesbajrami.com/de/policies/contact-information?srsltid=AU7gw4XMR-QHoiyQ3BGD17hFAdyLaGvDWFDbI28sUQh5DwAobwSxP5kB"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-bashkimi-viti",
@@ -1000,9 +1100,10 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.gjithebiznesi.com/XK/auto-servis-%E2%80%98berati%E2%80%99-bmw-049-378-051",
-        "https://www.instagram.com/auto_service_berati_/?hl=de"
+        "https://www.instagram.com/auto_service_berati_/?hl=de",
+        "https://www.google.com/search?q=Auto+servis+%E2%80%98BERATI%E2%80%99+BMW+Malishev%C3%AB+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-bledi-kline",
@@ -1013,9 +1114,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.facebook.com/a.s.bledi/?locale=de_DE",
-        "https://www.instagram.com/auto.servis.bledi/"
+        "https://www.instagram.com/auto.servis.bledi/",
+        "https://www.facebook.com/a.s.bledi/about?locale=de_DE",
+        "https://www.google.com/search?q=Auto+Servis+BLEDI+Klin%C3%AB+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-blerti-podujeve",
@@ -1049,9 +1152,11 @@
       "emails": [],
       "researchStatus": "not_found",
       "checkedUrls": [
-        "https://www.facebook.com/p/Auto-Servis-BMW-Prishtina-100063681036790/?locale=de_DE"
+        "https://www.facebook.com/p/Auto-Servis-BMW-Prishtina-100063681036790/?locale=de_DE",
+        "https://www.facebook.com/people/Auto-Servis-BMW-Prishtina/100063681036790/?sk=about&locale=de_DE",
+        "https://www.google.com/search?q=Auto+Servis+BMW+balia+Prishtina+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-budi-prishtina",
@@ -1083,9 +1188,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/auto-servis-buli",
-        "https://www.facebook.com/autosallonbuli"
+        "https://www.facebook.com/autosallonbuli",
+        "https://www.facebook.com/autosallonbuli/about",
+        "https://www.google.com/search?q=Auto+Servis+BULI+Prishtina+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-cima-ferizaj",
@@ -1095,9 +1202,11 @@
       "emails": [],
       "researchStatus": "not_found",
       "checkedUrls": [
-        "https://www.facebook.com/autopjesecima/"
+        "https://www.facebook.com/autopjesecima/",
+        "https://www.facebook.com/autopjesecima/about",
+        "https://www.google.com/search?q=Auto+servis+CIMA+Ferizaj+Ferizaj+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-cufa-ferizaj",
@@ -1129,9 +1238,10 @@
       "emails": [],
       "researchStatus": "not_found",
       "checkedUrls": [
-        "https://www.gjithebiznesi.com/XK/auto-servis-diagnoz-opel-049-284-990"
+        "https://www.gjithebiznesi.com/XK/auto-servis-diagnoz-opel-049-284-990",
+        "https://www.google.com/search?q=Auto+Servis+%26+Diagnoz+%22OPEL%22+Malishev%C3%AB+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-doni-skenderaj",
@@ -1142,9 +1252,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.top-rated.online/cities/Klin%C3%AB%2Be%2BEp%C3%ABrme/place/p/10916121/Auto%2BServis%2BDoni",
-        "https://www.facebook.com/autoservisdoni1/?locale=de_DE"
+        "https://www.facebook.com/autoservisdoni1/?locale=de_DE",
+        "https://www.facebook.com/autoservisdoni1/about?locale=de_DE",
+        "https://www.google.com/search?q=Auto+Servis+Doni+Skenderaj+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-edi-fushe-kosove",
@@ -1155,9 +1267,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.gjithebiznesi.com/XK/auto-servis-edi-045-411-022",
-        "https://www.facebook.com/marigona.shala.1485/"
+        "https://www.facebook.com/marigona.shala.1485/",
+        "https://www.facebook.com/marigona.shala.1485/about",
+        "https://www.google.com/search?q=Auto+servis+Edi+Fush%C3%AB+Kosov%C3%AB+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-enisi-obiliq",
@@ -1168,9 +1282,12 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.gjithebiznesi.com/XK/auto-servis-enisi-044-809-246",
-        "https://www.facebook.com/p/Auto-Servis-100077699191579/"
+        "https://www.facebook.com/p/Auto-Servis-100077699191579/",
+        "https://www.facebook.com/people/Auto-Servis/100077699191579/?sk=about",
+        "https://www.google.com/search?q=Auto+Servis+Enisi+Obiliq+email+kontakt",
+        "https://www.instagram.com/p/DdzQXyiC-dq/"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-ford-jashanica-prishtina",
@@ -1205,9 +1322,11 @@
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/auto-servis-gashi",
         "https://www.facebook.com/Gashi.Ardijan24/",
-        "https://www.instagram.com/reel/C9zfs8mNEZN/"
+        "https://www.instagram.com/reel/C9zfs8mNEZN/",
+        "https://www.facebook.com/Gashi.Ardijan24/about",
+        "https://www.google.com/search?q=Auto+Servis+%22Gashi%22+Peja+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-gazi-gjakova",
@@ -1240,9 +1359,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.facebook.com/p/Auto-Servis-Pjese-GENTI-100048997606589/",
-        "https://www.instagram.com/genti.autoservis/"
+        "https://www.instagram.com/genti.autoservis/",
+        "https://www.facebook.com/people/Auto-Servis-Pjese-GENTI/100048997606589/?sk=about",
+        "https://www.google.com/search?q=Auto+Servis+Genti+Prishtina+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-goni-peja",
@@ -1254,9 +1375,11 @@
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/auto-servis-goni",
         "https://www.facebook.com/p/Autoservis-AKA-100057115883996/",
-        "https://www.instagram.com/bmwservicegjoni/?hl=de"
+        "https://www.instagram.com/bmwservicegjoni/?hl=de",
+        "https://www.facebook.com/people/Autoservis-AKA/100057115883996/?sk=about",
+        "https://www.google.com/search?q=Auto+Servis+Goni+Peja+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-good-year-gjakova",
@@ -1267,35 +1390,58 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/auto-servis-good-year",
-        "https://www.instagram.com/gogi_servis/"
+        "https://www.instagram.com/gogi_servis/",
+        "https://www.google.com/search?q=Auto+Servis+Good%26Year+Gjakova+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-joni-viti",
       "matchedName": "Auto Servis JONI",
       "matchedPhone": "+38349866660",
       "matchedCity": "Viti",
-      "emails": [],
-      "researchStatus": "not_found",
+      "emails": [
+        {
+          "address": "toni.2f@hotmail.com",
+          "sourceUrls": [
+            "https://stgres.gjirafa.biz/autojoni-1"
+          ],
+          "checkedAt": "2026-10-13",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
       "checkedUrls": [
         "https://www.autojoni.com/",
-        "https://www.facebook.com/people/Auto-Joni-SHPK/100067014240697/?locale=de_DE"
+        "https://www.facebook.com/people/Auto-Joni-SHPK/100067014240697/?locale=de_DE",
+        "https://stgres.gjirafa.biz/autojoni-1",
+        "https://www.facebook.com/people/Auto-Joni-SHPK/100067014240697/?sk=about&locale=de_DE",
+        "https://www.google.com/search?q=Auto+Servis+JONI+Viti+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Gjirafa nennt E-Mail, Sadovinë e Jerlive/Viti und exakt +38349 866 660; Standort und Telefonnummer zusätzlich mit eigener Website https://www.autojoni.com/ abgeglichen."
     },
     {
       "workshopId": "auto-servis-kema",
       "matchedName": "Auto Servis KEMA",
       "matchedPhone": "+38338537702",
       "matchedCity": "Fushë Kosovë",
-      "emails": [],
-      "researchStatus": "not_found",
+      "emails": [
+        {
+          "address": "info@autokema.com",
+          "sourceUrls": [
+            "https://www.instagram.com/autokema/?hl=de"
+          ],
+          "checkedAt": "2026-10-13",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
       "checkedUrls": [
         "https://autokema.com/contacts/",
-        "https://www.instagram.com/autokema/?hl=de"
+        "https://www.instagram.com/autokema/?hl=de",
+        "https://www.google.com/search?q=Auto+Servis+KEMA+Fush%C3%AB+Kosov%C3%AB+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Instagram-Bio nennt die E-Mail, den Fushë-Kosovë-Standort Hashim Hajdini und exakt +383 (38) 537 702; Betriebswebsite antwortet beim Abruf nicht."
     },
     {
       "workshopId": "auto-servis-klima-peja",
@@ -1330,9 +1476,11 @@
       "checkedUrls": [
         "https://www.facebook.com/asLirimi/",
         "https://www.gjithebiznesi.com/XK/auto-servis-lirimi-045-533-746",
-        "https://www.instagram.com/autolirimi2/?hl=de"
+        "https://www.instagram.com/autolirimi2/?hl=de",
+        "https://www.facebook.com/asLirimi/about",
+        "https://www.google.com/search?q=Auto+Servis+Lirimi+Podujev%C3%AB+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-lumi-m-gjakova",
@@ -1385,13 +1533,25 @@
       "matchedName": "Auto Servis MEGI",
       "matchedPhone": "+38344979970",
       "matchedCity": "Drenas",
-      "emails": [],
-      "researchStatus": "not_found",
+      "emails": [
+        {
+          "address": "megiautoservis@gmail.com",
+          "sourceUrls": [
+            "https://mapcarta.com/de/N7341035484"
+          ],
+          "checkedAt": "2026-10-13",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
       "checkedUrls": [
         "https://www.facebook.com/AutoServiceMEGI/?locale=de_DE",
-        "https://www.autoyas.com/XK/Drenas/122648967802001/Auto-Servis-MEGI---Drenas"
+        "https://www.autoyas.com/XK/Drenas/122648967802001/Auto-Servis-MEGI---Drenas",
+        "https://mapcarta.com/de/N7341035484",
+        "https://www.facebook.com/AutoServiceMEGI/about?locale=de_DE",
+        "https://www.google.com/search?q=Auto+Servis+MEGI+Drenas+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Mapcarta/OpenStreetMap nennt die E-Mail zu exakt Auto Servis MEGI, Nr. 3 Rruga Jasharajve, Drenas 13000 und verlinkt dieselbe Facebook-Seite. Karte nennt älteres Telefon 044609224; vorhandenes Profiltelefon bleibt unverändert."
     },
     {
       "workshopId": "auto-servis-mercedes-benz-vedati-prishtina",
@@ -1424,9 +1584,10 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.gjithebiznesi.com/XK/auto-servis-meti_1J-044-385-480",
-        "https://www.instagram.com/servismeti/"
+        "https://www.instagram.com/servismeti/",
+        "https://www.google.com/search?q=Auto+Servis+METI+Rahovec+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-montimi-rahovec",
@@ -1456,13 +1617,14 @@
       "matchedPhone": "+38344126700",
       "matchedCity": "Prizren",
       "emails": [],
-      "researchStatus": "not_found",
+      "researchStatus": "uncertain",
       "checkedUrls": [
         "https://www.facebook.com/autoservismuriqi/?locale=sq_AL",
         "https://www.cybo.com/XK-biz/auto-servis-muriqi",
-        "https://www.instagram.com/autoservismuriqi/?hl=de"
+        "https://www.instagram.com/autoservismuriqi/?hl=de",
+        "https://www.google.com/search?q=Auto+Servis+Muriqi+Prizren+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Offener E-Mail-Kandidat autoservismuriqi@gmail.com: Google-Suchtreffer nennt exakt +383 44 126 700 und die E-Mail; direkte Facebook-Seite verlangt inzwischen Anmeldung. Instagram zeigt keine E-Mail. Noch nicht übernommen."
     },
     {
       "workshopId": "auto-servis-naimi-vushtrri",
@@ -1473,9 +1635,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.facebook.com/ServisNaimi/",
-        "https://www.instagram.com/AutoservisNaimi/"
+        "https://www.instagram.com/AutoservisNaimi/",
+        "https://www.facebook.com/ServisNaimi/about",
+        "https://www.google.com/search?q=Auto+Servis+Naimi+Vushtrri+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-nazi-drenas",
@@ -1487,9 +1651,10 @@
       "checkedUrls": [
         "https://www.facebook.com/100047540097064/mentions/",
         "https://www.gjithebiznesi.com/XK/auto-servis-nazi-044-405-002",
-        "https://www.instagram.com/reel/CJekxnehMs0/"
+        "https://www.instagram.com/reel/CJekxnehMs0/",
+        "https://www.google.com/search?q=Auto+Servis+Nazi+Drenas+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-nexhi-lipjan",
@@ -1501,9 +1666,13 @@
       "checkedUrls": [
         "https://www.gjithebiznesi.com/XK/auto-servis-nexhi_1n-044-736-933",
         "https://www.facebook.com/p/Auto-Servis-E-Dini-100069847076382/?locale=de_DE",
-        "https://www.instagram.com/nexhiautoservice/"
+        "https://www.instagram.com/nexhiautoservice/",
+        "https://www.facebook.com/people/Auto-Servis-E-Dini/100069847076382/?sk=about&locale=de_DE",
+        "https://www.google.com/search?q=Auto-Servis+NEXHI+Lipjan+email+kontakt",
+        "https://besnikrrustemi.wixsite.com/autoservisnexhi",
+        "https://besnikrrustemi.wixsite.com/autoservisnexhi/location"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-perparimi-ferizaj",
@@ -1537,9 +1706,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.gjithebiznesi.com/XK/auto-servis-pirqi-044-444-556",
-        "https://www.facebook.com/p/Auto-servis-PIRQI-100054465370509/"
+        "https://www.facebook.com/p/Auto-servis-PIRQI-100054465370509/",
+        "https://www.facebook.com/people/Auto-servis-PIRQI/100054465370509/?sk=about",
+        "https://www.google.com/search?q=Auto+Servis+Pirqi+Vushtrri+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-potera-gracanice",
@@ -1572,9 +1743,10 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/auto-servis-rizvanolli",
-        "https://www.instagram.com/p/CiNoLZLI2p2/"
+        "https://www.instagram.com/p/CiNoLZLI2p2/",
+        "https://www.google.com/search?q=Auto+Servis+Rizvanolli+Gjakova+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-sejda-gjilan",
@@ -1606,9 +1778,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.facebook.com/autotrimishpk/?locale=sq_AL",
-        "https://www.instagram.com/auto_servis_trimi/"
+        "https://www.instagram.com/auto_servis_trimi/",
+        "https://www.google.com/search?q=Auto+Servis+Trimi+Prishtina+email+kontakt",
+        "https://www.instagram.com/autotrimishpk1/?hl=de"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-univerzal-lipjan",
@@ -1619,9 +1793,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.gjithebiznesi.com/XK/auto-servis-univerzal_1s-044-269-491",
-        "https://www.facebook.com/univerzal.service/?locale=de_DE"
+        "https://www.facebook.com/univerzal.service/?locale=de_DE",
+        "https://www.facebook.com/univerzal.service/about?locale=de_DE",
+        "https://www.google.com/search?q=Auto+Servis+UNIVERZAL+Lipjan+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-visari-prizren",
@@ -1632,9 +1808,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/auto-servis-visari",
-        "https://www.facebook.com/p/Auto-Servis-Visari-100064331672303/"
+        "https://www.facebook.com/p/Auto-Servis-Visari-100064331672303/",
+        "https://www.facebook.com/people/Auto-Servis-Visari/100064331672303/?sk=about",
+        "https://www.google.com/search?q=Auto+Servis+Visari+Prizren+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-servis-visco-prizren",
@@ -1702,9 +1880,11 @@
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/auto-servis-xoni",
         "https://www.facebook.com/p/Auto-Servis-Xoni-100054468370223/",
-        "https://www.instagram.com/servisxoni/"
+        "https://www.instagram.com/servisxoni/",
+        "https://www.facebook.com/people/Auto-Servis-Xoni/100054468370223/?sk=about",
+        "https://www.google.com/search?q=Auto+servis+XONI+Gjilan+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "auto-star-xharra-gjakova",
@@ -1733,14 +1913,25 @@
       "matchedName": "Auto Servis Tershana",
       "matchedPhone": "+38344177020",
       "matchedCity": "Ferizaj",
-      "emails": [],
-      "researchStatus": "not_found",
+      "emails": [
+        {
+          "address": "autoservistershana@gmail.com",
+          "sourceUrls": [
+            "https://www.autotershana-ks.com/contact.html"
+          ],
+          "checkedAt": "2026-10-13",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
       "checkedUrls": [
         "https://www.facebook.com/autoservistershana/?locale=sq_AL",
         "https://autotershana-ks.com/service.html",
-        "https://www.instagram.com/auto.tershana/"
+        "https://www.instagram.com/auto.tershana/",
+        "https://www.autotershana-ks.com/contact.html",
+        "https://www.google.com/search?q=Auto+Servis+Tershana+Ferizaj+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Eigene Kontaktseite zeigt E-Mail, Zenel Hajdini/Ferizaj und exakt die vorhandene Telefonnummer 044/048 177 020."
     },
     {
       "workshopId": "autoavangarde-bmw-service-peja",
@@ -1751,9 +1942,10 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.facebook.com/avantgardeautoservice/",
-        "https://www.cybo.com/XK-biz/autoavangarde-bmw-service"
+        "https://www.cybo.com/XK-biz/autoavangarde-bmw-service",
+        "https://www.google.com/search?q=AutoAvangarde+-+BMW+Service+Peja+email+kontakt"
       ],
-      "notes": "Facebook-Treffer aus Çagllavicë/Prishtina ist nicht der Betrieb in Peja."
+      "notes": "Facebook-Treffer aus Çagllavicë/Prishtina ist nicht der Betrieb in Peja. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "autodetailingdaja-vushtrri",
@@ -1832,9 +2024,10 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.facebook.com/autoNaimi/?locale=sq_AL",
-        "https://www.instagram.com/p/CnhHTpxt6v4/"
+        "https://www.instagram.com/p/CnhHTpxt6v4/",
+        "https://www.google.com/search?q=Autoelektrika+Naimi+Prishtina+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "autohouse-pjese-servis-ferizaj",
@@ -1845,9 +2038,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.facebook.com/autohouse.serviceandparts/",
-        "https://www.instagram.com/autohouse.ks/"
+        "https://www.instagram.com/autohouse.ks/",
+        "https://www.facebook.com/autohouse.serviceandparts/about",
+        "https://www.google.com/search?q=Autohouse+Auto+Pjese+%26+Servis+Ferizaj+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "automehanicarska-radnja-gjilan",
@@ -1857,9 +2052,10 @@
       "emails": [],
       "researchStatus": "not_found",
       "checkedUrls": [
-        "https://www.facebook.com/autosada/"
+        "https://www.facebook.com/autosada/",
+        "https://www.google.com/search?q=Automehanicarska+radnja+Gjilan+email+kontakt"
       ],
-      "notes": "Facebook-Treffer Auto Sada hat anderen Namen, Adresse und Telefonnummer."
+      "notes": "Facebook-Treffer Auto Sada hat anderen Namen, Adresse und Telefonnummer. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "automex-gjakova",
@@ -1870,9 +2066,10 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/automex",
-        "https://www.facebook.com/public/Autocenter-Gjakova"
+        "https://www.facebook.com/public/Autocenter-Gjakova",
+        "https://www.google.com/search?q=Automex+Gjakova+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "autongjyrosje-haskuka-prizren",
@@ -1883,9 +2080,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/autongjyrosjehaskuka_1p",
-        "https://www.facebook.com/p/AutoServiceHASKUKA-100063587050451/"
+        "https://www.facebook.com/p/AutoServiceHASKUKA-100063587050451/",
+        "https://www.facebook.com/people/AutoServiceHASKUKA/100063587050451/?sk=about",
+        "https://www.google.com/search?q=AutoNgjyrosje%22HASKUKA%22+Prizren+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "autopjese-service-nazi-ferizaj",
@@ -1895,9 +2094,10 @@
       "emails": [],
       "researchStatus": "not_found",
       "checkedUrls": [
-        "https://www.cybo.com/XK-biz/autopjes%C3%AB-service-nazi"
+        "https://www.cybo.com/XK-biz/autopjes%C3%AB-service-nazi",
+        "https://www.google.com/search?q=Autopjes%C3%AB+%26+Service+Nazi+Ferizaj+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "autoservice-a-m-vushtrri",
@@ -1908,9 +2108,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.facebook.com/AutoServiceVisari/?locale=de_DE",
-        "https://www.instagram.com/as_ardi/"
+        "https://www.instagram.com/as_ardi/",
+        "https://www.facebook.com/AutoServiceVisari/about?locale=de_DE",
+        "https://www.google.com/search?q=Autoservice+A%26M+Vushtrri+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "autoservis-agimi-peja",
@@ -1921,9 +2123,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/autoservis-agimi",
-        "https://www.facebook.com/p/AutoServis-AGIMI-100054197784696/?locale=de_DE"
+        "https://www.facebook.com/p/AutoServis-AGIMI-100054197784696/?locale=de_DE",
+        "https://www.facebook.com/people/AutoServis-AGIMI/100054197784696/?sk=about&locale=de_DE",
+        "https://www.google.com/search?q=Autoservis+Agimi+Peja+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "autoservis-keni-prishtina",
@@ -1934,21 +2138,33 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/autoservis-keni",
-        "https://www.facebook.com/p/Auto-Servis-KENI-100054262131635/"
+        "https://www.facebook.com/p/Auto-Servis-KENI-100054262131635/",
+        "https://www.google.com/search?q=Autoservis+KENI+Prishtina+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Facebook verlangt Anmeldung; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "autoservis-pg-bosch-prishtina",
       "matchedName": "Autoservis PG Bosch",
       "matchedPhone": "+38344282504",
       "matchedCity": "Prishtina",
-      "emails": [],
-      "researchStatus": "not_found",
-      "checkedUrls": [
-        "https://www.facebook.com/media/set/?set=a.753815418034412.1073741834.225211990894760&type=3"
+      "emails": [
+        {
+          "address": "vjosakelmendi50@gmail.com",
+          "sourceUrls": [
+            "https://arbk.org/biz/peg-bosch-shpk/"
+          ],
+          "checkedAt": "2026-10-13",
+          "emailVerification": "publicly_listed"
+        }
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://www.facebook.com/media/set/?set=a.753815418034412.1073741834.225211990894760&type=3",
+        "https://arbk.org/biz/peg-bosch-shpk/",
+        "https://www.google.com/search?q=Autoservis+PG+Bosch+Prishtina+email+kontakt"
+      ],
+      "notes": "Öffentliche Kontaktliste von ARBK Open (unabhängiges Verzeichnis) nennt PEG BOSCH, Prishtinë, Rruga Qëndresa Nr.146 und exakt +38344282504."
     },
     {
       "workshopId": "autoservis-semini-prizren",
@@ -1959,9 +2175,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/autoservis-semini",
-        "https://www.facebook.com/p/Auto-servis-Semini-100063523570444/"
+        "https://www.facebook.com/p/Auto-servis-Semini-100063523570444/",
+        "https://www.facebook.com/people/Auto-servis-Semini/100063523570444/?sk=about",
+        "https://www.google.com/search?q=AutoServis+Semini+Prizren+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "autotrade-toyota",
@@ -2039,9 +2257,10 @@
       "checkedUrls": [
         "https://www.facebook.com/BMWgrouppristina/",
         "https://stgres.gjirafa.biz/bmw-prishtina-1",
-        "https://www.instagram.com/bmwkosova_/reels/?hl=de"
+        "https://www.instagram.com/bmwkosova_/reels/?hl=de",
+        "https://www.google.com/search?q=BMW+Prishtina+Prishtina+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Facebook verlangt Anmeldung; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "bmw-service-ferizaj",
@@ -2051,9 +2270,10 @@
       "emails": [],
       "researchStatus": "not_found",
       "checkedUrls": [
-        "https://www.facebook.com/bmwferizaj"
+        "https://www.facebook.com/bmwferizaj",
+        "https://www.google.com/search?q=BMW+Service+Ferizaj+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Facebook verlangt Anmeldung; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "cesko-auto-service-prizren",
@@ -2141,9 +2361,11 @@
       "researchStatus": "uncertain",
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/dida-service",
-        "https://www.facebook.com/p/DIDA-SERViS-100063452055819/"
+        "https://www.facebook.com/p/DIDA-SERViS-100063452055819/",
+        "https://www.google.com/search?q=Dida+Service+Prizren+049955682+email+Instagram",
+        "https://www.facebook.com/people/DIDA-SERViS/100063452055819/?sk=about"
       ],
-      "notes": "Facebook-Seite DIDA SERViS ohne ausreichenden Standort-/Telefonabgleich; nicht übernommen."
+      "notes": "Nachprüfung: DIDA SERViS auf Facebook nennt Fatondida24@gmail.com, jedoch weiterhin keine passende Telefonnummer oder bestätigte Prizren-Adresse; About-Seite technisch nicht verfügbar. Präzise Suche nach +38349 955682 liefert keinen Abgleich. Keine E-Mail übernommen."
     },
     {
       "workshopId": "dpf-auto-gjini-prizren",
@@ -2154,9 +2376,10 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/dpf-auto-gjini",
-        "https://www.facebook.com/dpfkosova1/?locale=sq_AL"
+        "https://www.facebook.com/dpfkosova1/?locale=sq_AL",
+        "https://www.google.com/search?q=DPF+Auto+Gjini+Prizren+email+kontakt"
       ],
-      "notes": "Treffer DPF Kosova mit anderem Namen und Kontakt; nicht übernommen."
+      "notes": "Treffer DPF Kosova mit anderem Namen und Kontakt; nicht übernommen. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "eurogoma-ferizaj",
@@ -2339,9 +2562,10 @@
       "emails": [],
       "researchStatus": "not_found",
       "checkedUrls": [
-        "https://www.facebook.com/garagefita/?locale=sq_AL"
+        "https://www.facebook.com/garagefita/?locale=sq_AL",
+        "https://www.google.com/search?q=Garage+Fita+Gjilan+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Facebook verlangt Anmeldung; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "global-automotive",
@@ -2373,9 +2597,11 @@
       "emails": [],
       "researchStatus": "not_found",
       "checkedUrls": [
-        "https://goniari.com/faq"
+        "https://goniari.com/faq",
+        "https://www.google.com/search?q=Auto+Goma+%E2%80%9EGoni+Ari%E2%80%9C+Prizren+email+kontakt",
+        "https://www.instagram.com/goniari.autogoma/"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "greensteam-detailing-prishtina",
@@ -2409,9 +2635,11 @@
       "emails": [],
       "researchStatus": "not_found",
       "checkedUrls": [
-        "https://www.facebook.com/KioGarage/?locale=de_DE"
+        "https://www.facebook.com/KioGarage/?locale=de_DE",
+        "https://www.google.com/search?q=KIO+Garage+Prizren+email+kontakt",
+        "https://www.instagram.com/kio_garage/"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; Facebook verlangt Anmeldung; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "koli-prishtina",
@@ -2419,13 +2647,15 @@
       "matchedPhone": "+38344810238",
       "matchedCity": "Prishtina",
       "emails": [],
-      "researchStatus": "not_found",
+      "researchStatus": "uncertain",
       "checkedUrls": [
         "https://stgres.gjirafa.biz/koli-1",
         "https://www.facebook.com/help/224320090914202?locale=sq_AL",
-        "https://www.instagram.com/koli_mitri/"
+        "https://www.instagram.com/koli_mitri/",
+        "https://www.google.com/search?q=Koli+Prishtina+email+kontakt",
+        "https://www.facebook.com/autoserviskoli/"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Offener E-Mail-Kandidat serviskoliprishtine@gmail.com: Google-Suchtreffer nennt exakt +383 44 810 238 und die E-Mail; direkte Facebook-Kontaktseite noch nicht lesbar. Keine Adresse im passenden Gjirafa-Eintrag. Noch nicht übernommen."
     },
     {
       "workshopId": "lipjani-coding-lipjan",
@@ -2521,9 +2751,10 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.openstreetmap.org/",
-        "https://www.instagram.com/benz_011_doo/"
+        "https://www.instagram.com/benz_011_doo/",
+        "https://www.google.com/search?q=Mercedes-Benz-Limi-Service+Istog+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "mercedes-isa-ferizaj",
@@ -2535,9 +2766,10 @@
       "checkedUrls": [
         "https://www.cybo.com/XK-biz/mercedes-isa",
         "https://www.facebook.com/p/Mercedes-Isa-Service-100088667126630/",
-        "https://www.instagram.com/mercedes_isa_service/"
+        "https://www.instagram.com/mercedes_isa_service/",
+        "https://www.google.com/search?q=Mercedes+Isa+Ferizaj+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; Facebook verlangt Anmeldung; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "mercedes-service-ballkan-peja",
@@ -2549,9 +2781,10 @@
       "checkedUrls": [
         "https://mercedesballkan.com/en/homepage/",
         "https://www.facebook.com/MercedesBenzServiceBallkan/",
-        "https://www.instagram.com/mercedes_service_ballkan/?hl=de"
+        "https://www.instagram.com/mercedes_service_ballkan/?hl=de",
+        "https://www.google.com/search?q=Mercedes+Service+Ballkan+Peja+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; Facebook verlangt Anmeldung; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "nero-prizren",
@@ -2563,9 +2796,10 @@
       "checkedUrls": [
         "https://biznisinfo.online/biznis-informator-6/",
         "https://www.facebook.com/public/Nero/",
-        "https://www.instagram.com/nero_company1/"
+        "https://www.instagram.com/nero_company1/",
+        "https://www.google.com/search?q=Nero+Prizren+email+kontakt"
       ],
-      "notes": "Suchtreffer und Adressen anderer Unternehmen mit Namen Nero; keine Werkstattadresse sicher belegbar."
+      "notes": "Suchtreffer und Adressen anderer Unternehmen mit Namen Nero; keine Werkstattadresse sicher belegbar. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "olluri-ferizaj",
@@ -2576,9 +2810,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.facebook.com/login.php?next=https%3A%2F%2Fwww.facebook.com%2F100063784440689%2Falbums%2F468269751975836%2F",
-        "https://www.instagram.com/05ferizajgirls/"
+        "https://www.instagram.com/05ferizajgirls/",
+        "https://www.google.com/search?q=Olluri+Ferizaj+email+kontakt",
+        "https://arbk.org/biz/sabit-olluri-bi/"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "opel-e-rafuna-prishtina",
@@ -2611,9 +2847,10 @@
       "emails": [],
       "researchStatus": "not_found",
       "checkedUrls": [
-        "https://www.facebook.com/p/Opel-Z-SH-Tabaku-100063556361444/"
+        "https://www.facebook.com/p/Opel-Z-SH-Tabaku-100063556361444/",
+        "https://www.google.com/search?q=Opel+Zh-Sh+Gjakova+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Facebook verlangt Anmeldung; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "peugeot-te-beda-prishtina",
@@ -2701,9 +2938,10 @@
       "checkedUrls": [
         "https://dogana.rks-gov.net/sharedfolder/AnnouncementFiles/2026_b0c9a4d9-6eaf-4463-9a1f-f6b4d67d9c49.Pdf",
         "https://www.facebook.com/reno.muqiqi.bllaca/",
-        "https://www.instagram.com/renomuciqi/"
+        "https://www.instagram.com/renomuciqi/",
+        "https://www.google.com/search?q=Reno+Mu%C3%A7iqi+%26+Bllaca+Obiliq+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; Facebook verlangt Anmeldung; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "rex-automobile-prizren",
@@ -2738,9 +2976,10 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.facebook.com/public/Ridvan-Ferizaj",
-        "https://www.instagram.com/ridvanasllanii/"
+        "https://www.instagram.com/ridvanasllanii/",
+        "https://www.google.com/search?q=Ridvan+Ferizaj+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "servis-kurtaj-erolls-prizren",
@@ -2750,9 +2989,10 @@
       "emails": [],
       "researchStatus": "not_found",
       "checkedUrls": [
-        "https://www.facebook.com/people/Servis-Kurtaj-Auto-klima-Moni/100064679107416/?locale=ms_MY"
+        "https://www.facebook.com/people/Servis-Kurtaj-Auto-klima-Moni/100064679107416/?locale=ms_MY",
+        "https://www.google.com/search?q=Servis+Kurtaj+%26+Auto+Klima+EROLLS+Prizren+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "shala-detailing-gjakova",
@@ -2784,9 +3024,10 @@
       "emails": [],
       "researchStatus": "not_found",
       "checkedUrls": [
-        "https://gulesider-da.cybo.com/XK-biz/sheki-benz-automotive-body-shop"
+        "https://gulesider-da.cybo.com/XK-biz/sheki-benz-automotive-body-shop",
+        "https://www.google.com/search?q=Sheki+Benz-+AutoMotive+Body+Shop+Vushtrri+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "shine-detailing-studio-prishtina",
@@ -2818,9 +3059,10 @@
       "emails": [],
       "researchStatus": "not_found",
       "checkedUrls": [
-        "https://www.gjithebiznesi.com/XK/sokoli-autoelectronic-049-326-545"
+        "https://www.gjithebiznesi.com/XK/sokoli-autoelectronic-049-326-545",
+        "https://www.google.com/search?q=Sokoli+AutoElectronic+Peja+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "sonic-garage",
@@ -2855,9 +3097,11 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://onlycar.rs/kosovska-mitrovica/tuning/stavileci-tuning",
-        "https://www.instagram.com/stavileci_tuninng/?hl=de"
+        "https://www.instagram.com/stavileci_tuninng/?hl=de",
+        "https://www.google.com/search?q=Stavileci+Tuning+Mitrovica+email+kontakt",
+        "https://www.stavilecituning.net/"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "superclean-prishtina",
@@ -2868,9 +3112,10 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.facebook.com/people/Super-Clean-Ks/100078345010051/?locale=sq_AL",
-        "https://www.gjithebiznesi.com/XK/superclean-prishtin%C3%AB-045-677-633"
+        "https://www.gjithebiznesi.com/XK/superclean-prishtin%C3%AB-045-677-633",
+        "https://www.google.com/search?q=SuperClean+Prishtin%C3%AB+Prishtina+email+kontakt"
       ],
-      "notes": "Facebook-Treffer Super Clean Ks hat anderen Standort und Telefonnummer; nicht übernommen."
+      "notes": "Facebook-Treffer Super Clean Ks hat anderen Standort und Telefonnummer; nicht übernommen. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "tiptop-detailing-gjakova",
@@ -2881,9 +3126,10 @@
       "researchStatus": "not_found",
       "checkedUrls": [
         "https://www.gjithebiznesi.com/XK/tiptop-vullkanizer-detailing-car-wash-049-323-545",
-        "https://www.instagram.com/tiptopautowash/"
+        "https://www.instagram.com/tiptopautowash/",
+        "https://www.google.com/search?q=TipTop+Vullkanizer+%26+Detailing+Car+Wash+Gjakova+email+kontakt"
       ],
-      "notes": "Instagram-Treffer Tip Top Auto Wash aus anderem Markt; nicht übernommen."
+      "notes": "Instagram-Treffer Tip Top Auto Wash aus anderem Markt; nicht übernommen. Erneut am 13.10.2026 im internen Browser recherchiert; keine zusätzlich direkt belegte E-Mail übernommen."
     },
     {
       "workshopId": "titans-auto-repair-prishtina",
@@ -2959,13 +3205,24 @@
       "matchedName": "Valoni-I",
       "matchedPhone": "+38349303929",
       "matchedCity": "Mitrovica",
-      "emails": [],
-      "researchStatus": "not_found",
+      "emails": [
+        {
+          "address": "wi.gan@hotmail.com",
+          "sourceUrls": [
+            "https://stgres.gjirafa.biz/autoservis-valoni-i-1"
+          ],
+          "checkedAt": "2026-10-13",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
       "checkedUrls": [
         "https://www.facebook.com/valoni86/?locale=sr_RS",
-        "https://www.instagram.com/vwservicevalonii/?hl=de"
+        "https://www.instagram.com/vwservicevalonii/?hl=de",
+        "https://stgres.gjirafa.biz/autoservis-valoni-i-1",
+        "https://www.google.com/search?q=Valoni-I+Mitrovica+email+kontakt"
       ],
-      "notes": "Suchtreffer Valoni Electronics und Hotel Valoni sind andere Betriebe; keine Adresse übernommen."
+      "notes": "Gjirafa zeigt E-Mail zu AutoServis Valoni-i an exakt Nr.1 Adem Voca, Mitrovicë 40000. Verzeichnis nennt andere/ältere Telefonnummern, daher Zuordnung über charakteristischen Namen und identische Straßenadresse; Profiltelefone bleiben unverändert."
     },
     {
       "workshopId": "waxon-auto-detailing-mitrovica",
@@ -3021,9 +3278,10 @@
       "checkedUrls": [
         "https://www.facebook.com/p/YLLI-PowerTune-100068944322737/",
         "https://www.cybo.com/XK-biz/ylli-performance-chip-tuning",
-        "https://www.instagram.com/ylli_chiptuningengine/?hl=de"
+        "https://www.instagram.com/ylli_chiptuningengine/?hl=de",
+        "https://www.google.com/search?q=Ylli+Performance+Chip+Tuning+Gjilan+email+kontakt"
       ],
-      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden."
+      "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen."
     }
   ]
 }
