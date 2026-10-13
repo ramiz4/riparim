@@ -42,6 +42,6 @@
 .workshop-email-row label {flex:1;min-width:0;}
 .workshop-email-row input[type="email"] {width:100%;min-width:0;}
 .workshop-email-flags {display:flex;gap:1rem;flex-wrap:wrap;width:100%;}
-.workshop-email-flags label {display:flex;gap:.4rem;align-items:center;flex:none;}
+.workshop-email-editor .workshop-email-flags label {display:flex;flex-direction:row;font-weight:400;gap:.4rem;align-items:center;flex:none;}
 .workshop-email-flags input[type="checkbox"] {width:auto;min-height:auto;}
 @media(max-width:480px){.workshop-email-row {flex-wrap:wrap;}.workshop-email-row label {flex-basis:100%;}}
