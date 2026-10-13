@@ -1,3 +1,4 @@
+import {catalogueFixtureKey} from './helpers/catalogue-fixture-key.mjs';
 import assert from 'node:assert/strict';
 import {assertPrivacyOutput} from './helpers/privacy-output.mjs';
 import {localizeHref} from '../scripts/lib/locale.mjs';
@@ -36,8 +37,7 @@ try{
  await run(process.execPath,['.node-runtime/command.mjs','migrate'],{env:environment});
  // Keep the real catalogue immutable. This isolated DB has only synthetic rows.
  const db=new DatabaseSync(join(directory,'app.sqlite'));
- const canonical=JSON.parse(await readFile('data/workshops.json','utf8'));
- const marker='workshop-source:'+createHash('sha256').update(JSON.stringify(canonical)).digest('hex');
+ const marker=await catalogueFixtureKey();
  db.prepare('INSERT INTO catalog_state VALUES (?,?)').run(marker,'fixture');
  for(const [id,name,status] of [['fixture-public','Synthetic Node Workshop','published'],['fixture-draft','Private Draft Workshop','draft']])db.prepare("INSERT INTO workshops (id,name,city,address,phone,brands,services,specialty,description,sources,checked_at,status,updated_at) VALUES (?,?, 'Prishtina','Synthetic road 1','+38344123456','[]','[\"Inspektion\"]','Synthetic','Fictional workshop for isolated integration','[]','2026-10-01',?,'2026-10-01T00:00:00Z')").run(id,name,status);
  db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at) VALUES ('main',?,?,1,0,?)").run('https://node-auth-fixture.supabase.co','sb_publishable_synthetic_fixture_1234567890','2026-10-01T00:00:00Z');
