@@ -378,5 +378,1068 @@
       "stage": "prepared-source",
       "result": "Two local additions, all local checks/builds/packages passed; PR160 created, no live publication claimed."
     }
+  ],
+  "supplementalRuns": [
+    {
+      "runId": "manual-expanded-research-2026-10-13",
+      "startedAt": "2026-10-13T07:00:31.816498+00:00",
+      "status": "canonical-prepared-review-and-ci-pending",
+      "authorization": "Explicit user exception to the completed-date guard for one manual expanded research/import/release run; all quality and release gates remain required.",
+      "baseCommit": "24b39f6f3e0705c6344f685b52c36e75252b8eb0",
+      "branch": "codex/daily-import-2026-10-13-manual",
+      "previousDailyPublishedCount": 2,
+      "dailyRemainingMaximum": 28,
+      "focusMunicipalities": [
+        "Lipjan",
+        "Vushtrri",
+        "Drenas",
+        "Skenderaj"
+      ],
+      "profiles": [
+        {
+          "id": "auto-servis-naimi-vushtrri",
+          "name": "Auto Servis Naimi",
+          "sourceUrls": [
+            "https://www.autoyas.com/XK/Vushtrri/107922445453402/Auto-Servis-Naimi",
+            "https://www.facebook.com/ServisNaimi/"
+          ],
+          "placeId": "ChIJS-1TM8VbUxMR2JYNr3M3av4",
+          "checkedAt": "2026-10-13T07:16:23.056190+00:00",
+          "nameMatched": true,
+          "normalizedPhoneMatched": true,
+          "independentLocationMatched": true,
+          "independentServiceScopeVerified": true,
+          "activeEntry": true,
+          "directIdResolved": true,
+          "mapsMethod": "Visible public Maps !19s result link; direct-ID return with deliberately incorrect query",
+          "ownershipVerificationClaimed": false,
+          "status": "verified-not-imported",
+          "publicBusinessEmail": {
+            "address": null,
+            "status": "not-found",
+            "sourceUrl": null,
+            "checkedAt": "2026-10-13T07:25:42.456497+00:00",
+            "checkedSourceUrls": [
+              "https://www.facebook.com/ServisNaimi/",
+              "https://www.instagram.com/NaimiAutoServis/",
+              "https://www.autoyas.com/XK/Vushtrri/107922445453402/Auto-Servis-Naimi"
+            ],
+            "note": "No email visible in public Facebook contact block or independent listing; official Facebook-linked Instagram profile unavailable. Targeted web search found no attributable business email; registry placeholders rejected."
+          }
+        },
+        {
+          "id": "auto-service-rashani-vushtrri",
+          "name": "Auto Service RASHANI",
+          "sourceUrls": [
+            "https://www.cybo.com/XK/vushtrri/car-repair/",
+            "https://www.veturaneshitje.com/biznese/132/auto-service-rashani",
+            "https://www.facebook.com/AutoServiceRashani"
+          ],
+          "placeId": "ChIJo0dV0UtbUxMRiQulO0Xp4cU",
+          "checkedAt": "2026-10-13T07:16:23.056190+00:00",
+          "nameMatched": true,
+          "normalizedPhoneMatched": true,
+          "independentLocationMatched": true,
+          "independentServiceScopeVerified": true,
+          "activeEntry": true,
+          "directIdResolved": true,
+          "mapsMethod": "Visible public Maps !19s result link; direct-ID return with deliberately incorrect query",
+          "ownershipVerificationClaimed": false,
+          "status": "verified-not-imported",
+          "publicBusinessEmail": {
+            "address": null,
+            "status": "not-found",
+            "sourceUrl": null,
+            "checkedAt": "2026-10-13T07:29:04.796395+00:00",
+            "checkedSourceUrls": [
+              "https://www.cybo.com/XK/vushtrri/car-repair/",
+              "https://www.veturaneshitje.com/biznese/132/auto-service-rashani",
+              "https://www.facebook.com/AutoServiceRashani"
+            ],
+            "note": "No attributable email found in independent listing, directly linked public Facebook Intro/About or targeted website/social searches. Platform footer email excluded."
+          }
+        },
+        {
+          "id": "auto-service-ardi-vushtrri",
+          "name": "Auto Service ARDI",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-service-ardi_1G-049-400-386",
+            "https://www.facebook.com/AutoServiceArdi/",
+            "https://www.autoyas.com/XK/Vushtrri/108632047402437/Auto-Service-ARDI"
+          ],
+          "placeId": "ChIJx9DKuGFbUxMRYxVaw3g7KGw",
+          "checkedAt": "2026-10-13T07:18:13.285830+00:00",
+          "nameMatched": true,
+          "normalizedPhoneMatched": true,
+          "independentLocationMatched": true,
+          "independentServiceScopeVerified": true,
+          "activeEntry": true,
+          "directIdResolved": true,
+          "mapsMethod": "Visible public Maps !19s result link; direct-ID return with deliberately incorrect query",
+          "ownershipVerificationClaimed": false,
+          "status": "verified-not-imported",
+          "publicBusinessEmail": {
+            "address": "alban.bekteshi2@gmail.com",
+            "status": "publicly-sourced",
+            "sourceUrl": "https://www.facebook.com/AutoServiceArdi/",
+            "checkedAt": "2026-10-13T07:20:06.739231+00:00",
+            "businessMatch": "Official public page name and phone match the candidate; no deliverability or marketing-consent claim."
+          },
+          "locationNote": "Official Facebook location dialog publishes directions to the business-specific destination 42.827724044311,20.969082912954. This resolves to the same business point as the active Maps entry (within 4 metres); Luan Haradinaj and directory Ana Lin label the same verified location. Catalogue uses the official street name; no Google coordinates persisted."
+        },
+        {
+          "id": "auto-service-besi-vushtrri",
+          "name": "Auto service BESI",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-service-besi-049-205-441"
+          ],
+          "placeId": "ChIJETVBwuZbUxMRaPlrks7hb24",
+          "checkedAt": "2026-10-13T07:20:06.739231+00:00",
+          "nameMatched": true,
+          "normalizedPhoneMatched": true,
+          "independentLocationMatched": true,
+          "independentServiceScopeVerified": true,
+          "activeEntry": true,
+          "directIdResolved": true,
+          "mapsMethod": "Visible public Maps !19s result link; direct-ID return with deliberately incorrect query",
+          "ownershipVerificationClaimed": false,
+          "status": "verified-not-imported",
+          "publicBusinessEmail": {
+            "address": null,
+            "status": "not-found",
+            "sourceUrl": null,
+            "checkedAt": "2026-10-13T07:34:08.968288+00:00",
+            "checkedSourceUrls": [
+              "https://www.gjithebiznesi.com/XK/auto-service-besi-049-205-441",
+              "https://www.cybo.com/XK-biz/auto-service-besi",
+              "https://www.facebook.com/besiauto/"
+            ],
+            "note": "No email in matching directories. Search-suggested Besi Auto Facebook page belongs to a dealership in Livoç i Poshtëm with a different telephone; its email was rejected. No attributable own website or Instagram found."
+          }
+        },
+        {
+          "id": "sheki-benz-vushtrri",
+          "name": "Sheki Benz- AutoMotive Body Shop",
+          "sourceUrls": [
+            "https://gulesider-da.cybo.com/XK-biz/sheki-benz-automotive-body-shop"
+          ],
+          "placeId": "ChIJD8VgB2xdUxMRkwgUQ8ER2Go",
+          "checkedAt": "2026-10-13T07:29:04.796395+00:00",
+          "nameMatched": true,
+          "normalizedPhoneMatched": true,
+          "independentLocationMatched": true,
+          "independentServiceScopeVerified": true,
+          "activeEntry": true,
+          "directIdResolved": true,
+          "mapsMethod": "Visible public Maps !19s result link; direct-ID return with deliberately incorrect query in confirmed internal browser account",
+          "ownershipVerificationClaimed": false,
+          "status": "verified-not-imported",
+          "publicBusinessEmail": {
+            "address": null,
+            "status": "not-found",
+            "sourceUrl": null,
+            "checkedAt": "2026-10-13T07:34:08.968288+00:00",
+            "checkedSourceUrls": [
+              "https://gulesider-da.cybo.com/XK-biz/sheki-benz-automotive-body-shop",
+              "https://www.facebook.com/p/Sheki-Benz-100071579418392/"
+            ],
+            "note": "Matching directory has no email; similarly named Facebook page only shows town, no phone/email. Search registry placeholder and AI suggestions rejected; no attributable own website/Instagram email found."
+          }
+        },
+        {
+          "id": "auto-service-prekazi-vushtrri",
+          "name": "Auto Service Prekazi",
+          "sourceUrls": [
+            "https://bedrijvengids.cybo.com/XK/vushtrri/autogarage?d=c",
+            "https://www.facebook.com/p/Auto-Servis-PREKAZI-100063530080689/"
+          ],
+          "placeId": "ChIJo3BGCoRfUxMR4tyWK4gFYGU",
+          "checkedAt": "2026-10-13T07:29:04.796395+00:00",
+          "nameMatched": true,
+          "normalizedPhoneMatched": true,
+          "independentLocationMatched": true,
+          "independentServiceScopeVerified": true,
+          "activeEntry": true,
+          "directIdResolved": true,
+          "mapsMethod": "Visible public Maps !19s result link; direct-ID return with deliberately incorrect query in confirmed internal browser account",
+          "ownershipVerificationClaimed": false,
+          "status": "verified-not-imported",
+          "publicBusinessEmail": {
+            "address": "mergim.meha@hotmail.com",
+            "status": "publicly-sourced",
+            "sourceUrl": "https://www.facebook.com/p/Auto-Servis-PREKAZI-100063530080689/",
+            "checkedAt": "2026-10-13T07:30:55.028601+00:00",
+            "businessMatch": "Public business page name and phone match; no deliverability or marketing-consent claim."
+          }
+        },
+        {
+          "id": "autoservice-a-m-vushtrri",
+          "name": "Autoservice A&M",
+          "sourceUrls": [
+            "https://bedrijvengids.cybo.com/XK/vushtrri/autogarage?d=c"
+          ],
+          "placeId": "ChIJ2X6qZsdfUxMR9yG24eMSxGk",
+          "checkedAt": "2026-10-13T07:30:55.028601+00:00",
+          "nameMatched": true,
+          "normalizedPhoneMatched": true,
+          "independentLocationMatched": true,
+          "independentServiceScopeVerified": true,
+          "activeEntry": true,
+          "directIdResolved": true,
+          "mapsMethod": "Visible public Maps !19s result link; direct-ID return with deliberately incorrect query in confirmed internal browser account",
+          "ownershipVerificationClaimed": false,
+          "status": "verified-not-imported",
+          "publicBusinessEmail": {
+            "address": null,
+            "status": "not-found",
+            "sourceUrl": null,
+            "checkedAt": "2026-10-13T07:30:55.028601+00:00",
+            "checkedSourceUrls": [
+              "https://bedrijvengids.cybo.com/XK/vushtrri/autogarage?d=c"
+            ],
+            "note": "Independent directory has no public business email. Focused search for this business and its Facebook/website contact produced no attributable email; emails belonging to other workshops rejected."
+          }
+        },
+        {
+          "id": "autodetailingdaja-vushtrri",
+          "name": "Autodetailingdaja",
+          "sourceUrls": [
+            "https://www.facebook.com/61564172242981/"
+          ],
+          "placeId": "ChIJBWVI9y9bUxMRqVLTgHMJyMc",
+          "checkedAt": "2026-10-13T07:47:21.332786+00:00",
+          "nameMatched": true,
+          "normalizedPhoneMatched": true,
+          "independentLocationMatched": true,
+          "locationPrecision": "municipality and postal code only; no independently verified street or coordinates",
+          "independentServiceScopeVerified": true,
+          "activeEntry": true,
+          "directIdResolved": true,
+          "mapsMethod": "Visible public Maps !19s result link; direct-ID return with deliberately incorrect query in confirmed internal browser account",
+          "ownershipVerificationClaimed": false,
+          "status": "prepared-for-independent-review",
+          "publicBusinessEmail": {
+            "address": "Jusufiriad2000@gmail.com",
+            "status": "publicly-sourced",
+            "sourceUrl": "https://www.facebook.com/61564172242981/",
+            "checkedAt": "2026-10-13T07:47:21.332786+00:00",
+            "businessMatch": "Public business page name and exact phone match; no deliverability or marketing-consent claim."
+          },
+          "locationNote": "Facebook states Vushtrri42000 and links a town search rather than a precise marker. Only this independently sourced town/postal code is published, with explicit missing-street disclosure; no Google street or coordinates copied. Independent reviewer must assess this limited address before merge."
+        }
+      ],
+      "deferred": [
+        {
+          "name": "Wolf Detailing",
+          "reason": "Public Maps telephone conflicts with independently published phones; same street/name alone is insufficient.",
+          "nextCheck": "Find independently published evidence linking the current Maps telephone to the same business.",
+          "sourceUrls": [
+            "https://www.autoyas.com/XK/Lipjan/705728559510841/Wolf-Detailing"
+          ]
+        },
+        {
+          "name": "Auto Servis Gashi Vushtrri",
+          "reason": "Public Maps telephone differs from both independently published telephone contacts.",
+          "nextCheck": "Resolve business continuity and phone difference from independent source.",
+          "sourceUrls": [
+            "https://stgres.gjirafa.biz/autoservisgashi-1/"
+          ]
+        },
+        {
+          "name": "Autoservis Erjoni",
+          "reason": "Maps search returned other businesses, no unique Komoran match.",
+          "nextCheck": "Find current own business page and uniquely matching Maps entry.",
+          "sourceUrls": [
+            "https://stgres.gjirafa.biz/autoservis-erjoni-1/"
+          ]
+        },
+        {
+          "name": "Auto Servis Fulga",
+          "reason": "Maps search returned other businesses, no unique Skenderaj match.",
+          "nextCheck": "Find current business identity/Maps entry.",
+          "sourceUrls": [
+            "https://stgres.gjirafa.biz/auto-servis-fulga-1/"
+          ]
+        },
+        {
+          "name": "Autoservis Lordi",
+          "reason": "Maps search offers a parts business outside the independently stated Skenderaj location; continuity and repair scope unresolved.",
+          "nextCheck": "Independent current workshop street/contact proof.",
+          "sourceUrls": [
+            "https://stgres.gjirafa.biz/autoservis-lordi-1/",
+            "https://www.merrjep.com/auto-servis-lordi"
+          ]
+        },
+        {
+          "name": "Auto Servis Isa Skenderaj",
+          "reason": "Maps selected a different town and incomplete contact; no matching Skenderaj identity.",
+          "nextCheck": "Independent current identity and exact Maps listing.",
+          "sourceUrls": [
+            "https://stgres.gjirafa.biz/auto-servis-isa-2"
+          ]
+        },
+        {
+          "name": "Auto Elektrika Bosch Lipjan",
+          "sourceUrls": [
+            "https://www.gjithebiznesi.com/XK/auto-elektrika-bosch-044-100-220"
+          ],
+          "reason": "Name, phone and address match, but public Maps profile lacks regular business status and recent independent operating evidence remains missing.",
+          "nextCheck": "Find recent own service evidence and confirm active status; read and directly recheck official Place ID."
+        },
+        {
+          "name": "Servis Tali Komoran",
+          "sourceUrls": [
+            "https://faqet-e-verdha.cybo.com/XK/drenasi/automobilistik"
+          ],
+          "reason": "Public Maps query did not resolve the independently listed business uniquely.",
+          "nextCheck": "Find current own identity and active exact Maps listing."
+        },
+        {
+          "name": "Auto Servis DENISI (Armend Zogu BI)",
+          "sourceUrls": [
+            "https://faqet-e-verdha.cybo.com/XK/drenasi/automobilistik"
+          ],
+          "reason": "Name, phone and street match, but current operating status lacks corroboration; public Maps has no regular opening status.",
+          "nextCheck": "Find recent own operation proof; obtain and directly verify public Place ID."
+        },
+        {
+          "name": "Detailing Gerguri",
+          "sourceUrls": [
+            "https://www.cybo.com/XK-biz/detailing-gerguri",
+            "https://www.facebook.com/p/Detailing-Gerguri-100084678797919/"
+          ],
+          "reason": "Own public page shows specialist cleaning, but Maps search returned other businesses rather than a unique matching active entry.",
+          "nextCheck": "Find the exact active public Maps listing and directly verify its Place ID."
+        }
+      ],
+      "duplicates": [
+        {
+          "id": "auto-elektro-service-agroni-vushtrri",
+          "reason": "Published identity rediscovered in municipal directory/source screening; not reimported."
+        },
+        {
+          "id": "auto-servis-pirqi-vushtrri",
+          "reason": "Published identity rediscovered in municipal directory/source screening; not reimported."
+        },
+        {
+          "id": "auto-servis-nazi-drenas",
+          "reason": "Published identity rediscovered in municipal directory/source screening; not reimported."
+        },
+        {
+          "id": "auto-servis-nexhi-lipjan",
+          "reason": "Published identity rediscovered in municipal directory/source screening; not reimported."
+        },
+        {
+          "id": "auto-servis-univerzal-lipjan",
+          "reason": "Published identity rediscovered in municipal directory/source screening; not reimported."
+        },
+        {
+          "id": "auto-cosmetic-te-fitimi-mitrovica",
+          "reason": "Published identity rediscovered in municipal directory/source screening; not reimported."
+        }
+      ],
+      "additionalCosts": 0,
+      "contactsSent": 0,
+      "googleApiRequests": 0,
+      "newlyPublishedCount": 0,
+      "preflight": {
+        "checkedAt": "2026-10-13T07:03:35.357Z",
+        "published": 164,
+        "checks": [
+          {
+            "path": "/werkstaetten",
+            "status": 200,
+            "bytes": 414003,
+            "ray": "a49c7c365c7b59fb-MXP",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/werkstatt/auto-servis-berati-malisheve",
+            "status": 200,
+            "bytes": 63330,
+            "ray": "a49c7c373d3b59fb-MXP",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/werkstatt/auto-servis-diagnoz-opel-malisheve",
+            "status": 200,
+            "bytes": 63604,
+            "ray": "a49c7c383e1259fb-MXP",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/sq/serviset",
+            "status": 200,
+            "bytes": 430419,
+            "ray": "a49c7c38fe9d59fb-MXP",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/sq/servis/auto-servis-berati-malisheve",
+            "status": 200,
+            "bytes": 63069,
+            "ray": "a49c7c39df3359fb-MXP",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/sq/servis/auto-servis-diagnoz-opel-malisheve",
+            "status": 200,
+            "bytes": 63343,
+            "ray": "a49c7c3a6fa559fb-MXP",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/en/workshops",
+            "status": 200,
+            "bytes": 419080,
+            "ray": "a49c7c3b887d59fb-MXP",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/en/workshop/auto-servis-berati-malisheve",
+            "status": 200,
+            "bytes": 60749,
+            "ray": "a49c7c3c897859fb-MXP",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/en/workshop/auto-servis-diagnoz-opel-malisheve",
+            "status": 200,
+            "bytes": 61013,
+            "ray": "a49c7c3d4a2659fb-MXP",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          }
+        ],
+        "healthy": true
+      },
+      "baseline": {
+        "checkedAt": "2026-10-13T07:08:15.531009+00:00",
+        "tableCounts": {
+          "workshops": 164,
+          "workshop_google_places": 164,
+          "workshop_google_ratings": 129,
+          "catalog_state": 59
+        },
+        "restoreVerified": true,
+        "canonicalFieldsCompared": 19,
+        "profilesCompared": 164,
+        "placeIdsCompared": 164,
+        "mismatches": [],
+        "retirementMarkers": 35
+      },
+      "activeRelease": "v1.25.0",
+      "activeWorkerVersion": "1ed5bb37-b958-4496-9595-a796cbf03087",
+      "preflightOutcomes": {
+        "ok": 12,
+        "other": 0,
+        "boundedObservation": true
+      },
+      "profileConfirmed": true,
+      "updatedAt": "2026-10-13T07:09:21.901855+00:00",
+      "emailPolicy": "Capture public business email when available, with source/date; missing email does not block publication; no contact messages.",
+      "browser": "Internal Codex browser; Google account ramizloki82@googlemail.com visibly confirmed before Maps checks. Earlier checks used the same confirmed Chrome account.",
+      "before": {
+        "published": 164,
+        "drafts": 0
+      },
+      "after": {
+        "published": 172,
+        "drafts": 0
+      },
+      "addedIds": [
+        "auto-servis-naimi-vushtrri",
+        "auto-service-rashani-vushtrri",
+        "auto-service-ardi-vushtrri",
+        "auto-service-besi-vushtrri",
+        "sheki-benz-vushtrri",
+        "auto-service-prekazi-vushtrri",
+        "autoservice-a-m-vushtrri",
+        "autodetailingdaja-vushtrri"
+      ],
+      "dryRun": {
+        "status": "passed",
+        "added": 8,
+        "updated": 0,
+        "deduplicated": 0,
+        "repeatIdempotent": true
+      },
+      "import": {
+        "status": "written-to-canonical-only",
+        "added": 8,
+        "updated": 0,
+        "publishedNewCount": 0
+      },
+      "translationCheck": {
+        "status": "passed",
+        "contract": "workshopTranslationSourceHash",
+        "locales": [
+          "de",
+          "sq",
+          "en"
+        ]
+      },
+      "emailSummary": {
+        "preparedWithPublicBusinessEmail": 3,
+        "preparedWithoutEmail": 5,
+        "deliverabilityTested": false,
+        "messagesSent": 0
+      },
+      "liveRecheckBeforeWrite": {
+        "tables": [
+          "workshops",
+          "workshop_google_places",
+          "workshop_google_ratings",
+          "catalog_state"
+        ],
+        "counts": [
+          164,
+          164,
+          129,
+          59
+        ],
+        "mismatches": 0,
+        "rowsWritten": 0,
+        "checkedAt": "2026-10-13T07:47:21.332786+00:00"
+      },
+      "provider": {
+        "googleApiRequests": 0,
+        "ownGoogleSdkRequests": 0,
+        "mapsCandidateChecks": 18,
+        "mapsDirectIdChecks": 8,
+        "providerManagedBrowserNetworkRequests": "not measured",
+        "freeApiQuota": "unknown; public UI used without API access",
+        "additionalCosts": 0,
+        "contactsSent": 0
+      },
+      "publication": {
+        "pr": null,
+        "release": null,
+        "deployment": null,
+        "newPublications": 0
+      },
+      "handoff": {
+        "state": "Continue this explicitly authorized manual supplemental run in its current worktree and branch.",
+        "lock": "held until verified release/live acceptance or documented safe handoff."
+      },
+      "researchQueue": {
+        "previousDeferred": [
+          {
+            "name": "Auto Servis & Pjesë BEXHI",
+            "originManifest": "data/import-2026-10-12-daily.json",
+            "sourceUrls": [
+              "https://autoservispjesbexhi.com/"
+            ],
+            "status": "prior-deferred",
+            "reason": "Public Maps profile has no telephone; strict phone comparison incomplete."
+          },
+          {
+            "name": "Auto Service BELTI",
+            "originManifest": "data/import-2026-10-12-daily.json",
+            "sourceUrls": [
+              "https://belti-service.com/",
+              "https://www.autoyas.com/XK/Suharek%C3%AB/251321245051560/AutoServis-BELTI"
+            ],
+            "status": "prior-deferred",
+            "reason": "Maps telephone differs from independently published business telephone; alternative Maps number not independently confirmed."
+          },
+          {
+            "name": "Wolf Detailing",
+            "originManifest": "data/import-2026-10-12-daily.json",
+            "sourceUrls": [
+              "https://www.autoyas.com/XK/Lipjan/705728559510841/Wolf-Detailing"
+            ],
+            "status": "prior-deferred",
+            "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+          },
+          {
+            "name": "Auto Servis Gashi",
+            "originManifest": "data/import-2026-10-12-daily.json",
+            "sourceUrls": [
+              "https://stgres.gjirafa.biz/autoservisgashi-1/?p360=1"
+            ],
+            "status": "prior-deferred",
+            "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+          },
+          {
+            "name": "Autoservis Erjoni",
+            "originManifest": "data/import-2026-10-12-daily.json",
+            "sourceUrls": [
+              "https://stgres.gjirafa.biz/autoservis-erjoni-1/?p360=1"
+            ],
+            "status": "prior-deferred",
+            "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+          },
+          {
+            "name": "Auto Servis Gjinovci",
+            "originManifest": "data/import-2026-10-12-daily.json",
+            "sourceUrls": [
+              "https://stgres.gjirafa.biz/auto-servis-gjinolli-1/?p360=1"
+            ],
+            "status": "prior-deferred",
+            "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+          },
+          {
+            "name": "Auto Servis Fulga",
+            "originManifest": "data/import-2026-10-12-daily.json",
+            "sourceUrls": [
+              "https://stgres.gjirafa.biz/auto-servis-fulga-1/?p360=1"
+            ],
+            "status": "prior-deferred",
+            "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+          },
+          {
+            "name": "Autoservis Lordi",
+            "originManifest": "data/import-2026-10-12-daily.json",
+            "sourceUrls": [
+              "https://stgres.gjirafa.biz/autoservis-lordi-1/?p360=1"
+            ],
+            "status": "prior-deferred",
+            "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+          },
+          {
+            "name": "Auto Servis Isa",
+            "originManifest": "data/import-2026-10-12-daily.json",
+            "sourceUrls": [
+              "https://stgres.gjirafa.biz/auto-servis-isa-2"
+            ],
+            "status": "prior-deferred",
+            "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+          },
+          {
+            "name": "Auto servis llaker LATI TUNING",
+            "originManifest": "data/import-2026-10-12-daily.json",
+            "sourceUrls": [
+              "https://stgres.gjirafa.biz/lati--tunning-1"
+            ],
+            "status": "prior-deferred",
+            "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+          },
+          {
+            "name": "Auto Servis TOTI",
+            "originManifest": "data/import-2026-10-12-daily.json",
+            "sourceUrls": [],
+            "status": "prior-deferred",
+            "reason": "Phone appears in towing advertisement; identity pending."
+          },
+          {
+            "name": "Auto Servis ABEDINI",
+            "originManifest": "data/import-2026-10-12-daily.json",
+            "sourceUrls": [],
+            "status": "prior-deferred",
+            "reason": "Historical phone prefixes and current site continuity need independent confirmation."
+          },
+          {
+            "name": "Auto Servis BURIMI",
+            "originManifest": "data/import-2026-10-12-daily.json",
+            "sourceUrls": [],
+            "status": "prior-deferred",
+            "reason": "Old advertisement names predecessor site; exact current site unconfirmed."
+          },
+          {
+            "name": "Auto Servis Idrizi",
+            "originManifest": "data/import-2026-10-13-daily.json",
+            "sourceUrls": [
+              "https://stgres.gjirafa.biz/auto-servis-idrizi-1"
+            ],
+            "status": "prior-deferred",
+            "reason": "Public Maps searches with explicit Kosovo returned other businesses; no unique matching identity."
+          },
+          {
+            "name": "Auto Servis\"GENTI\" Malishevë",
+            "originManifest": "data/import-2026-10-13-daily.json",
+            "sourceUrls": [
+              "https://www.merrjep.com/shpallja/auto-servis-genti/8494972",
+              "https://www.cybo.com/XK-biz/auto-servis%22genti%22-mlishev%C3%AB"
+            ],
+            "status": "prior-deferred",
+            "reason": "Independent phone/name/street match, but current active business status lacks corroboration; not published."
+          },
+          {
+            "name": "Auto Servis Xeni",
+            "originManifest": "data/import-2026-10-13-daily.json",
+            "sourceUrls": [
+              "https://www.cybo.com/XK/mali%C5%A1evo/car-repair/"
+            ],
+            "status": "prior-deferred",
+            "reason": "Name/phone/street and direct ID match, but no regular business status shown; active status unconfirmed."
+          },
+          {
+            "name": "Auto Servis F&S Skender Hoxha",
+            "originManifest": "data/import-2026-10-13-daily.json",
+            "sourceUrls": [
+              "https://www.gjithebiznesi.com/XK/auto-servis-f-s-skender-hoxha-049-151-054",
+              "https://arbk.atlas-studio.eu/business/skender-a-hoxha-bi-811447855"
+            ],
+            "status": "prior-deferred",
+            "reason": "Maps matches active hours/contact/location, but historical register mirror records dissolved Auto Servis F&S at this street. Continuity unresolved; conflicting directory categories."
+          },
+          {
+            "name": "Auto servis \"Tigri\"",
+            "originManifest": "data/import-2026-10-13-daily.json",
+            "sourceUrls": [
+              "https://www.findglocal.com/XK/Malishev%C3%AB/237401469797522/Auto-servis-%22Tigri%22"
+            ],
+            "status": "prior-deferred",
+            "reason": "Own published posts prove repair/alignment/phone/street; Maps offers different Tigri-L identity and other workshops. No substitute accepted."
+          },
+          {
+            "name": "Go Clean Auto Detailing",
+            "originManifest": "data/import-2026-10-13-daily.json",
+            "sourceUrls": [
+              "https://germin.org/team/leonora-cerreti/",
+              "https://www.cybo.com/XK/draga%C5%A1/car-wash-and-detail/"
+            ],
+            "status": "prior-deferred",
+            "reason": "Independent service/business evidence; no independently verified public phone and complete Maps check."
+          },
+          {
+            "name": "Auto Servis TONI",
+            "originManifest": "data/import-2026-10-13-daily.json",
+            "sourceUrls": [
+              "https://mapcarta.com/N4864543421"
+            ],
+            "status": "prior-deferred",
+            "reason": "Independent Shtime repair/location evidence; telephone and Maps identity unconfirmed."
+          },
+          {
+            "name": "Auto Servis Vëllezërit Luta",
+            "originManifest": "data/import-2026-10-13-daily.json",
+            "sourceUrls": [
+              "https://sk.cybo.com/XK/ka%C4%8Danik/autoservis"
+            ],
+            "status": "prior-deferred",
+            "reason": "Kaçanik repair lead lacks public phone and full Maps proof."
+          },
+          {
+            "name": "Auto Servis Luli",
+            "originManifest": "data/import-2026-10-13-daily.json",
+            "sourceUrls": [
+              "https://www.cybo.com/XK/bostane/car-repair"
+            ],
+            "status": "prior-deferred",
+            "reason": "Kamenicë repair lead; complete public Maps identity check still outstanding."
+          },
+          {
+            "name": "Auto Basha",
+            "originManifest": "data/import-2026-10-13-daily.json",
+            "sourceUrls": [
+              "https://www.cybo.com/XK/kamenica-kosovo/car-repair/"
+            ],
+            "status": "prior-deferred",
+            "reason": "Hodonoc/Kamenicë repair lead; complete public Maps identity check still outstanding."
+          }
+        ],
+        "newSourceLeads": [
+          {
+            "name": "Auto Servis Naimi",
+            "sourceUrls": [
+              "https://www.autoyas.com/XK/Vushtrri/107922445453402/Auto-Servis-Naimi",
+              "https://www.facebook.com/ServisNaimi/"
+            ],
+            "status": "prepared-for-review"
+          },
+          {
+            "name": "Auto Service RASHANI",
+            "sourceUrls": [
+              "https://www.cybo.com/XK/vushtrri/car-repair/",
+              "https://www.veturaneshitje.com/biznese/132/auto-service-rashani",
+              "https://www.facebook.com/AutoServiceRashani"
+            ],
+            "status": "prepared-for-review"
+          },
+          {
+            "name": "Auto Service ARDI",
+            "sourceUrls": [
+              "https://www.gjithebiznesi.com/XK/auto-service-ardi_1G-049-400-386",
+              "https://www.facebook.com/AutoServiceArdi/",
+              "https://www.autoyas.com/XK/Vushtrri/108632047402437/Auto-Service-ARDI"
+            ],
+            "status": "prepared-for-review"
+          },
+          {
+            "name": "Auto service BESI",
+            "sourceUrls": [
+              "https://www.gjithebiznesi.com/XK/auto-service-besi-049-205-441"
+            ],
+            "status": "prepared-for-review"
+          },
+          {
+            "name": "Sheki Benz- AutoMotive Body Shop",
+            "sourceUrls": [
+              "https://gulesider-da.cybo.com/XK-biz/sheki-benz-automotive-body-shop"
+            ],
+            "status": "prepared-for-review"
+          },
+          {
+            "name": "Auto Service Prekazi",
+            "sourceUrls": [
+              "https://bedrijvengids.cybo.com/XK/vushtrri/autogarage?d=c",
+              "https://www.facebook.com/p/Auto-Servis-PREKAZI-100063530080689/"
+            ],
+            "status": "prepared-for-review"
+          },
+          {
+            "name": "Autoservice A&M",
+            "sourceUrls": [
+              "https://bedrijvengids.cybo.com/XK/vushtrri/autogarage?d=c"
+            ],
+            "status": "prepared-for-review"
+          },
+          {
+            "name": "Autodetailingdaja",
+            "sourceUrls": [
+              "https://www.facebook.com/61564172242981/"
+            ],
+            "status": "prepared-for-review"
+          },
+          {
+            "name": "Auto Elektrika Bosch",
+            "sourceUrls": [
+              "https://hr.cybo.com/XK/lipljan/auto-servisi/"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Active-status and final public-ID evidence incomplete."
+          },
+          {
+            "name": "Albo Auto",
+            "sourceUrls": [
+              "https://hr.cybo.com/XK/lipljan/auto-servisi/"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Conflicting repair versus parts-store classification; no current repair proof."
+          },
+          {
+            "name": "Mekanik Gzimi",
+            "sourceUrls": [
+              "https://hr.cybo.com/XK/lipljan/auto-servisi/"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Public phone and complete identity proof missing."
+          },
+          {
+            "name": "Paco Car Diagnosis",
+            "sourceUrls": [
+              "https://hr.cybo.com/XK/lipljan/auto-servisi/"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Public phone and complete identity proof missing."
+          },
+          {
+            "name": "Auto Ardi Lipjan",
+            "sourceUrls": [
+              "https://hr.cybo.com/XK/lipljan/auto-servisi/"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Complete public Maps identity proof pending."
+          },
+          {
+            "name": "Auto Gazi Lipjan",
+            "sourceUrls": [
+              "https://hr.cybo.com/XK/lipljan/auto-servisi/"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Complete public Maps identity proof pending."
+          },
+          {
+            "name": "Extra Washen 24h",
+            "sourceUrls": [
+              "https://hr.cybo.com/XK/lipljan/auto-servisi/"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Car wash listing does not establish requested detailing/repair scope."
+          },
+          {
+            "name": "Crystal Wash",
+            "sourceUrls": [
+              "https://hr.cybo.com/XK/lipljan/auto-servisi/"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Car wash listing does not establish requested detailing/repair scope."
+          },
+          {
+            "name": "Unimax - Auto Dekor",
+            "sourceUrls": [
+              "https://www.autoyas.com/XK/Vushtrri/1376370759268193/Unimax---Auto-Dekor"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Accessory sales/conversions and products documented; requested repair/detailing service scope needs more specific evidence."
+          },
+          {
+            "name": "Detailing Gerguri",
+            "sourceUrls": [
+              "https://www.facebook.com/p/Detailing-Gerguri-100084678797919/"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "No unique matching public Maps entry resolved."
+          },
+          {
+            "name": "Auto Servis EDI Drenas",
+            "sourceUrls": [
+              "https://www.autoyas.com/XK/Drenas/225149334276643/Auto-Servis-%22EDI%22-Official"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Precise independent location and complete Maps proof pending."
+          },
+          {
+            "name": "Auto Servis DENISI (Armend Zogu BI)",
+            "sourceUrls": [
+              "https://faqet-e-verdha.cybo.com/XK/drenasi/automobilistik"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Matching name/phone/street; active operating proof and public Place-ID return still incomplete."
+          },
+          {
+            "name": "Servis Tali",
+            "sourceUrls": [
+              "https://faqet-e-verdha.cybo.com/XK/drenasi/automobilistik"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Public Maps query returned other businesses."
+          },
+          {
+            "name": "Auto Servis Luani Komoran",
+            "sourceUrls": [
+              "https://faqet-e-verdha.cybo.com/XK/drenasi/automobilistik"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Complete public Maps identity proof pending."
+          },
+          {
+            "name": "Auto servis & pjesë Obrija",
+            "sourceUrls": [
+              "https://faqet-e-verdha.cybo.com/XK/drenasi/automobilistik"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Complete public Maps identity proof pending."
+          },
+          {
+            "name": "Auto Grana Reno",
+            "sourceUrls": [
+              "https://faqet-e-verdha.cybo.com/XK/drenasi/automobilistik"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Complete public Maps identity proof pending."
+          },
+          {
+            "name": "Auto Pjesë & Servis NISI",
+            "sourceUrls": [
+              "https://faqet-e-verdha.cybo.com/XK/drenasi/automobilistik"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Complete public Maps identity proof pending."
+          },
+          {
+            "name": "Jeep Service MERGIMI",
+            "sourceUrls": [
+              "https://faqet-e-verdha.cybo.com/XK/drenasi/automobilistik"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Complete public Maps identity proof pending."
+          },
+          {
+            "name": "Autongjyrosje Astriti",
+            "sourceUrls": [
+              "https://faqet-e-verdha.cybo.com/XK/drenasi/automobilistik"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Complete public Maps identity proof pending."
+          },
+          {
+            "name": "Auto Servis ISTREFI",
+            "sourceUrls": [
+              "https://www.autoyas.com/XK/Skenderaj/679116075496530/Auto-Servis-%22ISTREFI%E2%80%9D"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Precise independent location and complete Maps proof pending."
+          },
+          {
+            "name": "Auto Servis TAFA",
+            "sourceUrls": [
+              "https://www.autos1000.com/XK/Skenderaj/1545959408955158/Auto-Servis-TAFA"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Complete public Maps identity proof pending."
+          },
+          {
+            "name": "Auto Servis MUSLIMI",
+            "sourceUrls": [
+              "https://www.cybo.com/XK/skenderaj/car-repair"
+            ],
+            "status": "source-lead-not-approved",
+            "reason": "Complete public Maps identity proof pending."
+          }
+        ],
+        "note": "Queue records source screening and remaining work, not completed identity checks. Previously deferred cases without a new current-run result retain their prior blocker."
+      },
+      "coverage": {
+        "focusMunicipalities": [
+          "Vushtrri",
+          "Lipjan",
+          "Drenas",
+          "Skenderaj"
+        ],
+        "priorDeferredQueue": 23,
+        "newSourceLeads": 30,
+        "rediscoveredDuplicates": 6,
+        "totalDistinctScreeningEntries": 59,
+        "individualMapsCandidatesChecked": 18,
+        "preparedForReview": 8,
+        "belowTenSupplementReason": "Eight candidates reached complete name/phone/independently sourced location/active Maps-ID checks. Other reviewed candidates have identity, phone, operating-status or service-scope blockers; remaining source leads still need Maps checks. Original daily run already published two; total daily additions would be ten if all eight pass review and release. No completeness claim."
+      },
+      "validation": {
+        "catalogCheck": "passed",
+        "diffCheck": "passed",
+        "node": "v24.21.0",
+        "go": "go1.27.1 darwin/arm64",
+        "toolchains": "Official downloads verified against official SHA-256 metadata in isolated runtime",
+        "fullCi": "pending",
+        "independentReview": "pending"
+      }
+    }
   ]
 }
