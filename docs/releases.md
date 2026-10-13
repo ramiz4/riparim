@@ -194,3 +194,12 @@ Multipart-Route begrenzt den tatsächlich gelesenen Body auf 11 MiB und akzeptie
 mehrere `file`-Parts; Textfelder bleiben eindeutig. JSON-Anträge können die
 Dokumentpflicht nicht umgehen. Downloads autorisieren den Antrag vor der
 Auswahl eines Dokuments mit dessen ID.
+
+## Eigene Werkstattöffnungszeiten
+
+Migration `0020_married_magus.sql` ergänzt zwei nullable Spalten in `workshops`.
+Sie ist mit dem bisherigen Worker kompatibel und benötigt keinen Backfill. Alte
+Inhaberentwürfe und Katalogimporte bewahren freigegebene Öffnungszeiten. Nach
+dem Release werden keine Google-Widgets in öffentlichen Profilen mehr geladen;
+bestehende externe Maps- und Routenlinks bleiben verfügbar. Bestätigte Inhaber
+reichen Wochenplan und Ausnahmen über die bestehende Moderation ein.

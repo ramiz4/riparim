@@ -280,3 +280,29 @@ Veröffentlichung nicht; Zustellbarkeit und Werbeeinwilligung werden nicht
 behauptet. Nachrichten wurden nicht versendet. PR, Release und Live-Abnahme
 werden im [bestehenden Tagesmanifest](../data/import-2026-10-13-daily.json)
 beziehungsweise dem lokalen Abschlussreceipt dokumentiert.
+
+## Eigene Öffnungszeiten
+
+Bestätigte Inhaber bearbeiten Öffnungszeiten zusammen mit ihren Profildaten. Der
+Wochenplan beginnt mit Montag und enthält sieben Tage: unbekannt, geschlossen,
+nach Vereinbarung oder bis zu drei geordnete Zeitfenster. Zeiten verwenden
+`HH:MM`; ausschließlich das Ende darf `24:00` sein. Für Öffnung über Mitternacht
+werden Zeitfenster auf beiden Tagen eingetragen. Bis zu 60 eindeutige datierte
+Ausnahmen ersetzen den jeweiligen Wochenplan vollständig. Überlappende Zeiten,
+ungültige Daten und fremde Metadaten werden serverseitig zurückgewiesen.
+
+Freigaben laufen über die bestehende Inhaber-, Konto-, Moderations- und
+Revisionsprüfung atomar mit der Profiländerung. Die öffentliche Anzeige nennt
+„Öffnungszeiten laut Werkstatt“ und das serverseitige Einreichungsdatum des
+freigegebenen Entwurfs. Bei fehlenden Zeiten erscheint ein Kontakt-Hinweis.
+„Jetzt geöffnet“ verwendet die Kosovo-Ortszeit (`Europe/Belgrade`, einschließlich
+Sommerzeit), Ausnahmen und halboffene Zeitintervalle. Die Anzeige aktualisiert
+sich alle 30 Sekunden sowie beim Wechsel der Tabsichtbarkeit.
+
+Migration `0020_married_magus.sql` ergänzt nullable `opening_hours` und
+`opening_hours_confirmed_at` in `workshops`. Kein Backfill: bestehende Profile
+starten ohne eigene Zeiten. Alte Entwürfe ohne dieses Feld bewahren vorhandene
+Zeiten; ein explizites `null` entfernt sie. Katalogimporte und die bestehenden
+Adminprofil-Upserts lassen diese getrennt gepflegten Spalten unverändert.
+Google-Zeiten werden nicht importiert. Direkte Angaben der Werkstätten können
+über deren bestätigte Inhaberfunktion erfasst werden.

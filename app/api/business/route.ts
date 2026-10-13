@@ -26,7 +26,7 @@ export async function POST(request:Request){
    const created=await requestWorkshopClaim(user,{workshopId:form.get("workshopId"),evidence:form.get("evidence")},files as File[]);
    return json({id:created,status:"pending",messageCode:"saved"},201);
   }
-  const body=createSchema.parse(await input(request,16000));
+  const body=createSchema.parse(await input(request,48000));
   const created=body.kind==="claim"?await requestWorkshopClaim(user,body.input):await requestWorkshopChange(user,body.workshopId,body.profile);
   return json({id:created,status:"pending",messageCode:"saved"},201);
  }catch(e){return failure(e);}

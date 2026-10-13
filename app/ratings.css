@@ -29,3 +29,7 @@
 .google-details-refresh:disabled{opacity:.5;cursor:default}
 .google-details-refresh>svg{flex-shrink:0}
 @media(max-width:720px),(pointer:coarse){.google-details-actions>.text-action{min-height:44px}}
+
+.workshop-opening-hours{min-width:0;flex:1}.workshop-opening-hours h2{font-size:16px;margin-bottom:8px}.opening-week{font-size:14px}.opening-week>div{display:flex;justify-content:space-between;gap:16px;padding:3px 0}.opening-week dt{flex-shrink:0}.opening-week dd{margin:0;text-align:right;overflow-wrap:anywhere}.opening-status{font-weight:600}.opening-status.open{color:var(--theme-accent)}.workshop-opening-hours .help{font-size:12px;margin-top:10px;color:var(--muted-foreground)}
+
+.workshop-opening-hours summary{cursor:pointer;min-height:44px;padding:10px 0;font-size:14px}.workshop-opening-hours summary:focus-visible{outline:2px solid var(--ring);outline-offset:3px}.workshop-opening-hours h3{font-size:14px;margin:12px 0 6px}

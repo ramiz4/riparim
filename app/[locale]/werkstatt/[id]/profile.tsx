@@ -13,9 +13,7 @@ import {usePublicSession} from "@/components/use-public-session";
 import {SiteHeader} from "@/components/site-header";
 import {WorkshopRatings} from "@/components/workshop-ratings";
 import {workshopMapsUrl,workshopRouteUrl} from "@/lib/google-maps-link";
-import {GooglePlaceReviews} from "@/components/google-place-reviews";
-import {workshopIdentityInput} from "@/lib/google-identity-fingerprint.mjs";
-import {useGoogleWorkshopProfile} from "@/components/use-google-workshop-profile";
+import {WorkshopOpeningHours} from "@/components/opening-hours";
 import {defaultCatalogueFilters,parseCatalogueFilters} from "@/lib/catalogue-filters";
 import {workshopDisplayLanguage,displayServiceDetail,type WorkshopDisplayContent,groupWorkshopServices,profileSelection,workshopSelectionMatches,type ProfileSelection} from "@/lib/workshop-profile-content";
 import {ReviewForm} from "@/components/review-form";
@@ -41,11 +39,10 @@ export default function WorkshopProfile({publicSnapshot=false,workshop:initialWo
  useEffect(()=>{if(!publicSnapshot)return;let active=true;void fetch(`/api/workshops?locale=${locale}`,{cache:"no-store"}).then(async response=>{const value=await response.json() as {workshops?:Workshop[];displayById?:Record<string,WorkshopDisplayContent>};if(!response.ok||!Array.isArray(value.workshops))throw Error("Directory unavailable");const workshop=value.workshops.find(item=>item.id===initialWorkshop.id&&item.status==="published");if(!workshop){if(active)window.location.reload();return;}if(active)setLive({workshop,directory:value.workshops,display:value.displayById?.[workshop.id]});}).catch(()=>{});return()=>{active=false;};},[publicSnapshot,initialWorkshop.id,locale,reviewRevision]);
  const router=useRouter();const [reviewOpen,setReviewOpen]=useState(false),[reviewBusy,setReviewBusy]=useState(false),[contact,setContact]=useState(false),[message,setMessage]=useState(""),[initialMessage,setInitialMessage]=useState(""),[feedback,setFeedback]=useState(""),[backHref,setBackHref]=useState(()=>localizeHref(initialSearchHref??"/werkstaetten",locale));
  useNavigationGuard({dirty:contact&&message!==initialMessage});
- const {identity,status,requestIdentity}=useGoogleWorkshopProfile(w.id,w.googleRating?.mapsUrl,workshopIdentityInput(w));
  const [selection,setSelection]=useState<ProfileSelection>({brand:null,service:null});
  const path=localizeHref(`/werkstatt/${encodeURIComponent(w.id)}`,locale);
- const mapHref=workshopMapsUrl(w,identity?.placeId);
- const routeHref=workshopRouteUrl(w,identity?.placeId);
+ const mapHref=workshopMapsUrl(w);
+ const routeHref=workshopRouteUrl(w);
  const phoneHref=contactHref(w,"phone");
  const serviceGroups=groupWorkshopServices(w),matches=workshopSelectionMatches(w,selection);
  const description=display?.description??w.description,specialty=display?.specialty??w.specialty;
@@ -61,7 +58,6 @@ export default function WorkshopProfile({publicSnapshot=false,workshop:initialWo
   const draft=t("public.whatsAppHello",{name:w.name})+t("public.messageAsk");setInitialMessage(draft);setMessage(draft);setContact(true);
  }
  async function copy(value:string,label:string){try{await navigator.clipboard.writeText(value);setFeedback(label);}catch{setFeedback(t("public.copyManual"));}}
- const googleReviews=<div key="google" className="profile-google-reviews" id="google-bewertungen"><GooglePlaceReviews key={w.id} workshop={w} identity={identity} status={status} requestIdentity={requestIdentity}/></div>;
  const riparimReviews=<div key="riparim" className={`profile-riparim-reviews${!reviews.length&&!reviewError&&!reviewsLoading?" is-empty":""}`}>
   <div className="profile-review-provider"><h3><ShieldCheck size={18}/>Riparim</h3>{reviews.length>0&&<p>{t("public.reviewsProof")}</p>}</div>
   {reviewsLoading?<p role="status">{t("public.loading")}</p>:reviewError?<p className="error" role="alert">{publicDataError(t,reviewError,"reviews")}</p>:reviews.length?<div className="public-review-list">{reviews.map((review,index)=><article className="public-review" key={`${review.display_name}:${review.date}:${index}`}>
@@ -75,11 +71,11 @@ export default function WorkshopProfile({publicSnapshot=false,workshop:initialWo
  <main className="workshop-page wrap" data-workshop-id={w.id}>
   <WorkshopNavigationLink className="profile-back" href={backHref}><ArrowLeft size={16}/>{t("public.backSearch")}</WorkshopNavigationLink>
   {display?.fallback&&<p className="help workshop-translation-notice">{t("public.translationFallback")}</p>}
-  <header className="workshop-overview"><div className="workshop-overview-identity"><h1>{w.name}</h1><p className="profile-place"><MapPin size={15}/><span>{w.city}</span>{specialty&&<span className="profile-specialty" lang={contentLanguage}>{specialty}</span>}</p></div><div className="workshop-overview-actions">{w.whatsapp&&<button className="primary" onClick={startWhatsApp}><MessageCircle size={17}/>WhatsApp</button>}{phoneHref&&<LocaleAnchor className={w.whatsapp?"outline":"primary"} href={phoneHref}><Phone size={17}/>{t("public.call")}</LocaleAnchor>}<LocaleAnchor className="outline" href={routeHref} target="_blank" rel="noopener noreferrer"><Navigation size={17}/>{t("public.route")}</LocaleAnchor></div><div className="profile-overview-details"><WorkshopRatings key={w.id} workshop={w} compact showGoogle={false}/><GooglePlaceReviews workshop={w} identity={identity} status={status} requestIdentity={requestIdentity} variant="overview"/></div></header>
+  <header className="workshop-overview"><div className="workshop-overview-identity"><h1>{w.name}</h1><p className="profile-place"><MapPin size={15}/><span>{w.city}</span>{specialty&&<span className="profile-specialty" lang={contentLanguage}>{specialty}</span>}</p></div><div className="workshop-overview-actions">{w.whatsapp&&<button className="primary" onClick={startWhatsApp}><MessageCircle size={17}/>WhatsApp</button>}{phoneHref&&<LocaleAnchor className={w.whatsapp?"outline":"primary"} href={phoneHref}><Phone size={17}/>{t("public.call")}</LocaleAnchor>}<LocaleAnchor className="outline" href={routeHref} target="_blank" rel="noopener noreferrer"><Navigation size={17}/>{t("public.route")}</LocaleAnchor></div><div className="profile-overview-details"><WorkshopRatings key={w.id} workshop={w} compact/><WorkshopOpeningHours hours={w.openingHours} confirmedAt={w.openingHoursConfirmedAt}/></div></header>
   <div className="workshop-page-grid"><div className="workshop-page-main">
    <section className="profile-page-section" id="leistungen"><div className="profile-section-heading"><h2>{w.brands.length?t("public.servicesBrands"):t("public.services")}</h2></div>{(selection.brand||selection.service)&&<div className="profile-search-match"><p>{t("public.yourSearch")}{selection.brand?`: ${selection.brand}`:""}</p><div>{matches.brand&&<span><Check size={14}/>{t("public.brandMatch",{brand:selection.brand!})}</span>}{matches.service&&<span><Check size={14}/>{t("public.serviceMatch",{service:valueLabel(locale,"service",selection.service!)})}</span>}</div></div>}{description&&<p className="profile-description" lang={contentLanguage}>{description}</p>}<div className="profile-service-groups" aria-label={t("public.offeredServices")}>{serviceGroups.map(group=><section key={group.title} className={`profile-service-group${matches.service&&group.title===selection.service?" selected":""}`}><h3>{group.title==="Weitere Leistungen"?t("public.otherServices"):valueLabel(locale,"service",group.title)}{matches.service&&group.title===selection.service&&<span className="profile-selection-label">{t("public.yourSelection")}</span>}</h3>{group.items.length>0&&<ul>{group.items.map(service=><li key={service.sourceIndex} lang={contentLanguage}>{displayServiceDetail(service,display,locale)}</li>)}</ul>}</section>)}</div>{(w.brands.length>0||w.languages.length>0)&&<div className="profile-facts">{w.brands.length>0&&<div><h3>{t("public.brands")}</h3><div className="brand-tags">{w.brands.map(brand=><span key={brand} className={matches.brand&&(brand===selection.brand||brand==="Alle Marken")?"profile-brand-selected":undefined}>{valueLabel(locale,"sentinel",brand)}{matches.brand&&(brand===selection.brand||brand==="Alle Marken")&&<span className="profile-selection-label">{t("public.yourSelection")}</span>}</span>)}</div></div>}{w.languages.length>0&&<div><h3>{t("public.consultationLanguages")}</h3><p><Globe size={15}/>{w.languages.map(language=>valueLabel(locale,"language",language)).join(" · ")}</p></div>}</div>}</section>
    <section className="profile-page-section" id="bewertungen"><div className="profile-section-heading"><h2>{t("public.reviews")}</h2><button className="text-action" onClick={openReview}>{t("public.writeReview")}</button></div><div className="profile-review-stream">
-    {riparimReviews}{googleReviews}
+    {riparimReviews}
     </div>
     <section className="inline-review" id="bewerten"><button type="button" className="inline-review-toggle" aria-expanded={reviewOpen} aria-controls="review-editor" disabled={reviewBusy} onClick={()=>setReviewOpen(value=>!value)}><span><Star size={19}/><strong>{t("public.experience")}</strong></span><ChevronDown size={19}/></button>{reviewOpen&&<div className="inline-review-body" id="review-editor"><ReviewForm workshop={w} directory={directory} signedIn={signedIn} account={account} returnTo={`${path}#bewerten`} onBusyChange={setReviewBusy} onSubmitted={()=>publicSnapshot?setReviewRevision(value=>value+1):router.refresh()}/></div>}</section>
    </section>
@@ -90,7 +86,6 @@ export default function WorkshopProfile({publicSnapshot=false,workshop:initialWo
      {w.phoneNote&&<p className="profile-scope">{t("public.phoneContact")} <span lang={contentLanguage}>{display?.phoneNote??w.phoneNote}</span></p>}
      <ul className="profile-source-list">
       {w.sources.map((source,index)=><li key={source.url}><LocaleAnchor href={source.url} target="_blank" rel="noopener noreferrer"><strong lang={contentLanguage}>{display?.sourceTitles[index]??source.title}</strong><span>{new URL(source.url).hostname}</span></LocaleAnchor></li>)}
-      {w.googleRating?.sourceUrl&&<li><LocaleAnchor href={w.googleRating.sourceUrl} target="_blank" rel="noopener noreferrer"><strong>{t("public.googleSource",{source:w.googleRating.sourceLabel??t("public.ratingSource")})}</strong><span>{t("public.recordedAt",{date:formatDate(locale,w.googleRating.checkedAt)})}{w.googleRating.sourceUpdatedAt?t("public.sourceDate",{date:formatDate(locale,w.googleRating.sourceUpdatedAt)}):""}</span></LocaleAnchor></li>}
      </ul>
     </div>
    </details>

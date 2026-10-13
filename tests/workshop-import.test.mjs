@@ -74,7 +74,7 @@ assert.equal(filters.parseCatalogueFilters(new URLSearchParams('sort=bewertung')
 const unknown=workshops.find(w=>w.googleRating.rating===null&&w.googleRating.count===null);
 assert.equal(unknown.googleRating.rating,null,'missing Google score stays null');
 const unknownMarkup=renderRatings({workshop:unknown,details:true});
-assert(unknownMarkup.includes('google-rating-panel')&&unknownMarkup.includes('Google-Bewertung zu'),'unloaded Google ratings reserve the native Standard widget without reporting zero or absent');
+assert(!unknownMarkup.includes('google-rating-panel')&&!unknownMarkup.includes('Google-Bewertung zu'),'ratings never reserve a Google widget');
 assert(!unknownMarkup.includes('0,0'));
 const emptyCardRatings=renderRatings({workshop:unknown,hideUnavailable:true});
 assert(!emptyCardRatings.includes('Google wird geladen')&&!emptyCardRatings.includes('Noch keine'),'list cards preserve the absence of empty rating placeholders');
@@ -111,16 +111,22 @@ const sorted=filters.matchCatalogue(workshops,{...filters.defaultCatalogueFilter
 assert.equal(sorted[0].id,'auto-mita','independent Google 5.0 scores do not outrank a Riparim rating');
 const markup=renderToStaticMarkup(React.createElement(WorkshopRatings,{workshop:mita,details:true}));
 for(const text of ['Riparim','3,0'])assert(markup.includes(text),`rating display includes ${text}`);
-assert(markup.includes('google-rating-panel'),'rating display retains the native Google widget slot');
+assert(!markup.includes('google-rating-panel'),'rating display only shows Riparim');
 for(const text of ['4,8','Anzahl nicht veröffentlicht','automita.com'])assert(!markup.includes(text),`historical Google content is not displayed: ${text}`);
 
 
+// Owner hours must survive even a newer canonical profile replacing older fields.
+const ownHours={week:Array.from({length:7},()=>({mode:'appointment'})),exceptions:[]};
+const hoursId=curated.find(w=>w.id!=='auto-mita').id;
+sqlite.prepare("UPDATE workshops SET opening_hours=?,opening_hours_confirmed_at='2026-10-13T10:00:00Z',updated_at='2000-01-01T00:00:00Z' WHERE id=?").run(JSON.stringify(ownHours),hoursId);
 // A later snapshot and an administrator's edits survive re-running the seed.
 sqlite.prepare("UPDATE workshops SET name='Edited profile',status='draft' WHERE id='auto-mita'").run();
 sqlite.prepare("UPDATE workshop_google_ratings SET rating=4.9,checked_at='2099-01-01T00:00:00Z' WHERE workshop_id='auto-mita'").run();
 sqlite.prepare("DELETE FROM catalog_state WHERE key=?").run(await directory.catalogueSeedKey());
 await directory.ensureInitialCatalog();
 const edited=(await directory.listWorkshops(true)).find(w=>w.id==='auto-mita');
+assert.deepEqual((await directory.listWorkshops(true)).find(w=>w.id===hoursId).openingHours,ownHours);
+assert.equal((await directory.listWorkshops(true)).find(w=>w.id===hoursId).openingHoursConfirmedAt,'2026-10-13T10:00:00Z');
 assert.equal(edited.name,'Edited profile');
 assert.equal(edited.status,'draft');
 assert.equal(edited.googleRating.rating,4.9,'older imported snapshot never overwrites newer data');
