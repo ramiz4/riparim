@@ -1,6 +1,6 @@
 import type {SqlDatabase,SqlStatement} from "@/lib/runtime/contracts";
 import type {WorkshopCatalogue} from "@/lib/workshop-source";
-import {profileColumns,profileValues} from "./workshop-record";
+import {profileColumns,profileValues} from "./workshop-profile-values";
 import {workshopIdentityHash} from "@/lib/google-place-identity";
 import {retiredWorkshopIds,workshopRetirementDate} from "@/lib/workshop-retirement";
 export async function catalogueImportStatements(db:SqlDatabase,catalogue:WorkshopCatalogue){
