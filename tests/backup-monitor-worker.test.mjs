@@ -67,6 +67,7 @@ function provider() {
       return Response.json({last_event: state.delivery});
     }
     if (url.hostname !== 'api.github.com') throw Error('Unexpected outbound destination.');
+    if (!request.headers.get('User-Agent')?.trim()) return new Response('User-Agent header required.', {status: 403});
     if (state.redirect) return new Response(null, {status: 302, headers: {Location: 'https://unexpected.example/metadata'}});
     if (url.pathname.endsWith('/runs')) {
       if (state.heavy) return Response.json({total_count: 100, workflow_runs: Array.from({length: 100}, (_, index) => ({id: 200 + index, run_attempt: 2,
@@ -112,6 +113,16 @@ try {
       const before = await sqliteFiles(join(root, name));
       const response = await request(runtime); assert.notEqual((await response.json()).monitorHealthy, true);
       assert.equal(fake.calls.length, 0); assert.deepEqual(await sqliteFiles(join(root, name)), before, 'inactive/unconfigured monitoring never creates object storage beyond Miniflare metadata');
+    } finally {await runtime.dispose();}
+  }
+  {
+    const fake = provider(), runtime = start('github-user-agent', bindings, fake);
+    try {
+      const response = await request(runtime), result = await response.json();
+      assert.equal(response.status, 200, 'workerd can read GitHub metadata when the provider requires User-Agent');
+      assert.equal(result.monitorHealthy, true); assert.equal(result.backupsHealthy, true);
+      assert.equal(fake.posts.length, 0); assert.equal(fake.pings.length, 1);
+      assert(!fake.pings[0].endsWith('/fail'));
     } finally {await runtime.dispose();}
   }
   {
