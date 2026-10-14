@@ -53,7 +53,8 @@ export async function recordGoogleSession(session:Session,client:AuthClient){
  const {data:{user},error}=await client.getUser();if(error||!user||user.identity.subject!==session.user.identity.subject||user.identity.provider!==session.user.identity.provider||user.identity.issuer!==session.user.identity.issuer)throw Error("INVALID_GOOGLE_SESSION");
  if(providerBlocked(user)||await accountBlocked(await resolveAccount(user.identity)))throw Error("ACCOUNT_DISABLED");
  const sessionId=await verifiedSessionId(client,user,"google");
- const result=await fetch("https://openidconnect.googleapis.com/v1/userinfo",{headers:{Authorization:`Bearer ${session.googleAccessToken}`},cache:"no-store",redirect:"error",signal:AbortSignal.timeout(8000)});
+ // Workers supports manual/follow; manual and the status check prevent bearer-token redirects.
+ const result=await fetch("https://openidconnect.googleapis.com/v1/userinfo",{headers:{Authorization:`Bearer ${session.googleAccessToken}`},cache:"no-store",redirect:"manual",signal:AbortSignal.timeout(8000)});
  if(!result.ok)throw Error("INVALID_GOOGLE_SESSION");
  const google=verifiedGoogleProfile(user,await result.json());
  await linkLegacyAccount(user,"google");

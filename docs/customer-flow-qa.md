@@ -784,3 +784,30 @@ unmittelbar vor fünf Minuten und nach Ablauf. `session-cache-tabs.test.mjs`
 prüft unabhängige Modulzustände zweier Tabs, Login/Logout ohne Fokuswechsel,
 OAuth-Dokumentrückkehr, verspätete Antworten vor Logout, Nachrichten ohne
 Kontodaten, Echovermeidung, Storage-Fallback und gesperrten Storage.
+
+
+## Google-Anmeldung im Worker (14. Oktober 2026, Issue #183)
+
+Der Live-Rücksprung reproduzierte `/anmelden?fehler=google&weiter=%2F%3Fbesuche%3D1`.
+Der Auth-Provider bestätigte den erfolgreichen PKCE-Codeaustausch und die
+Benutzerprüfung; der Worker meldete anschließend einen `TypeError`. Die
+unabhängige Google-Identitätsprüfung verwendete `fetch` mit `redirect:"error"`.
+Die konfigurierte Workers-Laufzeit unterstützt nur `follow` und `manual` und
+verwarf diesen Aufruf bereits vor der Netzwerkanfrage.
+
+Die Prüfung verwendet jetzt `manual`. Die bestehende Erfolgsstatusprüfung
+verwirft Weiterleitungen und andere Fehler, sodass der Google-Bearertoken
+weiterhin ausschließlich an den festen Userinfo-Endpunkt geht. Identitäts-,
+Sitzungs- und Berechtigungsprüfungen bleiben erhalten.
+
+`node tests/google-auth-worker.test.mjs` reproduzierte vor der Änderung den
+identischen Fehler-Rücksprung mit `TypeError` und besteht danach. Der Test
+führt die echten Start-/Callbackrouten, das Supabase-SSR-SDK, PKCE, eine
+asymmetrisch signierte ES256-Sitzung und D1 in der nativen Workers-Laufzeit aus.
+Er prüft die reguläre Sitzung, DE/SQ/EN, sichere Rücksprungziele, Abbruch,
+ungültigen Flow, fehlgeschlagenen Codeaustausch, Google-Fehler und
+Identitätsabweichungen sowie das Verwerfen von Redirects ohne Tokenweitergabe.
+Alle Konten, Signaturschlüssel und Providerantworten sind isolierte Fixtures;
+der Test ist im regulären Runner registriert. Eine erfolgreiche Anmeldung
+auf Produktion muss nach Übernahme des geprüften Main-Releases separat
+verifiziert werden.
