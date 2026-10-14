@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { build } from "esbuild";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir } from "node:fs/promises";
 import { JSDOM } from "jsdom";
 
 const out = ".test-runtime/session-cache-tabs";
@@ -152,7 +152,7 @@ try {
   inTab(a, () => a.api.invalidatePublicSession({ signedOut: true }));
   await settle();
   backend = member;
-  const oauth = await openTab("oauth");
+  await openTab("oauth");
   await settle();
   assert.deepEqual(
     b.observed,

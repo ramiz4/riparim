@@ -776,7 +776,7 @@ const ownerHours = {
   exceptions: [{ date: "2026-12-25", day: { mode: "closed" } }],
 };
 const largeHours = {
-  week: ownerHours.week.map((day) => ({
+  week: ownerHours.week.map(() => ({
     mode: "open",
     intervals: [
       { start: "08:00", end: "10:00" },
