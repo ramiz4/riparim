@@ -1,12 +1,12 @@
 .settings-page{min-height:calc(100svh - 180px);padding-top:var(--content-page-padding-top);padding-bottom:var(--content-page-padding-bottom)}
 .settings-page h1{font-size:var(--content-page-title-size);font-weight:var(--content-page-title-weight);line-height:1.2;letter-spacing:-.8px;margin-bottom:var(--content-page-gap)}
-.account-settings-group{max-width:720px}
+.account-settings-group{width:100%;min-width:0}
 .account-settings,.account-settings-group>.theme-settings{margin-top:28px;padding:28px 0 0;border:0;border-top:1px solid color-mix(in srgb,var(--foreground) 28%,var(--background));border-radius:0;background:transparent;overflow-wrap:anywhere}
 .account-settings-group>.account-settings:first-of-type{margin-top:0;padding-top:0;border-top:0}
 .account-settings h2,.theme-settings h2{font-size:22px;line-height:1.3;font-weight:650;letter-spacing:-.3px;margin-bottom:12px}
 .account-settings p,.account-confirmation p,.theme-settings>p{font-size:14px;line-height:1.6;color:var(--muted-foreground);margin:10px 0}
 .account-name-form,.account-confirmation{display:grid;gap:9px;margin:16px 0}
-.account-name-form{max-width:640px}
+.account-name-form{width:100%}
 .account-name-form label,.account-confirmation label{font-weight:600;font-size:14px}
 .account-name-form input,.account-confirmation input{width:100%;min-width:0;min-height:46px;padding:10px 12px;border:1px solid color-mix(in srgb,var(--foreground) 55%,var(--background));border-radius:8px;color:var(--foreground);background:var(--card)}
 .account-name-form input:disabled{opacity:1;color:var(--foreground);background:var(--muted)}

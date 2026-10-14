@@ -138,7 +138,7 @@ export function AccountSettings({localPreviewAccount,appearance}:{localPreviewAc
     <div><dt>{t("customer.signInMethod")}</dt><dd>{localPreviewAccount?.kind==="admin"?t("customer.localPreview"):valueLabel(locale,"provider",state.account.provider)}</dd></div>
     <div><dt>{t("customer.accountStatus")}</dt><dd>{t(localPreviewAccount?.kind==="admin"?"customer.localAccountStatus":"customer.verifiedAccount")}</dd></div>
    </dl>
-  </>:state?.deletionStarted?<p>{t("customer.deletionStarted")}</p>:state?<p>{t("customer.loginAccountStart")} <Link href="/anmelden?weiter=/einstellungen">{t("customer.googleOrEmail")}</Link> {t("customer.loginAccountEnd")}</p>:<button className="account-button" onClick={()=>{setError("");void load();}}>{t("customer.reload")}</button>}
+  </>:state?.deletionStarted?<p>{t("customer.deletionStarted")}</p>:state?localPreviewAccount?null:<p>{t("customer.loginAccountStart")} <Link href="/anmelden?weiter=/einstellungen">{t("customer.googleOrEmail")}</Link> {t("customer.loginAccountEnd")}</p>:<button className="account-button" onClick={()=>{setError("");void load();}}>{t("customer.reload")}</button>}
   {error&&!open&&<p className="account-error" role="alert">{error}</p>}
   {message&&<p role="status">{message}</p>}{localPreviewAccount&&!state?.account&&<button className="account-button" onClick={()=>{setMessage("");setPasswordMessage("");setOpen(false);setConfirmation("");void load();}}>{t("customer.previewReset")}</button>}
  </section>

@@ -36,6 +36,8 @@ npm run dev -- --host 127.0.0.1 --port 5174
 
 Die lokale Oberfläche ist unter `http://127.0.0.1:5174` erreichbar. Auth-Anbieter und Anmeldeoptionen werden in der geschützten Verwaltung konfiguriert. SMTP und Google OAuth müssen beim Anbieter eingerichtet und getestet werden; der Quellcode allein aktiviert sie nicht.
 
+`npm run dev` übernimmt in der lokalen Vorschau zusätzlich den geprüften Katalog und die vorhandene Öffnungszeiten-Importquelle als Standarddaten. Bestehende importierte oder vom Betrieb bestätigte Zeiten, unterdrückte Importe und geänderte Profilidentitäten werden bewahrt.
+
 Ein neuer Worktree braucht vor dem ersten Seitenaufruf die lokale Datenbank aus dem Abschnitt „Datenbank und Prüfung“. Der Entwicklungsserver verwendet dieselben logischen D1-/R2-Bindings wie der Sites-Build; die vorhandenen Migrationen müssen auf diese lokale Datenbank angewendet werden.
 
 Im lokalen Dev-Modus zeigt `/anmelden` den Button „Als Seedy anmelden“. Alternativ führt `/dev/anmelden` ohne Passwort direkt zu den Einstellungen; `?weiter=…` bewahrt ein geprüftes internes Ziel. Der Einstieg und die lesbaren Seed-Kontodaten sind auf die lokale Loopback-Vorschau beschränkt. Mit `REVIEW_MODERATOR_EMAIL=seedy@sites.test` in der ignorierten `.dev.vars` erhält Seedy den lokalen Verwaltungszugang.
