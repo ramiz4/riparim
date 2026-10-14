@@ -1,75 +1,52 @@
 # Backups and recovery
 
-Two main-only GitHub workflows create daily encrypted backups with **14-day retention**.
-They complement each other; neither archive is a complete provider migration alone.
+Two main-only workflows create daily encrypted backups with **14-day retention**.
+Neither archive alone is a complete provider migration.
 
-| Workflow                                                         | UTC schedule | Contents                                                                           | Size limit                                        |
-| ---------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------------- | ------------------------------------------------- |
-| [Backup: Supabase Auth](../../.github/workflows/auth-backup.yml) | 03:23        | Complete `auth` schema: users/hashes, identities, MFA, sessions/tokens, migrations | 16 MiB dump                                       |
-| [Backup: Platform](../../.github/workflows/platform-backup.yml)  | 03:43        | Supabase Auth configuration, D1 schema/data/history, all private R2 bytes/metadata | 1,000 objects, 4 MiB R2, 8 MiB compressed archive |
+| Workflow                                                | UTC   | Contents                                                                | Limits                                            |
+| ------------------------------------------------------- | ----- | ----------------------------------------------------------------------- | ------------------------------------------------- |
+| [Auth](../../.github/workflows/auth-backup.yml)         | 03:23 | Complete Supabase `auth` schema, including hashes/identities/MFA/tokens | 16 MiB dump                                       |
+| [Platform](../../.github/workflows/platform-backup.yml) | 03:43 | Auth configuration, D1 schema/data/history, private R2 bytes/metadata   | 1,000 objects; 4 MiB R2; 8 MiB compressed archive |
 
-GitHub schedules may be delayed or disabled after inactivity. Check run/artifact age;
-[backup monitoring](backup-monitoring.md) is configured active on Cloudflare.
-No automatic paid upgrade or allowance increase is permitted.
+Schedules may be delayed/disabled. Check successful run/artifact age and
+[monitor health](backup-monitoring.md). Usage shares free allowances; never upgrade or
+increase limits automatically. Limit failures create no completed backup. D1 Time Travel
+is supplementary, not an independent backup or R2 protection.
 
-## Access and protection
+## Protect access
 
-| Protected GitHub environment | Credential                                                              |
-| ---------------------------- | ----------------------------------------------------------------------- |
-| `auth-backup`                | `SUPABASE_AUTH_BACKUP_DATABASE_PASSWORD`                                |
-| `platform-backup`            | `CLOUDFLARE_BACKUP_TOKEN`: D1/R2 Read only in the owned account         |
-| `platform-backup`            | `SUPABASE_AUTH_CONFIG_TOKEN`: Auth Config Read for the existing project |
+| GitHub environment | Protected credential                                               |
+| ------------------ | ------------------------------------------------------------------ |
+| `auth-backup`      | `SUPABASE_AUTH_BACKUP_DATABASE_PASSWORD`                           |
+| `platform-backup`  | `CLOUDFLARE_BACKUP_TOKEN` (owned D1/R2 read only)                  |
+| `platform-backup`  | `SUPABASE_AUTH_CONFIG_TOKEN` (existing project's Auth Config Read) |
 
-Auth uses a read-only transaction over verified TLS via the session pooler.
-The database credential itself remains privileged. Restrict workflow/environment access.
-Plaintext exists only in private runner temporary storage. OpenSSL CMS encrypts
-with RSA-3072/AES-256-GCM before upload; GitHub receives ciphertext and a receipt.
-The private key stays in the existing 1Password project entry under
-`SUPABASE_AUTH_BACKUP_PRIVATE_KEY`; verify the recipient certificate through
-`SUPABASE_AUTH_BACKUP_RECIPIENT_CERT`. Never place the private key in Git or CI secrets.
-Keep old keys while retained backups still require them.
+Restrict workflow/environment access: the Auth database credential remains privileged
+although backup reads use verified TLS and a read-only transaction. Plaintext stays in
+private runner temporary storage; GitHub receives ciphertext/receipt only.
+The CMS private key stays in the existing 1Password project entry under
+`SUPABASE_AUTH_BACKUP_PRIVATE_KEY`; verify `SUPABASE_AUTH_BACKUP_RECIPIENT_CERT`.
+Keep old keys until retained backups expire. Never put private keys in Git or CI.
 
-Existing runner/artifact/API usage shares free account allowances.
-Limit failures publish no completed backup; review usage rather than upgrading.
-D1 Time Travel is supplementary and does not protect R2 or create an independent copy.
+## Recover in isolation
 
-## What the platform archive proves
-
-D1 application tables and migration data form one SQL read snapshot.
-Cloudflare/SQLite internal tables are excluded; AUTOINCREMENT counters are preserved.
-R2 inventory before and after download must match; every object's size/ETag must
-remain unchanged. Missing files or concurrent inventory changes abort publication.
-D1 is restored in isolated SQLite before encryption, checking integrity, foreign
-keys and private references. Supabase and D1 have separate snapshot times.
-
-Auth configuration is the complete returned API response. Masked/transformed
-OAuth/SMTP fields are **not usable passwords**. `supabase-auth-recovery.json`
-identifies protected vault fields needed separately. Signing/API keys, account data
-and unexported values are not reconstructed from configuration responses.
-PocketBase accounts/configuration are outside these Supabase backups.
-
-## Recover in isolation first
-
-1. Download a successful artifact into a private directory (`0700`, files `0600`).
-   Check the receipt's expected project/resources and ciphertext SHA-256.
-2. Retrieve the key privately into a temporary file, without clipboard, argv or logs.
-   Decrypt with the command below; on any GCM/authentication error, discard all output.
-3. For Auth, inspect `pg_restore --list`; restore only in compatible isolated
-   PostgreSQL/Supabase. Preserve provider roles/tables; no blind production `--clean`.
-   Check hashes, identities, MFA and migration contracts.
-4. For platform, inventory tar entries before extraction: regular files under
-   `snapshot/` only, no absolute/traversal paths or links. Check encrypted manifests
-   and every checksum. Restore D1 privately with trusted migrations; reconcile
-   ownership, approvals, blocks, tombstones and outbox against current code.
-5. Recreate private R2 files/metadata in an isolated bucket or [Node restore](data-transfer.md).
-   Recreated R2 assigns new ETags; reconcile reservations/conditional writes.
-6. Restore Auth configuration with separately verified OAuth/SMTP credentials,
-   redirects and signing/API keys. Match app identity mappings; old provider
-   accounts must not revive deleted app accounts. Revoke old sessions and verify
-   real email/Google login, private access and deletion with isolated accounts.
-7. Production recovery needs separate authorization, a write pause and complete
-   reconciliation under [provider switching](provider-switch.md). Preserve newer writes.
-   Remove temporary plaintext and keys after verification.
+1. Download a successful artifact privately (`0700` directory, `0600` files). Verify
+   receipt resources/project and ciphertext SHA-256.
+2. Retrieve the key into a private temporary file, never clipboard/argv/logs. Decrypt
+   below. **On any authentication/GCM error, discard all output and stop.**
+3. Auth: inspect `pg_restore --list`, then restore to compatible isolated
+   PostgreSQL/Supabase. Preserve roles/tables; no blind production `--clean`. Verify
+   hashes, identities, MFA and migration compatibility.
+4. Platform: inventory tar entries before extraction. Allow only regular files under
+   `snapshot/`, no absolute/traversal paths or links. Verify encrypted manifests and
+   checksums; restore D1 with trusted migrations and reconcile app rights, approvals,
+   tombstones and outbox.
+5. Recreate private R2 bytes/metadata in isolation or [Node restore](data-transfer.md).
+   New R2 ETags require reservation/conditional-write reconciliation.
+6. Restore provider configuration with separately verified OAuth/SMTP credentials,
+   redirects and signing/API keys. Match app identity mappings, revoke old sessions
+   and test real email/Google, private access and deletion with isolated accounts.
+   Deleted app accounts must not be revived by old provider accounts.
 
 ```sh
 set -e
@@ -79,9 +56,16 @@ openssl cms -decrypt -binary -inform DER -in auth.dump.cms \
 pg_restore --list auth.dump > archive-list.txt
 ```
 
-For the platform artifact, use `platform.tar.gz.cms` as input and a private
-`platform.tar.gz` output; the same CMS key applies. Authentication failure may
-leave unauthenticated output bytes, so never continue after a failed decrypt.
+For platform, substitute `platform.tar.gz.cms` and private `platform.tar.gz` output.
+Failed decrypt may leave unauthenticated bytes. Remove temporary plaintext/keys after
+verification. Production recovery requires separate authorization, a write pause and
+[data-preserving reconciliation](provider-switch.md); preserve newer writes.
 
-Sources: [Supabase restore](https://supabase.com/docs/guides/self-hosting/restore-from-platform),
-[D1 recovery](https://developers.cloudflare.com/d1/reference/time-travel/).
+## Backup limits
+
+Platform verification checks a D1 snapshot and unchanged complete R2 inventory; concurrent
+changes abort publication. Auth and D1 have separate snapshot times. Masked OAuth/SMTP
+configuration is not a password backup: `supabase-auth-recovery.json` identifies required
+vault fields. Unexported signing/API keys need separate protection. PocketBase is not
+covered. Provider guidance: [Supabase restore](https://supabase.com/docs/guides/self-hosting/restore-from-platform)
+and [D1 recovery](https://developers.cloudflare.com/d1/reference/time-travel/).

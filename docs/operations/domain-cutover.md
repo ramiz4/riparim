@@ -1,76 +1,54 @@
 # Domain and writer cutover
 
-The Sites → owned Worker cutover completed on October 5, 2026; see its
-[acceptance record](../archive/domain-cutover-2026-10-05.md).
-Use this procedure for a newly authorized switch, after verified release and data transfer.
+For a newly authorized switch, use the [provider-switching checklist](provider-switch.md).
+Complete preparation and data transfer before routing: verified release, backups/recovery,
+paused writers, fresh reconciliation and a return path are required. The completed Sites cutover is
+[historical evidence](../archive/domain-cutover-2026-10-05.md).
 
-## Prepare before the pause
+## Prepare routing
 
-1. Verify current release/commit, target artifact/bindings, active writer and
-   [data-transfer baseline](data-transfer.md). Keep the target frozen.
-2. Privately inventory/back up DNS records, nameservers, TTL, CAA, DNSSEC and TLS.
-   Preserve email/verification records. Nameserver changes and app routing are
-   separate actions; rehearse the exact authorized apex/www replacements.
-3. Verify routing permissions before announcing downtime. Cloudflare custom domains
-   need Worker permissions and `Workers Routes Write` for the owned zone;
-   successful code upload alone proves neither. Noninteractive Wrangler may replace
-   conflicts, so reconcile expected DNS changes before deployment.
-4. Match `SITE_ORIGIN`, generated artifact/routes, preview access and TLS to the plan.
-   The production apex is `https://riparim.com`; www redirects with path/query intact.
-5. Preserve the exact Auth project/provider and [identity mappings](auth-provider.md).
-   Verify public Auth settings, separately bound secrets, Google scopes/callback,
-   browser-key restrictions and unchanged Google verification-file bytes.
-   Supabase Site URL and allowed app callback `/auth/bestaetigen` must match;
-   avoid broad host wildcards. Templates retain token-hash/`.RedirectTo` contracts.
-6. Announce actual start/expected end with time zone, operator and fallback decision.
-   Preparation and backup capture must be complete enough to estimate the window.
+1. Inventory/back up DNS, nameservers, TTL, CAA, DNSSEC and TLS privately. Preserve
+   email/verification records. Rehearse the exact authorized apex/www replacements;
+   nameserver changes and app routing are separate actions.
+2. Verify routing permissions before announcing downtime. Cloudflare custom domains
+   need Worker permissions plus `Workers Routes Write` for the owned zone. Wrangler
+   may replace conflicts; reconcile expected DNS changes before deploying.
+3. Match `SITE_ORIGIN`, verified artifact/routes, target bindings, preview access and
+   TLS. Production is `https://riparim.com`; www redirects preserve path/query.
+4. Preserve the Auth provider/project and [identity mappings](auth-provider.md).
+   Check bound secrets, Google scopes/callback, browser-key restrictions and unchanged
+   verification-file bytes. Supabase Site URL and `/auth/bestaetigen` allowlist must
+   match; avoid host wildcards. Preserve template token-hash/`.RedirectTo` contracts.
+5. Announce the operating window/time zone, operator and fallback decision only after
+   preparation/backup capture can support the estimate.
 
-## Final operating window
+## Change routing
 
-1. Freeze/drain source and target, including all delivery work and active requests.
-   Prove maintenance text, `no-store` and embedded release identity on both sides.
-2. Capture fresh complete backups, verify recovery and apply only the reviewed
-   final reconciliation. Reconcile files, metadata, references, deletions and blocks;
-   a retry must be a no-op. Unknown acknowledgment requires a fresh inventory.
-3. Record Go/No-Go. Go needs the verified release, matching provider identity,
-   complete conflict-free data, DNS/TLS/access readiness and an executable return path.
-   On No-Go before target writes, explicitly resume only an unchanged verified source.
-4. Apply only the authorized routing plan while both sides remain frozen.
-   Verify HTTPS/apex/www and served release; reconcile repository routing through
-   a verified main release so later deployments preserve the same domains/bindings.
-5. Enable the target as the **sole writer** after deployment/data acceptance.
-   Keep the old source locked for stale DNS clients and alternate URLs.
-6. Perform customer acceptance immediately and report actual resumption/overruns.
-   Export-token expiry never unlocks the source.
+With both sides drained/paused, verify maintenance text, `no-store` and release identity.
+Record Go/No-Go for conflict-free data, provider identity, DNS/TLS/access and executable
+return. Unknown write acknowledgment requires a fresh inventory. On No-Go before target
+writes, resume only an unchanged verified source.
 
-## Acceptance
+Apply only the authorized routing plan. Verify HTTPS/apex/www and the served release;
+keep repository routes/bindings consistent through a verified main release. Enable the
+accepted target as sole writer, keep old/alternate URLs locked, and report resumption
+or overruns. Export-token expiry never unlocks the source.
 
-Record time/host/release, expected/actual results and protected backup/report references.
-Use isolated accounts/marked data; prove cleanup and omit personal/token/file data.
+## Accept and observe
 
-- Apex/www/TLS, HTTP→HTTPS, path/query redirects and direct Google ownership file.
-- Published navigation/search/profiles, keyboard, mobile/desktop and supported themes.
-- Email and actual Google login entirely on the target domain, correct return,
-  logout/revocation; existing sessions/blocks and verified legacy links remain correct.
-- Admin/moderation, own/admin private evidence and denied foreign/anonymous access;
-  forged Sites headers remain ineffective and drafts stay private.
-- App/Auth/DNS/TLS errors, sole writer, delivery and separately configured monitors.
-- A subsequent suitable main release deploys automatically to the same target,
-  with matching commit/hash/bindings. A retry uses the published artifact.
+Record time, host, release, expected/actual results and protected evidence references.
+Use isolated marked data/accounts and prove cleanup. Check:
 
-A login started on a technical host cannot prove production-domain OAuth:
-PKCE/intent cookies belong to the starting host. Announce a defined observation
-period with criteria and record operator acceptance separately from any agreed
-fallback-retention period. Retirement and final deletion need their own authorization.
+- Apex/www/TLS, HTTP→HTTPS, path/query redirects and the Google verification file.
+- Navigation/search/profiles, keyboard, mobile/desktop and supported themes.
+- Real email and Google login started on the production domain, return/logout,
+  revocation, blocks and legacy links. A technical-host login cannot prove domain OAuth.
+- Admin/moderation, own/admin private files, denied foreign/anonymous access, hidden
+  drafts and ineffective forged Sites headers.
+- Sole writer, app/Auth/DNS errors, delivery and separately configured monitors.
+- A subsequent suitable main release and artifact retry preserve target commit/bindings.
 
-## Recovery after routing cutover
-
-Prefer a reviewed forward fix or verified code rollback compatible with the
-**current** schema. Code rollback changes no D1/R2 data and must preserve locks/routes.
-To return traffic to a previous provider, freeze/drain both writers, create fresh
-backups and verify reverse transfer of all post-cutover writes/deletions/files,
-Auth mappings and delivery acceptances before reopening only that source.
-An outdated frozen source is not an available automated fallback. If reverse
-reconciliation is unproven, preserve the current inventory and use a forward fix.
-The report names release/checksums, actual times, operator, Go/No-Go, data/domain
-checks, observation, fallback status and remaining retirement work.
+Agree observation criteria and duration. Record operator acceptance separately from
+fallback retention. Retirement/final deletion need their own authorization.
+For recovery, use the [data-preserving return procedure](provider-switch.md#return-after-a-failure).
+Code rollback must fit the current schema, preserve locks/routes and changes no D1/R2 data.

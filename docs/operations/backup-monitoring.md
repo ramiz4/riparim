@@ -1,78 +1,65 @@
 # Backup monitoring
 
-The dedicated `riparim-backup-monitor` Worker checks both backup workflows every
-15 minutes. Checked-in configuration enables it; the October 13, 2026 acceptance
-verified cron, alert/recovery inbox receipt and missing-heartbeat alerts.
-Check live state before operating. Node is a prepared, disabled alternative.
+The dedicated `riparim-backup-monitor` Worker checks both [backup workflows](backups.md)
+every 15 minutes. Checked-in configuration enables it; verify live state before operating.
+Healthchecks.io independently detects missing monitor runs. Node is a disabled alternative.
 
-## Health and alerts
+## Understand an alert
 
-A healthy backup needs a completed successful `main` run and the nonempty,
-unexpired artifact of its current attempt: `supabase-auth-<run_id>-<attempt>`
-or `platform-<run_id>-<attempt>`. The monitor reads metadata, never archives or keys.
+A valid backup is a successful completed `main` run with its current attempt's nonempty,
+unexpired artifact. The monitor reads metadata only, never archives or decryption keys.
 
-| Condition                                                 | Alert threshold                                                    |
-| --------------------------------------------------------- | ------------------------------------------------------------------ |
-| Failed/cancelled/skipped/disabled job or invalid artifact | Next check                                                         |
-| No verified backup                                        | Immediately; or 36 hours after the last valid completion           |
-| Running job                                               | 30 minutes                                                         |
-| Queued attempt                                            | Two hours; ambiguous timestamp uses persisted first observation    |
-| Unchanged incident                                        | At most one reminder/job/24 hours; new valid backup sends recovery |
+| Condition                                                 | Alert threshold                                                      |
+| --------------------------------------------------------- | -------------------------------------------------------------------- |
+| Failed/cancelled/skipped/disabled job or invalid artifact | Next check                                                           |
+| No valid backup                                           | Immediately, or 36 hours after last valid completion                 |
+| Running job                                               | 30 minutes                                                           |
+| Queued attempt                                            | Two hours                                                            |
+| Unchanged incident                                        | At most one reminder/job/24 hours; a new valid backup sends recovery |
 
-`monitorHealthy` means checking, state and required delivery work; `backupsHealthy`
-is separate. A reported backup failure may accompany a healthy monitor.
-API/quota/state/unknown-delivery errors produce no success heartbeat.
-Healthchecks.io detects missing monitor runs independently of GitHub.
-Alert mail contains technical status/time and fixed GitHub links only.
+Backup failure and monitor failure are separate. API/quota/state/uncertain-delivery errors
+produce no success heartbeat. Alert mail contains technical status/times and fixed links.
 
-## Update Cloudflare
+## Update the Worker
 
-[wrangler.backup-monitor.jsonc](../../wrangler.backup-monitor.jsonc) is authoritative:
-`ENABLED=true`, `PAUSED=false`, `SCHEDULE=*/15 * * * *` with the full
-`BACKUP_MONITOR_` prefix and one matching cron. Its SQLite Durable Object stores
-state; website deployment changes neither monitor config nor app bindings here.
-
-1. Use the source checkout of a fully published verified main release.
-   The monitor is not in the website/Node app archive. Install locked tools and run
+1. Use source from a fully published [verified main release](releases.md); the monitor
+   is outside website/Node app archives. Install locked tools and run
    `npm run backups:worker:check`.
-2. Check the existing Worker/namespace and Healthchecks period/grace (15 minutes
-   each), operator inbox and allowances. Preserve the existing resources.
-3. Deploy the release's monitor configuration; omission preserves Worker secrets.
-4. Reread active variables/cron/namespace. Verify protected `POST /run`, next
-   actual cron and heartbeat; a dry run does not prove live delivery or permissions.
+2. Verify existing Worker/namespace, operator inbox, allowances and Healthchecks period/
+   grace (15 minutes each). Preserve existing resources.
+3. Deploy its [configuration](../../wrangler.backup-monitor.jsonc): `BACKUP_MONITOR_ENABLED=true`,
+   `BACKUP_MONITOR_PAUSED=false`, `BACKUP_MONITOR_SCHEDULE=*/15 * * * *` and matching cron.
 
-```sh
-node node_modules/wrangler/bin/wrangler.js deploy \
-  --config wrangler.backup-monitor.jsonc
-```
+   ```sh
+   node node_modules/wrangler/bin/wrangler.js deploy --config wrangler.backup-monitor.jsonc
+   ```
 
-If updating secrets, use a private `0600` JSON file with `--secrets-file`, then remove
-it. The monitor needs its own Resend key permitting send **and receipt retrieval**,
-heartbeat URL, sender/recipient, transfer token and preferably GitHub **Actions: Read**
-for this repository only. Keep them in the project vault/runtime, never argv/logs.
-It needs no Supabase/D1/R2/Git-write access or backup decryption keys.
+4. Reread active variables/cron/namespace. Verify protected `POST /run`, actual next cron,
+   heartbeat and inbox receipt; dry runs do not prove live permissions/delivery.
 
-## Pause, alternatives and state transfer
+Use a private `0600` JSON `--secrets-file` and remove it afterward; omission preserves
+Worker secrets. Required secrets are its own Resend key with send **and receipt retrieval**,
+heartbeat URL, sender/recipient, transfer token and preferably repository-only GitHub
+**Actions: Read**. No Supabase/D1/R2/Git-write access or backup key is needed.
+Keep secrets in protected vault/runtime, never argv/logs. Website deploys do not update it.
 
-To pause, first pause Healthchecks, then explicitly set `ENABLED=false`,
-`PAUSED=true`, empty `SCHEDULE` and `crons: []`. Preserve state and record the change
-through a reviewed PR/main release; otherwise another active release reenables it.
-Resumption needs authorization and a resumed Healthchecks check.
+## Pause or change runtime
 
-Node requires an independent always-on host and a dedicated user; a sleeping
-laptop is unsuitable. Deploy verified release source at `/opt/riparim-monitor/current`.
-Use the [env](../examples/backup-monitor.env.example),
+Pause Healthchecks first, then set `ENABLED=false`, `PAUSED=true`, empty `SCHEDULE`
+(all with `BACKUP_MONITOR_` prefix) and `crons: []`. Preserve state and record this through
+reviewed PR/main release so a later release cannot silently reenable it. Resumption needs
+authorization and a resumed Healthchecks check.
+
+Node needs an always-on host/dedicated user, not a sleeping laptop. Use verified source
+at `/opt/riparim-monitor/current` with the [env](../examples/backup-monitor.env.example),
 [service](../examples/riparim-backup-monitor.service) and
-[timer](../examples/riparim-backup-monitor.timer) templates with private env/state
-(`0600`, parent `0700`). Keep both enable/pause defaults until synthetic live alert,
-recovery, failed-delivery and missing-heartbeat inbox acceptance; then activate only
-with operator authorization. `npm run backups:monitor` is inactive by default.
+[timer](../examples/riparim-backup-monitor.timer). Keep env/state `0600`, parent `0700`.
+Keep disabled/paused defaults until live alert/recovery, failed-delivery and missing-
+heartbeat acceptance; activate only with authorization. Never enable both runtimes.
 
-Transfer state with both variants paused and no checks running. Preserve pending
-payloads, retry keys and provider receipts; sender/recipient/provider account stay
-unchanged. Never enable both modes. Back up and compare target state before `--replace`.
-Run Node transfer as the service user, with the same state path and nonsecret pause
-settings; no provider credentials are needed:
+Transfer state only with both paused and no checks running. Preserve pending payloads,
+retry keys and receipts, with unchanged sender/recipient/provider. Back up and compare
+existing target state before deliberate replacement. As the Node service user:
 
 ```sh
 BACKUP_MONITOR_ENABLED=false BACKUP_MONITOR_PAUSED=true \
@@ -83,22 +70,14 @@ BACKUP_MONITOR_STATE_PATH=/private/state.json \
 node scripts/monitor-backups.mjs import-state /private/transfer.json
 ```
 
-Cloudflare uses protected `GET /state` and `PUT /state`; paused requests only.
-Put the bearer token in private curl config, not URL/argv. Existing target replacement
-also needs deliberate `X-Monitor-Replace: true`. Unknown versions/repositories,
-invalid/future timestamps and state over 128 KiB fail before import.
+Worker uses protected `GET /state` / `PUT /state` while paused; use private curl config
+for the bearer token. Existing-target replacement also requires `X-Monitor-Replace: true`.
 
-## Resolve an alert
+## Resolve failures
 
-Check the linked job/artifact and rerun the affected main workflow after repair.
-[Backup restore](backups.md) remains a separate operation.
-For monitor errors, inspect clock, private state/lock, access, quotas and receipts.
-Keep pending state: Resend retries use identical bytes/key for at most 23 hours;
-after expiry or unknown acceptance, reconcile privately before any individual repair.
-Remove only an orphaned lock after stopping the timer and ruling out all processes.
-
-Cloudflare bounds external checks to four minutes and 45 provider calls plus a
-failure report. Reached limits remain errors. Existing Free allowances are shared;
-check actual usage and never enable paid overages automatically. Test actual inbox
-receipt periodically; all alert channels may fail together.
-Offline checks: `tests/backup-monitor*.test.mjs` and `npm run backups:worker:check`.
+Repair/rerun the linked main backup job; [restore](backups.md) is separate. For monitor
+errors check clock, state/lock, access, quotas and receipts. Keep pending state: Resend
+retry must preserve bytes/key for at most 23 hours. After expiry/unknown acceptance,
+reconcile privately before individual repair. Remove only orphaned locks with timer
+stopped and all processes ruled out. Resource limits remain errors; never enable paid
+overages automatically. Check actual inbox receipt periodically; all channels may fail.

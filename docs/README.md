@@ -1,49 +1,38 @@
 # Documentation
 
-Start with [local development](development/local-development.md), then use the guide for your task.
+For your first change: [start the app](development/local-development.md),
+[find the feature](development/architecture.md), then [run checks](development/testing.md).
+Follow [Contributing](../CONTRIBUTING.md) for task isolation and PRs.
 
-## Develop
+## Development
 
-| Task                                       | Guide                                                     |
-| ------------------------------------------ | --------------------------------------------------------- |
-| Find the code responsible for a feature    | [Codebase map](development/architecture.md)               |
-| Start the app or diagnose setup            | [Local development](development/local-development.md)     |
-| Recover an older local database            | [Local data recovery](development/local-data-recovery.md) |
-| Create a task branch and contribute        | [Contributing](../CONTRIBUTING.md)                        |
-| Run checks or diagnose test failures       | [Testing](development/testing.md)                         |
-| Change CI or measure its performance       | [CI](development/ci.md)                                   |
-| Add translated UI or routes                | [Internationalization](development/i18n.md)               |
-| Check customer and admin flows             | [Customer QA](development/customer-flow-qa.md)            |
-| Understand engineering language exceptions | [Codebase language](development/contributing-language.md) |
-| Execute an issue with agents               | [Issue execution](development/issue-execution.md)         |
+- [Local recovery](development/local-data-recovery.md): locked setup or an older database.
+- [Internationalization](development/i18n.md) and [language boundaries](development/contributing-language.md).
+- [Customer-flow QA](development/customer-flow-qa.md): check UI, Auth and permissions.
+- [CI](development/ci.md): complete verification and workflow changes.
+  [Benchmarking](development/ci-benchmark.md) is a separate advanced task.
 
-## Operate
+## Operations
 
-| Task                                       | Guide                                                      |
-| ------------------------------------------ | ---------------------------------------------------------- |
-| Publish or deploy a verified release       | [Releases](operations/releases.md)                         |
-| Install and operate the Node server        | [Node](operations/node.md)                                 |
-| Configure login or map provider identities | [Auth providers](operations/auth-provider.md)              |
-| Activate confirmation and recovery emails  | [Auth email templates](operations/auth-email-templates.md) |
-| Configure review email delivery            | [Mail transports](operations/mail-transports.md)           |
-| Back up or restore private data            | [Backups](operations/backups.md)                           |
-| Check or operate backup alerts             | [Backup monitoring](operations/backup-monitoring.md)       |
-| Transfer application data                  | [Data transfer](operations/data-transfer.md)               |
-| Switch providers with a return path        | [Provider switching](operations/provider-switch.md)        |
-| Move the production domain                 | [Domain cutover](operations/domain-cutover.md)             |
+- [Releases](operations/releases.md) and [Node hosting](operations/node.md).
+- [Auth providers](operations/auth-provider.md) and [Auth email templates](operations/auth-email-templates.md).
+- [Review email delivery](operations/mail-transports.md).
+- [Backups](operations/backups.md) and [backup monitoring](operations/backup-monitoring.md).
+- [Data transfer](operations/data-transfer.md), [provider switching](operations/provider-switch.md)
+  and [domain cutover](operations/domain-cutover.md).
 
-## Maintain the catalogue
+## Catalogue
 
-| Task                                   | Guide                                  |
-| -------------------------------------- | -------------------------------------- |
-| Edit, validate or import workshop data | [Workshop data](data/workshops.md)     |
-| Run the daily discovery process        | [Daily import](data/daily-import.md)   |
-| Verify Google identity and Maps links  | [Google Places](data/google-places.md) |
+- [Workshop data](data/workshops.md): edit, validate and import.
+- [Daily discovery](data/daily-import.md): verified research and publication.
+- [Google identity](data/google-places.md): Place IDs and Maps links.
 
-## Historical evidence
+## Agents and past work
 
-[Archive](archive/README.md) contains dated findings and completion records. Read them as evidence from that date, then check current code and configuration before operating anything.
+Agents follow [AGENTS](../AGENTS.md), [Git startup](development/git-worktrees.md)
+and, when invoked, [issue execution](development/issue-execution.md).
+[The archive](archive/README.md) holds dated evidence; use active guides for current operations.
 
-Guides explain the next action and its constraints. Scripts and configuration own exact versions, schemas and option lists; link them instead of copying their contents. Keep new guides focused on one task and remove superseded instructions. Put measurements and completed investigations in the archive, with their evidence and limits.
-
-The short [SMTP fixture README](../tests/fixtures/smtp/README.md) stays beside its test data. The [third-party licence](../vendor/shadcn-tailwind-4.13.0.LICENSE.md) remains verbatim.
+Keep each guide focused on a task. Link code/configuration for implementation detail;
+put completed investigations in the archive. The short [SMTP fixture note](../tests/fixtures/smtp/README.md)
+stays beside its data; [third-party licence text](../vendor/shadcn-tailwind-4.13.0.LICENSE.md) stays verbatim.

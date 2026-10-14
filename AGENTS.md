@@ -5,7 +5,7 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) before each new task and any subtree
 
 ## Start and finish
 
-- **Isolation:** follow the Git startup procedure in CONTRIBUTING. Keep the primary
+- **Isolation:** complete [Git startup](docs/development/git-worktrees.md) before a new task. Keep the primary
   checkout clean on synchronized `main`; use a new `codex/<task>` branch and exclusive
   worktree for each new task. Continue existing tasks in their checked worktree.
   Perform edits, installations and checks there; preserve other agents' work.

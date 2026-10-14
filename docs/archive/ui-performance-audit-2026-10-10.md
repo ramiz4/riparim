@@ -1,40 +1,21 @@
 # UI/performance audit: October 10, 2026
 
-Historical comparison against main `522c339`, branch `codex/ui-ux-performance`.
-Production was unreachable/blocked in that environment. Measurements describe
-the local built Worker and isolated components, not live Core Web Vitals.
+The local built Worker and isolated components were compared against main
+`522c339`; production was blocked/unreachable. Separating private review code from
+search reduced deduplicated gzipped entry JS by about 5% on homepage/catalogue.
+Responsive WebP images cut the two mobile images from 792,064 bytes to 68,320
+at DPR1 or 134,474 at DPR2. Originals stayed; no runtime dependency was added.
 
-Changes separated vehicle search from private review/evidence code, added image
-variants, rendered picker selections before hydration, tightened the 390 px guest
-header, focused newly added catalogue links and restored search-dialog trigger
-focus after Escape.
+Built public pages passed 48 locale/theme/width combinations, including keyboard,
+mobile search and server-rendered labels. Synthetic signed-in headers passed 24
+combinations with focus and 44 px account targets. Header spacing and search-dialog
+focus were corrected. [UI regressions](../../tests/public-performance-ui.test.mjs),
+[asset regressions](../../tests/public-assets.test.mjs), both Worker builds and
+full checks passed at handover.
 
-## Measured assets
+Asset bytes did not measure document transfer/loading time. Synthetic header
+checks did not prove actual login. Production LCP/INP/CLS, provider traffic and
+real login remained unmeasured; no Lighthouse score or live speed improvement
+was claimed. No migration, provider, authorization or data change was made.
 
-Deduplicated static entry dependencies from the Vite manifest, gzipped per file,
-showed about 5% less JS on both homepage and catalogue. Framework remained included;
-this did not measure document transfer or loading time.
-
-| Image     | Original JPEG bytes |    WebP 640 px |   WebP 1024 px |    WebP 1536 px |
-| --------- | ------------------: | -------------: | -------------: | --------------: |
-| Hero      |              422856 | 38726 (−90.8%) | 82872 (−80.4%) | 153342 (−63.7%) |
-| Diagnosis |              369208 | 29594 (−92.0%) | 51602 (−86.0%) |  83212 (−77.5%) |
-
-At 390 px Chromium selected 640/DPR1 or 1024/DPR2 variants: combined bytes fell
-from 792064 to 68320 or 134474. Sharp used `withoutEnlargement:true`, quality 78,
-effort 6; originals remained and no runtime dependency was added.
-
-## Verification and limits
-
-- Built homepage/catalogue: DE/SQ/EN × light/dark × 320/390/768/1280 = 48
-  combinations without overflow, empty selected labels or browser errors.
-- Mobile search/empty/reset/Escape/pagination and server labels without JS passed.
-- Actual synthetic signed-in header: 24 locale/theme/width cases, 44 px account
-  target and keyboard/focus passed; this was not real login.
-- [UI regression](../../tests/public-performance-ui.test.mjs),
-  [asset regression](../../tests/public-assets.test.mjs), both Worker builds,
-  catalogue, full tests, types, lint and packaging passed at handover.
-
-No migration/provider/access/data change. Mobile LCP/INP/CLS, production provider
-traffic and actual login remained unmeasured; no Lighthouse/PageSpeed score or
-live speed improvement was claimed.
+[Full record and original evidence](https://github.com/ramiz4/riparim/blob/bb20bb86051f3e7f82b412f0f6604ff6e460efb4/docs/archive/ui-performance-audit-2026-10-10.md).

@@ -1,27 +1,25 @@
 # Historical schema rollout notes
 
-Compatibility notes retained from release operations; migration files and GitHub
-release history are authoritative. Applied SQL stays unchanged.
-For a new release, follow [migration safety](../operations/releases.md#production-migrations-retries-and-rollback).
+Applied migrations stay unchanged. These compatibility notes describe past releases;
+new deployments follow [migration safety](../operations/releases.md#migrations-retry-and-rollback).
 
-| Migration                     | Behavior and return-path limit                                                                                                                                                                                                                                                |
-| ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `0015_noisy_rockslide.sql`    | Adds claim `documents` JSON default `[]`; no backfill. New writes mirror the first file into legacy columns. Old code remains compatible but sees one file.                                                                                                                   |
-| `0016_account_identities.sql` | Adds exact external identity mappings without changing internal ownership/file keys; old writers can register later. Deterministic historical `created_at`: `2026-10-11T00:00:00.000Z`. After provider cutover, only identity-aware code is safe.                             |
-| `0017_mail_transports.sql`    | Adds nullable transport/MIME and SMTP start marker. Started NULL-transport events remain Resend; preserve frozen bytes/acceptances.                                                                                                                                           |
-| `0018_auth_providers.sql`     | Adds default Supabase provider and deletion-grant binding; existing profile/cookies remain compatible. Provider switching needs independent account/secret migration.                                                                                                         |
-| `0020_married_magus.sql`      | Adds two nullable workshop opening-hour fields; no backfill. Legacy drafts/imports preserve approved hours; public profiles stop loading Google widgets.                                                                                                                      |
-| `0025_dark_pretty_boy.sql`    | Adds nullable visit `services` JSON, backfills scalar `service` as one item. Back up/recovery-test before backfill. New writes mirror first category; old code sees/edits that scalar. If scalar differs from first JSON value, it wins on reread; no stale extra categories. |
+- `0015`: claim documents default to `[]`, without backfill. New writes mirror the
+  first file; old code sees one. Historical fileless claims remain reviewable.
+- `0016`: adds external identity mappings without changing ownership/file keys.
+  After provider cutover, only identity-aware code is safe.
+- `0017`: adds mail transport/MIME markers. Started NULL-transport events remain
+  Resend and preserve their frozen bytes/acceptances.
+- `0018`: defaults existing accounts to Supabase and binds deletion grants.
+  Switching provider still requires separate private account/secret migration.
+- `0020`: adds nullable workshop hours without backfill; legacy writes preserve
+  approved hours and public profiles stop loading Google widgets.
+- `0025`: backfills visit service lists from the scalar after backup/recovery checks.
+  New writes mirror the first service; conflicting legacy scalar edits win on reread.
 
-Historical claim acceptance: old claims without a file remain reviewable.
-New claims require 1–5 PDF/JPG/PNG files, ≤5 MiB each/10 MiB total; the multipart
-body cap is 11 MiB. Account deletion/export preserves all private document references.
-The old Worker can operate with additive columns, but rollback does not remove them.
+Additive-column rollback does not remove columns or undo provider changes.
+Localized Auth templates changed no schema/secrets: activation still required
+backup, exact origin, byte readback and real per-locale receipts. Started review
+messages retained language/request bytes. Oracle hosting was evaluated and rejected;
+that evaluation performed no production Node/domain/Auth cutover.
 
-Localized Auth-template activation from issue #52 changed no schema/secrets.
-Provider fields require separate private backup, exact origin comparison and real
-DE/SQ/EN receipt acceptance. Code deployment/rollback does not modify those fields.
-Started review messages retain original language/request bytes on every retry.
-
-Oracle Always Free was evaluated October 11–12, 2026 and rejected for hosting.
-No Node host/domain/Auth production cutover was performed by that evaluation.
+[Full record and original evidence](https://github.com/ramiz4/riparim/blob/bb20bb86051f3e7f82b412f0f6604ff6e460efb4/docs/archive/schema-rollouts.md).

@@ -1,90 +1,65 @@
 # Google identity and Maps links
 
-Catalogue cards and workshop profiles make **zero Google queries**. They show
-Riparim ratings and application-owned opening hours. Maps/directions are external
-links derived from confirmed IDs; clicking opens Google. Historical widgets and
-provider changes are [archived](../archive/google-places-cost-audit-2026-10-11.md)
-and do not describe current product behavior.
+Workshop cards/profiles make **zero Google queries**. They show Riparim ratings and
+application-owned hours. External Maps links use confirmed IDs; clicking opens Google.
 
-## Confirm identity
+## Confirm a workshop
 
-A published workshop needs a confirmed Place ID even without Google reviews.
-[workshops.json](../../data/workshops.json) stores stable Riparim ID, Place ID,
-assignment date and independently authored verification evidence. Import and
-administration validate this gate and reject duplicate Place IDs. Changes to
-name, phone, town, address or coordinates require new confirmation.
-
-For daily research follow [daily import](daily-import.md): public Google Maps UI
-only, in the verified project browser profile; no API/SDK/finder and no added cost.
-Verify the visible Place ID directly with a deliberately mismatched fallback
-search, then compare independent business name/contact/location and active state.
-Uncertain identities remain deferred. Assignment proves business identity, not
-Google ownership or Riparim ownership rights.
+1. Follow [daily research](daily-import.md): public Maps UI only, verified project
+   browser profile, no API/SDK/finder or added costs.
+2. Read the Place ID from the visible official Maps link. Open it again with a
+   deliberately mismatched fallback search; compare independent business name,
+   normalized phone, precise location and active status. Defer conflicts or missing evidence.
+3. Store the ID, assignment/check date and independently authored evidence in
+   [workshops.json](../../data/workshops.json). Duplicate Place IDs are rejected.
+   Reconfirm after changes to name, phone, town, address or coordinates.
 
 Direct `query_place_id`, `place_id` and `q=place_id:…` links identify an entry.
-Search text alone does not. Confirm CID links against Google's returned identical
-CID; a CID is not a Place ID. Reject foreign domains. Search links need independent
-phone or distinctive name plus precise location evidence; map centres and nearby
-businesses are insufficient. Branches remain separate despite shared contacts.
+Search text, map centres and nearby businesses do not. A CID is not a Place ID;
+confirm CID links against Google's returned identical CID. Reject foreign domains.
+Search links require an independent phone or distinctive name plus precise location.
+Shared contacts do not merge branches. Google assignment grants no ownership rights.
 
-The public [assignment route](../../app/api/google-places/[id]/route.ts) accepts
-only an existing published ID. It reads its direct Maps identity or confirmed
-stored assignment with a matching business-data hash; it performs no search,
-updates no assignment and fetches no Google details. Without a valid unchanged
-identity it returns `placeId:null`, preserving the existing Maps fallback.
+Every published workshop needs a confirmed identity, even without Google reviews.
+The [public assignment route](../../app/api/google-places/[id]/route.ts) reads existing
+assignments only; it neither searches Google nor changes assignments. An invalid or
+changed identity returns no Place ID and keeps the Maps fallback.
 
-## Separate maintenance tool
+## Existing API maintenance
 
-[`match-workshop-google-places.mjs`](../../scripts/match-workshop-google-places.mjs)
-is an existing server-side identity tool for published profiles. It is outside
-the daily research procedure. Preview makes no provider calls:
+This tool is separate from daily discovery. Preview makes no provider calls:
 
 ```sh
 npm run catalog:google-match
 ```
 
-An explicitly authorized API run requires confirmed remaining free allowance and
-the protected `GOOGLE_PLACES_SERVER_API_KEY`; `--fetch --write --links --limit 100`
-adopts verified assignments with a CLI limit of 100 requests per run. The separate
-server assignment path shares 100 search/details queries per UTC day. Neither
-limit proves remaining free allowance. Identity conflicts remain unassigned.
-Keep existing `+381` contacts/RS region; `+383` uses XK. Known coordinates bias
-three kilometres, otherwise Kosovo. Never infer location from server egress.
+An API run requires **explicit authorization**, confirmed remaining free allowance
+and protected `GOOGLE_PLACES_SERVER_API_KEY`. The
+[matching script](../../scripts/match-workshop-google-places.mjs) accepts
+`--fetch --write --links --limit 100` (maximum 100 requests/run). The separate server
+assignment path permits 100 search/details queries per UTC day. These limits do not
+prove free allowance. Conflicts stay unassigned; never infer location from server egress.
 
-The [assignment store](../../db/google-places.ts) retains only IDs and authored
-verification/retry metadata: seven-day unresolved retries, provider errors after
-at least 15 minutes, short concurrency lease and yearly successful rechecks.
-These maintenance rules do not cause public-page Google requests.
+## Rights, keys and costs
 
-## Data rights and cost controls
+Keep independent sources/check dates. Place ID storage permission does not authorize
+bulk storage of Google business content. Copy no current stars, reviews, photos or
+hours. Historical substantiated snapshots keep provenance but affect no public rating
+or sort. The separately authorized old hours import is in [workshop data](workshops.md).
 
-Keep independently substantiated profile fields and source/check dates.
-Place IDs are exempt from standard storage restrictions; an API key does not
-grant permanent bulk storage rights for Google business data. No general content
-cache/import for stars, reviews, photos or opening hours is authorized. Preserve
-historical substantiated snapshots, without presenting them as current or using
-them for sorting. The specifically authorized old hours import is documented in
-[workshop data](workshops.md) and [history](../archive/catalogue-history.md).
+Before retained integration changes, verify the actual release, billing event dates/lag,
+shared allowance, quotas and key restrictions. Missing SKU rows, quotas and budget
+notifications prove no complete monetary cap. Without confirmed free allowance, use
+public Maps UI or defer. Enable no new paid services, plans or alerts.
 
-Keys stay in protected runtime configuration, never Git/logs/hosting files.
-Before changing retained provider integration, check the actual verified release,
-billing event dates/lag, shared account allowance, quotas and key restrictions.
-Daily/minute limits or budget notifications provide no complete monetary cap;
-absence of a SKU row proves no zero usage. Without confirmed free allowance,
-use public Maps UI or defer. Enable no new paid services/plans/alerts.
+Keys stay in protected runtime configuration, never Git/logs/hosting files. Server keys allow Places API (New) only. Browser keys
+need separately authorized integration and demonstrated production HTTPS referrers;
+local fixtures justify no production permissions. Do not invent fixed Cloudflare
+egress restrictions. Preserve previous settings and reread persisted values after changes.
+Missing keys disable retained routes; preserve app profiles, ratings and direct links.
+Restore only after independent configuration/allowance checks and a verified release.
 
-The browser key, if a separately authorized integration needs it, is restricted
-to demonstrated production HTTPS referrers and its required APIs; local fixtures
-do not justify production permissions. Server key is Places API (New) only;
-do not invent fixed Cloudflare egress IP restrictions. Secure previous settings
-before a change and read persisted values again after propagation.
-
-Missing keys disable retained Google routes. Preserve application-owned profiles,
-ratings and direct links during provider failure. Restore only after independent
-allowance/configuration verification and a verified main release. Current zero-query
-pages need no widget restoration. Historical key/quota readbacks and limitations
-are in the [cost audit](../archive/google-places-cost-audit-2026-10-11.md).
-
-References: [Places policies](https://developers.google.com/maps/documentation/places/web-service/policies),
-[Places usage](https://developers.google.com/maps/documentation/places/web-service/usage-and-billing),
-[Maps usage](https://developers.google.com/maps/documentation/javascript/usage-and-billing).
+[Places policies](https://developers.google.com/maps/documentation/places/web-service/policies)
+and [usage](https://developers.google.com/maps/documentation/places/web-service/usage-and-billing)
+define provider terms. Past widgets, billing evidence and limitations live in the
+[cost audit](../archive/google-places-cost-audit-2026-10-11.md).
