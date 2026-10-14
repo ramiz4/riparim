@@ -68,9 +68,7 @@
       "city": "Prizren",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://www.autoelectronics-ks.com/"
-      ],
+      "sourceUrls": ["https://www.autoelectronics-ks.com/"],
       "reason": "Eigene Website bestätigt Kontakt, Adresse und Pkw-Elektronik. Aktuelle Namens- und exakte Telefonsuche liefern keinen passenden Google-Eintrag; einen anderen AES-Betrieb nicht zuordnen."
     },
     {
@@ -79,9 +77,7 @@
       "city": "Gjilan",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-elektro-servis-niki-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-elektro-servis-niki-1"],
       "reason": "Eigener profilspezifischer Verzeichnispin ist belegt. Elektro Servis Gjilan liegt über einen Kilometer entfernt; andere Kandidaten haben andere Namen/Standorte."
     },
     {
@@ -90,9 +86,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-elektro-start-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-elektro-start-1"],
       "reason": "Profilspezifischer Verzeichnispin, Pkw-Elektrik und Kontakt sind unabhängig belegt. Kein passender aktueller Kartenbetrieb oder Kontaktbrücke zur Betriebsmail."
     },
     {
@@ -101,9 +95,7 @@
       "city": "Prishtina",
       "assessment": "published",
       "resultingStatus": "published",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-laker-kimi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-laker-kimi-1"],
       "reason": "Betriebsname, eigener Foto-/Leistungsbeleg und der profilspezifische Marker im unabhängigen Verzeichnis bestätigen den präzisen Standort des gültigen Google-Eintrags. Dort fehlt eine Telefonnummer; der Verzeichniskontakt bleibt als solcher gekennzeichnet.",
       "googleIdentity": {
         "placeId": "ChIJebOcSQCfVBMRenUNUpgt-kA",
@@ -187,9 +179,7 @@
       "city": "Ferizaj",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-pjes--servis-dubova-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-pjes--servis-dubova-1"],
       "reason": "Pkw-Service und Kontakt sind unabhängig belegt; kein gleicher aktueller Kartenkontakt und keine belegte Identitätsbrücke."
     },
     {
@@ -198,9 +188,7 @@
       "city": "Graçanicë",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-pjes--servis-fatosi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-pjes--servis-fatosi-1"],
       "reason": "Unabhängiger profilspezifischer Kartenmarker, Reparaturfotos, Pkw-Service und drei Kontakte sind belegt. Die aktuelle Google-Suche liefert nur andere Betriebe mit abweichenden Namen und Kontakten; kein bestätigter direkter Eintrag.",
       "independentMapMarker": {
         "markerAlt": "auto-pjes--servis-fatosi-1",
@@ -217,9 +205,7 @@
       "city": "Prishtina",
       "assessment": "identity_conflict",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-beni-2"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-beni-2"],
       "reason": "Der unabhängig belegte profilspezifische Kartenmarker und Kontakt passen nicht zum aktuellen Google-Namensvetter; etwa drei Kilometer Abstand. Keine Identitätsbrücke belegt."
     },
     {
@@ -255,10 +241,7 @@
         "phoneNote": "Aktueller Kontakt aus Betriebsprofil und unabhängigem Verzeichnis",
         "lat": 42.369790044229,
         "lng": 21.192236004495,
-        "services": [
-          "Inspektion & Wartung",
-          "Motor & Getriebe"
-        ],
+        "services": ["Inspektion & Wartung", "Motor & Getriebe"],
         "serviceDetails": [
           "Pkw-Wartung und Reparatur laut eigenem Betriebsprofil.",
           "Steuerkettenwechsel am Audi A6 laut veröffentlichtem Betriebsbeitrag."
@@ -272,9 +255,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-fia-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-fia-1"],
       "reason": "Pkw-Service und Kontakt sowie der profilspezifische unabhängige Kartenmarker sind belegt; dort ist kein entsprechender aktueller Google-Eintrag nachgewiesen. Auto Servis FIAT an einem anderen Standort nicht gleichsetzen."
     },
     {
@@ -311,9 +292,7 @@
       "city": "Gjakova",
       "assessment": "published",
       "resultingStatus": "published",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-gazi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-gazi-1"],
       "reason": "Betriebsname, Reparaturfoto und der genaue profilspezifische Marker im unabhängigen Verzeichnis bestätigen genau diesen gültigen Google-Eintrag. Dort fehlt die Telefonnummer; der unabhängig belegte Verzeichniskontakt bleibt gekennzeichnet.",
       "googleIdentity": {
         "placeId": "ChIJPTLT0Z-vUxMRruPkPVs7l0Y",
@@ -348,9 +327,7 @@
       "city": "Ferizaj",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-hoda-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-hoda-1"],
       "reason": "Unabhängige Quelle belegt Pkw-Kupplungs- und Bremsarbeiten; aktuelle Kartenergebnisse betreffen andere Betriebe."
     },
     {
@@ -359,9 +336,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-karabeg-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-karabeg-1"],
       "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke."
     },
     {
@@ -370,9 +345,7 @@
       "city": "Ferizaj",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-kiki-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-kiki-1"],
       "reason": "Unabhängiger Pkw-Servicebeleg vorhanden; Reno Servis Kiki in Nordmazedonien hat ein anderes Land und einen anderen Kontakt und wird nicht zugeordnet."
     },
     {
@@ -381,9 +354,7 @@
       "city": "Ferizaj",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-lavdrimi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-lavdrimi-1"],
       "reason": "Echter Verzeichnismarker ist belegt. Transmission Lavdimi liegt über vier Kilometer entfernt; näherer LABI-Betrieb hat anderen Namen/Kontakt. Keine Kontinuitätsbrücke."
     },
     {
@@ -392,9 +363,7 @@
       "city": "Deçan",
       "assessment": "published",
       "resultingStatus": "published",
-      "sourceUrls": [
-        "https://auto-servis-pjese-maloku.base44.app/"
-      ],
+      "sourceUrls": ["https://auto-servis-pjese-maloku.base44.app/"],
       "reason": "Die eigene Website verbindet bisherigen und aktuellen Kontakt und bestätigt Lan Dobraj sowie konkrete Pkw-Reparaturen. Der gültige Google-Eintrag hat dieselbe aktuelle Telefonnummer und Anschrift. Fehlerhafte Telefonlink-Vorlagen wurden nicht übernommen.",
       "googleIdentity": {
         "placeId": "ChIJu_fNLeFVUhMRsFdcOUdpo7Y",
@@ -435,9 +404,7 @@
       "city": "Ferizaj",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-mendi-2"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-mendi-2"],
       "reason": "Unabhängiger profilspezifischer Marker und Bibaj-Betriebsbeleg vorhanden. Nähe zu Auto Bibaj reicht bei anderem Namen und anderer Telefonnummer nicht für eine Zuordnung."
     },
     {
@@ -522,9 +489,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/automekanik--leoni-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/automekanik--leoni-1"],
       "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke."
     },
     {
@@ -533,9 +498,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/automekanik-muja-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/automekanik-muja-1"],
       "reason": "Aktueller namensähnlicher Muja-Eintrag liegt an einem anderen Ort; kein Kontakt-/Standortnachweis für dieselbe Identität."
     },
     {
@@ -544,9 +507,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/autoservis-bekteshi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-bekteshi-1"],
       "reason": "Pkw-Motor-/Getriebe- und Ölservice unabhängig belegt; aktuelle Google-Treffer passen nicht zum profilspezifischen Standort."
     },
     {
@@ -555,9 +516,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/autoservis-difa-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-difa-1"],
       "reason": "Originalquelle nennt einen zusätzlichen Telefonkontakt; auch mit dieser Nummer und dem profilspezifischen Standort kein passender Google-Betrieb belegt."
     },
     {
@@ -566,9 +525,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/autoservis-irfi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-irfi-1"],
       "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke."
     },
     {
@@ -577,9 +534,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/autoservis-naser-minushi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-naser-minushi-1"],
       "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke."
     },
     {
@@ -588,9 +543,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/axha-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/axha-1"],
       "reason": "Nähe zum öffentlichen BMW-balia-Profil ersetzt keine Namens-/Kontaktkontinuität. Keine passende eigene Google-Identität; bestehende öffentliche Zuordnung nicht überschreiben."
     },
     {
@@ -599,9 +552,7 @@
       "city": "Klinë",
       "assessment": "excluded",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://benita-ks.com/"
-      ],
+      "sourceUrls": ["https://benita-ks.com/"],
       "reason": "Tankstelle mit ausdrücklich beworbenem Schwerfahrzeug-Service. Der allgemeine Express-Service belegt keinen konkreten Pkw-Werkstattumfang."
     },
     {
@@ -679,9 +630,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/firi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/firi-1"],
       "reason": "Nähe zum öffentlichen BMW-balia-Profil ersetzt keine Namens-/Kontaktkontinuität. Keine passende eigene Google-Identität; bestehende öffentliche Zuordnung nicht überschreiben."
     },
     {
@@ -690,9 +639,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/g--b-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/g--b-1"],
       "reason": "Nähe zum öffentlichen BMW-balia-Profil ersetzt keine Namens-/Kontaktkontinuität. Keine passende eigene Google-Identität; bestehende öffentliche Zuordnung nicht überschreiben."
     },
     {
@@ -701,9 +648,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/ibra-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/ibra-1"],
       "reason": "Auto Elektro Ibra hat einen anderen Kontakt und einen Standort außerhalb von 300 Metern vom tatsächlichen Verzeichnispin. Keine belegte Kontinuitätsbrücke."
     },
     {
@@ -724,9 +669,7 @@
       "city": "Gjilan",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/moto-stanki-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/moto-stanki-1"],
       "reason": "Originalquelle bestätigt ausdrücklich Pkw- und Motorradservice; kein korrespondierender aktueller Google-Eintrag."
     },
     {
@@ -763,9 +706,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/opel-prishtina-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/opel-prishtina-1"],
       "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke."
     },
     {
@@ -774,9 +715,7 @@
       "city": "Prishtina",
       "assessment": "closed",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://www.gjithebiznesi.com/XK/opel-rakovica"
-      ],
+      "sourceUrls": ["https://www.gjithebiznesi.com/XK/opel-rakovica"],
       "reason": "Unabhängiges Verzeichnis markiert den zugeordneten Betrieb als geschlossen und den Kontakt als historisch. Keine bestätigte Wiedereröffnung; nicht veröffentlichen.",
       "unassignedProviderIdentity": {
         "placeId": "ChIJLxRcyNyeVBMRfsOdRteU1Ao",
@@ -821,9 +760,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/prishtina-auto-home-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/prishtina-auto-home-1"],
       "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke."
     },
     {
@@ -860,9 +797,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/skifti-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/skifti-1"],
       "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke."
     },
     {
@@ -871,9 +806,7 @@
       "city": "Ferizaj",
       "assessment": "excluded",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://www.cybo.com/XK/ferizaj/car-repair"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK/ferizaj/car-repair"],
       "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis."
     },
     {
@@ -882,9 +815,7 @@
       "city": "Prishtina",
       "assessment": "excluded",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://www.cybo.com/XK/pristina/car-repair"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK/pristina/car-repair"],
       "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis."
     },
     {
@@ -893,9 +824,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/turbo-klinika-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/turbo-klinika-1"],
       "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke."
     },
     {
@@ -904,9 +833,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/univerzall-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/univerzall-1"],
       "reason": "Direktes Quellprofil bestätigt Pkw-Service. Widersprechender Waschbetrieb-Kategorieeintrag reicht nicht für einen Ausschluss; aktueller Universal-Eintrag in Vragoli passt nicht zum belegten Geschäftspin."
     },
     {
@@ -915,9 +842,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/xhema-auto-servis-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/xhema-auto-servis-1"],
       "reason": "Quellprofil nennt Fahrzeugservice und Folierung; Auto Color Xhema liegt etwa einen Kilometer entfernt. Keine passende Kontaktbrücke belegt."
     }
   ]

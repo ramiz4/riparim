@@ -66,11 +66,15 @@ Ein minimaler Aufruf in einem vertrauenswürdigen Migrationsprogramm lautet:
 ```ts
 const accountId = await resolveAccount(sourceIdentity);
 if (accountId !== reviewedMapping.accountId) throw Error("SOURCE_MISMATCH");
-const linked = await linkAccountIdentity(sourceIdentity, targetIdentity, async identity => {
-  // Exact approved tuple, plus independent server-side provider verification.
-  // The proof must include the issuer, never only subject or email.
-  return verifyApprovedIdentity(reviewedMapping, identity);
-});
+const linked = await linkAccountIdentity(
+  sourceIdentity,
+  targetIdentity,
+  async (identity) => {
+    // Exact approved tuple, plus independent server-side provider verification.
+    // The proof must include the issuer, never only subject or email.
+    return verifyApprovedIdentity(reviewedMapping, identity);
+  },
+);
 if (linked !== reviewedMapping.accountId) throw Error("TARGET_MISMATCH");
 ```
 

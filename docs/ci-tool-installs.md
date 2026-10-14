@@ -4,11 +4,11 @@ The verification job still installs the complete root `package-lock.json` with
 `npm run install:ci`. Only the three following tool jobs use independent private
 manifests and npm v3 locks under `.github/tools/`:
 
-| Job | Direct root-pinned packages | Purpose |
-| --- | --- | --- |
-| PR title | `@commitlint/cli`, `@commitlint/config-conventional` | Existing root `commitlint.config.mjs`, including warnings and breaking-change parsing |
-| Semantic release | `semantic-release`, `conventional-changelog-conventionalcommits` | Existing root release config and its analyzer, notes-generator and GitHub plugins |
-| Cloudflare deploy | `wrangler`, `esbuild` | Exact Wrangler CLI plus the external D1 catalogue-plan source verification |
+| Job               | Direct root-pinned packages                                      | Purpose                                                                               |
+| ----------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| PR title          | `@commitlint/cli`, `@commitlint/config-conventional`             | Existing root `commitlint.config.mjs`, including warnings and breaking-change parsing |
+| Semantic release  | `semantic-release`, `conventional-changelog-conventionalcommits` | Existing root release config and its analyzer, notes-generator and GitHub plugins     |
+| Cloudflare deploy | `wrangler`, `esbuild`                                            | Exact Wrangler CLI plus the external D1 catalogue-plan source verification            |
 
 `npm run install:tool -- title` (or `release` / `deploy`) requires a clean
 checkout without root `node_modules`. It validates exact direct root pins and
@@ -50,12 +50,12 @@ cache. All twelve offline smoke completions passed: the three tool checks in
 each app-install state, plus each corresponding isolated tool check in both
 states. The temporary benchmark workflow was removed before merge.
 
-| Install | Cold wall time | Warm wall time | npm-reported installed packages |
-| --- | ---: | ---: | ---: |
-| Complete app | 18.91 s | 14.29 s | 1,037 |
-| Title tools | 2.03 s | 1.68 s | 76 |
-| Release tools | 2.90 s | 2.09 s | 302 |
-| Deploy tools | 2.73 s | 2.17 s | 39 |
+| Install       | Cold wall time | Warm wall time | npm-reported installed packages |
+| ------------- | -------------: | -------------: | ------------------------------: |
+| Complete app  |        18.91 s |        14.29 s |                           1,037 |
+| Title tools   |         2.03 s |         1.68 s |                              76 |
+| Release tools |         2.90 s |         2.09 s |                             302 |
+| Deploy tools  |         2.73 s |         2.17 s |                              39 |
 
 Against installing the full app in every tool job, title installation saved
 16.88 s cold / 12.61 s warm. Release plus deploy saved 32.19 s cold / 24.32 s

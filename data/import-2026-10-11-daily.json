@@ -109,10 +109,7 @@
       "auto-glass-kosovo-fushe-kosove",
       "titans-auto-repair-prishtina"
     ],
-    "existingSharedPhoneProfiles": [
-      "eurogoma-gjakova",
-      "eurogoma-mitrovica"
-    ]
+    "existingSharedPhoneProfiles": ["eurogoma-gjakova", "eurogoma-mitrovica"]
   },
   "notImported": [
     {
@@ -183,11 +180,7 @@
       "deduplicated": []
     },
     "translations": {
-      "locales": [
-        "de",
-        "sq",
-        "en"
-      ],
+      "locales": ["de", "sq", "en"],
       "centralHashContract": "workshopTranslationSourceHash",
       "validated": true
     }

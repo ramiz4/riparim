@@ -1,40 +1,358 @@
-import assert from 'node:assert/strict';
-import {build} from 'esbuild';
-import {mkdir} from 'node:fs/promises';
-import {createChunks} from '@supabase/ssr';
+import assert from "node:assert/strict";
+import { build } from "esbuild";
+import { mkdir } from "node:fs/promises";
+import { createChunks } from "@supabase/ssr";
 
-const output='.test-runtime/session-cookie-reads';await mkdir(output,{recursive:true});
-await build({stdin:{contents:`export {createAuthClient} from './lib/auth/provider';export {withAuthRequest} from './lib/auth/request-context';`,resolveDir:process.cwd(),loader:'ts'},outfile:output+'/auth.mjs',bundle:true,platform:'node',format:'esm',packages:'external',plugins:[{name:'isolated-runtime',setup(builder){builder.onResolve({filter:/^cloudflare:workers$/},args=>({path:args.path,namespace:'fixture'}));builder.onLoad({filter:/.*/,namespace:'fixture'},()=>({loader:'js',contents:'export const env=globalThis.fixtureEnv;'}));}}]});
-globalThis.fixtureEnv={AUTH_TRUSTED_ORIGIN:'https://auth.fixture.example',AUTH_TRUSTED_PROVIDER:'supabase'};
-const {createAuthClient,withAuthRequest}=await import(new URL('../'+output+'/auth.mjs',import.meta.url));
-const subject='00000000-0000-4000-8000-000000000001',originalFetch=globalThis.fetch;
-const remoteUser={id:subject,email:'member@example.test',email_confirmed_at:'2026-10-12',app_metadata:{provider:'email'},user_metadata:{full_name:'Ëmë 🚗'},identities:[]};
-let allowedOrigin,requests=[],providerMode='healthy',issuedSession;
-globalThis.fetch=async(input)=>{const url=new URL(String(input));assert.equal(url.origin,allowedOrigin,'Fixtures never call a live issuer');requests.push(url.pathname);if(providerMode==='outage')return new Response('Unavailable',{status:503});if(url.pathname==='/auth/v1/user')return providerMode==='revoked'?Response.json({msg:'Rejected',error_code:'bad_jwt'},{status:401}):Response.json(remoteUser);if(url.pathname==='/auth/v1/token')return providerMode==='reject'?Response.json({msg:'Rejected',error_code:'refresh_token_not_found'},{status:400}):Response.json(issuedSession);throw Error('Unexpected fixture provider path');};
-function configuration(origin){return {provider:'supabase',projectUrl:origin,publicKey:'sb_publishable_fixture_public_key_1234567890',enabled:true,emailDeliveryConfirmed:true,updatedAt:'fixture'};}
-function cookieKey(origin){return origin==='https://auth.fixture.example'?'riparim-auth-'+encodeURIComponent(origin):'sb-'+new URL(origin).hostname.split('.')[0]+'-auth-token';}
-function session(origin,expired=false){const token=[{alg:'HS256',typ:'JWT'},{sub:subject,iss:origin+'/auth/v1',session_id:'fixture-session',amr:[{method:'password'}],exp:Math.floor(Date.now()/1000)+3600},'signature'].map(value=>Buffer.from(typeof value==='string'?value:JSON.stringify(value)).toString('base64url')).join('.');return {access_token:token,refresh_token:'fixture-refresh',expires_at:expired?1:Math.floor(Date.now()/1000)+3600,expires_in:3600,token_type:'bearer',user:{...remoteUser,user_metadata:{full_name:'Untrusted cookie role/name',fixture_padding:'🛠ë'.repeat(1800),role:'admin'}}};}
-function jar(records){const cookies=new Map(records.map(({name,value})=>[name,value])),writes=[];return {cookies,writes,api:{getAll:()=>[...cookies].map(([name,value])=>({name,value})),setAll(values){writes.push(...values);for(const {name,value,options} of values)if(options.maxAge===0)cookies.delete(name);else cookies.set(name,value);}}};}
-async function read(origin,fixture,expect=true){allowedOrigin=origin;requests=[];return withAuthRequest(async()=>{const client=createAuthClient(configuration(origin),fixture.api,true),result=await client.getUser(),proof=await client.getSessionProof();assert.equal(result.data.user?.identity.subject??null,expect?subject:null);if(expect){assert.equal(result.data.user.name,'Ëmë 🚗','Only a fresh verified provider profile supplies the account name');assert.deepEqual(proof.data.proof,{id:'fixture-session',subject,method:'password'});}return {client,result,proof};});}
-try{
- for(const origin of ['https://fixture-project.supabase.co','https://other-project.supabase.co','https://auth.fixture.example']){
-  const key=cookieKey(origin),raw=JSON.stringify(session(origin)),encoded='base64-'+Buffer.from(raw).toString('base64url');
-  for(const records of [[{name:key,value:encoded}],createChunks(key,encoded),[{name:key,value:raw}],[...createChunks(key,encoded),{name:key+'.99',value:'orphan'}]]){
-   providerMode='healthy';const fixture=jar(records),before=[...fixture.cookies];await read(origin,fixture);assert.deepEqual([...fixture.cookies],before,'Reading a session never alters its actual cookie chunks');assert.equal(fixture.writes.length,0);assert.deepEqual(requests,['/auth/v1/user'],'Decoded cookies still require remote token validation');
+const output = ".test-runtime/session-cookie-reads";
+await mkdir(output, { recursive: true });
+await build({
+  stdin: {
+    contents: `export {createAuthClient} from './lib/auth/provider';export {withAuthRequest} from './lib/auth/request-context';`,
+    resolveDir: process.cwd(),
+    loader: "ts",
+  },
+  outfile: output + "/auth.mjs",
+  bundle: true,
+  platform: "node",
+  format: "esm",
+  packages: "external",
+  plugins: [
+    {
+      name: "isolated-runtime",
+      setup(builder) {
+        builder.onResolve({ filter: /^cloudflare:workers$/ }, (args) => ({
+          path: args.path,
+          namespace: "fixture",
+        }));
+        builder.onLoad({ filter: /.*/, namespace: "fixture" }, () => ({
+          loader: "js",
+          contents: "export const env=globalThis.fixtureEnv;",
+        }));
+      },
+    },
+  ],
+});
+globalThis.fixtureEnv = {
+  AUTH_TRUSTED_ORIGIN: "https://auth.fixture.example",
+  AUTH_TRUSTED_PROVIDER: "supabase",
+};
+const { createAuthClient, withAuthRequest } = await import(
+  new URL("../" + output + "/auth.mjs", import.meta.url)
+);
+const subject = "00000000-0000-4000-8000-000000000001",
+  originalFetch = globalThis.fetch;
+const remoteUser = {
+  id: subject,
+  email: "member@example.test",
+  email_confirmed_at: "2026-10-12",
+  app_metadata: { provider: "email" },
+  user_metadata: { full_name: "Ëmë 🚗" },
+  identities: [],
+};
+let allowedOrigin,
+  requests = [],
+  providerMode = "healthy",
+  issuedSession;
+globalThis.fetch = async (input) => {
+  const url = new URL(String(input));
+  assert.equal(url.origin, allowedOrigin, "Fixtures never call a live issuer");
+  requests.push(url.pathname);
+  if (providerMode === "outage")
+    return new Response("Unavailable", { status: 503 });
+  if (url.pathname === "/auth/v1/user")
+    return providerMode === "revoked"
+      ? Response.json(
+          { msg: "Rejected", error_code: "bad_jwt" },
+          { status: 401 },
+        )
+      : Response.json(remoteUser);
+  if (url.pathname === "/auth/v1/token")
+    return providerMode === "reject"
+      ? Response.json(
+          { msg: "Rejected", error_code: "refresh_token_not_found" },
+          { status: 400 },
+        )
+      : Response.json(issuedSession);
+  throw Error("Unexpected fixture provider path");
+};
+function configuration(origin) {
+  return {
+    provider: "supabase",
+    projectUrl: origin,
+    publicKey: "sb_publishable_fixture_public_key_1234567890",
+    enabled: true,
+    emailDeliveryConfirmed: true,
+    updatedAt: "fixture",
+  };
+}
+function cookieKey(origin) {
+  return origin === "https://auth.fixture.example"
+    ? "riparim-auth-" + encodeURIComponent(origin)
+    : "sb-" + new URL(origin).hostname.split(".")[0] + "-auth-token";
+}
+function session(origin, expired = false) {
+  const token = [
+    { alg: "HS256", typ: "JWT" },
+    {
+      sub: subject,
+      iss: origin + "/auth/v1",
+      session_id: "fixture-session",
+      amr: [{ method: "password" }],
+      exp: Math.floor(Date.now() / 1000) + 3600,
+    },
+    "signature",
+  ]
+    .map((value) =>
+      Buffer.from(
+        typeof value === "string" ? value : JSON.stringify(value),
+      ).toString("base64url"),
+    )
+    .join(".");
+  return {
+    access_token: token,
+    refresh_token: "fixture-refresh",
+    expires_at: expired ? 1 : Math.floor(Date.now() / 1000) + 3600,
+    expires_in: 3600,
+    token_type: "bearer",
+    user: {
+      ...remoteUser,
+      user_metadata: {
+        full_name: "Untrusted cookie role/name",
+        fixture_padding: "🛠ë".repeat(1800),
+        role: "admin",
+      },
+    },
+  };
+}
+function jar(records) {
+  const cookies = new Map(records.map(({ name, value }) => [name, value])),
+    writes = [];
+  return {
+    cookies,
+    writes,
+    api: {
+      getAll: () => [...cookies].map(([name, value]) => ({ name, value })),
+      setAll(values) {
+        writes.push(...values);
+        for (const { name, value, options } of values)
+          if (options.maxAge === 0) cookies.delete(name);
+          else cookies.set(name, value);
+      },
+    },
+  };
+}
+async function read(origin, fixture, expect = true) {
+  allowedOrigin = origin;
+  requests = [];
+  return withAuthRequest(async () => {
+    const client = createAuthClient(configuration(origin), fixture.api, true),
+      result = await client.getUser(),
+      proof = await client.getSessionProof();
+    assert.equal(
+      result.data.user?.identity.subject ?? null,
+      expect ? subject : null,
+    );
+    if (expect) {
+      assert.equal(
+        result.data.user.name,
+        "Ëmë 🚗",
+        "Only a fresh verified provider profile supplies the account name",
+      );
+      assert.deepEqual(proof.data.proof, {
+        id: "fixture-session",
+        subject,
+        method: "password",
+      });
+    }
+    return { client, result, proof };
+  });
+}
+try {
+  for (const origin of [
+    "https://fixture-project.supabase.co",
+    "https://other-project.supabase.co",
+    "https://auth.fixture.example",
+  ]) {
+    const key = cookieKey(origin),
+      raw = JSON.stringify(session(origin)),
+      encoded = "base64-" + Buffer.from(raw).toString("base64url");
+    for (const records of [
+      [{ name: key, value: encoded }],
+      createChunks(key, encoded),
+      [{ name: key, value: raw }],
+      [...createChunks(key, encoded), { name: key + ".99", value: "orphan" }],
+    ]) {
+      providerMode = "healthy";
+      const fixture = jar(records),
+        before = [...fixture.cookies];
+      await read(origin, fixture);
+      assert.deepEqual(
+        [...fixture.cookies],
+        before,
+        "Reading a session never alters its actual cookie chunks",
+      );
+      assert.equal(fixture.writes.length, 0);
+      assert.deepEqual(
+        requests,
+        ["/auth/v1/user"],
+        "Decoded cookies still require remote token validation",
+      );
+    }
+    // Read normalization must leave the pinned SDK in charge of every real
+    // chunk/orphan removal and the refreshed base64url write representation.
+    const expired = jar([
+        ...createChunks(
+          key,
+          "base64-" +
+            Buffer.from(JSON.stringify(session(origin, true))).toString(
+              "base64url",
+            ),
+        ),
+        { name: key + ".99", value: "orphan" },
+      ]),
+      oldNames = [...expired.cookies.keys()];
+    issuedSession = { ...session(origin), user: remoteUser };
+    providerMode = "healthy";
+    await read(origin, expired);
+    assert(requests.includes("/auth/v1/token"));
+    assert(
+      expired.writes.some(
+        (cookie) =>
+          cookie.value.startsWith("base64-") &&
+          cookie.options.httpOnly &&
+          cookie.options.secure &&
+          cookie.options.sameSite === "lax" &&
+          cookie.options.path === "/",
+      ),
+      "SDK refresh preserves encoding and private cookie options",
+    );
+    for (const name of oldNames)
+      assert(
+        expired.writes.some(
+          (cookie) => cookie.name === name && cookie.options.maxAge === 0,
+        ),
+        "Every stale original chunk and orphan is deleted",
+      );
+    assert(
+      expired.writes.every(
+        (cookie) => cookie.name === key || oldNames.includes(cookie.name),
+      ),
+      "Cleanup never invents a cookie name",
+    );
+    const rejected = jar(
+      createChunks(
+        key,
+        "base64-" +
+          Buffer.from(JSON.stringify(session(origin, true))).toString(
+            "base64url",
+          ),
+      ),
+    );
+    providerMode = "reject";
+    await read(origin, rejected, false);
+    assert.equal(
+      rejected.cookies.size,
+      0,
+      "A definitive rejected refresh removes all real chunks",
+    );
+    const unavailable = jar(
+        createChunks(
+          key,
+          "base64-" +
+            Buffer.from(JSON.stringify(session(origin, true))).toString(
+              "base64url",
+            ),
+        ),
+      ),
+      preserved = [...unavailable.cookies];
+    providerMode = "outage";
+    await read(origin, unavailable, false);
+    assert.deepEqual(
+      [...unavailable.cookies],
+      preserved,
+      "An outage cannot erase the original credential bytes",
+    );
+    // These forms deliberately fall back to SSR's exact decoder rather than
+    // assigning different semantics to legacy/noncanonical bytes.
+    providerMode = "healthy";
+    for (const bytes of [
+      "base64-" + Buffer.from(raw).toString("base64url") + "=",
+      "base64-" +
+        Buffer.from(raw)
+          .toString("base64url")
+          .replace(/(.{17})/g, "$1 "),
+    ])
+      await read(origin, jar([{ name: key, value: bytes }]));
+    const legacyUtf8 =
+      "base64-" +
+      Buffer.from([0xc1, 0xbb, ...Buffer.from(raw).subarray(1)]).toString(
+        "base64url",
+      );
+    await read(origin, jar([{ name: key, value: legacyUtf8 }]));
+    const spaced = raw + " ".repeat((1 - (Buffer.byteLength(raw) % 3) + 3) % 3),
+      canonical = Buffer.from(spaced).toString("base64url"),
+      alphabet =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_",
+      noncanonical =
+        canonical.slice(0, -1) +
+        alphabet[alphabet.indexOf(canonical.at(-1)) | 1];
+    await read(origin, jar([{ name: key, value: "base64-" + noncanonical }]));
+    const alternateOrigin =
+        origin === "https://other-project.supabase.co"
+          ? "https://fixture-project.supabase.co"
+          : "https://other-project.supabase.co",
+      alternateKey = cookieKey(alternateOrigin),
+      alternate =
+        "base64-" +
+        Buffer.from(JSON.stringify(session(alternateOrigin))).toString(
+          "base64url",
+        ),
+      mixed = jar([
+        ...createChunks(key, encoded),
+        ...createChunks(alternateKey, alternate),
+      ]);
+    await read(origin, mixed);
+    assert.equal(
+      mixed.cookies.get(alternateKey + ".0"),
+      createChunks(alternateKey, alternate)[0].value,
+      "Reading one issuer never rewrites another issuer cookie",
+    );
+    for (const malformed of [
+      "base64-!",
+      "base64-" + Buffer.from("not JSON").toString("base64url"),
+      "base64-" +
+        Buffer.from([0xef, 0xbb, 0xbf, ...Buffer.from(raw)]).toString(
+          "base64url",
+        ),
+      "base64-" + Buffer.from([0xff]).toString("base64url"),
+    ]) {
+      const fixture = jar([{ name: key, value: malformed }]);
+      await read(origin, fixture, false);
+      assert.deepEqual(
+        requests,
+        [],
+        "Malformed cookie data never becomes authenticated",
+      );
+      assert.equal(
+        fixture.writes.length,
+        0,
+        "Malformed chunk generations are treated as absent without re-saving",
+      );
+    }
+    const valid = jar(createChunks(key, encoded));
+    providerMode = "healthy";
+    await read(origin, valid);
+    providerMode = "revoked";
+    await read(origin, valid, false);
+    assert.deepEqual(
+      requests,
+      ["/auth/v1/user"],
+      "Fresh requests observe provider revocation, even with identical cookie bytes",
+    );
   }
-  // Read normalization must leave the pinned SDK in charge of every real
-  // chunk/orphan removal and the refreshed base64url write representation.
-  const expired=jar([...createChunks(key,'base64-'+Buffer.from(JSON.stringify(session(origin,true))).toString('base64url')),{name:key+'.99',value:'orphan'}]),oldNames=[...expired.cookies.keys()];issuedSession={...session(origin),user:remoteUser};providerMode='healthy';await read(origin,expired);assert(requests.includes('/auth/v1/token'));assert(expired.writes.some(cookie=>cookie.value.startsWith('base64-')&&cookie.options.httpOnly&&cookie.options.secure&&cookie.options.sameSite==='lax'&&cookie.options.path==='/'),'SDK refresh preserves encoding and private cookie options');for(const name of oldNames)assert(expired.writes.some(cookie=>cookie.name===name&&cookie.options.maxAge===0),'Every stale original chunk and orphan is deleted');assert(expired.writes.every(cookie=>cookie.name===key||oldNames.includes(cookie.name)),'Cleanup never invents a cookie name');
-  const rejected=jar(createChunks(key,'base64-'+Buffer.from(JSON.stringify(session(origin,true))).toString('base64url')));providerMode='reject';await read(origin,rejected,false);assert.equal(rejected.cookies.size,0,'A definitive rejected refresh removes all real chunks');
-  const unavailable=jar(createChunks(key,'base64-'+Buffer.from(JSON.stringify(session(origin,true))).toString('base64url'))),preserved=[...unavailable.cookies];providerMode='outage';await read(origin,unavailable,false);assert.deepEqual([...unavailable.cookies],preserved,'An outage cannot erase the original credential bytes');
-  // These forms deliberately fall back to SSR's exact decoder rather than
-  // assigning different semantics to legacy/noncanonical bytes.
-  providerMode='healthy';for(const bytes of ['base64-'+Buffer.from(raw).toString('base64url')+'=', 'base64-'+Buffer.from(raw).toString('base64url').replace(/(.{17})/g,'$1 ')])await read(origin,jar([{name:key,value:bytes}]));
-  const legacyUtf8='base64-'+Buffer.from([0xc1,0xbb,...Buffer.from(raw).subarray(1)]).toString('base64url');await read(origin,jar([{name:key,value:legacyUtf8}]));
-  const spaced=raw+' '.repeat((1-Buffer.byteLength(raw)%3+3)%3),canonical=Buffer.from(spaced).toString('base64url'),alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_',noncanonical=canonical.slice(0,-1)+alphabet[alphabet.indexOf(canonical.at(-1))|1];await read(origin,jar([{name:key,value:'base64-'+noncanonical}]));
-  const alternateOrigin=origin==='https://other-project.supabase.co'?'https://fixture-project.supabase.co':'https://other-project.supabase.co',alternateKey=cookieKey(alternateOrigin),alternate='base64-'+Buffer.from(JSON.stringify(session(alternateOrigin))).toString('base64url'),mixed=jar([...createChunks(key,encoded),...createChunks(alternateKey,alternate)]);await read(origin,mixed);assert.equal(mixed.cookies.get(alternateKey+'.0'),createChunks(alternateKey,alternate)[0].value,'Reading one issuer never rewrites another issuer cookie');
-  for(const malformed of ['base64-!', 'base64-'+Buffer.from('not JSON').toString('base64url'),'base64-'+Buffer.from([0xef,0xbb,0xbf,...Buffer.from(raw)]).toString('base64url'),'base64-'+Buffer.from([0xff]).toString('base64url')]){const fixture=jar([{name:key,value:malformed}]);await read(origin,fixture,false);assert.deepEqual(requests,[],'Malformed cookie data never becomes authenticated');assert.equal(fixture.writes.length,0,'Malformed chunk generations are treated as absent without re-saving');}
-  const valid=jar(createChunks(key,encoded));providerMode='healthy';await read(origin,valid);providerMode='revoked';await read(origin,valid,false);assert.deepEqual(requests,['/auth/v1/user'],'Fresh requests observe provider revocation, even with identical cookie bytes');
- }
- console.log('Session cookie reads: Unicode/raw/chunked/scoped cookies, verified claims/profile, original inventory, refresh bytes/cleanup, rejection/outage, legacy malformed fallback and fresh revocation passed');
-}finally{globalThis.fetch=originalFetch;}
+  console.log(
+    "Session cookie reads: Unicode/raw/chunked/scoped cookies, verified claims/profile, original inventory, refresh bytes/cleanup, rejection/outage, legacy malformed fallback and fresh revocation passed",
+  );
+} finally {
+  globalThis.fetch = originalFetch;
+}

@@ -1,73 +1,379 @@
-import {localizeHref} from '../scripts/lib/locale.mjs';
-import assert from 'node:assert/strict';
-import {mkdir,writeFile} from 'node:fs/promises';
-import {createRequire} from 'node:module';
-const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
-const bundle=await build({entryPoints:['lib/catalogue-filters.ts'],bundle:true,platform:'node',format:'esm',write:false});
-await mkdir('.test-runtime/catalogue',{recursive:true});
-await writeFile('.test-runtime/catalogue/filters.mjs',bundle.outputFiles[0].contents);
-const {defaultCatalogueFilters:defaults,parseCatalogueFilters,matchCatalogue,catalogueHref,activeCatalogueFilters,hasPublishedRatings,catalogueDistance}=await import(new URL('../.test-runtime/catalogue/filters.mjs',import.meta.url));
-let passed=0;
-const check=(condition,label)=>{assert(condition,label);passed++;};
-const record=(name,overrides={})=>({id:name,name,city:'Prishtina',status:'published',services:['Inspektion & Wartung'],brands:[],languages:[],rating:null,count:0,lat:null,lng:null,...overrides});
-const data=[record('Alpha fixture',{brands:['Volkswagen']}),record('Beta fixture',{city:'Peja'}),record('Gamma fixture',{brands:['Alle Marken'],rating:4.5,count:2}),record('Hidden fixture',{status:'draft',brands:['Volkswagen'],languages:['Deutsch'],rating:5,count:20})];
-check(matchCatalogue(data,defaults).length===3,'draft records never enter public results');
-const vw={...defaults,brand:'Volkswagen'};
-check(matchCatalogue(data,vw).map(w=>w.name).join('|')==='Alpha fixture|Gamma fixture','selected brand requires explicit brand or explicitly published all-brand support');
-check(matchCatalogue(data,defaults).some(w=>w.name==='Beta fixture'),'unknown-brand workshop remains visible without a brand filter');
-const language=parseCatalogueFilters(new URLSearchParams('sprache=de'),data.filter(w=>w.status==='published'));
-check(language.language==='Deutsch'&&matchCatalogue(data,language).length===0,'valid explicit language produces honest zero results despite no coverage');
-check(activeCatalogueFilters(language).includes('language'),'zero-result language remains removable as an active chip');
-const unknown=parseCatalogueFilters(new URLSearchParams('leistung=nonexistent&ort=nowhere&marke=unknown&sprache=xyz&sort=imaginary'),data);
-check(JSON.stringify(unknown)===JSON.stringify(defaults),'unknown public values normalize to defaults');
-const url=catalogueHref({...vw,service:'Diagnose & Elektronik',city:'Fushë Kosovë',language:'Englisch',sort:'rating',model:'private Golf',problem:'private repair text',year:'2019',radius:100,from:'2026-10-03'});
-check(url.includes('leistung=diagnose-elektronik')&&url.includes('ort=fushe-kosove')&&url.includes('sprache=en'),'known selections use stable public slugs');
-check(!/private|Golf|problem|model|year|radius|2026/.test(url),'private fields never enter the catalogue link');
-const parsed=parseCatalogueFilters(new URLSearchParams(url.split('?')[1]),data);
-check(parsed.brand==='Volkswagen'&&parsed.city==='Fushë Kosovë'&&parsed.language==='Englisch'&&parsed.sort==='rating','public URL filters round-trip independently of memory');
-check(JSON.stringify(parseCatalogueFilters(new URLSearchParams(),data))===JSON.stringify(defaults),'empty URL means standard filters');
-const city={...defaults,city:'Prishtina'};
-check(matchCatalogue(data,city).every(w=>w.city==='Prishtina'),'city selection matches only the public location filter');
-check(matchCatalogue(data,{...city,city:'Peja'}).every(w=>w.city==='Peja'),'changing city immediately selects the new location');
-const sorted=matchCatalogue(data,{...defaults,sort:'rating'});
-check(sorted[0].name==='Gamma fixture'&&sorted[1].name==='Alpha fixture','real published ratings precede unreviewed workshops, with alphabetical fallback');
-check(!hasPublishedRatings([record('Unreviewed fixture',{rating:5,count:0})]),'a number without published review count cannot enable rating sorting');
-check(parseCatalogueFilters(new URLSearchParams('sort=bewertung&sprache=de'),[record('Unreviewed fixture')]).sort==='name','unavailable rating sort normalizes without widening language filters');
-check(catalogueHref(defaults)==='/werkstaetten','default values are omitted from public URLs');
+import { localizeHref } from "../scripts/lib/locale.mjs";
+import assert from "node:assert/strict";
+import { mkdir, writeFile } from "node:fs/promises";
+import { createRequire } from "node:module";
+const { build } = createRequire(new URL("../package.json", import.meta.url))(
+  "esbuild",
+);
+const bundle = await build({
+  entryPoints: ["lib/catalogue-filters.ts"],
+  bundle: true,
+  platform: "node",
+  format: "esm",
+  write: false,
+});
+await mkdir(".test-runtime/catalogue", { recursive: true });
+await writeFile(
+  ".test-runtime/catalogue/filters.mjs",
+  bundle.outputFiles[0].contents,
+);
+const {
+  defaultCatalogueFilters: defaults,
+  parseCatalogueFilters,
+  matchCatalogue,
+  catalogueHref,
+  activeCatalogueFilters,
+  hasPublishedRatings,
+  catalogueDistance,
+} = await import(
+  new URL("../.test-runtime/catalogue/filters.mjs", import.meta.url)
+);
+let passed = 0;
+const check = (condition, label) => {
+  assert(condition, label);
+  passed++;
+};
+const record = (name, overrides = {}) => ({
+  id: name,
+  name,
+  city: "Prishtina",
+  status: "published",
+  services: ["Inspektion & Wartung"],
+  brands: [],
+  languages: [],
+  rating: null,
+  count: 0,
+  lat: null,
+  lng: null,
+  ...overrides,
+});
+const data = [
+  record("Alpha fixture", { brands: ["Volkswagen"] }),
+  record("Beta fixture", { city: "Peja" }),
+  record("Gamma fixture", { brands: ["Alle Marken"], rating: 4.5, count: 2 }),
+  record("Hidden fixture", {
+    status: "draft",
+    brands: ["Volkswagen"],
+    languages: ["Deutsch"],
+    rating: 5,
+    count: 20,
+  }),
+];
+check(
+  matchCatalogue(data, defaults).length === 3,
+  "draft records never enter public results",
+);
+const vw = { ...defaults, brand: "Volkswagen" };
+check(
+  matchCatalogue(data, vw)
+    .map((w) => w.name)
+    .join("|") === "Alpha fixture|Gamma fixture",
+  "selected brand requires explicit brand or explicitly published all-brand support",
+);
+check(
+  matchCatalogue(data, defaults).some((w) => w.name === "Beta fixture"),
+  "unknown-brand workshop remains visible without a brand filter",
+);
+const language = parseCatalogueFilters(
+  new URLSearchParams("sprache=de"),
+  data.filter((w) => w.status === "published"),
+);
+check(
+  language.language === "Deutsch" &&
+    matchCatalogue(data, language).length === 0,
+  "valid explicit language produces honest zero results despite no coverage",
+);
+check(
+  activeCatalogueFilters(language).includes("language"),
+  "zero-result language remains removable as an active chip",
+);
+const unknown = parseCatalogueFilters(
+  new URLSearchParams(
+    "leistung=nonexistent&ort=nowhere&marke=unknown&sprache=xyz&sort=imaginary",
+  ),
+  data,
+);
+check(
+  JSON.stringify(unknown) === JSON.stringify(defaults),
+  "unknown public values normalize to defaults",
+);
+const url = catalogueHref({
+  ...vw,
+  service: "Diagnose & Elektronik",
+  city: "Fushë Kosovë",
+  language: "Englisch",
+  sort: "rating",
+  model: "private Golf",
+  problem: "private repair text",
+  year: "2019",
+  radius: 100,
+  from: "2026-10-03",
+});
+check(
+  url.includes("leistung=diagnose-elektronik") &&
+    url.includes("ort=fushe-kosove") &&
+    url.includes("sprache=en"),
+  "known selections use stable public slugs",
+);
+check(
+  !/private|Golf|problem|model|year|radius|2026/.test(url),
+  "private fields never enter the catalogue link",
+);
+const parsed = parseCatalogueFilters(
+  new URLSearchParams(url.split("?")[1]),
+  data,
+);
+check(
+  parsed.brand === "Volkswagen" &&
+    parsed.city === "Fushë Kosovë" &&
+    parsed.language === "Englisch" &&
+    parsed.sort === "rating",
+  "public URL filters round-trip independently of memory",
+);
+check(
+  JSON.stringify(parseCatalogueFilters(new URLSearchParams(), data)) ===
+    JSON.stringify(defaults),
+  "empty URL means standard filters",
+);
+const city = { ...defaults, city: "Prishtina" };
+check(
+  matchCatalogue(data, city).every((w) => w.city === "Prishtina"),
+  "city selection matches only the public location filter",
+);
+check(
+  matchCatalogue(data, { ...city, city: "Peja" }).every(
+    (w) => w.city === "Peja",
+  ),
+  "changing city immediately selects the new location",
+);
+const sorted = matchCatalogue(data, { ...defaults, sort: "rating" });
+check(
+  sorted[0].name === "Gamma fixture" && sorted[1].name === "Alpha fixture",
+  "real published ratings precede unreviewed workshops, with alphabetical fallback",
+);
+check(
+  !hasPublishedRatings([record("Unreviewed fixture", { rating: 5, count: 0 })]),
+  "a number without published review count cannot enable rating sorting",
+);
+check(
+  parseCatalogueFilters(new URLSearchParams("sort=bewertung&sprache=de"), [
+    record("Unreviewed fixture"),
+  ]).sort === "name",
+  "unavailable rating sort normalizes without widening language filters",
+);
+check(
+  catalogueHref(defaults) === "/werkstaetten",
+  "default values are omitted from public URLs",
+);
 
-const named=[record('Auto Bardhë',{brands:['Volkswagen']}),record('Auto Bardhë Peja',{city:'Peja'}),record('Alpha Other',{brands:['Volkswagen']})];
-check(matchCatalogue(named,{...defaults,query:' BARDHE ',city:'Prishtina',brand:'Volkswagen'}).map(w=>w.name).join('|')==='Auto Bardhë','case and accents do not affect name search, and existing filters still apply');
-check(matchCatalogue(named,{...defaults,query:'Bardhe Auto'}).length===2,'multiple name words can match independently of their order');
-check(matchCatalogue(named,{...defaults,query:'not-a-workshop'}).length===0,'unknown names produce honest empty results');
-const search=parseCatalogueFilters(new URLSearchParams('q=Auto+%26+Bardh%C3%AB&sort=google'),named);
-check(search.query==='Auto & Bardhë'&&search.sort==='name','legacy Google sort falls back without losing name search');
-check(catalogueHref(search).includes('q=Auto+%26+Bardh%C3%AB')&&!catalogueHref(search).includes('sort='),'special characters are URL-encoded and legacy sort is removed');
-check(activeCatalogueFilters(search).includes('query'),'name search can be removed using an active filter');
-check(parseCatalogueFilters(new URLSearchParams('q='+encodeURIComponent('x'.repeat(250))),named).query.length===100,'public name search is bounded');
-const googleData=[record('Alpha missing',{rating:5,count:80}),record('Beta 4.8',{googleRating:{rating:4.8,count:150}}),record('Gamma 4.8',{googleRating:{rating:4.8,count:12}}),record('Delta 4.9',{googleRating:{rating:4.9,count:null}})];
-check(matchCatalogue(googleData,defaults).map(w=>w.name).join('|')==='Alpha missing|Beta 4.8|Delta 4.9|Gamma 4.8','stored Google snapshots are excluded from sorting');
-check(matchCatalogue(googleData,{...defaults,sort:'rating'})[0].name==='Alpha missing','Riparim sorting remains independent of Google');
-check(!hasPublishedRatings(googleData.slice(1)),'stored snapshots cannot enable Riparim sorting');
-for(const locale of ['de','sq','en']){const legacy=parseCatalogueFilters(new URLSearchParams('sort=google&q=Auto&ort=prishtina&leistung=diagnose-elektronik&marke=volkswagen&sprache=de'),data);check(legacy.sort==='name'&&legacy.query==='Auto'&&legacy.city==='Prishtina'&&legacy.service==='Diagnose & Elektronik'&&legacy.brand==='Volkswagen'&&legacy.language==='Deutsch','legacy Google sort preserves every public filter');check(catalogueHref(legacy,locale).startsWith(localizeHref('/werkstaetten',locale))&&!catalogueHref(legacy,locale).includes('sort='),'legacy fallback preserves locale');}
-const distances=[record('Alpha unknown'),record('Beta far',{lat:42.7129,lng:21.1655}),record('Gamma near',{lat:42.6629,lng:21.1655})];
-check(matchCatalogue(distances,{...defaults,city:'Prishtina',sort:'distance'}).map(w=>w.name).join('|')==='Gamma near|Beta far|Alpha unknown','known distances sort near first and missing coordinates stay at the end');
-check(catalogueDistance(distances[0],'Prishtina')===null&&catalogueDistance(distances[2],'Prishtina')===0,'unknown coordinates are not represented as zero distance');
-check(catalogueDistance(distances[1],'Prishtina')>5&&catalogueDistance(distances[1],'Prishtina')<6,'distance uses geographic coordinates and kilometres');
-check(parseCatalogueFilters(new URLSearchParams('sort=entfernung'),distances).sort==='name','distance requires a reference city');
-check(parseCatalogueFilters(new URLSearchParams('sort=entfernung&ort=prishtina'),distances).sort==='distance','distance sorting and city survive a public link');
-const skenderaj=record('Fixture Skenderaj',{city:'Skenderaj',lat:42.74667,lng:20.78861});
-check(catalogueDistance(skenderaj,'Skenderaj')===0,'Skenderaj has a verified city origin');
-check(parseCatalogueFilters(new URLSearchParams('sort=entfernung&ort=skenderaj'),[skenderaj]).sort==='distance','Skenderaj distance sorting survives a public link');
-const north=record('North branch fixture',{city:'Obiliq',lat:42.6796125,lng:21.116046875}),south=record('South branch fixture',{city:'Graçanicë'});
-const northFilters=parseCatalogueFilters(new URLSearchParams('ort=obiliq&sort=entfernung'),[north,south]);
-check(northFilters.city==='Obiliq'&&northFilters.sort==='distance','the north branch has a valid city filter and distance origin');
-check(matchCatalogue([north,south],northFilters).map(w=>w.id).join('|')===north.id,'selecting the north municipality does not mix in the old south branch');
-check(catalogueDistance(north,'Obiliq')>3&&catalogueDistance(north,'Obiliq')<5,'independently sourced workshop and city coordinates produce a useful distance');
-const multi=parseCatalogueFilters(new URLSearchParams('ort=prishtina&ort=peja&marke=volkswagen&marke=audi&leistung=inspektion-wartung&leistung=bremsen-fahrwerk&sort=entfernung'),data);
-check(Array.isArray(multi.city)&&multi.city.length===2,'repeated URL fields preserve multiple cities');
-check(multi.sort==='name','distance sorting requires exactly one reference city');
-check(matchCatalogue(data,{...defaults,city:['Prishtina','Peja'],brand:['Volkswagen','Audi']}).map(w=>w.name).join('|')==='Alpha fixture|Gamma fixture','alternatives within a field use OR and different fields use AND');
-check(JSON.stringify(parseCatalogueFilters(new URLSearchParams(catalogueHref(multi).split('?')[1]),data))===JSON.stringify(multi),'multi-selection survives public URLs and profile returns');
-const duplicate=parseCatalogueFilters(new URLSearchParams('ort=peja&ort=unknown&ort=peja'),data);
-check(duplicate.city==='Peja','invalid and duplicate selections are dropped without widening valid selections');
+const named = [
+  record("Auto Bardhë", { brands: ["Volkswagen"] }),
+  record("Auto Bardhë Peja", { city: "Peja" }),
+  record("Alpha Other", { brands: ["Volkswagen"] }),
+];
+check(
+  matchCatalogue(named, {
+    ...defaults,
+    query: " BARDHE ",
+    city: "Prishtina",
+    brand: "Volkswagen",
+  })
+    .map((w) => w.name)
+    .join("|") === "Auto Bardhë",
+  "case and accents do not affect name search, and existing filters still apply",
+);
+check(
+  matchCatalogue(named, { ...defaults, query: "Bardhe Auto" }).length === 2,
+  "multiple name words can match independently of their order",
+);
+check(
+  matchCatalogue(named, { ...defaults, query: "not-a-workshop" }).length === 0,
+  "unknown names produce honest empty results",
+);
+const search = parseCatalogueFilters(
+  new URLSearchParams("q=Auto+%26+Bardh%C3%AB&sort=google"),
+  named,
+);
+check(
+  search.query === "Auto & Bardhë" && search.sort === "name",
+  "legacy Google sort falls back without losing name search",
+);
+check(
+  catalogueHref(search).includes("q=Auto+%26+Bardh%C3%AB") &&
+    !catalogueHref(search).includes("sort="),
+  "special characters are URL-encoded and legacy sort is removed",
+);
+check(
+  activeCatalogueFilters(search).includes("query"),
+  "name search can be removed using an active filter",
+);
+check(
+  parseCatalogueFilters(
+    new URLSearchParams("q=" + encodeURIComponent("x".repeat(250))),
+    named,
+  ).query.length === 100,
+  "public name search is bounded",
+);
+const googleData = [
+  record("Alpha missing", { rating: 5, count: 80 }),
+  record("Beta 4.8", { googleRating: { rating: 4.8, count: 150 } }),
+  record("Gamma 4.8", { googleRating: { rating: 4.8, count: 12 } }),
+  record("Delta 4.9", { googleRating: { rating: 4.9, count: null } }),
+];
+check(
+  matchCatalogue(googleData, defaults)
+    .map((w) => w.name)
+    .join("|") === "Alpha missing|Beta 4.8|Delta 4.9|Gamma 4.8",
+  "stored Google snapshots are excluded from sorting",
+);
+check(
+  matchCatalogue(googleData, { ...defaults, sort: "rating" })[0].name ===
+    "Alpha missing",
+  "Riparim sorting remains independent of Google",
+);
+check(
+  !hasPublishedRatings(googleData.slice(1)),
+  "stored snapshots cannot enable Riparim sorting",
+);
+for (const locale of ["de", "sq", "en"]) {
+  const legacy = parseCatalogueFilters(
+    new URLSearchParams(
+      "sort=google&q=Auto&ort=prishtina&leistung=diagnose-elektronik&marke=volkswagen&sprache=de",
+    ),
+    data,
+  );
+  check(
+    legacy.sort === "name" &&
+      legacy.query === "Auto" &&
+      legacy.city === "Prishtina" &&
+      legacy.service === "Diagnose & Elektronik" &&
+      legacy.brand === "Volkswagen" &&
+      legacy.language === "Deutsch",
+    "legacy Google sort preserves every public filter",
+  );
+  check(
+    catalogueHref(legacy, locale).startsWith(
+      localizeHref("/werkstaetten", locale),
+    ) && !catalogueHref(legacy, locale).includes("sort="),
+    "legacy fallback preserves locale",
+  );
+}
+const distances = [
+  record("Alpha unknown"),
+  record("Beta far", { lat: 42.7129, lng: 21.1655 }),
+  record("Gamma near", { lat: 42.6629, lng: 21.1655 }),
+];
+check(
+  matchCatalogue(distances, {
+    ...defaults,
+    city: "Prishtina",
+    sort: "distance",
+  })
+    .map((w) => w.name)
+    .join("|") === "Gamma near|Beta far|Alpha unknown",
+  "known distances sort near first and missing coordinates stay at the end",
+);
+check(
+  catalogueDistance(distances[0], "Prishtina") === null &&
+    catalogueDistance(distances[2], "Prishtina") === 0,
+  "unknown coordinates are not represented as zero distance",
+);
+check(
+  catalogueDistance(distances[1], "Prishtina") > 5 &&
+    catalogueDistance(distances[1], "Prishtina") < 6,
+  "distance uses geographic coordinates and kilometres",
+);
+check(
+  parseCatalogueFilters(new URLSearchParams("sort=entfernung"), distances)
+    .sort === "name",
+  "distance requires a reference city",
+);
+check(
+  parseCatalogueFilters(
+    new URLSearchParams("sort=entfernung&ort=prishtina"),
+    distances,
+  ).sort === "distance",
+  "distance sorting and city survive a public link",
+);
+const skenderaj = record("Fixture Skenderaj", {
+  city: "Skenderaj",
+  lat: 42.74667,
+  lng: 20.78861,
+});
+check(
+  catalogueDistance(skenderaj, "Skenderaj") === 0,
+  "Skenderaj has a verified city origin",
+);
+check(
+  parseCatalogueFilters(new URLSearchParams("sort=entfernung&ort=skenderaj"), [
+    skenderaj,
+  ]).sort === "distance",
+  "Skenderaj distance sorting survives a public link",
+);
+const north = record("North branch fixture", {
+    city: "Obiliq",
+    lat: 42.6796125,
+    lng: 21.116046875,
+  }),
+  south = record("South branch fixture", { city: "Graçanicë" });
+const northFilters = parseCatalogueFilters(
+  new URLSearchParams("ort=obiliq&sort=entfernung"),
+  [north, south],
+);
+check(
+  northFilters.city === "Obiliq" && northFilters.sort === "distance",
+  "the north branch has a valid city filter and distance origin",
+);
+check(
+  matchCatalogue([north, south], northFilters)
+    .map((w) => w.id)
+    .join("|") === north.id,
+  "selecting the north municipality does not mix in the old south branch",
+);
+check(
+  catalogueDistance(north, "Obiliq") > 3 &&
+    catalogueDistance(north, "Obiliq") < 5,
+  "independently sourced workshop and city coordinates produce a useful distance",
+);
+const multi = parseCatalogueFilters(
+  new URLSearchParams(
+    "ort=prishtina&ort=peja&marke=volkswagen&marke=audi&leistung=inspektion-wartung&leistung=bremsen-fahrwerk&sort=entfernung",
+  ),
+  data,
+);
+check(
+  Array.isArray(multi.city) && multi.city.length === 2,
+  "repeated URL fields preserve multiple cities",
+);
+check(
+  multi.sort === "name",
+  "distance sorting requires exactly one reference city",
+);
+check(
+  matchCatalogue(data, {
+    ...defaults,
+    city: ["Prishtina", "Peja"],
+    brand: ["Volkswagen", "Audi"],
+  })
+    .map((w) => w.name)
+    .join("|") === "Alpha fixture|Gamma fixture",
+  "alternatives within a field use OR and different fields use AND",
+);
+check(
+  JSON.stringify(
+    parseCatalogueFilters(
+      new URLSearchParams(catalogueHref(multi).split("?")[1]),
+      data,
+    ),
+  ) === JSON.stringify(multi),
+  "multi-selection survives public URLs and profile returns",
+);
+const duplicate = parseCatalogueFilters(
+  new URLSearchParams("ort=peja&ort=unknown&ort=peja"),
+  data,
+);
+check(
+  duplicate.city === "Peja",
+  "invalid and duplicate selections are dropped without widening valid selections",
+);
 console.log(`Catalogue filter contracts: ${passed} passed`);

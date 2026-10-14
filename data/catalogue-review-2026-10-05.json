@@ -75,9 +75,7 @@
       "city": "Prizren",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://www.autoelectronics-ks.com/"
-      ],
+      "sourceUrls": ["https://www.autoelectronics-ks.com/"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -105,9 +103,7 @@
       "city": "Gjilan",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-elektro-servis-niki-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-elektro-servis-niki-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -116,9 +112,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-elektro-start-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-elektro-start-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -165,9 +159,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-laker-kimi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-laker-kimi-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -195,9 +187,7 @@
       "city": "Peja",
       "assessment": "published",
       "resultingStatus": "published",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/auto-llamarist-valoni"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/auto-llamarist-valoni"],
       "reason": "Independent contact and passenger-car repair source plus exactly one strict Google identity match.",
       "googleIdentity": {
         "placeId": "ChIJS1Fl-7b9UhMR-9NWY7yjRk4",
@@ -214,9 +204,7 @@
       "city": "Ferizaj",
       "assessment": "published",
       "resultingStatus": "published",
-      "sourceUrls": [
-        "https://de.cybo.com/XK/ferizaj/autoreparatur"
-      ],
+      "sourceUrls": ["https://de.cybo.com/XK/ferizaj/autoreparatur"],
       "reason": "Independent contact and passenger-car repair source plus exactly one strict Google identity match.",
       "googleIdentity": {
         "placeId": "ChIJOS5ZJ9F_VBMRRzJ7_AfKgiU",
@@ -233,9 +221,7 @@
       "city": "Ferizaj",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/autoserviceinovatorgroup-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/autoserviceinovatorgroup-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -244,9 +230,7 @@
       "city": "Ferizaj",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-pjes--servis-dubova-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-pjes--servis-dubova-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -255,9 +239,7 @@
       "city": "Graçanicë",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-pjes--servis-fatosi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-pjes--servis-fatosi-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -323,9 +305,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-beni-2"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-beni-2"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -353,9 +333,7 @@
       "city": "Ferizaj",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-cufa-2"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-cufa-2"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -364,9 +342,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-fia-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-fia-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -375,9 +351,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-ford-jashanica-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-ford-jashanica-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -405,9 +379,7 @@
       "city": "Gjakova",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-gazi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-gazi-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -416,9 +388,7 @@
       "city": "Peja",
       "assessment": "published",
       "resultingStatus": "published",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-goni-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-goni-1"],
       "reason": "Independent contact and passenger-car repair source plus exactly one strict Google identity match.",
       "googleIdentity": {
         "placeId": "ChIJRwwqY4D9UhMRNPiF5qFtm6Q",
@@ -454,9 +424,7 @@
       "city": "Ferizaj",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-hoda-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-hoda-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -465,9 +433,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-karabeg-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-karabeg-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -476,9 +442,7 @@
       "city": "Ferizaj",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-kiki-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-kiki-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -487,9 +451,7 @@
       "city": "Peja",
       "assessment": "published",
       "resultingStatus": "published",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-klima-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-klima-1"],
       "reason": "Independent contact and passenger-car repair source plus exactly one strict Google identity match.",
       "googleIdentity": {
         "placeId": "ChIJxY9iysoDUxMRCboJvh9k78o",
@@ -506,9 +468,7 @@
       "city": "Ferizaj",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-lavdrimi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-lavdrimi-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -517,9 +477,7 @@
       "city": "Gjakova",
       "assessment": "published",
       "resultingStatus": "published",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/autoservislumim-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/autoservislumim-1"],
       "reason": "Independent contact and passenger-car repair source plus exactly one strict Google identity match.",
       "googleIdentity": {
         "placeId": "ChIJOWz_2iSxUxMRs9MLdusHbKA",
@@ -536,9 +494,7 @@
       "city": "Deçan",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://galego.cybo.com/XK/pej%C3%AB/mechanic"
-      ],
+      "sourceUrls": ["https://galego.cybo.com/XK/pej%C3%AB/mechanic"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -547,9 +503,7 @@
       "city": "Ferizaj",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-mendi-2"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-mendi-2"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -577,9 +531,7 @@
       "city": "Prizren",
       "assessment": "published",
       "resultingStatus": "published",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/auto-servis-muriqi"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/auto-servis-muriqi"],
       "reason": "Independent contact and passenger-car repair source plus exactly one strict Google identity match.",
       "googleIdentity": {
         "placeId": "ChIJA9n0Hr6VUxMRkUy6Qw7PcJ8",
@@ -596,9 +548,7 @@
       "city": "Gjakova",
       "assessment": "published",
       "resultingStatus": "published",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/auto-servis-rizvanolli"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/auto-servis-rizvanolli"],
       "reason": "Independent contact and passenger-car repair source plus exactly one strict Google identity match.",
       "googleIdentity": {
         "placeId": "ChIJHY-JYe6xUxMR6O1WWZKP5xc",
@@ -615,9 +565,7 @@
       "city": "Gjilan",
       "assessment": "published",
       "resultingStatus": "published",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-sejda-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-sejda-1"],
       "reason": "Independent contact and passenger-car repair source plus exactly one strict Google identity match.",
       "googleIdentity": {
         "placeId": "ChIJnz-VYLuNVBMROs4-vKcMxzw",
@@ -664,9 +612,7 @@
       "city": "Prizren",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-xhelali-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-xhelali-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -710,9 +656,7 @@
       "locationCorrection": {
         "previousAddress": "M533+XMW, Prishtina",
         "currentAddress": "Zona Industriale Nr. 98, M42G+74, Prishtina 10000",
-        "coordinateSourceUrls": [
-          "https://www.autodiagnoza.shop/contact/"
-        ],
+        "coordinateSourceUrls": ["https://www.autodiagnoza.shop/contact/"],
         "coordinates": {
           "lat": 42.6506875,
           "lng": 21.1253125
@@ -726,9 +670,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/automekanik--leoni-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/automekanik--leoni-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -737,9 +679,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/automekanik-muja-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/automekanik-muja-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -786,9 +726,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/autoservis-bekteshi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-bekteshi-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -797,9 +735,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/autoservis-difa-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-difa-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -808,9 +744,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/autoservis-irfi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-irfi-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -819,9 +753,7 @@
       "city": "Prishtina",
       "assessment": "published",
       "resultingStatus": "published",
-      "sourceUrls": [
-        "https://www.cybo.com/XK/pristina/car-repair/?p=4"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK/pristina/car-repair/?p=4"],
       "reason": "Independent contact and passenger-car repair source plus exactly one strict Google identity match.",
       "googleIdentity": {
         "placeId": "ChIJ-ROy75SfVBMR7yDOPsnQ-IQ",
@@ -838,9 +770,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/autoservis-naser-minushi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-naser-minushi-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -868,9 +798,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/axha-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/axha-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -879,9 +807,7 @@
       "city": "Klinë",
       "assessment": "excluded",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://benita-ks.com/"
-      ],
+      "sourceUrls": ["https://benita-ks.com/"],
       "reason": "Tankstelle mit ausdrücklich beworbenem Schwerfahrzeug-Service. Der allgemeine Express-Service belegt keinen konkreten Pkw-Werkstattumfang."
     },
     {
@@ -890,9 +816,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/bmw-prishtina-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/bmw-prishtina-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -901,9 +825,7 @@
       "city": "Ferizaj",
       "assessment": "published",
       "resultingStatus": "published",
-      "sourceUrls": [
-        "https://www.facebook.com/bmwferizaj"
-      ],
+      "sourceUrls": ["https://www.facebook.com/bmwferizaj"],
       "reason": "Current business-authored contact and exact location resolve the earlier stale-directory conflict; same historical Google identity is preserved.",
       "googleIdentity": {
         "placeId": "ChIJb6GZpCd_VBMRi_bRC-yoNhI",
@@ -916,9 +838,7 @@
       "locationCorrection": {
         "previousAddress": "95R6+P8J, Driton Islami, Talinoc i Jerlive 70000",
         "currentAddress": "Brahim Ademi, Ferizaj, Kosovo",
-        "coordinateSourceUrls": [
-          "https://www.facebook.com/bmwferizaj"
-        ],
+        "coordinateSourceUrls": ["https://www.facebook.com/bmwferizaj"],
         "coordinates": {
           "lat": 42.376429900845,
           "lng": 21.136988
@@ -970,9 +890,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/fiat-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/fiat-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -981,9 +899,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/firi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/firi-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -992,9 +908,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/g--b-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/g--b-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -1003,9 +917,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/ibra-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/ibra-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -1026,9 +938,7 @@
       "city": "Prishtina",
       "assessment": "published",
       "resultingStatus": "published",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/koli-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/koli-1"],
       "reason": "Independent contact and passenger-car repair source plus exactly one strict Google identity match.",
       "googleIdentity": {
         "placeId": "ChIJzbQZKx2fVBMRt0kf7QWjCF4",
@@ -1065,9 +975,7 @@
       "city": "Gjilan",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/moto-stanki-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/moto-stanki-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -1076,9 +984,7 @@
       "city": "Prizren",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/nero_2Z"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/nero_2Z"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -1107,9 +1013,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/opel-prishtina-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/opel-prishtina-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -1130,9 +1034,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-beda-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-beda-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -1141,9 +1043,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/prishtina-auto-home-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/prishtina-auto-home-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -1152,9 +1052,7 @@
       "city": "Graçanicë",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/renaultcentermuciqi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/renaultcentermuciqi-1"],
       "reason": "Candidates remain inconsistent with the stored name or location; no unique corroborated identity."
     },
     {
@@ -1163,9 +1061,7 @@
       "city": "Prizren",
       "assessment": "published",
       "resultingStatus": "published",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/rex-automobile"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/rex-automobile"],
       "reason": "Independent contact and passenger-car repair source plus exactly one strict Google identity match.",
       "googleIdentity": {
         "placeId": "ChIJCyVBgsGWUxMRQ11i9tCO8q4",
@@ -1193,9 +1089,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/skifti-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/skifti-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -1204,9 +1098,7 @@
       "city": "Ferizaj",
       "assessment": "excluded",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://www.cybo.com/XK/ferizaj/car-repair"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK/ferizaj/car-repair"],
       "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis."
     },
     {
@@ -1215,9 +1107,7 @@
       "city": "Prishtina",
       "assessment": "excluded",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://www.cybo.com/XK/pristina/car-repair"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK/pristina/car-repair"],
       "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis."
     },
     {
@@ -1245,9 +1135,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/turbo-klinika-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/turbo-klinika-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -1256,9 +1144,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/univerzall-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/univerzall-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     },
     {
@@ -1267,9 +1153,7 @@
       "city": "Prishtina",
       "assessment": "needs_identity",
       "resultingStatus": "draft",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/xhema-auto-servis-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/xhema-auto-servis-1"],
       "reason": "No unique candidate with matching independently sourced contact, characteristic name and locality; retained for individual contact/location review."
     }
   ]

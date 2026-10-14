@@ -70,9 +70,7 @@
         "snapshot": null,
         "verification": {
           "method": "phone_and_location",
-          "sourceUrls": [
-            "https://www.facebook.com/autoservicetuli/"
-          ],
+          "sourceUrls": ["https://www.facebook.com/autoservicetuli/"],
           "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle; Maps nennt keine vergleichbare Straße. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
         }
       }
@@ -86,9 +84,7 @@
       "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa); nicht vom Betrieb bestätigt",
       "whatsapp": "",
       "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
+      "services": ["Inspektion & Wartung"],
       "serviceDetails": [
         "Fahrzeugwartung und Reparatur laut öffentlichem Verzeichniseintrag; konkrete Arbeiten bitte direkt bestätigen."
       ],
@@ -113,9 +109,7 @@
         "snapshot": null,
         "verification": {
           "method": "phone_and_location",
-          "sourceUrls": [
-            "https://gjirafa.biz/autoservicevali-1"
-          ],
+          "sourceUrls": ["https://gjirafa.biz/autoservicevali-1"],
           "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
         }
       }
@@ -129,9 +123,7 @@
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
       "whatsapp": "",
       "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
+      "services": ["Inspektion & Wartung"],
       "serviceDetails": [
         "Kfz-Service laut eigener öffentlicher Betriebsseite; konkrete Reparaturarten bitte direkt bestätigen."
       ],
@@ -156,9 +148,7 @@
         "snapshot": null,
         "verification": {
           "method": "phone_and_location",
-          "sourceUrls": [
-            "https://www.facebook.com/autoservisbesimi/"
-          ],
+          "sourceUrls": ["https://www.facebook.com/autoservisbesimi/"],
           "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
         }
       }
@@ -172,9 +162,7 @@
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
       "whatsapp": "",
       "brands": [],
-      "services": [
-        "Inspektion & Wartung"
-      ],
+      "services": ["Inspektion & Wartung"],
       "serviceDetails": [
         "Kfz-Service laut eigener öffentlicher Betriebsseite; konkrete Reparaturarten bitte direkt bestätigen."
       ],
@@ -199,9 +187,7 @@
         "snapshot": null,
         "verification": {
           "method": "phone_and_location",
-          "sourceUrls": [
-            "https://www.facebook.com/100092324168737/"
-          ],
+          "sourceUrls": ["https://www.facebook.com/100092324168737/"],
           "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle; Maps nennt keine vergleichbare Straße. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
         }
       }
@@ -215,9 +201,7 @@
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
       "whatsapp": "",
       "brands": [],
-      "services": [
-        "Karosserie & Lack"
-      ],
+      "services": ["Karosserie & Lack"],
       "serviceDetails": [
         "Fahrzeugaufbereitung und Innenraum-Detailing",
         "Aufbereitung von Scheinwerfern"
@@ -263,25 +247,10 @@
       }
     }
   ],
-  "municipalitiesInvestigated": [
-    "Istog",
-    "Klinë",
-    "Rahovec",
-    "Deçan"
-  ],
-  "plannedFocusMunicipalities": [
-    "Istog",
-    "Klinë",
-    "Rahovec",
-    "Deçan"
-  ],
+  "municipalitiesInvestigated": ["Istog", "Klinë", "Rahovec", "Deçan"],
+  "plannedFocusMunicipalities": ["Istog", "Klinë", "Rahovec", "Deçan"],
   "coverage": {
-    "focusMunicipalities": [
-      "Istog",
-      "Klinë",
-      "Rahovec",
-      "Deçan"
-    ],
+    "focusMunicipalities": ["Istog", "Klinë", "Rahovec", "Deçan"],
     "historicalDeferredQueueEntries": 82,
     "backlogCountsAreNewResearch": false,
     "fullyVerifiedToday": 5,
@@ -320,9 +289,7 @@
     },
     {
       "name": "Auto servis BEKA",
-      "aliases": [
-        "Auto servis Beka"
-      ],
+      "aliases": ["Auto servis Beka"],
       "sourceUrls": [],
       "priorEvidence": [
         {
@@ -403,12 +370,8 @@
     },
     {
       "name": "BEXHI",
-      "aliases": [
-        "Auto Servis & Pjesë BEXHI"
-      ],
-      "sourceUrls": [
-        "https://autoservispjesbexhi.com/"
-      ],
+      "aliases": ["Auto Servis & Pjesë BEXHI"],
+      "sourceUrls": ["https://autoservispjesbexhi.com/"],
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
@@ -929,9 +892,7 @@
     {
       "name": "Auto Servis Idrizi",
       "aliases": [],
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-idrizi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-idrizi-1"],
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-11-daily.json#notImported",
@@ -1155,12 +1116,8 @@
     },
     {
       "name": "Auto Servis Isa",
-      "aliases": [
-        "Auto Servis Isa Skenderaj"
-      ],
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-isa-2"
-      ],
+      "aliases": ["Auto Servis Isa Skenderaj"],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-isa-2"],
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-11-daily.json#notImported",
@@ -1304,9 +1261,7 @@
     {
       "name": "Auto servis llaker LATI TUNING",
       "aliases": [],
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/lati--tunning-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/lati--tunning-1"],
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-12-daily.json#uncertainties",
@@ -1440,9 +1395,7 @@
     {
       "name": "Auto Servis Xeni",
       "aliases": [],
-      "sourceUrls": [
-        "https://www.cybo.com/XK/mali%C5%A1evo/car-repair/"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK/mali%C5%A1evo/car-repair/"],
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-13-daily.json#uncertainties",
@@ -1556,9 +1509,7 @@
     {
       "name": "Auto Servis TONI",
       "aliases": [],
-      "sourceUrls": [
-        "https://mapcarta.com/N4864543421"
-      ],
+      "sourceUrls": ["https://mapcarta.com/N4864543421"],
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-13-daily.json#uncertainties",
@@ -1584,9 +1535,7 @@
     {
       "name": "Auto Servis Vëllezërit Luta",
       "aliases": [],
-      "sourceUrls": [
-        "https://sk.cybo.com/XK/ka%C4%8Danik/autoservis"
-      ],
+      "sourceUrls": ["https://sk.cybo.com/XK/ka%C4%8Danik/autoservis"],
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-13-daily.json#uncertainties",
@@ -1612,9 +1561,7 @@
     {
       "name": "Auto Servis Luli",
       "aliases": [],
-      "sourceUrls": [
-        "https://www.cybo.com/XK/bostane/car-repair"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK/bostane/car-repair"],
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-13-daily.json#uncertainties",
@@ -1640,9 +1587,7 @@
     {
       "name": "Auto Basha",
       "aliases": [],
-      "sourceUrls": [
-        "https://www.cybo.com/XK/kamenica-kosovo/car-repair/"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK/kamenica-kosovo/car-repair/"],
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-13-daily.json#uncertainties",
@@ -1667,9 +1612,7 @@
     },
     {
       "name": "Auto Elektrika Bosch",
-      "aliases": [
-        "Auto Elektrika Bosch Lipjan"
-      ],
+      "aliases": ["Auto Elektrika Bosch Lipjan"],
       "sourceUrls": [
         "https://hr.cybo.com/XK/lipljan/auto-servisi/",
         "https://www.gjithebiznesi.com/XK/auto-elektrika-bosch-044-100-220"
@@ -1699,9 +1642,7 @@
     {
       "name": "Albo Auto",
       "aliases": [],
-      "sourceUrls": [
-        "https://hr.cybo.com/XK/lipljan/auto-servisi/"
-      ],
+      "sourceUrls": ["https://hr.cybo.com/XK/lipljan/auto-servisi/"],
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
@@ -1723,9 +1664,7 @@
     {
       "name": "Mekanik Gzimi",
       "aliases": [],
-      "sourceUrls": [
-        "https://hr.cybo.com/XK/lipljan/auto-servisi/"
-      ],
+      "sourceUrls": ["https://hr.cybo.com/XK/lipljan/auto-servisi/"],
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
@@ -1747,9 +1686,7 @@
     {
       "name": "Paco Car Diagnosis",
       "aliases": [],
-      "sourceUrls": [
-        "https://hr.cybo.com/XK/lipljan/auto-servisi/"
-      ],
+      "sourceUrls": ["https://hr.cybo.com/XK/lipljan/auto-servisi/"],
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
@@ -1771,9 +1708,7 @@
     {
       "name": "Auto Ardi Lipjan",
       "aliases": [],
-      "sourceUrls": [
-        "https://hr.cybo.com/XK/lipljan/auto-servisi/"
-      ],
+      "sourceUrls": ["https://hr.cybo.com/XK/lipljan/auto-servisi/"],
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
@@ -1795,9 +1730,7 @@
     {
       "name": "Auto Gazi Lipjan",
       "aliases": [],
-      "sourceUrls": [
-        "https://hr.cybo.com/XK/lipljan/auto-servisi/"
-      ],
+      "sourceUrls": ["https://hr.cybo.com/XK/lipljan/auto-servisi/"],
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
@@ -1819,9 +1752,7 @@
     {
       "name": "Extra Washen 24h",
       "aliases": [],
-      "sourceUrls": [
-        "https://hr.cybo.com/XK/lipljan/auto-servisi/"
-      ],
+      "sourceUrls": ["https://hr.cybo.com/XK/lipljan/auto-servisi/"],
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
@@ -1843,9 +1774,7 @@
     {
       "name": "Crystal Wash",
       "aliases": [],
-      "sourceUrls": [
-        "https://hr.cybo.com/XK/lipljan/auto-servisi/"
-      ],
+      "sourceUrls": ["https://hr.cybo.com/XK/lipljan/auto-servisi/"],
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
@@ -1971,9 +1900,7 @@
     },
     {
       "name": "Servis Tali",
-      "aliases": [
-        "Servis Tali Komoran"
-      ],
+      "aliases": ["Servis Tali Komoran"],
       "sourceUrls": [
         "https://faqet-e-verdha.cybo.com/XK/drenasi/automobilistik"
       ],
@@ -2194,9 +2121,7 @@
     {
       "name": "Auto Servis MUSLIMI",
       "aliases": [],
-      "sourceUrls": [
-        "https://www.cybo.com/XK/skenderaj/car-repair"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK/skenderaj/car-repair"],
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
@@ -2218,9 +2143,7 @@
     {
       "name": "Auto Servis Gashi Vushtrri",
       "aliases": [],
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/autoservisgashi-1/"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/autoservisgashi-1/"],
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-13-daily.json#supplemental.deferred",
@@ -2338,9 +2261,7 @@
     {
       "name": "Auto Servis Genci",
       "aliases": [],
-      "sourceUrls": [
-        "https://asgenci.com/our-shop/"
-      ],
+      "sourceUrls": ["https://asgenci.com/our-shop/"],
       "priorEvidence": [
         {
           "origin": "data/research-daily-import-2026-10-10.md",
@@ -2385,9 +2306,7 @@
     },
     {
       "name": "Auto Servis & Pjesë Diti-B",
-      "sourceUrls": [
-        "https://www.facebook.com/100069473054785/about/"
-      ],
+      "sourceUrls": ["https://www.facebook.com/100069473054785/about/"],
       "status": "deferred",
       "reason": "Own page names Istog street; Maps entry with exact phone has conflicting distant business locality; current precise business location unresolved. No Place ID accepted.",
       "publicBusinessEmail": {
@@ -2716,11 +2635,7 @@
   "translationCheck": {
     "status": "passed",
     "contract": "await workshopTranslationSourceHash from lib/workshop-translations.ts",
-    "locales": [
-      "de",
-      "sq",
-      "en"
-    ],
+    "locales": ["de", "sq", "en"],
     "catalogueCheck": "177 published, 177 unique Place IDs, 117 researched emails"
   },
   "validation": {
@@ -2891,16 +2806,12 @@
       {
         "name": "Auto Servis bekimi Kline",
         "reason": "Own page supports car repairs but no unique matching public Maps identity; results are other towns or businesses.",
-        "checkedUrls": [
-          "https://www.facebook.com/100054480129061/"
-        ]
+        "checkedUrls": ["https://www.facebook.com/100054480129061/"]
       },
       {
         "name": "Auto Service Cena",
         "reason": "Own current service/name/phone/address and Instagram business email are proven; active Maps ID lacks Google telephone, so strict phone identity check is incomplete.",
-        "checkedUrls": [
-          "https://www.facebook.com/61556403245313/"
-        ],
+        "checkedUrls": ["https://www.facebook.com/61556403245313/"],
         "publicBusinessEmail": {
           "address": "sevice.cena@gmail.com",
           "status": "found",
@@ -2924,9 +2835,7 @@
       {
         "name": "Autoservis Universal NIKI Deçan",
         "reason": "Own current passenger-car maintenance/diagnosis and phone proven; direct active Maps ID lacks phone so strict identity check incomplete.",
-        "checkedUrls": [
-          "https://www.facebook.com/AUTOSERVIS.NIKI.DECAN/"
-        ],
+        "checkedUrls": ["https://www.facebook.com/AUTOSERVIS.NIKI.DECAN/"],
         "publicBusinessEmail": {
           "address": null,
           "status": "not-found-in-checked-sources"
@@ -2935,9 +2844,7 @@
       {
         "name": "Auto Pjesë & Servis ARDI Deçan",
         "reason": "Own page phone/email/town proven; parts shop category, no individually completed Maps or precise passenger-car service verification yet.",
-        "checkedUrls": [
-          "https://www.facebook.com/100063472716616/"
-        ],
+        "checkedUrls": ["https://www.facebook.com/100063472716616/"],
         "publicBusinessEmail": {
           "address": "xh.mehaj@gmail.com",
           "status": "found",
@@ -2955,16 +2862,12 @@
       {
         "name": "Pika Detailing",
         "reason": "Own detailing/polishing and phone confirmed on Instagram, but Maps search returns other identities and no matching active ID; no public email in checked bio.",
-        "checkedUrls": [
-          "https://www.instagram.com/pikadetailing1/"
-        ]
+        "checkedUrls": ["https://www.instagram.com/pikadetailing1/"]
       },
       {
         "name": "Auto polir Kastrati Rahovec",
         "reason": "Own polishing/phone/email confirmed; exact Maps search returns other identities so no matching active Place ID.",
-        "checkedUrls": [
-          "https://www.facebook.com/salihpolir/"
-        ],
+        "checkedUrls": ["https://www.facebook.com/salihpolir/"],
         "publicBusinessEmail": {
           "address": "skastrati222@gmail.com",
           "status": "found",
@@ -2974,9 +2877,7 @@
       {
         "name": "Auto servis DONI Malishevë",
         "reason": "Historical backlog rechecked: own page current parts sale/contact in Malishevë, but directory Rahovec conflict and precise passenger-car service/Maps identity unresolved.",
-        "checkedUrls": [
-          "https://www.facebook.com/autoservispjes.doni/"
-        ],
+        "checkedUrls": ["https://www.facebook.com/autoservispjes.doni/"],
         "publicBusinessEmail": {
           "address": null,
           "status": "unresolved"
@@ -2984,9 +2885,7 @@
       },
       {
         "name": "Auto Servis & Pjesë Diti-B",
-        "sourceUrls": [
-          "https://www.facebook.com/100069473054785/about/"
-        ],
+        "sourceUrls": ["https://www.facebook.com/100069473054785/about/"],
         "status": "deferred",
         "reason": "Own page names Istog street; Maps entry with exact phone has conflicting distant business locality; current precise business location unresolved. No Place ID accepted.",
         "publicBusinessEmail": {
@@ -3002,9 +2901,7 @@
         }
       }
     ],
-    "duplicateIds": [
-      "auto-servis-bledi-kline"
-    ],
+    "duplicateIds": ["auto-servis-bledi-kline"],
     "countIsPublication": false
   },
   "initialScheduledAttempt": {

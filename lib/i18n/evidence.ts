@@ -1,3 +1,5 @@
-import type {Locale} from "./locale";
+import type { Locale } from "./locale";
 
-export function evidenceHref(id:string,locale:Locale){return `/api/evidence/${encodeURIComponent(id)}?locale=${locale}`;}
+export function evidenceHref(id: string, locale: Locale) {
+  return `/api/evidence/${encodeURIComponent(id)}?locale=${locale}`;
+}

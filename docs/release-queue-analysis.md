@@ -8,12 +8,12 @@ hier keine belastbare Aufteilung nach diesen Ursachen.
 
 ## Historische Läufe und Wiederholung
 
-| Lauf / Versuch | Wartezeit vor Prüfjob | Aktiver Prüfjob | Folgeschritte |
-| --- | ---: | ---: | --- |
-| [Release 37365785961, Versuch 1](https://github.com/ramiz4/riparim/actions/runs/37365785961/attempts/1) | 320 s | 147 s | Release 37 s; Deploy nach 902 s abgebrochen |
-| [derselbe Release, Versuch 2](https://github.com/ramiz4/riparim/actions/runs/37365785961/attempts/2) | 241 s | 285 s | Release 32 s; Deploy übersprungen |
-| [PR-CI 37364195930](https://github.com/ramiz4/riparim/actions/runs/37364195930) | 308 s | 304 s | kein Produktionsjob |
-| [Titelprüfung 37365493954](https://github.com/ramiz4/riparim/actions/runs/37365493954) | 329 s | 31 s | kein Produktionsjob |
+| Lauf / Versuch                                                                                          | Wartezeit vor Prüfjob | Aktiver Prüfjob | Folgeschritte                               |
+| ------------------------------------------------------------------------------------------------------- | --------------------: | --------------: | ------------------------------------------- |
+| [Release 37365785961, Versuch 1](https://github.com/ramiz4/riparim/actions/runs/37365785961/attempts/1) |                 320 s |           147 s | Release 37 s; Deploy nach 902 s abgebrochen |
+| [derselbe Release, Versuch 2](https://github.com/ramiz4/riparim/actions/runs/37365785961/attempts/2)    |                 241 s |           285 s | Release 32 s; Deploy übersprungen           |
+| [PR-CI 37364195930](https://github.com/ramiz4/riparim/actions/runs/37364195930)                         |                 308 s |           304 s | kein Produktionsjob                         |
+| [Titelprüfung 37365493954](https://github.com/ramiz4/riparim/actions/runs/37365493954)                  |                 329 s |            31 s | kein Produktionsjob                         |
 
 Versuch 1 wurde am 05.10. um 19:48:37 erstellt. Versuch 2 begann erst um
 21:57:23; sein Prüfjob lief 22:01:24–22:06:09. Die Differenz zwischen ursprünglicher
@@ -31,13 +31,13 @@ Nachweis für sicher vermeidbare Arbeit eines unveröffentlichten alten Commits.
 
 ## Aktuelle Main-Läufe
 
-| Main-Lauf | Erstellung bis Prüfjobstart | Aktiver Prüfjob | Prüfende bis Release-Start | Release-Ende bis Deploy-Start |
-| --- | ---: | ---: | ---: | ---: |
-| [352be3a, vor Issue 90](https://github.com/ramiz4/riparim/actions/runs/38094220885) | 2 s | 444 s | 2 s | Deploy übersprungen: Docs |
-| [b88b2df, nach Issue 90](https://github.com/ramiz4/riparim/actions/runs/38094733816) | 3 s | 242 s | 2 s | 4 s |
-| [2b857d0, weitere Katalogänderung](https://github.com/ramiz4/riparim/actions/runs/38095275181) | 2 s | 242 s | 2 s | 3 s |
-| [93a6937, nach Issue 91](https://github.com/ramiz4/riparim/actions/runs/38096765160) | 2 s | 203 s | 2 s | 4 s |
-| [85c33b0, nach Issue 92](https://github.com/ramiz4/riparim/actions/runs/38097639289) | 2 s | 188 s | 3 s | 3 s |
+| Main-Lauf                                                                                      | Erstellung bis Prüfjobstart | Aktiver Prüfjob | Prüfende bis Release-Start | Release-Ende bis Deploy-Start |
+| ---------------------------------------------------------------------------------------------- | --------------------------: | --------------: | -------------------------: | ----------------------------: |
+| [352be3a, vor Issue 90](https://github.com/ramiz4/riparim/actions/runs/38094220885)            |                         2 s |           444 s |                        2 s |     Deploy übersprungen: Docs |
+| [b88b2df, nach Issue 90](https://github.com/ramiz4/riparim/actions/runs/38094733816)           |                         3 s |           242 s |                        2 s |                           4 s |
+| [2b857d0, weitere Katalogänderung](https://github.com/ramiz4/riparim/actions/runs/38095275181) |                         2 s |           242 s |                        2 s |                           3 s |
+| [93a6937, nach Issue 91](https://github.com/ramiz4/riparim/actions/runs/38096765160)           |                         2 s |           203 s |                        2 s |                           4 s |
+| [85c33b0, nach Issue 92](https://github.com/ramiz4/riparim/actions/runs/38097639289)           |                         2 s |           188 s |                        3 s |                           3 s |
 
 Diese unterschiedlichen Commits zeigen die tatsächlichen Laufzeiten des
 Gesamtprozesses; sie ersetzen keinen kontrollierten Vergleich einzelner

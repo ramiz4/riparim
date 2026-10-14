@@ -15,13 +15,13 @@ Sites-Apex-A-Einträge und des www-CNAME sowie die zusätzliche CI-Berechtigung
 
 Alle folgenden Ortszeiten gelten für Europe/Belgrade (UTC+02:00).
 
-| Vorgang | Tatsächlicher Zustand |
-| --- | --- |
-| Erster angekündigter Wechselversuch | 5. Oktober 00:50–01:05; No-Go wegen kollidierender DNS-Einträge und noch ausstehender konkreter Ersatzfreigabe |
-| Quelle nach No-Go wieder verfügbar | 01:03:38; keine Domain-/DNS-Änderung und kein Daten-Delta angewendet |
-| Zweites angekündigtes Fenster | 5. Oktober 04:45–05:00 |
-| Quelle tatsächlich eingefroren | 04:46:21 |
-| Neues Ziel als alleiniger Writer geöffnet | 04:57:35; öffentliche Wartung damit beendet |
+| Vorgang                                   | Tatsächlicher Zustand                                                                                          |
+| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Erster angekündigter Wechselversuch       | 5. Oktober 00:50–01:05; No-Go wegen kollidierender DNS-Einträge und noch ausstehender konkreter Ersatzfreigabe |
+| Quelle nach No-Go wieder verfügbar        | 01:03:38; keine Domain-/DNS-Änderung und kein Daten-Delta angewendet                                           |
+| Zweites angekündigtes Fenster             | 5. Oktober 04:45–05:00                                                                                         |
+| Quelle tatsächlich eingefroren            | 04:46:21                                                                                                       |
+| Neues Ziel als alleiniger Writer geöffnet | 04:57:35; öffentliche Wartung damit beendet                                                                    |
 
 Die Vorbereitungen und nachfolgenden Codekorrekturen erfolgten bei verfügbarer
 Website. Es wurde keine weitere Wartungspause für die Abnahmefixes benötigt.
@@ -43,14 +43,14 @@ unabhängig belegbar abgelaufene Zeilen für den Vergleich; er stellt keine alte
 Zähler wieder her und löscht keine aktiven Limits. Alle übrigen Tabellen und
 Spalten stimmten exakt überein. IP-Identität ist mit diesem Beleg nicht bewiesen.
 
-| Geschützter Nachweis | Kennung / SHA-256 |
-| --- | --- |
-| Finaler Delta-Bericht | `8aaaf863-ab64-462e-b49c-341815beedd1` |
-| Source-Sicherung | `domain-source-e3eeddf6-86e7-434e-9eaf-0cd972a976eb` |
-| Ziel vor Abgleich | `domain-target-527a4b08-41f2-4272-93b0-03ef1b2be587` |
-| Ziel nach Abgleich | `domain-target-complete-90fbf0c5-d896-4be1-8c7d-2a975fdf1c6e` |
+| Geschützter Nachweis                              | Kennung / SHA-256                                                  |
+| ------------------------------------------------- | ------------------------------------------------------------------ |
+| Finaler Delta-Bericht                             | `8aaaf863-ab64-462e-b49c-341815beedd1`                             |
+| Source-Sicherung                                  | `domain-source-e3eeddf6-86e7-434e-9eaf-0cd972a976eb`               |
+| Ziel vor Abgleich                                 | `domain-target-527a4b08-41f2-4272-93b0-03ef1b2be587`               |
+| Ziel nach Abgleich                                | `domain-target-complete-90fbf0c5-d896-4be1-8c7d-2a975fdf1c6e`      |
 | Vollständiger Ziel-Fingerprint vor Wiederaufnahme | `5ae859d9af4a45ed83fe3a6e6123d7848b9742a6a0a8fc32926a16df58ac9922` |
-| Begrenzter Ablaufbeleg | `1fcf2a2537f45b7d68a4c821bca26a59c2ae44fb2f4f694568e3db5dd190ebb4` |
+| Begrenzter Ablaufbeleg                            | `1fcf2a2537f45b7d68a4c821bca26a59c2ae44fb2f4f694568e3db5dd190ebb4` |
 
 Diese Sicherungen, private Konfiguration und Testjournale liegen geschützt
 außerhalb von Git. Die vollständige Wiederherstellung wurde lokal geprüft.
@@ -72,14 +72,14 @@ Verifikationseinträge blieben erhalten. Apex und www sind aktivierte Custom
 Domains des Workers `riparim`, ohne Preview. TLS ist aktiv, HTTP wird auf HTTPS
 umgeleitet und www erhält Pfad und Query bei der Weiterleitung auf den Apex.
 
-| Ressource | Produktives Ziel |
-| --- | --- |
-| Cloudflare-Account | `ec181b3a61c7c3da13910600953fc3ea` |
-| Origin | `https://riparim.com` |
-| D1 | `riparim-production`, `b395ea3a-5316-4b0b-bdee-533bdb68d6a0` |
-| R2 | `riparim-evidence-production`, privat; kein r2.dev / keine Dateidomain |
-| Scheduled-Handler | `*/5 * * * *` |
-| Technischer Workerhost | gleicher Code und gleicher Zielbestand, keine zweite Datenquelle |
+| Ressource              | Produktives Ziel                                                       |
+| ---------------------- | ---------------------------------------------------------------------- |
+| Cloudflare-Account     | `ec181b3a61c7c3da13910600953fc3ea`                                     |
+| Origin                 | `https://riparim.com`                                                  |
+| D1                     | `riparim-production`, `b395ea3a-5316-4b0b-bdee-533bdb68d6a0`           |
+| R2                     | `riparim-evidence-production`, privat; kein r2.dev / keine Dateidomain |
+| Scheduled-Handler      | `*/5 * * * *`                                                          |
+| Technischer Workerhost | gleicher Code und gleicher Zielbestand, keine zweite Datenquelle       |
 
 Das bestehende Supabase-Projekt und sein Identitätsnamensraum bleiben erhalten.
 Projektadresse, öffentliche Auth-Konfiguration und aktivierter Zustand wurden
@@ -90,11 +90,11 @@ Supabase-Verwaltungszugang, beide Google-Schlüssel und Resend-Werte wurden als
 geschützte Laufzeitwerte übernommen. Der Deployment-Token ist kein Worker-Secret.
 Echte Google-Verwaltung und produktive Anmeldung bestätigen die Übernahme.
 
-| Geprüfter Main-Release | Commit | Archiv-SHA-256 | Automatischer Lauf |
-| --- | --- | --- | --- |
-| v1.2.6, Vorbereitung | `130d5d4db6f0cfe6d874f1112bd362200973f6b6` | `91a5388e883f4a5cd30727c038f7605836d73b675efc9fdd0ec9ddcb0eb3fc7c` | [37239579311](https://github.com/ramiz4/riparim/actions/runs/37239579311) |
-| v1.2.7, dauerhaftes Routing | `2934a3fb70d4ca384aa9f75e0773a8a8be9e6597` | `96002104ce24969b5db063fff70b4a1b062cfe7c82be2abd996d3454b92afc21` | [37257149551](https://github.com/ramiz4/riparim/actions/runs/37257149551) |
-| v1.2.8, Callback-Datenschutz | `527d37d83c4d88dcb4100556941ce0207dc25763` | `cfe56aa950b331b07107ebd0f6e46aca4929c9a1086abe8da9d0b01e874087e9` | [37259289616](https://github.com/ramiz4/riparim/actions/runs/37259289616) |
+| Geprüfter Main-Release        | Commit                                     | Archiv-SHA-256                                                     | Automatischer Lauf                                                        |
+| ----------------------------- | ------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| v1.2.6, Vorbereitung          | `130d5d4db6f0cfe6d874f1112bd362200973f6b6` | `91a5388e883f4a5cd30727c038f7605836d73b675efc9fdd0ec9ddcb0eb3fc7c` | [37239579311](https://github.com/ramiz4/riparim/actions/runs/37239579311) |
+| v1.2.7, dauerhaftes Routing   | `2934a3fb70d4ca384aa9f75e0773a8a8be9e6597` | `96002104ce24969b5db063fff70b4a1b062cfe7c82be2abd996d3454b92afc21` | [37257149551](https://github.com/ramiz4/riparim/actions/runs/37257149551) |
+| v1.2.8, Callback-Datenschutz  | `527d37d83c4d88dcb4100556941ce0207dc25763` | `cfe56aa950b331b07107ebd0f6e46aca4929c9a1086abe8da9d0b01e874087e9` | [37259289616](https://github.com/ramiz4/riparim/actions/runs/37259289616) |
 | v1.2.9, exakte Eigentumsdatei | `53ae6ce7a896e779b75e5f249d25b7993c8c12d4` | `f3bd2b57c03e7f42c192bbdde92f4d0ebb17b6ee3a7984bfd30b83a2093a1353` | [37260211387](https://github.com/ramiz4/riparim/actions/runs/37260211387) |
 
 Nach dem kontrollierten Domainwechsel veröffentlichte bereits v1.2.7 automatisch
@@ -201,8 +201,7 @@ dieses Domainwechsel-Issues. Die weitere Betriebsbeobachtung kann fortgeführt
 werden, ohne die abgeschlossene technische Umstellung erneut zu öffnen.
 
 **Zum Zeitpunkt dieser Betreiberabnahme war das vereinbarte Ende der
-gesonderten Rückfallphase für #20 noch offen.** Der frühere Vorschlag
-6. Oktober, 05:00 Uhr war nicht bestätigt. Eine persönliche Nutzerabnahme
+gesonderten Rückfallphase für #20 noch offen.** Der frühere Vorschlag 6. Oktober, 05:00 Uhr war nicht bestätigt. Eine persönliche Nutzerabnahme
 wird nicht als erteilt behauptet. Die technische Betreiberabnahme
 aus #19 ersetzt weder diese Vereinbarung noch eine Freigabe zur endgültigen
 Löschung. Alte Veröffentlichung, Domainzuordnungen, Zugänge und Sicherungen

@@ -28,7 +28,7 @@ Die unabhängige Probe bündelte das Routingmodul mit zwei Releaseprofilen und
 zweiten, unveränderten Profils ergab tatsächlich:
 
 ```json
-{"untouchedProfileStaticResponse":null,"assetFetches":0}
+{ "untouchedProfileStaticResponse": null, "assetFetches": 0 }
 ```
 
 Die [Einrichtungsdokumentation](daily-workshop-import.md#vorprüfung-und-kostenfreier-betrieb)
@@ -58,7 +58,7 @@ zuerst mit `reviews=[]`, danach mit einer neuen freigegebenen Bewertung in den
 Props rendern. Tatsächliches Ergebnis:
 
 ```json
-{"updatedReviewPresent":false,"emptyReviewMessagePresent":true}
+{ "updatedReviewPresent": false, "emptyReviewMessagePresent": true }
 ```
 
 Damit bleiben Bewertungen und Fehler vom ersten Render sichtbar, obwohl neue
@@ -138,7 +138,13 @@ Die ursprünglichen P1-/P2-Befunde sind im korrigierten Stand behoben. Eine
 erneute unabhängige Routingprobe bestätigt die neuen Entscheidungen:
 
 ```json
-{"assetPaths":["/__public/de/werkstatt/untouched-profile.html","/__public/de/werkstatt/first-profile-shell.html","/__public/de/werkstaetten-shell.html"]}
+{
+  "assetPaths": [
+    "/__public/de/werkstatt/untouched-profile.html",
+    "/__public/de/werkstatt/first-profile-shell.html",
+    "/__public/de/werkstaetten-shell.html"
+  ]
+}
 ```
 
 Das unveränderte Einzelprofil bleibt somit statisch, auch wenn ein anderes

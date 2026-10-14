@@ -1,13 +1,159 @@
-import type {OpeningHours} from "./opening-hours";
-export const services = ["Alle Leistungen", "Inspektion & Wartung", "Diagnose & Elektronik", "Bremsen & Fahrwerk", "Motor & Getriebe", "Karosserie & Lack", "Reifen & Klima"];
-export const cities = ["Ganz Kosovo", "Prishtina", "Prizren", "Peja", "Gjakova", "Ferizaj", "Mitrovica", "Fushë Kosovë", "Graçanicë", "Klinë", "Viti", "Gjilan", "Deçan", "Istog", "Skenderaj", "Obiliq"];
-export const brands = ["Alle Marken","Volkswagen","Audi","SEAT","CUPRA","Volkswagen Nutzfahrzeuge","Volvo","Porsche","BMW","Mercedes-Benz","Škoda","MINI","Opel","Renault","Dacia","Nissan","Toyota","Ford","Peugeot","Citroën","Hyundai","Kia","Fiat","Honda","Suzuki","Isuzu","BYD","Ferrari","Lamborghini","Land Rover","Range Rover"];
-export type Source = {url:string;title:string;kind?:"official"|"directory"};
-export type GoogleRating = {rating:number|null;count:number|null;mapsUrl:string;sourceUrl:string|null;sourceLabel:string|null;checkedAt:string;sourceUpdatedAt:string|null};
-export type Workshop = {emails?:string[];emailContacts?:{address:string;verified:boolean}[];editableEmailContacts?:{address:string;active:boolean;verified:boolean}[];importedOpeningHours?:OpeningHours|null;openingHours?:OpeningHours|null;openingHoursConfirmedAt?:string|null;id:string;name:string;city:string;address:string;phone:string;phoneNote:string;whatsapp:string;brands:string[];services:string[];serviceDetails:string[];languages:string[];rating:number|null;count:number;googleRating?:GoogleRating|null;initials:string;color:string;specialty:string;description:string;lat:number|null;lng:number|null;sources:Source[];checkedAt:string;status:"draft"|"published";updatedAt:string};
+import type { OpeningHours } from "./opening-hours";
+export const services = [
+  "Alle Leistungen",
+  "Inspektion & Wartung",
+  "Diagnose & Elektronik",
+  "Bremsen & Fahrwerk",
+  "Motor & Getriebe",
+  "Karosserie & Lack",
+  "Reifen & Klima",
+];
+export const cities = [
+  "Ganz Kosovo",
+  "Prishtina",
+  "Prizren",
+  "Peja",
+  "Gjakova",
+  "Ferizaj",
+  "Mitrovica",
+  "Fushë Kosovë",
+  "Graçanicë",
+  "Klinë",
+  "Viti",
+  "Gjilan",
+  "Deçan",
+  "Istog",
+  "Skenderaj",
+  "Obiliq",
+];
+export const brands = [
+  "Alle Marken",
+  "Volkswagen",
+  "Audi",
+  "SEAT",
+  "CUPRA",
+  "Volkswagen Nutzfahrzeuge",
+  "Volvo",
+  "Porsche",
+  "BMW",
+  "Mercedes-Benz",
+  "Škoda",
+  "MINI",
+  "Opel",
+  "Renault",
+  "Dacia",
+  "Nissan",
+  "Toyota",
+  "Ford",
+  "Peugeot",
+  "Citroën",
+  "Hyundai",
+  "Kia",
+  "Fiat",
+  "Honda",
+  "Suzuki",
+  "Isuzu",
+  "BYD",
+  "Ferrari",
+  "Lamborghini",
+  "Land Rover",
+  "Range Rover",
+];
+export type Source = {
+  url: string;
+  title: string;
+  kind?: "official" | "directory";
+};
+export type GoogleRating = {
+  rating: number | null;
+  count: number | null;
+  mapsUrl: string;
+  sourceUrl: string | null;
+  sourceLabel: string | null;
+  checkedAt: string;
+  sourceUpdatedAt: string | null;
+};
+export type Workshop = {
+  emails?: string[];
+  emailContacts?: { address: string; verified: boolean }[];
+  editableEmailContacts?: {
+    address: string;
+    active: boolean;
+    verified: boolean;
+  }[];
+  importedOpeningHours?: OpeningHours | null;
+  openingHours?: OpeningHours | null;
+  openingHoursConfirmedAt?: string | null;
+  id: string;
+  name: string;
+  city: string;
+  address: string;
+  phone: string;
+  phoneNote: string;
+  whatsapp: string;
+  brands: string[];
+  services: string[];
+  serviceDetails: string[];
+  languages: string[];
+  rating: number | null;
+  count: number;
+  googleRating?: GoogleRating | null;
+  initials: string;
+  color: string;
+  specialty: string;
+  description: string;
+  lat: number | null;
+  lng: number | null;
+  sources: Source[];
+  checkedAt: string;
+  status: "draft" | "published";
+  updatedAt: string;
+};
 // Skenderaj: GeoNames populated-place feature 785642 (not the municipality).
 // Obiliq: GeoNames populated-place feature 787534, CC BY 4.0,
 // https://sws.geonames.org/787534/about.rdf (not workshop coordinates).
-export const cityCoordinates: Record<string,[number,number]>={Prishtina:[42.6629,21.1655],Prizren:[42.2153,20.7415],Peja:[42.6591,20.2883],Gjakova:[42.3803,20.4308],Ferizaj:[42.3702,21.1483],Mitrovica:[42.8914,20.866],"Fushë Kosovë":[42.663944,21.096111],"Graçanicë":[42.601111,21.195833],"Klinë":[42.621667,20.577778],"Viti":[42.321389,21.358333],"Gjilan":[42.46045,21.46986],"Deçan":[42.54018,20.28793],"Istog":[42.78083,20.4875],Skenderaj:[42.74667,20.78861],Obiliq:[42.68694,21.07028]};
-export function findWorkshops(directory:Workshop[],service:string,city:string,brand="Alle Marken",language="Alle Sprachen"){return directory.filter(w=>(service===services[0]||w.services.includes(service))&&(city===cities[0]||w.city===city)&&(brand==="Alle Marken"||w.brands.includes("Alle Marken")||w.brands.includes(brand)||w.brands.length===0)&&(language==="Alle Sprachen"||w.languages.includes(language)));}
-export function contactHref(w:Workshop,channel:"phone"|"whatsapp",message=""){if(channel==="phone")return w.phone?`tel:${w.phone}`:null;return w.whatsapp?`https://wa.me/${w.whatsapp.replace(/\D/g,"")}?text=${encodeURIComponent(message)}`:null;}
+export const cityCoordinates: Record<string, [number, number]> = {
+  Prishtina: [42.6629, 21.1655],
+  Prizren: [42.2153, 20.7415],
+  Peja: [42.6591, 20.2883],
+  Gjakova: [42.3803, 20.4308],
+  Ferizaj: [42.3702, 21.1483],
+  Mitrovica: [42.8914, 20.866],
+  "Fushë Kosovë": [42.663944, 21.096111],
+  Graçanicë: [42.601111, 21.195833],
+  Klinë: [42.621667, 20.577778],
+  Viti: [42.321389, 21.358333],
+  Gjilan: [42.46045, 21.46986],
+  Deçan: [42.54018, 20.28793],
+  Istog: [42.78083, 20.4875],
+  Skenderaj: [42.74667, 20.78861],
+  Obiliq: [42.68694, 21.07028],
+};
+export function findWorkshops(
+  directory: Workshop[],
+  service: string,
+  city: string,
+  brand = "Alle Marken",
+  language = "Alle Sprachen",
+) {
+  return directory.filter(
+    (w) =>
+      (service === services[0] || w.services.includes(service)) &&
+      (city === cities[0] || w.city === city) &&
+      (brand === "Alle Marken" ||
+        w.brands.includes("Alle Marken") ||
+        w.brands.includes(brand) ||
+        w.brands.length === 0) &&
+      (language === "Alle Sprachen" || w.languages.includes(language)),
+  );
+}
+export function contactHref(
+  w: Workshop,
+  channel: "phone" | "whatsapp",
+  message = "",
+) {
+  if (channel === "phone") return w.phone ? `tel:${w.phone}` : null;
+  return w.whatsapp
+    ? `https://wa.me/${w.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(message)}`
+    : null;
+}

@@ -45,13 +45,13 @@ erfordern keine Rückfrage.
 Wähle die Rolle nach dem Schwerpunkt der Anforderungen und der betroffenen
 Verträge. Labels sind Hinweise; der tatsächliche Arbeitsumfang entscheidet.
 
-| Schwerpunkt | Rolle |
-| --- | --- |
-| Oberfläche, Interaktion, Darstellung, Barrierefreiheit | Principal Frontend Engineer |
-| Infrastruktur, CI/CD, Laufzeitkonfiguration, Deployment | Principal DevOps Engineer |
-| APIs, Geschäftslogik, Datenmodell, serverseitige Autorisierung | Principal Backend Engineer |
+| Schwerpunkt                                                       | Rolle                        |
+| ----------------------------------------------------------------- | ---------------------------- |
+| Oberfläche, Interaktion, Darstellung, Barrierefreiheit            | Principal Frontend Engineer  |
+| Infrastruktur, CI/CD, Laufzeitkonfiguration, Deployment           | Principal DevOps Engineer    |
+| APIs, Geschäftslogik, Datenmodell, serverseitige Autorisierung    | Principal Backend Engineer   |
 | Systementwurf, Modulgrenzen, technische Architekturentscheidungen | Principal Software Architect |
-| Gemischter Umfang ohne klaren Schwerpunkt oder sonstige Aufgaben | Principal Software Engineer |
+| Gemischter Umfang ohne klaren Schwerpunkt oder sonstige Aufgaben  | Principal Software Engineer  |
 
 Starte einen Implementierungs-Subagenten ausdrücklich mit dieser Rolle. Sein
 Auftrag enthält Issue und Abnahmekriterien, absoluten Worktree-Pfad, Aufgabenbranch,

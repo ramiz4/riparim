@@ -28,9 +28,7 @@
       "assessment": "removed",
       "previousStatus": "draft",
       "reason": "Tankstelle mit ausdrücklich beworbenem Schwerfahrzeug-Service. Der allgemeine Express-Service belegt keinen konkreten Pkw-Werkstattumfang.",
-      "sourceUrls": [
-        "https://benita-ks.com/"
-      ]
+      "sourceUrls": ["https://benita-ks.com/"]
     },
     {
       "workshopId": "isuzu-servis-prizren",
@@ -50,9 +48,7 @@
       "assessment": "removed",
       "previousStatus": "draft",
       "reason": "Unabhängiges Verzeichnis markiert den zugeordneten Betrieb als geschlossen und den Kontakt als historisch. Keine bestätigte Wiedereröffnung; nicht veröffentlichen.",
-      "sourceUrls": [
-        "https://www.gjithebiznesi.com/XK/opel-rakovica"
-      ]
+      "sourceUrls": ["https://www.gjithebiznesi.com/XK/opel-rakovica"]
     },
     {
       "workshopId": "reno-center-muciqi-prishtina",
@@ -79,18 +75,14 @@
       "assessment": "removed",
       "previousStatus": "draft",
       "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis.",
-      "sourceUrls": [
-        "https://www.kienzle-ks.com/"
-      ]
+      "sourceUrls": ["https://www.kienzle-ks.com/"]
     },
     {
       "workshopId": "tahograf-prishtina",
       "assessment": "removed",
       "previousStatus": "draft",
       "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis.",
-      "sourceUrls": [
-        "https://www.cybo.com/XK/pristina/car-repair"
-      ]
+      "sourceUrls": ["https://www.cybo.com/XK/pristina/car-repair"]
     }
   ],
   "newPublishedWorkshop": {

@@ -176,9 +176,7 @@
       "independentLocationMatched": true,
       "independentServiceScopeVerified": true,
       "uniqueInCatalogue": true,
-      "sourceUrls": [
-        "https://autongjyrosjenaseri.com/"
-      ],
+      "sourceUrls": ["https://autongjyrosjenaseri.com/"],
       "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
     },
     {
@@ -191,9 +189,7 @@
       "independentLocationMatched": true,
       "independentServiceScopeVerified": true,
       "uniqueInCatalogue": true,
-      "sourceUrls": [
-        "https://autopicasso.net/"
-      ],
+      "sourceUrls": ["https://autopicasso.net/"],
       "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
     },
     {
@@ -206,9 +202,7 @@
       "independentLocationMatched": true,
       "independentServiceScopeVerified": true,
       "uniqueInCatalogue": true,
-      "sourceUrls": [
-        "https://autoservisblerti.com/"
-      ],
+      "sourceUrls": ["https://autoservisblerti.com/"],
       "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
     },
     {
@@ -403,9 +397,7 @@
       "independentLocationMatched": true,
       "independentServiceScopeVerified": true,
       "uniqueInCatalogue": true,
-      "sourceUrls": [
-        "https://lipjanicoding.com/en"
-      ],
+      "sourceUrls": ["https://lipjanicoding.com/en"],
       "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
     },
     {
@@ -448,9 +440,7 @@
       "independentLocationMatched": true,
       "independentServiceScopeVerified": true,
       "uniqueInCatalogue": true,
-      "sourceUrls": [
-        "https://shaladetailing.com/"
-      ],
+      "sourceUrls": ["https://shaladetailing.com/"],
       "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
     },
     {
@@ -508,10 +498,7 @@
       "independentLocationMatched": true,
       "independentServiceScopeVerified": true,
       "uniqueInCatalogue": true,
-      "sourceUrls": [
-        "https://autowaxon.com/contact",
-        "https://autowaxon.com/"
-      ],
+      "sourceUrls": ["https://autowaxon.com/contact", "https://autowaxon.com/"],
       "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
     },
     {
@@ -524,9 +511,7 @@
       "independentLocationMatched": true,
       "independentServiceScopeVerified": true,
       "uniqueInCatalogue": true,
-      "sourceUrls": [
-        "https://www.autoxhela.com/"
-      ],
+      "sourceUrls": ["https://www.autoxhela.com/"],
       "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
     }
   ],
@@ -556,9 +541,7 @@
       "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang."
     },
     {
-      "names": [
-        "Autobahn Motors SHPK"
-      ],
+      "names": ["Autobahn Motors SHPK"],
       "reason": "Google meldet vorübergehende Schließung; kein geeigneter aktueller Veröffentlichungskandidat."
     },
     {
@@ -581,9 +564,6 @@
     "added": 29,
     "updatedExisting": 0,
     "duplicatePlaceIds": 0,
-    "existingSharedPhoneProfiles": [
-      "eurogoma-gjakova",
-      "eurogoma-mitrovica"
-    ]
+    "existingSharedPhoneProfiles": ["eurogoma-gjakova", "eurogoma-mitrovica"]
   }
 }

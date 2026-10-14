@@ -138,6 +138,7 @@ Clipboardaufrufe zeigen nur lokale manuelle Kopierhinweise. Der angezeigte
 Übernahmevertrag umfasst tatsächliche kanonische Originwerte, erhaltene
 Callbackfreigaben, Release-Export und Go-Vorschauen, alle vier Providerdateien,
 erneutes Lesen sowie Empfangstest/Rückweg; keine reine Bodyübernahme.
+
 ## Lokalisierte Mailvorlagen und Provideraktivierung (Issue #52)
 
 Die zentralen Bestätigungs- und Recoveryvorlagen enthalten DE/SQ/EN-Betreff
@@ -182,6 +183,7 @@ Die Providerübernahme erfolgt separat aus einem geprüften Main-Release:
    SQ-/EN-Test. Der Export enthält vier Providerquellen, sechs synthetische
    tatsächliche Go-Vorschauen mit erwarteter/gerenderter Locale und Prüfsummen.
    Er ändert keinen Provider und enthält keine realen Tokens oder Empfänger.
+
 3. Nur den physischen Callback erlauben: Produktion
    `https://riparim.com/auth/bestaetigen\?**`, bei Bedarf getrennt die tatsächlich
    verwendete lokale Callback-Origin. Keine Host-/Seitenwildcards und keine
@@ -256,8 +258,7 @@ Die Allowlist ersetzt keine App-Zielvalidierung: Supabase akzeptiert bereits
 Redirects zur Site-Origin, während die serverseitige Zielvalidierung der
 Anwendung unverändert maßgeblich bleibt. Die [SMTP-Dokumentation](https://supabase.com/docs/guides/auth/auth-smtp)
 beschränkt den Standardversand auf nichtproduktive Zwecke. Deshalb steht die
-eigene SMTP-Einrichtung vor der Vorlagenübernahme: Bei neuen Free-Projekten seit
-3. Juni 2026 ist [Vorlagenbearbeitung erst mit eigenem SMTP möglich](https://supabase.com/changelog/46599-changes-to-email-template-customisation-on-free-tier).
+eigene SMTP-Einrichtung vor der Vorlagenübernahme: Bei neuen Free-Projekten seit 3. Juni 2026 ist [Vorlagenbearbeitung erst mit eigenem SMTP möglich](https://supabase.com/changelog/46599-changes-to-email-template-customisation-on-free-tier).
 Bestätigungs- und Recoveryvorlagen bleiben direkt aus
 `lib/auth/email-templates.ts` bezogen und enthalten jeweils Betreff und HTML-Body.
 Google benötigt weiterhin Website-Origin, den Callback des Supabase-Projekts
@@ -600,7 +601,6 @@ Die Moderation wartet den ersten Mailversuch ab. Die native D1-Fixture bestätig
 
 Der lokale CPU-Profiler verwendet ausschließlich einen isolierten workerd, Canonical-Fixtures und blockierte Providerzugriffe. Er misst Stichproben der aktiven CPU, keine Cloudflare-Abrechnung oder verbindliche Produktionsobergrenze. Die Messung nach einem geprüften Main-Release bleibt für seltene/private Aufrufpfade nötig. Die native Browserprüfung war in dieser Sitzung wegen wiederholter Meldungen „The user changed Google Chrome“ nicht zuverlässig ausführbar; es wird keine erfolgreiche native Layout-/Theme-Abnahme behauptet.
 
-
 ## Auth-Anbieterprüfung (Issue #139, 12. Oktober 2026)
 
 Die tatsächliche Setupkomponente und sämtliche bestehenden Layoutstyles wurden
@@ -681,7 +681,6 @@ die Sichtbarkeitsauswahl blieb mit Enter, Pfeiltasten und Escape stabil, mit
 unverschobenem Dialograhmen und ohne ResizeObserver-Meldung. Es wurden keine
 Werkstattänderungen gespeichert.
 
-
 ## Client-Navigation ohne Dokument-Reload (13. Oktober 2026)
 
 Interne Seitenlinks in Logo, Benutzer-/Verwaltungsmenü und Kundenabläufen
@@ -703,7 +702,6 @@ Providerzugriffen geprüft. Vor der Headerkorrektur lösten Anmeldung und Logo
 zusätzliche Dokumentanfragen aus. Danach blieben Anmeldung, Logo per Tab/Enter
 und Einstellungen beim selben Dokumentzähler; nur RSC-Anfragen kamen hinzu.
 Die Prüfung hat keine echten Konten, E-Mails oder Produktionsdaten verändert.
-
 
 ## Stabiler Anmeldestatus im Header (13. Oktober 2026)
 
@@ -734,7 +732,6 @@ Sitzungsantworten, Client-Neumount, serverseitigem Rendering, Gastantwort,
 Invalidierung, Cacheablauf, Fokusrückkehr und verspäteter alter Antwort. Die bestehende Deferred-UI-Suite
 prüft weiterhin DE/SQ/EN, Rollenentzug, Umbenennung, Kontolöschung und
 konkurrierende Sitzungsabfragen. Alle Fixtures verwenden fiktive Konten.
-
 
 ## Header beim kalten Profilübergang (14. Oktober 2026)
 
@@ -784,7 +781,6 @@ unmittelbar vor fünf Minuten und nach Ablauf. `session-cache-tabs.test.mjs`
 prüft unabhängige Modulzustände zweier Tabs, Login/Logout ohne Fokuswechsel,
 OAuth-Dokumentrückkehr, verspätete Antworten vor Logout, Nachrichten ohne
 Kontodaten, Echovermeidung, Storage-Fallback und gesperrten Storage.
-
 
 ## Google-Anmeldung im Worker (14. Oktober 2026, Issue #183)
 

@@ -2,10 +2,14 @@ import { handleMigrationRequest } from "../lib/migration-export";
 import handler from "vinext/server/fetch-handler";
 import { runWithConnectorBinding } from "../lib/connector-context";
 import type { ConnectorBinding } from "../lib/connector-contract.mjs";
-import {withAuthRequest} from "../lib/auth/request-context";
+import { withAuthRequest } from "../lib/auth/request-context";
 
 export default {
-  async fetch(request: Request, env: Cloudflare.Env, ctx: ExecutionContext<{ CONNECTORS?: ConnectorBinding }>) {
+  async fetch(
+    request: Request,
+    env: Cloudflare.Env,
+    ctx: ExecutionContext<{ CONNECTORS?: ConnectorBinding }>,
+  ) {
     const migration = await handleMigrationRequest(request, env);
     if (migration) return migration;
     let binding = ctx.props?.CONNECTORS;
@@ -16,17 +20,28 @@ export default {
       const expiresAt = Date.now() + 60_000;
       binding = {
         async getContext() {
-          if (Date.now() >= expiresAt) return { status: "request_context_expired" };
+          if (Date.now() >= expiresAt)
+            return { status: "request_context_expired" };
           return preview.getContext?.() ?? { status: "binding_unavailable" };
         },
         async invoke(connectorId, actionName, args) {
           if (Date.now() >= expiresAt) {
-            return { status: "request_context_expired", message: "This request has expired. Please try again." };
+            return {
+              status: "request_context_expired",
+              message: "This request has expired. Please try again.",
+            };
           }
           return preview.invoke(connectorId, actionName, args);
         },
       };
     }
-    return withAuthRequest(()=>runWithConnectorBinding(binding, () => handler.fetch(request, env, ctx)),request.headers.get("RSC")==="1"||!!request.headers.get("Accept")?.includes("text/x-component"));
+    return withAuthRequest(
+      () =>
+        runWithConnectorBinding(binding, () =>
+          handler.fetch(request, env, ctx),
+        ),
+      request.headers.get("RSC") === "1" ||
+        !!request.headers.get("Accept")?.includes("text/x-component"),
+    );
   },
 };

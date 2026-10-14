@@ -1,59 +1,453 @@
-.workshop-ratings{display:flex;flex-direction:column;gap:8px;margin:17px 0 12px;padding:12px 0;border-top:1px solid #e5ecee;border-bottom:1px solid #e5ecee;font-size:14px;line-height:1.45}.workshop-rating-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px 12px}.rating-provider{display:inline-flex;align-items:center;gap:5px;font-weight:650;color:#315954}.google-rating .rating-provider{color:#475f6c;text-decoration:underline;text-underline-offset:3px}.rating-value{display:inline-flex;align-items:center;gap:5px;color:#7e611c}.rating-value strong{font-size:15px}.rating-value>span{color:#596b70}.rating-unavailable{display:inline-flex;align-items:center;gap:5px;color:#596b70;font-size:13px}.workshop-ratings-detailed{max-width:430px;margin-top:14px;border:1px solid #dce6e8;border-radius:10px;padding:14px;background:#f7fafb}.rating-explanation,.rating-source{font-size:13px;color:#596b70;line-height:1.55;margin-top:5px}.rating-source a{color:#096e61;text-decoration:underline;text-underline-offset:3px}.profile-section-heading+.workshop-ratings-detailed{margin-top:0;margin-bottom:22px;max-width:none}.profile-section-heading+.workshop-ratings-detailed .workshop-rating-row{max-width:430px}.rating-sort-label{font-size:14px}
-.workshop-ratings-empty{height:0;padding:0;margin:0;border:0}.google-rating .google-maps-attribution{font-family:Roboto,Arial,sans-serif;font-style:normal;font-weight:400;color:#5e5e5e;font-size:14px;letter-spacing:normal;white-space:nowrap}.google-reviews-panel{width:100%;max-width:none;min-width:0}.google-official-widget gmp-advanced-place-details{display:block;width:100%;height:480px;max-width:400px;min-width:0;border:1px solid var(--border);border-radius:12px}.google-official-widget:empty{display:none}.google-widget-unavailable{display:none}
-.workshop-ratings-compact{flex-direction:row;flex-wrap:wrap;gap:10px;margin:15px 0 0;padding:0;border:0}
-.workshop-ratings-compact>.workshop-rating-row{display:inline-flex;justify-content:flex-start;gap:10px;padding:8px 12px;border:1px solid #e0e8e6;border-radius:8px;background:#f7faf8;min-height:42px}
-.workshop-ratings-compact>.google-rating{background:#fafbfc;border-color:#e3e8ec}
-.workshop-ratings-compact .rating-value strong{font-size:18px}
-.workshop-ratings-compact .rating-unavailable{font-size:14px}
-.workshop-ratings-compact>.rating-source{flex-basis:100%;margin:0;font-size:13px}
-@media(max-width:720px){
- .workshop-ratings-compact{gap:8px;margin-top:13px}
- .workshop-ratings-compact>.workshop-rating-row{padding:7px 10px;gap:8px;max-width:100%}
+.workshop-ratings {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 17px 0 12px;
+  padding: 12px 0;
+  border-top: 1px solid #e5ecee;
+  border-bottom: 1px solid #e5ecee;
+  font-size: 14px;
+  line-height: 1.45;
+}
+.workshop-rating-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+}
+.rating-provider {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 650;
+  color: #315954;
+}
+.google-rating .rating-provider {
+  color: #475f6c;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.rating-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #7e611c;
+}
+.rating-value strong {
+  font-size: 15px;
+}
+.rating-value > span {
+  color: #596b70;
+}
+.rating-unavailable {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #596b70;
+  font-size: 13px;
+}
+.workshop-ratings-detailed {
+  max-width: 430px;
+  margin-top: 14px;
+  border: 1px solid #dce6e8;
+  border-radius: 10px;
+  padding: 14px;
+  background: #f7fafb;
+}
+.rating-explanation,
+.rating-source {
+  font-size: 13px;
+  color: #596b70;
+  line-height: 1.55;
+  margin-top: 5px;
+}
+.rating-source a {
+  color: #096e61;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.profile-section-heading + .workshop-ratings-detailed {
+  margin-top: 0;
+  margin-bottom: 22px;
+  max-width: none;
+}
+.profile-section-heading + .workshop-ratings-detailed .workshop-rating-row {
+  max-width: 430px;
+}
+.rating-sort-label {
+  font-size: 14px;
+}
+.workshop-ratings-empty {
+  height: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+.google-rating .google-maps-attribution {
+  font-family: Roboto, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  color: #5e5e5e;
+  font-size: 14px;
+  letter-spacing: normal;
+  white-space: nowrap;
+}
+.google-reviews-panel {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+}
+.google-official-widget gmp-advanced-place-details {
+  display: block;
+  width: 100%;
+  height: 480px;
+  max-width: 400px;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.google-official-widget:empty {
+  display: none;
+}
+.google-widget-unavailable {
+  display: none;
+}
+.workshop-ratings-compact {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 15px 0 0;
+  padding: 0;
+  border: 0;
+}
+.workshop-ratings-compact > .workshop-rating-row {
+  display: inline-flex;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 8px 12px;
+  border: 1px solid #e0e8e6;
+  border-radius: 8px;
+  background: #f7faf8;
+  min-height: 42px;
+}
+.workshop-ratings-compact > .google-rating {
+  background: #fafbfc;
+  border-color: #e3e8ec;
+}
+.workshop-ratings-compact .rating-value strong {
+  font-size: 18px;
+}
+.workshop-ratings-compact .rating-unavailable {
+  font-size: 14px;
+}
+.workshop-ratings-compact > .rating-source {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 13px;
+}
+@media (max-width: 720px) {
+  .workshop-ratings-compact {
+    gap: 8px;
+    margin-top: 13px;
+  }
+  .workshop-ratings-compact > .workshop-rating-row {
+    padding: 7px 10px;
+    gap: 8px;
+    max-width: 100%;
+  }
 }
 
-.profile-google-heading{font-size:16px;margin:0 0 12px}.google-details-time{margin:10px 0 0}.profile-photo-attribution{font-size:12px;line-height:1.6;overflow-wrap:anywhere}.profile-photo-attribution a{text-decoration:underline;text-underline-offset:2px}.profile-photo-strip figcaption{padding:7px 2px;color:var(--muted-foreground)}.profile-gallery-attribution{padding:6px 22px 12px;min-width:0}.profile-photo-viewer[data-slot=dialog-content]{grid-template-rows:auto minmax(0,1fr) auto auto}
+.profile-google-heading {
+  font-size: 16px;
+  margin: 0 0 12px;
+}
+.google-details-time {
+  margin: 10px 0 0;
+}
+.profile-photo-attribution {
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.profile-photo-attribution a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.profile-photo-strip figcaption {
+  padding: 7px 2px;
+  color: var(--muted-foreground);
+}
+.profile-gallery-attribution {
+  padding: 6px 22px 12px;
+  min-width: 0;
+}
+.profile-photo-viewer[data-slot="dialog-content"] {
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+}
 
-.google-rating-panel .google-official-widget gmp-advanced-place-details-compact{display:block;width:100%;max-width:500px;min-width:0;border:1px solid var(--border);border-radius:12px}
+.google-rating-panel
+  .google-official-widget
+  gmp-advanced-place-details-compact {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
 
 /* Let Google's weekly opening-hours list expand beyond the collapsed summary. */
-.google-overview-panel .google-official-widget gmp-advanced-place-details{height:auto;max-width:none;border:0;border-radius:0;--gmp-mat-spacing-large:8px;--gmp-mat-spacing-medium:8px;--gmp-mat-spacing-extra-large:0px;--gmp-mat-spacing-two-extra-large:0px}
+.google-overview-panel .google-official-widget gmp-advanced-place-details {
+  height: auto;
+  max-width: none;
+  border: 0;
+  border-radius: 0;
+  --gmp-mat-spacing-large: 8px;
+  --gmp-mat-spacing-medium: 8px;
+  --gmp-mat-spacing-extra-large: 0px;
+  --gmp-mat-spacing-two-extra-large: 0px;
+}
 /* Reviews retain Google's native header, attribution and content insets. */
-.profile-google-reviews .google-official-widget gmp-advanced-place-details{max-width:none}
-.catalogue-card .google-rating-panel .google-official-widget gmp-advanced-place-details-compact{border:0;border-radius:0;--gmp-mat-color-surface:var(--card);--gmp-mat-font-body-small:normal 500 14px/20px Inter,Arial,Helvetica,sans-serif;--gmp-mat-spacing-large:0px;--gmp-mat-spacing-medium:4px}
+.profile-google-reviews .google-official-widget gmp-advanced-place-details {
+  max-width: none;
+}
+.catalogue-card
+  .google-rating-panel
+  .google-official-widget
+  gmp-advanced-place-details-compact {
+  border: 0;
+  border-radius: 0;
+  --gmp-mat-color-surface: var(--card);
+  --gmp-mat-font-body-small:
+    normal 500 14px/20px Inter, Arial, Helvetica, sans-serif;
+  --gmp-mat-spacing-large: 0px;
+  --gmp-mat-spacing-medium: 4px;
+}
 
-.google-details-fallback{display:flex;align-items:center;flex-wrap:wrap;gap:0 12px;font-size:13px;line-height:1.5;color:var(--muted-foreground)}
-.google-details-fallback>p,.google-details-loading{margin:0;font-size:13px;line-height:1.5;color:var(--muted-foreground)}
-.google-details-actions{display:flex;align-items:center;flex-wrap:wrap;gap:0 12px;min-width:0}
-.google-details-actions>.text-action{display:inline-flex;align-items:center;gap:5px;min-height:36px;margin:0;padding:4px 0;font-size:13px!important;line-height:1.5}
-.google-details-actions>.text-action:focus-visible{outline:2px solid var(--ring);outline-offset:3px;border-radius:3px}
-.google-details-refresh:disabled{opacity:.5;cursor:default}
-.google-details-refresh>svg{flex-shrink:0}
-@media(max-width:720px),(pointer:coarse){.google-details-actions>.text-action{min-height:44px}}
+.google-details-fallback {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+}
+.google-details-fallback > p,
+.google-details-loading {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted-foreground);
+}
+.google-details-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0 12px;
+  min-width: 0;
+}
+.google-details-actions > .text-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 36px;
+  margin: 0;
+  padding: 4px 0;
+  font-size: 13px !important;
+  line-height: 1.5;
+}
+.google-details-actions > .text-action:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+.google-details-refresh:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.google-details-refresh > svg {
+  flex-shrink: 0;
+}
+@media (max-width: 720px), (pointer: coarse) {
+  .google-details-actions > .text-action {
+    min-height: 44px;
+  }
+}
 
-.workshop-opening-hours{min-width:0;flex:1}.workshop-opening-hours h2{font-size:16px;margin-bottom:8px}.opening-week{font-size:14px}.opening-week>div{display:flex;justify-content:space-between;gap:16px;padding:3px 0}.opening-week dt{flex-shrink:0}.opening-week dd{margin:0;text-align:right;overflow-wrap:anywhere}.opening-status{font-weight:600}.opening-status.open{color:var(--theme-accent)}.workshop-opening-hours .help{font-size:12px;margin-top:10px;color:var(--muted-foreground)}
+.workshop-opening-hours {
+  min-width: 0;
+  flex: 1;
+}
+.workshop-opening-hours h2 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+.opening-week {
+  font-size: 14px;
+}
+.opening-week > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 3px 0;
+}
+.opening-week dt {
+  flex-shrink: 0;
+}
+.opening-week dd {
+  margin: 0;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+.opening-status {
+  font-weight: 600;
+}
+.opening-status.open {
+  color: var(--theme-accent);
+}
+.workshop-opening-hours .help {
+  font-size: 12px;
+  margin-top: 10px;
+  color: var(--muted-foreground);
+}
 
-.workshop-opening-hours summary{cursor:pointer;min-height:44px;padding:10px 0;font-size:14px}.workshop-opening-hours summary:focus-visible{outline:2px solid var(--ring);outline-offset:3px}.workshop-opening-hours h3{font-size:14px;margin:12px 0 6px}
+.workshop-opening-hours summary {
+  cursor: pointer;
+  min-height: 44px;
+  padding: 10px 0;
+  font-size: 14px;
+}
+.workshop-opening-hours summary:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+.workshop-opening-hours h3 {
+  font-size: 14px;
+  margin: 12px 0 6px;
+}
 
-.opening-hours-title { display:flex; align-items:center; flex-wrap:wrap; gap:6px 12px; }
-.opening-hours-title h2 { margin:0; font-size:14px; font-weight:500; color:var(--muted-foreground); }
-.opening-hours-title .opening-status { font-size:12px; }
-.opening-hours-trigger { display:inline-flex; align-items:center; gap:9px; max-width:100%; min-height:36px; text-align:left; font-size:14px; font-weight:600; color:inherit; border-radius:5px; }
-.opening-hours-trigger>svg { flex-shrink:0; transition:transform .15s; }
-.opening-hours-trigger[data-state=open]>svg:last-child { transform:rotate(180deg); }
-.opening-hours-trigger:focus-visible { outline:2px solid var(--ring); outline-offset:3px; }
-.opening-hours-trigger:hover { color:var(--theme-accent); }
-html.dark .opening-hours-trigger:hover { color:var(--ring); }
-.opening-hours-popover { width:min(360px,calc(100vw - 32px)); max-height:min(560px,var(--radix-popover-content-available-height,560px)); overflow-y:auto; overscroll-behavior:contain; padding:16px; border-color:var(--border); border-radius:12px; background:var(--popover); color:var(--popover-foreground); box-shadow:0 12px 36px #0003; }
-.opening-hours-popover-heading { display:flex; align-items:center; justify-content:space-between; gap:16px; padding-bottom:10px; margin-bottom:6px; border-bottom:1px solid var(--border); }
-.opening-hours-popover-heading h3 { display:flex; align-items:center; gap:8px; font-size:15px; font-weight:650; margin:0; }
-.opening-hours-popover-heading>button { display:grid; place-items:center; width:32px; height:32px; border-radius:6px; }
-.opening-hours-popover-heading>button:hover { background:var(--theme-hover); }
-.opening-hours-popover .opening-week { margin:0; }
-.opening-hours-popover .opening-week>div { align-items:baseline; gap:16px; padding:8px; border-radius:6px; }
-.opening-hours-popover .opening-week dt { color:var(--muted-foreground); }
-.opening-hours-popover .opening-week dd { font-variant-numeric:tabular-nums; }
-.opening-hours-popover .opening-week>.opening-day-today { background:var(--theme-hover); font-weight:650; }
-.opening-hours-popover .opening-week>.opening-day-today dt { color:inherit; }
-.opening-hours-popover>h3 { font-size:14px; font-weight:600; margin:14px 8px 4px; }
-.opening-hours-source { border-top:1px solid var(--border); padding-top:12px; margin:12px 8px 0; font-size:12px; line-height:1.6; color:var(--muted-foreground); }
-@media(prefers-reduced-motion:reduce) { .opening-hours-trigger>svg { transition:none; } }
+.opening-hours-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+}
+.opening-hours-title h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+.opening-hours-title .opening-status {
+  font-size: 12px;
+}
+.opening-hours-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  max-width: 100%;
+  min-height: 36px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: inherit;
+  border-radius: 5px;
+}
+.opening-hours-trigger > svg {
+  flex-shrink: 0;
+  transition: transform 0.15s;
+}
+.opening-hours-trigger[data-state="open"] > svg:last-child {
+  transform: rotate(180deg);
+}
+.opening-hours-trigger:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+.opening-hours-trigger:hover {
+  color: var(--theme-accent);
+}
+html.dark .opening-hours-trigger:hover {
+  color: var(--ring);
+}
+.opening-hours-popover {
+  width: min(360px, calc(100vw - 32px));
+  max-height: min(560px, var(--radix-popover-content-available-height, 560px));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 16px;
+  border-color: var(--border);
+  border-radius: 12px;
+  background: var(--popover);
+  color: var(--popover-foreground);
+  box-shadow: 0 12px 36px #0003;
+}
+.opening-hours-popover-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 10px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.opening-hours-popover-heading h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 650;
+  margin: 0;
+}
+.opening-hours-popover-heading > button {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+}
+.opening-hours-popover-heading > button:hover {
+  background: var(--theme-hover);
+}
+.opening-hours-popover .opening-week {
+  margin: 0;
+}
+.opening-hours-popover .opening-week > div {
+  align-items: baseline;
+  gap: 16px;
+  padding: 8px;
+  border-radius: 6px;
+}
+.opening-hours-popover .opening-week dt {
+  color: var(--muted-foreground);
+}
+.opening-hours-popover .opening-week dd {
+  font-variant-numeric: tabular-nums;
+}
+.opening-hours-popover .opening-week > .opening-day-today {
+  background: var(--theme-hover);
+  font-weight: 650;
+}
+.opening-hours-popover .opening-week > .opening-day-today dt {
+  color: inherit;
+}
+.opening-hours-popover > h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 14px 8px 4px;
+}
+.opening-hours-source {
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+  margin: 12px 8px 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted-foreground);
+}
+@media (prefers-reduced-motion: reduce) {
+  .opening-hours-trigger > svg {
+    transition: none;
+  }
+}

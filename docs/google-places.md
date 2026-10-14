@@ -73,14 +73,14 @@ Eine Änderung der zentralen JSON-Quelle löst über deren Inhalts-Hash den Impo
 
 Bei Abschluss von #94 verwendete `tests/catalogue-google-requests.test.mjs` 158 synthetische öffentliche Werkstätten, kontrollierte Sichtbarkeit und einen Google-SDK-Fixture ohne echte Provideraufrufe. Der Red-Lauf vor der Änderung zählte bei `sort=google` **158 Places-Abfragen**, obwohl keine Karte sichtbar war. Der gleiche Lauf nach der Änderung prüft in DE/SQ/EN:
 
-| Auslöser | Places-Abfragen nach Änderung |
-| --- | ---: |
-| Initialrender mit 158 Treffern und unsichtbaren Karten | 0 |
-| Alte URL `sort=google` | 0 |
-| Filteränderung, neue Karten weiterhin unsichtbar | 0 |
-| Erste sichtbare Karte | 1 |
-| Passende Karte nach Filterwechsel erneut sichtbar | 0 zusätzliche |
-| Localewechsel und erste erneut sichtbare Karte | 1 zusätzliche |
+| Auslöser                                               | Places-Abfragen nach Änderung |
+| ------------------------------------------------------ | ----------------------------: |
+| Initialrender mit 158 Treffern und unsichtbaren Karten |                             0 |
+| Alte URL `sort=google`                                 |                             0 |
+| Filteränderung, neue Karten weiterhin unsichtbar       |                             0 |
+| Erste sichtbare Karte                                  |                             1 |
+| Passende Karte nach Filterwechsel erneut sichtbar      |                 0 zusätzliche |
+| Localewechsel und erste erneut sichtbare Karte         |                 1 zusätzliche |
 
 Damals prüfte dieselbe Fixture zusätzlich in DE/SQ/EN die datenfreie statische Katalog-Shell: Die Hydration liest alle Filter und die Locale aus der echten URL, der bestehende Live-Katalogabruf bleibt erhalten und verursacht keine Google-Abfrage für unsichtbare Karten. Sichtbare Karten und ihre Wiederverwendung behalten dieselben Anfragezahlen. Der aktuelle Test verwendet 160 synthetische Datensätze und prüft null Google-Anfragen auch für sichtbare Katalogkarten; die obigen Zählungen beschreiben den damaligen SDK-Einzelratingpfad.
 
@@ -185,15 +185,15 @@ geprüftem Main-Release v1.12.9 auf 100 pro Tag freigegeben. Die Profilaufteilun
 verwendet diese bestehende Quote ohne weitere Provideränderung. Der native
 Readback vom 11.10.2026 bestätigt Advanced 100, Standard 250 und Sessions 0.
 
-| Dienst / Methode | Ziel-Tageslimit | Wirkung |
-| --- | ---: | --- |
-| Places (New): GetPlaceRequest | **0** | Einzel-Details bleiben gesperrt |
-| Places (New): SearchTextRequest | **20** | nur getrennte serverseitige Identitätsprüfung bei bestätigter freier Restmenge |
-| Places (New): PhotoMedia | **0** | öffentliche App lädt keine Google-Fotos |
-| UI-Kit Standard Query | **250** | nur noch offene ältere Profil-/Katalogansichten |
-| UI-Kit Advanced Query | **100** | getrennte Profilbausteine, ohne Name/Aktionen |
-| UI-Kit Sessions | **0** | nicht verwendet und gesperrt |
-| Maps JavaScript: Map loads | **0** | keine eingebetteten Karten; direkte Maps-/Routenlinks |
+| Dienst / Methode                | Ziel-Tageslimit | Wirkung                                                                        |
+| ------------------------------- | --------------: | ------------------------------------------------------------------------------ |
+| Places (New): GetPlaceRequest   |           **0** | Einzel-Details bleiben gesperrt                                                |
+| Places (New): SearchTextRequest |          **20** | nur getrennte serverseitige Identitätsprüfung bei bestätigter freier Restmenge |
+| Places (New): PhotoMedia        |           **0** | öffentliche App lädt keine Google-Fotos                                        |
+| UI-Kit Standard Query           |         **250** | nur noch offene ältere Profil-/Katalogansichten                                |
+| UI-Kit Advanced Query           |         **100** | getrennte Profilbausteine, ohne Name/Aktionen                                  |
+| UI-Kit Sessions                 |           **0** | nicht verwendet und gesperrt                                                   |
+| Maps JavaScript: Map loads      |           **0** | keine eingebetteten Karten; direkte Maps-/Routenlinks                          |
 
 Der Browser-Key erhält ausschließlich **Maps JavaScript API und Places UI Kit API**
 und genau `https://riparim.com/*`. **Places API (New) wird aus diesem Key entfernt**:

@@ -15,19 +15,19 @@ SDK-Fixture gegen einen isolierten Quellarchiv-Stand der Basis ausgeführt; die
 übrigen Vorher-Angaben folgen den damaligen Quellen und Red-Fixtures von #94/#95.
 Nachher-Werte werden durch die beiden genannten Anfrage-Fixtures geprüft. Sie sind **keine Produktionsmessung und keine Rechnung**.
 
-| Szenario | Vorher | Nachher |
-| --- | --- | --- |
-| Name-Sortierung, zwölf erstmals sichtbare Karten | 12 einzelne Ratingabrufe | 12 einzelne Ratingabrufe |
-| Filter ohne Treffer, zurück zu denselben zwölf sichtbaren Karten | 12 zusätzliche Ratingabrufe nach vollständigem Aus-/Einfiltern | 0 zusätzliche Ratingabrufe |
-| Weitere zwölf Karten einblenden, noch unsichtbar | 0 zusätzliche Ratingabrufe bei Name-Sortierung | 0 zusätzliche Ratingabrufe |
-| Diese weiteren zwölf erstmals sichtbar | 12 zusätzliche Ratingabrufe | 12 zusätzliche Ratingabrufe |
-| Alter Link `sort=google`, 158 synthetische Treffer, keine sichtbare Karte | 158 Ratingabrufe im Red-Lauf | 0; URL wird auf Name normalisiert |
-| Profilmount, Google-Bereiche unsichtbar | 1 vollständiger Enterprise-Detailsabruf im Red-Lauf | 0 Google-Abrufe |
-| Google-Bereich sichtbar, einschließlich Rezensionen | zusätzlich Standard-Widget; Header nutzt Vollprofilantwort | 1 gemeinsames Standard-Widget, kein Header-Ratingabruf |
-| Fotobereich sichtbar | Fotos aus vollständiger Profilantwort | 1 separate Metadatenabfrage `id,photos,attributions`, bis zu 3 Vorschauen |
-| Galerie öffnen / anderes Foto auswählen | gewählte Großdatei; zusätzliche Vorschaubilder im Dialog möglich | gewählte Großdatei; zusätzliche Vorschaubilder im Dialog möglich |
-| Erfolgreiches Profil 30 Minuten offen, keine Öffnungszeiten-Transition | Vollprofil-Refresh alle 5 Minuten; bei bekannter Transition bis 30 Minuten bzw. Transition + 1,5 Sekunden | 0 automatische Abrufe; Veraltungsanzeige |
-| Explizit sichtbares Aktualisieren nach Veraltung | Vollprofil-Refresh über Timer/Tabrückkehr | 1 neues Standard-Widget, 0 Fotometadatenabrufe |
+| Szenario                                                                  | Vorher                                                                                                    | Nachher                                                                   |
+| ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| Name-Sortierung, zwölf erstmals sichtbare Karten                          | 12 einzelne Ratingabrufe                                                                                  | 12 einzelne Ratingabrufe                                                  |
+| Filter ohne Treffer, zurück zu denselben zwölf sichtbaren Karten          | 12 zusätzliche Ratingabrufe nach vollständigem Aus-/Einfiltern                                            | 0 zusätzliche Ratingabrufe                                                |
+| Weitere zwölf Karten einblenden, noch unsichtbar                          | 0 zusätzliche Ratingabrufe bei Name-Sortierung                                                            | 0 zusätzliche Ratingabrufe                                                |
+| Diese weiteren zwölf erstmals sichtbar                                    | 12 zusätzliche Ratingabrufe                                                                               | 12 zusätzliche Ratingabrufe                                               |
+| Alter Link `sort=google`, 158 synthetische Treffer, keine sichtbare Karte | 158 Ratingabrufe im Red-Lauf                                                                              | 0; URL wird auf Name normalisiert                                         |
+| Profilmount, Google-Bereiche unsichtbar                                   | 1 vollständiger Enterprise-Detailsabruf im Red-Lauf                                                       | 0 Google-Abrufe                                                           |
+| Google-Bereich sichtbar, einschließlich Rezensionen                       | zusätzlich Standard-Widget; Header nutzt Vollprofilantwort                                                | 1 gemeinsames Standard-Widget, kein Header-Ratingabruf                    |
+| Fotobereich sichtbar                                                      | Fotos aus vollständiger Profilantwort                                                                     | 1 separate Metadatenabfrage `id,photos,attributions`, bis zu 3 Vorschauen |
+| Galerie öffnen / anderes Foto auswählen                                   | gewählte Großdatei; zusätzliche Vorschaubilder im Dialog möglich                                          | gewählte Großdatei; zusätzliche Vorschaubilder im Dialog möglich          |
+| Erfolgreiches Profil 30 Minuten offen, keine Öffnungszeiten-Transition    | Vollprofil-Refresh alle 5 Minuten; bei bekannter Transition bis 30 Minuten bzw. Transition + 1,5 Sekunden | 0 automatische Abrufe; Veraltungsanzeige                                  |
+| Explizit sichtbares Aktualisieren nach Veraltung                          | Vollprofil-Refresh über Timer/Tabrückkehr                                                                 | 1 neues Standard-Widget, 0 Fotometadatenabrufe                            |
 
 Filter-/Galeriewerte sind keine Garantie für beliebige Navigationen: Neue ID,
 Locale, neuer Browserlauf oder erneutes Öffnen verwerfen den jeweiligen
@@ -35,16 +35,16 @@ Anzeigestand. Browser-Caching, native Widget-Innenanfragen, Bild-Lazy-Loading un
 Google-Abrechnungsereignisse werden durch die Fixtures nicht vermessen. Das
 Erzeugen eines Widgets ist insbesondere keine zugesicherte SKU-Anfragezahl.
 
-| Aktueller Aufruf | Zu prüfende Google-SKU / Quotenfamilie |
-| --- | --- |
-| Sichtbare Katalogbewertung, JS `rating,userRatingCount,googleMapsURI,attributions` | Place Details Enterprise; Places-/Maps-JavaScript-Projektquoten |
-| Standard `gmp-place-details`, Rating/Öffnungszeiten/Rezensionen | Places UI Kit Query Essentials (`0678-4F72-DA7C`), unabhängig von Inhaltsauswahl |
-| Foto-Metadaten `id,photos,attributions` | Place Details Essentials IDs Only; keine Enterprise-Felder |
-| Vorschau- und Großbild `/photos/.../media` | Place Details Photos; jeden tatsächlichen Bildabruf getrennt betrachten |
-| Serverseitiges `places:searchText` mit Telefonnummer und eigener Standortprüfung | Text Search Enterprise; alle Suchmodi teilen das App-Limit |
-| Identitätsprüfung `addressComponents` für Kandidaten ohne Land | Place Details Essentials; zählt ebenfalls zum App-Limit |
-| SDK laden, direkte Maps-/Routenlinks | SDK-Laden und externe Links sind keine eingebettete Karte; keine Route-API-Abfrage der App |
-| Advanced-/Pro-UI-Kit oder Dynamic Maps | im aktuellen öffentlichen Profil nicht verwendet; unerwartete Rechnungszeilen prüfen |
+| Aktueller Aufruf                                                                   | Zu prüfende Google-SKU / Quotenfamilie                                                     |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Sichtbare Katalogbewertung, JS `rating,userRatingCount,googleMapsURI,attributions` | Place Details Enterprise; Places-/Maps-JavaScript-Projektquoten                            |
+| Standard `gmp-place-details`, Rating/Öffnungszeiten/Rezensionen                    | Places UI Kit Query Essentials (`0678-4F72-DA7C`), unabhängig von Inhaltsauswahl           |
+| Foto-Metadaten `id,photos,attributions`                                            | Place Details Essentials IDs Only; keine Enterprise-Felder                                 |
+| Vorschau- und Großbild `/photos/.../media`                                         | Place Details Photos; jeden tatsächlichen Bildabruf getrennt betrachten                    |
+| Serverseitiges `places:searchText` mit Telefonnummer und eigener Standortprüfung   | Text Search Enterprise; alle Suchmodi teilen das App-Limit                                 |
+| Identitätsprüfung `addressComponents` für Kandidaten ohne Land                     | Place Details Essentials; zählt ebenfalls zum App-Limit                                    |
+| SDK laden, direkte Maps-/Routenlinks                                               | SDK-Laden und externe Links sind keine eingebettete Karte; keine Route-API-Abfrage der App |
+| Advanced-/Pro-UI-Kit oder Dynamic Maps                                             | im aktuellen öffentlichen Profil nicht verwendet; unerwartete Rechnungszeilen prüfen       |
 
 Die höchste angeforderte Feldstufe bestimmt den Details-/Suchtarif. Die Tabelle
 ordnet Quellcode zu offiziellen Verträgen zu; der Nachweis tatsächlich
@@ -62,26 +62,26 @@ und Konfiguration lesend geprüft; anschließend wurden ausschließlich die unte
 belegten Quoten/Referrer angepasst. Es wurden keine Dienste, kostenpflichtigen
 Tarife oder Providerproben aktiviert.
 
-| Quelle / Zeitraum | Tatsächlich beobachtet | Aussagegrenze |
-| --- | --- | --- |
-| API-Dashboard, 10.10.2026 00:42:26 UTC bis 11.10.2026 00:42:26 UTC, Auswahl „1 Tag“ | Places API (New): 143 Requests; Places UI Kit API: 1 Request; angezeigte Fehler: 0 | API-Aggregate, keine SKU-/Billing-Zuordnung oder getrennte Vorher-/Nachher-Messung |
-| API-Dashboard, gleicher Zeitraum | Maps JavaScript API aktiv, Requestanzeige „—“ | Kein belegter Nullverbrauch |
-| Billing-Kontoübersicht, aktueller Monat 01.–11.10.2026 | Gesamtkosten 2,73 CHF; Einsparungen 0,00 CHF; Konto bereits als „Kostenpflichtiges Konto“ geführt | Kontogesamtsumme, noch kein Nachweis von Riparim-Projekt-/SKU-Kosten, Freimengen oder Vertragsregion |
+| Quelle / Zeitraum                                                                   | Tatsächlich beobachtet                                                                            | Aussagegrenze                                                                                        |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| API-Dashboard, 10.10.2026 00:42:26 UTC bis 11.10.2026 00:42:26 UTC, Auswahl „1 Tag“ | Places API (New): 143 Requests; Places UI Kit API: 1 Request; angezeigte Fehler: 0                | API-Aggregate, keine SKU-/Billing-Zuordnung oder getrennte Vorher-/Nachher-Messung                   |
+| API-Dashboard, gleicher Zeitraum                                                    | Maps JavaScript API aktiv, Requestanzeige „—“                                                     | Kein belegter Nullverbrauch                                                                          |
+| Billing-Kontoübersicht, aktueller Monat 01.–11.10.2026                              | Gesamtkosten 2,73 CHF; Einsparungen 0,00 CHF; Konto bereits als „Kostenpflichtiges Konto“ geführt | Kontogesamtsumme, noch kein Nachweis von Riparim-Projekt-/SKU-Kosten, Freimengen oder Vertragsregion |
 
 Der kontoweite tabellarische Bericht **„SKUs – diesen Monat“** hat den sichtbaren
 Datenstand **01.–10.10.2026** und umfasst neun SKU-Zeilen aus drei Diensten:
 
-| SKU | SKU-ID | Nutzungsmenge („count“) | Angezeigte Kosten |
-| --- | --- | ---: | ---: |
-| Place Details Enterprise | `2D9A-3DE0-3766` | 1164 | 2,73 CHF |
-| Places UI Kit Query | `0678-4F72-DA7C` | 37 | 0,00 CHF |
-| Text Search Pro | `4FDA-34B1-A910` | 1 | 0,00 CHF |
-| Place Details Essentials IDs Only | `5C36-E272-E88F` | 2 | 0,00 CHF |
-| Text Search Essentials IDs Only | `635D-A9DD-C520` | 1 | 0,00 CHF |
-| Place Details Essentials | `6E05-E1C3-8D85` | 126 | 0,00 CHF |
-| Place Details Photos | `DCD1-FE97-8C71` | 144 | 0,00 CHF |
-| Text Search Enterprise | `E967-44BC-B44D` | 472 | 0,00 CHF |
-| Dynamic Maps | `FAF4-3B2D-51B2` | 1 | 0,00 CHF |
+| SKU                               | SKU-ID           | Nutzungsmenge („count“) | Angezeigte Kosten |
+| --------------------------------- | ---------------- | ----------------------: | ----------------: |
+| Place Details Enterprise          | `2D9A-3DE0-3766` |                    1164 |          2,73 CHF |
+| Places UI Kit Query               | `0678-4F72-DA7C` |                      37 |          0,00 CHF |
+| Text Search Pro                   | `4FDA-34B1-A910` |                       1 |          0,00 CHF |
+| Place Details Essentials IDs Only | `5C36-E272-E88F` |                       2 |          0,00 CHF |
+| Text Search Essentials IDs Only   | `635D-A9DD-C520` |                       1 |          0,00 CHF |
+| Place Details Essentials          | `6E05-E1C3-8D85` |                     126 |          0,00 CHF |
+| Place Details Photos              | `DCD1-FE97-8C71` |                     144 |          0,00 CHF |
+| Text Search Enterprise            | `E967-44BC-B44D` |                     472 |          0,00 CHF |
+| Dynamic Maps                      | `FAF4-3B2D-51B2` |                       1 |          0,00 CHF |
 
 Dies sind **tatsächlich im Billing-Bericht angezeigte Mengen und Kosten**, keine
 Preisfallrechnung. Die 2,73 CHF sind im Bericht Enterprise Details zugeordnet;
@@ -101,15 +101,15 @@ Es wurden keine Adresse oder Zahlungsdaten übernommen. Die konto-eigene
 **Preise**-Tabelle zeigt folgende aktuelle Default-Listenpreisstufen in CHF pro
 1000 Ereignisse (gerundet); ein Sonderrabatt ist nicht belegt:
 
-| Relevante SKU | Kostenfreie Stufe laut Kontotabelle | Erste bezahlte Stufe, CHF/1000 |
-| --- | --- | ---: |
-| Standard UI Kit Query | bis 10000 Monatsereignisse | 0,83185 |
-| Place Details Enterprise | bis 1000 | 16,637 |
-| Place Details Photos | bis 1000 | 5,82295 |
-| Text Search Enterprise | bis 1000 | 29,11475 |
-| Dynamic Maps | bis 10000 | 5,82295 |
-| Place Details Essentials | bis 10000 | 4,15925 |
-| Details / Text Search Essentials IDs Only | Tabellenpreis ab Ereignis 0 jeweils 0 CHF, Einheit 1 | 0 |
+| Relevante SKU                             | Kostenfreie Stufe laut Kontotabelle                  | Erste bezahlte Stufe, CHF/1000 |
+| ----------------------------------------- | ---------------------------------------------------- | -----------------------------: |
+| Standard UI Kit Query                     | bis 10000 Monatsereignisse                           |                        0,83185 |
+| Place Details Enterprise                  | bis 1000                                             |                         16,637 |
+| Place Details Photos                      | bis 1000                                             |                        5,82295 |
+| Text Search Enterprise                    | bis 1000                                             |                       29,11475 |
+| Dynamic Maps                              | bis 10000                                            |                        5,82295 |
+| Place Details Essentials                  | bis 10000                                            |                        4,15925 |
+| Details / Text Search Essentials IDs Only | Tabellenpreis ab Ereignis 0 jeweils 0 CHF, Einheit 1 |                              0 |
 
 Diese Kontopreisstufen ersetzen globale USD-Modellpreise. Die bereits berichteten
 1164 Enterprise-Details-Ereignisse liegen oberhalb der kostenfreien 1000; für
@@ -140,11 +140,11 @@ sind manuelle Beobachtungsgrenzen, keine angelegten Budgetalarme oder Geldbudget
 Folgende Places-API-(New)-Quoten waren im UI als anpassbar angezeigt; die
 Tabelle hält den **Vorher-Zustand und Rückweg** fest:
 
-| Methode | Vorherlimit pro Tag | Nutzung bei Erstprüfung | Vorherlimit pro Minute |
-| --- | ---: | ---: | ---: |
-| GetPlaceRequest | 125000 | 97 | 600 |
-| SearchTextRequest | 75000 | 45 | 600 |
-| PhotoMedia | 175000 | 1 | 600 |
+| Methode           | Vorherlimit pro Tag | Nutzung bei Erstprüfung | Vorherlimit pro Minute |
+| ----------------- | ------------------: | ----------------------: | ---------------------: |
+| GetPlaceRequest   |              125000 |                      97 |                    600 |
+| SearchTextRequest |               75000 |                      45 |                    600 |
+| PhotoMedia        |              175000 |                       1 |                    600 |
 
 Die angezeigte Minuten-Nutzung war jeweils null; das ist keine Monatsnutzung.
 Diese großzügigen Vorherlimits sind keine Zusicherung kostenloser Nutzung. Andere
@@ -156,11 +156,11 @@ Die generische **IAM-Quotenansicht** mit dem Dienstfilter
 Maps-Quotenlink leitete auf „alle Maps APIs“ und wird deshalb nicht als Nachweis
 einer UI-Kit-Grenze verwendet. Der ebenfalls anpassbare UI-Kit-Vorherzustand lautete:
 
-| UI-Kit-Methode | Vorherlimit pro Tag | Nutzung bei Erstprüfung | Vorherlimit pro Minute |
-| --- | ---: | ---: | ---: |
-| Query Requests (Standard) | Unbegrenzt | 1 | 6000 |
-| Advanced Requests | 8000 | 0 | Unbegrenzt |
-| Sessions | Unbegrenzt | 0 | 6000 |
+| UI-Kit-Methode            | Vorherlimit pro Tag | Nutzung bei Erstprüfung | Vorherlimit pro Minute |
+| ------------------------- | ------------------: | ----------------------: | ---------------------: |
+| Query Requests (Standard) |          Unbegrenzt |                       1 |                   6000 |
+| Advanced Requests         |                8000 |                       0 |             Unbegrenzt |
+| Sessions                  |          Unbegrenzt |                       0 |                   6000 |
 
 Die oben gelesene konto-eigene Standard-Query-Preisstufe nennt 10000 freie
 Monatsereignisse; Billing-Nachlauf und andere Verbraucher bleiben bei der

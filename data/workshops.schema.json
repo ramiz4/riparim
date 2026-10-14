@@ -46,10 +46,7 @@
           "minimum": 0
         },
         "estimatedTotal": {
-          "type": [
-            "integer",
-            "null"
-          ],
+          "type": ["integer", "null"],
           "minimum": 1
         },
         "estimateSource": {
@@ -72,17 +69,10 @@
       ],
       "properties": {
         "status": {
-          "enum": [
-            "not_started",
-            "partial",
-            "completed"
-          ]
+          "enum": ["not_started", "partial", "completed"]
         },
         "reason": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "matchedPlaceIds": {
           "type": "integer",
@@ -187,18 +177,12 @@
           "maxItems": 30
         },
         "lat": {
-          "type": [
-            "number",
-            "null"
-          ],
+          "type": ["number", "null"],
           "minimum": 41.8,
           "maximum": 43.3
         },
         "lng": {
-          "type": [
-            "number",
-            "null"
-          ],
+          "type": ["number", "null"],
           "minimum": 19.8,
           "maximum": 21.9
         },
@@ -209,10 +193,7 @@
           "items": {
             "type": "object",
             "additionalProperties": false,
-            "required": [
-              "url",
-              "title"
-            ],
+            "required": ["url", "title"],
             "properties": {
               "url": {
                 "type": "string",
@@ -223,10 +204,7 @@
                 "type": "string"
               },
               "kind": {
-                "enum": [
-                  "official",
-                  "directory"
-                ]
+                "enum": ["official", "directory"]
               }
             }
           }
@@ -236,10 +214,7 @@
           "format": "date"
         },
         "status": {
-          "enum": [
-            "draft",
-            "published"
-          ]
+          "enum": ["draft", "published"]
         },
         "updatedAt": {
           "type": "string",
@@ -248,17 +223,10 @@
         "google": {
           "type": "object",
           "additionalProperties": false,
-          "required": [
-            "placeId",
-            "matchedAt",
-            "snapshot"
-          ],
+          "required": ["placeId", "matchedAt", "snapshot"],
           "properties": {
             "placeId": {
-              "type": [
-                "string",
-                "null"
-              ],
+              "type": ["string", "null"],
               "pattern": "^[A-Za-z0-9_-]{10,255}$"
             },
             "matchedAt": {
@@ -289,11 +257,7 @@
             "verification": {
               "type": "object",
               "additionalProperties": false,
-              "required": [
-                "method",
-                "sourceUrls",
-                "note"
-              ],
+              "required": ["method", "sourceUrls", "note"],
               "properties": {
                 "method": {
                   "enum": [
@@ -353,9 +317,7 @@
                 "const": "published"
               }
             },
-            "required": [
-              "status"
-            ]
+            "required": ["status"]
           },
           "then": {
             "properties": {
@@ -389,18 +351,12 @@
       ],
       "properties": {
         "rating": {
-          "type": [
-            "number",
-            "null"
-          ],
+          "type": ["number", "null"],
           "minimum": 1,
           "maximum": 5
         },
         "count": {
-          "type": [
-            "integer",
-            "null"
-          ],
+          "type": ["integer", "null"],
           "minimum": 0
         },
         "mapsUrl": {
@@ -421,10 +377,7 @@
           ]
         },
         "sourceLabel": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "checkedAt": {
           "anyOf": [

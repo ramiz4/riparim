@@ -38,17 +38,17 @@ Route und Marker. Cloudflare gewichtet Stichproben adaptiv: der aggregierte
 zeigt deshalb die gesendeten 30 Aufrufe und die beobachteten, gewichteten
 CPU-Statistiken. Sie behauptet keine lückenlose Messung jedes Aufrufs.
 
-| Route und Zustand | Format | Warme Aufrufe gesendet | Median CPU | p95 CPU | Maximum CPU | Erster beobachteter Aufruf |
-| --- | --- | ---: | ---: | ---: | ---: | ---: |
-| `/`, Gast | HTML | 30 | 0 ms | 1 ms | 1 ms | 4 ms |
-| `/anmelden`, Gast | HTML | 30 | 23 ms | 43 ms | 62 ms | 174 ms |
-| `/betrieb`, Gast | HTML | 30 | 34 ms | 50 ms | 73 ms | 49 ms |
-| `/bewertungen`, Gast | HTML | 30 | 23 ms | 33 ms | 35 ms | 29 ms |
-| `/einstellungen`, Gast | HTML | 30 | 17 ms | 26 ms | 27 ms | 71 ms |
-| `/werkstaetten`, Gast | RSC | 30 | 140 ms | 176 ms | 179 ms | 128 ms |
-| `/betrieb`, Gast | RSC | 30 | 15 ms | 22 ms | 45 ms | 21 ms |
-| `/api/session`, Gast mit bedeutungslosem Testcookie | JSON | 30 | 6 ms | 9 ms | 28 ms | 13 ms |
-| `/api/workshops`, Gast | JSON | 30 | 6 ms | 10 ms | 18 ms | 12 ms |
+| Route und Zustand                                   | Format | Warme Aufrufe gesendet | Median CPU | p95 CPU | Maximum CPU | Erster beobachteter Aufruf |
+| --------------------------------------------------- | ------ | ---------------------: | ---------: | ------: | ----------: | -------------------------: |
+| `/`, Gast                                           | HTML   |                     30 |       0 ms |    1 ms |        1 ms |                       4 ms |
+| `/anmelden`, Gast                                   | HTML   |                     30 |      23 ms |   43 ms |       62 ms |                     174 ms |
+| `/betrieb`, Gast                                    | HTML   |                     30 |      34 ms |   50 ms |       73 ms |                      49 ms |
+| `/bewertungen`, Gast                                | HTML   |                     30 |      23 ms |   33 ms |       35 ms |                      29 ms |
+| `/einstellungen`, Gast                              | HTML   |                     30 |      17 ms |   26 ms |       27 ms |                      71 ms |
+| `/werkstaetten`, Gast                               | RSC    |                     30 |     140 ms |  176 ms |      179 ms |                     128 ms |
+| `/betrieb`, Gast                                    | RSC    |                     30 |      15 ms |   22 ms |       45 ms |                      21 ms |
+| `/api/session`, Gast mit bedeutungslosem Testcookie | JSON   |                     30 |       6 ms |    9 ms |       28 ms |                      13 ms |
+| `/api/workshops`, Gast                              | JSON   |                     30 |       6 ms |   10 ms |       18 ms |                      12 ms |
 
 RSC wurde mit `RSC: 1`, `Accept: text/x-component` und dem kanonischen leeren
 `?_rsc`-Parameter separat angefordert. Nichtleere Probe-IDs erzeugten zunächst
@@ -136,11 +136,11 @@ Antworten enthalten rund 3 KB Betriebsdaten, 2,9 KB Bewertungen und 151 Bytes
 Kontozustand; größere reale Datenbestände sind damit nicht abschließend geprüft.
 
 | Angemeldeter GET | Kalter Median / Maximum | Warmer Median / p95 / Maximum |
-| --- | --- | --- |
-| `/api/session` | 13,27 / 17,31 ms | 2,65 / 4,02 / 4,78 ms |
-| `/api/business` | 13,89 / 18,88 ms | 4,20 / 5,86 / 6,62 ms |
-| `/api/visits` | 9,60 / 10,05 ms | 3,01 / 5,08 / 5,44 ms |
-| `/api/account` | 10,72 / 14,58 ms | 2,89 / 5,08 / 5,21 ms |
+| ---------------- | ----------------------- | ----------------------------- |
+| `/api/session`   | 13,27 / 17,31 ms        | 2,65 / 4,02 / 4,78 ms         |
+| `/api/business`  | 13,89 / 18,88 ms        | 4,20 / 5,86 / 6,62 ms         |
+| `/api/visits`    | 9,60 / 10,05 ms         | 3,01 / 5,08 / 5,44 ms         |
+| `/api/account`   | 10,72 / 14,58 ms        | 2,89 / 5,08 / 5,21 ms         |
 
 Eine aufgefrischte abgelaufene Sitzung benötigte kalt median/maximal 15,17 ms. Eine erstmals zugeordnete Altidentität lag bei
 10,27 / 13,40 ms, ein Providerausfall bei 9,96 / 10,45 ms.

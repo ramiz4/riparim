@@ -39,10 +39,7 @@
         "scopeEvidence": "Gjirafa explicitly describes sale and servicing of Mercedes-Benz and Smart cars; supports these brands without name inference.",
         "contactEvidence": "Gjirafa lists 044 164 141 and Shefqet Shkupi, Kalabri / Emshir, Prishtinë. Exact primary phone and street match the official Maps identity.",
         "additionalUrls": [],
-        "brandsPatch": [
-          "Mercedes-Benz",
-          "Smart"
-        ]
+        "brandsPatch": ["Mercedes-Benz", "Smart"]
       },
       "googleIdentity": {
         "placeId": "ChIJs4k20oyeVBMRVMCGu9mIn20",
@@ -56,9 +53,7 @@
       "name": "Auspuh Servis Kurti TD",
       "city": "Gjakova",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/auspuh-servis-kurti-td"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/auspuh-servis-kurti-td"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/auspuh-servis-kurti-td",
@@ -87,9 +82,7 @@
       "name": "Auto-Diagnostika",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/autodiagnostika-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/autodiagnostika-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/autodiagnostika-1",
@@ -105,9 +98,7 @@
       "name": "Auto Electronics",
       "city": "Prizren",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.autoelectronics-ks.com/"
-      ],
+      "sourceUrls": ["https://www.autoelectronics-ks.com/"],
       "sourceChecks": [
         {
           "url": "https://www.autoelectronics-ks.com/",
@@ -123,9 +114,7 @@
       "name": "Auto elektricist Ermiri",
       "city": "Prizren",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/auto-elektricist-ermiri"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/auto-elektricist-ermiri"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/auto-elektricist-ermiri",
@@ -141,9 +130,7 @@
       "name": "Auto Elektro Servis Niki",
       "city": "Gjilan",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-elektro-servis-niki-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-elektro-servis-niki-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/auto-elektro-servis-niki-1",
@@ -159,9 +146,7 @@
       "name": "Auto elektro Start",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-elektro-start-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-elektro-start-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/auto-elektro-start-1",
@@ -177,9 +162,7 @@
       "name": "Auto Fati",
       "city": "Prizren",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/auto-fati"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/auto-fati"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/auto-fati",
@@ -195,9 +178,7 @@
       "name": "Auto Ford service",
       "city": "Prizren",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/auto-ford-service"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/auto-ford-service"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/auto-ford-service",
@@ -213,9 +194,7 @@
       "name": "Auto Laker Kimi",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-laker-kimi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-laker-kimi-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/auto-laker-kimi-1",
@@ -231,9 +210,7 @@
       "name": "Auto Limar \"Alajdini\"",
       "city": "Prizren",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/auto-limar-alajdini"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/auto-limar-alajdini"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/auto-limar-alajdini",
@@ -249,9 +226,7 @@
       "name": "Auto Llamarist Valoni",
       "city": "Peja",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/auto-llamarist-valoni"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/auto-llamarist-valoni"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/auto-llamarist-valoni",
@@ -267,9 +242,7 @@
       "name": "Auto Ngjyrosje Fadili",
       "city": "Ferizaj",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/auto-ngjyrosje-fadili"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/auto-ngjyrosje-fadili"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/auto-ngjyrosje-fadili",
@@ -285,9 +258,7 @@
       "name": "Auto Pjesë&Service INOVATOR group",
       "city": "Ferizaj",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/autoserviceinovatorgroup-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/autoserviceinovatorgroup-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/autoserviceinovatorgroup-1",
@@ -303,9 +274,7 @@
       "name": "Auto Pjesë & Servis DUBOVA",
       "city": "Ferizaj",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-pjes--servis-dubova-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-pjes--servis-dubova-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/auto-pjes--servis-dubova-1",
@@ -321,9 +290,7 @@
       "name": "Auto Pjesë & Servis Fatosi",
       "city": "Graçanicë",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-pjes--servis-fatosi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-pjes--servis-fatosi-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/auto-pjes--servis-fatosi-1",
@@ -353,9 +320,7 @@
         "sourceUrl": "https://www.gjithebiznesi.com/XK/auto-rally-049-138-886",
         "scopeEvidence": "Independent car-repair directory category; also listed in Cybo Klina car-repair category.",
         "contactEvidence": "Independent source lists 049 138 886 and Mehmet Haxhaj, Klinë / Klinac 32000.",
-        "additionalUrls": [
-          "https://www.cybo.com/XK/klina/car-repair/"
-        ]
+        "additionalUrls": ["https://www.cybo.com/XK/klina/car-repair/"]
       },
       "googleIdentity": {
         "placeId": "ChIJQSGfTZoPUxMRbJPMdKm9pLM",
@@ -413,9 +378,7 @@
         "sourceUrl": "https://www.gjithebiznesi.com/XK/auto-service-bardhi-049-666-755",
         "scopeEvidence": "Independent car-repair directory category, also represented as a car_repair business by OpenStreetMap.",
         "contactEvidence": "Independent source lists 049 666 755 and M83G+QCR near customs / Deshmoret e Kombit, Pejë.",
-        "additionalUrls": [
-          "https://mapcarta.com/N5792764854"
-        ]
+        "additionalUrls": ["https://mapcarta.com/N5792764854"]
       },
       "googleIdentity": {
         "placeId": "ChIJM0I7MP39UhMRSugOjARCpw0",
@@ -460,9 +423,7 @@
       "name": "Auto Service \"MUSLIJA\"",
       "city": "Prizren",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/auto-service-muslija"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/auto-service-muslija"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/auto-service-muslija",
@@ -478,9 +439,7 @@
       "name": "Auto servis \"Agimi\"",
       "city": "Gjakova",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/auto-servis-agimi_1i"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/auto-servis-agimi_1i"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/auto-servis-agimi_1i",
@@ -496,9 +455,7 @@
       "name": "Auto Servis Bajrami",
       "city": "Peja",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/auto-servis-bajrami"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/auto-servis-bajrami"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/auto-servis-bajrami",
@@ -514,9 +471,7 @@
       "name": "Auto Servis Beni",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-beni-2"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-beni-2"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/auto-servis-beni-2",
@@ -564,9 +519,7 @@
       "name": "Auto Servis BULI",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/auto-servis-buli"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/auto-servis-buli"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/auto-servis-buli",
@@ -582,9 +535,7 @@
       "name": "Auto Servis Cufa",
       "city": "Ferizaj",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-cufa-2"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-cufa-2"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/auto-servis-cufa-2",
@@ -600,9 +551,7 @@
       "name": "Auto Servis Fia",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-fia-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-fia-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/auto-servis-fia-1",
@@ -618,9 +567,7 @@
       "name": "Auto Servis Ford Jashanica",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-ford-jashanica-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-ford-jashanica-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/auto-servis-ford-jashanica-1",
@@ -636,9 +583,7 @@
       "name": "Auto Servis \"Gashi\"",
       "city": "Peja",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/auto-servis-gashi"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/auto-servis-gashi"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/auto-servis-gashi",
@@ -654,9 +599,7 @@
       "name": "Auto Servis Gazi",
       "city": "Gjakova",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-gazi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-gazi-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/auto-servis-gazi-1",
@@ -672,9 +615,7 @@
       "name": "Auto Servis Goni",
       "city": "Peja",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/auto-servis-goni"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/auto-servis-goni"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/auto-servis-goni",
@@ -690,9 +631,7 @@
       "name": "Auto Servis Good&Year",
       "city": "Gjakova",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/auto-servis-good-year"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/auto-servis-good-year"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/auto-servis-good-year",
@@ -708,9 +647,7 @@
       "name": "Auto Servis Hoda",
       "city": "Ferizaj",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-hoda-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-hoda-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/auto-servis-hoda-1",
@@ -726,9 +663,7 @@
       "name": "Auto servis Karabeg",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-karabeg-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-karabeg-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/auto-servis-karabeg-1",
@@ -744,9 +679,7 @@
       "name": "Auto Servis Kiki",
       "city": "Ferizaj",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-kiki-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-kiki-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/auto-servis-kiki-1",
@@ -762,9 +695,7 @@
       "name": "Auto Servis Klima",
       "city": "Peja",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-klima-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-klima-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/auto-servis-klima-1",
@@ -780,9 +711,7 @@
       "name": "Auto Servis Lavdrimi",
       "city": "Ferizaj",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-lavdrimi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-lavdrimi-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/auto-servis-lavdrimi-1",
@@ -798,9 +727,7 @@
       "name": "Auto Servis Lumi-M",
       "city": "Gjakova",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://gjirafa.biz/autoservislumim-1"
-      ],
+      "sourceUrls": ["https://gjirafa.biz/autoservislumim-1"],
       "sourceChecks": [
         {
           "url": "https://gjirafa.biz/autoservislumim-1",
@@ -816,9 +743,7 @@
       "name": "Auto Servis Maloku",
       "city": "Deçan",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://galego.cybo.com/XK/pej%C3%AB/mechanic"
-      ],
+      "sourceUrls": ["https://galego.cybo.com/XK/pej%C3%AB/mechanic"],
       "sourceChecks": [
         {
           "url": "https://galego.cybo.com/XK-biz/auto-servis-maloku",
@@ -834,9 +759,7 @@
       "name": "Auto Servis Mendi",
       "city": "Ferizaj",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-mendi-2"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-mendi-2"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/auto-servis-mendi-2",
@@ -870,9 +793,7 @@
       "name": "Auto Servis Muriqi",
       "city": "Prizren",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/auto-servis-muriqi"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/auto-servis-muriqi"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/auto-servis-muriqi",
@@ -888,9 +809,7 @@
       "name": "Auto Servis Rizvanolli",
       "city": "Gjakova",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/auto-servis-rizvanolli"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/auto-servis-rizvanolli"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/auto-servis-rizvanolli",
@@ -906,9 +825,7 @@
       "name": "Auto Servis SEJDA",
       "city": "Gjilan",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-sejda-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-sejda-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/auto-servis-sejda-1",
@@ -942,9 +859,7 @@
       "name": "Auto Servis Visari",
       "city": "Prizren",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/auto-servis-visari"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/auto-servis-visari"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/auto-servis-visari",
@@ -960,9 +875,7 @@
       "name": "Auto Servis Xhelali",
       "city": "Prizren",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-xhelali-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-xhelali-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/auto-servis-xhelali-1",
@@ -992,9 +905,7 @@
         "sourceUrl": "https://www.gjithebiznesi.com/XK/auto-servis-xoni-049-231-674",
         "scopeEvidence": "Both independently readable Cybo and GjithëBiznesi identify this business as car repair.",
         "contactEvidence": "Both sources list 049 231 674 and CFV5+49J, M25-3, Gjilan 60000.",
-        "additionalUrls": [
-          "https://www.cybo.com/XK-biz/auto-servis-xoni"
-        ]
+        "additionalUrls": ["https://www.cybo.com/XK-biz/auto-servis-xoni"]
       },
       "googleIdentity": {
         "placeId": "ChIJL5Yb0l-NVBMR2cBjhlecSX4",
@@ -1027,9 +938,7 @@
       "name": "Automekanik Leoni",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/automekanik--leoni-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/automekanik--leoni-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/automekanik--leoni-1",
@@ -1045,9 +954,7 @@
       "name": "Automekanik Muja",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/automekanik-muja-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/automekanik-muja-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/automekanik-muja-1",
@@ -1063,9 +970,7 @@
       "name": "Automex",
       "city": "Gjakova",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/automex"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/automex"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/automex",
@@ -1081,9 +986,7 @@
       "name": "AutoNgjyrosje\"HASKUKA\"",
       "city": "Prizren",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/autongjyrosjehaskuka_1p"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/autongjyrosjehaskuka_1p"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/autongjyrosjehaskuka_1p",
@@ -1126,9 +1029,7 @@
       "name": "Autoservis Bekteshi",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/autoservis-bekteshi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-bekteshi-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/autoservis-bekteshi-1",
@@ -1144,9 +1045,7 @@
       "name": "Autoservis Difa",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/autoservis-difa-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-difa-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/autoservis-difa-1",
@@ -1162,9 +1061,7 @@
       "name": "Autoservis Irfi",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/autoservis-irfi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-irfi-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/autoservis-irfi-1",
@@ -1180,9 +1077,7 @@
       "name": "Autoservis KENI",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/autoservis-keni"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/autoservis-keni"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/autoservis-keni",
@@ -1198,9 +1093,7 @@
       "name": "AutoServis Naser Minushi",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/autoservis-naser-minushi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-naser-minushi-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/autoservis-naser-minushi-1",
@@ -1216,9 +1109,7 @@
       "name": "AutoServis Semini",
       "city": "Prizren",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/autoservis-semini"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/autoservis-semini"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/autoservis-semini",
@@ -1234,9 +1125,7 @@
       "name": "Axha",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/axha-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/axha-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/axha-1",
@@ -1252,9 +1141,7 @@
       "name": "Benita Company – Fahrzeugservice Klinë",
       "city": "Klinë",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://benita-ks.com/"
-      ],
+      "sourceUrls": ["https://benita-ks.com/"],
       "sourceChecks": [],
       "assessment": "excluded",
       "reason": "Tankstelle mit ausdrücklich beworbenem Schwerfahrzeug-Service. Der allgemeine Express-Service belegt keinen konkreten Pkw-Werkstattumfang.",
@@ -1265,9 +1152,7 @@
       "name": "BMW Prishtina",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/bmw-prishtina-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/bmw-prishtina-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/bmw-prishtina-1",
@@ -1283,9 +1168,7 @@
       "name": "Dida Service",
       "city": "Prizren",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/dida-service"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/dida-service"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/dida-service",
@@ -1301,9 +1184,7 @@
       "name": "DPF Auto Gjini",
       "city": "Prizren",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/dpf-auto-gjini"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/dpf-auto-gjini"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/dpf-auto-gjini",
@@ -1319,9 +1200,7 @@
       "name": "Fiat",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/fiat-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/fiat-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/fiat-1",
@@ -1337,9 +1216,7 @@
       "name": "Firi",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/firi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/firi-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/firi-1",
@@ -1355,9 +1232,7 @@
       "name": "G & B",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/g--b-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/g--b-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/g--b-1",
@@ -1373,9 +1248,7 @@
       "name": "Ibra",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/ibra-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/ibra-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/ibra-1",
@@ -1405,9 +1278,7 @@
       "name": "Koli",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/koli-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/koli-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/koli-1",
@@ -1423,9 +1294,7 @@
       "name": "Mercedes-Benz-Limi-Service",
       "city": "Istog",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK/%C5%BEa%C4%8D/car-repair/"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK/%C5%BEa%C4%8D/car-repair/"],
       "sourceChecks": [
         {
           "url": "https://galego.cybo.com/XK-biz/mercedes-benz-limi-service",
@@ -1441,9 +1310,7 @@
       "name": "Moto Stanki",
       "city": "Gjilan",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/moto-stanki-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/moto-stanki-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/moto-stanki-1",
@@ -1459,9 +1326,7 @@
       "name": "Nero",
       "city": "Prizren",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/nero_2Z"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/nero_2Z"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/nero_2Z",
@@ -1477,9 +1342,7 @@
       "name": "OPEL E.Rafuna",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/opel-e-rafuna"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/opel-e-rafuna"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/opel-e-rafuna",
@@ -1495,9 +1358,7 @@
       "name": "Opel Prishtina",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/opel-prishtina-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/opel-prishtina-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/opel-prishtina-1",
@@ -1513,9 +1374,7 @@
       "name": "Opel Rakovica",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/opel-rakovica-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/opel-rakovica-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/opel-rakovica-1",
@@ -1531,9 +1390,7 @@
       "name": "Peugeot te Beda",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-beda-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-beda-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/auto-servis-beda-1",
@@ -1549,9 +1406,7 @@
       "name": "Prishtina Auto Home",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/prishtina-auto-home-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/prishtina-auto-home-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/prishtina-auto-home-1",
@@ -1567,9 +1422,7 @@
       "name": "Reno Center MUÇIQI",
       "city": "Graçanicë",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/renaultcentermuciqi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/renaultcentermuciqi-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/renaultcentermuciqi-1",
@@ -1585,9 +1438,7 @@
       "name": "REX Automobile",
       "city": "Prizren",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK-biz/rex-automobile"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK-biz/rex-automobile"],
       "sourceChecks": [
         {
           "url": "https://www.cybo.com/XK-biz/rex-automobile",
@@ -1616,9 +1467,7 @@
       "name": "Skifti",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/skifti-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/skifti-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/skifti-1",
@@ -1634,9 +1483,7 @@
       "name": "Tachograf service Kienzle",
       "city": "Ferizaj",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK/ferizaj/car-repair"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK/ferizaj/car-repair"],
       "sourceChecks": [],
       "assessment": "excluded",
       "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis.",
@@ -1647,9 +1494,7 @@
       "name": "Tahograf SH.P.K",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://www.cybo.com/XK/pristina/car-repair"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK/pristina/car-repair"],
       "sourceChecks": [],
       "assessment": "excluded",
       "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis.",
@@ -1660,9 +1505,7 @@
       "name": "Turbo Service Engineering",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/turbo-engineering-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/turbo-engineering-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/turbo-engineering-1",
@@ -1678,9 +1521,7 @@
       "name": "Turbo Servis Turbo Klinika",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/turbo-klinika-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/turbo-klinika-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/turbo-klinika-1",
@@ -1696,9 +1537,7 @@
       "name": "Univerzall",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/univerzall-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/univerzall-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/univerzall-1",
@@ -1714,9 +1553,7 @@
       "name": "Xhema Auto Servis",
       "city": "Prishtina",
       "checkedAt": "2026-10-04",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/xhema-auto-servis-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/xhema-auto-servis-1"],
       "sourceChecks": [
         {
           "url": "https://stgres.gjirafa.biz/xhema-auto-servis-1",
@@ -1967,9 +1804,7 @@
         ],
         "checkedAt": "2026-10-04"
       },
-      "sourceUrls": [
-        "https://www.globalautomotive-ks.com/kontakti/"
-      ],
+      "sourceUrls": ["https://www.globalautomotive-ks.com/kontakti/"],
       "evidenceNotes": "Current official contact page explicitly publishes Rruga e Pejës Nr.80 Fushë Kosovë and +383 44/49 409 000. Replaces old /kontaktijic/ template page. Main phone/address unchanged; no identity reconfirmation needed."
     }
   ],

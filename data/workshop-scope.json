@@ -27,30 +27,22 @@
     {
       "workshopId": "tachograf-kienzle-ferizaj",
       "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis.",
-      "sourceUrls": [
-        "https://www.cybo.com/XK/ferizaj/car-repair"
-      ]
+      "sourceUrls": ["https://www.cybo.com/XK/ferizaj/car-repair"]
     },
     {
       "workshopId": "tahograf-prishtina",
       "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis.",
-      "sourceUrls": [
-        "https://www.cybo.com/XK/pristina/car-repair"
-      ]
+      "sourceUrls": ["https://www.cybo.com/XK/pristina/car-repair"]
     },
     {
       "workshopId": "benita-company-kline",
       "reason": "Tankstelle mit ausdrücklich beworbenem Schwerfahrzeug-Service. Der allgemeine Express-Service belegt keinen konkreten Pkw-Werkstattumfang.",
-      "sourceUrls": [
-        "https://benita-ks.com/"
-      ]
+      "sourceUrls": ["https://benita-ks.com/"]
     },
     {
       "workshopId": "opel-rakovica-prishtina",
       "reason": "Unabhängiges Verzeichnis markiert den zugeordneten Betrieb als geschlossen und den Kontakt als historisch. Keine bestätigte Wiedereröffnung; nicht veröffentlichen.",
-      "sourceUrls": [
-        "https://www.gjithebiznesi.com/XK/opel-rakovica"
-      ]
+      "sourceUrls": ["https://www.gjithebiznesi.com/XK/opel-rakovica"]
     }
   ]
 }

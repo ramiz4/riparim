@@ -1,12 +1,63 @@
-.my-reviews-page{min-height:calc(100svh - 180px);padding-top:var(--content-page-padding-top);padding-bottom:var(--content-page-padding-bottom);overflow-wrap:anywhere}
-.my-reviews-heading{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:var(--content-page-gap)}
-.my-reviews-heading h1:focus{outline:none}
-.my-reviews-heading h1{font-size:var(--content-page-title-size);font-weight:var(--content-page-title-weight);line-height:1.2;letter-spacing:-.8px}
-.my-reviews-heading p{margin-top:8px;color:var(--muted-foreground);font-size:15px;line-height:1.6}
-.my-reviews-page .visit{background:var(--card)}
-.my-reviews-page .visit-top>strong{min-width:0}
-.my-reviews-page .visit-status{white-space:normal;flex-shrink:0;max-width:55%}
-.my-reviews-page .visit-actions>button,.my-reviews-page .visit-list>.outline{min-height:44px}
-.my-reviews-page .login-prompt{padding:32px 20px;background:var(--card);border:1px solid var(--border);border-radius:12px}
-.my-reviews-page :is(a,button,summary):focus-visible{outline:3px solid var(--ring);outline-offset:3px}
-@media(max-width:720px){.my-reviews-heading{align-items:flex-start;flex-wrap:wrap;gap:16px}.my-reviews-page .visit-status{max-width:100%}}
+.my-reviews-page {
+  min-height: calc(100svh - 180px);
+  padding-top: var(--content-page-padding-top);
+  padding-bottom: var(--content-page-padding-bottom);
+  overflow-wrap: anywhere;
+}
+.my-reviews-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: var(--content-page-gap);
+}
+.my-reviews-heading h1:focus {
+  outline: none;
+}
+.my-reviews-heading h1 {
+  font-size: var(--content-page-title-size);
+  font-weight: var(--content-page-title-weight);
+  line-height: 1.2;
+  letter-spacing: -0.8px;
+}
+.my-reviews-heading p {
+  margin-top: 8px;
+  color: var(--muted-foreground);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.my-reviews-page .visit {
+  background: var(--card);
+}
+.my-reviews-page .visit-top > strong {
+  min-width: 0;
+}
+.my-reviews-page .visit-status {
+  white-space: normal;
+  flex-shrink: 0;
+  max-width: 55%;
+}
+.my-reviews-page .visit-actions > button,
+.my-reviews-page .visit-list > .outline {
+  min-height: 44px;
+}
+.my-reviews-page .login-prompt {
+  padding: 32px 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.my-reviews-page :is(a, button, summary):focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 3px;
+}
+@media (max-width: 720px) {
+  .my-reviews-heading {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .my-reviews-page .visit-status {
+    max-width: 100%;
+  }
+}

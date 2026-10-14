@@ -8,7 +8,10 @@
     "squash_merge_commit_message": "PR_BODY"
   },
   "production_environment": {
-    "deployment_branch_policy": {"protected_branches": false, "custom_branch_policies": true}
+    "deployment_branch_policy": {
+      "protected_branches": false,
+      "custom_branch_policies": true
+    }
   },
   "main": {
     "required_status_checks": {

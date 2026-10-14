@@ -1,150 +1,1117 @@
-import assert from 'node:assert/strict';
-import {mkdir,writeFile} from 'node:fs/promises';
-import {createRequire} from 'node:module';
-import {JSDOM,VirtualConsole} from 'jsdom';
-const dom=new JSDOM('<div id="root"></div>',{url:'https://riparim.example.test/betriebe',pretendToBeVisual:true,virtualConsole:new VirtualConsole()});
-for(const key of ['window','document','navigator','HTMLElement','HTMLButtonElement','HTMLFormElement','HTMLInputElement','HTMLSelectElement','HTMLTextAreaElement','DocumentFragment','Element','Node','NodeFilter','MutationObserver','CustomEvent','Event','MouseEvent','KeyboardEvent','getComputedStyle'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});
-globalThis.requestAnimationFrame=dom.window.requestAnimationFrame.bind(dom.window);globalThis.cancelAnimationFrame=dom.window.cancelAnimationFrame.bind(dom.window);globalThis.IS_REACT_ACT_ENVIRONMENT=true;globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};HTMLElement.prototype.scrollIntoView=function(){};
-const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
-const out='.test-runtime/business-ui';await mkdir(out,{recursive:true});
-const bundle=await build({stdin:{contents:"export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {BusinessPanel} from './components/business-panel';",resolveDir:process.cwd(),loader:'tsx'},outfile:out+'/ui.mjs',bundle:true,write:false,format:'esm',platform:'node',packages:'external',alias:{'next/link':'vinext/shims/link'}});await writeFile(out+'/ui.mjs',bundle.outputFiles[0].contents);
-const {createElement,act}=await import('react'),{createRoot}=await import('react-dom/client'),{BusinessPanel,I18nProvider,getMessages}=await import(new URL('../'+out+'/ui.mjs',import.meta.url));
-const workshop={id:'fixture-workshop',name:'Fiktive Werkstatt',city:'Prishtina',address:'Fixture Street 10',phone:'+38344123456',phoneNote:'Betrieb',whatsapp:'',services:['Inspektion & Wartung'],serviceDetails:['Inspektion'],description:'A sufficiently detailed fictional passenger-car workshop description.',status:'published',updatedAt:'2026-10-04T09:00:00Z'};
-let records={claims:[],changes:[],workshops:[]},mode='success',pending=null,loadFailure=false,holdLoad=false,resolveLoad=null;
-const requests=[];
-const requestView=(id,kind)=>({id,workshopId:workshop.id,workshopName:workshop.name,owner:'fixture-owner',status:'pending',moderatorNote:'',revision:0,createdAt:'2026-10-04T10:00:00Z',...(kind==='claim'?{evidence:'A private and sufficiently detailed fictional company-register explanation.',evidenceLinks:['https://business.example.test/proof']}:{profile:{phone:workshop.phone,phoneNote:workshop.phoneNote,whatsapp:workshop.whatsapp,services:workshop.services,serviceDetails:workshop.serviceDetails,description:workshop.description+' Proposed extra services.'},baseUpdatedAt:workshop.updatedAt})});
-const currentState=()=>({...records,pendingClaims:records.pendingClaims??records.claims.filter(row=>row.status==='pending').map(({id,workshopId,workshopName,createdAt,documents})=>({id,workshopId,workshopName,createdAt,documents})),pendingChangeRequestIds:records.pendingChangeRequestIds??records.changes.filter(row=>row.status==='pending').map(row=>row.id),pendingChangeWorkshopIds:records.pendingChangeWorkshopIds??records.changes.filter(row=>row.status==='pending'&&records.workshops.some(workshop=>workshop.id===row.workshopId)).map(row=>row.workshopId)});
-globalThis.fetch=async(url,options)=>{
- const method=options?.method??'GET',body=options?.body instanceof FormData?{kind:'claim',input:Object.fromEntries(options.body)}:options?.body?JSON.parse(options.body):null;requests.push({url,method,body});
- if(method==='GET'){assert(url.startsWith('/api/business'));if(holdLoad)return new Promise(resolve=>resolveLoad=resolve);const query=new URL(url,'https://riparim.example.test').searchParams;if(query.has('claimCursor'))return Response.json({...currentState(),claims:records.claimPage??[requestView('00000000-0000-4000-8000-000000000011','claim')],nextClaimCursor:null});if(query.has('changeCursor'))return Response.json({...currentState(),changes:records.changePage??[requestView('00000000-0000-4000-8000-000000000012','change')],nextChangeCursor:null});if(loadFailure)return Response.json({error:'Fixture loading failed',errorCode:'business_unavailable'},{status:503});return Response.json(url.includes('moderation')?{...currentState(),claims:records.claims.filter(row=>row.status==='pending'),changes:records.changes.filter(row=>row.status==='pending')}:currentState());}
- assert.equal(url,'/api/business','Only the isolated business fixture receives writes');
- if(method==='POST'){
-  if(mode==='failure')return Response.json({error:'Fixture duplicate or invalid draft',errorCode:'business_draft_conflict'},{status:409});
-  if(body.kind==='claim'){assert.deepEqual(Object.keys(body),['kind','input']);assert.deepEqual(Object.keys(body.input),body.input.file?['workshopId','evidence','file']:['workshopId','evidence']);records.claims.push(requestView('00000000-0000-4000-8000-000000000001','claim'));return Response.json({status:'pending'},{status:201});}
-  assert.equal(body.kind,'change');assert.deepEqual(Object.keys(body.profile).sort(),['description','phone','phoneNote','serviceDetails','services','whatsapp'].sort());
-  const commit=()=>{records.changes.push({...requestView('00000000-0000-4000-8000-000000000002','change'),profile:body.profile});return Response.json({status:'pending'},{status:201});};
-  if(mode==='pending')return new Promise(resolve=>pending={resolve,commit});return commit();
- }
- assert.equal(method,'PATCH');assert.deepEqual(Object.keys(body),['kind','id','revision','decision','note']);
- if(mode==='failure')return Response.json({error:'Fixture stale decision',errorCode:'business_claim_conflict'},{status:409});
- const commit=()=>{const list=body.kind==='claim'?records.claims:records.changes;const record=list.find(row=>row.id===body.id);record.status=body.decision;record.revision++;record.moderatorNote=body.note;return Response.json({ok:true});};
- if(mode==='pending')return new Promise(resolve=>pending={resolve,commit});return commit();
+import assert from "node:assert/strict";
+import { mkdir, writeFile } from "node:fs/promises";
+import { createRequire } from "node:module";
+import { JSDOM, VirtualConsole } from "jsdom";
+const dom = new JSDOM('<div id="root"></div>', {
+  url: "https://riparim.example.test/betriebe",
+  pretendToBeVisual: true,
+  virtualConsole: new VirtualConsole(),
+});
+for (const key of [
+  "window",
+  "document",
+  "navigator",
+  "HTMLElement",
+  "HTMLButtonElement",
+  "HTMLFormElement",
+  "HTMLInputElement",
+  "HTMLSelectElement",
+  "HTMLTextAreaElement",
+  "DocumentFragment",
+  "Element",
+  "Node",
+  "NodeFilter",
+  "MutationObserver",
+  "CustomEvent",
+  "Event",
+  "MouseEvent",
+  "KeyboardEvent",
+  "getComputedStyle",
+])
+  Object.defineProperty(globalThis, key, {
+    value: dom.window[key],
+    configurable: true,
+  });
+globalThis.requestAnimationFrame = dom.window.requestAnimationFrame.bind(
+  dom.window,
+);
+globalThis.cancelAnimationFrame = dom.window.cancelAnimationFrame.bind(
+  dom.window,
+);
+globalThis.IS_REACT_ACT_ENVIRONMENT = true;
+globalThis.ResizeObserver = class {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
 };
-let root=createRoot(document.getElementById('root')),passed=0,view='businesses',testLocale='de';
-const check=(value,label)=>{assert(value,label);passed++;};
-const button=label=>[...document.querySelectorAll('button')].find(node=>node.textContent===label);
-const control=label=>[...document.querySelectorAll('label')].find(node=>node.textContent.startsWith(label))?.querySelector('input,select,textarea')??document.getElementById([...document.querySelectorAll('label')].find(node=>node.textContent===label)?.htmlFor);
-const click=async node=>{assert(node,'Expected UI control exists');await act(async()=>{node.focus();node.click();});};
-const type=async(node,value)=>{const prototype=node instanceof HTMLTextAreaElement?HTMLTextAreaElement.prototype:HTMLInputElement.prototype;await act(async()=>{Object.getOwnPropertyDescriptor(prototype,'value').set.call(node,value);node.dispatchEvent(new Event('input',{bubbles:true}));});};
-const submit=async form=>act(async()=>form.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));
-const render=async(moderation=false)=>act(async()=>root.render(fixtureMessages(createElement(BusinessPanel,{moderation,view}))));
-const remount=async(moderation=false)=>{await act(async()=>root.unmount());root=createRoot(document.getElementById('root'));await render(moderation);};
-async function chooseDecisionReason(label){
- const trigger=document.querySelector('[role="alertdialog"] [role="combobox"]');
- await act(async()=>{trigger.focus();trigger.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true,cancelable:true}));});
- const option=[...document.querySelectorAll('[role="option"]')].find(node=>node.textContent===label);assert(option,'Expected decision reason exists');
- await act(async()=>{option.focus();option.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true}));});
+HTMLElement.prototype.scrollIntoView = function () {};
+const { build } = createRequire(new URL("../package.json", import.meta.url))(
+  "esbuild",
+);
+const out = ".test-runtime/business-ui";
+await mkdir(out, { recursive: true });
+const bundle = await build({
+  stdin: {
+    contents:
+      "export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {BusinessPanel} from './components/business-panel';",
+    resolveDir: process.cwd(),
+    loader: "tsx",
+  },
+  outfile: out + "/ui.mjs",
+  bundle: true,
+  write: false,
+  format: "esm",
+  platform: "node",
+  packages: "external",
+  alias: { "next/link": "vinext/shims/link" },
+});
+await writeFile(out + "/ui.mjs", bundle.outputFiles[0].contents);
+const { createElement, act } = await import("react"),
+  { createRoot } = await import("react-dom/client"),
+  { BusinessPanel, I18nProvider, getMessages } = await import(
+    new URL("../" + out + "/ui.mjs", import.meta.url)
+  );
+const workshop = {
+  id: "fixture-workshop",
+  name: "Fiktive Werkstatt",
+  city: "Prishtina",
+  address: "Fixture Street 10",
+  phone: "+38344123456",
+  phoneNote: "Betrieb",
+  whatsapp: "",
+  services: ["Inspektion & Wartung"],
+  serviceDetails: ["Inspektion"],
+  description:
+    "A sufficiently detailed fictional passenger-car workshop description.",
+  status: "published",
+  updatedAt: "2026-10-04T09:00:00Z",
+};
+let records = { claims: [], changes: [], workshops: [] },
+  mode = "success",
+  pending = null,
+  loadFailure = false,
+  holdLoad = false,
+  resolveLoad = null;
+const requests = [];
+const requestView = (id, kind) => ({
+  id,
+  workshopId: workshop.id,
+  workshopName: workshop.name,
+  owner: "fixture-owner",
+  status: "pending",
+  moderatorNote: "",
+  revision: 0,
+  createdAt: "2026-10-04T10:00:00Z",
+  ...(kind === "claim"
+    ? {
+        evidence:
+          "A private and sufficiently detailed fictional company-register explanation.",
+        evidenceLinks: ["https://business.example.test/proof"],
+      }
+    : {
+        profile: {
+          phone: workshop.phone,
+          phoneNote: workshop.phoneNote,
+          whatsapp: workshop.whatsapp,
+          services: workshop.services,
+          serviceDetails: workshop.serviceDetails,
+          description: workshop.description + " Proposed extra services.",
+        },
+        baseUpdatedAt: workshop.updatedAt,
+      }),
+});
+const currentState = () => ({
+  ...records,
+  pendingClaims:
+    records.pendingClaims ??
+    records.claims
+      .filter((row) => row.status === "pending")
+      .map(({ id, workshopId, workshopName, createdAt, documents }) => ({
+        id,
+        workshopId,
+        workshopName,
+        createdAt,
+        documents,
+      })),
+  pendingChangeRequestIds:
+    records.pendingChangeRequestIds ??
+    records.changes
+      .filter((row) => row.status === "pending")
+      .map((row) => row.id),
+  pendingChangeWorkshopIds:
+    records.pendingChangeWorkshopIds ??
+    records.changes
+      .filter(
+        (row) =>
+          row.status === "pending" &&
+          records.workshops.some((workshop) => workshop.id === row.workshopId),
+      )
+      .map((row) => row.workshopId),
+});
+globalThis.fetch = async (url, options) => {
+  const method = options?.method ?? "GET",
+    body =
+      options?.body instanceof FormData
+        ? { kind: "claim", input: Object.fromEntries(options.body) }
+        : options?.body
+          ? JSON.parse(options.body)
+          : null;
+  requests.push({ url, method, body });
+  if (method === "GET") {
+    assert(url.startsWith("/api/business"));
+    if (holdLoad) return new Promise((resolve) => (resolveLoad = resolve));
+    const query = new URL(url, "https://riparim.example.test").searchParams;
+    if (query.has("claimCursor"))
+      return Response.json({
+        ...currentState(),
+        claims: records.claimPage ?? [
+          requestView("00000000-0000-4000-8000-000000000011", "claim"),
+        ],
+        nextClaimCursor: null,
+      });
+    if (query.has("changeCursor"))
+      return Response.json({
+        ...currentState(),
+        changes: records.changePage ?? [
+          requestView("00000000-0000-4000-8000-000000000012", "change"),
+        ],
+        nextChangeCursor: null,
+      });
+    if (loadFailure)
+      return Response.json(
+        { error: "Fixture loading failed", errorCode: "business_unavailable" },
+        { status: 503 },
+      );
+    return Response.json(
+      url.includes("moderation")
+        ? {
+            ...currentState(),
+            claims: records.claims.filter((row) => row.status === "pending"),
+            changes: records.changes.filter((row) => row.status === "pending"),
+          }
+        : currentState(),
+    );
+  }
+  assert.equal(
+    url,
+    "/api/business",
+    "Only the isolated business fixture receives writes",
+  );
+  if (method === "POST") {
+    if (mode === "failure")
+      return Response.json(
+        {
+          error: "Fixture duplicate or invalid draft",
+          errorCode: "business_draft_conflict",
+        },
+        { status: 409 },
+      );
+    if (body.kind === "claim") {
+      assert.deepEqual(Object.keys(body), ["kind", "input"]);
+      assert.deepEqual(
+        Object.keys(body.input),
+        body.input.file
+          ? ["workshopId", "evidence", "file"]
+          : ["workshopId", "evidence"],
+      );
+      records.claims.push(
+        requestView("00000000-0000-4000-8000-000000000001", "claim"),
+      );
+      return Response.json({ status: "pending" }, { status: 201 });
+    }
+    assert.equal(body.kind, "change");
+    assert.deepEqual(
+      Object.keys(body.profile).sort(),
+      [
+        "description",
+        "phone",
+        "phoneNote",
+        "serviceDetails",
+        "services",
+        "whatsapp",
+      ].sort(),
+    );
+    const commit = () => {
+      records.changes.push({
+        ...requestView("00000000-0000-4000-8000-000000000002", "change"),
+        profile: body.profile,
+      });
+      return Response.json({ status: "pending" }, { status: 201 });
+    };
+    if (mode === "pending")
+      return new Promise((resolve) => (pending = { resolve, commit }));
+    return commit();
+  }
+  assert.equal(method, "PATCH");
+  assert.deepEqual(Object.keys(body), [
+    "kind",
+    "id",
+    "revision",
+    "decision",
+    "note",
+  ]);
+  if (mode === "failure")
+    return Response.json(
+      { error: "Fixture stale decision", errorCode: "business_claim_conflict" },
+      { status: 409 },
+    );
+  const commit = () => {
+    const list = body.kind === "claim" ? records.claims : records.changes;
+    const record = list.find((row) => row.id === body.id);
+    record.status = body.decision;
+    record.revision++;
+    record.moderatorNote = body.note;
+    return Response.json({ ok: true });
+  };
+  if (mode === "pending")
+    return new Promise((resolve) => (pending = { resolve, commit }));
+  return commit();
+};
+let root = createRoot(document.getElementById("root")),
+  passed = 0,
+  view = "businesses",
+  testLocale = "de";
+const check = (value, label) => {
+  assert(value, label);
+  passed++;
+};
+const button = (label) =>
+  [...document.querySelectorAll("button")].find(
+    (node) => node.textContent === label,
+  );
+const control = (label) =>
+  [...document.querySelectorAll("label")]
+    .find((node) => node.textContent.startsWith(label))
+    ?.querySelector("input,select,textarea") ??
+  document.getElementById(
+    [...document.querySelectorAll("label")].find(
+      (node) => node.textContent === label,
+    )?.htmlFor,
+  );
+const click = async (node) => {
+  assert(node, "Expected UI control exists");
+  await act(async () => {
+    node.focus();
+    node.click();
+  });
+};
+const type = async (node, value) => {
+  const prototype =
+    node instanceof HTMLTextAreaElement
+      ? HTMLTextAreaElement.prototype
+      : HTMLInputElement.prototype;
+  await act(async () => {
+    Object.getOwnPropertyDescriptor(prototype, "value").set.call(node, value);
+    node.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+};
+const submit = async (form) =>
+  act(async () =>
+    form.dispatchEvent(
+      new Event("submit", { bubbles: true, cancelable: true }),
+    ),
+  );
+const render = async (moderation = false) =>
+  act(async () =>
+    root.render(
+      fixtureMessages(createElement(BusinessPanel, { moderation, view })),
+    ),
+  );
+const remount = async (moderation = false) => {
+  await act(async () => root.unmount());
+  root = createRoot(document.getElementById("root"));
+  await render(moderation);
+};
+async function chooseDecisionReason(label) {
+  const trigger = document.querySelector(
+    '[role="alertdialog"] [role="combobox"]',
+  );
+  await act(async () => {
+    trigger.focus();
+    trigger.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "ArrowDown",
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+  });
+  const option = [...document.querySelectorAll('[role="option"]')].find(
+    (node) => node.textContent === label,
+  );
+  assert(option, "Expected decision reason exists");
+  await act(async () => {
+    option.focus();
+    option.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "Enter",
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+  });
 }
-const dialog=()=>document.querySelector('[role="alertdialog"]');
-try{
- loadFailure=true;await render();check(document.querySelector('[role="alert"]').textContent===getMessages('de').management.businessUnavailable&&button('Erneut versuchen'),'Loading failure exposes an accessible refresh action');
- check(document.querySelector('header h1')?.textContent==='Meine Betriebe'&&!document.querySelector('header button')&&!button('Aktualisieren'),'The page title has no redundant refresh action');
- loadFailure=false;await click(button('Erneut versuchen'));
- check(document.querySelector('h1').textContent==='Meine Betriebe'&&!document.querySelector('form')&&!document.querySelector('h2')&&!document.querySelector('a[href="/werkstaetten"]'),'An empty business overview shows guidance without the removed finder or an embedded claim form');
- loadFailure=true;await remount(true);check(button('Erneut versuchen')&&!button('Aktualisieren'),'Moderation shows retry only when loading fails');
- loadFailure=false;await click(button('Erneut versuchen'));check(!button('Erneut versuchen')&&!button('Aktualisieren'),'A recovered moderation queue has no redundant refresh button');await remount();
- view='requests';records.claims=[{...requestView('00000000-0000-4000-8000-000000000001','claim'),documents:[{id:'00000000-0000-4000-8000-000000000021',fileName:'proof.pdf'},{id:'00000000-0000-4000-8000-000000000022',fileName:'register.png'}]}];await remount();
- check(document.querySelectorAll('a[href*="document="]').length===2,'The applicant overview links every document individually');await remount(true);check(document.querySelectorAll('a[href*="document="]').length===2,'The moderation queue links every private document individually');await remount();
- check(document.querySelector('.business-status').textContent==='In Prüfung'&&!document.querySelector('form'),'The overview shows a pending claim without the application form');
- check(document.querySelector('.business-panel').textContent.includes('Dein Nachweis wird geprüft')&&document.querySelector('.business-panel').textContent.includes('separate Freigabe'),'A pending claim explains manual review and the next step without implying publication');
- view='businesses';records.workshops=[workshop];await remount();
- check(document.querySelector('h2').textContent===workshop.name&&!document.body.textContent.includes('Deine Profile')&&!document.body.textContent.includes('Bearbeite Kontakt, Leistungen und Beschreibung.'),'Owned workshop names lead directly into compact cards without redundant section copy');
- const editorOpener=button('Profil bearbeiten');await click(editorOpener);check(document.querySelector('[role="dialog"]').contains(document.activeElement)&&!document.querySelector('.business-panel .business-form'),'Profile editing opens a focused modal outside the overview');await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));await act(async()=>new Promise(resolve=>setTimeout(resolve,0)));check(!document.querySelector('[role="dialog"]')&&document.activeElement===editorOpener,'Escape returns focus to the exact workshop edit action');await click(editorOpener);view='requests';await render();check(document.querySelector('h1').textContent==='Meine Betriebsanträge'&&!document.querySelector('form'),'Changing to requests never retains a profile editor in the new page');view='businesses';await render();
- check(control('Telefon').value===workshop.phone&&control('Beschreibung').value===workshop.description,'The owner editor uses the current approved contact and description');
- check(document.querySelector('.opening-enabled input')&&!document.querySelector('.opening-day'),'Hours start explicitly unspecified');
- await click(document.querySelector('.opening-enabled input'));check(document.querySelectorAll('.opening-day').length===7,'Owner can edit all seven weekdays');
- const monday=document.querySelector('.opening-day select');await act(async()=>{Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype,'value').set.call(monday,'open');monday.dispatchEvent(new Event('change',{bubbles:true}));});
- check(document.querySelectorAll('.opening-interval').length===1,'Opening a day starts one editable interval');
- await click(button('Montag auf Montag–Freitag übernehmen'));check(document.querySelectorAll('.opening-interval').length===5,'Copy fills only weekdays');
- await click(button('Ausnahme hinzufügen'));check(document.querySelector('.opening-exception input[type="date"]'),'Exception dates have an accessible native date control');
- await click(document.querySelector('.opening-exception button'));
- await click(document.querySelector('.opening-enabled input'));check(!document.querySelector('.opening-day'),'Owner can clear their hours');
- check(document.querySelector('[role="dialog"]').textContent.includes('Quellen und Freigabestatus bleiben geschützt'),'The editor explains protected identity and publication fields');
- await type(control('Beschreibung'),workshop.description+' Additional documented repair services.');mode='pending';await submit(control('Telefon').form);
- check(document.querySelector('.business-form fieldset').disabled&&[...document.querySelector('[role="dialog"]').querySelectorAll('button')].every(node=>node.matches(':disabled')),'A pending draft disables both modal footer and editor actions');await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));check(document.querySelector('[role="dialog"]'),'Escape cannot dismiss the editor while submission is pending');
- check(requests.filter(row=>row.method==='POST'&&row.body.kind==='change').length===1,'The pending editor issues one scoped change request');
- await act(async()=>pending.resolve(pending.commit()));pending=null;mode='success';
- check(!document.querySelector('[role="dialog"]')&&button('Profil bearbeiten').disabled,'Submitted drafts close the editor and prevent duplicates while awaiting moderation');
- check(document.querySelector('[role="status"]').textContent.includes('bisherigen öffentlichen Angaben'),'Submission clearly preserves the previously published profile');
- view='requests';await remount();check(!button('Profil bearbeiten')&&document.querySelector('h1').textContent==='Meine Betriebsanträge','Requests have their own title and contain no profile editor');
- const proposal=document.querySelector('.business-proposal').closest('details');check(proposal&&!proposal.open&&proposal.querySelector('summary').textContent==='Eingereichte Angaben ansehen','Customers can inspect submitted changes without a large expanded proposal');
- records.claims=[requestView('00000000-0000-4000-8000-000000000003','claim')];records.workshops=[workshop];await remount(true);
- check(document.querySelector('.business-evidence').textContent.includes('company-register')&&document.querySelector('.business-request a').getAttribute('rel')==='noopener noreferrer','The administrator sees private evidence with safe external links');
- check(document.querySelector('.business-current summary').textContent==='Aktuell freigegebene Angaben ansehen','Change review includes the approved profile for comparison');
- const decisionOpener=button('Bestätigen'),decisionHeading=decisionOpener.closest('section').querySelector('h2');await click(decisionOpener);check(dialog().contains(document.activeElement),'Moderation confirmation takes keyboard focus');
- check(button('Entscheidung speichern').disabled&&!dialog().querySelector('textarea'),'Moderation starts with a required reason selection');check(dialog().classList.contains('app-dialog')&&dialog().querySelector('[data-slot=alert-dialog-header]')&&dialog().querySelector('[data-slot=dialog-body]')&&dialog().querySelector('[data-slot=alert-dialog-footer]'),'Decision dialogs use the shared header, scrolling body and footer');
- await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));
- await act(async()=>new Promise(resolve=>setTimeout(resolve,0)));check(!dialog()&&requests.filter(row=>row.method==='PATCH').length===0&&document.activeElement===decisionOpener,'Escape cancels without a write and restores the exact decision action');await click(decisionOpener);await click(button('Abbrechen'));await act(async()=>new Promise(resolve=>setTimeout(resolve,0)));check(!dialog()&&document.activeElement===decisionOpener,'Cancelling returns keyboard focus to the same request');
- await click(button('Bestätigen'));await chooseDecisionReason('Inhabernachweis geprüft und bestätigt');mode='pending';await click(button('Entscheidung speichern'));
- check([...dialog().querySelectorAll('button')].every(node=>node.disabled),'Pending moderation locks confirmation and cancellation');
- await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));
- check(dialog()&&requests.filter(row=>row.method==='PATCH').length===1,'A pending decision cannot be dismissed or duplicated');
- await act(async()=>pending.resolve(pending.commit()));pending=null;mode='success';
- await act(async()=>new Promise(resolve=>setTimeout(resolve,0)));check(!dialog()&&document.querySelector('[role="status"]').textContent==='Entscheidung gespeichert.'&&document.activeElement===decisionHeading,'A confirmed decision restores focus to the persistent queue heading after its row leaves');
- await click(button('Ablehnen'));await chooseDecisionReason('Anderer Grund');await type(control('Eigene Begründung'),'The proposed fictional changes require additional proof.');mode='failure';await click(button('Entscheidung speichern'));
- check(dialog().querySelector('[role="alert"]').textContent===getMessages('de').management.business_claim_conflict,'A stale decision remains visible and is not announced as success');
- mode='success';await click(button('Entscheidung speichern'));
- check(!dialog()&&document.querySelector('.business-panel').textContent.includes('Keine Änderungsentwürfe vorhanden'),'A confirmed rejection clears the pending change queue');
- records={workshops:[workshop],claims:[requestView('00000000-0000-4000-8000-000000000004','claim')],changes:[requestView('00000000-0000-4000-8000-000000000005','change')],nextClaimCursor:'fixture-claim-cursor',nextChangeCursor:'fixture-change-cursor'};await remount(true);
- await click(button('Weitere Anträge laden'));
- check(document.querySelectorAll('.business-request').length===3&&!button('Weitere Anträge laden')&&button('Weitere Änderungen laden'),'Claim pagination appends older requests without resetting the independent draft queue');
- await click(button('Weitere Änderungen laden'));
- check(document.querySelectorAll('.business-request').length===4&&!button('Weitere Änderungen laden'),'Draft pagination appends older proposals and stops at the last page');
- records={workshops:[],claims:[{...requestView('00000000-0000-4000-8000-000000000020','claim'),status:'rejected',moderatorNote:'Please supplement the fictional register entry.'}],changes:[]};await remount();
- check(document.querySelector('h2').textContent===workshop.name&&!document.querySelector('form'),'A history-only overview shows its decisions without an embedded claim form');
- check(document.querySelector('.business-request').textContent.includes('Dieser Antrag wurde abgelehnt. Beachte den Prüfvermerk.')&&document.querySelector('.business-note').textContent.includes('supplement'),'Historical rejected claims report their outcome and retain the private review note');
- records={workshops:[workshop],claims:[{...requestView('00000000-0000-4000-8000-000000000021','claim'),status:'approved'}],changes:[{...requestView('00000000-0000-4000-8000-000000000022','change'),status:'rejected',moderatorNote:'Please correct the fictional contact number.'},{...requestView('00000000-0000-4000-8000-000000000023','change'),status:'approved'}]};await remount();
- check(document.querySelector('.business-panel').textContent.includes('Dieser Inhabernachweis wurde bestätigt')&&!button('Profil bearbeiten'),'Confirmed ownership is reported separately from profile editing');
- check(document.querySelector('.business-panel').textContent.includes('Diese Änderungen wurden abgelehnt. Beachte den Prüfvermerk.')&&[...document.querySelectorAll('.business-status')].some(node=>node.textContent==='Freigegeben'),'Historical rejected changes report their outcome while approved changes clearly indicate publication approval');
- view='businesses';records={workshops:[workshop],claims:[],changes:[]};await remount();await click(button('Profil bearbeiten'));loadFailure=true;await submit(control('Telefon').form);
- check(document.querySelector('[role="status"]').textContent.includes('eingereicht')&&document.querySelector('[role="alert"]').textContent.includes('bereits eingereicht')&&document.querySelector('[role="alert"]').textContent.includes('Erneut versuchen'),'A saved draft with failed reload remains saved and offers a retry');
- loadFailure=false;await click(button('Erneut versuchen'));check(button('Profil bearbeiten').disabled,'Retry recovers a saved change lock without resubmission');
- records={workshops:[],claims:[],changes:[]};holdLoad=true;await remount();
- check(document.querySelector('[role="status"]').textContent==='Betriebsdaten werden geladen …'&&!button('Aktualisieren')&&document.querySelector('header h1').textContent==='Meine Betriebe','Initial loading keeps the page title visible and prevents a duplicate reload');
- holdLoad=false;await act(async()=>resolveLoad(Response.json(currentState())));resolveLoad=null;
- view='requests';records={workshops:[],claims:Array.from({length:50},(_,index)=>({...requestView(`history-${index}`,'claim'),status:'approved'})),changes:[],pendingClaims:[{id:'older-pending-claim',workshopId:workshop.id,workshopName:workshop.name,createdAt:'2020-01-01T00:00:00Z'}],pendingChangeWorkshopIds:[],nextClaimCursor:'older-history'};await remount();
- check(document.querySelector('h2').textContent===workshop.name&&document.querySelector('.business-status').textContent==='In Prüfung'&&document.querySelector('.business-request').textContent.includes('Dein Nachweis wird geprüft')&&!document.querySelector('.business-claim'),'An older current claim remains the visible next step without paging through historical decisions');
- records={...records,pendingClaims:[]};await remount();check(document.querySelector('h2').textContent===workshop.name&&button('Weitere Anträge laden')&&!document.querySelector('form'),'Historical pagination remains available without showing the claim form');
- view='businesses';records={workshops:[workshop],claims:[],changes:Array.from({length:50},(_,index)=>({...requestView(`change-history-${index}`,'change'),status:'approved'})),pendingClaims:[],pendingChangeWorkshopIds:[workshop.id],nextChangeCursor:'older-change-history'};await remount();
- check(button('Profil bearbeiten').disabled&&document.querySelector('.business-request').textContent.includes('Warte auf die Freigabe'),'An older pending change locks editing and explains the current next step before history is loaded');
- view='requests';records={workshops:[workshop],claims:[],changes:[requestView('replacement-pending','change'),{...requestView('old-rejected-change','change'),status:'rejected',moderatorNote:'Replaced with a corrected draft.'}]};await remount();
- const rejectedDraft=document.querySelector('.business-status.rejected').closest('article');check(!button('Profil bearbeiten')&&rejectedDraft.textContent.includes('Diese Änderungen wurden abgelehnt')&&!rejectedDraft.textContent.includes('erneut ein'),'A rejected historical draft does not ask for resubmission while its replacement is pending');
- records={workshops:[],claims:[{...requestView('competing-rejected-claim','claim'),status:'rejected',moderatorNote:'Ein anderer Übernahme-Antrag wurde bestätigt.'}],changes:[]};await remount();
- const rejectedClaim=document.querySelector('.business-status.rejected').closest('article');check(rejectedClaim.textContent.includes('anderer Übernahme-Antrag')&&!rejectedClaim.textContent.includes('neuen Antrag')&&rejectedClaim.textContent.includes('abgelehnt'),'An automatically rejected competing claim reports the assignment decision without promising a retry of that profile');
- records={workshops:[],claims:[requestView('visible-current-claim','claim')],changes:[]};await remount();check(!document.querySelector('a[href="/werkstaetten"]'),'The business overview omits the unrelated workshop search action');
- check(document.querySelector('.business-request').textContent.includes('privaten Nachweis manuell')&&document.querySelector('.business-request').textContent.includes('separate Freigabe'),'Current claim guidance visibly explains private manual verification and separate publication approval');
- records={workshops:[],claims:[requestView('claim-approved-between-pages','claim')],changes:[],nextClaimCursor:'older-approved-history'};await remount();records.workshops=[workshop];records.pendingClaims=[];records.claimPage=[{...requestView('older-approved-claim','claim'),status:'approved'}];await click(button('Weitere Anträge laden'));
- check(!document.querySelector('.business-claim-progress')&&!button('Profil bearbeiten'),'Request pagination removes a claim approved externally without showing an editor');view='businesses';await remount();check(button('Profil bearbeiten')&&!button('Profil bearbeiten').disabled,'The separate businesses page adopts newly confirmed ownership');view='requests';
- for(const kind of ['claim','change'])for(const outcome of ['approved','rejected','replacement']){
-  const obsolete={...requestView('obsolete-pending-change','change'),profile:{...requestView('obsolete-pending-change','change').profile,description:'Obsolete pending proposal before an external decision.'}};
-  records={workshops:[workshop],claims:[],changes:[obsolete],nextClaimCursor:'older-claim-page',nextChangeCursor:'older-change-page'};await remount();
-  records.claimPage=[{...requestView('older-claim-history','claim'),status:'approved'}];records.changePage=[{...requestView('older-change-history','change'),status:'approved'}];
-  records.pendingChangeWorkshopIds=outcome==='replacement'?[workshop.id]:[];records.pendingChangeRequestIds=outcome==='replacement'?['replacement-current-change']:[];
-  records.changes=outcome==='replacement'?[{...obsolete,id:'replacement-current-change',profile:{...obsolete.profile,description:'The replacement proposal is the current pending change.'}}]:[{...obsolete,status:outcome,moderatorNote:'An external '+outcome+' decision.'}];
-  await click(button(kind==='claim'?'Weitere Anträge laden':'Weitere Änderungen laden'));
-  check(!document.body.textContent.includes('Obsolete pending proposal')&&!button('Profil bearbeiten'),`Pagination in the ${kind} queue reconciles an obsolete pending card after external ${outcome} without guessing its decision`);
-  if(outcome==='replacement'){await remount();check(document.body.textContent.includes('The replacement proposal is the current pending change.'),'A full refresh reveals the current replacement proposal rather than the obsolete one');}
- }
- view='businesses';records={workshops:[workshop,{...workshop,id:'second-workshop',name:'Second fictional workshop'}],claims:[requestView('other-pending','claim')],changes:[]};await remount();check(document.querySelectorAll('.business-request').length===2&&[...document.querySelectorAll('button')].filter(node=>node.textContent==='Profil bearbeiten').length===2&&!document.querySelector('.business-status'),'The businesses page supports multiple owned workshops without rendering applications');view='requests';await remount();check(document.querySelector('h1').textContent==='Meine Betriebsanträge'&&document.querySelectorAll('.business-request').length===1&&!button('Profil bearbeiten'),'The requests page excludes owned workshop profiles');
- for(const locale of ['de','sq','en'])for(const kind of ['claim','change'])for(const approve of [true,false]){
-  testLocale=locale;const copy=getMessages(locale).management,request=requestView('localized-'+kind+'-'+approve,kind);
-  records={workshops:[workshop],claims:kind==='claim'?[request]:[],changes:kind==='change'?[request]:[]};await remount(true);
-  await click(button(approve?copy.approve:copy.reject));
-  const reason=kind==='claim'?(approve?copy.businessReasonOwnershipVerified:copy.businessReasonOwnershipUnproven):(approve?copy.businessReasonChangesVerified:copy.businessReasonContactUnverified);
-  await chooseDecisionReason(reason);check(!dialog().querySelector('textarea')&&!button(copy.saveDecision).disabled,'Every business decision context offers a localized standard reason without extra text');
-  await click(button(copy.saveDecision));check(requests.filter(row=>row.method==='PATCH').at(-1).body.note===reason,'The selected business reason is submitted through the existing private decision contract');
- }
- console.log(JSON.stringify({businessUiChecksPassed:passed,liveRequests:false}));
-}finally{await act(async()=>root.unmount());dom.window.close();}
+const dialog = () => document.querySelector('[role="alertdialog"]');
+try {
+  loadFailure = true;
+  await render();
+  check(
+    document.querySelector('[role="alert"]').textContent ===
+      getMessages("de").management.businessUnavailable &&
+      button("Erneut versuchen"),
+    "Loading failure exposes an accessible refresh action",
+  );
+  check(
+    document.querySelector("header h1")?.textContent === "Meine Betriebe" &&
+      !document.querySelector("header button") &&
+      !button("Aktualisieren"),
+    "The page title has no redundant refresh action",
+  );
+  loadFailure = false;
+  await click(button("Erneut versuchen"));
+  check(
+    document.querySelector("h1").textContent === "Meine Betriebe" &&
+      !document.querySelector("form") &&
+      !document.querySelector("h2") &&
+      !document.querySelector('a[href="/werkstaetten"]'),
+    "An empty business overview shows guidance without the removed finder or an embedded claim form",
+  );
+  loadFailure = true;
+  await remount(true);
+  check(
+    button("Erneut versuchen") && !button("Aktualisieren"),
+    "Moderation shows retry only when loading fails",
+  );
+  loadFailure = false;
+  await click(button("Erneut versuchen"));
+  check(
+    !button("Erneut versuchen") && !button("Aktualisieren"),
+    "A recovered moderation queue has no redundant refresh button",
+  );
+  await remount();
+  view = "requests";
+  records.claims = [
+    {
+      ...requestView("00000000-0000-4000-8000-000000000001", "claim"),
+      documents: [
+        { id: "00000000-0000-4000-8000-000000000021", fileName: "proof.pdf" },
+        {
+          id: "00000000-0000-4000-8000-000000000022",
+          fileName: "register.png",
+        },
+      ],
+    },
+  ];
+  await remount();
+  check(
+    document.querySelectorAll('a[href*="document="]').length === 2,
+    "The applicant overview links every document individually",
+  );
+  await remount(true);
+  check(
+    document.querySelectorAll('a[href*="document="]').length === 2,
+    "The moderation queue links every private document individually",
+  );
+  await remount();
+  check(
+    document.querySelector(".business-status").textContent === "In Prüfung" &&
+      !document.querySelector("form"),
+    "The overview shows a pending claim without the application form",
+  );
+  check(
+    document
+      .querySelector(".business-panel")
+      .textContent.includes("Dein Nachweis wird geprüft") &&
+      document
+        .querySelector(".business-panel")
+        .textContent.includes("separate Freigabe"),
+    "A pending claim explains manual review and the next step without implying publication",
+  );
+  view = "businesses";
+  records.workshops = [workshop];
+  await remount();
+  check(
+    document.querySelector("h2").textContent === workshop.name &&
+      !document.body.textContent.includes("Deine Profile") &&
+      !document.body.textContent.includes(
+        "Bearbeite Kontakt, Leistungen und Beschreibung.",
+      ),
+    "Owned workshop names lead directly into compact cards without redundant section copy",
+  );
+  const editorOpener = button("Profil bearbeiten");
+  await click(editorOpener);
+  check(
+    document
+      .querySelector('[role="dialog"]')
+      .contains(document.activeElement) &&
+      !document.querySelector(".business-panel .business-form"),
+    "Profile editing opens a focused modal outside the overview",
+  );
+  await act(async () =>
+    document.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "Escape",
+        bubbles: true,
+        cancelable: true,
+      }),
+    ),
+  );
+  await act(async () => new Promise((resolve) => setTimeout(resolve, 0)));
+  check(
+    !document.querySelector('[role="dialog"]') &&
+      document.activeElement === editorOpener,
+    "Escape returns focus to the exact workshop edit action",
+  );
+  await click(editorOpener);
+  view = "requests";
+  await render();
+  check(
+    document.querySelector("h1").textContent === "Meine Betriebsanträge" &&
+      !document.querySelector("form"),
+    "Changing to requests never retains a profile editor in the new page",
+  );
+  view = "businesses";
+  await render();
+  check(
+    control("Telefon").value === workshop.phone &&
+      control("Beschreibung").value === workshop.description,
+    "The owner editor uses the current approved contact and description",
+  );
+  check(
+    document.querySelector(".opening-enabled input") &&
+      !document.querySelector(".opening-day"),
+    "Hours start explicitly unspecified",
+  );
+  await click(document.querySelector(".opening-enabled input"));
+  check(
+    document.querySelectorAll(".opening-day").length === 7,
+    "Owner can edit all seven weekdays",
+  );
+  const monday = document.querySelector(".opening-day select");
+  await act(async () => {
+    Object.getOwnPropertyDescriptor(
+      HTMLSelectElement.prototype,
+      "value",
+    ).set.call(monday, "open");
+    monday.dispatchEvent(new Event("change", { bubbles: true }));
+  });
+  check(
+    document.querySelectorAll(".opening-interval").length === 1,
+    "Opening a day starts one editable interval",
+  );
+  await click(button("Montag auf Montag–Freitag übernehmen"));
+  check(
+    document.querySelectorAll(".opening-interval").length === 5,
+    "Copy fills only weekdays",
+  );
+  await click(button("Ausnahme hinzufügen"));
+  check(
+    document.querySelector('.opening-exception input[type="date"]'),
+    "Exception dates have an accessible native date control",
+  );
+  await click(document.querySelector(".opening-exception button"));
+  await click(document.querySelector(".opening-enabled input"));
+  check(!document.querySelector(".opening-day"), "Owner can clear their hours");
+  check(
+    document
+      .querySelector('[role="dialog"]')
+      .textContent.includes("Quellen und Freigabestatus bleiben geschützt"),
+    "The editor explains protected identity and publication fields",
+  );
+  await type(
+    control("Beschreibung"),
+    workshop.description + " Additional documented repair services.",
+  );
+  mode = "pending";
+  await submit(control("Telefon").form);
+  check(
+    document.querySelector(".business-form fieldset").disabled &&
+      [
+        ...document.querySelector('[role="dialog"]').querySelectorAll("button"),
+      ].every((node) => node.matches(":disabled")),
+    "A pending draft disables both modal footer and editor actions",
+  );
+  await act(async () =>
+    document.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "Escape",
+        bubbles: true,
+        cancelable: true,
+      }),
+    ),
+  );
+  check(
+    document.querySelector('[role="dialog"]'),
+    "Escape cannot dismiss the editor while submission is pending",
+  );
+  check(
+    requests.filter(
+      (row) => row.method === "POST" && row.body.kind === "change",
+    ).length === 1,
+    "The pending editor issues one scoped change request",
+  );
+  await act(async () => pending.resolve(pending.commit()));
+  pending = null;
+  mode = "success";
+  check(
+    !document.querySelector('[role="dialog"]') &&
+      button("Profil bearbeiten").disabled,
+    "Submitted drafts close the editor and prevent duplicates while awaiting moderation",
+  );
+  check(
+    document
+      .querySelector('[role="status"]')
+      .textContent.includes("bisherigen öffentlichen Angaben"),
+    "Submission clearly preserves the previously published profile",
+  );
+  view = "requests";
+  await remount();
+  check(
+    !button("Profil bearbeiten") &&
+      document.querySelector("h1").textContent === "Meine Betriebsanträge",
+    "Requests have their own title and contain no profile editor",
+  );
+  const proposal = document
+    .querySelector(".business-proposal")
+    .closest("details");
+  check(
+    proposal &&
+      !proposal.open &&
+      proposal.querySelector("summary").textContent ===
+        "Eingereichte Angaben ansehen",
+    "Customers can inspect submitted changes without a large expanded proposal",
+  );
+  records.claims = [
+    requestView("00000000-0000-4000-8000-000000000003", "claim"),
+  ];
+  records.workshops = [workshop];
+  await remount(true);
+  check(
+    document
+      .querySelector(".business-evidence")
+      .textContent.includes("company-register") &&
+      document.querySelector(".business-request a").getAttribute("rel") ===
+        "noopener noreferrer",
+    "The administrator sees private evidence with safe external links",
+  );
+  check(
+    document.querySelector(".business-current summary").textContent ===
+      "Aktuell freigegebene Angaben ansehen",
+    "Change review includes the approved profile for comparison",
+  );
+  const decisionOpener = button("Bestätigen"),
+    decisionHeading = decisionOpener.closest("section").querySelector("h2");
+  await click(decisionOpener);
+  check(
+    dialog().contains(document.activeElement),
+    "Moderation confirmation takes keyboard focus",
+  );
+  check(
+    button("Entscheidung speichern").disabled &&
+      !dialog().querySelector("textarea"),
+    "Moderation starts with a required reason selection",
+  );
+  check(
+    dialog().classList.contains("app-dialog") &&
+      dialog().querySelector("[data-slot=alert-dialog-header]") &&
+      dialog().querySelector("[data-slot=dialog-body]") &&
+      dialog().querySelector("[data-slot=alert-dialog-footer]"),
+    "Decision dialogs use the shared header, scrolling body and footer",
+  );
+  await act(async () =>
+    document.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "Escape",
+        bubbles: true,
+        cancelable: true,
+      }),
+    ),
+  );
+  await act(async () => new Promise((resolve) => setTimeout(resolve, 0)));
+  check(
+    !dialog() &&
+      requests.filter((row) => row.method === "PATCH").length === 0 &&
+      document.activeElement === decisionOpener,
+    "Escape cancels without a write and restores the exact decision action",
+  );
+  await click(decisionOpener);
+  await click(button("Abbrechen"));
+  await act(async () => new Promise((resolve) => setTimeout(resolve, 0)));
+  check(
+    !dialog() && document.activeElement === decisionOpener,
+    "Cancelling returns keyboard focus to the same request",
+  );
+  await click(button("Bestätigen"));
+  await chooseDecisionReason("Inhabernachweis geprüft und bestätigt");
+  mode = "pending";
+  await click(button("Entscheidung speichern"));
+  check(
+    [...dialog().querySelectorAll("button")].every((node) => node.disabled),
+    "Pending moderation locks confirmation and cancellation",
+  );
+  await act(async () =>
+    document.dispatchEvent(
+      new KeyboardEvent("keydown", {
+        key: "Escape",
+        bubbles: true,
+        cancelable: true,
+      }),
+    ),
+  );
+  check(
+    dialog() && requests.filter((row) => row.method === "PATCH").length === 1,
+    "A pending decision cannot be dismissed or duplicated",
+  );
+  await act(async () => pending.resolve(pending.commit()));
+  pending = null;
+  mode = "success";
+  await act(async () => new Promise((resolve) => setTimeout(resolve, 0)));
+  check(
+    !dialog() &&
+      document.querySelector('[role="status"]').textContent ===
+        "Entscheidung gespeichert." &&
+      document.activeElement === decisionHeading,
+    "A confirmed decision restores focus to the persistent queue heading after its row leaves",
+  );
+  await click(button("Ablehnen"));
+  await chooseDecisionReason("Anderer Grund");
+  await type(
+    control("Eigene Begründung"),
+    "The proposed fictional changes require additional proof.",
+  );
+  mode = "failure";
+  await click(button("Entscheidung speichern"));
+  check(
+    dialog().querySelector('[role="alert"]').textContent ===
+      getMessages("de").management.business_claim_conflict,
+    "A stale decision remains visible and is not announced as success",
+  );
+  mode = "success";
+  await click(button("Entscheidung speichern"));
+  check(
+    !dialog() &&
+      document
+        .querySelector(".business-panel")
+        .textContent.includes("Keine Änderungsentwürfe vorhanden"),
+    "A confirmed rejection clears the pending change queue",
+  );
+  records = {
+    workshops: [workshop],
+    claims: [requestView("00000000-0000-4000-8000-000000000004", "claim")],
+    changes: [requestView("00000000-0000-4000-8000-000000000005", "change")],
+    nextClaimCursor: "fixture-claim-cursor",
+    nextChangeCursor: "fixture-change-cursor",
+  };
+  await remount(true);
+  await click(button("Weitere Anträge laden"));
+  check(
+    document.querySelectorAll(".business-request").length === 3 &&
+      !button("Weitere Anträge laden") &&
+      button("Weitere Änderungen laden"),
+    "Claim pagination appends older requests without resetting the independent draft queue",
+  );
+  await click(button("Weitere Änderungen laden"));
+  check(
+    document.querySelectorAll(".business-request").length === 4 &&
+      !button("Weitere Änderungen laden"),
+    "Draft pagination appends older proposals and stops at the last page",
+  );
+  records = {
+    workshops: [],
+    claims: [
+      {
+        ...requestView("00000000-0000-4000-8000-000000000020", "claim"),
+        status: "rejected",
+        moderatorNote: "Please supplement the fictional register entry.",
+      },
+    ],
+    changes: [],
+  };
+  await remount();
+  check(
+    document.querySelector("h2").textContent === workshop.name &&
+      !document.querySelector("form"),
+    "A history-only overview shows its decisions without an embedded claim form",
+  );
+  check(
+    document
+      .querySelector(".business-request")
+      .textContent.includes(
+        "Dieser Antrag wurde abgelehnt. Beachte den Prüfvermerk.",
+      ) &&
+      document
+        .querySelector(".business-note")
+        .textContent.includes("supplement"),
+    "Historical rejected claims report their outcome and retain the private review note",
+  );
+  records = {
+    workshops: [workshop],
+    claims: [
+      {
+        ...requestView("00000000-0000-4000-8000-000000000021", "claim"),
+        status: "approved",
+      },
+    ],
+    changes: [
+      {
+        ...requestView("00000000-0000-4000-8000-000000000022", "change"),
+        status: "rejected",
+        moderatorNote: "Please correct the fictional contact number.",
+      },
+      {
+        ...requestView("00000000-0000-4000-8000-000000000023", "change"),
+        status: "approved",
+      },
+    ],
+  };
+  await remount();
+  check(
+    document
+      .querySelector(".business-panel")
+      .textContent.includes("Dieser Inhabernachweis wurde bestätigt") &&
+      !button("Profil bearbeiten"),
+    "Confirmed ownership is reported separately from profile editing",
+  );
+  check(
+    document
+      .querySelector(".business-panel")
+      .textContent.includes(
+        "Diese Änderungen wurden abgelehnt. Beachte den Prüfvermerk.",
+      ) &&
+      [...document.querySelectorAll(".business-status")].some(
+        (node) => node.textContent === "Freigegeben",
+      ),
+    "Historical rejected changes report their outcome while approved changes clearly indicate publication approval",
+  );
+  view = "businesses";
+  records = { workshops: [workshop], claims: [], changes: [] };
+  await remount();
+  await click(button("Profil bearbeiten"));
+  loadFailure = true;
+  await submit(control("Telefon").form);
+  check(
+    document
+      .querySelector('[role="status"]')
+      .textContent.includes("eingereicht") &&
+      document
+        .querySelector('[role="alert"]')
+        .textContent.includes("bereits eingereicht") &&
+      document
+        .querySelector('[role="alert"]')
+        .textContent.includes("Erneut versuchen"),
+    "A saved draft with failed reload remains saved and offers a retry",
+  );
+  loadFailure = false;
+  await click(button("Erneut versuchen"));
+  check(
+    button("Profil bearbeiten").disabled,
+    "Retry recovers a saved change lock without resubmission",
+  );
+  records = { workshops: [], claims: [], changes: [] };
+  holdLoad = true;
+  await remount();
+  check(
+    document.querySelector('[role="status"]').textContent ===
+      "Betriebsdaten werden geladen …" &&
+      !button("Aktualisieren") &&
+      document.querySelector("header h1").textContent === "Meine Betriebe",
+    "Initial loading keeps the page title visible and prevents a duplicate reload",
+  );
+  holdLoad = false;
+  await act(async () => resolveLoad(Response.json(currentState())));
+  resolveLoad = null;
+  view = "requests";
+  records = {
+    workshops: [],
+    claims: Array.from({ length: 50 }, (_, index) => ({
+      ...requestView(`history-${index}`, "claim"),
+      status: "approved",
+    })),
+    changes: [],
+    pendingClaims: [
+      {
+        id: "older-pending-claim",
+        workshopId: workshop.id,
+        workshopName: workshop.name,
+        createdAt: "2020-01-01T00:00:00Z",
+      },
+    ],
+    pendingChangeWorkshopIds: [],
+    nextClaimCursor: "older-history",
+  };
+  await remount();
+  check(
+    document.querySelector("h2").textContent === workshop.name &&
+      document.querySelector(".business-status").textContent === "In Prüfung" &&
+      document
+        .querySelector(".business-request")
+        .textContent.includes("Dein Nachweis wird geprüft") &&
+      !document.querySelector(".business-claim"),
+    "An older current claim remains the visible next step without paging through historical decisions",
+  );
+  records = { ...records, pendingClaims: [] };
+  await remount();
+  check(
+    document.querySelector("h2").textContent === workshop.name &&
+      button("Weitere Anträge laden") &&
+      !document.querySelector("form"),
+    "Historical pagination remains available without showing the claim form",
+  );
+  view = "businesses";
+  records = {
+    workshops: [workshop],
+    claims: [],
+    changes: Array.from({ length: 50 }, (_, index) => ({
+      ...requestView(`change-history-${index}`, "change"),
+      status: "approved",
+    })),
+    pendingClaims: [],
+    pendingChangeWorkshopIds: [workshop.id],
+    nextChangeCursor: "older-change-history",
+  };
+  await remount();
+  check(
+    button("Profil bearbeiten").disabled &&
+      document
+        .querySelector(".business-request")
+        .textContent.includes("Warte auf die Freigabe"),
+    "An older pending change locks editing and explains the current next step before history is loaded",
+  );
+  view = "requests";
+  records = {
+    workshops: [workshop],
+    claims: [],
+    changes: [
+      requestView("replacement-pending", "change"),
+      {
+        ...requestView("old-rejected-change", "change"),
+        status: "rejected",
+        moderatorNote: "Replaced with a corrected draft.",
+      },
+    ],
+  };
+  await remount();
+  const rejectedDraft = document
+    .querySelector(".business-status.rejected")
+    .closest("article");
+  check(
+    !button("Profil bearbeiten") &&
+      rejectedDraft.textContent.includes("Diese Änderungen wurden abgelehnt") &&
+      !rejectedDraft.textContent.includes("erneut ein"),
+    "A rejected historical draft does not ask for resubmission while its replacement is pending",
+  );
+  records = {
+    workshops: [],
+    claims: [
+      {
+        ...requestView("competing-rejected-claim", "claim"),
+        status: "rejected",
+        moderatorNote: "Ein anderer Übernahme-Antrag wurde bestätigt.",
+      },
+    ],
+    changes: [],
+  };
+  await remount();
+  const rejectedClaim = document
+    .querySelector(".business-status.rejected")
+    .closest("article");
+  check(
+    rejectedClaim.textContent.includes("anderer Übernahme-Antrag") &&
+      !rejectedClaim.textContent.includes("neuen Antrag") &&
+      rejectedClaim.textContent.includes("abgelehnt"),
+    "An automatically rejected competing claim reports the assignment decision without promising a retry of that profile",
+  );
+  records = {
+    workshops: [],
+    claims: [requestView("visible-current-claim", "claim")],
+    changes: [],
+  };
+  await remount();
+  check(
+    !document.querySelector('a[href="/werkstaetten"]'),
+    "The business overview omits the unrelated workshop search action",
+  );
+  check(
+    document
+      .querySelector(".business-request")
+      .textContent.includes("privaten Nachweis manuell") &&
+      document
+        .querySelector(".business-request")
+        .textContent.includes("separate Freigabe"),
+    "Current claim guidance visibly explains private manual verification and separate publication approval",
+  );
+  records = {
+    workshops: [],
+    claims: [requestView("claim-approved-between-pages", "claim")],
+    changes: [],
+    nextClaimCursor: "older-approved-history",
+  };
+  await remount();
+  records.workshops = [workshop];
+  records.pendingClaims = [];
+  records.claimPage = [
+    { ...requestView("older-approved-claim", "claim"), status: "approved" },
+  ];
+  await click(button("Weitere Anträge laden"));
+  check(
+    !document.querySelector(".business-claim-progress") &&
+      !button("Profil bearbeiten"),
+    "Request pagination removes a claim approved externally without showing an editor",
+  );
+  view = "businesses";
+  await remount();
+  check(
+    button("Profil bearbeiten") && !button("Profil bearbeiten").disabled,
+    "The separate businesses page adopts newly confirmed ownership",
+  );
+  view = "requests";
+  for (const kind of ["claim", "change"])
+    for (const outcome of ["approved", "rejected", "replacement"]) {
+      const obsolete = {
+        ...requestView("obsolete-pending-change", "change"),
+        profile: {
+          ...requestView("obsolete-pending-change", "change").profile,
+          description: "Obsolete pending proposal before an external decision.",
+        },
+      };
+      records = {
+        workshops: [workshop],
+        claims: [],
+        changes: [obsolete],
+        nextClaimCursor: "older-claim-page",
+        nextChangeCursor: "older-change-page",
+      };
+      await remount();
+      records.claimPage = [
+        { ...requestView("older-claim-history", "claim"), status: "approved" },
+      ];
+      records.changePage = [
+        {
+          ...requestView("older-change-history", "change"),
+          status: "approved",
+        },
+      ];
+      records.pendingChangeWorkshopIds =
+        outcome === "replacement" ? [workshop.id] : [];
+      records.pendingChangeRequestIds =
+        outcome === "replacement" ? ["replacement-current-change"] : [];
+      records.changes =
+        outcome === "replacement"
+          ? [
+              {
+                ...obsolete,
+                id: "replacement-current-change",
+                profile: {
+                  ...obsolete.profile,
+                  description:
+                    "The replacement proposal is the current pending change.",
+                },
+              },
+            ]
+          : [
+              {
+                ...obsolete,
+                status: outcome,
+                moderatorNote: "An external " + outcome + " decision.",
+              },
+            ];
+      await click(
+        button(
+          kind === "claim"
+            ? "Weitere Anträge laden"
+            : "Weitere Änderungen laden",
+        ),
+      );
+      check(
+        !document.body.textContent.includes("Obsolete pending proposal") &&
+          !button("Profil bearbeiten"),
+        `Pagination in the ${kind} queue reconciles an obsolete pending card after external ${outcome} without guessing its decision`,
+      );
+      if (outcome === "replacement") {
+        await remount();
+        check(
+          document.body.textContent.includes(
+            "The replacement proposal is the current pending change.",
+          ),
+          "A full refresh reveals the current replacement proposal rather than the obsolete one",
+        );
+      }
+    }
+  view = "businesses";
+  records = {
+    workshops: [
+      workshop,
+      { ...workshop, id: "second-workshop", name: "Second fictional workshop" },
+    ],
+    claims: [requestView("other-pending", "claim")],
+    changes: [],
+  };
+  await remount();
+  check(
+    document.querySelectorAll(".business-request").length === 2 &&
+      [...document.querySelectorAll("button")].filter(
+        (node) => node.textContent === "Profil bearbeiten",
+      ).length === 2 &&
+      !document.querySelector(".business-status"),
+    "The businesses page supports multiple owned workshops without rendering applications",
+  );
+  view = "requests";
+  await remount();
+  check(
+    document.querySelector("h1").textContent === "Meine Betriebsanträge" &&
+      document.querySelectorAll(".business-request").length === 1 &&
+      !button("Profil bearbeiten"),
+    "The requests page excludes owned workshop profiles",
+  );
+  for (const locale of ["de", "sq", "en"])
+    for (const kind of ["claim", "change"])
+      for (const approve of [true, false]) {
+        testLocale = locale;
+        const copy = getMessages(locale).management,
+          request = requestView("localized-" + kind + "-" + approve, kind);
+        records = {
+          workshops: [workshop],
+          claims: kind === "claim" ? [request] : [],
+          changes: kind === "change" ? [request] : [],
+        };
+        await remount(true);
+        await click(button(approve ? copy.approve : copy.reject));
+        const reason =
+          kind === "claim"
+            ? approve
+              ? copy.businessReasonOwnershipVerified
+              : copy.businessReasonOwnershipUnproven
+            : approve
+              ? copy.businessReasonChangesVerified
+              : copy.businessReasonContactUnverified;
+        await chooseDecisionReason(reason);
+        check(
+          !dialog().querySelector("textarea") &&
+            !button(copy.saveDecision).disabled,
+          "Every business decision context offers a localized standard reason without extra text",
+        );
+        await click(button(copy.saveDecision));
+        check(
+          requests.filter((row) => row.method === "PATCH").at(-1).body.note ===
+            reason,
+          "The selected business reason is submitted through the existing private decision contract",
+        );
+      }
+  console.log(
+    JSON.stringify({ businessUiChecksPassed: passed, liveRequests: false }),
+  );
+} finally {
+  await act(async () => root.unmount());
+  dom.window.close();
+}
 
-function fixtureMessages(element){return createElement(I18nProvider,{locale:testLocale,messages:getMessages(testLocale,["common","customer","management"])},element);}
+function fixtureMessages(element) {
+  return createElement(
+    I18nProvider,
+    {
+      locale: testLocale,
+      messages: getMessages(testLocale, ["common", "customer", "management"]),
+    },
+    element,
+  );
+}

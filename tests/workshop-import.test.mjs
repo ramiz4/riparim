@@ -1,142 +1,510 @@
-import {dailyCatalogueManifests} from "./helpers/daily-catalogue-manifests.mjs";
-import assert from 'node:assert/strict';
-import {readFile,writeFile,mkdir,readdir} from 'node:fs/promises';
-import {createRequire} from 'node:module';
-import {DatabaseSync} from 'node:sqlite';
+import { dailyCatalogueManifests } from "./helpers/daily-catalogue-manifests.mjs";
+import assert from "node:assert/strict";
+import { readFile, writeFile, mkdir, readdir } from "node:fs/promises";
+import { createRequire } from "node:module";
+import { DatabaseSync } from "node:sqlite";
 
-const require=createRequire(new URL('../package.json',import.meta.url));
-const {build}=require('esbuild');
-const React=require('react');
-const {renderToStaticMarkup}=require('react-dom/server');
-const output='.test-runtime/workshop-import';
-const result=await build({entryPoints:['db/directory.ts','lib/workshop-source.ts','lib/catalogue-filters.ts','components/workshop-ratings.tsx','lib/i18n/client.tsx','lib/i18n/messages.ts'],outdir:output,bundle:true,write:false,format:'esm',splitting:true,platform:'node',jsx:'automatic',external:['react','react-dom','lucide-react'],plugins:[{name:'fixture-storage',setup(b){b.onLoad({filter:/lib\/workshop-source\.ts$/},async args=>({loader:'ts',contents:(await readFile(args.path,'utf8')).replace('export function validateWorkshopCatalogue(input:unknown):WorkshopCatalogue{','export function validateWorkshopCatalogue(input:unknown):WorkshopCatalogue{globalThis.fixtureCatalogueValidationCalls=(globalThis.fixtureCatalogueValidationCalls??0)+1;')}));b.onResolve({filter:/^cloudflare:workers$/},a=>({path:a.path,namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},()=>({loader:'js',contents:'export const env=globalThis.fixtureEnv;'}));}}]});
-for(const file of result.outputFiles){await mkdir(file.path.slice(0,file.path.lastIndexOf('/')),{recursive:true});await writeFile(file.path,file.contents);}
-const sqlite=new DatabaseSync(':memory:');
-for(const file of (await readdir('drizzle')).filter(file=>file.endsWith('.sql')).sort())sqlite.exec(await readFile('drizzle/'+file,'utf8'));
-const d1={prepare(sql){const statement=sqlite.prepare(sql);const adapter=(values=[])=>({bind:(...v)=>{assert(v.length<=95,'import respects D1 binding limits');return adapter(v);},first:async()=>statement.get(...values)??null,all:async()=>({results:statement.all(...values)}),run:async()=>({meta:statement.run(...values)})});return adapter();},async batch(statements){assert(statements.length<=50,'large imports use bounded batches');sqlite.exec('BEGIN');try{const result=[];for(const statement of statements)result.push(await statement.run());sqlite.exec('COMMIT');return result;}catch(error){sqlite.exec('ROLLBACK');throw error;}}};
-globalThis.fixtureEnv={DB:d1,BUCKET:{}};
-const load=file=>import(new URL(output+'/'+file,'file://'+process.cwd()+'/').href);
-const realNow=Date.now;
+const require = createRequire(new URL("../package.json", import.meta.url));
+const { build } = require("esbuild");
+const React = require("react");
+const { renderToStaticMarkup } = require("react-dom/server");
+const output = ".test-runtime/workshop-import";
+const result = await build({
+  entryPoints: [
+    "db/directory.ts",
+    "lib/workshop-source.ts",
+    "lib/catalogue-filters.ts",
+    "components/workshop-ratings.tsx",
+    "lib/i18n/client.tsx",
+    "lib/i18n/messages.ts",
+  ],
+  outdir: output,
+  bundle: true,
+  write: false,
+  format: "esm",
+  splitting: true,
+  platform: "node",
+  jsx: "automatic",
+  external: ["react", "react-dom", "lucide-react"],
+  plugins: [
+    {
+      name: "fixture-storage",
+      setup(b) {
+        b.onLoad({ filter: /lib\/workshop-source\.ts$/ }, async (args) => {
+          const source = await readFile(args.path, "utf8");
+          const entry =
+            /export\s+function\s+validateWorkshopCatalogue\s*\(\s*input\s*:\s*unknown\s*\)\s*:\s*WorkshopCatalogue\s*\{/;
+          assert.match(
+            source,
+            entry,
+            "the validation counter attaches to the catalogue entry point",
+          );
+          return {
+            loader: "ts",
+            contents: source.replace(
+              entry,
+              "$&globalThis.fixtureCatalogueValidationCalls=(globalThis.fixtureCatalogueValidationCalls??0)+1;",
+            ),
+          };
+        });
+        b.onResolve({ filter: /^cloudflare:workers$/ }, (a) => ({
+          path: a.path,
+          namespace: "fixture",
+        }));
+        b.onLoad({ filter: /.*/, namespace: "fixture" }, () => ({
+          loader: "js",
+          contents: "export const env=globalThis.fixtureEnv;",
+        }));
+      },
+    },
+  ],
+});
+for (const file of result.outputFiles) {
+  await mkdir(file.path.slice(0, file.path.lastIndexOf("/")), {
+    recursive: true,
+  });
+  await writeFile(file.path, file.contents);
+}
+const sqlite = new DatabaseSync(":memory:");
+for (const file of (await readdir("drizzle"))
+  .filter((file) => file.endsWith(".sql"))
+  .sort())
+  sqlite.exec(await readFile("drizzle/" + file, "utf8"));
+const d1 = {
+  prepare(sql) {
+    const statement = sqlite.prepare(sql);
+    const adapter = (values = []) => ({
+      bind: (...v) => {
+        assert(v.length <= 95, "import respects D1 binding limits");
+        return adapter(v);
+      },
+      first: async () => statement.get(...values) ?? null,
+      all: async () => ({ results: statement.all(...values) }),
+      run: async () => ({ meta: statement.run(...values) }),
+    });
+    return adapter();
+  },
+  async batch(statements) {
+    assert(statements.length <= 50, "large imports use bounded batches");
+    sqlite.exec("BEGIN");
+    try {
+      const result = [];
+      for (const statement of statements) result.push(await statement.run());
+      sqlite.exec("COMMIT");
+      return result;
+    } catch (error) {
+      sqlite.exec("ROLLBACK");
+      throw error;
+    }
+  },
+};
+globalThis.fixtureEnv = { DB: d1, BUCKET: {} };
+const load = (file) =>
+  import(new URL(output + "/" + file, "file://" + process.cwd() + "/").href);
+const realNow = Date.now;
 let directory;
-try{Date.now=()=>0;directory=await load('db/directory.js');}finally{Date.now=realNow;}
-const filters=await load('lib/catalogue-filters.js');
-const {WorkshopRatings}=await load('components/workshop-ratings.js');
-const {I18nProvider}=await load('lib/i18n/client.js'),{getMessages}=await load('lib/i18n/messages.js');
-const renderRatings=props=>renderToStaticMarkup(React.createElement(I18nProvider,{locale:'de',messages:getMessages('de',['common','public'])},React.createElement(WorkshopRatings,props)));
-const {validateWorkshopCatalogue}=await load('lib/workshop-source.js');
-const catalogue=validateWorkshopCatalogue(JSON.parse(await readFile('data/workshops.json','utf8')));
-const curated=catalogue.workshops.map(record=>Object.fromEntries(Object.entries(record).filter(([key])=>key!=="google")));
-const manifest=JSON.parse(await readFile('data/import-2026-10-03.json','utf8'));
-const removals=JSON.parse(await readFile('data/workshop-removals.json','utf8'));
-const finalRemovals=JSON.parse(await readFile('data/workshop-final-removals.json','utf8'));
-const finalResearch=JSON.parse(await readFile('data/catalogue-final-2026-10-05.json','utf8'));
-const newImport=JSON.parse(await readFile('data/import-2026-10-10.json','utf8'));
-const dailyImports=await dailyCatalogueManifests(),dailyIds=dailyImports.flatMap(m=>m.importedWorkshopIds),latestImport=dailyImports.at(-1)??newImport;
-const newlyAdded=new Set([...newImport.importedWorkshopIds,...dailyIds]);
-const retired=new Set([...removals.workshopIds,...finalRemovals.workshopIds]);
-const added=new Set(manifest.importedWorkshopIds);
-const oldProfiles=curated.filter(w=>!added.has(w.id)&&!newlyAdded.has(w.id)&&w.id!==finalResearch.newPublishedWorkshop.workshopId);
-const newProfiles=curated.filter(w=>added.has(w.id));
-assert.equal(newProfiles.length,50-manifest.importedWorkshopIds.filter(id=>retired.has(id)).length);
-assert.equal(added.size,50);
-assert.equal(oldProfiles.length,113-[...retired].filter(id=>!added.has(id)).length);
-assert.equal(new Set(curated.map(w=>w.id)).size,latestImport.after.total);
-const oldPhones=new Set(oldProfiles.map(w=>w.phone));
-assert.equal(new Set(newProfiles.map(w=>w.phone)).size,newProfiles.length);
-for(const w of newProfiles){assert(!oldPhones.has(w.phone),'new workshop has a distinct phone');assert.equal(directory.validateProfile(w,w.id).status,w.status);}
+try {
+  Date.now = () => 0;
+  directory = await load("db/directory.js");
+} finally {
+  Date.now = realNow;
+}
+const filters = await load("lib/catalogue-filters.js");
+const { WorkshopRatings } = await load("components/workshop-ratings.js");
+const { I18nProvider } = await load("lib/i18n/client.js"),
+  { getMessages } = await load("lib/i18n/messages.js");
+const renderRatings = (props) =>
+  renderToStaticMarkup(
+    React.createElement(
+      I18nProvider,
+      { locale: "de", messages: getMessages("de", ["common", "public"]) },
+      React.createElement(WorkshopRatings, props),
+    ),
+  );
+const { validateWorkshopCatalogue } = await load("lib/workshop-source.js");
+const catalogue = validateWorkshopCatalogue(
+  JSON.parse(await readFile("data/workshops.json", "utf8")),
+);
+const curated = catalogue.workshops.map((record) =>
+  Object.fromEntries(
+    Object.entries(record).filter(([key]) => key !== "google"),
+  ),
+);
+const manifest = JSON.parse(
+  await readFile("data/import-2026-10-03.json", "utf8"),
+);
+const removals = JSON.parse(
+  await readFile("data/workshop-removals.json", "utf8"),
+);
+const finalRemovals = JSON.parse(
+  await readFile("data/workshop-final-removals.json", "utf8"),
+);
+const finalResearch = JSON.parse(
+  await readFile("data/catalogue-final-2026-10-05.json", "utf8"),
+);
+const newImport = JSON.parse(
+  await readFile("data/import-2026-10-10.json", "utf8"),
+);
+const dailyImports = await dailyCatalogueManifests(),
+  dailyIds = dailyImports.flatMap((m) => m.importedWorkshopIds),
+  latestImport = dailyImports.at(-1) ?? newImport;
+const newlyAdded = new Set([...newImport.importedWorkshopIds, ...dailyIds]);
+const retired = new Set([
+  ...removals.workshopIds,
+  ...finalRemovals.workshopIds,
+]);
+const added = new Set(manifest.importedWorkshopIds);
+const oldProfiles = curated.filter(
+  (w) =>
+    !added.has(w.id) &&
+    !newlyAdded.has(w.id) &&
+    w.id !== finalResearch.newPublishedWorkshop.workshopId,
+);
+const newProfiles = curated.filter((w) => added.has(w.id));
+assert.equal(
+  newProfiles.length,
+  50 - manifest.importedWorkshopIds.filter((id) => retired.has(id)).length,
+);
+assert.equal(added.size, 50);
+assert.equal(
+  oldProfiles.length,
+  113 - [...retired].filter((id) => !added.has(id)).length,
+);
+assert.equal(new Set(curated.map((w) => w.id)).size, latestImport.after.total);
+const oldPhones = new Set(oldProfiles.map((w) => w.phone));
+assert.equal(new Set(newProfiles.map((w) => w.phone)).size, newProfiles.length);
+for (const w of newProfiles) {
+  assert(!oldPhones.has(w.phone), "new workshop has a distinct phone");
+  assert.equal(directory.validateProfile(w, w.id).status, w.status);
+}
 
 // Reproduce an installation seeded with the retained original profiles.
-const insert=sqlite.prepare(`INSERT INTO workshops (${directory.profileColumns.join(',')}) VALUES (${directory.profileColumns.map(()=>'?').join(',')})`);
-for(const profile of oldProfiles)insert.run(...directory.profileValues(profile));
-sqlite.prepare('INSERT INTO catalog_state (key,value) VALUES (?,?)').run('initial-catalog-v3-113','2026-10-02');
-const before=sqlite.prepare('SELECT * FROM workshops ORDER BY id').all();
-let workshops=await directory.listWorkshops();
-assert.equal(workshops.length,catalogue.coverage.published,'only confirmed passenger-workshop profiles become public');
-assert.equal((await directory.listWorkshops(true)).length,catalogue.workshops.length);
-assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM catalog_state WHERE key LIKE 'workshop-retired:%'").get().n,35,'fresh catalogue installations preserve all retirement markers');
-for(const entry of JSON.parse(await readFile('data/workshop-scope.json','utf8')).excluded){
- assert(!workshops.some(w=>w.id===entry.workshopId),'out-of-scope entries are absent from the public catalogue');
- assert(retired.has(entry.workshopId));
- assert.throws(()=>directory.validateProfile({...curated[0],status:'published'},entry.workshopId),/entfernt/,'administrators cannot accidentally reintroduce retired excluded entries');
+const insert = sqlite.prepare(
+  `INSERT INTO workshops (${directory.profileColumns.join(",")}) VALUES (${directory.profileColumns.map(() => "?").join(",")})`,
+);
+for (const profile of oldProfiles)
+  insert.run(...directory.profileValues(profile));
+sqlite
+  .prepare("INSERT INTO catalog_state (key,value) VALUES (?,?)")
+  .run("initial-catalog-v3-113", "2026-10-02");
+const before = sqlite.prepare("SELECT * FROM workshops ORDER BY id").all();
+let workshops = await directory.listWorkshops();
+assert.equal(
+  workshops.length,
+  catalogue.coverage.published,
+  "only confirmed passenger-workshop profiles become public",
+);
+assert.equal(
+  (await directory.listWorkshops(true)).length,
+  catalogue.workshops.length,
+);
+assert.equal(
+  sqlite
+    .prepare(
+      "SELECT COUNT(*) AS n FROM catalog_state WHERE key LIKE 'workshop-retired:%'",
+    )
+    .get().n,
+  35,
+  "fresh catalogue installations preserve all retirement markers",
+);
+for (const entry of JSON.parse(
+  await readFile("data/workshop-scope.json", "utf8"),
+).excluded) {
+  assert(
+    !workshops.some((w) => w.id === entry.workshopId),
+    "out-of-scope entries are absent from the public catalogue",
+  );
+  assert(retired.has(entry.workshopId));
+  assert.throws(
+    () =>
+      directory.validateProfile(
+        { ...curated[0], status: "published" },
+        entry.workshopId,
+      ),
+    /entfernt/,
+    "administrators cannot accidentally reintroduce retired excluded entries",
+  );
 }
-assert(catalogue.workshops.filter(w=>!w.google.placeId).every(w=>!workshops.some(publicWorkshop=>publicWorkshop.id===w.id)),'unconfirmed Google identities remain private');
+assert(
+  catalogue.workshops
+    .filter((w) => !w.google.placeId)
+    .every(
+      (w) => !workshops.some((publicWorkshop) => publicWorkshop.id === w.id),
+    ),
+  "unconfirmed Google identities remain private",
+);
 
-assert.equal(sqlite.prepare("SELECT COUNT(*) AS n FROM workshops WHERE status='draft'").get().n,catalogue.coverage.drafts);
-const after=sqlite.prepare('SELECT * FROM workshops ORDER BY id').all().filter(w=>!added.has(w.id)&&!newlyAdded.has(w.id)&&w.id!==finalResearch.newPublishedWorkshop.workshopId);
-assert.deepEqual(after,before,'existing profile fields and publication state are preserved');
-assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM workshop_google_ratings').get().n,catalogue.workshops.filter(w=>w.google.snapshot).length);
-assert(manifest.originalPublishedWorkshopIds.filter(id=>!retired.has(id)).every(id=>(catalogue.workshops.find(w=>w.id===id)?.google.snapshot)),'all original profiles retain their separate Google metadata, including hidden profiles');
-assert.equal(workshops.filter(w=>w.googleRating?.rating!=null).length,5,'only sourced Google scores are numeric');
-assert.equal(workshops.filter(w=>w.googleRating?.count!=null).length,4);
-assert(workshops.every(w=>w.rating===null&&w.count===0),'Google stars never create Riparim reviews');
-assert.equal(filters.hasPublishedRatings(workshops),false);
-assert.equal(filters.parseCatalogueFilters(new URLSearchParams('sort=bewertung'),workshops).sort,'name','Google scores do not enable Riparim sorting');
-const unknown=workshops.find(w=>w.googleRating.rating===null&&w.googleRating.count===null);
-assert.equal(unknown.googleRating.rating,null,'missing Google score stays null');
-const unknownMarkup=renderRatings({workshop:unknown,details:true});
-assert(!unknownMarkup.includes('google-rating-panel')&&!unknownMarkup.includes('Google-Bewertung zu'),'ratings never reserve a Google widget');
-assert(!unknownMarkup.includes('0,0'));
-const emptyCardRatings=renderRatings({workshop:unknown,hideUnavailable:true});
-assert(!emptyCardRatings.includes('Google wird geladen')&&!emptyCardRatings.includes('Noch keine'),'list cards preserve the absence of empty rating placeholders');
-const sonic=workshops.find(w=>w.id==='sonic-garage');
-assert.equal(sonic.googleRating.rating,null,'star icons do not establish an exact Google aggregate');
-assert.equal(sonic.googleRating.count,19);
-const beli=workshops.find(w=>w.id==='auto-beli-ferizaj');
-assert.equal(beli.googleRating.rating,4);
-assert.equal(beli.googleRating.count,52);
-assert.equal(beli.googleRating.sourceUpdatedAt,'2026-02-20');
-assert.equal(workshops.find(w=>w.id==='auto-servis-doni-skenderaj').googleRating.count,8);
+assert.equal(
+  sqlite
+    .prepare("SELECT COUNT(*) AS n FROM workshops WHERE status='draft'")
+    .get().n,
+  catalogue.coverage.drafts,
+);
+const after = sqlite
+  .prepare("SELECT * FROM workshops ORDER BY id")
+  .all()
+  .filter(
+    (w) =>
+      !added.has(w.id) &&
+      !newlyAdded.has(w.id) &&
+      w.id !== finalResearch.newPublishedWorkshop.workshopId,
+  );
+assert.deepEqual(
+  after,
+  before,
+  "existing profile fields and publication state are preserved",
+);
+assert.equal(
+  sqlite.prepare("SELECT COUNT(*) AS n FROM workshop_google_ratings").get().n,
+  catalogue.workshops.filter((w) => w.google.snapshot).length,
+);
+assert(
+  manifest.originalPublishedWorkshopIds
+    .filter((id) => !retired.has(id))
+    .every(
+      (id) => catalogue.workshops.find((w) => w.id === id)?.google.snapshot,
+    ),
+  "all original profiles retain their separate Google metadata, including hidden profiles",
+);
+assert.equal(
+  workshops.filter((w) => w.googleRating?.rating != null).length,
+  5,
+  "only sourced Google scores are numeric",
+);
+assert.equal(workshops.filter((w) => w.googleRating?.count != null).length, 4);
+assert(
+  workshops.every((w) => w.rating === null && w.count === 0),
+  "Google stars never create Riparim reviews",
+);
+assert.equal(filters.hasPublishedRatings(workshops), false);
+assert.equal(
+  filters.parseCatalogueFilters(
+    new URLSearchParams("sort=bewertung"),
+    workshops,
+  ).sort,
+  "name",
+  "Google scores do not enable Riparim sorting",
+);
+const unknown = workshops.find(
+  (w) => w.googleRating.rating === null && w.googleRating.count === null,
+);
+assert.equal(
+  unknown.googleRating.rating,
+  null,
+  "missing Google score stays null",
+);
+const unknownMarkup = renderRatings({ workshop: unknown, details: true });
+assert(
+  !unknownMarkup.includes("google-rating-panel") &&
+    !unknownMarkup.includes("Google-Bewertung zu"),
+  "ratings never reserve a Google widget",
+);
+assert(!unknownMarkup.includes("0,0"));
+const emptyCardRatings = renderRatings({
+  workshop: unknown,
+  hideUnavailable: true,
+});
+assert(
+  !emptyCardRatings.includes("Google wird geladen") &&
+    !emptyCardRatings.includes("Noch keine"),
+  "list cards preserve the absence of empty rating placeholders",
+);
+const sonic = workshops.find((w) => w.id === "sonic-garage");
+assert.equal(
+  sonic.googleRating.rating,
+  null,
+  "star icons do not establish an exact Google aggregate",
+);
+assert.equal(sonic.googleRating.count, 19);
+const beli = workshops.find((w) => w.id === "auto-beli-ferizaj");
+assert.equal(beli.googleRating.rating, 4);
+assert.equal(beli.googleRating.count, 52);
+assert.equal(beli.googleRating.sourceUpdatedAt, "2026-02-20");
+assert.equal(
+  workshops.find((w) => w.id === "auto-servis-doni-skenderaj").googleRating
+    .count,
+  8,
+);
 
 // A canonical-source revision updates researched ratings without changing existing profiles.
-const beforeRatingRevision=sqlite.prepare('SELECT * FROM workshops ORDER BY id').all();
-sqlite.prepare("UPDATE workshop_google_ratings SET rating=NULL,review_count=NULL,checked_at='2026-10-03T17:13:16Z' WHERE workshop_id='auto-beli-ferizaj'").run();
-sqlite.prepare("UPDATE workshop_google_ratings SET review_count=6,checked_at='2026-10-03T17:13:16Z' WHERE workshop_id='auto-servis-doni-skenderaj'").run();
-sqlite.prepare("DELETE FROM catalog_state WHERE key=?").run(await directory.catalogueSeedKey());
+const beforeRatingRevision = sqlite
+  .prepare("SELECT * FROM workshops ORDER BY id")
+  .all();
+sqlite
+  .prepare(
+    "UPDATE workshop_google_ratings SET rating=NULL,review_count=NULL,checked_at='2026-10-03T17:13:16Z' WHERE workshop_id='auto-beli-ferizaj'",
+  )
+  .run();
+sqlite
+  .prepare(
+    "UPDATE workshop_google_ratings SET review_count=6,checked_at='2026-10-03T17:13:16Z' WHERE workshop_id='auto-servis-doni-skenderaj'",
+  )
+  .run();
+sqlite
+  .prepare("DELETE FROM catalog_state WHERE key=?")
+  .run(await directory.catalogueSeedKey());
 await directory.ensureInitialCatalog();
-assert.deepEqual(sqlite.prepare('SELECT * FROM workshops ORDER BY id').all(),beforeRatingRevision);
-assert.equal(sqlite.prepare("SELECT review_count FROM workshop_google_ratings WHERE workshop_id='auto-beli-ferizaj'").get().review_count,52);
-assert.equal(sqlite.prepare("SELECT review_count FROM workshop_google_ratings WHERE workshop_id='auto-servis-doni-skenderaj'").get().review_count,8);
+assert.deepEqual(
+  sqlite.prepare("SELECT * FROM workshops ORDER BY id").all(),
+  beforeRatingRevision,
+);
+assert.equal(
+  sqlite
+    .prepare(
+      "SELECT review_count FROM workshop_google_ratings WHERE workshop_id='auto-beli-ferizaj'",
+    )
+    .get().review_count,
+  52,
+);
+assert.equal(
+  sqlite
+    .prepare(
+      "SELECT review_count FROM workshop_google_ratings WHERE workshop_id='auto-servis-doni-skenderaj'",
+    )
+    .get().review_count,
+  8,
+);
 
 await directory.ensureInitialCatalog();
-assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM workshops').get().n,catalogue.workshops.length,'repeated import adds no duplicates');
-const insertVisit=sqlite.prepare('INSERT INTO visits (id,owner,workshop,date,vehicle,service,evidence_type,evidence_note,status,display_name,rating,review,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)');
-for(const [id,rating,status] of [['a',2,'published'],['b',4,'published'],['c',5,'pending']])insertVisit.run(id,'fixture-owner','auto-mita','2026-10-02','Fixture car','Service','Rechnung','Fixture evidence',status,'Fixture reviewer',rating,'Fixture repair review','2026-10-03');
-workshops=await directory.listWorkshops();
-const mita=workshops.find(w=>w.id==='auto-mita');
-assert.equal(mita.rating,3);
-assert.equal(mita.count,2,'only published Riparim reviews are counted');
-assert.equal(mita.googleRating.rating,4.8);
-assert.equal(mita.googleRating.count,null,'unpublished Google count is not guessed');
-const sorted=filters.matchCatalogue(workshops,{...filters.defaultCatalogueFilters,sort:'rating'});
-assert.equal(sorted[0].id,'auto-mita','independent Google 5.0 scores do not outrank a Riparim rating');
-const markup=renderToStaticMarkup(React.createElement(WorkshopRatings,{workshop:mita,details:true}));
-for(const text of ['Riparim','3,0'])assert(markup.includes(text),`rating display includes ${text}`);
-assert(!markup.includes('google-rating-panel'),'rating display only shows Riparim');
-for(const text of ['4,8','Anzahl nicht veröffentlicht','automita.com'])assert(!markup.includes(text),`historical Google content is not displayed: ${text}`);
-
+assert.equal(
+  sqlite.prepare("SELECT COUNT(*) AS n FROM workshops").get().n,
+  catalogue.workshops.length,
+  "repeated import adds no duplicates",
+);
+const insertVisit = sqlite.prepare(
+  "INSERT INTO visits (id,owner,workshop,date,vehicle,service,evidence_type,evidence_note,status,display_name,rating,review,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
+);
+for (const [id, rating, status] of [
+  ["a", 2, "published"],
+  ["b", 4, "published"],
+  ["c", 5, "pending"],
+])
+  insertVisit.run(
+    id,
+    "fixture-owner",
+    "auto-mita",
+    "2026-10-02",
+    "Fixture car",
+    "Service",
+    "Rechnung",
+    "Fixture evidence",
+    status,
+    "Fixture reviewer",
+    rating,
+    "Fixture repair review",
+    "2026-10-03",
+  );
+workshops = await directory.listWorkshops();
+const mita = workshops.find((w) => w.id === "auto-mita");
+assert.equal(mita.rating, 3);
+assert.equal(mita.count, 2, "only published Riparim reviews are counted");
+assert.equal(mita.googleRating.rating, 4.8);
+assert.equal(
+  mita.googleRating.count,
+  null,
+  "unpublished Google count is not guessed",
+);
+const sorted = filters.matchCatalogue(workshops, {
+  ...filters.defaultCatalogueFilters,
+  sort: "rating",
+});
+assert.equal(
+  sorted[0].id,
+  "auto-mita",
+  "independent Google 5.0 scores do not outrank a Riparim rating",
+);
+const markup = renderToStaticMarkup(
+  React.createElement(WorkshopRatings, { workshop: mita, details: true }),
+);
+for (const text of ["Riparim", "3,0"])
+  assert(markup.includes(text), `rating display includes ${text}`);
+assert(
+  !markup.includes("google-rating-panel"),
+  "rating display only shows Riparim",
+);
+for (const text of ["4,8", "Anzahl nicht veröffentlicht", "automita.com"])
+  assert(
+    !markup.includes(text),
+    `historical Google content is not displayed: ${text}`,
+  );
 
 // Owner hours must survive even a newer canonical profile replacing older fields.
-const ownHours={week:Array.from({length:7},()=>({mode:'appointment'})),exceptions:[]};
-const hoursId=curated.find(w=>w.id!=='auto-mita').id;
-sqlite.prepare("UPDATE workshops SET opening_hours=?,opening_hours_confirmed_at='2026-10-13T10:00:00Z',updated_at='2000-01-01T00:00:00Z' WHERE id=?").run(JSON.stringify(ownHours),hoursId);
+const ownHours = {
+  week: Array.from({ length: 7 }, () => ({ mode: "appointment" })),
+  exceptions: [],
+};
+const hoursId = curated.find((w) => w.id !== "auto-mita").id;
+sqlite
+  .prepare(
+    "UPDATE workshops SET opening_hours=?,opening_hours_confirmed_at='2026-10-13T10:00:00Z',updated_at='2000-01-01T00:00:00Z' WHERE id=?",
+  )
+  .run(JSON.stringify(ownHours), hoursId);
 // A later snapshot and an administrator's edits survive re-running the seed.
-sqlite.prepare("UPDATE workshops SET name='Edited profile',status='draft' WHERE id='auto-mita'").run();
-sqlite.prepare("UPDATE workshop_google_ratings SET rating=4.9,checked_at='2099-01-01T00:00:00Z' WHERE workshop_id='auto-mita'").run();
-sqlite.prepare("DELETE FROM catalog_state WHERE key=?").run(await directory.catalogueSeedKey());
+sqlite
+  .prepare(
+    "UPDATE workshops SET name='Edited profile',status='draft' WHERE id='auto-mita'",
+  )
+  .run();
+sqlite
+  .prepare(
+    "UPDATE workshop_google_ratings SET rating=4.9,checked_at='2099-01-01T00:00:00Z' WHERE workshop_id='auto-mita'",
+  )
+  .run();
+sqlite
+  .prepare("DELETE FROM catalog_state WHERE key=?")
+  .run(await directory.catalogueSeedKey());
 await directory.ensureInitialCatalog();
-const edited=(await directory.listWorkshops(true)).find(w=>w.id==='auto-mita');
-assert.deepEqual((await directory.listWorkshops(true)).find(w=>w.id===hoursId).openingHours,ownHours);
-assert.equal((await directory.listWorkshops(true)).find(w=>w.id===hoursId).openingHoursConfirmedAt,'2026-10-13T10:00:00Z');
-assert.equal(edited.name,'Edited profile');
-assert.equal(edited.status,'draft');
-assert.equal(edited.googleRating.rating,4.9,'older imported snapshot never overwrites newer data');
-assert.equal(edited.rating,3,'Google import does not modify visit aggregate');
-assert.equal(sqlite.prepare('SELECT COUNT(*) AS n FROM workshops').get().n,catalogue.workshops.length);
+const edited = (await directory.listWorkshops(true)).find(
+  (w) => w.id === "auto-mita",
+);
+assert.deepEqual(
+  (await directory.listWorkshops(true)).find((w) => w.id === hoursId)
+    .openingHours,
+  ownHours,
+);
+assert.equal(
+  (await directory.listWorkshops(true)).find((w) => w.id === hoursId)
+    .openingHoursConfirmedAt,
+  "2026-10-13T10:00:00Z",
+);
+assert.equal(edited.name, "Edited profile");
+assert.equal(edited.status, "draft");
+assert.equal(
+  edited.googleRating.rating,
+  4.9,
+  "older imported snapshot never overwrites newer data",
+);
+assert.equal(edited.rating, 3, "Google import does not modify visit aggregate");
+assert.equal(
+  sqlite.prepare("SELECT COUNT(*) AS n FROM workshops").get().n,
+  catalogue.workshops.length,
+);
 
 await directory.ensureInitialCatalog();
-const validationCalls=globalThis.fixtureCatalogueValidationCalls;
-await directory.listWorkshops();await directory.listWorkshops();
-assert.equal(globalThis.fixtureCatalogueValidationCalls,validationCalls,"Completed catalogue reads do not revalidate the immutable source");
+const validationCalls = globalThis.fixtureCatalogueValidationCalls;
+assert(
+  validationCalls > 0,
+  "the catalogue validation counter recorded real calls",
+);
+await directory.listWorkshops();
+await directory.listWorkshops();
+assert.equal(
+  globalThis.fixtureCatalogueValidationCalls,
+  validationCalls,
+  "Completed catalogue reads do not revalidate the immutable source",
+);
 
 sqlite.close();
-console.log(JSON.stringify({newWorkshops:newProfiles.length,publicWorkshops:catalogue.coverage.published,existingDraftsPreserved:catalogue.coverage.drafts,verifiedGoogleScores:5,independentRatingRevision:true,independentRatings:true,idempotentImport:true,storage:'isolated SQLite fixture',productionTouched:false}));
+console.log(
+  JSON.stringify({
+    newWorkshops: newProfiles.length,
+    publicWorkshops: catalogue.coverage.published,
+    existingDraftsPreserved: catalogue.coverage.drafts,
+    verifiedGoogleScores: 5,
+    independentRatingRevision: true,
+    independentRatings: true,
+    idempotentImport: true,
+    storage: "isolated SQLite fixture",
+    productionTouched: false,
+  }),
+);

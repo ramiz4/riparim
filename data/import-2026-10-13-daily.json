@@ -292,9 +292,7 @@
     {
       "id": "autodetailingdaja-vushtrri",
       "name": "Autodetailingdaja",
-      "sourceUrls": [
-        "https://www.facebook.com/61564172242981/"
-      ],
+      "sourceUrls": ["https://www.facebook.com/61564172242981/"],
       "placeId": "ChIJBWVI9y9bUxMRqVLTgHMJyMc",
       "checkedAt": "2026-10-13T07:47:21.332786+00:00",
       "nameMatched": true,
@@ -327,23 +325,17 @@
     },
     {
       "id": "auto-moto-universum-gjilan",
-      "sourceUrls": [
-        "https://www.cybo.com/XK/kamenica-kosovo/car-repair/"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK/kamenica-kosovo/car-repair/"],
       "reason": "Existing published identity rediscovered; excluded from new import."
     },
     {
       "id": "garage-fita-gjilan",
-      "sourceUrls": [
-        "https://www.cybo.com/XK/kamenica-kosovo/car-repair/"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK/kamenica-kosovo/car-repair/"],
       "reason": "Existing published identity rediscovered; excluded from new import."
     },
     {
       "id": "luxury-auto-detailing-gjilan",
-      "sourceUrls": [
-        "https://www.cybo.com/XK/kamenica-kosovo/car-repair/"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK/kamenica-kosovo/car-repair/"],
       "reason": "Existing published identity rediscovered; excluded from new import."
     },
     {
@@ -357,9 +349,7 @@
   "uncertainties": [
     {
       "name": "Auto Servis Idrizi",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-idrizi-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-idrizi-1"],
       "reason": "Public Maps searches with explicit Kosovo returned other businesses; no unique matching identity."
     },
     {
@@ -373,9 +363,7 @@
     },
     {
       "name": "Auto Servis Xeni",
-      "sourceUrls": [
-        "https://www.cybo.com/XK/mali%C5%A1evo/car-repair/"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK/mali%C5%A1evo/car-repair/"],
       "placeId": "ChIJ3VTUMRGfUxMRTNkDwna5d-8",
       "reason": "Name/phone/street and direct ID match, but no regular business status shown; active status unconfirmed."
     },
@@ -405,30 +393,22 @@
     },
     {
       "name": "Auto Servis TONI",
-      "sourceUrls": [
-        "https://mapcarta.com/N4864543421"
-      ],
+      "sourceUrls": ["https://mapcarta.com/N4864543421"],
       "reason": "Independent Shtime repair/location evidence; telephone and Maps identity unconfirmed."
     },
     {
       "name": "Auto Servis Vëllezërit Luta",
-      "sourceUrls": [
-        "https://sk.cybo.com/XK/ka%C4%8Danik/autoservis"
-      ],
+      "sourceUrls": ["https://sk.cybo.com/XK/ka%C4%8Danik/autoservis"],
       "reason": "Kaçanik repair lead lacks public phone and full Maps proof."
     },
     {
       "name": "Auto Servis Luli",
-      "sourceUrls": [
-        "https://www.cybo.com/XK/bostane/car-repair"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK/bostane/car-repair"],
       "reason": "Kamenicë repair lead; complete public Maps identity check still outstanding."
     },
     {
       "name": "Auto Basha",
-      "sourceUrls": [
-        "https://www.cybo.com/XK/kamenica-kosovo/car-repair/"
-      ],
+      "sourceUrls": ["https://www.cybo.com/XK/kamenica-kosovo/car-repair/"],
       "reason": "Hodonoc/Kamenicë repair lead; complete public Maps identity check still outstanding."
     }
   ],
@@ -464,11 +444,7 @@
     "healthy": true,
     "publicHttpStatus": 200,
     "checkedPages": 9,
-    "locales": [
-      "de",
-      "sq",
-      "en"
-    ],
+    "locales": ["de", "sq", "en"],
     "error1102": false,
     "completeHtml": true,
     "healthReceipt": ".sites-runtime/daily-import-2026-10-13/health.json",
@@ -507,12 +483,7 @@
       "workshop_google_ratings",
       "catalog_state"
     ],
-    "counts": [
-      162,
-      162,
-      129,
-      58
-    ],
+    "counts": [162, 162, 129, 58],
     "restoredInIsolatedSqlite": true,
     "restoredRowsEqualBackup": true,
     "privateUserTables": false,
@@ -552,11 +523,7 @@
   "translationCheck": {
     "status": "passed",
     "contract": "workshopTranslationSourceHash",
-    "locales": [
-      "de",
-      "sq",
-      "en"
-    ]
+    "locales": ["de", "sq", "en"]
   },
   "validation": {
     "catalogCheck": "passed",
@@ -614,12 +581,7 @@
       "branch": "codex/daily-import-2026-10-13-manual",
       "previousDailyPublishedCount": 2,
       "dailyRemainingMaximum": 28,
-      "focusMunicipalities": [
-        "Lipjan",
-        "Vushtrri",
-        "Drenas",
-        "Skenderaj"
-      ],
+      "focusMunicipalities": ["Lipjan", "Vushtrri", "Drenas", "Skenderaj"],
       "profiles": [
         {
           "id": "auto-servis-naimi-vushtrri",
@@ -828,9 +790,7 @@
         {
           "id": "autodetailingdaja-vushtrri",
           "name": "Autodetailingdaja",
-          "sourceUrls": [
-            "https://www.facebook.com/61564172242981/"
-          ],
+          "sourceUrls": ["https://www.facebook.com/61564172242981/"],
           "placeId": "ChIJBWVI9y9bUxMRqVLTgHMJyMc",
           "checkedAt": "2026-10-13T07:47:21.332786+00:00",
           "nameMatched": true,
@@ -866,25 +826,19 @@
           "name": "Auto Servis Gashi Vushtrri",
           "reason": "Public Maps telephone differs from both independently published telephone contacts.",
           "nextCheck": "Resolve business continuity and phone difference from independent source.",
-          "sourceUrls": [
-            "https://stgres.gjirafa.biz/autoservisgashi-1/"
-          ]
+          "sourceUrls": ["https://stgres.gjirafa.biz/autoservisgashi-1/"]
         },
         {
           "name": "Autoservis Erjoni",
           "reason": "Maps search returned other businesses, no unique Komoran match.",
           "nextCheck": "Find current own business page and uniquely matching Maps entry.",
-          "sourceUrls": [
-            "https://stgres.gjirafa.biz/autoservis-erjoni-1/"
-          ]
+          "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-erjoni-1/"]
         },
         {
           "name": "Auto Servis Fulga",
           "reason": "Maps search returned other businesses, no unique Skenderaj match.",
           "nextCheck": "Find current business identity/Maps entry.",
-          "sourceUrls": [
-            "https://stgres.gjirafa.biz/auto-servis-fulga-1/"
-          ]
+          "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-fulga-1/"]
         },
         {
           "name": "Autoservis Lordi",
@@ -899,9 +853,7 @@
           "name": "Auto Servis Isa Skenderaj",
           "reason": "Maps selected a different town and incomplete contact; no matching Skenderaj identity.",
           "nextCheck": "Independent current identity and exact Maps listing.",
-          "sourceUrls": [
-            "https://stgres.gjirafa.biz/auto-servis-isa-2"
-          ]
+          "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-isa-2"]
         },
         {
           "name": "Auto Elektrika Bosch Lipjan",
@@ -1142,11 +1094,7 @@
       "translationCheck": {
         "status": "passed",
         "contract": "workshopTranslationSourceHash",
-        "locales": [
-          "de",
-          "sq",
-          "en"
-        ]
+        "locales": ["de", "sq", "en"]
       },
       "emailSummary": {
         "preparedWithPublicBusinessEmail": 3,
@@ -1161,12 +1109,7 @@
           "workshop_google_ratings",
           "catalog_state"
         ],
-        "counts": [
-          164,
-          164,
-          129,
-          59
-        ],
+        "counts": [164, 164, 129, 59],
         "mismatches": 0,
         "rowsWritten": 0,
         "checkedAt": "2026-10-13T07:47:21.332786+00:00"
@@ -1196,9 +1139,7 @@
           {
             "name": "Auto Servis & Pjesë BEXHI",
             "originManifest": "data/import-2026-10-12-daily.json",
-            "sourceUrls": [
-              "https://autoservispjesbexhi.com/"
-            ],
+            "sourceUrls": ["https://autoservispjesbexhi.com/"],
             "status": "prior-deferred",
             "reason": "Public Maps profile has no telephone; strict phone comparison incomplete."
           },
@@ -1269,18 +1210,14 @@
           {
             "name": "Auto Servis Isa",
             "originManifest": "data/import-2026-10-12-daily.json",
-            "sourceUrls": [
-              "https://stgres.gjirafa.biz/auto-servis-isa-2"
-            ],
+            "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-isa-2"],
             "status": "prior-deferred",
             "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
           },
           {
             "name": "Auto servis llaker LATI TUNING",
             "originManifest": "data/import-2026-10-12-daily.json",
-            "sourceUrls": [
-              "https://stgres.gjirafa.biz/lati--tunning-1"
-            ],
+            "sourceUrls": ["https://stgres.gjirafa.biz/lati--tunning-1"],
             "status": "prior-deferred",
             "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
           },
@@ -1308,9 +1245,7 @@
           {
             "name": "Auto Servis Idrizi",
             "originManifest": "data/import-2026-10-13-daily.json",
-            "sourceUrls": [
-              "https://stgres.gjirafa.biz/auto-servis-idrizi-1"
-            ],
+            "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-idrizi-1"],
             "status": "prior-deferred",
             "reason": "Public Maps searches with explicit Kosovo returned other businesses; no unique matching identity."
           },
@@ -1327,9 +1262,7 @@
           {
             "name": "Auto Servis Xeni",
             "originManifest": "data/import-2026-10-13-daily.json",
-            "sourceUrls": [
-              "https://www.cybo.com/XK/mali%C5%A1evo/car-repair/"
-            ],
+            "sourceUrls": ["https://www.cybo.com/XK/mali%C5%A1evo/car-repair/"],
             "status": "prior-deferred",
             "reason": "Name/phone/street and direct ID match, but no regular business status shown; active status unconfirmed."
           },
@@ -1365,27 +1298,21 @@
           {
             "name": "Auto Servis TONI",
             "originManifest": "data/import-2026-10-13-daily.json",
-            "sourceUrls": [
-              "https://mapcarta.com/N4864543421"
-            ],
+            "sourceUrls": ["https://mapcarta.com/N4864543421"],
             "status": "prior-deferred",
             "reason": "Independent Shtime repair/location evidence; telephone and Maps identity unconfirmed."
           },
           {
             "name": "Auto Servis Vëllezërit Luta",
             "originManifest": "data/import-2026-10-13-daily.json",
-            "sourceUrls": [
-              "https://sk.cybo.com/XK/ka%C4%8Danik/autoservis"
-            ],
+            "sourceUrls": ["https://sk.cybo.com/XK/ka%C4%8Danik/autoservis"],
             "status": "prior-deferred",
             "reason": "Kaçanik repair lead lacks public phone and full Maps proof."
           },
           {
             "name": "Auto Servis Luli",
             "originManifest": "data/import-2026-10-13-daily.json",
-            "sourceUrls": [
-              "https://www.cybo.com/XK/bostane/car-repair"
-            ],
+            "sourceUrls": ["https://www.cybo.com/XK/bostane/car-repair"],
             "status": "prior-deferred",
             "reason": "Kamenicë repair lead; complete public Maps identity check still outstanding."
           },
@@ -1457,72 +1384,54 @@
           },
           {
             "name": "Autodetailingdaja",
-            "sourceUrls": [
-              "https://www.facebook.com/61564172242981/"
-            ],
+            "sourceUrls": ["https://www.facebook.com/61564172242981/"],
             "status": "prepared-for-review"
           },
           {
             "name": "Auto Elektrika Bosch",
-            "sourceUrls": [
-              "https://hr.cybo.com/XK/lipljan/auto-servisi/"
-            ],
+            "sourceUrls": ["https://hr.cybo.com/XK/lipljan/auto-servisi/"],
             "status": "source-lead-not-approved",
             "reason": "Active-status and final public-ID evidence incomplete."
           },
           {
             "name": "Albo Auto",
-            "sourceUrls": [
-              "https://hr.cybo.com/XK/lipljan/auto-servisi/"
-            ],
+            "sourceUrls": ["https://hr.cybo.com/XK/lipljan/auto-servisi/"],
             "status": "source-lead-not-approved",
             "reason": "Conflicting repair versus parts-store classification; no current repair proof."
           },
           {
             "name": "Mekanik Gzimi",
-            "sourceUrls": [
-              "https://hr.cybo.com/XK/lipljan/auto-servisi/"
-            ],
+            "sourceUrls": ["https://hr.cybo.com/XK/lipljan/auto-servisi/"],
             "status": "source-lead-not-approved",
             "reason": "Public phone and complete identity proof missing."
           },
           {
             "name": "Paco Car Diagnosis",
-            "sourceUrls": [
-              "https://hr.cybo.com/XK/lipljan/auto-servisi/"
-            ],
+            "sourceUrls": ["https://hr.cybo.com/XK/lipljan/auto-servisi/"],
             "status": "source-lead-not-approved",
             "reason": "Public phone and complete identity proof missing."
           },
           {
             "name": "Auto Ardi Lipjan",
-            "sourceUrls": [
-              "https://hr.cybo.com/XK/lipljan/auto-servisi/"
-            ],
+            "sourceUrls": ["https://hr.cybo.com/XK/lipljan/auto-servisi/"],
             "status": "source-lead-not-approved",
             "reason": "Complete public Maps identity proof pending."
           },
           {
             "name": "Auto Gazi Lipjan",
-            "sourceUrls": [
-              "https://hr.cybo.com/XK/lipljan/auto-servisi/"
-            ],
+            "sourceUrls": ["https://hr.cybo.com/XK/lipljan/auto-servisi/"],
             "status": "source-lead-not-approved",
             "reason": "Complete public Maps identity proof pending."
           },
           {
             "name": "Extra Washen 24h",
-            "sourceUrls": [
-              "https://hr.cybo.com/XK/lipljan/auto-servisi/"
-            ],
+            "sourceUrls": ["https://hr.cybo.com/XK/lipljan/auto-servisi/"],
             "status": "source-lead-not-approved",
             "reason": "Car wash listing does not establish requested detailing/repair scope."
           },
           {
             "name": "Crystal Wash",
-            "sourceUrls": [
-              "https://hr.cybo.com/XK/lipljan/auto-servisi/"
-            ],
+            "sourceUrls": ["https://hr.cybo.com/XK/lipljan/auto-servisi/"],
             "status": "source-lead-not-approved",
             "reason": "Car wash listing does not establish requested detailing/repair scope."
           },
@@ -1632,9 +1541,7 @@
           },
           {
             "name": "Auto Servis MUSLIMI",
-            "sourceUrls": [
-              "https://www.cybo.com/XK/skenderaj/car-repair"
-            ],
+            "sourceUrls": ["https://www.cybo.com/XK/skenderaj/car-repair"],
             "status": "source-lead-not-approved",
             "reason": "Complete public Maps identity proof pending."
           }
@@ -1642,12 +1549,7 @@
         "note": "Queue records source screening and remaining work, not completed identity checks. Previously deferred cases without a new current-run result retain their prior blocker."
       },
       "coverage": {
-        "focusMunicipalities": [
-          "Vushtrri",
-          "Lipjan",
-          "Drenas",
-          "Skenderaj"
-        ],
+        "focusMunicipalities": ["Vushtrri", "Lipjan", "Drenas", "Skenderaj"],
         "priorDeferredQueue": 23,
         "newSourceLeads": 30,
         "rediscoveredDuplicates": 6,
@@ -1757,23 +1659,17 @@
       },
       {
         "id": "auto-moto-universum-gjilan",
-        "sourceUrls": [
-          "https://www.cybo.com/XK/kamenica-kosovo/car-repair/"
-        ],
+        "sourceUrls": ["https://www.cybo.com/XK/kamenica-kosovo/car-repair/"],
         "reason": "Existing published identity rediscovered; excluded from new import."
       },
       {
         "id": "garage-fita-gjilan",
-        "sourceUrls": [
-          "https://www.cybo.com/XK/kamenica-kosovo/car-repair/"
-        ],
+        "sourceUrls": ["https://www.cybo.com/XK/kamenica-kosovo/car-repair/"],
         "reason": "Existing published identity rediscovered; excluded from new import."
       },
       {
         "id": "luxury-auto-detailing-gjilan",
-        "sourceUrls": [
-          "https://www.cybo.com/XK/kamenica-kosovo/car-repair/"
-        ],
+        "sourceUrls": ["https://www.cybo.com/XK/kamenica-kosovo/car-repair/"],
         "reason": "Existing published identity rediscovered; excluded from new import."
       },
       {
@@ -1787,9 +1683,7 @@
     "uncertainties": [
       {
         "name": "Auto Servis Idrizi",
-        "sourceUrls": [
-          "https://stgres.gjirafa.biz/auto-servis-idrizi-1"
-        ],
+        "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-idrizi-1"],
         "reason": "Public Maps searches with explicit Kosovo returned other businesses; no unique matching identity."
       },
       {
@@ -1803,9 +1697,7 @@
       },
       {
         "name": "Auto Servis Xeni",
-        "sourceUrls": [
-          "https://www.cybo.com/XK/mali%C5%A1evo/car-repair/"
-        ],
+        "sourceUrls": ["https://www.cybo.com/XK/mali%C5%A1evo/car-repair/"],
         "placeId": "ChIJ3VTUMRGfUxMRTNkDwna5d-8",
         "reason": "Name/phone/street and direct ID match, but no regular business status shown; active status unconfirmed."
       },
@@ -1835,30 +1727,22 @@
       },
       {
         "name": "Auto Servis TONI",
-        "sourceUrls": [
-          "https://mapcarta.com/N4864543421"
-        ],
+        "sourceUrls": ["https://mapcarta.com/N4864543421"],
         "reason": "Independent Shtime repair/location evidence; telephone and Maps identity unconfirmed."
       },
       {
         "name": "Auto Servis Vëllezërit Luta",
-        "sourceUrls": [
-          "https://sk.cybo.com/XK/ka%C4%8Danik/autoservis"
-        ],
+        "sourceUrls": ["https://sk.cybo.com/XK/ka%C4%8Danik/autoservis"],
         "reason": "Kaçanik repair lead lacks public phone and full Maps proof."
       },
       {
         "name": "Auto Servis Luli",
-        "sourceUrls": [
-          "https://www.cybo.com/XK/bostane/car-repair"
-        ],
+        "sourceUrls": ["https://www.cybo.com/XK/bostane/car-repair"],
         "reason": "Kamenicë repair lead; complete public Maps identity check still outstanding."
       },
       {
         "name": "Auto Basha",
-        "sourceUrls": [
-          "https://www.cybo.com/XK/kamenica-kosovo/car-repair/"
-        ],
+        "sourceUrls": ["https://www.cybo.com/XK/kamenica-kosovo/car-repair/"],
         "reason": "Hodonoc/Kamenicë repair lead; complete public Maps identity check still outstanding."
       }
     ],
@@ -1894,11 +1778,7 @@
       "healthy": true,
       "publicHttpStatus": 200,
       "checkedPages": 9,
-      "locales": [
-        "de",
-        "sq",
-        "en"
-      ],
+      "locales": ["de", "sq", "en"],
       "error1102": false,
       "completeHtml": true,
       "healthReceipt": ".sites-runtime/daily-import-2026-10-13/health.json",
@@ -1937,12 +1817,7 @@
         "workshop_google_ratings",
         "catalog_state"
       ],
-      "counts": [
-        162,
-        162,
-        129,
-        58
-      ],
+      "counts": [162, 162, 129, 58],
       "restoredInIsolatedSqlite": true,
       "restoredRowsEqualBackup": true,
       "privateUserTables": false,
@@ -1973,11 +1848,7 @@
     "translationCheck": {
       "status": "passed",
       "centralHashContract": "workshopTranslationSourceHash",
-      "locales": [
-        "de",
-        "sq",
-        "en"
-      ]
+      "locales": ["de", "sq", "en"]
     },
     "validation": {
       "ci": {
