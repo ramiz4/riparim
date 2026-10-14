@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-13T07:47:21.252Z",
+  "updatedAt": "2026-10-14T07:25:21.275Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 172,
+    "published": 177,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "Alle 172 veröffentlichten Kfz-Servicebetriebe besitzen einzeln bestätigte Google-Place-IDs. Neue Identitäten werden über die öffentliche Maps-Oberfläche gegen unabhängige Kontakt-, Standort- und Leistungsbelege geprüft; keine offenen Entwürfe.",
-    "matchedPlaceIds": 172,
+    "reason": "Alle 177 veröffentlichten Kfz-Servicebetriebe besitzen einzeln bestätigte Google-Place-IDs. Neue Identitäten werden über die öffentliche Maps-Oberfläche gegen unabhängige Kontakt-, Standort- und Leistungsbelege geprüft; keine offenen Entwürfe.",
+    "matchedPlaceIds": 177,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -2752,6 +2752,98 @@
       }
     },
     {
+      "id": "auto-service-tuli-rahovec",
+      "name": "Auto Service TULI",
+      "city": "Rahovec",
+      "address": "Sadedin Hajda, Rahovec 21000",
+      "phone": "+38344887896",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung",
+        "Motor & Getriebe",
+        "Bremsen & Fahrwerk",
+        "Reifen & Klima"
+      ],
+      "serviceDetails": [
+        "Wartung verschiedener Fahrzeugtypen",
+        "Motor- und Fahrwerksreparaturen",
+        "Befüllen von Klimaanlagen",
+        "Zahnriemenwechsel und Getriebeölservice"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugwartung · Motor und Fahrwerk",
+      "description": "Auto Service TULI in Rahovec nennt Wartung, Motor- und Fahrwerksreparaturen, Klimaservice sowie Zahnriemen- und Getriebeölservice auf der eigenen Betriebsseite. Kontakt und Anschrift stammen ebenfalls aus diesem öffentlichen Auftritt.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/autoservicetuli/",
+          "title": "Eigene Facebook-Seite: Kfz-Werkstatt, Wartung, Motor- und Fahrwerksreparaturen sowie Kontakt",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-14",
+      "status": "published",
+      "updatedAt": "2026-10-14T07:24:19.354753Z",
+      "google": {
+        "placeId": "ChIJwUpq4mijUxMRX_oLQ40ISts",
+        "matchedAt": "2026-10-14T07:24:19.354753Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.facebook.com/autoservicetuli/"
+          ],
+          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle; Maps nennt keine vergleichbare Straße. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
+        }
+      }
+    },
+    {
+      "id": "auto-service-vali-istog",
+      "name": "Auto Service Vali",
+      "city": "Istog",
+      "address": "Dëshmorët e Kombit, Istog",
+      "phone": "+38344920210",
+      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa); nicht vom Betrieb bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Fahrzeugwartung und Reparatur laut öffentlichem Verzeichniseintrag; konkrete Arbeiten bitte direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Kfz-Service",
+      "description": "Gjirafa führt Auto Service Vali in Istog mit Fahrzeugwartung und Reparatur. Telefon, Anschrift und E-Mail stammen aus dem öffentlichen Verzeichnis; Erreichbarkeit und einzelne Reparaturarten sind nicht vom Betrieb bestätigt.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://gjirafa.biz/autoservicevali-1",
+          "title": "Gjirafa: Auto Service Vali – Wartung und Reparatur aller Fahrzeuge, Telefon und Anschrift",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-14",
+      "status": "published",
+      "updatedAt": "2026-10-14T07:24:19.354753Z",
+      "google": {
+        "placeId": "ChIJNwwEMeIZUxMRsfs69rhCmYg",
+        "matchedAt": "2026-10-14T07:24:19.354753Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://gjirafa.biz/autoservicevali-1"
+          ],
+          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
+        }
+      }
+    },
+    {
       "id": "auto-servis-agimi-gjakova",
       "name": "Auto servis \"Agimi\"",
       "city": "Gjakova",
@@ -3046,6 +3138,49 @@
             "https://www.google.com/maps/search/?api=1&query=NOT_A_REAL_RIPARIM_BUSINESS&query_place_id=ChIJR0jrutd1UxMRlemhiDV-aUA"
           ],
           "note": "Öffentliche Maps-Oberfläche im bestätigten Projektprofil: Name, normalisiertes Telefon und unabhängige Straße/Ort stimmen überein; aktiver Eintrag mit regulärem Öffnungsstatus. Place-ID aus sichtbarem !19s-Ergebnislink direkt mit falscher Ersatzsuche rückgeprüft. Keine API-/SDK-Aufrufe, keine Inhaberbestätigung."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-besimi-kline",
+      "name": "Auto Servis Besimi",
+      "city": "Klinë",
+      "address": "Rruga Lufta e Çelisë, Pogragjë, Klinë 32000",
+      "phone": "+38344173716",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Kfz-Service laut eigener öffentlicher Betriebsseite; konkrete Reparaturarten bitte direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Kfz-Service",
+      "description": "Auto Servis Besimi bietet Fahrzeugservice in Klinë an. Name, Kontakt und Anschrift sind auf der eigenen öffentlichen Betriebsseite belegt; konkrete Reparaturarten bitte direkt bestätigen.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/autoservisbesimi/",
+          "title": "Eigene Facebook-Seite: Kfz-Service, Rruga Lufta e Çelisë in Pogragjë, Telefon und E-Mail",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-14",
+      "status": "published",
+      "updatedAt": "2026-10-14T07:24:19.354753Z",
+      "google": {
+        "placeId": "ChIJhQqDbvpvUxMRlJFO2NV1CeE",
+        "matchedAt": "2026-10-14T07:24:19.354753Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.facebook.com/autoservisbesimi/"
+          ],
+          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
         }
       }
     },
@@ -3589,6 +3724,49 @@
             "https://www.gjithebiznesi.com/XK/auto-servis-enisi-044-809-246"
           ],
           "note": "Name, Telefon und Straßenadresse stimmen überein; Kastriot und Obiliq bezeichnen hier denselben Ort. Direkte Place-Details-ID-Prüfung bestanden."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-ermali-kline",
+      "name": "Auto Servis Ermali",
+      "city": "Klinë",
+      "address": "Ilir Merturi, Klinë 32000",
+      "phone": "+38343538919",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Kfz-Service laut eigener öffentlicher Betriebsseite; konkrete Reparaturarten bitte direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Kfz-Service",
+      "description": "Auto Servis Ermali bietet Fahrzeugservice in Klinë an. Name, Kontakt und Anschrift sind auf der eigenen öffentlichen Betriebsseite belegt; konkrete Reparaturarten bitte direkt bestätigen.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/100092324168737/",
+          "title": "Eigene Facebook-Seite: Kfz-Werkstatt, Ilir Merturi in Klinë, Telefon und E-Mail",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-14",
+      "status": "published",
+      "updatedAt": "2026-10-14T07:24:19.354753Z",
+      "google": {
+        "placeId": "ChIJD9VxuPsPUxMRpMZoFq4Ddjw",
+        "matchedAt": "2026-10-14T07:24:19.354753Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.facebook.com/100092324168737/"
+          ],
+          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle; Maps nennt keine vergleichbare Straße. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
         }
       }
     },
@@ -7447,6 +7625,62 @@
             "https://www.findglocal.com/XK/Gjilan/1168160443205697/Luxury-Auto-Detailing"
           ],
           "note": "Aktuelle eigene Betriebsbeiträge bestätigen denselben Telefonkontakt und Mulla Idrizi III in Gjilan. Der abweichende ältere Verzeichnis-Plus-Code wird nicht übernommen. Direkte Place-Details-ID-Prüfung bestanden."
+        }
+      }
+    },
+    {
+      "id": "mana-auto-detailing-rahovec",
+      "name": "MANA auto detailing",
+      "city": "Rahovec",
+      "address": "Rr. UÇK (Shkodrani) Nr. 114, Rahovec",
+      "phone": "+38349790676",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Karosserie & Lack"
+      ],
+      "serviceDetails": [
+        "Fahrzeugaufbereitung und Innenraum-Detailing",
+        "Aufbereitung von Scheinwerfern"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugaufbereitung · Innenraum-Detailing",
+      "description": "MANA auto detailing in Rahovec bietet Fahrzeugaufbereitung, Innenraum-Detailing und Scheinwerferaufbereitung an. Die eigene Instagram-Seite nennt Telefon und Rr. UÇK Nr. 114; der eigene Facebook-Auftritt bestätigt Rahovec. Eine öffentlich belegte Geschäfts-E-Mail wurde in den geprüften Quellen nicht gefunden.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.instagram.com/manaautodetailing/",
+          "title": "Eigene Instagram-Seite: Fahrzeugaufbereitung, Telefon und Rr. UÇK Nr. 114",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/MANAautodetailing/",
+          "title": "Eigener Facebook-Auftritt: Rahovec und öffentlicher Telefonkontakt",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/manaautodetailing/reel/Dax-31fsI2z/",
+          "title": "Eigener Instagram-Beitrag: Scheinwerferaufbereitung",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-14",
+      "status": "published",
+      "updatedAt": "2026-10-14T07:24:19.354753Z",
+      "google": {
+        "placeId": "ChIJ251IxFKjUxMRPPJX5yQCLVY",
+        "matchedAt": "2026-10-14T07:24:19.354753Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.instagram.com/manaautodetailing/",
+            "https://www.facebook.com/MANAautodetailing/",
+            "https://www.instagram.com/manaautodetailing/reel/Dax-31fsI2z/"
+          ],
+          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
         }
       }
     },

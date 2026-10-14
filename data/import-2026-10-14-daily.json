@@ -1,0 +1,3263 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-14",
+  "localDate": "2026-10-14",
+  "timezone": "Europe/Zurich",
+  "startedAt": "2026-10-14T04:03:06.199Z",
+  "checkedAt": "2026-10-14T07:33:16.770357+00:00",
+  "status": "imported-awaiting-review-release",
+  "baseCommit": "ab16f3e17f6357a479a2bd247ded8dbf1ce32704",
+  "branch": "codex/daily-import-2026-10-14",
+  "reason": "5 fully verified candidates imported into isolated Canonical only; no new profiles published yet.",
+  "before": {
+    "total": 172,
+    "published": 172,
+    "drafts": 0
+  },
+  "after": {
+    "total": 177,
+    "published": 177,
+    "drafts": 0
+  },
+  "importedWorkshopIds": [
+    "auto-service-vali-istog",
+    "auto-servis-ermali-kline",
+    "auto-servis-besimi-kline",
+    "auto-service-tuli-rahovec",
+    "mana-auto-detailing-rahovec"
+  ],
+  "publishedCountConfirmed": 0,
+  "profiles": [
+    {
+      "id": "auto-service-tuli-rahovec",
+      "name": "Auto Service TULI",
+      "city": "Rahovec",
+      "address": "Sadedin Hajda, Rahovec 21000",
+      "phone": "+38344887896",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung",
+        "Motor & Getriebe",
+        "Bremsen & Fahrwerk",
+        "Reifen & Klima"
+      ],
+      "serviceDetails": [
+        "Wartung verschiedener Fahrzeugtypen",
+        "Motor- und Fahrwerksreparaturen",
+        "Befüllen von Klimaanlagen",
+        "Zahnriemenwechsel und Getriebeölservice"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugwartung · Motor und Fahrwerk",
+      "description": "Auto Service TULI in Rahovec nennt Wartung, Motor- und Fahrwerksreparaturen, Klimaservice sowie Zahnriemen- und Getriebeölservice auf der eigenen Betriebsseite. Kontakt und Anschrift stammen ebenfalls aus diesem öffentlichen Auftritt.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/autoservicetuli/",
+          "title": "Eigene Facebook-Seite: Kfz-Werkstatt, Wartung, Motor- und Fahrwerksreparaturen sowie Kontakt",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-14",
+      "status": "published",
+      "updatedAt": "2026-10-14T07:24:19.354753Z",
+      "google": {
+        "placeId": "ChIJwUpq4mijUxMRX_oLQ40ISts",
+        "matchedAt": "2026-10-14T07:24:19.354753Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.facebook.com/autoservicetuli/"
+          ],
+          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle; Maps nennt keine vergleichbare Straße. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
+        }
+      }
+    },
+    {
+      "id": "auto-service-vali-istog",
+      "name": "Auto Service Vali",
+      "city": "Istog",
+      "address": "Dëshmorët e Kombit, Istog",
+      "phone": "+38344920210",
+      "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa); nicht vom Betrieb bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Fahrzeugwartung und Reparatur laut öffentlichem Verzeichniseintrag; konkrete Arbeiten bitte direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Kfz-Service",
+      "description": "Gjirafa führt Auto Service Vali in Istog mit Fahrzeugwartung und Reparatur. Telefon, Anschrift und E-Mail stammen aus dem öffentlichen Verzeichnis; Erreichbarkeit und einzelne Reparaturarten sind nicht vom Betrieb bestätigt.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://gjirafa.biz/autoservicevali-1",
+          "title": "Gjirafa: Auto Service Vali – Wartung und Reparatur aller Fahrzeuge, Telefon und Anschrift",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-14",
+      "status": "published",
+      "updatedAt": "2026-10-14T07:24:19.354753Z",
+      "google": {
+        "placeId": "ChIJNwwEMeIZUxMRsfs69rhCmYg",
+        "matchedAt": "2026-10-14T07:24:19.354753Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://gjirafa.biz/autoservicevali-1"
+          ],
+          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-besimi-kline",
+      "name": "Auto Servis Besimi",
+      "city": "Klinë",
+      "address": "Rruga Lufta e Çelisë, Pogragjë, Klinë 32000",
+      "phone": "+38344173716",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Kfz-Service laut eigener öffentlicher Betriebsseite; konkrete Reparaturarten bitte direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Kfz-Service",
+      "description": "Auto Servis Besimi bietet Fahrzeugservice in Klinë an. Name, Kontakt und Anschrift sind auf der eigenen öffentlichen Betriebsseite belegt; konkrete Reparaturarten bitte direkt bestätigen.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/autoservisbesimi/",
+          "title": "Eigene Facebook-Seite: Kfz-Service, Rruga Lufta e Çelisë in Pogragjë, Telefon und E-Mail",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-14",
+      "status": "published",
+      "updatedAt": "2026-10-14T07:24:19.354753Z",
+      "google": {
+        "placeId": "ChIJhQqDbvpvUxMRlJFO2NV1CeE",
+        "matchedAt": "2026-10-14T07:24:19.354753Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.facebook.com/autoservisbesimi/"
+          ],
+          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-ermali-kline",
+      "name": "Auto Servis Ermali",
+      "city": "Klinë",
+      "address": "Ilir Merturi, Klinë 32000",
+      "phone": "+38343538919",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung"
+      ],
+      "serviceDetails": [
+        "Kfz-Service laut eigener öffentlicher Betriebsseite; konkrete Reparaturarten bitte direkt bestätigen."
+      ],
+      "languages": [],
+      "specialty": "Kfz-Service",
+      "description": "Auto Servis Ermali bietet Fahrzeugservice in Klinë an. Name, Kontakt und Anschrift sind auf der eigenen öffentlichen Betriebsseite belegt; konkrete Reparaturarten bitte direkt bestätigen.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/100092324168737/",
+          "title": "Eigene Facebook-Seite: Kfz-Werkstatt, Ilir Merturi in Klinë, Telefon und E-Mail",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-14",
+      "status": "published",
+      "updatedAt": "2026-10-14T07:24:19.354753Z",
+      "google": {
+        "placeId": "ChIJD9VxuPsPUxMRpMZoFq4Ddjw",
+        "matchedAt": "2026-10-14T07:24:19.354753Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.facebook.com/100092324168737/"
+          ],
+          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle; Maps nennt keine vergleichbare Straße. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
+        }
+      }
+    },
+    {
+      "id": "mana-auto-detailing-rahovec",
+      "name": "MANA auto detailing",
+      "city": "Rahovec",
+      "address": "Rr. UÇK (Shkodrani) Nr. 114, Rahovec",
+      "phone": "+38349790676",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Karosserie & Lack"
+      ],
+      "serviceDetails": [
+        "Fahrzeugaufbereitung und Innenraum-Detailing",
+        "Aufbereitung von Scheinwerfern"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugaufbereitung · Innenraum-Detailing",
+      "description": "MANA auto detailing in Rahovec bietet Fahrzeugaufbereitung, Innenraum-Detailing und Scheinwerferaufbereitung an. Die eigene Instagram-Seite nennt Telefon und Rr. UÇK Nr. 114; der eigene Facebook-Auftritt bestätigt Rahovec. Eine öffentlich belegte Geschäfts-E-Mail wurde in den geprüften Quellen nicht gefunden.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.instagram.com/manaautodetailing/",
+          "title": "Eigene Instagram-Seite: Fahrzeugaufbereitung, Telefon und Rr. UÇK Nr. 114",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/MANAautodetailing/",
+          "title": "Eigener Facebook-Auftritt: Rahovec und öffentlicher Telefonkontakt",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/manaautodetailing/reel/Dax-31fsI2z/",
+          "title": "Eigener Instagram-Beitrag: Scheinwerferaufbereitung",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-14",
+      "status": "published",
+      "updatedAt": "2026-10-14T07:24:19.354753Z",
+      "google": {
+        "placeId": "ChIJ251IxFKjUxMRPPJX5yQCLVY",
+        "matchedAt": "2026-10-14T07:24:19.354753Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.instagram.com/manaautodetailing/",
+            "https://www.facebook.com/MANAautodetailing/",
+            "https://www.instagram.com/manaautodetailing/reel/Dax-31fsI2z/"
+          ],
+          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
+        }
+      }
+    }
+  ],
+  "municipalitiesInvestigated": [
+    "Istog",
+    "Klinë",
+    "Rahovec",
+    "Deçan"
+  ],
+  "plannedFocusMunicipalities": [
+    "Istog",
+    "Klinë",
+    "Rahovec",
+    "Deçan"
+  ],
+  "coverage": {
+    "focusMunicipalities": [
+      "Istog",
+      "Klinë",
+      "Rahovec",
+      "Deçan"
+    ],
+    "historicalDeferredQueueEntries": 82,
+    "backlogCountsAreNewResearch": false,
+    "fullyVerifiedToday": 5,
+    "directlyExaminedNewBusinesses": 15,
+    "publishedNewIds": 0,
+    "belowTenReason": "Exact Maps identity/phone gaps, contradictory or moved locations, missing independently proved service scope; only five completed all gates. Target 40–60 source leads not reached: 17 businesses individually examined (including two historical leads) plus search/result discovery; discovery entries are not fully verified candidates.",
+    "individuallyExaminedBusinesses": 17,
+    "historicalLeadsRechecked": 2,
+    "distinctScreenedCandidates": 18,
+    "screenedOnlyExistingDuplicates": 1,
+    "currentDeferredExamined": 12,
+    "countDefinition": "5 approved + 12 individually examined deferred = 17; includes historical Vali and DONI. BLEDI is one additional existing identity screened out early, giving 18 screened candidates. Search result discoveries without individual source/Maps examination are not counted."
+  },
+  "researchQueue": [
+    {
+      "name": "Auto Servis Kollari",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Fehlender eindeutiger Kontakt-/Standortabgleich oder unzureichender unabhängiger Kfz-Leistungsnachweis."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Fehlender eindeutiger Kontakt-/Standortabgleich oder unzureichender unabhängiger Kfz-Leistungsnachweis.",
+      "deferredCause": "independent-service-scope-missing",
+      "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto servis BEKA",
+      "aliases": [
+        "Auto servis Beka"
+      ],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Fehlender eindeutiger Kontakt-/Standortabgleich oder unzureichender unabhängiger Kfz-Leistungsnachweis."
+        },
+        {
+          "origin": "data/import-2026-10-11-daily.json#notImported",
+          "reason": "Official finder searches for all six leads yielded generic, ambiguous or wrong-city entries; no corresponding unique identity was accepted."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Official finder searches for all six leads yielded generic, ambiguous or wrong-city entries; no corresponding unique identity was accepted.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis XHETI",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Fehlender eindeutiger Kontakt-/Standortabgleich oder unzureichender unabhängiger Kfz-Leistungsnachweis."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Fehlender eindeutiger Kontakt-/Standortabgleich oder unzureichender unabhängiger Kfz-Leistungsnachweis.",
+      "deferredCause": "independent-service-scope-missing",
+      "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Service BELTI",
+      "aliases": [],
+      "sourceUrls": [
+        "https://belti-service.com/",
+        "https://www.autoyas.com/XK/Suharek%C3%AB/251321245051560/AutoServis-BELTI"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Fehlender eindeutiger Kontakt-/Standortabgleich oder unzureichender unabhängiger Kfz-Leistungsnachweis."
+        },
+        {
+          "origin": "data/import-2026-10-12-daily.json#uncertainties",
+          "reason": "Maps telephone differs from independently published business telephone; alternative Maps number not independently confirmed."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Maps telephone differs from independently published business telephone; alternative Maps number not independently confirmed."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Maps telephone differs from independently published business telephone; alternative Maps number not independently confirmed.",
+      "deferredCause": "identity-contact-location-or-status-conflict",
+      "nextCheck": "Resolve the documented conflict using a current attributable own business source before any new Maps check.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "BEXHI",
+      "aliases": [
+        "Auto Servis & Pjesë BEXHI"
+      ],
+      "sourceUrls": [
+        "https://autoservispjesbexhi.com/"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Fehlender eindeutiger Kontakt-/Standortabgleich oder unzureichender unabhängiger Kfz-Leistungsnachweis."
+        },
+        {
+          "origin": "data/import-2026-10-12-daily.json#uncertainties",
+          "reason": "Public Maps profile has no telephone; strict phone comparison incomplete."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Public Maps profile has no telephone; strict phone comparison incomplete."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Public Maps profile has no telephone; strict phone comparison incomplete.",
+      "historicalPlaceId": "ChIJm3DAYABfUxMR7HJj8JlPHAE",
+      "deferredCause": "public-phone-or-strict-phone-match-missing",
+      "nextCheck": "Find and attribute a current public business phone, then compare in confirmed public Maps UI.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Autobokshi",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Fehlender eindeutiger Kontakt-/Standortabgleich oder unzureichender unabhängiger Kfz-Leistungsnachweis."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Fehlender eindeutiger Kontakt-/Standortabgleich oder unzureichender unabhängiger Kfz-Leistungsnachweis.",
+      "deferredCause": "independent-service-scope-missing",
+      "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Trimi Auto Servis",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang.",
+      "deferredCause": "independent-service-scope-missing",
+      "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "AutoServis & Pjesë Mergimi",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang.",
+      "deferredCause": "independent-service-scope-missing",
+      "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis Makolli",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang.",
+      "deferredCause": "independent-service-scope-missing",
+      "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis Diagro",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang.",
+      "deferredCause": "independent-service-scope-missing",
+      "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Cartex Kosova",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang.",
+      "deferredCause": "independent-service-scope-missing",
+      "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "IBEX CarCare",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang.",
+      "deferredCause": "independent-service-scope-missing",
+      "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "AUTO ROYAL Car Styling & Detailing",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang.",
+      "deferredCause": "independent-service-scope-missing",
+      "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "BULI Auto Dekor",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang.",
+      "deferredCause": "independent-service-scope-missing",
+      "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Autobahn Motors SHPK",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Google meldet vorübergehende Schließung; kein geeigneter aktueller Veröffentlichungskandidat."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Google meldet vorübergehende Schließung; kein geeigneter aktueller Veröffentlichungskandidat.",
+      "deferredCause": "identity-contact-location-or-status-conflict",
+      "nextCheck": "Require independently attributable current reopening/operating evidence before a new active public Maps check; historical temporary closure remains a publication block.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Detailing Pacolli",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Detailing Rexhepi",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "CarWash Detailing E2",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Ngjyroses Gjuka",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Detailing Niti",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+        },
+        {
+          "origin": "data/import-2026-10-11-daily.json#notImported",
+          "reason": "Official finder did not offer a unique corresponding entry in the attempted searches. No substitute business was accepted."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Official finder did not offer a unique corresponding entry in the attempted searches. No substitute business was accepted.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "AutoDetailingBerlin",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Detailing SWISS",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Detailing LARDI",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Niku Detailing",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Detailing EDI",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-10.json#notImported",
+          "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "AutoGermia",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-11-daily.json#notImported",
+          "reason": "Direct ID resolved to the correct name/street, but no business telephone is displayed on Maps; strict telephone comparison incomplete."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Direct ID resolved to the correct name/street, but no business telephone is displayed on Maps; strict telephone comparison incomplete.",
+      "historicalPlaceId": "ChIJr6I_-CyfVBMRWVeWFnzFmGE",
+      "deferredCause": "public-phone-or-strict-phone-match-missing",
+      "nextCheck": "Find and attribute a current public business phone, then compare in confirmed public Maps UI.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Xhama Center",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-11-daily.json#notImported",
+          "reason": "Independent current source names km4 while Maps ID shows km5; current exact site continuity remains unresolved."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Independent current source names km4 while Maps ID shows km5; current exact site continuity remains unresolved.",
+      "historicalPlaceId": "ChIJdYdrILGfVBMR8Y5NQKtzx4g",
+      "deferredCause": "identity-contact-location-or-status-conflict",
+      "nextCheck": "Resolve the documented conflict using a current attributable own business source before any new Maps check.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis Idrizi",
+      "aliases": [],
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-idrizi-1"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-11-daily.json#notImported",
+          "reason": "Official finder did not offer a unique corresponding entry in the attempted searches. No substitute business was accepted."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#uncertainties",
+          "reason": "Public Maps searches with explicit Kosovo returned other businesses; no unique matching identity."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Public Maps searches with explicit Kosovo returned other businesses; no unique matching identity."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Public Maps searches with explicit Kosovo returned other businesses; no unique matching identity.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis Fulga",
+      "aliases": [],
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-fulga-1/?p360=1",
+        "https://stgres.gjirafa.biz/auto-servis-fulga-1/"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-11-daily.json#notImported",
+          "reason": "Official finder did not offer a unique corresponding entry in the attempted searches. No substitute business was accepted."
+        },
+        {
+          "origin": "data/import-2026-10-12-daily.json#uncertainties",
+          "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#supplemental.deferred",
+          "reason": "Maps search returned other businesses, no unique Skenderaj match."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Maps search returned other businesses, no unique Skenderaj match.",
+      "nextCheck": "Find current business identity/Maps entry.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis XILI",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-11-daily.json#notImported",
+          "reason": "Official finder did not offer a unique corresponding entry in the attempted searches. No substitute business was accepted."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Official finder did not offer a unique corresponding entry in the attempted searches. No substitute business was accepted.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Mercedes Benz Viki&Laura",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-11-daily.json#notImported",
+          "reason": "Official finder did not offer a unique corresponding entry in the attempted searches. No substitute business was accepted."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Official finder did not offer a unique corresponding entry in the attempted searches. No substitute business was accepted.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto servis Durguti",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-11-daily.json#notImported",
+          "reason": "Official finder did not offer a unique corresponding entry in the attempted searches. No substitute business was accepted."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Official finder did not offer a unique corresponding entry in the attempted searches. No substitute business was accepted.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis Gjinovci",
+      "aliases": [],
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-gjinolli-1/?p360=1"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-11-daily.json#notImported",
+          "reason": "Official finder searches for all six leads yielded generic, ambiguous or wrong-city entries; no corresponding unique identity was accepted."
+        },
+        {
+          "origin": "data/import-2026-10-12-daily.json#uncertainties",
+          "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Public Maps identity and direct-ID verification incomplete; no publication.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Larje Soni",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-11-daily.json#notImported",
+          "reason": "Official finder searches for all six leads yielded generic, ambiguous or wrong-city entries; no corresponding unique identity was accepted."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Official finder searches for all six leads yielded generic, ambiguous or wrong-city entries; no corresponding unique identity was accepted.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Autoservis Lordi",
+      "aliases": [],
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/autoservis-lordi-1/?p360=1",
+        "https://stgres.gjirafa.biz/autoservis-lordi-1/",
+        "https://www.merrjep.com/auto-servis-lordi"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-11-daily.json#notImported",
+          "reason": "Official finder searches for all six leads yielded generic, ambiguous or wrong-city entries; no corresponding unique identity was accepted."
+        },
+        {
+          "origin": "data/import-2026-10-12-daily.json#uncertainties",
+          "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#supplemental.deferred",
+          "reason": "Maps search offers a parts business outside the independently stated Skenderaj location; continuity and repair scope unresolved."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Maps search offers a parts business outside the independently stated Skenderaj location; continuity and repair scope unresolved.",
+      "nextCheck": "Independent current workshop street/contact proof.",
+      "deferredCause": "identity-contact-location-or-status-conflict",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis Isa",
+      "aliases": [
+        "Auto Servis Isa Skenderaj"
+      ],
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/auto-servis-isa-2"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-11-daily.json#notImported",
+          "reason": "Official finder searches for all six leads yielded generic, ambiguous or wrong-city entries; no corresponding unique identity was accepted."
+        },
+        {
+          "origin": "data/import-2026-10-12-daily.json#uncertainties",
+          "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#supplemental.deferred",
+          "reason": "Maps selected a different town and incomplete contact; no matching Skenderaj identity."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Maps selected a different town and incomplete contact; no matching Skenderaj identity.",
+      "nextCheck": "Independent current identity and exact Maps listing.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Service Vali",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-11-daily.json#notImported",
+          "reason": "Official finder searches for all six leads yielded generic, ambiguous or wrong-city entries; no corresponding unique identity was accepted."
+        }
+      ],
+      "status": "verified-canonical-import-awaiting-publication",
+      "reason": "Independently proven Istog directory identity; exact international phone and city matched active public Maps ID; direct ID test passed.",
+      "nextCheck": "Finish current independent review, CI, squash merge and verified release/live acceptance.",
+      "publicBusinessEmail": {
+        "address": "jetmirzekaj06@gmail.com",
+        "sourceUrl": "https://gjirafa.biz/autoservicevali-1",
+        "checkedAt": "2026-10-14",
+        "status": "found"
+      },
+      "newWorkshopId": "auto-service-vali-istog",
+      "priorDeferredCause": "complete-current-maps-identity-missing"
+    },
+    {
+      "name": "Autoservis Faredini-A",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-11-daily.json#notImported",
+          "reason": "Official finder offered the matching name but a town street conflicts with the independent highway location. Exact site continuity and telephone comparison remain incomplete."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Official finder offered the matching name but a town street conflicts with the independent highway location. Exact site continuity and telephone comparison remain incomplete.",
+      "historicalPlaceId": "ChIJabvnmcWjUxMRFvBkzjze_1o",
+      "deferredCause": "identity-contact-location-or-status-conflict",
+      "nextCheck": "Resolve the documented conflict using a current attributable own business source before any new Maps check.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Wolf Detailing",
+      "aliases": [],
+      "sourceUrls": [
+        "https://www.autoyas.com/XK/Lipjan/705728559510841/Wolf-Detailing"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-12-daily.json#uncertainties",
+          "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#supplemental.deferred",
+          "reason": "Public Maps telephone conflicts with independently published phones; same street/name alone is insufficient."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Public Maps telephone conflicts with independently published phones; same street/name alone is insufficient.",
+      "nextCheck": "Find independently published evidence linking the current Maps telephone to the same business.",
+      "deferredCause": "identity-contact-location-or-status-conflict",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Autoservis Erjoni",
+      "aliases": [],
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/autoservis-erjoni-1/?p360=1",
+        "https://stgres.gjirafa.biz/autoservis-erjoni-1/"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-12-daily.json#uncertainties",
+          "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#supplemental.deferred",
+          "reason": "Maps search returned other businesses, no unique Komoran match."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Maps search returned other businesses, no unique Komoran match.",
+      "nextCheck": "Find current own business page and uniquely matching Maps entry.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto servis llaker LATI TUNING",
+      "aliases": [],
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/lati--tunning-1"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-12-daily.json#uncertainties",
+          "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Public Maps identity and direct-ID verification incomplete; no publication.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis TOTI",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-12-daily.json#uncertainties",
+          "reason": "Phone appears in towing advertisement; identity pending."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Phone appears in towing advertisement; identity pending."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Phone appears in towing advertisement; identity pending.",
+      "deferredCause": "public-phone-or-strict-phone-match-missing",
+      "nextCheck": "Find and attribute a current public business phone, then compare in confirmed public Maps UI.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis ABEDINI",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-12-daily.json#uncertainties",
+          "reason": "Historical phone prefixes and current site continuity need independent confirmation."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Historical phone prefixes and current site continuity need independent confirmation."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Historical phone prefixes and current site continuity need independent confirmation.",
+      "deferredCause": "identity-contact-location-or-status-conflict",
+      "nextCheck": "Resolve the documented conflict using a current attributable own business source before any new Maps check.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis BURIMI",
+      "aliases": [],
+      "sourceUrls": [],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-12-daily.json#uncertainties",
+          "reason": "Old advertisement names predecessor site; exact current site unconfirmed."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Old advertisement names predecessor site; exact current site unconfirmed."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Old advertisement names predecessor site; exact current site unconfirmed.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis\"GENTI\" Malishevë",
+      "aliases": [],
+      "sourceUrls": [
+        "https://www.merrjep.com/shpallja/auto-servis-genti/8494972",
+        "https://www.cybo.com/XK-biz/auto-servis%22genti%22-mlishev%C3%AB"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#uncertainties",
+          "reason": "Independent phone/name/street match, but current active business status lacks corroboration; not published."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Independent phone/name/street match, but current active business status lacks corroboration; not published."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Independent phone/name/street match, but current active business status lacks corroboration; not published.",
+      "historicalPlaceId": "ChIJUdsbEVl1UxMRa4sSZd1PSNE",
+      "deferredCause": "active-operation-evidence-missing",
+      "nextCheck": "Find recent attributable own operating evidence, then confirm active public Maps identity and directly return using the visible official Place ID. Do not repeat the already documented phone match as new verification.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis Xeni",
+      "aliases": [],
+      "sourceUrls": [
+        "https://www.cybo.com/XK/mali%C5%A1evo/car-repair/"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#uncertainties",
+          "reason": "Name/phone/street and direct ID match, but no regular business status shown; active status unconfirmed."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Name/phone/street and direct ID match, but no regular business status shown; active status unconfirmed."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Name/phone/street and direct ID match, but no regular business status shown; active status unconfirmed.",
+      "historicalPlaceId": "ChIJ3VTUMRGfUxMRTNkDwna5d-8",
+      "deferredCause": "active-operation-evidence-missing",
+      "nextCheck": "Find recent attributable own operating evidence, then confirm active public Maps identity and directly return using the visible official Place ID. Do not repeat the already documented phone match as new verification.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis F&S Skender Hoxha",
+      "aliases": [],
+      "sourceUrls": [
+        "https://www.gjithebiznesi.com/XK/auto-servis-f-s-skender-hoxha-049-151-054",
+        "https://arbk.atlas-studio.eu/business/skender-a-hoxha-bi-811447855"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#uncertainties",
+          "reason": "Maps matches active hours/contact/location, but historical register mirror records dissolved Auto Servis F&S at this street. Continuity unresolved; conflicting directory categories."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Maps matches active hours/contact/location, but historical register mirror records dissolved Auto Servis F&S at this street. Continuity unresolved; conflicting directory categories."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Maps matches active hours/contact/location, but historical register mirror records dissolved Auto Servis F&S at this street. Continuity unresolved; conflicting directory categories.",
+      "historicalPlaceId": "ChIJzznvDr2fUxMRmacT2v2PgbA",
+      "deferredCause": "identity-contact-location-or-status-conflict",
+      "nextCheck": "Resolve the documented conflict using a current attributable own business source before any new Maps check.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto servis \"Tigri\"",
+      "aliases": [],
+      "sourceUrls": [
+        "https://www.findglocal.com/XK/Malishev%C3%AB/237401469797522/Auto-servis-%22Tigri%22"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#uncertainties",
+          "reason": "Own published posts prove repair/alignment/phone/street; Maps offers different Tigri-L identity and other workshops. No substitute accepted."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Own published posts prove repair/alignment/phone/street; Maps offers different Tigri-L identity and other workshops. No substitute accepted."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Own published posts prove repair/alignment/phone/street; Maps offers different Tigri-L identity and other workshops. No substitute accepted.",
+      "deferredCause": "public-phone-or-strict-phone-match-missing",
+      "nextCheck": "Find and attribute a current public business phone, then compare in confirmed public Maps UI.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Go Clean Auto Detailing",
+      "aliases": [],
+      "sourceUrls": [
+        "https://germin.org/team/leonora-cerreti/",
+        "https://www.cybo.com/XK/draga%C5%A1/car-wash-and-detail/"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#uncertainties",
+          "reason": "Independent service/business evidence; no independently verified public phone and complete Maps check."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Independent service/business evidence; no independently verified public phone and complete Maps check."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Independent service/business evidence; no independently verified public phone and complete Maps check.",
+      "deferredCause": "public-phone-or-strict-phone-match-missing",
+      "nextCheck": "Find and attribute a current public business phone, then compare in confirmed public Maps UI.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis TONI",
+      "aliases": [],
+      "sourceUrls": [
+        "https://mapcarta.com/N4864543421"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#uncertainties",
+          "reason": "Independent Shtime repair/location evidence; telephone and Maps identity unconfirmed."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Independent Shtime repair/location evidence; telephone and Maps identity unconfirmed."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Independent Shtime repair/location evidence; telephone and Maps identity unconfirmed.",
+      "deferredCause": "public-phone-or-strict-phone-match-missing",
+      "nextCheck": "Find and attribute a current public business phone, then compare in confirmed public Maps UI.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis Vëllezërit Luta",
+      "aliases": [],
+      "sourceUrls": [
+        "https://sk.cybo.com/XK/ka%C4%8Danik/autoservis"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#uncertainties",
+          "reason": "Kaçanik repair lead lacks public phone and full Maps proof."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Kaçanik repair lead lacks public phone and full Maps proof."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Kaçanik repair lead lacks public phone and full Maps proof.",
+      "deferredCause": "public-phone-or-strict-phone-match-missing",
+      "nextCheck": "Find and attribute a current public business phone, then compare in confirmed public Maps UI.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis Luli",
+      "aliases": [],
+      "sourceUrls": [
+        "https://www.cybo.com/XK/bostane/car-repair"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#uncertainties",
+          "reason": "Kamenicë repair lead; complete public Maps identity check still outstanding."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Kamenicë repair lead; complete public Maps identity check still outstanding."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Kamenicë repair lead; complete public Maps identity check still outstanding.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Basha",
+      "aliases": [],
+      "sourceUrls": [
+        "https://www.cybo.com/XK/kamenica-kosovo/car-repair/"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#uncertainties",
+          "reason": "Hodonoc/Kamenicë repair lead; complete public Maps identity check still outstanding."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.previousDeferred",
+          "reason": "Hodonoc/Kamenicë repair lead; complete public Maps identity check still outstanding."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Hodonoc/Kamenicë repair lead; complete public Maps identity check still outstanding.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Elektrika Bosch",
+      "aliases": [
+        "Auto Elektrika Bosch Lipjan"
+      ],
+      "sourceUrls": [
+        "https://hr.cybo.com/XK/lipljan/auto-servisi/",
+        "https://www.gjithebiznesi.com/XK/auto-elektrika-bosch-044-100-220"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Active-status and final public-ID evidence incomplete."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#supplemental.deferred",
+          "reason": "Name, phone and address match, but public Maps profile lacks regular business status and recent independent operating evidence remains missing."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Name, phone and address match, but public Maps profile lacks regular business status and recent independent operating evidence remains missing.",
+      "nextCheck": "Find recent attributable own operating evidence, then confirm active public Maps identity and directly return using the visible official Place ID. Do not repeat the already documented phone match as new verification.",
+      "deferredCause": "active-operation-evidence-missing",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Albo Auto",
+      "aliases": [],
+      "sourceUrls": [
+        "https://hr.cybo.com/XK/lipljan/auto-servisi/"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Conflicting repair versus parts-store classification; no current repair proof."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Conflicting repair versus parts-store classification; no current repair proof.",
+      "deferredCause": "identity-contact-location-or-status-conflict",
+      "nextCheck": "Resolve the documented conflict using a current attributable own business source before any new Maps check.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Mekanik Gzimi",
+      "aliases": [],
+      "sourceUrls": [
+        "https://hr.cybo.com/XK/lipljan/auto-servisi/"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Public phone and complete identity proof missing."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Public phone and complete identity proof missing.",
+      "deferredCause": "public-phone-or-strict-phone-match-missing",
+      "nextCheck": "Find and attribute a current public business phone, then compare in confirmed public Maps UI.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Paco Car Diagnosis",
+      "aliases": [],
+      "sourceUrls": [
+        "https://hr.cybo.com/XK/lipljan/auto-servisi/"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Public phone and complete identity proof missing."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Public phone and complete identity proof missing.",
+      "deferredCause": "public-phone-or-strict-phone-match-missing",
+      "nextCheck": "Find and attribute a current public business phone, then compare in confirmed public Maps UI.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Ardi Lipjan",
+      "aliases": [],
+      "sourceUrls": [
+        "https://hr.cybo.com/XK/lipljan/auto-servisi/"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Complete public Maps identity proof pending."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Complete public Maps identity proof pending.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Gazi Lipjan",
+      "aliases": [],
+      "sourceUrls": [
+        "https://hr.cybo.com/XK/lipljan/auto-servisi/"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Complete public Maps identity proof pending."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Complete public Maps identity proof pending.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Extra Washen 24h",
+      "aliases": [],
+      "sourceUrls": [
+        "https://hr.cybo.com/XK/lipljan/auto-servisi/"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Car wash listing does not establish requested detailing/repair scope."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Car wash listing does not establish requested detailing/repair scope.",
+      "deferredCause": "independent-service-scope-missing",
+      "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Crystal Wash",
+      "aliases": [],
+      "sourceUrls": [
+        "https://hr.cybo.com/XK/lipljan/auto-servisi/"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Car wash listing does not establish requested detailing/repair scope."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Car wash listing does not establish requested detailing/repair scope.",
+      "deferredCause": "independent-service-scope-missing",
+      "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Unimax - Auto Dekor",
+      "aliases": [],
+      "sourceUrls": [
+        "https://www.autoyas.com/XK/Vushtrri/1376370759268193/Unimax---Auto-Dekor"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Accessory sales/conversions and products documented; requested repair/detailing service scope needs more specific evidence."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Accessory sales/conversions and products documented; requested repair/detailing service scope needs more specific evidence.",
+      "deferredCause": "independent-service-scope-missing",
+      "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Detailing Gerguri",
+      "aliases": [],
+      "sourceUrls": [
+        "https://www.facebook.com/p/Detailing-Gerguri-100084678797919/",
+        "https://www.cybo.com/XK-biz/detailing-gerguri"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "No unique matching public Maps entry resolved."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#supplemental.deferred",
+          "reason": "Own public page shows specialist cleaning, but Maps search returned other businesses rather than a unique matching active entry."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Own public page shows specialist cleaning, but Maps search returned other businesses rather than a unique matching active entry.",
+      "nextCheck": "Find the exact active public Maps listing for the independently sourced business and directly verify its visible official Place ID in the confirmed browser.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis EDI Drenas",
+      "aliases": [],
+      "sourceUrls": [
+        "https://www.autoyas.com/XK/Drenas/225149334276643/Auto-Servis-%22EDI%22-Official"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Precise independent location and complete Maps proof pending."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Precise independent location and complete Maps proof pending.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis DENISI (Armend Zogu BI)",
+      "aliases": [],
+      "sourceUrls": [
+        "https://faqet-e-verdha.cybo.com/XK/drenasi/automobilistik"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Matching name/phone/street; active operating proof and public Place-ID return still incomplete."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#supplemental.deferred",
+          "reason": "Name, phone and street match, but current operating status lacks corroboration; public Maps has no regular opening status."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Name, phone and street match, but current operating status lacks corroboration; public Maps has no regular opening status.",
+      "nextCheck": "Find recent attributable own operating evidence, then confirm active public Maps identity and directly return using the visible official Place ID. Do not repeat the already documented phone match as new verification.",
+      "deferredCause": "active-operation-evidence-missing",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Servis Tali",
+      "aliases": [
+        "Servis Tali Komoran"
+      ],
+      "sourceUrls": [
+        "https://faqet-e-verdha.cybo.com/XK/drenasi/automobilistik"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Public Maps query returned other businesses."
+        },
+        {
+          "origin": "data/import-2026-10-13-daily.json#supplemental.deferred",
+          "reason": "Public Maps query did not resolve the independently listed business uniquely."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Public Maps query did not resolve the independently listed business uniquely.",
+      "nextCheck": "Find current own identity and active exact Maps listing.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis Luani Komoran",
+      "aliases": [],
+      "sourceUrls": [
+        "https://faqet-e-verdha.cybo.com/XK/drenasi/automobilistik"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Complete public Maps identity proof pending."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Complete public Maps identity proof pending.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto servis & pjesë Obrija",
+      "aliases": [],
+      "sourceUrls": [
+        "https://faqet-e-verdha.cybo.com/XK/drenasi/automobilistik"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Complete public Maps identity proof pending."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Complete public Maps identity proof pending.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Grana Reno",
+      "aliases": [],
+      "sourceUrls": [
+        "https://faqet-e-verdha.cybo.com/XK/drenasi/automobilistik"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Complete public Maps identity proof pending."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Complete public Maps identity proof pending.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Pjesë & Servis NISI",
+      "aliases": [],
+      "sourceUrls": [
+        "https://faqet-e-verdha.cybo.com/XK/drenasi/automobilistik"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Complete public Maps identity proof pending."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Complete public Maps identity proof pending.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Jeep Service MERGIMI",
+      "aliases": [],
+      "sourceUrls": [
+        "https://faqet-e-verdha.cybo.com/XK/drenasi/automobilistik"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Complete public Maps identity proof pending."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Complete public Maps identity proof pending.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Autongjyrosje Astriti",
+      "aliases": [],
+      "sourceUrls": [
+        "https://faqet-e-verdha.cybo.com/XK/drenasi/automobilistik"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Complete public Maps identity proof pending."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Complete public Maps identity proof pending.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis ISTREFI",
+      "aliases": [],
+      "sourceUrls": [
+        "https://www.autoyas.com/XK/Skenderaj/679116075496530/Auto-Servis-%22ISTREFI%E2%80%9D"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Precise independent location and complete Maps proof pending."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Precise independent location and complete Maps proof pending.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis TAFA",
+      "aliases": [],
+      "sourceUrls": [
+        "https://www.autos1000.com/XK/Skenderaj/1545959408955158/Auto-Servis-TAFA"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Complete public Maps identity proof pending."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Complete public Maps identity proof pending.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis MUSLIMI",
+      "aliases": [],
+      "sourceUrls": [
+        "https://www.cybo.com/XK/skenderaj/car-repair"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads",
+          "reason": "Complete public Maps identity proof pending."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Complete public Maps identity proof pending.",
+      "deferredCause": "complete-current-maps-identity-missing",
+      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis Gashi Vushtrri",
+      "aliases": [],
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/autoservisgashi-1/"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/import-2026-10-13-daily.json#supplemental.deferred",
+          "reason": "Public Maps telephone differs from both independently published telephone contacts."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Public Maps telephone differs from both independently published telephone contacts.",
+      "nextCheck": "Resolve business continuity and phone difference from independent source.",
+      "deferredCause": "identity-contact-location-or-status-conflict",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Omni Detailing Center",
+      "aliases": [],
+      "sourceUrls": [
+        "https://www.cleaners10.com/XK/Pristina/327464513774490/Omni-Detailing-Center"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/research-daily-import-2026-10-10.md",
+          "reason": "Conflicting own published telephone contacts; business continuity unresolved."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Conflicting own published telephone contacts; business continuity unresolved.",
+      "deferredCause": "identity-contact-location-or-status-conflict",
+      "nextCheck": "Resolve the documented conflict using a current attributable own business source before any new Maps check.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "ULA detailing",
+      "aliases": [],
+      "sourceUrls": [
+        "https://www.autoyas.com/XK/Pristina/100456162539672/ULA-detailing"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/research-daily-import-2026-10-10.md",
+          "reason": "Concrete detailing service/own current work evidence missing."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Concrete detailing service/own current work evidence missing.",
+      "deferredCause": "independent-service-scope-missing",
+      "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Prishtina Pro Detailing",
+      "aliases": [],
+      "sourceUrls": [
+        "https://www.autoyas.com/XK/Pristina/105579041778298/Prishtina-Pro-Detailing"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/research-daily-import-2026-10-10.md",
+          "reason": "Current operating/identity evidence incomplete."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Current operating/identity evidence incomplete.",
+      "deferredCause": "active-operation-evidence-missing",
+      "nextCheck": "Find recent own operating evidence, then confirm active public Maps identity and direct Place ID.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis Spark",
+      "aliases": [],
+      "sourceUrls": [
+        "https://www.autoyas.com/XK/Pristina/1528838830468083/Auto-Servis-Spark"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/research-daily-import-2026-10-10.md",
+          "reason": "Historical +377 contact lacks attributable current telephone proof."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Historical +377 contact lacks attributable current telephone proof.",
+      "deferredCause": "public-phone-or-strict-phone-match-missing",
+      "nextCheck": "Find and attribute a current public business phone, then compare in confirmed public Maps UI.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis Genci",
+      "aliases": [],
+      "sourceUrls": [
+        "https://asgenci.com/our-shop/"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/research-daily-import-2026-10-10.md",
+          "reason": "Own source service evidence incomplete; historical website coming soon."
+        }
+      ],
+      "status": "historical-deferred-not-researched-today",
+      "reason": "Own source service evidence incomplete; historical website coming soon.",
+      "deferredCause": "independent-service-scope-missing",
+      "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto servis DONI Malishevë",
+      "aliases": [],
+      "sourceUrls": [
+        "https://www.autoyas.com/XK/Rahovec/555051834580557/Auto-servis-DONI-Malishev%C3%AB"
+      ],
+      "priorEvidence": [
+        {
+          "origin": "data/research-daily-import-2026-10-10.md",
+          "reason": "Conflicting independent location and old operating posts."
+        }
+      ],
+      "status": "rechecked-deferred",
+      "reason": "Own current Malishevë parts-selling page found; current precise service/location/Maps gaps not resolved.",
+      "deferredCause": "identity-contact-location-or-status-conflict",
+      "nextCheck": "Resolve the documented conflict using a current attributable own business source before any new Maps check.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": null,
+        "status": "unresolved",
+        "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
+      }
+    },
+    {
+      "name": "Auto Servis & Pjesë Diti-B",
+      "sourceUrls": [
+        "https://www.facebook.com/100069473054785/about/"
+      ],
+      "status": "deferred",
+      "reason": "Own page names Istog street; Maps entry with exact phone has conflicting distant business locality; current precise business location unresolved. No Place ID accepted.",
+      "publicBusinessEmail": {
+        "address": "lindritbajraktari8@gmail.com",
+        "sourceUrl": "https://www.facebook.com/100069473054785/about/",
+        "checkedAt": "2026-10-14",
+        "status": "found"
+      },
+      "independentEvidence": {
+        "phone": "+38349167170",
+        "address": "Rruga Lidhja e Pejës 752, Istog, Kosovo, 31000",
+        "services": "Servis dhe pjese per vetura"
+      }
+    }
+  ],
+  "duplicates": [
+    {
+      "id": "auto-servis-gashi-peja",
+      "name": "Auto Servis \"Gashi\"",
+      "reason": "Historical lead already in Canonical and the current complete live identity roster.",
+      "origins": [
+        "data/import-2026-10-12-daily.json#uncertainties",
+        "data/import-2026-10-13-daily.json#researchQueue.previousDeferred"
+      ]
+    },
+    {
+      "id": "auto-servis-naimi-vushtrri",
+      "name": "Auto Servis Naimi",
+      "reason": "Historical lead already in Canonical and the current complete live identity roster.",
+      "origins": [
+        "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads"
+      ]
+    },
+    {
+      "id": "auto-service-rashani-vushtrri",
+      "name": "Auto Service RASHANI",
+      "reason": "Historical lead already in Canonical and the current complete live identity roster.",
+      "origins": [
+        "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads"
+      ]
+    },
+    {
+      "id": "auto-service-ardi-vushtrri",
+      "name": "Auto Service ARDI",
+      "reason": "Historical lead already in Canonical and the current complete live identity roster.",
+      "origins": [
+        "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads"
+      ]
+    },
+    {
+      "id": "auto-service-besi-vushtrri",
+      "name": "Auto service BESI",
+      "reason": "Historical lead already in Canonical and the current complete live identity roster.",
+      "origins": [
+        "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads"
+      ]
+    },
+    {
+      "id": "sheki-benz-vushtrri",
+      "name": "Sheki Benz- AutoMotive Body Shop",
+      "reason": "Historical lead already in Canonical and the current complete live identity roster.",
+      "origins": [
+        "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads"
+      ]
+    },
+    {
+      "id": "autoservice-a-m-vushtrri",
+      "name": "Autoservice A&M",
+      "reason": "Historical lead already in Canonical and the current complete live identity roster.",
+      "origins": [
+        "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads"
+      ]
+    },
+    {
+      "id": "autodetailingdaja-vushtrri",
+      "name": "Autodetailingdaja",
+      "reason": "Historical lead already in Canonical and the current complete live identity roster.",
+      "origins": [
+        "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads"
+      ]
+    },
+    {
+      "id": "auto-service-prekazi-vushtrri",
+      "name": "Auto Servis PREKAZI",
+      "historicalName": "Auto Service Prekazi",
+      "reason": "Same official Facebook source and historical verified Place-ID profile; canonical/live publish the existing identity.",
+      "origins": [
+        "data/import-2026-10-13-daily.json#researchQueue.newSourceLeads"
+      ],
+      "sourceUrl": "https://www.facebook.com/p/Auto-Servis-PREKAZI-100063530080689/"
+    },
+    {
+      "workshopId": "auto-servis-bledi-kline",
+      "name": "Auto Servis BLEDI",
+      "reason": "Existing Canonical/live exact name/city identity; skipped before source import."
+    }
+  ],
+  "historicalSourcesRead": [
+    "data/import-2026-10-03.json",
+    "data/import-2026-10-10.json",
+    "data/import-2026-10-11-daily.json",
+    "data/import-2026-10-12-daily.json",
+    "data/import-2026-10-13-daily.json",
+    "data/research-daily-import-2026-10-10.md"
+  ],
+  "localAcceptanceReceiptsRead": [
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-13-manual.json",
+      "status": "completed-live-accepted",
+      "date": "2026-10-13",
+      "sha256": "43f9c2fb68faf194e79c567e75a58e0905cb708676e941bfe93d72003b98d042"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-13-scheduled.json",
+      "status": "completed-live-accepted",
+      "date": "2026-10-13",
+      "sha256": "300b2d2fc3ad62d88c1049b234ef9c4c6800f2104fe71efe51c064693c582520"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-13.json",
+      "status": "completed-live-accepted",
+      "date": "2026-10-13",
+      "sha256": "43f9c2fb68faf194e79c567e75a58e0905cb708676e941bfe93d72003b98d042"
+    }
+  ],
+  "preflight": {
+    "health": {
+      "checkedAt": "2026-10-14T04:06:20.105Z",
+      "published": 172,
+      "checks": [
+        {
+          "path": "/werkstaetten",
+          "status": 200,
+          "bytes": 468443,
+          "ray": "a4a3b5e48e10e5d9-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/werkstatt/auto-servis-naimi-vushtrri",
+          "status": 200,
+          "bytes": 69067,
+          "ray": "a4a3b5e78b8ce5d9-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/werkstatt/auto-service-prekazi-vushtrri",
+          "status": 200,
+          "bytes": 69901,
+          "ray": "a4a3b5e94ebfe5d9-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/sq/serviset",
+          "status": 200,
+          "bytes": 484589,
+          "ray": "a4a3b5eb19e0e5d9-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/sq/servis/auto-servis-naimi-vushtrri",
+          "status": 200,
+          "bytes": 68470,
+          "ray": "a4a3b5ed6e32e5d9-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/sq/servis/auto-service-prekazi-vushtrri",
+          "status": 200,
+          "bytes": 69349,
+          "ray": "a4a3b5eea8cae5d9-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/en/workshops",
+          "status": 200,
+          "bytes": 472808,
+          "ray": "a4a3b5f09bf8e5d9-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/en/workshop/auto-servis-naimi-vushtrri",
+          "status": 200,
+          "bytes": 66145,
+          "ray": "a4a3b5f44ab4e5d9-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/en/workshop/auto-service-prekazi-vushtrri",
+          "status": 200,
+          "bytes": 66974,
+          "ray": "a4a3b5f61daae5d9-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        }
+      ],
+      "healthy": true
+    },
+    "activeRelease": "v1.32.1",
+    "activeWorkerVersion": "92180dc0-2f93-4e18-a3cc-8e925ba17ea7",
+    "trafficPercentage": 100,
+    "releaseWorkflow": "https://github.com/ramiz4/riparim/actions/runs/38481580598",
+    "releaseWorkflowConclusion": "success",
+    "releaseArtifacts": {
+      "downloaded": 6,
+      "archiveProvenanceSha256PairsVerified": 3,
+      "releaseCommitMatchesBase": true,
+      "githubAssetDigestsVerified": 6
+    },
+    "boundedWorkerOutcomes": {
+      "from": "2026-10-14T04:03:00Z",
+      "to": "2026-10-14T04:10:17Z",
+      "ok": 10,
+      "other": 0,
+      "sampleNotAllTraffic": true
+    },
+    "deploymentSnapshotVerifiedAt": "2026-10-14T04:12:52.028860+00:00"
+  },
+  "liveReconciliation": {
+    "checkedAt": "2026-10-14T04:09:24.479886+00:00",
+    "identityRosterRows": 172,
+    "fieldsCompared": [
+      "id",
+      "name",
+      "city",
+      "address",
+      "phone",
+      "status",
+      "updated_at",
+      "place_id"
+    ],
+    "canonicalMismatches": 0,
+    "placeIds": 172,
+    "uniquePlaceIds": 172,
+    "drafts": 0,
+    "pendingWorkshopChanges": 0,
+    "liveRetirementMarkers": 35,
+    "liveRetirementMarkersMatchLocal": true,
+    "rowsWritten": 0,
+    "scopeLimitation": "Identity roster and revisions were read, not a full 19-field protected backup; writing/import/merge gates must be freshly completed if resumed."
+  },
+  "browser": {
+    "requested": "Codex In-app Browser",
+    "profileConfirmed": true,
+    "actions": "Public Google search/Maps, business Facebook contact panels, Instagram bio/posts and Gjirafa; no login needed; no contact requests sent."
+  },
+  "provider": {
+    "googleApiRequests": 0,
+    "ownMapsSdkRequests": 0,
+    "mapsUiSearchOrDirectNavigations": 22,
+    "googleBrowserSearchQueries": 15,
+    "additionalCosts": 0,
+    "contactsSent": 0,
+    "freeApiQuota": "unknown; public UI only, existing quota unchanged"
+  },
+  "publicBusinessEmailSummary": {
+    "approvedFound": 4,
+    "approvedMissing": 1,
+    "missingDoesNotBlock": true,
+    "rejectedForeignContact": "Auto Vali Prishtina and foreign Rent A Car Vali email/social hits were not assigned to Istog."
+  },
+  "dryRun": {
+    "added": [
+      "auto-service-vali-istog",
+      "auto-servis-ermali-kline",
+      "auto-servis-besimi-kline",
+      "auto-service-tuli-rahovec",
+      "mana-auto-detailing-rahovec"
+    ],
+    "updated": [],
+    "deduplicated": [],
+    "total": 177,
+    "sharedPhones": [
+      "eurogoma-gjakova/eurogoma-mitrovica existing separate branches"
+    ]
+  },
+  "import": {
+    "writtenCanonical": true,
+    "newIds": 5,
+    "changedPriorProfiles": 0,
+    "directProductionWrites": 0
+  },
+  "translationCheck": {
+    "status": "passed",
+    "contract": "await workshopTranslationSourceHash from lib/workshop-translations.ts",
+    "locales": [
+      "de",
+      "sq",
+      "en"
+    ],
+    "catalogueCheck": "177 published, 177 unique Place IDs, 117 researched emails"
+  },
+  "validation": {
+    "nodeVersion": "v24.21.0",
+    "goVersion": "go1.27.1 darwin/arm64",
+    "toolchainChecksums": "Official Node and Go archives verified",
+    "dependencyInstall": "npm run install:ci passed",
+    "catalogueCheck": "passed",
+    "workflowChecks": "local builds and GitHub checks pending",
+    "independentReview": "two independent agents reviewing current diff",
+    "initialFullTestFailure": "Opening-hours manifest rejected expanded catalogue; runner cancellation subsequently reported kill EPERM on macOS. Explicit unresearched exclusions fix the catalogue contract; full suite is being rerun.",
+    "appTests": "full npm test passed, 84792 ms; Node 24.21.0 / Go 1.27.1; isolated TMPDIR",
+    "types": "npx tsc --noEmit passed",
+    "lint": "passed, 7 existing warnings, no errors",
+    "backupWorker": "passed",
+    "gitDiffCheck": "passed",
+    "reviewCorrections": [
+      "Historical browser blocker marked resolved",
+      "Historical unresearched queue email notes explicitly dated to initial attempt",
+      "Cena email found; current deferral is solely incomplete Maps phone identity"
+    ]
+  },
+  "publication": {
+    "pr": null,
+    "commit": null,
+    "release": null,
+    "deployment": null,
+    "reason": "Awaiting full checks and independent review."
+  },
+  "handoff": {
+    "state": "active-under-lock",
+    "completedDateGuard": false,
+    "safeToReleaseLock": false
+  },
+  "errors": [
+    {
+      "stage": "browser-profile",
+      "status": "resolved",
+      "reason": "No verifiable required account in internal browser; native Codex inspection unavailable.",
+      "resolvedAt": "2026-10-14T07:34:01.086451+00:00",
+      "resolution": "Correct account visibly confirmed in internal browser on resumption; subsequent health/reconciliation passed."
+    }
+  ],
+  "runHistory": [
+    {
+      "at": "2026-10-14T04:09:24.479886+00:00",
+      "status": "prepared-local-resumable-handoff",
+      "newPublished": 0
+    },
+    {
+      "at": "2026-10-14T04:12:52.028860+00:00",
+      "status": "independently-reviewed-safe-handoff",
+      "newPublished": 0
+    },
+    {
+      "at": "2026-10-14T04:13:36.543698+00:00",
+      "status": "lock-released-after-safe-handoff",
+      "newPublished": 0
+    },
+    {
+      "at": "2026-10-14T07:07:32.261832+00:00",
+      "status": "resuming",
+      "note": "Original checkout missing; recovered same existing branch/path and manifest from durable receipt; ff-only refreshed to ab16f3e. Internal Google account confirmed, no login needed."
+    },
+    {
+      "at": "2026-10-14T07:27:50.736369+00:00",
+      "status": "canonical-imported-5-awaiting-reviewed-release",
+      "publishedNewIds": 0
+    }
+  ],
+  "resumption": {
+    "checkedAt": "2026-10-14T07:11:49.194791+00:00",
+    "baseCommit": "ab16f3e17f6357a479a2bd247ded8dbf1ce32704",
+    "browserProfileConfirmed": true,
+    "liveCount": 172,
+    "drafts": 0,
+    "pendingChanges": 0,
+    "retirementMarkers": 35,
+    "allCanonicalFieldsMatch": true,
+    "backupRestore": "All rows in 8 public catalogue tables exactly restored and SQLite integrity_check ok; includes 171 imported hours. Protected ignored local files, no private user tables.",
+    "release": "v1.32.3",
+    "releaseWorkflow": 38519620742,
+    "releaseAssetsVerified": 6,
+    "workerVersion": "5816e234-1184-4300-9054-45a05e4d33bd",
+    "outcomes": {
+      "ok": 47,
+      "canceled": 1
+    },
+    "health": "9 complete 200 DE/SQ/EN pages, no1102",
+    "managedAttachment": "Rejected ownerless attribution; original same branch/path recovered and retained locally"
+  },
+  "researchProgress": {
+    "approvedForDryRun": [
+      {
+        "name": "Auto Service Vali",
+        "city": "Istog",
+        "address": "Dëshmorët e Kombit, Istog",
+        "phone": "+38344920210",
+        "sourceUrl": "https://gjirafa.biz/autoservicevali-1",
+        "sourceTitle": "Gjirafa: Auto Service Vali – Wartung und Reparatur aller Fahrzeuge, Telefon und Anschrift",
+        "email": "jetmirzekaj06@gmail.com",
+        "placeId": "ChIJNwwEMeIZUxMRsfs69rhCmYg",
+        "mapsVerified": true
+      },
+      {
+        "name": "Auto Servis Ermali",
+        "city": "Klinë",
+        "address": "Ilir Merturi, Klinë 32000",
+        "phone": "+38343538919",
+        "sourceUrl": "https://www.facebook.com/100092324168737/",
+        "sourceTitle": "Eigene Facebook-Seite: Kfz-Werkstatt, Ilir Merturi in Klinë, Telefon und E-Mail",
+        "email": "ermaliautoservice@gmail.com",
+        "placeId": "ChIJD9VxuPsPUxMRpMZoFq4Ddjw",
+        "mapsVerified": true
+      },
+      {
+        "name": "Auto Servis Besimi",
+        "city": "Klinë",
+        "address": "Rruga Lufta e Çelisë, Pogragjë, Klinë 32000",
+        "phone": "+38344173716",
+        "sourceUrl": "https://www.facebook.com/autoservisbesimi/",
+        "sourceTitle": "Eigene Facebook-Seite: Kfz-Service, Rruga Lufta e Çelisë in Pogragjë, Telefon und E-Mail",
+        "email": "autoservisbesimi@hotmail.com",
+        "placeId": "ChIJhQqDbvpvUxMRlJFO2NV1CeE",
+        "mapsVerified": true
+      },
+      {
+        "name": "Auto Service TULI",
+        "city": "Rahovec",
+        "address": "Sadedin Hajda, Rahovec 21000",
+        "phone": "+38344887896",
+        "sourceUrl": "https://www.facebook.com/autoservicetuli/",
+        "sourceTitle": "Eigene Facebook-Seite: Kfz-Werkstatt, Wartung, Motor- und Fahrwerksreparaturen sowie Kontakt",
+        "email": "autoservistuli@gmail.com",
+        "placeId": "ChIJwUpq4mijUxMRX_oLQ40ISts",
+        "mapsVerified": true
+      },
+      {
+        "name": "MANA auto detailing",
+        "city": "Rahovec",
+        "address": "Rr. UÇK (Shkodrani) Nr. 114, Rahovec",
+        "phone": "+38349790676",
+        "sourceUrl": "https://www.instagram.com/manaautodetailing/",
+        "sourceTitle": "Eigene Instagram-Seite: Fahrzeugaufbereitung, Telefon und Rr. UÇK Nr. 114",
+        "sourceUrls": [
+          "https://www.instagram.com/manaautodetailing/",
+          "https://www.facebook.com/MANAautodetailing/",
+          "https://www.instagram.com/manaautodetailing/reel/Dax-31fsI2z/"
+        ],
+        "email": null,
+        "placeId": "ChIJ251IxFKjUxMRPPJX5yQCLVY",
+        "mapsVerified": true
+      }
+    ],
+    "deferred": [
+      {
+        "name": "Autoservis Nagipi – Istog",
+        "reason": "Exact Maps search selected a different towing identity; no unique active Maps identity accepted. Own legacy phone; current directory phone; no email in own FB contact panel."
+      },
+      {
+        "name": "Auto servis Albani – Dollc",
+        "reason": "Own website DNS failure, own FB no public phone/contact panel; same-name search results refer to other cities/phones.",
+        "checkedUrls": [
+          "https://www.facebook.com/100067069777101/",
+          "https://autoservisalbani.com/"
+        ]
+      },
+      {
+        "name": "Auto Servis bekimi Kline",
+        "reason": "Own page supports car repairs but no unique matching public Maps identity; results are other towns or businesses.",
+        "checkedUrls": [
+          "https://www.facebook.com/100054480129061/"
+        ]
+      },
+      {
+        "name": "Auto Service Cena",
+        "reason": "Own current service/name/phone/address and Instagram business email are proven; active Maps ID lacks Google telephone, so strict phone identity check is incomplete.",
+        "checkedUrls": [
+          "https://www.facebook.com/61556403245313/"
+        ],
+        "publicBusinessEmail": {
+          "address": "sevice.cena@gmail.com",
+          "status": "found",
+          "sourceUrl": "https://www.instagram.com/p/C71-IQEotM7/"
+        }
+      },
+      {
+        "name": "Auto Servis Gynber",
+        "reason": "Own social pages show old street and later explicit relocation; Maps active exact phone but precise current-site reconciliation not established.",
+        "checkedUrls": [
+          "https://www.facebook.com/Gynber/",
+          "https://www.instagram.com/autoservicegynber/",
+          "https://www.instagram.com/autoservicegynber/p/CzmMa2JrkY2/"
+        ],
+        "publicBusinessEmail": {
+          "address": "berkanhamza@hotmail.com",
+          "status": "found",
+          "sourceUrl": "https://www.facebook.com/Gynber/"
+        }
+      },
+      {
+        "name": "Autoservis Universal NIKI Deçan",
+        "reason": "Own current passenger-car maintenance/diagnosis and phone proven; direct active Maps ID lacks phone so strict identity check incomplete.",
+        "checkedUrls": [
+          "https://www.facebook.com/AUTOSERVIS.NIKI.DECAN/"
+        ],
+        "publicBusinessEmail": {
+          "address": null,
+          "status": "not-found-in-checked-sources"
+        }
+      },
+      {
+        "name": "Auto Pjesë & Servis ARDI Deçan",
+        "reason": "Own page phone/email/town proven; parts shop category, no individually completed Maps or precise passenger-car service verification yet.",
+        "checkedUrls": [
+          "https://www.facebook.com/100063472716616/"
+        ],
+        "publicBusinessEmail": {
+          "address": "xh.mehaj@gmail.com",
+          "status": "found",
+          "sourceUrl": "https://www.facebook.com/100063472716616/"
+        }
+      },
+      {
+        "name": "Autoservice & Tuning A-Lokaj",
+        "reason": "Own tuning scope and contact confirmed; broader in-scope passenger-car repairs not independently confirmed today; website DNS unavailable. No business email in own FB contact panel.",
+        "checkedUrls": [
+          "https://www.facebook.com/alokajtuning/",
+          "https://alokaj-tuned.com/"
+        ]
+      },
+      {
+        "name": "Pika Detailing",
+        "reason": "Own detailing/polishing and phone confirmed on Instagram, but Maps search returns other identities and no matching active ID; no public email in checked bio.",
+        "checkedUrls": [
+          "https://www.instagram.com/pikadetailing1/"
+        ]
+      },
+      {
+        "name": "Auto polir Kastrati Rahovec",
+        "reason": "Own polishing/phone/email confirmed; exact Maps search returns other identities so no matching active Place ID.",
+        "checkedUrls": [
+          "https://www.facebook.com/salihpolir/"
+        ],
+        "publicBusinessEmail": {
+          "address": "skastrati222@gmail.com",
+          "status": "found",
+          "sourceUrl": "https://www.facebook.com/salihpolir/"
+        }
+      },
+      {
+        "name": "Auto servis DONI Malishevë",
+        "reason": "Historical backlog rechecked: own page current parts sale/contact in Malishevë, but directory Rahovec conflict and precise passenger-car service/Maps identity unresolved.",
+        "checkedUrls": [
+          "https://www.facebook.com/autoservispjes.doni/"
+        ],
+        "publicBusinessEmail": {
+          "address": null,
+          "status": "unresolved"
+        }
+      },
+      {
+        "name": "Auto Servis & Pjesë Diti-B",
+        "sourceUrls": [
+          "https://www.facebook.com/100069473054785/about/"
+        ],
+        "status": "deferred",
+        "reason": "Own page names Istog street; Maps entry with exact phone has conflicting distant business locality; current precise business location unresolved. No Place ID accepted.",
+        "publicBusinessEmail": {
+          "address": "lindritbajraktari8@gmail.com",
+          "sourceUrl": "https://www.facebook.com/100069473054785/about/",
+          "checkedAt": "2026-10-14",
+          "status": "found"
+        },
+        "independentEvidence": {
+          "phone": "+38349167170",
+          "address": "Rruga Lidhja e Pejës 752, Istog, Kosovo, 31000",
+          "services": "Servis dhe pjese per vetura"
+        }
+      }
+    ],
+    "duplicateIds": [
+      "auto-servis-bledi-kline"
+    ],
+    "countIsPublication": false
+  },
+  "initialScheduledAttempt": {
+    "browser": {
+      "requested": "Codex In-app Browser",
+      "profileConfirmed": false,
+      "inventory": "Current internal browser has zero tabs and no account/profileName metadata; connected Chrome R Loki contains unrelated project/work-account tabs and was not navigated.",
+      "nativeCodexInspection": "Tool refused access to com.openai.codex for safety reasons.",
+      "actions": "Read-only browser inventory and documentation only; no browsing/navigation performed.",
+      "userAccessRequestSent": true
+    },
+    "handoff": {
+      "state": "documented-safe-handoff-zero-writes-resumable",
+      "resumeWorktree": "/Users/ramizloki/.codex/worktrees/daily-import-2026-10-14/riparim",
+      "resumeBranch": "codex/daily-import-2026-10-14",
+      "resumeManifest": "data/import-2026-10-14-daily.json",
+      "nextStep": "Make required Google account visibly inspectable in the internal browser; acquire shared lock and resume this existing worktree and manifest. Refresh health/full live reconciliation before any import.",
+      "completedDateGuard": false,
+      "safeToReleaseLock": true,
+      "reason": "No canonical or production mutation, PR, import or release initiated; deployment state is known.",
+      "documentedAt": "2026-10-14T04:12:52.028860+00:00",
+      "lockState": "released-matching-token",
+      "profileRecheck": "Internal browser inventory still zero tabs and no account metadata immediately before handoff.",
+      "lockReleasedAt": "2026-10-14T04:13:36.543698+00:00",
+      "lockStatusConfirmed": {
+        "locked": false
+      }
+    },
+    "preflight": {
+      "health": {
+        "checkedAt": "2026-10-14T04:06:20.105Z",
+        "published": 172,
+        "checks": [
+          {
+            "path": "/werkstaetten",
+            "status": 200,
+            "bytes": 468443,
+            "ray": "a4a3b5e48e10e5d9-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/werkstatt/auto-servis-naimi-vushtrri",
+            "status": 200,
+            "bytes": 69067,
+            "ray": "a4a3b5e78b8ce5d9-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/werkstatt/auto-service-prekazi-vushtrri",
+            "status": 200,
+            "bytes": 69901,
+            "ray": "a4a3b5e94ebfe5d9-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/sq/serviset",
+            "status": 200,
+            "bytes": 484589,
+            "ray": "a4a3b5eb19e0e5d9-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/sq/servis/auto-servis-naimi-vushtrri",
+            "status": 200,
+            "bytes": 68470,
+            "ray": "a4a3b5ed6e32e5d9-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/sq/servis/auto-service-prekazi-vushtrri",
+            "status": 200,
+            "bytes": 69349,
+            "ray": "a4a3b5eea8cae5d9-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/en/workshops",
+            "status": 200,
+            "bytes": 472808,
+            "ray": "a4a3b5f09bf8e5d9-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/en/workshop/auto-servis-naimi-vushtrri",
+            "status": 200,
+            "bytes": 66145,
+            "ray": "a4a3b5f44ab4e5d9-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          },
+          {
+            "path": "/en/workshop/auto-service-prekazi-vushtrri",
+            "status": 200,
+            "bytes": 66974,
+            "ray": "a4a3b5f61daae5d9-ZRH",
+            "error1102": false,
+            "complete": true,
+            "locale": true,
+            "heading": true,
+            "shell": false,
+            "profileIdentity": true
+          }
+        ],
+        "healthy": true
+      },
+      "activeRelease": "v1.32.1",
+      "activeWorkerVersion": "92180dc0-2f93-4e18-a3cc-8e925ba17ea7",
+      "trafficPercentage": 100,
+      "releaseWorkflow": "https://github.com/ramiz4/riparim/actions/runs/38481580598",
+      "releaseWorkflowConclusion": "success",
+      "releaseArtifacts": {
+        "downloaded": 6,
+        "archiveProvenanceSha256PairsVerified": 3,
+        "releaseCommitMatchesBase": true,
+        "githubAssetDigestsVerified": 6
+      },
+      "boundedWorkerOutcomes": {
+        "from": "2026-10-14T04:03:00Z",
+        "to": "2026-10-14T04:10:17Z",
+        "ok": 10,
+        "other": 0,
+        "sampleNotAllTraffic": true
+      },
+      "deploymentSnapshotVerifiedAt": "2026-10-14T04:12:52.028860+00:00"
+    },
+    "liveReconciliation": {
+      "checkedAt": "2026-10-14T04:09:24.479886+00:00",
+      "identityRosterRows": 172,
+      "fieldsCompared": [
+        "id",
+        "name",
+        "city",
+        "address",
+        "phone",
+        "status",
+        "updated_at",
+        "place_id"
+      ],
+      "canonicalMismatches": 0,
+      "placeIds": 172,
+      "uniquePlaceIds": 172,
+      "drafts": 0,
+      "pendingWorkshopChanges": 0,
+      "liveRetirementMarkers": 35,
+      "liveRetirementMarkersMatchLocal": true,
+      "rowsWritten": 0,
+      "scopeLimitation": "Identity roster and revisions were read, not a full 19-field protected backup; writing/import/merge gates must be freshly completed if resumed."
+    },
+    "validation": {
+      "nodeVersion": "v24.21.0",
+      "goVersion": "go1.27.1 darwin/arm64",
+      "dependencyInstall": "npm run install:ci succeeded in isolated worktree",
+      "initialHealthAttempt": "Failed before any request due to missing esbuild in fresh worktree; installed locked dependencies and official health command subsequently passed.",
+      "independentReview": {
+        "status": "passed",
+        "reviewer": "independent subagent review_daily_handoff",
+        "reviewedContentSha256": "50952428da98cb0fffa9c2b9d5ff6883d0d9add5738bc205d6dd1cd267163f56",
+        "scope": "Zero-result resumable handoff only; no catalogue or release approval.",
+        "corrections": [
+          "PREKAZI existing canonical/live identity removed from deferred queue and counted as duplicate.",
+          "Active-operation and Maps-identity blockers and next checks corrected."
+        ],
+        "remainingFindings": 0
+      },
+      "gitDiffCheck": "git diff --check passed; only new daily manifest is untracked",
+      "appTests": "not-run-no-code-or-catalogue-change",
+      "catalogueCheck": "npm run catalog:check passed; canonical and translations unchanged"
+    },
+    "coverage": {
+      "focusReason": "Low current Canonical municipality coverage (1,2,2,1 profiles respectively), rotating away from previous Vushtrri focus. No current external municipality/category research was performed.",
+      "municipalityCategoryAttempts": [],
+      "newCandidatesInvestigated": 0,
+      "independentlyFullyVerifiedToday": 0,
+      "completedMapsChecksToday": 0,
+      "historicalDeferredQueueEntries": 82,
+      "historicalPublishedDuplicatesFiltered": 9,
+      "backlogCountsAreNewResearch": false,
+      "deferredByCause": {
+        "independent-service-scope-missing": 16,
+        "complete-current-maps-identity-missing": 39,
+        "identity-contact-location-or-status-conflict": 12,
+        "public-phone-or-strict-phone-match-missing": 10,
+        "active-operation-evidence-missing": 5
+      },
+      "publishedNewIds": 0,
+      "belowTenReason": "Unconfirmed mandatory internal Google profile blocks public Maps verification and the requested browser research path."
+    },
+    "publication": {
+      "pr": null,
+      "commit": null,
+      "release": null,
+      "deployment": null,
+      "reason": "No publication without fully verified candidates; no release trigger created."
+    }
+  },
+  "historicalReconciliation": {
+    "manifestsRead": 12,
+    "matchingLeads": [
+      {
+        "file": "data/import-2026-10-11-daily.json",
+        "name": "Auto Service Vali",
+        "assessment": "Historical deferred Vali lead; same independently proved Istog identity now fully checked. Not a prior published ID."
+      }
+    ],
+    "preRemovalCanonicalHistoriesRead": 3,
+    "retiredPhoneOrPlaceConflicts": 0
+  },
+  "openingHours": {
+    "newProfiles": "explicitly excluded as unresearched; no assumed or Google hours added",
+    "priorPlansPreserved": 171,
+    "priorClosedExclusionPreserved": 1,
+    "newUnresearchedExclusions": 5,
+    "importWrittenToProduction": false,
+    "contractFix": "Accepted explicit unresearched exclusion; complete coverage, identity validation and central revision remain enforced",
+    "regressionCheck": "Passed: no plans/no SQL writes for unresearched entries; forged reasons and omitted identities rejected"
+  }
+}

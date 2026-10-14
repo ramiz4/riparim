@@ -17,6 +17,8 @@ export function csvRows(text){
 const standard=['08:00-18:00','08:00-18:00','08:00-18:00','08:00-18:00','08:00-18:00','08:00-16:00','Geschlossen'];
 export const weekdays=['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'];
 const hash=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
+export const unresearchedOpeningHoursReason='Nicht recherchiert – neuer Katalogeintrag';
+export const openingHoursImportRevision=({records,excluded})=>hash({records,excluded});
 export function prepareOpeningHoursImport(csv,catalogue,parseHours){
  const known=new Map(catalogue.workshops.map(w=>[w.id,w])),seen=new Set(),records=[],excluded=[];
  for(const row of csvRows(csv)){
@@ -25,7 +27,7 @@ export function prepareOpeningHoursImport(csv,catalogue,parseHours){
   seen.add(id);
   if(row.Name!==w.name||row.Ort!==w.city)throw Error(`Workshop identity changed: ${id}`);
   if(row['Zeitzone']!=='Europe/Belgrade'||!/^\d{4}-\d{2}-\d{2}$/.test(row['Geprüft am']))throw Error(`Invalid provenance: ${id}`);
-  if(row['Recherche-Status']==='Dauerhaft geschlossen laut Google Maps'){excluded.push({id,reason:row['Recherche-Status']});continue;}
+  if(['Dauerhaft geschlossen laut Google Maps',unresearchedOpeningHoursReason].includes(row['Recherche-Status'])){excluded.push({id,reason:row['Recherche-Status']});continue;}
   const assume=row['Recherche-Status']==='Standardzeiten (angenommen)'||['Widersprüchliche Quellen','Älterer Standort – prüfen','Zuordnung geklärt – Zeiten abweichend'].includes(row['Recherche-Status']);
   const dayValues=assume?standard:weekdays.map(d=>row[d]);
   const week=dayValues.map(value=>value==='Geschlossen'?{mode:'closed'}:{mode:'open',intervals:value.split(',').map(interval=>{const match=/^(\d{2}:\d{2})-(\d{2}:\d{2})$/.exec(interval);if(!match)throw Error(`Invalid interval for ${id}`);return {start:match[1],end:match[2]};})});
@@ -34,7 +36,7 @@ export function prepareOpeningHoursImport(csv,catalogue,parseHours){
  }
  if(seen.size!==known.size)throw Error('CSV does not cover the complete catalogue');
  records.sort((a,b)=>a.id.localeCompare(b.id));excluded.sort((a,b)=>a.id.localeCompare(b.id));
- return {schemaVersion:1,revision:hash({records,excluded}),records,excluded};
+ return {schemaVersion:1,revision:openingHoursImportRevision({records,excluded}),records,excluded};
 }
 export function validateOpeningHoursImport(manifest,catalogue,parseHours){
  if(manifest.schemaVersion!==1||!Array.isArray(manifest.records)||!Array.isArray(manifest.excluded))throw Error('Invalid opening-hours manifest');
@@ -45,8 +47,8 @@ export function validateOpeningHoursImport(manifest,catalogue,parseHours){
   parseHours(r.hours);
   if(!['assumed','researched'].includes(r.metadata?.kind)||!/^\d{4}-\d{2}-\d{2}$/.test(r.metadata.checkedAt))throw Error('Invalid import provenance');
  }
- for(const r of manifest.excluded){if(!known.has(r.id)||seen.has(r.id)||r.reason!=='Dauerhaft geschlossen laut Google Maps')throw Error('Invalid excluded record');seen.add(r.id);}
- if(seen.size!==known.size||manifest.revision!==hash({records:manifest.records,excluded:manifest.excluded}))throw Error('Incomplete or modified import');
+ for(const r of manifest.excluded){if(!known.has(r.id)||seen.has(r.id)||!['Dauerhaft geschlossen laut Google Maps',unresearchedOpeningHoursReason].includes(r.reason))throw Error('Invalid excluded record');seen.add(r.id);}
+ if(seen.size!==known.size||manifest.revision!==openingHoursImportRevision(manifest))throw Error('Incomplete or modified import');
  return manifest;
 }
 export function openingHoursImportQuery(manifest,now){

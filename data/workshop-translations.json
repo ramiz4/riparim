@@ -1496,6 +1496,64 @@
       }
     },
     {
+      "id": "auto-service-tuli-rahovec",
+      "sourceHash": "cce37edd1a52d3b2b0493ba2a54f3ce00c55d67b96beeeeb16783c3d3b8d5827",
+      "sq": {
+        "specialty": "Mirëmbajtje automjetesh · Motor dhe shasi",
+        "description": "Auto Service TULI në Rahovec publikon mirëmbajtje, riparime motori dhe shasie, servis klime si dhe ndërrim rripi të dhëmbëzuar dhe vajit të transmisionit në faqen e vet. Kontakti dhe adresa vijnë gjithashtu nga ky profil publik.",
+        "serviceDetails": [
+          "Mirëmbajtje e llojeve të ndryshme të automjeteve",
+          "Riparime motori dhe shasie",
+          "Mbushje e sistemeve të klimës",
+          "Ndërrim rripi të dhëmbëzuar dhe servis i vajit të transmisionit"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktimit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet në Facebook: servis automjetesh, mirëmbajtje, riparime motori dhe shasie si dhe kontakt"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle maintenance · Engine and suspension",
+        "description": "Auto Service TULI in Rahovec lists maintenance, engine and suspension repairs, air conditioning service, timing belt replacement and transmission oil service on its own business page. Its contact and address also come from that public page.",
+        "serviceDetails": [
+          "Maintenance for various vehicle types",
+          "Engine and suspension repairs",
+          "Air conditioning refills",
+          "Timing belt replacement and transmission oil service"
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Own Facebook page: vehicle workshop, maintenance, engine and suspension repairs, and contact"
+        ]
+      }
+    },
+    {
+      "id": "auto-service-vali-istog",
+      "sourceHash": "4aad536a2159b33165db6ae9799a480acf0523f329eaa1fd3e3ba76836834a05",
+      "sq": {
+        "specialty": "Servis automjetesh",
+        "description": "Gjirafa e rendit Auto Service Vali në Istog për mirëmbajtje dhe riparim automjetesh. Telefoni, adresa dhe e-maili vijnë nga direktoria publike; mundësia e kontaktimit dhe llojet konkrete të riparimeve nuk janë konfirmuar nga biznesi.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim automjetesh sipas regjistrimit në direktorinë publike; ju lutemi konfirmoni drejtpërdrejt punimet konkrete."
+        ],
+        "phoneNote": "Kontakt nga direktoria publike (Gjirafa); i pakonfirmuar nga biznesi",
+        "sourceTitles": [
+          "Gjirafa: Auto Service Vali – mirëmbajtje dhe riparim i të gjitha automjeteve, telefoni dhe adresa"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing",
+        "description": "Gjirafa lists Auto Service Vali in Istog for vehicle maintenance and repair. The telephone, address and email come from the public directory; availability and specific repair types have not been confirmed by the business.",
+        "serviceDetails": [
+          "Vehicle maintenance and repair according to the public directory listing; please confirm specific work directly."
+        ],
+        "phoneNote": "Public directory contact (Gjirafa); not confirmed by the business",
+        "sourceTitles": [
+          "Gjirafa: Auto Service Vali – maintenance and repair of all vehicles, telephone and address"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-agimi-gjakova",
       "sourceHash": "f00b0a5cd412dffe499093ffd39f8d0b55468f7728dc9fff18f3f4b8ed12e4d2",
       "sq": {
@@ -1656,6 +1714,32 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "GjithëBiznesi: name, telephone number, location and vehicle maintenance/repair"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-besimi-kline",
+      "sourceHash": "15684650485c13a36daeb5a133ca42b64c32c2e28e2067d21b58169186433bf0",
+      "sq": {
+        "specialty": "Servis automjetesh",
+        "description": "Auto Servis Besimi ofron servis automjetesh në Klinë. Emri, kontakti dhe adresa janë publikuar në faqen e vet publike të biznesit; ju lutemi konfirmoni drejtpërdrejt llojet konkrete të riparimeve.",
+        "serviceDetails": [
+          "Servis automjetesh sipas faqes së vet publike të biznesit; ju lutemi konfirmoni drejtpërdrejt llojet konkrete të riparimeve."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktimit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet në Facebook: servis automjetesh, Rruga Lufta e Çelisë në Pogragjë, telefoni dhe e-maili"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing",
+        "description": "Auto Servis Besimi offers vehicle servicing in Klinë. Its name, contact and address are listed on its own public business page; please confirm specific repair types directly.",
+        "serviceDetails": [
+          "Vehicle servicing according to its own public business page; please confirm specific repair types directly."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Own Facebook page: vehicle service, Rruga Lufta e Çelisë in Pogragjë, telephone and email"
         ]
       }
     },
@@ -1956,6 +2040,32 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-ermali-kline",
+      "sourceHash": "afa24fa01c7859ed19fa7038a7e27f6ca35e6f4b0f82decf49c89200ca59fb9e",
+      "sq": {
+        "specialty": "Servis automjetesh",
+        "description": "Auto Servis Ermali ofron servis automjetesh në Klinë. Emri, kontakti dhe adresa janë publikuar në faqen e vet publike të biznesit; ju lutemi konfirmoni drejtpërdrejt llojet konkrete të riparimeve.",
+        "serviceDetails": [
+          "Servis automjetesh sipas faqes së vet publike të biznesit; ju lutemi konfirmoni drejtpërdrejt llojet konkrete të riparimeve."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktimit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet në Facebook: servis automjetesh, Ilir Merturi në Klinë, telefoni dhe e-maili"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing",
+        "description": "Auto Servis Ermali offers vehicle servicing in Klinë. Its name, contact and address are listed on its own public business page; please confirm specific repair types directly.",
+        "serviceDetails": [
+          "Vehicle servicing according to its own public business page; please confirm specific repair types directly."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Own Facebook page: vehicle workshop, Ilir Merturi in Klinë, telephone and email"
         ]
       }
     },
@@ -4056,6 +4166,38 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "mana-auto-detailing-rahovec",
+      "sourceHash": "5d83986888eb14b6e072de30d94e5329967efe340ea3d2bab15b33410a6c0b67",
+      "sq": {
+        "specialty": "Kujdes për automjete · Detajim i interierit",
+        "description": "MANA auto detailing në Rahovec ofron kujdes për automjete, detajim të interierit dhe restaurim të fenerëve. Faqja e vet në Instagram publikon telefonin dhe Rr. UÇK Nr. 114; profili i vet në Facebook konfirmon Rahovecin. Në burimet e kontrolluara nuk u gjet një e-mail biznesi i provuar publikisht.",
+        "serviceDetails": [
+          "Kujdes për automjete dhe detajim i interierit",
+          "Restaurim i fenerëve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktimit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet në Instagram: kujdes për automjete, telefoni dhe Rr. UÇK Nr. 114",
+          "Profili i vet në Facebook: Rahovec dhe telefoni publik",
+          "Postimi i vet në Instagram: restaurim i fenerëve"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle detailing · Interior detailing",
+        "description": "MANA auto detailing in Rahovec offers vehicle detailing, interior detailing and headlight restoration. Its own Instagram page lists its telephone and Rr. UÇK No. 114; its own Facebook page confirms Rahovec. No publicly supported business email was found in the checked sources.",
+        "serviceDetails": [
+          "Vehicle detailing and interior detailing",
+          "Headlight restoration"
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Own Instagram page: vehicle detailing, telephone and Rr. UÇK No. 114",
+          "Own Facebook page: Rahovec and public telephone contact",
+          "Own Instagram post: headlight restoration"
         ]
       }
     },

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "0b2a97dab2c07f8509b5a8116dce2bf5614bb636d2600e0ccc7238f3d2d04023",
+  "revision": "7d2dc6ba11a47b96c67b64c0daf50933f2c08136f4030f5b23483ec457646e1a",
   "records": [
     {
       "id": "ahp-volkswagen-prizren",
@@ -15233,6 +15233,26 @@
     }
   ],
   "excluded": [
+    {
+      "id": "auto-service-tuli-rahovec",
+      "reason": "Nicht recherchiert – neuer Katalogeintrag"
+    },
+    {
+      "id": "auto-service-vali-istog",
+      "reason": "Nicht recherchiert – neuer Katalogeintrag"
+    },
+    {
+      "id": "auto-servis-besimi-kline",
+      "reason": "Nicht recherchiert – neuer Katalogeintrag"
+    },
+    {
+      "id": "auto-servis-ermali-kline",
+      "reason": "Nicht recherchiert – neuer Katalogeintrag"
+    },
+    {
+      "id": "mana-auto-detailing-rahovec",
+      "reason": "Nicht recherchiert – neuer Katalogeintrag"
+    },
     {
       "id": "titans-auto-repair-prishtina",
       "reason": "Dauerhaft geschlossen laut Google Maps"
