@@ -27,6 +27,10 @@ verdecken. Tests, Gruppen, Argumente und Suite-Parallelität bleiben identisch.
 Die Instrumentierung zählt die gestarteten Next-Buildprozesse über `/proc`
 (PID und Startzeit, Argumente `next/dist/bin/next build --webpack`):
 Baseline drei, Kandidat eine.
+Der CLI-Pfad wird relativ zum tatsächlichen Prozess-CWD aufgelöst und über
+`realpath` an das installierte Next-Modul des gemessenen Checkouts gebunden.
+Symlinks der Release-Source-Fixture bleiben derselbe Modulpfad; fremde oder
+verschachtelte Fake-Builds aus Profilerregressionen werden nicht mitgezählt.
 Dadurch werden auch Builds erfasst, deren ältere Tests ihre stdout-Ausgabe
 verwerfen; Bannerzählungen im Log bleiben eine getrennte Diagnosegröße.
 
@@ -41,6 +45,11 @@ Commit-SHA eingefroren. `sample.json` protokolliert Quell- und Harnessrevision,
 Node/npm/Go-Versionen, Runnerimage samt Imageversion, Architektur, Cache-Key und
 Cachehit. Die Harnessdateien und Messausgaben liegen in einem zweiten Checkout;
 sie verändern weder den gemessenen Quellbaum noch dessen Buildreceipt.
+Die Childcommands erhalten ausschließlich für ihre SHA-Bindung
+`GITHUB_SHA=sourceRevision`. Die echte Harness-SHA bleibt separat in den
+Metadaten erhalten; Event und Ref werden nicht verändert. Dadurch behalten die
+Paketierer ihren vollständigen Clean-Source-/Commitvertrag und prüfen die
+tatsächlich ausgecheckte Messrevision statt des PR-Merge-/Harnesscommits.
 CPU-Modell, logische CPUs, `availableParallelism()` und Gesamtspeicher werden
 ebenfalls erfasst. Die Auswertung verlangt dieselben CPU-/Speicherkapazitäten;
 unterschiedliche CPU-Modelle und Imageversionen bleiben im Rohinventar sichtbar.
@@ -60,8 +69,13 @@ Ein Receipt muss immer zu seiner eigenen Quellrevision passen.
 
 ## Kalter und warmer Paketcache
 
-Jeder Runner erhält ein frisches Paketcacheverzeichnis unter `runner.temp`,
-eindeutig durch Run-ID, Versuch und Lane. `setup-node` aktiviert kein npm-Caching.
+Jeder frisch bereitgestellte Hosted Runner verwendet das dedizierte Verzeichnis
+`${runner.temp}/ci-performance-npm`. Sein ausgewerteter Pfad bleibt über Prime-,
+Cold- und Warm-Runs identisch: `actions/cache` bindet die Cacheversion auch an
+den Pfad und die Kompression. Isolation entsteht durch getrennte Runner und den
+Experiment-Key. Vor jedem Restore/Install wird nachgewiesen, dass das Verzeichnis
+leer ist; vorhandene Inhalte werden nicht gelöscht oder stillschweigend benutzt.
+`setup-node` aktiviert kein npm-Caching.
 
 - `cold`: kein Restore und kein Save; kein Fallback auf einen vorhandenen Cache.
 - `prime`: einmal die vollständige Baseline ausführen und danach den isolierten
@@ -233,4 +247,5 @@ bereit und unterstützt in Laufnamen die Kontexte `github` und `inputs`.
 - [GitHub: Workflow-Events und Dispatch-Voraussetzungen](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows)
 - [GitHub: Workflow-Jobmetadaten und Versuch-API](https://docs.github.com/en/rest/actions/workflow-jobs)
 - [actions/cache: exaktes Restore und separater Save](https://github.com/actions/cache)
+- [actions/cache: Cacheversion und Pfadbindung](https://github.com/actions/cache#cache-version)
 - [actions/setup-node: Paketcacheoptionen](https://github.com/actions/setup-node)

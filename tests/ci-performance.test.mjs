@@ -1,11 +1,25 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { mkdtemp, writeFile, mkdir, rm, readFile } from "node:fs/promises";
+import {
+  mkdtemp,
+  writeFile,
+  mkdir,
+  rm,
+  readFile,
+  symlink,
+} from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { createNpmCacheWrapper } from "../scripts/ci-benchmark-cache.mjs";
+import {
+  createNpmCacheWrapper,
+  initializeBenchmarkCache,
+} from "../scripts/ci-benchmark-cache.mjs";
 import { nodeSourceDigest } from "../scripts/node-release.mjs";
+import {
+  sitesBuildConfiguration,
+  sitesProjectId,
+} from "../scripts/release-policy.mjs";
 import {
   quantile,
   workflowMetrics,
@@ -14,6 +28,8 @@ import {
   compareSamples,
   benchmarkArtifactPattern,
   assessCollectedSample,
+  isExpectedNextBuild,
+  benchmarkCommandEnvironment,
 } from "../scripts/ci-performance.mjs";
 
 assert.equal(quantile([400, 100, 300, 200], 0.5), 250);
@@ -87,6 +103,37 @@ const processes = [
 ];
 assert.equal(processTreeMemory(processes, 10), 600);
 assert.equal(processTreeMemory(processes, 99), 0);
+const harnessEnvironment = {
+    GITHUB_SHA: "a".repeat(40),
+    GITHUB_EVENT_NAME: "pull_request",
+    GITHUB_REF: "refs/pull/1/merge",
+  },
+  sourceEnvironment = benchmarkCommandEnvironment(
+    "b".repeat(40),
+    harnessEnvironment,
+    { BUILD_TARGET: "sites" },
+  );
+assert.equal(sourceEnvironment.GITHUB_SHA, "b".repeat(40));
+assert.equal(
+  sourceEnvironment.GITHUB_EVENT_NAME,
+  harnessEnvironment.GITHUB_EVENT_NAME,
+);
+assert.equal(sourceEnvironment.GITHUB_REF, harnessEnvironment.GITHUB_REF);
+assert.equal(harnessEnvironment.GITHUB_SHA, "a".repeat(40));
+assert.equal(sourceEnvironment.BUILD_TARGET, "sites");
+const benchmarkWorkflow = await readFile(
+  new URL("../.github/workflows/ci-performance-benchmark.yml", import.meta.url),
+  "utf8",
+);
+assert.match(
+  benchmarkWorkflow,
+  /NPM_CONFIG_CACHE: \$\{\{ runner\.temp \}\}\/ci-performance-npm\n/,
+  "cache restore/save need the same evaluated directory across prime and warm runs",
+);
+assert.doesNotMatch(
+  benchmarkWorkflow,
+  /NPM_CONFIG_CACHE:[^\n]*(?:run_id|run_attempt|matrix\.lane)/,
+);
 const inventoryFixture = {
   applicationDigest: "app",
   catalogueDigest: "catalogue",
@@ -216,6 +263,11 @@ try {
   const profileDirectory = join(root, "profile");
   const npmCli = join(root, "fake-npm.mjs"),
     isolatedCache = join(root, "cache");
+  await mkdir(isolatedCache);
+  await initializeBenchmarkCache(isolatedCache);
+  await writeFile(join(isolatedCache, "preexisting-cache"), "unexpected seed");
+  await assert.rejects(initializeBenchmarkCache(isolatedCache), /empty/);
+  await rm(join(isolatedCache, "preexisting-cache"));
   await writeFile(
     npmCli,
     "console.log(JSON.stringify({args:process.argv.slice(2),cache:process.env.npm_config_cache}));",
@@ -331,26 +383,92 @@ try {
   const fakeNext = join(root, "next/dist/bin/next");
   await mkdir(join(root, "next/dist/bin"), { recursive: true });
   await writeFile(fakeNext, "setTimeout(() => {}, 250);");
+  assert.equal(
+    await isExpectedNextBuild(
+      [process.execPath, fakeNext, "build", "--webpack"],
+      root,
+      fakeNext,
+    ),
+    true,
+  );
+  const fixtureRoot = join(root, "source-fixture");
+  await mkdir(join(fixtureRoot, "node_modules"), { recursive: true });
+  await symlink(join(root, "next"), join(fixtureRoot, "node_modules/next"));
+  assert.equal(
+    await isExpectedNextBuild(
+      [
+        process.execPath,
+        "node_modules/next/dist/bin/next",
+        "build",
+        "--webpack",
+      ],
+      fixtureRoot,
+      fakeNext,
+    ),
+    true,
+  );
+  const otherNext = join(root, "other/next/dist/bin/next");
+  await mkdir(dirname(otherNext), { recursive: true });
+  await writeFile(otherNext, "setTimeout(() => {}, 250);");
+  assert.equal(
+    await isExpectedNextBuild(
+      [process.execPath, fakeNext, "build", "--webpack"],
+      root,
+      otherNext,
+    ),
+    false,
+  );
+  assert.equal(
+    await isExpectedNextBuild(
+      [process.execPath, fakeNext, "start"],
+      root,
+      fakeNext,
+    ),
+    false,
+  );
   const profiler = fileURLToPath(
     new URL("../scripts/ci-profile-command.mjs", import.meta.url),
   );
-  execFileSync(
-    process.execPath,
-    [
-      profiler,
-      profileDirectory,
-      "fixture",
-      process.execPath,
-      "-e",
-      `
+  const fixtureCommand = `
     console.log('[ci-phase] ' + JSON.stringify({phase:'fixture.http',durationMs:12}));
     console.log('[fixture.test.mjs] Finished with exit 0 in 23ms');
       const {spawnSync} = require('node:child_process');
       spawnSync(process.execPath, [${JSON.stringify(fakeNext)}, 'build', '--webpack'], {stdio:'pipe'});
       spawnSync(process.execPath, [${JSON.stringify(fakeNext)}, 'build', '--webpack'], {stdio:'pipe'});
+  `;
+  const innerArguments = [
+      profiler,
+      profileDirectory,
+      "fixture",
+      process.execPath,
+      "-e",
+      fixtureCommand,
+    ],
+    outerDirectory = join(root, "outer-profile");
+  execFileSync(
+    process.execPath,
+    [
+      profiler,
+      outerDirectory,
+      "outer",
+      process.execPath,
+      "-e",
+      `
+    const {spawnSync}=require('node:child_process');
+    const result=spawnSync(process.execPath,${JSON.stringify(innerArguments)}, {
+      env:{...process.env,BENCHMARK_NEXT_CLI:${JSON.stringify(fakeNext)}},stdio:'inherit'});
+    process.exit(result.status ?? 1);
   `,
     ],
-    { stdio: "pipe" },
+    { stdio: "pipe", env: { ...process.env, BENCHMARK_NEXT_CLI: otherNext } },
+  );
+  const outerMeasured = JSON.parse(
+    (await readFile(join(outerDirectory, "phases.jsonl"), "utf8")).trim(),
+  );
+  assert.equal(
+    outerMeasured.nextProductionCompilations,
+    0,
+    "unit fake Next builds do not contaminate the outer benchmark",
   );
   const measured = JSON.parse(
     (await readFile(join(profileDirectory, "phases.jsonl"), "utf8")).trim(),
@@ -387,7 +505,7 @@ try {
       dependencies: { next: "1" },
     }),
     "package-lock.json": "lock",
-    ".gitignore": "ignored-receipt-input.txt\n.generated/\n",
+    ".gitignore": "ignored-receipt-input.txt\n.generated/\nsource-fixture/\n",
   }))
     await writeFile(join(root, file), content);
   execFileSync("git", ["add", "."], { cwd: root });
@@ -451,6 +569,88 @@ try {
   assert.notEqual(
     (await inputInventory(root)).migrationDigest,
     baseline.migrationDigest,
+  );
+  const packageSource = join(root, ".generated/package-source");
+  for (const directory of [
+    ".openai",
+    "dist/.openai",
+    "dist/server",
+    "dist/client/.vite",
+  ])
+    await mkdir(join(packageSource, directory), { recursive: true });
+  const hosting = { project_id: sitesProjectId, d1: "DB", r2: "BUCKET" };
+  for (const path of [".openai/hosting.json", "dist/.openai/hosting.json"])
+    await writeFile(join(packageSource, path), JSON.stringify(hosting));
+  await writeFile(
+    join(packageSource, "dist/server/wrangler.json"),
+    JSON.stringify({
+      ...sitesBuildConfiguration(hosting),
+      main: "index.js",
+      no_bundle: true,
+      assets: { directory: "../client" },
+    }),
+  );
+  await writeFile(
+    join(packageSource, "dist/server/index.js"),
+    "export default {};\n",
+  );
+  await writeFile(
+    join(packageSource, "dist/client/.vite/manifest.json"),
+    "{}\n",
+  );
+  await writeFile(join(packageSource, ".gitignore"), "dist/\nartifacts/\n");
+  execFileSync("git", ["init", "--quiet"], { cwd: packageSource });
+  execFileSync("git", ["add", "."], { cwd: packageSource });
+  execFileSync(
+    "git",
+    [
+      "-c",
+      "user.name=Fixture",
+      "-c",
+      "user.email=fixture@example.test",
+      "commit",
+      "--quiet",
+      "-m",
+      "test: clean benchmark source",
+    ],
+    { cwd: packageSource },
+  );
+  const measuredCommit = execFileSync("git", ["rev-parse", "HEAD"], {
+      cwd: packageSource,
+      encoding: "utf8",
+    }).trim(),
+    packageCommand = fileURLToPath(
+      new URL("../scripts/package-release.mjs", import.meta.url),
+    ),
+    foreignHarnessEnvironment = { ...process.env, ...harnessEnvironment };
+  assert.throws(
+    () =>
+      execFileSync(process.execPath, [packageCommand, "sites"], {
+        cwd: packageSource,
+        env: foreignHarnessEnvironment,
+        stdio: "pipe",
+      }),
+    (error) => /workflow commit/.test(error.stderr.toString()),
+  );
+  execFileSync(process.execPath, [packageCommand, "sites"], {
+    cwd: packageSource,
+    env: benchmarkCommandEnvironment(measuredCommit, foreignHarnessEnvironment),
+    stdio: "pipe",
+  });
+  const packaged = JSON.parse(
+    await readFile(
+      join(packageSource, "artifacts/sites-provenance.json"),
+      "utf8",
+    ),
+  );
+  assert.equal(
+    packaged.commit,
+    measuredCommit,
+    "real packaging binds to the measured clean commit",
+  );
+  assert.equal(
+    foreignHarnessEnvironment.GITHUB_SHA,
+    harnessEnvironment.GITHUB_SHA,
   );
 } finally {
   await rm(root, { recursive: true, force: true });

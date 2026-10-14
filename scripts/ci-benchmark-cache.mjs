@@ -1,5 +1,14 @@
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, writeFile, readdir } from "node:fs/promises";
 import { isAbsolute, join } from "node:path";
+export async function initializeBenchmarkCache(directory) {
+  if (!isAbsolute(directory))
+    throw Error("Benchmark cache path must be absolute.");
+  await mkdir(directory, { recursive: true });
+  if ((await readdir(directory)).length)
+    throw Error(
+      "Benchmark cache must be initially empty before restore/install.",
+    );
+}
 
 // Deployment installs deliberately retain only PATH/HOME/TMPDIR. Pin the cache
 // at the npm process boundary so those real target installs remain isolated too.

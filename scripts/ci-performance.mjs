@@ -1,6 +1,13 @@
 import { execFileSync, execFile } from "node:child_process";
 import { createHash } from "node:crypto";
-import { readFile, writeFile, mkdir, readdir, mkdtemp } from "node:fs/promises";
+import {
+  readFile,
+  writeFile,
+  mkdir,
+  readdir,
+  mkdtemp,
+  realpath,
+} from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
@@ -99,6 +106,37 @@ export function processTreeMemory(processes, rootPid) {
       total + (descendants.has(process.pid) ? process.rssBytes : 0),
     0,
   );
+}
+export async function isExpectedNextBuild(commandLine, cwd, expectedCLI) {
+  if (
+    !expectedCLI ||
+    !commandLine.includes("build") ||
+    !commandLine.includes("--webpack")
+  )
+    return false;
+  const candidates = commandLine.filter((argument) =>
+    /(?:^|\/)next\/dist\/bin\/next$/.test(argument),
+  );
+  if (!candidates.length) return false;
+  try {
+    const installed = await realpath(expectedCLI);
+    for (const candidate of candidates)
+      if ((await realpath(resolve(cwd, candidate))) === installed) return true;
+    return false;
+  } catch (error) {
+    // Install phases precede node_modules, and observed processes may exit.
+    if (error.code === "ENOENT" || error.code === "ESRCH") return false;
+    throw error;
+  }
+}
+export function benchmarkCommandEnvironment(
+  sourceRevision,
+  environment,
+  overrides = {},
+) {
+  if (!/^[a-f0-9]{40}$/.test(sourceRevision))
+    throw Error("Expected exact measured source commit.");
+  return { ...environment, ...overrides, GITHUB_SHA: sourceRevision };
 }
 
 const applicationDirectories = new Set([

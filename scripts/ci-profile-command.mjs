@@ -5,11 +5,12 @@ import {
   readFile,
   readdir,
   writeFile,
+  readlink,
 } from "node:fs/promises";
 import { createWriteStream } from "node:fs";
 import { join } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
-import { processTreeMemory } from "./ci-performance.mjs";
+import { processTreeMemory, isExpectedNextBuild } from "./ci-performance.mjs";
 
 const [directory, label, command, ...args] = process.argv.slice(2);
 if (!directory || !/^[a-z][a-z0-9-]*$/.test(label ?? "") || !command)
@@ -95,15 +96,31 @@ const measuring = (async () => {
         if (descendants.has(process.pid))
           known.set(process.pid, process.startTicks);
       const owned = table.filter((process) => descendants.has(process.pid));
-      for (const process of owned)
+      for (const ownedProcess of owned) {
+        const identity = `${ownedProcess.pid}:${ownedProcess.startTicks}`;
         if (
-          process.commandLine.some((argument) =>
+          nextLaunches.has(identity) ||
+          !ownedProcess.commandLine.includes("build") ||
+          !ownedProcess.commandLine.includes("--webpack") ||
+          !ownedProcess.commandLine.some((argument) =>
             /(?:^|\/)next\/dist\/bin\/next$/.test(argument),
-          ) &&
-          process.commandLine.includes("build") &&
-          process.commandLine.includes("--webpack")
+          )
         )
-          nextLaunches.add(`${process.pid}:${process.startTicks}`);
+          continue;
+        try {
+          const cwd = await readlink(`/proc/${ownedProcess.pid}/cwd`);
+          if (
+            await isExpectedNextBuild(
+              ownedProcess.commandLine,
+              cwd,
+              process.env.BENCHMARK_NEXT_CLI,
+            )
+          )
+            nextLaunches.add(identity);
+        } catch (error) {
+          if (error.code !== "ENOENT" && error.code !== "ESRCH") throw error;
+        }
+      }
       if (process.env.NPM_CONFIG_CACHE)
         for (const ownedProcess of owned) {
           if (

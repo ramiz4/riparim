@@ -4,7 +4,10 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { realpathSync } from "node:fs";
 import { availableParallelism, cpus, totalmem } from "node:os";
-import { inputInventory } from "./ci-performance.mjs";
+import {
+  inputInventory,
+  benchmarkCommandEnvironment,
+} from "./ci-performance.mjs";
 import { createNpmCacheWrapper } from "./ci-benchmark-cache.mjs";
 
 const [lane, sourceDirectory, outputDirectory] = process.argv.slice(2);
@@ -39,8 +42,16 @@ await createNpmCacheWrapper({
   log: join(output, "npm-cache.jsonl"),
 });
 process.env.PATH = wrappers + ":" + process.env.PATH;
+process.env.BENCHMARK_NEXT_CLI = join(
+  source,
+  "node_modules/next/dist/bin/next",
+);
 const inventory = await inputInventory(source);
 const cacheState = process.env.BENCHMARK_CACHE_STATE;
+if (process.env.BENCHMARK_CACHE_WAS_EMPTY !== "true")
+  throw Error(
+    "Sample requires proof of an initially empty dedicated cache directory.",
+  );
 if (!["cold", "warm", "prime"].includes(cacheState))
   throw Error("Invalid benchmark cache state.");
 if (cacheState === "warm" && process.env.BENCHMARK_CACHE_HIT !== "true")
@@ -53,6 +64,7 @@ const metadata = {
   variant: lane === "baseline" ? "baseline" : "candidate",
   cacheState,
   cacheHit: process.env.BENCHMARK_CACHE_HIT === "true",
+  cacheDirectoryInitiallyEmpty: true,
   cacheKey: process.env.BENCHMARK_CACHE_KEY,
   experiment: process.env.BENCHMARK_EXPERIMENT,
   sourceRevision: execFileSync("git", ["rev-parse", "HEAD"], {
@@ -89,7 +101,11 @@ function run(phase, command, args = [], environment = {}) {
     {
       cwd: source,
       stdio: "inherit",
-      env: { ...process.env, ...environment },
+      env: benchmarkCommandEnvironment(
+        metadata.sourceRevision,
+        process.env,
+        environment,
+      ),
     },
   );
   if (result.error) throw result.error;
