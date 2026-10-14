@@ -1,97 +1,66 @@
 # Customer-flow QA
 
-Choose checks for the changed behavior. Use actual components or the built Worker,
-isolated D1/R2, fictional accounts/files and intercepted providers. Confirm the
-`ramizloki82@googlemail.com` browser profile from available account/window
-information before browser actions. Past checks are
-[historical evidence](../archive/customer-flow-history.md), not current acceptance.
+Test the changed behavior with actual components or built Workers, isolated D1/R2,
+fictional accounts/files and intercepted providers. Before browser actions, confirm
+profile `ramizloki82@googlemail.com` from available account/window information.
+[Past checks](../archive/customer-flow-history.md) do not establish current acceptance.
 
-## Browser matrix
+## Browser coverage
 
-- Check DE/SQ/EN, 390 and 1280 CSS pixels, Light/Dark/System and 200% zoom.
-  Add 320 pixels for dense forms. No horizontal overflow or clipped controls.
-- Use Tab/Shift+Tab, Enter/Space, arrow keys and Escape; check labels, visible
-  focus, dialog focus/return and focus after a removed row or confirmation.
-- Cover initial/loading/empty/error/success states and retries. Preserve drafts
-  after errors; busy controls prevent duplicate submissions and unsafe navigation.
-- Test direct visits, reload, client navigation, back/forward, safe login returns,
-  locale switches and legacy URLs. Private text/files/tokens never enter public
-  links or alternate metadata. Restore temporary zoom/viewport settings afterward.
+- Check DE/SQ/EN at 390/1280 CSS pixels, Light/Dark/System and 200% zoom; add 320 px
+  for dense forms. Controls must remain visible without horizontal overflow.
+- Use keyboard navigation, activation, arrows and Escape. Check labels, visible
+  focus, dialog return and focus after removed rows/confirmations.
+- Cover loading, empty, error, success and retry states. Errors preserve drafts;
+  busy controls prevent duplicate submissions and unsafe navigation.
+- Test direct visits, reload, client navigation, history, locale switching and legacy
+  URLs. Private text/files/tokens never enter public links/metadata. Restore viewport/zoom.
 
 ## Auth and account
 
-Check registration (trimmed display name), confirmation → separate login with
-original target, recovery → reset → login, Google success/cancellation, logout
-and reauthentication for deletion. Reject invalid/expired tokens, foreign targets,
-forged native identity and unsafe redirects. Provider errors show safe messages.
+- Exercise registration, confirmation → separate login with original target,
+  recovery/reset/login, Google success/cancellation, logout and deletion reauthentication.
+  Reject invalid/expired tokens, foreign targets, forged identities and unsafe redirects.
+- Preserve concurrent name/language metadata. Review forms accept no client-supplied
+  name; name changes leave old reviews unchanged. Editing adopts the verified
+  account name and returns the review to moderation.
+- Check cold/failed/late sessions, guest/account transitions, five-minute expiry,
+  window return and cross-tab login/logout. The header retains verified display;
+  broadcasts carry no identity/tokens and server APIs authorize each private access.
+- Deletion removes private files/reservations and can resume after partial cleanup;
+  delayed uploads must not recreate removed evidence. Verify provider mail separately:
+  [Auth operations](../operations/auth-provider.md).
 
-Settings preserve concurrent metadata/language preferences. Name changes do not
-rewrite old reviews; the next review edit adopts the verified account name with
-renewed moderation. Review forms accept no client-supplied name. Deletion removes
-private files/reservations and supports retry after partial provider/local cleanup;
-late uploads cannot recreate removed evidence.
+## Reviews and evidence
 
-The header keeps its verified display during client transitions and profile loading.
-Check cold load, failed/late session answers, guest/account changes, five-minute
-expiry, window return and cross-tab login/logout. Browser signals contain no
-identity/tokens; server APIs independently authorize every private access.
+- Start from a public workshop profile. Review links, login returns and history
+  preserve dialog state; drafts/files belong only to the current account/workshop
+  in page memory. Success clears the next draft. Stars suffice; text is optional.
+- Required visit, consent, evidence and approval still apply. Check one-to-six distinct
+  known services and scalar compatibility, personal history, pagination, edits,
+  supplements, deletion and retries. Edits remove the previously public review.
+- Authorized approval/rejection updates public aggregates. Anonymous/foreign evidence
+  access fails; own/admin downloads preserve exact bytes. Check size/signature,
+  failed replacement and deletion racing a delayed upload.
 
-Tests: `google-auth.test.mjs`, `google-auth-worker.test.mjs`,
-`account-settings.test.mjs`, `account-settings-ui.test.mjs`,
-`session-header-navigation.test.mjs`, `session-cache-tabs.test.mjs`,
-`profile-loading-header.test.mjs` in [tests](../../tests).
-Provider setup/mail acceptance follow [auth operations](../operations/auth-provider.md).
+## Ownership and administration
 
-## Reviews and private evidence
-
-Start a review from its public workshop profile. `?bewerten=1`, legacy hashes,
-login return and browser navigation preserve dialog state. Draft/file state is
-bound to current account/workshop and remains only in page memory. Success starts
-an empty next draft. Stars suffice; text is optional. Required visit, consent,
-private evidence and approval still apply. One to six distinct known services
-retain scalar legacy compatibility.
-
-Check personal `/bewertungen` history, targeted submissions, pagination, editing,
-supplementing, deletion and retries. New/edited submissions stay private until
-approval; editing removes their public review. Approve/reject through authorized
-moderation and verify public aggregates/refresh. Anonymous/foreign evidence access
-fails; own/admin downloads preserve exact bytes. Check upload size/signature,
-replacement failure and account deletion during delayed upload.
-
-Tests: `combined-reviews.test.mjs`, `review-services.test.mjs`,
-`profile-review-dialog.test.mjs`, `my-reviews-page.test.mjs`,
-`my-reviews-ui.test.mjs`, `notification-link-ui.test.mjs`,
-`public-review-refresh.test.mjs`.
-
-## Owners and administration
-
-Claim only a valid published target from its profile; ambiguous targets show no
-foreign form. Claim page and private overview remain separate. New claims need
-one to five PDF/JPG/PNG documents, at most 5 MiB each/10 MiB total. Check append,
-cancel, individual removal, labeled native selection and confirmation focus.
-Old requests remain readable; downloads are applicant/admin only.
-
-Ownership is manually approved and grants only assigned-profile rights. Profile
-changes require separate moderation and current revision/owner permissions.
-Check competing requests, role removal, pending locks, stale lists and account
-cleanup. Editors preserve original business text/canonical values and newer
-administration changes. See [data contracts](../data/workshops.md).
-
-Tests: `business.test.mjs`, `business-ui.test.mjs`, `business-pages.test.mjs`,
-`business-claim-ui.test.mjs`, `admin-workshops-ui.test.mjs`,
-`admin-roles-ui.test.mjs`, `management-localization-ui.test.mjs`.
+- Claim only the selected published profile; ambiguous targets show no foreign form.
+  Keep claim and overview separate. Require 1–5 PDF/JPG/PNG documents, ≤5 MiB each/
+  10 MiB total; check selection, append/cancel/remove and confirmation focus.
+  Old requests stay readable; downloads are applicant/admin only.
+- Manual approval grants assigned-profile rights only. Profile changes need separate
+  moderation and current revision/ownership checks. Exercise competing requests,
+  removed roles, pending locks, stale lists and cleanup. Editors preserve original
+  business text, canonical values and newer admin changes: [data contracts](../data/workshops.md).
 
 ## Delivery and completion
 
-Moderation awaits the initial email attempt. Failure does not undo approval.
-Check one-event manual retries, five-attempt budget/backoffs, atomic leases,
-unchanged payload/idempotency and ambiguous SMTP locks. Provider acceptance is
-not recipient delivery. Diagnostics load on demand without polling; there is no
-periodic retry job. Use `notifications.test.mjs` and `smtp-tls.test.mjs`, and follow
-[mail operations](../operations/mail-transports.md).
-
-Run required [CI checks](../../.github/workflows/ci.yml) for code changes. Record
-tested artifact/release, matrix and limits. Browser fixtures prove presentation,
-protocol fixtures prove isolated contracts, and production auth/mail/storage
-require their own acceptance after a verified main release. Claim only observed
-results; real iPhone/Safari and live email delivery are separate checks when needed.
+- Moderation awaits the first email attempt; failure does not undo approval.
+  Check one-event retries, the five-retry budget/backoffs, atomic leases, unchanged
+  payload/idempotency and ambiguous SMTP locks. Diagnostics load on demand without
+  polling; there is no periodic retry job. Follow [mail operations](../operations/mail-transports.md).
+- Run required [CI checks](testing.md). Record artifact/release, coverage and limits.
+  Presentation/protocol fixtures prove their isolated scope; production auth/mail/storage
+  require independent acceptance after a verified main release. Provider handoff is
+  not inbox delivery; real iPhone/Safari and live receipts remain separate when relevant.

@@ -1,20 +1,17 @@
 # Auth providers and account identities
 
-Supabase is the default; PocketBase is the second concrete adapter.
-An arbitrary OIDC URL is unsupported. [The app contract](../../lib/auth/contract.ts)
-keeps provider payloads behind [adapters](../../lib/auth/provider.ts).
-Roles, ownership, blocks and internal account IDs stay in the app database.
+Supabase is the default; PocketBase is the second adapter. Arbitrary OIDC URLs are
+unsupported. App roles, blocks, ownership and account IDs stay in the app database.
+See the [provider contract](../../lib/auth/contract.ts) and [adapters](../../lib/auth/provider.ts).
 
-## Configure a provider
+## Configure login
 
-Public profile fields live in protected `auth_settings` administration; credentials
-and trust bindings live only in Worker secrets or Node `shared/runtime.env`.
-Hosted portless `*.supabase.co` retains existing compatibility. For another approved
-Supabase instance, set `AUTH_TRUSTED_PROVIDER=supabase`, exact HTTPS
-`AUTH_TRUSTED_ORIGIN`, `SUPABASE_SECRET_KEY_ORIGIN` and its server-only key.
-The public publishable/anon key belongs in the profile.
-
-PocketBase uses these private runtime bindings:
+Public profile values use protected `auth_settings` administration. Secrets/trust
+bindings belong in Worker secrets or Node `shared/runtime.env`; expose no secrets to browsers.
+Hosted portless `*.supabase.co` retains compatibility. Another approved Supabase needs
+`AUTH_TRUSTED_PROVIDER=supabase`, exact HTTPS `AUTH_TRUSTED_ORIGIN`,
+`SUPABASE_SECRET_KEY_ORIGIN` and its server key; only the public publishable/anon key
+belongs in the profile. PocketBase needs:
 
 ```dotenv
 AUTH_TRUSTED_PROVIDER=pocketbase
@@ -24,61 +21,52 @@ AUTH_ADMIN_KEY_ORIGIN=https://auth.example.test
 AUTH_ADMIN_KEY=<private-superuser-token>
 ```
 
-`AUTH_ADMIN_KEY` requires both bindings and takes precedence; a bad binding never
-falls back to the old Supabase key. Origins have no credentials/path/query/fragment;
-requests reject redirects. Unknown providers are rejected; unproven methods grant
-no Google authorization.
+Bind keys to the exact provider/origin and plan expiry/renewal. An invalid admin-key
+binding never falls back to Supabase. Origins permit no credentials/path/query/fragment;
+redirects/unknown providers are rejected. Unproven methods grant no Google authorization.
+Check PocketBase API rules privately: guests cannot set `verified`, and public updates
+must expose neither email identity nor provider links. Use the default `users` collection
+and the [PocketBase adapter’s fields](../../lib/auth/adapters/pocketbase.ts). The checked
+configuration is PocketBase 0.40.5 without MFA.
 
-The PocketBase adapter was checked against **0.40.5**: default `users` collection
-`_pb_users_auth_`, `_externalAuths` relationships, password identity `email`, no MFA,
-and text fields `name`/`preferredLocale` (`de`, `sq`, `en`). Reject guest writes to
-`verified` (for example `createRule: @request.body.verified:isset = false`); public
-updates must expose neither email identity nor provider links. Check API rules
-privately. Plan superuser-token expiry/renewal; never use it as a browser key.
-
-Configure SMTP and `{TOKEN}` email links at the provider:
+Configure SMTP and confirmation/recovery links at the provider using
 `https://riparim.com/auth/bestaetigen?type=signup&token_hash={TOKEN}` and
 `https://riparim.com/auth/bestaetigen?type=recovery&token_hash={TOKEN}`.
-Google uses the exact app callback `https://riparim.com/auth/bestaetigen?anbieter=google`
-with server-verified state/PKCE and independent Google identity proof.
-Use the isolated site's origin for tests. Confirmation requires a new login.
-Recovery grants only a reset capability until the provider accepts the signed token.
-PocketBase logout revokes the app grant; upstream tokens expire under provider rules.
-Each login has a private nonce; password sessions inherit no Google authorization.
-Supabase cookie verification shares a 1.5-second request budget without SDK retries;
-provider failures preserve cookies and grant no private access.
+Google callback is `https://riparim.com/auth/bestaetigen?anbieter=google` with verified
+state/PKCE and independent Google identity proof. Tests use their isolated origin.
+Confirmation requires new login; recovery grants only reset capability until token
+acceptance. Password sessions inherit no Google rights. PocketBase logout revokes the
+app grant; upstream tokens expire separately. Provider failure grants no private access.
 
-## Stable identity mapping
+## Map existing accounts
 
-`auth_identities` maps exact **provider + normalized HTTPS issuer + subject** to an
-opaque internal account ID. Preserve complete issuer paths/ports; adapters use origins.
-Historical Supabase keys and private file paths remain unchanged.
-Matching email or editable metadata proves neither identity nor rights.
+Link exact **provider + normalized HTTPS issuer + subject** to the existing internal
+account ID. Keep full issuer paths/ports, historical Supabase keys and private-file
+paths. Email matches or editable metadata prove no identity or rights.
 
 Use server/offline `linkAccountIdentity(source, target, verify)` only after independently
-verifying both exact identities against an approved mapping. Confirm its returned
-internal ID. The function never reassigns/merges accounts; adding a mapping revokes
-app sessions. Preserve roles, blocks, deletion tombstones and all ownership.
-Complete every mapping, including blocked/deleting accounts, before target login.
-After deletion, mappings/tombstones remain so surviving tokens cannot regain rights.
-Started deletion grants stay issuer-bound; continue them at their original provider
-or through verified administrative mapping. Retire old provider accounts separately.
+proving both exact identities against an approved mapping; check its returned account ID.
+It never merges/reassigns accounts and revokes app sessions. Map every blocked/deleting
+account before target login; preserve roles, ownership, blocks and deletion tombstones.
+Mappings/tombstones remain after deletion to reject surviving tokens. Continue started
+deletion at its original issuer or through verified administrative mapping. Retire old
+provider accounts separately.
 
-## Safe cutover and private operator recovery
+## Cut over or recover operator access
 
-First disable the existing profile, verify a draft target, then deliberately enable
-it. Changing an enabled provider/origin in one request is denied.
-Before any mapping, stop both writers and back up [app files and provider data](backups.md).
-Admin lists do not export hashes; without proven hash import/version compatibility,
-plan password resets. Existing backups cover Supabase, not PocketBase.
+Follow [provider switching](provider-switch.md) for authorization, paused writers,
+backups, identity acceptance and return. Back up provider data separately: the existing
+Supabase backups do not cover PocketBase. Admin lists export no hashes; without proven
+version/hash-import compatibility, use controlled password resets.
 
-There is no public bootstrap route. Disabling login on Node/owned Worker also removes
-web-admin configuration access. An authorized operator uses a protected/offline
-procedure with the service stopped: independently verify/map accounts, preserve both
-SQLite files/WAL/SHM, configure target runtime bindings and separately accept SMTP,
-Google and callbacks. The following example enables an **already mapped and verified**
-PocketBase target; replace public placeholders/path. Secrets remain in `runtime.env`.
-The completeness guard does not replace independent identity proof.
+Disable the old profile, verify a draft target, then enable it deliberately. Changing an
+enabled provider/origin together is denied. Disabled login also removes web-admin access
+on Node/owned Worker; there is no public bootstrap. An authorized operator must use a
+protected offline procedure with the service stopped, preserve both SQLite/WAL/SHM
+files, and accept SMTP/Google/callbacks separately.
+
+This recipe enables an **already mapped and verified** PocketBase target. Replace public
+placeholders/path; keep secrets in `runtime.env`. Its completeness guard is not identity proof.
 
 ```sh
 node --input-type=module <<'NODE'
@@ -101,13 +89,8 @@ finally{database.close();}
 NODE
 ```
 
-For D1, apply the equivalent reviewed configuration/grant transaction with writers
-blocked and verified backups. Restart the verified release, reject old cookie jars
-and require new login; check admin, ownership, blocks, private files and deletion.
-Keep old email timers disabled. On failure, preserve data/mappings and use
-[provider switching](provider-switch.md); after cutover, rollback requires an
-identity-aware version. Applied migrations `0016`/`0018` stay unchanged.
-Tests: account-identity, Auth-provider, PocketBase and Node suites use isolated
-accounts; they do not prove real Google, inbox delivery or production hash migration.
-Sources: [PocketBase Auth](https://pocketbase.io/docs/authentication/),
-[Supabase restore](https://supabase.com/docs/guides/self-hosting/restore-from-platform).
+For D1, use an equivalent reviewed configuration/grant transaction with writers blocked
+and verified backups. Restart the verified release, reject old cookies and require new
+login. Check admin/ownership/blocks/private access/deletion; keep old mail timers disabled.
+Preserve mappings/data on failure; rollback needs an identity-aware version. Never change
+applied migrations. Isolated tests do not prove real Google, inbox receipt or hash migration.

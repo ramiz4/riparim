@@ -1,38 +1,25 @@
 # Historical evidence
 
-These are compact records of past work, not current operating instructions. Their dates, measurements and limitations describe the state observed then. Use the [active guides](../README.md) and current configuration for new work.
+These dated records describe past observations. Use [active guides](../README.md) and current configuration for new work.
 
 ## Catalogue and Google
 
-- [Catalogue history](catalogue-history.md): completed imports and source decisions.
-- [Daily research, October 10](research-daily-import-2026-10-10.md): candidate and identity evidence.
-- [Google cost audit, October 11](google-places-cost-audit-2026-10-11.md): observed requests, costs and enforcement limits.
+- [Catalogue history](catalogue-history.md) · [Daily research](research-daily-import-2026-10-10.md)
+- [Google cost audit](google-places-cost-audit-2026-10-11.md)
 
 ## Product and performance
 
-- [Customer flow history](customer-flow-history.md): previous QA coverage and release boundaries.
-- [UI audit, October 10](ui-performance-audit-2026-10-10.md): asset measurements and pending production measurement.
-- [Static public release research](research-static-public-release.md) and [review](review-static-public-release.md): original findings, corrections and limits.
-- [Free-tier CPU](free-tier-cpu.md) and [private-page CPU investigation](issue-149-cpu.md): distinct live and local measurements.
+- [Customer-flow QA](customer-flow-history.md) · [UI audit](ui-performance-audit-2026-10-10.md)
+- [Public CPU](free-tier-cpu.md) · [Private-page CPU](issue-149-cpu.md)
+- [Static-release research](research-static-public-release.md) · [Independent review](review-static-public-release.md)
 
-## CI
+## CI and production
 
-- [CI performance](ci-performance.md): controlled before/after measurements and raw results.
-- [Tool installations](ci-tool-installs.md): isolated installation measurements.
-- [Test concurrency](test-suite-concurrency.md): resource and runtime evidence.
-- [Worker shutdown](worker-test-shutdown.md): response cleanup diagnosis.
-- [Release queue](release-queue-analysis.md): observed waits and retry behavior.
+- [CI performance](ci-performance.md) · [Tool installs](ci-tool-installs.md) · [Test concurrency](test-suite-concurrency.md)
+- [Worker shutdown](worker-test-shutdown.md) · [Release waits](release-queue-analysis.md)
+- [Data transfer](data-transfer-2026-10-04.md) · [Domain cutover](domain-cutover-2026-10-05.md)
+- [Release handover](release-handover-2026-10-05.md) · [Sites retirement](sites-retirement-2026-10-05.md) · [Schema rollouts](schema-rollouts.md)
 
-## Production transition
-
-- [Data transfer, October 4](data-transfer-2026-10-04.md).
-- [Domain cutover, October 5](domain-cutover-2026-10-05.md).
-- [Release handover, October 5](release-handover-2026-10-05.md).
-- [Sites retirement, October 5](sites-retirement-2026-10-05.md).
-- [Schema rollouts](schema-rollouts.md): previous migration and compatibility decisions.
-
-## Original evidence
-
-Machine-readable manifests, audit datasets and source records remain at their existing paths. The summaries link relevant evidence. Protected backups and private account data remain outside Git.
-
-The complete documentation before this reorganization is retained in Git at [`281c130`](https://github.com/ramiz4/riparim/tree/281c130e845758275c0db4655008dbda12fc6c84/docs), including the [original daily research](https://github.com/ramiz4/riparim/blob/281c130e845758275c0db4655008dbda12fc6c84/data/research-daily-import-2026-10-10.md). For exact historical wording, open that snapshot or run `git show 281c130:<original-path>`.
+Each summary links its [complete pre-pass record](https://github.com/ramiz4/riparim/tree/bb20bb86051f3e7f82b412f0f6604ff6e460efb4/docs/archive). [Before the first reorganization](https://github.com/ramiz4/riparim/tree/281c130e845758275c0db4655008dbda12fc6c84/docs)
+also retains the [original daily research](https://github.com/ramiz4/riparim/blob/281c130e845758275c0db4655008dbda12fc6c84/data/research-daily-import-2026-10-10.md).
+Raw manifests/datasets keep their existing paths; protected backups stay outside Git.

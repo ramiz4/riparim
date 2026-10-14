@@ -1,21 +1,18 @@
 # Review email delivery
 
-Moderation stores an outbox event and awaits its first send attempt; delivery failure
-does not undo the decision. Retries are **manual and individual**: one initial attempt
-plus at most five retries, after 1/5/15/30/60 minutes. No app cron, timer, batch drain
-or automatic provider fallback. [The outbox](../../lib/notifications/outbox.ts) enforces
-leases, cooldown and attempt budget together.
+A moderation decision records its email and awaits one send attempt; failed delivery
+does not undo moderation. Retries are **manual, one event at a time**: at most five,
+after 1/5/15/30/60 minutes. No app cron, timer, batch drain or automatic fallback.
 
-## Configuration
+## Configure delivery
 
-| Runtime        | Transport              | Protected values                                                  |
+| Runtime        | Transport              | Protected configuration                                           |
 | -------------- | ---------------------- | ----------------------------------------------------------------- |
 | Worker or Node | Resend (default)       | `RESEND_API_KEY`, `TRANSACTIONAL_EMAIL_FROM`, HTTPS `SITE_ORIGIN` |
 | Node only      | `EMAIL_TRANSPORT=smtp` | `SMTP_URL`, `SMTP_SECRET_ORIGIN`, sender/origin                   |
 
-SMTP selection in Worker blocks new events before network access. Never put SMTP
-credentials into Worker deployment secrets. Both paths require bound Auth admin
-credentials to verify the account's confirmed recipient.
+Both need bound Auth admin credentials to verify the confirmed recipient. Worker SMTP
+blocks new events before network access; put no SMTP credentials in Worker secrets.
 
 ```dotenv
 EMAIL_TRANSPORT=smtp
@@ -25,48 +22,38 @@ TRANSACTIONAL_EMAIL_FROM=Riparim <no-reply@auth.example.test>
 SITE_ORIGIN=https://riparim.example.test
 ```
 
-Encode URL credentials. Their binding must match exact protocol/host/explicit port;
-no query, fragment or custom options. `smtps` uses TLS immediately; `smtp` requires
-STARTTLS. Certificates are verified, minimum TLS 1.2. Only numeric loopback
-`127.0.0.1`/`::1` without credentials may be plaintext; `localhost` is no exception.
-Configure internal CAs in Node's protected trust store. Authorize the sender/domain
-and verify SPF/DKIM/DMARC and quotas separately. Network stages time out at eight
-seconds, the whole connection at 20; no pools or automatic SMTP requeue.
+Encode URL credentials. Binding must match exact protocol/host/explicit port, without
+query, fragment or custom options. `smtps` uses TLS; `smtp` requires STARTTLS. Certificates
+are verified (TLS ≥1.2). Only credential-free numeric loopback `127.0.0.1`/`::1` may use
+plaintext; `localhost` does not qualify. Configure internal CAs in protected Node trust.
+Authorize sender/domain and verify SPF/DKIM/DMARC, quotas and actual receipt separately.
 
-## Retry and unknown acceptance
+## Retry or switch
 
-Before sending, the outbox freezes transport, credential binding and original
-request bytes. SMTP also freezes complete MIME bytes/Message-ID. Changed contacts
-or credential scopes block retries; changing language/sender never rewrites a started
-message. Started historical `transport=NULL` events belong to Resend.
+1. Choose a [verified release](releases.md) with its additive mail migration; preserve
+   historical events. Stop/drain delivery writers under [provider switching](provider-switch.md).
+2. Complete/reconcile started events with their original transport/credentials. Only
+   new/unstarted events may adopt new settings. Changed contacts or credential scopes
+   block retry; changed sender/language cannot rewrite started messages.
+3. Verify TLS, credentials, sender and real receipt with isolated accounts. New mail
+   uses confirmed DE/SQ/EN preference; historical bytes remain frozen.
+4. Disable old timers/crons. Retry a single eligible event with
+   `npm run notifications:node -- <event-id>` in source, or the
+   [packaged Node command](node.md). Restoring an old provider requires its original scope.
 
-- Resend retries preserve bytes/event key within 23 hours (provider window: 24 hours).
-- SMTP has no provider idempotency. `smtp_in_flight` is persisted before connecting.
-- Only complete SMTP AUTH/envelope/DATA rejection proves nonacceptance: 4xx backs off,
-  5xx remains blocked for controlled repair. An incomplete reply or mere response
-  code does not prove rejection.
-- Socket loss, timeout, process/lease loss and lost acknowledgment become `unknown`.
-  Administrative retry cannot resend them. Reconcile Message-ID with relay logs;
-  do not delete events or reset status to force delivery.
-- Positive acceptance proves handoff, not inbox delivery. Stored success removes
-  private payload/MIME content. There is no exactly-once guarantee.
+## Handle uncertain acceptance
 
-## Switch or retry
+The [outbox](../../lib/notifications/outbox.ts) preserves original request/MIME bytes,
+Message-ID and binding. Started historical events without a transport belong to Resend.
 
-1. Prepare a [verified release](releases.md) and its additive migration
-   `0017_mail_transports.sql`; preserve historical events, no backfill required.
-2. Stop/drain old delivery writers during [provider switching](provider-switch.md).
-   Complete/reconcile started events under their original transport/credentials;
-   only new/unstarted events may adopt the new configuration.
-3. Verify TLS, credentials, sender and actual receipt with isolated accounts.
-   The protected notification API exposes only technical errors.
-4. Keep old timers/crons disabled. In a source build, retry one event with
-   `npm run notifications:node -- <event-id>`; packaged command is in [Node operations](node.md).
-5. Returning to a previous provider restores its original scope; `unknown` stays blocked.
+- Resend retries keep identical bytes/key for at most 23 hours (provider window: 24).
+- SMTP has no provider idempotency. Only complete AUTH/envelope/DATA rejection proves
+  nonacceptance: 4xx backs off; 5xx stays blocked for controlled repair.
+- Socket loss, timeout, incomplete replies or process/lease loss become `unknown`.
+  Administrative retry cannot resend them. Reconcile Message-ID against relay logs;
+  never delete/reset events to force sending.
+- Positive acceptance means handoff, not inbox receipt. There is no exactly-once guarantee.
 
-New messages use the confirmed DE/SQ/EN preference and HTML without generated
-plaintext. Frozen historical parts remain identical on retries.
-Local SMTP/TLS/outbox tests cover rejection, lost acknowledgments and concurrency;
-they send no real email. Provider-template activation is separate [Auth email templates](auth-email-templates.md).
-Sources: [SMTP](https://nodemailer.com/smtp),
+Local tests send no real email. [Auth template activation](auth-email-templates.md) is
+separate. Provider references: [SMTP](https://nodemailer.com/smtp) and
 [Resend idempotency](https://resend.com/docs/dashboard/emails/idempotency-keys).

@@ -1,43 +1,34 @@
 # Codebase language
 
-Use English for owned filenames, identifiers, comments, docs, test descriptions,
-technical diagnostics and internal research/import commentary throughout the tracked
-tree, including fixtures, examples, config and manifests. Unicode is valid.
+Write owned filenames, identifiers, comments, docs, tests, diagnostics, research
+and manifest commentary in English throughout the tracked tree. Unicode is valid.
+Keys and surrounding code stay English even when displayed text is translated.
 
 ## Preserve presentation and contracts
 
-- UI and email copy remain German (`de`, default), Albanian (`sq`) and English
-  (`en`). Keep display copy in typed `lib/i18n/` catalogs/explicit email templates;
-  keys and surrounding code stay English. Classify responses by codes/status,
-  never by human-readable text.
-- `legacy-messages.ts` and `legacy-scope-messages.ts` preserve German API messages;
-  localized client messages use existing error/message codes and HTTP statuses.
-- Preserve public URLs, query keys, hashes, cookies, issued links, callback URLs,
+- UI/email copy supports DE/SQ/EN in typed `lib/i18n/` catalogs or explicit templates.
+  Classify responses by codes/status, never human-readable text. Keep German legacy
+  API messages in `legacy-messages.ts`/`legacy-scope-messages.ts`; clients use message codes.
+- Preserve public URLs, queries/hashes, cookies, issued links, callback paths,
   stored service/evidence/sentinel values and deletion confirmations. Map English
-  internals at boundaries (`lib/i18n/locale.ts`, `canonical-values.ts`).
-  `/auth/bestaetigen` uses `/auth/confirm` without redirecting sensitive parameters.
-- Preserve original business names, addresses, source URLs/titles, quoted evidence,
-  user/provider content and catalogue display fields byte for byte. Put preserved
-  labels/wire values in code or quotes in docs. Source expressions and CSV headers
-  are explicit input adapters (`german-source-patterns.ts`). German operator-mail
-  copy lives in `scripts/lib/backup-monitor-messages.mjs`, separate from logic.
-- Translate owned manifest notes/reasons/methods/limitations, preserving IDs,
-  coordinates, timestamps, provenance and approval/permission status. Check source
-  hashes/revisions with existing helpers; translation overlays must still match
-  originals. A language edit is no new verification or live import.
-- Keep applied migrations, generated snapshots/lockfiles/bindings, vendor files
-  and existing Git history unchanged. Original opening-hours metadata, excluded
-  record reasons and persisted Google source labels retain validator-compatible
-  bytes; English research commentary remains separate.
+  internals at their boundaries (`locale.ts`, `canonical-values.ts`). The proxy
+  internally rewrites `/auth/bestaetigen` to `/auth/confirm` without redirecting tokens.
+- Keep business names/addresses, source titles/URLs, quoted evidence, user/provider
+  text and catalogue display fields byte for byte. Isolate original labels/wire values
+  in code or quotes; keep source expressions/CSV headers in explicit adapters such
+  as `german-source-patterns.ts`.
+  German operator-mail copy stays in `scripts/lib/backup-monitor-messages.mjs`.
+- Translate owned notes/reasons/methods/limits while preserving IDs, coordinates,
+  timestamps, provenance and approval/permissions. Check source hashes/revisions;
+  language edits are not new verification or live imports.
+- Leave applied migrations, generated snapshots/locks/bindings, vendor files and
+  Git history unchanged. Existing hours metadata, excluded-record reasons and
+  persisted Google labels retain validator-compatible bytes.
 
-## Check changes
+## Check your change
 
-```sh
-npm run language:check
-```
-
-The core suite also runs this bounded regression check. It detects known German
-physical source names and engineering prose; it is not a general language detector.
-Manually review new headings, examples, placeholders and tests. Record justified
-exceptions here; avoid broad first-party directory exemptions. Check Markdown
-anchors/links and keep historical evidence and limitations intact.
+Run `npm run language:check`; the core suite includes it. This bounded regression
+check catches known German source names/prose, not every language error.
+Manually review headings, examples, placeholders and tests; document justified
+exceptions here without broad directory exemptions. Check Markdown links/anchors
+and preserve historical evidence and its limits.
