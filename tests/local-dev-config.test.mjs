@@ -42,8 +42,31 @@ const { default: configure } = await import(
 );
 const originalTarget = process.env.BUILD_TARGET;
 const originalOrigin = process.env.SITE_ORIGIN;
+const originalPort = process.env.RIPARIM_LOCAL_DEV_PORT;
 
 try {
+  process.env.BUILD_TARGET = "cloudflare";
+  delete process.env.SITE_ORIGIN;
+  delete process.env.RIPARIM_LOCAL_DEV_PORT;
+  const defaults = await configure({ command: "serve", mode: "test" });
+  assert.equal(
+    defaults.server.port,
+    5174,
+    "The documented default port is stable",
+  );
+  assert.equal(
+    globalThis.localDevOptions.config({}).vars.SITE_ORIGIN,
+    "http://127.0.0.1:5174",
+    "The default origin matches the dev server",
+  );
+  process.env.RIPARIM_LOCAL_DEV_PORT = "5197";
+  const selected = await configure({ command: "serve", mode: "test" });
+  assert.equal(selected.server.port, 5197);
+  assert.equal(
+    globalThis.localDevOptions.config({}).vars.SITE_ORIGIN,
+    "http://127.0.0.1:5197",
+    "The selected CLI port determines the origin when no override exists",
+  );
   process.env.SITE_ORIGIN = "http://127.0.0.1:5184";
   for (const target of ["cloudflare", "sites"]) {
     process.env.BUILD_TARGET = target;
@@ -124,6 +147,8 @@ try {
   else process.env.BUILD_TARGET = originalTarget;
   if (originalOrigin === undefined) delete process.env.SITE_ORIGIN;
   else process.env.SITE_ORIGIN = originalOrigin;
+  if (originalPort === undefined) delete process.env.RIPARIM_LOCAL_DEV_PORT;
+  else process.env.RIPARIM_LOCAL_DEV_PORT = originalPort;
   delete globalThis.localDevOptions;
 }
 

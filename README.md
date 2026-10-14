@@ -30,11 +30,12 @@ is not on `PATH`, `RIPARIM_GO_BINARY` can point to the executable.
 
 ```sh
 npm run install:ci
-cp .env.example .env
-npm run dev -- --host 127.0.0.1 --port 5174
+npm run dev
 ```
 
-The local UI is available at `http://127.0.0.1:5174`. Auth providers and login options are configured in the protected administration area. SMTP and Google OAuth must be configured and tested at the provider; source code alone does not enable them.
+Local development is available at `http://127.0.0.1:5174`. Startup applies pending local D1 migrations and prepares the existing catalogue and default opening hours before serving the app. It needs no prior build, Cloudflare login or production credentials. Use `npm run dev:setup` to run the same preparation without starting a server. Each worktree has independent state under `.wrangler/state`.
+
+Copy `.env.example` to `.env` only when configuring optional integrations. Auth providers and login options are configured in the protected administration area. SMTP and Google OAuth still need their separate provider setup. For custom ports, use `npm run dev -- --port 5180`; an explicit `SITE_ORIGIN` remains an override. See [local development and recovery](docs/local-development.md) for errors and older databases without migration history.
 
 ### Format code
 
@@ -75,7 +76,7 @@ Husky, such as isolated tool jobs. After a local installation with
 
 `npm run dev` also uses the reviewed catalogue and existing opening-hours import source as default data in the local preview. Existing imported or business-confirmed hours, suppressed imports, and changed profile identities are preserved.
 
-A new worktree needs the local database from the “Database and checks” section before the first page request. The development server uses the same logical D1/R2 bindings as the Sites build; existing migrations must be applied to this local database.
+New worktrees prepare their local database automatically on the first `npm run dev`. The preparation and development server share the same local D1/R2 bindings and persistence path. Older manually migrated databases require the explicit recovery procedure in [local development](docs/local-development.md).
 
 In local development mode, `/anmelden` shows the German UI button “Als Seedy anmelden” (“Sign in as Seedy”). Alternatively, `/dev/anmelden` leads directly to settings without a password; `?weiter=…` preserves a validated internal destination. This entry point and readable seed account data are restricted to the local loopback preview. Setting `REVIEW_MODERATOR_EMAIL=seedy@sites.test` in the ignored `.dev.vars` gives Seedy local administration access.
 
@@ -143,14 +144,13 @@ Migrations live in `drizzle/`. After schema changes:
 npm run db:generate
 ```
 
-For a new local development database, first build the Sites Worker and apply SQL migrations in ascending order. Do not rerun already applied migrations:
+`npm run dev` applies pending checked-in Drizzle migrations using the installed Wrangler and its local migration history. To prepare the database separately:
 
 ```sh
-BUILD_TARGET=sites npm run build
-node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js d1 execute DB --local --config dist/server/wrangler.json --persist-to .wrangler/state --file drizzle/0000_handy_black_queen.sql
+npm run dev:setup
 ```
 
-Repeat the last command for each migration file that is still pending.
+Do not execute individual migration files manually: that bypasses the history needed for safe updates. Applied migrations remain unchanged. See [local development](docs/local-development.md) for legacy databases, failures and data-preserving backups. Production migrations retain the reviewed release/deployment process.
 
 ```sh
 npm test

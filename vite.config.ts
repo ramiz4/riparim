@@ -4,6 +4,10 @@ import { readFileSync } from "node:fs";
 import { defineConfig } from "vite";
 import hostingConfig from "./.openai/hosting.json";
 import { readExecutionProfile } from "./scripts/execution-profile.mjs";
+import {
+  defaultLocalDevPort,
+  localDevelopmentConfiguration,
+} from "./scripts/local-development.mjs";
 import { sites } from "./build/sites-vite-plugin";
 import { connectorPreview } from "./build/connector-preview-plugin.mjs";
 import { vinextLazyHandler } from "./build/vinext-lazy-handler.mjs";
@@ -19,6 +23,13 @@ const managedLinux = readExecutionProfile() === "managed-linux";
 
 export default defineConfig(async ({ command }) => {
   const buildTarget = releaseBuildTarget(process.env.BUILD_TARGET);
+  const local =
+    command === "serve"
+      ? await localDevelopmentConfiguration(process.cwd())
+      : undefined;
+  const localPort = Number(
+    process.env.RIPARIM_LOCAL_DEV_PORT ?? defaultLocalDevPort,
+  );
   // Use Miniflare's local Request.cf placeholder unless fetching is requested.
   process.env.CLOUDFLARE_CF_FETCH_ENABLED ??= "false";
   process.env.WRANGLER_SEND_METRICS ??= "false";
@@ -58,6 +69,7 @@ export default defineConfig(async ({ command }) => {
       ),
     },
     server: {
+      ...(!managedLinux ? { port: localPort, strictPort: true } : {}),
       ...(managedLinux
         ? { host: "0.0.0.0", allowedHosts: ["terminal.local"] }
         : {}),
@@ -83,10 +95,10 @@ export default defineConfig(async ({ command }) => {
         config:
           command === "serve"
             ? () => ({
-                ...sitesBuildConfiguration(hostingConfig),
+                ...local!.wranglerConfig,
                 vars: {
                   SITE_ORIGIN:
-                    process.env.SITE_ORIGIN ?? "http://127.0.0.1:5174",
+                    process.env.SITE_ORIGIN ?? `http://127.0.0.1:${localPort}`,
                 },
                 services: [
                   {
@@ -101,6 +113,7 @@ export default defineConfig(async ({ command }) => {
               : undefined,
         ...(command === "serve"
           ? {
+              persistState: { path: local!.persistPath },
               auxiliaryWorkers: [
                 {
                   config: {

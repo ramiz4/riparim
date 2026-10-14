@@ -1,5 +1,4 @@
 import { readFile, mkdir, writeFile } from "node:fs/promises";
-import { spawnSync } from "node:child_process";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { build } from "esbuild";
@@ -8,8 +7,17 @@ import {
   statementSql,
 } from "./catalogue-release-plan.mjs";
 import { validateOpeningHoursImport } from "./lib/opening-hours-import.mjs";
+import {
+  checkoutRoot,
+  localDevelopmentConfiguration,
+} from "./local-development.mjs";
+import { runLocalD1 } from "./local-d1.mjs";
+import {
+  localErrorCause,
+  redactLocalDiagnostic,
+} from "./local-diagnostics.mjs";
 
-export async function localOpeningHoursSeedSql(root = process.cwd()) {
+export async function localOpeningHoursSeedSql(root = checkoutRoot) {
   const catalogue = JSON.parse(
     await readFile(resolve(root, "data/workshops.json"), "utf8"),
   );
@@ -57,54 +65,14 @@ export async function localOpeningHoursSeedSql(root = process.cwd()) {
   return statements.map(statementSql).join("\n");
 }
 
-export async function seedLocalOpeningHours(root = process.cwd()) {
-  const runtime = resolve(root, ".sites-runtime/local-dev");
+export async function seedLocalOpeningHours(root = checkoutRoot, options = {}) {
+  const local = await localDevelopmentConfiguration(root);
+  const runtime = local.runtimePath;
   await mkdir(runtime, { recursive: true });
-  const config = resolve(runtime, "wrangler.json"),
-    file = resolve(runtime, "opening-hours.sql");
-  await writeFile(
-    config,
-    JSON.stringify({
-      name: "riparim-local-seed",
-      compatibility_date: "2026-05-15",
-      d1_databases: [
-        {
-          binding: "DB",
-          database_name: "site-creator-d1",
-          database_id: "00000000-0000-4000-8000-000000000000",
-          remote: false,
-        },
-      ],
-    }),
-  );
+  const file = resolve(runtime, "opening-hours.sql");
+  await writeFile(local.configPath, JSON.stringify(local.wranglerConfig));
   await writeFile(file, await localOpeningHoursSeedSql(root));
-  const result = spawnSync(
-    process.execPath,
-    [
-      "--import",
-      resolve(root, "scripts/sites-env.mjs"),
-      resolve(root, "node_modules/wrangler/bin/wrangler.js"),
-      "d1",
-      "execute",
-      "DB",
-      "--local",
-      "--config",
-      config,
-      "--persist-to",
-      resolve(root, ".wrangler/state"),
-      "--file",
-      file,
-    ],
-    { cwd: root, encoding: "utf8" },
-  );
-  await writeFile(
-    resolve(runtime, "seed.log"),
-    `${result.stdout ?? ""}\n${result.stderr ?? ""}`,
-  );
-  if (result.error || result.status !== 0)
-    throw Error(
-      "Local D1 seed failed. Prepare the local database as described in README.md; see .sites-runtime/local-dev/seed.log.",
-    );
+  await runLocalD1(local, "seed", ["execute", "DB", "--file", file], options);
   console.log(
     "Local development: catalogue and default opening hours prepared.",
   );
@@ -112,5 +80,18 @@ export async function seedLocalOpeningHours(root = process.cwd()) {
 if (
   process.argv[1] &&
   import.meta.url === pathToFileURL(resolve(process.argv[1])).href
-)
-  await seedLocalOpeningHours();
+) {
+  try {
+    await seedLocalOpeningHours();
+  } catch (error) {
+    const cause = localErrorCause(error);
+    console.error(
+      redactLocalDiagnostic(
+        cause.startsWith("Local development ")
+          ? cause
+          : `Local development seed failed: ${cause}`,
+      ),
+    );
+    process.exitCode = 1;
+  }
+}
