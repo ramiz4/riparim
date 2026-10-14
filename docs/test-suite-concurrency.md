@@ -51,13 +51,13 @@ Checkout und auf demselben Ubuntu-Runner: Node.js 24.21.0, vier CPUs,
 16.766.414.848 Bytes RAM. Gemessener Merge-Commit:
 `4e7be6ccf67d07fc09938ca0d33ae52b862a46e8`, PR-HEAD `dd046d0`.
 
-| Parallelität | Reihenfolge | Testlaufzeit | GNU-time-RSS (KiB) |
-| --- | --- | ---: | ---: |
-| 1 | erster Lauf | 77,67 s | 602.380 |
-| 2 | zweiter Lauf | 45,17 s | 602.084 |
-| 4 | dritter Lauf | 36,93 s | 605.520 |
-| 1 | Wiederholung | 70,88 s | 604.356 |
-| 2 | Wiederholung | 45,09 s | 608.324 |
+| Parallelität | Reihenfolge  | Testlaufzeit | GNU-time-RSS (KiB) |
+| ------------ | ------------ | -----------: | -----------------: |
+| 1            | erster Lauf  |      77,67 s |            602.380 |
+| 2            | zweiter Lauf |      45,17 s |            602.084 |
+| 4            | dritter Lauf |      36,93 s |            605.520 |
+| 1            | Wiederholung |      70,88 s |            604.356 |
+| 2            | Wiederholung |      45,09 s |            608.324 |
 
 Alle fünf vollständigen Läufe bestanden: 380 erfolgreiche Prozess-Endmeldungen
 (75 Suites plus i18n-Sperre je Lauf), keine Fehler oder beobachteten OOM-Abbrüche.

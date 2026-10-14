@@ -1,5 +1,53 @@
 "use client";
-import {Building2,KeyRound,Star,Users,Wrench} from "lucide-react";
-import {useI18n} from "@/lib/i18n/client";
-import {LocaleAnchor} from "@/components/locale-anchor";
-export function AdminNavigation({active}:{active:"workshops"|"reviews"|"users"|"login"|"business"}){const {t}=useI18n();return <nav className="admin-navigation wrap" aria-label={t("management.administration")}><LocaleAnchor href="/verwaltung" aria-current={active==="workshops"?"page":undefined}><Wrench size={17} aria-hidden="true"/>{t("management.workshops")}</LocaleAnchor><LocaleAnchor href="/verwaltung/bewertungen" aria-current={active==="reviews"?"page":undefined}><Star size={17} aria-hidden="true"/>{t("management.moderateReviews")}</LocaleAnchor><LocaleAnchor href="/verwaltung/benutzer" aria-current={active==="users"?"page":undefined}><Users size={17} aria-hidden="true"/>{t("management.users")}</LocaleAnchor><LocaleAnchor href="/verwaltung/betriebe" aria-current={active==="business"?"page":undefined}><Building2 size={17} aria-hidden="true"/>{t("management.businesses")}</LocaleAnchor><LocaleAnchor href="/verwaltung/anmeldung" aria-current={active==="login"?"page":undefined}><KeyRound size={17} aria-hidden="true"/>{t("management.loginRegistration")}</LocaleAnchor></nav>;}
+import { Building2, KeyRound, Star, Users, Wrench } from "lucide-react";
+import { useI18n } from "@/lib/i18n/client";
+import { LocaleAnchor } from "@/components/locale-anchor";
+export function AdminNavigation({
+  active,
+}: {
+  active: "workshops" | "reviews" | "users" | "login" | "business";
+}) {
+  const { t } = useI18n();
+  return (
+    <nav
+      className="admin-navigation wrap"
+      aria-label={t("management.administration")}
+    >
+      <LocaleAnchor
+        href="/verwaltung"
+        aria-current={active === "workshops" ? "page" : undefined}
+      >
+        <Wrench size={17} aria-hidden="true" />
+        {t("management.workshops")}
+      </LocaleAnchor>
+      <LocaleAnchor
+        href="/verwaltung/bewertungen"
+        aria-current={active === "reviews" ? "page" : undefined}
+      >
+        <Star size={17} aria-hidden="true" />
+        {t("management.moderateReviews")}
+      </LocaleAnchor>
+      <LocaleAnchor
+        href="/verwaltung/benutzer"
+        aria-current={active === "users" ? "page" : undefined}
+      >
+        <Users size={17} aria-hidden="true" />
+        {t("management.users")}
+      </LocaleAnchor>
+      <LocaleAnchor
+        href="/verwaltung/betriebe"
+        aria-current={active === "business" ? "page" : undefined}
+      >
+        <Building2 size={17} aria-hidden="true" />
+        {t("management.businesses")}
+      </LocaleAnchor>
+      <LocaleAnchor
+        href="/verwaltung/anmeldung"
+        aria-current={active === "login" ? "page" : undefined}
+      >
+        <KeyRound size={17} aria-hidden="true" />
+        {t("management.loginRegistration")}
+      </LocaleAnchor>
+    </nav>
+  );
+}

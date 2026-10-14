@@ -1,6 +1,6 @@
-import {nativeIdentityEnabled} from "@/lib/runtime/env";
-import {publicAccountName} from "@/lib/account-name";
-import {validatedReturnPath} from "@/lib/auth/return-path";
+import { nativeIdentityEnabled } from "@/lib/runtime/env";
+import { publicAccountName } from "@/lib/account-name";
+import { validatedReturnPath } from "@/lib/auth/return-path";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -61,7 +61,9 @@ export function chatGPTSignOutPath(returnTo = "/"): string {
   return `${SIGN_OUT_PATH}?return_to=${encodeURIComponent(safeReturnTo)}`;
 }
 
-function safeRelativeReturnPath(value: string): string {return validatedReturnPath(value,"https://app.local","/");}
+function safeRelativeReturnPath(value: string): string {
+  return validatedReturnPath(value, "https://app.local", "/");
+}
 
 function safeDecodeURIComponent(value: string): string | null {
   try {

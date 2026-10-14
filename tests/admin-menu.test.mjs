@@ -1,135 +1,430 @@
-import assert from 'node:assert/strict';
-import {mkdir,writeFile} from 'node:fs/promises';
-import {createRequire} from 'node:module';
-import {JSDOM,VirtualConsole} from 'jsdom';
+import assert from "node:assert/strict";
+import { mkdir, writeFile } from "node:fs/promises";
+import { createRequire } from "node:module";
+import { JSDOM, VirtualConsole } from "jsdom";
 
-const dom=new JSDOM('<div id="root"></div>',{url:'https://riparim.test/',pretendToBeVisual:true,virtualConsole:new VirtualConsole()});
-for(const key of ['window','document','navigator','HTMLElement','HTMLFormElement','HTMLInputElement','HTMLSelectElement','Option','DocumentFragment','Element','Node','NodeFilter','MutationObserver','CustomEvent','Event','MouseEvent','KeyboardEvent','getComputedStyle'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});
-globalThis.requestAnimationFrame=dom.window.requestAnimationFrame.bind(dom.window);
-globalThis.cancelAnimationFrame=dom.window.cancelAnimationFrame.bind(dom.window);
-globalThis.IS_REACT_ACT_ENVIRONMENT=true;
+const dom = new JSDOM('<div id="root"></div>', {
+  url: "https://riparim.test/",
+  pretendToBeVisual: true,
+  virtualConsole: new VirtualConsole(),
+});
+for (const key of [
+  "window",
+  "document",
+  "navigator",
+  "HTMLElement",
+  "HTMLFormElement",
+  "HTMLInputElement",
+  "HTMLSelectElement",
+  "Option",
+  "DocumentFragment",
+  "Element",
+  "Node",
+  "NodeFilter",
+  "MutationObserver",
+  "CustomEvent",
+  "Event",
+  "MouseEvent",
+  "KeyboardEvent",
+  "getComputedStyle",
+])
+  Object.defineProperty(globalThis, key, {
+    value: dom.window[key],
+    configurable: true,
+  });
+globalThis.requestAnimationFrame = dom.window.requestAnimationFrame.bind(
+  dom.window,
+);
+globalThis.cancelAnimationFrame = dom.window.cancelAnimationFrame.bind(
+  dom.window,
+);
+globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 // jsdom has no layout; these tests exercise navigation, not element sizing.
-globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
-globalThis.fetch=async(path,options)=>{
- assert(!options?.method||options.method==='GET','navigation fixtures never mutate data');
- const fixtures={'/api/notifications':{notifications:[],nextCursor:null,configured:true},'/api/workshops?admin=1':{workshops:[]},'/api/visits?moderation=1':{visits:[],pendingCount:0,nextCursor:null},'/api/auth-settings':{config:null},'/api/users?page=1&perPage=20':{users:[],page:1,perPage:20,hasMore:false,configured:true}};
- assert(Object.hasOwn(fixtures,path),`unexpected fixture request: ${path}`);
- return new Response(JSON.stringify(fixtures[path]),{headers:{'Content-Type':'application/json'}});
+globalThis.ResizeObserver = class {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
+globalThis.fetch = async (path, options) => {
+  assert(
+    !options?.method || options.method === "GET",
+    "navigation fixtures never mutate data",
+  );
+  const fixtures = {
+    "/api/notifications": {
+      notifications: [],
+      nextCursor: null,
+      configured: true,
+    },
+    "/api/workshops?admin=1": { workshops: [] },
+    "/api/visits?moderation=1": {
+      visits: [],
+      pendingCount: 0,
+      nextCursor: null,
+    },
+    "/api/auth-settings": { config: null },
+    "/api/users?page=1&perPage=20": {
+      users: [],
+      page: 1,
+      perPage: 20,
+      hasMore: false,
+      configured: true,
+    },
+  };
+  assert(Object.hasOwn(fixtures, path), `unexpected fixture request: ${path}`);
+  return new Response(JSON.stringify(fixtures[path]), {
+    headers: { "Content-Type": "application/json" },
+  });
 };
 
-const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
-const bundle=await build({stdin:{contents:`export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {SiteHeader} from './components/site-header';export {default as AdminPanel} from './app/[locale]/verwaltung/panel';export {default as AdminReviews} from './app/[locale]/verwaltung/bewertungen/reviews';export {default as AdminUsers} from './app/[locale]/verwaltung/benutzer/users';export {default as AuthSetup} from './app/[locale]/verwaltung/anmeldung/setup';`,resolveDir:process.cwd(),loader:'tsx'},bundle:true,platform:'node',format:'esm',outfile:'.test-runtime/admin-menu/header.mjs',write:false,packages:'external',loader:{'.css':'empty'},define:{'process.env.__VINEXT_HAS_PAGES_ROUTER':'"false"','process.env.__VINEXT_HAS_CLIENT_REWRITES':'"false"'},plugins:[{name:'app-router-boundary',setup(b){
- b.onResolve({filter:/^next\/link$/},()=>({path:new URL('../node_modules/vinext/dist/shims/link.js',import.meta.url).pathname}));
- // Exercise the real Link and Radix menu at the client-router boundary.
- b.onResolve({filter:/^\.\/navigation\.js$/},args=>args.importer.endsWith('/shims/link.js')?{path:'client-router',namespace:'fixture'}:undefined);
- b.onLoad({filter:/.*/,namespace:'fixture'},()=>({contents:'export function navigateClientSide(href){globalThis.routerAttempts.push(href);return Promise.resolve();}',loader:'js'}));
-}}]});
-await mkdir('.test-runtime/admin-menu',{recursive:true});
-await writeFile('.test-runtime/admin-menu/header.mjs',bundle.outputFiles[0].contents);
-const {createElement,act}=await import('react');
-const {createRoot}=await import('react-dom/client');
-const {SiteHeader,AdminPanel,AdminReviews,AdminUsers,AuthSetup,I18nProvider,getMessages}=await import(new URL('../.test-runtime/admin-menu/header.mjs',import.meta.url));
-window[Symbol.for('vinext.navigationRuntime')]={bootstrap:{routeManifest:null,rsc:undefined},functions:{navigate:()=>new Promise(()=>{})}};
-globalThis.routerAttempts=[];
-const documents=[];
-document.addEventListener('click',event=>{
- const link=event.target.closest('a');
- if(link&&!event.defaultPrevented){const url=new URL(link.href);documents.push(url.pathname+url.search+url.hash);event.preventDefault();}
+const { build } = createRequire(new URL("../package.json", import.meta.url))(
+  "esbuild",
+);
+const bundle = await build({
+  stdin: {
+    contents: `export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {SiteHeader} from './components/site-header';export {default as AdminPanel} from './app/[locale]/verwaltung/panel';export {default as AdminReviews} from './app/[locale]/verwaltung/bewertungen/reviews';export {default as AdminUsers} from './app/[locale]/verwaltung/benutzer/users';export {default as AuthSetup} from './app/[locale]/verwaltung/anmeldung/setup';`,
+    resolveDir: process.cwd(),
+    loader: "tsx",
+  },
+  bundle: true,
+  platform: "node",
+  format: "esm",
+  outfile: ".test-runtime/admin-menu/header.mjs",
+  write: false,
+  packages: "external",
+  loader: { ".css": "empty" },
+  define: {
+    "process.env.__VINEXT_HAS_PAGES_ROUTER": '"false"',
+    "process.env.__VINEXT_HAS_CLIENT_REWRITES": '"false"',
+  },
+  plugins: [
+    {
+      name: "app-router-boundary",
+      setup(b) {
+        b.onResolve({ filter: /^next\/link$/ }, () => ({
+          path: new URL(
+            "../node_modules/vinext/dist/shims/link.js",
+            import.meta.url,
+          ).pathname,
+        }));
+        // Exercise the real Link and Radix menu at the client-router boundary.
+        b.onResolve({ filter: /^\.\/navigation\.js$/ }, (args) =>
+          args.importer.endsWith("/shims/link.js")
+            ? { path: "client-router", namespace: "fixture" }
+            : undefined,
+        );
+        b.onLoad({ filter: /.*/, namespace: "fixture" }, () => ({
+          contents:
+            "export function navigateClientSide(href){globalThis.routerAttempts.push(href);return Promise.resolve();}",
+          loader: "js",
+        }));
+      },
+    },
+  ],
+});
+await mkdir(".test-runtime/admin-menu", { recursive: true });
+await writeFile(
+  ".test-runtime/admin-menu/header.mjs",
+  bundle.outputFiles[0].contents,
+);
+const { createElement, act } = await import("react");
+const { createRoot } = await import("react-dom/client");
+const {
+  SiteHeader,
+  AdminPanel,
+  AdminReviews,
+  AdminUsers,
+  AuthSetup,
+  I18nProvider,
+  getMessages,
+} = await import(
+  new URL("../.test-runtime/admin-menu/header.mjs", import.meta.url)
+);
+window[Symbol.for("vinext.navigationRuntime")] = {
+  bootstrap: { routeManifest: null, rsc: undefined },
+  functions: { navigate: () => new Promise(() => {}) },
+};
+globalThis.routerAttempts = [];
+const documents = [];
+document.addEventListener("click", (event) => {
+  const link = event.target.closest("a");
+  if (link && !event.defaultPrevented) {
+    const url = new URL(link.href);
+    documents.push(url.pathname + url.search + url.hash);
+    event.preventDefault();
+  }
 });
 
-const root=createRoot(document.getElementById('root'));
-async function render(email,isAdmin,provider='Google'){await act(async()=>root.render(fixtureMessages(createElement(SiteHeader,{account:{email,displayName:'Fixture account',provider},isAdmin}))));}
-async function openMenu(){
- const trigger=document.querySelector('[aria-label="Benutzermenü öffnen"]');
- await act(async()=>trigger.dispatchEvent(new MouseEvent('pointerdown',{bubbles:true,cancelable:true,button:0})));
- assert(document.querySelector('[role="menu"]'),'the real user menu opens');
+const root = createRoot(document.getElementById("root"));
+async function render(email, isAdmin, provider = "Google") {
+  await act(async () =>
+    root.render(
+      fixtureMessages(
+        createElement(SiteHeader, {
+          account: { email, displayName: "Fixture account", provider },
+          isAdmin,
+        }),
+      ),
+    ),
+  );
+}
+async function openMenu() {
+  const trigger = document.querySelector('[aria-label="Benutzermenü öffnen"]');
+  await act(async () =>
+    trigger.dispatchEvent(
+      new MouseEvent("pointerdown", {
+        bubbles: true,
+        cancelable: true,
+        button: 0,
+      }),
+    ),
+  );
+  assert(document.querySelector('[role="menu"]'), "the real user menu opens");
 }
 
-try{
- const destinations=[['Meine Betriebe','/betriebe'],['Meine Betriebsanträge','/antraege'],['Meine Bewertungen','/bewertungen'],['Einstellungen','/einstellungen']];
- for(const [email,isAdmin] of [['customer@example.test',false],['first-admin@example.test',true],['second-admin@example.test',true]]){
-  await render(email,isAdmin);
-  for(const [label,path] of [...destinations,...(isAdmin?[['Verwaltung','/verwaltung']]:[])]){
-   for(const input of ['click','Enter']){
-    await openMenu();
-    const identity=document.querySelector('.user-menu-identity');
-    const emailLink=identity.querySelector('a');
-    assert(emailLink,'the email has an explicit link boundary instead of relying on browser auto-linking');
-    assert.equal(emailLink.getAttribute('href'),`mailto:${email}`);
-    assert.equal(emailLink.textContent,email,'only the email belongs to the mailto link');
-    assert(!identity.querySelector('strong').closest('a'),'the full name remains plain text');
-    assert(!identity.querySelector('small').closest('a'),'the role remains plain text');
-    const items=[...document.querySelectorAll('[role="menuitem"]')];
-    assert.equal(items.filter(node=>node.textContent==='Verwaltung').length,isAdmin?1:0,'only admins receive the single management entry');
-    assert(!items.some(node=>node.textContent==='Bewerten'),'new reviews start at the workshop profile, without a general user-menu entry');
-    assert(!items.some(node=>node.textContent==='Bewertungen prüfen'),'the redundant review shortcut is absent from the user menu');
-    const item=items.find(node=>node.textContent===label);
-    assert(item,`${label} is available to ${email}`);
-    assert.equal(item.getAttribute('href'),path);
-    await activate(item,input);
-    assert.equal(document.querySelector('[role="menu"]'),null,'selection closes the menu');
-   }
-  }
- }
- assert(routerAttempts.length>0,'header destinations reach the client router');
- assert.deepEqual(documents,[],'header destinations never load a new document');
- routerAttempts.length=0;
- const sections=[['Werkstätten','/verwaltung','workshops'],['Bewertungen prüfen','/verwaltung/bewertungen','reviews'],['Benutzer','/verwaltung/benutzer','users'],['Betriebe','/verwaltung/betriebe','business'],['Login & Registrierung','/verwaltung/anmeldung','login']];
- async function activate(link,input){
-  const before=routerAttempts.length,documentsBefore=documents.length;
-  await act(async()=>{
-   if(input==='Enter'){
-    link.focus();
-    // The browser activates an anchor after an unhandled Enter keydown.
-    if(link.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true,cancelable:true})))link.click();
-   }else link.click();
-  });
-  assert.equal(routerAttempts.length,before+1,`${input} on ${link.textContent} must route without a document reload`);
-  assert.equal(routerAttempts.at(-1),new URL(link.href).pathname+new URL(link.href).search+new URL(link.href).hash);
-  assert.equal(documents.length,documentsBefore,'Client navigation suppresses the native document request');
- }
- for(const email of ['first-admin@example.test','second-admin@example.test']){
-  for(const [Page,active] of [[AdminPanel,'workshops'],[AdminReviews,'reviews'],[AdminUsers,'users'],[AuthSetup,'login']]){
-   await act(async()=>root.render(fixtureMessages(createElement(Page,{account:{email,displayName:'Fixture account',provider:'Google'}}))));
-   const navigation=document.querySelector('nav[aria-label="Verwaltung"]');
-   assert(navigation,`${active} includes the shared admin navigation`);
-   assert.equal(navigation.querySelectorAll('[aria-current="page"]').length,1);
-   for(const [label,path,section] of sections){
-    const link=[...navigation.querySelectorAll('a')].find(node=>node.textContent===label);
-    assert(link,`${active} offers ${label}`);
-    assert.equal(link.getAttribute('href'),path);
-    assert.equal(link.getAttribute('aria-current'),section===active?'page':null);
-    for(const input of ['click','Enter'])await activate(link,input);
-   }
-   if(active==='workshops'){
-    for(const link of document.querySelectorAll('main a[href="/verwaltung/bewertungen"]')){
-     for(const input of ['click','Enter'])await activate(link,input);
+try {
+  const destinations = [
+    ["Meine Betriebe", "/betriebe"],
+    ["Meine Betriebsanträge", "/antraege"],
+    ["Meine Bewertungen", "/bewertungen"],
+    ["Einstellungen", "/einstellungen"],
+  ];
+  for (const [email, isAdmin] of [
+    ["customer@example.test", false],
+    ["first-admin@example.test", true],
+    ["second-admin@example.test", true],
+  ]) {
+    await render(email, isAdmin);
+    for (const [label, path] of [
+      ...destinations,
+      ...(isAdmin ? [["Verwaltung", "/verwaltung"]] : []),
+    ]) {
+      for (const input of ["click", "Enter"]) {
+        await openMenu();
+        const identity = document.querySelector(".user-menu-identity");
+        const emailLink = identity.querySelector("a");
+        assert(
+          emailLink,
+          "the email has an explicit link boundary instead of relying on browser auto-linking",
+        );
+        assert.equal(emailLink.getAttribute("href"), `mailto:${email}`);
+        assert.equal(
+          emailLink.textContent,
+          email,
+          "only the email belongs to the mailto link",
+        );
+        assert(
+          !identity.querySelector("strong").closest("a"),
+          "the full name remains plain text",
+        );
+        assert(
+          !identity.querySelector("small").closest("a"),
+          "the role remains plain text",
+        );
+        const items = [...document.querySelectorAll('[role="menuitem"]')];
+        assert.equal(
+          items.filter((node) => node.textContent === "Verwaltung").length,
+          isAdmin ? 1 : 0,
+          "only admins receive the single management entry",
+        );
+        assert(
+          !items.some((node) => node.textContent === "Bewerten"),
+          "new reviews start at the workshop profile, without a general user-menu entry",
+        );
+        assert(
+          !items.some((node) => node.textContent === "Bewertungen prüfen"),
+          "the redundant review shortcut is absent from the user menu",
+        );
+        const item = items.find((node) => node.textContent === label);
+        assert(item, `${label} is available to ${email}`);
+        assert.equal(item.getAttribute("href"), path);
+        await activate(item, input);
+        assert.equal(
+          document.querySelector('[role="menu"]'),
+          null,
+          "selection closes the menu",
+        );
+      }
     }
-   }
   }
- }
- assert(routerAttempts.length>0,'all admin section links reach the client router');
- assert.deepEqual(documents,[],'admin section links never load a new document');
- const originalFetch=globalThis.fetch,logoutRequests=[];
- try{
-  // A retryable response avoids jsdom's unimplemented document navigation;
-  // the auth route suite separately verifies successful session revocation.
-  globalThis.fetch=async(url,options)=>{logoutRequests.push({url,options});return new Response(null,{status:503});};
-  for(const provider of ['Google','E-Mail']){
-   await render('logout@example.test',false,provider);await openMenu();
-   const logout=[...document.querySelectorAll('[role="menuitem"]')].find(node=>node.textContent==='Abmelden');
-   const requestsBefore=logoutRequests.length,documentsBefore=documents.length;
-   await act(async()=>logout.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true,button:0})));
-   assert.equal(logoutRequests.length,requestsBefore+1,`${provider} logout must revoke its app session through the auth API`);
-   assert.equal(logoutRequests.at(-1).url,'/api/auth/logout');assert.equal(logoutRequests.at(-1).options.method,'POST');
-   assert.equal(documents.length,documentsBefore,`${provider} logout must not use the ChatGPT sign-out endpoint`);
-   await act(async()=>document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true})));
+  assert(
+    routerAttempts.length > 0,
+    "header destinations reach the client router",
+  );
+  assert.deepEqual(
+    documents,
+    [],
+    "header destinations never load a new document",
+  );
+  routerAttempts.length = 0;
+  const sections = [
+    ["Werkstätten", "/verwaltung", "workshops"],
+    ["Bewertungen prüfen", "/verwaltung/bewertungen", "reviews"],
+    ["Benutzer", "/verwaltung/benutzer", "users"],
+    ["Betriebe", "/verwaltung/betriebe", "business"],
+    ["Login & Registrierung", "/verwaltung/anmeldung", "login"],
+  ];
+  async function activate(link, input) {
+    const before = routerAttempts.length,
+      documentsBefore = documents.length;
+    await act(async () => {
+      if (input === "Enter") {
+        link.focus();
+        // The browser activates an anchor after an unhandled Enter keydown.
+        if (
+          link.dispatchEvent(
+            new KeyboardEvent("keydown", {
+              key: "Enter",
+              bubbles: true,
+              cancelable: true,
+            }),
+          )
+        )
+          link.click();
+      } else link.click();
+    });
+    assert.equal(
+      routerAttempts.length,
+      before + 1,
+      `${input} on ${link.textContent} must route without a document reload`,
+    );
+    assert.equal(
+      routerAttempts.at(-1),
+      new URL(link.href).pathname +
+        new URL(link.href).search +
+        new URL(link.href).hash,
+    );
+    assert.equal(
+      documents.length,
+      documentsBefore,
+      "Client navigation suppresses the native document request",
+    );
   }
- }finally{globalThis.fetch=originalFetch;}
- console.log('Header and admin navigation: own review routes, absent general creation action, business/account/management entries, all admin sections, mouse/keyboard and role visibility passed');
-}finally{
- await act(async()=>root.unmount());
- dom.window.close();
+  for (const email of [
+    "first-admin@example.test",
+    "second-admin@example.test",
+  ]) {
+    for (const [Page, active] of [
+      [AdminPanel, "workshops"],
+      [AdminReviews, "reviews"],
+      [AdminUsers, "users"],
+      [AuthSetup, "login"],
+    ]) {
+      await act(async () =>
+        root.render(
+          fixtureMessages(
+            createElement(Page, {
+              account: {
+                email,
+                displayName: "Fixture account",
+                provider: "Google",
+              },
+            }),
+          ),
+        ),
+      );
+      const navigation = document.querySelector('nav[aria-label="Verwaltung"]');
+      assert(navigation, `${active} includes the shared admin navigation`);
+      assert.equal(
+        navigation.querySelectorAll('[aria-current="page"]').length,
+        1,
+      );
+      for (const [label, path, section] of sections) {
+        const link = [...navigation.querySelectorAll("a")].find(
+          (node) => node.textContent === label,
+        );
+        assert(link, `${active} offers ${label}`);
+        assert.equal(link.getAttribute("href"), path);
+        assert.equal(
+          link.getAttribute("aria-current"),
+          section === active ? "page" : null,
+        );
+        for (const input of ["click", "Enter"]) await activate(link, input);
+      }
+      if (active === "workshops") {
+        for (const link of document.querySelectorAll(
+          'main a[href="/verwaltung/bewertungen"]',
+        )) {
+          for (const input of ["click", "Enter"]) await activate(link, input);
+        }
+      }
+    }
+  }
+  assert(
+    routerAttempts.length > 0,
+    "all admin section links reach the client router",
+  );
+  assert.deepEqual(
+    documents,
+    [],
+    "admin section links never load a new document",
+  );
+  const originalFetch = globalThis.fetch,
+    logoutRequests = [];
+  try {
+    // A retryable response avoids jsdom's unimplemented document navigation;
+    // the auth route suite separately verifies successful session revocation.
+    globalThis.fetch = async (url, options) => {
+      logoutRequests.push({ url, options });
+      return new Response(null, { status: 503 });
+    };
+    for (const provider of ["Google", "E-Mail"]) {
+      await render("logout@example.test", false, provider);
+      await openMenu();
+      const logout = [...document.querySelectorAll('[role="menuitem"]')].find(
+        (node) => node.textContent === "Abmelden",
+      );
+      const requestsBefore = logoutRequests.length,
+        documentsBefore = documents.length;
+      await act(async () =>
+        logout.dispatchEvent(
+          new MouseEvent("click", {
+            bubbles: true,
+            cancelable: true,
+            button: 0,
+          }),
+        ),
+      );
+      assert.equal(
+        logoutRequests.length,
+        requestsBefore + 1,
+        `${provider} logout must revoke its app session through the auth API`,
+      );
+      assert.equal(logoutRequests.at(-1).url, "/api/auth/logout");
+      assert.equal(logoutRequests.at(-1).options.method, "POST");
+      assert.equal(
+        documents.length,
+        documentsBefore,
+        `${provider} logout must not use the ChatGPT sign-out endpoint`,
+      );
+      await act(async () =>
+        document.dispatchEvent(
+          new KeyboardEvent("keydown", {
+            key: "Escape",
+            bubbles: true,
+            cancelable: true,
+          }),
+        ),
+      );
+    }
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+  console.log(
+    "Header and admin navigation: own review routes, absent general creation action, business/account/management entries, all admin sections, mouse/keyboard and role visibility passed",
+  );
+} finally {
+  await act(async () => root.unmount());
+  dom.window.close();
 }
 
-function fixtureMessages(element){return createElement(I18nProvider,{locale:"de",messages:getMessages("de",["common","customer","management"])},element);}
+function fixtureMessages(element) {
+  return createElement(
+    I18nProvider,
+    {
+      locale: "de",
+      messages: getMessages("de", ["common", "customer", "management"]),
+    },
+    element,
+  );
+}

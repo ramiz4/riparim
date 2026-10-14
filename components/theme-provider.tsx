@@ -4,7 +4,12 @@ import { ThemeProvider as NextThemeProvider } from "next-themes";
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   return (
-    <NextThemeProvider attribute="class" defaultTheme="system" enableSystem storageKey="riparim-theme">
+    <NextThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      storageKey="riparim-theme"
+    >
       {children}
     </NextThemeProvider>
   );

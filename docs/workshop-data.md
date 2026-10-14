@@ -32,8 +32,7 @@ Nach Prüfung und Commit wird die Site wie üblich veröffentlicht. Der Runtime-
 ## Öffentlich belegte Kontaktdaten
 
 `data/workshop-contacts.json` ergänzt vorhandene Profile um die auf eigenen
-Betriebswebsites recherchierten E-Mail-Adressen und Websites. Die zehn am
-13. Oktober 2026 abgeglichenen Betriebe behalten ihre bisherigen Kennungen,
+Betriebswebsites recherchierten E-Mail-Adressen und Websites. Die zehn am 13. Oktober 2026 abgeglichenen Betriebe behalten ihre bisherigen Kennungen,
 Telefonnummern, Orte und Freigabestatus. Die separate Tabelle
 `workshop_contact_details` verknüpft jeden Kontakt per Fremdschlüssel mit dem
 Profil und speichert Quellen-URLs, Prüfdatum sowie den abgeglichenen Namen,
@@ -59,8 +58,7 @@ angewendet; der anschließende Katalogimport ergänzt die zehn Kontaktdatensätz
 ## Mehrere E-Mail-Adressen
 
 `data/workshop-emails.json` verwendet Version 2 des Kontaktvertrags und enthält
-eine Recherchezeile für jede der 172 bestehenden Werkstattkennungen. Der am
-14. Oktober 2026 im internen Browser nachgeprüfte Bestand umfasst 113 Adressen bei
+eine Recherchezeile für jede der 172 bestehenden Werkstattkennungen. Der am 14. Oktober 2026 im internen Browser nachgeprüfte Bestand umfasst 113 Adressen bei
 103 Werkstätten, davon neun mit mehreren Adressen. Die Nachprüfung aller 98 zuvor
 leeren Listen ergänzt insgesamt 28 Kontakte bei 27 weiteren Werkstätten. Eigene
 Websites, Facebook/Instagram und öffentliche Betriebsverzeichnisse einschließlich

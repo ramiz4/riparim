@@ -26,9 +26,7 @@
       "id": "auto-elektro-service-agroni-vushtrri",
       "name": "Auto Elektro Service AGRONI",
       "city": "Vushtrri",
-      "sourceUrls": [
-        "https://aesagroni.com/rreth-nesh"
-      ],
+      "sourceUrls": ["https://aesagroni.com/rreth-nesh"],
       "placeId": "ChIJbT1QoXtbUxMRVVAT8u2M2Rc",
       "checkedAt": "2026-10-12T07:32:35.413040Z",
       "mapsMethod": "Public Maps result official !19s Place ID; direct ID URL with deliberately incorrect fallback query",
@@ -45,9 +43,7 @@
       "id": "auto-servis-joni-viti",
       "name": "Auto Servis JONI",
       "city": "Viti",
-      "sourceUrls": [
-        "https://www.autojoni.com/"
-      ],
+      "sourceUrls": ["https://www.autojoni.com/"],
       "placeId": "ChIJI_GV5zljVBMRmtSQSVzYftU",
       "checkedAt": "2026-10-12T07:32:35.413040Z",
       "mapsMethod": "Public Maps result official !19s Place ID; direct ID URL with deliberately incorrect fallback query",
@@ -80,16 +76,12 @@
     {
       "id": "auto-servis-bashkimi-viti",
       "reason": "Existing published business rediscovered during independent source research; not imported again.",
-      "sourceUrls": [
-        "https://servis-bashkimi.com/"
-      ]
+      "sourceUrls": ["https://servis-bashkimi.com/"]
     },
     {
       "id": "auto-servis-blerti-podujeve",
       "reason": "Existing published business rediscovered during independent source research; not imported again.",
-      "sourceUrls": [
-        "https://autoservisblerti.com/"
-      ]
+      "sourceUrls": ["https://autoservisblerti.com/"]
     },
     {
       "id": "auto-servis-lirimi-podujeve",
@@ -132,24 +124,18 @@
     {
       "id": "auto-servis-bledi-kline",
       "reason": "Existing published business rediscovered during independent source research; not imported again.",
-      "sourceUrls": [
-        "https://www.cybo.com/XK/klina/car-repair/"
-      ]
+      "sourceUrls": ["https://www.cybo.com/XK/klina/car-repair/"]
     },
     {
       "id": "auto-rally-90-kline",
       "reason": "Existing published business rediscovered during independent source research; not imported again.",
-      "sourceUrls": [
-        "https://www.gjithebiznesi.com/XK/auto-rally-049-138-886"
-      ]
+      "sourceUrls": ["https://www.gjithebiznesi.com/XK/auto-rally-049-138-886"]
     }
   ],
   "uncertainties": [
     {
       "name": "Auto Servis & Pjesë BEXHI",
-      "sourceUrls": [
-        "https://autoservispjesbexhi.com/"
-      ],
+      "sourceUrls": ["https://autoservispjesbexhi.com/"],
       "placeId": "ChIJm3DAYABfUxMR7HJj8JlPHAE",
       "reason": "Public Maps profile has no telephone; strict phone comparison incomplete."
     },
@@ -170,16 +156,12 @@
     },
     {
       "name": "Auto Servis Gashi",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/autoservisgashi-1/?p360=1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/autoservisgashi-1/?p360=1"],
       "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
     },
     {
       "name": "Autoservis Erjoni",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/autoservis-erjoni-1/?p360=1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-erjoni-1/?p360=1"],
       "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
     },
     {
@@ -191,30 +173,22 @@
     },
     {
       "name": "Auto Servis Fulga",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-fulga-1/?p360=1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-fulga-1/?p360=1"],
       "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
     },
     {
       "name": "Autoservis Lordi",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/autoservis-lordi-1/?p360=1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-lordi-1/?p360=1"],
       "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
     },
     {
       "name": "Auto Servis Isa",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/auto-servis-isa-2"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-isa-2"],
       "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
     },
     {
       "name": "Auto servis llaker LATI TUNING",
-      "sourceUrls": [
-        "https://stgres.gjirafa.biz/lati--tunning-1"
-      ],
+      "sourceUrls": ["https://stgres.gjirafa.biz/lati--tunning-1"],
       "reason": "Public Maps identity and direct-ID verification incomplete; no publication."
     },
     {
@@ -254,11 +228,7 @@
     "healthy": true,
     "publicHttpStatus": 200,
     "checkedPages": 9,
-    "locales": [
-      "de",
-      "sq",
-      "en"
-    ],
+    "locales": ["de", "sq", "en"],
     "error1102": false,
     "completeHtml": true,
     "activeVersion": "d948bb07-7125-46b3-a6f0-eb8891de9583",
@@ -330,11 +300,7 @@
   "translationCheck": {
     "status": "passed",
     "command": "npm run catalog:check",
-    "locales": [
-      "de",
-      "sq",
-      "en"
-    ],
+    "locales": ["de", "sq", "en"],
     "centralHashContract": "workshopTranslationSourceHash",
     "newOverlays": 2,
     "orderedFieldsEditoriallyChecked": true
@@ -407,12 +373,7 @@
       "workshop_google_ratings",
       "catalog_state"
     ],
-    "counts": [
-      160,
-      160,
-      129,
-      57
-    ],
+    "counts": [160, 160, 129, 57],
     "privateUserTables": false,
     "restoredInIsolatedSqlite": true,
     "restoredRowsEqualBackup": true,
@@ -440,9 +401,7 @@
       "id": "auto-elektro-service-agroni-vushtrri",
       "name": "Auto Elektro Service AGRONI",
       "city": "Vushtrri",
-      "sourceUrls": [
-        "https://aesagroni.com/rreth-nesh"
-      ],
+      "sourceUrls": ["https://aesagroni.com/rreth-nesh"],
       "placeId": "ChIJbT1QoXtbUxMRVVAT8u2M2Rc",
       "checkedAt": "2026-10-12T07:32:35.413040Z",
       "mapsMethod": "Public Maps result official !19s Place ID; direct ID URL with deliberately incorrect fallback query",
@@ -459,9 +418,7 @@
       "id": "auto-servis-joni-viti",
       "name": "Auto Servis JONI",
       "city": "Viti",
-      "sourceUrls": [
-        "https://www.autojoni.com/"
-      ],
+      "sourceUrls": ["https://www.autojoni.com/"],
       "placeId": "ChIJI_GV5zljVBMRmtSQSVzYftU",
       "checkedAt": "2026-10-12T07:32:35.413040Z",
       "mapsMethod": "Public Maps result official !19s Place ID; direct ID URL with deliberately incorrect fallback query",

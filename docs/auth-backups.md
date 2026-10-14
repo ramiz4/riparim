@@ -55,6 +55,7 @@ Empfangsabnahme sind getrennt dokumentiert.
 
    Bei Authentifizierungsfehlern den gesamten entschlüsselten Output verwerfen;
    ein fehlgeschlagener GCM-Lauf kann unbestätigte Klartextbytes geschrieben haben.
+
 3. Zuerst in einer isolierten Umgebung mit kompatibler PostgreSQL-/Supabase-Authversion
    prüfen. Das Archiv enthält Schema und Daten, aber keine Ownership/ACLs.
    Ein leeres lokales PostgreSQL kann die Archivstruktur und Daten wiederherstellen;

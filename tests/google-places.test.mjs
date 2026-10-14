@@ -1,159 +1,959 @@
-import assert from 'node:assert/strict';
-import {readFile,writeFile,mkdir,readdir} from 'node:fs/promises';
-import {createRequire} from 'node:module';
-import {DatabaseSync} from 'node:sqlite';
-import {createHash} from 'node:crypto';
-const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
-const output='.test-runtime/google-places';
-const bundle=await build({entryPoints:{identity:'lib/google-place-identity.ts',places:'db/google-places.ts',directory:'db/directory.ts',source:'lib/workshop-source.ts',config:'app/api/google-places/route.ts',match:'app/api/google-places/[id]/route.ts',browser:'lib/google-maps-browser.ts',links:'lib/google-maps-link.ts',save:'app/api/workshops/route.ts'},outdir:output,bundle:true,write:false,format:'esm',platform:'node',plugins:[{name:'google-fixtures',setup(b){b.onResolve({filter:/^(cloudflare:workers|@\/app\/auth)$/},args=>({path:args.path,namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},args=>({contents:args.path==='@/app/auth'?'export async function getAdminUser(){return globalThis.fixtureAdmin??null;}':'export const env=globalThis.fixtureEnv;',loader:'js'}));}}]});
-await mkdir(output,{recursive:true});for(const file of bundle.outputFiles)await writeFile(file.path.replace(/\.js$/,'.mjs'),file.contents);
-const sqlite=new DatabaseSync(':memory:');for(const file of (await readdir('drizzle')).filter(file=>file.endsWith('.sql')).sort())sqlite.exec(await readFile('drizzle/'+file,'utf8'));
-let sqlWrites=0;
-const d1={prepare(sql){const statement=sqlite.prepare(sql);const adapter=(values=[])=>({bind:(...next)=>adapter(next),first:async()=>statement.get(...values)??null,all:async()=>({results:statement.all(...values)}),run:async()=>{sqlWrites++;return {meta:statement.run(...values)};}});return adapter();},async batch(statements){const result=[];for(const statement of statements)result.push(await statement.run());return result;}};
-globalThis.fixtureEnv={DB:d1,BUCKET:{}};
-const load=name=>import(new URL('../'+output+'/'+name+'.mjs',import.meta.url));
-const [identity,places,directory,config,match,browser,links,save]=await Promise.all(['identity','places','directory','config','match','browser','links','save'].map(load));
-const {validateWorkshopCatalogue}=await load('source');
-const catalogue=validateWorkshopCatalogue(JSON.parse(await readFile('data/workshops.json','utf8')));
-const all=await directory.listWorkshops(true),actualMita=all.find(w=>w.id==='auto-mita'),mita={...actualMita,googleRating:{...actualMita.googleRating,mapsUrl:'https://www.google.com/maps/search/?api=1&query=Auto+Mita+Prishtina'}};
-const initialIdentityFetch=globalThis.fetch,identityWrites=sqlWrites;globalThis.fetch=async()=>{throw Error('Confirmed public display must not query a provider');};
-try{for(const workshop of all.filter(w=>w.status==='published'))assert.equal(await places.readConfirmedWorkshopGooglePlace(workshop),catalogue.workshops.find(w=>w.id===workshop.id).google.placeId,'all 160 public profiles retain their canonical confirmed identity');assert.equal(sqlWrites,identityWrites,'confirmed identity coverage is read-only after the existing catalogue bootstrap');}finally{globalThis.fetch=initialIdentityFetch;}
-sqlite.exec('DELETE FROM workshop_google_places');
-const candidate={id:'ChIJFixtureAutoMitaOnly',displayName:{text:'Auto Mita'},internationalPhoneNumber:'+383 45 686 868',formattedAddress:'Prishtina, Kosovo',addressComponents:[{types:['country'],shortText:'XK',longText:'Kosovo'}],location:{latitude:mita.lat,longitude:mita.lng}};
-assert.equal(identity.verifiedGooglePlace(mita,[candidate]),candidate.id);
-assert.equal(identity.verifiedGooglePlace(mita,[{...candidate,internationalPhoneNumber:'+38349111111'}]),null,'phone must match');
-assert.equal(identity.verifiedGooglePlace(mita,[{...candidate,displayName:{text:'Auto Bardhi'}}]),null,'generic car-service names are insufficient');
-assert.equal(identity.verifiedGooglePlace(mita,[{...candidate,addressComponents:[{types:['country'],shortText:'MK',longText:'North Macedonia'}]}]),null,'country must match');
-assert.equal(identity.verifiedGooglePlace(mita,[{...candidate,location:{latitude:42.85,longitude:21.13}}]),null,'known premises must match');
-assert.equal(identity.verifiedGooglePlace(mita,[candidate,{...candidate,id:'ChIJAnotherAutoMita'}]),null,'ambiguous identities are rejected');
-assert.equal(identity.verifiedGooglePlace(mita,[{...candidate,id:'fake'}]),null,'invalid Google identifiers are rejected');
-assert.equal(identity.verifiedGooglePlace({...mita,lat:null,lng:null,city:'Fushë Kosovë'},[candidate]),null,'country text alone does not match Fushë Kosovë');
-const localSearch=identity.googlePlaceSearchRequest(mita);
-assert.equal(localSearch.textQuery,'+383 45686868');assert.equal(localSearch.regionCode,'XK');
-assert.deepEqual(localSearch.locationBias,{circle:{center:{latitude:mita.lat,longitude:mita.lng},radius:3000}},'known workshop premises replace the server IP as search bias');
-const legacySearch=identity.googlePlaceSearchRequest({...mita,phone:'+38138765432',lat:null,lng:null});
-assert.equal(legacySearch.textQuery,'+381 38765432');assert.equal(legacySearch.regionCode,'RS','calling-code region does not rewrite the actual phone number');
-assert.deepEqual(legacySearch.locationBias,{rectangle:{low:{latitude:41.8,longitude:19.8},high:{latitude:43.3,longitude:21.9}}});
-assert.equal(identity.verifiedGooglePlace({...mita,phone:'+38138765432'},[{...candidate,internationalPhoneNumber:'+381 38 765432',addressComponents:[{types:['country'],shortText:'RS',longText:'Serbia'}]}]),null,'legacy calling codes never authorize a workshop outside Kosovo');
-assert.equal(identity.verifiedGooglePlace(mita,[{...candidate,displayName:{text:'Renault - Dacia dhe Nissan #AutoMita'}}]),candidate.id,'joined brand names still match');
-assert.equal(identity.verifiedGooglePlace(mita,[{...candidate,primaryType:'electric_vehicle_charging_station',displayName:{text:'AutoMita charging station'}}]),null,'charging stations are not workshop profiles');
-assert.equal(identity.verifiedGooglePlace(mita,[{...candidate,addressComponents:undefined}]),candidate.id,'Google omits Kosovo country: exact sourced premises, phone and name still verify identity');
-assert.equal(identity.verifiedGooglePlace(mita,[{...candidate,addressComponents:undefined,location:{latitude:mita.lat+0.02,longitude:mita.lng}}]),null,'missing country requires exact premises');
-const origin='https://riparim.example.test',request=path=>new Request(origin+path),params=id=>({params:Promise.resolve({id})});
-let calls=0,lastRequest=null,apiError=false;
-const originalFetch=globalThis.fetch;
-globalThis.fetch=async(url,options)=>{assert.equal(String(url),'https://places.googleapis.com/v1/places:searchText','fixtures never use live Google APIs');calls++;lastRequest=options;return apiError?Response.json({error:'fixture'}, {status:503}):Response.json({places:[candidate]});};
-assert.deepEqual(await (await config.GET(request('/api/google-places'))).json(),{enabled:false});
-assert.deepEqual(await (await match.GET(request('/api/google-places/auto-mita'),params('auto-mita'))).json(),{enabled:false,placeId:null});
-assert.equal(calls,0,'missing keys never call Google');
-globalThis.fixtureEnv.GOOGLE_MAPS_BROWSER_API_KEY='fixture-browser-key';
-globalThis.fixtureEnv.GOOGLE_PLACES_SERVER_API_KEY='fixture-server-key';
-const configResponse=await config.GET(request('/api/google-places'));
-const body=await configResponse.text();assert(body.includes('fixture-browser-key')&&!body.includes('fixture-server-key'),'the private server key never crosses the HTTP boundary');
-assert.equal(configResponse.headers.get('Cache-Control'),'no-store');
-assert.equal((await config.GET(new Request(origin+'/api/google-places',{headers:{Origin:'https://other.example.test'}}))).status,403);
-const writesBeforePublicReads=sqlWrites;
-const publicIdentity=await (await match.GET(request('/api/google-places/auto-mita'),params('auto-mita'))).json();assert.equal(publicIdentity.placeId,links.googlePlaceIdFromMapsUrl(actualMita.googleRating.mapsUrl));assert.equal(calls,0,'public confirmed identities never search Google');assert.equal(sqlWrites,writesBeforePublicReads,'public identity display never refreshes or writes a Google identity record');
-const idOnlyWorkshop=all.find(w=>!w.googleRating),idOnlyPlace=catalogue.workshops.find(w=>w.id===idOnlyWorkshop.id).google.placeId;
-sqlite.prepare('INSERT INTO workshop_google_places(workshop_id,place_id,profile_hash,checked_at,retry_after) VALUES(?,?,?,?,?)').run(idOnlyWorkshop.id,idOnlyPlace,await identity.workshopIdentityHash(idOnlyWorkshop),1,0);
-const publicIdOnly=await (await match.GET(request('/api/google-places/'+idOnlyWorkshop.id),params(idOnlyWorkshop.id))).json();assert.equal(publicIdOnly.placeId,idOnlyPlace,'new profiles without historical Google snapshots use their existing confirmed ID without provider research');assert.equal(calls,0);assert.equal(sqlWrites,writesBeforePublicReads);
-sqlite.prepare('UPDATE workshop_google_places SET profile_hash=? WHERE workshop_id=?').run('outdated-business-fixture',idOnlyWorkshop.id);assert.equal((await(await match.GET(request('/api/google-places/'+idOnlyWorkshop.id),params(idOnlyWorkshop.id))).json()).placeId,null,'changed business identity never reuses stale association or starts research');assert.equal(calls,0);assert.equal(sqlWrites,writesBeforePublicReads);sqlite.prepare('DELETE FROM workshop_google_places WHERE workshop_id=?').run(idOnlyWorkshop.id);
-
-for(const locale of ['de','sq','en']){
- globalThis.fixtureAdmin=null;let response=await save.GET(request(`/api/workshops?admin=1&locale=${locale}`));assert.equal(response.status,401);assert.equal((await response.json()).errorCode,'authentication_required');
- globalThis.fixtureAdmin={isModerator:false};response=await save.GET(request(`/api/workshops?admin=1&locale=${locale}`));assert.equal(response.status,403);assert.equal((await response.json()).errorCode,'forbidden');
- response=await save.GET(request(`/api/workshops?locale=${locale}`));assert.equal(response.status,200);assert((await response.json()).workshops.every(w=>w.status==='published'),'locale never relaxes public publication rights');
- const forbidden=await config.GET(new Request(origin+`/api/google-places?locale=${locale}`,{headers:{Origin:'https://other.example.test'}}));assert.equal(forbidden.status,403);assert.equal((await forbidden.json()).errorCode,'invalid_request');
+import assert from "node:assert/strict";
+import { readFile, writeFile, mkdir, readdir } from "node:fs/promises";
+import { createRequire } from "node:module";
+import { DatabaseSync } from "node:sqlite";
+import { createHash } from "node:crypto";
+const { build } = createRequire(new URL("../package.json", import.meta.url))(
+  "esbuild",
+);
+const output = ".test-runtime/google-places";
+const bundle = await build({
+  entryPoints: {
+    identity: "lib/google-place-identity.ts",
+    places: "db/google-places.ts",
+    directory: "db/directory.ts",
+    source: "lib/workshop-source.ts",
+    config: "app/api/google-places/route.ts",
+    match: "app/api/google-places/[id]/route.ts",
+    browser: "lib/google-maps-browser.ts",
+    links: "lib/google-maps-link.ts",
+    save: "app/api/workshops/route.ts",
+  },
+  outdir: output,
+  bundle: true,
+  write: false,
+  format: "esm",
+  platform: "node",
+  plugins: [
+    {
+      name: "google-fixtures",
+      setup(b) {
+        b.onResolve(
+          { filter: /^(cloudflare:workers|@\/app\/auth)$/ },
+          (args) => ({ path: args.path, namespace: "fixture" }),
+        );
+        b.onLoad({ filter: /.*/, namespace: "fixture" }, (args) => ({
+          contents:
+            args.path === "@/app/auth"
+              ? "export async function getAdminUser(){return globalThis.fixtureAdmin??null;}"
+              : "export const env=globalThis.fixtureEnv;",
+          loader: "js",
+        }));
+      },
+    },
+  ],
+});
+await mkdir(output, { recursive: true });
+for (const file of bundle.outputFiles)
+  await writeFile(file.path.replace(/\.js$/, ".mjs"), file.contents);
+const sqlite = new DatabaseSync(":memory:");
+for (const file of (await readdir("drizzle"))
+  .filter((file) => file.endsWith(".sql"))
+  .sort())
+  sqlite.exec(await readFile("drizzle/" + file, "utf8"));
+let sqlWrites = 0;
+const d1 = {
+  prepare(sql) {
+    const statement = sqlite.prepare(sql);
+    const adapter = (values = []) => ({
+      bind: (...next) => adapter(next),
+      first: async () => statement.get(...values) ?? null,
+      all: async () => ({ results: statement.all(...values) }),
+      run: async () => {
+        sqlWrites++;
+        return { meta: statement.run(...values) };
+      },
+    });
+    return adapter();
+  },
+  async batch(statements) {
+    const result = [];
+    for (const statement of statements) result.push(await statement.run());
+    return result;
+  },
+};
+globalThis.fixtureEnv = { DB: d1, BUCKET: {} };
+const load = (name) =>
+  import(new URL("../" + output + "/" + name + ".mjs", import.meta.url));
+const [identity, places, directory, config, match, browser, links, save] =
+  await Promise.all(
+    [
+      "identity",
+      "places",
+      "directory",
+      "config",
+      "match",
+      "browser",
+      "links",
+      "save",
+    ].map(load),
+  );
+const { validateWorkshopCatalogue } = await load("source");
+const catalogue = validateWorkshopCatalogue(
+  JSON.parse(await readFile("data/workshops.json", "utf8")),
+);
+const all = await directory.listWorkshops(true),
+  actualMita = all.find((w) => w.id === "auto-mita"),
+  mita = {
+    ...actualMita,
+    googleRating: {
+      ...actualMita.googleRating,
+      mapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Auto+Mita+Prishtina",
+    },
+  };
+const initialIdentityFetch = globalThis.fetch,
+  identityWrites = sqlWrites;
+globalThis.fetch = async () => {
+  throw Error("Confirmed public display must not query a provider");
+};
+try {
+  for (const workshop of all.filter((w) => w.status === "published"))
+    assert.equal(
+      await places.readConfirmedWorkshopGooglePlace(workshop),
+      catalogue.workshops.find((w) => w.id === workshop.id).google.placeId,
+      "all 160 public profiles retain their canonical confirmed identity",
+    );
+  assert.equal(
+    sqlWrites,
+    identityWrites,
+    "confirmed identity coverage is read-only after the existing catalogue bootstrap",
+  );
+} finally {
+  globalThis.fetch = initialIdentityFetch;
 }
-assert.equal(sqlWrites,writesBeforePublicReads,'public display overlays never write D1 after canonical seed');
-assert.equal((await save.GET(request('/api/workshops?locale=fr'))).status,400,'invalid locale fails before reading the directory');
-const localizedDirectory=await (await save.GET(request('/api/workshops?locale=sq'))).json();assert(localizedDirectory.displayById,'explicit public locale receives an independent display map');assert.equal(localizedDirectory.workshops.find(w=>w.id===actualMita.id).description,actualMita.description,'canonical payload retains stored German description');
-assert.deepEqual((await (await save.GET(request('/api/workshops'))).json()).displayById,undefined,'missing locale preserves legacy DE payload');
-globalThis.fixtureAdmin={isModerator:true};assert.equal((await (await save.GET(request('/api/workshops?admin=1&locale=sq'))).json()).displayById,undefined,'admin editor receives canonical values only');
-globalThis.fixtureAdmin=null;
-const draft={...actualMita,id:'lookup-draft-fixture',status:'draft'};
-const insertFixture=sqlite.prepare(`INSERT INTO workshops (${directory.profileColumns.join(',')}) VALUES (${directory.profileColumns.map(()=>'?').join(',')})`);
+sqlite.exec("DELETE FROM workshop_google_places");
+const candidate = {
+  id: "ChIJFixtureAutoMitaOnly",
+  displayName: { text: "Auto Mita" },
+  internationalPhoneNumber: "+383 45 686 868",
+  formattedAddress: "Prishtina, Kosovo",
+  addressComponents: [
+    { types: ["country"], shortText: "XK", longText: "Kosovo" },
+  ],
+  location: { latitude: mita.lat, longitude: mita.lng },
+};
+assert.equal(identity.verifiedGooglePlace(mita, [candidate]), candidate.id);
+assert.equal(
+  identity.verifiedGooglePlace(mita, [
+    { ...candidate, internationalPhoneNumber: "+38349111111" },
+  ]),
+  null,
+  "phone must match",
+);
+assert.equal(
+  identity.verifiedGooglePlace(mita, [
+    { ...candidate, displayName: { text: "Auto Bardhi" } },
+  ]),
+  null,
+  "generic car-service names are insufficient",
+);
+assert.equal(
+  identity.verifiedGooglePlace(mita, [
+    {
+      ...candidate,
+      addressComponents: [
+        { types: ["country"], shortText: "MK", longText: "North Macedonia" },
+      ],
+    },
+  ]),
+  null,
+  "country must match",
+);
+assert.equal(
+  identity.verifiedGooglePlace(mita, [
+    { ...candidate, location: { latitude: 42.85, longitude: 21.13 } },
+  ]),
+  null,
+  "known premises must match",
+);
+assert.equal(
+  identity.verifiedGooglePlace(mita, [
+    candidate,
+    { ...candidate, id: "ChIJAnotherAutoMita" },
+  ]),
+  null,
+  "ambiguous identities are rejected",
+);
+assert.equal(
+  identity.verifiedGooglePlace(mita, [{ ...candidate, id: "fake" }]),
+  null,
+  "invalid Google identifiers are rejected",
+);
+assert.equal(
+  identity.verifiedGooglePlace(
+    { ...mita, lat: null, lng: null, city: "Fushë Kosovë" },
+    [candidate],
+  ),
+  null,
+  "country text alone does not match Fushë Kosovë",
+);
+const localSearch = identity.googlePlaceSearchRequest(mita);
+assert.equal(localSearch.textQuery, "+383 45686868");
+assert.equal(localSearch.regionCode, "XK");
+assert.deepEqual(
+  localSearch.locationBias,
+  {
+    circle: {
+      center: { latitude: mita.lat, longitude: mita.lng },
+      radius: 3000,
+    },
+  },
+  "known workshop premises replace the server IP as search bias",
+);
+const legacySearch = identity.googlePlaceSearchRequest({
+  ...mita,
+  phone: "+38138765432",
+  lat: null,
+  lng: null,
+});
+assert.equal(legacySearch.textQuery, "+381 38765432");
+assert.equal(
+  legacySearch.regionCode,
+  "RS",
+  "calling-code region does not rewrite the actual phone number",
+);
+assert.deepEqual(legacySearch.locationBias, {
+  rectangle: {
+    low: { latitude: 41.8, longitude: 19.8 },
+    high: { latitude: 43.3, longitude: 21.9 },
+  },
+});
+assert.equal(
+  identity.verifiedGooglePlace({ ...mita, phone: "+38138765432" }, [
+    {
+      ...candidate,
+      internationalPhoneNumber: "+381 38 765432",
+      addressComponents: [
+        { types: ["country"], shortText: "RS", longText: "Serbia" },
+      ],
+    },
+  ]),
+  null,
+  "legacy calling codes never authorize a workshop outside Kosovo",
+);
+assert.equal(
+  identity.verifiedGooglePlace(mita, [
+    {
+      ...candidate,
+      displayName: { text: "Renault - Dacia dhe Nissan #AutoMita" },
+    },
+  ]),
+  candidate.id,
+  "joined brand names still match",
+);
+assert.equal(
+  identity.verifiedGooglePlace(mita, [
+    {
+      ...candidate,
+      primaryType: "electric_vehicle_charging_station",
+      displayName: { text: "AutoMita charging station" },
+    },
+  ]),
+  null,
+  "charging stations are not workshop profiles",
+);
+assert.equal(
+  identity.verifiedGooglePlace(mita, [
+    { ...candidate, addressComponents: undefined },
+  ]),
+  candidate.id,
+  "Google omits Kosovo country: exact sourced premises, phone and name still verify identity",
+);
+assert.equal(
+  identity.verifiedGooglePlace(mita, [
+    {
+      ...candidate,
+      addressComponents: undefined,
+      location: { latitude: mita.lat + 0.02, longitude: mita.lng },
+    },
+  ]),
+  null,
+  "missing country requires exact premises",
+);
+const origin = "https://riparim.example.test",
+  request = (path) => new Request(origin + path),
+  params = (id) => ({ params: Promise.resolve({ id }) });
+let calls = 0,
+  lastRequest = null,
+  apiError = false;
+const originalFetch = globalThis.fetch;
+globalThis.fetch = async (url, options) => {
+  assert.equal(
+    String(url),
+    "https://places.googleapis.com/v1/places:searchText",
+    "fixtures never use live Google APIs",
+  );
+  calls++;
+  lastRequest = options;
+  return apiError
+    ? Response.json({ error: "fixture" }, { status: 503 })
+    : Response.json({ places: [candidate] });
+};
+assert.deepEqual(
+  await (await config.GET(request("/api/google-places"))).json(),
+  { enabled: false },
+);
+assert.deepEqual(
+  await (
+    await match.GET(
+      request("/api/google-places/auto-mita"),
+      params("auto-mita"),
+    )
+  ).json(),
+  { enabled: false, placeId: null },
+);
+assert.equal(calls, 0, "missing keys never call Google");
+globalThis.fixtureEnv.GOOGLE_MAPS_BROWSER_API_KEY = "fixture-browser-key";
+globalThis.fixtureEnv.GOOGLE_PLACES_SERVER_API_KEY = "fixture-server-key";
+const configResponse = await config.GET(request("/api/google-places"));
+const body = await configResponse.text();
+assert(
+  body.includes("fixture-browser-key") && !body.includes("fixture-server-key"),
+  "the private server key never crosses the HTTP boundary",
+);
+assert.equal(configResponse.headers.get("Cache-Control"), "no-store");
+assert.equal(
+  (
+    await config.GET(
+      new Request(origin + "/api/google-places", {
+        headers: { Origin: "https://other.example.test" },
+      }),
+    )
+  ).status,
+  403,
+);
+const writesBeforePublicReads = sqlWrites;
+const publicIdentity = await (
+  await match.GET(request("/api/google-places/auto-mita"), params("auto-mita"))
+).json();
+assert.equal(
+  publicIdentity.placeId,
+  links.googlePlaceIdFromMapsUrl(actualMita.googleRating.mapsUrl),
+);
+assert.equal(calls, 0, "public confirmed identities never search Google");
+assert.equal(
+  sqlWrites,
+  writesBeforePublicReads,
+  "public identity display never refreshes or writes a Google identity record",
+);
+const idOnlyWorkshop = all.find((w) => !w.googleRating),
+  idOnlyPlace = catalogue.workshops.find((w) => w.id === idOnlyWorkshop.id)
+    .google.placeId;
+sqlite
+  .prepare(
+    "INSERT INTO workshop_google_places(workshop_id,place_id,profile_hash,checked_at,retry_after) VALUES(?,?,?,?,?)",
+  )
+  .run(
+    idOnlyWorkshop.id,
+    idOnlyPlace,
+    await identity.workshopIdentityHash(idOnlyWorkshop),
+    1,
+    0,
+  );
+const publicIdOnly = await (
+  await match.GET(
+    request("/api/google-places/" + idOnlyWorkshop.id),
+    params(idOnlyWorkshop.id),
+  )
+).json();
+assert.equal(
+  publicIdOnly.placeId,
+  idOnlyPlace,
+  "new profiles without historical Google snapshots use their existing confirmed ID without provider research",
+);
+assert.equal(calls, 0);
+assert.equal(sqlWrites, writesBeforePublicReads);
+sqlite
+  .prepare(
+    "UPDATE workshop_google_places SET profile_hash=? WHERE workshop_id=?",
+  )
+  .run("outdated-business-fixture", idOnlyWorkshop.id);
+assert.equal(
+  (
+    await (
+      await match.GET(
+        request("/api/google-places/" + idOnlyWorkshop.id),
+        params(idOnlyWorkshop.id),
+      )
+    ).json()
+  ).placeId,
+  null,
+  "changed business identity never reuses stale association or starts research",
+);
+assert.equal(calls, 0);
+assert.equal(sqlWrites, writesBeforePublicReads);
+sqlite
+  .prepare("DELETE FROM workshop_google_places WHERE workshop_id=?")
+  .run(idOnlyWorkshop.id);
+
+for (const locale of ["de", "sq", "en"]) {
+  globalThis.fixtureAdmin = null;
+  let response = await save.GET(
+    request(`/api/workshops?admin=1&locale=${locale}`),
+  );
+  assert.equal(response.status, 401);
+  assert.equal((await response.json()).errorCode, "authentication_required");
+  globalThis.fixtureAdmin = { isModerator: false };
+  response = await save.GET(request(`/api/workshops?admin=1&locale=${locale}`));
+  assert.equal(response.status, 403);
+  assert.equal((await response.json()).errorCode, "forbidden");
+  response = await save.GET(request(`/api/workshops?locale=${locale}`));
+  assert.equal(response.status, 200);
+  assert(
+    (await response.json()).workshops.every((w) => w.status === "published"),
+    "locale never relaxes public publication rights",
+  );
+  const forbidden = await config.GET(
+    new Request(origin + `/api/google-places?locale=${locale}`, {
+      headers: { Origin: "https://other.example.test" },
+    }),
+  );
+  assert.equal(forbidden.status, 403);
+  assert.equal((await forbidden.json()).errorCode, "invalid_request");
+}
+assert.equal(
+  sqlWrites,
+  writesBeforePublicReads,
+  "public display overlays never write D1 after canonical seed",
+);
+assert.equal(
+  (await save.GET(request("/api/workshops?locale=fr"))).status,
+  400,
+  "invalid locale fails before reading the directory",
+);
+const localizedDirectory = await (
+  await save.GET(request("/api/workshops?locale=sq"))
+).json();
+assert(
+  localizedDirectory.displayById,
+  "explicit public locale receives an independent display map",
+);
+assert.equal(
+  localizedDirectory.workshops.find((w) => w.id === actualMita.id).description,
+  actualMita.description,
+  "canonical payload retains stored German description",
+);
+assert.deepEqual(
+  (await (await save.GET(request("/api/workshops"))).json()).displayById,
+  undefined,
+  "missing locale preserves legacy DE payload",
+);
+globalThis.fixtureAdmin = { isModerator: true };
+assert.equal(
+  (await (await save.GET(request("/api/workshops?admin=1&locale=sq"))).json())
+    .displayById,
+  undefined,
+  "admin editor receives canonical values only",
+);
+globalThis.fixtureAdmin = null;
+const draft = { ...actualMita, id: "lookup-draft-fixture", status: "draft" };
+const insertFixture = sqlite.prepare(
+  `INSERT INTO workshops (${directory.profileColumns.join(",")}) VALUES (${directory.profileColumns.map(() => "?").join(",")})`,
+);
 insertFixture.run(...directory.profileValues(draft));
-const publicWithDraft=await(await save.GET(request('/api/workshops?locale=sq'))).json();assert(!publicWithDraft.workshops.some(w=>w.id===draft.id));assert.equal(publicWithDraft.displayById[draft.id],undefined,'unpublished IDs do not leak in display map');
-globalThis.fixtureAdmin={isModerator:true};const adminWithDraft=await(await save.GET(request('/api/workshops?admin=1&locale=sq'))).json();assert(adminWithDraft.workshops.some(w=>w.id===draft.id));assert.equal(adminWithDraft.displayById,undefined);globalThis.fixtureAdmin=null;
-assert.equal((await match.GET(request('/api/google-places/'+draft.id),params(draft.id))).status,404,'drafts cannot trigger a Google lookup even when the live source has no drafts');
-assert.equal(calls,0);sqlite.prepare('DELETE FROM workshops WHERE id=?').run(draft.id);
-assert.equal((await match.GET(request('/api/google-places/bad/id'),params('bad/id'))).status,404);
-const legacyHash=createHash('sha256').update(JSON.stringify([mita.name,mita.phone,mita.city,mita.address,mita.lat,mita.lng])).digest('hex');
-sqlite.prepare('INSERT INTO workshop_google_places (workshop_id,place_id,profile_hash,checked_at,retry_after) VALUES (?,NULL,?,?,?)').run(mita.id,legacyHash,Date.now(),Date.now()+7*86400000);
-assert.equal(await places.resolveWorkshopGooglePlace(mita),candidate.id);assert.equal(calls,1,'the corrected resolver retries a negative result from the old search strategy');
-assert.equal(await places.resolveWorkshopGooglePlace(mita),candidate.id);assert.equal(calls,1,'a stored verified ID prevents repeated identity searches');
-assert.deepEqual(JSON.parse(lastRequest.body),identity.googleMapsLinkSearchRequest(mita),'query and search geography come only from server-owned public workshop data');
-assert(!lastRequest.headers['X-Goog-FieldMask'].includes('rating')&&!lastRequest.headers['X-Goog-FieldMask'].includes('reviews'),'matching never imports review content');
-assert.equal(lastRequest.headers['X-Goog-Api-Key'],'fixture-server-key');
-const columns=sqlite.prepare('PRAGMA table_info(workshop_google_places)').all().map(row=>row.name);assert(!columns.includes('rating')&&!columns.includes('review_count')&&!columns.includes('reviews'),'persistent matching stores only IDs and application metadata');
-const matchesBefore=sqlite.prepare('SELECT COUNT(*) AS n FROM workshop_google_places').get().n;
-assert.equal(matchesBefore,1);assert.equal((await directory.listWorkshops()).length,catalogue.coverage.published);assert.equal((await directory.listWorkshops(true)).filter(w=>w.status==='draft').length,catalogue.coverage.drafts);
-assert.equal((await directory.listWorkshops()).find(w=>w.id===mita.id).rating,null,'Google matching leaves Riparim aggregates untouched');
-const quotaKey='google-place-lookups:'+new Date().toISOString().slice(0,10);
-sqlite.prepare('UPDATE catalog_state SET value=? WHERE key=?').run('100',quotaKey);
-sqlite.prepare('INSERT INTO workshop_google_places (workshop_id,place_id,profile_hash,checked_at,retry_after) VALUES (?,?,?,?,?)').run('legacy-positive-fixture',candidate.id,legacyHash,Date.now(),Date.now()+365*86400000);
-assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'legacy-positive-fixture'}),candidate.id,'an unchanged verified legacy match survives the strategy upgrade even with no remaining quota');assert.equal(calls,1);
-assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'legacy-positive-fixture',phone:'+38349111111'}),null,'a changed profile cannot reuse a legacy verified identity');assert.equal(calls,1);
-assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'quota-fixture'}),null);assert.equal(calls,1,'daily identity-search budget cannot be exceeded');
-sqlite.prepare('UPDATE catalog_state SET value=? WHERE key=?').run('1',quotaKey);
-assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'ambiguous-fixture',phone:'+38349111111',lat:null,lng:null}),null);assert.equal(calls,4);assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'ambiguous-fixture',phone:'+38349111111',lat:null,lng:null}),null);assert.equal(calls,4,'unmatched candidates are not retried on every visit');
-apiError=true;await assert.rejects(places.resolveWorkshopGooglePlace({...mita,id:'error-fixture'}));assert.equal(calls,5);assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'error-fixture'}),null);assert.equal(calls,5,'provider failures back off');
-apiError=false;
-let fallbackCalls=0;
-globalThis.fetch=async(url,options)=>{fallbackCalls++;const query=JSON.parse(options.body);if(fallbackCalls===1){assert.equal(query.textQuery,identity.googleMapsLinkSearchRequest(mita).textQuery);return Response.json({places:[]});}assert.equal(query.textQuery,localSearch.textQuery);return Response.json({places:[candidate]});};
-assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'name-fallback-fixture'}),candidate.id,'verified name lookup recovers an empty phone search');
-assert.equal(fallbackCalls,2);
-let countryCalls=0;
-globalThis.fetch=async(url,options)=>{countryCalls++;if(String(url).includes('searchText'))return Response.json({places:[{...candidate,addressComponents:undefined}]});assert.equal(options.headers['X-Goog-FieldMask'],'addressComponents');return Response.json({addressComponents:candidate.addressComponents});};
-assert.equal(await places.resolveWorkshopGooglePlace({...mita,id:'country-details-fixture'}),candidate.id,'missing search country is verified through Place Details');
-assert.equal(countryCalls,2);
-const directUrl=links.googleMapsPlaceUrl(candidate.id,'Auto Mita');
-assert.equal(links.googlePlaceIdFromMapsUrl(directUrl),candidate.id);
-assert.equal(links.googlePlaceIdFromMapsUrl('https://evil.example/?query_place_id='+candidate.id),null);
-assert.equal(links.googlePlaceIdFromMapsUrl('https://www.google.com/maps/%ZZ'),null);
-assert.equal(links.googlePlaceIdFromMapsUrl('https://www.google.com/maps/?query=Auto+Mita'),null,'search text is not an ID');
-assert.equal(links.googleMapsCid('https://www.google.com/maps/?cid=10863169548485369450'),'10863169548485369450');
-assert.equal(identity.verifiedGooglePlaceFromMapsLink({...mita,googleRating:{...mita.googleRating,mapsUrl:'https://www.google.com/maps/?cid=123'}},[{...candidate,googleMapsUri:'https://maps.google.com/?cid=123',internationalPhoneNumber:undefined}]),candidate.id,'an exact stored CID identifies the same record without phone heuristics');
-assert.equal(identity.verifiedGooglePlaceFromMapsLink({...mita,googleRating:{...mita.googleRating,mapsUrl:'https://www.google.com/maps/?cid=123'}},[{...candidate,googleMapsUri:'https://maps.google.com/?cid=456'}]),null,'a different branch CID is rejected');
-sqlite.prepare('UPDATE catalog_state SET value=? WHERE key=?').run('100',quotaKey);
-const linked={...mita,id:'direct-link-fixture',googleRating:{...mita.googleRating,mapsUrl:directUrl}};
-const before=calls;assert.equal(await places.resolveWorkshopGooglePlace(linked),candidate.id);assert.equal(calls,before,'direct links require no API lookup even with exhausted quota');
-assert.equal(links.workshopMapsUrl(linked),directUrl.replace('query=Auto+Mita','query='+new URLSearchParams({query:`${linked.name} ${linked.address}`}).toString().slice(6)),'profile and widget use the same ID');
-assert.equal(browser.currentGoogleRating,undefined,'individual Enterprise ratings are removed from the public browser API');assert.equal(browser.currentGooglePhotos,undefined,'public browser has no REST photo requests');
-assert.equal(sqlite.prepare('SELECT rating FROM workshop_google_ratings WHERE workshop_id=?').get(mita.id).rating,4.8,'current API data is displayed, not written over sourced snapshots');
+const publicWithDraft = await (
+  await save.GET(request("/api/workshops?locale=sq"))
+).json();
+assert(!publicWithDraft.workshops.some((w) => w.id === draft.id));
+assert.equal(
+  publicWithDraft.displayById[draft.id],
+  undefined,
+  "unpublished IDs do not leak in display map",
+);
+globalThis.fixtureAdmin = { isModerator: true };
+const adminWithDraft = await (
+  await save.GET(request("/api/workshops?admin=1&locale=sq"))
+).json();
+assert(adminWithDraft.workshops.some((w) => w.id === draft.id));
+assert.equal(adminWithDraft.displayById, undefined);
+globalThis.fixtureAdmin = null;
+assert.equal(
+  (await match.GET(request("/api/google-places/" + draft.id), params(draft.id)))
+    .status,
+  404,
+  "drafts cannot trigger a Google lookup even when the live source has no drafts",
+);
+assert.equal(calls, 0);
+sqlite.prepare("DELETE FROM workshops WHERE id=?").run(draft.id);
+assert.equal(
+  (await match.GET(request("/api/google-places/bad/id"), params("bad/id")))
+    .status,
+  404,
+);
+const legacyHash = createHash("sha256")
+  .update(
+    JSON.stringify([
+      mita.name,
+      mita.phone,
+      mita.city,
+      mita.address,
+      mita.lat,
+      mita.lng,
+    ]),
+  )
+  .digest("hex");
+sqlite
+  .prepare(
+    "INSERT INTO workshop_google_places (workshop_id,place_id,profile_hash,checked_at,retry_after) VALUES (?,NULL,?,?,?)",
+  )
+  .run(mita.id, legacyHash, Date.now(), Date.now() + 7 * 86400000);
+assert.equal(await places.resolveWorkshopGooglePlace(mita), candidate.id);
+assert.equal(
+  calls,
+  1,
+  "the corrected resolver retries a negative result from the old search strategy",
+);
+assert.equal(await places.resolveWorkshopGooglePlace(mita), candidate.id);
+assert.equal(
+  calls,
+  1,
+  "a stored verified ID prevents repeated identity searches",
+);
+assert.deepEqual(
+  JSON.parse(lastRequest.body),
+  identity.googleMapsLinkSearchRequest(mita),
+  "query and search geography come only from server-owned public workshop data",
+);
+assert(
+  !lastRequest.headers["X-Goog-FieldMask"].includes("rating") &&
+    !lastRequest.headers["X-Goog-FieldMask"].includes("reviews"),
+  "matching never imports review content",
+);
+assert.equal(lastRequest.headers["X-Goog-Api-Key"], "fixture-server-key");
+const columns = sqlite
+  .prepare("PRAGMA table_info(workshop_google_places)")
+  .all()
+  .map((row) => row.name);
+assert(
+  !columns.includes("rating") &&
+    !columns.includes("review_count") &&
+    !columns.includes("reviews"),
+  "persistent matching stores only IDs and application metadata",
+);
+const matchesBefore = sqlite
+  .prepare("SELECT COUNT(*) AS n FROM workshop_google_places")
+  .get().n;
+assert.equal(matchesBefore, 1);
+assert.equal(
+  (await directory.listWorkshops()).length,
+  catalogue.coverage.published,
+);
+assert.equal(
+  (await directory.listWorkshops(true)).filter((w) => w.status === "draft")
+    .length,
+  catalogue.coverage.drafts,
+);
+assert.equal(
+  (await directory.listWorkshops()).find((w) => w.id === mita.id).rating,
+  null,
+  "Google matching leaves Riparim aggregates untouched",
+);
+const quotaKey =
+  "google-place-lookups:" + new Date().toISOString().slice(0, 10);
+sqlite
+  .prepare("UPDATE catalog_state SET value=? WHERE key=?")
+  .run("100", quotaKey);
+sqlite
+  .prepare(
+    "INSERT INTO workshop_google_places (workshop_id,place_id,profile_hash,checked_at,retry_after) VALUES (?,?,?,?,?)",
+  )
+  .run(
+    "legacy-positive-fixture",
+    candidate.id,
+    legacyHash,
+    Date.now(),
+    Date.now() + 365 * 86400000,
+  );
+assert.equal(
+  await places.resolveWorkshopGooglePlace({
+    ...mita,
+    id: "legacy-positive-fixture",
+  }),
+  candidate.id,
+  "an unchanged verified legacy match survives the strategy upgrade even with no remaining quota",
+);
+assert.equal(calls, 1);
+assert.equal(
+  await places.resolveWorkshopGooglePlace({
+    ...mita,
+    id: "legacy-positive-fixture",
+    phone: "+38349111111",
+  }),
+  null,
+  "a changed profile cannot reuse a legacy verified identity",
+);
+assert.equal(calls, 1);
+assert.equal(
+  await places.resolveWorkshopGooglePlace({ ...mita, id: "quota-fixture" }),
+  null,
+);
+assert.equal(calls, 1, "daily identity-search budget cannot be exceeded");
+sqlite
+  .prepare("UPDATE catalog_state SET value=? WHERE key=?")
+  .run("1", quotaKey);
+assert.equal(
+  await places.resolveWorkshopGooglePlace({
+    ...mita,
+    id: "ambiguous-fixture",
+    phone: "+38349111111",
+    lat: null,
+    lng: null,
+  }),
+  null,
+);
+assert.equal(calls, 4);
+assert.equal(
+  await places.resolveWorkshopGooglePlace({
+    ...mita,
+    id: "ambiguous-fixture",
+    phone: "+38349111111",
+    lat: null,
+    lng: null,
+  }),
+  null,
+);
+assert.equal(calls, 4, "unmatched candidates are not retried on every visit");
+apiError = true;
+await assert.rejects(
+  places.resolveWorkshopGooglePlace({ ...mita, id: "error-fixture" }),
+);
+assert.equal(calls, 5);
+assert.equal(
+  await places.resolveWorkshopGooglePlace({ ...mita, id: "error-fixture" }),
+  null,
+);
+assert.equal(calls, 5, "provider failures back off");
+apiError = false;
+let fallbackCalls = 0;
+globalThis.fetch = async (url, options) => {
+  fallbackCalls++;
+  const query = JSON.parse(options.body);
+  if (fallbackCalls === 1) {
+    assert.equal(
+      query.textQuery,
+      identity.googleMapsLinkSearchRequest(mita).textQuery,
+    );
+    return Response.json({ places: [] });
+  }
+  assert.equal(query.textQuery, localSearch.textQuery);
+  return Response.json({ places: [candidate] });
+};
+assert.equal(
+  await places.resolveWorkshopGooglePlace({
+    ...mita,
+    id: "name-fallback-fixture",
+  }),
+  candidate.id,
+  "verified name lookup recovers an empty phone search",
+);
+assert.equal(fallbackCalls, 2);
+let countryCalls = 0;
+globalThis.fetch = async (url, options) => {
+  countryCalls++;
+  if (String(url).includes("searchText"))
+    return Response.json({
+      places: [{ ...candidate, addressComponents: undefined }],
+    });
+  assert.equal(options.headers["X-Goog-FieldMask"], "addressComponents");
+  return Response.json({ addressComponents: candidate.addressComponents });
+};
+assert.equal(
+  await places.resolveWorkshopGooglePlace({
+    ...mita,
+    id: "country-details-fixture",
+  }),
+  candidate.id,
+  "missing search country is verified through Place Details",
+);
+assert.equal(countryCalls, 2);
+const directUrl = links.googleMapsPlaceUrl(candidate.id, "Auto Mita");
+assert.equal(links.googlePlaceIdFromMapsUrl(directUrl), candidate.id);
+assert.equal(
+  links.googlePlaceIdFromMapsUrl(
+    "https://evil.example/?query_place_id=" + candidate.id,
+  ),
+  null,
+);
+assert.equal(
+  links.googlePlaceIdFromMapsUrl("https://www.google.com/maps/%ZZ"),
+  null,
+);
+assert.equal(
+  links.googlePlaceIdFromMapsUrl(
+    "https://www.google.com/maps/?query=Auto+Mita",
+  ),
+  null,
+  "search text is not an ID",
+);
+assert.equal(
+  links.googleMapsCid("https://www.google.com/maps/?cid=10863169548485369450"),
+  "10863169548485369450",
+);
+assert.equal(
+  identity.verifiedGooglePlaceFromMapsLink(
+    {
+      ...mita,
+      googleRating: {
+        ...mita.googleRating,
+        mapsUrl: "https://www.google.com/maps/?cid=123",
+      },
+    },
+    [
+      {
+        ...candidate,
+        googleMapsUri: "https://maps.google.com/?cid=123",
+        internationalPhoneNumber: undefined,
+      },
+    ],
+  ),
+  candidate.id,
+  "an exact stored CID identifies the same record without phone heuristics",
+);
+assert.equal(
+  identity.verifiedGooglePlaceFromMapsLink(
+    {
+      ...mita,
+      googleRating: {
+        ...mita.googleRating,
+        mapsUrl: "https://www.google.com/maps/?cid=123",
+      },
+    },
+    [{ ...candidate, googleMapsUri: "https://maps.google.com/?cid=456" }],
+  ),
+  null,
+  "a different branch CID is rejected",
+);
+sqlite
+  .prepare("UPDATE catalog_state SET value=? WHERE key=?")
+  .run("100", quotaKey);
+const linked = {
+  ...mita,
+  id: "direct-link-fixture",
+  googleRating: { ...mita.googleRating, mapsUrl: directUrl },
+};
+const before = calls;
+assert.equal(await places.resolveWorkshopGooglePlace(linked), candidate.id);
+assert.equal(
+  calls,
+  before,
+  "direct links require no API lookup even with exhausted quota",
+);
+assert.equal(
+  links.workshopMapsUrl(linked),
+  directUrl.replace(
+    "query=Auto+Mita",
+    "query=" +
+      new URLSearchParams({ query: `${linked.name} ${linked.address}` })
+        .toString()
+        .slice(6),
+  ),
+  "profile and widget use the same ID",
+);
+assert.equal(
+  browser.currentGoogleRating,
+  undefined,
+  "individual Enterprise ratings are removed from the public browser API",
+);
+assert.equal(
+  browser.currentGooglePhotos,
+  undefined,
+  "public browser has no REST photo requests",
+);
+assert.equal(
+  sqlite
+    .prepare("SELECT rating FROM workshop_google_ratings WHERE workshop_id=?")
+    .get(mita.id).rating,
+  4.8,
+  "current API data is displayed, not written over sourced snapshots",
+);
 // Publication enforces Google identity separately from review availability.
-globalThis.fixtureAdmin={isModerator:true};
-const sendProfile=(body,method='POST')=>new Request(origin+'/api/workshops',{method,headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-const unverified={...actualMita,id:'publication-unverified',name:'Unverified electronics fixture',phone:'+38349111111',status:'published',googleRating:{mapsUrl:actualMita.googleRating.mapsUrl}};
-assert.equal((await save.POST(sendProfile(unverified))).status,422,'client-provided Google links cannot publish an unconfirmed profile');
-assert.equal(sqlite.prepare('SELECT id FROM workshops WHERE id=?').get(unverified.id),undefined);
-assert.equal((await save.POST(sendProfile({...unverified,status:'draft'}))).status,201,'unconfirmed profiles can be saved reversibly as drafts');
-const withoutReviews=(await directory.listWorkshops(true)).find(w=>w.id==='mercedes-service-ballkan-peja');
-const expectedId=links.googlePlaceIdFromMapsUrl(withoutReviews.googleRating.mapsUrl);
-assert(expectedId);assert.equal(withoutReviews.googleRating.rating,null);assert.equal(withoutReviews.googleRating.count,null);
-const oldBrowserKey=globalThis.fixtureEnv.GOOGLE_MAPS_BROWSER_API_KEY;delete globalThis.fixtureEnv.GOOGLE_MAPS_BROWSER_API_KEY;
-assert.equal(await places.confirmedPublicationPlace(directory.validateProfile(withoutReviews,withoutReviews.id),withoutReviews),expectedId,'an unchanged confirmed identity remains valid without live rating configuration');
-globalThis.fixtureEnv.GOOGLE_MAPS_BROWSER_API_KEY=oldBrowserKey;
-const response=await save.PATCH(sendProfile({...withoutReviews,description:withoutReviews.description+' Fixture editorial update.',previousUpdatedAt:withoutReviews.updatedAt},'PATCH'));
-assert.equal(response.status,200,'a verified profile without Google votes can be published');
-assert.equal(links.googlePlaceIdFromMapsUrl((await directory.listWorkshops()).find(w=>w.id===withoutReviews.id).googleRating.mapsUrl),expectedId,'the saved map link and confirmed identity stay aligned');
-assert.equal((await save.PATCH(sendProfile({...withoutReviews,previousUpdatedAt:'stale'},'PATCH'))).status,409,'a stale edit cannot change profile or identity metadata');
-sqlite.prepare('INSERT INTO workshop_google_places (workshop_id,place_id,profile_hash,checked_at,retry_after) VALUES (?,?,?,?,?)').run('sonic-garage',expectedId,'duplicate-fixture',Date.now(),Date.now()+86400000);
-assert.equal(await places.confirmedPublicationPlace(directory.validateProfile(withoutReviews,withoutReviews.id),withoutReviews),null,'a Google identity already used by another real profile cannot be published twice');
-const truck={...actualMita,id:'truck-management-fixture',name:'Scania Truck Fixture',status:'draft'};insertFixture.run(...directory.profileValues(truck));
-assert.equal((await save.PATCH(sendProfile({...truck,status:'published',previousUpdatedAt:truck.updatedAt},'PATCH'))).status,400,'truck entries cannot be republished through the management API');
-sqlite.prepare('DELETE FROM workshops WHERE id=?').run(truck.id);
+globalThis.fixtureAdmin = { isModerator: true };
+const sendProfile = (body, method = "POST") =>
+  new Request(origin + "/api/workshops", {
+    method,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+const unverified = {
+  ...actualMita,
+  id: "publication-unverified",
+  name: "Unverified electronics fixture",
+  phone: "+38349111111",
+  status: "published",
+  googleRating: { mapsUrl: actualMita.googleRating.mapsUrl },
+};
+assert.equal(
+  (await save.POST(sendProfile(unverified))).status,
+  422,
+  "client-provided Google links cannot publish an unconfirmed profile",
+);
+assert.equal(
+  sqlite.prepare("SELECT id FROM workshops WHERE id=?").get(unverified.id),
+  undefined,
+);
+assert.equal(
+  (await save.POST(sendProfile({ ...unverified, status: "draft" }))).status,
+  201,
+  "unconfirmed profiles can be saved reversibly as drafts",
+);
+const withoutReviews = (await directory.listWorkshops(true)).find(
+  (w) => w.id === "mercedes-service-ballkan-peja",
+);
+const expectedId = links.googlePlaceIdFromMapsUrl(
+  withoutReviews.googleRating.mapsUrl,
+);
+assert(expectedId);
+assert.equal(withoutReviews.googleRating.rating, null);
+assert.equal(withoutReviews.googleRating.count, null);
+const oldBrowserKey = globalThis.fixtureEnv.GOOGLE_MAPS_BROWSER_API_KEY;
+delete globalThis.fixtureEnv.GOOGLE_MAPS_BROWSER_API_KEY;
+assert.equal(
+  await places.confirmedPublicationPlace(
+    directory.validateProfile(withoutReviews, withoutReviews.id),
+    withoutReviews,
+  ),
+  expectedId,
+  "an unchanged confirmed identity remains valid without live rating configuration",
+);
+globalThis.fixtureEnv.GOOGLE_MAPS_BROWSER_API_KEY = oldBrowserKey;
+const response = await save.PATCH(
+  sendProfile(
+    {
+      ...withoutReviews,
+      description: withoutReviews.description + " Fixture editorial update.",
+      previousUpdatedAt: withoutReviews.updatedAt,
+    },
+    "PATCH",
+  ),
+);
+assert.equal(
+  response.status,
+  200,
+  "a verified profile without Google votes can be published",
+);
+assert.equal(
+  links.googlePlaceIdFromMapsUrl(
+    (await directory.listWorkshops()).find((w) => w.id === withoutReviews.id)
+      .googleRating.mapsUrl,
+  ),
+  expectedId,
+  "the saved map link and confirmed identity stay aligned",
+);
+assert.equal(
+  (
+    await save.PATCH(
+      sendProfile({ ...withoutReviews, previousUpdatedAt: "stale" }, "PATCH"),
+    )
+  ).status,
+  409,
+  "a stale edit cannot change profile or identity metadata",
+);
+sqlite
+  .prepare(
+    "INSERT INTO workshop_google_places (workshop_id,place_id,profile_hash,checked_at,retry_after) VALUES (?,?,?,?,?)",
+  )
+  .run(
+    "sonic-garage",
+    expectedId,
+    "duplicate-fixture",
+    Date.now(),
+    Date.now() + 86400000,
+  );
+assert.equal(
+  await places.confirmedPublicationPlace(
+    directory.validateProfile(withoutReviews, withoutReviews.id),
+    withoutReviews,
+  ),
+  null,
+  "a Google identity already used by another real profile cannot be published twice",
+);
+const truck = {
+  ...actualMita,
+  id: "truck-management-fixture",
+  name: "Scania Truck Fixture",
+  status: "draft",
+};
+insertFixture.run(...directory.profileValues(truck));
+assert.equal(
+  (
+    await save.PATCH(
+      sendProfile(
+        { ...truck, status: "published", previousUpdatedAt: truck.updatedAt },
+        "PATCH",
+      ),
+    )
+  ).status,
+  400,
+  "truck entries cannot be republished through the management API",
+);
+sqlite.prepare("DELETE FROM workshops WHERE id=?").run(truck.id);
 // Owner drafts validate a changed identity without replacing live metadata.
-sqlite.prepare('UPDATE catalog_state SET value=? WHERE key=?').run('0',quotaKey);
-const cacheBeforeDraft=sqlite.prepare('SELECT * FROM workshop_google_places WHERE workshop_id=?').get(actualMita.id);
-const changedPhone='+383441234567',readonlyCandidate={...candidate,id:'ChIJReadOnlyOperatorFixture',internationalPhoneNumber:changedPhone};
-globalThis.fetch=async url=>{assert.equal(String(url),'https://places.googleapis.com/v1/places:searchText');return Response.json({places:[readonlyCandidate]});};
-const operatorDraft=directory.validateProfile({...actualMita,phone:changedPhone},actualMita.id);
-assert.equal(await places.confirmedPublicationPlace(operatorDraft,actualMita,false),readonlyCandidate.id,'changed owner contacts pass the existing strict matcher in staging mode');
-assert.deepEqual(sqlite.prepare('SELECT * FROM workshop_google_places WHERE workshop_id=?').get(actualMita.id),cacheBeforeDraft,'successful staging preserves the publicly confirmed identity');
-globalThis.fetch=async()=>Response.json({error:'fixture unavailable'},{status:503});
-await assert.rejects(places.confirmedPublicationPlace({...operatorDraft,phone:'+383441234568'},actualMita,false));
-assert.deepEqual(sqlite.prepare('SELECT * FROM workshop_google_places WHERE workshop_id=?').get(actualMita.id),cacheBeforeDraft,'failed staging also preserves the publicly confirmed identity');
-globalThis.fetch=originalFetch;delete globalThis.window;sqlite.close();
-console.log(JSON.stringify({googleIdentityChecks:9,explicitSearchGeography:true,negativeCacheUpgrade:true,apiBoundaries:true,dailyBudget:100,existingPublicWorkshops:catalogue.coverage.published,existingDraftsPreserved:catalogue.coverage.drafts,nativeGoogleRatingWidgets:true,googleRatingsPersisted:false,liveProviderCalls:false}));
+sqlite
+  .prepare("UPDATE catalog_state SET value=? WHERE key=?")
+  .run("0", quotaKey);
+const cacheBeforeDraft = sqlite
+  .prepare("SELECT * FROM workshop_google_places WHERE workshop_id=?")
+  .get(actualMita.id);
+const changedPhone = "+383441234567",
+  readonlyCandidate = {
+    ...candidate,
+    id: "ChIJReadOnlyOperatorFixture",
+    internationalPhoneNumber: changedPhone,
+  };
+globalThis.fetch = async (url) => {
+  assert.equal(
+    String(url),
+    "https://places.googleapis.com/v1/places:searchText",
+  );
+  return Response.json({ places: [readonlyCandidate] });
+};
+const operatorDraft = directory.validateProfile(
+  { ...actualMita, phone: changedPhone },
+  actualMita.id,
+);
+assert.equal(
+  await places.confirmedPublicationPlace(operatorDraft, actualMita, false),
+  readonlyCandidate.id,
+  "changed owner contacts pass the existing strict matcher in staging mode",
+);
+assert.deepEqual(
+  sqlite
+    .prepare("SELECT * FROM workshop_google_places WHERE workshop_id=?")
+    .get(actualMita.id),
+  cacheBeforeDraft,
+  "successful staging preserves the publicly confirmed identity",
+);
+globalThis.fetch = async () =>
+  Response.json({ error: "fixture unavailable" }, { status: 503 });
+await assert.rejects(
+  places.confirmedPublicationPlace(
+    { ...operatorDraft, phone: "+383441234568" },
+    actualMita,
+    false,
+  ),
+);
+assert.deepEqual(
+  sqlite
+    .prepare("SELECT * FROM workshop_google_places WHERE workshop_id=?")
+    .get(actualMita.id),
+  cacheBeforeDraft,
+  "failed staging also preserves the publicly confirmed identity",
+);
+globalThis.fetch = originalFetch;
+delete globalThis.window;
+sqlite.close();
+console.log(
+  JSON.stringify({
+    googleIdentityChecks: 9,
+    explicitSearchGeography: true,
+    negativeCacheUpgrade: true,
+    apiBoundaries: true,
+    dailyBudget: 100,
+    existingPublicWorkshops: catalogue.coverage.published,
+    existingDraftsPreserved: catalogue.coverage.drafts,
+    nativeGoogleRatingWidgets: true,
+    googleRatingsPersisted: false,
+    liveProviderCalls: false,
+  }),
+);

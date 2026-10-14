@@ -5,14 +5,39 @@
   "main": "./build/cloudflare-worker.ts",
   "compatibility_date": "2026-05-15",
   "compatibility_flags": ["nodejs_compat"],
-  "limits": {"cpu_ms": 500},
-  "assets": {"html_handling": "none", "binding": "ASSETS", "run_worker_first": ["/werkstaetten", "/sq/werkstaetten", "/en/werkstaetten", "/werkstatt/*", "/sq/werkstatt/*", "/en/werkstatt/*", "/__public/*", "/__private/*"]},
+  "limits": { "cpu_ms": 500 },
+  "assets": {
+    "html_handling": "none",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/werkstaetten",
+      "/sq/werkstaetten",
+      "/en/werkstaetten",
+      "/werkstatt/*",
+      "/sq/werkstatt/*",
+      "/en/werkstatt/*",
+      "/__public/*",
+      "/__private/*"
+    ]
+  },
   "workers_dev": true,
   "routes": [
-    {"pattern": "riparim.com", "zone_id": "cb2470c7a7d49b8a3e6aa3e697c3355e", "custom_domain": true, "enabled": true, "previews_enabled": false},
-    {"pattern": "www.riparim.com", "zone_id": "cb2470c7a7d49b8a3e6aa3e697c3355e", "custom_domain": true, "enabled": true, "previews_enabled": false}
+    {
+      "pattern": "riparim.com",
+      "zone_id": "cb2470c7a7d49b8a3e6aa3e697c3355e",
+      "custom_domain": true,
+      "enabled": true,
+      "previews_enabled": false
+    },
+    {
+      "pattern": "www.riparim.com",
+      "zone_id": "cb2470c7a7d49b8a3e6aa3e697c3355e",
+      "custom_domain": true,
+      "enabled": true,
+      "previews_enabled": false
+    }
   ],
-  "triggers": {"crons": []},
+  "triggers": { "crons": [] },
   "preview_urls": false,
   "vars": {
     "SITE_ORIGIN": "https://riparim.com"
@@ -20,20 +45,24 @@
   "secrets": {
     "required": ["REVIEW_MODERATOR_EMAIL"]
   },
-  "d1_databases": [{
-    "binding": "DB",
-    "database_name": "riparim-production",
-    "database_id": "b395ea3a-5316-4b0b-bdee-533bdb68d6a0",
-    "migrations_dir": "drizzle",
-    "remote": false
-  }],
-  "r2_buckets": [{
-    "binding": "BUCKET",
-    "bucket_name": "riparim-evidence-production",
-    "remote": false
-  }],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "riparim-production",
+      "database_id": "b395ea3a-5316-4b0b-bdee-533bdb68d6a0",
+      "migrations_dir": "drizzle",
+      "remote": false
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "BUCKET",
+      "bucket_name": "riparim-evidence-production",
+      "remote": false
+    }
+  ],
   "observability": {
     "enabled": true,
-    "traces": {"enabled": true}
+    "traces": { "enabled": true }
   }
 }

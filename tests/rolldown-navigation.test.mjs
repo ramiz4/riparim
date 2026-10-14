@@ -9,18 +9,26 @@ const navigationId = "/fixture/node_modules/vinext/dist/shims/navigation.js";
 const entryId = "/fixture/index.js";
 const linkId = "/fixture/link.js";
 const sources = new Map([
-  [entryId, `
+  [
+    entryId,
+    `
     import { getClientNavigationState } from ${JSON.stringify(navigationId)};
     globalThis.__riparimFixtureNavigationState = getClientNavigationState();
     globalThis.__riparimNavigationRegression = async () =>
       (await import(${JSON.stringify(linkId)})).checkNavigation();
-  `],
-  [navigationId, `
+  `,
+  ],
+  [
+    navigationId,
+    `
     export function getClientNavigationState() { return "fixture-state"; }
     export function getPrefetchInterceptionContext() { return "fixture-prefetch"; }
     export async function navigateClientSide() { return "fixture-navigation"; }
-  `],
-  [linkId, `
+  `,
+  ],
+  [
+    linkId,
+    `
     let loadedNavigationModule = null;
     let navigationModulePromise = null;
     function loadNavigationModule() {
@@ -34,18 +42,21 @@ const sources = new Map([
         loadedNavigationModule ?? await loadNavigationModule();
       return [getPrefetchInterceptionContext(), await navigateClientSide()];
     }
-  `],
+  `,
+  ],
 ]);
 
 async function buildFixture(groups, directory) {
   const bundle = await rolldown({
     input: { index: entryId },
     preserveEntrySignatures: false,
-    plugins: [{
-      name: "navigation-fixture",
-      resolveId: id => sources.has(id) ? id : null,
-      load: id => sources.get(id),
-    }],
+    plugins: [
+      {
+        name: "navigation-fixture",
+        resolveId: (id) => (sources.has(id) ? id : null),
+        load: (id) => sources.get(id),
+      },
+    ],
   });
   try {
     const result = await bundle.generate({
@@ -55,14 +66,19 @@ async function buildFixture(groups, directory) {
       // smaller boundary instead of being absorbed into the browser entry.
       codeSplitting: {
         minSize: 10_000,
-        groups: [{ name: "framework", test: /[\\/]node_modules[\\/]react[\\/]/ }, ...groups],
+        groups: [
+          { name: "framework", test: /[\\/]node_modules[\\/]react[\\/]/ },
+          ...groups,
+        ],
       },
     });
     await mkdir(directory, { recursive: true });
-    await Promise.all(result.output.map(output => {
-      assert.equal(output.type, "chunk");
-      return writeFile(join(directory, output.fileName), output.code);
-    }));
+    await Promise.all(
+      result.output.map((output) => {
+        assert.equal(output.type, "chunk");
+        return writeFile(join(directory, output.fileName), output.code);
+      }),
+    );
     await import(pathToFileURL(join(directory, "index.js")).href);
   } finally {
     await bundle.close();
@@ -81,10 +97,21 @@ try {
     message: /is not a function/,
   });
 
-  await buildFixture([createVinextNavigationChunkGroup()], join(fixtureDirectory, "fixed"));
-  assert.deepEqual(await globalThis.__riparimNavigationRegression(), ["fixture-prefetch", "fixture-navigation"]);
-  assert.deepEqual(await globalThis.__riparimNavigationRegression(), ["fixture-prefetch", "fixture-navigation"]);
-  console.log("Rolldown navigation regression passed: prefetch and cached navigation functions remain callable.");
+  await buildFixture(
+    [createVinextNavigationChunkGroup()],
+    join(fixtureDirectory, "fixed"),
+  );
+  assert.deepEqual(await globalThis.__riparimNavigationRegression(), [
+    "fixture-prefetch",
+    "fixture-navigation",
+  ]);
+  assert.deepEqual(await globalThis.__riparimNavigationRegression(), [
+    "fixture-prefetch",
+    "fixture-navigation",
+  ]);
+  console.log(
+    "Rolldown navigation regression passed: prefetch and cached navigation functions remain callable.",
+  );
 } finally {
   delete globalThis.__riparimNavigationRegression;
   delete globalThis.__riparimFixtureNavigationState;

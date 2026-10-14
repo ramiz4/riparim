@@ -1,4 +1,4 @@
-import {LocaleAnchor} from "@/components/locale-anchor";
+import { LocaleAnchor } from "@/components/locale-anchor";
 import { LinkIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { connectorErrorRecovery } from "@/lib/connector-errors.mjs";

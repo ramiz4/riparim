@@ -1,64 +1,211 @@
-import assert from 'node:assert/strict';
-import {readFile,writeFile,mkdir} from 'node:fs/promises';
-import {createRequire} from 'node:module';
-import {DatabaseSync} from 'node:sqlite';
-const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
-const bundle=await build({stdin:{contents:"export * from './lib/auth/config';export {validateAuthEmailOrigins} from './lib/auth/email-templates';",resolveDir:process.cwd(),loader:'ts'},bundle:true,format:'esm',platform:'node',write:false,plugins:[{name:'email-settings-fixture',setup(b){
- b.onResolve({filter:/^cloudflare:workers$/},()=>({path:'env',namespace:'fixture'}));
- b.onLoad({filter:/.*/,namespace:'fixture'},()=>({contents:'export const env=globalThis.fixtureEnv;',loader:'js'}));
-}}]});
-await mkdir('.test-runtime/email-activation',{recursive:true});
-await writeFile('.test-runtime/email-activation/config.mjs',bundle.outputFiles[0].contents);
-const db=new DatabaseSync(':memory:');
-db.exec(await readFile('drizzle/0002_exotic_slayback.sql','utf8'));db.exec("ALTER TABLE auth_settings ADD provider TEXT NOT NULL DEFAULT 'supabase'");
-const d1={prepare(sql){const s=db.prepare(sql);const a=(values=[])=>({first:async()=>s.get(...values)??null,run:async()=>s.run(...values),bind:(...next)=>a(next)});return a();}};
-const projectUrl='https://fixture-project.supabase.co',key='sb_publishable_fixture_public_key_1234567890';
-globalThis.fixtureEnv={DB:d1,BUCKET:{},SITE_ORIGIN:'https://riparim.example.test'};
-let settings={external:{email:true,google:false},mailer_autoconfirm:false,disable_signup:false},available=true;
-const originalFetch=globalThis.fetch;
-globalThis.fetch=async url=>{assert.equal(String(url),projectUrl+'/auth/v1/settings');return available?Response.json(settings):new Response(null,{status:503});};
-const cfg=await import(new URL('../.test-runtime/email-activation/config.mjs',import.meta.url));
-let passed=0;const check=(ok,message)=>{assert(ok,message);passed++;};
-const row=()=>db.prepare("SELECT * FROM auth_settings WHERE id='main'").get();
-const draft=()=>{db.exec('DELETE FROM auth_settings');db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at) VALUES ('main',?,?,0,0,?)").run(projectUrl,key,'2026-10-02T00:00:00.000Z');};
+import assert from "node:assert/strict";
+import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { createRequire } from "node:module";
+import { DatabaseSync } from "node:sqlite";
+const { build } = createRequire(new URL("../package.json", import.meta.url))(
+  "esbuild",
+);
+const bundle = await build({
+  stdin: {
+    contents:
+      "export * from './lib/auth/config';export {validateAuthEmailOrigins} from './lib/auth/email-templates';",
+    resolveDir: process.cwd(),
+    loader: "ts",
+  },
+  bundle: true,
+  format: "esm",
+  platform: "node",
+  write: false,
+  plugins: [
+    {
+      name: "email-settings-fixture",
+      setup(b) {
+        b.onResolve({ filter: /^cloudflare:workers$/ }, () => ({
+          path: "env",
+          namespace: "fixture",
+        }));
+        b.onLoad({ filter: /.*/, namespace: "fixture" }, () => ({
+          contents: "export const env=globalThis.fixtureEnv;",
+          loader: "js",
+        }));
+      },
+    },
+  ],
+});
+await mkdir(".test-runtime/email-activation", { recursive: true });
+await writeFile(
+  ".test-runtime/email-activation/config.mjs",
+  bundle.outputFiles[0].contents,
+);
+const db = new DatabaseSync(":memory:");
+db.exec(await readFile("drizzle/0002_exotic_slayback.sql", "utf8"));
+db.exec(
+  "ALTER TABLE auth_settings ADD provider TEXT NOT NULL DEFAULT 'supabase'",
+);
+const d1 = {
+  prepare(sql) {
+    const s = db.prepare(sql);
+    const a = (values = []) => ({
+      first: async () => s.get(...values) ?? null,
+      run: async () => s.run(...values),
+      bind: (...next) => a(next),
+    });
+    return a();
+  },
+};
+const projectUrl = "https://fixture-project.supabase.co",
+  key = "sb_publishable_fixture_public_key_1234567890";
+globalThis.fixtureEnv = {
+  DB: d1,
+  BUCKET: {},
+  SITE_ORIGIN: "https://riparim.example.test",
+};
+let settings = {
+    external: { email: true, google: false },
+    mailer_autoconfirm: false,
+    disable_signup: false,
+  },
+  available = true;
+const originalFetch = globalThis.fetch;
+globalThis.fetch = async (url) => {
+  assert.equal(String(url), projectUrl + "/auth/v1/settings");
+  return available
+    ? Response.json(settings)
+    : new Response(null, { status: 503 });
+};
+const cfg = await import(
+  new URL("../.test-runtime/email-activation/config.mjs", import.meta.url)
+);
+let passed = 0;
+const check = (ok, message) => {
+  assert(ok, message);
+  passed++;
+};
+const row = () =>
+  db.prepare("SELECT * FROM auth_settings WHERE id='main'").get();
+const draft = () => {
+  db.exec("DELETE FROM auth_settings");
+  db.prepare(
+    "INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at) VALUES ('main',?,?,0,0,?)",
+  ).run(projectUrl, key, "2026-10-02T00:00:00.000Z");
+};
 draft();
-check(cfg.validateAuthEmailOrigins(globalThis.fixtureEnv.SITE_ORIGIN,globalThis.fixtureEnv.SITE_ORIGIN)===globalThis.fixtureEnv.SITE_ORIGIN,'Mail activation checks the actual provider and application origins before copying templates');
-for(const value of [globalThis.fixtureEnv.SITE_ORIGIN+'/','https://other.example.test']){assert.throws(()=>cfg.validateAuthEmailOrigins(globalThis.fixtureEnv.SITE_ORIGIN,value),/AUTH_EMAIL_ORIGIN/);passed++;}
-check(row().enabled===0&&row().email_delivery_confirmed===0,'Failed template origin validation never activates login or claims delivery');
-check(!(await cfg.getAuthConfig()).enabled,'A saved draft remains disabled without a requested activation');
-globalThis.fixtureEnv.EMAIL_LOGIN_ACTIVATION_PROJECT='https://other-project.supabase.co';
-globalThis.fixtureEnv.EMAIL_LOGIN_ACTIVATION_TIME='2026-10-03T00:00:00.000Z';
-check(!(await cfg.getAuthConfig()).enabled,'Activation cannot change another configured project');
-globalThis.fixtureEnv.EMAIL_LOGIN_ACTIVATION_PROJECT=projectUrl;
-globalThis.fixtureEnv.EMAIL_LOGIN_ACTIVATION_TIME='invalid';
-check(!(await cfg.getAuthConfig()).enabled,'Invalid activation time fails closed');
-globalThis.fixtureEnv.EMAIL_LOGIN_ACTIVATION_TIME='2026-10-01T00:00:00.000Z';
-check(!(await cfg.getAuthConfig()).enabled,'A newer owner configuration wins over an old activation');
-globalThis.fixtureEnv.EMAIL_LOGIN_ACTIVATION_TIME='2026-10-03T00:00:00.000Z';
-available=false;
-check(!(await cfg.getAuthConfig()).enabled&&row().enabled===0,'Provider outage leaves the saved draft untouched');
-available=true;settings={...settings,mailer_autoconfirm:true};
-check(!(await cfg.getAuthConfig()).enabled,'Automatically confirmed email is insufficient to activate email login');
-settings={...settings,mailer_autoconfirm:false};
-const config=await cfg.getAuthConfig();
-check(config.enabled&&row().enabled===1,'Verified existing provider is activated and persisted');
-check(!config.emailDeliveryConfirmed&&row().email_delivery_confirmed===0,'Activation does not claim untested SMTP delivery');
-let ready=await cfg.providerAvailability(config);
-check(ready.email&&ready.emailSignup&&!ready.emailRecovery,'Provider-enabled signup is available without a local SMTP attestation');
-settings={...settings,disable_signup:true};
-ready=await cfg.providerAvailability({...config,emailDeliveryConfirmed:true});
-check(ready.email&&!ready.emailSignup&&ready.emailRecovery,'Disabling signup preserves existing account login and recovery');
-settings={...settings,disable_signup:false};
-ready=await cfg.providerAvailability({...config,emailDeliveryConfirmed:true});
-check(ready.email&&ready.emailSignup&&ready.emailRecovery,'Confirmed delivery enables mail-dependent flows');
-available=false;
-ready=await cfg.providerAvailability(config);
-check(!ready.email&&!ready.emailSignup&&!ready.emailRecovery&&!ready.google,'Unavailable provider hides all sign-in controls');
-available=true;
-db.prepare("UPDATE auth_settings SET enabled=0,updated_at=? WHERE id='main'").run('2026-10-03T01:00:00.000Z');
-check(!(await cfg.getAuthConfig()).enabled,'Later owner deactivation is never overridden');
-db.prepare("UPDATE auth_settings SET enabled=0,updated_at='2026-10-02',provider='pocketbase',public_key='' WHERE id='main'").run();
-globalThis.fixtureEnv.AUTH_TRUSTED_ORIGIN=projectUrl;globalThis.fixtureEnv.AUTH_TRUSTED_PROVIDER='pocketbase';
-check(!(await cfg.getAuthConfig()).enabled,'An old Supabase scheduled activation cannot activate another protocol on the same endpoint');
-globalThis.fetch=originalFetch;
-console.log(JSON.stringify({emailActivationChecksPassed:passed,realEmailsSent:false}));
+check(
+  cfg.validateAuthEmailOrigins(
+    globalThis.fixtureEnv.SITE_ORIGIN,
+    globalThis.fixtureEnv.SITE_ORIGIN,
+  ) === globalThis.fixtureEnv.SITE_ORIGIN,
+  "Mail activation checks the actual provider and application origins before copying templates",
+);
+for (const value of [
+  globalThis.fixtureEnv.SITE_ORIGIN + "/",
+  "https://other.example.test",
+]) {
+  assert.throws(
+    () =>
+      cfg.validateAuthEmailOrigins(globalThis.fixtureEnv.SITE_ORIGIN, value),
+    /AUTH_EMAIL_ORIGIN/,
+  );
+  passed++;
+}
+check(
+  row().enabled === 0 && row().email_delivery_confirmed === 0,
+  "Failed template origin validation never activates login or claims delivery",
+);
+check(
+  !(await cfg.getAuthConfig()).enabled,
+  "A saved draft remains disabled without a requested activation",
+);
+globalThis.fixtureEnv.EMAIL_LOGIN_ACTIVATION_PROJECT =
+  "https://other-project.supabase.co";
+globalThis.fixtureEnv.EMAIL_LOGIN_ACTIVATION_TIME = "2026-10-03T00:00:00.000Z";
+check(
+  !(await cfg.getAuthConfig()).enabled,
+  "Activation cannot change another configured project",
+);
+globalThis.fixtureEnv.EMAIL_LOGIN_ACTIVATION_PROJECT = projectUrl;
+globalThis.fixtureEnv.EMAIL_LOGIN_ACTIVATION_TIME = "invalid";
+check(
+  !(await cfg.getAuthConfig()).enabled,
+  "Invalid activation time fails closed",
+);
+globalThis.fixtureEnv.EMAIL_LOGIN_ACTIVATION_TIME = "2026-10-01T00:00:00.000Z";
+check(
+  !(await cfg.getAuthConfig()).enabled,
+  "A newer owner configuration wins over an old activation",
+);
+globalThis.fixtureEnv.EMAIL_LOGIN_ACTIVATION_TIME = "2026-10-03T00:00:00.000Z";
+available = false;
+check(
+  !(await cfg.getAuthConfig()).enabled && row().enabled === 0,
+  "Provider outage leaves the saved draft untouched",
+);
+available = true;
+settings = { ...settings, mailer_autoconfirm: true };
+check(
+  !(await cfg.getAuthConfig()).enabled,
+  "Automatically confirmed email is insufficient to activate email login",
+);
+settings = { ...settings, mailer_autoconfirm: false };
+const config = await cfg.getAuthConfig();
+check(
+  config.enabled && row().enabled === 1,
+  "Verified existing provider is activated and persisted",
+);
+check(
+  !config.emailDeliveryConfirmed && row().email_delivery_confirmed === 0,
+  "Activation does not claim untested SMTP delivery",
+);
+let ready = await cfg.providerAvailability(config);
+check(
+  ready.email && ready.emailSignup && !ready.emailRecovery,
+  "Provider-enabled signup is available without a local SMTP attestation",
+);
+settings = { ...settings, disable_signup: true };
+ready = await cfg.providerAvailability({
+  ...config,
+  emailDeliveryConfirmed: true,
+});
+check(
+  ready.email && !ready.emailSignup && ready.emailRecovery,
+  "Disabling signup preserves existing account login and recovery",
+);
+settings = { ...settings, disable_signup: false };
+ready = await cfg.providerAvailability({
+  ...config,
+  emailDeliveryConfirmed: true,
+});
+check(
+  ready.email && ready.emailSignup && ready.emailRecovery,
+  "Confirmed delivery enables mail-dependent flows",
+);
+available = false;
+ready = await cfg.providerAvailability(config);
+check(
+  !ready.email && !ready.emailSignup && !ready.emailRecovery && !ready.google,
+  "Unavailable provider hides all sign-in controls",
+);
+available = true;
+db.prepare(
+  "UPDATE auth_settings SET enabled=0,updated_at=? WHERE id='main'",
+).run("2026-10-03T01:00:00.000Z");
+check(
+  !(await cfg.getAuthConfig()).enabled,
+  "Later owner deactivation is never overridden",
+);
+db.prepare(
+  "UPDATE auth_settings SET enabled=0,updated_at='2026-10-02',provider='pocketbase',public_key='' WHERE id='main'",
+).run();
+globalThis.fixtureEnv.AUTH_TRUSTED_ORIGIN = projectUrl;
+globalThis.fixtureEnv.AUTH_TRUSTED_PROVIDER = "pocketbase";
+check(
+  !(await cfg.getAuthConfig()).enabled,
+  "An old Supabase scheduled activation cannot activate another protocol on the same endpoint",
+);
+globalThis.fetch = originalFetch;
+console.log(
+  JSON.stringify({
+    emailActivationChecksPassed: passed,
+    realEmailsSent: false,
+  }),
+);

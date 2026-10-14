@@ -9,14 +9,14 @@ isolierte Komponentenprüfungen, nicht auf Produktionsmessungen.
 
 ## Befunde und Änderungen
 
-| Befund | Auswirkung | Änderung |
-| --- | --- | --- |
-| Startseite und Katalog importierten `app/journeys.tsx`. | Auch Bewertungsformular, Nachweis- und Löschdialogcode gehörten zu ihren Browserabhängigkeiten. | Fahrzeugsuche als eigene Komponente; öffentliche Seiten importieren sie direkt und erhalten nur benötigte Sprachkataloge. |
-| Beide Fotos wurden immer als vollständige JPEG-Dateien ausgeliefert. | Mobile Geräte luden unnötig große Bilder. | WebP in 640, 1024 und 1536 Pixeln mit `srcSet` und `sizes`; Hero bleibt priorisiert, zweites Foto bleibt lazy und wird asynchron dekodiert. |
-| Auswahlwerte fehlten im Server-HTML. | Suchfelder erschienen vor JavaScript leer. | `Picker` gibt die übersetzte aktuelle Auswahl schon beim Serverrendern aus. |
-| Der Gastheader ragte bei 390 Pixeln bis etwa 391 Pixel über den Bildschirmrand. | Anmeldung und rechter Seitenabstand wurden abgeschnitten. | Anmeldung als beschriftetes 44-Pixel-Icon auf kleinen Displays; kompakteres Logo und Kontomenü bis 380 Pixel. |
-| Nach „Mehr anzeigen“ blieb der Fokus am nach unten verschobenen Button. | Tastaturnutzer übersprangen die neuen Ergebnisse; am Listenende verschwand das Fokusziel. | Fokus auf den ersten neu hinzugefügten Profillink nach dem Rendern. |
-| Escape in der Fahrzeugsuche setzte den Fokus auf `BODY`. | Die Tastaturnavigation verlor ihre Ausgangsposition. | Dialog merkt sich den tatsächlichen Auslöser und stellt dessen Fokus wieder her, sofern er noch vorhanden ist. |
+| Befund                                                                          | Auswirkung                                                                                      | Änderung                                                                                                                                    |
+| ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Startseite und Katalog importierten `app/journeys.tsx`.                         | Auch Bewertungsformular, Nachweis- und Löschdialogcode gehörten zu ihren Browserabhängigkeiten. | Fahrzeugsuche als eigene Komponente; öffentliche Seiten importieren sie direkt und erhalten nur benötigte Sprachkataloge.                   |
+| Beide Fotos wurden immer als vollständige JPEG-Dateien ausgeliefert.            | Mobile Geräte luden unnötig große Bilder.                                                       | WebP in 640, 1024 und 1536 Pixeln mit `srcSet` und `sizes`; Hero bleibt priorisiert, zweites Foto bleibt lazy und wird asynchron dekodiert. |
+| Auswahlwerte fehlten im Server-HTML.                                            | Suchfelder erschienen vor JavaScript leer.                                                      | `Picker` gibt die übersetzte aktuelle Auswahl schon beim Serverrendern aus.                                                                 |
+| Der Gastheader ragte bei 390 Pixeln bis etwa 391 Pixel über den Bildschirmrand. | Anmeldung und rechter Seitenabstand wurden abgeschnitten.                                       | Anmeldung als beschriftetes 44-Pixel-Icon auf kleinen Displays; kompakteres Logo und Kontomenü bis 380 Pixel.                               |
+| Nach „Mehr anzeigen“ blieb der Fokus am nach unten verschobenen Button.         | Tastaturnutzer übersprangen die neuen Ergebnisse; am Listenende verschwand das Fokusziel.       | Fokus auf den ersten neu hinzugefügten Profillink nach dem Rendern.                                                                         |
+| Escape in der Fahrzeugsuche setzte den Fokus auf `BODY`.                        | Die Tastaturnavigation verlor ihre Ausgangsposition.                                            | Dialog merkt sich den tatsächlichen Auslöser und stellt dessen Fokus wieder her, sofern er noch vorhanden ist.                              |
 
 ## Gemessene Dateigrößen
 
@@ -27,10 +27,10 @@ jeweils ungefähr **5 % weniger JavaScript**. Das ist ein Vergleich der
 Browserabhängigkeiten, keine Messung der gesamten Dokumentantwort oder realer
 Übertragungszeiten. Frameworkcode bleibt enthalten.
 
-| Foto | JPEG vorher | WebP 640 px | WebP 1024 px | WebP 1536 px |
-| --- | ---: | ---: | ---: | ---: |
-| Hero | 422.856 Bytes | 38.726 Bytes (−90,8 %) | 82.872 Bytes (−80,4 %) | 153.342 Bytes (−63,7 %) |
-| Diagnose | 369.208 Bytes | 29.594 Bytes (−92,0 %) | 51.602 Bytes (−86,0 %) | 83.212 Bytes (−77,5 %) |
+| Foto     |   JPEG vorher |            WebP 640 px |           WebP 1024 px |            WebP 1536 px |
+| -------- | ------------: | ---------------------: | ---------------------: | ----------------------: |
+| Hero     | 422.856 Bytes | 38.726 Bytes (−90,8 %) | 82.872 Bytes (−80,4 %) | 153.342 Bytes (−63,7 %) |
+| Diagnose | 369.208 Bytes | 29.594 Bytes (−92,0 %) | 51.602 Bytes (−86,0 %) |  83.212 Bytes (−77,5 %) |
 
 Chromium wählte bei 390 Pixeln die 640-Pixel-Varianten mit DPR 1 und die
 1024-Pixel-Varianten mit DPR 2. Beide Fotos zusammen sinken damit von 792.064 auf

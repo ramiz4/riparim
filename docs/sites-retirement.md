@@ -1,8 +1,7 @@
 # Kontrollierte Stilllegung der bisherigen Sites-Veröffentlichung
 
 Diese Anleitung setzt [#20](https://github.com/ramiz4/riparim/issues/20) nach der
-[technischen Produktionsabnahme](domain-cutover-2026-10-05.md) um. Stand vom
-5. Oktober 2026: Inventar, geschütztes Gesamtarchiv und Stilllegung sind geprüft.
+[technischen Produktionsabnahme](domain-cutover-2026-10-05.md) um. Stand vom 5. Oktober 2026: Inventar, geschütztes Gesamtarchiv und Stilllegung sind geprüft.
 Der Nutzer beendete die gesonderte Rückfallphase ausdrücklich mit
 „Ja, jetzt stilllegen.“; die Betreiberentscheidung wurde um 09:51:01
 Europe/Belgrade (07:51:01 UTC) festgehalten. Die Ausführung und Nachprüfung stehen
@@ -11,18 +10,18 @@ wurde dadurch ersetzt; er löst keine weitere automatische Änderung aus.
 
 ## Bestand und Unabhängigkeit des neuen Betriebs
 
-| Alter Bestand | Inventar vor der Ausführung |
-| --- | --- |
-| Hostingprojekt | `appgprj_6abfd028b7e48191822a15d44cbbda8d`, aktiv, Betreiber ist Owner |
-| Generierte URL | `https://mjeshter-kosovo.r-loki.chatgpt.site`, HTTP 503 mit tatsächlichem Wartungstext und `no-store` |
-| Gespeicherte Veröffentlichung | Version 42, `bf0af1913102710925efcadbfa9d3fff7631b694`, geprüfter Sites-Release v1.2.0 |
-| Provider-Worker | `site---6abfd028b7e48191822a15d44cbbda8d` |
-| Alte Domainzuordnungen | Apex `appgdom_6ac0ffb23eb481919cf1ad20c799ecae`; www `appgdom_6ac0ffd2de708191ab09da6e4a896478` |
-| D1 | logisches Binding `DB`; 17 Anwendungstabellen plus zwei archivierte Systemtabellen, insgesamt 386 Zeilen |
-| Privates R2 | logisches Binding `BUCKET`; vollständig inventarisiert, null Objekte und Nachweisreferenzen |
-| Laufzeitkonfiguration | Revision 17, 13 Variablen; `MIGRATION_READ_ONLY=true` bleibt erhalten |
-| Hintergrundarbeit | keine verknüpften Sites-Automationen in der nativen Abfrage; gespeicherter Fünf-Minuten-Cron überspringt durch Read-only sämtliche Benachrichtigungsarbeit |
-| Historischer Quellcode | ursprünglicher e3-Stand samt vollständiger Git-Historie und BF0-Release-Tag separat gesichert |
+| Alter Bestand                 | Inventar vor der Ausführung                                                                                                                                |
+| ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Hostingprojekt                | `appgprj_6abfd028b7e48191822a15d44cbbda8d`, aktiv, Betreiber ist Owner                                                                                     |
+| Generierte URL                | `https://mjeshter-kosovo.r-loki.chatgpt.site`, HTTP 503 mit tatsächlichem Wartungstext und `no-store`                                                      |
+| Gespeicherte Veröffentlichung | Version 42, `bf0af1913102710925efcadbfa9d3fff7631b694`, geprüfter Sites-Release v1.2.0                                                                     |
+| Provider-Worker               | `site---6abfd028b7e48191822a15d44cbbda8d`                                                                                                                  |
+| Alte Domainzuordnungen        | Apex `appgdom_6ac0ffb23eb481919cf1ad20c799ecae`; www `appgdom_6ac0ffd2de708191ab09da6e4a896478`                                                            |
+| D1                            | logisches Binding `DB`; 17 Anwendungstabellen plus zwei archivierte Systemtabellen, insgesamt 386 Zeilen                                                   |
+| Privates R2                   | logisches Binding `BUCKET`; vollständig inventarisiert, null Objekte und Nachweisreferenzen                                                                |
+| Laufzeitkonfiguration         | Revision 17, 13 Variablen; `MIGRATION_READ_ONLY=true` bleibt erhalten                                                                                      |
+| Hintergrundarbeit             | keine verknüpften Sites-Automationen in der nativen Abfrage; gespeicherter Fünf-Minuten-Cron überspringt durch Read-only sämtliche Benachrichtigungsarbeit |
+| Historischer Quellcode        | ursprünglicher e3-Stand samt vollständiger Git-Historie und BF0-Release-Tag separat gesichert                                                              |
 
 Der produktive Worker `riparim` läuft im eigenen Account
 `ec181b3a61c7c3da13910600953fc3ea` auf `https://riparim.com`. Er verwendet allein
@@ -176,17 +175,17 @@ Ressourcen bleiben zur Aufbewahrung erhalten. Dies ist keine Projektlöschung.
 Die Ausführung lief von 09:52:54 bis 09:58:38 Europe/Belgrade; danach folgte
 die Nachprüfung ohne öffentliche Wartungspause.
 
-| Tatsächlich ausgeführt | Ergebnis |
-| --- | --- |
-| Source-Zugriff | `custom`, Policyrevision 3; genau ein Owner, null Nicht-Owner und Gruppen; aktueller Betreiber bleibt Owner |
-| Alte Domainzuordnungen | ausschließlich beide inventarisierten Source-IDs entfernt; frische Source-Liste leer |
-| Eigene Domainkonfiguration | beide ursprünglichen eigenen Worker-Domain-IDs, Zone, aktivierter Zustand und ausgeschaltete Previews unverändert |
-| Alte Exportwerte | ausschließlich `MIGRATION_EXPORT_TOKEN_SHA256`, `MIGRATION_EXPORT_EXPIRES_AT`, `MIGRATION_SOURCE_COMMIT` entfernt |
-| Aktive Source-Laufzeit | Environmentrevision 18; `MIGRATION_READ_ONLY=true`; übrige Einträge unverändert |
-| Private Übernahme | gespeicherte geprüfte Version 42 / BF0; Deployment `appgdep_6ac358569efc8191b9841848bccea8b5` erfolgreich mit Revision 18 |
-| Alte öffentliche Zugänge | generierte Root-URL und Exportpfad antworten anonym mit HTTP 401 |
+| Tatsächlich ausgeführt      | Ergebnis                                                                                                                                                                                     |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Source-Zugriff              | `custom`, Policyrevision 3; genau ein Owner, null Nicht-Owner und Gruppen; aktueller Betreiber bleibt Owner                                                                                  |
+| Alte Domainzuordnungen      | ausschließlich beide inventarisierten Source-IDs entfernt; frische Source-Liste leer                                                                                                         |
+| Eigene Domainkonfiguration  | beide ursprünglichen eigenen Worker-Domain-IDs, Zone, aktivierter Zustand und ausgeschaltete Previews unverändert                                                                            |
+| Alte Exportwerte            | ausschließlich `MIGRATION_EXPORT_TOKEN_SHA256`, `MIGRATION_EXPORT_EXPIRES_AT`, `MIGRATION_SOURCE_COMMIT` entfernt                                                                            |
+| Aktive Source-Laufzeit      | Environmentrevision 18; `MIGRATION_READ_ONLY=true`; übrige Einträge unverändert                                                                                                              |
+| Private Übernahme           | gespeicherte geprüfte Version 42 / BF0; Deployment `appgdep_6ac358569efc8191b9841848bccea8b5` erfolgreich mit Revision 18                                                                    |
+| Alte öffentliche Zugänge    | generierte Root-URL und Exportpfad antworten anonym mit HTTP 401                                                                                                                             |
 | Erhaltene Source-Ressourcen | Projekt aktiv und Owner-zugänglich, Versionen unverändert, logisches D1-Binding mit allen 17 Anwendungstabellen vorhanden; private Dateien vollständig archiviert, keine Ressourcen gelöscht |
-| Hintergrundarbeit | null verknüpfte Sites-Automationen; physischer Source-Cron bleibt archiviert, sämtliche Geschäftsarbeit durch Read-only gesperrt |
+| Hintergrundarbeit           | null verknüpfte Sites-Automationen; physischer Source-Cron bleibt archiviert, sämtliche Geschäftsarbeit durch Read-only gesperrt                                                             |
 
 Die neue Produktion lieferte nach jedem Routing-Schritt weiterhin HTTP 200
 am Apex und HTTP 308 mit erhaltener Query auf www, jeweils mit dem unveränderten

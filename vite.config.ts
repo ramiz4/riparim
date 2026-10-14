@@ -1,14 +1,17 @@
 import { execFileSync } from "node:child_process";
 import vinext from "vinext";
-import {readFileSync} from "node:fs";
+import { readFileSync } from "node:fs";
 import { defineConfig } from "vite";
 import hostingConfig from "./.openai/hosting.json";
 import { readExecutionProfile } from "./scripts/execution-profile.mjs";
 import { sites } from "./build/sites-vite-plugin";
 import { connectorPreview } from "./build/connector-preview-plugin.mjs";
-import {vinextLazyHandler} from "./build/vinext-lazy-handler.mjs";
+import { vinextLazyHandler } from "./build/vinext-lazy-handler.mjs";
 import { vinextNavigation } from "./build/vinext-navigation.mjs";
-import { releaseBuildTarget, sitesBuildConfiguration } from "./scripts/release-policy.mjs";
+import {
+  releaseBuildTarget,
+  sitesBuildConfiguration,
+} from "./scripts/release-policy.mjs";
 
 // macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
@@ -30,11 +33,30 @@ export default defineConfig(async ({ command }) => {
   // Wrangler snapshots its log path while the Cloudflare plugin is imported.
   const { cloudflare } = await import("@cloudflare/vite-plugin");
 
-  const releaseCommit = execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim();
-  if (!/^[a-f0-9]{40}$/.test(releaseCommit) || (process.env.GITHUB_SHA && process.env.GITHUB_SHA !== releaseCommit)) throw new Error("Build checkout must match its workflow commit.");
+  const releaseCommit = execFileSync("git", ["rev-parse", "HEAD"], {
+    encoding: "utf8",
+  }).trim();
+  if (
+    !/^[a-f0-9]{40}$/.test(releaseCommit) ||
+    (process.env.GITHUB_SHA && process.env.GITHUB_SHA !== releaseCommit)
+  )
+    throw new Error("Build checkout must match its workflow commit.");
 
   return {
-    define: { __RIPARIM_RELEASE_COMMIT__: JSON.stringify(releaseCommit), __RIPARIM_PUBLIC_REVISIONS__: JSON.stringify(JSON.parse(readFileSync("data/workshops.json","utf8")).workshops.filter((w:{status:string})=>w.status==="published").map((w:{id:string;updatedAt:string})=>({id:w.id,updatedAt:w.updatedAt})).sort((a:{id:string},b:{id:string})=>a.id<b.id?-1:a.id>b.id?1:0)) },
+    define: {
+      __RIPARIM_RELEASE_COMMIT__: JSON.stringify(releaseCommit),
+      __RIPARIM_PUBLIC_REVISIONS__: JSON.stringify(
+        JSON.parse(readFileSync("data/workshops.json", "utf8"))
+          .workshops.filter((w: { status: string }) => w.status === "published")
+          .map((w: { id: string; updatedAt: string }) => ({
+            id: w.id,
+            updatedAt: w.updatedAt,
+          }))
+          .sort((a: { id: string }, b: { id: string }) =>
+            a.id < b.id ? -1 : a.id > b.id ? 1 : 0,
+          ),
+      ),
+    },
     server: {
       ...(managedLinux
         ? { host: "0.0.0.0", allowedHosts: ["terminal.local"] }
@@ -50,16 +72,33 @@ export default defineConfig(async ({ command }) => {
       sites({ mockAuth: !managedLinux }),
       connectorPreview(),
       cloudflare({
-        configPath: command === "serve" || buildTarget === "sites" ? "./wrangler.sites.jsonc" : "./wrangler.jsonc",
+        configPath:
+          command === "serve" || buildTarget === "sites"
+            ? "./wrangler.sites.jsonc"
+            : "./wrangler.jsonc",
         viteEnvironment: { name: "rsc", childEnvironments: ["ssr"] },
         inspectorPort: false,
         // The plugin concatenates arrays. Local previews and Sites builds use
         // the same logical bindings over a base without production resources.
-        config: command === "serve" ? () => ({
-          ...sitesBuildConfiguration(hostingConfig),
-          vars: { SITE_ORIGIN: process.env.SITE_ORIGIN ?? "http://127.0.0.1:5174" },
-          services: [{ binding: "CONNECTORS", service: "sites-connector-preview", entrypoint: "ConnectorPreview" }],
-        }) : buildTarget === "sites" ? () => sitesBuildConfiguration(hostingConfig) : undefined,
+        config:
+          command === "serve"
+            ? () => ({
+                ...sitesBuildConfiguration(hostingConfig),
+                vars: {
+                  SITE_ORIGIN:
+                    process.env.SITE_ORIGIN ?? "http://127.0.0.1:5174",
+                },
+                services: [
+                  {
+                    binding: "CONNECTORS",
+                    service: "sites-connector-preview",
+                    entrypoint: "ConnectorPreview",
+                  },
+                ],
+              })
+            : buildTarget === "sites"
+              ? () => sitesBuildConfiguration(hostingConfig)
+              : undefined,
         ...(command === "serve"
           ? {
               auxiliaryWorkers: [

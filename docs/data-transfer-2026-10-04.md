@@ -43,19 +43,19 @@ Die originale Quellhistorie ist archiviert und wurde nicht über die Zielhistori
 geschrieben. Anbieterinterne `_cf_*`-Tabellen sind für SQL-Zugriffe gesperrt und
 ausdrücklich als ausgeschlossene Plattformdaten dokumentiert.
 
-| Bestand | Geprüftes Ergebnis |
-| --- | --- |
-| Quell-Datensätze | 386 |
-| Ergänzte Ziel-Datensätze | 35 |
-| Werkstattprofile | 163 vollständig identisch, Freigabestatus/Quellen erhalten |
-| Bewertungsquellen | 87 vollständig identisch |
-| Google-Zuordnungen | 88 gleiche Kennungen/Place IDs |
-| Adminrollen | 3 unverändert übernommen |
-| Sitzungen | 16 unverändert übernommen |
-| Aktive Anmeldekonfiguration | 1 unverändert übernommen |
-| Bestätigte Legacy-Verknüpfungen | 0; keine Zuordnung anhand gleicher E-Mail erfunden |
-| Besuche, Lösch-/Uploadzustände, Betriebsentwürfe | Vollständig abgeglichen, jeweils leer |
-| Private R2-Dateien | Beide vollständigen Inventare leer, keine fehlenden Verweise |
+| Bestand                                          | Geprüftes Ergebnis                                           |
+| ------------------------------------------------ | ------------------------------------------------------------ |
+| Quell-Datensätze                                 | 386                                                          |
+| Ergänzte Ziel-Datensätze                         | 35                                                           |
+| Werkstattprofile                                 | 163 vollständig identisch, Freigabestatus/Quellen erhalten   |
+| Bewertungsquellen                                | 87 vollständig identisch                                     |
+| Google-Zuordnungen                               | 88 gleiche Kennungen/Place IDs                               |
+| Adminrollen                                      | 3 unverändert übernommen                                     |
+| Sitzungen                                        | 16 unverändert übernommen                                    |
+| Aktive Anmeldekonfiguration                      | 1 unverändert übernommen                                     |
+| Bestätigte Legacy-Verknüpfungen                  | 0; keine Zuordnung anhand gleicher E-Mail erfunden           |
+| Besuche, Lösch-/Uploadzustände, Betriebsentwürfe | Vollständig abgeglichen, jeweils leer                        |
+| Private R2-Dateien                               | Beide vollständigen Inventare leer, keine fehlenden Verweise |
 
 Alle Rollen und Sitzungen gehören zum unveränderten Supabase-Projektnamensraum.
 Kontokennungen, Moderationsrechte und Status wurden bytegleich übernommen.

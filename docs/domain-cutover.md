@@ -37,15 +37,15 @@ veröffentlicht. Die abschließende Navigation über die Produktionsdomain gehö
 weiter zur Abnahme nach der Freigabe des Ziels. Ein offener PR oder ein grüner
 lokaler Build ersetzt keinen veröffentlichten Main-Release.
 
-| Ressource | Festes Ziel |
-| --- | --- |
-| Quell-Site | `appgprj_6abfd028b7e48191822a15d44cbbda8d` |
-| Produktionsdomain | `https://riparim.com` |
+| Ressource                    | Festes Ziel                                                                   |
+| ---------------------------- | ----------------------------------------------------------------------------- |
+| Quell-Site                   | `appgprj_6abfd028b7e48191822a15d44cbbda8d`                                    |
+| Produktionsdomain            | `https://riparim.com`                                                         |
 | Kanonische www-Weiterleitung | `https://www.riparim.com` nach `https://riparim.com`, Pfad und Query erhalten |
-| Cloudflare-Account / Worker | `ec181b3a61c7c3da13910600953fc3ea` / `riparim` |
-| Ziel-D1 | `riparim-production`, `b395ea3a-5316-4b0b-bdee-533bdb68d6a0` |
-| Ziel-R2 | `riparim-evidence-production`, privat |
-| Technischer Zielhost | `https://riparim.riparim-ec181b.workers.dev` |
+| Cloudflare-Account / Worker  | `ec181b3a61c7c3da13910600953fc3ea` / `riparim`                                |
+| Ziel-D1                      | `riparim-production`, `b395ea3a-5316-4b0b-bdee-533bdb68d6a0`                  |
+| Ziel-R2                      | `riparim-evidence-production`, privat                                         |
+| Technischer Zielhost         | `https://riparim.riparim-ec181b.workers.dev`                                  |
 
 ## Vorbereitung bei verfügbarer Quelle
 
@@ -114,19 +114,19 @@ Liste des Vorbereitungs-Releases aktiviert keine Produktionsdomain.
 
 ## Konfiguration und Authentifizierung
 
-| Vertrag | Prüfung vor dem Wechsel |
-| --- | --- |
-| Origin und Routing | Quelle und generiertes Artefakt verwenden dieselbe `SITE_ORIGIN`, dieselben vorgesehenen Routes/Custom Domains und denselben `workers_dev`-/Preview-Zustand. Keine zusätzliche Domain oder fremde Zone. |
-| Release-Prüfung | `assertCloudflareDeployConfig` vergleicht auch Routing und Zugriff über technische URLs; verpflanzte oder unerwartete Routings werden abgewiesen. Vars, Cron, Account, Worker, DB und Bucket bleiben geprüft. |
-| Auth-Daten | `auth_settings`, Rollen, Sperren, Sessions und bestätigte `auth_links` behalten ihren Supabase-Projektnamensraum. Keine Neuzuordnung anhand gleicher E-Mail. |
-| Geschützte Werte | Bestehende Moderatoridentität, `SUPABASE_SECRET_KEY`, beide Google-Schlüssel, Resend-Konfiguration und nötige Aktivierungswerte geschützt übernehmen. Keine Werte im Bericht oder Quellcode; Deployment-Token bleibt außerhalb der Worker-Laufzeit. |
-| Öffentliche Auth-Konfiguration | Projektadresse und Publishable-/Anon-Key stammen weiter aus `auth_settings`. Es ist keine neue `NEXT_PUBLIC_*`-Konfiguration oder neue Auth-Projektanlage nötig. Der Verwaltungsendpunkt `/api/auth-settings` bleibt geschützt. |
-| Supabase | Site URL `https://riparim.com`; erlaubter App-Callback `/auth/bestaetigen` mit den vorhandenen Rücksprung-/Flow-Parametern. Bestätigungs-/Recovery-Vorlagen verwenden weiter Token-Hash und `.RedirectTo`. Nur den erforderlichen Callback erlauben, keine allgemeine Host-Wildcard. |
-| Google OAuth | JavaScript-Origin `https://riparim.com`; Redirect-URI bleibt der Callback des unveränderten Supabase-Projekts. OAuth-Client, Secret und Scopes bleiben bestehen. |
-| Google Maps | Browser-Key erlaubt den tatsächlichen HTTPS-Produktionshost; separate API-Beschränkungen bleiben erhalten. Server-Key wird weder ins HTML noch ins Browserbundle ausgegeben. |
-| Eigentumsdatei | `/googled8cf505b6c63892b.html` antwortet mit dem unveränderten Verifikationsinhalt über die Produktionsdomain. |
-| Private Nachweise | R2 bleibt privat, ohne `r2.dev` und ohne eigene Dateidomain. Eigentümer-, Moderations- und Sperrprüfungen gelten serverseitig. |
-| Plattformheader | Der eigene Worker entfernt eingehende `oai-authenticated-user-*`; gefälschte Header bewirken weder Anmeldung noch Moderationsrechte. |
+| Vertrag                        | Prüfung vor dem Wechsel                                                                                                                                                                                                                                                              |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Origin und Routing             | Quelle und generiertes Artefakt verwenden dieselbe `SITE_ORIGIN`, dieselben vorgesehenen Routes/Custom Domains und denselben `workers_dev`-/Preview-Zustand. Keine zusätzliche Domain oder fremde Zone.                                                                              |
+| Release-Prüfung                | `assertCloudflareDeployConfig` vergleicht auch Routing und Zugriff über technische URLs; verpflanzte oder unerwartete Routings werden abgewiesen. Vars, Cron, Account, Worker, DB und Bucket bleiben geprüft.                                                                        |
+| Auth-Daten                     | `auth_settings`, Rollen, Sperren, Sessions und bestätigte `auth_links` behalten ihren Supabase-Projektnamensraum. Keine Neuzuordnung anhand gleicher E-Mail.                                                                                                                         |
+| Geschützte Werte               | Bestehende Moderatoridentität, `SUPABASE_SECRET_KEY`, beide Google-Schlüssel, Resend-Konfiguration und nötige Aktivierungswerte geschützt übernehmen. Keine Werte im Bericht oder Quellcode; Deployment-Token bleibt außerhalb der Worker-Laufzeit.                                  |
+| Öffentliche Auth-Konfiguration | Projektadresse und Publishable-/Anon-Key stammen weiter aus `auth_settings`. Es ist keine neue `NEXT_PUBLIC_*`-Konfiguration oder neue Auth-Projektanlage nötig. Der Verwaltungsendpunkt `/api/auth-settings` bleibt geschützt.                                                      |
+| Supabase                       | Site URL `https://riparim.com`; erlaubter App-Callback `/auth/bestaetigen` mit den vorhandenen Rücksprung-/Flow-Parametern. Bestätigungs-/Recovery-Vorlagen verwenden weiter Token-Hash und `.RedirectTo`. Nur den erforderlichen Callback erlauben, keine allgemeine Host-Wildcard. |
+| Google OAuth                   | JavaScript-Origin `https://riparim.com`; Redirect-URI bleibt der Callback des unveränderten Supabase-Projekts. OAuth-Client, Secret und Scopes bleiben bestehen.                                                                                                                     |
+| Google Maps                    | Browser-Key erlaubt den tatsächlichen HTTPS-Produktionshost; separate API-Beschränkungen bleiben erhalten. Server-Key wird weder ins HTML noch ins Browserbundle ausgegeben.                                                                                                         |
+| Eigentumsdatei                 | `/googled8cf505b6c63892b.html` antwortet mit dem unveränderten Verifikationsinhalt über die Produktionsdomain.                                                                                                                                                                       |
+| Private Nachweise              | R2 bleibt privat, ohne `r2.dev` und ohne eigene Dateidomain. Eigentümer-, Moderations- und Sperrprüfungen gelten serverseitig.                                                                                                                                                       |
+| Plattformheader                | Der eigene Worker entfernt eingehende `oai-authenticated-user-*`; gefälschte Header bewirken weder Anmeldung noch Moderationsrechte.                                                                                                                                                 |
 
 Der Wechsel des Webservers ändert weder den bestehenden Supabase-Provider-
 Callback noch die Google-Konten. App-Callbacks entstehen dagegen aus

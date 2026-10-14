@@ -66,17 +66,17 @@ Ohne `execute: true` wird ausschließlich ein Plan mit Mengen und Fingerprints
 ausgegeben. Die Modul-Schnittstelle `applyDeltaPlan()` erlaubt injizierte
 Providerzugriffe für isolierte Tests.
 
-| Option | Nachweis |
-| --- | --- |
-| `baselineSourceDirectory` | Vollständiges abgeschlossenes Quellbackup aus #18 |
-| `preTransferTargetDirectory` | Privates Zielbackup vor den bestätigten #18-Einfügungen |
-| `transferReportFile` | Privater bestätigter Transferbericht mit vollständigem Ergebnis-Fingerprint |
-| `sourceDirectory`, `expectedSourceCommit` | Frisches vollständiges Quellbackup und unabhängig verifizierter Source-Release |
-| `destinationDirectory`, `expectedCommit` | Frisches geschütztes Zielbackup und tatsächlicher Target-Release |
-| `expiryProjection` | Optional: `witnessDirectory`, `expectedWitnessCommit`, `receiptFile` |
+| Option                                             | Nachweis                                                                                     |
+| -------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `baselineSourceDirectory`                          | Vollständiges abgeschlossenes Quellbackup aus #18                                            |
+| `preTransferTargetDirectory`                       | Privates Zielbackup vor den bestätigten #18-Einfügungen                                      |
+| `transferReportFile`                               | Privater bestätigter Transferbericht mit vollständigem Ergebnis-Fingerprint                  |
+| `sourceDirectory`, `expectedSourceCommit`          | Frisches vollständiges Quellbackup und unabhängig verifizierter Source-Release               |
+| `destinationDirectory`, `expectedCommit`           | Frisches geschütztes Zielbackup und tatsächlicher Target-Release                             |
+| `expiryProjection`                                 | Optional: `witnessDirectory`, `expectedWitnessCommit`, `receiptFile`                         |
 | `sourceOrigin`, `sourceToken`, `sourceProbeParent` | Geschützter authentifizierter Quellzugriff für vollständige erneute Pause-/Bestandsnachweise |
-| `token` | Separater geschützter Cloudflare-Zugang zum fest eingebauten Zielaccount und zur Ziel-D1 |
-| `execute` | Nur der boolesche Wert `true` aktiviert Datenmutationen |
+| `token`                                            | Separater geschützter Cloudflare-Zugang zum fest eingebauten Zielaccount und zur Ziel-D1     |
+| `execute`                                          | Nur der boolesche Wert `true` aktiviert Datenmutationen                                      |
 
 Vor jedem Abschnitt werden die unveränderte, authentifizierte Quellpause und der
 explizite Target-Wartungsmarker samt unveränderlichem Release-Commit geprüft.

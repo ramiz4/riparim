@@ -1,5 +1,5 @@
 {
   "extends": "../tsconfig.json",
-  "compilerOptions": {"incremental": false, "plugins": []},
+  "compilerOptions": { "incremental": false, "plugins": [] },
   "include": ["worker.ts", "worker-env.d.ts"]
 }

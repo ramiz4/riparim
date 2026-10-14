@@ -1,47 +1,200 @@
-import assert from 'node:assert/strict';
-import {build} from 'esbuild';
-import {mkdir,readFile,readdir} from 'node:fs/promises';
-import {DatabaseSync} from 'node:sqlite';
-await mkdir('.test-runtime/premium',{recursive:true});
-await build({stdin:{contents:"export {GET,PUT} from './app/api/premium-workshops/route';export {selectPartnerWorkshops} from './lib/partner-selection';",resolveDir:process.cwd(),loader:'ts'},bundle:true,format:'esm',platform:'node',outfile:'.test-runtime/premium/api.mjs',plugins:[{name:'premium-boundaries',setup(b){
- b.onResolve({filter:/^(cloudflare:workers|@\/app\/auth)$/},args=>({path:args.path,namespace:'fixture'}));
- b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',contents:args.path==='cloudflare:workers'?'export const env=globalThis.premiumEnv;':'export async function getAdminUser(){return globalThis.premiumActor;}'}));
-}}]});
-const db=new DatabaseSync(':memory:');db.exec('PRAGMA foreign_keys=ON');
-for(const file of (await readdir('drizzle')).filter(file=>file.endsWith('.sql')).sort())db.exec(await readFile('drizzle/'+file,'utf8'));
+import assert from "node:assert/strict";
+import { build } from "esbuild";
+import { mkdir, readFile, readdir } from "node:fs/promises";
+import { DatabaseSync } from "node:sqlite";
+await mkdir(".test-runtime/premium", { recursive: true });
+await build({
+  stdin: {
+    contents:
+      "export {GET,PUT} from './app/api/premium-workshops/route';export {selectPartnerWorkshops} from './lib/partner-selection';",
+    resolveDir: process.cwd(),
+    loader: "ts",
+  },
+  bundle: true,
+  format: "esm",
+  platform: "node",
+  outfile: ".test-runtime/premium/api.mjs",
+  plugins: [
+    {
+      name: "premium-boundaries",
+      setup(b) {
+        b.onResolve(
+          { filter: /^(cloudflare:workers|@\/app\/auth)$/ },
+          (args) => ({ path: args.path, namespace: "fixture" }),
+        );
+        b.onLoad({ filter: /.*/, namespace: "fixture" }, (args) => ({
+          loader: "js",
+          contents:
+            args.path === "cloudflare:workers"
+              ? "export const env=globalThis.premiumEnv;"
+              : "export async function getAdminUser(){return globalThis.premiumActor;}",
+        }));
+      },
+    },
+  ],
+});
+const db = new DatabaseSync(":memory:");
+db.exec("PRAGMA foreign_keys=ON");
+for (const file of (await readdir("drizzle"))
+  .filter((file) => file.endsWith(".sql"))
+  .sort())
+  db.exec(await readFile("drizzle/" + file, "utf8"));
 let beforeRun;
-const d1={prepare(sql){const statement=db.prepare(sql);const adapt=(values=[])=>({bind:(...next)=>adapt(next),first:async()=>statement.get(...values)??null,all:async()=>({results:statement.all(...values)}),run:async()=>{beforeRun?.();beforeRun=null;return {meta:statement.run(...values)};}});return adapt();},async batch(statements){return Promise.all(statements.map(statement=>statement.run()));}};
-globalThis.premiumEnv={DB:d1,BUCKET:{}};globalThis.premiumActor=null;
-const api=await import(new URL('../.test-runtime/premium/api.mjs',import.meta.url));
-const origin='https://riparim.example.test';
-const get=(query='')=>api.GET(new Request(origin+'/api/premium-workshops'+query));
-const put=(body,extra={})=>api.PUT(new Request(origin+'/api/premium-workshops',{method:'PUT',headers:{Origin:origin,'Content-Type':'application/json',...extra},body:JSON.stringify(body)}));
-let data=await (await get('?locale=sq')).json();assert.equal(data.preview,true);assert(data.workshops.length>3);assert(data.workshops.every(w=>w.status==='published'));
-assert.equal((await get('?admin=1&workshop=fixture-workshop')).status,401);
-const first=data.workshops[0],second=data.workshops[1];
-assert.equal((await put({workshop:first.id,active:true})).status,401);
-globalThis.premiumActor={isModerator:false};assert.equal((await put({workshop:first.id,active:true})).status,403);
-globalThis.premiumActor={isModerator:true};
-assert.equal((await put({workshop:first.id,active:true},{Origin:'https://outside.example.test'})).status,403);
-for(const body of [{workshop:first.id,active:'true'},{workshop:first.id,active:true,owner:'forged'},{workshop:'../private',active:true}])assert.equal((await put(body)).status,400);
-assert.equal((await api.PUT(new Request(origin+'/api/premium-workshops',{method:'PUT',body:'invalid JSON'}))).status,400);
-assert.equal((await put({workshop:'missing-workshop',active:true})).status,404);
-assert.equal((await get('?locale=fr')).status,400);
-assert.equal((await put({workshop:first.id,active:true})).status,200);
-assert.equal((await (await get('?admin=1&workshop='+first.id)).json()).active,true);
-for(const locale of ['de','sq','en']){data=await (await get('?locale='+locale)).json();assert.equal(data.preview,false);assert.deepEqual(data.workshops.map(w=>w.id),[first.id]);assert(data.displayById);assert(!JSON.stringify(data).includes('updated_by'));}
-assert.equal((await put({workshop:second.id,active:true})).status,200);
+const d1 = {
+  prepare(sql) {
+    const statement = db.prepare(sql);
+    const adapt = (values = []) => ({
+      bind: (...next) => adapt(next),
+      first: async () => statement.get(...values) ?? null,
+      all: async () => ({ results: statement.all(...values) }),
+      run: async () => {
+        beforeRun?.();
+        beforeRun = null;
+        return { meta: statement.run(...values) };
+      },
+    });
+    return adapt();
+  },
+  async batch(statements) {
+    return Promise.all(statements.map((statement) => statement.run()));
+  },
+};
+globalThis.premiumEnv = { DB: d1, BUCKET: {} };
+globalThis.premiumActor = null;
+const api = await import(
+  new URL("../.test-runtime/premium/api.mjs", import.meta.url)
+);
+const origin = "https://riparim.example.test";
+const get = (query = "") =>
+  api.GET(new Request(origin + "/api/premium-workshops" + query));
+const put = (body, extra = {}) =>
+  api.PUT(
+    new Request(origin + "/api/premium-workshops", {
+      method: "PUT",
+      headers: { Origin: origin, "Content-Type": "application/json", ...extra },
+      body: JSON.stringify(body),
+    }),
+  );
+let data = await (await get("?locale=sq")).json();
+assert.equal(data.preview, true);
+assert(data.workshops.length > 3);
+assert(data.workshops.every((w) => w.status === "published"));
+assert.equal((await get("?admin=1&workshop=fixture-workshop")).status, 401);
+const first = data.workshops[0],
+  second = data.workshops[1];
+assert.equal((await put({ workshop: first.id, active: true })).status, 401);
+globalThis.premiumActor = { isModerator: false };
+assert.equal((await put({ workshop: first.id, active: true })).status, 403);
+globalThis.premiumActor = { isModerator: true };
+assert.equal(
+  (
+    await put(
+      { workshop: first.id, active: true },
+      { Origin: "https://outside.example.test" },
+    )
+  ).status,
+  403,
+);
+for (const body of [
+  { workshop: first.id, active: "true" },
+  { workshop: first.id, active: true, owner: "forged" },
+  { workshop: "../private", active: true },
+])
+  assert.equal((await put(body)).status, 400);
+assert.equal(
+  (
+    await api.PUT(
+      new Request(origin + "/api/premium-workshops", {
+        method: "PUT",
+        body: "invalid JSON",
+      }),
+    )
+  ).status,
+  400,
+);
+assert.equal(
+  (await put({ workshop: "missing-workshop", active: true })).status,
+  404,
+);
+assert.equal((await get("?locale=fr")).status, 400);
+assert.equal((await put({ workshop: first.id, active: true })).status, 200);
+assert.equal(
+  (await (await get("?admin=1&workshop=" + first.id)).json()).active,
+  true,
+);
+for (const locale of ["de", "sq", "en"]) {
+  data = await (await get("?locale=" + locale)).json();
+  assert.equal(data.preview, false);
+  assert.deepEqual(
+    data.workshops.map((w) => w.id),
+    [first.id],
+  );
+  assert(data.displayById);
+  assert(!JSON.stringify(data).includes("updated_by"));
+}
+assert.equal((await put({ workshop: second.id, active: true })).status, 200);
 db.prepare("UPDATE workshops SET status='draft' WHERE id=?").run(first.id);
-data=await (await get()).json();assert.equal(data.preview,false);assert.deepEqual(data.workshops.map(w=>w.id),[second.id]);
-assert.equal((await put({workshop:first.id,active:true})).status,404,'drafts cannot be promoted');
-assert.equal((await put({workshop:first.id,active:false})).status,200,'hidden placements can be deactivated');
-beforeRun=()=>db.prepare("UPDATE workshops SET status='draft' WHERE id=?").run(second.id);
-assert.equal((await put({workshop:second.id,active:true})).status,404,'publication is checked in the actual write statement');
-assert.equal((await put({workshop:second.id,active:false})).status,200);
-data=await (await get()).json();assert.equal(data.preview,true);assert(data.workshops.every(w=>w.status==='published'));assert(!data.workshops.some(w=>[first.id,second.id].includes(w.id)));
-db.prepare('DELETE FROM workshops WHERE id=?').run(first.id);assert.equal(db.prepare('SELECT COUNT(*) AS count FROM workshop_premium WHERE workshop_id=?').get(first.id).count,0,'profile removal cleans up placement state');
-const candidates=Array.from({length:5},(_,i)=>({id:String(i),status:'published'}));
-const a=api.selectPartnerWorkshops([...candidates,{id:'hidden',status:'draft'}],()=>0),b=api.selectPartnerWorkshops(candidates,()=>.999);
-assert.equal(a.length,3);assert.equal(new Set(a.map(w=>w.id)).size,3);assert(a.every(w=>w.status==='published'));assert.notDeepEqual(a.map(w=>w.id),b.map(w=>w.id));assert.equal(api.selectPartnerWorkshops(candidates.slice(0,2)).length,2);assert.deepEqual(candidates.map(w=>w.id),['0','1','2','3','4'],'shuffle never mutates the directory');
-console.log('Premium placements: actual SQLite migration, admin-only activation, publication races, paid-only pool, honest preview fallback and bounded random selection passed');
+data = await (await get()).json();
+assert.equal(data.preview, false);
+assert.deepEqual(
+  data.workshops.map((w) => w.id),
+  [second.id],
+);
+assert.equal(
+  (await put({ workshop: first.id, active: true })).status,
+  404,
+  "drafts cannot be promoted",
+);
+assert.equal(
+  (await put({ workshop: first.id, active: false })).status,
+  200,
+  "hidden placements can be deactivated",
+);
+beforeRun = () =>
+  db.prepare("UPDATE workshops SET status='draft' WHERE id=?").run(second.id);
+assert.equal(
+  (await put({ workshop: second.id, active: true })).status,
+  404,
+  "publication is checked in the actual write statement",
+);
+assert.equal((await put({ workshop: second.id, active: false })).status, 200);
+data = await (await get()).json();
+assert.equal(data.preview, true);
+assert(data.workshops.every((w) => w.status === "published"));
+assert(!data.workshops.some((w) => [first.id, second.id].includes(w.id)));
+db.prepare("DELETE FROM workshops WHERE id=?").run(first.id);
+assert.equal(
+  db
+    .prepare(
+      "SELECT COUNT(*) AS count FROM workshop_premium WHERE workshop_id=?",
+    )
+    .get(first.id).count,
+  0,
+  "profile removal cleans up placement state",
+);
+const candidates = Array.from({ length: 5 }, (_, i) => ({
+  id: String(i),
+  status: "published",
+}));
+const a = api.selectPartnerWorkshops(
+    [...candidates, { id: "hidden", status: "draft" }],
+    () => 0,
+  ),
+  b = api.selectPartnerWorkshops(candidates, () => 0.999);
+assert.equal(a.length, 3);
+assert.equal(new Set(a.map((w) => w.id)).size, 3);
+assert(a.every((w) => w.status === "published"));
+assert.notDeepEqual(
+  a.map((w) => w.id),
+  b.map((w) => w.id),
+);
+assert.equal(api.selectPartnerWorkshops(candidates.slice(0, 2)).length, 2);
+assert.deepEqual(
+  candidates.map((w) => w.id),
+  ["0", "1", "2", "3", "4"],
+  "shuffle never mutates the directory",
+);
+console.log(
+  "Premium placements: actual SQLite migration, admin-only activation, publication races, paid-only pool, honest preview fallback and bounded random selection passed",
+);
 db.close();

@@ -1,9 +1,91 @@
-import {decodeOpeningHours} from "@/lib/opening-hours";
-import {workshopEmailEdits} from "@/lib/workshop-emails";
-import type {Workshop,Source,GoogleRating} from "@/lib/workshops";
-function parseArray<T>(value:unknown):T[]{if(typeof value!=="string")return [];try{const a=JSON.parse(value);return Array.isArray(a)?a:[];}catch{return [];}}
-function decodeGoogleRating(row:Record<string,unknown>):GoogleRating|null{
- if(!row.google_workshop_id)return null;
- return {rating:row.google_rating===null||row.google_rating===undefined?null:Number(row.google_rating),count:row.google_review_count===null||row.google_review_count===undefined?null:Number(row.google_review_count),mapsUrl:String(row.google_maps_url),sourceUrl:row.google_source_url?String(row.google_source_url):null,sourceLabel:row.google_source_label?String(row.google_source_label):null,checkedAt:String(row.google_checked_at),sourceUpdatedAt:row.google_source_updated_at?String(row.google_source_updated_at):null};
+import { decodeOpeningHours } from "@/lib/opening-hours";
+import { workshopEmailEdits } from "@/lib/workshop-emails";
+import type { Workshop, Source, GoogleRating } from "@/lib/workshops";
+function parseArray<T>(value: unknown): T[] {
+  if (typeof value !== "string") return [];
+  try {
+    const a = JSON.parse(value);
+    return Array.isArray(a) ? a : [];
+  } catch {
+    return [];
+  }
 }
-export function decodeProfile(row:Record<string,unknown>,options?:{emailEditing?:boolean}):Workshop{const entries=workshopEmailEdits(row.editorial_emails,row.researched_emails),emailContacts=entries.filter(e=>e.active).map(({address,verified})=>({address,verified}));return {emails:emailContacts.map(e=>e.address),emailContacts,...(options?.emailEditing===true?{editableEmailContacts:entries}:{}),importedOpeningHours:decodeOpeningHours(row.imported_opening_hours),openingHours:decodeOpeningHours(row.opening_hours),openingHoursConfirmedAt:row.opening_hours_confirmed_at?String(row.opening_hours_confirmed_at):null,id:String(row.id),name:String(row.name),city:String(row.city),address:String(row.address),phone:String(row.phone),phoneNote:String(row.phone_note??""),whatsapp:String(row.whatsapp??""),brands:parseArray<string>(row.brands),services:parseArray<string>(row.services),serviceDetails:parseArray<string>(row.service_details),languages:parseArray<string>(row.languages),specialty:String(row.specialty),description:String(row.description),lat:row.lat===null?null:Number(row.lat),lng:row.lng===null?null:Number(row.lng),sources:parseArray<Source>(row.sources),checkedAt:String(row.checked_at),status:row.status==="published"?"published":"draft",updatedAt:String(row.updated_at),initials:String(row.name).split(/\s+/).filter(Boolean).slice(0,2).map(s=>s[0]).join("").toUpperCase(),color:["green","blue","orange","purple"][String(row.id).length%4],rating:row.rating===null||row.rating===undefined?null:Number(row.rating),count:Number(row.count??0),googleRating:decodeGoogleRating(row)};}
+function decodeGoogleRating(row: Record<string, unknown>): GoogleRating | null {
+  if (!row.google_workshop_id) return null;
+  return {
+    rating:
+      row.google_rating === null || row.google_rating === undefined
+        ? null
+        : Number(row.google_rating),
+    count:
+      row.google_review_count === null || row.google_review_count === undefined
+        ? null
+        : Number(row.google_review_count),
+    mapsUrl: String(row.google_maps_url),
+    sourceUrl: row.google_source_url ? String(row.google_source_url) : null,
+    sourceLabel: row.google_source_label
+      ? String(row.google_source_label)
+      : null,
+    checkedAt: String(row.google_checked_at),
+    sourceUpdatedAt: row.google_source_updated_at
+      ? String(row.google_source_updated_at)
+      : null,
+  };
+}
+export function decodeProfile(
+  row: Record<string, unknown>,
+  options?: { emailEditing?: boolean },
+): Workshop {
+  const entries = workshopEmailEdits(
+      row.editorial_emails,
+      row.researched_emails,
+    ),
+    emailContacts = entries
+      .filter((e) => e.active)
+      .map(({ address, verified }) => ({ address, verified }));
+  return {
+    emails: emailContacts.map((e) => e.address),
+    emailContacts,
+    ...(options?.emailEditing === true
+      ? { editableEmailContacts: entries }
+      : {}),
+    importedOpeningHours: decodeOpeningHours(row.imported_opening_hours),
+    openingHours: decodeOpeningHours(row.opening_hours),
+    openingHoursConfirmedAt: row.opening_hours_confirmed_at
+      ? String(row.opening_hours_confirmed_at)
+      : null,
+    id: String(row.id),
+    name: String(row.name),
+    city: String(row.city),
+    address: String(row.address),
+    phone: String(row.phone),
+    phoneNote: String(row.phone_note ?? ""),
+    whatsapp: String(row.whatsapp ?? ""),
+    brands: parseArray<string>(row.brands),
+    services: parseArray<string>(row.services),
+    serviceDetails: parseArray<string>(row.service_details),
+    languages: parseArray<string>(row.languages),
+    specialty: String(row.specialty),
+    description: String(row.description),
+    lat: row.lat === null ? null : Number(row.lat),
+    lng: row.lng === null ? null : Number(row.lng),
+    sources: parseArray<Source>(row.sources),
+    checkedAt: String(row.checked_at),
+    status: row.status === "published" ? "published" : "draft",
+    updatedAt: String(row.updated_at),
+    initials: String(row.name)
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((s) => s[0])
+      .join("")
+      .toUpperCase(),
+    color: ["green", "blue", "orange", "purple"][String(row.id).length % 4],
+    rating:
+      row.rating === null || row.rating === undefined
+        ? null
+        : Number(row.rating),
+    count: Number(row.count ?? 0),
+    googleRating: decodeGoogleRating(row),
+  };
+}

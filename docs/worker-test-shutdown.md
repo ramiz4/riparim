@@ -5,10 +5,10 @@ Instrumented comparison on 2026-10-10, Node 24.19.0, fresh locked dependencies
 same existing Worker assertions against their production builds. Baseline source:
 `2d593346c2337f827801835787bd4f4424da5ccc`.
 
-| Target | Baseline assertions | Baseline `dispose()` | Baseline process exit after disposal | Fixed response cleanup + disposal |
-| --- | ---: | ---: | ---: | ---: |
-| Cloudflare | 10.808 s | 102.795 s | 0.003 s | 0.089 s |
-| Sites | 10.380 s | 95.080 s | 0.004 s | 0.033 s |
+| Target     | Baseline assertions | Baseline `dispose()` | Baseline process exit after disposal | Fixed response cleanup + disposal |
+| ---------- | ------------------: | -------------------: | -----------------------------------: | --------------------------------: |
+| Cloudflare |            10.808 s |            102.795 s |                              0.003 s |                           0.089 s |
+| Sites      |            10.380 s |             95.080 s |                              0.004 s |                           0.033 s |
 
 The delay is inside `Miniflare.dispose()`, after all assertions, rather than a
 Node timer after disposal. Status/header-only checks leave response bodies

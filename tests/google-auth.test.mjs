@@ -1,324 +1,1252 @@
-import {authUser,authSession,authClient as neutralClient} from './helpers/auth-contract.mjs';
-import {localizeHref} from '../scripts/lib/locale.mjs';
-import assert from 'node:assert/strict';
-import {renderAuthEmails} from './helpers/auth-email-render.mjs';
-import {readFile,readdir,writeFile,mkdir} from 'node:fs/promises';
-import {createRequire} from 'node:module';
-import {DatabaseSync} from 'node:sqlite';
-const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
-const bundle=await build({entryPoints:{auth:'app/auth.ts',config:'lib/auth/config.ts',actions:'app/api/auth/[action]/route.ts',callback:'app/auth/bestaetigen/route.ts',templates:'lib/auth/email-templates.ts'},bundle:true,format:'esm',platform:'node',outdir:'.test-runtime/google-auth',write:false,plugins:[{name:'auth-fixtures',setup(b){
- b.onResolve({filter:/^(cloudflare:workers|@\/app\/chatgpt-auth|\.\/chatgpt-auth|@\/lib\/auth\/client|next\/headers)$/},args=>({path:args.path,namespace:'fixture'}));
- b.onLoad({filter:/.*/,namespace:'fixture'},args=>({contents:args.path==='cloudflare:workers'?'export const env=globalThis.fixtureEnv;':args.path==='next/headers'?'export async function cookies(){return globalThis.fixtureCookies;} export async function headers(){return new Headers({host:"riparim.example.test"});}':args.path.includes('chatgpt-auth')?'export async function getChatGPTUser(){return globalThis.fixtureNative;}':'export async function authClient(){return globalThis.fixtureClient;}',loader:'js'}));
-}}]});
-await mkdir('.test-runtime/google-auth',{recursive:true});
-for(const file of bundle.outputFiles)await writeFile(file.path.replace(/\.js$/,'.mjs'),file.contents);
-const db=new DatabaseSync(':memory:');
-for(const file of (await readdir('drizzle')).filter(file=>file.endsWith('.sql')).sort())db.exec(await readFile('drizzle/'+file,'utf8'));
-const d1={prepare(sql){const statement=db.prepare(sql);const adapter=(values=[])=>({first:async()=>statement.get(...values)??null,run:async()=>({meta:statement.run(...values)}),all:async()=>({results:statement.all(...values)}),bind:(...next)=>adapter(next)});return adapter();}};
-const projectUrl='https://fixture-project.supabase.co',origin='https://riparim.example.test';
-globalThis.fixtureEnv={DB:d1,BUCKET:{},REVIEW_MODERATOR_EMAIL:'owner@example.test',SITE_ORIGIN:origin};
-globalThis.fixtureNative=null;
-const cookieMap=new Map(),cookieOptions=new Map();
-globalThis.fixtureCookies={get(name){const value=cookieMap.get(name);return value?{name,value}:undefined;},getAll(){return [...cookieMap].map(([name,value])=>({name,value}));},set(name,value,options){cookieOptions.set(name,options);if(options?.maxAge===0)cookieMap.delete(name);else cookieMap.set(name,value);}};
-let user={id:'00000000-0000-4000-8000-000000000001',email:'owner@example.test',email_confirmed_at:'2026-10-03',user_metadata:{full_name:'Owner',provider:'google'},identities:[{provider:'google',identity_data:{sub:'google-owner-123',email:'owner@example.test',email_verified:true}}]};
-let sessionId='oauth-session-1',method='oauth',claimsError=null,claimedId=null,googleEnabled=true,googleProfile={sub:'google-owner-123',email:'owner@example.test',email_verified:true};
-let emailAutoConfirm=false,passwordCalls=0,oauthCalls=0,codeExchanges=0,lastOAuth=null,lastSetSession=null,signupCalls=0,signupError=null,lastSignup=null,signupSession=null;
-let otpError=null,lastOtp=null,lastRecovery=null,recoveryError=null,lastUpdate=null,updateError=null,signoutError=null,userError=null;
-const signouts=[];
-const providerSession=()=>({access_token:'fixture-supabase-access',refresh_token:'fixture-supabase-refresh',provider_token:'fixture-google-token',user});
-globalThis.fixtureClient=neutralClient({auth:{
- getUser:async()=>({data:{user},error:userError}),
- getClaims:async()=>({data:{claims:{session_id:sessionId,sub:claimedId??user.id,amr:[{method}]}},error:claimsError}),
- setSession:async(value)=>{lastSetSession=value;return {data:{session:providerSession()},error:null};},
- signInWithOAuth:async(value)=>{oauthCalls++;lastOAuth=value;return {data:{url:projectUrl+'/auth/v1/authorize?provider=google'},error:null};},
- signInWithPassword:async()=>{passwordCalls++;return {data:{user},error:null};},
- signUp:async(value)=>{signupCalls++;lastSignup=value;return {data:{user:{...user,email_confirmed_at:null},session:signupSession},error:signupError};},
- exchangeCodeForSession:async()=>{codeExchanges++;method='oauth';return {data:{user,session:providerSession()},error:null};},
- verifyOtp:async(value)=>{lastOtp=value;return {data:{user:otpError?null:user,session:otpError?null:providerSession()},error:otpError};},
- resetPasswordForEmail:async(email,options)=>{lastRecovery={email,options};return {error:recoveryError};},
- updateUser:async(value)=>{lastUpdate=value;return {data:{user},error:updateError};},
- signOut:async(options)=>{signouts.push(options);return {error:signoutError};},
-}},projectUrl);
-const originalFetch=globalThis.fetch;
-globalThis.fetch=async(url)=>{
- if(String(url)===projectUrl+'/auth/v1/settings')return Response.json({external:{email:true,google:googleEnabled},mailer_autoconfirm:emailAutoConfirm,disable_signup:false});
- if(String(url)==='https://openidconnect.googleapis.com/v1/userinfo')return Response.json(googleProfile);
- throw Error('Unexpected live request blocked: '+url);
+import {
+  authUser,
+  authSession,
+  authClient as neutralClient,
+} from "./helpers/auth-contract.mjs";
+import { localizeHref } from "../scripts/lib/locale.mjs";
+import assert from "node:assert/strict";
+import { renderAuthEmails } from "./helpers/auth-email-render.mjs";
+import { readFile, readdir, writeFile, mkdir } from "node:fs/promises";
+import { createRequire } from "node:module";
+import { DatabaseSync } from "node:sqlite";
+const { build } = createRequire(new URL("../package.json", import.meta.url))(
+  "esbuild",
+);
+const bundle = await build({
+  entryPoints: {
+    auth: "app/auth.ts",
+    config: "lib/auth/config.ts",
+    actions: "app/api/auth/[action]/route.ts",
+    callback: "app/auth/bestaetigen/route.ts",
+    templates: "lib/auth/email-templates.ts",
+  },
+  bundle: true,
+  format: "esm",
+  platform: "node",
+  outdir: ".test-runtime/google-auth",
+  write: false,
+  plugins: [
+    {
+      name: "auth-fixtures",
+      setup(b) {
+        b.onResolve(
+          {
+            filter:
+              /^(cloudflare:workers|@\/app\/chatgpt-auth|\.\/chatgpt-auth|@\/lib\/auth\/client|next\/headers)$/,
+          },
+          (args) => ({ path: args.path, namespace: "fixture" }),
+        );
+        b.onLoad({ filter: /.*/, namespace: "fixture" }, (args) => ({
+          contents:
+            args.path === "cloudflare:workers"
+              ? "export const env=globalThis.fixtureEnv;"
+              : args.path === "next/headers"
+                ? 'export async function cookies(){return globalThis.fixtureCookies;} export async function headers(){return new Headers({host:"riparim.example.test"});}'
+                : args.path.includes("chatgpt-auth")
+                  ? "export async function getChatGPTUser(){return globalThis.fixtureNative;}"
+                  : "export async function authClient(){return globalThis.fixtureClient;}",
+          loader: "js",
+        }));
+      },
+    },
+  ],
+});
+await mkdir(".test-runtime/google-auth", { recursive: true });
+for (const file of bundle.outputFiles)
+  await writeFile(file.path.replace(/\.js$/, ".mjs"), file.contents);
+const db = new DatabaseSync(":memory:");
+for (const file of (await readdir("drizzle"))
+  .filter((file) => file.endsWith(".sql"))
+  .sort())
+  db.exec(await readFile("drizzle/" + file, "utf8"));
+const d1 = {
+  prepare(sql) {
+    const statement = db.prepare(sql);
+    const adapter = (values = []) => ({
+      first: async () => statement.get(...values) ?? null,
+      run: async () => ({ meta: statement.run(...values) }),
+      all: async () => ({ results: statement.all(...values) }),
+      bind: (...next) => adapter(next),
+    });
+    return adapter();
+  },
 };
-db.prepare("INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at) VALUES ('main',?,?,1,0,?)").run(projectUrl,'sb_publishable_fixture_public_key_1234567890','2026-10-03');
-const auth=await import(new URL('../.test-runtime/google-auth/auth.mjs',import.meta.url));
-const cfg=await import(new URL('../.test-runtime/google-auth/config.mjs',import.meta.url));
-const actions=await import(new URL('../.test-runtime/google-auth/actions.mjs',import.meta.url));
-const callback=await import(new URL('../.test-runtime/google-auth/callback.mjs',import.meta.url));
-const templates=await import(new URL('../.test-runtime/google-auth/templates.mjs',import.meta.url));
-let passed=0;
-const check=(value,label)=>{assert(value,label);passed++;};
-const post=(action,body={},requestOrigin=origin)=>actions.POST(new Request(origin+'/api/auth/'+action,{method:'POST',headers:{'content-type':'application/json',Origin:requestOrigin,'cf-connecting-ip':'fixture-ip'},body:JSON.stringify(body)}),{params:Promise.resolve({action})});
-const callbackRequest=(query)=>callback.GET(new Request(origin+'/auth/bestaetigen?'+new URLSearchParams(query)));
-const accountId=`supabase:${new URL(projectUrl).hostname}:${user.id}`;
-const row=()=>db.prepare('SELECT * FROM auth_sessions WHERE id=?').get(JSON.stringify(['supabase',projectUrl,sessionId]));
-const config=await cfg.getAuthConfig();
-await cfg.verifyProvider(config,false);passed++;
-let availability=await cfg.providerAvailability(config);
-check(availability.google&&availability.email&&availability.emailSignup&&!availability.emailRecovery,'Provider-enabled registration no longer needs local SMTP attestation');
-for(const name of [undefined,null,123,'','   ','x','x'.repeat(81)]){
- const before=signupCalls;
- const invalid=await post('register',{name,email:'invalid-name@example.test',password:'fixture-password-123'});
- check(invalid.status===400&&(await invalid.json()).errorCode==='invalid_name'&&signupCalls===before,'Registration rejects invalid names before invoking signup');
+const projectUrl = "https://fixture-project.supabase.co",
+  origin = "https://riparim.example.test";
+globalThis.fixtureEnv = {
+  DB: d1,
+  BUCKET: {},
+  REVIEW_MODERATOR_EMAIL: "owner@example.test",
+  SITE_ORIGIN: origin,
+};
+globalThis.fixtureNative = null;
+const cookieMap = new Map(),
+  cookieOptions = new Map();
+globalThis.fixtureCookies = {
+  get(name) {
+    const value = cookieMap.get(name);
+    return value ? { name, value } : undefined;
+  },
+  getAll() {
+    return [...cookieMap].map(([name, value]) => ({ name, value }));
+  },
+  set(name, value, options) {
+    cookieOptions.set(name, options);
+    if (options?.maxAge === 0) cookieMap.delete(name);
+    else cookieMap.set(name, value);
+  },
+};
+let user = {
+  id: "00000000-0000-4000-8000-000000000001",
+  email: "owner@example.test",
+  email_confirmed_at: "2026-10-03",
+  user_metadata: { full_name: "Owner", provider: "google" },
+  identities: [
+    {
+      provider: "google",
+      identity_data: {
+        sub: "google-owner-123",
+        email: "owner@example.test",
+        email_verified: true,
+      },
+    },
+  ],
+};
+let sessionId = "oauth-session-1",
+  method = "oauth",
+  claimsError = null,
+  claimedId = null,
+  googleEnabled = true,
+  googleProfile = {
+    sub: "google-owner-123",
+    email: "owner@example.test",
+    email_verified: true,
+  };
+let emailAutoConfirm = false,
+  passwordCalls = 0,
+  oauthCalls = 0,
+  codeExchanges = 0,
+  lastOAuth = null,
+  lastSetSession = null,
+  signupCalls = 0,
+  signupError = null,
+  lastSignup = null,
+  signupSession = null;
+let otpError = null,
+  lastOtp = null,
+  lastRecovery = null,
+  recoveryError = null,
+  lastUpdate = null,
+  updateError = null,
+  signoutError = null,
+  userError = null;
+const signouts = [];
+const providerSession = () => ({
+  access_token: "fixture-supabase-access",
+  refresh_token: "fixture-supabase-refresh",
+  provider_token: "fixture-google-token",
+  user,
+});
+globalThis.fixtureClient = neutralClient(
+  {
+    auth: {
+      getUser: async () => ({ data: { user }, error: userError }),
+      getClaims: async () => ({
+        data: {
+          claims: {
+            session_id: sessionId,
+            sub: claimedId ?? user.id,
+            amr: [{ method }],
+          },
+        },
+        error: claimsError,
+      }),
+      setSession: async (value) => {
+        lastSetSession = value;
+        return { data: { session: providerSession() }, error: null };
+      },
+      signInWithOAuth: async (value) => {
+        oauthCalls++;
+        lastOAuth = value;
+        return {
+          data: { url: projectUrl + "/auth/v1/authorize?provider=google" },
+          error: null,
+        };
+      },
+      signInWithPassword: async () => {
+        passwordCalls++;
+        return { data: { user }, error: null };
+      },
+      signUp: async (value) => {
+        signupCalls++;
+        lastSignup = value;
+        return {
+          data: {
+            user: { ...user, email_confirmed_at: null },
+            session: signupSession,
+          },
+          error: signupError,
+        };
+      },
+      exchangeCodeForSession: async () => {
+        codeExchanges++;
+        method = "oauth";
+        return { data: { user, session: providerSession() }, error: null };
+      },
+      verifyOtp: async (value) => {
+        lastOtp = value;
+        return {
+          data: {
+            user: otpError ? null : user,
+            session: otpError ? null : providerSession(),
+          },
+          error: otpError,
+        };
+      },
+      resetPasswordForEmail: async (email, options) => {
+        lastRecovery = { email, options };
+        return { error: recoveryError };
+      },
+      updateUser: async (value) => {
+        lastUpdate = value;
+        return { data: { user }, error: updateError };
+      },
+      signOut: async (options) => {
+        signouts.push(options);
+        return { error: signoutError };
+      },
+    },
+  },
+  projectUrl,
+);
+const originalFetch = globalThis.fetch;
+globalThis.fetch = async (url) => {
+  if (String(url) === projectUrl + "/auth/v1/settings")
+    return Response.json({
+      external: { email: true, google: googleEnabled },
+      mailer_autoconfirm: emailAutoConfirm,
+      disable_signup: false,
+    });
+  if (String(url) === "https://openidconnect.googleapis.com/v1/userinfo")
+    return Response.json(googleProfile);
+  throw Error("Unexpected live request blocked: " + url);
+};
+db.prepare(
+  "INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at) VALUES ('main',?,?,1,0,?)",
+).run(projectUrl, "sb_publishable_fixture_public_key_1234567890", "2026-10-03");
+const auth = await import(
+  new URL("../.test-runtime/google-auth/auth.mjs", import.meta.url)
+);
+const cfg = await import(
+  new URL("../.test-runtime/google-auth/config.mjs", import.meta.url)
+);
+const actions = await import(
+  new URL("../.test-runtime/google-auth/actions.mjs", import.meta.url)
+);
+const callback = await import(
+  new URL("../.test-runtime/google-auth/callback.mjs", import.meta.url)
+);
+const templates = await import(
+  new URL("../.test-runtime/google-auth/templates.mjs", import.meta.url)
+);
+let passed = 0;
+const check = (value, label) => {
+  assert(value, label);
+  passed++;
+};
+const post = (action, body = {}, requestOrigin = origin) =>
+  actions.POST(
+    new Request(origin + "/api/auth/" + action, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Origin: requestOrigin,
+        "cf-connecting-ip": "fixture-ip",
+      },
+      body: JSON.stringify(body),
+    }),
+    { params: Promise.resolve({ action }) },
+  );
+const callbackRequest = (query) =>
+  callback.GET(
+    new Request(origin + "/auth/bestaetigen?" + new URLSearchParams(query)),
+  );
+const accountId = `supabase:${new URL(projectUrl).hostname}:${user.id}`;
+const row = () =>
+  db
+    .prepare("SELECT * FROM auth_sessions WHERE id=?")
+    .get(JSON.stringify(["supabase", projectUrl, sessionId]));
+const config = await cfg.getAuthConfig();
+await cfg.verifyProvider(config, false);
+passed++;
+let availability = await cfg.providerAvailability(config);
+check(
+  availability.google &&
+    availability.email &&
+    availability.emailSignup &&
+    !availability.emailRecovery,
+  "Provider-enabled registration no longer needs local SMTP attestation",
+);
+for (const name of [undefined, null, 123, "", "   ", "x", "x".repeat(81)]) {
+  const before = signupCalls;
+  const invalid = await post("register", {
+    name,
+    email: "invalid-name@example.test",
+    password: "fixture-password-123",
+  });
+  check(
+    invalid.status === 400 &&
+      (await invalid.json()).errorCode === "invalid_name" &&
+      signupCalls === before,
+    "Registration rejects invalid names before invoking signup",
+  );
 }
-let registration=await post('register',{name:'  Fixture Member  ',email:'new-account@example.test',password:'fixture-password-123',returnTo:'//other.example.test'});
-check(lastSignup.options.data.full_name==='Fixture Member','Registration trims and stores the required name');
-check(registration.status===200&&signupCalls===1,'Registration invokes signup while local delivery attestation is false');
-check((await registration.json()).message.includes('bestätige deine E-Mail-Adresse'),'Successful signup requires checking the confirmation email');
-check(new URL(lastSignup.options.emailRedirectTo).origin===origin&&new URL(lastSignup.options.emailRedirectTo).pathname==='/auth/bestaetigen','Confirmation uses the canonical callback');
-check(new URL(lastSignup.options.emailRedirectTo).searchParams.get('weiter')==='/?besuche=1','Confirmation callback rejects an external destination');
-check(db.prepare('SELECT COUNT(*) AS n FROM auth_sessions').get().n===0,'Signup cannot enroll a session or grant app access');
-signupError={code:'email_address_not_authorized',status:400};
-registration=await post('register',{name:'  Fixture Member  ',email:'new-account@example.test',password:'fixture-password-123'});
-check(registration.status===503&&!(await registration.json()).message,'SMTP rejection produces no false success');
-signupError={code:'over_email_send_rate_limit',status:429};
-check((await post('register',{name:'  Fixture Member  ',email:'new-account@example.test',password:'fixture-password-123'})).status===429,'Provider email limit is reported as a retryable rate limit');
-signupError=null;signupSession=providerSession();
-check((await post('register',{name:'  Fixture Member  ',email:'new-account@example.test',password:'fixture-password-123'})).status===503,'An unexpected auto-confirmed session fails closed');
-signupSession=null;
-check((await post('recovery',{email:user.email})).status===503,'SMTP-unconfirmed recovery cannot send live mail');
-sessionId='email-without-smtp';method='password';
-check((await post('login',{email:user.email,password:'fixture-password-123'})).status===200,'Confirmed account can log in while SMTP is unconfirmed');
-check(row()?.provider==='password'&&!row()?.moderator,'Email login grants a password session without Google privileges');
-user={...user,email_confirmed_at:null};sessionId='unconfirmed-email-login';
-check((await post('login',{email:user.email,password:'fixture-password-123'})).status===401&&!row(),'Unconfirmed email cannot obtain an app session');
-user={...user,email_confirmed_at:'2026-10-03'};emailAutoConfirm=true;
-check((await post('login',{email:user.email,password:'fixture-password-123'})).status===503&&passwordCalls===2,'Server blocks password login if email confirmation is disabled at the provider');
-emailAutoConfirm=false;sessionId='oauth-session-1';method='oauth';
-check((await post('google',{},'https://other.example.test')).status===403,'Google start rejects cross-origin POST');
-googleEnabled=false;
-check((await post('google')).status===503&&oauthCalls===0,'Disabled Google never produces a pretend OAuth URL');
-googleEnabled=true;
-let response=await post('google',{returnTo:'//other.example.test'});
-check(response.status===200&&oauthCalls===1,'Enabled Google starts real SDK OAuth');
-check(lastOAuth.provider==='google'&&lastOAuth.options.skipBrowserRedirect,'Server-owned PKCE flow');
-check(lastOAuth.options.scopes==='openid email profile','Only identity scopes requested');
-let destination=new URL(lastOAuth.options.redirectTo);
-check(destination.origin===origin&&destination.pathname==='/auth/bestaetigen','OAuth callback is canonical Site URL');
-check(destination.searchParams.get('weiter')==='/?besuche=1','OAuth external return path is rejected');
-let flow=cookieMap.get('riparim-google-flow'),options=cookieOptions.get('riparim-google-flow');
-check(options.httpOnly&&options.secure&&options.sameSite==='lax'&&options.maxAge===600,'OAuth intent cookie is private, secure and short-lived');
-response=await callbackRequest({anbieter:'google',code:'fixture-code',fluss:'wrong-flow'});
-check(response.status===303&&new URL(response.headers.get('Location')).searchParams.get('fehler')==='google'&&codeExchanges===0,'Mismatched intent cannot exchange a code');
-check(!cookieMap.has('riparim-google-flow'),'Invalid callback consumes intent cookie');
-await post('google',{returnTo:'/?besuche=1'});
-flow=cookieMap.get('riparim-google-flow');
-globalThis.fixtureNative={userId:'legacy-owner',email:user.email,displayName:'Native owner',fullName:null};
-response=await callbackRequest({anbieter:'google',code:'fixture-code',fluss:flow,weiter:'/?besuche=1'});
-check(response.status===303&&new URL(response.headers.get('Location')).search==='?besuche=1','Successful Google callback returns to requested private view');
-check(codeExchanges===1&&row().provider==='google'&&row().google_subject==='google-owner-123'&&row().moderator===1,'Verified current Google proof enrolls exact session');
-check(row().expires_at>Date.now()+29*86400000&&row().expires_at<=Date.now()+30*86400000,'Session retains a bounded 30-day lifetime');
-check(lastSetSession.access_token&&lastSetSession.refresh_token&&!('provider_token' in lastSetSession),'Google provider credentials are removed before cookie persistence');
-check(db.prepare('SELECT password_access FROM auth_links WHERE account_id=?').get(accountId).password_access===0,'Google-created native ownership link does not grant password access');
-globalThis.fixtureNative=null;
-let current=await auth.getAppUser();
-check(current.isModerator&&current.provider==='Google'&&current.ownerKeys.includes('legacy-owner'),'Verified Google session can own legacy records and administer without native ChatGPT');
-check((await auth.getAdminUser(current)).isModerator,'Configured owner is reachable through verified Google identity');
-const originalName=user.user_metadata.full_name;
-for(const name of [undefined,null,'','  ','x',123,'x'.repeat(81),'  Public Member  ']){
- user={...user,user_metadata:{...user.user_metadata,full_name:name}};
- current=await auth.getAppUser();
- check(current.displayName===(name==='  Public Member  '?'Public Member':'Anonym')&&current.displayName!==user.email,'Verified Google profiles normalize names and never use email as fallback');
+let registration = await post("register", {
+  name: "  Fixture Member  ",
+  email: "new-account@example.test",
+  password: "fixture-password-123",
+  returnTo: "//other.example.test",
+});
+check(
+  lastSignup.options.data.full_name === "Fixture Member",
+  "Registration trims and stores the required name",
+);
+check(
+  registration.status === 200 && signupCalls === 1,
+  "Registration invokes signup while local delivery attestation is false",
+);
+check(
+  (await registration.json()).message.includes(
+    "bestätige deine E-Mail-Adresse",
+  ),
+  "Successful signup requires checking the confirmation email",
+);
+check(
+  new URL(lastSignup.options.emailRedirectTo).origin === origin &&
+    new URL(lastSignup.options.emailRedirectTo).pathname ===
+      "/auth/bestaetigen",
+  "Confirmation uses the canonical callback",
+);
+check(
+  new URL(lastSignup.options.emailRedirectTo).searchParams.get("weiter") ===
+    "/?besuche=1",
+  "Confirmation callback rejects an external destination",
+);
+check(
+  db.prepare("SELECT COUNT(*) AS n FROM auth_sessions").get().n === 0,
+  "Signup cannot enroll a session or grant app access",
+);
+signupError = { code: "email_address_not_authorized", status: 400 };
+registration = await post("register", {
+  name: "  Fixture Member  ",
+  email: "new-account@example.test",
+  password: "fixture-password-123",
+});
+check(
+  registration.status === 503 && !(await registration.json()).message,
+  "SMTP rejection produces no false success",
+);
+signupError = { code: "over_email_send_rate_limit", status: 429 };
+check(
+  (
+    await post("register", {
+      name: "  Fixture Member  ",
+      email: "new-account@example.test",
+      password: "fixture-password-123",
+    })
+  ).status === 429,
+  "Provider email limit is reported as a retryable rate limit",
+);
+signupError = null;
+signupSession = providerSession();
+check(
+  (
+    await post("register", {
+      name: "  Fixture Member  ",
+      email: "new-account@example.test",
+      password: "fixture-password-123",
+    })
+  ).status === 503,
+  "An unexpected auto-confirmed session fails closed",
+);
+signupSession = null;
+check(
+  (await post("recovery", { email: user.email })).status === 503,
+  "SMTP-unconfirmed recovery cannot send live mail",
+);
+sessionId = "email-without-smtp";
+method = "password";
+check(
+  (await post("login", { email: user.email, password: "fixture-password-123" }))
+    .status === 200,
+  "Confirmed account can log in while SMTP is unconfirmed",
+);
+check(
+  row()?.provider === "password" && !row()?.moderator,
+  "Email login grants a password session without Google privileges",
+);
+user = { ...user, email_confirmed_at: null };
+sessionId = "unconfirmed-email-login";
+check(
+  (await post("login", { email: user.email, password: "fixture-password-123" }))
+    .status === 401 && !row(),
+  "Unconfirmed email cannot obtain an app session",
+);
+user = { ...user, email_confirmed_at: "2026-10-03" };
+emailAutoConfirm = true;
+check(
+  (await post("login", { email: user.email, password: "fixture-password-123" }))
+    .status === 503 && passwordCalls === 2,
+  "Server blocks password login if email confirmation is disabled at the provider",
+);
+emailAutoConfirm = false;
+sessionId = "oauth-session-1";
+method = "oauth";
+check(
+  (await post("google", {}, "https://other.example.test")).status === 403,
+  "Google start rejects cross-origin POST",
+);
+googleEnabled = false;
+check(
+  (await post("google")).status === 503 && oauthCalls === 0,
+  "Disabled Google never produces a pretend OAuth URL",
+);
+googleEnabled = true;
+let response = await post("google", { returnTo: "//other.example.test" });
+check(
+  response.status === 200 && oauthCalls === 1,
+  "Enabled Google starts real SDK OAuth",
+);
+check(
+  lastOAuth.provider === "google" && lastOAuth.options.skipBrowserRedirect,
+  "Server-owned PKCE flow",
+);
+check(
+  lastOAuth.options.scopes === "openid email profile",
+  "Only identity scopes requested",
+);
+let destination = new URL(lastOAuth.options.redirectTo);
+check(
+  destination.origin === origin && destination.pathname === "/auth/bestaetigen",
+  "OAuth callback is canonical Site URL",
+);
+check(
+  destination.searchParams.get("weiter") === "/?besuche=1",
+  "OAuth external return path is rejected",
+);
+let flow = cookieMap.get("riparim-google-flow"),
+  options = cookieOptions.get("riparim-google-flow");
+check(
+  options.httpOnly &&
+    options.secure &&
+    options.sameSite === "lax" &&
+    options.maxAge === 600,
+  "OAuth intent cookie is private, secure and short-lived",
+);
+response = await callbackRequest({
+  anbieter: "google",
+  code: "fixture-code",
+  fluss: "wrong-flow",
+});
+check(
+  response.status === 303 &&
+    new URL(response.headers.get("Location")).searchParams.get("fehler") ===
+      "google" &&
+    codeExchanges === 0,
+  "Mismatched intent cannot exchange a code",
+);
+check(
+  !cookieMap.has("riparim-google-flow"),
+  "Invalid callback consumes intent cookie",
+);
+await post("google", { returnTo: "/?besuche=1" });
+flow = cookieMap.get("riparim-google-flow");
+globalThis.fixtureNative = {
+  userId: "legacy-owner",
+  email: user.email,
+  displayName: "Native owner",
+  fullName: null,
+};
+response = await callbackRequest({
+  anbieter: "google",
+  code: "fixture-code",
+  fluss: flow,
+  weiter: "/?besuche=1",
+});
+check(
+  response.status === 303 &&
+    new URL(response.headers.get("Location")).search === "?besuche=1",
+  "Successful Google callback returns to requested private view",
+);
+check(
+  codeExchanges === 1 &&
+    row().provider === "google" &&
+    row().google_subject === "google-owner-123" &&
+    row().moderator === 1,
+  "Verified current Google proof enrolls exact session",
+);
+check(
+  row().expires_at > Date.now() + 29 * 86400000 &&
+    row().expires_at <= Date.now() + 30 * 86400000,
+  "Session retains a bounded 30-day lifetime",
+);
+check(
+  lastSetSession.access_token &&
+    lastSetSession.refresh_token &&
+    !("provider_token" in lastSetSession),
+  "Google provider credentials are removed before cookie persistence",
+);
+check(
+  db
+    .prepare("SELECT password_access FROM auth_links WHERE account_id=?")
+    .get(accountId).password_access === 0,
+  "Google-created native ownership link does not grant password access",
+);
+globalThis.fixtureNative = null;
+let current = await auth.getAppUser();
+check(
+  current.isModerator &&
+    current.provider === "Google" &&
+    current.ownerKeys.includes("legacy-owner"),
+  "Verified Google session can own legacy records and administer without native ChatGPT",
+);
+check(
+  (await auth.getAdminUser(current)).isModerator,
+  "Configured owner is reachable through verified Google identity",
+);
+const originalName = user.user_metadata.full_name;
+for (const name of [
+  undefined,
+  null,
+  "",
+  "  ",
+  "x",
+  123,
+  "x".repeat(81),
+  "  Public Member  ",
+]) {
+  user = { ...user, user_metadata: { ...user.user_metadata, full_name: name } };
+  current = await auth.getAppUser();
+  check(
+    current.displayName ===
+      (name === "  Public Member  " ? "Public Member" : "Anonym") &&
+      current.displayName !== user.email,
+    "Verified Google profiles normalize names and never use email as fallback",
+  );
 }
-user={...user,user_metadata:{...user.user_metadata,full_name:originalName}};
+user = {
+  ...user,
+  user_metadata: { ...user.user_metadata, full_name: originalName },
+};
 
-sessionId='preclaimed-password-session';method='password';
-await auth.recordPasswordSession(authUser(user,projectUrl),globalThis.fixtureClient);
-current=await auth.getAppUser();
-check(current.provider==='E-Mail'&&!current.isModerator&&current.ownerKeys.length===1,'Password on linked account cannot inherit Google role or Google-created legacy link');
-user={...user,user_metadata:{}};check((await auth.getAppUser()).displayName==='Anonym','Older email accounts with no name remain private');
-user={...user,user_metadata:{full_name:originalName}};
-check(row().legacy_access===0&&row().moderator===0,'Password session stores no Google grants');
-globalThis.fixtureNative={userId:'someone-else',email:'other@example.test',displayName:'Other',fullName:null};
-sessionId='password-mismatched-native';
-await auth.recordPasswordSession(authUser(user,projectUrl),globalThis.fixtureClient);
-check(row().legacy_access===0,'Unrelated native identity cannot upgrade password ownership');
-globalThis.fixtureNative={userId:'legacy-owner',email:user.email,displayName:'Owner',fullName:null};
-sessionId='password-fresh-native';
-await auth.recordPasswordSession(authUser(user,projectUrl),globalThis.fixtureClient);
-current=await auth.getAppUser();
-check(current.ownerKeys.includes('legacy-owner')&&!current.isModerator,'Fresh matching native proof may upgrade password legacy ownership but never Google moderation');
-globalThis.fixtureNative=null;
-sessionId='oauth-session-1';method='oauth';
-method='password';check(await auth.getAppUser()===null,'Google session requires continuing signed OAuth method proof');method='oauth';
-const originalIdentity=user.identities;
-user={...user,identities:[]};
-check(await auth.getAppUser()===null,'Unlinked Google identity invalidates Google session access');
-user={...user,identities:originalIdentity,user_metadata:{full_name:'Forged owner',email:'another@example.test',is_admin:true}};
-check((await auth.getAppUser()).isModerator,'Mutable metadata cannot replace independently verified Google role proof');
-claimedId='another-user';
-check(await auth.getAppUser()===null,'JWT subject must match server-verified identity');
-claimedId=null;claimsError={message:'fixture bad signature'};
-check(await auth.getAppUser()===null,'Invalid JWT signature cannot pass D1 session allowlist');
-claimsError=null;
+sessionId = "preclaimed-password-session";
+method = "password";
+await auth.recordPasswordSession(
+  authUser(user, projectUrl),
+  globalThis.fixtureClient,
+);
+current = await auth.getAppUser();
+check(
+  current.provider === "E-Mail" &&
+    !current.isModerator &&
+    current.ownerKeys.length === 1,
+  "Password on linked account cannot inherit Google role or Google-created legacy link",
+);
+user = { ...user, user_metadata: {} };
+check(
+  (await auth.getAppUser()).displayName === "Anonym",
+  "Older email accounts with no name remain private",
+);
+user = { ...user, user_metadata: { full_name: originalName } };
+check(
+  row().legacy_access === 0 && row().moderator === 0,
+  "Password session stores no Google grants",
+);
+globalThis.fixtureNative = {
+  userId: "someone-else",
+  email: "other@example.test",
+  displayName: "Other",
+  fullName: null,
+};
+sessionId = "password-mismatched-native";
+await auth.recordPasswordSession(
+  authUser(user, projectUrl),
+  globalThis.fixtureClient,
+);
+check(
+  row().legacy_access === 0,
+  "Unrelated native identity cannot upgrade password ownership",
+);
+globalThis.fixtureNative = {
+  userId: "legacy-owner",
+  email: user.email,
+  displayName: "Owner",
+  fullName: null,
+};
+sessionId = "password-fresh-native";
+await auth.recordPasswordSession(
+  authUser(user, projectUrl),
+  globalThis.fixtureClient,
+);
+current = await auth.getAppUser();
+check(
+  current.ownerKeys.includes("legacy-owner") && !current.isModerator,
+  "Fresh matching native proof may upgrade password legacy ownership but never Google moderation",
+);
+globalThis.fixtureNative = null;
+sessionId = "oauth-session-1";
+method = "oauth";
+method = "password";
+check(
+  (await auth.getAppUser()) === null,
+  "Google session requires continuing signed OAuth method proof",
+);
+method = "oauth";
+const originalIdentity = user.identities;
+user = { ...user, identities: [] };
+check(
+  (await auth.getAppUser()) === null,
+  "Unlinked Google identity invalidates Google session access",
+);
+user = {
+  ...user,
+  identities: originalIdentity,
+  user_metadata: {
+    full_name: "Forged owner",
+    email: "another@example.test",
+    is_admin: true,
+  },
+};
+check(
+  (await auth.getAppUser()).isModerator,
+  "Mutable metadata cannot replace independently verified Google role proof",
+);
+claimedId = "another-user";
+check(
+  (await auth.getAppUser()) === null,
+  "JWT subject must match server-verified identity",
+);
+claimedId = null;
+claimsError = { message: "fixture bad signature" };
+check(
+  (await auth.getAppUser()) === null,
+  "Invalid JWT signature cannot pass D1 session allowlist",
+);
+claimsError = null;
 await auth.revokeCurrentSession(globalThis.fixtureClient);
-check(await auth.getAppUser()===null,'Revocation denies otherwise valid Google session');
-db.prepare('UPDATE auth_sessions SET revoked=0,expires_at=0 WHERE id=?').run(JSON.stringify(['supabase',projectUrl,sessionId]));
-check(await auth.getAppUser()===null,'Expired app session cannot be prolonged by provider refresh');
-sessionId='unverified-google-session';method='oauth';googleProfile={...googleProfile,email_verified:false};
-await assert.rejects(auth.recordGoogleSession(authSession(providerSession(),projectUrl),globalThis.fixtureClient),/INVALID_GOOGLE_IDENTITY/);passed++;
-check(!row(),'Unverified Google email never enrolls a session');
-googleProfile={sub:'wrong-google-subject',email:user.email,email_verified:true};
-await assert.rejects(auth.recordGoogleSession(authSession(providerSession(),projectUrl),globalThis.fixtureClient),/INVALID_GOOGLE_IDENTITY/);passed++;
-check(!row(),'Different Google subject never enrolls a session');
-googleProfile={sub:'google-owner-123',email:user.email,email_verified:true};method='password';
-await assert.rejects(auth.recordGoogleSession(authSession(providerSession(),projectUrl),globalThis.fixtureClient),/INVALID_AUTH_SESSION/);passed++;
-check(!row(),'Historical linked Google identity cannot prove a current password session');
-method='oauth';
-await assert.rejects(auth.recordGoogleSession(authSession({...providerSession(),provider_token:null},projectUrl),globalThis.fixtureClient),/INVALID_GOOGLE_SESSION/);passed++;
-check(!row(),'OAuth callback requires fresh provider proof, not account metadata');
+check(
+  (await auth.getAppUser()) === null,
+  "Revocation denies otherwise valid Google session",
+);
+db.prepare("UPDATE auth_sessions SET revoked=0,expires_at=0 WHERE id=?").run(
+  JSON.stringify(["supabase", projectUrl, sessionId]),
+);
+check(
+  (await auth.getAppUser()) === null,
+  "Expired app session cannot be prolonged by provider refresh",
+);
+sessionId = "unverified-google-session";
+method = "oauth";
+googleProfile = { ...googleProfile, email_verified: false };
+await assert.rejects(
+  auth.recordGoogleSession(
+    authSession(providerSession(), projectUrl),
+    globalThis.fixtureClient,
+  ),
+  /INVALID_GOOGLE_IDENTITY/,
+);
+passed++;
+check(!row(), "Unverified Google email never enrolls a session");
+googleProfile = {
+  sub: "wrong-google-subject",
+  email: user.email,
+  email_verified: true,
+};
+await assert.rejects(
+  auth.recordGoogleSession(
+    authSession(providerSession(), projectUrl),
+    globalThis.fixtureClient,
+  ),
+  /INVALID_GOOGLE_IDENTITY/,
+);
+passed++;
+check(!row(), "Different Google subject never enrolls a session");
+googleProfile = {
+  sub: "google-owner-123",
+  email: user.email,
+  email_verified: true,
+};
+method = "password";
+await assert.rejects(
+  auth.recordGoogleSession(
+    authSession(providerSession(), projectUrl),
+    globalThis.fixtureClient,
+  ),
+  /INVALID_AUTH_SESSION/,
+);
+passed++;
+check(
+  !row(),
+  "Historical linked Google identity cannot prove a current password session",
+);
+method = "oauth";
+await assert.rejects(
+  auth.recordGoogleSession(
+    authSession({ ...providerSession(), provider_token: null }, projectUrl),
+    globalThis.fixtureClient,
+  ),
+  /INVALID_GOOGLE_SESSION/,
+);
+passed++;
+check(
+  !row(),
+  "OAuth callback requires fresh provider proof, not account metadata",
+);
 
 // Exercise the email journey at the route boundary with the same isolated DB.
-const emailChecksStart=passed;
-const reviewDestination='/werkstatt/fixture-workshop?suche=wartung#bewerten';
-method='password';sessionId='email-confirmation';
-registration=await post('register',{name:'Fixture Member',email:'confirmation@example.test',password:'fixture-password-123',returnTo:reviewDestination});
-check(registration.status===200,'Email registration begins the confirmation journey');
-function emailLink(template,redirectTo,token){
- const [{body}]=renderAuthEmails([{Subject:template===templates.recoveryEmailTemplate?templates.recoveryEmailSubject:templates.confirmationEmailSubject,Body:template,Data:{SiteURL:origin,RedirectTo:redirectTo,TokenHash:token}}]);
- return new URL(body.match(/href="([^"]+)"/)[1].replaceAll('&amp;','&'));
+const emailChecksStart = passed;
+const reviewDestination = "/werkstatt/fixture-workshop?suche=wartung#bewerten";
+method = "password";
+sessionId = "email-confirmation";
+registration = await post("register", {
+  name: "Fixture Member",
+  email: "confirmation@example.test",
+  password: "fixture-password-123",
+  returnTo: reviewDestination,
+});
+check(
+  registration.status === 200,
+  "Email registration begins the confirmation journey",
+);
+function emailLink(template, redirectTo, token) {
+  const [{ body }] = renderAuthEmails([
+    {
+      Subject:
+        template === templates.recoveryEmailTemplate
+          ? templates.recoveryEmailSubject
+          : templates.confirmationEmailSubject,
+      Body: template,
+      Data: { SiteURL: origin, RedirectTo: redirectTo, TokenHash: token },
+    },
+  ]);
+  return new URL(body.match(/href="([^"]+)"/)[1].replaceAll("&amp;", "&"));
 }
-let link=emailLink(templates.confirmationEmailTemplate,lastSignup.options.emailRedirectTo,'fixture-confirmation-token');
-check(link.origin===origin&&link.pathname==='/auth/bestaetigen'&&link.searchParams.get('weiter')===reviewDestination,'Rendered signup email preserves profile, filters and review anchor');
-response=await callback.GET(new Request(link));
-destination=new URL(response.headers.get('Location'));
-check(response.status===303&&destination.pathname==='/anmelden'&&destination.searchParams.get('hinweis')==='email-bestaetigt'&&destination.searchParams.get('weiter')===reviewDestination,'Confirmed signup returns to login with the original review destination');
-check(lastOtp.token_hash==='fixture-confirmation-token'&&lastOtp.type==='signup'&&signouts.at(-1).scope==='local'&&!row(),'Signup verification signs out without granting an app session');
-response=await post('login',{email:user.email,password:'fixture-password-123',returnTo:destination.searchParams.get('weiter')});
-check(response.status===200&&(await response.json()).returnTo===reviewDestination&&row().provider==='password','Separate confirmed login resumes the original workshop review');
+let link = emailLink(
+  templates.confirmationEmailTemplate,
+  lastSignup.options.emailRedirectTo,
+  "fixture-confirmation-token",
+);
+check(
+  link.origin === origin &&
+    link.pathname === "/auth/bestaetigen" &&
+    link.searchParams.get("weiter") === reviewDestination,
+  "Rendered signup email preserves profile, filters and review anchor",
+);
+response = await callback.GET(new Request(link));
+destination = new URL(response.headers.get("Location"));
+check(
+  response.status === 303 &&
+    destination.pathname === "/anmelden" &&
+    destination.searchParams.get("hinweis") === "email-bestaetigt" &&
+    destination.searchParams.get("weiter") === reviewDestination,
+  "Confirmed signup returns to login with the original review destination",
+);
+check(
+  lastOtp.token_hash === "fixture-confirmation-token" &&
+    lastOtp.type === "signup" &&
+    signouts.at(-1).scope === "local" &&
+    !row(),
+  "Signup verification signs out without granting an app session",
+);
+response = await post("login", {
+  email: user.email,
+  password: "fixture-password-123",
+  returnTo: destination.searchParams.get("weiter"),
+});
+check(
+  response.status === 200 &&
+    (await response.json()).returnTo === reviewDestination &&
+    row().provider === "password",
+  "Separate confirmed login resumes the original workshop review",
+);
 
-otpError={message:'expired fixture token'};
-response=await callbackRequest({token_hash:'expired',type:'signup',weiter:'https://outside.example.test'});
-destination=new URL(response.headers.get('Location'));
-check(destination.pathname==='/anmelden'&&destination.searchParams.get('fehler')==='bestaetigung'&&destination.searchParams.get('weiter')==='/?besuche=1','Expired confirmation fails with a safe return destination');
-otpError=null;
-db.prepare("UPDATE auth_settings SET email_delivery_confirmed=1 WHERE id='main'").run();
-response=await post('recovery',{email:' RECOVERY@example.test ',returnTo:'//outside.example.test'});
-check(response.status===200&&(await response.json()).message.includes('Wenn ein Konto existiert'),'Recovery does not reveal whether an account exists');
-check(lastRecovery.email==='recovery@example.test'&&lastRecovery.options.redirectTo===origin+'/auth/bestaetigen?locale=de&weiter=%2Fpasswort-neu','Recovery normalizes email and uses only the canonical reset destination');
-link=emailLink(templates.recoveryEmailTemplate,lastRecovery.options.redirectTo,'fixture-recovery-token');
-const signoutsBeforeRecovery=signouts.length;
-response=await callback.GET(new Request(link));
-check(response.status===303&&new URL(response.headers.get('Location')).pathname==='/passwort-neu'&&lastOtp.type==='recovery'&&signouts.length===signoutsBeforeRecovery,'Valid recovery preserves the provider session for password reset');
-recoveryError={message:'fixture provider outage'};
-check((await post('recovery',{email:'outage@example.test'})).status===503,'Provider failure cannot report a sent recovery email');
-recoveryError=null;otpError={message:'expired fixture recovery'};
-response=await callbackRequest({token_hash:'expired',type:'recovery'});
-check(new URL(response.headers.get('Location')).pathname==='/anmelden','Expired recovery cannot open the reset form');
-otpError=null;
+otpError = { message: "expired fixture token" };
+response = await callbackRequest({
+  token_hash: "expired",
+  type: "signup",
+  weiter: "https://outside.example.test",
+});
+destination = new URL(response.headers.get("Location"));
+check(
+  destination.pathname === "/anmelden" &&
+    destination.searchParams.get("fehler") === "bestaetigung" &&
+    destination.searchParams.get("weiter") === "/?besuche=1",
+  "Expired confirmation fails with a safe return destination",
+);
+otpError = null;
+db.prepare(
+  "UPDATE auth_settings SET email_delivery_confirmed=1 WHERE id='main'",
+).run();
+response = await post("recovery", {
+  email: " RECOVERY@example.test ",
+  returnTo: "//outside.example.test",
+});
+check(
+  response.status === 200 &&
+    (await response.json()).message.includes("Wenn ein Konto existiert"),
+  "Recovery does not reveal whether an account exists",
+);
+check(
+  lastRecovery.email === "recovery@example.test" &&
+    lastRecovery.options.redirectTo ===
+      origin + "/auth/bestaetigen?locale=de&weiter=%2Fpasswort-neu",
+  "Recovery normalizes email and uses only the canonical reset destination",
+);
+link = emailLink(
+  templates.recoveryEmailTemplate,
+  lastRecovery.options.redirectTo,
+  "fixture-recovery-token",
+);
+const signoutsBeforeRecovery = signouts.length;
+response = await callback.GET(new Request(link));
+check(
+  response.status === 303 &&
+    new URL(response.headers.get("Location")).pathname === "/passwort-neu" &&
+    lastOtp.type === "recovery" &&
+    signouts.length === signoutsBeforeRecovery,
+  "Valid recovery preserves the provider session for password reset",
+);
+recoveryError = { message: "fixture provider outage" };
+check(
+  (await post("recovery", { email: "outage@example.test" })).status === 503,
+  "Provider failure cannot report a sent recovery email",
+);
+recoveryError = null;
+otpError = { message: "expired fixture recovery" };
+response = await callbackRequest({ token_hash: "expired", type: "recovery" });
+check(
+  new URL(response.headers.get("Location")).pathname === "/anmelden",
+  "Expired recovery cannot open the reset form",
+);
+otpError = null;
 
-sessionId='email-reset-session';method='password';
-await auth.recordPasswordSession(authUser(user,projectUrl),globalThis.fixtureClient);
-sessionId='email-other-device';await auth.recordPasswordSession(authUser(user,projectUrl),globalThis.fixtureClient);
-sessionId='email-reset-session';
-updateError={message:'fixture rejected password'};
-response=await post('reset',{password:'fixture-new-password-123'});
-check(response.status===400&&row().revoked===0,'Failed password update preserves the current app session and reports failure');
-updateError=null;
-response=await post('reset',{password:'fixture-new-password-123'});
-check(response.status===200&&lastUpdate.password==='fixture-new-password-123'&&(await response.json()).returnTo==='/anmelden?hinweis=passwort-geaendert','Successful password update requests a fresh login');
-check(db.prepare('SELECT COUNT(*) AS n FROM auth_sessions WHERE account_id=? AND revoked=0').get(accountId).n===0&&signouts.at(-1).scope==='global','Password reset revokes every app session for the account and signs out the provider globally');
-check(await auth.getAppUser()===null,'An old app session cannot regain access after password reset');
-userError={message:'fixture no current user'};lastUpdate=null;
-check((await post('reset',{password:'fixture-new-password-123'})).status===401&&lastUpdate===null,'Password reset requires a server-verified confirmed provider user');
-userError=null;
+sessionId = "email-reset-session";
+method = "password";
+await auth.recordPasswordSession(
+  authUser(user, projectUrl),
+  globalThis.fixtureClient,
+);
+sessionId = "email-other-device";
+await auth.recordPasswordSession(
+  authUser(user, projectUrl),
+  globalThis.fixtureClient,
+);
+sessionId = "email-reset-session";
+updateError = { message: "fixture rejected password" };
+response = await post("reset", { password: "fixture-new-password-123" });
+check(
+  response.status === 400 && row().revoked === 0,
+  "Failed password update preserves the current app session and reports failure",
+);
+updateError = null;
+response = await post("reset", { password: "fixture-new-password-123" });
+check(
+  response.status === 200 &&
+    lastUpdate.password === "fixture-new-password-123" &&
+    (await response.json()).returnTo === "/anmelden?hinweis=passwort-geaendert",
+  "Successful password update requests a fresh login",
+);
+check(
+  db
+    .prepare(
+      "SELECT COUNT(*) AS n FROM auth_sessions WHERE account_id=? AND revoked=0",
+    )
+    .get(accountId).n === 0 && signouts.at(-1).scope === "global",
+  "Password reset revokes every app session for the account and signs out the provider globally",
+);
+check(
+  (await auth.getAppUser()) === null,
+  "An old app session cannot regain access after password reset",
+);
+userError = { message: "fixture no current user" };
+lastUpdate = null;
+check(
+  (await post("reset", { password: "fixture-new-password-123" })).status ===
+    401 && lastUpdate === null,
+  "Password reset requires a server-verified confirmed provider user",
+);
+userError = null;
 
-sessionId='email-logout';await auth.recordPasswordSession(authUser(user,projectUrl),globalThis.fixtureClient);
-response=await post('logout');
-check(response.status===200&&row().revoked===1&&signouts.at(-1).scope==='local'&&await auth.getAppUser()===null,'Logout revokes app access before local provider sign-out');
-sessionId='email-logout-outage';await auth.recordPasswordSession(authUser(user,projectUrl),globalThis.fixtureClient);
-signoutError={message:'fixture logout outage'};
-response=await post('logout');
-check(response.status===503&&row().revoked===1&&await auth.getAppUser()===null,'Logout provider failure still revokes local app access');
-signoutError=null;
-const emailJourneyChecksPassed=passed-emailChecksStart;
-method='oauth';sessionId='google-logout-session';
-await auth.recordGoogleSession(authSession(providerSession(),projectUrl),globalThis.fixtureClient);
-check(row().provider==='google'&&await auth.getAppUser()!==null,'Current verified Google session is enrolled before sign-out');
-response=await post('logout');
-check(response.status===200&&row().revoked===1&&signouts.at(-1).scope==='local'&&await auth.getAppUser()===null,'Google sign-out revokes the exact app session and provider cookies');
+sessionId = "email-logout";
+await auth.recordPasswordSession(
+  authUser(user, projectUrl),
+  globalThis.fixtureClient,
+);
+response = await post("logout");
+check(
+  response.status === 200 &&
+    row().revoked === 1 &&
+    signouts.at(-1).scope === "local" &&
+    (await auth.getAppUser()) === null,
+  "Logout revokes app access before local provider sign-out",
+);
+sessionId = "email-logout-outage";
+await auth.recordPasswordSession(
+  authUser(user, projectUrl),
+  globalThis.fixtureClient,
+);
+signoutError = { message: "fixture logout outage" };
+response = await post("logout");
+check(
+  response.status === 503 &&
+    row().revoked === 1 &&
+    (await auth.getAppUser()) === null,
+  "Logout provider failure still revokes local app access",
+);
+signoutError = null;
+const emailJourneyChecksPassed = passed - emailChecksStart;
+method = "oauth";
+sessionId = "google-logout-session";
+await auth.recordGoogleSession(
+  authSession(providerSession(), projectUrl),
+  globalThis.fixtureClient,
+);
+check(
+  row().provider === "google" && (await auth.getAppUser()) !== null,
+  "Current verified Google session is enrolled before sign-out",
+);
+response = await post("logout");
+check(
+  response.status === 200 &&
+    row().revoked === 1 &&
+    signouts.at(-1).scope === "local" &&
+    (await auth.getAppUser()) === null,
+  "Google sign-out revokes the exact app session and provider cookies",
+);
 // A deletion proof must be a new OAuth flow for the same ordinary account.
-user={...user,id:'00000000-0000-4000-8000-000000000003',email:'member@example.test',identities:[{provider:'google',identity_data:{sub:'google-member',email:'member@example.test',email_verified:true}}]};
-googleProfile={sub:'google-member',email:user.email,email_verified:true};method='oauth';sessionId='deletion-google-original';
-await auth.recordGoogleSession(authSession(providerSession(),projectUrl),globalThis.fixtureClient);
-response=await post('google',{reauthenticate:true,returnTo:'https://outside.example.test'});
-check(response.ok&&new URL(lastOAuth.options.redirectTo).searchParams.get('weiter')==='/einstellungen','Google deletion proof uses a canonical settings destination');
-let deletionIntent=JSON.parse(cookieMap.get('riparim-deletion-flow'));
-check(deletionIntent.accountId===`supabase:${new URL(projectUrl).hostname}:${user.id}`&&cookieOptions.get('riparim-deletion-flow').httpOnly,'Google deletion intent is bound to the verified current account in a private cookie');
-const originalMember=user;flow=cookieMap.get('riparim-google-flow');
-user={...user,id:'00000000-0000-4000-8000-000000000004'};
-response=await callbackRequest({anbieter:'google',code:'fixture-code',fluss:flow});
-check(new URL(response.headers.get('Location')).searchParams.get('fehler')==='google'&&!cookieMap.has('riparim-account-deletion'),'Choosing another Google account cannot authorize the original account deletion');
-user=originalMember;sessionId='deletion-google-original';
-await post('google',{reauthenticate:true});flow=cookieMap.get('riparim-google-flow');sessionId='deletion-google-fresh';
-response=await callbackRequest({anbieter:'google',code:'fixture-code',fluss:flow});
-check(new URL(response.headers.get('Location')).pathname==='/einstellungen'&&cookieMap.has('riparim-account-deletion'),'Fresh same-account OAuth proof returns to settings with deletion-only permission');
-check(!cookieMap.has('riparim-deletion-flow')&&db.prepare('SELECT started FROM auth_account_deletions WHERE account_id=?').get(`supabase:${new URL(projectUrl).hostname}:${user.id}`).started===0,'Google proof consumes its intent and cannot start deletion automatically');
-sessionId='deletion-google-fresh';await post('google',{reauthenticate:true});
-flow=cookieMap.get('riparim-google-flow');deletionIntent=JSON.parse(cookieMap.get('riparim-deletion-flow'));cookieMap.set('riparim-deletion-flow',JSON.stringify({...deletionIntent,expiresAt:0}));cookieMap.delete('riparim-account-deletion');
-response=await callbackRequest({anbieter:'google',code:'fixture-code',fluss:flow});
-check(new URL(response.headers.get('Location')).searchParams.get('fehler')==='google'&&!cookieMap.has('riparim-account-deletion'),'Expired Google deletion intent cannot grant permission');
-sessionId='deletion-google-fresh';db.prepare("INSERT INTO auth_account_roles VALUES (?,'admin','2026-10-04','fixture-admin')").run(`supabase:${new URL(projectUrl).hostname}:${user.id}`);
-check((await post('google',{reauthenticate:true})).status===403,'Delegated administrators cannot start self-deletion OAuth');
+user = {
+  ...user,
+  id: "00000000-0000-4000-8000-000000000003",
+  email: "member@example.test",
+  identities: [
+    {
+      provider: "google",
+      identity_data: {
+        sub: "google-member",
+        email: "member@example.test",
+        email_verified: true,
+      },
+    },
+  ],
+};
+googleProfile = {
+  sub: "google-member",
+  email: user.email,
+  email_verified: true,
+};
+method = "oauth";
+sessionId = "deletion-google-original";
+await auth.recordGoogleSession(
+  authSession(providerSession(), projectUrl),
+  globalThis.fixtureClient,
+);
+response = await post("google", {
+  reauthenticate: true,
+  returnTo: "https://outside.example.test",
+});
+check(
+  response.ok &&
+    new URL(lastOAuth.options.redirectTo).searchParams.get("weiter") ===
+      "/einstellungen",
+  "Google deletion proof uses a canonical settings destination",
+);
+let deletionIntent = JSON.parse(cookieMap.get("riparim-deletion-flow"));
+check(
+  deletionIntent.accountId ===
+    `supabase:${new URL(projectUrl).hostname}:${user.id}` &&
+    cookieOptions.get("riparim-deletion-flow").httpOnly,
+  "Google deletion intent is bound to the verified current account in a private cookie",
+);
+const originalMember = user;
+flow = cookieMap.get("riparim-google-flow");
+user = { ...user, id: "00000000-0000-4000-8000-000000000004" };
+response = await callbackRequest({
+  anbieter: "google",
+  code: "fixture-code",
+  fluss: flow,
+});
+check(
+  new URL(response.headers.get("Location")).searchParams.get("fehler") ===
+    "google" && !cookieMap.has("riparim-account-deletion"),
+  "Choosing another Google account cannot authorize the original account deletion",
+);
+user = originalMember;
+sessionId = "deletion-google-original";
+await post("google", { reauthenticate: true });
+flow = cookieMap.get("riparim-google-flow");
+sessionId = "deletion-google-fresh";
+response = await callbackRequest({
+  anbieter: "google",
+  code: "fixture-code",
+  fluss: flow,
+});
+check(
+  new URL(response.headers.get("Location")).pathname === "/einstellungen" &&
+    cookieMap.has("riparim-account-deletion"),
+  "Fresh same-account OAuth proof returns to settings with deletion-only permission",
+);
+check(
+  !cookieMap.has("riparim-deletion-flow") &&
+    db
+      .prepare("SELECT started FROM auth_account_deletions WHERE account_id=?")
+      .get(`supabase:${new URL(projectUrl).hostname}:${user.id}`).started === 0,
+  "Google proof consumes its intent and cannot start deletion automatically",
+);
+sessionId = "deletion-google-fresh";
+await post("google", { reauthenticate: true });
+flow = cookieMap.get("riparim-google-flow");
+deletionIntent = JSON.parse(cookieMap.get("riparim-deletion-flow"));
+cookieMap.set(
+  "riparim-deletion-flow",
+  JSON.stringify({ ...deletionIntent, expiresAt: 0 }),
+);
+cookieMap.delete("riparim-account-deletion");
+response = await callbackRequest({
+  anbieter: "google",
+  code: "fixture-code",
+  fluss: flow,
+});
+check(
+  new URL(response.headers.get("Location")).searchParams.get("fehler") ===
+    "google" && !cookieMap.has("riparim-account-deletion"),
+  "Expired Google deletion intent cannot grant permission",
+);
+sessionId = "deletion-google-fresh";
+db.prepare(
+  "INSERT INTO auth_account_roles VALUES (?,'admin','2026-10-04','fixture-admin')",
+).run(`supabase:${new URL(projectUrl).hostname}:${user.id}`);
+check(
+  (await post("google", { reauthenticate: true })).status === 403,
+  "Delegated administrators cannot start self-deletion OAuth",
+);
 // Locale is an explicit API contract, checked before provider/config work.
-for (const action of ['login','register','recovery','reset','logout','google']) {
- const before={passwordCalls,signupCalls,oauthCalls,codeExchanges};
- const invalid=await post(action,{locale:'fr',email:'invalid-locale@example.test',password:'fixture-password-123'});
- check(invalid.status===400&&(await invalid.json()).errorCode==='invalid_locale',`Invalid locale is rejected by ${action}`);
- check(JSON.stringify(before)===JSON.stringify({passwordCalls,signupCalls,oauthCalls,codeExchanges}),'Invalid locale cannot call a provider');
+for (const action of [
+  "login",
+  "register",
+  "recovery",
+  "reset",
+  "logout",
+  "google",
+]) {
+  const before = { passwordCalls, signupCalls, oauthCalls, codeExchanges };
+  const invalid = await post(action, {
+    locale: "fr",
+    email: "invalid-locale@example.test",
+    password: "fixture-password-123",
+  });
+  check(
+    invalid.status === 400 &&
+      (await invalid.json()).errorCode === "invalid_locale",
+    `Invalid locale is rejected by ${action}`,
+  );
+  check(
+    JSON.stringify(before) ===
+      JSON.stringify({ passwordCalls, signupCalls, oauthCalls, codeExchanges }),
+    "Invalid locale cannot call a provider",
+  );
 }
 db.prepare("UPDATE auth_settings SET enabled=0").run();
-for(const value of [null,'DE','fr',{},['en'],1])check((await post('google',{locale:value})).status===400,'Invalid locale fails before disabled provider configuration');
+for (const value of [null, "DE", "fr", {}, ["en"], 1])
+  check(
+    (await post("google", { locale: value })).status === 400,
+    "Invalid locale fails before disabled provider configuration",
+  );
 db.prepare("UPDATE auth_settings SET enabled=1").run();
-db.prepare('DELETE FROM auth_account_roles').run();db.prepare('DELETE FROM auth_attempts').run();
-for(const locale of ['de','sq','en']){
- const target=localizeHref('/werkstatt/fixture-workshop?suche=wartung#bewerten',locale);
- method='password';sessionId='localized-'+locale;
- let r=await post('register',{name:'Fixture Member',locale,email:'localized-'+locale+'@example.test',password:'fixture-password-123',returnTo:'/sq/servis/fixture-workshop?suche=wartung#bewerten'});
- check(r.ok&&(await r.json()).messageCode==='confirm_email'&&lastSignup.options.data.preferred_locale===locale,'Signup stores only the validated presentation preference');
- const confirmation=new URL(lastSignup.options.emailRedirectTo);
- check([...confirmation.searchParams.keys()].join(',')==='locale,weiter'&&confirmation.searchParams.get('locale')===locale&&confirmation.searchParams.get('weiter')===target,'Canonical locale-first confirmation retains the safe target and explicit locale wins');
- const localizedConfirmation=emailLink(templates.confirmationEmailTemplate,confirmation.href,'localized-signup-token');
- r=await callback.GET(new Request(localizedConfirmation));
- let destination=new URL(r.headers.get('Location'));
- check(destination.pathname===localizeHref('/anmelden',locale)&&destination.searchParams.get('weiter')===target,'Signup verification stays in the chosen language');
- const invalidEmail=await post('login',{locale,email:'invalid',password:'fixture-password-123'});check(invalidEmail.status===400&&(await invalidEmail.json()).errorCode==='invalid_email','Auth error codes and statuses stay identical across locales');
- r=await post('login',{locale,email:user.email,password:'fixture-password-123',returnTo:target});
- check(r.ok&&(await r.json()).returnTo===target,'Localized separate login resumes the review target');
- r=await post('recovery',{locale,email:'localized-recovery-'+locale+'@example.test'});
- check(r.ok&&new URL(lastRecovery.options.redirectTo).searchParams.get('weiter')===localizeHref('/passwort-neu',locale),'Recovery uses a localized reset page without metadata writes');
- const localizedRecovery=emailLink(templates.recoveryEmailTemplate,lastRecovery.options.redirectTo,'localized-recovery-token');
- r=await callback.GET(new Request(localizedRecovery));
- check(lastOtp.type==='recovery'&&lastOtp.token_hash==='localized-recovery-token','Rendered localized recovery email reaches the original token verifier');
- r=await callbackRequest({locale,code:'localized-pkce-code',weiter:localizeHref('/passwort-neu?source=email',locale)});
- check(new URL(r.headers.get('Location')).pathname===localizeHref('/passwort-neu',locale),'PKCE reset comparison ignores locale prefix and query');
- r=await post('reset',{locale,password:'fixture-new-password-123'});
- check(r.ok&&(await r.json()).returnTo===localizeHref('/anmelden?hinweis=passwort-geaendert',locale),'Reset returns to localized login');
- method='oauth';sessionId='localized-google-'+locale;
- r=await post('google',{locale,returnTo:target});flow=cookieMap.get('riparim-google-flow');
- check(r.ok&&[...new URL(lastOAuth.options.redirectTo).searchParams.keys()].slice(0,2).join(',')==='locale,weiter','OAuth shares the locale-first callback contract');
- r=await callbackRequest({locale,anbieter:'google',code:'fixture-code',fluss:flow,weiter:target});
- check(new URL(r.headers.get('Location')).pathname===localizeHref('/werkstatt/fixture-workshop',locale),'Google success returns in the requested language');
- r=await callbackRequest({locale,anbieter:'google',error:'access_denied',weiter:target});
- check(new URL(r.headers.get('Location')).pathname===localizeHref('/anmelden',locale),'Google cancellation returns in the requested language');
- await auth.recordGoogleSession(authSession(providerSession(),projectUrl),globalThis.fixtureClient);
- r=await post('google',{locale,reauthenticate:true});flow=cookieMap.get('riparim-google-flow');
- check(r.ok&&new URL(lastOAuth.options.redirectTo).searchParams.get('weiter')===localizeHref('/einstellungen',locale),'Deletion reauth keeps the settings language');
- sessionId='localized-deletion-'+locale;
- r=await callbackRequest({locale,anbieter:'google',code:'fixture-code',fluss:flow});
- check(new URL(r.headers.get('Location')).pathname===localizeHref('/einstellungen',locale),'Verified own deletion grant returns to localized settings');
- r=await post('logout',{locale});check(r.ok&&(await r.json()).returnTo===localizeHref('/anmelden',locale),'Logout returns to localized login');
- db.prepare('DELETE FROM auth_attempts').run();
+db.prepare("DELETE FROM auth_account_roles").run();
+db.prepare("DELETE FROM auth_attempts").run();
+for (const locale of ["de", "sq", "en"]) {
+  const target = localizeHref(
+    "/werkstatt/fixture-workshop?suche=wartung#bewerten",
+    locale,
+  );
+  method = "password";
+  sessionId = "localized-" + locale;
+  let r = await post("register", {
+    name: "Fixture Member",
+    locale,
+    email: "localized-" + locale + "@example.test",
+    password: "fixture-password-123",
+    returnTo: "/sq/servis/fixture-workshop?suche=wartung#bewerten",
+  });
+  check(
+    r.ok &&
+      (await r.json()).messageCode === "confirm_email" &&
+      lastSignup.options.data.preferred_locale === locale,
+    "Signup stores only the validated presentation preference",
+  );
+  const confirmation = new URL(lastSignup.options.emailRedirectTo);
+  check(
+    [...confirmation.searchParams.keys()].join(",") === "locale,weiter" &&
+      confirmation.searchParams.get("locale") === locale &&
+      confirmation.searchParams.get("weiter") === target,
+    "Canonical locale-first confirmation retains the safe target and explicit locale wins",
+  );
+  const localizedConfirmation = emailLink(
+    templates.confirmationEmailTemplate,
+    confirmation.href,
+    "localized-signup-token",
+  );
+  r = await callback.GET(new Request(localizedConfirmation));
+  let destination = new URL(r.headers.get("Location"));
+  check(
+    destination.pathname === localizeHref("/anmelden", locale) &&
+      destination.searchParams.get("weiter") === target,
+    "Signup verification stays in the chosen language",
+  );
+  const invalidEmail = await post("login", {
+    locale,
+    email: "invalid",
+    password: "fixture-password-123",
+  });
+  check(
+    invalidEmail.status === 400 &&
+      (await invalidEmail.json()).errorCode === "invalid_email",
+    "Auth error codes and statuses stay identical across locales",
+  );
+  r = await post("login", {
+    locale,
+    email: user.email,
+    password: "fixture-password-123",
+    returnTo: target,
+  });
+  check(
+    r.ok && (await r.json()).returnTo === target,
+    "Localized separate login resumes the review target",
+  );
+  r = await post("recovery", {
+    locale,
+    email: "localized-recovery-" + locale + "@example.test",
+  });
+  check(
+    r.ok &&
+      new URL(lastRecovery.options.redirectTo).searchParams.get("weiter") ===
+        localizeHref("/passwort-neu", locale),
+    "Recovery uses a localized reset page without metadata writes",
+  );
+  const localizedRecovery = emailLink(
+    templates.recoveryEmailTemplate,
+    lastRecovery.options.redirectTo,
+    "localized-recovery-token",
+  );
+  r = await callback.GET(new Request(localizedRecovery));
+  check(
+    lastOtp.type === "recovery" &&
+      lastOtp.token_hash === "localized-recovery-token",
+    "Rendered localized recovery email reaches the original token verifier",
+  );
+  r = await callbackRequest({
+    locale,
+    code: "localized-pkce-code",
+    weiter: localizeHref("/passwort-neu?source=email", locale),
+  });
+  check(
+    new URL(r.headers.get("Location")).pathname ===
+      localizeHref("/passwort-neu", locale),
+    "PKCE reset comparison ignores locale prefix and query",
+  );
+  r = await post("reset", { locale, password: "fixture-new-password-123" });
+  check(
+    r.ok &&
+      (await r.json()).returnTo ===
+        localizeHref("/anmelden?hinweis=passwort-geaendert", locale),
+    "Reset returns to localized login",
+  );
+  method = "oauth";
+  sessionId = "localized-google-" + locale;
+  r = await post("google", { locale, returnTo: target });
+  flow = cookieMap.get("riparim-google-flow");
+  check(
+    r.ok &&
+      [...new URL(lastOAuth.options.redirectTo).searchParams.keys()]
+        .slice(0, 2)
+        .join(",") === "locale,weiter",
+    "OAuth shares the locale-first callback contract",
+  );
+  r = await callbackRequest({
+    locale,
+    anbieter: "google",
+    code: "fixture-code",
+    fluss: flow,
+    weiter: target,
+  });
+  check(
+    new URL(r.headers.get("Location")).pathname ===
+      localizeHref("/werkstatt/fixture-workshop", locale),
+    "Google success returns in the requested language",
+  );
+  r = await callbackRequest({
+    locale,
+    anbieter: "google",
+    error: "access_denied",
+    weiter: target,
+  });
+  check(
+    new URL(r.headers.get("Location")).pathname ===
+      localizeHref("/anmelden", locale),
+    "Google cancellation returns in the requested language",
+  );
+  await auth.recordGoogleSession(
+    authSession(providerSession(), projectUrl),
+    globalThis.fixtureClient,
+  );
+  r = await post("google", { locale, reauthenticate: true });
+  flow = cookieMap.get("riparim-google-flow");
+  check(
+    r.ok &&
+      new URL(lastOAuth.options.redirectTo).searchParams.get("weiter") ===
+        localizeHref("/einstellungen", locale),
+    "Deletion reauth keeps the settings language",
+  );
+  sessionId = "localized-deletion-" + locale;
+  r = await callbackRequest({
+    locale,
+    anbieter: "google",
+    code: "fixture-code",
+    fluss: flow,
+  });
+  check(
+    new URL(r.headers.get("Location")).pathname ===
+      localizeHref("/einstellungen", locale),
+    "Verified own deletion grant returns to localized settings",
+  );
+  r = await post("logout", { locale });
+  check(
+    r.ok && (await r.json()).returnTo === localizeHref("/anmelden", locale),
+    "Logout returns to localized login",
+  );
+  db.prepare("DELETE FROM auth_attempts").run();
 }
-for(const locale of [undefined,'fr']){
- const r=await callbackRequest({...(locale?{locale}:{}),token_hash:'legacy-token',type:'signup',weiter:'/en/workshop/fixture-workshop'});
- const destination=new URL(r.headers.get('Location'));
- check(destination.pathname==='/anmelden'&&destination.searchParams.get('weiter')==='/werkstatt/fixture-workshop','Missing or invalid callback locale safely defaults to German');
+for (const locale of [undefined, "fr"]) {
+  const r = await callbackRequest({
+    ...(locale ? { locale } : {}),
+    token_hash: "legacy-token",
+    type: "signup",
+    weiter: "/en/workshop/fixture-workshop",
+  });
+  const destination = new URL(r.headers.get("Location"));
+  check(
+    destination.pathname === "/anmelden" &&
+      destination.searchParams.get("weiter") === "/werkstatt/fixture-workshop",
+    "Missing or invalid callback locale safely defaults to German",
+  );
 }
-globalThis.fetch=originalFetch;
-console.log(JSON.stringify({authBoundaryChecksPassed:passed,emailJourneyChecksPassed,googleLogoutChecksPassed:2,liveProviderCalls:false,realEmailsSent:false}));
+globalThis.fetch = originalFetch;
+console.log(
+  JSON.stringify({
+    authBoundaryChecksPassed: passed,
+    emailJourneyChecksPassed,
+    googleLogoutChecksPassed: 2,
+    liveProviderCalls: false,
+    realEmailsSent: false,
+  }),
+);

@@ -15,11 +15,11 @@ Der lokale echte workerd reproduzierte rund 25 ms aktive CPU-Stichproben pro war
 
 Vergleichsmessung mit denselben isolierten Canonicaldaten, ohne Produktions-/Providerzugriff:
 
-| Pfad | Vorher, aktive CPU-Stichprobe/Aufruf | Nachher |
-| --- | ---: | ---: |
-| `/` | 24,8 ms | 2,0 ms |
-| `/werkstaetten` | 5,4 ms | 1,8 ms |
-| `/api/workshops` | 7,7 ms | 3,6 ms |
+| Pfad             | Vorher, aktive CPU-Stichprobe/Aufruf | Nachher |
+| ---------------- | -----------------------------------: | ------: |
+| `/`              |                              24,8 ms |  2,0 ms |
+| `/werkstaetten`  |                               5,4 ms |  1,8 ms |
+| `/api/workshops` |                               7,7 ms |  3,6 ms |
 
 `BUILD_TARGET=cloudflare npm run build` und anschließend `node scripts/profile-worker-cpu.mjs` erzeugen lokale Inspector-Profile unter `work/cpu-profiles/`. Die CPU-Stichproben sind vergleichende Profilerdaten, keine Cloudflare-Abrechnung. Netzwerk-/D1-Wartezeit zählt nicht zur CPU. Messschwankungen und kalte/private Pfade erlauben keine Garantie, dass jede Produktionsanfrage unter 10 ms bleibt. Nach dem geprüften Main-Release dieselben Pfade und `exceededCpu` über die realen Logs erneut bewerten; den Tarif nicht vorsorglich ändern.
 

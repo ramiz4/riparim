@@ -13,10 +13,10 @@ Der gemeinsame Kern in `scripts/lib/backup-monitor-core.mjs` prüft
 Prüfung, Alarmgrenzen, Versand, Vorfallgenerationen und Wiederholungsschlüssel
 werden für beide Betriebswege nur einmal gepflegt:
 
-| Betriebsweg | Zeitplan und Zustand |
-| --- | --- |
-| Cloudflare | Eigener Worker `riparim-backup-monitor`, aktiver 15-Minuten-Cron und ein SQLite-backed Durable Object je Repository. Website und D1/R2-Bindings bleiben getrennt. |
-| Node | Bestehender Aufruf `scripts/monitor-backups.mjs`, später Linux/systemd-Timer und private JSON-Datei. Keine zusätzlichen npm-Pakete zur Ausführung. |
+| Betriebsweg | Zeitplan und Zustand                                                                                                                                              |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Cloudflare  | Eigener Worker `riparim-backup-monitor`, aktiver 15-Minuten-Cron und ein SQLite-backed Durable Object je Repository. Website und D1/R2-Bindings bleiben getrennt. |
+| Node        | Bestehender Aufruf `scripts/monitor-backups.mjs`, später Linux/systemd-Timer und private JSON-Datei. Keine zusätzlichen npm-Pakete zur Ausführung.                |
 
 Cloudflare ist aktiv; die Node-Vorlage bleibt standardmäßig deaktiviert. Ein separater
 Healthchecks.io-Check überwacht das Ausbleiben des Monitors, auch bei einem
@@ -33,14 +33,14 @@ Versuchs: `supabase-auth-<run_id>-<run_attempt>` beziehungsweise
 und Abschluss des Laufs liegen. Der Monitor lädt weder Archive noch Inhalte
 herunter und besitzt keine Entschlüsselungsschlüssel.
 
-| Zustand | Grenze und Begründung |
-| --- | --- |
-| Fehler, Abbruch, Timeout, Überspringen, ungültiges Artefakt oder deaktivierter Workflow | Alarm beim nächsten Aufruf, normalerweise binnen 15 Minuten. Beide Jobs bleiben unabhängig. |
-| Kein gültiges Backup | Ab 36 Stunden seit dem letzten verifizierten Abschluss: täglicher Abstand von 24 Stunden plus zwölf Stunden Spielraum für GitHub-Verzögerungen. Ohne verifizierte Sicherung sofort alarmieren. |
-| Lauf hängt | Ab 30 Minuten seit Laufstart. Beide Backup-Jobs haben ein Zehn-Minuten-Limit; die zusätzlichen 20 Minuten tolerieren verzögerte Statusmeldungen. |
-| Lauf wartet | Ab zwei Stunden seit Erstellung des aktuellen Versuchs. Fehlt ein eindeutiger Zeitwert einer Wiederholung, gilt ihre erste dauerhaft gespeicherte Beobachtung. Das gibt verzögertem Runnerstart mehr Spielraum als der eigentlichen Ausführung. |
-| Unveränderter Vorfall | Höchstens eine Erinnerung pro Job und 24 Stunden. Eine neue gültige Folgesicherung ermöglicht eine Entwarnung. |
-| Monitor oder Versand nicht verifiziert | Kein Erfolgs-Heartbeat; Fehlerstatus und Exitcode 1. Unbekannte Zustellung zählt nicht als Erfolg. |
+| Zustand                                                                                 | Grenze und Begründung                                                                                                                                                                                                                           |
+| --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Fehler, Abbruch, Timeout, Überspringen, ungültiges Artefakt oder deaktivierter Workflow | Alarm beim nächsten Aufruf, normalerweise binnen 15 Minuten. Beide Jobs bleiben unabhängig.                                                                                                                                                     |
+| Kein gültiges Backup                                                                    | Ab 36 Stunden seit dem letzten verifizierten Abschluss: täglicher Abstand von 24 Stunden plus zwölf Stunden Spielraum für GitHub-Verzögerungen. Ohne verifizierte Sicherung sofort alarmieren.                                                  |
+| Lauf hängt                                                                              | Ab 30 Minuten seit Laufstart. Beide Backup-Jobs haben ein Zehn-Minuten-Limit; die zusätzlichen 20 Minuten tolerieren verzögerte Statusmeldungen.                                                                                                |
+| Lauf wartet                                                                             | Ab zwei Stunden seit Erstellung des aktuellen Versuchs. Fehlt ein eindeutiger Zeitwert einer Wiederholung, gilt ihre erste dauerhaft gespeicherte Beobachtung. Das gibt verzögertem Runnerstart mehr Spielraum als der eigentlichen Ausführung. |
+| Unveränderter Vorfall                                                                   | Höchstens eine Erinnerung pro Job und 24 Stunden. Eine neue gültige Folgesicherung ermöglicht eine Entwarnung.                                                                                                                                  |
+| Monitor oder Versand nicht verifiziert                                                  | Kein Erfolgs-Heartbeat; Fehlerstatus und Exitcode 1. Unbekannte Zustellung zählt nicht als Erfolg.                                                                                                                                              |
 
 Die E-Mail enthält ausschließlich Jobname, Status, Zeitpunkt der letzten
 verifizierten Sicherung und einen festen GitHub-Lauf- oder Workflowlink. Keine
@@ -176,6 +176,7 @@ Für spätere Monitor-Updates:
    Datei entfernen. Werte niemals als CLI-Argumente oder in Logs ausgeben.
    Der bestehende Fine-grained GitHub-Token mit `Actions: Read` bleibt erhalten;
    der anonyme Zugriff wurde beim Live-Test von GitHub verweigert.
+
 4. Nach dem Deployment die drei aktiven Variablen, den einzigen
    `*/15 * * * *`-Trigger und den unveränderten SQLite-Namespace erneut lesen.
    Einen geschützten `POST /run`, den nächsten echten Cron-Lauf und dessen

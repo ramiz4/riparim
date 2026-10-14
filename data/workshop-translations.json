@@ -177,9 +177,7 @@
           "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
         ],
         "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
-        "sourceTitles": [
-          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
-        ]
+        "sourceTitles": ["Burim i pavarur: kontakti, vendndodhja dhe shërbimet"]
       },
       "en": {
         "specialty": "Vehicle servicing",
@@ -204,9 +202,7 @@
           "Polirim dhe veshje qeramike"
         ],
         "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
-        "sourceTitles": [
-          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
-        ]
+        "sourceTitles": ["Burim i pavarur: kontakti, vendndodhja dhe shërbimet"]
       },
       "en": {
         "specialty": "Detailing · Cleaning · Paint protection",
@@ -289,9 +285,7 @@
           "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
         ],
         "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
-        "sourceTitles": [
-          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
-        ]
+        "sourceTitles": ["Burim i pavarur: kontakti, vendndodhja dhe shërbimet"]
       },
       "en": {
         "specialty": "Vehicle servicing",
@@ -412,9 +406,7 @@
           "Airbag servicing"
         ],
         "phoneNote": "Public business contact; reachability not confirmed",
-        "sourceTitles": [
-          "Business website: contact, location and services"
-        ]
+        "sourceTitles": ["Business website: contact, location and services"]
       }
     },
     {
@@ -427,9 +419,7 @@
           "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
         ],
         "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
-        "sourceTitles": [
-          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
-        ]
+        "sourceTitles": ["Burim i pavarur: kontakti, vendndodhja dhe shërbimet"]
       },
       "en": {
         "specialty": "Vehicle servicing",
@@ -537,9 +527,7 @@
           "Film removal and PPF installation"
         ],
         "phoneNote": "Public business contact; reachability not confirmed",
-        "sourceTitles": [
-          "Business posts on AutoYas: contact and services"
-        ]
+        "sourceTitles": ["Business posts on AutoYas: contact and services"]
       },
       "sourceHash": "9f7012f772ebf4693915002c1a96ade7cd208706e08efee87482323fd6fa9268"
     },
@@ -605,9 +593,7 @@
       "sq": {
         "specialty": "Xhama automjetesh · Montim · Riparim",
         "description": "Auto Glass Kosovo në Fushë Kosovë ofron montim dhe riparim xhamash automjetesh sipas faqes së vet.",
-        "serviceDetails": [
-          "Montim dhe riparim xhamash automjetesh"
-        ],
+        "serviceDetails": ["Montim dhe riparim xhamash automjetesh"],
         "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
         "sourceTitles": [
           "Burim i pavarur: kontakti, vendndodhja dhe shërbimet",
@@ -617,9 +603,7 @@
       "en": {
         "specialty": "Vehicle glass · Installation · Repair",
         "description": "Auto Glass Kosovo in Fushë Kosovë offers vehicle glass installation and repair according to its own website.",
-        "serviceDetails": [
-          "Vehicle glass installation and repair"
-        ],
+        "serviceDetails": ["Vehicle glass installation and repair"],
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Independent business source: contact, location and services",
@@ -964,9 +948,7 @@
           "Paint correction and polishing"
         ],
         "phoneNote": "Public business contact; reachability not confirmed",
-        "sourceTitles": [
-          "Business website: contact, location and services"
-        ]
+        "sourceTitles": ["Business website: contact, location and services"]
       }
     },
     {
@@ -992,9 +974,7 @@
           "Interior and exterior detailing, polishing and ceramic coating"
         ],
         "phoneNote": "Public business contact; reachability not confirmed",
-        "sourceTitles": [
-          "Business website: contact, location and services"
-        ]
+        "sourceTitles": ["Business website: contact, location and services"]
       }
     },
     {
@@ -1243,9 +1223,7 @@
       "sq": {
         "specialty": "Punime karrocerie · Regjistrim në direktori",
         "description": "Regjistrim në direktori publike për punime karrocerie në Vushtrri. Konfirmoni drejtpërdrejt me biznesin kontaktin dhe shërbimet konkrete.",
-        "serviceDetails": [
-          "Punime karrocerie sipas direktorisë publike."
-        ],
+        "serviceDetails": ["Punime karrocerie sipas direktorisë publike."],
         "phoneNote": "Kontakt publik nga direktoria; arritshmëria nuk është konfirmuar",
         "sourceTitles": [
           "Direktoria publike: kontakt, vendndodhje dhe punime karrocerie"
@@ -1258,9 +1236,7 @@
           "Vehicle bodywork according to the public directory."
         ],
         "phoneNote": "Public directory contact; reachability not confirmed",
-        "sourceTitles": [
-          "Public directory: contact, location and bodywork"
-        ]
+        "sourceTitles": ["Public directory: contact, location and bodywork"]
       }
     },
     {
@@ -1340,9 +1316,7 @@
           "Pjesë këmbimi për Renault, Peugeot, Citroën dhe Dacia"
         ],
         "phoneNote": "Kontakt i publikuar i servisit",
-        "sourceTitles": [
-          "Faqja e biznesit: kontakti dhe servisi"
-        ]
+        "sourceTitles": ["Faqja e biznesit: kontakti dhe servisi"]
       },
       "en": {
         "specialty": "Vehicle servicing",
@@ -1352,9 +1326,7 @@
           "Spare parts for Renault, Peugeot, Citroën and Dacia"
         ],
         "phoneNote": "Published workshop contact",
-        "sourceTitles": [
-          "Business website: contact and servicing"
-        ]
+        "sourceTitles": ["Business website: contact and servicing"]
       }
     },
     {
@@ -1794,9 +1766,7 @@
           "Vehicle electrics and diagnostics"
         ],
         "phoneNote": "Public business contact; reachability not confirmed",
-        "sourceTitles": [
-          "Business website: contact, location and services"
-        ]
+        "sourceTitles": ["Business website: contact, location and services"]
       }
     },
     {
@@ -2001,9 +1971,7 @@
           "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
         ],
         "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
-        "sourceTitles": [
-          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
-        ]
+        "sourceTitles": ["Burim i pavarur: kontakti, vendndodhja dhe shërbimet"]
       },
       "en": {
         "specialty": "Vehicle servicing",
@@ -2027,9 +1995,7 @@
           "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
         ],
         "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
-        "sourceTitles": [
-          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
-        ]
+        "sourceTitles": ["Burim i pavarur: kontakti, vendndodhja dhe shërbimet"]
       },
       "en": {
         "specialty": "Vehicle servicing",
@@ -2258,9 +2224,7 @@
           "Air conditioning servicing"
         ],
         "phoneNote": "Public business contact; reachability not confirmed",
-        "sourceTitles": [
-          "Business website: contact, location and services"
-        ]
+        "sourceTitles": ["Business website: contact, location and services"]
       }
     },
     {
@@ -2335,9 +2299,7 @@
           "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
         ],
         "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
-        "sourceTitles": [
-          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
-        ]
+        "sourceTitles": ["Burim i pavarur: kontakti, vendndodhja dhe shërbimet"]
       },
       "en": {
         "specialty": "Vehicle servicing",
@@ -2483,9 +2445,7 @@
           "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
         ],
         "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
-        "sourceTitles": [
-          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
-        ]
+        "sourceTitles": ["Burim i pavarur: kontakti, vendndodhja dhe shërbimet"]
       },
       "en": {
         "specialty": "Vehicle servicing",
@@ -2509,9 +2469,7 @@
           "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
         ],
         "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
-        "sourceTitles": [
-          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
-        ]
+        "sourceTitles": ["Burim i pavarur: kontakti, vendndodhja dhe shërbimet"]
       },
       "en": {
         "specialty": "Vehicle servicing",
@@ -2557,10 +2515,7 @@
       "sq": {
         "specialty": "Servisim automjetesh · Diagnostikim",
         "description": "Servisim dhe diagnostikim automjetesh në Vushtrri sipas profilit publik të biznesit.",
-        "serviceDetails": [
-          "Servisim automjetesh",
-          "Diagnostikim automjetesh"
-        ],
+        "serviceDetails": ["Servisim automjetesh", "Diagnostikim automjetesh"],
         "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
         "sourceTitles": [
           "Profili publik i biznesit: kontakt, vendndodhje dhe shërbime"
@@ -2569,10 +2524,7 @@
       "en": {
         "specialty": "Vehicle servicing · Diagnostics",
         "description": "Vehicle servicing and diagnostics in Vushtrri according to the public business profile.",
-        "serviceDetails": [
-          "Vehicle servicing",
-          "Vehicle diagnostics"
-        ],
+        "serviceDetails": ["Vehicle servicing", "Vehicle diagnostics"],
         "phoneNote": "Public business contact; reachability not confirmed",
         "sourceTitles": [
           "Public business profile: contact, location and services"
@@ -2589,9 +2541,7 @@
           "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
         ],
         "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
-        "sourceTitles": [
-          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
-        ]
+        "sourceTitles": ["Burim i pavarur: kontakti, vendndodhja dhe shërbimet"]
       },
       "en": {
         "specialty": "Vehicle servicing",
@@ -2615,9 +2565,7 @@
           "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
         ],
         "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
-        "sourceTitles": [
-          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
-        ]
+        "sourceTitles": ["Burim i pavarur: kontakti, vendndodhja dhe shërbimet"]
       },
       "en": {
         "specialty": "Vehicle servicing",
@@ -2669,9 +2617,7 @@
           "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
         ],
         "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
-        "sourceTitles": [
-          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
-        ]
+        "sourceTitles": ["Burim i pavarur: kontakti, vendndodhja dhe shërbimet"]
       },
       "en": {
         "specialty": "Vehicle servicing",
@@ -2805,9 +2751,7 @@
           "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
         ],
         "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
-        "sourceTitles": [
-          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
-        ]
+        "sourceTitles": ["Burim i pavarur: kontakti, vendndodhja dhe shërbimet"]
       },
       "en": {
         "specialty": "Vehicle servicing",
@@ -2859,9 +2803,7 @@
           "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
         ],
         "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
-        "sourceTitles": [
-          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
-        ]
+        "sourceTitles": ["Burim i pavarur: kontakti, vendndodhja dhe shërbimet"]
       },
       "en": {
         "specialty": "Vehicle servicing",
@@ -3035,10 +2977,7 @@
       "sq": {
         "specialty": "Polirim automjetesh · Kujdes për vetura",
         "description": "Polirim dhe pastrim automjetesh sipas profilit publik të biznesit. Biznesi shënon Vushtrrinë si vendndodhje; adresa e saktë e rrugës nuk është vërtetuar në mënyrë të pavarur.",
-        "serviceDetails": [
-          "Polirim automjetesh",
-          "Pastrim automjetesh"
-        ],
+        "serviceDetails": ["Polirim automjetesh", "Pastrim automjetesh"],
         "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
         "sourceTitles": [
           "Profili publik i biznesit: kontakt, vendndodhje dhe polirim automjetesh"
@@ -3047,10 +2986,7 @@
       "en": {
         "specialty": "Vehicle polishing · Car care",
         "description": "Vehicle polishing and cleaning according to the public business profile. The business gives Vushtrri as its location; an exact street address has not been independently verified.",
-        "serviceDetails": [
-          "Vehicle polishing",
-          "Vehicle cleaning"
-        ],
+        "serviceDetails": ["Vehicle polishing", "Vehicle cleaning"],
         "phoneNote": "Public business contact; reachability not confirmed",
         "sourceTitles": [
           "Public business profile: contact, location and vehicle polishing"
@@ -3068,9 +3004,7 @@
           "Shërbime të lidhura me diagnostikimin; ju lutemi konfirmoni drejtpërdrejt gamën konkrete"
         ],
         "phoneNote": "Kontakt i publikuar i biznesit",
-        "sourceTitles": [
-          "Profil zyrtar partneri: servis · adresa · telefoni"
-        ]
+        "sourceTitles": ["Profil zyrtar partneri: servis · adresa · telefoni"]
       },
       "en": {
         "specialty": "Vehicle diagnostics",
@@ -3080,9 +3014,7 @@
           "Diagnostics-related services; please confirm the specific scope directly"
         ],
         "phoneNote": "Published business contact",
-        "sourceTitles": [
-          "Official partner profile: workshop · address · phone"
-        ]
+        "sourceTitles": ["Official partner profile: workshop · address · phone"]
       }
     },
     {
@@ -3929,10 +3861,7 @@
       "en": {
         "specialty": "Opel servicing",
         "description": "Foleja Motors lists vehicle repair, maintenance and checks at its Prishtinë–Ferizaj km 5 location, along with a dedicated service telephone number. The business describes itself on its website as an Opel distributor.",
-        "serviceDetails": [
-          "Vehicle repair",
-          "Maintenance and vehicle checks"
-        ],
+        "serviceDetails": ["Vehicle repair", "Maintenance and vehicle checks"],
         "phoneNote": "Published service phone number",
         "sourceTitles": [
           "Own website: address · service phone · repair and maintenance"
@@ -4136,9 +4065,7 @@
           "Navigation updates and region conversion"
         ],
         "phoneNote": "Public business contact; reachability not confirmed",
-        "sourceTitles": [
-          "Business website: contact, location and services"
-        ]
+        "sourceTitles": ["Business website: contact, location and services"]
       }
     },
     {
@@ -4152,9 +4079,7 @@
           "Polirim dhe veshje qeramike"
         ],
         "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
-        "sourceTitles": [
-          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
-        ]
+        "sourceTitles": ["Burim i pavarur: kontakti, vendndodhja dhe shërbimet"]
       },
       "en": {
         "specialty": "Detailing · Cleaning · Paint protection",
@@ -4425,9 +4350,7 @@
           "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
         ],
         "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
-        "sourceTitles": [
-          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
-        ]
+        "sourceTitles": ["Burim i pavarur: kontakti, vendndodhja dhe shërbimet"]
       },
       "en": {
         "specialty": "Vehicle servicing",
@@ -4669,14 +4592,9 @@
       "en": {
         "specialty": "Detailing · Cleaning · Ceramic coating",
         "description": "Shala Detailing in Smaq near Gjakova offers vehicle cleaning and ceramic coating according to its own website.",
-        "serviceDetails": [
-          "Interior and exterior cleaning",
-          "Ceramic coating"
-        ],
+        "serviceDetails": ["Interior and exterior cleaning", "Ceramic coating"],
         "phoneNote": "Public business contact; reachability not confirmed",
-        "sourceTitles": [
-          "Business website: contact, location and services"
-        ]
+        "sourceTitles": ["Business website: contact, location and services"]
       }
     },
     {
@@ -4749,9 +4667,7 @@
           "Mirëmbajtje dhe riparim automjetesh; konfirmoni drejtpërdrejt gamën konkrete."
         ],
         "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
-        "sourceTitles": [
-          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
-        ]
+        "sourceTitles": ["Burim i pavarur: kontakti, vendndodhja dhe shërbimet"]
       },
       "en": {
         "specialty": "Vehicle servicing",
@@ -4843,9 +4759,7 @@
           "Kujdes automjetesh sipas direktorisë së pavarur; konfirmoni drejtpërdrejt trajtimet konkrete."
         ],
         "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
-        "sourceTitles": [
-          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
-        ]
+        "sourceTitles": ["Burim i pavarur: kontakti, vendndodhja dhe shërbimet"]
       },
       "en": {
         "specialty": "Vehicle care · Detailing",
@@ -4869,9 +4783,7 @@
           "Kujdes automjetesh sipas direktorisë së pavarur; konfirmoni drejtpërdrejt trajtimet konkrete."
         ],
         "phoneNote": "Kontakt nga direktoria publike; mundësia e kontaktit nuk është konfirmuar",
-        "sourceTitles": [
-          "Burim i pavarur: kontakti, vendndodhja dhe shërbimet"
-        ]
+        "sourceTitles": ["Burim i pavarur: kontakti, vendndodhja dhe shërbimet"]
       },
       "en": {
         "specialty": "Vehicle care · Detailing",
@@ -5031,9 +4943,7 @@
       "sq": {
         "specialty": "Lyerje · Polirim",
         "description": "Xhela në Shipol pranë Mitrovica ofron lyerje dhe polirim automjetesh sipas faqes së vet.",
-        "serviceDetails": [
-          "Lyerje dhe polirim boje"
-        ],
+        "serviceDetails": ["Lyerje dhe polirim boje"],
         "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
         "sourceTitles": [
           "Faqja e biznesit: kontakti, vendndodhja dhe shërbimet"
@@ -5042,13 +4952,9 @@
       "en": {
         "specialty": "Painting · Polishing",
         "description": "Xhela in Shipol near Mitrovica offers painting and vehicle polishing according to its own website.",
-        "serviceDetails": [
-          "Painting and paint polishing"
-        ],
+        "serviceDetails": ["Painting and paint polishing"],
         "phoneNote": "Public business contact; reachability not confirmed",
-        "sourceTitles": [
-          "Business website: contact, location and services"
-        ]
+        "sourceTitles": ["Business website: contact, location and services"]
       }
     },
     {

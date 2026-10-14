@@ -1,41 +1,125 @@
-import assert from 'node:assert/strict';
-import {spawnSync} from 'node:child_process';
-import {mkdtemp, mkdir, readFile, writeFile, rm, lstat, realpath} from 'node:fs/promises';
-import {tmpdir} from 'node:os';
-import {join, resolve} from 'node:path';
+import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
+import {
+  mkdtemp,
+  mkdir,
+  readFile,
+  writeFile,
+  rm,
+  lstat,
+  realpath,
+} from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join, resolve } from "node:path";
 
-const installer=resolve('scripts/install-tool.mjs');
-const directory=await realpath(await mkdtemp(join(tmpdir(),'riparim-tools-')));
-const npm=join(directory,'fixture-npm.mjs');
+const installer = resolve("scripts/install-tool.mjs");
+const directory = await realpath(
+  await mkdtemp(join(tmpdir(), "riparim-tools-")),
+);
+const npm = join(directory, "fixture-npm.mjs");
 try {
- await writeFile(npm,`import {mkdir,writeFile} from 'node:fs/promises';
+  await writeFile(
+    npm,
+    `import {mkdir,writeFile} from 'node:fs/promises';
  const args=process.argv.slice(2);await writeFile('args.json',JSON.stringify(args));
  if(process.env.FIXTURE_FAILURE)process.exit(7);
- await mkdir(args[args.indexOf('--prefix')+1]+'/node_modules',{recursive:true});`);
- const run=(tool,extra={})=>spawnSync(process.execPath,[installer,tool],{cwd:directory,env:{...process.env,npm_execpath:npm,...extra},encoding:'utf8'});
- await writeFile(join(directory,'package.json'),JSON.stringify({devDependencies:{wrangler:'4.92.0',esbuild:'0.28.0'},overrides:{miniflare:{sharp:'0.35.4'}}}));
- const target=join(directory,'.github/tools/deploy');await mkdir(target,{recursive:true});
- const manifest={private:true,dependencies:{wrangler:'4.92.0',esbuild:'0.28.0'},overrides:{miniflare:{sharp:'0.35.4'}}};
- await writeFile(join(target,'package.json'),JSON.stringify(manifest));
- await writeFile(join(target,'package-lock.json'),JSON.stringify({lockfileVersion:3,packages:{'':{dependencies:manifest.dependencies},'node_modules/wrangler':{version:'4.92.0'},'node_modules/esbuild':{version:'0.28.0'}}}));
- const installed=run('deploy');
- assert.equal(installed.status,0,installed.stdout+installed.stderr);
- assert((await lstat(join(directory,'node_modules'))).isSymbolicLink());
- const args=JSON.parse(await readFile(join(directory,'args.json'),'utf8'));
- assert.equal(args[0],'ci');assert.equal(args[args.indexOf('--prefix')+1],target);
- for(const flag of ['--workspaces=false','--include=dev','--include=optional','--prefer-offline','--no-audit','--no-fund'])assert(args.includes(flag));
- const exists=run('deploy');assert.notEqual(exists.status,0);assert.match(exists.stderr,/already exists/);
- await rm(join(directory,'node_modules'));
- await (await import('node:fs/promises')).symlink('missing-tool-tree',join(directory,'node_modules'));
- const dangling=run('deploy');assert.notEqual(dangling.status,0);assert.match(dangling.stderr,/already exists/);
- await rm(join(directory,'node_modules'));
- const failed=run('deploy',{FIXTURE_FAILURE:'1'});assert.equal(failed.status,7);
- await assert.rejects(lstat(join(directory,'node_modules')),error=>error.code==='ENOENT');
- await writeFile(join(target,'package.json'),JSON.stringify({...manifest,dependencies:{...manifest.dependencies,wrangler:'4.91.0'}}));
- const drift=run('deploy');assert.notEqual(drift.status,0);assert.match(drift.stderr,/root pin/);
- await writeFile(join(target,'package.json'),JSON.stringify(manifest));
- await writeFile(join(target,'package-lock.json'),JSON.stringify({lockfileVersion:3,packages:{'':{dependencies:manifest.dependencies},'node_modules/wrangler':{version:'4.91.0'},'node_modules/esbuild':{version:'0.28.0'}}}));
- const lockDrift=run('deploy');assert.notEqual(lockDrift.status,0);assert.match(lockDrift.stderr,/lock must match/);
- const invalid=run('../deploy');assert.notEqual(invalid.status,0);assert.match(invalid.stderr,/title, release or deploy/);
- console.log('Tool installer: locked selection, root pins, existing-install protection and install failure propagation passed.');
-} finally {await rm(directory,{recursive:true,force:true});}
+ await mkdir(args[args.indexOf('--prefix')+1]+'/node_modules',{recursive:true});`,
+  );
+  const run = (tool, extra = {}) =>
+    spawnSync(process.execPath, [installer, tool], {
+      cwd: directory,
+      env: { ...process.env, npm_execpath: npm, ...extra },
+      encoding: "utf8",
+    });
+  await writeFile(
+    join(directory, "package.json"),
+    JSON.stringify({
+      devDependencies: { wrangler: "4.92.0", esbuild: "0.28.0" },
+      overrides: { miniflare: { sharp: "0.35.4" } },
+    }),
+  );
+  const target = join(directory, ".github/tools/deploy");
+  await mkdir(target, { recursive: true });
+  const manifest = {
+    private: true,
+    dependencies: { wrangler: "4.92.0", esbuild: "0.28.0" },
+    overrides: { miniflare: { sharp: "0.35.4" } },
+  };
+  await writeFile(join(target, "package.json"), JSON.stringify(manifest));
+  await writeFile(
+    join(target, "package-lock.json"),
+    JSON.stringify({
+      lockfileVersion: 3,
+      packages: {
+        "": { dependencies: manifest.dependencies },
+        "node_modules/wrangler": { version: "4.92.0" },
+        "node_modules/esbuild": { version: "0.28.0" },
+      },
+    }),
+  );
+  const installed = run("deploy");
+  assert.equal(installed.status, 0, installed.stdout + installed.stderr);
+  assert((await lstat(join(directory, "node_modules"))).isSymbolicLink());
+  const args = JSON.parse(await readFile(join(directory, "args.json"), "utf8"));
+  assert.equal(args[0], "ci");
+  assert.equal(args[args.indexOf("--prefix") + 1], target);
+  for (const flag of [
+    "--workspaces=false",
+    "--include=dev",
+    "--include=optional",
+    "--prefer-offline",
+    "--no-audit",
+    "--no-fund",
+  ])
+    assert(args.includes(flag));
+  const exists = run("deploy");
+  assert.notEqual(exists.status, 0);
+  assert.match(exists.stderr, /already exists/);
+  await rm(join(directory, "node_modules"));
+  await (
+    await import("node:fs/promises")
+  ).symlink("missing-tool-tree", join(directory, "node_modules"));
+  const dangling = run("deploy");
+  assert.notEqual(dangling.status, 0);
+  assert.match(dangling.stderr, /already exists/);
+  await rm(join(directory, "node_modules"));
+  const failed = run("deploy", { FIXTURE_FAILURE: "1" });
+  assert.equal(failed.status, 7);
+  await assert.rejects(
+    lstat(join(directory, "node_modules")),
+    (error) => error.code === "ENOENT",
+  );
+  await writeFile(
+    join(target, "package.json"),
+    JSON.stringify({
+      ...manifest,
+      dependencies: { ...manifest.dependencies, wrangler: "4.91.0" },
+    }),
+  );
+  const drift = run("deploy");
+  assert.notEqual(drift.status, 0);
+  assert.match(drift.stderr, /root pin/);
+  await writeFile(join(target, "package.json"), JSON.stringify(manifest));
+  await writeFile(
+    join(target, "package-lock.json"),
+    JSON.stringify({
+      lockfileVersion: 3,
+      packages: {
+        "": { dependencies: manifest.dependencies },
+        "node_modules/wrangler": { version: "4.91.0" },
+        "node_modules/esbuild": { version: "0.28.0" },
+      },
+    }),
+  );
+  const lockDrift = run("deploy");
+  assert.notEqual(lockDrift.status, 0);
+  assert.match(lockDrift.stderr, /lock must match/);
+  const invalid = run("../deploy");
+  assert.notEqual(invalid.status, 0);
+  assert.match(invalid.stderr, /title, release or deploy/);
+  console.log(
+    "Tool installer: locked selection, root pins, existing-install protection and install failure propagation passed.",
+  );
+} finally {
+  await rm(directory, { recursive: true, force: true });
+}

@@ -13,8 +13,8 @@ Vinexts native Prerender-API existiert in der installierten Version. Sie allein 
 `node_modules/vinext/dist/config/prerender.d.ts` und `.js` definieren:
 
 ```ts
-vinext({ prerender: true })
-vinext({ prerender: { routes: "*" } })
+vinext({ prerender: true });
+vinext({ prerender: { routes: "*" } });
 ```
 
 Die CLI unterstützt `vinext build --prerender-all` und `--prerender-concurrency`. Nur `routes: "*"` wird akzeptiert, kein Array ausgewählter URLs. Mit einem kurzen Node-Test wurden Normalisierung beider gültigen Konfigurationen, Zurückweisung eines Route-Arrays und Auswahlgrund `vinext-config` erfolgreich geprüft. `import('vinext/internal/build/run-prerender')` liefert tatsächlich eine Funktion. Diese interne API ist im installierten `package.json` exportiert; sie sollte bei Verwendung an die bestehende gepinnte Version gebunden bleiben.
