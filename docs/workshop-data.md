@@ -60,15 +60,21 @@ angewendet; der anschließende Katalogimport ergänzt die zehn Kontaktdatensätz
 
 `data/workshop-emails.json` verwendet Version 2 des Kontaktvertrags und enthält
 eine Recherchezeile für jede der 172 bestehenden Werkstattkennungen. Der am
-14. Oktober 2026 im internen Browser nachgeprüfte Bestand umfasst 111 Adressen bei
-101 Werkstätten, davon neun mit mehreren Adressen. Die Nachprüfung aller 98 zuvor
+14. Oktober 2026 im internen Browser nachgeprüfte Bestand umfasst 113 Adressen bei
+103 Werkstätten, davon neun mit mehreren Adressen. Die Nachprüfung aller 98 zuvor
 leeren Listen ergänzt insgesamt 28 Kontakte bei 27 weiteren Werkstätten. Eigene
 Websites, Facebook/Instagram und öffentliche Betriebsverzeichnisse einschließlich
 ARBK Open wurden abgeglichen. ARBK Open ist ein unabhängiges Verzeichnis, keine
 Behördenwebsite. Die erneute Prüfung aller 75 offenen Listen ergänzt vier weitere
 Kontakte bei Auto Ford, BMW balia, Pirqi und SuperClean. Google-Telefonsuchen und
 eine unabhängige Suche sowie angemeldete Facebook-/Instagram-Kontaktansichten
-wurden abgeglichen. 71 Listen bleiben leer; Arlindi und der Bajrami-Mailkandidat
+wurden abgeglichen. Die folgende gezielte Google-Nachprüfung aller 71 offenen
+Listen ergänzt zwei weitere Kontakte: Lirimi über den exakten Telefonkontakt und
+TABAKU über den Betriebsnamen sowie die vollständige Adresse. Beide Adressen
+stehen öffentlich bei Gjirafa; abweichende Verzeichnis-Telefone oder
+Straßenbeschreibungen werden nicht in die Profile übernommen. Neue passende
+Facebook-/Instagram-Kandidaten und Registereinträge wurden direkt geprüft.
+69 Listen bleiben leer; Arlindi und der Bajrami-Mailkandidat
 sind weiterhin nicht sicher zugeordnet. Nicht passende Namensvettern, Vorlagenadressen und historische
 Facebook-Mailaliase werden nicht importiert. Register-Kontakte können auch
 Vertreter-/Buchhaltungspostfächer sein; dies bleibt pro Adresse intern dokumentiert.
