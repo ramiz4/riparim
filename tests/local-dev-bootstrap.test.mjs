@@ -27,8 +27,37 @@ for (const directory of ["scripts", "lib", "db", "data", "drizzle", ".openai"])
   });
 await symlink(resolve(checkout, "node_modules"), resolve(root, "node_modules"));
 await cp(resolve(checkout, "package.json"), resolve(root, "package.json"));
+const journalPath = resolve(root, "drizzle/meta/_journal.json");
+const fixtureJournal = JSON.parse(await readFile(journalPath, "utf8"));
+const futureIndex = fixtureJournal.entries.length;
+const futureTag = `${String(futureIndex).padStart(4, "0")}_fixture_future`;
+fixtureJournal.entries.push({
+  ...fixtureJournal.entries.at(-1),
+  idx: futureIndex,
+  tag: futureTag,
+  when: fixtureJournal.entries.at(-1).when + 1,
+});
+await writeFile(journalPath, JSON.stringify(fixtureJournal));
+await writeFile(
+  resolve(root, "drizzle", `${futureTag}.sql`),
+  "CREATE TABLE fixture_future(id TEXT PRIMARY KEY);",
+);
+const initialMigrationCount = fixtureJournal.entries.length;
 
 try {
+  const launcher = resolve(root, "scripts/run-framework.mjs");
+  for (const flags of [["--port", "0"], ["-p", "0"], ["--port=0"]]) {
+    const result = await execute(
+      process.execPath,
+      [launcher, "dev", ...flags, "--help"],
+      { cwd: root },
+    );
+    assert.match(
+      result.stdout,
+      /vinext dev/,
+      "The launcher preserves ephemeral port syntax supported by Vinext",
+    );
+  }
   await prepareLocalDevelopment(root);
   const files = await readdir(resolve(root, ".wrangler/state"), {
     recursive: true,
@@ -39,7 +68,7 @@ try {
   try {
     assert.equal(
       db.prepare("SELECT count(*) AS n FROM d1_migrations").get().n,
-      26,
+      initialMigrationCount,
       "Setup records every checked-in migration in the native journal",
     );
     assert(
@@ -83,7 +112,7 @@ try {
   try {
     assert.equal(
       preserved.prepare("SELECT count(*) AS n FROM d1_migrations").get().n,
-      26,
+      initialMigrationCount,
     );
     assert.equal(
       preserved
@@ -125,16 +154,15 @@ try {
     preserved.close();
   }
 
-  const journalPath = resolve(root, "drizzle/meta/_journal.json");
   const journal = JSON.parse(await readFile(journalPath, "utf8"));
   journal.entries.push({
     ...journal.entries.at(-1),
-    idx: 26,
-    tag: "0026_bootstrap_probe",
-    when: 1790000000000,
+    idx: journal.entries.length,
+    tag: `${String(journal.entries.length).padStart(4, "0")}_bootstrap_probe`,
+    when: journal.entries.at(-1).when + 1,
   });
   await writeFile(journalPath, JSON.stringify(journal));
-  const pending = resolve(root, "drizzle/0026_bootstrap_probe.sql");
+  const pending = resolve(root, "drizzle", `${journal.entries.at(-1).tag}.sql`);
   await writeFile(
     pending,
     "CREATE TABLE bootstrap_probe(id TEXT PRIMARY KEY); SELECT * FROM missing_fixture_table;",
@@ -147,7 +175,7 @@ try {
   try {
     assert.equal(
       failed.prepare("SELECT count(*) AS n FROM d1_migrations").get().n,
-      26,
+      initialMigrationCount,
       "A failed native migration leaves successful receipts intact",
     );
     assert.equal(
@@ -171,7 +199,7 @@ try {
   try {
     assert.equal(
       upgraded.prepare("SELECT count(*) AS n FROM d1_migrations").get().n,
-      27,
+      initialMigrationCount + 1,
       "Retry applies only the repaired pending migration",
     );
   } finally {
@@ -236,6 +264,42 @@ try {
     /seed failed.*JSON/s,
     "A source validation error stops at seed and remains retryable",
   );
+  await writeFile(hoursPath, originalHours);
+  const sensitiveKey = "private-unknown-opening-hours-key";
+  const secret = "fixture-environment-secret-value";
+  const invalidHours = JSON.parse(originalHours);
+  invalidHours.records[0].hours[sensitiveKey] = secret;
+  invalidHours.records[0].hours[secret] = "untrusted-fixture-value";
+  await writeFile(hoursPath, JSON.stringify(invalidHours));
+  for (const entry of [
+    cli,
+    resolve(root, "scripts/seed-local-opening-hours.mjs"),
+  ])
+    await assert.rejects(
+      execute(process.execPath, [entry], {
+        cwd: checkout,
+        env: { ...process.env, RIPARIM_TEST_SECRET: secret },
+      }),
+      (error) => {
+        assert.equal(error.code, 1);
+        assert.match(error.stderr, /seed failed.*validation/s);
+        assert(
+          !error.stderr.includes(sensitiveKey),
+          "CLI validation diagnostics exclude untrusted property names",
+        );
+        assert(
+          !error.stderr.includes(secret),
+          "CLI validation diagnostics redact environment secrets",
+        );
+        return true;
+      },
+    );
+  const validationLog = await readFile(
+    resolve(root, ".sites-runtime/local-dev/seed.log"),
+    "utf8",
+  );
+  assert(!validationLog.includes(sensitiveKey));
+  assert(!validationLog.includes(secret));
   await writeFile(hoursPath, originalHours);
   await prepareLocalDevelopment(root);
 

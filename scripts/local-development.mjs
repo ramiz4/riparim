@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { sitesBuildConfiguration } from "./release-policy.mjs";
+import { redactLocalDiagnostic } from "./local-diagnostics.mjs";
 
 export const checkoutRoot = fileURLToPath(new URL("../", import.meta.url));
 export const defaultLocalDevPort = 5174;
@@ -24,10 +25,12 @@ export async function localDevelopmentConfiguration(root = checkoutRoot) {
     base = sitesBuildConfiguration(hosting);
   } catch (error) {
     throw new Error(
-      `Local development configuration failed (${error.code ?? error.name}).\n` +
-        `Check the tracked .openai/hosting.json in ${root}.\n` +
-        `Database: DB (local only)\nConfig: ${local.configPath}\nState: ${local.persistPath}\n` +
-        `Next: restore the checkout's valid hosting configuration; see docs/local-development.md.`,
+      redactLocalDiagnostic(
+        `Local development configuration failed (${error.code ?? error.name}).\n` +
+          `Check the tracked .openai/hosting.json in ${root}.\n` +
+          `Database: DB (local only)\nConfig: ${local.configPath}\nState: ${local.persistPath}\n` +
+          `Next: restore the checkout's valid hosting configuration; see docs/local-development.md.`,
+      ),
     );
   }
   return {

@@ -11,15 +11,21 @@ import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { runLocalD1 } from "./local-d1.mjs";
 import {
+  localErrorCause,
+  redactLocalDiagnostic,
+} from "./local-diagnostics.mjs";
+import {
   checkoutRoot,
   localDevelopmentConfiguration,
 } from "./local-development.mjs";
 
 function preparationError(local, phase, cause) {
   return new Error(
-    `Local development ${phase} failed: ${cause}\n` +
-      `Database: DB (local only)\nConfig: ${local.configPath}\nState: ${local.persistPath}\n` +
-      `Next: follow docs/local-development.md, then run npm run dev:setup.`,
+    redactLocalDiagnostic(
+      `Local development ${phase} failed: ${cause}\n` +
+        `Database: DB (local only)\nConfig: ${local.configPath}\nState: ${local.persistPath}\n` +
+        `Next: follow docs/local-development.md, then run npm run dev:setup.`,
+    ),
   );
 }
 
@@ -248,10 +254,9 @@ export async function prepareLocalDevelopment(
           phase,
           options.signal?.aborted
             ? "Preparation interrupted; the local migration journal will resume safely on retry."
-            : error instanceof SyntaxError
-              ? "Invalid JSON in the checked-in local source data."
-              : `${error.code ? error.code + ": " : ""}${error.message}`,
+            : localErrorCause(error),
         );
+    failure.message = redactLocalDiagnostic(failure.message);
     if (!failure.message.includes("\nLog: ")) {
       const log = resolve(local.runtimePath, `${phase}.log`);
       let written = false;
@@ -269,10 +274,7 @@ export async function prepareLocalDevelopment(
   }
 }
 
-if (
-  process.argv[1] &&
-  import.meta.url === pathToFileURL(resolve(process.argv[1])).href
-) {
+export async function runLocalDevelopmentPreparationCLI(root = checkoutRoot) {
   const controller = new AbortController();
   let interruption;
   const interrupt = (signal) => {
@@ -284,13 +286,23 @@ if (
   process.on("SIGINT", onInt);
   process.on("SIGTERM", onTerm);
   try {
-    await prepareLocalDevelopment(undefined, { signal: controller.signal });
+    await prepareLocalDevelopment(root, { signal: controller.signal });
+    return 0;
   } catch (error) {
-    console.error(error.message);
-    process.exitCode =
-      interruption === "SIGINT" ? 130 : interruption === "SIGTERM" ? 143 : 1;
+    console.error(redactLocalDiagnostic(error.message));
+    return interruption === "SIGINT"
+      ? 130
+      : interruption === "SIGTERM"
+        ? 143
+        : 1;
   } finally {
     process.off("SIGINT", onInt);
     process.off("SIGTERM", onTerm);
   }
 }
+
+if (
+  process.argv[1] &&
+  import.meta.url === pathToFileURL(resolve(process.argv[1])).href
+)
+  process.exitCode = await runLocalDevelopmentPreparationCLI();

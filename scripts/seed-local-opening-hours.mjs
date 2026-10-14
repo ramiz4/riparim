@@ -12,6 +12,10 @@ import {
   localDevelopmentConfiguration,
 } from "./local-development.mjs";
 import { runLocalD1 } from "./local-d1.mjs";
+import {
+  localErrorCause,
+  redactLocalDiagnostic,
+} from "./local-diagnostics.mjs";
 
 export async function localOpeningHoursSeedSql(root = checkoutRoot) {
   const catalogue = JSON.parse(
@@ -76,5 +80,18 @@ export async function seedLocalOpeningHours(root = checkoutRoot, options = {}) {
 if (
   process.argv[1] &&
   import.meta.url === pathToFileURL(resolve(process.argv[1])).href
-)
-  await seedLocalOpeningHours();
+) {
+  try {
+    await seedLocalOpeningHours();
+  } catch (error) {
+    const cause = localErrorCause(error);
+    console.error(
+      redactLocalDiagnostic(
+        cause.startsWith("Local development ")
+          ? cause
+          : `Local development seed failed: ${cause}`,
+      ),
+    );
+    process.exitCode = 1;
+  }
+}

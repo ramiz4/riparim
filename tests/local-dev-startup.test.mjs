@@ -39,10 +39,10 @@ async function availablePort() {
   return port;
 }
 
-async function start(directory) {
-  const port = await availablePort(),
-    origin = `http://127.0.0.1:${port}`,
+async function start(directory, options = {}) {
+  const port = options.port ?? (await availablePort()),
     environment = {};
+  let origin = port === 0 ? undefined : `http://127.0.0.1:${port}`;
   for (const key of ["PATH", "HOME", "TMPDIR", "SystemRoot"])
     if (process.env[key]) environment[key] = process.env[key];
   Object.assign(environment, {
@@ -84,6 +84,15 @@ async function start(directory) {
       "Fresh local dev must prepare its schema before seeding and stay running:\n" +
         logs,
     );
+    if (!origin) {
+      const announced = /http:\/\/127\.0\.0\.1:(\d+)/.exec(logs);
+      if (announced && Number(announced[1]) > 0)
+        origin = `http://127.0.0.1:${announced[1]}`;
+      else {
+        await delay(100);
+        continue;
+      }
+    }
     try {
       const response = await fetch(origin + "/api/workshops", {
         signal: AbortSignal.timeout(1000),
@@ -170,7 +179,13 @@ try {
   );
   await stop();
   const second = await checkout("second");
-  const independent = JSON.parse((await start(second)).output);
+  const ephemeral = await start(second, { port: 0 });
+  assert.notEqual(
+    new URL(ephemeral.origin).port,
+    "0",
+    "An ephemeral CLI port resolves to a usable announced address",
+  );
+  const independent = JSON.parse(ephemeral.output);
   assert.equal(
     independent.workshops.find(
       (workshop) => workshop.id === "ahp-volkswagen-prizren",

@@ -42,7 +42,54 @@ After a forced kill, the preparation lock can remain at `.wrangler/state/.ripari
 
 Previous instructions applied individual SQL files with `d1 execute`. Such a database may already contain tables while having no `d1_migrations` history. Replaying `CREATE TABLE` or `ALTER TABLE` would fail or produce an unsafe partial update. Startup therefore stops before migration or seed writes. Unknown, incomplete or divergent tracked schemas also stop.
 
-Do not fabricate receipts based only on existing table names or a matching schema. Historical migrations can contain data changes that table definitions cannot prove. This issue does not provide automatic history adoption. If local data must be retained, keep the backup and establish the original applied migration sequence from trustworthy records before arranging a deliberate migration/restore. The existing [data transfer](data-transfer.md) workflow has its own schema/history and evidence checks; it is not a command to bypass this bootstrap guard.
+Do not fabricate receipts based only on existing table names or a matching schema. Historical migrations can contain data changes that table definitions cannot prove. Startup does not adopt history automatically. Use one of the explicit procedures below.
+
+### Retain an existing dataset with verified execution records
+
+This is a one-time reviewed history adoption, separate from ordinary startup. A **Principal DevOps Engineer** prepares the bounded plan, and an independent **Principal Software Architect** reviews it under [issue execution](issue-execution.md). Request that specific review with the evidence below; do not upload database files, private uploads, credentials or raw customer rows.
+
+1. Stop every dev/setup/local Wrangler process using this checkout. Copy the complete D1/R2 state to a protected unused archive, leaving the active dataset in place. Verify the copy before any history write:
+
+   ```sh
+   state_backup=".wrangler/state-backup-$(date -u +%Y%m%dT%H%M%SZ)"
+   test ! -e "$state_backup"
+   cp -Rp .wrangler/state "$state_backup"
+   chmod 700 "$state_backup"
+   diff -rq .wrangler/state "$state_backup"
+   ```
+
+2. Establish the exact contiguous applied migration prefix from the original successful execution records. Supply ordered filenames, the original source commit, and hashes of the executed SQL that match the checked-in migration set. The records must account for every statement, including data changes; an old checkout alone, a table list or schema similarity is insufficient. Missing, failed, ambiguous or partial records stop adoption.
+3. Capture schema definitions only, through the installed local CLI, into a protected local review file. This reads no application rows and leaves the state archive byte-for-byte intact:
+
+   ```sh
+   (
+     umask 077
+     node ./node_modules/wrangler/bin/wrangler.js d1 execute DB --local \
+       --config .sites-runtime/local-dev/wrangler.json \
+       --persist-to .wrangler/state --json \
+       --command "SELECT name,type,tbl_name,sql FROM sqlite_schema WHERE sql IS NOT NULL ORDER BY name" \
+       > .sites-runtime/local-dev/legacy-schema-review.json
+   )
+   ```
+
+4. The two reviewers verify the trusted execution prefix against `drizzle/meta/_journal.json` and the immutable SQL, compare the complete application schema/constraints/indexes/triggers with that exact prefix, and confirm backup completeness. Share sanitized evidence and hashes in the review request; keep the actual archive local. A divergent schema or unproved data migration is a stop condition.
+5. Only after that review, the engineer supplies an explicit `approved-baseline.sql` for this state and proven prefix. Its allowed effects are solely creation of the pinned Wrangler-native `d1_migrations` definition and one receipt for each proved migration filename. It must not rerun migration SQL, modify application tables/rows, mark later migrations applied, or replace an existing unknown journal. Record the adoption time as such rather than inventing historical execution timestamps. The review records the exact prefix and SQL hashes.
+6. With all checkout processes still stopped, inspect and apply that reviewed file using the local target, then let normal preparation validate the journal/schema and apply only pending migrations:
+
+   ```sh
+   approved_baseline_sql=".sites-runtime/local-dev/approved-baseline.sql"
+   node ./node_modules/wrangler/bin/wrangler.js d1 execute DB --local \
+     --config .sites-runtime/local-dev/wrangler.json \
+     --persist-to .wrangler/state --file "$approved_baseline_sql"
+   npm run dev:setup
+   npm run dev
+   ```
+
+7. Verify the actual HTTP catalogue and the required local account/ownership/upload fixtures against the preserved dataset; retain the original archive and reviewed receipts. This handoff authorizes no production operation and performs no automatic data adoption. The existing [data transfer](data-transfer.md) workflow retains its own schema/history and evidence verification requirements.
+
+If any verification fails, stop all checkout processes, preserve the failed replacement state under another unused archive name, copy the original archive back to `.wrangler/state`, and compare its D1/R2 files byte for byte. Run the local CLI with `--command "PRAGMA quick_check"` and require `ok`; verify the archived private upload bytes/inventory as well. The restored legacy state remains blocked until its history can be proved. Never erase the original archive to make verification pass.
+
+### Start fresh with a disposable dataset
 
 For a disposable development database, explicitly archive the complete local state before starting fresh. **This removes the old dataset from active development and recreates curated defaults; the archived state remains available.** Stop all dev, setup and local Wrangler processes for this checkout first. Run from the checkout root:
 

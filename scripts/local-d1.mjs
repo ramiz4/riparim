@@ -1,15 +1,10 @@
 import { spawn } from "node:child_process";
 import { writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { redactLocalDiagnostic } from "./local-diagnostics.mjs";
 
 function diagnosticSummary(value) {
-  let text = value.replace(/\u001b\[[\d;]*m/g, "");
-  for (const [name, secret] of Object.entries(process.env))
-    if (
-      /TOKEN|SECRET|PASSWORD|PRIVATE|CREDENTIAL|KEY/.test(name) &&
-      secret?.length >= 3
-    )
-      text = text.replaceAll(secret, "[redacted]");
+  const text = redactLocalDiagnostic(value);
   return (
     text
       .split("\n")
@@ -96,9 +91,11 @@ export async function runLocalD1(local, phase, args, { signal } = {}) {
   );
   if (output.code !== 0 || output.error || signal?.aborted) {
     throw new Error(
-      `Local development ${phase} failed (${output.error?.code ? "spawn " + output.error.code : "exit " + (output.code ?? output.signal)}).\n` +
-        `Database: DB (local only)\nConfig: ${local.configPath}\nState: ${local.persistPath}\n` +
-        `${cause}\nLog: ${log}\nNext: follow docs/local-development.md, then run npm run dev:setup.`,
+      redactLocalDiagnostic(
+        `Local development ${phase} failed (${output.error?.code ? "spawn " + output.error.code : "exit " + (output.code ?? output.signal)}).\n` +
+          `Database: DB (local only)\nConfig: ${local.configPath}\nState: ${local.persistPath}\n` +
+          `${cause}\nLog: ${log}\nNext: follow docs/local-development.md, then run npm run dev:setup.`,
+      ),
     );
   }
   return output.stdout;

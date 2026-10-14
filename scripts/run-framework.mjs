@@ -1,4 +1,5 @@
 import { spawnSync } from "node:child_process";
+import { createServer } from "node:net";
 import { fileURLToPath } from "node:url";
 import { readExecutionProfile } from "./execution-profile.mjs";
 import { defaultLocalDevPort } from "./local-development.mjs";
@@ -19,43 +20,49 @@ if (managedLinux && command === "build") {
 }
 
 if (command === "dev" && !managedLinux) {
-  const { prepareLocalDevelopment } =
+  const { runLocalDevelopmentPreparationCLI } =
     await import("./prepare-local-development.mjs");
   let port = String(defaultLocalDevPort);
   for (let index = 0; index < args.length; index++) {
     if (["--port", "-p"].includes(args[index])) port = args[index + 1];
     else if (args[index].startsWith("--port=")) port = args[index].slice(7);
   }
-  if (!/^\d+$/.test(port ?? "") || Number(port) < 1 || Number(port) > 65535) {
+  if (!/^\d+$/.test(port ?? "") || Number(port) > 65535) {
     console.error(
-      "Local development: --port must be an integer from 1 to 65535.",
+      "Local development: --port must be an integer from 0 to 65535.",
     );
     process.exit(1);
+  }
+  if (Number(port) === 0) {
+    // Select a concrete ephemeral loopback port before the Worker config is
+    // created, so every local origin uses the port that Vinext will bind.
+    const socket = createServer();
+    await new Promise((accept, reject) => {
+      socket.once("error", reject);
+      socket.listen(0, "127.0.0.1", accept);
+    });
+    port = String(socket.address().port);
+    await new Promise((accept, reject) =>
+      socket.close((error) => (error ? reject(error) : accept())),
+    );
+    for (let index = 0; index < args.length; index++) {
+      if (
+        ["--port", "-p"].includes(args[index]) &&
+        Number(args[index + 1]) === 0
+      )
+        args[index + 1] = port;
+      else if (
+        args[index].startsWith("--port=") &&
+        Number(args[index].slice(7)) === 0
+      )
+        args[index] = `--port=${port}`;
+    }
   }
   // Vinext loads .env after preparation. Leave SITE_ORIGIN available for its
   // existing overrides and pass only the selected local port to Vite.
   process.env.RIPARIM_LOCAL_DEV_PORT = port;
-  const controller = new AbortController();
-  let interruption;
-  const interrupt = (signal) => {
-    interruption = signal;
-    controller.abort();
-  };
-  const onInt = () => interrupt("SIGINT"),
-    onTerm = () => interrupt("SIGTERM");
-  process.on("SIGINT", onInt);
-  process.on("SIGTERM", onTerm);
-  try {
-    await prepareLocalDevelopment(undefined, { signal: controller.signal });
-  } catch (error) {
-    console.error(error.message);
-    process.exitCode =
-      interruption === "SIGINT" ? 130 : interruption === "SIGTERM" ? 143 : 1;
-  } finally {
-    process.off("SIGINT", onInt);
-    process.off("SIGTERM", onTerm);
-  }
-  if (process.exitCode) process.exit(process.exitCode);
+  const exitCode = await runLocalDevelopmentPreparationCLI();
+  if (exitCode) process.exit(exitCode);
 }
 
 // Import in this process so the preview owner retains its PID and signals.
