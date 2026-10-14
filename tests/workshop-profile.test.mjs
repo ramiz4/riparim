@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { JSDOM } from "jsdom";
 import { mkdir, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 const require = createRequire(new URL("../package.json", import.meta.url));
@@ -583,24 +584,39 @@ const props = {
   account: null,
   isAdmin: false,
 };
+function markupNode(html, selector) {
+  const dom = new JSDOM(html);
+  try {
+    const node = dom.window.document.querySelector(selector);
+    assert(
+      node,
+      "Actual profile markup exposes the requested semantic region: " +
+        selector,
+    );
+    return node.outerHTML;
+  } finally {
+    dom.window.close();
+  }
+}
 const pageMarkup = render(profilePage.default, props);
 assert(
-  !pageMarkup.includes("profile-google-photos"),
+  !markupNode(pageMarkup, "main").includes('data-ui="profile-photos"'),
   "the profile has no separate Maps photo link or reserved photo space",
 );
-const mobile = pageMarkup.match(
-  /<nav class="profile-mobile-actions[^]*?<\/nav>/,
-)[0];
+const mobile = markupNode(pageMarkup, "nav[data-ui~=profile-mobile-actions]");
 assert(
   mobile.includes("WhatsApp") &&
     mobile.includes("Anrufen") &&
     mobile.includes("destination_place_id"),
   "confirmed WhatsApp, phone and exact-place route are available in the mobile bar",
 );
-const unconfirmed = render(profilePage.default, {
-  ...props,
-  workshop: { ...workshop, whatsapp: "" },
-}).match(/<nav class="profile-mobile-actions[^]*?<\/nav>/)[0];
+const unconfirmed = markupNode(
+  render(profilePage.default, {
+    ...props,
+    workshop: { ...workshop, whatsapp: "" },
+  }),
+  "nav[data-ui~=profile-mobile-actions]",
+);
 assert(
   !unconfirmed.includes("WhatsApp"),
   "a phone number does not imply WhatsApp availability",
@@ -660,13 +676,14 @@ for (const locale of ["de", "sq", "en"]) {
       html.includes(getMessages(locale).common.workshopEmailVerified),
   );
   assert(
-    !html
-      .match(/<div class="workshop-overview-actions"[^]*?<\/div>/)[0]
-      .includes("mailto:"),
+    !markupNode(
+      html,
+      "main[data-riparim-page=workshop] > header > div:nth-child(2)",
+    ).includes("mailto:"),
     "Email contacts add no top action",
   );
   assert(
-    !pageMarkup.includes("profile-email-summary"),
+    !markupNode(pageMarkup, "aside").includes("mailto:"),
     "Missing contacts omit the email section",
   );
 }

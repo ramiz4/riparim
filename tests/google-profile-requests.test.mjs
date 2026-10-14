@@ -286,11 +286,13 @@ try {
       h(React.StrictMode, null, h(api.Profile, { ...props, workshop: value })),
     );
     const t = api.createTranslator(api.getMessages(locale));
-    const trigger = document.querySelector(".opening-hours-trigger");
+    const trigger = document.querySelector(
+      "[data-ui~='workshop-opening-hours'] button[aria-haspopup='dialog']",
+    );
     assert(trigger, "Today is the only schedule trigger");
     assert(trigger.textContent.includes(t("common.hoursToday")));
     assert(
-      !document.querySelector(".workshop-opening-hours details"),
+      !document.querySelector("[data-ui~='workshop-opening-hours'] details"),
       "The schedule must not expand the overview layout",
     );
     await React.act(async () => {
@@ -299,22 +301,23 @@ try {
     });
     assert(
       document
-        .querySelector(".opening-hours-popover")
+        .querySelector("[data-ui~='opening-hours-popover']")
         .textContent.includes(t("common.hoursSource")),
     );
     assert(
       document
-        .querySelector(".opening-week")
+        .querySelector("[data-ui~='opening-week']")
         .textContent.includes("08:00–12:00, 13:00–18:00"),
     );
     assert(
-      document.querySelector(".opening-week dt").textContent ===
+      document.querySelector("[data-ui~='opening-week'] dt").textContent ===
         t("public.monday"),
       "weekdays use project translations even when browser ICU omits Albanian",
     );
     assert.equal(
-      document.querySelectorAll('.opening-hours-popover [aria-current="date"]')
-        .length,
+      document.querySelectorAll(
+        "[data-ui~='opening-hours-popover'] [aria-current=\"date\"]",
+      ).length,
       1,
       "The current local weekday is highlighted",
     );
@@ -326,7 +329,7 @@ try {
     });
     await React.act(settle);
     assert(
-      !document.querySelector(".opening-hours-popover"),
+      !document.querySelector("[data-ui~='opening-hours-popover']"),
       "Escape closes the floating schedule",
     );
     assert(
@@ -334,7 +337,11 @@ try {
       "Closing restores focus to Today",
     );
     assert(!document.querySelector("gmp-advanced-place-details"));
-    assert(!document.querySelector(".profile-google-reviews"));
+    assert(
+      !document.querySelector(
+        "[data-ui~='google-place-details'][data-google-variant='reviews']",
+      ),
+    );
     for (const link of document.querySelectorAll('a[href*="google.com/maps"]'))
       assert(
         new URL(link.href).searchParams.get("query_place_id") ===
@@ -350,7 +357,7 @@ try {
     );
     assert(
       document
-        .querySelector(".workshop-opening-hours")
+        .querySelector("[data-ui~='workshop-opening-hours']")
         .textContent.includes(t("common.hoursMissing")),
     );
     await render(
@@ -364,11 +371,13 @@ try {
         },
       }),
     );
-    const importedSection = document.querySelector(".workshop-opening-hours");
+    const importedSection = document.querySelector(
+      "[data-ui~='workshop-opening-hours']",
+    );
     assert(importedSection.textContent.includes("08:00–12:00"));
-    assert(!importedSection.querySelector(".opening-status"));
+    assert(!importedSection.querySelector("[role='status']"));
     assert(!importedSection.textContent.includes(t("common.hoursSource")));
-    assert(!importedSection.querySelector(".help"));
+    assert(!importedSection.querySelector("p"));
     await render(
       locale,
       h(api.Profile, {
@@ -382,14 +391,18 @@ try {
         },
       }),
     );
-    if (!document.querySelector(".opening-week"))
+    if (!document.querySelector("[data-ui~='opening-week']"))
       await React.act(async () => {
-        document.querySelector(".opening-hours-trigger").click();
+        document
+          .querySelector(
+            "[data-ui~='workshop-opening-hours'] button[aria-haspopup='dialog']",
+          )
+          .click();
         await settle();
       });
     assert(
       document
-        .querySelector(".opening-week")
+        .querySelector("[data-ui~='opening-week']")
         .textContent.includes("08:00–12:00"),
     );
   }
@@ -414,16 +427,22 @@ try {
   await render("de", h(api.Profile, { ...props, publicSnapshot: true }));
   assert(
     document
-      .querySelector(".public-review-list")
+      .querySelector("[data-ui~='public-review-list']")
       .textContent.includes(review.review),
   );
-  if (!document.querySelector(".opening-week"))
+  if (!document.querySelector("[data-ui~='opening-week']"))
     await React.act(async () => {
-      document.querySelector(".opening-hours-trigger").click();
+      document
+        .querySelector(
+          "[data-ui~='workshop-opening-hours'] button[aria-haspopup='dialog']",
+        )
+        .click();
       await settle();
     });
   assert(
-    document.querySelector(".opening-week").textContent.includes("08:00–12:00"),
+    document
+      .querySelector("[data-ui~='opening-week']")
+      .textContent.includes("08:00–12:00"),
   );
   assert.equal(counters.configs.length, 0);
   assert.equal(identities.length, 0);

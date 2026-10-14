@@ -228,7 +228,7 @@ const render = async (props = {}) => {
   );
 };
 const reload = async () => {
-  const retry = document.querySelector(".my-reviews-retry");
+  const retry = document.querySelector("[data-ui~='my-reviews-retry']");
   if (retry) return click(retry);
   const edit =
     button(copy.supplement) ?? button(copy.edit) ?? button(copy.completeReview);
@@ -245,13 +245,14 @@ try {
   check(
     document.querySelector('main [role="status"]').textContent ===
       copy.myReviewsLoading &&
-      document.querySelector(".visit-list").getAttribute("aria-busy") ===
-        "true",
+      document
+        .querySelector("[data-ui~='visit-list']")
+        .getAttribute("aria-busy") === "true",
     "A pending own-history request has a localized announced loading state",
   );
   check(
-    document.querySelector(".storage-notice") &&
-      !document.querySelector(".my-reviews-heading button") &&
+    document.querySelector("[data-ui~='storage-notice']") &&
+      !document.querySelector("[data-ui~='my-reviews-heading'] button") &&
       !document.querySelector('[role="dialog"]'),
     "Loading keeps the privacy notice and has no redundant header refresh or overlay",
   );
@@ -260,15 +261,19 @@ try {
   );
   mode = "success";
   check(
-    document.querySelectorAll(".visit").length === 1 &&
-      document.querySelector(".evidence-details a").getAttribute("href") ===
+    document.querySelectorAll("[data-ui~='visit']").length === 1 &&
+      document
+        .querySelector("[data-ui~='evidence-details'] a")
+        .getAttribute("href") ===
         "/api/evidence/" + id + "?locale=sq",
     "Loaded own reviews retain private evidence download links in the active locale",
   );
   items = [{ ...visit(), review: "" }];
   await reload();
   check(
-    document.querySelector(".submitted-review").textContent.includes("4 / 5") &&
+    document
+      .querySelector("[data-ui~='submitted-review']")
+      .textContent.includes("4 / 5") &&
       button(copy.supplement) &&
       !button(copy.completeReview) &&
       !document.body.textContent.includes(copy.oldReview),
@@ -285,25 +290,26 @@ try {
     "Failed refresh keeps a localized error and hides raw private/provider details",
   );
   check(
-    document.querySelectorAll(".visit").length === 1 &&
-      !document.querySelector(".my-reviews-retry").disabled,
+    document.querySelectorAll("[data-ui~='visit']").length === 1 &&
+      !document.querySelector("[data-ui~='my-reviews-retry']").disabled,
     "A transient refresh failure retains the prior history and offers retry",
   );
   mode = "empty";
   await reload();
   check(
-    document.querySelector(".empty h3").textContent === copy.noReviews &&
-      !document.querySelector('[role="alert"]'),
+    [...document.querySelectorAll("main h3")].some(
+      (heading) => heading.textContent === copy.noReviews,
+    ) && !document.querySelector('[role="alert"]'),
     "A successful empty history has a coherent localized empty state",
   );
   mode = "expired";
   await reload();
-  const signIn = document.querySelector(".login-prompt a");
+  const signIn = document.querySelector("[data-ui~='login-prompt'] a");
   check(
     signIn?.getAttribute("href") ===
       "/sq/hyr?weiter=" +
         encodeURIComponent("/sq/vleresimet?einreichung=" + id) &&
-      !document.querySelector(".visit"),
+      !document.querySelector("[data-ui~='visit']"),
     "An expired session clears private history and offers existing sign-in with the exact localized page return",
   );
   mode = "success";
@@ -348,7 +354,8 @@ try {
   await click(button(copy.close));
   check(
     !document.querySelector('[role="dialog"]') &&
-      document.querySelector(".visit-status").textContent === "Në shqyrtim",
+      document.querySelector("[data-ui~='visit-status']").textContent ===
+        "Në shqyrtim",
     "Closing the editor refreshes history on the page and shows the new moderation status",
   );
   await waitForFocus(supplementOpener);
@@ -400,7 +407,7 @@ try {
   check(
     document.querySelector('[name="review"]').value === "" &&
       document
-        .querySelector(".existing-evidence")
+        .querySelector('[data-ui~="review-evidence"]')
         .textContent.includes("fixture.png"),
     "An older approved visit can complete its review while retaining private evidence",
   );
@@ -414,29 +421,29 @@ try {
   mode = "pages";
   await render({ submissionId: null });
   check(
-    document.querySelectorAll(".visit").length === 1 &&
+    document.querySelectorAll("[data-ui~='visit']").length === 1 &&
       button(copy.moreReviews),
     "The own page retains the first history page and an accessible pagination action",
   );
   await click(button(copy.moreReviews));
   check(
     requests.at(-1).url === "/api/visits?cursor=fixture-next" &&
-      document.querySelectorAll(".visit").length === 2 &&
+      document.querySelectorAll("[data-ui~='visit']").length === 2 &&
       !button(copy.moreReviews),
     "Pagination appends older owned submissions using only the server cursor",
   );
   await reload();
   check(
     requests.at(-1).url === "/api/visits" &&
-      document.querySelectorAll(".visit").length === 1,
+      document.querySelectorAll("[data-ui~='visit']").length === 1,
     "Refresh starts the history at the first page instead of duplicating older items",
   );
   mode = "success";
   await reload();
-  const ownArticle = [...document.querySelectorAll(".visit")].find((article) =>
-    article.textContent.includes("Publikuar"),
+  const ownArticle = [...document.querySelectorAll("[data-ui~='visit']")].find(
+    (article) => article.textContent.includes("Publikuar"),
   );
-  const deleteOpener = ownArticle.querySelector(".delete-button");
+  const deleteOpener = ownArticle.querySelector("[data-ui~='delete-button']");
   await click(deleteOpener);
   check(
     document
@@ -470,7 +477,7 @@ try {
     document.activeElement === deleteOpener,
     "Keeping the review restores focus to its delete action",
   );
-  await click(ownArticle.querySelector(".delete-button"));
+  await click(ownArticle.querySelector("[data-ui~='delete-button']"));
   mutationMode = "error";
   await click(
     document.querySelector(
@@ -480,7 +487,7 @@ try {
   check(
     document.querySelector('[role="alertdialog"] [role="alert"]')
       .textContent === copy.reviewConflict &&
-      document.querySelectorAll(".visit").length === 2,
+      document.querySelectorAll("[data-ui~='visit']").length === 2,
     "Failed deletion keeps its owned history and gives a localized retry",
   );
   mutationMode = "pending";
@@ -492,7 +499,7 @@ try {
   check(
     [
       ...document.querySelectorAll(
-        '[role="alertdialog"] button,.visit-actions button',
+        "[role=\"alertdialog\"] button,[data-ui~='visit-actions'] button",
       ),
     ].every((control) => control.disabled),
     "An active deletion prevents duplicate actions on both confirmation and page",
@@ -514,7 +521,7 @@ try {
   mutationMode = "success";
   check(
     !document.querySelector('[role="alertdialog"]') &&
-      document.querySelectorAll(".visit").length === 1 &&
+      document.querySelectorAll("[data-ui~='visit']").length === 1 &&
       requests.filter((request) => request.method === "DELETE").at(-1).body ===
         JSON.stringify({ id }),
     "Successful deletion refreshes the own page and sends only the chosen submission ID",
@@ -537,7 +544,7 @@ try {
     ),
   );
   await act(async () => new Promise((resolve) => setTimeout(resolve, 0)));
-  const navigation = document.querySelector("main .visit-top a");
+  const navigation = document.querySelector("main [data-ui~='visit-top'] a");
   navigation.focus();
   window.history.pushState({}, "", "/sq/serviset");
   await act(async () =>
@@ -576,7 +583,7 @@ try {
     ),
   );
   check(
-    document.querySelectorAll(".visit").length === 1 &&
+    document.querySelectorAll("[data-ui~='visit']").length === 1 &&
       document.body.textContent.includes(
         "B private fictional account content.",
       ) &&
@@ -589,8 +596,10 @@ try {
   await render({ signedIn: false });
   check(
     requests.length === beforeGuest &&
-      !document.querySelector(".visit") &&
-      document.querySelector(".login-prompt a").getAttribute("href") ===
+      !document.querySelector("[data-ui~='visit']") &&
+      document
+        .querySelector("[data-ui~='login-prompt'] a")
+        .getAttribute("href") ===
         "/sq/hyr?weiter=" +
           encodeURIComponent("/sq/vleresimet?einreichung=" + id),
     "Signing out exposes only existing sign-in and performs no private history fetch",

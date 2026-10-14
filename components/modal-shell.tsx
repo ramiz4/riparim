@@ -10,6 +10,16 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
+import {
+  appButton,
+  dialogBodyClassName,
+  dialogCloseClassName,
+  dialogDescriptionClassName,
+  dialogFooterClassName,
+  dialogFrameClassName,
+  dialogHeaderClassName,
+  dialogTitleClassName,
+} from "@/lib/presentation";
 
 type Props = Omit<ComponentProps<typeof DialogContent>, "title"> & {
   title?: ReactNode;
@@ -23,7 +33,7 @@ export function ModalBody({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-slot="dialog-body"
-      className={cn("modal-body", className)}
+      className={cn(dialogBodyClassName, className)}
       role="region"
       aria-label={t("common.dialogContent")}
       tabIndex={0}
@@ -44,25 +54,34 @@ export function ModalContent({
   const { t } = useI18n();
   return (
     <DialogContent
-      className={cn("modal app-dialog", className)}
+      className={cn(dialogFrameClassName, className)}
+      closeButtonClassName={dialogCloseClassName}
       showCloseButton={!closeDisabled}
       {...props}
     >
-      <DialogHeader>
+      <DialogHeader className={dialogHeaderClassName}>
         {header ?? (
           <>
-            <DialogTitle>{title}</DialogTitle>
+            <DialogTitle className={dialogTitleClassName}>{title}</DialogTitle>
             {description && (
-              <DialogDescription>{description}</DialogDescription>
+              <DialogDescription className={dialogDescriptionClassName}>
+                {description}
+              </DialogDescription>
             )}
           </>
         )}
       </DialogHeader>
       <ModalBody>{children}</ModalBody>
-      <DialogFooter>
+      <DialogFooter className={dialogFooterClassName}>
         {footer ?? (
           <DialogClose asChild>
-            <button className="outline" disabled={closeDisabled}>
+            <button
+              className={cn(
+                appButton({ variant: "outline" }),
+                "[@media(max-width:720px)]:min-h-[45px] [@media(max-width:720px)]:px-[13px] [@media(max-width:720px)]:text-[13px]",
+              )}
+              disabled={closeDisabled}
+            >
               {t("common.close")}
             </button>
           </DialogClose>

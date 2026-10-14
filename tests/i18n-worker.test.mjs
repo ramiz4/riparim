@@ -274,17 +274,22 @@ await withWorkerRuntime(
       try {
         const doc = profileDom.window.document;
         assert.equal(
-          doc.querySelector(".profile-description").textContent,
+          doc.querySelector("#leistungen > p").textContent,
           display.description,
           "native SSR and API share active display revision",
         );
         assert.deepEqual(
-          [...doc.querySelectorAll(".profile-source-list > li strong")]
+          [...doc.querySelectorAll("#quellen ul > li strong")]
             .slice(0, translatedSource.sources.length)
             .map((el) => el.textContent),
           display.sourceTitles,
         );
-        assert.equal(doc.querySelector(".workshop-translation-notice"), null);
+        assert.equal(
+          doc.querySelector(
+            "main[data-riparim-page='workshop'] > p:first-of-type,article[data-ui~='workshop-card'] > div > p:last-child,article[data-ui~='partner-card'] > p:last-child",
+          ),
+          null,
+        );
       } finally {
         profileDom.window.close();
       }
@@ -315,22 +320,26 @@ await withWorkerRuntime(
       try {
         const doc = liveDom.window.document;
         assert.equal(
-          doc.querySelector(".profile-description").textContent,
+          doc.querySelector("#leistungen > p").textContent,
           liveDescription,
         );
         assert.equal(
-          doc.querySelector(".profile-description").getAttribute("lang"),
+          doc.querySelector("#leistungen > p").getAttribute("lang"),
           "",
         );
-        assert(doc.querySelector(".workshop-translation-notice"));
+        assert(
+          doc.querySelector(
+            "main[data-riparim-page='workshop'] > p:first-of-type,article[data-ui~='workshop-card'] > div > p:last-child,article[data-ui~='partner-card'] > p:last-child",
+          ),
+        );
         assert.equal(
-          doc.querySelector(".profile-description img"),
+          doc.querySelector("#leistungen > p img"),
           null,
           "React escapes original and translated strings",
         );
         assert(
           !doc
-            .querySelector(".profile-description")
+            .querySelector("#leistungen > p")
             .textContent.includes(translatedEntry[locale].description),
         );
       } finally {
@@ -369,7 +378,11 @@ await withWorkerRuntime(
       albanianXDom = new JSDOM(await albanianX.text());
     try {
       assert.deepEqual(
-        [...albanianXDom.window.document.querySelectorAll(".catalogue-card h2")]
+        [
+          ...albanianXDom.window.document.querySelectorAll(
+            "[data-ui~='catalogue-card'] h2",
+          ),
+        ]
           .map((node) => node.textContent)
           .filter((name) =>
             ["Auto servis XONI", "Auto Servis Xhelali"].includes(name),
@@ -390,7 +403,9 @@ await withWorkerRuntime(
         assert.equal(response.status, 200);
         assert.equal(
           dom.window.document
-            .querySelector(".profile-back")
+            .querySelector(
+              "main[data-riparim-page='workshop'] > a:first-of-type",
+            )
             .getAttribute("href"),
           returnTarget,
           "native actual full document response preserves name-search return in " +
@@ -413,7 +428,9 @@ await withWorkerRuntime(
           assert.equal(safeResponse.status, 200);
           assert.equal(
             safeDom.window.document
-              .querySelector(".profile-back")
+              .querySelector(
+                "main[data-riparim-page='workshop'] > a:first-of-type",
+              )
               .getAttribute("href"),
             source.includes("model=private")
               ? returnTarget
@@ -461,7 +478,9 @@ await withWorkerRuntime(
         assert.equal(finder.status, 200);
         assert(
           finderDom.window.document
-            .querySelector('.catalogue-page > .note[role="status"]')
+            .querySelector(
+              "main[data-riparim-page='catalogue'] > p[role='status']",
+            )
             .textContent.includes(
               {
                 de: "Öffne das Profil der Werkstatt",
@@ -623,7 +642,18 @@ await withWorkerRuntime(
         ),
         ownHtml = await own.text();
       assert.equal(own.status, 200);
-      assert.match(ownHtml, /<main[^>]*class="my-reviews-page wrap"/);
+      const ownDom = new JSDOM(ownHtml);
+      try {
+        assert.equal(
+          ownDom.window.document.querySelector("main h1")?.textContent,
+          { de: "Meine Bewertungen", sq: "Vlerësimet e mia", en: "My reviews" }[
+            locale
+          ],
+          "The private review response identifies its localized page independently of styling",
+        );
+      } finally {
+        ownDom.window.close();
+      }
       assert.match(
         ownHtml,
         /<meta[^>]*name="robots"[^>]*content="noindex[^">]*nofollow/,

@@ -218,7 +218,7 @@ try {
           ),
         ),
       );
-      const selector = document.querySelector(".language-switcher select");
+      const selector = document.querySelector("header select");
       assert.equal(dirty(), "false");
       await React.act(async () => {
         selector.focus();
@@ -232,7 +232,11 @@ try {
       assert.deepEqual(JSON.parse(writes[0].init.body), {
         preferredLocale: next,
       });
-      await click(document.querySelector(".workshop-overview-actions button"));
+      await click(
+        document.querySelector(
+          "main[data-riparim-page='workshop'] > header button",
+        ),
+      );
       let textarea = document.querySelector('[role="dialog"] textarea'),
         initial = textarea.value;
       assert.equal(
@@ -268,7 +272,9 @@ try {
         assert.equal(dirty(), "false", "closing unregisters the private draft");
         if (mode === "reopened") {
           await click(
-            document.querySelector(".workshop-overview-actions button"),
+            document.querySelector(
+              "main[data-riparim-page='workshop'] > header button",
+            ),
           );
           textarea = document.querySelector('[role="dialog"] textarea');
           assert.equal(

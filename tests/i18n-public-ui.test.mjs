@@ -283,7 +283,7 @@ try {
     try {
       assert.equal(
         documentDom.window.document
-          .querySelector(".profile-back")
+          .querySelector("main[data-riparim-page='workshop'] > a:first-of-type")
           .getAttribute("href"),
         returnTarget,
         "actual profile document response must include validated name-search return before client hydration",
@@ -306,7 +306,9 @@ try {
       ),
     );
     assert.equal(
-      document.querySelector(".profile-back").getAttribute("href"),
+      document
+        .querySelector("main[data-riparim-page='workshop'] > a:first-of-type")
+        .getAttribute("href"),
       returnTarget,
       "actual fully mounted document caller preserves name query after locale document navigation",
     );
@@ -333,7 +335,7 @@ try {
         );
       try {
         const back = safeDom.window.document
-          .querySelector(".profile-back")
+          .querySelector("main[data-riparim-page='workshop'] > a:first-of-type")
           .getAttribute("href");
         assert.equal(
           back,
@@ -362,7 +364,9 @@ try {
       ),
     );
     assert.equal(
-      document.querySelector(".profile-owner a").getAttribute("href"),
+      document
+        .querySelector("aside a[href*='werkstatt=']")
+        .getAttribute("href"),
       localizeHref(
         "/betriebe/beanspruchen?werkstatt=" + encodeURIComponent(workshop.id),
         locale,
@@ -370,31 +374,35 @@ try {
       "The actual workshop owner link opens the independent claim page in the active locale",
     );
     assert(
-      !document.querySelector(".inline-review"),
+      !document.querySelector("main form"),
       "The profile has no duplicate inline review action",
     );
-    await click(document.querySelector("#bewertungen .text-action"));
+    await click(
+      document.querySelector("#bewertungen [data-ui~='profile-write-review']"),
+    );
     assert(
       document
-        .querySelector(".profile-review-dialog")
+        .querySelector("[data-ui~='profile-review-dialog']")
         .textContent.includes(t("public.writeReview")) &&
         document
-          .querySelector(".profile-review-dialog")
+          .querySelector("[data-ui~='profile-review-dialog']")
           .textContent.includes(t("customer.reviewLogin")) &&
         !document
-          .querySelector(".profile-review-dialog")
+          .querySelector("[data-ui~='profile-review-dialog']")
           .textContent.includes(t("public.reviewHelp")),
       "actual profile caller keeps localized entry and login without a repeated introduction",
     );
     assert(
       document
-        .querySelector(".profile-review-dialog")
+        .querySelector("[data-ui~='profile-review-dialog']")
         .textContent.includes(workshop.name),
       "The workshop stays identifiable beside the profile review fields",
     );
     const loginReturn = new URL(
       new URL(
-        document.querySelector(".profile-review-dialog .login-prompt a").href,
+        document.querySelector(
+          "[data-ui~='profile-review-dialog'] [data-ui~='review-login-prompt'] a",
+        ).href,
       ).searchParams.get("weiter"),
       "https://fixture.test",
     );
@@ -483,12 +491,14 @@ try {
     );
     assert(
       document
-        .querySelector(".catalogue-page > .note")
+        .querySelector("main[data-riparim-page='catalogue'] > p[role='status']")
         .textContent.includes(t("public.reviewEntryHelp")) &&
         new URLSearchParams(window.location.search).get("bewerten") === "1",
       "The actual finder caller explains the new profile entry and retains context through hydration",
     );
-    const nameInput = document.querySelector(".catalogue-name-search input");
+    const nameInput = document.querySelector(
+      "[data-ui~='catalogue-name-search'] input",
+    );
     await React.act(async () => {
       Object.getOwnPropertyDescriptor(
         HTMLInputElement.prototype,
@@ -520,10 +530,10 @@ try {
     );
     assert(
       document
-        .querySelector(".catalogue-page > .note")
+        .querySelector("main[data-riparim-page='catalogue'] > p[role='status']")
         .textContent.includes(t("public.reviewEntryHelp")) &&
-        document.querySelector(".catalogue-name-search input").value ===
-          "Fixture",
+        document.querySelector("[data-ui~='catalogue-name-search'] input")
+          .value === "Fixture",
       "A fresh document entry restores review context and current public search",
     );
     window.history.replaceState({}, "", locale === "de" ? "/" : `/${locale}`);
@@ -543,7 +553,7 @@ try {
     );
     window.history.replaceState({}, "", locale === "de" ? "/" : `/${locale}`);
     const cityChoice = document.querySelectorAll(
-      '.search-box [role="combobox"]',
+      '#suche form [role="combobox"]',
     )[1];
     assert.equal(
       cityChoice.textContent,
@@ -574,7 +584,7 @@ try {
       assert.deepEqual(
         [
           ...cardDom.window.document.querySelectorAll(
-            ".catalogue-card-brands span",
+            "[data-ui~='catalogue-card-services'] + div > span",
           ),
         ].map((node) => node.textContent),
         [
@@ -620,7 +630,9 @@ try {
         `${locale}: 0/1/2 result copy`,
       );
       assert.equal(
-        (catalogue.match(/class="catalogue-card"/g) ?? []).length,
+        new JSDOM(catalogue).window.document.querySelectorAll(
+          "[data-ui~=catalogue-card]",
+        ).length,
         count,
       );
     }
@@ -643,10 +655,10 @@ try {
         );
       try {
         const input = chipDom.window.document.querySelector(
-            ".catalogue-name-search input",
+            "[data-ui~='catalogue-name-search'] input",
           ),
           label = chipDom.window.document.querySelector(
-            ".catalogue-name-search label",
+            "[data-ui~='catalogue-name-search'] label",
           );
         assert.equal(
           input.getAttribute("value"),
@@ -694,7 +706,7 @@ try {
     );
     assert(
       !document.querySelector(
-        ".catalogue-detail-search,.catalogue-private-context",
+        "main [name=vehicle],main [name=model],main [name=year]",
       ),
       "catalogue exposes public filters without a vehicle search",
     );
@@ -784,13 +796,13 @@ try {
       try {
         assert(
           fallbackDom.window.document.querySelector(
-            ".workshop-translation-notice",
+            "main[data-riparim-page='workshop'] > p:first-of-type,article[data-ui~='workshop-card'] > div > p:last-child,article[data-ui~='partner-card'] > p:last-child",
           ),
           "changed live text must visibly explain its original-language fallback",
         );
         assert.notEqual(
           fallbackDom.window.document
-            .querySelector(".profile-description")
+            .querySelector("#leistungen > p")
             .getAttribute("lang"),
           "de",
           "unknown live original cannot be assumed German",
@@ -815,13 +827,15 @@ try {
         try {
           assert.equal(
             knownDom.window.document
-              .querySelector(".profile-description")
+              .querySelector("#leistungen > p")
               .getAttribute("lang"),
             "de",
           );
           assert.equal(
             knownDom.window.document
-              .querySelector(".profile-specialty")
+              .querySelector(
+                "main[data-riparim-page='workshop'] > header h1 + p > span:nth-of-type(2)",
+              )
               .getAttribute("lang"),
             "de",
           );
@@ -836,7 +850,7 @@ try {
         try {
           assert(
             cardFallback.window.document.querySelector(
-              ".workshop-translation-notice",
+              "main[data-riparim-page='workshop'] > p:first-of-type,article[data-ui~='workshop-card'] > div > p:last-child,article[data-ui~='partner-card'] > p:last-child",
             ),
           );
         } finally {
@@ -910,14 +924,14 @@ try {
     try {
       const doc = translatedDom.window.document;
       assert.equal(
-        doc.querySelector(".profile-description").textContent,
+        doc.querySelector("#leistungen > p").textContent,
         alignedDisplay.description,
       );
-      assert.equal(doc.querySelector(".profile-description img"), null);
+      assert.equal(doc.querySelector("#leistungen > p img"), null);
       assert.deepEqual(
-        [...doc.querySelectorAll(".profile-service-group li")].map(
-          (el) => el.textContent,
-        ),
+        [
+          ...doc.querySelectorAll("#leistungen > div[aria-label] > section li"),
+        ].map((el) => el.textContent),
         locale === "de"
           ? ["Elektronische Diagnose", "Bremsenservice", "Weitere Hilfe"]
           : [
@@ -926,24 +940,29 @@ try {
               alignedDisplay.serviceDetails[4],
             ],
       );
-      assert.equal(doc.querySelector(".profile-service-group script"), null);
       assert.equal(
-        doc.querySelector(".profile-source-list strong").textContent,
+        doc.querySelector("#leistungen > div[aria-label] > section script"),
+        null,
+      );
+      assert.equal(
+        doc.querySelector("#quellen ul strong").textContent,
         alignedDisplay.sourceTitles[0],
       );
-      assert.equal(doc.querySelector(".profile-source-list strong b"), null);
+      assert.equal(doc.querySelector("#quellen ul strong b"), null);
       assert.equal(
-        doc.querySelector(".profile-source-list a").getAttribute("href"),
+        doc.querySelector("#quellen ul a").getAttribute("href"),
         workshop.sources[0].url,
       );
       assert(
         doc
-          .querySelector(".profile-sources-content")
+          .querySelector("#quellen > div")
           .textContent.includes(alignedDisplay.phoneNote),
       );
       assert(
         doc
-          .querySelector(".profile-riparim-reviews .review-meta")
+          .querySelector(
+            "[data-ui~='profile-riparim-reviews'] [data-ui~='public-review'] > p:first-of-type",
+          )
           .textContent.includes(
             {
               de: "Bremsen & Fahrwerk",
@@ -954,19 +973,26 @@ try {
       );
       assert(
         doc
-          .querySelector(".profile-riparim-reviews .review-meta")
+          .querySelector(
+            "[data-ui~='profile-riparim-reviews'] [data-ui~='public-review'] > p:first-of-type",
+          )
           .textContent.includes("Original vehicle"),
       );
       assert(
         doc
-          .querySelector(".profile-riparim-reviews")
+          .querySelector("[data-ui~='profile-riparim-reviews']")
           .textContent.includes("Original private-to-approved review"),
       );
       assert.equal(
         doc.querySelector('a[href^="tel:"]').getAttribute("href"),
         "tel:" + workshop.phone,
       );
-      assert.equal(doc.querySelector(".workshop-translation-notice"), null);
+      assert.equal(
+        doc.querySelector(
+          "main[data-riparim-page='workshop'] > p:first-of-type,article[data-ui~='workshop-card'] > div > p:last-child,article[data-ui~='partner-card'] > p:last-child",
+        ),
+        null,
+      );
     } finally {
       translatedDom.window.close();
     }
@@ -1009,13 +1035,16 @@ try {
         ),
       ),
     );
-    await click(document.querySelector(".catalogue-load-error button"));
+    await click(
+      document.querySelector("[data-ui~='catalogue-load-error'] button"),
+    );
     assert(
       refreshedRequests.includes(`/api/workshops?locale=${locale}`),
       "public refresh explicitly requests the current UI locale",
     );
     assert.equal(
-      document.querySelector(".catalogue-card-services span").textContent,
+      document.querySelector("[data-ui~='catalogue-card-services'] span")
+        .textContent,
       cardDisplay.serviceDetails[0],
       "refresh updates display content with canonical directory",
     );
@@ -1039,10 +1068,10 @@ try {
         ),
       ),
     );
-    await click(document.querySelector(".profile-share"));
+    await click(document.querySelector("aside > button"));
     assert(
       document
-        .querySelector('.workshop-page-aside > p[role="status"]')
+        .querySelector('aside > p[role="status"]')
         .textContent.includes(t("public.copyManual")),
       "clipboard failure gets localized fallback",
     );
@@ -1055,7 +1084,7 @@ try {
       },
       configurable: true,
     });
-    await click(document.querySelector(".profile-share"));
+    await click(document.querySelector("aside > button"));
     assert.equal(
       copied,
       "https://riparim.example.test" +
@@ -1064,11 +1093,15 @@ try {
     );
     assert(
       document
-        .querySelector('.workshop-page-aside > p[role="status"]')
+        .querySelector('aside > p[role="status"]')
         .textContent.includes(t("public.profileCopied")),
     );
     delete navigator.clipboard;
-    await click(document.querySelector(".workshop-overview-actions button"));
+    await click(
+      document.querySelector(
+        "main[data-riparim-page='workshop'] > header button",
+      ),
+    );
     const contact = document.querySelector('[role="dialog"]');
     assert(
       contact
@@ -1107,12 +1140,20 @@ try {
       ),
     );
     assert.equal((privacy.match(/<section/g) ?? []).length, 9);
-    assert(
-      privacy.includes("<code>openid</code>") &&
-        privacy.includes("<strong>") &&
-        privacy.includes("mailto:") &&
-        !privacy.match(/\{(?:contact|publishedFields|openid|google)\}/),
-    );
+    const privacyDom = new JSDOM(privacy);
+    try {
+      assert(
+        [...privacyDom.window.document.querySelectorAll("code")].some(
+          (node) => node.textContent === "openid",
+        ) &&
+          privacyDom.window.document.querySelector("strong") &&
+          privacyDom.window.document.querySelector("a[href^='mailto:']") &&
+          !privacy.match(/\{(?:contact|publishedFields|openid|google)\}/),
+        "Privacy renders rich consent scopes, published fields and contact links without template placeholders",
+      );
+    } finally {
+      privacyDom.window.close();
+    }
     assert(privacy.includes("Supabase"));
     assertPrivacyOutput(privacy, locale, "supabase");
     const alternatePrivacy = renderToStaticMarkup(
@@ -1191,11 +1232,13 @@ try {
     );
     await React.act(async () =>
       gallery
-        .querySelector(".profile-gallery-stage img")
+        .querySelector("[data-ui~='profile-photo-viewer'] img:not([alt=''])")
         .dispatchEvent(new Event("error")),
     );
     assert.equal(
-      gallery.querySelector(".profile-photo-error").textContent,
+      gallery.querySelector(
+        "[data-ui~='profile-photo-viewer'] p[role='status']",
+      ).textContent,
       `${t("public.photoFailed")} ${t("public.chooseAnotherPhoto")}`,
       "complete multiple-photo error paragraph separates its sentences",
     );
@@ -1237,11 +1280,13 @@ try {
       const errorDialog = document.querySelector('[role="dialog"]');
       await React.act(async () =>
         errorDialog
-          .querySelector(".profile-gallery-stage img")
+          .querySelector("[data-ui~='profile-photo-viewer'] img:not([alt=''])")
           .dispatchEvent(new Event("error")),
       );
       assert.equal(
-        errorDialog.querySelector(".profile-photo-error").textContent,
+        errorDialog.querySelector(
+          "[data-ui~='profile-photo-viewer'] p[role='status']",
+        ).textContent,
         `${t("public.photoFailed")} ${t(photoCount === 1 ? "public.reopenPhoto" : "public.chooseAnotherPhoto")}`,
         `${locale}: complete error paragraph has an explicit sentence separator for ${photoCount} photos`,
       );
@@ -1359,7 +1404,7 @@ try {
     );
     assert(
       document
-        .querySelector(".public-review-text")
+        .querySelector("[data-ui~='public-review'] > p:nth-of-type(2)")
         .textContent.includes(review.review),
       "Approved runtime reviews load into released profiles",
     );

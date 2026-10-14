@@ -1,4 +1,6 @@
 "use client";
+import { cn } from "@/lib/utils";
+import { pageFrameClassName, contentTitleClassName } from "@/lib/presentation";
 import { DeferredStatus } from "./deferred-status";
 import { useEffect, useState } from "react";
 import { usePageQuery } from "./use-page-query";
@@ -59,8 +61,13 @@ export function DeferredReviews() {
           submissionId={submissionId}
         />
       ) : (
-        <main className="my-reviews-page wrap">
-          <h1>{t("customer.myReviews")}</h1>
+        <main
+          className={cn(
+            pageFrameClassName,
+            "min-h-[calc(100svh_-_180px)] pt-[var(--content-page-padding-top)] pb-[var(--content-page-padding-bottom)] [overflow-wrap:anywhere]",
+          )}
+        >
+          <h1 className={contentTitleClassName}>{t("customer.myReviews")}</h1>
           <DeferredStatus
             error={error}
             pending={pending}

@@ -161,16 +161,23 @@ try {
   await search("prizren");
   await click(option("Prizren"));
   assert.equal(
-    document.querySelectorAll(".searchable-picker-chip").length,
+    document.querySelectorAll(
+      "[data-ui~='picker-control'] > div > span:has(button)",
+    ).length,
     2,
     "Only two selected chips are shown",
   );
   assert.equal(
-    document.querySelector(".searchable-picker-more").textContent,
+    document.querySelector("[data-ui~='picker-control'] > div > button")
+      .textContent,
     "+1 weitere",
     "Additional selections remain visible as a count",
   );
-  await click(document.querySelector(".searchable-picker-chip button"));
+  await click(
+    document.querySelector(
+      "[data-ui~='picker-control'] > div > span:has(button) button",
+    ),
+  );
   assert.deepEqual(
     selection,
     ["Peja", "Prizren"],

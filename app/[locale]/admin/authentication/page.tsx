@@ -1,3 +1,4 @@
+import { appButton } from "@/lib/presentation";
 import { publicReleaseRender } from "@/lib/public-release";
 import { deferredManagementPage } from "@/lib/deferred-page";
 import { I18nMessages } from "@/lib/i18n/client";
@@ -25,11 +26,18 @@ export default async function Page({
   if (!u?.isModerator)
     return (
       <I18nMessages messages={messages}>
-        <main className="access-page">
-          <h1>{t("management.ownerRequired")}</h1>
-          <p>{t("management.authAccessHelp")}</p>
+        <main
+          data-ui="access-page"
+          className="mx-auto my-20 flex max-w-[600px] flex-col gap-[25px] p-[30px]"
+        >
+          <h1 className="text-[32px] leading-[1.2]">
+            {t("management.ownerRequired")}
+          </h1>
+          <p className="text-[#758273] dark:text-muted-foreground">
+            {t("management.authAccessHelp")}
+          </p>
           <LocaleAnchor
-            className="primary"
+            className={appButton()}
             href={chatGPTSignInPath(
               localizeHref("/verwaltung/anmeldung", locale),
             )}

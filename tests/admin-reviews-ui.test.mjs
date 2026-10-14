@@ -1,5 +1,7 @@
+import { compileApplicationCss } from "./helpers/compiled-tailwind.mjs";
+import { cssForDom } from "./helpers/style-fixture.mjs";
 import assert from "node:assert/strict";
-import { mkdir, writeFile, readFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { build } from "esbuild";
 import { JSDOM, VirtualConsole } from "jsdom";
 
@@ -244,7 +246,7 @@ const filter = async (label) => {
 };
 const chooseReason = async (label) => {
   const trigger = document.querySelector(
-    '.moderation-decision [role="combobox"]',
+    "[data-ui~='moderation-decision'] [role=\"combobox\"]",
   );
   await act(async () => {
     trigger.focus();
@@ -271,21 +273,61 @@ const chooseReason = async (label) => {
     );
   });
 };
+function hasNoDuplicateModerationMetric(main) {
+  const title = main.querySelector("[data-ui~='admin-title']"),
+    tools = main.querySelector("[data-ui~='moderation-toolbar']");
+  return Boolean(
+    title &&
+    tools &&
+    main.firstElementChild === title &&
+    title.nextElementSibling === tools &&
+    !main.textContent.includes(getMessages("de").management.newSubmissions),
+  );
+}
 try {
   for (pendingCount of [0, 7]) {
     await remount();
     const main = document.querySelector("main"),
-      title = main.querySelector(".admin-title"),
-      tools = main.querySelector(".moderation-toolbar");
+      title = main.querySelector("[data-ui~='admin-title']"),
+      tools = main.querySelector("[data-ui~='moderation-toolbar']");
     assert.equal(
       title.textContent,
       "Bewertungen prüfen",
       "The title area contains only the retained heading",
     );
     assert.equal(
-      main.querySelector(".moderation-count"),
-      null,
-      "The duplicate submission metric leaves no empty tile",
+      main.querySelectorAll("[data-ui~=moderation-loaded-count]").length,
+      1,
+      "The loaded result count appears exactly once",
+    );
+    assert(
+      hasNoDuplicateModerationMetric(main),
+      "The duplicate submission metric leaves no count or empty tile",
+    );
+    assert.deepEqual(
+      [
+        `${pendingCount} ${getMessages("de").management.newSubmissions}`,
+        "",
+      ].map((content) => {
+        const copy = main.cloneNode(true),
+          tile = document.createElement("div");
+        tile.textContent = content;
+        copy.querySelector("[data-ui~='moderation-toolbar']").before(tile);
+        return hasNoDuplicateModerationMetric(copy);
+      }),
+      [false, false],
+      "Count and empty tiles are rejected without relying on removed CSS classes",
+    );
+    const metricBelowTools = main.cloneNode(true),
+      repeatedMetric = document.createElement("div");
+    repeatedMetric.textContent = `${pendingCount} ${getMessages("de").management.newSubmissions}`;
+    metricBelowTools
+      .querySelector("[data-ui~='moderation-toolbar']")
+      .after(repeatedMetric);
+    assert.equal(
+      hasNoDuplicateModerationMetric(metricBelowTools),
+      false,
+      "Duplicate metric content is rejected even when heading and toolbar remain adjacent",
     );
     assert.equal(
       tools.querySelector('button:not([role="combobox"])'),
@@ -301,7 +343,7 @@ try {
       "Prüfstatus filtern",
     );
     assert.equal(
-      main.querySelector(".moderation-loaded-count").textContent,
+      main.querySelector("[data-ui~='moderation-loaded-count']").textContent,
       "1 Einreichungen geladen · 1 in dieser Auswahl",
       "The result count below the list remains",
     );
@@ -313,19 +355,19 @@ try {
     );
   }
   const style = document.createElement("style");
-  style.textContent = await readFile(
-    new URL("../app/workshop-pages.css", import.meta.url),
-    "utf8",
-  );
+  style.textContent = cssForDom((await compileApplicationCss()).source, {
+    document,
+  });
   document.head.append(style);
   assert.equal(
-    getComputedStyle(document.querySelector(".admin-title h1")).marginTop,
+    getComputedStyle(document.querySelector("[data-ui~='admin-title'] h1"))
+      .marginTop,
     "0px",
     "The heading does not reserve spacing for its removed eyebrow",
   );
   style.remove();
   assert(
-    !document.querySelector(".notification-panel"),
+    !document.querySelector("[data-ui~='notification-panel']"),
     "Notification diagnostics stay collapsed until explicitly opened",
   );
   assert(
@@ -339,10 +381,7 @@ try {
     getMessages("de").customer.reviewUnavailable,
     "A failed initial load remains announced",
   );
-  assert(
-    !document.querySelector(".empty"),
-    "A failed load is not presented as an empty queue",
-  );
+  assert(!emptyState(), "A failed load is not presented as an empty queue");
   assert(
     button("Einreichungen erneut laden"),
     "A failed initial load offers a focused recovery action",
@@ -350,7 +389,7 @@ try {
   mode = "success";
   await click(button("Einreichungen erneut laden"));
   assert.equal(
-    document.querySelectorAll(".moderation-entry").length,
+    document.querySelectorAll("[data-ui~='moderation-entry']").length,
     1,
     "Recovery loads the same moderation queue",
   );
@@ -365,7 +404,7 @@ try {
     "Moderation still requires a private reason",
   );
   const reason = document.querySelector(
-    '.moderation-decision [role="combobox"]',
+    "[data-ui~='moderation-decision'] [role=\"combobox\"]",
   );
   assert.equal(
     document.querySelector('label[for="' + reason.id + '"]').textContent,
@@ -375,7 +414,7 @@ try {
   assert(!document.querySelector("textarea"), "Free text is initially absent");
   assert(
     document
-      .querySelector(".moderation-review-rating")
+      .querySelector("[data-ui~='moderation-review-rating']")
       .textContent.includes("4 / 5") &&
       !document.body.textContent.includes(
         getMessages("de").management.oldIncompleteReview,
@@ -467,18 +506,20 @@ try {
     "Recovering the list never repeats the successful moderation decision",
   );
   assert.equal(
-    document.querySelectorAll(".moderation-entry").length,
+    document.querySelectorAll("[data-ui~='moderation-entry']").length,
     0,
     "The published item leaves the open queue after recovery",
   );
   await filter("Veröffentlicht");
   assert.equal(
-    document.querySelector(".visit-status").textContent,
+    document.querySelector("[data-ui~='visit-status']").textContent,
     "Veröffentlicht",
     "The real status picker remains operable by keyboard",
   );
   assert.equal(
-    document.querySelector(".moderation-evidence a").getAttribute("href"),
+    document
+      .querySelector("[data-ui~='moderation-evidence'] a")
+      .getAttribute("href"),
     "/api/evidence/" + visit.id + "?locale=de",
     "Private evidence retains its authorized localized download destination",
   );
@@ -491,7 +532,7 @@ try {
   );
   await filter("Ergänzung nötig");
   assert.equal(
-    document.querySelector(".visit-status").textContent,
+    document.querySelector("[data-ui~='visit-status']").textContent,
     "Ergänzung nötig",
   );
   await chooseReason("Anderer Grund");
@@ -519,19 +560,17 @@ try {
   );
   await type(search, "fIxTuRe cAr");
   assert.equal(
-    document.querySelectorAll(".moderation-entry").length,
+    document.querySelectorAll("[data-ui~='moderation-entry']").length,
     1,
     "Search preserves case-insensitive vehicle matching",
   );
   await type(search, "unmatched fictional search");
   assert(
-    document
-      .querySelector(".empty")
-      .textContent.includes("Keine passenden Einreichungen geladen."),
+    emptyState().textContent.includes("Keine passenden Einreichungen geladen."),
     "A search without matches retains its empty state",
   );
   assert.equal(
-    document.querySelector(".moderation-loaded-count").textContent,
+    document.querySelector("[data-ui~='moderation-loaded-count']").textContent,
     "1 Einreichungen geladen · 0 in dieser Auswahl",
   );
   await type(search, "");
@@ -539,12 +578,12 @@ try {
   await remount();
   await click(button("Weitere Einreichungen laden"));
   assert.equal(
-    document.querySelectorAll(".moderation-entry").length,
+    document.querySelectorAll("[data-ui~='moderation-entry']").length,
     1,
     "The next page reaches an older pending review while the supplemented review stays filtered",
   );
   assert.equal(
-    document.querySelector(".moderation-loaded-count").textContent,
+    document.querySelector("[data-ui~='moderation-loaded-count']").textContent,
     "2 Einreichungen geladen · 1 in dieser Auswahl",
     "Pagination appends instead of replacing loaded submissions",
   );
@@ -561,18 +600,15 @@ try {
       .textContent.includes("Einreichungen werden geladen"),
     "Initial loading is announced",
   );
-  assert(
-    !document.querySelector(".empty"),
-    "Loading does not suggest an empty queue",
-  );
+  assert(!emptyState(), "Loading does not suggest an empty queue");
   await act(async () => resolveLoad());
   mode = "success";
   records = [];
   await remount();
   assert(
-    document
-      .querySelector(".empty")
-      .textContent.includes("Für diesen Filter liegt keine Einreichung vor."),
+    emptyState().textContent.includes(
+      "Für diesen Filter liegt keine Einreichung vor.",
+    ),
     "An empty queue keeps the filter-specific guidance",
   );
   records = [visit];
@@ -588,7 +624,7 @@ try {
   await click(button("Ergänzung anfordern"));
   await click(button("Einreichungen erneut laden"));
   assert.equal(
-    document.querySelectorAll(".moderation-entry").length,
+    document.querySelectorAll("[data-ui~='moderation-entry']").length,
     0,
     "Lost access clears previously loaded private reviews",
   );
@@ -603,12 +639,12 @@ try {
   mode = "success";
   await remount();
   await act(async () => {
-    const details = document.querySelector(".notification-details");
+    const details = document.querySelector("[data-ui~='notification-details']");
     details.open = true;
     details.dispatchEvent(new Event("toggle"));
   });
   assert(
-    document.querySelector(".notification-panel"),
+    document.querySelector("[data-ui~='notification-panel']"),
     "The explicit diagnostics disclosure exposes manual retry controls",
   );
   assert(
@@ -631,5 +667,14 @@ function fixtureMessages(element) {
       messages: getMessages("de", ["common", "customer", "management"]),
     },
     element,
+  );
+}
+
+function emptyState() {
+  return (
+    [...document.querySelectorAll("main h2")].find(
+      (heading) =>
+        heading.textContent === getMessages("de").management.noSubmissions,
+    )?.parentElement ?? null
   );
 }

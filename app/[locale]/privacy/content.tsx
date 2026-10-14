@@ -34,18 +34,22 @@ export function PrivacyContent({
   authProvider?: "supabase" | "pocketbase";
 }) {
   const contact = (
-    <LocaleAnchor href={`mailto:${privacyContactAddress}`}>
+    <LocaleAnchor
+      className="text-[var(--theme-accent)] underline underline-offset-[3px] [overflow-wrap:anywhere]"
+      href={`mailto:${privacyContactAddress}`}
+    >
       {privacyContactAddress}
     </LocaleAnchor>
   );
   const slots = {
     contact,
-    openid: <code>openid</code>,
-    email: <code>email</code>,
-    profile: <code>profile</code>,
+    openid: <code className="text-[0.95em]">openid</code>,
+    email: <code className="text-[0.95em]">email</code>,
+    profile: <code className="text-[0.95em]">profile</code>,
     publishedFields: <strong>{text.reviewsPublicFields}</strong>,
     google: (
       <LocaleAnchor
+        className="text-[var(--theme-accent)] underline underline-offset-[3px] [overflow-wrap:anywhere]"
         href="https://policies.google.com/privacy"
         target="_blank"
         rel="noopener noreferrer"
@@ -55,6 +59,7 @@ export function PrivacyContent({
     ),
     authProvider: (
       <LocaleAnchor
+        className="text-[var(--theme-accent)] underline underline-offset-[3px] [overflow-wrap:anywhere]"
         href={
           authProvider === "pocketbase"
             ? "https://pocketbase.io/docs/authentication/"
@@ -68,15 +73,29 @@ export function PrivacyContent({
     ),
   };
   return (
-    <main className="privacy-page">
-      <h1>{text.title}</h1>
-      <p className="privacy-date">{text.date}</p>
+    <main
+      className="mx-auto mt-[42px] mb-[72px] w-[min(760px,calc(100%_-_40px))] text-[16px] leading-[1.75] at-most-720:mt-7"
+      data-ui="privacy-page"
+    >
+      <h1 className="mb-3 text-[clamp(30px,5vw,42px)] leading-[1.2] tracking-[-0.8px]">
+        {text.title}
+      </h1>
+      <p className="mb-6 text-[14px] text-muted-foreground">{text.date}</p>
       <p>{rich(text.contact, slots)}</p>
       {sections.map(([name, count]) => (
-        <section key={name} aria-labelledby={`privacy-${name}`}>
-          <h2 id={`privacy-${name}`}>{text[`${name}Heading`]}</h2>
+        <section
+          className="mt-[34px]"
+          key={name}
+          aria-labelledby={`privacy-${name}`}
+        >
+          <h2
+            className="mb-3.5 text-[22px] leading-[1.35] at-most-720:text-[20px]"
+            id={`privacy-${name}`}
+          >
+            {text[`${name}Heading`]}
+          </h2>
           {Array.from({ length: count }, (_, i) => (
-            <p key={i}>
+            <p className={i > 0 ? "mt-3.5" : undefined} key={i}>
               {rich(
                 text[`${name}${i + 1}` as keyof PrivacyMessageCatalog],
                 slots,

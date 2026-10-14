@@ -1,6 +1,8 @@
 "use client";
 import { displayComparator } from "@/lib/i18n/collation";
 import { SearchablePicker } from "@/components/searchable-picker";
+import { pickerVariants, type PickerPresentation } from "./picker-styles";
+import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n/client";
 import {
   canonicalValues,
@@ -25,6 +27,8 @@ export function Picker({
   sortLabels = false,
   disabled = false,
   disabledValues = [],
+  presentation = "plain",
+  className,
 }: {
   value: string;
   onChange: (v: string) => void;
@@ -36,6 +40,8 @@ export function Picker({
   sortLabels?: boolean;
   disabled?: boolean;
   disabledValues?: string[];
+  presentation?: PickerPresentation;
+  className?: string;
 }) {
   const { locale } = useI18n();
   const labelFor = (v: string) =>
@@ -65,11 +71,17 @@ export function Picker({
         )}
         disabled={disabled}
         disabledValues={disabledValues}
+        presentation={presentation}
+        className={className}
       />
     );
   return (
     <Select value={value} onValueChange={onChange} disabled={disabled}>
-      <SelectTrigger id={id} className="picker" aria-label={label}>
+      <SelectTrigger
+        id={id}
+        className={cn(pickerVariants({ presentation }), className)}
+        aria-label={label}
+      >
         <SelectValue>{labelFor(value)}</SelectValue>
       </SelectTrigger>
       <SelectContent position="popper">

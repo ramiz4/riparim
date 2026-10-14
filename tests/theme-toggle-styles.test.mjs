@@ -1,32 +1,27 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
-import { createRequire } from "node:module";
+import { mkdir } from "node:fs/promises";
+import { build } from "esbuild";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import { JSDOM } from "jsdom";
-
-const require = createRequire(import.meta.url);
-// Use the same minifier supplied by the project's locked Vite dependency.
-const { transform } = createRequire(require.resolve("vite/package.json"))(
-  "lightningcss",
+import { compileApplicationCss } from "./helpers/compiled-tailwind.mjs";
+import { cssForDom } from "./helpers/style-fixture.mjs";
+const output = ".test-runtime/theme-toggle-styles";
+await mkdir(output, { recursive: true });
+await build({
+  entryPoints: ["components/theme-toggle.tsx"],
+  outfile: output + "/toggle.mjs",
+  bundle: true,
+  format: "esm",
+  platform: "node",
+  packages: "external",
+  jsx: "automatic",
+});
+const { ThemeToggle } = await import(
+  new URL("../" + output + "/toggle.mjs", import.meta.url)
 );
-const css = await readFile(
-  process.argv[2] ?? new URL("../app/theme.css", import.meta.url),
-  "utf8",
-);
-const start = css.indexOf(".theme-control"),
-  end = css.search(/\.footer\s*>\s*a/);
-assert(start >= 0 && end > start, "the shared toggle styles are present");
-const theme = css.slice(start, end);
-const primitive = await readFile(
-  new URL("../app/form-controls.css", import.meta.url),
-  "utf8",
-);
-const source = "*{box-sizing:border-box}" + primitive + theme;
-const minified = transform({
-  filename: "theme.css",
-  code: Buffer.from(source),
-  minify: true,
-}).code.toString();
-
+const { source, production } = await compileApplicationCss();
+const markup = renderToStaticMarkup(createElement(ThemeToggle));
 function offset(style, width) {
   const translate = style.translate.startsWith("calc(")
     ? width - 2
@@ -36,10 +31,9 @@ function offset(style, width) {
   );
   return translate + transform;
 }
-
-for (const [variant, styles] of [
+for (const [variant, css] of [
   ["source", source],
-  ["production", minified],
+  ["production", production],
 ]) {
   for (const [dark, checked, mounted] of [
     [false, false, true],
@@ -47,25 +41,36 @@ for (const [variant, styles] of [
     [true, false, false],
     [false, false, false],
   ]) {
-    const state = checked ? "checked" : "unchecked";
     const dom = new JSDOM(
-      `<html class="${dark ? "dark" : ""}"><head><style>${styles}</style></head><body><div class="theme-control" data-mounted="${mounted}"><span class="theme-switch-shell"><button class="theme-switch" data-slot="switch" data-state="${state}"><span data-slot="switch-thumb" data-state="${state}"></span></button><span class="theme-switch-glyph"></span></span></div></body></html>`,
+      `<html class="${dark ? "dark" : ""}"><head><style></style></head><body>${markup}</body></html>`,
     );
     try {
-      const style = (selector) =>
-        dom.window.getComputedStyle(
-          dom.window.document.querySelector(selector),
-        );
-      const track = style(".theme-switch"),
-        thumb = style("[data-slot=switch-thumb]"),
-        glyph = style(".theme-switch-glyph");
+      const document = dom.window.document;
+      const control = document.querySelector("[data-mounted]");
+      const trackNode = document.querySelector("[data-slot=switch]");
+      const thumbNode = document.querySelector("[data-slot=switch-thumb]");
+      const glyphNode =
+        document.querySelector("[data-slot=theme-glyph]") ??
+        control.querySelector('span[aria-hidden="true"]');
+      assert(glyphNode, "The actual component renders its decorative glyph");
+      control.dataset.mounted = String(mounted);
+      trackNode.dataset.state = thumbNode.dataset.state = checked
+        ? "checked"
+        : "unchecked";
+      document.querySelector("style").textContent = cssForDom(css, {
+        dark,
+        document,
+      });
+      const track = dom.window.getComputedStyle(trackNode),
+        thumb = dom.window.getComputedStyle(thumbNode),
+        glyph = dom.window.getComputedStyle(glyphNode);
       const inset =
-        parseFloat(track.borderLeftWidth) + parseFloat(track.paddingLeft);
-      const thumbWidth = parseFloat(thumb.width),
+          parseFloat(track.borderLeftWidth) + parseFloat(track.paddingLeft),
+        thumbWidth = parseFloat(thumb.width),
         trackWidth = parseFloat(track.width);
-      const thumbLeft = inset + offset(thumb, thumbWidth);
-      const glyphLeft =
-        parseFloat(glyph.left) + offset(glyph, parseFloat(glyph.width));
+      const thumbLeft = inset + offset(thumb, thumbWidth),
+        glyphLeft =
+          parseFloat(glyph.left) + offset(glyph, parseFloat(glyph.width));
       const context = `${variant}: dark=${dark}, checked=${checked}, mounted=${mounted}`;
       assert(
         thumbLeft >= inset && thumbLeft + thumbWidth <= trackWidth - inset,
@@ -76,11 +81,20 @@ for (const [variant, styles] of [
         glyphLeft + parseFloat(glyph.width) / 2,
         `${context}: icon remains centered on the thumb`,
       );
+      assert(
+        !(
+          thumb.translate &&
+          thumb.translate !== "none" &&
+          thumb.transform &&
+          thumb.transform !== "none"
+        ),
+        `${context}: movement uses only one CSS property`,
+      );
     } finally {
       dom.window.close();
     }
   }
 }
 console.log(
-  "Theme toggle styles: source and production keep the thumb contained and icon centered in both themes and before hydration",
+  "Theme toggle: actual component and compiled source/production keep the thumb contained and glyph centered for light/dark pre- and post-hydration attributes",
 );

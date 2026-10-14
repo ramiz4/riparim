@@ -1,5 +1,7 @@
+import { compileApplicationCss } from "./helpers/compiled-tailwind.mjs";
+import { cssForDom } from "./helpers/style-fixture.mjs";
 import assert from "node:assert/strict";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { JSDOM, VirtualConsole } from "jsdom";
 
@@ -48,47 +50,10 @@ globalThis.ResizeObserver = class {
 
 const require = createRequire(new URL("../package.json", import.meta.url));
 const { build } = require("esbuild");
-const { transform } = createRequire(require.resolve("vite/package.json"))(
-  "lightningcss",
-);
-const css = (
-  await Promise.all(
-    [
-      "globals.css",
-      "ui-refresh.css",
-      "theme.css",
-      "[locale]/admin/users/users.css",
-    ].map((file) =>
-      readFile(new URL("../app/" + file, import.meta.url), "utf8"),
-    ),
-  )
-)
-  .join("\n")
-  .replace(/^@(?:import|custom-variant).*;$/gm, "")
-  .replace(/@theme\s+inline\s*\{[^}]*\}/g, "");
-const productionCss = transform({
-  filename: "users.css",
-  code: Buffer.from(css),
-  minify: true,
-})
-  .code.toString()
-  .replace(/[^{}]*:is\(\)\{[^}]*\}/g, "");
-// jsdom needs custom properties resolved in border shorthands; browsers do this natively.
+const { source: css, production: productionCss } =
+  await compileApplicationCss();
 function resolveTokens(styles, dark) {
-  const tokens = {};
-  for (const [, selector, declarations] of css.matchAll(
-    /(:root|html\.dark)\s*\{([^}]+)\}/g,
-  )) {
-    if (selector === "html.dark" && !dark) continue;
-    for (const [, name, value] of declarations.matchAll(
-      /(--[\w-]+):\s*([^;]+)/g,
-    ))
-      tokens[name] = value.trim();
-  }
-  return styles.replace(
-    /var\((--[\w-]+)\)/g,
-    (match, name) => tokens[name] ?? match,
-  );
+  return cssForDom(styles, { dark, document });
 }
 const styleNode = document.createElement("style");
 document.head.append(styleNode);
@@ -259,6 +224,37 @@ const remount = async () => {
   root = createRoot(document.getElementById("root"));
   await mount();
 };
+function hasConciseTitle(scope) {
+  const title = scope.querySelector("[data-ui~='admin-title']"),
+    heading = title?.querySelector("h1"),
+    action = title?.querySelector("button"),
+    messages = getMessages("de").management;
+  return Boolean(
+    heading &&
+    action &&
+    title.children.length === 2 &&
+    title.firstElementChild === heading.parentElement &&
+    heading.parentElement.children.length === 1 &&
+    heading.parentElement.textContent.trim() === messages.manageUsers &&
+    heading.textContent.trim() === messages.manageUsers &&
+    title.lastElementChild === action &&
+    action.textContent.trim() === messages.createUser &&
+    title.textContent.replace(/\s/g, "") ===
+      (messages.manageUsers + messages.createUser).replace(/\s/g, ""),
+  );
+}
+function hasPaginationWithoutProtectionNote(scope) {
+  const main = scope.matches?.("main") ? scope : scope.querySelector("main"),
+    pagination = main?.querySelector('nav[aria-label="Benutzerseiten"]'),
+    normalize = (text) => text.replace(/\s+/g, " ").trim();
+  return Boolean(
+    pagination &&
+    pagination === main.lastElementChild &&
+    !normalize(main.textContent).includes(
+      normalize(getMessages("de").management.userProtectionHelp),
+    ),
+  );
+}
 try {
   await mount();
   check(
@@ -266,34 +262,59 @@ try {
     "The user management title remains visible",
   );
   check(
-    !document.querySelector(".admin-title .eyebrow") &&
-      !document.querySelector(".admin-title p"),
+    hasConciseTitle(document),
     "The title has no redundant eyebrow or subtitle",
   );
   check(
-    document.querySelector(".admin-title button").textContent ===
+    document.querySelector("[data-ui~='admin-title'] button").textContent ===
       "Benutzer anlegen",
     "The account creation action remains visible",
   );
   check(
     document
-      .querySelector(".users-toolbar input")
+      .querySelector("[data-ui~='users-toolbar'] input")
       .getAttribute("aria-label") === "Benutzer auf dieser Seite durchsuchen" &&
-      !document.querySelector(".users-toolbar button"),
+      !document.querySelector("[data-ui~='users-toolbar'] button"),
     "The toolbar retains its labelled search without a manual refresh action",
   );
   check(
     document.querySelector("table").getAttribute("aria-label") ===
       "Benutzerkonten" &&
-      document.querySelector(".users-pagination").getAttribute("aria-label") ===
-        "Benutzerseiten",
+      document
+        .querySelector("[data-ui~='users-pagination']")
+        .getAttribute("aria-label") === "Benutzerseiten",
     "The labelled account table and pagination remain visible",
   );
   check(
-    !document.querySelector(".admin-users-page .admin-note") &&
-      document.querySelector(".users-pagination") ===
-        document.querySelector("main").lastElementChild,
+    hasPaginationWithoutProtectionNote(document),
     "Pagination ends the account list without the removed protection note",
+  );
+  const redundantTitle = document.querySelector("main").cloneNode(true),
+    eyebrow = document.createElement("span");
+  eyebrow.textContent = "Redundant account management label";
+  redundantTitle.querySelector("h1").before(eyebrow);
+  const redundantNote = document.querySelector("main").cloneNode(true),
+    protectionNote = document.createElement("p");
+  protectionNote.textContent = getMessages("de").management.userProtectionHelp;
+  redundantNote
+    .querySelector("[data-ui~='users-pagination']")
+    .before(protectionNote);
+  assert.deepEqual(
+    [
+      hasConciseTitle(redundantTitle),
+      hasPaginationWithoutProtectionNote(redundantNote),
+    ],
+    [false, false],
+    "Redundant title and protection-note content fail even without legacy CSS classes",
+  );
+  const contentAfterPagination = document.querySelector("main").cloneNode(true),
+    trailingContent = document.createElement("p");
+  trailingContent.textContent = "Content after pagination";
+  contentAfterPagination.append(trailingContent);
+  assert.equal(
+    hasPaginationWithoutProtectionNote(contentAfterPagination),
+    false,
+    "Pagination must remain the last element independently of note content",
   );
   for (const [label, name] of [
     ["Fixture Member bearbeiten", "pencil"],
@@ -332,7 +353,7 @@ try {
       document.documentElement.classList.toggle("dark", dark);
       styleNode.textContent = resolveTokens(styles, dark);
       const get = (node) => getComputedStyle(node),
-        table = document.querySelector(".users-table");
+        table = document.querySelector("[data-ui~='users-table']");
       check(
         get(table).borderTopColor === color,
         variant +
@@ -345,7 +366,9 @@ try {
           get(row).borderBottomColor === color,
           variant + ": header and account rows use the same subtle separator",
         );
-      for (const control of table.querySelectorAll(".users-actions button")) {
+      for (const control of table.querySelectorAll(
+        "[data-ui~='users-actions'] button",
+      )) {
         const styles = get(control);
         check(
           styles.display === "inline-flex" &&
@@ -365,37 +388,40 @@ try {
     "Initial loading announces progress before displaying account rows",
   );
   check(
-    document.querySelector(".admin-title button").disabled &&
-      document.querySelector(".users-search input").disabled,
+    document.querySelector("[data-ui~='admin-title'] button").disabled &&
+      document.querySelector("[data-ui~='users-search'] input").disabled,
     "Initial loading disables creation and search until configuration is known",
   );
   await act(async () => pending.resolve(pending.respond()));
   pending = null;
   mode = "success";
-  await type(document.querySelector(".users-search input"), "Inactive Member");
+  await type(
+    document.querySelector("[data-ui~='users-search'] input"),
+    "Inactive Member",
+  );
   check(
     document.querySelectorAll("tbody tr").length === 1 &&
       document
-        .querySelector(".users-pagination")
+        .querySelector("[data-ui~='users-pagination']")
         .textContent.includes("1 Treffer"),
     "Search continues to filter account rows and report matching entries",
   );
   await type(
-    document.querySelector(".users-search input"),
+    document.querySelector("[data-ui~='users-search'] input"),
     "No matching fixture",
   );
   check(
-    document.querySelector(".users-empty h2").textContent ===
+    document.querySelector("[data-ui~='users-empty'] h2").textContent ===
       "Keine passenden Benutzer auf dieser Seite." &&
-      !document.querySelector(".users-empty button"),
+      !document.querySelector("[data-ui~='users-empty'] button"),
     "An unmatched search retains the labelled empty result without a redundant create action",
   );
-  await type(document.querySelector(".users-search input"), "");
+  await type(document.querySelector("[data-ui~='users-search'] input"), "");
   mode = "pending";
   await click(button("Fixture Member deaktivieren"));
   icon(button("Fixture Member deaktivieren"), "loader-circle");
   check(
-    [...document.querySelectorAll(".users-actions button")].every(
+    [...document.querySelectorAll("[data-ui~='users-actions'] button")].every(
       (control) => control.disabled,
     ),
     "An account status mutation disables every conflicting action while retaining icons and labels",
@@ -418,9 +444,10 @@ try {
   );
   await click(button("Current Admin bearbeiten"));
   check(
-    document.querySelector(".users-form input[type=email]").disabled &&
+    document.querySelector("[data-ui~='users-form'] input[type=email]")
+      .disabled &&
       document
-        .querySelector(".users-form")
+        .querySelector("[data-ui~='users-form']")
         .textContent.includes("geschützten Verwaltungszugang"),
     "Editing a protected account still disables its email and explains the restricted fields",
   );
@@ -442,22 +469,21 @@ try {
   check(
     document.querySelector("[role=alert]").textContent ===
       getMessages("de").management.users_unavailable &&
-      !document.querySelector(".users-empty"),
+      !document.querySelector("[data-ui~='users-empty']"),
     "Failed initial loading displays the server error without claiming an empty account list",
   );
   mode = "success";
   users = [];
   await remount();
   check(
-    document.querySelector(".users-empty h2").textContent ===
+    document.querySelector("[data-ui~='users-empty'] h2").textContent ===
       "Noch keine Benutzer auf dieser Seite." &&
-      document.querySelector(".users-empty button").textContent ===
+      document.querySelector("[data-ui~='users-empty'] button").textContent ===
         "Benutzer anlegen",
     "An empty account list retains its account creation action and explanatory state",
   );
   check(
-    document.querySelector(".users-pagination") &&
-      !document.querySelector(".admin-note"),
+    hasPaginationWithoutProtectionNote(document),
     "The empty list still retains pagination without the removed note",
   );
   configured = false;
@@ -465,13 +491,14 @@ try {
   check(
     document.querySelector("#users-setup-title").textContent ===
       "Serverkonfiguration fehlt" &&
-      document.querySelector(".users-setup-note a").getAttribute("href") ===
-        "/verwaltung/anmeldung",
+      document
+        .querySelector("[data-ui~='users-setup-note'] a")
+        .getAttribute("href") === "/verwaltung/anmeldung",
     "Missing configuration keeps its accessible setup guidance",
   );
   check(
-    document.querySelector(".admin-title button").disabled &&
-      document.querySelector(".users-search input").disabled &&
+    document.querySelector("[data-ui~='admin-title'] button").disabled &&
+      document.querySelector("[data-ui~='users-search'] input").disabled &&
       !document.querySelector("table"),
     "Unconfigured management exposes no enabled account actions",
   );

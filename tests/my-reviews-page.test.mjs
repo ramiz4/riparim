@@ -166,7 +166,9 @@ try {
           "Direct guest page has a regular document frame",
         );
         assert.equal(
-          document.querySelector(".login-prompt a").getAttribute("href"),
+          document
+            .querySelector("[data-ui~='login-prompt'] a")
+            .getAttribute("href"),
           localizeHref("/anmelden?weiter=", locale) +
             encodeURIComponent(
               localizeHref("/bewertungen", locale) +
@@ -175,7 +177,9 @@ try {
           "Logged-out direct calls preserve only their localized validated page destination through sign-in",
         );
         assert(
-          !document.querySelector(".visit, .evidence-details"),
+          !document.querySelector(
+            "[data-ui~='visit'], [data-ui~='evidence-details']",
+          ),
           "Guests never render private reviews or evidence",
         );
         assert(

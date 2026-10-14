@@ -263,13 +263,17 @@ try {
       "The current localized subtitle remains",
     );
     assert(
-      !document.querySelector("main .eyebrow"),
+      document.querySelector("main h1").parentElement.firstElementChild
+        .tagName === "H1" &&
+        document.querySelector("main h1").parentElement.children.length === 2,
       "The redundant account eyebrow stays absent in every locale",
     );
-    const instructions = document.querySelector("section.setup-instructions"),
+    const instructions = document.querySelector(
+        "section[data-ui~='setup-instructions']",
+      ),
       initialText = visibleText(instructions);
     assert.deepEqual(
-      [...instructions.querySelectorAll(".setup-steps>li>h3")].map(
+      [...instructions.querySelectorAll("[data-ui~='setup-steps']>li>h3")].map(
         (node) => node.textContent,
       ),
       screen.headings,
@@ -431,10 +435,9 @@ try {
       "Required fields keep current accessible labels",
     );
     assert.deepEqual(
-      [...form().querySelectorAll(".auth-preview-links a")].map((node) => [
-        node.textContent,
-        node.getAttribute("href"),
-      ]),
+      [...form().querySelectorAll("[data-ui~='auth-preview-links'] a")].map(
+        (node) => [node.textContent, node.getAttribute("href")],
+      ),
       [
         [copy.previewLogin, localizeHref("/anmelden", locale)],
         [copy.previewRegistration, localizeHref("/registrieren", locale)],
@@ -488,7 +491,7 @@ try {
           'input,textarea,[role="checkbox"],[role="switch"]',
         ),
       ].every((control) => control.disabled) &&
-        document.querySelector(".language-switcher select").disabled,
+        document.querySelector("header select").disabled,
       "The current busy guard freezes payload fields and language navigation",
     );
     const before = requests.length;
@@ -529,9 +532,9 @@ try {
     await remount();
     assert(
       submitButton().disabled &&
-        document.querySelector('.admin-loading[role="status"]').textContent ===
-          copy.configLoading &&
-        form().closest(".auth-setup-layout").hidden,
+        document.querySelector("[data-ui~='admin-loading'][role=\"status\"]")
+          .textContent === copy.configLoading &&
+        form().closest("[data-ui~='auth-setup-layout']").hidden,
       "Shared loading indicator announces configuration loading while the form stays hidden",
     );
     assert(
@@ -591,7 +594,7 @@ try {
     );
     assert(
       !document
-        .querySelector("section.setup-instructions")
+        .querySelector("section[data-ui~='setup-instructions']")
         .textContent.includes("Supabase"),
       "Help matches the chosen provider",
     );

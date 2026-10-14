@@ -100,7 +100,9 @@ try {
       document.activeElement,
       "Adding an address focuses its input",
     );
-    await click(document.querySelectorAll(".workshop-email-row button")[2]);
+    await click(
+      document.querySelectorAll("[data-ui~='workshop-email-row'] button")[2],
+    );
     assert.equal(entries.length, 2);
     assert.equal(
       document.activeElement,
@@ -112,7 +114,9 @@ try {
     assert.equal(entries.length, 10);
     assert.equal(document.querySelector('input[type="email"]').maxLength, 254);
     while (entries.length)
-      await click(document.querySelector(".workshop-email-row button"));
+      await click(
+        document.querySelector("[data-ui~='workshop-email-row'] button"),
+      );
     assert.equal(document.activeElement, add);
     assert.equal(document.querySelectorAll('input[type="email"]').length, 0);
   }

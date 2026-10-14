@@ -1,3 +1,5 @@
+import { cn } from "@/lib/utils";
+import { pageFrameClassName, contentTitleClassName } from "@/lib/presentation";
 import { localSeedPreviewAccount } from "@/lib/auth/local-development";
 import { publicReleaseRender } from "@/lib/public-release";
 import { deferredManagementPage } from "@/lib/deferred-page";
@@ -10,7 +12,6 @@ import { DirectoryFooter } from "@/components/directory-footer";
 import { SiteHeader } from "@/components/site-header";
 import { ThemeSettings } from "@/components/theme-settings";
 import { AccountSettings } from "@/components/account-settings";
-import "./settings.css";
 
 export async function generateMetadata({
   params,
@@ -60,8 +61,17 @@ export default async function SettingsPage({
         }
         isAdmin={!!admin?.isModerator}
       />
-      <main className="settings-page wrap">
-        <h1>{t("customer.settings")}</h1>
+      <main
+        className={cn(
+          pageFrameClassName,
+          "min-h-[calc(100svh_-_180px)] pt-[var(--content-page-padding-top)] pb-[var(--content-page-padding-bottom)]",
+        )}
+      >
+        <h1
+          className={cn(contentTitleClassName, "mb-[var(--content-page-gap)]")}
+        >
+          {t("customer.settings")}
+        </h1>
         <AccountSettings
           key={localPreviewAccount?.kind ?? "account"}
           localPreviewAccount={localPreviewAccount}

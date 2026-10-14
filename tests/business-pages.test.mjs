@@ -226,7 +226,7 @@ for (const locale of ["de", "sq", "en"]) {
       );
       check(
         !document.body.textContent.includes("Another public workshop") &&
-          !document.querySelector(".business-request"),
+          !document.querySelector("[data-ui~='business-request']"),
         "The claim contains no alternate workshop or business overview",
       );
       for (const target of [

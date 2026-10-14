@@ -1,4 +1,5 @@
 "use client";
+import { appButton, errorClassName } from "@/lib/presentation";
 import { useI18n } from "@/lib/i18n/client";
 export default function PageError({
   reset,
@@ -8,11 +9,11 @@ export default function PageError({
 }) {
   const { t } = useI18n();
   return (
-    <main className="access-page">
-      <p className="error" role="alert">
+    <main className="mx-auto my-20 flex max-w-[600px] flex-col gap-[25px] p-[30px]">
+      <p className={errorClassName} role="alert">
         {t("common.unavailable")}
       </p>
-      <button className="primary" onClick={reset}>
+      <button className={appButton()} onClick={reset}>
         {t("common.retry")}
       </button>
     </main>

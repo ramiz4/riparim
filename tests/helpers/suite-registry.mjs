@@ -1,4 +1,12 @@
 export const registeredSuites = Object.freeze([
+  { file: "style-fixture-state.test.mjs", group: "core" },
+  { file: "compiled-tailwind.test.mjs", group: "core" },
+  { file: "presentation-navigation.test.mjs", group: "core" },
+  { file: "tailwind-qa-comparison.test.mjs", group: "core" },
+  { file: "tailwind-qa-plan.test.mjs", group: "core" },
+  { file: "native-focus-styles.test.mjs", group: "core" },
+  { file: "native-button-styles.test.mjs", group: "core" },
+  { file: "styling-contract.test.mjs", group: "core" },
   { file: "worker-runtime.test.mjs", group: "core" },
   { file: "public-review-refresh.test.mjs", group: "core" },
   { file: "catalogue-release-plan.test.mjs", group: "core" },

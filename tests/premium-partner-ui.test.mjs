@@ -106,7 +106,8 @@ try {
           ),
         ),
       );
-    const open = async () => click(document.querySelector(".premium-control"));
+    const open = async () =>
+      click(document.querySelector("[data-ui~='premium-control']"));
     const save = () =>
       [...document.querySelectorAll('[role="dialog"] button')].find(
         (node) => node.textContent === t("management.premiumSave"),

@@ -112,7 +112,7 @@ try {
     const server = new JSDOM(markup);
     try {
       assert(
-        server.window.document.querySelector("header.header"),
+        server.window.document.querySelector("[data-ui~='site-header'] header"),
         "The profile loading fallback preserves the site header",
       );
       assert.equal(
@@ -121,7 +121,7 @@ try {
         getMessages(locale).common.loadingProfile,
       );
       assert.equal(
-        !!server.window.document.querySelector(".header-auth"),
+        !!server.window.document.querySelector("[data-ui~='header-auth']"),
         false,
         "An unknown server session never claims the visitor is signed out",
       );
@@ -140,20 +140,20 @@ try {
       ),
     );
     assert(
-      document.querySelector(".user-menu-trigger"),
+      document.querySelector("header button[aria-haspopup='menu']"),
       "The previous route has a verified account",
     );
     const before = requests;
     await act(async () => root.render(wrap(locale, h(ProfileLoading))));
     assert(
-      document.querySelector("header.header"),
+      document.querySelector("[data-ui~='site-header'] header"),
       "The cold profile route keeps the header mounted in its loading fallback",
     );
     assert(
-      document.querySelector(".user-menu-trigger"),
+      document.querySelector("header button[aria-haspopup='menu']"),
       "The loading fallback retains the known account instead of removing its menu",
     );
-    assert.equal(!!document.querySelector(".header-auth"), false);
+    assert.equal(!!document.querySelector("[data-ui~='header-auth']"), false);
     assert.equal(
       requests,
       before,

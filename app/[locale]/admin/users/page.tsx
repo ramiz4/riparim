@@ -1,3 +1,4 @@
+import { appButton } from "@/lib/presentation";
 import { publicReleaseRender } from "@/lib/public-release";
 import { deferredManagementPage } from "@/lib/deferred-page";
 import { I18nMessages } from "@/lib/i18n/client";
@@ -10,7 +11,6 @@ import Link from "@/components/locale-link";
 import { getAdminUser } from "@/app/auth";
 import { chatGPTSignInPath } from "@/app/chatgpt-auth";
 import AdminUsers from "./users";
-import "./users.css";
 
 export const dynamic = "force-dynamic";
 
@@ -28,11 +28,18 @@ export default async function AdminUsersPage({
   if (!user)
     return (
       <I18nMessages messages={messages}>
-        <main className="access-page">
-          <h1>{t("management.manageUsers")}</h1>
-          <p>{t("management.managementLogin")}</p>
+        <main
+          data-ui="access-page"
+          className="mx-auto my-20 flex max-w-[600px] flex-col gap-[25px] p-[30px]"
+        >
+          <h1 className="text-[32px] leading-[1.2]">
+            {t("management.manageUsers")}
+          </h1>
+          <p className="text-[#758273] dark:text-muted-foreground">
+            {t("management.managementLogin")}
+          </p>
           <LocaleAnchor
-            className="primary"
+            className={appButton()}
             href={chatGPTSignInPath(
               localizeHref("/verwaltung/benutzer", locale),
             )}
@@ -47,10 +54,17 @@ export default async function AdminUsersPage({
   if (!user.isModerator)
     return (
       <I18nMessages messages={messages}>
-        <main className="access-page">
-          <h1>{t("management.noUsersAccess")}</h1>
-          <p>{t("management.usersAccessHelp")}</p>
-          <Link className="primary" href="/">
+        <main
+          data-ui="access-page"
+          className="mx-auto my-20 flex max-w-[600px] flex-col gap-[25px] p-[30px]"
+        >
+          <h1 className="text-[32px] leading-[1.2]">
+            {t("management.noUsersAccess")}
+          </h1>
+          <p className="text-[#758273] dark:text-muted-foreground">
+            {t("management.usersAccessHelp")}
+          </p>
+          <Link className={appButton()} href="/">
             {t("management.backWorkshops")}
           </Link>
         </main>

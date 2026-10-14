@@ -201,7 +201,9 @@ try {
     ]) {
       for (const input of ["click", "Enter"]) {
         await openMenu();
-        const identity = document.querySelector(".user-menu-identity");
+        const identity = document.querySelector(
+          "[data-slot='dropdown-menu-label']",
+        );
         const emailLink = identity.querySelector("a");
         assert(
           emailLink,

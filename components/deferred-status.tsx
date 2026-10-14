@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useRef, type ReactNode, type RefObject } from "react";
+import { appButton, errorClassName } from "@/lib/presentation";
 import { useI18n } from "@/lib/i18n/client";
+import { cn } from "@/lib/utils";
 
 export function DeferredStatus({
   error,
@@ -11,6 +13,8 @@ export function DeferredStatus({
   retryText,
   completedFocusRef,
   loadingIndicator,
+  errorClassName: errorPresentation,
+  loadingClassName,
 }: {
   error: boolean;
   pending: boolean;
@@ -20,6 +24,8 @@ export function DeferredStatus({
   retryText?: string;
   completedFocusRef?: RefObject<HTMLElement | null>;
   loadingIndicator?: ReactNode;
+  errorClassName?: string;
+  loadingClassName?: string;
 }) {
   const { t } = useI18n(),
     button = useRef<HTMLButtonElement>(null),
@@ -46,18 +52,20 @@ export function DeferredStatus({
   return (
     <>
       {error && (
-        <p className="error" role="alert">
+        <p className={cn(errorClassName, errorPresentation)} role="alert">
           {errorText ?? t("customer.tryAgain")}
         </p>
       )}
       {pending &&
         (loadingIndicator ?? (
-          <p role="status">{loadingText ?? t("customer.loading")}</p>
+          <p className={loadingClassName} role="status">
+            {loadingText ?? t("customer.loading")}
+          </p>
         ))}
       {error && (
         <button
           ref={button}
-          className="outline"
+          className={appButton({ variant: "outline" })}
           disabled={pending}
           onClick={() => {
             restore.current =

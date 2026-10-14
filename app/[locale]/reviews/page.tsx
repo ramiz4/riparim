@@ -11,7 +11,6 @@ import { getMessages, createTranslator } from "@/lib/i18n/messages";
 import { callbackLocale } from "@/lib/auth/locale";
 import { reviewSubmissionId } from "@/lib/own-reviews";
 import type { Workshop } from "@/lib/workshops";
-import "./reviews.css";
 
 export const dynamic = "force-dynamic";
 export async function generateMetadata({

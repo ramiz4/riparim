@@ -1,4 +1,27 @@
 "use client";
+import { dialogCopyClassName } from "@/lib/presentation";
+import {
+  dialogHeaderClassName,
+  dialogTitleClassName,
+  dialogDescriptionClassName,
+  dialogFooterClassName,
+  confirmationCancelClassName,
+  confirmationActionClassName,
+  pageFrameClassName,
+  appButton,
+  errorClassName,
+  emptyStateClassName,
+  emptyStateCopyClassName,
+  formClassName,
+  formLabelClassName,
+  inputClassName,
+  helpTextClassName,
+  formHintClassName,
+  noteClassName,
+  confirmationDialogClassName,
+} from "@/lib/presentation";
+import { cn } from "@/lib/utils";
+
 import { AdminLoading } from "@/components/admin-loading";
 import { useI18n } from "@/lib/i18n/client";
 import {
@@ -358,13 +381,24 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
     <>
       <SiteHeader account={account} isAdmin />
       <AdminNavigation active="users" />
-      <main className="admin-main admin-users-page wrap">
-        <div className="admin-title">
+      <main
+        data-ui="admin-users-page"
+        className={cn(pageFrameClassName, "pt-8 pb-[60px]")}
+      >
+        <div
+          data-ui="admin-title"
+          className="flex items-center justify-between gap-[30px] at-most-1000:items-start at-most-720:flex-col at-most-720:gap-[18px]"
+        >
           <div>
-            <h1>{t("management.manageUsers")}</h1>
+            <h1 className="text-[32px] leading-[1.2] font-semibold tracking-[-1px] at-most-720:text-[28px] m-0">
+              {t("management.manageUsers")}
+            </h1>
           </div>
           <button
-            className="primary"
+            className={cn(
+              appButton(),
+              "whitespace-nowrap at-most-1000:text-[13px] at-most-720:w-full",
+            )}
             disabled={busy || configured !== true}
             onClick={() => openEditor()}
           >
@@ -372,10 +406,14 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
             {t("management.createUser")}
           </button>
         </div>
-        <div className="users-toolbar">
-          <label className="users-search">
+        <div data-ui="users-toolbar" className="my-[22px] flex items-center">
+          <label
+            data-ui="users-search"
+            className="flex min-w-0 flex-1 items-center gap-[9px] rounded-[9px] border border-border bg-card px-3.5 py-[11px] text-muted-foreground focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-[#35866a] at-most-720:basis-full at-most-720:p-3"
+          >
             <Search size={16} aria-hidden="true" />
             <input
+              className="w-full min-w-0 border-0 bg-transparent text-[14px] text-foreground outline-none"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder={t("management.userSearchExample")}
@@ -385,30 +423,45 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
           </label>
         </div>
         {feedback && (
-          <p className="admin-feedback" role="status">
+          <p
+            className="mb-4 rounded-lg bg-[#eef6e9] px-[15px] py-3 text-[14px] text-[#527d4d] dark:bg-[#163e32] dark:text-[var(--theme-positive)]"
+            role="status"
+          >
             {feedback}
           </p>
         )}
         {error && (
-          <p className="error users-error" role="alert">
+          <p className={cn(errorClassName, "mb-[18px]")} role="alert">
             {error}
           </p>
         )}
         {pendingDeletions.length > 0 && (
           <section
-            className="users-setup-note"
+            data-ui="users-setup-note"
+            className="flex items-start gap-4 rounded-xl border border-border bg-card p-[26px] at-most-720:gap-3 at-most-720:p-[19px]"
             aria-labelledby="pending-deletions-title"
           >
             <div>
-              <h2 id="pending-deletions-title">
+              <h2
+                className="mb-2 text-[20px] font-semibold at-most-720:text-[18px]"
+                id="pending-deletions-title"
+              >
                 {t("management.unfinishedDeletions")}
               </h2>
-              <p>{t("management.unfinishedDeletionHelp")}</p>
+              <p className="max-w-[660px] text-[14px] text-muted-foreground">
+                {t("management.unfinishedDeletionHelp")}
+              </p>
               {pendingDeletions.map((user) => (
-                <p key={user.id}>
+                <p
+                  className="max-w-[660px] text-[14px] text-muted-foreground"
+                  key={user.id}
+                >
                   <span>{user.id}</span>{" "}
                   <button
-                    className="outline small"
+                    className={cn(
+                      appButton({ variant: "outline" }),
+                      "px-[13px] py-2",
+                    )}
                     disabled={busy || user.protected}
                     aria-label={t("management.finishDeletionLabel", {
                       id: user.id,
@@ -430,14 +483,30 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
         )}
         {configured === false && (
           <section
-            className="users-setup-note"
+            data-ui="users-setup-note"
+            className="flex items-start gap-4 rounded-xl border border-border bg-card p-[26px] at-most-720:gap-3 at-most-720:p-[19px]"
             aria-labelledby="users-setup-title"
           >
-            <ShieldCheck size={24} aria-hidden="true" />
+            <ShieldCheck
+              className="mt-1 text-[#35866a]"
+              size={24}
+              aria-hidden="true"
+            />
             <div>
-              <h2 id="users-setup-title">{t("management.serverMissing")}</h2>
-              <p>{t("management.usersSetupHelp")}</p>
-              <Link className="text-action" href="/verwaltung/anmeldung">
+              <h2
+                className="mb-2 text-[20px] font-semibold at-most-720:text-[18px]"
+                id="users-setup-title"
+              >
+                {t("management.serverMissing")}
+              </h2>
+              <p className="max-w-[660px] text-[14px] text-muted-foreground">
+                {t("management.usersSetupHelp")}
+              </p>
+              <Link
+                data-ui="text-action"
+                className={appButton({ variant: "text" })}
+                href="/verwaltung/anmeldung"
+              >
                 {t("management.openLoginSettings")}
               </Link>
             </div>
@@ -453,36 +522,68 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
                 {t("management.usersLoading")}
               </AdminLoading>
             )}
-            <div className="directory-table users-table" aria-busy={loading}>
+            <div
+              data-ui="directory-table users-table"
+              className="overflow-hidden rounded-[10px] border bg-white dark:border-border dark:bg-card dark:text-foreground at-most-720:overflow-auto border-border"
+              aria-busy={loading}
+            >
               <Table aria-label={t("management.userAccounts")}>
                 <TableHeader>
-                  <TableRow>
-                    <TableHead>{t("management.users")}</TableHead>
-                    <TableHead>{t("management.role")}</TableHead>
-                    <TableHead>{t("management.status")}</TableHead>
-                    <TableHead>{t("management.loginMethod")}</TableHead>
-                    <TableHead>{t("management.created")}</TableHead>
-                    <TableHead>{t("management.lastLogin")}</TableHead>
-                    <TableHead>
+                  <TableRow className="hover:bg-[#f8faf5] dark:hover:border-input dark:hover:bg-[var(--theme-hover)] border-border">
+                    <TableHead className="bg-[#f6f8f3] px-[18px] py-[15px] text-[13px] text-[#7a8b6d] dark:bg-secondary dark:text-muted-foreground at-most-720:p-3">
+                      {t("management.users")}
+                    </TableHead>
+                    <TableHead className="bg-[#f6f8f3] px-[18px] py-[15px] text-[13px] text-[#7a8b6d] dark:bg-secondary dark:text-muted-foreground at-most-720:p-3">
+                      {t("management.role")}
+                    </TableHead>
+                    <TableHead className="bg-[#f6f8f3] px-[18px] py-[15px] text-[13px] text-[#7a8b6d] dark:bg-secondary dark:text-muted-foreground at-most-720:p-3">
+                      {t("management.status")}
+                    </TableHead>
+                    <TableHead className="bg-[#f6f8f3] px-[18px] py-[15px] text-[13px] text-[#7a8b6d] dark:bg-secondary dark:text-muted-foreground at-most-720:p-3">
+                      {t("management.loginMethod")}
+                    </TableHead>
+                    <TableHead className="bg-[#f6f8f3] px-[18px] py-[15px] text-[13px] text-[#7a8b6d] dark:bg-secondary dark:text-muted-foreground at-most-720:p-3">
+                      {t("management.created")}
+                    </TableHead>
+                    <TableHead className="bg-[#f6f8f3] px-[18px] py-[15px] text-[13px] text-[#7a8b6d] dark:bg-secondary dark:text-muted-foreground at-most-720:p-3">
+                      {t("management.lastLogin")}
+                    </TableHead>
+                    <TableHead className="bg-[#f6f8f3] px-[18px] py-[15px] text-[13px] text-[#7a8b6d] dark:bg-secondary dark:text-muted-foreground at-most-720:p-3">
                       <span className="sr-only">{t("management.actions")}</span>
                     </TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {shown.map((user) => (
-                    <TableRow key={user.id}>
-                      <TableCell>
-                        <strong>{user.name || t("management.unnamed")}</strong>
-                        <span className="users-email">{user.email}</span>
+                    <TableRow
+                      className="hover:bg-[#f8faf5] dark:hover:border-input dark:hover:bg-[var(--theme-hover)] border-border"
+                      key={user.id}
+                    >
+                      <TableCell className="px-[18px] py-[17px] text-[14px] at-most-720:p-3 at-most-720:text-[13px] align-top first:min-w-[225px] first:max-w-80 first:whitespace-normal first:[overflow-wrap:anywhere]">
+                        <strong className="block font-semibold">
+                          {user.name || t("management.unnamed")}
+                        </strong>
+                        <span className="mt-[3px] block text-[12px] text-muted-foreground">
+                          {user.email}
+                        </span>
                         {user.protected && (
-                          <span className="users-protected">
+                          <span className="mt-2 inline-flex items-center gap-[5px] text-[11px] text-[#247655] dark:text-[var(--theme-positive)]">
                             <ShieldCheck size={12} aria-hidden="true" />
                             {t("management.protectedAccess")}
                           </span>
                         )}
                       </TableCell>
-                      <TableCell>
-                        <span className={`users-role ${user.role}`}>
+                      <TableCell className="px-[18px] py-[17px] text-[14px] at-most-720:p-3 at-most-720:text-[13px] align-top first:min-w-[225px] first:max-w-80 first:whitespace-normal first:[overflow-wrap:anywhere]">
+                        <span
+                          data-ui="users-role"
+                          data-role={user.role}
+                          className={cn(
+                            "inline-flex items-center gap-[5px] rounded-[5px] px-[9px] py-[3px] text-[12px] whitespace-nowrap",
+                            user.role === "admin"
+                              ? "bg-[#e8f2ef] text-[#216f55] dark:bg-[#163e32] dark:text-[var(--theme-positive)]"
+                              : "bg-secondary text-muted-foreground",
+                          )}
+                        >
                           {user.role === "admin" ? (
                             <>
                               <ShieldCheck size={13} aria-hidden="true" />
@@ -493,17 +594,24 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
                           )}
                         </span>
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="px-[18px] py-[17px] text-[14px] at-most-720:p-3 at-most-720:text-[13px] align-top first:min-w-[225px] first:max-w-80 first:whitespace-normal first:[overflow-wrap:anywhere]">
                         <span
-                          className={`users-status ${user.active ? "active" : "inactive"}`}
+                          data-ui="users-status"
+                          data-active={user.active}
+                          className={cn(
+                            "inline-flex rounded-[5px] px-[9px] py-[3px] text-[12px] whitespace-nowrap",
+                            user.active
+                              ? "bg-[#eaf4e6] text-[#387445] dark:bg-[#163e32] dark:text-[var(--theme-positive)]"
+                              : "bg-[#f4ece8] text-[#956247] dark:bg-[#3a2926] dark:text-[#e6a89b]",
+                          )}
                         >
                           {user.active
                             ? t("management.active")
                             : t("management.inactive")}
                         </span>
                       </TableCell>
-                      <TableCell>
-                        <span className="users-providers">
+                      <TableCell className="px-[18px] py-[17px] text-[14px] at-most-720:p-3 at-most-720:text-[13px] align-top first:min-w-[225px] first:max-w-80 first:whitespace-normal first:[overflow-wrap:anywhere]">
+                        <span className="block">
                           {user.providers.length
                             ? user.providers
                                 .map((provider) =>
@@ -516,20 +624,29 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
                                 .join(", ")
                             : "–"}
                         </span>
-                        <span className="users-confirmation">
+                        <span className="mt-[3px] block text-[12px] text-muted-foreground">
                           {user.confirmed
                             ? t("management.emailConfirmed")
                             : t("management.emailUnconfirmed")}
                         </span>
                       </TableCell>
-                      <TableCell>
+                      <TableCell className="px-[18px] py-[17px] text-[14px] at-most-720:p-3 at-most-720:text-[13px] align-top first:min-w-[225px] first:max-w-80 first:whitespace-normal first:[overflow-wrap:anywhere]">
                         {user.createdAt ? displayDate(user.createdAt) : "–"}
                       </TableCell>
-                      <TableCell>{displayDate(user.lastSignInAt)}</TableCell>
-                      <TableCell>
-                        <div className="users-actions">
+                      <TableCell className="px-[18px] py-[17px] text-[14px] at-most-720:p-3 at-most-720:text-[13px] align-top first:min-w-[225px] first:max-w-80 first:whitespace-normal first:[overflow-wrap:anywhere]">
+                        {displayDate(user.lastSignInAt)}
+                      </TableCell>
+                      <TableCell className="px-[18px] py-[17px] text-[14px] at-most-720:p-3 at-most-720:text-[13px] align-top first:min-w-[225px] first:max-w-80 first:whitespace-normal first:[overflow-wrap:anywhere]">
+                        <div
+                          data-ui="users-actions"
+                          className="flex flex-col items-start gap-2.5"
+                        >
                           <button
-                            className="text-action"
+                            data-ui="text-action"
+                            className={cn(
+                              appButton({ variant: "text" }),
+                              "inline-flex items-center gap-1.5 m-0 text-[13px] whitespace-nowrap",
+                            )}
                             disabled={busy}
                             aria-label={t("management.editUserLabel", {
                               name: user.name || user.email,
@@ -540,7 +657,11 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
                             {t("management.edit")}
                           </button>
                           <button
-                            className="text-action"
+                            data-ui="text-action"
+                            className={cn(
+                              appButton({ variant: "text" }),
+                              "inline-flex items-center gap-1.5 m-0 text-[13px] whitespace-nowrap",
+                            )}
                             disabled={busy || user.protected}
                             title={
                               user.protected
@@ -568,7 +689,11 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
                               : t("management.makeAdmin")}
                           </button>
                           <button
-                            className="text-action"
+                            data-ui="text-action"
+                            className={cn(
+                              appButton({ variant: "text" }),
+                              "inline-flex items-center gap-1.5 m-0 text-[13px] whitespace-nowrap",
+                            )}
                             disabled={busy || user.protected}
                             title={
                               user.protected
@@ -588,7 +713,7 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
                             !roleUser ? (
                               <LoaderCircle
                                 size={15}
-                                className="spin"
+                                className="inline-block animate-spin motion-reduce:animate-none"
                                 aria-hidden="true"
                               />
                             ) : user.active ? (
@@ -601,7 +726,7 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
                               : t("management.enable")}
                           </button>
                           <button
-                            className="users-delete"
+                            className="inline-flex items-center gap-1.5 text-[13px] font-[550] text-[#a13d35] whitespace-nowrap hover:enabled:underline hover:enabled:underline-offset-[3px] dark:text-[#e6a89b]"
                             disabled={busy || user.protected}
                             title={
                               user.protected
@@ -627,21 +752,27 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
               </Table>
             </div>
             {!loading && !error && !shown.length && (
-              <div className="empty users-empty">
+              <div
+                data-ui="users-empty"
+                className={cn(
+                  emptyStateClassName,
+                  "mt-[18px] at-most-720:px-[18px] at-most-720:py-[30px]",
+                )}
+              >
                 <UsersRound size={28} aria-hidden="true" />
-                <h2>
+                <h2 className="text-[20px] font-semibold at-most-720:text-[18px]">
                   {query.trim()
                     ? t("management.noMatchingUsers")
                     : t("management.noUsers")}
                 </h2>
-                <p>
+                <p className={emptyStateCopyClassName}>
                   {query.trim()
                     ? t("management.userSearchHelp")
                     : t("management.createUserHelp")}
                 </p>
                 {!query.trim() && (
                   <button
-                    className="outline"
+                    className={appButton({ variant: "outline" })}
                     disabled={busy}
                     onClick={() => openEditor()}
                   >
@@ -651,11 +782,15 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
               </div>
             )}
             <nav
-              className="users-pagination"
+              data-ui="users-pagination"
+              className="mt-[22px] flex items-center justify-between gap-[18px] text-[#65746e] dark:text-muted-foreground at-most-720:flex-wrap at-most-720:gap-2.5"
               aria-label={t("management.userPages")}
             >
               <button
-                className="outline small"
+                className={cn(
+                  appButton({ variant: "outline" }),
+                  "px-[13px] py-2",
+                )}
                 disabled={busy || page === 1}
                 onClick={() => {
                   setQuery("");
@@ -665,14 +800,17 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
                 <ChevronLeft size={16} aria-hidden="true" />
                 {t("management.back")}
               </button>
-              <span>
+              <span className="text-center text-[13px] text-muted-foreground at-most-720:order-3 at-most-720:w-full">
                 {t("management.userPageSummary", { page, count: users.length })}
                 {query.trim()
                   ? t("management.userMatches", { count: shown.length })
                   : ""}
               </span>
               <button
-                className="outline small"
+                className={cn(
+                  appButton({ variant: "outline" }),
+                  "px-[13px] py-2",
+                )}
                 disabled={busy || !hasMore}
                 onClick={() => {
                   setQuery("");
@@ -696,7 +834,6 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
         }}
       >
         <ModalContent
-          className="user-editor"
           closeDisabled={saving}
           title={
             editing ? t("management.editUser") : t("management.createUser")
@@ -707,12 +844,21 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
           footer={
             <>
               <DialogClose asChild>
-                <button className="outline" disabled={saving}>
+                <button
+                  className={cn(
+                    appButton({ variant: "outline" }),
+                    "at-most-720:min-h-[45px] at-most-720:text-[13px] at-most-720:px-[13px]",
+                  )}
+                  disabled={saving}
+                >
                   {t("management.cancel")}
                 </button>
               </DialogClose>
               <button
-                className="primary"
+                className={cn(
+                  appButton(),
+                  "at-most-720:min-h-[45px] at-most-720:text-[13px] at-most-720:flex-1",
+                )}
                 disabled={saving || !draft}
                 type="submit"
                 form={formId}
@@ -721,7 +867,7 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
                   <>
                     <LoaderCircle
                       size={16}
-                      className="spin"
+                      className="inline-block animate-spin motion-reduce:animate-none"
                       aria-hidden="true"
                     />
                     {t("management.saving")}
@@ -737,14 +883,22 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
         >
           {draft && (
             <form
+              data-ui="users-form"
               id={formId}
-              className="journey-form users-form"
+              className={formClassName}
               onSubmit={save}
             >
-              <fieldset disabled={saving}>
-                <label>
+              <fieldset
+                className="m-0 flex min-w-0 flex-col gap-[18px] border-0 p-0"
+                disabled={saving}
+              >
+                <label className={formLabelClassName}>
                   {t("management.name")}
                   <input
+                    className={cn(
+                      inputClassName,
+                      "disabled:cursor-not-allowed disabled:bg-secondary disabled:text-muted-foreground",
+                    )}
                     required
                     minLength={2}
                     maxLength={80}
@@ -753,9 +907,13 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
                     onChange={(event) => change("name", event.target.value)}
                   />
                 </label>
-                <label>
+                <label className={formLabelClassName}>
                   {t("management.emailAddress")}
                   <input
+                    className={cn(
+                      inputClassName,
+                      "disabled:cursor-not-allowed disabled:bg-secondary disabled:text-muted-foreground",
+                    )}
                     required
                     type="email"
                     maxLength={254}
@@ -766,14 +924,30 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
                   />
                 </label>
                 {editing?.protected && (
-                  <p className="help">{t("management.protectedEmail")}</p>
+                  <p
+                    className={cn(
+                      cn(helpTextClassName, "-mt-[9px] text-[13px]"),
+                      "leading-[1.65]",
+                    )}
+                  >
+                    {t("management.protectedEmail")}
+                  </p>
                 )}
-                <label>
+                <label className={formLabelClassName}>
                   {editing
                     ? t("management.newPassword")
                     : t("management.password")}
-                  {editing && <span> {t("management.optional")}</span>}
+                  {editing && (
+                    <span className={formHintClassName}>
+                      {" "}
+                      {t("management.optional")}
+                    </span>
+                  )}
                   <input
+                    className={cn(
+                      inputClassName,
+                      "disabled:cursor-not-allowed disabled:bg-secondary disabled:text-muted-foreground",
+                    )}
                     type="password"
                     required={!editing}
                     minLength={12}
@@ -784,36 +958,61 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
                     aria-describedby={`${formId}-password-help`}
                   />
                 </label>
-                <p className="help" id={`${formId}-password-help`}>
+                <p
+                  className={cn(
+                    cn(helpTextClassName, "-mt-[9px] text-[13px]"),
+                    "leading-[1.65]",
+                  )}
+                  id={`${formId}-password-help`}
+                >
                   {editing
                     ? t("management.passwordKeepHelp")
                     : t("management.passwordHelp")}
                 </p>
                 {!editing && (
                   <>
-                    <label className="activation-switch users-activation">
+                    <label className="flex items-center gap-3 rounded-lg border border-border bg-card p-[15px]">
                       <Switch
                         checked={draft.active}
                         onCheckedChange={(active) => change("active", active)}
                         aria-label={t("management.activateNewUser")}
                       />
-                      <span>
+                      <span
+                        className={cn(
+                          formHintClassName,
+                          "dark:text-[var(--theme-accent)] at-most-720:leading-[1.5] flex flex-col gap-[3px] text-[14px] text-foreground",
+                        )}
+                      >
                         <strong>{t("management.activateAccount")}</strong>
-                        <span>{t("management.disabledLogin")}</span>
+                        <span className="text-[12px] font-normal text-muted-foreground">
+                          {t("management.disabledLogin")}
+                        </span>
                       </span>
                     </label>
-                    <p className="help">{t("management.createdUserRights")}</p>
+                    <p
+                      className={cn(
+                        cn(helpTextClassName, "-mt-[9px] text-[13px]"),
+                        "leading-[1.65]",
+                      )}
+                    >
+                      {t("management.createdUserRights")}
+                    </p>
                   </>
                 )}
                 {editing?.protected && (
-                  <div className="note">
+                  <div className={noteClassName}>
                     <UserRound size={18} aria-hidden="true" />
-                    <p>{t("management.protectedUser")}</p>
+                    <p className={dialogCopyClassName}>
+                      {t("management.protectedUser")}
+                    </p>
                   </div>
                 )}
               </fieldset>
               {formError && (
-                <p className="error" role="alert">
+                <p
+                  className={cn(errorClassName, "leading-[1.65]")}
+                  role="alert"
+                >
                   {formError}
                 </p>
               )}
@@ -828,17 +1027,18 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
         }}
       >
         <AlertDialogContent
-          className={`app-dialog confirmation-dialog user-role-dialog ${roleUser?.role === "admin" ? "role-revoke" : "role-grant"}`}
+          data-ui="user-role-dialog"
+          className={confirmationDialogClassName}
         >
-          <AlertDialogHeader>
-            <AlertDialogTitle>
+          <AlertDialogHeader className={dialogHeaderClassName}>
+            <AlertDialogTitle className={dialogTitleClassName}>
               {roleUser?.role === "admin"
                 ? t("management.revokeAdminTitle")
                 : t("management.grantAdminTitle")}
             </AlertDialogTitle>
           </AlertDialogHeader>
           <ModalBody>
-            <AlertDialogDescription>
+            <AlertDialogDescription className={dialogDescriptionClassName}>
               {t(
                 roleUser?.role === "admin"
                   ? "management.roleRevokeHelp"
@@ -846,14 +1046,27 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
                 { name: roleUser?.name || roleUser?.email || "" },
               )}
             </AlertDialogDescription>
-            {roleUser?.name && <p className="help">{roleUser.email}</p>}
-            <p className="help">{t("management.roleSessionsHelp")}</p>
+            {roleUser?.name && (
+              <p className={helpTextClassName}>{roleUser.email}</p>
+            )}
+            <p className={helpTextClassName}>
+              {t("management.roleSessionsHelp")}
+            </p>
           </ModalBody>
-          <AlertDialogFooter>
-            <AlertDialogCancel disabled={!!mutating}>
+          <AlertDialogFooter className={dialogFooterClassName}>
+            <AlertDialogCancel
+              className={confirmationCancelClassName}
+              disabled={!!mutating}
+            >
               {t("management.cancel")}
             </AlertDialogCancel>
             <AlertDialogAction
+              className={cn(
+                confirmationActionClassName,
+                roleUser?.role === "admin"
+                  ? ""
+                  : "bg-[#176b51] text-white enabled:hover:bg-[#0b503b]",
+              )}
               disabled={!!mutating}
               onClick={(event) => {
                 event.preventDefault();
@@ -862,7 +1075,11 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
             >
               {mutating ? (
                 <>
-                  <LoaderCircle size={16} className="spin" aria-hidden="true" />
+                  <LoaderCircle
+                    size={16}
+                    className="inline-block animate-spin motion-reduce:animate-none"
+                    aria-hidden="true"
+                  />
                   {t("management.changingRole")}
                 </>
               ) : roleUser?.role === "admin" ? (
@@ -880,30 +1097,36 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
           if (!open && !mutating) setDeleteUser(null);
         }}
       >
-        <AlertDialogContent className="app-dialog confirmation-dialog user-delete-dialog">
-          <AlertDialogHeader>
-            <AlertDialogTitle>
+        <AlertDialogContent className={confirmationDialogClassName}>
+          <AlertDialogHeader className={dialogHeaderClassName}>
+            <AlertDialogTitle className={dialogTitleClassName}>
               {t("management.deleteUserTitle")}
             </AlertDialogTitle>
           </AlertDialogHeader>
           <ModalBody>
-            <AlertDialogDescription>
+            <AlertDialogDescription className={dialogDescriptionClassName}>
               {t("management.deleteUserHelp", {
                 name: deleteUser?.name || deleteUser?.email || "",
               })}
             </AlertDialogDescription>
-            {deleteUser?.name && <p className="help">{deleteUser.email}</p>}
+            {deleteUser?.name && (
+              <p className={helpTextClassName}>{deleteUser.email}</p>
+            )}
             {deleteError && (
-              <p className="error" role="alert">
+              <p className={errorClassName} role="alert">
                 {deleteError}
               </p>
             )}
           </ModalBody>
-          <AlertDialogFooter>
-            <AlertDialogCancel disabled={!!mutating}>
+          <AlertDialogFooter className={dialogFooterClassName}>
+            <AlertDialogCancel
+              className={confirmationCancelClassName}
+              disabled={!!mutating}
+            >
               {t("management.cancel")}
             </AlertDialogCancel>
             <AlertDialogAction
+              className={confirmationActionClassName}
               disabled={!!mutating}
               onClick={(event) => {
                 event.preventDefault();
@@ -912,7 +1135,11 @@ export default function AdminUsers({ account }: { account: AccountIdentity }) {
             >
               {mutating ? (
                 <>
-                  <LoaderCircle size={16} className="spin" aria-hidden="true" />
+                  <LoaderCircle
+                    size={16}
+                    className="inline-block animate-spin motion-reduce:animate-none"
+                    aria-hidden="true"
+                  />
                   {t("management.deleting")}
                 </>
               ) : (

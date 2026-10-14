@@ -1,4 +1,15 @@
 "use client";
+import {
+  dialogHeaderClassName,
+  dialogTitleClassName,
+  dialogDescriptionClassName,
+  dialogFooterClassName,
+  confirmationCancelClassName,
+  appButton,
+  confirmationDialogClassName,
+} from "@/lib/presentation";
+import { cn } from "@/lib/utils";
+
 import { invalidatePublicSession } from "./use-public-session";
 import { useI18n } from "@/lib/i18n/client";
 import {
@@ -40,6 +51,11 @@ import {
   AlertDialogFooter,
   AlertDialogCancel,
 } from "@/components/ui/alert-dialog";
+
+const accountSectionClassName =
+  "mt-7 min-w-0 rounded-none border-0 border-t border-[color-mix(in_srgb,var(--foreground)_28%,var(--background))] bg-transparent pt-7 [overflow-wrap:anywhere] at-most-720:mt-6 at-most-720:pt-6";
+const accountButtonClassName =
+  "inline-flex min-h-11 cursor-pointer items-center justify-center justify-self-start gap-2 rounded-lg border border-input bg-card px-4 py-2.5 text-[14px] font-semibold text-foreground no-underline enabled:hover:border-[var(--theme-accent)] enabled:hover:bg-[var(--theme-hover)] focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-[var(--theme-accent)] disabled:cursor-default disabled:bg-muted disabled:text-muted-foreground disabled:opacity-100 at-most-720:max-w-full at-most-720:whitespace-normal";
 
 type Account = {
   email: string;
@@ -362,15 +378,21 @@ export function AccountSettings({
     setPasswordMessage(t("customer.previewPasswordChanged"));
   }
   return (
-    <div className="account-settings-group" aria-busy={loading || busy}>
+    <div className="w-full min-w-0" aria-busy={loading || busy}>
       {localPreviewAccount && (
         <aside
-          className="settings-preview"
+          className="mb-6 flex flex-wrap items-center justify-between gap-3 border-b border-[color-mix(in_srgb,var(--foreground)_28%,var(--background))] pt-3 pb-[18px] at-most-720:items-start"
           aria-label={t("customer.previewTitle")}
         >
-          <p>{t("customer.previewTitle")}</p>
-          <nav aria-label={t("customer.previewViews")}>
+          <p className="m-0 min-w-[220px] flex-1 text-[13px] leading-[1.5] text-muted-foreground at-most-720:min-w-0 at-most-720:basis-full">
+            {t("customer.previewTitle")}
+          </p>
+          <nav
+            className="flex flex-wrap gap-1.5"
+            aria-label={t("customer.previewViews")}
+          >
             <LocaleAnchor
+              className="inline-flex min-h-11 items-center rounded-lg border border-input bg-card px-3 py-2 text-[13px] font-[550] text-foreground aria-[current=page]:border-[var(--theme-accent)] aria-[current=page]:bg-accent aria-[current=page]:text-[var(--theme-accent)] focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-[var(--theme-accent)]"
               href="/einstellungen"
               aria-current={
                 localPreviewAccount.kind === "admin" ? "page" : undefined
@@ -379,6 +401,7 @@ export function AccountSettings({
               {t("customer.previewAdmin")}
             </LocaleAnchor>
             <LocaleAnchor
+              className="inline-flex min-h-11 items-center rounded-lg border border-input bg-card px-3 py-2 text-[13px] font-[550] text-foreground aria-[current=page]:border-[var(--theme-accent)] aria-[current=page]:bg-accent aria-[current=page]:text-[var(--theme-accent)] focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-[var(--theme-accent)]"
               href="/einstellungen?vorschau=email"
               aria-current={
                 localPreviewAccount.kind === "email" ? "page" : undefined
@@ -387,6 +410,7 @@ export function AccountSettings({
               {t("customer.previewEmail")}
             </LocaleAnchor>
             <LocaleAnchor
+              className="inline-flex min-h-11 items-center rounded-lg border border-input bg-card px-3 py-2 text-[13px] font-[550] text-foreground aria-[current=page]:border-[var(--theme-accent)] aria-[current=page]:bg-accent aria-[current=page]:text-[var(--theme-accent)] focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-[var(--theme-accent)]"
               href="/einstellungen?vorschau=google"
               aria-current={
                 localPreviewAccount.kind === "google" ? "page" : undefined
@@ -397,18 +421,37 @@ export function AccountSettings({
           </nav>
         </aside>
       )}
-      <section className="account-settings" aria-labelledby={`${id}-heading`}>
-        <h2 ref={accountHeading} tabIndex={-1} id={`${id}-heading`}>
+      <section
+        className="min-w-0 [overflow-wrap:anywhere]"
+        aria-labelledby={`${id}-heading`}
+      >
+        <h2
+          className="mb-3 text-[22px] leading-[1.3] font-[650] tracking-[-0.3px]"
+          ref={accountHeading}
+          tabIndex={-1}
+          id={`${id}-heading`}
+        >
           {t("customer.yourAccount")}
         </h2>
         {loading ? (
-          <p role="status">{t("customer.accountLoading")}</p>
+          <p
+            className="my-2.5 text-[14px] leading-[1.6] text-muted-foreground"
+            role="status"
+          >
+            {t("customer.accountLoading")}
+          </p>
         ) : state?.account ? (
           <>
-            <form onSubmit={save} className="account-name-form">
-              <label htmlFor={`${id}-name`}>{t("customer.fullName")}</label>
-              <div className="account-name-row">
+            <form onSubmit={save} className="my-4 grid w-full gap-[9px]">
+              <label
+                className="text-[14px] font-semibold"
+                htmlFor={`${id}-name`}
+              >
+                {t("customer.fullName")}
+              </label>
+              <div className="flex min-w-0 items-stretch gap-2.5 at-most-380:gap-2">
                 <input
+                  className="min-h-[46px] min-w-0 rounded-lg border border-[color-mix(in_srgb,var(--foreground)_55%,var(--background))] bg-card px-3 py-2.5 text-foreground focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-[var(--theme-accent)] flex-1 w-0 disabled:opacity-100 disabled:bg-muted disabled:text-foreground"
                   id={`${id}-name`}
                   name="name"
                   autoComplete="name"
@@ -420,7 +463,10 @@ export function AccountSettings({
                   disabled={busy || state.deletionStarted}
                 />
                 <button
-                  className="account-button"
+                  className={cn(
+                    accountButtonClassName,
+                    "shrink-0 gap-2 at-most-380:px-3",
+                  )}
                   type="submit"
                   aria-label={t("customer.saveName")}
                   disabled={
@@ -432,34 +478,42 @@ export function AccountSettings({
                   {busy ? (
                     <LoaderCircle
                       size={17}
-                      className="spin"
+                      className="inline-block animate-spin motion-reduce:animate-none"
                       aria-hidden="true"
                     />
                   ) : (
                     <Save size={17} aria-hidden="true" />
                   )}
-                  <span>
+                  <span className="at-most-380:hidden">
                     {t(busy ? "customer.wait" : "customer.saveNameShort")}
                   </span>
                 </button>
               </div>
             </form>
-            <dl className="account-identity">
-              <div>
-                <dt>{t("customer.email")}</dt>
-                <dd>{state.account.email}</dd>
+            <dl className="mt-[18px] grid grid-cols-[minmax(0,1.4fr)_repeat(2,minmax(0,1fr))] gap-5 at-most-720:grid-cols-1 at-most-720:gap-3">
+              <div className="flex min-w-0 flex-col gap-0.5">
+                <dt className="mb-1 text-[14px] text-muted-foreground">
+                  {t("customer.email")}
+                </dt>
+                <dd className="m-0 text-[15px] leading-[1.5] font-[550] text-foreground">
+                  {state.account.email}
+                </dd>
               </div>
-              <div>
-                <dt>{t("customer.signInMethod")}</dt>
-                <dd>
+              <div className="flex min-w-0 flex-col gap-0.5">
+                <dt className="mb-1 text-[14px] text-muted-foreground">
+                  {t("customer.signInMethod")}
+                </dt>
+                <dd className="m-0 text-[15px] leading-[1.5] font-[550] text-foreground">
                   {localPreviewAccount?.kind === "admin"
                     ? t("customer.localPreview")
                     : valueLabel(locale, "provider", state.account.provider)}
                 </dd>
               </div>
-              <div>
-                <dt>{t("customer.accountStatus")}</dt>
-                <dd>
+              <div className="flex min-w-0 flex-col gap-0.5">
+                <dt className="mb-1 text-[14px] text-muted-foreground">
+                  {t("customer.accountStatus")}
+                </dt>
+                <dd className="m-0 text-[15px] leading-[1.5] font-[550] text-foreground">
                   {t(
                     localPreviewAccount?.kind === "admin"
                       ? "customer.localAccountStatus"
@@ -470,10 +524,12 @@ export function AccountSettings({
             </dl>
           </>
         ) : state?.deletionStarted ? (
-          <p>{t("customer.deletionStarted")}</p>
+          <p className="my-2.5 text-[14px] leading-[1.6] text-muted-foreground">
+            {t("customer.deletionStarted")}
+          </p>
         ) : state ? (
           localPreviewAccount ? null : (
-            <p>
+            <p className="my-2.5 text-[14px] leading-[1.6] text-muted-foreground">
               {t("customer.loginAccountStart")}{" "}
               <Link href="/anmelden?weiter=/einstellungen">
                 {t("customer.googleOrEmail")}
@@ -483,7 +539,7 @@ export function AccountSettings({
           )
         ) : (
           <button
-            className="account-button"
+            className={accountButtonClassName}
             onClick={() => {
               setError("");
               void load();
@@ -493,14 +549,24 @@ export function AccountSettings({
           </button>
         )}
         {error && !open && (
-          <p className="account-error" role="alert">
+          <p
+            className="my-2.5 text-[14px] leading-[1.6] text-destructive"
+            role="alert"
+          >
             {error}
           </p>
         )}
-        {message && <p role="status">{message}</p>}
+        {message && (
+          <p
+            className="my-2.5 text-[14px] leading-[1.6] text-muted-foreground"
+            role="status"
+          >
+            {message}
+          </p>
+        )}
         {localPreviewAccount && !state?.account && (
           <button
-            className="account-button"
+            className={accountButtonClassName}
             onClick={() => {
               setMessage("");
               setPasswordMessage("");
@@ -515,17 +581,26 @@ export function AccountSettings({
       </section>
       {state?.account && (
         <section
-          className="account-settings account-password-settings"
+          className={accountSectionClassName}
           aria-labelledby={`${id}-password-heading`}
         >
-          <h2 id={`${id}-password-heading`}>{t("customer.accountPassword")}</h2>
+          <h2
+            className="mb-3 text-[22px] leading-[1.3] font-[650] tracking-[-0.3px]"
+            id={`${id}-password-heading`}
+          >
+            {t("customer.accountPassword")}
+          </h2>
           {localPreviewAccount?.kind === "admin" ? (
-            <p>{t("customer.localPasswordNote")}</p>
+            <p className="my-2.5 text-[14px] leading-[1.6] text-muted-foreground">
+              {t("customer.localPasswordNote")}
+            </p>
           ) : state.account.provider === "E-Mail" ? (
             <>
-              <p>{t("customer.passwordSettingsNote")}</p>
+              <p className="my-2.5 text-[14px] leading-[1.6] text-muted-foreground">
+                {t("customer.passwordSettingsNote")}
+              </p>
               <button
-                className="account-button"
+                className={accountButtonClassName}
                 disabled={busy || loading || state.deletionStarted}
                 onClick={() => void requestPasswordLink()}
               >
@@ -534,10 +609,12 @@ export function AccountSettings({
             </>
           ) : (
             <>
-              <p>{t("customer.googlePasswordNote")}</p>
+              <p className="my-2.5 text-[14px] leading-[1.6] text-muted-foreground">
+                {t("customer.googlePasswordNote")}
+              </p>
               {localPreviewAccount ? (
                 <button
-                  className="account-button"
+                  className={accountButtonClassName}
                   onClick={() =>
                     setPasswordMessage(t("customer.previewGooglePassword"))
                   }
@@ -546,7 +623,7 @@ export function AccountSettings({
                 </button>
               ) : (
                 <a
-                  className="account-button"
+                  className={accountButtonClassName}
                   href="https://myaccount.google.com/security"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -557,15 +634,25 @@ export function AccountSettings({
             </>
           )}
           {passwordError && (
-            <p className="account-error" role="alert">
+            <p
+              className="my-2.5 text-[14px] leading-[1.6] text-destructive"
+              role="alert"
+            >
               {passwordError}
             </p>
           )}
-          {passwordMessage && <p role="status">{passwordMessage}</p>}
+          {passwordMessage && (
+            <p
+              className="my-2.5 text-[14px] leading-[1.6] text-muted-foreground"
+              role="status"
+            >
+              {passwordMessage}
+            </p>
+          )}
           {localPreviewAccount?.kind === "email" && passwordMessage && (
             <button
               ref={previewPasswordOpener}
-              className="account-button"
+              className={accountButtonClassName}
               onClick={() => {
                 setPreviewPasswordError("");
                 setPreviewPasswordOpen(true);
@@ -579,11 +666,16 @@ export function AccountSettings({
       {appearance}
       {state && (state.account || state.deletionStarted) && (
         <section
-          className="account-settings account-deletion-settings"
+          className={accountSectionClassName}
           aria-labelledby={`${id}-delete-heading`}
         >
-          <h2 id={`${id}-delete-heading`}>{t("customer.deleteAccount")}</h2>
-          <p>
+          <h2
+            className="mb-3 text-[22px] leading-[1.3] font-[650] tracking-[-0.3px]"
+            id={`${id}-delete-heading`}
+          >
+            {t("customer.deleteAccount")}
+          </h2>
+          <p className="my-2.5 text-[14px] leading-[1.6] text-muted-foreground">
             {t(
               state.account?.protected
                 ? "customer.protectedAccount"
@@ -605,7 +697,10 @@ export function AccountSettings({
             >
               <AlertDialogTrigger asChild>
                 <button
-                  className="account-button account-danger"
+                  className={cn(
+                    accountButtonClassName,
+                    "border-destructive text-destructive",
+                  )}
                   disabled={busy || loading}
                 >
                   {state.deletionStarted
@@ -614,34 +709,45 @@ export function AccountSettings({
                 </button>
               </AlertDialogTrigger>
               <AlertDialogContent
-                className="app-dialog confirmation-dialog settings-delete-dialog"
+                className={cn(
+                  confirmationDialogClassName,
+                  "max-w-[min(560px,calc(100vw_-_32px))] data-[size=default]:sm:max-w-[min(560px,calc(100vw_-_32px))]",
+                )}
                 onEscapeKeyDown={(event) => {
                   if (busy) event.preventDefault();
                 }}
               >
-                <AlertDialogHeader>
-                  <AlertDialogTitle>
+                <AlertDialogHeader className={dialogHeaderClassName}>
+                  <AlertDialogTitle className={dialogTitleClassName}>
                     {t("customer.deleteAccountTitle")}
                   </AlertDialogTitle>
-                  <AlertDialogDescription>
+                  <AlertDialogDescription
+                    className={dialogDescriptionClassName}
+                  >
                     {t("customer.deleteAccountDescription")}
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <ModalBody>
                   {localPreviewAccount && (
-                    <p className="settings-dialog-preview">
+                    <p className="mt-0 mb-4 text-[13px] text-muted-foreground">
                       {t("customer.previewTitle")}
                     </p>
                   )}
                   {!ready ? (
-                    <div className="account-confirmation">
-                      <p>{t("customer.reauthNote")}</p>
+                    <div className="my-4 grid gap-[9px]">
+                      <p className="my-2.5 text-[14px] leading-[1.6] text-muted-foreground">
+                        {t("customer.reauthNote")}
+                      </p>
                       {state.account?.provider === "E-Mail" && (
                         <>
-                          <label htmlFor={`${id}-password`}>
+                          <label
+                            className="text-[14px] font-semibold"
+                            htmlFor={`${id}-password`}
+                          >
                             {t("customer.currentPassword")}
                           </label>
                           <input
+                            className="min-h-[46px] min-w-0 w-full rounded-lg border border-[color-mix(in_srgb,var(--foreground)_55%,var(--background))] bg-card px-3 py-2.5 text-foreground focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-[var(--theme-accent)]"
                             id={`${id}-password`}
                             type="password"
                             autoComplete={
@@ -662,7 +768,7 @@ export function AccountSettings({
                         </>
                       )}
                       <button
-                        className="account-button"
+                        className={accountButtonClassName}
                         disabled={
                           busy ||
                           (state.account?.provider === "E-Mail" && !password)
@@ -677,11 +783,15 @@ export function AccountSettings({
                       </button>
                     </div>
                   ) : (
-                    <div className="account-confirmation">
-                      <label htmlFor={`${id}-confirmation`}>
+                    <div className="my-4 grid gap-[9px]">
+                      <label
+                        className="text-[14px] font-semibold"
+                        htmlFor={`${id}-confirmation`}
+                      >
                         {t("customer.enterDeletePhrase", { phrase })}
                       </label>
                       <input
+                        className="min-h-[46px] min-w-0 w-full rounded-lg border border-[color-mix(in_srgb,var(--foreground)_55%,var(--background))] bg-card px-3 py-2.5 text-foreground focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-[var(--theme-accent)]"
                         ref={confirmationInput}
                         id={`${id}-confirmation`}
                         autoComplete="off"
@@ -692,23 +802,31 @@ export function AccountSettings({
                         disabled={busy}
                       />
                       {state.deletionStarted && (
-                        <p>{t("customer.deletionRetryNote")}</p>
+                        <p className="my-2.5 text-[14px] leading-[1.6] text-muted-foreground">
+                          {t("customer.deletionRetryNote")}
+                        </p>
                       )}
                     </div>
                   )}
                   {error && (
-                    <p className="account-error" role="alert">
+                    <p className="text-destructive" role="alert">
                       {error}
                     </p>
                   )}
                 </ModalBody>
-                <AlertDialogFooter>
-                  <AlertDialogCancel disabled={busy}>
+                <AlertDialogFooter className={dialogFooterClassName}>
+                  <AlertDialogCancel
+                    className={confirmationCancelClassName}
+                    disabled={busy}
+                  >
                     {t("customer.cancel")}
                   </AlertDialogCancel>
                   {ready && (
                     <button
-                      className="account-button account-danger"
+                      className={cn(
+                        accountButtonClassName,
+                        "border-destructive text-destructive",
+                      )}
                       disabled={
                         busy || !deleteConfirmation(locale, confirmation)
                       }
@@ -740,16 +858,26 @@ export function AccountSettings({
               event.preventDefault();
               previewPasswordOpener.current?.focus();
             }}
-            className="settings-password-dialog"
+            className="max-w-[min(560px,calc(100vw_-_32px))] sm:max-w-[min(560px,calc(100vw_-_32px))]"
             title={t("customer.authReset")}
             description={t("customer.previewTitle")}
             footer={
               <>
                 <DialogClose asChild>
-                  <button className="outline">{t("customer.cancel")}</button>
+                  <button
+                    className={cn(
+                      appButton({ variant: "outline" }),
+                      "at-most-720:min-h-[45px] at-most-720:text-[13px] at-most-720:px-[13px]",
+                    )}
+                  >
+                    {t("customer.cancel")}
+                  </button>
                 </DialogClose>
                 <button
-                  className="primary"
+                  className={cn(
+                    appButton(),
+                    "at-most-720:min-h-[45px] at-most-720:text-[13px] at-most-720:flex-1",
+                  )}
                   form={`${id}-preview-password-form`}
                   type="submit"
                 >
@@ -760,13 +888,17 @@ export function AccountSettings({
           >
             <form
               id={`${id}-preview-password-form`}
-              className="account-confirmation"
+              className="my-4 grid gap-[9px]"
               onSubmit={previewPassword}
             >
-              <label htmlFor={`${id}-new-password`}>
+              <label
+                className="text-[14px] font-semibold"
+                htmlFor={`${id}-new-password`}
+              >
                 {t("customer.password")}
               </label>
               <input
+                className="min-h-[46px] min-w-0 w-full rounded-lg border border-[color-mix(in_srgb,var(--foreground)_55%,var(--background))] bg-card px-3 py-2.5 text-foreground focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-[var(--theme-accent)]"
                 id={`${id}-new-password`}
                 name="password"
                 type="password"
@@ -776,13 +908,20 @@ export function AccountSettings({
                 maxLength={128}
                 aria-describedby={`${id}-password-minimum`}
               />
-              <p id={`${id}-password-minimum`}>
+              <p
+                className="my-2.5 text-[14px] leading-[1.6] text-muted-foreground"
+                id={`${id}-password-minimum`}
+              >
                 {t("customer.passwordMinimum")}
               </p>
-              <label htmlFor={`${id}-repeat-password`}>
+              <label
+                className="text-[14px] font-semibold"
+                htmlFor={`${id}-repeat-password`}
+              >
                 {t("customer.repeatPassword")}
               </label>
               <input
+                className="min-h-[46px] min-w-0 w-full rounded-lg border border-[color-mix(in_srgb,var(--foreground)_55%,var(--background))] bg-card px-3 py-2.5 text-foreground focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-[var(--theme-accent)]"
                 id={`${id}-repeat-password`}
                 name="passwordRepeat"
                 type="password"
@@ -792,7 +931,10 @@ export function AccountSettings({
                 maxLength={128}
               />
               {previewPasswordError && (
-                <p className="account-error" role="alert">
+                <p
+                  className="my-2.5 text-[14px] leading-[1.6] text-destructive"
+                  role="alert"
+                >
                   {previewPasswordError}
                 </p>
               )}

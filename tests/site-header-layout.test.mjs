@@ -136,13 +136,13 @@ for (const account of [
           page === "landing" ? "true" : "false",
           `${page} explicitly enables the initial glass only over a hero`,
         );
-        // Ignore generated Radix IDs; compare the visible header and its wrapper.
+        // Ignore generated Radix IDs when comparing shared header content.
+        // The wrapper hero state is verified separately above.
         for (const node of header.querySelectorAll("[id]"))
           node.removeAttribute("id");
         for (const node of header.querySelectorAll("[for]"))
           node.removeAttribute("for");
         const signature = JSON.stringify({
-          wrapper: wrapper.className,
           header: header.outerHTML,
         });
         if (reference)

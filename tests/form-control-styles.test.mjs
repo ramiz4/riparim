@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { compileApplicationCss } from "./helpers/compiled-tailwind.mjs";
+import { cssForDom } from "./helpers/style-fixture.mjs";
 import { createRequire } from "node:module";
 import { pathToFileURL } from "node:url";
 import { createElement } from "react";
@@ -8,9 +9,6 @@ import { JSDOM } from "jsdom";
 
 const require = createRequire(import.meta.url);
 const { build } = require("esbuild");
-const { transform } = createRequire(require.resolve("vite/package.json"))(
-  "lightningcss",
-);
 const bundle = await build({
   entryPoints: ["components/ui/checkbox.tsx", "components/ui/switch.tsx"],
   outdir: ".test-runtime/form-controls",
@@ -34,54 +32,21 @@ const { Checkbox } = await import(
 const { Switch } = await import(
   pathToFileURL(".test-runtime/form-controls/switch.mjs").href
 );
-const files = [
-  "globals.css",
-  "ui-refresh.css",
-  "auth.css",
-  "catalogue.css",
-  "workshop-pages.css",
-  "ratings.css",
-  "form-controls.css",
-  "theme.css",
-  "[locale]/admin/users/users.css",
-];
-const css = (
-  await Promise.all(
-    files.map((file) =>
-      readFile(new URL(`../app/${file}`, import.meta.url), "utf8"),
-    ),
-  )
-)
-  .join("\n")
-  .replace(/^@(?:import|custom-variant).*;$/gm, "")
-  .replace(/@theme\s+inline\s*\{[^}]*\}/g, "");
-// Empty :is() rules from unrelated pseudo-element selectors never match in a
-// browser, but jsdom rejects them. They have no bearing on control styles.
-const production = transform({
-  filename: "controls.css",
-  code: Buffer.from(css),
-  minify: true,
-})
-  .code.toString()
-  .replace(/[^{}]*:is\(\)\{[^}]*\}/g, "");
-
-// jsdom does not resolve custom properties in border shorthands. Resolve the
-// application's own theme tokens before measuring; browsers resolve them natively.
-function resolveTokens(styles, dark) {
-  const tokens = {};
-  for (const [, selector, declarations] of css.matchAll(
-    /(:root|html\.dark)\s*\{([^}]+)\}/g,
-  )) {
-    if (selector === "html.dark" && !dark) continue;
-    for (const [, name, value] of declarations.matchAll(
-      /(--[\w-]+):\s*([^;]+)/g,
-    ))
-      tokens[name] = value.trim();
-  }
-  return styles.replace(
-    /var\((--[\w-]+)\)/g,
-    (match, name) => tokens[name] ?? match,
-  );
+await build({
+  entryPoints: ["components/select-with-other.tsx"],
+  outfile: ".test-runtime/form-controls/select-with-other.mjs",
+  bundle: true,
+  format: "esm",
+  platform: "node",
+  packages: "external",
+  jsx: "automatic",
+});
+const { SelectWithOther } = await import(
+  pathToFileURL(".test-runtime/form-controls/select-with-other.mjs").href
+);
+const { source: css, production } = await compileApplicationCss();
+function resolveTokens(styles, dark, document) {
+  return cssForDom(styles, { dark, document });
 }
 function movement(style, width) {
   const translate = style.translate.startsWith("calc(")
@@ -107,6 +72,62 @@ for (const [variant, styles] of [
   ["production", production],
 ]) {
   for (const dark of [false, true]) {
+    for (const presentation of ["default", "claim", "moderation"]) {
+      for (const disabled of [false, true]) {
+        const html = renderToStaticMarkup(
+          createElement(SelectWithOther, {
+            id: "visit-evidence",
+            label: "Visit evidence",
+            placeholder: "Choose evidence",
+            options: [{ value: "invoice", label: "Invoice" }],
+            value: { choice: "", detail: "" },
+            onChange() {},
+            detailLabel: "Other evidence",
+            detailPlaceholder: "Describe evidence",
+            minLength: 3,
+            maxLength: 100,
+            presentation,
+            disabled,
+          }),
+        );
+        const dom = new JSDOM(
+          `<html class="${dark ? "dark" : ""}"><head><style></style></head><body>${html}</body></html>`,
+        );
+        try {
+          const { document } = dom.window;
+          document.querySelector("style").textContent = resolveTokens(
+            styles,
+            dark,
+            document,
+          );
+          const trigger = document.querySelector("button[role=combobox]"),
+            value = trigger?.querySelector("[data-slot=select-value]"),
+            context = `${variant}, dark=${dark}, ${presentation}, disabled=${disabled}`,
+            expected = dark ? "rgb(237, 247, 246)" : "rgb(24, 44, 48)";
+          assert(trigger?.hasAttribute("data-placeholder"), context);
+          assert.equal(value?.textContent, "Choose evidence", context);
+          assert.equal(
+            dom.window.getComputedStyle(trigger).color,
+            expected,
+            context,
+          );
+          assert.equal(
+            dom.window.getComputedStyle(value).color,
+            expected,
+            context,
+          );
+        } finally {
+          dom.window.close();
+        }
+      }
+    }
+  }
+}
+for (const [variant, styles] of [
+  ["source", css],
+  ["production", production],
+]) {
+  for (const dark of [false, true]) {
     for (const context of [
       "",
       "activation-switch",
@@ -115,9 +136,11 @@ for (const [variant, styles] of [
       for (const size of ["default", "sm"]) {
         for (const checked of [false, true]) {
           const dom = new JSDOM(
-            `<html class="${dark ? "dark" : ""}"><style>${resolveTokens(styles, dark)}</style><form class="journey-form">${markup(checked, size, context)}</form></html>`,
+            `<html class="${dark ? "dark" : ""}"><style></style><form class="journey-form">${markup(checked, size, context)}</form></html>`,
           );
           try {
+            dom.window.document.querySelector("style").textContent =
+              resolveTokens(styles, dark, dom.window.document);
             const get = (selector) =>
               dom.window.getComputedStyle(
                 dom.window.document.querySelector(selector),
@@ -140,10 +163,9 @@ for (const [variant, styles] of [
               `${message}: thumb reaches the correct end`,
             );
             const expected = dom.window.document.createElement("span");
-            expected.style.backgroundColor = resolveTokens(
-              checked ? "var(--primary)" : "var(--input)",
-              dark,
-            );
+            expected.style.backgroundColor = dom.window
+              .getComputedStyle(dom.window.document.documentElement)
+              .getPropertyValue(checked ? "--primary" : "--input");
             assert.equal(
               track.backgroundColor,
               expected.style.backgroundColor,
@@ -165,9 +187,11 @@ for (const [variant, styles] of [
           ),
         );
         const dom = new JSDOM(
-          `<html class="${dark ? "dark" : ""}"><style>${resolveTokens(styles, dark)}</style><form class="journey-form">${html}</form></html>`,
+          `<html class="${dark ? "dark" : ""}"><style></style><form class="journey-form">${html}</form></html>`,
         );
         try {
+          dom.window.document.querySelector("style").textContent =
+            resolveTokens(styles, dark, dom.window.document);
           const node = dom.window.document.querySelector(
               "[data-slot=checkbox]",
             ),
@@ -186,10 +210,9 @@ for (const [variant, styles] of [
             checked === "indeterminate" ? "mixed" : String(checked),
           );
           const expected = dom.window.document.createElement("span");
-          expected.style.backgroundColor = resolveTokens(
-            checked ? "var(--primary)" : "var(--background)",
-            dark,
-          );
+          expected.style.backgroundColor = dom.window
+            .getComputedStyle(dom.window.document.documentElement)
+            .getPropertyValue(checked ? "--primary" : "--background");
           assert.equal(
             style.backgroundColor,
             expected.style.backgroundColor,
@@ -219,5 +242,5 @@ for (const [variant, styles] of [
   }
 }
 console.log(
-  "Shared form controls: source and production contain both switch sizes in all forms and themes; checkbox states and reuse passed",
+  "Shared form controls: compiled source/production preserve both switch sizes, checkbox states and empty SelectWithOther foreground in every presentation and theme",
 );

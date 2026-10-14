@@ -1,73 +1,72 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
-import { createRequire } from "node:module";
-import { JSDOM } from "jsdom";
-
-const require = createRequire(import.meta.url);
-const { transform } = createRequire(require.resolve("vite/package.json"))(
-  "lightningcss",
-);
-const css = await readFile(
-  new URL("../app/ratings.css", import.meta.url),
-  "utf8",
-);
-const production = transform({
-  filename: "ratings.css",
-  code: Buffer.from(css),
-  minify: true,
-}).code.toString();
-for (const [variant, styles] of [
-  ["source", css],
-  ["production", production],
-]) {
-  for (const locale of ["de", "sq", "en"])
-    for (const dark of [false, true]) {
-      const dom = new JSDOM(
-        `<html lang="${locale}" class="${dark ? "dark" : ""}"><style>${styles}</style><div class="profile-overview-details"><div class="google-reviews-panel google-overview-panel"><div class="google-official-widget"><gmp-advanced-place-details><gmp-place-opening-hours></gmp-place-opening-hours><gmp-place-attribution></gmp-place-attribution></gmp-advanced-place-details></div></div></div><div class="profile-google-reviews"><div class="google-official-widget"><gmp-advanced-place-details></gmp-advanced-place-details></div></div></html>`,
-      );
-      try {
-        const widget = dom.window.document.querySelector(
-          ".google-overview-panel gmp-advanced-place-details",
+import { compileApplicationCss } from "./helpers/compiled-tailwind.mjs";
+import { cssForDom } from "./helpers/style-fixture.mjs";
+import { createGoogleStyleFixture } from "./helpers/google-style-fixture.mjs";
+const { source, production } = await compileApplicationCss();
+const fixture = await createGoogleStyleFixture("google-opening-hours-styles");
+try {
+  for (const [variant, css] of [
+    ["source", source],
+    ["production", production],
+  ]) {
+    for (const locale of ["de", "sq", "en"])
+      for (const dark of [false, true]) {
+        fixture.document.documentElement.lang = locale;
+        fixture.document.documentElement.classList.toggle("dark", dark);
+        fixture.document.getElementById("fixture-style").textContent =
+          cssForDom(css, { dark });
+        await fixture.render(
+          locale,
+          fixture.h(
+            "div",
+            null,
+            fixture.widget("overview"),
+            fixture.widget("reviews"),
+          ),
         );
-        const style = dom.window.getComputedStyle(widget);
+        const widgets = fixture.document.querySelectorAll(
+          "gmp-advanced-place-details",
+        );
+        assert.equal(
+          widgets.length,
+          2,
+          "Actual overview and reviews mount isolated provider hosts",
+        );
+        const style = fixture.dom.window.getComputedStyle(widgets[0]);
         assert.equal(
           style.height,
           "auto",
-          `${variant}, ${locale}, dark=${dark}: the opening-hours widget must grow when Google expands the weekly list instead of clipping it to the summary height`,
+          `${variant}, ${locale}, dark=${dark}: expanded weekly hours retain automatic height`,
         );
-        assert.equal(
-          style.maxHeight,
-          "",
-          "expanded opening hours have no height cap",
-        );
+        assert.equal(style.maxHeight, "", "The weekly list has no height cap");
         assert.equal(
           style.width,
           "100%",
-          "the overview fits narrow profile columns",
+          "The actual provider host fits a narrow profile column",
         );
         assert.equal(
           style.maxWidth,
           "none",
-          "the overview fills desktop profile columns",
+          "The actual provider host fills the desktop column",
         );
         assert(
-          widget.querySelector("gmp-place-attribution"),
-          "native Google attribution remains present",
+          widgets[0].querySelector("gmp-place-opening-hours"),
+          "The overview retains opening-hours content",
+        );
+        assert(
+          widgets[0].querySelector("gmp-place-attribution"),
+          "Native provider attribution remains present",
         );
         assert.equal(
-          dom.window.getComputedStyle(
-            dom.window.document.querySelector(
-              ".profile-google-reviews gmp-advanced-place-details",
-            ),
-          ).height,
+          fixture.dom.window.getComputedStyle(widgets[1]).height,
           "480px",
-          "the separate review list retains its scrollable height",
+          "The separate review list keeps its scrolling height",
         );
-      } finally {
-        dom.window.close();
       }
-    }
+  }
+} finally {
+  await fixture.close();
 }
 console.log(
-  "Google opening hours: expandable overview height survives source and production CSS in DE/SQ/EN and both themes",
+  "Google opening hours: actual component hosts retain automatic overview height, scrollable review height and attribution with compiled source/production CSS in DE/SQ/EN and both themes",
 );

@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
+import { appButton, pageFrameClassName } from "@/lib/presentation";
 import { useI18n } from "@/lib/i18n/client";
 import type { Workshop } from "@/lib/workshops";
 import type { WorkshopDisplayById } from "@/lib/workshop-profile-content";
@@ -58,12 +60,22 @@ export default function PublicWorkshopShell({ id }: { id: string }) {
   return (
     <>
       <SiteHeader account={null} publicSnapshot />
-      <main className="workshop-page wrap" data-public-profile-id={id}>
+      <main
+        className={cn(
+          pageFrameClassName,
+          "pt-6 pb-16 at-most-720:pt-[18px] at-most-720:pb-[calc(108px_+_env(safe-area-inset-bottom))]",
+        )}
+        data-riparim-page="workshop"
+        data-public-profile-id={id}
+      >
         <h1>
           {error ? t("common.profileNotAvailable") : t("common.loadingProfile")}
         </h1>
         {error ? (
-          <button className="primary" onClick={() => window.location.reload()}>
+          <button
+            className={appButton()}
+            onClick={() => window.location.reload()}
+          >
             {t("common.retry")}
           </button>
         ) : (

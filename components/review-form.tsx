@@ -3,6 +3,20 @@ import { storedEvidenceTypes } from "@/lib/i18n/canonical-values";
 
 import { reviewServiceValues, reviewTextMaxLength } from "@/lib/review";
 import { useI18n } from "@/lib/i18n/client";
+import { cn } from "@/lib/utils";
+import {
+  appButton,
+  dialogCopyClassName,
+  errorClassName,
+  formClassName,
+  formGridClassName,
+  formHintClassName,
+  formLabelClassName,
+  helpTextClassName,
+  inputClassName,
+  noteClassName,
+  textareaClassName,
+} from "@/lib/presentation";
 import {
   responseError,
   LocalizedError,
@@ -54,6 +68,7 @@ type Props = {
   existing?: Visit | null;
   formId?: string;
   showSubmit?: boolean;
+  presentation?: "default" | "profile";
   returnTo: string;
   onSubmitted?: () => void;
   onBusyChange?: (busy: boolean) => void;
@@ -65,6 +80,7 @@ export function ReviewForm({
   existing = null,
   formId,
   showSubmit = true,
+  presentation = "default",
   returnTo,
   onSubmitted,
   onBusyChange,
@@ -218,66 +234,94 @@ export function ReviewForm({
   }
   if (!signedIn)
     return (
-      <div className="login-prompt">
-        <ShieldCheck size={25} />
-        <p>{t("customer.reviewLogin")}</p>
+      <div
+        className="flex flex-col items-center gap-5 p-5 text-center"
+        data-ui="review-login-prompt"
+      >
+        <ShieldCheck
+          size={25}
+          className="text-[#327b52] dark:text-[var(--theme-positive)]"
+        />
+        <p className={dialogCopyClassName}>{t("customer.reviewLogin")}</p>
         {workshopName && (
-          <p>
+          <p className={dialogCopyClassName}>
             <strong>
               {t("customer.workshop")}: {workshopName}
             </strong>
           </p>
         )}
         <LocaleAnchor
-          className="primary"
+          className={appButton()}
           href={`/anmelden?weiter=${encodeURIComponent(returnTo)}`}
         >
           {t("customer.loginOrRegister")}
         </LocaleAnchor>
-        <p className="help">{t("customer.reviewPrivacy")}</p>
+        <p className={cn(helpTextClassName, "leading-[1.65]")}>
+          {t("customer.reviewPrivacy")}
+        </p>
       </div>
     );
   if (done)
     return (
-      <div className="review-submission-success" role="status">
-        <FileCheck2 size={30} />
-        <h3>{t("customer.reviewSubmitted")}</h3>
-        <p>{t("customer.reviewSubmittedNote")}</p>
+      <div
+        className="flex flex-col gap-[13px] py-[10px]"
+        role="status"
+        data-ui="review-submission-success"
+      >
+        <FileCheck2
+          size={30}
+          className="text-[#26775e] dark:text-[var(--theme-positive)]"
+        />
+        <h3 className="m-0 text-[20px]">{t("customer.reviewSubmitted")}</h3>
+        <p className="m-0 text-[14px] leading-[1.7] text-[#5d776b] dark:text-muted-foreground">
+          {t("customer.reviewSubmittedNote")}
+        </p>
         <AccountStorageNotice />
       </div>
     );
   if (!directory.length)
-    return <p className="help">{t("customer.noWorkshop")}</p>;
+    return (
+      <p className={cn(helpTextClassName, "leading-[1.65]")}>
+        {t("customer.noWorkshop")}
+      </p>
+    );
   return (
     <form
       id={id}
-      className="journey-form combined-review-form"
+      className={formClassName}
+      data-ui="review-form"
       onSubmit={submit}
       aria-label={t("customer.reviewForm")}
     >
       {workshopName && (!workshop || existing) && (
-        <p className="note">
+        <p className={cn(noteClassName, dialogCopyClassName)}>
           <strong>
             {t("customer.workshop")}: {workshopName}
           </strong>
         </p>
       )}
       {existing?.moderator_note && (
-        <div className="note">
-          <p>
+        <div className={noteClassName}>
+          <p className={dialogCopyClassName}>
             {t("customer.moderationNote", { note: existing.moderator_note })}
           </p>
         </div>
       )}
       {existing?.status === "published" && (
-        <p className="note">{t("customer.reviewRechecked")}</p>
+        <p className={cn(noteClassName, dialogCopyClassName)}>
+          {t("customer.reviewRechecked")}
+        </p>
       )}
       {!workshop && (
-        <Field className="picker-field">
-          <FieldLabel htmlFor={`${id}-workshop`}>
+        <Field className="min-w-0 gap-[6px] border-0 bg-transparent p-0">
+          <FieldLabel
+            className="m-0 block text-[14px] leading-snug font-semibold text-foreground"
+            htmlFor={`${id}-workshop`}
+          >
             {t("customer.workshop")}
           </FieldLabel>
           <Picker
+            presentation="form"
             id={`${id}-workshop`}
             value={wid}
             onChange={setWid}
@@ -289,25 +333,41 @@ export function ReviewForm({
           />
         </Field>
       )}
-      <fieldset className="review-section">
-        <legend className="sr-only">{t("customer.experience")}</legend>
-        <div className="form-grid">
-          <label>
+      <fieldset
+        className="m-0 flex min-w-0 flex-col gap-4 border-0 p-0"
+        data-ui="review-experience"
+      >
+        <legend
+          className={
+            presentation === "profile"
+              ? "mb-0 pr-[9px] text-[16px] font-[650] text-[#254b48] dark:text-foreground"
+              : "sr-only"
+          }
+        >
+          {t("customer.experience")}
+        </legend>
+        <div className={formGridClassName}>
+          <label className={cn(formLabelClassName, "min-w-0")}>
             {t("customer.visitDate")}
             <input
               required
               name="date"
               type="date"
+              className={cn(
+                inputClassName,
+                "box-border min-h-[46px] min-w-0 max-w-full appearance-none [&::-webkit-date-and-time-value]:min-w-0 [&::-webkit-date-and-time-value]:text-left",
+              )}
               value={date}
               max={new Date().toISOString().slice(0, 10)}
               onChange={(e) => setDate(e.target.value)}
             />
           </label>
-          <label>
+          <label className={cn(formLabelClassName, "min-w-0")}>
             {t("customer.vehicle")}
             <input
               required
               name="vehicle"
+              className={inputClassName}
               minLength={3}
               maxLength={100}
               placeholder={t("customer.vehicleExample")}
@@ -316,11 +376,15 @@ export function ReviewForm({
             />
           </label>
         </div>
-        <Field className="picker-field">
-          <FieldLabel htmlFor={`${id}-service`}>
+        <Field className="min-w-0 gap-[6px] border-0 bg-transparent p-0">
+          <FieldLabel
+            className="m-0 block text-[14px] leading-snug font-semibold text-foreground"
+            htmlFor={`${id}-service`}
+          >
             {t("customer.completedWork")}
           </FieldLabel>
           <SearchablePicker
+            presentation="form"
             id={`${id}-service`}
             required
             multiple
@@ -337,9 +401,12 @@ export function ReviewForm({
           />
         </Field>
         <div>
-          <label id={`${id}-rating`}>{t("customer.yourStars")}</label>
+          <label className={formLabelClassName} id={`${id}-rating`}>
+            {t("customer.yourStars")}
+          </label>
           <div
-            className="star-rating"
+            className="mt-[6px] flex flex-wrap items-center gap-[5px] at-most-720:gap-[2px]"
+            data-ui="star-rating"
             role="radiogroup"
             aria-labelledby={`${id}-rating`}
             aria-required="true"
@@ -350,6 +417,7 @@ export function ReviewForm({
                 key={value}
                 type="button"
                 role="radio"
+                className="grid min-h-[42px] min-w-10 place-items-center rounded-lg p-[5px] text-[#bc9137] hover:bg-[#fbf3dc] aria-checked:bg-[#fbf3dc] dark:text-[var(--theme-warning)] dark:hover:bg-[#3b3020] dark:aria-checked:bg-[#3b3020] at-most-720:min-w-[38px]"
                 aria-checked={rating === value}
                 aria-label={t("customer.stars", { count: value })}
                 tabIndex={rating === value || (!rating && value === 1) ? 0 : -1}
@@ -397,16 +465,21 @@ export function ReviewForm({
                 />
               </button>
             ))}
-            <span>{rating ? `${rating} / 5` : t("customer.choose")}</span>
+            <span className="ml-[6px] text-[13px] text-muted-foreground at-most-720:text-[12px]">
+              {rating ? `${rating} / 5` : t("customer.choose")}
+            </span>
           </div>
         </div>
         <details
-          className="review-optional"
+          data-ui="review-optional"
           open={!!existing?.review || !!draft?.review}
         >
-          <summary>{t("customer.yourReview")}</summary>
+          <summary className="cursor-pointer py-[6px] text-[14px] font-semibold focus-visible:[outline:3px_solid_var(--ring)] focus-visible:outline-offset-[3px]">
+            {t("customer.yourReview")}
+          </summary>
           <textarea
             name="review"
+            className={textareaClassName}
             aria-label={t("customer.yourReview")}
             maxLength={reviewTextMaxLength}
             rows={2}
@@ -416,13 +489,27 @@ export function ReviewForm({
           />
         </details>
       </fieldset>
-      <fieldset className="review-section">
-        <legend>{t("customer.privateEvidence")}</legend>
-        <Field className="picker-field">
-          <FieldLabel htmlFor={`${id}-kind`}>
+      <fieldset
+        className="mt-[3px] flex min-w-0 flex-col gap-4 border-0 border-t border-[#e0e8ea] pt-[18px] dark:border-border"
+        data-ui="review-evidence"
+      >
+        <legend
+          className={cn(
+            "pr-[9px] text-[15px] font-[650] text-[#254b48] dark:text-foreground",
+            presentation === "profile" && "mb-3 text-[16px]",
+          )}
+        >
+          {t("customer.privateEvidence")}
+        </legend>
+        <Field className="min-w-0 gap-[6px] border-0 bg-transparent p-0">
+          <FieldLabel
+            className="m-0 block text-[14px] leading-snug font-semibold text-foreground"
+            htmlFor={`${id}-kind`}
+          >
             {t("customer.evidenceType")}
           </FieldLabel>
           <Picker
+            presentation="form"
             id={`${id}-kind`}
             value={kind}
             onChange={setKind}
@@ -436,23 +523,31 @@ export function ReviewForm({
           />
         </Field>
         {existing?.file_name && (
-          <p className="existing-evidence">
+          <p className="flex flex-wrap items-center gap-[7px] rounded-lg bg-[#f2f7f5] px-[13px] py-[11px] text-[14px] leading-[1.65] text-[#566c71] [overflow-wrap:anywhere] dark:bg-[var(--theme-surface)] dark:text-muted-foreground">
             <FileCheck2 size={17} />
             {t("customer.existingReceipt", { name: existing.file_name })}
-            <span>{t("customer.keepReceipt")}</span>
+            <span className="w-full text-[12px] text-muted-foreground">
+              {t("customer.keepReceipt")}
+            </span>
           </p>
         )}
-        <label className="upload">
-          <Upload size={20} />
+        <label
+          className={cn(
+            formLabelClassName,
+            "flex flex-col items-center gap-1 rounded-[9px] border border-dashed border-[#95b39f] bg-[#f9fbf7] p-5 dark:border-border dark:bg-[var(--theme-surface)] dark:text-muted-foreground",
+          )}
+        >
+          <Upload size={20} className="mb-[7px] text-[#639571]" />
           <strong>
             {existing?.file_name
               ? t("customer.replaceReceipt")
               : t("customer.uploadReceipt")}
           </strong>
-          <span>{t("customer.fileTypes")}</span>
+          <span className={formHintClassName}>{t("customer.fileTypes")}</span>
           <input
             name="file"
             type="file"
+            className="mt-[10px] w-full max-w-[320px] text-[13px] font-normal"
             onChange={(event) =>
               setSelectedFile(event.target.files?.[0] ?? null)
             }
@@ -464,14 +559,24 @@ export function ReviewForm({
             }
           />
           {selectedFile && (
-            <span className="review-selected-file">{selectedFile.name}</span>
+            <span
+              data-ui="review-selected-file"
+              className={cn(
+                formHintClassName,
+                presentation === "profile" &&
+                  "font-[550] text-foreground [overflow-wrap:anywhere]",
+              )}
+            >
+              {selectedFile.name}
+            </span>
           )}
         </label>
         {kind === storedEvidenceTypes.other ? (
-          <label>
+          <label className={formLabelClassName}>
             {t("customer.describeEvidence")}
             <textarea
               name="evidenceNote"
+              className={textareaClassName}
               rows={2}
               minLength={40}
               required
@@ -483,12 +588,15 @@ export function ReviewForm({
           </label>
         ) : (
           <details
-            className="review-optional"
+            data-ui="review-optional"
             open={!!existing?.evidence_note || !!draft?.note}
           >
-            <summary>{t("customer.receiptNote")}</summary>
+            <summary className="cursor-pointer py-[6px] text-[14px] font-semibold focus-visible:[outline:3px_solid_var(--ring)] focus-visible:outline-offset-[3px]">
+              {t("customer.receiptNote")}
+            </summary>
             <textarea
               name="evidenceNote"
+              className={textareaClassName}
               aria-label={t("customer.receiptNote")}
               rows={2}
               maxLength={3000}
@@ -498,13 +606,26 @@ export function ReviewForm({
             />
           </details>
         )}
-        <p className="help">{t("customer.redactNote")}</p>
+        <p className={cn(helpTextClassName, "leading-[1.65]")}>
+          {t("customer.redactNote")}
+        </p>
       </fieldset>
-      <div className={`consent-block${consentError ? " invalid" : ""}`}>
-        <label className="consent" htmlFor={consentId}>
+      <div
+        className={cn(
+          "rounded-lg border border-[#d6e1d8] bg-[#f7faf6] p-4 dark:border-border dark:bg-[var(--theme-surface)] dark:text-muted-foreground at-most-720:p-[14px]",
+          consentError &&
+            "border-[#c4584b] bg-[#fff7f5] dark:border-[#75413e] dark:bg-[#3a2426] dark:text-[var(--theme-danger)]",
+        )}
+        data-ui="review-consent"
+      >
+        <label
+          className={cn(formLabelClassName, "flex items-start gap-[10px]")}
+          htmlFor={consentId}
+        >
           <Checkbox
             id={consentId}
             ref={consentCheckbox}
+            className="mt-[2px] shrink-0"
             checked={consent}
             onCheckedChange={(v) => {
               setConsent(v === true);
@@ -514,24 +635,43 @@ export function ReviewForm({
             aria-invalid={consentError}
             aria-describedby={`${consentId}-help${consentError ? ` ${consentId}-error` : ""}`}
           />
-          <span id={`${consentId}-help`}>{t("customer.consentNote")}</span>
+          <span
+            className="flex flex-col gap-[6px] text-[13px] font-normal leading-[1.7] text-[#697d6d] dark:text-muted-foreground"
+            id={`${consentId}-help`}
+          >
+            {t("customer.consentNote")}
+          </span>
         </label>
         {consentError && (
-          <p className="consent-error" id={`${consentId}-error`} role="alert">
+          <p
+            className="mt-3 ml-[29px] text-[14px] font-semibold leading-[1.6] text-[#a73c30] dark:text-[var(--theme-danger)] at-most-720:ml-0"
+            id={`${consentId}-error`}
+            role="alert"
+          >
             {t("customer.consentError")}
           </p>
         )}
       </div>
       {error && (
-        <p role="alert" className="error">
+        <p role="alert" className={errorClassName}>
           {error}
         </p>
       )}
       {showSubmit && (
-        <button type="submit" disabled={busy} className="primary review-submit">
+        <button
+          type="submit"
+          disabled={busy}
+          className={cn(
+            appButton(),
+            "min-h-[45px] self-start px-[22px] at-most-720:w-full",
+          )}
+        >
           {busy ? (
             <>
-              <LoaderCircle className="spin" size={17} />
+              <LoaderCircle
+                className="inline-block animate-[spin_1s_linear_infinite]"
+                size={17}
+              />
               {t("customer.submitting")}
             </>
           ) : (

@@ -162,7 +162,7 @@ try {
   await click(button("Versandübersicht aktualisieren"));
   check(
     document
-      .querySelector(".note")
+      .querySelector("[data-ui~=notification-panel] > p:not([role])")
       .textContent.includes("noch nicht eingerichtet"),
     "Missing server configuration is explicit and does not undo moderation",
   );
@@ -170,7 +170,8 @@ try {
     !button("Fällige Benachrichtigungen prüfen"),
     "There is no global delivery action",
   );
-  const entries = () => document.querySelectorAll(".notification-entry");
+  const entries = () =>
+    document.querySelectorAll("[data-ui~='notification-entry']");
   check(
     entries().length === 2 &&
       entries()[0].textContent.includes("Versand blockiert") &&
@@ -254,7 +255,7 @@ try {
   await render(2);
   check(
     document
-      .querySelector(".notification-panel")
+      .querySelector("[data-ui~='notification-panel']")
       .textContent.includes("bestätigt noch keine Zustellung"),
     "An empty queue explains acceptance versus final delivery",
   );

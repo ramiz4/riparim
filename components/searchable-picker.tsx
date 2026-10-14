@@ -2,6 +2,8 @@
 import { useId, useRef, useState, type KeyboardEvent } from "react";
 import { Check, ChevronDown, Search, X } from "lucide-react";
 import { useI18n } from "@/lib/i18n/client";
+import { cn } from "@/lib/utils";
+import { pickerVariants, type PickerPresentation } from "./picker-styles";
 import {
   Popover,
   PopoverAnchor,
@@ -22,6 +24,8 @@ type Props = {
   allValue?: string;
   disabled?: boolean;
   disabledValues?: string[];
+  presentation?: PickerPresentation;
+  className?: string;
 };
 const normalized = (value: string) =>
   value
@@ -41,6 +45,8 @@ export function SearchablePicker({
   allValue,
   disabled = false,
   disabledValues = [],
+  presentation = "plain",
+  className,
 }: Props) {
   const { t } = useI18n(),
     listId = useId(),
@@ -119,7 +125,13 @@ export function SearchablePicker({
     >
       <PopoverAnchor asChild>
         <div
-          className="picker searchable-picker-control"
+          className={cn(
+            pickerVariants({ presentation }),
+            "flex items-center",
+            presentation === "catalogue" ? "gap-[10px]" : "gap-[6px]",
+            className,
+          )}
+          data-ui="picker-control"
           onClick={(event) => {
             if (!disabled && !(event.target as HTMLElement).closest("button")) {
               setOpen(true);
@@ -128,18 +140,24 @@ export function SearchablePicker({
           }}
         >
           {multiple && (
-            <div className="searchable-picker-selected">
+            <div className="flex min-w-0 flex-1 flex-wrap gap-[5px]">
               {specificSelected.length ? (
                 <>
                   {specificSelected.slice(0, 2).map((item) => (
-                    <span className="searchable-picker-chip" key={item}>
-                      <span>{labelFor(item)}</span>
+                    <span
+                      className="inline-flex max-w-full items-center gap-1 rounded-[5px] bg-[var(--theme-hover)] pt-[3px] pr-1 pb-[3px] pl-[7px] text-[0.8125rem] leading-[1.4]"
+                      key={item}
+                    >
+                      <span className="[overflow-wrap:anywhere]">
+                        {labelFor(item)}
+                      </span>
                       <button
                         type="button"
                         aria-label={t("common.removeOption", {
                           value: labelFor(item),
                         })}
                         disabled={disabled}
+                        className="grid min-h-[26px] w-[26px] shrink-0 place-items-center rounded-[3px] hover:bg-secondary"
                         onClick={() => {
                           choose(item);
                           trigger.current?.focus({ preventScroll: true });
@@ -152,7 +170,7 @@ export function SearchablePicker({
                   {specificSelected.length > 2 && (
                     <button
                       type="button"
-                      className="searchable-picker-more"
+                      className="min-h-[30px] rounded-[5px] bg-[var(--theme-hover)] px-[7px] py-1 text-[0.8125rem] whitespace-nowrap"
                       onClick={() => {
                         setOpen(true);
                         setQuery("");
@@ -166,7 +184,7 @@ export function SearchablePicker({
                 </>
               ) : (
                 <span
-                  className="searchable-picker-placeholder"
+                  className="cursor-pointer"
                   onClick={() => {
                     if (!disabled) {
                       setOpen(true);
@@ -184,7 +202,11 @@ export function SearchablePicker({
               ref={trigger}
               id={id}
               type="button"
-              className={`searchable-picker-trigger${multiple ? " searchable-picker-toggle" : ""}`}
+              className={cn(
+                "flex min-h-6 min-w-0 flex-1 items-center justify-between gap-2 text-left [&>span]:min-w-0 [&>span]:[overflow-wrap:anywhere] [&>svg]:shrink-0",
+                multiple &&
+                  "min-h-[30px] flex-[0_0_30px] self-stretch justify-center",
+              )}
               role="combobox"
               aria-label={label}
               aria-required={required || undefined}
@@ -205,7 +227,7 @@ export function SearchablePicker({
       </PopoverAnchor>
       <PopoverContent
         id={`${listId}-popup`}
-        className="searchable-picker-content"
+        className="w-[var(--radix-popover-trigger-width)] min-w-[min(260px,calc(100vw_-_32px))] max-w-[calc(100vw_-_32px)] overflow-hidden border-border bg-popover p-0 text-popover-foreground"
         align="start"
         onOpenAutoFocus={(event) => {
           event.preventDefault();
@@ -213,10 +235,15 @@ export function SearchablePicker({
         }}
         aria-label={label}
       >
-        <div className="searchable-picker-search">
-          <Search size={16} aria-hidden="true" />
+        <div className="flex items-center gap-2 border-b border-border p-3 focus-within:[box-shadow:inset_0_-2px_var(--ring)]">
+          <Search
+            className="shrink-0 text-muted-foreground"
+            size={16}
+            aria-hidden="true"
+          />
           <input
             ref={input}
+            className="w-full min-w-0 border-0 bg-transparent text-[1rem] text-inherit outline-none"
             type="search"
             aria-label={t("common.searchOptions", { label })}
             placeholder={t("common.searchOptions", { label })}
@@ -231,25 +258,36 @@ export function SearchablePicker({
           role="listbox"
           aria-label={label}
           aria-multiselectable={multiple || undefined}
-          className="searchable-picker-options"
+          className="max-h-[min(260px,calc(var(--radix-popover-content-available-height,400px)_-_55px))] overflow-y-auto overscroll-contain p-[5px]"
           onKeyDown={navigate}
         >
           {matches.map((item) => (
             <button
               type="button"
               role="option"
+              className="flex min-h-10 w-full items-center gap-[9px] rounded-[6px] p-2 text-left text-[0.875rem] hover:bg-[var(--theme-hover)] focus-visible:bg-[var(--theme-hover)] focus-visible:[outline:2px_solid_var(--ring)] focus-visible:outline-offset-[-2px] aria-selected:bg-[var(--theme-hover)] disabled:opacity-50"
               aria-selected={selected.includes(item)}
               disabled={disabledValues.includes(item)}
               key={item}
               onClick={() => choose(item)}
             >
-              <span className="searchable-picker-check" aria-hidden="true">
+              <span
+                className="grid w-[18px] shrink-0 place-items-center text-[var(--theme-accent)] dark:text-ring"
+                aria-hidden="true"
+              >
                 {selected.includes(item) && <Check size={16} />}
               </span>
               <span>{labelFor(item)}</span>
             </button>
           ))}
-          {!matches.length && <p role="status">{t("common.noOptions")}</p>}
+          {!matches.length && (
+            <p
+              className="px-[10px] py-4 text-[0.875rem] text-muted-foreground"
+              role="status"
+            >
+              {t("common.noOptions")}
+            </p>
+          )}
         </div>
       </PopoverContent>
     </Popover>
