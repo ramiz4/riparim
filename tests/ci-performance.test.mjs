@@ -10,7 +10,7 @@ import {
 } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import {
   createNpmCacheWrapper,
   initializeBenchmarkCache,
@@ -392,7 +392,10 @@ try {
   );
   const fakeNext = join(root, "next/dist/bin/next");
   await mkdir(join(root, "next/dist/bin"), { recursive: true });
-  await writeFile(fakeNext, "setTimeout(() => {}, 250);");
+  await writeFile(
+    fakeNext,
+    "process.title='next-build (v16.3.4)'; setTimeout(() => {}, 250);",
+  );
   assert.equal(
     await isExpectedNextBuild(
       [process.execPath, fakeNext, "build", "--webpack"],
@@ -470,7 +473,15 @@ try {
     process.exit(result.status ?? 1);
   `,
     ],
-    { stdio: "pipe", env: { ...process.env, BENCHMARK_NEXT_CLI: otherNext } },
+    {
+      stdio: "pipe",
+      env: {
+        ...process.env,
+        BENCHMARK_NEXT_CLI: otherNext,
+        NODE_OPTIONS:
+          `${process.env.NODE_OPTIONS ?? ""} --import=${pathToFileURL(fileURLToPath(new URL("../scripts/ci-next-launch-hook.mjs", import.meta.url))).href}?duplicate`.trim(),
+      },
+    },
   );
   const outerMeasured = JSON.parse(
     (await readFile(join(outerDirectory, "phases.jsonl"), "utf8")).trim(),
@@ -491,6 +502,15 @@ try {
   assert.deepEqual(measured.suites, [
     { suite: "fixture.test.mjs", exitCode: 0, seconds: 0.023 },
   ]);
+  assert.equal(
+    measured.nextProductionCompilations,
+    2,
+    "silent builds count before their main code overwrites process.title",
+  );
+  assert.ok(
+    measured.nextLaunchRecords >= 4,
+    "duplicate hook module imports observe the same two launches",
+  );
   if (process.platform === "linux") {
     assert.ok(measured.memory.peakBytes > 0);
     assert.ok(measured.memory.samples > 0);

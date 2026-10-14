@@ -5,12 +5,12 @@ import {
   readFile,
   readdir,
   writeFile,
-  readlink,
 } from "node:fs/promises";
 import { createWriteStream } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { setTimeout as delay } from "node:timers/promises";
-import { processTreeMemory, isExpectedNextBuild } from "./ci-performance.mjs";
+import { processTreeMemory } from "./ci-performance.mjs";
 
 const [directory, label, command, ...args] = process.argv.slice(2);
 if (!directory || !/^[a-z][a-z0-9-]*$/.test(label ?? "") || !command)
@@ -22,7 +22,19 @@ const logPath = join(directory, `${label}.log`),
   log = createWriteStream(logPath),
   startedAt = new Date().toISOString(),
   start = performance.now();
-const child = spawn(command, args, { stdio: ["ignore", "pipe", "pipe"] });
+const nextLaunchLog = join(directory, `${label}-next-launches.jsonl`),
+  hook = pathToFileURL(
+    fileURLToPath(new URL("./ci-next-launch-hook.mjs", import.meta.url)),
+  ).href;
+await writeFile(nextLaunchLog, "");
+const child = spawn(command, args, {
+  stdio: ["ignore", "pipe", "pipe"],
+  env: {
+    ...process.env,
+    NODE_OPTIONS: `${process.env.NODE_OPTIONS ?? ""} --import=${hook}`.trim(),
+    BENCHMARK_NEXT_LAUNCH_LOG: nextLaunchLog,
+  },
+});
 for (const [stream, output] of [
   [child.stdout, process.stdout],
   [child.stderr, process.stderr],
@@ -36,7 +48,6 @@ let exited = false,
   samples = 0,
   measurementError = null;
 const known = new Map();
-const nextLaunches = new Set();
 const npmCacheProcesses = new Map();
 async function processes() {
   const entries = await readdir("/proc");
@@ -96,31 +107,6 @@ const measuring = (async () => {
         if (descendants.has(process.pid))
           known.set(process.pid, process.startTicks);
       const owned = table.filter((process) => descendants.has(process.pid));
-      for (const ownedProcess of owned) {
-        const identity = `${ownedProcess.pid}:${ownedProcess.startTicks}`;
-        if (
-          nextLaunches.has(identity) ||
-          !ownedProcess.commandLine.includes("build") ||
-          !ownedProcess.commandLine.includes("--webpack") ||
-          !ownedProcess.commandLine.some((argument) =>
-            /(?:^|\/)next\/dist\/bin\/next$/.test(argument),
-          )
-        )
-          continue;
-        try {
-          const cwd = await readlink(`/proc/${ownedProcess.pid}/cwd`);
-          if (
-            await isExpectedNextBuild(
-              ownedProcess.commandLine,
-              cwd,
-              process.env.BENCHMARK_NEXT_CLI,
-            )
-          )
-            nextLaunches.add(identity);
-        } catch (error) {
-          if (error.code !== "ENOENT" && error.code !== "ESRCH") throw error;
-        }
-      }
       if (process.env.NPM_CONFIG_CACHE)
         for (const ownedProcess of owned) {
           if (
@@ -194,6 +180,14 @@ exited = true;
 await measuring;
 await new Promise((resolve) => log.end(resolve));
 const text = await readFile(logPath, "utf8");
+const launchRecords = (await readFile(nextLaunchLog, "utf8"))
+    .trim()
+    .split("\n")
+    .filter(Boolean)
+    .map((line) => JSON.parse(line)),
+  nextLaunches = new Set(
+    launchRecords.map((record) => `${record.pid}:${record.timeOrigin}`),
+  );
 const metric = {
   phase: label,
   startedAt,
@@ -209,6 +203,9 @@ const metric = {
     error: measurementError,
   },
   nextProductionCompilations: nextLaunches.size,
+  nextLaunchRecords: launchRecords.length,
+  nextLaunchMethod:
+    "pre-main Node import; canonical CLI identity; PID/timeOrigin deduplication",
   npmCacheProcesses: [...npmCacheProcesses.values()],
   nextBuildBannerCount: (
     text.match(/Creating an optimized production build/g) ?? []

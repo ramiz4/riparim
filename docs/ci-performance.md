@@ -24,13 +24,21 @@ unveränderten Befehle seiner Quellrevision einschließlich der drei Node-Builds
 Der Harness startet den identischen `tests/run.mjs`-Entrypoint direkt mit Node:
 npm-Test-Lifecycle-PATH würde die Cachehülle durch `node_modules/.bin/npm`
 verdecken. Tests, Gruppen, Argumente und Suite-Parallelität bleiben identisch.
-Die Instrumentierung zählt die gestarteten Next-Buildprozesse über `/proc`
-(PID und Startzeit, Argumente `next/dist/bin/next build --webpack`):
-Baseline drei, Kandidat eine.
-Der CLI-Pfad wird relativ zum tatsächlichen Prozess-CWD aufgelöst und über
-`realpath` an das installierte Next-Modul des gemessenen Checkouts gebunden.
-Symlinks der Release-Source-Fixture bleiben derselbe Modulpfad; fremde oder
-verschachtelte Fake-Builds aus Profilerregressionen werden nicht mitgezählt.
+Die Instrumentierung zählt echte Next-CLI-Starts mit `build --webpack` über
+einen ausschließlich im Benchmark eingesetzten Node-`--import`-Hook vor dem
+Mainprogramm: Baseline drei, Kandidat eine. Next überschreibt `process.title`
+vor dem Build und entfernt damit seine ursprüngliche Linux-Cmdline; periodisches
+`/proc`-Sampling allein wäre für diese Zählung unzuverlässig.
+Der tatsächliche Entrypoint `process.argv[1]` wird über `realpath` an das
+installierte Next-Modul des gemessenen Checkouts gebunden. Symlinks der
+Release-Source-Fixture bleiben derselbe Modulpfad; fremde oder verschachtelte
+Fake-Builds werden nicht mitgezählt. Launchlogs gehören jeweils einer
+Profilerphase. Mehrfach geladene Hooks aus Source und Harness werden über PID
+und `performance.timeOrigin` dedupliziert; Workerthreads zählen nicht erneut.
+Bestehende `NODE_OPTIONS` bleiben erhalten. Der Hook wird nur in die Childumgebung
+des Benchmarkprofilers ergänzt; normale CI und Produktion erhalten ihn nicht.
+Die bereinigte Zielinstallation und ihre eingeschränkten Runtimeprüfungen
+übernehmen keine Benchmark-`NODE_OPTIONS`.
 Dadurch werden auch Builds erfasst, deren ältere Tests ihre stdout-Ausgabe
 verwerfen; Bannerzählungen im Log bleiben eine getrennte Diagnosegröße.
 

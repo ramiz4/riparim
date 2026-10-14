@@ -114,15 +114,12 @@ export async function isExpectedNextBuild(commandLine, cwd, expectedCLI) {
     !commandLine.includes("--webpack")
   )
     return false;
-  const candidates = commandLine.filter((argument) =>
-    /(?:^|\/)next\/dist\/bin\/next$/.test(argument),
-  );
-  if (!candidates.length) return false;
+  const candidate = commandLine[1];
+  if (!candidate || !/(?:^|\/)next\/dist\/bin\/next$/.test(candidate))
+    return false;
   try {
     const installed = await realpath(expectedCLI);
-    for (const candidate of candidates)
-      if ((await realpath(resolve(cwd, candidate))) === installed) return true;
-    return false;
+    return (await realpath(resolve(cwd, candidate))) === installed;
   } catch (error) {
     // Install phases precede node_modules, and observed processes may exit.
     if (error.code === "ENOENT" || error.code === "ESRCH") return false;
