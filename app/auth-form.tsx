@@ -7,6 +7,7 @@ import {LocaleAnchor} from "@/components/locale-anchor";
 import {useId,useState,type FormEvent} from "react";
 import {Mail,LockKeyhole,LoaderCircle,Eye,EyeOff} from "lucide-react";
 import {SiteHeader} from "@/components/site-header";
+import {invalidatePublicSession} from "@/components/use-public-session";
 import type {AccountIdentity} from "@/components/account-storage-notice";
 
 export type AuthScreen="login"|"register"|"recovery"|"reset";
@@ -25,7 +26,7 @@ export default function AuthForm({screen,emailReady,googleReady,isOwner,returnTo
   e.preventDefault();if(!emailReady||busy)return;const f=new FormData(e.currentTarget);
   if(screen==="reset"&&f.get("password")!==f.get("passwordRepeat")){setError(t("customer.passwordMismatch"));return;}
   setBusy("email");setError("");let navigating=false;
-  try{const r=await fetch(`/api/auth/${screen}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({locale,...(screen==="register"?{name:f.get("name")}:{}),email:f.get("email"),password:f.get("password"),returnTo})});const d=await r.json() as CodedResponse&{returnTo?:string};if(!r.ok)throw responseError(t,d);if(d.returnTo){navigating=true;window.location.assign(d.returnTo);}else setMessage(messageCodeMessage(t,d.messageCode));}
+  try{const r=await fetch(`/api/auth/${screen}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({locale,...(screen==="register"?{name:f.get("name")}:{}),email:f.get("email"),password:f.get("password"),returnTo})});const d=await r.json() as CodedResponse&{returnTo?:string};if(!r.ok)throw responseError(t,d);if(d.returnTo){if(screen==="login")invalidatePublicSession({signedIn:true});else if(screen==="reset")invalidatePublicSession({signedOut:true});navigating=true;window.location.assign(d.returnTo);}else setMessage(messageCodeMessage(t,d.messageCode));}
   catch(e){navigating=false;setError(e instanceof LocalizedError?e.message:t("customer.tryAgain"));}finally{if(!navigating)setBusy(null);}
  }
  async function google(){
