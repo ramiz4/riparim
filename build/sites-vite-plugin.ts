@@ -1,3 +1,4 @@
+import {localSeedAccount} from "../lib/auth/local-seed";
 import {validatedReturnPath} from "../lib/auth/return-path";
 // Vendored from @openai/sites-vite-plugin 0.2.0 (openai/sites#9).
 // See sites-vite-plugin.LICENSE for the upstream MIT license.
@@ -6,9 +7,7 @@ import type { IncomingMessage, ServerResponse } from "node:http";
 import { resolve } from "node:path";
 import type { Plugin } from "vite";
 
-const localUserId = "local_seedy";
-const localEmail = "seedy@sites.test";
-const localFullName = "Seedy";
+const {userId:localUserId,email:localEmail,displayName:localFullName}=localSeedAccount;
 const localCookieName = "__sites_local_auth";
 const localHosts = new Set(["localhost", "127.0.0.1", "::1"]);
 const localAddresses = new Set(["127.0.0.1", "::1", "::ffff:127.0.0.1"]);
@@ -109,18 +108,6 @@ export function sites({ mockAuth = true } = {}): Plugin {
         const signOut = url.pathname === "/signout-with-chatgpt";
         if (!signIn && !signOut) {
           if (signInCookies.length === 1 && signInCookies[0] === "1") {
-            // Read-only fixture on the same loopback boundary as local sign-in.
-            // Provider cookies keep the real account path; unrelated preferences
-            // must not suppress the seed data. No Auth provider is called here.
-            if (url.pathname === "/api/account" && request.method === "GET" && !applicationCookies.some(cookie => /^(?:sb-|riparim-auth-|riparim-pb-|riparim-account-)/.test(cookie))) {
-              response.setHeader("Content-Type", "application/json; charset=utf-8");
-              response.setHeader("Cache-Control", "private, no-store");
-              response.end(JSON.stringify({
-                account: { email: localEmail, name: localFullName, provider: "ChatGPT", protected: true },
-                deletionReady: false, deletionStarted: false, preview: true,
-              }));
-              return;
-            }
             setHeader(request, "oai-authenticated-user-id", localUserId);
             setHeader(request, "oai-authenticated-user-email", localEmail);
             setHeader(

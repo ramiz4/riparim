@@ -33,7 +33,7 @@ const click=async control=>{assert(control,'The requested control is visible');a
 const dialog=()=>document.querySelector('[role="alertdialog"]');
 const input=label=>document.getElementById([...document.querySelectorAll('label')].find(node=>node.textContent===label)?.htmlFor);
 const type=async(control,value)=>{await act(async()=>{Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(control,value);control.dispatchEvent(new Event('input',{bubbles:true}));});};
-const mount=async()=>act(async()=>root.render(createElement(I18nProvider,{locale:activeLocale,messages:getMessages(activeLocale,["common","customer"])},createElement(AccountSettings))));
+const mount=async()=>act(async()=>root.render(createElement(I18nProvider,{locale:activeLocale,messages:getMessages(activeLocale,["common","customer"])},createElement(AccountSettings,{localPreviewAccount:state.preview?{email:state.account.email,name:state.account.name,provider:state.account.provider}:undefined}))));
 const remount=async()=>{await act(async()=>root.unmount());root=createRoot(document.getElementById('root'));await mount();};
 try{
  loadFailure=true;await mount();check(document.querySelector('[role="alert"]').textContent===getMessages('de').customer.accountUnavailable&&button('Erneut laden'),'Failed account loading exposes an accessible retry');

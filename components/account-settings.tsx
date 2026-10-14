@@ -14,15 +14,18 @@ import {AlertDialog,AlertDialogTrigger,AlertDialogContent,AlertDialogHeader,Aler
 type Account={email:string;name:string;provider:string;protected:boolean};
 type AccountState=CodedResponse&{account:Account|null;deletionReady:boolean;deletionStarted:boolean;error?:string;preview?:boolean};
 
-export function AccountSettings(){
+type LocalPreviewAccount={email:string;name:string;provider:string};
+function previewState(account:LocalPreviewAccount):AccountState{return {account:{...account,protected:true},preview:true,deletionReady:false,deletionStarted:false};}
+export function AccountSettings({localPreviewAccount}:{localPreviewAccount?:LocalPreviewAccount}={}){
  const {locale,t}=useI18n(),phrase=deletePhrases[locale],networkError=t("customer.accountNetwork");
  const id=useId(),router=useRouter();
- const [state,setState]=useState<AccountState|null>(null),[name,setName]=useState(""),[password,setPassword]=useState("");
- const [loading,setLoading]=useState(true),[busy,setBusy]=useState(false),[error,setError]=useState(""),[message,setMessage]=useState("");
+ const [state,setState]=useState<AccountState|null>(localPreviewAccount?previewState(localPreviewAccount):null),[name,setName]=useState(localPreviewAccount?.name??""),[password,setPassword]=useState("");
+ const [loading,setLoading]=useState(!localPreviewAccount),[busy,setBusy]=useState(false),[error,setError]=useState(""),[message,setMessage]=useState("");
  const [open,setOpen]=useState(false),[confirmation,setConfirmation]=useState("");
  const [passwordMessage,setPasswordMessage]=useState(""),[passwordError,setPasswordError]=useState("");
  useNavigationGuard({busy,dirty:!!password||!!confirmation||!!state?.account&&name!==state.account.name});
  const load=useCallback(async(signal?:AbortSignal)=>{
+  if(localPreviewAccount){setState(previewState(localPreviewAccount));setName(localPreviewAccount.name);setLoading(false);return;}
   setLoading(true);setError("");
   try{
    const response=await fetch("/api/account",{cache:"no-store",signal}),data=await response.json() as AccountState;
@@ -32,7 +35,7 @@ export function AccountSettings(){
    if(data.deletionReady||data.deletionStarted)setOpen(true);
   }catch(e){if(!signal?.aborted)setError(e instanceof TypeError?networkError:e instanceof LocalizedError?e.message:networkError);}
   finally{if(!signal?.aborted)setLoading(false);}
- },[t,networkError]);
+ },[t,networkError,localPreviewAccount]);
  // eslint-disable-next-line react-hooks/set-state-in-effect -- Load only the authenticated account, including an interrupted deletion, on mount.
  useEffect(()=>{const controller=new AbortController();void load(controller.signal);return ()=>controller.abort();},[load]);
 

@@ -1,3 +1,4 @@
+import {localSeedPreviewAccount} from "@/lib/auth/local-development";
 import {publicReleaseRender} from "@/lib/public-release";
 import {deferredManagementPage} from "@/lib/deferred-page";
 import {I18nMessages} from "@/lib/i18n/client";
@@ -19,6 +20,7 @@ export default async function SettingsPage({params}:{params:Promise<{locale:stri
  if(publicReleaseRender())return deferredManagementPage("settings",locale);
   const user = await getAppUser();
   const admin = await getAdminUser(user);
+  const localPreviewAccount = await localSeedPreviewAccount(user);
 
   return (
     <I18nMessages messages={messages}>
@@ -26,7 +28,7 @@ export default async function SettingsPage({params}:{params:Promise<{locale:stri
       <main className="settings-page wrap">
         <h1>{t("customer.settings")}</h1>
         <ThemeSettings />
-        <AccountSettings />
+        <AccountSettings localPreviewAccount={localPreviewAccount} />
       </main>
       <DirectoryFooter />
     </I18nMessages>
