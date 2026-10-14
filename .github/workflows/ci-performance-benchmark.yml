@@ -1,0 +1,177 @@
+name: CI performance benchmark
+run-name: CI performance ${{ github.event.label.name || format('{0}-{1}', inputs.variant, inputs.cache-state) }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      variant:
+        type: choice
+        options: [baseline, candidate]
+        required: true
+      source-ref:
+        description: Exact 40-character source commit (not a branch)
+        type: string
+        required: true
+      cache-state:
+        type: choice
+        options: [cold, warm, prime]
+        required: true
+      experiment:
+        description: Shared isolated experiment ID for both revisions
+        type: string
+        required: true
+  # This explicit label entry point permits measurement before the workflow is
+  # merged into main. Each label-add event is an independent sample run.
+  pull_request:
+    types: [labeled]
+
+permissions:
+  contents: read
+
+# Every sample must finish independently, including repeated label events.
+concurrency:
+  group: ci-performance-${{ github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    name: Prepare benchmark
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.pull_request.head.repo.full_name == github.repository &&
+      contains(fromJSON('["ci-performance-baseline-cold","ci-performance-candidate-cold","ci-performance-baseline-warm","ci-performance-candidate-warm","ci-performance-prime"]'), github.event.label.name))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+      source: ${{ steps.plan.outputs.source }}
+      cache-state: ${{ steps.plan.outputs.cache-state }}
+      experiment: ${{ steps.plan.outputs.experiment }}
+      variant: ${{ steps.plan.outputs.variant }}
+    steps:
+      - name: Select exact isolated sample inputs
+        id: plan
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          LABEL_NAME: ${{ github.event.label.name }}
+          INPUT_VARIANT: ${{ inputs.variant }}
+          INPUT_SOURCE: ${{ inputs.source-ref }}
+          INPUT_CACHE_STATE: ${{ inputs.cache-state }}
+          INPUT_EXPERIMENT: ${{ inputs.experiment }}
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          BASELINE_SOURCE: bbfa675e8b73e3a126991ec9bf8841de49cbc877
+        run: |
+          node --input-type=module <<'NODE'
+          import { appendFileSync } from 'node:fs';
+          const env = process.env;
+          let variant = env.INPUT_VARIANT, source = env.INPUT_SOURCE;
+          let cacheState = env.INPUT_CACHE_STATE, experiment = env.INPUT_EXPERIMENT;
+          if (env.EVENT_NAME === 'pull_request') {
+            const label = env.LABEL_NAME;
+            variant = label.includes('-candidate-') ? 'candidate' : 'baseline';
+            cacheState = label.endsWith('-prime') ? 'prime' : label.endsWith('-warm') ? 'warm' : 'cold';
+            source = variant === 'baseline' ? env.BASELINE_SOURCE : env.PR_HEAD;
+            experiment = `issue-189-pr-${env.PR_NUMBER}-${env.PR_HEAD}`;
+          }
+          if (!['baseline','candidate'].includes(variant) || !['cold','warm','prime'].includes(cacheState) ||
+              !/^[a-f0-9]{40}$/.test(source) || !/^[a-zA-Z0-9_-]{1,100}$/.test(experiment) ||
+              (cacheState === 'prime' && variant !== 'baseline')) throw Error('Invalid benchmark inputs.');
+          const lane = variant === 'baseline' ? ['baseline'] : ['quality','node','workers'];
+          appendFileSync(env.GITHUB_OUTPUT, `matrix=${JSON.stringify({lane})}\nsource=${source}\ncache-state=${cacheState}\nexperiment=${experiment}\nvariant=${variant}\n`);
+          NODE
+
+  measure:
+    name: Benchmark ${{ matrix.lane }}
+    needs: plan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+      BENCHMARK_CACHE_STATE: ${{ needs.plan.outputs.cache-state }}
+      BENCHMARK_EXPERIMENT: ${{ needs.plan.outputs.experiment }}
+      BENCHMARK_GO_VERSION: "1.27.1"
+      # Never restore a user's/default-branch cache for a cold measurement.
+      NPM_CONFIG_CACHE: ${{ runner.temp }}/ci-performance-npm-${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.lane }}
+    steps:
+      - name: Check out measurement harness
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          path: harness
+          persist-credentials: false
+      - name: Check out exact measured source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.plan.outputs.source }}
+          path: source
+          persist-credentials: false
+      - name: Set up exact Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: "24.21.0"
+          package-manager-cache: false
+      - name: Set up exact Go where template tests need it
+        if: matrix.lane == 'baseline' || matrix.lane == 'quality'
+        uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version: "1.27.1"
+          cache: false
+      - name: Select isolated exact npm cache key
+        id: cache-key
+        env:
+          LOCK_DIGEST: ${{ hashFiles('source/package-lock.json') }}
+        run: |
+          mkdir -p "$NPM_CONFIG_CACHE"
+          printf 'key=ci-performance-%s-Linux-x64-node24.21.0-go1.27.1-%s\n' "$BENCHMARK_EXPERIMENT" "$LOCK_DIGEST" >> "$GITHUB_OUTPUT"
+      - name: Restore only the exact warm cache
+        id: cache
+        if: needs.plan.outputs.cache-state == 'warm'
+        uses: actions/cache/restore@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+        with:
+          path: ${{ env.NPM_CONFIG_CACHE }}
+          key: ${{ steps.cache-key.outputs.key }}
+          fail-on-cache-miss: true
+      - name: Measure complete verification lane
+        env:
+          BENCHMARK_CACHE_HIT: ${{ steps.cache.outputs.cache-hit || 'false' }}
+          BENCHMARK_CACHE_KEY: ${{ steps.cache-key.outputs.key }}
+          LANE: ${{ matrix.lane }}
+        run: node harness/scripts/ci-benchmark-lane.mjs "$LANE" "$GITHUB_WORKSPACE/source" "$GITHUB_WORKSPACE/harness/.benchmark/$LANE"
+      - name: Prime the isolated cache after the complete baseline
+        if: needs.plan.outputs.cache-state == 'prime'
+        uses: actions/cache/save@caa296126883cff596d87d8935842f9db880ef25 # v5.1.0
+        with:
+          path: ${{ env.NPM_CONFIG_CACHE }}
+          key: ${{ steps.cache-key.outputs.key }}
+      - name: Preserve raw phases, suites, resources and input manifest
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: ci-performance-${{ github.run_id }}-${{ github.run_attempt }}-${{ matrix.lane }}
+          path: harness/.benchmark/${{ matrix.lane }}/
+          if-no-files-found: error
+          retention-days: 14
+
+  verify:
+    name: Benchmark verify
+    needs: [plan, measure]
+    if: always() && needs.plan.outputs.variant == 'candidate'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - name: Check out exact measured source for the final gate
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.plan.outputs.source }}
+          persist-credentials: false
+      - name: Require every verification lane to succeed
+        env:
+          PRODUCERS_RESULT: ${{ needs.measure.result }}
+        run: |
+          NEEDS_JSON=$(node -e 'console.log(JSON.stringify(Object.fromEntries(["quality","node","workers"].map(name => [name,{result:process.env.PRODUCERS_RESULT}]))))')
+          export NEEDS_JSON
+          node scripts/verify-ci-gate.mjs

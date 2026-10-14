@@ -9,6 +9,7 @@ export async function runSuites({
   runtime,
   contract,
   suites,
+  beforeSuites,
   concurrency = Number(process.env.TEST_CONCURRENCY ?? 4),
 }) {
   if (process.platform === "win32")
@@ -82,10 +83,12 @@ export async function runSuites({
     console.log(
       `[${label}] Finished with exit ${code} in ${(performance.now() - started).toFixed(0)}ms`,
     );
+    return code;
   }
   try {
     await rm(runtime, { recursive: true, force: true });
     if (!exitCode) await run(contract);
+    if (!exitCode && beforeSuites) await beforeSuites(run);
     const results = await Promise.allSettled(
       Array.from({ length: concurrency }, async () => {
         try {

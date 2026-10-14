@@ -9,13 +9,19 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { join } from "node:path";
 
-export async function pocketbaseNodeHttp({ directory, port, start, stop }) {
+export async function pocketbaseNodeHttp({
+  directory,
+  port,
+  start,
+  stop,
+  source = process.cwd(),
+}) {
   const target = join(directory, "pocketbase-http");
   await mkdir(target);
   await promisify(execFile)(
     process.execPath,
     [".node-runtime/command.mjs", "migrate"],
-    { env: { ...process.env, RIPARIM_DATA_DIR: target } },
+    { cwd: source, env: { ...process.env, RIPARIM_DATA_DIR: target } },
   );
   globalThis.pocketbaseNodeEnv = {};
   const storageModule = join(directory, "pocketbase-storage.mjs"),

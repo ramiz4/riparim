@@ -29,7 +29,13 @@ const key = "sb_publishable_synthetic_provider_exit_1234567890",
   secret = "sb_secret_synthetic_provider_exit",
   encode = (value) => Buffer.from(JSON.stringify(value)).toString("base64url");
 const stable = (name) => "opaque-stable-" + name;
-export async function providerExitHttp({ directory, port, start, stop }) {
+export async function providerExitHttp({
+  directory,
+  port,
+  start,
+  stop,
+  source = process.cwd(),
+}) {
   const parent = join(directory, "provider-exit");
   await mkdir(parent, { mode: 0o700 });
   const tls = {
@@ -539,7 +545,7 @@ export async function providerExitHttp({ directory, port, start, stop }) {
     await promisify(execFile)(
       process.execPath,
       [".node-runtime/command.mjs", "notifications", "exit-pinned"],
-      { env: environment, timeout: 30000 },
+      { cwd: source, env: environment, timeout: 30000 },
     );
     assert.equal(
       messages.length,
@@ -685,6 +691,7 @@ export async function providerExitHttp({ directory, port, start, stop }) {
       process.execPath,
       [".node-runtime/command.mjs", "notifications", "exit-pinned"],
       {
+        cwd: source,
         env: {
           ...environment,
           RIPARIM_DATA_DIR: join(parent, "reverse-target"),

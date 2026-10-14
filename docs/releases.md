@@ -25,7 +25,7 @@ Abhängigkeitsaudit, Pin-Aktualisierung und Messnachweise stehen in
 Der Workflow **Release** startet nur bei `push` auf `main` im Repository `ramiz4/riparim`. Er verwendet Node.js 24 und arbeitet mit dem exakten Merge-Commit:
 
 1. Wiederverwendbare CI führt Katalogprüfung, Tests, TypeScript, Lint sowie Cloudflare-, Sites- und Node-Builds aus.
-2. Der geprüfte Build wird als unveränderliches Actions-Artefakt an den Release-Job übergeben. Repository, Commit und SHA-256 müssen übereinstimmen.
+2. Node und Cloudflare/Sites übergeben zwei unveränderliche Actions-Artefakte mit ihren exakten IDs an den Release-Job. Das abschließende Gate bestätigt alle Pflichtzweige. Run, Repository, Commit und SHA-256 müssen übereinstimmen; Teilwiederholungen dürfen erfolgreiche Producer eines früheren Versuchs desselben Runs weiterverwenden. Der [CI-Leistungsablauf](ci-performance.md) beschreibt Aufteilung und Messung.
 3. `semantic-release` analysiert die Conventional Commits seit dem letzten `v*`-Tag und erstellt Tag, Release Notes sowie einen GitHub Release mit drei Archiven und jeweils eigener Provenienzdatei.
 4. Die validierte Repositoryvariable `DEPLOYMENT_TARGET` wählt `cloudflare` (Default) oder `node`. Node startet keinen Cloudflare-Deploy und benötigt keine Cloudflare-Secrets; Installation erfolgt über den [hostlokalen Nodeweg](node-deployment.md). Bei Cloudflare lädt der Deploy-Job beide Dateien aus diesem veröffentlichten GitHub Release. Er prüft Tag, Commit, Prüfsumme und Zielbindings, wendet ausstehende D1-Migrationen an und veröffentlicht genau die geprüften Artefaktbytes auf Cloudflare. Ein erneuter Deploy verwendet denselben Release, keinen neuen Build.
 

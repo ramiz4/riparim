@@ -1,7 +1,16 @@
 # Begrenzte Test-Parallelität (Issue 91)
 
-`npm test` prüft zuerst den i18n-Vertrag und führt anschließend jede registrierte
-Suite in einem eigenen Node-Prozess aus. Auf Linux/macOS/WSL ist die
+`npm test` prüft zuerst den i18n-Vertrag, baut Node einmal unter derselben
+Prozessgruppenverwaltung und führt anschließend jede registrierte Suite in
+einem eigenen Node-Prozess aus. Beide Node-Integrationssuites verwenden
+validierte Kopien dieses Builds in getrennten Fixtures.
+
+`npm test -- --group core` führt alle übrigen Suites ohne Node-Build aus;
+`npm test -- --group node` prüft die zwei Node-Integrationssuites. Ein explizites
+`RIPARIM_NODE_PREBUILT` muss zu den aktuellen Source-/Outputdigests passen.
+Die zentrale Registrierung erzwingt vollständige, disjunkte Gruppen; der
+Standard ohne Gruppe bleibt die vollständige Prüfung. Ablauf und kontrollierte
+Messung stehen in [ci-performance.md](ci-performance.md). Auf Linux/macOS/WSL ist die
 Standardparallelität vier. `TEST_CONCURRENCY=1 npm test` führt dieselben Suites
 seriell aus; `2`, `3` oder `4` erlauben entsprechend viele gleichzeitige Suites.
 Native Windows-Ausführung wird vor jeder Suite und jeder Änderung am

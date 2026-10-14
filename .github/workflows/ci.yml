@@ -8,6 +8,13 @@ on:
       upload-build:
         type: boolean
         default: false
+    outputs:
+      node-artifact-id:
+        description: Exact immutable Node artifact produced by this verification
+        value: ${{ jobs.node.outputs.artifact-id }}
+      workers-artifact-id:
+        description: Exact immutable Cloudflare and Sites artifact produced by this verification
+        value: ${{ jobs.workers.outputs.artifact-id }}
 
 permissions:
   contents: read
@@ -17,8 +24,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  verify:
-    name: Tests, types, lint and build
+  quality:
+    name: Quality and core tests
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -46,18 +53,78 @@ jobs:
       - name: Validate workshop catalogue
         run: npm run catalog:check
       - name: Test customer journeys and catalogue
-        run: npm test
+        run: npm test -- --group core
       - name: Check TypeScript
         run: npx tsc --noEmit
       - name: Lint
         run: npm run lint
       - name: Verify portable backup monitor Worker and binding types
         run: npm run backups:worker:check
+
+  node:
+    name: Node build and integration tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      artifact-id: ${{ steps.build-artifact.outputs.artifact-id }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install locked dependencies
+        env:
+          HUSKY: "0"
+        run: npm run install:ci
       - name: Build portable Node application from the same checked source
         run: npm run build:node
         timeout-minutes: 10
+      - name: Verify the shared Node build with both integration suites
+        env:
+          RIPARIM_NODE_PREBUILT: ${{ github.workspace }}
+        run: npm test -- --group node
       - name: Package verified Node application
         run: node scripts/package-release.mjs node
+      - name: Retain exact Node build for semantic release
+        if: inputs.upload-build == true
+        id: build-artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: node-${{ github.sha }}-${{ github.run_attempt }}
+          path: |
+            artifacts/riparim-node.tar.gz
+            artifacts/node-provenance.json
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0
+
+  workers:
+    name: Cloudflare and Sites builds
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      artifact-id: ${{ steps.build-artifact.outputs.artifact-id }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install locked dependencies
+        env:
+          HUSKY: "0"
+        run: npm run install:ci
       - name: Build Cloudflare Worker
         env:
           BUILD_TARGET: cloudflare
@@ -74,11 +141,33 @@ jobs:
         timeout-minutes: 10
       - name: Package verified Sites companion
         run: node scripts/package-release.mjs sites
-      - name: Retain exact build for semantic release
+      - name: Retain exact Worker builds for semantic release
         if: inputs.upload-build == true
+        id: build-artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: worker-${{ github.sha }}
-          path: artifacts/
+          name: workers-${{ github.sha }}-${{ github.run_attempt }}
+          path: |
+            artifacts/riparim-worker.tar.gz
+            artifacts/provenance.json
+            artifacts/riparim-sites.tar.gz
+            artifacts/sites-provenance.json
           if-no-files-found: error
           retention-days: 14
+          compression-level: 0
+
+  verify:
+    name: Tests, types, lint and build
+    needs: [quality, node, workers]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Require every verification branch to succeed
+        env:
+          NEEDS_JSON: ${{ toJSON(needs) }}
+        run: node scripts/verify-ci-gate.mjs

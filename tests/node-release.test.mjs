@@ -1,9 +1,13 @@
+import {
+  logNodePhase,
+  nodePhase,
+  prepareNodeTestBuild,
+} from "./helpers/node-build.mjs";
 import assert from "node:assert/strict";
 import { execFile, spawn } from "node:child_process";
 import { promisify } from "node:util";
 import {
   chmod,
-  cp,
   mkdir,
   mkdtemp,
   readFile,
@@ -14,17 +18,19 @@ import {
   writeFile,
 } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join, resolve } from "node:path";
+import { join } from "node:path";
 import { createHash } from "node:crypto";
 import { DatabaseSync } from "node:sqlite";
 import { createServer } from "node:net";
 import { setTimeout as delay } from "node:timers/promises";
 import {
-  prepareNodeRelease,
+  prepareNodeRelease as prepare,
   activateNodeRelease,
 } from "../scripts/deploy-node.mjs";
 import { packageRelease } from "../scripts/package-release.mjs";
 
+const prepareNodeRelease = (options) =>
+  nodePhase("release install/verification", () => prepare(options));
 const run = promisify(execFile),
   directory = await mkdtemp(join(tmpdir(), "riparim-node-release-"));
 const source = join(directory, "source"),
@@ -33,34 +39,20 @@ let server,
   logs = "";
 async function stop() {
   if (!server) return;
+  const started = performance.now();
+  if (server.exitCode !== null || server.signalCode !== null) {
+    server = undefined;
+    return;
+  }
   const closed = new Promise((resolve) => server.on("close", resolve));
   server.kill("SIGTERM");
   await closed;
   server = undefined;
+  logNodePhase("release shutdown", started);
 }
 try {
-  await mkdir(source);
-  const tracked = (await run("git", ["ls-files", "-z"])).stdout
-    .split("\0")
-    .filter(Boolean);
-  for (const path of tracked) {
-    await mkdir(join(source, path, ".."), { recursive: true });
-    await cp(path, join(source, path));
-  }
-  const git = async (...args) => run("git", args, { cwd: source });
-  await git("init", "--initial-branch=main");
-  await git("config", "user.email", "fixture@example.test");
-  await git("config", "user.name", "Release fixture");
-  await git("add", ".");
-  await git("commit", "-m", "feat: isolated release fixture");
-  await symlink(resolve("node_modules"), join(source, "node_modules"));
-  await run(process.execPath, ["scripts/build-node.mjs"], {
-    cwd: source,
-    timeout: 180000,
-    maxBuffer: 4 * 1024 * 1024,
-    env: { ...process.env, NEXT_TELEMETRY_DISABLED: "1" },
-  });
-  const commit = (await git("rev-parse", "HEAD")).stdout.trim();
+  const originalRoot = process.cwd();
+  const commit = await prepareNodeTestBuild({ root: originalRoot, source });
   await writeFile(
     join(source, "public/.env"),
     "PRIVATE_FIXTURE_DO_NOT_PUBLISH=yes\n",
@@ -100,6 +92,13 @@ try {
     ),
   );
   assert.equal(packaged.provenance.provider, "node");
+  assert.notEqual(
+    commit,
+    (
+      await run("git", ["rev-parse", "HEAD"], { cwd: originalRoot })
+    ).stdout.trim(),
+    "release fixture retains synthetic commit provenance",
+  );
   const archive = await readFile(packaged.archive),
     provenance = await readFile(packaged.provenancePath);
   // No build/source checkout remains while the published application is running.
@@ -280,9 +279,30 @@ try {
   await new Promise((resolve) => socket.listen(0, "127.0.0.1", resolve));
   const port = socket.address().port;
   await new Promise((resolve) => socket.close(resolve));
+  const confined = [
+    "--permission",
+    `--allow-fs-read=${host}`,
+    `--allow-fs-write=${join(host, "shared/data")}`,
+  ];
+  await run(
+    process.execPath,
+    [
+      ...confined,
+      "--input-type=module",
+      "--eval",
+      `import assert from 'node:assert/strict'; import { readFileSync } from 'node:fs';
+    for (const path of ${JSON.stringify([join(originalRoot, "package.json"), join(originalRoot, ".next/BUILD_ID"), join(originalRoot, ".node-runtime/server.mjs"), join(originalRoot, "node_modules/next/package.json")])}) {
+      assert.equal(process.permission.has('fs.read', path), false);
+      assert.throws(() => readFileSync(path), { code: 'ERR_ACCESS_DENIED' });
+    }`,
+    ],
+    { cwd: prepared.path, env: { PATH: process.env.PATH } },
+  );
+  const startup = performance.now();
   server = spawn(
     process.execPath,
     [
+      ...confined,
       "--env-file=" + join(host, "shared/runtime.env"),
       ".node-runtime/server.mjs",
       "--port",
@@ -294,6 +314,8 @@ try {
         PATH: process.env.PATH,
         RIPARIM_DATA_DIR: join(host, "shared/data"),
         NEXT_TELEMETRY_DISABLED: "1",
+        // Next's generic ancestor metadata discovery must stay inside this host.
+        NEXT_PRIVATE_OUTPUT_TRACE_ROOT: prepared.path,
       },
       stdio: ["ignore", "pipe", "pipe"],
     },
@@ -311,6 +333,8 @@ try {
     await delay(100);
   }
   assert.equal(response?.status, 200, logs);
+  logNodePhase("release startup", startup);
+  const httpStarted = performance.now();
   assert.deepEqual(await response.json(), { account: null, isAdmin: false });
   const page = await fetch(origin + "/en/workshops");
   assert.equal(page.status, 200, logs);
@@ -342,6 +366,7 @@ try {
     308,
     "runtime preserves original-origin proxy normalization",
   );
+  logNodePhase("release HTTP", httpStarted);
   await stop();
   const envfile = await readFile(join(host, "shared/runtime.env"));
   const db = new DatabaseSync(join(host, "shared/data/app.sqlite"));

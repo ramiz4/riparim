@@ -21,6 +21,12 @@ if (name === "contract.mjs") {
   record("contract");
   process.exitCode = config.contractFails ? 9 : 0;
   if (config.hangContract) setInterval(() => {}, 1000);
+} else if (name === "build.mjs") {
+  mkdirSync(config.runtime, { recursive: true });
+  record("build");
+  spawn(process.execPath, ["grandchild.mjs"], { stdio: "inherit" }).unref();
+  process.on("SIGTERM", () => {});
+  setInterval(() => {}, 1000);
 } else if (name === "grandchild.mjs") {
   process.on("SIGTERM", () => {});
   record("grandchild");
