@@ -110,8 +110,9 @@ export function sites({ mockAuth = true } = {}): Plugin {
         if (!signIn && !signOut) {
           if (signInCookies.length === 1 && signInCookies[0] === "1") {
             // Read-only fixture on the same loopback boundary as local sign-in.
-            // It never reaches an Auth provider or changes the real account API.
-            if (url.pathname === "/api/account" && request.method === "GET" && applicationCookies.length === 0) {
+            // Provider cookies keep the real account path; unrelated preferences
+            // must not suppress the seed data. No Auth provider is called here.
+            if (url.pathname === "/api/account" && request.method === "GET" && !applicationCookies.some(cookie => /^(?:sb-|riparim-auth-|riparim-pb-|riparim-account-)/.test(cookie))) {
               response.setHeader("Content-Type", "application/json; charset=utf-8");
               response.setHeader("Cache-Control", "private, no-store");
               response.end(JSON.stringify({
