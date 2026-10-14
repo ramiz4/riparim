@@ -758,3 +758,29 @@ Route-Fallback in DE/SQ/EN und prüft Header, Statusbeschriftung, serverseitige
 Identitätsisolation und Tastaturzugang. Der Client-Test wechselt von einem
 verifizierten Header in den Fallback und schützt den Kontomenü-Erhalt ohne
 zusätzliche Sitzungsabfrage. Fixtures verwenden ausschließlich fiktive Konten.
+
+## Fünf Minuten Sitzungscache und Tab-Synchronisierung (14. Oktober 2026)
+
+Der browserinterne UI-Sitzungscache bleibt fünf Minuten frisch. Eine neue
+Clientroute nutzt innerhalb dieser Frist dieselbe verifizierte Antwort. Nach
+Ablauf oder Rückkehr zum Fenster wird erneut geprüft; der bekannte Header bleibt
+währenddessen erhalten. Server und geschützte APIs prüfen ihre Berechtigungen
+weiter unabhängig.
+
+Erfolgreicher Passwort-Login, Logout, Passwortreset und Kontolöschung invalidieren
+den Cache sofort. BroadcastChannel überträgt ausschließlich `signed-in`,
+`signed-out` oder `refresh`; keine Identität, Rolle oder Tokens. Ohne
+BroadcastChannel verwendet die App kurzlebige Storage-Ereignisse mit Signal und
+Nonce; blockierter Storage verhindert die lokale Invalidierung nicht.
+Empfangene Nachrichten werden nicht zurückgesendet.
+
+Der erste erfolgreiche `/api/session`-Aufruf eines Dokuments stößt in anderen
+Tabs eine erneute Prüfung an. Dadurch synchronisieren auch Google-/E-Mail- und
+native Anmelderücksprünge ihre serverseitig gesetzten Cookies. Diese Prüfung
+ändert keine serverseitigen Auth-Regeln und speichert keine Kontodaten im Browser.
+
+`session-header-navigation.test.mjs` prüft den echten Header nach 30 Sekunden,
+unmittelbar vor fünf Minuten und nach Ablauf. `session-cache-tabs.test.mjs`
+prüft unabhängige Modulzustände zweier Tabs, Login/Logout ohne Fokuswechsel,
+OAuth-Dokumentrückkehr, verspätete Antworten vor Logout, Nachrichten ohne
+Kontodaten, Echovermeidung, Storage-Fallback und gesperrten Storage.

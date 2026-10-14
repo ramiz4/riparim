@@ -49,11 +49,17 @@ try{
  assert.equal(requestCount,2,'Private UI also shares the still-fresh session instead of duplicating the identity request');
  assert.equal(document.querySelector('[data-private-content]').dataset.privateContent,'member');
  now+=30_001;
+ await act(async()=>root.render(wrap('after-thirty-seconds',h(SiteHeader,{account:null,publicSnapshot:true}))));
+ assert.equal(requestCount,2,'Routing after thirty seconds still reuses the five-minute cache');
+ now+=269_998;
+ await act(async()=>root.render(wrap('before-five-minutes',h(SiteHeader,{account:null,publicSnapshot:true}))));
+ assert.equal(requestCount,2,'The cached session remains fresh until five minutes');
+ now+=2;
  await act(async()=>root.render(wrap('expired-preview',h(SiteHeader,{account:null,publicSnapshot:true}))));
  assert(document.querySelector('.user-menu-trigger'),'Expired display state remains stable while the fresh check is pending');
  assert.equal(requestCount,3,'The shared session has a bounded lifetime');
  await act(async()=>finish(Response.json(member)));
- now+=30_001;
+ now+=300_001;
  await act(async()=>root.render(wrap('reviews',h(DeferredReviews))));
  assert.equal(!!document.querySelector('.header-auth'),false,'A deferred private page retains the verified header during its loading state');
  assert.equal(!!document.querySelector('[data-private-content]'),false,'The display preview cannot authorize private content before a fresh response');
@@ -70,7 +76,7 @@ try{
  await act(async()=>invalidatePublicSession({signedOut:true}));
  assert.equal(!!document.querySelector('.user-menu-trigger'),false,'Local sign-out clears every retained header immediately');
  await act(async()=>finish(Response.json({account:null,isAdmin:false})));
- now+=30_001;
+ now+=300_001;
  await act(async()=>root.render(wrap('late-old',h(SiteHeader,{account:null,publicSnapshot:true}))));
  const oldResponse=finish;
  await act(async()=>invalidatePublicSession({signedOut:true}));
