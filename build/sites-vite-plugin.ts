@@ -1,3 +1,4 @@
+import {localSeedAccount} from "../lib/auth/local-seed";
 import {validatedReturnPath} from "../lib/auth/return-path";
 // Vendored from @openai/sites-vite-plugin 0.2.0 (openai/sites#9).
 // See sites-vite-plugin.LICENSE for the upstream MIT license.
@@ -6,14 +7,13 @@ import type { IncomingMessage, ServerResponse } from "node:http";
 import { resolve } from "node:path";
 import type { Plugin } from "vite";
 
-const localUserId = "local_seedy";
-const localEmail = "seedy@sites.test";
-const localFullName = "Seedy";
+const {userId:localUserId,email:localEmail,displayName:localFullName}=localSeedAccount;
 const localCookieName = "__sites_local_auth";
 const localHosts = new Set(["localhost", "127.0.0.1", "::1"]);
 const localAddresses = new Set(["127.0.0.1", "::1", "::ffff:127.0.0.1"]);
 const authPaths = new Set([
   "/signin-with-chatgpt",
+  "/dev/anmelden",
   "/signout-with-chatgpt",
   "/callback",
 ]);
@@ -103,7 +103,8 @@ export function sites({ mockAuth = true } = {}): Plugin {
           return;
         }
 
-        const signIn = url.pathname === "/signin-with-chatgpt";
+        const localSignIn = url.pathname === "/dev/anmelden";
+        const signIn = localSignIn || url.pathname === "/signin-with-chatgpt";
         const signOut = url.pathname === "/signout-with-chatgpt";
         if (!signIn && !signOut) {
           if (signInCookies.length === 1 && signInCookies[0] === "1") {
@@ -160,7 +161,7 @@ export function sites({ mockAuth = true } = {}): Plugin {
         response.setHeader("Cache-Control", "private, no-store");
         response.setHeader(
           "Location",
-          safeReturn(url.searchParams.get("return_to")),
+          safeReturn(localSignIn ? url.searchParams.get("weiter") ?? "/einstellungen" : url.searchParams.get("return_to")),
         );
         response.setHeader(
           "Set-Cookie",

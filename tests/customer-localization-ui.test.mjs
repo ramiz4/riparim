@@ -33,10 +33,13 @@ try{
   for(const [screen,heading] of [['login','authLogin'],['register','authRegister'],['recovery','authRecovery'],['reset','authReset']]){
    await render(locale,AuthForm,{account:null,screen,emailReady:true,googleReady:true,isOwner:false,returnTo:localizeHref('/werkstatt/fixture-workshop#bewerten',locale)});
    check(document.querySelector('h1').textContent===copy[heading],'Auth heading uses the active locale');
+   check(!document.querySelector('.auth-local-login'),'Normal Auth screens never expose the local seed entry');
    if(screen!=='recovery'){
     const reveal=document.querySelector('[aria-label="'+copy.showPassword+'"]');check(reveal,'Password toggle has an active-locale accessible label');await click(reveal);check(document.querySelector('[name="password"]').type==='text'&&document.querySelector('[aria-label="'+copy.hidePassword+'"]'),'Password visibility preserves accessible state');
    }
   }
+  await render(locale,AuthForm,{account:null,screen:'login',emailReady:false,googleReady:false,isOwner:false,localSeedLogin:true,returnTo:localizeHref('/einstellungen',locale)});
+  const seedLink=document.querySelector('.auth-local-login a');check(seedLink.textContent===copy.localSeedLogin&&seedLink.getAttribute('href')==='/dev/anmelden?weiter='+encodeURIComponent(localizeHref('/einstellungen',locale)),'The explicit local login remains available without provider setup and preserves its localized destination');
   await render(locale,AuthForm,{account:null,screen:'register',emailReady:true,googleReady:true,isOwner:false,returnTo:localizeHref('/werkstatt/fixture-workshop#bewerten',locale)});
   const name=document.querySelector('[name="name"]');check(name?.required&&name.minLength===2&&name.maxLength===80&&name.closest('label').textContent===copy.displayName&&document.getElementById(name.getAttribute('aria-describedby')).textContent===copy.registrationNameNote,'Registration requires a labeled account display name');
   await type(name,'Fixture Customer');await type(document.querySelector('[name="email"]'),'fixture@example.test');await type(document.querySelector('[name="password"]'),'fixture-password-123');mode='auth-error';await submit();

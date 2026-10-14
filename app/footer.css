@@ -1,3 +1,7 @@
+.footer-band{background:#dfeae8;border-top:1px solid #b9ceca}
+.footer.directory-footer{color:#415b60}
+html.dark .footer-band{background:#123236;border-color:#527578}
+html.dark .footer.directory-footer{color:#b7cdcb}
 .directory-footer .footer-branding { margin-right: auto; }
 .directory-footer .footer-branding .brand { margin-right: 0; min-height: 44px; }
 .directory-footer .footer-tagline { display: none; }

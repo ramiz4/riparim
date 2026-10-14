@@ -22,3 +22,7 @@
 .setup-instructions .note{margin-top:20px}
 @media(max-width:900px){.auth-setup-layout{grid-template-columns:1fr}}
 @media(max-width:720px){.auth-setup-layout{gap:18px}.setup-instructions,.auth-settings-form{padding:21px}.setup-steps{padding-left:19px}}
+
+.auth-local-login{margin-bottom:24px}
+.auth-local-login>a{display:flex;align-items:center;justify-content:center;width:100%;text-decoration:none}
+.auth-local-login>p{margin:8px 0 0;font-size:12px;line-height:1.5;text-align:center;color:var(--muted-foreground)}

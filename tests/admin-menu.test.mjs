@@ -46,10 +46,10 @@ async function openMenu(){
 }
 
 try{
- const destinations=[['Meine Betriebe','/betriebe'],['Meine Anträge','/antraege'],['Meine Bewertungen','/bewertungen'],['Einstellungen','/einstellungen']];
+ const destinations=[['Meine Betriebe','/betriebe'],['Meine Betriebsanträge','/antraege'],['Meine Bewertungen','/bewertungen'],['Einstellungen','/einstellungen']];
  for(const [email,isAdmin] of [['customer@example.test',false],['first-admin@example.test',true],['second-admin@example.test',true]]){
   await render(email,isAdmin);
-  for(const [label,path] of [...destinations,...(isAdmin?[['Verwalten','/verwaltung']]:[])]){
+  for(const [label,path] of [...destinations,...(isAdmin?[['Verwaltung','/verwaltung']]:[])]){
    for(const input of ['click','Enter']){
     await openMenu();
     const identity=document.querySelector('.user-menu-identity');
@@ -60,7 +60,7 @@ try{
     assert(!identity.querySelector('strong').closest('a'),'the full name remains plain text');
     assert(!identity.querySelector('small').closest('a'),'the role remains plain text');
     const items=[...document.querySelectorAll('[role="menuitem"]')];
-    assert.equal(items.filter(node=>node.textContent==='Verwalten').length,isAdmin?1:0,'only admins receive the single management entry');
+    assert.equal(items.filter(node=>node.textContent==='Verwaltung').length,isAdmin?1:0,'only admins receive the single management entry');
     assert(!items.some(node=>node.textContent==='Bewerten'),'new reviews start at the workshop profile, without a general user-menu entry');
     assert(!items.some(node=>node.textContent==='Bewertungen prüfen'),'the redundant review shortcut is absent from the user menu');
     const item=items.find(node=>node.textContent===label);

@@ -45,7 +45,7 @@ export function DeferredManagement({kind}:{kind:DeferredManagementKind}){
  const administrative=['workshops','users','reviews','claims','auth'].includes(kind);
  const footer=['settings','business','applications','claim'].includes(kind)?<DirectoryFooter/>:null;
  if(!session)return <>{header}<main className={administrative?'admin-main wrap':kind==='settings'?'settings-page wrap':'business-page wrap'}><h1>{title}</h1><DeferredStatus error={error} pending={pending} retry={retry} loadingIndicator={administrative?<AdminLoading>{t("customer.loading")}</AdminLoading>:undefined}/></main>{footer}</>;
- if(kind==='settings')return <>{header}<main className="settings-page wrap"><h1>{title}</h1><ThemeSettings/><AccountSettings/></main>{footer}</>;
+ if(kind==='settings')return <>{header}<main className="settings-page wrap"><h1>{title}</h1><AccountSettings appearance={<ThemeSettings/>}/></main>{footer}</>;
  if(!session.account||administrative&&!session.isAdmin)return <>{header}<main className="access-page"><h1>{title}</h1>{session.account&&administrative?<p>{t('management.noReviewAccess')}</p>:<p><Link className="primary" href={'/anmelden?weiter='+encodeURIComponent(returnTo)}>{t('management.login')}</Link> {t('management.businessLogin')}</p>}<Link href="/">{t('management.backWorkshops')}</Link></main>{footer}</>;
  if(kind==='workshops')return <AdminPanel account={session.account}/>;
  if(kind==='users')return <AdminUsers account={session.account}/>;

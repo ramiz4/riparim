@@ -14,6 +14,8 @@ if (managedLinux && command === "build") {
   process.exit(result.status ?? 1);
 }
 
+if(command==="dev"&&!managedLinux){const {seedLocalOpeningHours}=await import("./seed-local-opening-hours.mjs");await seedLocalOpeningHours();}
+
 // Import in this process so the preview owner retains its PID and signals.
 const cli = new URL(managedLinux
   ? "../node_modules/vite/bin/vite.js"

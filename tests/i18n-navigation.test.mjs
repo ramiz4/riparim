@@ -55,3 +55,6 @@ for(const locale of ['de','sq','en']){
  assert.equal(languageSwitchHref('/anmelden?weiter='+encodeURIComponent('/betriebe/beanspruchen?werkstatt=fixture-workshop'),locale),localizeHref('/anmelden?weiter=',locale)+encodeURIComponent(localizeHref('/betriebe/beanspruchen?werkstatt=fixture-workshop',locale)));
 }
 console.log('Locale navigation and auth return boundaries passed');
+
+for(const view of ['email','google'])assert.equal(languageSwitchHref('/einstellungen?vorschau='+view,'sq'),'/sq/cilesimet?vorschau='+view,'Language switches retain the named local preview');
+assert.equal(languageSwitchHref('/einstellungen?vorschau=email&vorschau=google','en'),'/en/settings','Ambiguous preview modes are discarded');
