@@ -1,4 +1,5 @@
-name: Supabase Auth Backup
+name: "Backup: Supabase Auth"
+run-name: "Supabase Auth backup: ${{ github.ref_name }} / ${{ github.event_name == 'schedule' && 'scheduled' || 'manual' }}"
 
 on:
   schedule:

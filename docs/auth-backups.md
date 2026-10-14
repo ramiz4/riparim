@@ -1,6 +1,6 @@
 # Supabase-Auth sichern
 
-Der Workflow `Supabase Auth Backup` sichert täglich um **03:23 UTC** (04:23 Uhr
+Der Workflow `Backup: Supabase Auth` sichert täglich um **03:23 UTC** (04:23 Uhr
 Schweizer Winterzeit, 05:23 Uhr Sommerzeit) das vollständige `auth`-Schema des
 bestehenden Riparim-Projekts. Dazu gehören Benutzer samt Passwort-Hashes,
 Provideridentitäten, MFA-Daten, Sitzungen, Tokens und Auth-Migrationshistorie.

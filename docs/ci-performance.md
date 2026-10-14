@@ -8,7 +8,7 @@ Veröffentlichung und Deployment.
 
 ## Kontrollierter Vergleich
 
-`CI performance benchmark` führt ausschließlich lokale Prüfungen, Builds und
+`Benchmark: CI performance` führt ausschließlich lokale Prüfungen, Builds und
 Paketierung mit isolierten Testdaten aus. Der Workflow besitzt nur
 `contents: read`, verwendet keine Produktionssecrets und startet keine
 Veröffentlichung, Bereitstellung oder Live-Migration. Er hat einen eigenen
@@ -36,7 +36,7 @@ Email-Templateprüfungen. Alle Installationen nutzen den gelockten Installer mit
 `HUSKY=0`. Der Hookvertrag selbst bleibt Teil der allgemeinen Tests.
 
 Für Issue #189 ist die Baseline
-`bbfa675e8b73e3a126991ec9bf8841de49cbc877`. Der Kandidat wird auf eine genaue
+`1648f6b8bc780fce820fd1d937774cf3231248e1`. Der Kandidat wird auf eine genaue
 Commit-SHA eingefroren. `sample.json` protokolliert Quell- und Harnessrevision,
 Node/npm/Go-Versionen, Runnerimage samt Imageversion, Architektur, Cache-Key und
 Cachehit. Die Harnessdateien und Messausgaben liegen in einem zweiten Checkout;
@@ -118,7 +118,7 @@ serielle Paare vermeiden selbst erzeugte Queuewartezeiten.
 Nach dem Merge kann derselbe Ablauf per `workflow_dispatch` mit den Inputs
 `variant`, `source-ref`, `cache-state` und `experiment` gestartet werden.
 `source-ref` muss eine genaue 40-stellige Commit-SHA sein. Die Primevariante ist
-immer `baseline`. Nicht die produktive `Release`-Pipeline für Messungen auslösen.
+immer `baseline`. Nicht die produktive `Release: Publish and deploy`-Pipeline für Messungen auslösen.
 
 ## Read-only-Auswertung
 
@@ -190,6 +190,43 @@ anfängliche Queue-/Approvalwartezeit; dieses Read-only-Benchmark deployt nicht
 und kann dieses Ziel nur durch spätere tatsächliche Releasebeobachtungen prüfen.
 Zielabweichungen und Folgemaßnahmen vor Issue-Abschluss ausdrücklich festhalten.
 Auch 30 kontrollierte Erfolgsruns belegen keine allgemeine Flake-Garantie.
+
+## Workflow- und Laufnamen
+
+Workflow-Anzeigenamen folgen `Kategorie: Zweck`: eine kurze, eindeutige
+englische Bezeichnung mit ASCII-Zeichen. Der Kategorienpräfix macht verwandte
+Aufgabenbereiche in der Actions-Liste erkennbar; der Zweck benennt ihre Aufgabe. Dateinamen bleiben
+stabile technische Identitäten für API-Aufrufe, Monitoring und wiederverwendbare
+Workflows.
+
+| Datei                          | Anzeigename                   |
+| ------------------------------ | ----------------------------- |
+| `ci.yml`                       | `CI: Verify and build`        |
+| `conventional-pr.yml`          | `CI: Check PR title`          |
+| `release.yml`                  | `Release: Publish and deploy` |
+| `auth-backup.yml`              | `Backup: Supabase Auth`       |
+| `platform-backup.yml`          | `Backup: Platform`            |
+| `ci-performance-benchmark.yml` | `Benchmark: CI performance`   |
+
+`run-name` ergänzt den Kontext des einzelnen Laufs: CI und Titelprüfung zeigen
+PR-Nummer und Titel; Backups zeigen Branch sowie `scheduled` oder `manual`;
+Benchmarks zeigen Variante/Cachezustand beziehungsweise das auslösende Label und
+PR-Nummer oder Experiment. Release behält GitHubs Ereignisstandard, den
+Commitbetreff, damit die zugrunde liegende Änderung in der Laufliste sichtbar ist.
+
+Jobnamen mit externen Verträgen bleiben exakt erhalten:
+`Tests, types, lint and build`, `Conventional PR title` und der Main-Aufrufer
+`Verify merged main`. Damit bleibt auch der vom Nodeinstaller geprüfte Name
+`Verify merged main / Tests, types, lint and build` erhalten. Die gespeicherten
+Monitorbezeichnungen `Supabase Auth Backup` und `Platform Backup` bleiben stabile
+logische Identitäten; die Backup-Workflows werden über ihre Dateipfade gelesen.
+Eine Änderung des Anzeigenamens benötigt keine Migration des Monitorzustands.
+
+`tests/ci-workflow.test.mjs` prüft alle sechs Namen, deren Eindeutigkeit,
+kontextbezogene Laufnamen sowie die bisherigen Trigger und externen Checknamen.
+Die Benennungskonvention ist eine Repositoryentscheidung; GitHub stellt die
+getrennten Felder [`name` und `run-name`](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#name)
+bereit und unterstützt in Laufnamen die Kontexte `github` und `inputs`.
 
 ## Primärquellen
 

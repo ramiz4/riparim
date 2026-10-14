@@ -1,4 +1,5 @@
-name: Conventional PR
+name: "CI: Check PR title"
+run-name: "Check PR #${{ github.event.pull_request.number }}: ${{ github.event.pull_request.title }}"
 
 on:
   pull_request:

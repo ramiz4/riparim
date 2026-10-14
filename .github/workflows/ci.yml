@@ -1,4 +1,5 @@
-name: CI
+name: "CI: Verify and build"
+run-name: "${{ github.event_name == 'pull_request' && format('Verify PR #{0}: {1}', github.event.pull_request.number, github.event.pull_request.title) || format('Verify {0}', github.ref_name) }}"
 
 on:
   pull_request:

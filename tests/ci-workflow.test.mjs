@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
 import { assertCIVerification } from "../scripts/verify-ci-gate.mjs";
 import { verifyCIArtifacts } from "../scripts/verify-ci-artifacts.mjs";
@@ -362,4 +362,96 @@ assert(
 );
 console.log(
   "Release receives only immutable target-specific IDs and retains six assets, SHA pins, required check names and production serialization.",
+);
+
+const workflows = [
+  ["ci.yml", "CI: Verify and build", ["pull_request", "workflow_call"]],
+  ["conventional-pr.yml", "CI: Check PR title", ["pull_request"]],
+  ["release.yml", "Release: Publish and deploy", ["push"]],
+  [
+    "auth-backup.yml",
+    "Backup: Supabase Auth",
+    ["schedule", "workflow_dispatch"],
+  ],
+  [
+    "platform-backup.yml",
+    "Backup: Platform",
+    ["schedule", "workflow_dispatch"],
+  ],
+  [
+    "ci-performance-benchmark.yml",
+    "Benchmark: CI performance",
+    ["workflow_dispatch", "pull_request"],
+  ],
+];
+assert.deepEqual(
+  (await readdir(".github/workflows")).sort(),
+  workflows.map(([file]) => file).sort(),
+);
+const workflowSources = new Map();
+const workflowNames = [];
+for (const [file, expectedName, events] of workflows) {
+  const source = await readFile(`.github/workflows/${file}`, "utf8");
+  workflowSources.set(file, source);
+  const name = source.match(/^name: "([^"\n]+)"$/m)?.[1];
+  assert.equal(
+    name,
+    expectedName,
+    `${file} must have a clear category and purpose in Actions`,
+  );
+  assert.match(name, /^(CI|Release|Backup|Benchmark): [A-Z][A-Za-z0-9 ]+$/);
+  workflowNames.push(name);
+  const eventBlock = source.match(/^on:\n([\s\S]*?)(?=^[^\s#])/m)?.[1];
+  assert.deepEqual(
+    [...eventBlock.matchAll(/^  ([a-z_]+):/gm)].map((match) => match[1]),
+    events,
+    `${file} must retain its event contract`,
+  );
+}
+assert.equal(
+  new Set(workflowNames).size,
+  workflows.length,
+  "each workflow must have a unique display name",
+);
+for (const file of ["ci.yml", "conventional-pr.yml"]) {
+  const source = workflowSources.get(file);
+  assert.match(
+    source,
+    /^run-name: .*github\.event\.pull_request\.number.*github\.event\.pull_request\.title.*$/m,
+  );
+}
+assert.match(
+  workflowSources.get("ci.yml"),
+  /format\('Verify \{0\}', github\.ref_name\)/,
+);
+assert.match(
+  workflowSources.get("conventional-pr.yml"),
+  /name: Conventional PR title/,
+);
+assert.doesNotMatch(
+  workflowSources.get("release.yml"),
+  /^run-name:/m,
+  "Release runs must retain GitHub's commit subject default",
+);
+for (const [file, schedule] of [
+  ["auth-backup.yml", "23 3 * * *"],
+  ["platform-backup.yml", "43 3 * * *"],
+]) {
+  const source = workflowSources.get(file);
+  assert(source.includes(`cron: "${schedule}"`));
+  assert.match(
+    source,
+    /^run-name: .*github\.ref_name.*github\.event_name == 'schedule'.*'scheduled'.*'manual'.*$/m,
+  );
+}
+const benchmark = workflowSources.get("ci-performance-benchmark.yml");
+assert.match(
+  benchmark,
+  /^run-name: .*github\.event\.label\.name.*inputs\.variant.*inputs\.cache-state.*github\.event\.pull_request\.number.*inputs\.experiment.*$/m,
+);
+assert.match(benchmark, /pull_request:\n    types: \[labeled\]/);
+assert.match(ci, /pull_request:\n    types: \[opened, synchronize, reopened\]/);
+assert.match(release, /push:\n    branches: \[main\]/);
+console.log(
+  "Actions display names are unique and categorized; contextual run names preserve triggers, required checks and release identities.",
 );

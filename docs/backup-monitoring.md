@@ -9,7 +9,11 @@ Abbruch wurde mit isolierten, verzögerten Testantworten auf Cloudflare geprüft
 Node bleibt eine vorbereitete, deaktivierte Alternative.
 
 Der gemeinsame Kern in `scripts/lib/backup-monitor-core.mjs` prüft
-`Supabase Auth Backup` und `Platform Backup` getrennt über GitHub-Metadaten.
+die Workflows `Backup: Supabase Auth` und `Backup: Platform` getrennt über
+GitHub-Metadaten. Die Dateipfade `auth-backup.yml` und `platform-backup.yml`
+identifizieren die Workflows; gespeicherte Alarm-/Vorfallbezeichnungen bleiben
+`Supabase Auth Backup` und `Platform Backup`. Anzeigenamen sind von diesen
+stabilen Monitoridentitäten getrennt.
 Prüfung, Alarmgrenzen, Versand, Vorfallgenerationen und Wiederholungsschlüssel
 werden für beide Betriebswege nur einmal gepflegt:
 

@@ -117,7 +117,7 @@ keine Release-Automatisierung.
 - Die Anwendung bleibt ein privates Projekt; eine Veröffentlichung als npm-Paket
   gehört nicht zum Release-Prozess. CI-Zugangsdaten bleiben in geschützten Secrets;
   Release-Jobs erhalten nur die benötigten Berechtigungen und laufen serialisiert.
-- Der Workflow `Release` veröffentlicht geprüfte GitHub-Release-Artefakte für Cloudflare, Sites und Node.
+- Der Workflow `Release: Publish and deploy` veröffentlicht geprüfte GitHub-Release-Artefakte für Cloudflare, Sites und Node.
   Cloudflare bleibt das Deployment-Default; der Nodeweg installiert den
   veröffentlichten Main-Release ohne Ziel-Build. Deployment, Produktionsmigrationen und die
   gesonderte Daten-/Domainumstellung richten sich nach

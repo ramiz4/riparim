@@ -1,4 +1,5 @@
-name: Platform Backup
+name: "Backup: Platform"
+run-name: "Platform backup: ${{ github.ref_name }} / ${{ github.event_name == 'schedule' && 'scheduled' || 'manual' }}"
 
 on:
   schedule:

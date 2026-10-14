@@ -1,5 +1,5 @@
-name: CI performance benchmark
-run-name: CI performance ${{ github.event.label.name || format('{0}-{1}', inputs.variant, inputs.cache-state) }}
+name: "Benchmark: CI performance"
+run-name: "CI performance: ${{ github.event.label.name || format('{0}/{1}', inputs.variant, inputs.cache-state) }} / ${{ github.event.pull_request.number && format('PR #{0}', github.event.pull_request.number) || inputs.experiment }}"
 
 on:
   workflow_dispatch:
@@ -60,7 +60,7 @@ jobs:
           INPUT_EXPERIMENT: ${{ inputs.experiment }}
           PR_HEAD: ${{ github.event.pull_request.head.sha }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
-          BASELINE_SOURCE: bbfa675e8b73e3a126991ec9bf8841de49cbc877
+          BASELINE_SOURCE: 1648f6b8bc780fce820fd1d937774cf3231248e1
         run: |
           node --input-type=module <<'NODE'
           import { appendFileSync } from 'node:fs';
