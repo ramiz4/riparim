@@ -1,3 +1,4 @@
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 import { ValidationError } from "@/lib/validation-error";
 import { getAdminUser } from "@/app/auth";
 import { resolveProviderAccount } from "@/lib/auth/identities";
@@ -25,13 +26,16 @@ export async function PATCH(request: Request, { params }: Context) {
     const admin = await getAdminUser();
     if (!admin)
       return json(
-        { error: "Bitte melde dich an.", errorCode: "authentication_required" },
+        {
+          error: legacyMessages.authenticationRequired,
+          errorCode: "authentication_required",
+        },
         401,
       );
     if (!admin.isModerator || !sameOrigin(request))
       return json(
         {
-          error: "Kein Zugriff auf die Benutzerverwaltung.",
+          error: legacyMessages.usersForbidden,
           errorCode: "forbidden",
         },
         403,
@@ -39,12 +43,12 @@ export async function PATCH(request: Request, { params }: Context) {
     let id = (await params).id;
     if (!validUserId(id))
       return json(
-        { error: "Ungültige Benutzerkennung.", errorCode: "invalid_user_id" },
+        { error: legacyMessages.invalidUserId, errorCode: "invalid_user_id" },
         400,
       );
     if (!request.headers.get("content-type")?.includes("application/json"))
       return json(
-        { error: "Ungültige Anfrage.", errorCode: "invalid_request" },
+        { error: legacyMessages.invalidRequest, errorCode: "invalid_request" },
         400,
       );
     let fields;
@@ -56,7 +60,7 @@ export async function PATCH(request: Request, { params }: Context) {
           error:
             e instanceof ValidationError
               ? e.message
-              : "Bitte prüfe die Eingaben.",
+              : legacyMessages.checkInputs,
           errorCode: e instanceof ValidationError ? e.code : "invalid_request",
         },
         400,
@@ -67,7 +71,7 @@ export async function PATCH(request: Request, { params }: Context) {
     const subject = normalizeAuthSubject(auth.provider, id);
     if (!subject)
       return json(
-        { error: "Ungültige Benutzerkennung.", errorCode: "invalid_user_id" },
+        { error: legacyMessages.invalidUserId, errorCode: "invalid_user_id" },
         400,
       );
     id = subject;
@@ -86,8 +90,7 @@ export async function PATCH(request: Request, { params }: Context) {
     )
       return json(
         {
-          error:
-            "Dein eigener und der ursprüngliche Verwaltungszugang sind geschützt: Rolle, Kontostatus und E-Mail-Adresse können nicht geändert werden.",
+          error: legacyMessages.userProtected,
           errorCode: "user_protected",
         },
         403,
@@ -98,7 +101,7 @@ export async function PATCH(request: Request, { params }: Context) {
     )
       return json(
         {
-          error: "Diese E-Mail-Adresse ist für die Verwaltung reserviert.",
+          error: legacyMessages.userEmailReserved,
           errorCode: "user_email_reserved",
         },
         403,
@@ -110,8 +113,7 @@ export async function PATCH(request: Request, { params }: Context) {
     if (status?.status === "deleted")
       return json(
         {
-          error:
-            "Die Löschung dieses Kontos wurde bereits begonnen. Bitte schließe sie über Löschen ab.",
+          error: legacyMessages.userDeletionStarted,
           errorCode: "user_deletion_started",
         },
         409,
@@ -126,8 +128,7 @@ export async function PATCH(request: Request, { params }: Context) {
           if (e instanceof Error && e.message === "ROLE_CHANGE_FORBIDDEN")
             return json(
               {
-                error:
-                  "Die Rollenänderung ist nicht mehr erlaubt. Bitte aktualisiere die Benutzerverwaltung und melde dich bei Bedarf erneut an.",
+                error: legacyMessages.roleChangeForbidden,
                 errorCode: "role_change_forbidden",
               },
               403,
@@ -180,13 +181,16 @@ export async function DELETE(request: Request, { params }: Context) {
     const admin = await getAdminUser();
     if (!admin)
       return json(
-        { error: "Bitte melde dich an.", errorCode: "authentication_required" },
+        {
+          error: legacyMessages.authenticationRequired,
+          errorCode: "authentication_required",
+        },
         401,
       );
     if (!admin.isModerator || !sameOrigin(request))
       return json(
         {
-          error: "Kein Zugriff auf die Benutzerverwaltung.",
+          error: legacyMessages.usersForbidden,
           errorCode: "forbidden",
         },
         403,
@@ -194,7 +198,7 @@ export async function DELETE(request: Request, { params }: Context) {
     let id = (await params).id;
     if (!validUserId(id))
       return json(
-        { error: "Ungültige Benutzerkennung.", errorCode: "invalid_user_id" },
+        { error: legacyMessages.invalidUserId, errorCode: "invalid_user_id" },
         400,
       );
     const auth = await getAuthAdmin();
@@ -202,7 +206,7 @@ export async function DELETE(request: Request, { params }: Context) {
     const subject = normalizeAuthSubject(auth.provider, id);
     if (!subject)
       return json(
-        { error: "Ungültige Benutzerkennung.", errorCode: "invalid_user_id" },
+        { error: legacyMessages.invalidUserId, errorCode: "invalid_user_id" },
         400,
       );
     id = subject;
@@ -212,7 +216,7 @@ export async function DELETE(request: Request, { params }: Context) {
       if (accountId === admin.userId)
         return json(
           {
-            error: "Das Administratorkonto kann nicht gelöscht werden.",
+            error: legacyMessages.userDeleteProtected,
             errorCode: "user_delete_protected",
           },
           403,
@@ -228,7 +232,7 @@ export async function DELETE(request: Request, { params }: Context) {
     if (data.user && (await protectedUser(data.user, admin, auth)))
       return json(
         {
-          error: "Das Administratorkonto kann nicht gelöscht werden.",
+          error: legacyMessages.userDeleteProtected,
           errorCode: "user_delete_protected",
         },
         403,
@@ -238,8 +242,7 @@ export async function DELETE(request: Request, { params }: Context) {
   } catch {
     return json(
       {
-        error:
-          "Der Benutzer konnte nicht vollständig gelöscht werden. Eine begonnene Löschung hält das Konto gesperrt. Bitte versuche es erneut.",
+        error: legacyMessages.userDeleteIncomplete,
         errorCode: "user_delete_incomplete",
       },
       503,

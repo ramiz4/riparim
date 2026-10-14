@@ -1,3 +1,5 @@
+import { maintenanceMessages } from "./i18n/maintenance-messages";
+import { localeFromPath } from "./i18n/locale";
 import hosting from "../.openai/hosting.json";
 import type {
   RuntimeEnv,
@@ -154,17 +156,14 @@ export async function handleMigrationRequest(
   if (url.pathname !== prefix) {
     if (!migrationReadOnly(env)) return null;
     return stampReleaseCommit(
-      new Response(
-        "Riparim wird gerade auf den neuen Server übernommen. Bitte versuche es später erneut.",
-        {
-          status: 503,
-          headers: {
-            "Cache-Control": "no-store",
-            "Retry-After": "300",
-            "X-Riparim-Migration-Read-Only": "true",
-          },
+      new Response(maintenanceMessages[localeFromPath(url.pathname)], {
+        status: 503,
+        headers: {
+          "Cache-Control": "no-store",
+          "Retry-After": "300",
+          "X-Riparim-Migration-Read-Only": "true",
         },
-      ),
+      }),
     );
   }
   // No cookies, native identity, admin UI, cross-origin grant or caller SQL.

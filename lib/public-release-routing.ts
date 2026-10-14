@@ -1,21 +1,26 @@
 import { setReleaseRscHeaders } from "./release-rsc";
-import { localeFromPath, localizeHref, pageIdentityPath } from "./i18n/locale";
+import {
+  isPagePath,
+  localeFromPath,
+  localizeHref,
+  pageIdentityPath,
+} from "./i18n/locale";
 import { ownReviewsHref } from "./own-reviews";
 type Revision = { id: string; updatedAt: string };
 declare const __RIPARIM_PUBLIC_REVISIONS__: Revision[];
 export function publicAssetPath(url: URL) {
-  if (pageIdentityPath(url.pathname) === "/datenschutz")
+  if (pageIdentityPath(url.pathname) === "/privacy")
     return `/__public/${localeFromPath(url.pathname)}/privacy.html`;
   if (pageIdentityPath(url.pathname) === "/")
     return `/__public/${localeFromPath(url.pathname)}/home.html`;
   const match = pageIdentityPath(url.pathname).match(
-    /^\/(werkstaetten|werkstatt\/([a-z0-9][a-z0-9-]{2,80}))$/,
+    /^\/(workshops|workshop\/([a-z0-9][a-z0-9-]{2,80}))$/,
   );
   if (!match) return null;
   const locale = localeFromPath(url.pathname),
     id = match[2];
   if (id && !__RIPARIM_PUBLIC_REVISIONS__.some((w) => w.id === id)) return null;
-  return `/__public/${locale}/${id ? "werkstatt/" + id : "werkstaetten"}.html`;
+  return `/__public/${locale}/${id ? "workshop/" + id : "workshops"}.html`;
 }
 export async function servePublicRelease(
   request: Request,
@@ -24,6 +29,7 @@ export async function servePublicRelease(
   const url = new URL(request.url);
   if (url.pathname.startsWith("/__public/"))
     return new Response("Not found", { status: 404 });
+  if (!isPagePath(url.pathname)) return null;
   const identity = pageIdentityPath(url.pathname),
     locale = localeFromPath(url.pathname);
   if (identity === "/" && !Reflect.get(env, "PUBLIC_RELEASE_RENDER")) {
@@ -38,7 +44,7 @@ export async function servePublicRelease(
     else if (query.getAll("werkstatt").length === 1) {
       const id = query.get("werkstatt")!;
       destination = /^[a-z0-9][a-z0-9-]{2,80}$/.test(id)
-        ? `/werkstatt/${id}`
+        ? `/workshop/${id}`
         : "/";
     } else if (query.has("nachweis")) {
       const id =
@@ -51,8 +57,8 @@ export async function servePublicRelease(
           : null;
       destination =
         row?.status === "published"
-          ? `/werkstatt/${id}#bewerten`
-          : "/werkstaetten?bewerten=1";
+          ? `/workshop/${id}#bewerten`
+          : "/workshops?bewerten=1";
     }
     if (destination)
       return new Response(null, {
@@ -85,9 +91,9 @@ export async function servePublicRelease(
     return null;
   // A changed profile uses a data-free shell until its next approved release.
   const id = pageIdentityPath(url.pathname).match(
-    /^\/werkstatt\/([a-z0-9-]+)$/,
+    /^\/workshop\/([a-z0-9-]+)$/,
   )?.[1];
-  let current = ["/", "/datenschutz"].includes(identity);
+  let current = ["/", "/privacy"].includes(identity);
   if (id) {
     const row = await env.DB.prepare(
       "SELECT status,updated_at FROM workshops WHERE id=?",
@@ -112,7 +118,7 @@ export async function servePublicRelease(
   let selected = current ? asset : asset.replace(/\.html$/, "-shell.html");
   // The provider name follows even a disabled draft; one settings read keeps
   // privacy accurate without rendering React or contacting the auth provider.
-  if (identity === "/datenschutz") {
+  if (identity === "/privacy") {
     const config = await env.DB.prepare(
       "SELECT provider FROM auth_settings WHERE id='main'",
     ).first<{ provider: string }>();

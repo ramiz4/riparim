@@ -101,7 +101,7 @@ await mkdir(".test-runtime/public-review-refresh", { recursive: true });
 await build({
   stdin: {
     contents:
-      "export {default as Profile} from './app/[locale]/werkstatt/[id]/profile';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {rememberSearchSession,readSearchSession} from './lib/search-session';export {invalidatePublicSession} from './components/use-public-session';",
+      "export {default as Profile} from './app/[locale]/workshop/[id]/profile';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {rememberSearchSession,readSearchSession} from './lib/search-session';export {invalidatePublicSession} from './components/use-public-session';",
     resolveDir: process.cwd(),
     loader: "tsx",
   },

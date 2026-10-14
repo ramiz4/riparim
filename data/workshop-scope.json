@@ -1,24 +1,24 @@
 {
   "checkedAt": "2026-10-05",
-  "focus": "Pkw-Werkstätten mit belegtem Pkw-Service und eindeutigem Standort; keine reinen Lkw-, Bus- oder Truck-Teilebetriebe",
+  "focus": "Passenger-car workshops with evidenced passenger-car service and an unambiguous location; no businesses limited to trucks, buses or truck parts",
   "excluded": [
     {
       "workshopId": "auto-ballkan-gjilan",
-      "reason": "Vom Nutzer als Truck-Teilelieferant bestätigt; kein konkreter Pkw-Werkstattnachweis.",
+      "reason": "Confirmed by the user as a truck parts supplier; no concrete evidence of a passenger-car workshop.",
       "sourceUrls": [
         "https://www.gjithebiznesi.com/XK/auto-ballkan-044-177-327"
       ]
     },
     {
       "workshopId": "scania-trans-mitrovica",
-      "reason": "Unternehmensauftritt als Truck & Bus Scania Service; aus dem Pkw-Verzeichnis entfernt.",
+      "reason": "The business presents itself as Truck & Bus Scania Service; removed from the passenger-car directory.",
       "sourceUrls": [
         "https://www.facebook.com/TruckBus-Scania-Service-113881273360473/"
       ]
     },
     {
       "workshopId": "isuzu-servis-prizren",
-      "reason": "Der Isuzu-Standort gehört zum Truck-&-Bus-Angebot von Burak; dieser Nutzfahrzeugeintrag wird nicht als Pkw-Werkstatt geführt.",
+      "reason": "The Isuzu location belongs to Burak's truck and bus offering; this commercial-vehicle entry is not listed as a passenger-car workshop.",
       "sourceUrls": [
         "https://isuzu.co.rs/kontakt-kosovo/",
         "https://www.burak-ks.com/en/trucks"
@@ -26,22 +26,22 @@
     },
     {
       "workshopId": "tachograf-kienzle-ferizaj",
-      "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis.",
+      "reason": "Tachograph specialist without concrete evidence of passenger-car repairs.",
       "sourceUrls": ["https://www.cybo.com/XK/ferizaj/car-repair"]
     },
     {
       "workshopId": "tahograf-prishtina",
-      "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis.",
+      "reason": "Tachograph specialist without concrete evidence of passenger-car repairs.",
       "sourceUrls": ["https://www.cybo.com/XK/pristina/car-repair"]
     },
     {
       "workshopId": "benita-company-kline",
-      "reason": "Tankstelle mit ausdrücklich beworbenem Schwerfahrzeug-Service. Der allgemeine Express-Service belegt keinen konkreten Pkw-Werkstattumfang.",
+      "reason": "Fuel station explicitly advertising heavy-vehicle service. The general express service does not establish a concrete passenger-car workshop scope.",
       "sourceUrls": ["https://benita-ks.com/"]
     },
     {
       "workshopId": "opel-rakovica-prishtina",
-      "reason": "Unabhängiges Verzeichnis markiert den zugeordneten Betrieb als geschlossen und den Kontakt als historisch. Keine bestätigte Wiedereröffnung; nicht veröffentlichen.",
+      "reason": "An independent directory marks the assigned business as closed and its contact as historical. No confirmed reopening; do not publish.",
       "sourceUrls": ["https://www.gjithebiznesi.com/XK/opel-rakovica"]
     }
   ]

@@ -17,10 +17,10 @@ const https = z
   .refine((value) => {
     const u = new URL(value);
     return u.protocol === "https:" && !u.username && !u.password;
-  }, "HTTPS-Quelle ohne Zugangsdaten erforderlich");
+  }, "An HTTPS source without credentials is required");
 const timestamp = z
   .string()
-  .refine((value) => Number.isFinite(Date.parse(value)), "Ungültiges Datum");
+  .refine((value) => Number.isFinite(Date.parse(value)), "Invalid date");
 const date = z
   .string()
   .regex(/^\d{4}-\d{2}-\d{2}$/)
@@ -28,7 +28,7 @@ const date = z
     (value) =>
       Number.isFinite(Date.parse(value)) &&
       new Date(value).toISOString().slice(0, 10) === value,
-    "Ungültiges Prüfdatum",
+    "Invalid verification date",
   );
 const texts = z.array(z.string().min(1).max(200)).max(30);
 const snapshot = z
@@ -49,7 +49,7 @@ const snapshot = z
     )
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Numerische Google-Angaben brauchen eine belegte Quelle",
+        message: "Numeric Google values require a documented source",
       });
   });
 
@@ -111,35 +111,33 @@ export const workshopSourceEntrySchema = z
     if (workshopRetired(w.id))
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message:
-          "Entfernte Werkstattkennung darf nicht erneut importiert werden",
+        message: "A retired workshop ID must not be imported again",
       });
     if (w.services.some((service) => !services.slice(1).includes(service)))
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Unbekannte Leistungskategorie",
+        message: "Unknown service category",
       });
     if ((w.lat === null) !== (w.lng === null))
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Koordinaten müssen paarweise vorliegen",
+        message: "Coordinates must be provided as a pair",
       });
     if ((w.google.placeId === null) !== (w.google.matchedAt === null))
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Place-ID und Zuordnungsdatum müssen zusammen vorliegen",
+        message: "Place ID and matching date must be provided together",
       });
     if (w.status === "published" && !w.google.placeId)
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message:
-          "Veröffentlichte Werkstätten brauchen eine bestätigte Google-Zuordnung",
+        message: "Published workshops require a confirmed Google match",
       });
     if (w.status === "published" && workshopScopeExclusion(w))
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message:
-          "Nur bestätigte Pkw-Werkstatteinträge veröffentlichen: " +
+          "Publish only confirmed passenger-car workshops: " +
           workshopScopeExclusion(w),
       });
     const linkedId = googlePlaceIdFromMapsUrl(w.google.snapshot?.mapsUrl);
@@ -147,12 +145,12 @@ export const workshopSourceEntrySchema = z
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message:
-          "Google-Kartenlink und Place-ID müssen denselben Eintrag bezeichnen",
+          "The Google Maps link and Place ID must identify the same listing",
       });
     if (w.google.verification && !w.google.placeId)
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
-        message: "Ein Zuordnungsnachweis braucht eine Place-ID",
+        message: "Matching evidence requires a Place ID",
       });
   });
 export type WorkshopSourceEntry = z.infer<typeof workshopSourceEntrySchema>;
@@ -212,11 +210,11 @@ export function validateWorkshopCatalogue(input: unknown): WorkshopCatalogue {
   const now = Date.now(),
     today = new Date(now).toISOString().slice(0, 10);
   for (const w of data.workshops) {
-    if (ids.has(w.id)) throw Error(`Doppelte Werkstattkennung: ${w.id}`);
+    if (ids.has(w.id)) throw Error(`Duplicate workshop ID: ${w.id}`);
     ids.add(w.id);
     if (w.google.placeId) {
       if (places.has(w.google.placeId))
-        throw Error(`Doppelte Google-Place-ID: ${w.id}`);
+        throw Error(`Duplicate Google Place ID: ${w.id}`);
       places.add(w.google.placeId);
     }
     if (
@@ -225,19 +223,19 @@ export function validateWorkshopCatalogue(input: unknown): WorkshopCatalogue {
       (w.google.matchedAt && Date.parse(w.google.matchedAt) > now) ||
       (w.google.snapshot && Date.parse(w.google.snapshot.checkedAt) > now)
     )
-      throw Error(`Prüfdatum liegt in der Zukunft: ${w.id}`);
+      throw Error(`Verification date is in the future: ${w.id}`);
   }
   const stats = catalogueStats(data.workshops);
   for (const key of ["published", "drafts"] as const)
     if (data.coverage[key] !== stats[key])
-      throw Error(`Abweichende Bestandszahl: ${key}`);
+      throw Error(`Catalogue count mismatch: ${key}`);
   for (const key of [
     "matchedPlaceIds",
     "numericSnapshotRatings",
     "pendingPublishedMatches",
   ] as const)
     if (data.googleImport[key] !== stats[key])
-      throw Error(`Abweichende Google-Abdeckung: ${key}`);
+      throw Error(`Google coverage mismatch: ${key}`);
   return data;
 }
 
@@ -274,7 +272,7 @@ export function mergeWorkshopCatalogue(
         normalize(w.address) === normalize(candidate.address),
     );
     if (matches.length > 1 || (byId && byPlace && byId.id !== byPlace.id))
-      throw Error(`Mehrdeutiger Import: ${candidate.id}`);
+      throw Error(`Ambiguous import: ${candidate.id}`);
     const existing = byId ?? byPlace ?? matches[0];
     if (!existing) {
       workshops.push(candidate);

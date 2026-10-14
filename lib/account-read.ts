@@ -1,3 +1,4 @@
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 import type { AppUser } from "./auth/app-user";
 import type { AuthConfig } from "./auth/config";
 import {
@@ -16,8 +17,7 @@ export type AccountReadAuth = {
 const unavailable = () =>
   json(
     {
-      error:
-        "Die Kontoverwaltung ist gerade nicht verfügbar. Bitte versuche es erneut.",
+      error: legacyMessages.accountUnavailable,
       errorCode: "account_unavailable",
     },
     503,

@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { build } from "esbuild";
 import { mkdir, writeFile } from "node:fs/promises";
 const out = ".test-runtime/customer-metadata.mjs";
-const source = `export {authCallbackUrl} from './lib/auth/locale';export {generateMetadata as home} from './app/[locale]/page';export {generateMetadata as login} from './app/[locale]/anmelden/page';export {generateMetadata as register} from './app/[locale]/registrieren/page';export {generateMetadata as recovery} from './app/[locale]/passwort-vergessen/page';export {generateMetadata as reset} from './app/[locale]/passwort-neu/page';export {generateMetadata as settings} from './app/[locale]/einstellungen/page';export {generateMetadata as ownReviews} from './app/[locale]/bewertungen/page';`;
+const source = `export {authCallbackUrl} from './lib/auth/locale';export {generateMetadata as home} from './app/[locale]/page';export {generateMetadata as login} from './app/[locale]/login/page';export {generateMetadata as register} from './app/[locale]/register/page';export {generateMetadata as recovery} from './app/[locale]/forgot-password/page';export {generateMetadata as reset} from './app/[locale]/reset-password/page';export {generateMetadata as settings} from './app/[locale]/settings/page';export {generateMetadata as ownReviews} from './app/[locale]/reviews/page';`;
 const result = await build({
   stdin: { contents: source, resolveDir: process.cwd(), loader: "tsx" },
   outfile: out,

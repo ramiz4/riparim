@@ -1,109 +1,101 @@
-# Finaler Datenabgleich für den Domainwechsel
+# Final data reconciliation for domain cutover
 
-Die Werkzeuge bereiten den letzten Abgleich für #19 vor. Sie schalten keine
-Wartungssperre ein und ändern keine Domain, Laufzeitkonfiguration oder
-Veröffentlichung. Die öffentliche Quell-Site bleibt während der Vorbereitung
-verfügbar. Die kurze Pause wird erst nach erfolgreicher Prüfung und vor ihrer
-Aktivierung wie in [domain-cutover.md](domain-cutover.md) angekündigt.
+The tools prepare final reconciliation for #19. They enable no maintenance lock
+and change no domain, runtime configuration or publication. The public source
+Site stays available during preparation. The short pause is announced only
+after successful verification and before activation, as described in
+[domain-cutover.md](domain-cutover.md).
 
-## Bewiesener Ausgangsstand
+## Proven baseline
 
-Der Abschluss von #18 enthält das geschützte Quellbackup, das Zielbackup vor dem
-Import und den privaten Transferbericht. `loadTransferredBaseline()` prüft ihre
-Identitäten, Abschlussnachweise und Prüfsummen. Es rekonstruiert die bestätigten
-Einfügungen ausschließlich im Arbeitsspeicher. Menge der Einfügungen,
-beibehaltene Cachemetadaten und der vollständige Ziel-Fingerprint müssen exakt
-zum Transferbericht passen. Ein aktuelles, zufällig ähnliches Ziel wird dadurch
-nicht zum Ausgangsstand erklärt.
+Completion of #18 includes the protected source backup, target backup before
+import and private transfer report. `loadTransferredBaseline()` checks their
+identities, completion receipts and checksums. It reconstructs confirmed inserts
+only in memory. Insert counts, retained cache metadata and the complete target
+fingerprint must exactly match the transfer report. This does not declare a
+current coincidentally similar target to be the baseline.
 
-`planDataDelta()` vergleicht diesen Ausgangsstand mit der frischen, angehaltenen
-Quelle und dem frischen Ziel. Unveränderte Quellzeilen bewahren die ursprünglichen
-Zielwerte einschließlich der bereits validierten Cachemetadaten. Neue,
-geänderte oder gelöschte Quellzeilen erzeugen nur die entsprechenden Einfügungen,
-Änderungen oder Löschungen. Andere Zieländerungen stoppen den Plan. Bereits exakt
-übernommene Änderungen werden bei einem erneuten Abgleich übersprungen.
-Sitzungswiderrufe, Kontosperren, entfernte Rollen und gelöschte Einreichungen
-werden damit nicht aus einem älteren Backup wiederhergestellt. Ein Wechsel des
-Supabase-Projekts ist außerhalb dieses Domainabgleichs und führt zu No-Go.
+`planDataDelta()` compares this baseline with the fresh paused source and fresh
+target. Unchanged source rows preserve original target values, including already
+validated cache metadata. New, changed or deleted source rows produce only the
+corresponding inserts, modifications or deletions. Other target changes stop
+the plan. Already transferred exact changes are skipped on renewed reconciliation.
+Session revocations, account blocks, removed roles and deleted submissions are
+therefore not restored from an older backup. A Supabase project change is
+outside this domain reconciliation and produces No-Go.
 
-Die Entscheidung über Cachemetadaten verwendet die vorhandene gemeinsame
-Identitätsfunktion. Bei geänderter Telefonnummer, Adresse oder Kartenquelle
-bleibt kein alter Zielhash als aktuelle Bestätigung stehen. Quoten, Rollen und
-Geschäftsdaten fallen nicht unter diese Ausnahme. Alle ursprünglichen Backups
-bleiben unverändert.
+The cache metadata decision uses the existing shared identity function.
+A changed phone number, address or map source does not leave an old target hash
+as current confirmation. Quotas, roles and business data do not fall under this
+exception. All original backups remain unchanged.
 
-## Gesonderter Nachweis abgelaufener Auth-Zähler
+## Separate proof of expired Auth counters
 
-Standardmäßig wird auch jede Zielabweichung in `auth_attempts` abgewiesen. Die
-optionale Ablaufprojektion benötigt einen geschützten QA-Nachweis und ein
-vollständiges geschütztes Zielbackup als Zeitzeugen. Dessen `exportedAt` ist der
-feste Stichtag; er darf weder nach der vertrauenswürdigen Ausführungszeit noch
-nach den frischen Source-/Target-Backups liegen.
+By default, every target deviation in `auth_attempts` is also rejected.
+The optional expiry projection requires a protected QA receipt and complete
+protected target backup as a timestamped witness. Its `exportedAt` is the fixed
+cutoff; it must be no later than trusted execution time or the fresh
+source/target backups.
 
-Die Prüfung bestätigt zuerst den unveränderten #18-Fingerprint. Anschließend
-werden ausschließlich Zähler ausgeblendet, deren SHA-/Zehn-Minuten-Fenster,
-positive Versuchsanzahl und Zwanzig-Minuten-Ablauf zur tatsächlichen
-Limiter-Implementierung passen und die bereits **vor diesem Stichtag** abgelaufen
-waren. Nach dieser Projektion muss der gesamte bewiesene Ausgangsstand dem
-Zeitzeugen entsprechen. Aktive oder fehlerhafte Zähler sowie Änderungen anderer
-Tabellen bleiben Konflikte. Eine konkrete IP-Zuordnung wird durch zeitliche
-Korrelation nicht als bewiesen ausgegeben.
+The check first confirms the unchanged #18 fingerprint. It then hides only
+counters whose SHA/ten-minute window, positive attempt count and twenty-minute
+expiry match the actual limiter implementation and which had already expired
+**before this cutoff**. After projection, the entire proven baseline must match
+the witness. Active or malformed counters and changes in other tables remain
+conflicts. A specific IP mapping is not claimed proven through time correlation.
 
-Diese Projektion erzeugt weder eine Bereinigung noch eine Wiederherstellung
-abgelaufener Zähler. Bereits abgelaufene Zielzeilen bleiben physisch unverändert;
-abgelaufene Quellzeilen werden nicht erneut kopiert. Aktive Quellzähler werden
-normal abgeglichen. Der endgültige **rohe** Ziel-Fingerprint berücksichtigt auch
-diese erhaltenen Zielzeilen, damit ein erfolgreicher No-op keinen nur
-ungeprüften Projektionszustand behauptet.
+This projection neither cleans up nor restores expired counters.
+Already expired target rows remain physically unchanged; expired source rows
+are not copied again. Active source counters are reconciled normally.
+The final **raw** target fingerprint also includes these preserved target rows,
+so a successful no-op does not claim an otherwise unverified projected state.
 
-## Geschützte Ausführung
+## Protected execution
 
-`scripts/apply-delta-d1.mjs` nimmt Optionen und die kurzlebigen Zugangsdaten nur
-über geschütztes JSON auf stdin entgegen. Tokens gehören weder in Argumente,
-Konfigurationsdateien, Git noch in Berichte. Der verantwortliche Ausführungsprozess
-holt sie aus dem geschützten Dienst und erzeugt die Eingabe im Arbeitsspeicher.
-Ohne `execute: true` wird ausschließlich ein Plan mit Mengen und Fingerprints
-ausgegeben. Die Modul-Schnittstelle `applyDeltaPlan()` erlaubt injizierte
-Providerzugriffe für isolierte Tests.
+`scripts/apply-delta-d1.mjs` accepts options and short-lived credentials only
+through protected JSON on stdin. Tokens belong neither in arguments,
+configuration files, Git nor reports. The responsible execution process obtains
+them from the protected service and builds input in memory. Without
+`execute: true`, only a plan with counts and fingerprints is emitted.
+The `applyDeltaPlan()` module interface permits injected provider access for
+isolated tests.
 
-| Option                                             | Nachweis                                                                                     |
-| -------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `baselineSourceDirectory`                          | Vollständiges abgeschlossenes Quellbackup aus #18                                            |
-| `preTransferTargetDirectory`                       | Privates Zielbackup vor den bestätigten #18-Einfügungen                                      |
-| `transferReportFile`                               | Privater bestätigter Transferbericht mit vollständigem Ergebnis-Fingerprint                  |
-| `sourceDirectory`, `expectedSourceCommit`          | Frisches vollständiges Quellbackup und unabhängig verifizierter Source-Release               |
-| `destinationDirectory`, `expectedCommit`           | Frisches geschütztes Zielbackup und tatsächlicher Target-Release                             |
-| `expiryProjection`                                 | Optional: `witnessDirectory`, `expectedWitnessCommit`, `receiptFile`                         |
-| `sourceOrigin`, `sourceToken`, `sourceProbeParent` | Geschützter authentifizierter Quellzugriff für vollständige erneute Pause-/Bestandsnachweise |
-| `token`                                            | Separater geschützter Cloudflare-Zugang zum fest eingebauten Zielaccount und zur Ziel-D1     |
-| `execute`                                          | Nur der boolesche Wert `true` aktiviert Datenmutationen                                      |
+| Option                                             | Evidence                                                                                |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `baselineSourceDirectory`                          | Complete finished source backup from #18                                                |
+| `preTransferTargetDirectory`                       | Private target backup before confirmed #18 inserts                                      |
+| `transferReportFile`                               | Private confirmed transfer report with complete result fingerprint                      |
+| `sourceDirectory`, `expectedSourceCommit`          | Fresh complete source backup and independently verified source release                  |
+| `destinationDirectory`, `expectedCommit`           | Fresh protected target backup and actual target release                                 |
+| `expiryProjection`                                 | Optional: `witnessDirectory`, `expectedWitnessCommit`, `receiptFile`                    |
+| `sourceOrigin`, `sourceToken`, `sourceProbeParent` | Protected authenticated source access for complete renewed pause/inventory verification |
+| `token`                                            | Separate protected Cloudflare access to the fixed embedded target account and target D1 |
+| `execute`                                          | Only boolean `true` activates data mutations                                            |
 
-Vor jedem Abschnitt werden die unveränderte, authentifizierte Quellpause und der
-explizite Target-Wartungsmarker samt unveränderlichem Release-Commit geprüft.
-Der Target-Bestand wird vollständig neu gelesen. SQL und Bindings entstehen
-allein aus dem neuen Dreifachabgleich; es gibt keine Eingabe beliebiger SQL-Texte.
-Änderungen und Löschungen vergleichen alle alten Spalten einschließlich Nullwerten.
-Jedes Statement darf genau eine erwartete Zeile ändern; je Abschnitt gibt es
-höchstens 50 Statements und höchstens 95 Bindings pro Statement.
+Before each section, the unchanged authenticated source pause and explicit target
+maintenance marker with immutable release commit are checked. The target
+inventory is fully reread. SQL and bindings come only from the new three-way
+reconciliation; there is no input of arbitrary SQL text.
+Changes and deletions compare all old columns, including null values.
+Each statement may modify exactly one expected row; each section has at most
+50 statements and each statement at most 95 bindings.
 
-Eine verlorene Bestätigung wird nie automatisch wiederholt. Quelle und Ziel
-bleiben angehalten, ein neues geschütztes Zielbackup wird erstellt und der
-Dreifachabgleich neu berechnet. Er erkennt vollständig oder teilweise übernommene
-Änderungen. Am Ende müssen sowohl der vollständige rohe Zielzustand als auch ein
-erneuter, leerer Änderungsplan stimmen. Source-Identität und originale Source-
-Fingerprints werden nochmals geprüft.
+A lost acknowledgment is never retried automatically. Source and target remain
+paused, a new protected target backup is created and three-way reconciliation
+is recalculated. It detects fully or partially transferred changes.
+At the end, both the complete raw target state and a new empty change plan
+must match. Source identity and original source fingerprints are checked again.
 
-## Private Dateien und Go/No-Go
+## Private files and Go/No-Go
 
-Ein gegenüber #18 verändertes privates Quellinventar ist derzeit vor jeglicher
-D1-Mutation ein ausdrückliches No-Go: Zuerst muss ein gesonderter vollständiger
-R2-Delta für Inhalt, Metadaten, Referenzen und Löschungen geprüft werden. Ein
-Datenbankabgleich allein übernimmt keine Datei. Auch das aktuelle Zielinventar,
-seine Privatheit und Referenzen müssen vor dem Aufruf separat nach
-[data-transfer.md](data-transfer.md) bestätigt werden. Die Werkzeuge behaupten
-keine bereits ausgeführte Dateiübernahme oder Domainumstellung.
+A private source inventory changed since #18 currently produces an explicit
+No-Go before any D1 mutation: first a separate complete R2 delta for content,
+metadata, references and deletions must be reviewed. Database reconciliation
+alone transfers no file. Current target inventory, its privacy and references
+must also be separately confirmed before invocation according to
+[data-transfer.md](data-transfer.md). The tools claim no already executed file
+transfer or domain cutover.
 
-Erst nach konfliktfreiem Abschluss folgen Routing, ausschließliche Freigabe des
-Ziel-Writers, die fachliche Domain-/Auth-Abnahme und der vereinbarte
-Beobachtungszeitraum. Backups, Quell-Site und private Berichte bleiben bis zur
-sicheren Übergabe erhalten.
+Only conflict-free completion is followed by routing, exclusive activation of
+the target writer, business domain/Auth acceptance and the agreed observation
+period. Backups, source Site and private reports remain until safe handover.

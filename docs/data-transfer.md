@@ -1,150 +1,144 @@
-# Datenübernahme von Sites zum eigenen Worker
+# Transfer data from Sites to the owned Worker
 
-Die Quell-Site bleibt während Vorbereitung und Prüfung erhalten. Eine leere,
-bereits migrierte Zieldatenbank ist keine abgeschlossene Übernahme. #18 bleibt
-offen, bis Backup, Wiederherstellung, Abgleich und Zugriffstests tatsächlich
-ausgeführt und dokumentiert sind; Domainwechsel #19 und Stilllegung #20 folgen.
+The source Site remains intact during preparation and verification. An empty,
+already migrated target database is not a completed transfer. #18 remains open
+until backup, recovery, reconciliation and access tests have actually been
+performed and documented; domain cutover #19 and retirement #20 follow.
 
-## Ressourcen und Veröffentlichungsstand
+## Resources and publication state
 
-- Quelle: Sites-Projekt `appgprj_6abfd028b7e48191822a15d44cbbda8d`,
-  `https://riparim.com`, logische Bindings `DB` und `BUCKET`.
-- Zielaccount: `ec181b3a61c7c3da13910600953fc3ea`, Worker `riparim`.
-- Ziel-D1: `riparim-production`, `b395ea3a-5316-4b0b-bdee-533bdb68d6a0`.
-- Ziel-R2: `riparim-evidence-production`, privat.
+- Source: Sites project `appgprj_6abfd028b7e48191822a15d44cbbda8d`,
+  `https://riparim.com`, logical bindings `DB` and `BUCKET`.
+- Target account: `ec181b3a61c7c3da13910600953fc3ea`, Worker `riparim`.
+- Target D1: `riparim-production`, `b395ea3a-5316-4b0b-bdee-533bdb68d6a0`.
+- Target R2: `riparim-evidence-production`, private.
 
-Der Quellzugriff erfolgt über die vorhandenen Worker-Bindings. Der Sites-
-Connector bietet keinen vollständigen Datenbank-/Dateiexport. Ein Cloudflare-
-Token des Zielaccounts erhält dadurch keinen Zugriff auf die Plattformressourcen
-der Quelle. Für die Übernahme wird deshalb der geprüfte Sites-Build desselben
-Main-Releases genutzt. Die beiden Anbieterarchive dürfen nicht vertauscht werden:
-der eigene Worker entfernt native Identitätsheader, der Sites-Adapter bewahrt
-deren bestehendes Verhalten hinter dem Plattformzugang.
+Source access uses the existing Worker bindings. The Sites connector offers no
+complete database/file export. A Cloudflare token for the target account does
+not thereby gain access to the source's platform resources. The transfer
+therefore uses the verified Sites build from the same main release. The two
+provider archives must not be swapped: the owned Worker removes native identity
+headers; the Sites adapter preserves their existing behavior behind platform access.
 
-Nur ein vollständig veröffentlichter GitHub Release mit passendem Quellcommit,
-Projekt und SHA-256 darf auf die Quell-Site übernommen werden. Der konfigurierte
-Sites-Quellbranch muss den exakten Release-Commit per Fast-forward erhalten;
-bei Divergenz stoppen. Reine zusätzliche Veröffentlichungscommits dürfen nicht
-als vermeintlich gleicher Archivcommit ausgegeben werden. Nach zusätzlicher
-Sicherung der gesamten Quellhistorie auf einem eigenen Branch und mit lokalem
-Git-Bundle samt Wiederherstellungsprüfung kann eine ausdrücklich vom Nutzer
-beauftragte Ausrichtung erfolgen. Sie verwendet ausschließlich
-`--force-with-lease=refs/heads/main:<zuvor bestätigter vollständiger SHA>` zum
-geprüften Release-Commit und bricht bei jeder zwischenzeitlichen Änderung ab.
-Ohne diese ausdrückliche Beauftragung bleibt die Veröffentlichung gestoppt.
-Das heruntergeladene geprüfte Sites-Archiv wird unverändert
-mit den nativen Sites-Werkzeugen gespeichert und veröffentlicht.
+Only a fully published GitHub release with matching source commit, project and
+SHA-256 may be deployed to the source Site. The configured Sites source branch
+must receive the exact release commit by fast-forward; stop on divergence.
+Additional publication-only commits must not be presented as supposedly the
+same archive commit. After additionally backing up the entire source history
+on a separate branch and in a local Git bundle with recovery verification,
+an alignment explicitly authorized by the user may be performed. It uses only
+`--force-with-lease=refs/heads/main:<previously confirmed full SHA>` to the verified
+release commit and aborts on any intervening change. Without this explicit
+authorization, publication remains stopped.
+The downloaded verified Sites archive is stored and published unchanged with
+the native Sites tools.
 
-## Geschützter Export und Schreibpause
+## Protected export and write pause
 
-Die Quelle erhält folgende geschützte Laufzeitkonfiguration; sie gehört weder
-in Git noch in PR-Text, Logs oder Befehlsargumente:
+The source receives the following protected runtime configuration; it belongs
+neither in Git nor in PR text, logs or command arguments:
 
-- `MIGRATION_READ_ONLY=true`: sperrt den gesamten App-Handler, einschließlich
-  GETs mit automatischen Datenbankänderungen und Scheduled-Benachrichtigungen.
-- `MIGRATION_EXPORT_TOKEN_SHA256`: SHA-256 eines kryptografisch erzeugten
-  256-Bit-Tokens. Der Klartext wird ausschließlich geschützt im Exportprozess
-  gehalten und per Authorization-Header übertragen.
-- `MIGRATION_EXPORT_EXPIRES_AT`: höchstens 24 Stunden gültiger ISO-Zeitpunkt.
-- `MIGRATION_SOURCE_COMMIT`: exakter, unabhängig geprüfter Release-Commit.
+- `MIGRATION_READ_ONLY=true`: blocks the entire app handler, including GETs
+  with automatic database modifications and scheduled notifications.
+- `MIGRATION_EXPORT_TOKEN_SHA256`: SHA-256 of a cryptographically generated
+  256-bit token. Plaintext is held only securely in the export process and
+  transmitted through an Authorization header.
+- `MIGRATION_EXPORT_EXPIRES_AT`: ISO timestamp valid for at most 24 hours.
+- `MIGRATION_SOURCE_COMMIT`: exact, independently verified release commit.
 
-Der Exportpfad `/__migration/export` antwortet ohne diese Konfiguration und ohne
-gültige Berechtigung mit 404. Er akzeptiert keine Client-SQL-Abfragen, keine
-Client-Zielressourcen und keine Cookie-/UI-Admin-Abkürzung. Tabellen werden gegen
-das tatsächliche SQLite-Schema geprüft; kleine Folgeseiten erhalten BLOB-Werte.
-R2 wird vollständig über dessen Cursor inventarisiert, einschließlich privater
-Objekte ohne aktuellen Besuchsverweis. Dateischlüssel stehen im geschützten
-POST-Body; Inhalte werden gestreamt und nur mit unverändertem ETag gelesen.
+The `/__migration/export` path returns 404 without this configuration and valid
+authorization. It accepts no client SQL queries, client target resources or
+cookie/UI admin shortcuts. Tables are checked against the actual SQLite schema;
+small paginated responses preserve BLOB values. R2 is fully inventoried through
+its cursor, including private objects without a current visit reference.
+File keys are in the protected POST body; contents are streamed and read only
+with an unchanged ETag.
 
-Die Exportberechtigung läuft ab; die Schreibpause endet **nicht** automatisch.
-Nach dem Wechsel darf die alte Site keine zweite Schreibquelle werden. Die
-Wiederaufnahme benötigt einen ausdrücklichen Betriebsentscheid und erneuten
-Abgleich. Zum Rückfall vor Domainwechsel die Exportwerte entfernen und die
-Schreibpause gezielt aufheben; keine Datenbank oder Dateien löschen.
+Export authorization expires; the write pause does **not** end automatically.
+After cutover, the old Site must not become a second write source.
+Resumption requires an explicit operational decision and renewed reconciliation.
+For fallback before the domain cutover, remove export values and explicitly lift
+the write pause; delete no database or files.
 
-Vor der Bestandsaufnahme müssen alte Aufrufe und Hintergrundarbeiten abgeflossen
-sein. Zwei identische vollständige Bestandsaufnahmen sind eine zusätzliche
-Kontrolle, kein Ersatz für diese Betriebsbedingung. Bei aktiven Uploads,
-Löschungen, unklarer Quieszenz oder abweichendem Abschlussabgleich bleibt der
-Zustand No-Go. Ein bestehender Lösch- oder Uploadzustand wird erhalten und nicht
-automatisch bereinigt oder als erledigt markiert.
+Old requests and background work must drain before inventory capture.
+Two identical complete inventories are an additional check, not a substitute
+for this operational condition. Active uploads, deletions, uncertain quiescence
+or a differing final reconciliation keep the state at No-Go. Existing deletion
+or upload state is preserved and not automatically cleaned or marked complete.
 
-## Backup und Wiederherstellung
+## Backup and recovery
 
-Backups werden außerhalb von Git in einem Verzeichnis mit Modus 0700 gespeichert;
-Dateien erhalten 0600. Das Inventar enthält alle tatsächlichen Tabellen,
-Schemaobjekte und erreichbaren Migrationsmetadaten. Reservierte `_cf_*`-Tabellen
-sind vom Anbieter für SQL-Lesezugriffe gesperrt; ihre Namen werden ausdrücklich
-als ausgeschlossene Plattformtabellen dokumentiert. Dieser logische Export
-behauptet keine Sicherung dieser internen Providerdaten. Private SQL-Bindings und
-Sitzungsdaten werden nicht in Diagnosen ausgegeben. Dateiinhalt, Größe,
-SHA-256, ursprünglicher Objektschlüssel, HTTP-/Custom-Metadaten sowie Quell-ETag
-werden festgehalten. Ein abgebrochener Export gilt nicht als abgeschlossen.
+Backups are stored outside Git in a directory with mode 0700; files receive 0600.
+The inventory contains all actual tables, schema objects and accessible migration
+metadata. Reserved `_cf_*` tables are blocked by the provider for SQL reads;
+their names are explicitly documented as excluded platform tables. This logical
+export claims no backup of those internal provider data. Private SQL bindings
+and session data are not exposed in diagnostics. File contents, size, SHA-256,
+original object key, HTTP/custom metadata and source ETag are recorded.
+An interrupted export does not count as complete.
 
-`scripts/data-transfer.mjs` stellt die Anwendungsdaten isoliert mit ausschließlich
-eingechecktem SQL wieder her. Fremdes Export-SQL wird nie ausgeführt. Das gesamte
-Schema samt Spalten muss genau einen bekannten Migrationsstand beweisen; eine
-vorhandene D1-/Drizzle-Historie muss dazu passen. Die bei Sites tatsächlich
-verwendete `__appgarden_migrations` wird ausschließlich mit ihrer überprüften
-Drei-Spalten-Definition, Reihenfolge und den exakten eingecheckten Dateinamen
-anerkannt; sie bleibt im Quellarchiv und ersetzt keine Zielhistorie. Fehlende Historie wird als solche
-ausgewiesen und niemals durch erfundene angewendete Zeilen ersetzt. Plattform-
-und Quell-Migrationsdaten bleiben unverändert im Quellarchiv erhalten. Das
-Upgrade ergänzt ausschließlich den bewiesenen fehlenden Migrationssuffix.
+`scripts/data-transfer.mjs` restores application data in isolation using only
+committed SQL. Untrusted export SQL is never executed. The entire schema,
+including columns, must prove exactly one known migration state; any existing
+D1/Drizzle history must match it. The `__appgarden_migrations` actually used by
+Sites is recognized only with its verified three-column definition, ordering
+and exact committed filenames; it remains in the source archive and replaces
+no target history. Missing history is reported as such and never replaced with
+invented applied rows. Platform and source migration data remain unchanged in
+the source archive. The upgrade adds only the proven missing migration suffix.
 
-Die gleiche Wiederherstellungsprüfung gilt für das Zielbackup. Dessen bereits
-angewendete Historie bleibt erhalten. Ein Datentransfer ersetzt keine Migration
-und spielt keine alten CREATE/DROP-Anweisungen über die Produktionsdatenbank.
+The same recovery check applies to the target backup. Its already applied
+history is preserved. A data transfer does not replace a migration or replay
+old CREATE/DROP statements over the production database.
 
-## Import und Abnahme
+## Import and acceptance
 
-Der Zielnachweis verlangt neben HTTP503/no-store den ausdrücklichen Wartungsmarker
-des Workers und dessen unveränderlich eingebauten Release-Commit. Ein gewöhnlicher
-App-Ausfall gilt nicht als aktive Schreibpause. Quellidentität und Bestandsfingerprints
-werden vor und nach jedem Importabschnitt authentifiziert geprüft.
+In addition to HTTP503/no-store, target verification requires the Worker's
+explicit maintenance marker and its immutably embedded release commit.
+An ordinary app outage does not count as an active write pause. Source identity
+and inventory fingerprints are checked with authentication before and after
+each import section.
 
-Vor Import beide Seiten sichern, Wiederherstellung prüfen, Dateien vollständig
-verifizieren und einen privaten Plan erzeugen. Gleiche Datensätze sind No-ops;
-fehlende Primärschlüssel können ergänzt werden. Abweichende Zeilen und Unique-
-Kollisionen stoppen den Plan. Auch zusätzliche Zieldatensätze bleiben erhalten
-und sichtbar. Es gibt kein pauschales Replace, Upsert oder Löschen fremder Daten.
-Die ausdrückliche Option `retainValidatedCacheMetadata=true` behandelt nur zwei
-nachgewiesene Fälle als gleichwertige Metadaten: ISO-Abschlusszeitpunkte desselben
-`workshop-source:<SHA>`-Imports bei exakt gleichem vollständigem Profilbestand;
-und Google-Zuordnungscaches bei gleicher Place ID, gleichem vollständigem Profil
-und gleicher Bewertungsquelle, wenn der Zielhash der aktuellen gemeinsamen
-Identitätsfunktion entspricht. Hier dürfen lediglich Cachezeiten oder veraltete
-Quellhashes abweichen. Zielwerte bleiben erhalten; die Ausgabe weist
-`retainedMetadata` getrennt aus. Quotenzähler, Geschäftsdaten, Besitzrechte,
-Freigaben und andere Zuordnungen werden niemals so gleichgesetzt. Die originale
-Quelle und ihre Fingerprints bleiben unverändert. Es entstehen keine UPDATEs.
-Ein anderer Katalogkonflikt benötigt einen gesondert geprüften Plan.
+Before import, back up both sides, verify recovery, fully verify files and create
+a private plan. Identical records are no-ops; missing primary keys may be added.
+Differing rows and unique collisions stop the plan. Additional target records
+are also preserved and visible. There is no blanket replace, upsert or deletion
+of unrelated data.
+The explicit `retainValidatedCacheMetadata=true` option treats only two proven
+cases as equivalent metadata: ISO completion times for the same
+`workshop-source:<SHA>` import with an exactly identical complete profile
+inventory; and Google identity caches with the same Place ID, complete profile
+and review source when the target hash matches the current shared identity
+function. Only cache timestamps or outdated source hashes may differ here.
+Target values are preserved; output reports `retainedMetadata` separately.
+Quota counters, business data, ownership, approvals and other mappings are never
+equated this way. The original source and its fingerprints remain unchanged.
+No UPDATEs are generated. Other catalogue conflicts require a separately reviewed plan.
 
-Private Objekte werden unter gleichen Schlüsseln übernommen. Bereits vorhandene
-Zielobjekte müssen Inhalt und Metadaten nachweislich erfüllen, andernfalls
-stoppen. Originale Provider-ETags/Uploadzeiten bleiben im Backup; neu erzeugte
-R2-Providerwerte dürfen nicht mit unveränderten Datei-Prüfsummen verwechselt
-werden. Referenzen aus `visits` und `evidence_uploads` werden vollständig geprüft;
-ein fehlender privater Beleg blockiert die Übernahme.
+Private objects are transferred under the same keys. Existing target objects
+must demonstrably meet content and metadata requirements; otherwise stop.
+Original provider ETags/upload times remain in the backup; newly generated R2
+provider values must not be confused with unchanged file checksums.
+References from `visits` and `evidence_uploads` are fully checked; a missing
+private evidence file blocks the transfer.
 
-Für Wiederholungen bestätigte Einfügungen erneut gegen Quelle und Ziel prüfen.
-Ein verlorener Commit-Acknowledgement ist kein Grund für blinden erneuten Import.
-Die Ausgabe enthält nur Mengen und Prüfergebnisse. Abschließend einen neuen
-vollständigen Quell-/Zielabgleich ausführen und die Schreibpause bestätigen.
+On retries, recheck confirmed inserts against source and target. A lost commit
+acknowledgment is no reason for a blind reimport. Output contains only counts
+and check results. Finally perform a new complete source/target reconciliation
+and confirm the write pause.
 
-Go/No-Go benötigt außerdem: unveränderte Supabase-Projektidentität, serverseitig
-bestätigte Legacy-Verknüpfungen, erhaltene Adminrollen und Kontosperren,
-Anmeldung/Abmeldung, Moderation und erlaubte sowie fremde/anonyme Nachweisabrufe.
-Gleiche E-Mail-Adressen erzeugen keine Besitzrechte. Mit echten Konten benötigte
-Anmeldeschritte werden getrennt von isolierten Tests dokumentiert. Ohne diese
-Abnahme keine Domainumstellung und keine Schließung von #18.
+Go/No-Go additionally requires: unchanged Supabase project identity,
+server-confirmed legacy links, preserved admin roles and account blocks,
+login/logout, moderation, and permitted as well as foreign/anonymous evidence
+requests. Matching email addresses create no ownership rights.
+Login steps required with real accounts are documented separately from isolated
+tests. Without this acceptance, no domain cutover and no closure of #18.
 
-Für einen Anbieterwechsel auf Node verwendet [provider-exit.md](provider-exit.md)
-denselben geschützten Export und dessen Schema-/Dateinachweise. Der neue
-Offline-Restore veröffentlicht beide Datenbanken nur als vollständiges neues
-Verzeichnis. Ein Retry prüft ausschließlich den gesamten unveränderten Stand;
-Änderungen und Löschungen stoppen ihn. Der bisherige D1-Einfügeplan ist kein
-allgemeiner Rückweg in einen bereits benutzten Bestand. Der Node-Export kann
-einen frischen Rücktransfer einschließlich neuer Löschungen und Versandzustände
-belegen; seine exakte `riparim_node_migrations`-Historie wird gegen die
-eingecheckten Migrationen geprüft.
+For a provider switch to Node, [provider-exit.md](provider-exit.md) uses the same
+protected export and its schema/file evidence. The new offline restore publishes
+both databases only as a complete new directory. A retry checks only the entire
+unchanged state; modifications and deletions stop it. The existing D1 insert
+plan is not a general return path into an already used inventory. The Node
+export can prove a fresh reverse transfer including new deletions and delivery
+states; its exact `riparim_node_migrations` history is checked against the
+committed migrations.

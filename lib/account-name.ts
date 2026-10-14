@@ -1,3 +1,4 @@
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 export const accountNameMinLength = 2;
 export const accountNameMaxLength = 80;
 
@@ -12,5 +13,5 @@ export function validAccountName(value: unknown): string | null {
 
 // Missing provider profile names must never expose an email address in reviews.
 export function publicAccountName(value: unknown): string {
-  return validAccountName(value) ?? "Anonym";
+  return validAccountName(value) ?? legacyMessages.anonymousAccountName;
 }

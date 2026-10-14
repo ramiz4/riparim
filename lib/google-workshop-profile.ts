@@ -1,3 +1,4 @@
+import { storedSourceLabels } from "@/lib/i18n/canonical-values";
 import type { Locale } from "./i18n/locale";
 import { intlLocales } from "./i18n/format";
 import { googleMapsPlaceUrl } from "./google-maps-link";
@@ -94,7 +95,7 @@ export function normalizeGoogleProfile(
       : null;
   const mapsUrl =
     safeGoogleHttps(body.googleMapsUri) ??
-    googleMapsPlaceUrl(placeId, "Werkstatt");
+    googleMapsPlaceUrl(placeId, storedSourceLabels.workshopMapFallback);
   return {
     placeId,
     loadedAt: now,

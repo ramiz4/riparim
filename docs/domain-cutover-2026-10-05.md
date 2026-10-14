@@ -1,229 +1,226 @@
-# Produktionsumstellung vom 5. Oktober 2026
+# Production cutover on October 5, 2026
 
-Dieser Bericht hält die tatsächlich ausgeführte Umstellung aus
-[#19](https://github.com/ramiz4/riparim/issues/19) fest. Die technische
-Betreiberabnahme ist abgeschlossen. Die gesonderte Rückfallphase für #20
-wurde danach um 09:51:01 ausdrücklich beendet. Die [öffentliche Stilllegung](sites-retirement.md)
-ist ausgeführt; alte Ressourcen und Sicherungen bleiben schreibgesperrt erhalten.
+This report records the actual cutover from
+[#19](https://github.com/ramiz4/riparim/issues/19). Technical operator acceptance
+is complete. The separate fallback period for #20 was then explicitly ended
+at 09:51:01. [Public retirement](sites-retirement.md) has been performed;
+old resources and backups remain preserved under a write lock.
 
-## Verantwortung und Betriebsfenster
+## Responsibility and operating window
 
-Die Durchführung und der Go/No-Go-Entscheid lagen beim in diesem Chat
-beauftragten Agent. Der Nutzer genehmigte ausdrücklich den Ersatz der beiden
-Sites-Apex-A-Einträge und des www-CNAME sowie die zusätzliche CI-Berechtigung
-`Workers Routes Write` ausschließlich für die eigene Zone von `riparim.com`.
+The agent assigned in this chat owned execution and the Go/No-Go decision.
+The user explicitly authorized replacement of both Sites apex A records and
+the www CNAME, and additional CI permission `Workers Routes Write` exclusively
+for the owned `riparim.com` zone.
 
-Alle folgenden Ortszeiten gelten für Europe/Belgrade (UTC+02:00).
+All local times below use Europe/Belgrade (UTC+02:00).
 
-| Vorgang                                   | Tatsächlicher Zustand                                                                                          |
-| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| Erster angekündigter Wechselversuch       | 5. Oktober 00:50–01:05; No-Go wegen kollidierender DNS-Einträge und noch ausstehender konkreter Ersatzfreigabe |
-| Quelle nach No-Go wieder verfügbar        | 01:03:38; keine Domain-/DNS-Änderung und kein Daten-Delta angewendet                                           |
-| Zweites angekündigtes Fenster             | 5. Oktober 04:45–05:00                                                                                         |
-| Quelle tatsächlich eingefroren            | 04:46:21                                                                                                       |
-| Neues Ziel als alleiniger Writer geöffnet | 04:57:35; öffentliche Wartung damit beendet                                                                    |
+| Event                              | Actual state                                                                                                          |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| First announced cutover attempt    | October 5, 00:50–01:05; No-Go because of conflicting DNS records and still-pending explicit replacement authorization |
+| Source available again after No-Go | 01:03:38; no domain/DNS changes and no data delta applied                                                             |
+| Second announced window            | October 5, 04:45–05:00                                                                                                |
+| Source actually frozen             | 04:46:21                                                                                                              |
+| New target opened as sole writer   | 04:57:35; public maintenance ended at that point                                                                      |
 
-Die Vorbereitungen und nachfolgenden Codekorrekturen erfolgten bei verfügbarer
-Website. Es wurde keine weitere Wartungspause für die Abnahmefixes benötigt.
+Preparation and subsequent code corrections happened while the website was
+available. Acceptance fixes required no further maintenance pause.
 
-## Finaler Datenabgleich und Schreibrechte
+## Final data reconciliation and write access
 
-Die geschützte Datenübernahme aus [#18](data-transfer-2026-10-04.md) wurde nicht
-blind wiederholt. Neue vollständige Sicherungen von eingefrorener Quelle und
-Ziel wurden gegen den verifizierten Übernahmestand verglichen. Der finale
-Abgleich war ein geprüfter No-op: **0 Einfügungen, 0 Änderungen, 0 Löschungen**.
-19 logische Tabellen und 386 Zeilen wurden auf jeder Seite inventarisiert.
-48 bereits geprüfte Ziel-Metadaten blieben erhalten. Quelle und Ziel enthielten
-vor den synthetischen Prüfungen keine privaten R2-Objekte und keine Besuche.
+The protected data transfer from [#18](data-transfer-2026-10-04.md) was not blindly
+repeated. New complete backups of the frozen source and target were compared
+with the verified transfer baseline. Final reconciliation was a reviewed no-op:
+**0 inserts, 0 modifications, 0 deletions**. 19 logical tables and 386 rows were
+inventoried on each side. 48 already verified target metadata entries were
+preserved. Before synthetic checks, source and target contained no private
+R2 objects and no visits.
 
-Die vorangegangene technische Auth-Prüfung hatte ausschließlich abgelaufene
-`auth_attempts`-Zeilen verändert. Ein geschützter Vorher-/Nachher-Beleg mit festem
-Zeitpunkt weist diese begrenzte Abweichung nach. Der Abgleich ignoriert nur
-unabhängig belegbar abgelaufene Zeilen für den Vergleich; er stellt keine alten
-Zähler wieder her und löscht keine aktiven Limits. Alle übrigen Tabellen und
-Spalten stimmten exakt überein. IP-Identität ist mit diesem Beleg nicht bewiesen.
+The preceding technical Auth check had changed only expired `auth_attempts`
+rows. A protected before/after receipt with a fixed timestamp proves this
+bounded deviation. Reconciliation ignores only independently provable expired
+rows for comparison; it restores no old counters and deletes no active limits.
+All other tables and columns matched exactly. This receipt does not prove
+IP identity.
 
-| Geschützter Nachweis                              | Kennung / SHA-256                                                  |
-| ------------------------------------------------- | ------------------------------------------------------------------ |
-| Finaler Delta-Bericht                             | `8aaaf863-ab64-462e-b49c-341815beedd1`                             |
-| Source-Sicherung                                  | `domain-source-e3eeddf6-86e7-434e-9eaf-0cd972a976eb`               |
-| Ziel vor Abgleich                                 | `domain-target-527a4b08-41f2-4272-93b0-03ef1b2be587`               |
-| Ziel nach Abgleich                                | `domain-target-complete-90fbf0c5-d896-4be1-8c7d-2a975fdf1c6e`      |
-| Vollständiger Ziel-Fingerprint vor Wiederaufnahme | `5ae859d9af4a45ed83fe3a6e6123d7848b9742a6a0a8fc32926a16df58ac9922` |
-| Begrenzter Ablaufbeleg                            | `1fcf2a2537f45b7d68a4c821bca26a59c2ae44fb2f4f694568e3db5dd190ebb4` |
+| Protected evidence                            | Identifier / SHA-256                                               |
+| --------------------------------------------- | ------------------------------------------------------------------ |
+| Final delta report                            | `8aaaf863-ab64-462e-b49c-341815beedd1`                             |
+| Source backup                                 | `domain-source-e3eeddf6-86e7-434e-9eaf-0cd972a976eb`               |
+| Target before reconciliation                  | `domain-target-527a4b08-41f2-4272-93b0-03ef1b2be587`               |
+| Target after reconciliation                   | `domain-target-complete-90fbf0c5-d896-4be1-8c7d-2a975fdf1c6e`      |
+| Complete target fingerprint before resumption | `5ae859d9af4a45ed83fe3a6e6123d7848b9742a6a0a8fc32926a16df58ac9922` |
+| Bounded expiry receipt                        | `1fcf2a2537f45b7d68a4c821bca26a59c2ae44fb2f4f694568e3db5dd190ebb4` |
 
-Diese Sicherungen, private Konfiguration und Testjournale liegen geschützt
-außerhalb von Git. Die vollständige Wiederherstellung wurde lokal geprüft.
-Seit der Wiederaufnahme ist der eigene D1-/R2-Bestand maßgeblich; spätere
-Anmeldungen, reguläre Google-Metadaten und Nutzerschreibvorgänge sind kein Anlass,
-den alten Fingerprint erneut durch Restore zu erzwingen.
+These backups, private configuration and test journals are protected outside
+Git. Complete recovery was verified locally. Since resumption, the owned D1/R2
+inventory is authoritative; subsequent logins, normal Google metadata and user
+writes are no reason to force the old fingerprint again through a restore.
 
-Das eigene Ziel steht auf `MIGRATION_READ_ONLY=false`. Die alte Site steht
-dauerhaft auf `true`, Umgebungsrevision 17; auch ihr Scheduled-Handler überspringt
-Schreibarbeit. Die generierte alte URL antwortet mit HTTP 503 und `no-store`.
-Das Ablaufen des geschützten Exportzugangs öffnet die Quellschreibrechte nicht.
+The owned target is on `MIGRATION_READ_ONLY=false`. The old Site remains
+permanently on `true`, environment revision 17; its scheduled handler also
+skips write work. The old generated URL returns HTTP 503 and `no-store`.
+Expiry of protected export access does not reopen source write rights.
 
-## Domain, Ressourcen und Release-Nachweise
+## Domain, resources and release evidence
 
-Die eigene aktive Zone `cb2470c7a7d49b8a3e6aa3e697c3355e` verwendet
-`bailey.ns.cloudflare.com` und `ignacio.ns.cloudflare.com`. Ausschließlich die
-drei freigegebenen Web-DNS-Einträge wurden ersetzt; acht Mail- und
-Verifikationseinträge blieben erhalten. Apex und www sind aktivierte Custom
-Domains des Workers `riparim`, ohne Preview. TLS ist aktiv, HTTP wird auf HTTPS
-umgeleitet und www erhält Pfad und Query bei der Weiterleitung auf den Apex.
+The owned active zone `cb2470c7a7d49b8a3e6aa3e697c3355e` uses
+`bailey.ns.cloudflare.com` and `ignacio.ns.cloudflare.com`. Only the three
+authorized web DNS records were replaced; eight email and verification records
+were preserved. Apex and www are enabled custom domains for Worker `riparim`,
+without preview. TLS is active, HTTP redirects to HTTPS, and www preserves
+path and query when redirecting to the apex.
 
-| Ressource              | Produktives Ziel                                                       |
-| ---------------------- | ---------------------------------------------------------------------- |
-| Cloudflare-Account     | `ec181b3a61c7c3da13910600953fc3ea`                                     |
-| Origin                 | `https://riparim.com`                                                  |
-| D1                     | `riparim-production`, `b395ea3a-5316-4b0b-bdee-533bdb68d6a0`           |
-| R2                     | `riparim-evidence-production`, privat; kein r2.dev / keine Dateidomain |
-| Scheduled-Handler      | `*/5 * * * *`                                                          |
-| Technischer Workerhost | gleicher Code und gleicher Zielbestand, keine zweite Datenquelle       |
+| Resource              | Production target                                               |
+| --------------------- | --------------------------------------------------------------- |
+| Cloudflare account    | `ec181b3a61c7c3da13910600953fc3ea`                              |
+| Origin                | `https://riparim.com`                                           |
+| D1                    | `riparim-production`, `b395ea3a-5316-4b0b-bdee-533bdb68d6a0`    |
+| R2                    | `riparim-evidence-production`, private; no r2.dev / file domain |
+| Scheduled handler     | `*/5 * * * *`                                                   |
+| Technical Worker host | Same code and target inventory, no second data source           |
 
-Das bestehende Supabase-Projekt und sein Identitätsnamensraum bleiben erhalten.
-Projektadresse, öffentliche Auth-Konfiguration und aktivierter Zustand wurden
-geschützt zwischen Source-Sicherung und produktiver `auth_settings`-Zeile
-abgeglichen. Site URL und erlaubter App-Callback berücksichtigen riparim.com;
-Google-Provider-Callback, Client und Scopes bleiben bestehen. Moderatoridentität,
-Supabase-Verwaltungszugang, beide Google-Schlüssel und Resend-Werte wurden als
-geschützte Laufzeitwerte übernommen. Der Deployment-Token ist kein Worker-Secret.
-Echte Google-Verwaltung und produktive Anmeldung bestätigen die Übernahme.
+The existing Supabase project and its identity namespace are preserved.
+Project address, public Auth configuration and enabled state were securely
+compared between the source backup and production `auth_settings` row.
+Site URL and permitted app callback account for riparim.com; Google provider
+callback, client and scopes are preserved. Moderator identity, Supabase
+administrative access, both Google keys and Resend values were transferred as
+protected runtime values. The deployment token is not a Worker secret.
+Actual Google administration and production login confirm the transfer.
 
-| Geprüfter Main-Release        | Commit                                     | Archiv-SHA-256                                                     | Automatischer Lauf                                                        |
-| ----------------------------- | ------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------------- |
-| v1.2.6, Vorbereitung          | `130d5d4db6f0cfe6d874f1112bd362200973f6b6` | `91a5388e883f4a5cd30727c038f7605836d73b675efc9fdd0ec9ddcb0eb3fc7c` | [37239579311](https://github.com/ramiz4/riparim/actions/runs/37239579311) |
-| v1.2.7, dauerhaftes Routing   | `2934a3fb70d4ca384aa9f75e0773a8a8be9e6597` | `96002104ce24969b5db063fff70b4a1b062cfe7c82be2abd996d3454b92afc21` | [37257149551](https://github.com/ramiz4/riparim/actions/runs/37257149551) |
-| v1.2.8, Callback-Datenschutz  | `527d37d83c4d88dcb4100556941ce0207dc25763` | `cfe56aa950b331b07107ebd0f6e46aca4929c9a1086abe8da9d0b01e874087e9` | [37259289616](https://github.com/ramiz4/riparim/actions/runs/37259289616) |
-| v1.2.9, exakte Eigentumsdatei | `53ae6ce7a896e779b75e5f249d25b7993c8c12d4` | `f3bd2b57c03e7f42c192bbdde92f4d0ebb17b6ee3a7984bfd30b83a2093a1353` | [37260211387](https://github.com/ramiz4/riparim/actions/runs/37260211387) |
+| Verified main release        | Commit                                     | Archive SHA-256                                                    | Automatic run                                                             |
+| ---------------------------- | ------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| v1.2.6, preparation          | `130d5d4db6f0cfe6d874f1112bd362200973f6b6` | `91a5388e883f4a5cd30727c038f7605836d73b675efc9fdd0ec9ddcb0eb3fc7c` | [37239579311](https://github.com/ramiz4/riparim/actions/runs/37239579311) |
+| v1.2.7, permanent routing    | `2934a3fb70d4ca384aa9f75e0773a8a8be9e6597` | `96002104ce24969b5db063fff70b4a1b062cfe7c82be2abd996d3454b92afc21` | [37257149551](https://github.com/ramiz4/riparim/actions/runs/37257149551) |
+| v1.2.8, callback privacy     | `527d37d83c4d88dcb4100556941ce0207dc25763` | `cfe56aa950b331b07107ebd0f6e46aca4929c9a1086abe8da9d0b01e874087e9` | [37259289616](https://github.com/ramiz4/riparim/actions/runs/37259289616) |
+| v1.2.9, exact ownership file | `53ae6ce7a896e779b75e5f249d25b7993c8c12d4` | `f3bd2b57c03e7f42c192bbdde92f4d0ebb17b6ee3a7984bfd30b83a2093a1353` | [37260211387](https://github.com/ramiz4/riparim/actions/runs/37260211387) |
 
-Nach dem kontrollierten Domainwechsel veröffentlichte bereits v1.2.7 automatisch
-auf derselben Produktionsdomain. v1.2.8 belegt eine weitere automatische
-Veröffentlichung bei verfügbarer Website. Ausgelieferter Commit, Release-
-Provenienz und Archivhash wurden unabhängig geprüft. Die Quelle blieb auf
-Sites-Version 42, geprüftem v1.2.0 / `bf0af1913102710925efcadbfa9d3fff7631b694`.
+After controlled domain cutover, v1.2.7 already published automatically on the
+same production domain. v1.2.8 proves another automatic publication while the
+website was available. Served commit, release provenance and archive hash were
+independently verified. The source stayed on Sites version 42, verified
+v1.2.0 / `bf0af1913102710925efcadbfa9d3fff7631b694`.
 
-## Tatsächliche Prüfung und entdeckte Abweichungen
+## Actual checks and discovered deviations
 
-- Echte Google-Anmeldung vollständig auf riparim.com: erwarteter Rücksprung zu
-  `/werkstaetten?ort=prishtina`, 18 passende Werkstätten, vorhandener
-  Verwaltungszugang. Anschließende echte Abmeldung führte zur Gast-Anmeldeseite.
-- Navigation im veröffentlichten Bundle: Suche, Werkstattprofil per Tastatur,
-  Foto öffnen und Escape, erhaltener Suchfilter, Einstellungen, Datenschutz und
-  Browser Vor-/Zurück. Kein Fehler aus #33 im Browserlog.
-- Mobil 390 × 844, dunkles Theme und Desktop 1280 × 900, helles Theme: kein
-  horizontaler Überlauf; Beschriftungen und Anmeldung/Navigation sichtbar.
-  Die temporäre Viewport-Einstellung wurde anschließend zurückgesetzt.
-- Verwaltung und Moderationsansicht mit vorhandenem Google-Zugang schreibfrei
-  geöffnet; keine echte Bewertung oder Benutzerverwaltung verändert.
-- Gefundener Callback-Fehler: der gemeinsame Proxy überschrieb `no-referrer`.
-  [PR #38](https://github.com/ramiz4/riparim/pull/38) korrigierte beide Pfade und
-  Cookie-Refresh. Produktiv geprüft: Signup-, Recovery- und Google-Fehlercallback
-  HTTP 303, `no-referrer`, `no-store`, kanonisches erhaltenes Rücksprungziel.
-- Gefundene statische Weiterleitung: die Eigentumsdatei erhielt HTTP 307 statt
-  direkter HTTP 200. [PR #39](https://github.com/ramiz4/riparim/pull/39) korrigiert
-  die Cloudflare-HTML-Normalisierung und erzwingt denselben Vertrag im Release.
-  Die native Miniflare-Regression reproduzierte den Fehler und prüft GET/HEAD,
-  unveränderte Bytes, dynamische Root-Seite und fehlende Dateien.
+- Actual Google login entirely on riparim.com: expected return to
+  `/werkstaetten?ort=prishtina`, 18 matching workshops, existing administrative
+  access. Subsequent actual logout led to the guest login page.
+- Navigation in the published bundle: search, workshop profile by keyboard,
+  open photo and Escape, preserved search filter, settings, privacy and browser
+  forward/back. No #33 error in the browser log.
+- Mobile 390 × 844, dark theme and desktop 1280 × 900, light theme: no horizontal
+  overflow; labels and login/navigation visible. The temporary viewport setting
+  was reset afterward.
+- Administration and moderation view opened read-only with existing Google
+  access; no actual review or user administration changed.
+- Discovered callback error: the shared proxy overwrote `no-referrer`.
+  [PR #38](https://github.com/ramiz4/riparim/pull/38) corrected both paths and
+  cookie refresh. Verified in production: signup, recovery and Google error
+  callback HTTP 303, `no-referrer`, `no-store`, canonical preserved return target.
+- Discovered static redirect: the ownership file received HTTP 307 instead of
+  direct HTTP 200. [PR #39](https://github.com/ramiz4/riparim/pull/39) corrects
+  Cloudflare HTML normalization and enforces the same contract in the release.
+  The native Miniflare regression reproduced the error and checks GET/HEAD,
+  unchanged bytes, dynamic root page and missing files.
 
-Die beiden Codekorrekturen haben Standards-/Spec-Reviews, vollständige Tests,
-TypeScript, Katalogprüfung, Lint sowie Cloudflare-/Sites-Build und Packaging
-bestanden. Lint behält sieben bestehende Warnungen ohne Fehler.
+Both code corrections passed standards/spec reviews, full tests, TypeScript,
+catalogue checks, lint and Cloudflare/Sites builds and packaging.
+Lint retains seven existing warnings with no errors.
 
-v1.2.9 wurde am 5. Oktober um 05:41:24 automatisch veröffentlicht, Deployment
-`961b802f-0987-47aa-99e8-af5165a6ba67`, Version
-`c4d865d2-3702-402f-993c-54c568083ecb` mit 100 Prozent Verkehr.
-Apex und technischer Host lieferten HTTP 200 und den gebackenen Main-Commit.
-Die Eigentumsdatei lieferte direkt HTTP 200 für GET und HEAD, ohne Location;
-GET enthielt die unveränderten Verifikationsbytes. Drei HTTP-/www-Prüfungen
-bestätigten HTTPS und den erhaltenen Suchpfad mit Query.
+v1.2.9 was published automatically on October 5 at 05:41:24, deployment
+`961b802f-0987-47aa-99e8-af5165a6ba67`, version
+`c4d865d2-3702-402f-993c-54c568083ecb` with 100 percent traffic.
+Apex and technical host served HTTP 200 and the embedded main commit.
+The ownership file returned direct HTTP 200 for GET and HEAD, without Location;
+GET contained unchanged verification bytes. Three HTTP/www checks confirmed
+HTTPS and the preserved search path with query.
 
-Die endgültige Produktionsprüfung begann am 5. Oktober um 05:42:31.
-**Fünf Produktions-Vorabprüfungen und 15 Auth-/Privatdateiprüfungen bestanden.**
-Drei markierte, zufällige Testkonten wurden bestätigt angelegt und über den
-produktiven E-Mail-/Passwort-Endpunkt angemeldet. Die Vorabprüfungen benutzen
-ungültige/fehlende Callback-Tokens; sie bestätigen keine neue E-Mail-Zustellung.
-Echte Google-Anmeldung und Rücksprung sind separat oben nachgewiesen.
+Final production verification started on October 5 at 05:42:31.
+**Five production preflight checks and 15 Auth/private-file checks passed.**
+Three marked, random test accounts were confirmed created and logged in through
+the production email/password endpoint. Preflight checks use invalid/missing
+callback tokens; they confirm no new email delivery. Actual Google login and
+return navigation are proven separately above.
 
-Geprüft wurden anonyme und gefälschte Sites-Identität, verweigerte Kundenrechte
-auf Verwaltungsendpunkten, echte Adminrechte, privater Pending-Besuch mit
-synthetischer PNG-Datei, eigener/Admin-Dateizugriff, verweigerter fremder und
-anonymer Zugriff, Ausschluss aus öffentlichen Bewertungen, kein Versandereignis
-für den Pending-Besuch, Sitzungswiderruf bei Sperre und Abmeldung sowie nötige
-neue Anmeldung nach Entsperrung. Keine echte Bewertung wurde moderiert; die
-Entscheidungs-/Benachrichtigungsverträge sind durch isolierte Tests abgedeckt.
-Bestätigte Legacy-Verknüpfungen wurden im finalen Bestand mitgezählt: null
-bestehende Datensätze; die Zuordnungs- und Besitzrechte sind in Fixtures geprüft.
-Zusätzliche schreibfreie Probes mit gefälschten Sites-Headern lieferten HTTP 401
-für `/api/auth-settings` und `/api/business`; `/api/account` lieferte ausschließlich
-`account: null` und `deletionReady: false`.
+Checks covered anonymous and forged Sites identity, rejected customer access
+on administrative endpoints, actual admin rights, a private pending visit with
+a synthetic PNG file, own/admin file access, rejected foreign and anonymous
+access, exclusion from public reviews, no delivery event for the pending visit,
+session revocation on blocking and logout, and required new login after
+unblocking. No actual review was moderated; decision/notification contracts are
+covered by isolated tests. Confirmed legacy links were counted in the final
+inventory: zero existing records; linking and ownership are verified in fixtures.
+Additional read-only probes with forged Sites headers returned HTTP 401 for
+`/api/auth-settings` and `/api/business`; `/api/account` returned only
+`account: null` and `deletionReady: false`.
 
-**Bereinigung bestätigt:** alle drei Testkonten, ihre Rollen/Status/Sessions,
-der Pending-Besuch und seine private Datei wurden entfernt. Null verbleibende
-Testkonten, null Bereinigungsfehler; privates R2-Inventar anschließend null
-Objekte. D1 enthielt anschließend null Besuche, Upload-Reservierungen und
-Versandereignisse; 163 Werkstätten, davon 78 freigegeben, blieben vorhanden.
-Bestehende gemeinsame IP-Limits blieben erhalten. Es wurden keine
-echten E-Mails versandt. Das geschützte Journal trägt die Kennung
+**Cleanup confirmed:** all three test accounts, their roles/status/sessions,
+the pending visit and its private file were removed. Zero remaining test
+accounts, zero cleanup errors; the private R2 inventory then held zero objects.
+D1 then contained zero visits, upload reservations and delivery events;
+163 workshops, 78 approved, remained. Existing shared IP limits were preserved.
+No actual emails were sent. The protected journal has identifier
 `3cce58df-259a-4461-9d0f-79a0e298feac`.
 
-## Beobachtung, Abnahme und Rückfall
+## Observation, acceptance and fallback
 
-Erste tatsächliche Beobachtung: 5. Oktober 04:57:35 bis 05:36:06. Die
-Cloudflare-Aggregate zeigen 230 Fetch- und acht Scheduled-Aufrufe mit Outcome
-`ok`, keine HTTP-5xx. 86 HTTP-404 betrafen automatisierte Aufrufe nicht vorhandener
-Git-/Umgebungs-/Konfigurationsdateien, WordPress und `.well-known/ucp`; keine
-geprüfte App-Seite war darunter. Im Browser wurden keine Navigations- oder
-Google-Autorisierungsfehler erfasst. Dies belegt den genannten Zeitraum, keine
-beliebige künftige Verfügbarkeit. Es wurden nur Mengen und Kategorien gespeichert.
+First actual observation: October 5, 04:57:35 to 05:36:06. Cloudflare aggregates
+show 230 fetch and eight scheduled invocations with outcome `ok`, no HTTP 5xx.
+86 HTTP 404 responses concerned automated requests for nonexistent Git,
+environment and configuration files, WordPress and `.well-known/ucp`;
+no verified app page was among them. No navigation or Google authorization
+errors were captured in the browser. This proves the stated period, not
+arbitrary future availability. Only counts and categories were stored.
 
-**Technische Betreiberabnahme: Go am 5. Oktober um 07:16:24.** Verantwortlich
-ist der in diesem Chat autonom beauftragte Betreiber-Agent. Die technische
-Beobachtung lief von 04:57:35 bis 07:16:24, also **2 Stunden, 18 Minuten und
-49 Sekunden**. Der letzte vollständige Aggregatabgleich umfasst 584 Fetch-
-und 27 Scheduled-Aufrufe mit Outcome `ok`, keine Worker-Ausführungsfehler und
-keine HTTP-5xx. Die HTTP-201-Antwort gehört zum oben dokumentierten privaten
-Testbesuch, dessen Bereinigung bestätigt wurde. Berechtigungsablehnungen und
-nicht vorhandene Pfade wurden nicht als erfolgreiche Fachaktionen gezählt.
+**Technical operator acceptance: Go on October 5 at 07:16:24.** The responsible
+owner is the operator agent autonomously assigned in this chat.
+Technical observation ran from 04:57:35 to 07:16:24, or **2 hours, 18 minutes
+and 49 seconds**. The last complete aggregate reconciliation covers 584 fetch
+and 27 scheduled invocations with outcome `ok`, no Worker execution errors
+and no HTTP 5xx. The HTTP 201 response belongs to the documented private test
+visit above, whose cleanup was confirmed. Permission denials and nonexistent
+paths were not counted as successful business actions.
 
-Fünf frische Abschlussprobes bestätigen HTTP 200 und den Release-Commit auf
-Apex und technischem Host, die kanonische www-Weiterleitung mit erhaltener Query,
-die direkte Google-Eigentumsdatei sowie den tatsächlichen Wartungstext mit
-`no-store` auf der alten generierten URL. Die authentifizierte Sites-Abfrage
-bestätigt weiterhin `MIGRATION_READ_ONLY=true`, Umgebungsrevision 17.
+Five fresh final probes confirm HTTP 200 and the release commit on apex and
+technical host, canonical www redirection preserving query, the direct Google
+ownership file and actual maintenance text with `no-store` on the old generated
+URL. The authenticated Sites query still confirms `MIGRATION_READ_ONLY=true`,
+environment revision 17.
 
-Alle Anforderungen aus #19 sind damit technisch nachgewiesen: geschützte
-Konfiguration und Identitäten, produktive Auth-/Berechtigungsprüfung, DNS/TLS,
-vollständiger finaler Abgleich, alleiniger Writer, begründetes Go/No-Go mit
-geprüftem Forward-Fix, beobachtete Fachabläufe und weitere automatische
-Main-Releases. Die erfolgreiche technische Abnahme erlaubt den Abschluss
-dieses Domainwechsel-Issues. Die weitere Betriebsbeobachtung kann fortgeführt
-werden, ohne die abgeschlossene technische Umstellung erneut zu öffnen.
+All #19 requirements are therefore technically proven: protected configuration
+and identities, production Auth/permission checks, DNS/TLS, complete final
+reconciliation, sole writer, justified Go/No-Go with a reviewed forward fix,
+observed business flows and further automatic main releases.
+Successful technical acceptance permits closure of this domain cutover issue.
+Further operational observation may continue without reopening the completed
+technical cutover.
 
-**Zum Zeitpunkt dieser Betreiberabnahme war das vereinbarte Ende der
-gesonderten Rückfallphase für #20 noch offen.** Der frühere Vorschlag 6. Oktober, 05:00 Uhr war nicht bestätigt. Eine persönliche Nutzerabnahme
-wird nicht als erteilt behauptet. Die technische Betreiberabnahme
-aus #19 ersetzt weder diese Vereinbarung noch eine Freigabe zur endgültigen
-Löschung. Alte Veröffentlichung, Domainzuordnungen, Zugänge und Sicherungen
-werden bis zum nachgewiesenen Ende der Rückfallphase erhalten; Inventar,
-Archiv und Stilllegungsplan dürfen vorbereitet werden.
+**At the time of this operator acceptance, the agreed end of the separate
+fallback period for #20 was still unresolved.** The earlier proposal of
+October 6, 05:00 was not confirmed. Personal user acceptance is not claimed
+to have been granted. Technical operator acceptance from #19 replaces neither
+that agreement nor authorization for final deletion. Old publication, domain
+mappings, access and backups are preserved until the proven end of the fallback
+period; inventory, archive and retirement plan may be prepared.
 
-Ein Codefehler wird bevorzugt durch einen geprüften Forward-Fix über Main
-behoben; die erfolgreichen Abnahmefixes zeigen diesen Weg bereits produktiv.
-Ein Code-Rollback setzt keine D1-/R2-Daten zurück. Zur alten Site darf erst nach
-einer angekündigten Schreibpause beider Seiten, neuen Sicherungen, vollständiger
-Rückübernahme aller seit dem Wechsel entstandenen Änderungen/Löschungen/Dateien
-und erneutem Auth-/Berechtigungsabgleich geroutet werden. Ungeprüftes Zurückrouten
-auf die eingefrorene alte Datenbank ist kein freigegebener Rückweg.
+A code error is preferably resolved through a reviewed forward fix via main;
+successful acceptance fixes already demonstrate this path in production.
+A code rollback resets no D1/R2 data. Routing to the old Site may occur only
+after an announced write pause on both sides, new backups, full reverse transfer
+of all changes/deletions/files created since cutover and renewed Auth/permission
+reconciliation. Unverified routing back to the frozen old database is not an
+authorized return path.
 
-Nach Ende der vereinbarten Phase folgen in #20 Inventar, Archiv/Retention,
-gewünschtes Verhalten alter URLs, kontrolliertes Deaktivieren von Veröffentlichung,
-Domainzuordnungen und alten Hintergrundarbeiten sowie gezielter Widerruf
-ausschließlich alter Zugänge. Gemeinsam genutzte Supabase-/Google-/Maildienste
-bleiben bestehen. Eine endgültige Ressourcenlöschung benötigt nach Ablauf der
-Aufbewahrung eine separate Freigabe.
+After the agreed period ends, #20 covers inventory, archive/retention, intended
+behavior of old URLs, controlled disabling of publication, domain mappings and
+old background work, and selective revocation of only old access.
+Shared Supabase/Google/email services remain. Final resource deletion requires
+separate authorization after retention expires.
 
-Der spätere Nutzerentscheid „Ja, jetzt stilllegen.“ beendete diese Phase um
-09:51:01. Der [Stilllegungsnachweis](sites-retirement.md#abschlussnachweis-vom-5-oktober-2026)
-dokumentiert die Ausführung bis 09:58:38, anschließende Auth-/Datei-QA,
-erhaltene Ressourcen und die Mindestaufbewahrung bis 4. November 2026.
+The later user decision “Ja, jetzt stilllegen.” (“Yes, retire it now.”) ended
+this period at 09:51:01.
+The [retirement evidence](sites-retirement.md#completion-evidence-from-october-5-2026)
+documents execution until 09:58:38, subsequent Auth/file QA, preserved resources
+and minimum retention until November 4, 2026.

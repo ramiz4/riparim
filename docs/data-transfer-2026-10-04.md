@@ -1,108 +1,106 @@
-# Geprüfte Datenübernahme vom 4. Oktober 2026
+# Verified data transfer on October 4, 2026
 
-## Ergebnis und Betriebszustand
+## Result and operational state
 
-Die bestehende Anwendung wurde vollständig auf den eigenen Cloudflare-Datenbestand
-übernommen und dort geprüft. Der Import endete am **4. Oktober 2026 um
-19:45:56 UTC**. Die Domain bleibt bis #19 auf Sites. Nach dem zwischenzeitlichen
-Schreibstopp ist die bisherige Site wieder verfügbar und der einzige produktive
-Schreibpfad; das eigene Ziel steht bis zum koordinierten Domainwechsel auf
-`MIGRATION_READ_ONLY=true`. Vor dem Wechsel ist ein neuer Delta-Abgleich erforderlich.
+The existing application was fully transferred to the owned Cloudflare data
+stores and verified there. The import ended on **October 4, 2026 at
+19:45:56 UTC**. The domain remains on Sites until #19. After the intervening
+write pause, the previous Site is available again and is the only production
+write path; the owned target remains on `MIGRATION_READ_ONLY=true` until the
+coordinated domain cutover. A new delta reconciliation is required before cutover.
 
-Der technische Verantwortliche für die Durchführung und das dokumentierte Go/No-Go
-ist der in diesem Chat beauftragte Codex-Agent. Das Go gilt für die geprüfte
-Datenübernahme und die Target-Abnahme, nicht für eine unkoordinierte Domainumstellung.
+The technical owner for execution and the documented Go/No-Go decision is the
+Codex agent assigned in this chat. Go applies to the verified data transfer
+and target acceptance, not an uncoordinated domain cutover.
 
-## Nachweise
+## Evidence
 
-- Quellenveröffentlichung: unverändertes geprüftes Sites-Archiv aus
-  [v1.2.0](https://github.com/ramiz4/riparim/releases/tag/v1.2.0), Commit
-  `bf0af1913102710925efcadbfa9d3fff7631b694`, Sites-Version 42.
-- Ziel und Transferwerkzeuge: vollständig grüner
-  [Main-Workflow](https://github.com/ramiz4/riparim/actions/runs/37228912201),
-  [v1.2.3](https://github.com/ramiz4/riparim/releases/tag/v1.2.3), Commit
+- Source publication: unchanged verified Sites archive from
+  [v1.2.0](https://github.com/ramiz4/riparim/releases/tag/v1.2.0), commit
+  `bf0af1913102710925efcadbfa9d3fff7631b694`, Sites version 42.
+- Target and transfer tools: fully green
+  [main workflow](https://github.com/ramiz4/riparim/actions/runs/37228912201),
+  [v1.2.3](https://github.com/ramiz4/riparim/releases/tag/v1.2.3), commit
   `03bce9429492519de1af7067bca240eca9f53395`.
-- Vorbereitung und geprüfte Korrekturen:
+- Preparation and reviewed corrections:
   [PR #27](https://github.com/ramiz4/riparim/pull/27),
-  [PR #28](https://github.com/ramiz4/riparim/pull/28) und
+  [PR #28](https://github.com/ramiz4/riparim/pull/28) and
   [PR #30](https://github.com/ramiz4/riparim/pull/30).
-- Beide vollständigen logischen Backups liegen außerhalb von Git unter
-  `.sites-runtime/backups`, Verzeichnisse 0700, Dateien 0600. Snapshot-, Manifest-
-  und Datei-Prüfsummen wurden geprüft. Beide Datenbestände wurden isoliert aus
-  vertrauenswürdigem eingechecktem SQL wiederhergestellt.
-- Der geschützte Abschlussbericht liegt unter `.sites-runtime/transfer-reports`.
-  Er enthält Backupreferenzen, Schemabeweis, Abgleich und Zeitpunkte; keine
-  privaten Datensätze werden in Repository oder PR-Text übernommen.
+- Both complete logical backups are stored outside Git under
+  `.sites-runtime/backups`, directories 0700, files 0600. Snapshot, manifest
+  and file checksums were verified. Both data inventories were restored in
+  isolation from trusted committed SQL.
+- The protected final report is under `.sites-runtime/transfer-reports`.
+  It contains backup references, schema proof, reconciliation and timestamps;
+  no private records are included in the repository or PR text.
 
-## Daten- und Identitätsabgleich
+## Data and identity reconciliation
 
-Quelle und Ziel enthalten jeweils 19 logische Tabellen samt erreichbarer
-Migrationshistorie. Die Quelle nutzt `__appgarden_migrations`, das Ziel
-`d1_migrations`; beide Historien beweisen genau die 13 eingecheckten Migrationen.
-Die originale Quellhistorie ist archiviert und wurde nicht über die Zielhistorie
-geschrieben. Anbieterinterne `_cf_*`-Tabellen sind für SQL-Zugriffe gesperrt und
-ausdrücklich als ausgeschlossene Plattformdaten dokumentiert.
+Source and target each contain 19 logical tables and accessible migration
+history. The source uses `__appgarden_migrations`, the target `d1_migrations`;
+both histories prove exactly the 13 committed migrations. Original source
+history is archived and was not written over target history. Provider-internal
+`_cf_*` tables are blocked for SQL access and explicitly documented as excluded
+platform data.
 
-| Bestand                                          | Geprüftes Ergebnis                                           |
-| ------------------------------------------------ | ------------------------------------------------------------ |
-| Quell-Datensätze                                 | 386                                                          |
-| Ergänzte Ziel-Datensätze                         | 35                                                           |
-| Werkstattprofile                                 | 163 vollständig identisch, Freigabestatus/Quellen erhalten   |
-| Bewertungsquellen                                | 87 vollständig identisch                                     |
-| Google-Zuordnungen                               | 88 gleiche Kennungen/Place IDs                               |
-| Adminrollen                                      | 3 unverändert übernommen                                     |
-| Sitzungen                                        | 16 unverändert übernommen                                    |
-| Aktive Anmeldekonfiguration                      | 1 unverändert übernommen                                     |
-| Bestätigte Legacy-Verknüpfungen                  | 0; keine Zuordnung anhand gleicher E-Mail erfunden           |
-| Besuche, Lösch-/Uploadzustände, Betriebsentwürfe | Vollständig abgeglichen, jeweils leer                        |
-| Private R2-Dateien                               | Beide vollständigen Inventare leer, keine fehlenden Verweise |
+| Inventory                                       | Verified result                                             |
+| ----------------------------------------------- | ----------------------------------------------------------- |
+| Source records                                  | 386                                                         |
+| Added target records                            | 35                                                          |
+| Workshop profiles                               | 163 completely identical, approval status/sources preserved |
+| Review sources                                  | 87 completely identical                                     |
+| Google mappings                                 | 88 matching identifiers/Place IDs                           |
+| Admin roles                                     | 3 transferred unchanged                                     |
+| Sessions                                        | 16 transferred unchanged                                    |
+| Active login configuration                      | 1 transferred unchanged                                     |
+| Confirmed legacy links                          | 0; no mapping invented from matching email addresses        |
+| Visits, deletion/upload states, business drafts | Fully reconciled, each empty                                |
+| Private R2 files                                | Both complete inventories empty, no missing references      |
 
-Alle Rollen und Sitzungen gehören zum unveränderten Supabase-Projektnamensraum.
-Kontokennungen, Moderationsrechte und Status wurden bytegleich übernommen.
-Kein vorhandener Geschäftsdaten-Datensatz wurde ersetzt. Die 48 ausdrücklich
-ausgewiesenen gleichwertigen Metadaten betreffen lediglich Importzeitpunkt und
-bereits validierten Google-Cache; die Originalwerte bleiben im geschützten
-Quellbackup erhalten. Quotenzähler und Geschäftsdaten fallen nicht unter diese
-Ausnahme. Vor und nach den Einfügeabschnitten wurden Quelle und Ziel vollständig
-neu geprüft; ein wiederholter Plan findet keine fehlenden Quelldatensätze.
+All roles and sessions belong to the unchanged Supabase project namespace.
+Account identifiers, moderation rights and status were transferred byte-for-byte.
+No existing business data record was replaced. The 48 explicitly reported
+equivalent metadata entries concern only the import timestamp and already
+validated Google cache; original values remain in the protected source backup.
+Quota counters and business data do not fall under this exception.
+Before and after insert sections, source and target were fully rechecked;
+a repeated plan finds no missing source records.
 
-## Authentifizierung und private Zugriffe am echten Ziel
+## Authentication and private access on the actual target
 
-15 Vertragsprüfungen wurden am eigenen Worker mit drei ausschließlich temporären
-Supabase-Testkonten ausgeführt. Der Provider erzeugte keine E-Mails; die private
-PNG-Einreichung wurde nie veröffentlicht und erzeugte kein Versandereignis.
+15 contract checks were performed on the owned Worker with three exclusively
+temporary Supabase test accounts. The provider generated no emails; the private
+PNG submission was never published and generated no delivery event.
 
-Geprüft sind anonyme und gefälschte native Header, normale Konten ohne
-Verwaltungsrechte, authentifizierte Verwaltung und Moderationsliste, gemeinsamer
-Login mit erhaltenem Rücksprung, eigener privater Besuch/Dateiabruf, fremder und
-anonymer Zugriff, administrativer Dateizugriff, öffentliche Nichtanzeige,
-Kontosperre mit Sitzungswiderruf, erneuter Login nach Entsperrung sowie Logout mit
-Widerruf. Der private Dateiinhalt entsprach exakt der Testdatei.
+Checks covered anonymous and forged native headers, regular accounts without
+administrative rights, authenticated administration and moderation list, shared
+login with a preserved return target, own private visit/file access, foreign
+and anonymous access, administrative file access, absence from public display,
+account blocking with session revocation, login after unblocking, and logout
+with revocation. Private file contents exactly matched the test file.
 
-Die Bereinigung ist abschließend nachgewiesen: keine temporären Providerkonten,
-keine zusätzlichen Rollen, keine Testbesuche oder Uploadreservierungen und ein
-erneut leeres R2-Inventar. Der SDK-spezifische Zustand bereits widerrufener
-Sitzungen wurde anhand der offiziellen `AuthSessionMissingError`-Klasse korrekt
-behandelt; unbekannte Fehler wurden nicht pauschal ignoriert. Die drei echten
-Adminrollen und 16 ursprünglichen Sitzungen bleiben erhalten.
+Final cleanup is proven: no temporary provider accounts, no additional roles,
+no test visits or upload reservations, and an empty R2 inventory again.
+The SDK-specific state of already revoked sessions was handled correctly using
+the official `AuthSessionMissingError` class; unknown errors were not broadly
+ignored. The three real admin roles and 16 original sessions remain intact.
 
-R2 ist privat: `r2.dev` deaktiviert, keine Custom Domains. Google-OAuth wurde
-auf der bisherigen Produktion bereits mit dem Nutzer geprüft; die zusätzliche
-Domain-/Callback-Abnahme und die Beobachtung nach dem Routingwechsel gehören
-zu #19. Sie werden durch diesen Bericht nicht als erledigt bezeichnet.
+R2 is private: `r2.dev` disabled, no custom domains. Google OAuth was already
+verified with the user on the previous production deployment; additional
+domain/callback acceptance and observation after routing cutover belong to #19.
+This report does not claim they are complete.
 
-## Wiederaufnahme und Rückweg
+## Resumption and return path
 
-Die Quellhistorie wurde vor dem ausdrücklich freigegebenen, exakt begrenzten
-Lease-Push remote unter `codex/sites-source-backup-e3d92c7` und als lokales
-Git-Bundle gesichert und wiederhergestellt. Die alte Veröffentlichung sowie alle
-Backups bleiben erhalten. Die Betriebsanleitung steht in
-[data-transfer.md](data-transfer.md).
+Before the explicitly authorized, precisely bounded lease push, source history
+was backed up remotely under `codex/sites-source-backup-e3d92c7` and as a local
+Git bundle, and restored. The old publication and all backups are preserved.
+The operating guide is in [data-transfer.md](data-transfer.md).
 
-Bis #19 bleibt Sites alleiniger Writer. Die frisch verifizierten Backups dürfen
-nicht als dauerhaft synchroner Stand ausgegeben werden. Der Domainwechsel
-benötigt einen finalen Source-/Target-Abgleich unter einer angekündigten kurzen
-Schreibpause. Nach einem Wechsel ist ein einfaches Zurückrouten auf eine veraltete
-Datenbank verboten; neue Schreibvorgänge müssen rückübernommen oder mit einem
-dokumentierten Forward-Fix erhalten werden. #20 beginnt erst nach abgenommener
-Umstellung und beendeter Beobachtungs-/Rückfallphase.
+Until #19, Sites remains the sole writer. Freshly verified backups must not be
+presented as a permanently synchronized state. Domain cutover requires a final
+source/target reconciliation under an announced short write pause.
+After cutover, simply routing back to an outdated database is prohibited;
+new writes must be transferred back or preserved through a documented forward
+fix. #20 starts only after accepted cutover and completion of the
+observation/fallback period.

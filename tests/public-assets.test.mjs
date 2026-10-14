@@ -6,7 +6,7 @@ const manifest = JSON.parse(
 );
 for (const entry of [
   "app/finder.tsx",
-  "app/[locale]/werkstaetten/catalogue.tsx",
+  "app/[locale]/workshops/catalogue.tsx",
 ]) {
   const dependencies = new Set();
   function visit(key) {

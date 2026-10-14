@@ -53,7 +53,7 @@ const output = ".test-runtime/admin-roles-ui";
 const bundle = await build({
   stdin: {
     contents:
-      "export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {default} from './app/[locale]/verwaltung/benutzer/users';",
+      "export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {default} from './app/[locale]/admin/users/users';",
     resolveDir: process.cwd(),
     loader: "tsx",
   },

@@ -1,3 +1,4 @@
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 import { validAccountName } from "@/lib/account-name";
 import { ValidationError } from "@/lib/validation-error";
 import type { AuthUser as User } from "@/lib/auth/contract";
@@ -61,7 +62,7 @@ export function parseUserFields(
     !Object.keys(body).length ||
     Object.keys(body).some((key) => !allowed.includes(key))
   )
-    throw new ValidationError("invalid_request", "Bitte prüfe die Eingaben.");
+    throw new ValidationError("invalid_request", legacyMessages.checkInputs);
   if (
     !creating &&
     ("active" in body || "role" in body) &&
@@ -69,7 +70,7 @@ export function parseUserFields(
   )
     throw new ValidationError(
       "account_fields_separate",
-      "Bitte ändere Rolle und Kontostatus getrennt von den Benutzerdaten.",
+      legacyMessages.accountFieldsSeparate,
     );
   const fields: {
     name?: string;
@@ -81,10 +82,7 @@ export function parseUserFields(
   if (creating || "name" in body) {
     const name = validAccountName(body.name);
     if (!name)
-      throw new ValidationError(
-        "invalid_name",
-        "Bitte gib einen Namen mit 2 bis 80 Zeichen ein.",
-      );
+      throw new ValidationError("invalid_name", legacyMessages.invalidName);
     fields.name = name;
   }
   if (creating || "email" in body) {
@@ -93,10 +91,7 @@ export function parseUserFields(
       body.email.trim().length > 254 ||
       !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(body.email.trim())
     )
-      throw new ValidationError(
-        "invalid_email",
-        "Bitte gib eine gültige E-Mail-Adresse ein.",
-      );
+      throw new ValidationError("invalid_email", legacyMessages.invalidEmail);
     fields.email = body.email.trim().toLowerCase();
   }
   if (creating || "password" in body) {
@@ -107,7 +102,7 @@ export function parseUserFields(
     )
       throw new ValidationError(
         "invalid_password",
-        "Bitte nutze ein Passwort mit 12 bis 128 Zeichen.",
+        legacyMessages.invalidPassword,
       );
     fields.password = body.password;
   }
@@ -115,7 +110,7 @@ export function parseUserFields(
     if (typeof body.active !== "boolean")
       throw new ValidationError(
         "account_status_invalid",
-        "Bitte wähle einen gültigen Kontostatus.",
+        legacyMessages.accountStatusInvalid,
       );
     fields.active = body.active;
   } else if (creating) fields.active = true;
@@ -123,7 +118,7 @@ export function parseUserFields(
     if (body.role !== "admin" && body.role !== "user")
       throw new ValidationError(
         "account_role_invalid",
-        "Bitte wähle die Rolle Benutzer oder Admin.",
+        legacyMessages.accountRoleInvalid,
       );
     fields.role = body.role;
   }
@@ -148,15 +143,14 @@ export function providerFailure(
   if (error?.code === "weak_password")
     return json(
       {
-        error: "Bitte wähle ein stärkeres Passwort.",
+        error: legacyMessages.userPasswordWeak,
         errorCode: "user_password_weak",
       },
       400,
     );
   return json(
     {
-      error:
-        "Die Benutzerverwaltung ist gerade nicht verfügbar. Bitte versuche es erneut.",
+      error: legacyMessages.usersUnavailable,
       errorCode: "users_unavailable",
     },
     503,
@@ -165,8 +159,7 @@ export function providerFailure(
 export const notConfigured = () =>
   json(
     {
-      error:
-        "Für die Benutzerverwaltung muss der passend gebundene Auth-Adminschlüssel in der Serverkonfiguration hinterlegt sein.",
+      error: legacyMessages.usersConfigurationMissing,
       errorCode: "users_configuration_missing",
     },
     503,

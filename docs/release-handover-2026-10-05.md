@@ -1,87 +1,83 @@
-# Gesamtabschluss der Produktionsumstellung vom 5. Oktober 2026
+# Overall completion of production cutover on October 5, 2026
 
-Die Folgearbeiten zu [#17](https://github.com/ramiz4/riparim/issues/17) sind
-abgeschlossen: [Datenübernahme #18](data-transfer-2026-10-04.md),
-[Domain-/Auth-Umstellung #19](domain-cutover-2026-10-05.md) und
-[öffentliche Sites-Stilllegung #20](sites-retirement.md). Die zugehörigen
-Ausführungsberichte bleiben die maßgeblichen Nachweise; dieser Bericht ordnet
-sie den übergeordneten Abnahmekriterien zu. Alle Ortszeiten gelten für
-Europe/Belgrade (UTC+02:00).
+Follow-up work for [#17](https://github.com/ramiz4/riparim/issues/17) is complete:
+[data transfer #18](data-transfer-2026-10-04.md),
+[domain/Auth cutover #19](domain-cutover-2026-10-05.md) and
+[public Sites retirement #20](sites-retirement.md). Their execution reports
+remain authoritative evidence; this report maps them to the parent acceptance
+criteria. All local times use Europe/Belgrade (UTC+02:00).
 
-## Erfüllte Abnahmekriterien und belegter Umfang
+## Met acceptance criteria and proven scope
 
-| Kriterium aus #17                                   | Tatsächlich nachgewiesen                                                                                                                                                                                                                                                                                                                                                               |
-| --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Geprüfte Main-Pipeline und geschützte Konfiguration | PR #8 samt Bootstrap-Fixes ist integriert; Production-Environment nur für Main, getrennte Cloudflare-/Anwendungs-Secrets und geprüfte feste Bindings.                                                                                                                                                                                                                                  |
-| Zugeordnete, unveränderliche Release-Bytes          | [v1.2.9](https://github.com/ramiz4/riparim/releases/tag/v1.2.9), Commit `53ae6ce7a896e779b75e5f249d25b7993c8c12d4`; Tag, Provenienz, Archivhash und ausgelieferter `X-Riparim-Release-Commit` stimmen überein. Wiederholung baut kein neues Archiv.                                                                                                                                    |
-| Bestehende D1-/R2-Daten vollständig übernehmen      | #18: 19 logische Tabellen, 386 Source-Zeilen, 13 belegte Migrationen; Besitzrechte, Freigabestatus und Quellen erhalten. Beide R2-Inventare waren leer; private Dateiabläufe wurden mit isolierten PNG-Daten geprüft. Vollständige Backups und lokale Wiederherstellung bestanden. #19: finaler Dreifachabgleich, 0 Einfügungen/Änderungen/Löschungen; Wiederholung als No-op geprüft. |
-| Identitäten, Sitzungen und Zugriffskontrollen       | Supabase-Projekt unverändert; ursprüngliche drei Adminrollen, 16 Sitzungen und aktive Auth-Konfiguration abgeglichen. Null vorhandene bestätigte Legacy-Verknüpfungen; keine E-Mail-basierte Zuordnung erfunden. Serverrechte, Sperren, fremder/anonymer Privatdateizugriff und eigene/Admin-Zugriffe tatsächlich geprüft.                                                             |
-| Produktionsdomain, Google-Datei und Auth-Callbacks  | Apex/www mit TLS, kanonischer Pfad-/Query-Weiterleitung und direkter unveränderter Google-Datei; vorhandene Laufzeitwerte geschützt übernommen. Echte Google-Anmeldung, korrekter Rücksprung, Verwaltung und Abmeldung auf riparim.com bestanden.                                                                                                                                      |
-| Go/No-Go und Rückweg                                | Erstes No-Go mit tatsächlicher Wiederaufnahme der unveränderten Quelle vor Zielschreibvorgängen; finales Go nach Daten-/TLS-/Release-Abgleich. Technische Abnahme um 07:16:24; der zeitlich begrenzte Sites-Rückweg und sein ausdrücklich beschlossenes Ende sind unten präzisiert.                                                                                                    |
-| Weitere automatische, serialisierte Main-Releases   | v1.2.7–v1.2.9 wurden nach dem Domainwechsel automatisch auf derselben Produktion veröffentlicht. Workflow-Gruppe `production-release`, `cancel-in-progress: false`; exakte Provenienz, feste Ressourcen und Vorrang neuerer vollständig veröffentlichter Releases.                                                                                                                     |
-| Betriebsdokumentation einschließlich Migrationen    | [Release-Betrieb](releases.md#produktionsmigrationen-wiederholung-und-rollback), [Transfer/Wiederholung](data-transfer.md), [Domainwechsel](domain-cutover.md) und [Archiv/Retention](sites-retirement.md) enthalten geprüfte Abläufe und ihre Grenzen.                                                                                                                                |
+| Criterion from #17                                 | Actually proven                                                                                                                                                                                                                                                                                                                                         |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Verified main pipeline and protected configuration | PR #8 and bootstrap fixes integrated; production environment main-only, separate Cloudflare/app secrets and verified fixed bindings.                                                                                                                                                                                                                    |
+| Associated immutable release bytes                 | [v1.2.9](https://github.com/ramiz4/riparim/releases/tag/v1.2.9), commit `53ae6ce7a896e779b75e5f249d25b7993c8c12d4`; tag, provenance, archive hash and served `X-Riparim-Release-Commit` match. A retry builds no new archive.                                                                                                                           |
+| Fully transfer existing D1/R2 data                 | #18: 19 logical tables, 386 source rows, 13 proven migrations; ownership, approval status and sources preserved. Both R2 inventories were empty; private file flows were checked with isolated PNG data. Complete backups and local recovery passed. #19: final three-way reconciliation, 0 inserts/modifications/deletions; retry verified as a no-op. |
+| Identities, sessions and access controls           | Supabase project unchanged; original three admin roles, 16 sessions and active Auth configuration reconciled. Zero existing confirmed legacy links; no email-based mapping invented. Server permissions, blocks, foreign/anonymous private-file access and own/admin access actually checked.                                                           |
+| Production domain, Google file and Auth callbacks  | Apex/www with TLS, canonical path/query redirect and direct unchanged Google file; existing runtime values securely transferred. Actual Google login, correct return target, administration and logout on riparim.com passed.                                                                                                                           |
+| Go/No-Go and return path                           | First No-Go with actual resumption of unchanged source before target writes; final Go after data/TLS/release reconciliation. Technical acceptance at 07:16:24; the time-limited Sites return path and its explicitly decided end are detailed below.                                                                                                    |
+| Further automatic serialized main releases         | v1.2.7–v1.2.9 were published automatically on the same production deployment after domain cutover. Workflow group `production-release`, `cancel-in-progress: false`; exact provenance, fixed resources and precedence of newer fully published releases.                                                                                                |
+| Operating documentation including migrations       | [Release operations](releases.md#production-migrations-retries-and-rollback), [transfer/retry](data-transfer.md), [domain cutover](domain-cutover.md) and [archive/retention](sites-retirement.md) contain verified procedures and limitations.                                                                                                         |
 
-Aktives Worker-Archiv v1.2.9, SHA-256:
+Active Worker archive v1.2.9, SHA-256:
 `f3bd2b57c03e7f42c192bbdde92f4d0ebb17b6ee3a7984bfd30b83a2093a1353`.
-Der [automatische Produktionslauf](https://github.com/ramiz4/riparim/actions/runs/37260211387)
-ist erfolgreich. Nachfolgende reine Test-/Dokumentationscommits erzwingen keinen
-neuen Release. Der [Main-Lauf nach der Stilllegung](https://github.com/ramiz4/riparim/actions/runs/37282985174)
-ist ebenfalls vollständig erfolgreich; sein Deploy-Job wurde mangels neuen
-semantischen Releases planmäßig übersprungen.
+The [automatic production run](https://github.com/ramiz4/riparim/actions/runs/37260211387)
+succeeded. Subsequent test/documentation-only commits force no new release.
+The [main run after retirement](https://github.com/ramiz4/riparim/actions/runs/37282985174)
+also fully succeeded; its deployment job was skipped as intended because there
+was no new semantic release.
 
-## Rückweg vor und nach der Writer-Freigabe
+## Return path before and after writer activation
 
-Vor der Freigabe des Ziel-Writers konnte die unveränderte Sites-Veröffentlichung
-wieder aufgenommen werden. Dieser konkrete Weg wurde beim ersten No-Go um
-01:03:38 tatsächlich ausgeführt, ohne Domain-/DNS-Änderung oder Daten-Delta.
-Seit 04:57:35 ist der eigene Cloudflare-Datenbestand die einzige maßgebliche
-Schreibquelle. Ein Code-Rollback setzt diese Daten nicht zurück.
+Before enabling the target writer, the unchanged Sites publication could be
+resumed. This concrete path was actually executed at the first No-Go at
+01:03:38, without domain/DNS changes or data delta. Since 04:57:35, the owned
+Cloudflare inventory is the sole authoritative write source.
+A code rollback does not reset this data.
 
-Eine Rückübernahme neuer D1-/R2-Daten nach Sites ist **weder implementiert noch
-getestet** und wird nicht als verfügbarer automatisierter Rückweg bezeichnet.
-Die vorhandenen Transferwerkzeuge schreiben ausschließlich auf das feste
-Cloudflare-Ziel. Der dokumentierte Rückabgleich ist eine Voraussetzung für eine
-eventuell gesondert vorzubereitende Rückkehr, kein ausgeführter Source-Import.
-Tatsächlich erprobt sind Forward-Fixes über geprüfte Main-Releases: Die
-Callback- und Eigentumsdatei-Korrekturen aus PR #38/#39 wurden bei verfügbarer
-Produktion automatisch veröffentlicht und anschließend abgenommen.
+Reverse transfer of new D1/R2 data to Sites is **neither implemented nor tested**
+and is not described as an available automated return path. Existing transfer
+tools write exclusively to the fixed Cloudflare target. Documented reverse
+reconciliation is a prerequisite for any separately prepared return, not an
+executed source import. Forward fixes through verified main releases are
+actually proven: callback and ownership-file corrections from PR #38/#39 were
+published automatically while production was available and then accepted.
 
-Der Nutzer beendete das ursprüngliche Rückfallfenster mit „Ja, jetzt stilllegen.“
-um 09:51:01 ausdrücklich. Die öffentliche alte Veröffentlichung wurde daraufhin
-bis 09:58:38 gesperrt, ihre Domainzuordnungen entfernt und der alte Exportzugang
-aus der Laufzeit genommen. Dies ersetzt die vorher offene Rückfallphase aus dem
-Domainbericht. Die alte Site ist jetzt aufbewahrter Wiederherstellungsbestand,
-kein unmittelbar aktivierbares Produktionsziel. Ein künftiger Wechsel zurück
-benötigt frische beidseitige Backups, angekündigte Schreibpause, vollständige
-geprüfte Rückübernahme neuer Änderungen/Löschungen/Dateien und erneute Rechte-QA.
-Ohne diesen Nachweis bleibt der eigene Datenbestand erhalten und der
-Forward-Fix der verfügbare Wiederherstellungsweg.
+The user explicitly ended the original fallback window with “Ja, jetzt stilllegen.”
+(“Yes, retire it now.”) at 09:51:01. The old public publication was then locked by 09:58:38, its domain
+mappings removed and old export access removed from runtime. This supersedes
+the previously unresolved fallback period in the domain report.
+The old Site is now retained recovery inventory, not a production target that
+can be immediately activated. A future switch back requires fresh backups of
+both sides, an announced write pause, complete verified reverse transfer of
+new changes/deletions/files and renewed permissions QA.
+Without this proof, the owned inventory remains and a forward fix is the
+available recovery path.
 
-## Prüfung, Aufbewahrung und Übergabe
+## Verification, retention and handover
 
-Die Domainabnahme beobachtete 2 Stunden, 18 Minuten und 49 Sekunden mit 584
-Fetch- und 27 Scheduled-Aufrufen, ohne Worker-Ausführungsfehler oder HTTP-5xx.
-Nach der Stilllegung bestanden erneut fünf Vorabprüfungen und 15 echte Auth-/
-Privatdateiprüfungen um 10:02:59. Die drei markierten Testkonten, ihre Daten und
-die private Datei sind vollständig bereinigt; null verbleibende Konten oder
-Bereinigungsfehler. Echte Google-Anmeldung/Verwaltung/Abmeldung wurden zusätzlich
-geprüft. Es wurden keine echten E-Mails versandt oder echten Bewertungen moderiert.
+Domain acceptance observed 2 hours, 18 minutes and 49 seconds with 584 fetch
+and 27 scheduled invocations, without Worker execution errors or HTTP 5xx.
+After retirement, five preflight checks and 15 actual Auth/private-file checks
+passed again at 10:02:59. The three marked test accounts, their data and the
+private file are fully cleaned up; zero remaining accounts or cleanup errors.
+Actual Google login/administration/logout were also checked.
+No actual emails were sent or actual reviews moderated.
 
-Die frische öffentliche Abschlussprüfung bestätigt Apex und technischen Host
-mit HTTP 200 und unverändertem v1.2.9-Commit, www mit HTTP 308 und erhaltener
-Query, Google-Verifikationsdatei direkt mit HTTP 200 und unveränderten Bytes
-sowie die alte generierte URL anonym mit HTTP 401. Sie verändert keine Daten.
+Fresh public final checks confirm apex and technical host with HTTP 200 and
+unchanged v1.2.9 commit, www with HTTP 308 and preserved query, direct Google
+verification file with HTTP 200 and unchanged bytes, and old generated URL
+anonymously with HTTP 401. They change no data.
 
-Der vollständige verschlüsselte Source-Bestand und getrennte Recovery-Schlüssel
-sind lokal außerhalb verwalteter Worktrees und im geschützten Projekt-Vault
-wiederherstellbar gesichert. Archiv, alte Versionen und Ressourcen bleiben
-**mindestens bis 4. November 2026** erhalten; keine automatische oder endgültige
-Löschung ist beauftragt. Gemeinsam genutzte Supabase-, Google-, Resend- und
-Cloudflare-CI-Zugänge bleiben bestehen. Aufgaben-Worktrees und benötigte private
-Prüfjournale werden bis zur sicheren Übergabe bewahrt.
+Complete encrypted source inventory and separate recovery keys are recoverably
+backed up locally outside managed worktrees and in the protected project vault.
+Archive, old versions and resources remain **at least until November 4, 2026**;
+no automatic or final deletion is authorized. Shared Supabase, Google, Resend
+and Cloudflare CI access is preserved. Task worktrees and required private check
+journals remain until safe handover.
 
-Der Abschluss ändert weder Produktionscode noch Schema oder Daten. Die
-abschließende Dokumentation durchläuft Spec-/Standards-Review und die
-verpflichtenden GitHub-Prüfungen; Integration erfolgt ausschließlich per
-Squash-PR. Die Issue-Folge endet nach dessen Integration und einer frischen
-GitHub-Abfrage ohne offene Issues.
+Completion changes neither production code nor schema or data.
+Final documentation undergoes spec/standards review and required GitHub checks;
+integration occurs only through a squash PR. The issue sequence ends after its
+integration and a fresh GitHub query showing no open issues.

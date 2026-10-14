@@ -1,67 +1,67 @@
-# Stabile Konten und externe Anmeldeidentitäten
+# Stable accounts and external login identities
 
-Riparim behandelt Konto-IDs als opake interne Schlüssel. Besitzrechte,
-Dateipfade, Rollen, Sperren und Versandereignisse verwenden weiterhin diese
-Schlüssel. Die private Tabelle `auth_identities` ordnet ihnen separat
-`provider`, normalisierten HTTPS-`issuer` und `subject` zu. Ein Konto kann je
-Provider und Issuer genau eine Identität haben; eine externe Identität gehört
-zu genau einem Konto. E-Mail-Adressen und editierbare Profilmetadaten sind
-keine Zuordnungsnachweise.
+Riparim treats account IDs as opaque internal keys. Ownership rights,
+file paths, roles, blocks, and delivery events continue to use these
+keys. The private `auth_identities` table separately maps
+`provider`, a normalized HTTPS `issuer`, and `subject` to them. An account can have
+exactly one identity per provider and issuer; each external identity belongs
+to exactly one account. Email addresses and editable profile metadata are
+not proof of a mapping.
 
-Historische Schlüssel wie `supabase:projekt.supabase.co:<uuid>` bleiben
-unverändert. Ihr lesbares Format ist keine fachliche Bedeutung. Nur die
-Migration und die Kompatibilitätsgrenze in `lib/auth/legacy-supabase.ts` kennen
-dieses Format. Auch neue Supabase-Konten erhalten während der kompatiblen
-Einführungsphase solche Schlüssel, damit eine noch laufende Vorgängerversion
-dieselben Konten beschreibt. Die vollständige normalisierte Issuer-Authority
-unterscheidet dabei verschiedene Ports; Standard-HTTPS behält alte Schlüssel.
-Andere Provider können einen neuen zufälligen internen Schlüssel erhalten.
-Das Identitätsmodul verwendet dieselbe Zuordnung auch für den konkreten
-PocketBase-Adapter; Konfiguration und private Betreiberübernahme stehen in
+Historical keys such as `supabase:projekt.supabase.co:<uuid>` remain
+unchanged. Their readable format has no domain meaning. Only the
+migration and compatibility boundary in `lib/auth/legacy-supabase.ts` know
+this format. New Supabase accounts also receive such keys during the compatible
+rollout phase so that a still-running predecessor version
+refers to the same accounts. The complete normalized issuer authority
+distinguishes different ports; standard HTTPS retains old keys.
+Other providers can receive a new random internal key.
+The identity module uses the same mapping for the concrete
+PocketBase adapter; configuration and private operator migration are documented in
 [auth-provider.md](auth-provider.md).
 
-## Migration und Einführung
+## Migration and rollout
 
-Die neue additive Drizzle-Migration `0016_account_identities.sql` läuft vor
-dem neuen Anwendungscode. Sie übernimmt historische Kontoreferenzen aus
-Sitzungen, Altverknüpfungen, Rollen und Rollenvergabe, Sperren, Löschgrants,
-Bewertungen und Moderation, Uploads, Betriebsdaten und Versandereignissen.
-Besitzschlüssel und Dateien werden nicht umgeschrieben. Alte Writer können
-nach der Migration weiterarbeiten; der Resolver registriert deren spätere
-Konten bei Bedarf. Alte Sitzungen und Löschgrants ohne Issuerfelder gelten
-ausschließlich an ihrer historischen Ursprungsidentität.
-Backfill-Zuordnungen verwenden den festen Migrationsmarker
-`2026-10-11T00:00:00.000Z` als `created_at`, damit wiederholte Aufrüstungen
-derselben historischen Exportquelle dieselben übertragbaren Zeilen ergeben.
-Spätere neue Zuordnungen verwenden ihren tatsächlichen Erstellungszeitpunkt.
+The new additive Drizzle migration `0016_account_identities.sql` runs before
+the new application code. It backfills historical account references from
+sessions, legacy links, roles and role assignments, blocks, deletion grants,
+reviews and moderation, uploads, business data, and delivery events.
+Ownership keys and files are not rewritten. Old writers can
+continue after migration; the resolver registers accounts they create later
+when needed. Old sessions and deletion grants without issuer fields are valid
+only for their historical source identity.
+Backfilled mappings use the fixed migration marker
+`2026-10-11T00:00:00.000Z` as `created_at` so repeated upgrades
+of the same historical export source produce the same transferable rows.
+Later new mappings use their actual creation time.
 
-Neue Sitzungseinträge speichern Provider, Issuer und Subject getrennt vom
-Anmeldeverfahren Passwort/Google. Eine gleichlautende externe Session-ID
-eines anderen Projekts kann deshalb keinen bestehenden Sitzungsgrant nutzen.
-Rollenentzug und Sperren greifen weiterhin an der internen Konto-ID.
+New session entries store provider, issuer, and subject separately from the
+password/Google login method. An identical external session ID
+from another project therefore cannot use an existing session grant.
+Role revocation and blocks continue to apply to the internal account ID.
 
-Diese Aufgabe verändert weder Livekonten noch Providerkonfigurationen. Ein
-tatsächlicher Anbieterwechsel braucht einen gesonderten kontrollierten
-Daten-/Identitätsübernahmeauftrag und vollständige, geprüfte Bestandslisten.
+This task changes neither live accounts nor provider configuration. An
+actual provider switch requires a separate controlled
+data/identity migration assignment and complete, reviewed inventory lists.
 
-## Ausdrückliche geprüfte Zuordnung
+## Explicit verified mapping
 
-`linkAccountIdentity(existing, next, verify)` ist eine ausschließlich
-serverseitige/offline verwendete Funktion. Es gibt keine öffentliche Route
-und keine automatische Verknüpfung gleicher E-Mail-Adressen. Der
-vertrauenswürdige Aufrufer muss **beide** Identitäten unabhängig prüfen und
-die ausdrückliche Zuordnung zu demselben internen Konto belegen. Bei einer
-Migration kann dieser Nachweis aus einer geprüften Übernahmeliste mit exakten
-Quell-/Zielkennungen stammen; bei einer kontogesteuerten Zuordnung aus zwei
-frischen serverseitig geprüften Anmeldungen. Eine Providerabfrage allein
-belegt nur, dass ein Konto existiert, und ersetzt die geprüfte Zuordnungsentscheidung
-nicht. Niemals allein nach E-Mail vergleichen.
+`linkAccountIdentity(existing, next, verify)` is a function used exclusively
+on the server or offline. There is no public route
+and no automatic linking of identical email addresses. The
+trusted caller must independently verify **both** identities and
+prove their explicit assignment to the same internal account. For a
+migration, this proof can come from a reviewed migration list with exact
+source/target identifiers; for an account-driven mapping, it can come from two
+fresh server-verified logins. A provider query alone
+proves only that an account exists and does not replace the verified mapping decision.
+Never compare by email alone.
 
-Die Quelle muss bereits registriert sein. Vor dem Schreibaufruf protokolliert
-der kontrollierte Migrationsprozess intern Konto-ID und beide
-Provider-/Issuer-/Subject-Paare, ohne Token, Geheimnisse oder E-Mail-Adressen.
-Der Rückgabewert muss exakt der erwarteten internen Konto-ID entsprechen.
-Ein minimaler Aufruf in einem vertrauenswürdigen Migrationsprogramm lautet:
+The source must already be registered. Before the write call, the
+controlled migration process internally records the account ID and both
+provider/issuer/subject tuples, without tokens, secrets, or email addresses.
+The return value must exactly match the expected internal account ID.
+A minimal call in a trusted migration program is:
 
 ```ts
 const accountId = await resolveAccount(sourceIdentity);
@@ -78,78 +78,77 @@ const linked = await linkAccountIdentity(
 if (linked !== reviewedMapping.accountId) throw Error("TARGET_MISMATCH");
 ```
 
-Die Funktion hängt bestehende Bindungen niemals um und führt keine Konten
-zusammen. Auch ungemappte Konten, die ein alter Writer bereits benutzt hat,
-sind geschützt. Datenbank-Eindeutigkeit und die atomare Prüfung verhindern
-konkurrierende kontoübergreifende Bindungen. Bestehende Anwendungssitzungen
-werden bei einer Zuordnung widerrufen; anschließend ist eine neue Anmeldung
-nötig. Inaktive oder gelöschte Konten können kontrolliert auf dieselbe interne
-ID übernommen werden; ihre Sperre beziehungsweise ihr Lösch-Tombstone bleibt
-unverändert und gilt sofort für die Zielidentität. Unvollständige
-Übernahmelisten sind kein freigegebener Cutover: alle Bestandskonten inklusive
-Sperren und begonnenen Löschungen müssen geprüft zugeordnet sein, bevor
-Zielanmeldungen aktiviert werden.
+The function never reassigns existing bindings or merges accounts.
+Unmapped accounts already used by an old writer are protected too.
+Database uniqueness and the atomic check prevent
+concurrent bindings across accounts. Existing application sessions
+are revoked when a mapping is added; a new login is then required.
+Inactive or deleted accounts can be migrated in a controlled manner to the same internal
+ID; their block or deletion tombstone remains
+unchanged and applies immediately to the target identity. Incomplete
+migration lists do not constitute an approved cutover: all existing accounts, including
+blocks and started deletions, must have verified mappings before
+target logins are enabled.
 
-Während des kompatiblen Schema-Rollouts bleibt das alte Anmeldeprojekt aktiv.
-Vor dem Schreiben von Zielzuordnungen oder dem Aktivieren des Zielprojekts
-müssen alle alten Writer beendet sein. Eine alte Version würde sonst beim
-Zielprojekt weiterhin andere Besitzschlüssel erzeugen. Nach der Zuordnung
-verifiziert der Migrationsprozess jeden erwarteten Quell-/Zielbezug über den
-Resolver, vergleicht Bestandszahlen und prüft Kunden-, Admin-, Sperr- und
-Löschabläufe mit isolierten Konten. Der Auth-Adapter unterstützt zusätzlich ausdrücklich serverseitig freigegebene
-kompatible HTTPS-Hosts. Seine Konfiguration ersetzt keine Kontoübernahme; siehe
-[Auth-Anbieter und Wechsel](auth-provider.md).
+During the compatible schema rollout, the old login project remains active.
+Before writing target mappings or enabling the target project,
+all old writers must be stopped. Otherwise an old version would
+continue to create different ownership keys for the target project. After mapping,
+the migration process verifies every expected source/target relationship through the
+resolver, compares inventory counts, and checks customer, admin, blocking, and
+deletion flows with isolated accounts. The auth adapter also explicitly supports server-approved
+compatible HTTPS hosts. Its configuration does not replace account migration; see
+[auth providers and switching](auth-provider.md).
 
-## Löschung, Versand und Rückweg
+## Deletion, delivery, and return path
 
-Benutzerverwaltung und eigene Kontofunktionen übersetzen die aktuelle
-externe Identität in die interne ID. Selbstschutz und Rollen verwenden die
-interne ID; Provideroperationen verwenden das bestätigte aktuelle Subject.
-Löschgrants speichern ihren Issuer und können nicht an einem anderen Projekt
-verwendet werden. Vor einem Projektwechsel begonnene eigene Löschungen sind
-am ursprünglichen Projekt abzuschließen oder danach administrativ über die
-geprüfte neue Zuordnung fortzusetzen. Die Pending-Liste zeigt das aktuelle
-gemappte Subject auch nach dessen Providerlöschung.
+User administration and self-service account functions translate the current
+external identity to the internal ID. Self-protection and roles use the
+internal ID; provider operations use the verified current subject.
+Deletion grants store their issuer and cannot be used at another project.
+Self-deletions started before a project switch must be
+completed at the original project or continued administratively afterwards through
+the verified new mapping. The pending list shows the current
+mapped subject even after its provider account has been deleted.
 
-Nach erfolgreicher Löschung bleiben Identitätszuordnungen und lokale
-Tombstones erhalten. Damit können überlebende Tokens oder alte externe
-Konten keine neue interne Identität und keine früheren Rechte erhalten.
-Dateien, Bewertungen, Betriebszuordnungen, Sitzungen und Versandereignisse
-werden weiterhin bereinigt. Der aktuelle konfigurierte Provider wird
-gelöscht; die Stilllegung alter Providerprojekte und ihrer verbliebenen
-Konten gehört zum gesonderten Anbieterwechsel, für den deren administrative
-Zugänge benötigt werden.
+After successful deletion, identity mappings and local
+tombstones remain. This prevents surviving tokens or old external
+accounts from obtaining a new internal identity or earlier rights.
+Files, reviews, business assignments, sessions, and delivery events
+continue to be cleaned up. The currently configured provider account is
+deleted; retiring old provider projects and their remaining
+accounts belongs to the separate provider switch, which requires their administrative
+access.
 
-Die Outbox findet den aktuellen Providerkontakt über das Mapping, auch bei
-bestätigten privaten Native-Altverknüpfungen. Sie parst keine internen IDs
-und behält Sperrprüfung, bestätigte Kontakte, unveränderliche Retry-Payloads
-und Idempotenz bei.
+The outbox finds the current provider contact through the mapping, including
+confirmed private legacy native links. It does not parse internal IDs
+and retains block checks, verified contacts, immutable retry payloads,
+and idempotency.
 
-Vor Zielzuordnungen/Cutover darf die Anwendung auf die geprüfte
-Vorgängerversion zurückgehen; die additiven Tabellen und nullable Spalten
-bleiben bestehen. Keine angewendete Migration ändern oder zurücknehmen.
-Nach einem Cutover ist nur eine identitätsfähige Version ein sicherer
-Rollback. Ein Rückwechsel zum ursprünglichen Provider erfolgt mit den
-erhaltenen ursprünglichen Zuordnungen und neuer Anmeldung; niemals
-Identitätszeilen löschen, um eine Konfliktprüfung zu umgehen.
+Before target mappings/cutover, the application may return to the verified
+predecessor version; additive tables and nullable columns
+remain. Do not change or roll back any applied migration.
+After a cutover, only an identity-aware version is a safe
+rollback. Switching back to the original provider uses the
+preserved original mappings and requires a new login; never
+delete identity rows to bypass a conflict check.
 
-## Nachweise
+## Evidence
 
-`tests/account-identities.test.mjs` prüft die tatsächliche additive Migration,
-Neu-/Altidentitäten, getrennte Issuer, ausdrückliche doppelte Prüfung,
-konkurrierende Bindungen, spätere Vorgänger-Writer, unveränderte private
-Dateipfade, fremde Identitäten mit gleicher E-Mail/gefälschten Metadaten,
-Rollenentzug, Sperrung während der Zuordnung, Admin-Selbstschutz, aktuelle
-Outboxkontakte und wiederholbare Kontolöschung. Die bestehenden Passwort-,
-Google-, Native-Altverknüpfungs-, Account- und Verwaltungsprüfungen bleiben
-registriert; `tests/account-settings.test.mjs` prüft zusätzlich verspätete
-Vorgänger-Löschgrants. Alle Providerantworten sind synthetisch; keine echten
-Nachrichten oder Kontomigrationen werden ausgelöst.
+`tests/account-identities.test.mjs` checks the actual additive migration,
+new/old identities, distinct issuers, explicit double verification,
+concurrent bindings, later predecessor writers, unchanged private
+file paths, foreign identities with identical email/forged metadata,
+role revocation, blocking during mapping, admin self-protection, current
+outbox contacts, and repeatable account deletion. Existing password,
+Google, legacy native-link, account, and administration checks remain
+registered; `tests/account-settings.test.mjs` also checks late
+predecessor deletion grants. All provider responses are synthetic; no real
+messages or account migrations are triggered.
 
-`tests/account-identities-worker.test.mjs` führt dieselbe Migration und die
-Bindungs-/Konfliktprüfung außerdem gegen die tatsächliche D1-Implementierung
-aus. Die Migration verwendet kleine verschachtelte Selects; die Bindung prüft
-Referenzen mit direkten `NOT EXISTS`, damit beide Wege auch deren SQL-Limits
-einhalten.
+`tests/account-identities-worker.test.mjs` also runs the same migration and
+binding/conflict checks against the actual D1 implementation.
+The migration uses small nested selects; binding checks
+references with direct `NOT EXISTS` so both paths also comply with their SQL limits.
 
-Die eigenen Identitätsverträge erhalten mögliche HTTPS-Issuerpfade (z.B. Realms). Die konkreten Supabase-/PocketBase-Adapter verwenden ihre geprüfte Origin. Unterschiedliche Pfade werden nicht auf dieselbe Origin reduziert. Authprofile, neue Sessiongrants und begonnene Löschgrants sind ausdrücklich providergebunden; siehe [auth-provider.md](auth-provider.md).
+The application-owned identity contracts preserve possible HTTPS issuer paths (for example realms). The concrete Supabase/PocketBase adapters use their verified origin. Different paths are not reduced to the same origin. Auth profiles, new session grants, and started deletion grants are explicitly provider-bound; see [auth-provider.md](auth-provider.md).

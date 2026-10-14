@@ -15,7 +15,7 @@ const bundle = await build({
     details: "components/workshop-google-details.tsx",
     ratings: "components/workshop-ratings.tsx",
     reviews: "components/google-place-reviews.tsx",
-    profile: "app/[locale]/werkstatt/[id]/profile.tsx",
+    profile: "app/[locale]/workshop/[id]/profile.tsx",
     provider: "lib/i18n/client.tsx",
     messages: "lib/i18n/messages.ts",
   },

@@ -1,16 +1,17 @@
-# Portabler Node-Betrieb
+# Portable Node operation
 
-Riparim kann neben dem bestehenden Vinext-/Cloudflare-Build denselben
-App-Router-Code mit dem bereits installierten Next.js auf einem gewöhnlichen
-Node-Server ausführen. Es gibt keine neue Framework- oder Storage-Abhängigkeit.
-Cloudflare bleibt das Deployment-Default. Der [Node-Release-/Deploymentweg](node-deployment.md) installiert vorgebaute geprüfte Main-Releases auf einem einzelnen Host ohne App-Neubuild.
+Alongside the existing Vinext/Cloudflare build, Riparim can run the same App
+Router code with the already installed Next.js on an ordinary Node server.
+There is no new framework or storage dependency. Cloudflare remains the default
+deployment target. The [Node release/deployment path](node-deployment.md) installs
+prebuilt verified main releases on a single host without rebuilding the app.
 
-## Build, Migrationen und Start
+## Build, migrations and startup
 
-Node.js 24 ab 24.10 wird empfohlen; die unterstützten Versionen stehen in
-`package.json`. Der zweite Betriebsweg verwendet das eingebaute `node:sqlite`.
-In Node 22/24 gilt dessen API noch als experimentell. Installation und Build
-benötigen die gelockten Entwicklungsabhängigkeiten.
+Node.js 24 from 24.10 is recommended; supported versions are in `package.json`.
+The second operating path uses built-in `node:sqlite`. Its API remains
+experimental in Node 22/24. Installation and build need locked development
+dependencies.
 
 ```sh
 npm run install:ci
@@ -22,122 +23,128 @@ npm run db:migrate:node
 npm run start:node -- --port 5174
 ```
 
-Der Build erzeugt `.next/` und `.node-runtime/command.mjs`. Ein kleiner `node:http`-Starter übergibt Requests an das vorhandene Next.js.
-Nexts Webpack-Build ersetzt `lib/runtime/env` durch den Node-Adapter und den Worker-SMTP-Stub durch den kleinen Node-Versandadapter. Seiten und
-APIs verwenden dieselben Geschäftsregeln und SQL-Abfragen wie der Worker.
-Die Option `skipProxyUrlNormalize` erhält die ursprüngliche Request-Origin:
-sonst können interne Sprach-Rewrites von `127.0.0.1` auf `localhost` als
-externe Selbstanfragen ausgeführt werden. Der kanonische `/de`-Redirect bleibt.
-Die gemeinsame Verfügbarkeitsprüfung entscheidet vor dem Streaming:
-fehlende, ungültige und unveröffentlichte Werkstattprofile erhalten HTTP 404
-für HTML, RSC-Navigation und HEAD. Private Entwürfe bleiben verborgen.
+The build produces `.next/` and `.node-runtime/command.mjs`.
+A small `node:http` launcher passes requests to existing Next.js.
+Next's Webpack build replaces `lib/runtime/env` with the Node adapter and the
+Worker SMTP stub with the small Node delivery adapter. Pages and APIs use the
+same business rules and SQL queries as the Worker. The `skipProxyUrlNormalize`
+option preserves the original request origin: otherwise internal locale rewrites
+from `127.0.0.1` to `localhost` can be executed as external self-requests.
+The canonical `/de` redirect remains. The shared availability check decides
+before streaming: missing, invalid and unpublished workshop profiles receive
+HTTP 404 for HTML, RSC navigation and HEAD. Private drafts remain hidden.
 
-Für den Betrieb hinter einem HTTPS-Reverse-Proxy muss `SITE_ORIGIN` die
-öffentliche HTTPS-Origin sein. Der Starter validiert HTTP/HTTPS ohne Zugangsdaten,
-Pfad, Query oder Fragment und erzeugt daraus Nexts öffentliche Request-Metadaten.
-Socket-Bindhost und Port bleiben davon getrennt. Eingehende Host- und
-Forwarded-Host/-Proto/-Port-Header überschreiben diese Konfiguration nicht.
-Der Reverse-Proxy übernimmt TLS und öffentliche Hostweiterleitungen.
-Der Server bindet standardmäßig nur Loopback; `--hostname` und `--port` können
-über `npm run start:node -- ...` übergeben werden. Starter und Kommandos laden
-`.env` mit Nodes `--env-file-if-exists`. Secrets bleiben serverseitig und gehören
-nicht in Git oder Build-Artefakte.
+Behind an HTTPS reverse proxy, `SITE_ORIGIN` must be the public HTTPS origin.
+The launcher validates HTTP/HTTPS without credentials, path, query or fragment
+and creates Next's public request metadata from it. Socket bind host and port
+remain separate. Incoming Host and Forwarded-Host/-Proto/-Port headers do not
+override this configuration. The reverse proxy handles TLS and public host
+redirects. The server binds only to loopback by default; `--hostname` and `--port`
+can be passed through `npm run start:node -- ...`. Launcher and commands load
+`.env` with Node's `--env-file-if-exists`. Secrets remain server-side and belong
+neither in Git nor build artifacts.
 
-Für IP-Limits verwendet der Node-Adapter die verifizierte Socketadresse aus
-einem `AsyncLocalStorage`-Kontext. Starter und Next-Bundle teilen ausschließlich
-den Kontextcontainer; gleichzeitig bearbeitete Requests behalten getrennte
-Adressen. Frei übergebene `cf-connecting-ip`, `X-Forwarded-For` oder interne
-Fakeheader begründen keinen neuen Rate-Limit-Scope. Der Cloudflare-Adapter
-verwendet weiterhin den vom eigenen Edge bereitgestellten Header.
+For IP limits, the Node adapter uses the verified socket address from an
+`AsyncLocalStorage` context. Launcher and Next bundle share only the context
+container; concurrent requests keep separate addresses. Freely supplied
+`cf-connecting-ip`, `X-Forwarded-For` or internal fake headers establish no new
+rate limit scope. The Cloudflare adapter continues using the header supplied
+by the owned edge.
 
-Wenn ein Reverse-Proxy vorgeschaltet ist, enthält `RIPARIM_TRUSTED_PROXIES`
-ausschließlich seine expliziten IP-Adressen, kommagetrennt. Nur ein Socketpeer
-aus dieser Liste darf ein gültiges einzelnes `X-Real-IP` liefern. Der Proxy muss
-diesen Header mit der tatsächlich verbundenen Clientadresse **überschreiben**;
-ungeprüftes Weiterreichen eines Browserheaders erfüllt diese Grenze nicht.
-IPv4-mapped IPv6 und äquivalente IP-Schreibweisen werden normalisiert. Fehlende,
-mehrdeutige oder ungültige weitergeleitete Clientadressen fallen auf den Socketpeer
-zurück. Ungültige Einträge in der Proxy-Allowlist brechen den Start ab.
-Ohne Allowlist werden sämtliche Forwarding-IP-Header ignoriert. Starte über
-`start:node`; direktes `next start` stellt keinen Socketkontext bereit und
-verwendet konservativ den gemeinsamen `unknown`-Scope.
+When a reverse proxy is present, `RIPARIM_TRUSTED_PROXIES` contains only its
+explicit IP addresses, comma-separated. Only a socket peer on this list may
+provide a valid single `X-Real-IP`. The proxy must **overwrite** this header with
+the actually connected client address; forwarding an unverified browser header
+does not meet this boundary. IPv4-mapped IPv6 and equivalent IP spellings are
+normalized. Missing, ambiguous or invalid forwarded client addresses fall back
+to the socket peer. Invalid entries in the proxy allowlist abort startup.
+Without an allowlist, all forwarding IP headers are ignored. Start through
+`start:node`; direct `next start` provides no socket context and conservatively
+uses the shared `unknown` scope.
 
-## Daten und private Dateien
+## Data and private files
 
-`RIPARIM_DATA_DIR` bezeichnet ein eigenes, beschreibbares Datenverzeichnis
-außerhalb von `public/`. Ohne Konfiguration wird `.riparim/` verwendet.
-Darin liegen zwei persistente Dateien mit Dateimodus `0600`:
+`RIPARIM_DATA_DIR` identifies a dedicated writable data directory outside
+`public/`. Without configuration, `.riparim/` is used.
+It contains two persistent files with mode `0600`:
 
-- `app.sqlite`: Anwendungstabellen aus den unveränderten Drizzle-SQL-Dateien.
-- `files.sqlite`: private Dokumentinhalte als Blobs mit Schlüssel, ETag,
-  Uploadzeit und HTTP-/Custom-Metadaten. Diese separate Datei ist der lokale
-  Dateispeicher, kein öffentliches Downloadverzeichnis.
+- `app.sqlite`: application tables from unchanged Drizzle SQL files.
+- `files.sqlite`: private document content as blobs with key, ETag, upload time
+  and HTTP/custom metadata. This separate file is the local file store,
+  not a public download directory.
 
-Neue Verzeichnisse werden mit Modus `0700` angelegt. Der Dienstbenutzer braucht
-exklusiven administrativen Zugriff auf das Verzeichnis. Downloads laufen
-weiterhin ausschließlich durch die bestehenden APIs mit Besitz-/Adminprüfung
-und `Cache-Control: private, no-store`. Sites-Identitätsheader begründen im
-Node-Betrieb weder Kunden- noch Adminrechte, auch bei fehlender Auth-Konfiguration.
-Die echte Anmeldung verwendet den konfigurierten Auth-Host: standardmäßig Supabase, alternativ eine ausdrücklich freigegebene Supabase-kompatible Instanz oder das konkrete PocketBase-Profil gemäß [auth-provider.md](auth-provider.md). `AUTH_TRUSTED_ORIGIN`/`AUTH_TRUSTED_PROVIDER`, die `AUTH_ADMIN_KEY`-Credentialbindings sowie die kompatiblen `SUPABASE_SECRET_KEY`-Werte werden auch im Node-Weg ausschließlich aus der geschützten Laufzeitumgebung gelesen.
+New directories are created with mode `0700`. The service user needs exclusive
+administrative access to the directory. Downloads still go exclusively through
+existing APIs with ownership/admin checks and `Cache-Control: private, no-store`.
+Sites identity headers establish neither customer nor admin rights in Node
+operation, even with missing Auth configuration. Actual login uses the configured
+Auth host: Supabase by default, alternatively an explicitly authorized
+Supabase-compatible instance or the concrete PocketBase profile according to
+[auth-provider.md](auth-provider.md). `AUTH_TRUSTED_ORIGIN`/`AUTH_TRUSTED_PROVIDER`,
+`AUTH_ADMIN_KEY` credential bindings and compatible `SUPABASE_SECRET_KEY` values
+are also read exclusively from the protected runtime environment in the Node path.
 
-`db:migrate:node` führt die SQL-Dateien in aufsteigender Reihenfolge aus.
-`riparim_node_migrations` speichert Dateiname, SHA-256 und Zeitpunkt. Jede
-Migration und ihr Beleg bilden eine Transaktion. Wiederholungen überspringen
-identische angewendete Dateien; geänderte angewendete Dateien führen zum Abbruch.
-Es gibt keine neue Drizzle-Migration und keine automatische Datenübernahme aus D1.
-Die initiale Katalogübernahme verwendet weiterhin den vorhandenen Import.
-Der geprüfte vollständige D1/R2-Export kann mit dem kleinen Offline-Restore in
-ein neues Node-Verzeichnis übernommen werden. Ablauf, sichere Retrygrenze und
-frischer Rücktransfer stehen in [provider-exit.md](provider-exit.md).
+`db:migrate:node` runs SQL files in ascending order. `riparim_node_migrations`
+stores filename, SHA-256 and time. Each migration and receipt form a transaction.
+Retries skip identical applied files; modified applied files cause an abort.
+There is no new Drizzle migration and no automatic data transfer from D1.
+Initial catalogue transfer still uses the existing import. A verified complete
+D1/R2 export can be transferred into a new Node directory with the small offline
+restore. Process, safe retry boundary and fresh reverse transfer are in
+[provider-exit.md](provider-exit.md).
 
-SQL-Batches bleiben atomar. Private Dateiinhalte und deren ETag stehen gemeinsam
-in einer Blobstore-Zeile: bedingte Uploads aktualisieren sie ausschließlich,
-wenn die Reservierung mit diesem ETag noch existiert. Kontolöschung entfernt
-Reservierungen; verspätete Uploads können danach keine Inhalte hinterlassen.
-SQLite serialisiert diese Operation auch zwischen mehreren lokalen Verbindungen.
-Metadatenlisten laden keine Dokumentinhalte. Ungültige Schlüssel mit absoluten
-Pfaden, Traversalsegmenten oder Backslashes werden abgewiesen.
+SQL batches remain atomic. Private file contents and their ETag share one
+blobstore row: conditional uploads update them only if the reservation with
+that ETag still exists. Account deletion removes reservations; delayed uploads
+cannot then leave content. SQLite serializes this operation across multiple
+local connections too. Metadata lists load no document contents. Invalid keys
+with absolute paths, traversal segments or backslashes are rejected.
 
-Der Weg ist für **einen Host mit lokalem persistentem Datenträger** vorgesehen.
-Eine gemeinsame SQLite-Datei auf Netzlaufwerken oder mehrere Hosts sind kein
-abgenommener Betriebsweg. Vor Sicherung oder Übernahme alle App-Prozesse und
-den Versandjob stoppen, dann das vollständige Datenverzeichnis einschließlich
-vorhandener SQLite-WAL-/SHM-Dateien sichern. Beide Datenbanken gehören zu einer
-Sicherung; `files.sqlite` allein enthält keine Besitzrechte. Wiederherstellung
-in ein privates Verzeichnis erfolgt bei gestoppten Prozessen, danach Migrationen
-und die Kundenabläufe prüfen. Für Online-Backups ist eine SQLite-Backupmethode
-statt einfacher Kopien aktiver Dateien erforderlich.
+The path is intended for **one host with local persistent storage**.
+A shared SQLite file on network drives or multiple hosts is not an accepted
+operating path. Before backup or transfer, stop all app processes and the
+delivery job, then back up the complete data directory, including any SQLite
+WAL/SHM files. Both databases belong in a backup; `files.sqlite` alone contains
+no ownership rights. Restore into a private directory with processes stopped,
+then check migrations and customer flows. Online backups require a SQLite
+backup method rather than simple copies of active files.
 
-## Hintergrundversand
+## Background delivery
 
-Die Moderationsroute wartet ihren ersten Versandversuch ab. Das dauerhafte Ereignis bleibt bei Teilfehlern erhalten. Es gibt keine Fire-and-forget-Promises und keinen periodischen Maildienst.
+The moderation route awaits its first send attempt. The persistent event survives
+partial failures. There are no fire-and-forget promises or periodic email service.
 
 ```sh
-npm run notifications:node -- riparim-review-<einreichung>-revision-<revision>
+npm run notifications:node -- riparim-review-<submission>-revision-<revision>
 ```
 
-Dieses Betreiberkommando wiederholt ausschließlich das benannte Ereignis und wartet den Versuch ab. Es respektiert dieselbe Lease, das sichere Idempotenzfenster, die Wartezeiten von 1/5/15/30/60 Minuten und das Limit eines Erstversands plus fünf manueller Wiederholungen. Datenverzeichnis, `.env` und Release-Verzeichnis bleiben identisch. Die geschützte Notification-API bietet dieselbe Einzelaktion; eine Sammelverarbeitung gibt es nicht. Vorhandene systemd-Mailtimer oder Crons vor Aktivierung dieses Releases stoppen und deaktivieren.
+This operator command retries only the named event and awaits the attempt.
+It respects the same lease, safe idempotency window, waits of 1/5/15/30/60 minutes
+and limit of one initial send plus five manual retries. Data directory, `.env`
+and release directory remain identical. The protected notification API offers
+the same individual action; there is no batch processing. Stop and disable
+existing systemd email timers or crons before activating this release.
 
-## Abnahme
+## Acceptance
 
-`npm test` registriert den zweiten Betriebsweg:
+`npm test` registers the second operating path:
 
-- `node-storage`: Persistenz, atomare Batch-Rollbacks, unveränderte Migrationen,
-  private Dateien, Metadaten, Pagination und bedingte Schreibvorgänge.
-- `node-evidence`: tatsächliche Bewertungs-/Download-/Kontolöschlogik mit
-  synthetischen Konten und echtem Node-Storage; fremder Download wird verweigert,
-  Kontolöschung während Upload bereinigt Inhalt und Inventar.
-- `node-runtime`: tatsächlicher Next-Produktionsbuild und gestarteter HTTP-Server
-  mit synthetischen öffentlichen und privaten Profilen; Seiten in DE/SQ/EN,
-  APIs, private Zugriffsverweigerung, gefälschte Sites-Adminheader, echte Socket-IP-
-  Limits, parallele vertrauenswürdige Proxyclients und konfigurierte HTTPS-Origins sowie beide
-  ausführbaren Migration-/Outbox-Kommandos.
+- `node-storage`: persistence, atomic batch rollbacks, unchanged migrations,
+  private files, metadata, pagination and conditional writes.
+- `node-evidence`: actual review/download/account-deletion logic with synthetic
+  accounts and real Node storage; foreign downloads are rejected, account
+  deletion during upload cleans up content and inventory.
+- `node-runtime`: actual Next production build and started HTTP server with
+  synthetic public and private profiles; DE/SQ/EN pages, APIs, private access
+  denial, forged Sites admin headers, actual socket IP limits, parallel trusted
+  proxy clients and configured HTTPS origins, and both executable migration/
+  outbox commands.
 
-Diese Prüfungen ändern keine Live-Provider und senden keine echten E-Mails.
-Der Test baut Node selbst; `npm run test:node` wiederholt die HTTP-Abnahme einzeln.
-Die bisherigen Cloudflare-/Sites-Builds und Releasepakete bleiben Pflichtchecks.
+These checks change no live providers and send no actual emails. The test builds
+Node itself; `npm run test:node` repeats HTTP acceptance individually.
+Existing Cloudflare/Sites builds and release packages remain required checks.
 
-API-Grundlagen: [Node SQLite](https://nodejs.org/api/sqlite.html),
-[Next-Server](https://nextjs.org/docs/app/guides/custom-server),
-[AsyncLocalStorage](https://nodejs.org/api/async_context.html) und
-[Proxy-URL-Normalisierung](https://nextjs.org/docs/app/api-reference/file-conventions/proxy#advanced-proxy-flags).
+API foundations: [Node SQLite](https://nodejs.org/api/sqlite.html),
+[Next server](https://nextjs.org/docs/app/guides/custom-server),
+[AsyncLocalStorage](https://nodejs.org/api/async_context.html) and
+[proxy URL normalization](https://nextjs.org/docs/app/api-reference/file-conventions/proxy#advanced-proxy-flags).

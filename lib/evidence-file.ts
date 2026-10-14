@@ -1,12 +1,10 @@
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 import { ValidationError } from "@/lib/validation-error";
 
 export const evidenceFileLimit = 5 * 1024 * 1024;
 export async function validateEvidenceFile(file: File) {
   if (file.size > evidenceFileLimit)
-    throw new ValidationError(
-      "file_too_large",
-      "Die Datei ist zu groß. Maximal 5 MB.",
-    );
+    throw new ValidationError("file_too_large", legacyMessages.fileTooLarge);
   const bytes = await file.arrayBuffer(),
     b = new Uint8Array(bytes);
   const valid =
@@ -24,7 +22,7 @@ export async function validateEvidenceFile(file: File) {
   if (!valid)
     throw new ValidationError(
       "invalid_file",
-      "Bitte lade eine gültige PDF-, JPG- oder PNG-Datei hoch.",
+      legacyMessages.invalidEvidenceFile,
     );
   return {
     bytes,

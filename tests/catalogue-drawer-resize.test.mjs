@@ -53,7 +53,7 @@ boundaries["@/components/picker"] = boundaries[
 await build({
   stdin: {
     contents:
-      "export {default as Catalogue} from './app/[locale]/werkstaetten/catalogue';export {defaultCatalogueFilters} from './lib/catalogue-filters';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",
+      "export {default as Catalogue} from './app/[locale]/workshops/catalogue';export {defaultCatalogueFilters} from './lib/catalogue-filters';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",
     resolveDir: process.cwd(),
     loader: "tsx",
   },

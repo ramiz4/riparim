@@ -16,8 +16,8 @@ const { values } = parseArgs({
 });
 const limit = Number(values.limit);
 if (!Number.isInteger(limit) || limit < 1 || limit > 100)
-  throw Error("limit muss zwischen 1 und 100 liegen");
-if (values.write && !values.fetch) throw Error("--write benötigt --fetch");
+  throw Error("limit must be between 1 and 100");
+if (values.write && !values.fetch) throw Error("--write requires --fetch");
 const runtime = resolve(root, ".sites-runtime/catalogue-google");
 await mkdir(runtime, { recursive: true });
 await build({
@@ -80,7 +80,7 @@ if (!values.fetch) {
   const key = (process.env.GOOGLE_PLACES_SERVER_API_KEY ?? "").trim();
   if (!key)
     throw Error(
-      "GOOGLE_PLACES_SERVER_API_KEY ist nicht eingerichtet; keine Google-Abfrage ausgeführt",
+      "GOOGLE_PLACES_SERVER_API_KEY is not configured; no Google request was made",
     );
   const responses = new Map(),
     matched = [],

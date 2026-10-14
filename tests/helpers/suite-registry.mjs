@@ -126,6 +126,9 @@ export const registeredSuites = Object.freeze([
   { file: "session-cache-tabs.test.mjs", group: "core" },
   { file: "profile-loading-header.test.mjs", group: "core" },
   { file: "formatting.test.mjs", group: "core" },
+  { file: "codebase-language.test.mjs", group: "core" },
+  { file: "auth-screen-query.test.mjs", group: "core" },
+  { file: "release-route-identity.test.mjs", group: "core" },
   { file: "local-dev-bootstrap.test.mjs", group: "core" },
   { file: "local-dev-startup.test.mjs", group: "core" },
 ]);

@@ -14,67 +14,83 @@ export function stripLocalePrefix(path: string): string {
   const stripped = path.replace(/^\/(?:de|sq|en)(?=\/|\?|#|$)/, "");
   return /^[?#]/.test(stripped) ? `/${stripped}` : stripped || "/";
 }
-// German paths identify the existing page tree; only browser-facing paths vary.
-const pageRoutes: readonly Record<Locale, string>[] = [
-  { de: "/", sq: "/", en: "/" },
-  { de: "/werkstaetten", sq: "/serviset", en: "/workshops" },
-  { de: "/anmelden", sq: "/hyr", en: "/login" },
-  { de: "/registrieren", sq: "/regjistrohu", en: "/register" },
+// Source identities are English; localized public URLs remain stable.
+const pageRoutes: readonly (Record<Locale, string> & { id: string })[] = [
+  { id: "/", de: "/", sq: "/", en: "/" },
+  { id: "/workshops", de: "/werkstaetten", sq: "/serviset", en: "/workshops" },
+  { id: "/login", de: "/anmelden", sq: "/hyr", en: "/login" },
+  { id: "/register", de: "/registrieren", sq: "/regjistrohu", en: "/register" },
   {
+    id: "/forgot-password",
     de: "/passwort-vergessen",
     sq: "/fjalekalimi-i-harruar",
     en: "/forgot-password",
   },
-  { de: "/passwort-neu", sq: "/fjalekalim-i-ri", en: "/reset-password" },
-  { de: "/einstellungen", sq: "/cilesimet", en: "/settings" },
-  { de: "/bewertungen", sq: "/vleresimet", en: "/reviews" },
-  { de: "/datenschutz", sq: "/privatesia", en: "/privacy" },
-  { de: "/betriebe", sq: "/biznesi", en: "/business" },
-  { de: "/antraege", sq: "/kerkesat", en: "/requests" },
   {
+    id: "/reset-password",
+    de: "/passwort-neu",
+    sq: "/fjalekalim-i-ri",
+    en: "/reset-password",
+  },
+  { id: "/settings", de: "/einstellungen", sq: "/cilesimet", en: "/settings" },
+  { id: "/reviews", de: "/bewertungen", sq: "/vleresimet", en: "/reviews" },
+  { id: "/privacy", de: "/datenschutz", sq: "/privatesia", en: "/privacy" },
+  { id: "/business", de: "/betriebe", sq: "/biznesi", en: "/business" },
+  { id: "/requests", de: "/antraege", sq: "/kerkesat", en: "/requests" },
+  {
+    id: "/business/claim",
     de: "/betriebe/beanspruchen",
     sq: "/biznesi/kerko-pronesine",
     en: "/business/claim",
   },
-  { de: "/verwaltung", sq: "/administrimi", en: "/admin" },
+  { id: "/admin", de: "/verwaltung", sq: "/administrimi", en: "/admin" },
   {
+    id: "/admin/authentication",
     de: "/verwaltung/anmeldung",
     sq: "/administrimi/autentikimi",
     en: "/admin/authentication",
   },
   {
+    id: "/admin/users",
     de: "/verwaltung/benutzer",
     sq: "/administrimi/perdoruesit",
     en: "/admin/users",
   },
   {
+    id: "/admin/businesses",
     de: "/verwaltung/betriebe",
     sq: "/administrimi/bizneset",
     en: "/admin/businesses",
   },
   {
+    id: "/admin/reviews",
     de: "/verwaltung/bewertungen",
     sq: "/administrimi/vleresimet",
     en: "/admin/reviews",
   },
 ];
 const legacyPageRoutes: Record<string, string> = {
-  "/betrieb": "/betriebe",
-  "/betrieb/beanspruchen": "/betriebe/beanspruchen",
+  "/betrieb": "/business",
+  "/betrieb/beanspruchen": "/business/claim",
 };
 const profileRoute: Record<Locale, string> = {
   de: "/werkstatt/",
   sq: "/servis/",
   en: "/workshop/",
 };
+const profileIdentity = "/workshop/";
 export function pageIdentityPath(path: string): string {
   const locale = localeFromPath(path),
     value = stripLocalePrefix(path).replace(/\/$/, "") || "/";
   if (legacyPageRoutes[value]) return legacyPageRoutes[value];
-  const route = pageRoutes.find((route) => route[locale] === value);
-  if (route) return route.de;
-  if (value.startsWith(profileRoute[locale]))
-    return profileRoute.de + value.slice(profileRoute[locale].length);
+  const route = pageRoutes.find(
+    (route) =>
+      route[locale] === value || route.de === value || route.id === value,
+  );
+  if (route) return route.id;
+  for (const prefix of [profileRoute[locale], profileRoute.de, profileIdentity])
+    if (value.startsWith(prefix))
+      return profileIdentity + value.slice(prefix.length);
   return value;
 }
 // Current physical public files, independently checked against public/ in tests.
@@ -112,7 +128,7 @@ export function isStaticOrMetadataPath(path: string): boolean {
 }
 export function isTechnicalPath(path: string): boolean {
   return (
-    /^\/(?:api(?:\/|$)|auth\/bestaetigen(?:\/|$)|_next(?:\/|$)|signin-with-chatgpt(?:\/|$)|signout-with-chatgpt(?:\/|$)|callback(?:\/|$)|__sites_connector_preview(?:\/|$)|__migration(?:\/|$)|\.well-known(?:\/|$))/.test(
+    /^\/(?:api(?:\/|$)|auth\/(?:bestaetigen|confirm)(?:\/|$)|_next(?:\/|$)|signin-with-chatgpt(?:\/|$)|signout-with-chatgpt(?:\/|$)|callback(?:\/|$)|__sites_connector_preview(?:\/|$)|__migration(?:\/|$)|\.well-known(?:\/|$))/.test(
       path,
     ) || isStaticOrMetadataPath(path)
   );
@@ -123,19 +139,34 @@ export function localizeHref(href: string, locale: Locale): string {
   if (url.origin !== "https://riparim.invalid" || isTechnicalPath(url.pathname))
     return href;
   const identity = pageIdentityPath(url.pathname),
-    route = pageRoutes.find((route) => route.de === identity);
+    route = pageRoutes.find((route) => route.id === identity);
   const path = route
     ? route[locale]
-    : identity.startsWith(profileRoute.de)
-      ? profileRoute[locale] + identity.slice(profileRoute.de.length)
+    : identity.startsWith(profileIdentity)
+      ? profileRoute[locale] + identity.slice(profileIdentity.length)
       : identity;
   return `${locale === "de" ? "" : `/${locale}`}${path === "/" && locale !== "de" ? "" : path}${url.search}${url.hash}`;
 }
 
 export function isPagePath(path: string): boolean {
-  const value = pageIdentityPath(path);
+  const locale = localeFromPath(path),
+    value = stripLocalePrefix(path).replace(/\/$/, "") || "/",
+    hasLocalePrefix = /^\/(?:de|sq|en)(?:\/|$)/.test(path);
   return (
-    pageRoutes.some((route) => route.de === value) ||
-    /^\/werkstatt\/[^/]+$/.test(value)
+    !!legacyPageRoutes[value] ||
+    pageRoutes.some(
+      (route) =>
+        route[locale] === value ||
+        route.de === value ||
+        (!hasLocalePrefix && route.id === value),
+    ) ||
+    [
+      profileRoute[locale],
+      profileRoute.de,
+      ...(!hasLocalePrefix ? [profileIdentity] : []),
+    ].some(
+      (prefix) =>
+        value.startsWith(prefix) && /^[^/]+$/.test(value.slice(prefix.length)),
+    )
   );
 }

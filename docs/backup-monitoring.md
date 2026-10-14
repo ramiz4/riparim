@@ -1,286 +1,268 @@
-# Backup-Überwachung
+# Backup monitoring
 
-**Stand 13.10.2026: Cloudflare-Überwachung aktiviert und live geprüft.**
-Der Betreiber hat die regelmäßige Prüfung im 15-Minuten-Takt und E-Mail-Alarme
-freigegeben. Der Hauptcheck in Healthchecks.io ist aktiv; der erste automatische
-Cron-Lauf und sein Erfolgs-Heartbeat wurden bestätigt. Alarm-/Entwarnungsmails
-und der Ausbleibealarm wurden im Betreiberpostfach empfangen. Der Vier-Minuten-
-Abbruch wurde mit isolierten, verzögerten Testantworten auf Cloudflare geprüft.
-Node bleibt eine vorbereitete, deaktivierte Alternative.
+**Status on 2026-10-13: Cloudflare monitoring enabled and verified live.**
+The operator authorized regular checks every 15 minutes and email alerts.
+The main Healthchecks.io check is active; the first automatic cron run and its
+success heartbeat were confirmed. Alert/recovery emails and the missing-heartbeat
+alert were received in the operator's inbox. The four-minute abort was verified
+with isolated delayed test responses on Cloudflare.
+Node remains a prepared, disabled alternative.
 
-Der gemeinsame Kern in `scripts/lib/backup-monitor-core.mjs` prüft
-die Workflows `Backup: Supabase Auth` und `Backup: Platform` getrennt über
-GitHub-Metadaten. Die Dateipfade `auth-backup.yml` und `platform-backup.yml`
-identifizieren die Workflows; gespeicherte Alarm-/Vorfallbezeichnungen bleiben
-`Supabase Auth Backup` und `Platform Backup`. Anzeigenamen sind von diesen
-stabilen Monitoridentitäten getrennt.
-Prüfung, Alarmgrenzen, Versand, Vorfallgenerationen und Wiederholungsschlüssel
-werden für beide Betriebswege nur einmal gepflegt:
+The shared core in `scripts/lib/backup-monitor-core.mjs` checks the
+`Backup: Supabase Auth` and `Backup: Platform` workflows separately through
+GitHub metadata. The file paths `auth-backup.yml` and `platform-backup.yml`
+identify the workflows; stored alert/incident labels remain
+`Supabase Auth Backup` and `Platform Backup`. Display names are separate from
+these stable monitor identities.
+Checks, alert thresholds, delivery, incident generations and retry keys are
+maintained once for both operating modes:
 
-| Betriebsweg | Zeitplan und Zustand                                                                                                                                              |
-| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Cloudflare  | Eigener Worker `riparim-backup-monitor`, aktiver 15-Minuten-Cron und ein SQLite-backed Durable Object je Repository. Website und D1/R2-Bindings bleiben getrennt. |
-| Node        | Bestehender Aufruf `scripts/monitor-backups.mjs`, später Linux/systemd-Timer und private JSON-Datei. Keine zusätzlichen npm-Pakete zur Ausführung.                |
+| Operating mode | Schedule and state                                                                                                                                                |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Cloudflare     | Dedicated `riparim-backup-monitor` Worker, active 15-minute cron and one SQLite-backed Durable Object per repository. Website and D1/R2 bindings remain separate. |
+| Node           | Existing `scripts/monitor-backups.mjs` entry point, later a Linux/systemd timer and private JSON file. No additional npm packages required to run it.             |
 
-Cloudflare ist aktiv; die Node-Vorlage bleibt standardmäßig deaktiviert. Ein separater
-Healthchecks.io-Check überwacht das Ausbleiben des Monitors, auch bei einem
-Cloudflare- oder Hostausfall. Ein weiterer GitHub-Zeitplan wäre dafür nicht
-ausreichend. Der Zustand lässt sich im pausierten Betrieb zwischen beiden
-Varianten übertragen; Details stehen unten.
+Cloudflare is active; the Node template remains disabled by default. A separate
+Healthchecks.io check monitors missing monitor runs, including Cloudflare or
+host outages. Another GitHub schedule would not suffice for this purpose.
+State can be transferred between both variants while paused; details follow below.
 
-## Erfolg, Alarmgrenzen und Zustellung
+## Success, alert thresholds and delivery
 
-Gesund ist nur ein abgeschlossener erfolgreicher Main-Lauf mit dem exakten,
-nicht leeren, veröffentlichten und nicht abgelaufenen Artefakt des aktuellen
-Versuchs: `supabase-auth-<run_id>-<run_attempt>` beziehungsweise
-`platform-<run_id>-<run_attempt>`. Die Veröffentlichungszeit muss zwischen Start
-und Abschluss des Laufs liegen. Der Monitor lädt weder Archive noch Inhalte
-herunter und besitzt keine Entschlüsselungsschlüssel.
+Only a completed successful main run with the exact, nonempty, published,
+unexpired artifact of the current attempt is healthy:
+`supabase-auth-<run_id>-<run_attempt>` or `platform-<run_id>-<run_attempt>`.
+The publication time must fall between the run's start and completion.
+The monitor downloads neither archives nor content and holds no decryption keys.
 
-| Zustand                                                                                 | Grenze und Begründung                                                                                                                                                                                                                           |
-| --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Fehler, Abbruch, Timeout, Überspringen, ungültiges Artefakt oder deaktivierter Workflow | Alarm beim nächsten Aufruf, normalerweise binnen 15 Minuten. Beide Jobs bleiben unabhängig.                                                                                                                                                     |
-| Kein gültiges Backup                                                                    | Ab 36 Stunden seit dem letzten verifizierten Abschluss: täglicher Abstand von 24 Stunden plus zwölf Stunden Spielraum für GitHub-Verzögerungen. Ohne verifizierte Sicherung sofort alarmieren.                                                  |
-| Lauf hängt                                                                              | Ab 30 Minuten seit Laufstart. Beide Backup-Jobs haben ein Zehn-Minuten-Limit; die zusätzlichen 20 Minuten tolerieren verzögerte Statusmeldungen.                                                                                                |
-| Lauf wartet                                                                             | Ab zwei Stunden seit Erstellung des aktuellen Versuchs. Fehlt ein eindeutiger Zeitwert einer Wiederholung, gilt ihre erste dauerhaft gespeicherte Beobachtung. Das gibt verzögertem Runnerstart mehr Spielraum als der eigentlichen Ausführung. |
-| Unveränderter Vorfall                                                                   | Höchstens eine Erinnerung pro Job und 24 Stunden. Eine neue gültige Folgesicherung ermöglicht eine Entwarnung.                                                                                                                                  |
-| Monitor oder Versand nicht verifiziert                                                  | Kein Erfolgs-Heartbeat; Fehlerstatus und Exitcode 1. Unbekannte Zustellung zählt nicht als Erfolg.                                                                                                                                              |
+| State                                                                       | Threshold and rationale                                                                                                                                                                                                     |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Failure, cancellation, timeout, skip, invalid artifact or disabled workflow | Alert on the next invocation, normally within 15 minutes. Both jobs remain independent.                                                                                                                                     |
+| No valid backup                                                             | From 36 hours after the last verified completion: a daily interval of 24 hours plus twelve hours of allowance for GitHub delays. Alert immediately if no backup is verified.                                                |
+| Stuck run                                                                   | From 30 minutes after run start. Both backup jobs have a ten-minute limit; the extra 20 minutes tolerate delayed status reports.                                                                                            |
+| Queued run                                                                  | From two hours after creation of the current attempt. If a retry lacks an unambiguous timestamp, its first persistently stored observation applies. This gives delayed runner startup more allowance than actual execution. |
+| Unchanged incident                                                          | At most one reminder per job per 24 hours. A new valid subsequent backup permits a recovery notice.                                                                                                                         |
+| Monitor or delivery unverified                                              | No success heartbeat; error status and exit code 1. Unknown delivery does not count as success.                                                                                                                             |
 
-Die E-Mail enthält ausschließlich Jobname, Status, Zeitpunkt der letzten
-verifizierten Sicherung und einen festen GitHub-Lauf- oder Workflowlink. Keine
-Kontodaten, Tokens, Dokumente, Archivbytes oder Schlüssel werden versendet.
-Resend-Annahme allein zählt nicht als Zustellung: `delivered`, `opened` oder
-`clicked` bestätigen die Übergabe; andere Zustände bleiben offen. Auch dieser
-Providerbeleg ersetzt nicht den tatsächlichen Empfangstest im Betreiberpostfach.
-[Resend-Zustellstatus](https://resend.com/docs/api-reference/emails/retrieve-email).
+The email contains only the job name, status, last verified backup time and a
+fixed GitHub run or workflow link. No account data, tokens, documents, archive
+bytes or keys are sent. Resend acceptance alone does not count as delivery:
+`delivered`, `opened` or `clicked` confirm handoff; other states remain unresolved.
+Even this provider receipt does not replace an actual receipt test in the
+operator's inbox.
+[Resend delivery status](https://resend.com/docs/api-reference/emails/retrieve-email).
 
-Ein gesunder Heartbeat bestätigt die Funktionsfähigkeit von Prüfung, Zustand und
-erforderlichem Versand. Er bedeutet nicht, dass beide Backups gesund sind: Ein
-erfolgreich gemeldeter Backupfehler darf den Monitor weiterhin als funktionsfähig
-ausweisen. Der JSON-Ausgang trennt `monitorHealthy` und `backupsHealthy`.
-API-, Kontingent-, Zustands- und Versandfehler können keinen gesunden
-Monitorstatus erzeugen. Healthchecks erhält einen leeren POST beziehungsweise
-`/fail`, ohne Job- oder Kontoinhalte.
+A healthy heartbeat confirms that checking, state and required delivery work.
+It does not mean both backups are healthy: a successfully reported backup failure
+may still show the monitor as functioning. JSON output separates `monitorHealthy`
+and `backupsHealthy`. API, quota, state and delivery errors cannot produce a healthy
+monitor status. Healthchecks receives an empty POST or `/fail`, without job or
+account content.
 [Pinging API](https://healthchecks.io/docs/http_api/).
 
-Die GitHub-Abfrage berücksichtigt die letzten 32 Tage erstellter Läufe. Das
-umfasst GitHubs 30-Tage-Fenster für Wiederholungen zuzüglich der 36-Stunden-Grenze
-für frische Sicherungen. Sie paginiert bis 500 Läufe und 500 Artefakte pro Lauf
-und prüft höchstens 20 erfolgreiche Kandidaten. Wartende Wiederholungen verwenden
-zusätzlich die Metadaten ihres aktuellen Versuchs, höchstens 20 Abfragen je Job.
-Die ursprüngliche Erstellung des übergeordneten Laufs bestimmt nicht deren
-Wartefrist. Ein fehlender aktueller Zeitwert erhält eine dauerhaft gespeicherte
-Beobachtungsfrist; ebenso weitere Wiederholungen oberhalb der 20 Abfragen.
-Spätere Statusupdates und Neustarts verschieben diese Frist nicht. Je Job sind
-höchstens 500 Beobachtungseinträge erlaubt; nicht mehr wartende Versuche werden
-entfernt. [Metadaten eines Versuchs](https://docs.github.com/en/rest/actions/workflow-runs#get-a-workflow-run-attempt).
-API-Ausfälle bleiben Prüfungsfehler. Überschrittene Listen-/Kandidatengrenzen und
-unvollständige oder ungültige Antworten sind Prüfungsfehler. Eine neue Wiederholung
-eines älteren Laufs wird anhand ihres aktuellen Versuchs und Artefakts geprüft.
-[GitHub-Wiederholungsfenster](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs).
-[Läufe](https://docs.github.com/en/rest/actions/workflow-runs),
-[Artefakte](https://docs.github.com/en/rest/actions/artifacts).
+The GitHub query considers runs created in the last 32 days. This covers GitHub's
+30-day retry window plus the 36-hour fresh-backup threshold. It paginates up to
+500 runs and 500 artifacts per run and checks at most 20 successful candidates.
+Queued retries also use metadata for their current attempt, at most 20 queries
+per job. The original parent run's creation time does not determine their queue
+deadline. A missing current timestamp receives a persistently stored observation
+deadline, as do further retries beyond the 20 queries. Later status updates and
+restarts do not shift this deadline. At most 500 observation entries are allowed
+per job; attempts no longer queued are removed.
+[Attempt metadata](https://docs.github.com/en/rest/actions/workflow-runs#get-a-workflow-run-attempt).
+API outages remain verification errors. Exceeded list/candidate limits and
+incomplete or invalid responses are verification errors. A new retry of an older
+run is checked using its current attempt and artifact.
+[GitHub retry window](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs).
+[Runs](https://docs.github.com/en/rest/actions/workflow-runs),
+[artifacts](https://docs.github.com/en/rest/actions/artifacts).
 
-## Kosten und benötigte Zugänge
+## Costs and required access
 
-Vor Aktivierung aktuelle Kontingente und deren vorhandenen Verbrauch erneut
-prüfen. Keine Paid-Pläne oder kostenpflichtigen Overages einschalten.
+Before activation, recheck current allowances and existing usage.
+Do not enable paid plans or paid overages.
 
-- **Ausführung:** Keine zusätzliche Hostgebühr nur bei Nutzung eines bereits
-  vorhandenen ständig laufenden Hosts. Ein solcher Host ist für Riparim noch
-  nicht bestätigt. Neue Hardware, ein VPS und dessen Betrieb sind nicht durch
-  diese Implementierung als kostenlos nachgewiesen.
-- **Cloudflare:** Der separate Worker kann den Linux-Host ersetzen. Erwartet sind
-  96 geplante Prüfungen täglich. SQLite-backed Durable Objects stehen im Free-Tarif
-  bereit; Kontoverbrauch, Speicher, Laufzeit und tatsächliche CPU-Werte vor
-  Aktivierung prüfen. Der Prüfkern läuft im Durable Object, der vorgeschaltete
-  Worker übernimmt Auslösung und geschützten Zugriff. Die Free-Grenze von 50
-  externen Subrequests gilt weiterhin: Der Adapter begrenzt einen Prüflauf auf
-  45 externe Aufrufe einschließlich Versand und Heartbeat und reserviert einen
-  Aufruf für die Fehlermeldung. Erreichte Grenzen bleiben Fehler, niemals ein
-  gesunder Status. Node behält seine größere Abfragegrenze.
-  Externe Prüfungen haben eine Vier-Minuten-Frist und einen separat begrenzten
-  Fehler-Heartbeat. Gleichzeitige Prüfungen werden zusammengeführt; die interne
-  Operationswarteschlange ist begrenzt.
-  [Workers-Limits](https://developers.cloudflare.com/workers/platform/limits/#subrequests),
-  [Durable-Objects-Kontingente](https://developers.cloudflare.com/durable-objects/platform/pricing/).
-- **GitHub:** Im Normalfall sechs Metadatenabfragen pro Aufruf, also 24 pro Stunde.
-  Öffentlich unauthentifiziert gelten 60 pro Stunde und IP; andere Nutzung und
-  Pagination können das überschreiten. Optional einen Fine-grained Token nur für
-  `ramiz4/riparim`, ausschließlich **Actions: Read**, einsetzen; üblicherweise
-  5.000 Requests pro Stunde. Die implementierte Obergrenze liegt bei 1.008
-  Metadatenrequests pro Stunde bei vier Aufrufen. Bei Limits bleibt der Monitor
-  fehlerhaft. [GitHub-API-Limits](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api).
-- **Resend Free:** 3.000 Nachrichten pro Monat, 100 pro Tag, gemeinsam mit den
-  bestehenden App-/Authmails. Ein unveränderter Ausfall beider Jobs erzeugt etwa
-  zwei Nachrichten täglich plus spätere Entwarnungen; häufig wechselnde Vorfälle
-  und Tests erhöhen das. Die vorhandene bestätigte Domain verwenden. Ein
-  Kontingentfehler blockiert die bestätigte Zustellung und löst keinen
-  Erfolgs-Heartbeat aus. [Tarif](https://resend.com/pricing).
-  API-Aufrufe werden mit mindestens 600 ms Abstand ausgeführt; ein geteiltes
-  Teamlimit kann dennoch greifen. [API-Limits](https://resend.com/docs/api-reference/usage-limits).
-- **Healthchecks.io Hobbyist:** Ein Check von 20 kostenlosen Checks; 100 rollierende
-  Logeinträge je Check. 96 Aufrufe täglich benötigen keinen Paid-Tarif; die
-  begrenzte Historie umfasst ungefähr einen Tag. Bei belegtem Checkkontingent
-  nicht automatisch aufrüsten. E-Mail-Integration und begrenzte Erinnerungen
-  konfigurieren und selbst testen. [Tarif und Logaufbewahrung](https://healthchecks.io/pricing/).
+- **Execution:** No additional host fee only when using an existing host that
+  runs continuously. Such a host has not yet been confirmed for Riparim.
+  This implementation does not establish that new hardware, a VPS or operating
+  it is free.
+- **Cloudflare:** The separate Worker can replace the Linux host. Expected usage
+  is 96 scheduled checks daily. SQLite-backed Durable Objects are available on
+  the Free plan; check account usage, storage, runtime and actual CPU values
+  before activation. The checking core runs in the Durable Object; the fronting
+  Worker handles triggering and protected access. The Free limit of 50 external
+  subrequests still applies: the adapter limits each check to 45 external calls,
+  including delivery and heartbeat, and reserves one call for reporting failure.
+  Reached limits remain errors, never a healthy status. Node retains its higher
+  query limit. External checks have a four-minute deadline and a separately
+  bounded failure heartbeat. Concurrent checks are coalesced; the internal
+  operations queue is bounded.
+  [Workers limits](https://developers.cloudflare.com/workers/platform/limits/#subrequests),
+  [Durable Object allowances](https://developers.cloudflare.com/durable-objects/platform/pricing/).
+- **GitHub:** Normally six metadata queries per invocation, or 24 per hour.
+  Unauthenticated public access permits 60 per hour per IP; other usage and
+  pagination may exceed that. Optionally use a fine-grained token for
+  `ramiz4/riparim` only, exclusively **Actions: Read**; usually 5,000 requests
+  per hour. The implemented maximum is 1,008 metadata requests per hour across
+  four invocations. At the limits, the monitor remains in an error state.
+  [GitHub API limits](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api).
+- **Resend Free:** 3,000 messages per month, 100 per day, shared with existing
+  app/Auth emails. An unchanged outage of both jobs produces about two messages
+  daily plus later recovery notices; frequent incident changes and tests increase
+  this. Use the existing verified domain. A quota error blocks confirmed delivery
+  and produces no success heartbeat. [Pricing](https://resend.com/pricing).
+  API calls are spaced at least 600 ms apart; a shared team limit may still apply.
+  [API limits](https://resend.com/docs/api-reference/usage-limits).
+- **Healthchecks.io Hobbyist:** One of 20 free checks; 100 rolling log entries
+  per check. 96 daily calls require no paid plan; the limited history covers
+  approximately one day. Do not upgrade automatically if the check allowance
+  is occupied. Configure and test email integration and bounded reminders.
+  [Pricing and log retention](https://healthchecks.io/pricing/).
 
-Ein separater Resend-Schlüssel muss Senden und Abrufen des Zustellstatus erlauben;
-ein `sending_access`-Schlüssel genügt nicht. Das erforderliche `full_access`
-gewährt weitergehenden Resend-Zugriff und gehört ausschließlich in die private
-Monitorlaufzeit: Node-Envdatei oder Worker-Secret. Der Monitor braucht keine
-Supabase-, D1-, R2- oder Git-Schreibrechte.
-Neue Schlüssel und die geheime Heartbeat-URL im bestehenden
-1Password-Projekteintrag `mkp7xa42clfbreiv2q3b3nrq5y` aufbewahren; niemals
-Entschlüsselungsschlüssel an den Monitor übergeben.
+A separate Resend key must permit both sending and retrieving delivery status;
+a `sending_access` key is insufficient. The required `full_access` grants broader
+Resend access and belongs only in the private monitor runtime: the Node env file
+or a Worker secret. The monitor needs no Supabase, D1, R2 or Git write access.
+Store new keys and the secret heartbeat URL in the existing 1Password project
+entry `mkp7xa42clfbreiv2q3b3nrq5y`; never give the monitor decryption keys.
 
-## Betrieb, Updates und alternative Einrichtung
+## Operation, updates and alternative setup
 
-### Cloudflare: aktive Deployments und Updates
+### Cloudflare: active deployments and updates
 
-`wrangler.backup-monitor.jsonc` ist die maßgebliche Produktionskonfiguration
-für den separaten Worker. Sie enthält `BACKUP_MONITOR_ENABLED=true`,
-`BACKUP_MONITOR_PAUSED=false`, `BACKUP_MONITOR_SCHEDULE=*/15 * * * *` und genau
-einen gleichlautenden Cron-Trigger. Ein gewöhnliches Deployment mit dieser
-Konfiguration erhält damit die freigegebene Überwachung. Zusätzliche
-Aktivierungsflags sind nicht mehr nötig. Das Website-Deployment verwendet eine
-andere Konfiguration und berührt diesen Worker nicht. Der Monitor besitzt
-weiterhin keinen Zugriff auf App-D1/R2.
+`wrangler.backup-monitor.jsonc` is the authoritative production configuration
+for the separate Worker. It contains `BACKUP_MONITOR_ENABLED=true`,
+`BACKUP_MONITOR_PAUSED=false`, `BACKUP_MONITOR_SCHEDULE=*/15 * * * *` and exactly
+one matching cron trigger. An ordinary deployment with this configuration
+therefore preserves the authorized monitoring. Additional activation flags are
+no longer needed. Website deployment uses a different configuration and does not
+affect this Worker. The monitor still has no access to app D1/R2.
 
-Die Konfiguration verwendet `compatibility_date=2026-05-22`, das neueste Datum,
-das der gelockte Wrangler-/workerd-Stand tatsächlich lokal unterstützt. Ein
-Datums- oder Werkzeugupdate erhält eigene Laufzeit- und Typprüfungen.
-`npm run backups:worker:check` vergleicht die separat generierten Bindingtypen,
-prüft TypeScript und führt einen lokalen Wrangler-Dry-Run aus. Die reguläre
-Suite verwendet die tatsächlichen Variablen und Cron-Trigger dieser
-Konfiguration im echten workerd und verlangt einen erfolgreichen automatischen
-Prüflauf. Unpassende Zeitpläne und ausdrücklich pausierte Laufzeiten führen
-weiterhin keine Provideraufrufe aus.
+The configuration uses `compatibility_date=2026-05-22`, the latest date actually
+supported locally by the locked Wrangler/workerd versions. A date or tool update
+requires its own runtime and type checks. `npm run backups:worker:check` compares
+the separately generated binding types, checks TypeScript and performs a local
+Wrangler dry run. The regular suite uses this configuration's actual variables
+and cron triggers in real workerd and requires a successful automatic check.
+Mismatched schedules and explicitly paused runtimes still make no provider calls.
 
-Für spätere Monitor-Updates:
+For later monitor updates:
 
-1. Ausschließlich den exakten Quellcheckout eines vollständig veröffentlichten,
-   geprüften GitHub-Main-Releases verwenden; Tag und Commit prüfen. Der Monitor
-   liegt im Release-Quellcheckout, nicht im Website-/Node-Apparchiv. Gelockte
-   Werkzeuge installieren und `npm run backups:worker:check` ausführen.
-2. Bestehenden Worker, dessen SQLite-Namespace, aktive Cron-Einstellung und den
-   Healthchecks-Hauptcheck prüfen. Healthchecks behält 15 Minuten Periode,
-   15 Minuten Grace und die bestätigte Betreiber-E-Mail-Integration. Kein neuer
-   Worker, Namespace oder Check ist für ein Update erforderlich.
-3. Ein Deployment ohne neue Geheimnisse bewahrt bestehende Worker-Secrets:
+1. Use only the exact source checkout of a fully published, verified GitHub main
+   release; check tag and commit. The monitor is in the release source checkout,
+   not in the website/Node app archive. Install locked tools and run
+   `npm run backups:worker:check`.
+2. Check the existing Worker, its SQLite namespace, active cron setting and main
+   Healthchecks check. Healthchecks retains a 15-minute period, 15-minute grace
+   and the confirmed operator email integration. An update needs no new Worker,
+   namespace or check.
+3. A deployment without new secrets preserves existing Worker secrets:
 
    ```sh
    node node_modules/wrangler/bin/wrangler.js deploy \
      --config wrangler.backup-monitor.jsonc
    ```
 
-   Falls Geheimnisse ausdrücklich aktualisiert werden, nur Monitorwerte aus
-   1Password in einer privaten JSON-Datei (`0600`) bereitstellen und zusätzlich
-   `--secrets-file /private/riparim-monitor-secrets.json` übergeben. Danach die
-   Datei entfernen. Werte niemals als CLI-Argumente oder in Logs ausgeben.
-   Der bestehende Fine-grained GitHub-Token mit `Actions: Read` bleibt erhalten;
-   der anonyme Zugriff wurde beim Live-Test von GitHub verweigert.
+   If secrets are explicitly updated, provide only monitor values from 1Password
+   in a private JSON file (`0600`) and additionally pass
+   `--secrets-file /private/riparim-monitor-secrets.json`. Remove the file afterward.
+   Never expose values as CLI arguments or in logs. The existing fine-grained
+   GitHub token with `Actions: Read` is retained; GitHub rejected anonymous access
+   during the live test.
 
-4. Nach dem Deployment die drei aktiven Variablen, den einzigen
-   `*/15 * * * *`-Trigger und den unveränderten SQLite-Namespace erneut lesen.
-   Einen geschützten `POST /run`, den nächsten echten Cron-Lauf und dessen
-   Healthchecks-Heartbeat prüfen. Ein Dry-Run allein bestätigt weder Remote-
-   Berechtigungen noch Zustellung. Die Website und ihre Bindings bleiben getrennt.
+4. After deployment, reread the three active variables, the sole
+   `*/15 * * * *` trigger and unchanged SQLite namespace. Verify a protected
+   `POST /run`, the next actual cron run and its Healthchecks heartbeat.
+   A dry run alone confirms neither remote permissions nor delivery.
+   The website and its bindings remain separate.
 
-### Cloudflare gezielt pausieren
+### Pause Cloudflare explicitly
 
-Eine Pausierung ist eine ausdrückliche Betriebsänderung: zuerst den
-Healthchecks-Hauptcheck pausieren, dann die Variablen auf
-`BACKUP_MONITOR_ENABLED=false`, `BACKUP_MONITOR_PAUSED=true`, einen leeren
-`BACKUP_MONITOR_SCHEDULE` und die Cron-Liste auf `[]` setzen. Der SQLite-Zustand
-bleibt erhalten. Dieselbe Änderung muss vor weiteren Deployments in der
-maßgeblichen Repository-Konfiguration über einen geprüften PR und Main-Release
-festgehalten werden; sonst würde der nächste aktive Release die Überwachung
-wieder aktivieren. Eine spätere Wiederaufnahme braucht ebenfalls einen
-Aktivierungsauftrag und einen fortgesetzten Healthchecks-Hauptcheck.
+Pausing is an explicit operational change: first pause the main Healthchecks
+check, then set `BACKUP_MONITOR_ENABLED=false`, `BACKUP_MONITOR_PAUSED=true`,
+an empty `BACKUP_MONITOR_SCHEDULE` and the cron list to `[]`. SQLite state is
+preserved. The same change must be recorded in the authoritative repository
+configuration through a reviewed PR and main release before further deployments;
+otherwise the next active release would reenable monitoring. Later resumption
+also requires an activation authorization and a resumed main Healthchecks check.
 
 ### Node
 
-Verantwortlich ist der Riparim-Betreiber. Diese Schritte sind vorbereitet und
-werden erst nach einem eigenen Aktivierungsauftrag ausgeführt:
+The Riparim operator is responsible. These steps are prepared and will be
+performed only after a separate activation authorization:
 
-1. Einen unabhängigen, dauerhaft laufenden Host und das Betreiberpostfach
-   festlegen; Node gemäß `package.json` bereitstellen. Ein schlafender Laptop
-   eignet sich nicht als täglicher Monitor. Kontingente und E-Mail-Absender prüfen.
-2. Ausschließlich den zu einem vollständig veröffentlichten, geprüften GitHub
-   Release gehörenden Main-Commit schreibgeschützt unter
-   `/opt/riparim-monitor/current` bereitstellen. Release-Tag und Commit prüfen;
-   keinen Featurebranch oder offenen PR installieren. Der Monitor ist in diesem
-   Quellcheckout enthalten, nicht im Anwendungsarchiv. Updates verwenden ebenso
-   einen geprüften Main-Release; der private Zustand bleibt außerhalb des Checkouts.
-3. Einen Healthchecks.io-Hobbyist-Check für **Riparim Backup Monitor** mit
-   15 Minuten Periode und 15 Minuten Grace einrichten. Seine eigene
-   E-Mail-Integration an das Betreiberpostfach verifizieren, einschließlich
-   Ausbleibealarm, Entwarnung und begrenzter Erinnerungen. Dieser zweite
-   Versandweg muss auch bei ausgefallenem Resend-API-Zugang funktionieren.
-4. Einen eigenen unprivilegierten Benutzer `riparim-backup-monitor` einrichten.
-   [Env-Vorlage](examples/backup-monitor.env.example) geschützt nach
-   `/etc/riparim-backup-monitor.env` übernehmen (`root`, Modus `0600`). Schlüssel
-   aus 1Password einsetzen, ohne sie in Befehlsargumenten, Shellhistorie oder Logs
-   auszugeben. `BACKUP_MONITOR_ENABLED=false` und `BACKUP_MONITOR_PAUSED=true`
-   zunächst beibehalten. Alte Node-Konfigurationen ohne Pausevariable bleiben
-   kompatibel.
-5. [Service](examples/riparim-backup-monitor.service) und
-   [Timer](examples/riparim-backup-monitor.timer) nach Prüfung der Hostpfade
-   bereitstellen; zunächst nicht aktivieren. Das Stateverzeichnis hat Modus
-   `0700`, die Zustandsdatei `0600`. Es enthält nur technische Status-, Zeit- und
-   Versandbelege und darf nicht mit einem anderen Monitorhost geteilt werden.
-6. Die ungefährliche Empfangsabnahme durchführen: mit synthetischen Main-Läufen
-   und künstlichen Artefaktmetadaten `runBackupMonitor` an den realen E-Mail-
-   Adapter anbinden. Pro Job Fehler, fehlenden/deaktivierten Lauf, ungültiges
-   Artefakt, tolerierte Verzögerung, begrenzte Wiederholung und neue erfolgreiche
-   Folgesicherung prüfen. Reale Backupjobs oder deren Archive dabei nicht ändern.
-   Zustellbeleg **und** tatsächlichen Eingang der Alarm-/Entwarnungsmails prüfen.
-   Die isolierten Fixtures in `tests/backup-monitor.test.mjs` zeigen den Vertrag;
-   dieser Test selbst verwendet ausschließlich simulierte Transportadapter.
-7. Zusätzlich einen ungefährlichen falschen Versandzugang und einen unterbrochenen
-   Heartbeat simulieren. Es darf kein gesunder Monitorstatus entstehen;
-   der externe E-Mail-Ausbleibealarm muss ankommen. Healthchecks-/GitHub-/Resend-
-   Nichterreichbarkeit als unbekannten Zustand behandeln, nicht als Backup-Erfolg.
-   Auch der externe Check und das Betreiberpostfach brauchen wiederkehrende
-   manuelle Empfangsprüfungen; ein vollständiger Ausfall aller Alarmwege bleibt
-   eine ausdrücklich dokumentierte Betriebsgrenze.
-8. Erst nach dokumentierter Abnahme `BACKUP_MONITOR_ENABLED=true` und
-   `BACKUP_MONITOR_PAUSED=false` setzen und
-   den Timer aktivieren. Er läuft außerhalb von GitHub; ein deaktivierter
-   Backup-Zeitplan bleibt erkennbar. Aktuellen Status und nächsten Timertermin
-   kontrollieren. Die reine Installation und der folgende Standardaufruf
-   aktivieren nichts:
+1. Select an independent, continuously running host and the operator inbox;
+   provide Node according to `package.json`. A sleeping laptop is unsuitable
+   as a daily monitor. Check allowances and the email sender.
+2. Deploy only the main commit belonging to a fully published, verified GitHub
+   release, read-only under `/opt/riparim-monitor/current`. Check release tag and
+   commit; install no feature branch or open PR. The monitor is included in this
+   source checkout, not in the application archive. Updates also use a verified
+   main release; private state remains outside the checkout.
+3. Set up a Healthchecks.io Hobbyist check for **Riparim Backup Monitor** with a
+   15-minute period and 15-minute grace. Verify its own email integration with
+   the operator inbox, including missing-heartbeat alerts, recovery notices and
+   bounded reminders. This second delivery path must work even when Resend API
+   access is unavailable.
+4. Create a dedicated unprivileged `riparim-backup-monitor` user. Copy the
+   [env template](examples/backup-monitor.env.example) securely to
+   `/etc/riparim-backup-monitor.env` (`root`, mode `0600`). Insert keys from
+   1Password without exposing them in command arguments, shell history or logs.
+   Initially retain `BACKUP_MONITOR_ENABLED=false` and
+   `BACKUP_MONITOR_PAUSED=true`. Old Node configurations without a pause variable
+   remain compatible.
+5. Deploy the [service](examples/riparim-backup-monitor.service) and
+   [timer](examples/riparim-backup-monitor.timer) after checking host paths;
+   do not activate them initially. The state directory uses mode `0700`, the
+   state file `0600`. It contains only technical status, time and delivery
+   receipts and must not be shared with another monitor host.
+6. Perform the harmless receipt acceptance test: connect `runBackupMonitor`
+   to the real email adapter with synthetic main runs and artificial artifact
+   metadata. For each job, check failure, a missing/disabled run, an invalid
+   artifact, tolerated delay, bounded retries and a new successful subsequent
+   backup. Do not alter real backup jobs or their archives. Check the delivery
+   receipt **and** actual receipt of alert/recovery emails. The isolated fixtures
+   in `tests/backup-monitor.test.mjs` demonstrate the contract; that test itself
+   uses only simulated transport adapters.
+7. Also simulate harmless invalid delivery credentials and an interrupted
+   heartbeat. No healthy monitor status may result; the external missing-heartbeat
+   email alert must arrive. Treat Healthchecks/GitHub/Resend unavailability as
+   unknown state, not backup success. The external check and operator inbox also
+   require recurring manual receipt checks; complete failure of all alert paths
+   remains an explicitly documented operational limitation.
+8. Only after documented acceptance, set `BACKUP_MONITOR_ENABLED=true` and
+   `BACKUP_MONITOR_PAUSED=false` and activate the timer. It runs outside GitHub;
+   a disabled backup schedule remains detectable. Check current status and the
+   next timer invocation. Installation alone and the following default invocation
+   activate nothing:
 
    ```sh
    npm run backups:monitor
    # {"status":"inactive"}
    ```
 
-## Zustand zwischen Cloudflare und Node übertragen
+## Transfer state between Cloudflare and Node
 
-`scripts/lib/backup-monitor-state.mjs` erzeugt ein gemeinsames JSON-Format mit
-`format`, `version`, `repository` und `state`, begrenzt auf 128 KiB. Unbekannte
-Felder, fremde Repositories, inkompatible Versionen, ungültige oder zukünftige
-Zeitwerte werden vor jeder Übernahme abgewiesen. Vorfälle, Generationen,
-Warteschlangenbeobachtungen und ausstehende Nachricht mit Payload, Provider-ID
-und Wiederholungsschlüssel bleiben erhalten. Zugangsdaten werden nicht exportiert.
+`scripts/lib/backup-monitor-state.mjs` produces a shared JSON format with
+`format`, `version`, `repository` and `state`, limited to 128 KiB. Unknown fields,
+other repositories, incompatible versions, invalid or future timestamps are
+rejected before any import. Incidents, generations, queue observations and the
+pending message with payload, provider ID and retry key are preserved.
+Credentials are not exported.
 
-Zuerst den Quellmonitor pausieren, laufende Prüfungen abwarten und auch das Ziel
-deaktiviert/pausiert halten. Absender, Empfänger und Resend-Konto dürfen bei
-offenen Nachrichten nicht wechseln. Beide Uhren müssen stimmen. Ein vorhandener
-Zielzustand wird standardmäßig nicht überschrieben. `--replace` beziehungsweise
-`X-Monitor-Replace: true` ist nur nach privater Sicherung und bewusstem Abgleich
-zulässig. Nie beide Betriebswege gleichzeitig einschalten: Das wäre kein Failover
-und könnte neue Vorfälle doppelt versenden.
+First pause the source monitor, wait for running checks and keep the target
+disabled/paused too. Sender, recipient and Resend account must not change while
+messages are pending. Both clocks must be correct. Existing target state is not
+overwritten by default. `--replace` or `X-Monitor-Replace: true` is permitted only
+after a private backup and deliberate comparison. Never enable both operating
+modes simultaneously: that would not be failover and could send new incidents twice.
 
-Node-Übertragungen müssen als derselbe Betriebssystembenutzer wie der Dienst
-laufen, damit der importierte Zustand für ihn lesbar bleibt. Sie brauchen nur
-die nicht geheimen Pausenvorgaben und den Zustandsdateipfad, keine Envdatei mit
-Providerzugängen. Die Befehle verwenden die bestehende exklusive Lockdatei;
-Dateien (`0600`) und Elternverzeichnis (`0700`) bleiben privat. Ein von Cloudflare
-empfangenes Transferfile vorher geschützt diesem Benutzer zugänglich machen.
-Es gibt keine Provider-/Heartbeat-Aufrufe:
+Node transfers must run as the same operating system user as the service so
+that imported state remains readable to it. They need only the nonsecret pause
+settings and state file path, not an env file containing provider credentials.
+The commands use the existing exclusive lock file; files (`0600`) and the parent
+directory (`0700`) remain private. First securely make a transfer file received
+from Cloudflare accessible to this user. There are no provider/heartbeat calls:
 
 ```sh
 sudo -u riparim-backup-monitor env \
@@ -293,14 +275,14 @@ sudo -u riparim-backup-monitor env \
   BACKUP_MONITOR_STATE_PATH=/var/lib/riparim-backup-monitor/state.json \
   /usr/bin/node /opt/riparim-monitor/current/scripts/monitor-backups.mjs \
   import-state /var/lib/riparim-backup-monitor/transfer/state.json
-# Nur nach Sicherung eines vorhandenen Zielzustands: --replace
+# Only after backing up existing target state: --replace
 ```
 
-Cloudflare bietet auf der ausgegebenen Worker-URL `GET /state` und `PUT /state`.
-Beide verlangen `Authorization: Bearer …` mit dem privaten Transfer-Token und
-denselben pausierten Zustand. Aktive Aufrufe werden mit 409 abgewiesen. Der
-Token gehört in eine private Curl-Konfigurationsdatei (`0600`), nicht in
-Befehlsargumente oder die URL. Beispiel mit nicht geheimem `MONITOR_URL`:
+Cloudflare offers `GET /state` and `PUT /state` on the reported Worker URL.
+Both require `Authorization: Bearer …` with the private transfer token and the
+same paused state. Active requests are rejected with 409. The token belongs in
+a private Curl configuration file (`0600`), not in command arguments or the URL.
+Example with nonsecret `MONITOR_URL`:
 
 ```sh
 umask 077
@@ -311,44 +293,39 @@ curl --fail --config /private/monitor-transfer.curl \
   "$MONITOR_URL/state"
 ```
 
-Bei einem vorhandenen Zielzustand kommt nur nach Sicherung der nicht geheime
-Header `X-Monitor-Replace: true` hinzu. Exportantworten werden mit
-`Cache-Control: no-store` ausgeliefert.
-Nach der Übernahme erst den Zielzustand und ausstehende Zustellbelege prüfen,
-dann ausschließlich das Ziel aktivieren. Die Quelle bleibt pausiert. Für den
-Rückweg dieselben Schritte verwenden. Entschlüsselung oder Rückübernahme von
-Supabase-/D1-/R2-Daten ist nicht Teil dieses Wechsels.
+If target state already exists, add the nonsecret `X-Monitor-Replace: true` header
+only after backing it up. Export responses use `Cache-Control: no-store`.
+After import, first check target state and pending delivery receipts, then enable
+only the target. The source remains paused. Use the same steps for the return
+path. Decryption or reverse transfer of Supabase/D1/R2 data is not part of this switch.
 
-## Fehler beheben und sicher fortsetzen
+## Resolve errors and resume safely
 
-Bei einem Backupalarm zuerst den verlinkten Lauf und dessen Artefakt prüfen,
-Ursache beheben und den betroffenen Main-Workflow erneut starten. Die andere
-Sicherung ersetzt ihn nicht. Ein Backuprestore bleibt ein separater Auftrag nach
-[Authbackup-Anleitung](auth-backups.md) beziehungsweise
-[Plattformbackup-Anleitung](platform-backups.md).
+On a backup alert, first check the linked run and its artifact, resolve the cause
+and rerun the affected main workflow. The other backup does not replace it.
+A backup restore remains a separate authorization under the
+[Auth backup guide](auth-backups.md) or [platform backup guide](platform-backups.md).
 
-Bei Monitoralarm Servicezustand, Host, Uhrzeit, Kontingente, Netzwerk,
-Zustandsrechte und Versandbelege privat prüfen. Providerfehlertexte werden nicht
-öffentlich geloggt. Dauerhafte Pending-Nachrichten nicht durch Löschen des
-gesamten Zustands „reparieren“: Das verliert Vorfälle und Deduplizierung.
-Versandpayload und Idempotenzschlüssel werden vor dem Senden atomar und mit
-`fsync` gespeichert. Absender, Empfänger und Providerkonto bei offenen Sends
-nicht ändern; zuerst deren Zustellung eindeutig abgleichen. Resend hält
-Schlüssel 24 Stunden; unbestätigte Sends werden
-höchstens 23 Stunden automatisch mit denselben Bytes wiederholt. Danach den
-Providerbeleg privat abgleichen und den einzelnen Pending-Eintrag erst nach
-eindeutiger Auflösung korrigieren. Kein automatischer Neuversand nach Ablauf.
-[Idempotenz](https://resend.com/docs/dashboard/emails/idempotency-keys).
+On a monitor alert, privately check service state, host, clock, allowances,
+network, state permissions and delivery receipts. Provider error messages are
+not logged publicly. Do not "repair" persistent pending messages by deleting all
+state: that loses incidents and deduplication. The delivery payload and idempotency
+key are saved atomically with `fsync` before sending. Do not change sender,
+recipient or provider account while sends are pending; first unambiguously
+reconcile their delivery. Resend retains keys for 24 hours; unconfirmed sends
+are retried automatically for at most 23 hours with the same bytes. Afterward,
+privately reconcile the provider receipt and correct only the individual pending
+entry once its outcome is unambiguous. No automatic resend after expiry.
+[Idempotency](https://resend.com/docs/dashboard/emails/idempotency-keys).
 
-Die Lockdatei verhindert parallele Aufrufe. Nach abruptem Prozessende bleibt sie
-bewusst bestehen. Erst den Timer stoppen, sicher ausschließen, dass noch ein
-Monitorprozess läuft, und anschließend ausschließlich dessen verwaiste
-`state.json.lock` entfernen. Den privaten Zustand erhalten. Bei einem Rollback
-Timer stoppen und die Zustandsversion mit dem früheren geprüften Main-Release
-abgleichen; unbekannte Versionen bleiben Fehler. Ohne Timer/Heartbeat bleibt die
-Überwachung ausdrücklich deaktiviert und liefert keinen Schutz.
+The lock file prevents concurrent invocations. It deliberately remains after
+abrupt process termination. First stop the timer, reliably rule out any running
+monitor process, then remove only its orphaned `state.json.lock`. Preserve private
+state. On rollback, stop the timer and compare the state version with the earlier
+verified main release; unknown versions remain errors. Without timer/heartbeat,
+monitoring is explicitly disabled and provides no protection.
 
-Die reguläre Testsuite führt die Offline-Regressionen aus:
+The regular test suite runs the offline regressions:
 
 ```sh
 node tests/backup-monitor.test.mjs
@@ -358,6 +335,6 @@ npm run backups:worker:check
 npm test
 ```
 
-Sie prüfen die Anforderungen mit synthetischen Daten und simulierten GitHub-,
-Resend- und Heartbeat-Antworten, inklusive Zustellfehlern und unterbrochenen
-Versandzuständen. Sie behaupten keinen tatsächlichen Postfachempfang.
+They verify requirements with synthetic data and simulated GitHub, Resend and
+heartbeat responses, including delivery errors and interrupted delivery states.
+They claim no actual inbox receipt.

@@ -1,322 +1,322 @@
-# Google-Zuordnungen und Maps-Links für Riparim
+# Google assignments and Maps links for Riparim
 
-Die Google-Schlüssel sind in der gehosteten Laufzeit eingerichtet. Google-Sterne und -Anzahlen werden nicht mehr öffentlich geladen oder angezeigt; historische Momentaufnahmen werden weiterhin nicht zur Sortierung verwendet. Alle **177 veröffentlichten Kfz-Servicebetriebe einschließlich Fahrzeugaufbereitung** besitzen eine eindeutig bestätigte Place ID. Die Zuordnungen werden einzeln anhand offizieller Karten, eigener Betriebswebsites oder übereinstimmender unabhängiger Kontakt-/Standortnachweise geprüft. Am 5. Oktober kamen 32 bestätigte IDs hinzu; zwei bestehende Identitäten konnten nach Korrektur überholter Verzeichnisstandorte veröffentlicht werden. `google.verification` dokumentiert Methode, Beleglinks und eigene Prüfnotiz. Auto Electronics gehört zu den 27 auf Nutzerauftrag entfernten, nicht eindeutig zugeordneten Entwürfen. Die sechs in `data/workshop-scope.json` begründeten fachlichen Ausschlüsse, der unabhängig als geschlossen belegte Opel-Rakovica-Betrieb und das alte Reno-Südprofil wurden nach abschließender Prüfung auf Nutzerauftrag entfernt. Der belegte Reno-Nordstandort wird als neues öffentliches Profil geführt. Google-Bewertungen, Rezensionen, Fotos und Öffnungszeiten werden weder im Katalog noch im Werkstattprofil geladen. Maps- und Routenlinks bleiben externe Links. Die tatsächliche Anzeige hängt zusätzlich von der verfügbaren Google-Anbindung im Browser ab.
+Google keys are configured in the hosted runtime. Google stars and counts are no longer loaded or displayed publicly; historical snapshots continue to be excluded from sorting. All **177 published automotive service businesses, including vehicle detailing**, have an unambiguously confirmed Place ID. Assignments are checked individually against official maps, businesses' own websites, or matching independent contact/location evidence. On October 5, 32 confirmed IDs were added; two existing identities could be published after correcting outdated directory locations. `google.verification` documents the method, evidence links, and independently authored verification note. Auto Electronics is among the 27 drafts without an unambiguous assignment removed at the user's request. The six scope exclusions justified in `data/workshop-scope.json`, the Opel Rakovica business independently proven closed, and the old southern Reno profile were removed after final review at the user's request. The substantiated northern Reno location is listed as a new public profile. Google ratings, reviews, photos, and opening hours are loaded neither in the catalogue nor in workshop profiles. Maps and directions links remain external links. Actual display also depends on the available Google integration in the browser.
 
-Die zentrale Importquelle ist `data/workshops.json`; sie enthält Profile, stabile Riparim-IDs, Google-Zuordnungen und belegte Momentaufnahmen getrennt. Datenformat, Bestandsprüfung und Importbefehle stehen in `docs/workshop-data.md`. API-Inhalte werden nicht dauerhaft in Git gespeichert; ein Google-Bulkexport benötigt passende Datenrechte.
+The central import source is `data/workshops.json`; it contains profiles, stable Riparim IDs, Google assignments, and substantiated snapshots separately. Data format, inventory review, and import commands are documented in `docs/workshop-data.md`. API content is not stored permanently in Git; a Google bulk export requires appropriate data rights.
 
-Am 4. Oktober wurden neun weitere Entwürfe individuell bestätigt und veröffentlicht. 13 unabhängig belegte Plus-Code-Adressen wurden offline in genaue Koordinaten umgerechnet und gegen den bestehenden Google-Eintrag geprüft. Zwei weitere Prüfungen ergaben ungeklärte Standortkonflikte bei Autodiagnoza Kosove und BMW Service Ferizaj; diese Profile wurden damals bis zur unabhängigen Klärung ausgeblendet. Kennungen, historische Zuordnungen und Bewertungen bleiben erhalten. Der damalige Bestand umfasste deshalb 78 veröffentlichte Profile, davon 19 mit genauen Koordinaten, und 85 Entwürfe. Die eigenen Nachweise stehen in `data/catalogue-review-2026-10-04.json`.
+On October 4, nine additional drafts were individually confirmed and published. Thirteen independently substantiated Plus Code addresses were converted offline into precise coordinates and checked against the existing Google entry. Two further checks found unresolved location conflicts for Autodiagnoza Kosove and BMW Service Ferizaj; these profiles were hidden at that time pending independent clarification. Identifiers, historical assignments, and ratings are preserved. The inventory at that time therefore contained 78 published profiles, 19 with precise coordinates, and 85 drafts. Independently authored evidence is recorded in `data/catalogue-review-2026-10-04.json`.
 
-Am 5. Oktober wurden alle 85 verbleibenden Entwürfe überprüft und **34 freigegeben**. Autodiagnoza Kosove und BMW Service Ferizaj behalten ihre bisherigen IDs; ihre aktuellen Standorte sind nun aus eigenen Betriebsquellen präzise belegt. Der Bestand nach diesem ersten Prüfschritt umfasste **112 öffentliche Profile, davon 21 mit genauen Koordinaten, und 51 Entwürfe**. Davon benötigten damals 45 weitere Identitätsbelege; sechs blieben fachlich ausgeschlossen. Die Freigabesperre und das Tageslimit von 100 serverseitigen Identitätsabfragen bleiben bestehen. `data/catalogue-review-2026-10-05.json` dokumentiert jedes Prüfergebnis. Neue Google-API-Inhalte wurden nicht dauerhaft gespeichert.
+On October 5, all 85 remaining drafts were reviewed and **34 approved**. Autodiagnoza Kosove and BMW Service Ferizaj retain their existing IDs; their current locations are now precisely substantiated by the businesses' own sources. After this first review step, the inventory contained **112 public profiles, 21 with precise coordinates, and 51 drafts**. At that time, 45 of those needed further identity evidence; six remained excluded from scope. The publication gate and daily limit of 100 server-side identity queries remain in place. `data/catalogue-review-2026-10-05.json` documents every review outcome. No new Google API content was stored permanently.
 
-Die anschließende Weiterprüfung der 51 Entwürfe bestätigt **13 weitere IDs**. Aktuelle Betriebsquellen lösen alte Kontaktdaten und Bezeichnungen auf; genaue profilspezifische Verzeichnismarker bestätigen Kimi und Gazi trotz fehlender Google-Telefonnummer. Jede ID wurde von Google Maps mit einer absichtlich unpassenden Ersatzsuche auf genau denselben Betrieb zurückgeprüft. Keine zusätzlichen Server-Abfragen oder Lockerung der Identitätsprüfung waren nötig. Der Bestand nach diesem Prüfschritt umfasste **125 öffentliche Profile, davon 23 mit unabhängig belegten genauen Koordinaten, und 38 Entwürfe**. 30 Identitäten, eine Reno-Filialkontinuität, ein belegter geschlossener Betrieb und sechs fachliche Ausschlüsse blieben damals offen bzw. ausgeblendet. Der vollständige Folgebericht ist `data/catalogue-followup-2026-10-05.json`.
+Subsequent review of the 51 drafts confirmed **13 more IDs**. Current business sources resolve old contact details and names; precise profile-specific directory markers confirm Kimi and Gazi despite missing Google phone numbers. Every ID was verified directly through Google Maps with a deliberately mismatched fallback search to resolve to exactly the same business. No additional server queries or relaxation of identity checks were needed. After this review step, the inventory contained **125 public profiles, 23 with independently substantiated precise coordinates, and 38 drafts**. Thirty identities, one Reno branch continuity question, one substantiated closed business, and six scope exclusions remained open or hidden at that time. The complete follow-up report is `data/catalogue-followup-2026-10-05.json`.
 
-Die vertiefte Prüfung dieser 30 Identitäten bestätigt **drei weitere bestehende Profile**: Sfishta Auto Home, Niki und Fatosi. Eigene Anzeigen, Betriebsbeiträge, amtliche Aliasbelege und genaue unabhängige Geschäftspunkte verbinden den bisherigen Betrieb jeweils mit seinem gültigen Google-Eintrag. Die direkten ID-Rücktests erfolgten im vom Nutzer vorgegebenen Gmail-Browserprofil; weitere Serverabfragen wurden nicht ausgeführt. Der Bestand nach diesem Prüfschritt umfasste **128 öffentliche Profile, davon unverändert 23 mit unabhängig belegten genauen Koordinaten, und 35 Entwürfe**. 27 Identitäten benötigen weiterhin einen eindeutigen Beleg; die acht übrigen Entwürfe bleiben unverändert. Alle 30 Prüfausgänge stehen in `data/catalogue-identity-2026-10-05.json`.
+Further review of these 30 identities confirmed **three more existing profiles**: Sfishta Auto Home, Niki, and Fatosi. Their own advertisements, business posts, official alias evidence, and precise independent business points connect each existing business to its valid Google entry. Direct ID verification used the Gmail browser profile specified by the user; no further server queries were performed. After this review step, the inventory contained **128 public profiles, still 23 with independently substantiated precise coordinates, and 35 drafts**. Twenty-seven identities still need unambiguous evidence; the other eight drafts remain unchanged. All 30 outcomes are recorded in `data/catalogue-identity-2026-10-05.json`.
 
-Die anschließend vom Nutzer verworfenen 27 Identitäten sind in `data/workshop-removals.json` dokumentiert. Der Bestand nach dieser ersten Entfernung umfasste **128 öffentliche Profile und 8 Entwürfe**, insgesamt **136 Profile**. Der Katalog umfasste nach dem Abschluss am 5. Oktober **129 öffentliche Profile und keine Entwürfe**. Zugehörige Cache-/Kartenmetadaten werden entfernt; Entfernungsmarker schützen vor erneutem Import. Die früheren Prüfergebnisse und ihre damaligen Zahlen bleiben als Historie erhalten.
+The 27 identities subsequently rejected by the user are documented in `data/workshop-removals.json`. After this first removal, the inventory contained **128 public profiles and 8 drafts**, or **136 profiles** in total. After completion on October 5, the catalogue contained **129 public profiles and no drafts**. Associated cache/map metadata is removed; removal markers prevent reimport. Earlier review outcomes and their counts at the time remain as history.
 
-## Konfiguration im bestehenden Google-Cloud-Projekt Riparim
+## Configuration in the existing Riparim Google Cloud project
 
-1. Maps JavaScript API, Places API (New) und Places UI Kit API sind bereits aktiviert. Vor Änderungen an vorhandener Nutzung gelten die unten dokumentierten Billing-/Freimengen-/Quotenprüfungen; keine zusätzlichen Dienste oder kostenpflichtigen Tarife aktivieren.
-2. Den Produktions-Browser-Key nur für tatsächlich benötigte HTTPS-Referrer und Maps JavaScript und Places UI Kit (kein Places API (New) im Browser-Key) freigeben. Maßgeblich ist die belegte produktive Runtime-Zuordnung; ein alter Sites-Host oder lokale Fixtures begründen keine Freigabe des Produktionskeys.
-3. Der separate private Server-Key darf ausschließlich Places API (New) verwenden und bleibt im geschützten Server-Runtime-Secret. Ohne feste belegte Cloudflare-Ausgangs-IP wird keine ungeprüfte IP-Beschränkung eingerichtet.
-4. `GOOGLE_MAPS_BROWSER_API_KEY` und `GOOGLE_PLACES_SERVER_API_KEY` gehören ausschließlich in die geschützte Laufzeitkonfiguration. App-Veröffentlichungen erfolgen über den geprüften Main-Release gemäß `docs/releases.md`; keine Schlüssel in Git oder `.openai/hosting.json`, keine manuelle Feature-Branch-Veröffentlichung.
-5. Tatsächlich unterstützte Quoten und vorhandene Billing-Warnungen prüfen. Ein Benachrichtigungsbudget stoppt keine Nutzung; das App-Limit von 100/Tag begrenzt ausschließlich serverseitige Identitätsabfragen. Wirksame Istwerte, Solländerungen und Rückweg stehen im Betriebsrunbook unten.
-6. Live-Validierung nur als begrenzter Schritt mit bestätigtem kostenlosem Restkontingent. Ohne dieses Kontingent genügen isolierte Ausfall-/Anfragefixtures und die lesende Providerkonfiguration; direkte Maps-Links bleiben verfügbar und Fehler werden nicht als fehlende Bewertungen ausgegeben.
+1. Maps JavaScript API, Places API (New), and Places UI Kit API are already enabled. Before changing existing usage, apply the billing/free-allowance/quota checks documented below; enable no additional services or paid plans.
+2. Allow the production browser key only for HTTPS referrers actually needed and Maps JavaScript and Places UI Kit (no Places API (New) in the browser key). Proven production runtime assignment is authoritative; an old Sites host or local fixtures do not justify allowing the production key.
+3. The separate private server key may use only Places API (New) and stays in the protected server runtime secret. Without a fixed, substantiated Cloudflare egress IP, do not configure an unverified IP restriction.
+4. `GOOGLE_MAPS_BROWSER_API_KEY` and `GOOGLE_PLACES_SERVER_API_KEY` belong exclusively in protected runtime configuration. Publish the app through a verified main release according to `docs/releases.md`; no keys in Git or `.openai/hosting.json`, and no manual feature-branch publication.
+5. Check actually supported quotas and existing billing warnings. A notification budget does not stop usage; the app limit of 100/day limits only server-side identity queries. Effective current values, intended changes, and the return path are documented in the operations runbook below.
+6. Live validation is only a bounded step with a confirmed remaining free allowance. Without that allowance, isolated failure/request fixtures and read-only provider configuration are sufficient; direct Maps links remain available, and errors are not presented as missing ratings.
 
-## Vorhandene Google-Maps-Links als Identität
+## Existing Google Maps links as identity
 
-Die gespeicherten Links werden zuerst ausgewertet. `query_place_id`, `place_id` und `q=place_id:…` identifizieren den Eintrag unmittelbar und benötigen keine erneute Suchanfrage. Ein CID-Link wird anhand der identischen CID im von Google zurückgegebenen Maps-Link bestätigt. Fremde Domains und Suchtext werden niemals als Place ID behandelt.
+Stored links are evaluated first. `query_place_id`, `place_id`, and `q=place_id:…` identify the entry directly and require no new search request. A CID link is confirmed through the identical CID in the Maps link returned by Google. Foreign domains and search text are never treated as a Place ID.
 
-Für Suchlinks wird deren vorhandene Suchanfrage einschließlich Adresse verwendet. Ein eindeutiger Treffer muss zusätzlich über Telefonnummer oder den passenden Namen und einen präzisen Standort (belegte Koordinaten, Plus Code oder mindestens zwei passende Adresswörter) bestätigt werden. Ein Suchlink allein belegt keine Identität. Bestätigte Links werden mit der Place ID gespeichert; Kontaktlink und eingebetteter Bewertungsbereich verwenden denselben Eintrag. Ein geänderter Link invalidiert den Zuordnungscache.
+For search links, their existing search query, including address, is used. A unique result must also be confirmed by phone number or a matching name and precise location (substantiated coordinates, Plus Code, or at least two matching address words). A search link alone does not prove identity. Confirmed links are stored with the Place ID; the contact link and embedded rating area use the same entry. A changed link invalidates the assignment cache.
 
-## Zuordnung und Darstellung
+## Assignment and presentation
 
-Ein veröffentlichtes Profil benötigt eine bestätigte Google-Identität, auch wenn keine Rezensionen oder Sterne vorhanden sind. Importvalidator und Verwaltungsroute prüfen diese Voraussetzung. Ein unverändertes bestätigtes Profil behält seine Identität; Änderungen an Name, Telefon, Ort, Adresse oder Koordinaten benötigen eine neue Bestätigung. Doppelt verwendete Place IDs werden zurückgewiesen. Kartenlink, Route, Bewertungen und Öffnungszeiten verwenden dieselbe ID. Öffnungszeiten werden ausschließlich im nativen Google-Baustein des Profilkopfs dargestellt; Fotos bleiben auf Google Maps. Inhalte werden nicht in die Importquelle übernommen.
+A published profile requires confirmed Google identity even when no reviews or stars exist. The import validator and administration route check this prerequisite. An unchanged confirmed profile retains its identity; changes to name, phone, town, address, or coordinates require new confirmation. Duplicate Place IDs are rejected. Map links, directions, ratings, and opening hours use the same ID. Opening hours appear only in the native Google component in the profile header; photos stay on Google Maps. Content is not adopted into the import source.
 
-Die öffentliche Zuordnungsroute nimmt ausschließlich eine vorhandene veröffentlichte
-Werkstattkennung entgegen und liest deren bereits bestätigte Place ID aus dem
-direkten Maps-Link oder dem vorhandenen `workshop_google_places`-Datensatz mit
-gültiger ID und passendem Geschäftsdatenhash. Auch Profile ohne historische
-Google-Momentaufnahme behalten dadurch ihre bestätigte Identität. Sie startet
-keine Google-Suche, aktualisiert keinen Zuordnungsdatensatz (der bestehende Katalog-Bootstrap bleibt unverändert) und verwendet keine
-neuen Google-Details. Ohne bestätigte unveränderte ID liefert sie `placeId:null` und die
-Oberfläche bietet den vorhandenen Maps-Link. Neue oder geänderte Geschäftsdaten
-werden ausschließlich im gesonderten geprüften Veröffentlichungs-/Rechercheweg
-bestätigt. Die nachfolgenden Suchregeln gelten für diesen serverseitigen Weg.
+The public assignment route accepts only an existing published
+workshop identifier and reads its already confirmed Place ID from the
+direct Maps link or existing `workshop_google_places` record with
+a valid ID and matching business-data hash. Profiles without a historical
+Google snapshot therefore also retain their confirmed identity. It starts
+no Google search, updates no assignment record (the existing catalogue bootstrap remains unchanged), and uses
+no new Google details. Without a confirmed unchanged ID, it returns `placeId:null`, and the
+UI offers the existing Maps link. New or changed business data
+is confirmed exclusively through the separate verified publication/research procedure.
+The following search rules apply to that server-side procedure.
 
-Telefonabfragen verwenden ein Leerzeichen nach der Vorwahl und den dazugehörigen Regionscode: `+383`/`XK`, vorhandene `+381`-Nummern unverändert mit `RS`. Bekannte Werkstattkoordinaten setzen einen Suchbias von drei Kilometern; ohne Koordinaten wird das Gebiet Kosovo verwendet. So hängt die Suche nicht von der Ausgangs-IP des Servers ab. Die abschließende Landes- und Standortprüfung bleibt davon unabhängig; bei einer erfolglosen Telefonsuche folgt eine Suche nach Werkstattname und Ort, mit denselben strikten Identitätsprüfungen. Fehlende strukturierte Länderangaben werden für Kandidaten mit passender Telefonnummer über Place Details geprüft. Alle Such- und Detailanfragen zählen zum gemeinsamen Limit von 100/Tag. Zusammengezogene Namen wie AutoMita werden erkannt; Ladestationen, Parkplätze und reine Waschanlagen werden ausgeschlossen. Bei einer Änderung der Suchstrategie macht deren Versionskennung frühere erfolglose Zuordnungen erneut prüfbar.
+Phone queries use a space after the country code and its corresponding region code: `+383`/`XK`, and existing `+381` numbers unchanged with `RS`. Known workshop coordinates set a search bias of three kilometres; without coordinates, the Kosovo area is used. Search therefore does not depend on the server's egress IP. Final country and location verification remains independent; after an unsuccessful phone search, a search by workshop name and town follows with the same strict identity checks. Missing structured country information is checked through Place Details for candidates with a matching phone number. All search and details requests count toward the shared limit of 100/day. Joined names such as AutoMita are recognized; charging stations, car parks, and car-wash-only businesses are excluded. When the search strategy changes, its version identifier makes previous unsuccessful assignments eligible for rechecking.
 
-Es werden nur Place IDs und eigene Prüf-/Wiederholungsmetadaten dauerhaft gespeichert. Ungeklärte Treffer werden nach sieben Tagen erneut geprüft, Providerfehler frühestens nach 15 Minuten. Gleichzeitige Aufrufe teilen eine kurze Lease. Eine Änderung des Profils löst eine neue Zuordnung aus; erfolgreiche Zuordnungen werden nach einem Jahr erneut geprüft.
+Only Place IDs and independently authored verification/retry metadata are stored permanently. Unresolved results are checked again after seven days, provider errors no earlier than after 15 minutes. Concurrent calls share a short lease. A profile change triggers a new assignment; successful assignments are checked again after one year.
 
-Sichtbare Karten stellen aktuelle Sterne und Anzahl im nativen Google Advanced-
-UI-Kit-Widget dar. Die App exportiert keine Ratingwerte und speichert keine
-API-Sterne oder Rezensionen in D1, R2 oder Browser Storage. Google- und
-Providerattribution bleiben im Baustein erhalten. Google-Werte fließen weder in
-Riparim-Mittelwerte noch in Riparim-Sortierungen ein.
+Visible cards show current stars and counts in the native Google Advanced
+UI Kit widget. The app exports no rating values and stores no
+API stars or reviews in D1, R2, or browser storage. Google and
+provider attribution remain in the component. Google values contribute neither to
+Riparim averages nor to Riparim sorting.
 
-Der Katalog bietet ausschließlich Name, Riparim-Bewertung und Entfernung als Sortierungen an. Alte Links mit `sort=google` werden auf die Standardsortierung Name normalisiert; Suchbegriff, Leistung, Ort, Marke, Sprache und Locale bleiben erhalten. Es gibt keine globale oder auf die ersten zwölf Ergebnisse begrenzte Google-Sortierung. Historische Google-Momentaufnahmen werden weiterhin weder als aktuell angezeigt noch zur Sortierung verwendet.
+The catalogue offers only name, Riparim rating, and distance as sorting options. Old links with `sort=google` normalize to the default name sort; search term, service, town, brand, language, and locale are preserved. There is no global Google sorting or Google sorting limited to the first twelve results. Historical Google snapshots continue to be neither displayed as current nor used for sorting.
 
-Google-Bausteine starten ausschließlich bei Sichtbarkeit und aktivem Tab
-(120-Pixel-Vorlauf). Ein unverändertes Widget bleibt im aktuellen Komponentenstand
-verbunden; Filter blenden die ganze bereits montierte Karte aus und wieder ein.
-Die IDs dieser Karten bleiben auf den aktuellen veröffentlichten Katalog begrenzt;
-es werden keine Google-Werte extrahiert. Locale-/Identitätswechsel entfernen alte
-Google-Inhalte. Neue Sortierung, geänderter Entfernungsursprung oder geänderte
-Sortierfolge des Livekatalogs beginnen eine neue Ansicht, damit DOM- und
-Tastaturreihenfolge der sichtbaren Sortierung entsprechen. Es gibt keinen Content-
-Cache, TTL, Hintergrundrefresh oder Schreiben in D1, R2, Redis, CDN oder Browser
-Storage. Place-ID-Zuordnung und direkte Maps-Fallbacks bleiben erhalten.
+Google components start only when visible and the tab is active
+(with a 120-pixel preload margin). An unchanged widget remains
+connected in the current component state; filters hide and show the entire already mounted card.
+These card IDs remain limited to the current published catalogue;
+no Google values are extracted. Locale/identity changes remove old
+Google content. A new sort, changed distance origin, or changed
+sort order in the live catalogue starts a new view so DOM and
+keyboard order match the visible sort. There is no content
+cache, TTL, background refresh, or writing to D1, R2, Redis, CDN, or browser
+storage. Place ID assignment and direct Maps fallbacks are preserved.
 
-Eine Änderung der zentralen JSON-Quelle löst über deren Inhalts-Hash den Import aus; Profile und recherchierte Google-Angaben werden anhand ihrer getrennten Zeitstempel aktualisiert. Neuere manuell gepflegte Angaben bleiben erhalten.
+A change to the central JSON source triggers import through its content hash; profiles and researched Google information are updated according to their separate timestamps. Newer manually maintained information is preserved.
 
-### Historischer Anfragenachweis für Issue #94
+### Historical request evidence for Issue #94
 
-Bei Abschluss von #94 verwendete `tests/catalogue-google-requests.test.mjs` 158 synthetische öffentliche Werkstätten, kontrollierte Sichtbarkeit und einen Google-SDK-Fixture ohne echte Provideraufrufe. Der Red-Lauf vor der Änderung zählte bei `sort=google` **158 Places-Abfragen**, obwohl keine Karte sichtbar war. Der gleiche Lauf nach der Änderung prüft in DE/SQ/EN:
+At completion of #94, `tests/catalogue-google-requests.test.mjs` used 158 synthetic public workshops, controlled visibility, and a Google SDK fixture without real provider calls. The red run before the change counted **158 Places queries** with `sort=google`, even though no card was visible. The same run after the change checked in DE/SQ/EN:
 
-| Auslöser                                               | Places-Abfragen nach Änderung |
-| ------------------------------------------------------ | ----------------------------: |
-| Initialrender mit 158 Treffern und unsichtbaren Karten |                             0 |
-| Alte URL `sort=google`                                 |                             0 |
-| Filteränderung, neue Karten weiterhin unsichtbar       |                             0 |
-| Erste sichtbare Karte                                  |                             1 |
-| Passende Karte nach Filterwechsel erneut sichtbar      |                 0 zusätzliche |
-| Localewechsel und erste erneut sichtbare Karte         |                 1 zusätzliche |
+| Trigger                                             | Places queries after change |
+| --------------------------------------------------- | --------------------------: |
+| Initial render with 158 results and invisible cards |                           0 |
+| Old URL `sort=google`                               |                           0 |
+| Filter change, new cards still invisible            |                           0 |
+| First visible card                                  |                           1 |
+| Matching card visible again after a filter change   |                0 additional |
+| Locale change and first card becoming visible again |                1 additional |
 
-Damals prüfte dieselbe Fixture zusätzlich in DE/SQ/EN die datenfreie statische Katalog-Shell: Die Hydration liest alle Filter und die Locale aus der echten URL, der bestehende Live-Katalogabruf bleibt erhalten und verursacht keine Google-Abfrage für unsichtbare Karten. Sichtbare Karten und ihre Wiederverwendung behalten dieselben Anfragezahlen. Der aktuelle Test verwendet 160 synthetische Datensätze und prüft null Google-Anfragen auch für sichtbare Katalogkarten; die obigen Zählungen beschreiben den damaligen SDK-Einzelratingpfad.
+At that time, the same fixture also checked the data-free static catalogue shell in DE/SQ/EN: hydration reads every filter and the locale from the real URL; the existing live catalogue fetch remains and causes no Google query for invisible cards. Visible cards and their reuse retain the same request counts. The current test uses 160 synthetic records and checks zero Google requests even for visible catalogue cards; the counts above describe the SDK individual-rating path at that time.
 
-Die damals gezählten Aufrufe waren SDK-`fetchFields`-Anfragen, keine Kostenmessung oder Aussage zur Abrechnungskategorie. Auch reguläre URL-/Sortierverträge, Lade-/Leer-/Fehlerfälle und verspätete Antworten werden ohne Live-Google-Verbindungen geprüft.
+Calls counted then were SDK `fetchFields` requests, not a cost measurement or a claim about billing categories. Ordinary URL/sorting contracts, loading/empty/error cases, and late responses are also checked without live Google connections.
 
-## Historischer UI-Kit-Betrieb im Werkstattprofil (bis v1.26.2)
+## Historical UI Kit operation in workshop profiles (through v1.26.2)
 
-Eigene Riparim-Bewertungen beziehungsweise ihr leerer Hinweis stehen immer vor Google. Der Google-Host bleibt dadurch auch während des Nachladens an derselben DOM-Position und wird nicht verschoben oder erneut verbunden; seine eigene Panelsichtbarkeit steuert weiterhin den Abruf. Daraus wird keine Aussage über Googles internes Abrechnungsverhalten abgeleitet.
+Riparim's own reviews or their empty-state message always precede Google. The Google host therefore stays at the same DOM position during loading and is neither moved nor reconnected; its own panel visibility continues to control fetching. This does not imply anything about Google's internal billing behavior.
 
-Das Profil verwendet zwei getrennte Advanced-UI-Kit-Bausteine: Im Profilkopf
-zeigt `gmp-advanced-place-details` nur `gmp-place-rating`,
-`gmp-place-opening-hours` und `gmp-place-attribution`. Unter den eigenen
-Rezensionen zeigt `gmp-advanced-place-details` nur `gmp-place-reviews` und
-`gmp-place-attribution`. Beide verwenden dieselbe bestätigte Identität und die
-aktive Sprache; die Zuordnungsroute wird gemeinsam genutzt. Jeder Baustein
-startet erst bei seiner eigenen Sichtbarkeit. Die zusätzliche App-Überschrift,
-der wiederholte Werkstattname und native Maps-Aktionen entfallen. Öffnungszeiten
-stehen ausschließlich oben, Google-Kommentare ausschließlich im Rezensionenbereich.
-Es gibt weder eine parallele Enterprise-Profilabfrage noch einen vollständigen
-REST-Refresh zum nächsten Öffnungs-/Schließwechsel.
-Die native Google-Darstellung unterscheidet fehlende Rezensionen, unbekannte
-Öffnungszeiten und Schließstatus. Die App liest diese Daten nicht aus dem DOM,
-Shadow-DOM oder dem Widget aus. Die dokumentierte öffentliche `place`-Property
-enthält lediglich ID, Standort und Viewport. Ein fehlgeschlagener Provideraufruf
-wird als Ladefehler angezeigt, niemals als null Bewertungen ausgegeben.
+The profile uses two separate Advanced UI Kit components: in the profile header,
+`gmp-advanced-place-details` shows only `gmp-place-rating`,
+`gmp-place-opening-hours`, and `gmp-place-attribution`. Below Riparim's own
+reviews, `gmp-advanced-place-details` shows only `gmp-place-reviews` and
+`gmp-place-attribution`. Both use the same confirmed identity and
+active language; they share the assignment route. Each component
+starts only when it becomes visible. The additional app heading,
+repeated workshop name, and native Maps actions are omitted. Opening hours
+appear only at the top; Google comments appear only in the reviews area.
+There is neither a parallel Enterprise profile query nor a full
+REST refresh at the next opening/closing transition.
+Native Google presentation distinguishes missing reviews, unknown
+opening hours, and closed status. The app does not read this data from the DOM,
+shadow DOM, or widget. The documented public `place` property
+contains only ID, location, and viewport. A failed provider call
+is displayed as a loading error, never as zero reviews.
 
-Jeder Baustein startet nur bei Sichtbarkeit (120-Pixel-Vorlauf) und aktivem Tab.
-Konfiguration und Zuordnungsroute starten erst bei Sichtbarkeit des Google-Bereichs
-und aktivem Tab.
-Die öffentliche Zuordnungsroute liest nur die bereits bestätigte ID. Nach wartender
-Konfiguration wird die aktuelle Sichtbarkeit erneut geprüft; ist der Bereich
-unsichtbar, wird die Zuordnung bis zur erneuten Sichtbarkeit zurückgestellt.
-Sichtbarkeit wird auch nach asynchronem SDK-Laden erneut geprüft. Themewechsel
-und normale Profilzustandsänderungen
-bewahren dieselbe Widgetinstanz; Farben und Schriften werden ausschließlich
-über die offiziellen CSS-Eigenschaften und `color-scheme` geändert. Der
-Rezensionenbaustein nutzt die gesamte Hauptspaltenbreite mit interner Scrollfunktion;
-der rahmenlose Profilkopf erhält 152 Pixel Höhe und dieselbe interne Scrollfunktion für
-ausgeklappte Wochenzeiten. Der vollständige Baustein ist nötig, weil
-`gmp-place-opening-hours` laut Inhaltsreferenz nur dort unterstützt ist; das
-kompakte Beispiel in Googles Advanced-Anleitung zeigt diese Zeiten im Live-SDK
-nicht an. Abstände werden ausschließlich über die dokumentierten
-`--gmp-mat-spacing-*`-Eigenschaften reduziert. Quellenhinweis und Infofunktion
-bleiben sichtbar; deren native Reihenfolge wird nicht verändert. Katalogratings
-behalten den kompakten Baustein mit Inhaltshöhe.
-Die Google- und Autorenattribution des Bausteins bleibt vollständig erhalten.
-Das Profil verwendet keine Zusammenfassungen oder `all-content`.
+Each component starts only when visible (120-pixel preload margin) and the tab is active.
+Configuration and the assignment route start only when the Google area is visible
+and the tab is active.
+The public assignment route reads only the already confirmed ID. After waiting for
+configuration, current visibility is checked again; if the area
+is invisible, assignment is deferred until it becomes visible again.
+Visibility is also rechecked after asynchronous SDK loading. Theme changes
+and ordinary profile state changes
+preserve the same widget instance; colors and fonts are changed only
+through official CSS properties and `color-scheme`. The
+reviews component uses the full main-column width with internal scrolling;
+the borderless profile header gets a height of 152 pixels and the same internal scrolling for
+expanded weekly hours. The full component is required because
+`gmp-place-opening-hours` is supported only there according to the content reference;
+the compact example in Google's Advanced guide does not show these hours in the live SDK.
+Spacing is reduced only through the documented
+`--gmp-mat-spacing-*` properties. Source attribution and the information function
+remain visible; their native order is unchanged. Catalogue ratings
+retain the compact component with content height.
+The component's Google and author attribution remains complete.
+The profile uses no summaries or `all-content`.
 
-Der Ladezeitpunkt bleibt internes Veraltungsmetadatum. Nach 30 Minuten wird der
-jeweilige alte Baustein ausgeblendet und eine klare
-Veraltungsanzeige angeboten. Status, die kompakte Aktion **Erneut laden** und
-der Maps-Fallback stehen in einer umbrechenden Zeile. Bei SDK-Ladefehlern heißt
-die Aktion weiterhin **Seite neu laden** und lädt den Browser tatsächlich neu. Der
-Timer ändert ausschließlich die Anzeige: Er startet keine Google-Abfrage.
-Auch ein Wechsel zurück in den Tab aktualisiert nicht automatisch. Erst die
-explizite Aktion im sichtbaren Bereich und aktiven Tab ersetzt die Widgetinstanz;
-sie lädt weder individuelle Details noch Fotoreferenzen. Interne Abfragen des
-Google-Bausteins gehören zum Providervertrag und lassen sich aus App-Mocks nicht
-als tatsächliche Abrechnungsereignisse ableiten. Bei deaktiviertem Provider,
-Timeout oder Quotenfehler bleibt der bestätigte direkte Maps-Link verfügbar;
-Fehler verursachen keine automatische Wiederholungsschleife. Ein SDK-Ladefehler
-bietet ausdrücklich **Seite neu laden**, da der SDK-Lader seinen Fehlversuch
-innerhalb desselben Browserlaufs behält. Bei einem bereits geladenen SDK kann
-ein Widgetfehler durch die sichtbare Aktualisierungsaktion erneut versucht werden.
+Load time remains internal staleness metadata. After 30 minutes,
+the respective old component is hidden and a clear
+staleness indicator is offered. Status, the compact localized action **Erneut laden** (“Load again”), and
+the Maps fallback appear in a wrapping row. On SDK loading errors, the
+action remains **Seite neu laden** (“Reload page”) and actually reloads the browser. The
+timer changes only the display: it starts no Google query.
+Returning to the tab also does not refresh automatically. Only the
+explicit action in a visible area with an active tab replaces the widget instance;
+it loads neither individual details nor photo references. Internal queries by the
+Google component belong to the provider contract and cannot be inferred from app mocks
+as actual billing events. When the provider is disabled,
+times out, or reports a quota error, the confirmed direct Maps link remains available;
+errors cause no automatic retry loop. An SDK loading error
+explicitly offers **Seite neu laden** because the SDK loader retains its failed attempt
+within the same browser run. With an already loaded SDK,
+a widget error can be retried through the visible refresh action.
 
-### Eigene Öffnungszeiten und Profile ohne Google-Abfragen
+### Application-owned opening hours and profiles without Google queries
 
-Katalog und Profil zeigen ausschließlich Riparim-Bewertungen. Das Profil startet
-keine Google-Konfiguration, Identitätsroute, SDK-, Widget-, Foto- oder
-Detailsabfrage. Maps- und Routenlinks werden aus vorhandenen bestätigten IDs
-gebildet; der Browser öffnet Google erst beim Anklicken eines externen Links.
-Der serverseitige Identitätsabgleich für Katalog- und Kontaktänderungen bleibt
-getrennt bestehen. Die bisherigen Providerquoten werden nicht erhöht.
+The catalogue and profile show only Riparim ratings. The profile starts
+no Google configuration, identity route, SDK, widget, photo, or
+details query. Maps and directions links are formed from existing confirmed IDs;
+the browser opens Google only when an external link is clicked.
+Server-side identity checks for catalogue and contact changes remain
+separate. Existing provider quotas are not increased.
 
-Öffnungszeiten werden über die bestätigte Inhaberfunktion eingereicht und nach
-Moderation veröffentlicht. Wochenplan, Ausnahmen und serverseitiges
-Bestätigungsdatum gehören zur eigenen DB. Fehlende Angaben sind ausdrücklich
-unbekannt, nicht geschlossen. Details stehen in [workshop-data.md](workshop-data.md).
-Google-Zeiten werden nicht einmalig importiert oder synchronisiert. Die obigen
-und folgenden datierten Providerprüfungen dokumentieren den historischen Betrieb.
+Opening hours are submitted through verified owner functionality and
+published after moderation. Weekly schedules, exceptions, and the server-side
+confirmation date belong in the app's database. Missing information is explicitly
+unknown, not closed. Details are documented in [workshop-data.md](workshop-data.md).
+Google hours are neither imported once nor synchronized. The dated
+provider checks above and below document historical operation.
 
-Die DE/SQ/EN-Katalog- und Profilfixtures prüfen null Google-Anfragen, eigene
-Bewertungen, eigene Öffnungszeiten, Live-Hydration, Leerzustände und Maps-Links.
+DE/SQ/EN catalogue and profile fixtures check zero Google requests, application-owned
+ratings, opening hours, live hydration, empty states, and Maps links.
 
-## Betrieb: Kosten und Ausfallweg (#96)
+## Operation: costs and outage path (#96)
 
-Der [datierte Prüfbericht vom 11.10.2026](google-places-cost-audit-2026-10-11.md)
-enthält den reproduzierten Vorher-/Nachher-Abrufvergleich, alle neun tatsächlich
-beobachteten SKU-Mengen/Kosten, die Schweizer Konto-Preisstufen in CHF,
-Key-/Quoten-Vorherwerte und die Grenzen der Messung. Der damalige Projekt-Billing-Bericht
-wies **2,73 CHF** aus, davon Enterprise Details mit **1164 Ereignissen** bei einer
-freien Kontostufe bis 1000. #94/#95 sind lokale Anfrageoptimierungen; ihr
-Produktionskosten-Nachherwert ist wegen Billing-Verzug noch nicht belegt.
+The [dated audit report from 2026-10-11](google-places-cost-audit-2026-10-11.md)
+contains the reproduced before/after fetch comparison, all nine actually
+observed SKU quantities/costs, Swiss account price tiers in CHF,
+prior key/quota values, and measurement limitations. The project billing report at that time
+showed **2.73 CHF**, including Enterprise Details with **1164 events** and a
+free account tier up to 1000. #94/#95 are local request optimizations;
+their production cost after the change is not yet proven because of billing delay.
 
-### Providerfreigabe: begrenzte Standard- und Advanced-Widgets
+### Provider approval: bounded Standard and Advanced widgets
 
-Der datierte #96-Bericht bleibt unverändert als historischer Beleg der ersten
-Browserpause. Beim Beginn dieser Korrektur war der Browser-Key noch auf
-`https://riparim-google-paused.invalid/*` beschränkt. Die Standard-Freigabe ist
-seit v1.12.7 aktiv. Advanced wurde nach frischer Kontopreis-/Nutzungsprüfung und
-geprüftem Main-Release v1.12.9 auf 100 pro Tag freigegeben. Die Profilaufteilung
-verwendet diese bestehende Quote ohne weitere Provideränderung. Der native
-Readback vom 11.10.2026 bestätigt Advanced 100, Standard 250 und Sessions 0.
+The dated #96 report remains unchanged as historical evidence of the initial
+browser pause. At the start of this correction, the browser key was still restricted to
+`https://riparim-google-paused.invalid/*`. Standard approval has been
+active since v1.12.7. Advanced was approved at 100 per day after a fresh account pricing/usage check
+and verified main release v1.12.9. The profile split
+uses this existing quota without further provider changes. Native
+readback from 2026-10-11 confirms Advanced 100, Standard 250, and Sessions 0.
 
-| Dienst / Methode                | Ziel-Tageslimit | Wirkung                                                                        |
-| ------------------------------- | --------------: | ------------------------------------------------------------------------------ |
-| Places (New): GetPlaceRequest   |           **0** | Einzel-Details bleiben gesperrt                                                |
-| Places (New): SearchTextRequest |          **20** | nur getrennte serverseitige Identitätsprüfung bei bestätigter freier Restmenge |
-| Places (New): PhotoMedia        |           **0** | öffentliche App lädt keine Google-Fotos                                        |
-| UI-Kit Standard Query           |         **250** | nur noch offene ältere Profil-/Katalogansichten                                |
-| UI-Kit Advanced Query           |         **100** | getrennte Profilbausteine, ohne Name/Aktionen                                  |
-| UI-Kit Sessions                 |           **0** | nicht verwendet und gesperrt                                                   |
-| Maps JavaScript: Map loads      |           **0** | keine eingebetteten Karten; direkte Maps-/Routenlinks                          |
+| Service / method                | Target daily limit | Effect                                                                            |
+| ------------------------------- | -----------------: | --------------------------------------------------------------------------------- |
+| Places (New): GetPlaceRequest   |              **0** | Individual details remain blocked                                                 |
+| Places (New): SearchTextRequest |             **20** | Separate server-side identity checks only with confirmed remaining free allowance |
+| Places (New): PhotoMedia        |              **0** | Public app loads no Google photos                                                 |
+| UI Kit Standard Query           |            **250** | Only still-open older profile/catalogue views                                     |
+| UI Kit Advanced Query           |            **100** | Separate profile components, without name/actions                                 |
+| UI Kit Sessions                 |              **0** | Unused and blocked                                                                |
+| Maps JavaScript: Map loads      |              **0** | No embedded maps; direct Maps/directions links                                    |
 
-Der Browser-Key erhält ausschließlich **Maps JavaScript API und Places UI Kit API**
-und genau `https://riparim.com/*`. **Places API (New) wird aus diesem Key entfernt**:
-Das sperrt den bisherigen Einzel-Details-Pfad unabhängig von seiner ungeprüften
-SDK-GetPlace-Quotenzuordnung. Der amtliche UI-Kit-Setupvertrag benötigt Maps
-JavaScript und UI Kit; `PlaceDetailsPlaceRequestElement.place` akzeptiert einen
-`Place`-Identitätsgegenstand oder eine ID. Das Erzeugen von `Place({id,
-requestedLanguage})` lädt keine Details; `fetchFields` wird nicht aufgerufen.
-UI-Kit-Widgets verwenden eigene Quoten; laut Google werden deren zugrunde
-liegende Places-/Geocoding-Abfragen nicht gegen die jeweiligen Projektquoten
-gezählt. Die GetPlace- und Map-loads-Sperren verhindern die UI-Kit-Bausteine deshalb
-nicht. Pflichtinhalte und Google-Attribution bleiben vollständig im nativen Widget.
+The browser key receives only **Maps JavaScript API and Places UI Kit API**
+and exactly `https://riparim.com/*`. **Places API (New) is removed from this key**:
+this blocks the former individual-details path independently of its unverified
+SDK GetPlace quota assignment. The official UI Kit setup contract requires Maps
+JavaScript and UI Kit; `PlaceDetailsPlaceRequestElement.place` accepts a
+`Place` identity object or an ID. Creating `Place({id,
+requestedLanguage})` loads no details; `fetchFields` is not called.
+UI Kit widgets use their own quotas; according to Google, their underlying
+Places/geocoding queries do not count against the corresponding project quotas.
+GetPlace and map-load blocks therefore do not prevent UI Kit components.
+Required content and Google attribution remain complete in the native widget.
 
-Das Schweizer Kontopreismodell aus #96 hat 10.000 freie Standard-UI-Kit-Ereignisse
-pro Monat. 250 pro Tag ergeben selbst über 31 volle Tage höchstens 7750 zusätzliche
-Standard-Queries dieses Projekts. Der frisch gelesene Billingbericht vom
-11.10.2026 08:42:27 UTC meldet 38 Standard-UI-Kit-Ereignisse mit 0 CHF,
-also 9962 Einheiten gegenüber der dokumentierten freien Kontostufe. Konservativ
-38 + 22 weitere Tagesfenster × 250 = 5538 Standard-Ereignisse im laufenden Monat.
-Dies ist ein Kontrollmodell, keine Live-Nachherabrechnung. Derselbe Bericht weist
-1261 Enterprise-Ereignisse mit 4,34 CHF aus; diese historischen Kosten und der
-Billingnachlauf beweisen keinen kostenlosen Enterprise-Rückweg. Bereits
-verbrauchte, verspätet gemeldete und
-andere gemeinsame Billing-Verbraucher müssen vor Freigabe separat berücksichtigt
-werden. Kein anderer Projekt-Key darf die Quote erhöhen oder einen kostenpflichtigen
-Ausweichpfad öffnen. Eine Tagesquote ist keine globale Geldobergrenze und kein
-Monatsbudget; bei unbestätigter kostenloser Restmenge bleibt die Referrerpause.
-Tagesreset-Zeitzone und Reporting-Verzug sind beim Provider zu prüfen.
+The Swiss account pricing model from #96 has 10,000 free Standard UI Kit events
+per month. Even across 31 full days, 250 per day yields at most 7750 additional
+Standard queries for this project. The freshly read billing report from
+2026-10-11 at 08:42:27 UTC reports 38 Standard UI Kit events with 0 CHF,
+leaving 9962 units against the documented free account tier. Conservatively,
+38 + 22 more daily windows × 250 = 5538 Standard events in the current month.
+This is a control model, not live billing after the change. The same report shows
+1261 Enterprise events with 4.34 CHF; these historical costs and
+billing lag prove no free Enterprise return path. Already
+consumed units, delayed reports, and
+other shared billing consumers must be considered separately before approval.
+No other project key may increase the quota or open a paid
+fallback path. A daily quota is neither a global monetary cap nor a
+monthly budget; the referrer pause remains if the remaining free allowance is unconfirmed.
+The provider's daily reset timezone and reporting delay must be checked.
 
-Advanced verwendet die separate SKU **Places UI Kit Pro (42AB-1FB3-B56A)**.
-Die [offizielle Preisliste](https://developers.google.com/maps/billing-and-pricing/pricing)
-nennt **5000 freie Ereignisse pro Monat**, darüber 5 USD pro 1000. Vor Aktivierung
-müssen die tatsächliche kostenlose Schweizer Kontostufe und bisherige kontoweite
-Pro-Nutzung frisch bestätigt sein. Die native Kontopreisliste vom 11.10.2026
-bestätigt 0 CHF bis zur Staffelgrenze 5000 und danach 4,159249999 CHF pro 1000.
-Der aktuelle Monatsbericht enthält neun SKUs, keine Pro-UI-Kit-Zeile; Gesamt
-4,34 CHF bleiben ausschließlich den historischen Enterprise-Details zugeordnet.
-Das Rechnungskonto ist nur mit `riparim-510521` verknüpft. Diese Billinganzeige
-allein beweist wegen Reporting-Verzug keine Nullnutzung; vor der Freigabe
-wurde zusätzlich die bisherige Advanced-Tagesquote 0 mit Nutzungsreadback geprüft. 100 pro Tag erlauben selbst über 31 Tage
-höchstens 3100 Advanced-Queries; andere Kontoverbraucher und Reporting-Verzug
-müssen zusätzlich in die freie Restmenge passen. Bei unbestätigter Restmenge
-bleibt Advanced auf 0; es gibt keinen kostenpflichtigen Ausweichpfad.
-Standard- und Pro-SKUs besitzen getrennte freie Mengen. Die Pro-Quote darf
-keine Sessions oder Zusatzinhalte freigeben. Diese Begrenzung ist keine
-allgemeine Geldobergrenze des Google-Kontos.
+Advanced uses the separate SKU **Places UI Kit Pro (42AB-1FB3-B56A)**.
+The [official price list](https://developers.google.com/maps/billing-and-pricing/pricing)
+lists **5000 free events per month**, then 5 USD per 1000. Before activation,
+the actual free Swiss account tier and previous account-wide
+Pro usage must be freshly confirmed. The native account price list from 2026-10-11
+confirms 0 CHF up to the 5000 tier boundary, then 4.159249999 CHF per 1000.
+The current monthly report contains nine SKUs and no Pro UI Kit row; the total
+4.34 CHF remains assigned exclusively to historical Enterprise Details.
+The billing account is linked only to `riparim-510521`. Because of reporting delay,
+this billing display alone does not prove zero usage; before approval,
+the previous Advanced daily quota of 0 was additionally verified through usage readback.
+Even across 31 days, 100 per day permits at most 3100 Advanced queries;
+other account consumers and reporting delay must also fit within the remaining free allowance.
+If the remaining allowance is unconfirmed, Advanced stays at 0; there is no paid fallback path.
+Standard and Pro SKUs have separate free allowances. The Pro quota
+must expose neither sessions nor additional content. This limit is not
+a general monetary cap for the Google account.
 
-Der getrennte Server-Key bleibt auf Places API (New) beschränkt, ohne behauptete
-feste Cloudflare-Ausgangs-IP. Öffentliche bestätigte Identitätsrouten starten keine
-neue Provider-Suche. Recherche/Neuzuordnung darf die serverseitige Suche nur mit
-belegtem kostenlosem Restkontingent verwenden; sonst offizielle Maps-Oberfläche
-oder Rückstellung. Keine geheimen Werte, echte Kontodetails oder Google-Inhalte
-werden in Git, D1, R2 oder Browser Storage übertragen. Historische Google-
-Momentaufnahmen bleiben unverändert und werden nicht als aktuelle Werte angezeigt.
+The separate server key remains restricted to Places API (New), without a claimed
+fixed Cloudflare egress IP. Public confirmed identity routes start no
+new provider search. Research/reassignment may use server-side search only with
+substantiated remaining free allowance; otherwise use the official Maps UI
+or defer. No secret values, real account details, or Google content
+are transferred into Git, D1, R2, or browser storage. Historical Google
+snapshots remain unchanged and are not displayed as current values.
 
-### Prüfschritte und Rückweg
+### Verification steps and return path
 
-1. **Projekt-/Billing-Verantwortlicher:** Billing-Berichte nach Projekt, Datum und
-   SKU filtern; Brutto-Nutzung, Credits/Rabatte und Kosten trennen. Konto-Schweiz/CHF,
-   Tarifstufen, Zeitzone und Reporting-Verzug mitprüfen. API-Dashboardzahlen und
-   fehlende SKU-Zeilen sind kein Nullkosten-/Restkontingent-Nachweis. Nach Release
-   denselben Traffic/Zeitraum vergleichen; keine zusätzliche Backend-Telemetrie nötig.
-2. **Projekt-/Quota-Verantwortlicher:** Im bestehenden Projekt `riparim-510521`
-   wirksame Methoden-/Tages-/Minutenquoten und API-/Referrer-Beschränkungen lesen.
-   UI-Kit über IAM Quotas mit `placewidgets.googleapis.com` prüfen. Das App-Limit
-   **100/UTC-Tag** betrifft nur Identitätssuche und ergänzende Land-Details;
-   UI-Kit-Widgets fallen nicht darunter; individuelle Browserratings und Bilder sind entfernt. Vor einer Änderung
-   alten Wert, Soll, kostenlose Restmenge und Auswirkungen festhalten. Das
-   [konservative Restmengenmodell](google-places-cost-audit-2026-10-11.md#begrenzungsmodell-und-offene-kontrollen)
-   ist keine Rechnung oder Gesamtgeldgrenze. Der Warnweg ist **tägliche manuelle
-   Billingprüfung** gegenüber zuletzt belegten 4,34 CHF und den relevanten SKUs.
-   Manuelle Warnschwellen: **50/80/100 %** der bestätigten freien SKU-Menge;
-   Enterprise Details/Text Search Enterprise/Fotos jeweils **500/800/1000**,
-   Standard-UI-Kit **5000/8000/10000**, Pro-UI-Kit **2500/4000/5000**. Bei 80 % Restmenge/Verzug und Tagesgrenzen
-   prüfen, bei 100 % den betreffenden API-Pfad pausieren. Enterprise Details
-   liegt mit 1261 bereits darüber; dieser alte Pfad bleibt gesperrt. Diese
-   Beobachtungsgrenzen sind keine eingeschalteten Budgetalarme oder Geldbudgets.
-   Ein Anstieg erfordert Prüfung von Ereignisdatum/Reporting-Verzug sowie Quoten/
-   fremden Verbrauchern und gegebenenfalls die geprüfte Abschaltung. Ein
-   Benachrichtigungsbudget allein stoppt keine Maps-Nutzung; ohne beauftragten
-   Benachrichtigungsweg werden keine automatischen Warnungen eingerichtet.
-3. **Runtime-/Release-Verantwortlicher:** Für die bestehende Konfigabschaltung
-   `GOOGLE_PLACES_SERVER_API_KEY` oder `GOOGLE_MAPS_BROWSER_API_KEY` in der geschützten
-   Runtime leer setzen/entfernen; die Google-Routen liefern `enabled:false`.
-   Vorher Wiederherstellung im vorhandenen geschützten Secret-Weg sichern, nichts
-   in Git/Logs schreiben. Dies deaktiviert auch neue Identitätsprüfungen für
-   Veröffentlichungen. Browser behalten Konfiguration/SDK bis zum Neuladen;
-   die Runtime-Abschaltung beendet keine bereits offenen SDK-Instanzen.
-4. **Wiederherstellung mit UI-Kit-Widgets:** Vor Freigabe den vollständigen
-   geprüften Main-Release kontrollieren: keine produktiven `fetchFields`- oder
-   REST-Fotoabrufe. Aktuelles Billing einschließlich gemeinsam genutzter
-   Kontofreimenge prüfen. Tagesgrenzen gemäß obiger Tabelle speichern und frisch
-   lesen. Browser-Key nur Maps JavaScript und UI Kit zuordnen, dann exakt
-   `https://riparim.com/*` freigeben; die sechs alten Dev-/Legacy-Referrer bleiben
-   entfernt. Bis zu fünf Minuten Providerpropagation abwarten, erneut lesen und
-   mit einer neuen Browserinstanz höchstens einen sichtbaren Bereich innerhalb
-   der bestätigten freien Quote prüfen. Nach SDK-Autorisierungsfehlern bewusst
-   neu laden; keine automatische Retryschleife. Keine Paid-Tarife, Abonnements,
-   Budget-/Alertdienste oder automatische Nachrichten einrichten.
-5. **Rückweg:** Bei fehlender kostenloser Restmenge, unerwartetem SKU-Verbrauch
-   oder ungeklärter Quotenwirkung den Browser-Referrer wieder auf exakt
-   `https://riparim-google-paused.invalid/*` setzen. Niedrige Methodenquoten und
-   Ausschluss von Places (New) im Browser-Key beibehalten. GetPlace und Fotos
-   werden auch bei Monatswechsel nicht automatisch wieder freigegeben.
-   Eigene Profile/Bewertungen und direkte Maps-/Routenlinks zuerst prüfen;
-   eine potenziell kostenpflichtige Providerprobe ist kein Abschaltnachweis.
-   Änderungen/Readbacks getrennt von tatsächlichem Live- und Billingnachweis
-   dokumentieren. Veröffentlichung nur als geprüfter Main-Release nach
+1. **Project/billing owner:** Filter billing reports by project, date, and
+   SKU; distinguish gross usage, credits/discounts, and costs. Also check Switzerland/CHF account settings,
+   price tiers, timezone, and reporting delay. API dashboard counts and
+   missing SKU rows do not prove zero costs or remaining allowance. After release,
+   compare the same traffic/time period; no additional backend telemetry is needed.
+2. **Project/quota owner:** Read effective method/daily/minute quotas and API/referrer restrictions
+   in existing project `riparim-510521`.
+   Check UI Kit through IAM Quotas with `placewidgets.googleapis.com`. The app limit
+   **100/UTC day** covers only identity search and supplementary country details;
+   UI Kit widgets are excluded; individual browser ratings and images are removed. Before a change,
+   record the old value, target, remaining free allowance, and impact. The
+   [conservative remaining-allowance model](google-places-cost-audit-2026-10-11.md#limiting-model-and-open-controls)
+   is neither a bill nor an overall monetary cap. The warning procedure is **daily manual
+   billing inspection** against the last substantiated 4.34 CHF and relevant SKUs.
+   Manual warning thresholds: **50/80/100%** of the confirmed free SKU allowance;
+   Enterprise Details/Text Search Enterprise/photos each **500/800/1000**,
+   Standard UI Kit **5000/8000/10000**, Pro UI Kit **2500/4000/5000**. At 80%, check remaining allowance,
+   reporting delay, and daily limits; at 100%, pause the affected API path. Enterprise Details
+   is already above that at 1261; this old path remains blocked. These
+   observation thresholds are neither enabled budget alerts nor monetary budgets.
+   An increase requires inspection of event dates/reporting delay, quotas,
+   and other consumers, and the verified shutdown when needed. A
+   notification budget alone does not stop Maps usage; without an authorized
+   notification procedure, configure no automatic alerts.
+3. **Runtime/release owner:** For the existing configuration shutdown,
+   empty/remove `GOOGLE_PLACES_SERVER_API_KEY` or `GOOGLE_MAPS_BROWSER_API_KEY` in protected
+   runtime configuration; Google routes return `enabled:false`.
+   First secure restoration through the existing protected secret mechanism; write nothing
+   to Git/logs. This also disables new identity checks for
+   publication. Browsers retain configuration/SDK until reload;
+   runtime shutdown does not terminate already open SDK instances.
+4. **Restoration with UI Kit widgets:** Before approval, inspect the complete
+   verified main release: no production `fetchFields` or
+   REST photo requests. Check current billing, including shared
+   account free allowance. Save daily limits according to the table above and read them
+   back freshly. Assign only Maps JavaScript and UI Kit to the browser key, then allow exactly
+   `https://riparim.com/*`; the six old development/legacy referrers remain
+   removed. Wait up to five minutes for provider propagation, read back again, and
+   use a new browser instance to check at most one visible area within
+   the confirmed free quota. Deliberately reload after SDK authorization errors;
+   no automatic retry loop. Configure no paid plans, subscriptions,
+   budget/alert services, or automatic messages.
+5. **Return path:** If remaining free allowance is missing, SKU consumption is unexpected,
+   or quota effects are unclear, set the browser referrer back to exactly
+   `https://riparim-google-paused.invalid/*`. Preserve low method quotas and
+   exclusion of Places (New) from the browser key. GetPlace and photos
+   are not automatically re-enabled at the start of a new month.
+   Check application-owned profiles/ratings and direct Maps/directions links first;
+   a potentially paid provider probe is not proof of shutdown.
+   Document changes/readbacks separately from actual live and billing evidence.
+   Publish only as a verified main release according to
    `docs/releases.md`.
 
-Google-Ausfälle dürfen eigene Profile/Bewertungen und bestätigte Maps-/Routenlinks
-nicht unterbrechen. Die App zeigt Ladefehler statt null Google-Bewertungen und
-startet im selben Bereich keine automatische Retryschleife; neue Navigation oder
-explizite Aktualisierung kann neu anfordern. Die isolierten DE/SQ/EN-Fixtures
-prüfen `enabled:false`, HTTP 429, Identitäts-/Widget-Timeouts ohne
-echte Providerverbindungen. API-Recherche nur mit belegtem kostenlosen
-Restkontingent, sonst offizielle Maps-Oberfläche oder Rückstellung; keine Betriebe
-kontaktieren. Dauerhaft bleiben eigene/unabhängig belegte Geschäftsdaten, Place IDs
-und Prüfmetadaten; kein neuer allgemeiner API-Contentcache/Bulkimport für Sterne,
-Rezensionen, Öffnungszeiten oder Fotos. Vorhandene historische Momentaufnahmen
-bleiben unverändert und werden nicht als Live-Google-Werte ausgegeben.
+Google failures must not interrupt application-owned profiles/ratings or confirmed Maps/directions links.
+The app shows loading errors instead of zero Google ratings and
+starts no automatic retry loop in the same area; new navigation or
+explicit refresh may request again. Isolated DE/SQ/EN fixtures
+check `enabled:false`, HTTP 429, identity/widget timeouts without
+real provider connections. API research requires substantiated remaining free
+allowance; otherwise use the official Maps UI or defer; contact no businesses.
+Only independently authored/substantiated business data, Place IDs,
+and verification metadata remain permanently; no new general API content cache/bulk import for stars,
+reviews, opening hours, or photos. Existing historical snapshots
+remain unchanged and are not presented as live Google values.
 
-## Primäre Dokumentation
+## Primary documentation
 
 - https://developers.google.com/maps/documentation/javascript/usage-and-billing
 - https://developers.google.com/maps/documentation/places/web-service/usage-and-billing
@@ -331,56 +331,56 @@ bleiben unverändert und werden nicht als Live-Google-Werte ausgegeben.
 - https://developers.google.com/maps/documentation/places/web-service/text-search
 - https://developers.google.com/maps/documentation/places/web-service/policies
 
-## Abschluss der übrigen acht Entwürfe
+## Completion of the remaining eight drafts
 
-Der Bestand nach dem Abschluss am 5. Oktober umfasste **129 eindeutig Google-zugeordnete öffentliche Pkw-Werkstätten und keine Entwürfe**. Die acht alten Entwürfe werden auf Nutzerauftrag entfernt; `data/workshop-final-removals.json` schützt ihre Kennungen vor erneutem Import. Der unabhängig belegte Nordstandort Reno Muçiqi & Bllaca erhält eine eigene Kennung, die bestätigte Place ID `ChIJhxuISoKdVBMRjzIZ8rKjdEc` und keine übertragenen Kundenverknüpfungen des alten Südprofils. Die Place ID wurde direkt mit einer unpassenden Ersatzsuche auf denselben Geschäftspunkt zurückgeprüft. Der positive Pkw-Service-Nachweis stammt aus eigenen Betriebsbeiträgen und einem amtlichen Wartungsauftrag. Alle acht Ergebnisse und die unabhängige Standortquelle stehen in `data/catalogue-final-2026-10-05.json`. Buraks allgemeine Pkw-Textbausteine reichen nach Abgleich mit dem konkreten Lkw-/Bus- und Motorradauftritt nicht für einen eindeutig belegten Pkw-Werkstattumfang. Die fünf numerisch belegten historischen Google-Sterne bleiben unverändert; neue Google-Inhalte wurden nicht gespeichert und das Server-Tageslimit wurde nicht umgangen.
+After completion on October 5, the inventory contained **129 public passenger-car workshops with unambiguous Google assignments and no drafts**. The eight old drafts are removed at the user's request; `data/workshop-final-removals.json` protects their identifiers against reimport. The independently substantiated northern location Reno Muçiqi & Bllaca receives its own identifier, confirmed Place ID `ChIJhxuISoKdVBMRjzIZ8rKjdEc`, and no transferred customer links from the old southern profile. The Place ID was directly verified to resolve to the same business point with a mismatched fallback search. Positive passenger-car service evidence comes from the business's own posts and an official maintenance contract. All eight outcomes and the independent location source are in `data/catalogue-final-2026-10-05.json`. After comparison with its specific truck/bus and motorcycle presentation, Burak's generic passenger-car text is insufficient to substantiate an unambiguous passenger-car workshop scope. The five numerically substantiated historical Google star values remain unchanged; no new Google content was stored and the server daily limit was not bypassed.
 
-## Erweiterung am 10. Oktober 2026
+## Expansion on October 10, 2026
 
-29 neue Kfz-Servicebetriebe, darunter zehn Betriebe mit Detailing oder Lackaufbereitung, erweitern den Katalog auf 158 öffentliche Profile. Alle neuen Place IDs wurden über den offiziellen Maps-JavaScript-SDK direkt mit Place Details aufgelöst und einzeln mit unabhängig veröffentlichtem Kontakt, Namen und Standort abgeglichen. Es gab 45 Browser-Textsuchabfragen und 29 direkte ID-Prüfungen, aber keine serverseitigen Places-Abfragen. Google-Bewertungen, Adressen, Telefonnummern und Koordinaten wurden nicht in Git oder D1 kopiert. Neue Profile erhalten keine Google-Momentaufnahme. Die Prüfung belegt die Geschäftszuordnung, keinen Inhaber-Verifizierungsstatus bei Google. Eigene Belege und Prüfergebnisse stehen in `data/import-2026-10-10.json`.
+Twenty-nine new automotive service businesses, including ten with detailing or paint restoration, expand the catalogue to 158 public profiles. All new Place IDs were resolved directly through the official Maps JavaScript SDK with Place Details and individually compared against independently published contact details, name, and location. There were 45 browser text-search queries and 29 direct ID checks, but no server-side Places queries. Google ratings, addresses, phone numbers, and coordinates were not copied into Git or D1. New profiles receive no Google snapshot. Verification proves business assignment, not ownership verification status at Google. Independently authored evidence and outcomes are recorded in `data/import-2026-10-10.json`.
 
-## Erster täglicher Lauf am 11. Oktober 2026
+## First daily run on October 11, 2026
 
-Auto Enzo Detailing und Shine Detailing Studio ergänzen den versionierten
-Katalog um zwei Google-eindeutig zugeordnete Detailing-Betriebe in Prishtina:
-**158 → 160 Profile, weiterhin keine Entwürfe**. Eigene Betriebsbeiträge in
-einem nachvollziehbaren unabhängigen Spiegel belegen Kontakte, Straßen und
-konkrete Leistungen; Shine hat zusätzlich einen unabhängigen Kontaktbeleg.
-Beide aktiven Google-Einträge wurden im vorgeschriebenen Gmail-Profil über
-den offiziellen Place-ID-Finder und anschließend direkt per ID mit
-absichtlich unpassender Ersatzsuche geprüft. Telefon und Straße stimmen
-überein. Es werden keine Google-Geschäftsdaten oder neuen Bewertungen
-kopiert und keine Inhaberbestätigung behauptet.
+Auto Enzo Detailing and Shine Detailing Studio add two detailing businesses in Prishtina
+with unambiguous Google assignments to the versioned catalogue:
+**158 → 160 profiles, still no drafts**. The businesses' own posts in
+a traceable independent mirror substantiate contacts, streets, and
+specific services; Shine also has independent contact evidence.
+Both active Google entries were checked in the required Gmail profile through
+the official Place ID finder and then directly by ID with
+a deliberately mismatched fallback search. Phone and street match.
+No Google business data or new ratings are copied,
+and no ownership confirmation is claimed.
 
-17 unabhängig recherchierte Kandidaten und sechs Bestandsdubletten wurden
-gesichtet. Nur zwei Kandidaten erfüllen derzeit alle Freigabebedingungen;
-fehlende eindeutige IDs, fehlender Google-Telefonkontakt und ein ungeklärter
-Standortwechsel führen zur Rückstellung. Der Dry Run ergänzt genau zwei
-IDs und aktualisiert kein bestehendes Profil. DE/SQ/EN-Inhalte und zentrale
-Übersetzungshashes sind geprüft. Das Manifest
-`data/import-2026-10-11-daily.json` unterscheidet den geprüften Quellimport
-von noch zu bestätigender Live-Veröffentlichung. Die ursprünglichen 158
-Profile sind vor dem Import vollständig ohne Profilfeldabweichung mit D1
-abgeglichen und geschützt gesichert worden.
+Seventeen independently researched candidates and six existing duplicates were
+reviewed. Only two candidates currently meet all publication conditions;
+missing unambiguous IDs, missing Google phone contact, and an unresolved
+location change cause deferral. The dry run adds exactly two
+IDs and updates no existing profile. DE/SQ/EN content and central
+translation hashes are verified. The manifest
+`data/import-2026-10-11-daily.json` distinguishes the verified source import
+from live publication still requiring confirmation. The original 158
+profiles were fully compared against D1 without profile-field differences
+and securely backed up before import.
 
-## Verbindlicher Rechercheweg der täglichen Routine
+## Required research procedure for the daily routine
 
-Seit der Nutzerentscheidung vom 12. Oktober 2026 prüft die tägliche
-Importautomation neue Identitäten immer ausschließlich über die öffentliche
-Google-Maps-Oberfläche. Sie verwendet keine eigenen API-Schlüssel,
-Places-/Maps-API- oder SDK-Aufrufe, Einbettungen oder API-Finder.
-Der vollständige Ablauf und die Rückstellungsbedingungen stehen in
-[daily-workshop-import.md](daily-workshop-import.md). Bestehende produktive
-Widgets und deren Providerquoten bleiben von dieser Rechercheregel unberührt.
+Since the user's decision on October 12, 2026, the daily
+import automation always checks new identities exclusively through the public
+Google Maps UI. It uses no owned API keys,
+Places/Maps API or SDK calls, embeds, or API finders.
+The complete procedure and deferral conditions are documented in
+[daily-workshop-import.md](daily-workshop-import.md). Existing production
+widgets and their provider quotas are unaffected by this research rule.
 
-## Täglicher Import am 13. Oktober 2026
+## Daily import on October 13, 2026
 
-Auto servis ‘BERATI’ BMW und Auto Servis & Diagnoz "OPEL" in Malishevë
-ergänzen den geprüften Quellbestand von 162 auf 164 Profile. Öffentliche
-Verzeichnisse belegen Kontakt, Straße und Fahrzeugwartung/-reparatur; die
-aktiven Maps-Einträge wurden ausschließlich über die öffentliche Oberfläche
-abgeglichen und direkt per Place-ID rückgeprüft. Marken, Beratungssprachen,
-WhatsApp und weitergehende Leistungen werden nicht aus Namen abgeleitet.
-Der Import ändert keine bisherigen Profile. Quellen, Rückstellungen und
-PR-/Release-/Liveabnahmestatus stehen im
-[Importmanifest](../data/import-2026-10-13-daily.json).
+Auto servis ‘BERATI’ BMW and Auto Servis & Diagnoz "OPEL" in Malishevë
+expand the verified source inventory from 162 to 164 profiles. Public
+directories substantiate contact details, street, and vehicle maintenance/repair;
+active Maps entries were compared exclusively through the public UI
+and verified directly by Place ID. Brands, consultation languages,
+WhatsApp, and additional services are not inferred from names.
+The import changes no previous profiles. Sources, deferrals, and
+PR/release/live acceptance status are documented in the
+[import manifest](../data/import-2026-10-13-daily.json).

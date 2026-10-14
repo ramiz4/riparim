@@ -13,6 +13,6 @@ export function workshopScopeExclusion(workshop: {
       workshop.name,
     )
   )
-    return "Lkw-, Bus- oder Tachografbetrieb: kein bestätigter Pkw-Werkstatteintrag.";
+    return "Truck, bus or tachograph business: no confirmed passenger-car workshop listing.";
   return null;
 }

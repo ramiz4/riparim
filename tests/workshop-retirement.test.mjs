@@ -301,7 +301,7 @@ const incoming = {
 };
 assert.throws(
   () => source.mergeWorkshopCatalogue(catalogue, [incoming]),
-  /Entfernte Werkstattkennung/,
+  /retired workshop ID/,
 );
 assert.throws(() => directory.validateProfile(incoming, retired), /entfernt/);
 assert.throws(
@@ -457,7 +457,7 @@ for (const id of finalManifest.workshopIds) {
   const reimport = { ...incoming, id };
   assert.throws(
     () => source.mergeWorkshopCatalogue(catalogue, [reimport]),
-    /Entfernte Werkstattkennung/,
+    /retired workshop ID/,
   );
   assert.throws(() => directory.validateProfile(reimport, id), /entfernt/);
 }

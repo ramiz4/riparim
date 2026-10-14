@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "removedAt": "2026-10-05T13:58:49.122Z",
-  "reason": "Auf ausdrücklichen Nutzerauftrag verworfene Entwürfe ohne eindeutige bestätigte Google-Zuordnung.",
+  "reason": "Drafts without an unambiguous confirmed Google assignment rejected at the user's explicit request.",
   "issueUrl": "https://github.com/ramiz4/riparim/issues/53",
   "previousReview": "./catalogue-identity-2026-10-05.json",
   "before": {

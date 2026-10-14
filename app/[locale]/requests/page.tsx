@@ -11,7 +11,7 @@ import { localizeHref } from "@/lib/i18n/locale";
 import { SiteHeader } from "@/components/site-header";
 import { DirectoryFooter } from "@/components/directory-footer";
 import { BusinessPanel } from "@/components/business-panel";
-import "../betriebe/business.css";
+import "../business/business.css";
 
 export const dynamic = "force-dynamic";
 

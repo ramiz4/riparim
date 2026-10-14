@@ -130,7 +130,7 @@ const output = ".test-runtime/catalogue-google-requests";
 await mkdir(output, { recursive: true });
 await build({
   stdin: {
-    contents: `export {default as Catalogue} from './app/[locale]/werkstaetten/catalogue';export {I18nProvider} from './lib/i18n/client';export {getMessages,createTranslator} from './lib/i18n/messages';export {defaultCatalogueFilters,parseCatalogueFilters} from './lib/catalogue-filters';`,
+    contents: `export {default as Catalogue} from './app/[locale]/workshops/catalogue';export {I18nProvider} from './lib/i18n/client';export {getMessages,createTranslator} from './lib/i18n/messages';export {defaultCatalogueFilters,parseCatalogueFilters} from './lib/catalogue-filters';`,
     resolveDir: process.cwd(),
     loader: "tsx",
   },

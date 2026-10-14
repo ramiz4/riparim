@@ -31,7 +31,7 @@ export async function GET(request: Request) {
     p.get("weiter"),
     siteOrigin(),
     locale,
-    type === "recovery" ? "/passwort-neu" : "/?besuche=1",
+    type === "recovery" ? "/reset-password" : "/?besuche=1",
   );
   let client: AuthClient | undefined;
   try {
@@ -146,14 +146,14 @@ export async function GET(request: Request) {
             callback.searchParams.get("weiter"),
             siteOrigin(),
             locale,
-            type === "recovery" ? "/passwort-neu" : "/?besuche=1",
+            type === "recovery" ? "/reset-password" : "/?besuche=1",
           );
         }
       }
       if (
         type === "recovery" ||
         pageIdentityPath(new URL(next, siteOrigin()).pathname) ===
-          "/passwort-neu"
+          "/reset-password"
       ) {
         const result = await client.acceptRecovery(
           code ?? token!,

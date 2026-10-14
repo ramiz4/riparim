@@ -9,7 +9,7 @@ import { getAdminUser } from "@/app/auth";
 import { SiteHeader } from "@/components/site-header";
 import { AdminNavigation } from "@/components/admin-navigation";
 import { BusinessPanel } from "@/components/business-panel";
-import "@/app/[locale]/betriebe/business.css";
+import "@/app/[locale]/business/business.css";
 
 export const dynamic = "force-dynamic";
 export default async function BusinessModerationPage({

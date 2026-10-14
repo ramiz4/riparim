@@ -1,3 +1,4 @@
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 import { z } from "zod";
 import { getAdminUser } from "@/app/auth";
 import { storage } from "@/db/storage";
@@ -25,13 +26,16 @@ export async function GET(request: Request) {
     const admin = await getAdminUser();
     if (!admin)
       return json(
-        { error: "Bitte melde dich an.", errorCode: "authentication_required" },
+        {
+          error: legacyMessages.authenticationRequired,
+          errorCode: "authentication_required",
+        },
         401,
       );
     if (!admin.isModerator)
       return json(
         {
-          error: "Kein Zugriff auf den Benachrichtigungsversand.",
+          error: legacyMessages.notificationsForbidden,
           errorCode: "forbidden",
         },
         403,
@@ -44,8 +48,8 @@ export async function GET(request: Request) {
       {
         error:
           e instanceof Error && e.message === "INVALID_CURSOR"
-            ? "Ungültige Seitenangabe."
-            : "Die Versandübersicht ist gerade nicht verfügbar.",
+            ? legacyMessages.invalidPage
+            : legacyMessages.notificationOverviewUnavailable,
         errorCode:
           e instanceof Error && e.message === "INVALID_CURSOR"
             ? "invalid_page"
@@ -61,20 +65,23 @@ export async function POST(request: Request) {
     !request.headers.get("content-type")?.includes("application/json")
   )
     return json(
-      { error: "Ungültige Anfrage.", errorCode: "invalid_request" },
+      { error: legacyMessages.invalidRequest, errorCode: "invalid_request" },
       403,
     );
   try {
     const admin = await getAdminUser();
     if (!admin)
       return json(
-        { error: "Bitte melde dich an.", errorCode: "authentication_required" },
+        {
+          error: legacyMessages.authenticationRequired,
+          errorCode: "authentication_required",
+        },
         401,
       );
     if (!admin.isModerator)
       return json(
         {
-          error: "Kein Zugriff auf den Benachrichtigungsversand.",
+          error: legacyMessages.notificationsForbidden,
           errorCode: "forbidden",
         },
         403,
@@ -84,7 +91,7 @@ export async function POST(request: Request) {
       body = actionSchema.parse(await readJson(request, 2048));
     } catch {
       return json(
-        { error: "Ungültige Aktion.", errorCode: "invalid_request" },
+        { error: legacyMessages.invalidAction, errorCode: "invalid_request" },
         400,
       );
     }
@@ -104,8 +111,7 @@ export async function POST(request: Request) {
     if (!canRetryNotification(row))
       return json(
         {
-          error:
-            "Wiederholung derzeit nicht möglich: Wartezeit, Versuchslimit, laufender Versand oder abgeschlossene Nachricht.",
+          error: legacyMessages.notificationRetryForbidden,
           errorCode: "notification_retry_forbidden",
         },
         409,
@@ -123,8 +129,7 @@ export async function POST(request: Request) {
   } catch {
     return json(
       {
-        error:
-          "Die Versandprüfung konnte nicht gestartet werden. Das Ereignis bleibt gespeichert.",
+        error: legacyMessages.notificationStartFailed,
         errorCode: "notification_start_failed",
       },
       503,

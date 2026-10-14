@@ -50,7 +50,7 @@ const out = ".test-runtime/management-localization-ui.mjs";
 const result = await build({
   stdin: {
     contents:
-      "export {AdminNavigation} from './components/admin-navigation';export {BusinessPanel} from './components/business-panel';export {default as AdminPanel} from './app/[locale]/verwaltung/panel';export {default as AdminUsers} from './app/[locale]/verwaltung/benutzer/users';export {default as AdminReviews} from './app/[locale]/verwaltung/bewertungen/reviews';export {NotificationStatus} from './components/notification-status';export {default as AuthSetup} from './app/[locale]/verwaltung/anmeldung/setup';export * as mailSources from './lib/auth/email-templates';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",
+      "export {AdminNavigation} from './components/admin-navigation';export {BusinessPanel} from './components/business-panel';export {default as AdminPanel} from './app/[locale]/admin/panel';export {default as AdminUsers} from './app/[locale]/admin/users/users';export {default as AdminReviews} from './app/[locale]/admin/reviews/reviews';export {NotificationStatus} from './components/notification-status';export {default as AuthSetup} from './app/[locale]/admin/authentication/setup';export * as mailSources from './lib/auth/email-templates';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",
     resolveDir: process.cwd(),
     loader: "tsx",
   },

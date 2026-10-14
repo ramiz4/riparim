@@ -43,7 +43,8 @@
     "test:node": "node tests/node-runtime.test.mjs",
     "test:node-release": "node tests/node-release.test.mjs",
     "hours:import": "node scripts/import-opening-hours.mjs",
-    "emails:import": "node scripts/import-workshop-emails.mjs"
+    "emails:import": "node scripts/import-workshop-emails.mjs",
+    "language:check": "node scripts/check-codebase-language.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

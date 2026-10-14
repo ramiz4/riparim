@@ -34,7 +34,7 @@ const current = validateWorkshopCatalogue(
 );
 const [action = "check", inputPath, ...flags] = process.argv.slice(2);
 if (action === "check") {
-  if (inputPath) throw Error("check benötigt keine zusätzlichen Argumente");
+  if (inputPath) throw Error("check does not accept additional arguments");
   await validateWorkshopTranslations(
     JSON.parse(
       await readFile(resolve(root, "data/workshop-translations.json"), "utf8"),
@@ -73,10 +73,10 @@ if (action === "check") {
   );
 } else if (action === "merge") {
   if (!inputPath || flags.some((flag) => flag !== "--write"))
-    throw Error("Verwendung: npm run catalog:merge -- datei.json [--write]");
+    throw Error("Usage: npm run catalog:merge -- file.json [--write]");
   const incoming = JSON.parse(await readFile(resolve(inputPath), "utf8"));
   if (!Array.isArray(incoming.workshops))
-    throw Error("Importdatei muss ein workshops-Array enthalten");
+    throw Error("The import file must contain a workshops array");
   const { catalogue, report } = mergeWorkshopCatalogue(
     current,
     incoming.workshops,
@@ -105,4 +105,4 @@ if (action === "check") {
       2,
     ),
   );
-} else throw Error("Unterstützt werden check und merge");
+} else throw Error("Supported commands are check and merge");

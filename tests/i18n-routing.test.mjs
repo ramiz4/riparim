@@ -52,6 +52,31 @@ const request = (path) => ({
   cookies: { getAll: () => [], set() {} },
 });
 for (const enabled of [false, true]) {
+  globalThis.fixtureAuth = enabled ? { enabled: true } : null;
+  const callback = await proxy(
+    request("/auth/bestaetigen?code=fixture-secret&locale=sq&weiter=%2Fsq"),
+  );
+  assert.equal(callback.status, 200);
+  assert.equal(
+    callback.headers.get("Location"),
+    null,
+    "Issued callback links never redirect their sensitive query",
+  );
+  assert.equal(
+    callback.headers.get("x-middleware-rewrite"),
+    "https://riparim.com/auth/confirm?code=fixture-secret&locale=sq&weiter=%2Fsq",
+    "The public callback is rewritten directly to the English source route",
+  );
+  assert.equal(callback.headers.get("Referrer-Policy"), "no-referrer");
+  assert.equal(callback.headers.get("Cache-Control"), "private, no-store");
+  if (enabled)
+    assert.match(
+      callback.headers.get("Set-Cookie"),
+      /fixture-session=renewed/,
+      "Cookie refresh retains the compatibility callback rewrite",
+    );
+}
+for (const enabled of [false, true]) {
   globalThis.fixtureAuth = enabled
     ? {
         enabled: true,
@@ -72,7 +97,12 @@ for (const enabled of [false, true]) {
     );
     assert.equal(
       response.headers.get("x-middleware-rewrite"),
-      "https://riparim.com/de" + (path === "/" ? "" : path),
+      "https://riparim.com/de" +
+        (path === "/"
+          ? ""
+          : path
+              .replace("/werkstaetten", "/workshops")
+              .replace("/werkstatt/", "/workshop/")),
       "German pages receive an internal native locale rewrite",
     );
     assert.equal(response.headers.get("Cache-Control"), "private, no-store");
@@ -101,7 +131,9 @@ for (const enabled of [false, true]) {
       );
       assert.equal(
         response.headers.get("x-middleware-rewrite"),
-        `https://riparim.com/${prefix.slice(1) || "de"}/werkstatt/${id}?_rsc=fixture`,
+        prefix === "/en"
+          ? null
+          : `https://riparim.com/${prefix.slice(1) || "de"}/workshop/${id}?_rsc=fixture`,
         "404 still renders the localized route boundary",
       );
       assert.equal(response.headers.get("Cache-Control"), "private, no-store");
@@ -120,18 +152,20 @@ for (const enabled of [false, true]) {
     }
 }
 for (const [path, identity] of [
-  ["/en/workshops", "/en/werkstaetten"],
-  ["/sq/serviset", "/sq/werkstaetten"],
-  ["/en/workshop/test-id", "/en/werkstatt/test-id"],
-  ["/sq/servis/test-id", "/sq/werkstatt/test-id"],
-  ["/en/login", "/en/anmelden"],
-  ["/sq/biznesi/kerko-pronesine", "/sq/betriebe/beanspruchen"],
-  ["/en/admin/users", "/en/verwaltung/benutzer"],
+  ["/en/workshops", "/en/workshops"],
+  ["/sq/serviset", "/sq/workshops"],
+  ["/en/workshop/test-id", "/en/workshop/test-id"],
+  ["/sq/servis/test-id", "/sq/workshop/test-id"],
+  ["/en/login", "/en/login"],
+  ["/sq/biznesi/kerko-pronesine", "/sq/business/claim"],
+  ["/en/admin/users", "/en/admin/users"],
 ]) {
   const response = await proxy(request(path + "?ort=prizren"));
   assert.equal(
     response.headers.get("x-middleware-rewrite"),
-    "https://riparim.com" + identity + "?ort=prizren",
+    path === identity
+      ? null
+      : "https://riparim.com" + identity + "?ort=prizren",
     "Translated browser paths resolve the existing page tree",
   );
   assert.match(
@@ -159,7 +193,6 @@ for (const path of [
   "/sq",
   "/en",
   "/api/account",
-  "/auth/bestaetigen?token_hash=fixture",
   "/signin-with-chatgpt",
   "/callback",
   "/__sites_connector_preview/invoke",

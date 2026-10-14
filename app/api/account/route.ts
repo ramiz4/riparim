@@ -1,3 +1,5 @@
+import { canonicalDeleteConfirmation } from "@/lib/i18n/delete-confirmation";
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 import { accountReadResponse } from "@/lib/account-read";
 import { ValidationError } from "@/lib/validation-error";
 import { isLocale } from "@/lib/i18n/locale";
@@ -32,8 +34,7 @@ function logFailure(operation: string, error: unknown) {
 const unavailable = () =>
   json(
     {
-      error:
-        "Die Kontoverwaltung ist gerade nicht verfügbar. Bitte versuche es erneut.",
+      error: legacyMessages.accountUnavailable,
       errorCode: "account_unavailable",
     },
     503,
@@ -79,7 +80,7 @@ export async function PATCH(request: Request) {
     body = await input(request);
   } catch {
     return json(
-      { error: "Ungültige Anfrage.", errorCode: "invalid_request" },
+      { error: legacyMessages.invalidRequest, errorCode: "invalid_request" },
       400,
     );
   }
@@ -88,7 +89,7 @@ export async function PATCH(request: Request) {
     if (!current)
       return json(
         {
-          error: "Bitte melde dich mit Google oder E-Mail an.",
+          error: legacyMessages.googleOrEmailRequired,
           errorCode: "authentication_required",
         },
         401,
@@ -100,7 +101,7 @@ export async function PATCH(request: Request) {
     )
       return json(
         {
-          error: "Nur der Anzeigename kann hier geändert werden.",
+          error: legacyMessages.invalidAccountPatch,
           errorCode: "invalid_account_patch",
         },
         400,
@@ -113,7 +114,7 @@ export async function PATCH(request: Request) {
       return json(
         {
           error:
-            e instanceof ValidationError ? e.message : "Bitte prüfe den Namen.",
+            e instanceof ValidationError ? e.message : legacyMessages.checkName,
           errorCode: e instanceof ValidationError ? e.code : "invalid_request",
         },
         400,
@@ -122,7 +123,7 @@ export async function PATCH(request: Request) {
     if (await accountBlocked(current.user.userId))
       return json(
         {
-          error: "Die Kontolöschung wurde bereits begonnen.",
+          error: legacyMessages.accountDeletionStarted,
           errorCode: "account_blocked",
         },
         409,
@@ -157,7 +158,7 @@ export async function POST(request: Request) {
     body = await input(request);
   } catch {
     return json(
-      { error: "Ungültige Anfrage.", errorCode: "invalid_request" },
+      { error: legacyMessages.invalidRequest, errorCode: "invalid_request" },
       400,
     );
   }
@@ -165,7 +166,10 @@ export async function POST(request: Request) {
     const current = await currentAccount();
     if (!current)
       return json(
-        { error: "Bitte melde dich an.", errorCode: "authentication_required" },
+        {
+          error: legacyMessages.authenticationRequired,
+          errorCode: "authentication_required",
+        },
         401,
       );
     if (
@@ -174,7 +178,7 @@ export async function POST(request: Request) {
     )
       return json(
         {
-          error: "Dieses Konto kann hier nicht gelöscht werden.",
+          error: legacyMessages.selfDeletionProtected,
           errorCode: "deletion_protected",
         },
         403,
@@ -187,7 +191,7 @@ export async function POST(request: Request) {
     )
       return json(
         {
-          error: "Bitte gib dein aktuelles Passwort ein.",
+          error: legacyMessages.currentPasswordRequired,
           errorCode: "current_password_required",
         },
         400,
@@ -195,7 +199,7 @@ export async function POST(request: Request) {
     if (await rateLimit(request, "account-reauth", current.user.userId))
       return json(
         {
-          error: "Zu viele Versuche. Bitte warte einige Minuten.",
+          error: legacyMessages.rateLimited,
           errorCode: "rate_limited",
         },
         429,
@@ -210,14 +214,14 @@ export async function POST(request: Request) {
     )
       return json(
         {
-          error: "Das Passwort konnte nicht bestätigt werden.",
+          error: legacyMessages.passwordProofFailed,
           errorCode: "password_proof_failed",
         },
         401,
       );
     if (await accountBlocked(current.user.userId))
       return json(
-        { error: "Dieses Konto ist gesperrt.", errorCode: "account_blocked" },
+        { error: legacyMessages.accountBlocked, errorCode: "account_blocked" },
         403,
       );
     await issueDeletionGrant(
@@ -237,14 +241,17 @@ export async function DELETE(request: Request) {
     body = await input(request);
   } catch {
     return json(
-      { error: "Ungültige Anfrage.", errorCode: "invalid_request" },
+      { error: legacyMessages.invalidRequest, errorCode: "invalid_request" },
       400,
     );
   }
-  if (Object.keys(body).length !== 1 || body.confirmation !== "KONTO LÖSCHEN")
+  if (
+    Object.keys(body).length !== 1 ||
+    body.confirmation !== canonicalDeleteConfirmation
+  )
     return json(
       {
-        error: "Bitte bestätige die Kontolöschung ausdrücklich.",
+        error: legacyMessages.deletionConfirmationRequired,
         errorCode: "deletion_confirmation_required",
       },
       400,
@@ -259,7 +266,7 @@ export async function DELETE(request: Request) {
     )
       return json(
         {
-          error: "Bitte bestätige deine Identität erneut.",
+          error: legacyMessages.reauthenticationRequired,
           errorCode: "reauthentication_required",
         },
         401,
@@ -269,7 +276,7 @@ export async function DELETE(request: Request) {
       if (!current || current.user.userId !== grant.account_id)
         return json(
           {
-            error: "Bitte bestätige deine Identität erneut.",
+            error: legacyMessages.reauthenticationRequired,
             errorCode: "reauthentication_required",
           },
           401,
@@ -277,8 +284,7 @@ export async function DELETE(request: Request) {
       if (await deletionProtected(current.user))
         return json(
           {
-            error:
-              "Administrationszugänge sind gegen eigene Löschung geschützt.",
+            error: legacyMessages.adminSelfDeletionProtected,
             errorCode: "deletion_protected",
           },
           403,
@@ -301,7 +307,7 @@ export async function DELETE(request: Request) {
     if (isBootstrapAccount(lookup.data.user?.email))
       return json(
         {
-          error: "Der ursprüngliche Verwaltungszugang ist geschützt.",
+          error: legacyMessages.originalAdminProtected,
           errorCode: "deletion_protected",
         },
         403,
@@ -318,7 +324,7 @@ export async function DELETE(request: Request) {
     if (e instanceof Error && e.message === "DELETION_FORBIDDEN")
       return json(
         {
-          error: "Administrationszugänge sind gegen eigene Löschung geschützt.",
+          error: legacyMessages.adminSelfDeletionProtected,
           errorCode: "deletion_protected",
         },
         403,
@@ -326,8 +332,7 @@ export async function DELETE(request: Request) {
     logFailure("delete", e);
     return json(
       {
-        error:
-          "Die Löschung konnte nicht abgeschlossen werden. Dein Konto bleibt nach Beginn gesperrt. Bitte wiederhole die Löschung hier; falls nötig hilft die Verwaltung.",
+        error: legacyMessages.deletionIncomplete,
         errorCode: "deletion_incomplete",
       },
       503,

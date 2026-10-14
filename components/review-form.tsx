@@ -1,4 +1,6 @@
 "use client";
+import { storedEvidenceTypes } from "@/lib/i18n/canonical-values";
+
 import { reviewServiceValues, reviewTextMaxLength } from "@/lib/review";
 import { useI18n } from "@/lib/i18n/client";
 import {
@@ -89,7 +91,7 @@ export function ReviewForm({
         "",
     ),
     [kind, setKind] = useState(
-      draft?.kind ?? existing?.evidence_type ?? "Rechnung",
+      draft?.kind ?? existing?.evidence_type ?? storedEvidenceTypes.invoice,
     ),
     [service, setService] = useState<string | string[]>(
       draft?.service ?? initialServices,
@@ -126,7 +128,7 @@ export function ReviewForm({
       note !== (existing?.evidence_note ?? "") ||
       rating !== (existing?.rating ?? 0) ||
       review !== (existing?.review ?? "") ||
-      kind !== (existing?.evidence_type ?? "Rechnung") ||
+      kind !== (existing?.evidence_type ?? storedEvidenceTypes.invoice) ||
       consent);
   useNavigationGuard({ busy, dirty });
   useEffect(() => {
@@ -425,9 +427,9 @@ export function ReviewForm({
             value={kind}
             onChange={setKind}
             values={[
-              "Rechnung",
-              "Service- oder Arbeitsbeleg",
-              "Anderer Nachweis",
+              storedEvidenceTypes.invoice,
+              storedEvidenceTypes.workOrder,
+              storedEvidenceTypes.other,
             ]}
             valueCategory="evidence"
             label={t("customer.evidenceType")}
@@ -456,7 +458,7 @@ export function ReviewForm({
             }
             accept="application/pdf,image/jpeg,image/png"
             required={
-              kind !== "Anderer Nachweis" &&
+              kind !== storedEvidenceTypes.other &&
               !existing?.file_name &&
               !selectedFile
             }
@@ -465,7 +467,7 @@ export function ReviewForm({
             <span className="review-selected-file">{selectedFile.name}</span>
           )}
         </label>
-        {kind === "Anderer Nachweis" ? (
+        {kind === storedEvidenceTypes.other ? (
           <label>
             {t("customer.describeEvidence")}
             <textarea

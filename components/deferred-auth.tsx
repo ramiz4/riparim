@@ -1,4 +1,5 @@
 "use client";
+import { parseAuthScreenQuery } from "@/lib/auth/screen-query";
 import { DeferredStatus } from "./deferred-status";
 import { useEffect, useState } from "react";
 import { usePageQuery } from "./use-page-query";
@@ -18,7 +19,7 @@ type Options = {
 };
 export function DeferredAuth({ screen }: { screen: AuthScreen }) {
   const { locale, t } = useI18n(),
-    query = usePageQuery(),
+    query = parseAuthScreenQuery(usePageQuery()),
     {
       session,
       error: sessionError,
@@ -61,7 +62,7 @@ export function DeferredAuth({ screen }: { screen: AuthScreen }) {
   }, [attempt]);
   const destination = localizeHref(
     validatedReturnPath(
-      query.get("weiter"),
+      query.returnTo,
       typeof window === "undefined"
         ? "https://riparim.com"
         : window.location.origin,
@@ -117,16 +118,16 @@ export function DeferredAuth({ screen }: { screen: AuthScreen }) {
       isOwner={session.isAdmin}
       returnTo={destination}
       notice={
-        query.get("hinweis") === "email-bestaetigt"
+        query.notice === "email-confirmed"
           ? t("customer.emailConfirmed")
-          : query.get("hinweis") === "passwort-geaendert"
+          : query.notice === "password-changed"
             ? t("customer.passwordChanged")
             : undefined
       }
       errorHint={
-        query.get("fehler") === "bestaetigung"
+        query.error === "confirmation"
           ? t("customer.invalidLink")
-          : query.get("fehler") === "google"
+          : query.error === "google"
             ? t("customer.googleCancelled")
             : undefined
       }

@@ -43,7 +43,7 @@ const files = [
   "ratings.css",
   "form-controls.css",
   "theme.css",
-  "[locale]/verwaltung/benutzer/users.css",
+  "[locale]/admin/users/users.css",
 ];
 const css = (
   await Promise.all(

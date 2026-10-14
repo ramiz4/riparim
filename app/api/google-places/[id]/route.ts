@@ -1,3 +1,4 @@
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 import { listWorkshops } from "@/db/directory";
 import {
   googlePlacesConfiguration,
@@ -11,19 +12,22 @@ export async function GET(
 ) {
   if (!sameOrigin(request))
     return json(
-      { errorCode: "invalid_request", error: "Ungültige Anfrage." },
+      { errorCode: "invalid_request", error: legacyMessages.invalidRequest },
       403,
     );
   const { id } = await params;
   if (!/^[a-z0-9][a-z0-9-]{2,80}$/.test(id))
-    return json({ errorCode: "not_found", error: "Ungültige Werkstatt." }, 404);
+    return json(
+      { errorCode: "not_found", error: legacyMessages.invalidWorkshop },
+      404,
+    );
   if (!googlePlacesConfiguration().enabled)
     return json({ enabled: false, placeId: null });
   try {
     const workshop = (await listWorkshops()).find((w) => w.id === id);
     if (!workshop)
       return json(
-        { errorCode: "not_found", error: "Werkstatt nicht gefunden." },
+        { errorCode: "not_found", error: legacyMessages.workshopNotFound },
         404,
       ); // Display reuses only the already confirmed public ID; browsing cannot start provider research.
     const placeId = await readConfirmedWorkshopGooglePlace(workshop);
@@ -32,7 +36,7 @@ export async function GET(
     return json(
       {
         errorCode: "unavailable",
-        error: "Google-Angaben sind gerade nicht verfügbar.",
+        error: legacyMessages.googleDataUnavailable,
       },
       503,
     );

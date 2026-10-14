@@ -55,9 +55,13 @@ export async function proxy(request: NextRequest) {
     const identity = pageIdentityPath(canonical.pathname);
     destination.pathname = `/${localeFromPath(canonical.pathname)}${identity === "/" ? "" : identity}`;
   }
+  // Provider URLs and issued emails keep the public callback and its cookie scope.
+  // Rewrite in place so sensitive callback query values never enter a redirect.
+  if (["/auth/bestaetigen", "/auth/bestaetigen/"].includes(canonical.pathname))
+    destination.pathname = "/auth/confirm";
   const rewrite = destination.pathname !== canonical.pathname;
   const profileId = page
-    ? pageIdentityPath(canonical.pathname).match(/^\/werkstatt\/([^/]+)$/)?.[1]
+    ? pageIdentityPath(canonical.pathname).match(/^\/workshop\/([^/]+)$/)?.[1]
     : undefined;
   // Decide before RSC streaming starts; keep the route's localized not-found UI.
   const status =
@@ -66,9 +70,12 @@ export async function proxy(request: NextRequest) {
       !(await publishedWorkshop(profileId)))
       ? 404
       : undefined;
-  const referrerPolicy = ["/auth/bestaetigen", "/auth/bestaetigen/"].includes(
-    canonical.pathname,
-  )
+  const referrerPolicy = [
+    "/auth/bestaetigen",
+    "/auth/bestaetigen/",
+    "/auth/confirm",
+    "/auth/confirm/",
+  ].includes(canonical.pathname)
     ? "no-referrer"
     : "strict-origin-when-cross-origin";
   // Cookie renewal must reconstruct the same response plan, including its rewrite.

@@ -100,6 +100,8 @@ for (const target of [
   "/\\outside.test",
   "/en/callback",
   "/sq/auth/bestaetigen?token_hash=secret",
+  "/auth/confirm?code=secret",
+  "/sq/%61uth/confirm?code=secret",
   "/en/signin-with-chatgpt",
   "/en/%63allback",
   "/%5coutside.test",
