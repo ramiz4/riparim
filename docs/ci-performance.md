@@ -286,50 +286,43 @@ Der Kandidat erweitert den Prüfvertrag, ohne Anwendungseingaben zu verändern.
 
 ## Ergebnis vom 14. Oktober 2026
 
-Geprüfter Kandidat `a60aaa387fbe058cc537dd884ecb84b34614c821`, Baseline
-`1648f6b8bc780fce820fd1d937774cf3231248e1`. Die 423 Anwendungseingaben,
+Gemessener Kandidat `a60aaa387fbe058cc537dd884ecb84b34614c821`, Baseline
+`1648f6b8bc780fce820fd1d937774cf3231248e1`. Alle 423 Anwendungseingaben,
 Katalog, Migrationen und Lockfile stimmen überein. Ubuntu 24.04, vier CPUs,
 16-GiB-Klasse, Node 24.21.0, Go 1.27.1, npm 11.19.0 und Target-npm 11.21.0.
-Die Runnerimages wechselten während der Serie zwischen
-`20261004.327.1` und `20261012.334.1`; beide Versionen sowie unterschiedliche
-CPUmodelle sind erhalten. Der Vergleich ist daher keine Messung auf
-byteidentischen VM-Images, sondern auf derselben dokumentierten Runnerklasse.
 
 | Paketcache | Erfolgreiche Paare | Aktiver Pfad P50 vorher → nachher | P95 vorher → nachher | P50 Runnersekunden vorher → nachher | Verkürzung |
 | ---------- | -----------------: | --------------------------------: | -------------------: | ----------------------------------: | ---------: |
 | Kalt       |                  5 |                       475 → 212 s |          484 → 226 s |                         475 → 520 s |     55,4 % |
-| Warm       |                  4 |                     432 → 216,5 s |          469 → 220 s |                         432 → 490 s |     49,9 % |
+| Warm       |                 10 |                     423,5 → 217 s |          474 → 233 s |                     423,5 → 493,5 s |     48,8 % |
 
-Alle 18 ausgewerteten Erstversuche bestanden; keine ungültigen Samples oder
-Retries. Der Warmcache wurde in sämtlichen beteiligten Lanes exakt getroffen;
-Kaltläufe restaurierten keinen Cache. Echte Next-Starts: Baseline drei, Kandidat
-einer. Der verpflichtende Gesamtcheck und alle Runnerkosten sind enthalten.
-Runnerzeit steigt um 9,5 % kalt beziehungsweise 13,4 % warm und bleibt unter
-der 25-%-Grenze. Warm-P50/P95 bleiben unter 240/300 Sekunden.
+Alle 30 ausgewerteten Erstversuche bestanden; keine Fehler, ungültigen Samples
+oder Retries. Prime ist ausgeschlossen. Sämtliche Warm-Lanes trafen den exakten
+Cache; Kaltläufe restaurierten keinen Cache. Echte Next-Starts: Baseline drei,
+Kandidat einer. Gesamtcheck und alle Runnerkosten sind enthalten. Runnerzeit
+steigt um 9,5 % kalt beziehungsweise 16,5 % warm und bleibt unter 25 %.
+Warm-P50/P95 bleiben unter 240/300 Sekunden. Damit sind alle Messziele erreicht.
 
-Der Nutzer verlangte während der Messserie ausdrücklich den Abschluss statt
-weiterer Ausweitung. Die primäre Auswertung verwendet deshalb die ersten vier
-vollständig abgeschlossenen Warm-Paare in geplanter Reihenfolge. Das ursprüngliche
-Ziel von zehn Warm-Paaren wird für diesen Abschluss nicht als erfüllt behauptet;
-der Report markiert diese Stichprobe weiterhin als unvollständig. Bereits
-gestartete weitere reine Messläufe ändern die hier eingefrorene Auswertung nicht.
-P95 bei vier Samples ist deren Maximum; daraus folgt keine allgemeine
-Zuverlässigkeitsgarantie.
+Der Nutzer verlangte während der Messserie ausdrücklich den Abschluss. Es wurden
+keine zusätzlichen Versuche gestartet; die bereits beauftragten letzten Läufe
+schlossen während der finalen Prüfung ab. Die vollständige ursprüngliche
+Stichprobe liegt damit vor. Kleine Stichproben begründen weiterhin keine
+allgemeine Flake-Garantie.
 
-Prime und das erste Kaltpaar starteten gleichzeitig; spätere Samples liefen
-in begrenzten Gruppen. Diese zusätzliche Runnerlast ist dokumentiert, initiale
-und spätere Wartezeiten stehen im Ergebnisdatensatz. Der Harness enthält die
-gleiche Quelltree-Version wie der Kandidat; Node-Launch-Hooks und RSS-Sampling
-laufen bei beiden Varianten. Der Kandidat hat zusätzlich die neuen
-Regressionstests und den semantischen Workflowcheck.
+Prime und das erste Kaltpaar starteten gleichzeitig; spätere Samples liefen in
+begrenzten Gruppen. Zusätzliche Runnerlast und Wartezeiten sind dokumentiert.
+Die Images wechselten zwischen `20261004.327.1` und `20261012.334.1`, CPUmodelle
+variieren. Das ist ein Vergleich derselben dokumentierten Runnerklasse,
+kein Vergleich byteidentischer VM-Images. Rohkapazitäten und Versionen bleiben
+im Datensatz erhalten. Die Hooks und RSS-Beobachter laufen bei beiden Varianten;
+der Kandidat enthält zusätzlich neue Regressionstests und den Workflowcheck.
 
-Run-Links, Rohkapazitäten, Digests, Laufzeiten und der reproduzierbare Bericht
-stehen in [ci-performance-results.json](ci-performance-results.json). Die
-Actions-Messartefakte enthalten die ursprünglichen Logs und Phasen.
-Ein abgewiesener Workflow-Definitionslauf
-[38549303157](https://github.com/ramiz4/riparim/actions/runs/38549303157)
-liegt vor der gültigen Messserie und ist ausdrücklich kein Sample.
-Die spätere Kapazitäts-/Metadatenkorrektur betrifft die Offlinevalidierung;
-sie verändert keine gemessenen Programme oder Zeiten. Der reale Releasepfad
-wird durch diesen Benchmark nicht bereitgestellt und besitzt noch keine
-ausreichende neue Produktionsstichprobe für eine Release-P50-Zusage.
+Run-Links, Digests, Kapazitäten, vollständige Laufzeiten und der reproduzierbare
+Bericht stehen in [ci-performance-results.json](ci-performance-results.json).
+Die Actions-Messartefakte enthalten originale Logs und Phasen. Der abgewiesene
+Workflow-Definitionslauf [38549303157](https://github.com/ramiz4/riparim/actions/runs/38549303157)
+liegt vor der gültigen Messserie und zählt ausdrücklich nicht als Sample.
+Die spätere Kapazitäts-/Metadatenkorrektur ist eine Offlinevalidierung und
+verändert keine gemessenen Programme oder Zeiten. Der reale Releasepfad wurde
+für den Benchmark nicht bereitgestellt; für dessen neue Produktions-P50 liegt
+noch keine ausreichende Stichprobe vor.
