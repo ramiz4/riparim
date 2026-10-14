@@ -112,6 +112,8 @@ function run(phase, command, args = [], environment = {}) {
   if (result.status !== 0) process.exit(result.status ?? 1);
 }
 run("install", "npm", ["run", "install:ci"], { HUSKY: "0" });
+if (lane === "quality")
+  run("workflow-lint", "bash", ["scripts/check-workflows.sh"]);
 if (lane === "baseline" || lane === "quality") {
   run("format", "npm", ["run", "format:check"]);
   run("catalogue", "npm", ["run", "catalog:check"]);

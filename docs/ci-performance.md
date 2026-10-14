@@ -76,6 +76,8 @@ den Pfad und die Kompression. Isolation entsteht durch getrennte Runner und den
 Experiment-Key. Vor jedem Restore/Install wird nachgewiesen, dass das Verzeichnis
 leer ist; vorhandene Inhalte werden nicht gelöscht oder stillschweigend benutzt.
 `setup-node` aktiviert kein npm-Caching.
+Der Pfad wird im Initialisierungsschritt mit dessen `runner.temp`-Kontext
+aufgelöst und über `GITHUB_ENV` an Restore, Messung und Save weitergegeben.
 
 - `cold`: kein Restore und kein Save; kein Fallback auf einen vorhandenen Cache.
 - `prime`: einmal die vollständige Baseline ausführen und danach den isolierten
@@ -244,8 +246,20 @@ bereit und unterstützt in Laufnamen die Kontexte `github` und `inputs`.
 
 ## Primärquellen
 
+Der Quality-Zweig validiert alle `.github/workflows/*.yml` semantisch mit dem
+offiziellen, über SHA-256 gepinnten actionlint **1.7.12**. Das prüft unter anderem
+Ausdruckskontexte und Job-/Stepverträge. `-shellcheck= -pyflakes=` deaktiviert nur
+die optionalen zusätzlichen Shell-/Pythonintegrationen; die Workflowprüfung
+bleibt vollständig aktiv und benötigt keine weitere App-Abhängigkeit.
+Der Kandidatenbenchmark ruft denselben `scripts/check-workflows.sh`-Entrypoint
+nach der Installation auf und zählt Download sowie Prüfung als Phase
+`workflow-lint` vollständig mit. Die Baselinerevision besitzt diese zusätzliche
+Prüfung noch nicht; ihre ursprüngliche Prüfmenge bleibt im Vergleich erhalten.
+Der Kandidat erweitert den Prüfvertrag, ohne Anwendungseingaben zu verändern.
+
 - [GitHub: Workflow-Events und Dispatch-Voraussetzungen](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows)
 - [GitHub: Workflow-Jobmetadaten und Versuch-API](https://docs.github.com/en/rest/actions/workflow-jobs)
 - [actions/cache: exaktes Restore und separater Save](https://github.com/actions/cache)
 - [actions/cache: Cacheversion und Pfadbindung](https://github.com/actions/cache#cache-version)
 - [actions/setup-node: Paketcacheoptionen](https://github.com/actions/setup-node)
+- [actionlint: gepinnte Version und semantische Workflowprüfung](https://github.com/rhysd/actionlint/blob/v1.7.12/docs/usage.md)

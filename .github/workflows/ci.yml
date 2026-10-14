@@ -44,6 +44,8 @@ jobs:
         env:
           HUSKY: "0"
         run: npm run install:ci
+      - name: Check GitHub Actions workflow semantics
+        run: bash scripts/check-workflows.sh
       - name: Check formatting
         run: npm run format:check
       - name: Set up Go for actual Auth email template rendering

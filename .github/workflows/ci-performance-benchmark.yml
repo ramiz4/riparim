@@ -95,8 +95,6 @@ jobs:
       BENCHMARK_CACHE_STATE: ${{ needs.plan.outputs.cache-state }}
       BENCHMARK_EXPERIMENT: ${{ needs.plan.outputs.experiment }}
       BENCHMARK_GO_VERSION: "1.27.1"
-      # Never restore a user's/default-branch cache for a cold measurement.
-      NPM_CONFIG_CACHE: ${{ runner.temp }}/ci-performance-npm
     steps:
       - name: Check out measurement harness
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -124,8 +122,10 @@ jobs:
         id: cache-key
         env:
           LOCK_DIGEST: ${{ hashFiles('source/package-lock.json') }}
+          NPM_CONFIG_CACHE: ${{ runner.temp }}/ci-performance-npm
         run: |
           node --input-type=module -e 'import { initializeBenchmarkCache } from "./harness/scripts/ci-benchmark-cache.mjs"; await initializeBenchmarkCache(process.env.NPM_CONFIG_CACHE)'
+          printf 'NPM_CONFIG_CACHE=%s\n' "$NPM_CONFIG_CACHE" >> "$GITHUB_ENV"
           printf 'cache-empty=true\n' >> "$GITHUB_OUTPUT"
           printf 'key=ci-performance-%s-Linux-x64-node24.21.0-go1.27.1-%s\n' "$BENCHMARK_EXPERIMENT" "$LOCK_DIGEST" >> "$GITHUB_OUTPUT"
       - name: Restore only the exact warm cache

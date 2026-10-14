@@ -134,6 +134,16 @@ assert.doesNotMatch(
   benchmarkWorkflow,
   /NPM_CONFIG_CACHE:[^\n]*(?:run_id|run_attempt|matrix\.lane)/,
 );
+assert.doesNotMatch(
+  benchmarkWorkflow.split("\n  measure:\n")[1].split("\n    steps:\n")[0],
+  /\$\{\{ runner\./,
+  "GitHub only exposes runner context in steps, not job-level env",
+);
+assert.match(
+  benchmarkWorkflow,
+  /printf 'NPM_CONFIG_CACHE=%s\\n' "\$NPM_CONFIG_CACHE" >> "\$GITHUB_ENV"/,
+  "the stable cache path must reach subsequent restore/save and measurement steps",
+);
 const inventoryFixture = {
   applicationDigest: "app",
   catalogueDigest: "catalogue",

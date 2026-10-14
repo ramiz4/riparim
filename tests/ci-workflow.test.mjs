@@ -20,6 +20,11 @@ const node = job(ci, "node");
 const workers = job(ci, "workers");
 const gateJob = job(ci, "verify");
 assert.match(quality, /npm test -- --group core/);
+assert.match(
+  quality,
+  /run: bash scripts\/check-workflows\.sh/,
+  "quality must validate workflow semantics for every workflow",
+);
 assert.match(node, /npm test -- --group node/);
 assert.match(gateJob, /name: Tests, types, lint and build/);
 assert.match(gateJob, /needs: \[quality, node, workers\]/);
