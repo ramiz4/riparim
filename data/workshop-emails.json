@@ -1191,6 +1191,48 @@
       "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen. Zusätzliche öffentliche Verzeichnissuche am 13.10.2026 durchgeführt. Facebook-Angaben nach Anmeldung erneut geprüft. Nachprüfung am 14.10.2026: zusätzliche Suchprüfung nach Telefonnummer beziehungsweise Betriebsname und Ort durchgeführt. Öffentliche Facebook-Kandidaten angemeldet erneut geprüft. Öffentliche Instagram-Kandidaten angemeldet mit vollständiger Bio erneut geprüft. Keine zusätzlich sicher zugeordnete E-Mail übernommen. Nachprüfung 14.10.2026: Erneute gezielte Google-Suche und Abgleich der verfügbaren Kontaktquellen; keine weitere sicher zuordenbare veröffentlichte E-Mail gefunden."
     },
     {
+      "workshopId": "auto-service-tuli-rahovec",
+      "matchedName": "Auto Service TULI",
+      "matchedPhone": "+38344887896",
+      "matchedCity": "Rahovec",
+      "emails": [
+        {
+          "address": "autoservistuli@gmail.com",
+          "sourceUrls": [
+            "https://www.facebook.com/autoservicetuli/"
+          ],
+          "checkedAt": "2026-10-14",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://www.facebook.com/autoservicetuli/"
+      ],
+      "notes": "Öffentlich belegte Geschäftsadresse. Recherche bestätigt weder Zustellung, Einwilligung noch Betriebsbesitz."
+    },
+    {
+      "workshopId": "auto-service-vali-istog",
+      "matchedName": "Auto Service Vali",
+      "matchedPhone": "+38344920210",
+      "matchedCity": "Istog",
+      "emails": [
+        {
+          "address": "jetmirzekaj06@gmail.com",
+          "sourceUrls": [
+            "https://gjirafa.biz/autoservicevali-1"
+          ],
+          "checkedAt": "2026-10-14",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://gjirafa.biz/autoservicevali-1"
+      ],
+      "notes": "Öffentlich belegte Geschäftsadresse. Recherche bestätigt weder Zustellung, Einwilligung noch Betriebsbesitz."
+    },
+    {
       "workshopId": "auto-servis-agimi-gjakova",
       "matchedName": "Auto servis \"Agimi\"",
       "matchedPhone": "+38344128553",
@@ -1322,6 +1364,27 @@
         "https://www.instagram.com/auto_service_berati_/"
       ],
       "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen. Zusätzliche öffentliche Verzeichnissuche am 13.10.2026 durchgeführt. Nachprüfung am 14.10.2026: zusätzliche Suchprüfung nach Telefonnummer beziehungsweise Betriebsname und Ort durchgeführt. Öffentliche Instagram-Kandidaten angemeldet mit vollständiger Bio erneut geprüft. Keine zusätzlich sicher zugeordnete E-Mail übernommen. Nachprüfung 14.10.2026: Erneute gezielte Google-Suche und Abgleich der verfügbaren Kontaktquellen; keine weitere sicher zuordenbare veröffentlichte E-Mail gefunden."
+    },
+    {
+      "workshopId": "auto-servis-besimi-kline",
+      "matchedName": "Auto Servis Besimi",
+      "matchedPhone": "+38344173716",
+      "matchedCity": "Klinë",
+      "emails": [
+        {
+          "address": "autoservisbesimi@hotmail.com",
+          "sourceUrls": [
+            "https://www.facebook.com/autoservisbesimi/"
+          ],
+          "checkedAt": "2026-10-14",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://www.facebook.com/autoservisbesimi/"
+      ],
+      "notes": "Öffentlich belegte Geschäftsadresse. Recherche bestätigt weder Zustellung, Einwilligung noch Betriebsbesitz."
     },
     {
       "workshopId": "auto-servis-bledi-kline",
@@ -1555,6 +1618,27 @@
         "https://www.google.com/search?q=Auto%20Servis%20Enisi%20Obiliq%20email%20-site%3Acybo.com%20-site%3Ariparim.com"
       ],
       "notes": "Öffentliche Quellen und verfügbare Social-Media-Treffer geprüft; keine sicher zuordenbare E-Mail-Adresse gefunden. Erneut am 13.10.2026 im internen Browser recherchiert; Instagram-Bio geprüft; keine zusätzlich direkt belegte E-Mail übernommen. Zusätzliche öffentliche Verzeichnissuche am 13.10.2026 durchgeführt. Facebook-Angaben nach Anmeldung erneut geprüft. Nachprüfung am 14.10.2026: zusätzliche Suchprüfung nach Telefonnummer beziehungsweise Betriebsname und Ort durchgeführt. Öffentliche Facebook-Kandidaten angemeldet erneut geprüft. Öffentliche Instagram-Kandidaten angemeldet mit vollständiger Bio erneut geprüft. Keine zusätzlich sicher zugeordnete E-Mail übernommen. Nachprüfung 14.10.2026: Erneute gezielte Google-Suche und Abgleich der verfügbaren Kontaktquellen; keine weitere sicher zuordenbare veröffentlichte E-Mail gefunden."
+    },
+    {
+      "workshopId": "auto-servis-ermali-kline",
+      "matchedName": "Auto Servis Ermali",
+      "matchedPhone": "+38343538919",
+      "matchedCity": "Klinë",
+      "emails": [
+        {
+          "address": "ermaliautoservice@gmail.com",
+          "sourceUrls": [
+            "https://www.facebook.com/100092324168737/"
+          ],
+          "checkedAt": "2026-10-14",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://www.facebook.com/100092324168737/"
+      ],
+      "notes": "Öffentlich belegte Geschäftsadresse. Recherche bestätigt weder Zustellung, Einwilligung noch Betriebsbesitz."
     },
     {
       "workshopId": "auto-servis-ford-jashanica-prishtina",
@@ -3202,6 +3286,20 @@
         "https://www.facebook.com/LuxuryAutoDetailingGjilan/"
       ],
       "notes": "Öffentlich belegte Adresse; Zuordnung über Betriebsname, Standort oder Telefonnummer geprüft."
+    },
+    {
+      "workshopId": "mana-auto-detailing-rahovec",
+      "matchedName": "MANA auto detailing",
+      "matchedPhone": "+38349790676",
+      "matchedCity": "Rahovec",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://www.instagram.com/manaautodetailing/",
+        "https://www.facebook.com/MANAautodetailing/",
+        "https://www.instagram.com/manaautodetailing/reel/Dax-31fsI2z/"
+      ],
+      "notes": "Keine Geschäfts-E-Mail in der eigenen Facebook-Kontaktansicht oder Instagram-Bio; zusätzliche Namens-/Ortssuche liefert keine eindeutig belegte Adresse. Fehlende E-Mail blockiert die Aufnahme nicht."
     },
     {
       "workshopId": "mercedes-benz-baaf",

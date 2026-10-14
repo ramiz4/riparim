@@ -1,6 +1,6 @@
 # Zentrale Werkstattdaten
 
-`data/workshops.json` ist die versionierte Quelle für Werkstattimporte. Sie enthält den aktuellen Bestand: **172 veröffentlichte Kfz-Servicebetriebe einschließlich Fahrzeugaufbereitung und keine Entwürfe**. Der Status jedes Datensatzes ist ausdrücklich gespeichert. Die Schätzung von ungefähr 1.700 Werkstätten stammt vom Nutzer; sie ist kein recherchierter Gesamtbestand und keine Vollständigkeitsbehauptung.
+`data/workshops.json` ist die versionierte Quelle für Werkstattimporte. Sie enthält den aktuellen Bestand: **177 veröffentlichte Kfz-Servicebetriebe einschließlich Fahrzeugaufbereitung und keine Entwürfe**. Der Status jedes Datensatzes ist ausdrücklich gespeichert. Die Schätzung von ungefähr 1.700 Werkstätten stammt vom Nutzer; sie ist kein recherchierter Gesamtbestand und keine Vollständigkeitsbehauptung.
 
 Die bisherigen getrennten Dateien für Profile und Google-Momentaufnahmen wurden in diese Quelle übernommen und entfernt. Namen, Kontakte, Quellen, Prüfzeitpunkte und stabile Riparim-Kennungen bleiben erhalten. Es werden keine Platzhalter für fehlende Werkstätten erzeugt.
 
@@ -456,3 +456,18 @@ Telefone und Freigabestatus unmittelbar beim Schreiben. Ein abweichender oder
 fehlender Datensatz bricht die gesamte Abfrage ab. Die Importrevision verhindert
 erneutes Schreiben derselben Daten. Andere Profilfelder, Inhaberzeiten,
 Bewertungen und private Tabellen werden nicht geschrieben.
+
+## Täglicher Import am 14. Oktober 2026
+
+Fünf neue Profile in Istog, Klinë und Rahovec ergänzen den geprüften
+Quellbestand von 172 auf 177. Vier Geschäfts-E-Mails sind unabhängig belegt;
+bei MANA auto detailing bleibt die fehlende Adresse ausdrücklich dokumentiert.
+DE-/SQ-/EN-Inhalte, öffentliche Maps-ID-Rücktests und der vollständige
+Liveabgleich stehen im [Tagesmanifest](../data/import-2026-10-14-daily.json).
+Der Quellimport allein bestätigt noch keine Live-Veröffentlichung.
+
+Neue Betriebe ohne recherchierte Öffnungszeiten stehen im Zeitenmanifest
+als `Nicht recherchiert – neuer Katalogeintrag`. Sie erhalten keinen Plan;
+171 bestehende Pläne und die bisherige Schließungsrückstellung bleiben erhalten.
+Vollständiger Identitätsabgleich und Manifestrevision gelten auch für solche
+Rückstellungen. Der Tagesimport führt keinen produktiven Zeitenimport aus.
