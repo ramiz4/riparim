@@ -94,7 +94,7 @@ export async function runLocalD1(local, phase, args, { signal } = {}) {
       redactLocalDiagnostic(
         `Local development ${phase} failed (${output.error?.code ? "spawn " + output.error.code : "exit " + (output.code ?? output.signal)}).\n` +
           `Database: DB (local only)\nConfig: ${local.configPath}\nState: ${local.persistPath}\n` +
-          `${cause}\nLog: ${log}\nNext: follow docs/local-development.md, then run npm run dev:setup.`,
+          `${cause}\nLog: ${log}\nNext: follow docs/development/local-development.md, then run npm run dev:setup.`,
       ),
     );
   }
