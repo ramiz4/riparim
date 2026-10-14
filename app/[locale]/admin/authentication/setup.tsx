@@ -1,4 +1,17 @@
 "use client";
+import { cn } from "@/lib/utils";
+import {
+  pageFrameClassName,
+  appButton,
+  noteClassName,
+  formClassName,
+  formLabelClassName,
+  helpTextClassName,
+  inputClassName,
+  textareaClassName,
+  formHintClassName,
+  errorClassName,
+} from "@/lib/presentation";
 import { AdminLoading } from "@/components/admin-loading";
 import { useI18n } from "@/lib/i18n/client";
 import {
@@ -146,10 +159,17 @@ export default function AuthSetup({ account }: { account: AccountIdentity }) {
     <>
       <SiteHeader account={account} isAdmin />
       <AdminNavigation active="login" />
-      <main className="auth-setup-page wrap">
-        <div className="section-heading">
-          <h1>{t("management.connectAuth")}</h1>
-          <p>
+      <main
+        className={cn(
+          pageFrameClassName,
+          "pt-[30px] pb-[70px] at-most-720:pt-7",
+        )}
+      >
+        <div>
+          <h1 className="my-2.5 text-[33px] leading-[1.2] font-[650] tracking-[-0.8px] at-most-720:text-[29px]">
+            {t("management.connectAuth")}
+          </h1>
+          <p className="mt-1.5 text-[14px] text-muted-foreground at-most-720:text-[13px]">
             {t("management.authSetupIntro", {
               provider: provider === "supabase" ? "Supabase" : "PocketBase",
             })}
@@ -158,20 +178,35 @@ export default function AuthSetup({ account }: { account: AccountIdentity }) {
         {loading && (
           <AdminLoading>{t("management.configLoading")}</AdminLoading>
         )}
-        <div className="auth-setup-layout" hidden={loading}>
+        <div
+          data-ui="auth-setup-layout"
+          className="mt-6 grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-start gap-6 [&[hidden]]:hidden at-most-900:grid-cols-1 at-most-720:gap-[18px]"
+          hidden={loading}
+        >
           <section
-            className="setup-instructions"
+            data-ui="setup-instructions"
+            className="min-w-0 rounded-xl border border-[#dfe7d9] p-[25px] dark:border-border dark:bg-card at-most-720:p-[21px]"
             aria-labelledby="setup-instructions-heading"
           >
-            <h2 id="setup-instructions-heading">
+            <h2
+              className="mb-3 text-[18px] font-[650]"
+              id="setup-instructions-heading"
+            >
               {t("management.authChecklist")}
             </h2>
             {provider === "pocketbase" ? (
               <>
-                <p>{t("management.pocketbaseSetup")}</p>
-                <p>{t("management.pocketbaseCallbacks")}</p>
-                <p>{t("management.authControlledSwitch")}</p>
+                <p className="my-2.5 text-[14px] text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground mt-0 mb-[18px] leading-[1.6]">
+                  {t("management.pocketbaseSetup")}
+                </p>
+                <p className="my-2.5 text-[14px] text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground mt-0 mb-[18px] leading-[1.6]">
+                  {t("management.pocketbaseCallbacks")}
+                </p>
+                <p className="my-2.5 text-[14px] text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground mt-0 mb-[18px] leading-[1.6]">
+                  {t("management.authControlledSwitch")}
+                </p>
                 <LocaleAnchor
+                  className="text-[#387d46] underline dark:text-[var(--theme-accent)]"
                   href="https://pocketbase.io/docs/authentication/"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -181,13 +216,21 @@ export default function AuthSetup({ account }: { account: AccountIdentity }) {
               </>
             ) : (
               <>
-                <p>{t("management.authReuseProject")}</p>
-                <ol className="setup-steps">
-                  <li>
-                    <h3>{t("management.authChooseProject")}</h3>
-                    <p>
+                <p className="my-2.5 text-[14px] text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground mt-0 mb-[18px] leading-[1.6]">
+                  {t("management.authReuseProject")}
+                </p>
+                <ol
+                  data-ui="setup-steps"
+                  className="m-0 grid list-decimal gap-4 pl-[22px] at-most-720:pl-[19px]"
+                >
+                  <li className="min-w-0 pl-1 marker:font-[650] marker:text-foreground">
+                    <h3 className="m-0 text-[15px] font-[650] text-foreground">
+                      {t("management.authChooseProject")}
+                    </h3>
+                    <p className="text-[14px] text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground my-[5px] leading-[1.6]">
                       {t("management.authProjectCheckBefore")}{" "}
                       <LocaleAnchor
+                        className="text-[#387d46] underline dark:text-[var(--theme-accent)]"
                         href="https://supabase.com/dashboard"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -197,44 +240,75 @@ export default function AuthSetup({ account }: { account: AccountIdentity }) {
                       {t("management.authProjectCheckAfter")}
                     </p>
                   </li>
-                  <li>
-                    <h3>{t("management.authWebsiteMail")}</h3>
-                    <p>{t("management.authWebsiteMailCheck")}</p>
-                    <details>
-                      <summary>{t("management.authMailHelp")}</summary>
-                      <div className="setup-help">
-                        <p>{t("management.smtpHelp")}</p>
-                        <p>{t("management.authSmtpFreeRule")}</p>
+                  <li className="min-w-0 pl-1 marker:font-[650] marker:text-foreground">
+                    <h3 className="m-0 text-[15px] font-[650] text-foreground">
+                      {t("management.authWebsiteMail")}
+                    </h3>
+                    <p className="text-[14px] text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground my-[5px] leading-[1.6]">
+                      {t("management.authWebsiteMailCheck")}
+                    </p>
+                    <details className="mt-2 border-t border-border">
+                      <summary className="min-h-11 cursor-pointer px-0.5 py-[11px] text-[13px] font-semibold text-foreground [overflow-wrap:anywhere] focus-visible:rounded-[3px] focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-[var(--theme-accent)]">
+                        {t("management.authMailHelp")}
+                      </summary>
+                      <div className="px-0.5 pb-2.5 text-[13px] leading-[1.6]">
+                        <p className="text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground my-[5px] mt-2 mb-3 text-[13px]">
+                          {t("management.smtpHelp")}
+                        </p>
+                        <p className="text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground my-[5px] mt-2 mb-3 text-[13px]">
+                          {t("management.authSmtpFreeRule")}
+                        </p>
                         <LocaleAnchor
+                          className="text-[#387d46] underline dark:text-[var(--theme-accent)] mb-2 inline-block text-[13px] leading-[1.6] underline-offset-[3px]"
                           href="https://supabase.com/docs/guides/auth/auth-smtp"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
                           {t("management.smtpDocs")}
                         </LocaleAnchor>
-                        <p>{t("management.authOriginRule")}</p>
-                        <p>
+                        <p className="text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground my-[5px] mt-2 mb-3 text-[13px]">
+                          {t("management.authOriginRule")}
+                        </p>
+                        <p className="text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground my-[5px] mt-2 mb-3 text-[13px]">
                           {t("management.authCallbackRule", {
                             callback:
                               "https://riparim.com/auth/bestaetigen\\?**",
                           })}
                         </p>
-                        <p>{t("management.authReleaseBackup")}</p>
-                        <p>{t("management.authExportHelp")}</p>
-                        <pre aria-label="auth:email-templates" tabIndex={0}>
+                        <p className="text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground my-[5px] mt-2 mb-3 text-[13px]">
+                          {t("management.authReleaseBackup")}
+                        </p>
+                        <p className="text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground my-[5px] mt-2 mb-3 text-[13px]">
+                          {t("management.authExportHelp")}
+                        </p>
+                        <pre
+                          className="max-h-60 overflow-auto rounded-[7px] bg-[#f3f6ef] p-3 text-[12px] leading-[1.6] text-[#5c7550] whitespace-pre-wrap [overflow-wrap:anywhere] focus-visible:rounded-[3px] focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-[var(--theme-accent)] dark:bg-secondary dark:text-muted-foreground"
+                          aria-label="auth:email-templates"
+                          tabIndex={0}
+                        >
                           {exportCommand}
                         </pre>
-                        <p>{t("management.authOriginFailure")}</p>
-                        <p>{t("management.authFieldPairHelp")}</p>
+                        <p className="text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground my-[5px] mt-2 mb-3 text-[13px]">
+                          {t("management.authOriginFailure")}
+                        </p>
+                        <p className="text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground my-[5px] mt-2 mb-3 text-[13px]">
+                          {t("management.authFieldPairHelp")}
+                        </p>
                         {mailFields.map((field) => (
                           <details
+                            className="mt-2 border-t border-border"
                             key={field.id}
                             data-auth-mail-field={field.id}
                           >
-                            <summary>{field.label}</summary>
+                            <summary className="min-h-11 cursor-pointer px-0.5 py-[11px] text-[13px] font-semibold text-foreground [overflow-wrap:anywhere] focus-visible:rounded-[3px] focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-[var(--theme-accent)]">
+                              {field.label}
+                            </summary>
                             <button
                               type="button"
-                              className="outline small"
+                              className={cn(
+                                appButton({ variant: "outline" }),
+                                "px-[13px] py-2",
+                              )}
                               aria-label={t("management.copyMailField", {
                                 field: field.label,
                               })}
@@ -246,16 +320,39 @@ export default function AuthSetup({ account }: { account: AccountIdentity }) {
                                 field: field.label,
                               })}
                             </button>
-                            <pre aria-label={field.label} tabIndex={0}>
+                            <pre
+                              className="max-h-60 overflow-auto rounded-[7px] bg-[#f3f6ef] p-3 text-[12px] leading-[1.6] text-[#5c7550] whitespace-pre-wrap [overflow-wrap:anywhere] focus-visible:rounded-[3px] focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-[var(--theme-accent)] dark:bg-secondary dark:text-muted-foreground"
+                              aria-label={field.label}
+                              tabIndex={0}
+                            >
                               {field.source}
                             </pre>
                           </details>
                         ))}
-                        {copyMessage && <p role="status">{copyMessage}</p>}
-                        {copyError && <p role="alert">{copyError}</p>}
-                        <p>{t("management.authReadbackHelp")}</p>
-                        <p>{t("management.authActivationFailure")}</p>
+                        {copyMessage && (
+                          <p
+                            className="text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground my-[5px] mt-2 mb-3 text-[13px]"
+                            role="status"
+                          >
+                            {copyMessage}
+                          </p>
+                        )}
+                        {copyError && (
+                          <p
+                            className="text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground my-[5px] mt-2 mb-3 text-[13px]"
+                            role="alert"
+                          >
+                            {copyError}
+                          </p>
+                        )}
+                        <p className="text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground my-[5px] mt-2 mb-3 text-[13px]">
+                          {t("management.authReadbackHelp")}
+                        </p>
+                        <p className="text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground my-[5px] mt-2 mb-3 text-[13px]">
+                          {t("management.authActivationFailure")}
+                        </p>
                         <LocaleAnchor
+                          className="text-[#387d46] underline dark:text-[var(--theme-accent)] mb-2 inline-block text-[13px] leading-[1.6] underline-offset-[3px]"
                           href="https://supabase.com/docs/guides/auth/auth-email-templates"
                           target="_blank"
                           rel="noopener noreferrer"
@@ -265,23 +362,38 @@ export default function AuthSetup({ account }: { account: AccountIdentity }) {
                       </div>
                     </details>
                   </li>
-                  <li>
-                    <h3>{t("management.authTestDelivery")}</h3>
-                    <p>{t("management.authTestDeliveryCheck")}</p>
+                  <li className="min-w-0 pl-1 marker:font-[650] marker:text-foreground">
+                    <h3 className="m-0 text-[15px] font-[650] text-foreground">
+                      {t("management.authTestDelivery")}
+                    </h3>
+                    <p className="text-[14px] text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground my-[5px] leading-[1.6]">
+                      {t("management.authTestDeliveryCheck")}
+                    </p>
                   </li>
-                  <li>
-                    <h3>{t("management.authGoogleHeading")}</h3>
-                    <p>{t("management.authGoogleCheck")}</p>
-                    <details>
-                      <summary>{t("management.authGoogleSettings")}</summary>
-                      <div className="setup-help">
-                        <p>
+                  <li className="min-w-0 pl-1 marker:font-[650] marker:text-foreground">
+                    <h3 className="m-0 text-[15px] font-[650] text-foreground">
+                      {t("management.authGoogleHeading")}
+                    </h3>
+                    <p className="text-[14px] text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground my-[5px] leading-[1.6]">
+                      {t("management.authGoogleCheck")}
+                    </p>
+                    <details className="mt-2 border-t border-border">
+                      <summary className="min-h-11 cursor-pointer px-0.5 py-[11px] text-[13px] font-semibold text-foreground [overflow-wrap:anywhere] focus-visible:rounded-[3px] focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-[var(--theme-accent)]">
+                        {t("management.authGoogleSettings")}
+                      </summary>
+                      <div className="px-0.5 pb-2.5 text-[13px] leading-[1.6]">
+                        <p className="text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground my-[5px] mt-2 mb-3 text-[13px]">
                           {t("management.googleBefore")}{" "}
-                          <strong>https://riparim.com</strong>{" "}
+                          <strong className="font-[550] text-[#537848] dark:text-[var(--theme-accent)]">
+                            https://riparim.com
+                          </strong>{" "}
                           {t("management.googleAfter")}
                         </p>
-                        <p>{t("management.authGoogleCredentials")}</p>
+                        <p className="text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground my-[5px] mt-2 mb-3 text-[13px]">
+                          {t("management.authGoogleCredentials")}
+                        </p>
                         <LocaleAnchor
+                          className="text-[#387d46] underline dark:text-[var(--theme-accent)] mb-2 inline-block text-[13px] leading-[1.6] underline-offset-[3px]"
                           href="https://supabase.com/docs/guides/auth/social-login/auth-google"
                           target="_blank"
                           rel="noopener noreferrer"
@@ -294,18 +406,25 @@ export default function AuthSetup({ account }: { account: AccountIdentity }) {
                 </ol>
               </>
             )}
-            <div className="note">
+            <div className={cn(noteClassName, "mt-5")}>
               <ShieldCheck size={21} />
-              <p>{t("management.legacyProofHelp")}</p>
+              <p className="text-[14px] leading-[1.8] text-[#7a896e] [overflow-wrap:anywhere] dark:text-muted-foreground m-0">
+                {t("management.legacyProofHelp")}
+              </p>
             </div>
           </section>
           <form
-            className="journey-form auth-settings-form"
+            className={cn(
+              formClassName,
+              "min-w-0 self-start rounded-xl border border-[#dfe7d9] bg-[#f9fbf6] p-[25px] dark:border-border dark:bg-[var(--theme-surface)] dark:text-muted-foreground at-most-900:-order-1 at-most-720:p-[21px]",
+            )}
             onChange={() => setDirty(true)}
             onSubmit={save}
           >
-            <h2>{t("management.connectProject")}</h2>
-            <label>
+            <h2 className="mb-3 text-[18px] font-[650]">
+              {t("management.connectProject")}
+            </h2>
+            <label className={formLabelClassName}>
               {t("management.authProvider")}
               <select
                 data-auth-provider
@@ -319,14 +438,17 @@ export default function AuthSetup({ account }: { account: AccountIdentity }) {
                 <option value="pocketbase">PocketBase</option>
               </select>
             </label>
-            <p className="help">{t("management.authControlledSwitch")}</p>
-            <label>
+            <p className={helpTextClassName}>
+              {t("management.authControlledSwitch")}
+            </p>
+            <label className={formLabelClassName}>
               {t(
                 provider === "supabase"
                   ? "management.projectUrl"
                   : "management.authEndpoint",
               )}
               <input
+                className={inputClassName}
                 disabled={loading || busy}
                 type="url"
                 required
@@ -342,9 +464,10 @@ export default function AuthSetup({ account }: { account: AccountIdentity }) {
             </label>
             {provider === "supabase" && (
               <>
-                <label>
+                <label className={formLabelClassName}>
                   {t("management.publishableKey")}
                   <textarea
+                    className={textareaClassName}
                     disabled={loading || busy}
                     required
                     rows={3}
@@ -354,11 +477,16 @@ export default function AuthSetup({ account }: { account: AccountIdentity }) {
                     autoComplete="off"
                   />
                 </label>
-                <p className="help">{t("management.publicKeyHelp")}</p>
+                <p className={helpTextClassName}>
+                  {t("management.publicKeyHelp")}
+                </p>
               </>
             )}
-            <label className="consent">
+            <label
+              className={cn(formLabelClassName, "flex items-start gap-2.5")}
+            >
               <Checkbox
+                className="mt-1 shrink-0"
                 disabled={loading || busy}
                 checked={mail}
                 onCheckedChange={(v) => {
@@ -367,9 +495,18 @@ export default function AuthSetup({ account }: { account: AccountIdentity }) {
                 }}
                 aria-label={t("management.confirmDelivery")}
               />
-              <span>{t("management.deliveryTested")}</span>
+              <span
+                className={cn(
+                  formHintClassName,
+                  "text-[13px] leading-[1.7] text-[#697d6d] dark:text-muted-foreground",
+                )}
+              >
+                {t("management.deliveryTested")}
+              </span>
             </label>
-            <label className="activation-switch">
+            <label
+              className={cn(formLabelClassName, "flex items-center gap-3")}
+            >
               <Switch
                 disabled={loading || busy}
                 checked={enabled}
@@ -379,26 +516,39 @@ export default function AuthSetup({ account }: { account: AccountIdentity }) {
                 }}
                 aria-label={t("management.activateCustomerLogin")}
               />
-              <span>{t("management.activateCustomerLogin")}</span>
+              <span
+                className={cn(
+                  formHintClassName,
+                  "text-[14px] text-[#506a48] dark:text-[var(--theme-accent)] at-most-720:leading-[1.5]",
+                )}
+              >
+                {t("management.activateCustomerLogin")}
+              </span>
             </label>
             {error && (
-              <p className="error" role="alert">
+              <p className={errorClassName} role="alert">
                 {error}
               </p>
             )}
             {message && (
-              <p className="admin-feedback" role="status">
+              <p
+                className="mb-4 rounded-lg bg-[#eef6e9] px-[15px] py-3 text-[14px] text-[#527d4d] dark:bg-[#163e32] dark:text-[var(--theme-positive)]"
+                role="status"
+              >
                 {message}
               </p>
             )}
             <button
               type="submit"
-              className="primary"
+              className={appButton()}
               disabled={loading || busy}
             >
               {busy ? (
                 <>
-                  <LoaderCircle className="spin" size={17} />
+                  <LoaderCircle
+                    className="inline-block animate-spin motion-reduce:animate-none"
+                    size={17}
+                  />
                   {t("management.checkingConnection")}
                 </>
               ) : enabled ? (
@@ -407,14 +557,26 @@ export default function AuthSetup({ account }: { account: AccountIdentity }) {
                 t("management.saveConnectionDraft")
               )}
             </button>
-            <div className="auth-preview-links">
-              <LocaleAnchor href="/anmelden">
+            <div
+              data-ui="auth-preview-links"
+              className="flex flex-col gap-2.5 text-[13px] text-[#517b48] dark:text-[var(--theme-accent)]"
+            >
+              <LocaleAnchor
+                className="underline underline-offset-[3px]"
+                href="/anmelden"
+              >
                 {t("management.previewLogin")}
               </LocaleAnchor>
-              <LocaleAnchor href="/registrieren">
+              <LocaleAnchor
+                className="underline underline-offset-[3px]"
+                href="/registrieren"
+              >
                 {t("management.previewRegistration")}
               </LocaleAnchor>
-              <LocaleAnchor href="/passwort-vergessen">
+              <LocaleAnchor
+                className="underline underline-offset-[3px]"
+                href="/passwort-vergessen"
+              >
                 {t("management.previewRecovery")}
               </LocaleAnchor>
             </div>

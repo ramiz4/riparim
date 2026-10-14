@@ -1,4 +1,10 @@
 "use client";
+import { cn } from "@/lib/utils";
+import {
+  contentTitleClassName,
+  pageFrameClassName,
+  appButton,
+} from "@/lib/presentation";
 import { AdminLoading } from "@/components/admin-loading";
 import { DeferredStatus } from "./deferred-status";
 import { useEffect, useRef, useState } from "react";
@@ -140,19 +146,41 @@ export function DeferredManagement({ kind }: { kind: DeferredManagementKind }) {
       <>
         {header}
         <main
-          className={
+          className={cn(
+            pageFrameClassName,
             administrative
-              ? "admin-main wrap"
-              : kind === "settings"
-                ? "settings-page wrap"
-                : "business-page wrap"
-          }
+              ? "pt-8 pb-[60px]"
+              : "min-h-[calc(100svh_-_180px)] pt-[var(--content-page-padding-top)] pb-[var(--content-page-padding-bottom)]",
+          )}
         >
-          <h1>{title}</h1>
+          <h1
+            className={
+              administrative
+                ? undefined
+                : cn(
+                    contentTitleClassName,
+                    kind === "settings" ? "mb-[var(--content-page-gap)]" : "",
+                  )
+            }
+          >
+            {title}
+          </h1>
           <DeferredStatus
             error={error}
             pending={pending}
             retry={retry}
+            errorClassName={
+              !administrative && kind !== "settings"
+                ? "mt-2 mb-[var(--content-page-gap)] leading-[1.6]"
+                : undefined
+            }
+            loadingClassName={
+              !administrative && kind !== "settings"
+                ? error
+                  ? "mt-2.5 mb-4 text-[14px] leading-[1.7] text-muted-foreground"
+                  : "mt-2 mb-[var(--content-page-gap)] text-[15px] leading-[1.6] text-muted-foreground"
+                : undefined
+            }
             loadingIndicator={
               administrative ? (
                 <AdminLoading>{t("customer.loading")}</AdminLoading>
@@ -167,8 +195,20 @@ export function DeferredManagement({ kind }: { kind: DeferredManagementKind }) {
     return (
       <>
         {header}
-        <main className="settings-page wrap">
-          <h1>{title}</h1>
+        <main
+          className={cn(
+            pageFrameClassName,
+            "min-h-[calc(100svh_-_180px)] pt-[var(--content-page-padding-top)] pb-[var(--content-page-padding-bottom)]",
+          )}
+        >
+          <h1
+            className={cn(
+              contentTitleClassName,
+              "mb-[var(--content-page-gap)]",
+            )}
+          >
+            {title}
+          </h1>
           <AccountSettings appearance={<ThemeSettings />} />
         </main>
         {footer}
@@ -178,14 +218,19 @@ export function DeferredManagement({ kind }: { kind: DeferredManagementKind }) {
     return (
       <>
         {header}
-        <main className="access-page">
-          <h1>{title}</h1>
+        <main
+          data-ui="access-page"
+          className="mx-auto my-20 flex max-w-[600px] flex-col gap-[25px] p-[30px]"
+        >
+          <h1 className="text-[32px] leading-[1.2]">{title}</h1>
           {session.account && administrative ? (
-            <p>{t("management.noReviewAccess")}</p>
+            <p className="text-[#758273] dark:text-muted-foreground">
+              {t("management.noReviewAccess")}
+            </p>
           ) : (
-            <p>
+            <p className="text-[#758273] dark:text-muted-foreground">
               <Link
-                className="primary"
+                className={appButton()}
                 href={"/anmelden?weiter=" + encodeURIComponent(returnTo)}
               >
                 {t("management.login")}
@@ -209,12 +254,25 @@ export function DeferredManagement({ kind }: { kind: DeferredManagementKind }) {
         <main
           ref={claimMain}
           tabIndex={-1}
-          className="business-page business-claim-page wrap"
+          className={cn(
+            pageFrameClassName,
+            "min-h-[calc(100svh_-_180px)] max-w-[680px] pt-4 pb-9 at-most-720:pt-2.5",
+          )}
         >
-          {!directoryReady && <h1>{title}</h1>}
+          {!directoryReady && (
+            <h1 className={cn(contentTitleClassName, "focus:outline-none")}>
+              {title}
+            </h1>
+          )}
           <DeferredStatus
             error={currentDirectory?.state === "error"}
             pending={directoryPending}
+            errorClassName="mt-2 mb-[var(--content-page-gap)] leading-[1.6]"
+            loadingClassName={
+              currentDirectory?.state === "error"
+                ? "mt-2.5 mb-4 text-[14px] leading-[1.7] text-muted-foreground"
+                : "mt-2 mb-[var(--content-page-gap)] text-[15px] leading-[1.6] text-muted-foreground"
+            }
             errorText={t("management.businessUnavailable")}
             retryText={t("management.retryBusiness")}
             completedFocusRef={claimMain}
@@ -241,16 +299,19 @@ export function DeferredManagement({ kind }: { kind: DeferredManagementKind }) {
       {header}
       {kind === "claims" && <AdminNavigation active="business" />}
       <main
-        className={
-          kind === "claims"
-            ? "business-page admin-main admin-business-page wrap"
-            : "business-page wrap"
-        }
+        className={cn(
+          pageFrameClassName,
+          "min-h-[calc(100svh_-_180px)] pt-[var(--content-page-padding-top)] pb-[var(--content-page-padding-bottom)]",
+        )}
       >
         {kind === "claims" && (
           <>
-            <h1>{title}</h1>
-            <p>{t("management.businessModerationHelp")}</p>
+            <h1 className={cn(contentTitleClassName, "focus:outline-none")}>
+              {title}
+            </h1>
+            <p className="mt-2 mb-[var(--content-page-gap)] text-[15px] leading-[1.6] text-muted-foreground">
+              {t("management.businessModerationHelp")}
+            </p>
           </>
         )}
         <BusinessPanel

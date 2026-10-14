@@ -1,3 +1,9 @@
+import { cn } from "@/lib/utils";
+import {
+  pageFrameClassName,
+  contentTitleClassName,
+  appButton,
+} from "@/lib/presentation";
 import { publicReleaseRender } from "@/lib/public-release";
 import { deferredManagementPage } from "@/lib/deferred-page";
 import { I18nMessages } from "@/lib/i18n/client";
@@ -11,7 +17,6 @@ import { localizeHref } from "@/lib/i18n/locale";
 import { SiteHeader } from "@/components/site-header";
 import { DirectoryFooter } from "@/components/directory-footer";
 import { BusinessPanel } from "@/components/business-panel";
-import "../business/business.css";
 
 export const dynamic = "force-dynamic";
 
@@ -43,19 +48,28 @@ export default async function BusinessApplicationsPage({
           }
           isAdmin={!!admin?.isModerator}
         />
-        <main className="business-page wrap">
+        <main
+          className={cn(
+            pageFrameClassName,
+            "min-h-[calc(100svh_-_180px)] pt-[var(--content-page-padding-top)] pb-[var(--content-page-padding-bottom)]",
+          )}
+        >
           {!user && (
             <>
-              <h1>{t("management.myApplications")}</h1>
-              <p>{t("management.applicationsIntro")}</p>
+              <h1 className={cn(contentTitleClassName, "focus:outline-none")}>
+                {t("management.myApplications")}
+              </h1>
+              <p className="mt-2 mb-[var(--content-page-gap)] text-[15px] leading-[1.6] text-muted-foreground">
+                {t("management.applicationsIntro")}
+              </p>
             </>
           )}
           {user ? (
             <BusinessPanel key="requests" view="requests" />
           ) : (
-            <p>
+            <p className="mt-2.5 mb-4 text-[14px] leading-[1.7] text-muted-foreground">
               <Link
-                className="primary"
+                className={appButton()}
                 href={`/anmelden?weiter=${encodeURIComponent(localizeHref("/antraege", locale))}`}
               >
                 {t("management.login")}

@@ -101,7 +101,9 @@ try {
       ),
     ),
   );
-  const trigger = document.querySelector(".catalogue-filter-button");
+  const trigger = document.querySelector(
+    "[data-ui~='catalogue-filter-button']",
+  );
   await act(async () => trigger.click());
   assert(document.querySelector("[role=dialog]"));
   const draft = document.querySelector(

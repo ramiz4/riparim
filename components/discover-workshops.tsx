@@ -1,5 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
+import { appButton, pageFrameClassName } from "@/lib/presentation";
 import { useI18n } from "@/lib/i18n/client";
 import { selectPartnerWorkshops } from "@/lib/partner-selection";
 import { Sparkles } from "lucide-react";
@@ -83,31 +85,51 @@ export function DiscoverWorkshops() {
   }
   return (
     <section
-      className="discover-section partner-section wrap"
+      className={cn(
+        pageFrameClassName,
+        "mt-0 rounded-none border-0 bg-transparent py-20 at-most-720:py-12",
+      )}
       aria-labelledby="discover-title"
     >
-      <div className="discover-heading">
-        <h2 id="discover-title">
-          <Sparkles size={24} aria-hidden="true" />
+      <div className="mb-6">
+        <h2
+          className="flex items-center gap-[10px] text-[28px] font-[650] leading-[1.2] tracking-[-0.7px] at-most-720:text-[26px]"
+          id="discover-title"
+        >
+          <Sparkles
+            className="shrink-0 text-[var(--theme-accent)] at-most-720:size-[22px]"
+            size={24}
+            aria-hidden="true"
+          />
           {t("public.partnerTitle")}
         </h2>
       </div>
       {status === "loading" ? (
         <LoadingIndicator label={t("public.loadingWorkshops")} />
       ) : status === "error" ? (
-        <div className="discover-message" role="alert">
+        <div
+          className="flex flex-wrap items-center gap-4 py-6 text-muted-foreground"
+          role="alert"
+        >
           <p>{t("public.directoryUnavailable")}</p>
-          <button type="button" className="outline" onClick={retry}>
+          <button
+            type="button"
+            className={appButton({ variant: "outline" })}
+            onClick={retry}
+          >
             {t("public.reload")}
           </button>
         </div>
       ) : view.workshops.length === 0 ? (
-        <div className="discover-message">
+        <div className="flex flex-wrap items-center gap-4 py-6 text-muted-foreground">
           <p>{t("public.directoryEmpty")}</p>
           <p>{t("public.directoryEmptyHelp")}</p>
         </div>
       ) : (
-        <div className="catalogue-grid discover-grid">
+        <div
+          data-ui="discover-grid"
+          className="grid grid-cols-3 gap-6 [&[hidden]]:hidden at-most-1000:auto-cols-[48%] at-most-1000:grid-flow-col at-most-1000:grid-cols-none at-most-1000:gap-4 at-most-1000:overflow-x-auto at-most-1000:px-[2px] at-most-1000:pt-1 at-most-1000:pb-5 at-most-1000:[scroll-snap-type:x_mandatory] at-most-1000:[scroll-padding-inline:2px] at-most-1000:[scrollbar-width:thin] at-most-720:auto-cols-[86%] at-most-720:[overscroll-behavior-inline:contain]"
+        >
           {view.workshops.map((workshop, index) => (
             <WorkshopCard
               key={workshop.id}

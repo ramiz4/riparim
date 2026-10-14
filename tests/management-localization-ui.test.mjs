@@ -118,7 +118,7 @@ async function render(locale, Component, props = {}) {
 }
 async function chooseReviewReason(label) {
   const trigger = document.querySelector(
-    '.moderation-decision [role="combobox"]',
+    "[data-ui~='moderation-decision'] [role=\"combobox\"]",
   );
   await act(async () => {
     trigger.focus();
@@ -375,7 +375,7 @@ try {
       await render(locale, BusinessPanel, { view: "requests" });
       check(
         document
-          .querySelector(".business-request")
+          .querySelector("[data-ui~='business-request']")
           .textContent.includes(privateCheck),
         "Each locale visibly explains manual private ownership verification for the current claim",
       );
@@ -471,7 +471,7 @@ try {
         ),
       );
       check(
-        document.querySelector(".language-switcher select").disabled,
+        document.querySelector("header select").disabled,
         "A pending workshop mutation blocks document language switching",
       );
       check(
@@ -649,20 +649,20 @@ try {
       );
       check(
         document
-          .querySelector(".moderation-list")
+          .querySelector("[data-ui~='moderation-list']")
           .textContent.includes(visit.review) &&
           document
-            .querySelector(".moderation-list")
+            .querySelector("[data-ui~='moderation-list']")
             .textContent.includes(visit.evidence_note),
         "Customer and evidence free text remain unchanged during moderation",
       );
       check(
-        !document.querySelector(".notification-panel"),
+        !document.querySelector("[data-ui~='notification-panel']"),
         "The simplified review page preserves Main57 removal of the delivery panel",
       );
       const copy = getMessages(locale).management;
       check(
-        !document.querySelector(".moderation-decision textarea"),
+        !document.querySelector("[data-ui~='moderation-decision'] textarea"),
         "Every locale starts with a select without free text",
       );
       await chooseReviewReason(copy.reviewReasonConfirmed);
@@ -679,7 +679,9 @@ try {
         "Standard moderation notes use the chosen locale without changing the decision contract",
       );
       await chooseReviewReason(copy.otherReason);
-      const field = document.querySelector(".moderation-decision textarea");
+      const field = document.querySelector(
+        "[data-ui~='moderation-decision'] textarea",
+      );
       await act(async () => {
         Object.getOwnPropertyDescriptor(
           HTMLTextAreaElement.prototype,
@@ -721,10 +723,11 @@ try {
           .click(),
       );
       check(
-        document.querySelector(".language-switcher select").disabled &&
+        document.querySelector("header select").disabled &&
           field.disabled &&
-          document.querySelector('.moderation-decision [role="combobox"]')
-            .disabled,
+          document.querySelector(
+            "[data-ui~='moderation-decision'] [role=\"combobox\"]",
+          ).disabled,
         "A pending moderation decision blocks language changes and freezes private notes",
       );
       await act(async () =>
@@ -743,7 +746,7 @@ try {
       await render(locale, NotificationStatus);
       check(
         document
-          .querySelector(".notification-entry")
+          .querySelector("[data-ui~='notification-entry']")
           .textContent.includes(sent),
         "Retained delivery diagnostics still distinguish service acceptance from delivery in every locale",
       );
@@ -847,7 +850,7 @@ try {
         );
       }
       const instructions = document.querySelector(
-        ".setup-instructions",
+        "[data-ui~='setup-instructions']",
       ).textContent;
       for (const value of [
         "SITE_ORIGIN",
@@ -883,8 +886,9 @@ try {
           .click(),
       );
       check(
-        document.querySelector('.setup-instructions [role="alert"]')
-          .textContent === getMessages(locale).management.mailCopyFailed &&
+        document.querySelector(
+          "[data-ui~='setup-instructions'] [role=\"alert\"]",
+        ).textContent === getMessages(locale).management.mailCopyFailed &&
           !document.body.textContent.includes("Raw private clipboard failure"),
         "Clipboard rejection shows only the active-locale manual-copy guidance",
       );
@@ -920,7 +924,7 @@ try {
         ),
       );
       check(
-        document.querySelector(".language-switcher select").disabled &&
+        document.querySelector("header select").disabled &&
           [
             ...form.querySelectorAll(
               'input,textarea,[role="checkbox"],[role="switch"]',

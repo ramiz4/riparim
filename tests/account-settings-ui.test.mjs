@@ -252,17 +252,13 @@ try {
   loadFailure = false;
   await click(button("Erneut laden"));
   check(
-    document
-      .querySelector(".account-identity")
-      .textContent.includes(state.account.email),
+    document.querySelector("dl").textContent.includes(state.account.email),
     "The account view identifies the signed-in email and provider",
   );
   check(
-    document
-      .querySelector(".account-identity")
-      .textContent.includes("E-Mail bestätigt") &&
-      document.querySelector(".account-password-settings") &&
-      document.querySelector(".account-deletion-settings"),
+    document.querySelector("dl").textContent.includes("E-Mail bestätigt") &&
+      document.querySelector('section[aria-labelledby$="-password-heading"]') &&
+      document.querySelector('section[aria-labelledby$="-delete-heading"]'),
     "Verified account data, password and deletion are separate labelled sections",
   );
   mode = "pending";
@@ -278,15 +274,18 @@ try {
   pending = null;
   check(
     document
-      .querySelector('.account-password-settings [role="status"]')
+      .querySelector(
+        'section[aria-labelledby$=-password-heading] [role="status"]',
+      )
       .textContent.includes("Zurücksetzen"),
     "Password recovery announces the email-link flow without changing the password in the settings",
   );
   mode = "failure";
   await click(button("Passwort ändern"));
   check(
-    document.querySelector('.account-password-settings [role="alert"]')
-      .textContent === getMessages("de").customer.recoveryFailed,
+    document.querySelector(
+      'section[aria-labelledby$=-password-heading] [role="alert"]',
+    ).textContent === getMessages("de").customer.recoveryFailed,
     "A failed recovery request stays retryable within the password section",
   );
   mode = "success";
@@ -394,7 +393,7 @@ try {
   pending = null;
   check(
     !dialog() &&
-      !document.querySelector(".account-name-form") &&
+      !nameForm() &&
       document
         .querySelector('[role="status"]')
         .textContent.includes("wurden gelöscht"),
@@ -429,8 +428,7 @@ try {
     "Partial failure reloads the server state and offers a scoped retry",
   );
   check(
-    !document.querySelector(".account-name-form") &&
-      dialog().textContent.includes("sieben Tagen"),
+    !nameForm() && dialog().textContent.includes("sieben Tagen"),
     "An interrupted deletion cannot continue ordinary account editing",
   );
   mode = "success";
@@ -456,7 +454,7 @@ try {
   check(
     !button("Konto löschen") &&
       document
-        .querySelector(".account-deletion-settings")
+        .querySelector('section[aria-labelledby$="-delete-heading"]')
         .textContent.includes(getMessages("de").customer.protectedAccount),
     "Protected accounts explain the guard and expose no deletion control",
   );
@@ -480,8 +478,8 @@ try {
   check(!dialog(), "Cancel dismisses Google proof without starting an action");
   check(
     !button("Passwort ändern") &&
-      document.querySelector(".account-password-settings a").href ===
-        "https://myaccount.google.com/security",
+      document.querySelector("section[aria-labelledby$=-password-heading] a")
+        .href === "https://myaccount.google.com/security",
     "Google accounts direct password management to their provider",
   );
   for (const locale of ["de", "sq", "en"]) {
@@ -507,9 +505,7 @@ try {
       "The local seed account shows data without exposing a real name mutation",
     );
     check(
-      document
-        .querySelector(".account-identity")
-        .textContent.includes(copy.localPreview) &&
+      document.querySelector("dl").textContent.includes(copy.localPreview) &&
         !button(copy.passwordChange) &&
         !button(copy.deleteAccount),
       "The local preview labels the fixture, disables password delivery and protects its admin account from deletion",
@@ -555,9 +551,9 @@ try {
       );
       check(
         JSON.stringify(
-          [
-            ...document.querySelectorAll(".account-settings-group>section>h2"),
-          ].map((el) => el.textContent),
+          [...document.querySelectorAll("[aria-busy]>section>h2")].map(
+            (el) => el.textContent,
+          ),
         ) ===
           JSON.stringify([
             copy.yourAccount,
@@ -568,12 +564,12 @@ try {
         "Settings follow account, password, appearance and deletion order",
       );
       check(
-        !document.querySelector(".account-name-help") &&
+        !nameForm()?.querySelector("p") &&
           input(copy.fullName).parentElement.contains(button(copy.saveName)),
         "The full name and icon save button form one simple row without helper copy",
       );
       await type(input(copy.fullName), "Updated Sample");
-      await submitForm(document.querySelector(".account-name-form"));
+      await submitForm(nameForm());
       check(
         input(copy.fullName).value === "Updated Sample" &&
           requests.length === count &&
@@ -583,8 +579,9 @@ try {
       if (provider === "E-Mail") {
         await click(button(copy.passwordChange));
         check(
-          document.querySelector('.account-password-settings [role="status"]')
-            .textContent === copy.previewPasswordLinkSent,
+          document.querySelector(
+            'section[aria-labelledby$=-password-heading] [role="status"]',
+          ).textContent === copy.previewPasswordLinkSent,
           "A preview email-link result is clearly simulated",
         );
         const source = button(copy.previewPasswordForm);
@@ -624,13 +621,16 @@ try {
         );
       } else {
         check(
-          !document.querySelector(".account-password-settings a"),
+          !document.querySelector(
+            "section[aria-labelledby$=-password-heading] a",
+          ),
           "Preview Google password management never opens a real provider",
         );
         await click(button(copy.openGoogleAccount));
         check(
-          document.querySelector('.account-password-settings [role="status"]')
-            .textContent === copy.previewGooglePassword,
+          document.querySelector(
+            'section[aria-labelledby$=-password-heading] [role="status"]',
+          ).textContent === copy.previewGooglePassword,
           "Google preview explains its simulated provider action",
         );
       }
@@ -670,7 +670,9 @@ try {
       await act(async () => new Promise((resolve) => setTimeout(resolve, 25)));
       check(
         document.activeElement ===
-          document.querySelector(".account-settings>h2"),
+          [...document.querySelectorAll("section > h2")].find(
+            (heading) => heading.textContent === copy.yourAccount,
+          ),
         "Completed deletion focuses the persistent account heading",
       );
       await click(button(copy.previewReset));
@@ -747,4 +749,8 @@ try {
 } finally {
   await act(async () => root.unmount());
   dom.window.close();
+}
+
+function nameForm() {
+  return document.querySelector('input[name="name"]')?.closest("form") ?? null;
 }

@@ -129,22 +129,26 @@ try {
     ),
   );
   assert.equal(
-    !!document.querySelector(".header-auth"),
+    !!document.querySelector("[data-ui~='header-auth']"),
     false,
     "An unverified initial session is not a confirmed guest",
   );
   assert(
-    document.querySelector('.header-session-status[role="status"]'),
+    document.querySelector(
+      "[data-ui~='header-session-status'][role=\"status\"]",
+    ),
     "The initial loading state is accessible without a keyboard stop",
   );
   await act(async () => finish(new Response(null, { status: 503 })));
   assert.equal(
-    !!document.querySelector(".header-auth"),
+    !!document.querySelector("[data-ui~='header-auth']"),
     false,
     "A session service failure must not claim the visitor is signed out",
   );
   assert.equal(
-    document.querySelector(".header-session-status").getAttribute("aria-label"),
+    document
+      .querySelector("[data-ui~='header-session-status']")
+      .getAttribute("aria-label"),
     getMessages("de").common.unavailable,
   );
   await act(async () =>
@@ -159,7 +163,7 @@ try {
     finish(Response.json(member));
   });
   assert(
-    document.querySelector(".user-menu-trigger"),
+    document.querySelector("header button[aria-label='Benutzermenü öffnen']"),
     "The initial verified session shows the account",
   );
   // A warmed browser preview must never leak into a separately rendered document.
@@ -170,7 +174,7 @@ try {
     );
     assert(
       !html.includes(member.account.email) &&
-        !html.includes("user-menu-trigger"),
+        !html.includes('aria-label="Benutzermenü öffnen"'),
       "Server rendering cannot read the previous browser identity",
     );
   } finally {
@@ -185,12 +189,12 @@ try {
     ),
   );
   assert.equal(
-    !!document.querySelector(".header-auth"),
+    !!document.querySelector("[data-ui~='header-auth']"),
     false,
     "A client page change must not flash login/register before session revalidation finishes",
   );
   assert(
-    document.querySelector(".user-menu-trigger"),
+    document.querySelector("header button[aria-label='Benutzermenü öffnen']"),
     "The known account remains visible during revalidation",
   );
   assert.equal(
@@ -246,7 +250,7 @@ try {
     ),
   );
   assert(
-    document.querySelector(".user-menu-trigger"),
+    document.querySelector("header button[aria-label='Benutzermenü öffnen']"),
     "Expired display state remains stable while the fresh check is pending",
   );
   assert.equal(requestCount, 3, "The shared session has a bounded lifetime");
@@ -254,7 +258,7 @@ try {
   now += 300_001;
   await act(async () => root.render(wrap("reviews", h(DeferredReviews))));
   assert.equal(
-    !!document.querySelector(".header-auth"),
+    !!document.querySelector("[data-ui~='header-auth']"),
     false,
     "A deferred private page retains the verified header during its loading state",
   );
@@ -265,7 +269,7 @@ try {
   );
   await act(async () => finish(new Response(null, { status: 503 })));
   assert(
-    document.querySelector(".user-menu-trigger"),
+    document.querySelector("header button[aria-label='Benutzermenü öffnen']"),
     "A failed private session check retains only the display preview",
   );
   assert.equal(
@@ -278,7 +282,7 @@ try {
     finish(Response.json({ account: null, isAdmin: false })),
   );
   assert(
-    document.querySelector(".header-auth"),
+    document.querySelector("[data-ui~='header-auth']"),
     "An authoritative signed-out response shows login/register",
   );
   assert.equal(
@@ -294,14 +298,14 @@ try {
     ),
   );
   assert.equal(
-    !!document.querySelector(".user-menu-trigger"),
+    !!document.querySelector("header button[aria-label='Benutzermenü öffnen']"),
     false,
     "A later page must not revive an expired account",
   );
   await act(async () => finish(Response.json(member)));
   await act(async () => invalidatePublicSession({ signedOut: true }));
   assert.equal(
-    !!document.querySelector(".user-menu-trigger"),
+    !!document.querySelector("header button[aria-label='Benutzermenü öffnen']"),
     false,
     "Local sign-out clears every retained header immediately",
   );
@@ -329,7 +333,7 @@ try {
     ),
   );
   assert.equal(
-    !!document.querySelector(".user-menu-trigger"),
+    !!document.querySelector("header button[aria-label='Benutzermenü öffnen']"),
     false,
     "A delayed pre-sign-out response cannot repopulate the preview for a new page",
   );
@@ -371,17 +375,17 @@ try {
     ),
   );
   assert.equal(
-    !!document.querySelector(".header-auth"),
+    !!document.querySelector("[data-ui~='header-auth']"),
     false,
     "A retained guest header cannot flash guest buttons after a login signal",
   );
   assert(
-    document.querySelector(".header-session-status"),
+    document.querySelector("[data-ui~='header-session-status']"),
     "Switching to a cleared public snapshot uses neutral pending state",
   );
   await act(async () => finish(new Response(null, { status: 503 })));
   assert.equal(
-    !!document.querySelector(".header-auth"),
+    !!document.querySelector("[data-ui~='header-auth']"),
     false,
     "A failed post-login check cannot revive the previous guest header",
   );

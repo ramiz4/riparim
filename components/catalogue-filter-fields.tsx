@@ -1,4 +1,5 @@
 "use client";
+import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n/client";
 import { valueLabel } from "@/lib/i18n/values";
 import { useId } from "react";
@@ -17,6 +18,7 @@ export function CatalogueFilterFields({
   onChange,
   directory,
   fields = ["service", "city", "brand", "language"],
+  presentation = "default",
 }: {
   filters: CatalogueFilters;
   onChange: (
@@ -24,6 +26,7 @@ export function CatalogueFilterFields({
     value: CatalogueChoice,
   ) => void;
   directory: Workshop[];
+  presentation?: "default" | "sidebar" | "dialog";
   fields?: readonly ("service" | "city" | "brand" | "language")[];
 }) {
   const { locale, t } = useI18n();
@@ -34,7 +37,13 @@ export function CatalogueFilterFields({
     ];
   return (
     <div
-      className="catalogue-filter-fields"
+      className={cn(
+        "grid grid-cols-[repeat(auto-fit,minmax(min(100%,16rem),1fr))] gap-[15px]",
+        presentation === "sidebar" &&
+          "grid-cols-[minmax(0,1fr)] gap-5 at-most-1000:hidden",
+        presentation === "dialog" && "grid-cols-1",
+      )}
+      data-ui="catalogue-filter-fields"
       role="group"
       aria-label={t("public.filterLabel")}
     >
@@ -61,9 +70,15 @@ export function CatalogueFilterFields({
         .filter((field) => fields.includes(field.key))
         .sort((a, b) => fields.indexOf(a.key) - fields.indexOf(b.key))
         .map((field) => (
-          <div className="catalogue-filter-field" key={field.key}>
-            <label htmlFor={`${id}-${field.key}`}>{field.label}</label>
+          <div className="min-w-0" key={field.key}>
+            <label
+              className="mb-2 block text-[1rem] font-[550] text-[#315249] dark:text-foreground"
+              htmlFor={`${id}-${field.key}`}
+            >
+              {field.label}
+            </label>
             <SearchablePicker
+              presentation="catalogue"
               multiple={field.key !== "language"}
               allValue={field.values[0]}
               id={`${id}-${field.key}`}
@@ -91,7 +106,9 @@ export function CatalogueFilterFields({
               }
             />
             {field.key === "language" && options.languages.length === 1 && (
-              <p>{t("public.languageUnknown")}</p>
+              <p className="mt-2 text-[0.875rem] leading-[1.55] text-[#617467] dark:text-muted-foreground">
+                {t("public.languageUnknown")}
+              </p>
             )}
           </div>
         ))}

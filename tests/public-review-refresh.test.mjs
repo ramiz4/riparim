@@ -176,7 +176,7 @@ try {
     ),
   );
   assert.equal(
-    !!document.querySelector(".header-auth"),
+    !!document.querySelector("[data-ui~='header-auth']"),
     false,
     "A loaded workshop profile does not replace the pending header with guest buttons",
   );
@@ -187,7 +187,7 @@ try {
   );
   await act(async () => finishSession(new Response(null, { status: 503 })));
   assert.equal(
-    !!document.querySelector(".header-auth"),
+    !!document.querySelector("[data-ui~='header-auth']"),
     false,
     "A failed session check is not a confirmed guest on a workshop profile",
   );
@@ -201,7 +201,7 @@ try {
     finishSession(Response.json({ account: null, isAdmin: false })),
   );
   assert(
-    document.querySelector(".header-auth"),
+    document.querySelector("[data-ui~='header-auth']"),
     "Only a confirmed guest receives sign-in links",
   );
   assert.equal(typeof globalThis.completePublicReview, "function");
@@ -223,7 +223,7 @@ try {
   );
   assert(
     document
-      .querySelector(".public-review-text")
+      .querySelector('[data-ui~="public-review"]')
       .textContent.includes("Fresh approved review"),
   );
   assert.equal(

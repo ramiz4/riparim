@@ -141,6 +141,27 @@ const submit = async () =>
       .querySelector("form")
       .dispatchEvent(new Event("submit", { bubbles: true, cancelable: true })),
   );
+function hasNoPublicNameFields(form, publicName) {
+  return (
+    !form.querySelector('[name="name"],[name="displayName"]') &&
+    !form.textContent.includes(publicName)
+  );
+}
+function assertReadonlyNameRejected(form, publicName) {
+  const redundantName = form.cloneNode(true),
+    row = document.createElement("div"),
+    label = document.createElement("span"),
+    value = document.createElement("strong");
+  label.textContent = publicName;
+  value.textContent = "Fixture Customer";
+  row.append(label, value);
+  redundantName.prepend(row);
+  assert.equal(
+    hasNoPublicNameFields(redundantName, publicName),
+    false,
+    "A localized readonly public-name row fails without legacy presentation classes",
+  );
+}
 const requests = [];
 let mode = "auth-error";
 const originalFetch = globalThis.fetch;
@@ -212,7 +233,7 @@ try {
         "Auth heading uses the active locale",
       );
       check(
-        !document.querySelector(".auth-local-login"),
+        !document.querySelector("a[href^='/dev/anmelden?']"),
         "Normal Auth screens never expose the local seed entry",
       );
       if (screen !== "recovery") {
@@ -237,7 +258,7 @@ try {
       localSeedLogin: true,
       returnTo: localizeHref("/einstellungen", locale),
     });
-    const seedLink = document.querySelector(".auth-local-login a");
+    const seedLink = document.querySelector("a[href^='/dev/anmelden?']");
     check(
       seedLink.textContent === copy.localSeedLogin &&
         seedLink.getAttribute("href") ===
@@ -292,13 +313,13 @@ try {
     await submit();
     check(
       document
-        .querySelector(".auth-success")
+        .querySelector("[data-ui~='auth-success']")
         .textContent.includes(copy.confirmEmailMessage),
       "Confirmation success is localized without exposing legacy provider text",
     );
     check(
       document
-        .querySelector(".auth-success a")
+        .querySelector("[data-ui~='auth-success'] a")
         .getAttribute("href")
         .startsWith(localizeHref("/anmelden?weiter=", locale)),
       "Success returns to localized login",
@@ -384,10 +405,10 @@ try {
     await type(document.querySelector('[name="date"]'), "2026-10-04");
     await type(document.querySelector('[name="vehicle"]'), "Synthetic vehicle");
     check(
-      !document.querySelector('[name="name"]') &&
-        !document.querySelector(".review-account-name"),
+      hasNoPublicNameFields(document.querySelector("form"), copy.publicName),
       "Review forms do not expose an editable name or redundant publication label",
     );
+    assertReadonlyNameRejected(document.querySelector("form"), copy.publicName);
     const kindSelect = [...document.querySelectorAll("select")].find((node) =>
       [...node.options].some((option) => option.value === "Anderer Nachweis"),
     );
@@ -457,11 +478,11 @@ try {
       returnTo: localizeHref("/werkstatt/fixture-workshop", locale),
     });
     check(
-      !document.querySelector('[name="name"]') &&
-        !document.querySelector(".review-account-name") &&
+      hasNoPublicNameFields(document.querySelector("form"), copy.publicName) &&
         !document.querySelector("form").textContent.includes("Original name"),
       "Editing preserves server-controlled names without a redundant name field",
     );
+    assertReadonlyNameRejected(document.querySelector("form"), copy.publicName);
     check(
       document.querySelector("form").textContent.includes("Original workshop"),
       "The review form names the assigned workshop next to its fields",
@@ -552,10 +573,10 @@ try {
     });
     check(
       document
-        .querySelector("form > .note strong")
+        .querySelector("form > p > strong")
         .textContent.includes("New selected workshop") &&
         !document
-          .querySelector("form > .note strong")
+          .querySelector("form > p > strong")
           .textContent.includes("Original unavailable workshop"),
       "Existing workshop selection keeps the displayed identity aligned with its assigned submission",
     );
@@ -571,7 +592,9 @@ try {
       signedIn: false,
       existing,
     });
-    const editLogin = new URL(document.querySelector(".login-prompt a").href);
+    const editLogin = new URL(
+      document.querySelector("[data-ui~='review-login-prompt'] a").href,
+    );
     check(
       editLogin.pathname === localizeHref("/anmelden", locale) &&
         editLogin.searchParams.get("weiter") ===
@@ -601,7 +624,7 @@ try {
       "The actual own review page has an active-locale heading without a modal frame",
     );
     check(
-      document.querySelector(".visit-status").textContent ===
+      document.querySelector("[data-ui~='visit-status']").textContent ===
         {
           de: "Ergänzung nötig",
           sq: "Nevojitet plotësim",
@@ -611,17 +634,17 @@ try {
     );
     check(
       document
-        .querySelector(".evidence-details a")
+        .querySelector("[data-ui~='evidence-details'] a")
         .getAttribute("href")
         .endsWith("?locale=" + locale),
       "Customer evidence links use the shared explicit locale download helper",
     );
     check(
       document
-        .querySelector(".visit")
+        .querySelector("[data-ui~='visit']")
         .textContent.includes("Original unchanged customer review text.") &&
         document
-          .querySelector(".visit")
+          .querySelector("[data-ui~='visit']")
           .textContent.includes("Original private note"),
       "Free text is never translated",
     );
@@ -672,8 +695,8 @@ try {
       mode = "network";
       await click(logout);
       check(
-        document.querySelector('.header-error[role="alert"]').textContent ===
-          getMessages(locale).common.logoutFailed &&
+        document.querySelector("[data-ui~='header-error'][role=\"alert\"]")
+          .textContent === getMessages(locale).common.logoutFailed &&
           !document.body.textContent.includes("Raw provider/internal failure"),
         "Header network failures show only the active-locale logout message",
       );

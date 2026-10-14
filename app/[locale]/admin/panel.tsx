@@ -1,4 +1,18 @@
 "use client";
+import { cn } from "@/lib/utils";
+import {
+  pageFrameClassName,
+  appButton,
+  errorClassName,
+  emptyStateClassName,
+  formClassName,
+  formLabelClassName,
+  inputClassName,
+  formGridClassName,
+  formHintClassName,
+  textareaClassName,
+  helpTextClassName,
+} from "@/lib/presentation";
 import { WorkshopEmailsEditor } from "@/components/workshop-emails";
 import {
   workshopEmailEditsSchema,
@@ -227,38 +241,61 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
     <>
       <SiteHeader account={account} isAdmin />
       <AdminNavigation active="workshops" />
-      <main className="admin-main admin-workshops-page wrap">
-        <div className="admin-title">
-          <h1>{t("management.manageWorkshops")}</h1>
-          <button className="primary" disabled={saving} onClick={() => open()}>
+      <main className={cn(pageFrameClassName, "pt-8 pb-[60px]")}>
+        <div
+          data-ui="admin-title"
+          className="flex items-center justify-between gap-[30px] at-most-1000:items-start at-most-720:flex-col at-most-720:gap-[18px]"
+        >
+          <h1 className="text-[32px] leading-[1.2] font-semibold tracking-[-1px] at-most-720:text-[28px] m-0">
+            {t("management.manageWorkshops")}
+          </h1>
+          <button
+            className={cn(
+              appButton(),
+              "whitespace-nowrap at-most-1000:text-[13px]",
+            )}
+            disabled={saving}
+            onClick={() => open()}
+          >
             <Plus size={17} />
             {t("management.addWorkshop")}
           </button>
         </div>
-        <div className="admin-overview">
-          <div>
-            <strong>
+        <div
+          data-ui="admin-overview"
+          className="my-6 grid grid-cols-2 gap-[17px] at-most-720:grid-cols-1 at-most-720:gap-2.5"
+        >
+          <div className="relative flex flex-col items-start rounded-[10px] border border-[#dce7e8] bg-[#f4f8f8] px-6 py-5 dark:border-border dark:bg-[var(--theme-surface)] dark:text-foreground at-most-720:px-5 at-most-720:py-4">
+            <strong className="text-[32px] leading-[1.3] font-semibold at-most-720:text-[27px]">
               {formatNumber(
                 locale,
                 list.filter((w) => w.status === "published").length,
               )}
             </strong>
-            <span>{t("management.publishedLocations")}</span>
+            <span className="text-[13px] text-[#7d8e6f] dark:text-muted-foreground at-most-720:text-[14px]">
+              {t("management.publishedLocations")}
+            </span>
           </div>
-          <div>
-            <strong>
+          <div className="relative flex flex-col items-start rounded-[10px] border border-[#dce7e8] bg-[#f4f8f8] px-6 py-5 dark:border-border dark:bg-[var(--theme-surface)] dark:text-foreground at-most-720:px-5 at-most-720:py-4">
+            <strong className="text-[32px] leading-[1.3] font-semibold at-most-720:text-[27px]">
               {formatNumber(
                 locale,
                 list.filter((w) => w.status === "draft").length,
               )}
             </strong>
-            <span>{t("management.drafts")}</span>
+            <span className="text-[13px] text-[#7d8e6f] dark:text-muted-foreground at-most-720:text-[14px]">
+              {t("management.drafts")}
+            </span>
           </div>
         </div>
-        <div className="admin-tools">
-          <label>
+        <div
+          data-ui="admin-tools"
+          className="mb-[22px] flex items-center gap-3 at-most-1000:flex-wrap at-most-720:gap-2"
+        >
+          <label className="flex items-center gap-[9px] rounded-[7px] border border-[#dbe5d4] px-3 py-[9px] text-[#79946a] dark:border-border dark:text-muted-foreground at-most-1000:flex-1 at-most-720:w-full at-most-720:flex-auto mr-0 w-full min-w-0">
             <Search size={16} />
             <input
+              className="min-w-0 border-0 bg-transparent text-[14px] outline-none w-full"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               aria-label={t("management.workshopSearch")}
@@ -267,57 +304,95 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
           </label>
         </div>
         {feedback && (
-          <p role="status" className="admin-feedback">
+          <p
+            role="status"
+            className="mb-4 rounded-lg bg-[#eef6e9] px-[15px] py-3 text-[14px] text-[#527d4d] dark:bg-[#163e32] dark:text-[var(--theme-positive)]"
+          >
             {feedback}
           </p>
         )}
         {error && (
-          <p role="alert" className="error">
+          <p role="alert" className={errorClassName}>
             {error}
           </p>
         )}
         {loading && (
           <AdminLoading>{t("management.workshopsLoading")}</AdminLoading>
         )}
-        <div className="directory-table">
+        <div
+          data-ui="directory-table"
+          className="overflow-hidden rounded-[10px] border border-[#e5edef] bg-white dark:border-[#214045] dark:bg-card dark:text-foreground at-most-720:overflow-auto"
+        >
           <Table>
             <TableHeader>
-              <TableRow>
-                <TableHead>{t("management.workshop")}</TableHead>
-                <TableHead>{t("management.city")}</TableHead>
-                <TableHead>{t("management.status")}</TableHead>
-                <TableHead>{t("management.sourceCheck")}</TableHead>
-                <TableHead>
+              <TableRow className="hover:bg-[#f8faf5] dark:hover:border-input dark:hover:bg-[var(--theme-hover)] border-[#e5edef] dark:border-[#214045]">
+                <TableHead className="bg-[#f6f8f3] px-[18px] py-[15px] text-[13px] text-[#7a8b6d] dark:bg-secondary dark:text-muted-foreground at-most-720:p-3">
+                  {t("management.workshop")}
+                </TableHead>
+                <TableHead className="bg-[#f6f8f3] px-[18px] py-[15px] text-[13px] text-[#7a8b6d] dark:bg-secondary dark:text-muted-foreground at-most-720:p-3">
+                  {t("management.city")}
+                </TableHead>
+                <TableHead className="bg-[#f6f8f3] px-[18px] py-[15px] text-[13px] text-[#7a8b6d] dark:bg-secondary dark:text-muted-foreground at-most-720:p-3">
+                  {t("management.status")}
+                </TableHead>
+                <TableHead className="bg-[#f6f8f3] px-[18px] py-[15px] text-[13px] text-[#7a8b6d] dark:bg-secondary dark:text-muted-foreground at-most-720:p-3">
+                  {t("management.sourceCheck")}
+                </TableHead>
+                <TableHead className="bg-[#f6f8f3] px-[18px] py-[15px] text-[13px] text-[#7a8b6d] dark:bg-secondary dark:text-muted-foreground at-most-720:p-3">
                   <span className="sr-only">{t("management.actions")}</span>
                 </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {visible.map((w) => (
-                <TableRow key={w.id}>
-                  <TableCell>
+                <TableRow
+                  className="hover:bg-[#f8faf5] dark:hover:border-input dark:hover:bg-[var(--theme-hover)] border-[#e5edef] dark:border-[#214045]"
+                  key={w.id}
+                >
+                  <TableCell className="px-[18px] py-[17px] text-[14px] at-most-720:p-3 at-most-720:text-[13px]">
                     <strong>{w.name}</strong>
-                    <span className="table-specialty">{w.specialty}</span>
+                    <span className="mt-0.5 block text-[12px] text-[#85977b] dark:text-muted-foreground">
+                      {w.specialty}
+                    </span>
                   </TableCell>
-                  <TableCell>{w.city}</TableCell>
-                  <TableCell>
-                    <span className={`publication-status ${w.status}`}>
+                  <TableCell className="px-[18px] py-[17px] text-[14px] at-most-720:p-3 at-most-720:text-[13px]">
+                    {w.city}
+                  </TableCell>
+                  <TableCell className="px-[18px] py-[17px] text-[14px] at-most-720:p-3 at-most-720:text-[13px]">
+                    <span
+                      data-ui="publication-status"
+                      data-status={w.status}
+                      className={cn(
+                        "inline-block rounded-[5px] px-[9px] py-[3px] text-[12px] whitespace-nowrap",
+                        w.status === "published"
+                          ? "bg-[#eaf4e6] text-[#4a7849] dark:bg-[#163e32] dark:text-[var(--theme-positive)]"
+                          : "bg-[#f2f2e6] text-[#8a8055] dark:bg-[#3b3020] dark:text-[var(--theme-warning)]",
+                      )}
+                    >
                       {w.status === "published"
                         ? t("management.published")
                         : t("management.draftHidden")}
                     </span>
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="px-[18px] py-[17px] text-[14px] at-most-720:p-3 at-most-720:text-[13px]">
                     {formatDate(locale, w.checkedAt, { dateOnly: true })}
                   </TableCell>
-                  <TableCell>
-                    <div className="admin-table-actions">
+                  <TableCell className="px-[18px] py-[17px] text-[14px] at-most-720:p-3 at-most-720:text-[13px]">
+                    <div className="flex flex-col items-start gap-2.5">
                       <button
-                        className="text-action"
+                        data-ui="text-action"
+                        className={cn(
+                          appButton({ variant: "text" }),
+                          "m-0 inline-flex items-center gap-1.5 text-[13px] whitespace-nowrap",
+                        )}
                         disabled={saving}
                         onClick={() => open(w)}
                       >
-                        <Pencil size={15} aria-hidden="true" />
+                        <Pencil
+                          className="shrink-0"
+                          size={15}
+                          aria-hidden="true"
+                        />
                         {t("management.edit")}
                       </button>
                       <PremiumPartnerControl workshop={w} />
@@ -329,10 +404,13 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
           </Table>
         </div>
         {!loading && !error && !visible.length && (
-          <div className="empty">
+          <div className={emptyStateClassName}>
             <Wrench size={24} />
             <h3>{t("management.noWorkshops")}</h3>
-            <button className="outline" onClick={() => open()}>
+            <button
+              className={appButton({ variant: "outline" })}
+              onClick={() => open()}
+            >
               {t("management.addWorkshop")}
             </button>
           </div>
@@ -345,7 +423,7 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
         }}
       >
         <ModalContent
-          className="workshop-editor"
+          className="max-w-[min(750px,calc(100%_-_32px))] sm:max-w-[min(750px,calc(100%_-_32px))]"
           closeDisabled={saving}
           title={
             editing ? t("management.editWorkshop") : t("management.addWorkshop")
@@ -354,19 +432,31 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
           footer={
             <>
               <DialogClose asChild>
-                <button className="outline" disabled={saving}>
+                <button
+                  className={cn(
+                    appButton({ variant: "outline" }),
+                    "at-most-720:min-h-[45px] at-most-720:text-[13px] at-most-720:px-[13px]",
+                  )}
+                  disabled={saving}
+                >
                   {t("management.cancel")}
                 </button>
               </DialogClose>
               <button
                 disabled={saving || !draft}
-                className="primary"
+                className={cn(
+                  appButton(),
+                  "at-most-720:min-h-[45px] at-most-720:text-[13px] at-most-720:flex-1",
+                )}
                 type="submit"
                 form={editorFormId}
               >
                 {saving ? (
                   <>
-                    <LoaderCircle size={16} className="spin" />
+                    <LoaderCircle
+                      size={16}
+                      className="inline-block animate-spin motion-reduce:animate-none"
+                    />
                     {t("management.saving")}
                   </>
                 ) : draft?.status === "published" ? (
@@ -379,10 +469,11 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
           }
         >
           {draft && (
-            <form id={editorFormId} className="journey-form" onSubmit={save}>
-              <label>
+            <form id={editorFormId} className={formClassName} onSubmit={save}>
+              <label className={formLabelClassName}>
                 {t("management.workshopName")}
                 <input
+                  className={inputClassName}
                   disabled={saving}
                   required
                   minLength={3}
@@ -391,12 +482,16 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
                   onChange={(e) => change("name", e.target.value)}
                 />
               </label>
-              <div className="form-grid">
-                <Field className="picker-field">
-                  <FieldLabel htmlFor={`${editorFormId}-city`}>
+              <div className={formGridClassName}>
+                <Field className="min-w-0 gap-1.5 border-0 bg-transparent p-0">
+                  <FieldLabel
+                    className="m-0 block text-[14px] font-semibold text-foreground"
+                    htmlFor={`${editorFormId}-city`}
+                  >
                     {t("management.city")}
                   </FieldLabel>
                   <Picker
+                    presentation="form"
                     id={`${editorFormId}-city`}
                     disabled={saving}
                     value={draft.city}
@@ -405,9 +500,10 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
                     label={t("management.workshopCity")}
                   />
                 </Field>
-                <label>
+                <label className={formLabelClassName}>
                   {t("management.checkedOn")}
                   <input
+                    className={inputClassName}
                     disabled={saving}
                     required
                     type="date"
@@ -417,9 +513,10 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
                   />
                 </label>
               </div>
-              <label>
+              <label className={formLabelClassName}>
                 {t("management.address")}
                 <input
+                  className={inputClassName}
                   disabled={saving}
                   required
                   minLength={5}
@@ -428,10 +525,11 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
                   onChange={(e) => change("address", e.target.value)}
                 />
               </label>
-              <div className="form-grid">
-                <label>
+              <div className={formGridClassName}>
+                <label className={formLabelClassName}>
                   {t("management.phoneNumber")}
                   <input
+                    className={inputClassName}
                     disabled={saving}
                     required
                     type="tel"
@@ -440,9 +538,10 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
                     onChange={(e) => change("phone", e.target.value)}
                   />
                 </label>
-                <label>
+                <label className={formLabelClassName}>
                   {t("management.contactNote")}
                   <input
+                    className={inputClassName}
                     disabled={saving}
                     value={draft.phoneNote}
                     maxLength={150}
@@ -451,10 +550,13 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
                   />
                 </label>
               </div>
-              <label>
+              <label className={formLabelClassName}>
                 {t("management.confirmedWhatsApp")}{" "}
-                <span>{t("management.optional")}</span>
+                <span className={formHintClassName}>
+                  {t("management.optional")}
+                </span>
                 <input
+                  className={inputClassName}
                   disabled={saving}
                   type="tel"
                   placeholder={t("management.explicitWhatsApp")}
@@ -464,14 +566,18 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
               </label>
               <fieldset disabled={saving}>
                 <WorkshopEmailsEditor
+                  presentation="form"
                   emails={draft.emailEntries}
                   onChange={(emails) => change("emailEntries", emails)}
                 />
               </fieldset>
-              <label>
+              <label className={formLabelClassName}>
                 {t("management.publishedBrands")}{" "}
-                <span>{t("management.commaUnknown")}</span>
+                <span className={formHintClassName}>
+                  {t("management.commaUnknown")}
+                </span>
                 <input
+                  className={inputClassName}
                   disabled={saving}
                   value={draft.brands}
                   maxLength={600}
@@ -479,10 +585,18 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
                   onChange={(e) => change("brands", e.target.value)}
                 />
               </label>
-              <fieldset className="service-checkboxes">
-                <legend>{t("management.serviceAreas")}</legend>
+              <fieldset className="grid grid-cols-2 gap-2.5 rounded-lg border border-[#dce6d4] px-[15px] pt-[13px] pb-[15px] dark:border-border dark:bg-card at-most-720:grid-cols-1">
+                <legend className="px-1 text-[14px] font-semibold">
+                  {t("management.serviceAreas")}
+                </legend>
                 {services.slice(1).map((s) => (
-                  <label key={s}>
+                  <label
+                    className={cn(
+                      formLabelClassName,
+                      "flex items-center gap-[9px] text-[13px] font-normal",
+                    )}
+                    key={s}
+                  >
                     <Checkbox
                       disabled={saving}
                       checked={draft.services.includes(s)}
@@ -495,14 +609,19 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
                         )
                       }
                     />
-                    <span>{valueLabel(locale, "service", s)}</span>
+                    <span className={formHintClassName}>
+                      {valueLabel(locale, "service", s)}
+                    </span>
                   </label>
                 ))}
               </fieldset>
-              <label>
+              <label className={formLabelClassName}>
                 {t("management.publishedServices")}{" "}
-                <span>{t("management.onePerLine")}</span>
+                <span className={formHintClassName}>
+                  {t("management.onePerLine")}
+                </span>
                 <textarea
+                  className={textareaClassName}
                   disabled={saving}
                   required
                   rows={4}
@@ -512,10 +631,11 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
                   onChange={(e) => change("serviceDetails", e.target.value)}
                 />
               </label>
-              <div className="form-grid">
-                <label>
+              <div className={formGridClassName}>
+                <label className={formLabelClassName}>
                   {t("management.specialty")}
                   <input
+                    className={inputClassName}
                     disabled={saving}
                     required
                     minLength={3}
@@ -525,10 +645,13 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
                     onChange={(e) => change("specialty", e.target.value)}
                   />
                 </label>
-                <label>
+                <label className={formLabelClassName}>
                   {t("management.confirmedLanguages")}{" "}
-                  <span>{t("management.optional")}</span>
+                  <span className={formHintClassName}>
+                    {t("management.optional")}
+                  </span>
                   <input
+                    className={inputClassName}
                     disabled={saving}
                     value={draft.languages}
                     maxLength={200}
@@ -537,9 +660,10 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
                   />
                 </label>
               </div>
-              <label>
+              <label className={formLabelClassName}>
                 {t("management.description")}
                 <textarea
+                  className={textareaClassName}
                   disabled={saving}
                   required
                   minLength={20}
@@ -549,10 +673,13 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
                   onChange={(e) => change("description", e.target.value)}
                 />
               </label>
-              <label>
+              <label className={formLabelClassName}>
                 {t("management.sourceLinks")}{" "}
-                <span>{t("management.httpsPerLine")}</span>
+                <span className={formHintClassName}>
+                  {t("management.httpsPerLine")}
+                </span>
                 <textarea
+                  className={textareaClassName}
                   disabled={saving}
                   required={draft.status === "published"}
                   rows={3}
@@ -562,13 +689,23 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
                   placeholder="https://werkstatt.example/kontakt"
                 />
               </label>
-              <details className="location-details">
-                <summary>{t("management.preciseLocation")}</summary>
-                <p className="help">{t("management.coordinatesHelp")}</p>
-                <div className="form-grid">
-                  <label>
+              <details>
+                <summary className="mb-3 cursor-pointer text-[14px] font-semibold text-[#567c4f] dark:text-muted-foreground">
+                  {t("management.preciseLocation")}
+                </summary>
+                <p
+                  className={cn(
+                    cn(helpTextClassName, "mb-3"),
+                    "leading-[1.65]",
+                  )}
+                >
+                  {t("management.coordinatesHelp")}
+                </p>
+                <div className={formGridClassName}>
+                  <label className={formLabelClassName}>
                     {t("management.latitude")}
                     <input
+                      className={inputClassName}
                       disabled={saving}
                       type="number"
                       step="any"
@@ -578,9 +715,10 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
                       onChange={(e) => change("lat", e.target.value)}
                     />
                   </label>
-                  <label>
+                  <label className={formLabelClassName}>
                     {t("management.longitude")}
                     <input
+                      className={inputClassName}
                       disabled={saving}
                       type="number"
                       step="any"
@@ -592,11 +730,15 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
                   </label>
                 </div>
               </details>
-              <Field className="picker-field">
-                <FieldLabel htmlFor={`${editorFormId}-status`}>
+              <Field className="min-w-0 gap-1.5 border-0 bg-transparent p-0">
+                <FieldLabel
+                  className="m-0 block text-[14px] font-semibold text-foreground"
+                  htmlFor={`${editorFormId}-status`}
+                >
                   {t("management.visibility")}
                 </FieldLabel>
                 <Picker
+                  presentation="form"
                   id={`${editorFormId}-status`}
                   disabled={saving}
                   value={draft.status}
@@ -609,9 +751,14 @@ export default function AdminPanel({ account }: { account: AccountIdentity }) {
                   label={t("management.profileVisibility")}
                 />
               </Field>
-              <p className="help">{t("management.publicationHelp")}</p>
+              <p className={cn(helpTextClassName, "leading-[1.65]")}>
+                {t("management.publicationHelp")}
+              </p>
               {formError && (
-                <p role="alert" className="error">
+                <p
+                  role="alert"
+                  className={cn(errorClassName, "leading-[1.65]")}
+                >
                   {formError}
                 </p>
               )}

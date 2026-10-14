@@ -216,13 +216,13 @@ const render = async (locale, node) => {
   });
 };
 const intersect = async (index = 0) => {
-  const card = document.querySelectorAll(".catalogue-card:not([hidden])")[
-    index
-  ];
+  const card = document.querySelectorAll(
+    "[data-ui~='catalogue-card']:not([hidden])",
+  )[index];
   for (let pass = 0; pass < 3; pass++)
     await act(async () => {
       for (const [observer, element] of [...observations])
-        if (element.closest(".catalogue-card") === card)
+        if (element.closest("[data-ui~='catalogue-card']") === card)
           observer.callback([{ isIntersecting: true }]);
       await settle();
     });
@@ -261,15 +261,18 @@ try {
     await render(locale, h(Catalogue, { ...props, initialFilters }));
     assert(!window.location.search.includes("sort=google"));
     assert.equal(
-      document.querySelectorAll(".catalogue-card:not([hidden])").length,
+      document.querySelectorAll("[data-ui~='catalogue-card']:not([hidden])")
+        .length,
       12,
     );
     assert(
-      document.querySelector(".riparim-rating .rating-value"),
+      document.querySelector(
+        "[data-ui~='workshop-ratings'] [aria-label] > strong",
+      ),
       "published Riparim ratings remain visible",
     );
     const sort = document.querySelector(
-      '.catalogue-panel-sort [role="combobox"]',
+      "[data-ui~='catalogue-results-toolbar'] [role='combobox']",
     );
     await act(async () => sort.click());
     const t = createTranslator(getMessages(locale));
@@ -293,16 +296,20 @@ try {
     for (let i = 0; i < 12; i++) await intersect(i);
     await search("No fixture match");
     assert.equal(
-      document.querySelectorAll(".catalogue-card:not([hidden])").length,
+      document.querySelectorAll("[data-ui~='catalogue-card']:not([hidden])")
+        .length,
       0,
     );
     await search("");
     await act(async () => {
-      document.querySelector(".catalogue-pagination button").click();
+      document
+        .querySelector("[data-ui~='catalogue-pagination'] button")
+        .click();
       await settle();
     });
     assert.equal(
-      document.querySelectorAll(".catalogue-card:not([hidden])").length,
+      document.querySelectorAll("[data-ui~='catalogue-card']:not([hidden])")
+        .length,
       24,
     );
     for (let i = 0; i < 24; i++) await intersect(i);
@@ -321,7 +328,11 @@ try {
       0,
       "catalogue never loads Google configuration or SDK",
     );
-    assert(!document.querySelector(".google-rating-panel"));
+    assert(
+      !document.querySelector(
+        "[data-ui~='google-place-details'][data-google-variant='rating']",
+      ),
+    );
     scenarioCounts.push({
       locale,
       firstTwelve: 0,
@@ -342,7 +353,8 @@ try {
     );
     assert.equal(catalogueRefreshRequests.length, refreshes + 1);
     assert.equal(
-      document.querySelectorAll(".catalogue-card:not([hidden])").length,
+      document.querySelectorAll("[data-ui~='catalogue-card']:not([hidden])")
+        .length,
       11,
     );
     const actual = new URLSearchParams(window.location.search);
@@ -373,7 +385,9 @@ try {
     );
     assert(
       document
-        .querySelector(".rating-unavailable")
+        .querySelector(
+          "[data-ui~='workshop-ratings'] > div > span:last-of-type",
+        )
         .textContent.includes(t("public.noReviews")),
       "unrated cards show the existing localized empty state",
     );
@@ -405,14 +419,14 @@ try {
     });
     assert(
       !document.querySelector(
-        '.catalogue-card-target[href*="' + workshops[0].id + '"]',
+        '[data-card-focus-target][href*="' + workshops[0].id + '"]',
       ),
       "retired profiles are removed even while filtered away",
     );
     await search("");
     assert(
       !document.querySelector(
-        '.catalogue-card-target[href*="' + workshops[0].id + '"]',
+        '[data-card-focus-target][href*="' + workshops[0].id + '"]',
       ),
     );
   } finally {

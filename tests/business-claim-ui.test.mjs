@@ -144,7 +144,9 @@ async function submit(form) {
   );
 }
 async function chooseConnection(label) {
-  const trigger = document.querySelector('.claim-form [role="combobox"]');
+  const trigger = document.querySelector(
+    "[data-ui~='claim-form'] [role=\"combobox\"]",
+  );
   await act(async () => {
     trigger.focus();
     trigger.dispatchEvent(
@@ -180,15 +182,15 @@ try {
       "The claim page has its own localized title and fixed workshop",
     );
     check(
-      document.querySelector('.claim-form [role="combobox"]') &&
+      document.querySelector("[data-ui~='claim-form'] [role=\"combobox\"]") &&
         !document.querySelector("textarea") &&
-        !document.querySelector(".business-request"),
+        !document.querySelector("[data-ui~='business-request']"),
       "The application starts with a role selection without free text or a workshop selector",
     );
     check(
       document.querySelector(
         'a[href="' + localizeHref("/werkstatt/" + workshop.id, locale) + '"]',
-      ) && !document.querySelector(".business-section"),
+      ) && !document.querySelector("[data-ui~='business-section']"),
       "The flat claim page offers one back link without a surrounding card",
     );
     const upload = document.querySelector("input[type=file]");
@@ -209,7 +211,9 @@ try {
         requests.at(-1).get("evidence").length >= 40,
       "The chosen role produces a localized private declaration while the existing evidence contract is preserved",
     );
-    await act(async () => document.querySelector(".claim-remove-file").click());
+    await act(async () =>
+      document.querySelector("[data-ui~='claim-remove-file']").click(),
+    );
     await chooseConnection(messages.claimRoleOther);
     const proof = document.querySelector("textarea");
     check(
@@ -255,13 +259,13 @@ try {
       upload.dispatchEvent(new Event("change", { bubbles: true }));
     });
     check(
-      document.querySelector(".claim-upload strong").textContent ===
+      document.querySelector("[data-ui~='claim-upload'] strong").textContent ===
         messages.claimReplaceDocument &&
-        document.querySelector(".claim-selected-file span").textContent ===
-          "fixture.pdf",
+        document.querySelector("[data-ui~='claim-selected-file'] span")
+          .textContent === "fixture.pdf",
       "The localized upload shows its selected file and replacement action",
     );
-    const remove = document.querySelector(".claim-remove-file");
+    const remove = document.querySelector("[data-ui~='claim-remove-file']");
     check(
       remove.getAttribute("aria-label") ===
         messages.claimRemoveDocument.replace("{name}", "fixture.pdf"),
@@ -269,13 +273,13 @@ try {
     );
     await act(async () => remove.click());
     check(
-      !document.querySelector(".claim-selected-file") &&
+      !document.querySelector("[data-ui~='claim-selected-file']") &&
         document.activeElement === upload &&
         proof.value.includes("ownership"),
       "Removing the required document preserves text and restores focus to the chooser",
     );
     check(
-      document.querySelector(".claim-upload strong").textContent ===
+      document.querySelector("[data-ui~='claim-upload'] strong").textContent ===
         messages.claimChooseDocument,
       "Clearing a document restores the localized empty upload state",
     );
@@ -287,13 +291,14 @@ try {
     });
     await select(upload, [second]);
     check(
-      document.querySelectorAll(".claim-selected-file").length === 2 &&
-        !upload.required,
+      document.querySelectorAll("[data-ui~='claim-selected-file']").length ===
+        2 && !upload.required,
       "Documents can be added across separate selections",
     );
     await select(upload, []);
     check(
-      document.querySelectorAll(".claim-selected-file").length === 2,
+      document.querySelectorAll("[data-ui~='claim-selected-file']").length ===
+        2,
       "Cancelling the chooser preserves the selected documents",
     );
     await select(
@@ -301,17 +306,18 @@ try {
       Array.from({ length: 4 }, () => file),
     );
     check(
-      document.querySelectorAll(".claim-selected-file").length === 2 &&
+      document.querySelectorAll("[data-ui~='claim-selected-file']").length ===
+        2 &&
         document.querySelector("[role=alert]").textContent ===
           messages.business_documents_limit,
       "Excessive selections retain the existing draft",
     );
     await act(async () =>
-      document.querySelectorAll(".claim-remove-file")[1].click(),
+      document.querySelectorAll("[data-ui~='claim-remove-file']")[1].click(),
     );
     check(
-      document.querySelectorAll(".claim-selected-file").length === 1 &&
-        proof.value.includes("ownership"),
+      document.querySelectorAll("[data-ui~='claim-selected-file']").length ===
+        1 && proof.value.includes("ownership"),
       "Removing one document preserves the others and ownership text",
     );
     await select(upload, [second]);
@@ -335,11 +341,12 @@ try {
     const form = proof.form;
     await submit(form);
     check(
-      document.querySelector(".claim-submit button").textContent ===
+      document.querySelector("[data-ui~='claim-submit'] button").textContent ===
         messages.claimSending &&
         form.querySelector("fieldset").disabled &&
-        document.querySelector(".business-panel").getAttribute("aria-busy") ===
-          "true",
+        document
+          .querySelector("[data-ui~='business-panel']")
+          .getAttribute("aria-busy") === "true",
       "Pending submission announces busy and freezes the fields",
     );
     const count = requests.length;
@@ -362,7 +369,7 @@ try {
     );
     check(
       document.activeElement ===
-        document.querySelector(".claim-confirmation h2"),
+        document.querySelector("[data-ui~='claim-confirmation'] h2"),
       "Successful submission moves focus to the confirmation",
     );
     await submit(form);

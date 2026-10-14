@@ -8,7 +8,12 @@ import { localizeHref } from "@/lib/i18n/locale";
 import { validatedReturnPath } from "@/lib/auth/return-path";
 import { useDeferredSession } from "./use-deferred-session";
 import { SiteHeader } from "./site-header";
-import AuthForm, { type AuthScreen } from "@/app/auth-form";
+import AuthForm, {
+  authPageClassName,
+  authCardClassName,
+  authTitleClassName,
+  type AuthScreen,
+} from "@/app/auth-form";
 
 type Options = {
   enabled: boolean;
@@ -87,9 +92,12 @@ export function DeferredAuth({ screen }: { screen: AuthScreen }) {
           isAdmin={session?.isAdmin ?? false}
           publicSnapshot={!session}
         />
-        <main className="auth-page">
-          <section className="auth-card auth-compact">
-            <h1>{headings[screen]}</h1>
+        <main className={authPageClassName} data-ui="auth-page">
+          <section
+            className={authCardClassName}
+            data-ui="auth-card auth-compact"
+          >
+            <h1 className={authTitleClassName}>{headings[screen]}</h1>
             <DeferredStatus
               error={error || sessionError}
               pending={sessionPending || optionsPending}

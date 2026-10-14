@@ -192,7 +192,9 @@ const travel = async (direction) => {
   await act(settle);
 };
 const open = async () =>
-  click(document.querySelector("#bewertungen .text-action"));
+  click(
+    document.querySelector("#bewertungen [data-ui~='profile-write-review']"),
+  );
 const escape = async () => {
   await act(async () => {
     document.activeElement.dispatchEvent(
@@ -202,6 +204,12 @@ const escape = async () => {
   });
   await act(settle);
 };
+function hasNoPublicNameFields(form, publicName) {
+  return (
+    !form.querySelector('[name="name"],[name="displayName"]') &&
+    !form.textContent.includes(publicName)
+  );
+}
 try {
   window.history.replaceState(
     {},
@@ -210,7 +218,7 @@ try {
   );
   await render();
   assert(
-    !document.querySelector(".inline-review"),
+    !document.querySelector("main form"),
     "Only the existing write-review action remains",
   );
   await open();
@@ -218,8 +226,10 @@ try {
     document.querySelector("[role=dialog]").contains(document.activeElement),
     "Opening moves focus into the dialog",
   );
-  const form = document.querySelector(".combined-review-form"),
-    submit = document.querySelector(".profile-review-dialog [type=submit]");
+  const form = document.querySelector("form[data-ui~='review-form']"),
+    submit = document.querySelector(
+      "[data-ui~='profile-review-dialog'] [type=submit]",
+    );
   assert.equal(
     submit.getAttribute("form"),
     form.id,
@@ -246,8 +256,29 @@ try {
     "Browser Forward opens the dialog again",
   );
   assert(
-    !document.querySelector(".review-account-name"),
-    "The redundant public-name label is removed",
+    hasNoPublicNameFields(
+      document.querySelector("form[data-ui~='review-form']"),
+      api.getMessages("de").customer.publicName,
+    ),
+    "The public name remains server controlled without a redundant publication label",
+  );
+  const redundantName = document
+      .querySelector("form[data-ui~='review-form']")
+      .cloneNode(true),
+    publicNameRow = document.createElement("div"),
+    publicNameLabel = document.createElement("span"),
+    publicNameValue = document.createElement("strong");
+  publicNameLabel.textContent = api.getMessages("de").customer.publicName;
+  publicNameValue.textContent = "Fixture user";
+  publicNameRow.append(publicNameLabel, publicNameValue);
+  redundantName.prepend(publicNameRow);
+  assert.equal(
+    hasNoPublicNameFields(
+      redundantName,
+      api.getMessages("de").customer.publicName,
+    ),
+    false,
+    "A readonly public-name row also fails without legacy presentation classes",
   );
   await click(
     document.querySelector(
@@ -281,7 +312,7 @@ try {
   assert(!document.querySelector("[role=dialog]"), "Escape closes the dialog");
   assert(
     document.activeElement ===
-      document.querySelector("#bewertungen .text-action"),
+      document.querySelector("#bewertungen [data-ui~='profile-write-review']"),
     "Focus returns to write review",
   );
   assert(navigation.dirty, "A retained closed draft still guards navigation");
@@ -294,7 +325,7 @@ try {
   );
   assert(
     document
-      .querySelector(".review-selected-file")
+      .querySelector("[data-ui~='review-selected-file']")
       .textContent.includes(file.name),
   );
   assert.equal(
@@ -329,12 +360,12 @@ try {
     finishSubmission();
     await settle();
   });
-  assert(document.querySelector(".review-submission-success"));
+  assert(document.querySelector("[data-ui~='review-submission-success']"));
   assert(!navigation.dirty, "Successful submission clears the retained draft");
   await escape();
   await travel("forward");
   assert(
-    document.querySelector(".profile-review-dialog [type=submit]"),
+    document.querySelector("[data-ui~='profile-review-dialog'] [type=submit]"),
     "Browser Forward after success opens a usable new review",
   );
   assert.equal(
@@ -390,11 +421,11 @@ try {
     document.querySelector("[role=dialog]"),
     "Login return opens the dialog automatically",
   );
-  assert(document.querySelector(".login-prompt"));
+  assert(document.querySelector("[data-ui~='review-login-prompt']"));
   const returnUrl = new URL(
-    new URL(document.querySelector(".login-prompt a").href).searchParams.get(
-      "weiter",
-    ),
+    new URL(
+      document.querySelector("[data-ui~='review-login-prompt'] a").href,
+    ).searchParams.get("weiter"),
     "https://fixture.test",
   );
   assert.equal(returnUrl.pathname, "/werkstatt/fixture");

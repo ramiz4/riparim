@@ -1,5 +1,7 @@
+import { compileApplicationCss } from "./helpers/compiled-tailwind.mjs";
+import { cssForDom } from "./helpers/style-fixture.mjs";
 import assert from "node:assert/strict";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { JSDOM, VirtualConsole } from "jsdom";
 
@@ -123,9 +125,6 @@ globalThis.fetch = async (url) => {
 
 const require = createRequire(import.meta.url),
   { build } = require("esbuild");
-const { transform } = createRequire(require.resolve("vite/package.json"))(
-  "lightningcss",
-);
 const output = ".test-runtime/catalogue-docking";
 await mkdir(output, { recursive: true });
 const bundle = await build({
@@ -166,50 +165,14 @@ const { createElement, act } = await import("react"),
   { createRoot } = await import("react-dom/client");
 const { Catalogue, defaultCatalogueFilters, I18nProvider, getMessages } =
   await import(new URL("../" + output + "/ui.mjs", import.meta.url));
-const files = [
-  "globals.css",
-  "ui-refresh.css",
-  "site-header.css",
-  "catalogue.css",
-  "form-controls.css",
-  "theme.css",
-];
-const css = (
-  await Promise.all(
-    files.map((file) =>
-      readFile(new URL("../app/" + file, import.meta.url), "utf8"),
-    ),
-  )
-)
-  .join("\n")
-  .replace(/^@(?:import|custom-variant).*;$/gm, "")
-  .replace(/@theme\s+inline\s*\{[^}]*\}/g, "");
-const production = transform({
-  filename: "catalogue.css",
-  code: Buffer.from(css),
-  minify: true,
-})
-  .code.toString()
-  .replace(/[^{}]*:is\(\)\{[^}]*\}/g, "");
+const { source: css, production } = await compileApplicationCss();
 function viewportCss(source) {
-  const fixture = new JSDOM(`<style>${source}</style>`, {
-    virtualConsole: new VirtualConsole(),
+  return cssForDom(source, {
+    dark: document.documentElement.classList.contains("dark"),
+    document,
+    width,
+    height,
   });
-  const flatten = (rules) =>
-    [...rules]
-      .map((rule) =>
-        rule.type === 4
-          ? matches(rule.conditionText)
-            ? flatten(rule.cssRules)
-            : ""
-          : rule.type === 1
-            ? rule.cssText
-            : "",
-      )
-      .join("\n");
-  const result = flatten(fixture.window.document.styleSheets[0].cssRules);
-  fixture.window.close();
-  return result;
 }
 const styleElement = document.createElement("style");
 document.head.append(styleElement);
@@ -242,8 +205,17 @@ function geometry(style) {
       (addition ? Number(addition[2]) * (addition[1] === "-" ? -1 : 1) : 0)
     : parentWidth;
   const left =
-    gutter + pixels(resolved(style, "marginInline") || style.marginLeft);
-  const padding = pixels(resolved(style, "paddingInline") || style.paddingLeft),
+    gutter +
+    pixels(
+      resolved(style, "marginInline") ||
+        style.marginInlineStart ||
+        style.marginLeft,
+    );
+  const padding = pixels(
+      resolved(style, "paddingInline") ||
+        style.paddingInlineStart ||
+        style.paddingLeft,
+    ),
     border = pixels(style.borderLeftWidth);
   return {
     left,
@@ -406,8 +378,9 @@ try {
           "The docked search retains the drawer action",
         );
         assert.equal(
-          getComputedStyle(panel().querySelector(".catalogue-filter-fields"))
-            .display,
+          getComputedStyle(
+            panel().querySelector('[data-ui="catalogue-filter-fields"]'),
+          ).display,
           "none",
           "Mobile location and service controls move into the drawer",
         );

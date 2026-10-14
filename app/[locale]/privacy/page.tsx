@@ -12,7 +12,6 @@ import { getMessages } from "@/lib/i18n/messages";
 import { privacyMessages } from "@/lib/i18n/privacy-messages";
 import { publicMetadata } from "@/lib/i18n/public-metadata";
 import { siteOrigin, getAuthConfig } from "@/lib/auth/config";
-import "./privacy.css";
 export const dynamic = "force-dynamic";
 export async function generateMetadata({
   params,

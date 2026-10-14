@@ -1,5 +1,7 @@
+import { compileApplicationCss } from "./helpers/compiled-tailwind.mjs";
+import { cssForDom } from "./helpers/style-fixture.mjs";
 import assert from "node:assert/strict";
-import { mkdir, writeFile, readFile } from "node:fs/promises";
+import { mkdir, writeFile } from "node:fs/promises";
 import { build } from "esbuild";
 import { JSDOM, VirtualConsole } from "jsdom";
 
@@ -178,8 +180,8 @@ try {
   for (pendingCount of [0, 7]) {
     await remount();
     const main = document.querySelector("main"),
-      tools = main.querySelector(".admin-tools"),
-      overview = main.querySelector(".admin-overview");
+      tools = main.querySelector("[data-ui~='admin-tools']"),
+      overview = main.querySelector("[data-ui~='admin-overview']");
     assert.equal(
       tools.querySelectorAll("a,button").length,
       0,
@@ -196,12 +198,12 @@ try {
     );
     assert.equal(main.querySelector("h1").textContent, "Werkstätten verwalten");
     assert.equal(
-      main.querySelector(".admin-title").textContent,
+      main.querySelector("[data-ui~='admin-title']").textContent,
       "Werkstätten verwaltenWerkstatt hinzufügen",
       "The title area has only the heading and add action",
     );
     assert.equal(
-      main.querySelector(".admin-note"),
+      main.querySelector(":scope > p:not([role])"),
       null,
       "The obsolete note below the table is absent",
     );
@@ -221,7 +223,7 @@ try {
     }
   }
   assert.deepEqual(
-    [...document.querySelectorAll(".admin-overview>div")].map(
+    [...document.querySelectorAll("[data-ui~='admin-overview']>div")].map(
       (node) => node.textContent,
     ),
     ["1Veröffentlichte Standorte", "1Entwürfe"],
@@ -242,9 +244,7 @@ try {
   );
   await type(search, "no matching fixture");
   assert(
-    document
-      .querySelector(".empty")
-      .textContent.includes("Keine Werkstätten gefunden."),
+    emptyState().textContent.includes("Keine Werkstätten gefunden."),
     "Search exposes the empty state",
   );
   await type(search, "");
@@ -293,7 +293,7 @@ try {
     "Loading remains announced",
   );
   assert.equal(
-    document.querySelector(".empty"),
+    emptyState(),
     null,
     "Loading does not display a misleading empty state",
   );
@@ -307,7 +307,7 @@ try {
     "Load failures remain accessible",
   );
   assert.equal(
-    document.querySelector(".empty"),
+    emptyState(),
     null,
     "A failed load is not described as an empty directory",
   );
@@ -315,13 +315,11 @@ try {
   records = [];
   await remount();
   assert(
-    document
-      .querySelector(".empty")
-      .textContent.includes("Keine Werkstätten gefunden."),
+    emptyState().textContent.includes("Keine Werkstätten gefunden."),
     "An empty directory retains its add action",
   );
   assert.equal(
-    document.querySelector(".empty button").textContent,
+    emptyState().querySelector("button").textContent,
     "Werkstatt hinzufügen",
   );
   console.log(
@@ -333,31 +331,8 @@ try {
 }
 
 async function assertTableStyles() {
-  const files = [
-    "globals.css",
-    "ui-refresh.css",
-    "auth.css",
-    "catalogue.css",
-    "workshop-pages.css",
-    "ratings.css",
-    "form-controls.css",
-    "theme.css",
-  ];
-  const css = (
-    await Promise.all(
-      files.map((file) =>
-        readFile(new URL("../app/" + file, import.meta.url), "utf8"),
-      ),
-    )
-  )
-    .join("\n")
-    .replace(/^@(?:import|custom-variant).*;$/gm, "")
-    .replace(/@theme\s+inline\s*\{[^}]*\}/g, "");
-  const table = document.querySelector(".directory-table");
-  // The same table outside this page is a control for shared administration views.
-  const control = table.cloneNode(true);
-  control.className = "directory-table users-table";
-  document.body.append(control);
+  const { source: css } = await compileApplicationCss();
+  const table = document.querySelector("[data-ui~='directory-table']");
   const style = document.createElement("style");
   document.head.append(style);
   function luminance(color) {
@@ -380,27 +355,18 @@ async function assertTableStyles() {
   }
   try {
     for (const dark of [false, true]) {
-      const tokens = {};
-      for (const [, selector, declarations] of css.matchAll(
-        /(:root|html\.dark)\s*\{([^}]+)\}/g,
-      )) {
-        if (selector === "html.dark" && !dark) continue;
-        for (const [, name, value] of declarations.matchAll(
-          /(--[\w-]+):\s*([^;]+)/g,
-        ))
-          tokens[name] = value.trim();
-      }
       document.documentElement.classList.toggle("dark", dark);
-      // jsdom does not resolve CSS variables itself; use the actual theme values.
-      style.textContent = css.replace(
-        /var\((--[\w-]+)\)/g,
-        (match, name) => tokens[name] ?? match,
+      style.textContent = cssForDom(css, { dark, document });
+      const target = getComputedStyle(table);
+      const sharedBorder = dark ? "rgb(43, 75, 80)" : "rgb(223, 230, 216)";
+      assert.equal(
+        target.borderBottomColor,
+        dark ? "rgb(33, 64, 69)" : "rgb(229, 237, 239)",
+        "Workshop separators preserve the recorded light/dark colors",
       );
-      const target = getComputedStyle(table),
-        shared = getComputedStyle(control);
       assert(
         contrast(target.borderBottomColor, target.backgroundColor) <
-          contrast(shared.borderBottomColor, shared.backgroundColor),
+          contrast(sharedBorder, target.backgroundColor),
         "Workshop table borders are subtler than the unchanged shared table in " +
           (dark ? "dark" : "light") +
           " mode",
@@ -417,19 +383,19 @@ async function assertTableStyles() {
         "The header keeps a distinct surface",
       );
       assert.equal(
-        getComputedStyle(document.querySelector(".admin-overview"))
+        getComputedStyle(document.querySelector("[data-ui~='admin-overview']"))
           .gridTemplateColumns,
         "repeat(2, minmax(0, 1fr))",
         "Two metrics fill the desktop grid without an empty third column",
       );
       assert.equal(
-        getComputedStyle(document.querySelector(".admin-title h1")).marginTop,
+        getComputedStyle(document.querySelector("[data-ui~='admin-title'] h1"))
+          .marginTop,
         "0px",
         "The simplified title leaves no eyebrow spacing",
       );
     }
   } finally {
-    control.remove();
     style.remove();
     document.documentElement.classList.remove("dark");
   }
@@ -443,5 +409,14 @@ function fixtureMessages(element) {
       messages: getMessages("de", ["common", "customer", "management"]),
     },
     element,
+  );
+}
+
+function emptyState() {
+  return (
+    [...document.querySelectorAll("main h3")].find(
+      (heading) =>
+        heading.textContent === getMessages("de").management.noWorkshops,
+    )?.parentElement ?? null
   );
 }

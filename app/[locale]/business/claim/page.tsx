@@ -1,3 +1,10 @@
+import { cn } from "@/lib/utils";
+import {
+  pageFrameClassName,
+  contentTitleClassName,
+  errorClassName,
+  appButton,
+} from "@/lib/presentation";
 import { publicReleaseRender } from "@/lib/public-release";
 import { deferredManagementPage } from "@/lib/deferred-page";
 import { I18nMessages } from "@/lib/i18n/client";
@@ -11,7 +18,6 @@ import { listWorkshops } from "@/db/directory";
 import { SiteHeader } from "@/components/site-header";
 import { DirectoryFooter } from "@/components/directory-footer";
 import { BusinessClaimForm } from "@/components/business-claim-form";
-import "../business.css";
 
 export const dynamic = "force-dynamic";
 export default async function BusinessClaimPage({
@@ -61,15 +67,34 @@ export default async function BusinessClaimPage({
         }
         isAdmin={!!admin?.isModerator}
       />
-      <main className="business-page business-claim-page wrap">
+      <main
+        className={cn(
+          pageFrameClassName,
+          "min-h-[calc(100svh_-_180px)] max-w-[680px] pt-4 pb-9 at-most-720:pt-2.5",
+        )}
+      >
         {user ? (
           directoryUnavailable ? (
             <>
-              <h1>{t("management.claimTitle")}</h1>
-              <p className="error" role="alert">
+              <h1 className={cn(contentTitleClassName, "focus:outline-none")}>
+                {t("management.claimTitle")}
+              </h1>
+              <p
+                className={cn(
+                  errorClassName,
+                  "mt-2 mb-[var(--content-page-gap)] leading-[1.6]",
+                )}
+                role="alert"
+              >
                 {t("management.businessUnavailable")}
               </p>
-              <Link className="outline small" href={returnTo}>
+              <Link
+                className={cn(
+                  appButton({ variant: "outline" }),
+                  "px-[13px] py-2",
+                )}
+                href={returnTo}
+              >
                 {t("management.retryBusiness")}
               </Link>
             </>
@@ -81,10 +106,12 @@ export default async function BusinessClaimPage({
           )
         ) : (
           <>
-            <h1>{t("management.claimTitle")}</h1>
-            <p>
+            <h1 className={cn(contentTitleClassName, "focus:outline-none")}>
+              {t("management.claimTitle")}
+            </h1>
+            <p className="mt-2 mb-[var(--content-page-gap)] text-[15px] leading-[1.6] text-muted-foreground">
               <Link
-                className="primary"
+                className={appButton()}
                 href={`/anmelden?weiter=${encodeURIComponent(returnTo)}`}
               >
                 {t("management.login")}

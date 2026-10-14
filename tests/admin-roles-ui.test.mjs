@@ -231,8 +231,10 @@ try {
     "The account table exposes the role column",
   );
   check(
-    row("member").querySelector(".users-role").textContent === "Benutzer" &&
-      row("other-admin").querySelector(".users-role").textContent === "Admin",
+    row("member").querySelector("[data-ui~='users-role']").textContent ===
+      "Benutzer" &&
+      row("other-admin").querySelector("[data-ui~='users-role']")
+        .textContent === "Admin",
     "User and admin roles have visible labels",
   );
   for (const name of ["Current Admin", "Emergency Admin"]) {
@@ -298,7 +300,7 @@ try {
     "Pending role changes disable confirmation and cancellation",
   );
   check(
-    [...document.querySelectorAll(".users-actions button")].every(
+    [...document.querySelectorAll("[data-ui~='users-actions'] button")].every(
       (control) => control.disabled,
     ),
     "Pending role changes disable conflicting account actions",
@@ -321,7 +323,8 @@ try {
   mode = "success";
   check(
     !dialog() &&
-      row("member").querySelector(".users-role").textContent === "Admin",
+      row("member").querySelector("[data-ui~='users-role']").textContent ===
+        "Admin",
     "Successful promotion updates the visible role and closes the confirmation",
   );
   check(
@@ -351,7 +354,8 @@ try {
   );
   check(
     requests.filter((request) => request.method === "GET").length === 2 &&
-      row("member").querySelector(".users-role").textContent === "Benutzer",
+      row("member").querySelector("[data-ui~='users-role']").textContent ===
+        "Benutzer",
     "An uncertain result reloads roles and reflects a completed server change",
   );
   check(
@@ -365,8 +369,8 @@ try {
   await click(demote());
   await click(dialogButton("Adminrechte entziehen"));
   check(
-    row("member").querySelector(".users-role").textContent === "Benutzer" &&
-      mutations().at(-1).body.role === "user",
+    row("member").querySelector("[data-ui~='users-role']").textContent ===
+      "Benutzer" && mutations().at(-1).body.role === "user",
     "Confirmed demotion restores the visible ordinary role",
   );
   check(
@@ -382,7 +386,8 @@ try {
   await click(dialogButton("Zum Admin machen"));
   check(
     !dialog() &&
-      row("member").querySelector(".users-role").textContent === "Admin",
+      row("member").querySelector("[data-ui~='users-role']").textContent ===
+        "Admin",
     "A stale promotion confirmation reflects the role already assigned by another request",
   );
   check(
@@ -401,7 +406,8 @@ try {
   await click(dialogButton("Adminrechte entziehen"));
   check(
     !dialog() &&
-      row("member").querySelector(".users-role").textContent === "Benutzer",
+      row("member").querySelector("[data-ui~='users-role']").textContent ===
+        "Benutzer",
     "A stale demotion confirmation reflects an already removed role",
   );
   check(

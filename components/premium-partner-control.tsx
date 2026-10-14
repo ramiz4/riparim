@@ -1,4 +1,11 @@
 "use client";
+import { dialogCopyClassName } from "@/lib/presentation";
+import { cn } from "@/lib/utils";
+import {
+  appButton,
+  helpTextClassName,
+  errorClassName,
+} from "@/lib/presentation";
 import { Crown } from "lucide-react";
 import { useState } from "react";
 import { useNavigationGuard } from "@/lib/i18n/navigation-guard";
@@ -60,8 +67,12 @@ export function PremiumPartnerControl({ workshop }: { workshop: Workshop }) {
   return (
     <>
       <button
+        data-ui="text-action premium-control"
         type="button"
-        className="text-action premium-control"
+        className={cn(
+          appButton({ variant: "text" }),
+          "m-0 inline-flex items-center gap-1.5 text-[13px] whitespace-nowrap",
+        )}
         onClick={() => void show()}
       >
         <Crown size={15} aria-hidden="true" />
@@ -80,12 +91,21 @@ export function PremiumPartnerControl({ workshop }: { workshop: Workshop }) {
           footer={
             <>
               <DialogClose asChild>
-                <button className="outline" disabled={busy || loading}>
+                <button
+                  className={cn(
+                    appButton({ variant: "outline" }),
+                    "at-most-720:min-h-[45px] at-most-720:text-[13px] at-most-720:px-[13px]",
+                  )}
+                  disabled={busy || loading}
+                >
                   {t("management.cancel")}
                 </button>
               </DialogClose>
               <button
-                className="primary"
+                className={cn(
+                  appButton(),
+                  "at-most-720:min-h-[45px] at-most-720:text-[13px] at-most-720:flex-1",
+                )}
                 disabled={loading || busy || !loaded}
                 onClick={() => void save()}
               >
@@ -94,11 +114,13 @@ export function PremiumPartnerControl({ workshop }: { workshop: Workshop }) {
             </>
           }
         >
-          <p>{t("management.premiumHelp")}</p>
+          <p className={dialogCopyClassName}>{t("management.premiumHelp")}</p>
           {loading ? (
-            <p role="status">{t("management.loading")}</p>
+            <p className={dialogCopyClassName} role="status">
+              {t("management.loading")}
+            </p>
           ) : (
-            <label className="activation-switch">
+            <label className="flex items-center gap-3">
               <Checkbox
                 checked={active}
                 disabled={
@@ -109,20 +131,24 @@ export function PremiumPartnerControl({ workshop }: { workshop: Workshop }) {
                 onCheckedChange={(value) => setActive(value === true)}
                 aria-label={t("management.premiumActive")}
               />
-              <span>{t("management.premiumActive")}</span>
+              <span className="text-[14px] text-[#506a48] dark:text-[var(--theme-accent)] at-most-720:leading-[1.5]">
+                {t("management.premiumActive")}
+              </span>
             </label>
           )}
           {workshop.status !== "published" && (
-            <p className="help">{t("management.premiumPublishedOnly")}</p>
+            <p className={cn(helpTextClassName, "leading-[1.65]")}>
+              {t("management.premiumPublishedOnly")}
+            </p>
           )}
           {error && (
             <div>
-              <p className="error" role="alert">
+              <p className={cn(errorClassName, "leading-[1.65]")} role="alert">
                 {error}
               </p>
               {!loaded && (
                 <button
-                  className="outline"
+                  className={appButton({ variant: "outline" })}
                   disabled={busy}
                   onClick={() => void show()}
                 >

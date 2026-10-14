@@ -414,16 +414,16 @@ try {
   );
   await remount();
   check(
-    document.querySelector(".business-status").textContent === "In Prüfung" &&
-      !document.querySelector("form"),
+    document.querySelector("[data-ui~='business-status']").textContent ===
+      "In Prüfung" && !document.querySelector("form"),
     "The overview shows a pending claim without the application form",
   );
   check(
     document
-      .querySelector(".business-panel")
+      .querySelector("[data-ui~='business-panel']")
       .textContent.includes("Dein Nachweis wird geprüft") &&
       document
-        .querySelector(".business-panel")
+        .querySelector("[data-ui~='business-panel']")
         .textContent.includes("separate Freigabe"),
     "A pending claim explains manual review and the next step without implying publication",
   );
@@ -444,7 +444,9 @@ try {
     document
       .querySelector('[role="dialog"]')
       .contains(document.activeElement) &&
-      !document.querySelector(".business-panel .business-form"),
+      !document.querySelector(
+        "[data-ui~='business-panel'] [data-ui~='business-form']",
+      ),
     "Profile editing opens a focused modal outside the overview",
   );
   await act(async () =>
@@ -478,16 +480,28 @@ try {
     "The owner editor uses the current approved contact and description",
   );
   check(
-    document.querySelector(".opening-enabled input") &&
-      !document.querySelector(".opening-day"),
+    document.querySelector(
+      "[data-ui~='opening-editor'] > label input[type='checkbox']",
+    ) &&
+      !document.querySelector(
+        "[data-ui~='opening-editor'] > div > div > fieldset",
+      ),
     "Hours start explicitly unspecified",
   );
-  await click(document.querySelector(".opening-enabled input"));
+  await click(
+    document.querySelector(
+      "[data-ui~='opening-editor'] > label input[type='checkbox']",
+    ),
+  );
   check(
-    document.querySelectorAll(".opening-day").length === 7,
+    document.querySelectorAll(
+      "[data-ui~='opening-editor'] > div > div > fieldset",
+    ).length === 7,
     "Owner can edit all seven weekdays",
   );
-  const monday = document.querySelector(".opening-day select");
+  const monday = document.querySelector(
+    "[data-ui~='opening-editor'] > div > div > fieldset select",
+  );
   await act(async () => {
     Object.getOwnPropertyDescriptor(
       HTMLSelectElement.prototype,
@@ -496,22 +510,41 @@ try {
     monday.dispatchEvent(new Event("change", { bubbles: true }));
   });
   check(
-    document.querySelectorAll(".opening-interval").length === 1,
+    document.querySelectorAll(
+      "[data-ui~='opening-editor'] > div > div > fieldset > div > div",
+    ).length === 1,
     "Opening a day starts one editable interval",
   );
   await click(button("Montag auf Montag–Freitag übernehmen"));
   check(
-    document.querySelectorAll(".opening-interval").length === 5,
+    document.querySelectorAll(
+      "[data-ui~='opening-editor'] > div > div > fieldset > div > div",
+    ).length === 5,
     "Copy fills only weekdays",
   );
   await click(button("Ausnahme hinzufügen"));
   check(
-    document.querySelector('.opening-exception input[type="date"]'),
+    document.querySelector(
+      "[data-ui~='opening-editor'] > fieldset > div input[type=\"date\"]",
+    ),
     "Exception dates have an accessible native date control",
   );
-  await click(document.querySelector(".opening-exception button"));
-  await click(document.querySelector(".opening-enabled input"));
-  check(!document.querySelector(".opening-day"), "Owner can clear their hours");
+  await click(
+    document.querySelector(
+      "[data-ui~='opening-editor'] > fieldset > div button",
+    ),
+  );
+  await click(
+    document.querySelector(
+      "[data-ui~='opening-editor'] > label input[type='checkbox']",
+    ),
+  );
+  check(
+    !document.querySelector(
+      "[data-ui~='opening-editor'] > div > div > fieldset",
+    ),
+    "Owner can clear their hours",
+  );
   check(
     document
       .querySelector('[role="dialog"]')
@@ -525,7 +558,7 @@ try {
   mode = "pending";
   await submit(control("Telefon").form);
   check(
-    document.querySelector(".business-form fieldset").disabled &&
+    document.querySelector("[data-ui~='business-form'] fieldset").disabled &&
       [
         ...document.querySelector('[role="dialog"]').querySelectorAll("button"),
       ].every((node) => node.matches(":disabled")),
@@ -572,7 +605,7 @@ try {
     "Requests have their own title and contain no profile editor",
   );
   const proposal = document
-    .querySelector(".business-proposal")
+    .querySelector("[data-ui~='business-proposal']")
     .closest("details");
   check(
     proposal &&
@@ -588,15 +621,16 @@ try {
   await remount(true);
   check(
     document
-      .querySelector(".business-evidence")
+      .querySelector("[data-ui~='business-evidence']")
       .textContent.includes("company-register") &&
-      document.querySelector(".business-request a").getAttribute("rel") ===
-        "noopener noreferrer",
+      document
+        .querySelector("[data-ui~='business-request'] a")
+        .getAttribute("rel") === "noopener noreferrer",
     "The administrator sees private evidence with safe external links",
   );
   check(
-    document.querySelector(".business-current summary").textContent ===
-      "Aktuell freigegebene Angaben ansehen",
+    document.querySelector("[data-ui~='business-current'] summary")
+      .textContent === "Aktuell freigegebene Angaben ansehen",
     "Change review includes the approved profile for comparison",
   );
   const decisionOpener = button("Bestätigen"),
@@ -612,7 +646,7 @@ try {
     "Moderation starts with a required reason selection",
   );
   check(
-    dialog().classList.contains("app-dialog") &&
+    dialog().getAttribute("role") === "alertdialog" &&
       dialog().querySelector("[data-slot=alert-dialog-header]") &&
       dialog().querySelector("[data-slot=dialog-body]") &&
       dialog().querySelector("[data-slot=alert-dialog-footer]"),
@@ -691,7 +725,7 @@ try {
   check(
     !dialog() &&
       document
-        .querySelector(".business-panel")
+        .querySelector("[data-ui~='business-panel']")
         .textContent.includes("Keine Änderungsentwürfe vorhanden"),
     "A confirmed rejection clears the pending change queue",
   );
@@ -705,14 +739,14 @@ try {
   await remount(true);
   await click(button("Weitere Anträge laden"));
   check(
-    document.querySelectorAll(".business-request").length === 3 &&
+    document.querySelectorAll("[data-ui~='business-request']").length === 3 &&
       !button("Weitere Anträge laden") &&
       button("Weitere Änderungen laden"),
     "Claim pagination appends older requests without resetting the independent draft queue",
   );
   await click(button("Weitere Änderungen laden"));
   check(
-    document.querySelectorAll(".business-request").length === 4 &&
+    document.querySelectorAll("[data-ui~='business-request']").length === 4 &&
       !button("Weitere Änderungen laden"),
     "Draft pagination appends older proposals and stops at the last page",
   );
@@ -735,12 +769,12 @@ try {
   );
   check(
     document
-      .querySelector(".business-request")
+      .querySelector("[data-ui~='business-request']")
       .textContent.includes(
         "Dieser Antrag wurde abgelehnt. Beachte den Prüfvermerk.",
       ) &&
       document
-        .querySelector(".business-note")
+        .querySelector("[data-ui~='business-note']")
         .textContent.includes("supplement"),
     "Historical rejected claims report their outcome and retain the private review note",
   );
@@ -767,18 +801,18 @@ try {
   await remount();
   check(
     document
-      .querySelector(".business-panel")
+      .querySelector("[data-ui~='business-panel']")
       .textContent.includes("Dieser Inhabernachweis wurde bestätigt") &&
       !button("Profil bearbeiten"),
     "Confirmed ownership is reported separately from profile editing",
   );
   check(
     document
-      .querySelector(".business-panel")
+      .querySelector("[data-ui~='business-panel']")
       .textContent.includes(
         "Diese Änderungen wurden abgelehnt. Beachte den Prüfvermerk.",
       ) &&
-      [...document.querySelectorAll(".business-status")].some(
+      [...document.querySelectorAll("[data-ui~='business-status']")].some(
         (node) => node.textContent === "Freigegeben",
       ),
     "Historical rejected changes report their outcome while approved changes clearly indicate publication approval",
@@ -842,11 +876,12 @@ try {
   await remount();
   check(
     document.querySelector("h2").textContent === workshop.name &&
-      document.querySelector(".business-status").textContent === "In Prüfung" &&
+      document.querySelector("[data-ui~='business-status']").textContent ===
+        "In Prüfung" &&
       document
-        .querySelector(".business-request")
+        .querySelector("[data-ui~='business-request']")
         .textContent.includes("Dein Nachweis wird geprüft") &&
-      !document.querySelector(".business-claim"),
+      !document.querySelector("[data-ui~='business-claim']"),
     "An older current claim remains the visible next step without paging through historical decisions",
   );
   records = { ...records, pendingClaims: [] };
@@ -873,7 +908,7 @@ try {
   check(
     button("Profil bearbeiten").disabled &&
       document
-        .querySelector(".business-request")
+        .querySelector("[data-ui~='business-request']")
         .textContent.includes("Warte auf die Freigabe"),
     "An older pending change locks editing and explains the current next step before history is loaded",
   );
@@ -892,7 +927,7 @@ try {
   };
   await remount();
   const rejectedDraft = document
-    .querySelector(".business-status.rejected")
+    .querySelector("[data-ui~='business-status'][data-status='rejected']")
     .closest("article");
   check(
     !button("Profil bearbeiten") &&
@@ -913,7 +948,7 @@ try {
   };
   await remount();
   const rejectedClaim = document
-    .querySelector(".business-status.rejected")
+    .querySelector("[data-ui~='business-status'][data-status='rejected']")
     .closest("article");
   check(
     rejectedClaim.textContent.includes("anderer Übernahme-Antrag") &&
@@ -933,10 +968,10 @@ try {
   );
   check(
     document
-      .querySelector(".business-request")
+      .querySelector("[data-ui~='business-request']")
       .textContent.includes("privaten Nachweis manuell") &&
       document
-        .querySelector(".business-request")
+        .querySelector("[data-ui~='business-request']")
         .textContent.includes("separate Freigabe"),
     "Current claim guidance visibly explains private manual verification and separate publication approval",
   );
@@ -954,7 +989,7 @@ try {
   ];
   await click(button("Weitere Anträge laden"));
   check(
-    !document.querySelector(".business-claim-progress") &&
+    !document.querySelector("[data-ui~='business-claim-progress']") &&
       !button("Profil bearbeiten"),
     "Request pagination removes a claim approved externally without showing an editor",
   );
@@ -1048,18 +1083,18 @@ try {
   };
   await remount();
   check(
-    document.querySelectorAll(".business-request").length === 2 &&
+    document.querySelectorAll("[data-ui~='business-request']").length === 2 &&
       [...document.querySelectorAll("button")].filter(
         (node) => node.textContent === "Profil bearbeiten",
       ).length === 2 &&
-      !document.querySelector(".business-status"),
+      !document.querySelector("[data-ui~='business-status']"),
     "The businesses page supports multiple owned workshops without rendering applications",
   );
   view = "requests";
   await remount();
   check(
     document.querySelector("h1").textContent === "Meine Betriebsanträge" &&
-      document.querySelectorAll(".business-request").length === 1 &&
+      document.querySelectorAll("[data-ui~='business-request']").length === 1 &&
       !button("Profil bearbeiten"),
     "The requests page excludes owned workshop profiles",
   );

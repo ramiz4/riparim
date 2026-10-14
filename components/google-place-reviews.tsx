@@ -1,5 +1,7 @@
 "use client";
 import { useI18n } from "@/lib/i18n/client";
+import { cn } from "@/lib/utils";
+import { appButton } from "@/lib/presentation";
 import { LocaleAnchor } from "@/components/locale-anchor";
 import { useEffect, useRef, useState } from "react";
 import { RefreshCw } from "lucide-react";
@@ -12,6 +14,19 @@ import type {
 import { useGoogleVisibility } from "./use-google-visibility";
 import { workshopMapsUrl } from "@/lib/google-maps-link";
 import type { Workshop } from "@/lib/workshops";
+
+const googleHostClassName =
+  "block min-w-0 w-full rounded-xl border border-border [color-scheme:inherit] [--gmp-mat-color-surface:var(--theme-surface)] [--gmp-mat-color-on-surface:var(--foreground)] [--gmp-mat-color-on-surface-variant:var(--muted-foreground)] [--gmp-mat-color-primary:var(--theme-accent)] [--gmp-mat-color-secondary-container:var(--primary)] [--gmp-mat-color-on-secondary-container:var(--primary-foreground)] [--gmp-mat-color-neutral-container:var(--muted)] [--gmp-mat-color-on-neutral-container:var(--muted-foreground)] [--gmp-mat-color-outline-decorative:var(--border)] [--gmp-mat-font-family:Inter,Arial,Helvetica,sans-serif] [--gmp-mat-font-display-small:normal_600_20px/28px_Inter,Arial,Helvetica,sans-serif] [--gmp-mat-font-body-medium:normal_400_14px/22px_Inter,Arial,Helvetica,sans-serif]";
+const googleHostVariants = {
+  rating: "max-w-[500px]",
+  overview:
+    "h-auto max-w-none rounded-none border-0 [--gmp-mat-spacing-large:8px] [--gmp-mat-spacing-medium:8px] [--gmp-mat-spacing-extra-large:0px] [--gmp-mat-spacing-two-extra-large:0px]",
+  reviews: "h-[480px] max-w-none",
+} as const;
+const googleDetailsActionClassName = cn(
+  appButton({ variant: "text" }),
+  "m-0 inline-flex min-h-9 items-center gap-[5px] py-1 text-[13px] leading-[1.5] focus-visible:rounded-[3px] focus-visible:[outline:2px_solid_var(--ring)] focus-visible:outline-offset-[3px] [@media(max-width:720px),(pointer:coarse)]:min-h-11",
+);
 
 type Props = {
   workshop: Workshop;
@@ -90,6 +105,7 @@ function GoogleDetails({
         return;
       }
       element = document.createElement(tag);
+      element.className = cn(googleHostClassName, googleHostVariants[variant]);
       if (compact) element.setAttribute("orientation", "horizontal");
       const request = document.createElement("gmp-place-details-place-request");
       (request as HTMLElement & { place: unknown }).place = new library.Place({
@@ -136,11 +152,14 @@ function GoogleDetails({
   return (
     <div
       ref={ref}
-      className={`google-reviews-panel${compact ? " google-rating-panel" : ""}${variant === "overview" ? " google-overview-panel" : ""}`}
+      className="min-w-0 w-full max-w-none"
+      data-ui="google-place-details"
+      data-google-variant={variant}
     >
       <div
         ref={container}
-        className={`google-official-widget${expired || unavailable ? " google-widget-unavailable" : ""}`}
+        className={cn("empty:hidden", (expired || unavailable) && "hidden")}
+        data-ui="google-official-widget"
         aria-label={t(
           variant === "rating"
             ? "public.googleRatingWidgetAria"
@@ -151,8 +170,14 @@ function GoogleDetails({
         )}
       />
       {unavailable || expired ? (
-        <div className="google-details-fallback">
-          <p role="status">
+        <div
+          className="flex flex-wrap items-center gap-x-3 gap-y-0 text-[13px] leading-[1.5] text-muted-foreground"
+          data-ui="google-details-fallback"
+        >
+          <p
+            className="m-0 text-[13px] leading-[1.5] text-muted-foreground"
+            role="status"
+          >
             {t(
               unavailable
                 ? "public.googleDetailsFailed"
@@ -161,11 +186,14 @@ function GoogleDetails({
                   : "public.googleDetailsStale",
             )}
           </p>
-          <div className="google-details-actions">
+          <div className="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-0">
             {identity && (
               <button
                 type="button"
-                className="text-action google-details-refresh"
+                className={cn(
+                  googleDetailsActionClassName,
+                  "disabled:cursor-default disabled:opacity-50",
+                )}
                 aria-label={
                   needsReload
                     ? t("public.googleDetailsReload")
@@ -179,14 +207,14 @@ function GoogleDetails({
                   }
                 }}
               >
-                <RefreshCw size={14} aria-hidden="true" />
+                <RefreshCw size={14} aria-hidden="true" className="shrink-0" />
                 {t(
                   needsReload ? "public.googleDetailsReload" : "public.reload",
                 )}
               </button>
             )}
             <LocaleAnchor
-              className="text-action"
+              className={googleDetailsActionClassName}
               href={mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
@@ -198,7 +226,10 @@ function GoogleDetails({
       ) : (
         !loadedAt &&
         canLoad && (
-          <p className="google-details-loading" role="status">
+          <p
+            className="m-0 text-[13px] leading-[1.5] text-muted-foreground"
+            role="status"
+          >
             {t("public.googleDetailsLoading")}
           </p>
         )

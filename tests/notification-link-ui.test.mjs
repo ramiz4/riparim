@@ -183,7 +183,7 @@ try {
     await render();
     check(
       requests[0] === "/api/visits?id=" + id &&
-        document.querySelectorAll(".visit").length === 1,
+        document.querySelectorAll("[data-ui~='visit']").length === 1,
       "The authenticated return opens the exact owned submission instead of an unrelated history page",
     );
     check(
@@ -199,7 +199,7 @@ try {
       "The aligned own reviews page has no redundant back-navigation row",
     );
     check(
-      document.querySelector(".visit-status").textContent ===
+      document.querySelector("[data-ui~='visit-status']").textContent ===
         {
           de: "Ergänzung nötig",
           sq: "Nevojitet plotësim",
@@ -219,7 +219,7 @@ try {
     await render();
     check(
       requests.at(-1) === "/api/visits" &&
-        document.querySelectorAll(".visit").length === 2,
+        document.querySelectorAll("[data-ui~='visit']").length === 2,
       "Following the all-reviews destination loads the complete owned history",
     );
     dom.reconfigure({
@@ -232,7 +232,7 @@ try {
     await render();
     check(
       requests.at(-1) === "/api/visits?id=" + id &&
-        document.querySelectorAll(".visit").length === 1,
+        document.querySelectorAll("[data-ui~='visit']").length === 1,
       "Returning through browser history restores the targeted submission",
     );
     await act(async () => root.unmount());
@@ -240,7 +240,7 @@ try {
     root = createRoot(document.getElementById("root"));
     await render();
     check(
-      document.querySelectorAll(".visit").length === 0 &&
+      document.querySelectorAll("[data-ui~='visit']").length === 0 &&
         document.querySelector('[role="alert"]').textContent ===
           getMessages(locale).common.notFound,
       "A different login sees no private submission behind a copied notification link",

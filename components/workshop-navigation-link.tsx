@@ -42,8 +42,13 @@ export function WorkshopNavigationLink({
           new URL(target, window.location.href).pathname,
         );
         if (pathname === "/workshops")
-          return document.querySelector(".catalogue-page") !== null;
-        const page = document.querySelector<HTMLElement>(".workshop-page");
+          return (
+            document.querySelector('[data-riparim-page="catalogue"]') !== null
+          );
+        if (!pathname.startsWith("/workshop/")) return false;
+        const page = document.querySelector<HTMLElement>(
+          '[data-riparim-page="workshop"]',
+        );
         return (
           page?.dataset.workshopId ===
           decodeURIComponent(pathname.slice("/workshop/".length))

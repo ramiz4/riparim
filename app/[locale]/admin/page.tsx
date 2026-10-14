@@ -1,3 +1,4 @@
+import { appButton } from "@/lib/presentation";
 import { publicReleaseRender } from "@/lib/public-release";
 import { deferredManagementPage } from "@/lib/deferred-page";
 import { I18nMessages } from "@/lib/i18n/client";
@@ -25,11 +26,18 @@ export default async function AdminPage({
   if (!user)
     return (
       <I18nMessages messages={messages}>
-        <main className="access-page">
-          <h1>{t("management.workshopAdministration")}</h1>
-          <p>{t("management.adminLoginHelp")}</p>
+        <main
+          data-ui="access-page"
+          className="mx-auto my-20 flex max-w-[600px] flex-col gap-[25px] p-[30px]"
+        >
+          <h1 className="text-[32px] leading-[1.2]">
+            {t("management.workshopAdministration")}
+          </h1>
+          <p className="text-[#758273] dark:text-muted-foreground">
+            {t("management.adminLoginHelp")}
+          </p>
           <LocaleAnchor
-            className="primary"
+            className={appButton()}
             href={chatGPTSignInPath(localizeHref("/verwaltung", locale))}
             target="_top"
           >
@@ -42,10 +50,17 @@ export default async function AdminPage({
   if (!user.isModerator)
     return (
       <I18nMessages messages={messages}>
-        <main className="access-page">
-          <h1>{t("management.noAdministration")}</h1>
-          <p>{t("management.customerHelp")}</p>
-          <Link className="primary" href="/">
+        <main
+          data-ui="access-page"
+          className="mx-auto my-20 flex max-w-[600px] flex-col gap-[25px] p-[30px]"
+        >
+          <h1 className="text-[32px] leading-[1.2]">
+            {t("management.noAdministration")}
+          </h1>
+          <p className="text-[#758273] dark:text-muted-foreground">
+            {t("management.customerHelp")}
+          </p>
+          <Link className={appButton()} href="/">
             {t("management.backWorkshops")}
           </Link>
         </main>

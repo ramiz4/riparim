@@ -225,7 +225,7 @@ try {
       messages.customer.myReviewsLoading,
     );
     assert(
-      !document.querySelector(".login-prompt"),
+      !document.querySelector("[data-ui~='login-prompt']"),
       "Pending validation never reports the visitor as a guest",
     );
     await act(async () => {
@@ -234,7 +234,9 @@ try {
     });
     await flush();
     assert.equal(
-      document.querySelector(".login-prompt a").getAttribute("href"),
+      document
+        .querySelector("[data-ui~='login-prompt'] a")
+        .getAttribute("href"),
       localizeHref("/anmelden?weiter=", locale) +
         encodeURIComponent(
           localizeHref("/bewertungen", locale) + "?einreichung=" + id,
@@ -253,7 +255,9 @@ try {
       await mount(locale, DeferredReviews);
       await flush();
       assert.equal(
-        document.querySelector(".login-prompt a").getAttribute("href"),
+        document
+          .querySelector("[data-ui~='login-prompt'] a")
+          .getAttribute("href"),
         localizeHref("/anmelden?weiter=", locale) +
           encodeURIComponent(localizeHref("/bewertungen", locale)),
         "Ambiguous and external private targets are discarded",
@@ -268,7 +272,7 @@ try {
     await mount(locale, DeferredManagement, { kind: "claim" });
     await flush();
     assert.equal(
-      document.querySelector("main .primary").getAttribute("href"),
+      document.querySelector("main a[href*='weiter=']").getAttribute("href"),
       localizeHref("/anmelden?weiter=", locale) +
         encodeURIComponent(
           localizeHref("/betriebe/beanspruchen", locale) +
@@ -290,11 +294,11 @@ try {
     await flush();
     assert(document.querySelector('input[name="email"]'));
     assert.equal(
-      document.querySelector(".auth-error")?.textContent,
+      document.querySelector("main [role=alert]")?.textContent,
       messages.customer.googleCancelled,
     );
     assert.equal(
-      document.querySelector(".auth-google").disabled,
+      document.querySelector("[data-ui~='auth-google']").disabled,
       true,
       "Current provider options disable unavailable Google",
     );
@@ -305,7 +309,7 @@ try {
     );
     assert(
       document
-        .querySelector(".auth-switch a")
+        .querySelector("[data-ui~=auth-card] > p:last-of-type a")
         .href.includes(
           encodeURIComponent(
             localizeHref("/werkstatt/fixture-workshop", locale) + "#bewerten",
@@ -346,7 +350,7 @@ try {
     "Unavailable session validation fails closed with an actionable error",
   );
   assert(
-    !document.querySelector(".visit"),
+    !document.querySelector("[data-ui~='visit']"),
     "Failed validation never shows a private visit",
   );
   sessionFailure = false;
@@ -354,7 +358,7 @@ try {
   await act(async () => document.querySelector("main button").click());
   await flush();
   assert(
-    document.querySelector(".login-prompt"),
+    document.querySelector("[data-ui~='login-prompt']"),
     "Retry reads a fresh session and observes sign-out",
   );
   session = {
@@ -374,7 +378,7 @@ try {
     "A customer never mounts the administrative catalogue",
   );
   assert(
-    document.querySelector(".access-page"),
+    document.querySelector("[data-ui~='access-page']"),
     "The administrative gate explains denied access",
   );
   for (const [Page, props, path] of [
@@ -447,7 +451,7 @@ try {
   const beforeRetry = requests.filter(
       (path) => path === "/api/workshops",
     ).length,
-    retryDirectory = document.querySelector("main .outline");
+    retryDirectory = document.querySelector("main [role=alert] ~ button");
   await act(async () => {
     retryDirectory.focus();
     retryDirectory.click();
@@ -475,7 +479,7 @@ try {
       status: "published",
     },
   ];
-  const retainedRetry = document.querySelector("main .outline");
+  const retainedRetry = document.querySelector("main [role=alert] ~ button");
   holdDirectory = {};
   await act(async () => {
     retainedRetry.focus();
@@ -492,7 +496,7 @@ try {
   });
   await flush();
   assert(
-    document.querySelector(".claim-form"),
+    document.querySelector("[data-ui~='claim-form']"),
     "A successful retry recovers the retained claim form",
   );
   assert.equal(
@@ -510,7 +514,7 @@ try {
     window.dispatchEvent(new Event("popstate"));
   });
   assert.equal(
-    !!document.querySelector(".claim-form"),
+    !!document.querySelector("[data-ui~='claim-form']"),
     false,
     "Changing a retained claim target hides the old workshop form before the new directory response",
   );
@@ -524,7 +528,7 @@ try {
   });
   await flush();
   assert.equal(
-    document.querySelector(".claim-workshop h2").textContent,
+    document.querySelector("[data-ui~='claim-workshop'] h2").textContent,
     "Workshop B",
     "The retained wrapper exposes only its current resolved target",
   );
@@ -539,7 +543,7 @@ try {
     window.dispatchEvent(new Event("popstate"));
   });
   assert.equal(
-    !!document.querySelector(".claim-form"),
+    !!document.querySelector("[data-ui~='claim-form']"),
     false,
     "An old resolved workshop is hidden while a different target loads",
   );
@@ -566,7 +570,7 @@ try {
   });
   await flush();
   assert.equal(
-    document.querySelector(".claim-workshop h2").textContent,
+    document.querySelector("[data-ui~='claim-workshop'] h2").textContent,
     "Workshop C",
   );
   await act(async () =>
@@ -574,7 +578,7 @@ try {
   );
   await flush();
   assert.equal(
-    document.querySelector(".claim-workshop h2").textContent,
+    document.querySelector("[data-ui~='claim-workshop'] h2").textContent,
     "Workshop C",
     "A late response for the old target cannot replace the current resolved form",
   );
@@ -584,11 +588,14 @@ try {
       window.dispatchEvent(new Event("popstate"));
     });
     assert.equal(
-      !!document.querySelector(".claim-form"),
+      !!document.querySelector("[data-ui~='claim-form']"),
       false,
       "Missing and ambiguous targets never retain an earlier workshop form",
     );
-    assert.equal(!!document.querySelector(".claim-workshop"), false);
+    assert.equal(
+      !!document.querySelector("[data-ui~='claim-workshop']"),
+      false,
+    );
   }
   directoryFailure = false;
   window.history.replaceState({}, "", "/einstellungen");
@@ -603,8 +610,10 @@ try {
   requests = [];
   await mount("de", DeferredManagement, { kind: "settings" });
   await flush();
-  const retainedAccountPanel = document.querySelector(".account-settings"),
-    nameControl = document.querySelector(".account-name-form input");
+  const retainedAccountPanel = document.querySelector(
+      "main [aria-busy] > section:first-of-type",
+    ),
+    nameControl = document.querySelector("input[name='name']");
   nameControl.focus();
   await act(async () => {
     Object.getOwnPropertyDescriptor(
@@ -618,17 +627,19 @@ try {
   ).length;
   await act(async () =>
     document
-      .querySelector(".account-name-form")
+      .querySelector("form:has(input[name='name'])")
       .dispatchEvent(new Event("submit", { bubbles: true, cancelable: true })),
   );
   await flush();
   assert.equal(
-    document.querySelector(".user-menu-name").textContent,
+    document.querySelector(
+      "header button[aria-haspopup='menu'] > span:last-of-type",
+    ).textContent,
     "Updated",
     "A successful name mutation refreshes the retained wrapper session/header",
   );
   assert.equal(
-    document.querySelector(".account-settings"),
+    document.querySelector("main [aria-busy] > section:first-of-type"),
     retainedAccountPanel,
     "Session refresh preserves the account panel instance",
   );
@@ -657,23 +668,23 @@ try {
       });
   await act(async () => findButton(copy.deleteAccount).click());
   await type(
-    document.querySelector('.account-confirmation input[type="password"]'),
+    document.querySelector("[role=alertdialog] input[type=password]"),
     "fixture-password",
   );
   await act(async () => findButton(copy.confirmPassword).click());
   await type(
-    document.querySelector(".account-confirmation input"),
+    document.querySelector("[role=alertdialog] input"),
     "KONTO LÖSCHEN",
   );
   await act(async () => findButton(copy.deletePermanently).click());
   await flush();
   assert.equal(
-    !!document.querySelector(".user-menu-trigger"),
+    !!document.querySelector("header button[aria-haspopup='menu']"),
     false,
     "Successful deletion clears the retained wrapper account header",
   );
   assert.equal(
-    document.querySelector(".account-settings"),
+    document.querySelector("main [aria-busy] > section:first-of-type"),
     retainedAccountPanel,
     "Deleting the account does not require unmounting the wrapper to clear its header",
   );
@@ -688,8 +699,10 @@ try {
   window.history.replaceState({}, "", "/einstellungen");
   await mount("de", RetainedSettings);
   await flush();
-  const racePanel = document.querySelector(".account-settings"),
-    raceName = document.querySelector(".account-name-form input"),
+  const racePanel = document.querySelector(
+      "main [aria-busy] > section:first-of-type",
+    ),
+    raceName = document.querySelector("input[name='name']"),
     oldResponse = {};
   holdSession = oldResponse;
   await act(async () => invalidatePublicSession());
@@ -697,7 +710,7 @@ try {
     root.render(wrap("de", h(RetainedSettings, { headers: 1 }))),
   );
   assert.equal(
-    document.querySelector(".account-settings"),
+    document.querySelector("main [aria-busy] > section:first-of-type"),
     racePanel,
     "Adding another session consumer retains the settings instance",
   );
@@ -706,14 +719,16 @@ try {
   await type(raceName, "After Member");
   await act(async () =>
     document
-      .querySelector(".account-name-form")
+      .querySelector("form:has(input[name='name'])")
       .dispatchEvent(new Event("submit", { bubbles: true, cancelable: true })),
   );
   const freshCount = requests.filter((path) => path === "/api/session").length;
   await act(async () => oldResponse.resolve());
   await flush();
   assert.equal(
-    document.querySelector(".user-menu-name").textContent,
+    document.querySelector(
+      "header button[aria-haspopup='menu'] > span:last-of-type",
+    ).textContent,
     "After",
     "An earlier session response cannot undo the confirmed rename",
   );
@@ -731,14 +746,16 @@ try {
   });
   await flush();
   assert.deepEqual(
-    [...document.querySelectorAll(".user-menu-name")].map(
-      (node) => node.textContent,
-    ),
+    [
+      ...document.querySelectorAll(
+        "header button[aria-haspopup='menu'] > span:last-of-type",
+      ),
+    ].map((node) => node.textContent),
     ["After", "After", "After"],
     "Deferred and public clients consume the same freshly verified session",
   );
   assert.equal(
-    document.querySelector(".account-settings"),
+    document.querySelector("main [aria-busy] > section:first-of-type"),
     racePanel,
     "Race handling preserves the retained settings form",
   );
@@ -753,7 +770,7 @@ try {
   await type(raceName, "Final Member");
   await act(async () =>
     document
-      .querySelector(".account-name-form")
+      .querySelector("form:has(input[name='name'])")
       .dispatchEvent(new Event("submit", { bubbles: true, cancelable: true })),
   );
   await act(async () => {
@@ -764,9 +781,11 @@ try {
   await act(async () => lateOldResponse.resolve());
   await flush();
   assert.deepEqual(
-    [...document.querySelectorAll(".user-menu-name")].map(
-      (node) => node.textContent,
-    ),
+    [
+      ...document.querySelectorAll(
+        "header button[aria-haspopup='menu'] > span:last-of-type",
+      ),
+    ].map((node) => node.textContent),
     ["Final", "Final", "Final", "Final"],
     "A delayed pre-mutation response cannot replace any newly verified header",
   );

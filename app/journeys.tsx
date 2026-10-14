@@ -1,4 +1,24 @@
 "use client";
+import {
+  dialogHeaderClassName,
+  dialogTitleClassName,
+  dialogDescriptionClassName,
+  dialogFooterClassName,
+  confirmationCancelClassName,
+  confirmationActionClassName,
+  pageFrameClassName,
+  contentTitleClassName,
+  appButton,
+  errorClassName,
+  loadingStateClassName,
+  emptyStateClassName,
+  emptyStateCopyClassName,
+  helpTextClassName,
+  noteClassName,
+  confirmationDialogClassName,
+} from "@/lib/presentation";
+import { cn } from "@/lib/utils";
+
 import { useI18n } from "@/lib/i18n/client";
 import {
   responseError,
@@ -108,7 +128,7 @@ export function VisitForm({
       }}
     >
       <ModalContent
-        className="review-submission-modal"
+        className="max-w-[min(700px,calc(100%_-_32px))] sm:max-w-[min(700px,calc(100%_-_32px))]"
         onCloseAutoFocus={onCloseAutoFocus}
         closeDisabled={busy}
         title={done ? t("customer.reviewSubmitted") : t("customer.editReview")}
@@ -120,13 +140,22 @@ export function VisitForm({
         footer={
           <>
             <DialogClose asChild>
-              <button className="outline" disabled={busy}>
+              <button
+                className={cn(
+                  appButton({ variant: "outline" }),
+                  "at-most-720:min-h-[45px] at-most-720:text-[13px] at-most-720:px-[13px]",
+                )}
+                disabled={busy}
+              >
                 {done ? t("customer.close") : t("customer.cancel")}
               </button>
             </DialogClose>
             {signedIn && done ? (
               <LocaleAnchor
-                className="primary"
+                className={cn(
+                  appButton(),
+                  "at-most-720:min-h-[45px] at-most-720:text-[13px] at-most-720:flex-1",
+                )}
                 href={ownReviewsHref(existing?.id)}
               >
                 {t("customer.myReviews")}
@@ -136,11 +165,17 @@ export function VisitForm({
                 type="submit"
                 form={formId}
                 disabled={busy}
-                className="primary"
+                className={cn(
+                  appButton(),
+                  "at-most-720:min-h-[45px] at-most-720:text-[13px] at-most-720:flex-1",
+                )}
               >
                 {busy ? (
                   <>
-                    <LoaderCircle className="spin" size={17} />
+                    <LoaderCircle
+                      className="inline-block animate-spin motion-reduce:animate-none"
+                      size={17}
+                    />
                     {t("customer.submitting")}
                   </>
                 ) : (
@@ -336,21 +371,44 @@ export function MyVisits({
   }
   return (
     <>
-      <main className="my-reviews-page wrap">
-        <header className="my-reviews-heading">
+      <main
+        className={cn(
+          pageFrameClassName,
+          "min-h-[calc(100svh_-_180px)] pt-[var(--content-page-padding-top)] pb-[var(--content-page-padding-bottom)] [overflow-wrap:anywhere]",
+        )}
+      >
+        <header
+          data-ui="my-reviews-heading"
+          className="mb-[var(--content-page-gap)] flex items-center justify-between gap-5 at-most-720:flex-wrap at-most-720:items-start at-most-720:gap-4"
+        >
           <div>
-            <h1 ref={pageHeading} tabIndex={-1}>
+            <h1
+              className={cn(contentTitleClassName, "focus:outline-none")}
+              ref={pageHeading}
+              tabIndex={-1}
+            >
               {t("customer.myReviews")}
             </h1>
-            <p>{t("customer.myReviewsNote")}</p>
+            <p className="mt-2 text-[15px] leading-[1.6] text-muted-foreground">
+              {t("customer.myReviewsNote")}
+            </p>
           </div>
         </header>
         {!signedIn || authenticationRequired ? (
-          <div className="login-prompt">
-            <ShieldCheck size={25} />
+          <div
+            data-ui="login-prompt"
+            className="flex flex-col items-center gap-5 rounded-xl border border-border bg-card px-5 py-8 text-center"
+          >
+            <ShieldCheck
+              className="text-[#327b52] dark:text-[var(--theme-positive)]"
+              size={25}
+            />
             <p>{t("customer.myReviewsLogin")}</p>
             <LocaleAnchor
-              className="primary"
+              className={cn(
+                appButton(),
+                "focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-ring",
+              )}
               href={`/anmelden?weiter=${encodeURIComponent(localizeHref(ownReviewsHref(target), locale))}`}
             >
               {t("customer.loginOrRegister")}
@@ -360,27 +418,45 @@ export function MyVisits({
           <>
             <AccountStorageNotice />
             {directoryUnavailable && (
-              <p className="error" role="alert">
+              <p className={errorClassName} role="alert">
                 {t("customer.workshopsUnavailable")}{" "}
-                <LocaleAnchor reloadDocument href={ownReviewsHref(target)}>
+                <LocaleAnchor
+                  className="focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-ring"
+                  reloadDocument
+                  href={ownReviewsHref(target)}
+                >
                   {t("customer.refresh")}
                 </LocaleAnchor>
               </p>
             )}
-            <div className="visit-list" aria-busy={loading}>
+            <div
+              data-ui="visit-list"
+              className="flex flex-col gap-[15px] pt-[13px]"
+              aria-busy={loading}
+            >
               {loading && !view.loaded && (
-                <div className="review-loading" role="status">
-                  <LoaderCircle size={18} className="spin" />
+                <div className={loadingStateClassName} role="status">
+                  <LoaderCircle
+                    size={18}
+                    className="inline-block animate-spin motion-reduce:animate-none"
+                  />
                   <span>{t("customer.myReviewsLoading")}</span>
                 </div>
               )}
               {view.error && (
                 <>
-                  <p className="error" role="alert">
+                  <p className={errorClassName} role="alert">
                     {view.error}
                   </p>
                   <button
-                    className="outline small my-reviews-retry"
+                    data-ui="my-reviews-retry"
+                    className={cn(
+                      cn(
+                        appButton({ variant: "outline" }),
+                        "focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-ring px-[13px] py-2 min-h-11",
+                      ),
+                      "min-h-11",
+                    )}
                     disabled={busy}
                     onClick={() => void load()}
                   >
@@ -389,23 +465,39 @@ export function MyVisits({
                 </>
               )}
               {!loading && !view.error && view.loaded && !view.items.length && (
-                <div className="empty">
+                <div className={emptyStateClassName}>
                   <MessageCircle size={25} />
-                  <h3>{t("customer.noReviews")}</h3>
-                  <p>{t("customer.noReviewsNote")}</p>
+                  <h3 className="text-[18px]">{t("customer.noReviews")}</h3>
+                  <p className={emptyStateCopyClassName}>
+                    {t("customer.noReviewsNote")}
+                  </p>
                 </div>
               )}
               {target && (
-                <LocaleAnchor className="outline small" href="/bewertungen">
+                <LocaleAnchor
+                  className={cn(
+                    appButton({ variant: "outline" }),
+                    "focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-ring px-[13px] py-2",
+                  )}
+                  href="/bewertungen"
+                >
                   {t("customer.allMyReviews")}
                 </LocaleAnchor>
               )}
               {view.items.map((v) => (
-                <article className="visit" key={v.id}>
-                  <div className="visit-top">
-                    <strong>
+                <article
+                  data-ui="visit"
+                  className="rounded-[11px] border border-[#dae5e6] bg-card p-[17px] dark:border-border at-most-720:p-[15px]"
+                  key={v.id}
+                >
+                  <div
+                    data-ui="visit-top"
+                    className="flex items-start justify-between gap-3.5 text-[15px] at-most-720:flex-wrap at-most-720:gap-[9px]"
+                  >
+                    <strong className="min-w-0 at-most-720:text-[16px]">
                       {directory.some((w) => w.id === v.workshop) ? (
                         <Link
+                          className="focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-ring"
                           href={`/werkstatt/${encodeURIComponent(v.workshop)}`}
                         >
                           {v.workshop_name ?? t("customer.workshopProfile")}
@@ -414,50 +506,85 @@ export function MyVisits({
                         (v.workshop_name ?? t("customer.formerWorkshop"))
                       )}
                     </strong>
-                    <span className={`visit-status ${v.status}`}>
+                    <span
+                      data-ui="visit-status"
+                      data-status={v.status}
+                      className={cn(
+                        "max-w-[55%] shrink-0 rounded-[5px] px-2 py-[3px] text-[12px] whitespace-normal at-most-720:max-w-full",
+                        v.status === "approved" || v.status === "published"
+                          ? "bg-[#e7f3e8] text-[#2c784b] dark:bg-[#163e32] dark:text-[var(--theme-positive)]"
+                          : v.status === "needs_more"
+                            ? "bg-[#ffefe7] text-[#934832] dark:border-[#75413e] dark:bg-[#3a2426] dark:text-[var(--theme-danger)]"
+                            : "bg-[#f3efe1] text-[#80713a] dark:bg-[#3b3020] dark:text-[var(--theme-warning)]",
+                      )}
+                    >
                       {valueLabel(locale, "status", v.status)}
                     </span>
                   </div>
-                  <p className="review-meta">
+                  <p
+                    data-ui="review-meta"
+                    className="mt-[5px] mb-2.5 text-[12px] text-[#8b978c] dark:text-muted-foreground"
+                  >
                     {v.vehicle} ·{" "}
                     {formatDate(locale, v.date, { dateOnly: true })} ·{" "}
                     {reviewServicesLabel(locale, v)}
                   </p>
                   {completeReview(v) ? (
-                    <div className="submitted-review">
-                      <span>
+                    <div
+                      data-ui="submitted-review"
+                      className="flex flex-col gap-[7px] py-3"
+                    >
+                      <span className="flex items-center gap-[5px] text-[13px] text-[#a98029] dark:text-[var(--theme-warning)]">
                         <Star size={15} fill="currentColor" />
                         {v.rating} / 5 · {v.display_name}
                       </span>
-                      {v.review && <p>{v.review}</p>}
+                      {v.review && (
+                        <p className="text-[15px] whitespace-pre-wrap [overflow-wrap:anywhere]">
+                          {v.review}
+                        </p>
+                      )}
                     </div>
                   ) : (
-                    <p className="help">{t("customer.oldReview")}</p>
+                    <p className={helpTextClassName}>
+                      {t("customer.oldReview")}
+                    </p>
                   )}
-                  <details className="evidence-details">
-                    <summary>
+                  <details
+                    data-ui="evidence-details"
+                    className="mt-0.5 border-t border-[#e2e9eb] pt-3 dark:border-border"
+                  >
+                    <summary className="cursor-pointer text-[14px] font-[550] text-[#4c6f68] dark:text-muted-foreground focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-ring">
                       {t("customer.privateEvidenceSummary", {
                         type: valueLabel(locale, "evidence", v.evidence_type),
                       })}
                     </summary>
                     {v.file_name && (
                       <LocaleAnchor
-                        className="text-action"
+                        data-ui="text-action"
+                        className={cn(
+                          appButton({ variant: "text" }),
+                          "focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-ring",
+                        )}
                         href={evidenceHref(v.id, locale)}
                       >
                         {t("customer.downloadReceipt")}
                       </LocaleAnchor>
                     )}
                     {v.evidence_note && (
-                      <p className="evidence-note">{v.evidence_note}</p>
+                      <p className="mt-2.5 bg-[#f5f7f3] p-3 text-[14px] whitespace-pre-wrap dark:border-border dark:bg-[var(--theme-surface)] dark:text-muted-foreground">
+                        {v.evidence_note}
+                      </p>
                     )}
                   </details>
                   {v.moderator_note && (
-                    <p className="note">
+                    <p className={noteClassName}>
                       {t("customer.moderationNote", { note: v.moderator_note })}
                     </p>
                   )}
-                  <div className="visit-actions">
+                  <div
+                    data-ui="visit-actions"
+                    className="mt-3.5 flex items-center justify-start gap-[15px] at-most-720:flex-wrap at-most-720:items-start"
+                  >
                     {[
                       "pending",
                       "approved",
@@ -466,7 +593,13 @@ export function MyVisits({
                     ].includes(v.status) &&
                       directory.some((w) => w.id === v.workshop) && (
                         <button
-                          className="outline small"
+                          className={cn(
+                            cn(
+                              appButton({ variant: "outline" }),
+                              "focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-ring px-[13px] py-2",
+                            ),
+                            "min-h-11",
+                          )}
                           disabled={busy}
                           onClick={(event) => {
                             rememberFocus(event.currentTarget);
@@ -481,7 +614,14 @@ export function MyVisits({
                         </button>
                       )}
                     <button
-                      className="delete-button"
+                      data-ui="delete-button"
+                      className={cn(
+                        cn(
+                          appButton({ variant: "danger" }),
+                          "ml-auto focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-ring",
+                        ),
+                        "min-h-11",
+                      )}
                       disabled={busy}
                       onClick={(event) => {
                         rememberFocus(event.currentTarget);
@@ -497,7 +637,13 @@ export function MyVisits({
               ))}
               {view.cursor && (
                 <button
-                  className="outline"
+                  className={cn(
+                    cn(
+                      appButton({ variant: "outline" }),
+                      "focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-ring",
+                    ),
+                    "min-h-11",
+                  )}
                   disabled={busy}
                   onClick={() => void load(true)}
                 >
@@ -506,7 +652,7 @@ export function MyVisits({
               )}
             </div>
             {actionError && (
-              <p className="error" role="alert">
+              <p className={errorClassName} role="alert">
                 {actionError}
               </p>
             )}
@@ -536,29 +682,33 @@ export function MyVisits({
         }}
       >
         <AlertDialogContent
-          className="app-dialog confirmation-dialog"
+          className={confirmationDialogClassName}
           onCloseAutoFocus={closeAutoFocus}
         >
-          <AlertDialogHeader>
-            <AlertDialogTitle>
+          <AlertDialogHeader className={dialogHeaderClassName}>
+            <AlertDialogTitle className={dialogTitleClassName}>
               {t("customer.deleteReviewTitle")}
             </AlertDialogTitle>
           </AlertDialogHeader>
           <ModalBody>
-            <AlertDialogDescription>
+            <AlertDialogDescription className={dialogDescriptionClassName}>
               {t("customer.deleteReviewNote")}
             </AlertDialogDescription>
             {actionError && (
-              <p className="error" role="alert">
+              <p className={errorClassName} role="alert">
                 {actionError}
               </p>
             )}
           </ModalBody>
-          <AlertDialogFooter>
-            <AlertDialogCancel disabled={mutating}>
+          <AlertDialogFooter className={dialogFooterClassName}>
+            <AlertDialogCancel
+              className={confirmationCancelClassName}
+              disabled={mutating}
+            >
               {t("customer.keep")}
             </AlertDialogCancel>
             <AlertDialogAction
+              className={confirmationActionClassName}
               disabled={mutating}
               onClick={(e) => {
                 e.preventDefault();

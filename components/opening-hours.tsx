@@ -2,6 +2,8 @@
 import { useEffect, useId, useState } from "react";
 import { useI18n } from "@/lib/i18n/client";
 import { formatDate } from "@/lib/i18n/format";
+import { cn } from "@/lib/utils";
+import { appButton, helpTextClassName } from "@/lib/presentation";
 import { ChevronDown, Clock3, X } from "lucide-react";
 import {
   Popover,
@@ -35,9 +37,11 @@ const modeKeys = {
 export function OpeningHoursDetails({
   hours,
   todayIndex,
+  presentation = "default",
 }: {
   hours: OpeningHours | null | undefined;
   todayIndex?: number;
+  presentation?: "default" | "popover";
 }) {
   const { locale, t } = useI18n();
   if (!hours) return <p>{t("common.hoursMissing")}</p>;
@@ -47,28 +51,79 @@ export function OpeningHoursDetails({
       : t(modeKeys[day.mode]);
   return (
     <>
-      <dl className="opening-week">
+      <dl className="text-[14px]" data-ui="opening-week">
         {hours.week.map((day, index) => (
           <div
             key={index}
-            className={index === todayIndex ? "opening-day-today" : undefined}
+            className={cn(
+              "flex justify-between gap-4 py-[3px]",
+              presentation === "popover" && "items-baseline rounded-[6px] p-2",
+              presentation === "popover" &&
+                index === todayIndex &&
+                "bg-[var(--theme-hover)] font-[650]",
+            )}
             aria-current={index === todayIndex ? "date" : undefined}
           >
-            <dt>{t(weekdayKeys[index])}</dt>
-            <dd>{label(day)}</dd>
+            <dt
+              className={cn(
+                "shrink-0",
+                presentation === "popover" &&
+                  index !== todayIndex &&
+                  "text-muted-foreground",
+              )}
+            >
+              {t(weekdayKeys[index])}
+            </dt>
+            <dd
+              className={cn(
+                "m-0 text-right [overflow-wrap:anywhere]",
+                presentation === "popover" && "tabular-nums",
+              )}
+            >
+              {label(day)}
+            </dd>
           </div>
         ))}
       </dl>
       {hours.exceptions.length > 0 && (
         <>
-          <h3>{t("common.hoursExceptions")}</h3>
-          <dl className="opening-week">
+          <h3
+            className={
+              presentation === "popover"
+                ? "mt-[14px] mr-2 mb-1 ml-2 text-[14px] font-semibold"
+                : undefined
+            }
+          >
+            {t("common.hoursExceptions")}
+          </h3>
+          <dl className="text-[14px]" data-ui="opening-exceptions">
             {[...hours.exceptions]
               .sort((a, b) => a.date.localeCompare(b.date))
               .map((value) => (
-                <div key={value.date}>
-                  <dt>{formatDate(locale, value.date, { dateOnly: true })}</dt>
-                  <dd>{label(value.day)}</dd>
+                <div
+                  key={value.date}
+                  className={cn(
+                    "flex justify-between gap-4 py-[3px]",
+                    presentation === "popover" &&
+                      "items-baseline rounded-[6px] p-2",
+                  )}
+                >
+                  <dt
+                    className={cn(
+                      "shrink-0",
+                      presentation === "popover" && "text-muted-foreground",
+                    )}
+                  >
+                    {formatDate(locale, value.date, { dateOnly: true })}
+                  </dt>
+                  <dd
+                    className={cn(
+                      "m-0 text-right [overflow-wrap:anywhere]",
+                      presentation === "popover" && "tabular-nums",
+                    )}
+                  >
+                    {label(value.day)}
+                  </dd>
                 </div>
               ))}
           </dl>
@@ -81,10 +136,12 @@ export function WorkshopOpeningHours({
   hours: ownerHours,
   importedHours,
   confirmedAt,
+  className,
 }: {
   hours: OpeningHours | null | undefined;
   importedHours?: OpeningHours | null;
   confirmedAt?: string | null;
+  className?: string;
 }) {
   const hours = ownerHours ?? importedHours;
   const confirmed = !!ownerHours && !!confirmedAt;
@@ -109,15 +166,25 @@ export function WorkshopOpeningHours({
     : t("common.hoursToday");
   return (
     <section
-      className="workshop-opening-hours profile-opening-hours"
+      className={cn(
+        "mt-[18px] min-w-0 max-w-[580px] flex-1 text-[14px] text-[#576e64] dark:text-muted-foreground at-most-720:mt-[15px]",
+        className,
+      )}
+      data-ui="workshop-opening-hours"
       aria-labelledby={`${id}-hours`}
     >
       <h2 className="sr-only" id={`${id}-hours`}>
         {t("common.hoursTitle")}
       </h2>
       {confirmed && hours && now && status !== "unknown" && (
-        <div className="opening-hours-title">
-          <span className={`opening-status ${status}`} role="status">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-[6px]">
+          <span
+            className={cn(
+              "text-[12px] font-semibold",
+              status === "open" && "text-[var(--theme-accent)]",
+            )}
+            role="status"
+          >
             {t(
               status === "open"
                 ? "common.hoursNowOpen"
@@ -131,24 +198,32 @@ export function WorkshopOpeningHours({
       {hours ? (
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
-            <button type="button" className="opening-hours-trigger">
+            <button
+              type="button"
+              className="inline-flex min-h-9 max-w-full items-center gap-[9px] rounded-[5px] text-left text-[14px] font-semibold text-inherit hover:text-[var(--theme-accent)] focus-visible:[outline:2px_solid_var(--ring)] focus-visible:outline-offset-[3px] dark:hover:text-ring [&>svg:last-child]:transition-transform [&>svg:last-child]:duration-150 data-[state=open]:[&>svg:last-child]:rotate-180 motion-reduce:[&>svg]:transition-none"
+            >
               <Clock3 size={17} aria-hidden="true" />
               <span>{todayLabel}</span>
               <ChevronDown size={16} aria-hidden="true" />
             </button>
           </PopoverTrigger>
           <PopoverContent
-            className="opening-hours-popover"
+            className="max-h-[min(560px,var(--radix-popover-content-available-height,560px))] w-[min(360px,calc(100vw_-_32px))] overflow-y-auto overscroll-contain rounded-xl border-border bg-popover p-4 text-popover-foreground [box-shadow:0_12px_36px_#0003]"
+            data-ui="opening-hours-popover"
             align="start"
             aria-labelledby={`${id}-schedule`}
           >
-            <div className="opening-hours-popover-heading">
-              <h3 id={`${id}-schedule`}>
+            <div className="mb-[6px] flex items-center justify-between gap-4 border-b border-border pb-[10px]">
+              <h3
+                className="m-0 flex items-center gap-2 text-[15px] font-[650]"
+                id={`${id}-schedule`}
+              >
                 <Clock3 size={17} aria-hidden="true" />
                 {t("common.hoursTitle")}
               </h3>
               <button
                 type="button"
+                className="grid size-8 place-items-center rounded-[6px] hover:bg-[var(--theme-hover)]"
                 aria-label={t("common.close")}
                 onClick={() => setOpen(false)}
               >
@@ -156,11 +231,12 @@ export function WorkshopOpeningHours({
               </button>
             </div>
             <OpeningHoursDetails
+              presentation="popover"
               hours={hours}
               todayIndex={now ? openingWeekday(now) : undefined}
             />
             {confirmed && (
-              <p className="opening-hours-source">
+              <p className="mx-2 mt-3 border-t border-border pt-3 text-[12px] leading-[1.6] text-muted-foreground">
                 {t("common.hoursSource")}
                 {confirmedAt && (
                   <>
@@ -193,11 +269,12 @@ function DayEditor({
 }) {
   const { t } = useI18n();
   return (
-    <fieldset className="opening-day">
+    <fieldset className="grid min-w-0 gap-4 rounded-lg border border-border p-3">
       <legend>{label}</legend>
-      <label>
+      <label className="grid gap-[7px] text-[14px] font-semibold">
         {t("common.hoursDayStatus")}
         <select
+          className="min-h-11 w-full rounded-lg border border-input bg-background px-3 py-[10px] [font:inherit] text-foreground focus-visible:[outline:3px_solid_var(--ring)] focus-visible:outline-offset-[3px]"
           value={day.mode}
           onChange={(event) =>
             onChange(
@@ -222,12 +299,13 @@ function DayEditor({
       </label>
       {day.mode === "open" && (
         <>
-          <div className="opening-intervals">
+          <div>
             {day.intervals.map((interval, index) => (
-              <div key={index} className="opening-interval">
-                <label>
+              <div key={index} className="flex flex-wrap items-end gap-2">
+                <label className="grid min-w-[85px] flex-1 gap-[7px] text-[14px] font-semibold">
                   {t("common.hoursFrom")}
                   <input
+                    className="min-h-11 min-w-0 w-full rounded-lg border border-input bg-background px-3 py-[10px] text-foreground focus-visible:[outline:3px_solid_var(--ring)] focus-visible:outline-offset-[3px]"
                     required
                     inputMode="numeric"
                     placeholder="08:00"
@@ -246,9 +324,10 @@ function DayEditor({
                     }
                   />
                 </label>
-                <label>
+                <label className="grid min-w-[85px] flex-1 gap-[7px] text-[14px] font-semibold">
                   {t("common.hoursUntil")}
                   <input
+                    className="min-h-11 min-w-0 w-full rounded-lg border border-input bg-background px-3 py-[10px] text-foreground focus-visible:[outline:3px_solid_var(--ring)] focus-visible:outline-offset-[3px]"
                     required
                     inputMode="numeric"
                     placeholder="17:00"
@@ -270,7 +349,10 @@ function DayEditor({
                 {day.intervals.length > 1 && (
                   <button
                     type="button"
-                    className="outline small"
+                    className={cn(
+                      appButton({ variant: "outline", size: "small" }),
+                      "mt-2",
+                    )}
                     aria-label={t("common.hoursRemoveInterval", {
                       day: label,
                       number: index + 1,
@@ -291,7 +373,10 @@ function DayEditor({
           {day.intervals.length < 3 && (
             <button
               type="button"
-              className="outline small"
+              className={cn(
+                appButton({ variant: "outline", size: "small" }),
+                "mt-2",
+              )}
               onClick={() =>
                 onChange({
                   ...day,
@@ -316,12 +401,18 @@ export function OpeningHoursEditor({
 }) {
   const { t } = useI18n();
   return (
-    <fieldset className="opening-editor">
+    <fieldset
+      className="my-5 grid min-w-0 gap-4 rounded-[10px] border border-border p-4 at-most-600:p-3"
+      data-ui="opening-editor"
+    >
       <legend>{t("common.hoursTitle")}</legend>
-      <p className="help">{t("common.hoursEditingHelp")}</p>
-      <label className="opening-enabled">
+      <p className={cn(helpTextClassName, "leading-[1.65]")}>
+        {t("common.hoursEditingHelp")}
+      </p>
+      <label className="flex items-center gap-[10px] text-[14px] font-semibold">
         <input
           type="checkbox"
+          className="w-5 flex-[0_0_20px] focus-visible:[outline:3px_solid_var(--ring)] focus-visible:outline-offset-[3px]"
           checked={!!hours}
           onChange={(event) =>
             onChange(event.target.checked ? emptyOpeningHours() : null)
@@ -331,7 +422,7 @@ export function OpeningHoursEditor({
       </label>
       {hours && (
         <>
-          <div className="opening-days">
+          <div className="grid grid-cols-2 gap-[14px] at-most-600:grid-cols-1">
             {hours.week.map((day, index) => (
               <div key={index}>
                 <DayEditor
@@ -349,7 +440,10 @@ export function OpeningHoursEditor({
                 {index === 0 && (
                   <button
                     type="button"
-                    className="outline small"
+                    className={cn(
+                      appButton({ variant: "outline", size: "small" }),
+                      "mt-2",
+                    )}
                     onClick={() =>
                       onChange({
                         ...hours,
@@ -365,14 +459,18 @@ export function OpeningHoursEditor({
               </div>
             ))}
           </div>
-          <fieldset className="opening-exceptions">
+          <fieldset className="mt-5 grid min-w-0 gap-4">
             <legend>{t("common.hoursExceptions")}</legend>
             {hours.exceptions.map((exception, index) => (
-              <div key={index} className="opening-exception">
-                <label>
+              <div
+                key={index}
+                className="grid gap-[10px] border-b border-border py-3"
+              >
+                <label className="grid gap-[7px] text-[14px] font-semibold">
                   {t("common.hoursDate")}
                   <input
                     type="date"
+                    className="min-h-11 min-w-0 w-full rounded-lg border border-input bg-background px-3 py-[10px] text-foreground focus-visible:[outline:3px_solid_var(--ring)] focus-visible:outline-offset-[3px]"
                     required
                     value={exception.date}
                     onChange={(event) =>
@@ -401,7 +499,10 @@ export function OpeningHoursEditor({
                 />
                 <button
                   type="button"
-                  className="outline small"
+                  className={cn(
+                    appButton({ variant: "outline", size: "small" }),
+                    "mt-2",
+                  )}
                   onClick={() =>
                     onChange({
                       ...hours,
@@ -418,7 +519,10 @@ export function OpeningHoursEditor({
             {hours.exceptions.length < 60 && (
               <button
                 type="button"
-                className="outline small"
+                className={cn(
+                  appButton({ variant: "outline", size: "small" }),
+                  "mt-2",
+                )}
                 onClick={() =>
                   onChange({
                     ...hours,

@@ -160,9 +160,14 @@ try {
     try {
       const main = loadingDom.window.document.querySelector("main");
       assert.equal(
-        main.querySelectorAll('h1,h2,[class*="placeholder"]').length,
+        main.querySelectorAll("h1,h2,article").length,
         0,
         `${locale}: pending catalogue has no repeated title or skeleton cards`,
+      );
+      assert.equal(
+        main.children.length,
+        1,
+        "Pending catalogue contains only its status, without empty placeholder rows",
       );
       assert.equal(main.textContent, loadingLabels[locale]);
       assert.equal(
@@ -193,26 +198,28 @@ try {
           assert(
             (
               picker.querySelector('[data-slot="select-value"]') ??
-              picker
-                .closest(".searchable-picker-control")
-                ?.querySelector(".searchable-picker-selected")
+              picker.closest("[data-ui~=picker-control]")?.querySelector("span")
             )?.textContent.trim(),
             `${locale}: selected values must be readable before JavaScript loads`,
           );
         assert(
           !doc.querySelector(
-            ".catalogue-detail-search,.catalogue-private-context,.search-tabs",
+            "main [name=vehicle],main [name=model],main [name=year]",
           ),
           "public pages have a single search path without the vehicle wizard",
         );
         if (Page === Finder) {
           assert(
             doc
-              .querySelector(".landing-hero")
-              .nextElementSibling.matches(".discover-section"),
+              .querySelector("section[aria-labelledby='hero-title']")
+              .nextElementSibling.matches(
+                "section[aria-labelledby='discover-title']",
+              ),
             "discovery sits directly after the hero",
           );
-          const partnerHeader = doc.querySelector(".discover-heading");
+          const partnerHeader = doc.querySelector(
+            "section[aria-labelledby='discover-title'] > div:first-child",
+          );
           assert.equal(
             partnerHeader.textContent,
             t("public.partnerTitle"),
@@ -228,12 +235,16 @@ try {
             "partner header has no extra copy or actions",
           );
           assert(
-            !doc.querySelector(".shortcuts-section"),
+            !doc.querySelector("main a[href*='leistung=']"),
             "the old location and service link section is removed",
           );
-          const invitation = doc.querySelector(".review-invitation");
+          const invitation = doc.querySelector(
+            "[data-ui~='review-invitation']",
+          );
           assert(
-            invitation.previousElementSibling.matches(".discover-section"),
+            invitation.previousElementSibling.matches(
+              "section[aria-labelledby='discover-title']",
+            ),
             "review invitation follows the workshop cards",
           );
           assert.equal(
@@ -251,11 +262,13 @@ try {
             "review action clearly asks visitors to select the workshop they visited",
           );
           assert(
-            doc.querySelector(".landing-hero #suche form"),
+            doc.querySelector(
+              "section[aria-labelledby='hero-title'] #suche form",
+            ),
             "quick search is inside the hero before JavaScript loads",
           );
           assert.equal(
-            doc.querySelector(".landing-hero-content>p").textContent,
+            doc.querySelector("#hero-title + p").textContent,
             t("public.heroBenefit"),
           );
           assert.equal(
@@ -309,7 +322,7 @@ try {
     Object.defineProperty(window, "scrollY", { value: 96, configurable: true });
     await act(async () => root.render(wrap(locale, h(Finder, props))));
     assert.equal(
-      document.querySelector(".navbar").dataset.scrolled,
+      document.querySelector("[data-ui~='site-header']").dataset.scrolled,
       "true",
       "header restores its glass state when entering an already scrolled page",
     );
@@ -324,12 +337,12 @@ try {
       });
       await act(async () => window.dispatchEvent(new Event("scroll")));
       assert.equal(
-        document.querySelector(".navbar").dataset.scrolled,
+        document.querySelector("[data-ui~='site-header']").dataset.scrolled,
         expected,
         "header glass follows scroll and clears at the top",
       );
     }
-    const form = document.querySelector(".search-box"),
+    const form = document.querySelector("#suche form"),
       before = fixtureNavigations.length;
     await act(async () => {
       form.dispatchEvent(
@@ -359,7 +372,7 @@ try {
       "Search responds before the router returns any data",
     );
     assert(
-      !document.querySelector(".landing-hero"),
+      !document.querySelector("section[aria-labelledby='hero-title']"),
       "Pending navigation immediately shows the destination loading view",
     );
     assert.equal(
@@ -385,7 +398,10 @@ try {
     );
     await act(async () => root.render(null));
     await act(async () => root.render(wrap(locale, h(Catalogue, props))));
-    assert.equal(document.querySelectorAll(".catalogue-card").length, 12);
+    assert.equal(
+      document.querySelectorAll("[data-ui~='catalogue-card']").length,
+      12,
+    );
     const more = () =>
       [...document.querySelectorAll("button")].find(
         (button) => button.textContent === t("public.showMore"),
@@ -393,19 +409,25 @@ try {
     more().focus();
     await act(async () => more().click());
     await new Promise((resolve) => requestAnimationFrame(resolve));
-    assert.equal(document.querySelectorAll(".catalogue-card").length, 24);
+    assert.equal(
+      document.querySelectorAll("[data-ui~='catalogue-card']").length,
+      24,
+    );
     assert.equal(
       document.activeElement,
-      document.querySelectorAll(".catalogue-card-target")[12],
+      document.querySelectorAll("[data-card-focus-target]")[12],
       "Keyboard users continue at the first newly added workshop",
     );
     more().focus();
     await act(async () => more().click());
     await new Promise((resolve) => requestAnimationFrame(resolve));
-    assert.equal(document.querySelectorAll(".catalogue-card").length, 25);
+    assert.equal(
+      document.querySelectorAll("[data-ui~='catalogue-card']").length,
+      25,
+    );
     assert.equal(
       document.activeElement,
-      document.querySelectorAll(".catalogue-card-target")[24],
+      document.querySelectorAll("[data-card-focus-target]")[24],
       "Focus survives the removal of the final show-more button",
     );
     await act(async () => root.render(null));
@@ -421,7 +443,9 @@ try {
         : Response.json({ enabled: false });
     await act(async () => root.render(wrap(locale, h(DiscoverWorkshops))));
     assert.equal(
-      document.querySelector('.discover-section [role="status"]').textContent,
+      document.querySelector(
+        "section[aria-labelledby='discover-title'] [role=\"status\"]",
+      ).textContent,
       t("public.loadingWorkshops"),
     );
     const published = [...workshops.slice(0, 5)].reverse();
@@ -442,26 +466,29 @@ try {
       ),
     );
     assert.equal(
-      document.querySelectorAll(".discover-grid .catalogue-card").length,
+      document.querySelectorAll(
+        "[data-ui~='discover-grid'] [data-ui~='catalogue-card']",
+      ).length,
       3,
       "discovery is bounded to three published cards",
     );
     assert(
-      [...document.querySelectorAll(".discover-grid h3")].every((node) =>
-        /^Fixture 0[0-4]$/.test(node.textContent),
+      [...document.querySelectorAll("[data-ui~='discover-grid'] h3")].every(
+        (node) => /^Fixture 0[0-4]$/.test(node.textContent),
       ),
       "random discovery includes published records only",
     );
     assert.equal(
-      document.querySelectorAll(".partner-label").length,
+      document.querySelectorAll("[data-ui~='partner-label']").length,
       0,
       "fallback workshop cards have no example-placement label",
     );
     assert(
-      [...document.querySelectorAll(".discover-grid a")].every((node) =>
-        published.some((workshop) =>
-          node.getAttribute("href").includes(workshop.id),
-        ),
+      [...document.querySelectorAll("[data-ui~='discover-grid'] a")].every(
+        (node) =>
+          published.some((workshop) =>
+            node.getAttribute("href").includes(workshop.id),
+          ),
       ),
       "cards link to actual selected profiles",
     );
@@ -471,11 +498,13 @@ try {
     await act(async () => root.render(wrap(locale, h(DiscoverWorkshops))));
     assert(
       document
-        .querySelector(".discover-message")
+        .querySelector(
+          "section[aria-labelledby='discover-title'] > div:last-child",
+        )
         .textContent.includes(t("public.directoryEmpty")),
     );
     assert.equal(
-      document.querySelectorAll(".catalogue-card").length,
+      document.querySelectorAll("[data-ui~='catalogue-card']").length,
       0,
       "empty catalogues never fabricate workshops",
     );
@@ -496,15 +525,21 @@ try {
     assert(!document.body.textContent.includes("private provider detail"));
     fail = false;
     await act(async () =>
-      document.querySelector(".discover-message button").click(),
+      document
+        .querySelector(
+          "section[aria-labelledby='discover-title'] > div:last-child button",
+        )
+        .click(),
     );
     assert.equal(
-      document.querySelectorAll(".discover-grid .catalogue-card").length,
+      document.querySelectorAll(
+        "[data-ui~='discover-grid'] [data-ui~='catalogue-card']",
+      ).length,
       1,
       "retry replaces the safe error with current profiles",
     );
     assert.equal(
-      document.querySelector(".partner-label").textContent,
+      document.querySelector("[data-ui~='partner-label']").textContent,
       t("public.partnerAd"),
       "confirmed paid placement is labelled as advertising",
     );
