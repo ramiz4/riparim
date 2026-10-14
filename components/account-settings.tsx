@@ -27,6 +27,7 @@ export function AccountSettings({localPreviewAccount,appearance}:{localPreviewAc
  const [state,setState]=useState<AccountState|null>(localPreviewAccount?previewState(localPreviewAccount):null),[name,setName]=useState(localPreviewAccount?.name??""),[password,setPassword]=useState("");
  const [loading,setLoading]=useState(!localPreviewAccount),[busy,setBusy]=useState(false),[error,setError]=useState(""),[message,setMessage]=useState("");
  const [open,setOpen]=useState(false),[confirmation,setConfirmation]=useState("");
+ const accountHeading=useRef<HTMLHeadingElement>(null),focusAfterDeletion=useRef(false);
  const previewPasswordOpener=useRef<HTMLButtonElement>(null),confirmationInput=useRef<HTMLInputElement>(null);
  const ready=!!state&&(state.deletionReady||state.deletionStarted);
  const [previewPasswordOpen,setPreviewPasswordOpen]=useState(false),[previewPasswordError,setPreviewPasswordError]=useState("");
@@ -47,6 +48,14 @@ export function AccountSettings({localPreviewAccount,appearance}:{localPreviewAc
  // eslint-disable-next-line react-hooks/set-state-in-effect -- Load only the authenticated account, including an interrupted deletion, on mount.
  useEffect(()=>{const controller=new AbortController();void load(controller.signal);return ()=>controller.abort();},[load]);
  useEffect(()=>{if(open&&ready)confirmationInput.current?.focus();},[open,ready]);
+ useEffect(()=>{
+  if(!focusAfterDeletion.current||state?.account||state?.deletionStarted)return;
+  focusAfterDeletion.current=false;
+  // Radix first attempts to restore the now-removed delete trigger. Give the
+  // completed action a persistent target, without overriding later user focus.
+  const frame=requestAnimationFrame(()=>{const active=document.activeElement;if(!active||active===document.body||!active.isConnected)accountHeading.current?.focus();});
+  return()=>cancelAnimationFrame(frame);
+ },[state?.account,state?.deletionStarted,message]);
 
  async function mutate(method:string,body:Record<string,unknown>,url="/api/account"):Promise<CodedResponse&{name?:string;url?:string;ok?:boolean}>{
   // Preview props come only from a development request for the verified seed
@@ -97,7 +106,7 @@ export function AccountSettings({localPreviewAccount,appearance}:{localPreviewAc
   if(busy||!deleteConfirmation(locale,confirmation)||!state?.deletionReady&&!state?.deletionStarted)return;
   setBusy(true);setError("");setMessage("");
   try{
-   await mutate("DELETE",{confirmation:deleteConfirmation(locale,confirmation)});setOpen(false);setConfirmation("");setPassword("");setState({account:null,deletionReady:false,deletionStarted:false});
+   await mutate("DELETE",{confirmation:deleteConfirmation(locale,confirmation)});focusAfterDeletion.current=true;setOpen(false);setConfirmation("");setPassword("");setState({account:null,deletionReady:false,deletionStarted:false});
    setMessage(t(localPreviewAccount?"customer.previewAccountDeleted":"customer.accountDeleted"));if(!localPreviewAccount){invalidatePublicSession({signedOut:true});router.refresh();}
   }catch(e){
    const failure=e instanceof TypeError?networkError:e instanceof LocalizedError?e.message:networkError;
@@ -117,7 +126,7 @@ export function AccountSettings({localPreviewAccount,appearance}:{localPreviewAc
   <nav aria-label={t("customer.previewViews")}><LocaleAnchor href="/einstellungen" aria-current={localPreviewAccount.kind==="admin"?"page":undefined}>{t("customer.previewAdmin")}</LocaleAnchor><LocaleAnchor href="/einstellungen?vorschau=email" aria-current={localPreviewAccount.kind==="email"?"page":undefined}>{t("customer.previewEmail")}</LocaleAnchor><LocaleAnchor href="/einstellungen?vorschau=google" aria-current={localPreviewAccount.kind==="google"?"page":undefined}>{t("customer.previewGoogle")}</LocaleAnchor></nav>
  </aside>}
  <section className="account-settings" aria-labelledby={`${id}-heading`}>
-  <h2 id={`${id}-heading`}>{t("customer.yourAccount")}</h2>
+  <h2 ref={accountHeading} tabIndex={-1} id={`${id}-heading`}>{t("customer.yourAccount")}</h2>
   {loading?<p role="status">{t("customer.accountLoading")}</p>:state?.account?<>
    <form onSubmit={save} className="account-name-form">
     <label htmlFor={`${id}-name`}>{t("customer.fullName")}</label>
