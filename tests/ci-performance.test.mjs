@@ -145,6 +145,7 @@ assert.match(
   "the stable cache path must reach subsequent restore/save and measurement steps",
 );
 const inventoryFixture = {
+  sourceDigest: "source",
   applicationDigest: "app",
   catalogueDigest: "catalogue",
   migrationDigest: "migration",
@@ -157,8 +158,19 @@ function sample(variant, cacheState, duration, id) {
     runAttempt: 1,
     cacheHit: cacheState === "warm",
     nodeVersion: "v24.21.0",
+    npmVersion: "11.12.0",
+    targetNpmVersion: "11.21.0",
     goVersion: "1.27.1",
+    runnerArchitecture: "x64",
+    cacheKey: "fixture-cache-key",
+    sourceRevision: (variant === "baseline" ? "b" : "c").repeat(40),
     runnerImage: "ubuntu24",
+    runnerResources: {
+      availableParallelism: 4,
+      logicalCpus: 4,
+      totalMemoryBytes: 16_766_410_752,
+      cpuModels: ["fixture CPU"],
+    },
     experiment: "fixture",
     inventory: inventoryFixture,
     metrics: {
@@ -180,10 +192,54 @@ for (const cacheState of ["cold", "warm"])
     samples.push(sample("candidate", cacheState, 200, samples.length));
   }
 const report = compareSamples(samples);
+assert.throws(
+  () =>
+    compareSamples(
+      samples.map((value) => ({
+        ...value,
+        nodeVersion: undefined,
+        sourceRevision: undefined,
+      })),
+    ),
+  /metadata/,
+  "missing runtime/source identity across the whole series cannot pass equality checks",
+);
 assert.equal(report.complete, true);
 assert.equal(report.comparisons[0].medianReduction, 0.5);
 assert.equal(report.comparisons[0].efficiencyTargetMet, true);
 assert.equal(compareSamples(samples.slice(2)).complete, false);
+assert.doesNotThrow(
+  () =>
+    compareSamples([
+      samples[0],
+      {
+        ...samples[1],
+        runnerResources: {
+          ...samples[1].runnerResources,
+          totalMemoryBytes: 16_766_414_848,
+          cpuModels: ["different standard hosted CPU"],
+        },
+      },
+    ]),
+  "tiny kernel-reserved memory and CPU-model variation keep the same hosted capacity class",
+);
+for (const changedResources of [
+  { ...samples[1].runnerResources, logicalCpus: 2, availableParallelism: 2 },
+  { ...samples[1].runnerResources, totalMemoryBytes: 8 * 1024 ** 3 },
+  { ...samples[1].runnerResources, totalMemoryBytes: 16_900_000_000 },
+  { ...samples[1].runnerResources, totalMemoryBytes: 0 },
+  { ...samples[1].runnerResources, totalMemoryBytes: Infinity },
+  { ...samples[1].runnerResources, availableParallelism: 0 },
+  undefined,
+])
+  assert.throws(
+    () =>
+      compareSamples([
+        samples[0],
+        { ...samples[1], runnerResources: changedResources },
+      ]),
+    /resources/,
+  );
 assert.throws(
   () => compareSamples([{ ...samples[0], cacheHit: true }]),
   /Cache-state/,
@@ -266,6 +322,86 @@ assert.match(
     [collectedLane],
   ).invalid.reason,
   /failed/,
+);
+const candidateJobs = [
+    job("Benchmark quality", 3, 10),
+    job("Benchmark node", 3, 20),
+    job("Benchmark workers", 5, 15),
+    job("Benchmark verify", 22, 24),
+  ],
+  candidateLanes = ["quality", "node", "workers"].map((lane, i) => ({
+    ...collectedLane,
+    variant: "candidate",
+    sourceRevision: samples[1].sourceRevision,
+    lane,
+    runnerResources: {
+      ...collectedLane.runnerResources,
+      totalMemoryBytes:
+        collectedLane.runnerResources.totalMemoryBytes + i * 4096,
+    },
+  }));
+assert.equal(
+  assessCollectedSample(collectionRun, candidateJobs, candidateLanes).sample
+    .metrics.success,
+  true,
+);
+for (const resources of [
+  { ...collectedLane.runnerResources, logicalCpus: 2, availableParallelism: 2 },
+  { ...collectedLane.runnerResources, totalMemoryBytes: 8 * 1024 ** 3 },
+  { ...collectedLane.runnerResources, totalMemoryBytes: NaN },
+]) {
+  const lanes = candidateLanes.map((lane, index) =>
+    index === 2 ? { ...lane, runnerResources: resources } : lane,
+  );
+  assert.match(
+    assessCollectedSample(collectionRun, candidateJobs, lanes).invalid.reason,
+    /resources/,
+    "a hardware mismatch in the final lane must invalidate the whole sample",
+  );
+  assert.throws(
+    () => compareSamples([samples[0], { ...samples[1], lanes }]),
+    /resources/,
+    "offline reports also validate every lane rather than only the selected first lane",
+  );
+}
+assert.match(
+  assessCollectedSample(
+    collectionRun,
+    candidateJobs,
+    candidateLanes.map((lane, index) =>
+      index === 1 ? { ...lane, nodeVersion: "v24.10.0" } : lane,
+    ),
+  ).invalid.reason,
+  /environment/,
+);
+for (const change of [
+  { sourceRevision: "f".repeat(40) },
+  { inventory: { ...inventoryFixture, sourceDigest: "foreign source" } },
+  { cacheState: "warm", cacheHit: true },
+]) {
+  const lanes = candidateLanes.map((lane, index) =>
+    index === 2 ? { ...lane, ...change } : lane,
+  );
+  assert.throws(
+    () => compareSamples([samples[0], { ...samples[1], lanes }]),
+    /metadata/,
+  );
+  assert.match(
+    assessCollectedSample(collectionRun, candidateJobs, lanes).invalid.reason,
+    /metadata/,
+  );
+}
+assert.match(
+  assessCollectedSample(
+    collectionRun,
+    candidateJobs,
+    candidateLanes.map((lane) => ({
+      ...lane,
+      nodeVersion: undefined,
+      sourceRevision: undefined,
+    })),
+  ).invalid.reason,
+  /metadata/,
 );
 
 const root = await mkdtemp(join(tmpdir(), "riparim-ci-inputs-"));

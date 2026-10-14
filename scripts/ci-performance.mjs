@@ -222,12 +222,74 @@ export async function inputInventory(root = process.cwd()) {
   };
 }
 
+const benchmarkEnvironmentFields = [
+  "nodeVersion",
+  "goVersion",
+  "npmVersion",
+  "targetNpmVersion",
+  "runnerArchitecture",
+  "runnerImage",
+  "experiment",
+  "cacheKey",
+];
+const memoryRelativeTolerance = 0.001;
+function assertBenchmarkMetadata(sample, parent = sample) {
+  if (
+    !sample ||
+    benchmarkEnvironmentFields.some(
+      (field) => typeof sample[field] !== "string" || !sample[field].trim(),
+    ) ||
+    !/^[a-f0-9]{40}$/.test(sample.sourceRevision ?? "") ||
+    typeof sample.inventory?.sourceDigest !== "string" ||
+    !sample.inventory.sourceDigest.trim()
+  )
+    throw Error("Required benchmark metadata is missing or invalid.");
+  if (
+    !["cold", "warm", "prime"].includes(sample.cacheState) ||
+    typeof sample.cacheHit !== "boolean" ||
+    (sample.cacheState === "warm") !== sample.cacheHit
+  )
+    throw Error("Cache-state provenance does not match the sample.");
+  if (
+    sample.variant !== parent.variant ||
+    sample.sourceRevision !== parent.sourceRevision ||
+    sample.inventory.sourceDigest !== parent.inventory.sourceDigest ||
+    sample.cacheState !== parent.cacheState ||
+    sample.cacheHit !== parent.cacheHit
+  )
+    throw Error("Mixed lane source identity or cache-state metadata.");
+}
+function assertComparableRunnerResources(reference, observed) {
+  for (const resources of [reference, observed])
+    if (
+      !resources ||
+      !Number.isInteger(resources.availableParallelism) ||
+      resources.availableParallelism <= 0 ||
+      !Number.isInteger(resources.logicalCpus) ||
+      resources.logicalCpus <= 0 ||
+      resources.availableParallelism > resources.logicalCpus ||
+      !Number.isFinite(resources.totalMemoryBytes) ||
+      resources.totalMemoryBytes <= 0
+    )
+      throw Error("Benchmark runner resources are missing or invalid.");
+  if (
+    reference.availableParallelism !== observed.availableParallelism ||
+    reference.logicalCpus !== observed.logicalCpus ||
+    Math.round(reference.totalMemoryBytes / 1024 ** 3) !==
+      Math.round(observed.totalMemoryBytes / 1024 ** 3) ||
+    Math.abs(reference.totalMemoryBytes - observed.totalMemoryBytes) /
+      reference.totalMemoryBytes >
+      memoryRelativeTolerance
+  )
+    throw Error("Benchmark runner resources differ in CPU or memory capacity.");
+}
 export function compareSamples(samples) {
   const reference = samples.find((sample) => sample.cacheState !== "prime");
   if (!reference) throw Error("No measured samples.");
   const revisions = new Map(),
     runIds = new Set();
   for (const sample of samples) {
+    assertBenchmarkMetadata(sample);
     if (sample.cacheState === "prime") continue;
     if (runIds.has(sample.runId)) throw Error("Duplicate benchmark run ID.");
     runIds.add(sample.runId);
@@ -238,22 +300,24 @@ export function compareSamples(samples) {
       throw Error("Benchmark source revision differs within a variant.");
     revisions.set(sample.variant, sample.sourceRevision);
     if (
-      sample.nodeVersion !== reference.nodeVersion ||
-      sample.goVersion !== reference.goVersion ||
-      sample.npmVersion !== reference.npmVersion ||
-      sample.targetNpmVersion !== reference.targetNpmVersion ||
-      sample.runnerArchitecture !== reference.runnerArchitecture ||
-      sample.runnerImage !== reference.runnerImage ||
-      sample.runnerResources?.availableParallelism !==
-        reference.runnerResources?.availableParallelism ||
-      sample.runnerResources?.logicalCpus !==
-        reference.runnerResources?.logicalCpus ||
-      sample.runnerResources?.totalMemoryBytes !==
-        reference.runnerResources?.totalMemoryBytes ||
-      sample.experiment !== reference.experiment ||
-      sample.cacheKey !== reference.cacheKey
+      benchmarkEnvironmentFields.some(
+        (field) => sample[field] !== reference[field],
+      )
     )
       throw Error("Benchmark environment or experiment differs.");
+    for (const lane of [sample, ...(sample.lanes ?? [])]) {
+      assertBenchmarkMetadata(lane, sample);
+      assertComparableRunnerResources(
+        reference.runnerResources,
+        lane.runnerResources,
+      );
+      if (
+        benchmarkEnvironmentFields.some(
+          (field) => lane[field] !== reference[field],
+        )
+      )
+        throw Error("Benchmark lane environment or experiment differs.");
+    }
     for (const field of [
       "applicationDigest",
       "catalogueDigest",
@@ -352,6 +416,15 @@ export function compareSamples(samples) {
     complete: comparisons.every((comparison) => comparison.complete),
     runIds: samples.map((sample) => sample.runId),
     sourceRevisions: Object.fromEntries(revisions),
+    runnerResourcePolicy: {
+      availableParallelism: reference.runnerResources.availableParallelism,
+      logicalCpus: reference.runnerResources.logicalCpus,
+      nominalMemoryGiB: Math.round(
+        reference.runnerResources.totalMemoryBytes / 1024 ** 3,
+      ),
+      referenceReportedMemoryBytes: reference.runnerResources.totalMemoryBytes,
+      maximumRelativeMemoryVariation: memoryRelativeTolerance,
+    },
   };
 }
 
@@ -406,15 +479,25 @@ export function assessCollectedSample(run, jobs, lanes) {
     return invalid("Incomplete or duplicate lane metadata.");
   if (lanes.some((lane) => !lane.verified))
     return invalid("A lane did not finish benchmark verification.");
-  for (const lane of lanes)
+  for (const lane of lanes) {
+    try {
+      assertBenchmarkMetadata(lane, first);
+    } catch (error) {
+      return invalid(error.message);
+    }
     if (
-      lane.inventory.sourceDigest !== first.inventory.sourceDigest ||
-      lane.sourceRevision !== first.sourceRevision ||
-      lane.cacheState !== first.cacheState ||
-      lane.variant !== first.variant ||
-      lane.cacheHit !== first.cacheHit
+      benchmarkEnvironmentFields.some((field) => lane[field] !== first[field])
     )
-      return invalid("Mixed lane inputs or cache states.");
+      return invalid("Benchmark lane environment or experiment differs.");
+    try {
+      assertComparableRunnerResources(
+        first.runnerResources,
+        lane.runnerResources,
+      );
+    } catch (error) {
+      return invalid(error.message);
+    }
+  }
   const requiredJobs = required.map((name) => `Benchmark ${name}`);
   if (first.variant === "candidate") requiredJobs.push("Benchmark verify");
   if (

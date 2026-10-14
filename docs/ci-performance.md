@@ -59,8 +59,20 @@ Metadaten erhalten; Event und Ref werden nicht verändert. Dadurch behalten die
 Paketierer ihren vollständigen Clean-Source-/Commitvertrag und prüfen die
 tatsächlich ausgecheckte Messrevision statt des PR-Merge-/Harnesscommits.
 CPU-Modell, logische CPUs, `availableParallelism()` und Gesamtspeicher werden
-ebenfalls erfasst. Die Auswertung verlangt dieselben CPU-/Speicherkapazitäten;
-unterschiedliche CPU-Modelle und Imageversionen bleiben im Rohinventar sichtbar.
+ebenfalls erfasst. Jede Lane und jeder Sample muss dieselben positiven,
+ganzzahligen CPU-/Parallelitätskapazitäten besitzen. Speicherkapazität wird als
+nächste ganze GiB-Klasse verglichen; die tatsächlich gemeldeten Bytes müssen
+positiv und endlich sein und dürfen höchstens **0,1 %** vom Referenzrunner
+abweichen. Bei der 16-GiB-Klasse sind das ungefähr 16 MiB. So bleiben wenige
+kernelreservierte Seiten, etwa ein beobachteter Unterschied von 4096 Bytes,
+zulässig; 4→2 CPUs, 16→8 GiB oder wesentliche Änderungen innerhalb einer Klasse
+werden abgewiesen. Die Prüfung gilt für alle drei Kandidatenlanes und für die
+gesamte Serie, einschließlich der erneuten Offlineauswertung.
+Tatsächliche Bytes, CPU-Modelle und Imageversionen bleiben im Rohinventar
+erhalten. Standard-Hosted-Runner können unterschiedliche CPU-Modelle verwenden;
+deren Identität wird nicht versprochen. Imageklasse und Node-/npm-/Go-Versionen
+müssen weiter übereinstimmen. Diese Toleranz ist eine Validierungsregel der
+Offlineauswertung und verändert weder Messbefehle noch gemeldete Rohwerte.
 
 `inputInventory` erfasst alle getrackten Dateien mit SHA-256. Ein separates
 Anwendungsinventar umfasst Anwendung, Komponenten, Bibliotheken, Assets,
@@ -271,3 +283,53 @@ Der Kandidat erweitert den Prüfvertrag, ohne Anwendungseingaben zu verändern.
 - [actions/cache: Cacheversion und Pfadbindung](https://github.com/actions/cache#cache-version)
 - [actions/setup-node: Paketcacheoptionen](https://github.com/actions/setup-node)
 - [actionlint: gepinnte Version und semantische Workflowprüfung](https://github.com/rhysd/actionlint/blob/v1.7.12/docs/usage.md)
+
+## Ergebnis vom 14. Oktober 2026
+
+Geprüfter Kandidat `a60aaa387fbe058cc537dd884ecb84b34614c821`, Baseline
+`1648f6b8bc780fce820fd1d937774cf3231248e1`. Die 423 Anwendungseingaben,
+Katalog, Migrationen und Lockfile stimmen überein. Ubuntu 24.04, vier CPUs,
+16-GiB-Klasse, Node 24.21.0, Go 1.27.1, npm 11.19.0 und Target-npm 11.21.0.
+Die Runnerimages wechselten während der Serie zwischen
+`20261004.327.1` und `20261012.334.1`; beide Versionen sowie unterschiedliche
+CPUmodelle sind erhalten. Der Vergleich ist daher keine Messung auf
+byteidentischen VM-Images, sondern auf derselben dokumentierten Runnerklasse.
+
+| Paketcache | Erfolgreiche Paare | Aktiver Pfad P50 vorher → nachher | P95 vorher → nachher | P50 Runnersekunden vorher → nachher | Verkürzung |
+| ---------- | -----------------: | --------------------------------: | -------------------: | ----------------------------------: | ---------: |
+| Kalt       |                  5 |                       475 → 212 s |          484 → 226 s |                         475 → 520 s |     55,4 % |
+| Warm       |                  4 |                     432 → 216,5 s |          469 → 220 s |                         432 → 490 s |     49,9 % |
+
+Alle 18 ausgewerteten Erstversuche bestanden; keine ungültigen Samples oder
+Retries. Der Warmcache wurde in sämtlichen beteiligten Lanes exakt getroffen;
+Kaltläufe restaurierten keinen Cache. Echte Next-Starts: Baseline drei, Kandidat
+einer. Der verpflichtende Gesamtcheck und alle Runnerkosten sind enthalten.
+Runnerzeit steigt um 9,5 % kalt beziehungsweise 13,4 % warm und bleibt unter
+der 25-%-Grenze. Warm-P50/P95 bleiben unter 240/300 Sekunden.
+
+Der Nutzer verlangte während der Messserie ausdrücklich den Abschluss statt
+weiterer Ausweitung. Die primäre Auswertung verwendet deshalb die ersten vier
+vollständig abgeschlossenen Warm-Paare in geplanter Reihenfolge. Das ursprüngliche
+Ziel von zehn Warm-Paaren wird für diesen Abschluss nicht als erfüllt behauptet;
+der Report markiert diese Stichprobe weiterhin als unvollständig. Bereits
+gestartete weitere reine Messläufe ändern die hier eingefrorene Auswertung nicht.
+P95 bei vier Samples ist deren Maximum; daraus folgt keine allgemeine
+Zuverlässigkeitsgarantie.
+
+Prime und das erste Kaltpaar starteten gleichzeitig; spätere Samples liefen
+in begrenzten Gruppen. Diese zusätzliche Runnerlast ist dokumentiert, initiale
+und spätere Wartezeiten stehen im Ergebnisdatensatz. Der Harness enthält die
+gleiche Quelltree-Version wie der Kandidat; Node-Launch-Hooks und RSS-Sampling
+laufen bei beiden Varianten. Der Kandidat hat zusätzlich die neuen
+Regressionstests und den semantischen Workflowcheck.
+
+Run-Links, Rohkapazitäten, Digests, Laufzeiten und der reproduzierbare Bericht
+stehen in [ci-performance-results.json](ci-performance-results.json). Die
+Actions-Messartefakte enthalten die ursprünglichen Logs und Phasen.
+Ein abgewiesener Workflow-Definitionslauf
+[38549303157](https://github.com/ramiz4/riparim/actions/runs/38549303157)
+liegt vor der gültigen Messserie und ist ausdrücklich kein Sample.
+Die spätere Kapazitäts-/Metadatenkorrektur betrifft die Offlinevalidierung;
+sie verändert keine gemessenen Programme oder Zeiten. Der reale Releasepfad
+wird durch diesen Benchmark nicht bereitgestellt und besitzt noch keine
+ausreichende neue Produktionsstichprobe für eine Release-P50-Zusage.
