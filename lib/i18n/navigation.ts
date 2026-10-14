@@ -13,7 +13,7 @@ function publicNavigationHref(href:string,locale:Locale,allowReturn:boolean):str
  let url:URL;try{url=new URL(href,origin);}catch{return localizeHref("/",locale);}
  if(url.origin!==origin||url.username||url.password)return localizeHref("/",locale);
  const path=pageIdentityPath(url.pathname),query=new URLSearchParams();
- if(/^\/(?:api|auth|signin-with-chatgpt|signout-with-chatgpt|callback|__sites_connector_preview|__migration|_next)(?:\/|$)/.test(path)||/\.[a-z0-9]+$/i.test(path))return localizeHref("/",locale);
+ if(/^\/(?:api|auth|dev|signin-with-chatgpt|signout-with-chatgpt|callback|__sites_connector_preview|__migration|_next)(?:\/|$)/.test(path)||/\.[a-z0-9]+$/i.test(path))return localizeHref("/",locale);
  if(path==="/werkstaetten"){
   if(url.searchParams.get("bewerten")==="1")query.set("bewerten","1");
   const name=catalogueQuery(url.searchParams.get("q")??"");if(name)query.set("q",name);

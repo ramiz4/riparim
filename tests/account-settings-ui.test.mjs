@@ -15,7 +15,7 @@ let state={account:{email:'member@example.test',name:'Fixture Member',provider:'
 let mode='success',pending=null,loadFailure=false;
 const requests=[];globalThis.fixtureRefreshes=0;
 globalThis.fetch=async(url,options)=>{
- const method=options?.method??'GET',body=options?.body?JSON.parse(options.body):null;requests.push({url,method,body});assert.equal(url,'/api/account','Fixtures never send external account requests');
+ const method=options?.method??'GET',body=options?.body?JSON.parse(options.body):null;requests.push({url,method,body});if(url==='/api/auth/recovery'){assert.equal(method,'POST');assert.deepEqual(body,{email:state.account.email,locale:activeLocale});if(mode==='pending')return new Promise(resolve=>{pending={resolve};});return mode==='failure'?Response.json({errorCode:'recovery_failed'},{status:503}):Response.json({messageCode:'recovery_sent'});}assert.equal(url,'/api/account','Fixtures never send external account requests');
  if(method==='GET')return loadFailure?Response.json({error:'Fixture load failed',errorCode:'account_unavailable'},{status:503}):Response.json(state);
  if(method==='PATCH'){assert.deepEqual(Object.keys(body),['name']);if(mode==='failure')return Response.json({error:'Fixture invalid name'},{status:400});state={...state,account:{...state.account,name:body.name.trim()}};return Response.json({name:state.account.name});}
  if(method==='POST'){assert.deepEqual(Object.keys(body),['password']);if(mode==='failure')return Response.json({error:'Fixture wrong password',errorCode:'password_proof_failed'},{status:401});state={...state,deletionReady:true};return Response.json({ok:true});}
@@ -39,6 +39,10 @@ try{
  loadFailure=true;await mount();check(document.querySelector('[role="alert"]').textContent===getMessages('de').customer.accountUnavailable&&button('Erneut laden'),'Failed account loading exposes an accessible retry');
  loadFailure=false;await click(button('Erneut laden'));
  check(document.querySelector('.account-identity').textContent.includes(state.account.email),'The account view identifies the signed-in email and provider');
+ check(document.querySelector('.account-identity').textContent.includes('E-Mail bestätigt')&&document.querySelector('.account-password-settings')&&document.querySelector('.account-deletion-settings'),'Verified account data, password and deletion are separate labelled sections');
+ mode='pending';await click(button('Passwort ändern'));check(button('Bitte warten …').disabled,'Password recovery disables its action while the request is pending');await act(async()=>pending.resolve(Response.json({messageCode:'recovery_sent'})));mode='success';pending=null;
+ check(document.querySelector('.account-password-settings [role="status"]').textContent.includes('Zurücksetzen'),'Password recovery announces the email-link flow without changing the password in the settings');
+ mode='failure';await click(button('Passwort ändern'));check(document.querySelector('.account-password-settings [role="alert"]').textContent===getMessages('de').customer.recoveryFailed,'A failed recovery request stays retryable within the password section');mode='success';
  const name=input('Anzeigename');check(name.value==='Fixture Member'&&name.required&&name.minLength===2&&name.maxLength===80,'The display name has an accessible label and length constraints');
  await type(name,'  Updated Member  ');await act(async()=>document.querySelector('form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));
  check(input('Anzeigename').value==='Updated Member'&&document.querySelector('[role="status"]').textContent.includes('unverändert'),'Saving announces success and explains existing review names');
@@ -69,10 +73,19 @@ try{
  mode='success';await click(button('Löschung wiederholen'));
  check(!dialog()&&document.querySelector('[role="status"]').textContent.includes('wurden gelöscht'),'Confirmed retry completes the interrupted deletion');
  state={account:{email:'admin@example.test',name:'Admin',provider:'Google',protected:true},deletionReady:false,deletionStarted:false};await remount();
- check(!button('Konto löschen')&&document.querySelector('.account-settings').textContent.includes('Administrationszugänge'),'Protected accounts explain the guard and expose no deletion control');
+ check(!button('Konto löschen')&&document.querySelector('.account-deletion-settings').textContent.includes('Administrationszugänge'),'Protected accounts explain the guard and expose no deletion control');
  state={account:{email:'member@example.test',name:'Member',provider:'Google',protected:false},deletionReady:false,deletionStarted:false};await remount();await click(button('Konto löschen'));
  check(button('Mit Google erneut bestätigen')&&!input('Aktuelles Passwort'),'Google accounts use the dedicated OAuth proof action');await click(button('Abbrechen'));
  check(!dialog(),'Cancel dismisses Google proof without starting an action');
+ check(!button('Passwort ändern')&&document.querySelector('.account-password-settings a').href==='https://myaccount.google.com/security','Google accounts direct password management to their provider');
+ for(const locale of ['de','sq','en']){
+  activeLocale=locale;const copy=getMessages(locale).customer;state={account:{email:'seedy@sites.test',name:'Seedy',provider:'ChatGPT',protected:true},preview:true,deletionReady:false,deletionStarted:false};await remount();const requestsBefore=requests.length;
+  check(input(copy.displayName).value==='Seedy'&&input(copy.displayName).disabled&&!button(copy.saveName),'The local seed account shows data without exposing a real name mutation');
+  check(document.querySelector('.account-identity').textContent.includes(copy.localPreview)&&button(copy.passwordChange).disabled&&!button(copy.deleteAccount),'The local preview labels the fixture, disables password delivery and protects its admin account from deletion');
+  await act(async()=>document.querySelector('form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));check(requests.length===requestsBefore,'Even a synthetic preview form submission cannot reach account writes');
+ }
+ activeLocale='de';
+
  state={account:null,deletionReady:false,deletionStarted:false};await remount();
  check(document.querySelector('a').getAttribute('href')==='/anmelden?weiter=/einstellungen'&&!button('Konto löschen'),'Signed-out or native-only views link back to login without destructive controls');
  for(const [locale,phrase] of [['de','KONTO LÖSCHEN'],['sq','FSHI LLOGARINË'],['en','DELETE ACCOUNT']]){

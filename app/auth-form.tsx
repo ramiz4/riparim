@@ -10,12 +10,12 @@ import {SiteHeader} from "@/components/site-header";
 import type {AccountIdentity} from "@/components/account-storage-notice";
 
 export type AuthScreen="login"|"register"|"recovery"|"reset";
-type Props={account:AccountIdentity|null;screen:AuthScreen;emailReady:boolean;googleReady:boolean;isOwner:boolean;returnTo:string;errorHint?:string;notice?:string};
+type Props={account:AccountIdentity|null;screen:AuthScreen;emailReady:boolean;googleReady:boolean;isOwner:boolean;returnTo:string;errorHint?:string;notice?:string;localSeedLogin?:boolean};
 
 
 function GoogleMark(){return <svg viewBox="0 0 48 48" width="20" height="20" aria-hidden="true"><path fill="#4285F4" d="M43.6 24.5c0-1.5-.1-2.9-.4-4.3H24v8.1h11a9.4 9.4 0 0 1-4.1 6.2v5.1h6.6c3.9-3.6 6.1-8.8 6.1-15.1Z"/><path fill="#34A853" d="M24 44c5.5 0 10.1-1.8 13.5-4.9l-6.6-5.1c-1.8 1.2-4.1 1.9-6.9 1.9-5.3 0-9.8-3.6-11.4-8.4H5.8v5.3A20 20 0 0 0 24 44Z"/><path fill="#FBBC05" d="M12.6 27.5a12 12 0 0 1 0-7V15.2H5.8a20 20 0 0 0 0 17.6l6.8-5.3Z"/><path fill="#EA4335" d="M24 12.1c3 0 5.7 1 7.8 3l5.9-5.9A19.6 19.6 0 0 0 24 4 20 20 0 0 0 5.8 15.2l6.8 5.3c1.6-4.8 6.1-8.4 11.4-8.4Z"/></svg>;}
 
-export default function AuthForm({screen,emailReady,googleReady,isOwner,returnTo,errorHint,notice,account}:Props){
+export default function AuthForm({screen,emailReady,googleReady,isOwner,returnTo,errorHint,notice,account,localSeedLogin=false}:Props){
  const {locale,t}=useI18n(),nameId=useId();
  const headings:Record<AuthScreen,string>={login:t("customer.authLogin"),register:t("customer.authRegister"),recovery:t("customer.authRecovery"),reset:t("customer.authReset")};
  const [error,setError]=useState(errorHint??""),[message,setMessage]=useState(""),[busy,setBusy]=useState<"email"|"google"|null>(null),[showPassword,setShowPassword]=useState(false);
@@ -35,6 +35,7 @@ export default function AuthForm({screen,emailReady,googleReady,isOwner,returnTo
  }
  return <><SiteHeader account={account} isAdmin={isOwner}/><main className="auth-page"><section className="auth-card auth-compact" aria-labelledby="auth-title">
  <h1 id="auth-title">{headings[screen]}</h1><p className="auth-intro">{screen==="login"?t("customer.loginIntro"):screen==="register"?t("customer.registerIntro"):screen==="recovery"?t("customer.recoveryIntro"):t("customer.resetIntro")}</p>
+ {screen==="login"&&localSeedLogin&&<div className="auth-local-login"><a className="primary" href={`/dev/anmelden?weiter=${encodeURIComponent(returnTo)}`}>{t("customer.localSeedLogin")}</a><p>{t("customer.localSeedLoginNote")}</p></div>}
  {notice&&<p className="admin-feedback" role="status">{notice}</p>}
  {message?<div className="auth-success" role="status"><Mail size={24}/><p>{message}</p><LocaleAnchor className="outline" href={`/anmelden?weiter=${encodeURIComponent(returnTo)}`}>{t("customer.backLogin")}</LocaleAnchor></div>:<>
  {social&&<><button className="auth-google" type="button" disabled={!googleReady||!!busy} onClick={()=>void google()}>{busy==="google"?<LoaderCircle className="spin" size={20}/>:<GoogleMark/>}{t("customer.googleContinue")}</button>{!googleReady&&<p className="auth-unavailable">{t("customer.googleSetup")}</p>}<div className="auth-divider"><span>{t("customer.orEmail")}</span></div></>}

@@ -14,6 +14,7 @@ const localHosts = new Set(["localhost", "127.0.0.1", "::1"]);
 const localAddresses = new Set(["127.0.0.1", "::1", "::ffff:127.0.0.1"]);
 const authPaths = new Set([
   "/signin-with-chatgpt",
+  "/dev/anmelden",
   "/signout-with-chatgpt",
   "/callback",
 ]);
@@ -103,10 +104,22 @@ export function sites({ mockAuth = true } = {}): Plugin {
           return;
         }
 
-        const signIn = url.pathname === "/signin-with-chatgpt";
+        const localSignIn = url.pathname === "/dev/anmelden";
+        const signIn = localSignIn || url.pathname === "/signin-with-chatgpt";
         const signOut = url.pathname === "/signout-with-chatgpt";
         if (!signIn && !signOut) {
           if (signInCookies.length === 1 && signInCookies[0] === "1") {
+            // Read-only fixture on the same loopback boundary as local sign-in.
+            // It never reaches an Auth provider or changes the real account API.
+            if (url.pathname === "/api/account" && request.method === "GET" && applicationCookies.length === 0) {
+              response.setHeader("Content-Type", "application/json; charset=utf-8");
+              response.setHeader("Cache-Control", "private, no-store");
+              response.end(JSON.stringify({
+                account: { email: localEmail, name: localFullName, provider: "ChatGPT", protected: true },
+                deletionReady: false, deletionStarted: false, preview: true,
+              }));
+              return;
+            }
             setHeader(request, "oai-authenticated-user-id", localUserId);
             setHeader(request, "oai-authenticated-user-email", localEmail);
             setHeader(
@@ -160,7 +173,7 @@ export function sites({ mockAuth = true } = {}): Plugin {
         response.setHeader("Cache-Control", "private, no-store");
         response.setHeader(
           "Location",
-          safeReturn(url.searchParams.get("return_to")),
+          safeReturn(localSignIn ? url.searchParams.get("weiter") ?? "/einstellungen" : url.searchParams.get("return_to")),
         );
         response.setHeader(
           "Set-Cookie",

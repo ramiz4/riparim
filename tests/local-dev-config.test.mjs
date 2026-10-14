@@ -47,3 +47,23 @@ try{
  if(originalOrigin===undefined)delete process.env.SITE_ORIGIN;else process.env.SITE_ORIGIN=originalOrigin;
  delete globalThis.localDevOptions;
 }
+
+const authOutput='.test-runtime/local-dev-config/auth-screen.mjs';
+await build({entryPoints:['app/auth-screen.tsx'],outfile:authOutput,bundle:true,platform:'node',format:'esm',packages:'external',plugins:[{name:'auth-page-boundaries',setup(b){
+ b.onResolve({filter:/^(next\/headers|next\/navigation|\.\/auth|\.\/auth-form|@\/lib\/auth\/config|@\/lib\/public-release)$/},args=>({path:args.path,namespace:'fixture'}));
+ b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',contents:args.path==='next/headers'?'export async function headers(){return new Headers({host:globalThis.fixtureHost});}':args.path==='next/navigation'?'export function redirect(){throw Error("Unexpected redirect");}':args.path==='./auth'?'export async function getAppUser(){return null;}export async function getAdminUser(){return null;}':args.path==='./auth-form'?'export default function AuthForm(){return null;}':args.path==='@/lib/public-release'?'export function publicReleaseRender(){return false;}':'export async function getAuthConfig(){return null;}export function safeReturnPath(value){return value??"/einstellungen";}export async function providerAvailability(){return {email:false,emailSignup:false,emailRecovery:false,google:false};}'}));
+}}]});
+const {default:AuthScreenPage}=await import(new URL('../'+authOutput,import.meta.url));
+const originalMode=process.env.NODE_ENV;
+try{
+ for(const mode of ['development','production','test'])for(const host of ['127.0.0.1:5199','localhost:5199','[::1]:5199','riparim.com','127.0.0.1.evil.test:5199'])for(const screen of ['login','register','recovery','reset']){
+  process.env.NODE_ENV=mode;globalThis.fixtureHost=host;
+  const page=await AuthScreenPage({screen,params:Promise.resolve({locale:'de'}),searchParams:Promise.resolve({weiter:'/einstellungen'})});
+  const local=mode==='development'&&['127.0.0.1:5199','localhost:5199','[::1]:5199'].includes(host)&&screen==='login';
+  assert.equal(page.props.children.props.localSeedLogin,local,'Only the local development login page offers the seed entry');
+ }
+ console.log('Local login UI boundary: development loopback only; production, external hosts and other Auth screens omit the entry');
+}finally{
+ if(originalMode===undefined)delete process.env.NODE_ENV;else process.env.NODE_ENV=originalMode;
+ delete globalThis.fixtureHost;
+}

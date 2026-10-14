@@ -12,7 +12,7 @@ import {useCallback,useEffect,useId,useState,type FormEvent} from "react";
 import {AlertDialog,AlertDialogTrigger,AlertDialogContent,AlertDialogHeader,AlertDialogTitle,AlertDialogDescription,AlertDialogFooter,AlertDialogCancel} from "@/components/ui/alert-dialog";
 
 type Account={email:string;name:string;provider:string;protected:boolean};
-type AccountState=CodedResponse&{account:Account|null;deletionReady:boolean;deletionStarted:boolean;error?:string};
+type AccountState=CodedResponse&{account:Account|null;deletionReady:boolean;deletionStarted:boolean;error?:string;preview?:boolean};
 
 export function AccountSettings(){
  const {locale,t}=useI18n(),phrase=deletePhrases[locale],networkError=t("customer.accountNetwork");
@@ -20,6 +20,7 @@ export function AccountSettings(){
  const [state,setState]=useState<AccountState|null>(null),[name,setName]=useState(""),[password,setPassword]=useState("");
  const [loading,setLoading]=useState(true),[busy,setBusy]=useState(false),[error,setError]=useState(""),[message,setMessage]=useState("");
  const [open,setOpen]=useState(false),[confirmation,setConfirmation]=useState("");
+ const [passwordMessage,setPasswordMessage]=useState(""),[passwordError,setPasswordError]=useState("");
  useNavigationGuard({busy,dirty:!!password||!!confirmation||!!state?.account&&name!==state.account.name});
  const load=useCallback(async(signal?:AbortSignal)=>{
   setLoading(true);setError("");
@@ -42,13 +43,22 @@ export function AccountSettings(){
   return data;
  }
  async function save(event:FormEvent){
-  event.preventDefault();if(busy)return;
+  event.preventDefault();if(busy||state?.preview)return;
   setBusy(true);setError("");setMessage("");
   try{
    const data=await mutate("PATCH",{name});
    setState(old=>old?.account?{...old,account:{...old.account,name:data.name!}}:old);setName(data.name!);
    setMessage(t("customer.nameSaved"));invalidatePublicSession({displayName:data.name});router.refresh();
   }catch(e){setError(e instanceof TypeError?networkError:e instanceof LocalizedError?e.message:networkError);}
+  finally{setBusy(false);}
+ }
+ async function requestPasswordLink(){
+  if(busy||!state?.account||state.preview||state.account.provider!=="E-Mail")return;
+  setBusy(true);setPasswordError("");setPasswordMessage("");
+  try{
+   await mutate("POST",{email:state.account.email,locale},"/api/auth/recovery");
+   setPasswordMessage(t("customer.passwordLinkSent"));
+  }catch(e){setPasswordError(e instanceof TypeError?networkError:e instanceof LocalizedError?e.message:networkError);}
   finally{setBusy(false);}
  }
  async function reauthenticate(){
@@ -76,21 +86,38 @@ export function AccountSettings(){
   }finally{setBusy(false);}
  }
  const ready=!!state&&(state.deletionReady||state.deletionStarted);
- return <section className="account-settings" aria-labelledby={`${id}-heading`} aria-busy={loading||busy}>
+ return <div className="account-settings-group" aria-busy={loading||busy}><section className="account-settings" aria-labelledby={`${id}-heading`}>
   <h2 id={`${id}-heading`}>{t("customer.yourAccount")}</h2>
   {loading?<p role="status">{t("customer.accountLoading")}</p>:state?.account?<>
-   <p className="account-identity">{state.account.email} · {valueLabel(locale,"provider",state.account.provider)}</p>
+   <dl className="account-identity">
+    <div><dt>{t("customer.email")}</dt><dd>{state.account.email}</dd></div>
+    <div><dt>{t("customer.signInMethod")}</dt><dd>{state.preview?t("customer.localPreview"):valueLabel(locale,"provider",state.account.provider)}</dd></div>
+    <div><dt>{t("customer.accountStatus")}</dt><dd>{t(state.preview?"customer.localAccountStatus":"customer.verifiedAccount")}</dd></div>
+   </dl>
+   {state.preview&&<p>{t("customer.localAccountNote")}</p>}
    <form onSubmit={save} className="account-name-form">
     <label htmlFor={`${id}-name`}>{t("customer.displayName")}</label>
-    <input id={`${id}-name`} name="name" autoComplete="name" required minLength={2} maxLength={80} value={name} onChange={event=>setName(event.target.value)} disabled={busy||state.deletionStarted} aria-describedby={`${id}-name-note`}/>
+    <input id={`${id}-name`} name="name" autoComplete="name" required minLength={2} maxLength={80} value={name} onChange={event=>setName(event.target.value)} disabled={busy||state.deletionStarted||state.preview} aria-describedby={`${id}-name-note`}/>
     <p id={`${id}-name-note`}>{t("customer.nameNote")}</p>
-    <button className="account-button" type="submit" disabled={busy||state.deletionStarted}>{busy?t("customer.wait"):t("customer.saveName")}</button>
+    {!state.preview&&<button className="account-button" type="submit" disabled={busy||state.deletionStarted}>{busy?t("customer.wait"):t("customer.saveName")}</button>}
    </form>
-   {state.account.protected?<p>{t("customer.protectedAccount")}</p>:<p>{t("customer.deleteAccountNote")}</p>}
   </>:state?.deletionStarted?<p>{t("customer.deletionStarted")}</p>:state?<p>{t("customer.loginAccountStart")} <Link href="/anmelden?weiter=/einstellungen">{t("customer.googleOrEmail")}</Link> {t("customer.loginAccountEnd")}</p>:<button className="account-button" onClick={()=>{setError("");void load();}}>{t("customer.reload")}</button>}
   {error&&!open&&<p className="account-error" role="alert">{error}</p>}
   {message&&<p role="status">{message}</p>}
-  {state&&(state.deletionStarted||state.account&&!state.account.protected)&&<AlertDialog open={open} onOpenChange={value=>{if(!busy){setOpen(value);setConfirmation("");setPassword("");setError("");}}}>
+ </section>
+ {state?.account&&<section className="account-settings account-password-settings" aria-labelledby={`${id}-password-heading`}>
+  <h2 id={`${id}-password-heading`}>{t("customer.accountPassword")}</h2>
+  {state.preview?<><p>{t("customer.localPasswordNote")}</p><button className="account-button" disabled>{t("customer.passwordChange")}</button></>:state.account.provider==="E-Mail"?<>
+   <p>{t("customer.passwordSettingsNote")}</p>
+   <button className="account-button" disabled={busy||loading||state.deletionStarted} onClick={()=>void requestPasswordLink()}>{busy?t("customer.wait"):t("customer.passwordChange")}</button>
+  </>:<><p>{t("customer.googlePasswordNote")}</p><a className="account-button" href="https://myaccount.google.com/security" target="_blank" rel="noopener noreferrer">{t("customer.openGoogleAccount")}</a></>}
+  {passwordError&&<p className="account-error" role="alert">{passwordError}</p>}
+  {passwordMessage&&<p role="status">{passwordMessage}</p>}
+ </section>}
+ {state&&(state.account||state.deletionStarted)&&<section className="account-settings account-deletion-settings" aria-labelledby={`${id}-delete-heading`}>
+  <h2 id={`${id}-delete-heading`}>{t("customer.deleteAccount")}</h2>
+  <p>{t(state.account?.protected?"customer.protectedAccount":"customer.deleteAccountNote")}</p>
+  {!state.preview&&(state.deletionStarted||state.account&&!state.account.protected)&&<AlertDialog open={open} onOpenChange={value=>{if(!busy){setOpen(value);setConfirmation("");setPassword("");setError("");}}}>
    <AlertDialogTrigger asChild><button className="account-button account-danger" disabled={busy||loading}>{state.deletionStarted?t("customer.continueDeletion"):t("customer.deleteAccount")}</button></AlertDialogTrigger>
    <AlertDialogContent onEscapeKeyDown={event=>{if(busy)event.preventDefault();}}>
     <AlertDialogHeader>
@@ -113,5 +140,6 @@ export function AccountSettings(){
     </AlertDialogFooter>
    </AlertDialogContent>
   </AlertDialog>}
- </section>;
+ </section>}
+ </div>;
 }
