@@ -91,5 +91,13 @@ try{
  await act(async()=>window.dispatchEvent(new Event('focus')));
  assert.equal(requestCount,beforeFocus+1,'Concurrent focus signals share the same request');
  await act(async()=>finish(Response.json({account:null,isAdmin:false})));
+ // Deferred private pages retain the same header while switching its snapshot mode.
+ await act(async()=>root.render(wrap('retained-mode',h(SiteHeader,{account:null,publicSnapshot:false}))));
+ await act(async()=>invalidatePublicSession({signedIn:true}));
+ await act(async()=>root.render(wrap('retained-mode',h(SiteHeader,{account:null,publicSnapshot:true}))));
+ assert.equal(!!document.querySelector('.header-auth'),false,'A retained guest header cannot flash guest buttons after a login signal');
+ assert(document.querySelector('.header-session-status'),'Switching to a cleared public snapshot uses neutral pending state');
+ await act(async()=>finish(new Response(null,{status:503})));
+ assert.equal(!!document.querySelector('.header-auth'),false,'A failed post-login check cannot revive the previous guest header');
  console.log('Header navigation: shared route cache, expiry/focus revalidation, stable account preview, server isolation, private-data gating and authoritative sign-out passed');
 }finally{await act(async()=>root.unmount());dom.window.close();Date.now=realNow;}

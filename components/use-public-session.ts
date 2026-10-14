@@ -81,6 +81,10 @@ export function applyPublicSessionChange(session:PublicSession|null,change:Sessi
 }
 export function usePublicSession(initial:PublicSession,publicSnapshot=false){
  const [session,setSession]=useState<PublicSession|null>(()=>publicSnapshot?sessionPreview():initial),[error,setError]=useState(false);
+ const [snapshotMode,setSnapshotMode]=useState(publicSnapshot);
+ // A retained private header may enter public mode after another tab signs in.
+ // Reset during render so an old guest/account is never committed in that mode.
+ if(snapshotMode!==publicSnapshot){setSnapshotMode(publicSnapshot);setSession(publicSnapshot?sessionPreview():initial);}
  useEffect(()=>{
   if(!publicSnapshot)return;
   let active=true,sequence=0;
