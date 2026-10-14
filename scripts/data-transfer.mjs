@@ -53,7 +53,7 @@ const fail = (message) => {
 
 // Compare the complete SQLite definitions, including constraints and indexes.
 // Formatting outside string literals is immaterial; literal contents stay exact.
-function normalizedSql(sql) {
+export function normalizedSql(sql) {
   return (
     sql
       .match(

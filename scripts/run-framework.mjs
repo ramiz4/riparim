@@ -1,6 +1,7 @@
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { readExecutionProfile } from "./execution-profile.mjs";
+import { defaultLocalDevPort } from "./local-development.mjs";
 
 const [command, ...args] = process.argv.slice(2);
 if (!["dev", "build"].includes(command))
@@ -18,9 +19,43 @@ if (managedLinux && command === "build") {
 }
 
 if (command === "dev" && !managedLinux) {
-  const { seedLocalOpeningHours } =
-    await import("./seed-local-opening-hours.mjs");
-  await seedLocalOpeningHours();
+  const { prepareLocalDevelopment } =
+    await import("./prepare-local-development.mjs");
+  let port = String(defaultLocalDevPort);
+  for (let index = 0; index < args.length; index++) {
+    if (["--port", "-p"].includes(args[index])) port = args[index + 1];
+    else if (args[index].startsWith("--port=")) port = args[index].slice(7);
+  }
+  if (!/^\d+$/.test(port ?? "") || Number(port) < 1 || Number(port) > 65535) {
+    console.error(
+      "Local development: --port must be an integer from 1 to 65535.",
+    );
+    process.exit(1);
+  }
+  // Vinext loads .env after preparation. Leave SITE_ORIGIN available for its
+  // existing overrides and pass only the selected local port to Vite.
+  process.env.RIPARIM_LOCAL_DEV_PORT = port;
+  const controller = new AbortController();
+  let interruption;
+  const interrupt = (signal) => {
+    interruption = signal;
+    controller.abort();
+  };
+  const onInt = () => interrupt("SIGINT"),
+    onTerm = () => interrupt("SIGTERM");
+  process.on("SIGINT", onInt);
+  process.on("SIGTERM", onTerm);
+  try {
+    await prepareLocalDevelopment(undefined, { signal: controller.signal });
+  } catch (error) {
+    console.error(error.message);
+    process.exitCode =
+      interruption === "SIGINT" ? 130 : interruption === "SIGTERM" ? 143 : 1;
+  } finally {
+    process.off("SIGINT", onInt);
+    process.off("SIGTERM", onTerm);
+  }
+  if (process.exitCode) process.exit(process.exitCode);
 }
 
 // Import in this process so the preview owner retains its PID and signals.
@@ -34,7 +69,9 @@ process.argv = [
   process.execPath,
   fileURLToPath(cli),
   command,
-  ...(!managedLinux && command === "dev" ? ["--port", "5173"] : []),
+  ...(!managedLinux && command === "dev"
+    ? ["--port", String(defaultLocalDevPort)]
+    : []),
   ...args,
 ];
 await import(cli.href);
