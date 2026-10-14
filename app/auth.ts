@@ -166,12 +166,13 @@ export async function recordGoogleSession(
   )
     throw Error("ACCOUNT_DISABLED");
   const sessionId = await verifiedSessionId(client, user, "google");
+  // Workers supports manual/follow; manual and the status check prevent bearer-token redirects.
   const result = await fetch(
     "https://openidconnect.googleapis.com/v1/userinfo",
     {
       headers: { Authorization: `Bearer ${session.googleAccessToken}` },
       cache: "no-store",
-      redirect: "error",
+      redirect: "manual",
       signal: AbortSignal.timeout(8000),
     },
   );

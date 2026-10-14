@@ -121,6 +121,7 @@ suites.push("backup-monitor-portable.test.mjs");
 suites.push("backup-monitor-worker.test.mjs");
 suites.push("auth-request-latency.test.mjs");
 suites.push("auth-provider-worker.test.mjs");
+suites.push("google-auth-worker.test.mjs");
 suites.push("session-cookie-reads.test.mjs");
 suites.push("deferred-pages-ui.test.mjs");
 suites.push("release-navigation-contract.test.mjs");
