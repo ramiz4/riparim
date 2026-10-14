@@ -289,7 +289,11 @@
     "publishedNewIds": 0,
     "belowTenReason": "Exact Maps identity/phone gaps, contradictory or moved locations, missing independently proved service scope; only five completed all gates. Target 40–60 source leads not reached: 17 businesses individually examined (including two historical leads) plus search/result discovery; discovery entries are not fully verified candidates.",
     "individuallyExaminedBusinesses": 17,
-    "historicalLeadsRechecked": 2
+    "historicalLeadsRechecked": 2,
+    "distinctScreenedCandidates": 18,
+    "screenedOnlyExistingDuplicates": 1,
+    "currentDeferredExamined": 12,
+    "countDefinition": "5 approved + 12 individually examined deferred = 17; includes historical Vali and DONI. BLEDI is one additional existing identity screened out early, giving 18 screened candidates. Search result discoveries without individual source/Maps examination are not counted."
   },
   "researchQueue": [
     {
@@ -1199,15 +1203,15 @@
       ],
       "status": "verified-canonical-import-awaiting-publication",
       "reason": "Independently proven Istog directory identity; exact international phone and city matched active public Maps ID; direct ID test passed.",
-      "deferredCause": "complete-current-maps-identity-missing",
-      "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
+      "nextCheck": "Finish current independent review, CI, squash merge and verified release/live acceptance.",
       "publicBusinessEmail": {
         "address": "jetmirzekaj06@gmail.com",
         "sourceUrl": "https://gjirafa.biz/autoservicevali-1",
         "checkedAt": "2026-10-14",
         "status": "found"
       },
-      "newWorkshopId": "auto-service-vali-istog"
+      "newWorkshopId": "auto-service-vali-istog",
+      "priorDeferredCause": "complete-current-maps-identity-missing"
     },
     {
       "name": "Autoservis Faredini-A",
@@ -2976,6 +2980,25 @@
         "publicBusinessEmail": {
           "address": null,
           "status": "unresolved"
+        }
+      },
+      {
+        "name": "Auto Servis & Pjesë Diti-B",
+        "sourceUrls": [
+          "https://www.facebook.com/100069473054785/about/"
+        ],
+        "status": "deferred",
+        "reason": "Own page names Istog street; Maps entry with exact phone has conflicting distant business locality; current precise business location unresolved. No Place ID accepted.",
+        "publicBusinessEmail": {
+          "address": "lindritbajraktari8@gmail.com",
+          "sourceUrl": "https://www.facebook.com/100069473054785/about/",
+          "checkedAt": "2026-10-14",
+          "status": "found"
+        },
+        "independentEvidence": {
+          "phone": "+38349167170",
+          "address": "Rruga Lidhja e Pejës 752, Istog, Kosovo, 31000",
+          "services": "Servis dhe pjese per vetura"
         }
       }
     ],
