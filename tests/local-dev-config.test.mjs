@@ -63,7 +63,8 @@ try{
   assert.equal(page.props.children.props.localSeedLogin,local,'Only the local development login page offers the seed entry');
   const seed={userId:'local_seedy',email:'seedy@sites.test',displayName:'Seedy',provider:'ChatGPT'};
   assert.equal(!!await localSeedPreviewAccount(seed),mode==='development'&&['127.0.0.1:5199','localhost:5199','[::1]:5199'].includes(host),'Only the verified local seed identity receives preview account data');
-  for(const user of [null,{...seed,userId:'another-user'},{...seed,provider:'E-Mail'},{...seed,email:'another@example.test'}])assert.equal(await localSeedPreviewAccount(user),undefined,'Guests and real accounts never receive seed data');
+  for(const view of ['email','google']){const preview=await localSeedPreviewAccount(seed,view),allowed=mode==='development'&&['127.0.0.1:5199','localhost:5199','[::1]:5199'].includes(host);assert.equal(!!preview,allowed);if(preview){assert.equal(preview.kind,view);assert.equal(preview.protected,false);assert.equal(preview.provider,view==='email'?'E-Mail':'Google');}}
+  for(const user of [null,{...seed,userId:'another-user'},{...seed,provider:'E-Mail'},{...seed,email:'another@example.test'}])assert.equal(await localSeedPreviewAccount(user,'email'),undefined,'Guests and real accounts never receive seed data');
  }
  console.log('Local login UI boundary: development loopback only; production, external hosts and other Auth screens omit the entry');
 }finally{

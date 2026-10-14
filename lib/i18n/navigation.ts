@@ -24,6 +24,7 @@ function publicNavigationHref(href:string,locale:Locale,allowReturn:boolean):str
   const workshop=url.searchParams.get("nachweis");if(workshop&&profileId.test(workshop))query.set("nachweis",workshop);
 
  }
+ if(path==="/einstellungen"&&url.searchParams.getAll("vorschau").length===1&&["email","google"].includes(url.searchParams.get("vorschau")??""))query.set("vorschau",url.searchParams.get("vorschau")!);
  if(path==="/betriebe/beanspruchen"){const ids=url.searchParams.getAll("werkstatt"),id=ids.length===1?ids[0]:null;if(id&&profileId.test(id))query.set("werkstatt",id);}
  if(/^\/werkstatt\/[^/]+$/.test(path)){
   const search=url.searchParams.get("suche");
