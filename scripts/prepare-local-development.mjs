@@ -24,7 +24,7 @@ function preparationError(local, phase, cause) {
     redactLocalDiagnostic(
       `Local development ${phase} failed: ${cause}\n` +
         `Database: DB (local only)\nConfig: ${local.configPath}\nState: ${local.persistPath}\n` +
-        `Next: follow docs/local-development.md, then run npm run dev:setup.`,
+        `Next: follow docs/development/local-development.md, then run npm run dev:setup.`,
     ),
   );
 }

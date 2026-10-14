@@ -29,7 +29,7 @@ export async function localDevelopmentConfiguration(root = checkoutRoot) {
         `Local development configuration failed (${error.code ?? error.name}).\n` +
           `Check the tracked .openai/hosting.json in ${root}.\n` +
           `Database: DB (local only)\nConfig: ${local.configPath}\nState: ${local.persistPath}\n` +
-          `Next: restore the checkout's valid hosting configuration; see docs/local-development.md.`,
+          `Next: restore the checkout's valid hosting configuration; see docs/development/local-development.md.`,
       ),
     );
   }

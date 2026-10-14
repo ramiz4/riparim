@@ -335,7 +335,7 @@ try {
   }
   await assert.rejects(
     prepareLocalDevelopment(root),
-    /migration history is missing.*docs\/local-development\.md/s,
+    /migration history is missing.*docs\/development\/local-development\.md/s,
     "An existing application schema without history stops before replay",
   );
   const stopped = new DatabaseSync(resolve(root, ".wrangler/state", filename));

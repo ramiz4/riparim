@@ -428,7 +428,10 @@ export async function pocketbaseNodeHttp({
       );
     privateStorage.close();
     delete globalThis.pocketbaseNodeEnv;
-    const instructions = await readFile("docs/auth-provider.md", "utf8"),
+    const instructions = await readFile(
+        "docs/operations/auth-provider.md",
+        "utf8",
+      ),
       operator = instructions.match(
         /node --input-type=module <<'NODE'\n([\s\S]*?)\nNODE/,
       )[1];
