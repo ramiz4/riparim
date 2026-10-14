@@ -36,6 +36,43 @@ npm run dev -- --host 127.0.0.1 --port 5174
 
 Die lokale Oberfläche ist unter `http://127.0.0.1:5174` erreichbar. Auth-Anbieter und Anmeldeoptionen werden in der geschützten Verwaltung konfiguriert. SMTP und Google OAuth müssen beim Anbieter eingerichtet und getestet werden; der Quellcode allein aktiviert sie nicht.
 
+### Code formatieren
+
+`npm run install:ci` aktiviert über `prepare` automatisch den lokalen Husky-Hook.
+Vor jedem Commit formatiert lint-staged ausschließlich gestagte Dateien mit der
+festgelegten lokalen Prettier-Version und übernimmt die Formatierung in den Index.
+Nicht gestagte Änderungen bleiben erhalten, auch bei teilweise gestagten Dateien.
+Ein Syntaxfehler verhindert den Commit und stellt den ursprünglichen Index und
+Arbeitsstand wieder her. Der Hook führt keine vollständigen Tests oder Builds aus.
+
+```sh
+npm run format
+npm run format:check
+```
+
+Beide Befehle verwenden denselben Umfang und die Konfiguration in
+`.prettierrc.json`. Sie nutzt Prettier-Standardwerte; JSONC-Dateien erhalten keine
+abschließenden Kommas, da die vorhandenen Wrangler-Verträge sie mit `JSON.parse`
+lesen. `format:check` verändert keine Dateien und prüft die Formatierung
+früh in CI. ESLint prüft weiterhin Codequalität; die vorhandenen Regeln enthalten
+keine widersprüchlichen Formatierungsregeln. `.prettierignore` bewahrt generierte
+Lockfiles und Bindings, angewandte Drizzle-Migrationen sowie unveränderte
+Vendor-Quellen einschließlich shadcn und des Sites-Vite-Plugins.
+
+Für Formatierung beim Speichern den Prettier-Editoradapter installieren und die
+lokale Projektversion verwenden; die eingecheckte Konfiguration wird automatisch
+erkannt. Editorformatierung ist optional. Git-Hooks sind lokal umgehbar; die
+Formatierungsprüfung in CI bleibt verbindlich.
+
+Jeder Aufgaben-Worktree benötigt seine eigene Installation. Die Einrichtung
+schreibt den Hook-Pfad in dessen Git-Worktree-Konfiguration und bewahrt die Hooks
+anderer Worktrees. Bei Bedarf aktiviert sie `extensions.worktreeConfig`; ein
+ungewöhnlicher gemeinsamer `core.worktree` muss zuvor in die Konfiguration des
+primären Worktrees verschoben werden. CI verwendet `HUSKY=0`; `prepare` überspringt
+außerdem Produktionsinstallationen, fehlende Git-Metadaten und Installationen ohne
+Husky, etwa die isolierten Tool-Jobs. Nach einer lokalen Installation mit
+`--ignore-scripts` aktiviert `npm run prepare` den Hook.
+
 `npm run dev` übernimmt in der lokalen Vorschau zusätzlich den geprüften Katalog und die vorhandene Öffnungszeiten-Importquelle als Standarddaten. Bestehende importierte oder vom Betrieb bestätigte Zeiten, unterdrückte Importe und geänderte Profilidentitäten werden bewahrt.
 
 Ein neuer Worktree braucht vor dem ersten Seitenaufruf die lokale Datenbank aus dem Abschnitt „Datenbank und Prüfung“. Der Entwicklungsserver verwendet dieselben logischen D1-/R2-Bindings wie der Sites-Build; die vorhandenen Migrationen müssen auf diese lokale Datenbank angewendet werden.
@@ -79,7 +116,6 @@ Der reproduzierbare Anbieterwechsel mit geschütztem App-/Dateibackup, frischem 
 Der portable Node-Betrieb unterstützt zusätzlich SMTP über `EMAIL_TRANSPORT=smtp`, `SMTP_URL` und `SMTP_SECRET_ORIGIN`. Migration `0017_mail_transports.sql` ergänzt Transportbindung, eingefrorene MIME-Bytes und eine dauerhafte SMTP-Startmarkierung. Unklare SMTP-Übergaben werden auch bei administrativem Retry nicht erneut gesendet. Konfiguration, TLS-Prüfung und der kontrollierte Wechselweg stehen in [mail-transports.md](docs/mail-transports.md). Der Worker behält den HTTP-Versand über Resend.
 
 Migration `0012` ergänzt die private Versandtabelle; historische Moderationsentscheidungen werden nicht nachträglich benachrichtigt. Der Erstversand wird direkt nach der gespeicherten Moderationsentscheidung abgewartet. Es gibt keinen periodischen Mailjob. Bei Fehlern erlaubt die geschützte Verwaltung höchstens fünf manuelle Wiederholungen nach 1, 5, 15, 30 und 60 Minuten Wartezeit. Limit und Wartezeit werden atomar serverseitig geprüft. Die Übersicht aktualisiert sich nach einer Aktion oder auf ausdrücklichen Abruf; sie pollt nicht. Providerfehler widerrufen die erfolgreiche Moderation nicht. Unklare SMTP-Übergaben und abgelaufene Resend-Idempotenzfenster bleiben gegen unkontrollierten Neuversand gesperrt. Bereits gespeicherte Ereignisse und Payloadbytes bleiben erhalten. Der Release entfernt den bisherigen Cron mit einer explizit leeren Cronliste; keine neue Migration ist erforderlich.
-
 
 Jede Entscheidung besitzt einen eindeutigen Idempotenzschlüssel je Einreichung und Revision. Nach dem ersten Versuch bleiben Empfänger und Nachrichteninhalt unverändert. Wiederholungen enden konservativ nach 23 Stunden, da [Resend die Schlüssel 24 Stunden speichert](https://resend.com/docs/dashboard/emails/idempotency-keys); unklare ältere Ereignisse benötigen eine Prüfung beim Versanddienst. Ein geänderter Empfänger oder eine geänderte Versandschlüssel-Konfiguration verhindert eine unsichere Wiederholung. Nach erfolgreicher Übergabe wird der eingefrorene Adress-/Nachrichteninhalt aus der lokalen Tabelle entfernt. „An Versanddienst übergeben“ bestätigt keine endgültige Zustellung. Das Löschen der Einreichung oder des Kontos entfernt zugehörige lokale Versandereignisse.
 

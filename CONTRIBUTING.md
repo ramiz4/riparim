@@ -128,6 +128,21 @@ Referenz: [Semantic Release](https://semantic-release.org/intro/) und
 
 ## Qualität und Übergabe
 
+Installiere im jeweiligen Aufgaben-Worktree mit `npm run install:ci`. Der
+`prepare`-Ablauf richtet Husky automatisch ein. Vor einem Commit formatiert
+lint-staged nur gestagte, unterstützte Dateien mit der gepinnten Prettier-Version;
+nicht gestagte Änderungen werden bewahrt. Bei einem Formatterfehler bleibt der
+Commit aus. Verwende `npm run format` für eine vollständige lokale Formatierung
+und `npm run format:check` zur schreibfreien Prüfung desselben Umfangs.
+
+Die optional aktivierte Editorformatierung beim Speichern muss die lokale
+Prettier-Version und Projektkonfiguration verwenden. Die zentralen Ausnahmen in
+`.prettierignore` schützen generierte Dateien, Vendor-Quellen und angewandte
+Migrationen. Hooks können lokal umgangen werden; `format:check` ist deshalb eine
+verbindliche CI-Prüfung. Tests, Typprüfung und Builds bleiben außerhalb des schnellen
+Commit-Hooks. Installationsausnahmen und Worktree-Konfiguration stehen im
+[README](README.md#code-formatieren).
+
 Für AI Agents gelten die Entwurfsprinzipien, Datenschutzregeln und
 Abschlussbedingungen in [AGENTS.md](AGENTS.md). Installation und lokale Prüfungen
 stehen in [README.md](README.md); die verpflichtenden Codeprüfungen definiert
