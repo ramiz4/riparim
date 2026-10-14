@@ -19,7 +19,7 @@ hoursUnchanged:"Öffnungszeiten bleiben unverändert.",hoursTitle:"Öffnungszeit
   languageLabel:"Sprache wählen",discardDraft:"Deine nicht gespeicherten Eingaben gehen beim Sprachwechsel verloren. Sprache trotzdem wechseln?",
   preferenceNotSaved:"Deine Sprachpräferenz konnte nicht gespeichert werden. Die ausgewählte Sprache gilt für diese Seite.",
   checkingSession:"Anmeldestatus wird geprüft …",homeLabel:"Riparim Startseite",login:"Anmelden",register:"Registrieren",userMenu:"Benutzermenü öffnen",myAccount:"Mein Konto",signedIn:"Angemeldet",admin:"Admin",
-  myReviews:"Meine Bewertungen",review:"Bewerten",settings:"Einstellungen",myBusiness:"Meine Betriebe",myApplications:"Meine Anträge",manage:"Verwalten",logout:"Abmelden",loggingOut:"Wird abgemeldet …",logoutFailed:"Abmelden fehlgeschlagen. Bitte versuche es erneut.",
+  myReviews:"Meine Bewertungen",review:"Bewerten",settings:"Einstellungen",myBusiness:"Meine Betriebe",myApplications:"Meine Betriebsanträge",manage:"Verwaltung",logout:"Abmelden",loggingOut:"Wird abgemeldet …",logoutFailed:"Abmelden fehlgeschlagen. Bitte versuche es erneut.",
   unavailable:"Diese Information ist momentan nicht verfügbar.",errorGeneric:"Die Aktion ist fehlgeschlagen. Bitte versuche es erneut.",messageGeneric:"Die Aktion wurde abgeschlossen.",
   authenticationRequired:"Bitte melde dich an.",forbidden:"Du hast keine Berechtigung für diese Aktion.",invalidRequest:"Bitte prüfe deine Eingaben.",notFound:"Der Eintrag wurde nicht gefunden.",conflict:"Der Eintrag wurde zwischenzeitlich geändert. Bitte lade ihn erneut.",saved:"Änderungen gespeichert.",
   reviewCount:{one:"{count} Bewertung",other:"{count} Bewertungen"}
@@ -49,7 +49,7 @@ hoursUnchanged:"Orari mbetet i pandryshuar.",hoursTitle:"Orari i punës",hoursUn
   languageLabel:"Zgjidh gjuhën",discardDraft:"Të dhënat që nuk i ke ruajtur do të humbasin kur të ndërrosh gjuhën. Dëshiron të vazhdosh?",
   preferenceNotSaved:"Preferenca jote e gjuhës nuk mund të ruhej. Gjuha e zgjedhur vlen për këtë faqe.",
   checkingSession:"Po kontrollohet hyrja …",homeLabel:"Faqja kryesore e Riparim",login:"Hyr",register:"Regjistrohu",userMenu:"Hap menynë e përdoruesit",myAccount:"Llogaria ime",signedIn:"I identifikuar",admin:"Administrator",
-  myReviews:"Vlerësimet e mia",review:"Vlerëso",settings:"Cilësimet",myBusiness:"Bizneset e mia",myApplications:"Kërkesat e mia",manage:"Administro",logout:"Dil",loggingOut:"Duke dalë …",logoutFailed:"Dalja dështoi. Provo përsëri.",
+  myReviews:"Vlerësimet e mia",review:"Vlerëso",settings:"Cilësimet",myBusiness:"Bizneset e mia",myApplications:"Kërkesat e mia për bizneset",manage:"Administrimi",logout:"Dil",loggingOut:"Duke dalë …",logoutFailed:"Dalja dështoi. Provo përsëri.",
   unavailable:"Ky informacion nuk është i disponueshëm për momentin.",errorGeneric:"Veprimi dështoi. Provo përsëri.",messageGeneric:"Veprimi përfundoi.",
   authenticationRequired:"Identifikohu për të vazhduar.",forbidden:"Nuk ke leje për këtë veprim.",invalidRequest:"Kontrollo të dhënat që ke dhënë.",notFound:"Ky regjistrim nuk u gjet.",conflict:"Ky regjistrim ka ndryshuar ndërkohë. Ngarkoje përsëri.",saved:"Ndryshimet u ruajtën.",
   reviewCount:{one:"{count} vlerësim",other:"{count} vlerësime"}
@@ -73,7 +73,7 @@ hoursUnchanged:"Opening hours remain unchanged.",hoursTitle:"Opening hours",hour
   languageLabel:"Choose language",discardDraft:"Your unsaved entries will be lost when you change language. Change language anyway?",
   preferenceNotSaved:"Your language preference could not be saved. The selected language applies to this page.",
   checkingSession:"Checking sign-in status …",homeLabel:"Riparim home",login:"Log in",register:"Register",userMenu:"Open user menu",myAccount:"My account",signedIn:"Signed in",admin:"Admin",
-  myReviews:"My reviews",review:"Write a review",settings:"Settings",myBusiness:"My businesses",myApplications:"My requests",manage:"Manage",logout:"Log out",loggingOut:"Logging out …",logoutFailed:"Log out failed. Please try again.",
+  myReviews:"My reviews",review:"Write a review",settings:"Settings",myBusiness:"My businesses",myApplications:"My business requests",manage:"Administration",logout:"Log out",loggingOut:"Logging out …",logoutFailed:"Log out failed. Please try again.",
   unavailable:"This information is currently unavailable.",errorGeneric:"The action failed. Please try again.",messageGeneric:"The action completed.",
   authenticationRequired:"Please log in.",forbidden:"You do not have permission for this action.",invalidRequest:"Please check your entries.",notFound:"The entry was not found.",conflict:"The entry has changed. Please reload it.",saved:"Changes saved.",
   reviewCount:{one:"{count} review",other:"{count} reviews"}

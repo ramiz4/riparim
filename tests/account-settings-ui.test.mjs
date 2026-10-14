@@ -3,19 +3,19 @@ import {mkdir,writeFile} from 'node:fs/promises';
 import {createRequire} from 'node:module';
 import {JSDOM,VirtualConsole} from 'jsdom';
 const dom=new JSDOM('<div id="root"></div>',{url:'https://riparim.example.test/einstellungen',pretendToBeVisual:true,virtualConsole:new VirtualConsole()});
-for(const key of ['window','document','navigator','HTMLElement','HTMLButtonElement','HTMLFormElement','HTMLInputElement','DocumentFragment','Element','Node','NodeFilter','MutationObserver','CustomEvent','Event','MouseEvent','KeyboardEvent','getComputedStyle'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});
+for(const key of ['window','document','navigator','HTMLElement','HTMLButtonElement','HTMLFormElement','FormData','HTMLInputElement','DocumentFragment','Element','Node','NodeFilter','MutationObserver','CustomEvent','Event','MouseEvent','KeyboardEvent','getComputedStyle'])Object.defineProperty(globalThis,key,{value:dom.window[key],configurable:true});
 globalThis.requestAnimationFrame=dom.window.requestAnimationFrame.bind(dom.window);globalThis.cancelAnimationFrame=dom.window.cancelAnimationFrame.bind(dom.window);globalThis.IS_REACT_ACT_ENVIRONMENT=true;
 const {build}=createRequire(new URL('../package.json',import.meta.url))('esbuild');
 const output='.test-runtime/account-settings-ui';
-const bundle=await build({stdin:{contents:"export {AccountSettings} from './components/account-settings';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/ui.mjs',bundle:true,write:false,platform:'node',format:'esm',packages:'external',plugins:[{name:'ui-boundaries',setup(b){b.onResolve({filter:/^next\/(link|navigation)$/},args=>({path:args.path,namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',resolveDir:process.cwd(),contents:args.path==='next/link'?`import React from 'react';export default function Link({children,href,...props}){return React.createElement('a',{...props,href},children);}`:'export function useRouter(){return {refresh(){globalThis.fixtureRefreshes++;}};}'}));}}]});
+const bundle=await build({stdin:{contents:"export {AccountSettings} from './components/account-settings';export {ThemeSettings} from './components/theme-settings';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",resolveDir:process.cwd(),loader:'tsx'},outfile:output+'/ui.mjs',bundle:true,write:false,platform:'node',format:'esm',packages:'external',plugins:[{name:'ui-boundaries',setup(b){b.onResolve({filter:/^next\/(link|navigation)$/},args=>({path:args.path,namespace:'fixture'}));b.onLoad({filter:/.*/,namespace:'fixture'},args=>({loader:'js',resolveDir:process.cwd(),contents:args.path==='next/link'?`import React from 'react';export default function Link({children,href,...props}){return React.createElement('a',{...props,href},children);}`:'export function useRouter(){return {refresh(){globalThis.fixtureRefreshes++;}};}'}));}}]});
 await mkdir(output,{recursive:true});await writeFile(output+'/ui.mjs',bundle.outputFiles[0].contents);
 const {createElement,act}=await import('react'),{createRoot}=await import('react-dom/client');
-const {AccountSettings,I18nProvider,getMessages}=await import(new URL('../'+output+'/ui.mjs',import.meta.url));
+const {AccountSettings,ThemeSettings,I18nProvider,getMessages}=await import(new URL('../'+output+'/ui.mjs',import.meta.url));
 let state={account:{email:'member@example.test',name:'Fixture Member',provider:'E-Mail',protected:false},deletionReady:false,deletionStarted:false};
 let mode='success',pending=null,loadFailure=false;
 const requests=[];globalThis.fixtureRefreshes=0;
 globalThis.fetch=async(url,options)=>{
- const method=options?.method??'GET',body=options?.body?JSON.parse(options.body):null;requests.push({url,method,body});assert.equal(url,'/api/account','Fixtures never send external account requests');
+ const method=options?.method??'GET',body=options?.body?JSON.parse(options.body):null;requests.push({url,method,body});if(url==='/api/auth/recovery'){assert.equal(method,'POST');assert.deepEqual(body,{email:state.account.email,locale:activeLocale});if(mode==='pending')return new Promise(resolve=>{pending={resolve};});return mode==='failure'?Response.json({errorCode:'recovery_failed'},{status:503}):Response.json({messageCode:'recovery_sent'});}assert.equal(url,'/api/account','Fixtures never send external account requests');
  if(method==='GET')return loadFailure?Response.json({error:'Fixture load failed',errorCode:'account_unavailable'},{status:503}):Response.json(state);
  if(method==='PATCH'){assert.deepEqual(Object.keys(body),['name']);if(mode==='failure')return Response.json({error:'Fixture invalid name'},{status:400});state={...state,account:{...state.account,name:body.name.trim()}};return Response.json({name:state.account.name});}
  if(method==='POST'){assert.deepEqual(Object.keys(body),['password']);if(mode==='failure')return Response.json({error:'Fixture wrong password',errorCode:'password_proof_failed'},{status:401});state={...state,deletionReady:true};return Response.json({ok:true});}
@@ -28,20 +28,25 @@ globalThis.fetch=async(url,options)=>{
 let activeLocale='de';
 let root=createRoot(document.getElementById('root')),passed=0;
 const check=(condition,label)=>{assert(condition,label);passed++;};
-const button=label=>[...document.querySelectorAll('button')].find(node=>node.textContent===label);
+const button=label=>[...document.querySelectorAll('button')].find(node=>node.textContent===label||node.getAttribute('aria-label')===label);
 const click=async control=>{assert(control,'The requested control is visible');await act(async()=>{control.focus();control.click();});};
 const dialog=()=>document.querySelector('[role="alertdialog"]');
 const input=label=>document.getElementById([...document.querySelectorAll('label')].find(node=>node.textContent===label)?.htmlFor);
 const type=async(control,value)=>{await act(async()=>{Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(control,value);control.dispatchEvent(new Event('input',{bubbles:true}));});};
-const mount=async()=>act(async()=>root.render(createElement(I18nProvider,{locale:activeLocale,messages:getMessages(activeLocale,["common","customer"])},createElement(AccountSettings))));
+const mount=async()=>act(async()=>root.render(createElement(I18nProvider,{locale:activeLocale,messages:getMessages(activeLocale,["common","customer"])},createElement(AccountSettings,{localPreviewAccount:state.preview?{kind:state.account.provider==='ChatGPT'?'admin':state.account.provider==='Google'?'google':'email',email:state.account.email,name:state.account.name,provider:state.account.provider,protected:state.account.protected}:undefined,appearance:createElement(ThemeSettings)}))));
 const remount=async()=>{await act(async()=>root.unmount());root=createRoot(document.getElementById('root'));await mount();};
+async function submitForm(form){await act(async()=>form.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));}
 try{
  loadFailure=true;await mount();check(document.querySelector('[role="alert"]').textContent===getMessages('de').customer.accountUnavailable&&button('Erneut laden'),'Failed account loading exposes an accessible retry');
  loadFailure=false;await click(button('Erneut laden'));
  check(document.querySelector('.account-identity').textContent.includes(state.account.email),'The account view identifies the signed-in email and provider');
- const name=input('Anzeigename');check(name.value==='Fixture Member'&&name.required&&name.minLength===2&&name.maxLength===80,'The display name has an accessible label and length constraints');
+ check(document.querySelector('.account-identity').textContent.includes('E-Mail bestätigt')&&document.querySelector('.account-password-settings')&&document.querySelector('.account-deletion-settings'),'Verified account data, password and deletion are separate labelled sections');
+ mode='pending';await click(button('Passwort ändern'));check(button('Bitte warten …').disabled,'Password recovery disables its action while the request is pending');await act(async()=>pending.resolve(Response.json({messageCode:'recovery_sent'})));mode='success';pending=null;
+ check(document.querySelector('.account-password-settings [role="status"]').textContent.includes('Zurücksetzen'),'Password recovery announces the email-link flow without changing the password in the settings');
+ mode='failure';await click(button('Passwort ändern'));check(document.querySelector('.account-password-settings [role="alert"]').textContent===getMessages('de').customer.recoveryFailed,'A failed recovery request stays retryable within the password section');mode='success';
+ const name=input('Voller Name');check(name.value==='Fixture Member'&&name.required&&name.minLength===2&&name.maxLength===80,'The display name has an accessible label and length constraints');
  await type(name,'  Updated Member  ');await act(async()=>document.querySelector('form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));
- check(input('Anzeigename').value==='Updated Member'&&document.querySelector('[role="status"]').textContent.includes('unverändert'),'Saving announces success and explains existing review names');
+ check(input('Voller Name').value==='Updated Member'&&document.querySelector('[role="status"]').textContent===getMessages('de').customer.nameSaved,'Saving announces success and explains existing review names');
  check(globalThis.fixtureRefreshes===1&&requests.find(r=>r.method==='PATCH').body.name==='  Updated Member  ','Saving refreshes the account header and sends no account identifier');
  await click(button('Konto löschen'));check(dialog()&&dialog().contains(document.activeElement),'Deletion uses a real alert dialog with keyboard focus inside');
  check(dialog().textContent.includes('privaten Nachweisdateien')&&dialog().textContent.includes('Identität'),'The dialog describes affected data and requires a fresh identity proof');
@@ -69,10 +74,40 @@ try{
  mode='success';await click(button('Löschung wiederholen'));
  check(!dialog()&&document.querySelector('[role="status"]').textContent.includes('wurden gelöscht'),'Confirmed retry completes the interrupted deletion');
  state={account:{email:'admin@example.test',name:'Admin',provider:'Google',protected:true},deletionReady:false,deletionStarted:false};await remount();
- check(!button('Konto löschen')&&document.querySelector('.account-settings').textContent.includes('Administrationszugänge'),'Protected accounts explain the guard and expose no deletion control');
+ check(!button('Konto löschen')&&document.querySelector('.account-deletion-settings').textContent.includes(getMessages('de').customer.protectedAccount),'Protected accounts explain the guard and expose no deletion control');
  state={account:{email:'member@example.test',name:'Member',provider:'Google',protected:false},deletionReady:false,deletionStarted:false};await remount();await click(button('Konto löschen'));
  check(button('Mit Google erneut bestätigen')&&!input('Aktuelles Passwort'),'Google accounts use the dedicated OAuth proof action');await click(button('Abbrechen'));
  check(!dialog(),'Cancel dismisses Google proof without starting an action');
+ check(!button('Passwort ändern')&&document.querySelector('.account-password-settings a').href==='https://myaccount.google.com/security','Google accounts direct password management to their provider');
+ for(const locale of ['de','sq','en']){
+  activeLocale=locale;const copy=getMessages(locale).customer;state={account:{email:'seedy@sites.test',name:'Seedy',provider:'ChatGPT',protected:true},preview:true,deletionReady:false,deletionStarted:false};await remount();const requestsBefore=requests.length;
+  check(input(copy.fullName).value==='Seedy'&&!input(copy.fullName).disabled&&button(copy.saveName).disabled,'The local seed account shows data without exposing a real name mutation');
+  check(document.querySelector('.account-identity').textContent.includes(copy.localPreview)&&!button(copy.passwordChange)&&!button(copy.deleteAccount),'The local preview labels the fixture, disables password delivery and protects its admin account from deletion');
+  await act(async()=>document.querySelector('form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));check(requests.length===requestsBefore,'Even a synthetic preview form submission cannot reach account writes');
+ }
+ for(const locale of ['de','sq','en'])for(const provider of ['E-Mail','Google']){
+  activeLocale=locale;const copy=getMessages(locale).customer,phrase={de:'KONTO LÖSCHEN',sq:'FSHI LLOGARINË',en:'DELETE ACCOUNT'}[locale];
+  state={account:{email:'sample@example.test',name:'Sample Member',provider,protected:false},preview:true,deletionReady:false,deletionStarted:false};const count=requests.length,refreshes=globalThis.fixtureRefreshes;await remount();
+  check(requests.length===count,'A simulated account never requests the real account API');
+  check(JSON.stringify([...document.querySelectorAll('.account-settings-group>section>h2')].map(el=>el.textContent))===JSON.stringify([copy.yourAccount,copy.accountPassword,copy.appearance,copy.deleteAccount]),'Settings follow account, password, appearance and deletion order');
+  check(!document.querySelector('.account-name-help')&&input(copy.fullName).parentElement.contains(button(copy.saveName)),'The full name and icon save button form one simple row without helper copy');
+  await type(input(copy.fullName),'Updated Sample');await submitForm(document.querySelector('.account-name-form'));check(input(copy.fullName).value==='Updated Sample'&&requests.length===count&&globalThis.fixtureRefreshes===refreshes,'Preview name saves stay local and never change the real seed session');
+  if(provider==='E-Mail'){
+   await click(button(copy.passwordChange));check(document.querySelector('.account-password-settings [role="status"]').textContent===copy.previewPasswordLinkSent,'A preview email-link result is clearly simulated');
+   const source=button(copy.previewPasswordForm);await click(source);check(document.querySelector('[role="dialog"]')&&document.querySelector('[role="dialog"]').contains(document.activeElement),'The preview password form opens in an accessible standard modal');
+   const form=document.querySelector('[role="dialog"] form');await type(form.querySelector('[name="password"]'),'preview-password-123');await type(form.querySelector('[name="passwordRepeat"]'),'different-password-123');await submitForm(form);check(document.querySelector('[role="dialog"] [role="alert"]').textContent===copy.passwordMismatch,'Password preview checks the matching repeated value');
+   await type(form.querySelector('[name="passwordRepeat"]'),'preview-password-123');await submitForm(form);await act(async()=>new Promise(resolve=>setTimeout(resolve,0)));check(!document.querySelector('[role="dialog"]')&&document.activeElement===source,'Preview password completion clears the fields and restores the exact opener focus');
+  }else{
+   check(!document.querySelector('.account-password-settings a'),'Preview Google password management never opens a real provider');await click(button(copy.openGoogleAccount));check(document.querySelector('.account-password-settings [role="status"]').textContent===copy.previewGooglePassword,'Google preview explains its simulated provider action');
+  }
+  await click(button(copy.deleteAccount));
+  if(provider==='E-Mail'){await type(input(copy.currentPassword),'preview-proof');await click(button(copy.confirmPassword));}else{check(!input(copy.currentPassword),'Google proof has no password field');await click(button(copy.googleReauth));}
+  const confirmation=input(copy.enterDeletePhrase.replace('{phrase}',phrase));check(confirmation&&document.activeElement===confirmation&&button(copy.deletePermanently).disabled,'Proof leads to a focused explicit confirmation, without deleting');
+  await type(confirmation,'wrong');check(button(copy.deletePermanently).disabled,'A vague preview confirmation cannot delete the fixture');await type(confirmation,phrase);await click(button(copy.deletePermanently));check(!dialog()&&document.querySelector('[role="status"]').textContent===copy.previewAccountDeleted,'Only the explicit confirmation simulates account deletion');await act(async()=>new Promise(resolve=>setTimeout(resolve,25)));check(document.activeElement===document.querySelector('.account-settings>h2'),'Completed deletion focuses the persistent account heading');
+  await click(button(copy.previewReset));check(input(copy.fullName).value==='Sample Member'&&button(copy.deleteAccount),'Reset restores the fixture and its original fields');check(requests.length===count&&globalThis.fixtureRefreshes===refreshes,'All preview steps preserve real account, email and session APIs');
+ }
+ activeLocale='de';
+
  state={account:null,deletionReady:false,deletionStarted:false};await remount();
  check(document.querySelector('a').getAttribute('href')==='/anmelden?weiter=/einstellungen'&&!button('Konto löschen'),'Signed-out or native-only views link back to login without destructive controls');
  for(const [locale,phrase] of [['de','KONTO LÖSCHEN'],['sq','FSHI LLOGARINË'],['en','DELETE ACCOUNT']]){

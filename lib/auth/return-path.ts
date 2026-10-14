@@ -6,6 +6,6 @@ export function validatedReturnPath(value:unknown,origin:string,fallback="/?besu
   const url=new URL(value,origin),decoded=decodeURIComponent(url.pathname);
   if(/[\u0000-\u001f\u007f\\]/.test(decoded))return fallback;
   const path=stripLocalePrefix(decoded);
-  return url.origin===origin&&!/^\/(?:signin-with-chatgpt|signout-with-chatgpt|callback|auth\/bestaetigen)(?:\/|$)/.test(path)?`${url.pathname}${url.search}${url.hash}`:fallback;
+  return url.origin===origin&&!/^\/(?:signin-with-chatgpt|signout-with-chatgpt|dev|callback|auth\/bestaetigen)(?:\/|$)/.test(path)?`${url.pathname}${url.search}${url.hash}`:fallback;
  }catch{return fallback;}
 }

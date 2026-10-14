@@ -23,20 +23,16 @@ export function ThemeSettings() {
   return (
     <section className="theme-settings" aria-labelledby="appearance-title">
       <h2 id="appearance-title">{t("customer.appearance")}</h2>
-      <p id="appearance-description">{t("customer.appearanceNote")}</p>
-      <RadioGroup className="theme-options" value={selected} onValueChange={setTheme} disabled={!mounted} aria-labelledby="appearance-title" aria-describedby="appearance-description">
+      <RadioGroup className="theme-options" value={selected} onValueChange={setTheme} disabled={!mounted} aria-labelledby="appearance-title" aria-describedby="appearance-save-note">
         {options.map(({ value, label, description, Icon }) => (
           <label key={value} className="theme-option" data-selected={selected === value} htmlFor={`theme-${value}`}>
-            <span className="theme-option-top">
-              <Icon size={23} strokeWidth={1.7} aria-hidden="true" />
-              <RadioGroupItem id={`theme-${value}`} value={value} aria-label={label} />
-            </span>
-            <strong>{label}</strong>
-            <span className="theme-option-description">{description}</span>
+            <Icon className="theme-option-icon" size={20} strokeWidth={1.7} aria-hidden="true" />
+            <span className="theme-option-text"><strong>{label}</strong>{value==="system"&&<span className="theme-option-description">{description}</span>}</span>
+            <RadioGroupItem id={`theme-${value}`} value={value} aria-label={label} />
           </label>
         ))}
       </RadioGroup>
-      <p className="settings-save-note">{t("customer.themeSaved")}</p>
+      <p id="appearance-save-note" className="settings-save-note">{t("customer.themeSaved")}</p>
     </section>
   );
 }
