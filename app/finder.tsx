@@ -167,6 +167,7 @@ export default function Finder({
       ) : (
         <main className="landing-page">
           <section className="landing-hero" aria-labelledby="hero-title">
+            {/* eslint-disable-next-line @next/next/no-img-element -- Preoptimized static WebP variants preserve responsive selection and hero priority across all runtimes. */}
             <img
               className="landing-hero-image"
               src="/workshop-1536.webp"
@@ -249,6 +250,7 @@ export default function Finder({
             aria-labelledby="trust-title"
           >
             <figure className="trust-visual">
+              {/* eslint-disable-next-line @next/next/no-img-element -- Preoptimized static WebP variants already provide responsive delivery without a runtime optimizer. */}
               <img
                 src="/diagnostics-1024.webp"
                 srcSet="/diagnostics-640.webp 640w, /diagnostics-1024.webp 1024w, /diagnostics-1536.webp 1536w"

@@ -7,6 +7,7 @@ export function Brand() {
   const { t } = useI18n();
   return (
     <LocaleAnchor className="brand" href="/" aria-label={t("common.homeLabel")}>
+      {/* eslint-disable-next-line @next/next/no-img-element -- The compact, fixed-size logo is already optimized and served as the same static asset by every runtime. */}
       <img
         className={styles.logo}
         src="/riparim-logo-display.png"

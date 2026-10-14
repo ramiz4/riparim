@@ -32,6 +32,7 @@ export function ReviewInvitation() {
           </p>
         </div>
         <figure className="review-invitation-visual">
+          {/* eslint-disable-next-line @next/next/no-img-element -- Preoptimized static WebP variants already provide responsive delivery without a runtime optimizer. */}
           <img
             src="/review-experience-1024.webp"
             srcSet="/review-experience-640.webp 640w, /review-experience-1024.webp 1024w, /review-experience-1280.webp 1280w"
