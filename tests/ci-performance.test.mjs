@@ -5,6 +5,7 @@ import { tmpdir } from "node:os";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createNpmCacheWrapper } from "../scripts/ci-benchmark-cache.mjs";
+import { nodeSourceDigest } from "../scripts/node-release.mjs";
 import {
   quantile,
   workflowMetrics,
@@ -386,10 +387,48 @@ try {
       dependencies: { next: "1" },
     }),
     "package-lock.json": "lock",
+    ".gitignore": "ignored-receipt-input.txt\n.generated/\n",
   }))
     await writeFile(join(root, file), content);
   execFileSync("git", ["add", "."], { cwd: root });
   const baseline = await inputInventory(root);
+  assert.equal(
+    baseline.sourceDigest,
+    await nodeSourceDigest(root),
+    "benchmark source identity matches the Node receipt contract",
+  );
+  await writeFile(
+    join(root, "ignored-receipt-input.txt"),
+    "untracked ignored output",
+  );
+  assert.equal(
+    (await inputInventory(root)).sourceDigest,
+    baseline.sourceDigest,
+    "untracked ignored files do not become Node source inputs",
+  );
+  execFileSync("git", ["add", "--force", "ignored-receipt-input.txt"], {
+    cwd: root,
+  });
+  const trackedIgnored = await inputInventory(root);
+  assert.notEqual(
+    trackedIgnored.sourceDigest,
+    baseline.sourceDigest,
+    "tracked files remain source inputs even when an ignore rule matches",
+  );
+  assert.equal(trackedIgnored.sourceDigest, await nodeSourceDigest(root));
+  await writeFile(
+    join(root, "ignored-receipt-input.txt"),
+    "changed tracked receipt input",
+  );
+  const changedTrackedIgnored = await inputInventory(root);
+  assert.notEqual(
+    changedTrackedIgnored.sourceDigest,
+    trackedIgnored.sourceDigest,
+  );
+  assert.equal(
+    changedTrackedIgnored.sourceDigest,
+    await nodeSourceDigest(root),
+  );
   await writeFile(join(root, ".github/ci.yml"), "changed workflow");
   await writeFile(join(root, "scripts/test.mjs"), "changed test harness");
   await writeFile(
@@ -397,6 +436,7 @@ try {
     JSON.stringify({ scripts: { test: "new" }, dependencies: { next: "1" } }),
   );
   const candidate = await inputInventory(root);
+  assert.equal(candidate.sourceDigest, await nodeSourceDigest(root));
   assert.notEqual(candidate.sourceDigest, baseline.sourceDigest);
   assert.equal(candidate.applicationDigest, baseline.applicationDigest);
   assert.equal(candidate.catalogueDigest, baseline.catalogueDigest);

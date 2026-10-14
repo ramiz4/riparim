@@ -4,6 +4,7 @@ import { readFile, writeFile, mkdir, readdir, mkdtemp } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
+import { nodeSourceDigest } from "./node-release.mjs";
 
 // Medians use the midpoint; P95 uses nearest rank, as in the issue baseline.
 export function quantile(values, percentile) {
@@ -171,7 +172,7 @@ export async function inputInventory(root = process.cwd()) {
   }
   return {
     schema: 1,
-    sourceDigest: digest(files),
+    sourceDigest: await nodeSourceDigest(root),
     applicationDigest: digest(applicationFiles),
     catalogueDigest: digest(
       files.filter(
