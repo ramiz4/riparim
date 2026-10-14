@@ -1,3 +1,4 @@
+import { logNodePhase, prepareNodeTestBuild } from "./helpers/node-build.mjs";
 import { catalogueFixtureKey } from "./helpers/catalogue-fixture-key.mjs";
 import assert from "node:assert/strict";
 import { assertPrivacyOutput } from "./helpers/privacy-output.mjs";
@@ -17,13 +18,16 @@ import { setTimeout as delay } from "node:timers/promises";
 const run = promisify(execFile),
   directory = await mkdtemp(join(tmpdir(), "riparim-node-http-"));
 let server,
-  logs = "";
+  logs = "",
+  httpStarted;
+const source = join(directory, "source");
 async function start(
   environment,
   port,
   hostname = "127.0.0.1",
   fixture = true,
 ) {
+  const started = performance.now();
   server = spawn(
     process.execPath,
     [
@@ -36,7 +40,7 @@ async function start(
       "--port",
       String(port),
     ],
-    { env: environment, stdio: ["ignore", "pipe", "pipe"] },
+    { cwd: source, env: environment, stdio: ["ignore", "pipe", "pipe"] },
   );
   server.stdout.on("data", (data) => (logs += data));
   server.stderr.on("data", (data) => (logs += data));
@@ -44,7 +48,11 @@ async function start(
     if (server.exitCode !== null) throw new Error(logs);
     try {
       const response = await fetch(`http://127.0.0.1:${port}/api/session`);
-      if (response.ok || response.status === 503) return;
+      if (response.ok || response.status === 503) {
+        logNodePhase("runtime startup", started);
+        httpStarted = performance.now();
+        return;
+      }
     } catch {}
     await delay(100);
   }
@@ -52,20 +60,23 @@ async function start(
 }
 async function stop() {
   if (!server) return;
+  logNodePhase("runtime HTTP", httpStarted);
+  const started = performance.now();
+  if (server.exitCode !== null || server.signalCode !== null) {
+    server = undefined;
+    return;
+  }
   const closed = new Promise((resolve) => server.on("close", resolve));
   server.kill("SIGTERM");
   await closed;
   server = undefined;
+  logNodePhase("runtime shutdown", started);
 }
 try {
-  await run(process.execPath, ["scripts/build-node.mjs"], {
-    timeout: 180000,
-    maxBuffer: 4 * 1024 * 1024,
-    env: {
-      ...process.env,
-      RIPARIM_DATA_DIR: directory,
-      NEXT_TELEMETRY_DISABLED: "1",
-    },
+  await prepareNodeTestBuild({
+    root: process.cwd(),
+    source,
+    environment: { ...process.env, RIPARIM_DATA_DIR: directory },
   });
   const socket = createServer();
   await new Promise((resolve) => socket.listen(0, "127.0.0.1", resolve));
@@ -81,6 +92,7 @@ try {
       NEXT_TELEMETRY_DISABLED: "1",
     };
   await run(process.execPath, [".node-runtime/command.mjs", "migrate"], {
+    cwd: source,
     env: environment,
   });
   // Keep the real catalogue immutable. This isolated DB has only synthetic rows.
@@ -367,13 +379,18 @@ try {
       run(
         process.execPath,
         [".node-runtime/server.mjs", "--port", String(port)],
-        { env: { ...environment, SITE_ORIGIN: value }, timeout: 10000 },
+        {
+          cwd: source,
+          env: { ...environment, SITE_ORIGIN: value },
+          timeout: 10000,
+        },
       ),
       /SITE_ORIGIN must be an HTTP/,
     );
   // The executable retry path awaits all work and does not need a Worker context.
   await assert.rejects(
     run(process.execPath, [".node-runtime/command.mjs", "notifications"], {
+      cwd: source,
       env: environment,
     }),
     /Provide the notification event ID/,
@@ -385,7 +402,7 @@ try {
       "notifications",
       "riparim-review-missing-event",
     ],
-    { env: environment },
+    { cwd: source, env: environment },
   );
   await stop();
   const maintenance = {
@@ -418,8 +435,8 @@ try {
     ),
   );
   await stop();
-  await providerExitHttp({ directory, port, start, stop });
-  await pocketbaseNodeHttp({ directory, port, start, stop });
+  await providerExitHttp({ directory, port, start, stop, source });
+  await pocketbaseNodeHttp({ directory, port, start, stop, source });
   console.log(
     "Actual Node production server: synthetic public pages/APIs, drafts, forged identity, auth refusal, private storage, socket/proxy rate limits, async isolation and outbox command passed",
   );

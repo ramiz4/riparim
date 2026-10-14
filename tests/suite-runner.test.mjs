@@ -69,6 +69,7 @@ async function setup({
   simpleFailure = false,
   hang = false,
   hangContract = false,
+  sharedBuild = false,
   orphan = false,
   platform,
 } = {}) {
@@ -81,6 +82,7 @@ async function setup({
   const contract = join(cwd, "contract.mjs");
   await copyFile(processFixture, contract);
   await copyFile(processFixture, join(cwd, "grandchild.mjs"));
+  if (sharedBuild) await copyFile(processFixture, join(cwd, "build.mjs"));
   const suites = [];
   for (let i = 0; i < count; i++) {
     const suite = join(cwd, `suite-${i}.mjs`);
@@ -102,6 +104,7 @@ async function setup({
       simpleFailure,
       hang,
       hangContract,
+      sharedBuild: sharedBuild ? join(cwd, "build.mjs") : undefined,
       orphan,
       platform,
     }),
@@ -315,6 +318,36 @@ try {
     const result = await running.result;
     await stopped(await records(state.events));
     assert.equal(result.code, code, result.stdout + result.stderr);
+    await cleaned(state);
+  }
+  for (const [signal, code] of [
+    ["SIGINT", 130],
+    ["SIGTERM", 143],
+  ]) {
+    const state = await setup({ sharedBuild: true, count: 1 }),
+      running = launch(state.config);
+    for (let attempt = 0; attempt < 100; attempt++) {
+      try {
+        if (
+          (await records(state.events)).some(
+            (event) => event.type === "grandchild",
+          )
+        )
+          break;
+      } catch (error) {
+        if (error.code !== "ENOENT") throw error;
+      }
+      await delay(20);
+    }
+    const events = await records(state.events);
+    assert.deepEqual(
+      events.map((event) => event.type),
+      ["contract", "build", "grandchild"],
+      "shared build is managed after contract before suites",
+    );
+    running.child.kill(signal);
+    assert.equal((await running.result).code, code);
+    await stopped(await records(state.events));
     await cleaned(state);
   }
   console.log(

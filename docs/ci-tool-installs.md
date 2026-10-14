@@ -1,7 +1,8 @@
 # Locked tool-job installations
 
-The verification job still installs the complete root `package-lock.json` with
-`npm run install:ci`. Only the three following tool jobs use independent private
+Each verification branch (`quality`, `node`, `workers`) installs the complete
+root `package-lock.json` with `npm run install:ci`; the final gate installs no
+dependencies. Only the three following tool jobs use independent private
 manifests and npm v3 locks under `.github/tools/`:
 
 | Job               | Direct root-pinned packages                                      | Purpose                                                                               |

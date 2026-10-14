@@ -9,7 +9,7 @@ import {
   rm,
   writeFile,
 } from "node:fs/promises";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 
 // Bind the compiled output to the complete tracked input, including the lock.
 export async function nodeSourceDigest(root = process.cwd()) {
@@ -75,6 +75,9 @@ export async function assertNodeInputs(root = process.cwd()) {
     );
 }
 export async function nodeOutputDigest(root = process.cwd()) {
+  for (const name of [".next", ".node-runtime"])
+    if (!(await lstat(join(root, name))).isDirectory())
+      throw Error("Node build roots must be regular directories.");
   const files = [];
   for (const name of await readdir(join(root, ".next"))) {
     if (excludedNext.has(name)) continue;
@@ -91,6 +94,8 @@ export async function nodeOutputDigest(root = process.cwd()) {
   );
   const hash = createHash("sha256");
   for (const file of files.sort()) {
+    if (!(await lstat(join(root, file))).isFile())
+      throw Error("Node build contains a link or special file.");
     if (privatePath(file)) throw Error("Private material in Node build.");
     hash.update(file + "\0");
     hash.update(
@@ -109,8 +114,10 @@ async function regularTree(path) {
   else if (!stat.isFile())
     throw Error("Node build contains a link or special file.");
 }
-export async function packageNodeRelease(root, commit) {
+export async function validateNodeBuild(root = process.cwd()) {
   await assertNodeInputs(root);
+  if (!(await lstat(join(root, ".node-runtime/build.json"))).isFile())
+    throw Error("Node build receipt must be a regular file.");
   const receipt = JSON.parse(
     await readFile(join(root, ".node-runtime/build.json"), "utf8"),
   );
@@ -120,6 +127,35 @@ export async function packageNodeRelease(root, commit) {
     throw Error(
       "Node build does not match the committed source. Rebuild before packaging.",
     );
+  return receipt;
+}
+export async function copyNodeBuild(source, target) {
+  if (resolve(source) === resolve(target))
+    throw Error("Node build copy requires different source and target roots.");
+  const receipt = await validateNodeBuild(source);
+  await assertNodeInputs(target);
+  if (receipt.sourceDigest !== (await nodeSourceDigest(target)))
+    throw Error("Node build does not match the target fixture source.");
+  for (const name of [".next", ".node-runtime"])
+    await rm(join(target, name), { recursive: true, force: true });
+  await mkdir(join(target, ".next"));
+  for (const name of await readdir(join(source, ".next"))) {
+    if (excludedNext.has(name)) continue;
+    await cp(join(source, ".next", name), join(target, ".next", name), {
+      recursive: true,
+    });
+  }
+  await mkdir(join(target, ".node-runtime"));
+  for (const name of ["server.mjs", "command.mjs", "install.mjs", "build.json"])
+    await cp(
+      join(source, ".node-runtime", name),
+      join(target, ".node-runtime", name),
+    );
+  await validateNodeBuild(source);
+  return validateNodeBuild(target);
+}
+export async function packageNodeRelease(root, commit) {
+  const receipt = await validateNodeBuild(root);
   const artifacts = join(root, "artifacts"),
     stage = join(root, ".sites-runtime/node-package"),
     node = join(stage, "node");

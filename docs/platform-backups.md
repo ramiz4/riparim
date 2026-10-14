@@ -1,6 +1,6 @@
 # Authkonfiguration, D1 und R2 sichern
 
-Der tägliche Workflow `Platform Backup` ergänzt die bestehende
+Der tägliche Workflow `Backup: Platform` ergänzt die bestehende
 [Authdaten-Sicherung](auth-backups.md). Er läuft um 03:43 UTC (04:43 Schweizer
 Winterzeit, 05:43 Sommerzeit) ausschließlich auf `main`, mit 14 Tagen Aufbewahrung.
 Der Entschlüsselungsschlüssel ist derselbe verifizierte RSA-Schlüssel im

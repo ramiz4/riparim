@@ -7,6 +7,18 @@ import { catalogueReleasePlan } from "./catalogue-release-plan.mjs";
 import { releaseBuildTarget } from "./release-policy.mjs";
 
 if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
+  let phaseStarted = performance.now();
+  function finishPhase(phase) {
+    const ended = performance.now();
+    console.log(
+      "[ci-phase] " +
+        JSON.stringify({
+          phase: "renderer." + phase,
+          durationMs: Math.round(ended - phaseStarted),
+        }),
+    );
+    phaseStarted = ended;
+  }
   const config = JSON.parse(
     await readFile("dist/server/wrangler.json", "utf8"),
   );
@@ -77,6 +89,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
       throw Error(
         "Isolated release catalogue differs from canonical published count",
       );
+    finishPhase("seed");
     await rm("dist/client/__public", { recursive: true, force: true });
     let pages = 0;
     for (const locale of ["de", "sq", "en"]) {
@@ -132,6 +145,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
         await writeFile(file.replace(/\.html$/, ".rsc"), await rsc.text());
       }
     }
+    finishPhase("public");
     await rm("dist/client/__private", { recursive: true, force: true });
     const privatePaths = JSON.parse(
       await readFile("data/deferred-pages.json", "utf8"),
@@ -163,6 +177,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
           await mkdir(dirname(file), { recursive: true });
           await writeFile(file, body);
         }
+    finishPhase("private");
     await runtime.setOptions({
       ...options,
       bindings: {
@@ -199,6 +214,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
         await rsc.text(),
       );
     }
+    finishPhase("provider");
     await runtime.setOptions({
       ...options,
       bindings: {
@@ -248,6 +264,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
         if (rsc.status !== 200) throw Error("Public RSC shell failed: " + path);
         await writeFile(file.replace(/\.html$/, ".rsc"), await rsc.text());
       }
+    finishPhase("shells");
     await writeFile(
       "dist/public-release.json",
       JSON.stringify(
@@ -273,6 +290,8 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
       `Rendered ${pages} public release documents from isolated canonical data; no production or provider access`,
     );
   } finally {
+    phaseStarted = performance.now();
     await runtime.dispose();
+    finishPhase("dispose");
   }
 }

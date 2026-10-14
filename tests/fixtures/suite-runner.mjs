@@ -5,4 +5,6 @@ const options = JSON.parse(await readFile(process.argv[2], "utf8"));
 // Test-only platform contract simulation; this is not native Windows execution.
 if (options.platform)
   Object.defineProperty(process, "platform", { value: options.platform });
+if (options.sharedBuild)
+  options.beforeSuites = (run) => run(options.sharedBuild);
 process.exitCode = await runSuites(options);
