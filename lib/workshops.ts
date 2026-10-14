@@ -1,15 +1,8 @@
+import { storedServices, storedSentinels } from "@/lib/i18n/canonical-values";
 import type { OpeningHours } from "./opening-hours";
-export const services = [
-  "Alle Leistungen",
-  "Inspektion & Wartung",
-  "Diagnose & Elektronik",
-  "Bremsen & Fahrwerk",
-  "Motor & Getriebe",
-  "Karosserie & Lack",
-  "Reifen & Klima",
-];
+export const services: string[] = Object.values(storedServices);
 export const cities = [
-  "Ganz Kosovo",
+  storedSentinels.allCities,
   "Prishtina",
   "Prizren",
   "Peja",
@@ -27,7 +20,7 @@ export const cities = [
   "Obiliq",
 ];
 export const brands = [
-  "Alle Marken",
+  storedSentinels.allBrands,
   "Volkswagen",
   "Audi",
   "SEAT",
@@ -133,18 +126,19 @@ export function findWorkshops(
   directory: Workshop[],
   service: string,
   city: string,
-  brand = "Alle Marken",
-  language = "Alle Sprachen",
+  brand = storedSentinels.allBrands,
+  language = storedSentinels.allLanguages,
 ) {
   return directory.filter(
     (w) =>
       (service === services[0] || w.services.includes(service)) &&
       (city === cities[0] || w.city === city) &&
-      (brand === "Alle Marken" ||
-        w.brands.includes("Alle Marken") ||
+      (brand === storedSentinels.allBrands ||
+        w.brands.includes(storedSentinels.allBrands) ||
         w.brands.includes(brand) ||
         w.brands.length === 0) &&
-      (language === "Alle Sprachen" || w.languages.includes(language)),
+      (language === storedSentinels.allLanguages ||
+        w.languages.includes(language)),
   );
 }
 export function contactHref(

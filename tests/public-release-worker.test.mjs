@@ -249,7 +249,7 @@ if (config.name === "riparim") {
       "The landing document does not serialize the workshop catalogue",
     );
     const hidden = await runtime.dispatchFetch(
-      "https://riparim.com/__public/de/werkstaetten.html",
+      "https://riparim.com/__public/de/workshops.html",
     );
     assert.equal(hidden.status, 404);
     await hidden.text();
@@ -454,8 +454,8 @@ if (config.name === "riparim") {
             );
         }
     for (const path of [
-      "/__private/de/bewertungen.html",
-      "/__private/en/verwaltung.rsc",
+      "/__private/de/reviews.html",
+      "/__private/en/admin.rsc",
     ]) {
       const internal = await runtime.dispatchFetch(
         "https://riparim.com" + path,

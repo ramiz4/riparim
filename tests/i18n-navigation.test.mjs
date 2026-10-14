@@ -78,6 +78,16 @@ assert.equal(
   "/?besuche=1",
   "Encoded callback paths also cannot loop",
 );
+for (const callback of [
+  "/auth/confirm",
+  "/en/auth/confirm",
+  "/sq/%61uth/confirm",
+])
+  assert.equal(
+    safeReturnPath(callback + "?code=secret"),
+    "/?besuche=1",
+    "English internal callbacks cannot create return loops",
+  );
 assert.equal(safeReturnPath("/en/signin-with-chatgpt"), "/?besuche=1");
 assert.equal(
   safeReturnPath("/en/callback"),
@@ -89,6 +99,16 @@ assert.equal(
   profileSearchHref("/sq/serviset?sprache=sq&ort=prizren", []),
   "/sq/serviset?ort=prizren&sprache=sq",
   "Catalogue return targets retain locale and canonical filter values",
+);
+assert.equal(
+  pageIdentityPath("/anmelden"),
+  "/login",
+  "German public URLs resolve an English source identity",
+);
+assert.equal(
+  pageIdentityPath("/sq/servis/fixture-id"),
+  "/workshop/fixture-id",
+  "Translated profile URLs resolve an English source identity",
 );
 const routes = [
   ["/", "/sq", "/en"],
@@ -130,7 +150,7 @@ const nativePages = (await readdir("app/[locale]", { recursive: true }))
       file.replace(/(?:^|\/)page\.tsx$/, "").replace("[id]", "fixture-id"),
   );
 assert.deepEqual(
-  routes.map((route) => route[0]).sort(),
+  routes.map((route) => stripLocalePrefix(route[2])).sort(),
   nativePages.sort(),
   "Every native page has a reviewed translation",
 );
@@ -141,7 +161,10 @@ for (const translations of routes)
         localizeHref(source + "?ort=prizren#bewerten", locale),
         translations[i] + "?ort=prizren#bewerten",
       );
-      assert.equal(pageIdentityPath(source), translations[0]);
+      assert.equal(
+        pageIdentityPath(source),
+        stripLocalePrefix(translations[2]),
+      );
       assert(isPagePath(source));
       assert.equal(
         localizeHref(

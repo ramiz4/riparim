@@ -1,223 +1,224 @@
-# Täglicher geprüfter Werkstattimport
+# Daily verified workshop import
 
-Die lokale Codex-Automation **Riparim: täglicher geprüfter Werkstattimport**
-gehört zum Projekt `/Users/ramizloki/workspace/riparim` und verwendet
-`gpt-6.1-sol` mit Reasoning `high`. Ihr Auftrag umfasst Recherche, Quellen- und
-Google-Identitätsprüfung, Dublettenabgleich, Dry Run, Katalogimport,
-Übersetzungen, geprüften PR, Squash-Merge, Release und Live-Abnahme.
-Der Nutzer hat diese wiederkehrenden Schritte ausdrücklich autorisiert;
-tägliche erneute Freigaben sind nicht erforderlich. Kontaktaufnahme ist untersagt.
+The local Codex automation **Riparim: täglicher geprüfter Werkstattimport**
+(“Riparim: daily verified workshop import”) belongs to the project
+`/Users/ramizloki/workspace/riparim` and uses
+`gpt-6.1-sol` with `high` reasoning. Its assignment includes research, source and
+Google identity verification, duplicate comparison, dry run, catalogue import,
+translations, a reviewed PR, squash merge, release, and live acceptance.
+The user has explicitly authorized these recurring steps;
+new daily approvals are not required. Contacting businesses is prohibited.
 
-## Zeitplan und Laufzeit
+## Schedule and runtime
 
-Gewünschter Termin ist täglich **09:00 Europe/Berlin**. Die derzeitige
-Automationsschnittstelle speichert eine lokale Uhrzeit ohne separates
-Zeitzonenfeld. Das Desktopprofil verwendet Europe/Zurich, dessen aktuelle
-UTC-Offsets und Sommerzeitwechsel mit Europe/Berlin übereinstimmen. Der
-Zeitplan wird deshalb lokal auf 09:00 gespeichert. Das ist keine separat
-gespeicherte Berlin-Zeitzone: bei Änderung der Desktopzeitzone den Zeitplan
-vor weiterer Aktivierung erneut prüfen. Am 11.10.2026 entspricht der Termin
-07:00 UTC. Die Automation wurde nach erfolgreicher Live-Abnahme am
-11.10.2026 lokal als **ACTIVE** bestätigt; nächster Termin ist 11.10.2026
-09:00 lokal beziehungsweise 07:00 UTC. Eine pausierte Automation hat keinen
-ausführbaren nächsten Lauf.
+The requested time is daily at **09:00 Europe/Berlin**. The current
+automation interface stores a local time without a separate
+timezone field. The desktop profile uses Europe/Zurich, whose current
+UTC offsets and daylight-saving transitions match Europe/Berlin. The
+schedule is therefore stored locally at 09:00. This is not a separately
+stored Berlin timezone: if the desktop timezone changes, check the schedule
+again before further activation. On 2026-10-11, the scheduled time
+corresponds to 07:00 UTC. After successful live acceptance on
+2026-10-11, the automation was locally confirmed as **ACTIVE**; the next scheduled time
+was 2026-10-11 at 09:00 local, or 07:00 UTC. A paused automation has no
+executable next run.
 
-Das ist ein ausführbarer lokaler Agentenauftrag, kein Cloud-Cron. Computer
-und Codex-App müssen laufen und auf Repository und benötigte Verbindungen
-zugreifen können. Der Zugang über GitHub CLI, Cloudflare-Connector und das
-Browserprofil `ramizloki82@googlemail.com` wurde bei Einrichtung geprüft.
-Browseraktionen sind über die vorhandene native Oberfläche möglich; die
-Browserextension ist bislang nur im anderen Profil verbunden. Die Secrets
-liegen im Produktions-Worker und werden nicht an die Automation exportiert.
-Wrangler ist lokal nicht angemeldet. Remote-D1-Lesezugriff erfolgt über den
-Cloudflare-Connector; das Deployment übernimmt GitHub Actions.
-Anmeldung und Quoten können zwischen Läufen ablaufen und werden vor jedem
-Lauf erneut geprüft. Eine Verbindung in dieser Sitzung beweist keinen
-dauerhaften Zugriff eines späteren geplanten Laufs.
+This is an executable local agent assignment, not a cloud cron. The computer
+and Codex app must be running and able to access the repository and required
+connections. Access through GitHub CLI, the Cloudflare connector, and the
+browser profile `ramizloki82@googlemail.com` was verified during setup.
+Browser actions are possible through the existing native UI; the
+browser extension is currently connected only in the other profile. Secrets
+live in the production Worker and are not exported to the automation.
+Wrangler is not logged in locally. Remote D1 read access uses the
+Cloudflare connector; GitHub Actions handles deployment.
+Authentication and quotas can expire between runs and are checked again before every
+run. A connection in this session does not prove
+persistent access for a later scheduled run.
 
-## Gemeinsame Sperre und Fortsetzung
+## Shared lock and continuation
 
-Vor Synchronisierung von main und vor jeder Katalogbearbeitung aus einem
-isolierten Worktree ausführen:
+Before synchronizing main and before any catalogue edits, run the following
+from an isolated worktree:
 
 ```sh
-node scripts/daily-workshop-import.mjs acquire <eindeutige-chat-oder-lauf-id>
+node scripts/daily-workshop-import.mjs acquire <unique-chat-or-run-id>
 node scripts/daily-workshop-import.mjs status
 ```
 
-Die Sperre liegt im gemeinsamen Git-Verzeichnis und gilt für alle Worktrees
-dieses Repositorys auf diesem Host. Ein paralleler Erwerb schlägt fehl. Der
-ausgegebene Token gehört zum Lauf, ist kein Providergeheimnis und dient nur
-der kontrollierten Freigabe. Er bleibt außerhalb von Git in der lokalen
-Sperrdatei. Sperre bis zum Abschluss von PR, Release und Liveprüfung halten.
+The lock lives in the shared Git directory and applies to all worktrees
+of this repository on this host. Concurrent acquisition fails. The
+returned token belongs to the run, is not a provider secret, and is used only
+for controlled release. It stays outside Git in the local
+lock file. Hold the lock until the PR, release, and live checks are complete.
 
 ```sh
-node scripts/daily-workshop-import.mjs release <passender-lauf-token>
+node scripts/daily-workshop-import.mjs release <matching-run-token>
 ```
 
-Ein Abbruch lässt die Sperre absichtlich bestehen. Keine automatische
-Zeitüberschreitung und keine Freigabe nur anhand des Alters. Besitzerchat,
-Worktree, datiertes Manifest, offene Import-PRs und laufende Release-Jobs
-prüfen. Läuft der Besitzer noch, neuen Lauf ohne Mutation beenden. Ist er
-beendet, die Aufgabe im bestehenden Worktree und Manifest fortsetzen; erst
-nach geklärtem Import-/Deploymentausgang den passenden Token freigeben.
-Das verhindert einen zweiten Import nach unbekanntem Teilerfolg.
-Bei einer fehlenden oder beschädigten Sperrdatei nicht automatisch löschen.
-Die Sperre schützt kooperierende Läufe auf diesem Host; zusätzliche Hosts
-dürfen dieselbe Routine erst nach Einrichtung einer gemeinsamen Sperre starten.
+An interrupted run deliberately leaves the lock in place. There is no automatic
+timeout and no release based only on its age. Check the owning chat,
+worktree, dated manifest, open import PRs, and running release jobs.
+If the owner is still running, end the new run without mutations. If it has
+ended, continue the task in the existing worktree and manifest; release
+the matching token only after the import/deployment outcome is established.
+This prevents a second import after an unknown partial success.
+Do not automatically delete a missing or damaged lock file.
+The lock protects cooperating runs on this host; additional hosts
+may start the same routine only after a shared lock has been established.
 
-## Vorprüfung und kostenfreier Betrieb
+## Preflight and operation without additional cost
 
 ```sh
-node scripts/daily-workshop-import.mjs health <profil-id> <profil-id>
+node scripts/daily-workshop-import.mjs health <profile-id> <profile-id>
 ```
 
-Die Vorprüfung liest den öffentlichen Livebestand und Katalog-/Profilseiten
-in DE/SQ/EN. HTTP-Fehler, Error 1102, fehlende Überschrift, falsche Sprache
-und unvollständige HTML-Antworten sperren die Veröffentlichung. HTTP200
-allein reicht wegen möglicher Streamingabbrüche nicht. Vor Aktivierung und
-nach jedem Release außerdem Cloudflare-Outcome und aktive Version abgleichen.
-Die Prüfung schreibt keine Produktionsdaten und sendet keine Nachrichten.
+Preflight reads the public live inventory and catalogue/profile pages
+in DE/SQ/EN. HTTP errors, Error 1102, a missing heading, incorrect language,
+and incomplete HTML responses block publication. HTTP 200
+alone is insufficient because streaming can abort. Before activation and
+after every release, also compare Cloudflare outcomes and the active version.
+The check writes no production data and sends no messages.
 
-Der Nutzer wünscht **keine zusätzlichen Kosten**. Neue Google-Identitäten
-werden **immer ausschließlich über die öffentliche Google-Maps-Oberfläche**
-im bestätigten Browserprofil geprüft. Die Place-ID aus dem sichtbaren
-offiziellen Maps-Link lesen und direkt mit einer absichtlich unpassenden
-Ersatzsuche zurückprüfen; Name, normalisierte Telefonnummer, Standort und
-aktiven Geschäftsstatus gegen unabhängige Quellen abgleichen. Ein fehlender
-oder widersprüchlicher Nachweis führt zur Rückstellung des Kandidaten.
+The user requests **no additional costs**. New Google identities
+are **always checked exclusively through the public Google Maps UI**
+in the verified browser profile. Read the Place ID from the visible
+official Maps link and immediately verify it again with a deliberately mismatched
+fallback search; compare name, normalized phone number, location, and
+active business status against independent sources. Missing
+or conflicting evidence defers the candidate.
 
-Die Routine verwendet keine eigenen API-Schlüssel, Places-/Maps-API- oder
-SDK-Aufrufe, eingebetteten Karten oder API-Finder. Eine unbekannte kostenlose
-API-Restquote sperrt diese API-Wege, aber nicht die öffentliche Maps-Prüfung.
-Keine Quoten, produktiven Widgets oder Providerfreigaben für den Import ändern.
-Providerbedingungen gelten weiterhin; kein Scraping oder Proxy-Umweg.
-Keine kostenpflichtigen Tarife, neuen API-Abonnements oder bezahlten Ressourcen
-anlegen. Bestehende Codex-Kontingente verwenden. Dauerhaft bleiben nur Place-ID
-und eigene Prüfmetadaten; Geschäftsdaten werden unabhängig von Google belegt.
+The routine uses no owned API keys, Places/Maps API or
+SDK calls, embedded maps, or API finders. An unknown free
+API quota remaining blocks those API paths, but not the public Maps check.
+Do not change quotas, production widgets, or provider approvals for the import.
+Provider terms still apply; no scraping or proxy workaround.
+Create no paid plans, new API subscriptions, or paid resources.
+Use existing Codex allowances. Only the Place ID
+and independently authored verification metadata remain permanently; business data is substantiated independently of Google.
 
-Am 10.10.2026 wurde im Cloudflare-Dashboard **Workers Free / 10 ms CPU pro
-Anfrage** bestätigt. Die öffentliche SSR-Anwendung überschreitet diese
-Grenze; auch Version v1.11.1 erzeugt `exceededCpu` und HTTP503/Error1102.
-Bis zur bestätigten Live-Abnahme war die Routine pausiert. Der Nutzer
-hat den kostenfreien Umbau auf öffentliche HTML-Release-Artefakte autorisiert.
-Die Umsetzung rendert Katalog und Profile in DE/SQ/EN ausschließlich in
-einem lokalen workerd mit isolierter D1-Datenbank aus der Canonicalquelle.
-Keine Produktionszugänge oder Provideranfragen werden beim Rendern verwendet.
-Ein kleiner Worker-Abgleich der veröffentlichten IDs und Profilrevisionen
-geht der Asset-Auslieferung voraus: neuere Adminänderungen invalidieren nur das betroffene Profil. Es wird dann
-eine datenfreie Shell ausgeliefert und der aktuelle öffentliche Inhalt über
-die API geladen. Eine Ausblendung ergibt unmittelbar HTTP404. Bei Änderungen
-am Gesamtbestand verwendet der Katalog ebenfalls eine datenfreie Shell;
-unveränderte Profile behalten ihre vollständige statische Antwort. Anmeldedaten und öffentliche
-Riparim-Bewertungen werden nach Hydration über private Session- bzw. öffentliche
-Review-APIs geladen; RSC-Anfragen bleiben dynamisch. Direkte Zugriffe auf den
-internen Assetpfad sind gesperrt. Diese Statusabfrage zählt zu den bestehenden
-Workers-Free-Kontingenten; es wird kein zusätzlicher Tarif aktiviert.
+On 2026-10-10, the Cloudflare dashboard confirmed **Workers Free / 10 ms CPU per
+request**. The public SSR application exceeds this
+limit; version v1.11.1 also produces `exceededCpu` and HTTP 503/Error 1102.
+The routine remained paused until confirmed live acceptance. The user
+authorized the conversion to public HTML release artifacts without additional cost.
+The implementation renders the catalogue and profiles in DE/SQ/EN exclusively in
+a local workerd with an isolated D1 database from the canonical source.
+Rendering uses no production access or provider requests.
+A small Worker check of published IDs and profile revisions
+precedes asset delivery: newer admin changes invalidate only the affected profile. It then
+delivers a data-free shell and loads current public content through
+the API. Hiding a profile immediately returns HTTP 404. For changes
+to the overall inventory, the catalogue also uses a data-free shell;
+unchanged profiles retain their complete static response. Login data and public
+Riparim reviews load after hydration through private session or public
+review APIs; RSC requests stay dynamic. Direct access to the
+internal asset path is blocked. This status query counts toward existing
+Workers Free allowances; no additional plan is activated.
 
-Der bisherige Katalogleser validierte vor jedem Abruf die komplette
-unveränderte Quelle. Jetzt wird bei vorhandenem Abschlussmarker auf diese
-Prüfung verzichtet. Tatsächliche Imports behalten die vollständige Validierung,
-Revisionstests, Begrenzungen und idempotente Abschlusskennung. Die Release-CI
-prüft weiterhin Katalog und sämtliche Übersetzungshashes. Die statischen
-Artefakte werden im bestehenden unveränderlichen Releasearchiv mitgesichert.
-Der Build erzeugt zusätzlich einen Importplan aus derselben zentralen
-Statementfactory wie der Runtimeimport. Der Deploymentjob vergleicht diesen
-Plan exakt mit dem geprüften Quellcommit und führt ihn nach Migrationen,
-aber vor dem Workerupload extern über D1 aus. 50er-Batches bleiben
-wiederholbar; der Abschlussmarker kommt zuletzt. Neue Daten benötigen
-damit keine erste CPU-intensive Importanfrage im Free-Worker. Vor einem
-Katalogrelease die betroffenen Katalogtabellen lokal geschützt sichern,
-die Wiederherstellung isoliert prüfen und die Sicherung bis zur sicheren
-Übergabe erhalten; keine privaten Kundentabellen oder Secrets exportieren.
+Previously, the catalogue reader validated the entire
+unchanged source before every fetch. It now skips this
+check when a completion marker is present. Actual imports retain full validation,
+revision tests, limits, and the idempotent completion marker. Release CI
+continues to check the catalogue and every translation hash. Static
+artifacts are also backed up in the existing immutable release archive.
+The build additionally generates an import plan from the same central
+statement factory as the runtime import. The deployment job compares this
+plan exactly against the reviewed source commit and executes it externally through D1
+after migrations but before Worker upload. Batches of 50 remain
+repeatable; the completion marker comes last. New data therefore needs
+no first CPU-intensive import request in the Free Worker. Before a
+catalogue release, securely back up affected catalogue tables locally,
+verify recovery in isolation, and preserve the backup until a safe
+handover; export no private customer tables or secrets.
 
-Referenzen: [Cloudflare Limits](https://developers.cloudflare.com/workers/platform/limits/),
-[Static-Asset-Abrechnung](https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/),
-[lokale geplante Aufgaben](https://learn.chatgpt.com/docs/automations?surface=app).
+References: [Cloudflare limits](https://developers.cloudflare.com/workers/platform/limits/),
+[static asset billing](https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/),
+[local scheduled tasks](https://learn.chatgpt.com/docs/automations?surface=app).
 
-## Recherche, Abgleich und Import
+## Research, comparison, and import
 
-Gemeinden und Tätigkeiten wechseln; kleinere Orte einbeziehen. Ziel sind
-bis zu 30 belegte neue Pkw-Servicebetriebe täglich, darunter Autoelektrik,
-Fahrzeugglas und echtes Detailing/Polieren/Keramikschutz. Bei weniger als
-10 geeigneten Betrieben nur diese übernehmen und den Grund dokumentieren.
-Anhaltspunkte ohne Kontakt-, Standort-, Leistungs- und aktive eindeutige
-Google-Zuordnung bleiben zurückgestellt.
+Vary municipalities and services; include smaller towns. The target is
+up to 30 substantiated new passenger-car service businesses daily, including auto electrical work,
+automotive glass, and actual detailing/polishing/ceramic protection. If fewer than
+10 suitable businesses are found, import only those and document the reason.
+Leads without contact, location, services, and an active unambiguous
+Google assignment remain deferred.
 
-Vor Katalogmutation aktuelle öffentliche Profile, zugängliche Entwürfe,
-Place-Zuordnungen, öffentliche Admin-/Betriebsänderungen und Live-
-Entfernungsmarker über den autorisierten Zugang lesen. Nur Katalogtabellen
-und öffentliche Profilfelder abrufen; keine privaten Nutzer-/Besuchsbelege
-exportieren. Prüfe gegen `data/workshops.json`, sämtliche früheren Import-
-und Recherchemanifeste sowie Scope-/Entfernungsdateien. Historische
-Profilnamen und Kontakte entfernter IDs anhand der vorhandenen Historie
-berücksichtigen. Place-ID, internationale normalisierte Nummer, Name/Alias,
-Adresse und Standort vergleichen; Filialen separat bewerten. Unklarheit
-führt zur Rückstellung. Bei fehlendem vollständigem Liveabgleich stoppen.
+Before mutating the catalogue, read current public profiles, accessible drafts,
+Place assignments, public admin/business changes, and live
+removal markers through authorized access. Fetch only catalogue tables
+and public profile fields; export no private user/visit evidence.
+Compare against `data/workshops.json`, every earlier import
+and research manifest, and scope/removal files. Account for historical
+profile names and contacts of removed IDs using existing history.
+Compare Place ID, normalized international number, name/alias,
+address, and location; assess branches separately. Uncertainty
+means deferral. Stop if a complete live comparison is unavailable.
 
-Zuerst die bestätigten neueren Adminänderungen in die Canonicalquelle
-übernehmen; die Runtime schützt ältere Imports, ersetzt diesen Export aber
-nicht. Für neue vollständige Datensätze vorhandene Werkzeuge verwenden:
+First adopt verified newer admin changes into the canonical source;
+the runtime protects against older imports but does not replace this export.
+Use existing tools for new complete records:
 
 ```sh
-npm run catalog:merge -- /absoluter/pfad/zum/bestaetigten-import.json
-npm run catalog:merge -- /absoluter/pfad/zum/bestaetigten-import.json --write
+npm run catalog:merge -- /absolute/path/to/verified-import.json
+npm run catalog:merge -- /absolute/path/to/verified-import.json --write
 npm run catalog:check
 ```
 
-DE-Originale und SQ-/EN-Overlay vollständig ergänzen. Übersetzungshashes
-ausschließlich mit `workshopTranslationSourceHash` berechnen. Neuere Profile,
-Besitzrechte, Moderation und private Tabellen bewahren. Keine unmittelbaren
-Liveinserts; der Release übernimmt die geprüfte Canonicalquelle wiederholbar.
+Complete German originals and SQ/EN overlays. Compute translation hashes
+only with `workshopTranslationSourceHash`. Preserve newer profiles,
+ownership rights, moderation, and private tables. No direct
+live inserts; the release repeatably adopts the verified canonical source.
 
-`data/import-YYYY-MM-DD-daily.json` ist das datierte Laufmanifest. Wiederholung
-setzt dasselbe Manifest fort. Darin Quellen und Prüfzeit, Gemeindeabdeckung,
-Kandidaten/Dubletten/Rückstellungen, eigene Google-Identitätsnachweise,
-Anfragen/Quoten, Vorbestand, Dry Run, Importresultat, IDs, Übersetzungsprüfung,
-PR, Release und abschließenden Liveabgleich dokumentieren. Google-Identität
-beweist keine bestätigte Inhaberschaft. Keine kopierten aktuellen Google-
-Geschäftsdaten, Sterne, Rezensionen, Öffnungszeiten oder Fotos speichern.
+`data/import-YYYY-MM-DD-daily.json` is the dated run manifest. A repeat
+continues the same manifest. Record sources and verification time, municipality coverage,
+candidates/duplicates/deferrals, independently authored Google identity evidence,
+requests/quotas, previous inventory, dry run, import result, IDs, translation checks,
+PR, release, and final live comparison there. Google identity
+does not prove verified ownership. Store no copied current Google
+business data, stars, reviews, opening hours, or photos.
 
-## PR, Release und Nachprüfung
+## PR, release, and follow-up checks
 
-Die vollständigen Prüfungen aus `.github/workflows/ci.yml`, vollständiger
-Diff, `git diff --check` und unabhängiges Review sind verbindlich. PR und
-Commits folgen Conventional Commits. Ein neuer Katalogimport verwendet
-`feat(catalogue)`, damit Semantic Release eine Veröffentlichung erzeugt.
-Nach erfolgreichen aktuellen Checks ausschließlich Squash-Merge nach main.
-GitHub-Release mit allen laut `docs/releases.md` für das aktuelle Format
-erforderlichen Artefakten/Provenienzen und erfolgreichem Deploy-Job bestätigen.
-Kein Featurebranchdeployment und keine Sites-Veröffentlichung.
+All checks from `.github/workflows/ci.yml`, the full
+diff, `git diff --check`, and independent review are required. PRs and
+commits follow Conventional Commits. A new catalogue import uses
+`feat(catalogue)` so Semantic Release produces a publication.
+After successful current checks, merge only by squash into main.
+Confirm the GitHub Release with all artifacts/provenance required
+by `docs/releases.md` for the current format and a successful deployment job.
+No feature-branch deployment or Sites publication.
 
-Nach dem Deployment alle neuen Profile in DE/SQ/EN mit der Vorprüfung
-prüfen; Livebestand, eindeutige Place-IDs und vorherige Profilrevisionen
-abgleichen. Erfolg erst danach melden. Bei Nullkandidaten oder Fehlern
-Manifest und konkreten Grund sichern; weder Import noch Release erfinden.
+After deployment, check every new profile in DE/SQ/EN with preflight;
+compare live inventory, unique Place IDs, and previous profile revisions.
+Report success only afterwards. For zero candidates or failures,
+secure the manifest and specific reason; invent neither an import nor a release.
 
-## Abnahme des ersten kontrollierten Laufs
+## Acceptance of the first controlled run
 
-[PR #99](https://github.com/ramiz4/riparim/pull/99) wurde nach erfolgreicher
-CI und unabhängigem Review per Squash integriert.
+[PR #99](https://github.com/ramiz4/riparim/pull/99) was squash-merged after successful
+CI and independent review.
 [Release v1.12.0](https://github.com/ramiz4/riparim/releases/tag/v1.12.0)
-aus `54549c17df92aecde2d5a7562a7106913e5a8bf0` enthält vier bestätigte
-Artefakte mit passenden Commit- und SHA-256-Provenienzen.
-Der [Release-/Deploy-Lauf](https://github.com/ramiz4/riparim/actions/runs/38093081018)
-war vollständig erfolgreich; Cloudflare bestätigt die neue Version für 100 Prozent
-des Traffics. Workers Free bleibt bestehen.
+from `54549c17df92aecde2d5a7562a7106913e5a8bf0` contains four confirmed
+artifacts with matching commit and SHA-256 provenance.
+The [release/deployment run](https://github.com/ramiz4/riparim/actions/runs/38093081018)
+was entirely successful; Cloudflare confirms the new version for 100 percent
+of traffic. Workers Free remains in place.
 
-Zwei neue Betriebe sind veröffentlicht, der Livebestand beträgt 160.
-Zwei vollständige Healthläufe bestätigten Katalog und beide Profile in
-DE/SQ/EN mit HTTP200, korrekter Identität und vollständigem HTML ohne
-Error1102. Die 19 öffentlichen Felder aller 158 vorherigen Profile,
-158 Google-Zuordnungen, 129 gespeicherten Ratingzeilen und 49 vorherigen
-Katalogzustände stimmen weiterhin mit der geschützten Sicherung überein.
-Sechs recherchierte Bestandsdubletten wurden nicht erneut importiert.
-Die übrigen Kandidaten bleiben wegen fehlender eindeutiger Identität,
-fehlendem Telefonabgleich oder widersprüchlichem Standort zurückgestellt.
+Two new businesses are published, bringing the live inventory to 160.
+Two complete health runs confirmed the catalogue and both profiles in
+DE/SQ/EN with HTTP 200, correct identity, and complete HTML without
+Error 1102. The 19 public fields of all 158 previous profiles,
+158 Google assignments, 129 stored rating rows, and 49 previous
+catalogue states still match the protected backup.
+Six researched existing duplicates were not imported again.
+The remaining candidates stay deferred because of missing unambiguous identity,
+missing phone comparison, or conflicting location.
 
-Das [Importmanifest](../data/import-2026-10-11-daily.json) enthält Quellen,
-Rückstellungen, aktive Automation, Release und Live-Abnahme. Die beobachteten
-Outcomes der neuen Worker-Version im Abnahmeintervall waren ausschließlich
-`ok`; das ist eine zeitlich begrenzte Beobachtung. Der Connector verweigert
-weiterhin Billing-/Detail-Log-Endpunkte mit Fehler10000. Aggregierte
-Observability, schreibfreier D1-Abgleich und Deploymentzugriff funktionieren.
+The [import manifest](../data/import-2026-10-11-daily.json) contains sources,
+deferrals, the active automation, release, and live acceptance. Observed
+outcomes of the new Worker version during the acceptance interval were exclusively
+`ok`; this is a time-limited observation. The connector
+continues to deny billing/detailed-log endpoints with Error 10000. Aggregated
+observability, read-only D1 comparison, and deployment access work.

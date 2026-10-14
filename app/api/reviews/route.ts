@@ -1,3 +1,4 @@
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 import { decodeReviewServices } from "@/lib/review";
 import { storage } from "@/db/storage";
 import { json } from "@/lib/http";
@@ -21,7 +22,7 @@ export async function GET(request: Request) {
     console.error("reviews-read", e);
     return json(
       {
-        error: "Bewertungen sind momentan nicht verfügbar.",
+        error: legacyMessages.reviewsUnavailable,
         errorCode: "reviews_unavailable",
       },
       503,

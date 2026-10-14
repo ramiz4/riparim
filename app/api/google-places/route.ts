@@ -1,10 +1,11 @@
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 import { googlePlacesConfiguration } from "@/db/google-places";
 import { json, sameOrigin } from "@/lib/http";
 export const dynamic = "force-dynamic";
 export async function GET(request: Request) {
   if (!sameOrigin(request))
     return json(
-      { errorCode: "invalid_request", error: "Ungültige Anfrage." },
+      { errorCode: "invalid_request", error: legacyMessages.invalidRequest },
       403,
     );
   const config = googlePlacesConfiguration();

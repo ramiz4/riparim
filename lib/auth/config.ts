@@ -1,3 +1,4 @@
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 import { ValidationError } from "@/lib/validation-error";
 import { validatedReturnPath } from "@/lib/auth/return-path";
 import { env } from "@/lib/runtime/env";
@@ -85,7 +86,7 @@ export function validatePublicConfig(
   if (provider !== "supabase" && provider !== "pocketbase")
     throw new ValidationError(
       "auth_config_invalid",
-      "Bitte wähle einen unterstützten Auth-Anbieter.",
+      legacyMessages.authConfigInvalid,
     );
   let origin: string;
   try {
@@ -93,14 +94,14 @@ export function validatePublicConfig(
   } catch {
     throw new ValidationError(
       "auth_project_url",
-      "Bitte nutze die HTTPS-Adresse des gewählten Anbieters mit passender serverseitiger Freigabe.",
+      legacyMessages.authProjectUrl,
     );
   }
   if (provider === "pocketbase") {
     if (key)
       throw new ValidationError(
         "auth_public_key",
-        "PocketBase benötigt keinen öffentlichen Schlüssel.",
+        legacyMessages.pocketbasePublicKeyUnsupported,
       );
     return { provider, projectUrl: origin, publicKey: "" };
   }
@@ -109,7 +110,7 @@ export function validatePublicConfig(
   } catch {
     throw new ValidationError(
       "auth_public_key",
-      "Bitte nutze den öffentlichen Publishable-Key oder den bisherigen Anon-Key.",
+      legacyMessages.supabasePublicKeyRequired,
     );
   }
   return { provider, projectUrl: origin, publicKey: key };
@@ -142,7 +143,7 @@ export async function verifyProvider(
   } catch {
     throw new ValidationError(
       "auth_provider_connection",
-      "Die Verbindung konnte nicht bestätigt werden. Prüfe Anbieter, Adresse und öffentliche Einstellungen.",
+      legacyMessages.authProviderConnection,
     );
   }
   if (
@@ -151,11 +152,11 @@ export async function verifyProvider(
   )
     throw new ValidationError(
       "auth_email_confirmation",
-      "Aktiviere E-Mail-Anmeldung, Registrierung und E-Mail-Bestätigung. Automatische Bestätigung muss ausgeschaltet sein.",
+      legacyMessages.authEmailConfirmation,
     );
   if (!ready.email && !ready.google)
     throw new ValidationError(
       "auth_provider_required",
-      "Aktiviere E-Mail mit E-Mail-Bestätigung oder verbinde Google im Auth-Projekt.",
+      legacyMessages.authProviderRequired,
     );
 }

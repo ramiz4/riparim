@@ -191,7 +191,7 @@ try {
         const page = await AuthScreenPage({
           screen,
           params: Promise.resolve({ locale: "de" }),
-          searchParams: Promise.resolve({ weiter: "/einstellungen" }),
+          query: { returnTo: "/einstellungen" },
         });
         const local =
           mode === "development" &&

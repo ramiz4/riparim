@@ -82,7 +82,7 @@ const { build } = createRequire(new URL("../package.json", import.meta.url))(
 );
 const bundle = await build({
   stdin: {
-    contents: `export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {SiteHeader} from './components/site-header';export {default as AdminPanel} from './app/[locale]/verwaltung/panel';export {default as AdminReviews} from './app/[locale]/verwaltung/bewertungen/reviews';export {default as AdminUsers} from './app/[locale]/verwaltung/benutzer/users';export {default as AuthSetup} from './app/[locale]/verwaltung/anmeldung/setup';`,
+    contents: `export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {SiteHeader} from './components/site-header';export {default as AdminPanel} from './app/[locale]/admin/panel';export {default as AdminReviews} from './app/[locale]/admin/reviews/reviews';export {default as AdminUsers} from './app/[locale]/admin/users/users';export {default as AuthSetup} from './app/[locale]/admin/authentication/setup';`,
     resolveDir: process.cwd(),
     loader: "tsx",
   },

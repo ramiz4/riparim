@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "removedAt": "2026-10-05T15:22:26.058Z",
-  "reason": "Vom Nutzer freigegebener Abschluss der acht Entwürfe: sechs fachlich ungeeignete oder geschlossen belegte Einträge, altes Reno-Südprofil und nach abschließender Prüfung weiterhin nicht konkret als Pkw-Werkstatt belegter Isuzu/Burak-Eintrag.",
+  "reason": "User-approved completion of the eight drafts: six entries evidenced as unsuitable in scope or closed, the old southern Reno profile and the Isuzu/Burak entry still lacking specific evidence of a passenger-car workshop after the final review.",
   "issueUrl": "https://github.com/ramiz4/riparim/issues/53",
   "previousReview": "./catalogue-final-2026-10-05.json",
   "before": {

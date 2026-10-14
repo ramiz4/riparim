@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useI18n } from "@/lib/i18n/client";
 import type { Workshop } from "@/lib/workshops";
 import type { WorkshopDisplayById } from "@/lib/workshop-profile-content";
-import WorkshopProfile from "@/app/[locale]/werkstatt/[id]/profile";
+import WorkshopProfile from "@/app/[locale]/workshop/[id]/profile";
 import { SiteHeader } from "./site-header";
 export default function PublicWorkshopShell({ id }: { id: string }) {
   const { locale, t } = useI18n();

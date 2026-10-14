@@ -1,46 +1,46 @@
-# Mitarbeit an Riparim
+# Contributing to Riparim
 
-## Git: Haupt-Checkout und Aufgaben-Worktrees
+## Git: primary checkout and task worktrees
 
-Der primäre Git-Worktree bleibt auf `main` und enthält keine Aufgabenänderungen.
-Jede neue Agent-Aufgabe erhält einen separaten Worktree und einen neuen
-`codex/<aufgabe>`-Branch. Fortsetzungen verwenden die bestehende Aufgabenisolation.
+The primary Git worktree stays on `main` and contains no task changes.
+Every new agent task gets a separate worktree and a new
+`codex/<task>` branch. Continuations use the existing task isolation.
 
-Vor der Erstellung muss der Agent folgende Bedingungen herstellen:
+Before creating it, the agent must establish the following conditions:
 
-1. Mit `git worktree list --porcelain` den primären Checkout identifizieren;
-   nicht den aktuellen Pfad als Haupt-Checkout voraussetzen. Laufende Bearbeitung
-   durch andere Agents zuerst koordinieren; Synchronisierung nicht parallel ausführen.
-2. Dort `git status` prüfen. Arbeitsbaum und Index müssen sauber sein, einschließlich
-   unversionierter Dateien; es darf kein Merge, Rebase oder Cherry-Pick laufen.
-3. `git fetch origin --prune --tags` erfolgreich ausführen. Bei einem sauberen,
-   derzeit unbenutzten Haupt-Checkout auf einem anderen Branch mit `git switch main`
-   zurückkehren. Fehlt `main`, darf er von `origin/main` angelegt werden, sofern
-   `main` in keinem anderen Worktree ausgecheckt ist.
-4. `main` mit `git merge --ff-only origin/main` aktualisieren und dessen Upstream
-   auf `origin/main` setzen. Danach muss `HEAD` exakt `origin/main` entsprechen.
-   Lokale Zusatzcommits und Divergenz sind ein Stop-Kriterium, auch wenn ein Merge
-   mit `--ff-only` bei einem vorausliegenden Branch erfolgreich zurückkehrt.
-5. Einen noch unbenutzten Worktree-Pfad außerhalb des Haupt-Checkouts und einen
-   neuen Branch wählen. Beide von diesem geprüften `main` erstellen. Im neuen
-   Worktree Branch und Basis-Commit prüfen, bevor die eigentliche Arbeit beginnt.
+1. Identify the primary checkout with `git worktree list --porcelain`;
+   do not assume the current path is the primary checkout. Coordinate any ongoing
+   work by other agents first; do not synchronize concurrently.
+2. Check `git status` there. The working tree and index must be clean, including
+   untracked files; no merge, rebase, or cherry-pick may be in progress.
+3. Successfully run `git fetch origin --prune --tags`. If the primary checkout is clean,
+   currently unused, and on another branch, return with `git switch main`.
+   If `main` is missing, it may be created from `origin/main` provided that
+   `main` is not checked out in any other worktree.
+4. Update `main` with `git merge --ff-only origin/main` and set its upstream
+   to `origin/main`. Afterwards, `HEAD` must match `origin/main` exactly.
+   Additional local commits and divergence are stop conditions, even when a merge
+   with `--ff-only` returns successfully for a branch that is ahead.
+5. Choose an unused worktree path outside the primary checkout and a
+   new branch. Create both from this verified `main`. Check the branch and
+   base commit in the new worktree before starting the actual work.
 
-Wenn eine Bedingung scheitert, den Start abbrechen und den konkreten Zustand
-melden. Fremde Arbeit bleibt erhalten; automatisches Stashing, Reset, Clean oder
-erzwungenes Auschecken löst diesen Konflikt nicht. Ein von der Umgebung bereits
-bereitgestellter Aufgaben-Worktree muss dieselben Bedingungen erfüllen.
+If a condition fails, stop the startup procedure and report the specific state.
+Preserve others' work; automatic stashing, reset, clean, or a
+forced checkout does not resolve this conflict. A task worktree already
+provisioned by the environment must satisfy the same conditions.
 
-Nach der Zustandsprüfung kann die folgende Vorlage verwendet werden. Die drei
-Variablen durch ermittelte absolute Pfade und einen eindeutigen Branchnamen ersetzen.
-Die Vorlage setzt einen vorhandenen `main` und einen Haupt-Checkout ohne laufende
-Git-Operation voraus; bei jedem Fehler endet sie vor weiteren Schritten.
+After checking the state, the following template may be used. Replace the three
+variables with the identified absolute paths and a unique branch name.
+The template assumes an existing `main` and a primary checkout with no ongoing
+Git operation; any error stops it before subsequent steps.
 
 ```sh
 (
   set -eu
-  primary_checkout='/absoluter/pfad/zum/haupt-checkout'
-  task_worktree='/absoluter/pfad/zum/neuen/aufgaben-worktree'
-  task_branch='codex/kurze-aufgabe'
+  primary_checkout='/absolute/path/to/primary-checkout'
+  task_worktree='/absolute/path/to/new/task-worktree'
+  task_branch='codex/short-task'
 
   test -z "$(git -C "$primary_checkout" status --porcelain --untracked-files=all)"
   git -C "$primary_checkout" fetch origin --prune --tags
@@ -59,24 +59,34 @@ Git-Operation voraus; bei jedem Fehler endet sie vor weiteren Schritten.
 )
 ```
 
-Anschließend im Aufgaben-Worktree arbeiten. Installationen, Build-Ausgaben,
-lokale Datenbanken und Testzustände bleiben dort isoliert; gemeinsam verwendete
-Git-Refs und Remotes erfordern weiterhin Koordination. Für spätere Aktualisierungen
-des Aufgabenbranches `origin/main` frisch holen und nur im Aufgaben-Worktree
-integrieren. Eine gemeinsam verwendete Branch-Historie bleibt erhalten.
+Then work in the task worktree. Installations, build output,
+local databases, and test state remain isolated there; shared
+Git refs and remotes still require coordination. For later updates
+of the task branch, fetch `origin/main` again and integrate it only in the
+task worktree. Preserve shared branch history.
+
+## Codebase language
+
+Write repository-owned code, filenames, comments, documentation, technical messages,
+and test descriptions in English. Keep the multilingual UI and its translation
+resources in their supported languages. Preserve compatibility URLs, wire and storage
+contracts, original source evidence, vendor/generated content, and applied migrations
+where translating them would change their meaning or behavior. The authoritative
+scope, exceptions, and verification rules are in
+[docs/codebase-language.md](docs/codebase-language.md).
 
 ## Conventional Commits
 
-Alle neuen Aufgabencommits und PR-Titel folgen
+All new task commits and PR titles follow
 [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/).
-Verwende englische, kurze Beschreibungen und kleingeschriebene Typen:
+Use short English descriptions and lowercase types:
 
 ```text
-<type>(<optionaler scope>): <beschreibung>
+<type>(<optional scope>): <description>
 ```
 
-Typen: `feat`, `fix`, `perf`, `refactor`, `docs`, `test`, `build`, `ci`, `chore`,
-`style`, `revert`. Ein Commit behandelt eine zusammenhängende Änderung.
+Types: `feat`, `fix`, `perf`, `refactor`, `docs`, `test`, `build`, `ci`, `chore`,
+`style`, `revert`. Each commit covers one coherent change.
 
 ```text
 feat(catalogue): add service filters
@@ -84,8 +94,8 @@ fix(auth): validate callback redirect targets
 docs(agents): define isolated task workflow
 ```
 
-Inkompatible Änderungen werden mit `!` markiert und erhalten einen
-`BREAKING CHANGE:`-Footer mit Auswirkungen und Migrationsweg, zum Beispiel:
+Mark incompatible changes with `!` and add a
+`BREAKING CHANGE:` footer describing their impact and migration path, for example:
 
 ```text
 feat(api)!: require verified workshop ownership
@@ -94,57 +104,57 @@ BREAKING CHANGE: Workshop updates require verified ownership. Existing owners
 must complete verification before submitting further updates.
 ```
 
-Bei Squash-Merges muss die tatsächlich nach `main` übernommene Commit-Nachricht
-dieser Konvention folgen und sämtliche Breaking-Change-Hinweise enthalten.
-Bei mehreren unabhängigen Änderungen separate PRs bevorzugen.
+For squash merges, the commit message actually integrated into `main`
+must follow this convention and include every breaking-change note.
+Prefer separate PRs for multiple independent changes.
 
 ## Semantic Release
 
-Semantic Release ist der verbindliche Zielprozess für Versionen, Release Notes
-und Release-Tags. Die technische Quelle der Wahrheit sind die eingecheckte
-Release-Konfiguration und der CI-Workflow. Diese Richtlinie allein aktiviert
-keine Release-Automatisierung.
+Semantic Release is the required target process for versions, release notes,
+and release tags. The checked-in release configuration and CI workflow
+are the technical source of truth. This policy alone does not enable
+release automation.
 
-- Releases laufen ausschließlich in CI auf `main` nach erfolgreichen
-  Qualitätsprüfungen; PRs und Aufgabenbranches veröffentlichen keine Releases.
-- Commit-Analyzer und Release-Notes-Generator müssen beide das Preset
-  `conventionalcommits` verwenden und Breaking Changes konsistent erkennen.
-- `fix` führt zu Patch, `feat` zu Minor, Breaking Changes zu Major;
-  `perf` soll Patch auslösen. Weitere Typen lösen ohne Breaking Change keine
-  Veröffentlichung aus. Abweichungen müssen in der Release-Konfiguration begründet sein.
-- Versionen, Release-Tags und generierte Release Notes werden vom Release-Prozess
-  verwaltet. Aufgaben ändern sie nicht manuell und führen keine lokalen Live-Releases aus.
-- Die Anwendung bleibt ein privates Projekt; eine Veröffentlichung als npm-Paket
-  gehört nicht zum Release-Prozess. CI-Zugangsdaten bleiben in geschützten Secrets;
-  Release-Jobs erhalten nur die benötigten Berechtigungen und laufen serialisiert.
-- Der Workflow `Release: Publish and deploy` veröffentlicht geprüfte GitHub-Release-Artefakte für Cloudflare, Sites und Node.
-  Cloudflare bleibt das Deployment-Default; der Nodeweg installiert den
-  veröffentlichten Main-Release ohne Ziel-Build. Deployment, Produktionsmigrationen und die
-  gesonderte Daten-/Domainumstellung richten sich nach
-  [docs/releases.md](docs/releases.md). Offene PRs werden nicht veröffentlicht.
+- Releases run exclusively in CI on `main` after successful
+  quality checks; PRs and task branches do not publish releases.
+- Both the commit analyzer and release notes generator must use the
+  `conventionalcommits` preset and recognize breaking changes consistently.
+- `fix` produces a patch, `feat` a minor, and breaking changes a major release;
+  `perf` should trigger a patch. Other types do not trigger publication without
+  a breaking change. Deviations must be justified in the release configuration.
+- The release process manages versions, release tags, and generated release notes.
+  Tasks do not change them manually or run local live releases.
+- The application remains a private project; publishing an npm package
+  is outside the release process. CI credentials stay in protected secrets;
+  release jobs receive only the permissions they need and run serially.
+- The `Release: Publish and deploy` workflow publishes verified GitHub Release artifacts for Cloudflare, Sites, and Node.
+  Cloudflare remains the deployment default; the Node path installs the
+  published main release without building on the target. Deployment, production migrations, and
+  the separate data/domain cutover follow
+  [docs/releases.md](docs/releases.md). Open PRs are not published.
 
-Referenz: [Semantic Release](https://semantic-release.org/intro/) und
-[Konfiguration](https://semantic-release.org/usage/configuration/).
+References: [Semantic Release](https://semantic-release.org/intro/) and
+[configuration](https://semantic-release.org/usage/configuration/).
 
-## Qualität und Übergabe
+## Quality and handover
 
-Installiere im jeweiligen Aufgaben-Worktree mit `npm run install:ci`. Der
-`prepare`-Ablauf richtet Husky automatisch ein. Vor einem Commit formatiert
-lint-staged nur gestagte, unterstützte Dateien mit der gepinnten Prettier-Version;
-nicht gestagte Änderungen werden bewahrt. Bei einem Formatterfehler bleibt der
-Commit aus. Verwende `npm run format` für eine vollständige lokale Formatierung
-und `npm run format:check` zur schreibfreien Prüfung desselben Umfangs.
+Install in the relevant task worktree with `npm run install:ci`. The
+`prepare` process configures Husky automatically. Before a commit,
+lint-staged formats only staged, supported files with the pinned Prettier version;
+unstaged changes are preserved. A formatter error prevents the
+commit. Use `npm run format` for full local formatting
+and `npm run format:check` for a read-only check of the same scope.
 
-Die optional aktivierte Editorformatierung beim Speichern muss die lokale
-Prettier-Version und Projektkonfiguration verwenden. Die zentralen Ausnahmen in
-`.prettierignore` schützen generierte Dateien, Vendor-Quellen und angewandte
-Migrationen. Hooks können lokal umgangen werden; `format:check` ist deshalb eine
-verbindliche CI-Prüfung. Tests, Typprüfung und Builds bleiben außerhalb des schnellen
-Commit-Hooks. Installationsausnahmen und Worktree-Konfiguration stehen im
-[README](README.md#code-formatieren).
+Optional editor formatting on save must use the local
+Prettier version and project configuration. The central exclusions in
+`.prettierignore` protect generated files, vendor sources, and applied
+migrations. Hooks can be bypassed locally; `format:check` is therefore a
+required CI check. Tests, type checking, and builds stay outside the fast
+commit hook. Installation exceptions and worktree configuration are documented in
+[README](README.md#format-code).
 
-Für AI Agents gelten die Entwurfsprinzipien, Datenschutzregeln und
-Abschlussbedingungen in [AGENTS.md](AGENTS.md). Installation und lokale Prüfungen
-stehen in [README.md](README.md); die verpflichtenden Codeprüfungen definiert
-[der CI-Workflow](.github/workflows/ci.yml). Beschreibe im PR das resultierende
-Verhalten, durchgeführte Prüfungen und nötige Migrationen.
+AI agents must follow the design principles, privacy rules, and
+completion conditions in [AGENTS.md](AGENTS.md). Installation and local checks
+are documented in [README.md](README.md); required code checks are defined by
+[the CI workflow](.github/workflows/ci.yml). Describe the resulting
+behavior, checks performed, and necessary migrations in the PR.

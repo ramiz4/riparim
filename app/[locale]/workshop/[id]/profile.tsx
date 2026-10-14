@@ -1,4 +1,6 @@
 "use client";
+import { storedSentinels } from "@/lib/i18n/canonical-values";
+
 import { workshopEmailHref } from "@/lib/workshop-emails";
 import { publicDataError } from "@/lib/i18n/public-errors";
 import { useI18n } from "@/lib/i18n/client";
@@ -489,7 +491,7 @@ export default function WorkshopProfile({
                     className={`profile-service-group${matches.service && group.title === selection.service ? " selected" : ""}`}
                   >
                     <h3>
-                      {group.title === "Weitere Leistungen"
+                      {group.title === storedSentinels.additionalServices
                         ? t("public.otherServices")
                         : valueLabel(locale, "service", group.title)}
                       {matches.service && group.title === selection.service && (
@@ -522,7 +524,7 @@ export default function WorkshopProfile({
                             className={
                               matches.brand &&
                               (brand === selection.brand ||
-                                brand === "Alle Marken")
+                                brand === storedSentinels.allBrands)
                                 ? "profile-brand-selected"
                                 : undefined
                             }
@@ -530,7 +532,7 @@ export default function WorkshopProfile({
                             {valueLabel(locale, "sentinel", brand)}
                             {matches.brand &&
                               (brand === selection.brand ||
-                                brand === "Alle Marken") && (
+                                brand === storedSentinels.allBrands) && (
                                 <span className="profile-selection-label">
                                   {t("public.yourSelection")}
                                 </span>

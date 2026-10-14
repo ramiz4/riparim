@@ -1,3 +1,4 @@
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 import { ValidationError } from "@/lib/validation-error";
 import { getAdminUser } from "@/app/auth";
 import { getAuthAdmin } from "@/lib/auth/admin";
@@ -20,13 +21,16 @@ export async function GET(request: Request) {
     const admin = await getAdminUser();
     if (!admin)
       return json(
-        { error: "Bitte melde dich an.", errorCode: "authentication_required" },
+        {
+          error: legacyMessages.authenticationRequired,
+          errorCode: "authentication_required",
+        },
         401,
       );
     if (!admin.isModerator)
       return json(
         {
-          error: "Kein Zugriff auf die Benutzerverwaltung.",
+          error: legacyMessages.usersForbidden,
           errorCode: "forbidden",
         },
         403,
@@ -43,7 +47,7 @@ export async function GET(request: Request) {
       perPage > 100
     )
       return json(
-        { error: "Ungültige Seitenangabe.", errorCode: "invalid_page" },
+        { error: legacyMessages.invalidPage, errorCode: "invalid_page" },
         400,
       );
     const auth = await getAuthAdmin();
@@ -72,7 +76,7 @@ export async function GET(request: Request) {
       .map((row) => ({
         id: row.subject,
         email: "",
-        name: `Begonnene Löschung (${row.subject})`,
+        name: legacyMessages.pendingDeletionName(row.subject),
         role: "user",
         active: false,
         confirmed: false,
@@ -103,20 +107,23 @@ export async function POST(request: Request) {
     const admin = await getAdminUser();
     if (!admin)
       return json(
-        { error: "Bitte melde dich an.", errorCode: "authentication_required" },
+        {
+          error: legacyMessages.authenticationRequired,
+          errorCode: "authentication_required",
+        },
         401,
       );
     if (!admin.isModerator || !sameOrigin(request))
       return json(
         {
-          error: "Kein Zugriff auf die Benutzerverwaltung.",
+          error: legacyMessages.usersForbidden,
           errorCode: "forbidden",
         },
         403,
       );
     if (!request.headers.get("content-type")?.includes("application/json"))
       return json(
-        { error: "Ungültige Anfrage.", errorCode: "invalid_request" },
+        { error: legacyMessages.invalidRequest, errorCode: "invalid_request" },
         400,
       );
     let fields;
@@ -128,7 +135,7 @@ export async function POST(request: Request) {
           error:
             e instanceof ValidationError
               ? e.message
-              : "Bitte prüfe die Eingaben.",
+              : legacyMessages.checkInputs,
           errorCode: e instanceof ValidationError ? e.code : "invalid_request",
         },
         400,
@@ -137,7 +144,7 @@ export async function POST(request: Request) {
     if (fields.email === moderatorEmail())
       return json(
         {
-          error: "Diese E-Mail-Adresse ist für die Verwaltung reserviert.",
+          error: legacyMessages.userEmailReserved,
           errorCode: "user_email_reserved",
         },
         403,

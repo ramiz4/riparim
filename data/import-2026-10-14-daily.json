@@ -71,7 +71,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://www.facebook.com/autoservicetuli/"],
-          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle; Maps nennt keine vergleichbare Straße. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
+          "note": "Public Maps interface in the confirmed account: the distinctive name, independently evidenced international phone number and place agree; active entry. The actual Place ID was read from the visible official !19s link and directly rechecked with a deliberately unrelated fallback search. Street details exclusively from an independent source; Maps lists no comparable street. No owner verification and no Google business data adopted."
         }
       }
     },
@@ -110,7 +110,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://gjirafa.biz/autoservicevali-1"],
-          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
+          "note": "Public Maps interface in the confirmed account: the distinctive name, independently evidenced international phone number and place agree; active entry. The actual Place ID was read from the visible official !19s link and directly rechecked with a deliberately unrelated fallback search. Street details exclusively from an independent source. No owner verification and no Google business data adopted."
         }
       }
     },
@@ -149,7 +149,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://www.facebook.com/autoservisbesimi/"],
-          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
+          "note": "Public Maps interface in the confirmed account: the distinctive name, independently evidenced international phone number and place agree; active entry. The actual Place ID was read from the visible official !19s link and directly rechecked with a deliberately unrelated fallback search. Street details exclusively from an independent source. No owner verification and no Google business data adopted."
         }
       }
     },
@@ -188,7 +188,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://www.facebook.com/100092324168737/"],
-          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle; Maps nennt keine vergleichbare Straße. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
+          "note": "Public Maps interface in the confirmed account: the distinctive name, independently evidenced international phone number and place agree; active entry. The actual Place ID was read from the visible official !19s link and directly rechecked with a deliberately unrelated fallback search. Street details exclusively from an independent source; Maps lists no comparable street. No owner verification and no Google business data adopted."
         }
       }
     },
@@ -242,7 +242,7 @@
             "https://www.facebook.com/MANAautodetailing/",
             "https://www.instagram.com/manaautodetailing/reel/Dax-31fsI2z/"
           ],
-          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
+          "note": "Public Maps interface in the confirmed account: the distinctive name, independently evidenced international phone number and place agree; active entry. The actual Place ID was read from the visible official !19s link and directly rechecked with a deliberately unrelated fallback search. Street details exclusively from an independent source. No owner verification and no Google business data adopted."
         }
       }
     }
@@ -272,11 +272,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Fehlender eindeutiger Kontakt-/Standortabgleich oder unzureichender unabhängiger Kfz-Leistungsnachweis."
+          "reason": "No unambiguous contact/location comparison or insufficient independent evidence of automotive services."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Fehlender eindeutiger Kontakt-/Standortabgleich oder unzureichender unabhängiger Kfz-Leistungsnachweis.",
+      "reason": "No unambiguous contact/location comparison or insufficient independent evidence of automotive services.",
       "deferredCause": "independent-service-scope-missing",
       "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
       "publicBusinessEmail": {
@@ -294,7 +294,7 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Fehlender eindeutiger Kontakt-/Standortabgleich oder unzureichender unabhängiger Kfz-Leistungsnachweis."
+          "reason": "No unambiguous contact/location comparison or insufficient independent evidence of automotive services."
         },
         {
           "origin": "data/import-2026-10-11-daily.json#notImported",
@@ -320,11 +320,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Fehlender eindeutiger Kontakt-/Standortabgleich oder unzureichender unabhängiger Kfz-Leistungsnachweis."
+          "reason": "No unambiguous contact/location comparison or insufficient independent evidence of automotive services."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Fehlender eindeutiger Kontakt-/Standortabgleich oder unzureichender unabhängiger Kfz-Leistungsnachweis.",
+      "reason": "No unambiguous contact/location comparison or insufficient independent evidence of automotive services.",
       "deferredCause": "independent-service-scope-missing",
       "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
       "publicBusinessEmail": {
@@ -345,7 +345,7 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Fehlender eindeutiger Kontakt-/Standortabgleich oder unzureichender unabhängiger Kfz-Leistungsnachweis."
+          "reason": "No unambiguous contact/location comparison or insufficient independent evidence of automotive services."
         },
         {
           "origin": "data/import-2026-10-12-daily.json#uncertainties",
@@ -375,7 +375,7 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Fehlender eindeutiger Kontakt-/Standortabgleich oder unzureichender unabhängiger Kfz-Leistungsnachweis."
+          "reason": "No unambiguous contact/location comparison or insufficient independent evidence of automotive services."
         },
         {
           "origin": "data/import-2026-10-12-daily.json#uncertainties",
@@ -406,11 +406,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Fehlender eindeutiger Kontakt-/Standortabgleich oder unzureichender unabhängiger Kfz-Leistungsnachweis."
+          "reason": "No unambiguous contact/location comparison or insufficient independent evidence of automotive services."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Fehlender eindeutiger Kontakt-/Standortabgleich oder unzureichender unabhängiger Kfz-Leistungsnachweis.",
+      "reason": "No unambiguous contact/location comparison or insufficient independent evidence of automotive services.",
       "deferredCause": "independent-service-scope-missing",
       "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
       "publicBusinessEmail": {
@@ -428,11 +428,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang."
+          "reason": "Parts/product sales, towing or other categories without sufficiently evidenced relevant service scope."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang.",
+      "reason": "Parts/product sales, towing or other categories without sufficiently evidenced relevant service scope.",
       "deferredCause": "independent-service-scope-missing",
       "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
       "publicBusinessEmail": {
@@ -450,11 +450,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang."
+          "reason": "Parts/product sales, towing or other categories without sufficiently evidenced relevant service scope."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang.",
+      "reason": "Parts/product sales, towing or other categories without sufficiently evidenced relevant service scope.",
       "deferredCause": "independent-service-scope-missing",
       "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
       "publicBusinessEmail": {
@@ -472,11 +472,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang."
+          "reason": "Parts/product sales, towing or other categories without sufficiently evidenced relevant service scope."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang.",
+      "reason": "Parts/product sales, towing or other categories without sufficiently evidenced relevant service scope.",
       "deferredCause": "independent-service-scope-missing",
       "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
       "publicBusinessEmail": {
@@ -494,11 +494,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang."
+          "reason": "Parts/product sales, towing or other categories without sufficiently evidenced relevant service scope."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang.",
+      "reason": "Parts/product sales, towing or other categories without sufficiently evidenced relevant service scope.",
       "deferredCause": "independent-service-scope-missing",
       "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
       "publicBusinessEmail": {
@@ -516,11 +516,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang."
+          "reason": "Parts/product sales, towing or other categories without sufficiently evidenced relevant service scope."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang.",
+      "reason": "Parts/product sales, towing or other categories without sufficiently evidenced relevant service scope.",
       "deferredCause": "independent-service-scope-missing",
       "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
       "publicBusinessEmail": {
@@ -538,11 +538,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang."
+          "reason": "Parts/product sales, towing or other categories without sufficiently evidenced relevant service scope."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang.",
+      "reason": "Parts/product sales, towing or other categories without sufficiently evidenced relevant service scope.",
       "deferredCause": "independent-service-scope-missing",
       "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
       "publicBusinessEmail": {
@@ -560,11 +560,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang."
+          "reason": "Parts/product sales, towing or other categories without sufficiently evidenced relevant service scope."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang.",
+      "reason": "Parts/product sales, towing or other categories without sufficiently evidenced relevant service scope.",
       "deferredCause": "independent-service-scope-missing",
       "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
       "publicBusinessEmail": {
@@ -582,11 +582,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang."
+          "reason": "Parts/product sales, towing or other categories without sufficiently evidenced relevant service scope."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang.",
+      "reason": "Parts/product sales, towing or other categories without sufficiently evidenced relevant service scope.",
       "deferredCause": "independent-service-scope-missing",
       "nextCheck": "Find own published current passenger-car repair, glass or substantive detailing evidence.",
       "publicBusinessEmail": {
@@ -604,11 +604,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Google meldet vorübergehende Schließung; kein geeigneter aktueller Veröffentlichungskandidat."
+          "reason": "Google reports temporary closure; not a suitable current publication candidate."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Google meldet vorübergehende Schließung; kein geeigneter aktueller Veröffentlichungskandidat.",
+      "reason": "Google reports temporary closure; not a suitable current publication candidate.",
       "deferredCause": "identity-contact-location-or-status-conflict",
       "nextCheck": "Require independently attributable current reopening/operating evidence before a new active public Maps check; historical temporary closure remains a publication block.",
       "publicBusinessEmail": {
@@ -626,11 +626,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+          "reason": "No unambiguously matching current Google contact or multiple unconfirmed locations; not approved."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben.",
+      "reason": "No unambiguously matching current Google contact or multiple unconfirmed locations; not approved.",
       "deferredCause": "complete-current-maps-identity-missing",
       "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
       "publicBusinessEmail": {
@@ -648,11 +648,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+          "reason": "No unambiguously matching current Google contact or multiple unconfirmed locations; not approved."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben.",
+      "reason": "No unambiguously matching current Google contact or multiple unconfirmed locations; not approved.",
       "deferredCause": "complete-current-maps-identity-missing",
       "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
       "publicBusinessEmail": {
@@ -670,11 +670,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+          "reason": "No unambiguously matching current Google contact or multiple unconfirmed locations; not approved."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben.",
+      "reason": "No unambiguously matching current Google contact or multiple unconfirmed locations; not approved.",
       "deferredCause": "complete-current-maps-identity-missing",
       "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
       "publicBusinessEmail": {
@@ -692,11 +692,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+          "reason": "No unambiguously matching current Google contact or multiple unconfirmed locations; not approved."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben.",
+      "reason": "No unambiguously matching current Google contact or multiple unconfirmed locations; not approved.",
       "deferredCause": "complete-current-maps-identity-missing",
       "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
       "publicBusinessEmail": {
@@ -714,7 +714,7 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+          "reason": "No unambiguously matching current Google contact or multiple unconfirmed locations; not approved."
         },
         {
           "origin": "data/import-2026-10-11-daily.json#notImported",
@@ -740,11 +740,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+          "reason": "No unambiguously matching current Google contact or multiple unconfirmed locations; not approved."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben.",
+      "reason": "No unambiguously matching current Google contact or multiple unconfirmed locations; not approved.",
       "deferredCause": "complete-current-maps-identity-missing",
       "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
       "publicBusinessEmail": {
@@ -762,11 +762,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+          "reason": "No unambiguously matching current Google contact or multiple unconfirmed locations; not approved."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben.",
+      "reason": "No unambiguously matching current Google contact or multiple unconfirmed locations; not approved.",
       "deferredCause": "complete-current-maps-identity-missing",
       "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
       "publicBusinessEmail": {
@@ -784,11 +784,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+          "reason": "No unambiguously matching current Google contact or multiple unconfirmed locations; not approved."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben.",
+      "reason": "No unambiguously matching current Google contact or multiple unconfirmed locations; not approved.",
       "deferredCause": "complete-current-maps-identity-missing",
       "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
       "publicBusinessEmail": {
@@ -806,11 +806,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+          "reason": "No unambiguously matching current Google contact or multiple unconfirmed locations; not approved."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben.",
+      "reason": "No unambiguously matching current Google contact or multiple unconfirmed locations; not approved.",
       "deferredCause": "complete-current-maps-identity-missing",
       "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
       "publicBusinessEmail": {
@@ -828,11 +828,11 @@
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
-          "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+          "reason": "No unambiguously matching current Google contact or multiple unconfirmed locations; not approved."
         }
       ],
       "status": "historical-deferred-not-researched-today",
-      "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben.",
+      "reason": "No unambiguously matching current Google contact or multiple unconfirmed locations; not approved.",
       "deferredCause": "complete-current-maps-identity-missing",
       "nextCheck": "In the confirmed browser, check the exact public Maps entry and directly return using its visible official Place ID.",
       "publicBusinessEmail": {

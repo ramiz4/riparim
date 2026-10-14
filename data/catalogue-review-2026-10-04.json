@@ -11,7 +11,7 @@
     "drafts": 85,
     "preciseCoordinates": 19
   },
-  "method": "Betriebs- und Verzeichnisquellen unabhängig geprüft. Google-Karten nur zur Identitätsbestätigung; keine Google-Geschäftsinhalte übernommen. Plus Codes aus unabhängig belegten Adressen offline mit Google Open Location Code decodiert.",
+  "method": "Business and directory sources independently checked. Google Maps used only to confirm identity; no Google business content adopted. Plus Codes from independently evidenced addresses decoded offline with Google Open Location Code.",
   "algorithmSource": "https://github.com/google/open-location-code/blob/main/python/openlocationcode/openlocationcode.py",
   "reviewedDrafts": 92,
   "draftSummary": {
@@ -74,7 +74,7 @@
       ],
       "sourceChecks": [],
       "assessment": "excluded",
-      "reason": "Vom Nutzer als Truck-Teilelieferant bestätigt; kein konkreter Pkw-Werkstattnachweis.",
+      "reason": "Confirmed by the user as a truck parts supplier; no concrete evidence of a passenger-car workshop.",
       "exclusionAuthority": "data/workshop-scope.json"
     },
     {
@@ -1144,7 +1144,7 @@
       "sourceUrls": ["https://benita-ks.com/"],
       "sourceChecks": [],
       "assessment": "excluded",
-      "reason": "Tankstelle mit ausdrücklich beworbenem Schwerfahrzeug-Service. Der allgemeine Express-Service belegt keinen konkreten Pkw-Werkstattumfang.",
+      "reason": "Fuel station explicitly advertising heavy-vehicle service. The general express service does not establish a concrete passenger-car workshop scope.",
       "exclusionAuthority": "data/workshop-scope.json"
     },
     {
@@ -1270,7 +1270,7 @@
       ],
       "sourceChecks": [],
       "assessment": "excluded",
-      "reason": "Der Isuzu-Standort gehört zum Truck-&-Bus-Angebot von Burak; dieser Nutzfahrzeugeintrag wird nicht als Pkw-Werkstatt geführt.",
+      "reason": "The Isuzu location belongs to Burak's truck and bus offering; this commercial-vehicle entry is not listed as a passenger-car workshop.",
       "exclusionAuthority": "data/workshop-scope.json"
     },
     {
@@ -1459,7 +1459,7 @@
       ],
       "sourceChecks": [],
       "assessment": "excluded",
-      "reason": "Unternehmensauftritt als Truck & Bus Scania Service; aus dem Pkw-Verzeichnis entfernt.",
+      "reason": "The business presents itself as Truck & Bus Scania Service; removed from the passenger-car directory.",
       "exclusionAuthority": "data/workshop-scope.json"
     },
     {
@@ -1486,7 +1486,7 @@
       "sourceUrls": ["https://www.cybo.com/XK/ferizaj/car-repair"],
       "sourceChecks": [],
       "assessment": "excluded",
-      "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis.",
+      "reason": "Tachograph specialist without concrete evidence of passenger-car repairs.",
       "exclusionAuthority": "data/workshop-scope.json"
     },
     {
@@ -1497,7 +1497,7 @@
       "sourceUrls": ["https://www.cybo.com/XK/pristina/car-repair"],
       "sourceChecks": [],
       "assessment": "excluded",
-      "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis.",
+      "reason": "Tachograph specialist without concrete evidence of passenger-car repairs.",
       "exclusionAuthority": "data/workshop-scope.json"
     },
     {
@@ -1601,7 +1601,7 @@
         "https://www.google.com/maps/search/?api=1&query=Auto+Cosmetic+te+FITIMI+VVCV%2B5H5%2C+M2%2C+Mitrovic%C3%AB+40000&query_place_id=ChIJr_6I2ChFUxMRARVfS1C0RGI",
         "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/"
       ],
-      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted.",
       "checkedAt": "2026-10-04T09:56:02.071Z",
       "matchedAt": "2026-10-04T09:56:02.071Z",
       "independentCode": "8GJ2VVCV+5H5"
@@ -1614,7 +1614,7 @@
         "https://www.google.com/maps/search/?api=1&query=Auto+Ngjyros%C3%ABs+SHYPI+95Q7%2B872%2C+Talinoc+i+Jerlive+70000&query_place_id=ChIJs2t2ydx_VBMR7o5UGmJb778",
         "https://www.cybo.com/XK/ferizaj/car-repair"
       ],
-      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted.",
       "checkedAt": "2026-10-04T09:55:31.486Z",
       "matchedAt": "2026-10-04T09:55:31.486Z",
       "independentCode": "8GJ395Q7+872"
@@ -1627,7 +1627,7 @@
         "https://www.google.com/maps/search/?api=1&query=Auto+Ngjyrosje+Egzoni+95MC%2BX3%2C+Talinoc+i+Muhaxher%C3%ABve+70000&query_place_id=ChIJ7ehTfgZ_VBMRNjghZHjasXA",
         "https://www.cybo.com/XK/ferizaj/car-repair"
       ],
-      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted.",
       "checkedAt": "2026-10-04T09:55:32.347Z",
       "matchedAt": "2026-10-04T09:55:32.347Z",
       "independentCode": "8GJ395MC+X3"
@@ -1640,7 +1640,7 @@
         "https://www.google.com/maps/search/?api=1&query=Auto+Pjes%C3%AB+%26+Servis+JAHA+CFR5%2B26%2C+Gjilan+60000&query_place_id=ChIJMb1eezmNVBMRRmiBJtGANVE",
         "https://de.cybo.com/XK/gjilan/autoreparatur"
       ],
-      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted.",
       "checkedAt": "2026-10-04T09:56:03.011Z",
       "matchedAt": "2026-10-04T09:56:03.011Z",
       "independentCode": "8GJ3CFR5+26"
@@ -1653,7 +1653,7 @@
         "https://www.google.com/maps/search/?api=1&query=Auto+Service+Kushtrimi+9573%2BG23%2C+Hivzi+Sylejmani%2C+Ferizaj+70000&query_place_id=ChIJMxwsC3h_VBMR2K3PwgtzmDQ",
         "https://www.cybo.com/XK/ferizaj/car-repair"
       ],
-      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted.",
       "checkedAt": "2026-10-04T09:56:03.981Z",
       "matchedAt": "2026-10-04T09:56:03.981Z",
       "independentCode": "8GJ39573+G23"
@@ -1666,7 +1666,7 @@
         "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Doni+QQVM%2B5VX%2C+R101%2C+Klin%C3%AB+e+Ep%C3%ABrme+41000&query_place_id=ChIJZ5Wsu-pBUxMRTFrP2jiQn0g",
         "https://www.top-rated.online/cities/Klin%C3%AB%2Be%2BEp%C3%ABrme/place/p/10916121/Auto%2BServis%2BDoni"
       ],
-      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name und unabhängig belegter Plus Code stimmen überein. Die Telefonnummer hat dieselbe lokale Rufnummer mit älterer Ländervorwahl. Die bestätigte Zuordnung bleibt erhalten; Kontaktdaten wurden nicht geändert.",
+      "note": "Rechecked using the stored Google Place ID link: the distinctive name and independently evidenced Plus Code agree. The phone number has the same local number with an older country dialing code. The confirmed assignment is preserved; contact details were not changed.",
       "checkedAt": "2026-10-04T09:56:04.863Z",
       "matchedAt": "2026-10-04T09:56:04.863Z",
       "independentCode": "8GJ2QQVM+5VX"
@@ -1679,7 +1679,7 @@
         "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Genti+M43G%2BVQW%2C+Unnamed+Road%2C+Prishtina+10000&query_place_id=ChIJz2OODhafVBMRSk4BbeHIhq8",
         "https://www.cybo.com/XK/pristina/car-repair"
       ],
-      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted.",
       "checkedAt": "2026-10-04T09:56:33.421Z",
       "matchedAt": "2026-10-04T09:56:33.421Z",
       "independentCode": "8GJ3M43G+VQW"
@@ -1692,7 +1692,7 @@
         "https://www.google.com/maps/search/?api=1&query=Auto+Servis+P%C3%ABrparimi+95Q3%2B7VQ%2C+Driton+Islami%2C+Talinoc+i+Jerlive+70000&query_place_id=ChIJv4FJP0V_VBMRiq_V3C5Yh2k",
         "https://www.cybo.com/XK/ferizaj/car-repair"
       ],
-      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted.",
       "checkedAt": "2026-10-04T09:56:34.256Z",
       "matchedAt": "2026-10-04T09:56:34.256Z",
       "independentCode": "8GJ395Q3+7VQ"
@@ -1705,7 +1705,7 @@
         "https://www.google.com/maps/search/?api=1&query=Autodiagnoza+Kosove+M533%2BXMW%2C+Prishtina&query_place_id=ChIJkbvtE2meVBMRvu2LFtwxfho",
         "https://www.cybo.com/XK/pristina/car-repair"
       ],
-      "note": "Nicht bestätigt für die neuen Koordinaten: Die gespeicherte Place-ID öffnet einen Betrieb mit derselben Telefonnummer, aber einem abweichenden Standort und Plus Code außerhalb des 300-m-Bereichs. Die unabhängig gewonnenen Koordinaten dürfen für diesen Eintrag nicht übernommen werden. Zuordnung und bestehende Bewertungen für spätere Klärung erhalten.",
+      "note": "Not confirmed for the new coordinates: the stored Place ID opens a business with the same phone number but a different location and Plus Code outside the 300-meter range. The independently obtained coordinates must not be adopted for this entry. Preserve the assignment and existing reviews for later clarification.",
       "checkedAt": "2026-10-04T09:56:35.146Z",
       "matchedAt": null
     },
@@ -1717,7 +1717,7 @@
         "https://www.google.com/maps/search/?api=1&query=Autoelektrika+Naimi+M44X%2BHR2%2C+Prishtina+10000&query_place_id=ChIJUQjLIHufVBMRMpMm10I6HN0",
         "https://www.cybo.com/XK/pristina/car-repair"
       ],
-      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted.",
       "checkedAt": "2026-10-04T09:57:07.966Z",
       "matchedAt": "2026-10-04T09:57:07.966Z",
       "independentCode": "8GJ3M44X+HR2"
@@ -1730,7 +1730,7 @@
         "https://www.google.com/maps/search/?api=1&query=Autopjes%C3%AB+%26+Service+Nazi+959P%2BXV6%2C+Bibaj+70000&query_place_id=ChIJhduIqz1_VBMR1pQy7eVfBok",
         "https://www.cybo.com/XK/ferizaj/car-repair"
       ],
-      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted.",
       "checkedAt": "2026-10-04T09:57:08.795Z",
       "matchedAt": "2026-10-04T09:57:08.795Z",
       "independentCode": "8GJ3959P+XV6"
@@ -1743,7 +1743,7 @@
         "https://www.google.com/maps/search/?api=1&query=Autoservis+PG+Bosch+M55M%2BCC2%2C+Prishtina+10000&query_place_id=ChIJMTTQbMSfVBMROfUEApqoNwg",
         "https://www.cybo.com/XK/pristina/car-repair"
       ],
-      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name und Telefonnummer stimmen überein; der Geschäftspunkt liegt innerhalb von 300 m der unabhängig aus dem Verzeichnis-Plus-Code bestimmten Koordinaten. Google-Koordinaten wurden nicht übernommen.",
+      "note": "Rechecked using the stored Google Place ID link: the distinctive name and phone number agree; the business location is within 300 meters of the coordinates independently determined from the directory Plus Code. Google coordinates were not adopted.",
       "checkedAt": "2026-10-04T09:57:09.703Z",
       "matchedAt": "2026-10-04T09:57:09.703Z",
       "independentCode": "8GJ3M55M+CC2"
@@ -1756,7 +1756,7 @@
         "https://www.google.com/maps/search/?api=1&query=BMW+Service+95R6%2BP8J%2C+Driton+Islami%2C+Talinoc+i+Jerlive+70000&query_place_id=ChIJb6GZpCd_VBMRi_bRC-yoNhI",
         "https://www.cybo.com/XK/ferizaj/car-repair"
       ],
-      "note": "Nicht bestätigt für die neuen Koordinaten: Die gespeicherte Place-ID öffnet einen Betrieb mit derselben Telefonnummer, aber einem abweichenden Standort und Plus Code außerhalb des 300-m-Bereichs. Die unabhängig gewonnenen Koordinaten dürfen für diesen Eintrag nicht übernommen werden. Zuordnung und bestehende Bewertungen für spätere Klärung erhalten.",
+      "note": "Not confirmed for the new coordinates: the stored Place ID opens a business with the same phone number but a different location and Plus Code outside the 300-meter range. The independently obtained coordinates must not be adopted for this entry. Preserve the assignment and existing reviews for later clarification.",
       "checkedAt": "2026-10-04T09:57:53.315Z",
       "matchedAt": null
     },
@@ -1768,7 +1768,7 @@
         "https://www.google.com/maps/search/?api=1&query=Mercedes+Isa+95QF%2B28%2C+Talinoc+i+Muhaxher%C3%ABve+70000&query_place_id=ChIJI21YCwB_VBMRU22CO97yQLU",
         "https://www.cybo.com/XK/ferizaj/car-repair"
       ],
-      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted.",
       "checkedAt": "2026-10-04T09:57:54.295Z",
       "matchedAt": "2026-10-04T09:57:54.295Z",
       "independentCode": "8GJ395QF+28"
@@ -1781,7 +1781,7 @@
         "https://www.google.com/maps/search/?api=1&query=Stavileci+Tuning+VVR6%2B9Q5%2C+Rruga+Kollashini%2C+Mitrovic%C3%AB+40000&query_place_id=ChIJrzhQ3jxFUxMRANcJyieNKyo",
         "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/"
       ],
-      "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen.",
+      "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted.",
       "checkedAt": "2026-10-04T09:57:55.147Z",
       "matchedAt": "2026-10-04T09:57:55.147Z",
       "independentCode": "8GJ2VVR6+9Q5"

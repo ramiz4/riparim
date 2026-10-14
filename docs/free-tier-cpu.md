@@ -1,34 +1,34 @@
-# Cloudflare Free: CPU und manueller Mailversand
+# Cloudflare Free: CPU and manual email delivery
 
-## Nachgewiesener Engpass
+## Proven bottleneck
 
-Die Logs vom 11.–12. Oktober 2026 zeigten drei `exceededCpu`-Abbrüche einer älteren Worker-Version auf `/`. Langsame Startseitenaufrufe oberhalb 10 ms lagen im Mittel bei rund 175 ms. Weitere betroffene Pfade waren öffentliche APIs, Datenschutz und private Kontoseiten. Diese gefilterten Werte sind kein Mittelwert aller Besucheranfragen.
+Logs from October 11–12, 2026 showed three `exceededCpu` aborts of an older Worker version on `/`. Slow homepage requests above 10 ms averaged about 175 ms. Other affected paths were public APIs, privacy and private account pages. These filtered values are not the average of all visitor requests.
 
-Der lokale echte workerd reproduzierte rund 25 ms aktive CPU-Stichproben pro warmem Startseitenaufruf. Die bisherige Startseite renderte React und serialisierte den gesamten Katalog bei jeder Anfrage. Auch der Framework-Handler wurde bereits vor dem öffentlichen Assetpfad geladen. Die Katalogübersicht las und dekodierte für die Revisionsprüfung sämtliche veröffentlichten Zeilen.
+Local real workerd reproduced about 25 ms of active CPU samples per warm homepage request. The previous homepage rendered React and serialized the entire catalogue on every request. The framework handler was also loaded before the public asset path. The catalogue overview read and decoded all published rows for revision checking.
 
-## Änderung und Messung
+## Change and measurement
 
-- Startseite und Datenschutz werden in DE/SQ/EN als datenfreie Release-Dokumente gerendert. Der Header fragt persönliche Sitzungsdaten separat ab; keine Konten oder Besuchsnachweise gelangen in die Artefakte. Der Landing-Katalog wird erst für eine ausdrücklich ausgeführte WebMCP-Suche abgefragt.
-- Der öffentliche Assetpfad lädt das React-/Vinext-Framework nicht mehr. Ein begrenzter Buildadapter korrigiert den relativen Pfad von Vinext beta.5s generiertem Asset-Sidecar im ausgelagerten Handler; tatsächliche Worker-Builds prüfen dessen Import und RSC-Verhalten.
-- Öffentliche Katalog-GETs verwenden dieselbe maßgebliche Antwortfunktion direkt. Administrative Abfragen und sämtliche Schreibmethoden bleiben im autorisierten Frameworkpfad. Eine Gast-Session ohne Cookie benötigt auf dem eigenen Worker keinen Auth-/React-Aufruf; native Identity-Header können dort keine Anmeldung erzeugen.
-- Die Katalogrevision wird als ein SQL-Aggregat verglichen. Geänderte oder ausgeblendete Profile behalten die unmittelbare D1-Statusprüfung und datenfreie Fallback-Shells. Unbekannte Seitenpfade werden vor Framework-Laden abgewiesen. Authentifizierte Seiten und RSC bleiben dynamisch.
+- Homepage and privacy are rendered in DE/SQ/EN as release documents containing no data. The header requests personal session data separately; no accounts or visit evidence enter artifacts. The landing catalogue is queried only for an explicitly performed WebMCP search.
+- The public asset path no longer loads the React/Vinext framework. A bounded build adapter corrects the relative path of Vinext beta.5's generated asset sidecar in the extracted handler; actual Worker builds check its import and RSC behavior.
+- Public catalogue GETs use the same authoritative response function directly. Administrative queries and all write methods remain in the authorized framework path. A guest session without a cookie needs no Auth/React call on the owned Worker; native identity headers cannot create a login there.
+- Catalogue revision is compared as one SQL aggregate. Changed or hidden profiles retain immediate D1 status checking and shells containing no data as fallbacks. Unknown page paths are rejected before framework loading. Authenticated pages and RSC stay dynamic.
 
-Vergleichsmessung mit denselben isolierten Canonicaldaten, ohne Produktions-/Providerzugriff:
+Comparative measurement with the same isolated canonical data, without production/provider access:
 
-| Pfad             | Vorher, aktive CPU-Stichprobe/Aufruf | Nachher |
-| ---------------- | -----------------------------------: | ------: |
-| `/`              |                              24,8 ms |  2,0 ms |
-| `/werkstaetten`  |                               5,4 ms |  1,8 ms |
-| `/api/workshops` |                               7,7 ms |  3,6 ms |
+| Path             | Before, active CPU sample/request |  After |
+| ---------------- | --------------------------------: | -----: |
+| `/`              |                           24.8 ms | 2.0 ms |
+| `/werkstaetten`  |                            5.4 ms | 1.8 ms |
+| `/api/workshops` |                            7.7 ms | 3.6 ms |
 
-`BUILD_TARGET=cloudflare npm run build` und anschließend `node scripts/profile-worker-cpu.mjs` erzeugen lokale Inspector-Profile unter `work/cpu-profiles/`. Die CPU-Stichproben sind vergleichende Profilerdaten, keine Cloudflare-Abrechnung. Netzwerk-/D1-Wartezeit zählt nicht zur CPU. Messschwankungen und kalte/private Pfade erlauben keine Garantie, dass jede Produktionsanfrage unter 10 ms bleibt. Nach dem geprüften Main-Release dieselben Pfade und `exceededCpu` über die realen Logs erneut bewerten; den Tarif nicht vorsorglich ändern.
+`BUILD_TARGET=cloudflare npm run build`, followed by `node scripts/profile-worker-cpu.mjs`, generates local Inspector profiles under `work/cpu-profiles/`. CPU samples are comparative profiler data, not Cloudflare billing. Network/D1 wait time does not count toward CPU. Measurement variation and cold/private paths permit no guarantee that every production request stays below 10 ms. After the verified main release, reassess the same paths and `exceededCpu` through actual logs; do not preemptively change plans.
 
-## Mailversand ohne periodischen Job
+## Email delivery without a periodic job
 
-Der gespeicherten Moderationsentscheidung folgt ein abgewarteter Erstversand. Fehler ändern die Freigabe nicht. Es gibt keine Cronverarbeitung, Sammelaktion oder UI-Polling. Die explizit leere Cronliste entfernt den bisherigen Zeitplan beim Release-Deployment.
+The stored moderation decision is followed by an awaited initial send. Errors do not change approval. There is no cron processing, batch action or UI polling. The explicitly empty cron list removes the previous schedule during release deployment.
 
-Eine private, aufklappbare Verwaltungsübersicht bietet einzelne Wiederholungen: höchstens fünf zusätzlich zum Erstversand, nach Wartezeiten von 1, 5, 15, 30 und 60 Minuten. Versuchslimit, Wartezeit und Lease werden beim Datenbank-Claim atomar geprüft. Konfiguration-/Empfängerfehler zählen ebenfalls zum Budget. Ein neuer Erstversand kann nicht als periodischer Retry missbraucht werden.
+A private collapsible administrative overview offers individual retries: at most five in addition to the initial send, after waits of 1, 5, 15, 30 and 60 minutes. Attempt limit, wait and lease are checked atomically when claiming in the database. Configuration/recipient errors also count toward the budget. A new initial send cannot be misused as a periodic retry.
 
-Bestehende Ereignisse, Versuche und Payloadbytes bleiben erhalten; keine neue Migration. Resend behält die ursprünglichen Idempotenzbytes innerhalb von 23 Stunden. Unklare SMTP-Übergaben bleiben gesperrt. Betreiber von Node-Releases müssen vorhandene Mailtimer deaktivieren; ein Einzelretry verlangt die Ereignis-ID. Ein Code-Rollback darf ausgeschöpfte Versuche nicht zurücksetzen und muss den gewollten manuellen Versandmodus berücksichtigen.
+Existing events, attempts and payload bytes are preserved; no new migration. Resend retains original idempotency bytes within 23 hours. Ambiguous SMTP handoffs remain locked. Node release operators must disable existing email timers; an individual retry requires the event ID. A code rollback must not reset exhausted attempts and must account for the intended manual delivery mode.
 
-Quellen: [Workers CPU-Grenzen](https://developers.cloudflare.com/workers/platform/limits/#cpu-time), [Workers-Preise](https://developers.cloudflare.com/workers/platform/pricing/), [Projekt-Versandvertrag](mail-transports.md).
+Sources: [Workers CPU limits](https://developers.cloudflare.com/workers/platform/limits/#cpu-time), [Workers pricing](https://developers.cloudflare.com/workers/platform/pricing/), [project delivery contract](mail-transports.md).

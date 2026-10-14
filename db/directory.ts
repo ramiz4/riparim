@@ -1,3 +1,5 @@
+import { legacyWorkshopScopeReasons } from "@/lib/i18n/legacy-scope-messages";
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 import { ValidationError } from "@/lib/validation-error";
 import { storage } from "./storage";
 import canonical from "@/data/workshops.json";
@@ -95,7 +97,7 @@ export function validateProfile(
   if (workshopRetired(id))
     throw new ValidationError(
       "workshop_retired",
-      "Diese Werkstattkennung wurde entfernt und darf nicht erneut verwendet werden.",
+      legacyMessages.workshopRetired,
     );
   const text = (key: string, max: number) =>
       String(body[key] ?? "")
@@ -130,7 +132,7 @@ export function validateProfile(
     if (!item || typeof item !== "object")
       throw new ValidationError(
         "workshop_sources_invalid",
-        "Bitte ergänze gültige Quellen.",
+        legacyMessages.workshopSourcesInvalid,
       );
     const r = item as Record<string, unknown>;
     let u: URL;
@@ -139,13 +141,13 @@ export function validateProfile(
     } catch {
       throw new ValidationError(
         "workshop_sources_invalid",
-        "Bitte ergänze gültige Quellen.",
+        legacyMessages.workshopSourcesInvalid,
       );
     }
     if (u.protocol !== "https:" || u.username || u.password)
       throw new ValidationError(
         "workshop_sources_https",
-        "Quellen müssen HTTPS-Links ohne Zugangsdaten sein.",
+        legacyMessages.workshopSourcesHttps,
       );
     const directorySource =
       r.kind === "directory" ||
@@ -178,24 +180,25 @@ export function validateProfile(
   )
     throw new ValidationError(
       "workshop_invalid_profile",
-      "Bitte prüfe Name, Ort, Adresse, Telefonnummer, Marke, Leistungen, Beschreibung und Prüfdatum.",
+      legacyMessages.workshopInvalidProfile,
     );
   if (whatsapp && !/^\+[1-9]\d{7,14}$/.test(whatsapp))
     throw new ValidationError(
       "workshop_whatsapp_invalid",
-      "Bitte ergänze WhatsApp als internationale Telefonnummer oder lasse das Feld leer.",
+      legacyMessages.workshopWhatsappInvalid,
     );
   if (status === "published" && !sources.length)
     throw new ValidationError(
       "workshop_sources_required",
-      "Ein veröffentlichtes Profil braucht mindestens eine nachvollziehbare Quelle.",
+      legacyMessages.workshopSourcesRequired,
     );
   if (status === "published" && workshopScopeExclusion({ id, name }))
     throw new ValidationError(
       "workshop_scope_excluded",
-      "Riparim veröffentlicht Pkw-Werkstätten. " +
-        workshopScopeExclusion({ id, name }) +
-        " Bitte als Entwurf speichern.",
+      legacyMessages.passengerCarOnlyPrefix +
+        (legacyWorkshopScopeReasons[id] ??
+          legacyMessages.passengerCarScopeExclusion) +
+        legacyMessages.saveDraftSuffix,
     );
   const lat =
       body.lat === null || body.lat === undefined || body.lat === ""
@@ -217,7 +220,7 @@ export function validateProfile(
   )
     throw new ValidationError(
       "workshop_coordinates_invalid",
-      "Bitte ergänze gültige Koordinaten in Kosovo oder lasse beide Felder leer.",
+      legacyMessages.workshopCoordinatesInvalid,
     );
   return {
     id,

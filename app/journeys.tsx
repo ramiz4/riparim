@@ -68,13 +68,6 @@ export type Visit = {
   file_name: string | null;
   revision: number;
 };
-export const statusLabels: Record<string, string> = {
-  pending: "In Prüfung",
-  approved: "Bewertung vervollständigen",
-  needs_more: "Ergänzung nötig",
-  published: "Veröffentlicht",
-  deleting: "Löschung ausstehend",
-};
 
 export function VisitForm({
   open,

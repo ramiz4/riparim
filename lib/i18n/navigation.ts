@@ -53,7 +53,7 @@ function publicNavigationHref(
     /\.[a-z0-9]+$/i.test(path)
   )
     return localizeHref("/", locale);
-  if (path === "/werkstaetten") {
+  if (path === "/workshops") {
     if (url.searchParams.get("bewerten") === "1") query.set("bewerten", "1");
     const name = catalogueQuery(url.searchParams.get("q") ?? "");
     if (name) query.set("q", name);
@@ -69,34 +69,29 @@ function publicNavigationHref(
     if (workshop && profileId.test(workshop)) query.set("nachweis", workshop);
   }
   if (
-    path === "/einstellungen" &&
+    path === "/settings" &&
     url.searchParams.getAll("vorschau").length === 1 &&
     ["email", "google"].includes(url.searchParams.get("vorschau") ?? "")
   )
     query.set("vorschau", url.searchParams.get("vorschau")!);
-  if (path === "/betriebe/beanspruchen") {
+  if (path === "/business/claim") {
     const ids = url.searchParams.getAll("werkstatt"),
       id = ids.length === 1 ? ids[0] : null;
     if (id && profileId.test(id)) query.set("werkstatt", id);
   }
-  if (/^\/werkstatt\/[^/]+$/.test(path)) {
+  if (/^\/workshop\/[^/]+$/.test(path)) {
     const search = url.searchParams.get("suche");
     if (search) {
       const target = languageSwitchHref(search, locale);
-      if (
-        pageIdentityPath(new URL(target, origin).pathname) === "/werkstaetten"
-      )
+      if (pageIdentityPath(new URL(target, origin).pathname) === "/workshops")
         query.set("suche", target);
     }
     if (url.searchParams.get("bewerten") === "1") query.set("bewerten", "1");
   }
   if (
-    [
-      "/anmelden",
-      "/registrieren",
-      "/passwort-vergessen",
-      "/passwort-neu",
-    ].includes(path)
+    ["/login", "/register", "/forgot-password", "/reset-password"].includes(
+      path,
+    )
   ) {
     const next = url.searchParams.get("weiter");
     if (allowReturn && next && next.length <= 2000) {

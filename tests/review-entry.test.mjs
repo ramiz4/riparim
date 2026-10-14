@@ -7,7 +7,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 const out = ".test-runtime/review-entry.mjs";
 const bundle = await build({
   stdin: {
-    contents: `export {default as Home} from './app/[locale]/page';export {default as Catalogue} from './app/[locale]/werkstaetten/catalogue';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {defaultCatalogueFilters} from './lib/catalogue-filters';`,
+    contents: `export {default as Home} from './app/[locale]/page';export {default as Catalogue} from './app/[locale]/workshops/catalogue';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {defaultCatalogueFilters} from './lib/catalogue-filters';`,
     resolveDir: process.cwd(),
     loader: "tsx",
   },

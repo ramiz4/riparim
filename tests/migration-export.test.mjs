@@ -119,6 +119,25 @@ for (const workerPath of [
       assert.equal(blocked.headers.get("X-Riparim-Release-Commit"), commit);
       passed++;
     }
+    for (const [page, expected] of [
+      [
+        "/en/maintenance",
+        "Riparim is being transferred to the new server. Please try again later.",
+      ],
+      [
+        "/sq/maintenance",
+        "Riparim po transferohet në serverin e ri. Ju lutemi provoni përsëri më vonë.",
+      ],
+      [
+        "/maintenance",
+        "Riparim wird gerade auf den neuen Server übernommen. Bitte versuche es später erneut.",
+      ],
+    ]) {
+      const blocked = await runtime.dispatchFetch("http://fixture" + page);
+      assert.equal(blocked.status, 503);
+      assert.equal(await blocked.text(), expected);
+      passed++;
+    }
     assert.equal(
       (await db.prepare("SELECT COUNT(*) AS n FROM application_writes").first())
         .n,

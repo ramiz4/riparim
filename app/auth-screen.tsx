@@ -1,3 +1,4 @@
+import type { AuthScreenQuery } from "@/lib/auth/screen-query";
 import { publicReleaseRender } from "@/lib/public-release";
 import { DeferredAuth } from "@/components/deferred-auth";
 import { I18nMessages } from "@/lib/i18n/client";
@@ -14,12 +15,12 @@ import { isLocalDevelopmentRequest } from "@/lib/auth/local-development";
 import { redirect } from "next/navigation";
 export default async function AuthScreenPage({
   screen,
-  searchParams,
+  query,
   params,
 }: {
   params: Promise<{ locale: string }>;
   screen: AuthScreen;
-  searchParams: Promise<{ weiter?: string; fehler?: string; hinweis?: string }>;
+  query: AuthScreenQuery;
 }) {
   const { locale: value } = await params,
     locale = isLocale(value) ? value : "de";
@@ -30,10 +31,10 @@ export default async function AuthScreenPage({
       </I18nMessages>
     );
   const c = await getAuthConfig(),
-    q = await searchParams,
+    q = query,
     u = await getAppUser(),
     a = await getAdminUser(u),
-    next = localizeHref(safeReturnPath(q.weiter), locale);
+    next = localizeHref(safeReturnPath(q.returnTo), locale);
   if (screen === "login" && c?.enabled && u) redirect(next);
   const localSeedLogin =
     screen === "login" && (await isLocalDevelopmentRequest());
@@ -65,16 +66,16 @@ export default async function AuthScreenPage({
         isOwner={!!a?.isModerator}
         returnTo={next}
         notice={
-          q.hinweis === "email-bestaetigt"
+          q.notice === "email-confirmed"
             ? t("customer.emailConfirmed")
-            : q.hinweis === "passwort-geaendert"
+            : q.notice === "password-changed"
               ? t("customer.passwordChanged")
               : undefined
         }
         errorHint={
-          q.fehler === "bestaetigung"
+          q.error === "confirmation"
             ? t("customer.invalidLink")
-            : q.fehler === "google"
+            : q.error === "google"
               ? t("customer.googleCancelled")
               : undefined
         }

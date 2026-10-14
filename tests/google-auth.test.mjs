@@ -17,7 +17,7 @@ const bundle = await build({
     auth: "app/auth.ts",
     config: "lib/auth/config.ts",
     actions: "app/api/auth/[action]/route.ts",
-    callback: "app/auth/bestaetigen/route.ts",
+    callback: "app/auth/confirm/route.ts",
     templates: "lib/auth/email-templates.ts",
   },
   bundle: true,

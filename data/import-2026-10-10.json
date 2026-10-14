@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "checkedAt": "2026-10-10",
-  "request": "Zusätzliche veröffentlichbare Kfz-Werkstätten und Detailing-Betriebe im Kosovo recherchieren und importieren; alle bestätigten Treffer über 20 hinaus aufnehmen, Dubletten vermeiden.",
+  "request": "Research and import additional publishable automotive workshops and detailing businesses in Kosovo; include all confirmed results beyond 20 and avoid duplicates.",
   "before": {
     "total": 129,
     "published": 129,
@@ -103,7 +103,7 @@
       "sourceUrls": [
         "https://halaman-kuning.cybo.com/XK/kori%C5%A1a/membaiki-kereta-?d=c"
       ],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "auto-detailing-meti-mitrovica",
@@ -118,7 +118,7 @@
       "sourceUrls": [
         "https://www.autoyas.com/XK/Mitrovica/309155915624453/Auto-Detailing-Meti"
       ],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "auto-elektricist-xhaviti-gjakova",
@@ -133,7 +133,7 @@
       "sourceUrls": [
         "https://halaman-kuning.cybo.com/XK/gjakov%C3%AB/membaiki-kereta-?d=c"
       ],
-      "note": "Identischer Name und Telefonkontakt. Der Google-Standortmarker liegt innerhalb der unabhängig veröffentlichten Plus-Code-Zelle 9CVV+6CW an der Wesley-Clark-Straße. Direkte Place-Details-ID-Prüfung bestanden."
+      "note": "Identical name and phone contact. The Google location marker lies within the independently published Plus Code cell 9CVV+6CW on Wesley Clark street. Direct Place Details ID check passed."
     },
     {
       "id": "auto-elektro-servis-a-plus-prizren",
@@ -148,7 +148,7 @@
       "sourceUrls": [
         "https://www.gjithebiznesi.com/XK/auto-elektro-servis-a-044-205-111"
       ],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "auto-glass-kosovo-fushe-kosove",
@@ -164,7 +164,7 @@
         "https://www.cybo.com/XK-biz/auto-glass-kosovo-auto-xhama",
         "https://autoglasskosovo.com/location"
       ],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "auto-ngjyrosje-naseri-suhareke",
@@ -177,7 +177,7 @@
       "independentServiceScopeVerified": true,
       "uniqueInCatalogue": true,
       "sourceUrls": ["https://autongjyrosjenaseri.com/"],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "auto-picasso-prishtina",
@@ -190,7 +190,7 @@
       "independentServiceScopeVerified": true,
       "uniqueInCatalogue": true,
       "sourceUrls": ["https://autopicasso.net/"],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "auto-servis-blerti-podujeve",
@@ -203,7 +203,7 @@
       "independentServiceScopeVerified": true,
       "uniqueInCatalogue": true,
       "sourceUrls": ["https://autoservisblerti.com/"],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "auto-servis-edi-fushe-kosove",
@@ -218,7 +218,7 @@
       "sourceUrls": [
         "https://www.gjithebiznesi.com/XK/auto-servis-edi-045-411-022"
       ],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "auto-servis-enisi-obiliq",
@@ -233,7 +233,7 @@
       "sourceUrls": [
         "https://www.gjithebiznesi.com/XK/auto-servis-enisi-044-809-246"
       ],
-      "note": "Name, Telefon und Straßenadresse stimmen überein; Kastriot und Obiliq bezeichnen hier denselben Ort. Direkte Place-Details-ID-Prüfung bestanden."
+      "note": "Name, phone and street address agree; Kastriot and Obiliq refer to the same place here. Direct Place Details ID check passed."
     },
     {
       "id": "auto-servis-lirimi-podujeve",
@@ -248,7 +248,7 @@
       "sourceUrls": [
         "https://www.gjithebiznesi.com/XK/auto-servis-lirimi-045-533-746"
       ],
-      "note": "Name, Telefon und Straßenadresse stimmen überein; Besianë und Podujevë bezeichnen hier denselben Ort. Direkte Place-Details-ID-Prüfung bestanden."
+      "note": "Name, phone and street address agree; Besianë and Podujevë refer to the same place here. Direct Place Details ID check passed."
     },
     {
       "id": "auto-servis-megi-drenas",
@@ -264,7 +264,7 @@
         "https://www.autoyas.com/XK/Drenas/122648967802001/Auto-Servis-MEGI---Drenas",
         "https://www.gjithebiznesi.com/XK/auto-servis-megi-044-609-224"
       ],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "auto-servis-meti-rahovec",
@@ -279,7 +279,7 @@
       "sourceUrls": [
         "https://www.gjithebiznesi.com/XK/auto-servis-meti_1J-044-385-480"
       ],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "auto-servis-montimi-rahovec",
@@ -294,7 +294,7 @@
       "sourceUrls": [
         "https://www.gjithebiznesi.com/XK/auto-servis-montimi-044-269-197"
       ],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "auto-servis-nazi-drenas",
@@ -309,7 +309,7 @@
       "sourceUrls": [
         "https://www.gjithebiznesi.com/XK/auto-servis-nazi-044-405-002"
       ],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "auto-servis-nexhi-lipjan",
@@ -324,7 +324,7 @@
       "sourceUrls": [
         "https://www.gjithebiznesi.com/XK/auto-servis-nexhi_1n-044-736-933"
       ],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "auto-servis-pirqi-vushtrri",
@@ -339,7 +339,7 @@
       "sourceUrls": [
         "https://www.gjithebiznesi.com/XK/auto-servis-pirqi-044-444-556"
       ],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "auto-servis-univerzal-lipjan",
@@ -354,7 +354,7 @@
       "sourceUrls": [
         "https://www.gjithebiznesi.com/XK/auto-servis-univerzal_1s-044-269-491"
       ],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "auto-servis-visco-prizren",
@@ -369,7 +369,7 @@
       "sourceUrls": [
         "https://www.gjithebiznesi.com/XK/auto-servis-visco-044-122-498"
       ],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "greensteam-detailing-prishtina",
@@ -385,7 +385,7 @@
         "https://mygreensteam.com/wp-content/uploads/2025/07/Company-Profile-GreenSteam-Detailing.pdf",
         "https://mygreensteam.com/"
       ],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "lipjani-coding-lipjan",
@@ -398,7 +398,7 @@
       "independentServiceScopeVerified": true,
       "uniqueInCatalogue": true,
       "sourceUrls": ["https://lipjanicoding.com/en"],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "luxury-auto-detailing-gjilan",
@@ -413,7 +413,7 @@
       "sourceUrls": [
         "https://www.findglocal.com/XK/Gjilan/1168160443205697/Luxury-Auto-Detailing"
       ],
-      "note": "Aktuelle eigene Betriebsbeiträge bestätigen denselben Telefonkontakt und Mulla Idrizi III in Gjilan. Der abweichende ältere Verzeichnis-Plus-Code wird nicht übernommen. Direkte Place-Details-ID-Prüfung bestanden."
+      "note": "Current posts by the business confirm the same phone contact and Mulla Idrizi III in Gjilan. The conflicting older directory Plus Code is not adopted. Direct Place Details ID check passed."
     },
     {
       "id": "opel-zh-sh-gjakova",
@@ -428,7 +428,7 @@
       "sourceUrls": [
         "https://faqet-e-verdha.cybo.com/XK/gjakov%C3%AB/riparimi-i-makinave-"
       ],
-      "note": "Zwei Google-Geschäftspunkte teilen die Telefonnummer. Nur die Place ID mit passendem Namen und exakt dem unabhängigen Plus-Code 9CGP+R24 an der Skënderbeu-Straße wird übernommen. Direkte Place-Details-ID-Prüfung bestanden."
+      "note": "Two Google business locations share the phone number. Only the Place ID with the matching name and exact independent Plus Code 9CGP+R24 on Skënderbeu street is adopted. Direct Place Details ID check passed."
     },
     {
       "id": "shala-detailing-gjakova",
@@ -441,7 +441,7 @@
       "independentServiceScopeVerified": true,
       "uniqueInCatalogue": true,
       "sourceUrls": ["https://shaladetailing.com/"],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "sokoli-autoelectronic-peja",
@@ -456,7 +456,7 @@
       "sourceUrls": [
         "https://www.gjithebiznesi.com/XK/sokoli-autoelectronic-049-326-545"
       ],
-      "note": "Abweichender Namenszusatz im Google-Auftritt; identische internationale Telefonnummer und exakt derselbe unabhängige Plus-Code M843+28 bestätigen die Paarung. Verzeichnisname bleibt erhalten. Direkte Place-Details-ID-Prüfung bestanden."
+      "note": "The Google presence has a different name suffix; the identical international phone number and exact same independent Plus Code M843+28 confirm the match. The directory name is preserved. Direct Place Details ID check passed."
     },
     {
       "id": "superclean-prishtina",
@@ -471,7 +471,7 @@
       "sourceUrls": [
         "https://www.gjithebiznesi.com/XK/superclean-prishtin%C3%AB-045-677-633"
       ],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "tiptop-detailing-gjakova",
@@ -486,7 +486,7 @@
       "sourceUrls": [
         "https://www.gjithebiznesi.com/XK/tiptop-vullkanizer-detailing-car-wash-049-323-545"
       ],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "waxon-auto-detailing-mitrovica",
@@ -499,7 +499,7 @@
       "independentServiceScopeVerified": true,
       "uniqueInCatalogue": true,
       "sourceUrls": ["https://autowaxon.com/contact", "https://autowaxon.com/"],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     },
     {
       "id": "xhela-polir-mitrovica",
@@ -512,7 +512,7 @@
       "independentServiceScopeVerified": true,
       "uniqueInCatalogue": true,
       "sourceUrls": ["https://www.autoxhela.com/"],
-      "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+      "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
     }
   ],
   "notImported": [
@@ -525,7 +525,7 @@
         "BEXHI",
         "Autobokshi"
       ],
-      "reason": "Fehlender eindeutiger Kontakt-/Standortabgleich oder unzureichender unabhängiger Kfz-Leistungsnachweis."
+      "reason": "No unambiguous contact/location comparison or insufficient independent evidence of automotive services."
     },
     {
       "names": [
@@ -538,11 +538,11 @@
         "AUTO ROYAL Car Styling & Detailing",
         "BULI Auto Dekor"
       ],
-      "reason": "Teile-/Produktverkauf, Abschleppen oder andere Kategorien ohne ausreichend belegten passenden Dienstleistungsumfang."
+      "reason": "Parts/product sales, towing or other categories without sufficiently evidenced relevant service scope."
     },
     {
       "names": ["Autobahn Motors SHPK"],
-      "reason": "Google meldet vorübergehende Schließung; kein geeigneter aktueller Veröffentlichungskandidat."
+      "reason": "Google reports temporary closure; not a suitable current publication candidate."
     },
     {
       "names": [
@@ -557,7 +557,7 @@
         "Niku Detailing",
         "Auto Detailing EDI"
       ],
-      "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
+      "reason": "No unambiguously matching current Google contact or multiple unconfirmed locations; not approved."
     }
   ],
   "deduplication": {

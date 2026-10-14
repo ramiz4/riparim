@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "7d2dc6ba11a47b96c67b64c0daf50933f2c08136f4030f5b23483ec457646e1a",
+  "revision": "d86a8ad27e20b9da92e07140431d54b843c1960eefd24b07c65066941d76dec2",
   "records": [
     {
       "id": "ahp-volkswagen-prizren",
@@ -345,7 +345,7 @@
         "source": "https://www.facebook.com/KurtiTD/",
         "sourceName": "KTD Exhaust System",
         "researchStatus": "Gefunden (Betriebsprofil)",
-        "notes": "Eigener Wochenplan im öffentlichen Facebook-Dialog.",
+        "notes": "The business's own weekly schedule in the public Facebook dialog.",
         "originalWeek": [
           "09:00-18:00",
           "09:00-18:00",
@@ -606,7 +606,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: ungewöhnliche Quellenangabe (24 Stunden oder über Mitternacht). Bisherige Quelle: https://www.google.com/maps/search/?api=1&query=Auto+Detailing+BESI+Mal%C3%ABsi+e+Re+20550&query_place_id=ChIJkevGspSXUxMRXbVZsyaYY4o. Quellenname: Auto Detailing BESI. Bisheriger Recherchehinweis: Quelle nennt 24-Stunden-Öffnung oder Zeiten über Mitternacht. Unverändert wiedergegeben. Vor Besuch beim Betrieb bestätigen.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: unusual source hours (24 hours or overnight). Previous source: https://www.google.com/maps/search/?api=1&query=Auto+Detailing+BESI+Mal%C3%ABsi+e+Re+20550&query_place_id=ChIJkevGspSXUxMRXbVZsyaYY4o. Source name: Auto Detailing BESI. Previous research note: The source lists 24-hour opening or overnight hours. Reproduced unchanged. Confirm with the business before visiting.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -968,7 +968,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: keine verlässlichen Zeiten gefunden. Bisherige Quelle: https://www.cybo.com/XK-biz/auto-elektri%C3%A7ist-xhaviti. Quellenname: Auto elektriçist Xhaviti. Bisheriger Recherchehinweis: Nachrecherche am 13.10.2026: exakte Telefonnummer zusätzlich im Web gesucht und den Betrieb über Cybos eigene Suche geöffnet. Cybo bestätigt 045 273 122, Wesley Clark und 9CVV+6CW, enthält aber keinen Wochenplan und keine eigene Website oder Facebook-Verlinkung. Der zuvor gefundene Auto Servis Xhaviti in Vushtrri ist ein anderer Betrieb. Keine Zeiten übernommen. Social-Media-Nachprüfung am 13.10.2026: Facebook und Instagram direkt geprüft: https://www.facebook.com/p/Auto-Servis-Xhaviti-100043816706357/ und https://www.instagram.com/autoservice_xhaviti/reels/ nennen Rruga Faruk Beqiri, Vushtrri. Facebook nennt +383 44 296 152, abweichend von 045 273 122 in Gjakova. Daher nicht zugeordnet.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: no reliable hours found. Previous source: https://www.cybo.com/XK-biz/auto-elektri%C3%A7ist-xhaviti. Source name: Auto elektriçist Xhaviti. Previous research note: Follow-up research on 13.10.2026: the exact phone number was additionally searched on the web and the business opened through Cybo's own search. Cybo confirms 045 273 122, Wesley Clark and 9CVV+6CW, but contains no weekly schedule or business website or Facebook link. The previously found Auto Servis Xhaviti in Vushtrri is a different business. No hours adopted. Social-media follow-up on 13.10.2026: Facebook and Instagram checked directly: https://www.facebook.com/p/Auto-Servis-Xhaviti-100043816706357/ and https://www.instagram.com/autoservice_xhaviti/reels/ list Rruga Faruk Beqiri, Vushtrri. Facebook lists +383 44 296 152, different from 045 273 122 in Gjakova. Therefore not assigned.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -1057,7 +1057,7 @@
         "source": "https://www.cybo.com/XK-biz/auto-elektrika-dzogovic",
         "sourceName": "Auto elektrika Dzogovic",
         "researchStatus": "Gefunden (Verzeichnis)",
-        "notes": "Vollständig geladener Cybo-Eintrag nennt Drvarska bb, Mitrovicë 38220 und 064 9161436 passend zur CSV-Werkstatt. Wochenplan: werktags 10:00–19:00, Samstag 10:00–17:00, Sonntag geschlossen.",
+        "notes": "The fully loaded Cybo entry lists Drvarska bb, Mitrovicë 38220 and 064 9161436, matching the CSV workshop. Weekly schedule: weekdays 10:00–19:00, Saturday 10:00–17:00, Sunday closed.",
         "originalWeek": [
           "10:00-19:00",
           "10:00-19:00",
@@ -1502,7 +1502,7 @@
         "source": "https://stgres.gjirafa.biz/auto-elektro-servis-niki-1",
         "sourceName": "Auto Elektro Servis Niki",
         "researchStatus": "Gefunden (Verzeichnis)",
-        "notes": "Telefon +383 44 164 468 stimmt mit dem Betrieb überein. Verzeichnis nennt Afrim Zhitia. Der CSV-Maps-Link zeigt inzwischen EnesiMotoGjilan; dessen 24-Stunden-Plan wurde nicht zugeordnet.",
+        "notes": "Phone +383 44 164 468 agrees with the business. The directory lists Afrim Zhitia. The CSV Maps link now shows EnesiMotoGjilan; its 24-hour schedule was not assigned.",
         "originalWeek": [
           "08:00-19:00",
           "08:00-19:00",
@@ -1852,7 +1852,7 @@
         "source": "https://www.auto-ford.com/contact/",
         "sourceName": "Autoford",
         "researchStatus": "Widersprüchliche Quellen",
-        "notes": "Eigene Kontaktseite bestätigt +383 44 605 241 und R107 (Periferi), Prizren. Übernommen ist der detaillierte Kontaktplan mit Mo–Fr 08:00–18:00, Sa 09:00–17:00 und Sonntag geschlossen. Die Startseite nennt Sa 08:00–17:00; der Footer nennt Hën–Sht 08:00–18:00 und eine abweichende Telefonnummer 044-602-241. Samstagszeit daher vor Besuch bestätigen. Startseite: https://www.auto-ford.com/ . Cybo bestätigt +383 44 605 241 und den CSV-Plus-Code: https://www.cybo.com/XK-biz/auto-ford-service",
+        "notes": "The business's own contact page confirms +383 44 605 241 and R107 (Periferi), Prizren. The detailed contact schedule with Mon–Fri 08:00–18:00, Sat 09:00–17:00 and Sunday closed is adopted. The homepage lists Sat 08:00–17:00; the footer lists Hën–Sht 08:00–18:00 and a different phone number, 044-602-241. Therefore confirm Saturday hours before visiting. Homepage: https://www.auto-ford.com/ . Cybo confirms +383 44 605 241 and the CSV Plus Code: https://www.cybo.com/XK-biz/auto-ford-service",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -2030,7 +2030,7 @@
         "source": "https://stgres.gjirafa.biz/auto-laker-kimi-1",
         "sourceName": "Auto Laker Kimi",
         "researchStatus": "Gefunden (Verzeichnis)",
-        "notes": "Passender Originaleintrag mit +383 44 294 811. Vollständiger Gjirafa-Wochenplan: Mo–Sa 09:00–18:00, Sonntag geschlossen.",
+        "notes": "Matching original entry with +383 44 294 811. Complete Gjirafa weekly schedule: Mon–Sat 09:00–18:00, Sunday closed.",
         "originalWeek": [
           "09:00-18:00",
           "09:00-18:00",
@@ -2653,7 +2653,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: ungewöhnliche Quellenangabe (24 Stunden oder über Mitternacht). Bisherige Quelle: https://www.google.com/maps/search/?api=1&query=Auto+Ngjyros%C3%ABs+IZMIRI+116+V%C3%ABllezerit+G%C3%ABrvalla%2C+Ferizaj+70000&query_place_id=ChIJJ4SlZvp_VBMRyXe6jR8r5-E. Quellenname: Auto Ngjyrosës IZMIRI. Bisheriger Recherchehinweis: Quelle nennt 24-Stunden-Öffnung oder Zeiten über Mitternacht. Unverändert wiedergegeben. Vor Besuch beim Betrieb bestätigen.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: unusual source hours (24 hours or overnight). Previous source: https://www.google.com/maps/search/?api=1&query=Auto+Ngjyros%C3%ABs+IZMIRI+116+V%C3%ABllezerit+G%C3%ABrvalla%2C+Ferizaj+70000&query_place_id=ChIJJ4SlZvp_VBMRyXe6jR8r5-E. Source name: Auto Ngjyrosës IZMIRI. Previous research note: The source lists 24-hour opening or overnight hours. Reproduced unchanged. Confirm with the business before visiting.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -3187,7 +3187,7 @@
         "source": "https://stgres.gjirafa.biz/autoserviceinovatorgroup-1",
         "sourceName": "Auto Pjesë&Service INOVATOR group",
         "researchStatus": "Älterer Standort – prüfen",
-        "notes": "Verzeichnis nennt Rr. Remzi Hoxha und eine ältere Telefonnummer. Die aktuelle eigene Kontaktseite nennt Rr. Brahim Ademi, aber keine Zeiten. Dieser Wochenplan ist für den heutigen Standort nicht bestätigt. Aktuelle Quelle: https://inovatorautomotive.com/kontakti/",
+        "notes": "The directory lists Rr. Remzi Hoxha and an older phone number. The business's current contact page lists Rr. Brahim Ademi but no hours. This weekly schedule is not confirmed for the current location. Current source: https://inovatorautomotive.com/kontakti/",
         "originalWeek": [
           "09:00-19:00",
           "09:00-19:00",
@@ -3276,7 +3276,7 @@
         "source": "https://stgres.gjirafa.biz/auto-pjes--servis-fatosi-1",
         "sourceName": "Auto Pjesë & Servis Fatosi",
         "researchStatus": "Zuordnung geklärt – Zeiten abweichend",
-        "notes": "Zuordnung belegt: Gjirafa nennt gemeinsam +383 44 668 508 (CSV), +383 49 436 662 und +383 49 521 111 (Maps), dazu den passenden Standort Llapnasellë. Übernommen ist der Werkstatt-Wochenplan aus Gjirafa. Maps führt denselben Kontakt als Auto Larje Fatosi und nennt auch am Sonntag 08:00–18:00. Sonntag vor einem Werkstattbesuch bestätigen.",
+        "notes": "Assignment evidenced: Gjirafa jointly lists +383 44 668 508 (CSV), +383 49 436 662 and +383 49 521 111 (Maps), along with the matching Llapnasellë location. The workshop weekly schedule from Gjirafa is adopted. Maps lists the same contact as Auto Larje Fatosi and also shows Sunday 08:00–18:00. Confirm Sunday hours before a workshop visit.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -3543,7 +3543,7 @@
         "source": "https://gjirafa.biz/autoservisregllazhatabaku-1",
         "sourceName": "Auto Servis Regllazha - TABAKU",
         "researchStatus": "Widersprüchliche Quellen",
-        "notes": "Gjirafa nennt Mo–Sa 08:00–18:00, Sonntag geschlossen. Mapcarta nennt Mo–Sa 09:00–18:00. Vor Besuch beim Betrieb bestätigen. Zweite Quelle: https://mapcarta.com/N7297774449",
+        "notes": "Gjirafa lists Mon–Sat 08:00–18:00, Sunday closed. Mapcarta lists Mon–Sat 09:00–18:00. Confirm with the business before visiting. Second source: https://mapcarta.com/N7297774449",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -4350,7 +4350,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: ungewöhnliche Quellenangabe (24 Stunden oder über Mitternacht). Bisherige Quelle: https://www.google.com/maps/search/?api=1&query=Auto+Service+Mali+Rr.+Mon+Balaj+no.245%2C+Prishtina+10000&query_place_id=ChIJ0-0nVbufVBMRnljLpHwJfFM. Quellenname: Auto Service Mali. Bisheriger Recherchehinweis: Quelle nennt 24-Stunden-Öffnung oder Zeiten über Mitternacht. Unverändert wiedergegeben. Vor Besuch beim Betrieb bestätigen.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: unusual source hours (24 hours or overnight). Previous source: https://www.google.com/maps/search/?api=1&query=Auto+Service+Mali+Rr.+Mon+Balaj+no.245%2C+Prishtina+10000&query_place_id=ChIJ0-0nVbufVBMRnljLpHwJfFM. Source name: Auto Service Mali. Previous research note: The source lists 24-hour opening or overnight hours. Reproduced unchanged. Confirm with the business before visiting.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -4795,7 +4795,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: ungewöhnliche Quellenangabe (24 Stunden oder über Mitternacht). Bisherige Quelle: https://www.google.com/maps/search/?api=1&query=Auto+Servis+ANUARI+Qemal+Stafa%2C+Nr.8+Hasan+Ferri%2C+Prishtina+10000&query_place_id=ChIJT9vZ2UifVBMRXP0Z5KC7dl8. Quellenname: Auto Servis ANUARI. Bisheriger Recherchehinweis: Quelle nennt 24-Stunden-Öffnung oder Zeiten über Mitternacht. Unverändert wiedergegeben. Vor Besuch beim Betrieb bestätigen.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: unusual source hours (24 hours or overnight). Previous source: https://www.google.com/maps/search/?api=1&query=Auto+Servis+ANUARI+Qemal+Stafa%2C+Nr.8+Hasan+Ferri%2C+Prishtina+10000&query_place_id=ChIJT9vZ2UifVBMRXP0Z5KC7dl8. Source name: Auto Servis ANUARI. Previous research note: The source lists 24-hour opening or overnight hours. Reproduced unchanged. Confirm with the business before visiting.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -4884,7 +4884,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: keine verlässlichen Zeiten gefunden. Bisherige Quelle: https://www.cybo.com/XK-biz/auto-servis-arlindi. Quellenname: Auto Servis Arlindi. Bisheriger Recherchehinweis: Nachrecherche am 13.10.2026: exakte Telefonnummer im Web und Cybos eigene Namens-/Ortssuche geprüft. Der passende Cybo-Eintrag bestätigt 044 848 728 und Rr Qëndresa, enthält aber keine Öffnungszeiten oder eigene Website/Facebook-Verlinkung. Das gleichnamige zuvor gefundene Facebook-Profil nennt 048 454 542; dessen Angaben wurden nicht diesem Betrieb zugeordnet. Social-Media-Nachprüfung am 13.10.2026: Instagram https://www.instagram.com/auto.servis.arlindi/ direkt geprüft: Rruga Driton Islami, Ferizaj, 044-287-682. Facebook https://www.facebook.com/AutoServisArlindi/ direkt geprüft: +383 48 454 542. Beide passen nicht zu 044 848 728 und Rr Qëndresa in Prishtina.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: no reliable hours found. Previous source: https://www.cybo.com/XK-biz/auto-servis-arlindi. Source name: Auto Servis Arlindi. Previous research note: Follow-up research on 13.10.2026: the exact phone number checked on the web and in Cybo's own name/place search. The matching Cybo entry confirms 044 848 728 and Rr Qëndresa but contains no opening hours or business website/Facebook link. The previously found Facebook namesake lists 048 454 542; its details were not assigned to this business. Social-media follow-up on 13.10.2026: Instagram https://www.instagram.com/auto.servis.arlindi/ checked directly: Rruga Driton Islami, Ferizaj, 044-287-682. Facebook https://www.facebook.com/AutoServisArlindi/ checked directly: +383 48 454 542. Neither matches 044 848 728 and Rr Qëndresa in Prishtina.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -5952,7 +5952,7 @@
         "source": "https://stgres.gjirafa.biz/auto-servis-doni-3",
         "sourceName": "Auto Servis Doni",
         "researchStatus": "Gefunden (Verzeichnis)",
-        "notes": "Telefon +383 49 255 770 und Standort Klinë e Epërme stimmen überein.",
+        "notes": "Phone +383 49 255 770 and the Klinë e Epërme location agree.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -6041,7 +6041,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: ungewöhnliche Quellenangabe (24 Stunden oder über Mitternacht). Bisherige Quelle: https://www.google.com/maps/search/?api=1&query=Auto+servis+Edi+Vragoli%2C+Fush%C3%AB+10000&query_place_id=ChIJLfh83WRjUxMRu_3vwydW44s. Quellenname: Auto servis Edi. Bisheriger Recherchehinweis: Quelle nennt 24-Stunden-Öffnung oder Zeiten über Mitternacht. Unverändert wiedergegeben. Vor Besuch beim Betrieb bestätigen.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: unusual source hours (24 hours or overnight). Previous source: https://www.google.com/maps/search/?api=1&query=Auto+servis+Edi+Vragoli%2C+Fush%C3%AB+10000&query_place_id=ChIJLfh83WRjUxMRu_3vwydW44s. Source name: Auto servis Edi. Previous research note: The source lists 24-hour opening or overnight hours. Reproduced unchanged. Confirm with the business before visiting.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -6308,7 +6308,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: ungewöhnliche Quellenangabe (24 Stunden oder über Mitternacht). Bisherige Quelle: https://www.google.com/maps/search/?api=1&query=Auto+Servis+%22Gashi%22+J8G3%2BGWQ%2C+Pej%C3%AB+30000&query_place_id=ChIJAXLDOLH_UhMRvfYFH9KdYus. Quellenname: Auto Servis \"Gashi\". Bisheriger Recherchehinweis: Quelle nennt 24-Stunden-Öffnung oder Zeiten über Mitternacht. Unverändert wiedergegeben. Vor Besuch beim Betrieb bestätigen.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: unusual source hours (24 hours or overnight). Previous source: https://www.google.com/maps/search/?api=1&query=Auto+Servis+%22Gashi%22+J8G3%2BGWQ%2C+Pej%C3%AB+30000&query_place_id=ChIJAXLDOLH_UhMRvfYFH9KdYus. Source name: Auto Servis \"Gashi\". Previous research note: The source lists 24-hour opening or overnight hours. Reproduced unchanged. Confirm with the business before visiting.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -6403,7 +6403,7 @@
         "source": "https://gjirafa.biz/auto-servis-gazi-1/?p360=1",
         "sourceName": "Auto Servis Gazi",
         "researchStatus": "Gefunden (Verzeichnis)",
-        "notes": "Telefon +383 44 126 233 und Wesley Clark stimmen überein.",
+        "notes": "Phone +383 44 126 233 and Wesley Clark agree.",
         "originalWeek": [
           "08:00-20:00",
           "08:00-20:00",
@@ -6492,7 +6492,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: ungewöhnliche Quellenangabe (24 Stunden oder über Mitternacht). Bisherige Quelle: https://www.google.com/maps/search/?api=1&query=Auto+Servis+Genti+M43G%2BVQW%2C+Unnamed+Road%2C+Prishtina+10000&query_place_id=ChIJz2OODhafVBMRSk4BbeHIhq8. Quellenname: Auto Servis Genti. Bisheriger Recherchehinweis: Quelle nennt 24-Stunden-Öffnung oder Zeiten über Mitternacht. Unverändert wiedergegeben. Vor Besuch beim Betrieb bestätigen.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: unusual source hours (24 hours or overnight). Previous source: https://www.google.com/maps/search/?api=1&query=Auto+Servis+Genti+M43G%2BVQW%2C+Unnamed+Road%2C+Prishtina+10000&query_place_id=ChIJz2OODhafVBMRSk4BbeHIhq8. Source name: Auto Servis Genti. Previous research note: The source lists 24-hour opening or overnight hours. Reproduced unchanged. Confirm with the business before visiting.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -6670,7 +6670,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: ungewöhnliche Quellenangabe (24 Stunden oder über Mitternacht). Bisherige Quelle: https://www.cybo.com/XK-biz/auto-servis-good-year. Quellenname: Auto Servis Good&Year. Bisheriger Recherchehinweis: Cybo nennt Mo–Sa 24 Stunden und Sonntag geschlossen. Telefonnummer 044 371 634 und Plus-Code CC4M+PXQ stimmen exakt überein. Der verlinkte eigene Facebook-Eintrag ist nicht öffentlich erreichbar: https://www.facebook.com/876110389125726/ . Die 24-Stunden-Angabe ist deshalb nur als Verzeichnisangabe übernommen und vor Besuch zu bestätigen.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: unusual source hours (24 hours or overnight). Previous source: https://www.cybo.com/XK-biz/auto-servis-good-year. Source name: Auto Servis Good&Year. Previous research note: Cybo lists Mon–Sat 24 hours and Sunday closed. Phone number 044 371 634 and Plus Code CC4M+PXQ agree exactly. The linked Facebook entry of the business is not publicly accessible: https://www.facebook.com/876110389125726/ . The 24-hour statement is therefore adopted only as a directory statement and must be confirmed before visiting.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -8009,7 +8009,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: keine verlässlichen Zeiten gefunden. Bisherige Quelle: https://www.cybo.com/XK-biz/auto-servis-p%C3%ABrparimi. Quellenname: Auto Servis Përparimi. Bisheriger Recherchehinweis: Nachrecherche am 13.10.2026: der vollständig geladene Cybo-Eintrag bestätigt 044 444 713 und 95Q3+7VQ/Driton Islami, nennt aber keine Zeiten. Zusätzliche Telefonnummernsuche ohne passenden Zeitbeleg. Das passende öffentliche Facebook-Profil hatte ebenfalls keinen Wochenplan. Seine verlinkte Website http://www.autoservisperparimi.com/ ist nicht erreichbar (DNS-Auflösung fehlgeschlagen). Social-Media-Nachprüfung am 13.10.2026: Facebook https://www.facebook.com/p/Auto-Servis-P%C3%ABrparimi-100035441186788/ erneut geprüft. Kontaktbereich zeigt auch nach dem angebotenen Neuladen einen technischen Fehler (This page is not available at the moment); keine verifizierbare Stundenangabe. Gezielte Facebook-/Instagram-Suche fand kein zusätzlich sicher zuordenbares Instagram-Profil. Der Zugriffsfehler ist kein Beleg für fehlende Betriebszeiten.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: no reliable hours found. Previous source: https://www.cybo.com/XK-biz/auto-servis-p%C3%ABrparimi. Source name: Auto Servis Përparimi. Previous research note: Follow-up research on 13.10.2026: the fully loaded Cybo entry confirms 044 444 713 and 95Q3+7VQ/Driton Islami but lists no hours. Additional phone-number search without matching evidence of hours. The matching public Facebook profile also had no weekly schedule. Its linked website http://www.autoservisperparimi.com/ is inaccessible (DNS resolution failed). Social-media follow-up on 13.10.2026: Facebook https://www.facebook.com/p/Auto-Servis-P%C3%ABrparimi-100035441186788/ checked again. The contact section still shows a technical error after the offered reload (This page is not available at the moment); no verifiable hours. Targeted Facebook/Instagram search found no additional reliably attributable Instagram profile. The access error is not evidence that business hours are unavailable.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -8270,7 +8270,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: keine verlässlichen Zeiten gefunden. Bisherige Quelle: https://www.cybo.com/XK-biz/auto-servis-rizvanolli. Quellenname: Auto Servis Rizvanolli. Bisheriger Recherchehinweis: Nachrecherche am 13.10.2026: Cybo war diesmal vollständig lesbar. Telefonnummer 044 605 905 und Aleksanër Moisiu stimmen überein, aber der Eintrag enthält keinen Wochenplan und keine eigene Website/Facebook-Verlinkung. Zusätzliche Suche nach der exakten Telefonnummer lieferte keinen Zeitbeleg. Social-Media-Nachprüfung am 13.10.2026: Gezielte Suche nach Facebook- und Instagram-Profilen ohne sicher zuordenbaren Treffer. Der Instagram-Treffer von drivezonetv betrifft ein historisches Foto Auto Taxi Rizvanolli Gjakovë 1925 und belegt keine Öffnungszeiten der Werkstatt.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: no reliable hours found. Previous source: https://www.cybo.com/XK-biz/auto-servis-rizvanolli. Source name: Auto Servis Rizvanolli. Previous research note: Follow-up research on 13.10.2026: Cybo was fully readable this time. Phone number 044 605 905 and Aleksanër Moisiu agree, but the entry contains no weekly schedule or business website/Facebook link. Additional search for the exact phone number yielded no evidence of hours. Social-media follow-up on 13.10.2026: targeted search for Facebook and Instagram profiles yielded no reliably attributable result. The drivezonetv Instagram result concerns a historical photo Auto Taxi Rizvanolli Gjakovë 1925 and does not establish the workshop's opening hours.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -8626,7 +8626,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: keine verlässlichen Zeiten gefunden. Bisherige Quelle: https://www.cybo.com/XK-biz/auto-servis-visari. Quellenname: Auto Servis Visari. Bisheriger Recherchehinweis: Nachrecherche am 13.10.2026: passender Cybo-Eintrag mit 049 120 572 und Enver Hadri vollständig geprüft, ohne Zeiten. Zusätzliche Telefonnummernsuche ohne Beleg. Das gefundene Facebook-Profil https://www.facebook.com/p/Auto-Servis-Visari-100064331672303/ nennt 043 717 397 und keinen Wochenplan. Gjirafa nennt wiederum 049/044 138 392 und Rruga e Rozhajës. Ohne sichere Verbindung wurden keine Zeiten fremder bzw. gleichnamiger Einträge übernommen. Social-Media-Nachprüfung am 13.10.2026: Zusätzliches Facebook-Profil https://www.facebook.com/100063696052432/?locale=sq_AL direkt geprüft: Rruga Kosova, Prizren, statt Enver Hadri. Der Kontaktbereich meldet einen technischen Fehler. Das zuvor geprüfte Profil 100064331672303 nennt wiederum 043 717 397. Keine belegte Verbindung zum CSV-Kontakt 049 120 572 und kein sicher zuordenbares Instagram-Profil gefunden.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: no reliable hours found. Previous source: https://www.cybo.com/XK-biz/auto-servis-visari. Source name: Auto Servis Visari. Previous research note: Follow-up research on 13.10.2026: matching Cybo entry with 049 120 572 and Enver Hadri fully checked, without hours. Additional phone-number search without evidence. The Facebook profile found at https://www.facebook.com/p/Auto-Servis-Visari-100064331672303/ lists 043 717 397 and no weekly schedule. Gjirafa instead lists 049/044 138 392 and Rruga e Rozhajës. Without a reliable link, no hours from other businesses or namesakes were adopted. Social-media follow-up on 13.10.2026: additional Facebook profile https://www.facebook.com/100063696052432/?locale=sq_AL checked directly: Rruga Kosova, Prizren, instead of Enver Hadri. The contact section reports a technical error. The previously checked profile 100064331672303 instead lists 043 717 397. No evidenced link to the CSV contact 049 120 572 and no reliably attributable Instagram profile found.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -8893,7 +8893,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: ungewöhnliche Quellenangabe (24 Stunden oder über Mitternacht). Bisherige Quelle: https://www.google.com/maps/search/?api=1&query=Auto+servis+XONI+CFV5%2B49J%2C+M25-3%2C+Gjilan+60000&query_place_id=ChIJL5Yb0l-NVBMR2cBjhlecSX4. Quellenname: Auto servis XONI. Bisheriger Recherchehinweis: Quelle nennt 24-Stunden-Öffnung oder Zeiten über Mitternacht. Unverändert wiedergegeben. Vor Besuch beim Betrieb bestätigen.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: unusual source hours (24 hours or overnight). Previous source: https://www.google.com/maps/search/?api=1&query=Auto+servis+XONI+CFV5%2B49J%2C+M25-3%2C+Gjilan+60000&query_place_id=ChIJL5Yb0l-NVBMR2cBjhlecSX4. Source name: Auto servis XONI. Previous research note: The source lists 24-hour opening or overnight hours. Reproduced unchanged. Confirm with the business before visiting.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -9961,7 +9961,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: keine verlässlichen Zeiten gefunden. Bisherige Quelle: https://www.cybo.com/XK-biz/autopjes%C3%AB-service-nazi. Quellenname: Autopjesë & Service Nazi. Bisheriger Recherchehinweis: Nachrecherche am 13.10.2026: vollständig geladener Cybo-Eintrag bestätigt 049 297 333 und 959P+XV6, Bibaj, enthält jedoch keine Öffnungszeiten oder eigene Website/Facebook-Verlinkung. Zusätzliche Telefonnummernsuche ohne Zeitbeleg. Die zuvor gefundene eigene YouTube-Veröffentlichung belegt denselben Kontakt, aber keinen Wochenplan. Social-Media-Nachprüfung am 13.10.2026: Instagram https://www.instagram.com/autoservisnazi/ und der gefundene Beitrag https://www.instagram.com/p/DDYBYv4N9kZ/ direkt geprüft. Die Bio nennt km 15 der Straße Tirana–Elbasan, Albanien. Dieses Profil gehört nicht zum gesuchten Betrieb in Bibaj/Ferizaj. Facebook-Suche ohne sicher zuordenbares Betriebsprofil.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: no reliable hours found. Previous source: https://www.cybo.com/XK-biz/autopjes%C3%AB-service-nazi. Source name: Autopjesë & Service Nazi. Previous research note: Follow-up research on 13.10.2026: the fully loaded Cybo entry confirms 049 297 333 and 959P+XV6, Bibaj, but contains no opening hours or business website/Facebook link. Additional phone-number search without evidence of hours. The previously found post on the business's own YouTube channel establishes the same contact but no weekly schedule. Social-media follow-up on 13.10.2026: Instagram https://www.instagram.com/autoservisnazi/ and the post found at https://www.instagram.com/p/DDYBYv4N9kZ/ checked directly. The bio lists km 15 of the Tirana–Elbasan road, Albania. This profile does not belong to the target business in Bibaj/Ferizaj. Facebook search without a reliably attributable business profile.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -10940,7 +10940,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: ungewöhnliche Quellenangabe (24 Stunden oder über Mitternacht). Bisherige Quelle: https://www.google.com/maps/search/?api=1&query=Cesko+auto+service+Besim+Shala%2C+Prizren+20000&query_place_id=ChIJMzRnIjKVUxMR37SDG3p6bug. Quellenname: Cesko auto service. Bisheriger Recherchehinweis: Quelle nennt 24-Stunden-Öffnung oder Zeiten über Mitternacht. Unverändert wiedergegeben. Vor Besuch beim Betrieb bestätigen.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: unusual source hours (24 hours or overnight). Previous source: https://www.google.com/maps/search/?api=1&query=Cesko+auto+service+Besim+Shala%2C+Prizren+20000&query_place_id=ChIJMzRnIjKVUxMR37SDG3p6bug. Source name: Cesko auto service. Previous research note: The source lists 24-hour opening or overnight hours. Reproduced unchanged. Confirm with the business before visiting.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -11474,7 +11474,7 @@
         "source": "https://www.google.com/maps/search/?api=1&query=Eurogoma+%E2%80%93+Gjakov%C3%AB-2+Rruga+e+Tirana%2C+tranzit+p.n.%2C+Gjakov%C3%AB%2C+Kosovo&query_place_id=ChIJawgbXVaxUxMRPP3SLe47gc8",
         "sourceName": "Eurogoma - Gjakovë 1",
         "researchStatus": "Zuordnung geklärt (offizielle Adresse)",
-        "notes": "Offizielle Standortseite bestätigt Gjakovë-2 an Rruga e Tirana – tranzit pn. Der Maps-Eintrag nennt dieselbe Firma, Straße und Tranzit sowie eurogoma.net. Die CSV-Nummer +383 49 324 436 ist laut offizieller Kontaktseite die Zentralnummer in Prishtina, kein Filialkontakt. Maps nennt für die Filiale +383 49 189 021 und verwendet die abweichende Nummerierung Gjakovë 1. Wochenplan am 13.10.2026 erneut in Maps gelesen. Standortbeleg: https://www.eurogoma.net/locations/ . Zentralnummer: https://www.eurogoma.net/contact/",
+        "notes": "The official location page confirms Gjakovë-2 at Rruga e Tirana – tranzit pn. The Maps entry lists the same company, street and Tranzit, along with eurogoma.net. According to the official contact page, the CSV number +383 49 324 436 is the central Prishtina number, not a branch contact. Maps lists +383 49 189 021 for the branch and uses the different numbering Gjakovë 1. Weekly schedule read again in Maps on 13.10.2026. Location evidence: https://www.eurogoma.net/locations/ . Central number: https://www.eurogoma.net/contact/",
         "originalWeek": [
           "08:00-17:00",
           "08:00-17:00",
@@ -11741,7 +11741,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: ungewöhnliche Quellenangabe (24 Stunden oder über Mitternacht). Bisherige Quelle: https://www.google.com/maps/search/?api=1&query=Eurogoma+%E2%80%93+Prizren+Ortakoll+Lagjja+Ortakoll%2C+Rruga+Ismail+Kryeziu%2C+Prizren%2C+Kosovo&query_place_id=ChIJR2_3vzK_UxMRj0SC8kETc54. Quellenname: Eurogoma - Prizren 2. Bisheriger Recherchehinweis: Quelle nennt 24-Stunden-Öffnung oder Zeiten über Mitternacht. Unverändert wiedergegeben. Vor Besuch beim Betrieb bestätigen.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: unusual source hours (24 hours or overnight). Previous source: https://www.google.com/maps/search/?api=1&query=Eurogoma+%E2%80%93+Prizren+Ortakoll+Lagjja+Ortakoll%2C+Rruga+Ismail+Kryeziu%2C+Prizren%2C+Kosovo&query_place_id=ChIJR2_3vzK_UxMRj0SC8kETc54. Source name: Eurogoma - Prizren 2. Previous research note: The source lists 24-hour opening or overnight hours. Reproduced unchanged. Confirm with the business before visiting.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -12548,7 +12548,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: ungewöhnliche Quellenangabe (24 Stunden oder über Mitternacht). Bisherige Quelle: https://www.google.com/maps/search/?api=1&query=Lipjani+Coding+Rruga+Isa+Olluri%2C+Lipjan%2C+Kosov%C3%AB&query_place_id=ChIJqcamjDqDVBMRkSBTblVoqbk. Quellenname: Lipjani Coding. Bisheriger Recherchehinweis: Quelle nennt 24-Stunden-Öffnung oder Zeiten über Mitternacht. Unverändert wiedergegeben. Vor Besuch beim Betrieb bestätigen.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: unusual source hours (24 hours or overnight). Previous source: https://www.google.com/maps/search/?api=1&query=Lipjani+Coding+Rruga+Isa+Olluri%2C+Lipjan%2C+Kosov%C3%AB&query_place_id=ChIJqcamjDqDVBMRkSBTblVoqbk. Source name: Lipjani Coding. Previous research note: The source lists 24-hour opening or overnight hours. Reproduced unchanged. Confirm with the business before visiting.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -12904,7 +12904,7 @@
         "source": "https://www.facebook.com/p/Mercedes-Isa-Service-100088667126630/",
         "sourceName": "Mercedes Isa Service",
         "researchStatus": "Gefunden (Betriebsprofil)",
-        "notes": "Eigener Facebook-Wochenplan. Profil nennt eine Aktualisierung vor etwa vier Jahren.",
+        "notes": "The business's own Facebook weekly schedule. The profile lists an update approximately four years ago.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -13082,7 +13082,7 @@
         "source": "https://www.facebook.com/AutoServisNero/",
         "sourceName": "Auto Servis NERO",
         "researchStatus": "Gefunden (Betriebsprofil)",
-        "notes": "Telefon +383 44 428 865 stimmt überein. Eigenes Profil nennt Muhamed Qami 265 statt Meriman Jakupi.",
+        "notes": "Phone +383 44 428 865 agrees. The business's own profile lists Muhamed Qami 265 instead of Meriman Jakupi.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -13349,7 +13349,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: keine verlässlichen Zeiten gefunden. Bisherige Quelle: https://www.cybo.com/XK-biz/opel-zh-sh. Quellenname: Opel Zh-Sh. Bisheriger Recherchehinweis: Nachrecherche am 13.10.2026: über Cybos eigene Suche den exakten Betrieb geöffnet. Telefonnummer 043 730 111, Skënderbeu und 9CGP+R24 stimmen überein, aber der Eintrag nennt keine Öffnungszeiten oder eigene Website/Facebook-Verlinkung. Zusätzliche Telefonnummernsuche ohne Beleg. Die zuvor gefundenen Zeiten von Opel Z-SH TABAKU mit anderer Telefonnummer und anderem Standort bleiben ausgeschlossen. Social-Media-Nachprüfung am 13.10.2026: Facebook https://www.facebook.com/p/Opel-Z-SH-Tabaku-100063556361444/ direkt geprüft; sichtbare eigene Beiträge, aber der Kontaktbereich meldet einen technischen Fehler. Gefundene Kontakthinweise nennen 044 189 387 bzw. 044 206 356 statt 043 730 111. Ohne eindeutige Verbindung keine Zeiten übertragen. Instagram-Suche fand kein sicher zuordenbares Betriebsprofil.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: no reliable hours found. Previous source: https://www.cybo.com/XK-biz/opel-zh-sh. Source name: Opel Zh-Sh. Previous research note: Follow-up research on 13.10.2026: the exact business opened through Cybo's own search. Phone number 043 730 111, Skënderbeu and 9CGP+R24 agree, but the entry lists no opening hours or business website/Facebook link. Additional phone-number search without evidence. The previously found hours of Opel Z-SH TABAKU with a different phone number and location remain excluded. Social-media follow-up on 13.10.2026: Facebook https://www.facebook.com/p/Opel-Z-SH-Tabaku-100063556361444/ checked directly; the business's own posts are visible, but the contact section reports a technical error. Contact references found list 044 189 387 or 044 206 356 instead of 043 730 111. No hours transferred without an unambiguous link. Instagram search found no reliably attributable business profile.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -13883,7 +13883,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: ungewöhnliche Quellenangabe (24 Stunden oder über Mitternacht). Bisherige Quelle: https://www.google.com/maps/search/?api=1&query=Ridvan+R206%2C+Ferizaj+70000&query_place_id=ChIJ8zFU5C9_VBMRg0d-nCiUDv4. Quellenname: Ridvan. Bisheriger Recherchehinweis: Quelle nennt 24-Stunden-Öffnung oder Zeiten über Mitternacht. Unverändert wiedergegeben. Vor Besuch beim Betrieb bestätigen.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: unusual source hours (24 hours or overnight). Previous source: https://www.google.com/maps/search/?api=1&query=Ridvan+R206%2C+Ferizaj+70000&query_place_id=ChIJ8zFU5C9_VBMRg0d-nCiUDv4. Source name: Ridvan. Previous research note: The source lists 24-hour opening or overnight hours. Reproduced unchanged. Confirm with the business before visiting.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",
@@ -13972,7 +13972,7 @@
         "source": "https://www.google.com/maps/search/?api=1&query=Servis+Kurtaj+%26+Auto+Klima+EROLLS+Prizren+20000&query_place_id=ChIJW0bIRgeVUxMRTDjqVfHvpN8",
         "sourceName": "Servis Kurtaj & Auto Klima Moni",
         "researchStatus": "Gefunden (Google Maps)",
-        "notes": "Maps nennt Auto Klima Moni statt EROLLS. Telefon +383 44 940 015 stimmt mit dem CSV-Betrieb überein.",
+        "notes": "Maps lists Auto Klima Moni instead of EROLLS. Phone +383 44 940 015 agrees with the CSV business.",
         "originalWeek": [
           "09:00-17:00",
           "09:00-17:00",
@@ -14322,7 +14322,7 @@
         "source": "https://www.google.com/maps/search/?api=1&query=Sokoli+AutoElectronic+M843%2B28%2C+Pej%C3%AB&query_place_id=ChIJE6T4PF79UhMRRgCM6ZQIuxQ",
         "sourceName": "Sokol Dina Auto",
         "researchStatus": "Gefunden (Google Maps)",
-        "notes": "Maps nennt Sokol Dina Auto. Telefon +383 49 326 545 und Plus Code M843+28 stimmen mit Sokoli AutoElectronic überein.",
+        "notes": "Maps lists Sokol Dina Auto. Phone +383 49 326 545 and Plus Code M843+28 agree with Sokoli AutoElectronic.",
         "originalWeek": [
           "09:00-17:00",
           "09:00-17:00",
@@ -15129,7 +15129,7 @@
         "source": "Standardannahme auf Nutzerwunsch – kein Quellenbeleg",
         "sourceName": "",
         "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Auf Nutzerwunsch angenommener Standard: Mo–Fr 08:00–18:00, Sa 08:00–16:00, So geschlossen. Nicht recherchiert oder von der Werkstatt bestätigt. Grund: ungewöhnliche Quellenangabe (24 Stunden oder über Mitternacht). Bisherige Quelle: https://www.google.com/maps/search/?api=1&query=Xhela+Shipol%2C+Mitrovic%C3%AB%2C+Kosov%C3%AB&query_place_id=ChIJHUU43hZFUxMR_WC4zXj2pEQ. Quellenname: Xhela. Bisheriger Recherchehinweis: Quelle nennt 24-Stunden-Öffnung oder Zeiten über Mitternacht. Unverändert wiedergegeben. Vor Besuch beim Betrieb bestätigen.",
+        "notes": "Standard assumed at the user's request: Mon–Fri 08:00–18:00, Sat 08:00–16:00, Sun closed. Not researched or confirmed by the workshop. Reason: unusual source hours (24 hours or overnight). Previous source: https://www.google.com/maps/search/?api=1&query=Xhela+Shipol%2C+Mitrovic%C3%AB%2C+Kosov%C3%AB&query_place_id=ChIJHUU43hZFUxMR_WC4zXj2pEQ. Source name: Xhela. Previous research note: The source lists 24-hour opening or overnight hours. Reproduced unchanged. Confirm with the business before visiting.",
         "originalWeek": [
           "08:00-18:00",
           "08:00-18:00",

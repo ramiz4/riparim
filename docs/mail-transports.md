@@ -1,20 +1,22 @@
-# Bewertungsnachrichten und Anbieterwechsel
+# Review messages and provider switching
 
-Die bestehende Outbox übernimmt weiterhin Moderationsereignisse, Leases,
-Backoff und sofortigen Einzelversand. Wiederholungen erfolgen ausschließlich manuell, höchstens fünfmal zusätzlich zum Erstversand. Die Wartezeiten betragen 1, 5, 15, 30 und 60 Minuten; Claim, Wartezeit und Gesamtlimit von sechs Versuchen werden zusammen geprüft. Die Moderationsentscheidung bleibt
-auch bei Versandfehlern erfolgreich. Der kleine Vertrag in
-`lib/notifications/transports.ts` wählt Resend oder SMTP; es gibt keinen
-zusätzlichen Queue-Dienst und keinen automatischen Provider-Fallback.
+The existing outbox still handles moderation events, leases, backoff and immediate
+individual sends. Retries are exclusively manual, at most five in addition to
+the initial send. Waits are 1, 5, 15, 30 and 60 minutes; claim, wait and the total
+limit of six attempts are checked together. The moderation decision succeeds
+even on delivery errors. The small contract in `lib/notifications/transports.ts`
+selects Resend or SMTP; there is no additional queue service or automatic
+provider fallback.
 
-## Konfiguration
+## Configuration
 
-Ohne `EMAIL_TRANSPORT` gilt weiterhin Resend. `EMAIL_TRANSPORT=resend`,
-`RESEND_API_KEY` und `TRANSACTIONAL_EMAIL_FROM` funktionieren wie bisher.
-Der Worker verwendet diesen HTTP-Transport. Ein SMTP-Auswahlwert im Worker
-blockiert neue Ereignisse vor Netzwerkzugriff; SMTP-Zugangsdaten gehören dort
-nicht in die Deployment-Secrets.
+Without `EMAIL_TRANSPORT`, Resend remains the default. `EMAIL_TRANSPORT=resend`,
+`RESEND_API_KEY` and `TRANSACTIONAL_EMAIL_FROM` work as before.
+The Worker uses this HTTP transport. Selecting SMTP in the Worker blocks new
+events before network access; SMTP credentials do not belong in its deployment
+secrets.
 
-Der portable Node-Betrieb unterstützt zusätzlich `EMAIL_TRANSPORT=smtp`:
+Portable Node operation also supports `EMAIL_TRANSPORT=smtp`:
 
 ```dotenv
 EMAIL_TRANSPORT=smtp
@@ -24,98 +26,101 @@ TRANSACTIONAL_EMAIL_FROM=Riparim <no-reply@auth.example.test>
 SITE_ORIGIN=https://riparim.example.test
 ```
 
-`SMTP_URL` ist ein serverseitiges Geheimnis. Benutzer und Passwort werden bei
-Bedarf URL-kodiert. `SMTP_SECRET_ORIGIN` muss genau Protokoll, normalisierten Host
-und expliziten Port des credentialfreien Ziels angeben. Pfade (außer `/`),
-Queryparameter, Fragmente und ungebundene Zugangsdaten sind ungültig. Der
-SMTP-Server muss den Absender für die gewählte Domain erlauben. SPF, DKIM und
-DMARC sowie Providerlimits bleiben Aufgabe der Domain-/Mailserverkonfiguration.
+`SMTP_URL` is a server-side secret. Username and password are URL-encoded when
+needed. `SMTP_SECRET_ORIGIN` must specify exactly the protocol, normalized host
+and explicit port of the credential-free target. Paths other than `/`, query
+parameters, fragments and unbound credentials are invalid.
+The SMTP server must allow the sender for the selected domain. SPF, DKIM, DMARC
+and provider limits remain the responsibility of domain/mail server configuration.
 
-`smtps://` verwendet sofort TLS; `smtp://` verlangt STARTTLS. Zertifikate werden
-mit Node-Vertrauensankern und mindestens TLS 1.2 geprüft. TLS lässt sich nicht
-über die URL abschalten. Nur ein Relay auf der **numerischen** Loopback-Adresse
-`127.0.0.1` oder `::1` darf ohne Zugangsdaten unverschlüsselt arbeiten; dies ist
-der lokale Testweg. `localhost` ist keine Klartext-Ausnahme. Interne CAs müssen
-im geschützten Node-Betrieb über den normalen Node-Truststore eingerichtet
-werden. Die TLS-Probe nutzt ausschließlich eine isolierte Fixture-CA.
+`smtps://` uses TLS immediately; `smtp://` requires STARTTLS.
+Certificates are checked using Node trust anchors and at least TLS 1.2.
+TLS cannot be disabled through the URL. Only a relay at the **numeric** loopback
+address `127.0.0.1` or `::1` may operate unencrypted without credentials;
+this is the local test path. `localhost` is no plaintext exception.
+Internal CAs must be configured in protected Node operation through the normal
+Node trust store. The TLS probe uses only an isolated fixture CA.
 
-DNS, Verbindungsaufbau, Greeting und Socket-Inaktivität sind auf jeweils acht
-Sekunden begrenzt; zusätzlich schließt ein Gesamtlimit von 20 Sekunden die
-SMTP-Verbindung. Die Outbox-Lease bleibt 120 Sekunden. Nodemailer 10.1.0 liefert
-MIME-Erzeugung und den dokumentierten einzelnen SMTPConnection-Lifecycle;
-Connection-Pools und deren automatische Requeues werden nicht verwendet.
-Nodemailer wird nur in Node-Builds geladen.
+DNS, connection establishment, greeting and socket inactivity are each limited
+to eight seconds; a total limit of 20 seconds additionally closes the SMTP
+connection. The outbox lease remains 120 seconds. Nodemailer 10.1.0 provides
+MIME generation and the documented single SMTPConnection lifecycle;
+connection pools and their automatic requeues are not used.
+Nodemailer is loaded only in Node builds.
 
-`SUPABASE_SECRET_KEY` beziehungsweise der gebundene Adminschlüssel des
-[kompatiblen Auth-Hosts](auth-provider.md) bleibt für die Prüfung der bestätigten
-Kontoadresse erforderlich. Browserdaten können Absender, Empfänger und Inhalte
-nicht überschreiben. Neue Nachrichten verwenden die bestätigte DE/SQ/EN-Präferenz.
+`SUPABASE_SECRET_KEY`, or the bound admin key of the
+[compatible Auth host](auth-provider.md), remains required to verify the confirmed
+account address. Browser data cannot override sender, recipient or content.
+New messages use the confirmed DE/SQ/EN preference.
 
-## Persistenz und Wiederholung
+## Persistence and retries
 
-Migration `0017_mail_transports.sql` ist vor dem neuen Code anzuwenden. Sie
-ergänzt ausschließlich nullable `transport`, nullable `wire_payload` und
-`smtp_in_flight` mit Default 0. Eine Datenübernahme ist nicht nötig. Bereits
-begonnene Ereignisse mit `transport=NULL` gehören immer zu Resend.
+Apply migration `0017_mail_transports.sql` before the new code. It adds only
+nullable `transport`, nullable `wire_payload` and `smtp_in_flight` defaulting
+to 0. No data transfer is required. Already started events with `transport=NULL`
+always belong to Resend.
 
-Vor dem ersten Netzwerkzugriff werden Transport, Hash der Zugangskonfiguration
-und ursprüngliche JSON-Payloadbytes atomar gespeichert. SMTP friert zusätzlich
-die gesamten RFC-5322/MIME-Bytes ein, einschließlich Datum, Message-ID, Absender,
-Sprache und Kodierung. Der Hash umfasst SMTP-Host, Port, TLS-Modus, lokale
-Relay-Ausnahme, Benutzer und Passwort; Geheimnisse werden nicht in der Tabelle
-kopiert. Bekannte Wiederholungen behalten diese Bytes selbst nach Änderungen an
-Absender oder Sprachpräferenz. Geänderte bestätigte Empfänger blockieren sie.
+Before the first network access, transport, credential configuration hash and
+original JSON payload bytes are stored atomically. SMTP additionally freezes
+all RFC 5322/MIME bytes, including date, Message-ID, sender, language and encoding.
+The hash covers SMTP host, port, TLS mode, local relay exception, username and
+password; secrets are not copied into the table. Known retries retain these
+bytes even after sender or language preference changes. Changed confirmed
+recipients block them.
 
-Resend wiederholt die identische Anfrage mit dem bestehenden Ereignisschlüssel
-nur innerhalb von 23 Stunden; der Provider hält die Idempotenzschlüssel 24
-Stunden. Bei SMTP gibt es diese Provider-Idempotenz **nicht**. Die dauerhafte
-Markierung `smtp_in_flight=1` wird vor Verbindungsbeginn gesetzt:
+Resend retries the identical request with the existing event key only within
+23 hours; the provider retains idempotency keys for 24 hours.
+SMTP has **no** such provider idempotency. The persistent `smtp_in_flight=1`
+marker is set before connection establishment:
 
-- Nur vom SMTP-Client eindeutig verarbeitete AUTH-/Envelope-/DATA-Ablehnungen
-  (`EAUTH`, `EENVELOPE`, `EMESSAGE` mit 4xx/5xx) beweisen Nichtannahme. 4xx
-  erhalten Backoff; 5xx bleiben für kontrollierte Reparatur blockiert. Nur eine
-  erfolgreich gespeicherte Nichtannahme löscht den Marker. Connection-, Socket-,
-  Timeout- und Protocolfehler bleiben `unknown`, auch mit `responseCode`: Eine
-  unterminierte oder unvollständige Mehrzeilenantwort beweist keine Ablehnung.
-- Verbindungsabbruch, Timeout, Prozessverlust, abgelaufene Lease und verlorene
-  Erfolgs-/Start-Acknowledgements ergeben `unknown`. Auch eine administrative Wiederholung darf daraus keine neue Sendung machen.
-- Eine positive Providerantwort bedeutet Übergabe, keine endgültige Zustellung.
-  Nach gespeichertem Erfolg werden private Payload und MIME-Inhalt entfernt.
+- Only AUTH/envelope/DATA rejections unambiguously processed by the SMTP client
+  (`EAUTH`, `EENVELOPE`, `EMESSAGE` with 4xx/5xx) prove nonacceptance.
+  4xx responses get backoff; 5xx remain blocked for controlled repair.
+  Only successfully stored nonacceptance clears the marker.
+  Connection, socket, timeout and protocol errors remain `unknown`, even with
+  `responseCode`: an unterminated or incomplete multiline response proves
+  no rejection.
+- Connection interruption, timeout, process loss, expired lease and lost
+  success/start acknowledgments produce `unknown`. Even an administrative retry
+  must not turn that into a new send.
+- A positive provider response means handoff, not final delivery.
+  After success is stored, private payload and MIME content are removed.
 
-Es gibt keine Exactly-once-Zustellgarantie. Bei `unknown` muss ein Betreiber die
-Message-ID im Relay-/Providerprotokoll abgleichen und gegebenenfalls die
-Bestätigung separat dokumentieren. Diese Änderung bietet bewusst keine Aktion
-zum ungeprüften Freischalten solcher Ereignisse.
+There is no exactly-once delivery guarantee. For `unknown`, an operator must
+reconcile the Message-ID against relay/provider logs and, if necessary, record
+confirmation separately. This change deliberately offers no action to reopen
+such events without verification.
 
-## Wechsel und Prüfung
+## Switching and verification
 
-1. Den geprüften Main-Release samt Migration im Zielbetrieb vorbereiten; vor
-   Daten-/Domainumstellung den [portablen Betriebsweg](node-runtime.md) und
-   die [Release-Regeln](releases.md) befolgen. Alte und neue Outbox-Prozesse nicht
-   gleichzeitig gegen unterschiedliche Datenbankkopien schreiben lassen.
-2. Historische begonnene Resend-Ereignisse unter der bisherigen Konfiguration
-   innerhalb ihrer sicheren Frist abarbeiten oder beim bisherigen Anbieter
-   prüfen. Begonnene Ereignisse dürfen keinen anderen Transport/Host/Schlüssel
-   erhalten. Unbegonnene Ereignisse dürfen mit neuer Konfiguration starten.
-3. SMTP-Host, TLS, Domainfreigabe und Authentifizierung in isolierter Umgebung
-   prüfen. Zugangskonfiguration im geschützten Node-Betrieb setzen. Die bestehende
-   geschützte Notification-API zeigt Fehler ohne Empfänger, Nachrichten oder Keys.
-4. Im Node-Betrieb keinen Timer/Cron einrichten. Eine ausdrückliche Wiederholung
-   verwendet `npm run notifications:node -- <ereignis-id>` und dieselben Limits.
-   Kein zusätzliches Queue-Produkt ist nötig. Nach dem Wechsel nur neue oder
-   noch unbegonnene Ereignisse durch den neuen Anbieter verarbeiten lassen.
-5. Bei Rückkehr zum alten Transport dessen ursprünglichen Scope wiederherstellen;
-   `unknown` bleibt gesperrt. Keine Outboxzeilen löschen, kopieren oder Statuswerte
-   zurücksetzen, um einen Retry zu erzwingen.
+1. Prepare the verified main release and migration in the target environment;
+   before data/domain cutover, follow the [portable operating path](node-runtime.md)
+   and [release rules](releases.md). Do not let old and new outbox processes
+   write concurrently against different database copies.
+2. Complete historical started Resend events under the previous configuration
+   within their safe window, or check them with the previous provider.
+   Started events must receive no different transport/host/key.
+   Unstarted events may begin with new configuration.
+3. Check SMTP host, TLS, domain authorization and authentication in an isolated
+   environment. Set credential configuration in protected Node operation.
+   The existing protected notification API shows errors without recipients,
+   messages or keys.
+4. Set up no timer/cron in Node operation. An explicit retry uses
+   `npm run notifications:node -- <event-id>` and the same limits.
+   No additional queue product is needed. After switching, allow the new provider
+   to process only new or still unstarted events.
+5. When returning to the old transport, restore its original scope;
+   `unknown` remains blocked. Do not delete or copy outbox rows or reset status
+   values to force a retry.
 
-Die reguläre Testsuite prüft tatsächliches lokales SMTP, negative RCPT-/DATA-
-Antworten, unterminierte 4xx/5xx- und Mehrzeilenantworten, Socketverlust nach
-DATA, Datenbank-Ack-Verlust, Konkurrenz und Lease-
-Verlust sowie TLS-Authentifizierung mit einer isolierten CA, Ablehnung eines
-unvertrauten Zertifikats und Credentialzielbindung. Alle Testdaten sind fiktiv;
-es werden keine echten E-Mails gesendet und keine Live-Provider verändert.
+The regular test suite checks actual local SMTP, negative RCPT/DATA responses,
+unterminated 4xx/5xx and multiline responses, socket loss after DATA, database
+acknowledgment loss, concurrency and lease loss, plus TLS authentication with
+an isolated CA, rejection of an untrusted certificate and credential target
+binding. All test data is fictitious; no actual emails are sent and no live
+providers are changed.
 
-Primäre Verträge: [Nodemailer SMTP](https://nodemailer.com/smtp),
+Primary contracts: [Nodemailer SMTP](https://nodemailer.com/smtp),
 [SMTPConnection](https://nodemailer.com/extras/smtp-connection),
-[Nodemailer-Fehlervertrag](https://nodemailer.com/errors) und
-[Resend Idempotency](https://resend.com/docs/dashboard/emails/idempotency-keys).
+[Nodemailer error contract](https://nodemailer.com/errors) and
+[Resend idempotency](https://resend.com/docs/dashboard/emails/idempotency-keys).

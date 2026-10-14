@@ -1,87 +1,86 @@
-# Begrenzte Test-Parallelität (Issue 91)
+# Bounded test concurrency (Issue 91)
 
-`npm test` prüft zuerst den i18n-Vertrag, baut Node einmal unter derselben
-Prozessgruppenverwaltung und führt anschließend jede registrierte Suite in
-einem eigenen Node-Prozess aus. Beide Node-Integrationssuites verwenden
-validierte Kopien dieses Builds in getrennten Fixtures.
+`npm test` first checks the i18n contract, builds Node once under the same process
+group management, then runs each registered suite in its own Node process.
+Both Node integration suites use validated copies of this build in separate
+fixtures.
 
-`npm test -- --group core` führt alle übrigen Suites ohne Node-Build aus;
-`npm test -- --group node` prüft die zwei Node-Integrationssuites. Ein explizites
-`RIPARIM_NODE_PREBUILT` muss zu den aktuellen Source-/Outputdigests passen.
-Die zentrale Registrierung erzwingt vollständige, disjunkte Gruppen; der
-Standard ohne Gruppe bleibt die vollständige Prüfung. Ablauf und kontrollierte
-Messung stehen in [ci-performance.md](ci-performance.md). Auf Linux/macOS/WSL ist die
-Standardparallelität vier. `TEST_CONCURRENCY=1 npm test` führt dieselben Suites
-seriell aus; `2`, `3` oder `4` erlauben entsprechend viele gleichzeitige Suites.
-Native Windows-Ausführung wird vor jeder Suite und jeder Änderung am
-Testverzeichnis mit einer WSL-Empfehlung abgelehnt. POSIX-Prozessgruppen sichern
-die Bereinigung auch dann, wenn ein beendeter Node-Prozess Nachfahren mit offenen
-Ausgabekanälen hinterlässt. `taskkill` kann diesen Fall nach Ende des Elternprozesses
-nicht zuverlässig abdecken; deshalb gibt es keinen nativen Windows-Testpfad.
+`npm test -- --group core` runs all other suites without a Node build;
+`npm test -- --group node` checks the two Node integration suites.
+Explicit `RIPARIM_NODE_PREBUILT` must match current source/output digests.
+Central registration enforces complete disjoint groups; the default without a
+group remains complete verification. Process and controlled measurements are
+in [ci-performance.md](ci-performance.md). Default concurrency on Linux/macOS/WSL
+is four. `TEST_CONCURRENCY=1 npm test` runs the same suites serially;
+`2`, `3` or `4` permit that many concurrent suites.
+Native Windows execution is rejected with a WSL recommendation before any suite
+or test directory change. POSIX process groups ensure cleanup even when a
+terminated Node process leaves descendants with open output channels.
+`taskkill` cannot reliably cover this after the parent process ends;
+there is therefore no native Windows test path.
 
-## Geprüfte Ressourcen
+## Verified resources
 
-- Jede Suite schreibt ausschließlich in eigene Unterverzeichnisse oder eindeutig
-  benannte Dateien unter `.test-runtime`; der Runner allein entfernt dessen Wurzel.
-  `repository-policy.test.mjs` entfernt nur sein eigenes Unterverzeichnis.
-- SQLite-Fixtures verwenden `:memory:`. Import-, Datenübernahme-, Release-,
-  Mail-Export- und Lock-Fixtures verwenden eigene `mkdtemp`-Verzeichnisse.
-  Statische Katalogdaten, Migrationen und Quellen werden lediglich gelesen.
-- Miniflare-Fixtures wählen freie lokale Ports und isolierte Laufzeitdaten.
-  Es gibt keine gemeinsame Testdatenbank und keinen festen Suite-Port.
-- Globales DOM, Provider-Mocks und React-Zustand sind pro Node-Prozess isoliert.
-  Echte Go-Mailrenderings teilen lediglich Gos sperrgeschützten Buildcache.
-  Keine Suite benötigt das Ergebnis einer vorherigen Suite.
+- Each suite writes only to its own subdirectories or uniquely named files
+  under `.test-runtime`; only the runner removes its root.
+  `repository-policy.test.mjs` removes only its own subdirectory.
+- SQLite fixtures use `:memory:`. Import, data transfer, release, email export
+  and lock fixtures use their own `mkdtemp` directories.
+  Static catalogue data, migrations and sources are only read.
+- Miniflare fixtures choose free local ports and isolated runtime data.
+  There is no shared test database or fixed suite port.
+- Global DOM, provider mocks and React state are isolated per Node process.
+  Actual Go email renders share only Go's lock-protected build cache.
+  No suite needs the result of a preceding suite.
 
-## Fehler, Signale und Diagnose
+## Errors, signals and diagnostics
 
-Jede Ausgabezeile und Start-/Endmeldung trägt den Dateinamen der Suite. Eine
-fehlgeschlagene Suite stoppt die Warteschlange und laufende Geschwister. SIGINT
-und SIGTERM liefern 130 beziehungsweise 143. Linux/macOS-Suites besitzen eigene
-Prozessgruppen: SIGTERM erreicht auch Node-, Go-, esbuild- und workerd-Nachfahren;
-noch laufende Gruppen erhalten nach 500 ms SIGKILL. Der Erfolgspfad wartet nicht
-500 ms, wenn die Gruppe bereits verschwunden ist. Auch verbliebene Nachfahren
-eines erfolgreich beendeten Node-Prozesses werden bereinigt. `.test-runtime`
-wird erst nach Prozessende und geschlossenen Ausgabekanälen entfernt.
+Every output line and start/end message carries the suite filename.
+A failed suite stops the queue and running siblings. SIGINT and SIGTERM return
+130 and 143 respectively. Linux/macOS suites have their own process groups:
+SIGTERM also reaches Node, Go, esbuild and workerd descendants; still-running
+groups receive SIGKILL after 500 ms. The success path does not wait 500 ms if
+the group has already disappeared. Remaining descendants of a successfully
+terminated Node process are also cleaned up. `.test-runtime` is removed only
+after process termination and output channel closure.
 
-Die Runner-Regression prüft Parallelitätsgrenze, den seriellen Modus, alle
-Suite-Starts, die i18n-Sperre, zugeordnete Logs, Fehler, beide Signale und auch
-Nachfahren, die SIGTERM ignorieren. Sie verwendet eigene temporäre Verzeichnisse
-und einen Handshake statt Zeitannahmen zur Prüfung gleichzeitiger Starts.
-Ein isolierter Kindprozess simuliert zusätzlich `process.platform = 'win32'`
-und prüft den sofortigen Fehler, fehlende Suite-Starts und das unveränderte
-Testverzeichnis. Diese Plattform-Vertragsprüfung ist kein nativer Windows-Test.
+Runner regression checks concurrency bounds, serial mode, all suite starts,
+the i18n gate, attributed logs, failures, both signals and descendants ignoring
+SIGTERM. It uses dedicated temporary directories and a handshake instead of
+timing assumptions to verify concurrent starts. An isolated child also simulates
+`process.platform = 'win32'` and checks immediate failure, absence of suite starts
+and unchanged test directory. This platform contract check is no native Windows test.
 
-## Messung
+## Measurement
 
-[Actions-Lauf 38096027955, Job 114341991218](https://github.com/ramiz4/riparim/actions/runs/38096027955/job/114341991218)
-verglich am 11. Oktober 2026 alle 75 Suites einschließlich i18n-Sperre im selben
-Checkout und auf demselben Ubuntu-Runner: Node.js 24.21.0, vier CPUs,
-16.766.414.848 Bytes RAM. Gemessener Merge-Commit:
-`4e7be6ccf67d07fc09938ca0d33ae52b862a46e8`, PR-HEAD `dd046d0`.
+[Actions run 38096027955, job 114341991218](https://github.com/ramiz4/riparim/actions/runs/38096027955/job/114341991218)
+compared all 75 suites, including the i18n gate, on October 11, 2026 in the same
+checkout and on the same Ubuntu runner: Node.js 24.21.0, four CPUs,
+16,766,414,848 bytes RAM. Measured merge commit:
+`4e7be6ccf67d07fc09938ca0d33ae52b862a46e8`, PR head `dd046d0`.
 
-| Parallelität | Reihenfolge  | Testlaufzeit | GNU-time-RSS (KiB) |
-| ------------ | ------------ | -----------: | -----------------: |
-| 1            | erster Lauf  |      77,67 s |            602.380 |
-| 2            | zweiter Lauf |      45,17 s |            602.084 |
-| 4            | dritter Lauf |      36,93 s |            605.520 |
-| 1            | Wiederholung |      70,88 s |            604.356 |
-| 2            | Wiederholung |      45,09 s |            608.324 |
+| Concurrency | Order      | Test runtime | GNU time RSS (KiB) |
+| ----------- | ---------- | -----------: | -----------------: |
+| 1           | First run  |      77.67 s |            602,380 |
+| 2           | Second run |      45.17 s |            602,084 |
+| 4           | Third run  |      36.93 s |            605,520 |
+| 1           | Repeat     |      70.88 s |            604,356 |
+| 2           | Repeat     |      45.09 s |            608,324 |
 
-Alle fünf vollständigen Läufe bestanden: 380 erfolgreiche Prozess-Endmeldungen
-(75 Suites plus i18n-Sperre je Lauf), keine Fehler oder beobachteten OOM-Abbrüche.
-Vier Prozesse sparen gegenüber dem wiederholten seriellen Lauf **47,9 %**,
-gegenüber dem ersten seriellen Lauf **52,5 %** und gegenüber der wiederholten
-Zweierausführung **18,1 %** Testlaufzeit. Deshalb ist vier der Standard.
+All five complete runs passed: 380 successful process completion messages
+(75 suites plus i18n gate per run), no failures or observed OOM aborts.
+Four processes save **47.9%** test time against the repeated serial run,
+**52.5%** against the first serial run and **18.1%** against the repeated
+pairwise execution. Four is therefore the default.
 
-Die Laufzeit umfasst i18n-Prüfung und Bereinigung, ohne Actions-Queue und Setup.
-GNU time `%M` ist die maximale einzelne RSS aus Prozess-/Kind-Rusage, **kein
-summierter Spitzenwert des gleichzeitig laufenden Prozessbaums**. Die Zahlen
-belegen keine entsprechende Gesamtspeichergrenze.
+Runtime includes i18n checking and cleanup, excluding Actions queue and setup.
+GNU time `%M` is the maximum individual RSS from process/child rusage,
+**not a summed peak of the concurrently running process tree**.
+The figures prove no corresponding total memory limit.
 
-Nach der Messung wurde der unsichere native Windows-Pfad entfernt und die
-Fail-fast-Vertragsprüfung ergänzt. Der POSIX-Scheduler und sämtliche bisherigen
-Suite-Registrierungen bleiben erhalten; der finale Linux-Stand wird mit der
-Standardparallelität vier und der vollständigen CI geprüft. Der nur zur Messung
-verwendete zusätzliche Workflow ist entfernt. Die letzte Runner-Logzeile nennt
-auch lokal Parallelitätsgrad, Exitcode und gesamte Testlaufzeit.
+After measurement, the unsafe native Windows path was removed and the fail-fast
+contract check added. The POSIX scheduler and all existing suite registrations
+are preserved; final Linux state is checked with default concurrency four and
+complete CI. The additional measurement-only workflow is removed.
+The final runner log line also reports concurrency, exit code and total test
+runtime locally.

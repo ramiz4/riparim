@@ -1,3 +1,7 @@
+import {
+  backupStatusLabels as statusLabels,
+  backupNotificationText,
+} from "./backup-monitor-messages.mjs";
 const delay = (milliseconds) =>
   new Promise((resolve) => setTimeout(resolve, milliseconds));
 
@@ -280,25 +284,6 @@ function evaluate(workflow, snapshot, now, job) {
   };
 }
 
-const statusLabels = {
-  healthy: "Gesund",
-  failure: "Sicherung fehlgeschlagen",
-  cancelled: "Sicherung abgebrochen",
-  timed_out: "Sicherung abgelaufen",
-  skipped: "Sicherung übersprungen",
-  neutral: "Sicherung ohne Erfolg",
-  action_required: "Sicherung benötigt Eingriff",
-  stale: "Sicherung veraltet",
-  startup_failure: "Sicherung nicht gestartet",
-  incomplete: "Sicherung nicht abgeschlossen",
-  invalid_artifact: "Gültiges Backup-Artefakt fehlt",
-  missing: "Sicherung fehlt",
-  disabled: "Workflow deaktiviert",
-  stuck: "Sicherung hängt",
-  monitor_error: "Prüfung fehlgeschlagen",
-  awaiting_backup: "Neue Sicherung ausstehend",
-  recovered: "Entwarnung: Sicherung erfolgreich",
-};
 /** @param {{apiKey?: string, from?: string, to?: string, fetch?: typeof globalThis.fetch, wait?: (milliseconds: number) => Promise<unknown>}} [options] */
 export function createResendNotifier({
   apiKey,
@@ -337,7 +322,7 @@ export function createResendNotifier({
     async send(message, key) {
       if (!Object.hasOwn(statusLabels, message.status))
         throw Error("Invalid notification status.");
-      const text = `Job: ${message.job}\nStatus: ${statusLabels[message.status]}\nLetzte erfolgreiche Sicherung: ${message.lastSuccessAt ?? "keine verifiziert"}\nLink: ${message.url}`;
+      const text = backupNotificationText(message);
       const value = await request("/emails", {
         method: "POST",
         headers: { "Idempotency-Key": key },

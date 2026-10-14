@@ -1,32 +1,32 @@
 # Riparim
 
-Werkstätten in Kosovo finden, Leistungen und Standort vergleichen und direkt kontaktieren. Kundinnen und Kunden reichen Bewertung und privaten Besuchsnachweis zusammen ein. Erst nach Prüfung durch einen Administrator wird die Bewertung veröffentlicht.
+Find workshops in Kosovo, compare services and location, and contact them directly. Customers submit a review together with private visit evidence. The review is published only after an administrator has checked it.
 
 Website: [riparim.com](https://riparim.com)
 
-Für Mitarbeit gelten [CONTRIBUTING.md](CONTRIBUTING.md) und für AI Agents
-[AGENTS.md](AGENTS.md): isolierte Aufgaben-Worktrees, Conventional Commits und
-Semantic Release als Release-Prozess.
+Contributors follow [CONTRIBUTING.md](CONTRIBUTING.md), and AI agents follow
+[AGENTS.md](AGENTS.md): isolated task worktrees, Conventional Commits, and
+Semantic Release as the release process.
 
-## Technik
+## Technology
 
-- React, TypeScript und Vinext mit App Router
-- Cloudflare Worker, D1-Datenbank und privater R2-Dateispeicher; die neue Release-Pipeline verwendet den eigenen Cloudflare-Account
-- Eigener Auth-Vertrag mit Supabase als Default und konkret austauschbarem PocketBase-Adapter für E-Mail/Passwort und Google OAuth
-- Tägliche verschlüsselte Supabase-Auth-Sicherung: [Betrieb und Wiederherstellung](docs/auth-backups.md)
-- Ergänzende Sicherung von Authkonfiguration und D1/R2: [Plattformbackups](docs/platform-backups.md)
-- Vorbereitete, deaktivierte und portable E-Mail-Überwachung beider Jobs auf Cloudflare oder Node: [Backup-Monitor](docs/backup-monitoring.md)
-- Drizzle für Schema und SQL-Migrationen
+- React, TypeScript, and Vinext with App Router
+- Cloudflare Worker, D1 database, and private R2 file storage; the new release pipeline uses the project's own Cloudflare account
+- Application-owned auth contract with Supabase as the default and a concrete interchangeable PocketBase adapter for email/password and Google OAuth
+- Daily encrypted Supabase auth backup: [operation and recovery](docs/auth-backups.md)
+- Additional backup of auth configuration and D1/R2: [platform backups](docs/platform-backups.md)
+- Prepared, disabled, portable email monitoring for both jobs on Cloudflare or Node: [backup monitor](docs/backup-monitoring.md)
+- Drizzle for schema and SQL migrations
 
-Öffentlich sichtbar sind ausschließlich freigegebene Werkstätten und Bewertungen. Nachweise und Kontodaten werden nicht im Repository gespeichert. Werkstattdaten enthalten Quellen; Einträge aus Verzeichnissen bleiben bis zur Freigabe Entwürfe.
+Only approved workshops and reviews are publicly visible. Evidence and account data are not stored in the repository. Workshop data includes sources; directory entries remain drafts until approval.
 
-## Lokal starten
+## Run locally
 
-Voraussetzungen: Node.js 22 ab 22.14 oder ab 24.10 und npm. CI verwendet Node.js 24.
-Für `npm test` und den Auth-Mailvorlagenexport ist zusätzlich Go 1.27.1 nötig;
-CI richtet diese Version fest ein. Die Templates werden mit echtem Go
-`html/template` geprüft, ohne Module oder weitere Go-Abhängigkeiten. Ist Go
-nicht auf dem `PATH`, kann `RIPARIM_GO_BINARY` auf die ausführbare Datei zeigen.
+Requirements: Node.js 22 from 22.14 or Node.js from 24.10, and npm. CI uses Node.js 24.
+`npm test` and auth email template export also require Go 1.27.1;
+CI installs this pinned version. Templates are checked with actual Go
+`html/template`, without modules or additional Go dependencies. If Go
+is not on `PATH`, `RIPARIM_GO_BINARY` can point to the executable.
 
 ```sh
 npm run install:ci
@@ -34,123 +34,123 @@ cp .env.example .env
 npm run dev -- --host 127.0.0.1 --port 5174
 ```
 
-Die lokale Oberfläche ist unter `http://127.0.0.1:5174` erreichbar. Auth-Anbieter und Anmeldeoptionen werden in der geschützten Verwaltung konfiguriert. SMTP und Google OAuth müssen beim Anbieter eingerichtet und getestet werden; der Quellcode allein aktiviert sie nicht.
+The local UI is available at `http://127.0.0.1:5174`. Auth providers and login options are configured in the protected administration area. SMTP and Google OAuth must be configured and tested at the provider; source code alone does not enable them.
 
-### Code formatieren
+### Format code
 
-`npm run install:ci` aktiviert über `prepare` automatisch den lokalen Husky-Hook.
-Vor jedem Commit formatiert lint-staged ausschließlich gestagte Dateien mit der
-festgelegten lokalen Prettier-Version und übernimmt die Formatierung in den Index.
-Nicht gestagte Änderungen bleiben erhalten, auch bei teilweise gestagten Dateien.
-Ein Syntaxfehler verhindert den Commit und stellt den ursprünglichen Index und
-Arbeitsstand wieder her. Der Hook führt keine vollständigen Tests oder Builds aus.
+`npm run install:ci` automatically activates the local Husky hook through `prepare`.
+Before each commit, lint-staged formats only staged files with the
+specified local Prettier version and adds the formatting to the index.
+Unstaged changes are preserved, including in partially staged files.
+A syntax error prevents the commit and restores the original index and
+working state. The hook does not run full tests or builds.
 
 ```sh
 npm run format
 npm run format:check
 ```
 
-Beide Befehle verwenden denselben Umfang und die Konfiguration in
-`.prettierrc.json`. Sie nutzt Prettier-Standardwerte; JSONC-Dateien erhalten keine
-abschließenden Kommas, da die vorhandenen Wrangler-Verträge sie mit `JSON.parse`
-lesen. `format:check` verändert keine Dateien und prüft die Formatierung
-früh in CI. ESLint prüft weiterhin Codequalität; die vorhandenen Regeln enthalten
-keine widersprüchlichen Formatierungsregeln. `.prettierignore` bewahrt generierte
-Lockfiles und Bindings, angewandte Drizzle-Migrationen sowie unveränderte
-Vendor-Quellen einschließlich shadcn und des Sites-Vite-Plugins.
+Both commands use the same scope and configuration in
+`.prettierrc.json`. It uses Prettier defaults; JSONC files receive no
+trailing commas because existing Wrangler contracts read them with `JSON.parse`.
+`format:check` changes no files and checks formatting
+early in CI. ESLint continues to check code quality; the existing rules contain
+no conflicting formatting rules. `.prettierignore` preserves generated
+lockfiles and bindings, applied Drizzle migrations, and unchanged
+vendor sources, including shadcn and the Sites Vite plugin.
 
-Für Formatierung beim Speichern den Prettier-Editoradapter installieren und die
-lokale Projektversion verwenden; die eingecheckte Konfiguration wird automatisch
-erkannt. Editorformatierung ist optional. Git-Hooks sind lokal umgehbar; die
-Formatierungsprüfung in CI bleibt verbindlich.
+For formatting on save, install the Prettier editor adapter and use the
+local project version; the checked-in configuration is recognized automatically.
+Editor formatting is optional. Git hooks can be bypassed locally;
+the formatting check in CI remains required.
 
-Jeder Aufgaben-Worktree benötigt seine eigene Installation. Die Einrichtung
-schreibt den Hook-Pfad in dessen Git-Worktree-Konfiguration und bewahrt die Hooks
-anderer Worktrees. Bei Bedarf aktiviert sie `extensions.worktreeConfig`; ein
-ungewöhnlicher gemeinsamer `core.worktree` muss zuvor in die Konfiguration des
-primären Worktrees verschoben werden. CI verwendet `HUSKY=0`; `prepare` überspringt
-außerdem Produktionsinstallationen, fehlende Git-Metadaten und Installationen ohne
-Husky, etwa die isolierten Tool-Jobs. Nach einer lokalen Installation mit
-`--ignore-scripts` aktiviert `npm run prepare` den Hook.
+Every task worktree needs its own installation. Setup
+writes the hook path into its Git worktree configuration and preserves hooks
+in other worktrees. It enables `extensions.worktreeConfig` when needed; an
+unusual shared `core.worktree` must first be moved into the configuration of the
+primary worktree. CI uses `HUSKY=0`; `prepare` also skips
+production installations, missing Git metadata, and installations without
+Husky, such as isolated tool jobs. After a local installation with
+`--ignore-scripts`, `npm run prepare` enables the hook.
 
-`npm run dev` übernimmt in der lokalen Vorschau zusätzlich den geprüften Katalog und die vorhandene Öffnungszeiten-Importquelle als Standarddaten. Bestehende importierte oder vom Betrieb bestätigte Zeiten, unterdrückte Importe und geänderte Profilidentitäten werden bewahrt.
+`npm run dev` also uses the reviewed catalogue and existing opening-hours import source as default data in the local preview. Existing imported or business-confirmed hours, suppressed imports, and changed profile identities are preserved.
 
-Ein neuer Worktree braucht vor dem ersten Seitenaufruf die lokale Datenbank aus dem Abschnitt „Datenbank und Prüfung“. Der Entwicklungsserver verwendet dieselben logischen D1-/R2-Bindings wie der Sites-Build; die vorhandenen Migrationen müssen auf diese lokale Datenbank angewendet werden.
+A new worktree needs the local database from the “Database and checks” section before the first page request. The development server uses the same logical D1/R2 bindings as the Sites build; existing migrations must be applied to this local database.
 
-Im lokalen Dev-Modus zeigt `/anmelden` den Button „Als Seedy anmelden“. Alternativ führt `/dev/anmelden` ohne Passwort direkt zu den Einstellungen; `?weiter=…` bewahrt ein geprüftes internes Ziel. Der Einstieg und die lesbaren Seed-Kontodaten sind auf die lokale Loopback-Vorschau beschränkt. Mit `REVIEW_MODERATOR_EMAIL=seedy@sites.test` in der ignorierten `.dev.vars` erhält Seedy den lokalen Verwaltungszugang.
+In local development mode, `/anmelden` shows the German UI button “Als Seedy anmelden” (“Sign in as Seedy”). Alternatively, `/dev/anmelden` leads directly to settings without a password; `?weiter=…` preserves a validated internal destination. This entry point and readable seed account data are restricted to the local loopback preview. Setting `REVIEW_MODERATOR_EMAIL=seedy@sites.test` in the ignored `.dev.vars` gives Seedy local administration access.
 
-`REVIEW_MODERATOR_EMAIL` bestimmt das Administratorkonto und gehört in die Laufzeitkonfiguration. `.env`, lokale Datenbanken, Uploads und Build-Ausgaben sind von Git ausgeschlossen. Die `.env.example` enthält ausschließlich Platzhalter.
+`REVIEW_MODERATOR_EMAIL` selects the administrator account and belongs in runtime configuration. `.env`, local databases, uploads, and build output are excluded from Git. `.env.example` contains placeholders only.
 
-Unter `/verwaltung/benutzer` verwaltet die Administration die E-Mail- und Google-Konten des konfigurierten Auth-Anbieters: ansehen, anlegen, bearbeiten, aktivieren, deaktivieren und löschen. Supabase bleibt der Standard; PocketBase verwendet ein unabhängiges REST-Protokoll hinter demselben kleinen App-Vertrag. Für administrative Vorgänge werden ausschließlich serverseitige, separat an Provider und Ziel-Origin gebundene Credentials verwendet. Die Migration `0018_auth_providers.sql` bewahrt bestehende Supabase-Einstellungen/Cookies und ergänzt die Providerbindung privater Löschgrants. Einrichtung, Betriebsgrenzen, Hash-/Resetvoraussetzungen und sichere Kontoübernahme stehen in [docs/auth-provider.md](docs/auth-provider.md).
+At `/verwaltung/benutzer`, administration manages the configured auth provider's email and Google accounts: view, create, edit, enable, disable, and delete. Supabase remains the default; PocketBase uses an independent REST protocol behind the same small app contract. Administrative operations use only server-side credentials separately bound to the provider and target origin. Migration `0018_auth_providers.sql` preserves existing Supabase settings/cookies and adds provider binding for private deletion grants. Setup, operational limits, hash/reset requirements, and safe account migration are documented in [docs/auth-provider.md](docs/auth-provider.md).
 
-Administrativ angelegte Konten haben bestätigte E-Mail-Adressen und reguläre Kundenrechte; es wird keine E-Mail versendet. Deaktivierung sperrt neue und bestehende Sitzungen sofort. Nach Reaktivierung ist eine neue Anmeldung erforderlich. Änderungen an E-Mail oder Passwort widerrufen bestehende App-Sitzungen. Löschen entfernt auch zugehörige Besuche, Bewertungen und private Nachweise, einschließlich verknüpfter Altbestände. Bei einem Fehler bleibt das Konto gesperrt und die Löschung kann wiederholt werden. Der Verwaltungszugang ist gegen Sperren, Löschen und Änderung seiner E-Mail-Adresse geschützt.
+Administratively created accounts have verified email addresses and ordinary customer rights; no email is sent. Disabling an account immediately blocks new and existing sessions. After reactivation, a new login is required. Changes to email or password revoke existing app sessions. Deletion also removes associated visits, reviews, and private evidence, including linked legacy records. If an error occurs, the account remains blocked and deletion can be retried. Administration access is protected against blocking, deletion, and changes to its email address.
 
-In der Benutzerverwaltung können Admins weiteren Konten Adminrechte erteilen und diese wieder entziehen. Diese Rolle erlaubt die Verwaltung von Werkstätten, Bewertungen und privaten Nachweisen, Benutzerkonten sowie der Anmeldekonfiguration. Die Zuweisung liegt ausschließlich in der privaten D1-Tabelle `auth_account_roles`, ist an die stabile interne Konto-ID gebunden und kann nicht über Provider-Profilmetadaten gesetzt werden. Rollenwechsel widerrufen bestehende App-Sitzungen atomar mit der Rollenänderung; die betroffene Person muss sich erneut mit E-Mail/Passwort oder Google anmelden. Deaktivierte oder unbestätigte Konten erhalten weiterhin keinen Zugriff. Der ursprüngliche Verwaltungszugang behält seine bisherigen Anmeldebedingungen und bleibt als geschützter Admin erhalten. Admins können ihre eigene Rolle nicht entziehen; gleichzeitige Rollenänderungen prüfen die Berechtigung auch unmittelbar beim Schreiben.
+In user administration, admins can grant and revoke admin rights for other accounts. This role allows management of workshops, reviews and private evidence, user accounts, and login configuration. Assignment lives exclusively in the private D1 table `auth_account_roles`, is bound to the stable internal account ID, and cannot be set through provider profile metadata. Role changes revoke existing app sessions atomically with the role change; the affected person must sign in again with email/password or Google. Disabled or unverified accounts still receive no access. The original administration access retains its previous login conditions and remains a protected admin. Admins cannot revoke their own role; concurrent role changes also check authorization immediately when writing.
 
-Unter `/einstellungen` können angemeldete E-Mail- und Google-Konten ihren Anzeigenamen bearbeiten. Die Kontodaten zeigen E-Mail-Adresse, Anmeldemethode und bestätigten Status. Ein eigener Passwortbereich startet den bestehenden Ablauf über einen E-Mail-Link; Google-Konten verweisen zur Passwortverwaltung bei Google. Die Kontolöschung steht in einem getrennten Bereich mit den bisherigen Identitäts- und Administrationsschutzprüfungen. Die lokale Loopback-Vorschau bietet Seed-Admin, E-Mail-Konto (`?vorschau=email`) und Google-Konto (`?vorschau=google`) mit fiktiven Daten. Namensänderung, Passwort-Link, Passwortformular und Kontolöschung werden ausschließlich im Seitenzustand simuliert; Konto-, E-Mail- und Sitzungs-APIs bleiben dabei unberührt. Nach einer simulierten Löschung lässt sich die Vorschau zurücksetzen. Die E-Mail-Registrierung verlangt einen Anzeigenamen mit 2–80 Zeichen. Neue und bearbeitete Bewertungen übernehmen ausschließlich den serverseitig geprüften Kontonamen; ein eigener Bewertungsname kann nicht eingegeben werden. Bei fehlenden oder ungültigen Namen älterer oder Google-Konten erscheint „Anonym“, niemals die E-Mail-Adresse als Ersatz. Bereits eingereichte Bewertungsnamen bleiben bei einer reinen Kontonamensänderung unverändert und werden erst bei der nächsten Bewertungsbearbeitung übernommen. Eigene Kontolöschung verlangt eine neue Passwortprüfung beziehungsweise einen serverseitig geprüften Google-OAuth-Ablauf und die Eingabe `KONTO LÖSCHEN`. Kontoziele kommen ausschließlich aus der verifizierten Sitzung. Delegierte Admins, der ursprüngliche Verwaltungszugang und bestätigte administrative Altverknüpfungen sind gegen eigene Löschung geschützt.
+At `/einstellungen`, signed-in email and Google accounts can edit their display name. Account details show email address, login method, and verified status. A separate password section starts the existing flow through an email link; Google accounts are directed to Google's password management. Account deletion is in a separate section with the existing identity and administration protection checks. The local loopback preview offers a seed admin, email account (`?vorschau=email`), and Google account (`?vorschau=google`) with fictional data. Name changes, password link, password form, and account deletion are simulated exclusively in page state; account, email, and session APIs are untouched. The preview can be reset after a simulated deletion. Email registration requires a display name of 2–80 characters. New and edited reviews use only the server-verified account name; a separate review name cannot be entered. Missing or invalid names on older or Google accounts appear as the localized label “Anonym” (“Anonymous”), never the email address as a fallback. Previously submitted review names remain unchanged when only the account name changes and are adopted on the next review edit. Self-deletion requires a fresh password check or a server-verified Google OAuth flow and entry of the localized confirmation `KONTO LÖSCHEN`. Account targets come exclusively from the verified session. Delegated admins, the original administration access, and confirmed legacy administrative links are protected against self-deletion.
 
-Unter `/bewertungen` sehen angemeldete Konten ihre eigenen Einreichungen als eigenständige Seite mit Prüfstatus, privaten Nachweisen und den bisherigen Bearbeitungs-, Ergänzungs- und Löschaktionen. Das Kontomenü, Abschlusslinks und neue Moderationsbenachrichtigungen verwenden diese Seite. Alte Links mit `/?besuche=1` oder `einreichung` führen mit erhaltener Sprache und gültigem Einreichungsziel dorthin. Direktaufruf, Neuladen und Browsernavigation benötigen keinen geöffneten Landing-Dialog. Gäste und abgelaufene Sitzungen erhalten den bestehenden Anmeldeweg mit sicherem Rücksprungziel. Die Seite ist in DE/SQ/EN `noindex,nofollow` ohne private Sprachalternativen; Berechtigungen und Nachweisspeicherung bleiben auf den bestehenden APIs.
+At `/bewertungen`, signed-in accounts see their own submissions on a standalone page with review status, private evidence, and existing edit, supplement, and delete actions. The account menu, completion links, and new moderation notifications use this page. Old links with `/?besuche=1` or `einreichung` lead there while preserving the language and a valid submission target. Direct visits, reloads, and browser navigation require no open landing dialog. Guests and expired sessions receive the existing login path with a safe return destination. The page is `noindex,nofollow` in DE/SQ/EN, with no private language alternates; permissions and evidence storage remain on existing APIs.
 
-Migration `0009` ergänzt die private D1-Tabelle `auth_account_deletions`, Migration `0010` die Upload-Inventartabelle `evidence_uploads`; bestehende Daten benötigen keine Übernahme. Vor Veröffentlichung sind beide Migrationen anzuwenden. Ein gehashter Löschschlüssel ist zunächst zehn Minuten gültig und wird beim Start der Löschung zur sieben Tage gültigen Fortsetzungsberechtigung. Er ermöglicht keine normale Anmeldung. Teilfehler behalten Sperre und Eigentumsverknüpfung für die Wiederholung; die Bereinigung entfernt auch verwaiste und ältere Nachweisdateien. Nach Ablauf hilft die administrative Löschfunktion; unvollständige lokale Bereinigungen erscheinen auch dann in der Benutzerverwaltung, wenn der Anmeldedienst das Konto bereits entfernt hat. Laufende Nachweisuploads werden vor dem Schreiben registriert. Private Dateiinhalte ersetzen ihre leere R2-Reservierung ausschließlich mit einer atomaren ETag-Bedingung. Entfernt die Löschung die Reservierung, kann ein verspäteter Upload keine privaten Dateiinhalte mehr speichern. Verwaiste Reservierungen und fehlgeschlagene Kompensationslöschungen bleiben bereinigbar, ohne die Kontolöschung dauerhaft zu blockieren. Es werden keine neuen Supabase-Tabellen oder Mailvorlagen benötigt.
+Migration `0009` adds the private D1 table `auth_account_deletions`; migration `0010` adds the upload inventory table `evidence_uploads`. Existing data requires no transfer. Both migrations must be applied before publication. A hashed deletion key is initially valid for ten minutes and becomes a continuation permission valid for seven days when deletion starts. It does not permit ordinary login. Partial failures preserve the block and ownership link for retries; cleanup also removes orphaned and older evidence files. After expiry, the administrative deletion function can help; incomplete local cleanup appears in user administration even if the auth service has already removed the account. Ongoing evidence uploads are registered before writing. Private file contents replace their empty R2 reservation only with an atomic ETag condition. If deletion removes the reservation, a late upload can no longer store private file contents. Orphaned reservations and failed compensating deletions remain cleanable without permanently blocking account deletion. No new Supabase tables or email templates are needed.
 
-Unter `/betriebe` sehen angemeldete Konten ihre zugeordneten Werkstattprofile; mehrere Betriebe pro Konto sind möglich. „Profil bearbeiten“ öffnet einen Dialog mit festem Kopf, scrollbarem Formular und festen Aktionen. Die eigenständige Seite `/antraege` zeigt offene und entschiedene Übernahme-Anträge sowie Profiländerungen. Beide Seiten stehen gleichrangig im Kontomenü. Alte Links auf `/betrieb` und `/betrieb/beanspruchen` werden mit erhaltenen Parametern auf die neuen Adressen weitergeleitet.
+At `/betriebe`, signed-in accounts see their assigned workshop profiles; multiple businesses per account are supported. The localized “Profil bearbeiten” (“Edit profile”) action opens a dialog with a fixed header, scrollable form, and fixed actions. The standalone `/antraege` page shows pending and decided ownership requests and profile changes. Both pages have equal standing in the account menu. Old links to `/betrieb` and `/betrieb/beanspruchen` redirect to the new addresses with their parameters preserved.
 
-„Werkstattprofil beanspruchen“ ist eine eigene Seite unter `/betriebe/beanspruchen?werkstatt=…`, erreichbar über das öffentliche Werkstattprofil. Antragstellende wählen ihre Verbindung zum Betrieb: Inhaber, Geschäftsführer, bevollmächtigte Person oder eine andere Verbindung mit eigener Erklärung. Der gewählte Bezug wird als private Erklärung gespeichert; bei einer anderen Verbindung sind mindestens 40 Zeichen nötig. Jeder neue Antrag benötigt 1–5 Dokumente als PDF, JPG oder PNG, jeweils bis 5 MiB und zusammen bis 10 MiB. Nur Antragsteller und Verwaltung können sie herunterladen. Direktaufrufe ohne gültiges Profil zeigen einen Link zum Werkstattfinder. Nach erfolgreicher Einreichung führt die Bestätigung zu „Meine Betriebsanträge“.
+“Werkstattprofil beanspruchen” (“Claim workshop profile”) is a standalone page at `/betriebe/beanspruchen?werkstatt=…`, reachable from the public workshop profile. Applicants select their relationship to the business: owner, managing director, authorized representative, or another relationship with their own explanation. The selected relationship is stored as a private declaration; another relationship requires at least 40 characters. Each new request requires 1–5 documents as PDF, JPG, or PNG, up to 5 MiB each and 10 MiB total. Only applicants and administration can download them. Direct visits without a valid profile show a link to the workshop finder. After successful submission, the confirmation leads to “Meine Betriebsanträge” (“My business requests”).
 
-Die Verwaltung bestätigt oder lehnt Betriebsanträge unter `/verwaltung/betriebe` mit einer passenden Begründungsauswahl ab. Auch Prüfvermerke für Bewertungen bieten Standardgründe und eine eigene Erklärung bei „Anderer Grund“. Diese Vermerke bleiben privat. Pro Profil besteht höchstens eine bestätigte Zuordnung; konkurrierende Anträge können keine zusätzlichen Rechte erteilen. Ein bestätigter Betriebszugang verleiht keine Adminrolle und erlaubt ausschließlich Änderungsentwürfe für eigene Profile. Kontakt, Leistungen und Beschreibung werden erst nach erneuter Freigabe öffentlich übernommen. Name, Standort, Quellen, Prüfdatum und Freigabestatus bleiben geschützt. Geänderte Telefonnummern benötigen die bestehende strikte Google-Prüfung; deren Vorbereitung überschreibt die öffentliche Zuordnung nicht. Ein zwischenzeitlich geändertes Profil verhindert die Übernahme eines alten Entwurfs. Die Übersicht lädt nach Änderungen automatisch nach; eine Wiederholung wird nur bei Ladefehlern angeboten.
+Administration approves or rejects business requests at `/verwaltung/betriebe` with an appropriate reason selection. Review notes also offer standard reasons and a custom explanation for “Anderer Grund” (“Other reason”). These notes stay private. Each profile has at most one confirmed assignment; competing requests cannot grant additional rights. Confirmed business access grants no admin role and permits only change drafts for owned profiles. Contact details, services, and description become public only after renewed approval. Name, location, sources, review date, and approval status remain protected. Changed phone numbers require the existing strict Google check; preparing that check does not overwrite the public assignment. An intervening profile change prevents adoption of an old draft. The overview automatically reloads after changes; retry is offered only for loading errors.
 
-D1-Migration `0011` ergänzt `workshop_claims`, `workshop_owners` und `workshop_changes`. Sie erfordert keine Übernahme bestehender Daten und muss vor Veröffentlichung angewendet werden. Migration `0014` ergänzt nullable Dateimetadaten für private Inhabernachweise. Bestehende Textnachweise und Beleglinks bleiben erhalten; es ist keine Datenübernahme nötig. Die Verwaltung muss Nachweise unabhängig prüfen. Uploads nutzen den bestehenden privaten R2-Speicher und das Upload-Inventar; Kontolöschung bereinigt auch diese Dokumente. Kontolöschung entfernt private Anträge, Entwürfe und Betriebszuordnungen einschließlich bestätigter Altverknüpfungen, lässt aber die unabhängig gepflegten Katalogprofile bestehen. Freigegebene Betriebsänderungen müssen vor dem nächsten Katalogimport wie Adminänderungen exportiert werden.
+D1 migration `0011` adds `workshop_claims`, `workshop_owners`, and `workshop_changes`. It requires no transfer of existing data and must be applied before publication. Migration `0014` adds nullable file metadata for private ownership evidence. Existing textual evidence and evidence links are preserved; no data transfer is needed. Administration must check evidence independently. Uploads use existing private R2 storage and the upload inventory; account deletion also cleans up these documents. Account deletion removes private requests, drafts, and business assignments, including confirmed legacy links, while preserving independently maintained catalogue profiles. Approved business changes must be exported like admin changes before the next catalogue import.
 
-Bei Bewertungsfreigabe und angeforderter Nachweisergänzung speichert die Moderation zusammen mit der Statusänderung ein dauerhaftes Ereignis in `review_notifications`. Die Nachricht enthält ausschließlich den Status und einen Link über die Anmeldung zur eigenen Einreichung; Namen, Bewertungstext, Fahrzeugdaten, private Nachweise und Prüfvermerke werden nicht versendet. Empfänger kommen aus dem serverseitig geprüften Konto des gewählten Auth-Anbieters; bestätigte Altverknüpfungen werden berücksichtigt. Fehlende bestätigte Adressen und gesperrte Konten bleiben in den privaten Versandereignissen nachvollziehbar.
+When a review is approved or additional evidence is requested, moderation stores a durable event in `review_notifications` together with the status change. The message contains only the status and a link through login to the person's own submission; names, review text, vehicle details, private evidence, and review notes are not sent. Recipients come from the server-verified account of the selected auth provider; confirmed legacy links are considered. Missing verified addresses and blocked accounts remain traceable in private delivery events.
 
-Der Standardversand verwendet weiterhin den bestehenden Resend-Dienst und die bestätigte Domain `auth.riparim.com`. `RESEND_API_KEY` ist ein serverseitiges Geheimnis aus dem vorhandenen geschützten Projektzugang, `TRANSACTIONAL_EMAIL_FROM` der Absender, beispielsweise `Riparim <no-reply@auth.riparim.com>`. Der passend gebundene Auth-Adminschlüssel wird zur Prüfung bestätigter Kontoadressen benötigt; Supabase behält den kompatiblen `SUPABASE_SECRET_KEY`-Weg. Gemeinsame DE/SQ/EN-Mailcopy liegt in `lib/email-content.ts`; `lib/notifications/email.ts` rendert die Reviewmails mit Betreff und ausschließlich HTML mit Sprache, Titel und beschriftetem Link. `text: ""` deaktiviert die automatische Klartexterzeugung von Resend. Der erste Versuch verwendet ausschließlich die validierte Präferenz des bestätigten Empfängers; fehlende oder ungültige Werte bleiben deutsch. Gespeicherte Retries behalten ihre ursprüngliche Sprache und sämtliche Versandbytes auch nach einer Präferenz- oder Releaseänderung. Das gilt auch für historische Payloads, die noch einen Klartextteil enthalten.
+Default delivery continues to use the existing Resend service and verified domain `auth.riparim.com`. `RESEND_API_KEY` is a server-side secret from the existing protected project access; `TRANSACTIONAL_EMAIL_FROM` is the sender, for example `Riparim <no-reply@auth.riparim.com>`. The appropriately bound auth admin key is required to verify confirmed account addresses; Supabase retains the compatible `SUPABASE_SECRET_KEY` path. Shared DE/SQ/EN email copy lives in `lib/email-content.ts`; `lib/notifications/email.ts` renders review emails with a subject and HTML only, including language, title, and a labeled link. `text: ""` disables Resend's automatic plain-text generation. The first attempt uses only the validated preference of the verified recipient; missing or invalid values remain German. Stored retries preserve their original language and every delivery byte even after preference or release changes. This also applies to historical payloads that still contain a plain-text part.
 
-Bestätigungs-/Recoverybetreff und HTML-Vorlage liegen in
-`lib/auth/email-templates.ts`. Die Anwendung erzeugt weiterhin den stabilen
-Callback mit `?locale=…&weiter=…`. Die gesonderte Providerübernahme nach einem
-geprüften Main-Release steht in [der Mailaktivierung](docs/customer-flow-qa.md#lokalisierte-mailvorlagen-und-provideraktivierung-issue-52).
-Es gibt keine neue Mailplattform, Migration oder Auth-Hook-Infrastruktur.
+Confirmation/recovery subjects and HTML templates live in
+`lib/auth/email-templates.ts`. The application continues to generate the stable
+callback with `?locale=…&weiter=…`. Separate provider adoption after a
+verified main release is documented in [email activation](docs/customer-flow-qa.md#localized-email-templates-and-provider-activation-issue-52).
+There is no new email platform, migration, or auth hook infrastructure.
 
-Der reproduzierbare Anbieterwechsel mit geschütztem App-/Dateibackup, frischem Node-Restore und Daten erhaltendem Rückweg steht in [provider-exit.md](docs/provider-exit.md).
+The reproducible provider switch with protected app/file backup, a fresh Node restore, and a return path that preserves data is documented in [provider-exit.md](docs/provider-exit.md).
 
-Der portable Node-Betrieb unterstützt zusätzlich SMTP über `EMAIL_TRANSPORT=smtp`, `SMTP_URL` und `SMTP_SECRET_ORIGIN`. Migration `0017_mail_transports.sql` ergänzt Transportbindung, eingefrorene MIME-Bytes und eine dauerhafte SMTP-Startmarkierung. Unklare SMTP-Übergaben werden auch bei administrativem Retry nicht erneut gesendet. Konfiguration, TLS-Prüfung und der kontrollierte Wechselweg stehen in [mail-transports.md](docs/mail-transports.md). Der Worker behält den HTTP-Versand über Resend.
+Portable Node operation also supports SMTP through `EMAIL_TRANSPORT=smtp`, `SMTP_URL`, and `SMTP_SECRET_ORIGIN`. Migration `0017_mail_transports.sql` adds transport binding, frozen MIME bytes, and a durable SMTP start marker. Uncertain SMTP handoffs are not resent, including on administrative retry. Configuration, TLS verification, and the controlled switch procedure are documented in [mail-transports.md](docs/mail-transports.md). The Worker retains HTTP delivery through Resend.
 
-Migration `0012` ergänzt die private Versandtabelle; historische Moderationsentscheidungen werden nicht nachträglich benachrichtigt. Der Erstversand wird direkt nach der gespeicherten Moderationsentscheidung abgewartet. Es gibt keinen periodischen Mailjob. Bei Fehlern erlaubt die geschützte Verwaltung höchstens fünf manuelle Wiederholungen nach 1, 5, 15, 30 und 60 Minuten Wartezeit. Limit und Wartezeit werden atomar serverseitig geprüft. Die Übersicht aktualisiert sich nach einer Aktion oder auf ausdrücklichen Abruf; sie pollt nicht. Providerfehler widerrufen die erfolgreiche Moderation nicht. Unklare SMTP-Übergaben und abgelaufene Resend-Idempotenzfenster bleiben gegen unkontrollierten Neuversand gesperrt. Bereits gespeicherte Ereignisse und Payloadbytes bleiben erhalten. Der Release entfernt den bisherigen Cron mit einer explizit leeren Cronliste; keine neue Migration ist erforderlich.
+Migration `0012` adds the private delivery table; historical moderation decisions are not notified retroactively. The initial delivery attempt is awaited immediately after the saved moderation decision. There is no periodic email job. On failure, protected administration allows at most five manual retries after waits of 1, 5, 15, 30, and 60 minutes. Limits and waiting times are checked atomically on the server. The overview updates after an action or on explicit request; it does not poll. Provider errors do not revoke successful moderation. Uncertain SMTP handoffs and expired Resend idempotency windows remain blocked against uncontrolled resending. Stored events and payload bytes are preserved. The release removes the previous cron with an explicitly empty cron list; no new migration is required.
 
-Jede Entscheidung besitzt einen eindeutigen Idempotenzschlüssel je Einreichung und Revision. Nach dem ersten Versuch bleiben Empfänger und Nachrichteninhalt unverändert. Wiederholungen enden konservativ nach 23 Stunden, da [Resend die Schlüssel 24 Stunden speichert](https://resend.com/docs/dashboard/emails/idempotency-keys); unklare ältere Ereignisse benötigen eine Prüfung beim Versanddienst. Ein geänderter Empfänger oder eine geänderte Versandschlüssel-Konfiguration verhindert eine unsichere Wiederholung. Nach erfolgreicher Übergabe wird der eingefrorene Adress-/Nachrichteninhalt aus der lokalen Tabelle entfernt. „An Versanddienst übergeben“ bestätigt keine endgültige Zustellung. Das Löschen der Einreichung oder des Kontos entfernt zugehörige lokale Versandereignisse.
+Every decision has a unique idempotency key per submission and revision. After the first attempt, recipient and message contents remain unchanged. Retries conservatively end after 23 hours because [Resend stores keys for 24 hours](https://resend.com/docs/dashboard/emails/idempotency-keys); uncertain older events require inspection at the delivery service. A changed recipient or delivery-key configuration prevents an unsafe retry. After a successful handoff, the frozen address/message contents are removed from the local table. The localized status “An Versanddienst übergeben” (“Handed to delivery service”) does not confirm final delivery. Deleting the submission or account removes associated local delivery events.
 
-Der portable Entwicklungsserver bietet eine lokale ChatGPT-Testidentität unter `/signin-with-chatgpt?return_to=/`. Diese Simulation gilt nur auf Loopback und wird nicht in den Produktionsbuild übernommen. Verwende sie nicht als Ersatz für Tests der echten Anmeldung.
+The portable development server offers a local ChatGPT test identity at `/signin-with-chatgpt?return_to=/`. This simulation applies only on loopback and is excluded from the production build. Do not use it as a substitute for testing real login.
 
-## Portabler Node-Server
+## Portable Node server
 
-Zusätzlich zum Cloudflare-Worker kann derselbe App-Code mit Next.js auf Node
-laufen. `npm run build:node`, `npm run db:migrate:node` und
-`npm run start:node -- --port 5174` verwenden SQLite und einen privaten lokalen
-Blob-Dateispeicher. Konfiguration, Sicherung, manueller Versand und Grenzen
-stehen in [docs/node-runtime.md](docs/node-runtime.md). Der bestehende
-Cloudflare-Default bleibt bestehen. Geprüfte vorgebaute Nodepakete und der hostlokale Installations-/Deploymentweg stehen in [docs/node-deployment.md](docs/node-deployment.md).
+In addition to the Cloudflare Worker, the same app code can run with Next.js on Node.
+`npm run build:node`, `npm run db:migrate:node`, and
+`npm run start:node -- --port 5174` use SQLite and a private local
+blob file store. Configuration, backup, manual delivery, and limits
+are documented in [docs/node-runtime.md](docs/node-runtime.md). The existing
+Cloudflare default remains in place. Verified prebuilt Node packages and the host-local installation/deployment procedure are documented in [docs/node-deployment.md](docs/node-deployment.md).
 
-Interne Konto-IDs werden über eine private, additive Identitätszuordnung von
-externen Anmeldekonten getrennt. Bestehende Besitzschlüssel und Dateipfade
-bleiben erhalten. Rollout, geprüfte Anbieterzuordnung, Sperrerhalt und Rückweg
-stehen in [docs/account-identities.md](docs/account-identities.md).
+Internal account IDs are separated from external login accounts through a private,
+additive identity mapping. Existing ownership keys and file paths
+are preserved. Rollout, verified provider mapping, preservation of blocks, and the return path
+are documented in [docs/account-identities.md](docs/account-identities.md).
 
-## Datenbank und Prüfung
+## Database and checks
 
-Migrationen liegen in `drizzle/`. Nach Änderungen am Schema:
+Migrations live in `drizzle/`. After schema changes:
 
 ```sh
 npm run db:generate
 ```
 
-Für eine neue lokale Entwicklungsdatenbank zuerst den Sites-Worker bauen und die SQL-Migrationen in aufsteigender Reihenfolge anwenden. Bereits angewendete Migrationen nicht erneut ausführen:
+For a new local development database, first build the Sites Worker and apply SQL migrations in ascending order. Do not rerun already applied migrations:
 
 ```sh
 BUILD_TARGET=sites npm run build
 node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js d1 execute DB --local --config dist/server/wrangler.json --persist-to .wrangler/state --file drizzle/0000_handy_black_queen.sql
 ```
 
-Den letzten Befehl für die jeweils noch ausstehenden Dateien wiederholen.
+Repeat the last command for each migration file that is still pending.
 
 ```sh
 npm test
@@ -159,26 +159,26 @@ npm run lint
 npm run build
 ```
 
-`npm test` prüft den Bewertungsablauf, Besitzrechte, Benutzerverwaltung, Katalogfilter sowie Google-Sitzungen und OAuth-Callbacks mit isolierten SQLite-/R2-/Provider-Fixtures. Dabei werden keine echten E-Mails gesendet und keine Produktionsdaten verändert.
+`npm test` checks the review flow, ownership rights, user administration, catalogue filters, Google sessions, and OAuth callbacks with isolated SQLite/R2/provider fixtures. It sends no real emails and changes no production data.
 
-Auf Linux, macOS und WSL laufen unabhängige Test-Suites in vier getrennten
-Node-Prozessen gleichzeitig. `TEST_CONCURRENCY=1 npm test` erhält die serielle
-Diagnose; Werte von 1 bis 4 sind erlaubt. Für Windows verwende WSL: Native
-Windows-Ausführung wird vor dem Start von Suites abgelehnt, da dort die sichere
-Bereinigung über POSIX-Prozessgruppen fehlt.
-Logs tragen den Namen ihrer Suite. Die i18n-Prüfung läuft zuerst; Fehler oder
-Abbruch stoppen laufende Suites, bevor das gemeinsame Testverzeichnis entfernt
-wird. Ressourcenprüfung und Laufzeitmessung stehen in
-[der Test-Runner-Dokumentation](docs/test-suite-concurrency.md).
+On Linux, macOS, and WSL, independent test suites run concurrently in four separate
+Node processes. `TEST_CONCURRENCY=1 npm test` retains serial
+diagnosis; values from 1 to 4 are allowed. Use WSL on Windows: native
+Windows execution is rejected before starting suites because it lacks safe
+cleanup through POSIX process groups.
+Logs include their suite name. The i18n check runs first; failure or
+cancellation stops running suites before the shared test directory is removed.
+Resource checks and runtime measurements are documented in
+[the test runner documentation](docs/test-suite-concurrency.md).
 
-`npm run build` prüft zusätzlich den erzeugten Browser-Code: Der echte gebündelte Link muss die Navigation auslösen und auch nach einem fehlgeschlagenen Prefetch funktionieren. Die Prüfung läuft für Cloudflare- und Sites-Builds mit isolierten Browser-/Netzwerk-Fixtures. Nach einem vorhandenen Build lässt sie sich mit `npm run test:client-build` einzeln wiederholen.
+`npm run build` also checks generated browser code: the actual bundled link must trigger navigation and continue to work after a failed prefetch. The check runs for Cloudflare and Sites builds with isolated browser/network fixtures. After an existing build, it can be repeated separately with `npm run test:client-build`.
 
-Die ergänzende Live- und Browserprüfung steht in [docs/customer-flow-qa.md](docs/customer-flow-qa.md). Die dokumentierte Bestandsprüfung in `data/catalogue-review-2026-10-04.json` führt die unabhängigen Quellen und zurückgestellten Standortkonflikte auf.
+Additional live and browser checks are documented in [docs/customer-flow-qa.md](docs/customer-flow-qa.md). The recorded inventory review in `data/catalogue-review-2026-10-04.json` lists independent sources and deferred location conflicts.
 
-GitHub Actions prüft Katalog, Tests, TypeScript, Lint und Worker-Build bei Pull Requests. Nach einem Squash-Merge nach `main` erstellt `semantic-release` bei relevanten Conventional Commits einen versionierten GitHub Release und veröffentlicht dessen geprüftes Worker-Artefakt auf Cloudflare. Details und nötige Produktions-Secrets stehen in [docs/releases.md](docs/releases.md).
+GitHub Actions checks the catalogue, tests, TypeScript, lint, and Worker build on pull requests. After a squash merge into `main`, `semantic-release` creates a versioned GitHub Release for relevant Conventional Commits and publishes its verified Worker artifact to Cloudflare. Details and required production secrets are documented in [docs/releases.md](docs/releases.md).
 
-## Veröffentlichung
+## Publication
 
-Die Veröffentlichung auf `https://riparim.com` erfolgt ausschließlich über den Workflow **Release** aus dem gemergten `main`. `wrangler.jsonc` ist die Quelle für Zielaccount, Ressourcen, die beiden eigenen Custom Domains und Laufzeitvariablen. Das GitHub-Environment `production` erlaubt nur `main` und verwahrt die Deployment-/Anwendungs-Secrets. Offene PRs werden nicht veröffentlicht.
+Publication at `https://riparim.com` takes place exclusively through the **Release** workflow from merged `main`. `wrangler.jsonc` is the source for the target account, resources, the two owned custom domains, and runtime variables. The GitHub environment `production` allows only `main` and stores deployment/application secrets. Open PRs are not published.
 
-Die Datenübernahme und Produktionsumstellung sind [geprüft und abgenommen](docs/domain-cutover-2026-10-05.md). Der [Gesamtabschluss](docs/release-handover-2026-10-05.md) ordnet die Nachweise den Abnahmekriterien zu. Die bisherige OpenAI Site ist [öffentlich stillgelegt](docs/sites-retirement.md); Owner-Zugang, Daten und Versionen bleiben zur gesicherten Aufbewahrung erhalten. `.openai/hosting.json` identifiziert dieses historische Projekt für das geprüfte Sites-Archiv und lokale Bindings; es ist kein produktives Deploymentziel der regulären Pipeline. Native Sites-Tokens werden nicht für CI verwendet. Der eigene Cloudflare-Worker entfernt native Sites-Identitätsheader am Eingang. Ein lokaler Worker kann mit `npm start -- --port 5175` geprüft werden.
+Data migration and the production cutover have been [verified and accepted](docs/domain-cutover-2026-10-05.md). The [overall completion record](docs/release-handover-2026-10-05.md) maps evidence to acceptance criteria. The previous OpenAI Site has been [publicly retired](docs/sites-retirement.md); owner access, data, and versions remain retained securely. `.openai/hosting.json` identifies this historical project for the verified Sites archive and local bindings; it is not a production deployment target of the regular pipeline. Native Sites tokens are not used for CI. The owned Cloudflare Worker removes native Sites identity headers at ingress. A local Worker can be checked with `npm start -- --port 5175`.

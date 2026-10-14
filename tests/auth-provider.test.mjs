@@ -12,7 +12,7 @@ await mkdir(output, { recursive: true });
 const bundle = await build({
   stdin: {
     contents:
-      "export * from './lib/auth/config'; export * from './lib/auth/admin'; export * from './lib/auth/identities'; export * from './lib/auth/password-proof'; export * from './lib/auth/provider'; export * from './app/auth'; export {POST as authPost} from './app/api/auth/[action]/route'; export {GET as callback} from './app/auth/bestaetigen/route'; export {GET as listUsers,POST as addUser} from './app/api/users/route'; export {PATCH as editUser,DELETE as removeUser} from './app/api/users/[id]/route'; export {POST as saveAuthSettings} from './app/api/auth-settings/route';",
+      "export * from './lib/auth/config'; export * from './lib/auth/admin'; export * from './lib/auth/identities'; export * from './lib/auth/password-proof'; export * from './lib/auth/provider'; export * from './app/auth'; export {POST as authPost} from './app/api/auth/[action]/route'; export {GET as callback} from './app/auth/confirm/route'; export {GET as listUsers,POST as addUser} from './app/api/users/route'; export {PATCH as editUser,DELETE as removeUser} from './app/api/users/[id]/route'; export {POST as saveAuthSettings} from './app/api/auth-settings/route';",
     resolveDir: process.cwd(),
     loader: "ts",
   },

@@ -1,147 +1,138 @@
-# Anbieterwechsel mit geprüftem Rückweg
+# Provider switching with a verified return path
 
-Riparim kann auf einem gewöhnlichen Node-Host mit lokaler SQLite und privatem
-Dateispeicher laufen. Auth verwendet den eigenen App-Vertrag mit zwei konkreten
-Adaptern für Supabase Auth (auch eine kompatible selbst betriebene Instanz) und
-PocketBase. Benachrichtigungen können über SMTP statt Resend gehen. Ein beliebiger
-OIDC-Anbieter oder ein anderer Datenbanktyp benötigt weiterhin eine gezielte
-Adapteränderung. Der Wechsel ist kein Ein-Klick-Vorgang.
+Riparim can run on an ordinary Node host with local SQLite and private file
+storage. Auth uses the app's own contract with two concrete adapters for Supabase
+Auth (including a compatible self-hosted instance) and PocketBase.
+Notifications can use SMTP instead of Resend. An arbitrary OIDC provider or
+another database type still needs a targeted adapter change.
+The switch is not a one-click operation.
 
-## Reihenfolge
+## Sequence
 
-1. Den geprüften GitHub Release aus gemergtem `main` samt Commit/SHA-256 sichern.
-   Die gleiche geprüfte Quelle mit `npm run build:node` bauen, Node 24 ab 24.10,
-   privaten persistenten Datenträger und einen Dienstbenutzer vorbereiten.
-   Feature-Branches und offene PRs werden nicht veröffentlicht. Keine Prozesse
-   am neuen Datenverzeichnis starten, bevor die vollständige Wiederherstellung
-   und Konfiguration abgeschlossen sind.
-2. Alle alten Writer, Versand-Crons/Timer, laufenden Requests, Uploads und
-   Kontolöschungen stoppen und abfließen lassen. Eine Schreibpause gilt für beide
-   Seiten. Den vorhandenen geschützten Export aus [data-transfer.md](data-transfer.md)
-   aktivieren: `MIGRATION_READ_ONLY=true`, gültigen Export-Tokenhash,
-   kurze gültige Exportfrist und exakt geprüften `MIGRATION_SOURCE_COMMIT`
-   konfigurieren. Der Token wird über geschütztes stdin und Authorization
-   übertragen. Die Pause läuft nicht mit der Exportberechtigung ab.
-   Der Node-Starter sperrt ebenfalls vor Next alle App-Requests, einschließlich
-   GETs; `notifications:node` arbeitet während dieser Pause nicht.
-3. `scripts/export-source.mjs` nach der bestehenden Anleitung ausführen und den
-   vollständigen Abschlussbeleg prüfen. Backupverzeichnis/Elternverzeichnis 0700,
-   Dateien 0600, außerhalb von Git/`public/`; keine Kontodaten, Keys, Objektpfade
-   oder SQL-Bindings in Logs oder argv. Auth-Providerkonten, Passwort-Hashes,
-   OAuth-Einstellungen, Secrets und DNS-Konfiguration separat sichern. Sie
-   gehören nicht in das Appbackup. Im Appbackup enthaltene Session-/Grantdaten
-   bleiben ebenfalls geschützt.
-4. Das komplette Appbackup in ein **neues** Node-Datenverzeichnis importieren:
+1. Save the verified GitHub release from merged `main`, including commit/SHA-256.
+   Build the same verified source with `npm run build:node`, prepare Node 24
+   from 24.10, private persistent storage and a service user. Feature branches
+   and open PRs are not published. Start no processes on the new data directory
+   before complete recovery and configuration are finished.
+2. Stop and drain all old writers, delivery crons/timers, active requests,
+   uploads and account deletions. A write pause applies to both sides.
+   Enable the existing protected export from [data-transfer.md](data-transfer.md):
+   configure `MIGRATION_READ_ONLY=true`, a valid export token hash, short valid
+   export deadline and exactly verified `MIGRATION_SOURCE_COMMIT`.
+   The token is transmitted through protected stdin and Authorization.
+   The pause does not expire with export authorization.
+   The Node launcher also blocks all app requests before Next, including GETs;
+   `notifications:node` does not work during this pause.
+3. Run `scripts/export-source.mjs` according to the existing guide and check the
+   complete completion receipt. Backup/parent directory 0700, files 0600,
+   outside Git/`public/`; no account data, keys, object paths or SQL bindings
+   in logs or argv. Back up Auth provider accounts, password hashes, OAuth
+   settings, secrets and DNS configuration separately. They do not belong in
+   the app backup. Session/grant data in the app backup also remains protected.
+4. Import the entire app backup into a **new** Node data directory:
 
    ```sh
-   node scripts/restore-node.mjs < /geschuetzter/pfad/restore-options.json
+   node scripts/restore-node.mjs < /protected/path/restore-options.json
    ```
 
-   Die Datei enthält ausschließlich die folgenden Optionen; Projekt und Commit
-   sind aus dem unabhängig geprüften Abschlussbeleg zu übernehmen:
+   The file contains only the following options; take project and commit from
+   the independently verified completion receipt:
 
    ```json
    {
-     "sourceDirectory": "/geschuetzter/pfad/backup",
+     "sourceDirectory": "/protected/path/backup",
      "expectedProjectId": "<verified-source-project>",
      "expectedCommit": "<40-character-reviewed-release-commit>",
-     "directory": "/geschuetzter/pfad/new-node-data"
+     "directory": "/protected/path/new-node-data"
    }
    ```
 
-   Der Elternpfad muss bereits privat und kanonisch sein. Alle Zielprozesse
-   bleiben gestoppt. Der Import prüft Abschluss, Snapshot/Manifest-Fingerprints,
-   vollständiges Schema und private Bytes/SHA-256. Er führt ausschließlich
-   eingecheckte Drizzle-Migrationen aus, übernimmt Appdaten mit internen/externen
-   Identitätszuordnungen, Rollen, Sperren, Lösch-Tombstones, Freigaben, Reservierungen
-   und historische Outboxzustände. Quell-Migrationsdaten bleiben im Backup;
-   die Zielhistorie belegt die tatsächlich ausgeführten Migrationen mit Hashes.
-   `riparim_node_migrations` wird als exakt geprüfte Runtimehistorie anerkannt.
-   Private Bytes, ursprüngliche ETags, Uploadzeiten und HTTP-/Custom-Metadaten
-   werden erhalten. Der Import verwendet bewusst kein normales `bucket.put`,
-   das Reservierungs-ETags ändern würde.
+   The parent path must already be private and canonical. All target processes
+   remain stopped. Import checks completion, snapshot/manifest fingerprints,
+   complete schema and private bytes/SHA-256. It runs only committed Drizzle
+   migrations, transfers app data with internal/external identity mappings,
+   roles, blocks, deletion tombstones, approvals, reservations and historical
+   outbox states. Source migration data remains in the backup; target history
+   proves actually executed migrations with hashes. `riparim_node_migrations`
+   is recognized as exactly verified runtime history. Private bytes, original
+   ETags, upload times and HTTP/custom metadata are preserved. Import deliberately
+   avoids regular `bucket.put`, which would change reservation ETags.
 
-   Beide Datenbanken und ihr Abschlussbeleg entstehen im privaten temporären
-   Verzeichnis; erst nach vollständiger Prüfung wird das ganze Verzeichnis
-   veröffentlicht. Fehler vor diesem Schritt geben keinen Halbrestore frei.
-   Eine identische Wiederholung ist ausschließlich eine vollständige Prüfung
-   des unveränderten Ergebnisses. Jede neue Zeile, Änderung oder Löschung,
-   auch neue Datei-Bytes, Authkonfiguration oder Identitätsverknüpfung, stoppt
-   den alten Import. Es gibt keine Einfügungen in ein bereits benutztes Ziel
-   und keine automatische Wiederbelebung gelöschter Bewertungen.
-   Nach einem Prozesscrash können `.restore-lock` und das private Staging-
-   Verzeichnis zurückbleiben. Retry löscht sie bewusst nicht blind. Der Betreiber
-   prüft und bereinigt ausschließlich eigene Reste, nachdem Restore-/App-Prozesse
-   sicher gestoppt und das vollständige Backup gesichert sind.
+   Both databases and their completion receipt are created in a private temporary
+   directory; the entire directory is published only after complete verification.
+   Errors before this step release no partial restore. An identical retry is
+   exclusively a complete check of the unchanged result. Any new row,
+   modification or deletion, including new file bytes, Auth configuration or
+   identity link, stops the old import. No inserts into an already used target
+   and no automatic resurrection of deleted reviews.
+   After a process crash, `.restore-lock` and the private staging directory may
+   remain. Retry deliberately does not blindly delete them. The operator checks
+   and cleans only their own remnants after restore/app processes are safely
+   stopped and the complete backup is secured.
 
-5. Authkonten separat auf einer tatsächlich kompatiblen Zielversion übernehmen
-   und die Passwort-Hash-/Google-Verträge mit isolierten Konten prüfen. Eine
-   Admin-Liste exportiert keine vollständigen Passwort-Hashes. Die offizielle
-   [Supabase-Restore-Anleitung](https://supabase.com/docs/guides/self-hosting/restore-from-platform)
-   nennt Versionsabgleich, enthaltene Authdaten sowie separate Keys, OAuth/SMTP
-   und erneute Anmeldung. Falls das Ziel Hashes nicht verifiziert importieren
-   kann, ist ein kontrollierter Reset nötig. Google-Subjects und Callback am
-   Ziel gesondert einrichten. Alle exakten Quell-/Zieltuples einschließlich
-   Sperren/Tombstones mit dem vorhandenen `linkAccountIdentity` und unabhängig
-   geprüften Provideridentitäten an dieselben internen IDs binden; nie per
-   gleicher E-Mail oder Rollenmetadaten. Bei weiterhin gestoppten Zielprozessen
-   Mapping, Ziel-Authsettings und separat gebundene Secrets kontrolliert
-   serverseitig/offline nach [auth-provider.md](auth-provider.md) konfigurieren.
-   Eine deaktivierte oder noch an den alten Customhost gebundene Anmeldung
-   setzt keinen verfügbaren Admin-UI-Zugang für den Wechsel voraus.
-6. SMTP/Absender/TLS und den unmittelbaren Ereignisversand nach
-   [mail-transports.md](mail-transports.md) konfigurieren. Bereits
-   begonnene Ereignisse behalten Transport und Credentialbindung. `unknown`
-   beziehungsweise unklare SMTP-Annahmen benötigen externe Klärung; sie dürfen
-   beim Anbieterwechsel nicht erneut gesendet werden. Ein SMTP-250 belegt nur
-   Annahme durch den Server, keine Zustellung an das Postfach.
-7. Auf dem Ziel öffentliche und ausgeblendete Werkstätten, neue Anmeldung,
-   dieselben internen Besitzrechte, eigene/fremde private Nachweise, Moderation,
-   Benachrichtigung sowie Kontolöschung prüfen. Rollenmetadaten und gefälschte
-   native Header dürfen keine Verwaltungsrechte geben. Die neue Anmeldung
-   ersetzt alte Provider- und App-Sitzungen; deren Stilllegung separat prüfen.
-   Quelle bleibt gesperrt. Erst dann Domain/TLS/Proxy umstellen und das Ziel als
-   **einzigen Writer** freigeben. Freigabe und Domainwechsel
-   sind Betriebsaktionen und gehören nicht zum automatisierten Wechseltest.
+5. Separately transfer Auth accounts to an actually compatible target version
+   and check password-hash/Google contracts with isolated accounts.
+   An admin list does not export complete password hashes. The official
+   [Supabase restore guide](https://supabase.com/docs/guides/self-hosting/restore-from-platform)
+   describes version alignment, included Auth data and separate keys, OAuth/SMTP
+   and renewed login. If the target cannot verifiably import hashes, a controlled
+   reset is required. Configure Google subjects and target callback separately.
+   Bind all exact source/target tuples, including blocks/tombstones, to the same
+   internal IDs using existing `linkAccountIdentity` and independently verified
+   provider identities; never through matching email or role metadata.
+   With target processes still stopped, configure mapping, target Auth settings
+   and separately bound secrets in a controlled server-side/offline manner
+   according to [auth-provider.md](auth-provider.md). Disabled login or login
+   still bound to the old custom host does not require available admin UI access
+   for the switch.
+6. Configure SMTP/sender/TLS and immediate event delivery according to
+   [mail-transports.md](mail-transports.md). Already started events retain
+   transport and credential binding. `unknown` or ambiguous SMTP acceptance
+   requires external clarification; it must not be resent during a provider
+   switch. SMTP 250 proves only server acceptance, not delivery to the inbox.
+7. On the target, check public and hidden workshops, new login, the same internal
+   ownership, own/foreign private evidence, moderation, notification and account
+   deletion. Role metadata and forged native headers must grant no administrative
+   rights. New login replaces old provider and app sessions; verify their
+   retirement separately. Source stays locked. Only then switch domain/TLS/proxy
+   and enable the target as the **sole writer**. Activation and domain cutover
+   are operational actions and not part of the automated switch test.
 
-## Daten erhaltender Rückweg
+## Return path preserving data
 
-Vor erster Zieländerung kann auf den unveränderten geprüften Quellbestand
-zurückgegangen werden. Nach Betriebsaufnahme wird die alte Quelle niemals
-blind wieder geöffnet. Zuerst den neuen Writer einschließlich laufender
-Versandanfragen stoppen,
-alle laufenden Arbeiten abfließen lassen und einen **frischen vollständigen
-Zielbestand** über denselben geschützten Export sichern. Node unterstützt diesen
-Export inklusive seiner Runtimehistorie und privaten Objekte.
+Before the first target change, it is possible to return to unchanged verified
+source data. After operation starts, the old source is never blindly reopened.
+First stop the new writer, including active delivery requests, drain all active
+work and secure a **fresh complete target inventory** through the same protected
+export. Node supports this export, including its runtime history and private objects.
 
-Diesen aktuellen Bestand in einer frischen kompatiblen Rückumgebung vollständig
-wiederherstellen und prüfen. Neue Zeilen, Bearbeitungen, Löschungen, Tombstones,
-Identitätsaliases und Versandannahmen müssen enthalten sein. Historische
-`unknown`/gebundene Nachrichten bleiben so; ein alter Outboxbestand darf keine
-bereits angenommenen Nachrichten erneut versenden. Auth-Providerdaten und Keys
-separat abgleichen, neue Anmeldung verlangen. Erst nach Zugriffstests und
-Bestandsabgleich Domain/Writer umstellen. Ein Rückimport in eine schon benutzte
-D1/R2-Umgebung braucht einen gesonderten geprüften Reconciliation-Plan; der
-Node-Restore verspricht dafür keinen pauschalen Merge.
+Fully restore and verify this current inventory in a fresh compatible return
+environment. New rows, edits, deletions, tombstones, identity aliases and delivery
+acceptances must be included. Historical `unknown`/bound messages remain so;
+an old outbox inventory must not resend already accepted messages.
+Reconcile Auth provider data and keys separately; require new login.
+Only switch domain/writer after access tests and inventory reconciliation.
+Reverse import into an already used D1/R2 environment needs a separate reviewed
+reconciliation plan; Node restore promises no blanket merge for this.
 
-## Tatsächlicher Nachweis und Grenzen
+## Actual evidence and limitations
 
-`npm test` registriert `node-restore.test.mjs` und die Wechselprobe innerhalb des
-bestehenden `node-runtime.test.mjs`; nur ein Test baut Next. Die Probe verwendet
-einen echten isolierten D1-/R2-Quellbestand mit geschütztem Export, einen frischen Node-/SQLite-/Private-Files-Restore,
-den tatsächlichen Next-Produktionsserver und echte SDK-Requests zu zwei isolierten
-HTTPS-Auth-Protokollinstanzen. Nur der Testchild vertraut ihrem synthetischen
-Zertifikat. Kein Produktions-Testhook und keine deaktivierte TLS-Prüfung.
-Die tatsächlichen HTTP-Routen prüfen Rollen, Sperren/Tombstones, Besitzrechte,
-private Downloads, Moderation, eine Annahme je Ereignis durch einen isolierten
-SMTP-Server und Kontolöschung. Danach nimmt der pausierte Node-Server einen neuen
-Export mit dieser Löschung auf; dessen Restore belegt den Rückweg. Ein alter
-Backup-Retry wird abgewiesen. Offline-Prüfungen belegen originale Bytes/Metadaten,
-ETag-Reservierungen, Historienhashes sowie keine Freigabe bei unvollständigen Files.
+`npm test` registers `node-restore.test.mjs` and the switch probe within existing
+`node-runtime.test.mjs`; only one test builds Next. The probe uses a real isolated
+D1/R2 source inventory with protected export, a fresh Node/SQLite/private-files
+restore, the actual Next production server and real SDK requests to two isolated
+HTTPS Auth protocol instances. Only the test child trusts their synthetic
+certificate. No production test hook or disabled TLS verification.
+Actual HTTP routes check roles, blocks/tombstones, ownership, private downloads,
+moderation, one acceptance per event by an isolated SMTP server and account
+deletion. The paused Node server then captures a new export with that deletion;
+its restore proves the return path. An old backup retry is rejected.
+Offline checks prove original bytes/metadata, ETag reservations, history hashes
+and no release with incomplete files.
 
-Das ist ein reproduzierbarer App-/Protokollnachweis. Echte Passwort-Hashmigration,
-Google-Kontoübernahme, externe DNS/TLS-Umstellung und Postfachzustellung sind
-nicht durchgeführt. SQLite ist für einen Host mit lokalem persistentem Datenträger
-abgenommen; mehrere Hosts oder Netzwerkdateisysteme sind nicht geprüft.
-Cloudflare-/Sites-Releasepakete und deren bestehende Pflichtprüfungen bleiben
-unverändert erforderlich. Es wird keine Produktion automatisch aktiviert.
+This is reproducible app/protocol evidence. Actual password-hash migration,
+Google account transfer, external DNS/TLS cutover and inbox delivery were not
+performed. SQLite is accepted for one host with local persistent storage;
+multiple hosts or network filesystems are untested. Cloudflare/Sites release
+packages and their existing required checks remain required unchanged.
+No production environment is enabled automatically.

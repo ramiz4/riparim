@@ -38,7 +38,7 @@ globalThis.fixtureHeaders = new Headers();
 const result = await build({
   stdin: {
     contents:
-      "export {default as Home} from './app/[locale]/page';export {default as ReviewsPage,generateMetadata} from './app/[locale]/bewertungen/page';export {isPagePath} from './lib/i18n/locale';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",
+      "export {default as Home} from './app/[locale]/page';export {default as ReviewsPage,generateMetadata} from './app/[locale]/reviews/page';export {isPagePath} from './lib/i18n/locale';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",
     resolveDir: process.cwd(),
     loader: "tsx",
   },

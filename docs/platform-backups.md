@@ -1,116 +1,113 @@
-# Authkonfiguration, D1 und R2 sichern
+# Back up Auth configuration, D1 and R2
 
-Der tägliche Workflow `Backup: Platform` ergänzt die bestehende
-[Authdaten-Sicherung](auth-backups.md). Er läuft um 03:43 UTC (04:43 Schweizer
-Winterzeit, 05:43 Sommerzeit) ausschließlich auf `main`, mit 14 Tagen Aufbewahrung.
-Der Entschlüsselungsschlüssel ist derselbe verifizierte RSA-Schlüssel im
-1Password-Projekteintrag `mkp7xa42clfbreiv2q3b3nrq5y`, Feld
-`SUPABASE_AUTH_BACKUP_PRIVATE_KEY`. Alte Authbackups bleiben entschlüsselbar;
-es wird kein Schlüssel ersetzt.
+The daily `Backup: Platform` workflow supplements the existing
+[Auth data backup](auth-backups.md). It runs at 03:43 UTC (04:43 Swiss winter
+time, 05:43 summer time), exclusively on `main`, with 14-day retention.
+The decryption key is the same verified RSA key in the 1Password project entry
+`mkp7xa42clfbreiv2q3b3nrq5y`, field `SUPABASE_AUTH_BACKUP_PRIVATE_KEY`.
+Old Auth backups remain decryptable; no key is replaced.
 
-## Bestand und Abgrenzung
+## Inventory and scope
 
-Die Prüfung am 12.10.2026 ergab keine geplante unabhängige D1-/R2-Sicherung
-und keine automatische Authkonfigurationssicherung. D1 besitzt bereits
-Cloudflare Time Travel (sieben Tage auf Workers Free). Dieser Wiederherstellungsweg
-ersetzt keine unabhängige Kopie und sichert keine R2-Objekte.
-D1 hatte etwa 553 KB, R2 zwei Objekte mit insgesamt 26.528 Bytes.
+The check on 2026-10-12 found no scheduled independent D1/R2 backup and no
+automatic Auth configuration backup. D1 already has Cloudflare Time Travel
+(seven days on Workers Free). This recovery path does not replace an independent
+copy and does not back up R2 objects.
+D1 held about 553 KB; R2 held two objects totaling 26,528 bytes.
 
-Das neue Archiv enthält:
+The new archive contains:
 
-- Die vollständige Antwort von Supabase `GET /v1/projects/<ref>/config/auth`:
-  Site URL, Redirects, aktivierte Provider, SMTP-Einstellungen, Mailvorlagen,
-  Registrierungs-, Sitzungs-, Sicherheits- und Rate-Limit-Einstellungen.
-  Alle zurückgegebenen Werte bleiben im verschlüsselten Archiv. Die live
-  gelesenen OAuth-/SMTP-Geheimnisfelder waren keine direkt mit den originalen
-  Vault-Schlüsseln übereinstimmenden Werte. Solche API-Repräsentationen dürfen
-  nicht als Passwort wieder eingespielt werden. Was die API maskiert oder
-  nicht exportiert, wird dadurch nicht rekonstruiert; OAuth-/SMTP-Secrets im
-  bestehenden 1Password-Eintrag und neu anzulegende Signing-/API-Keys bleiben
-  Teil des Wiederherstellungsplans. Keine automatischen PATCHs gegen Produktion.
-  `supabase-auth-recovery.json` benennt den Vault-Eintrag und die zugehörigen
-  Felder, ohne deren Werte in Metadaten oder Logs auszugeben.
-- Einen konsistenten SQL-Lesesnapshot des D1-Anwendungsschemas einschließlich
-  Anwendungs- und Migrationsdaten. Cloudflare- und SQLite-interne Tabellen
-  sind ausdrücklich ausgenommen; `sqlite_sequence`-Zähler der gesicherten
-  AUTOINCREMENT-Tabellen werden zusätzlich erhalten.
-- Alle R2-Objekte, auch ohne aktuellen Besuchsverweis: Bytes, Schlüssel,
-  Größe, ETag, Änderungszeit, HTTP-/Custom-Metadaten und SHA-256. Objektpfade
-  werden nicht als lokale Dateinamen verwendet.
+- The complete response from Supabase `GET /v1/projects/<ref>/config/auth`:
+  Site URL, redirects, enabled providers, SMTP settings, email templates,
+  registration, session, security and rate limit settings.
+  All returned values remain in the encrypted archive. The OAuth/SMTP secret
+  fields read live were not values directly matching the original vault keys.
+  Such API representations must not be restored as passwords. Anything the API
+  masks or does not export is not reconstructed this way; OAuth/SMTP secrets in
+  the existing 1Password entry and signing/API keys to be created remain part
+  of the recovery plan. No automatic PATCH requests against production.
+  `supabase-auth-recovery.json` names the vault entry and associated fields
+  without exposing their values in metadata or logs.
+- A consistent SQL read snapshot of the D1 application schema, including
+  application and migration data. Cloudflare and SQLite internal tables are
+  explicitly excluded; `sqlite_sequence` counters for the backed-up
+  AUTOINCREMENT tables are preserved separately.
+- All R2 objects, including those without a current visit reference: bytes,
+  keys, size, ETag, modification time, HTTP/custom metadata and SHA-256.
+  Object paths are not used as local filenames.
 
-## Konsistenz und Prüfung
+## Consistency and verification
 
-R2 wird vor dem D1-Snapshot inventarisiert. Downloads müssen Größe und ETag
-erhalten; eine zweite vollständige Inventarisierung muss exakt übereinstimmen.
-Bei Änderungen, fehlenden Seiten oder Dateien bricht der Run ab und veröffentlicht
-kein fertiges Backup. Bei aktivem Upload oder einer Löschung später erneut starten.
-Alle D1-Zeilen, Zeilenzahlen und das Schema werden in einer einzigen SQL-Leseanweisung
-erfasst. Spalten werden vorher ermittelt, das Schema muss im Snapshot unverändert
-sein. Scalar-Subqueries umgehen die kleine D1-Grenze für Compound-SELECTs.
-Die Spaltenwerte werden mit einem balancierten Verkettungsbaum serialisiert,
-damit breite Tabellen die SQLite-Grenze für Ausdruckstiefe nicht überschreiten.
-Text inklusive Nullbytes und BLOBs wird verlustfrei über Hexwerte gesichert.
-Der native, weitergehende Rechte benötigende Export wird nicht verwendet;
-es gibt keine App-Schreibpause und keine automatische Datenänderung.
+R2 is inventoried before the D1 snapshot. Downloads must preserve size and ETag;
+a second complete inventory must match exactly. Changes, missing pages or files
+abort the run without publishing a completed backup. Retry later if an upload
+or deletion is active.
+All D1 rows, row counts and the schema are captured in a single SQL read
+statement. Columns are identified beforehand; the schema must remain unchanged
+in the snapshot. Scalar subqueries bypass the small D1 compound-SELECT limit.
+Column values are serialized using a balanced concatenation tree so that wide
+tables do not exceed SQLite's expression depth limit. Text, including null bytes,
+and BLOBs are backed up losslessly as hexadecimal values.
+The native export requiring broader permissions is not used; there is no app
+write pause and no automatic data modification.
 
-Vor Verschlüsselung wird D1 in einer isolierten SQLite-Datenbank im Speicher
-wiederhergestellt und auf Integrität, Fremdschlüssel und Vollständigkeit der
-privaten Dateiverweise geprüft. Externes Öffnen von Dateien und Extensions sind
-bei dieser Prüfung gesperrt. D1 und Supabase haben unabhängige Snapshotzeiten;
-ein anbieterübergreifend atomarer Snapshot wird nicht behauptet.
+Before encryption, D1 is restored into an isolated in-memory SQLite database
+and checked for integrity, foreign keys and complete private file references.
+Opening external files and extensions is blocked during this check. D1 and
+Supabase have independent snapshot times; no atomic snapshot across providers
+is claimed.
 
-## Zugänge, Schutz und kostenlose Grenzen
+## Access, protection and free limits
 
-Das GitHub-Environment `platform-backup` erlaubt nur `main`. Erforderlich sind
-`CLOUDFLARE_BACKUP_TOKEN` (D1 Read und Workers R2 Storage Read im Riparim-Account) und
-`SUPABASE_AUTH_CONFIG_TOKEN` (nur Auth Config Read, nur das bestehende Projekt).
-Beide Zugangsschlüssel werden zusätzlich im selben 1Password-Projekteintrag
-aufbewahrt. Sie werden nicht in Git oder öffentlichen Logs gespeichert.
+The GitHub `platform-backup` environment allows only `main`. Required credentials
+are `CLOUDFLARE_BACKUP_TOKEN` (D1 Read and Workers R2 Storage Read in the Riparim
+account) and `SUPABASE_AUTH_CONFIG_TOKEN` (Auth Config Read only, for the existing
+project only). Both access keys are also stored in the same 1Password project
+entry. They are not stored in Git or public logs.
 
-Transport verwendet geprüftes HTTPS; Redirects werden abgewiesen. Die API-Zugänge
-haben ausschließlich die bestätigten Leserechte und werden nicht für andere Ziele verwendet.
-Klartext existiert nur im privaten temporären Runnerverzeichnis. Das gesamte
-Archiv wird vor Upload mit RSA-3072/AES-256-GCM (CMS) verschlüsselt.
-GitHub erhält nur `platform.tar.gz.cms` und den öffentlichen SHA-256-Beleg.
+Transport uses verified HTTPS; redirects are rejected. API credentials have
+only the confirmed read permissions and are not used for other targets.
+Plaintext exists only in the runner's private temporary directory. The entire
+archive is encrypted with RSA-3072/AES-256-GCM (CMS) before upload.
+GitHub receives only `platform.tar.gz.cms` and the public SHA-256 receipt.
 
-Es werden keine Paid-Pläne, Buckets oder weiteren Cloudservices eingerichtet.
-Standardrunner sind im öffentlichen Repository kostenlos; Artifact-Speicher,
-D1-Lesezugriffe und R2-Operationen teilen bestehende Freimengen. Sicherheitsgrenzen:
-höchstens 1.000 Objekte, 4 MiB R2-Inhalt und 8 MiB komprimiertes Archiv. Wachstum
-führt zum Abbruch statt zu einer automatischen Kontingenterhöhung. Bei der geprüften
-kleinen Datenmenge ist reichlich Reserve vorhanden. Andere Kontoverbräuche trotzdem
-berücksichtigen. GitHub-Zeitpläne können verzögert oder nach 60 Tagen ohne
-Repositoryaktivität deaktiviert werden; Backupalter und Runstatus kontrollieren.
+No paid plans, buckets or additional cloud services are set up.
+Standard runners are free in the public repository; artifact storage, D1 reads
+and R2 operations share existing free allowances. Safety limits: at most 1,000
+objects, 4 MiB of R2 content and an 8 MiB compressed archive. Growth causes an
+abort rather than an automatic allowance increase. The verified small data
+volume leaves ample headroom. Still account for other account usage. GitHub
+schedules may be delayed or disabled after 60 days without repository activity;
+check backup age and run status.
 
-Die unabhängige [E-Mail-Überwachung beider Backup-Jobs](backup-monitoring.md) ist
-vorbereitet und auf Betreiberwunsch deaktiviert. Ihre spätere Aktivierung und
-Empfangsabnahme sind getrennt dokumentiert.
+The independent [email monitoring of both backup jobs](backup-monitoring.md) is
+prepared and disabled at the operator's request. Its later activation and receipt
+acceptance are documented separately.
 
-## Wiederherstellung
+## Recovery
 
-1. Erfolgreiches Artifact in ein privates Verzeichnis herunterladen und den
-   Ciphertext-SHA-256 prüfen. Mit dem in 1Password gespeicherten Schlüssel
-   gemäß [Authbackup-Anleitung](auth-backups.md) entschlüsseln (`openssl cms`,
-   `-binary -inform DER`). Bei GCM-Fehlern sämtlichen Output verwerfen.
-2. Tar-Inhalt zuerst inventarisieren; nur reguläre Dateien im Verzeichnis
-   `snapshot/` zulassen, keine absoluten Pfade, Traversalsegmente oder Links.
-   Konto, Projekt, Datenbank, Bucket und alle Inhaltsprüfsummen gegen die
-   verschlüsselten Manifeste prüfen.
-3. D1 zunächst in einer isolierten SQLite-/D1-Umgebung wiederherstellen.
-   Tabellenverträge und Drizzle-Migrationen, Besitzrechte, Moderationsstatus,
-   Identitäten, Lösch-Tombstones und Outboxzustände gegen den aktuellen Code
-   prüfen. Nicht blind über einen neueren produktiven Bestand schreiben.
-4. R2-Dateien und Metadaten in einem privaten Testbucket oder im geprüften
-   Node-Restore rekonstruieren. Originale ETags stehen im Manifest; R2 vergibt
-   beim Wiederanlegen systemeigene ETags. Reservierungen und bedingte Uploads
-   müssen nach dem bestehenden Datenübernahmevertrag abgeglichen werden.
-   Das Archiv allein ist keine Freigabe für einen Produktionsrestore.
-5. Authkonfiguration in einer kompatiblen isolierten Instanz abgleichen.
-   SMTP/Google-Secrets, Redirects, neue Signing/API-Keys und separate Authdaten
-   einrichten; tatsächliche Anmeldung, private Downloads und Kontolöschung prüfen.
-   Alte Sitzungen widerrufen. Quelle und Ziel brauchen einen abgestimmten
-   Wiederherstellungsauftrag und eine Schreibpause gemäß [Providerexit](provider-exit.md).
+1. Download a successful artifact to a private directory and check the ciphertext
+   SHA-256. Decrypt with the key stored in 1Password according to the
+   [Auth backup guide](auth-backups.md) (`openssl cms`, `-binary -inform DER`).
+   On GCM errors, discard all output.
+2. First inventory the tar contents; allow only regular files in `snapshot/`,
+   with no absolute paths, traversal segments or links. Check account, project,
+   database, bucket and all content checksums against the encrypted manifests.
+3. First restore D1 in an isolated SQLite/D1 environment. Check table contracts
+   and Drizzle migrations, ownership, moderation status, identities, deletion
+   tombstones and outbox states against the current code. Do not blindly
+   overwrite newer production data.
+4. Reconstruct R2 files and metadata in a private test bucket or through the
+   verified Node restore. Original ETags are in the manifest; R2 assigns its
+   own ETags when recreating objects. Reservations and conditional uploads
+   must be reconciled according to the existing data transfer contract.
+   The archive alone does not authorize a production restore.
+5. Compare Auth configuration in a compatible isolated instance. Configure
+   SMTP/Google secrets, redirects, new signing/API keys and separate Auth data;
+   verify actual login, private downloads and account deletion. Revoke old
+   sessions. Source and target need an agreed recovery authorization and write
+   pause according to the [provider exit guide](provider-exit.md).
 
-Quellen: [D1 Time Travel](https://developers.cloudflare.com/d1/reference/time-travel/),
+Sources: [D1 Time Travel](https://developers.cloudflare.com/d1/reference/time-travel/),
 [D1 SQL](https://developers.cloudflare.com/d1/sql-api/sql-statements/),
 [Supabase Auth Config](https://supabase.com/docs/reference/api/v1-get-auth-service-config).

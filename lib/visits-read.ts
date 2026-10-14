@@ -1,3 +1,4 @@
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 import { decodeReviewServices } from "./review";
 import { storage } from "@/db/storage";
 import { ownerPair, type AppUser } from "./auth/app-user";
@@ -5,8 +6,7 @@ import { json } from "./http";
 const failure = () =>
   json(
     {
-      error:
-        "Die Bewertung konnte gerade nicht verarbeitet werden. Deine Eingaben bleiben erhalten.",
+      error: legacyMessages.reviewUnavailable,
       errorCode: "review_unavailable",
     },
     503,
@@ -28,7 +28,7 @@ export async function visitsReadResponse(
     if (!user)
       return json(
         {
-          error: "Bitte melde dich an, um deine Nachweise zu sehen.",
+          error: legacyMessages.evidenceAuthenticationRequired,
           errorCode: "authentication_required",
         },
         401,
@@ -37,7 +37,7 @@ export async function visitsReadResponse(
       moderator = !!(await getAdminUser(user))?.isModerator;
     if (admin && !moderator)
       return json(
-        { error: "Kein Zugriff auf die Prüfung.", errorCode: "forbidden" },
+        { error: legacyMessages.moderationForbidden, errorCode: "forbidden" },
         403,
       );
     const where = admin ? [] : ["v.owner IN (?,?)"],
@@ -46,7 +46,10 @@ export async function visitsReadResponse(
     if (target) {
       if (!/^[0-9a-f-]{36}$/.test(target))
         return json(
-          { error: "Ungültige Einreichung.", errorCode: "invalid_request" },
+          {
+            error: legacyMessages.invalidSubmission,
+            errorCode: "invalid_request",
+          },
           400,
         );
       where.push("v.id=?");
@@ -56,7 +59,7 @@ export async function visitsReadResponse(
     if (cursor) {
       if (cursor.length > 512)
         return json(
-          { error: "Ungültige Seitenangabe.", errorCode: "invalid_request" },
+          { error: legacyMessages.invalidPage, errorCode: "invalid_request" },
           400,
         );
       let c;
@@ -64,7 +67,7 @@ export async function visitsReadResponse(
         c = JSON.parse(atob(cursor));
       } catch {
         return json(
-          { error: "Ungültige Seitenangabe.", errorCode: "invalid_request" },
+          { error: legacyMessages.invalidPage, errorCode: "invalid_request" },
           400,
         );
       }
@@ -75,7 +78,7 @@ export async function visitsReadResponse(
         !/^[0-9a-f-]{36}$/.test(c.id)
       )
         return json(
-          { error: "Ungültige Seitenangabe.", errorCode: "invalid_request" },
+          { error: legacyMessages.invalidPage, errorCode: "invalid_request" },
           400,
         );
       where.push("(v.created_at<? OR (v.created_at=? AND v.id<?))");
@@ -90,8 +93,7 @@ export async function visitsReadResponse(
     if (target && !r.results.length)
       return json(
         {
-          error:
-            "Diese Einreichung gehört nicht zu deinem Konto oder wurde gelöscht.",
+          error: legacyMessages.submissionNotFound,
           errorCode: "not_found",
         },
         404,

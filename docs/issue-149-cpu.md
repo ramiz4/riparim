@@ -1,175 +1,166 @@
-# Issue #149: private Seiten, Sitzungen und RSC
+# Issue #149: private pages, sessions and RSC
 
-## Verbindliches Abnahmeziel
+## Binding acceptance target
 
-Der Auftraggeber hat am 12. Oktober 2026 das Abschlussziel präzisiert:
-„Aktuelle Produktion optimieren; Free-Grenzen offen dokumentieren“.
-Die Optimierung wird daher gegen die aktuelle Produktion abgenommen.
-Das ursprünglich geforderte zuverlässige Einhalten von 10 ms auf Workers Free
-wird durch diese Aufgabe nicht zugesichert. Kalte Überschreitungen bleiben
-unten ausdrücklich dokumentiert; Tarif und bestehendes 500-ms-Limit bleiben
-unverändert. Geprüfter PR, Squash-Merge, Main-Release, tatsächliche Live-CPU-
-und Cron-Prüfung bleiben Teil des Auftrags.
+On October 12, 2026, the requester clarified the completion target:
+“Aktuelle Produktion optimieren; Free-Grenzen offen dokumentieren”
+(“Optimize current production; document Free limits openly”).
+Optimization is therefore accepted against current production.
+This task does not guarantee the originally requested reliable compliance with
+10 ms on Workers Free. Cold overruns remain explicitly documented below;
+the plan and existing 500 ms limit remain unchanged. A reviewed PR, squash
+merge, main release, actual live CPU and cron checks remain part of the assignment.
 
-## Vergleichsbasis am 12. Oktober 2026
+## Comparison baseline on October 12, 2026
 
-Die ursprünglichen Issue-Messungen stammen aus v1.20.2. Vor der Umsetzung war
-bereits v1.21.4 produktiv: Commit `70d9be959166eef7c08f729ef8de7b407c70cbb1`,
-Worker-Version `c4cd2de2-7f12-4465-9de1-5a3ba8f87a4f`, aktiviert um
-13:34:08 UTC. Der Release-Workflow war erfolgreich. Diese aktuelle Version
-ist deshalb die Vorher-Basis.
+Original issue measurements came from v1.20.2. Before implementation, v1.21.4
+was already in production: commit `70d9be959166eef7c08f729ef8de7b407c70cbb1`,
+Worker version `c4cd2de2-7f12-4465-9de1-5a3ba8f87a4f`, activated at
+13:34:08 UTC. The release workflow succeeded. This current version is therefore
+the before baseline.
 
-`limits.cpu_ms: 500` stammt aus dem bereits gemergten PR #151. Diese Aufgabe
-ändert weder diese Konfiguration noch den Tarif. Die Bewertung gegen das
-[Free-Budget von 10 ms je HTTP-Aufruf](https://developers.cloudflare.com/workers/platform/limits/#cpu-time)
-ist davon unabhängig; erfolgreiche Antworten unter einem höheren Limit
-belegen keine Eignung für Free.
+`limits.cpu_ms: 500` comes from the already merged PR #151. This task changes
+neither that configuration nor the plan. Assessment against the
+[Free budget of 10 ms per HTTP invocation](https://developers.cloudflare.com/workers/platform/limits/#cpu-time)
+is independent of it; successful responses under a higher limit do not prove
+suitability for Free.
 
-Die kontrollierten GETs liefen zwischen 15:35 und 15:37 UTC mit eindeutigen,
-datenfreien `cpu_probe`-Markern. Pro Fall wurde ein erster beobachteter Aufruf
-und anschließend 30 warme Aufrufe gesendet. Alle unten ausgewerteten Antworten
-waren HTTP 200 und enthielten den obigen Release-Commit. Ein erster
-beobachteter Live-Aufruf ist kein nachgewiesen frischer Isolate; ein echter
-Kaltstart wird separat lokal geprüft. Netzwerkzeit ist nicht CPU-Zeit.
+Controlled GETs ran between 15:35 and 15:37 UTC with unique `cpu_probe` markers
+containing no data. Each case received a first observed invocation followed by
+30 warm invocations. All responses evaluated below were HTTP 200 and contained
+the release commit above. A first observed live invocation is not a proven fresh
+isolate; an actual cold start is checked separately locally. Network time is not
+CPU time.
 
-Die CPU-Werte kommen aus Cloudflares `cpu_time_ms`-Tracefeld, gruppiert nach
-Route und Marker. Cloudflare gewichtet Stichproben adaptiv: der aggregierte
-`count` wich teilweise von der tatsächlich gesendeten Anzahl ab. Die Tabelle
-zeigt deshalb die gesendeten 30 Aufrufe und die beobachteten, gewichteten
-CPU-Statistiken. Sie behauptet keine lückenlose Messung jedes Aufrufs.
+CPU values come from Cloudflare's `cpu_time_ms` trace field, grouped by route
+and marker. Cloudflare weights samples adaptively: aggregated `count` sometimes
+differed from the number actually sent. The table therefore shows 30 sent
+requests and observed weighted CPU statistics. It claims no complete measurement
+of every invocation.
 
-| Route und Zustand                                   | Format | Warme Aufrufe gesendet | Median CPU | p95 CPU | Maximum CPU | Erster beobachteter Aufruf |
-| --------------------------------------------------- | ------ | ---------------------: | ---------: | ------: | ----------: | -------------------------: |
-| `/`, Gast                                           | HTML   |                     30 |       0 ms |    1 ms |        1 ms |                       4 ms |
-| `/anmelden`, Gast                                   | HTML   |                     30 |      23 ms |   43 ms |       62 ms |                     174 ms |
-| `/betrieb`, Gast                                    | HTML   |                     30 |      34 ms |   50 ms |       73 ms |                      49 ms |
-| `/bewertungen`, Gast                                | HTML   |                     30 |      23 ms |   33 ms |       35 ms |                      29 ms |
-| `/einstellungen`, Gast                              | HTML   |                     30 |      17 ms |   26 ms |       27 ms |                      71 ms |
-| `/werkstaetten`, Gast                               | RSC    |                     30 |     140 ms |  176 ms |      179 ms |                     128 ms |
-| `/betrieb`, Gast                                    | RSC    |                     30 |      15 ms |   22 ms |       45 ms |                      21 ms |
-| `/api/session`, Gast mit bedeutungslosem Testcookie | JSON   |                     30 |       6 ms |    9 ms |       28 ms |                      13 ms |
-| `/api/workshops`, Gast                              | JSON   |                     30 |       6 ms |   10 ms |       18 ms |                      12 ms |
+| Route and state                                    | Format | Warm requests sent | Median CPU | p95 CPU | Maximum CPU | First observed invocation |
+| -------------------------------------------------- | ------ | -----------------: | ---------: | ------: | ----------: | ------------------------: |
+| `/`, guest                                         | HTML   |                 30 |       0 ms |    1 ms |        1 ms |                      4 ms |
+| `/anmelden`, guest                                 | HTML   |                 30 |      23 ms |   43 ms |       62 ms |                    174 ms |
+| `/betrieb`, guest                                  | HTML   |                 30 |      34 ms |   50 ms |       73 ms |                     49 ms |
+| `/bewertungen`, guest                              | HTML   |                 30 |      23 ms |   33 ms |       35 ms |                     29 ms |
+| `/einstellungen`, guest                            | HTML   |                 30 |      17 ms |   26 ms |       27 ms |                     71 ms |
+| `/werkstaetten`, guest                             | RSC    |                 30 |     140 ms |  176 ms |      179 ms |                    128 ms |
+| `/betrieb`, guest                                  | RSC    |                 30 |      15 ms |   22 ms |       45 ms |                     21 ms |
+| `/api/session`, guest with meaningless test cookie | JSON   |                 30 |       6 ms |    9 ms |       28 ms |                     13 ms |
+| `/api/workshops`, guest                            | JSON   |                 30 |       6 ms |   10 ms |       18 ms |                     12 ms |
 
-RSC wurde mit `RSC: 1`, `Accept: text/x-component` und dem kanonischen leeren
-`?_rsc`-Parameter separat angefordert. Nichtleere Probe-IDs erzeugten zunächst
-HTTP 307; diese Redirects sind ausdrücklich nicht Teil der RSC-Tabelle. Der
-Katalog-RSC-Body betrug rund 342 KB, die JSON-Katalogantwort rund 225 KB.
+RSC was requested separately with `RSC: 1`, `Accept: text/x-component` and the
+canonical empty `?_rsc` parameter. Nonempty probe IDs initially produced HTTP 307;
+those redirects are explicitly excluded from the RSC table. Catalogue RSC body
+size was about 342 KB; the JSON catalogue response about 225 KB.
 
-Eine vom Benutzer bereitgestellte bestehende Sitzung wurde anschließend ohne
-Mailversand oder fachliche Live-Schreibvorgänge geprüft. Der erste beobachtete
-authentifizierte Betriebsaufruf benötigte 154 ms CPU. Zehn anschließend mit
-`networkidle` vollständig abgeschlossene Aufrufe mit individuellen Probe-IDs
-wurden im Echtzeit-Tail vollständig erfasst: Median 33,5 ms, p95/Maximum 63 ms.
-Die Sitzungsprüfung eines authentifizierten direkten GETs benötigte 44 ms
-(n = 1; keine belastbare warme Stichprobe). Private Antworten verwendeten
-`private, no-store`.
+An existing session provided by the user was then checked without sending email
+or making business writes in production. The first observed authenticated
+business request used 154 ms CPU. Ten subsequent requests, fully completed with
+`networkidle` and individual probe IDs, were fully captured in the real-time tail:
+median 33.5 ms, p95/maximum 63 ms. An authenticated direct GET session check used
+44 ms (n = 1; no reliable warm sample). Private responses used `private, no-store`.
 
-## Nachgewiesene Ursachen und Prüfvertrag
+## Proven causes and verification contract
 
-Der isolierte echte workerd reproduzierte Katalog-RSC mit 342–348 KB und rund
-62–66 ms warmer aktiver CPU-Stichprobe. Der Profiler zeigte vor allem
-RSC-Serialisierung. Private Bewertungsseiten übertrugen zusätzlich den ganzen
-Bearbeitungskatalog. Eine authentifizierte Sitzungsprüfung rief den Provider
-dreimal auf: Proxy, Routenauthentifizierung und die symmetrische
-Tokenprüfung des SDKs.
+Isolated real workerd reproduced catalogue RSC at 342–348 KB and about 62–66 ms
+of warm active CPU samples. The profiler primarily showed RSC serialization.
+Private review pages also transferred the entire editing catalogue.
+An authenticated session check called the provider three times: proxy,
+route authentication and the SDK's symmetric token verification.
 
-Der Vergleichsprofiler verwendet ausschließlich isoliertes D1/R2, synthetische
-Sitzungen und abgefangene Providerantworten. CPU-Sampling aus dem lokalen
-Inspector ist vergleichende Diagnose, keine Cloudflare-Abrechnung. Eine
-Freigabe für Free benötigt zusätzlich reale CPU-Werte des veröffentlichten
-Main-Releases, einschließlich Sitzungszustand, HTML/RSC, realer Navigation und
-Locale-Wechsel. Fehlende `exceededCpu`-Abbrüche allein genügen nicht.
+The comparison profiler uses only isolated D1/R2, synthetic sessions and
+intercepted provider responses. CPU sampling from the local Inspector is
+comparative diagnosis, not Cloudflare billing. Approval for Free additionally
+requires actual CPU values from the published main release, including session
+state, HTML/RSC, actual navigation and locale changes. Absence of `exceededCpu`
+aborts alone is insufficient.
 
-## Umsetzung und lokale Nachher-Messung
+## Implementation and local after measurement
 
-Private HTML-/RSC-Antworten enthalten nur Release-Oberflächen und lokalisierte
-Ladehinweise. Sitzungen, Besitzrechte und private Daten werden anschließend
-über frische, autorisierte APIs geladen. Die internen Artefaktpfade sind am
-Worker gesperrt. Auch diese datenfreien privaten Antworten bleiben
-`private, no-store` und `noindex,nofollow`.
+Private HTML/RSC responses contain only release interfaces and localized loading
+messages. Sessions, ownership and private data are subsequently loaded through
+fresh authorized APIs. Internal artifact paths are blocked on the Worker.
+These private responses containing no data also remain `private, no-store`
+and `noindex,nofollow`.
 
 ```text
-HTML / RSC → datenfreie Release-Oberfläche
-JSON GET   → ein Providerclient je Anfrage → aktuelle D1-Zugriffsprüfung
-Schreiben  → bestehende autorisierte App-Routen
+HTML / RSC → release interface containing no data
+JSON GET   → one provider client per request → current D1 access check
+Writes     → existing authorized app routes
 ```
 
-Sitzungs-, Auth-Options-, Betriebs-, Bewertungs- und Kontolesezugriffe umgehen
-das React-Framework auf dem eigenen Worker. App Router und Worker verwenden
-dieselben maßgeblichen GET-Antwortfunktionen. Das erhält Besitzrechte,
-bestätigte Altverknüpfungen, Cursor, Moderation und den bereits begonnenen
-Kontolöschungsablauf. Frische HTTP-Anfragen prüfen weiterhin Provider,
-Sitzungswiderruf, Kontosperre und Rollenentzug. Node/Sites und sämtliche
-Schreibmethoden behalten ihre bisherigen Adapter.
+Session, Auth options, business, review and account reads bypass the React
+framework on the owned Worker. App Router and Worker use the same authoritative
+GET response functions. This preserves ownership, confirmed legacy links,
+cursors, moderation and the already started account deletion flow.
+Fresh HTTP requests still check provider, session revocation, account blocks
+and role removal. Node/Sites and all write methods retain existing adapters.
 
-Der Supabase-Adapter teilt die verifizierte Providerantwort nur innerhalb
-einer HTTP-Anfrage. Eine native, streng geprüfte Cookie-Lesedarstellung
-vermeidet langsame JavaScript-Base64-Dekodierung; originale Chunknamen und
-Cookiebytes sowie SDK-Validierung, Tokenauffrischung, Schreibformate und
-Löschung bleiben erhalten. Nichtkanonische oder ungültige Eingaben gehen
-unverändert durch den bisherigen SDK-Pfad. Es gibt keine neue Abhängigkeit,
-Auth-Protokollumstellung oder Aufgabenmigration.
+The Supabase adapter shares the verified provider response only within a single
+HTTP request. A native strictly validated cookie read representation avoids
+slow JavaScript Base64 decoding; original chunk names and cookie bytes, SDK
+validation, token refresh, write formats and deletion are preserved.
+Noncanonical or invalid inputs go unchanged through the previous SDK path.
+There is no new dependency, Auth protocol change or task migration.
 
-Der öffentliche RSC-Pfad verwendet Release-Artefakte mit denselben aktuellen
-Status-/Revisions- und Providerprüfungen wie HTML. Katalog-RSC liefert eine
-kompakte Oberfläche und lädt veröffentlichte Datensätze über die bestehende
-Live-API. Private Queryziele werden nach Hydration aus der tatsächlichen URL
-gelesen; der RSC-Antwortheader trägt den aktuellen Pfad samt Query außerhalb
-des unveränderlichen Artefakts.
+The public RSC path uses release artifacts with the same current status/revision
+and provider checks as HTML. Catalogue RSC serves a compact interface and loads
+published records through the existing live API. Private query targets are read
+after hydration from the actual URL; the RSC response header carries the current
+path and query outside the immutable artifact.
 
-Der Aufgabenbranch integrierte während der Umsetzung `main` bis
-`c0bf92b851beb3d5db7f288dd05bcb27d65b314a` (v1.23.0). Die neue Landingpage,
-Premium-Funktionen und deren bereits veröffentlichte Migration `0019` bleiben
-erhalten. Die später integrierte Backup-Monitoring-Änderung betrifft keine
-Anwendungslaufzeit und aktiviert durch diese Aufgabe keinen Monitor.
+During implementation, the task branch integrated `main` up to
+`c0bf92b851beb3d5db7f288dd05bcb27d65b314a` (v1.23.0). The new landing page,
+premium features and their already published migration `0019` are preserved.
+The subsequently integrated backup monitoring change affects no app runtime
+and activates no monitor through this task.
 
-Der letzte gemessene Cloudflare-Build enthält die integrierte Basis
-`c0bf92b` plus Aufgabenänderungen einschließlich aller drei Review-Korrekturen.
-SHA-256 des Modulbestands nach dem Hashverfahren des Profilers:
+The last measured Cloudflare build contains the integrated `c0bf92b` baseline
+plus task changes, including all three review corrections.
+SHA-256 of the module inventory using the profiler's hashing method:
 `bce84bb7b9ae20b8650c91ecd19cbf0842ddefe0664b1b6a214b27661338b946`.
-Die endgültigen JWT-Fixtures verwenden außerdem eine authentifizierte Audience
-und eine UUID-Sitzungs-ID; frühere Messungen nutzten eine einfachere Fixture.
-Je Fall wurden drei frische workerd-Isolates und 30 warme Aufrufe gemessen.
-Die befüllte Fixture enthält eigene, bestätigte alte und fremde Datensätze
-sowie einen getrennten 51-Datensätze-Paginationstest. Die profilierten
-Antworten enthalten rund 3 KB Betriebsdaten, 2,9 KB Bewertungen und 151 Bytes
-Kontozustand; größere reale Datenbestände sind damit nicht abschließend geprüft.
+Final JWT fixtures also use an authenticated audience and UUID session ID;
+earlier measurements used a simpler fixture. Each case measured three fresh
+workerd isolates and 30 warm invocations. The populated fixture contains own,
+confirmed legacy and foreign records, plus a separate 51-record pagination test.
+Profiled responses contain about 3 KB of business data, 2.9 KB of reviews and
+151 bytes of account state; this does not conclusively verify larger real inventories.
 
-| Angemeldeter GET | Kalter Median / Maximum | Warmer Median / p95 / Maximum |
-| ---------------- | ----------------------- | ----------------------------- |
-| `/api/session`   | 13,27 / 17,31 ms        | 2,65 / 4,02 / 4,78 ms         |
-| `/api/business`  | 13,89 / 18,88 ms        | 4,20 / 5,86 / 6,62 ms         |
-| `/api/visits`    | 9,60 / 10,05 ms         | 3,01 / 5,08 / 5,44 ms         |
-| `/api/account`   | 10,72 / 14,58 ms        | 2,89 / 5,08 / 5,21 ms         |
+| Signed-in GET   | Cold median / maximum | Warm median / p95 / maximum |
+| --------------- | --------------------- | --------------------------- |
+| `/api/session`  | 13.27 / 17.31 ms      | 2.65 / 4.02 / 4.78 ms       |
+| `/api/business` | 13.89 / 18.88 ms      | 4.20 / 5.86 / 6.62 ms       |
+| `/api/visits`   | 9.60 / 10.05 ms       | 3.01 / 5.08 / 5.44 ms       |
+| `/api/account`  | 10.72 / 14.58 ms      | 2.89 / 5.08 / 5.21 ms       |
 
-Eine aufgefrischte abgelaufene Sitzung benötigte kalt median/maximal 15,17 ms. Eine erstmals zugeordnete Altidentität lag bei
-10,27 / 13,40 ms, ein Providerausfall bei 9,96 / 10,45 ms.
-Die Gastfälle der direkten privaten APIs lagen kalt maximal bei 6,45 ms,
-warm maximal bei 2,09 ms. Ein Gast mit bedeutungslosem Cookie lag
-kalt median/maximal bei 5,36/5,65 ms und warm bei 1,12/2,05 ms. Authentifizierte direkte Lesezugriffe benötigen
-einen Provideraufruf; Auffrischung benötigt zwei.
+A refreshed expired session used a cold median/maximum of 15.17 ms.
+A legacy identity linked for the first time reached 10.27 / 13.40 ms;
+a provider outage 9.96 / 10.45 ms. Guest cases for direct private APIs reached
+a cold maximum of 6.45 ms, warm maximum 2.09 ms. A guest with a meaningless cookie
+reached cold median/maximum 5.36/5.65 ms and warm 1.12/2.05 ms.
+Authenticated direct reads require one provider call; refresh requires two.
 
-Vor der GET-Extraktion lagen bei einer befüllten Fixture die kalten
-Mediane für Betrieb/Bewertungen/Konto bei 27,89/23,04/23,92 ms. Diese frühere
-Aufgabenmessung basiert allerdings noch auf `70d9be9`; der Vergleich umfasst
-auch die Integration des neueren Main; die JWT-Fixture wurde danach angeglichen. Der separate Originalvergleich aus
-dem unveränderten Git-Archiv `70d9be9` zeigt für angemeldete Bewertungen
-87,92 ms kalten und 47,16 ms warmen Median; mit der korrigierten Oberfläche
-sind es 3,98 ms kalt und 0 ms warmer Median (p95 1,29 ms, Maximum 1,80 ms).
-Der Katalog-RSC-Body beträgt jetzt 19.620 Bytes; sein Gastfall benötigte
-kalt median/maximal 4,06/5,65 ms und warm median/p95/maximal 0/1,13/1,40 ms.
-Nullsamples bedeuten fehlende aktive Inspector-Stichproben, keine garantierte
-CPU-Freiheit. Das sind Dokumentwerte, keine Summen aller nachgeladenen
-API-Aufrufe.
+Before GET extraction, cold medians for business/reviews/account with a populated
+fixture were 27.89/23.04/23.92 ms. This earlier task measurement still used
+`70d9be9`; the comparison also includes integration of newer main; the JWT fixture
+was aligned afterward. The separate original comparison from unchanged Git
+archive `70d9be9` shows signed-in reviews at 87.92 ms cold and 47.16 ms warm median;
+with the corrected interface they are 3.98 ms cold and 0 ms warm median
+(p95 1.29 ms, maximum 1.80 ms). Catalogue RSC body size is now 19,620 bytes;
+its guest case needed cold median/maximum 4.06/5.65 ms and warm
+median/p95/maximum 0/1.13/1.40 ms. Zero samples mean no active Inspector samples,
+not guaranteed absence of CPU usage. These are document values, not sums of
+all subsequently loaded API calls.
 
-**Die lokale Messung erfüllt die kalte Free-Reserve noch nicht.** Insbesondere
-private authentifizierte APIs und Tokenauffrischung überschreiten weiterhin
-10 ms. Die verbesserten warmen Werte erlauben keine allgemeine Free-Garantie.
-Echte Cloudflare-CPU-Werte und größere/private Abläufe müssen nach dem
-geprüften Main-Release erneut gemessen werden. Der Tarif und das bestehende
-konfigurierte 500-ms-Limit bleiben unverändert.
+**Local measurement still does not meet the cold Free headroom requirement.**
+Private authenticated APIs and token refresh in particular still exceed 10 ms.
+Improved warm values provide no general Free guarantee. Actual Cloudflare CPU
+values and larger/private flows must be remeasured after the verified main
+release. The plan and existing configured 500 ms limit remain unchanged.
 
-Reproduktion nach einem Cloudflare-Build:
+Reproduction after a Cloudflare build:
 
 ```sh
 CPU_PROFILE_POPULATED=1 CPU_PROFILE_COLD=3 CPU_PROFILE_SAMPLES=30 \
@@ -177,78 +168,72 @@ CPU_PROFILE_POPULATED=1 CPU_PROFILE_COLD=3 CPU_PROFILE_SAMPLES=30 \
   node scripts/profile-worker-cpu.mjs
 ```
 
-Der Profiler dokumentiert Commit, tatsächlichen Artefakthash, Fixturezustand,
-kalte/warme Rohsamples, Provideraufrufe, Antwortgröße und zusammengefasste
-CPU-Stichproben. Modulinitialisierung vor dem Inspector ist ausdrücklich
-ausgeschlossen; es werden keine Live-Provider oder Produktionsdaten verwendet.
+The profiler records commit, actual artifact hash, fixture state, cold/warm raw
+samples, provider calls, response size and summarized CPU samples.
+Module initialization before the Inspector is explicitly excluded;
+no live providers or production data are used.
 
-## Browser- und Vertragsprüfung
+## Browser and contract checks
 
-Die Browserprüfung verwendete den vom Benutzer bereitgestellten integrierten
-Browser mit zuvor verifiziertem Riparim-Konto. Die lokale tatsächliche
-Cloudflare-Anwendung lief mit isoliertem D1/R2 und synthetischen
-Providerantworten. DE/SQ/EN, 390/1280 Pixel, Hell/Dunkel/System, Tastatur,
-Lade-/Leer-/Fehlerzustände und verweigerter Verwaltungszugang wurden geprüft;
-das Systemtheme löste hier dunkel auf. Es gab keinen horizontalen Überlauf.
+Browser verification used the user's supplied integrated browser with a
+previously verified Riparim account. The local actual Cloudflare application
+ran with isolated D1/R2 and synthetic provider responses.
+DE/SQ/EN, 390/1280 pixels, light/dark/system themes, keyboard, loading/empty/error
+states and rejected administrative access were checked; system theme resolved
+to dark here. There was no horizontal overflow.
 
-Die native Prüfung reproduzierte zuerst verlorene Queryziele in statischen
-RSC-Oberflächen und verlorenen Fokus nach einem erneuten Sitzungsfehler.
-Die korrigierte tatsächliche Navigation bewahrt die gezielte Bewertung und
-Werkstatt durch Anmeldung, Direktaufruf und Browser-Zurück. Sitzungs-Retry erhält bei erneutem Fehler den Tastaturfokus. Öffentliche Suche mit Ort/Leistung, Locale-Wechsel und
-Neuladen behielten ihre Filter. Die bestehenden öffentlichen Feldgrenzen
-beim Sprachwechsel bleiben unverändert.
+Native checking first reproduced lost query targets in static RSC interfaces
+and lost focus after another session error. Corrected actual navigation preserves
+the targeted review and workshop through login, direct access and browser back.
+Session retry retains keyboard focus on another error. Public search with
+location/service, locale switch and reload preserved filters.
+Existing public field boundaries during locale changes remain unchanged.
 
-Das erste unabhängige Architect-Review fand außerdem drei Fehler bei
-beibehaltenen Clientkomponenten. Der Werkstatt-Retry löst nun ausdrücklich
-einen neuen Ladeversuch aus. Ergebnisse gehören zum aktuellen Konto und
-Queryziel; beim Wechsel verschwinden alte Formulare sofort und verspätete
-Antworten werden verworfen. Erfolgreiche Namensänderung oder Kontolöschung
-invalidieren die gemeinsame Sitzungsanfrage und aktualisieren öffentliche
-sowie private Anzeigen auch ohne Remount. Alte laufende Sitzungsantworten
-können diesen Zustand nicht überschreiben. Diese Verträge wurden zuerst
-mit fehlschlagenden Tests reproduziert und danach erfolgreich geprüft.
-Der Formularbereich bleibt bei Kontoänderungen erhalten; nach erfolgreichem
-Werkstatt-Retry erhält der Hauptbereich den Tastaturfokus.
+The first independent architect review also found three errors with retained
+client components. Workshop retry now explicitly triggers a new load attempt.
+Results belong to the current account and query target; old forms disappear
+immediately on change and delayed responses are discarded. Successful name
+change or account deletion invalidates the shared session request and updates
+public and private displays even without remounting. Old in-flight session
+responses cannot overwrite this state. These contracts were first reproduced
+with failing tests, then verified successfully. The form area is retained on
+account changes; after a successful workshop retry, the main area receives
+keyboard focus.
 
-Die gebauten Worker-Vertragstests ergänzen befüllte Besitz-/Altverknüpfungs- und
-fremde Fälle, Pagination, private Nachweise, Moderation, Rollen-/Sitzungsentzug,
-begonnene gesperrte Kontolöschung, Cookieauffrischung, definitive Ablehnung,
-Provider-/Datenbankfehler und gefälschte native Header. Die bisherigen
-Mutations-, SMTP-, manuellen Retry- und Node/Sites-Verträge bleiben Teil der
-regulären CI-Prüfungen. Live-Messungen versenden keine echten Mails und ändern
-keine fachlichen Produktionsdaten.
+Built Worker contract tests add populated ownership/legacy-link and foreign
+cases, pagination, private evidence, moderation, role/session removal, started
+locked account deletion, cookie refresh, definitive rejection, provider/database
+errors and forged native headers. Existing mutation, SMTP, manual retry and
+Node/Sites contracts remain part of regular CI checks. Live measurements send
+no actual emails and change no business production data.
 
-## Cron-Verlauf über alle Versionen
+## Cron history across all versions
 
-Die Schedules-API lieferte bei der aktuellen Bestandsprüfung eine leere Liste.
-Die Logs wurden zusätzlich ohne Worker-Versionsfilter nach Service `riparim`
-und `$metadata.origin = scheduled` ausgewertet. Zwischen 09:30 und 11:10 UTC
-wurden 20 Invocation-Ereignisse des bisherigen `*/5 * * * *`-Timers beobachtet;
-das letzte lag im Intervall 11:05–11:10 UTC. Die zugehörigen Fehler meldeten
-den fehlenden Scheduled-Handler. Von 11:10 UTC bis zum Aufgabenstart und den
-Vorher-Messungen wurden keine weiteren Scheduled-Ereignisse gefunden.
+The schedules API returned an empty list during the current inventory check.
+Logs were also evaluated without a Worker version filter for service `riparim`
+and `$metadata.origin = scheduled`. Between 09:30 and 11:10 UTC, 20 invocation
+events from the previous `*/5 * * * *` timer were observed; the last occurred
+in the 11:05–11:10 UTC interval. Associated errors reported the missing scheduled
+handler. From 11:10 UTC until task start and before measurements, no further
+scheduled events were found.
 
-Der Stopp war damit bereits vor dieser Implementierung eingetreten und
-überdauerte die Veröffentlichungen v1.21.0 bis v1.21.4. Das ist ein
-versionsübergreifender Beobachtungsnachweis und keine durch diese Aufgabe
-verursachte Reparatur. Die Logs belegen, dass ein alter Timer trotz leerer
-Control-Plane-Liste weiter feuerte. Ein verzögerter Abgleich ist eine
-naheliegende Erklärung; der genaue providerinterne Ablauf lässt sich mit den
-verfügbaren Logs nicht bestimmen.
-Das letzte Ereignis liegt jenseits der dokumentierten
-[Propagationszeit von bis zu 15 Minuten](https://developers.cloudflare.com/workers/configuration/cron-triggers/).
-Die zusätzliche Bestandsprüfung um 16:59 UTC zeigte weiterhin eine leere
-Schedules-Liste und null Scheduled-Ereignisse oder passende Handlerfehler seit
-11:10 UTC, ohne Versionsfilter. Die verfügbaren Trigger-/Handlerwerte in
-diesem Fenster waren ausschließlich `http`/`fetch`; das schließt eine bloß
-geänderte Darstellung der Timer im neuen Traceformat als Erklärung aus.
-Das aktive Release war inzwischen v1.23.0 mit Worker-Version
-`fefcc17c-cf8d-4b63-b108-c7b5904ef652`, aktiviert um 16:58:22 UTC.
-Die Abwesenheit muss nach dem Aufgabenrelease erneut über mehrere
-Fünf-Minuten-Intervalle geprüft werden. Es wird kein wirkungsloser
-Scheduled-Handler eingeführt.
+The stop had therefore already occurred before this implementation and persisted
+through releases v1.21.0 to v1.21.4. This is observation evidence across versions,
+not a repair caused by this task. Logs prove an old timer continued firing despite
+an empty control-plane list. Delayed reconciliation is a plausible explanation;
+the exact provider-internal sequence cannot be established from available logs.
+The last event falls beyond the documented
+[propagation time of up to 15 minutes](https://developers.cloudflare.com/workers/configuration/cron-triggers/).
+The additional inventory check at 16:59 UTC still showed an empty schedules list
+and zero scheduled events or matching handler errors since 11:10 UTC, without
+a version filter. Available trigger/handler values in that window were exclusively
+`http`/`fetch`; this rules out a mere change in timer representation in the new
+trace format as an explanation. The active release was by then v1.23.0 with
+Worker version `fefcc17c-cf8d-4b63-b108-c7b5904ef652`, activated at 16:58:22 UTC.
+Absence must be checked again over several five-minute intervals after the task
+release. No ineffective scheduled handler is introduced.
 
-Der Mailvertrag bleibt ein abgewarteter Erstversand und höchstens fünf
-manuelle Einzelwiederholungen nach 1/5/15/30/60 Minuten. Versuchszähler,
-atomarer Claim, Lease, Idempotenz und Sperren bei unklarer SMTP-Übergabe
-bleiben maßgeblich. Die Messungen senden keine echten Nachrichten.
+The email contract remains an awaited initial send and at most five manual
+individual retries after 1/5/15/30/60 minutes. Attempt counters, atomic claim,
+lease, idempotency and locks on ambiguous SMTP handoff remain authoritative.
+Measurements send no actual messages.

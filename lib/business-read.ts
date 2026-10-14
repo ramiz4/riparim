@@ -1,3 +1,4 @@
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 import { researchedEmailsSql } from "@/db/workshop-email-values";
 import { z } from "zod";
 import { storage } from "@/db/storage";
@@ -61,7 +62,7 @@ function parseCursor(value?: string | null) {
       .strict()
       .parse(JSON.parse(atob(value)));
   } catch {
-    throw new BusinessError("Ungültige Seitenangabe.", 400, "invalid_page");
+    throw new BusinessError(legacyMessages.invalidPage, 400, "invalid_page");
   }
 }
 export async function businessState(
@@ -171,7 +172,7 @@ export function businessFailure(error: unknown) {
   if (error instanceof z.ZodError)
     return json(
       {
-        error: "Bitte prüfe deine Eingaben und den Inhabernachweis.",
+        error: legacyMessages.businessInvalidInput,
         errorCode: "business_invalid_input",
       },
       400,
@@ -182,8 +183,7 @@ export function businessFailure(error: unknown) {
   );
   return json(
     {
-      error:
-        "Der Betriebsbereich ist gerade nicht verfügbar. Deine Eingaben bleiben erhalten.",
+      error: legacyMessages.businessUnavailable,
       errorCode: "business_unavailable",
     },
     503,
@@ -203,12 +203,15 @@ export async function businessReadResponse(
       user = moderation ? await getAdminUser() : await getAppUser();
     if (!user)
       return json(
-        { error: "Bitte melde dich an.", errorCode: "authentication_required" },
+        {
+          error: legacyMessages.authenticationRequired,
+          errorCode: "authentication_required",
+        },
         401,
       );
     if (moderation && !user.isModerator)
       return json(
-        { error: "Kein Zugriff auf die Prüfung.", errorCode: "forbidden" },
+        { error: legacyMessages.moderationForbidden, errorCode: "forbidden" },
         403,
       );
     return json(

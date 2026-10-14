@@ -15,10 +15,10 @@ import { BusinessClaimForm } from "./business-claim-form";
 import { AdminNavigation } from "./admin-navigation";
 import Link from "./locale-link";
 import type { Workshop } from "@/lib/workshops";
-import AdminPanel from "@/app/[locale]/verwaltung/panel";
-import AdminUsers from "@/app/[locale]/verwaltung/benutzer/users";
-import AdminReviews from "@/app/[locale]/verwaltung/bewertungen/reviews";
-import AuthSetup from "@/app/[locale]/verwaltung/anmeldung/setup";
+import AdminPanel from "@/app/[locale]/admin/panel";
+import AdminUsers from "@/app/[locale]/admin/users/users";
+import AdminReviews from "@/app/[locale]/admin/reviews/reviews";
+import AuthSetup from "@/app/[locale]/admin/authentication/setup";
 
 export type DeferredManagementKind =
   | "settings"

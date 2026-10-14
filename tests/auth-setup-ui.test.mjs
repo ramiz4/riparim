@@ -51,7 +51,7 @@ const output = ".test-runtime/auth-setup-ui";
 const bundle = await build({
   stdin: {
     contents:
-      "export {default as AuthSetup} from './app/[locale]/verwaltung/anmeldung/setup';export * from './lib/auth/email-templates';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",
+      "export {default as AuthSetup} from './app/[locale]/admin/authentication/setup';export * from './lib/auth/email-templates';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",
     resolveDir: process.cwd(),
     loader: "tsx",
   },
