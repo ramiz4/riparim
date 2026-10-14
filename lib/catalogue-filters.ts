@@ -1,3 +1,4 @@
+import { storedSentinels, storedLanguages } from "@/lib/i18n/canonical-values";
 import { displayComparator } from "@/lib/i18n/collation";
 import { valueLabel } from "@/lib/i18n/values";
 import { localizeHref, type Locale } from "@/lib/i18n/locale";
@@ -35,26 +36,28 @@ export const defaultCatalogueFilters: CatalogueFilters = {
   service: services[0],
   city: cities[0],
   brand: brands[0],
-  language: "Alle Sprachen",
+  language: storedSentinels.allLanguages,
   sort: "name",
 };
-export const filterLabels = {
-  query: "Name",
-  service: "Leistung",
-  city: "Ort",
-  brand: "Marke",
-  language: "Sprache",
-};
-export const knownLanguages = ["Albanisch", "Deutsch", "Englisch"];
+
+export const knownLanguages = [
+  storedLanguages.albanian,
+  storedLanguages.german,
+  storedLanguages.english,
+];
 const sortSlugs: Record<CatalogueSort, string> = {
   name: "name",
   rating: "bewertung",
   distance: "entfernung",
 };
+const languageByStoredValue = {
+  [storedLanguages.albanian]: "sq",
+  [storedLanguages.german]: "de",
+  [storedLanguages.english]: "en",
+};
 export function catalogueSlug(value: string) {
-  const language = { Albanisch: "sq", Deutsch: "de", Englisch: "en" }[
-    value as "Albanisch" | "Deutsch" | "Englisch"
-  ];
+  const language =
+    languageByStoredValue[value as keyof typeof languageByStoredValue];
   return (
     language ??
     value
@@ -99,7 +102,7 @@ export function catalogueOptions(directory: Workshop[], locale: Locale = "de") {
       ),
     ],
     languages: [
-      "Alle Sprachen",
+      storedSentinels.allLanguages,
       ...sorted(
         directory.flatMap((w) => w.languages),
         true,
@@ -204,8 +207,12 @@ export function parseCatalogueFilters(
     brand: pickMany("marke", unique([...brands, ...options.brands]), brands[0]),
     language: pick(
       "sprache",
-      unique(["Alle Sprachen", ...knownLanguages, ...options.languages]),
-      "Alle Sprachen",
+      unique([
+        storedSentinels.allLanguages,
+        ...knownLanguages,
+        ...options.languages,
+      ]),
+      storedSentinels.allLanguages,
     ),
     sort,
   };
@@ -294,7 +301,7 @@ export function matchCatalogue(
             w.brands.includes(value) ||
             w.brands.includes(brands[0]),
         ) &&
-        (filters.language === "Alle Sprachen" ||
+        (filters.language === storedSentinels.allLanguages ||
           w.languages.includes(filters.language)) &&
         words.every((word) => searchText(w.name).includes(word)),
     )

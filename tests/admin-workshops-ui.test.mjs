@@ -51,7 +51,7 @@ await mkdir(out, { recursive: true });
 const bundle = await build({
   stdin: {
     contents:
-      "export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {default} from './app/[locale]/verwaltung/panel';",
+      "export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {default} from './app/[locale]/admin/panel';",
     resolveDir: process.cwd(),
     loader: "tsx",
   },

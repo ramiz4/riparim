@@ -8,7 +8,7 @@ const https = z
   .refine((value) => {
     const url = new URL(value);
     return url.protocol === "https:" && !url.username && !url.password;
-  }, "HTTPS-Quelle ohne Zugangsdaten erforderlich");
+  }, "An HTTPS source without credentials is required");
 const date = z
   .string()
   .regex(/^\d{4}-\d{2}-\d{2}$/)
@@ -16,7 +16,7 @@ const date = z
     (value) =>
       Number.isFinite(Date.parse(value)) &&
       new Date(value).toISOString().slice(0, 10) === value,
-    "Ungültiges Prüfdatum",
+    "Invalid verification date",
   );
 export const workshopContactsSchema = z
   .object({
@@ -52,24 +52,20 @@ export function validateWorkshopContacts(
   const today = new Date().toISOString().slice(0, 10);
   for (const contact of data.contacts) {
     if (ids.has(contact.workshopId))
-      throw Error(`Doppelter Werkstattkontakt: ${contact.workshopId}`);
+      throw Error(`Duplicate workshop contact: ${contact.workshopId}`);
     ids.add(contact.workshopId);
     const profile = profiles.get(contact.workshopId);
     if (!profile || profile.status !== "published")
-      throw Error(
-        `Kontakt ohne veröffentlichtes Profil: ${contact.workshopId}`,
-      );
+      throw Error(`Contact has no published profile: ${contact.workshopId}`);
     if (
       profile.name !== contact.matchedName ||
       profile.phone !== contact.matchedPhone ||
       profile.city !== contact.matchedCity
     )
-      throw Error(
-        `Kontaktidentität stimmt nicht überein: ${contact.workshopId}`,
-      );
+      throw Error(`Contact identity mismatch: ${contact.workshopId}`);
     if (contact.checkedAt > today)
       throw Error(
-        `Kontaktprüfdatum liegt in der Zukunft: ${contact.workshopId}`,
+        `Contact verification date is in the future: ${contact.workshopId}`,
       );
   }
   return data;

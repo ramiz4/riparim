@@ -1,12 +1,18 @@
 import { setReleaseRscHeaders } from "./release-rsc";
 import paths from "@/data/deferred-pages.json";
-import { localeFromPath, localizeHref, pageIdentityPath } from "./i18n/locale";
+import {
+  isPagePath,
+  localeFromPath,
+  localizeHref,
+  pageIdentityPath,
+} from "./i18n/locale";
 
 export async function serveDeferredPage(request: Request, env: Cloudflare.Env) {
   const url = new URL(request.url),
     identity = pageIdentityPath(url.pathname);
   if (url.pathname.startsWith("/__private/"))
     return new Response("Not Found", { status: 404 });
+  if (!isPagePath(url.pathname)) return null;
   if (
     !paths.includes(identity) ||
     !["GET", "HEAD"].includes(request.method) ||

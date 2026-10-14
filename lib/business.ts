@@ -1,3 +1,4 @@
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 import { researchedEmailsSql } from "@/db/workshop-email-values";
 import { sameWorkshopEmailEdits } from "./workshop-emails";
 import { validateEvidenceFile } from "@/lib/evidence-file";
@@ -38,7 +39,7 @@ function validatedProfile(body: Record<string, unknown>, id: string) {
     throw new BusinessError(
       error instanceof ValidationError
         ? error.message
-        : "Bitte prüfe die Profilangaben.",
+        : legacyMessages.businessProfileInvalid,
       400,
       error instanceof ValidationError
         ? error.code
@@ -55,7 +56,7 @@ export async function requestWorkshopClaim(
     selectionError = claimDocumentsError(files);
   if (selectionError)
     throw new BusinessError(
-      "Bitte prüfe die Dokumente.",
+      legacyMessages.businessDocumentsInvalid,
       selectionError === "file_too_large" ||
         selectionError === "business_documents_too_large"
         ? 413
@@ -83,7 +84,7 @@ export async function requestWorkshopClaim(
         .run();
       if (!tracked.meta.changes)
         throw new BusinessError(
-          "Dein Konto ist gesperrt.",
+          legacyMessages.businessAccountBlocked,
           401,
           "account_blocked",
         );
@@ -99,7 +100,7 @@ export async function requestWorkshopClaim(
         .first();
       if (!permitted)
         throw new BusinessError(
-          "Dein Konto ist gesperrt.",
+          legacyMessages.businessAccountBlocked,
           401,
           "account_blocked",
         );
@@ -109,7 +110,7 @@ export async function requestWorkshopClaim(
       });
       if (!uploaded)
         throw new BusinessError(
-          "Der Upload wurde inzwischen abgebrochen. Bitte versuche es erneut.",
+          legacyMessages.businessUploadCancelled,
           409,
           "business_claim_conflict",
         );
@@ -145,7 +146,7 @@ export async function requestWorkshopClaim(
       .run();
     if (!result.meta.changes)
       throw new BusinessError(
-        "Das Profil ist nicht verfügbar, bereits zugeordnet oder dein Antrag wird schon geprüft.",
+        legacyMessages.businessClaimUnavailable,
         409,
         "business_claim_unavailable",
       );
@@ -185,7 +186,7 @@ export async function requestWorkshopChange(
     .first<Record<string, unknown>>();
   if (!current)
     throw new BusinessError(
-      "Dieses Profil ist deinem Konto nicht zugeordnet.",
+      legacyMessages.businessOwnershipRequired,
       403,
       "business_not_owner",
     );
@@ -226,7 +227,7 @@ export async function requestWorkshopChange(
     .run();
   if (!result.meta.changes)
     throw new BusinessError(
-      "Für dieses Profil liegt bereits ein Entwurf vor oder die Zuordnung wurde geändert.",
+      legacyMessages.businessDraftExists,
       409,
       "business_draft_conflict",
     );
@@ -251,7 +252,7 @@ export async function decideClaim(
       .run();
     if (!result.meta.changes)
       throw new BusinessError(
-        "Der Antrag wurde geändert oder du bist nicht mehr zur Freigabe berechtigt.",
+        legacyMessages.businessClaimApprovalConflict,
         409,
         "business_claim_conflict",
       );
@@ -270,13 +271,13 @@ export async function decideClaim(
       .bind(note, now, admin.userId, id, revision),
     db
       .prepare(
-        "UPDATE workshop_claims SET status='rejected',moderator_note='Ein anderer Übernahme-Antrag wurde bestätigt.',moderated_at=?,moderated_by=?,revision=revision+1 WHERE status='pending' AND id<>? AND workshop_id IN (SELECT workshop_id FROM workshop_owners WHERE claim_id=?)",
+        "UPDATE workshop_claims SET status='rejected',moderator_note=?,moderated_at=?,moderated_by=?,revision=revision+1 WHERE status='pending' AND id<>? AND workshop_id IN (SELECT workshop_id FROM workshop_owners WHERE claim_id=?)",
       )
-      .bind(now, admin.userId, id, id),
+      .bind(legacyMessages.anotherClaimApproved, now, admin.userId, id, id),
   ]);
   if (!results[0].meta.changes)
     throw new BusinessError(
-      "Das Profil ist bereits zugeordnet, das Konto ist gesperrt oder der Antrag wurde geändert.",
+      legacyMessages.businessClaimConflict,
       409,
       "business_assignment_conflict",
     );
@@ -300,7 +301,7 @@ export async function decideChange(
       .run();
     if (!result.meta.changes)
       throw new BusinessError(
-        "Der Entwurf wurde bereits geändert.",
+        legacyMessages.businessDraftChanged,
         409,
         "business_draft_changed",
       );
@@ -314,7 +315,7 @@ export async function decideChange(
     .first<Record<string, unknown>>();
   if (!change)
     throw new BusinessError(
-      "Der Entwurf wurde bereits entschieden.",
+      legacyMessages.businessDraftDecided,
       409,
       "business_draft_decided",
     );
@@ -323,7 +324,7 @@ export async function decideChange(
   );
   if (!existing || existing.updatedAt !== change.base_updated_at)
     throw new BusinessError(
-      "Die freigegebenen Angaben wurden inzwischen geändert. Bitte lehne diesen Entwurf ab und fordere einen neuen an.",
+      legacyMessages.businessApprovedProfileChanged,
       409,
       "business_profile_changed",
     );
@@ -337,7 +338,7 @@ export async function decideChange(
       : null;
   if (profile.status === "published" && !placeId)
     throw new BusinessError(
-      "Für diese Kontaktdaten fehlt eine eindeutige bestätigte Google-Zuordnung. Der bisherige öffentliche Stand bleibt erhalten.",
+      legacyMessages.businessGoogleRequired,
       422,
       "business_google_required",
     );
@@ -449,7 +450,7 @@ export async function decideChange(
   const results = await db.batch(statements);
   if (!results[0].meta.changes)
     throw new BusinessError(
-      "Die Zuordnung, das Profil oder deine Berechtigung wurde inzwischen geändert.",
+      legacyMessages.businessOwnershipChanged,
       409,
       "business_authority_changed",
     );

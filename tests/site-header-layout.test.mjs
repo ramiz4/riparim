@@ -12,12 +12,12 @@ await build({
   stdin: {
     contents: `
  export {default as Finder} from './app/finder';
- export {default as Catalogue} from './app/[locale]/werkstaetten/catalogue';
- export {default as AdminPanel} from './app/[locale]/verwaltung/panel';
+ export {default as Catalogue} from './app/[locale]/workshops/catalogue';
+ export {default as AdminPanel} from './app/[locale]/admin/panel';
  export {default as AuthForm} from './app/auth-form';
- export {default as PrivacyPage} from './app/[locale]/datenschutz/page';
- export {default as BusinessPage} from './app/[locale]/betriebe/page';
- export {default as BusinessClaimPage} from './app/[locale]/betriebe/beanspruchen/page';
+ export {default as PrivacyPage} from './app/[locale]/privacy/page';
+ export {default as BusinessPage} from './app/[locale]/business/page';
+ export {default as BusinessClaimPage} from './app/[locale]/business/claim/page';
  export {defaultCatalogueFilters} from './lib/catalogue-filters';`,
     resolveDir: process.cwd(),
     loader: "tsx",

@@ -102,12 +102,12 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
       ]) {
         const path =
           id === "privacy"
-            ? "/datenschutz"
+            ? "/privacy"
             : id === "home"
               ? "/"
               : id
-                ? `/werkstatt/${id}`
-                : "/werkstaetten";
+                ? `/workshop/${id}`
+                : "/workshops";
         const response = await runtime.dispatchFetch(
           "https://riparim.com" + localizeHref(path, locale),
         );
@@ -188,7 +188,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
     });
     for (const locale of ["de", "sq", "en"]) {
       const response = await runtime.dispatchFetch(
-          "https://riparim.com" + localizeHref("/datenschutz", locale),
+          "https://riparim.com" + localizeHref("/privacy", locale),
         ),
         html = await response.text();
       if (
@@ -205,7 +205,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
         html,
       );
       const rsc = await runtime.dispatchFetch(
-        "https://riparim.com" + localizeHref("/datenschutz", locale) + "?_rsc",
+        "https://riparim.com" + localizeHref("/privacy", locale) + "?_rsc",
         { headers: { RSC: "1", Accept: "text/x-component" } },
       );
       if (rsc.status !== 200) throw Error("PocketBase privacy RSC failed");
@@ -231,12 +231,12 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
       ]) {
         const path =
           id === "privacy"
-            ? "/datenschutz"
+            ? "/privacy"
             : id === "home"
               ? "/"
               : id
-                ? `/werkstatt/${id}`
-                : "/werkstaetten";
+                ? `/workshop/${id}`
+                : "/workshops";
         const response = await runtime.dispatchFetch(
             "https://riparim.com" + localizeHref(path, locale),
           ),

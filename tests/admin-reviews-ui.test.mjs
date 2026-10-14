@@ -52,7 +52,7 @@ await mkdir(out, { recursive: true });
 const bundle = await build({
   stdin: {
     contents:
-      "export {default} from './app/[locale]/verwaltung/bewertungen/reviews';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",
+      "export {default} from './app/[locale]/admin/reviews/reviews';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';",
     resolveDir: process.cwd(),
     loader: "tsx",
   },

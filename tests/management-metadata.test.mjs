@@ -3,14 +3,14 @@ import { build } from "esbuild";
 import { mkdir, writeFile } from "node:fs/promises";
 const out = ".test-runtime/management-metadata.mjs";
 const names = [
-  "betriebe",
-  "antraege",
-  "betriebe/beanspruchen",
-  "verwaltung",
-  "verwaltung/benutzer",
-  "verwaltung/betriebe",
-  "verwaltung/bewertungen",
-  "verwaltung/anmeldung",
+  "business",
+  "requests",
+  "business/claim",
+  "admin",
+  "admin/users",
+  "admin/businesses",
+  "admin/reviews",
+  "admin/authentication",
 ];
 const source = names
   .map(

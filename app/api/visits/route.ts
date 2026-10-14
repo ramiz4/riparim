@@ -1,3 +1,8 @@
+import {
+  storedEvidenceTypes,
+  evidenceTypes,
+} from "@/lib/i18n/canonical-values";
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 import { visitsReadResponse } from "@/lib/visits-read";
 import { publicAccountName, accountNameMaxLength } from "@/lib/account-name";
 import {
@@ -21,8 +26,7 @@ export const dynamic = "force-dynamic";
 const failure = () =>
   json(
     {
-      error:
-        "Die Bewertung konnte gerade nicht verarbeitet werden. Deine Eingaben bleiben erhalten.",
+      error: legacyMessages.reviewUnavailable,
       errorCode: "review_unavailable",
     },
     503,
@@ -41,20 +45,20 @@ async function submitEvidence(request: Request, replacing: boolean) {
   if (!user)
     return json(
       {
-        error: "Bitte melde dich an, bevor du eine Bewertung einreichst.",
+        error: legacyMessages.reviewAuthenticationRequired,
         errorCode: "authentication_required",
       },
       401,
     );
   if (!sameOrigin(request))
     return json(
-      { error: "Ungültige Anfrage.", errorCode: "invalid_request" },
+      { error: legacyMessages.invalidRequest, errorCode: "invalid_request" },
       403,
     );
   if (Number(request.headers.get("content-length") ?? 0) > 6 * 1024 * 1024)
     return json(
       {
-        error: "Die Datei ist zu groß. Maximal 5 MB.",
+        error: legacyMessages.fileTooLarge,
         errorCode: "file_too_large",
       },
       413,
@@ -84,8 +88,7 @@ async function submitEvidence(request: Request, replacing: boolean) {
     if (!validReviewText(reviewValue) || !validReviewRating(rating))
       return json(
         {
-          error:
-            "Bitte wähle 1–5 Sterne. Der optionale Text darf höchstens 2000 Zeichen enthalten.",
+          error: legacyMessages.reviewContentInvalid,
           errorCode: "invalid_review",
         },
         400,
@@ -93,7 +96,7 @@ async function submitEvidence(request: Request, replacing: boolean) {
     if (f.get("consent") !== "true")
       return json(
         {
-          error: "Bitte bestätige die Checkbox zur privaten Prüfung.",
+          error: legacyMessages.consentRequired,
           errorCode: "consent_required",
         },
         400,
@@ -104,14 +107,11 @@ async function submitEvidence(request: Request, replacing: boolean) {
       date > new Date().toISOString().slice(0, 10) ||
       vehicle.length < 3 ||
       !selectedServices ||
-      !["Rechnung", "Service- oder Arbeitsbeleg", "Anderer Nachweis"].includes(
-        evidenceType,
-      )
+      !evidenceTypes.includes(evidenceType)
     )
       return json(
         {
-          error:
-            "Bitte prüfe Werkstatt, Besuchsdatum, Fahrzeug, Leistung und Nachweisart.",
+          error: legacyMessages.invalidVisit,
           errorCode: "invalid_visit",
         },
         400,
@@ -119,7 +119,7 @@ async function submitEvidence(request: Request, replacing: boolean) {
     if (!(await publishedWorkshop(workshop)))
       return json(
         {
-          error: "Bitte wähle eine veröffentlichte Werkstatt.",
+          error: legacyMessages.publishedWorkshopRequired,
           errorCode: "invalid_visit",
         },
         400,
@@ -143,7 +143,10 @@ async function submitEvidence(request: Request, replacing: boolean) {
       return ownsVisit(user, prior.owner)
         ? json({ id, status: prior.status })
         : json(
-            { error: "Ungültige Kennung.", errorCode: "review_conflict" },
+            {
+              error: legacyMessages.invalidReviewId,
+              errorCode: "review_conflict",
+            },
             409,
           );
     if (
@@ -157,8 +160,7 @@ async function submitEvidence(request: Request, replacing: boolean) {
     )
       return json(
         {
-          error:
-            "Die Bewertung kann gerade nicht bearbeitet werden. Bitte aktualisiere deine Bewertungen.",
+          error: legacyMessages.reviewEditConflict,
           errorCode: "review_conflict",
         },
         409,
@@ -200,8 +202,7 @@ async function submitEvidence(request: Request, replacing: boolean) {
         key = null;
         return json(
           {
-            error:
-              "Dein Konto ist gesperrt. Bitte melde dich bei der Verwaltung.",
+            error: legacyMessages.reviewAccountBlocked,
             errorCode: "account_blocked",
           },
           401,
@@ -222,8 +223,7 @@ async function submitEvidence(request: Request, replacing: boolean) {
       if (!permitted)
         return json(
           {
-            error:
-              "Dein Konto ist gesperrt. Bitte melde dich bei der Verwaltung.",
+            error: legacyMessages.reviewAccountBlocked,
             errorCode: "account_blocked",
           },
           401,
@@ -235,8 +235,7 @@ async function submitEvidence(request: Request, replacing: boolean) {
       if (!uploaded)
         return json(
           {
-            error:
-              "Die Einreichung wurde inzwischen gelöscht oder geändert. Bitte aktualisiere deine Bewertungen.",
+            error: legacyMessages.submissionRemovedOrChanged,
             errorCode: "review_conflict",
           },
           (await accountBlocked(user.userId)) ? 401 : 409,
@@ -251,8 +250,7 @@ async function submitEvidence(request: Request, replacing: boolean) {
       if (!(await bucket.head(prior.file_key)))
         return json(
           {
-            error:
-              "Der bisherige Beleg ist nicht verfügbar. Bitte lade ihn erneut hoch.",
+            error: legacyMessages.priorEvidenceMissing,
             errorCode: "evidence_missing",
           },
           400,
@@ -263,12 +261,11 @@ async function submitEvidence(request: Request, replacing: boolean) {
     }
     if (
       !key &&
-      (evidenceType !== "Anderer Nachweis" || evidenceNote.length < 40)
+      (evidenceType !== storedEvidenceTypes.other || evidenceNote.length < 40)
     )
       return json(
         {
-          error:
-            "Bitte lade einen Beleg hoch oder beschreibe einen anderen nachvollziehbaren Nachweis mit mindestens 40 Zeichen.",
+          error: legacyMessages.evidenceRequired,
           errorCode: "evidence_required",
         },
         400,
@@ -303,16 +300,14 @@ async function submitEvidence(request: Request, replacing: boolean) {
         if (await accountBlocked(user.userId))
           return json(
             {
-              error:
-                "Dein Konto ist gesperrt. Bitte melde dich bei der Verwaltung.",
+              error: legacyMessages.reviewAccountBlocked,
               errorCode: "account_blocked",
             },
             401,
           );
         return json(
           {
-            error:
-              "Die Bewertung wurde zwischenzeitlich geändert. Bitte aktualisiere deine Bewertungen.",
+            error: legacyMessages.reviewChanged,
             errorCode: "review_conflict",
           },
           409,
@@ -354,8 +349,7 @@ async function submitEvidence(request: Request, replacing: boolean) {
         if (key) await bucket.delete(key);
         return json(
           {
-            error:
-              "Dein Konto ist gesperrt. Bitte melde dich bei der Verwaltung.",
+            error: legacyMessages.reviewAccountBlocked,
             errorCode: "account_blocked",
           },
           401,
@@ -406,7 +400,7 @@ async function submitEvidence(request: Request, replacing: boolean) {
 export async function PATCH(request: Request) {
   if (!sameOrigin(request))
     return json(
-      { error: "Ungültige Anfrage.", errorCode: "invalid_request" },
+      { error: legacyMessages.invalidRequest, errorCode: "invalid_request" },
       403,
     );
   let body: Record<string, unknown>;
@@ -414,7 +408,7 @@ export async function PATCH(request: Request) {
     body = await readJson(request);
   } catch {
     return json(
-      { error: "Ungültige Eingaben.", errorCode: "invalid_request" },
+      { error: legacyMessages.invalidInputs, errorCode: "invalid_request" },
       400,
     );
   }
@@ -422,7 +416,10 @@ export async function PATCH(request: Request) {
     body.action === "moderate" ? await getAdminUser() : await getAppUser();
   if (!user)
     return json(
-      { error: "Bitte melde dich an.", errorCode: "authentication_required" },
+      {
+        error: legacyMessages.authenticationRequired,
+        errorCode: "authentication_required",
+      },
       401,
     );
   try {
@@ -431,7 +428,7 @@ export async function PATCH(request: Request) {
     if (body.action === "moderate") {
       if (!user.isModerator)
         return json(
-          { error: "Kein Zugriff auf die Prüfung.", errorCode: "forbidden" },
+          { error: legacyMessages.moderationForbidden, errorCode: "forbidden" },
           403,
         );
       const status = String(body.status ?? ""),
@@ -446,7 +443,7 @@ export async function PATCH(request: Request) {
       )
         return json(
           {
-            error: "Bitte ergänze einen Prüfvermerk mit mindestens 10 Zeichen.",
+            error: legacyMessages.moderatorNoteRequired,
             errorCode: "invalid_request",
           },
           400,
@@ -469,8 +466,7 @@ export async function PATCH(request: Request) {
       if (!prior || prior.revision !== revision || prior.status === "deleting")
         return json(
           {
-            error:
-              "Die Bewertung wurde zwischenzeitlich geändert. Bitte aktualisiere die Liste.",
+            error: legacyMessages.moderationReviewChanged,
             errorCode: "review_conflict",
           },
           409,
@@ -479,8 +475,7 @@ export async function PATCH(request: Request) {
         if (!completeReview(prior))
           return json(
             {
-              error:
-                "Diese ältere Einreichung enthält noch keine vollständige Bewertung. Sie muss zuerst ergänzt werden.",
+              error: legacyMessages.legacyReviewIncomplete,
               errorCode: "invalid_review",
             },
             400,
@@ -489,14 +484,13 @@ export async function PATCH(request: Request) {
           if (!(await storage().bucket.head(prior.file_key)))
             return json(
               {
-                error:
-                  "Der Besuchsbeleg fehlt. Fordere einen neuen Nachweis an.",
+                error: legacyMessages.visitEvidenceMissing,
                 errorCode: "evidence_missing",
               },
               409,
             );
         } else if (
-          prior.evidence_type !== "Anderer Nachweis" ||
+          prior.evidence_type !== storedEvidenceTypes.other ||
           prior.evidence_note.trim().length < 40
         )
           return json(
@@ -556,8 +550,7 @@ export async function PATCH(request: Request) {
       if (!result[1].meta.changes)
         return json(
           {
-            error:
-              "Die Bewertung wurde geändert oder die Werkstatt ist ausgeblendet. Bitte aktualisiere die Liste.",
+            error: legacyMessages.reviewChangedOrWorkshopHidden,
             errorCode: "review_conflict",
           },
           409,
@@ -574,14 +567,13 @@ export async function PATCH(request: Request) {
     if (body.action === "review")
       return json(
         {
-          error:
-            "Bitte reiche Bewertung und Nachweis gemeinsam ein. Nur die Verwaltung kann veröffentlichen.",
+          error: legacyMessages.combinedReviewRequired,
           errorCode: "invalid_request",
         },
         409,
       );
     return json(
-      { error: "Ungültige Aktion.", errorCode: "invalid_request" },
+      { error: legacyMessages.invalidAction, errorCode: "invalid_request" },
       400,
     );
   } catch (e) {
@@ -593,12 +585,15 @@ export async function DELETE(request: Request) {
   const user = await getAppUser();
   if (!user)
     return json(
-      { error: "Bitte melde dich an.", errorCode: "authentication_required" },
+      {
+        error: legacyMessages.authenticationRequired,
+        errorCode: "authentication_required",
+      },
       401,
     );
   if (!sameOrigin(request))
     return json(
-      { error: "Ungültige Anfrage.", errorCode: "invalid_request" },
+      { error: legacyMessages.invalidRequest, errorCode: "invalid_request" },
       403,
     );
   let body: Record<string, unknown>;
@@ -606,7 +601,7 @@ export async function DELETE(request: Request) {
     body = await readJson(request);
   } catch {
     return json(
-      { error: "Ungültige Eingaben.", errorCode: "invalid_request" },
+      { error: legacyMessages.invalidInputs, errorCode: "invalid_request" },
       400,
     );
   }
@@ -621,7 +616,7 @@ export async function DELETE(request: Request) {
       .first<{ file_key: string | null; owner: string }>();
     if (!v)
       return json(
-        { error: "Nachweis nicht gefunden.", errorCode: "not_found" },
+        { error: legacyMessages.evidenceNotFound, errorCode: "not_found" },
         404,
       );
     await cleanupVisitEvidence(v.owner, id);

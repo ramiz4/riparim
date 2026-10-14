@@ -1,224 +1,215 @@
-# Releases und Veröffentlichung
+# Releases and publication
 
-Änderungen gehen über einen Pull Request nach `main`. Produktion darf erst nach dem Squash-Merge, erfolgreicher Prüfung und einem zugehörigen GitHub Release aktualisiert werden. Feature-Branches und offene PRs dürfen nicht über Sites veröffentlicht werden.
+Changes reach `main` through a pull request. Production may be updated only after squash merge, successful verification and an associated GitHub release. Feature branches and open PRs must not be published through Sites.
 
-## Conventional Commits und Squash-Merge
+## Conventional Commits and squash merge
 
-Der PR-Titel wird als Squash-Commit übernommen und mit Commitlint geprüft. Beispiele:
+The PR title becomes the squash commit and is checked with Commitlint. Examples:
 
-- `fix: correct workshop search` erzeugt eine Patch-Version.
-- `feat: add appearance settings` erzeugt eine Minor-Version.
-- `feat!: replace the profile API` erzeugt eine Major-Version. Alternativ steht ein `BREAKING CHANGE:`-Footer am Ende der PR-Beschreibung.
-- `docs:`, `test:`, `ci:`, `build:`, `refactor:` und `chore:` erzeugen allein normalerweise keinen Release.
+- `fix: correct workshop search` produces a patch version.
+- `feat: add appearance settings` produces a minor version.
+- `feat!: replace the profile API` produces a major version. Alternatively, a `BREAKING CHANGE:` footer appears at the end of the PR description.
+- `docs:`, `test:`, `ci:`, `build:`, `refactor:` and `chore:` alone normally produce no release.
 
-Neue lokale Commits verwenden ebenfalls dieses Format. Prüfen: `printf '%s\n' 'feat: add settings' | npm run commitlint`. Historische Commit-Nachrichten werden nicht umgeschrieben.
+New local commits also use this format. Check: `printf '%s\n' 'feat: add settings' | npm run commitlint`. Historical commit messages are not rewritten.
 
-GitHub erlaubt ausschließlich Squash-Merges. `main` erfordert einen PR, einen aktuellen erfolgreichen CI-Lauf und den Check **Conventional PR title**; die Regeln gelten auch für Administratoren. Die versionierte Konfiguration steht in `.github/repository-policy.json`. Ein Repository-Administrator kann sie mit `npm run repo:configure` anwenden und mit `npm run repo:check` prüfen. Diese Befehle benötigen eine passende `gh`-Anmeldung, keine Site-Zugangsdaten.
+GitHub permits only squash merges. `main` requires a PR, a current successful CI run and the **Conventional PR title** check; rules also apply to administrators. Versioned configuration is in `.github/repository-policy.json`. A repository administrator can apply it with `npm run repo:configure` and check it with `npm run repo:check`. These commands need appropriate `gh` authentication, not Site credentials.
 
 ## GitHub Actions
 
-Die Titel-, Semantic-Release- und Deploy-Jobs installieren ausschließlich ihre
-separat gelockten Werkzeuge. Die volle App-Installation bleibt im Prüfjob.
-Abhängigkeitsaudit, Pin-Aktualisierung und Messnachweise stehen in
+Title, Semantic Release and deployment jobs install only their separately locked
+tools. Full app installation remains in the verification job.
+Dependency audit, pin updates and measurement evidence are in
 [ci-tool-installs.md](ci-tool-installs.md).
 
-Der Workflow **Release** startet nur bei `push` auf `main` im Repository `ramiz4/riparim`. Er verwendet Node.js 24 und arbeitet mit dem exakten Merge-Commit:
+The **Release** workflow starts only on `push` to `main` in `ramiz4/riparim`. It uses Node.js 24 and works with the exact merge commit:
 
-1. Wiederverwendbare CI führt Katalogprüfung, Tests, TypeScript, Lint sowie Cloudflare-, Sites- und Node-Builds aus.
-2. Node und Cloudflare/Sites übergeben zwei unveränderliche Actions-Artefakte mit ihren exakten IDs an den Release-Job. Das abschließende Gate bestätigt alle Pflichtzweige. Run, Repository, Commit und SHA-256 müssen übereinstimmen; Teilwiederholungen dürfen erfolgreiche Producer eines früheren Versuchs desselben Runs weiterverwenden. Der [CI-Leistungsablauf](ci-performance.md) beschreibt Aufteilung und Messung.
-3. `semantic-release` analysiert die Conventional Commits seit dem letzten `v*`-Tag und erstellt Tag, Release Notes sowie einen GitHub Release mit drei Archiven und jeweils eigener Provenienzdatei.
-4. Die validierte Repositoryvariable `DEPLOYMENT_TARGET` wählt `cloudflare` (Default) oder `node`. Node startet keinen Cloudflare-Deploy und benötigt keine Cloudflare-Secrets; Installation erfolgt über den [hostlokalen Nodeweg](node-deployment.md). Bei Cloudflare lädt der Deploy-Job beide Dateien aus diesem veröffentlichten GitHub Release. Er prüft Tag, Commit, Prüfsumme und Zielbindings, wendet ausstehende D1-Migrationen an und veröffentlicht genau die geprüften Artefaktbytes auf Cloudflare. Ein erneuter Deploy verwendet denselben Release, keinen neuen Build.
+1. Reusable CI performs catalogue checks, tests, TypeScript, lint and Cloudflare, Sites and Node builds.
+2. Node and Cloudflare/Sites pass two immutable Actions artifacts with exact IDs to the release job. The final gate confirms all required branches. Run, repository, commit and SHA-256 must match; partial reruns may reuse successful producers from an earlier attempt of the same run. The [CI performance process](ci-performance.md) describes partitioning and measurement.
+3. `semantic-release` analyzes Conventional Commits since the last `v*` tag and creates a tag, release notes and GitHub release with three archives, each with its own provenance file.
+4. The validated `DEPLOYMENT_TARGET` repository variable selects `cloudflare` (default) or `node`. Node starts no Cloudflare deployment and needs no Cloudflare secrets; installation uses the [host-local Node path](node-deployment.md). For Cloudflare, the deployment job downloads both files from this published GitHub release. It checks tag, commit, checksum and target bindings, applies pending D1 migrations and publishes exactly the verified artifact bytes to Cloudflare. A repeated deployment uses the same release, not a new build.
 
-Der automatisch bereitgestellte `GITHUB_TOKEN` erhält ausschließlich im Release-Job `contents: write`. Es werden keine npm-Pakete veröffentlicht, keine Release-Commits nach `main` geschrieben und keine zusätzlichen PATs benötigt. Der erste Release beginnt ohne vorhandenes Versions-Tag bei `1.0.0`; danach gelten SemVer-Bumps. Tags und GitHub Releases sind die Versionsquelle, die private `package.json` wird nicht bei jeder Veröffentlichung geändert.
+The automatically provided `GITHUB_TOKEN` receives `contents: write` only in the release job. No npm packages are published, no release commits are written to `main` and no additional PATs are required. The first release starts at `1.0.0` without an existing version tag; subsequent releases follow SemVer bumps. Tags and GitHub releases are the version source; private `package.json` is not changed on every publication.
 
-Release-Läufe werden serialisiert und nicht während einer Veröffentlichung abgebrochen. Ein vor der Release-Erstellung überholter Commit erzeugt keinen Release; der neuere `main`-Lauf übernimmt die Änderungen. Ein bereits veröffentlichter Release wird auch dann deployt, wenn inzwischen ein reiner Dokumentations- oder Wartungscommit auf `main` liegt. Erst ein neuerer vollständig veröffentlichter Release verhindert das Deployment einer älteren Version, auch bei einer Wiederholung nur des Deploy-Jobs. Ein erneuter Lauf desselben Commits verwendet einen bereits vollständig veröffentlichten Release wieder.
+Release runs are serialized and not cancelled during publication. A commit superseded before release creation produces no release; the newer `main` run incorporates changes. An already published release is deployed even if a documentation-only or maintenance commit has since reached `main`. Only a newer fully published release prevents deployment of an older version, including a retry of only the deployment job. Rerunning the same commit reuses an already fully published release.
 
-Die erneute Messung nach den Laufzeitoptimierungen und die Entscheidung gegen
-einen vorsorglichen Queue-Umbau stehen in
-[release-queue-analysis.md](release-queue-analysis.md). Vollständige Retries prüfen
-weiterhin die zum jeweiligen Releaseformat gehörenden Builds und deren Provenienz; ein vorhandener veröffentlichter
-Tag wird vor dem Remote-Main-Vergleich wiederverwendet. Nur neue Veröffentlichungen
-werden von einem neueren Main-Commit verdrängt.
+Renewed measurement after runtime optimizations and the decision against
+preemptive queue restructuring are in [release-queue-analysis.md](release-queue-analysis.md).
+Full retries still check the builds and provenance for the respective release
+format; an existing published tag is reused before comparing remote main.
+Only new publications are superseded by a newer main commit.
 
-Wenn eine GitHub-Veröffentlichung nach dem Anlegen des Tags scheitert, bleibt der Workflow ausdrücklich fehlerhaft. Vor dem erneuten Lauf den vorhandenen Release samt zugehörigen Assets vervollständigen: historische Releases haben vier Assets (Cloudflare-/Sites-Paar), neue Releases mit `riparim-release: node-v1` zusätzlich das Nodepaar und damit sechs; kein zusätzliches Versions-Tag erzeugen. Ein fehlender, als Entwurf gespeicherter oder unvollständiger Release wird nicht als Erfolg ausgegeben.
+If GitHub publication fails after tag creation, the workflow explicitly remains failed. Before rerunning, complete the existing release and associated assets: historical releases have four assets (Cloudflare/Sites pair), new releases with `riparim-release: node-v1` additionally have the Node pair, totaling six; create no additional version tag. A missing, draft or incomplete release is not reported as success.
 
-## Produktionsmigrationen, Wiederholung und Rollback
+## Production migrations, retries and rollback
 
-Der Deploy-Job wendet D1-Migrationen **vor** dem Worker-Upload an. Währenddessen
-bedienen der bisherige Worker und sein Scheduled-Handler weiterhin Anfragen;
-Schema und Code werden nicht gemeinsam atomar umgeschaltet. Neue Migrationen
-müssen deshalb mit der noch aktiven Version und dem vorgesehenen Code-Rückweg
-verträglich sein. Angewendete SQL-Dateien bleiben unverändert; jede Änderung
-bekommt eine neue Drizzle-Migration.
+The deployment job applies D1 migrations **before** Worker upload.
+Meanwhile the previous Worker and its scheduled handler continue serving requests;
+schema and code do not switch atomically together. New migrations must therefore
+be compatible with the still-active version and intended code return path.
+Applied SQL files remain unchanged; every change gets a new Drizzle migration.
 
-Für inkompatible Änderungen mehrere Releases verwenden: zuerst das Schema
-additiv erweitern, dann Daten mit geprüftem, wiederholbarem Backfill übernehmen
-und Leser/Schreiber umstellen. Alte Spalten oder Tabellen erst in einer späteren,
-gesondert geprüften Migration entfernen, wenn kein aktiver oder für Rollback
-vorgesehener Code sie benötigt. Vor produktiven Datenänderungen eine geschützte,
-geprüft wiederherstellbare Sicherung erstellen; eine nötige Schreibpause vorher
-mit Zeitraum und Wiederaufnahme ankündigen.
+Use multiple releases for incompatible changes: first extend the schema
+additively, then transfer data through a reviewed repeatable backfill and switch
+readers/writers. Remove old columns or tables only in a later separately reviewed
+migration when no active or rollback-target code needs them. Before production
+data changes, create a protected backup with verified recovery; announce any
+required write pause beforehand with time window and resumption.
 
-Bei einem Fehler Schema und `d1_migrations` frisch prüfen. Bereits erfolgreiche
-Migrationen bleiben angewandt, auch wenn der anschließende Code-Upload scheitert.
-Die Historie nicht löschen und SQL nicht ungeprüft erneut ausführen. Bei
-unbekanntem Ausgang oder abweichendem Schema den Lauf stoppen und den Bestand
-klären. Nach behobenem Fehler denselben veröffentlichten Release-Lauf erneut
-starten: er prüft Provenienz und Reihenfolge erneut, überspringt angewandte
-Migrationen und verwendet unveränderte Archivbytes. Vorher tatsächlich aktive
-Worker-Version, Secrets, Bindings und Wartungszustand prüfen. Ein neuerer
-vollständig veröffentlichter Release hat weiterhin Vorrang.
+On an error, freshly check schema and `d1_migrations`. Already successful
+migrations remain applied even if subsequent code upload fails. Do not delete
+history or rerun SQL without verification. On unknown outcome or differing
+schema, stop the run and clarify the inventory. After resolving the error,
+rerun the same published release: it rechecks provenance and ordering, skips
+applied migrations and uses unchanged archive bytes. First check the actually
+active Worker version, secrets, bindings and maintenance state.
+A newer fully published release still takes precedence.
 
-Ein Code-Rollback ist nur mit dem aktuellen Schema und den vorhandenen Daten
-zulässig; er setzt D1 und R2 nicht zurück. Der übliche Korrekturweg ist ein
-geprüfter Forward-Fix über Main. Eine Rückkehr zu Sites folgt dem
-[gesonderten Abgleichplan](domain-cutover.md#wiederherstellung-nach-dem-routingwechsel)
-und der [Archiv-Wiederherstellung](sites-retirement.md#wiederherstellung-und-sichere-unterbrechung).
-Ein Backup-Restore, der neue Schreibvorgänge verlieren würde, ist kein sicherer
-Rollback. [D1-Migrationen](https://developers.cloudflare.com/d1/reference/migrations/),
-[Worker-Rollbacks](https://developers.cloudflare.com/workers/versions-and-deployments/rollbacks/).
+A code rollback is allowed only with the current schema and existing data;
+it resets neither D1 nor R2. The usual correction path is a reviewed forward fix
+through main. Return to Sites follows the
+[separate reconciliation plan](domain-cutover.md#recovery-after-routing-cutover)
+and [archive recovery](sites-retirement.md#recovery-and-safe-interruption).
+A backup restore that would lose new writes is no safe rollback.
+[D1 migrations](https://developers.cloudflare.com/d1/reference/migrations/),
+[Worker rollbacks](https://developers.cloudflare.com/workers/versions-and-deployments/rollbacks/).
 
-## Cloudflare-Produktion
+## Cloudflare production
 
-Die Backup-Überwachung läuft im separaten Worker `riparim-backup-monitor`.
-Website-Releases deployen ausschließlich das App-Artefakt und verändern dessen
-Cron oder Secrets nicht. Für Monitor-Updates ist `wrangler.backup-monitor.jsonc`
-maßgeblich: Die freigegebenen aktiven Variablen und der 15-Minuten-Cron sind
-versioniert und bleiben bei einem normalen Deployment erhalten. CI prüft den
-automatischen Monitorlauf mit genau dieser Konfiguration im echten workerd.
-Auch Monitor-Updates dürfen ausschließlich einen geprüften, veröffentlichten
-Main-Release verwenden. Ablauf und gezielte Pausierung stehen in
-[backup-monitoring.md](backup-monitoring.md#cloudflare-aktive-deployments-und-updates).
+Backup monitoring runs in the separate `riparim-backup-monitor` Worker.
+Website releases deploy only the app artifact and change neither the monitor's
+cron nor secrets. `wrangler.backup-monitor.jsonc` is authoritative for monitor
+updates: authorized active variables and the 15-minute cron are versioned and
+preserved by a normal deployment. CI checks the automatic monitor run with
+exactly this configuration in real workerd. Monitor updates too may use only
+a verified published main release. Process and explicit pausing are in
+[backup-monitoring.md](backup-monitoring.md#cloudflare-active-deployments-and-updates).
 
-`wrangler.jsonc` enthält den eigenen Zielaccount, den Worker `riparim`, die verifizierte D1-Datenbank `riparim-production` und den privaten R2-Bucket `riparim-evidence-production`. Vite übernimmt diese Konfiguration für Produktionsbuilds. Lokale Vorschauen verwenden isolierte Bindings; Produktionsressourcen bleiben mit `remote: false` vom lokalen Entwicklungsserver getrennt. Die generierte `dist/server/wrangler.json` wird unverändert aus dem Release-Archiv deployt.
+`wrangler.jsonc` contains the owned target account, Worker `riparim`, verified D1 database `riparim-production` and private R2 bucket `riparim-evidence-production`. Vite adopts this configuration for production builds. Local previews use isolated bindings; production resources stay separate from the local development server with `remote: false`. Generated `dist/server/wrangler.json` is deployed unchanged from the release archive.
 
-D1 und R2 werden vor dem ersten Deployment angelegt und ihre exakten Bindings geprüft. Der Deploy-Aufruf deaktiviert Wranglers automatische Provisionierung mit `--experimental-provision=false`. Dadurch entfällt insbesondere die zusätzliche R2-Metadatenabfrage beim ersten Worker-Upload; der Deployment-Token benötigt keine R2-Lese- oder Objektrechte.
+D1 and R2 are created before the first deployment and their exact bindings verified. The deployment command disables Wrangler's automatic provisioning with `--experimental-provision=false`. This avoids the additional R2 metadata query on the first Worker upload in particular; the deployment token needs no R2 read or object permissions.
 
-Das GitHub-Environment `production` erlaubt ausschließlich den Branch `main`. Darin werden zwei Secrets eingerichtet:
+The GitHub `production` environment allows only branch `main`. Two secrets are configured there:
 
-- `CLOUDFLARE_API_TOKEN`: separater Account-Token für automatisierte Deployments und D1-Migrationen. Für die erste Worker-Erstellung sind Workers Product Admin sowie D1 Write nötig; nach dem Bootstrap kann der Workers-Zugriff auf Editor für diesen Worker reduziert werden. Die aktiven Custom Domains benötigen zusätzlich `Workers Routes Write`, ausschließlich für die eigene Zone von `riparim.com`. Allgemeine DNS-, Billing-, R2-Objekt- und Token-Management-Rechte gehören nicht zum App-Deployment.
-- `CLOUDFLARE_WORKER_SECRETS`: JSON mit mindestens `REVIEW_MODERATOR_EMAIL` sowie den benötigten Google-Schlüsseln, `SUPABASE_SECRET_KEY` für Benutzerverwaltung und bestätigte Benachrichtigungsempfänger, `RESEND_API_KEY` und `TRANSACTIONAL_EMAIL_FROM` für transaktionale Bewertungsnachrichten oder einmaligen Aktivierungswerten. Beim freigegebenen Auth-Host zusätzlich `AUTH_TRUSTED_ORIGIN`/`AUTH_TRUSTED_PROVIDER` sowie die separate Credentialbindung; für PocketBase `AUTH_ADMIN_KEY`, `AUTH_ADMIN_KEY_ORIGIN` und `AUTH_ADMIN_KEY_PROVIDER=pocketbase`, für den kompatiblen Supabaseweg `SUPABASE_SECRET_KEY_ORIGIN` gemäß [auth-provider.md](auth-provider.md). Der Moderatorwert muss dem bestehenden Riparim-Admin entsprechen. Deployment-Tokens gehören nicht in dieses Laufzeit-JSON.
+- `CLOUDFLARE_API_TOKEN`: separate account token for automated deployments and D1 migrations. Initial Worker creation requires Workers Product Admin and D1 Write; after bootstrap, Workers access can be reduced to Editor for this Worker. Active custom domains additionally need `Workers Routes Write`, exclusively for the owned `riparim.com` zone. General DNS, billing, R2 object and token management permissions do not belong to app deployment.
+- `CLOUDFLARE_WORKER_SECRETS`: JSON containing at least `REVIEW_MODERATOR_EMAIL` and required Google keys, `SUPABASE_SECRET_KEY` for user administration and confirmed notification recipients, `RESEND_API_KEY` and `TRANSACTIONAL_EMAIL_FROM` for transactional review messages or one-time activation values. For an authorized Auth host, also `AUTH_TRUSTED_ORIGIN`/`AUTH_TRUSTED_PROVIDER` and separate credential binding; for PocketBase `AUTH_ADMIN_KEY`, `AUTH_ADMIN_KEY_ORIGIN` and `AUTH_ADMIN_KEY_PROVIDER=pocketbase`, for compatible Supabase `SUPABASE_SECRET_KEY_ORIGIN` according to [auth-provider.md](auth-provider.md). The moderator value must match the existing Riparim admin. Deployment tokens do not belong in this runtime JSON.
 
-Die Secrets dürfen nicht als Repository-Secrets gespeichert werden: PR-Workflows erhalten keinen Zugriff auf das geschützte Produktions-Environment. Die Codex-MCP-Anmeldung bleibt davon getrennt. Anwendungsgeheimnisse werden mit `--secrets-file` gemeinsam mit dem Worker hochgeladen, kurzfristig in einer Datei mit Modus `0600` gehalten und anschließend entfernt. Eine spätere Veröffentlichung ohne neue Werte bewahrt bestehende Worker-Secrets.
+Secrets must not be stored as repository secrets: PR workflows receive no access to the protected production environment. Codex MCP authentication stays separate. Application secrets are uploaded together with the Worker using `--secrets-file`, briefly held in a file with mode `0600`, then removed. A later publication without new values preserves existing Worker secrets.
 
-Die Moderation wartet einen unmittelbaren Versandversuch ab. Fehlgeschlagene Nachrichten werden ausschließlich einzeln und manuell wiederholt: maximal fünfmal zusätzlich zum Erstversand, nach 1, 5, 15, 30 und 60 Minuten Wartezeit. Der Worker exportiert keinen Scheduled-Handler; `triggers.crons: []` entfernt den bisherigen Zeitplan beim geprüften Release-Deployment. Keine neue Migration: bestehende Ereignisse, Versuche und eingefrorene Versandbytes bleiben erhalten. Historische Ereignisse mit sechs oder mehr Versuchen sind ausgeschöpft.
+Moderation awaits an immediate send attempt. Failed messages are retried only individually and manually: at most five times in addition to the initial send, after waits of 1, 5, 15, 30 and 60 minutes. The Worker exports no scheduled handler; `triggers.crons: []` removes the previous schedule during verified release deployment. No new migration: existing events, attempts and frozen delivery bytes are preserved. Historical events with six or more attempts are exhausted.
 
-`SITE_ORIGIN=https://riparim.com` liegt als normale Variable in der Wrangler-Konfiguration. Ausschließlich Apex und www sind als aktivierte Custom Domains der eigenen Zone eingetragen; Preview-URLs bleiben deaktiviert. Der technische Workers-Host verwendet denselben Datenbestand. Die Deploy-Prüfung erzwingt diese Routinggrenzen und die unveränderte Konfiguration im Release-Archiv. Fehlende CI-Zugangsdaten lassen den Deploy-Job ausdrücklich scheitern. Lokale `wrangler deploy --dry-run`-Prüfungen validieren Paket und Bindings, aber keine Remote-Berechtigungen.
+`SITE_ORIGIN=https://riparim.com` is a normal variable in Wrangler configuration. Only apex and www are registered as enabled custom domains in the owned zone; preview URLs remain disabled. The technical Workers host uses the same inventory. Deployment checking enforces these routing boundaries and unchanged configuration in the release archive. Missing CI credentials explicitly fail the deployment job. Local `wrangler deploy --dry-run` checks validate package and bindings, not remote permissions.
 
-## Einmaliger Wechsel von Sites
+## One-time switch from Sites
 
-Die [Datenübernahme](data-transfer-2026-10-04.md), [Produktionsumstellung](domain-cutover-2026-10-05.md) und [kontrollierte öffentliche Sites-Stilllegung](sites-retirement.md) sind abgeschlossen. D1-Daten einschließlich Auth-Konfiguration, Identitäten, Rollen, Sessions, Besitzrechten und Freigabestatus wurden abgeglichen; privates R2 und Migrationshistorie sind geprüft. Der eigene Worker ist der alleinige Writer. Die alte Site ist Owner-only und bleibt schreibgesperrt; ihre Daten, Versionen und gesicherten Archive werden gemäß dokumentierter Aufbewahrung erhalten. Eine leere neue Datenbank mit angewendeter Schema-Migration ist keine Übernahme bestehender Nutzerdaten.
+[Data transfer](data-transfer-2026-10-04.md), [production cutover](domain-cutover-2026-10-05.md) and [controlled public Sites retirement](sites-retirement.md) are complete. D1 data, including Auth configuration, identities, roles, sessions, ownership and approval status, was reconciled; private R2 and migration history are verified. The owned Worker is the sole writer. The old Site is owner-only and remains write-locked; its data, versions and backed-up archives are preserved according to documented retention. An empty new database with applied schema migrations is not a transfer of existing user data.
 
-Der erste Worker-Release erlaubt zunächst die Prüfung des Deployments. Anmeldung und Verwaltung benötigen die übernommene aktive `auth_settings`-Zeile und die zum bestehenden Supabase-Projekt gehörenden Werte. `REVIEW_MODERATOR_EMAIL` und `SUPABASE_SECRET_KEY` allein legen diese Konfiguration nicht an; eine ungeschützte Bootstrap-Route wird nicht bereitgestellt.
+The first Worker release initially permits deployment checking. Login and administration need the transferred active `auth_settings` row and values belonging to the existing Supabase project. `REVIEW_MODERATOR_EMAIL` and `SUPABASE_SECRET_KEY` alone do not create this configuration; no unprotected bootstrap route is provided.
 
-Die technische Abnahme umfasst tatsächliche E-Mail-/Google-Anmeldung, Verwaltung, private Belege und Werkstattsuche über die Produktionsdomain. Native ChatGPT-Konten benötigen für private Altbestände eine bestätigte Supabase-Verknüpfung; gleiche E-Mail-Adressen allein erlauben keine Zuordnung. Schema-/Datenänderungen werden durch einen Code-Rollback nicht automatisch zurückgesetzt. Für einen Fehler nach dem Wechsel bleibt der aktuelle eigene D1-/R2-Bestand maßgeblich; Rückübernahme und Wiederöffnung der alten Site verlangen den dokumentierten sicheren Abgleich.
+Technical acceptance includes actual email/Google login, administration, private evidence and workshop search through the production domain. Native ChatGPT accounts need a confirmed Supabase link for private legacy data; matching email addresses alone permit no mapping. Schema/data changes are not automatically reset by a code rollback. For an error after cutover, the current owned D1/R2 inventory remains authoritative; reverse transfer and reopening the old Site require documented safe reconciliation.
 
-Der eigene Worker entfernt eingehende `oai-authenticated-user-*`-Header. Diese können auf OpenAI Sites eine native Plattform-Identität darstellen, auf dem eigenen öffentlich erreichbaren Worker stammen sie vom Client und dürfen keine Anmeldung oder Adminrechte begründen. Supabase-Anmeldung und Session-Prüfung bleiben bestehen.
+The owned Worker removes incoming `oai-authenticated-user-*` headers. These can represent native platform identity on OpenAI Sites; on the owned publicly accessible Worker they come from the client and must grant neither login nor admin rights. Supabase login and session checks remain.
 
-Der Gesamtabschluss der Produktionsumstellung steht im [Abschlussbericht](release-handover-2026-10-05.md). Die zugehörigen Arbeiten sind in [Issue #17](https://github.com/ramiz4/riparim/issues/17) verfolgt: [Datenübernahme #18](https://github.com/ramiz4/riparim/issues/18), anschließend [Domain-/Auth-Umstellung #19](https://github.com/ramiz4/riparim/issues/19) und nach abgenommener Umstellung sowie beendeter Rückfallphase [Sites-Stilllegung #20](https://github.com/ramiz4/riparim/issues/20).
+Overall production cutover completion is in the [final report](release-handover-2026-10-05.md). Associated work is tracked in [Issue #17](https://github.com/ramiz4/riparim/issues/17): [data transfer #18](https://github.com/ramiz4/riparim/issues/18), followed by [domain/Auth cutover #19](https://github.com/ramiz4/riparim/issues/19) and, after accepted cutover and the fallback period ended, [Sites retirement #20](https://github.com/ramiz4/riparim/issues/20).
 
-Referenzen: [semantic-release](https://semantic-release.org/recipes/ci-configurations/github-actions/), [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/), [GitHub Squash-Merges](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests), [Cloudflare CI](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/), [Workers-Berechtigungen](https://developers.cloudflare.com/workers/authorization/workers/).
+References: [semantic-release](https://semantic-release.org/recipes/ci-configurations/github-actions/), [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/), [GitHub squash merges](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/configuring-pull-request-merges/configuring-commit-squashing-for-pull-requests), [Cloudflare CI](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/), [Workers permissions](https://developers.cloudflare.com/workers/authorization/workers/).
 
-## Geprüftes Sites-Archiv für die Datenübernahme
+## Verified Sites archive for data transfer
 
-CI baut beide Anbieterziele aus demselben geprüften Commit. Der GitHub Release
-enthält neben dem regulären Cloudflare-Artefakt ein Sites-Archiv und eine eigene
-Provenienzdatei mit Projekt-ID und SHA-256. Sites verwendet weiterhin den
-Plattformadapter und logische DB-/BUCKET-Bindings; das eigene Cloudflare-Archiv
-ist dafür ungeeignet. Die reguläre Veröffentlichung auf den eigenen Worker bleibt
-automatisiert. Die einmalige Quellenveröffentlichung übernimmt ausschließlich
-das unveränderte, geprüfte Sites-Release-Archiv. Die erforderliche Schreibpause,
-geschützte Sicherung und Go/No-Go-Prüfung stehen in [data-transfer.md](data-transfer.md).
+CI builds both provider targets from the same verified commit. Alongside the
+regular Cloudflare artifact, the GitHub release contains a Sites archive and
+its own provenance file with project ID and SHA-256. Sites still uses the
+platform adapter and logical DB/BUCKET bindings; the owned Cloudflare archive
+is unsuitable for that. Regular publication to the owned Worker stays automated.
+The one-time source publication uses only the unchanged verified Sites release
+archive. Required write pause, protected backup and Go/No-Go checks are in
+[data-transfer.md](data-transfer.md).
 
-### Locale-Mailvorlagen übernehmen
+### Apply locale email templates
 
-Issue #52 benötigt keine Migration und keine neuen Secrets. Der Main-Release
-enthält die zentralen Go-Betreff-/Bodyvorlagen für Bestätigung und Recovery;
-das Worker-Deployment verändert die Supabase-Vorlagen nicht automatisch.
-Die [Provideraktivierung](customer-flow-qa.md#lokalisierte-mailvorlagen-und-provideraktivierung-issue-52)
-verlangt den exakten Abgleich von `SITE_ORIGIN` und tatsächlich gelesener Site URL,
-Export/Go-Vorschau vom Release-Checkout, private Sicherung und Übernahme aller
-vier Providerfelder, erneutes Lesen und isolierten Empfangstest in DE/SQ/EN.
-Die Freigabe erfordert sowohl das geprüfte Release als auch diese Providerabnahme.
-Ein Code-Rollback stellt Providerfelder nicht wieder her; dafür die gesicherten
-vier Felder verwenden. Bestehende SMTP-Werte und Callbackpfade erhalten.
+Issue #52 needs no migration or new secrets. The main release includes central
+Go subject/body templates for confirmation and recovery; Worker deployment
+does not automatically change Supabase templates.
+[Provider activation](customer-flow-qa.md#localized-email-templates-and-provider-activation-issue-52)
+requires exact comparison of `SITE_ORIGIN` and the actually read Site URL,
+export/Go preview from the release checkout, private backup and transfer of all
+four provider fields, rereading and isolated receipt tests in DE/SQ/EN.
+Approval requires both the verified release and provider acceptance.
+A code rollback does not restore provider fields; use the backed-up four fields
+for that. Preserve existing SMTP values and callback paths.
 
-Neue Reviewmails versenden nur Betreff und HTML; `text: ""` schaltet Resends
-automatische Klartexterzeugung aus. Sie verwenden beim ersten
-Versand die validierte Empfängerpräferenz.
-Bereits eingefrorene Nachrichten behalten bei Retries ihre ursprüngliche
-Sprache und identische Requestbytes einschließlich historischer Klartextteile;
-sie benötigen keine Datenübernahme.
-Der Supabase-SMTP-Quellvertrag bietet HTML ohne eigenen MIME-Klartextteil; dieser
-dokumentierte Providerumfang bleibt bei der Empfangsabnahme sichtbar.
+New review emails send only subject and HTML; `text: ""` disables Resend's
+automatic plaintext generation. They use the validated recipient preference
+on the first send. Already frozen messages retain their original language and
+identical request bytes, including historical plaintext parts, on retries;
+they need no data transfer. The Supabase SMTP source contract supplies HTML
+without its own MIME plaintext part; this documented provider scope remains
+visible during receipt acceptance.
 
-## Öffentliche statische Katalog-Releases
+## Public static catalogue releases
 
-Der Cloudflare-Build rendert Katalog und veröffentlichte Profile in DE/SQ/EN
-mit einem isolierten lokalen workerd. Dabei werden ausschließlich geprüfte
-Canonicaldaten verwendet; Runtimekonten und Bewertungen gelangen nicht in
-die HTML-Artefakte. Für geänderte Liveprofile liegen datenfreie Shells bei.
-Der kleine öffentliche Requestpfad prüft Status/Revision gegen D1, bevor er
-ein Asset ausliefert. Private Seiten und RSC bleiben im bestehenden Worker.
+The Cloudflare build renders catalogue and published profiles in DE/SQ/EN with
+an isolated local workerd. It uses only verified canonical data; runtime accounts
+and reviews never enter HTML artifacts. Shells containing no data accompany
+changed live profiles. The small public request path checks status/revision
+against D1 before serving an asset. Private pages and RSC remain in the existing
+Worker.
 
-Das geprüfte Archiv enthält außerdem `dist/catalogue-import.json`. Der
-Deploymentjob vergleicht den Plan mit derselben zentralen Statementfactory
-und der Canonicalquelle des Releasecommits. Nach D1-Migrationen werden die
-begrenzten, revisionsgeschützten Upserts extern ausgeführt, anschließend
-kommt der Abschlussmarker und erst danach der Workerupload. Ein Fehler
-unterdrückt den Upload; derselbe veröffentlichte Release bleibt wiederholbar.
-Das verhindert, dass der erste HTTP-Aufruf den gesamten Katalog unter dem
-Workers-Free-CPU-Limit importieren muss. Neuere Adminrevisionen, bestehende
-Kundenverknüpfungen und Entfernungsmarker bleiben geschützt. Es gibt keine
-neue Migration oder zusätzliche kostenpflichtige Ressource.
+The verified archive also contains `dist/catalogue-import.json`.
+The deployment job compares the plan with the same central statement factory
+and canonical source of the release commit. After D1 migrations, bounded
+revision-protected upserts are executed externally, followed by the completion
+marker and only then Worker upload. An error suppresses upload;
+the same published release remains retryable. This prevents the first HTTP
+request from having to import the entire catalogue under the Workers Free
+CPU limit. Newer admin revisions, existing customer links and removal markers
+remain protected. There is no new migration or additional paid resource.
 
-Bei Katalogänderungen vor dem Merge eine geschützte lokale Sicherung der
-betroffenen Katalogtabellen samt isolierter Wiederherstellungsprüfung
-erhalten. Die tägliche Routine folgt [dem Laufvertrag](daily-workshop-import.md).
+For catalogue changes, retain a protected local backup of affected catalogue
+tables with isolated recovery verification before merging.
+The daily routine follows [the run contract](daily-workshop-import.md).
 
-## Verpflichtende Dokumente für Inhaberansprüche
+## Mandatory documents for ownership claims
 
-Migration `0015_noisy_rockslide.sql` ergänzt `workshop_claims.documents` additiv
-als JSON-Liste mit Default `[]`. Es gibt keinen Datenverlust und keinen Backfill:
-Leser verwenden für alte Einzeldateien weiterhin `file_key`, `file_name` und
-`file_type`; dies gilt auch für Schreibvorgänge des bisherigen Workers während
-des Deployments. Neue Anträge speichern alle Dokumente und spiegeln die erste
-Datei in diesen alten Spalten. Der vorherige Worker kann nach einem Code-Rollback
-weiterarbeiten, zeigt aber nur das erste Dokument. Alle Dateien bleiben im
-privaten Bucket; Kontolöschung entfernt sämtliche Dateien über die vorhandene
-Upload-Inventur und den Konto-Präfix. Export/Restore prüfen alle JSON-Referenzen.
+Migration `0015_noisy_rockslide.sql` additively adds `workshop_claims.documents`
+as a JSON list defaulting to `[]`. There is no data loss or backfill:
+readers still use `file_key`, `file_name` and `file_type` for old single files;
+this also applies to writes by the previous Worker during deployment.
+New requests store all documents and mirror the first file into those old
+columns. The previous Worker can continue after a code rollback, but shows
+only the first document. All files stay in the private bucket; account deletion
+removes every file through the existing upload inventory and account prefix.
+Export/restore check all JSON references.
 
-Nur neue Anträge benötigen 1–5 Dokumente: PDF, JPG oder PNG, jeweils bis 5 MiB,
-zusammen bis 10 MiB. Historische Anträge ohne Datei bleiben prüfbar. Die
-Multipart-Route begrenzt den tatsächlich gelesenen Body auf 11 MiB und akzeptiert
-mehrere `file`-Parts; Textfelder bleiben eindeutig. JSON-Anträge können die
-Dokumentpflicht nicht umgehen. Downloads autorisieren den Antrag vor der
-Auswahl eines Dokuments mit dessen ID.
+Only new requests require 1–5 documents: PDF, JPG or PNG, up to 5 MiB each,
+10 MiB total. Historical requests without a file remain reviewable.
+The multipart route limits the actually read body to 11 MiB and accepts multiple
+`file` parts; text fields remain unique. JSON requests cannot bypass mandatory
+documents. Downloads authorize the claim before selecting a document by its ID.
 
-## Eigene Werkstattöffnungszeiten
+## Own workshop opening hours
 
-Migration `0020_married_magus.sql` ergänzt zwei nullable Spalten in `workshops`.
-Sie ist mit dem bisherigen Worker kompatibel und benötigt keinen Backfill. Alte
-Inhaberentwürfe und Katalogimporte bewahren freigegebene Öffnungszeiten. Nach
-dem Release werden keine Google-Widgets in öffentlichen Profilen mehr geladen;
-bestehende externe Maps- und Routenlinks bleiben verfügbar. Bestätigte Inhaber
-reichen Wochenplan und Ausnahmen über die bestehende Moderation ein.
+Migration `0020_married_magus.sql` adds two nullable columns to `workshops`.
+It is compatible with the previous Worker and needs no backfill.
+Old owner drafts and catalogue imports preserve approved opening hours.
+After the release, public profiles no longer load Google widgets;
+existing external Maps and directions links remain available.
+Confirmed owners submit weekly schedules and exceptions through existing moderation.
 
-## Mehrere Arbeiten pro Bewertung
+## Multiple services per review
 
-Migration `0025_dark_pretty_boy.sql` ergänzt `visits.services` als nullable
-JSON-Spalte und übernimmt vorhandene `service`-Werte als Einzelelementlisten.
-Vor dem produktiven Backfill eine geschützte Plattform-Sicherung mit erfolgreicher
-isolierter Wiederherstellungsprüfung erstellen. Der Deploymentjob wendet die
-Migration vor dem neuen Worker an; bestehende Migrationen bleiben unverändert.
+Migration `0025_dark_pretty_boy.sql` adds `visits.services` as a nullable JSON
+column and transfers existing `service` values as single-element lists.
+Before production backfill, create a protected platform backup with successful
+isolated recovery verification. The deployment job applies migration before
+the new Worker; existing migrations remain unchanged.
 
-Neue Schreibvorgänge spiegeln die erste Kategorie weiterhin in `service`.
-Der bisherige Worker kann während des Deployments und nach einem Code-Rollback
-weiterarbeiten: neue Legacy-Zeilen ohne JSON lesen sich als Einzelkategorie.
-Ändert er nur das skalare Feld, hat dieses beim erneuten Lesen Vorrang vor einer
-abweichenden ersten JSON-Kategorie. Dadurch gehen alte Worker-Änderungen beim
-erneuten Upgrade nicht verloren; veraltete zusätzliche Kategorien werden in
-diesem Fall nicht weiter angezeigt. Bei übereinstimmender erster Kategorie bleibt
-die Mehrfachauswahl erhalten. Ein Code-Rollback entfernt die Spalte nicht und
-zeigt im alten Worker nur die primäre Kategorie. Besuchsnachweise und deren
-Zugriffsregeln bleiben unverändert.
+New writes still mirror the first category into `service`.
+The previous Worker can continue during deployment and after code rollback:
+new legacy rows without JSON read as a single category. If it changes only the
+scalar field, that takes precedence on reread over a differing first JSON
+category. This prevents losing old Worker changes on another upgrade;
+stale additional categories are no longer displayed in that case.
+With a matching first category, multiple selection is preserved.
+A code rollback does not remove the column and shows only the primary category
+in the old Worker. Visit evidence and its access rules remain unchanged.

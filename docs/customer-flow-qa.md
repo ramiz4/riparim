@@ -1,174 +1,174 @@
-# Kundenablauf: Prüfung vom 4. Oktober 2026
+# Customer flow: verification on October 4, 2026
 
-## Live geprüft
+## Verified live
 
-- Die Testregistrierung wurde über die veröffentlichte Site durchgeführt. Der Versanddienst bestätigte die Zustellung, und der Nutzer bestätigte seine E-Mail-Adresse.
-- Die Bestätigungs- und Wiederherstellungsvorlagen im bestehenden Supabase-Projekt verwenden jetzt den serverseitigen Token-Hash-Callback. Der `weiter`-Parameter bleibt erhalten; eine Anmeldung nach Bestätigung führt dadurch zur ursprünglichen Werkstatt und Bewertungsstelle zurück.
-- Eine echte Wiederherstellungs-E-Mail mit der neuen Vorlage wurde zugestellt. Der Nutzer bestätigte die erfolgreiche Passwortänderung und die Rückkehr zur Anmeldung.
-- Anschließend wurde die geprüfte E-Mail-Zustellung in der geschützten Site-Verwaltung freigegeben. Der reguläre Site-Endpunkt `/api/auth/recovery` lieferte HTTP 200; auch diese E-Mail wurde zugestellt. Die Freigabe liegt in der Laufzeitdatenbank, nicht in Git.
+- Test registration was performed through the published site. The delivery service confirmed delivery, and the user confirmed their email address.
+- Confirmation and recovery templates in the existing Supabase project now use the server-side token-hash callback. The `weiter` parameter is preserved; login after confirmation therefore returns to the original workshop and review location.
+- A real recovery email with the new template was delivered. The user confirmed a successful password change and return to login.
+- Verified email delivery was then approved in protected site administration. The regular site endpoint `/api/auth/recovery` returned HTTP 200; that email was also delivered. Approval lives in the runtime database, not Git.
 
-Testadressen, Passwörter, Bestätigungstokens und Sitzungen werden nicht in dieser Dokumentation gespeichert. Das bestehende SMTP-Projekt wurde beibehalten. Die Vorlagen entsprechen dem dokumentierten [Supabase-Token-Hash-Verfahren](https://supabase.com/docs/guides/auth/auth-email-templates); der Versand verwendet [Custom SMTP](https://supabase.com/docs/guides/auth/auth-smtp).
+Test addresses, passwords, confirmation tokens, and sessions are not stored in this documentation. The existing SMTP project was retained. Templates follow the documented [Supabase token-hash procedure](https://supabase.com/docs/guides/auth/auth-email-templates); delivery uses [Custom SMTP](https://supabase.com/docs/guides/auth/auth-smtp).
 
-## Bewertungsablauf im lokalen Browser
+## Review flow in the local browser
 
-Der portable Entwicklungsserver verwendete ausschließlich die lokale Testidentität und projektlokale SQLite-/R2-Speicher. Eine ausdrücklich als Test gekennzeichnete Bewertung wurde mit einer PNG-Testdatei eingereicht. Sie erschien zunächst nur unter den eigenen Einreichungen und in der Prüfverwaltung. Ein nicht angemeldeter Abruf des privaten Nachweises wurde mit HTTP 401 zurückgewiesen.
+The portable development server used only the local test identity and project-local SQLite/R2 storage. A review explicitly labeled as a test was submitted with a PNG test file. It initially appeared only under the person's own submissions and in review administration. An unauthenticated request for the private evidence was rejected with HTTP 401.
 
-Nach lokaler Admin-Freigabe erschienen Text und vier Sterne im Werkstattprofil. Eine Bearbeitung verwendete den vorhandenen Beleg weiter und setzte die Einreichung erneut auf „In Prüfung“; die öffentliche Bewertung verschwand. Anschließend wurde die gesamte lokale Einreichung gelöscht. Die eigenen und öffentlichen Listen waren leer, der Nachweis lieferte HTTP 404, und die lokalen R2-Objekt-, Multipart- und Part-Tabellen enthielten jeweils null Datensätze. Es wurden keine fiktiven Kundenbewertungen in Produktion veröffentlicht.
+After local admin approval, text and four stars appeared in the workshop profile. Editing reused the existing evidence and returned the submission to the localized status “In Prüfung” (“Under review”); the public review disappeared. The entire local submission was then deleted. Personal and public lists were empty, the evidence returned HTTP 404, and local R2 object, multipart, and part tables each contained zero records. No fictional customer reviews were published in production.
 
-## Automatisierte Prüfung
+## Automated checks
 
-`npm test` prüft die Routen mit isolierten Provider-, SQLite- und R2-Fixtures. Neu abgedeckt sind der gesamte E-Mail-Ablauf mit erhaltenem Rücksprungziel, ungültige Tokens, Providerfehler, Passwortänderung mit kontoübergreifender Sitzungswiderrufung und Abmeldung. Die Speicherprüfungen umfassen jetzt auch fehlgeschlagene Löschung mit Wiederholung, drei Seiten alter Belege und eine Löschung während eines verspäteten Ersatz-Uploads. Diese Tests senden keine echten E-Mails und verändern keine Produktionsdaten.
+`npm test` checks routes with isolated provider, SQLite, and R2 fixtures. New coverage includes the complete email flow with preserved return destination, invalid tokens, provider errors, password changes with account-wide session revocation, and logout. Storage checks now also include failed deletion with retry, three pages of old evidence, and deletion during a delayed replacement upload. These tests send no real emails and change no production data.
 
-Die übrigen Freigabeprüfungen sind `npm run catalog:check`, `npx tsc --noEmit`, `npm run lint` und der Sites-Worker-Build. Der Katalogtest schützt die neun neuen Freigaben, 13 bestätigten Koordinaten und zwei zurückgestellten Standortkonflikte. Der Entfernungstest berücksichtigt den ergänzten GeoNames-Suchursprung für Skenderaj.
+Other publication checks are `npm run catalog:check`, `npx tsc --noEmit`, `npm run lint`, and the Sites Worker build. The catalogue test protects the nine new approvals, 13 confirmed coordinates, and two deferred location conflicts. The distance test accounts for the added GeoNames search origin for Skenderaj.
 
-## Eigenständige eigene Bewertungen (Issue #61)
+## Standalone personal reviews (Issue #61)
 
-`/bewertungen`, `/sq/bewertungen` und `/en/bewertungen` verwenden die reguläre Seitenstruktur mit gemeinsamer Seitenbreite, Überschrift und einer Wiederholungsaktion bei Ladefehlern. Die eigene Historie hat keinen Modalrahmen; Bearbeitung und Löschbestätigung behalten ihre vorhandenen Dialoge. Alte Landing-Links leiten serverseitig auf diese Seite weiter. Gültige `einreichung`-Ziele und die Sprache bleiben durch die bestehende Anmeldung erhalten; ungültige oder mehrdeutige Einreichungsziele werden verworfen.
+`/bewertungen`, `/sq/bewertungen`, and `/en/bewertungen` use the regular page structure with shared page width, heading, and a retry action on loading errors. Personal history has no modal frame; editing and deletion confirmation retain their existing dialogs. Old landing links redirect server-side to this page. Valid `einreichung` targets and language survive the existing login flow; invalid or ambiguous submission targets are discarded.
 
-Die beobachtbaren Testgrenzen sind die gerenderte React-Seite und Navigation sowie HTTP-, Authentifizierungs- und Metadatenverträge. `tests/my-reviews-page.test.mjs` prüft Direktaufruf, sicheren Anmelderückweg, Legacy-Weiterleitung, DE/SQ/EN-Metadaten und den Ladehinweis vor Hydration. `tests/notification-link-ui.test.mjs` prüft gezielte Einreichungen, die Rückkehr zur vollständigen Historie und erneut zum gezielten Ziel sowie abgewiesene fremde Einreichungen. `tests/my-reviews-ui.test.mjs` deckt Lade-, Leer- und Fehlerzustände, abgelaufene Sitzungen, private Downloads, Bearbeiten/Ergänzen/Vervollständigen, Pagination, Nachladen nach Dialogschluss und Fehlerwiederholung, Löschbestätigung einschließlich Fokus/Escape und Wiederholung sowie Kontoänderung mit verspäteter Antwort ab. Die vorhandenen API-Fixtures für Besitzrechte und Nachweise bleiben unverändert maßgeblich.
+Observable test boundaries are the rendered React page and navigation, plus HTTP, authentication, and metadata contracts. `tests/my-reviews-page.test.mjs` checks direct visits, safe login return, legacy redirects, DE/SQ/EN metadata, and the loading notice before hydration. `tests/notification-link-ui.test.mjs` checks targeted submissions, returning to complete history and back to the targeted destination, and rejected foreign submissions. `tests/my-reviews-ui.test.mjs` covers loading, empty, and error states, expired sessions, private downloads, editing/supplementing/completing, pagination, reloading after dialog closure, error retry, deletion confirmation including focus/Escape and retry, and an account change with a late response. Existing API fixtures for ownership rights and evidence remain authoritative and unchanged.
 
-Die Red-Schritte wurden mit `node tests/notification-link-ui.test.mjs`, `node tests/customer-localization-ui.test.mjs`, `node tests/my-reviews-page.test.mjs`, `node tests/notifications.test.mjs` und `node tests/my-reviews-ui.test.mjs` tatsächlich ausgeführt: Modalrahmen, alter Menü-/Mailrückweg, fehlende Weiterleitung, fehlender initialer Ladehinweis beziehungsweise fehlender Anmelderückweg nach Sitzungsablauf. Dieselben Befehle bestehen nach der Umsetzung. Alle Fixtures verwenden fiktive Konten und Inhalte; sie senden keine echten E-Mails und ändern keine Produktionsdaten. `tests/i18n-worker.test.mjs` prüft zusätzlich die privaten Dokumente und Legacy-Weiterleitungen in beiden tatsächlich gebauten Worker-Artefakten.
+Red steps were actually run with `node tests/notification-link-ui.test.mjs`, `node tests/customer-localization-ui.test.mjs`, `node tests/my-reviews-page.test.mjs`, `node tests/notifications.test.mjs`, and `node tests/my-reviews-ui.test.mjs`: modal frame, old menu/email return path, missing redirect, missing initial loading notice, or missing login return after session expiry. The same commands pass after implementation. Every fixture uses fictional accounts and content; none sends real emails or changes production data. `tests/i18n-worker.test.mjs` additionally checks private documents and legacy redirects in both actually built Worker artifacts.
 
-Die native Prüfung am 06.10.2026 verwendete das vorgegebene Chrome-Profil, die tatsächlichen Komponenten und Projekt-CSS mit fiktiven Antworten für die eigene Historie. Bei 390 Pixeln dunkel mit gefüllter Liste, 1280 Pixeln hell mit Leerzustand sowie 390/1280 Pixeln mit Systemtheme und Fehler-/Ladezustand entsprachen Dokument- und Scrollbreite jeweils dem Viewport; das Systemtheme war auf diesem Rechner hell. Die Übersicht hatte keinen Dialog-Overlay. Der Ladehinweis war sichtbar und Aktualisieren gesperrt; Leer- und Fehlerhinweise sowie der Privatheitshinweis blieben erreichbar. Die gezielte Einreichung zeigte einen Datensatz, die vollständige Historie vier. Browser-Zurück und -Vorwärts stellten diese Ziele wieder her. Ergänzen öffnete die vorhandenen Formularwerte und den bisherigen fiktiven Beleg; Tab erreichte den privaten Downloadlink.
+Native verification on 2026-10-06 used the specified Chrome profile, actual components, and project CSS with fictional responses for personal history. At 390 pixels in dark mode with a populated list, 1280 pixels in light mode with an empty state, and 390/1280 pixels with system theme and error/loading states, document and scroll widths each matched the viewport; system theme was light on this computer. The overview had no dialog overlay. The loading notice was visible and refresh disabled; empty/error messages and the privacy notice remained reachable. A targeted submission showed one record; complete history showed four. Browser back/forward restored those targets. Supplementing opened existing form values and the previous fictional evidence; Tab reached the private download link.
 
-Das unabhängige Review und eine DOM-Probe reproduzierten nach Dialogschluss Fokus auf `BODY`. Der zusätzliche Red-Schritt scheiterte an der erwarteten Rückkehr zur auslösenden Ergänzungsaktion. Die korrigierte UI-Suite besteht mit 33 Prüfungen: Schließen/Escape/Abbrechen von Ergänzung, Bearbeitung, Vervollständigung und Löschbestätigung, verzögerte Listenaktualisierung, Aktualisieren als Fokusziel nach entfernten Zeilen sowie erhaltene spätere Navigation oder Fokusbewegung. Die native Nachprüfung bestätigte nach Escape Fokus auf Ergänzen beziehungsweise Löschen. Die Rückkehr berücksichtigt den [APG-Dialogablauf](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/).
+Independent review and a DOM probe reproduced focus on `BODY` after dialog closure. The additional red step failed on expected return to the triggering supplement action. The corrected UI suite passes with 33 checks: close/Escape/cancel for supplementing, editing, completing, and deletion confirmation; delayed list refresh; refresh as the focus target after removed rows; and preservation of later navigation or focus movement. Native rechecking confirmed focus on supplement or delete after Escape. Return behavior follows the [APG dialog workflow](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/).
 
-Am tatsächlichen lokalen App-Server lieferte der alte englische Einreichungslink HTTP 307 zur neuen lokalisierten URL. Direktaufruf und Browser-Neuladen lieferten HTTP 200 mit „My reviews“ und demselben validierten Ziel; die Anmeldeschaltfläche enthielt den vollständigen lokalisierten Rückweg. Die serverseitige Ausgabe war `noindex,nofollow`. Im nativen Profil meldete React zusätzlich eine Hydrationswarnung für `cz-shortcut-listen` am Body; dieses Attribut fehlte im erneut gelesenen Server-HTML und weist auf eine Browser-Injektion hin. Die Prüfungen verwenden keine echten Konten oder Nachweise, ändern keine Providerkonfiguration und bestätigen keine neue Live-Provideraktivierung.
+At the actual local app server, the old English submission link returned HTTP 307 to the new localized URL. Direct visits and browser reload returned HTTP 200 with “My reviews” and the same validated target; the login button contained the complete localized return path. Server output was `noindex,nofollow`. In the native profile, React also reported a hydration warning for `cz-shortcut-listen` on the body; this attribute was absent from newly read server HTML and indicates browser injection. These checks use no real accounts or evidence, change no provider configuration, and confirm no new live provider activation.
 
-## Google-Anmeldung
+## Google login
 
-Die Google-OAuth-App und der Web-Client wurden im bestehenden Cloud-Projekt angelegt. JavaScript-Ursprung ist `https://riparim.com`; Weiterleitung ist die vom bestehenden Supabase-Projekt bereitgestellte OAuth-Callback-Adresse. Der geheime Clientschlüssel gehört ausschließlich in die Google-Provider-Einstellung von Supabase. Die Anmeldung benötigt nur `openid`, Profil und E-Mail, wie in der [offiziellen Einrichtung](https://supabase.com/docs/guides/auth/social-login/auth-google) beschrieben.
+The Google OAuth app and web client were created in the existing Cloud project. JavaScript origin is `https://riparim.com`; the redirect is the OAuth callback address supplied by the existing Supabase project. The secret client key belongs only in Supabase's Google provider setting. Login needs only `openid`, profile, and email, as described in the [official setup](https://supabase.com/docs/guides/auth/social-login/auth-google).
 
-Der Nutzer hat den Clientschlüssel direkt in Supabase hinterlegt, den Provider aktiviert und die erfolgreiche echte Google-Anmeldung bestätigt. Das Google-Branding ist noch nicht verifiziert; deshalb erscheint im Kontoauswahlfenster derzeit die technische Supabase-Domain. Fixture-Ergebnisse allein bestätigen keine produktive Google-Anmeldung.
+The user stored the client key directly in Supabase, enabled the provider, and confirmed successful real Google login. Google branding is not yet verified; the account selection window therefore currently shows the technical Supabase domain. Fixture results alone do not confirm production Google login.
 
-Beim Abgleich mit dem parallel veröffentlichten Theme wurde die Google-Abmeldung korrigiert: Der Header verwendet für Google und E-Mail den App-Abmelde-Endpunkt, der die aktuelle Sitzung widerruft und die Provider-Cookies entfernt. Der native ChatGPT-Abmeldeweg bleibt für ChatGPT-Konten vorgesehen. Die Header-Regressionsprüfung reproduzierte den bisherigen Fehler und besteht nach der Korrektur; die Auth-Routenprüfung bestätigt zusätzlich den Widerruf einer zuvor verifizierten Google-Sitzung.
+When reconciling with the concurrently published theme, Google logout was corrected: the header uses the app logout endpoint for Google and email, revoking the current session and removing provider cookies. The native ChatGPT logout path remains intended for ChatGPT accounts. The header regression check reproduced the previous bug and passes after correction; auth route checks additionally confirm revocation of a previously verified Google session.
 
-## Eigene Kontoverwaltung
+## Self-service account management
 
-Die Kontoeinstellungen wurden mit fiktiven Konten geprüft: validierter Anzeigename ohne Änderung bestehender Bewertungsnamen, erneute Passwortprüfung und Google-OAuth-Bestätigung, getrennte Löschbestätigung, fremde Kontoziele, abgelaufene Berechtigungen sowie geschützte Verwaltungszugänge. Die UI-Prüfung umfasst Tastaturfokus, Escape, Abbrechen, deaktivierte Aktionen während laufender Anfragen und die Wiederholung einer unterbrochenen Löschung. Die Oberfläche wurde zusätzlich im Browser mit fiktiven Daten in hellem Desktop- und dunklem Mobil-Layout geprüft.
+Account settings were checked with fictional accounts: validated display name without changing existing review names, fresh password verification and Google OAuth confirmation, separate deletion confirmation, foreign account targets, expired permissions, and protected administration access. UI checks include keyboard focus, Escape, cancel, disabled actions during running requests, and retry of an interrupted deletion. The UI was also checked in the browser with fictional data in a light desktop layout and dark mobile layout.
 
-Die Speicher-Regressionsprüfungen pausieren einen Nachweisupload vor dem R2-Schreiben und beginnen währenddessen die Kontolöschung. Die Löschung entfernt die leere R2-Reservierung, sodass die atomare ETag-Bedingung den verspäteten Dateischreibvorgang abweist. Auch bei fehlgeschlagener Kompensation dürfen keine privaten Dateiinhalte nachträglich gespeichert werden. Das Inventar macht nötige Bereinigungen sichtbar. Zusätzliche Prüfungen decken abgebrochene Reservierungen mit und ohne vorhandenes R2-Objekt ab. Ein weiterer Test löscht das Providerkonto erfolgreich und lässt danach die lokale Abschlussbereinigung scheitern: Das Konto erscheint weiterhin als unvollständige Löschung in der Verwaltung und die administrative Wiederholung funktioniert auch bei Provider-HTTP-404.
+Storage regression checks pause an evidence upload before writing to R2 and start account deletion meanwhile. Deletion removes the empty R2 reservation so that the atomic ETag condition rejects the late file write. Even on failed compensation, private file contents must not be stored afterwards. The inventory makes necessary cleanup visible. Additional checks cover abandoned reservations with and without an existing R2 object. Another test successfully deletes the provider account and then fails local final cleanup: the account still appears as incomplete deletion in administration, and administrative retry works even with provider HTTP 404.
 
-Die Prüfungen verändern keine echten Konten und ersetzen keine produktive Prüfung des neuen Kontobereichs. Vor Veröffentlichung sind D1-Migrationen `0009` und `0010` erforderlich; es sind keine neuen Supabase-E-Mailvorlagen nötig.
+Checks change no real accounts and do not replace production verification of the new account section. D1 migrations `0009` and `0010` are required before publication; no new Supabase email templates are needed.
 
-## Betriebszugang
+## Business access
 
-Der neue Betriebsablauf wird mit isolierten Konten und einer privaten SQLite-Datenbank geprüft: Antrag mit privater Begründung und Beleglinks, begründete manuelle Entscheidung, ausschließlich zugeordnete Profile, Entwürfe vor Veröffentlichung, Konkurrenz- und Dublettenfälle, verlorene Moderationsrechte, verknüpfte Altbesitzer und Bereinigung bei Kontolöschung. Google-Fixtures prüfen erfolgreiche und fehlerhafte Kontaktvalidierung ohne Änderung der öffentlichen Zuordnung; konkurrierende Entscheidungen dürfen keine fremden Metadaten übernehmen. Die UI-Prüfungen decken beschriftete Formulare, Fehler- und Leerzustände, erhaltene Eingaben, Statusanzeigen, Bestätigungsdialog, Tastaturfokus, Escape sowie gesperrte Aktionen bei laufenden Anfragen ab. Es werden keine echten Betriebsanträge oder Google-Abfragen erzeugt. Moderationsliste und eigene Historie besitzen getrennte Folgeseiten; eine 101-Anträge-Fixture bestätigt, dass ältere offene Anträge bei identischen Zeitstempeln vollständig erreichbar bleiben. Ungültige Telefonnummern und WhatsApp-Kontakte liefern korrigierbare Eingabefehler. Der Betriebsbereich und die Freigabeliste wurden zusätzlich im Browser mit fiktiven Daten bei 1280 Pixeln im hellen Theme und 390 Pixeln im dunklen Theme auf Beschriftungen und Überlauf geprüft. Vor Veröffentlichung ist Migration `0011` erforderlich.
+The new business flow is checked with isolated accounts and a private SQLite database: request with private justification and evidence links, reasoned manual decision, assigned profiles only, drafts before publication, competition/duplicate cases, lost moderation rights, linked legacy owners, and cleanup on account deletion. Google fixtures check successful and failed contact validation without changing public assignment; concurrent decisions must adopt no foreign metadata. UI checks cover labeled forms, error/empty states, preserved input, status displays, confirmation dialog, keyboard focus, Escape, and blocked actions during running requests. No real business requests or Google queries are created. Moderation list and personal history have separate pagination; a fixture with 101 requests confirms that older pending requests remain fully reachable with identical timestamps. Invalid phone numbers and WhatsApp contacts produce correctable input errors. The business section and approval list were also checked in the browser with fictional data at 1280 pixels in light theme and 390 pixels in dark theme for labels and overflow. Migration `0011` is required before publication.
 
-## Moderationsbenachrichtigungen
+## Moderation notifications
 
-Isolierte Versand-Fixtures prüfen atomare Moderation/Ereignisspeicherung, verifizierte Empfänger und bestätigte Altverknüpfungen, private Inhalte, sichere gezielte Anmeldelinks, gleichzeitige Entscheidungen und Versandversuche, dauerhafte Backoffs einschließlich der Begrenzung fehlgeschlagener Empfängerabfragen, fehlende Konfiguration/Kontakte sowie Netzwerk- und Datenbankfehler nach einer bereits angenommenen Nachricht. Wiederholungen verwenden exakt denselben Inhalt und Idempotenzschlüssel; abgelaufene Schlüssel und geänderte Empfänger oder Zugangsdaten führen zu blockierten Versandereignissen. Die geschützte Versand-API unterscheidet Vormerkung, Übergabe und unklare Ergebnisse und erlaubt keine blinde Wiederholung nach Ablauf. „Bewertungen prüfen“ enthält keinen Versandbereich; Moderationsentscheidungen lösen weiterhin den automatischen Versand aus. Die React-Prüfung bewahrt Suche, Tastaturfilter, private Nachweislinks, Prüfentscheidungen, Folgeseiten und Ergebniszähler. Ein gezieltes erneutes Laden am Fehlerzustand wiederholt ausschließlich den Listenabruf, auch nach einer bereits erfolgreichen Moderation.
+Isolated delivery fixtures check atomic moderation/event storage, verified recipients and confirmed legacy links, private content, safe targeted login links, concurrent decisions and delivery attempts, durable backoffs including limits for failed recipient lookups, missing configuration/contacts, and network/database errors after a message has already been accepted. Retries use exactly the same content and idempotency key; expired keys and changed recipients or credentials cause blocked delivery events. The protected delivery API distinguishes queued events, handoffs, and uncertain outcomes, and allows no blind retry after expiry. The localized “Bewertungen prüfen” (“Review submissions”) page contains no delivery section; moderation decisions still trigger automatic delivery. React checks preserve search, keyboard filters, private evidence links, review decisions, pagination, and result counters. A targeted reload at the error state retries only list fetching, including after already successful moderation.
 
-Ein zusätzlicher Miniflare-Test führt den tatsächlichen Worker-Scheduled-Handler mit nativer D1-Datenbank aus. Sämtliche Provideranfragen werden innerhalb dieses isolierten Workers abgefangen; es werden keine echten E-Mails verschickt. Der Scheduler übergibt ein Ereignis einmalig und überspringt es beim nächsten Lauf. Vor Veröffentlichung ist Migration `0012` erforderlich, außerdem die serverseitige Resend-Konfiguration und der im Artefakt deklarierte Fünf-Minuten-Cron. Die bestehende Auth-Domain wurde beim Dienst als bestätigt und für Versand aktiviert gelesen; eine echte Zustellung der neuen Vorlagen wurde nicht geprüft.
+An additional Miniflare test runs the actual Worker scheduled handler with native D1. All provider requests are intercepted inside this isolated Worker; no real emails are sent. The scheduler hands off one event once and skips it on the next run. Before publication, migration `0012` is required, along with server-side Resend configuration and the five-minute cron declared in the artifact. The existing auth domain was read as verified and enabled for delivery at the service; real delivery of the new templates was not checked.
 
-## Kundenabläufe in drei Sprachen (Issue #50)
+## Customer flows in three languages (Issue #50)
 
-Die isolierte DE/SQ/EN-Matrix prüft Signup → Bestätigung → separate Anmeldung
-mit ursprünglichem Werkstattziel, Recovery → Reset → Anmeldung, Google-Erfolg
-und Abbruch, eigene Google-Löschreauth sowie Abmeldung. APIs erhalten explizit
-`locale`; fehlende Werte bleiben deutsch kompatibel, ungültige Werte liefern
-400 vor Provider-/Konfigurationszugriff. Der physische Callback und seine
-Cookiepfade bleiben `/auth/bestaetigen`. Sein gemeinsamer Mailvertrag beginnt
-mit `?locale=…&weiter=…`; alte `type=signup`-Callbacks bleiben gültig.
+The isolated DE/SQ/EN matrix checks signup → confirmation → separate login
+with the original workshop target, recovery → reset → login, Google success
+and cancellation, Google reauth for self-deletion, and logout. APIs receive explicit
+`locale`; missing values preserve German compatibility, and invalid values return
+400 before provider/configuration access. The public callback and its
+cookie paths remain `/auth/bestaetigen`. Its shared email contract starts
+with `?locale=…&weiter=…`; old `type=signup` callbacks remain valid.
 
-`tests/google-auth.test.mjs` verwendet echte Routen und eine private SQLite-
-Fixture mit abgefangenen Provideraufrufen. `tests/account-settings.test.mjs`
-prüft die eigenständige Sprachpräferenz am bestätigten eigenen Konto,
-Metadatenerhalt, fremde Ziele, Mischpayloads, Rollenfelder und Providerfehler.
-Der Sprachwähler wartet höchstens drei Sekunden auf das Speichern; bei Fehler
-oder Timeout navigiert er trotzdem und zeigt nach Reload die sichere lokale
-Notice. Native ChatGPT-Konten überspringen den Schreibversuch.
-`tests/i18n-switcher.test.mjs` deckt diesen Vertrag ab; die lokale native
-Simulation behält Loopback-/Header-/Prefetchgrenzen in
+`tests/google-auth.test.mjs` uses real routes and a private SQLite
+fixture with intercepted provider calls. `tests/account-settings.test.mjs`
+checks the independent language preference on the verified own account,
+metadata preservation, foreign targets, mixed payloads, role fields, and provider errors.
+The language selector waits at most three seconds for saving; on failure
+or timeout it navigates anyway and shows the safe localized
+notice after reload. Native ChatGPT accounts skip the write attempt.
+`tests/i18n-switcher.test.mjs` covers this contract; the local native
+simulation preserves loopback/header/prefetch boundaries in
 `tests/i18n-native-auth.test.mjs`.
 
-Die tatsächlichen React-/Radix-Komponenten werden durch
-`tests/customer-localization-ui.test.mjs` und
-`tests/account-settings-ui.test.mjs` mit aktiven Katalogen geprüft: lokale
-Beschriftungen und Fehler, Passwortanzeige, Sternbedienung per Tastatur,
-Dialogfokus/Escape, erhaltene Originalinhalte und bestehende kanonische
-Leistungs-/Nachweiswerte. Kontolöschung verlangt exakt `KONTO LÖSCHEN`,
-`DELETE ACCOUNT` beziehungsweise `FSHI LLOGARINË`; erst danach sendet der
-Client den bestehenden deutschen Sentinel. Die serverseitigen eigenen
-Deletion-Grants und Schutzregeln bleiben maßgeblich.
+Actual React/Radix components are checked by
+`tests/customer-localization-ui.test.mjs` and
+`tests/account-settings-ui.test.mjs` with active catalogues: localized
+labels and errors, password visibility, keyboard star operation,
+dialog focus/Escape, preserved original content, and existing canonical
+service/evidence values. Account deletion requires exactly `KONTO LÖSCHEN`,
+`DELETE ACCOUNT`, or `FSHI LLOGARINË`; only then does the
+client send the existing German sentinel. Server-side self-deletion
+grants and protection rules remain authoritative.
 
-`tests/combined-reviews.test.mjs` vergleicht erfolgreiche Downloadbytes und
-Header und prüft lokale Plaintextfehler mit identischen 401/404-Statuscodes und
-`X-Riparim-Error-Code`. Kunden- und Administrationslinks verwenden denselben
-Downloadhelfer. Auth-/Kontometadaten und private Landing-Querymodi sind
-`noindex,nofollow` ohne öffentliche Alternates; die normale Landing bleibt
-indexierbar. Metadatenfixtures und beide tatsächlichen Worker-Builds prüfen
-diese Grenze. Keine dieser Fixtures nutzt persönliche Konten, echte Belege,
-Live-E-Mails oder Produktionsänderungen. Browsergeometrie/Themes/Zoom werden
-vor der PR-Freigabe gesondert koordiniert.
+`tests/combined-reviews.test.mjs` compares successful download bytes and
+headers and checks localized plain-text errors with identical 401/404 status codes and
+`X-Riparim-Error-Code`. Customer and administration links use the same
+download helper. Auth/account metadata and private landing query modes are
+`noindex,nofollow` without public alternates; the ordinary landing page stays
+indexable. Metadata fixtures and both actual Worker builds check
+this boundary. None of these fixtures uses personal accounts, real evidence,
+live emails, or production changes. Browser geometry/themes/zoom are
+coordinated separately before PR approval.
 
-## Betrieb und Verwaltung in drei Sprachen (Issue #51)
+## Business and administration in three languages (Issue #51)
 
-Die isolierten React-/Radix-Prüfungen verwenden die tatsächlich aktiven
-DE/SQ/EN-Kataloge: Verwaltungsnavigation, Betreiberentwurf, Werkstatteditor,
-Benutzer-/Rollenbestätigung, Bewertungsmoderation und Auth-Konfiguration.
-Originaltexte, bestehende Leistungen/Beratungssprachen, Rollen, Status,
-Einreichungsrevisionen und technische Projektwerte bleiben in den Requests
-unverändert. Lokale Fehler behalten Entwürfe und zeigen keine rohen Providertexte.
-Bestehende Prüfungen bewahren Tastaturfokus, Escape, gesperrte Aktionen bei
-laufenden Mutationen, Rollen-/Sitzungswiderruf und geschützte Konten.
+Isolated React/Radix checks use the actually active
+DE/SQ/EN catalogues: administration navigation, owner drafts, workshop editor,
+user/role confirmation, review moderation, and auth configuration.
+Original text, existing services/consultation languages, roles, status,
+submission revisions, and technical project values remain unchanged
+in requests. Localized errors preserve drafts and show no raw provider text.
+Existing checks preserve keyboard focus, Escape, blocked actions during
+running mutations, role/session revocation, and protected accounts.
 
-Die tatsächlichen Business-, Workshop-, Benutzer-, Konfigurations- und
-Versandrouten werden mit isolierter SQLite-Datenbank und abgefangenen
-Providergrenzen geprüft. Stabile Fehlercodes und ursprüngliche HTTP-/Textverträge
-gelten auch für SQ-/EN-Anfragen. Ein verzögerter administrativer Anzeigenamenpatch
-darf keine inzwischen geänderte Sprachpräferenz oder andere Metadaten zurücksetzen.
-Dieser Test prüft den API-Keymerge-Vertrag, keine produktive Providerkonkurrenz.
+Actual business, workshop, user, configuration, and
+delivery routes are checked with isolated SQLite and intercepted
+provider boundaries. Stable error codes and original HTTP/text contracts
+also apply to SQ/EN requests. A delayed administrative display-name patch
+must not reset an intervening changed language preference or other metadata.
+This test checks the API key-merge contract, not production provider concurrency.
 
-Versanddiagnosen übersetzen Zustände und Ursachen und lokalisieren Versuchszähler
-sowie Kosovo-Zeit einschließlich Sommerzeit. „An Versanddienst übergeben“
-bestätigt weiterhin keine Zustellung. Metadatenfixtures und beide tatsächlichen
-Worker-Builds prüfen alle sechs geschützten Routen auf `noindex,nofollow` ohne
-private Sprachalternativen. Browsergeometrie, Themes und Zoom werden vor der
-PR-Freigabe getrennt mit einem temporären Harness der echten Komponenten und
-fiktiven Daten geprüft. Keine persönlichen Konten, echten Nachweise oder
-Live-E-Mails dienen als Fixtures; Providerkonfiguration und Mailaktivierung
-bleiben dem Folgeissue und dem geprüften Main-Release vorbehalten.
+Delivery diagnostics translate states and causes and localize attempt counters
+and Kosovo time, including daylight saving. The localized “An Versanddienst übergeben” (“Handed to delivery service”)
+continues not to confirm delivery. Metadata fixtures and both actual
+Worker builds check all six protected routes for `noindex,nofollow` without
+private language alternates. Browser geometry, themes, and zoom are checked
+separately before PR approval with a temporary harness of actual components and
+fictional data. Personal accounts, real evidence, and
+live emails are not fixtures; provider configuration and email activation
+remain reserved for the follow-up issue and verified main release.
 
-Nach Integration von Issue #52 prüfen die tatsächlichen AuthSetup-Komponenten
-in allen drei Locales vier getrennte Betreff-/HTML-Felder und deren
-Clipboardaufrufe bytegenau gegen die zentralen Go-Exporte. Technischer Quellcode
-wird angezeigt, nicht als HTML ausgeführt oder übersetzt. Abgewiesene
-Clipboardaufrufe zeigen nur lokale manuelle Kopierhinweise. Der angezeigte
-Übernahmevertrag umfasst tatsächliche kanonische Originwerte, erhaltene
-Callbackfreigaben, Release-Export und Go-Vorschauen, alle vier Providerdateien,
-erneutes Lesen sowie Empfangstest/Rückweg; keine reine Bodyübernahme.
+After integration of Issue #52, actual AuthSetup components
+in all three locales check four separate subject/HTML fields and their
+clipboard calls byte-for-byte against central Go exports. Technical source code
+is displayed, not executed as HTML or translated. Rejected
+clipboard calls show only localized manual-copy instructions. The displayed
+adoption contract includes actual canonical origin values, preserved
+callback permissions, release export and Go previews, all four provider files,
+readback, receipt testing, and return path; not body-only adoption.
 
-## Lokalisierte Mailvorlagen und Provideraktivierung (Issue #52)
+## Localized email templates and provider activation (Issue #52)
 
-Die zentralen Bestätigungs- und Recoveryvorlagen enthalten DE/SQ/EN-Betreff
-und HTML-Body. Nur der exakte locale-first Redirectprefix wählt SQ/EN;
-leere, kurze, alte oder abweichende URLs bleiben deutsch. Der Längenguard
-verhindert einen Slice-Fehler im unveränderten Body. Die Betreffquellen müssen
-bereits vor dem Rendering in das 255-Zeichen-Feld des Supabase-Dashboards passen.
-Sie verwenden kompakte zentrale Betreffcopy und einen vollständigen Prefixvergleich
-mit Go-`printf`-Stringpräzision statt `slice`. Die kanonisch validierte Origin ist
-ASCII (internationale Hosts stehen in Punycode); daher entspricht die Runenpräzision
-hier der Prefix-Bytelänge. Kurze oder fehlende Redirects bleiben sicher deutsch.
-Die HTML-Titel behalten ihre ausführliche Copy; sie müssen nicht dem kürzeren
-Betreff entsprechen. `tests/auth-email-export.test.mjs` prüft die tatsächlichen
-exportierten Betreffquellen gegen die 255-Zeichen-Grenze.
-`tests/auth-email-templates.test.mjs` führt
-beide zentralen Felder mit Go `html/template` ohne `FuncMap` aus und prüft
-Sonderzeichen, Token-URLescaping, Sprache, direkte Bodycontainer, Titel und CTA.
-Der [geprüfte Supabase-Mailer](https://github.com/supabase/auth/blob/ce9a8eee0cc042be8c7a42981a7ddae631e41d91/internal/mailer/templatemailer/template.go)
-parst beide Felder mit `html/template` und ruft erst `subject.Execute`, dann
-`body.Execute` auf. Die lokale Go-Prüfung beweist diesen Quellvertrag; die
-gehostete Betreffauswertung wird erst durch den Empfangstest bestätigt.
+Central confirmation and recovery templates contain DE/SQ/EN subjects
+and HTML bodies. Only the exact locale-first redirect prefix selects SQ/EN;
+empty, short, old, or differing URLs remain German. The length guard
+prevents a slice error in the unchanged body. Subject sources must
+fit within the Supabase dashboard's 255-character field before rendering.
+They use compact central subject copy and a full prefix comparison
+with Go `printf` string precision instead of `slice`. The canonically validated origin is
+ASCII (international hosts use Punycode); rune precision therefore matches
+prefix byte length here. Short or missing redirects safely remain German.
+HTML titles retain their longer copy; they need not match the shorter
+subject. `tests/auth-email-export.test.mjs` checks actual
+exported subject sources against the 255-character limit.
+`tests/auth-email-templates.test.mjs` executes
+both central fields with Go `html/template` without `FuncMap` and checks
+special characters, token URL escaping, language, direct body containers, title, and CTA.
+The [verified Supabase mailer](https://github.com/supabase/auth/blob/ce9a8eee0cc042be8c7a42981a7ddae631e41d91/internal/mailer/templatemailer/template.go)
+parses both fields with `html/template`, then calls `subject.Execute` followed by
+`body.Execute`. Local Go verification proves this source contract;
+hosted subject evaluation is confirmed only by receipt testing.
 
-Die Providerübernahme erfolgt separat aus einem geprüften Main-Release:
+Provider adoption happens separately from a verified main release:
 
-1. Im bestehenden Supabase-Projekt die tatsächliche Site URL, Redirect-Allowlist
-   und die bisherigen vier Betreff-/Bodyfelder als privaten Rückweg sichern.
-   SMTP-Zugangsdaten bleiben unverändert und außerhalb des Exports.
-2. Worker-`SITE_ORIGIN` und tatsächlich gelesene Supabase Site URL müssen exakt
-   dieselbe kanonische Origin ohne abschließenden Slash enthalten. Vom
-   Release-Checkout mit dem tatsächlich gelesenen Providerwert exportieren:
+1. In the existing Supabase project, back up the actual Site URL, redirect allowlist,
+   and previous four subject/body fields as a private return path.
+   SMTP credentials remain unchanged and outside the export.
+2. Worker `SITE_ORIGIN` and the actually read Supabase Site URL must contain exactly
+   the same canonical origin without a trailing slash. Export from the
+   release checkout with the actually read provider value:
 
    ```sh
    npm run auth:email-templates -- \
@@ -177,633 +177,654 @@ Die Providerübernahme erfolgt separat aus einem geprüften Main-Release:
      --output-dir /tmp/riparim-auth-mail-release
    ```
 
-   Das Zielverzeichnis muss neu sein. Slash-/Pfad-/Originabweichungen führen
-   vor der Ausgabe zu `AUTH_EMAIL_ORIGIN_NOT_CANONICAL` oder
-   `AUTH_EMAIL_ORIGIN_MISMATCH`. Ein deutscher Fallback ist kein erfolgreicher
-   SQ-/EN-Test. Der Export enthält vier Providerquellen, sechs synthetische
-   tatsächliche Go-Vorschauen mit erwarteter/gerenderter Locale und Prüfsummen.
-   Er ändert keinen Provider und enthält keine realen Tokens oder Empfänger.
+   The target directory must be new. Slash/path/origin mismatches produce
+   `AUTH_EMAIL_ORIGIN_NOT_CANONICAL` or `AUTH_EMAIL_ORIGIN_MISMATCH`
+   before output. German fallback is not a successful SQ/EN test.
+   Export contains four provider sources, six synthetic
+   actual Go previews with expected/rendered locale, and checksums.
+   It changes no provider and contains no real tokens or recipients.
 
-3. Nur den physischen Callback erlauben: Produktion
-   `https://riparim.com/auth/bestaetigen\?**`, bei Bedarf getrennt die tatsächlich
-   verwendete lokale Callback-Origin. Keine Host-/Seitenwildcards und keine
-   `/sq/auth/…`- oder `/en/auth/…`-Callbacks. Bestehende alte Callbacklinks und
-   notwendige Freigaben erhalten; die Site URL bleibt eine reine Origin.
-4. Unter Authentication → Email Templates gemeinsam `confirmation.subject.txt`
-   und `confirmation.body.html` bei „Confirm sign up“ sowie
-   `recovery.subject.txt` und `recovery.body.html` bei „Reset password“ übernehmen.
-   Alternativ die [Management-API-Felder](https://supabase.com/docs/guides/auth/auth-email-templates)
+3. Allow only the public callback: production
+   `https://riparim.com/auth/bestaetigen\?**`, and, when needed, separately the actually
+   used local callback origin. No host/page wildcards and no
+   `/sq/auth/…` or `/en/auth/…` callbacks. Preserve old callback links and
+   required permissions; Site URL stays a plain origin.
+4. Under Authentication → Email Templates, adopt `confirmation.subject.txt`
+   and `confirmation.body.html` together for “Confirm sign up”, and
+   `recovery.subject.txt` and `recovery.body.html` for “Reset password”.
+   Alternatively use the [Management API fields](https://supabase.com/docs/guides/auth/auth-email-templates)
    `mailer_subjects_confirmation`, `mailer_templates_confirmation_content`,
-   `mailer_subjects_recovery`, `mailer_templates_recovery_content` verwenden.
-   Anschließend beide Felder erneut lesen und bytegenau mit dem Export vergleichen.
-5. Providerpreview und isolierte, ausdrücklich freigegebene Testkonten je Locale
-   verwenden: tatsächlichen Betreff/Body empfangen, Bestätigung → separate
-   Anmeldung zum ursprünglichen Profil sowie Recovery → Reset → Anmeldung und
-   alte DE-Links prüfen. Keine echten Kunden anschreiben; Adressen, Passwörter
-   und Tokens bleiben privat. Recovery schreibt keine fremden Metadaten.
-   Scheitert die Prüfung, die vier gesicherten bisherigen Felder zurückspielen
-   und Mailfreigabe nicht als bestätigt kennzeichnen.
-
-Reviewmails verwenden beim ersten Versuch ausschließlich die allowlisted
-`user_metadata.preferred_locale` des geprüften bestätigten Empfängers.
-Moderator-/Cron-/Browserlocale ist ohne Einfluss. Beide Entscheidungen haben
-lokalisierte Login-/Einreichungsziele. Die Route-, React- und nativen
-D1/Scheduled-Fixtures prüfen DE/SQ/EN und fremde/private Zielgrenzen.
-`tests/notifications.test.mjs` vergleicht das tatsächliche `fetch init.body`
-und den Idempotenzschlüssel nach verlorener lokaler Bestätigung, Sprach- und
-Konfigurationswechsel. Historische deutsche Payloads behalten sogar
-JSON-Reihenfolge und Leerraum. Empfänger-/Credentialwechsel, 23-Stunden-Grenze,
-Backoff und kontrollierte Wiederholungen bleiben geschützt.
-
-Neue Reviewmails liefern auf ausdrücklichen Projektwunsch ausschließlich Betreff
-und HTML an Resend; der tatsächliche Requestbody enthält `text: ""` als
-expliziten Opt-out. Bei fehlendem Feld erzeugt Resend automatisch Klartext,
-wie die [Send-Email-API](https://resend.com/docs/api-reference/emails/send-email)
-und der [Changelog](https://resend.com/changelog/automatic-plain-text-emails)
-beschreiben.
-Die Tests prüfen dies für beide Entscheidungen und alle drei Locales sowie
-bytegleiche HTML-only-Retries. Bereits eingefrorene historische Payloads mit
-`text` sowie alte Payloads ohne `text` bleiben unverändert, damit ihr
-Idempotenzvertrag erhalten bleibt. Beim
-[geprüften Supabase-SMTP-Client](https://github.com/supabase/auth/blob/ce9a8eee0cc042be8c7a42981a7ddae631e41d91/internal/mailer/mailmeclient/mailmeclient.go)
-setzt `SetBody("text/html", body)` ausschließlich HTML; die Providerfelder
-können keinen zusätzlichen MIME-Klartextteil konfigurieren. Auth-HTML ist
-vollständig textbasiert und zugänglich. Die `.preview.txt`-Dateien des Exports
-sind nur Lesbarkeitsvorschauen, keine behauptete SMTP-Alternative. Content-Type
-und tatsächliches Verhalten des gehosteten Mailers beim Empfangstest prüfen.
-Diese Providergrenze wird nicht durch Headertricks, Hooks oder eine neue
-Mailplattform umgangen.
-
-Automatisierte Fixtures und Vorschauen senden keine realen Nachrichten und
-ändern keine Produktion. Native Prüfung bei 390/1280 Pixeln, 200 Prozent Zoom
-und heller/dunkler Darstellung sowie tatsächlicher Empfang und Providerübernahme
-werden vor der Gesamtfreigabe separat protokolliert. Ohne diesen Nachweis ist
-die neue Providerkonfiguration noch nicht als live abgenommen zu bezeichnen.
-
-## Kompakte Anmeldeeinrichtung (Issue #59)
-
-Die Verwaltung zeigt vier kurze Prüfschritte und öffnet URL-Werte, SMTP-Hilfe,
-Google-Einstellungen sowie die langen Mailquellen bei Bedarf mit nativen
-`details`/`summary`-Elementen. Ein bereits konfiguriertes Projekt und erfolgreich
-getestete Einstellungen werden weiterverwendet. Dadurch bleibt die Verbindung
-rechts direkt erreichbar; eine neue Projekterstellung oder Wiederholung
-bereits abgenommener Einrichtung wird nicht verlangt.
-
-Site URL und der physische Callback `https://riparim.com/auth/bestaetigen\?**`
-bleiben erforderlich. Die [Redirect-Dokumentation](https://supabase.com/docs/guides/auth/redirect-urls)
-empfiehlt einen festgelegten Produktionspfad. Der einzelne Backslash maskiert
-das Fragezeichen als Querytrenner; ein unmaskiertes `?` wäre ein
-Einzeichen-Wildcard. `**` erhält die bestehenden Sprach-/Rücksprungparameter.
-Die Allowlist ersetzt keine App-Zielvalidierung: Supabase akzeptiert bereits
-Redirects zur Site-Origin, während die serverseitige Zielvalidierung der
-Anwendung unverändert maßgeblich bleibt. Die [SMTP-Dokumentation](https://supabase.com/docs/guides/auth/auth-smtp)
-beschränkt den Standardversand auf nichtproduktive Zwecke. Deshalb steht die
-eigene SMTP-Einrichtung vor der Vorlagenübernahme: Bei neuen Free-Projekten seit 3. Juni 2026 ist [Vorlagenbearbeitung erst mit eigenem SMTP möglich](https://supabase.com/changelog/46599-changes-to-email-template-customisation-on-free-tier).
-Bestätigungs- und Recoveryvorlagen bleiben direkt aus
-`lib/auth/email-templates.ts` bezogen und enthalten jeweils Betreff und HTML-Body.
-Google benötigt weiterhin Website-Origin, den Callback des Supabase-Projekts
-und die Providerkonfiguration gemäß der [offiziellen Anleitung](https://supabase.com/docs/guides/auth/social-login/auth-google).
-
-`tests/auth-setup-ui.test.mjs` prüft die tatsächlichen React-/Radix-Komponenten:
-kompakte anfängliche Anleitung in DE/SQ/EN, erreichbare native Details, vier
-zentrale kopierbare Betreff-/HTML-Felder, Wiederverwendung gespeicherter
-Verbindung sowie unveränderte Entwurfs-/Aktivierungs-/SMTP-Verträge,
-Vorschauziele und Lade-/Fehlerzustände. Die API-Fixtures haben keine externen
-Effekte. Bei der Integration der Verwaltungslokalisierung aus Issue #51 blieben
-Formular, Fehlercodes und Sperren während laufender Speicherung erhalten.
-Originabgleich, Releaseexport, Backup, Readback und Rollback-Hilfe sind in
-allen drei Sprachen in der geschlossenen Mailhilfe erreichbar; die
-Management-UI-Suite prüft weiterhin Quellenkopie und lokale Copy-Fehler.
-
-Die ergänzende native Prüfung im vorgegebenen Chrome-Profil verwendete die
-tatsächliche Komponente und Projekt-CSS mit ausschließlich abgefangenem
-`GET /api/auth-settings`: 390 Pixel mit Systemtheme (auf diesem Rechner dunkel),
-1280 Pixel hell und 390 Pixel dunkel mit geöffneter URL-/SMTP-/Mailhilfe.
-Dokumentbreite und Scrollbreite waren jeweils identisch (390/1280 Pixel);
-alle vier Quellen blieben bei 390 Pixeln innerhalb ihrer 287 Pixel breiten
-Scrollbereiche. Leere Konfiguration, Ladezustand mit gesperrtem Speicherbutton
-und Fehler waren lesbar; die Anleitung blieb erreichbar. Leertaste schloss
-die Hilfe, Enter öffnete sie. Tab erreichte SMTP-Link, verschachtelte
-Bestätigungshilfe sowie Betreff und HTML-Body; End scrollte die Quelle bis zum
-abschließenden `{{ end }}` mit sichtbarem Fokusring. Die Prüfung änderte keine
-Providerkonfiguration und löste keine Live-E-Mails aus. Der korrigierte
-Dashboardwert wurde anschließend nativ mit genau einem Backslash bestätigt;
-auch bei 1336 Pixeln blieb die Dokumentbreite gleich der Scrollbreite.
-
-## Kompakte Betriebsverwaltung (Issue #60)
-
-„Mein Betrieb“ führt beim ersten Besuch direkt zum Antrag auf ein vorhandenes
-Werkstattprofil. Ohne bestätigtes Profil oder laufenden Antrag gilt das auch nach
-älteren Entscheidungen. Leere Profil-, Antrags- und Änderungskästen entfallen.
-Bestätigte Profile bieten „Profil bearbeiten“; Anträge und Änderungen erklären
-je nach aktuellem Prüfstand den nächsten Schritt. Historische Ablehnungen
-zeigen ihr Ergebnis und den Prüfvermerk, ohne eine inzwischen gesperrte
-Einreichung zu empfehlen. Eingereichte Änderungsdetails und der
-Antrag auf ein weiteres Profil lassen sich mit nativen `details`/`summary`
-Elementen öffnen. Inhabernachweise und Beleglinks bleiben privat; manuelle
-Inhaberprüfung und gesonderte Veröffentlichungsfreigabe bleiben erhalten.
-
-„Aktualisieren“ bleibt am Seitentitel erreichbar, weil Entscheidungen der
-Verwaltung außerhalb der geöffneten Seite erfolgen. Der Abruf zeigt einen
-Ladezustand und sperrt konkurrierende Einreichungen. Scheitert nur das Nachladen
-nach einer erfolgreichen Einreichung, bestätigt die Seite die Speicherung und
-fordert zum Aktualisieren statt zum erneuten Einreichen auf.
-
-`tests/business-ui.test.mjs` prüft an den tatsächlichen React-Komponenten den
-direkten Einstieg, private und erhaltene Eingaben, Prüfstände und nächste Schritte,
-kompakte Details, gesperrte Aktionen, initiales Laden, Aktualisierung sowie die
-Wiederholung eines fehlgeschlagenen Listenabrufs nach erfolgreicher Einreichung.
-`tests/business.test.mjs` prüft zusätzlich die autoritative Liste laufender
-Anträge und Änderungssperren eigener Profile unter mehr als 100 neueren
-historischen Entscheidungen sowie die Trennung fremder Konten. Die UI-Fixtures
-prüfen diese aktuellen Hinweise ohne vorheriges Blättern, Historie ohne laufenden
-Antrag, alte Ablehnungen mit laufendem Ersatzentwurf und automatisch abgelehnte
-konkurrierende Anträge. Beim Nachladen einer Folgeseite werden aktuelle Zuordnung
-und Sperren gemeinsam übernommen; die beiden Historien bleiben unabhängig.
-Aktuelle Änderungsanträge besitzen zusätzlich eigene IDs. Beim Nachladen beider
-Listen verschwinden veraltete Prüfungskarten auch nach externer Freigabe,
-Ablehnung oder einem Ersatzentwurf für dasselbe Profil. Der Client errät keine
-Entscheidung; der vollständige Abruf zeigt den neuen Prüfstand und gegebenenfalls
-den aktuellen Ersatzentwurf.
-Die bestehenden Moderationsprüfungen schützen Dialogfokus, Escape, begründete
-Entscheidungen und getrennte Folgeseiten. `tests/management-localization-ui.test.mjs`
-prüft weiterhin DE/SQ/EN mit ursprünglichen Beschreibungen und kanonischen
-Leistungswerten. Die gesamte Testsuite nutzt isolierte Konten und abgefangene
-Provideranfragen; sie sendet keine echten Nachrichten und ändert keine
-Produktionsdaten.
-
-Die ergänzende native Prüfung im vorgegebenen Chrome-Profil verwendete ein
-eigenes QA-Fenster mit geprüftem Profil und kontrolliertem Fokus sowie die
-aktuellen Komponenten, ThemeProvider, Header, Footer, CSS und Assets. Bei
-1280 × 844 Pixeln im hellen deutschen Desktop-Layout waren der direkte Antrag,
-„Aktualisieren“ am Titel und die Hinweise zum laufenden Antrag verständlich;
-Tab und Leertaste öffneten den weiteren Antrag mit sichtbarem Fokusring. Bei
-390 × 844 Pixeln zeigte Albanisch im dunklen Theme die Änderungssperre und den
-Wartehinweis; Tab und Enter öffneten die eingereichten Originalangaben ohne
-horizontale Beschneidung. Englisch im hellen Mobil-Layout erlaubte den
-Editoraufruf per Tastatur, den Zugriff auf das beschriftete Telefonfeld und eine
-isolierte Einreichung: Erfolgsmeldung, unveränderter öffentlicher Stand,
-geschlossener Editor und gesperrte weitere Bearbeitung waren sichtbar. Deutsch
-im mobilen Systemtheme folgte dem System und löste dunkel auf; Antrag,
-Beschriftungen und Layout blieben lesbar. Alle API-Schreibversuche wurden mit
-synthetischen Daten abgefangen; Produktion und echte Konten blieben unverändert.
-Lade-, Fehler- und fehlgeschlagene Nachladezustände sind zusätzlich automatisiert
-geprüft und werden hier nicht als nativ abgenommen behauptet.
-
-## Bewertungseinstieg am Werkstattprofil (Issue #62)
-
-Variante A verwendet ausschließlich das jeweilige öffentliche Werkstattprofil
-für neue Bewertungen. Dort ist die Werkstatt bereits ausgewählt und das
-vollständige Formular für Bewertung und privaten Nachweis vorhanden. Der
-allgemeine Dialog und „Bewerten“ im Benutzermenü entfallen. Eigene Einreichungen
-können weiterhin gezielt bearbeitet oder ergänzt werden.
-
-`tests/review-entry.test.mjs` prüft alte `nachweis`-Links in DE/SQ/EN: bekannte
-öffentliche Werkstätten führen zu ihrem Profil mit `#bewerten`; allgemeine,
-unbekannte, ungültige oder mehrdeutige Ziele führen zum Werkstattfinder mit
-einem lokalisierten Hinweis. Ein Katalogfehler nutzt dessen vorhandenen
-Wiederholungsablauf. Der tatsächliche Worker-Test prüft zusätzlich die
-Weiterleitungen und schützt nicht veröffentlichte Profile. Der Finderhinweis
-bleibt beim Neuladen und Sprachwechsel erhalten.
-
-Die React-Prüfungen bestätigen den fehlenden allgemeinen Menüeintrag, den
-sichtbaren Werkstattnamen am Formular, Profil-Anmelderücksprünge, das gemeinsame
-POST von Bewertung und privatem Nachweis, Sterne-/Einwilligungsvalidierung,
-lokalisierte Fehler und die Freigabeerklärung im Erfolgszustand. Bearbeitungen
-verwenden weiterhin PUT mit Revision und erhaltenem privaten Beleg; ihr
-Anmeldeziel ist die eigene gezielte Einreichung. Die bestehenden isolierten
-API-/SQLite-/R2-Prüfungen schützen Upload, Besitzrechte und Moderation.
-
-Diese Prüfungen verwenden fiktive Daten und abgefangene Providergrenzen.
-Die native Prüfung erfolgte in Chrome mit dem bestätigten Projektprofil
-`ramizloki82@googlemail.com`, echten Komponenten, Projekt-CSS und synthetischen,
-abgefangenen Requests. Bei 390 Pixeln waren System-Theme (hier hell), Light und
-Dark ohne horizontale Überbreite; bei 1280 Pixeln wurde das geöffnete Formular
-im dunklen Theme mit Werkstattname neben den Feldern geprüft. Viewport und
-Dokumentbreite betrugen jeweils 390 beziehungsweise 1280 Pixel.
-
-Das Benutzermenü enthält keinen allgemeinen Bewertungslink; Escape stellt den
-Fokus am Auslöser wieder her. Leertaste bedient den Inline-Toggle, Tab erreicht
-das beschriftete Datum und die Pfeiltaste wählt den nächsten Stern samt Fokus.
-Die ausgeloggte SQ-Profilprüfung bestätigt den Namen und den lokalisierten
-Anmeldelink mit Rückkehr zu `#bewerten`. Der EN-Finderhinweis und Profilzugang
-waren bei 390 Pixeln und tatsächlich auf 200 Prozent gestelltem Chrome-Zoom
-sichtbar, weiterhin ohne horizontale Überbreite; anschließend wurde der Zoom
-auf 100 Prozent zurückgesetzt.
-
-Diese native Prüfung bestätigt keine vollständige Anmeldung, Einreichung oder
-Dateiübertragung; diese Verträge decken die oben genannten isolierten Tests ab.
-Es gibt keine neue Migration oder Providerkonfiguration.
-
-Nach Integration von Issue #61 führt „Meine Bewertungen“ überall zur regulären
-privaten Seite `/bewertungen` mit optionaler validierter `einreichung`. Der
-gezielte Bearbeitungsdialog verwendet denselben lokalisierten Anmelderücksprung
-und Abschlusslink; seine Fokuswiederherstellung bleibt erhalten. Alte
-`besuche`-/`einreichung`-Links behalten den privaten Seiteneinstieg, auch bei
-gleichzeitigem `nachweis`-Parameter. Der ungenutzte allgemeine Dialog-Hook ist
-entfernt. Die ergänzenden Integrationstests prüfen beide Linkverträge und die
-bestehenden eigenen Seitenaktionen mit fiktiven Daten.
-
-## Profilgebundener Übernahme-Antrag mit Dokument
-
-Der Antrag übernimmt ausschließlich die über `werkstatt` verlinkte öffentliche
-Werkstatt und zeigt Name und Standort an. Eine Auswahl anderer Profile und der
-permanente Button „Aktualisieren“ entfallen. Ohne gültiges, eindeutiges Ziel
-führt ein Hinweis zum Werkstattfinder. Der Antrag enthält einen privaten
-Nachweistext und einen optionalen Upload für PDF, JPG oder PNG bis 5 MB.
-Nach erfolgreicher Einreichung lädt die Seite automatisch nach; nur ein
-Ladefehler bietet „Erneut versuchen“. Bestehende Beleglinks bleiben in der
-Verwaltungsprüfung erhalten. Dokumente lassen sich über eine geschützte Route
-nur vom Antragsteller und der Verwaltung herunterladen.
-
-Migration `0014` erweitert `workshop_claims` additiv um nullable Dateimetadaten.
-Bestehende Anträge brauchen keine Übernahme. Der Releaseprozess wendet die
-Migration vor dem neuen Worker an. Dokumente verwenden den bestehenden privaten
-R2-Bucket und das Upload-Inventar. Kontolöschung entfernt auch Dokumente und
-verwaiste Uploads; bedingte R2-Schreibvorgänge verhindern verspätete Inhalte
-nach dem Entfernen ihrer Reservierung.
-
-`tests/business-ui.test.mjs` prüft den festen Namen statt Profilauswahl, genau ein
-Textfeld und den beschrifteten Upload, erhaltene Eingaben nach Fehlern, den
-fehlenden Aktualisieren-Button, automatische Statusübernahme und Wiederholung
-bei Ladefehlern sowie ungültige und mehrdeutige Ziele. Die API-/SQLite-/R2-Fixtures
-in `tests/business.test.mjs` prüfen private Downloads, MIME-/Signaturprüfung,
-Größenlimits ohne Content-Length, Fehlerbereinigung, historische Beleglinks und
-Kontolöschung während eines Uploads. Alle Daten sind fiktiv.
-
-Die native Prüfung am 11.10.2026 nutzte Chrome mit zuvor bestätigtem Profil
-`ramizloki82@googlemail.com`, die tatsächliche BusinessPanel-Komponente,
-ThemeProvider und gebautes Projekt-CSS. Die lokale Vorschau verwendete
-synthetische Antworten statt Livekonten. Bei 1282 Pixeln hell und 390 Pixeln
-dunkel (SQ) war das Formular lesbar; Viewport- und Dokumentbreite waren gleich.
-Tab erreichte vom Nachweistext den Upload und anschließend den Einreichen-Button
-mit sichtbarem Fokus. Englisch im mobilen Systemtheme löste dunkel auf und
-zeigte den Ladefehler mit „Try again“ ohne Aktualisieren-Button. Diese native
-Prüfung bestätigt keine echte Dateiübertragung oder Produktionsübernahme;
-die Uploadverträge decken die isolierten Tests ab.
-
-## Kontoname für Bewertungen
-
-Die E-Mail-Registrierung verlangt einen Namen mit 2–80 Zeichen und speichert
-ihn getrimmt als `full_name`. `tests/google-auth.test.mjs` prüft fehlende, leere,
-zu kurze, zu lange und nicht textuelle Namen vor dem Provideraufruf sowie
-Google- und ältere E-Mail-Konten ohne Namen. Verifizierte Sitzungen verwenden
-bei ungültigem Profilnamen „Anonym“ statt einer E-Mail-Adresse.
-
-`tests/combined-reviews.test.mjs` prüft tatsächliche POST-/PUT-Routen mit
-SQLite: Mitgesendete Bewertungsnamen werden ignoriert, neue und bearbeitete
-Bewertungen übernehmen den aktuellen Kontonamen. Anonyme und 80 Zeichen lange
-Namen können weiterhin moderiert und veröffentlicht werden. Die bestehende
-Besitz-, Nachweis- und Freigabeprüfung bleibt erhalten. Änderungen nur am
-Kontonamen schreiben bestehende Bewertungen nicht um; die nächste Bearbeitung
-übernimmt den Namen mit erneuter Moderation. Keine Migration oder
-Providerkonfigurationsänderung ist erforderlich.
-
-Die tatsächlichen React-Komponenten prüfen in DE/SQ/EN das verpflichtende,
-beschriftete Registrierungsfeld mit zugeordneter Hilfe, die Namensübertragung
-und den angezeigten Kontonamen ohne editierbares Bewertungsfeld. Neue und
-bearbeitete Bewertungen senden kein Namensfeld. Fehler, erhaltene Eingaben,
-Sternbedienung und Einwilligung bleiben durch die Kunden-UI-Suite geprüft.
-
-Die native Prüfung im bestätigten Chrome-Profil
-`ramizloki82@googlemail.com` verwendete echte Komponenten und Projekt-CSS in
-einem lokalen Harness mit fiktiven Daten und abgefangenen API-Anfragen. Die
-Registrierung war im hellen Desktop-Layout und bei 390 × 844 Pixeln lesbar;
-Tab wechselte vom Anzeigenamen zur E-Mail. Das albanische Bewertungsformular
-zeigte bei 390 Pixeln im dunklen Theme den Kontonamen ohne Eingabefeld; die
-Pfeiltaste änderte Sternwert und Fokus. Englisch zeigte im Systemtheme den
-Fallback „Anonym“; ein 80 Zeichen langer Name ohne Leerzeichen brach innerhalb
-der mobilen Namensanzeige um. Diese Prüfung bestätigt keine Live-Registrierung
-oder echte Dateiübertragung. Es wurden keine Produktionsdaten geändert und
-keine E-Mails versendet.
-
-## Getrennte Betriebsübersicht und Beanspruchung
-
-`/betrieb` ist die private Übersicht für eigene Profile, Anträge und Änderungen.
-Sie enthält kein Antragsformular und keinen permanenten Aktualisieren-Button.
-Bei leerer Übersicht erklärt ein Hinweis den Einstieg über das öffentliche
-Werkstattprofil; ein Link öffnet den Werkstattfinder. Der Inhaberlink im Profil
-führt direkt zur eigenständigen Seite `/betrieb/beanspruchen?werkstatt=…`.
-Diese hat „Werkstattprofil beanspruchen“ als Seitentitel, die feste Werkstatt und
-ausschließlich Nachweistext plus optionalen privaten Upload. Nach erfolgreicher
-Einreichung ersetzt eine Bestätigung das Formular und verlinkt „Mein Betrieb“.
-Es gibt keine automatische Rückleitung und keinen eingebetteten Übersichtsteil.
-
-Anmeldung und Sprachwechsel behalten die Antragsseite mit eindeutigem
-Werkstattziel bei. Mehrdeutige, fehlende oder nicht veröffentlichte Werkstätten
-zeigen kein Formular für ein anderes Profil. Ein Katalogfehler bietet einen
-gezielten Wiederholungslink. Beide Seiten bleiben `noindex,nofollow`; das
-Benutzermenü führt weiterhin zur Übersicht. APIs, private Dokumente, Besitzrechte
-und manuelle Freigaben verwenden die bestehenden Verträge; es gibt keine neue
-Migration oder Providerkonfiguration.
-
-`tests/business-pages.test.mjs` prüft die tatsächlichen Seitendokumente
-in DE/SQ/EN, die getrennten Titel, Gast-Anmelderücksprünge,
-ungültige/mehrdeutige/unveröffentlichte Ziele und den Katalogfehler.
-`tests/business-claim-ui.test.mjs` prüft den beschrifteten Upload, Multipartdaten,
-erhaltene private Eingaben, gesperrte konkurrierende Einreichungen sowie die
-Bestätigung ohne Formular und ohne zusätzliche Übersichtsanfrage.
-`tests/business-ui.test.mjs` schützt die leere Übersicht, laufende Anträge,
-Profilbearbeitung und Moderation ohne eingebetteten neuen Antrag. Sprachwechsel,
-Header und beide tatsächlich gebauten Worker werden zusätzlich geprüft.
-Alle Fixtures verwenden fiktive Konten und abgefangene Netzwerkanfragen.
-
-Die ergänzende native Prüfung im bestätigten Chrome-Profil
-`ramizloki82@googlemail.com` nutzte ein eigenes QA-Fenster, die tatsächlichen
-Komponenten, ThemeProvider, Header, Footer, Assets und gebautes Projekt-CSS.
-Bei 1282 Pixeln hell wurden Antrag, synthetische Einreichung per Tastatur,
-Bestätigung ohne Formular und der Dokumentlink zur leeren Übersicht geprüft.
-Bei 390 Pixeln zeigte Englisch im dunklen Theme nur die Antragsseite;
-Albanisch im Systemtheme (hier dunkel) zeigte nur die Übersicht. Die gemessene
-Antragsbreite entsprach dem Viewport (390 beziehungsweise 1282 Pixel).
-Die Vorschau fing Schreibanfragen mit fiktiven Antworten ab. Diese Abnahme
-bestätigt keine echte Authentifizierung oder Dateispeicherung in Produktion.
-
-## Vereinfachtes Bewertungsformular (11. Oktober 2026)
-
-Sterne sind für eine Bewertung ausreichend; der Text ist optional und hat keine
-Mindestlänge. Bewertungstext und optionale Belegnotiz beginnen eingeklappt.
-Vorhandene Texte bleiben beim Bearbeiten sichtbar. Wiederholte Einleitungen,
-Namens- und Speichererklärungen entfallen; der private Nachweis, Besuchsangaben,
-Einwilligung und manuelle Freigabe bleiben erforderlich. Die Texte sind in
-DE/SQ/EN angepasst. Es ist keine Migration oder Datenübernahme nötig.
-
-`tests/combined-reviews.test.mjs` prüft leere, fehlende, kurze und lange Texte,
-ungültige Sterne, nicht textuelle Eingaben, Freigabe und öffentliche Aggregate
-sowie das Entfernen eines Texts mit erneuter Freigabe. Die tatsächlichen
-Kunden- und Verwaltungsoberflächen behandeln Sternebewertungen als vollständig.
-Die CSS-Prüfung schützt die schrumpfenden Formulargruppen und Grid-Spalten sowie
-die maximale Breite nativer Datumsfelder in Quell- und Produktions-CSS.
-
-Die native Prüfung im bestätigten Chrome-Profil `ramizloki82@googlemail.com`
-verwendete die tatsächliche React-Komponente und kompiliertes Projekt-CSS mit
-fiktiven Daten. Bei 320/390 Pixeln mobil und 1280 Pixeln Desktop entsprachen
-Dokument- und Viewportbreite einander. Das Datumsfeld blieb innerhalb seines
-Labels (262/332/600 Pixel). Helles und dunkles Theme sowie Sterneauswahl mit
-Pfeiltasten/End und das Aufklappen des optionalen Texts per Tab/Enter wurden
-geprüft. Ein echtes iPhone mit Safari wurde nicht geprüft; die automatisierten
-CSS-Grenzen ersetzen keine Abnahme auf diesem Gerät. Die Vorschau fängt
-Schreibanfragen ab und verändert keine Produktionsdaten.
-
-## Flache Antragsseite
-
-Die Beanspruchung verwendet auf Desktop und Mobil keine äußere Formular-Card.
-„Profil beanspruchen“, der kompakte Werkstattkontext und ein kurzer Einstieg
-führen direkt zu Nachweistext und optionalem Dokument. Die Dateiauswahl besitzt
-in DE/SQ/EN eigene sichtbare Beschriftungen; native Browsertexte werden visuell
-ersetzt, während der echte Dateiinput für Tastatur und Dateidialog erhalten
-bleibt. Dateiname, Ersetzen und Entfernen sind sichtbar. Entfernen bewahrt den
-Text und setzt den Fokus auf die Auswahl zurück. Während der Einreichung sind
-die Felder gesperrt und der Button zeigt den Sendezustand. Die Bestätigung
-erhält Fokus und verlinkt die separate Betriebsübersicht.
-
-Die bestehenden Multipart-, Größen-, Besitz- und Freigabeverträge bleiben
-unverändert; neue Migrationen oder Providerkonfigurationen sind nicht nötig.
-Die tatsächlichen React-Prüfungen decken zusätzlich Auswahlzustand, Entfernen,
-Fokus, erhaltene Fehlerentwürfe, Sendezustand und Bestätigungsfokus in allen drei
-Sprachen ab. Die native Vorschau im bestätigten Chrome-Profil
-`ramizloki82@googlemail.com` zeigte bei 1282 Pixeln hell und 390 Pixeln dunkel
-keine äußere Card und keine horizontalen Überbreiten. Auf 390 × 844 Pixeln war
-„Antrag einreichen“ vollständig im sichtbaren Formularbereich. Englisch mit
-Systemtheme löste dunkel auf; Tab erreichte den sichtbaren Upload-Fokusring,
-anschließend den Sende-Button. Eine lokale Einreichung per Enter führte zum
-Bestätigungstitel mit Fokus. Die Vorschau verwendet fiktive Antworten und bestätigt keine reale Dokumentübertragung.
-
-## Verpflichtende Dokumente und Mehrfachauswahl
-
-Neue Inhaberansprüche brauchen mindestens ein Dokument; der Hinweis „Optional“
-entfällt. Die Auswahl erlaubt bis zu fünf PDF-, JPG- oder PNG-Dateien, jeweils
-bis 5 MiB und zusammen bis 10 MiB. Zusätzliche Auswahlen ergänzen die Liste;
-jedes Dokument kann einzeln entfernt werden. Ein abgebrochener Dateidialog
-bewahrt die Auswahl. Alte Anträge ohne Datei bleiben lesbar. Migration und
-Rollout-Verträglichkeit stehen in [releases.md](releases.md).
-
-Die Routen-Fixtures prüfen Pflichtprüfung inklusive JSON-Umgehungsversuch,
-Anzahl-/Größen-/Signaturgrenzen, private Downloads aller Dokumente, alte
-Einzeldateien, Kompensation bei späterem Uploadfehler und Kontolöschung während
-des zweiten Uploads. Die UI-Fixtures prüfen Mehrfachauswahl, Ergänzen, Entfernen,
-Fehler mit erhaltenem Entwurf, Downloads in Übersicht und Verwaltung sowie
-Bestätigung mit Fokuswechsel in DE/SQ/EN. Die vollständige Testsuite besteht.
-
-Native Prüfung im bestätigten Profil `ramizloki82@googlemail.com`: Desktop
-(1282 px, Light Mode) und schmal (390 px, Dark Mode) zeigen beide Dateien
-ohne horizontalen Überlauf. Der native Dateidialog wählt zwei isolierte
-Testdateien gleichzeitig; Tastaturfokus erreicht die Auswahl. Nach dem
-lokal abgefangenen Einreichen erhält die Bestätigungsüberschrift den Fokus.
-Die Vorschau verwendet fiktive Konten und lokale Testdateien. Es wurden keine
-Produktionsanträge oder Nachweise erzeugt.
-
-## CPU-Schnellpfade und manueller Einzelversand (12. Oktober 2026)
-
-Startseite und Datenschutz werden wie Katalog/Profile aus dem geprüften Release ausgeliefert; persönliche Kontodaten kommen ausschließlich aus der geschützten Session-API. Landing-Dokumente enthalten keinen vollständigen Werkstattkatalog mehr. Legacy-Einreichungs-/Nachweislinks, DE/SQ/EN, RSC, Live-Entöffentlichung und administrative Katalogleserechte bleiben durch echte Worker-Tests geschützt. Öffentliche Katalog-GETs verwenden denselben Datenvertrag ohne das React-Seitenframework; administrative Abfragen und alle Schreibzugriffe bleiben im autorisierten Requestpfad.
-
-Die Moderation wartet den ersten Mailversuch ab. Die native D1-Fixture bestätigt die tatsächliche sofortige Übergabe ohne Scheduled-Handler. Fehler erlauben maximal fünf manuelle Wiederholungen, nach Wartezeiten von 1/5/15/30/60 Minuten. Tests prüfen frühe Anfragen, erschöpfte Budgets, parallele Claims, unveränderte Payloadbytes, Empfänger-/Credentialänderungen, Resend-Fristen, SMTP-Unklarheit und den fehlenden Sammelversand. Die aufklappbare Versandübersicht lädt erst auf Anforderung und pollt nicht. React-Prüfungen schützen Beschriftungen, deaktivierte Aktionen, Status-/Fehlermeldungen und die erhaltenen Moderationsabläufe in DE/SQ/EN.
-
-Der lokale CPU-Profiler verwendet ausschließlich einen isolierten workerd, Canonical-Fixtures und blockierte Providerzugriffe. Er misst Stichproben der aktiven CPU, keine Cloudflare-Abrechnung oder verbindliche Produktionsobergrenze. Die Messung nach einem geprüften Main-Release bleibt für seltene/private Aufrufpfade nötig. Die native Browserprüfung war in dieser Sitzung wegen wiederholter Meldungen „The user changed Google Chrome“ nicht zuverlässig ausführbar; es wird keine erfolgreiche native Layout-/Theme-Abnahme behauptet.
-
-## Auth-Anbieterprüfung (Issue #139, 12. Oktober 2026)
-
-Die tatsächliche Setupkomponente und sämtliche bestehenden Layoutstyles wurden
-im bestätigten Chrome-Profil geprüft: DE Light auf 1280 Pixeln, SQ Dark und EN
-System auf 390 Pixeln sowie Lade-, Busy- und Fehlerzustände. Tastaturauswahl,
-Tabfokus, Anbieterwechsel im Entwurf, gesperrte Felder/Sprachnavigation und
-anbieterspezifische Hilfe funktionierten ohne horizontalen Dokumentüberlauf.
-PocketBase zeigt kein Public-Keyfeld; die Speicherfehlermeldung nennt neutral
-Adresse und Konfiguration des Anmeldedienstes. Requests hatten ausschließlich
-synthetische Antworten und lösten keine echten Providerwrites oder E-Mails aus.
-
-Automatisiert sprechen die tatsächlichen Adapter und App-Routen unabhängige
-Supabase-/PocketBase-Protokollserver. Der echte Node-HTTP-Test prüft zusätzlich
-PocketBase über eine lokale TLS-Instanz, Runtimebindings, bestehende private
-Besitzpfade, Profil-/Reauthablauf, Rollen, kontrollierten Wechsel, Datenschutz
-und Logout. Eine separate lokale PocketBase-0.40.5-Probe bestätigt dessen
-aktuelle REST-/ExternalAuth-Verträge mit synthetischen Konten. Ein echter
-Googleclient, produktiver SMTP-Versand und eine Live-Hash-/Kontoübernahme waren
-nicht Gegenstand dieser Probe; Voraussetzungen stehen in [auth-provider.md](auth-provider.md).
-
-## Bewertungsdialog und mehrere durchgeführte Arbeiten
-
-„Bewertung schreiben“ öffnet den Dialog auf dem Werkstattprofil mit `?bewerten=1`.
-Direktaufruf, Neuladen und Browser-Zurück/Vorwärts stellen dessen Zustand wieder
-her; bestehende `#bewerten`-Links bleiben gültig. Sprache und der geprüfte
-Suchrücksprung bleiben auch im Anmelderückweg erhalten. Geschlossene Entwürfe,
-einschließlich einer ausgewählten Datei, bleiben nur im Speicher der aktuellen
-Seite und sind an Konto und Werkstatt gebunden. Erfolgreiches Einreichen startet
-beim nächsten Öffnen einen leeren Entwurf, auch bei Browser-Vorwärts nach dem
-Schließen der Erfolgsansicht; der Submit-Button ist dann wieder vorhanden.
-Der Anzeigename kommt weiterhin
-serverseitig aus dem bestätigten Konto; das Formular enthält keine Namenseingabe.
-
-Migration `0025_dark_pretty_boy.sql` ergänzt die nullable JSON-Spalte
-`visits.services` und übernimmt bestehende `service`-Werte als Einzelelementlisten.
-Die Migration muss vor dem neuen Anwendungscode angewendet werden. Das skalare
-`service`-Feld bleibt als primäre Leistung für ältere Clients bestehen. Neue
-Formulare senden `services` als JSON-Liste mit ein bis sechs bekannten Kategorien;
-der Server prüft jede Kategorie und entfernt Duplikate. Explizite Listen ersetzen
-die bisherige Auswahl. Ältere Bearbeitungsanfragen bewahren zusätzliche Kategorien,
-wenn die primäre Leistung unverändert bleibt. Eigene Einreichungen, Moderation und
-öffentliche Bewertungen zeigen sämtliche Leistungen in der gewählten Sprache.
-Berechtigungen, Besuchsnachweise und Freigabeanforderungen bleiben unverändert.
-Schreibt ein vorheriger Worker während Deployment oder Rollback nur `service`,
-hat ein geänderter skalarer Wert Vorrang vor der veralteten JSON-Liste. Nullable
-Legacy-Einfügungen bleiben lesbar. Diese Übergänge prüft
-`tests/review-services.test.mjs` nach Anwendung der echten Migrationen.
-
-`tests/profile-review-dialog.test.mjs` prüft URL-Zustand, Browsernavigation,
-Entwurf/File-Erhalt, Konto-/Werkstattgrenzen und den Anmelderückweg.
-`tests/combined-reviews.test.mjs` prüft Speichern, Lesen, Bearbeiten, Legacy-Clients,
-Moderation und abgewiesene Service-Listen mit isolierten SQLite-/R2-Fixtures.
-
-## Gemeinsamer Seitenrahmen und normale Auswahlfelder (13. Oktober 2026)
-
-Header, Inhaltsrahmen und Footer verwenden dieselbe `.wrap`-Breite: maximal
-1440 Pixel, mit 56 Pixeln Seitenrand auf Desktop, 32 bis 1000 Pixeln und 16
-bis 720 Pixeln Viewportbreite. Bewertungen, Einstellungen und Betriebsübersicht
-teilen Titel- und Abstandsvariablen. Die Einstellungen haben flache äußere
-Bereiche; die drei Theme-Karten bleiben erhalten. Der normale Bewertungskopf
-hat weder Zurück-Link noch Aktualisieren-Button. Ladefehler erlauben gezieltes
-Nachladen. Entfernt eine Löschung die auslösende Zeile, erhält die Überschrift
-Fokus; spätere Navigation und andere Fokusbewegungen werden weiterhin bewahrt.
-
-Formular-Picker verwenden `Field`/`FieldLabel` mit getrennten, zugeordneten Labels
-und umrandeten Controls. Die alten gefärbten `.field`-Container entfallen;
-das integrierte Suchlayout der Landingpage bleibt erhalten. Nur der Dialoginhalt
-scrollt. `overflow: clip` verhindert, dass Tastaturfokus den äußeren Dialograhmen
-verschiebt oder die Positionierung eines Select-Dropdowns in eine Größenschleife
-bringt.
-
-Die native lokale Abnahme prüfte Einstellungen, Bewertungen, Betrieb und Katalog
-bei 1491, 1030, 1000 und 390 Pixeln: Header, Inhalt und Footer hatten jeweils
-dieselben Kanten, ohne horizontales Überlaufen. Die Theme-Auswahl wurde mit Maus
-und Tastatur in Hell und System geprüft. Ort und Sichtbarkeit im Werkstatteditor
-hatten transparente Label-Container, verknüpfte Labels und umrandete Controls;
-die Sichtbarkeitsauswahl blieb mit Enter, Pfeiltasten und Escape stabil, mit
-unverschobenem Dialograhmen und ohne ResizeObserver-Meldung. Es wurden keine
-Werkstattänderungen gespeichert.
-
-## Client-Navigation ohne Dokument-Reload (13. Oktober 2026)
-
-Interne Seitenlinks in Logo, Benutzer-/Verwaltungsmenü und Kundenabläufen
-verwenden den Client-Router. Technische Endpunkte, Downloads, externe Ziele und
-ausdrückliche Fehlerwiederholungen behalten Dokumentnavigation. Der gemeinsame
-Release-RSC-Header enthält die von Vinext eingebettete Build-Kennung; ohne sie
-verwirft der Browser vorgebaute Antworten auch aus demselben Release und lädt
-das Zieldokument neu. Echte Buildwechsel behalten den sicheren Reload.
-
-Die Navigationstests verwenden den tatsächlichen Vinext-Link und prüfen
-DE/SQ/EN, Tastaturaktivierung, Menüschließen, native Linkausnahmen und
-abgebrochene Klicks. Der RSC-Regressionstest verwendet den tatsächlichen
-Routerplaner. Die gebaute Worker-Prüfung vergleicht öffentliche und private
-RSC-Antworten mit der unabhängig gelesenen Kennung des Frameworkrenderers.
-
-Im bestätigten Chrome-Profil `ramizloki82@googlemail.com` wurde der lokal
-gebaute Cloudflare-Worker mit isolierter Datenbank und blockierten
-Providerzugriffen geprüft. Vor der Headerkorrektur lösten Anmeldung und Logo
-zusätzliche Dokumentanfragen aus. Danach blieben Anmeldung, Logo per Tab/Enter
-und Einstellungen beim selben Dokumentzähler; nur RSC-Anfragen kamen hinzu.
-Die Prüfung hat keine echten Konten, E-Mails oder Produktionsdaten verändert.
-
-## Stabiler Anmeldestatus im Header (13. Oktober 2026)
-
-Die Live-Abnahme von v1.31.2 im bestätigten Chrome-Profil zeigte bei Startseite
-→ Einstellungen → Datenschutz dieselbe `performance.timeOrigin`: Die
-Navigation lud kein neues Dokument. Gleichzeitig stieg die Anzahl der
-`/api/session`-Anfragen von eins auf zwei auf drei; während jeder neuen
-Prüfung erschien kurz der Gastheader. Das neue Seitenexemplar begann mit
-`account:null`, obwohl die vorherige Seite das Konto bereits bestätigt hatte.
-
-Der Header behält nun die zuletzt bestätigte Identität ausschließlich als
-Anzeigevorschau im Arbeitsspeicher des aktuellen Browserdokuments. Der
-Serverrenderer liest diese Vorschau nie; Cookies und Browserstorage werden
-nicht ergänzt. Normale Seitenwechsel teilen die bestätigte Sitzung für
-höchstens 30 Sekunden. Der nächste Zugriff nach Ablauf, Tab-/Fensterrückkehr,
-BFCache-Wiederherstellung, Kontoänderungen und ein ausdrücklicher Retry prüfen
-sie erneut; gleichzeitige Verbraucher teilen dieselbe laufende Anfrage.
-Private Daten-APIs prüfen unabhängig davon jeden Zugriff serverseitig. Eine
-abgelaufene Anzeigevorschau reicht nicht zum Laden der privaten Seite. Beim ersten Laden zeigt der Header einen beschrifteten, nicht
-fokussierbaren Ladezustand statt unbestätigter Anmeldebuttons. Ein Fehler bleibt
-neutral; eine bestätigte Gastantwort oder lokale Kontolöschung entfernt das
-Kontomenü. Antworten von vor einer Invalidierung dürfen die Vorschau nicht
-wiederherstellen.
-
-`tests/session-header-navigation.test.mjs` prüft den echten Header und die
-private Bewertungswrapper-Komponente bei verzögerten/fehlgeschlagenen
-Sitzungsantworten, Client-Neumount, serverseitigem Rendering, Gastantwort,
-Invalidierung, Cacheablauf, Fokusrückkehr und verspäteter alter Antwort. Die bestehende Deferred-UI-Suite
-prüft weiterhin DE/SQ/EN, Rollenentzug, Umbenennung, Kontolöschung und
-konkurrierende Sitzungsabfragen. Alle Fixtures verwenden fiktive Konten.
-
-## Header beim kalten Profilübergang (14. Oktober 2026)
-
-Der eingeloggte Live-Test wechselte vom Werkstattprofil über das Benutzermenü
-zu eigenen Bewertungen, Betrieb und Verwaltung sowie über Browser-Zurück
-wieder zum Profil. Die privaten Übergänge zeigten weder Gastbuttons noch
-Dokument-Reloads. Beim ersten Profilaufruf im frischen Browserdokument fehlte
-jedoch kurz der gesamte Header: Der tatsächliche Suspense-Fallback zeigte
-ausschließlich „Werkstattprofil wird geladen …“. Der Zustand wurde erneut
-mit einem zweiten Profil reproduziert und als Screenshot festgehalten.
-
-Der Profil-Fallback enthält jetzt denselben `SiteHeader` mit `publicSnapshot`
-wie die datenfreie Profilshell. Er übernimmt die bereits bestätigte Identität
-aus dem gemeinsamen Browser-Sitzungszustand; eine unbekannte Sitzung bleibt
-neutral. Die bestehende Anfrage-Deduplizierung gilt auch während des Übergangs
-zur geladenen Profilshell. Es gibt keine neue Autorisierung, Datenabfrage,
-Migration oder zusätzliche Browser-Speicherung.
-
-`tests/profile-loading-header.test.mjs` rendert den tatsächlichen
-Route-Fallback in DE/SQ/EN und prüft Header, Statusbeschriftung, serverseitige
-Identitätsisolation und Tastaturzugang. Der Client-Test wechselt von einem
-verifizierten Header in den Fallback und schützt den Kontomenü-Erhalt ohne
-zusätzliche Sitzungsabfrage. Fixtures verwenden ausschließlich fiktive Konten.
-
-## Fünf Minuten Sitzungscache und Tab-Synchronisierung (14. Oktober 2026)
-
-Der browserinterne UI-Sitzungscache bleibt fünf Minuten frisch. Eine neue
-Clientroute nutzt innerhalb dieser Frist dieselbe verifizierte Antwort. Nach
-Ablauf oder Rückkehr zum Fenster wird erneut geprüft; der bekannte Header bleibt
-währenddessen erhalten. Server und geschützte APIs prüfen ihre Berechtigungen
-weiter unabhängig.
-
-Erfolgreicher Passwort-Login, Logout, Passwortreset und Kontolöschung invalidieren
-den Cache sofort. BroadcastChannel überträgt ausschließlich `signed-in`,
-`signed-out` oder `refresh`; keine Identität, Rolle oder Tokens. Ohne
-BroadcastChannel verwendet die App kurzlebige Storage-Ereignisse mit Signal und
-Nonce; blockierter Storage verhindert die lokale Invalidierung nicht.
-Empfangene Nachrichten werden nicht zurückgesendet.
-
-Der erste erfolgreiche `/api/session`-Aufruf eines Dokuments stößt in anderen
-Tabs eine erneute Prüfung an. Dadurch synchronisieren auch Google-/E-Mail- und
-native Anmelderücksprünge ihre serverseitig gesetzten Cookies. Diese Prüfung
-ändert keine serverseitigen Auth-Regeln und speichert keine Kontodaten im Browser.
-
-`session-header-navigation.test.mjs` prüft den echten Header nach 30 Sekunden,
-unmittelbar vor fünf Minuten und nach Ablauf. `session-cache-tabs.test.mjs`
-prüft unabhängige Modulzustände zweier Tabs, Login/Logout ohne Fokuswechsel,
-OAuth-Dokumentrückkehr, verspätete Antworten vor Logout, Nachrichten ohne
-Kontodaten, Echovermeidung, Storage-Fallback und gesperrten Storage.
-
-## Google-Anmeldung im Worker (14. Oktober 2026, Issue #183)
-
-Der Live-Rücksprung reproduzierte `/anmelden?fehler=google&weiter=%2F%3Fbesuche%3D1`.
-Der Auth-Provider bestätigte den erfolgreichen PKCE-Codeaustausch und die
-Benutzerprüfung; der Worker meldete anschließend einen `TypeError`. Die
-unabhängige Google-Identitätsprüfung verwendete `fetch` mit `redirect:"error"`.
-Die konfigurierte Workers-Laufzeit unterstützt nur `follow` und `manual` und
-verwarf diesen Aufruf bereits vor der Netzwerkanfrage.
-
-Die Prüfung verwendet jetzt `manual`. Die bestehende Erfolgsstatusprüfung
-verwirft Weiterleitungen und andere Fehler, sodass der Google-Bearertoken
-weiterhin ausschließlich an den festen Userinfo-Endpunkt geht. Identitäts-,
-Sitzungs- und Berechtigungsprüfungen bleiben erhalten.
-
-`node tests/google-auth-worker.test.mjs` reproduzierte vor der Änderung den
-identischen Fehler-Rücksprung mit `TypeError` und besteht danach. Der Test
-führt die echten Start-/Callbackrouten, das Supabase-SSR-SDK, PKCE, eine
-asymmetrisch signierte ES256-Sitzung und D1 in der nativen Workers-Laufzeit aus.
-Er prüft die reguläre Sitzung, DE/SQ/EN, sichere Rücksprungziele, Abbruch,
-ungültigen Flow, fehlgeschlagenen Codeaustausch, Google-Fehler und
-Identitätsabweichungen sowie das Verwerfen von Redirects ohne Tokenweitergabe.
-Alle Konten, Signaturschlüssel und Providerantworten sind isolierte Fixtures;
-der Test ist im regulären Runner registriert. Eine erfolgreiche Anmeldung
-auf Produktion muss nach Übernahme des geprüften Main-Releases separat
-verifiziert werden.
+   `mailer_subjects_recovery`, `mailer_templates_recovery_content`.
+   Then read both fields again and compare byte-for-byte with the export.
+5. Use provider preview and isolated, explicitly approved test accounts per locale:
+   receive the actual subject/body, check confirmation → separate
+   login to the original profile and recovery → reset → login,
+   and old German links. Contact no real customers; addresses, passwords,
+   and tokens stay private. Recovery writes no foreign metadata.
+   If verification fails, restore the four backed-up previous fields
+   and do not mark email approval as confirmed.
+
+On their first attempt, review emails use only the allowlisted
+`user_metadata.preferred_locale` of the verified confirmed recipient.
+Moderator/cron/browser locale has no effect. Both decisions have
+localized login/submission targets. Route, React, and native
+D1/scheduled fixtures check DE/SQ/EN and foreign/private target boundaries.
+`tests/notifications.test.mjs` compares actual `fetch init.body`
+and the idempotency key after lost local confirmation, language changes,
+and configuration changes. Historical German payloads preserve even
+JSON order and whitespace. Recipient/credential changes, the 23-hour limit,
+backoff, and controlled retries remain protected.
+
+At the project's explicit request, new review emails send only subject
+and HTML to Resend; the actual request body contains `text: ""` as
+an explicit opt-out. Without this field, Resend automatically generates plain text,
+as described by the [Send Email API](https://resend.com/docs/api-reference/emails/send-email)
+and [changelog](https://resend.com/changelog/automatic-plain-text-emails).
+Tests check this for both decisions and all three locales, plus
+byte-identical HTML-only retries. Already frozen historical payloads with
+`text` and old payloads without `text` remain unchanged to preserve their
+idempotency contract. In the
+[verified Supabase SMTP client](https://github.com/supabase/auth/blob/ce9a8eee0cc042be8c7a42981a7ddae631e41d91/internal/mailer/mailmeclient/mailmeclient.go),
+`SetBody("text/html", body)` sets HTML only; provider fields
+cannot configure an additional MIME plain-text part. Auth HTML is
+entirely text-based and accessible. Export `.preview.txt` files
+are only readability previews, not a claimed SMTP alternative. Check content type
+and actual hosted mailer behavior during receipt testing.
+This provider boundary is not bypassed through header tricks, hooks, or a new
+email platform.
+
+Automated fixtures and previews send no real messages and
+change no production state. Native verification at 390/1280 pixels, 200% zoom,
+and light/dark presentation, plus actual receipt and provider adoption,
+are recorded separately before overall approval. Without this evidence,
+the new provider configuration must not be described as accepted live.
+
+## Compact login setup (Issue #59)
+
+Administration shows four short verification steps and opens URL values, SMTP help,
+Google settings, and long email sources on demand with native
+`details`/`summary` elements. An already configured project and successfully
+tested settings are reused. The connection therefore remains
+directly reachable on the right; creating a new project or repeating
+already accepted setup is not required.
+
+Site URL and the public callback `https://riparim.com/auth/bestaetigen\?**`
+remain required. The [redirect documentation](https://supabase.com/docs/guides/auth/redirect-urls)
+recommends a fixed production path. The single backslash escapes
+the question mark as a query separator; an unescaped `?` would be a
+single-character wildcard. `**` preserves existing language/return parameters.
+The allowlist does not replace app destination validation: Supabase already accepts
+redirects to the site origin, while server-side destination validation by the
+application remains authoritative and unchanged. The [SMTP documentation](https://supabase.com/docs/guides/auth/auth-smtp)
+restricts default delivery to nonproduction purposes. Custom
+SMTP setup therefore precedes template adoption: for new Free projects since June 3, 2026,
+[template editing requires custom SMTP](https://supabase.com/changelog/46599-changes-to-email-template-customisation-on-free-tier).
+Confirmation and recovery templates continue to come directly from
+`lib/auth/email-templates.ts`, each containing subject and HTML body.
+Google still requires website origin, the Supabase project's callback,
+and provider configuration according to the [official guide](https://supabase.com/docs/guides/auth/social-login/auth-google).
+
+`tests/auth-setup-ui.test.mjs` checks actual React/Radix components:
+compact initial instructions in DE/SQ/EN, reachable native details, four
+central copyable subject/HTML fields, reuse of the saved
+connection, and unchanged draft/activation/SMTP contracts,
+preview targets, and loading/error states. API fixtures have no external
+effects. Integration of administration localization from Issue #51 preserved
+forms, error codes, and locks during ongoing saving.
+Origin comparison, release export, backup, readback, and rollback help are reachable
+in all three languages inside collapsed email help; the
+management UI suite continues to check source copying and localized copy errors.
+
+Additional native verification in the specified Chrome profile used the
+actual component and project CSS with only intercepted
+`GET /api/auth-settings`: 390 pixels with system theme (dark on this computer),
+1280 pixels light, and 390 pixels dark with URL/SMTP/email help open.
+Document width and scroll width were identical (390/1280 pixels);
+all four sources stayed within their 287-pixel-wide
+scroll areas at 390 pixels. Empty configuration, loading state with a disabled save button,
+and errors were readable; instructions remained reachable. Space closed
+the help, Enter opened it. Tab reached the SMTP link, nested
+confirmation help, subject, and HTML body; End scrolled the source to the
+final `{{ end }}` with a visible focus ring. Verification changed no
+provider configuration and triggered no live emails. The corrected
+dashboard value was then confirmed natively with exactly one backslash;
+document width also matched scroll width at 1336 pixels.
+
+## Compact business management (Issue #60)
+
+The localized “Mein Betrieb” (“My business”) entry leads directly to a request for an existing
+workshop profile on the first visit. Without a confirmed profile or pending request,
+this also applies after earlier decisions. Empty profile, request, and change boxes are omitted.
+Confirmed profiles offer “Profil bearbeiten” (“Edit profile”); requests and changes explain
+the next step according to their current review state. Historical rejections
+show their result and review note without recommending a submission
+that has since become blocked. Submitted change details and the
+request for another profile open through native `details`/`summary`
+elements. Ownership evidence and evidence links stay private; manual
+ownership review and separate publication approval remain.
+
+“Aktualisieren” (“Refresh”) stays reachable beside the page title because administration decisions
+happen outside the open page. Fetching shows a
+loading state and blocks concurrent submissions. If only reloading
+fails after successful submission, the page confirms persistence and
+asks for refresh instead of resubmission.
+
+`tests/business-ui.test.mjs` checks actual React components for
+direct entry, private and preserved input, review states and next steps,
+compact details, blocked actions, initial loading, refresh, and
+retry of a failed list fetch after successful submission.
+`tests/business.test.mjs` also checks the authoritative list of pending
+requests and change locks for owned profiles among more than 100 newer
+historical decisions, and separation of foreign accounts. UI fixtures
+check these current notices without prior pagination, history without a pending
+request, old rejections with a pending replacement draft, and automatically rejected
+competing requests. When loading a subsequent page, current assignment
+and locks are adopted together; the two histories remain independent.
+Current change requests also have their own IDs. Reloading both
+lists removes stale review cards even after external approval,
+rejection, or a replacement draft for the same profile. The client guesses no
+decision; complete fetching shows the new review state and, where applicable,
+the current replacement draft.
+Existing moderation checks protect dialog focus, Escape, reasoned
+decisions, and separate pagination. `tests/management-localization-ui.test.mjs`
+continues to check DE/SQ/EN with original descriptions and canonical
+service values. The entire test suite uses isolated accounts and intercepted
+provider requests; it sends no real messages and changes no
+production data.
+
+Additional native verification in the specified Chrome profile used a
+dedicated QA window with verified profile and controlled focus, and
+current components, ThemeProvider, header, footer, CSS, and assets. At
+1280 × 844 pixels in the light German desktop layout, the direct request,
+refresh beside the title, and pending-request notices were understandable;
+Tab and Space opened the additional request with a visible focus ring. At
+390 × 844 pixels, Albanian in dark theme showed the change lock and
+waiting notice; Tab and Enter opened submitted original details without
+horizontal clipping. English in light mobile layout allowed keyboard
+opening of the editor, access to the labeled phone field, and an
+isolated submission: success message, unchanged public state,
+closed editor, and blocked further editing were visible. German
+in mobile system theme followed the system and resolved dark; request,
+labels, and layout stayed readable. All API write attempts were intercepted with
+synthetic data; production and real accounts were unchanged.
+Loading, error, and failed-reload states are additionally checked automatically
+and are not claimed here as natively accepted.
+
+## Review entry at the workshop profile (Issue #62)
+
+Variant A uses only the respective public workshop profile
+for new reviews. The workshop is already selected there and the
+complete review/private-evidence form is available. The
+general dialog and localized “Bewerten” (“Review”) user-menu entry are removed. Personal submissions
+can still be edited or supplemented directly.
+
+`tests/review-entry.test.mjs` checks old `nachweis` links in DE/SQ/EN: known
+public workshops lead to their profile with `#bewerten`; general,
+unknown, invalid, or ambiguous targets lead to the workshop finder with
+a localized notice. A catalogue error uses its existing
+retry flow. The actual Worker test also checks
+redirects and protects unpublished profiles. The finder notice
+survives reload and language changes.
+
+React checks confirm the absent general menu item,
+visible workshop name on the form, profile login returns, joint
+POST of review and private evidence, star/consent validation,
+localized errors, and the approval explanation on success. Edits
+continue to use PUT with revision and preserved private evidence; their
+login destination is the person's own targeted submission. Existing isolated
+API/SQLite/R2 checks protect uploads, ownership rights, and moderation.
+
+These checks use fictional data and intercepted provider boundaries.
+Native verification used Chrome with the confirmed project profile
+`ramizloki82@googlemail.com`, real components, project CSS, and synthetic,
+intercepted requests. At 390 pixels, System theme (light here), Light, and
+Dark had no horizontal overflow; at 1280 pixels, the open form
+was checked in dark theme with workshop name beside the fields. Viewport and
+document width were each 390 or 1280 pixels.
+
+The user menu has no general review link; Escape restores
+focus to the trigger. Space operates the inline toggle, Tab reaches
+the labeled date, and an arrow key selects the next star with focus.
+The logged-out SQ profile check confirms the name and localized
+login link returning to `#bewerten`. The EN finder notice and profile entry
+were visible at 390 pixels with Chrome zoom actually set to 200%,
+still without horizontal overflow; zoom was then
+reset to 100%.
+
+This native verification confirms no complete login, submission, or
+file transfer; those contracts are covered by the isolated tests above.
+There is no new migration or provider configuration.
+
+After integration of Issue #61, “Meine Bewertungen” (“My reviews”) leads everywhere to the regular
+private `/bewertungen` page with optional validated `einreichung`. The
+targeted editing dialog uses the same localized login return
+and completion link; its focus restoration remains. Old
+`besuche`/`einreichung` links retain private page entry, including with a
+simultaneous `nachweis` parameter. The unused general dialog hook is
+removed. Additional integration tests check both link contracts and
+existing personal page actions with fictional data.
+
+## Profile-bound ownership request with document
+
+The request uses only the public workshop linked through `werkstatt`
+and shows its name and location. Other-profile selection and the
+permanent refresh button are removed. Without a valid, unique target,
+a notice leads to the workshop finder. The request contains private
+evidence text and an optional upload for PDF, JPG, or PNG up to 5 MB.
+After successful submission, the page reloads automatically; only a
+loading error offers the localized “Erneut versuchen” (“Try again”) action. Existing evidence links stay in
+administrative review. Only the applicant and administration can download documents
+through a protected route.
+
+Migration `0014` additively extends `workshop_claims` with nullable file metadata.
+Existing requests need no data migration. The release process applies the
+migration before the new Worker. Documents use the existing private
+R2 bucket and upload inventory. Account deletion also removes documents and
+orphaned uploads; conditional R2 writes prevent late content
+after its reservation has been removed.
+
+`tests/business-ui.test.mjs` checks the fixed name instead of profile selection, exactly one
+text field and labeled upload, preserved input after errors,
+absent refresh button, automatic status adoption, and retry
+on loading errors, plus invalid and ambiguous targets. API/SQLite/R2 fixtures
+in `tests/business.test.mjs` check private downloads, MIME/signature verification,
+size limits without Content-Length, error cleanup, historical evidence links, and
+account deletion during an upload. All data is fictional.
+
+Native verification on 2026-10-11 used Chrome with the previously confirmed profile
+`ramizloki82@googlemail.com`, the actual BusinessPanel component,
+ThemeProvider, and built project CSS. The local preview used
+synthetic responses instead of live accounts. At 1282 pixels light and 390 pixels
+dark (SQ), the form was readable; viewport and document widths matched.
+Tab reached the upload from evidence text, then the submit button,
+with visible focus. English in mobile system theme resolved dark and
+showed the loading error with “Try again” without a refresh button. This native
+verification confirms no real file transfer or production adoption;
+upload contracts are covered by isolated tests.
+
+## Account name for reviews
+
+Email registration requires a name of 2–80 characters and stores
+it trimmed as `full_name`. `tests/google-auth.test.mjs` checks missing, empty,
+too short, too long, and nontext names before calling the provider, plus
+Google and older email accounts without names. Verified sessions use
+the localized “Anonym” (“Anonymous”) instead of an email address for an invalid profile name.
+
+`tests/combined-reviews.test.mjs` checks actual POST/PUT routes with
+SQLite: submitted review names are ignored; new and edited
+reviews adopt the current account name. Anonymous and 80-character
+names can still be moderated and published. Existing
+ownership, evidence, and approval checks remain. Changes only to the
+account name do not rewrite existing reviews; the next edit
+adopts the name with renewed moderation. No migration or
+provider configuration change is required.
+
+Actual React components check the required, labeled
+registration field with associated help, name transmission,
+and displayed account name without an editable review field in DE/SQ/EN. New and
+edited reviews send no name field. Errors, preserved input,
+star operation, and consent remain covered by the customer UI suite.
+
+Native verification in the confirmed Chrome profile
+`ramizloki82@googlemail.com` used real components and project CSS in
+a local harness with fictional data and intercepted API requests. Registration
+was readable in light desktop layout and at 390 × 844 pixels;
+Tab moved from display name to email. The Albanian review form
+at 390 pixels in dark theme showed the account name without an input field;
+the arrow key changed star value and focus. English in system theme showed
+the fallback “Anonym”; an 80-character name without spaces wrapped within
+the mobile name display. This verification confirms no live registration
+or real file transfer. No production data was changed,
+and no emails were sent.
+
+## Separate business overview and claim page
+
+`/betrieb` is the private overview for owned profiles, requests, and changes.
+It contains no request form or permanent refresh button.
+For an empty overview, a notice explains entry through the public
+workshop profile; a link opens the workshop finder. The owner link in the profile
+leads directly to the standalone `/betrieb/beanspruchen?werkstatt=…` page.
+Its page title is the localized “Werkstattprofil beanspruchen” (“Claim workshop profile”), with the fixed workshop and
+only evidence text plus an optional private upload. After successful
+submission, a confirmation replaces the form and links to “Mein Betrieb” (“My business”).
+There is no automatic return redirect or embedded overview section.
+
+Login and language changes preserve the request page with an unambiguous
+workshop target. Ambiguous, missing, or unpublished workshops
+show no form for another profile. A catalogue error offers a
+targeted retry link. Both pages remain `noindex,nofollow`; the
+user menu still leads to the overview. APIs, private documents, ownership rights,
+and manual approvals use existing contracts; there is no new
+migration or provider configuration.
+
+`tests/business-pages.test.mjs` checks actual page documents
+in DE/SQ/EN, separate titles, guest login returns,
+invalid/ambiguous/unpublished targets, and catalogue errors.
+`tests/business-claim-ui.test.mjs` checks labeled uploads, multipart data,
+preserved private input, blocked competing submissions, and
+confirmation without a form or an additional overview request.
+`tests/business-ui.test.mjs` protects the empty overview, pending requests,
+profile editing, and moderation without an embedded new request. Language switching,
+header, and both actually built Workers are also checked.
+All fixtures use fictional accounts and intercepted network requests.
+
+Additional native verification in the confirmed Chrome profile
+`ramizloki82@googlemail.com` used a dedicated QA window, actual
+components, ThemeProvider, header, footer, assets, and built project CSS.
+At 1282 pixels light, the request, synthetic keyboard submission,
+confirmation without a form, and document link to the empty overview were checked.
+At 390 pixels, English in dark theme showed only the request page;
+Albanian in system theme (dark here) showed only the overview. Measured
+request width matched the viewport (390 or 1282 pixels).
+The preview intercepted write requests with fictional responses. This acceptance
+confirms no real authentication or production file storage.
+
+## Simplified review form (October 11, 2026)
+
+Stars are sufficient for a review; text is optional and has no
+minimum length. Review text and optional evidence note start collapsed.
+Existing text stays visible when editing. Repeated introductions,
+name explanations, and storage explanations are omitted; private evidence, visit details,
+consent, and manual approval remain required. Text is adapted in
+DE/SQ/EN. No migration or data transfer is needed.
+
+`tests/combined-reviews.test.mjs` checks empty, missing, short, and long text,
+invalid stars, nontext input, approval and public aggregates,
+and text removal with renewed approval. Actual
+customer and administration interfaces treat star-only reviews as complete.
+CSS checks protect shrinking form groups and grid columns, and
+the maximum width of native date fields in source and production CSS.
+
+Native verification in the confirmed Chrome profile `ramizloki82@googlemail.com`
+used the actual React component and compiled project CSS with
+fictional data. At 320/390 pixels mobile and 1280 pixels desktop,
+document and viewport widths matched. The date field stayed within its
+label (262/332/600 pixels). Light and dark themes, star selection with
+arrow keys/End, and expanding optional text with Tab/Enter were
+checked. A real iPhone with Safari was not checked; automated
+CSS boundaries do not replace acceptance on that device. The preview intercepts
+write requests and changes no production data.
+
+## Flat request page
+
+Claiming uses no outer form card on desktop or mobile.
+The localized “Profil beanspruchen” (“Claim profile”), compact workshop context, and short introduction
+lead directly to evidence text and optional document. File selection has
+its own visible labels in DE/SQ/EN; native browser text is visually
+replaced while retaining the real file input for keyboard use and the file dialog.
+Filename, replace, and remove are visible. Removing preserves
+text and returns focus to selection. During submission,
+fields are disabled and the button shows sending state. Confirmation
+receives focus and links to the separate business overview.
+
+Existing multipart, size, ownership, and approval contracts stay
+unchanged; no new migrations or provider configuration are needed.
+Actual React checks also cover selection state, removal,
+focus, preserved drafts after errors, sending state, and confirmation focus in all three
+languages. The native preview in the confirmed Chrome profile
+`ramizloki82@googlemail.com` showed no outer card or horizontal overflow
+at 1282 pixels light and 390 pixels dark. At 390 × 844 pixels,
+“Antrag einreichen” (“Submit request”) was fully within the visible form area. English with
+system theme resolved dark; Tab reached the visible upload focus ring,
+then the send button. A local Enter submission led to the
+confirmation title with focus. The preview uses fictional responses and confirms no real document transfer.
+
+## Required documents and multiple selection
+
+New ownership claims require at least one document; the “Optional” notice
+is removed. Selection allows up to five PDF, JPG, or PNG files,
+up to 5 MiB each and 10 MiB total. Additional selections append to the list;
+each document can be removed individually. Cancelling the file dialog
+preserves selection. Old requests without a file stay readable. Migration and
+rollout compatibility are documented in [releases.md](releases.md).
+
+Route fixtures check the requirement, including a JSON bypass attempt,
+count/size/signature limits, private downloads of all documents, old
+single files, compensation on later upload failure, and account deletion during
+the second upload. UI fixtures check multiple selection, adding, removing,
+errors with preserved drafts, downloads in overview and administration, and
+confirmation with focus change in DE/SQ/EN. The full test suite passes.
+
+Native verification in the confirmed profile `ramizloki82@googlemail.com`: desktop
+(1282 px, Light Mode) and narrow (390 px, Dark Mode) show both files
+without horizontal overflow. The native file dialog selects two isolated
+test files together; keyboard focus reaches selection. After
+locally intercepted submission, the confirmation heading receives focus.
+The preview uses fictional accounts and local test files. No
+production requests or evidence were created.
+
+## CPU fast paths and manual single-event delivery (October 12, 2026)
+
+Landing and privacy pages, like catalogue/profiles, are delivered from the verified release; personal account data comes only from the protected session API. Landing documents no longer contain the complete workshop catalogue. Legacy submission/evidence links, DE/SQ/EN, RSC, live unpublishing, and administrative catalogue read permissions remain protected by real Worker tests. Public catalogue GETs use the same data contract without the React page framework; administrative queries and all writes remain in the authorized request path.
+
+Moderation awaits the first email attempt. The native D1 fixture confirms actual immediate handoff without a scheduled handler. Failures permit at most five manual retries after waits of 1/5/15/30/60 minutes. Tests check early requests, exhausted budgets, concurrent claims, unchanged payload bytes, recipient/credential changes, Resend deadlines, SMTP uncertainty, and absence of bulk delivery. The collapsible delivery overview loads only on request and does not poll. React checks protect labels, disabled actions, status/error messages, and retained moderation flows in DE/SQ/EN.
+
+The local CPU profiler uses only an isolated workerd, canonical fixtures, and blocked provider access. It samples active CPU, not Cloudflare billing or a binding production ceiling. Measurement after a verified main release remains necessary for rare/private request paths. Native browser verification could not run reliably in this session because of repeated “The user changed Google Chrome” messages; no successful native layout/theme acceptance is claimed.
+
+## Auth provider verification (Issue #139, October 12, 2026)
+
+The actual setup component and all existing layout styles were
+checked in the confirmed Chrome profile: DE Light at 1280 pixels, SQ Dark and EN
+System at 390 pixels, plus loading, busy, and error states. Keyboard selection,
+Tab focus, provider changes in draft, blocked fields/language navigation, and
+provider-specific help worked without horizontal document overflow.
+PocketBase shows no public-key field; the saving error message neutrally names
+the auth service's address and configuration. Requests had only
+synthetic responses and triggered no real provider writes or emails.
+
+Automatically, actual adapters and app routes communicate with independent
+Supabase/PocketBase protocol servers. The real Node HTTP test additionally checks
+PocketBase through a local TLS instance, runtime bindings, existing private
+ownership paths, profile/reauth flows, roles, controlled switching, privacy,
+and logout. A separate local PocketBase 0.40.5 probe confirms its
+current REST/ExternalAuth contracts with synthetic accounts. A real
+Google client, production SMTP delivery, and live hash/account migration were
+outside this probe's scope; prerequisites are documented in [auth-provider.md](auth-provider.md).
+
+## Review dialog and multiple completed services
+
+The localized “Bewertung schreiben” (“Write review”) action opens the dialog on the workshop profile with `?bewerten=1`.
+Direct visits, reload, and browser back/forward restore its state;
+existing `#bewerten` links remain valid. Language and validated
+search return also survive the login return path. Closed drafts,
+including a selected file, remain only in current page memory
+and are bound to account and workshop. Successful submission starts
+an empty draft on next opening, including browser forward after
+closing the success view; the submit button is then present again.
+The display name still comes server-side from the verified account;
+the form contains no name input.
+
+Migration `0025_dark_pretty_boy.sql` adds the nullable JSON column
+`visits.services` and adopts existing `service` values as single-element lists.
+The migration must be applied before new application code. Scalar
+`service` remains the primary service for older clients. New
+forms send `services` as a JSON list with one to six known categories;
+the server validates each category and removes duplicates. Explicit lists replace
+previous selection. Older editing requests preserve additional categories
+if the primary service stays unchanged. Personal submissions, moderation, and
+public reviews show every service in the selected language.
+Permissions, visit evidence, and approval requirements remain unchanged.
+If a previous Worker writes only `service` during deployment or rollback,
+a changed scalar value takes precedence over the stale JSON list. Nullable
+legacy inserts remain readable. These transitions are checked by
+`tests/review-services.test.mjs` after applying the actual migrations.
+
+`tests/profile-review-dialog.test.mjs` checks URL state, browser navigation,
+draft/file preservation, account/workshop boundaries, and login return.
+`tests/combined-reviews.test.mjs` checks saving, reading, editing, legacy clients,
+moderation, and rejected service lists with isolated SQLite/R2 fixtures.
+
+## Shared page frame and ordinary selection fields (October 13, 2026)
+
+Header, content frame, and footer use the same `.wrap` width: at most
+1440 pixels, with 56-pixel side margins on desktop, 32 up to 1000 pixels, and 16
+up to 720 pixels of viewport width. Reviews, settings, and business overview
+share title and spacing variables. Settings have flat outer
+sections; the three theme cards remain. The ordinary review header
+has neither back link nor refresh button. Loading errors allow targeted
+reloading. If deletion removes the triggering row, the heading receives
+focus; later navigation and other focus movements are still preserved.
+
+Form pickers use `Field`/`FieldLabel` with separate associated labels
+and bordered controls. Old colored `.field` containers are removed;
+the landing page's integrated search layout remains. Only dialog content
+scrolls. `overflow: clip` prevents keyboard focus from moving the outer dialog frame
+or putting select dropdown positioning into a resize loop.
+
+Native local acceptance checked settings, reviews, business, and catalogue
+at 1491, 1030, 1000, and 390 pixels: header, content, and footer each
+had identical edges without horizontal overflow. Theme selection was checked with mouse
+and keyboard in Light and System. Town and visibility in the workshop editor
+had transparent label containers, associated labels, and bordered controls;
+visibility selection remained stable with Enter, arrow keys, and Escape,
+without moving the dialog frame or producing a ResizeObserver message. No
+workshop changes were saved.
+
+## Client navigation without document reload (October 13, 2026)
+
+Internal page links in the logo, user/administration menus, and customer flows
+use the client router. Technical endpoints, downloads, external destinations, and
+explicit error retries retain document navigation. The shared
+release RSC header contains the build identifier embedded by Vinext; without it,
+the browser discards prebuilt responses even from the same release and reloads
+the target document. Actual build changes retain safe reload behavior.
+
+Navigation tests use the actual Vinext Link and check
+DE/SQ/EN, keyboard activation, menu closure, native link exceptions, and
+cancelled clicks. The RSC regression test uses the actual
+router planner. Built Worker verification compares public and private
+RSC responses against the independently read framework renderer identifier.
+
+The locally built Cloudflare Worker was checked in the confirmed Chrome profile
+`ramizloki82@googlemail.com` with an isolated database and blocked
+provider access. Before the header correction, login and logo
+triggered additional document requests. Afterwards, login, logo through Tab/Enter,
+and settings retained the same document counter; only RSC requests were added.
+Verification changed no real accounts, emails, or production data.
+
+## Stable login status in the header (October 13, 2026)
+
+Live acceptance of v1.31.2 in the confirmed Chrome profile showed the same
+`performance.timeOrigin` across landing → settings → privacy:
+navigation loaded no new document. At the same time, the number of
+`/api/session` requests increased from one to two to three; each new
+check briefly showed the guest header. The new page instance started with
+`account:null` even though the previous page had already confirmed the account.
+
+The header now retains the last verified identity solely as a
+display preview in current browser-document memory. The
+server renderer never reads this preview; cookies and browser storage are
+not added. Ordinary page changes share the verified session for
+at most 30 seconds. The next access after expiry, tab/window return,
+BFCache restoration, account changes, and an explicit retry recheck
+it; concurrent consumers share the same running request.
+Private data APIs independently check each access server-side. An
+expired display preview is insufficient to load a private page. On first load, the header shows a labeled, nonfocusable
+loading state instead of unconfirmed login buttons. An error stays
+neutral; a confirmed guest response or local account deletion removes the
+account menu. Responses predating an invalidation must not
+restore the preview.
+
+`tests/session-header-navigation.test.mjs` checks the actual header and
+private review wrapper component with delayed/failed
+session responses, client remount, server rendering, guest response,
+invalidation, cache expiry, focus return, and a late old response. The existing deferred UI suite
+continues to check DE/SQ/EN, role revocation, renaming, account deletion, and
+concurrent session queries. All fixtures use fictional accounts.
+
+## Header during a cold profile transition (October 14, 2026)
+
+The signed-in live test moved from a workshop profile through the user menu
+to personal reviews, business, and administration, then through browser back
+to the profile. Private transitions showed neither guest buttons nor
+document reloads. On the first profile visit in a fresh browser document,
+however, the entire header was briefly missing: the actual Suspense fallback showed
+only the localized “Werkstattprofil wird geladen …” (“Loading workshop profile …”). The state was reproduced
+with a second profile and recorded as a screenshot.
+
+The profile fallback now contains the same `SiteHeader` with `publicSnapshot`
+as the data-free profile shell. It adopts the already verified identity
+from shared browser session state; an unknown session remains
+neutral. Existing request deduplication also applies during transition
+to the loaded profile shell. There is no new authorization, data query,
+migration, or additional browser storage.
+
+`tests/profile-loading-header.test.mjs` renders the actual
+route fallback in DE/SQ/EN and checks header, status label, server-side
+identity isolation, and keyboard access. The client test moves from a
+verified header into the fallback and protects account-menu retention without
+an additional session query. Fixtures use only fictional accounts.
+
+## Five-minute session cache and tab synchronization (October 14, 2026)
+
+The browser-internal UI session cache stays fresh for five minutes. A new
+client route uses the same verified response within this period. After
+expiry or window return, it checks again; the known header remains
+meanwhile. Server and protected APIs continue checking permissions
+independently.
+
+Successful password login, logout, password reset, and account deletion immediately
+invalidate the cache. BroadcastChannel transmits only `signed-in`,
+`signed-out`, or `refresh`; no identity, role, or tokens. Without
+BroadcastChannel, the app uses short-lived storage events with signal and
+nonce; blocked storage does not prevent local invalidation.
+Received messages are not echoed.
+
+A document's first successful `/api/session` call triggers rechecking in other
+tabs. This also synchronizes Google/email and
+native login returns with their server-set cookies. This check
+changes no server-side auth rules and stores no account data in the browser.
+
+`session-header-navigation.test.mjs` checks the actual header after 30 seconds,
+immediately before five minutes, and after expiry. `session-cache-tabs.test.mjs`
+checks independent module states in two tabs, login/logout without focus changes,
+OAuth document return, late responses before logout, messages without
+account data, echo prevention, storage fallback, and blocked storage.
+
+## Google login in the Worker (October 14, 2026, Issue #183)
+
+The live return reproduced `/anmelden?fehler=google&weiter=%2F%3Fbesuche%3D1`.
+The auth provider confirmed successful PKCE code exchange and
+user verification; the Worker then reported a `TypeError`. Independent
+Google identity verification used `fetch` with `redirect:"error"`.
+The configured Workers runtime supports only `follow` and `manual` and
+rejected this call before the network request.
+
+Verification now uses `manual`. Existing success-status checking
+rejects redirects and other errors so that the Google bearer token
+still goes only to the fixed userinfo endpoint. Identity,
+session, and permission checks remain.
+
+`node tests/google-auth-worker.test.mjs` reproduced the identical error return
+with `TypeError` before the change and passes afterwards. The test
+executes real start/callback routes, the Supabase SSR SDK, PKCE,
+an asymmetrically signed ES256 session, and D1 in the native Workers runtime.
+It checks ordinary sessions, DE/SQ/EN, safe return destinations, cancellation,
+invalid flows, failed code exchange, Google errors,
+and identity mismatches, plus redirect rejection without forwarding tokens.
+All accounts, signing keys, and provider responses are isolated fixtures;
+the test is registered in the regular runner. Successful production login
+must be verified separately after adoption of the verified main release.
+
+## English source refactor (14 October 2026, Issue #186)
+
+The actual Cloudflare production bundle was checked in an isolated local
+Miniflare Worker with D1/R2 fixtures and blocked outbound provider access. Native
+Chrome QA used the project-mandated profile, verified from its account and window
+information before local navigation. English catalogue navigation switched to
+Albanian by keyboard, opened the same workshop profile, survived reload, and
+switched to the existing German profile URL while retaining its search return.
+The German and English login pages retained their localized labels, recovery
+links and disabled-provider state.
+
+Profile layouts were inspected at 390 and 1280 CSS pixels. The initial system
+appearance, explicit light/dark switching and keyboard activation passed. The
+English login layout was also inspected at a visually verified 200% browser
+zoom. The temporary QA tab was closed after restoring its zoom.
+
+These were isolated navigation/presentation checks; no live authentication,
+account mutation, email, upload or provider configuration was performed. The
+existing protocol and native Worker suites cover callback/privacy/cookie and
+permission behavior. English physical page identities keep all established
+DE/SQ/EN public paths, and `/auth/bestaetigen` still reaches the confirmation
+handler through an internal rewrite without a sensitive redirect.

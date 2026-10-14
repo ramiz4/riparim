@@ -66,7 +66,7 @@ const output = ".test-runtime/public-performance";
 await mkdir(output, { recursive: true });
 await build({
   stdin: {
-    contents: `export {DiscoverWorkshops} from './components/discover-workshops';export {default as CatalogueLoading} from './app/[locale]/werkstaetten/loading';export {default as Finder} from './app/finder';export {default as Catalogue} from './app/[locale]/werkstaetten/catalogue';export {I18nProvider} from './lib/i18n/client';export {getMessages,createTranslator} from './lib/i18n/messages';export {defaultCatalogueFilters} from './lib/catalogue-filters';`,
+    contents: `export {DiscoverWorkshops} from './components/discover-workshops';export {default as CatalogueLoading} from './app/[locale]/workshops/loading';export {default as Finder} from './app/finder';export {default as Catalogue} from './app/[locale]/workshops/catalogue';export {I18nProvider} from './lib/i18n/client';export {getMessages,createTranslator} from './lib/i18n/messages';export {defaultCatalogueFilters} from './lib/catalogue-filters';`,
     resolveDir: process.cwd(),
     loader: "tsx",
   },

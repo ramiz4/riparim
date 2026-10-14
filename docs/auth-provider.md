@@ -1,49 +1,49 @@
-# Auth-Anbieter und Wechsel
+# Auth providers and switching
 
-Riparim besitzt den Auth-Vertrag in `lib/auth/contract.ts`: verifizierte Nutzer
-mit `provider`, exaktem `issuer` und `subject`, Sitzungsnachweise, die benötigten
-Anmeldeabläufe, verfügbare Fähigkeiten und normalisierte Fehler. Fachliche
-Rollen, Sperren, Besitzrechte und interne Konto-IDs liegen in der App-Datenbank.
-Es gibt genau zwei Adapter: Supabase Auth und PocketBase. Eine andere Adresse
-muss zum ausgewählten Protokoll passen; eine beliebige OIDC-URL ist kein Adapter.
+Riparim owns the auth contract in `lib/auth/contract.ts`: verified users
+with `provider`, exact `issuer`, and `subject`, session proofs, the required
+login flows, available capabilities, and normalized errors. Domain
+roles, blocks, ownership rights, and internal account IDs live in the app database.
+There are exactly two adapters: Supabase Auth and PocketBase. A different address
+must match the selected protocol; an arbitrary OIDC URL is not an adapter.
 
-`lib/auth/provider.ts` wählt die beiden konkreten Implementierungen aus.
-Supabase-SDKs, GoTrue-Claims, UUIDs, Public-Key-Formate und SSR-/PKCE-Cookies
-bleiben in `lib/auth/adapters/supabase.ts`; historische Kontoschlüssel,
-Sitzungskennungen und Tombstones in `lib/auth/legacy-supabase.ts`.
-`lib/auth/adapters/pocketbase.ts` spricht dessen REST-Protokoll direkt, ohne
-zusätzliches SDK. Die Fachrouten verwenden camelCase-Daten und kennen keine
-Providerclaims. Google wird zusätzlich über Googles serverseitiges `userinfo`
-geprüft. Profildaten, gleichlautende E-Mail-Adressen und editierbare Rollenfelder
-verleihen keine Rechte.
+`lib/auth/provider.ts` selects the two concrete implementations.
+Supabase SDKs, GoTrue claims, UUIDs, public key formats, and SSR/PKCE cookies
+stay in `lib/auth/adapters/supabase.ts`; historical account keys,
+session identifiers, and tombstones stay in `lib/auth/legacy-supabase.ts`.
+`lib/auth/adapters/pocketbase.ts` speaks its REST protocol directly, without
+an additional SDK. Domain routes use camelCase data and know no
+provider claims. Google is also verified through Google's server-side `userinfo`.
+Profile data, identical email addresses, and editable role fields
+grant no rights.
 
-Die öffentliche Datenschutzseite benennt das gewählte Profil auch während der
-Deaktivierung. Der Worker wählt zwischen zwei beim Release isoliert erzeugten
-Dokumenten anhand der privaten Authsettings; der Node-Server rendert denselben
-Textvertrag. Dafür werden weder Konten noch Providernetzwerk benötigt.
+The public privacy page names the selected profile even while it is
+disabled. The Worker selects between two documents generated in isolation during the release
+using private auth settings; the Node server renders the same
+text contract. This requires neither accounts nor provider networking.
 
-Die bestehenden automatisierten [Authbackups](auth-backups.md) und der
-Authkonfigurationsteil der [Plattformsicherung](platform-backups.md) sichern
-weiterhin die vorhandene Supabase-Installation. Sie sichern keine
-PocketBase-Konten, Passwort-Hashes oder Konfiguration. Bei einem Cutover muss
-der Betreiber die eigene providerseitige Sicherung und Wiederherstellung für
-PocketBase prüfen; Appdaten bleiben im vorhandenen Transfer-/Restore-Vertrag.
+Existing automated [auth backups](auth-backups.md) and the
+auth configuration portion of [platform backups](platform-backups.md) continue to back up
+the existing Supabase installation. They do not back up
+PocketBase accounts, password hashes, or configuration. For a cutover,
+the operator must verify their own provider-side backup and recovery for
+PocketBase; app data stays in the existing transfer/restore contract.
 
-## Bestehende Supabase-Installation
+## Existing Supabase installation
 
-Migration `0018_auth_providers.sql` ergänzt `auth_settings.provider` und die
-Providerbindung privater Löschgrants mit Default `supabase`. Bestehende
-Einstellungen, Kontoschlüssel und Hosted-SSR-Cookies funktionieren weiter.
-Alte und neue Sitzungen werden anhand der exakten Identität geprüft. Neue
-App-Sitzungsschlüssel trennen auch gleiche Provider-SIDs verschiedener Issuer;
-vorhandene Supabase-SIDs besitzen eine ausdrücklich begrenzte Lesekompatibilität.
-Fehlende oder unbekannte Supabase-AMR bleibt als unbekannte Methode markiert
-und kann keinen bestehenden Google-Grant bestätigen; eine belegte Sitzungs-ID
-kann weiterhin sicher widerrufen werden. Angewendete Migrationen wurden nicht verändert. Der alte zeitgesteuerte
-Supabase-Aktivierungswert kann kein PocketBase-Profil aktivieren.
+Migration `0018_auth_providers.sql` adds `auth_settings.provider` and
+provider binding for private deletion grants with default `supabase`. Existing
+settings, account keys, and hosted SSR cookies continue to work.
+Old and new sessions are checked against the exact identity. New
+app session keys also separate identical provider SIDs from different issuers;
+existing Supabase SIDs have explicitly limited read compatibility.
+Missing or unknown Supabase AMR remains marked as an unknown method
+and cannot confirm an existing Google grant; a proven session ID
+can still be safely revoked. Applied migrations were not changed. The old scheduled
+Supabase activation value cannot enable a PocketBase profile.
 
-Hosted Supabase unter einer portlosen `*.supabase.co`-Origin bleibt der Standard.
-Für eine alternative kompatible Instanz:
+Hosted Supabase at a portless `*.supabase.co` origin remains the default.
+For an alternative compatible instance:
 
 ```dotenv
 AUTH_TRUSTED_PROVIDER=supabase
@@ -52,48 +52,48 @@ SUPABASE_SECRET_KEY_ORIGIN=https://auth.example.test
 SUPABASE_SECRET_KEY=<server-only-key-issued-by-that-instance>
 ```
 
-Ein fehlendes `AUTH_TRUSTED_PROVIDER` bedeutet aus Kompatibilitätsgründen
-`supabase`. Für neue Installationen kann der Adminschlüssel alternativ unter
-`AUTH_ADMIN_KEY` mit **beiden** expliziten Bindungen `AUTH_ADMIN_KEY_PROVIDER`
-und `AUTH_ADMIN_KEY_ORIGIN` liegen. Dieser Schlüssel hat Vorrang; eine falsche
-Bindung fällt nicht auf den alten Schlüssel zurück. Hosted-Installationen
-behalten die bisherige Credentialkompatibilität, solange keine explizite
-Originbindung vorliegt. Eine freigegebene öffentliche Origin gibt niemals
-Administrationsgeheimnisse frei.
+A missing `AUTH_TRUSTED_PROVIDER` means `supabase` for compatibility.
+For new installations, the admin key can alternatively be stored under
+`AUTH_ADMIN_KEY` with **both** explicit bindings `AUTH_ADMIN_KEY_PROVIDER`
+and `AUTH_ADMIN_KEY_ORIGIN`. This key takes precedence; an incorrect
+binding does not fall back to the old key. Hosted installations
+retain existing credential compatibility unless an explicit
+origin binding is present. An approved public origin never exposes
+administration secrets.
 
-Supabase benötigt den öffentlichen Publishable-/Anon-Key in der Verwaltung.
-E-Mail-Bestätigung, Signup, Recovery, PKCE, Adminendpunkte und der getrennte
-serverseitige Google-Proof behalten ihre bisherigen Verträge. Die vorhandenen
-Supabase-E-Mail-Vorlagen und Hinweise gehören nur zu diesem Adapter.
+Supabase requires the public publishable/anon key in administration.
+Email confirmation, signup, recovery, PKCE, admin endpoints, and the separate
+server-side Google proof retain their existing contracts. Existing
+Supabase email templates and instructions apply only to this adapter.
 
-Der Transport verwendet `redirect: "manual"` und weist jede 3xx-Antwort zurück,
-bevor ein weiteres Ziel kontaktiert wird. `redirect: "error"` wirft im verwendeten
-Workers-Runtime bereits vor dem Netzwerkaufruf eine Exception. Bei einer anstehenden
-Session-Erneuerung führte die SDK-Wiederholung dadurch zu 25,4 Sekunden Wartezeit
-pro Auth-Prüfung und zu 50,8 beziehungsweise 76,2 Sekunden bei wiederholten Prüfungen.
-Die native Workerprüfung schützt deshalb sowohl den erfolgreichen Provideraufruf
-als auch die Redirect-Sperre.
+The transport uses `redirect: "manual"` and rejects every 3xx response
+before contacting another destination. `redirect: "error"` throws an exception
+in the Workers runtime in use before making the network request. When
+session renewal was pending, SDK retries therefore caused a 25.4-second wait
+per auth check, and 50.8 or 76.2 seconds with repeated checks.
+The native Worker check therefore protects both successful provider calls
+and redirect blocking.
 
-Cookiebasierte Supabase-Auth-Clients teilen innerhalb eines HTTP-Requests ein Zeitbudget
-von 1,5 Sekunden ab dem ersten Provideraufruf, einschließlich Antwortkörper.
-Netzwerkfehler, 5xx, Redirects und ungültige Antworten beenden die Prüfung ohne
-SDK-Wiederholung; weitere Clients desselben Requests übernehmen diesen Ausfall.
-Dabei werden keine Session-Cookies gelöscht oder überschrieben. Ein späterer
-Request kann erneut prüfen. Eine eindeutige Ablehnung abgelaufener Credentials
-bleibt hingegen wirksam. Provider- und App-Prüfungen sind weiterhin Voraussetzung
-für private Rechte; der Ausfallzustand wird niemals zwischen Requests geteilt.
-Explizite Anmelde- und Kontoänderungsoperationen beginnen eine neue Auth-Phase,
-damit lokale Datenbank-/Dateiarbeit vor einer Mutation deren Budget nicht verbraucht.
-Passwortclients ohne gespeicherte Sitzung und Adminclients behalten ihren
-bisherigen Transport-Timeout.
+Cookie-based Supabase auth clients share a time budget of
+1.5 seconds within an HTTP request, starting with the first provider call and including the response body.
+Network errors, 5xx, redirects, and invalid responses end verification without
+SDK retries; additional clients in the same request inherit this failure.
+No session cookies are deleted or overwritten. A later
+request can verify again. An unambiguous rejection of expired credentials,
+however, remains effective. Provider and app checks are still prerequisites
+for private rights; failure state is never shared between requests.
+Explicit login and account-change operations start a new auth phase
+so that local database/file work before a mutation does not consume its budget.
+Password clients without a stored session and admin clients retain their
+existing transport timeout.
 
-## PocketBase-Profil
+## PocketBase profile
 
-Der konkrete Adapter wurde gegen PocketBase **0.40.5** geprüft. Er verwendet
-`/api/collections/users/` und die aktuelle Systemcollection `_externalAuths`,
-deren providerverwaltete Beziehungen `recordRef`/`collectionRef` enthalten.
-Er setzt die Standard-Authcollection `users` mit ID `_pb_users_auth_` voraus.
-Kein öffentlicher Supabase-Key wird verwendet.
+The concrete adapter was verified against PocketBase **0.40.5**. It uses
+`/api/collections/users/` and the current `_externalAuths` system collection,
+whose provider-managed relationships contain `recordRef`/`collectionRef`.
+It assumes the default `users` auth collection with ID `_pb_users_auth_`.
+No public Supabase key is used.
 
 ```dotenv
 AUTH_TRUSTED_PROVIDER=pocketbase
@@ -103,198 +103,196 @@ AUTH_ADMIN_KEY_ORIGIN=https://auth.example.test
 AUTH_ADMIN_KEY=<private-superuser-auth-token-issued-by-pocketbase>
 ```
 
-Der Betreiber richtet diese konkrete Instanz ein:
+The operator configures this specific instance:
 
-- Authcollection `users`: Passwortauth mit Identitätsfeld `email`, kein MFA
-  für die hier unterstützten Abläufe. Textfeld `name` und zusätzlich Textfeld
-  `preferredLocale` für `de`, `sq`, `en`. Die normalen Riparim-Grenzen für
-  Name und Passwort gelten weiter. Fehlende zurückgelesene Profilfelder werden
-  als Fehler behandelt, nicht als erfolgreiche Speicherung.
-- Registrierung freigeben, ohne Gäste `verified` setzen zu lassen, z.B.
-  `createRule: @request.body.verified:isset = false`. Öffentliche Schreibrechte
-  dürfen weder `verified`, E-Mail-Identität noch Providerverknüpfungen freigeben.
-  Profiländerungen in Riparim laufen über den separat gebundenen Adminclient.
-  API-Regeln und aktuelle Berechtigungen in einer isolierten Instanz prüfen.
-- SMTP und die E-Mail-Vorlagen einrichten. Der bestätigte Versandstatus in
-  Riparim wird erst nach tatsächlicher Prüfung gesetzt. Der Adapter ruft
-  `request-verification` bzw. `request-password-reset` auf; diese APIs erhalten
-  keine requestbezogene Redirectadresse.
-- Bestätigungslink in der PocketBase-Vorlage:
+- Auth collection `users`: password auth with identity field `email`, no MFA
+  for the flows supported here. Text field `name` and an additional text field
+  `preferredLocale` for `de`, `sq`, `en`. Ordinary Riparim limits for
+  names and passwords still apply. Missing profile fields when read back are
+  treated as errors, not successful persistence.
+- Allow registration without letting guests set `verified`, for example
+  `createRule: @request.body.verified:isset = false`. Public write rights
+  must expose neither `verified`, email identity, nor provider links.
+  Profile changes in Riparim use the separately bound admin client.
+  Verify API rules and current permissions in an isolated instance.
+- Configure SMTP and email templates. Verified delivery status in
+  Riparim is set only after actual verification. The adapter calls
+  `request-verification` or `request-password-reset`; these APIs receive
+  no request-specific redirect address.
+- Confirmation link in the PocketBase template:
   `https://riparim.com/auth/bestaetigen?type=signup&token_hash={TOKEN}`.
-  Recoverylink:
+  Recovery link:
   `https://riparim.com/auth/bestaetigen?type=recovery&token_hash={TOKEN}`.
-  `{TOKEN}` ist der PocketBase-Vorlagenplatzhalter. In einer Testinstanz die
-  eigene Site-Origin verwenden. Locale/Rückweg werden im gleichen Browser über
-  ein privates kurzlebiges Intentcookie erhalten; auf einem anderen Gerät gilt
-  der sichere Standardrückweg. Bestätigung erfordert danach eine neue Anmeldung.
-- Google-OAuth im Provider einrichten und beim Googleclient exakt
-  `https://riparim.com/auth/bestaetigen?anbieter=google` als Rücksprungadresse
-  registrieren (bei Tests die eigene Site-Origin). Diese Adresse bleibt bei
-  Locale-, Rückweg- und Reauthwechsel gleich; deren Appintent bleibt privat im
-  kurzlebigen Browsercookie. Der Adapter erhält State und PKCE-Verifier von
-  `auth-methods`, erlaubt nur Googles HTTPS-Autorisierungsadresse und setzt
-  `openid email profile` für den unabhängigen Identitätsnachweis. Die
-  serverseitigen Providerlinks und ein unabhängiger Google-Proof müssen dieselbe
-  Google-Identität und bestätigte E-Mail ergeben. Fehlende, abgelaufene oder
-  fremde Intentdaten verweigern den Callback vor dem Codeaustausch.
-- Einen privaten PocketBase-Superuser-Authtoken betreiberseitig ausstellen,
-  geschützt hinterlegen, dessen Ablauf und Erneuerung planen. Er wird nie als
-  Browsertoken oder Public-Key verwendet. Fehlende, abgelaufene oder falsch
-  gebundene Credentials verweigern administrative Vorgänge.
+  `{TOKEN}` is the PocketBase template placeholder. Use the instance's own
+  site origin for testing. Locale/return destination are preserved in the same browser through
+  a private short-lived intent cookie; another device uses
+  the safe default return destination. Confirmation then requires a new login.
+- Configure Google OAuth at the provider and register exactly
+  `https://riparim.com/auth/bestaetigen?anbieter=google` as the return address
+  in the Google client (use the instance's own site origin for tests). This address remains the same
+  when locale, return destination, or reauth intent changes; their app intent stays private in the
+  short-lived browser cookie. The adapter gets state and the PKCE verifier from
+  `auth-methods`, allows only Google's HTTPS authorization address, and sets
+  `openid email profile` for independent identity proof. Server-side
+  provider links and independent Google proof must yield the same
+  Google identity and verified email. Missing, expired, or
+  foreign intent data rejects the callback before code exchange.
+- Issue a private PocketBase superuser auth token on the operator side,
+  store it securely, and plan its expiry and renewal. It is never used as
+  a browser token or public key. Missing, expired, or incorrectly
+  bound credentials deny administrative operations.
 
-PocketBase hat weder GoTrue-AMR noch eine individuelle Sitzungs-ID. Es kann
-für zwei Anmeldemethoden desselben Kontos in derselben Sekunde denselben Token
-minten. Deshalb erzeugt Riparim **pro erfolgreicher Anmeldung** eine zufällige
-private App-Nonce und bindet den Grant an Nonce, Token, Provider und Issuer.
-Ein unabhängiger Passwortbrowser erbt keine Google-Rechte. Cookies enthalten
-keine behauptete Authmethode; Rollen kommen aus dem eingeschriebenen App-Grant.
+PocketBase has neither GoTrue AMR nor an individual session ID. It can
+mint the same token for two login methods of the same account in the same second.
+Riparim therefore generates a random private app nonce **for every successful login**
+and binds the grant to nonce, token, provider, and issuer.
+An independent password browser inherits no Google rights. Cookies contain
+no claimed auth method; roles come from the enrolled app grant.
 
-Jeder Request prüft den gespeicherten Bearertoken serverseitig mit
-`auth-refresh`, verwendet jedoch weiterhin den ursprünglich eingeschriebenen
-Token. Die zurückgelieferte Tokenrotation ersetzt den Grant nicht. Nach Ablauf
-des ursprünglichen Provider-Tokens ist eine neue Anmeldung nötig; die lokale
-Grantlaufzeit bleibt maximal 30 Tage. PocketBase besitzt keinen individuellen
-serverseitigen Logoutendpunkt: Riparim widerruft den aktuellen App-Grant und
-entfernt die Browsercredentials. Ein kopiertes Cookie erhält damit keine
-Riparim-Rechte mehr; der Upstreamtoken selbst läuft nach Providerregeln ab.
+Each request checks the stored bearer token server-side with
+`auth-refresh`, but continues to use the originally enrolled token.
+Returned token rotation does not replace the grant. After the
+original provider token expires, a new login is required; the local
+grant lifetime remains at most 30 days. PocketBase has no individual
+server-side logout endpoint: Riparim revokes the current app grant and
+removes browser credentials. A copied cookie can therefore obtain no
+Riparim rights; the upstream token itself expires under provider rules.
 
-PocketBase validiert einen Recoverytoken erst bei `confirm-password-reset`.
-Der Link öffnet daher ausschließlich eine zeitlich begrenzte Resetcapability;
-auch ein syntaktisch korrektes JWT verleiht vorher **keine** App-Sitzung,
-Moderation, Kontoidentität oder Löschberechtigung. Erst nachdem der Provider
-diesen konkreten signierten Token akzeptiert hat, wird dessen Subject an die
-interne Zuordnung gebunden und werden dessen App-Grants widerrufen. PocketBase
-invalidiert bei erfolgreichem Reset auch die vorherigen Provider-Tokens. Die
-Capability wird anschließend verbraucht; für normalen Passwortwechsel dieses
-Kontrollverfahren verwenden.
+PocketBase validates a recovery token only at `confirm-password-reset`.
+The link therefore opens only a time-limited reset capability;
+even a syntactically correct JWT grants **no** app session,
+moderation, account identity, or deletion permission beforehand. Only after the provider
+has accepted this particular signed token is its subject bound to the
+internal mapping and its app grants revoked. PocketBase also invalidates
+previous provider tokens on a successful reset. The
+capability is then consumed; use this control procedure for ordinary password changes.
 
-Quellen: [PocketBase Auth](https://pocketbase.io/docs/authentication/),
+Sources: [PocketBase Auth](https://pocketbase.io/docs/authentication/),
 [Records API](https://pocketbase.io/docs/api-records/),
-[0.40.5 Tokenvertrag](https://github.com/pocketbase/pocketbase/blob/v0.40.5/core/record_tokens.go),
-[0.40.5 ExternalAuth-Berechtigungen](https://github.com/pocketbase/pocketbase/blob/v0.40.5/apis/record_crud_external_auth_test.go).
+[0.40.5 token contract](https://github.com/pocketbase/pocketbase/blob/v0.40.5/core/record_tokens.go),
+[0.40.5 ExternalAuth permissions](https://github.com/pocketbase/pocketbase/blob/v0.40.5/apis/record_crud_external_auth_test.go).
 
-## Konfiguration und sicherer Cutover
+## Configuration and safe cutover
 
-Alle Secrets und Trustbindungen liegen ausschließlich in geschützter
-Laufzeitkonfiguration: Node-`runtime.env`, Worker-Secrets beziehungsweise dem
-Sites-Runtime-Secret-JSON. Nodeinstaller und Cloudflare-/Sites-Secretallowlist
-kennen die neuen Namen. Browserformular und API liefern nur Provider, exakte
-HTTPS-Adresse, ggf. öffentlichen Key und Betriebsflags zurück. Endpunkte haben
-keine Zugangsdaten, Pfade, Query oder Fragment; Ports gehören zur Origin.
-Requests sind zeitlich begrenzt und folgen keinen Redirects. Google-Prooftokens
-gehen ausschließlich an Googles festen HTTPS-Userinfo-Endpunkt.
+All secrets and trust bindings live exclusively in protected
+runtime configuration: Node `runtime.env`, Worker secrets, or the
+Sites runtime secret JSON. The Node installer and Cloudflare/Sites secret allowlist
+recognize the new names. The browser form and API return only provider, exact
+HTTPS address, public key when applicable, and operational flags. Endpoints have
+no credentials, paths, query, or fragment; ports belong to the origin.
+Requests are time-limited and follow no redirects. Google proof tokens
+go only to Google's fixed HTTPS userinfo endpoint.
 
-Der Provider-/Originwechsel einer aktiven Anmeldung wird serverseitig
-verweigert, auch wenn im selben Request `enabled=false` gesetzt wird. Zuerst
-am bisherigen Profil deaktivieren, dann die neue Konfiguration als Entwurf
-prüfen und bewusst aktivieren. Der geschützte Native-Bootstrapzugang bleibt
-separat; ein Nodebetrieb benötigt die dokumentierte Betreiber-/Datenübernahme,
-keinen öffentlichen Bootstrapendpunkt.
+Switching provider/origin for an enabled login configuration is denied server-side,
+even if `enabled=false` is set in the same request. First
+disable the existing profile, then verify the new configuration as a draft
+and deliberately enable it. Protected native bootstrap access remains
+separate; Node operation requires the documented operator/data migration,
+not a public bootstrap endpoint.
 
-Vorher:
+Beforehand:
 
-1. Quelle und Zielversion sichern und beide Writer für die Übernahme stoppen.
-   Zielkonten, Bestätigungsstatus und Providerverknüpfungen isoliert prüfen.
-   Auth-Adminlisten exportieren keine vollständigen Passwort-Hashes.
-2. **Passwörter:** Hashübernahme ist an die nachgewiesenen Importfunktionen,
-   Formate und Versionen beider konkreten Systeme gebunden. Dieser Adapter
-   implementiert keinen Hashimport. Ohne separat belegte Importkompatibilität
-   einen kontrollierten Passwort-Reset vorsehen. Geheimnisse/Exporte gehören
-   nicht in Source, Browser, Logs oder normale argv.
-3. **Identitäten:** Exakte Quell- und Zielidentität unabhängig beweisen und
-   gemäß [account-identities.md](account-identities.md) an denselben internen
-   Account binden. Die Zuordnung nutzt Provider **und den gesamten exakten
-   HTTPS-Issuer**, einschließlich eines möglichen Realmpfads. Die beiden
-   aktuellen Adapter verwenden Origins. Gleichlautende Subjects verschiedener
-   Provider/Issuer oder gleiche E-Mail-Adressen werden niemals automatisch
-   verknüpft. Rollen, Sperren, Lösch-Tombstones, Besitzrechte und private
-   Dateipfade gehören weiter zum unveränderten internen Account.
-4. **Sitzungen:** Zuordnung widerruft alte App-Grants. Laufende Browserlogins,
-   OAuth-/PKCE-Flows und begonnene Löschgrants sind an ihre Quellidentität
-   gebunden und bekommen am Ziel keine Rechte. Alte Providerzugänge separat
-   stilllegen; keine Refresh-, Bearer- oder Recoverytokens übertragen.
-5. SMTP, Googleclient, vollständige Callbackadressen, Datenbestände und
-   Kundenabläufe mit isolierten Konten prüfen. Erst danach bewusst aktivieren.
+1. Back up source and target versions and stop both writers for migration.
+   Verify target accounts, confirmation status, and provider links in isolation.
+   Auth admin lists do not export complete password hashes.
+2. **Passwords:** Hash migration depends on proven import capabilities,
+   formats, and versions of both concrete systems. This adapter
+   implements no hash import. Without separately proven import compatibility,
+   plan a controlled password reset. Secrets/exports do not belong
+   in source, browsers, logs, or ordinary argv.
+3. **Identities:** Independently prove exact source and target identity and
+   bind them to the same internal account according to
+   [account-identities.md](account-identities.md). Mapping uses the provider
+   **and the entire exact HTTPS issuer**, including a possible realm path. The two
+   current adapters use origins. Identical subjects from different
+   providers/issuers or identical email addresses are never automatically
+   linked. Roles, blocks, deletion tombstones, ownership rights, and private
+   file paths continue to belong to the unchanged internal account.
+4. **Sessions:** Mapping revokes old app grants. Active browser logins,
+   OAuth/PKCE flows, and started deletion grants are bound to their source identity
+   and obtain no rights at the target. Retire old provider access separately;
+   transfer no refresh, bearer, or recovery tokens.
+5. Verify SMTP, Google client, complete callback addresses, data inventories, and
+   customer flows with isolated accounts. Only then deliberately enable the target.
 
-Der Rückweg erhält Quell- und Zielzuordnungen sowie die unveränderten
-Anwendungsdaten. Anmeldung am Ziel deaktivieren, ursprünglichen geprüften
-Providerbestand, Konfiguration und Credentialbindungen herstellen und neue
-Anmeldung verlangen. Kein Rückweg auf eine App-Version vor der additiven
-Identitäts-/Providerschemaeinführung; keine automatische Datenbank-Downgrade
-oder Verknüpfung nach E-Mail. Snapshot-/Transferwerkzeuge bewahren die
-Providerauswahl und Bindungen privater Löschgrants. Ein Domain-Deltalauf darf
-auch bei identischer Origin das Providerprotokoll nicht ändern.
+The return path preserves source and target mappings and unchanged
+application data. Disable target login, restore the original verified
+provider inventory, configuration, and credential bindings, and require a new
+login. Do not return to an app version predating the additive
+identity/provider schema rollout; perform no automatic database downgrade
+or linking by email. Snapshot/transfer tools preserve
+provider selection and private deletion-grant bindings. A domain delta run must
+not change the provider protocol, even with an identical origin.
 
-## Ein weiterer Adapter
+## Another adapter
 
-Für einen konkret beauftragten Anbieter eine kleine Implementierung von
-`AuthClient`/`AuthAdminClient` und seiner verifizierten Fähigkeiten ergänzen,
-Providerdaten an dieser Grenze validieren und die explizite Auswahl in
-Provider/config/Setup erweitern. Sessionproof und OAuthidentitäten müssen aus
-serververifizierten Quellen kommen; falls sein Recoveryprotokoll keine Sitzung
-belegt, bleibt es wie bei PocketBase eine getrennte Capability. SDKs und
-Protokollformen bleiben im Adapter. Fachrouten, Rollen, Kontozuordnung,
-Nachweispfade und Löschverwaltung benötigen keine Provider-SDK-Umstellung.
+For a specifically commissioned provider, add a small implementation of
+`AuthClient`/`AuthAdminClient` and its verified capabilities,
+validate provider data at this boundary, and extend explicit selection in
+provider/config/setup. Session proof and OAuth identities must come from
+server-verified sources; if its recovery protocol proves no session,
+it remains a separate capability as with PocketBase. SDKs and
+protocol shapes stay in the adapter. Domain routes, roles, account mapping,
+evidence paths, and deletion administration need no provider SDK migration.
 
-## Abnahme und Grenzen
+## Acceptance and limits
 
-`tests/auth-provider.test.mjs` spricht mit den tatsächlich installierten
-Supabase-SDKs eine isolierte GoTrue-HTTP-Instanz.
-`tests/pocketbase-auth.test.mjs` verwendet eine unabhängige REST-Instanz mit
-anderem Payload und Nicht-UUID-Subjects und führt die tatsächlichen Adapter
-und App-Routen aus. Nur der Transport der synthetischen freigegebenen
-HTTPS-Origin wird auf Loopback geleitet; SDKs, Adapter und Fachrouten werden
-nicht durch interne Mocks ersetzt. Geprüft werden Login, Signup/Bestätigung,
-Recovery/Reset, Google/State/PKCE, Reauth, Logout, Admin-CRUD/Löschretry,
-Identitätszuordnung, private Besitzrechte und relevante negative Verträge.
+`tests/auth-provider.test.mjs` uses the actually installed
+Supabase SDKs to communicate with an isolated GoTrue HTTP instance.
+`tests/pocketbase-auth.test.mjs` uses an independent REST instance with
+a different payload and non-UUID subjects, executing the actual adapters
+and app routes. Only transport for the synthetic approved
+HTTPS origin is routed to loopback; SDKs, adapters, and domain routes are
+not replaced by internal mocks. Checks cover login, signup/confirmation,
+recovery/reset, Google/state/PKCE, reauth, logout, admin CRUD/deletion retry,
+identity mapping, private ownership rights, and relevant negative contracts.
 
-Die zusätzliche reale lokale PocketBase-0.40.5-Probe bestätigte Login,
-serverseitiges Refresh, Reauth, aktuelle private ExternalAuth-Beziehungen,
-Admin-CRUD, Logout und Providerlöschung mit synthetischen Konten. Kein echter
-Google-OAuthclient, produktiver Mailversand oder Import realer Passwort-Hashes
-wurde damit betrieben. Die bisherigen Native-/Google-/Konto-/Kunden- und
-Providerwechseltests bleiben registriert. Dieses Issue stellt keine Live-
-Authinstanz bereit und verändert keinen produktiven Provider oder Kontobestand.
+The additional real local PocketBase 0.40.5 probe confirmed login,
+server-side refresh, reauth, current private ExternalAuth relationships,
+admin CRUD, logout, and provider deletion with synthetic accounts. It used no real
+Google OAuth client, production email delivery, or import of real password hashes.
+Existing native/Google/account/customer and provider-switch tests remain registered.
+This issue provisions no live auth instance and changes no production provider or account inventory.
 
-## Privater Betreiberweg ohne Native-Administration
+## Private operator procedure without native administration
 
-Auf Node und dem eigenen Worker gibt es keinen Sites-Nativezugang. Nach
-Deaktivierung von `auth_settings.enabled` verliert dort auch der bisherige
-Webadmin den Zugriff auf die Konfiguration. Der Formularweg allein kann dann
-nicht wieder aktivieren. Diese Zugriffssperre wird beibehalten; es gibt keine
-öffentliche Bootstraproute.
+Node and the owned Worker have no Sites native access. After
+`auth_settings.enabled` is disabled, the previous web admin also loses
+configuration access there. The form alone then cannot re-enable it.
+This access restriction is preserved; there is no
+public bootstrap route.
 
-Für Node ist der konkrete Betreiberweg:
+The concrete Node operator procedure is:
 
-1. Im alten Profil deaktivieren; Appdienst und sonstige Writer stoppen. Alte
-   Mailtimer oder Crons stoppen und dauerhaft deaktivieren.
-   Ein geprüftes Backup **beider** SQLite-Datenbanken einschließlich nötiger
-   WAL-/SHM-Dateien sichern und Wiederherstellung vorher prüfen. Der Dienst
-   bleibt während der folgenden Schritte gestoppt.
-2. Zielkonten und vollständige Quell-/Zielzuordnungen privat prüfen, mit der
-   vorhandenen `linkAccountIdentity`-Operation auf einer geschützten
-   Administrationsmaschine vorbereiten und deren unveränderte Konto-IDs,
-   Rollen, Sperren, Löschzustände sowie private Dateien vergleichen. Die
-   geprüften SQLite-Dateien anschließend bei gestoppten Writern geschützt
-   übernehmen. [account-identities.md](account-identities.md) beschreibt die
-   Verträge; bloße Listenabfrage oder gleiche E-Mail ist kein Identitätsbeweis.
-3. Zielorigin/Provider sowie den **Ziel**-Adminschlüssel mit seinen Bindungen
-   in der geschützten `shared/runtime.env` hinterlegen. Zielsettings, SMTP,
-   Google und Callback separat prüfen. Den untenstehenden vorhandenen
-   Node-24-/SQLite-Befehl auf dem Host als berechtigter Dienstbetreiber
-   ausführen. Er benötigt weder Sourcecheckout noch Build und enthält nur
-   öffentliche Profilangaben; Geheimnisse bleiben in `runtime.env`.
-4. Den Dienst mit dem geprüften Release neu starten. Alte Cookiegläser müssen
-   verweigert werden; mit den geprüften Zielkonten neu anmelden und Admin,
-   Besitzrechte, Sperren und private Nachweise prüfen. Alte Mailtimer oder
-   Crons bleiben deaktiviert. Nur ein einzelnes gespeichertes Ereignis nach dem
-   [Vertrag für manuellen Versand](node-runtime.md#hintergrundversand) wiederholen.
-   Bei Fehlern gestoppt bleiben und den dokumentierten Daten erhaltenden Rückweg
-   verwenden.
+1. Disable the old profile; stop the app service and other writers. Stop old
+   email timers or crons and disable them permanently.
+   Secure a verified backup of **both** SQLite databases, including required
+   WAL/SHM files, and verify recovery beforehand. The service
+   stays stopped throughout the following steps.
+2. Privately verify target accounts and complete source/target mappings,
+   prepare them with the existing `linkAccountIdentity` operation on a protected
+   administration machine, and compare their unchanged account IDs,
+   roles, blocks, deletion states, and private files. Then securely
+   adopt the verified SQLite files with writers stopped.
+   [account-identities.md](account-identities.md) describes the contracts;
+   merely querying a list or matching email is not proof of identity.
+3. Store the target origin/provider and **target** admin key with its bindings
+   in protected `shared/runtime.env`. Verify target settings, SMTP,
+   Google, and callback separately. Run the existing
+   Node 24/SQLite command below on the host as an authorized service operator.
+   It requires neither a source checkout nor a build and contains only
+   public profile details; secrets stay in `runtime.env`.
+4. Restart the service with the verified release. Old cookie jars must be
+   rejected; sign in again with verified target accounts and check admin access,
+   ownership rights, blocks, and private evidence. Old email timers or
+   crons stay disabled. Retry only one stored event according to the
+   [manual delivery contract](node-runtime.md#background-delivery).
+   On failure, stay stopped and use the documented return path
+   that preserves data.
 
-Beispiel für bewusstes Aktivieren eines **bereits vollständig zugeordneten und
-geprüften** PocketBase-Ziels. Platzhalter und Pfad durch die überprüften Werte
-ersetzen; `email_delivery_confirmed=0` erteilt keine ungetestete Versandfreigabe:
+Example of deliberately enabling an **already fully mapped and
+verified** PocketBase target. Replace placeholders and the path with verified values;
+`email_delivery_confirmed=0` does not grant untested delivery approval:
 
 ```sh
 node --input-type=module <<'NODE'
@@ -317,10 +315,10 @@ finally{database.close();}
 NODE
 ```
 
-Der Vollständigkeitscheck ersetzt keine unabhängige Identitätsprüfung oder
-Provider-Vorabnahme; er verweigert lediglich fehlende Zuordnungen. Für den
-eigenen Worker erfolgt die gleichwertige private Konfigurations-/Grantänderung
-über die berechtigten D1-Betriebswerkzeuge bei gesperrten Writern und geprüftem
-Backup. Einen fremden Provider oder Kontobestand nicht im Webformular erraten.
-Ein Rückweg führt dieselben kontrollierten Schritte mit dem erhaltenen,
-geprüften Quellprofil aus und verlangt neue Anmeldung.
+The completeness check does not replace independent identity verification or
+provider acceptance beforehand; it merely rejects missing mappings. For the
+owned Worker, perform the equivalent private configuration/grant change
+through authorized D1 operations tools with writers blocked and a verified
+backup. Do not guess an unfamiliar provider or account inventory in the web form.
+The return path performs the same controlled steps with the preserved,
+verified source profile and requires a new login.

@@ -75,7 +75,7 @@ await mkdir(output, { recursive: true });
 await build({
   stdin: {
     contents:
-      "export {default as Profile} from './app/[locale]/werkstatt/[id]/profile';export {I18nProvider} from './lib/i18n/client';export {getMessages,createTranslator} from './lib/i18n/messages';export {NavigationGuardProvider,useNavigationState} from './lib/i18n/navigation-guard';",
+      "export {default as Profile} from './app/[locale]/workshop/[id]/profile';export {I18nProvider} from './lib/i18n/client';export {getMessages,createTranslator} from './lib/i18n/messages';export {NavigationGuardProvider,useNavigationState} from './lib/i18n/navigation-guard';",
     resolveDir: process.cwd(),
     loader: "tsx",
   },

@@ -12,7 +12,7 @@ export function profileSearchHref(value: string | null, directory: Workshop[]) {
     const url = new URL(value, "https://riparim.invalid");
     if (
       url.origin !== "https://riparim.invalid" ||
-      pageIdentityPath(url.pathname) !== "/werkstaetten"
+      pageIdentityPath(url.pathname) !== "/workshops"
     )
       return null;
     return localizeHref(

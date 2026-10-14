@@ -1,3 +1,4 @@
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 import { ValidationError } from "@/lib/validation-error";
 import { getAdminUser } from "@/app/auth";
 import {
@@ -12,12 +13,15 @@ export async function GET() {
   const u = await getAdminUser();
   if (!u)
     return json(
-      { error: "Bitte melde dich an.", errorCode: "authentication_required" },
+      {
+        error: legacyMessages.authenticationRequired,
+        errorCode: "authentication_required",
+      },
       401,
     );
   if (!u.isModerator)
     return json(
-      { error: "Kein Zugriff auf die Konfiguration.", errorCode: "forbidden" },
+      { error: legacyMessages.authConfigForbidden, errorCode: "forbidden" },
       403,
     );
   try {
@@ -36,12 +40,15 @@ export async function POST(request: Request) {
   const u = await getAdminUser();
   if (!u)
     return json(
-      { error: "Bitte melde dich an.", errorCode: "authentication_required" },
+      {
+        error: legacyMessages.authenticationRequired,
+        errorCode: "authentication_required",
+      },
       401,
     );
   if (!u.isModerator || !sameOrigin(request))
     return json(
-      { error: "Kein Zugriff auf die Konfiguration.", errorCode: "forbidden" },
+      { error: legacyMessages.authConfigForbidden, errorCode: "forbidden" },
       403,
     );
   try {
@@ -60,8 +67,7 @@ export async function POST(request: Request) {
     )
       return json(
         {
-          error:
-            "Ein aktives Auth-Projekt kann nicht ohne kontrollierte Kontoübernahme gewechselt werden.",
+          error: legacyMessages.authProjectChange,
           errorCode: "auth_project_change",
         },
         400,
@@ -85,7 +91,9 @@ export async function POST(request: Request) {
     return json(
       {
         error:
-          e instanceof ValidationError ? e.message : "Bitte prüfe die Angaben.",
+          e instanceof ValidationError
+            ? e.message
+            : legacyMessages.checkDetails,
         errorCode:
           e instanceof ValidationError ? e.code : "auth_config_invalid",
       },

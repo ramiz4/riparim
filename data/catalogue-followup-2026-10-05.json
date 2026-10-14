@@ -32,7 +32,7 @@
       "sourceUrls": [
         "https://www.gjithebiznesi.com/XK/auto-ballkan-044-177-327"
       ],
-      "reason": "Vom Nutzer als Truck-Teilelieferant bestätigt; kein konkreter Pkw-Werkstattnachweis."
+      "reason": "Confirmed by the user as a truck parts supplier; no concrete evidence of a passenger-car workshop."
     },
     {
       "workshopId": "auto-diagnostika-prishtina",
@@ -44,7 +44,7 @@
         "https://www.njoftime.com/threads/prishtine-auto-diagnostika-prishtin%C3%AB.378447/",
         "https://www.gjithebiznesi.com/XK/auto-servis-auto-diagnostika-044-112-914"
       ],
-      "reason": "Eigene Anzeige belegt ausschließlich Pkw-Fehlerdiagnose. Unabhängige aktuelle Anschrift und Telefon bestätigen denselben direkt geprüften Karten-Eintrag.",
+      "reason": "The business's own advertisement establishes passenger-car fault diagnostics only. An independent current address and phone confirm the same directly checked Maps entry.",
       "googleIdentity": {
         "placeId": "ChIJox3Nl9OfVBMRe4yWuczSZZw",
         "uniqueInCatalogue": true,
@@ -69,7 +69,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://www.autoelectronics-ks.com/"],
-      "reason": "Eigene Website bestätigt Kontakt, Adresse und Pkw-Elektronik. Aktuelle Namens- und exakte Telefonsuche liefern keinen passenden Google-Eintrag; einen anderen AES-Betrieb nicht zuordnen."
+      "reason": "The business's own website confirms contact details, address and passenger-car electronics. Current name and exact-phone searches yield no matching Google entry; do not assign another AES business."
     },
     {
       "workshopId": "auto-elektro-servis-niki-gjilan",
@@ -78,7 +78,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/auto-elektro-servis-niki-1"],
-      "reason": "Eigener profilspezifischer Verzeichnispin ist belegt. Elektro Servis Gjilan liegt über einen Kilometer entfernt; andere Kandidaten haben andere Namen/Standorte."
+      "reason": "The profile-specific directory pin is evidenced. Elektro Servis Gjilan is over one kilometer away; other candidates have different names/locations."
     },
     {
       "workshopId": "auto-elektro-start-prishtina",
@@ -87,7 +87,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/auto-elektro-start-1"],
-      "reason": "Profilspezifischer Verzeichnispin, Pkw-Elektrik und Kontakt sind unabhängig belegt. Kein passender aktueller Kartenbetrieb oder Kontaktbrücke zur Betriebsmail."
+      "reason": "The profile-specific directory pin, passenger-car electrical work and contact details are independently evidenced. No matching current Maps business or contact link to the business email."
     },
     {
       "workshopId": "auto-laker-kimi-prishtina",
@@ -96,7 +96,7 @@
       "assessment": "published",
       "resultingStatus": "published",
       "sourceUrls": ["https://stgres.gjirafa.biz/auto-laker-kimi-1"],
-      "reason": "Betriebsname, eigener Foto-/Leistungsbeleg und der profilspezifische Marker im unabhängigen Verzeichnis bestätigen den präzisen Standort des gültigen Google-Eintrags. Dort fehlt eine Telefonnummer; der Verzeichniskontakt bleibt als solcher gekennzeichnet.",
+      "reason": "The business name, its own photo/service evidence and the profile-specific marker in the independent directory confirm the precise location of the valid Google entry. That entry has no phone number; the directory contact remains labeled as such.",
       "googleIdentity": {
         "placeId": "ChIJebOcSQCfVBMRenUNUpgt-kA",
         "uniqueInCatalogue": true,
@@ -121,7 +121,7 @@
           "lng": 21.159120798110962
         },
         "within300m": true,
-        "note": "Der sichtbare profilspezifische Marker wurde über die unabhängige Web-Mercator-Kachel und seinen Markerfuß lokalisiert; kein Kartenmittelpunkt."
+        "note": "The visible profile-specific marker was located using the independent Web Mercator tile and its marker base; it is not a map center."
       }
     },
     {
@@ -135,7 +135,7 @@
         "https://inovatorautomotive.com/kontakti/",
         "https://maps.app.goo.gl/ekKSvRLUMb5tv1GKA"
       ],
-      "reason": "Die eigene Unternehmensgeschichte belegt die Fortführung von Auto Servis INOVATOR als INOVATOR Automotive. Der eigene Kontakt und direkte Kartenlink bestätigen dieselbe Google-Identität auch ohne dort veröffentlichte Telefonnummer.",
+      "reason": "The business's own history establishes that Auto Servis INOVATOR continued as INOVATOR Automotive. Its own contact details and direct Maps link confirm the same Google identity even without a published phone number there.",
       "googleIdentity": {
         "placeId": "ChIJx-kdM1l-VBMRwc2PmJdYa4Q",
         "uniqueInCatalogue": true,
@@ -180,7 +180,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/auto-pjes--servis-dubova-1"],
-      "reason": "Pkw-Service und Kontakt sind unabhängig belegt; kein gleicher aktueller Kartenkontakt und keine belegte Identitätsbrücke."
+      "reason": "Passenger-car service and contact details are independently evidenced; no identical current Maps contact or evidenced identity link."
     },
     {
       "workshopId": "auto-pjese-servis-fatosi-gracanice",
@@ -189,14 +189,14 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/auto-pjes--servis-fatosi-1"],
-      "reason": "Unabhängiger profilspezifischer Kartenmarker, Reparaturfotos, Pkw-Service und drei Kontakte sind belegt. Die aktuelle Google-Suche liefert nur andere Betriebe mit abweichenden Namen und Kontakten; kein bestätigter direkter Eintrag.",
+      "reason": "An independent profile-specific map marker, repair photos, passenger-car service and three contacts are evidenced. The current Google search only yields other businesses with different names and contacts; no confirmed direct entry.",
       "independentMapMarker": {
         "markerAlt": "auto-pjes--servis-fatosi-1",
         "sourceCoordinates": {
           "lat": 42.58514408289668,
           "lng": 21.13142967224121
         },
-        "note": "Benannter Geschäftspin, nicht Kartenmittelpunkt. Markerfuß bei 218/463 über eigener sichtbarer Web-Mercator-Kachel17/73229/48368 lokalisiert."
+        "note": "Named business pin, not a map center. Marker base at 218/463 located using the visible Web Mercator tile 17/73229/48368."
       }
     },
     {
@@ -206,7 +206,7 @@
       "assessment": "identity_conflict",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-beni-2"],
-      "reason": "Der unabhängig belegte profilspezifische Kartenmarker und Kontakt passen nicht zum aktuellen Google-Namensvetter; etwa drei Kilometer Abstand. Keine Identitätsbrücke belegt."
+      "reason": "The independently evidenced profile-specific map marker and contact do not match the current Google namesake; approximately three kilometers apart. No identity link is evidenced."
     },
     {
       "workshopId": "auto-servis-cufa-ferizaj",
@@ -219,7 +219,7 @@
         "https://www.facebook.com/people/Autoservis-Cufa/100066490786217/",
         "https://www.facebook.com/reel/931922949996718/"
       ],
-      "reason": "Aktuelles Betriebsprofil und unabhängiges Verzeichnis bestätigen Kontakt und Bibaj. Der vom Betrieb veröffentlichte Directions-Zielpunkt liegt höchstens 300 Meter vom selben Google-Eintrag entfernt; ein eigener Beitrag belegt Pkw-Motorarbeiten.",
+      "reason": "The current business profile and independent directory confirm contact details and Bibaj. The Directions destination published by the business is at most 300 meters from the same Google entry; the business's own post establishes passenger-car engine work.",
       "googleIdentity": {
         "placeId": "ChIJFTS-BHR_VBMRLDRPsHW-ogI",
         "uniqueInCatalogue": true,
@@ -256,7 +256,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-fia-1"],
-      "reason": "Pkw-Service und Kontakt sowie der profilspezifische unabhängige Kartenmarker sind belegt; dort ist kein entsprechender aktueller Google-Eintrag nachgewiesen. Auto Servis FIAT an einem anderen Standort nicht gleichsetzen."
+      "reason": "Passenger-car service and contact details, along with the profile-specific independent map marker, are evidenced; no corresponding current Google entry is established there. Do not equate it with Auto Servis FIAT at a different location."
     },
     {
       "workshopId": "auto-servis-ford-jashanica-prishtina",
@@ -268,7 +268,7 @@
         "https://www.merrjep.com/shpallja/ford-servis-jashanica-autopjes-servisim/7226795",
         "https://stgres.gjirafa.biz/auto-servis-ford-jashanica-1"
       ],
-      "reason": "Die eigene Anzeige nennt die veröffentlichte Mobilnummer und dieselbe lokale Festnetznummer wie der Google-Eintrag unter historischer Vorwahl. Pkw-Service, Name und Straße sind unabhängig belegt.",
+      "reason": "The business's own advertisement lists the published mobile number and the same local landline number as the Google entry under a historical dialing code. Passenger-car service, name and street are independently evidenced.",
       "googleIdentity": {
         "placeId": "ChIJgxoAFyKfVBMRJOYQKh2Gejs",
         "uniqueInCatalogue": true,
@@ -293,7 +293,7 @@
       "assessment": "published",
       "resultingStatus": "published",
       "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-gazi-1"],
-      "reason": "Betriebsname, Reparaturfoto und der genaue profilspezifische Marker im unabhängigen Verzeichnis bestätigen genau diesen gültigen Google-Eintrag. Dort fehlt die Telefonnummer; der unabhängig belegte Verzeichniskontakt bleibt gekennzeichnet.",
+      "reason": "The business name, repair photo and exact profile-specific marker in the independent directory confirm this exact valid Google entry. Its phone number is missing; the independently evidenced directory contact remains labeled.",
       "googleIdentity": {
         "placeId": "ChIJPTLT0Z-vUxMRruPkPVs7l0Y",
         "uniqueInCatalogue": true,
@@ -318,7 +318,7 @@
           "lng": 20.443475246
         },
         "within300m": true,
-        "note": "Sichtbarer profilspezifischer Marker mit Betriebszeichen und Pkw auf Hebebühne; anderer Namensvetter über einen Kilometer entfernt."
+        "note": "Visible profile-specific marker with a business sign and a passenger car on a lift; another namesake is over one kilometer away."
       }
     },
     {
@@ -328,7 +328,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-hoda-1"],
-      "reason": "Unabhängige Quelle belegt Pkw-Kupplungs- und Bremsarbeiten; aktuelle Kartenergebnisse betreffen andere Betriebe."
+      "reason": "An independent source establishes passenger-car clutch and brake work; current Maps results concern other businesses."
     },
     {
       "workshopId": "auto-servis-karabeg-prishtina",
@@ -337,7 +337,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-karabeg-1"],
-      "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke."
+      "reason": "Passenger-car service and an independent directory contact are evidenced. Current Maps and contact checks yield other businesses or businesses without an unambiguous correspondence; no reliable identity link."
     },
     {
       "workshopId": "auto-servis-kiki-ferizaj",
@@ -346,7 +346,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-kiki-1"],
-      "reason": "Unabhängiger Pkw-Servicebeleg vorhanden; Reno Servis Kiki in Nordmazedonien hat ein anderes Land und einen anderen Kontakt und wird nicht zugeordnet."
+      "reason": "Independent passenger-car service evidence is available; Reno Servis Kiki in North Macedonia has a different country and contact and is not assigned."
     },
     {
       "workshopId": "auto-servis-lavdrimi-ferizaj",
@@ -355,7 +355,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-lavdrimi-1"],
-      "reason": "Echter Verzeichnismarker ist belegt. Transmission Lavdimi liegt über vier Kilometer entfernt; näherer LABI-Betrieb hat anderen Namen/Kontakt. Keine Kontinuitätsbrücke."
+      "reason": "A genuine directory marker is evidenced. Transmission Lavdimi is over four kilometers away; the closer LABI business has a different name/contact. No continuity link."
     },
     {
       "workshopId": "auto-servis-maloku-decan",
@@ -364,7 +364,7 @@
       "assessment": "published",
       "resultingStatus": "published",
       "sourceUrls": ["https://auto-servis-pjese-maloku.base44.app/"],
-      "reason": "Die eigene Website verbindet bisherigen und aktuellen Kontakt und bestätigt Lan Dobraj sowie konkrete Pkw-Reparaturen. Der gültige Google-Eintrag hat dieselbe aktuelle Telefonnummer und Anschrift. Fehlerhafte Telefonlink-Vorlagen wurden nicht übernommen.",
+      "reason": "The business's own website links its previous and current contacts and confirms Lan Dobraj and specific passenger-car repairs. The valid Google entry has the same current phone number and address. Incorrect phone-link templates were not adopted.",
       "googleIdentity": {
         "placeId": "ChIJu_fNLeFVUhMRsFdcOUdpo7Y",
         "uniqueInCatalogue": true,
@@ -405,7 +405,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-mendi-2"],
-      "reason": "Unabhängiger profilspezifischer Marker und Bibaj-Betriebsbeleg vorhanden. Nähe zu Auto Bibaj reicht bei anderem Namen und anderer Telefonnummer nicht für eine Zuordnung."
+      "reason": "An independent profile-specific marker and evidence of the Bibaj business are available. Proximity to Auto Bibaj is insufficient for assignment when the name and phone number differ."
     },
     {
       "workshopId": "auto-servis-mercedes-benz-vedati-prishtina",
@@ -417,7 +417,7 @@
         "https://www.merrjep.com/shpallja/service-mercedes-benz-vedati/10609892",
         "https://www.gjithebiznesi.com/XK/mercedes-benz-vedati-044-496-496"
       ],
-      "reason": "Die aktuelle Betriebsanzeige verbindet den bisherigen und aktuellen Kontakt. Direkter Kartenlink und gültige Place ID wählen denselben Betrieb mit bestätigter Anschrift aus.",
+      "reason": "The current business advertisement links its previous and current contacts. The direct Maps link and valid Place ID select the same business with a confirmed address.",
       "googleIdentity": {
         "placeId": "ChIJCz9-2W6fVBMRuVUellpelNw",
         "uniqueInCatalogue": true,
@@ -444,7 +444,7 @@
       "sourceUrls": [
         "https://stgres.gjirafa.biz/auto-servis-valoni---feroda-1"
       ],
-      "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke."
+      "reason": "Passenger-car service and an independent directory contact are evidenced. Current Maps and contact checks yield other businesses or businesses without an unambiguous correspondence; no reliable identity link."
     },
     {
       "workshopId": "auto-servis-xhelali-prizren",
@@ -457,7 +457,7 @@
         "https://www.facebook.com/AutoFoljeXhelali/",
         "https://www.autoyas.com/XK/Prizren/439576746129205/Auto-Folje-Xhelali"
       ],
-      "reason": "Unabhängiger Betriebsbeleg verbindet den bisherigen Kontakt ausdrücklich mit Auto Folje Xhelali. Das eigene Betriebsprofil bestätigt aktuellen Kontakt, Anschrift und genauen Directions-Zielpunkt innerhalb von 300 Metern zum selben Google-Eintrag.",
+      "reason": "Independent business evidence explicitly links the previous contact to Auto Folje Xhelali. The business's own profile confirms the current contact, address and exact Directions destination within 300 meters of the same Google entry.",
       "googleIdentity": {
         "placeId": "ChIJgc9JBjKUUxMRoP3PNI5Eo-U",
         "uniqueInCatalogue": true,
@@ -490,7 +490,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/automekanik--leoni-1"],
-      "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke."
+      "reason": "Passenger-car service and an independent directory contact are evidenced. Current Maps and contact checks yield other businesses or businesses without an unambiguous correspondence; no reliable identity link."
     },
     {
       "workshopId": "automekanik-muja-prishtina",
@@ -499,7 +499,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/automekanik-muja-1"],
-      "reason": "Aktueller namensähnlicher Muja-Eintrag liegt an einem anderen Ort; kein Kontakt-/Standortnachweis für dieselbe Identität."
+      "reason": "The current similarly named Muja entry is in a different place; no contact/location evidence for the same identity."
     },
     {
       "workshopId": "autoservis-bekteshi-prishtina",
@@ -508,7 +508,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-bekteshi-1"],
-      "reason": "Pkw-Motor-/Getriebe- und Ölservice unabhängig belegt; aktuelle Google-Treffer passen nicht zum profilspezifischen Standort."
+      "reason": "Passenger-car engine/transmission and oil service are independently evidenced; current Google results do not match the profile-specific location."
     },
     {
       "workshopId": "autoservis-difa-prishtina",
@@ -517,7 +517,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-difa-1"],
-      "reason": "Originalquelle nennt einen zusätzlichen Telefonkontakt; auch mit dieser Nummer und dem profilspezifischen Standort kein passender Google-Betrieb belegt."
+      "reason": "The original source lists an additional phone contact; even with this number and the profile-specific location, no matching Google business is evidenced."
     },
     {
       "workshopId": "autoservis-irfi-prishtina",
@@ -526,7 +526,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-irfi-1"],
-      "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke."
+      "reason": "Passenger-car service and an independent directory contact are evidenced. Current Maps and contact checks yield other businesses or businesses without an unambiguous correspondence; no reliable identity link."
     },
     {
       "workshopId": "autoservis-naser-minushi-prishtina",
@@ -535,7 +535,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-naser-minushi-1"],
-      "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke."
+      "reason": "Passenger-car service and an independent directory contact are evidenced. Current Maps and contact checks yield other businesses or businesses without an unambiguous correspondence; no reliable identity link."
     },
     {
       "workshopId": "axha-prishtina",
@@ -544,7 +544,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/axha-1"],
-      "reason": "Nähe zum öffentlichen BMW-balia-Profil ersetzt keine Namens-/Kontaktkontinuität. Keine passende eigene Google-Identität; bestehende öffentliche Zuordnung nicht überschreiben."
+      "reason": "Proximity to the public BMW-balia profile does not replace name/contact continuity. No matching Google identity for this business; do not overwrite the existing public assignment."
     },
     {
       "workshopId": "benita-company-kline",
@@ -553,7 +553,7 @@
       "assessment": "excluded",
       "resultingStatus": "draft",
       "sourceUrls": ["https://benita-ks.com/"],
-      "reason": "Tankstelle mit ausdrücklich beworbenem Schwerfahrzeug-Service. Der allgemeine Express-Service belegt keinen konkreten Pkw-Werkstattumfang."
+      "reason": "Fuel station explicitly advertising heavy-vehicle service. The general express service does not establish a concrete passenger-car workshop scope."
     },
     {
       "workshopId": "bmw-prishtina-prishtina",
@@ -566,7 +566,7 @@
         "https://www.gjithebiznesi.com/XK/bmw-prishtina-046-160-902",
         "https://stgres.gjirafa.biz/bmw-prishtina-1"
       ],
-      "reason": "Betriebsbeiträge bestätigen den früheren Straßenstandort und die aktuelle Anschrift an der Lidhja e Lezhës sowie den neuen Kontakt. Ein unabhängiges Verzeichnis und der gültige Google-Eintrag stimmen bei Name und neuer Telefonnummer überein.",
+      "reason": "Business posts confirm the former street location and current address on Lidhja e Lezhës, along with the new contact. An independent directory and the valid Google entry agree on the name and new phone number.",
       "googleIdentity": {
         "placeId": "ChIJqXQcgJufVBMROGwBj_-gtXU",
         "uniqueInCatalogue": true,
@@ -601,7 +601,7 @@
         "https://www.filikaqa.com/en/listings/1394-auto-servis-mentori",
         "https://yellowpages-tl.cybo.com/XK-biz/autoservis-mentori"
       ],
-      "reason": "Unveränderte Telefonnummer und Fiat-Spezialisierung verbinden den bisherigen Verzeichniseintrag mit Auto Servis Mentori. Der aktuelle Name und die genaue Anschrift sind unabhängig belegt und wählen denselben gültigen Google-Eintrag.",
+      "reason": "The unchanged phone number and Fiat specialization link the previous directory entry to Auto Servis Mentori. The current name and exact address are independently evidenced and select the same valid Google entry.",
       "googleIdentity": {
         "placeId": "ChIJqdYqioGfVBMRibazGbBsjTU",
         "uniqueInCatalogue": true,
@@ -631,7 +631,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/firi-1"],
-      "reason": "Nähe zum öffentlichen BMW-balia-Profil ersetzt keine Namens-/Kontaktkontinuität. Keine passende eigene Google-Identität; bestehende öffentliche Zuordnung nicht überschreiben."
+      "reason": "Proximity to the public BMW-balia profile does not replace name/contact continuity. No matching Google identity for this business; do not overwrite the existing public assignment."
     },
     {
       "workshopId": "g-b-prishtina",
@@ -640,7 +640,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/g--b-1"],
-      "reason": "Nähe zum öffentlichen BMW-balia-Profil ersetzt keine Namens-/Kontaktkontinuität. Keine passende eigene Google-Identität; bestehende öffentliche Zuordnung nicht überschreiben."
+      "reason": "Proximity to the public BMW-balia profile does not replace name/contact continuity. No matching Google identity for this business; do not overwrite the existing public assignment."
     },
     {
       "workshopId": "ibra-prishtina",
@@ -649,7 +649,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/ibra-1"],
-      "reason": "Auto Elektro Ibra hat einen anderen Kontakt und einen Standort außerhalb von 300 Metern vom tatsächlichen Verzeichnispin. Keine belegte Kontinuitätsbrücke."
+      "reason": "Auto Elektro Ibra has a different contact and a location more than 300 meters from the actual directory pin. No evidenced continuity link."
     },
     {
       "workshopId": "isuzu-servis-prizren",
@@ -661,7 +661,7 @@
         "https://isuzu.co.rs/kontakt-kosovo/",
         "https://www.burak-ks.com/en/trucks"
       ],
-      "reason": "Der Isuzu-Standort gehört zum Truck-&-Bus-Angebot von Burak; dieser Nutzfahrzeugeintrag wird nicht als Pkw-Werkstatt geführt."
+      "reason": "The Isuzu location belongs to Burak's truck and bus offering; this commercial-vehicle entry is not listed as a passenger-car workshop."
     },
     {
       "workshopId": "moto-stanki-gjilan",
@@ -670,7 +670,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/moto-stanki-1"],
-      "reason": "Originalquelle bestätigt ausdrücklich Pkw- und Motorradservice; kein korrespondierender aktueller Google-Eintrag."
+      "reason": "The original source explicitly confirms passenger-car and motorcycle service; no corresponding current Google entry."
     },
     {
       "workshopId": "nero-prizren",
@@ -682,7 +682,7 @@
         "https://biznisinfo.online/biznis-informator-6/",
         "https://faqet-e-verdha.cybo.com/XK/prizreni/riparimi-i-makinave-"
       ],
-      "reason": "Aktueller unabhängiger Reparaturbeleg bestätigt Telefonnummer und Prizren; Name und genaue Straße stimmen mit dem gültigen Google-Eintrag überein. Dort steht dieselbe lokale Nummer mit der früheren Kosovo-Vorwahl; der aktuelle unabhängig belegte Kontakt bleibt erhalten.",
+      "reason": "Current independent repair evidence confirms the phone number and Prizren; the name and exact street agree with the valid Google entry. It lists the same local number with the former Kosovo dialing code; the current independently evidenced contact is preserved.",
       "googleIdentity": {
         "placeId": "ChIJmXwWcEuUUxMRO19gku2sp8U",
         "uniqueInCatalogue": true,
@@ -707,7 +707,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/opel-prishtina-1"],
-      "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke."
+      "reason": "Passenger-car service and an independent directory contact are evidenced. Current Maps and contact checks yield other businesses or businesses without an unambiguous correspondence; no reliable identity link."
     },
     {
       "workshopId": "opel-rakovica-prishtina",
@@ -716,10 +716,10 @@
       "assessment": "closed",
       "resultingStatus": "draft",
       "sourceUrls": ["https://www.gjithebiznesi.com/XK/opel-rakovica"],
-      "reason": "Unabhängiges Verzeichnis markiert den zugeordneten Betrieb als geschlossen und den Kontakt als historisch. Keine bestätigte Wiedereröffnung; nicht veröffentlichen.",
+      "reason": "An independent directory marks the assigned business as closed and its contact as historical. No confirmed reopening; do not publish.",
       "unassignedProviderIdentity": {
         "placeId": "ChIJLxRcyNyeVBMRfsOdRteU1Ao",
-        "reason": "Keiner öffentlichen Zuordnung zugewiesen; Schließung oder Filialkontinuität ungeklärt."
+        "reason": "Not assigned to any public mapping; closure or branch continuity remains unresolved."
       }
     },
     {
@@ -732,7 +732,7 @@
         "https://stgres.gjirafa.biz/auto-servis-beda-1",
         "https://pagini-aurii.cybo.com/XK-biz/auto-sevice-beda-shpk"
       ],
-      "reason": "Gleiche internationale Telefonnummer, Betriebsname und genaue Straße bestätigen den heutigen BEDA-Eintrag. Pkw-Reparatur ist unabhängig belegt.",
+      "reason": "The same international phone number, business name and exact street confirm the current BEDA entry. Passenger-car repair is independently evidenced.",
       "googleIdentity": {
         "placeId": "ChIJoaIikxGfVBMR-sPTTKaGVLc",
         "uniqueInCatalogue": true,
@@ -761,7 +761,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/prishtina-auto-home-1"],
-      "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke."
+      "reason": "Passenger-car service and an independent directory contact are evidenced. Current Maps and contact checks yield other businesses or businesses without an unambiguous correspondence; no reliable identity link."
     },
     {
       "workshopId": "reno-center-muciqi-prishtina",
@@ -774,10 +774,10 @@
         "https://www.merrjep.com/shpallja/reno-center-muciqi/10545304",
         "https://dogana.rks-gov.net/sharedfolder/AnnouncementFiles/2026_b0c9a4d9-6eaf-4463-9a1f-f6b4d67d9c49.Pdf"
       ],
-      "reason": "Aktuelle Nordfiliale in Shkabaj/Obiliq ist eindeutig belegt; sie darf ohne bestätigte Filialkontinuität nicht auf das bestehende Südprofil in Graçanicë/Preoc übertragen werden. Quellen unterscheiden zwei Standorte und zwei Rechtsträger.",
+      "reason": "The current northern branch in Shkabaj/Obiliq is unambiguously evidenced; it must not be transferred to the existing southern profile in Graçanicë/Preoc without confirmed branch continuity. Sources distinguish two locations and two legal entities.",
       "unassignedProviderIdentity": {
         "placeId": "ChIJhxuISoKdVBMRjzIZ8rKjdEc",
-        "reason": "Keiner öffentlichen Zuordnung zugewiesen; Schließung oder Filialkontinuität ungeklärt."
+        "reason": "Not assigned to any public mapping; closure or branch continuity remains unresolved."
       }
     },
     {
@@ -789,7 +789,7 @@
       "sourceUrls": [
         "https://www.facebook.com/TruckBus-Scania-Service-113881273360473/"
       ],
-      "reason": "Unternehmensauftritt als Truck & Bus Scania Service; aus dem Pkw-Verzeichnis entfernt."
+      "reason": "The business presents itself as Truck & Bus Scania Service; removed from the passenger-car directory."
     },
     {
       "workshopId": "skifti-prishtina",
@@ -798,7 +798,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/skifti-1"],
-      "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke."
+      "reason": "Passenger-car service and an independent directory contact are evidenced. Current Maps and contact checks yield other businesses or businesses without an unambiguous correspondence; no reliable identity link."
     },
     {
       "workshopId": "tachograf-kienzle-ferizaj",
@@ -807,7 +807,7 @@
       "assessment": "excluded",
       "resultingStatus": "draft",
       "sourceUrls": ["https://www.cybo.com/XK/ferizaj/car-repair"],
-      "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis."
+      "reason": "Tachograph specialist without concrete evidence of passenger-car repairs."
     },
     {
       "workshopId": "tahograf-prishtina",
@@ -816,7 +816,7 @@
       "assessment": "excluded",
       "resultingStatus": "draft",
       "sourceUrls": ["https://www.cybo.com/XK/pristina/car-repair"],
-      "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis."
+      "reason": "Tachograph specialist without concrete evidence of passenger-car repairs."
     },
     {
       "workshopId": "turbo-servis-turbo-klinika-prishtina",
@@ -825,7 +825,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/turbo-klinika-1"],
-      "reason": "Pkw-Service und unabhängiger Verzeichniskontakt sind belegt. Aktuelle Karten- und Kontaktprüfung liefert andere oder nicht eindeutig korrespondierende Betriebe; keine belastbare Identitätsbrücke."
+      "reason": "Passenger-car service and an independent directory contact are evidenced. Current Maps and contact checks yield other businesses or businesses without an unambiguous correspondence; no reliable identity link."
     },
     {
       "workshopId": "univerzall-prishtina",
@@ -834,7 +834,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/univerzall-1"],
-      "reason": "Direktes Quellprofil bestätigt Pkw-Service. Widersprechender Waschbetrieb-Kategorieeintrag reicht nicht für einen Ausschluss; aktueller Universal-Eintrag in Vragoli passt nicht zum belegten Geschäftspin."
+      "reason": "The direct source profile confirms passenger-car service. A conflicting car-wash category entry is insufficient for exclusion; the current Universal entry in Vragoli does not match the evidenced business pin."
     },
     {
       "workshopId": "xhema-auto-servis-prishtina",
@@ -843,7 +843,7 @@
       "assessment": "needs_identity",
       "resultingStatus": "draft",
       "sourceUrls": ["https://stgres.gjirafa.biz/xhema-auto-servis-1"],
-      "reason": "Quellprofil nennt Fahrzeugservice und Folierung; Auto Color Xhema liegt etwa einen Kilometer entfernt. Keine passende Kontaktbrücke belegt."
+      "reason": "The source profile lists vehicle service and wrapping; Auto Color Xhema is approximately one kilometer away. No matching contact link is evidenced."
     }
   ]
 }

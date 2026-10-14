@@ -1,3 +1,4 @@
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 import { listWorkshops } from "@/db/directory";
 import { workshopDisplayById } from "./workshop-display.server";
 import { isLocale } from "./i18n/locale";
@@ -10,7 +11,7 @@ export async function publicWorkshopResponse(request: Request) {
     const locale = new URL(request.url).searchParams.get("locale");
     if (locale !== null && !isLocale(locale))
       return json(
-        { errorCode: "invalid_request", error: "Ungültige Sprache." },
+        { errorCode: "invalid_request", error: legacyMessages.invalidLocale },
         400,
       );
     const workshops = await listWorkshops();
@@ -28,8 +29,7 @@ export async function publicWorkshopResponse(request: Request) {
     return json(
       {
         errorCode: "unavailable",
-        error:
-          "Die Werkstattdaten sind gerade nicht verfügbar. Bitte versuche es erneut.",
+        error: legacyMessages.workshopDataUnavailable,
       },
       503,
     );

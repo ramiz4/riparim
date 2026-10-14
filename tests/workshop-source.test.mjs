@@ -596,20 +596,20 @@ unconfirmed.workshops[0].google = {
 };
 assert.throws(
   () => validateWorkshopCatalogue(unconfirmed),
-  /bestätigte Google-Zuordnung/,
+  /confirmed Google match/,
 );
 const trucks = structuredClone(catalogue);
 trucks.workshops[0].name = "Scania Truck Fixture";
-assert.throws(() => validateWorkshopCatalogue(trucks), /Pkw-Werkstatteinträge/);
+assert.throws(
+  () => validateWorkshopCatalogue(trucks),
+  /confirmed passenger-car workshops/,
+);
 const mismatchedLink = structuredClone(catalogue);
 mismatchedLink.workshops.find(
   (w) => w.status === "published",
 ).google.snapshot.mapsUrl =
   "https://www.google.com/maps/?query_place_id=ChIJUnrelatedFixture";
-assert.throws(
-  () => validateWorkshopCatalogue(mismatchedLink),
-  /denselben Eintrag/,
-);
+assert.throws(() => validateWorkshopCatalogue(mismatchedLink), /same listing/);
 const noReviews = catalogue.workshops.find(
   (w) => w.id === "mercedes-service-ballkan-peja",
 );
@@ -634,7 +634,7 @@ invalid.workshops.push(structuredClone(mita));
 invalid.coverage.published++;
 assert.throws(
   () => validateWorkshopCatalogue(invalid),
-  /Doppelte Werkstattkennung/,
+  /Duplicate workshop ID/,
 );
 const invalidRating = structuredClone(catalogue);
 invalidRating.workshops.find((w) => w.id === mita.id).google.snapshot.rating =
@@ -644,7 +644,7 @@ const unsupported = structuredClone(mita);
 unsupported.google.snapshot.sourceUrl = null;
 assert.throws(
   () => mergeWorkshopCatalogue(catalogue, [unsupported]),
-  /belegte Quelle/,
+  /documented source/,
 );
 const ownReview = structuredClone(mita);
 ownReview.rating = 5;
@@ -693,13 +693,13 @@ duplicatePlace.workshops.find((w) => w.id === "sonic-garage").google = {
 duplicatePlace.googleImport.matchedPlaceIds++;
 assert.throws(
   () => validateWorkshopCatalogue(duplicatePlace),
-  /Doppelte Google-Place-ID/,
+  /Duplicate Google Place ID/,
 );
 const wrongStats = structuredClone(catalogue);
 wrongStats.coverage.published = 1700;
 assert.throws(
   () => validateWorkshopCatalogue(wrongStats),
-  /Abweichende Bestandszahl/,
+  /Catalogue count mismatch/,
 );
 const fabricatedComplete = structuredClone(catalogue);
 fabricatedComplete.coverage.complete = true;

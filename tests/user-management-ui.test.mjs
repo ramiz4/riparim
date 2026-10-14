@@ -57,7 +57,7 @@ const css = (
       "globals.css",
       "ui-refresh.css",
       "theme.css",
-      "[locale]/verwaltung/benutzer/users.css",
+      "[locale]/admin/users/users.css",
     ].map((file) =>
       readFile(new URL("../app/" + file, import.meta.url), "utf8"),
     ),
@@ -96,7 +96,7 @@ const output = ".test-runtime/user-management-ui";
 const bundle = await build({
   stdin: {
     contents:
-      "export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {default} from './app/[locale]/verwaltung/benutzer/users';",
+      "export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {default} from './app/[locale]/admin/users/users';",
     resolveDir: process.cwd(),
     loader: "tsx",
   },

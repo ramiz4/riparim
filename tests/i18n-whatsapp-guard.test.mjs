@@ -79,7 +79,7 @@ globalThis.ResizeObserver = class {
 const out = ".test-runtime/i18n-whatsapp-guard.mjs",
   bundle = await build({
     stdin: {
-      contents: `export {default as Profile} from './app/[locale]/werkstatt/[id]/profile';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {useNavigationState} from './lib/i18n/navigation-guard';`,
+      contents: `export {default as Profile} from './app/[locale]/workshop/[id]/profile';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {useNavigationState} from './lib/i18n/navigation-guard';`,
       resolveDir: process.cwd(),
       loader: "tsx",
     },

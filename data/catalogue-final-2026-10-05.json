@@ -18,7 +18,7 @@
       "workshopId": "auto-ballkan-gjilan",
       "assessment": "removed",
       "previousStatus": "draft",
-      "reason": "Vom Nutzer als Truck-Teilelieferant bestätigt; kein konkreter Pkw-Werkstattnachweis.",
+      "reason": "Confirmed by the user as a truck parts supplier; no concrete evidence of a passenger-car workshop.",
       "sourceUrls": [
         "https://www.gjithebiznesi.com/XK/auto-ballkan-044-177-327"
       ]
@@ -27,14 +27,14 @@
       "workshopId": "benita-company-kline",
       "assessment": "removed",
       "previousStatus": "draft",
-      "reason": "Tankstelle mit ausdrücklich beworbenem Schwerfahrzeug-Service. Der allgemeine Express-Service belegt keinen konkreten Pkw-Werkstattumfang.",
+      "reason": "Fuel station explicitly advertising heavy-vehicle service. The general express service does not establish a concrete passenger-car workshop scope.",
       "sourceUrls": ["https://benita-ks.com/"]
     },
     {
       "workshopId": "isuzu-servis-prizren",
       "assessment": "removed",
       "previousStatus": "draft",
-      "reason": "Die allgemeine Serviceseite enthält wiederholte englische Pkw-Reparaturtexte. Die konkrete Betreiberbeschreibung und der aktuelle Betriebsauftritt belegen Lkw-/Bus-Teilehandel sowie Motorradservice; ein konkreter Pkw-Werkstattumfang am zugeordneten Prizren-Geschäftspunkt bleibt unbestätigt. Auf Nutzerauftrag nach erfolgloser abschließender Prüfung entfernt.",
+      "reason": "The general service page contains repeated English passenger-car repair copy. The specific operator description and current business presence establish truck/bus parts trading and motorcycle service; a concrete passenger-car workshop scope at the assigned Prizren business location remains unconfirmed. Removed at the user's request after an unsuccessful final review.",
       "sourceUrls": [
         "https://www.burak-ks.com/en/service",
         "https://www.burak-ks.com/en/about",
@@ -47,14 +47,14 @@
       "workshopId": "opel-rakovica-prishtina",
       "assessment": "removed",
       "previousStatus": "draft",
-      "reason": "Unabhängiges Verzeichnis markiert den zugeordneten Betrieb als geschlossen und den Kontakt als historisch. Keine bestätigte Wiedereröffnung; nicht veröffentlichen.",
+      "reason": "An independent directory marks the assigned business as closed and its contact as historical. No confirmed reopening; do not publish.",
       "sourceUrls": ["https://www.gjithebiznesi.com/XK/opel-rakovica"]
     },
     {
       "workshopId": "reno-center-muciqi-prishtina",
       "assessment": "removed",
       "previousStatus": "draft",
-      "reason": "Veraltetes Südprofil auf Nutzerauftrag entfernt; Nordfiliale wird unter neuer Kennung geführt, ohne Übertragung von Kundendaten.",
+      "reason": "Outdated southern profile removed at the user's request; the northern branch uses a new identifier without transferring customer data.",
       "sourceUrls": [
         "https://www.autoyas.com/XK/Pristina/100327432881928/Reno-Mu%C3%A7iqi%26Bllaca",
         "https://dogana.rks-gov.net/sharedfolder/AnnouncementFiles/2026_b0c9a4d9-6eaf-4463-9a1f-f6b4d67d9c49.Pdf",
@@ -65,7 +65,7 @@
       "workshopId": "scania-trans-mitrovica",
       "assessment": "removed",
       "previousStatus": "draft",
-      "reason": "Unternehmensauftritt als Truck & Bus Scania Service; aus dem Pkw-Verzeichnis entfernt.",
+      "reason": "The business presents itself as Truck & Bus Scania Service; removed from the passenger-car directory.",
       "sourceUrls": [
         "https://www.facebook.com/TruckBus-Scania-Service-113881273360473/"
       ]
@@ -74,14 +74,14 @@
       "workshopId": "tachograf-kienzle-ferizaj",
       "assessment": "removed",
       "previousStatus": "draft",
-      "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis.",
+      "reason": "Tachograph specialist without concrete evidence of passenger-car repairs.",
       "sourceUrls": ["https://www.kienzle-ks.com/"]
     },
     {
       "workshopId": "tahograf-prishtina",
       "assessment": "removed",
       "previousStatus": "draft",
-      "reason": "Tachograf-Spezialbetrieb ohne konkreten Pkw-Reparaturnachweis.",
+      "reason": "Tachograph specialist without concrete evidence of passenger-car repairs.",
       "sourceUrls": ["https://www.cybo.com/XK/pristina/car-repair"]
     }
   ],

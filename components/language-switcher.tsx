@@ -1,11 +1,13 @@
 "use client";
+import { storedLanguages } from "@/lib/i18n/canonical-values";
+
 import { useId, useState, useRef, useLayoutEffect } from "react";
 import { Globe, ChevronDown } from "lucide-react";
 import { useI18n } from "@/lib/i18n/client";
 import { isLocale, locales } from "@/lib/i18n/locale";
 import { preferredLanguageHref } from "@/lib/i18n/preference";
 import { useNavigationState } from "@/lib/i18n/navigation-guard";
-const names = { de: "Deutsch", sq: "Shqip", en: "English" };
+const names = { de: storedLanguages.german, sq: "Shqip", en: "English" };
 export function LanguageSwitcher({
   verifiedAccount = false,
 }: {

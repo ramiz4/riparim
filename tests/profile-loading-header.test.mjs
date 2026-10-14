@@ -8,7 +8,7 @@ await mkdir(out, { recursive: true });
 await build({
   stdin: {
     contents:
-      "export {default as ProfileLoading} from './app/[locale]/werkstatt/[id]/loading';export {SiteHeader} from './components/site-header';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {invalidatePublicSession} from './components/use-public-session';",
+      "export {default as ProfileLoading} from './app/[locale]/workshop/[id]/loading';export {SiteHeader} from './components/site-header';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {invalidatePublicSession} from './components/use-public-session';",
     resolveDir: process.cwd(),
     loader: "tsx",
   },

@@ -1,3 +1,4 @@
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 import {
   businessReadResponse,
   businessFailure as failure,
@@ -44,7 +45,11 @@ async function input(request: Request, maxBytes: number) {
   try {
     return await readJson(request, maxBytes);
   } catch {
-    throw new BusinessError("Ungültige Eingaben.", 400, "invalid_request");
+    throw new BusinessError(
+      legacyMessages.invalidInputs,
+      400,
+      "invalid_request",
+    );
   }
 }
 export async function GET(request: Request) {
@@ -58,14 +63,17 @@ export async function POST(request: Request) {
     )
   )
     return json(
-      { error: "Ungültige Anfrage.", errorCode: "invalid_request" },
+      { error: legacyMessages.invalidRequest, errorCode: "invalid_request" },
       403,
     );
   try {
     const user = await getAppUser();
     if (!user)
       return json(
-        { error: "Bitte melde dich an.", errorCode: "authentication_required" },
+        {
+          error: legacyMessages.authenticationRequired,
+          errorCode: "authentication_required",
+        },
         401,
       );
     if (request.headers.get("content-type")?.includes("multipart/form-data")) {
@@ -75,11 +83,15 @@ export async function POST(request: Request) {
       } catch (error) {
         if (error instanceof Error && error.message === "INPUT_TOO_LARGE")
           throw new BusinessError(
-            "Die Dokumente sind zusammen zu groß. Maximal 10 MB.",
+            legacyMessages.businessDocumentsTooLarge,
             413,
             "business_documents_too_large",
           );
-        throw new BusinessError("Ungültige Eingaben.", 400, "invalid_request");
+        throw new BusinessError(
+          legacyMessages.invalidInputs,
+          400,
+          "invalid_request",
+        );
       }
       if (
         [...form.keys()].some(
@@ -88,16 +100,13 @@ export async function POST(request: Request) {
         ["workshopId", "evidence"].some((key) => form.getAll(key).length > 1)
       )
         throw new BusinessError(
-          "Ungültige Eingaben.",
+          legacyMessages.invalidInputs,
           400,
           "business_invalid_input",
         );
       const files = form.getAll("file");
       if (files.some((file) => typeof file === "string"))
-        throw new ValidationError(
-          "invalid_file",
-          "Bitte lade eine gültige Datei hoch.",
-        );
+        throw new ValidationError("invalid_file", legacyMessages.invalidUpload);
       const created = await requestWorkshopClaim(
         user,
         { workshopId: form.get("workshopId"), evidence: form.get("evidence") },
@@ -124,19 +133,22 @@ export async function PATCH(request: Request) {
     !request.headers.get("content-type")?.includes("application/json")
   )
     return json(
-      { error: "Ungültige Anfrage.", errorCode: "invalid_request" },
+      { error: legacyMessages.invalidRequest, errorCode: "invalid_request" },
       403,
     );
   try {
     const admin = await getAdminUser();
     if (!admin)
       return json(
-        { error: "Bitte melde dich an.", errorCode: "authentication_required" },
+        {
+          error: legacyMessages.authenticationRequired,
+          errorCode: "authentication_required",
+        },
         401,
       );
     if (!admin.isModerator)
       return json(
-        { error: "Kein Zugriff auf die Prüfung.", errorCode: "forbidden" },
+        { error: legacyMessages.moderationForbidden, errorCode: "forbidden" },
         403,
       );
     const body = decisionSchema.parse(await input(request, 8192));

@@ -41,12 +41,12 @@ export function WorkshopNavigationLink({
         const pathname = pageIdentityPath(
           new URL(target, window.location.href).pathname,
         );
-        if (pathname === "/werkstaetten")
+        if (pathname === "/workshops")
           return document.querySelector(".catalogue-page") !== null;
         const page = document.querySelector<HTMLElement>(".workshop-page");
         return (
           page?.dataset.workshopId ===
-          decodeURIComponent(pathname.slice("/werkstatt/".length))
+          decodeURIComponent(pathname.slice("/workshop/".length))
         );
       },
       navigate: (target) => router.push(target),

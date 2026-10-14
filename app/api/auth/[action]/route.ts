@@ -1,3 +1,4 @@
+import { legacyMessages } from "@/lib/i18n/legacy-messages";
 import { validAccountName } from "@/lib/account-name";
 import {
   requestLocale,
@@ -33,7 +34,7 @@ export async function POST(
     !request.headers.get("content-type")?.includes("application/json")
   )
     return json(
-      { error: "Ungültige Anfrage.", errorCode: "invalid_request" },
+      { error: legacyMessages.invalidRequest, errorCode: "invalid_request" },
       403,
     );
   const { action } = await params;
@@ -43,7 +44,7 @@ export async function POST(
     )
   )
     return json(
-      { error: "Ungültige Aktion.", errorCode: "invalid_request" },
+      { error: legacyMessages.invalidAction, errorCode: "invalid_request" },
       404,
     );
   let body: Record<string, unknown>;
@@ -51,14 +52,14 @@ export async function POST(
     body = await readJson(request, 8192);
   } catch {
     return json(
-      { error: "Bitte prüfe die Eingaben.", errorCode: "invalid_request" },
+      { error: legacyMessages.checkInputs, errorCode: "invalid_request" },
       400,
     );
   }
   const locale = requestLocale(body.locale);
   if (!locale)
     return json(
-      { error: "Ungültige Sprache.", errorCode: "invalid_locale" },
+      { error: legacyMessages.invalidLocale, errorCode: "invalid_locale" },
       400,
     );
   try {
@@ -66,8 +67,7 @@ export async function POST(
     if (!c?.enabled)
       return json(
         {
-          error:
-            "Die Anmeldung wird gerade eingerichtet. Bitte versuche es später erneut.",
+          error: legacyMessages.authSetupPending,
           errorCode: "auth_unavailable",
         },
         503,
@@ -75,8 +75,7 @@ export async function POST(
     if (action === "recovery" && !c.emailDeliveryConfirmed)
       return json(
         {
-          error:
-            "Der E-Mail-Versand ist derzeit noch nicht verfügbar. Bitte versuche es später erneut.",
+          error: legacyMessages.emailDeliveryUnavailable,
           errorCode: "email_unavailable",
         },
         503,
@@ -92,8 +91,7 @@ export async function POST(
       if (!available)
         return json(
           {
-            error:
-              "E-Mail-Anmeldung ist gerade nicht verfügbar. Bitte versuche es später erneut.",
+            error: legacyMessages.emailLoginUnavailable,
             errorCode: "email_unavailable",
           },
           503,
@@ -104,7 +102,7 @@ export async function POST(
       if (!(await providerAvailability(c)).google)
         return json(
           {
-            error: "Google-Anmeldung ist gerade nicht verfügbar.",
+            error: legacyMessages.googleUnavailable,
             errorCode: "google_unavailable",
           },
           503,
@@ -112,7 +110,7 @@ export async function POST(
       if (await rateLimit(request, action, ""))
         return json(
           {
-            error: "Zu viele Versuche. Bitte warte einige Minuten.",
+            error: legacyMessages.rateLimited,
             errorCode: "rate_limited",
           },
           429,
@@ -127,7 +125,7 @@ export async function POST(
       )
         return json(
           {
-            error: "Dieses Konto kann hier nicht gelöscht werden.",
+            error: legacyMessages.selfDeletionProtected,
             errorCode: "deletion_protected",
           },
           403,
@@ -144,7 +142,7 @@ export async function POST(
       if (error || !data.url)
         return json(
           {
-            error: "Google-Anmeldung ist gerade nicht verfügbar.",
+            error: legacyMessages.googleUnavailable,
             errorCode: "google_unavailable",
           },
           503,
@@ -203,8 +201,7 @@ export async function POST(
       )
         return json(
           {
-            error:
-              "Öffne zuerst den gültigen Link aus deiner E-Mail oder melde dich an.",
+            error: legacyMessages.recoveryLinkOrLoginRequired,
             errorCode: "recovery_required",
           },
           401,
@@ -219,8 +216,7 @@ export async function POST(
     if (action !== "logout" && (await rateLimit(request, action, rateIdentity)))
       return json(
         {
-          error:
-            "Zu viele Versuche. Bitte warte einige Minuten und versuche es erneut.",
+          error: legacyMessages.retryRateLimited,
           errorCode: "rate_limited",
         },
         429,
@@ -231,7 +227,7 @@ export async function POST(
       if (error)
         return json(
           {
-            error: "Abmelden fehlgeschlagen. Bitte versuche es erneut.",
+            error: legacyMessages.logoutFailed,
             errorCode: "unknown",
           },
           503,
@@ -249,7 +245,7 @@ export async function POST(
     )
       return json(
         {
-          error: "Bitte gib eine gültige E-Mail-Adresse ein.",
+          error: legacyMessages.invalidEmail,
           errorCode: "invalid_email",
         },
         400,
@@ -260,7 +256,7 @@ export async function POST(
     )
       return json(
         {
-          error: "Bitte nutze ein Passwort mit 12 bis 128 Zeichen.",
+          error: legacyMessages.invalidPassword,
           errorCode: "invalid_password",
         },
         400,
@@ -273,8 +269,7 @@ export async function POST(
       if (error || !data.user?.emailVerified)
         return json(
           {
-            error:
-              "Anmeldung fehlgeschlagen. Prüfe E-Mail und Passwort und bestätige deine E-Mail-Adresse.",
+            error: legacyMessages.loginFailed,
             errorCode: "login_failed",
           },
           401,
@@ -286,8 +281,7 @@ export async function POST(
         if (e instanceof Error && e.message === "ACCOUNT_DISABLED")
           return json(
             {
-              error:
-                "Dieses Konto ist gesperrt. Bitte wende dich an die Verwaltung.",
+              error: legacyMessages.accountBlockedContactAdmin,
               errorCode: "account_blocked",
             },
             403,
@@ -301,7 +295,7 @@ export async function POST(
       if (!name)
         return json(
           {
-            error: "Bitte gib einen Namen mit 2 bis 80 Zeichen ein.",
+            error: legacyMessages.invalidName,
             errorCode: "invalid_name",
           },
           400,
@@ -317,8 +311,7 @@ export async function POST(
         if (error.status === 429 || error.code === "rate_limited")
           return json(
             {
-              error:
-                "Zu viele Registrierungsversuche. Bitte warte einige Minuten und versuche es erneut.",
+              error: legacyMessages.registrationRateLimited,
               errorCode: "rate_limited",
             },
             429,
@@ -326,16 +319,14 @@ export async function POST(
         if (error.code === "email_unavailable")
           return json(
             {
-              error:
-                "Die Bestätigungs-E-Mail kann derzeit nicht gesendet werden. Bitte versuche es später erneut.",
+              error: legacyMessages.confirmationDeliveryUnavailable,
               errorCode: "confirmation_unavailable",
             },
             503,
           );
         return json(
           {
-            error:
-              "Registrierung konnte gerade nicht abgeschlossen werden. Prüfe die Eingaben oder versuche es später erneut.",
+            error: legacyMessages.registrationCheckInputs,
             errorCode: "registration_failed",
           },
           error.status && error.status >= 500 ? 503 : 400,
@@ -346,8 +337,7 @@ export async function POST(
         await client.signOut({ scope: "local" });
         return json(
           {
-            error:
-              "Die E-Mail-Bestätigung ist gerade nicht verfügbar. Bitte versuche es später erneut.",
+            error: legacyMessages.confirmationUnavailable,
             errorCode: "confirmation_unavailable",
           },
           503,
@@ -356,15 +346,13 @@ export async function POST(
       if (!data.user)
         return json(
           {
-            error:
-              "Die Registrierung konnte gerade nicht abgeschlossen werden. Bitte versuche es später erneut.",
+            error: legacyMessages.registrationFailed,
             errorCode: "registration_failed",
           },
           503,
         );
       return json({
-        message:
-          "Prüfe dein Postfach und bestätige deine E-Mail-Adresse. Danach kannst du dich anmelden.",
+        message: legacyMessages.confirmationSent,
         messageCode: "confirm_email",
       });
     }
@@ -376,22 +364,20 @@ export async function POST(
       if (error)
         return json(
           {
-            error:
-              "Die Anfrage konnte gerade nicht verarbeitet werden. Bitte versuche es später erneut.",
+            error: legacyMessages.recoveryFailed,
             errorCode: "recovery_failed",
           },
           503,
         );
       return json({
-        message:
-          "Wenn ein Konto existiert, erhältst du einen Link zum Zurücksetzen.",
+        message: legacyMessages.recoverySent,
         messageCode: "recovery_sent",
       });
     }
     if (!(await client.recoveryReady()))
       return json(
         {
-          error: "Bitte öffne einen gültigen Wiederherstellungslink.",
+          error: legacyMessages.recoveryLinkRequired,
           errorCode: "recovery_required",
         },
         401,
@@ -400,8 +386,7 @@ export async function POST(
     if (error)
       return json(
         {
-          error:
-            "Das Passwort konnte nicht geändert werden. Bitte versuche es erneut.",
+          error: legacyMessages.passwordUpdateFailed,
           errorCode: "password_update_failed",
         },
         400,
@@ -412,7 +397,7 @@ export async function POST(
       .run();
     await client.signOut({ scope: "global" });
     return json({
-      message: "Dein Passwort wurde geändert. Bitte melde dich erneut an.",
+      message: legacyMessages.passwordUpdated,
       messageCode: "password_changed",
       returnTo: localizeHref("/anmelden?hinweis=passwort-geaendert", locale),
     });
@@ -423,8 +408,7 @@ export async function POST(
     );
     return json(
       {
-        error:
-          "Die Anmeldung ist gerade nicht verfügbar. Bitte versuche es später erneut.",
+        error: legacyMessages.authUnavailable,
         errorCode: "auth_unavailable",
       },
       503,

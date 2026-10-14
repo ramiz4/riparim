@@ -10,7 +10,7 @@ await mkdir(out, { recursive: true });
 const result = await build({
   stdin: {
     contents:
-      "export {default as ApplicationsPage,generateMetadata as applicationsMetadata} from './app/[locale]/antraege/page';export {default as BusinessPage} from './app/[locale]/betriebe/page';export {default as ClaimPage,generateMetadata} from './app/[locale]/betriebe/beanspruchen/page';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {isPagePath} from './lib/i18n/locale';",
+      "export {default as ApplicationsPage,generateMetadata as applicationsMetadata} from './app/[locale]/requests/page';export {default as BusinessPage} from './app/[locale]/business/page';export {default as ClaimPage,generateMetadata} from './app/[locale]/business/claim/page';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {isPagePath} from './lib/i18n/locale';",
     resolveDir: process.cwd(),
     loader: "tsx",
   },

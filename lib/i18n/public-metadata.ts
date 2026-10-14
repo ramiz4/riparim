@@ -22,8 +22,8 @@ export function publicMetadata(
     new URL(path, "https://riparim.invalid").pathname,
   );
   const publicPage =
-    ["/", "/werkstaetten", "/datenschutz"].includes(identity) ||
-    /^\/werkstatt\/[a-z0-9][a-z0-9-]{2,80}$/.test(identity);
+    ["/", "/workshops", "/privacy"].includes(identity) ||
+    /^\/workshop\/[a-z0-9][a-z0-9-]{2,80}$/.test(identity);
   if (!indexable || !publicPage)
     return {
       ...text,

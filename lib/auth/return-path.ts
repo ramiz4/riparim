@@ -18,7 +18,7 @@ export function validatedReturnPath(
     if (/[\u0000-\u001f\u007f\\]/.test(decoded)) return fallback;
     const path = stripLocalePrefix(decoded);
     return url.origin === origin &&
-      !/^\/(?:signin-with-chatgpt|signout-with-chatgpt|dev|callback|auth\/bestaetigen)(?:\/|$)/.test(
+      !/^\/(?:signin-with-chatgpt|signout-with-chatgpt|dev|callback|auth\/(?:bestaetigen|confirm))(?:\/|$)/.test(
         path,
       )
       ? `${url.pathname}${url.search}${url.hash}`

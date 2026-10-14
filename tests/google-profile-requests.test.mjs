@@ -171,7 +171,7 @@ const output = ".test-runtime/google-profile-requests";
 await mkdir(output, { recursive: true });
 await build({
   stdin: {
-    contents: `export {default as Profile} from './app/[locale]/werkstatt/[id]/profile';export {GooglePlaceReviews} from './components/google-place-reviews';export {I18nProvider} from './lib/i18n/client';export {getMessages,createTranslator} from './lib/i18n/messages';export {formatDate} from './lib/i18n/format';`,
+    contents: `export {default as Profile} from './app/[locale]/workshop/[id]/profile';export {GooglePlaceReviews} from './components/google-place-reviews';export {I18nProvider} from './lib/i18n/client';export {getMessages,createTranslator} from './lib/i18n/messages';export {formatDate} from './lib/i18n/format';`,
     resolveDir: process.cwd(),
     loader: "tsx",
   },

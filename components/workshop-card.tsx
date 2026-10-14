@@ -1,4 +1,6 @@
 "use client";
+import { storedSentinels, storedServices } from "@/lib/i18n/canonical-values";
+
 import { useI18n } from "@/lib/i18n/client";
 import { valueLabel } from "@/lib/i18n/values";
 import { WorkshopNavigationLink } from "@/components/workshop-navigation-link";
@@ -13,8 +15,8 @@ import type { Workshop } from "@/lib/workshops";
 
 export function WorkshopCard({
   workshop: w,
-  selectedBrand = "Alle Marken",
-  selectedService = "Alle Leistungen",
+  selectedBrand = storedSentinels.allBrands,
+  selectedService = storedServices.all,
   searchHref,
   distanceKm,
   distanceOrigin,

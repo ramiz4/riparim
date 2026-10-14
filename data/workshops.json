@@ -12,7 +12,7 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "Alle 177 veröffentlichten Kfz-Servicebetriebe besitzen einzeln bestätigte Google-Place-IDs. Neue Identitäten werden über die öffentliche Maps-Oberfläche gegen unabhängige Kontakt-, Standort- und Leistungsbelege geprüft; keine offenen Entwürfe.",
+    "reason": "All 177 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
     "matchedPlaceIds": 177,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
@@ -107,7 +107,7 @@
             "https://stgres.gjirafa.biz/ali-mercedesi-1",
             "https://www.google.com/maps/?cid=7899182740166590548"
           ],
-          "note": "Individuelle Google-Karte anhand unabhängig belegter Telefonnummer, Werkstattname und präziser Adresse bestätigt; CID und tatsächliche Place ID bezeichnen denselben Eintrag. Keine Google-Geschäftsangaben oder Bewertungen in die Profilquelle übernommen."
+          "note": "Individual Google listing confirmed using an independently evidenced phone number, workshop name and precise address; CID and actual Place ID designate the same entry. No Google business details or reviews adopted into the profile source."
         }
       }
     },
@@ -208,7 +208,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/auspuh-servis-kurti-td-045-651-784"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -305,7 +305,7 @@
             "https://www.google.com/maps/search/?api=1&query=Auto+Cosmetic+te+FITIMI+VVCV%2B5H5%2C+M2%2C+Mitrovic%C3%AB+40000&query_place_id=ChIJr_6I2ChFUxMRARVfS1C0RGI",
             "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/"
           ],
-          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
+          "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted."
         }
       }
     },
@@ -346,7 +346,7 @@
           "sourceUrls": [
             "https://halaman-kuning.cybo.com/XK/kori%C5%A1a/membaiki-kereta-?d=c"
           ],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -388,7 +388,7 @@
           "sourceUrls": [
             "https://www.autoyas.com/XK/Mitrovica/309155915624453/Auto-Detailing-Meti"
           ],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -449,7 +449,7 @@
             "https://www.gjithebiznesi.com/XK/auto-servis-auto-diagnostika-044-112-914",
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJox3Nl9OfVBMRe4yWuczSZZw"
           ],
-          "note": "Eigene Anzeige belegt ausschließlich Pkw-Fehlerdiagnose. Unabhängige aktuelle Anschrift und Telefon bestätigen denselben direkt geprüften Karten-Eintrag."
+          "note": "The business's own advertisement establishes passenger-car fault diagnostics only. An independent current address and phone confirm the same directly checked Maps entry."
         }
       }
     },
@@ -503,7 +503,7 @@
           "sourceUrls": [
             "https://faqet-e-verdha.cybo.com/XK/prizreni/riparimi-i-makinave-"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -544,7 +544,7 @@
           "sourceUrls": [
             "https://halaman-kuning.cybo.com/XK/gjakov%C3%AB/membaiki-kereta-?d=c"
           ],
-          "note": "Identischer Name und Telefonkontakt. Der Google-Standortmarker liegt innerhalb der unabhängig veröffentlichten Plus-Code-Zelle 9CVV+6CW an der Wesley-Clark-Straße. Direkte Place-Details-ID-Prüfung bestanden."
+          "note": "Identical name and phone contact. The Google location marker lies within the independently published Plus Code cell 9CVV+6CW on Wesley Clark street. Direct Place Details ID check passed."
         }
       }
     },
@@ -713,7 +713,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://aesagroni.com/rreth-nesh"],
-          "note": "Name, normalisierte Telefonnummer und Standort unabhängig abgeglichen. Aktiver öffentlicher Maps-Eintrag; Place-ID aus offiziellem sichtbarem Maps-Link direkt mit absichtlich unpassender Ersatzsuche rückgeprüft. Keine Google-Inhaberbestätigung und keine eigenen API-/SDK-Aufrufe."
+          "note": "Name, normalized phone number and location independently compared. Active public Maps entry; Place ID from the official visible Maps link directly rechecked with a deliberately unrelated fallback search. No Google owner verification and no API/SDK calls made by us."
         }
       }
     },
@@ -754,7 +754,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/auto-elektro-servis-a-044-205-111"
           ],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -821,7 +821,7 @@
             "https://www.findglocal.com/XK/Gjilan/1759871737615916/Auto-elektricist--Niki",
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJv-KrCHaNVBMRzYjAlm90dtQ"
           ],
-          "note": "Eigene Anzeige verbindet Nikis unveränderten Kontakt ausdrücklich mit Enesi Moto Gjilan. Aktuelle Niki-Betriebsbeiträge bestätigen weiterhin Pkw-Elektrik/Diagnose und Avdullah Presheva Nr. 82; der zusätzlich gemeinsam veröffentlichte Kontakt und genaue Geschäftspunkt entsprechen dem bestätigten Google-Eintrag. Der Pkw-Werkstattname bleibt erhalten; Transportwerbung allein wurde nicht als Reparaturnachweis gewertet."
+          "note": "The business's own advertisement explicitly links Niki's unchanged contact to Enesi Moto Gjilan. Current Niki business posts still confirm passenger-car electrical work/diagnostics and Avdullah Presheva Nr. 82; the additional jointly published contact and exact business location correspond to the confirmed Google entry. The passenger-car workshop name is preserved; transport advertising alone was not treated as evidence of repairs."
         }
       }
     },
@@ -933,7 +933,7 @@
           "sourceUrls": [
             "https://www.autoyas.com/XK/Pristina/100237179537543/Auto-Enzo-Detailing"
           ],
-          "note": "Name, unabhängig veröffentlichtes Telefon und Straße mit aktivem Maps-Eintrag abgeglichen. Place ID über offiziellen Finder gelesen und mit absichtlich unpassender Ersatzsuche direkt rückgeprüft. Keine Inhaberschaft behauptet."
+          "note": "Name, independently published phone and street compared with the active Maps entry. Place ID read through the official finder and directly rechecked with a deliberately unrelated fallback search. No ownership claimed."
         }
       }
     },
@@ -987,7 +987,7 @@
           "sourceUrls": [
             "https://faqet-e-verdha.cybo.com/XK/prizreni/riparimi-i-makinave-"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -1041,7 +1041,7 @@
           "sourceUrls": [
             "https://faqet-e-verdha.cybo.com/XK/prizreni/riparimi-i-makinave-"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -1086,7 +1086,7 @@
             "https://www.cybo.com/XK-biz/auto-glass-kosovo-auto-xhama",
             "https://autoglasskosovo.com/location"
           ],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -1142,7 +1142,7 @@
             "https://stgres.gjirafa.biz/auto-laker-kimi-1",
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJebOcSQCfVBMRenUNUpgt-kA"
           ],
-          "note": "Betriebsname, eigener Foto-/Leistungsbeleg und der profilspezifische Marker im unabhängigen Verzeichnis bestätigen den präzisen Standort des gültigen Google-Eintrags. Dort fehlt eine Telefonnummer; der Verzeichniskontakt bleibt als solcher gekennzeichnet."
+          "note": "The business name, its own photo/service evidence and the profile-specific marker in the independent directory confirm the precise location of the valid Google entry. That entry has no phone number; the directory contact remains labeled as such."
         }
       }
     },
@@ -1196,7 +1196,7 @@
           "sourceUrls": [
             "https://faqet-e-verdha.cybo.com/XK-biz/auto-limar-alajdini"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -1285,7 +1285,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://www.cybo.com/XK-biz/auto-llamarist-valoni"],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -1525,7 +1525,7 @@
             "https://www.google.com/maps/search/?api=1&query=Auto+Ngjyros%C3%ABs+SHYPI+95Q7%2B872%2C+Talinoc+i+Jerlive+70000&query_place_id=ChIJs2t2ydx_VBMR7o5UGmJb778",
             "https://www.cybo.com/XK/ferizaj/car-repair"
           ],
-          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
+          "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted."
         }
       }
     },
@@ -1580,7 +1580,7 @@
             "https://www.google.com/maps/search/?api=1&query=Auto+Ngjyrosje+Egzoni+95MC%2BX3%2C+Talinoc+i+Muhaxher%C3%ABve+70000&query_place_id=ChIJ7ehTfgZ_VBMRNjghZHjasXA",
             "https://www.cybo.com/XK/ferizaj/car-repair"
           ],
-          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
+          "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted."
         }
       }
     },
@@ -1633,7 +1633,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://de.cybo.com/XK/ferizaj/autoreparatur"],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -1673,7 +1673,7 @@
         "verification": {
           "method": "official_website",
           "sourceUrls": ["https://autongjyrosjenaseri.com/"],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -1713,7 +1713,7 @@
         "verification": {
           "method": "official_website",
           "sourceUrls": ["https://autopicasso.net/"],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -1788,7 +1788,7 @@
             "https://maps.app.goo.gl/ekKSvRLUMb5tv1GKA",
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJx-kdM1l-VBMRwc2PmJdYa4Q"
           ],
-          "note": "Die eigene Unternehmensgeschichte belegt die Fortführung von Auto Servis INOVATOR als INOVATOR Automotive. Der eigene Kontakt und direkte Kartenlink bestätigen dieselbe Google-Identität auch ohne dort veröffentlichte Telefonnummer."
+          "note": "The business's own history establishes that Auto Servis INOVATOR continued as INOVATOR Automotive. Its own contact details and direct Maps link confirm the same Google identity even without a published phone number there."
         }
       }
     },
@@ -1863,7 +1863,7 @@
             "https://www.cybo.com/XK-biz/auto-larje-fatosi",
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJU2coyzCdVBMR9MLuvMnBqHM"
           ],
-          "note": "Eigene Fatosi-Anzeigen verbinden den vorhandenen Kontakt mit der Google-Telefonnummer; eine eigene Stellenanzeige verbindet einen weiteren Verzeichniskontakt mit Auto Larje Fatosi in Llapnasellë. Der unabhängig belegte Pkw-Reparaturstandort und gültige Google-Eintrag liegen am selben Geschäftspunkt. Der Pkw-Service bleibt durch die ursprüngliche Quelle und Reparaturfotos belegt; der Waschbetrieb wird nicht allein aufgrund des Namens zugeordnet."
+          "note": "Fatosi's own advertisements link the existing contact to the Google phone number; the business's own job advertisement links another directory contact to Auto Larje Fatosi in Llapnasellë. The independently evidenced passenger-car repair location and valid Google entry share the same business location. Passenger-car service remains evidenced by the original source and repair photos; the car wash is not assigned solely on the basis of its name."
         }
       }
     },
@@ -1918,7 +1918,7 @@
             "https://www.google.com/maps/search/?api=1&query=Auto+Pjes%C3%AB+%26+Servis+JAHA+CFR5%2B26%2C+Gjilan+60000&query_place_id=ChIJMb1eezmNVBMRRmiBJtGANVE",
             "https://de.cybo.com/XK/gjilan/autoreparatur"
           ],
-          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
+          "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted."
         }
       }
     },
@@ -1969,7 +1969,7 @@
             "https://www.cybo.com/XK/klina/car-repair/",
             "https://www.google.com/maps/?cid=12944679764476334956"
           ],
-          "note": "Individuelle Google-Karte anhand unabhängig belegter Telefonnummer, Werkstattname und präziser Adresse bestätigt; CID und tatsächliche Place ID bezeichnen denselben Eintrag. Keine Google-Geschäftsangaben oder Bewertungen in die Profilquelle übernommen."
+          "note": "Individual Google listing confirmed using an independently evidenced phone number, workshop name and precise address; CID and actual Place ID designate the same entry. No Google business details or reviews adopted into the profile source."
         }
       }
     },
@@ -2026,7 +2026,7 @@
             "https://stgres.gjirafa.biz/Kategori/Automjete?f=MjQ4MyFAIw%3D%3D",
             "https://www.google.com/maps/?cid=9144073666212295597"
           ],
-          "note": "Individuelle Google-Karte anhand unabhängig belegter Telefonnummer, Werkstattname und präziser Adresse bestätigt; CID und tatsächliche Place ID bezeichnen denselben Eintrag. Keine Google-Geschäftsangaben oder Bewertungen in die Profilquelle übernommen."
+          "note": "Individual Google listing confirmed using an independently evidenced phone number, workshop name and precise address; CID and actual Place ID designate the same entry. No Google business details or reviews adopted into the profile source."
         }
       }
     },
@@ -2116,7 +2116,7 @@
             "https://www.facebook.com/AutoServiceArdi/",
             "https://www.autoyas.com/XK/Vushtrri/108632047402437/Auto-Service-ARDI"
           ],
-          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: Name, unabhängig veröffentlichtes Telefon und Standort stimmen überein; aktiver Eintrag. Place-ID aus sichtbarem !19s-Link direkt mit falscher Ersatzsuche rückgeprüft. Keine API-/SDK-Abfragen und keine Inhaberbestätigung."
+          "note": "Public Maps interface in the confirmed account: name, independently published phone and location agree; active entry. Place ID from the visible !19s link directly rechecked with an incorrect fallback search. No API/SDK requests and no owner verification."
         }
       }
     },
@@ -2167,7 +2167,7 @@
             "https://mapcarta.com/N5792764854",
             "https://www.google.com/maps/?cid=983827630900832330"
           ],
-          "note": "Individuelle Google-Karte anhand unabhängig belegter Telefonnummer, Werkstattname und präziser Adresse bestätigt; CID und tatsächliche Place ID bezeichnen denselben Eintrag. Keine Google-Geschäftsangaben oder Bewertungen in die Profilquelle übernommen."
+          "note": "Individual Google listing confirmed using an independently evidenced phone number, workshop name and precise address; CID and actual Place ID designate the same entry. No Google business details or reviews adopted into the profile source."
         }
       }
     },
@@ -2206,7 +2206,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/auto-service-besi-049-205-441"
           ],
-          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: Name, unabhängig veröffentlichtes Telefon und Standort stimmen überein; aktiver Eintrag. Place-ID aus sichtbarem !19s-Link direkt mit falscher Ersatzsuche rückgeprüft. Keine API-/SDK-Abfragen und keine Inhaberbestätigung."
+          "note": "Public Maps interface in the confirmed account: name, independently published phone and location agree; active entry. Place ID from the visible !19s link directly rechecked with an incorrect fallback search. No API/SDK requests and no owner verification."
         }
       }
     },
@@ -2262,7 +2262,7 @@
             "https://www.gjithebiznesi.com/XK/auto-service-bmw-visari-049-870-650",
             "https://www.google.com/maps/?cid=14815260215799336472"
           ],
-          "note": "Individuelle Google-Karte anhand unabhängig belegter Telefonnummer, Werkstattname und präziser Adresse bestätigt; CID und tatsächliche Place ID bezeichnen denselben Eintrag. Keine Google-Geschäftsangaben oder Bewertungen in die Profilquelle übernommen."
+          "note": "Individual Google listing confirmed using an independently evidenced phone number, workshop name and precise address; CID and actual Place ID designate the same entry. No Google business details or reviews adopted into the profile source."
         }
       }
     },
@@ -2326,7 +2326,7 @@
             "https://servicedemi.com/our-services/",
             "https://servicedemi.com/contact-us-2/"
           ],
-          "note": "Die eigene Betriebsdomain bestätigt die Identität trotz unterschiedlicher Termin- und allgemeiner Geschäftstelefonnummern."
+          "note": "The business's own domain confirms the identity despite different appointment and general business phone numbers."
         }
       }
     },
@@ -2374,7 +2374,7 @@
         "verification": {
           "method": "official_maps",
           "sourceUrls": ["https://autoserviceexpress.net/kontakt"],
-          "note": "Der Maps-Link auf der offiziellen Kontaktseite identifiziert dieselbe CID. Telefonnummer und Adresse bestätigen die Zuordnung zusätzlich."
+          "note": "The Maps link on the official contact page identifies the same CID. Phone number and address additionally confirm the assignment."
         }
       }
     },
@@ -2429,7 +2429,7 @@
             "https://www.google.com/maps/search/?api=1&query=Auto+Service+Kushtrimi+9573%2BG23%2C+Hivzi+Sylejmani%2C+Ferizaj+70000&query_place_id=ChIJMxwsC3h_VBMR2K3PwgtzmDQ",
             "https://www.cybo.com/XK/ferizaj/car-repair"
           ],
-          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
+          "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted."
         }
       }
     },
@@ -2525,7 +2525,7 @@
           "sourceUrls": [
             "https://faqet-e-verdha.cybo.com/XK-biz/auto-service-muslija"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -2572,7 +2572,7 @@
             "https://www.facebook.com/p/Auto-Servis-PREKAZI-100063530080689/",
             "https://bedrijvengids.cybo.com/XK/vushtrri/autogarage?d=c"
           ],
-          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: Name, unabhängig veröffentlichtes Telefon und Standort stimmen überein; aktiver Eintrag. Place-ID aus sichtbarem !19s-Link direkt mit falscher Ersatzsuche rückgeprüft. Keine API-/SDK-Abfragen und keine Inhaberbestätigung."
+          "note": "Public Maps interface in the confirmed account: name, independently published phone and location agree; active entry. Place ID from the visible !19s link directly rechecked with an incorrect fallback search. No API/SDK requests and no owner verification."
         }
       }
     },
@@ -2619,7 +2619,7 @@
             "https://www.cybo.com/XK/vushtrri/car-repair/",
             "https://www.veturaneshitje.com/biznese/132/auto-service-rashani"
           ],
-          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: Name, unabhängig veröffentlichtes Telefon und Standort stimmen überein; aktiver Eintrag. Place-ID aus sichtbarem !19s-Link direkt mit falscher Ersatzsuche rückgeprüft. Keine API-/SDK-Abfragen und keine Inhaberbestätigung."
+          "note": "Public Maps interface in the confirmed account: name, independently published phone and location agree; active entry. Place ID from the visible !19s link directly rechecked with an incorrect fallback search. No API/SDK requests and no owner verification."
         }
       }
     },
@@ -2666,7 +2666,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://www.facebook.com/autoservicetuli/"],
-          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle; Maps nennt keine vergleichbare Straße. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
+          "note": "Public Maps interface in the confirmed account: the distinctive name, independently evidenced international phone number and place agree; active entry. The actual Place ID was read from the visible official !19s link and directly rechecked with a deliberately unrelated fallback search. Street details exclusively from an independent source; Maps lists no comparable street. No owner verification and no Google business data adopted."
         }
       }
     },
@@ -2705,7 +2705,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://gjirafa.biz/autoservicevali-1"],
-          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
+          "note": "Public Maps interface in the confirmed account: the distinctive name, independently evidenced international phone number and place agree; active entry. The actual Place ID was read from the visible official !19s link and directly rechecked with a deliberately unrelated fallback search. Street details exclusively from an independent source. No owner verification and no Google business data adopted."
         }
       }
     },
@@ -2759,7 +2759,7 @@
           "sourceUrls": [
             "https://www.autos1000.com/XK/Gjakova/209901509451149/Auto-servis-%22Agimi%22"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -2897,7 +2897,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/auto-servis-bajrami-049-275-728"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -2949,7 +2949,7 @@
         "verification": {
           "method": "name_and_address",
           "sourceUrls": ["https://servis-bashkimi.com/"],
-          "note": "Individueller Werkstattname und Ramnishtë/Viti stimmen mit der offiziellen Website überein. Eine Google-Telefonnummer ist dafür nicht erforderlich."
+          "note": "The distinctive workshop name and Ramnishtë/Viti agree with the official website. A Google phone number is not required for this."
         }
       }
     },
@@ -2991,7 +2991,7 @@
             "https://www.gjithebiznesi.com/XK/auto-servis-%E2%80%98berati%E2%80%99-bmw-049-378-051",
             "https://www.google.com/maps/search/?api=1&query=NOT_A_REAL_RIPARIM_BUSINESS&query_place_id=ChIJR0jrutd1UxMRlemhiDV-aUA"
           ],
-          "note": "Öffentliche Maps-Oberfläche im bestätigten Projektprofil: Name, normalisiertes Telefon und unabhängige Straße/Ort stimmen überein; aktiver Eintrag mit regulärem Öffnungsstatus. Place-ID aus sichtbarem !19s-Ergebnislink direkt mit falscher Ersatzsuche rückgeprüft. Keine API-/SDK-Aufrufe, keine Inhaberbestätigung."
+          "note": "Public Maps interface in the confirmed project profile: name, normalized phone and independent street/place agree; active entry with regular opening status. Place ID from the visible !19s result link directly rechecked with an incorrect fallback search. No API/SDK calls, no owner verification."
         }
       }
     },
@@ -3030,7 +3030,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://www.facebook.com/autoservisbesimi/"],
-          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
+          "note": "Public Maps interface in the confirmed account: the distinctive name, independently evidenced international phone number and place agree; active entry. The actual Place ID was read from the visible official !19s link and directly rechecked with a deliberately unrelated fallback search. Street details exclusively from an independent source. No owner verification and no Google business data adopted."
         }
       }
     },
@@ -3082,7 +3082,7 @@
             "https://www.nlb-kos.com/sq/merchant-list-test",
             "https://www.google.com/maps/?cid=9746007481171612760"
           ],
-          "note": "Individuelle Google-Karte anhand unabhängig belegter Telefonnummer, Werkstattname und präziser Adresse bestätigt; CID und tatsächliche Place ID bezeichnen denselben Eintrag. Keine Google-Geschäftsangaben oder Bewertungen in die Profilquelle übernommen."
+          "note": "Individual Google listing confirmed using an independently evidenced phone number, workshop name and precise address; CID and actual Place ID designate the same entry. No Google business details or reviews adopted into the profile source."
         }
       }
     },
@@ -3128,7 +3128,7 @@
         "verification": {
           "method": "official_website",
           "sourceUrls": ["https://autoservisblerti.com/"],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -3266,7 +3266,7 @@
           "sourceUrls": [
             "https://yellowpages-tl.cybo.com/XK/ajvalija/pagkumpuni-ng-kotse"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -3376,7 +3376,7 @@
             "https://www.facebook.com/reel/931922949996718/",
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJFTS-BHR_VBMRLDRPsHW-ogI"
           ],
-          "note": "Aktuelles Betriebsprofil und unabhängiges Verzeichnis bestätigen Kontakt und Bibaj. Der vom Betrieb veröffentlichte Directions-Zielpunkt liegt höchstens 300 Meter vom selben Google-Eintrag entfernt; ein eigener Beitrag belegt Pkw-Motorarbeiten."
+          "note": "The current business profile and independent directory confirm contact details and Bibaj. The Directions destination published by the business is at most 300 meters from the same Google entry; the business's own post establishes passenger-car engine work."
         }
       }
     },
@@ -3418,7 +3418,7 @@
             "https://www.gjithebiznesi.com/XK/auto-servis-diagnoz-%22opel%22-049-284-990",
             "https://www.google.com/maps/search/?api=1&query=NOT_A_REAL_RIPARIM_BUSINESS&query_place_id=ChIJ35tXXoOfUxMRZEfRxbLnlrc"
           ],
-          "note": "Öffentliche Maps-Oberfläche im bestätigten Projektprofil: Name, normalisiertes Telefon und unabhängige Straße/Ort stimmen überein; aktiver Eintrag mit regulärem Öffnungsstatus. Place-ID aus sichtbarem !19s-Ergebnislink direkt mit falscher Ersatzsuche rückgeprüft. Keine API-/SDK-Aufrufe, keine Inhaberbestätigung."
+          "note": "Public Maps interface in the confirmed project profile: name, normalized phone and independent street/place agree; active entry with regular opening status. Place ID from the visible !19s result link directly rechecked with an incorrect fallback search. No API/SDK calls, no owner verification."
         }
       }
     },
@@ -3468,7 +3468,7 @@
             "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Doni+QQVM%2B5VX%2C+R101%2C+Klin%C3%AB+e+Ep%C3%ABrme+41000&query_place_id=ChIJZ5Wsu-pBUxMRTFrP2jiQn0g",
             "https://www.top-rated.online/cities/Klin%C3%AB%2Be%2BEp%C3%ABrme/place/p/10916121/Auto%2BServis%2BDoni"
           ],
-          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name und unabhängig belegter Plus Code stimmen überein. Die Telefonnummer hat dieselbe lokale Rufnummer mit älterer Ländervorwahl. Die bestätigte Zuordnung bleibt erhalten; Kontaktdaten wurden nicht geändert."
+          "note": "Rechecked using the stored Google Place ID link: the distinctive name and independently evidenced Plus Code agree. The phone number has the same local number with an older country dialing code. The confirmed assignment is preserved; contact details were not changed."
         }
       }
     },
@@ -3509,7 +3509,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/auto-servis-edi-045-411-022"
           ],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -3550,7 +3550,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/auto-servis-enisi-044-809-246"
           ],
-          "note": "Name, Telefon und Straßenadresse stimmen überein; Kastriot und Obiliq bezeichnen hier denselben Ort. Direkte Place-Details-ID-Prüfung bestanden."
+          "note": "Name, phone and street address agree; Kastriot and Obiliq refer to the same place here. Direct Place Details ID check passed."
         }
       }
     },
@@ -3589,7 +3589,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://www.facebook.com/100092324168737/"],
-          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle; Maps nennt keine vergleichbare Straße. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
+          "note": "Public Maps interface in the confirmed account: the distinctive name, independently evidenced international phone number and place agree; active entry. The actual Place ID was read from the visible official !19s link and directly rechecked with a deliberately unrelated fallback search. Street details exclusively from an independent source; Maps lists no comparable street. No owner verification and no Google business data adopted."
         }
       }
     },
@@ -3645,7 +3645,7 @@
             "https://stgres.gjirafa.biz/auto-servis-ford-jashanica-1",
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJgxoAFyKfVBMRJOYQKh2Gejs"
           ],
-          "note": "Die eigene Anzeige nennt die veröffentlichte Mobilnummer und dieselbe lokale Festnetznummer wie der Google-Eintrag unter historischer Vorwahl. Pkw-Service, Name und Straße sind unabhängig belegt."
+          "note": "The business's own advertisement lists the published mobile number and the same local landline number as the Google entry under a historical dialing code. Passenger-car service, name and street are independently evidenced."
         }
       }
     },
@@ -3699,7 +3699,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/auto-servis-gashi-045-972-775"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -3749,7 +3749,7 @@
             "https://stgres.gjirafa.biz/auto-servis-gazi-1",
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJPTLT0Z-vUxMRruPkPVs7l0Y"
           ],
-          "note": "Betriebsname, Reparaturfoto und der genaue profilspezifische Marker im unabhängigen Verzeichnis bestätigen genau diesen gültigen Google-Eintrag. Dort fehlt die Telefonnummer; der unabhängig belegte Verzeichniskontakt bleibt gekennzeichnet."
+          "note": "The business name, repair photo and exact profile-specific marker in the independent directory confirm this exact valid Google entry. Its phone number is missing; the independently evidenced directory contact remains labeled."
         }
       }
     },
@@ -3799,7 +3799,7 @@
             "https://www.google.com/maps/search/?api=1&query=Auto+Servis+Genti+M43G%2BVQW%2C+Unnamed+Road%2C+Prishtina+10000&query_place_id=ChIJz2OODhafVBMRSk4BbeHIhq8",
             "https://www.cybo.com/XK/pristina/car-repair"
           ],
-          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
+          "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted."
         }
       }
     },
@@ -3851,7 +3851,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-goni-1"],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -3905,7 +3905,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/auto-servis-good-year-044-371-634"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -3950,7 +3950,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://www.autojoni.com/"],
-          "note": "Name, normalisierte Telefonnummer und Standort unabhängig abgeglichen. Aktiver öffentlicher Maps-Eintrag; Place-ID aus offiziellem sichtbarem Maps-Link direkt mit absichtlich unpassender Ersatzsuche rückgeprüft. Keine Google-Inhaberbestätigung und keine eigenen API-/SDK-Aufrufe."
+          "note": "Name, normalized phone number and location independently compared. Active public Maps entry; Place ID from the official visible Maps link directly rechecked with a deliberately unrelated fallback search. No Google owner verification and no API/SDK calls made by us."
         }
       }
     },
@@ -4053,7 +4053,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-klima-1"],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -4094,7 +4094,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/auto-servis-lirimi-045-533-746"
           ],
-          "note": "Name, Telefon und Straßenadresse stimmen überein; Besianë und Podujevë bezeichnen hier denselben Ort. Direkte Place-Details-ID-Prüfung bestanden."
+          "note": "Name, phone and street address agree; Besianë and Podujevë refer to the same place here. Direct Place Details ID check passed."
         }
       }
     },
@@ -4147,7 +4147,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://stgres.gjirafa.biz/autoservislumim-1"],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -4208,7 +4208,7 @@
             "https://auto-servis-pjese-maloku.base44.app/",
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJu_fNLeFVUhMRsFdcOUdpo7Y"
           ],
-          "note": "Die eigene Website verbindet bisherigen und aktuellen Kontakt und bestätigt Lan Dobraj sowie konkrete Pkw-Reparaturen. Der gültige Google-Eintrag hat dieselbe aktuelle Telefonnummer und Anschrift. Fehlerhafte Telefonlink-Vorlagen wurden nicht übernommen."
+          "note": "The business's own website links its previous and current contacts and confirms Lan Dobraj and specific passenger-car repairs. The valid Google entry has the same current phone number and address. Incorrect phone-link templates were not adopted."
         }
       }
     },
@@ -4256,7 +4256,7 @@
             "https://www.autoyas.com/XK/Drenas/122648967802001/Auto-Servis-MEGI---Drenas",
             "https://www.gjithebiznesi.com/XK/auto-servis-megi-044-609-224"
           ],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -4318,7 +4318,7 @@
             "https://www.gjithebiznesi.com/XK/mercedes-benz-vedati-044-496-496",
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJCz9-2W6fVBMRuVUellpelNw"
           ],
-          "note": "Die aktuelle Betriebsanzeige verbindet den bisherigen und aktuellen Kontakt. Direkter Kartenlink und gültige Place ID wählen denselben Betrieb mit bestätigter Anschrift aus."
+          "note": "The current business advertisement links its previous and current contacts. The direct Maps link and valid Place ID select the same business with a confirmed address."
         }
       }
     },
@@ -4359,7 +4359,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/auto-servis-meti_1J-044-385-480"
           ],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -4400,7 +4400,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/auto-servis-montimi-044-269-197"
           ],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -4447,7 +4447,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://www.cybo.com/XK-biz/auto-servis-muriqi"],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -4484,7 +4484,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://www.facebook.com/ServisNaimi/"],
-          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: Name, unabhängig veröffentlichtes Telefon und Standort stimmen überein; aktiver Eintrag. Place-ID aus sichtbarem !19s-Link direkt mit falscher Ersatzsuche rückgeprüft. Keine API-/SDK-Abfragen und keine Inhaberbestätigung."
+          "note": "Public Maps interface in the confirmed account: name, independently published phone and location agree; active entry. Place ID from the visible !19s link directly rechecked with an incorrect fallback search. No API/SDK requests and no owner verification."
         }
       }
     },
@@ -4525,7 +4525,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/auto-servis-nazi-044-405-002"
           ],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -4566,7 +4566,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/auto-servis-nexhi_1n-044-736-933"
           ],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -4621,7 +4621,7 @@
             "https://www.google.com/maps/search/?api=1&query=Auto+Servis+P%C3%ABrparimi+95Q3%2B7VQ%2C+Driton+Islami%2C+Talinoc+i+Jerlive+70000&query_place_id=ChIJv4FJP0V_VBMRiq_V3C5Yh2k",
             "https://www.cybo.com/XK/ferizaj/car-repair"
           ],
-          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
+          "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted."
         }
       }
     },
@@ -4662,7 +4662,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/auto-servis-pirqi-044-444-556"
           ],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -4716,7 +4716,7 @@
             "https://kosovajob.com/jobs?id=44373",
             "https://superpuna.rks-gov.net/job-seeker/job-post/kerkojm-ndihmes-mekanik-2"
           ],
-          "note": "Die Werkstatttelefonnummer und der Standort an der Straße Prishtinë–Ferizaj bestätigen diese Filiale; der gleichnamige Betrieb mit anderer Telefonnummer wurde ausgeschlossen."
+          "note": "The workshop phone number and location on the Prishtinë–Ferizaj road confirm this branch; the namesake business with a different phone number was excluded."
         }
       }
     },
@@ -4763,7 +4763,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://www.cybo.com/XK-biz/auto-servis-rizvanolli"],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -4811,7 +4811,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-sejda-1"],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -4894,7 +4894,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/auto-servis-univerzal_1s-044-269-491"
           ],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -4948,7 +4948,7 @@
           "sourceUrls": [
             "https://faqet-e-verdha.cybo.com/XK/prizreni/riparimi-i-makinave-"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -4989,7 +4989,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/auto-servis-visco-044-122-498"
           ],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -5057,7 +5057,7 @@
             "https://www.autoyas.com/XK/Prizren/439576746129205/Auto-Folje-Xhelali",
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJgc9JBjKUUxMRoP3PNI5Eo-U"
           ],
-          "note": "Unabhängiger Betriebsbeleg verbindet den bisherigen Kontakt ausdrücklich mit Auto Folje Xhelali. Das eigene Betriebsprofil bestätigt aktuellen Kontakt, Anschrift und genauen Directions-Zielpunkt innerhalb von 300 Metern zum selben Google-Eintrag."
+          "note": "Independent business evidence explicitly links the previous contact to Auto Folje Xhelali. The business's own profile confirms the current contact, address and exact Directions destination within 300 meters of the same Google entry."
         }
       }
     },
@@ -5113,7 +5113,7 @@
             "https://www.cybo.com/XK-biz/auto-servis-xoni",
             "https://www.google.com/maps/?cid=9099976421809570009"
           ],
-          "note": "Individuelle Google-Karte anhand unabhängig belegter Telefonnummer, Werkstattname und präziser Adresse bestätigt; CID und tatsächliche Place ID bezeichnen denselben Eintrag. Keine Google-Geschäftsangaben oder Bewertungen in die Profilquelle übernommen."
+          "note": "Individual Google listing confirmed using an independently evidenced phone number, workshop name and precise address; CID and actual Place ID designate the same entry. No Google business details or reviews adopted into the profile source."
         }
       }
     },
@@ -5173,7 +5173,7 @@
           "sourceUrls": [
             "https://faqet-e-verdha.cybo.com/XK/gjakov%C3%AB/riparimi-i-makinave-"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -5275,7 +5275,7 @@
           "sourceUrls": [
             "https://www.cybo.com/XK-biz/autoavangarde-bmw-service"
           ],
-          "note": "Individueller Name, BMW-Service und Standort an der Magjistralja Pejë–Prishtinë stimmen mit dem unabhängigen Betriebsnachweis überein."
+          "note": "Distinctive name, BMW service and location on Magjistralja Pejë–Prishtinë agree with the independent business evidence."
         }
       }
     },
@@ -5312,7 +5312,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://www.facebook.com/61564172242981/"],
-          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: Name, unabhängig veröffentlichtes Telefon und Ort Vushtrri stimmen überein; aktiver Eintrag. Place-ID aus sichtbarem !19s-Link mit falscher Ersatzsuche rückgeprüft. Straßenangabe nicht übernommen, nur unabhängig belegter Ort veröffentlicht. Keine Inhaberbestätigung."
+          "note": "Public Maps interface in the confirmed account: name, independently published phone and Vushtrri agree; active entry. Place ID from the visible !19s link rechecked with an incorrect fallback search. Street details not adopted, only the independently evidenced place published. No owner verification."
         }
       }
     },
@@ -5414,7 +5414,7 @@
             "https://www.autodiagnoza.shop/contact/",
             "https://www.facebook.com/autodiagnozakosove/posts/pfbid0KK3SPqA5mS7GBEaFHqJJzs4XNq1jwpdKJbAwDmiKWKVf2jdt3jfZ3q8SubdqqKZZl"
           ],
-          "note": "Der aktuell vom Betrieb veröffentlichte Standort und Kontakt bestätigen dieselbe bestehende Google-Identität; die frühere Verzeichnisadresse ist überholt."
+          "note": "The location and contact currently published by the business confirm the same existing Google identity; the former directory address is outdated."
         }
       }
     },
@@ -5464,7 +5464,7 @@
             "https://www.google.com/maps/search/?api=1&query=Autoelektrika+Naimi+M44X%2BHR2%2C+Prishtina+10000&query_place_id=ChIJUQjLIHufVBMRMpMm10I6HN0",
             "https://www.cybo.com/XK/pristina/car-repair"
           ],
-          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
+          "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted."
         }
       }
     },
@@ -5553,7 +5553,7 @@
         "verification": {
           "method": "name_and_address",
           "sourceUrls": ["https://www.cybo.com/XK/gjilan/car-repair/"],
-          "note": "Vollständiger Name und genaue Adresse Koretiste/Gjilan 38250 stimmen mit dem unabhängigen Verzeichniseintrag überein."
+          "note": "Full name and exact address Koretiste/Gjilan 38250 agree with the independent directory entry."
         }
       }
     },
@@ -5607,7 +5607,7 @@
           "sourceUrls": [
             "https://faqet-e-verdha.cybo.com/XK/gjakov%C3%AB/riparimi-i-makinave-"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -5662,7 +5662,7 @@
           "sourceUrls": [
             "https://faqet-e-verdha.cybo.com/XK/prizreni/riparimi-i-makinave-"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -5717,7 +5717,7 @@
             "https://www.google.com/maps/search/?api=1&query=Autopjes%C3%AB+%26+Service+Nazi+959P%2BXV6%2C+Bibaj+70000&query_place_id=ChIJhduIqz1_VBMR1pQy7eVfBok",
             "https://www.cybo.com/XK/ferizaj/car-repair"
           ],
-          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
+          "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted."
         }
       }
     },
@@ -5758,7 +5758,7 @@
           "sourceUrls": [
             "https://bedrijvengids.cybo.com/XK/vushtrri/autogarage?d=c"
           ],
-          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: Name, unabhängig veröffentlichtes Telefon und Standort stimmen überein; aktiver Eintrag. Place-ID aus sichtbarem !19s-Link direkt mit falscher Ersatzsuche rückgeprüft. Keine API-/SDK-Abfragen und keine Inhaberbestätigung."
+          "note": "Public Maps interface in the confirmed account: name, independently published phone and location agree; active entry. Place ID from the visible !19s link directly rechecked with an incorrect fallback search. No API/SDK requests and no owner verification."
         }
       }
     },
@@ -5808,7 +5808,7 @@
             "https://www.cybo.com/XK-biz/autoservis-agimi",
             "https://www.google.com/maps/?cid=13500840597129851265"
           ],
-          "note": "Individuelle Google-Karte anhand unabhängig belegter Telefonnummer, Werkstattname und präziser Adresse bestätigt; CID und tatsächliche Place ID bezeichnen denselben Eintrag. Keine Google-Geschäftsangaben oder Bewertungen in die Profilquelle übernommen."
+          "note": "Individual Google listing confirmed using an independently evidenced phone number, workshop name and precise address; CID and actual Place ID designate the same entry. No Google business details or reviews adopted into the profile source."
         }
       }
     },
@@ -5860,7 +5860,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://www.cybo.com/XK/pristina/car-repair/?p=4"],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -5910,7 +5910,7 @@
             "https://www.google.com/maps/search/?api=1&query=Autoservis+PG+Bosch+M55M%2BCC2%2C+Prishtina+10000&query_place_id=ChIJMTTQbMSfVBMROfUEApqoNwg",
             "https://www.cybo.com/XK/pristina/car-repair"
           ],
-          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name und Telefonnummer stimmen überein; der Geschäftspunkt liegt innerhalb von 300 m der unabhängig aus dem Verzeichnis-Plus-Code bestimmten Koordinaten. Google-Koordinaten wurden nicht übernommen."
+          "note": "Rechecked using the stored Google Place ID link: the distinctive name and phone number agree; the business location is within 300 meters of the coordinates independently determined from the directory Plus Code. Google coordinates were not adopted."
         }
       }
     },
@@ -5964,7 +5964,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/autoservis-semini-049-424-287"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -6029,7 +6029,7 @@
             "https://www.toyota-kosovo.com/owners/maintenance/express-service",
             "https://www.toyota-kosovo.com/owners/maintenance/hybrid-service"
           ],
-          "note": "Die offizielle Toyota-Kosovo-Domain, Händlername und Filialstandort bestätigen die Identität. Historische Landesvorwahlen werden nicht pauschal gleichgesetzt."
+          "note": "The official Toyota Kosovo domain, dealer name and branch location confirm the identity. Historical country dialing codes are not treated as generally equivalent."
         }
       }
     },
@@ -6192,7 +6192,7 @@
             "https://stgres.gjirafa.biz/bmw-prishtina-1",
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJqXQcgJufVBMROGwBj_-gtXU"
           ],
-          "note": "Betriebsbeiträge bestätigen den früheren Straßenstandort und die aktuelle Anschrift an der Lidhja e Lezhës sowie den neuen Kontakt. Ein unabhängiges Verzeichnis und der gültige Google-Eintrag stimmen bei Name und neuer Telefonnummer überein."
+          "note": "Business posts confirm the former street location and current address on Lidhja e Lezhës, along with the new contact. An independent directory and the valid Google entry agree on the name and new phone number."
         }
       }
     },
@@ -6244,7 +6244,7 @@
         "verification": {
           "method": "official_maps",
           "sourceUrls": ["https://www.facebook.com/bmwferizaj"],
-          "note": "Der aktuell vom Betrieb veröffentlichte Standort und Kontakt bestätigen dieselbe bestehende Google-Identität; die frühere Verzeichnisadresse ist überholt."
+          "note": "The location and contact currently published by the business confirm the same existing Google identity; the former directory address is outdated."
         }
       }
     },
@@ -6360,7 +6360,7 @@
             "https://ddautoservice.com/hostinger-backend/api/index.php?resource=services&lang=sq",
             "https://maps.app.goo.gl/nciwJW6yFBoGpzqs9"
           ],
-          "note": "Offizielle Telefonnummer und unabhängig veröffentlichte Betriebskoordinaten bestätigen die Identität trotz zusammengezogener Namensschreibweise."
+          "note": "The official phone number and independently published business coordinates confirm the identity despite the joined-up spelling of the name."
         }
       }
     },
@@ -6414,7 +6414,7 @@
             "https://www.citroen-ks.com/ndihmese/gjeni-nje-pike-shitje.html",
             "https://www.citroen-ks.com/"
           ],
-          "note": "Die eingebettete Karte des offiziellen Citroën-Händlerportals bestätigt die CID 5469968250566796252. Die andere Delfin-Filiale wurde ausgeschlossen."
+          "note": "The embedded map on the official Citroën dealer portal confirms CID 5469968250566796252. The other Delfin branch was excluded."
         }
       }
     },
@@ -6468,7 +6468,7 @@
           "sourceUrls": [
             "https://faqet-e-verdha.cybo.com/XK/prizreni/riparimi-i-makinave-"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -6522,7 +6522,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/dpf-auto-gjini-049-445-589"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -6680,7 +6680,7 @@
             "https://www.eurogoma.net/contact/",
             "https://www.eurogoma.net/services/"
           ],
-          "note": "Die eigene Standortseite bestätigt die Filiale in Shupkovc/Mitrovica. Die zentrale Telefonnummer identifiziert nicht die abweichende Filiale in Shkabaj."
+          "note": "The business's own location page confirms the branch in Shupkovc/Mitrovica. The central phone number does not identify the different branch in Shkabaj."
         }
       }
     },
@@ -6834,7 +6834,7 @@
             "https://yellowpages-tl.cybo.com/XK-biz/autoservis-mentori",
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJqdYqioGfVBMRibazGbBsjTU"
           ],
-          "note": "Unveränderte Telefonnummer und Fiat-Spezialisierung verbinden den bisherigen Verzeichniseintrag mit Auto Servis Mentori. Der aktuelle Name und die genaue Anschrift sind unabhängig belegt und wählen denselben gültigen Google-Eintrag."
+          "note": "The unchanged phone number and Fiat specialization link the previous directory entry to Auto Servis Mentori. The current name and exact address are independently evidenced and select the same valid Google entry."
         }
       }
     },
@@ -6878,7 +6878,7 @@
         "verification": {
           "method": "official_maps",
           "sourceUrls": ["https://b2b.foleja.com/foleja-motors/"],
-          "note": "Die Karte der offiziellen Motors-Seite bestätigt die CID 6574000919579083654. Der veröffentlichte Servicekontakt bleibt erhalten."
+          "note": "The map on the official Motors page confirms CID 6574000919579083654. The published service contact is preserved."
         }
       }
     },
@@ -7063,7 +7063,7 @@
             "https://mygreensteam.com/wp-content/uploads/2025/07/Company-Profile-GreenSteam-Detailing.pdf",
             "https://mygreensteam.com/"
           ],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -7153,7 +7153,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://stgres.gjirafa.biz/koli-1"],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -7202,7 +7202,7 @@
         "verification": {
           "method": "official_website",
           "sourceUrls": ["https://lipjanicoding.com/en"],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -7244,7 +7244,7 @@
           "sourceUrls": [
             "https://www.findglocal.com/XK/Gjilan/1168160443205697/Luxury-Auto-Detailing"
           ],
-          "note": "Aktuelle eigene Betriebsbeiträge bestätigen denselben Telefonkontakt und Mulla Idrizi III in Gjilan. Der abweichende ältere Verzeichnis-Plus-Code wird nicht übernommen. Direkte Place-Details-ID-Prüfung bestanden."
+          "note": "Current posts by the business confirm the same phone contact and Mulla Idrizi III in Gjilan. The conflicting older directory Plus Code is not adopted. Direct Place Details ID check passed."
         }
       }
     },
@@ -7298,7 +7298,7 @@
             "https://www.facebook.com/MANAautodetailing/",
             "https://www.instagram.com/manaautodetailing/reel/Dax-31fsI2z/"
           ],
-          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: individueller Name, unabhängig belegte internationale Telefonnummer und Ort stimmen überein; aktiver Eintrag. Tatsächliche Place-ID aus sichtbarem offiziellen !19s-Link gelesen und mit absichtlich unpassender Ersatzsuche direkt zurückgeprüft. Straßenangabe ausschließlich aus unabhängiger Quelle. Keine Inhaberbestätigung und keine Google-Geschäftsdaten übernommen."
+          "note": "Public Maps interface in the confirmed account: the distinctive name, independently evidenced international phone number and place agree; active entry. The actual Place ID was read from the visible official !19s link and directly rechecked with a deliberately unrelated fallback search. Street details exclusively from an independent source. No owner verification and no Google business data adopted."
         }
       }
     },
@@ -7351,7 +7351,7 @@
             "https://baaf-ks.com/sip/kontakt.php",
             "https://baaf-ks.com/sip/garanti.php"
           ],
-          "note": "Offizielle Telefonnummer, individuelle Firmenkennung und der von der eigenen Kontaktseite verlinkte Kartenstandort bestätigen die Werkstatt."
+          "note": "The official phone number, distinctive business identifier and map location linked from the business's own contact page confirm the workshop."
         }
       }
     },
@@ -7411,7 +7411,7 @@
             "https://de.cybo.com/XK/zhaq/autoreparatur/?p=8",
             "https://www.openstreetmap.org/way/889901834"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -7466,7 +7466,7 @@
             "https://www.google.com/maps/search/?api=1&query=Mercedes+Isa+95QF%2B28%2C+Talinoc+i+Muhaxher%C3%ABve+70000&query_place_id=ChIJI21YCwB_VBMRU22CO97yQLU",
             "https://www.cybo.com/XK/ferizaj/car-repair"
           ],
-          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
+          "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted."
         }
       }
     },
@@ -7537,7 +7537,7 @@
             "https://www.google.com/maps?cid=7844820119116098576&output=embed",
             "https://www.facebook.com/MercedesBenzServiceBallkan/"
           ],
-          "note": "Die eigene Website bettet genau CID 7844820119116098576 ein. Die Händler-Duplikatkarte und andere gleichnamige Betriebe wurden ausgeschlossen."
+          "note": "The business's own website embeds exactly CID 7844820119116098576. The duplicate dealer listing and other namesake businesses were excluded."
         }
       }
     },
@@ -7598,7 +7598,7 @@
             "https://faqet-e-verdha.cybo.com/XK/prizreni/riparimi-i-makinave-",
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJmXwWcEuUUxMRO19gku2sp8U"
           ],
-          "note": "Aktueller unabhängiger Reparaturbeleg bestätigt Telefonnummer und Prizren; Name und genaue Straße stimmen mit dem gültigen Google-Eintrag überein. Dort steht dieselbe lokale Nummer mit der früheren Kosovo-Vorwahl; der aktuelle unabhängig belegte Kontakt bleibt erhalten."
+          "note": "Current independent repair evidence confirms the phone number and Prizren; the name and exact street agree with the valid Google entry. It lists the same local number with the former Kosovo dialing code; the current independently evidenced contact is preserved."
         }
       }
     },
@@ -7700,7 +7700,7 @@
             "https://dyqani.app/places/car_rental/opel-erafuna-prishtine",
             "https://www.autoyas.com/XK/Pristina/116827828191779/Opel-E.Rafuna"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -7741,7 +7741,7 @@
           "sourceUrls": [
             "https://faqet-e-verdha.cybo.com/XK/gjakov%C3%AB/riparimi-i-makinave-"
           ],
-          "note": "Zwei Google-Geschäftspunkte teilen die Telefonnummer. Nur die Place ID mit passendem Namen und exakt dem unabhängigen Plus-Code 9CGP+R24 an der Skënderbeu-Straße wird übernommen. Direkte Place-Details-ID-Prüfung bestanden."
+          "note": "Two Google business locations share the phone number. Only the Place ID with the matching name and exact independent Plus Code 9CGP+R24 on Skënderbeu street is adopted. Direct Place Details ID check passed."
         }
       }
     },
@@ -7797,7 +7797,7 @@
             "https://pagini-aurii.cybo.com/XK-biz/auto-sevice-beda-shpk",
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJoaIikxGfVBMR-sPTTKaGVLc"
           ],
-          "note": "Gleiche internationale Telefonnummer, Betriebsname und genaue Straße bestätigen den heutigen BEDA-Eintrag. Pkw-Reparatur ist unabhängig belegt."
+          "note": "The same international phone number, business name and exact street confirm the current BEDA entry. Passenger-car repair is independently evidenced."
         }
       }
     },
@@ -7930,7 +7930,7 @@
             "https://prishtinaonline.com/uploads/nr._616_19_165_221_servisimi_dhe_mirembajtja_e_automjeteve_te_qkmf-se_dhe_qmu-se.pdf",
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJ-5d0UsmhVBMRBQBORVPLs7A"
           ],
-          "note": "Eigene Serviceanzeige verbindet den bestehenden Kontakt mit Sfishta Auto Home in Bardhosh. Amtliche Auftragsbelege nennen Auto Home und N.T.SH. Sfishta gemeinsam mit dem zusätzlichen Betriebsnummernkontakt; dieser stimmt unter historischer Kosovo-Vorwahl mit dem bestätigten Google-Eintrag überein. Pkw-Service, operative Kontinuität und die direkt geprüfte Place ID sind belegt; keine rechtliche Verschmelzung wird behauptet."
+          "note": "The business's own service advertisement links the existing contact to Sfishta Auto Home in Bardhosh. Official contract evidence names Auto Home and N.T.SH. Sfishta together with the additional business phone contact; this matches the confirmed Google entry under the historical Kosovo dialing code. Passenger-car service, operational continuity and the directly checked Place ID are evidenced; no legal merger is claimed."
         }
       }
     },
@@ -7992,7 +7992,7 @@
             "https://dogana.rks-gov.net/sharedfolder/AnnouncementFiles/2026_b0c9a4d9-6eaf-4463-9a1f-f6b4d67d9c49.Pdf",
             "https://www.merrjep.com/shpallja/reno-center-muciqi/10545304"
           ],
-          "note": "Neue Kennung ausschließlich für den belegten Nordstandort. Betriebsbeiträge und amtlicher Auftrag bestätigen Kontakt und Pkw-Service. Der unabhängig veröffentlichte Standortcode liegt innerhalb von 300 m desselben Google-Geschäftspunkts. Place-ID mit unpassender Ersatzsuche direkt zurückgeprüft; keine Übertragung vom alten Südprofil."
+          "note": "New identifier exclusively for the evidenced northern location. Business posts and an official contract confirm contact details and passenger-car service. The independently published location code is within 300 meters of the same Google business location. Place ID directly rechecked with an unrelated fallback search; no transfer from the old southern profile."
         }
       }
     },
@@ -8039,7 +8039,7 @@
         "verification": {
           "method": "phone_and_location",
           "sourceUrls": ["https://www.cybo.com/XK-biz/rex-automobile"],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -8160,7 +8160,7 @@
         "verification": {
           "method": "official_website",
           "sourceUrls": ["https://shaladetailing.com/"],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -8201,7 +8201,7 @@
           "sourceUrls": [
             "https://gulesider-da.cybo.com/XK-biz/sheki-benz-automotive-body-shop"
           ],
-          "note": "Öffentliche Maps-Oberfläche im bestätigten Konto: Name, unabhängig veröffentlichtes Telefon und Standort stimmen überein; aktiver Eintrag. Place-ID aus sichtbarem !19s-Link direkt mit falscher Ersatzsuche rückgeprüft. Keine API-/SDK-Abfragen und keine Inhaberbestätigung."
+          "note": "Public Maps interface in the confirmed account: name, independently published phone and location agree; active entry. Place ID from the visible !19s link directly rechecked with an incorrect fallback search. No API/SDK requests and no owner verification."
         }
       }
     },
@@ -8251,7 +8251,7 @@
             "https://www.autoyas.com/XK/Pristina/982725325082851/Shine-Detailing-Studio",
             "https://www.gjithebiznesi.com/XK/shine-detailing-studio-049-757-144"
           ],
-          "note": "Name, unabhängig veröffentlichtes Telefon und Straße mit aktivem Maps-Eintrag abgeglichen. Place ID über offiziellen Finder gelesen und mit absichtlich unpassender Ersatzsuche direkt rückgeprüft. Keine Inhaberschaft behauptet."
+          "note": "Name, independently published phone and street compared with the active Maps entry. Place ID read through the official finder and directly rechecked with a deliberately unrelated fallback search. No ownership claimed."
         }
       }
     },
@@ -8292,7 +8292,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/sokoli-autoelectronic-049-326-545"
           ],
-          "note": "Abweichender Namenszusatz im Google-Auftritt; identische internationale Telefonnummer und exakt derselbe unabhängige Plus-Code M843+28 bestätigen die Paarung. Verzeichnisname bleibt erhalten. Direkte Place-Details-ID-Prüfung bestanden."
+          "note": "The Google presence has a different name suffix; the identical international phone number and exact same independent Plus Code M843+28 confirm the match. The directory name is preserved. Direct Place Details ID check passed."
         }
       }
     },
@@ -8404,7 +8404,7 @@
             "https://www.google.com/maps/search/?api=1&query=Stavileci+Tuning+VVR6%2B9Q5%2C+Rruga+Kollashini%2C+Mitrovic%C3%AB+40000&query_place_id=ChIJrzhQ3jxFUxMRANcJyieNKyo",
             "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/"
           ],
-          "note": "Erneut am gespeicherten Google-Place-ID-Link geprüft: individueller Name, Telefon und der unabhängig belegte Plus Code stimmen überein. Der Plus Code bestimmt die neuen Koordinaten; Google-Geschäftsdaten wurden nicht übernommen."
+          "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted."
         }
       }
     },
@@ -8445,7 +8445,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/superclean-prishtin%C3%AB-045-677-633"
           ],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -8486,7 +8486,7 @@
           "sourceUrls": [
             "https://www.gjithebiznesi.com/XK/tiptop-vullkanizer-detailing-car-wash-049-323-545"
           ],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -8533,7 +8533,7 @@
         "verification": {
           "method": "name_and_address",
           "sourceUrls": ["https://www.cybo.com/XK/pristina/car-repair"],
-          "note": "Individueller Betriebsname, Stadt und Postadresse 15000 stimmen mit dem unabhängigen Kontaktverzeichnis überein."
+          "note": "Distinctive business name, city and postal address 15000 agree with the independent contact directory."
         }
       }
     },
@@ -8588,7 +8588,7 @@
           "sourceUrls": [
             "https://www.merrjep.com/shpallja/turbo-servis-turbina-te-llojeve-te-ndryshme/2205281"
           ],
-          "note": "Gleiche unabhängig belegte Telefonnummer, charakteristischer Name und passender Ort innerhalb des bekannten Ortsgebiets bestätigen genau einen Google-Eintrag. Pkw-Service wurde unabhängig belegt."
+          "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
         }
       }
     },
@@ -8721,7 +8721,7 @@
             "https://autowaxon.com/contact",
             "https://autowaxon.com/"
           ],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -8758,7 +8758,7 @@
         "verification": {
           "method": "official_website",
           "sourceUrls": ["https://www.autoxhela.com/"],
-          "note": "Telefon, charakteristischer Betriebsname und Standort wurden einzeln mit dem Google-Eintrag abgeglichen. Die Place ID wurde direkt über Place Details bestätigt; keine Google-Geschäftsangaben übernommen."
+          "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
         }
       }
     },
@@ -8808,7 +8808,7 @@
             "https://www.cybo.com/XK-biz/ylli-performance-chip-tuning",
             "https://www.google.com/maps/?cid=17632544202562383595"
           ],
-          "note": "Individuelle Google-Karte anhand unabhängig belegter Telefonnummer, Werkstattname und präziser Adresse bestätigt; CID und tatsächliche Place ID bezeichnen denselben Eintrag. Keine Google-Geschäftsangaben oder Bewertungen in die Profilquelle übernommen."
+          "note": "Individual Google listing confirmed using an independently evidenced phone number, workshop name and precise address; CID and actual Place ID designate the same entry. No Google business details or reviews adopted into the profile source."
         }
       }
     }
