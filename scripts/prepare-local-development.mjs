@@ -1,6 +1,8 @@
 import {
   access,
   mkdir,
+  mkdtemp,
+  rename,
   readFile,
   readdir,
   rm,
@@ -79,12 +81,7 @@ async function checkLocalHistory(local, options) {
   const historyTable = schema.find(
     ({ name, type }) => name === "d1_migrations" && type === "table",
   );
-  if (!historyTable && applicationSchema(schema).length)
-    throw preparationError(
-      local,
-      "inspection",
-      "Existing local application tables, but migration history is missing. Automatic replay is unsafe.",
-    );
+  if (!historyTable && applicationSchema(schema).length) return "legacy";
   let history = [];
   if (historyTable) {
     const expectedHistory =
@@ -137,6 +134,32 @@ async function checkLocalHistory(local, options) {
       );
   } finally {
     expected.close();
+  }
+}
+
+async function archiveLegacyState(local, options) {
+  options.signal?.throwIfAborted();
+  const backup = await mkdtemp(`${local.persistPath}-backup-`);
+  // Keep the preparation lock in place throughout the move and fresh setup.
+  const entries = (await readdir(local.persistPath)).filter(
+    (name) => name !== ".riparim-prepare.lock",
+  );
+  console.warn(
+    `Local development: legacy database has no migration history. ` +
+      `Preserving all existing local data and uploads in ${backup}. ` +
+      `Starting with fresh catalogue defaults; previous local accounts, visits and edits remain in the backup.`,
+  );
+  try {
+    for (const name of entries)
+      await rename(resolve(local.persistPath, name), resolve(backup, name));
+  } catch (error) {
+    throw preparationError(
+      local,
+      "backup",
+      `Could not finish archiving local state (${error.code ?? error.name}). ` +
+        `No data was deleted. Preserve both ${backup} and ${local.persistPath}; ` +
+        `do not retry until the moved entries have been restored.`,
+    );
   }
 }
 
@@ -232,7 +255,16 @@ export async function prepareLocalDevelopment(
     console.log(
       "Local development: checking schema and migration history (local only).",
     );
-    await checkLocalHistory(local, options);
+    if ((await checkLocalHistory(local, options)) === "legacy") {
+      phase = "backup";
+      try {
+        await archiveLegacyState(local, options);
+      } catch (error) {
+        // A partial archive must block retries until its entries are restored.
+        locked = false;
+        throw error;
+      }
+    }
     options.signal?.throwIfAborted();
     phase = "migrations";
     console.log("Local development: applying pending migrations (local only).");

@@ -10,7 +10,13 @@ npm run dev
 Open `http://127.0.0.1:5174`. Startup applies pending local migrations and prepares
 curated workshop data. It needs no build, Cloudflare login or production credentials.
 Each worktree keeps its own database and uploads in `.wrangler/state`.
-Existing edits and confirmed hours are preserved; failed setup never resets data.
+With valid migration history, existing edits and confirmed hours are preserved.
+Older databases with application tables but no migration history are automatically
+archived with all D1 data and R2 uploads in a private `.wrangler/state-backup-*`
+directory. Startup prints that path and announces fresh catalogue defaults;
+previous local accounts, visits and edits stay in the backup, not the new database.
+Normal restarts do not archive again. See [local recovery](local-data-recovery.md)
+for backup recovery. Failed migrations or seeds never trigger this archive flow.
 
 ## Useful options
 

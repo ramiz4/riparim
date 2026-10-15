@@ -11,6 +11,22 @@ Read `.wrangler/state/.riparim-prepare.lock/owner.json` and inspect its PID with
 Remove the lock only after verifying that no preparation owns this state;
 retain it if ownership is uncertain. Normal shutdown releases its own lock.
 
+## Automatic legacy backup
+
+`npm run dev` (and `npm run dev:setup`) automatically archives local application
+state that has no migration history, then prepares fresh catalogue defaults.
+The printed `.wrangler/state-backup-*` path contains the original D1/R2 state,
+with private directory permissions. Keep it until its data is no longer needed.
+No legacy records are automatically imported and no migration receipts are fabricated.
+
+If archiving fails midway, startup stops and retains the preparation lock to block
+retries. With all processes stopped, move the entries from the printed backup back
+into `.wrangler/state` before clearing the abandoned lock. Preserve both locations;
+never overwrite conflicting entries. Then address the reported filesystem error.
+
+To inspect or recover an archived legacy dataset, use the reviewed procedure below
+on a private copy. Simply restoring it and running `dev` archives it again.
+
 ## Start fresh with disposable data
 
 This archives the complete D1/R2 state, removes it from active development and
@@ -31,8 +47,8 @@ still needs verification. Never upload the archive or move it into another proje
 
 ## Keep an older dataset
 
-Existing tables do not prove which data migrations ran. Startup therefore refuses
-unknown/incomplete/divergent history rather than fabricating receipts or replaying SQL.
+Existing tables do not prove which data migrations ran. Startup archives missing history and refuses
+unknown/incomplete/divergent recorded history rather than fabricating receipts or replaying SQL.
 A **Principal DevOps Engineer** prepares the plan; an independent **Principal Software
 Architect** reviews it under [issue execution](issue-execution.md).
 
