@@ -274,3 +274,58 @@ try {
   else process.env.NODE_ENV = originalMode;
   delete globalThis.fixtureHost;
 }
+
+const moderatorOutput = ".test-runtime/local-dev-config/moderator.mjs";
+await build({
+  stdin: {
+    contents: 'export {moderatorEmail} from "./db/storage";',
+    resolveDir: process.cwd(),
+  },
+  outfile: moderatorOutput,
+  bundle: true,
+  platform: "node",
+  format: "esm",
+  plugins: [
+    {
+      name: "local-moderator-runtime",
+      setup(b) {
+        b.onResolve({ filter: /^@\/lib\/runtime\/env$/ }, () => ({
+          path: "env",
+          namespace: "fixture",
+        }));
+        b.onLoad({ filter: /.*/, namespace: "fixture" }, () => ({
+          contents: "export const env = globalThis.moderatorFixtureEnv;",
+        }));
+      },
+    },
+  ],
+});
+globalThis.moderatorFixtureEnv = {};
+const { moderatorEmail } = await import(
+  new URL("../" + moderatorOutput, import.meta.url)
+);
+const moderatorMode = process.env.NODE_ENV;
+try {
+  for (const mode of ["development", "production", "test"]) {
+    process.env.NODE_ENV = mode;
+    for (const value of [undefined, "", "Admin@example.test"]) {
+      globalThis.moderatorFixtureEnv.REVIEW_MODERATOR_EMAIL = value;
+      assert.equal(
+        moderatorEmail(),
+        value
+          ? "admin@example.test"
+          : mode === "development"
+            ? "seedy@sites.test"
+            : "",
+        "Only development defaults to Seedy; explicit administrators and production authorization are preserved",
+      );
+    }
+  }
+} finally {
+  if (moderatorMode === undefined) delete process.env.NODE_ENV;
+  else process.env.NODE_ENV = moderatorMode;
+  delete globalThis.moderatorFixtureEnv;
+}
+console.log(
+  "Local seed administrator: development default, empty environment and production boundary passed",
+);
