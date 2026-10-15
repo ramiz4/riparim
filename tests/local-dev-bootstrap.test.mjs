@@ -7,6 +7,7 @@ import {
   readdir,
   rm,
   symlink,
+  stat,
   writeFile,
 } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -333,12 +334,55 @@ try {
   } finally {
     legacy.close();
   }
-  await assert.rejects(
-    prepareLocalDevelopment(root),
-    /migration history is missing.*docs\/development\/local-development\.md/s,
-    "An existing application schema without history stops before replay",
+  const uploadPath = resolve(root, ".wrangler/state/v3/r2/fixture-upload");
+  await mkdir(resolve(uploadPath, ".."), { recursive: true });
+  await writeFile(uploadPath, "private fixture upload");
+  if (process.platform !== "win32" && process.getuid?.() !== 0) {
+    const stateParent = resolve(root, ".wrangler");
+    await chmod(stateParent, 0o555);
+    try {
+      await assert.rejects(
+        prepareLocalDevelopment(root),
+        /backup failed.*EACCES/s,
+      );
+      await assert.rejects(
+        prepareLocalDevelopment(root),
+        /busy.*preparation lock/s,
+      );
+    } finally {
+      await chmod(stateParent, 0o755);
+      await rm(resolve(root, ".wrangler/state/.riparim-prepare.lock"), {
+        recursive: true,
+      });
+    }
+    const intact = new DatabaseSync(resolve(root, ".wrangler/state", filename));
+    try {
+      assert.equal(
+        intact
+          .prepare("SELECT owner FROM visits WHERE id='fixture-visit'")
+          .get().owner,
+        "fixture-account",
+      );
+    } finally {
+      intact.close();
+    }
+  }
+  const beforeBackup = await readdir(resolve(root, ".wrangler"));
+  await prepareLocalDevelopment(root);
+  const backups = (await readdir(resolve(root, ".wrangler"))).filter(
+    (name) => name.startsWith("state-backup-") && !beforeBackup.includes(name),
   );
-  const stopped = new DatabaseSync(resolve(root, ".wrangler/state", filename));
+  assert.equal(backups.length, 1, "Legacy startup creates one private archive");
+  const backup = resolve(root, ".wrangler", backups[0]);
+  if (process.platform !== "win32")
+    assert.equal((await stat(backup)).mode & 0o777, 0o700);
+  await assert.rejects(readFile(uploadPath), { code: "ENOENT" });
+  assert.equal(
+    await readFile(resolve(backup, "v3/r2/fixture-upload"), "utf8"),
+    "private fixture upload",
+    "The archive retains upload bytes alongside D1",
+  );
+  const stopped = new DatabaseSync(resolve(backup, filename));
   try {
     assert.equal(
       stopped
@@ -347,17 +391,43 @@ try {
         )
         .get().n,
       0,
-      "Legacy refusal never initializes a replacement migration history",
+      "The archived legacy database is never given fabricated migration history",
     );
     assert.equal(
       stopped.prepare("SELECT owner FROM visits WHERE id='fixture-visit'").get()
         .owner,
       "fixture-account",
-      "Inspection never modifies private fixture records",
+      "The archive retains private records",
     );
   } finally {
     stopped.close();
   }
+  const replacement = new DatabaseSync(
+    resolve(root, ".wrangler/state", filename),
+  );
+  try {
+    assert.equal(
+      replacement.prepare("SELECT count(*) AS n FROM d1_migrations").get().n,
+      initialMigrationCount + 1,
+    );
+    assert.equal(
+      replacement.prepare("SELECT count(*) AS n FROM visits").get().n,
+      0,
+    );
+    assert(
+      replacement.prepare("SELECT count(*) AS n FROM workshops").get().n > 0,
+    );
+  } finally {
+    replacement.close();
+  }
+  await prepareLocalDevelopment(root);
+  assert.deepEqual(
+    (await readdir(resolve(root, ".wrangler"))).filter((name) =>
+      name.startsWith("state-backup-"),
+    ),
+    backups,
+    "Normal restarts do not archive again",
+  );
 
   const actualNode = process.execPath;
   Object.defineProperty(process, "execPath", {
