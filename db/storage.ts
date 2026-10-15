@@ -1,10 +1,14 @@
 import { env } from "@/lib/runtime/env";
+import { localSeedAccount } from "@/lib/auth/local-seed";
 export function storage() {
   if (!env.DB || !env.BUCKET) throw new Error("Storage unavailable");
   return { db: env.DB, bucket: env.BUCKET };
 }
 export function moderatorEmail() {
-  return (env.REVIEW_MODERATOR_EMAIL ?? "").toLowerCase();
+  return (
+    env.REVIEW_MODERATOR_EMAIL ||
+    (process.env.NODE_ENV === "development" ? localSeedAccount.email : "")
+  ).toLowerCase();
 }
 // The per-visit R2 namespace is a durable inventory, including older uploads.
 // Retain the visit row on failure so owner deletion can retry the complete namespace.

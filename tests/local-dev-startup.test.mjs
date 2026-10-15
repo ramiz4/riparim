@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { spawn, execFile, execFileSync } from "node:child_process";
-import { cp, mkdir, mkdtemp, rm, symlink } from "node:fs/promises";
+import { cp, mkdir, mkdtemp, rm, symlink, writeFile } from "node:fs/promises";
 import { createServer } from "node:net";
 import { dirname, join } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
@@ -141,6 +141,27 @@ try {
   });
   assert.equal(profile.status, 200);
   assert.match(await profile.text(), /AHP Volkswagen/);
+  const guest = await fetch(origin + "/api/session");
+  assert.equal((await guest.json()).isAdmin, false);
+  const login = await fetch(origin + "/dev/anmelden", { redirect: "manual" });
+  assert.equal(login.status, 302);
+  const cookie = login.headers.get("set-cookie").split(";")[0];
+  const session = await fetch(origin + "/api/session", { headers: { cookie } });
+  const account = await session.json();
+  assert.equal(account.account.email, "seedy@sites.test");
+  assert.equal(
+    account.isAdmin,
+    true,
+    "Seedy receives the server-side admin role without .dev.vars",
+  );
+  const administration = await fetch(origin + "/api/notifications", {
+    headers: { cookie },
+  });
+  assert.equal(
+    administration.status,
+    200,
+    "Seedy can access an actual administration endpoint",
+  );
   await stop();
   // Edit only disposable state through the same local CLI a developer uses.
   // The newer revision must remain visible after preparation runs again.
@@ -169,7 +190,17 @@ try {
       },
     },
   );
-  const restarted = JSON.parse((await start(first)).output);
+  await writeFile(join(first, ".env"), "REVIEW_MODERATOR_EMAIL=\n");
+  const restart = await start(first);
+  const localSession = await fetch(restart.origin + "/api/session", {
+    headers: { cookie },
+  });
+  assert.equal(
+    (await localSession.json()).isAdmin,
+    true,
+    "An empty optional environment value does not remove the local admin default",
+  );
+  const restarted = JSON.parse(restart.output);
   assert.equal(
     restarted.workshops.find(
       (workshop) => workshop.id === "ahp-volkswagen-prizren",

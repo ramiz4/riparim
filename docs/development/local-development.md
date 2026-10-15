@@ -29,8 +29,9 @@ npm run dev:setup
 origin unless `SITE_ORIGIN` overrides it. Optional integrations use `.env.example`;
 configure them only when needed. Supported runtimes are in [package.json](../../package.json).
 
-For local admin access, set `REVIEW_MODERATOR_EMAIL=seedy@sites.test` in ignored
-`.dev.vars`, then use “Als Seedy anmelden” at `/anmelden` or `/dev/anmelden`.
+Use “Als Seedy anmelden” at `/anmelden` or `/dev/anmelden` for local admin access.
+Seedy is the default administrator in the local dev server; no `.dev.vars` setup
+is required. Release builds do not include this default.
 The latter accepts a validated internal `?weiter=…`. Account previews use
 `?vorschau=email` or `?vorschau=google`; the portable preview also offers
 `/signin-with-chatgpt?return_to=/`. These loopback-only simulations do not test real login.
