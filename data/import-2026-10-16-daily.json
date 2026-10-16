@@ -4,8 +4,8 @@
   "localDate": "2026-10-16",
   "timezone": "Europe/Zurich",
   "startedAt": "2026-10-16T04:02:01.810Z",
-  "checkedAt": "2026-10-16T10:45:03.865869Z",
-  "status": "local-validation-in-progress",
+  "checkedAt": "2026-10-16T10:50:34.838928Z",
+  "status": "local-tests-passed-awaiting-final-review-ci-release",
   "completedDateGuard": false,
   "baseCommit": "dc9ba967fca7f135e0f0d92f930691364094b0c3",
   "branch": "codex/daily-import-2026-10-16",
@@ -3596,7 +3596,8 @@
     "retirementMarkers": 35,
     "pendingWorkshopChanges": 0,
     "drafts": 0,
-    "prewriteRevisionGuard": "All 177 identities/revisions/Place IDs/profile hashes unchanged immediately before local merge; zero drafts/changes and exact prior retirement markers."
+    "prewriteRevisionGuard": "All 177 identities/revisions/Place IDs/profile hashes unchanged immediately before local merge; zero drafts/changes and exact prior retirement markers.",
+    "supplementalFullTableGuard": "All854 public catalogue-related rows across eight protected tables freshly re-read in bounded pages and structurally identical to the verified recovery backup; no newer revision found."
   },
   "browser": {
     "requiredAccountConfirmed": true,
@@ -3613,9 +3614,9 @@
     "extraCosts": 0,
     "messagesSent": 0,
     "researchMethod": "Manual internal-browser public source and Maps navigation; no scraper, Google API/SDK/finder/embed or proxy workaround used for identity verification.",
-    "snapshotReadPages": 174,
-    "snapshotReadRows": 854,
-    "otherRequests": "Bounded read-only live identity/revision/status and release/observability checks; no production writes.",
+    "snapshotReadPages": 348,
+    "snapshotReadRows": 1708,
+    "otherRequests": "Additional bounded identity/revision/status and release/observability checks; zero production writes. Manual browser navigations were not instrumented as a request counter.",
     "availableBudget": "Existing Codex allowance used; no new subscription or quota purchased. Exact remaining per-provider budget not exposed by research interfaces.",
     "transientReadError": "One generic Cloudflare API authentication failure; smaller read-only query and schema retry succeeded. Dedicated observability connection used after generic observability authentication failed."
   },
@@ -3668,19 +3669,19 @@
     "scope": "local canonical merge only; production import remains release-bound"
   },
   "translationCheck": {
-    "newGermanProfiles": 8,
-    "newSqOverlays": 8,
-    "newEnOverlays": 8,
+    "newGermanProfiles": 11,
+    "newSqOverlays": 11,
+    "newEnOverlays": 11,
     "hashContract": "workshopTranslationSourceHash",
-    "openingHours": "No new hours researched/imported; eight explicit unresearched exclusions; all 171 existing plans preserved."
+    "openingHours": "No new hours researched/imported; eleven explicit unresearched exclusions; all171 existing plans preserved."
   },
   "validation": {
     "node": "24.21.0",
     "go": "1.27.1",
-    "catalogueCheck": "pending-final-scope",
+    "catalogueCheck": "passed-188-profiles-188-place-assignments",
     "hoursPreview": "passed-171-plans",
     "sourceEligibilityReview": "Authored-evidence review passed seven; Global Glass added with same gates. Luani rejected for unresolved premises continuity; ILIRI explicit own ceramic-application and relocation sources added.",
-    "fullAppTests": "pending-rerun-for-final-eleven-profile-scope",
+    "fullAppTests": "passed-complete-eleven-profile-suite-including-node-build-and-both-integrations",
     "formatCheck": "passed",
     "languageCheck": "passed",
     "independentFinalHeadReview": "pending",
@@ -3688,8 +3689,8 @@
     "testFixtureFix": "Three existing snapshot-dependent test setups now explicitly select/seed the snapshot case and tolerate profiles without snapshots. All original rejection, concurrency and preservation assertions remain; numeric fixture ratings are null. No provider calls.",
     "firstFullSuiteAttempt": "Failed at business test catalogue-order snapshot assumption; targeted repaired business suite passed all159 checks.",
     "secondFullSuiteAttempt": "Manifest missing required after.total field; restored established total/published/drafts contract; no test weakened.",
-    "fullAppTestDurationMs": 146183,
-    "fullAppTestLogSha256": "21e68cf5ea6be5dfc2e9d5043b41430641172f67b342f24cbce64c6c12396b6f",
+    "fullAppTestDurationMs": 163025,
+    "fullAppTestLogSha256": "ad7851484dd16486057a7018ed4494d61d0792f0d7f0dc2da9560ddc68c9eeff",
     "types": "passed",
     "lint": "passed",
     "workflowSemantics": "passed-pinned-actionlint",
