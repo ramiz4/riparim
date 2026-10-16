@@ -1019,6 +1019,19 @@ check(
       .get(fourth.id),
   "Authority removed between read and commit cannot confirm ownership",
 );
+// Seed the existing Maps-link case explicitly: catalogue ordering must not
+// require the first public profile to have a historical Google snapshot.
+db.prepare(
+  `INSERT OR REPLACE INTO workshop_google_ratings
+   (workshop_id,rating,review_count,maps_url,source_url,source_label,checked_at,source_updated_at)
+   VALUES (?,NULL,NULL,?,?,?,?,NULL)`,
+).run(
+  first.id,
+  "https://www.google.com/maps/search/?api=1&query=fixture&query_place_id=ChIJHistoricalFixture",
+  "https://fixture.example.test/maps-provenance",
+  "Isolated Maps-link fixture",
+  "2026-01-01T00:00:00.000Z",
+);
 // Async identity hashing can reorder transaction arrival. Both Google results
 // may legitimately win; a late loser must preserve the actual winner's data.
 for (const winningValidation of [1, 2]) {

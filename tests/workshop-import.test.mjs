@@ -286,8 +286,9 @@ assert.equal(
   "Google scores do not enable Riparim sorting",
 );
 const unknown = workshops.find(
-  (w) => w.googleRating.rating === null && w.googleRating.count === null,
+  (w) => w.googleRating?.rating === null && w.googleRating.count === null,
 );
+assert(unknown, "The fixture includes a snapshot with unknown aggregates");
 assert.equal(
   unknown.googleRating.rating,
   null,
