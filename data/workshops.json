@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-16T10:07:13.283Z",
+  "updatedAt": "2026-10-16T10:44:17.504Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 185,
+    "published": 188,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 185 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 185,
+    "reason": "All 188 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 188,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -403,6 +403,62 @@
             "https://halaman-kuning.cybo.com/XK/kori%C5%A1a/membaiki-kereta-?d=c"
           ],
           "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
+        }
+      }
+    },
+    {
+      "id": "auto-detailing-edi-malisheve",
+      "name": "Auto Detailing EDI",
+      "city": "Malishevë",
+      "address": "Rr. Adem Jashari, afër Bytyqi Oil, Malishevë 24000",
+      "phone": "+38349534811",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Fahrzeugpolitur",
+        "Keramikbeschichtung",
+        "Fahrzeugfolierung",
+        "Anbringen von Scheibenfolien"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugpolitur · Keramikbeschichtung",
+      "description": "Auto Detailing EDI in Malishevë bietet Fahrzeugpolitur, Keramikbeschichtung, Fahrzeugfolierung, Anbringen von Scheibenfolien an. Der eigene Betriebsauftritt nennt den Standort Rr. Adem Jashari, afër Bytyqi Oil, Malishevë 24000 und die öffentliche Geschäftsnummer.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.instagram.com/autodetailing_edi/",
+          "title": "Eigene Instagram-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autodetailing_edi/p/CpDrNr2Nite/",
+          "title": "Eigene Instagram-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/AutopolirEdi/",
+          "title": "Eigene Facebook-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-16",
+      "status": "published",
+      "updatedAt": "2026-10-16T10:43:56.149039Z",
+      "google": {
+        "placeId": "ChIJB0KY3tZ1UxMRQlWKKp76pt4",
+        "matchedAt": "2026-10-16T10:33:09Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.instagram.com/autodetailing_edi/",
+            "https://www.instagram.com/autodetailing_edi/p/CpDrNr2Nite/",
+            "https://www.facebook.com/AutopolirEdi/"
+          ],
+          "note": "Public Maps UI in the confirmed project account: independently sourced identity, international phone and location match an active entry. Place ID read from a visible official !19s link and directly returned with an unrelated London fallback. Catalogue fields come exclusively from independent business sources; no ownership claim or current Google business content adopted."
         }
       }
     },
@@ -6387,6 +6443,66 @@
       }
     },
     {
+      "id": "autozone-center-fushe-kosove",
+      "name": "AUTOZONE CENTER Fushë Kosovë",
+      "city": "Fushë Kosovë",
+      "address": "Rruga e Pejës 204, Fushë Kosovë 12000",
+      "phone": "+38349870800",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Professionelle Fahrzeugpolitur",
+        "Keramikbeschichtung"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugpolitur · Keramikbeschichtung",
+      "description": "AUTOZONE CENTER Fushë Kosovë in Fushë Kosovë bietet Professionelle Fahrzeugpolitur, Keramikbeschichtung an. Der eigene Betriebsauftritt nennt den Standort Rruga e Pejës 204, Fushë Kosovë 12000 und die öffentliche Geschäftsnummer.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.instagram.com/autozone.ks/",
+          "title": "Eigene Instagram-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autozone.ks/reel/DbbV1YAsLHe/",
+          "title": "Eigene Instagram-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/reel/DXUoWGnDCKk/",
+          "title": "Eigene Instagram-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://autozone-ks.com/",
+          "title": "Eigene Betriebswebsite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-16",
+      "status": "published",
+      "updatedAt": "2026-10-16T10:43:56.149039Z",
+      "google": {
+        "placeId": "ChIJrQE7OMZjUxMRnK0kB8C-8yA",
+        "matchedAt": "2026-10-16T10:43:20Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.instagram.com/autozone.ks/",
+            "https://www.instagram.com/autozone.ks/reel/DbbV1YAsLHe/",
+            "https://www.instagram.com/reel/DXUoWGnDCKk/",
+            "https://autozone-ks.com/"
+          ],
+          "note": "Public Maps UI in the confirmed project account: independently sourced identity, international phone and location match an active entry. Place ID read from a visible official !19s link and directly returned with an unrelated London fallback. Catalogue fields come exclusively from independent business sources; no ownership claim or current Google business content adopted."
+        }
+      }
+    },
+    {
       "id": "baki-automobile",
       "name": "Baki Automobile SH.P.K",
       "city": "Prishtina",
@@ -8284,6 +8400,62 @@
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJ-5d0UsmhVBMRBQBORVPLs7A"
           ],
           "note": "The business's own service advertisement links the existing contact to Sfishta Auto Home in Bardhosh. Official contract evidence names Auto Home and N.T.SH. Sfishta together with the additional business phone contact; this matches the confirmed Google entry under the historical Kosovo dialing code. Passenger-car service, operational continuity and the directly checked Place ID are evidenced; no legal merger is claimed."
+        }
+      }
+    },
+    {
+      "id": "refresh-detailing-service-prishtina",
+      "name": "Refresh Detailing Service",
+      "city": "Prishtina",
+      "address": "Rr. Struga, Mati 1, Prishtinë 10000",
+      "phone": "+38349854800",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Fahrzeugpolitur",
+        "Keramikbeschichtung",
+        "Innenraumreinigung",
+        "Anbringen von Lackschutzfolie (PPF)"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugpolitur · Keramikbeschichtung",
+      "description": "Refresh Detailing Service in Prishtina bietet Fahrzeugpolitur, Keramikbeschichtung, Innenraumreinigung, Anbringen von Lackschutzfolie (PPF) an. Der eigene Betriebsauftritt nennt den Standort Rr. Struga, Mati 1, Prishtinë 10000 und die öffentliche Geschäftsnummer.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.tiktok.com/@refreshdetailingservice",
+          "title": "Eigene TikTok-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/refreshdetailingserviceks/",
+          "title": "Eigene Instagram-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/p/Refresh-Detailing-Service-61558724501080/",
+          "title": "Eigene Facebook-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-16",
+      "status": "published",
+      "updatedAt": "2026-10-16T10:43:56.149039Z",
+      "google": {
+        "placeId": "ChIJ0ToqSsqfVBMRSjnhUsb2kf8",
+        "matchedAt": "2026-10-16T10:37:46Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.tiktok.com/@refreshdetailingservice",
+            "https://www.instagram.com/refreshdetailingserviceks/",
+            "https://www.facebook.com/p/Refresh-Detailing-Service-61558724501080/"
+          ],
+          "note": "Public Maps UI in the confirmed project account: independently sourced identity, international phone and location match an active entry. Place ID read from a visible official !19s link and directly returned with an unrelated London fallback. Catalogue fields come exclusively from independent business sources; no ownership claim or current Google business content adopted."
         }
       }
     },

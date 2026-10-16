@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "ab59ce2dd4fbb51f719a8783f34596e0ef5d4ccff859ec99d59fab1a4145e1b7",
+  "revision": "53b68bf82caff589f87fa9e20afeaebeaee9f6c343ea4de45596f11f14b5c306",
   "records": [
     {
       "id": "ahp-volkswagen-prizren",
@@ -15238,6 +15238,10 @@
       "reason": "Nicht recherchiert – neuer Katalogeintrag"
     },
     {
+      "id": "auto-detailing-edi-malisheve",
+      "reason": "Nicht recherchiert – neuer Katalogeintrag"
+    },
+    {
       "id": "auto-service-tuli-rahovec",
       "reason": "Nicht recherchiert – neuer Katalogeintrag"
     },
@@ -15278,7 +15282,15 @@
       "reason": "Nicht recherchiert – neuer Katalogeintrag"
     },
     {
+      "id": "autozone-center-fushe-kosove",
+      "reason": "Nicht recherchiert – neuer Katalogeintrag"
+    },
+    {
       "id": "mana-auto-detailing-rahovec",
+      "reason": "Nicht recherchiert – neuer Katalogeintrag"
+    },
+    {
+      "id": "refresh-detailing-service-prishtina",
       "reason": "Nicht recherchiert – neuer Katalogeintrag"
     },
     {

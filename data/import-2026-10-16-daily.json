@@ -4,12 +4,12 @@
   "localDate": "2026-10-16",
   "timezone": "Europe/Zurich",
   "startedAt": "2026-10-16T04:02:01.810Z",
-  "checkedAt": "2026-10-16T10:25:16.376809Z",
-  "status": "local-tests-passed-awaiting-independent-review-and-release",
+  "checkedAt": "2026-10-16T10:45:03.865869Z",
+  "status": "local-validation-in-progress",
   "completedDateGuard": false,
   "baseCommit": "dc9ba967fca7f135e0f0d92f930691364094b0c3",
   "branch": "codex/daily-import-2026-10-16",
-  "reason": "Eight independently evidenced additions after broad source screening. Fewer than ten qualify because exact independent sites, strict telephone matches, current passenger-car scope or active Maps identities remain missing/conflicting; uncertain candidates stay deferred.",
+  "reason": "Eleven independently evidenced profiles prepared in the same daily batch; final-head checks, independent review, PR and release pending.",
   "before": {
     "publicApiCount": 177,
     "canonicalCount": 177,
@@ -23,11 +23,11 @@
   },
   "after": {
     "publicApiCount": 177,
-    "localCanonicalCount": 185,
-    "localAdditions": 8,
+    "localCanonicalCount": 188,
+    "localAdditions": 11,
     "productionWrites": 0,
-    "total": 185,
-    "published": 185,
+    "total": 188,
+    "published": 188,
     "drafts": 0,
     "scope": "Local canonical approval counts; actual live catalogue stays at publicApiCount until release acceptance."
   },
@@ -39,7 +39,10 @@
     "advance-detailing-prishtina",
     "auto-xhama-euro-glass-fushe-kosove",
     "auto-xhama-premium-fushe-kosove",
-    "auto-xhama-global-glass-fushe-kosove"
+    "auto-xhama-global-glass-fushe-kosove",
+    "auto-detailing-edi-malisheve",
+    "refresh-detailing-service-prishtina",
+    "autozone-center-fushe-kosove"
   ],
   "publishedWorkshopIds": [],
   "publishedCountConfirmed": 0,
@@ -83,6 +86,21 @@
       "id": "auto-xhama-global-glass-fushe-kosove",
       "candidate": "Auto Xhama \"Global Glass\"",
       "state": "prepared-not-yet-live"
+    },
+    {
+      "id": "auto-detailing-edi-malisheve",
+      "candidate": "Auto Detailing EDI",
+      "state": "prepared-not-yet-live"
+    },
+    {
+      "id": "refresh-detailing-service-prishtina",
+      "candidate": "Refresh Detailing Service",
+      "state": "prepared-not-yet-live"
+    },
+    {
+      "id": "autozone-center-fushe-kosove",
+      "candidate": "AUTOZONE CENTER Fushë Kosovë",
+      "state": "prepared-not-yet-live"
     }
   ],
   "municipalitiesInvestigated": [
@@ -97,7 +115,7 @@
     "sourceLeadRecordsScreened": 43,
     "distinctSourceLeadGroups": 42,
     "sourceGroupCaution": "Lead groups are preliminary research identities, not confirmed unique operating businesses. Glass Service/Center aliases are conservatively grouped pending continuity proof.",
-    "freshUniqueCandidatesInvestigated": 28,
+    "freshUniqueCandidatesInvestigated": 39,
     "freshDuplicates": 2,
     "historicallyResolvedExistingIdentities": 15,
     "historicalQueueEntries": 92,
@@ -108,18 +126,16 @@
       "Auto Servis MUSLIMI",
       "Auto polir Kastrati Rahovec"
     ],
-    "independentlyFullyVerifiedToday": 8,
-    "completedMapsChecksToday": 8,
-    "successfulDirectIdReturnTests": 9,
-    "deferredCurrentCandidates": 19,
+    "independentlyFullyVerifiedToday": 11,
+    "completedMapsChecksToday": 11,
+    "successfulDirectIdReturnTests": 12,
+    "deferredCurrentCandidates": 27,
     "deferredCurrentByCause": {
-      "matching-active-maps-identity": 2,
-      "phone-or-identity": 8,
-      "independent-location-or-continuity": 9
+      "evidence-gaps-individually-documented": 27
     },
     "currentInactiveExclusions": 1,
     "historicalQueueCaution": "Unrefreshed carried records are historical evidence and were not researched again without a new lead.",
-    "belowTenReason": "Eight independently evidenced additions after broad source screening. Fewer than ten qualify because exact independent sites, strict telephone matches, current passenger-car scope or active Maps identities remain missing/conflicting; uncertain candidates stay deferred."
+    "sourceScreeningTarget": "43 source records / 42 conservative identity groups screened; individual checks completed where attributable sources were available. No forced quota."
   },
   "researchQueue": [
     {
@@ -3604,11 +3620,11 @@
     "transientReadError": "One generic Cloudflare API authentication failure; smaller read-only query and schema retry succeeded. Dedicated observability connection used after generic observability authentication failed."
   },
   "publicBusinessEmailSummary": {
-    "preparedWithSourcedEmail": 6,
-    "preparedWithoutEmail": 2,
+    "preparedWithSourcedEmail": 7,
+    "preparedWithoutEmail": 4,
     "newlyPublishedWithSourcedEmail": 0,
     "newlyPublishedWithoutEmail": 0,
-    "productionContract": "Existing complete-catalogue schema-v2 email research source extended by eight identity-bound records; no model/schema change. Six publicly listed addresses, two researched not-found records.",
+    "productionContract": "Existing complete-catalogue schema-v2 email research source extended by eleven identity-bound records: seven publicly listed addresses and four researched not-found records; no model/schema change.",
     "deliveryOrConsentVerified": false,
     "messagesSent": 0
   },
@@ -3661,10 +3677,10 @@
   "validation": {
     "node": "24.21.0",
     "go": "1.27.1",
-    "catalogueCheck": "passed-185-profiles-185-place-assignments",
+    "catalogueCheck": "pending-final-scope",
     "hoursPreview": "passed-171-plans",
     "sourceEligibilityReview": "Authored-evidence review passed seven; Global Glass added with same gates. Luani rejected for unresolved premises continuity; ILIRI explicit own ceramic-application and relocation sources added.",
-    "fullAppTests": "passed-complete-suite-including-node-build-and-both-integrations",
+    "fullAppTests": "pending-rerun-for-final-eleven-profile-scope",
     "formatCheck": "passed",
     "languageCheck": "passed",
     "independentFinalHeadReview": "pending",
@@ -3728,9 +3744,10 @@
     "observedStatus": "ACTIVE",
     "storedHourField": 5,
     "requestedLocalTime": "06:00 Europe/Zurich",
-    "actualDisplayedLocalTimeVerified": false,
+    "actualDisplayedLocalTimeVerified": true,
     "settingsChanged": false,
-    "limitation": "Current automation view rendered an inline-only card unavailable to the tool; persisted recurrence has a differing hour field. Asked user to read actual local time/timezone. No fixed UTC conversion assumed and no reactivation performed."
+    "actualDisplayedLocalTime": "06:00 Europe/Zurich",
+    "verification": "User directly confirmed displayed local time and timezone in this chat. Settings unchanged."
   },
   "continuationAttempts": [
     {
@@ -4036,7 +4053,7 @@
   },
   "researchProgress": {
     "startedAt": "2026-10-16T09:32:16.901129+00:00",
-    "finishedAt": "2026-10-16T10:12:02.549462Z",
+    "finishedAt": "2026-10-16T10:45:03.865869Z",
     "checkedCandidates": [
       {
         "name": "Auto polir Kastrati Rahovec",
@@ -4169,7 +4186,7 @@
         },
         "status": "deferred",
         "reason": "Public Maps search returned other businesses and no uniquely matching Peqan identity/phone.",
-        "nextCheck": "Find official active Maps link and finish independent email search.",
+        "nextCheck": "Find official active Maps link.",
         "googleIdentity": {
           "checkedAt": "2026-10-16T09:39:59Z",
           "method": "public-maps-ui",
@@ -5005,6 +5022,249 @@
           "identityConfirmed": false,
           "placeId": null
         }
+      },
+      {
+        "name": "Auto Detailing EDI",
+        "sourceUrls": [
+          "https://www.instagram.com/autodetailing_edi/",
+          "https://www.instagram.com/autodetailing_edi/p/CpDrNr2Nite/",
+          "https://www.facebook.com/AutopolirEdi/"
+        ],
+        "independentEvidence": {
+          "phone": "+38349534811",
+          "city": "Malishevë",
+          "address": "Rr. Adem Jashari, afër Bytyqi Oil, Malishevë 24000",
+          "services": [
+            "car polishing",
+            "ceramic coating",
+            "vehicle wrapping",
+            "window-film installation"
+          ],
+          "newEvidence": "Current own Instagram profile publishes its official Maps short link, full international phone and own street; own current/pinned posts corroborate services and Bytyqi Oil landmark. This resolves the earlier missing Maps identity."
+        },
+        "publicBusinessEmail": {
+          "address": null,
+          "sourceUrl": null,
+          "checkedAt": "2026-10-16T10:33:09Z",
+          "status": "not-found",
+          "note": "Expanded own Instagram bio and own Facebook business contact summary show no email or own website. Explicit business/city email+Facebook source search found no attributable business email; no guessed address."
+        },
+        "status": "verified",
+        "googleIdentity": {
+          "checkedAt": "2026-10-16T10:33:09Z",
+          "method": "public-maps-ui",
+          "identityConfirmed": true,
+          "placeId": "ChIJB0KY3tZ1UxMRQlWKKp76pt4",
+          "nameMatched": true,
+          "phoneMatched": true,
+          "locationMatched": true,
+          "active": true,
+          "placeIdSource": "Visible official !19s result link from public Auto detailing Malisheve search after opening own-published Maps short link.",
+          "directIdReturnVerified": true,
+          "unrelatedFallbackQuery": "unrelated workshop in London",
+          "note": "Exact own international phone, independently published street/landmark and distinctive name match active public identity. Own detailing services establish passenger-car scope despite a broad Maps category. No current Google fields adopted."
+        }
+      },
+      {
+        "name": "Refresh Detailing Service",
+        "sourceUrls": [
+          "https://www.tiktok.com/@refreshdetailingservice",
+          "https://www.instagram.com/refreshdetailingserviceks/",
+          "https://www.facebook.com/p/Refresh-Detailing-Service-61558724501080/"
+        ],
+        "independentEvidence": {
+          "phone": "+38349854800",
+          "additionalPublicPhone": "+38348178144",
+          "city": "Prishtina",
+          "address": "Rr. Struga, Mati 1, Prishtinë 10000",
+          "services": [
+            "car polishing",
+            "ceramic coating",
+            "interior cleaning",
+            "paint-protection film"
+          ],
+          "scopeNote": "Own expanded Instagram bio states street/district and exact phone; own Facebook supports same street and recent work. Instagram's own Facebook link redirects to the inspected page."
+        },
+        "publicBusinessEmail": {
+          "address": null,
+          "sourceUrl": null,
+          "checkedAt": "2026-10-16T10:37:46Z",
+          "status": "not-found",
+          "note": "Own TikTok bio, expanded official Instagram bio/link list and Facebook contact-information tab show no email or own website. Explicit name/city email+Facebook/Instagram source search found no attributable address. No inferred address."
+        },
+        "status": "verified",
+        "googleIdentity": {
+          "checkedAt": "2026-10-16T10:37:46Z",
+          "method": "public-maps-ui",
+          "identityConfirmed": true,
+          "placeId": "ChIJ0ToqSsqfVBMRSjnhUsb2kf8",
+          "nameMatched": true,
+          "phoneMatched": true,
+          "locationMatched": true,
+          "active": true,
+          "placeIdSource": "Visible official !19s result link in public detailing Mati 1 Prishtina search.",
+          "directIdReturnVerified": true,
+          "unrelatedFallbackQuery": "unrelated workshop in London",
+          "note": "Own international telephone, Rr. Struga/Mati 1 location and distinctive business identity match active public entry and direct-ID return. Services exclusively from own social sources; no current Google data or certification claims adopted."
+        }
+      },
+      {
+        "name": "AUTOZONE CENTER Fushë Kosovë",
+        "sourceUrls": [
+          "https://www.instagram.com/autozone.ks/",
+          "https://www.instagram.com/autozone.ks/reel/DbbV1YAsLHe/",
+          "https://www.instagram.com/reel/DXUoWGnDCKk/",
+          "https://autozone-ks.com/"
+        ],
+        "independentEvidence": {
+          "phone": "+38349870800",
+          "city": "Fushë Kosovë",
+          "address": "Rruga e Pejës 204, Fushë Kosovë 12000",
+          "services": ["professional car polishing", "ceramic coating"],
+          "note": "Own Instagram publishes street number and branch phone; own service post explicitly books polishing/ceramic appointments at this branch. Real website home confirms three-stage polishing and ceramic protection. Contact-page US/example.com placeholders rejected. Other branches evaluated separately, not imported."
+        },
+        "publicBusinessEmail": {
+          "address": "autozonecenter@gmail.com",
+          "sourceUrl": "https://www.instagram.com/autozone.ks/reel/DbbV1YAsLHe/",
+          "checkedAt": "2026-10-16T10:43:20Z",
+          "status": "publicly-sourced",
+          "note": "Own public company post publishes email alongside this branch's phone and website; shared company contact, not a private address. No deliverability/consent claim."
+        },
+        "status": "verified",
+        "googleIdentity": {
+          "checkedAt": "2026-10-16T10:43:20Z",
+          "method": "public-maps-ui",
+          "identityConfirmed": true,
+          "placeId": "ChIJrQE7OMZjUxMRnK0kB8C-8yA",
+          "nameMatched": true,
+          "phoneMatched": true,
+          "locationMatched": true,
+          "active": true,
+          "placeIdSource": "Visible official !19s result link in public Auto Zone Kosovo search.",
+          "directIdReturnVerified": true,
+          "unrelatedFallbackQuery": "unrelated workshop in London",
+          "note": "Own profile street/branch phone and business website match active public entry; direct ID returns exact branch. Google road notation differs in granularity, no conflicting premises number; catalogue uses own address only."
+        }
+      },
+      {
+        "name": "Auto BONI Servis",
+        "sourceUrls": [
+          "https://www.facebook.com/p/Auto-BONI-Servis-100065557778554/"
+        ],
+        "status": "deferred",
+        "reason": "Own Facebook publishes Skenderaj and +38344309535 but no precise site or sufficiently detailed passenger-car service scope.",
+        "nextCheck": "Obtain current own exact site, branch contact and qualifying service evidence, then complete public Maps identity; revisit only with a new attributable source.",
+        "publicBusinessEmail": {
+          "address": null,
+          "sourceUrl": null,
+          "checkedAt": "2026-10-16T10:45:03.865869Z",
+          "status": "not-found",
+          "note": "Own Facebook contact summary and explicit business/city email+Instagram search found no attributable email; other heavy-vehicle BONI account rejected."
+        }
+      },
+      {
+        "name": "AUTO PJESË VETONI-H",
+        "sourceUrls": ["https://www.facebook.com/AUTOPJESEVETONIH/"],
+        "status": "deferred",
+        "reason": "Own source establishes parts retail at Lebushë on Pejë-Deçan road, +38349483493; actual passenger-car repair scope unproven.",
+        "nextCheck": "Obtain current own exact site, branch contact and qualifying service evidence, then complete public Maps identity; revisit only with a new attributable source.",
+        "publicBusinessEmail": {
+          "address": null,
+          "sourceUrl": null,
+          "checkedAt": "2026-10-16T10:45:03.865869Z",
+          "status": "not-found",
+          "note": "Own Facebook summary and explicit name/city email+Instagram search found no attributable address or matching official Instagram."
+        }
+      },
+      {
+        "name": "Autopjes Arberi",
+        "sourceUrls": [
+          "https://www.facebook.com/AutoPjesarberi/",
+          "https://autopjes.com/"
+        ],
+        "status": "deferred",
+        "reason": "Own source is parts/car-import retail; current attributable phone and actual repair scope missing.",
+        "nextCheck": "Obtain current own exact site, branch contact and qualifying service evidence, then complete public Maps identity; revisit only with a new attributable source.",
+        "publicBusinessEmail": {
+          "address": null,
+          "sourceUrl": null,
+          "checkedAt": "2026-10-16T10:45:03.865869Z",
+          "status": "not-found",
+          "note": "Own Facebook and scoped email/Instagram search found no attributable address; linked own website DNS failed. Uninspected TikTok lead remains a possible future source, not an email finding."
+        }
+      },
+      {
+        "name": "Auto servis fetahu",
+        "sourceUrls": [
+          "https://www.facebook.com/autofetahi/",
+          "https://autofetahu.com/"
+        ],
+        "status": "deferred",
+        "reason": "Own Facebook Karaqevë e Poshtme/Kamenicë contact is incomplete and recent operation unproven; linked site DNS failed.",
+        "nextCheck": "Obtain current own exact site, branch contact and qualifying service evidence, then complete public Maps identity; revisit only with a new attributable source.",
+        "publicBusinessEmail": {
+          "address": null,
+          "sourceUrl": null,
+          "checkedAt": "2026-10-16T10:45:03.865869Z",
+          "status": "not-found",
+          "note": "Own Facebook and explicit name/city email+Instagram search found no attributable email; website DNS failed. Equipment supplier post and AI-generated phone rejected as contact proof."
+        }
+      },
+      {
+        "name": "Autoparts Partner Kamenicë",
+        "sourceUrls": ["https://www.instagram.com/autoparts.partner/"],
+        "status": "deferred",
+        "reason": "Own source establishes wholesale/parts-store opening, not workshop services; foreign headquarters contacts are not proven Kamenicë branch contacts.",
+        "nextCheck": "Obtain current own exact site, branch contact and qualifying service evidence, then complete public Maps identity; revisit only with a new attributable source.",
+        "publicBusinessEmail": {
+          "address": null,
+          "sourceUrl": null,
+          "checkedAt": "2026-10-16T10:45:03.865869Z",
+          "status": "unresolved",
+          "note": "Expanded own Instagram bio and scoped contact search checked. A foreign headquarters email appeared in an own post, but its applicability to this branch is unresolved; no branch email adopted."
+        }
+      },
+      {
+        "name": "Auto ngjyrosje & polir Labi",
+        "sourceUrls": ["https://www.tiktok.com/@autongjyrosjelabi"],
+        "status": "deferred",
+        "reason": "Own TikTok publishes Qubrel/Skenderaj, +38343509362 and painting/restoration/polishing; no matching public Maps identity in exact locality search.",
+        "nextCheck": "Obtain current own exact site, branch contact and qualifying service evidence, then complete public Maps identity; revisit only with a new attributable source.",
+        "publicBusinessEmail": {
+          "address": null,
+          "sourceUrl": null,
+          "checkedAt": "2026-10-16T10:45:03.865869Z",
+          "status": "not-found",
+          "note": "Own TikTok bio and explicit business/locality email+Facebook search found no attributable business email or official website/Instagram; community post corroborates phone/services only."
+        }
+      },
+      {
+        "name": "AutoDetailingNisi",
+        "sourceUrls": ["https://www.tiktok.com/@autodetailingnisi"],
+        "status": "deferred",
+        "reason": "Own TikTok publishes polishing/ceramic/deep cleaning and local 049199251, but no precise independent site or completed Maps identity.",
+        "nextCheck": "Obtain current own exact site, branch contact and qualifying service evidence, then complete public Maps identity; revisit only with a new attributable source.",
+        "publicBusinessEmail": {
+          "address": null,
+          "sourceUrl": null,
+          "checkedAt": "2026-10-16T10:45:03.865869Z",
+          "status": "not-found",
+          "note": "Own TikTok bio and explicit email+Facebook/Instagram source search found no attributable email/site; unrelated foreign Nisu business email and unproven Auto Nisi dealer rejected."
+        }
+      },
+      {
+        "name": "Auto Detailing Diori",
+        "sourceUrls": ["https://www.instagram.com/autodetailing_diori/"],
+        "status": "deferred",
+        "reason": "Own Instagram publishes Mitrovicë and local 049274968 detailing contact, but no precise independent site or completed Maps identity.",
+        "nextCheck": "Obtain current own exact site, branch contact and qualifying service evidence, then complete public Maps identity; revisit only with a new attributable source.",
+        "publicBusinessEmail": {
+          "address": null,
+          "sourceUrl": null,
+          "checkedAt": "2026-10-16T10:45:03.865869Z",
+          "status": "not-found",
+          "note": "Own Instagram bio and explicit business/city email+Facebook search found no attributable address/site; unrelated foreign Dorian businesses rejected."
+        }
       }
     ],
     "sourcePrechecks": [
@@ -5056,14 +5316,15 @@
         "city": "Suharekë",
         "sourceUrl": "https://www.facebook.com/servisluani/",
         "leadGroup": "auto servis luani",
-        "stage": "source-prechecked-not-fully-verified",
+        "stage": "deferred",
         "publicBusinessEmail": {
           "address": null,
           "sourceUrl": null,
-          "checkedAt": null,
-          "status": "unresolved",
-          "note": "Preliminary source screening only; individual email/identity research not completed unless linked current candidate evidence says otherwise."
-        }
+          "checkedAt": "2026-10-16T09:57:48Z",
+          "status": "not-found",
+          "note": "Own Facebook contact section and Instagram bio contain no business email; no own website linked. Scoped public name/location source search found no attributable email; no guessed address. Explicit business/city email search also found no attributable email; registry lists local phone/street without email."
+        },
+        "currentCandidateReference": "Auto Servis Luani Suharekë"
       },
       {
         "name": "Servis Kelmendi",
@@ -5099,14 +5360,15 @@
         "city": "Suharekë",
         "sourceUrl": "https://www.facebook.com/xoniautoservis/",
         "leadGroup": "auto servis vullkanizer xoni",
-        "stage": "source-prechecked-not-fully-verified",
+        "stage": "deferred",
         "publicBusinessEmail": {
           "address": null,
           "sourceUrl": null,
-          "checkedAt": null,
-          "status": "unresolved",
-          "note": "Preliminary source screening only; individual email/identity research not completed unless linked current candidate evidence says otherwise."
-        }
+          "checkedAt": "2026-10-16T09:40:00Z",
+          "status": "not-found",
+          "note": "No email or website in own Facebook summary; scoped email/Instagram search found a different XONI transport business with different phones. Its email rejected. No attributable official Instagram or directory email identified."
+        },
+        "currentCandidateReference": "Auto Servis & Vullkanizer XONI Suharekë"
       },
       {
         "name": "Auto Servis Ledioni",
@@ -5129,14 +5391,15 @@
         "sourceUrl": "https://www.facebook.com/AUTOPJESEVETONIH/",
         "precheckReason": "Parts-only evidence in own source search snippet; repair scope unproven.",
         "leadGroup": "auto pjese vetoni h",
-        "stage": "source-prechecked-not-fully-verified",
+        "stage": "deferred",
         "publicBusinessEmail": {
           "address": null,
           "sourceUrl": null,
-          "checkedAt": null,
-          "status": "unresolved",
-          "note": "Preliminary source screening only; individual email/identity research not completed unless linked current candidate evidence says otherwise."
-        }
+          "checkedAt": "2026-10-16T10:45:03.865869Z",
+          "status": "not-found",
+          "note": "Own Facebook summary and explicit name/city email+Instagram search found no attributable address or matching official Instagram."
+        },
+        "currentCandidateReference": "AUTO PJESË VETONI-H"
       },
       {
         "name": "Auto Servis Bekaj",
@@ -5215,14 +5478,15 @@
         "sourceUrl": "https://www.facebook.com/p/Auto-BONI-Servis-100065557778554/",
         "city": "Skenderaj",
         "leadGroup": "auto boni servis",
-        "stage": "source-prechecked-not-fully-verified",
+        "stage": "deferred",
         "publicBusinessEmail": {
           "address": null,
           "sourceUrl": null,
-          "checkedAt": null,
-          "status": "unresolved",
-          "note": "Preliminary source screening only; individual email/identity research not completed unless linked current candidate evidence says otherwise."
-        }
+          "checkedAt": "2026-10-16T10:45:03.865869Z",
+          "status": "not-found",
+          "note": "Own Facebook contact summary and explicit business/city email+Instagram search found no attributable email; other heavy-vehicle BONI account rejected."
+        },
+        "currentCandidateReference": "Auto BONI Servis"
       },
       {
         "name": "Auto Servis TOTI",
@@ -5244,28 +5508,30 @@
         "sourceUrl": "https://www.facebook.com/AutoPjesarberi/",
         "city": "Skenderaj",
         "leadGroup": "autopjes arberi",
-        "stage": "source-prechecked-not-fully-verified",
+        "stage": "deferred",
         "publicBusinessEmail": {
           "address": null,
           "sourceUrl": null,
-          "checkedAt": null,
-          "status": "unresolved",
-          "note": "Preliminary source screening only; individual email/identity research not completed unless linked current candidate evidence says otherwise."
-        }
+          "checkedAt": "2026-10-16T10:45:03.865869Z",
+          "status": "not-found",
+          "note": "Own Facebook and scoped email/Instagram search found no attributable address; linked own website DNS failed. Uninspected TikTok lead remains a possible future source, not an email finding."
+        },
+        "currentCandidateReference": "Autopjes Arberi"
       },
       {
         "name": "Auto servis fetahu",
         "city": "Kamenicë",
         "sourceUrl": "https://www.facebook.com/autofetahi/",
         "leadGroup": "auto servis fetahu",
-        "stage": "source-prechecked-not-fully-verified",
+        "stage": "deferred",
         "publicBusinessEmail": {
           "address": null,
           "sourceUrl": null,
-          "checkedAt": null,
-          "status": "unresolved",
-          "note": "Preliminary source screening only; individual email/identity research not completed unless linked current candidate evidence says otherwise."
-        }
+          "checkedAt": "2026-10-16T10:45:03.865869Z",
+          "status": "not-found",
+          "note": "Own Facebook and explicit name/city email+Instagram search found no attributable email; website DNS failed. Equipment supplier post and AI-generated phone rejected as contact proof."
+        },
+        "currentCandidateReference": "Auto servis fetahu"
       },
       {
         "name": "Auto Servis Univerzal Qallaki",
@@ -5320,14 +5586,15 @@
         "sourceUrl": "https://www.instagram.com/autoparts.partner/",
         "precheckReason": "Own shop post establishes parts store, no passenger-car repair scope.",
         "leadGroup": "autoparts partner kamenice",
-        "stage": "source-prechecked-not-fully-verified",
+        "stage": "deferred",
         "publicBusinessEmail": {
           "address": null,
           "sourceUrl": null,
-          "checkedAt": null,
+          "checkedAt": "2026-10-16T10:45:03.865869Z",
           "status": "unresolved",
-          "note": "Preliminary source screening only; individual email/identity research not completed unless linked current candidate evidence says otherwise."
-        }
+          "note": "Expanded own Instagram bio and scoped contact search checked. A foreign headquarters email appeared in an own post, but its applicability to this branch is unresolved; no branch email adopted."
+        },
+        "currentCandidateReference": "Autoparts Partner Kamenicë"
       },
       {
         "name": "Autodetailing ILIRI",
@@ -5348,71 +5615,76 @@
         "name": "Auto ngjyrosje & polir Labi",
         "sourceUrl": "https://www.tiktok.com/@autongjyrosjelabi/video/7665013244104346900",
         "city": "Skenderaj",
-        "stage": "source-prechecked-not-fully-verified",
+        "stage": "deferred",
         "leadGroup": "auto ngjyrosje polir labi",
         "publicBusinessEmail": {
           "address": null,
           "sourceUrl": null,
-          "checkedAt": null,
-          "status": "unresolved",
-          "note": "Preliminary source screening only; individual email/identity research not completed unless linked current candidate evidence says otherwise."
-        }
+          "checkedAt": "2026-10-16T10:45:03.865869Z",
+          "status": "not-found",
+          "note": "Own TikTok bio and explicit business/locality email+Facebook search found no attributable business email or official website/Instagram; community post corroborates phone/services only."
+        },
+        "currentCandidateReference": "Auto ngjyrosje & polir Labi"
       },
       {
         "name": "AutoDetailingNisi",
         "sourceUrl": "https://www.tiktok.com/@autodetailingnisi/video/7670158714539871496",
         "city": "Skenderaj",
-        "stage": "source-prechecked-not-fully-verified",
+        "stage": "deferred",
         "leadGroup": "autodetailingnisi",
         "publicBusinessEmail": {
           "address": null,
           "sourceUrl": null,
-          "checkedAt": null,
-          "status": "unresolved",
-          "note": "Preliminary source screening only; individual email/identity research not completed unless linked current candidate evidence says otherwise."
-        }
+          "checkedAt": "2026-10-16T10:45:03.865869Z",
+          "status": "not-found",
+          "note": "Own TikTok bio and explicit email+Facebook/Instagram source search found no attributable email/site; unrelated foreign Nisu business email and unproven Auto Nisi dealer rejected."
+        },
+        "currentCandidateReference": "AutoDetailingNisi"
       },
       {
         "name": "Auto Detailing Diori",
         "sourceUrl": "https://www.instagram.com/reel/DTrNjWfiIEy/",
         "city": "Skenderaj",
-        "stage": "source-prechecked-not-fully-verified",
+        "stage": "deferred",
         "leadGroup": "auto detailing diori",
         "publicBusinessEmail": {
           "address": null,
           "sourceUrl": null,
-          "checkedAt": null,
-          "status": "unresolved",
-          "note": "Preliminary source screening only; individual email/identity research not completed unless linked current candidate evidence says otherwise."
-        }
+          "checkedAt": "2026-10-16T10:45:03.865869Z",
+          "status": "not-found",
+          "note": "Own Instagram bio and explicit business/city email+Facebook search found no attributable address/site; unrelated foreign Dorian businesses rejected."
+        },
+        "currentCandidateReference": "Auto Detailing Diori"
       },
       {
         "name": "Auto City",
         "city": "Deçan",
         "sourceUrl": "https://www.facebook.com/p/Auto-City-100094552764155/",
-        "stage": "source-prechecked-not-fully-verified",
+        "stage": "deferred",
         "leadGroup": "auto city",
         "publicBusinessEmail": {
           "address": null,
           "sourceUrl": null,
-          "checkedAt": null,
-          "status": "unresolved",
-          "note": "Preliminary source screening only; individual email/identity research not completed unless linked current candidate evidence says otherwise."
-        }
+          "checkedAt": "2026-10-16T09:52:37Z",
+          "status": "not-found",
+          "note": "Own website/contact page, official Facebook summary and Instagram bio show no email. Own website contact is form/phone; no guessed address or form submission."
+        },
+        "currentCandidateReference": "Auto City Deçan"
       },
       {
         "name": "Auto Detailing EDI",
         "city": "Malishevë",
         "sourceUrl": "https://www.instagram.com/p/Ck_Y26utssb/",
-        "stage": "source-prechecked-not-fully-verified",
+        "stage": "verified",
         "leadGroup": "auto detailing edi",
         "publicBusinessEmail": {
           "address": null,
           "sourceUrl": null,
-          "checkedAt": null,
-          "status": "unresolved",
-          "note": "Preliminary source screening only; individual email/identity research not completed unless linked current candidate evidence says otherwise."
-        }
+          "checkedAt": "2026-10-16T10:33:09Z",
+          "status": "not-found",
+          "note": "Expanded own Instagram bio and own Facebook business contact summary show no email or own website. Explicit business/city email+Facebook source search found no attributable business email; no guessed address."
+        },
+        "currentCandidateReference": "Auto Detailing EDI"
       },
       {
         "name": "Advance Detailing Co.",
@@ -5477,29 +5749,31 @@
         "name": "AUTO ZONE Tuning accessories",
         "city": "unresolved",
         "sourceUrl": "https://www.instagram.com/reel/DXUoWGnDCKk/",
-        "stage": "source-prechecked-not-fully-verified",
+        "stage": "verified",
         "leadGroup": "auto zone tuning accessories",
         "publicBusinessEmail": {
-          "address": null,
-          "sourceUrl": null,
-          "checkedAt": null,
-          "status": "unresolved",
-          "note": "Preliminary source screening only; individual email/identity research not completed unless linked current candidate evidence says otherwise."
-        }
+          "address": "autozonecenter@gmail.com",
+          "sourceUrl": "https://www.instagram.com/autozone.ks/reel/DbbV1YAsLHe/",
+          "checkedAt": "2026-10-16T10:43:20Z",
+          "status": "publicly-sourced",
+          "note": "Own public company post publishes email alongside this branch's phone and website; shared company contact, not a private address. No deliverability/consent claim."
+        },
+        "currentCandidateReference": "AUTOZONE CENTER Fushë Kosovë"
       },
       {
         "name": "Refresh Detailing Service",
         "city": "unresolved",
         "sourceUrl": "https://www.tiktok.com/@refreshdetailingservice/video/7693963648120786197",
-        "stage": "source-prechecked-not-fully-verified",
+        "stage": "verified",
         "leadGroup": "refresh detailing service",
         "publicBusinessEmail": {
           "address": null,
           "sourceUrl": null,
-          "checkedAt": null,
-          "status": "unresolved",
-          "note": "Preliminary source screening only; individual email/identity research not completed unless linked current candidate evidence says otherwise."
-        }
+          "checkedAt": "2026-10-16T10:37:46Z",
+          "status": "not-found",
+          "note": "Own TikTok bio, expanded official Instagram bio/link list and Facebook contact-information tab show no email or own website. Explicit name/city email+Facebook/Instagram source search found no attributable address. No inferred address."
+        },
+        "currentCandidateReference": "Refresh Detailing Service"
       },
       {
         "name": "Auto Xhama Center Glass-Servis",
@@ -5536,14 +5810,14 @@
         "city": "Fushë Kosovë",
         "sourceUrl": "https://euroglass-rks.com/",
         "leadGroup": "euro glass",
-        "stage": "source-prechecked-not-fully-verified",
+        "stage": "verified",
         "publicBusinessEmail": {
-          "address": null,
-          "sourceUrl": null,
-          "checkedAt": null,
-          "status": "unresolved",
-          "note": "Preliminary source screening only; individual email/identity research not completed unless linked current candidate evidence says otherwise."
-        }
+          "address": "euroglass0@gmail.com",
+          "sourceUrl": "https://euroglass-rks.com/contact/",
+          "checkedAt": "2026-10-16T09:52:37Z",
+          "status": "publicly-sourced"
+        },
+        "currentCandidateReference": "Auto Xhama Euro Glass"
       },
       {
         "name": "Auto Xhama Glass Service",
@@ -5678,7 +5952,8 @@
     "extendedCoverage": [
       "Fushë Kosovë vehicle glass",
       "Prishtina detailing",
-      "Gjilan detailing"
+      "Gjilan detailing",
+      "Malishevë detailing; own current Maps link resolved EDI"
     ],
     "prioritizationNote": "Started with the dated deferred queue and receipts; promising prior records refreshed when a source check could resolve a gap. Unchanged conflicts were not treated as fresh verification."
   },
@@ -5729,5 +6004,17 @@
     "observedLocalHour": 6,
     "settingsChanged": false,
     "note": "User Europe/Zurich 06:00 instruction overrides stale repository 09:00 Europe/Berlin prose."
+  },
+  "supplementalImport": {
+    "beforeLocalCount": 185,
+    "added": [
+      "auto-detailing-edi-malisheve",
+      "refresh-detailing-service-prishtina",
+      "autozone-center-fushe-kosove"
+    ],
+    "afterLocalCount": 188,
+    "dryRun": "passed-three-additions-no-updates-or-deduplication",
+    "write": "local-only; production remains release-bound",
+    "liveGuard": "All177 identity/revision/PlaceID/hash rows fetched in18bounded pages and exactly equal baseline immediately before local write."
   }
 }

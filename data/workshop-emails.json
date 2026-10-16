@@ -189,6 +189,20 @@
       "notes": "ARBK Open explicitly lists Auto Detailing BESI (Besmir Dullaj B.I.) in Malësi e Re, Prizren, RILINDËSIT Nr.24. The business name and same district as in the catalogue confirm the assignment; the directory additionally lists +38343792022, profile phone unchanged. The Facebook Besmir Tutaj result was not used as evidence."
     },
     {
+      "workshopId": "auto-detailing-edi-malisheve",
+      "matchedName": "Auto Detailing EDI",
+      "matchedPhone": "+38349534811",
+      "matchedCity": "Malishevë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://www.instagram.com/autodetailing_edi/",
+        "https://www.instagram.com/autodetailing_edi/p/CpDrNr2Nite/",
+        "https://www.facebook.com/AutopolirEdi/"
+      ],
+      "notes": "Expanded own Instagram bio and own Facebook business contact summary show no email or own website. Explicit business/city email+Facebook source search found no attributable business email; no guessed address."
+    },
+    {
       "workshopId": "auto-detailing-meti-mitrovica",
       "matchedName": "Auto Detailing Meti",
       "matchedPhone": "+38343509444",
@@ -2764,6 +2778,30 @@
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number. Previously stored address and evidence preserved and compared again."
     },
     {
+      "workshopId": "autozone-center-fushe-kosove",
+      "matchedName": "AUTOZONE CENTER Fushë Kosovë",
+      "matchedPhone": "+38349870800",
+      "matchedCity": "Fushë Kosovë",
+      "emails": [
+        {
+          "address": "autozonecenter@gmail.com",
+          "sourceUrls": [
+            "https://www.instagram.com/autozone.ks/reel/DbbV1YAsLHe/"
+          ],
+          "checkedAt": "2026-10-16",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://www.instagram.com/autozone.ks/",
+        "https://www.instagram.com/autozone.ks/reel/DbbV1YAsLHe/",
+        "https://www.instagram.com/reel/DXUoWGnDCKk/",
+        "https://autozone-ks.com/"
+      ],
+      "notes": "Own public company post publishes email alongside this branch's phone and website; shared company contact, not a private address. No deliverability/consent claim."
+    },
+    {
       "workshopId": "baki-automobile",
       "matchedName": "Baki Automobile SH.P.K",
       "matchedPhone": "+38344505499",
@@ -3551,6 +3589,20 @@
         "https://www.facebook.com/sfishtaautohome/"
       ],
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
+    },
+    {
+      "workshopId": "refresh-detailing-service-prishtina",
+      "matchedName": "Refresh Detailing Service",
+      "matchedPhone": "+38349854800",
+      "matchedCity": "Prishtina",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://www.tiktok.com/@refreshdetailingservice",
+        "https://www.instagram.com/refreshdetailingserviceks/",
+        "https://www.facebook.com/p/Refresh-Detailing-Service-61558724501080/"
+      ],
+      "notes": "Own TikTok bio, expanded official Instagram bio/link list and Facebook contact-information tab show no email or own website. Explicit name/city email+Facebook/Instagram source search found no attributable address. No inferred address."
     },
     {
       "workshopId": "reno-muciqi-bllaca-obiliq",

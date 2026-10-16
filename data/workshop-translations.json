@@ -228,6 +228,42 @@
       }
     },
     {
+      "id": "auto-detailing-edi-malisheve",
+      "sourceHash": "9193d28be365c7616f329bf201b4db28b58cb2fc5ab4e26c40d9391582759b38",
+      "sq": {
+        "specialty": "Polirim · Veshje qeramike",
+        "description": "Auto Detailing EDI në Malishevë ofron Polirim i automjeteve, Veshje qeramike, Mbështjellje e automjeteve me folje, Vendosje e foljeve në xhama. Profili i vetë biznesit publikon vendndodhjen Rr. Adem Jashari, afër Bytyqi Oil, Malishevë 24000 dhe numrin publik të kontaktit.",
+        "serviceDetails": [
+          "Polirim i automjeteve",
+          "Veshje qeramike",
+          "Mbështjellje e automjeteve me folje",
+          "Vendosje e foljeve në xhama"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia për ta kontaktuar nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara"
+        ]
+      },
+      "en": {
+        "specialty": "Car polishing · Ceramic coating",
+        "description": "Auto Detailing EDI in Malishevë provides Car polishing, Ceramic coating, Vehicle wrapping, Window-film installation. Its own business profile publishes the Rr. Adem Jashari, afër Bytyqi Oil, Malishevë 24000 location and public business telephone number.",
+        "serviceDetails": [
+          "Car polishing",
+          "Ceramic coating",
+          "Vehicle wrapping",
+          "Window-film installation"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own business page: name, location, contact and offered services",
+          "Own business page: name, location, contact and offered services",
+          "Own business page: name, location, contact and offered services"
+        ]
+      }
+    },
+    {
       "id": "auto-detailing-meti-mitrovica",
       "sourceHash": "67848dce97269590f5be31b2be2ab4d703ddc79361b437d2e9f44f5ad9b214bb",
       "sq": {
@@ -3602,6 +3638,37 @@
       }
     },
     {
+      "id": "autozone-center-fushe-kosove",
+      "sourceHash": "42dca91c90ebfea47568af66f82a86b8263e8bde88bee32e19e73a609cb13c61",
+      "sq": {
+        "specialty": "Polirim · Veshje qeramike",
+        "description": "AUTOZONE CENTER Fushë Kosovë në Fushë Kosovë ofron Polirim profesional i automjeteve, Veshje qeramike. Profili i vetë biznesit publikon vendndodhjen Rruga e Pejës 204, Fushë Kosovë 12000 dhe numrin publik të kontaktit.",
+        "serviceDetails": [
+          "Polirim profesional i automjeteve",
+          "Veshje qeramike"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia për ta kontaktuar nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara"
+        ]
+      },
+      "en": {
+        "specialty": "Car polishing · Ceramic coating",
+        "description": "AUTOZONE CENTER Fushë Kosovë in Fushë Kosovë provides Professional car polishing, Ceramic coating. Its own business profile publishes the Rruga e Pejës 204, Fushë Kosovë 12000 location and public business telephone number.",
+        "serviceDetails": ["Professional car polishing", "Ceramic coating"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own business page: name, location, contact and offered services",
+          "Own business page: name, location, contact and offered services",
+          "Own business page: name, location, contact and offered services",
+          "Own business page: name, location, contact and offered services"
+        ]
+      }
+    },
+    {
       "id": "baki-automobile",
       "sourceHash": "b904b95db8bbdcafb6f98f9ee089effe7ab77d5d5a605021c98750c15a35d229",
       "sq": {
@@ -4681,6 +4748,42 @@
           "Evidence of contact details, location and passenger-car servicing",
           "Evidence of contact details, location and passenger-car servicing",
           "Evidence of contact details, location and passenger-car servicing"
+        ]
+      }
+    },
+    {
+      "id": "refresh-detailing-service-prishtina",
+      "sourceHash": "fb49a6212198c55313037f3a672bdaa3907991958f0cc1f4f099c96c4e5a4bdb",
+      "sq": {
+        "specialty": "Polirim · Veshje qeramike",
+        "description": "Refresh Detailing Service në Prishtina ofron Polirim i automjeteve, Veshje qeramike, Pastrim i interierit, Vendosje e foljes mbrojtëse për bojën (PPF). Profili i vetë biznesit publikon vendndodhjen Rr. Struga, Mati 1, Prishtinë 10000 dhe numrin publik të kontaktit.",
+        "serviceDetails": [
+          "Polirim i automjeteve",
+          "Veshje qeramike",
+          "Pastrim i interierit",
+          "Vendosje e foljes mbrojtëse për bojën (PPF)"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia për ta kontaktuar nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara"
+        ]
+      },
+      "en": {
+        "specialty": "Car polishing · Ceramic coating",
+        "description": "Refresh Detailing Service in Prishtina provides Car polishing, Ceramic coating, Interior cleaning, Application of paint-protection film (PPF). Its own business profile publishes the Rr. Struga, Mati 1, Prishtinë 10000 location and public business telephone number.",
+        "serviceDetails": [
+          "Car polishing",
+          "Ceramic coating",
+          "Interior cleaning",
+          "Application of paint-protection film (PPF)"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own business page: name, location, contact and offered services",
+          "Own business page: name, location, contact and offered services",
+          "Own business page: name, location, contact and offered services"
         ]
       }
     },
