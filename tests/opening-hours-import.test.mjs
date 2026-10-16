@@ -6,6 +6,7 @@ import {
   prepareOpeningHoursImport,
   validateOpeningHoursImport,
   openingHoursImportQuery,
+  openingHoursImportQueries,
   csvRows,
   unresearchedOpeningHoursReason,
   openingHoursImportRevision,
@@ -28,10 +29,10 @@ const parse = (value) => openingHoursSchema.parse(value),
     await readFile("data/opening-hours-import.json", "utf8"),
   );
 validateOpeningHoursImport(manifest, catalogue, parse);
-assert.equal(manifest.records.length, 171);
+assert.equal(manifest.records.length, 182);
 assert.equal(
   manifest.records.filter((r) => r.metadata.kind === "assumed").length,
-  25,
+  30,
 );
 assert.equal(
   manifest.excluded.filter(
@@ -135,8 +136,36 @@ assert.equal(
   0,
   "Exclusions cannot create imported opening hours",
 );
-assert.equal(apply().changes, 171);
+assert.equal(apply().changes, 182);
 assert.equal(apply().changes, 0);
+const otherRevision = { ...manifest, revision: "f".repeat(64) };
+const unchangedPlans = openingHoursImportQuery(otherRevision);
+assert.equal(
+  db.prepare(unchangedPlans.sql).run(...unchangedPlans.params).changes,
+  0,
+  "Adding another workshop to a release preserves unchanged schedules and their revisions",
+);
+const translatedNotes = structuredClone(manifest);
+translatedNotes.revision = "e".repeat(64);
+translatedNotes.records[0].metadata.notes = "Editorial translation only";
+const editorialQuery = openingHoursImportQuery(translatedNotes);
+assert.equal(
+  db.prepare(editorialQuery.sql).run(...editorialQuery.params).changes,
+  0,
+  "Editing source notes without a newer check must not rewrite imported evidence",
+);
+const olderRecord = structuredClone(manifest.records[0]);
+olderRecord.metadata.checkedAt = "2026-10-12";
+olderRecord.hours.week[0] = { mode: "closed" };
+const staleQuery = openingHoursImportQuery({
+  revision: "d".repeat(64),
+  records: [olderRecord],
+});
+assert.equal(
+  db.prepare(staleQuery.sql).run(...staleQuery.params).changes,
+  0,
+  "Older source evidence cannot replace a newer imported schedule",
+);
 assert.equal(
   db
     .prepare("SELECT opening_hours_confirmed_at FROM workshops WHERE id=?")
@@ -151,6 +180,8 @@ db.prepare("UPDATE workshops SET phone=? WHERE id=?").run(
   first.id,
 );
 assert.throws(apply, /NOT NULL/);
+for (const query of openingHoursImportQueries(manifest))
+  db.prepare(query.sql).run(...query.params);
 assert.deepEqual(
   db
     .prepare(
@@ -158,6 +189,7 @@ assert.deepEqual(
     )
     .all(),
   importedBefore,
+  "Catalogue seeding preserves a changed identity; standalone import still rejects it",
 );
 db.prepare(
   "UPDATE workshops SET phone=?,opening_hours=NULL,opening_hours_confirmed_at=NULL WHERE id=?",
@@ -198,5 +230,5 @@ assert.equal(
 );
 db.close();
 console.log(
-  "Hours import: 171 plans, 25 assumptions, strict CSV identities, atomic conflict rollback, idempotency, owner preservation and suppression tombstones passed",
+  "Hours import: 182 plans, 30 assumptions, strict CSV identities, atomic conflict rollback, idempotency, owner preservation and suppression tombstones passed",
 );

@@ -52,7 +52,11 @@ Editorial choices, including empty/disabled lists, override research. Changed ad
 need fresh manual business confirmation; owner edits still need approval.
 
 Owner hours override imports, and approved removal blocks imported fallback permanently.
-Daily research imports no hours. For manual edits follow the
+Opening-hours manifests are included in the revision-bound release import before Worker
+upload. Research the business's own published hours; when no usable schedule is available
+and the user authorizes fallback hours, retain explicit `assumed` provenance. Defaults are
+Monday–Friday 08:00–18:00, Saturday 08:00–16:00 and Sunday closed. They are never owner-confirmed
+hours and do not determine current open status. For manual edits follow the
 [hours contract](../../lib/opening-hours.ts): split overnight hours across days.
 Imported hours have no invented confirmation date and do not determine current open status.
 

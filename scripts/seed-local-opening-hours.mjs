@@ -39,7 +39,16 @@ export async function localOpeningHoursSeedSql(root = checkoutRoot) {
   validateOpeningHoursImport(hours, catalogue, (value) =>
     openingHoursSchema.parse(value),
   );
-  const plan = await catalogueReleasePlan(catalogue, "local-development", root);
+  // Local restarts fill missing defaults below instead of refreshing imported
+  // schedules, so intentional local edits remain untouched.
+  const plan = await catalogueReleasePlan(
+    catalogue,
+    "local-development",
+    root,
+    {
+      includeOpeningHours: false,
+    },
+  );
   const statements = [
     ...plan.statements,
     { sql: plan.completionSql, params: [plan.key, "local-development"] },

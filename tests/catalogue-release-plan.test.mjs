@@ -4,6 +4,7 @@ import { readFile, readdir, mkdtemp, writeFile, rm } from "node:fs/promises";
 import { readFileSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
+import { pathToFileURL } from "node:url";
 import {
   catalogueReleasePlan,
   statementSql,
@@ -15,6 +16,36 @@ const commit = "a".repeat(40),
   catalogue = JSON.parse(await readFile("data/workshops.json", "utf8"));
 const plan = await catalogueReleasePlan(catalogue, commit),
   planPath = join(directory, "plan.json");
+const hours = JSON.parse(
+  await readFile("data/opening-hours-import.json", "utf8"),
+);
+assert(
+  plan.statements.every(
+    (statement) => Buffer.byteLength(statementSql(statement)) < 100_000,
+  ),
+  "Every released statement stays below the D1 SQL-text limit, including hours JSON",
+);
+const { catalogueImportKey } = await import(
+  pathToFileURL(join(root, ".sites-runtime/catalogue-release/import.mjs"))
+);
+const { contacts } = JSON.parse(
+  await readFile("data/workshop-contacts.json", "utf8"),
+);
+const { contacts: emails } = JSON.parse(
+  await readFile("data/workshop-emails.json", "utf8"),
+);
+assert.equal(
+  plan.key,
+  await catalogueImportKey(catalogue, contacts, emails, hours),
+);
+assert.notEqual(
+  plan.key,
+  await catalogueImportKey(catalogue, contacts, emails, {
+    ...hours,
+    revision: "f".repeat(64),
+  }),
+  "A schedule-only release cannot reuse the previous completion marker",
+);
 const sqlite = new DatabaseSync(":memory:");
 let writes = 0,
   failAfter = Infinity;
@@ -60,6 +91,22 @@ try {
   );
   failAfter = Infinity;
   await apply("resume");
+  assert.equal(
+    sqlite
+      .prepare("SELECT COUNT(*) AS n FROM workshop_opening_hours_imports")
+      .get().n,
+    hours.records.length,
+    "The exact released plan imports hours before Worker upload",
+  );
+  assert.equal(
+    sqlite
+      .prepare(
+        "SELECT COUNT(*) AS n FROM workshops WHERE opening_hours_confirmed_at IS NOT NULL",
+      )
+      .get().n,
+    0,
+    "Imported researched/default hours never invent owner confirmation",
+  );
   assert.equal(
     sqlite.prepare("SELECT COUNT(*) AS n FROM workshops").get().n,
     catalogue.workshops.length,

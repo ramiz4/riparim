@@ -5,6 +5,8 @@ import type { WorkshopEmailContacts } from "@/lib/workshop-contacts";
 import type { WorkshopContact } from "@/lib/workshop-contacts";
 import { profileColumns, profileValues } from "./workshop-profile-values";
 import { workshopIdentityHash } from "@/lib/google-place-identity";
+import { openingHoursImportQueries } from "./opening-hours-import-query.mjs";
+type HoursImport = { revision: string; records: unknown[] };
 import {
   retiredWorkshopIds,
   workshopRetirementDate,
@@ -14,6 +16,7 @@ export async function catalogueImportStatements(
   catalogue: WorkshopCatalogue,
   contacts: WorkshopContact[] = [],
   emails: WorkshopEmailContacts["contacts"] = [],
+  hours?: HoursImport,
 ) {
   const profiles = catalogue.workshops,
     googleSnapshots = catalogue.workshops.flatMap((w) =>
@@ -130,22 +133,29 @@ export async function catalogueImportStatements(
       await catalogueImportKey(catalogue, contacts, emails),
     ),
   );
+  if (hours) {
+    for (const query of openingHoursImportQueries(hours))
+      statements.push(db.prepare(query.sql).bind(...query.params));
+  }
   return statements;
 }
 export async function catalogueImportKey(
   catalogue: WorkshopCatalogue,
   contacts: WorkshopContact[] = [],
   emails: WorkshopEmailContacts["contacts"] = [],
+  hours?: HoursImport,
 ) {
   const digest = await crypto.subtle.digest(
     "SHA-256",
     new TextEncoder().encode(
       JSON.stringify(
-        emails.length
-          ? { catalogue, contacts, emails }
-          : contacts.length
-            ? { catalogue, contacts }
-            : catalogue,
+        hours
+          ? { catalogue, contacts, emails, hoursRevision: hours.revision }
+          : emails.length
+            ? { catalogue, contacts, emails }
+            : contacts.length
+              ? { catalogue, contacts }
+              : catalogue,
       ),
     ),
   );

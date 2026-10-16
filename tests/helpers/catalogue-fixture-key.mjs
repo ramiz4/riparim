@@ -22,6 +22,9 @@ export function catalogueFixtureKey() {
     const { contacts: emails } = JSON.parse(
       await readFile("data/workshop-emails.json", "utf8"),
     );
-    return catalogueImportKey(catalogue, contacts, emails);
+    const hours = JSON.parse(
+      await readFile("data/opening-hours-import.json", "utf8"),
+    );
+    return catalogueImportKey(catalogue, contacts, emails, hours);
   })());
 }

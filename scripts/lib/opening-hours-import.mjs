@@ -191,13 +191,7 @@ export function validateOpeningHoursImport(manifest, catalogue, parseHours) {
     throw Error("Incomplete or modified import");
   return manifest;
 }
-export function openingHoursImportQuery(manifest, now) {
-  // A single statement is atomic. A stale/missing identity violates the NOT NULL
-  // suppression flag before any upsert commits, including on repeated imports.
-  const payload = JSON.stringify(manifest.records);
-  const sql = `WITH incoming AS (SELECT value AS item FROM json_each(?)), valid AS (SELECT i.item FROM incoming i JOIN workshops w ON w.id=json_extract(i.item,'$.id') AND w.status='published' AND w.name=json_extract(i.item,'$.expected.name') AND w.city=json_extract(i.item,'$.expected.city') AND w.address=json_extract(i.item,'$.expected.address') AND w.phone=json_extract(i.item,'$.expected.phone'))
- INSERT INTO workshop_opening_hours_imports(workshop_id,opening_hours,source_metadata,import_revision,imported_at,suppressed)
- SELECT json_extract(item,'$.id'),json_extract(item,'$.hours'),json_extract(item,'$.metadata'),?,?,CASE WHEN (SELECT count(*) FROM valid)=(SELECT count(*) FROM incoming) THEN 0 ELSE NULL END FROM incoming WHERE 1
- ON CONFLICT(workshop_id) DO UPDATE SET opening_hours=excluded.opening_hours,source_metadata=excluded.source_metadata,import_revision=excluded.import_revision,imported_at=excluded.imported_at WHERE workshop_opening_hours_imports.suppressed=0 AND workshop_opening_hours_imports.import_revision IS NOT excluded.import_revision`;
-  return { sql, params: [payload, manifest.revision, now] };
-}
+export {
+  openingHoursImportQuery,
+  openingHoursImportQueries,
+} from "../../db/opening-hours-import-query.mjs";

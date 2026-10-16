@@ -7,6 +7,7 @@ export async function catalogueReleasePlan(
   catalogue,
   commit,
   root = process.cwd(),
+  { includeOpeningHours = true } = {},
 ) {
   const output = resolve(root, ".sites-runtime/catalogue-release/import.mjs");
   await mkdir(dirname(output), { recursive: true });
@@ -34,6 +35,9 @@ export async function catalogueReleasePlan(
     await readFile(resolve(root, "data/workshop-emails.json"), "utf8"),
   );
   if (!Array.isArray(emails)) throw Error("Released email source is missing");
+  const hours = JSON.parse(
+    await readFile(resolve(root, "data/opening-hours-import.json"), "utf8"),
+  );
   // The same statement factory powers runtime imports; this adapter records its plan.
   const recorder = {
     prepare(sql) {
@@ -47,13 +51,14 @@ export async function catalogueReleasePlan(
   return {
     schemaVersion: 1,
     commit,
-    key: await catalogueImportKey(catalogue, contacts, emails),
+    key: await catalogueImportKey(catalogue, contacts, emails, hours),
     completionSql: catalogueCompletionSql,
     statements: await catalogueImportStatements(
       recorder,
       catalogue,
       contacts,
       emails,
+      includeOpeningHours ? hours : undefined,
     ),
   };
 }

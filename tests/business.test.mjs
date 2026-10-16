@@ -874,7 +874,7 @@ assert.deepEqual(
   ownerHours,
 );
 db.prepare(
-  "INSERT INTO workshop_opening_hours_imports(workshop_id,opening_hours) VALUES(?,?)",
+  "INSERT INTO workshop_opening_hours_imports(workshop_id,opening_hours) VALUES(?,?) ON CONFLICT(workshop_id) DO UPDATE SET opening_hours=excluded.opening_hours,suppressed=0",
 ).run(first.id, JSON.stringify(ownerHours));
 let clearing = await change("a", first.id, {
   ...profile((await directory.listWorkshops()).find((w) => w.id === first.id)),
