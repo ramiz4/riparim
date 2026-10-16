@@ -606,7 +606,7 @@ assert.throws(
 );
 const mismatchedLink = structuredClone(catalogue);
 mismatchedLink.workshops.find(
-  (w) => w.status === "published",
+  (w) => w.status === "published" && w.google.snapshot,
 ).google.snapshot.mapsUrl =
   "https://www.google.com/maps/?query_place_id=ChIJUnrelatedFixture";
 assert.throws(() => validateWorkshopCatalogue(mismatchedLink), /same listing/);

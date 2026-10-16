@@ -2,6 +2,42 @@
   "schemaVersion": 1,
   "workshops": [
     {
+      "id": "advance-detailing-prishtina",
+      "sourceHash": "cd34934040cbbbdcb902fe913f3bf47b7a579a157e848185141ee0f2667435fe",
+      "sq": {
+        "specialty": "Korrektim i bojës · Mbrojtje qeramike · Detailing",
+        "description": "Advance Detailing Co. në Prishtina ofron korrektim të bojës në disa faza, polirim, mbrojtje qeramike, pastrim të interierit dhe folje mbrojtëse për bojën. Faqja e vetë biznesit publikon vendndodhjen në Xhevat Qena.",
+        "serviceDetails": [
+          "Korrektim i bojës në disa faza dhe polirim",
+          "Aplikim i mbrojtjes qeramike",
+          "Pastrim i interierit",
+          "Vendosje e foljes mbrojtëse për bojën (PPF)"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia për ta kontaktuar nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit: kontakt biznesi i publikuar publikisht",
+          "Faqja e vetë biznesit në Facebook: emri, vendndodhja, kontakti dhe shërbimet e ofruara"
+        ]
+      },
+      "en": {
+        "specialty": "Paint correction · Ceramic protection · Detailing",
+        "description": "Advance Detailing Co. in Prishtina provides multi-stage paint correction, car polishing, ceramic protection, interior detailing and paint-protection film. Its own website publishes the Xhevat Qena location.",
+        "serviceDetails": [
+          "Multi-stage paint correction and car polishing",
+          "Application of ceramic protection",
+          "Interior detailing",
+          "Application of paint-protection film (PPF)"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own business website: name, location, contact and offered services",
+          "Own business website: publicly published business contact",
+          "Own Facebook page: name, location, contact and offered services"
+        ]
+      }
+    },
+    {
       "id": "ahp-volkswagen-prizren",
       "sourceHash": "a424f9610e6403a309d90359e597f99d4c7fbf6dd95edb42eece087f05dad4c9",
       "sq": {
@@ -188,6 +224,42 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "auto-detailing-edi-malisheve",
+      "sourceHash": "9193d28be365c7616f329bf201b4db28b58cb2fc5ab4e26c40d9391582759b38",
+      "sq": {
+        "specialty": "Polirim · Veshje qeramike",
+        "description": "Auto Detailing EDI në Malishevë ofron Polirim i automjeteve, Veshje qeramike, Mbështjellje e automjeteve me folje, Vendosje e foljeve në xhama. Profili i vetë biznesit publikon vendndodhjen Rr. Adem Jashari, afër Bytyqi Oil, Malishevë 24000 dhe numrin publik të kontaktit.",
+        "serviceDetails": [
+          "Polirim i automjeteve",
+          "Veshje qeramike",
+          "Mbështjellje e automjeteve me folje",
+          "Vendosje e foljeve në xhama"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia për ta kontaktuar nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara"
+        ]
+      },
+      "en": {
+        "specialty": "Car polishing · Ceramic coating",
+        "description": "Auto Detailing EDI in Malishevë provides Car polishing, Ceramic coating, Vehicle wrapping, Window-film installation. Its own business profile publishes the Rr. Adem Jashari, afër Bytyqi Oil, Malishevë 24000 location and public business telephone number.",
+        "serviceDetails": [
+          "Car polishing",
+          "Ceramic coating",
+          "Vehicle wrapping",
+          "Window-film installation"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own business page: name, location, contact and offered services",
+          "Own business page: name, location, contact and offered services",
+          "Own business page: name, location, contact and offered services"
         ]
       }
     },
@@ -1664,6 +1736,38 @@
       }
     },
     {
+      "id": "auto-servis-behari-suhareke",
+      "sourceHash": "7ff79cfc1c079bd284a2ad4ba9e8af5d6d3049170f13e0bf2bc5f071a072ce2b",
+      "sq": {
+        "specialty": "Regllazh · Diagnostikim · Goma dhe klimë",
+        "description": "Auto Servis Behari në Reshtan pranë Suharekës ofron regllazh, montim dhe balancim gomash, diagnostikim kompjuterik, si dhe mbushje dhe servis të klimës së automjeteve.",
+        "serviceDetails": [
+          "Regllazh",
+          "Montim dhe balancim gomash",
+          "Diagnostikim kompjuterik",
+          "Mbushje dhe servis i klimës së automjeteve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia për ta kontaktuar nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vetë biznesit në Facebook: emri, vendndodhja, kontakti dhe shërbimet e ofruara"
+        ]
+      },
+      "en": {
+        "specialty": "Wheel alignment · Diagnostics · Tyres and air conditioning",
+        "description": "Auto Servis Behari in Reshtan near Suharekë provides wheel alignment, tyre fitting and balancing, computer diagnostics, and vehicle air-conditioning charging and servicing.",
+        "serviceDetails": [
+          "Wheel alignment",
+          "Tyre fitting and balancing",
+          "Computer diagnostics",
+          "Vehicle air-conditioning charging and servicing"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own Facebook page: name, location, contact and offered services"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-berati-malisheve",
       "sourceHash": "6925453ee7769afc4d3da29b6e1228062698bd59c7333b97b937917729ea0b08",
       "sq": {
@@ -2032,6 +2136,30 @@
         "phoneNote": "Public business contact; availability not confirmed",
         "sourceTitles": [
           "Own Facebook page: vehicle workshop, Ilir Merturi in Klinë, telephone and email"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-fitimi-suhareke",
+      "sourceHash": "8c38f7e0a3bd22e276f761f84533f6d0dab3e492188272987b5716735d0fb03f",
+      "sq": {
+        "specialty": "Servis për Mercedes-Benz G-Class",
+        "description": "Auto Servis \"Fitimi\" në Suharekë ofron servis të specializuar për Mercedes-Benz G-Class. Biznesi publikon vendndodhjen në Rr.1 dhe një numër publik kontakti.",
+        "serviceDetails": ["Servis për Mercedes-Benz G-Class"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia për ta kontaktuar nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vetë biznesit në Facebook: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit në Instagram: emri, vendndodhja, kontakti dhe shërbimet e ofruara"
+        ]
+      },
+      "en": {
+        "specialty": "Mercedes-Benz G-Class servicing",
+        "description": "Auto Servis \"Fitimi\" in Suharekë provides specialized servicing for the Mercedes-Benz G-Class. The business publishes its Rr.1 location and a public business telephone number.",
+        "serviceDetails": ["Servicing for the Mercedes-Benz G-Class"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own Facebook page: name, location, contact and offered services",
+          "Own Instagram page: name, location, contact and offered services"
         ]
       }
     },
@@ -2946,6 +3074,98 @@
       }
     },
     {
+      "id": "auto-xhama-euro-glass-fushe-kosove",
+      "sourceHash": "3824d861e49a3977531eb9a3c07e62491fdd5b426b39f74d0840385b039e4b14",
+      "sq": {
+        "specialty": "Riparim dhe ndërrim i xhamave të automjeteve",
+        "description": "Auto Xhama Euro Glass në Fushë Kosovë ofron riparim, ndërrim dhe montim të xhamave të automjeteve. Faqja e vetë biznesit për kontakt publikon Rruga e Pejes Nr.271 si vendndodhje.",
+        "serviceDetails": [
+          "Riparim i xhamave të automjeteve",
+          "Ndërrim dhe montim i xhamave të automjeteve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia për ta kontaktuar nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit: kontakt biznesi i publikuar publikisht"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle-glass repair and replacement",
+        "description": "Auto Xhama Euro Glass in Fushë Kosovë provides vehicle-glass repair, replacement and fitting. Its own contact page publishes the Rruga e Pejes Nr.271 location.",
+        "serviceDetails": [
+          "Vehicle-glass repair",
+          "Vehicle-glass replacement and fitting"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own business website: name, location, contact and offered services",
+          "Own business website: publicly published business contact"
+        ]
+      }
+    },
+    {
+      "id": "auto-xhama-global-glass-fushe-kosove",
+      "sourceHash": "fd82b56c0a3945f48902dad1b8c68428b1fdbc15efcb21cdba1b813dd2951204",
+      "sq": {
+        "specialty": "Riparim dhe ndërrim i xhamave të përparmë dhe të pasmë",
+        "description": "Auto Xhama \"Global Glass\" në Bresje pranë Fushë Kosovës ofron riparim dhe ndërrim të xhamave të përparmë dhe të pasmë. Faqja e vetë biznesit publikon Rruga e Pejës 288 dhe numrin publik të kontaktit.",
+        "serviceDetails": [
+          "Riparim dhe ndërrim i xhamave të përparmë",
+          "Riparim dhe ndërrim i xhamave të pasmë"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia për ta kontaktuar nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vetë biznesit në Facebook: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit në Facebook: kontakt biznesi i publikuar publikisht"
+        ]
+      },
+      "en": {
+        "specialty": "Front- and rear-window repair and replacement",
+        "description": "Auto Xhama \"Global Glass\" in Bresje near Fushë Kosovë provides front- and rear-window repair and replacement. Its own business page publishes the Rruga e Pejës 288 location and public business telephone number.",
+        "serviceDetails": [
+          "Front-window repair and replacement",
+          "Rear-window repair and replacement"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own Facebook page: name, location, contact and offered services",
+          "Own Facebook page: publicly published business contact"
+        ]
+      }
+    },
+    {
+      "id": "auto-xhama-premium-fushe-kosove",
+      "sourceHash": "e97bbbc0182d50b092390ad03f20e6029154e1fe5c935050599f29dd1b586a44",
+      "sq": {
+        "specialty": "Riparim dhe ndërrim i xhamave të automjeteve",
+        "description": "Auto Xhama Premium në Bresje pranë Fushë Kosovës ofron riparim dhe ndërrim të xhamave të automjeteve, si dhe heqje të foljeve dhe mbetjeve të ngjitësit. Profili i vetë biznesit publikon vendndodhjen përball HIB Petrol.",
+        "serviceDetails": [
+          "Riparim i xhamave të automjeteve",
+          "Ndërrim dhe montim i xhamave të automjeteve",
+          "Heqje e foljeve dhe mbetjeve të ngjitësit nga xhamat"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia për ta kontaktuar nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vetë biznesit në Instagram: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit në Facebook: emri, vendndodhja, kontakti dhe shërbimet e ofruara"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle-glass repair and replacement",
+        "description": "Auto Xhama Premium in Bresje near Fushë Kosovë provides vehicle-glass repair and replacement, plus removal of window film and adhesive residue. Its own profile publishes the location opposite HIB Petrol.",
+        "serviceDetails": [
+          "Vehicle-glass repair",
+          "Vehicle-glass replacement and fitting",
+          "Removal of window film and adhesive residue"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own Instagram page: name, location, contact and offered services",
+          "Own Facebook page: name, location, contact and offered services"
+        ]
+      }
+    },
+    {
       "id": "autoavangarde-bmw-service-peja",
       "sourceHash": "5b74c63dbcef7580b7438e235bbd00a0a62447f170ceea5cf67c885b859e3ca0",
       "sq": {
@@ -2968,6 +3188,42 @@
         "phoneNote": "Local 049 number normalised to +383; the source also lists a historical +386 dialling code",
         "sourceTitles": [
           "Public directory: name, contact and vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "autodetailing-iliri-skenderaj",
+      "sourceHash": "ef865d57b9f9e1cdf21bb8f4414fc3412744737563fdfa9b25a6276ad0608406",
+      "sq": {
+        "specialty": "Polirim · Mbrojtje qeramike · Ngjyrosje",
+        "description": "Autodetailing ILIRI në Skenderaj ofron polirim, mbrojtje qeramike dhe ngjyrosje të automjeteve. Biznesi publikon Rruga Azem Bejta 106 si vendndodhje dhe i përshkruan këto shërbime në postimet e veta.",
+        "serviceDetails": [
+          "Polirim i automjeteve",
+          "Aplikim i mbrojtjes qeramike",
+          "Ngjyrosje e automjeteve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia për ta kontaktuar nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vetë biznesit në Facebook: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit në Instagram: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit në Instagram: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit në Instagram: emri, vendndodhja, kontakti dhe shërbimet e ofruara"
+        ]
+      },
+      "en": {
+        "specialty": "Car polishing · Ceramic protection · Painting",
+        "description": "Autodetailing ILIRI in Skenderaj provides car polishing, ceramic protection and vehicle painting. The business publishes its Rruga Azem Bejta 106 location and describes these services in its own vehicle posts.",
+        "serviceDetails": [
+          "Car polishing",
+          "Application of ceramic protection",
+          "Vehicle painting"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own Facebook page: name, location, contact and offered services",
+          "Own Instagram page: name, location, contact and offered services",
+          "Own Instagram page: name, location, contact and offered services",
+          "Own Instagram page: name, location, contact and offered services"
         ]
       }
     },
@@ -3378,6 +3634,37 @@
           "Autotrade: name · exact address · service business; 2024 brochure, offers expired",
           "Regular maintenance in the current Toyota service portal",
           "Hybrid system check and written report in the Toyota service portal"
+        ]
+      }
+    },
+    {
+      "id": "autozone-center-fushe-kosove",
+      "sourceHash": "42dca91c90ebfea47568af66f82a86b8263e8bde88bee32e19e73a609cb13c61",
+      "sq": {
+        "specialty": "Polirim · Veshje qeramike",
+        "description": "AUTOZONE CENTER Fushë Kosovë në Fushë Kosovë ofron Polirim profesional i automjeteve, Veshje qeramike. Profili i vetë biznesit publikon vendndodhjen Rruga e Pejës 204, Fushë Kosovë 12000 dhe numrin publik të kontaktit.",
+        "serviceDetails": [
+          "Polirim profesional i automjeteve",
+          "Veshje qeramike"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia për ta kontaktuar nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara"
+        ]
+      },
+      "en": {
+        "specialty": "Car polishing · Ceramic coating",
+        "description": "AUTOZONE CENTER Fushë Kosovë in Fushë Kosovë provides Professional car polishing, Ceramic coating. Its own business profile publishes the Rruga e Pejës 204, Fushë Kosovë 12000 location and public business telephone number.",
+        "serviceDetails": ["Professional car polishing", "Ceramic coating"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own business page: name, location, contact and offered services",
+          "Own business page: name, location, contact and offered services",
+          "Own business page: name, location, contact and offered services",
+          "Own business page: name, location, contact and offered services"
         ]
       }
     },
@@ -4465,6 +4752,42 @@
       }
     },
     {
+      "id": "refresh-detailing-service-prishtina",
+      "sourceHash": "fb49a6212198c55313037f3a672bdaa3907991958f0cc1f4f099c96c4e5a4bdb",
+      "sq": {
+        "specialty": "Polirim · Veshje qeramike",
+        "description": "Refresh Detailing Service në Prishtina ofron Polirim i automjeteve, Veshje qeramike, Pastrim i interierit, Vendosje e foljes mbrojtëse për bojën (PPF). Profili i vetë biznesit publikon vendndodhjen Rr. Struga, Mati 1, Prishtinë 10000 dhe numrin publik të kontaktit.",
+        "serviceDetails": [
+          "Polirim i automjeteve",
+          "Veshje qeramike",
+          "Pastrim i interierit",
+          "Vendosje e foljes mbrojtëse për bojën (PPF)"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia për ta kontaktuar nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit: emri, vendndodhja, kontakti dhe shërbimet e ofruara"
+        ]
+      },
+      "en": {
+        "specialty": "Car polishing · Ceramic coating",
+        "description": "Refresh Detailing Service in Prishtina provides Car polishing, Ceramic coating, Interior cleaning, Application of paint-protection film (PPF). Its own business profile publishes the Rr. Struga, Mati 1, Prishtinë 10000 location and public business telephone number.",
+        "serviceDetails": [
+          "Car polishing",
+          "Ceramic coating",
+          "Interior cleaning",
+          "Application of paint-protection film (PPF)"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own business page: name, location, contact and offered services",
+          "Own business page: name, location, contact and offered services",
+          "Own business page: name, location, contact and offered services"
+        ]
+      }
+    },
+    {
       "id": "reno-muciqi-bllaca-obiliq",
       "sourceHash": "279ecbef8b7cff8fc54f7146aeff55a8700deb171cb764c97f79fc938bdf4f3c",
       "sq": {
@@ -4545,6 +4868,38 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Public directory: name, contact and vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "servis-kelmendi-suhareke",
+      "sourceHash": "c742ea9c7d30a5e5abea25c8aef32128ab70b984dca093454976f331eb5bb94b",
+      "sq": {
+        "specialty": "Përpunim i motorëve dhe kokave të cilindrave",
+        "description": "Servis Kelmendi në Suharekë ofron përpunim të motorëve me djegie të brendshme dhe të kokave të cilindrave. Faqet e vetë biznesit publikojnë Rruga Besa 2 dhe numrin e kontaktit.",
+        "serviceDetails": [
+          "Përpunim i motorëve me djegie të brendshme",
+          "Përpunim i kokave të cilindrave"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia për ta kontaktuar nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vetë biznesit në Facebook: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit në Instagram: emri, vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vetë biznesit në Instagram: emri, vendndodhja, kontakti dhe shërbimet e ofruara"
+        ]
+      },
+      "en": {
+        "specialty": "Engine and cylinder-head machining",
+        "description": "Servis Kelmendi in Suharekë provides combustion-engine and cylinder-head machining. Its own business pages publish the Rruga Besa 2 location and business telephone number.",
+        "serviceDetails": [
+          "Combustion-engine machining",
+          "Cylinder-head machining"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own Facebook page: name, location, contact and offered services",
+          "Own Instagram page: name, location, contact and offered services",
+          "Own Instagram page: name, location, contact and offered services"
         ]
       }
     },

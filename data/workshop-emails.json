@@ -2,6 +2,27 @@
   "schemaVersion": 2,
   "contacts": [
     {
+      "workshopId": "advance-detailing-prishtina",
+      "matchedName": "Advance Detailing Co.",
+      "matchedPhone": "+38349909229",
+      "matchedCity": "Prishtina",
+      "emails": [
+        {
+          "address": "info@advancedetailingco.com",
+          "sourceUrls": ["https://advancedetailingco.com/kontakt/"],
+          "checkedAt": "2026-10-16",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://advancedetailingco.com/",
+        "https://advancedetailingco.com/kontakt/",
+        "https://www.facebook.com/advancedetailingco"
+      ],
+      "notes": "Public business contact evidenced on the attributed own source; no deliverability, consent or ownership claim. No contact message sent."
+    },
+    {
       "workshopId": "ahp-volkswagen-prizren",
       "matchedName": "AHP Volkswagen / Audi / Skoda",
       "matchedPhone": "+38344561161",
@@ -166,6 +187,20 @@
         "https://www.google.com/search?q=Auto+Detailing+BESI+Prizren+site%3Aarbk.org"
       ],
       "notes": "ARBK Open explicitly lists Auto Detailing BESI (Besmir Dullaj B.I.) in Malësi e Re, Prizren, RILINDËSIT Nr.24. The business name and same district as in the catalogue confirm the assignment; the directory additionally lists +38343792022, profile phone unchanged. The Facebook Besmir Tutaj result was not used as evidence."
+    },
+    {
+      "workshopId": "auto-detailing-edi-malisheve",
+      "matchedName": "Auto Detailing EDI",
+      "matchedPhone": "+38349534811",
+      "matchedCity": "Malishevë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://www.instagram.com/autodetailing_edi/",
+        "https://www.instagram.com/autodetailing_edi/p/CpDrNr2Nite/",
+        "https://www.facebook.com/AutopolirEdi/"
+      ],
+      "notes": "Expanded own Instagram bio and own Facebook business contact summary show no email or own website. Explicit business/city email+Facebook source search found no attributable business email; no guessed address."
     },
     {
       "workshopId": "auto-detailing-meti-mitrovica",
@@ -1295,6 +1330,23 @@
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number. Previously stored address and evidence preserved and compared again."
     },
     {
+      "workshopId": "auto-servis-behari-suhareke",
+      "matchedName": "Auto Servis Behari",
+      "matchedPhone": "+38349897683",
+      "matchedCity": "Suharekë",
+      "emails": [
+        {
+          "address": "autoservisbehari@outlook.com",
+          "sourceUrls": ["https://www.facebook.com/AutoServiceBehari/"],
+          "checkedAt": "2026-10-16",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": ["https://www.facebook.com/AutoServiceBehari/"],
+      "notes": "Public business contact evidenced on the attributed own source; no deliverability, consent or ownership claim. No contact message sent."
+    },
+    {
       "workshopId": "auto-servis-berati-malisheve",
       "matchedName": "Auto servis ‘BERATI’ BMW",
       "matchedPhone": "+38349378051",
@@ -1577,6 +1629,28 @@
       "researchStatus": "found",
       "checkedUrls": ["https://www.facebook.com/100092324168737/"],
       "notes": "Publicly evidenced business email address. Research confirms neither delivery, consent nor business ownership."
+    },
+    {
+      "workshopId": "auto-servis-fitimi-suhareke",
+      "matchedName": "Auto Servis \"Fitimi\"",
+      "matchedPhone": "+38349222437",
+      "matchedCity": "Suharekë",
+      "emails": [
+        {
+          "address": "autoservisfitimi@gmail.com",
+          "sourceUrls": [
+            "https://www.facebook.com/p/Auto-Servis-Fitimi-100027869215821/"
+          ],
+          "checkedAt": "2026-10-16",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://www.facebook.com/p/Auto-Servis-Fitimi-100027869215821/",
+        "https://www.instagram.com/p/DPREq9OjIQK/"
+      ],
+      "notes": "Public business contact evidenced on the attributed own source; no deliverability, consent or ownership claim. No contact message sent."
     },
     {
       "workshopId": "auto-servis-ford-jashanica-prishtina",
@@ -2311,6 +2385,68 @@
       "notes": "The business's own contact page shows the email, Zenel Hajdini/Ferizaj and the exact existing phone number 044/048 177 020."
     },
     {
+      "workshopId": "auto-xhama-euro-glass-fushe-kosove",
+      "matchedName": "Auto Xhama Euro Glass",
+      "matchedPhone": "+38344102010",
+      "matchedCity": "Fushë Kosovë",
+      "emails": [
+        {
+          "address": "euroglass0@gmail.com",
+          "sourceUrls": ["https://euroglass-rks.com/contact/"],
+          "checkedAt": "2026-10-16",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://euroglass-rks.com/",
+        "https://euroglass-rks.com/contact/"
+      ],
+      "notes": "Public business contact evidenced on the attributed own source; no deliverability, consent or ownership claim. No contact message sent."
+    },
+    {
+      "workshopId": "auto-xhama-global-glass-fushe-kosove",
+      "matchedName": "Auto Xhama \"Global Glass\"",
+      "matchedPhone": "+38349450437",
+      "matchedCity": "Fushë Kosovë",
+      "emails": [
+        {
+          "address": "denisshyseni1@gmail.com",
+          "sourceUrls": [
+            "https://www.facebook.com/autoglassglobal/directory_contact_info"
+          ],
+          "checkedAt": "2026-10-16",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://www.facebook.com/autoglassglobal/",
+        "https://www.facebook.com/autoglassglobal/directory_contact_info"
+      ],
+      "notes": "Public business contact evidenced on the attributed own source; no deliverability, consent or ownership claim. No contact message sent."
+    },
+    {
+      "workshopId": "auto-xhama-premium-fushe-kosove",
+      "matchedName": "Auto Xhama Premium",
+      "matchedPhone": "+38345232341",
+      "matchedCity": "Fushë Kosovë",
+      "emails": [
+        {
+          "address": "autoxhamapremium@gmail.com",
+          "sourceUrls": ["https://www.facebook.com/autoxhamapremium/"],
+          "checkedAt": "2026-10-16",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://www.instagram.com/autoxhamapremium/",
+        "https://www.facebook.com/autoxhamapremium/"
+      ],
+      "notes": "Public business contact evidenced on the attributed own source; no deliverability, consent or ownership claim. No contact message sent."
+    },
+    {
       "workshopId": "autoavangarde-bmw-service-peja",
       "matchedName": "AutoAvangarde - BMW Service",
       "matchedPhone": "+38349327220",
@@ -2327,6 +2463,21 @@
         "https://www.google.com/search?q=%22049%20327%20220%22%20Peja"
       ],
       "notes": "The Facebook result from Çagllavicë/Prishtina is not the business in Peja. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Facebook publishes autoserviceavantgarde@gmail.com for Prishtina with +38344600455, not for the Peja business (+38349327220); excluded. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
+    },
+    {
+      "workshopId": "autodetailing-iliri-skenderaj",
+      "matchedName": "Autodetailing ILIRI",
+      "matchedPhone": "+38349467181",
+      "matchedCity": "Skenderaj",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://www.facebook.com/p/Autodetailing-ILIRI-100091746354902/",
+        "https://www.instagram.com/autodetailing_iliri/",
+        "https://www.instagram.com/autodetailing_iliri/p/Da3IaNYjXJN/",
+        "https://www.instagram.com/autodetailing_iliri/p/DayEyJFt-BR/"
+      ],
+      "notes": "Own Facebook contact summary and Instagram bio have no email; scoped email/source search found no attributable address. Other-business emails rejected; no own website identified."
     },
     {
       "workshopId": "autodetailingdaja-vushtrri",
@@ -2625,6 +2776,30 @@
         "https://www.instagram.com/toyotakosova/"
       ],
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number. Previously stored address and evidence preserved and compared again."
+    },
+    {
+      "workshopId": "autozone-center-fushe-kosove",
+      "matchedName": "AUTOZONE CENTER Fushë Kosovë",
+      "matchedPhone": "+38349870800",
+      "matchedCity": "Fushë Kosovë",
+      "emails": [
+        {
+          "address": "autozonecenter@gmail.com",
+          "sourceUrls": [
+            "https://www.instagram.com/autozone.ks/reel/DbbV1YAsLHe/"
+          ],
+          "checkedAt": "2026-10-16",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://www.instagram.com/autozone.ks/",
+        "https://www.instagram.com/autozone.ks/reel/DbbV1YAsLHe/",
+        "https://www.instagram.com/reel/DXUoWGnDCKk/",
+        "https://autozone-ks.com/"
+      ],
+      "notes": "Own public company post publishes email alongside this branch's phone and website; shared company contact, not a private address. No deliverability/consent claim."
     },
     {
       "workshopId": "baki-automobile",
@@ -3416,6 +3591,20 @@
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
     },
     {
+      "workshopId": "refresh-detailing-service-prishtina",
+      "matchedName": "Refresh Detailing Service",
+      "matchedPhone": "+38349854800",
+      "matchedCity": "Prishtina",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://www.tiktok.com/@refreshdetailingservice",
+        "https://www.instagram.com/refreshdetailingserviceks/",
+        "https://www.facebook.com/p/Refresh-Detailing-Service-61558724501080/"
+      ],
+      "notes": "Own TikTok bio, expanded official Instagram bio/link list and Facebook contact-information tab show no email or own website. Explicit name/city email+Facebook/Instagram source search found no attributable address. No inferred address."
+    },
+    {
       "workshopId": "reno-muciqi-bllaca-obiliq",
       "matchedName": "Reno Muçiqi & Bllaca",
       "matchedPhone": "+38344201301",
@@ -3488,6 +3677,20 @@
         "https://www.google.com/search?q=%22045%20613%20617%22%20Ferizaj"
       ],
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
+    },
+    {
+      "workshopId": "servis-kelmendi-suhareke",
+      "matchedName": "Servis Kelmendi",
+      "matchedPhone": "+38349229141",
+      "matchedCity": "Suharekë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://www.facebook.com/p/Servis-Kelmendi-100091513797905/",
+        "https://www.instagram.com/servis.kelmendi1/",
+        "https://www.instagram.com/servis.kelmendi1/reel/DZfT60yNtIa/"
+      ],
+      "notes": "Own Facebook summary and Instagram bio/link list have no email or own website; scoped source search found registry placeholders and platform-contact addresses only, rejected. No attributable public business email."
     },
     {
       "workshopId": "servis-kurtaj-erolls-prizren",

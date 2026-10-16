@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "d86a8ad27e20b9da92e07140431d54b843c1960eefd24b07c65066941d76dec2",
+  "revision": "53b68bf82caff589f87fa9e20afeaebeaee9f6c343ea4de45596f11f14b5c306",
   "records": [
     {
       "id": "ahp-volkswagen-prizren",
@@ -15234,11 +15234,23 @@
   ],
   "excluded": [
     {
+      "id": "advance-detailing-prishtina",
+      "reason": "Nicht recherchiert – neuer Katalogeintrag"
+    },
+    {
+      "id": "auto-detailing-edi-malisheve",
+      "reason": "Nicht recherchiert – neuer Katalogeintrag"
+    },
+    {
       "id": "auto-service-tuli-rahovec",
       "reason": "Nicht recherchiert – neuer Katalogeintrag"
     },
     {
       "id": "auto-service-vali-istog",
+      "reason": "Nicht recherchiert – neuer Katalogeintrag"
+    },
+    {
+      "id": "auto-servis-behari-suhareke",
       "reason": "Nicht recherchiert – neuer Katalogeintrag"
     },
     {
@@ -15250,7 +15262,39 @@
       "reason": "Nicht recherchiert – neuer Katalogeintrag"
     },
     {
+      "id": "auto-servis-fitimi-suhareke",
+      "reason": "Nicht recherchiert – neuer Katalogeintrag"
+    },
+    {
+      "id": "auto-xhama-euro-glass-fushe-kosove",
+      "reason": "Nicht recherchiert – neuer Katalogeintrag"
+    },
+    {
+      "id": "auto-xhama-global-glass-fushe-kosove",
+      "reason": "Nicht recherchiert – neuer Katalogeintrag"
+    },
+    {
+      "id": "auto-xhama-premium-fushe-kosove",
+      "reason": "Nicht recherchiert – neuer Katalogeintrag"
+    },
+    {
+      "id": "autodetailing-iliri-skenderaj",
+      "reason": "Nicht recherchiert – neuer Katalogeintrag"
+    },
+    {
+      "id": "autozone-center-fushe-kosove",
+      "reason": "Nicht recherchiert – neuer Katalogeintrag"
+    },
+    {
       "id": "mana-auto-detailing-rahovec",
+      "reason": "Nicht recherchiert – neuer Katalogeintrag"
+    },
+    {
+      "id": "refresh-detailing-service-prishtina",
+      "reason": "Nicht recherchiert – neuer Katalogeintrag"
+    },
+    {
+      "id": "servis-kelmendi-suhareke",
       "reason": "Nicht recherchiert – neuer Katalogeintrag"
     },
     {

@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-14T07:25:21.275Z",
+  "updatedAt": "2026-10-16T10:44:17.504Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 177,
+    "published": 188,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,12 +12,68 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 177 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 177,
+    "reason": "All 188 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 188,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
   "workshops": [
+    {
+      "id": "advance-detailing-prishtina",
+      "name": "Advance Detailing Co.",
+      "city": "Prishtina",
+      "address": "Xhevat Qena, Prishtinë 10000",
+      "phone": "+38349909229",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Mehrstufige Lackkorrektur und Fahrzeugpolitur",
+        "Auftragen von Keramikschutz",
+        "Innenraumaufbereitung",
+        "Anbringen von Lackschutzfolie (PPF)"
+      ],
+      "languages": [],
+      "specialty": "Lackkorrektur · Keramikschutz · Fahrzeugaufbereitung",
+      "description": "Advance Detailing Co. in Prishtina bietet mehrstufige Lackkorrektur, Fahrzeugpolitur, Keramikschutz, Innenraumaufbereitung und Lackschutzfolie an. Die eigene Website nennt den Standort an der Xhevat Qena.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://advancedetailingco.com/",
+          "title": "Eigene Betriebswebsite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://advancedetailingco.com/kontakt/",
+          "title": "Eigene Betriebswebsite: Öffentlich veröffentlichter Geschäftskontakt",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/advancedetailingco",
+          "title": "Eigene Facebook-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-16",
+      "status": "published",
+      "updatedAt": "2026-10-16T10:06:24.074213Z",
+      "google": {
+        "placeId": "ChIJ37DfXZ-fVBMRo99bAJlNTU0",
+        "matchedAt": "2026-10-16T09:50:36Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://advancedetailingco.com/",
+            "https://advancedetailingco.com/kontakt/",
+            "https://www.facebook.com/advancedetailingco"
+          ],
+          "note": "Public Maps UI in the confirmed project account: independently sourced identity, international phone and location match an active entry. Place ID read from a visible official !19s link and directly returned with an unrelated London fallback. Catalogue fields come exclusively from independent business sources; no ownership claim or current Google business content adopted."
+        }
+      }
+    },
     {
       "id": "ahp-volkswagen-prizren",
       "name": "AHP Volkswagen / Audi / Skoda",
@@ -347,6 +403,62 @@
             "https://halaman-kuning.cybo.com/XK/kori%C5%A1a/membaiki-kereta-?d=c"
           ],
           "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
+        }
+      }
+    },
+    {
+      "id": "auto-detailing-edi-malisheve",
+      "name": "Auto Detailing EDI",
+      "city": "Malishevë",
+      "address": "Rr. Adem Jashari, afër Bytyqi Oil, Malishevë 24000",
+      "phone": "+38349534811",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Fahrzeugpolitur",
+        "Keramikbeschichtung",
+        "Fahrzeugfolierung",
+        "Anbringen von Scheibenfolien"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugpolitur · Keramikbeschichtung",
+      "description": "Auto Detailing EDI in Malishevë bietet Fahrzeugpolitur, Keramikbeschichtung, Fahrzeugfolierung, Anbringen von Scheibenfolien an. Der eigene Betriebsauftritt nennt den Standort Rr. Adem Jashari, afër Bytyqi Oil, Malishevë 24000 und die öffentliche Geschäftsnummer.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.instagram.com/autodetailing_edi/",
+          "title": "Eigene Instagram-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autodetailing_edi/p/CpDrNr2Nite/",
+          "title": "Eigene Instagram-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/AutopolirEdi/",
+          "title": "Eigene Facebook-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-16",
+      "status": "published",
+      "updatedAt": "2026-10-16T10:43:56.149039Z",
+      "google": {
+        "placeId": "ChIJB0KY3tZ1UxMRQlWKKp76pt4",
+        "matchedAt": "2026-10-16T10:33:09Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.instagram.com/autodetailing_edi/",
+            "https://www.instagram.com/autodetailing_edi/p/CpDrNr2Nite/",
+            "https://www.facebook.com/AutopolirEdi/"
+          ],
+          "note": "Public Maps UI in the confirmed project account: independently sourced identity, international phone and location match an active entry. Place ID read from a visible official !19s link and directly returned with an unrelated London fallback. Catalogue fields come exclusively from independent business sources; no ownership claim or current Google business content adopted."
         }
       }
     },
@@ -2954,6 +3066,52 @@
       }
     },
     {
+      "id": "auto-servis-behari-suhareke",
+      "name": "Auto Servis Behari",
+      "city": "Suharekë",
+      "address": "R117, Therandë, Reshtan, Suharekë 23000",
+      "phone": "+38349897683",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Diagnose & Elektronik",
+        "Bremsen & Fahrwerk",
+        "Reifen & Klima"
+      ],
+      "serviceDetails": [
+        "Achsvermessung",
+        "Reifenmontage und Auswuchten",
+        "Computerdiagnose",
+        "Befüllung und Service von Fahrzeugklimaanlagen"
+      ],
+      "languages": [],
+      "specialty": "Achsvermessung · Diagnose · Reifen und Klima",
+      "description": "Auto Servis Behari in Reshtan bei Suharekë bietet Achsvermessung, Reifenmontage und Auswuchten, Computerdiagnose sowie die Befüllung und Wartung von Fahrzeugklimaanlagen an.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/AutoServiceBehari/",
+          "title": "Eigene Facebook-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-16",
+      "status": "published",
+      "updatedAt": "2026-10-16T10:06:24.074213Z",
+      "google": {
+        "placeId": "ChIJO1Y1Ep2ZUxMRfBZWhEjjT0Q",
+        "matchedAt": "2026-10-16T09:39:59Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": ["https://www.facebook.com/AutoServiceBehari/"],
+          "note": "Public Maps UI in the confirmed project account: independently sourced identity, international phone and location match an active entry. Place ID read from a visible official !19s link and directly returned with an unrelated London fallback. Catalogue fields come exclusively from independent business sources; no ownership claim or current Google business content adopted."
+        }
+      }
+    },
+    {
       "id": "auto-servis-berati-malisheve",
       "name": "Auto servis ‘BERATI’ BMW",
       "city": "Malishevë",
@@ -3590,6 +3748,51 @@
           "method": "phone_and_location",
           "sourceUrls": ["https://www.facebook.com/100092324168737/"],
           "note": "Public Maps interface in the confirmed account: the distinctive name, independently evidenced international phone number and place agree; active entry. The actual Place ID was read from the visible official !19s link and directly rechecked with a deliberately unrelated fallback search. Street details exclusively from an independent source; Maps lists no comparable street. No owner verification and no Google business data adopted."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-fitimi-suhareke",
+      "name": "Auto Servis \"Fitimi\"",
+      "city": "Suharekë",
+      "address": "Rr.1, Therandë, Suharekë 23000",
+      "phone": "+38349222437",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": ["Mercedes-Benz"],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Service für die Mercedes-Benz G-Klasse"],
+      "languages": [],
+      "specialty": "Service für die Mercedes-Benz G-Klasse",
+      "description": "Auto Servis \"Fitimi\" in Suharekë bietet spezialisierten Service für die Mercedes-Benz G-Klasse. Der Betrieb veröffentlicht seinen Standort an der Rr.1 und eine öffentliche Geschäftsnummer.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/p/Auto-Servis-Fitimi-100027869215821/",
+          "title": "Eigene Facebook-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/p/DPREq9OjIQK/",
+          "title": "Eigene Instagram-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-16",
+      "status": "published",
+      "updatedAt": "2026-10-16T10:06:24.074213Z",
+      "google": {
+        "placeId": "ChIJH2FIdMCbUxMRBAqIzptNP00",
+        "matchedAt": "2026-10-16T09:39:59Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.facebook.com/p/Auto-Servis-Fitimi-100027869215821/",
+            "https://www.instagram.com/p/DPREq9OjIQK/"
+          ],
+          "note": "Public Maps UI in the confirmed project account: independently sourced identity, international phone and location match an active entry. Place ID read from a visible official !19s link and directly returned with an unrelated London fallback. Catalogue fields come exclusively from independent business sources; no ownership claim or current Google business content adopted."
         }
       }
     },
@@ -5231,6 +5434,151 @@
       }
     },
     {
+      "id": "auto-xhama-euro-glass-fushe-kosove",
+      "name": "Auto Xhama Euro Glass",
+      "city": "Fushë Kosovë",
+      "address": "Rruga e Pejes Nr.271, Fushë Kosovë 12000",
+      "phone": "+38344102010",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Reparatur von Fahrzeugglas",
+        "Austausch und Montage von Fahrzeugscheiben"
+      ],
+      "languages": [],
+      "specialty": "Reparatur und Austausch von Fahrzeugglas",
+      "description": "Auto Xhama Euro Glass in Fushë Kosovë bietet die Reparatur, den Austausch und die Montage von Fahrzeugscheiben an. Die eigene Kontaktseite nennt die Rruga e Pejes Nr.271 als Standort.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://euroglass-rks.com/",
+          "title": "Eigene Betriebswebsite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://euroglass-rks.com/contact/",
+          "title": "Eigene Betriebswebsite: Öffentlich veröffentlichter Geschäftskontakt",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-16",
+      "status": "published",
+      "updatedAt": "2026-10-16T10:06:24.074213Z",
+      "google": {
+        "placeId": "ChIJCd2A_29jUxMRf8DYS06OSmA",
+        "matchedAt": "2026-10-16T09:52:37Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://euroglass-rks.com/",
+            "https://euroglass-rks.com/contact/"
+          ],
+          "note": "Public Maps UI in the confirmed project account: independently sourced identity, international phone and location match an active entry. Place ID read from a visible official !19s link and directly returned with an unrelated London fallback. Catalogue fields come exclusively from independent business sources; no ownership claim or current Google business content adopted."
+        }
+      }
+    },
+    {
+      "id": "auto-xhama-global-glass-fushe-kosove",
+      "name": "Auto Xhama \"Global Glass\"",
+      "city": "Fushë Kosovë",
+      "address": "Rruga e Pejës 288, Bresje, Fushë Kosovë 12000",
+      "phone": "+38349450437",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Reparatur und Austausch von Frontscheiben",
+        "Reparatur und Austausch von Heckscheiben"
+      ],
+      "languages": [],
+      "specialty": "Reparatur und Austausch von Front- und Heckscheiben",
+      "description": "Auto Xhama \"Global Glass\" in Bresje bei Fushë Kosovë bietet die Reparatur und den Austausch von Front- und Heckscheiben an. Die eigene Betriebsseite nennt die Rruga e Pejës 288 und die öffentliche Geschäftsnummer.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/autoglassglobal/",
+          "title": "Eigene Facebook-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/autoglassglobal/directory_contact_info",
+          "title": "Eigene Facebook-Seite: Öffentlich veröffentlichter Geschäftskontakt",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-16",
+      "status": "published",
+      "updatedAt": "2026-10-16T10:06:24.074213Z",
+      "google": {
+        "placeId": "ChIJyzf2D49jUxMRu4gKPodR8vw",
+        "matchedAt": "2026-10-16T10:00:51Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.facebook.com/autoglassglobal/",
+            "https://www.facebook.com/autoglassglobal/directory_contact_info"
+          ],
+          "note": "Public Maps UI in the confirmed project account: independently sourced identity, international phone and location match an active entry. Place ID read from a visible official !19s link and directly returned with an unrelated London fallback. Catalogue fields come exclusively from independent business sources; no ownership claim or current Google business content adopted."
+        }
+      }
+    },
+    {
+      "id": "auto-xhama-premium-fushe-kosove",
+      "name": "Auto Xhama Premium",
+      "city": "Fushë Kosovë",
+      "address": "Bresje, përball HIB Petrol, Fushë Kosovë 12000",
+      "phone": "+38345232341",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Reparatur von Fahrzeugglas",
+        "Austausch und Montage von Fahrzeugscheiben",
+        "Entfernen von Scheibenfolien und Kleberückständen"
+      ],
+      "languages": [],
+      "specialty": "Reparatur und Austausch von Fahrzeugglas",
+      "description": "Auto Xhama Premium in Bresje bei Fushë Kosovë bietet Reparatur und Austausch von Fahrzeugscheiben sowie das Entfernen von Scheibenfolien und Kleberückständen an. Der eigene Auftritt nennt den Standort gegenüber HIB Petrol.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.instagram.com/autoxhamapremium/",
+          "title": "Eigene Instagram-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/autoxhamapremium/",
+          "title": "Eigene Facebook-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-16",
+      "status": "published",
+      "updatedAt": "2026-10-16T10:06:24.074213Z",
+      "google": {
+        "placeId": "ChIJS_MJOmtjUxMR_c6WNT56G3k",
+        "matchedAt": "2026-10-16T09:58:20Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.instagram.com/autoxhamapremium/",
+            "https://www.facebook.com/autoxhamapremium/"
+          ],
+          "note": "Public Maps UI in the confirmed project account: independently sourced identity, international phone and location match an active entry. Place ID read from a visible official !19s link and directly returned with an unrelated London fallback. Catalogue fields come exclusively from independent business sources; no ownership claim or current Google business content adopted."
+        }
+      }
+    },
+    {
       "id": "autoavangarde-bmw-service-peja",
       "name": "AutoAvangarde - BMW Service",
       "city": "Peja",
@@ -5276,6 +5624,67 @@
             "https://www.cybo.com/XK-biz/autoavangarde-bmw-service"
           ],
           "note": "Distinctive name, BMW service and location on Magjistralja Pejë–Prishtinë agree with the independent business evidence."
+        }
+      }
+    },
+    {
+      "id": "autodetailing-iliri-skenderaj",
+      "name": "Autodetailing ILIRI",
+      "city": "Skenderaj",
+      "address": "Rruga Azem Bejta 106, Skenderaj 41000",
+      "phone": "+38349467181",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Fahrzeugpolitur",
+        "Auftragen von Keramikschutz",
+        "Fahrzeuglackierung"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugpolitur · Keramikschutz · Lackierung",
+      "description": "Autodetailing ILIRI in Skenderaj bietet Fahrzeugpolitur, Keramikschutz und Lackierarbeiten an. Der Betrieb nennt die Rruga Azem Bejta 106 als Standort und beschreibt diese Leistungen in eigenen Fahrzeugbeiträgen.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/p/Autodetailing-ILIRI-100091746354902/",
+          "title": "Eigene Facebook-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autodetailing_iliri/",
+          "title": "Eigene Instagram-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autodetailing_iliri/p/Da3IaNYjXJN/",
+          "title": "Eigene Instagram-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autodetailing_iliri/p/DayEyJFt-BR/",
+          "title": "Eigene Instagram-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-16",
+      "status": "published",
+      "updatedAt": "2026-10-16T10:06:24.074213Z",
+      "google": {
+        "placeId": "ChIJmwTmWJFrUxMRwXxn74i9Hww",
+        "matchedAt": "2026-10-16T09:47:25Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.facebook.com/p/Autodetailing-ILIRI-100091746354902/",
+            "https://www.instagram.com/autodetailing_iliri/",
+            "https://www.instagram.com/autodetailing_iliri/p/Da3IaNYjXJN/",
+            "https://www.instagram.com/autodetailing_iliri/p/DayEyJFt-BR/"
+          ],
+          "note": "Public Maps UI in the confirmed project account: independently sourced identity, international phone and location match an active entry. Place ID read from a visible official !19s link and directly returned with an unrelated London fallback. Catalogue fields come exclusively from independent business sources; no ownership claim or current Google business content adopted."
         }
       }
     },
@@ -6030,6 +6439,66 @@
             "https://www.toyota-kosovo.com/owners/maintenance/hybrid-service"
           ],
           "note": "The official Toyota Kosovo domain, dealer name and branch location confirm the identity. Historical country dialing codes are not treated as generally equivalent."
+        }
+      }
+    },
+    {
+      "id": "autozone-center-fushe-kosove",
+      "name": "AUTOZONE CENTER Fushë Kosovë",
+      "city": "Fushë Kosovë",
+      "address": "Rruga e Pejës 204, Fushë Kosovë 12000",
+      "phone": "+38349870800",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Professionelle Fahrzeugpolitur",
+        "Keramikbeschichtung"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugpolitur · Keramikbeschichtung",
+      "description": "AUTOZONE CENTER Fushë Kosovë in Fushë Kosovë bietet Professionelle Fahrzeugpolitur, Keramikbeschichtung an. Der eigene Betriebsauftritt nennt den Standort Rruga e Pejës 204, Fushë Kosovë 12000 und die öffentliche Geschäftsnummer.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.instagram.com/autozone.ks/",
+          "title": "Eigene Instagram-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autozone.ks/reel/DbbV1YAsLHe/",
+          "title": "Eigene Instagram-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/reel/DXUoWGnDCKk/",
+          "title": "Eigene Instagram-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://autozone-ks.com/",
+          "title": "Eigene Betriebswebsite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-16",
+      "status": "published",
+      "updatedAt": "2026-10-16T10:43:56.149039Z",
+      "google": {
+        "placeId": "ChIJrQE7OMZjUxMRnK0kB8C-8yA",
+        "matchedAt": "2026-10-16T10:43:20Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.instagram.com/autozone.ks/",
+            "https://www.instagram.com/autozone.ks/reel/DbbV1YAsLHe/",
+            "https://www.instagram.com/reel/DXUoWGnDCKk/",
+            "https://autozone-ks.com/"
+          ],
+          "note": "Public Maps UI in the confirmed project account: independently sourced identity, international phone and location match an active entry. Place ID read from a visible official !19s link and directly returned with an unrelated London fallback. Catalogue fields come exclusively from independent business sources; no ownership claim or current Google business content adopted."
         }
       }
     },
@@ -7935,6 +8404,62 @@
       }
     },
     {
+      "id": "refresh-detailing-service-prishtina",
+      "name": "Refresh Detailing Service",
+      "city": "Prishtina",
+      "address": "Rr. Struga, Mati 1, Prishtinë 10000",
+      "phone": "+38349854800",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Fahrzeugpolitur",
+        "Keramikbeschichtung",
+        "Innenraumreinigung",
+        "Anbringen von Lackschutzfolie (PPF)"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugpolitur · Keramikbeschichtung",
+      "description": "Refresh Detailing Service in Prishtina bietet Fahrzeugpolitur, Keramikbeschichtung, Innenraumreinigung, Anbringen von Lackschutzfolie (PPF) an. Der eigene Betriebsauftritt nennt den Standort Rr. Struga, Mati 1, Prishtinë 10000 und die öffentliche Geschäftsnummer.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.tiktok.com/@refreshdetailingservice",
+          "title": "Eigene TikTok-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/refreshdetailingserviceks/",
+          "title": "Eigene Instagram-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/p/Refresh-Detailing-Service-61558724501080/",
+          "title": "Eigene Facebook-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-16",
+      "status": "published",
+      "updatedAt": "2026-10-16T10:43:56.149039Z",
+      "google": {
+        "placeId": "ChIJ0ToqSsqfVBMRSjnhUsb2kf8",
+        "matchedAt": "2026-10-16T10:37:46Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.tiktok.com/@refreshdetailingservice",
+            "https://www.instagram.com/refreshdetailingserviceks/",
+            "https://www.facebook.com/p/Refresh-Detailing-Service-61558724501080/"
+          ],
+          "note": "Public Maps UI in the confirmed project account: independently sourced identity, international phone and location match an active entry. Place ID read from a visible official !19s link and directly returned with an unrelated London fallback. Catalogue fields come exclusively from independent business sources; no ownership claim or current Google business content adopted."
+        }
+      }
+    },
+    {
       "id": "reno-muciqi-bllaca-obiliq",
       "name": "Reno Muçiqi & Bllaca",
       "city": "Obiliq",
@@ -8082,6 +8607,60 @@
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
+        }
+      }
+    },
+    {
+      "id": "servis-kelmendi-suhareke",
+      "name": "Servis Kelmendi",
+      "city": "Suharekë",
+      "address": "Rruga Besa 2, Suharekë 23000",
+      "phone": "+38349229141",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Motor & Getriebe"],
+      "serviceDetails": [
+        "Bearbeitung von Verbrennungsmotoren",
+        "Bearbeitung von Zylinderköpfen"
+      ],
+      "languages": [],
+      "specialty": "Motoren- und Zylinderkopfbearbeitung",
+      "description": "Servis Kelmendi in Suharekë bietet die Bearbeitung von Verbrennungsmotoren und Zylinderköpfen an. Die eigenen Betriebsseiten nennen die Rruga Besa 2 und die öffentliche Geschäftsnummer.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/p/Servis-Kelmendi-100091513797905/",
+          "title": "Eigene Facebook-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/servis.kelmendi1/",
+          "title": "Eigene Instagram-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/servis.kelmendi1/reel/DZfT60yNtIa/",
+          "title": "Eigene Instagram-Seite: Name, Standort, Kontakt und angebotene Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-16",
+      "status": "published",
+      "updatedAt": "2026-10-16T10:06:24.074213Z",
+      "google": {
+        "placeId": "ChIJ4T_rFRubUxMRjfIZ__ONOg0",
+        "matchedAt": "2026-10-16T09:40:00Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.facebook.com/p/Servis-Kelmendi-100091513797905/",
+            "https://www.instagram.com/servis.kelmendi1/",
+            "https://www.instagram.com/servis.kelmendi1/reel/DZfT60yNtIa/"
+          ],
+          "note": "Public Maps UI in the confirmed project account: independently sourced identity, international phone and location match an active entry. Place ID read from a visible official !19s link and directly returned with an unrelated London fallback. Catalogue fields come exclusively from independent business sources; no ownership claim or current Google business content adopted."
         }
       }
     },
