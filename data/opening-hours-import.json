@@ -1,7 +1,96 @@
 {
   "schemaVersion": 1,
-  "revision": "53b68bf82caff589f87fa9e20afeaebeaee9f6c343ea4de45596f11f14b5c306",
+  "revision": "3347cfbbee292cc847e2895f896fa8dfe87e5a8b0ee725336d0a2e65b8bbcac9",
   "records": [
+    {
+      "id": "advance-detailing-prishtina",
+      "expected": {
+        "name": "Advance Detailing Co.",
+        "city": "Prishtina",
+        "address": "Xhevat Qena, Prishtinë 10000",
+        "phone": "+38349909229"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-16",
+        "source": "https://www.facebook.com/advancedetailingco",
+        "sourceName": "Advance Detailing Co.",
+        "researchStatus": "Gefunden (eigener Betriebsauftritt)",
+        "notes": "Own website contact page has no weekly schedule; own current Facebook business page lists this full weekly schedule at identical Xhevat Qena location. Facebook labels the hours as updated about five years ago; retain as publicly listed research, not current owner confirmation.",
+        "originalWeek": [
+          "09:00-17:00",
+          "09:00-17:00",
+          "09:00-17:00",
+          "09:00-17:00",
+          "09:00-17:00",
+          "09:00-16:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
     {
       "id": "ahp-volkswagen-prizren",
       "expected": {
@@ -617,6 +706,87 @@
           "Geschlossen"
         ],
         "earlierPlan": "24 Stunden geöffnet | 24 Stunden geöffnet | 24 Stunden geöffnet | 24 Stunden geöffnet | 24 Stunden geöffnet | 24 Stunden geöffnet | 24 Stunden geöffnet"
+      }
+    },
+    {
+      "id": "auto-detailing-edi-malisheve",
+      "expected": {
+        "name": "Auto Detailing EDI",
+        "city": "Malishevë",
+        "address": "Rr. Adem Jashari, afër Bytyqi Oil, Malishevë 24000",
+        "phone": "+38349534811"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-16",
+        "source": "https://www.facebook.com/AutopolirEdi/",
+        "sourceName": "Auto Detailing EDI",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own Facebook summary/Info/Details checked during this follow-up: exact verified phone and services, no weekly schedule. Earlier same-day expanded own Instagram bio inspection supplied identity/site/phone but no weekly schedule. Use explicit assumed standard fallback.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
       }
     },
     {
@@ -5076,6 +5246,95 @@
       }
     },
     {
+      "id": "auto-servis-behari-suhareke",
+      "expected": {
+        "name": "Auto Servis Behari",
+        "city": "Suharekë",
+        "address": "R117, Therandë, Reshtan, Suharekë 23000",
+        "phone": "+38349897683"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-16",
+        "source": "https://www.facebook.com/AutoServiceBehari/",
+        "sourceName": "Auto Servis Behari",
+        "researchStatus": "Gefunden (eigener Betriebsauftritt)",
+        "notes": "Own public Facebook business-hours dialog; current name, Reshtan address and business phones match verified profile.",
+        "originalWeek": [
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-servis-berati-malisheve",
       "expected": {
         "name": "Auto servis ‘BERATI’ BMW",
@@ -6138,6 +6397,95 @@
           "07:30-18:00",
           "07:30-18:00",
           "07:30-16:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-fitimi-suhareke",
+      "expected": {
+        "name": "Auto Servis \"Fitimi\"",
+        "city": "Suharekë",
+        "address": "Rr.1, Therandë, Suharekë 23000",
+        "phone": "+38349222437"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-16",
+        "source": "https://www.facebook.com/p/Auto-Servis-Fitimi-100027869215821/",
+        "sourceName": "Auto Servis \"Fitimi\"",
+        "researchStatus": "Gefunden (eigener Betriebsauftritt)",
+        "notes": "Own public Facebook business-hours dialog publishes full week; business name/address/phone/email match the already verified identity.",
+        "originalWeek": [
+          "09:00-17:00",
+          "09:00-17:00",
+          "09:00-17:00",
+          "09:00-17:00",
+          "09:00-17:00",
+          "09:00-17:00",
           "Geschlossen"
         ],
         "earlierPlan": ""
@@ -9079,6 +9427,265 @@
       }
     },
     {
+      "id": "auto-xhama-euro-glass-fushe-kosove",
+      "expected": {
+        "name": "Auto Xhama Euro Glass",
+        "city": "Fushë Kosovë",
+        "address": "Rruga e Pejes Nr.271, Fushë Kosovë 12000",
+        "phone": "+38344102010"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-16",
+        "source": "https://euroglass-rks.com/contact/",
+        "sourceName": "Auto Xhama Euro Glass",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own website home/contact publishes exact current271address/phones but no weekly schedule. Its linked Facebook page lists269rather than271; do not attribute that page's hours to this precise site without continuity evidence. Use explicitly assumed standard fallback, preserving catalogue identity from the existing verified primary website/Maps assignment.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-xhama-global-glass-fushe-kosove",
+      "expected": {
+        "name": "Auto Xhama \"Global Glass\"",
+        "city": "Fushë Kosovë",
+        "address": "Rruga e Pejës 288, Bresje, Fushë Kosovë 12000",
+        "phone": "+38349450437"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-16",
+        "source": "https://www.facebook.com/autoglassglobal/",
+        "sourceName": "Auto Xhama \"Global Glass\"",
+        "researchStatus": "Gefunden (eigener Betriebsauftritt)",
+        "notes": "Own public Facebook weekly dialog, updated about one year ago; current own phone and Rruga e Pejës288 site match published identity. Publicly listed research only, no owner confirmation.",
+        "originalWeek": [
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-17:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-xhama-premium-fushe-kosove",
+      "expected": {
+        "name": "Auto Xhama Premium",
+        "city": "Fushë Kosovë",
+        "address": "Bresje, përball HIB Petrol, Fushë Kosovë 12000",
+        "phone": "+38345232341"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-16",
+        "source": "https://www.facebook.com/autoxhamapremium/",
+        "sourceName": "Auto Xhama Premium",
+        "researchStatus": "Gefunden (eigener Betriebsauftritt)",
+        "notes": "Own public Facebook business-hours dialog lists full week, updated about nine months ago. Exact published business phone matches verified profile; retained as public research, not owner confirmation.",
+        "originalWeek": [
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "autoavangarde-bmw-service-peja",
       "expected": {
         "name": "AutoAvangarde - BMW Service",
@@ -9164,6 +9771,87 @@
           "09:00-18:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "autodetailing-iliri-skenderaj",
+      "expected": {
+        "name": "Autodetailing ILIRI",
+        "city": "Skenderaj",
+        "address": "Rruga Azem Bejta 106, Skenderaj 41000",
+        "phone": "+38349467181"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-16",
+        "source": "https://www.facebook.com/p/Autodetailing-ILIRI-100091746354902/",
+        "sourceName": "Autodetailing ILIRI",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own page summary and Info/Details sections checked; address/phone match but no weekly schedule published there. Previously inspected own Instagram bio/service posts provide no attributable weekly hours. Use explicit assumed fallback.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -10505,6 +11193,87 @@
           "09:00-14:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "autozone-center-fushe-kosove",
+      "expected": {
+        "name": "AUTOZONE CENTER Fushë Kosovë",
+        "city": "Fushë Kosovë",
+        "address": "Rruga e Pejës 204, Fushë Kosovë 12000",
+        "phone": "+38349870800"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-16",
+        "source": "https://autozone-ks.com/",
+        "sourceName": "AUTOZONE CENTER Fushë Kosovë",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own website home/footer and linked Facebook summary/Info/Details contain no attributable Fushë Kosovë weekly schedule. Own Instagram bio checked earlier today also had no hours. The previously inspected website contact page contains US/example.com template contacts; its generic template information cannot evidence this Kosovo branch. Use explicitly assumed standard fallback.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -13630,6 +14399,101 @@
       }
     },
     {
+      "id": "refresh-detailing-service-prishtina",
+      "expected": {
+        "name": "Refresh Detailing Service",
+        "city": "Prishtina",
+        "address": "Rr. Struga, Mati 1, Prishtinë 10000",
+        "phone": "+38349854800"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "10:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "10:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "10:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "10:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "10:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "10:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-16",
+        "source": "https://www.facebook.com/p/Refresh-Detailing-Service-61558724501080/",
+        "sourceName": "Refresh Detailing Service",
+        "researchStatus": "Gefunden (eigener Betriebsauftritt)",
+        "notes": "Own public Facebook weekly dialog, updated about two years ago; exact own international phone and Rr.Struga site match verified business. Publicly listed research only, not owner confirmation.",
+        "originalWeek": [
+          "10:00-18:00",
+          "10:00-18:00",
+          "10:00-18:00",
+          "10:00-18:00",
+          "10:00-18:00",
+          "10:00-18:00",
+          "09:00-17:00"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "reno-muciqi-bllaca-obiliq",
       "expected": {
         "name": "Reno Muçiqi & Bllaca",
@@ -13894,6 +14758,87 @@
           "Geschlossen"
         ],
         "earlierPlan": "Geschlossen | Geschlossen | Geschlossen | Geschlossen | Geschlossen | Geschlossen | 24 Stunden geöffnet"
+      }
+    },
+    {
+      "id": "servis-kelmendi-suhareke",
+      "expected": {
+        "name": "Servis Kelmendi",
+        "city": "Suharekë",
+        "address": "Rruga Besa 2, Suharekë 23000",
+        "phone": "+38349229141"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-16",
+        "source": "https://www.facebook.com/p/Servis-Kelmendi-100091513797905/",
+        "sourceName": "Servis Kelmendi",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own weekly dialog is about four years old and internally implausible: Monday00:00–18:00, Thursday08:00–06:00 (overnight), other weekdays08:00–18:00,Sundayclosed. Do not silently correct or adopt as current schedule; user-requested standard fallback remains explicitly assumed.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
       }
     },
     {
@@ -15234,23 +16179,11 @@
   ],
   "excluded": [
     {
-      "id": "advance-detailing-prishtina",
-      "reason": "Nicht recherchiert – neuer Katalogeintrag"
-    },
-    {
-      "id": "auto-detailing-edi-malisheve",
-      "reason": "Nicht recherchiert – neuer Katalogeintrag"
-    },
-    {
       "id": "auto-service-tuli-rahovec",
       "reason": "Nicht recherchiert – neuer Katalogeintrag"
     },
     {
       "id": "auto-service-vali-istog",
-      "reason": "Nicht recherchiert – neuer Katalogeintrag"
-    },
-    {
-      "id": "auto-servis-behari-suhareke",
       "reason": "Nicht recherchiert – neuer Katalogeintrag"
     },
     {
@@ -15262,39 +16195,7 @@
       "reason": "Nicht recherchiert – neuer Katalogeintrag"
     },
     {
-      "id": "auto-servis-fitimi-suhareke",
-      "reason": "Nicht recherchiert – neuer Katalogeintrag"
-    },
-    {
-      "id": "auto-xhama-euro-glass-fushe-kosove",
-      "reason": "Nicht recherchiert – neuer Katalogeintrag"
-    },
-    {
-      "id": "auto-xhama-global-glass-fushe-kosove",
-      "reason": "Nicht recherchiert – neuer Katalogeintrag"
-    },
-    {
-      "id": "auto-xhama-premium-fushe-kosove",
-      "reason": "Nicht recherchiert – neuer Katalogeintrag"
-    },
-    {
-      "id": "autodetailing-iliri-skenderaj",
-      "reason": "Nicht recherchiert – neuer Katalogeintrag"
-    },
-    {
-      "id": "autozone-center-fushe-kosove",
-      "reason": "Nicht recherchiert – neuer Katalogeintrag"
-    },
-    {
       "id": "mana-auto-detailing-rahovec",
-      "reason": "Nicht recherchiert – neuer Katalogeintrag"
-    },
-    {
-      "id": "refresh-detailing-service-prishtina",
-      "reason": "Nicht recherchiert – neuer Katalogeintrag"
-    },
-    {
-      "id": "servis-kelmendi-suhareke",
       "reason": "Nicht recherchiert – neuer Katalogeintrag"
     },
     {

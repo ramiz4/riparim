@@ -4,6 +4,7 @@ import { ValidationError } from "@/lib/validation-error";
 import { storage } from "./storage";
 import canonical from "@/data/workshops.json";
 import emailSource from "@/data/workshop-emails.json";
+import hoursSource from "@/data/opening-hours-import.json";
 import contactSource from "@/data/workshop-contacts.json";
 import {
   validateWorkshopContacts,
@@ -40,6 +41,7 @@ export function catalogueSeedKey() {
     catalogue,
     contacts.contacts,
     emails.contacts,
+    hoursSource,
   ));
 }
 export { decodeProfile } from "./workshop-record";
@@ -62,6 +64,7 @@ export async function ensureInitialCatalog() {
     catalogue,
     contacts.contacts,
     emails.contacts,
+    hoursSource,
   );
   // Bounded, repeatable batches also support large imports; the completion marker is last.
   for (let i = 0; i < statements.length; i += 50)

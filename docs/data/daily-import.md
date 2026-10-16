@@ -45,6 +45,12 @@ before activation and after deployment.
    Match Place ID, international phone, aliases, address and location; assess branches
    separately. Incomplete live comparison blocks mutation. Export catalogue/public
    fields only; private accounts, visits and evidence stay outside this comparison.
+5. Research opening hours on the business's own public sources. If no usable schedule
+   is attributable to the verified site, use the user-authorized standard fallback
+   through the existing hours preparer and retain explicit `assumed` provenance.
+   Never copy Google hours or invent owner confirmation. The release imports the
+   checked hours manifest before uploading the Worker; existing owner plans and
+   suppression markers remain authoritative.
 
 ## Prepare and publish
 
