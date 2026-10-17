@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "3347cfbbee292cc847e2895f896fa8dfe87e5a8b0ee725336d0a2e65b8bbcac9",
+  "revision": "684f8a75707453108b990cfc740ca5b35977b5454eef1b520ef53b3f87ee84d4",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -12613,6 +12613,99 @@
       }
     },
     {
+      "id": "fiat-toplica-obiliq",
+      "expected": {
+        "name": "Fiat Toplica",
+        "city": "Obiliq",
+        "address": "Hasan Prishtina 620, Magjistralja Prishtinë–Obiliq",
+        "phone": "+38344174568"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              },
+              {
+                "start": "19:00",
+                "end": "20:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-17",
+        "source": "https://www.facebook.com/p/Fiat-Toplica-100064721136962/",
+        "sourceName": "Fiat Toplica",
+        "researchStatus": "Gefunden (eigener Betriebsauftritt)",
+        "notes": "Retain explicitly published Saturday second interval; do not infer continuous opening or owner confirmation. Own full Facebook hours dialog has no update age displayed.",
+        "originalWeek": [
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00,19:00-20:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "foleja-motors",
       "expected": {
         "name": "Foleja Motors",
@@ -13416,6 +13509,87 @@
           "09:00-19:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "ma-auto-detailing-viti",
+      "expected": {
+        "name": "MA Auto Detailing",
+        "city": "Viti",
+        "address": "Rruga Agim Ramadani, Viti",
+        "phone": "+38344500869"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-17",
+        "source": "https://www.instagram.com/ma_autodetailing/",
+        "sourceName": "MA Auto Detailing",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own sources checked on 2026-10-17: https://www.instagram.com/ma_autodetailing/, https://www.facebook.com/profile.php?id=61556436233213. No own complete weekly schedule displayed. Central explicitly assumed defaults required. No usable independently sourced weekly schedule; user-authorized central standard fallback is explicitly assumed, not owner-confirmed. Source age undated; check date is not a business confirmation.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -14395,6 +14569,87 @@
           "09:00-19:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "reforma-automotive-audi-obiliq",
+      "expected": {
+        "name": "Reforma Automotive - Audi",
+        "city": "Obiliq",
+        "address": "Gjergj Fishta, Kastriot, Obiliq 15000",
+        "phone": "+38344504604"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-17",
+        "source": "https://audireforma.com/",
+        "sourceName": "Reforma Automotive - Audi",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own sources checked on 2026-10-17: https://audireforma.com/, https://audireforma.com/kontakt/, https://audireforma.com/servis/, https://www.instagram.com/audireforma/, https://www.facebook.com/reformacompany/directory_basic_info. Own site/service/contact and own complete IG bio/FB details have no weekly hours. Central explicitly assumed defaults required. No usable independently sourced weekly schedule; user-authorized central standard fallback is explicitly assumed, not owner-confirmed. Source age undated; check date is not a business confirmation.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
