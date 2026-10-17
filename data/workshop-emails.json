@@ -3150,6 +3150,19 @@
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
     },
     {
+      "workshopId": "fiat-toplica-obiliq",
+      "matchedName": "Fiat Toplica",
+      "matchedPhone": "+38344174568",
+      "matchedCity": "Obiliq",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://www.facebook.com/p/Fiat-Toplica-100064721136962/",
+        "https://www.instagram.com/fiat_toplica/"
+      ],
+      "notes": "Own Facebook full contact-information tab, own IG bio and exact-name/email search checked; no attributable business email or separate own website. Foreign tuning-company contact rejected."
+    },
+    {
       "workshopId": "foleja-motors",
       "matchedName": "Foleja Motors",
       "matchedPhone": "+38349959596",
@@ -3333,6 +3346,20 @@
         "https://www.facebook.com/LuxuryAutoDetailingGjilan/"
       ],
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
+    },
+    {
+      "workshopId": "ma-auto-detailing-viti",
+      "matchedName": "MA Auto Detailing",
+      "matchedPhone": "+38344500869",
+      "matchedCity": "Viti",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://www.instagram.com/ma_autodetailing/",
+        "https://www.instagram.com/reel/DAnvpfYA2yj/",
+        "https://www.facebook.com/profile.php?id=61556436233213"
+      ],
+      "notes": "Own complete IG bio and linked own Facebook business header/details, plus exact own-name/phone/email source search checked; no business email or separate own website found."
     },
     {
       "workshopId": "mana-auto-detailing-rahovec",
@@ -3589,6 +3616,31 @@
         "https://www.facebook.com/sfishtaautohome/"
       ],
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
+    },
+    {
+      "workshopId": "reforma-automotive-audi-obiliq",
+      "matchedName": "Reforma Automotive - Audi",
+      "matchedPhone": "+38344504604",
+      "matchedCity": "Obiliq",
+      "emails": [
+        {
+          "address": "artan.shala@reforma-pr.com",
+          "sourceUrls": [
+            "https://www.facebook.com/reformacompany/directory_contact_info"
+          ],
+          "checkedAt": "2026-10-17",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://audireforma.com/",
+        "https://audireforma.com/servis/",
+        "https://audireforma.com/kontakt/",
+        "https://www.instagram.com/audireforma/",
+        "https://www.facebook.com/reformacompany/"
+      ],
+      "notes": "Public business email on the attributed own source; no deliverability, consent or ownership claim; no message sent."
     },
     {
       "workshopId": "refresh-detailing-service-prishtina",

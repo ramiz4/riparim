@@ -4131,6 +4131,36 @@
       }
     },
     {
+      "id": "fiat-toplica-obiliq",
+      "sourceHash": "e5405937459d110fc9334a4be17e6f917c7629f2117c46e17a6989b8cbf45b85",
+      "sq": {
+        "specialty": "Servis veturash · Servis vaji",
+        "description": "Fiat Toplica ofron servis për Fiat, Alfa Romeo dhe Lancia sipas profilit të vet të biznesit. Biznesi publikon adresën Hasan Prishtina 620 në rrugën Prishtinë–Obiliq; profili i vet në Instagram ka edhe një rubrikë për servis vaji.",
+        "serviceDetails": [
+          "Servis veturash për Fiat, Alfa Romeo dhe Lancia",
+          "Servis vaji sipas profilit të vet në Instagram"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet në Facebook: shërbimet, vendndodhja e saktë dhe kontakti",
+          "Profili i vet në Instagram: kontakti dhe rubrika e servisit të vajit"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle servicing · Oil service",
+        "description": "Fiat Toplica offers servicing for Fiat, Alfa Romeo and Lancia according to its own business profile. The business publishes its address as Hasan Prishtina 620 on the Prishtinë–Obiliq road; its own Instagram profile also includes an oil-service section.",
+        "serviceDetails": [
+          "Vehicle servicing for Fiat, Alfa Romeo and Lancia",
+          "Oil service according to its own Instagram profile"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own Facebook page: service scope, precise location and contact",
+          "Own Instagram profile: contact and oil-service section"
+        ]
+      }
+    },
+    {
       "id": "foleja-motors",
       "sourceHash": "d68985a5d97c020a177f3b85e1699c1c6d4da54a651f36d88527b512111a6ef0",
       "sq": {
@@ -4378,6 +4408,38 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "ma-auto-detailing-viti",
+      "sourceHash": "a8ed5d5dec0cbf8d2831319190f265ba3a2cfffbfc16404e72e8162b48d78d24",
+      "sq": {
+        "specialty": "Polirim · Mbrojtje me qeramikë · Pastrim i brendshëm",
+        "description": "MA Auto Detailing në Viti ofron polirim veturash, mbrojtje me qeramikë dhe pastrim të hollësishëm të brendshëm. Profilet e vetë biznesit e përmendin Rrugën Agim Ramadani si vendndodhje.",
+        "serviceDetails": [
+          "Polirim veturash dhe korrigjim i bojës",
+          "Vendosje e mbrojtjes me qeramikë",
+          "Pastrim i hollësishëm i brendshëm"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Profili i vet në Instagram: shërbimet, kontakti dhe vendndodhja",
+          "Faqja e vet në Facebook: vendndodhja, kontakti i biznesit dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle polishing · Ceramic protection · Interior detailing",
+        "description": "MA Auto Detailing in Viti offers vehicle polishing, ceramic protection and thorough interior detailing. Its own business profiles identify Rruga Agim Ramadani as the location.",
+        "serviceDetails": [
+          "Vehicle polishing and paint correction",
+          "Application of ceramic protection",
+          "Thorough interior detailing"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own Instagram profile: services, contact and location",
+          "Own Facebook page: location, business contact and services"
         ]
       }
     },
@@ -4748,6 +4810,44 @@
           "Evidence of contact details, location and passenger-car servicing",
           "Evidence of contact details, location and passenger-car servicing",
           "Evidence of contact details, location and passenger-car servicing"
+        ]
+      }
+    },
+    {
+      "id": "reforma-automotive-audi-obiliq",
+      "sourceHash": "60d952322ece6d3f51fddeecb5aebfb30b0d14a605b17b31ac6d941498aba181",
+      "sq": {
+        "specialty": "Mirëmbajtje veturash · Diagnostikim · Mekanikë dhe elektrikë",
+        "description": "Reforma Automotive - Audi në Obiliq publikon mirëmbajtje dhe riparime për Audi, Volkswagen, Škoda dhe SEAT. Faqja e vet e servisit përmend diagnostikim elektronik, ndërrim vaji dhe filtrash, si dhe punime mekanike, elektrike, në klimë, frena dhe sistemin e ecjes. Profili i vet në Instagram e përmend Gjergj Fishtën si vendndodhje.",
+        "serviceDetails": [
+          "Mirëmbajtje periodike dhe ndërrim vaji e filtrash",
+          "Diagnostikim elektronik i veturave",
+          "Riparime mekanike dhe elektrike",
+          "Servis i klimës, frenave dhe sistemit të ecjes"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet e servisit: riparimet, markat dhe kontakti i servisit",
+          "Faqja e vet e kontaktit: kontakte të ndara për servis dhe shitje",
+          "Profili i vet në Instagram: identiteti dhe vendndodhja e biznesit",
+          "Faqja e vet në Facebook: kontakti publik i biznesit dhe emaili"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle maintenance · Diagnostics · Mechanical and electrical repairs",
+        "description": "Reforma Automotive - Audi in Obiliq publishes maintenance and repairs for Audi, Volkswagen, Škoda and SEAT. Its own service page lists electronic diagnostics, oil and filter changes, and work on mechanical and electrical systems, air conditioning, brakes and suspension. Its own Instagram profile identifies Gjergj Fishta as the location.",
+        "serviceDetails": [
+          "Regular maintenance and oil and filter changes",
+          "Electronic vehicle diagnostics",
+          "Mechanical and electrical repairs",
+          "Air-conditioning, brake and suspension servicing"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own service page: repairs, vehicle brands and service contact",
+          "Own contact page: separate service and sales contacts",
+          "Own Instagram profile: business identity and location",
+          "Own Facebook page: public business contact and email"
         ]
       }
     },

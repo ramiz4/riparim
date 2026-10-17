@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-16T10:44:17.504Z",
+  "updatedAt": "2026-10-17T03:29:52.671Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 188,
+    "published": 191,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 188 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 188,
+    "reason": "All 191 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 191,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -7308,6 +7308,54 @@
       }
     },
     {
+      "id": "fiat-toplica-obiliq",
+      "name": "Fiat Toplica",
+      "city": "Obiliq",
+      "address": "Hasan Prishtina 620, Magjistralja Prishtinë–Obiliq",
+      "phone": "+38344174568",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": ["Fiat", "Alfa Romeo", "Lancia"],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Fahrzeugservice für Fiat, Alfa Romeo und Lancia",
+        "Ölservice laut eigenem Instagram-Auftritt"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice · Ölservice",
+      "description": "Fiat Toplica bietet laut eigenem Betriebsauftritt Fahrzeugservice für Fiat, Alfa Romeo und Lancia an. Der Betrieb veröffentlicht die Adresse Hasan Prishtina 620 an der Straße Prishtinë–Obiliq; der eigene Instagram-Auftritt zeigt auch einen Ölservice-Bereich.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/p/Fiat-Toplica-100064721136962/",
+          "title": "Eigene Facebook-Seite: Leistungsumfang, genauer Standort und Kontakt",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/fiat_toplica/",
+          "title": "Eigener Instagram-Auftritt: Kontakt und Ölservice-Bereich",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-17",
+      "status": "published",
+      "updatedAt": "2026-10-17T03:29:17.060Z",
+      "google": {
+        "placeId": "ChIJUzpAGuGfVBMRAQuM6MRUUQ8",
+        "matchedAt": "2026-10-17T03:28:44Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.facebook.com/p/Fiat-Toplica-100064721136962/",
+            "https://www.instagram.com/fiat_toplica/"
+          ],
+          "note": "Public Maps UI in the confirmed project account: independently sourced name, international phone and precise site match an active entry. Place ID read from a visible official link and returned with an unrelated London fallback. All catalogue fields use independent business sources; no ownership claim or current Google content adopted."
+        }
+      }
+    },
+    {
       "id": "foleja-motors",
       "name": "Foleja Motors",
       "city": "Prishtina",
@@ -7714,6 +7762,55 @@
             "https://www.findglocal.com/XK/Gjilan/1168160443205697/Luxury-Auto-Detailing"
           ],
           "note": "Current posts by the business confirm the same phone contact and Mulla Idrizi III in Gjilan. The conflicting older directory Plus Code is not adopted. Direct Place Details ID check passed."
+        }
+      }
+    },
+    {
+      "id": "ma-auto-detailing-viti",
+      "name": "MA Auto Detailing",
+      "city": "Viti",
+      "address": "Rruga Agim Ramadani, Viti",
+      "phone": "+38344500869",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Fahrzeugpolitur und Lackkorrektur",
+        "Auftragen von Keramikschutz",
+        "Gründliche Innenraumaufbereitung"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugpolitur · Keramikschutz · Innenraumaufbereitung",
+      "description": "MA Auto Detailing in Viti bietet Fahrzeugpolitur, Keramikschutz und gründliche Innenraumaufbereitung an. Die eigenen Betriebsprofile nennen die Rruga Agim Ramadani als Standort.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.instagram.com/ma_autodetailing/",
+          "title": "Eigener Instagram-Auftritt: Leistungen, Kontakt und Standort",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/profile.php?id=61556436233213",
+          "title": "Eigene Facebook-Seite: Standort, Geschäftskontakt und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-17",
+      "status": "published",
+      "updatedAt": "2026-10-17T03:29:17.060Z",
+      "google": {
+        "placeId": "ChIJERwhAwBjVBMRNScHSHrYnqo",
+        "matchedAt": "2026-10-17T03:24:00Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.instagram.com/ma_autodetailing/",
+            "https://www.facebook.com/profile.php?id=61556436233213"
+          ],
+          "note": "Public Maps UI in the confirmed project account: independently sourced name, international phone and precise site match an active entry. Place ID read from a visible official link and returned with an unrelated London fallback. All catalogue fields use independent business sources; no ownership claim or current Google content adopted."
         }
       }
     },
@@ -8400,6 +8497,74 @@
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJ-5d0UsmhVBMRBQBORVPLs7A"
           ],
           "note": "The business's own service advertisement links the existing contact to Sfishta Auto Home in Bardhosh. Official contract evidence names Auto Home and N.T.SH. Sfishta together with the additional business phone contact; this matches the confirmed Google entry under the historical Kosovo dialing code. Passenger-car service, operational continuity and the directly checked Place ID are evidenced; no legal merger is claimed."
+        }
+      }
+    },
+    {
+      "id": "reforma-automotive-audi-obiliq",
+      "name": "Reforma Automotive - Audi",
+      "city": "Obiliq",
+      "address": "Gjergj Fishta, Kastriot, Obiliq 15000",
+      "phone": "+38344504604",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": ["Audi", "Volkswagen", "Škoda", "SEAT"],
+      "services": [
+        "Inspektion & Wartung",
+        "Diagnose & Elektronik",
+        "Bremsen & Fahrwerk",
+        "Motor & Getriebe",
+        "Reifen & Klima"
+      ],
+      "serviceDetails": [
+        "Regelmäßige Wartung und Öl- und Filterwechsel",
+        "Elektronische Fahrzeugdiagnose",
+        "Mechanische und elektrische Reparaturen",
+        "Service an Klimaanlage, Bremsen und Fahrwerk"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugwartung · Diagnose · Mechanik und Elektrik",
+      "description": "Reforma Automotive - Audi in Obiliq veröffentlicht Wartung und Reparaturen für Audi, Volkswagen, Škoda und SEAT. Die eigene Serviceseite nennt elektronische Diagnose, Öl- und Filterwechsel sowie Arbeiten an Mechanik, Elektrik, Klimaanlage, Bremsen und Fahrwerk. Der eigene Instagram-Auftritt nennt die Gjergj Fishta als Standort.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://audireforma.com/servis/",
+          "title": "Eigene Serviceseite: Reparaturen, Fahrzeugmarken und Servicekontakt",
+          "kind": "official"
+        },
+        {
+          "url": "https://audireforma.com/kontakt/",
+          "title": "Eigene Kontaktseite: getrennte Kontakte für Service und Verkauf",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/audireforma/",
+          "title": "Eigener Instagram-Auftritt: Betriebsidentität und Standort",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/reformacompany/",
+          "title": "Eigene Facebook-Seite: öffentlicher Geschäftskontakt und E-Mail",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-17",
+      "status": "published",
+      "updatedAt": "2026-10-17T03:29:17.060Z",
+      "google": {
+        "placeId": "ChIJm-wEsuSfVBMRvzD2H4ND4gM",
+        "matchedAt": "2026-10-17T03:28:44Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://audireforma.com/servis/",
+            "https://audireforma.com/kontakt/",
+            "https://www.instagram.com/audireforma/",
+            "https://www.facebook.com/reformacompany/"
+          ],
+          "note": "Public Maps UI in the confirmed project account: independently sourced name, international phone and precise site match an active entry. Place ID read from a visible official link and returned with an unrelated London fallback. All catalogue fields use independent business sources; no ownership claim or current Google content adopted."
         }
       }
     },
