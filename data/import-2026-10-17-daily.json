@@ -4,7 +4,7 @@
   "localDate": "2026-10-17",
   "timezone": "Europe/Zurich",
   "startedAt": "2026-10-17T03:04:28.516Z",
-  "checkedAt": "2026-10-17T03:36:29.318355+00:00",
+  "checkedAt": "2026-10-17T03:38:28.702057+00:00",
   "status": "local-import-prepared-awaiting-tests-review-ci-release",
   "completedDateGuard": false,
   "baseCommit": "71f44b87ea3af0fcc252876a059fa79545502e58",
@@ -860,7 +860,7 @@
       "name": "Auto Detailing EDI",
       "aliases": [],
       "sourceUrls": [],
-      "status": "resolved-published-this-run",
+      "status": "historical-resolved-published-before-this-run",
       "priorEvidence": [
         {
           "origin": "data/import-2026-10-10.json#notImported",
@@ -871,7 +871,7 @@
           "reason": "Kein eindeutig passender aktueller Google-Kontakt oder mehrere unbestätigte Standorte; nicht freigegeben."
         }
       ],
-      "deferredCause": "complete-current-maps-identity-missing",
+      "deferredCause": null,
       "nextCheck": "No repeat discovery: use the canonical/live identity under the published ID.",
       "publicBusinessEmail": {
         "address": null,
@@ -888,7 +888,8 @@
         "note": "Historical initial 06:03–06:13 attempt: Historical lead carried forward locally; email search not performed today because the required internal browser account cannot be confirmed. Check own website/contact page, attributable Facebook/Instagram and independent directory on resumption. This is not a not-found result. Browser access was subsequently confirmed on resumption; research remains pending unless this entry has a later checkedAt."
       },
       "resolvedWorkshopId": "auto-detailing-edi-malisheve",
-      "resolvedAt": "2026-10-16T11:08:33.179381Z"
+      "resolvedAt": "2026-10-16T11:08:33.179381Z",
+      "resolutionNote": "Published on2026-10-16 and already included in the188-profile baseline; not a new candidate or publication for2026-10-17."
     },
     {
       "name": "AutoGermia",
@@ -6199,6 +6200,11 @@
       "stage": "initial-local-core-check",
       "status": "resolved",
       "cause": "Existing hours importer test hardcoded182 plans/30 assumptions; cancellation produced secondary process-group EPERM. Fixed root inventory assertions; full rerun passed, no suites skipped."
+    },
+    {
+      "stage": "independent-standards-review",
+      "status": "corrected-awaiting-rereview",
+      "cause": "Historical resolved EDI entry incorrectly retained this-run label; now explicitly historical, preserving original October16 resolution timestamp."
     }
   ],
   "handoff": {
@@ -6307,6 +6313,8 @@
     "regressionCorrection": "Replaced brittle historical182/30 inventory assertions with nonempty researched/assumed coverage and complete applied-row count. Targeted hours suite and full core rerun passed."
   },
   "review": {
-    "status": "pending"
+    "status": "initial-review-completed-one-manifest-finding-corrected-awaiting-final-head-review",
+    "standards": "Historical EDI publication status corrected; no catalogue/hours/contact/translation/test findings.",
+    "spec": "Prepared change passed; operational acceptance still pending."
   }
 }
