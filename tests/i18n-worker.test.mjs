@@ -75,9 +75,17 @@ await withWorkerRuntime(
         (canonical.workshops.filter(
           (workshop) => workshop.status === "published",
         ).length +
-          2),
+          7),
     );
     assert(sitemapXml.includes("https://riparim.test/sq/serviset"));
+    for (const slug of ["prishtina", "prizren", "ferizaj", "peja", "gjakova"])
+      for (const locale of ["de", "sq", "en"])
+        assert(
+          sitemapXml.includes(
+            "https://riparim.test" + localizeHref(`/workshops/${slug}`, locale),
+          ),
+          "All Worker targets publish the same bounded city identities",
+        );
     const robotsResponse = await dispatchFetch(
       "https://riparim.test/robots.txt",
     );

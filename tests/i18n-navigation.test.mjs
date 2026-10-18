@@ -113,6 +113,11 @@ assert.equal(
 const routes = [
   ["/", "/sq", "/en"],
   ["/werkstaetten", "/sq/serviset", "/en/workshops"],
+  [
+    "/werkstaetten/prishtina",
+    "/sq/serviset/prishtina",
+    "/en/workshops/prishtina",
+  ],
   ["/werkstatt/fixture-id", "/sq/servis/fixture-id", "/en/workshop/fixture-id"],
   ["/anmelden", "/sq/hyr", "/en/login"],
   ["/registrieren", "/sq/regjistrohu", "/en/register"],
@@ -147,7 +152,10 @@ const nativePages = (await readdir("app/[locale]", { recursive: true }))
   .map(
     (file) =>
       "/" +
-      file.replace(/(?:^|\/)page\.tsx$/, "").replace("[id]", "fixture-id"),
+      file
+        .replace(/(?:^|\/)page\.tsx$/, "")
+        .replace("[id]", "fixture-id")
+        .replace("[city]", "prishtina"),
   );
 assert.deepEqual(
   routes.map((route) => stripLocalePrefix(route[2])).sort(),

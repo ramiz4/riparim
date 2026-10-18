@@ -140,13 +140,19 @@ try {
       "/werkstaetten",
       "/sq/serviset",
       "/en/workshops",
+      ...["prishtina", "prizren", "ferizaj", "peja", "gjakova"].flatMap(
+        (slug) =>
+          ["de", "sq", "en"].map((locale) =>
+            localizeHref(`/workshops/${slug}`, locale),
+          ),
+      ),
       "/werkstatt/fixture-public",
       "/sq/servis/fixture-public",
       "/en/workshop/fixture-public",
     ]
       .map((path) => origin + path)
       .sort(),
-    "Only canonical home, catalogue and published profiles enter the sitemap",
+    "Only canonical home, catalogue, five city pages and published profiles enter the sitemap",
   );
   assert(
     !sitemapXml.includes("fixture-draft") &&
@@ -217,6 +223,51 @@ try {
     assert.equal(response.status, 200, path + logs);
     assert.match(await response.text(), /Synthetic Node Workshop/);
   }
+  for (const locale of ["de", "sq", "en"])
+    for (const init of [
+      {},
+      { method: "HEAD" },
+      { headers: { RSC: "1", Accept: "text/x-component" } },
+    ]) {
+      const response = await fetch(
+        origin + localizeHref("/workshops/prishtina", locale),
+        init,
+      );
+      assert.equal(
+        response.status,
+        200,
+        "City routes use the same Node boundary",
+      );
+      const body = await response.text();
+      assert(!body.includes("Private Draft Workshop"));
+      if (init.method !== "HEAD")
+        assert(body.includes("Synthetic Node Workshop"));
+    }
+  const emptyCity = await fetch(origin + "/en/workshops/peja");
+  assert.equal(emptyCity.status, 200);
+  assert(
+    (await emptyCity.text()).includes(
+      "No profile is currently published for Peja",
+    ),
+  );
+  for (const path of [
+    "/werkstaetten/unknown",
+    "/en/workshops/unknown",
+    "/sq/serviset/prishtina/extra",
+  ])
+    for (const init of [
+      {},
+      { method: "HEAD" },
+      { headers: { RSC: "1", Accept: "text/x-component" } },
+    ]) {
+      const response = await fetch(origin + path, init);
+      assert.equal(
+        response.status,
+        404,
+        "Unsupported cities are real 404 in Node",
+      );
+      await response.text();
+    }
   for (const [alias, target] of [
     ["/en/werkstaetten?ort=Prizren", "/en/workshops?ort=Prizren"],
     [
