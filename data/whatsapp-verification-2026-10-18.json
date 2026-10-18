@@ -1,0 +1,1184 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-18T14:00:21.111Z",
+  "method": "whatsapp_web_phone_number_lookup",
+  "summary": {
+    "workshops": 194,
+    "uniquePhoneNumbers": 193,
+    "registeredPhoneNumbers": 171,
+    "notRegisteredPhoneNumbers": 22,
+    "unresolvedPhoneNumbers": 0,
+    "registeredWorkshops": 171,
+    "notRegisteredWorkshops": 23,
+    "previouslyListedWhatsAppWorkshops": 8,
+    "newlyEnabledWorkshops": 163
+  },
+  "evidence": {
+    "interface": "WhatsApp Web > New chat > Phone number",
+    "registered": "The exact public catalogue number returned an account result after the input was cleared and the number was entered.",
+    "not_registered": "The exact public catalogue number returned \"No results found\". AS Motors was additionally checked through a direct chat link, which explicitly reported that the number was not on WhatsApp.",
+    "observation": "Delayed responses were revisited before recording a final result. Account profile names, chats and private account information were not retained.",
+    "authorization": "The user explicitly requested enabling the existing WhatsApp button for every successfully checked catalogue number.",
+    "limits": "Registration was observed at the recorded time. It does not establish owner confirmation, acceptance of workshop inquiries, message delivery or responsiveness. No messages, calls, invitations or contact writes were performed."
+  },
+  "checks": [
+    {
+      "workshopIds": ["advance-detailing-prishtina"],
+      "phone": "+38349909229",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:49:39.947Z"
+    },
+    {
+      "workshopIds": ["ahp-volkswagen-prizren"],
+      "phone": "+38344561161",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:50:11.057Z"
+    },
+    {
+      "workshopIds": ["ali-mercedesi-prishtina"],
+      "phone": "+38344164141",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:50:13.205Z"
+    },
+    {
+      "workshopIds": ["as-motors"],
+      "phone": "+38338536060",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T13:49:42.147Z"
+    },
+    {
+      "workshopIds": ["auspuh-servis-kurti-td-gjakova"],
+      "phone": "+38345651784",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T13:50:15.355Z"
+    },
+    {
+      "workshopIds": ["auto-beli-ferizaj"],
+      "phone": "+38344772003",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:50:17.498Z"
+    },
+    {
+      "workshopIds": ["auto-cosmetic-fitimi-mitrovica"],
+      "phone": "+38349213901",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:50:19.666Z"
+    },
+    {
+      "workshopIds": ["auto-detailing-besi-prizren"],
+      "phone": "+38349990013",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:50:21.839Z"
+    },
+    {
+      "workshopIds": ["auto-detailing-edi-malisheve"],
+      "phone": "+38349534811",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:50:23.989Z"
+    },
+    {
+      "workshopIds": ["auto-detailing-meti-mitrovica"],
+      "phone": "+38343509444",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:50:26.172Z"
+    },
+    {
+      "workshopIds": ["auto-diagnostika-prishtina"],
+      "phone": "+38344112914",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:50:28.340Z"
+    },
+    {
+      "workshopIds": ["auto-elektricist-ermiri-prizren"],
+      "phone": "+38343738348",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:50:30.531Z"
+    },
+    {
+      "workshopIds": ["auto-elektricist-xhaviti-gjakova"],
+      "phone": "+38345273122",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T13:50:52.215Z"
+    },
+    {
+      "workshopIds": ["auto-elektrika-dzogovic-mitrovica"],
+      "phone": "+381649161436",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T13:50:54.397Z"
+    },
+    {
+      "workshopIds": ["auto-elektrika-samko-mitrovica"],
+      "phone": "+381669599440",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:50:56.598Z"
+    },
+    {
+      "workshopIds": ["auto-elektro-blendi-ferizaj"],
+      "phone": "+38344760607",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:50:58.816Z"
+    },
+    {
+      "workshopIds": ["auto-elektro-service-agroni-vushtrri"],
+      "phone": "+38344900333",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:51:00.980Z"
+    },
+    {
+      "workshopIds": ["auto-elektro-servis-a-plus-prizren"],
+      "phone": "+38344205111",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T13:51:26.594Z"
+    },
+    {
+      "workshopIds": ["auto-elektro-servis-niki-gjilan"],
+      "phone": "+38344164468",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:51:28.232Z"
+    },
+    {
+      "workshopIds": ["auto-energjia"],
+      "phone": "+38344777775",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:51:30.382Z"
+    },
+    {
+      "workshopIds": ["auto-enzo-detailing-prishtina"],
+      "phone": "+38345524633",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:51:32.555Z"
+    },
+    {
+      "workshopIds": ["auto-fati-prizren"],
+      "phone": "+38344129120",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:51:34.716Z"
+    },
+    {
+      "workshopIds": ["auto-ford-service-prizren"],
+      "phone": "+38344605241",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:51:36.335Z"
+    },
+    {
+      "workshopIds": ["auto-glass-kosovo-fushe-kosove"],
+      "phone": "+38349219999",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:51:38.489Z"
+    },
+    {
+      "workshopIds": ["auto-laker-kimi-prishtina"],
+      "phone": "+38344294811",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:51:40.657Z"
+    },
+    {
+      "workshopIds": ["auto-limar-alajdini-prizren"],
+      "phone": "+38345909864",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T13:51:42.814Z"
+    },
+    {
+      "workshopIds": ["auto-llamarinier-luani-mitrovica"],
+      "phone": "+38344213762",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:51:44.991Z"
+    },
+    {
+      "workshopIds": ["auto-llamarist-valoni-peja"],
+      "phone": "+38349252003",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T13:51:47.122Z"
+    },
+    {
+      "workshopIds": ["auto-mita"],
+      "phone": "+38345686868",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:51:49.274Z"
+    },
+    {
+      "workshopIds": ["auto-moto-universum-gjilan"],
+      "phone": "+38349547577",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:51:51.414Z"
+    },
+    {
+      "workshopIds": ["auto-ngjyroses-goga-ferizaj"],
+      "phone": "+38348380560",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:52:16.231Z"
+    },
+    {
+      "workshopIds": ["auto-ngjyroses-izmiri-ferizaj"],
+      "phone": "+38345676606",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:52:18.372Z"
+    },
+    {
+      "workshopIds": ["auto-ngjyroses-shypi-ferizaj"],
+      "phone": "+38349729777",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:52:20.564Z"
+    },
+    {
+      "workshopIds": ["auto-ngjyrosje-egzoni-ferizaj"],
+      "phone": "+38344367105",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:52:22.765Z"
+    },
+    {
+      "workshopIds": ["auto-ngjyrosje-fadili-ferizaj"],
+      "phone": "+38344172013",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:52:24.922Z"
+    },
+    {
+      "workshopIds": ["auto-ngjyrosje-naseri-suhareke"],
+      "phone": "+38349491331",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:52:27.064Z"
+    },
+    {
+      "workshopIds": ["auto-picasso-prishtina"],
+      "phone": "+38344113775",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T13:52:29.224Z"
+    },
+    {
+      "workshopIds": ["auto-pjese-service-inovator-group-ferizaj"],
+      "phone": "+38349929000",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:52:31.374Z"
+    },
+    {
+      "workshopIds": ["auto-pjese-servis-fatosi-gracanice"],
+      "phone": "+38344668508",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:52:33.499Z"
+    },
+    {
+      "workshopIds": ["auto-pjese-servis-jaha-gjilan"],
+      "phone": "+38344296081",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:52:35.652Z"
+    },
+    {
+      "workshopIds": ["auto-rally-90-kline"],
+      "phone": "+38349138886",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:52:37.851Z"
+    },
+    {
+      "workshopIds": ["auto-regllazha-tabaku-peja"],
+      "phone": "+38349141187",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:52:40.002Z"
+    },
+    {
+      "workshopIds": ["auto-service-adonisi-gjilan"],
+      "phone": "+38344321126",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T13:52:42.185Z"
+    },
+    {
+      "workshopIds": ["auto-service-ardi-vushtrri"],
+      "phone": "+38349400386",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:52:44.335Z"
+    },
+    {
+      "workshopIds": ["auto-service-bardhi-peja"],
+      "phone": "+38349666755",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:52:46.477Z"
+    },
+    {
+      "workshopIds": ["auto-service-besi-vushtrri"],
+      "phone": "+38349205441",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:52:48.635Z"
+    },
+    {
+      "workshopIds": ["auto-service-bmw-visari-peja"],
+      "phone": "+38345511217",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:52:50.760Z"
+    },
+    {
+      "workshopIds": ["auto-service-demi"],
+      "phone": "+38349156789",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:52:52.954Z"
+    },
+    {
+      "workshopIds": ["auto-service-express-prishtina"],
+      "phone": "+38349595483",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:53:12.209Z"
+    },
+    {
+      "workshopIds": ["auto-service-kushtrimi-ferizaj"],
+      "phone": "+38345444656",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:53:14.402Z"
+    },
+    {
+      "workshopIds": ["auto-service-mali-prishtina"],
+      "phone": "+38343799021",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T13:53:16.552Z"
+    },
+    {
+      "workshopIds": ["auto-service-muslija-prizren"],
+      "phone": "+38344662200",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:53:18.714Z"
+    },
+    {
+      "workshopIds": ["auto-service-prekazi-vushtrri"],
+      "phone": "+38344296650",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:53:20.899Z"
+    },
+    {
+      "workshopIds": ["auto-service-rashani-vushtrri"],
+      "phone": "+38349684954",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:53:23.064Z"
+    },
+    {
+      "workshopIds": ["auto-service-tuli-rahovec"],
+      "phone": "+38344887896",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:53:25.211Z"
+    },
+    {
+      "workshopIds": ["auto-service-vali-istog"],
+      "phone": "+38344920210",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:53:27.362Z"
+    },
+    {
+      "workshopIds": ["auto-servis-agimi-gjakova"],
+      "phone": "+38344128553",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:53:29.518Z"
+    },
+    {
+      "workshopIds": ["auto-servis-anuari-prishtina"],
+      "phone": "+38348700548",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:53:31.697Z"
+    },
+    {
+      "workshopIds": ["auto-servis-arlindi-prishtina"],
+      "phone": "+38344848728",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:53:33.852Z"
+    },
+    {
+      "workshopIds": ["auto-servis-bajrami-peja"],
+      "phone": "+38349275728",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T13:53:36.002Z"
+    },
+    {
+      "workshopIds": ["auto-servis-bashkimi-viti"],
+      "phone": "+38344431632",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:53:38.177Z"
+    },
+    {
+      "workshopIds": ["auto-servis-behari-suhareke"],
+      "phone": "+38349897683",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:53:40.343Z"
+    },
+    {
+      "workshopIds": ["auto-servis-berati-malisheve"],
+      "phone": "+38349378051",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:53:42.670Z"
+    },
+    {
+      "workshopIds": ["auto-servis-besimi-kline"],
+      "phone": "+38344173716",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:53:44.577Z"
+    },
+    {
+      "workshopIds": ["auto-servis-bledi-kline"],
+      "phone": "+38349654571",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:53:46.727Z"
+    },
+    {
+      "workshopIds": ["auto-servis-blerti-podujeve"],
+      "phone": "+38343530001",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:53:48.888Z"
+    },
+    {
+      "workshopIds": ["auto-servis-bmw-balia-prishtina"],
+      "phone": "+38349169839",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:54:04.195Z"
+    },
+    {
+      "workshopIds": ["auto-servis-budi-prishtina"],
+      "phone": "+38345454535",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:54:06.096Z"
+    },
+    {
+      "workshopIds": ["auto-servis-buli-prishtina"],
+      "phone": "+38349288882",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:54:08.287Z"
+    },
+    {
+      "workshopIds": ["auto-servis-cima-ferizaj"],
+      "phone": "+38345260944",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:54:17.470Z"
+    },
+    {
+      "workshopIds": ["auto-servis-cufa-ferizaj"],
+      "phone": "+38344453222",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:54:19.648Z"
+    },
+    {
+      "workshopIds": ["auto-servis-diagnoz-opel-malisheve"],
+      "phone": "+38349284990",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:54:21.833Z"
+    },
+    {
+      "workshopIds": ["auto-servis-doni-skenderaj"],
+      "phone": "+38349255770",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:54:23.997Z"
+    },
+    {
+      "workshopIds": ["auto-servis-edi-fushe-kosove"],
+      "phone": "+38345411022",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:54:26.158Z"
+    },
+    {
+      "workshopIds": ["auto-servis-enisi-obiliq"],
+      "phone": "+38344809246",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:54:28.299Z"
+    },
+    {
+      "workshopIds": ["auto-servis-ermali-kline"],
+      "phone": "+38343538919",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:54:30.423Z"
+    },
+    {
+      "workshopIds": ["auto-servis-fitimi-suhareke"],
+      "phone": "+38349222437",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:54:32.573Z"
+    },
+    {
+      "workshopIds": ["auto-servis-ford-jashanica-prishtina"],
+      "phone": "+38344650843",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:54:34.780Z"
+    },
+    {
+      "workshopIds": ["auto-servis-gashi-peja"],
+      "phone": "+38345972775",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T13:54:36.956Z"
+    },
+    {
+      "workshopIds": ["auto-servis-gazi-gjakova"],
+      "phone": "+38344126233",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:54:39.151Z"
+    },
+    {
+      "workshopIds": ["auto-servis-genti-prishtina"],
+      "phone": "+38344208555",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:54:41.299Z"
+    },
+    {
+      "workshopIds": ["auto-servis-goni-peja"],
+      "phone": "+38349499177",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:54:43.448Z"
+    },
+    {
+      "workshopIds": ["auto-servis-good-year-gjakova"],
+      "phone": "+38344371634",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:54:45.581Z"
+    },
+    {
+      "workshopIds": ["auto-servis-joni-viti"],
+      "phone": "+38349866660",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:54:47.740Z"
+    },
+    {
+      "workshopIds": ["auto-servis-kema"],
+      "phone": "+38338537702",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T13:54:49.860Z"
+    },
+    {
+      "workshopIds": ["auto-servis-klima-peja"],
+      "phone": "+38349209635",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:54:51.971Z"
+    },
+    {
+      "workshopIds": ["auto-servis-lirimi-podujeve"],
+      "phone": "+38345533746",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:54:53.763Z"
+    },
+    {
+      "workshopIds": ["auto-servis-lumi-m-gjakova"],
+      "phone": "+38349339252",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:54:55.662Z"
+    },
+    {
+      "workshopIds": ["auto-servis-maloku-decan"],
+      "phone": "+38348919694",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:55:07.780Z"
+    },
+    {
+      "workshopIds": ["auto-servis-megi-drenas"],
+      "phone": "+38344979970",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:55:09.879Z"
+    },
+    {
+      "workshopIds": ["auto-servis-mercedes-benz-vedati-prishtina"],
+      "phone": "+38344496496",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:55:12.035Z"
+    },
+    {
+      "workshopIds": ["auto-servis-meti-rahovec"],
+      "phone": "+38344385480",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:55:14.185Z"
+    },
+    {
+      "workshopIds": ["auto-servis-montimi-rahovec"],
+      "phone": "+38344269197",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:55:16.327Z"
+    },
+    {
+      "workshopIds": ["auto-servis-muriqi-prizren"],
+      "phone": "+38344126700",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:55:18.486Z"
+    },
+    {
+      "workshopIds": ["auto-servis-naimi-vushtrri"],
+      "phone": "+38344198428",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:55:20.648Z"
+    },
+    {
+      "workshopIds": ["auto-servis-nazi-drenas"],
+      "phone": "+38344405002",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:55:22.789Z"
+    },
+    {
+      "workshopIds": ["auto-servis-nexhi-lipjan"],
+      "phone": "+38344736933",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:55:24.958Z"
+    },
+    {
+      "workshopIds": ["auto-servis-perparimi-ferizaj"],
+      "phone": "+38344444713",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:55:27.123Z"
+    },
+    {
+      "workshopIds": ["auto-servis-pirqi-vushtrri"],
+      "phone": "+38344444556",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:55:29.300Z"
+    },
+    {
+      "workshopIds": ["auto-servis-potera-gracanice"],
+      "phone": "+38344169468",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:55:31.457Z"
+    },
+    {
+      "workshopIds": ["auto-servis-rizvanolli-gjakova"],
+      "phone": "+38344605905",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:55:33.648Z"
+    },
+    {
+      "workshopIds": ["auto-servis-sejda-gjilan"],
+      "phone": "+38344177086",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:55:35.826Z"
+    },
+    {
+      "workshopIds": ["auto-servis-sistem-mazgit"],
+      "phone": "+38344168690",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:55:37.940Z"
+    },
+    {
+      "workshopIds": ["auto-servis-trimi-prishtina"],
+      "phone": "+38349195447",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:55:40.131Z"
+    },
+    {
+      "workshopIds": ["auto-servis-univerzal-lipjan"],
+      "phone": "+38344269491",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:55:42.267Z"
+    },
+    {
+      "workshopIds": ["auto-servis-visari-prizren"],
+      "phone": "+38349120572",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:55:44.423Z"
+    },
+    {
+      "workshopIds": ["auto-servis-visco-prizren"],
+      "phone": "+38344122498",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:56:06.510Z"
+    },
+    {
+      "workshopIds": ["auto-servis-xhelali-prizren"],
+      "phone": "+38343525525",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:56:08.658Z"
+    },
+    {
+      "workshopIds": ["auto-servis-xoni-gjilan"],
+      "phone": "+38349231674",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:56:10.824Z"
+    },
+    {
+      "workshopIds": ["auto-star-xharra-gjakova"],
+      "phone": "+38349588500",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:56:12.983Z"
+    },
+    {
+      "workshopIds": ["auto-tershana"],
+      "phone": "+38344177020",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:56:15.148Z"
+    },
+    {
+      "workshopIds": ["auto-xhama-euro-glass-fushe-kosove"],
+      "phone": "+38344102010",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:56:17.341Z"
+    },
+    {
+      "workshopIds": ["auto-xhama-global-glass-fushe-kosove"],
+      "phone": "+38349450437",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:56:19.504Z"
+    },
+    {
+      "workshopIds": ["auto-xhama-premium-fushe-kosove"],
+      "phone": "+38345232341",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:56:21.670Z"
+    },
+    {
+      "workshopIds": ["autoavangarde-bmw-service-peja"],
+      "phone": "+38349327220",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T13:56:23.831Z"
+    },
+    {
+      "workshopIds": ["autodetailing-iliri-skenderaj"],
+      "phone": "+38349467181",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:56:25.982Z"
+    },
+    {
+      "workshopIds": ["autodetailingdaja-vushtrri"],
+      "phone": "+38349457010",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:56:28.145Z"
+    },
+    {
+      "workshopIds": ["autodiagnoza-bardhi"],
+      "phone": "+38345664521",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:56:30.286Z"
+    },
+    {
+      "workshopIds": ["autodiagnoza-kosove-prishtina"],
+      "phone": "+38344260318",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:56:32.477Z"
+    },
+    {
+      "workshopIds": ["autoelektrika-naimi-prishtina"],
+      "phone": "+38344128583",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:56:34.695Z"
+    },
+    {
+      "workshopIds": ["autohouse-pjese-servis-ferizaj"],
+      "phone": "+38348666007",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:56:36.504Z"
+    },
+    {
+      "workshopIds": ["automehanicarska-radnja-gjilan"],
+      "phone": "+381649192290",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:56:38.403Z"
+    },
+    {
+      "workshopIds": ["automex-gjakova"],
+      "phone": "+38345592663",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:56:40.561Z"
+    },
+    {
+      "workshopIds": ["autongjyrosje-haskuka-prizren"],
+      "phone": "+38349278870",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:56:42.688Z"
+    },
+    {
+      "workshopIds": ["autopjese-service-nazi-ferizaj"],
+      "phone": "+38349297333",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:57:14.802Z"
+    },
+    {
+      "workshopIds": ["autoservice-a-m-vushtrri"],
+      "phone": "+38344151645",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:57:16.988Z"
+    },
+    {
+      "workshopIds": ["autoservis-agimi-peja"],
+      "phone": "+38349850252",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:57:19.163Z"
+    },
+    {
+      "workshopIds": ["autoservis-keni-prishtina"],
+      "phone": "+38349353500",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:57:21.329Z"
+    },
+    {
+      "workshopIds": ["autoservis-krasniqi-suhareke"],
+      "phone": "+38349593002",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:57:23.506Z"
+    },
+    {
+      "workshopIds": ["autoservis-pg-bosch-prishtina"],
+      "phone": "+38344282504",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:57:25.706Z"
+    },
+    {
+      "workshopIds": ["autoservis-semini-prizren"],
+      "phone": "+38349424287",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:57:27.856Z"
+    },
+    {
+      "workshopIds": ["autotrade-toyota"],
+      "phone": "+38338600260",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T13:57:29.488Z"
+    },
+    {
+      "workshopIds": ["autozone-center-fushe-kosove"],
+      "phone": "+38349870800",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:57:31.640Z"
+    },
+    {
+      "workshopIds": ["baki-automobile"],
+      "phone": "+38344505499",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:57:33.782Z"
+    },
+    {
+      "workshopIds": ["ballkan-auto-garage-gjilan"],
+      "phone": "+38344133332",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:57:35.639Z"
+    },
+    {
+      "workshopIds": ["bmw-prishtina-prishtina"],
+      "phone": "+38346160902",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:57:37.540Z"
+    },
+    {
+      "workshopIds": ["bmw-service-ferizaj"],
+      "phone": "+38344116212",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:57:39.681Z"
+    },
+    {
+      "workshopIds": ["cesko-auto-service-prizren"],
+      "phone": "+38345623482",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:57:41.824Z"
+    },
+    {
+      "workshopIds": ["dd-auto-service"],
+      "phone": "+38348603353",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:57:43.984Z"
+    },
+    {
+      "workshopIds": ["delfin-auto-citroen"],
+      "phone": "+38349196902",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:57:46.152Z"
+    },
+    {
+      "workshopIds": ["dida-service-prizren"],
+      "phone": "+38349955682",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:57:48.290Z"
+    },
+    {
+      "workshopIds": ["dpf-auto-gjini-prizren"],
+      "phone": "+38349445589",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:57:50.458Z"
+    },
+    {
+      "workshopIds": ["drini-detailing-more-podujeve"],
+      "phone": "+38349222947",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:58:12.458Z"
+    },
+    {
+      "workshopIds": ["eurogoma-ferizaj"],
+      "phone": "+38349504424",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:58:14.623Z"
+    },
+    {
+      "workshopIds": ["eurogoma-gjakova", "eurogoma-mitrovica"],
+      "phone": "+38349324436",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T13:58:16.958Z"
+    },
+    {
+      "workshopIds": ["eurogoma-prizren-lubizhde"],
+      "phone": "+38349744232",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:58:18.893Z"
+    },
+    {
+      "workshopIds": ["eurogoma-prizren-ortakoll"],
+      "phone": "+38349475061",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:58:21.056Z"
+    },
+    {
+      "workshopIds": ["fiat-prishtina"],
+      "phone": "+38344254528",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:58:23.215Z"
+    },
+    {
+      "workshopIds": ["fiat-toplica-obiliq"],
+      "phone": "+38344174568",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:58:25.349Z"
+    },
+    {
+      "workshopIds": ["foleja-motors"],
+      "phone": "+38349959596",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:58:27.490Z"
+    },
+    {
+      "workshopIds": ["garage-fita-gjilan"],
+      "phone": "+38349273699",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:58:29.667Z"
+    },
+    {
+      "workshopIds": ["global-automotive"],
+      "phone": "+38344409000",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:58:31.823Z"
+    },
+    {
+      "workshopIds": ["goni-ari"],
+      "phone": "+38349137315",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:58:34.024Z"
+    },
+    {
+      "workshopIds": ["greensteam-detailing-prishtina"],
+      "phone": "+38349880777",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:58:36.215Z"
+    },
+    {
+      "workshopIds": ["kio-garage-prizren"],
+      "phone": "+38344119976",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T13:58:38.399Z"
+    },
+    {
+      "workshopIds": ["koli-prishtina"],
+      "phone": "+38344810238",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:58:40.548Z"
+    },
+    {
+      "workshopIds": ["lipjani-coding-lipjan"],
+      "phone": "+38344415621",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:58:42.707Z"
+    },
+    {
+      "workshopIds": ["luxury-auto-detailing-gjilan"],
+      "phone": "+38345585263",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:58:44.857Z"
+    },
+    {
+      "workshopIds": ["ma-auto-detailing-viti"],
+      "phone": "+38344500869",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:58:46.988Z"
+    },
+    {
+      "workshopIds": ["mana-auto-detailing-rahovec"],
+      "phone": "+38349790676",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:58:49.131Z"
+    },
+    {
+      "workshopIds": ["mercedes-benz-baaf"],
+      "phone": "+38344508199",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:59:05.667Z"
+    },
+    {
+      "workshopIds": ["mercedes-benz-limi-service-istog"],
+      "phone": "+38344270982",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:59:07.850Z"
+    },
+    {
+      "workshopIds": ["mercedes-isa-ferizaj"],
+      "phone": "+38349999343",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:59:09.951Z"
+    },
+    {
+      "workshopIds": ["mercedes-service-ballkan-peja"],
+      "phone": "+38349774250",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:59:12.081Z"
+    },
+    {
+      "workshopIds": ["nero-prizren"],
+      "phone": "+38344428865",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:59:14.215Z"
+    },
+    {
+      "workshopIds": ["olluri-ferizaj"],
+      "phone": "+38344121791",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:59:16.357Z"
+    },
+    {
+      "workshopIds": ["opel-e-rafuna-prishtina"],
+      "phone": "+38344545140",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T13:59:18.509Z"
+    },
+    {
+      "workshopIds": ["opel-zh-sh-gjakova"],
+      "phone": "+38343730111",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:59:20.658Z"
+    },
+    {
+      "workshopIds": ["peugeot-te-beda-prishtina"],
+      "phone": "+38344171570",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T13:59:22.790Z"
+    },
+    {
+      "workshopIds": ["porsche-prishtina"],
+      "phone": "+38338606900",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T13:59:24.917Z"
+    },
+    {
+      "workshopIds": ["prishtina-auto-home-prishtina"],
+      "phone": "+38344949888",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:59:27.082Z"
+    },
+    {
+      "workshopIds": ["reforma-automotive-audi-obiliq"],
+      "phone": "+38344504604",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:59:29.281Z"
+    },
+    {
+      "workshopIds": ["refresh-detailing-service-prishtina"],
+      "phone": "+38349854800",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:59:31.418Z"
+    },
+    {
+      "workshopIds": ["reno-muciqi-bllaca-obiliq"],
+      "phone": "+38344201301",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:59:33.601Z"
+    },
+    {
+      "workshopIds": ["rex-automobile-prizren"],
+      "phone": "+38344119538",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:59:35.774Z"
+    },
+    {
+      "workshopIds": ["ridvan-ferizaj"],
+      "phone": "+38345613617",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:59:37.948Z"
+    },
+    {
+      "workshopIds": ["servis-kelmendi-suhareke"],
+      "phone": "+38349229141",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:59:39.775Z"
+    },
+    {
+      "workshopIds": ["servis-kurtaj-erolls-prizren"],
+      "phone": "+38344940015",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:59:41.661Z"
+    },
+    {
+      "workshopIds": ["shala-detailing-gjakova"],
+      "phone": "+38345425689",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:59:50.903Z"
+    },
+    {
+      "workshopIds": ["sheki-benz-vushtrri"],
+      "phone": "+38349196189",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:59:53.053Z"
+    },
+    {
+      "workshopIds": ["shine-detailing-studio-prishtina"],
+      "phone": "+38349757144",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:59:55.211Z"
+    },
+    {
+      "workshopIds": ["sokoli-autoelectronic-peja"],
+      "phone": "+38349326545",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:59:57.361Z"
+    },
+    {
+      "workshopIds": ["sonic-garage"],
+      "phone": "+38345934924",
+      "status": "registered",
+      "checkedAt": "2026-10-18T13:59:59.537Z"
+    },
+    {
+      "workshopIds": ["stavileci-tuning-mitrovica"],
+      "phone": "+38349400650",
+      "status": "registered",
+      "checkedAt": "2026-10-18T14:00:01.680Z"
+    },
+    {
+      "workshopIds": ["superclean-prishtina"],
+      "phone": "+38345677633",
+      "status": "registered",
+      "checkedAt": "2026-10-18T14:00:03.837Z"
+    },
+    {
+      "workshopIds": ["tiptop-detailing-gjakova"],
+      "phone": "+38349323545",
+      "status": "registered",
+      "checkedAt": "2026-10-18T14:00:06.003Z"
+    },
+    {
+      "workshopIds": ["titans-auto-repair-prishtina"],
+      "phone": "+38349116411",
+      "status": "registered",
+      "checkedAt": "2026-10-18T14:00:08.144Z"
+    },
+    {
+      "workshopIds": ["turbo-service-engineering-prishtina"],
+      "phone": "+38344552232",
+      "status": "registered",
+      "checkedAt": "2026-10-18T14:00:10.313Z"
+    },
+    {
+      "workshopIds": ["universal-auto-pjese-servis-gjilan"],
+      "phone": "+38344304686",
+      "status": "registered",
+      "checkedAt": "2026-10-18T14:00:12.480Z"
+    },
+    {
+      "workshopIds": ["valoni-i-mitrovica"],
+      "phone": "+38349303929",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T14:00:14.654Z"
+    },
+    {
+      "workshopIds": ["waxon-auto-detailing-mitrovica"],
+      "phone": "+38343800098",
+      "status": "registered",
+      "checkedAt": "2026-10-18T14:00:16.805Z"
+    },
+    {
+      "workshopIds": ["xhela-polir-mitrovica"],
+      "phone": "+38349227726",
+      "status": "registered",
+      "checkedAt": "2026-10-18T14:00:18.955Z"
+    },
+    {
+      "workshopIds": ["ylli-performance-chip-tuning-gjilan"],
+      "phone": "+38345332669",
+      "status": "not_registered",
+      "checkedAt": "2026-10-18T14:00:21.111Z"
+    }
+  ]
+}
