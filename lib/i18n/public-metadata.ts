@@ -1,4 +1,5 @@
 import { guidePagePaths } from "../guide-routes";
+import { cityPagePaths } from "../workshop-cities";
 import type { Metadata } from "next";
 import { locales, localizeHref, pageIdentityPath, type Locale } from "./locale";
 export type PublicPageQuery = Record<string, string | string[] | undefined>;
@@ -23,7 +24,13 @@ export function publicMetadata(
     new URL(path, "https://riparim.invalid").pathname,
   );
   const publicPage =
-    ["/", "/workshops", "/privacy", ...guidePagePaths].includes(identity) ||
+    [
+      "/",
+      "/workshops",
+      "/privacy",
+      ...cityPagePaths,
+      ...guidePagePaths,
+    ].includes(identity) ||
     /^\/workshop\/[a-z0-9][a-z0-9-]{2,80}$/.test(identity);
   if (!indexable || !publicPage)
     return {

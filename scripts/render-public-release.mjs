@@ -4,9 +4,21 @@ import { Miniflare } from "miniflare";
 import { execFileSync } from "node:child_process";
 import { localizeHref, guidePagePaths } from "./lib/locale.mjs";
 import { catalogueReleasePlan } from "./catalogue-release-plan.mjs";
+import { build } from "esbuild";
 import { releaseBuildTarget } from "./release-policy.mjs";
+import { publicAnalyticsBindings } from "./lib/public-analytics.mjs";
 
 if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
+  const cityBundle = await build({
+    entryPoints: ["lib/workshop-cities.ts"],
+    bundle: true,
+    write: false,
+    platform: "node",
+    format: "esm",
+  });
+  const { cityPagePaths } = await import(
+    `data:text/javascript;base64,${Buffer.from(cityBundle.outputFiles[0].contents).toString("base64")}`
+  );
   let phaseStarted = performance.now();
   function finishPhase(phase) {
     const ended = performance.now();
@@ -46,6 +58,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
     d1Databases: ["DB"],
     r2Buckets: ["BUCKET"],
     bindings: {
+      ...publicAnalyticsBindings(config.vars),
       SITE_ORIGIN: "https://riparim.com",
       PUBLIC_RELEASE_RENDER: "true",
     },
@@ -96,6 +109,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
       "/privacy",
       "/workshops",
       ...guidePagePaths,
+      ...cityPagePaths,
       ...published.map((workshop) => `/workshop/${workshop.id}`),
     ];
     const publicFile = (path) => (path === "/" ? "home" : path.slice(1));
@@ -173,8 +187,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
     await runtime.setOptions({
       ...options,
       bindings: {
-        SITE_ORIGIN: "https://riparim.com",
-        PUBLIC_RELEASE_RENDER: "true",
+        ...options.bindings,
         PUBLIC_RELEASE_AUTH_PROVIDER: "pocketbase",
       },
     });
@@ -210,7 +223,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
     await runtime.setOptions({
       ...options,
       bindings: {
-        SITE_ORIGIN: "https://riparim.com",
+        ...options.bindings,
         PUBLIC_RELEASE_RENDER: "shell",
       },
     });

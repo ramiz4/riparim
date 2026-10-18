@@ -17,6 +17,8 @@ Follow [Contributing](../CONTRIBUTING.md) for task isolation and PRs.
 - [Releases](operations/releases.md) and [Node hosting](operations/node.md).
 - [Auth providers](operations/auth-provider.md) and [Auth email templates](operations/auth-email-templates.md).
 - [Review email delivery](operations/mail-transports.md).
+- [Search discovery](operations/seo.md): sitemap submission and index inspection.
+- [Traffic and conversion analytics](operations/analytics.md).
 - [Backups](operations/backups.md) and [backup monitoring](operations/backup-monitoring.md).
 - [Data transfer](operations/data-transfer.md), [provider switching](operations/provider-switch.md)
   and [domain cutover](operations/domain-cutover.md).

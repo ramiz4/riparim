@@ -2,6 +2,7 @@ import { weekdayDe, weekdaySq, weekdayEn } from "./weekday-messages";
 import { defineMessages, type MessageShape } from "./message-contract";
 
 export const publicDe = /* @__PURE__ */ Object.assign({}, weekdayDe, {
+  exploreCities: "Nach Stadt entdecken",
   heroCar: "Dein Auto.",
   partnerTitle: "Premium-Partner",
   partnerAd: "Anzeige · Premium-Partner",
@@ -40,6 +41,7 @@ export const publicDe = /* @__PURE__ */ Object.assign({}, weekdayDe, {
   reviewAfter: "Nach dem Besuch bewerten",
   submitReview: "Bewertung und Nachweis einreichen. Nach Freigabe sichtbar.",
   workshops: "Werkstätten",
+  workshopIndex: "Alle Werkstattprofile nach Name",
   sort: "Sortieren",
   sortName: "Name A–Z",
   sortRiparim: "Riparim-Bewertung",
@@ -246,6 +248,7 @@ export const publicDe = /* @__PURE__ */ Object.assign({}, weekdayDe, {
 const check = defineMessages<typeof publicDe>();
 export const publicSq = /* @__PURE__ */ check(
   /* @__PURE__ */ Object.assign({}, weekdaySq, {
+    exploreCities: "Zbulo sipas qytetit",
     heroCar: "Makina jote.",
     partnerTitle: "Partnerë Premium",
     partnerAd: "Reklamë · Partner Premium",
@@ -284,6 +287,7 @@ export const publicSq = /* @__PURE__ */ check(
     reviewAfter: "Vlerëso pas vizitës",
     submitReview: "Dërgo vlerësimin dhe dëshminë. Shfaqen pas miratimit.",
     workshops: "Servise",
+    workshopIndex: "Të gjitha profilet e serviseve sipas emrit",
     sort: "Rendit",
     sortName: "Emri A–Z",
     sortRiparim: "Vlerësimi në Riparim",
@@ -493,6 +497,7 @@ export const publicSq = /* @__PURE__ */ check(
 );
 export const publicEn = /* @__PURE__ */ check(
   /* @__PURE__ */ Object.assign({}, weekdayEn, {
+    exploreCities: "Explore by city",
     heroCar: "Your car.",
     partnerTitle: "Premium partners",
     partnerAd: "Ad · Premium partner",
@@ -531,6 +536,7 @@ export const publicEn = /* @__PURE__ */ check(
     reviewAfter: "Review after your visit",
     submitReview: "Submit your review and evidence. Visible after approval.",
     workshops: "Workshops",
+    workshopIndex: "All workshop profiles by name",
     sort: "Sort",
     sortName: "Name A–Z",
     sortRiparim: "Riparim rating",

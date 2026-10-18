@@ -53,6 +53,47 @@ await withWorkerRuntime(
         .filter((sql) => sql.trim()))
         await db.prepare(statement).run();
     await (await dispatchFetch("https://riparim.test/api/workshops")).text();
+    const sitemapResponse = await dispatchFetch(
+      "https://riparim.test/sitemap.xml",
+    );
+    assert.equal(
+      sitemapResponse.status,
+      200,
+      "Every Worker target serves the shared XML sitemap route",
+    );
+    assert.match(
+      sitemapResponse.headers.get("Content-Type"),
+      /application\/xml/,
+    );
+    const sitemapXml = await sitemapResponse.text();
+    const sitemapDocument = new JSDOM(sitemapXml, {
+      contentType: "application/xml",
+    }).window.document;
+    assert.equal(
+      sitemapDocument.querySelectorAll("url").length,
+      3 *
+        (canonical.workshops.filter(
+          (workshop) => workshop.status === "published",
+        ).length +
+          7),
+    );
+    assert(sitemapXml.includes("https://riparim.test/sq/serviset"));
+    for (const slug of ["prishtina", "prizren", "ferizaj", "peja", "gjakova"])
+      for (const locale of ["de", "sq", "en"])
+        assert(
+          sitemapXml.includes(
+            "https://riparim.test" + localizeHref(`/workshops/${slug}`, locale),
+          ),
+          "All Worker targets publish the same bounded city identities",
+        );
+    const robotsResponse = await dispatchFetch(
+      "https://riparim.test/robots.txt",
+    );
+    assert.equal(robotsResponse.status, 200);
+    assert.match(
+      await robotsResponse.text(),
+      /Sitemap: https:\/\/riparim\.test\/sitemap\.xml/,
+    );
     for (let round = 0; round < 2; round++)
       await settleWorkerRequests(
         [

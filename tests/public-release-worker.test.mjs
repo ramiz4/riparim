@@ -1,5 +1,6 @@
 import { localizeHref, guidePagePaths } from "../scripts/lib/locale.mjs";
 import assert from "node:assert/strict";
+import { JSDOM } from "jsdom";
 import { assertPrivacyOutput } from "./helpers/privacy-output.mjs";
 import { readFile, readdir } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -13,7 +14,7 @@ if (config.name === "riparim") {
   const published = canonical.workshops.filter((w) => w.status === "published");
   assert.equal(
     manifest.pages,
-    3 * (published.length + 3 + guidePagePaths.length),
+    3 * (published.length + 8 + guidePagePaths.length),
   );
   assert.equal(manifest.privateData, false);
   assert.equal(manifest.privacyVariants, 3);
@@ -113,6 +114,66 @@ if (config.name === "riparim") {
     await renderedRsc.text();
     await runtime.setOptions(options);
     db = await runtime.getD1Database("DB");
+    const sitemapResponse = await runtime.dispatchFetch(
+      "https://riparim.com/sitemap.xml?private=fixture",
+      { headers: { cookie: "untrusted=fixture" } },
+    );
+    assert.equal(sitemapResponse.status, 200);
+    assert.match(
+      sitemapResponse.headers.get("Content-Type"),
+      /application\/xml/,
+    );
+    assert.equal(sitemapResponse.headers.has("set-cookie"), false);
+    const sitemapXml = await sitemapResponse.text();
+    const sitemapDocument = new JSDOM(sitemapXml, {
+      contentType: "application/xml",
+    }).window.document;
+    const sitemapLocations = [...sitemapDocument.querySelectorAll("loc")].map(
+      (node) => node.textContent,
+    );
+    assert.equal(sitemapLocations.length, 3 * (published.length + 7));
+    assert(sitemapLocations.includes("https://riparim.com/sq/serviset"));
+    assert(!sitemapXml.includes("private=fixture"));
+    for (const slug of ["prishtina", "prizren", "ferizaj", "peja", "gjakova"])
+      for (const locale of ["de", "sq", "en"])
+        assert(
+          sitemapLocations.includes(
+            "https://riparim.com" + localizeHref(`/workshops/${slug}`, locale),
+          ),
+          "City sitemap URLs match rendered canonical routes",
+        );
+    for (const workshop of published)
+      for (const locale of ["de", "sq", "en"])
+        assert(
+          sitemapLocations.includes(
+            "https://riparim.com" +
+              localizeHref(`/workshop/${workshop.id}`, locale),
+          ),
+        );
+    for (const init of [{}, { method: "HEAD" }]) {
+      const robots = await runtime.dispatchFetch(
+        "https://riparim.com/robots.txt",
+        init,
+      );
+      assert.equal(robots.status, 200);
+      if (init.method === "HEAD") assert.equal(await robots.text(), "");
+      else
+        assert.match(
+          await robots.text(),
+          /Sitemap: https:\/\/riparim\.com\/sitemap\.xml/,
+        );
+    }
+    for (const path of [
+      "/en/sitemap.xml",
+      "/sq/robots.txt",
+      "/sitemap-unknown.xml",
+      "/en/workshop/fixture-unknown",
+    ])
+      assert.equal(
+        (await runtime.dispatchFetch("https://riparim.com" + path)).status,
+        404,
+        path,
+      );
     const first = published[0];
     const previewResponse = await runtime.dispatchFetch(
       "https://riparim.com/api/premium-workshops?locale=sq",
@@ -162,6 +223,7 @@ if (config.name === "riparim") {
         "/datenschutz",
         ...guidePagePaths,
         "/werkstaetten",
+        "/workshops/prishtina",
         `/werkstatt/${first.id}`,
       ]) {
         const response = await runtime.dispatchFetch(
@@ -183,6 +245,41 @@ if (config.name === "riparim") {
         assert(html.includes(`<html lang="${locale}"`));
         assert(!html.includes("private-secret"));
         assert(!html.includes("private-user@example.test"));
+        if (path === "/werkstaetten") {
+          const index = new JSDOM(html).window.document.querySelector(
+            "details[data-ui='workshop-index']",
+          );
+          assert(
+            index,
+            "Immutable release HTML exposes the entire published catalogue without JavaScript",
+          );
+          assert.deepEqual(
+            [...index.querySelectorAll("a[href]")]
+              .map(
+                (link) =>
+                  new URL(link.getAttribute("href"), "https://riparim.com")
+                    .pathname,
+              )
+              .sort(),
+            published
+              .map((workshop) =>
+                localizeHref(`/workshop/${workshop.id}`, locale),
+              )
+              .sort(),
+          );
+          for (const link of index.querySelectorAll("a[href]")) {
+            const target = new URL(
+              link.getAttribute("href"),
+              "https://riparim.com",
+            );
+            assert.deepEqual([...target.searchParams.keys()], ["suche"]);
+            assert.equal(
+              target.searchParams.get("suche"),
+              localizeHref("/workshops", locale),
+              "Release index links retain only a clean public catalogue return target",
+            );
+          }
+        }
         if (path === "/datenschutz")
           assertPrivacyOutput(html, locale, "supabase");
         const navigation = await runtime.dispatchFetch(
@@ -196,6 +293,60 @@ if (config.name === "riparim") {
           "Every public locale route preserves the real renderer build identity",
         );
         await navigation.text();
+      }
+    for (const locale of ["de", "sq", "en"])
+      for (const city of [
+        "Prishtina",
+        "Prizren",
+        "Ferizaj",
+        "Peja",
+        "Gjakova",
+      ]) {
+        const path = localizeHref(`/workshops/${city.toLowerCase()}`, locale);
+        const response = await runtime.dispatchFetch(
+          "https://riparim.com" + path,
+        );
+        assert.equal(response.status, 200);
+        assert.equal(response.headers.get("X-Riparim-Public-Snapshot"), "1");
+        const body = await response.text();
+        assert.deepEqual(
+          [...body.matchAll(/data-workshop-id="([^"]+)"/g)]
+            .map((match) => match[1])
+            .sort(),
+          published
+            .filter((workshop) => workshop.city === city)
+            .map((workshop) => workshop.id)
+            .sort(),
+          "Actual city snapshot contains every and only matching published profile",
+        );
+        assert(body.includes(`https://riparim.com${path}`));
+        const head = await runtime.dispatchFetch("https://riparim.com" + path, {
+          method: "HEAD",
+        });
+        assert.equal(head.status, 200);
+        assert.equal(await head.text(), "");
+        const navigation = await runtime.dispatchFetch(
+          "https://riparim.com" + path + "?_rsc",
+          { headers: { RSC: "1", Accept: "text/x-component" } },
+        );
+        assert.equal(navigation.status, 200);
+        assert(
+          !(await navigation.text()).includes("data-workshop-id"),
+          "City navigation always loads the latest catalogue through a data-free shell",
+        );
+      }
+    for (const path of [
+      "/werkstaetten/unknown",
+      "/en/workshops/unknown",
+      "/sq/serviset/prishtina/extra",
+    ])
+      for (const method of ["GET", "HEAD"]) {
+        const response = await runtime.dispatchFetch(
+          "https://riparim.com" + path,
+          { method },
+        );
+        assert.equal(response.status, 404);
+        await response.text();
       }
     await db
       .prepare(
@@ -299,6 +450,15 @@ if (config.name === "riparim") {
       .prepare("UPDATE workshops SET description=?,updated_at=? WHERE id=?")
       .bind("Newer approved admin text", "2099-01-01T00:00:00.000Z", first.id)
       .run();
+    const changedCity = await runtime.dispatchFetch(
+      "https://riparim.com/en/workshops/prishtina",
+    );
+    assert.equal(changedCity.status, 200);
+    assert.equal(changedCity.headers.get("X-Riparim-Public-Snapshot"), "1");
+    assert(
+      !(await changedCity.text()).includes("data-workshop-id="),
+      "A changed publication invalidates city data alongside the catalogue",
+    );
     const edited = await runtime.dispatchFetch(
       "https://riparim.com/werkstatt/" + first.id,
     );
@@ -326,6 +486,38 @@ if (config.name === "riparim") {
     assert.equal(directory.headers.get("X-Riparim-Public-Snapshot"), "1");
     const html = await directory.text();
     assert(!html.includes(`data-workshop-id="${first.id}"`));
+    assert(
+      !html.includes('data-ui="workshop-index"'),
+      "Invalidated snapshots never retain stale public profile anchors",
+    );
+    const removedSitemap = await runtime.dispatchFetch(
+      "https://riparim.com/sitemap.xml",
+    );
+    const removedXml = await removedSitemap.text();
+    for (const locale of ["de", "sq", "en"])
+      assert(
+        !removedXml.includes(localizeHref(`/workshop/${first.id}`, locale)),
+        "Unpublishing immediately removes all language variants from the live sitemap",
+      );
+    await db
+      .prepare(
+        "INSERT INTO workshops (id,name,city,address,phone,brands,services,specialty,description,sources,checked_at,status,updated_at) VALUES ('fixture-seo-new','Synthetic SEO Workshop','Prishtina','Synthetic road 207','+38344123456','[]','[]','Synthetic','Isolated publication fixture','[]','2026-10-18','published','2099-01-02T00:00:00Z')",
+      )
+      .run();
+    const updatedSitemap = await runtime.dispatchFetch(
+      "https://riparim.com/sitemap.xml",
+    );
+    const updatedXml = await updatedSitemap.text();
+    for (const path of [
+      "/werkstatt/fixture-seo-new",
+      "/sq/servis/fixture-seo-new",
+      "/en/workshop/fixture-seo-new",
+    ])
+      assert(
+        updatedXml.includes("https://riparim.com" + path),
+        "Newly approved profiles enter discovery without waiting for another snapshot",
+      );
+
     const session = await runtime.dispatchFetch(
       "https://riparim.com/api/session",
       {
@@ -675,6 +867,22 @@ if (config.name === "riparim") {
       assert.equal(response.status, 200);
       assertPrivacyOutput(await response.text(), locale, "supabase");
     }
+    db = await runtime.getD1Database("DB");
+    await db
+      .prepare("ALTER TABLE workshops RENAME TO seo_unavailable_fixture")
+      .run();
+    const unavailableSitemap = await runtime.dispatchFetch(
+      "https://riparim.com/sitemap.xml",
+    );
+    assert.equal(
+      unavailableSitemap.status,
+      503,
+      "Catalogue failure cannot publish a successful partial sitemap",
+    );
+    assert.equal(
+      await unavailableSitemap.text(),
+      "Sitemap temporarily unavailable",
+    );
     console.log(
       "Public release: all locales, private isolation, privacy providers/shells, RSC, newer admin edits and immediate unpublishing passed",
     );
