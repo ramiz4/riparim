@@ -119,6 +119,17 @@ for (const workerPath of [
       assert.equal(blocked.headers.get("X-Riparim-Release-Commit"), commit);
       passed++;
     }
+    for (const path of ["/sitemap.xml", "/robots.txt"]) {
+      const blocked = await runtime.dispatchFetch("http://fixture" + path);
+      assert.equal(blocked.status, 503);
+      assert.equal(
+        blocked.headers.get("X-Riparim-Migration-Read-Only"),
+        "true",
+        "Metadata reads respect the transfer freeze before catalogue initialization",
+      );
+      await blocked.text();
+      passed++;
+    }
     for (const [page, expected] of [
       [
         "/en/maintenance",
