@@ -1139,8 +1139,24 @@ try {
         h(api.PrivacyContent, { text: api.privacyMessages[locale] }),
       ),
     );
-    assert.equal((privacy.match(/<section/g) ?? []).length, 9);
+    assert.equal((privacy.match(/<section/g) ?? []).length, 10);
     const privacyDom = new JSDOM(privacy);
+    assert(
+      privacyDom.window.document.querySelector("#privacy-analytics"),
+      "Privacy describes optional analytics",
+    );
+    assert(
+      privacyDom.window.document.querySelector(
+        'a[href="https://posthog.com/privacy"]',
+      ),
+      "Privacy links the processor policy",
+    );
+    assert(
+      privacyDom.window.document.querySelector(
+        `a[href="${localizeHref("/einstellungen#analytics-settings", locale)}"]`,
+      ),
+      "Privacy links the localized revocation control",
+    );
     try {
       assert(
         [...privacyDom.window.document.querySelectorAll("code")].some(

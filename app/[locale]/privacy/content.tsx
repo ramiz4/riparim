@@ -24,6 +24,7 @@ const sections = [
   ["business", 2],
   ["storage", 1],
   ["google", 3],
+  ["analytics", 3],
   ["deletion", 5],
 ] as const;
 export function PrivacyContent({
@@ -57,6 +58,24 @@ export function PrivacyContent({
         Google
       </LocaleAnchor>
     ),
+    analyticsSettings: (
+      <LocaleAnchor
+        className="text-[var(--theme-accent)] underline underline-offset-[3px]"
+        href="/einstellungen#analytics-settings"
+      >
+        {text.analyticsSettings}
+      </LocaleAnchor>
+    ),
+    posthog: (
+      <LocaleAnchor
+        className="text-[var(--theme-accent)] underline underline-offset-[3px]"
+        href="https://posthog.com/privacy"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        PostHog
+      </LocaleAnchor>
+    ),
     authProvider: (
       <LocaleAnchor
         className="text-[var(--theme-accent)] underline underline-offset-[3px] [overflow-wrap:anywhere]"
@@ -76,6 +95,7 @@ export function PrivacyContent({
     <main
       className="mx-auto mt-[42px] mb-[72px] w-[min(760px,calc(100%_-_40px))] text-[16px] leading-[1.75] at-most-720:mt-7"
       data-ui="privacy-page"
+      data-riparim-page="privacy"
     >
       <h1 className="mb-3 text-[clamp(30px,5vw,42px)] leading-[1.2] tracking-[-0.8px]">
         {text.title}

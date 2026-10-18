@@ -10,7 +10,7 @@ export const privacyDe = {
   metadataDescription:
     "Informationen zur Anmeldung, Bewertungen, privaten Besuchsnachweisen und Google-Diensten bei Riparim.",
   title: "Datenschutz bei Riparim",
-  date: "Stand: 13. Oktober 2026",
+  date: "Stand: 18. Oktober 2026",
   contact:
     "Bei Fragen zum Datenschutz oder einer Bitte um Löschung deiner Kontodaten erreichst du uns unter {contact}.",
   accountHeading: "Anmeldung und Konto",
@@ -54,6 +54,14 @@ export const privacyDe = {
   storageHeading: "Dienste und Speicherung",
   storage1:
     "Die Website wird auf der für Riparim eingerichteten Hosting-Infrastruktur betrieben. Einreichungen und Prüfvermerke werden in einer Datenbank gespeichert, Nachweisdateien in einem privaten Dateispeicher. {authProvider} verarbeitet die für dein Nutzerkonto und deine Anmeldung erforderlichen Daten.",
+  analyticsHeading: "Optionale Nutzungsanalyse mit PostHog",
+  analyticsSettings: "Analyse-Einstellungen",
+  analytics1:
+    "Nur mit deiner ausdrücklichen Einwilligung verwenden wir {posthog} in der EU, um öffentliche Seitenaufrufe und den Ablauf Werkstattsuche → veröffentlichtes Profil → Kontaktklick auszuwerten. Erfasst werden die Seitenadresse ohne Suchparameter oder Fragment, Sprache, öffentliche Werkstattkennung, Kontaktart und Besuchsdauer. PostHog erhält technisch erforderliche Verbindungsdaten wie die IP-Adresse; die geografische Auswertung ist abgeschaltet.",
+  analytics2:
+    "Deine Auswahl wird für 180 Tage lokal im Browser gespeichert. Erst nach Zustimmung speichern wir eine zufällige Browserkennung und eine Besuchskennung mit 30 Minuten Inaktivitätsgrenze. Wir verknüpfen diese Kennungen nicht mit deinem Konto. Kontoverwaltung, Anmeldung, Verwaltung, Formulare, Nachrichten und private Nachweise werden nicht erfasst. Automatische Klickaufzeichnung, Sitzungsaufzeichnungen und Personenprofile sind ausgeschaltet.",
+  analytics3:
+    "Die Einwilligung ist freiwillig und kann unter {analyticsSettings} jederzeit widerrufen werden. Ablehnung und Widerruf lassen alle Funktionen verfügbar. Der Widerruf stoppt weitere Erfassung und entfernt die Analysekennungen aus diesem Browser; bereits übermittelte Ereignisse bleiben bis zum Ablauf der Aufbewahrung im PostHog-Projekt gespeichert.",
   googleHeading: "Google Maps und Places",
   google1:
     "Werkstattprofile enthalten eigene Öffnungszeiten und Riparim-Bewertungen. Google Maps und Routen öffnen sich erst, wenn du einen externen Link anklickst. Dabei gelten die Bedingungen von Google, und Google erhält Verbindungsdaten einschließlich deiner IP-Adresse.",
@@ -82,7 +90,7 @@ const sq = /* @__PURE__ */ defineMessages<typeof privacyDe>()({
   metadataDescription:
     "Informacione mbi hyrjen, vlerësimet, dëshmitë private të vizitës dhe shërbimet e Google në Riparim.",
   title: "Mbrojtja e të dhënave në Riparim",
-  date: "Përditësuar më: 13 tetor 2026",
+  date: "Përditësuar më: 18 tetor 2026",
   contact:
     "Për pyetje mbi mbrojtjen e të dhënave ose për një kërkesë për fshirjen e të dhënave të llogarisë sate, mund të na kontaktosh në {contact}.",
   accountHeading: "Hyrja dhe llogaria",
@@ -126,6 +134,14 @@ const sq = /* @__PURE__ */ defineMessages<typeof privacyDe>()({
   storageHeading: "Shërbimet dhe ruajtja",
   storage1:
     "Faqja funksionon në infrastrukturën e hostimit të konfiguruar për Riparim. Dorëzimet dhe shënimet e shqyrtimit ruhen në një bazë të dhënash, ndërsa skedarët dëshmues ruhen në një hapësirë private skedarësh. {authProvider} përpunon të dhënat e nevojshme për llogarinë tënde dhe hyrjen.",
+  analyticsHeading: "Analiza opsionale e përdorimit me PostHog",
+  analyticsSettings: "Cilësimet e analizës",
+  analytics1:
+    "Vetëm me pëlqimin tënd të shprehur përdorim {posthog} në BE për të analizuar vizitat e faqeve publike dhe rrugën kërkimi i serviseve → profili i publikuar → klikimi i kontaktit. Regjistrohen adresa e faqes pa parametra kërkimi ose fragment, gjuha, identifikuesi publik i servisit, lloji i kontaktit dhe kohëzgjatja e vizitës. PostHog merr të dhëna lidhjeje teknikisht të nevojshme, si adresa IP; analiza gjeografike është e çaktivizuar.",
+  analytics2:
+    "Zgjedhja jote ruhet lokalisht në shfletues për 180 ditë. Vetëm pas miratimit ruajmë një identifikues të rastësishëm të shfletuesit dhe një identifikues vizite me kufi pasiviteti prej 30 minutash. Nuk i lidhim këta identifikues me llogarinë tënde. Menaxhimi i llogarisë, hyrja, administrimi, formularët, mesazhet dhe dëshmitë private nuk regjistrohen. Regjistrimi automatik i klikimeve, regjistrimet e seancave dhe profilet e personave janë të çaktivizuara.",
+  analytics3:
+    "Pëlqimi është vullnetar dhe mund të tërhiqet në çdo kohë te {analyticsSettings}. Refuzimi dhe tërheqja i lënë të gjitha funksionet të disponueshme. Tërheqja ndalon regjistrimin e mëtejshëm dhe heq identifikuesit e analizës nga ky shfletues; ngjarjet e dërguara tashmë mbeten deri në përfundimin e periudhës së ruajtjes në projektin PostHog.",
   googleHeading: "Google Maps dhe Places",
   google1:
     "Profilet e serviseve përmbajnë orarin e tyre dhe vlerësimet e Riparim. Google Maps dhe udhëzimet hapen vetëm kur klikon një lidhje të jashtme. Atëherë zbatohen kushtet e Google dhe Google merr të dhënat e lidhjes, përfshirë adresën tënde IP.",
@@ -151,7 +167,7 @@ const en = /* @__PURE__ */ defineMessages<typeof privacyDe>()({
   metadataDescription:
     "Information about logging in, reviews, private proof of visits and Google services at Riparim.",
   title: "Privacy at Riparim",
-  date: "Last updated: 13 October 2026",
+  date: "Last updated: 18 October 2026",
   contact:
     "For questions about privacy or a request to delete your account data, contact us at {contact}.",
   accountHeading: "Login and account",
@@ -195,6 +211,14 @@ const en = /* @__PURE__ */ defineMessages<typeof privacyDe>()({
   storageHeading: "Services and storage",
   storage1:
     "The website runs on the hosting infrastructure configured for Riparim. Submissions and review notes are stored in a database, and proof files in private file storage. {authProvider} processes the data required for your user account and login.",
+  analyticsHeading: "Optional usage analytics with PostHog",
+  analyticsSettings: "Analytics settings",
+  analytics1:
+    "Only with your explicit consent do we use {posthog} in the EU to analyse public page visits and the journey workshop search → published profile → contact click. We record the page address without query parameters or fragments, language, public workshop identifier, contact type and visit duration. PostHog receives technically necessary connection data such as your IP address; geographic enrichment is disabled.",
+  analytics2:
+    "Your choice is stored locally in your browser for 180 days. Only after approval do we store a random browser identifier and a visit identifier with a 30-minute inactivity limit. We do not link these identifiers to your account. Account management, login, administration, forms, messages and private proof are not recorded. Automatic click capture, session recordings and person profiles are disabled.",
+  analytics3:
+    "Consent is optional and can be withdrawn at any time under {analyticsSettings}. Declining or withdrawing leaves all features available. Withdrawal stops further capture and removes analytics identifiers from this browser; events already sent remain until the PostHog project's retention period ends.",
   googleHeading: "Google Maps and Places",
   google1:
     "Workshop profiles contain their own opening hours and Riparim reviews. Google Maps and directions open only when you click an external link. Google’s terms then apply, and Google receives connection data including your IP address.",

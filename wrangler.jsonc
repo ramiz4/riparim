@@ -40,7 +40,10 @@
   "triggers": { "crons": [] },
   "preview_urls": false,
   "vars": {
-    "SITE_ORIGIN": "https://riparim.com"
+    "SITE_ORIGIN": "https://riparim.com",
+    "POSTHOG_KEY": "phc_yFiArbBVZQqaKojGfqDkHJ6enDtCNMbHm7kWFhmNxZkN",
+    "POSTHOG_HOST": "https://eu.i.posthog.com",
+    "POSTHOG_TEST_MODE": "false"
   },
   "secrets": {
     "required": ["REVIEW_MODERATOR_EMAIL"]
