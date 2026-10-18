@@ -153,6 +153,51 @@ try {
     assert.equal(response.status, 200, path + logs);
     assert.match(await response.text(), /Synthetic Node Workshop/);
   }
+  for (const locale of ["de", "sq", "en"])
+    for (const init of [
+      {},
+      { method: "HEAD" },
+      { headers: { RSC: "1", Accept: "text/x-component" } },
+    ]) {
+      const response = await fetch(
+        origin + localizeHref("/workshops/prishtina", locale),
+        init,
+      );
+      assert.equal(
+        response.status,
+        200,
+        "City routes use the same Node boundary",
+      );
+      const body = await response.text();
+      assert(!body.includes("Private Draft Workshop"));
+      if (init.method !== "HEAD")
+        assert(body.includes("Synthetic Node Workshop"));
+    }
+  const emptyCity = await fetch(origin + "/en/workshops/peja");
+  assert.equal(emptyCity.status, 200);
+  assert(
+    (await emptyCity.text()).includes(
+      "No profile is currently published for Peja",
+    ),
+  );
+  for (const path of [
+    "/werkstaetten/unknown",
+    "/en/workshops/unknown",
+    "/sq/serviset/prishtina/extra",
+  ])
+    for (const init of [
+      {},
+      { method: "HEAD" },
+      { headers: { RSC: "1", Accept: "text/x-component" } },
+    ]) {
+      const response = await fetch(origin + path, init);
+      assert.equal(
+        response.status,
+        404,
+        "Unsupported cities are real 404 in Node",
+      );
+      await response.text();
+    }
   for (const [alias, target] of [
     ["/en/werkstaetten?ort=Prizren", "/en/workshops?ort=Prizren"],
     [

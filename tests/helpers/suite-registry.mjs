@@ -1,4 +1,6 @@
 export const registeredSuites = Object.freeze([
+  { file: "city-routing.test.mjs", group: "core" },
+  { file: "city-pages.test.mjs", group: "core" },
   { file: "style-fixture-state.test.mjs", group: "core" },
   { file: "compiled-tailwind.test.mjs", group: "core" },
   { file: "presentation-navigation.test.mjs", group: "core" },
