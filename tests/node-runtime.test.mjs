@@ -1,3 +1,4 @@
+import { assertPublicHead } from "./helpers/public-head.mjs";
 import { logNodePhase, prepareNodeTestBuild } from "./helpers/node-build.mjs";
 import { catalogueFixtureKey } from "./helpers/catalogue-fixture-key.mjs";
 import assert from "node:assert/strict";
@@ -58,6 +59,29 @@ async function start(
     await delay(100);
   }
   throw new Error("Node server did not start: " + logs);
+}
+function renderedRscElements(body) {
+  const elements = [];
+  function visit(value) {
+    if (Array.isArray(value)) {
+      if (value[0] === "$" && value[3] && typeof value[3] === "object")
+        elements.push({ type: value[1], props: value[3] });
+      value.forEach(visit);
+    } else if (value && typeof value === "object")
+      Object.values(value).forEach(visit);
+  }
+  for (const line of body.split("\n")) {
+    const payload = line.match(/^[0-9a-f]+:(.*)$/)?.[1];
+    if (!payload) continue;
+    let value;
+    try {
+      value = JSON.parse(payload);
+    } catch {
+      continue;
+    } // Module and other protocol records are not React elements.
+    visit(value);
+  }
+  return elements;
 }
 async function stop() {
   if (!server) return;
@@ -146,13 +170,22 @@ try {
             localizeHref(`/workshops/${slug}`, locale),
           ),
       ),
+      "/ratgeber",
+      "/sq/udhezues",
+      "/en/guides",
+      "/ratgeber/werkstatt-auswaehlen",
+      "/sq/udhezues/zgjedhja-e-servisit",
+      "/en/guides/choosing-a-workshop",
+      "/ratgeber/werkstattbesuch-vorbereiten",
+      "/sq/udhezues/pergatitja-e-vizites",
+      "/en/guides/preparing-a-visit",
       "/werkstatt/fixture-public",
       "/sq/servis/fixture-public",
       "/en/workshop/fixture-public",
     ]
       .map((path) => origin + path)
       .sort(),
-    "Only canonical home, catalogue, five city pages and published profiles enter the sitemap",
+    "Only canonical home, catalogue, five city pages, three guides and published profiles enter the sitemap",
   );
   assert(
     !sitemapXml.includes("fixture-draft") &&
@@ -224,6 +257,135 @@ try {
     assert.match(await response.text(), /Synthetic Node Workshop/);
   }
   for (const locale of ["de", "sq", "en"])
+    for (const identity of [
+      "/guides",
+      "/guides/choosing-a-workshop",
+      "/guides/preparing-a-visit",
+    ]) {
+      const path = localizeHref(identity, locale);
+      for (const init of [
+        {},
+        { method: "HEAD" },
+        { headers: { RSC: "1", Accept: "text/x-component" } },
+      ]) {
+        const response = await fetch(
+          origin + path + "?token=private-guide-query",
+          init,
+        );
+        assert.equal(response.status, 200, path + logs);
+        const body = await response.text();
+        assert(!body.includes("Private Draft Workshop"));
+        assert.match(
+          response.headers.get("cache-control"),
+          /private.*no-store/,
+        );
+        if (init.method === "HEAD") {
+          assert.equal(body, "");
+          continue;
+        }
+        let metadataLinks;
+        // Next retains the current request query in its private router/Flight
+        // envelope. Public article elements, metadata and links must stay clean.
+        if (init.headers) {
+          assert.match(
+            response.headers.get("content-type"),
+            /text\/x-component/,
+          );
+          const elements = renderedRscElements(body);
+          assert(
+            elements.some(
+              ({ type, props }) =>
+                type === "main" && props["data-riparim-page"] === "guide",
+            ),
+          );
+          assert(
+            elements.every(
+              ({ props }) =>
+                !JSON.stringify(props).includes("private-guide-query"),
+            ),
+            "Rendered guide RSC elements never expose ignored query values",
+          );
+          metadataLinks = elements
+            .filter(({ type }) => type === "link")
+            .map(({ props }) => props);
+        } else {
+          const dom = new JSDOM(body);
+          try {
+            const doc = dom.window.document;
+            assert.equal(doc.documentElement.lang, locale);
+            assert(doc.querySelector('main[data-riparim-page="guide"]'));
+            assert(
+              !doc
+                .querySelector("main")
+                .outerHTML.includes("private-guide-query"),
+            );
+            assert(
+              [...doc.querySelectorAll("head title,head meta,head link")].every(
+                (node) => !node.outerHTML.includes("private-guide-query"),
+              ),
+              "Guide metadata excludes ignored query values",
+            );
+            assert(
+              [...doc.querySelectorAll("a[href]")].every(
+                (node) =>
+                  !node.getAttribute("href").includes("private-guide-query"),
+              ),
+              "Public guide links exclude ignored query values",
+            );
+            metadataLinks = [...doc.querySelectorAll("head link")].map(
+              (node) => ({
+                rel: node.rel,
+                href: node.href,
+                hrefLang: node.hreflang,
+              }),
+            );
+            assert(!body.includes("noindex"));
+          } finally {
+            dom.window.close();
+          }
+        }
+        assert.equal(
+          metadataLinks.find((link) => link.rel === "canonical")?.href,
+          origin + path,
+          "Node guide canonical matches the clean public locale URL",
+        );
+        assert.deepEqual(
+          Object.fromEntries(
+            metadataLinks
+              .filter((link) => link.rel === "alternate" && link.hrefLang)
+              .map((link) => [link.hrefLang, link.href]),
+          ),
+          Object.fromEntries(
+            ["de", "sq", "en", "x-default"].map((language) => [
+              language,
+              origin +
+                localizeHref(
+                  identity,
+                  language === "x-default" ? "de" : language,
+                ),
+            ]),
+          ),
+          "Guide HTML and RSC expose clean reciprocal alternatives",
+        );
+        const clean = await fetch(origin + path, init);
+        assert.equal(clean.status, 200);
+        assert(
+          !(await clean.text()).includes("private-guide-query"),
+          "A following clean request never contains another request's query value",
+        );
+      }
+    }
+  for (const path of [
+    "/ratgeber/missing",
+    "/sq/udhezues/missing",
+    "/en/guides/missing",
+  ])
+    assert.equal(
+      (await fetch(origin + path)).status,
+      404,
+      "Unknown guide is a real Node 404",
+    );
+  for (const locale of ["de", "sq", "en"])
     for (const init of [
       {},
       { method: "HEAD" },
@@ -268,6 +430,30 @@ try {
       );
       await response.text();
     }
+  for (const locale of ["de", "sq", "en"])
+    for (const identity of [
+      "/",
+      "/workshops",
+      "/workshops/prishtina",
+      "/workshop/fixture-public",
+      "/privacy",
+      "/guides",
+      "/guides/choosing-a-workshop",
+      "/guides/preparing-a-visit",
+    ])
+      for (const userAgent of [
+        "",
+        "Mozilla/5.0",
+        "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+        "Twitterbot/1.0",
+      ]) {
+        const response = await fetch(
+          origin + localizeHref(identity, locale) + "?q=private-head-query",
+          { headers: { "User-Agent": userAgent } },
+        );
+        assert.equal(response.status, 200);
+        assertPublicHead(await response.text(), identity, locale, origin);
+      }
   for (const [alias, target] of [
     ["/en/werkstaetten?ort=Prizren", "/en/workshops?ort=Prizren"],
     [

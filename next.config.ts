@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 import { resolve } from "node:path";
 
 const nextConfig: NextConfig = {
+  // Release HTML and live documents must carry complete SEO metadata in head.
+  htmlLimitedBots: /.*/,
   // Preserve the original request origin for internal locale rewrites.
   skipProxyUrlNormalize: true,
   // Node uses the same App Router code with a different runtime adapter.

@@ -158,6 +158,82 @@ const { stripSitesIdentityHeaders } = await importFixture(
 );
 const { proxy } = await importFixture("proxy");
 
+// Missing user agents must not bypass the configured blocking metadata policy.
+for (const [name, worker] of [
+  ["owned", cloudflareWorker],
+  ["sites", sitesWorker],
+]) {
+  for (const method of ["GET", "HEAD"])
+    for (const userAgent of [
+      null,
+      "",
+      "Mozilla/5.0",
+      "Googlebot",
+      "Twitterbot",
+    ]) {
+      const headers = new Headers({
+        Cookie: "fixture-cookie=preserved",
+        Authorization: "Bearer fixture-access",
+        "oai-authenticated-user-id": "fixture-native-id",
+      });
+      if (userAgent !== null) headers.set("User-Agent", userAgent);
+      const original = new Request(
+        "https://riparim.com/ratgeber?private=fixture",
+        { method, headers, redirect: "manual" },
+      );
+      const response = await worker.fetch(
+        original,
+        { PUBLIC_RELEASE_RENDER: "skip-assets" },
+        { waitUntil() {} },
+      );
+      await response.text();
+      const forwarded = globalThis.fixtureForwardedRequest;
+      assert.equal(
+        forwarded.headers.get("user-agent"),
+        userAgent || "RiparimHtmlRenderer/1.0",
+        `${name}: a neutral owned UA makes page metadata blocking even without a client UA`,
+      );
+      assert.equal(
+        original.headers.get("user-agent"),
+        userAgent,
+        "The original request is not mutated",
+      );
+      assert.equal(forwarded.url, original.url);
+      assert.equal(forwarded.method, method);
+      assert.equal(forwarded.redirect, "manual");
+      assert.equal(forwarded.headers.get("cookie"), "fixture-cookie=preserved");
+      assert.equal(
+        forwarded.headers.get("authorization"),
+        "Bearer fixture-access",
+      );
+      assert.equal(
+        forwarded.headers.get("oai-authenticated-user-id"),
+        name === "sites" ? "fixture-native-id" : null,
+        "Metadata normalization preserves each adapter's identity boundary",
+      );
+    }
+  for (const [path, init] of [
+    ["/ratgeber", { headers: { RSC: "1" } }],
+    ["/ratgeber", { headers: { Accept: "text/x-component" } }],
+    ["/ratgeber", { method: "POST", body: "fixture-body" }],
+    ["/api/auth-settings", {}],
+    ["/favicon.svg", {}],
+    ["/auth/bestaetigen?token=fixture", {}],
+  ]) {
+    const response = await worker.fetch(
+      new Request("https://riparim.com" + path, init),
+      { PUBLIC_RELEASE_RENDER: "skip-assets" },
+      { waitUntil() {} },
+    );
+    await response.text();
+    assert.equal(
+      globalThis.fixtureForwardedRequest.headers.get("user-agent"),
+      null,
+      `${name}: non-document requests retain their original header contract`,
+    );
+  }
+}
+
 for (const url of [
   "https://www.riparim.com/",
   "http://www.riparim.com/werkstatt/fixture?suche=%2Fwerkstaetten&weiter=%2Feinstellungen",

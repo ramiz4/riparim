@@ -4,7 +4,13 @@ import { LocaleAnchor } from "@/components/locale-anchor";
 import { CityNavigation } from "./city-navigation";
 import { useState } from "react";
 import Link from "@/components/locale-link";
-import { ChevronRight, FileCheck2, LockKeyhole, Settings } from "lucide-react";
+import {
+  BookOpen,
+  ChevronRight,
+  FileCheck2,
+  LockKeyhole,
+  Settings,
+} from "lucide-react";
 import { Brand } from "@/components/brand";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { ModalContent } from "@/components/modal-shell";
@@ -31,7 +37,7 @@ export function DirectoryFooter({
         <footer
           className={cn(
             pageFrameClassName,
-            "flex items-center gap-6 py-[27px] text-[13px] text-[#415b60] dark:text-[#b7cdcb] at-most-720:grid at-most-720:grid-cols-[minmax(0,1fr)] at-most-720:gap-[18px] at-most-720:pt-7 at-most-720:pb-[22px]",
+            "flex flex-wrap items-center gap-6 py-[27px] text-[13px] text-[#415b60] dark:text-[#b7cdcb] at-most-720:grid at-most-720:grid-cols-[minmax(0,1fr)] at-most-720:gap-[18px] at-most-720:pt-7 at-most-720:pb-[22px]",
           )}
         >
           <div className="mr-auto at-most-720:m-0 at-most-720:flex at-most-720:min-w-0 at-most-720:flex-col at-most-720:items-start at-most-720:gap-1 at-most-720:[&_a:focus-visible]:[outline:3px_solid_var(--ring)] at-most-720:[&_a:focus-visible]:outline-offset-[3px]">
@@ -62,6 +68,14 @@ export function DirectoryFooter({
                 size={18}
                 aria-hidden="true"
               />
+            </Link>
+            <Link className={footerActionClassName} href="/guides">
+              <BookOpen
+                className="hidden text-[var(--theme-accent)] at-most-720:block"
+                size={20}
+                aria-hidden="true"
+              />
+              <span>{t("public.guides")}</span>
             </Link>
             <DialogTrigger asChild>
               <button className={footerActionClassName} type="button">

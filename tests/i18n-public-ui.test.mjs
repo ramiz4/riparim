@@ -445,6 +445,13 @@ try {
           footer.textContent.includes(t("public.privacy")),
         "actual settings caller supplies localized public footer messages",
       );
+      assert.equal(
+        footer.querySelector(
+          'a[href="' + localizeHref("/guides", locale) + '"]',
+        )?.textContent,
+        t("public.guides"),
+        "The existing public footer links to the localized guide index",
+      );
       assert(
         !footer.textContent.includes(t("common.unavailable")),
         "settings footer cannot render missing-namespace fallbacks",

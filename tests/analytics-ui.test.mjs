@@ -53,7 +53,7 @@ globalThis.ResizeObserver = class {
 const out = ".test-runtime/analytics-ui/fixture.mjs";
 const bundle = await build({
   stdin: {
-    contents: `export {AnalyticsConsent,AnalyticsSettings} from './components/analytics-consent';export {default as Profile} from './app/[locale]/workshop/[id]/profile';export {default as CityDirectory} from './app/[locale]/workshops/[city]/city-directory';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {analyticsMessages} from './lib/i18n/analytics-messages';export {localizeHref} from './lib/i18n/locale';`,
+    contents: `export {GuideIndexContent,GuideArticleContent} from './components/workshop-guide-content';export {AnalyticsConsent,AnalyticsSettings} from './components/analytics-consent';export {default as Profile} from './app/[locale]/workshop/[id]/profile';export {default as CityDirectory} from './app/[locale]/workshops/[city]/city-directory';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {analyticsMessages} from './lib/i18n/analytics-messages';export {localizeHref} from './lib/i18n/locale';`,
     resolveDir: process.cwd(),
     loader: "tsx",
   },
@@ -89,6 +89,8 @@ await writeFile(out, bundle.outputFiles[0].text);
 const {
   AnalyticsConsent,
   AnalyticsSettings,
+  GuideIndexContent,
+  GuideArticleContent,
   Profile,
   CityDirectory,
   I18nProvider,
@@ -281,6 +283,41 @@ for (const locale of ["de", "sq", "en"]) {
     cityEvents,
     "City query changes cannot duplicate or leak into events",
   );
+  const searchStepsBeforeGuides = events.filter(
+    ({ event }) => event === "workshop_search_viewed",
+  ).length;
+  for (const [identity, view] of [
+    ["/guides", h(GuideIndexContent, { locale })],
+    [
+      "/guides/choosing-a-workshop",
+      h(GuideArticleContent, { locale, id: "choosing-a-workshop" }),
+    ],
+    [
+      "/guides/preparing-a-visit",
+      h(GuideArticleContent, { locale, id: "preparing-a-visit" }),
+    ],
+  ]) {
+    await render(
+      locale,
+      identity + "?q=private-guide-query#private-guide-fragment",
+      view,
+    );
+    assert.equal(
+      events.at(-1).event,
+      "$pageview",
+      "An actual guide component is recognized after client navigation",
+    );
+    assert.equal(events.at(-1).properties.page_type, "guide");
+    assert.equal(
+      events.at(-1).properties.page_path,
+      localizeHref(identity, locale),
+    );
+  }
+  assert.equal(
+    events.filter(({ event }) => event === "workshop_search_viewed").length,
+    searchStepsBeforeGuides,
+    "Guide reads do not invent funnel steps",
+  );
   await render(locale, "/werkstatt/issue-205-fixture", profile);
   assert.equal(
     events.filter(({ event }) => event === "workshop_profile_viewed").length,
@@ -379,6 +416,8 @@ for (const locale of ["de", "sq", "en"]) {
   for (const personal of [
     "private-search",
     "private-city-search",
+    "private-guide-query",
+    "private-guide-fragment",
     "private-fragment",
     "another-city-secret",
     "Private issue-205",

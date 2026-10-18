@@ -123,8 +123,8 @@ const deBase = {
 
 const de = /* @__PURE__ */ Object.assign({}, deBase, {
   public: publicDe,
-  sharing: sharingDe,
   city: cityDe,
+  sharing: sharingDe,
   customer: customerDe,
   management: managementDe,
 });
@@ -143,8 +143,8 @@ function defineCatalog<const C extends CatalogNamespaces>(
 
 const sq = /* @__PURE__ */ defineCatalog({
   public: publicSq,
-  sharing: sharingSq,
   city: citySq,
+  sharing: sharingSq,
   customer: customerSq,
   management: managementSq,
   common: /* @__PURE__ */ Object.assign({}, weekdaySq, {
@@ -250,8 +250,8 @@ const sq = /* @__PURE__ */ defineCatalog({
 
 const en = /* @__PURE__ */ defineCatalog({
   public: publicEn,
-  sharing: sharingEn,
   city: cityEn,
+  sharing: sharingEn,
   customer: customerEn,
   management: managementEn,
   common: /* @__PURE__ */ Object.assign({}, weekdayEn, {

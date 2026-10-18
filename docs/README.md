@@ -30,6 +30,10 @@ Follow [Contributing](../CONTRIBUTING.md) for task isolation and PRs.
 - [Daily discovery](data/daily-import.md): verified research and publication.
 - [Google identity](data/google-places.md): Place IDs and Maps links.
 
+## Growth
+
+- [Workshop guides and social drafts](growth/workshop-guides.md): content sources and manual sharing copy.
+
 ## Agents and past work
 
 Agents follow [AGENTS](../AGENTS.md), [Git startup](development/git-worktrees.md)

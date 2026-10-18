@@ -1,3 +1,5 @@
+export { guidePagePaths } from "../guide-routes";
+import { guideRoutes } from "../guide-routes";
 import { workshopCities } from "../workshop-cities";
 export const locales = ["de", "sq", "en"] as const;
 export type Locale = (typeof locales)[number];
@@ -18,6 +20,7 @@ export function stripLocalePrefix(path: string): string {
 // Source identities are English; localized public URLs remain stable.
 const pageRoutes: readonly (Record<Locale, string> & { id: string })[] = [
   { id: "/", de: "/", sq: "/", en: "/" },
+  ...guideRoutes,
   { id: "/workshops", de: "/werkstaetten", sq: "/serviset", en: "/workshops" },
   ...workshopCities.map(({ slug }) => ({
     id: `/workshops/${slug}`,

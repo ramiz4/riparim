@@ -1,3 +1,4 @@
+import { metadataDocumentRequest } from "../lib/vinext-request";
 import { workerSessionResponse } from "../lib/worker-session";
 import { workerPrivateReadResponse } from "../lib/worker-private-read";
 import { authOptionsResponse } from "../lib/auth-options";
@@ -109,7 +110,12 @@ export default {
       );
     const handler = (await import("vinext/server/fetch-handler")).default;
     const result = await withAuthRequest(
-      () => handler.fetch(stripSitesIdentityHeaders(request), env, ctx),
+      () =>
+        handler.fetch(
+          metadataDocumentRequest(stripSitesIdentityHeaders(request)),
+          env,
+          ctx,
+        ),
       request.headers.get("RSC") === "1" ||
         !!request.headers.get("Accept")?.includes("text/x-component"),
     );

@@ -160,6 +160,21 @@ const sitemap = new JSDOM(await sitemapResponse.text(), {
 const locations = [...sitemap.querySelectorAll("loc")].map(
   (node) => node.textContent,
 );
+for (const path of [
+  "/ratgeber",
+  "/sq/udhezues",
+  "/en/guides",
+  "/ratgeber/werkstatt-auswaehlen",
+  "/sq/udhezues/zgjedhja-e-servisit",
+  "/en/guides/choosing-a-workshop",
+  "/ratgeber/werkstattbesuch-vorbereiten",
+  "/sq/udhezues/pergatitja-e-vizites",
+  "/en/guides/preparing-a-visit",
+])
+  assert(
+    locations.includes("https://riparim.example.test" + path),
+    "The live sitemap includes canonical localized guide URLs: " + path,
+  );
 for (const city of api.workshopCities)
   for (const prefix of ["/werkstaetten", "/sq/serviset", "/en/workshops"])
     assert(

@@ -7,7 +7,7 @@ curl --fail https://riparim.com/robots.txt
 curl --fail https://riparim.com/sitemap.xml
 ```
 
-The sitemap lists canonical home, catalogue, five city pages and currently published workshop URLs
+The sitemap lists canonical home, catalogue, five city pages, the three guide pages and currently published workshop URLs
 in DE/SQ/EN, with reciprocal language alternatives from the same metadata helper
 used by pages. It excludes drafts, unknown profiles, account/admin routes and query
 parameters. It reads approved live records and returns 503 if that read fails;
@@ -29,6 +29,13 @@ change invalidates city HTML alongside the catalogue; data-free shells load appr
 live records through the public API until the next release. Client navigation also
 uses these shells. The Node runtime renders through the same published-only contract.
 
+The guide index and two articles use exact route identities from
+[`lib/guide-routes.ts`](../../lib/guide-routes.ts), shared by locale routing,
+metadata, sitemap and immutable release assets. All nine localized guide URLs
+are discoverable without query parameters. Unknown guides return 404. The guide
+pages contain static editorial content and contextual links to the live catalogue
+and city pages; they never snapshot account or catalogue records.
+
 The catalogue's expandable alphabetical profile index contains ordinary HTML links
 to every published workshop without requiring JavaScript. The first twelve cards,
 filters, incremental browsing and saved search behavior stay unchanged. Index links use
@@ -47,6 +54,38 @@ access control. Private-page `noindex,nofollow` metadata and server authorizatio
 remain authoritative; blocking those pages in robots.txt would prevent crawlers
 from reading their noindex directive.
 
+## Metadata in the document head
+
+Public documents must contain one nonempty title and description, one clean
+canonical link and four reciprocal language alternatives inside the parsed
+`document.head`. Metadata found only in the body is invalid release output.
+[Google's canonical guidance](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls)
+and [localized-version guidance](https://developers.google.com/search/docs/specialty/international/localized-versions)
+require a valid head for these HTML annotations.
+
+The shared Next/Vinext configuration uses the supported
+[`htmlLimitedBots: /.*/` option](https://nextjs.org/docs/app/api-reference/config/next-config-js/htmlLimitedBots)
+to await metadata before streaming HTML. This intentionally blocks document
+rendering until metadata is ready; no loading-performance improvement is claimed.
+Pinned Vinext treats an absent User-Agent as streaming before checking that option.
+The release renderer therefore supplies its own nonempty application User-Agent
+for every HTML/RSC capture, including privacy providers and data-free shells.
+It validates the parsed public head before writing any release HTML.
+
+At the final native Vinext boundary, Cloudflare and Sites supply a neutral owned
+User-Agent only when a page document GET/HEAD has no nonempty client User-Agent.
+Supplied browser/crawler identities, RSC, APIs, assets, callbacks and mutations
+retain their original request behavior. The Cloudflare adapter still strips
+untrusted Sites identity headers; Sites retains its trusted identity and connector
+context. No HTML rewriting or client-side metadata relocation is used.
+
+Release acceptance inspects `document.head`, including direct visits, client
+navigation, ordinary browsers, Googlebot/Twitterbot and absent-User-Agent requests.
+Cloudflare checks cover full assets, explicit shells, stale-publication shell
+selection, live fallback and both privacy providers; Node uses the same head
+contract. Unknown/unpublished routes must remain real 404s without public
+canonical/language alternatives, and query values must stay out of SEO metadata.
+
 ## Submit and inspect
 
 1. Open [Search Console](https://search.google.com/search-console), select the
@@ -55,7 +94,7 @@ from reading their noindex directive.
 2. After verifying the served release and sitemap, submit `sitemap.xml` under
    **Sitemaps**. Record the actual submission time and displayed result; a served
    sitemap alone does not prove submission or successful processing.
-3. Inspect a home, catalogue, city and workshop URL with **URL inspection**. Check the
+3. Inspect a home, catalogue, city, guide and workshop URL with **URL inspection**. Check the
    indexed URL and Google's selected canonical separately from the live test.
    Sample DE/SQ/EN and a recently published profile; check that private/draft URLs
    are excluded. Request indexing only for relevant published pages when warranted.

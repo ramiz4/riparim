@@ -46,6 +46,9 @@ const env = {
   },
 };
 for (const [path, locale, artifact] of [
+  ["/ratgeber", "de", "guides"],
+  ["/sq/udhezues/zgjedhja-e-servisit", "sq", "guides/choosing-a-workshop"],
+  ["/en/guides/preparing-a-visit", "en", "guides/preparing-a-visit"],
   ["/werkstaetten", "de", "workshops"],
   ["/sq/serviset", "sq", "workshops"],
   ["/en/workshops", "en", "workshops"],
@@ -82,6 +85,27 @@ for (const [path, locale, artifact] of [
         );
       await response.text();
     }
+}
+for (const path of [
+  "/ratgeber",
+  "/sq/udhezues/zgjedhja-e-servisit",
+  "/en/guides/preparing-a-visit",
+]) {
+  const response = await servePublicRelease(
+    new Request("https://riparim.test" + path),
+    {
+      ...env,
+      DB: {
+        prepare() {
+          throw Error(
+            "Immutable guidance must not read account or catalogue data",
+          );
+        },
+      },
+    },
+  );
+  assert.equal(response.status, 200);
+  await response.text();
 }
 const privatePaths = JSON.parse(
   await readFile("data/deferred-pages.json", "utf8"),

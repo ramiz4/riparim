@@ -1,4 +1,5 @@
-import { localizeHref } from "../scripts/lib/locale.mjs";
+import { assertPublicHead } from "./helpers/public-head.mjs";
+import { localizeHref, guidePagePaths } from "../scripts/lib/locale.mjs";
 import assert from "node:assert/strict";
 import { assertPrivacyOutput } from "./helpers/privacy-output.mjs";
 import { readFile, readdir } from "node:fs/promises";
@@ -75,8 +76,28 @@ await withWorkerRuntime(
         (canonical.workshops.filter(
           (workshop) => workshop.status === "published",
         ).length +
-          7),
+          7 +
+          guidePagePaths.length),
     );
+    const sitemapLocations = [...sitemapDocument.querySelectorAll("loc")].map(
+      (node) => node.textContent,
+    );
+    for (const path of [
+      "/ratgeber",
+      "/sq/udhezues",
+      "/en/guides",
+      "/ratgeber/werkstatt-auswaehlen",
+      "/sq/udhezues/zgjedhja-e-servisit",
+      "/en/guides/choosing-a-workshop",
+      "/ratgeber/werkstattbesuch-vorbereiten",
+      "/sq/udhezues/pergatitja-e-vizites",
+      "/en/guides/preparing-a-visit",
+    ])
+      assert(
+        sitemapLocations.includes("https://riparim.test" + path),
+        "Every Worker target advertises the nine real canonical guide URLs: " +
+          path,
+      );
     assert(sitemapXml.includes("https://riparim.test/sq/serviset"));
     for (const slug of ["prishtina", "prizren", "ferizaj", "peja", "gjakova"])
       for (const locale of ["de", "sq", "en"])
@@ -180,46 +201,58 @@ await withWorkerRuntime(
         "/",
         "/werkstaetten",
         "/datenschutz",
+        "/workshops/prishtina",
+        ...guidePagePaths,
         `/werkstatt/${published.id}`,
       ]) {
         const path =
           identity === "/" ? prefix || "/" : localizeHref(identity, locale);
-        const response = await dispatchFetch(
-          `https://riparim.test${path}?q=private-secret&ort=prizren&token=fixture`,
-        );
-        assert.equal(response.status, 200);
-        const dom = new JSDOM(await response.text());
-        try {
-          const doc = dom.window.document;
-          assert.equal(doc.documentElement.lang, locale);
-          assert(doc.title);
-          assert.equal(
-            doc.querySelector('link[rel="canonical"]').href,
-            `https://riparim.test${path}`,
-            "canonical contains clean localized page identity",
+        for (const userAgent of [
+          undefined,
+          "Mozilla/5.0",
+          "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+          "Twitterbot/1.0",
+        ]) {
+          const response = await dispatchFetch(
+            `https://riparim.test${path}?q=private-secret&ort=prizren&token=fixture`,
+            userAgent ? { headers: { "User-Agent": userAgent } } : {},
           );
-          const alternatives = Object.fromEntries(
-            [...doc.querySelectorAll('link[rel="alternate"][hreflang]')].map(
-              (link) => [link.hreflang, link.href],
-            ),
-          );
-          assert.deepEqual(
-            alternatives,
-            Object.fromEntries(
-              ["de", "sq", "en", "x-default"].map((language) => [
-                language,
-                "https://riparim.test" +
-                  localizeHref(
-                    identity,
-                    language === "x-default" ? "de" : language,
-                  ),
-              ]),
-            ),
-            "all locales emit identical reciprocal sets",
-          );
-          assert(!JSON.stringify(alternatives).includes("private-secret"));
-        } finally {
-          dom.window.close();
+          assert.equal(response.status, 200);
+          const html = await response.text();
+          assertPublicHead(html, identity, locale, "https://riparim.test");
+          const dom = new JSDOM(html);
+          try {
+            const doc = dom.window.document;
+            assert.equal(doc.documentElement.lang, locale);
+            assert(doc.title);
+            assert.equal(
+              doc.head.querySelector('link[rel="canonical"]').href,
+              `https://riparim.test${path}`,
+              "canonical contains clean localized page identity",
+            );
+            const alternatives = Object.fromEntries(
+              [
+                ...doc.head.querySelectorAll('link[rel="alternate"][hreflang]'),
+              ].map((link) => [link.hreflang, link.href]),
+            );
+            assert.deepEqual(
+              alternatives,
+              Object.fromEntries(
+                ["de", "sq", "en", "x-default"].map((language) => [
+                  language,
+                  "https://riparim.test" +
+                    localizeHref(
+                      identity,
+                      language === "x-default" ? "de" : language,
+                    ),
+                ]),
+              ),
+              "all locales emit identical reciprocal sets",
+            );
+            assert(!JSON.stringify(alternatives).includes("private-secret"));
+          } finally {
+            dom.window.close();
+          }
         }
       }
       const rsc = await dispatchFetch(
@@ -578,6 +611,9 @@ await withWorkerRuntime(
       );
     }
     for (const path of [
+      "/ratgeber/missing",
+      "/sq/udhezues/missing",
+      "/en/guides/missing",
       "/fr",
       "/sq/missing",
       "/en/missing",
@@ -594,6 +630,18 @@ await withWorkerRuntime(
     ]) {
       const response = await dispatchFetch("https://riparim.test" + path);
       assert.equal(response.status, 404, path);
+      const dom = new JSDOM(await response.text());
+      try {
+        assert.equal(
+          dom.window.document.querySelectorAll(
+            'link[rel="canonical"],link[rel="alternate"][hreflang]',
+          ).length,
+          0,
+          "Unknown routes never expose public canonical/alternate metadata",
+        );
+      } finally {
+        dom.window.close();
+      }
     }
     for (const path of ["/api/workshops", "/api/google-places"]) {
       const response = await dispatchFetch("https://riparim.test" + path);

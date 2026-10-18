@@ -10,6 +10,6 @@ const result = await build({
   platform: "node",
   write: false,
 });
-export const { localizeHref } = await import(
+export const { localizeHref, guidePagePaths } = await import(
   `data:text/javascript;base64,${Buffer.from(result.outputFiles[0].contents).toString("base64")}`
 );
