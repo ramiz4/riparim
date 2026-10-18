@@ -5699,7 +5699,7 @@
             "08:00-19:00",
             "Geschlossen"
           ],
-          "limits": "Tentative directory schedule only. Own sources and site attribution must be checked before adopting as researched. If no usable plan after complete research, central assumed fallback is required for otherwise eligible identity."
+          "limits": "Undated directory week read; no attributable own weekly source found in completed source searches. Identity/premises remain unresolved, so no schedule is imported. No owner confirmation asserted."
         },
         "googleIdentity": {
           "method": "public-maps-ui",
@@ -5749,7 +5749,7 @@
             "Geschlossen",
             "Geschlossen"
           ],
-          "limits": "Tentative directory schedule only. Own sources and site attribution must be checked before adopting as researched. If no usable plan after complete research, central assumed fallback is required for otherwise eligible identity."
+          "limits": "Undated directory week read; no attributable own weekly source found in completed source searches. Identity/premises remain unresolved, so no schedule is imported. No owner confirmation asserted."
         },
         "googleIdentity": {
           "method": "public-maps-ui",
@@ -5797,7 +5797,7 @@
             "08:00-19:00",
             "Geschlossen"
           ],
-          "limits": "Tentative directory schedule only. Own sources and site attribution must be checked before adopting as researched. If no usable plan after complete research, central assumed fallback is required for otherwise eligible identity."
+          "limits": "Undated directory week read; no attributable own weekly source found in completed source searches. Identity/premises remain unresolved, so no schedule is imported. No owner confirmation asserted."
         },
         "googleIdentity": {
           "method": "public-maps-ui",
@@ -5860,7 +5860,7 @@
             "08:00-19:00",
             "Geschlossen"
           ],
-          "limits": "Tentative directory schedule only. Own sources and site attribution must be checked before adopting as researched. If no usable plan after complete research, central assumed fallback is required for otherwise eligible identity.",
+          "limits": "Own Facebook full week was read and differs from the directory plan. Contact/branch continuity remains unresolved, so no hours are imported. No owner confirmation asserted.",
           "note": "Own Facebook full week differs from directory08–18 plan; no owner confirmation. No hours imported while contact continuity is unresolved."
         },
         "googleIdentity": {
@@ -5979,7 +5979,7 @@
           "note": "Explicitly directory-listed business email, not inferred from name. Own Instagram no email; related-name Facebook empty and uncorroborated."
         },
         "openingHoursResearch": {
-          "status": "directory-plan-prepared-own-check-pending",
+          "status": "directory-week-researched-identity-deferred",
           "sourceUrl": "https://stgres.gjirafa.biz/ledo-motors-1",
           "checkedAt": "2026-10-18T08:17:48.195404+00:00",
           "sourceAge": "undated directory",
@@ -5992,7 +5992,8 @@
             "09:00-19:00",
             "Geschlossen"
           ],
-          "note": "Own Instagram has no week. No hours imported while identity unresolved."
+          "note": "Own Instagram has no week. No hours imported while identity unresolved.",
+          "limits": "Own Instagram has no weekly plan; related-name Facebook is not attributed. Undated directory week retained as research only while phone/premises continuity remains unresolved; no owner confirmation or import."
         },
         "nextCheck": "Find own relocation/contact continuity or attributable old-phone Maps entry; do not repeatedly search unchanged name."
       },
