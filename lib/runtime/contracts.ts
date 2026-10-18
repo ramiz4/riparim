@@ -84,6 +84,9 @@ export type RuntimeEnv = {
   DB?: SqlDatabase;
   BUCKET?: PrivateFiles;
   SITE_ORIGIN?: string;
+  POSTHOG_KEY?: string;
+  POSTHOG_HOST?: string;
+  POSTHOG_TEST_MODE?: string;
   REVIEW_MODERATOR_EMAIL?: string;
   GOOGLE_MAPS_BROWSER_API_KEY?: string;
   GOOGLE_PLACES_SERVER_API_KEY?: string;

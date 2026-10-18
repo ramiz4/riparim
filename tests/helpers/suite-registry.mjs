@@ -1,4 +1,7 @@
 export const registeredSuites = Object.freeze([
+  { file: "analytics.test.mjs", group: "core" },
+  { file: "analytics-ui.test.mjs", group: "core" },
+  { file: "analytics-config.test.mjs", group: "core" },
   { file: "style-fixture-state.test.mjs", group: "core" },
   { file: "compiled-tailwind.test.mjs", group: "core" },
   { file: "presentation-navigation.test.mjs", group: "core" },

@@ -177,7 +177,7 @@ export default function Finder({
           <LoadingIndicator label={t("common.loadingWorkshops")} />
         </main>
       ) : (
-        <main className="bg-white dark:bg-background">
+        <main className="bg-white dark:bg-background" data-riparim-page="home">
           <section
             className="relative isolate flex items-center bg-[#071e20] text-white"
             aria-labelledby="hero-title"

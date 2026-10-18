@@ -24,6 +24,8 @@ const publicHashes = new Set([
   "#privacy-storage",
   "#privacy-google",
   "#privacy-deletion",
+  "#privacy-analytics",
+  "#analytics-settings",
 ]);
 // Language switches carry only public navigation fields, never arbitrary URL data.
 export function languageSwitchHref(href: string, locale: Locale): string {

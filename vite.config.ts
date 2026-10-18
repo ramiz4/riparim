@@ -12,6 +12,7 @@ import { sites } from "./build/sites-vite-plugin";
 import { connectorPreview } from "./build/connector-preview-plugin.mjs";
 import { vinextLazyHandler } from "./build/vinext-lazy-handler.mjs";
 import { vinextNavigation } from "./build/vinext-navigation.mjs";
+import { publicAnalyticsBindings } from "./scripts/lib/public-analytics.mjs";
 import {
   releaseBuildTarget,
   sitesBuildConfiguration,
@@ -97,6 +98,7 @@ export default defineConfig(async ({ command }) => {
             ? () => ({
                 ...local!.wranglerConfig,
                 vars: {
+                  ...publicAnalyticsBindings(process.env),
                   SITE_ORIGIN:
                     process.env.SITE_ORIGIN ?? `http://127.0.0.1:${localPort}`,
                 },
