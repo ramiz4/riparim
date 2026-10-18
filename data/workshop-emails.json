@@ -2200,6 +2200,29 @@
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
     },
     {
+      "workshopId": "auto-servis-sistem-mazgit",
+      "matchedName": "Auto Servis Sistem",
+      "matchedPhone": "+38344168690",
+      "matchedCity": "Obiliq",
+      "emails": [
+        {
+          "address": "autoservis-sistem@hotmail.com",
+          "sourceUrls": [
+            "https://www.facebook.com/autoservis.sistem/directory_contact_info"
+          ],
+          "checkedAt": "2026-10-18",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://autoservis-sistem.com/",
+        "https://autoservis-sistem.com/kontakt",
+        "https://www.facebook.com/autoservis.sistem/"
+      ],
+      "notes": "Explicit public business contact on the attributed own source. No deliverability, consent or ownership assertion; no contact message sent."
+    },
+    {
       "workshopId": "auto-servis-trimi-prishtina",
       "matchedName": "Auto Servis Trimi",
       "matchedPhone": "+38349195447",
@@ -2711,6 +2734,33 @@
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; Facebook requires login; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. No additional reliably assigned email adopted. Email result autoservis.keni@gmail.com is listed for Rent a Car Keni with +38344112585; no evidence linking it to the catalogue contact +38349353500. Not adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
     },
     {
+      "workshopId": "autoservis-krasniqi-suhareke",
+      "matchedName": "Autoservis Krasniqi",
+      "matchedPhone": "+38349593002",
+      "matchedCity": "Suharekë",
+      "emails": [
+        {
+          "address": "info@autokrasniqi.com",
+          "sourceUrls": ["https://autokrasniqi.com/kontakti/"],
+          "checkedAt": "2026-10-18",
+          "emailVerification": "publicly_listed"
+        },
+        {
+          "address": "autokrasniqi@gmail.com",
+          "sourceUrls": ["https://autokrasniqi.com/kontakti/"],
+          "checkedAt": "2026-10-18",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://autokrasniqi.com/kontakti/",
+        "https://autokrasniqi.com/sherbimet/",
+        "https://autokrasniqi.com/ballina/"
+      ],
+      "notes": "Explicit public business contact on the attributed own source. No deliverability, consent or ownership assertion; no contact message sent."
+    },
+    {
       "workshopId": "autoservis-pg-bosch-prishtina",
       "matchedName": "Autoservis PG Bosch",
       "matchedPhone": "+38344282504",
@@ -3007,6 +3057,19 @@
         "https://www.google.com/search?q=%22049%20445%20589%22%20Prizren"
       ],
       "notes": "DPF Kosova result with a different name and contact; not adopted. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. DPF Kosova publishes info.dpfkosova@gmail.com with +38344240333; no evidence linking it to DPF Auto Gjini with +38349445589; excluded. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. At least one contact page was not publicly available. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
+    },
+    {
+      "workshopId": "drini-detailing-more-podujeve",
+      "matchedName": "Drini Detailing & More",
+      "matchedPhone": "+38349222947",
+      "matchedCity": "Podujevë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://www.facebook.com/profile.php?id=61584798375499",
+        "https://www.instagram.com/drini.detailing.more/"
+      ],
+      "notes": "Own full Facebook Info/bio and Instagram bio plus independent name/town email/Instagram search show no attributable email or own contact website; Prishtine Drini email is a separate identity and not reused."
     },
     {
       "workshopId": "eurogoma-ferizaj",

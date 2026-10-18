@@ -2844,6 +2844,36 @@
       }
     },
     {
+      "id": "auto-servis-sistem-mazgit",
+      "sourceHash": "866b324373ed938323f0731b4d7484de678b65935e6d78bf16d6e5738e882e3c",
+      "sq": {
+        "specialty": "Diagnostikim i transmisionit për vetura · Riparim transmisioni",
+        "description": "Auto Servis Sistem në Mazgit ofron diagnostikim dhe riparim të transmisionit për vetura. Biznesi ndodhet në rrugën Prishtinë–Mitrovicë, në kilometrin 7.",
+        "serviceDetails": [
+          "Diagnostikim i transmisionit për vetura",
+          "Riparim i transmisionit për vetura"
+        ],
+        "sourceTitles": [
+          "Faqja e vetë biznesit: servis i transmisionit për vetura, kontakti dhe vendndodhja",
+          "Faqja e vetë biznesit në Facebook: kontakti i biznesit dhe përcaktimi i vendndodhjes"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia për ta kontaktuar nuk është konfirmuar"
+      },
+      "en": {
+        "specialty": "Car transmission diagnosis · Transmission repair",
+        "description": "Auto Servis Sistem in Mazgit offers car transmission diagnosis and repair. The business is located at kilometre 7 on the Prishtinë–Mitrovicë road.",
+        "serviceDetails": [
+          "Car transmission diagnosis",
+          "Car transmission repair"
+        ],
+        "sourceTitles": [
+          "Own business website: car transmission service, contact and location",
+          "Own Facebook page: business contact and location attribution"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed"
+      }
+    },
+    {
       "id": "auto-servis-trimi-prishtina",
       "sourceHash": "17704d292a737cae7ee37a7ef5704b2a2f3e36a6c754252daf370fb362376f97",
       "sq": {
@@ -3548,6 +3578,36 @@
       }
     },
     {
+      "id": "autoservis-krasniqi-suhareke",
+      "sourceHash": "079c6c1efd7265693a08892dd4e7818d5adb534341fd49eed41a1b650c18d59e",
+      "sq": {
+        "specialty": "Servis për vetura · Mirëmbajtje · Kontroll teknik",
+        "description": "Autoservis Krasniqi në Suharekë ofron mirëmbajtje dhe riparim të veturave, si dhe kontroll teknik të automjeteve. Biznesi ndodhet në Rrugën Skënderbeu.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparim i veturave",
+          "Kontroll teknik i automjeteve"
+        ],
+        "sourceTitles": [
+          "Faqja e kontaktit e vetë biznesit: adresa, numrat e biznesit dhe emaili",
+          "Faqja e shërbimeve e vetë biznesit: servis për vetura dhe kontroll teknik"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia për ta kontaktuar nuk është konfirmuar"
+      },
+      "en": {
+        "specialty": "Car servicing · Maintenance · Vehicle inspection",
+        "description": "Autoservis Krasniqi in Suharekë offers car maintenance and repairs, as well as technical vehicle inspections. The business is located on Rruga Skënderbeu.",
+        "serviceDetails": [
+          "Car maintenance and repairs",
+          "Technical vehicle inspection"
+        ],
+        "sourceTitles": [
+          "Own contact page: address, business numbers and email",
+          "Own services page: car servicing and vehicle inspection"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed"
+      }
+    },
+    {
       "id": "autoservis-pg-bosch-prishtina",
       "sourceHash": "17704d292a737cae7ee37a7ef5704b2a2f3e36a6c754252daf370fb362376f97",
       "sq": {
@@ -3938,6 +3998,40 @@
           "Cybo: published name · address · telephone · vehicle service category",
           "Contact, location and passenger-car service cross-check dated 5 October 2026"
         ]
+      }
+    },
+    {
+      "id": "drini-detailing-more-podujeve",
+      "sourceHash": "07a3741cf798a5fe9bc7eb0853918df71fdfc18417852539114c096addf74c94",
+      "sq": {
+        "specialty": "Polirim i veturave · Detailing · PPF",
+        "description": "Drini Detailing & More në Podujevë ofron polirim dhe detailing të veturave, folje mbrojtëse (PPF) dhe shërbimin Chrome Delete. Biznesi ndodhet në Rrugën Skënderbeu.",
+        "serviceDetails": [
+          "Polirim i veturave",
+          "Detailing i veturave",
+          "Folje mbrojtëse (PPF)",
+          "Chrome Delete"
+        ],
+        "sourceTitles": [
+          "Faqja e vetë biznesit në Facebook: kontakti, vendndodhja dhe shërbimet",
+          "Profili i vetë biznesit në Instagram: kontakti, vendndodhja dhe shërbimet"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia për ta kontaktuar nuk është konfirmuar"
+      },
+      "en": {
+        "specialty": "Car polishing · Detailing · PPF",
+        "description": "Drini Detailing & More in Podujevë offers car polishing and detailing, protective film (PPF) and Chrome Delete. The business is located on Rruga Skënderbeu.",
+        "serviceDetails": [
+          "Car polishing",
+          "Vehicle detailing",
+          "Protective film (PPF)",
+          "Chrome Delete"
+        ],
+        "sourceTitles": [
+          "Own Facebook page: contact, location and services",
+          "Own Instagram profile: contact, location and services"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed"
       }
     },
     {

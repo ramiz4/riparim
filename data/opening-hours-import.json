@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "684f8a75707453108b990cfc740ca5b35977b5454eef1b520ef53b3f87ee84d4",
+  "revision": "aacc8cf613f15e4c5f8137c089363e71d1084a073708582bf8b0d37ea28553f8",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -8721,6 +8721,95 @@
       }
     },
     {
+      "id": "auto-servis-sistem-mazgit",
+      "expected": {
+        "name": "Auto Servis Sistem",
+        "city": "Obiliq",
+        "address": "Magjistralja Prishtinë–Mitrovicë km 7, Mazgit",
+        "phone": "+38344168690"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "17:30"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "17:30"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "17:30"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "17:30"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "17:30"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "17:30"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-18",
+        "source": "https://www.facebook.com/autoservis.sistem/",
+        "sourceName": "Auto Servis Sistem",
+        "researchStatus": "Gefunden (eigener Betriebsauftritt)",
+        "notes": "Own Facebook full weekly dialog read on 2026-10-18. Update age not displayed. Not owner-confirmed; viewing date is not a business confirmation.",
+        "originalWeek": [
+          "08:30-17:30",
+          "08:30-17:30",
+          "08:30-17:30",
+          "08:30-17:30",
+          "08:30-17:30",
+          "08:30-17:30",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-servis-trimi-prishtina",
       "expected": {
         "name": "Auto Servis Trimi",
@@ -10930,6 +11019,87 @@
       }
     },
     {
+      "id": "autoservis-krasniqi-suhareke",
+      "expected": {
+        "name": "Autoservis Krasniqi",
+        "city": "Suharekë",
+        "address": "Rruga Skënderbeu p.n., Suharekë 23000",
+        "phone": "+38349593002"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-18",
+        "source": "https://autokrasniqi.com/kontakti/",
+        "sourceName": "Autoservis Krasniqi",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own sources checked on 2026-10-18: https://autokrasniqi.com/kontakti/, https://autokrasniqi.com/ballina/, https://autokrasniqi.com/sherbimet/, https://www.facebook.com/ServiceKrasniqi/. No week on own contact/home/service pages. Own linked Facebook content unavailable; focused independent Instagram/hours search yields no attributable own profile/week. Use central explicitly assumed default; do not infer closure from unavailable Facebook. Own embedded map not used for identity or any catalogue fact. Source age undated; viewing date is not a business confirmation. No owner confirmation or current open status asserted.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "autoservis-pg-bosch-prishtina",
       "expected": {
         "name": "Autoservis PG Bosch",
@@ -12075,6 +12245,87 @@
           "09:00-17:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "drini-detailing-more-podujeve",
+      "expected": {
+        "name": "Drini Detailing & More",
+        "city": "Podujevë",
+        "address": "Rruga Skënderbeu, Podujevë",
+        "phone": "+38349222947"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-18",
+        "source": "https://www.facebook.com/profile.php?id=61584798375499&sk=about",
+        "sourceName": "Drini Detailing & More",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own sources checked on 2026-10-18: https://www.facebook.com/profile.php?id=61584798375499&sk=about, https://www.instagram.com/drini.detailing.more/. Neither own business profile provides usable weekly hours or a contact website. Use central assumed default for cleared identity; no Google hours copied. Source age undated; viewing date is not a business confirmation. No owner confirmation or current open status asserted.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
