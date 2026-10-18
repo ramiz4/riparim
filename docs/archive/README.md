@@ -6,6 +6,7 @@ These dated records describe past observations. Use [active guides](../README.md
 
 - [Catalogue history](catalogue-history.md) · [Daily research](research-daily-import-2026-10-10.md)
 - [Google cost audit](google-places-cost-audit-2026-10-11.md)
+- [Complete WhatsApp verification](research-whatsapp-verification-2026-10-18.md)
 
 ## Product and performance
 

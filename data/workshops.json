@@ -1,7 +1,7 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-18T08:35:26.954Z",
+  "updatedAt": "2026-10-18T14:03:08.403Z",
   "coverage": {
     "countryCode": "XK",
     "published": 194,
@@ -25,7 +25,7 @@
       "address": "Xhevat Qena, Prishtinë 10000",
       "phone": "+38349909229",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349909229",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": [
@@ -58,7 +58,7 @@
       ],
       "checkedAt": "2026-10-16",
       "status": "published",
-      "updatedAt": "2026-10-16T10:06:24.074213Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ37DfXZ-fVBMRo99bAJlNTU0",
         "matchedAt": "2026-10-16T09:50:36Z",
@@ -81,7 +81,7 @@
       "address": "20000, M25, Prizren",
       "phone": "+38344561161",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344561161",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -101,7 +101,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJrYwDvZyWUxMRc7AI-ssgTBQ",
         "matchedAt": "2026-10-04T06:38:15.551Z",
@@ -123,7 +123,7 @@
       "address": "Shefqet Shkupi , Lagjja Kalabri(Emshir), Prishtinë",
       "phone": "+38344164141",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344164141",
       "brands": ["Mercedes-Benz", "Smart"],
       "services": ["Inspektion & Wartung", "Motor & Getriebe"],
       "serviceDetails": [
@@ -144,7 +144,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:00:23.292Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJs4k20oyeVBMRVMCGu9mIn20",
         "matchedAt": "2026-10-04T09:54:03.927040Z",
@@ -275,7 +275,7 @@
       "address": "Rr. Ibrahim Rugova, Ferizaj 70000",
       "phone": "+38344772003",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344772003",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -295,7 +295,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJNXRTcx19VBMRLj2OzkG4A3Q",
         "matchedAt": "2026-10-04T06:38:16.502Z",
@@ -317,7 +317,7 @@
       "address": "VVCV+5H5, M2, Mitrovicë 40000",
       "phone": "+38349213901",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349213901",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -342,7 +342,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:04:19.069Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJr_6I2ChFUxMRARVfS1C0RGI",
         "matchedAt": "2026-10-04T09:56:02.071Z",
@@ -372,7 +372,7 @@
       "address": "Malësi e Re 20550",
       "phone": "+38349990013",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349990013",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -392,7 +392,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJkevGspSXUxMRXbVZsyaYY4o",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -413,7 +413,7 @@
       "address": "Rr. Adem Jashari, afër Bytyqi Oil, Malishevë 24000",
       "phone": "+38349534811",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349534811",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": [
@@ -446,7 +446,7 @@
       ],
       "checkedAt": "2026-10-16",
       "status": "published",
-      "updatedAt": "2026-10-16T10:43:56.149039Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJB0KY3tZ1UxMRQlWKKp76pt4",
         "matchedAt": "2026-10-16T10:33:09Z",
@@ -469,7 +469,7 @@
       "address": "Mitrovica 40000",
       "phone": "+38343509444",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38343509444",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": [
@@ -490,7 +490,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJiex-kthFUxMRBH4rM-JOjzo",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -511,7 +511,7 @@
       "address": "Lord Bajron 77, Prishtina 10000",
       "phone": "+38344112914",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344112914",
       "brands": [],
       "services": ["Diagnose & Elektronik"],
       "serviceDetails": [
@@ -541,7 +541,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T10:08:45.026Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJox3Nl9OfVBMRe4yWuczSZZw",
         "matchedAt": "2026-10-05T10:08:45.026Z",
@@ -572,7 +572,7 @@
       "address": "1 William Walker, Prizren 20000",
       "phone": "+38343738348",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38343738348",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -597,7 +597,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJW80AN8qVUxMRCOCtwrht_qg",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -709,7 +709,7 @@
       "address": "Filip Vishnjiq, Mitrovicë 38220",
       "phone": "+381669599440",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+381669599440",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -729,7 +729,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJXaB60G9FUxMRcof91OFOzOQ",
         "matchedAt": "2026-10-04T06:38:17.755Z",
@@ -751,7 +751,7 @@
       "address": "116 Vëllezerit Gërvalla, Ferizaj 70000",
       "phone": "+38344760607",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344760607",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -771,7 +771,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ2Z89GU9_VBMRyR4mlYf6J-Q",
         "matchedAt": "2026-10-04T06:38:18.096Z",
@@ -793,7 +793,7 @@
       "address": "22 Maji, Vushtrri",
       "phone": "+38344900333",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344900333",
       "brands": [],
       "services": ["Diagnose & Elektronik"],
       "serviceDetails": [
@@ -817,7 +817,7 @@
       ],
       "checkedAt": "2026-10-12",
       "status": "published",
-      "updatedAt": "2026-10-12T07:32:35.413040Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJbT1QoXtbUxMRVVAT8u2M2Rc",
         "matchedAt": "2026-10-12T07:32:35.413040Z",
@@ -877,7 +877,7 @@
       "address": "Avdullah Presheva Nr. 82, Gjilan 60000",
       "phone": "+38344164468",
       "phoneNote": "Kontakt aus eigener Betriebsanzeige und aktuellen Betriebsbeiträgen",
-      "whatsapp": "",
+      "whatsapp": "+38344164468",
       "brands": [],
       "services": ["Diagnose & Elektronik"],
       "serviceDetails": [
@@ -912,7 +912,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T12:08:22.374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJv-KrCHaNVBMRzYjAlm90dtQ",
         "matchedAt": "2026-10-05T12:08:22.374Z",
@@ -944,7 +944,7 @@
       "address": "Rruga Mon Balaj 658, Bërnicë e Epërme, 10000 Prishtinë, Kosovo",
       "phone": "+38344777775",
       "phoneNote": "Veröffentlichter Servicekontakt; Viber wird ausdrücklich genannt",
-      "whatsapp": "",
+      "whatsapp": "+38344777775",
       "brands": [
         "Mercedes-Benz",
         "BMW",
@@ -990,7 +990,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T12:13:17.842594+00:00",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJfSg1uDuhVBMRG9zhbKNtX60",
         "matchedAt": "2026-10-04T06:47:52.478Z",
@@ -1012,7 +1012,7 @@
       "address": "Ferid Curri, Prishtina",
       "phone": "+38345524633",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38345524633",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": [
@@ -1035,7 +1035,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T22:12:28.577Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJe9Xt6_WfVBMRLIa5AID6zyg",
         "matchedAt": "2026-10-10T22:12:28.577Z",
@@ -1056,7 +1056,7 @@
       "address": "Mirman jakupi Muhamet çami no 51, Prizren 20000",
       "phone": "+38344129120",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344129120",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -1081,7 +1081,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJQwaI3PyVUxMRimoFEn3CgKw",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -1110,7 +1110,7 @@
       "address": "6MRX+JVQ, Prizren 20000",
       "phone": "+38344605241",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344605241",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -1135,7 +1135,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ-cAhrOC_UxMR9xXSyq8Uzi8",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -1164,7 +1164,7 @@
       "address": "460 Rruga e Pejës, Fushë Kosovë 12000",
       "phone": "+38349219999",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349219999",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": ["Montage und Reparatur von Fahrzeugglas"],
@@ -1187,7 +1187,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJsZKayDhjUxMR1Ec5xgLX1gk",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -1209,7 +1209,7 @@
       "address": "Vëllëzërit Fazliu, Prishtinë",
       "phone": "+38344294811",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344294811",
       "brands": [],
       "services": [
         "Inspektion & Wartung",
@@ -1235,7 +1235,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T10:08:45.026Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJebOcSQCfVBMRenUNUpgt-kA",
         "matchedAt": "2026-10-05T10:08:45.026Z",
@@ -1319,7 +1319,7 @@
       "address": "Mbreti Agron Kqiç i Madh, Mitrovicë 40000",
       "phone": "+38344213762",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344213762",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -1339,7 +1339,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJJUmVY4dbUxMRwsHIAJw3Rio",
         "matchedAt": "2026-10-04T06:38:18.634Z",
@@ -1408,7 +1408,7 @@
       "address": "Magjistralja Prishtinë–Shkup, km 7, 10000 Prishtina, Kosovo",
       "phone": "+38345686868",
       "phoneNote": "Allgemeiner Kontakt Renault · Nissan · Dacia",
-      "whatsapp": "",
+      "whatsapp": "+38345686868",
       "brands": ["Renault", "Dacia", "Nissan", "Volvo"],
       "services": [
         "Inspektion & Wartung",
@@ -1445,7 +1445,7 @@
       ],
       "checkedAt": "2026-10-02",
       "status": "published",
-      "updatedAt": "2026-10-02T16:15:00.000Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJL9XXwhCdVBMR_jl20uzt15A",
         "matchedAt": "2026-10-04T06:38:18.963Z",
@@ -1467,7 +1467,7 @@
       "address": "Abdullah Tahiri, Gjilan 60000",
       "phone": "+38349547577",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349547577",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -1487,7 +1487,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJN009LtzyVBMRBIhEaKINpE4",
         "matchedAt": "2026-10-04T06:38:19.304Z",
@@ -1509,7 +1509,7 @@
       "address": "Rruga Ahmet Hoxha, Ferizaj 70000",
       "phone": "+38348380560",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38348380560",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -1529,7 +1529,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJpyrbaNd_VBMREMjd2Ees5tk",
         "matchedAt": "2026-10-04T06:38:19.624Z",
@@ -1551,7 +1551,7 @@
       "address": "116 Vëllezerit Gërvalla, Ferizaj 70000",
       "phone": "+38345676606",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38345676606",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -1571,7 +1571,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJJ4SlZvp_VBMRyXe6jR8r5-E",
         "matchedAt": "2026-10-04T06:38:19.979Z",
@@ -1593,7 +1593,7 @@
       "address": "95Q7+872, Talinoc i Jerlive 70000",
       "phone": "+38349729777",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349729777",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -1618,7 +1618,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:04:19.069Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJs2t2ydx_VBMR7o5UGmJb778",
         "matchedAt": "2026-10-04T09:55:31.486Z",
@@ -1648,7 +1648,7 @@
       "address": "95MC+X3, Talinoc i Muhaxherëve 70000",
       "phone": "+38344367105",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344367105",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -1673,7 +1673,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:04:19.069Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ7ehTfgZ_VBMRNjghZHjasXA",
         "matchedAt": "2026-10-04T09:55:32.347Z",
@@ -1703,7 +1703,7 @@
       "address": "Rruga Braim Ademi, Ferizaj 70000",
       "phone": "+38344172013",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344172013",
       "brands": [],
       "services": ["Inspektion & Wartung", "Karosserie & Lack"],
       "serviceDetails": [
@@ -1729,7 +1729,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJOS5ZJ9F_VBMRRzJ7_AfKgiU",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -1756,7 +1756,7 @@
       "address": "Greikoc, Theranda, Kosovë",
       "phone": "+38349491331",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349491331",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": [
@@ -1777,7 +1777,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJm4wk31CXUxMR0Jnhlh_gzBo",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -1836,7 +1836,7 @@
       "address": "Rr. Brahim Ademi, Ferizaj 70000",
       "phone": "+38349929000",
       "phoneNote": "Aktueller Kontakt aus der eigenen Betriebswebsite",
-      "whatsapp": "",
+      "whatsapp": "+38349929000",
       "brands": [],
       "services": [
         "Inspektion & Wartung",
@@ -1879,7 +1879,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T10:08:45.026Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJx-kdM1l-VBMRwc2PmJdYa4Q",
         "matchedAt": "2026-10-05T10:08:45.026Z",
@@ -1911,7 +1911,7 @@
       "address": "Magjistralja Ferizaj-Prishtinë , Llapnasellë, Komuna e Prishtinës",
       "phone": "+38344668508",
       "phoneNote": "Kontakt aus eigenen Fatosi-Anzeigen, zusätzlich im unabhängigen Werkstattverzeichnis bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344668508",
       "brands": [],
       "services": ["Inspektion & Wartung", "Reifen & Klima"],
       "serviceDetails": [
@@ -1952,7 +1952,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T12:08:22.374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJU2coyzCdVBMR9MLuvMnBqHM",
         "matchedAt": "2026-10-05T12:08:22.374Z",
@@ -1986,7 +1986,7 @@
       "address": "CFR5+26, Gjilan 60000",
       "phone": "+38344296081",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344296081",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -2011,7 +2011,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:04:19.069Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJMb1eezmNVBMRRmiBJtGANVE",
         "matchedAt": "2026-10-04T09:56:03.011Z",
@@ -2041,7 +2041,7 @@
       "address": "Mehmet Haxhaj, Klina 32000",
       "phone": "+38349138886",
       "phoneNote": "Öffentlicher Verzeichniskontakt (GjithëBiznesi); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349138886",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -2061,7 +2061,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:00:23.292Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJQSGfTZoPUxMRbJPMdKm9pLM",
         "matchedAt": "2026-10-04T09:54:03.927040Z",
@@ -2092,7 +2092,7 @@
       "address": "Rr. Ahmet Gjikolli 57 (Jarinë), Peja 30000",
       "phone": "+38349141187",
       "phoneNote": "Öffentlicher Verzeichniskontakt (GjithëBiznesi); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349141187",
       "brands": [],
       "services": ["Inspektion & Wartung", "Bremsen & Fahrwerk"],
       "serviceDetails": [
@@ -2118,7 +2118,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:00:23.292Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJl6oVOfb9UhMRrXOWUo1G5n4",
         "matchedAt": "2026-10-04T09:54:03.927040Z",
@@ -2191,7 +2191,7 @@
       "address": "Luan Haradinaj, Vushtrri 42000",
       "phone": "+38349400386",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349400386",
       "brands": [],
       "services": ["Motor & Getriebe", "Reifen & Klima"],
       "serviceDetails": [
@@ -2217,7 +2217,7 @@
       ],
       "checkedAt": "2026-10-13",
       "status": "published",
-      "updatedAt": "2026-10-13T07:42:24.004Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJx9DKuGFbUxMRYxVaw3g7KGw",
         "matchedAt": "2026-10-13T07:42:24.004Z",
@@ -2239,7 +2239,7 @@
       "address": "M83G+QCR Afer Doganes, Deshmoret E Kombit Tranzit, Deshmoret e Kombit, Pejë",
       "phone": "+38349666755",
       "phoneNote": "Öffentlicher Verzeichniskontakt (GjithëBiznesi); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349666755",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -2259,7 +2259,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:00:23.292Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJM0I7MP39UhMRSugOjARCpw0",
         "matchedAt": "2026-10-04T09:54:03.927040Z",
@@ -2290,7 +2290,7 @@
       "address": "RXPH+QWF, Vushtrri 42000",
       "phone": "+38349205441",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349205441",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": ["Karosseriearbeiten laut öffentlichem Verzeichnis."],
@@ -2308,7 +2308,7 @@
       ],
       "checkedAt": "2026-10-13",
       "status": "published",
-      "updatedAt": "2026-10-13T07:42:24.004Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJETVBwuZbUxMRaPlrks7hb24",
         "matchedAt": "2026-10-13T07:42:24.004Z",
@@ -2329,7 +2329,7 @@
       "address": "Mulla Zekë Bërdynaj, Pejë 30090",
       "phone": "+38345511217",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38345511217",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -2354,7 +2354,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:00:23.292Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJtePPQnD9UhMRGE6y8atgms0",
         "matchedAt": "2026-10-04T09:54:03.927040Z",
@@ -2385,7 +2385,7 @@
       "address": "Rruga tranzit, kyqja në autostradën e re, Prizren, Kosovo",
       "phone": "+38349156789",
       "phoneNote": "Service-Terminvereinbarung",
-      "whatsapp": "",
+      "whatsapp": "+38349156789",
       "brands": ["Mercedes-Benz"],
       "services": [
         "Inspektion & Wartung",
@@ -2419,7 +2419,7 @@
       ],
       "checkedAt": "2026-10-02",
       "status": "published",
-      "updatedAt": "2026-10-02T16:15:00.000Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJd92tlvaVUxMRnBlwgnMwk-M",
         "matchedAt": "2026-10-04T07:26:35.861Z",
@@ -2497,7 +2497,7 @@
       "address": "9573+G23, Hivzi Sylejmani, Ferizaj 70000",
       "phone": "+38345444656",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38345444656",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -2522,7 +2522,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:04:19.069Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJMxwsC3h_VBMR2K3PwgtzmDQ",
         "matchedAt": "2026-10-04T09:56:03.981Z",
@@ -2594,7 +2594,7 @@
       "address": "William walker, Prizren 20000",
       "phone": "+38344662200",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344662200",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -2619,7 +2619,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJwSzqwuC_UxMR8b_sOv-3H7c",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -2648,7 +2648,7 @@
       "address": "Magjistralja Prishtinë-Vushtrri, Vushtrri 42000",
       "phone": "+38344296650",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344296650",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -2673,7 +2673,7 @@
       ],
       "checkedAt": "2026-10-13",
       "status": "published",
-      "updatedAt": "2026-10-13T07:42:24.004Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJo3BGCoRfUxMR4tyWK4gFYGU",
         "matchedAt": "2026-10-13T07:42:24.004Z",
@@ -2695,7 +2695,7 @@
       "address": "RXFF+VP, Vushtrri 42000",
       "phone": "+38349684954",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349684954",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -2720,7 +2720,7 @@
       ],
       "checkedAt": "2026-10-13",
       "status": "published",
-      "updatedAt": "2026-10-13T07:42:24.004Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJo0dV0UtbUxMRiQulO0Xp4cU",
         "matchedAt": "2026-10-13T07:42:24.004Z",
@@ -2742,7 +2742,7 @@
       "address": "Sadedin Hajda, Rahovec 21000",
       "phone": "+38344887896",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344887896",
       "brands": [],
       "services": [
         "Inspektion & Wartung",
@@ -2770,7 +2770,7 @@
       ],
       "checkedAt": "2026-10-14",
       "status": "published",
-      "updatedAt": "2026-10-14T07:24:19.354753Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJwUpq4mijUxMRX_oLQ40ISts",
         "matchedAt": "2026-10-14T07:24:19.354753Z",
@@ -2789,7 +2789,7 @@
       "address": "Dëshmorët e Kombit, Istog",
       "phone": "+38344920210",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344920210",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -2809,7 +2809,7 @@
       ],
       "checkedAt": "2026-10-14",
       "status": "published",
-      "updatedAt": "2026-10-14T07:24:19.354753Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJNwwEMeIZUxMRsfs69rhCmYg",
         "matchedAt": "2026-10-14T07:24:19.354753Z",
@@ -2828,7 +2828,7 @@
       "address": "Muhamet Ukshini, Gjakovë 50000",
       "phone": "+38344128553",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344128553",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -2853,7 +2853,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJQR1mzhWvUxMReJEjFpctCH0",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -2882,7 +2882,7 @@
       "address": "Qemal Stafa, Nr.8 Hasan Ferri, Prishtina 10000",
       "phone": "+38348700548",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38348700548",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -2902,7 +2902,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJT9vZ2UifVBMRXP0Z5KC7dl8",
         "matchedAt": "2026-10-04T06:38:22.864Z",
@@ -2924,7 +2924,7 @@
       "address": "Rr Qëndresa, Prishtina 10000",
       "phone": "+38344848728",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344848728",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -2944,7 +2944,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJtS2xJRWZVBMRkML-ELqhZYA",
         "matchedAt": "2026-10-04T06:38:23.232Z",
@@ -3072,7 +3072,7 @@
       "address": "R117, Therandë, Reshtan, Suharekë 23000",
       "phone": "+38349897683",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349897683",
       "brands": [],
       "services": [
         "Diagnose & Elektronik",
@@ -3099,7 +3099,7 @@
       ],
       "checkedAt": "2026-10-16",
       "status": "published",
-      "updatedAt": "2026-10-16T10:06:24.074213Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJO1Y1Ep2ZUxMRfBZWhEjjT0Q",
         "matchedAt": "2026-10-16T09:39:59Z",
@@ -3118,7 +3118,7 @@
       "address": "Rruga Adem Jashari, Malishevë 24000",
       "phone": "+38349378051",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349378051",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -3138,7 +3138,7 @@
       ],
       "checkedAt": "2026-10-13",
       "status": "published",
-      "updatedAt": "2026-10-13T01:08:27Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJR0jrutd1UxMRlemhiDV-aUA",
         "matchedAt": "2026-10-13T01:08:27Z",
@@ -3160,7 +3160,7 @@
       "address": "Rruga Lufta e Çelisë, Pogragjë, Klinë 32000",
       "phone": "+38344173716",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344173716",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -3180,7 +3180,7 @@
       ],
       "checkedAt": "2026-10-14",
       "status": "published",
-      "updatedAt": "2026-10-14T07:24:19.354753Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJhQqDbvpvUxMRlJFO2NV1CeE",
         "matchedAt": "2026-10-14T07:24:19.354753Z",
@@ -3199,7 +3199,7 @@
       "address": "Abedin Rexha, Klina 32000",
       "phone": "+38349654571",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349654571",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -3219,7 +3219,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:00:23.292Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJSz6o8xYPUxMRWJSI5SrGQIc",
         "matchedAt": "2026-10-04T09:54:03.927040Z",
@@ -3251,7 +3251,7 @@
       "address": "Podujevë, Kosovë",
       "phone": "+38343530001",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38343530001",
       "brands": [],
       "services": [
         "Inspektion & Wartung",
@@ -3278,7 +3278,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJLR88RQCvVBMRCepTvT5qORU",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -3297,7 +3297,7 @@
       "address": "Prishtina 10000",
       "phone": "+38349169839",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349169839",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -3317,7 +3317,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJUZYIFJ-fVBMR2P9cYiR8f4Y",
         "matchedAt": "2026-10-04T06:38:23.800Z",
@@ -3339,7 +3339,7 @@
       "address": "Rr Raniz Cerrnica, Prroj i Njelmt, Prishtina 10000",
       "phone": "+38345454535",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38345454535",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -3359,7 +3359,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJgSzMVimfVBMR8FRiAysbryU",
         "matchedAt": "2026-10-04T06:38:24.120Z",
@@ -3381,7 +3381,7 @@
       "address": "Hajvali, Prishtina 10510",
       "phone": "+38349288882",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349288882",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -3406,7 +3406,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJMdXx3nGdVBMRC6tqZjasSd0",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -3435,7 +3435,7 @@
       "address": "Kadri Zeka, Ferizaj 70000",
       "phone": "+38345260944",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38345260944",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -3455,7 +3455,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJTc9TLsp_VBMR5Q1nCZpNf1g",
         "matchedAt": "2026-10-04T06:38:24.452Z",
@@ -3477,7 +3477,7 @@
       "address": "Bibaj-Ferizaj",
       "phone": "+38344453222",
       "phoneNote": "Aktueller Kontakt aus Betriebsprofil und unabhängigem Verzeichnis",
-      "whatsapp": "",
+      "whatsapp": "+38344453222",
       "brands": [],
       "services": ["Inspektion & Wartung", "Motor & Getriebe"],
       "serviceDetails": [
@@ -3513,7 +3513,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T10:08:45.026Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJFTS-BHR_VBMRLDRPsHW-ogI",
         "matchedAt": "2026-10-05T10:08:45.026Z",
@@ -3545,7 +3545,7 @@
       "address": "Rruga Pavaresia, Malishevë 24000",
       "phone": "+38349284990",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349284990",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -3565,7 +3565,7 @@
       ],
       "checkedAt": "2026-10-13",
       "status": "published",
-      "updatedAt": "2026-10-13T01:08:27Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ35tXXoOfUxMRZEfRxbLnlrc",
         "matchedAt": "2026-10-13T01:08:27Z",
@@ -3587,7 +3587,7 @@
       "address": "QQVM+5VX, R101, Klinë e Epërme 41000",
       "phone": "+38349255770",
       "phoneNote": "Verzeichnis führt 049 255 770; ältere internationale Vorwahl in der Quelle",
-      "whatsapp": "",
+      "whatsapp": "+38349255770",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -3607,7 +3607,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:04:19.069Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJZ5Wsu-pBUxMRTFrP2jiQn0g",
         "matchedAt": "2026-10-04T09:56:04.863Z",
@@ -3637,7 +3637,7 @@
       "address": "Vragoli, Fushë 10000",
       "phone": "+38345411022",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38345411022",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -3657,7 +3657,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJLfh83WRjUxMRu_3vwydW44s",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -3678,7 +3678,7 @@
       "address": "Hasan Prishtina - Obiliq, R220, Kastriot 15000",
       "phone": "+38344809246",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344809246",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -3698,7 +3698,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJoQAbQi1gUxMR1LOibq_lh_U",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -3719,7 +3719,7 @@
       "address": "Ilir Merturi, Klinë 32000",
       "phone": "+38343538919",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38343538919",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -3739,7 +3739,7 @@
       ],
       "checkedAt": "2026-10-14",
       "status": "published",
-      "updatedAt": "2026-10-14T07:24:19.354753Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJD9VxuPsPUxMRpMZoFq4Ddjw",
         "matchedAt": "2026-10-14T07:24:19.354753Z",
@@ -3758,7 +3758,7 @@
       "address": "Rr.1, Therandë, Suharekë 23000",
       "phone": "+38349222437",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349222437",
       "brands": ["Mercedes-Benz"],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": ["Service für die Mercedes-Benz G-Klasse"],
@@ -3781,7 +3781,7 @@
       ],
       "checkedAt": "2026-10-16",
       "status": "published",
-      "updatedAt": "2026-10-16T10:06:24.074213Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJH2FIdMCbUxMRBAqIzptNP00",
         "matchedAt": "2026-10-16T09:39:59Z",
@@ -3803,7 +3803,7 @@
       "address": "Lidhja e Prizrenit, Prishtinë",
       "phone": "+38344650843",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344650843",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -3828,7 +3828,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T10:08:45.026Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJgxoAFyKfVBMRJOYQKh2Gejs",
         "matchedAt": "2026-10-05T10:08:45.026Z",
@@ -3913,7 +3913,7 @@
       "address": "Wesley Clark, Gjakovë",
       "phone": "+38344126233",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344126233",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -3933,7 +3933,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T10:08:45.026Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJPTLT0Z-vUxMRruPkPVs7l0Y",
         "matchedAt": "2026-10-05T10:08:45.026Z",
@@ -3963,7 +3963,7 @@
       "address": "M43G+VQW, Unnamed Road, Prishtina 10000",
       "phone": "+38344208555",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344208555",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -3983,7 +3983,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:04:19.069Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJz2OODhafVBMRSk4BbeHIhq8",
         "matchedAt": "2026-10-04T09:56:33.421Z",
@@ -4013,7 +4013,7 @@
       "address": "M89C+PH Peja, Peje 30000",
       "phone": "+38349499177",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349499177",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -4038,7 +4038,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJRwwqY4D9UhMRNPiF5qFtm6Q",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -4065,7 +4065,7 @@
       "address": "CC4M+PXQ, Gjakovë 50000",
       "phone": "+38344371634",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344371634",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -4090,7 +4090,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJX_RIpvavUxMRlbkyN9HMZ_g",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -4119,7 +4119,7 @@
       "address": "Rr. Dushku nr. 130, Sadovinë e Jerlive, Viti",
       "phone": "+38349866660",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349866660",
       "brands": [],
       "services": [
         "Inspektion & Wartung",
@@ -4145,7 +4145,7 @@
       ],
       "checkedAt": "2026-10-12",
       "status": "published",
-      "updatedAt": "2026-10-12T07:32:35.413040Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJI_GV5zljVBMRmtSQSVzYftU",
         "matchedAt": "2026-10-12T07:32:35.413040Z",
@@ -4219,7 +4219,7 @@
       "address": "Katundi i Ri , Katund i Ri, Komuna e Pejës",
       "phone": "+38349209635",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349209635",
       "brands": [],
       "services": ["Inspektion & Wartung", "Reifen & Klima"],
       "serviceDetails": [
@@ -4240,7 +4240,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJxY9iysoDUxMRCboJvh9k78o",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -4267,7 +4267,7 @@
       "address": "Podujeve - Merdare, 2 km, Besianë 11000",
       "phone": "+38345533746",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38345533746",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -4287,7 +4287,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJU6HJFWSvVBMRN2CX9P9ENYM",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -4308,7 +4308,7 @@
       "address": "9 Nentori, Gjakovë",
       "phone": "+38349339252",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349339252",
       "brands": [],
       "services": ["Inspektion & Wartung", "Diagnose & Elektronik"],
       "serviceDetails": [
@@ -4334,7 +4334,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJOWz_2iSxUxMRs9MLdusHbKA",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -4361,7 +4361,7 @@
       "address": "Lan dobraj, Deçan 51000",
       "phone": "+38348919694",
       "phoneNote": "Aktueller sichtbarer Kontakt aus der eigenen Betriebswebsite",
-      "whatsapp": "",
+      "whatsapp": "+38348919694",
       "brands": [],
       "services": [
         "Inspektion & Wartung",
@@ -4392,7 +4392,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T10:08:45.026Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJu_fNLeFVUhMRsFdcOUdpo7Y",
         "matchedAt": "2026-10-05T10:08:45.026Z",
@@ -4470,7 +4470,7 @@
       "address": "M5W6+GC5, Prishtina 10520",
       "phone": "+38344496496",
       "phoneNote": "Aktueller Kontakt aus Betriebsanzeige und unabhängigem Verzeichnis; Erreichbarkeit direkt prüfen",
-      "whatsapp": "",
+      "whatsapp": "+38344496496",
       "brands": [],
       "services": ["Inspektion & Wartung", "Diagnose & Elektronik"],
       "serviceDetails": [
@@ -4501,7 +4501,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T10:08:45.026Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJCz9-2W6fVBMRuVUellpelNw",
         "matchedAt": "2026-10-05T10:08:45.026Z",
@@ -4532,7 +4532,7 @@
       "address": "Ratkoc, Rahovec 21050",
       "phone": "+38344385480",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344385480",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -4552,7 +4552,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJtSiJIpulUxMRqDpESTRYQWw",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -4573,7 +4573,7 @@
       "address": "Magjistralja, Rruga UÇK, Rahovec 21000",
       "phone": "+38344269197",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344269197",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -4593,7 +4593,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJUWdUKV-jUxMRUPw9_gBnEgs",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -4614,7 +4614,7 @@
       "address": "2) Rr Flamuri. Petrove Tranzit, Prizren 20000",
       "phone": "+38344126700",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344126700",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -4634,7 +4634,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJA9n0Hr6VUxMRkUy6Qw7PcJ8",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -4661,7 +4661,7 @@
       "address": "Bedri Pejani, Vushtrri 42000",
       "phone": "+38344198428",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344198428",
       "brands": [],
       "services": ["Inspektion & Wartung", "Diagnose & Elektronik"],
       "serviceDetails": ["Fahrzeugservice", "Fahrzeugdiagnose"],
@@ -4679,7 +4679,7 @@
       ],
       "checkedAt": "2026-10-13",
       "status": "published",
-      "updatedAt": "2026-10-13T07:42:24.004Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJS-1TM8VbUxMR2JYNr3M3av4",
         "matchedAt": "2026-10-13T07:42:24.004Z",
@@ -4698,7 +4698,7 @@
       "address": "Autostrada Ibrahim Rugova, Drenas Komoran 13050",
       "phone": "+38344405002",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344405002",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -4718,7 +4718,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJF76CzqR6UxMRWI0WKlx0-c0",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -4739,7 +4739,7 @@
       "address": "Bajram Gashi 320, Banullë, Lipjan 14000",
       "phone": "+38344736933",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344736933",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -4759,7 +4759,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJh0VUWA6DVBMRUJX-YMmG0qE",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -4780,7 +4780,7 @@
       "address": "95Q3+7VQ, Driton Islami, Talinoc i Jerlive 70000",
       "phone": "+38344444713",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344444713",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -4805,7 +4805,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:04:19.069Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJv4FJP0V_VBMRiq_V3C5Yh2k",
         "matchedAt": "2026-10-04T09:56:34.256Z",
@@ -4835,7 +4835,7 @@
       "address": "RXM6+4FR, Gjergj Kastrioti Skenderbeu, Vushtrri 42000",
       "phone": "+38344444556",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344444556",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -4855,7 +4855,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJuUm_gSRbUxMRJDrySRYvJV4",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -4876,7 +4876,7 @@
       "address": "Magjistralja Prishtinë–Ferizaj, km 7, Graçanicë, Kosovo",
       "phone": "+38344169468",
       "phoneNote": "Veröffentlichter Betriebskontakt aus eigener Stellenanzeige; Viber ausdrücklich erwähnt",
-      "whatsapp": "",
+      "whatsapp": "+38344169468",
       "brands": ["Audi", "Volkswagen"],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -4900,7 +4900,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T12:23:44.809366+00:00",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJU_Y9YNSdVBMRGMevqCLSIzA",
         "matchedAt": "2026-10-04T07:26:35.861Z",
@@ -4930,7 +4930,7 @@
       "address": "Aleksanër Moisiu, Gjakovë 50000",
       "phone": "+38344605905",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344605905",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -4950,7 +4950,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJHY-JYe6xUxMR6O1WWZKP5xc",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -4977,7 +4977,7 @@
       "address": "Avduall Presheva , Gjilan",
       "phone": "+38344177086",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344177086",
       "brands": [],
       "services": ["Inspektion & Wartung", "Karosserie & Lack"],
       "serviceDetails": [
@@ -4998,7 +4998,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJnz-VYLuNVBMROs4-vKcMxzw",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -5025,7 +5025,7 @@
       "address": "Magjistralja Prishtinë–Mitrovicë km 7, Mazgit",
       "phone": "+38344168690",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344168690",
       "brands": [],
       "services": ["Motor & Getriebe"],
       "serviceDetails": [
@@ -5051,7 +5051,7 @@
       ],
       "checkedAt": "2026-10-18",
       "status": "published",
-      "updatedAt": "2026-10-18T08:34:23.538863Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJZ4gk7safVBMRV5naacYQ7C8",
         "matchedAt": "2026-10-18T08:34:23.538863Z",
@@ -5073,7 +5073,7 @@
       "address": "Afer shkolles iliri, Isa Kastrati, Prishtina",
       "phone": "+38349195447",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349195447",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -5093,7 +5093,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ9wwYnhKfVBMRC8kLTQwCz38",
         "matchedAt": "2026-10-04T06:38:26.383Z",
@@ -5115,7 +5115,7 @@
       "address": "lipjan-banull, R120, Lipjan 14000",
       "phone": "+38344269491",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344269491",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -5135,7 +5135,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJp_ETv_-CVBMRFzoGDAgPqUE",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -5156,7 +5156,7 @@
       "address": "Enver Hadri PN Prizren XK, 20000",
       "phone": "+38349120572",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349120572",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -5181,7 +5181,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ45EnXQCVUxMREe66dnqtplE",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -5210,7 +5210,7 @@
       "address": "Rruga e Transitit Petrovë, Prizren 20000",
       "phone": "+38344122498",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344122498",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -5230,7 +5230,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJa4mLzfOVUxMRsDb9IqPAVkY",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -5251,7 +5251,7 @@
       "address": "Jusuf Ramadani, Lubizhdë, Prizren",
       "phone": "+38343525525",
       "phoneNote": "Aktueller Kontakt aus dem eigenen Betriebsprofil",
-      "whatsapp": "",
+      "whatsapp": "+38343525525",
       "brands": [],
       "services": ["Inspektion & Wartung", "Karosserie & Lack"],
       "serviceDetails": [
@@ -5287,7 +5287,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T10:08:45.026Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJgc9JBjKUUxMRoP3PNI5Eo-U",
         "matchedAt": "2026-10-05T10:08:45.026Z",
@@ -5319,7 +5319,7 @@
       "address": "CFV5+49J, M25-3, Gjilan 60000",
       "phone": "+38349231674",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349231674",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -5344,7 +5344,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:00:23.292Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJL5Yb0l-NVBMR2cBjhlecSX4",
         "matchedAt": "2026-10-04T09:54:03.927040Z",
@@ -5375,7 +5375,7 @@
       "address": "Besim Bishtazhini, Gjakova",
       "phone": "+38349588500",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349588500",
       "brands": ["Mercedes-Benz"],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -5406,7 +5406,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ2zjWiu-xUxMR6w7XAMmr0wk",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -5435,7 +5435,7 @@
       "address": "Rruga Zenel Hajdini, Ferizaj, Kosovo",
       "phone": "+38344177020",
       "phoneNote": "Allgemeiner Werkstattkontakt",
-      "whatsapp": "",
+      "whatsapp": "+38344177020",
       "brands": [],
       "services": [
         "Inspektion & Wartung",
@@ -5466,7 +5466,7 @@
       ],
       "checkedAt": "2026-10-02",
       "status": "published",
-      "updatedAt": "2026-10-02T16:15:00.000Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJZTSQQzx_VBMRkvA_KhRqNk8",
         "matchedAt": "2026-10-04T06:38:26.703Z",
@@ -5488,7 +5488,7 @@
       "address": "Rruga e Pejes Nr.271, Fushë Kosovë 12000",
       "phone": "+38344102010",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344102010",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": [
@@ -5514,7 +5514,7 @@
       ],
       "checkedAt": "2026-10-16",
       "status": "published",
-      "updatedAt": "2026-10-16T10:06:24.074213Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJCd2A_29jUxMRf8DYS06OSmA",
         "matchedAt": "2026-10-16T09:52:37Z",
@@ -5536,7 +5536,7 @@
       "address": "Rruga e Pejës 288, Bresje, Fushë Kosovë 12000",
       "phone": "+38349450437",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349450437",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": [
@@ -5562,7 +5562,7 @@
       ],
       "checkedAt": "2026-10-16",
       "status": "published",
-      "updatedAt": "2026-10-16T10:06:24.074213Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJyzf2D49jUxMRu4gKPodR8vw",
         "matchedAt": "2026-10-16T10:00:51Z",
@@ -5584,7 +5584,7 @@
       "address": "Bresje, përball HIB Petrol, Fushë Kosovë 12000",
       "phone": "+38345232341",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38345232341",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": [
@@ -5611,7 +5611,7 @@
       ],
       "checkedAt": "2026-10-16",
       "status": "published",
-      "updatedAt": "2026-10-16T10:06:24.074213Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJS_MJOmtjUxMR_c6WNT56G3k",
         "matchedAt": "2026-10-16T09:58:20Z",
@@ -5682,7 +5682,7 @@
       "address": "Rruga Azem Bejta 106, Skenderaj 41000",
       "phone": "+38349467181",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349467181",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": [
@@ -5719,7 +5719,7 @@
       ],
       "checkedAt": "2026-10-16",
       "status": "published",
-      "updatedAt": "2026-10-16T10:06:24.074213Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJmwTmWJFrUxMRwXxn74i9Hww",
         "matchedAt": "2026-10-16T09:47:25Z",
@@ -5743,7 +5743,7 @@
       "address": "Vushtrri 42000",
       "phone": "+38349457010",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349457010",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": ["Polieren von Fahrzeugen", "Fahrzeugreinigung"],
@@ -5761,7 +5761,7 @@
       ],
       "checkedAt": "2026-10-13",
       "status": "published",
-      "updatedAt": "2026-10-13T07:42:24.004Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJBWVI9y9bUxMRqVLTgHMJyMc",
         "matchedAt": "2026-10-13T07:42:24.004Z",
@@ -5780,7 +5780,7 @@
       "address": "Rruga Ibrahim Rugova, Ferizaj, Kosovo",
       "phone": "+38345664521",
       "phoneNote": "Veröffentlichter Geschäftskontakt",
-      "whatsapp": "",
+      "whatsapp": "+38345664521",
       "brands": [],
       "services": ["Diagnose & Elektronik"],
       "serviceDetails": [
@@ -5800,7 +5800,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T12:08:07.696318+00:00",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ03ypjB1_VBMRgU6N3oDQVRY",
         "matchedAt": "2026-10-04T06:38:27.230Z",
@@ -5822,7 +5822,7 @@
       "address": "Zona Industriale Nr. 98, M42G+74, Prishtina 10000",
       "phone": "+38344260318",
       "phoneNote": "Telefon aus der eigenen Kontaktseite; Erreichbarkeit direkt beim Betrieb prüfen",
-      "whatsapp": "",
+      "whatsapp": "+38344260318",
       "brands": [],
       "services": ["Diagnose & Elektronik"],
       "serviceDetails": [
@@ -5852,7 +5852,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJkbvtE2meVBMRvu2LFtwxfho",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -5882,7 +5882,7 @@
       "address": "M44X+HR2, Prishtina 10000",
       "phone": "+38344128583",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344128583",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -5902,7 +5902,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:04:19.069Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJUQjLIHufVBMRMpMm10I6HN0",
         "matchedAt": "2026-10-04T09:57:07.966Z",
@@ -5932,7 +5932,7 @@
       "address": "Magjistralja Ferizaj-Prishtinë, Ferizaj 70000",
       "phone": "+38348666007",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38348666007",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -5952,7 +5952,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJS72rI-p_VBMR_4KThMqdykg",
         "matchedAt": "2026-10-04T06:38:28.248Z",
@@ -5974,7 +5974,7 @@
       "address": "Koretiste, Gjilan 38250",
       "phone": "+381649192290",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+381649192290",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -5994,7 +5994,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJoxQpM6GNVBMRQIa-9VcGmHc",
         "matchedAt": "2026-10-04T07:26:35.861Z",
@@ -6021,7 +6021,7 @@
       "address": "Selman riza, Gjakovë 10000",
       "phone": "+38345592663",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38345592663",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -6046,7 +6046,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJtU1fjeyxUxMRtyTwvpO-XpU",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -6075,7 +6075,7 @@
       "address": "Brigada 125, Prizren 20000",
       "phone": "+38349278870",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349278870",
       "brands": [],
       "services": ["Inspektion & Wartung", "Karosserie & Lack"],
       "serviceDetails": [
@@ -6101,7 +6101,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ19tbe5C_UxMR8sk4_2w7Q6A",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -6130,7 +6130,7 @@
       "address": "959P+XV6, Bibaj 70000",
       "phone": "+38349297333",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349297333",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -6155,7 +6155,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:04:19.069Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJhduIqz1_VBMR1pQy7eVfBok",
         "matchedAt": "2026-10-04T09:57:08.795Z",
@@ -6185,7 +6185,7 @@
       "address": "Rr. Halit Cakaj 14, Vushtrri 42000",
       "phone": "+38344151645",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344151645",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -6205,7 +6205,7 @@
       ],
       "checkedAt": "2026-10-13",
       "status": "published",
-      "updatedAt": "2026-10-13T07:42:24.004Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ2X6qZsdfUxMR9yG24eMSxGk",
         "matchedAt": "2026-10-13T07:42:24.004Z",
@@ -6226,7 +6226,7 @@
       "address": "TMK, Pejë 30000",
       "phone": "+38349850252",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349850252",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -6246,7 +6246,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:00:23.292Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJuaQd1SX_UhMRgfEYGf6eXLs",
         "matchedAt": "2026-10-04T09:54:03.927040Z",
@@ -6276,7 +6276,7 @@
       "address": "2 Eduard Lir, Prishtina 10000",
       "phone": "+38349353500",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349353500",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -6301,7 +6301,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ-ROy75SfVBMR7yDOPsnQ-IQ",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -6328,7 +6328,7 @@
       "address": "Rruga Skënderbeu p.n., Suharekë 23000",
       "phone": "+38349593002",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349593002",
       "brands": ["Volkswagen", "Audi", "SEAT", "Škoda", "Mercedes-Benz"],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -6354,7 +6354,7 @@
       ],
       "checkedAt": "2026-10-18",
       "status": "published",
-      "updatedAt": "2026-10-18T08:34:23.538863Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJTTiea0SaUxMRqY3MM3y7Tqk",
         "matchedAt": "2026-10-18T08:34:23.538863Z",
@@ -6376,7 +6376,7 @@
       "address": "M55M+CC2, Prishtina 10000",
       "phone": "+38344282504",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344282504",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -6396,7 +6396,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:04:19.069Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJMTTQbMSfVBMROfUEApqoNwg",
         "matchedAt": "2026-10-04T09:57:09.703Z",
@@ -6426,7 +6426,7 @@
       "address": "Hasjanja-Gjonaj, Prizren 20000",
       "phone": "+38349424287",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349424287",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -6451,7 +6451,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJWwIf51q_UxMRQAyT9x5ndbs",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -6545,7 +6545,7 @@
       "address": "Rruga e Pejës 204, Fushë Kosovë 12000",
       "phone": "+38349870800",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349870800",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": [
@@ -6581,7 +6581,7 @@
       ],
       "checkedAt": "2026-10-16",
       "status": "published",
-      "updatedAt": "2026-10-16T10:43:56.149039Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJrQE7OMZjUxMRnK0kB8C-8yA",
         "matchedAt": "2026-10-16T10:43:20Z",
@@ -6605,7 +6605,7 @@
       "address": "Magjistralja Prishtinë–Ferizaj, km 5, 10000 Prishtinë, Kosovo",
       "phone": "+38344505499",
       "phoneNote": "Allgemeiner Geschäftskontakt",
-      "whatsapp": "",
+      "whatsapp": "+38344505499",
       "brands": [
         "Volkswagen",
         "Audi",
@@ -6642,7 +6642,7 @@
       ],
       "checkedAt": "2026-10-02",
       "status": "published",
-      "updatedAt": "2026-10-02T16:15:00.000Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJVYrXNK-dVBMRkWGix3urKCE",
         "matchedAt": "2026-10-04T06:38:29.679Z",
@@ -6664,7 +6664,7 @@
       "address": "Rruga Gjilan, Gjilan 60000",
       "phone": "+38344133332",
       "phoneNote": "Lokale 044-Nummer auf +383 normalisiert; Quelle führt auch eine historische +377-Vorwahl",
-      "whatsapp": "",
+      "whatsapp": "+38344133332",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -6684,7 +6684,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ9duUBHDtVBMRl2nLKi2gon0",
         "matchedAt": "2026-10-04T06:38:30.016Z",
@@ -6706,7 +6706,7 @@
       "address": "Lidhja e Lezhës, Prishtina 10000",
       "phone": "+38346160902",
       "phoneNote": "Aktueller Kontakt aus Betriebsbeiträgen und unabhängigem Verzeichnis",
-      "whatsapp": "",
+      "whatsapp": "+38346160902",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -6736,7 +6736,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T10:08:45.026Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJqXQcgJufVBMROGwBj_-gtXU",
         "matchedAt": "2026-10-05T10:08:45.026Z",
@@ -6768,7 +6768,7 @@
       "address": "Brahim Ademi, Ferizaj, Kosovo",
       "phone": "+38344116212",
       "phoneNote": "Telefon aus dem eigenen Betriebsprofil; Erreichbarkeit direkt beim Betrieb prüfen",
-      "whatsapp": "",
+      "whatsapp": "+38344116212",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -6793,7 +6793,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJb6GZpCd_VBMRi_bRC-yoNhI",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -6820,7 +6820,7 @@
       "address": "Besim Shala, Prizren 20000",
       "phone": "+38345623482",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38345623482",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -6840,7 +6840,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJMzRnIjKVUxMR37SDG3p6bug",
         "matchedAt": "2026-10-04T06:38:30.975Z",
@@ -6990,7 +6990,7 @@
       "address": "6QJ4+7HQ, Bekim Berisha-Abeja, Prizren",
       "phone": "+38349955682",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349955682",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -7015,7 +7015,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJyQejR72VUxMRfwEdsQQLf5Q",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -7044,7 +7044,7 @@
       "address": "pn Rrustë Kabashi, Prizren 20000",
       "phone": "+38349445589",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349445589",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -7069,7 +7069,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJuxYqBCGVUxMRDAkoncPsVC4",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -7098,7 +7098,7 @@
       "address": "Rruga Skënderbeu, Podujevë",
       "phone": "+38349222947",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349222947",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": [
@@ -7126,7 +7126,7 @@
       ],
       "checkedAt": "2026-10-18",
       "status": "published",
-      "updatedAt": "2026-10-18T08:34:23.538863Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJIzGWLIWpVBMRWdGNcXHSnpk",
         "matchedAt": "2026-10-18T08:34:23.538863Z",
@@ -7148,7 +7148,7 @@
       "address": "Rruga Rexhep Bislimi, afër Viva Fresh, Ferizaj, Kosovo",
       "phone": "+38349504424",
       "phoneNote": "Allgemeiner Filialkontakt Ferizaj",
-      "whatsapp": "",
+      "whatsapp": "+38349504424",
       "brands": [],
       "services": ["Reifen & Klima"],
       "serviceDetails": [
@@ -7173,7 +7173,7 @@
       ],
       "checkedAt": "2026-10-02",
       "status": "published",
-      "updatedAt": "2026-10-02T18:21:53.000Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ2ezPzEV_VBMRAPesce8JHaY",
         "matchedAt": "2026-10-04T06:38:31.799Z",
@@ -7306,7 +7306,7 @@
       "address": "Rruga për Lubizhdë, Prizren, Kosovo",
       "phone": "+38349744232",
       "phoneNote": "Veröffentlichter Filialkontakt",
-      "whatsapp": "",
+      "whatsapp": "+38349744232",
       "brands": [],
       "services": ["Reifen & Klima"],
       "serviceDetails": [
@@ -7330,7 +7330,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T12:04:35.346588+00:00",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJr9MOAi-VUxMR6ntYWk2bOVY",
         "matchedAt": "2026-10-04T06:38:32.624Z",
@@ -7352,7 +7352,7 @@
       "address": "Lagjja Ortakoll, Rruga Ismail Kryeziu, Prizren, Kosovo",
       "phone": "+38349475061",
       "phoneNote": "Veröffentlichter Filialkontakt",
-      "whatsapp": "",
+      "whatsapp": "+38349475061",
       "brands": [],
       "services": ["Reifen & Klima"],
       "serviceDetails": [
@@ -7376,7 +7376,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T12:04:35.346588+00:00",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJR2_3vzK_UxMRj0SC8kETc54",
         "matchedAt": "2026-10-04T06:39:07.807Z",
@@ -7398,7 +7398,7 @@
       "address": "273 Isa Kastrati, Matiqan, Prishtina 10000",
       "phone": "+38344254528",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344254528",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -7428,7 +7428,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T10:08:45.026Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJqdYqioGfVBMRibazGbBsjTU",
         "matchedAt": "2026-10-05T10:08:45.026Z",
@@ -7460,7 +7460,7 @@
       "address": "Hasan Prishtina 620, Magjistralja Prishtinë–Obiliq",
       "phone": "+38344174568",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344174568",
       "brands": ["Fiat", "Alfa Romeo", "Lancia"],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -7486,7 +7486,7 @@
       ],
       "checkedAt": "2026-10-17",
       "status": "published",
-      "updatedAt": "2026-10-17T03:29:17.060Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJUzpAGuGfVBMRAQuM6MRUUQ8",
         "matchedAt": "2026-10-17T03:28:44Z",
@@ -7508,7 +7508,7 @@
       "address": "Magjistralja Prishtinë–Ferizaj, km 5, 10000 Prishtina, Kosovo",
       "phone": "+38349959596",
       "phoneNote": "Veröffentlichte Service-Telefonnummer",
-      "whatsapp": "",
+      "whatsapp": "+38349959596",
       "brands": ["Opel"],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": ["Fahrzeugreparatur", "Wartung und Fahrzeugkontrollen"],
@@ -7525,7 +7525,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T12:08:07.696318+00:00",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJi4CvOMidVBMRhkOafAGLO1s",
         "matchedAt": "2026-10-04T07:26:35.861Z",
@@ -7552,7 +7552,7 @@
       "address": "Fatmir Ibishi, Gjilan 60000",
       "phone": "+38349273699",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349273699",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -7572,7 +7572,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJAZZ6ZTeNVBMRy7byzlQqJ9M",
         "matchedAt": "2026-10-04T06:39:08.412Z",
@@ -7594,7 +7594,7 @@
       "address": "Rruga e Pejës Nr. 80, Fushë Kosovë, Kosovo",
       "phone": "+38344409000",
       "phoneNote": "Allgemeiner Geschäftskontakt im eigenen Website-Footer",
-      "whatsapp": "",
+      "whatsapp": "+38344409000",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -7619,7 +7619,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:00:23.292Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ0eOahftjUxMR7_JmJ-bgp6E",
         "matchedAt": "2026-10-04T06:39:08.747Z",
@@ -7641,7 +7641,7 @@
       "address": "Brigada 125 N4, 20000 Prizren, Kosovo",
       "phone": "+38349137315",
       "phoneNote": "Allgemeiner Werkstattkontakt",
-      "whatsapp": "",
+      "whatsapp": "+38349137315",
       "brands": [],
       "services": ["Reifen & Klima"],
       "serviceDetails": [
@@ -7667,7 +7667,7 @@
       ],
       "checkedAt": "2026-10-02",
       "status": "published",
-      "updatedAt": "2026-10-02T16:15:00.000Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ0w2KCM6_UxMRPlsAoKL18Zc",
         "matchedAt": "2026-10-04T06:39:09.069Z",
@@ -7689,7 +7689,7 @@
       "address": "Magjistralja Prishtinë - Gjilan km 4, Prishtinë",
       "phone": "+38349880777",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349880777",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": [
@@ -7715,7 +7715,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJyT5aBNKdVBMRYnZ624qTZPE",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -7779,7 +7779,7 @@
       "address": "Vëllëzërit Fazliu, Prishtinë",
       "phone": "+38344810238",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344810238",
       "brands": [],
       "services": ["Inspektion & Wartung", "Bremsen & Fahrwerk"],
       "serviceDetails": [
@@ -7800,7 +7800,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJzbQZKx2fVBMRt0kf7QWjCF4",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -7876,7 +7876,7 @@
       "address": "Mulla Idrizi III, Gjilan 60000",
       "phone": "+38345585263",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38345585263",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": [
@@ -7897,7 +7897,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJaTWZ1RqNVBMRQ0eBE9gCOec",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -7918,7 +7918,7 @@
       "address": "Rruga Agim Ramadani, Viti",
       "phone": "+38344500869",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344500869",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": [
@@ -7945,7 +7945,7 @@
       ],
       "checkedAt": "2026-10-17",
       "status": "published",
-      "updatedAt": "2026-10-17T03:29:17.060Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJERwhAwBjVBMRNScHSHrYnqo",
         "matchedAt": "2026-10-17T03:24:00Z",
@@ -7967,7 +7967,7 @@
       "address": "Rr. UÇK (Shkodrani) Nr. 114, Rahovec",
       "phone": "+38349790676",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349790676",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": [
@@ -7998,7 +7998,7 @@
       ],
       "checkedAt": "2026-10-14",
       "status": "published",
-      "updatedAt": "2026-10-14T07:24:19.354753Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ251IxFKjUxMRPPJX5yQCLVY",
         "matchedAt": "2026-10-14T07:24:19.354753Z",
@@ -8021,7 +8021,7 @@
       "address": "Lutogllavë p.n., 20000 Prizren, Kosovo",
       "phone": "+38344508199",
       "phoneNote": "Veröffentlichter allgemeiner Mobilkontakt; separat gekennzeichnete Verkaufsnummer nicht übernommen",
-      "whatsapp": "",
+      "whatsapp": "+38344508199",
       "brands": ["Mercedes-Benz"],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -8044,7 +8044,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T12:23:44.809366+00:00",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJhTwIS8KWUxMRLrTcMsrUbYI",
         "matchedAt": "2026-10-04T07:26:35.861Z",
@@ -8074,7 +8074,7 @@
       "address": "R101 Lidhja e Pejes151 XK, Istog 31020",
       "phone": "+38344270982",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344270982",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -8104,7 +8104,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:14:49.418Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ2RZCo9UbUxMRRYjsUK8r0is",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -8134,7 +8134,7 @@
       "address": "95QF+28, Talinoc i Muhaxherëve 70000",
       "phone": "+38349999343",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349999343",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -8159,7 +8159,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:04:19.069Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJI21YCwB_VBMRU22CO97yQLU",
         "matchedAt": "2026-10-04T09:57:54.295Z",
@@ -8260,7 +8260,7 @@
       "address": "Meriman Jakupi, Prizren 20000",
       "phone": "+38344428865",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344428865",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -8290,7 +8290,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T10:08:45.026Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJmXwWcEuUUxMRO19gku2sp8U",
         "matchedAt": "2026-10-05T10:08:45.026Z",
@@ -8321,7 +8321,7 @@
       "address": "Rruga e Bonstill, Ferizaj 70000",
       "phone": "+38344121791",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344121791",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -8341,7 +8341,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJn0HK7tl_VBMRzfULGiPH3kU",
         "matchedAt": "2026-10-04T06:39:11.047Z",
@@ -8423,7 +8423,7 @@
       "address": "9CGP+R24, Skënderbeu, Gjakovë 50000",
       "phone": "+38343730111",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38343730111",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -8443,7 +8443,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJhxKlqlqxUxMRagYBac6qJx4",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -8574,7 +8574,7 @@
       "address": "Bardhosh, Prishtina",
       "phone": "+38344949888",
       "phoneNote": "Kontakt aus eigener Serviceanzeige und Betriebsbeiträgen",
-      "whatsapp": "",
+      "whatsapp": "+38344949888",
       "brands": [],
       "services": [
         "Inspektion & Wartung",
@@ -8620,7 +8620,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T12:08:22.374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ-5d0UsmhVBMRBQBORVPLs7A",
         "matchedAt": "2026-10-05T12:08:22.374Z",
@@ -8653,7 +8653,7 @@
       "address": "Gjergj Fishta, Kastriot, Obiliq 15000",
       "phone": "+38344504604",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344504604",
       "brands": ["Audi", "Volkswagen", "Škoda", "SEAT"],
       "services": [
         "Inspektion & Wartung",
@@ -8697,7 +8697,7 @@
       ],
       "checkedAt": "2026-10-17",
       "status": "published",
-      "updatedAt": "2026-10-17T03:29:17.060Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJm-wEsuSfVBMRvzD2H4ND4gM",
         "matchedAt": "2026-10-17T03:28:44Z",
@@ -8721,7 +8721,7 @@
       "address": "Rr. Struga, Mati 1, Prishtinë 10000",
       "phone": "+38349854800",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349854800",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": [
@@ -8754,7 +8754,7 @@
       ],
       "checkedAt": "2026-10-16",
       "status": "published",
-      "updatedAt": "2026-10-16T10:43:56.149039Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ0ToqSsqfVBMRSjnhUsb2kf8",
         "matchedAt": "2026-10-16T10:37:46Z",
@@ -8777,7 +8777,7 @@
       "address": "Magjistralja Prishtinë–Mitrovicë km 2, Shkabaj, Obiliq, Kosovo",
       "phone": "+38344201301",
       "phoneNote": "Geschäftskontakt aus eigenen Betriebsbeiträgen und amtlichem Wartungsauftrag",
-      "whatsapp": "",
+      "whatsapp": "+38344201301",
       "brands": ["Renault", "Nissan", "Dacia"],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -8808,7 +8808,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T15:22:26.058Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJhxuISoKdVBMRjzIZ8rKjdEc",
         "matchedAt": "2026-10-05T15:22:26.058Z",
@@ -8839,7 +8839,7 @@
       "address": "7QCP+GJ2, M25, Prizren 20550",
       "phone": "+38344119538",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Cybo); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344119538",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -8859,7 +8859,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJCyVBgsGWUxMRQ11i9tCO8q4",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -8886,7 +8886,7 @@
       "address": "R206, Ferizaj 70000",
       "phone": "+38345613617",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38345613617",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -8906,7 +8906,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ8zFU5C9_VBMRg0d-nCiUDv4",
         "matchedAt": "2026-10-04T06:39:11.776Z",
@@ -8928,7 +8928,7 @@
       "address": "Rruga Besa 2, Suharekë 23000",
       "phone": "+38349229141",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349229141",
       "brands": [],
       "services": ["Motor & Getriebe"],
       "serviceDetails": [
@@ -8959,7 +8959,7 @@
       ],
       "checkedAt": "2026-10-16",
       "status": "published",
-      "updatedAt": "2026-10-16T10:06:24.074213Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ4T_rFRubUxMRjfIZ__ONOg0",
         "matchedAt": "2026-10-16T09:40:00Z",
@@ -8982,7 +8982,7 @@
       "address": "Prizren 20000",
       "phone": "+38344940015",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344940015",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -9002,7 +9002,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJW0bIRgeVUxMRTDjqVfHvpN8",
         "matchedAt": "2026-10-04T06:39:12.507Z",
@@ -9024,7 +9024,7 @@
       "address": "Rruga Kështjella, Smaq, Gjakovë",
       "phone": "+38345425689",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38345425689",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": ["Innen- und Außenreinigung", "Keramikversiegelung"],
@@ -9042,7 +9042,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ9XGLP2KxUxMR3WRa1Azbhss",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -9061,7 +9061,7 @@
       "address": "RX5Q+HM2, Rr. Galip Badivuku, Vushtrri 42000",
       "phone": "+38349196189",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349196189",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -9081,7 +9081,7 @@
       ],
       "checkedAt": "2026-10-13",
       "status": "published",
-      "updatedAt": "2026-10-13T07:42:24.004Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJD8VgB2xdUxMRkwgUQ8ER2Go",
         "matchedAt": "2026-10-13T07:42:24.004Z",
@@ -9102,7 +9102,7 @@
       "address": "Skënder Matallari Nr. 25, Matiçan, Prishtina",
       "phone": "+38349757144",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349757144",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": [
@@ -9130,7 +9130,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T22:12:28.577Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJs1UsfN6ZVBMRgsSud-YzyZo",
         "matchedAt": "2026-10-10T22:12:28.577Z",
@@ -9152,7 +9152,7 @@
       "address": "M843+28, Pejë",
       "phone": "+38349326545",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349326545",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -9172,7 +9172,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJE6T4PF79UhMRRgCM6ZQIuxQ",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -9193,7 +9193,7 @@
       "address": "Beteja Ilire, Muhoc, 70000 Ferizaj, Kosovo",
       "phone": "+38345934924",
       "phoneNote": "Allgemeiner Werkstattkontakt · auch für Terminabsprachen",
-      "whatsapp": "",
+      "whatsapp": "+38345934924",
       "brands": [],
       "services": [
         "Inspektion & Wartung",
@@ -9223,7 +9223,7 @@
       ],
       "checkedAt": "2026-10-02",
       "status": "published",
-      "updatedAt": "2026-10-02T18:21:53.000Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJibLTIg9_VBMRiC_qFd-UsZI",
         "matchedAt": "2026-10-04T06:39:12.879Z",
@@ -9245,7 +9245,7 @@
       "address": "VVR6+9Q5, Rruga Kollashini, Mitrovicë 40000",
       "phone": "+38349400650",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349400650",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -9275,7 +9275,7 @@
       ],
       "checkedAt": "2026-10-04",
       "status": "published",
-      "updatedAt": "2026-10-04T10:04:19.069Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJrzhQ3jxFUxMRANcJyieNKyo",
         "matchedAt": "2026-10-04T09:57:55.147Z",
@@ -9305,7 +9305,7 @@
       "address": "Prishtinë - Ferizaj (Çagllavicë) Kilometri i 3, Prishtina 10000",
       "phone": "+38345677633",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38345677633",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": [
@@ -9325,7 +9325,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJc2i7p8qdVBMRWHjikePrNjc",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -9346,7 +9346,7 @@
       "address": "34 Nënë Tereza, Gjakovë 50000",
       "phone": "+38349323545",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349323545",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": [
@@ -9366,7 +9366,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJGRcrk_qtUxMRp0Xr0ws6eG4",
         "matchedAt": "2026-10-10T20:59:53.578Z",
@@ -9387,7 +9387,7 @@
       "address": "Pristina 15000",
       "phone": "+38349116411",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38349116411",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -9407,7 +9407,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ-6adEa-fVBMRKH2q9koRSAI",
         "matchedAt": "2026-10-04T07:26:35.861Z",
@@ -9434,7 +9434,7 @@
       "address": "Rr.7 Shtatori, Prishtinë",
       "phone": "+38344552232",
       "phoneNote": "Öffentlicher Verzeichniskontakt (Gjirafa.biz); nicht vom Betrieb bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344552232",
       "brands": [],
       "services": ["Inspektion & Wartung", "Motor & Getriebe"],
       "serviceDetails": [
@@ -9460,7 +9460,7 @@
       ],
       "checkedAt": "2026-10-05",
       "status": "published",
-      "updatedAt": "2026-10-05T09:06:46.192Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJ5ac28s-fVBMRCQrodfvS-F0",
         "matchedAt": "2026-10-05T09:06:46.192Z",
@@ -9489,7 +9489,7 @@
       "address": "NenaTereze 85, Gjilan 60000",
       "phone": "+38344304686",
       "phoneNote": "Öffentlicher Verzeichniskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38344304686",
       "brands": [],
       "services": ["Inspektion & Wartung"],
       "serviceDetails": [
@@ -9509,7 +9509,7 @@
       ],
       "checkedAt": "2026-10-03",
       "status": "published",
-      "updatedAt": "2026-10-03T17:13:16.309374Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJFf8v_FONVBMRnECDJ_M162E",
         "matchedAt": "2026-10-04T06:39:14.527Z",
@@ -9573,7 +9573,7 @@
       "address": "Rr. Agim Ramadani, Mitrovicë, Kosovë",
       "phone": "+38343800098",
       "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
-      "whatsapp": "",
+      "whatsapp": "+38343800098",
       "brands": [],
       "services": ["Karosserie & Lack"],
       "serviceDetails": [
@@ -9600,7 +9600,7 @@
       ],
       "checkedAt": "2026-10-10",
       "status": "published",
-      "updatedAt": "2026-10-10T20:59:53.578Z",
+      "updatedAt": "2026-10-18T14:02:41.866Z",
       "google": {
         "placeId": "ChIJATQ_altFUxMRu2tObrV3C60",
         "matchedAt": "2026-10-10T20:59:53.578Z",
