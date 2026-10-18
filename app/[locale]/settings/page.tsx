@@ -10,6 +10,7 @@ import type { Metadata } from "next";
 import { getAdminUser, getAppUser } from "@/app/auth";
 import { DirectoryFooter } from "@/components/directory-footer";
 import { SiteHeader } from "@/components/site-header";
+import { AnalyticsSettings } from "@/components/analytics-consent";
 import { ThemeSettings } from "@/components/theme-settings";
 import { AccountSettings } from "@/components/account-settings";
 
@@ -75,7 +76,12 @@ export default async function SettingsPage({
         <AccountSettings
           key={localPreviewAccount?.kind ?? "account"}
           localPreviewAccount={localPreviewAccount}
-          appearance={<ThemeSettings />}
+          appearance={
+            <>
+              <ThemeSettings />
+              <AnalyticsSettings />
+            </>
+          }
         />
       </main>
       <DirectoryFooter />

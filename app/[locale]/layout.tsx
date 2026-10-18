@@ -6,6 +6,8 @@ import "../globals.css";
 import { getMessages, createTranslator } from "@/lib/i18n/messages";
 import { I18nProvider } from "@/lib/i18n/client";
 import { LocaleNotice } from "@/components/locale-notice";
+import { AnalyticsConsent } from "@/components/analytics-consent";
+import { env } from "@/lib/runtime/env";
 export async function generateMetadata({
   params,
 }: {
@@ -40,8 +42,16 @@ export default async function RootLayout({
           messages={getMessages(locale, ["common"])}
         >
           <ThemeProvider>
-            <LocaleNotice />
-            {children}
+            <AnalyticsConsent
+              config={{
+                key: env.POSTHOG_KEY ?? "",
+                host: env.POSTHOG_HOST ?? "",
+                testMode: env.POSTHOG_TEST_MODE === "true",
+              }}
+            >
+              <LocaleNotice />
+              {children}
+            </AnalyticsConsent>
           </ThemeProvider>
         </I18nProvider>
       </body>
