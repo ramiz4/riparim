@@ -242,7 +242,11 @@ if (config.name === "riparim") {
           );
           assert.deepEqual(
             [...index.querySelectorAll("a[href]")]
-              .map((link) => link.getAttribute("href"))
+              .map(
+                (link) =>
+                  new URL(link.getAttribute("href"), "https://riparim.com")
+                    .pathname,
+              )
               .sort(),
             published
               .map((workshop) =>
@@ -250,6 +254,18 @@ if (config.name === "riparim") {
               )
               .sort(),
           );
+          for (const link of index.querySelectorAll("a[href]")) {
+            const target = new URL(
+              link.getAttribute("href"),
+              "https://riparim.com",
+            );
+            assert.deepEqual([...target.searchParams.keys()], ["suche"]);
+            assert.equal(
+              target.searchParams.get("suche"),
+              localizeHref("/workshops", locale),
+              "Release index links retain only a clean public catalogue return target",
+            );
+          }
         }
         if (path === "/datenschutz")
           assertPrivacyOutput(html, locale, "supabase");

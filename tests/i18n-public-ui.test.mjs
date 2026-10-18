@@ -76,7 +76,7 @@ const bundle = await build({
               ? `export async function headers(){return new Headers();}`
               : a.path === "next/link"
                 ? `import React from 'react';export default function Link({href,children,...props}){return React.createElement('a',{...props,href},children);}`
-                : `export function redirect(){throw Error('Unexpected fixture redirect');}export function notFound(){throw Error('Unexpected fixture notFound');}export function useRouter(){return {push(){},refresh(){},prefetch(){}};}export function usePathname(){return '/';}export function useSearchParams(){return new URLSearchParams();}`,
+                : `export function redirect(){throw Error('Unexpected fixture redirect');}export function notFound(){throw Error('Unexpected fixture notFound');}export function useRouter(){return {push(href){globalThis.fixtureRouterPush?.(href);},refresh(){},prefetch(){}};}export function usePathname(){return '/';}export function useSearchParams(){return new URLSearchParams();}`,
         }));
         b.onResolve({ filter: /^@\/app\/auth$/ }, () => ({
           path: "auth",
@@ -668,12 +668,26 @@ try {
     assert(workshopIndex.querySelector("summary").textContent.trim());
     const indexLinks = [...workshopIndex.querySelectorAll("a[href]")];
     assert.deepEqual(
-      indexLinks.map((link) => link.getAttribute("href")).sort(),
+      indexLinks
+        .map(
+          (link) =>
+            new URL(link.getAttribute("href"), "https://fixture.test").pathname,
+        )
+        .sort(),
       indexedRecords
         .map((record) => localizeHref(`/workshop/${record.id}`, locale))
         .sort(),
       "Every published profile stays crawlable even beyond incremental results and active filters",
     );
+    for (const link of indexLinks) {
+      const target = new URL(link.getAttribute("href"), "https://fixture.test");
+      assert.deepEqual([...target.searchParams.keys()], ["suche"]);
+      assert.equal(
+        target.searchParams.get("suche"),
+        `${localizeHref("/workshops", locale)}?q=Indexed+workshop+0`,
+        "Index document and new-tab links preserve only the validated public search return",
+      );
+    }
     assert(
       indexLinks.every((link) => link.textContent.includes("Indexed workshop")),
     );
@@ -695,6 +709,142 @@ try {
       12,
       "Incremental browsing still starts with twelve cards",
     );
+    const indexFilters = {
+      ...api.defaultCatalogueFilters,
+      query: "Indexed workshop",
+      city: "Prishtina",
+    };
+    const indexReturn = api.catalogueHref(indexFilters, locale);
+    const retainedSearch = {
+      catalogueHref: indexReturn,
+      visibleCount: 24,
+      scrollY: 321,
+    };
+    const previousScrollTo = window.scrollTo;
+    const previousScrollY = Object.getOwnPropertyDescriptor(window, "scrollY");
+    const scrollRestorations = [];
+    const routerVisits = [];
+    window.scrollTo = (options) => scrollRestorations.push(options.top);
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      value: 321,
+    });
+    globalThis.fixtureRouterPush = (href) => routerVisits.push(href);
+    try {
+      api.rememberSearchSession(retainedSearch);
+      window.history.replaceState({}, "", indexReturn);
+      await React.act(async () =>
+        root.render(
+          wrap(
+            locale,
+            h(api.Catalogue, {
+              ...props,
+              key: `index-search-${locale}`,
+              initialWorkshops: indexedRecords,
+              initialFilters: indexFilters,
+            }),
+          ),
+        ),
+      );
+      const profileLink = document.querySelector(
+        "details[data-ui='workshop-index'] a[href]",
+      );
+      const profileTarget = profileLink.getAttribute("href");
+      const openEvent = new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+        button: 0,
+      });
+      await React.act(async () => profileLink.dispatchEvent(openEvent));
+      assert.equal(
+        openEvent.defaultPrevented,
+        true,
+        "Index activation uses client navigation to retain paging and scroll memory",
+      );
+      assert.deepEqual(routerVisits, [profileTarget]);
+      assert.deepEqual(api.readSearchSession(), retainedSearch);
+      const modifiedClick = new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+        button: 0,
+        ctrlKey: true,
+      });
+      await React.act(async () => profileLink.dispatchEvent(modifiedClick));
+      assert.equal(
+        modifiedClick.defaultPrevented,
+        false,
+        "Modified index activation retains the browser's new-tab behavior",
+      );
+      assert.deepEqual(routerVisits, [profileTarget]);
+      const targetUrl = new URL(profileTarget, window.location.href);
+      assert.equal(targetUrl.searchParams.get("suche"), indexReturn);
+      globalThis.fixturePublicDirectory = indexedRecords;
+      const indexProfile = await api.ProfilePage({
+        params: Promise.resolve({
+          locale,
+          id: targetUrl.pathname.split("/").at(-1),
+        }),
+        searchParams: Promise.resolve({
+          suche: targetUrl.searchParams.get("suche"),
+        }),
+      });
+      const documentReturn = new JSDOM(
+        renderToStaticMarkup(wrap(locale, indexProfile)),
+      ).window.document
+        .querySelector("main[data-riparim-page='workshop'] > a:first-of-type")
+        .getAttribute("href");
+      assert.equal(
+        documentReturn,
+        indexReturn,
+        "A document fallback or new tab retains the validated public search filters without relying on hydration",
+      );
+      window.history.replaceState({}, "", profileTarget);
+      await React.act(async () => root.render(wrap(locale, indexProfile)));
+      await click(
+        document.querySelector(
+          "main[data-riparim-page='workshop'] > a:first-of-type",
+        ),
+      );
+      assert.equal(routerVisits.at(-1), indexReturn);
+      window.history.replaceState({}, "", indexReturn);
+      scrollRestorations.length = 0;
+      await React.act(async () => {
+        root.render(
+          wrap(
+            locale,
+            h(api.Catalogue, {
+              ...props,
+              key: `index-return-${locale}`,
+              initialWorkshops: indexedRecords,
+              initialFilters: indexFilters,
+            }),
+          ),
+        );
+      });
+      await React.act(
+        async () => new Promise((resolve) => requestAnimationFrame(resolve)),
+      );
+      assert.equal(
+        document.querySelector("[data-ui~='catalogue-name-search'] input")
+          .value,
+        "Indexed workshop",
+      );
+      assert.equal(
+        document.querySelectorAll("[data-ui~=catalogue-card]:not([hidden])")
+          .length,
+        24,
+        "Returning from an index profile restores incremental paging",
+      );
+      assert(
+        scrollRestorations.includes(321),
+        "Returning from an index profile restores the retained scroll position",
+      );
+    } finally {
+      delete globalThis.fixtureRouterPush;
+      globalThis.fixturePublicDirectory = [workshop];
+      window.scrollTo = previousScrollTo;
+      Object.defineProperty(window, "scrollY", previousScrollY);
+    }
     for (const query of [
       "Ganz Kosovo",
       "Alle Marken",

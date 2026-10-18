@@ -16,7 +16,9 @@ priorities or update frequencies are sent.
 
 The catalogue's expandable alphabetical profile index contains ordinary HTML links
 to every published workshop without requiring JavaScript. The first twelve cards,
-filters, incremental browsing and saved search behavior stay unchanged. Cloudflare
+filters, incremental browsing and saved search behavior stay unchanged. Index links use
+the existing client navigation and validated public search return target; canonical
+and sitemap URLs remain free of navigation query parameters. Cloudflare
 serves this index inside its immutable public release snapshot. Approval changes
 invalidate stale catalogue HTML to a data-free shell until the next verified release;
 the live sitemap updates immediately. Adopt approved operator changes into the
