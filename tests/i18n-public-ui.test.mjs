@@ -636,6 +636,65 @@ try {
         count,
       );
     }
+    const indexedRecords = Array.from({ length: 25 }, (_, i) => ({
+      ...workshop,
+      id: `fixture-index-${i}`,
+      name: `Indexed workshop ${i}`,
+    }));
+    const indexHtml = renderToStaticMarkup(
+      wrap(
+        locale,
+        h(api.Catalogue, {
+          ...props,
+          initialWorkshops: [
+            ...indexedRecords,
+            { ...workshop, id: "fixture-private", status: "draft" },
+          ],
+          initialFilters: {
+            ...api.defaultCatalogueFilters,
+            query: "Indexed workshop 0",
+          },
+        }),
+      ),
+    );
+    const indexDocument = new JSDOM(indexHtml).window.document;
+    const workshopIndex = indexDocument.querySelector(
+      "details[data-ui='workshop-index']",
+    );
+    assert(
+      workshopIndex,
+      "Catalogue exposes an accessible native profile index without JavaScript",
+    );
+    assert(workshopIndex.querySelector("summary").textContent.trim());
+    const indexLinks = [...workshopIndex.querySelectorAll("a[href]")];
+    assert.deepEqual(
+      indexLinks.map((link) => link.getAttribute("href")).sort(),
+      indexedRecords
+        .map((record) => localizeHref(`/workshop/${record.id}`, locale))
+        .sort(),
+      "Every published profile stays crawlable even beyond incremental results and active filters",
+    );
+    assert(
+      indexLinks.every((link) => link.textContent.includes("Indexed workshop")),
+    );
+    assert(!workshopIndex.textContent.includes("fixture-private"));
+    const incrementalHtml = renderToStaticMarkup(
+      wrap(
+        locale,
+        h(api.Catalogue, {
+          ...props,
+          initialWorkshops: indexedRecords,
+          initialFilters: api.defaultCatalogueFilters,
+        }),
+      ),
+    );
+    assert.equal(
+      new JSDOM(incrementalHtml).window.document.querySelectorAll(
+        "[data-ui~=catalogue-card]",
+      ).length,
+      12,
+      "Incremental browsing still starts with twelve cards",
+    );
     for (const query of [
       "Ganz Kosovo",
       "Alle Marken",
