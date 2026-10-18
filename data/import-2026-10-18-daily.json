@@ -3,7 +3,7 @@
   "date": "2026-10-18",
   "timezone": "Europe/Zurich",
   "startedAt": "2026-10-18T02:57:59.337Z",
-  "checkedAt": "2026-10-18T08:58:05.253508Z",
+  "checkedAt": "2026-10-18T09:08:28.064755Z",
   "status": "prepared-awaiting-final-head-verification",
   "completedDateGuard": false,
   "baseCommit": "31c526677cb338828062f24bc2ed336981ebb123",
@@ -5841,10 +5841,10 @@
         },
         "publicBusinessEmail": {
           "address": null,
-          "sourceUrl": "https://stgres.gjirafa.biz/auto-servis--pjes-starti-1?route=1",
-          "checkedAt": "2026-10-18T08:09:02.017771+00:00",
-          "status": "unresolved",
-          "note": "Gjirafa no email; own website DNS unavailable; own Facebook overview no email. Info/official Instagram followup remains pending."
+          "sourceUrl": "https://www.facebook.com/autoservisstarti/directory_contact_info",
+          "checkedAt": "2026-10-18T09:08:28.064755Z",
+          "status": "not-found",
+          "note": "Full own Facebook contact panel contains the public phone only. Own website DNS unavailable; directory no email; independent own-name/town Facebook/Instagram/email search found no attributable official Instagram or business email. No guessed address."
         },
         "openingHoursResearch": {
           "status": "researched-own-week-identity-deferred",
@@ -5874,8 +5874,8 @@
           "phoneMatched": "own-current-phone-matches-but-old-directory-contact-continuity-unresolved",
           "note": "Own Facebook independently publishes current different contact, precise same-street point and electro-mechanical service. Directory contact44907885 remains unexplained; do not merge by name/street alone."
         },
-        "reason": "Public Maps comparison was completed against own Facebook name/current contact/street point. Relationship to the different directory contact remains unresolved; do not assume contact/branch continuity. Own Facebook full week was read, while complete own email/contact-section research is still pending.",
-        "nextCheck": "Find attributable own continuity between directory44907885 and current own44220221 before import; complete own contact/hour sections."
+        "reason": "Public Maps comparison matches own current Facebook name/contact/street point, but continuity with the different directory contact remains unresolved. Own full weekly hours and contact panel have been read; no attributable business email was found.",
+        "nextCheck": "Find attributable contact/branch continuity connecting the old directory contact with the current own business. No additional email or hours gap alone blocks publication; identity conflict does."
       },
       {
         "name": "Auto Servis Sistem",
@@ -5943,7 +5943,15 @@
             "note": "Opened own manually listed business link in a dedicated public Maps tab and compared returned entry identifier to wrong-London Place-ID return. Equality confirmed in browser; raw Google coordinates/URLs and CID not retained."
           }
         },
-        "plannedWorkshopId": "auto-servis-sistem-mazgit"
+        "plannedWorkshopId": "auto-servis-sistem-mazgit",
+        "additionalSourceChecks": [
+          {
+            "url": "https://www.instagram.com/autoservissistem/",
+            "checkedAt": "2026-10-18T09:08:28.064755Z",
+            "status": "related-name-profile-not-used-for-factual-adoption",
+            "note": "Expanded bio offers manual gearbox repair and heavy-vehicle parts but has no phone, business email or precise branch address to fully corroborate attribution. No ISO/brand/ownership claim adopted; canonical facts continue to use independently attributed website and own Facebook."
+          }
+        ]
       },
       {
         "name": "Ledo motors",
@@ -6019,12 +6027,12 @@
         "publicBusinessEmail": {
           "address": null,
           "sourceUrl": "https://stgres.gjirafa.biz/autoservis-elektrika-1",
-          "checkedAt": "2026-10-18T08:17:48.195404+00:00",
-          "status": "unresolved",
-          "note": "Directory no email/own links; own source search pending. Maps failure does not complete email research."
+          "checkedAt": "2026-10-18T09:08:28.064755Z",
+          "status": "not-found",
+          "note": "Full Gjirafa business page has no email or own website/social link. Additional focused independent full-name/international-phone Facebook/Instagram/email source search yielded no attributable own profile or business email. Unrelated results rejected."
         },
         "openingHoursResearch": {
-          "status": "directory-plan-prepared-own-check-pending",
+          "status": "directory-week-researched-identity-deferred",
           "sourceUrl": "https://stgres.gjirafa.biz/autoservis-elektrika-1",
           "checkedAt": "2026-10-18T08:17:48.195404+00:00",
           "sourceAge": "undated directory",
@@ -6036,7 +6044,8 @@
             "08:00-18:00",
             "08:00-18:00",
             "Geschlossen"
-          ]
+          ],
+          "limits": "Undated directory week read. No attributable own weekly source found in the completed source search; no hours imported while Maps identity is missing."
         },
         "nextCheck": "Locate attributable own contact/social source and exact business Maps link."
       },
@@ -6423,21 +6432,23 @@
         "checkedAt": "2026-10-18T08:40:44.070753Z",
         "sourceUrls": [
           "https://www.facebook.com/profile.php?id=100054457031351",
-          "http://autoservisrekordi.com/"
+          "http://autoservisrekordi.com/",
+          "https://www.instagram.com/autoservisrekordi/"
         ],
         "independentEvidence": {
-          "publicPhones": ["+38344518693"],
-          "address": "Drenas (city only)",
+          "publicPhones": ["+38344518693", "+38344450075", "+38348304304"],
+          "address": "Rruga Fehmi e Xhevë Lladrovci, Drenas",
           "services": [
             "passenger-car service",
             "electrical repairs",
             "brake service",
             "engine service",
             "air conditioning"
-          ]
+          ],
+          "note": "Own Instagram bio gives exact street and links the same own website, which explicitly lists383contacts and repair services. No legacy377Facebook prefix is corrected or inferred; explicit website numbers remain independently sourced."
         },
-        "reason": "Find own precise current site and active phone-matched public Maps identity. Own website explicitly publishes383phones; legacy377Facebook contact is not converted/inferred. Full own Facebook Details lacks address.",
-        "nextCheck": "Find own precise current site and active phone-matched public Maps identity. Own website explicitly publishes383phones; legacy377Facebook contact is not converted/inferred. Full own Facebook Details lacks address. Resume only on a new attributable missing proof, not unchanged search repetition.",
+        "reason": "New own Instagram evidence resolves the independent exact-street gap. Public Maps full-name/town/country and exact primary international-phone checks still yield no attributable matching entry; no business identity is published without that match.",
+        "nextCheck": "Find an attributable official business Maps link or a current public Maps contact matching independently published business numbers; avoid repeating unchanged generic searches.",
         "publicBusinessEmail": {
           "address": "albertleku01@gmail.com",
           "sourceUrl": "https://www.facebook.com/profile.php?id=100054457031351",
@@ -6449,18 +6460,19 @@
           "status": "partial-own-plan-not-importable",
           "sources": [
             "http://autoservisrekordi.com/",
-            "https://www.facebook.com/profile.php?id=100054457031351&sk=directory_basic_info"
+            "https://www.facebook.com/profile.php?id=100054457031351&sk=directory_basic_info",
+            "https://www.instagram.com/autoservisrekordi/"
           ],
           "checkedAt": "2026-10-18T08:40:44.070753Z",
           "sourceAge": "Undated own website; Facebook update age not displayed",
-          "note": "Website states Mon–Sat08:05–18:15, no Sunday plan. No complete plausible branch-attributed week established; central assumed fallback only after identity clears."
+          "note": "Own website gives Mon–Sat08:05–18:15 but no Sunday plan; own Facebook Details and own Instagram provide no complete week. Use central assumed fallback only if identity later clears."
         },
         "googleIdentity": {
           "placeId": null,
           "method": "public-maps-ui",
           "checkedAt": "2026-10-18T08:40:44.070753Z",
           "identityConfirmed": false,
-          "note": "Full-name/town/country search does not yield uniquely attributable matching entry. No unrelated result adopted."
+          "note": "Same candidate rechecked after newly found own precise-street source. Full-name/location and exact independently sourced primary international-phone queries do not establish a matching public entry."
         }
       },
       {
@@ -6519,7 +6531,7 @@
         }
       }
     ],
-    "independentlyFullyEvidenced": 4,
+    "independentlyFullyEvidenced": 5,
     "publicationBottleneck": "Three identities satisfy all source/Maps gates. Fourteen detailed candidates have specific missing Maps identity, phone/location continuity or independent premises evidence. Nine additional directory leads remain at source-triage stage; they are not complete checks. Browser access is confirmed and is no longer a blocker.",
     "deferredByCause": {
       "no-attributable-active-maps-entry": [
@@ -6527,7 +6539,8 @@
         "Autoservis Vëllezërit Asllani",
         "Auto Servis Idrizi",
         "Autoservis Elektrika",
-        "Drini Detailing (Prishtinë)"
+        "Drini Detailing (Prishtinë)",
+        "Autoservis Rekordi"
       ],
       "contact-or-location-continuity": [
         "Auto Servis & Pjesë Starti",
@@ -6540,8 +6553,7 @@
         "IAS Detailing",
         "Pristine Detailing",
         "Auto Servis YLBERI-XH"
-      ],
-      "premises-and-maps-missing": ["Autoservis Rekordi"]
+      ]
     },
     "mapsAccessBlockIsNotAnEmailOrHoursExclusion": true,
     "additionalUnqualifiedSourceHints": [
@@ -7319,6 +7331,10 @@
       {
         "name": "Autoservis Krasniqi",
         "city": "Suharekë"
+      },
+      {
+        "name": "Autoservis Rekordi",
+        "city": "Drenas"
       }
     ],
     "initialSourcePreparationCounts": {
@@ -7687,7 +7703,8 @@
       "durationMs": 57602,
       "note": "Final-head target build/package verification will repeat after manifest-only review corrections."
     },
-    "reviewCorrection": "Spec review caught stale current-state summaries left from the initial access-blocked preparation. Corrected current counters/blocker/candidate reasons; retained initial observations explicitly as history. Re-review required for new head."
+    "reviewCorrection": "Spec review caught stale current-state summaries left from the initial access-blocked preparation. Corrected current counters/blocker/candidate reasons; retained initial observations explicitly as history. Re-review required for new head.",
+    "finalResearchFollowup": "Completed previously pending own Facebook contact panel for Starti and explicit independent Facebook/Instagram/email source search for Elektrika despite their failed identity gates. Newly found own Rekordi Instagram resolves precise street but public Maps phone still fails; source-complete metric now5, fullyverified remains3. Inspected related-name Sistem Instagram without adopting uncorroborated branch facts."
   },
   "plannedFocusMunicipalities": [
     "Kamenicë",
