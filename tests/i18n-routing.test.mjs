@@ -243,6 +243,24 @@ try {
 } finally {
   globalThis.fixtureDatabaseUnavailable = false;
 }
+globalThis.fixtureDatabaseUnavailable = true;
+try {
+  for (const path of [
+    "/ratgeber",
+    "/sq/udhezues/zgjedhja-e-servisit",
+    "/en/guides/preparing-a-visit",
+  ]) {
+    const response = await proxy(request(path));
+    assert.equal(
+      response.status,
+      200,
+      "Immutable guides do not depend on account data or auth provider availability",
+    );
+    assert.equal(response.headers.has("set-cookie"), false);
+  }
+} finally {
+  globalThis.fixtureDatabaseUnavailable = false;
+}
 globalThis.fixtureCatalogueUnavailable = true;
 try {
   await assert.rejects(

@@ -1,4 +1,4 @@
-import { localizeHref } from "../scripts/lib/locale.mjs";
+import { localizeHref, guidePagePaths } from "../scripts/lib/locale.mjs";
 import assert from "node:assert/strict";
 import { assertPrivacyOutput } from "./helpers/privacy-output.mjs";
 import { readFile, readdir } from "node:fs/promises";
@@ -139,6 +139,7 @@ await withWorkerRuntime(
         "/",
         "/werkstaetten",
         "/datenschutz",
+        ...guidePagePaths,
         `/werkstatt/${published.id}`,
       ]) {
         const path =
@@ -537,6 +538,9 @@ await withWorkerRuntime(
       );
     }
     for (const path of [
+      "/ratgeber/missing",
+      "/sq/udhezues/missing",
+      "/en/guides/missing",
       "/fr",
       "/sq/missing",
       "/en/missing",

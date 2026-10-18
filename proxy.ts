@@ -1,3 +1,4 @@
+import { guidePagePaths } from "@/lib/guide-routes";
 import { NextResponse, type NextRequest } from "next/server";
 import { createAuthClient } from "@/lib/auth/provider";
 import { getAuthConfig } from "@/lib/auth/config";
@@ -89,8 +90,12 @@ export async function proxy(request: NextRequest) {
     return response;
   };
   let response = createResponse();
-  // Physical files and technical metadata do not require an auth database or provider.
-  if (isStaticOrMetadataPath(canonical.pathname)) return response;
+  // Public guidance, physical files and technical metadata contain no account data.
+  if (
+    isStaticOrMetadataPath(canonical.pathname) ||
+    guidePagePaths.includes(pageIdentityPath(canonical.pathname))
+  )
+    return response;
   const c = await getAuthConfig();
   if (!c?.enabled) return response;
   const local = ["localhost", "127.0.0.1"].includes(canonical.hostname);

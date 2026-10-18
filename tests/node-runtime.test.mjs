@@ -153,6 +153,53 @@ try {
     assert.equal(response.status, 200, path + logs);
     assert.match(await response.text(), /Synthetic Node Workshop/);
   }
+  for (const locale of ["de", "sq", "en"])
+    for (const identity of [
+      "/guides",
+      "/guides/choosing-a-workshop",
+      "/guides/preparing-a-visit",
+    ]) {
+      const path = localizeHref(identity, locale);
+      for (const init of [
+        {},
+        { method: "HEAD" },
+        { headers: { RSC: "1", Accept: "text/x-component" } },
+      ]) {
+        const response = await fetch(
+          origin + path + "?token=private-guide-query",
+          init,
+        );
+        assert.equal(response.status, 200, path + logs);
+        const body = await response.text();
+        assert(!body.includes("private-guide-query"));
+        assert(!body.includes("Private Draft Workshop"));
+        if (init.method === "HEAD") assert.equal(body, "");
+        else if (init.headers)
+          assert.match(
+            response.headers.get("content-type"),
+            /text\/x-component/,
+          );
+        else {
+          assert.match(body, new RegExp('<html lang="' + locale + '"'));
+          assert(
+            body.includes('href="' + origin + path + '"'),
+            "Node guide canonical matches the public locale URL",
+          );
+          assert(body.includes('data-riparim-page="guide'));
+          assert(!body.includes("noindex"));
+        }
+      }
+    }
+  for (const path of [
+    "/ratgeber/missing",
+    "/sq/udhezues/missing",
+    "/en/guides/missing",
+  ])
+    assert.equal(
+      (await fetch(origin + path)).status,
+      404,
+      "Unknown guide is a real Node 404",
+    );
   for (const [alias, target] of [
     ["/en/werkstaetten?ort=Prizren", "/en/workshops?ort=Prizren"],
     [

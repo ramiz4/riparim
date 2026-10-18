@@ -1,3 +1,4 @@
+import { guidePagePaths } from "./guide-routes";
 import { setReleaseRscHeaders } from "./release-rsc";
 import {
   isPagePath,
@@ -9,6 +10,9 @@ import { ownReviewsHref } from "./own-reviews";
 type Revision = { id: string; updatedAt: string };
 declare const __RIPARIM_PUBLIC_REVISIONS__: Revision[];
 export function publicAssetPath(url: URL) {
+  const identity = pageIdentityPath(url.pathname);
+  if (guidePagePaths.includes(identity))
+    return `/__public/${localeFromPath(url.pathname)}${identity}.html`;
   if (pageIdentityPath(url.pathname) === "/privacy")
     return `/__public/${localeFromPath(url.pathname)}/privacy.html`;
   if (pageIdentityPath(url.pathname) === "/")
@@ -93,7 +97,7 @@ export async function servePublicRelease(
   const id = pageIdentityPath(url.pathname).match(
     /^\/workshop\/([a-z0-9-]+)$/,
   )?.[1];
-  let current = ["/", "/privacy"].includes(identity);
+  let current = ["/", "/privacy", ...guidePagePaths].includes(identity);
   if (id) {
     const row = await env.DB.prepare(
       "SELECT status,updated_at FROM workshops WHERE id=?",

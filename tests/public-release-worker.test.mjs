@@ -1,4 +1,4 @@
-import { localizeHref } from "../scripts/lib/locale.mjs";
+import { localizeHref, guidePagePaths } from "../scripts/lib/locale.mjs";
 import assert from "node:assert/strict";
 import { assertPrivacyOutput } from "./helpers/privacy-output.mjs";
 import { readFile, readdir } from "node:fs/promises";
@@ -11,7 +11,10 @@ if (config.name === "riparim") {
   );
   const canonical = JSON.parse(await readFile("data/workshops.json", "utf8"));
   const published = canonical.workshops.filter((w) => w.status === "published");
-  assert.equal(manifest.pages, 3 * (published.length + 3));
+  assert.equal(
+    manifest.pages,
+    3 * (published.length + 3 + guidePagePaths.length),
+  );
   assert.equal(manifest.privateData, false);
   assert.equal(manifest.privacyVariants, 3);
   const modules = (await readdir("dist/server", { recursive: true }))
@@ -157,6 +160,7 @@ if (config.name === "riparim") {
       for (const path of [
         "/",
         "/datenschutz",
+        ...guidePagePaths,
         "/werkstaetten",
         `/werkstatt/${first.id}`,
       ]) {
