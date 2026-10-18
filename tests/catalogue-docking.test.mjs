@@ -448,6 +448,101 @@ try {
         viewportWidth > 1000 ? 12 : 0,
       );
     }
+  await act(async () =>
+    root.render(
+      createElement(
+        I18nProvider,
+        { locale: "de", messages: getMessages("de", ["common", "public"]) },
+        createElement(Catalogue, {
+          key: "index-contrast",
+          initialWorkshops: [
+            {
+              id: "issue-207-contrast",
+              name: "(#207) Contrast workshop",
+              city: "Prishtina",
+              address: "(#207) Fictional address",
+              phone: "",
+              phoneNote: "",
+              whatsapp: "",
+              brands: [],
+              services: ["Inspektion & Wartung"],
+              serviceDetails: [],
+              languages: [],
+              rating: null,
+              count: 0,
+              description: "(#207) Isolated contrast fixture",
+              specialty: "",
+              lat: null,
+              lng: null,
+              sources: [],
+              checkedAt: "2026-10-18",
+              status: "published",
+            },
+          ],
+          initialError: "",
+          initialFilters: defaultCatalogueFilters,
+          account: null,
+          isAdmin: false,
+        }),
+      ),
+    ),
+  );
+  const index = document.querySelector("details[data-ui='workshop-index']");
+  assert(index, "Contrast is checked on the actual rendered workshop index");
+  index.open = true;
+  function luminance(color) {
+    const channels = color.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+    assert(channels, `Contrast requires resolved opaque RGB colors: ${color}`);
+    return channels
+      .slice(1)
+      .map((value) => {
+        const channel = Number(value) / 255;
+        return channel <= 0.04045
+          ? channel / 12.92
+          : ((channel + 0.055) / 1.055) ** 2.4;
+      })
+      .reduce(
+        (sum, channel, index) =>
+          sum + channel * [0.2126, 0.7152, 0.0722][index],
+        0,
+      );
+  }
+  const contrastCases = [];
+  for (const [variant, compiledCss] of [
+    ["source", css],
+    ["production", production],
+  ])
+    for (const dark of [false, true])
+      for (const viewportWidth of [390, 1280]) {
+        width = viewportWidth;
+        document.documentElement.classList.toggle("dark", dark);
+        styles(compiledCss);
+        const linkStyle = getComputedStyle(index.querySelector("a[href]"));
+        const background = getComputedStyle(document.body).backgroundColor;
+        const foregroundLuminance = luminance(linkStyle.color);
+        const backgroundLuminance = luminance(background);
+        const ratio =
+          (Math.max(foregroundLuminance, backgroundLuminance) + 0.05) /
+          (Math.min(foregroundLuminance, backgroundLuminance) + 0.05);
+        assert(
+          ratio >= 4.5,
+          `${variant}, dark=${dark}, width=${width}: normal index text contrast ${ratio.toFixed(2)} must reach 4.5:1 (${linkStyle.color} on ${background})`,
+        );
+        assert.equal(
+          linkStyle.textDecorationLine,
+          "underline",
+          "Readable index links retain their non-color link indication",
+        );
+        contrastCases.push({
+          variant,
+          dark,
+          width,
+          color: linkStyle.color,
+          background,
+          ratio: Number(ratio.toFixed(2)),
+        });
+      }
+  console.log(JSON.stringify({ workshopIndexContrast: contrastCases }));
   console.log(
     JSON.stringify({
       catalogueDockingCasesPassed: cases,
