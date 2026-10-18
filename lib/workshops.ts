@@ -75,6 +75,7 @@ export type Workshop = {
     verified: boolean;
   }[];
   importedOpeningHours?: OpeningHours | null;
+  importedOpeningHoursAssumed?: boolean;
   openingHours?: OpeningHours | null;
   openingHoursConfirmedAt?: string | null;
   id: string;

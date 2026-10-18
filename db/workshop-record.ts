@@ -43,13 +43,16 @@ export function decodeProfile(
     emailContacts = entries
       .filter((e) => e.active)
       .map(({ address, verified }) => ({ address, verified }));
+  const importedOpeningHours = decodeOpeningHours(row.imported_opening_hours);
   return {
     emails: emailContacts.map((e) => e.address),
     emailContacts,
     ...(options?.emailEditing === true
       ? { editableEmailContacts: entries }
       : {}),
-    importedOpeningHours: decodeOpeningHours(row.imported_opening_hours),
+    importedOpeningHours,
+    importedOpeningHoursAssumed:
+      !!importedOpeningHours && row.imported_opening_hours_assumed === 1,
     openingHours: decodeOpeningHours(row.opening_hours),
     openingHoursConfirmedAt: row.opening_hours_confirmed_at
       ? String(row.opening_hours_confirmed_at)
