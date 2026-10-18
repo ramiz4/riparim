@@ -6518,8 +6518,6 @@
         }
       }
     ],
-    "newSourcePreparations": 3,
-    "continuedSourcePreparations": 1,
     "independentlyFullyEvidenced": 4,
     "publicationBottleneck": "Three identities satisfy all source/Maps gates. Fourteen detailed candidates have specific missing Maps identity, phone/location continuity or independent premises evidence. Nine additional directory leads remain at source-triage stage; they are not complete checks. Browser access is confirmed and is no longer a blocker.",
     "deferredByCause": {
@@ -6561,7 +6559,7 @@
         "nextCheck": "Find attributable own current public contact, exact premises, email and hours; polishing scope is only a directory lead."
       }
     ],
-    "duplicateScope": "Seven current existing identities detected in prior48-source shortlist, including yesterday's3published additions; not seven newly researched businesses.",
+    "duplicateScope": "Nineteen existing-source identity hints: twelve from current directory triage plus seven from the previously read48-source shortlist. Historical hints are not counted as newly researched businesses; potential branches and the retired Reno source remain separately blocked.",
     "attemptedPriorSources": [
       {
         "name": "Auto Servis Niti",
@@ -6654,7 +6652,7 @@
         "nextCheck": "Resume only in confirmed internal browser or on a new attributable source; retain earlier identity conflicts."
       }
     ],
-    "workTargetLimitation": "The approximate40–60precheck work target was met with57current lead groups, including40directory records. Seventeen detailed cases yielded3fully verified identities;14were specifically deferred. This is not an exhaustive market search or a claim that the remaining9source-only leads have completed identity/email/hours checks. No quota filler is imported.",
+    "workTargetLimitation": "The approximate 40–60 precheck work target was met with 57 current lead groups, including 40 directory records. Seventeen detailed cases yielded 3 fully verified identities; 14 were specifically deferred. This is not an exhaustive market search or a claim that the remaining 9 source-only leads have completed identity/email/hours checks. No quota filler is imported.",
     "currentSourceTriage": [
       {
         "name": "Peugeot te Beda",
@@ -7321,7 +7319,12 @@
         "name": "Autoservis Krasniqi",
         "city": "Suharekë"
       }
-    ]
+    ],
+    "initialSourcePreparationCounts": {
+      "new": 3,
+      "continued": 1,
+      "phase": "Before confirmed browser continuation; historical preparation counts, not final detailed-candidate totals."
+    }
   },
   "browser": {
     "status": "confirmed",
@@ -7556,6 +7559,36 @@
         "canceled": 2,
         "scope": "Finite current-version aggregate; cancellation alone is not a resource error. Nine complete content checks contain no1102."
       }
+    },
+    "initialPhase": "Original early-run captures are retained in the preceding fields. Resumed/current fields identify the refreshed checks after the browser was confirmed and main advanced to v1.37.0.",
+    "current": {
+      "checkedAt": "2026-10-18T08:13:46.054230+00:00",
+      "main": "31c526677cb338828062f24bc2ed336981ebb123",
+      "release": "v1.37.0",
+      "releaseWorkflow": 39108318529,
+      "releaseWorkflowConclusion": "success",
+      "healthFile": ".sites-runtime/daily-import-2026-10-18/health-resumed.json",
+      "fullResponses": 9,
+      "healthy": true,
+      "all907CatalogueRowsUnchanged": true,
+      "publicCount": 191,
+      "canonicalFieldsMatched": 19,
+      "placeHashesMatched": 191,
+      "retirementMarkers": 35,
+      "deploymentId": "9a1fcc83-627b-4c86-8cea-c785469c2105",
+      "workerVersion": "4d42877f-0008-4eb0-a780-8f03b334960b",
+      "trafficPercent": 100,
+      "logs": {
+        "from": "2026-10-18T07:45:31Z",
+        "to": "2026-10-18T08:04:00Z",
+        "ok": 52,
+        "canceled": 2,
+        "scope": "Finite current-version aggregate; cancellation alone is not a resource error. Nine complete content checks contain no1102."
+      },
+      "beforeWriteHealth": ".sites-runtime/daily-import-2026-10-18/health-before-write.json",
+      "beforeWriteAll907RowsUnchanged": true,
+      "beforeWriteDrafts": 0,
+      "beforeWritePendingChanges": 0
     }
   },
   "provider": {
