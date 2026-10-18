@@ -1,4 +1,5 @@
 "use client";
+import { useWorkshopContactAnalytics } from "@/components/analytics-consent";
 import { storedSentinels } from "@/lib/i18n/canonical-values";
 import { cn } from "@/lib/utils";
 import {
@@ -253,6 +254,7 @@ export default function WorkshopProfile({
   const mapHref = workshopMapsUrl(w);
   const routeHref = workshopRouteUrl(w);
   const phoneHref = contactHref(w, "phone");
+  const trackContact = useWorkshopContactAnalytics(w.id);
   const serviceGroups = groupWorkshopServices(w),
     matches = workshopSelectionMatches(w, selection);
   const description = display?.description ?? w.description,
@@ -448,6 +450,7 @@ export default function WorkshopProfile({
         )}
         data-riparim-page="workshop"
         data-workshop-id={w.id}
+        data-analytics-workshop-id={w.status === "published" ? w.id : undefined}
       >
         <WorkshopNavigationLink
           className="mb-5 inline-flex items-center gap-[7px] text-[14px] text-[#617578] dark:text-muted-foreground at-most-720:mb-[17px]"
@@ -494,6 +497,7 @@ export default function WorkshopProfile({
                   "min-h-[45px] px-[15px] py-[10px] whitespace-nowrap",
                 )}
                 href={phoneHref}
+                onClick={() => trackContact("phone")}
               >
                 <Phone size={17} />
                 {t("public.call")}
@@ -505,6 +509,7 @@ export default function WorkshopProfile({
                 "min-h-[45px] px-[15px] py-[10px] whitespace-nowrap",
               )}
               href={routeHref}
+              onClick={() => trackContact("directions")}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -838,6 +843,7 @@ export default function WorkshopProfile({
                   "mt-2 text-[14px] leading-[1.6]",
                 )}
                 href={mapHref}
+                onClick={() => trackContact("directions")}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -847,6 +853,7 @@ export default function WorkshopProfile({
                 <LocaleAnchor
                   className="mt-5 mb-4 flex flex-row items-center gap-2 [overflow-wrap:anywhere] at-most-720:mt-[14px] at-most-720:mb-0"
                   href={phoneHref}
+                  onClick={() => trackContact("phone")}
                 >
                   <Phone size={17} />
                   <strong className="text-[18px] tracking-[0.1px] text-[#294c43] dark:text-foreground">
@@ -870,6 +877,7 @@ export default function WorkshopProfile({
                       <LocaleAnchor
                         className="mt-2 mb-[0.1rem] flex min-h-8 items-start gap-2 text-[14px] leading-[1.5]"
                         href={workshopEmailHref(entry.address)}
+                        onClick={() => trackContact("email")}
                       >
                         <Mail
                           size={17}
@@ -950,6 +958,7 @@ export default function WorkshopProfile({
                 w.whatsapp && mobileWhatsAppClassName,
               )}
               href={phoneHref}
+              onClick={() => trackContact("phone")}
             >
               <Phone size={18} />
               {t("public.call")}
@@ -962,6 +971,7 @@ export default function WorkshopProfile({
               w.whatsapp && mobileWhatsAppClassName,
             )}
             href={routeHref}
+            onClick={() => trackContact("directions")}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -991,6 +1001,7 @@ export default function WorkshopProfile({
               <LocaleAnchor
                 className={dialogPrimaryClassName}
                 href={contactHref(w, "whatsapp", message) ?? undefined}
+                onClick={() => trackContact("whatsapp")}
                 target="_blank"
                 rel="noopener noreferrer"
               >

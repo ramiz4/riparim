@@ -4,6 +4,9 @@ import type { RuntimeEnv } from "./contracts";
 let storage: ReturnType<typeof createNodeStorage> | undefined;
 const configuration = [
   "SITE_ORIGIN",
+  "POSTHOG_KEY",
+  "POSTHOG_HOST",
+  "POSTHOG_TEST_MODE",
   "REVIEW_MODERATOR_EMAIL",
   "GOOGLE_MAPS_BROWSER_API_KEY",
   "GOOGLE_PLACES_SERVER_API_KEY",

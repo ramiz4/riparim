@@ -14,6 +14,7 @@ import { localizeHref } from "@/lib/i18n/locale";
 import { useDeferredSession } from "./use-deferred-session";
 import { SiteHeader } from "./site-header";
 import { DirectoryFooter } from "./directory-footer";
+import { AnalyticsSettings } from "./analytics-consent";
 import { ThemeSettings } from "./theme-settings";
 import { AccountSettings } from "./account-settings";
 import { BusinessPanel } from "./business-panel";
@@ -209,7 +210,14 @@ export function DeferredManagement({ kind }: { kind: DeferredManagementKind }) {
           >
             {title}
           </h1>
-          <AccountSettings appearance={<ThemeSettings />} />
+          <AccountSettings
+            appearance={
+              <>
+                <ThemeSettings />
+                <AnalyticsSettings />
+              </>
+            }
+          />
         </main>
         {footer}
       </>
