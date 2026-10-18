@@ -3,7 +3,7 @@
   "date": "2026-10-18",
   "timezone": "Europe/Zurich",
   "startedAt": "2026-10-18T02:57:59.337Z",
-  "checkedAt": "2026-10-18T08:53:06.262249Z",
+  "checkedAt": "2026-10-18T08:58:05.253508Z",
   "status": "prepared-awaiting-final-head-verification",
   "completedDateGuard": false,
   "baseCommit": "31c526677cb338828062f24bc2ed336981ebb123",
@@ -5668,7 +5668,7 @@
         "name": "Auto Llaker Lirimi",
         "city": "Kamenicë",
         "origin": "new-source",
-        "status": "deferred-preparatory-sources-only",
+        "status": "deferred-no-attributable-active-maps-entry",
         "checkedAt": "2026-10-18T08:09:02.017771+00:00",
         "sourceUrls": ["https://stgres.gjirafa.biz/auto-llaker-lirimi-1"],
         "independentEvidence": {
@@ -5686,7 +5686,7 @@
           "note": "Full Gjirafa business page and focused independent exact-name search checked. No attributable own website, official Facebook/Instagram profile or business email found. Asllani construction-company results with different town/phone rejected."
         },
         "openingHoursResearch": {
-          "status": "directory-plan-prepared-own-check-pending",
+          "status": "directory-week-researched-identity-deferred",
           "sourceUrl": "https://stgres.gjirafa.biz/auto-llaker-lirimi-1",
           "checkedAt": "2026-10-18T03:09:34.339479+00:00",
           "sourceAge": "Undated business entry; current retrieval/crawl is not a business confirmation.",
@@ -5709,14 +5709,14 @@
           "checkedAt": "2026-10-18T08:09:02.017771+00:00",
           "note": "Public Maps full-name/site/country and independently sourced primary international-phone check did not yield attributable identity. No unrelated result adopted."
         },
-        "reason": "Current directory details read; no attributable own website/Facebook/Instagram source found in focused name/place/email search. Precise premises and public Maps gate remain incomplete.",
+        "reason": "Independent directory contact, village and offered painting/polishing are evidenced. Public name/country and primary international-phone Maps searches did not establish an attributable active entry; independent precise current premises remain missing.",
         "nextCheck": "New own contact/precise-site or attributable Maps business link needed; do not repeat unchanged exact searches."
       },
       {
         "name": "Autoservis Vëllezërit Asllani",
         "city": "Kaçanik",
         "origin": "new-source",
-        "status": "deferred-preparatory-sources-only",
+        "status": "deferred-no-attributable-active-maps-entry",
         "checkedAt": "2026-10-18T08:09:02.017771+00:00",
         "sourceUrls": [
           "https://stgres.gjirafa.biz/autoservis-vllezrit-asllani-1"
@@ -5736,7 +5736,7 @@
           "note": "Full Gjirafa business page and focused independent exact-name search checked. No attributable own website, official Facebook/Instagram profile or business email found. Asllani construction-company results with different town/phone rejected."
         },
         "openingHoursResearch": {
-          "status": "directory-plan-prepared-own-check-pending",
+          "status": "directory-week-researched-identity-deferred",
           "sourceUrl": "https://stgres.gjirafa.biz/autoservis-vllezrit-asllani-1",
           "checkedAt": "2026-10-18T03:09:34.339479+00:00",
           "sourceAge": "Undated business entry; current retrieval/crawl is not a business confirmation.",
@@ -5759,14 +5759,14 @@
           "checkedAt": "2026-10-18T08:09:02.017771+00:00",
           "note": "Public Maps full-name/site/country and independently sourced primary international-phone check did not yield attributable identity. No unrelated result adopted."
         },
-        "reason": "Directory search preview only; full public web retrieval unavailable. No attributable own website/social/email found in focused source search. Precise premises, current own evidence and public Maps gate incomplete.",
+        "reason": "Full Gjirafa business page was retrieved in the internal browser, with own-independent directory contact/site/service/week data. Full-name/town/country and exact international-phone Maps searches yielded no attributable identity; related construction-company contact results were rejected.",
         "nextCheck": "New own contact/precise-site or attributable Maps business link needed; do not repeat unchanged exact searches."
       },
       {
         "name": "Auto Servis Idrizi",
         "city": "Shtime",
         "origin": "continued-historical-identity",
-        "status": "deferred-preparatory-sources-only",
+        "status": "deferred-no-attributable-active-maps-entry",
         "checkedAt": "2026-10-18T08:05:46.681334+00:00",
         "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-idrizi-1"],
         "independentEvidence": {
@@ -5784,7 +5784,7 @@
           "note": "Gjirafa directory has no email or own website/social link. Focused independent full-name/town source search returned no own/contact/official Facebook or Instagram result. No guessed profiles or address patterns."
         },
         "openingHoursResearch": {
-          "status": "directory-plan-prepared-own-check-pending",
+          "status": "directory-week-researched-identity-deferred",
           "sourceUrl": "https://stgres.gjirafa.biz/auto-servis-idrizi-1",
           "checkedAt": "2026-10-18T03:09:34.339479+00:00",
           "sourceAge": "Undated business entry; current retrieval/crawl is not a business confirmation.",
@@ -5807,14 +5807,14 @@
           "checkedAt": "2026-10-18T08:05:46.681334+00:00",
           "note": "Public full-name/town/country and exact independently sourced international-phone searches produced no attributable matching active entry; no unrelated result adopted."
         },
-        "reason": "Same previously deferred directory identity; details page retrieved. Own source/email checks and strict public Maps phone/site/Place-ID verification pending, not repeated through another Google channel.",
+        "reason": "Independent directory name/contact/street/service/week evidence was read. Public Maps name/town/country and exact international-phone searches did not establish a matching entry; focused own/contact/social source search found no attributable business email.",
         "nextCheck": "Resume only when own attributable Maps/alias/contact evidence appears; no repeated same phone/name search without new evidence."
       },
       {
         "name": "Auto Servis & Pjesë Starti",
         "city": "Shtime",
         "origin": "new-source",
-        "status": "deferred-preparatory-sources-only",
+        "status": "deferred-contact-continuity",
         "checkedAt": "2026-10-18T08:09:02.017771+00:00",
         "sourceUrls": [
           "https://stgres.gjirafa.biz/auto-servis--pjes-starti-1?route=1",
@@ -5847,20 +5847,21 @@
           "note": "Gjirafa no email; own website DNS unavailable; own Facebook overview no email. Info/official Instagram followup remains pending."
         },
         "openingHoursResearch": {
-          "status": "directory-plan-prepared-own-check-pending",
-          "sourceUrl": "https://stgres.gjirafa.biz/auto-servis--pjes-starti-1?route=1",
-          "checkedAt": "2026-10-18T03:09:34.339479+00:00",
-          "sourceAge": "Undated business entry; current retrieval/crawl is not a business confirmation.",
+          "status": "researched-own-week-identity-deferred",
+          "sourceUrl": "https://www.facebook.com/autoservisstarti/",
+          "checkedAt": "2026-10-18T08:58:05.253508Z",
+          "sourceAge": "Own full weekly dialog; update age not displayed.",
           "week": [
-            "08:00-18:00",
-            "08:00-18:00",
-            "08:00-18:00",
-            "08:00-18:00",
-            "08:00-18:00",
-            "08:00-18:00",
+            "08:00-19:00",
+            "08:00-19:00",
+            "08:00-19:00",
+            "08:00-19:00",
+            "08:00-19:00",
+            "08:00-19:00",
             "Geschlossen"
           ],
-          "limits": "Tentative directory schedule only. Own sources and site attribution must be checked before adopting as researched. If no usable plan after complete research, central assumed fallback is required for otherwise eligible identity."
+          "limits": "Tentative directory schedule only. Own sources and site attribution must be checked before adopting as researched. If no usable plan after complete research, central assumed fallback is required for otherwise eligible identity.",
+          "note": "Own Facebook full week differs from directory08–18 plan; no owner confirmation. No hours imported while contact continuity is unresolved."
         },
         "googleIdentity": {
           "method": "public-maps-ui",
@@ -5873,7 +5874,7 @@
           "phoneMatched": "own-current-phone-matches-but-old-directory-contact-continuity-unresolved",
           "note": "Own Facebook independently publishes current different contact, precise same-street point and electro-mechanical service. Directory contact44907885 remains unexplained; do not merge by name/street alone."
         },
-        "reason": "Directory details retrieved. Other directory lead associates a similarly named same-street business with another telephone and autostarti.com; own site retrieval failed. Do not merge identities or replace a contact without attributed continuity. Public Maps gate pending.",
+        "reason": "Public Maps comparison was completed against own Facebook name/current contact/street point. Relationship to the different directory contact remains unresolved; do not assume contact/branch continuity. Own Facebook full week was read, while complete own email/contact-section research is still pending.",
         "nextCheck": "Find attributable own continuity between directory44907885 and current own44220221 before import; complete own contact/hour sections."
       },
       {
@@ -6519,8 +6520,8 @@
     ],
     "newSourcePreparations": 3,
     "continuedSourcePreparations": 1,
-    "independentlyFullyEvidenced": 0,
-    "publicationBottleneck": "Required internal project Google profile not available; no Maps UI identity could be completed. Independent preparations are incomplete and not publication-ready.",
+    "independentlyFullyEvidenced": 4,
+    "publicationBottleneck": "Three identities satisfy all source/Maps gates. Fourteen detailed candidates have specific missing Maps identity, phone/location continuity or independent premises evidence. Nine additional directory leads remain at source-triage stage; they are not complete checks. Browser access is confirmed and is no longer a blocker.",
     "deferredByCause": {
       "no-attributable-active-maps-entry": [
         "Auto Llaker Lirimi",
@@ -6653,7 +6654,7 @@
         "nextCheck": "Resume only in confirmed internal browser or on a new attributable source; retain earlier identity conflicts."
       }
     ],
-    "workTargetLimitation": "The40–60source-precheck target was not completed: no confirmed internal browser profile is available. Historical triage, availability probes and partial independent preparations are not counted as complete fresh identity checks.",
+    "workTargetLimitation": "The approximate40–60precheck work target was met with57current lead groups, including40directory records. Seventeen detailed cases yielded3fully verified identities;14were specifically deferred. This is not an exhaustive market search or a claim that the remaining9source-only leads have completed identity/email/hours checks. No quota filler is imported.",
     "currentSourceTriage": [
       {
         "name": "Peugeot te Beda",
@@ -7301,6 +7302,25 @@
         "missing": "Attributable current own/contact/source-age and precise-site evidence; complete email/hours research and Maps identity remain pending. Directory listing alone is not complete verification.",
         "nextCheck": "Find an own business contact/service/premises source before another Maps attempt."
       }
+    ],
+    "independentlyFullyEvidencedDefinition": "Independent name, business phone, precise site and qualifying passenger-car services supported. This is separate from the public Maps assignment/publication gate.",
+    "independentlyFullyEvidencedCandidates": [
+      {
+        "name": "Auto Servis Sistem",
+        "city": "Obiliq"
+      },
+      {
+        "name": "Drini Detailing",
+        "city": "Prishtinë"
+      },
+      {
+        "name": "Drini Detailing & More",
+        "city": "Podujevë"
+      },
+      {
+        "name": "Autoservis Krasniqi",
+        "city": "Suharekë"
+      }
     ]
   },
   "browser": {
@@ -7566,10 +7586,10 @@
     "preparedAddresses": 3
   },
   "publication": {
-    "pr": null,
+    "pr": "https://github.com/ramiz4/riparim/pull/212",
     "release": null,
     "state": "prepared-awaiting-reviewed-pr-ci-and-release",
-    "newPullRequests": 0,
+    "newPullRequests": 1,
     "newReleases": 0,
     "closeoutMethod": "Secure final CI/review/PR/release/live evidence in the protected daily receipt and postmerge local manifest; never mutate immutable main/release artefacts directly."
   },
@@ -7626,7 +7646,14 @@
       "reviewer": "daily18_identity_review",
       "scope": "Three identities; Sistem manual own-link equality condition visibly fulfilled, source metadata stored without Google CID/coordinates/raw URL."
     },
-    "finalHeadEvidenceLocation": "Final-head independent reviews and CI are secured in PR and protected daily receipt; postmerge local completion manifest records outcomes."
+    "finalHeadEvidenceLocation": "Final-head independent reviews and CI are secured in PR and protected daily receipt; postmerge local completion manifest records outcomes.",
+    "nodeIntegrationPriorHead": {
+      "head": "61084d9b2c57290834bb015157a3bf59b19fefcd",
+      "status": "passed",
+      "durationMs": 57602,
+      "note": "Final-head target build/package verification will repeat after manifest-only review corrections."
+    },
+    "reviewCorrection": "Spec review caught stale current-state summaries left from the initial access-blocked preparation. Corrected current counters/blocker/candidate reasons; retained initial observations explicitly as history. Re-review required for new head."
   },
   "plannedFocusMunicipalities": [
     "Kamenicë",
@@ -7634,43 +7661,53 @@
     "Shtime",
     "Hani i Elezit"
   ],
-  "focusRationale": "All four municipalities have zero existing canonical profiles; source preparation includes smaller villages. Historical one-gap cases prioritized but current access blocks prevent their new Maps checks.",
+  "focusRationale": "The four initial municipalities had zero canonical coverage and include smaller villages. Historical one-gap cases were reviewed first; current source research and public Maps checks then expanded to other municipalities when local hints failed identity/premises/scope gates. Required internal account has been visibly confirmed since the continuation.",
   "independentSourceAccess": [
     {
       "url": "https://www.facebook.com/autoservisNiti/",
-      "result": "Retrieval returned old cached Facebook temporary-block page; no current business data or closure inferred."
+      "result": "Retrieval returned old cached Facebook temporary-block page; no current business data or closure inferred.",
+      "phase": "Initial web-tool preparation before confirmed internal-browser continuation; historical availability observation."
     },
     {
       "url": "https://www.facebook.com/AutoKlimaSkenda/",
-      "result": "Retrieval returned old cached Facebook temporary-block page; no current business data or closure inferred."
+      "result": "Retrieval returned old cached Facebook temporary-block page; no current business data or closure inferred.",
+      "phase": "Initial web-tool preparation before confirmed internal-browser continuation; historical availability observation."
     },
     {
       "url": "https://www.facebook.com/autoedis/",
-      "result": "Retrieval returned old cached Facebook temporary-block page; no current business data or closure inferred."
+      "result": "Retrieval returned old cached Facebook temporary-block page; no current business data or closure inferred.",
+      "phase": "Initial web-tool preparation before confirmed internal-browser continuation; historical availability observation."
     },
     {
       "url": "https://autoservisfatoni.com/",
-      "result": "Public web retrieval unavailable via tool; no current business fact inferred."
+      "result": "Public web retrieval unavailable via tool; no current business fact inferred.",
+      "phase": "Initial web-tool preparation before confirmed internal-browser continuation; historical availability observation."
     },
     {
       "url": "https://autocity.vercel.app/contact",
-      "result": "Public web retrieval unavailable via tool; no current business fact inferred."
+      "result": "Public web retrieval unavailable via tool; no current business fact inferred.",
+      "phase": "Initial web-tool preparation before confirmed internal-browser continuation; historical availability observation."
     },
     {
       "url": "https://stgres.gjirafa.biz/autoservis-vllezrit-asllani-1",
-      "result": "Public web retrieval unavailable via tool; no current business fact inferred."
+      "result": "Public web retrieval unavailable via tool; no current business fact inferred.",
+      "phase": "Initial web-tool preparation before confirmed internal-browser continuation; historical availability observation.",
+      "currentFollowup": "Full public page later retrieved/read in the confirmed internal browser; initial retrieval limitation resolved."
     },
     {
       "url": "https://autostarti.com/",
-      "result": "Own public web tool and ordinary HTTPS fetch failed; no TLS bypass or URL guessing."
+      "result": "Own public web tool and ordinary HTTPS fetch failed; no TLS bypass or URL guessing.",
+      "phase": "Initial web-tool preparation before confirmed internal-browser continuation; historical availability observation."
     },
     {
       "url": "https://autoservisfatoni.com/",
-      "result": "Ordinary HTTPS fetch failed; no TLS bypass or guessed contact."
+      "result": "Ordinary HTTPS fetch failed; no TLS bypass or guessed contact.",
+      "phase": "Initial web-tool preparation before confirmed internal-browser continuation; historical availability observation."
     },
     {
       "url": "https://autocity.vercel.app/contact",
-      "result": "Ordinary HTTPS fetch returned404; this proves only URL unavailability, not business closure."
+      "result": "Ordinary HTTPS fetch returned404; this proves only URL unavailability, not business closure.",
+      "phase": "Initial web-tool preparation before confirmed internal-browser continuation; historical availability observation."
     }
   ],
   "duplicates": [
@@ -7722,7 +7759,9 @@
     {
       "municipality": "Kamenicë",
       "categories": ["passenger-car repair", "glass", "polishing/detailing"],
-      "result": "Lirimi/Cima preparation; household-glass sources rejected. No confirmed Maps identity."
+      "result": "Lirimi name/country and primary international-phone Maps searches did not establish a matching entry; Cima remains a raw source lead. Household-glass sources rejected.",
+      "initialPreparationResult": "Lirimi/Cima preparation; household-glass sources rejected. No confirmed Maps identity.",
+      "initialPreparationPhase": "Before internal browser access was restored; retained as history."
     },
     {
       "municipality": "Kaçanik",
@@ -7731,17 +7770,23 @@
         "auto electrics",
         "polishing/detailing"
       ],
-      "result": "Asllani/TE NEZA leads; exact own contact/site checks incomplete and no Maps access. No attributable substantive local detailing result in focused sources."
+      "result": "Asllani has no attributable Maps match; YLBERI own contact/service/week and directPID return are checked, but precise current premises remain unresolved. TE NEZA legacy contact unresolved; no fully verified substantive local detailing business.",
+      "initialPreparationResult": "Asllani/TE NEZA leads; exact own contact/site checks incomplete and no Maps access. No attributable substantive local detailing result in focused sources.",
+      "initialPreparationPhase": "Before internal browser access was restored; retained as history."
     },
     {
       "municipality": "Shtime",
       "categories": ["passenger-car repair", "air conditioning", "bodywork"],
-      "result": "Idrizi continued; Starti requires contact/identity continuity. No Maps access."
+      "result": "Idrizi name/country/international-phone Maps searches did not establish an identity. Starti own current contact matches related Maps entry but directory contact continuity remains unresolved.",
+      "initialPreparationResult": "Idrizi continued; Starti requires contact/identity continuity. No Maps access.",
+      "initialPreparationPhase": "Before internal browser access was restored; retained as history."
     },
     {
       "municipality": "Hani i Elezit",
       "categories": ["passenger-car repair", "glass", "detailing"],
-      "result": "Examined source results produced parts/oils retail or unrelated categories, no new eligible identity."
+      "result": "Own Bushi profile proves parts wholesale/retail, not concrete repair scope. Agroni directory lead lacks complete independent source attribution. No local identity fully eligible.",
+      "initialPreparationResult": "Examined source results produced parts/oils retail or unrelated categories, no new eligible identity.",
+      "initialPreparationPhase": "Before internal browser access was restored; retained as history."
     },
     {
       "municipality": "Kaçanik",
