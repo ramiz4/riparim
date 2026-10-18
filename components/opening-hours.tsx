@@ -135,16 +135,19 @@ export function OpeningHoursDetails({
 export function WorkshopOpeningHours({
   hours: ownerHours,
   importedHours,
+  importedAssumed,
   confirmedAt,
   className,
 }: {
   hours: OpeningHours | null | undefined;
   importedHours?: OpeningHours | null;
+  importedAssumed?: boolean;
   confirmedAt?: string | null;
   className?: string;
 }) {
   const hours = ownerHours ?? importedHours;
   const confirmed = !!ownerHours && !!confirmedAt;
+  const assumed = !ownerHours && !!importedHours && importedAssumed === true;
   const { locale, t } = useI18n(),
     [now, setNow] = useState<Date | null>(null),
     [open, setOpen] = useState(false),
@@ -176,6 +179,15 @@ export function WorkshopOpeningHours({
       <h2 className="sr-only" id={`${id}-hours`}>
         {t("common.hoursTitle")}
       </h2>
+      {assumed && (
+        <p
+          id={`${id}-assumed`}
+          className="mb-1 text-[12px] font-semibold"
+          data-ui="opening-hours-assumed"
+        >
+          {t("common.hoursAssumed")}
+        </p>
+      )}
       {confirmed && hours && now && status !== "unknown" && (
         <div className="flex flex-wrap items-center gap-x-3 gap-y-[6px]">
           <span
@@ -200,6 +212,7 @@ export function WorkshopOpeningHours({
           <PopoverTrigger asChild>
             <button
               type="button"
+              aria-describedby={assumed ? `${id}-assumed` : undefined}
               className="inline-flex min-h-9 max-w-full items-center gap-[9px] rounded-[5px] text-left text-[14px] font-semibold text-inherit hover:text-[var(--theme-accent)] focus-visible:[outline:2px_solid_var(--ring)] focus-visible:outline-offset-[3px] dark:hover:text-ring [&>svg:last-child]:transition-transform [&>svg:last-child]:duration-150 data-[state=open]:[&>svg:last-child]:rotate-180 motion-reduce:[&>svg]:transition-none"
             >
               <Clock3 size={17} aria-hidden="true" />

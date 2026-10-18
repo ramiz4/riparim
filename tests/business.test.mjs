@@ -876,6 +876,25 @@ assert.deepEqual(
 db.prepare(
   "INSERT INTO workshop_opening_hours_imports(workshop_id,opening_hours) VALUES(?,?) ON CONFLICT(workshop_id) DO UPDATE SET opening_hours=excluded.opening_hours,suppressed=0",
 ).run(first.id, JSON.stringify(ownerHours));
+for (const [metadata, assumed] of [
+  ['{"kind":"assumed","notes":"PRIVATE_SOURCE_NOTES"}', true],
+  ['{"kind":"researched"}', false],
+  ['{"kind":"unknown"}', false],
+  ["invalid JSON", false],
+  [null, false],
+]) {
+  db.prepare(
+    "UPDATE workshop_opening_hours_imports SET source_metadata=? WHERE workshop_id=?",
+  ).run(metadata, first.id);
+  const publicHours = (await directory.listWorkshops()).find(
+    (w) => w.id === first.id,
+  );
+  assert.equal(publicHours.importedOpeningHoursAssumed, assumed);
+  assert(
+    !JSON.stringify(publicHours).includes("PRIVATE_SOURCE_NOTES"),
+    "Only the provenance flag is public",
+  );
+}
 let clearing = await change("a", first.id, {
   ...profile((await directory.listWorkshops()).find((w) => w.id === first.id)),
   openingHours: null,
@@ -889,6 +908,7 @@ const removedHours = (await directory.listWorkshops()).find(
 );
 assert.equal(removedHours.openingHours, null);
 assert.equal(removedHours.importedOpeningHours, null);
+assert.equal(removedHours.importedOpeningHoursAssumed, false);
 assert.equal(
   db
     .prepare(

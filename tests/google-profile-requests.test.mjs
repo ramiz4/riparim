@@ -378,18 +378,54 @@ try {
     assert(!importedSection.querySelector("[role='status']"));
     assert(!importedSection.textContent.includes(t("common.hoursSource")));
     assert(!importedSection.querySelector("p"));
+    assert(
+      !importedSection.textContent.includes(t("common.hoursAssumed")),
+      "Research and unknown provenance are not assumed",
+    );
+    await render(
+      locale,
+      h(api.Profile, {
+        ...props,
+        workshop: {
+          ...workshop,
+          openingHours: null,
+          importedOpeningHours: hours,
+          importedOpeningHoursAssumed: true,
+        },
+      }),
+    );
+    const assumedSection = document.querySelector(
+      "[data-ui~='workshop-opening-hours']",
+    );
+    const assumedLabel = assumedSection.querySelector(
+      "[data-ui='opening-hours-assumed']",
+    );
+    assert.equal(assumedLabel.textContent, t("common.hoursAssumed"));
+    assert.equal(
+      assumedSection.querySelector("button").getAttribute("aria-describedby"),
+      assumedLabel.id,
+    );
+    assert(
+      !assumedSection.querySelector("[role='status']"),
+      "Assumed times never claim current opening status",
+    );
     await render(
       locale,
       h(api.Profile, {
         ...props,
         workshop: {
           ...value,
+          importedOpeningHoursAssumed: true,
           importedOpeningHours: {
             week: Array(7).fill({ mode: "closed" }),
             exceptions: [],
           },
         },
       }),
+    );
+    assert(
+      !document.querySelector("[data-ui='opening-hours-assumed']"),
+      "Owner hours override an assumed fallback",
     );
     if (!document.querySelector("[data-ui~='opening-week']"))
       await React.act(async () => {

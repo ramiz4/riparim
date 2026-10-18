@@ -527,6 +527,7 @@ export default function WorkshopProfile({
             <WorkshopOpeningHours
               className="m-0 max-w-none border-l border-border pl-6 at-most-960:border-t at-most-960:border-l-0 at-most-960:pt-[14px] at-most-960:pl-0 at-most-720:mt-0 at-most-720:pt-3"
               importedHours={w.importedOpeningHours}
+              importedAssumed={w.importedOpeningHoursAssumed}
               hours={w.openingHours}
               confirmedAt={w.openingHoursConfirmedAt}
             />
