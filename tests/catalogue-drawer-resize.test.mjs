@@ -39,6 +39,8 @@ globalThis.IntersectionObserver = class {
 const output = ".test-runtime/catalogue-drawer-resize";
 await mkdir(output, { recursive: true });
 const boundaries = {
+  "next/link": `import React from 'react';export default function Link({href,children,...props}){return React.createElement('a',{...props,href},children);}`,
+  "next/navigation": "export function useRouter(){return {push(){}};}",
   "@/components/site-header": "export function SiteHeader(){return null}",
   "@/components/directory-footer":
     "export function DirectoryFooter(){return null}",
@@ -66,7 +68,7 @@ await build({
     {
       name: "layout-boundaries",
       setup(b) {
-        b.onResolve({ filter: /^@\/components\// }, (args) =>
+        b.onResolve({ filter: /^(?:@\/components\/|next\/)/ }, (args) =>
           boundaries[args.path]
             ? { path: args.path, namespace: "fixture" }
             : undefined,
