@@ -131,7 +131,10 @@ const h = React.createElement,
   wrap = (locale, node) =>
     h(
       api.I18nProvider,
-      { locale, messages: api.getMessages(locale, ["common", "public"]) },
+      {
+        locale,
+        messages: api.getMessages(locale, ["common", "public", "sharing"]),
+      },
       node,
     );
 const workshop = {
@@ -1277,11 +1280,11 @@ try {
         ),
       ),
     );
-    await click(document.querySelector("aside > button"));
+    await click(document.querySelector("[data-ui='profile-sharing'] button"));
     assert(
       document
-        .querySelector('aside > p[role="status"]')
-        .textContent.includes(t("public.copyManual")),
+        .querySelector('[data-ui="profile-sharing"] [role="status"]')
+        .textContent.includes(t("sharing.manual")),
       "clipboard failure gets localized fallback",
     );
     let copied;
@@ -1293,17 +1296,16 @@ try {
       },
       configurable: true,
     });
-    await click(document.querySelector("aside > button"));
+    await click(document.querySelector("[data-ui='profile-sharing'] button"));
     assert.equal(
       copied,
-      "https://riparim.example.test" +
-        localizeHref("/werkstatt/" + workshop.id, locale),
+      "https://riparim.com" + localizeHref("/werkstatt/" + workshop.id, locale),
       "share contains clean locale profile URL only",
     );
     assert(
       document
-        .querySelector('aside > p[role="status"]')
-        .textContent.includes(t("public.profileCopied")),
+        .querySelector('[data-ui="profile-sharing"] [role="status"]')
+        .textContent.includes(t("sharing.copied")),
     );
     delete navigator.clipboard;
     await click(
