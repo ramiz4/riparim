@@ -140,13 +140,19 @@ try {
       "/werkstaetten",
       "/sq/serviset",
       "/en/workshops",
+      ...["prishtina", "prizren", "ferizaj", "peja", "gjakova"].flatMap(
+        (slug) =>
+          ["de", "sq", "en"].map((locale) =>
+            localizeHref(`/workshops/${slug}`, locale),
+          ),
+      ),
       "/werkstatt/fixture-public",
       "/sq/servis/fixture-public",
       "/en/workshop/fixture-public",
     ]
       .map((path) => origin + path)
       .sort(),
-    "Only canonical home, catalogue and published profiles enter the sitemap",
+    "Only canonical home, catalogue, five city pages and published profiles enter the sitemap",
   );
   assert(
     !sitemapXml.includes("fixture-draft") &&

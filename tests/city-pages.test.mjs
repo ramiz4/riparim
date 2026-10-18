@@ -4,7 +4,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { JSDOM } from "jsdom";
 const result = await build({
   stdin: {
-    contents: `export { default as CityPage,generateMetadata } from './app/[locale]/workshops/[city]/page';export {default as CityDirectory} from './app/[locale]/workshops/[city]/city-directory';export {I18nProvider} from './lib/i18n/client';export {getMessages,createTranslator} from './lib/i18n/messages';export {workshopCities,cityWorkshops} from './lib/workshop-cities';`,
+    contents: `export { default as CityPage,generateMetadata } from './app/[locale]/workshops/[city]/page';export {default as CityDirectory} from './app/[locale]/workshops/[city]/city-directory';export {I18nProvider} from './lib/i18n/client';export {getMessages,createTranslator} from './lib/i18n/messages';export {workshopCities,cityWorkshops} from './lib/workshop-cities';export {publicSitemapResponse} from './lib/public-seo';`,
     resolveDir: process.cwd(),
     loader: "tsx",
   },
@@ -152,6 +152,25 @@ for (const locale of ["de", "sq", "en"])
       );
     }
   }
+const sitemapResponse = await api.publicSitemapResponse();
+assert.equal(sitemapResponse.status, 200);
+const sitemap = new JSDOM(await sitemapResponse.text(), {
+  contentType: "application/xml",
+}).window.document;
+const locations = [...sitemap.querySelectorAll("loc")].map(
+  (node) => node.textContent,
+);
+for (const city of api.workshopCities)
+  for (const prefix of ["/werkstaetten", "/sq/serviset", "/en/workshops"])
+    assert(
+      locations.includes(`https://riparim.example.test${prefix}/${city.slug}`),
+      "Sitemap advertises every supported city locale",
+    );
+assert(
+  !locations.some(
+    (path) => path.includes("unknown") || path.includes("issue-208-private"),
+  ),
+);
 for (const city of ["unknown", "Prishtina", "prishtina/extra"])
   await assert.rejects(
     () => api.CityPage({ params: Promise.resolve({ locale: "en", city }) }),

@@ -1,3 +1,4 @@
+import { cityPagePaths } from "./workshop-cities";
 import { listWorkshops } from "@/db/directory";
 import { siteOrigin } from "@/lib/auth/config";
 import { locales } from "@/lib/i18n/locale";
@@ -27,6 +28,7 @@ export async function publicSitemapResponse() {
     const paths = [
       "/",
       "/workshops",
+      ...cityPagePaths,
       ...workshops
         .filter(
           (workshop) =>

@@ -128,9 +128,17 @@ if (config.name === "riparim") {
     const sitemapLocations = [...sitemapDocument.querySelectorAll("loc")].map(
       (node) => node.textContent,
     );
-    assert.equal(sitemapLocations.length, 3 * (published.length + 2));
+    assert.equal(sitemapLocations.length, 3 * (published.length + 7));
     assert(sitemapLocations.includes("https://riparim.com/sq/serviset"));
     assert(!sitemapXml.includes("private=fixture"));
+    for (const slug of ["prishtina", "prizren", "ferizaj", "peja", "gjakova"])
+      for (const locale of ["de", "sq", "en"])
+        assert(
+          sitemapLocations.includes(
+            "https://riparim.com" + localizeHref(`/workshops/${slug}`, locale),
+          ),
+          "City sitemap URLs match rendered canonical routes",
+        );
     for (const workshop of published)
       for (const locale of ["de", "sq", "en"])
         assert(
