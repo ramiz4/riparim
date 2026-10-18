@@ -33,7 +33,6 @@ import {
   MessageCircle,
   Navigation,
   Phone,
-  Share2,
   ShieldCheck,
   Star,
 } from "lucide-react";
@@ -68,6 +67,7 @@ import { contactHref, type Workshop } from "@/lib/workshops";
 import { readSearchSession } from "@/lib/search-session";
 import { profileSearchHref } from "@/lib/profile-navigation";
 import { WorkshopNavigationLink } from "@/components/workshop-navigation-link";
+import { WorkshopSharing } from "@/components/workshop-sharing";
 
 const sectionClassName =
   "mb-[25px] border-b border-[#e0e8e9] pb-[25px] [scroll-margin-top:100px] dark:border-border at-most-720:mb-[22px] at-most-720:pb-[22px]";
@@ -95,6 +95,7 @@ const dialogPrimaryClassName = cn(
 );
 
 type Props = {
+  publicOrigin?: string;
   publicSnapshot?: boolean;
   initialSearchHref?: string | null;
   display?: WorkshopDisplayContent;
@@ -107,6 +108,7 @@ type Props = {
   isAdmin: boolean;
 };
 export default function WorkshopProfile({
+  publicOrigin,
   publicSnapshot = false,
   workshop: initialWorkshop,
   directory: initialDirectory,
@@ -902,18 +904,11 @@ export default function WorkshopProfile({
                 </div>
               )}
             </section>
-            <button
-              className="flex min-h-[46px] w-full items-center justify-center gap-[7px] p-[15px] text-[14px] text-[#608079] dark:text-muted-foreground at-most-720:p-3"
-              onClick={() =>
-                void copy(
-                  `${window.location.origin}${path}`,
-                  t("public.profileCopied"),
-                )
-              }
-            >
-              <Share2 size={16} />
-              {t("public.shareProfile")}
-            </button>
+            <WorkshopSharing
+              key={`${w.id}:${locale}`}
+              workshop={w}
+              publicOrigin={publicOrigin}
+            />
             {feedback && !contact && (
               <p className={helpTextClassName} role="status">
                 {feedback}

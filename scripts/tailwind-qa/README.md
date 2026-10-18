@@ -57,9 +57,10 @@ and two drawer keyframes. The reduced-motion shutdown is its only use of
 `!important`. `tests/styling-contract.test.mjs` guards this inventory, imports,
 base selectors and runtime style elements with negative fixtures.
 
-Unchanged separate contracts are the pinned shadcn/animation vendor imports,
-standalone email HTML and provider-owned shadow content. Google host variables
-use literal arbitrary-property utilities. Existing runtime values remain at
+Separate contracts are the pinned shadcn/animation vendor imports, standalone
+email HTML, provider-owned shadow content and the public profile print document.
+The print document uses one scoped stylesheet and receives only the public card.
+Google host variables use literal arbitrary-property utilities. Existing runtime values remain at
 their boundaries: the workshop image URL; chart colors and its single generated
 color-variable style element; progress percentage; sidebar width/skeleton values;
 Sonner variables; and ToggleGroup spacing. These do not replace page stylesheets.

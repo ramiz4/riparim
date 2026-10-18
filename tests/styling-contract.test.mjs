@@ -103,6 +103,7 @@ function assertSourceStyling(file, source) {
     ts.ScriptKind.TSX,
   );
   let chartStyleElements = 0;
+  let printStyleElements = 0;
   function visit(node) {
     const declaration =
       ts.isImportDeclaration(node) || ts.isExportDeclaration(node);
@@ -148,13 +149,19 @@ function assertSourceStyling(file, source) {
       while (boundary && !ts.isVariableDeclaration(boundary))
         boundary = boundary.parent;
       // The pinned chart component emits per-instance color custom properties.
+      // The isolated print document has no application stylesheet or private UI.
       // Email HTML strings and dynamic provider/image/widget style attributes
       // are separate runtime contracts, not first-party stylesheet elements.
       assert(
-        jsxStyle &&
+        (jsxStyle &&
           file === "components/ui/chart.tsx" &&
           boundary?.name.getText(ast) === "ChartStyle" &&
-          ++chartStyleElements === 1,
+          ++chartStyleElements === 1) ||
+          (factoryStyle &&
+            file === "lib/profile-sharing.ts" &&
+            node.expression.getText(ast) === "doc.createElement" &&
+            boundary?.name.getText(ast) === "style" &&
+            ++printStyleElements === 1),
         `Unexpected first-party runtime style element in ${file}`,
       );
     }
