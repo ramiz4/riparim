@@ -75,8 +75,28 @@ await withWorkerRuntime(
         (canonical.workshops.filter(
           (workshop) => workshop.status === "published",
         ).length +
-          7),
+          7 +
+          guidePagePaths.length),
     );
+    const sitemapLocations = [...sitemapDocument.querySelectorAll("loc")].map(
+      (node) => node.textContent,
+    );
+    for (const path of [
+      "/ratgeber",
+      "/sq/udhezues",
+      "/en/guides",
+      "/ratgeber/werkstatt-auswaehlen",
+      "/sq/udhezues/zgjedhja-e-servisit",
+      "/en/guides/choosing-a-workshop",
+      "/ratgeber/werkstattbesuch-vorbereiten",
+      "/sq/udhezues/pergatitja-e-vizites",
+      "/en/guides/preparing-a-visit",
+    ])
+      assert(
+        sitemapLocations.includes("https://riparim.test" + path),
+        "Every Worker target advertises the nine real canonical guide URLs: " +
+          path,
+      );
     assert(sitemapXml.includes("https://riparim.test/sq/serviset"));
     for (const slug of ["prishtina", "prizren", "ferizaj", "peja", "gjakova"])
       for (const locale of ["de", "sq", "en"])
