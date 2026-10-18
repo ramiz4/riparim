@@ -102,6 +102,42 @@ for (const slug of ["prishtina", "prizren", "ferizaj", "peja", "gjakova"])
       { path: `${prefix}/${slug}`, locale, type: "city" },
       "Only editorial city identities enter analytics with a clean path",
     );
+for (const [locale, paths] of [
+  [
+    "de",
+    [
+      "/ratgeber",
+      "/ratgeber/werkstatt-auswaehlen",
+      "/ratgeber/werkstattbesuch-vorbereiten",
+    ],
+  ],
+  [
+    "sq",
+    [
+      "/sq/udhezues",
+      "/sq/udhezues/zgjedhja-e-servisit",
+      "/sq/udhezues/pergatitja-e-vizites",
+    ],
+  ],
+  [
+    "en",
+    [
+      "/en/guides",
+      "/en/guides/choosing-a-workshop",
+      "/en/guides/preparing-a-visit",
+    ],
+  ],
+])
+  for (const path of paths)
+    assert.deepEqual(
+      page(
+        "https://riparim.com" +
+          path +
+          "?q=private-guide-search#private-guide-fragment",
+      ),
+      { path, locale, type: "guide" },
+      "Only the three fixed guide identities enter analytics with clean localized paths",
+    );
 assert.deepEqual(
   page("https://riparim.com/en/workshop/fixture-205", "fixture-205"),
   {
@@ -123,6 +159,12 @@ for (const path of [
   "/api/session",
   "/auth/bestaetigen?token=secret",
   "/unknown",
+  "/ratgeber/unknown",
+  "/en/guides/private@example.test",
+  "/sq/guides/choosing-a-workshop",
+  "/sq/udhezues/pergatitja-e-vizites/extra",
+  "/en/guides?bewerten=1",
+  "/ratgeber?einreichung=private",
   "/werkstaetten/unknown",
   "/en/workshops/private@example.test",
   "/sq/serviset/prishtina/extra",
@@ -175,6 +217,43 @@ assert.equal(
   true,
 );
 
+const guideFixture = fixture();
+guideFixture.navigate(
+  "/en/guides?q=private-guide-search#private-guide-fragment",
+);
+await settle();
+assert.equal(
+  guideFixture.events.length,
+  0,
+  "Guides remain silent before consent",
+);
+guideFixture.controller.setConsent("accepted");
+await settle();
+assert.deepEqual(
+  guideFixture.events.map(({ event }) => event),
+  ["$pageview"],
+  "Reading a guide is a pageview, not an invented search or conversion step",
+);
+guideFixture.navigate("/en/guides?q=another-private-guide-search");
+await settle();
+assert.equal(
+  guideFixture.events.length,
+  1,
+  "Guide query changes do not duplicate the pageview",
+);
+guideFixture.navigate("/en/guides/choosing-a-workshop");
+guideFixture.controller.contact("fixture-210", "phone");
+await settle();
+assert.deepEqual(
+  guideFixture.events.map(({ event }) => event),
+  ["$pageview", "$pageleave", "$pageview"],
+);
+assert(
+  guideFixture.events.every(
+    ({ properties }) => properties.page_type === "guide",
+  ),
+);
+assert(!JSON.stringify(guideFixture.events).includes("private-guide"));
 const f = fixture();
 f.navigate("/werkstaetten?q=personal-search&token=secret#never-send");
 await settle();

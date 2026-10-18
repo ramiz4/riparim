@@ -146,13 +146,22 @@ try {
             localizeHref(`/workshops/${slug}`, locale),
           ),
       ),
+      "/ratgeber",
+      "/sq/udhezues",
+      "/en/guides",
+      "/ratgeber/werkstatt-auswaehlen",
+      "/sq/udhezues/zgjedhja-e-servisit",
+      "/en/guides/choosing-a-workshop",
+      "/ratgeber/werkstattbesuch-vorbereiten",
+      "/sq/udhezues/pergatitja-e-vizites",
+      "/en/guides/preparing-a-visit",
       "/werkstatt/fixture-public",
       "/sq/servis/fixture-public",
       "/en/workshop/fixture-public",
     ]
       .map((path) => origin + path)
       .sort(),
-    "Only canonical home, catalogue, five city pages and published profiles enter the sitemap",
+    "Only canonical home, catalogue, five city pages, three guides and published profiles enter the sitemap",
   );
   assert(
     !sitemapXml.includes("fixture-draft") &&

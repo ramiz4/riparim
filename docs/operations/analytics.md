@@ -56,7 +56,7 @@ capture-only payload to the EU ingestion host. No PostHog browser SDK is loaded.
 | `workshop_profile_viewed`  | Published workshop profile page view                                 | `workshop_id`                                                                            |
 | `workshop_contact_clicked` | Telephone, WhatsApp, directions or email clicked on that profile     | `workshop_id`, `contact_channel` (`phone`, `whatsapp`, `directions`, `email`)            |
 
-All events carry `page_path`, `page_type` (`home`, `search`, `city`, `profile`, `privacy`),
+All events carry `page_path`, `page_type` (`home`, `search`, `city`, `guide`, `profile`, `privacy`),
 `locale`, `is_verification`, a random `distinct_id` and `$session_id`.
 `$current_url`, `$pathname` and `$host` contain only a canonical public route and
 the production domain. `$process_person_profile: false` disables person profile
@@ -64,12 +64,17 @@ creation; `$geoip_disable: true` disables IP geolocation enrichment.
 The browser still connects to PostHog's EU service, which receives the network
 request. No application account identity is supplied.
 
-Only the home page, privacy page, directory, the five editorial city listings
-and a confirmed published profile are eligible. City identities derive from
+Only the home page, privacy page, directory, the five editorial city listings,
+the three fixed guide identities and a confirmed published profile are eligible.
+City identities derive from
 [`lib/workshop-cities.ts`](../../lib/workshop-cities.ts); unsupported cities never
 enter analytics. City listings emit the existing `workshop_search_viewed` funnel
-step with `page_type=city` and the canonical localized route. Account, authentication, administration, visit evidence and review
-submission flows are excluded. Query strings, fragments, form values, search
+step with `page_type=city` and the canonical localized route. Guide identities derive
+from [`lib/guide-routes.ts`](../../lib/guide-routes.ts). The index and two articles
+emit only the existing pageview/pageleave events with `page_type=guide`; reading
+an article does not emit a search, profile or contact funnel step. Unknown or
+mixed-language guide paths remain ineligible. Account, authentication,
+administration, visit evidence and review submission flows are excluded. Query strings, fragments, form values, search
 terms, contact destinations, account IDs, email addresses, referrers and page
 titles are never included. Email actions record only the channel name, never an
 email address. Existing website links are not a supported contact action.

@@ -1,3 +1,4 @@
+import { CityNavigation } from "@/components/city-navigation";
 import type { Locale } from "@/lib/i18n/locale";
 import {
   guideIds,
@@ -37,13 +38,16 @@ function CatalogueNextStep({ locale }: { locale: Locale }) {
       >
         {text.findWorkshops}
       </Link>
+      <div className="mt-6 border-t border-border pt-5">
+        <CityNavigation />
+      </div>
     </section>
   );
 }
 export function GuideIndexContent({ locale }: { locale: Locale }) {
   const text = guideMessages[locale];
   return (
-    <main className={mainClassName} data-riparim-page="guides">
+    <main className={mainClassName} data-riparim-page="guide">
       <p className={cn(eyebrowClassName, "mb-3")}>{text.kicker}</p>
       <h1 className={contentTitleClassName}>{text.indexTitle}</h1>
       <p className={cn(copyClassName, "mt-5 max-w-[680px]")}>

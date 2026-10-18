@@ -1,3 +1,4 @@
+import { guidePagePaths } from "./guide-routes";
 import { cityPagePaths } from "./workshop-cities";
 import { listWorkshops } from "@/db/directory";
 import { siteOrigin } from "@/lib/auth/config";
@@ -29,6 +30,7 @@ export async function publicSitemapResponse() {
       "/",
       "/workshops",
       ...cityPagePaths,
+      ...guidePagePaths,
       ...workshops
         .filter(
           (workshop) =>

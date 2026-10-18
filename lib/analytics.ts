@@ -1,5 +1,7 @@
+import { guidePagePaths } from "./guide-routes";
 import { cityPagePaths } from "./workshop-cities";
 import {
+  isPagePath,
   localizeHref,
   localeFromPath,
   pageIdentityPath,
@@ -9,7 +11,7 @@ import {
 export type AnalyticsPage = {
   path: string;
   locale: Locale;
-  type: "home" | "search" | "city" | "profile" | "privacy";
+  type: "home" | "search" | "city" | "guide" | "profile" | "privacy";
   workshopId?: string;
 };
 export type AnalyticsConsent = "unknown" | "accepted" | "declined";
@@ -105,9 +107,11 @@ export function publicAnalyticsPage(
         ? "search"
         : cityPagePaths.includes(identity)
           ? "city"
-          : identity === "/privacy"
-            ? "privacy"
-            : null;
+          : guidePagePaths.includes(identity) && isPagePath(url.pathname)
+            ? "guide"
+            : identity === "/privacy"
+              ? "privacy"
+              : null;
   if (type) return { path: localizeHref(identity, locale), locale, type };
   if (
     publishedWorkshopId &&

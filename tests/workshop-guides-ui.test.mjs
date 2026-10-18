@@ -129,6 +129,23 @@ for (const [locale, expected] of Object.entries(expectations)) {
         ),
         "The related guide remains reachable",
       );
+      for (const city of [
+        "prishtina",
+        "prizren",
+        "ferizaj",
+        "peja",
+        "gjakova",
+      ]) {
+        const prefix = {
+          de: "/werkstaetten",
+          sq: "/sq/serviset",
+          en: "/en/workshops",
+        }[locale];
+        assert(
+          doc.querySelector(`main a[href='${prefix}/${city}']`),
+          "Each guide leads to the real localized city entry: " + city,
+        );
+      }
       assert.equal(
         doc.querySelectorAll("[data-ui='guide-checklist'] li").length,
         5,

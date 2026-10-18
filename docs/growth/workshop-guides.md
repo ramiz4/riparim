@@ -4,7 +4,11 @@ The public guide index and two articles live in the typed
 [guide messages](../../lib/i18n/guide-messages.ts). The small
 [route registry](../../lib/guide-routes.ts) owns their public URL identities.
 They use existing catalogue filters, direct workshop contact and moderated review
-submission. They do not promise booking, repair quality, prices or legal rights.
+submission. Contextual city navigation reuses the authoritative
+[city navigation](../../components/city-navigation.tsx) and
+[city definitions](../../lib/workshop-cities.ts), without copying catalogue data.
+All three guide identities enter the live sitemap in DE/SQ/EN. Unknown guides
+remain real 404s. They do not promise booking, repair quality, prices or legal rights.
 
 The articles are original Riparim workflow guidance. General questions about
 workshop experience, communication and an itemized estimate were checked against
@@ -48,4 +52,7 @@ is configured. Replace nothing in profile or catalogue data when sharing.
   https://riparim.com/en/guides/preparing-a-visit
 
 Measure visits and contact actions using the existing approved analytics scope.
+After consent, guide reads emit ordinary pageview/pageleave events with
+`page_type=guide` and canonical localized paths. They add no funnel events; query
+values, hashes and private flow modes never enter their payload.
 A contact click does not establish a message, visit or completed repair.
