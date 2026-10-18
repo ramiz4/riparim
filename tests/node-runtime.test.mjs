@@ -1,3 +1,4 @@
+import { assertPublicHead } from "./helpers/public-head.mjs";
 import { logNodePhase, prepareNodeTestBuild } from "./helpers/node-build.mjs";
 import { catalogueFixtureKey } from "./helpers/catalogue-fixture-key.mjs";
 import assert from "node:assert/strict";
@@ -429,6 +430,30 @@ try {
       );
       await response.text();
     }
+  for (const locale of ["de", "sq", "en"])
+    for (const identity of [
+      "/",
+      "/workshops",
+      "/workshops/prishtina",
+      "/workshop/fixture-public",
+      "/privacy",
+      "/guides",
+      "/guides/choosing-a-workshop",
+      "/guides/preparing-a-visit",
+    ])
+      for (const userAgent of [
+        "",
+        "Mozilla/5.0",
+        "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+        "Twitterbot/1.0",
+      ]) {
+        const response = await fetch(
+          origin + localizeHref(identity, locale) + "?q=private-head-query",
+          { headers: { "User-Agent": userAgent } },
+        );
+        assert.equal(response.status, 200);
+        assertPublicHead(await response.text(), identity, locale, origin);
+      }
   for (const [alias, target] of [
     ["/en/werkstaetten?ort=Prizren", "/en/workshops?ort=Prizren"],
     [

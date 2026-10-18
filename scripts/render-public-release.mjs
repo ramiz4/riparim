@@ -1,3 +1,4 @@
+import { validatePublicDocumentHead } from "./lib/public-document.mjs";
 import { readFile, readdir, mkdir, writeFile, rm } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
 import { Miniflare } from "miniflare";
@@ -75,6 +76,11 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
       new Response("Release renderer has no provider access", { status: 502 }),
   };
   const runtime = new Miniflare(options);
+  const renderRequest = (url, init = {}) => {
+    const headers = new Headers(init.headers);
+    headers.set("User-Agent", "RiparimPublicRelease/1.0");
+    return runtime.dispatchFetch(url, { ...init, headers });
+  };
   try {
     const db = await runtime.getD1Database("DB");
     for (const file of (await readdir("drizzle"))
@@ -84,9 +90,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
         .split("--> statement-breakpoint")
         .filter((sql) => sql.trim()))
         await db.prepare(sql).run();
-    const seed = await runtime.dispatchFetch(
-      "https://riparim.com/api/workshops",
-    );
+    const seed = await renderRequest("https://riparim.com/api/workshops");
     if (seed.status !== 200)
       throw Error(
         "Isolated release catalogue could not be initialized: " +
@@ -118,7 +122,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
       const prefix = locale === "de" ? "" : "/" + locale;
       for (const path of publicPaths) {
         const id = path.match(/^\/workshop\/([^/]+)$/)?.[1];
-        const response = await runtime.dispatchFetch(
+        const response = await renderRequest(
           "https://riparim.com" + localizeHref(path, locale),
         );
         const html = await response.text();
@@ -132,6 +136,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
           html.includes('data-slot="dropdown-menu-label"')
         )
           throw Error(`Public release rendering failed: ${prefix + path}`);
+        validatePublicDocumentHead(html, path, locale, "https://riparim.com");
         if (id && !html.includes(`data-workshop-id="${id}"`))
           throw Error("Public release profile identity differs");
         const file = resolve(
@@ -142,7 +147,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
         await mkdir(dirname(file), { recursive: true });
         await writeFile(file, html);
         pages++;
-        const rsc = await runtime.dispatchFetch(
+        const rsc = await renderRequest(
           "https://riparim.com" + localizeHref(path, locale) + "?_rsc",
           { headers: { RSC: "1", Accept: "text/x-component" } },
         );
@@ -159,7 +164,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
     for (const locale of ["de", "sq", "en"])
       for (const path of privatePaths)
         for (const rsc of [false, true]) {
-          const response = await runtime.dispatchFetch(
+          const response = await renderRequest(
               "https://riparim.com" +
                 localizeHref(path, locale) +
                 (rsc ? "?_rsc" : ""),
@@ -192,7 +197,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
       },
     });
     for (const locale of ["de", "sq", "en"]) {
-      const response = await runtime.dispatchFetch(
+      const response = await renderRequest(
           "https://riparim.com" + localizeHref("/privacy", locale),
         ),
         html = await response.text();
@@ -205,11 +210,17 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
         html.includes("https://supabase.com/privacy")
       )
         throw Error("PocketBase privacy rendering failed: " + locale);
+      validatePublicDocumentHead(
+        html,
+        "/privacy",
+        locale,
+        "https://riparim.com",
+      );
       await writeFile(
         resolve("dist/client/__public", locale, "privacy-pocketbase.html"),
         html,
       );
-      const rsc = await runtime.dispatchFetch(
+      const rsc = await renderRequest(
         "https://riparim.com" + localizeHref("/privacy", locale) + "?_rsc",
         { headers: { RSC: "1", Accept: "text/x-component" } },
       );
@@ -229,7 +240,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
     });
     for (const locale of ["de", "sq", "en"])
       for (const path of publicPaths) {
-        const response = await runtime.dispatchFetch(
+        const response = await renderRequest(
             "https://riparim.com" + localizeHref(path, locale),
           ),
           html = await response.text();
@@ -241,6 +252,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
           html.includes("data-workshop-id=")
         )
           throw Error("Public shell rendering failed: " + path);
+        validatePublicDocumentHead(html, path, locale, "https://riparim.com");
         const file = resolve(
           "dist/client/__public",
           locale,
@@ -248,7 +260,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
         );
         await mkdir(dirname(file), { recursive: true });
         await writeFile(file, html);
-        const rsc = await runtime.dispatchFetch(
+        const rsc = await renderRequest(
           "https://riparim.com" + localizeHref(path, locale) + "?_rsc",
           { headers: { RSC: "1", Accept: "text/x-component" } },
         );

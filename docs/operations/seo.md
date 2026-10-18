@@ -54,6 +54,38 @@ access control. Private-page `noindex,nofollow` metadata and server authorizatio
 remain authoritative; blocking those pages in robots.txt would prevent crawlers
 from reading their noindex directive.
 
+## Metadata in the document head
+
+Public documents must contain one nonempty title and description, one clean
+canonical link and four reciprocal language alternatives inside the parsed
+`document.head`. Metadata found only in the body is invalid release output.
+[Google's canonical guidance](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls)
+and [localized-version guidance](https://developers.google.com/search/docs/specialty/international/localized-versions)
+require a valid head for these HTML annotations.
+
+The shared Next/Vinext configuration uses the supported
+[`htmlLimitedBots: /.*/` option](https://nextjs.org/docs/app/api-reference/config/next-config-js/htmlLimitedBots)
+to await metadata before streaming HTML. This intentionally blocks document
+rendering until metadata is ready; no loading-performance improvement is claimed.
+Pinned Vinext treats an absent User-Agent as streaming before checking that option.
+The release renderer therefore supplies its own nonempty application User-Agent
+for every HTML/RSC capture, including privacy providers and data-free shells.
+It validates the parsed public head before writing any release HTML.
+
+At the final native Vinext boundary, Cloudflare and Sites supply a neutral owned
+User-Agent only when a page document GET/HEAD has no nonempty client User-Agent.
+Supplied browser/crawler identities, RSC, APIs, assets, callbacks and mutations
+retain their original request behavior. The Cloudflare adapter still strips
+untrusted Sites identity headers; Sites retains its trusted identity and connector
+context. No HTML rewriting or client-side metadata relocation is used.
+
+Release acceptance inspects `document.head`, including direct visits, client
+navigation, ordinary browsers, Googlebot/Twitterbot and absent-User-Agent requests.
+Cloudflare checks cover full assets, explicit shells, stale-publication shell
+selection, live fallback and both privacy providers; Node uses the same head
+contract. Unknown/unpublished routes must remain real 404s without public
+canonical/language alternatives, and query values must stay out of SEO metadata.
+
 ## Submit and inspect
 
 1. Open [Search Console](https://search.google.com/search-console), select the

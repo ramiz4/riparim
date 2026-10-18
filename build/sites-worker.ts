@@ -1,3 +1,4 @@
+import { metadataDocumentRequest } from "../lib/vinext-request";
 import { handleMigrationRequest } from "../lib/migration-export";
 import handler from "vinext/server/fetch-handler";
 import { runWithConnectorBinding } from "../lib/connector-context";
@@ -38,7 +39,7 @@ export default {
     return withAuthRequest(
       () =>
         runWithConnectorBinding(binding, () =>
-          handler.fetch(request, env, ctx),
+          handler.fetch(metadataDocumentRequest(request), env, ctx),
         ),
       request.headers.get("RSC") === "1" ||
         !!request.headers.get("Accept")?.includes("text/x-component"),

@@ -1,4 +1,5 @@
 export const registeredSuites = Object.freeze([
+  { file: "public-document.test.mjs", group: "core" },
   { file: "workshop-guides.test.mjs", group: "core" },
   { file: "workshop-guides-ui.test.mjs", group: "core" },
   { file: "city-routing.test.mjs", group: "core" },

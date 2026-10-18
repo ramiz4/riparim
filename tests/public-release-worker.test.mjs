@@ -1,3 +1,4 @@
+import { assertPublicHead } from "./helpers/public-head.mjs";
 import { localizeHref, guidePagePaths } from "../scripts/lib/locale.mjs";
 import assert from "node:assert/strict";
 import { JSDOM } from "jsdom";
@@ -24,6 +25,37 @@ if (config.name === "riparim") {
       a === "index.js" ? -1 : b === "index.js" ? 1 : a.localeCompare(b),
     )
     .map((file) => ({ type: "ESModule", path: resolve("dist/server", file) }));
+  for (const locale of ["de", "sq", "en"]) {
+    for (const identity of [
+      "/",
+      "/privacy",
+      "/workshops",
+      "/workshops/prishtina",
+      ...guidePagePaths,
+      `/workshop/${published[0].id}`,
+    ]) {
+      const artifact = identity === "/" ? "home" : identity.slice(1);
+      for (const suffix of ["", "-shell"])
+        assertPublicHead(
+          await readFile(
+            `dist/client/__public/${locale}/${artifact}${suffix}.html`,
+            "utf8",
+          ),
+          identity,
+          locale,
+          "https://riparim.com",
+        );
+    }
+    assertPublicHead(
+      await readFile(
+        `dist/client/__public/${locale}/privacy-pocketbase.html`,
+        "utf8",
+      ),
+      "/privacy",
+      locale,
+      "https://riparim.com",
+    );
+  }
   let providerCalls = 0,
     authenticated = false,
     refreshedSession = null,
@@ -253,6 +285,7 @@ if (config.name === "riparim") {
         assert.equal(response.headers.has("set-cookie"), false);
         assert.equal(response.headers.get("Cache-Control"), "no-store");
         const html = await response.text();
+        assertPublicHead(html, path, locale, "https://riparim.com");
         assert(html.includes(`<html lang="${locale}"`));
         assert(!html.includes("private-secret"));
         assert(!html.includes("private-user@example.test"));
@@ -320,6 +353,12 @@ if (config.name === "riparim") {
         assert.equal(response.status, 200);
         assert.equal(response.headers.get("X-Riparim-Public-Snapshot"), "1");
         const body = await response.text();
+        assertPublicHead(
+          body,
+          `/workshops/${city.toLowerCase()}`,
+          locale,
+          "https://riparim.com",
+        );
         assert.deepEqual(
           [...body.matchAll(/data-workshop-id="([^"]+)"/g)]
             .map((match) => match[1])
@@ -359,6 +398,60 @@ if (config.name === "riparim") {
         assert.equal(response.status, 404);
         await response.text();
       }
+    const liveProfileId = "issue-210-live-metadata";
+    await db
+      .prepare(
+        "INSERT INTO workshops (id,name,city,address,phone,brands,services,specialty,description,sources,checked_at,status,updated_at) VALUES (?,?,'Prishtina',?,'','[]','[]',?,?,'[]','2026-10-18','published','2026-10-18T00:00:00Z')",
+      )
+      .bind(
+        liveProfileId,
+        "(#210) Live metadata fixture",
+        "(#210) Fictional road",
+        "(#210) Fixture",
+        "(#210) Isolated published profile outside the release manifest",
+      )
+      .run();
+    try {
+      for (const locale of ["de", "sq", "en"])
+        for (const userAgent of [
+          undefined,
+          "Mozilla/5.0",
+          "Googlebot",
+          "Twitterbot/1.0",
+        ]) {
+          const identity = `/workshop/${liveProfileId}`;
+          const response = await runtime.dispatchFetch(
+            "https://riparim.com" +
+              localizeHref(identity, locale) +
+              "?q=private-head-query",
+            userAgent ? { headers: { "User-Agent": userAgent } } : {},
+          );
+          assert.equal(response.status, 200);
+          assert.equal(
+            response.headers.get("X-Riparim-Public-Snapshot"),
+            null,
+            "A newly published profile uses the actual live rendering fallback",
+          );
+          assertPublicHead(
+            await response.text(),
+            identity,
+            locale,
+            "https://riparim.com",
+          );
+        }
+      const head = await runtime.dispatchFetch(
+        "https://riparim.com/werkstatt/" + liveProfileId,
+        { method: "HEAD" },
+      );
+      assert.equal(head.status, 200);
+      assert.equal(await head.text(), "");
+      assert.equal(head.headers.get("X-Content-Type-Options"), "nosniff");
+    } finally {
+      await db
+        .prepare("DELETE FROM workshops WHERE id=?")
+        .bind(liveProfileId)
+        .run();
+    }
     await db
       .prepare(
         "INSERT INTO auth_settings (id,project_url,public_key,enabled,email_delivery_confirmed,updated_at,provider) VALUES ('main','https://auth.fixture.test','',0,0,'fixture','pocketbase')",
@@ -370,6 +463,7 @@ if (config.name === "riparim") {
         ),
         html = await privacy.text();
       assert.equal(privacy.status, 200);
+      assertPublicHead(html, "/privacy", locale, "https://riparim.com");
       assert.equal(privacy.headers.get("X-Riparim-Public-Snapshot"), "1");
       assert.equal(privacy.headers.has("set-cookie"), false);
       assert(html.includes("https://pocketbase.io/docs/authentication/"));
@@ -466,8 +560,15 @@ if (config.name === "riparim") {
     );
     assert.equal(changedCity.status, 200);
     assert.equal(changedCity.headers.get("X-Riparim-Public-Snapshot"), "1");
+    const changedCityHtml = await changedCity.text();
+    assertPublicHead(
+      changedCityHtml,
+      "/workshops/prishtina",
+      "en",
+      "https://riparim.com",
+    );
     assert(
-      !(await changedCity.text()).includes("data-workshop-id="),
+      !changedCityHtml.includes("data-workshop-id="),
       "A changed publication invalidates city data alongside the catalogue",
     );
     const edited = await runtime.dispatchFetch(
@@ -476,6 +577,12 @@ if (config.name === "riparim") {
     assert.equal(edited.status, 200);
     assert.equal(edited.headers.get("X-Riparim-Public-Snapshot"), "1");
     const editedHtml = await edited.text();
+    assertPublicHead(
+      editedHtml,
+      `/workshop/${first.id}`,
+      "de",
+      "https://riparim.com",
+    );
     assert(editedHtml.includes(`data-public-profile-id="${first.id}"`));
     assert(
       !editedHtml.includes(first.description),
@@ -496,6 +603,7 @@ if (config.name === "riparim") {
     );
     assert.equal(directory.headers.get("X-Riparim-Public-Snapshot"), "1");
     const html = await directory.text();
+    assertPublicHead(html, "/workshops", "de", "https://riparim.com");
     assert(!html.includes(`data-workshop-id="${first.id}"`));
     assert(
       !html.includes('data-ui="workshop-index"'),
@@ -876,7 +984,9 @@ if (config.name === "riparim") {
         "https://riparim.com" + localizeHref("/datenschutz", locale),
       );
       assert.equal(response.status, 200);
-      assertPrivacyOutput(await response.text(), locale, "supabase");
+      const html = await response.text();
+      assertPublicHead(html, "/privacy", locale, "https://riparim.com");
+      assertPrivacyOutput(html, locale, "supabase");
     }
     db = await runtime.getD1Database("DB");
     await db
