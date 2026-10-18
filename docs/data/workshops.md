@@ -26,6 +26,23 @@ duplicate IDs/Place IDs. Keep [scope](../../data/workshop-scope.json) and both
 effective. Shared phones do not merge branches. Imports preserve ownership, drafts,
 reviews and newer revisions; they do not delete profiles.
 
+## Verified WhatsApp contacts
+
+Before adding a workshop contact or changing its telephone number, follow the mandatory
+[WhatsApp verification procedure](daily-import.md#whatsapp-verification-for-new-or-changed-workshop-contacts).
+Every intended workshop-contact number needs an internal-browser WhatsApp Web lookup;
+a telephone listing or generated link is not registration evidence. The daily manifest
+records the exact international number, workshop/site IDs, UTC check time, method and
+`registered`, `not_registered` or `unresolved` status.
+
+Set `whatsapp` only to the exact positively checked, independently attributed workshop
+number. Negative or unresolved new contacts leave it empty. Preserve existing confirmed
+contacts and newer approved operator revisions; defer conflicts through the live
+comparison. Shared numbers need one check with explicit site associations. Inspect the
+existing button and target after the verified release, without opening chats, sending
+messages, making calls, inviting anyone or creating contacts. Registration does not
+establish ownership, responsiveness or acceptance of inquiries.
+
 ## Import researched contacts or hours
 
 Preview first. Production writes need a verified main release, protected backup and
