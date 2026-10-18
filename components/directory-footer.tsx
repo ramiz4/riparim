@@ -1,6 +1,7 @@
 "use client";
 import { useI18n } from "@/lib/i18n/client";
 import { LocaleAnchor } from "@/components/locale-anchor";
+import { CityNavigation } from "./city-navigation";
 import { useState } from "react";
 import Link from "@/components/locale-link";
 import { ChevronRight, FileCheck2, LockKeyhole, Settings } from "lucide-react";
@@ -24,6 +25,9 @@ export function DirectoryFooter({
   return (
     <Dialog open={info} onOpenChange={setInfo}>
       <div className="border-t border-[#b9ceca] bg-[#dfeae8] dark:border-[#527578] dark:bg-[#123236]">
+        <div className={cn(pageFrameClassName, "pt-6")}>
+          <CityNavigation />
+        </div>
         <footer
           className={cn(
             pageFrameClassName,

@@ -7,12 +7,27 @@ curl --fail https://riparim.com/robots.txt
 curl --fail https://riparim.com/sitemap.xml
 ```
 
-The sitemap lists canonical home, catalogue and currently published workshop URLs
+The sitemap lists canonical home, catalogue, five city pages and currently published workshop URLs
 in DE/SQ/EN, with reciprocal language alternatives from the same metadata helper
 used by pages. It excludes drafts, unknown profiles, account/admin routes and query
 parameters. It reads approved live records and returns 503 if that read fails;
 it never publishes a successful partial sitemap. No invented modification dates,
 priorities or update frequencies are sent.
+
+The city pages cover Prishtina, Prizren, Ferizaj, Peja and Gjakova. Their bounded
+identities come from [`lib/workshop-cities.ts`](../../lib/workshop-cities.ts), shared
+by routing, metadata, navigation, sitemap and release rendering. German city URLs
+use `/werkstaetten/<city>`; Albanian uses `/sq/serviset/<city>` and English uses
+`/en/workshops/<city>`. Each page includes every currently published profile with
+that exact catalogue city, localized preparation guidance and service filter links
+derived from those profiles. No proximity, coverage or quality claim is inferred.
+Unsupported cities return 404; arbitrary city/filter combinations have no separate
+indexable landing page. Query variants canonicalize to the clean city URL.
+
+Cloudflare releases include city HTML and RSC artifacts. Any publication revision
+change invalidates city HTML alongside the catalogue; data-free shells load approved
+live records through the public API until the next release. Client navigation also
+uses these shells. The Node runtime renders through the same published-only contract.
 
 The catalogue's expandable alphabetical profile index contains ordinary HTML links
 to every published workshop without requiring JavaScript. The first twelve cards,
@@ -40,7 +55,7 @@ from reading their noindex directive.
 2. After verifying the served release and sitemap, submit `sitemap.xml` under
    **Sitemaps**. Record the actual submission time and displayed result; a served
    sitemap alone does not prove submission or successful processing.
-3. Inspect a home, catalogue and workshop URL with **URL inspection**. Check the
+3. Inspect a home, catalogue, city and workshop URL with **URL inspection**. Check the
    indexed URL and Google's selected canonical separately from the live test.
    Sample DE/SQ/EN and a recently published profile; check that private/draft URLs
    are excluded. Request indexing only for relevant published pages when warranted.

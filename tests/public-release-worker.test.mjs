@@ -12,7 +12,7 @@ if (config.name === "riparim") {
   );
   const canonical = JSON.parse(await readFile("data/workshops.json", "utf8"));
   const published = canonical.workshops.filter((w) => w.status === "published");
-  assert.equal(manifest.pages, 3 * (published.length + 3));
+  assert.equal(manifest.pages, 3 * (published.length + 8));
   assert.equal(manifest.privateData, false);
   assert.equal(manifest.privacyVariants, 3);
   const modules = (await readdir("dist/server", { recursive: true }))
@@ -128,9 +128,17 @@ if (config.name === "riparim") {
     const sitemapLocations = [...sitemapDocument.querySelectorAll("loc")].map(
       (node) => node.textContent,
     );
-    assert.equal(sitemapLocations.length, 3 * (published.length + 2));
+    assert.equal(sitemapLocations.length, 3 * (published.length + 7));
     assert(sitemapLocations.includes("https://riparim.com/sq/serviset"));
     assert(!sitemapXml.includes("private=fixture"));
+    for (const slug of ["prishtina", "prizren", "ferizaj", "peja", "gjakova"])
+      for (const locale of ["de", "sq", "en"])
+        assert(
+          sitemapLocations.includes(
+            "https://riparim.com" + localizeHref(`/workshops/${slug}`, locale),
+          ),
+          "City sitemap URLs match rendered canonical routes",
+        );
     for (const workshop of published)
       for (const locale of ["de", "sq", "en"])
         assert(
@@ -211,6 +219,7 @@ if (config.name === "riparim") {
         "/",
         "/datenschutz",
         "/werkstaetten",
+        "/workshops/prishtina",
         `/werkstatt/${first.id}`,
       ]) {
         const response = await runtime.dispatchFetch(
@@ -280,6 +289,60 @@ if (config.name === "riparim") {
           "Every public locale route preserves the real renderer build identity",
         );
         await navigation.text();
+      }
+    for (const locale of ["de", "sq", "en"])
+      for (const city of [
+        "Prishtina",
+        "Prizren",
+        "Ferizaj",
+        "Peja",
+        "Gjakova",
+      ]) {
+        const path = localizeHref(`/workshops/${city.toLowerCase()}`, locale);
+        const response = await runtime.dispatchFetch(
+          "https://riparim.com" + path,
+        );
+        assert.equal(response.status, 200);
+        assert.equal(response.headers.get("X-Riparim-Public-Snapshot"), "1");
+        const body = await response.text();
+        assert.deepEqual(
+          [...body.matchAll(/data-workshop-id="([^"]+)"/g)]
+            .map((match) => match[1])
+            .sort(),
+          published
+            .filter((workshop) => workshop.city === city)
+            .map((workshop) => workshop.id)
+            .sort(),
+          "Actual city snapshot contains every and only matching published profile",
+        );
+        assert(body.includes(`https://riparim.com${path}`));
+        const head = await runtime.dispatchFetch("https://riparim.com" + path, {
+          method: "HEAD",
+        });
+        assert.equal(head.status, 200);
+        assert.equal(await head.text(), "");
+        const navigation = await runtime.dispatchFetch(
+          "https://riparim.com" + path + "?_rsc",
+          { headers: { RSC: "1", Accept: "text/x-component" } },
+        );
+        assert.equal(navigation.status, 200);
+        assert(
+          !(await navigation.text()).includes("data-workshop-id"),
+          "City navigation always loads the latest catalogue through a data-free shell",
+        );
+      }
+    for (const path of [
+      "/werkstaetten/unknown",
+      "/en/workshops/unknown",
+      "/sq/serviset/prishtina/extra",
+    ])
+      for (const method of ["GET", "HEAD"]) {
+        const response = await runtime.dispatchFetch(
+          "https://riparim.com" + path,
+          { method },
+        );
+        assert.equal(response.status, 404);
+        await response.text();
       }
     await db
       .prepare(
@@ -383,6 +446,15 @@ if (config.name === "riparim") {
       .prepare("UPDATE workshops SET description=?,updated_at=? WHERE id=?")
       .bind("Newer approved admin text", "2099-01-01T00:00:00.000Z", first.id)
       .run();
+    const changedCity = await runtime.dispatchFetch(
+      "https://riparim.com/en/workshops/prishtina",
+    );
+    assert.equal(changedCity.status, 200);
+    assert.equal(changedCity.headers.get("X-Riparim-Public-Snapshot"), "1");
+    assert(
+      !(await changedCity.text()).includes("data-workshop-id="),
+      "A changed publication invalidates city data alongside the catalogue",
+    );
     const edited = await runtime.dispatchFetch(
       "https://riparim.com/werkstatt/" + first.id,
     );

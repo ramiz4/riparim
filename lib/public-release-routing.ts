@@ -1,3 +1,4 @@
+import { cityPagePaths } from "./workshop-cities";
 import { setReleaseRscHeaders } from "./release-rsc";
 import {
   isPagePath,
@@ -13,7 +14,10 @@ export function publicAssetPath(url: URL) {
     return `/__public/${localeFromPath(url.pathname)}/privacy.html`;
   if (pageIdentityPath(url.pathname) === "/")
     return `/__public/${localeFromPath(url.pathname)}/home.html`;
-  const match = pageIdentityPath(url.pathname).match(
+  const identity = pageIdentityPath(url.pathname);
+  if (cityPagePaths.includes(identity))
+    return `/__public/${localeFromPath(url.pathname)}/${identity.slice(1)}.html`;
+  const match = identity.match(
     /^\/(workshops|workshop\/([a-z0-9][a-z0-9-]{2,80}))$/,
   );
   if (!match) return null;

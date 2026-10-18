@@ -1,3 +1,4 @@
+import { workshopCities } from "../workshop-cities";
 export const locales = ["de", "sq", "en"] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "de";
@@ -18,6 +19,12 @@ export function stripLocalePrefix(path: string): string {
 const pageRoutes: readonly (Record<Locale, string> & { id: string })[] = [
   { id: "/", de: "/", sq: "/", en: "/" },
   { id: "/workshops", de: "/werkstaetten", sq: "/serviset", en: "/workshops" },
+  ...workshopCities.map(({ slug }) => ({
+    id: `/workshops/${slug}`,
+    de: `/werkstaetten/${slug}`,
+    sq: `/serviset/${slug}`,
+    en: `/workshops/${slug}`,
+  })),
   { id: "/login", de: "/anmelden", sq: "/hyr", en: "/login" },
   { id: "/register", de: "/registrieren", sq: "/regjistrohu", en: "/register" },
   {

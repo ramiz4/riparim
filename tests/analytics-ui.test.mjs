@@ -53,7 +53,7 @@ globalThis.ResizeObserver = class {
 const out = ".test-runtime/analytics-ui/fixture.mjs";
 const bundle = await build({
   stdin: {
-    contents: `export {AnalyticsConsent,AnalyticsSettings} from './components/analytics-consent';export {default as Profile} from './app/[locale]/workshop/[id]/profile';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {analyticsMessages} from './lib/i18n/analytics-messages';export {localizeHref} from './lib/i18n/locale';`,
+    contents: `export {AnalyticsConsent,AnalyticsSettings} from './components/analytics-consent';export {default as Profile} from './app/[locale]/workshop/[id]/profile';export {default as CityDirectory} from './app/[locale]/workshops/[city]/city-directory';export {I18nProvider} from './lib/i18n/client';export {getMessages} from './lib/i18n/messages';export {analyticsMessages} from './lib/i18n/analytics-messages';export {localizeHref} from './lib/i18n/locale';`,
     resolveDir: process.cwd(),
     loader: "tsx",
   },
@@ -90,6 +90,7 @@ const {
   AnalyticsConsent,
   AnalyticsSettings,
   Profile,
+  CityDirectory,
   I18nProvider,
   getMessages,
   analyticsMessages,
@@ -163,7 +164,12 @@ async function render(locale, path, view) {
         I18nProvider,
         {
           locale,
-          messages: getMessages(locale, ["common", "public", "customer"]),
+          messages: getMessages(locale, [
+            "common",
+            "public",
+            "customer",
+            "city",
+          ]),
         },
         h(AnalyticsConsent, { config }, view),
       ),
@@ -245,6 +251,35 @@ for (const locale of ["de", "sq", "en"]) {
     events.filter(({ event }) => event === "$pageview").length,
     1,
     "Filter/hash rerender sends no duplicate",
+  );
+  const cityPage = h(CityDirectory, {
+    city: { slug: "prishtina", name: "Prishtina" },
+    initialWorkshops: [workshop],
+    initialDisplayById: {},
+    initialError: false,
+    publicSnapshot: false,
+  });
+  await render(
+    locale,
+    "/workshops/prishtina?q=private-city-search#private-fragment",
+    cityPage,
+  );
+  assert.equal(
+    events.filter(({ event }) => event === "workshop_search_viewed").length,
+    2,
+    "The actual city listing joins the existing discovery funnel",
+  );
+  assert.equal(events.at(-1).properties.page_type, "city");
+  assert.equal(
+    events.at(-1).properties.page_path,
+    localizeHref("/workshops/prishtina", locale),
+  );
+  const cityEvents = events.length;
+  await render(locale, "/workshops/prishtina?q=another-city-secret", cityPage);
+  assert.equal(
+    events.length,
+    cityEvents,
+    "City query changes cannot duplicate or leak into events",
   );
   await render(locale, "/werkstatt/issue-205-fixture", profile);
   assert.equal(
@@ -343,6 +378,9 @@ for (const locale of ["de", "sq", "en"]) {
   const serialized = JSON.stringify(events);
   for (const personal of [
     "private-search",
+    "private-city-search",
+    "private-fragment",
+    "another-city-secret",
     "Private issue-205",
     "+38349000205",
     "issue-205@example.test",
