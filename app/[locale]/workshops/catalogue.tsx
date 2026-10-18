@@ -828,7 +828,7 @@ export default function Catalogue({
                   .map((workshop) => (
                     <li key={workshop.id} className="min-w-0">
                       <WorkshopNavigationLink
-                        className="inline-block py-2 break-words text-primary underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+                        className="inline-block py-2 break-words text-[var(--theme-accent)] underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
                         href={`/workshop/${encodeURIComponent(workshop.id)}?${new URLSearchParams({ suche: catalogueHref(filters, locale) })}`}
                       >
                         {workshop.name} · {workshop.city}
