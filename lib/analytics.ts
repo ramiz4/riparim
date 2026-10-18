@@ -1,3 +1,4 @@
+import { cityPagePaths } from "./workshop-cities";
 import {
   localizeHref,
   localeFromPath,
@@ -8,7 +9,7 @@ import {
 export type AnalyticsPage = {
   path: string;
   locale: Locale;
-  type: "home" | "search" | "profile" | "privacy";
+  type: "home" | "search" | "city" | "profile" | "privacy";
   workshopId?: string;
 };
 export type AnalyticsConsent = "unknown" | "accepted" | "declined";
@@ -102,9 +103,11 @@ export function publicAnalyticsPage(
       ? "home"
       : identity === "/workshops"
         ? "search"
-        : identity === "/privacy"
-          ? "privacy"
-          : null;
+        : cityPagePaths.includes(identity)
+          ? "city"
+          : identity === "/privacy"
+            ? "privacy"
+            : null;
   if (type) return { path: localizeHref(identity, locale), locale, type };
   if (
     publishedWorkshopId &&
@@ -321,7 +324,8 @@ export function createAnalyticsController(options: {
       return;
     }
     emit("$pageview", page, { $pageview_id: pageviewId });
-    if (page.type === "search") emit("workshop_search_viewed", page);
+    if (["search", "city"].includes(page.type))
+      emit("workshop_search_viewed", page);
     if (page.type === "profile") emit("workshop_profile_viewed", page);
   }
   function updateConsent(value: AnalyticsConsent) {
