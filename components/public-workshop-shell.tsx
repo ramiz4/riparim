@@ -7,7 +7,13 @@ import type { Workshop } from "@/lib/workshops";
 import type { WorkshopDisplayById } from "@/lib/workshop-profile-content";
 import WorkshopProfile from "@/app/[locale]/workshop/[id]/profile";
 import { SiteHeader } from "./site-header";
-export default function PublicWorkshopShell({ id }: { id: string }) {
+export default function PublicWorkshopShell({
+  id,
+  publicOrigin,
+}: {
+  id: string;
+  publicOrigin?: string;
+}) {
   const { locale, t } = useI18n();
   const [data, setData] = useState<{
       workshop: Workshop;
@@ -46,6 +52,7 @@ export default function PublicWorkshopShell({ id }: { id: string }) {
   if (data)
     return (
       <WorkshopProfile
+        publicOrigin={publicOrigin}
         publicSnapshot
         workshop={data.workshop}
         directory={data.directory}
