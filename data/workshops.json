@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-17T03:29:52.671Z",
+  "updatedAt": "2026-10-18T08:35:26.954Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 191,
+    "published": 194,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 191 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 191,
+    "reason": "All 194 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 194,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -5019,6 +5019,54 @@
       }
     },
     {
+      "id": "auto-servis-sistem-mazgit",
+      "name": "Auto Servis Sistem",
+      "city": "Obiliq",
+      "address": "Magjistralja Prishtinë–Mitrovicë km 7, Mazgit",
+      "phone": "+38344168690",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Motor & Getriebe"],
+      "serviceDetails": [
+        "Getriebediagnose für Pkw",
+        "Reparatur von Pkw-Getrieben"
+      ],
+      "languages": [],
+      "specialty": "Pkw-Getriebediagnose · Getriebereparatur",
+      "description": "Auto Servis Sistem in Mazgit bietet Diagnose und Reparatur von Pkw-Getrieben an. Der Betrieb befindet sich an der Straße Prishtinë–Mitrovicë bei Kilometer 7.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://autoservis-sistem.com/",
+          "title": "Eigene Betriebswebsite: Pkw-Getriebeservice, Kontakt und Standort",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/autoservis.sistem/",
+          "title": "Eigene Facebook-Seite: Geschäftskontakt und Standortzuordnung",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-18",
+      "status": "published",
+      "updatedAt": "2026-10-18T08:34:23.538863Z",
+      "google": {
+        "placeId": "ChIJZ4gk7safVBMRV5naacYQ7C8",
+        "matchedAt": "2026-10-18T08:34:23.538863Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://autoservis-sistem.com/",
+            "https://www.facebook.com/autoservis.sistem/"
+          ],
+          "note": "Public Maps UI in the confirmed project account: independently sourced business name, international phone and precise site match an active entry. Place ID read from a visible official result link and returned with an unrelated London fallback. No Google business content or ownership claim adopted."
+        }
+      }
+    },
+    {
       "id": "auto-servis-trimi-prishtina",
       "name": "Auto Servis Trimi",
       "city": "Prishtina",
@@ -6274,6 +6322,54 @@
       }
     },
     {
+      "id": "autoservis-krasniqi-suhareke",
+      "name": "Autoservis Krasniqi",
+      "city": "Suharekë",
+      "address": "Rruga Skënderbeu p.n., Suharekë 23000",
+      "phone": "+38349593002",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": ["Volkswagen", "Audi", "SEAT", "Škoda", "Mercedes-Benz"],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Wartung und Reparatur von Pkw",
+        "Technische Fahrzeugprüfung"
+      ],
+      "languages": [],
+      "specialty": "Pkw-Service · Wartung · Technische Fahrzeugprüfung",
+      "description": "Autoservis Krasniqi in Suharekë bietet Wartung und Reparatur von Pkw sowie technische Fahrzeugprüfungen an. Der Betrieb befindet sich an der Rruga Skënderbeu.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://autokrasniqi.com/kontakti/",
+          "title": "Eigene Kontaktseite: Anschrift, Geschäftsnummern und E-Mail",
+          "kind": "official"
+        },
+        {
+          "url": "https://autokrasniqi.com/sherbimet/",
+          "title": "Eigene Leistungsseite: Pkw-Service und Fahrzeugprüfung",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-18",
+      "status": "published",
+      "updatedAt": "2026-10-18T08:34:23.538863Z",
+      "google": {
+        "placeId": "ChIJTTiea0SaUxMRqY3MM3y7Tqk",
+        "matchedAt": "2026-10-18T08:34:23.538863Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://autokrasniqi.com/kontakti/",
+            "https://autokrasniqi.com/sherbimet/"
+          ],
+          "note": "Public Maps UI in the confirmed project account: independently sourced business name, international phone and precise site match an active entry. Place ID read from a visible official result link and returned with an unrelated London fallback. No Google business content or ownership claim adopted."
+        }
+      }
+    },
+    {
       "id": "autoservis-pg-bosch-prishtina",
       "name": "Autoservis PG Bosch",
       "city": "Prishtina",
@@ -6992,6 +7088,56 @@
             "https://www.gjithebiznesi.com/XK/dpf-auto-gjini-049-445-589"
           ],
           "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
+        }
+      }
+    },
+    {
+      "id": "drini-detailing-more-podujeve",
+      "name": "Drini Detailing & More",
+      "city": "Podujevë",
+      "address": "Rruga Skënderbeu, Podujevë",
+      "phone": "+38349222947",
+      "phoneNote": "Öffentlicher Betriebskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Fahrzeugpolitur",
+        "Fahrzeugaufbereitung",
+        "Schutzfolien (PPF)",
+        "Entfernen von Chromakzenten (Chrome Delete)"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugpolitur · Aufbereitung · PPF",
+      "description": "Drini Detailing & More in Podujevë bietet Fahrzeugpolitur und Aufbereitung sowie Schutzfolien (PPF) und Chrome Delete an. Der Betrieb befindet sich an der Rruga Skënderbeu.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/profile.php?id=61584798375499",
+          "title": "Eigene Facebook-Seite: Kontakt, Standort und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/drini.detailing.more/",
+          "title": "Eigener Instagram-Auftritt: Kontakt, Standort und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-18",
+      "status": "published",
+      "updatedAt": "2026-10-18T08:34:23.538863Z",
+      "google": {
+        "placeId": "ChIJIzGWLIWpVBMRWdGNcXHSnpk",
+        "matchedAt": "2026-10-18T08:34:23.538863Z",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://www.facebook.com/profile.php?id=61584798375499",
+            "https://www.instagram.com/drini.detailing.more/"
+          ],
+          "note": "Public Maps UI in the confirmed project account: independently sourced business name, international phone and precise site match an active entry. Place ID read from a visible official result link and returned with an unrelated London fallback. No Google business content or ownership claim adopted."
         }
       }
     },
