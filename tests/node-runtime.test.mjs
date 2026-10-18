@@ -59,6 +59,29 @@ async function start(
   }
   throw new Error("Node server did not start: " + logs);
 }
+function renderedRscElements(body) {
+  const elements = [];
+  function visit(value) {
+    if (Array.isArray(value)) {
+      if (value[0] === "$" && value[3] && typeof value[3] === "object")
+        elements.push({ type: value[1], props: value[3] });
+      value.forEach(visit);
+    } else if (value && typeof value === "object")
+      Object.values(value).forEach(visit);
+  }
+  for (const line of body.split("\n")) {
+    const payload = line.match(/^[0-9a-f]+:(.*)$/)?.[1];
+    if (!payload) continue;
+    let value;
+    try {
+      value = JSON.parse(payload);
+    } catch {
+      continue;
+    } // Module and other protocol records are not React elements.
+    visit(value);
+  }
+  return elements;
+}
 async function stop() {
   if (!server) return;
   logNodePhase("runtime HTTP", httpStarted);
@@ -250,23 +273,105 @@ try {
         );
         assert.equal(response.status, 200, path + logs);
         const body = await response.text();
-        assert(!body.includes("private-guide-query"));
         assert(!body.includes("Private Draft Workshop"));
-        if (init.method === "HEAD") assert.equal(body, "");
-        else if (init.headers)
+        assert.match(
+          response.headers.get("cache-control"),
+          /private.*no-store/,
+        );
+        if (init.method === "HEAD") {
+          assert.equal(body, "");
+          continue;
+        }
+        let metadataLinks;
+        // Next retains the current request query in its private router/Flight
+        // envelope. Public article elements, metadata and links must stay clean.
+        if (init.headers) {
           assert.match(
             response.headers.get("content-type"),
             /text\/x-component/,
           );
-        else {
-          assert.match(body, new RegExp('<html lang="' + locale + '"'));
+          const elements = renderedRscElements(body);
           assert(
-            body.includes('href="' + origin + path + '"'),
-            "Node guide canonical matches the public locale URL",
+            elements.some(
+              ({ type, props }) =>
+                type === "main" && props["data-riparim-page"] === "guide",
+            ),
           );
-          assert(body.includes('data-riparim-page="guide'));
-          assert(!body.includes("noindex"));
+          assert(
+            elements.every(
+              ({ props }) =>
+                !JSON.stringify(props).includes("private-guide-query"),
+            ),
+            "Rendered guide RSC elements never expose ignored query values",
+          );
+          metadataLinks = elements
+            .filter(({ type }) => type === "link")
+            .map(({ props }) => props);
+        } else {
+          const dom = new JSDOM(body);
+          try {
+            const doc = dom.window.document;
+            assert.equal(doc.documentElement.lang, locale);
+            assert(doc.querySelector('main[data-riparim-page="guide"]'));
+            assert(
+              !doc
+                .querySelector("main")
+                .outerHTML.includes("private-guide-query"),
+            );
+            assert(
+              [...doc.querySelectorAll("head title,head meta,head link")].every(
+                (node) => !node.outerHTML.includes("private-guide-query"),
+              ),
+              "Guide metadata excludes ignored query values",
+            );
+            assert(
+              [...doc.querySelectorAll("a[href]")].every(
+                (node) =>
+                  !node.getAttribute("href").includes("private-guide-query"),
+              ),
+              "Public guide links exclude ignored query values",
+            );
+            metadataLinks = [...doc.querySelectorAll("head link")].map(
+              (node) => ({
+                rel: node.rel,
+                href: node.href,
+                hrefLang: node.hreflang,
+              }),
+            );
+            assert(!body.includes("noindex"));
+          } finally {
+            dom.window.close();
+          }
         }
+        assert.equal(
+          metadataLinks.find((link) => link.rel === "canonical")?.href,
+          origin + path,
+          "Node guide canonical matches the clean public locale URL",
+        );
+        assert.deepEqual(
+          Object.fromEntries(
+            metadataLinks
+              .filter((link) => link.rel === "alternate" && link.hrefLang)
+              .map((link) => [link.hrefLang, link.href]),
+          ),
+          Object.fromEntries(
+            ["de", "sq", "en", "x-default"].map((language) => [
+              language,
+              origin +
+                localizeHref(
+                  identity,
+                  language === "x-default" ? "de" : language,
+                ),
+            ]),
+          ),
+          "Guide HTML and RSC expose clean reciprocal alternatives",
+        );
+        const clean = await fetch(origin + path, init);
+        assert.equal(clean.status, 200);
+        assert(
+          !(await clean.text()).includes("private-guide-query"),
+          "A following clean request never contains another request's query value",
+        );
       }
     }
   for (const path of [
