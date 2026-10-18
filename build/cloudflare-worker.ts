@@ -34,6 +34,24 @@ export default {
     if (publicRelease) return stampReleaseCommit(publicRelease);
     const migration = await handleMigrationRequest(request, env);
     if (migration) return stampReleaseCommit(migration);
+    if (
+      ["GET", "HEAD"].includes(request.method) &&
+      ["/sitemap.xml", "/robots.txt"].includes(url.pathname)
+    ) {
+      const seo = await import("../lib/public-seo");
+      const response =
+        url.pathname === "/sitemap.xml"
+          ? await seo.publicSitemapResponse()
+          : seo.publicRobotsResponse();
+      return stampReleaseCommit(
+        request.method === "HEAD"
+          ? new Response(null, {
+              status: response.status,
+              headers: response.headers,
+            })
+          : response,
+      );
+    }
     if (!isTechnicalPath(url.pathname) && !isPagePath(url.pathname))
       return stampReleaseCommit(
         new Response("Not Found", {

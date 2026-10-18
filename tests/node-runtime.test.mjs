@@ -13,6 +13,7 @@ import { join } from "node:path";
 import { createServer } from "node:net";
 import { createHash } from "node:crypto";
 import { DatabaseSync } from "node:sqlite";
+import { JSDOM } from "jsdom";
 import { setTimeout as delay } from "node:timers/promises";
 
 const run = promisify(execFile),
@@ -115,6 +116,69 @@ try {
   );
   db.close();
   await start(environment, port);
+  const sitemapResponse = await fetch(origin + "/sitemap.xml?q=private-query", {
+    headers: { cookie: "untrusted=fixture" },
+  });
+  assert.equal(
+    sitemapResponse.status,
+    200,
+    "Published URLs have an XML sitemap",
+  );
+  assert.match(sitemapResponse.headers.get("content-type"), /application\/xml/);
+  assert.equal(sitemapResponse.headers.has("set-cookie"), false);
+  const sitemapXml = await sitemapResponse.text();
+  const sitemap = new JSDOM(sitemapXml, { contentType: "application/xml" });
+  assert.equal(sitemap.window.document.documentElement.localName, "urlset");
+  assert.deepEqual(
+    [...sitemap.window.document.querySelectorAll("loc")]
+      .map((node) => node.textContent)
+      .sort(),
+    [
+      "/",
+      "/sq",
+      "/en",
+      "/werkstaetten",
+      "/sq/serviset",
+      "/en/workshops",
+      "/werkstatt/fixture-public",
+      "/sq/servis/fixture-public",
+      "/en/workshop/fixture-public",
+    ]
+      .map((path) => origin + path)
+      .sort(),
+    "Only canonical home, catalogue and published profiles enter the sitemap",
+  );
+  assert(
+    !sitemapXml.includes("fixture-draft") &&
+      !sitemapXml.includes("private-query"),
+  );
+  for (const url of sitemap.window.document.querySelectorAll("url")) {
+    const links = [
+      ...url.getElementsByTagNameNS("http://www.w3.org/1999/xhtml", "link"),
+    ];
+    assert.deepEqual(
+      links.map((link) => link.getAttribute("hreflang")).sort(),
+      ["de", "en", "sq", "x-default"],
+    );
+    assert(
+      links.some(
+        (link) =>
+          link.getAttribute("href") === url.querySelector("loc").textContent,
+      ),
+      "Alternates include the URL itself",
+    );
+  }
+  const robotsResponse = await fetch(origin + "/robots.txt");
+  assert.equal(robotsResponse.status, 200);
+  assert.match(
+    await robotsResponse.text(),
+    new RegExp(`Sitemap: ${origin}/sitemap\\.xml`),
+  );
+  assert.equal(
+    (await fetch(origin + "/sitemap.xml", { method: "HEAD" })).status,
+    200,
+  );
+  assert.equal((await fetch(origin + "/en/sitemap.xml")).status, 404);
   for (const locale of ["de", "sq", "en"])
     for (const init of [
       {},
