@@ -114,7 +114,7 @@ const bundleOptions = {
               args.path === "next/server"
                 ? 'export const NextResponse={redirect:(url,status)=>new Response(null,{status,headers:{Location:String(url)}}),rewrite:(url)=>{const response=new Response(null,{headers:{"x-middleware-rewrite":String(url)}});response.cookies={set:(name,value)=>response.headers.append("Set-Cookie",name+"="+value+"; Path=/; HttpOnly; Secure; SameSite=Lax")};return response;},next:()=>{const response=new Response(null);response.cookies={set:(name,value)=>response.headers.append("Set-Cookie",name+"="+value+"; Path=/; HttpOnly; Secure; SameSite=Lax")};return response;}};'
                 : args.path === "@/lib/auth/config"
-                  ? "export async function getAuthConfig(){return globalThis.fixtureProxyAuthConfig??null;}"
+                  ? "export async function getAuthConfig(){return globalThis.fixtureProxyAuthConfig??null;} export function siteOrigin(){return 'https://riparim.com';}"
                   : 'export function createAuthClient(config,cookies){if(!globalThis.fixtureProxyAuthConfig)throw new Error("Canonical routing must not access the provider");return {async getUser(){cookies.setAll([{name:"sb-fixture-auth-token",value:"refreshed",options:{}}]);}};}',
           }),
         );
