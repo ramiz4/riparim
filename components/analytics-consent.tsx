@@ -88,6 +88,7 @@ export function AnalyticsConsent({
               {
                 home: "home",
                 search: "catalogue",
+                city: "city",
                 profile: "workshop",
                 privacy: "privacy",
               } as const

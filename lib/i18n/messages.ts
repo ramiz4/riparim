@@ -1,3 +1,4 @@
+import { cityDe, citySq, cityEn } from "./city-messages";
 import { weekdayDe, weekdaySq, weekdayEn } from "./weekday-messages";
 import { defaultLocale, isLocale, type Locale } from "./locale";
 import { formatNumber } from "./format";
@@ -121,6 +122,7 @@ const deBase = {
 
 const de = /* @__PURE__ */ Object.assign({}, deBase, {
   public: publicDe,
+  city: cityDe,
   customer: customerDe,
   management: managementDe,
 });
@@ -139,6 +141,7 @@ function defineCatalog<const C extends CatalogNamespaces>(
 
 const sq = /* @__PURE__ */ defineCatalog({
   public: publicSq,
+  city: citySq,
   customer: customerSq,
   management: managementSq,
   common: /* @__PURE__ */ Object.assign({}, weekdaySq, {
@@ -244,6 +247,7 @@ const sq = /* @__PURE__ */ defineCatalog({
 
 const en = /* @__PURE__ */ defineCatalog({
   public: publicEn,
+  city: cityEn,
   customer: customerEn,
   management: managementEn,
   common: /* @__PURE__ */ Object.assign({}, weekdayEn, {
@@ -439,6 +443,7 @@ export function getMessages(
     "common",
     "metadata",
     "public",
+    "city",
     "customer",
     "management",
   ],
@@ -447,6 +452,7 @@ export function getMessages(
   const catalog = { de, sq, en }[active];
   const result: MessageCatalog = { locale: active };
   for (const namespace of namespaces) {
+    if (namespace === "city") result.city = catalog.city;
     if (namespace === "public") result.public = catalog.public;
     if (namespace === "customer") result.customer = catalog.customer;
     if (namespace === "management") result.management = catalog.management;

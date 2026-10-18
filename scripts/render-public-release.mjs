@@ -4,10 +4,21 @@ import { Miniflare } from "miniflare";
 import { execFileSync } from "node:child_process";
 import { localizeHref } from "./lib/locale.mjs";
 import { catalogueReleasePlan } from "./catalogue-release-plan.mjs";
+import { build } from "esbuild";
 import { releaseBuildTarget } from "./release-policy.mjs";
 import { publicAnalyticsBindings } from "./lib/public-analytics.mjs";
 
 if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
+  const cityBundle = await build({
+    entryPoints: ["lib/workshop-cities.ts"],
+    bundle: true,
+    write: false,
+    platform: "node",
+    format: "esm",
+  });
+  const { cityPagePaths } = await import(
+    `data:text/javascript;base64,${Buffer.from(cityBundle.outputFiles[0].contents).toString("base64")}`
+  );
   let phaseStarted = performance.now();
   function finishPhase(phase) {
     const ended = performance.now();
@@ -93,23 +104,19 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
       );
     finishPhase("seed");
     await rm("dist/client/__public", { recursive: true, force: true });
+    const publicPaths = [
+      "/",
+      "/privacy",
+      "/workshops",
+      ...cityPagePaths,
+      ...published.map((workshop) => `/workshop/${workshop.id}`),
+    ];
+    const assetName = (path) => (path === "/" ? "home" : path.slice(1));
     let pages = 0;
     for (const locale of ["de", "sq", "en"]) {
       const prefix = locale === "de" ? "" : "/" + locale;
-      for (const id of [
-        "home",
-        "privacy",
-        null,
-        ...published.map((w) => w.id),
-      ]) {
-        const path =
-          id === "privacy"
-            ? "/privacy"
-            : id === "home"
-              ? "/"
-              : id
-                ? `/workshop/${id}`
-                : "/workshops";
+      for (const path of publicPaths) {
+        const id = path.match(/^\/workshop\/(.+)$/)?.[1];
         const response = await runtime.dispatchFetch(
           "https://riparim.com" + localizeHref(path, locale),
         );
@@ -124,16 +131,12 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
           html.includes('data-slot="dropdown-menu-label"')
         )
           throw Error(`Public release rendering failed: ${prefix + path}`);
-        if (
-          id &&
-          !["home", "privacy"].includes(id) &&
-          !html.includes(`data-workshop-id="${id}"`)
-        )
+        if (id && !html.includes(`data-workshop-id="${id}"`))
           throw Error("Public release profile identity differs");
         const file = resolve(
           "dist/client/__public",
           locale,
-          (["home", "privacy"].includes(id) ? id : path.slice(1)) + ".html",
+          assetName(path) + ".html",
         );
         await mkdir(dirname(file), { recursive: true });
         await writeFile(file, html);
@@ -224,20 +227,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
       },
     });
     for (const locale of ["de", "sq", "en"])
-      for (const id of [
-        "home",
-        "privacy",
-        null,
-        ...published.map((w) => w.id),
-      ]) {
-        const path =
-          id === "privacy"
-            ? "/privacy"
-            : id === "home"
-              ? "/"
-              : id
-                ? `/workshop/${id}`
-                : "/workshops";
+      for (const path of publicPaths) {
         const response = await runtime.dispatchFetch(
             "https://riparim.com" + localizeHref(path, locale),
           ),
@@ -253,8 +243,7 @@ if (releaseBuildTarget(process.env.BUILD_TARGET) === "cloudflare") {
         const file = resolve(
           "dist/client/__public",
           locale,
-          (["home", "privacy"].includes(id) ? id : path.slice(1)) +
-            "-shell.html",
+          assetName(path) + "-shell.html",
         );
         await mkdir(dirname(file), { recursive: true });
         await writeFile(file, html);

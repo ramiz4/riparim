@@ -3,6 +3,7 @@ import { isErrorCode } from "@/lib/i18n/codes";
 import { publicDataError } from "@/lib/i18n/public-errors";
 import { formatNumber } from "@/lib/i18n/format";
 import { useI18n } from "@/lib/i18n/client";
+import { WorkshopNavigationLink } from "@/components/workshop-navigation-link";
 import {
   useCallback,
   useEffect,
@@ -812,6 +813,31 @@ export default function Catalogue({
             )}
           </div>
         </div>
+        {ready &&
+          directory.some((workshop) => workshop.status === "published") && (
+            <details
+              className="mt-8 rounded-lg border border-border p-4"
+              data-ui="workshop-index"
+            >
+              <summary className="cursor-pointer font-medium focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring">
+                {t("public.workshopIndex")}
+              </summary>
+              <ul className="mt-4 grid gap-x-6 gap-y-1 sm:grid-cols-2 lg:grid-cols-3">
+                {orderedCatalogue(directory, defaultCatalogueFilters, locale)
+                  .filter((workshop) => workshop.status === "published")
+                  .map((workshop) => (
+                    <li key={workshop.id} className="min-w-0">
+                      <WorkshopNavigationLink
+                        className="inline-block py-2 break-words text-[var(--theme-accent)] underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+                        href={`/workshop/${encodeURIComponent(workshop.id)}?${new URLSearchParams({ suche: catalogueHref(filters, locale) })}`}
+                      >
+                        {workshop.name} · {workshop.city}
+                      </WorkshopNavigationLink>
+                    </li>
+                  ))}
+              </ul>
+            </details>
+          )}
       </main>
       <DirectoryFooter />
     </>

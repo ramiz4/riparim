@@ -89,6 +89,19 @@ assert.deepEqual(
   page("https://riparim.com/sq/serviset?q=private-name#search"),
   { path: "/sq/serviset", locale: "sq", type: "search" },
 );
+for (const slug of ["prishtina", "prizren", "ferizaj", "peja", "gjakova"])
+  for (const [locale, prefix] of [
+    ["de", "/werkstaetten"],
+    ["sq", "/sq/serviset"],
+    ["en", "/en/workshops"],
+  ])
+    assert.deepEqual(
+      page(
+        `https://riparim.com${prefix}/${slug}?q=private-city-search#private-fragment`,
+      ),
+      { path: `${prefix}/${slug}`, locale, type: "city" },
+      "Only editorial city identities enter analytics with a clean path",
+    );
 assert.deepEqual(
   page("https://riparim.com/en/workshop/fixture-205", "fixture-205"),
   {
@@ -110,6 +123,10 @@ for (const path of [
   "/api/session",
   "/auth/bestaetigen?token=secret",
   "/unknown",
+  "/werkstaetten/unknown",
+  "/en/workshops/private@example.test",
+  "/sq/serviset/prishtina/extra",
+  "/en/workshops/prishtina?bewerten=1",
   "/werkstatt/fixture-205",
   "/?besuche=1",
   "/?einreichung=private",
