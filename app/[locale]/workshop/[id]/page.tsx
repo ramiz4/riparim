@@ -71,8 +71,10 @@ export default async function WorkshopPage({
   if (!/^[a-z0-9][a-z0-9-]{2,80}$/.test(id)) notFound();
   if (publicReleaseShell())
     return (
-      <I18nMessages messages={getMessages(locale, ["public", "customer"])}>
-        <PublicWorkshopShell id={id} />
+      <I18nMessages
+        messages={getMessages(locale, ["public", "customer", "sharing"])}
+      >
+        <PublicWorkshopShell id={id} publicOrigin={siteOrigin()} />
       </I18nMessages>
     );
   const [directory, user] = await Promise.all([listWorkshops(), getAppUser()]);
@@ -103,8 +105,11 @@ export default async function WorkshopPage({
     reviewError = "unavailable";
   }
   return (
-    <I18nMessages messages={getMessages(locale, ["public", "customer"])}>
+    <I18nMessages
+      messages={getMessages(locale, ["public", "customer", "sharing"])}
+    >
       <WorkshopProfile
+        publicOrigin={siteOrigin()}
         publicSnapshot={publicReleaseRender()}
         display={displayById[workshop.id]}
         initialSearchHref={initialSearchHref}

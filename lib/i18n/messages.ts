@@ -4,6 +4,7 @@ import { defaultLocale, isLocale, type Locale } from "./locale";
 import { formatNumber } from "./format";
 import { publicDe, publicSq, publicEn } from "./public-messages";
 import { customerDe, customerSq, customerEn } from "./customer-messages";
+import { sharingDe, sharingSq, sharingEn } from "./sharing-messages";
 import {
   managementDe,
   managementSq,
@@ -123,6 +124,7 @@ const deBase = {
 const de = /* @__PURE__ */ Object.assign({}, deBase, {
   public: publicDe,
   city: cityDe,
+  sharing: sharingDe,
   customer: customerDe,
   management: managementDe,
 });
@@ -142,6 +144,7 @@ function defineCatalog<const C extends CatalogNamespaces>(
 const sq = /* @__PURE__ */ defineCatalog({
   public: publicSq,
   city: citySq,
+  sharing: sharingSq,
   customer: customerSq,
   management: managementSq,
   common: /* @__PURE__ */ Object.assign({}, weekdaySq, {
@@ -248,6 +251,7 @@ const sq = /* @__PURE__ */ defineCatalog({
 const en = /* @__PURE__ */ defineCatalog({
   public: publicEn,
   city: cityEn,
+  sharing: sharingEn,
   customer: customerEn,
   management: managementEn,
   common: /* @__PURE__ */ Object.assign({}, weekdayEn, {
@@ -446,6 +450,7 @@ export function getMessages(
     "city",
     "customer",
     "management",
+    "sharing",
   ],
 ): MessageCatalog {
   const active = isLocale(locale) ? locale : defaultLocale;
@@ -454,6 +459,7 @@ export function getMessages(
   for (const namespace of namespaces) {
     if (namespace === "city") result.city = catalog.city;
     if (namespace === "public") result.public = catalog.public;
+    if (namespace === "sharing") result.sharing = catalog.sharing;
     if (namespace === "customer") result.customer = catalog.customer;
     if (namespace === "management") result.management = catalog.management;
     if (namespace === "common") result.common = catalog.common;

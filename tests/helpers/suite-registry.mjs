@@ -80,6 +80,7 @@ export const registeredSuites = Object.freeze([
   { file: "catalogue-docking.test.mjs", group: "core" },
   { file: "public-performance-ui.test.mjs", group: "core" },
   { file: "profile-navigation.test.mjs", group: "core" },
+  { file: "profile-sharing.test.mjs", group: "core" },
   { file: "auth-setup-ui.test.mjs", group: "core" },
   { file: "admin-menu.test.mjs", group: "core" },
   { file: "admin-workshops-ui.test.mjs", group: "core" },
