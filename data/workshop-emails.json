@@ -841,6 +841,20 @@
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
     },
     {
+      "workshopId": "auto-pjese-servis-bekimi-drenas",
+      "matchedName": "Auto Pjesë & Servis Bekimi",
+      "matchedPhone": "+38349157000",
+      "matchedCity": "Drenas",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://www.facebook.com/autoservisbekimi/",
+        "https://www.instagram.com/autopjese_servisbekimi/",
+        "https://www.autos1000.com/XK/Drenas/106698517935482/Auto-Pjes%C3%AB-%26-Servis-Bekimi"
+      ],
+      "notes": "Complete own Facebook contact panel, expanded own Instagram bio and full traceable directory checked on 2026-10-19. No attributable business email or own contact website found. No outreach or guessed address."
+    },
+    {
       "workshopId": "auto-pjese-servis-fatosi-gracanice",
       "matchedName": "Auto Pjesë & Servis Fatosi",
       "matchedPhone": "+38344668508",

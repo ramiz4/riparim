@@ -3,22 +3,23 @@
   "date": "2026-10-19",
   "timezone": "Europe/Zurich",
   "startedAt": "2026-10-19T03:04:46.968519+00:00",
-  "checkedAt": "2026-10-19T03:50:58.648199+00:00",
-  "status": "research-in-progress-preliminary-eligibility-review",
+  "checkedAt": "2026-10-19T04:01:47.352249+00:00",
+  "status": "local-import-prepared-awaiting-tests-review",
   "completedDateGuard": false,
   "baseCommit": "b0dd6de7d806bdc7d93397cc0fc2875125d2bf80",
   "branch": "codex/daily-import-2026-10-19",
   "before": {
     "canonicalCount": 194,
-    "liveComparison": "pending"
+    "liveComparison": "matched-all-194-profiles-and-assignments-no-drafts-or-pending-changes"
   },
   "after": {
-    "total": 194,
-    "published": 194,
-    "scope": "unchanged local canonical; live comparison pending",
-    "localProductionWrites": 0
+    "total": 195,
+    "published": 195,
+    "scope": "Prepared local canonical catalogue; no production writes or publication yet.",
+    "localProductionWrites": 0,
+    "canonical": 195
   },
-  "importedWorkshopIds": [],
+  "importedWorkshopIds": ["auto-pjese-servis-bekimi-drenas"],
   "publishedWorkshopIds": [],
   "publishedCountConfirmed": 0,
   "historicalSourcesRead": [
@@ -1079,10 +1080,10 @@
         "reason": "Own Facebook publishes Rr.AliGashi,Skenderaj with countryAlbania and+35544685018; directory mirrors it. No country-prefix correction is inferred. Need current independently explicit Kosovo phone and premises attribution. No Maps or WhatsApp lookup yet.",
         "publicBusinessEmail": {
           "address": null,
-          "status": "unresolved",
+          "status": "not-found",
           "sourceUrl": "https://www.facebook.com/p/Autoservis-Adem-Ramadani-100054511267342/",
-          "checkedAt": "2026-10-19T03:09:52.583238+00:00",
-          "note": "Own contact summary has phone only; full Info and official Instagram followup pending."
+          "checkedAt": "2026-10-19T04:01:47.352249+00:00",
+          "note": "Own main contact summary and public Info inspected; focused exact-name Instagram/email search found unrelated personal/music profiles and the same directory mirror. No attributable official Instagram or business email found; country/phone conflict remains unresolved."
         },
         "openingHoursResearch": {
           "status": "researched-own-full-week-identity-deferred",
@@ -1100,13 +1101,15 @@
           ],
           "limits": "Complete own public business-hours dialog read. No owner confirmation and no schedule imported while identity/contact/site gate unresolved."
         },
-        "nextCheck": "Find current own explicit international Kosovo number and a matching precise site; complete contact/Instagram/email/week evidence."
+        "nextCheck": "Find current own explicit international Kosovo number and a matching precise site; preserve the completed contact/hours research.",
+        "contactResearchFollowupCompletedAt": "2026-10-19T04:01:47.352249+00:00",
+        "contactResearchLimits": "Checked accessible own/contact, directory and attributable social/search sources as recorded. Absence is bounded by those sources; no outreach and no claim of exhaustive web absence."
       },
       {
         "id": "auto-pjese-servis-bekimi-drenas",
         "name": "Auto Pjesë & Servis Bekimi",
         "city": "Drenas",
-        "status": "source-complete-awaiting-independent-identity-review",
+        "status": "eligible-preparing-import",
         "checkedAt": "2026-10-19T03:17:45.966448+00:00",
         "sourceUrls": [
           "https://www.facebook.com/autoservisbekimi/",
@@ -1134,10 +1137,13 @@
           "directPlaceIdReturnWithMismatchedFallbackPassed": true,
           "nameMatched": true,
           "selectedPhoneMatched": true,
-          "locationReview": "Own precise civic address is Doktor Ibrahim Rugova387/KorroticeEperme; Maps entry is on same named IbrahimRugova/M9 road. Other nearby Bekimi entries were not adopted. Independent identity reviewer must assess site/branch attribution before final selection.",
+          "locationReview": "The selected entry corroborates the independently declared locality and road. Nearby homonyms use different phones at distinct sites. Catalogue address remains solely own-business sourced; generated navigation-marker differences and postal labels alone are not treated as a conflict.",
           "activeStatusObserved": true,
           "ownerConfirmationClaimed": false,
-          "checkedAt": "2026-10-19T03:17:45.966448+00:00"
+          "checkedAt": "2026-10-19T03:58:58.326Z",
+          "localityCorroborated": true,
+          "nearbyHomonymsUseDifferentPhones": true,
+          "branchAmbiguityResolved": true
         },
         "publicBusinessEmail": {
           "address": null,
@@ -1166,7 +1172,7 @@
           "selected": "+38349157000",
           "reason": "First own contact, explicitly matched publicMaps number, positively checked in regularWhatsAppWeb. Other public contact numbers and separate legacy+386 number checked individually; no country conversion of legacy field."
         },
-        "nextCheck": "Independent identity/site review then complete pre-write live guard, central hours/translation preparation, dry-run and guarded release."
+        "nextCheck": "Complete central import, translations/hours validation, final independent review, CI and verified main release."
       },
       {
         "name": "Auto fellne vullkanizer Perparimi",
@@ -1181,18 +1187,23 @@
           "publicPhones": ["+38349444490"]
         },
         "reason": "Own address is Jasharaj94; current publicMaps premises do not clearly corroborate the same exact site. Name/contact match alone does not resolve site continuity.",
-        "nextCheck": "Current own precise premises or manual own businessMapslink resolving location continuity. Complete own-email/Instagram/hour research.",
+        "nextCheck": "Current own precise premises or manual own businessMapslink resolving location continuity. ",
         "publicBusinessEmail": {
           "address": null,
-          "status": "unresolved",
+          "status": "not-found",
           "sourceUrl": "https://www.autos1000.com/XK/Drenas/350207982437071/Auto-fellne-vullkanizer-Perparimi",
-          "checkedAt": "2026-10-19T03:37:43.589335+00:00",
-          "note": "Detailed own-contact/official social attribution search remains pending; no email guessed."
+          "checkedAt": "2026-10-19T04:01:47.352249+00:00",
+          "note": "Own full Facebook contact tab lists telephone only; full directory and focused exact-name/phone Instagram/email search yielded no attributable business email. No guessed address or private email-finder source used."
         },
         "openingHoursResearch": {
-          "status": "pending",
-          "checkedAt": "2026-10-19T03:37:43.589335+00:00",
-          "note": "No schedule imported. Complete source research before any selection; identity conflicts cannot be bypassed by defaults."
+          "status": "no-usable-week-found-identity-deferred",
+          "sourceUrls": [
+            "https://www.autos1000.com/XK/Drenas/350207982437071/Auto-fellne-vullkanizer-Perparimi",
+            "https://www.facebook.com/350207982437071/"
+          ],
+          "checkedAt": "2026-10-19T04:01:47.352249+00:00",
+          "sourceAge": "No complete attributable weekly plan found in checked source views.",
+          "limits": "Own main and contact tab plus full directory checked; no weekly plan established. No hours imported while premises continuity remains unresolved; a future eligible import must use centrally prepared assumed defaults if still absent."
         },
         "googleIdentity": {
           "placeId": "ChIJ_z8XrKhvUxMRgfX76ea_IaQ",
@@ -1204,7 +1215,9 @@
           "directIdReturn": "not-completed-after-location-conflict",
           "identityConfirmed": false,
           "checkedAt": "2026-10-19T03:37:43.589335+00:00"
-        }
+        },
+        "contactResearchFollowupCompletedAt": "2026-10-19T04:01:47.352249+00:00",
+        "contactResearchLimits": "Checked accessible own/contact, directory and attributable social/search sources as recorded. Absence is bounded by those sources; no outreach and no claim of exhaustive web absence."
       },
       {
         "name": "Auto Servis Miloti",
@@ -1221,17 +1234,17 @@
         "reason": "Own current business contact and passenger-car mechanic scope match the directory; independent location is only Drenas.",
         "nextCheck": "Obtain exact own street/premises; complete own contact and weekly schedule. Maps deferred until source site complete.",
         "publicBusinessEmail": {
-          "address": null,
-          "status": "unresolved",
-          "sourceUrl": "https://www.autos1000.com/XK/Drenas/443034459209272/Auto-Servis-Miloti",
-          "checkedAt": "2026-10-19T03:37:43.589335+00:00",
-          "note": "Detailed own-contact/official social attribution search remains pending; no email guessed."
+          "address": "milot__h@hotmail.com",
+          "status": "publicly-sourced",
+          "sourceUrl": "https://www.facebook.com/automekanikmiloti/",
+          "checkedAt": "2026-10-19T04:01:47.352249+00:00",
+          "note": "Own public business contact panel explicitly lists this email beside the matching business name, Drenas and public main phone. Focused own Instagram search found no attributable separate account. Public listing is not deliverability, consent or ownership confirmation."
         },
         "openingHoursResearch": {
-          "status": "incomplete-directory-week",
-          "sourceUrl": "https://www.autos1000.com/XK/Drenas/443034459209272/Auto-Servis-Miloti",
-          "checkedAt": "2026-10-19T03:37:43.589335+00:00",
-          "sourceAge": "undated mirror",
+          "status": "researched-own-full-week-identity-deferred",
+          "sourceUrl": "https://www.facebook.com/automekanikmiloti/",
+          "checkedAt": "2026-10-19T04:01:47.352249+00:00",
+          "sourceAge": "Own update age not displayed.",
           "week": [
             "08:00-18:00",
             "08:00-18:00",
@@ -1239,10 +1252,12 @@
             "08:00-18:00",
             "08:00-18:00",
             "08:00-18:00",
-            null
+            "closed"
           ],
-          "note": "Sunday missing in directory; own full week remains pending. No imported schedule for unresolved identity."
-        }
+          "limits": "Complete own business-hours dialog read; no owner confirmation. No plan imported while precise premises gate remains unresolved."
+        },
+        "contactResearchFollowupCompletedAt": "2026-10-19T04:01:47.352249+00:00",
+        "contactResearchLimits": "Checked accessible own/contact, directory and attributable social/search sources as recorded. Absence is bounded by those sources; no outreach and no claim of exhaustive web absence."
       },
       {
         "name": "Auto Servis EDI Official",
@@ -1259,16 +1274,22 @@
         "nextCheck": "Read own full contact/site/service posts; separate from AutoEdisDetailing, which is another source identity.",
         "publicBusinessEmail": {
           "address": null,
-          "status": "unresolved",
+          "status": "not-found",
           "sourceUrl": "https://www.facebook.com/p/Auto-Servis-EDI-Official-100057490778408/",
-          "checkedAt": "2026-10-19T03:37:43.589335+00:00",
-          "note": "Detailed own-contact/official social attribution search remains pending; no email guessed."
+          "checkedAt": "2026-10-19T04:01:47.352249+00:00",
+          "note": "Own complete Facebook contact tab lists phone only; focused exact-name Drenas Instagram/email search inspected strongest Edi Motors Instagram lead, which declares Vrion/Sarande and is rejected as another business. No attributable business email found."
         },
         "openingHoursResearch": {
-          "status": "pending",
-          "checkedAt": "2026-10-19T03:37:43.589335+00:00",
-          "note": "No schedule imported. Complete source research before any selection; identity conflicts cannot be bypassed by defaults."
-        }
+          "status": "no-usable-week-found-identity-deferred",
+          "sourceUrls": [
+            "https://www.facebook.com/p/Auto-Servis-EDI-Official-100057490778408/"
+          ],
+          "checkedAt": "2026-10-19T04:01:47.352249+00:00",
+          "sourceAge": "No complete attributable schedule displayed in checked own main/contact views.",
+          "limits": "No Google hours copied. If identity later qualifies and no usable week is found, central assumed defaults are required."
+        },
+        "contactResearchFollowupCompletedAt": "2026-10-19T04:01:47.352249+00:00",
+        "contactResearchLimits": "Checked accessible own/contact, directory and attributable social/search sources as recorded. Absence is bounded by those sources; no outreach and no claim of exhaustive web absence."
       },
       {
         "name": "Autoservis Nagipi",
@@ -1297,7 +1318,9 @@
           "checkedAt": "2026-10-19T03:50:58.648199+00:00",
           "sourceAge": "Only mirrored own post dated2016-07-31; no current weekly plan shown.",
           "limits": "No usable week in own public profile or full directory; no attributable own Instagram found. Identity remains gated by currentcontact proof; no default imported."
-        }
+        },
+        "contactResearchFollowupCompletedAt": "2026-10-19T04:01:47.352249+00:00",
+        "contactResearchLimits": "Checked accessible own/contact, directory and attributable social/search sources as recorded. Absence is bounded by those sources; no outreach and no claim of exhaustive web absence."
       },
       {
         "name": "Autoservis Universal NIKI",
@@ -1332,7 +1355,9 @@
             "closed"
           ],
           "limits": "Complete own public business-hours dialog read. No owner confirmation and no schedule imported while identity/contact/site gate unresolved."
-        }
+        },
+        "contactResearchFollowupCompletedAt": "2026-10-19T04:01:47.352249+00:00",
+        "contactResearchLimits": "Checked accessible own/contact, directory and attributable social/search sources as recorded. Absence is bounded by those sources; no outreach and no claim of exhaustive web absence."
       },
       {
         "name": "Autoservice & Tuning A-Lokaj",
@@ -1371,7 +1396,9 @@
             "closed"
           ],
           "limits": "Complete own public business-hours dialog read. No owner confirmation and no schedule imported while identity/contact/site gate unresolved."
-        }
+        },
+        "contactResearchFollowupCompletedAt": "2026-10-19T04:01:47.352249+00:00",
+        "contactResearchLimits": "Checked accessible own/contact, directory and attributable social/search sources as recorded. Absence is bounded by those sources; no outreach and no claim of exhaustive web absence."
       },
       {
         "name": "Autoservis Fidani",
@@ -1425,7 +1452,9 @@
           "identityConfirmed": false,
           "reason": "No official visible retraceable Place-ID link extracted; no alternative identifier retained.",
           "checkedAt": "2026-10-19T03:37:43.589335+00:00"
-        }
+        },
+        "contactResearchFollowupCompletedAt": "2026-10-19T04:01:47.352249+00:00",
+        "contactResearchLimits": "Checked accessible own/contact, directory and attributable social/search sources as recorded. Absence is bounded by those sources; no outreach and no claim of exhaustive web absence."
       },
       {
         "name": "Autoservis Grezda",
@@ -1466,7 +1495,9 @@
             "closed"
           ],
           "note": "No owner confirmation; no publication without complete Maps identity."
-        }
+        },
+        "contactResearchFollowupCompletedAt": "2026-10-19T04:01:47.352249+00:00",
+        "contactResearchLimits": "Checked accessible own/contact, directory and attributable social/search sources as recorded. Absence is bounded by those sources; no outreach and no claim of exhaustive web absence."
       },
       {
         "name": "Autoservis Elektrika",
@@ -1514,7 +1545,9 @@
           "locationMatched": false,
           "identityConfirmed": false,
           "checkedAt": "2026-10-19T03:37:43.589335+00:00"
-        }
+        },
+        "contactResearchFollowupCompletedAt": "2026-10-19T04:01:47.352249+00:00",
+        "contactResearchLimits": "Checked accessible own/contact, directory and attributable social/search sources as recorded. Absence is bounded by those sources; no outreach and no claim of exhaustive web absence."
       },
       {
         "name": "TAFA POLISH",
@@ -1540,7 +1573,9 @@
           "checkedAt": "2026-10-19T03:50:58.648199+00:00",
           "sourceAge": "Own profile date/update age undisclosed.",
           "limits": "Own bio and focused own-contact/social lookup have no weeklyplan; source-declaredpolishing/ceramic are not openingtimes. Defaults would use centralpreparer only after identity/site gates clear."
-        }
+        },
+        "contactResearchFollowupCompletedAt": "2026-10-19T04:01:47.352249+00:00",
+        "contactResearchLimits": "Checked accessible own/contact, directory and attributable social/search sources as recorded. Absence is bounded by those sources; no outreach and no claim of exhaustive web absence."
       },
       {
         "name": "Auto Larje SUPER / Detailing and Polishing by Edona",
@@ -1560,18 +1595,25 @@
         "nextCheck": "Precise current premises and attribution of the two service contacts; complete own contact/email/week.",
         "publicBusinessEmail": {
           "address": null,
-          "status": "unresolved",
+          "status": "not-found",
           "sourceUrl": "https://www.facebook.com/AutolarjeSUPER",
-          "checkedAt": "2026-10-19T03:37:43.589335+00:00",
-          "note": "Detailed own-contact/official social attribution search remains pending; no email guessed."
+          "checkedAt": "2026-10-19T04:01:47.352249+00:00",
+          "note": "Own SUPER full Facebook contact tab lists phone only, linked own Instagram is unavailable, and official Edona Instagram bio lists its contact without email. Separate focused SUPER and Edona Facebook/email searches found no attributable business email. Collaboration/site identities remain unresolved."
         },
         "openingHoursResearch": {
-          "status": "unusable-own-always-open-claim",
-          "sourceUrl": "https://www.facebook.com/AutolarjeSUPER",
-          "checkedAt": "2026-10-19T03:37:43.589335+00:00",
-          "sourceAge": "not displayed",
-          "note": "Own always-open control alone is not a usable checked weekly plan; no schedule imported before identity clearance."
-        }
+          "status": "no-usable-site-attributed-week-identity-deferred",
+          "sourceUrls": [
+            "https://www.facebook.com/AutolarjeSUPER",
+            "https://www.facebook.com/watch/?v=1534619891780893",
+            "https://www.instagram.com/autodetailingedona/",
+            "https://www.instagram.com/auto_larje_super/"
+          ],
+          "checkedAt": "2026-10-19T04:01:47.352249+00:00",
+          "sourceAge": "Own always-open label does not establish a complete usable workshop plan for the collaboration/site.",
+          "limits": "No attributable full detailing weekly plan found in checked SUPER and Edona own sources. No plan imported while identities/premises remain unresolved; central fallback required if later eligible and still absent."
+        },
+        "contactResearchFollowupCompletedAt": "2026-10-19T04:01:47.352249+00:00",
+        "contactResearchLimits": "Checked accessible own/contact, directory and attributable social/search sources as recorded. Absence is bounded by those sources; no outreach and no claim of exhaustive web absence."
       },
       {
         "name": "DK Polir Detailer",
@@ -1597,7 +1639,9 @@
           "checkedAt": "2026-10-19T03:50:58.648199+00:00",
           "sourceAge": "Own public businesspostdate2026-04-08; no weekly source published.",
           "limits": "No public business contact/week/site; personal-details are not harvested. No default imported before full identity clearance."
-        }
+        },
+        "contactResearchFollowupCompletedAt": "2026-10-19T04:01:47.352249+00:00",
+        "contactResearchLimits": "Checked accessible own/contact, directory and attributable social/search sources as recorded. Absence is bounded by those sources; no outreach and no claim of exhaustive web absence."
       },
       {
         "name": "Autongjyrosje Lali",
@@ -1612,16 +1656,20 @@
         "nextCheck": "Precise independently attributable street/site plus current own contact/weekly/email proof. No inferred branch or address.",
         "publicBusinessEmail": {
           "address": null,
-          "status": "unresolved",
+          "status": "not-found",
           "sourceUrl": "https://www.instagram.com/auto.ngjyrosjelali/",
-          "checkedAt": "2026-10-19T03:37:43.589335+00:00",
-          "note": "Detailed own-contact/official social attribution search remains pending; no email guessed."
+          "checkedAt": "2026-10-19T04:01:47.352249+00:00",
+          "note": "Own Instagram public bio lists two business phones and Terzimahall only, without email or contact website. Focused exact-name Prizren Facebook/email/hours search found no attributable own Facebook or email source."
         },
         "openingHoursResearch": {
-          "status": "pending",
-          "checkedAt": "2026-10-19T03:37:43.589335+00:00",
-          "note": "No schedule imported. Complete source research before any selection; identity conflicts cannot be bypassed by defaults."
-        }
+          "status": "no-usable-week-found-identity-deferred",
+          "sourceUrls": ["https://www.instagram.com/auto.ngjyrosjelali/"],
+          "checkedAt": "2026-10-19T04:01:47.352249+00:00",
+          "sourceAge": "No schedule or attributable own external hours source found.",
+          "limits": "Own Instagram and focused independent source search checked. No default inserted into unresolved identity; a later eligible import must use central assumed fallback if needed."
+        },
+        "contactResearchFollowupCompletedAt": "2026-10-19T04:01:47.352249+00:00",
+        "contactResearchLimits": "Checked accessible own/contact, directory and attributable social/search sources as recorded. Absence is bounded by those sources; no outreach and no claim of exhaustive web absence."
       },
       {
         "name": "Autoservis Lind",
@@ -1667,7 +1715,9 @@
           "limits": "Complete plausible directoryplan, no operator confirmation. No import without complete currentidentity."
         },
         "nextCheck": "New attributable current business contact/alias/directMaplink; do not repeat unchanged name/phone lookups.",
-        "reason": "Full source contact/site/repair evidence, but no attributable currentMaps identity."
+        "reason": "Full source contact/site/repair evidence, but no attributable currentMaps identity.",
+        "contactResearchFollowupCompletedAt": "2026-10-19T04:01:47.352249+00:00",
+        "contactResearchLimits": "Checked accessible own/contact, directory and attributable social/search sources as recorded. Absence is bounded by those sources; no outreach and no claim of exhaustive web absence."
       },
       {
         "name": "Auto servis Balia",
@@ -1714,7 +1764,9 @@
         },
         "nextCheck": "New attributable current business contact/alias/directMaplink; do not repeat unchanged name/phone lookups.",
         "possibleRelatedCanonicalIdentity": "auto-servis-bmw-balia-prishtina",
-        "reason": "A related canonical BMWBalia name has another phone and source; source continuity is unresolved, not a verified newbranch or duplicate."
+        "reason": "A related canonical BMWBalia name has another phone and source; source continuity is unresolved, not a verified newbranch or duplicate.",
+        "contactResearchFollowupCompletedAt": "2026-10-19T04:01:47.352249+00:00",
+        "contactResearchLimits": "Checked accessible own/contact, directory and attributable social/search sources as recorded. Absence is bounded by those sources; no outreach and no claim of exhaustive web absence."
       }
     ],
     "notes": "Prior-day carry-forward is historical, not a fresh check.",
@@ -1722,7 +1774,10 @@
     "mapsIdentityAttempts": 8,
     "fullyVerified": 0,
     "countingNote": "Detailed/currently investigated identities, source-only lead groups, duplicate hints and historical queue are overlapping stages, never a claim that every source-only lead had complete checks.",
-    "selectionReason": "Below-ten outcome is possible after broadening: only Bekimi currently has complete independent contact/site/scope/week plus a retraceable publicMapsPlaceID. Others have explicit current-contact/site/PlaceID gates. Preliminary independent review must resolve Bekimi site/branch attribution before import."
+    "selectionReason": "Coverage broadened from four smaller municipalities into Prishtina and Prizren. One continued identity now fully verified; the other sixteen detailed cases retain specific phone, premises or visible Place-ID gaps. No quantity-driven relaxation.",
+    "fullyVerifiedPublicationCandidates": 1,
+    "sourceContactFollowupStatus": "Completed accessible-source email and hours followups for all 17 detailed identities; identity conflicts remain.",
+    "continuedCandidateNote": "Bekimi is a continued identity from earlier daily manifests, now resolved using new own-source contact/site/week and public Maps evidence; not counted as a second new identity."
   },
   "browser": {
     "accountVisiblyConfirmed": true,
@@ -1846,6 +1901,136 @@
         }
       ],
       "healthy": true
+    },
+    "backupRestore": {
+      "sha256": "e5f220148c2bac125c6258fee421ceda39a79e194f2dd2f6a0639d06856a5923",
+      "tables": {
+        "catalog_state": 73,
+        "workshops": 194,
+        "workshop_contact_details": 10,
+        "workshop_email_addresses": 128,
+        "workshop_email_imports": 5,
+        "workshop_google_places": 194,
+        "workshop_google_ratings": 129,
+        "workshop_opening_hours_imports": 188
+      },
+      "rows": 921,
+      "exactRowsRestored": true,
+      "integrityCheck": "ok",
+      "protectedFiles": true,
+      "comparison": "All fields and values equal; SQLite REAL affinity numeric equivalence retained."
+    },
+    "liveContract": {
+      "profileColumns": [
+        "id",
+        "name",
+        "city",
+        "address",
+        "phone",
+        "phone_note",
+        "whatsapp",
+        "brands",
+        "services",
+        "service_details",
+        "languages",
+        "specialty",
+        "description",
+        "lat",
+        "lng",
+        "sources",
+        "checked_at",
+        "status",
+        "updated_at"
+      ],
+      "profilesSha256": "3a634dd5540f391ae98f5e849300e2a023748f7dea698d8ae70d0b6e5252d59a",
+      "placesSha256": "4eee57d899c38bdc18ef1a31dde1630a418e864de488ee0c97298c8d87718347",
+      "retirementSha256": "45471b5f656e358bc223ef4125af70c3b47e72dbda1f4c9d064b4b62021080fd",
+      "count": 194,
+      "publicApiFieldsMatched": 19,
+      "checkedAt": "2026-10-19T03:58:37.830Z"
+    },
+    "liveInventory": {
+      "checkedAt": "2026-10-19T03:07:36.983Z",
+      "tables": [
+        {
+          "table": "catalog_state",
+          "count": 73,
+          "sha256": "99e93d1777b886391deb716b6d8a28bf00c8b5a248041813e09f91733e7d23e5"
+        },
+        {
+          "table": "workshop_contact_details",
+          "count": 10,
+          "sha256": "feaad907c80bf5f503ebdea1719ee2c7ac21c5ad59cf15028f01bfb83b1952c1"
+        },
+        {
+          "table": "workshop_email_addresses",
+          "count": 128,
+          "sha256": "0b9fb269566a139e185e6af1afb606f4e24476afaeb85ebf305159676c370b46"
+        },
+        {
+          "table": "workshop_email_imports",
+          "count": 5,
+          "sha256": "d95b5451b07569dfb9784289e57488b1982978013aee08b05c9d8fc5af33d9ff"
+        },
+        {
+          "table": "workshop_google_places",
+          "count": 194,
+          "sha256": "2fdebbba673ce1f41627507ec7f22f1d1726ce3ec9e8ab7c0580fb4402d28ea2"
+        },
+        {
+          "table": "workshop_google_ratings",
+          "count": 129,
+          "sha256": "31d5723c7255ae19a0463c46370644b15059f9d477a69dbdb284282373e4a42c"
+        },
+        {
+          "table": "workshop_opening_hours_imports",
+          "count": 188,
+          "sha256": "ddb87500d01d0933d3e639ce9fdb6b3bb4d1875c727eff135725d891256b2612"
+        },
+        {
+          "table": "workshops",
+          "count": 194,
+          "sha256": "f74a44372b05a7f56406f6deff5cadfb99bbbb3b3fe2f713bb97a6db50e03df9"
+        }
+      ],
+      "pending": []
+    },
+    "canonicalLiveComparison": {
+      "checkedAt": "2026-10-19T03:08:21.003Z",
+      "count": 194,
+      "drafts": 0,
+      "allCanonicalProfilesMatched": true,
+      "allPlaceAssignmentsAndCentralHashesMatched": true,
+      "retirementMarkers": 35,
+      "retirementMarkersMatched": true
+    },
+    "prewriteGuard": {
+      "checkedAt": "2026-10-19T03:58:38.597Z",
+      "sha256": "e5f220148c2bac125c6258fee421ceda39a79e194f2dd2f6a0639d06856a5923",
+      "counts": {
+        "catalog_state": 73,
+        "workshops": 194,
+        "workshop_contact_details": 10,
+        "workshop_email_addresses": 128,
+        "workshop_email_imports": 5,
+        "workshop_google_places": 194,
+        "workshop_google_ratings": 129,
+        "workshop_opening_hours_imports": 188
+      },
+      "unchanged": true
+    },
+    "production": {
+      "release": "v1.42.2",
+      "releaseWorkflow": 39135588234,
+      "deployment": "20981e18-6cdb-43f5-8ba7-263820aabe8b",
+      "workerVersion": "3956138d-50f8-4e50-8fb1-8536bbd14582",
+      "traffic": 100,
+      "outcomes": {
+        "windowStart": "2026-10-19T03:00:00Z",
+        "windowEnd": "2026-10-19T03:08:00Z",
+        "ok": 41,
+        "other": 0
+      }
     }
   },
   "provider": {
@@ -1858,7 +2043,12 @@
   },
   "openingHours": {
     "publishedResearchedConfirmed": 0,
-    "publishedAssumedConfirmed": 0
+    "publishedAssumedConfirmed": 0,
+    "preparedResearched": 1,
+    "preparedAssumed": 0,
+    "publishedResearched": 0,
+    "publishedAssumed": 0,
+    "manifestRevision": "1f386cc9677b98eb07452c6e9c4537c4909c3ae56297ac1bc25dbf2f29e635b9"
   },
   "publicBusinessEmailSummary": {
     "publishedWithEmailConfirmed": 0,
@@ -1922,7 +2112,8 @@
       "not_registered": 0,
       "unresolved": 0,
       "newlyProvidedContacts": 0
-    }
+    },
+    "newlyPreparedWorkshopContacts": 1
   },
   "publication": {
     "pr": null,
@@ -1936,7 +2127,63 @@
     "settingsChanged": false
   },
   "errors": [],
-  "validation": {},
+  "validation": {
+    "preliminaryReview": {
+      "head": "6fca85c3b1279c5a2d60f7acfcf6aa870fd47a5e",
+      "standards": "PASS",
+      "spec": "PASS after fresh locality and nearby-homonym comparison",
+      "scope": "Eligibility preparation only; final import/release gates remain pending."
+    },
+    "catalogueMerge": {
+      "dryRun": {
+        "added": ["auto-pjese-servis-bekimi-drenas"],
+        "updated": [],
+        "total": 195,
+        "unexpectedChanges": false
+      },
+      "write": {
+        "localOnly": true,
+        "added": ["auto-pjese-servis-bekimi-drenas"],
+        "updated": [],
+        "total": 195
+      }
+    },
+    "targetedRegression": [
+      "node tests/workshop-source.test.mjs: PASS",
+      "node tests/workshop-import.test.mjs: PASS"
+    ],
+    "catalogueCheck": "PASS:195 profiles/195 unique Place IDs/0 drafts; no existing catalogue rows modified",
+    "hoursDryRun": "PASS:189 records,155 researched/34 assumed; one new researched plan",
+    "emailsDryRun": "PASS:195 covered,128 addresses unchanged; new Bekimi has no sourced email",
+    "isolatedImport": {
+      "checkedAt": "2026-10-19T04:02:23.568Z",
+      "priorRowsPreserved": 921,
+      "priorProfilesPreserved": 194,
+      "newProfiles": 1,
+      "newResearchedHours": 1,
+      "newAssumedHours": 0,
+      "newWhatsAppContacts": 1,
+      "ownerConfirmationInvented": false,
+      "productionTouched": false,
+      "counts": {
+        "catalog_state": 74,
+        "workshops": 195,
+        "workshop_contact_details": 10,
+        "workshop_email_addresses": 128,
+        "workshop_email_imports": 5,
+        "workshop_google_places": 195,
+        "workshop_google_ratings": 129,
+        "workshop_opening_hours_imports": 189
+      }
+    },
+    "toolchains": {
+      "node": "v24.21.0",
+      "go": "go1.27.1 darwin/arm64",
+      "workflowNode": "24",
+      "workflowGo": "1.27.1",
+      "verifiedMatch": true
+    }
+  },
   "handoff": {
     "status": "active-lock-held",
     "lockReleased": false
