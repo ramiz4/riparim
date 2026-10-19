@@ -1772,7 +1772,7 @@
     "notes": "Prior-day carry-forward is historical, not a fresh check.",
     "sourceTriageUniqueLeadGroups": 44,
     "mapsIdentityAttempts": 8,
-    "fullyVerified": 0,
+    "fullyVerified": 1,
     "countingNote": "Detailed/currently investigated identities, source-only lead groups, duplicate hints and historical queue are overlapping stages, never a claim that every source-only lead had complete checks.",
     "selectionReason": "Coverage broadened from four smaller municipalities into Prishtina and Prizren. One continued identity now fully verified; the other sixteen detailed cases retain specific phone, premises or visible Place-ID gaps. No quantity-driven relaxation.",
     "fullyVerifiedPublicationCandidates": 1,
