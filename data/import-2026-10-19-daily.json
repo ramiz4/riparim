@@ -4,8 +4,8 @@
   "timezone": "Europe/Zurich",
   "startedAt": "2026-10-19T03:04:46.968519+00:00",
   "checkedAt": "2026-10-19T04:01:47.352249+00:00",
-  "status": "local-import-prepared-awaiting-tests-review",
-  "completedDateGuard": false,
+  "status": "automatic-daily-completed-explicit-followup-prepared",
+  "completedDateGuard": true,
   "baseCommit": "b0dd6de7d806bdc7d93397cc0fc2875125d2bf80",
   "branch": "codex/daily-import-2026-10-19",
   "before": {
@@ -13,15 +13,17 @@
     "liveComparison": "matched-all-194-profiles-and-assignments-no-drafts-or-pending-changes"
   },
   "after": {
-    "total": 195,
-    "published": 195,
-    "scope": "Prepared local canonical catalogue; no production writes or publication yet.",
-    "localProductionWrites": 0,
-    "canonical": 195
+    "total": 197,
+    "published": 197,
+    "scope": "Prepared canonical inventory including an explicitly requested manual blocker followup. Original completed automatic daily outcome is preserved in originalCompletedDailyResult."
   },
-  "importedWorkshopIds": ["auto-pjese-servis-bekimi-drenas"],
-  "publishedWorkshopIds": [],
-  "publishedCountConfirmed": 0,
+  "importedWorkshopIds": [
+    "auto-pjese-servis-bekimi-drenas",
+    "autoservis-fidani-prishtina",
+    "auto-fellne-vullkanizer-perparimi-drenas"
+  ],
+  "publishedWorkshopIds": ["auto-pjese-servis-bekimi-drenas"],
+  "publishedCountConfirmed": 1,
   "historicalSourcesRead": [
     {
       "path": "data/import-2026-10-03.json",
@@ -1777,7 +1779,8 @@
     "selectionReason": "Coverage broadened from four smaller municipalities into Prishtina and Prizren. One continued identity now fully verified; the other sixteen detailed cases retain specific phone, premises or visible Place-ID gaps. No quantity-driven relaxation.",
     "fullyVerifiedPublicationCandidates": 1,
     "sourceContactFollowupStatus": "Completed accessible-source email and hours followups for all 17 detailed identities; identity conflicts remain.",
-    "continuedCandidateNote": "Bekimi is a continued identity from earlier daily manifests, now resolved using new own-source contact/site/week and public Maps evidence; not counted as a second new identity."
+    "continuedCandidateNote": "Bekimi is a continued identity from earlier daily manifests, now resolved using new own-source contact/site/week and public Maps evidence; not counted as a second new identity.",
+    "scope": "Original automatic daily research snapshot; current resolutions are in the explicit followup manifest."
   },
   "browser": {
     "accountVisiblyConfirmed": true,
@@ -2116,10 +2119,25 @@
     "newlyPreparedWorkshopContacts": 1
   },
   "publication": {
-    "pr": null,
-    "release": null,
-    "newPullRequests": 0,
-    "newReleases": 0
+    "pr": "https://github.com/ramiz4/riparim/pull/219",
+    "release": "v1.43.0",
+    "newPullRequests": 1,
+    "newReleases": 1,
+    "reviewedHead": "e7408955dd04da6c7e003260bc99c3facc587d43",
+    "mergedAt": "2026-10-19T04:15:37Z",
+    "mergeCommit": "c24ca6779adb2a5cc6d6d713be44f53c1c772b86",
+    "releaseWorkflow": 39198576786,
+    "releaseUrl": "https://github.com/ramiz4/riparim/releases/tag/v1.43.0",
+    "releaseCommit": "c24ca6779adb2a5cc6d6d713be44f53c1c772b86",
+    "releaseWorkflowConclusion": "success",
+    "deployment": "ba23c6c5-8873-4ee1-870c-68c81f7f1d76",
+    "workerVersion": "b5772db6-72a7-4b0c-b230-5245fced7df6",
+    "trafficPercent": 100,
+    "releaseArtifactsVerified": 6,
+    "releaseProvenancesVerified": 3,
+    "releasePlanStatements": 438,
+    "releasePlanKey": "workshop-source:2b1d39c05abfef4936d37884941cec567df1304dfa383fbca8f5fd2e758cdd84",
+    "scope": "Original completed automatic daily release; the explicitly requested manual followup has its own publication record."
   },
   "schedule": {
     "requestedLocalTime": "06:00 Europe/Zurich",
@@ -7498,5 +7516,41 @@
       "result": "Initial public town/service search and resulting sources reviewed; limited attributable precise/contact evidence. No quota-filled candidate."
     }
   ],
-  "expandedMunicipalities": ["Prishtinë", "Prizren"]
+  "expandedMunicipalities": ["Prishtinë", "Prizren"],
+  "originalCompletedDailyResult": {
+    "importedWorkshopIds": ["auto-pjese-servis-bekimi-drenas"],
+    "after": {
+      "total": 195,
+      "published": 195,
+      "canonical": 195,
+      "uniquePlaceIds": 195,
+      "scope": "Confirmed complete public API, database and three-language public profile acceptance after verified main release.",
+      "localProductionWrites": 0,
+      "releaseImportApplied": true,
+      "previousProfilesPreserved": 194,
+      "previousCatalogueRowsPreserved": 921,
+      "catalogueRows": 925,
+      "drafts": 0,
+      "pendingChanges": 0
+    },
+    "publishedCountConfirmed": 1,
+    "publishedWorkshopIds": ["auto-pjese-servis-bekimi-drenas"],
+    "completedAt": "2026-10-19T04:25:54.013944+00:00",
+    "release": "v1.43.0",
+    "protectedReceipt": "receipt-2026-10-19.json",
+    "pr": "https://github.com/ramiz4/riparim/pull/219",
+    "mergeCommit": "c24ca6779adb2a5cc6d6d713be44f53c1c772b86"
+  },
+  "explicitUserRequestedFollowups": [
+    {
+      "manifest": "data/import-2026-10-19-blocker-followup.json",
+      "authorization": "Explicit user request after the completed daily run: resolve Fidani, Perparimi and Miloti and publish fully verified businesses.",
+      "preparedNewIds": [
+        "autoservis-fidani-prishtina",
+        "auto-fellne-vullkanizer-perparimi-drenas"
+      ],
+      "publishedNewIds": [],
+      "status": "local-import-prepared-awaiting-tests-review"
+    }
+  ]
 }
