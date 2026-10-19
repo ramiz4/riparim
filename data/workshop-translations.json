@@ -632,6 +632,40 @@
       }
     },
     {
+      "id": "auto-fellne-vullkanizer-perparimi-drenas",
+      "sourceHash": "f636c5e35b1cad5105b365a3426d3ea1c269c8bc2ce2c0e9270762289f318b2f",
+      "sq": {
+        "specialty": "Shërbime gomash · Balancim · Riparim fellnesh",
+        "description": "Auto Fellne & Vullkanizer Përparimi në Drenas ofron shitje, riparim dhe balancim gomash, si dhe riparimin dhe saldimin e fellneve. Faqja e vet në Facebook publikon adresën Jasharaj 94; direktoria e pavarur plotëson lidhjen përmes Rrugës së Jasharajve dhe një kontakti tjetër të biznesit.",
+        "serviceDetails": [
+          "Shitje dhe riparim gomash",
+          "Balancim gomash",
+          "Riparim dhe saldim fellnesh"
+        ],
+        "phoneNote": "Kontakte të tjera të biznesit: +38344353514, +38344777282; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet në Facebook: emri, adresa dhe kontakti kryesor publik",
+          "Postim i vetë biznesit: fasada e servisit, shërbimet e gomave dhe kontakte të tjera",
+          "Direktori e pavarur: rruga, kontakt tjetër dhe shërbimet për goma e fellne"
+        ]
+      },
+      "en": {
+        "specialty": "Tyre service · Balancing · Wheel repairs",
+        "description": "Auto Fellne & Vullkanizer Përparimi in Drenas offers tyre sales, repairs and balancing, as well as wheel repairs and welding. Its own Facebook page lists Jasharaj 94; the independent business directory corroborates the location through Rruga e Jasharajve and an additional business contact.",
+        "serviceDetails": [
+          "Tyre sales and repairs",
+          "Tyre balancing",
+          "Wheel repairs and welding"
+        ],
+        "phoneNote": "Other business contacts: +38344353514, +38344777282; reachability not confirmed",
+        "sourceTitles": [
+          "Own Facebook page: business name, address and public main contact",
+          "Own business post: workshop facade, tyre service and additional business contacts",
+          "Independent business directory: street, additional contact and tyre/wheel services"
+        ]
+      }
+    },
+    {
       "id": "auto-ford-service-prizren",
       "sourceHash": "3b698f793872f1c0f93cdb962bd3dbaebf8ad0860366095d3412b699621df806",
       "sq": {
@@ -3580,6 +3614,36 @@
         "phoneNote": "Public directory contact (Cybo); not confirmed by the business",
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "autoservis-fidani-prishtina",
+      "sourceHash": "a93556d9074dbb1e559a44ad85f05664ad9bf728024f0dcd8ffcaff3e6f55bc0",
+      "sq": {
+        "specialty": "Riparime veturash · Kuti shpejtësie · Turbina",
+        "description": "Autoservis Fidani në rrugën Xhelal Mitrovica në Prishtinë ofron, sipas direktorisë publike të bizneseve, riparime mekanike të veturave, si dhe riparimin e kutive të shpejtësisë dhe turbinave.",
+        "serviceDetails": [
+          "Riparime mekanike të veturave",
+          "Riparim i kutive të shpejtësisë",
+          "Riparim turbinash"
+        ],
+        "phoneNote": "Kontakt publik i biznesit sipas direktorisë; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, rruga, telefoni, shërbimet për vetura dhe kontakti i biznesit"
+        ]
+      },
+      "en": {
+        "specialty": "Car repairs · Gearboxes · Turbochargers",
+        "description": "Autoservis Fidani on Xhelal Mitrovica in Prishtina offers mechanical passenger-car repairs as well as gearbox and turbocharger repairs, according to the public business directory.",
+        "serviceDetails": [
+          "Mechanical passenger-car repairs",
+          "Gearbox repairs",
+          "Turbocharger repairs"
+        ],
+        "phoneNote": "Public business contact from the directory; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, street, telephone, passenger-car services and business contact"
         ]
       }
     },

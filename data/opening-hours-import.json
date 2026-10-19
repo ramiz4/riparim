@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "1f386cc9677b98eb07452c6e9c4537c4909c3ae56297ac1bc25dbf2f29e635b9",
+  "revision": "c1cd2735b0cb195588582671d6633f3f0429e1b51c42c9ff4ebf5e04e1004cb9",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -1941,6 +1941,95 @@
           "09:00-18:00",
           "09:00-18:00",
           "09:00-16:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-fellne-vullkanizer-perparimi-drenas",
+      "expected": {
+        "name": "Auto Fellne & Vullkanizer Përparimi",
+        "city": "Drenas",
+        "address": "Jasharaj 94, Drenas",
+        "phone": "+38349444490"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-19",
+        "source": "https://stgres.gjirafa.biz/vullkanizer-prparimi-1",
+        "sourceName": "Vullkanizer Përparimi",
+        "researchStatus": "Gefunden (unabhängiges Firmenverzeichnis)",
+        "notes": "Plausible complete week from an attributable independent directory. Source update age unavailable; checked today is not operator confirmation. Own/social sources did not establish a usable own full week. No Google hours copied.",
+        "originalWeek": [
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
           "Geschlossen"
         ],
         "earlierPlan": ""
@@ -11013,6 +11102,95 @@
           "07:30-20:00",
           "07:30-20:00",
           "07:30-20:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "autoservis-fidani-prishtina",
+      "expected": {
+        "name": "Autoservis Fidani",
+        "city": "Prishtina",
+        "address": "Xhelal Mitrovica, Prishtinë",
+        "phone": "+38344192943"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "15:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-19",
+        "source": "https://stgres.gjirafa.biz/autoservis-fidani-1",
+        "sourceName": "Autoservis Fidani",
+        "researchStatus": "Gefunden (unabhängiges Firmenverzeichnis)",
+        "notes": "Plausible complete week from an attributable independent directory. Source update age unavailable; checked today is not operator confirmation. Own/social sources did not establish a usable own full week. No Google hours copied.",
+        "originalWeek": [
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "09:00-15:00",
           "Geschlossen"
         ],
         "earlierPlan": ""

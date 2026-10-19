@@ -6,7 +6,7 @@
   "authorization": "User explicitly requested fresh blocker resolution and reviewed publication for Fidani, Perparimi and Miloti after completion of the daily import. This is not a second automatic daily run.",
   "baseCommit": "c24ca6779adb2a5cc6d6d713be44f53c1c772b86",
   "startedAt": "2026-10-19T06:09:22.208113+00:00",
-  "status": "research-in-progress",
+  "status": "local-import-prepared-awaiting-tests-review",
   "dailyCompletionPreserved": true,
   "previousDailyReceipt": "receipt-2026-10-19.json",
   "candidates": [
@@ -14,7 +14,7 @@
       "name": "Auto fellne vullkanizer Perparimi",
       "city": "Drenas",
       "checkedAt": "2026-10-19T03:37:43.589335+00:00",
-      "status": "site-clarification-awaiting-independent-review",
+      "status": "eligible-preparing-guarded-import",
       "sourceUrls": [
         "https://www.autos1000.com/XK/Drenas/350207982437071/Auto-fellne-vullkanizer-Perparimi",
         "https://www.facebook.com/350207982437071/"
@@ -23,13 +23,13 @@
         "publicPhones": ["+38349444490"]
       },
       "reason": "New independent street/second-contact evidence plus own-account and facade linkage prepared for independent eligibility review; no import before approval.",
-      "nextCheck": "Current own precise premises or manual own businessMapslink resolving location continuity. ",
+      "nextCheck": "Complete every intended contact-number WhatsApp check and central import/release gates.",
       "publicBusinessEmail": {
         "address": null,
         "status": "not-found",
         "sourceUrl": "https://www.autos1000.com/XK/Drenas/350207982437071/Auto-fellne-vullkanizer-Perparimi",
-        "checkedAt": "2026-10-19T04:01:47.352249+00:00",
-        "note": "Own full Facebook contact tab lists telephone only; full directory and focused exact-name/phone Instagram/email search yielded no attributable business email. No guessed address or private email-finder source used."
+        "checkedAt": "2026-10-19T06:20:50.167Z",
+        "note": "Own full Facebook contact tab lists telephone only; full directory and focused exact-name/phone Instagram/email search yielded no attributable business email. No guessed address or private email-finder source used. New full independent directory also contains no email."
       },
       "openingHoursResearch": {
         "status": "researched-directory-full-week",
@@ -53,9 +53,9 @@
         "officialVisibleLinkRead": true,
         "nameMatched": true,
         "phoneMatched": true,
-        "locationMatched": false,
+        "locationMatched": true,
         "directIdReturn": "completed-same-business",
-        "identityConfirmed": false,
+        "identityConfirmed": true,
         "checkedAt": "2026-10-19T06:13:59.773493+00:00",
         "directIdReturnWithMismatchedFallbackPassed": true,
         "ownWebsiteAccountMatched": true,
@@ -81,7 +81,9 @@
         "selectedPhone": "+38349444490",
         "selectedPhoneSource": "Explicit current own public contact field; exact selected Maps phone matches.",
         "otherOwnSignagePhone": "+38344777282",
-        "uncertainPhotoDigits": "One photographed mobile-number suffix is not confidently legible and is not inferred or adopted. No assertion that a different number is current or a replacement."
+        "uncertainPhotoDigits": "One photographed mobile-number suffix is not confidently legible and is not inferred or adopted. No assertion that a different number is current or a replacement.",
+        "intendedContacts": ["+38349444490", "+38344353514", "+38344777282"],
+        "phoneSelection": "Main number comes from explicit current own contact field. Additional legible contacts are corroborated by own signage; one also by the independent directory. Unreadable photo digits are not adopted."
       },
       "previousBlockerReason": "Own address is Jasharaj94; current publicMaps premises do not clearly corroborate the same exact site. Name/contact match alone does not resolve site continuity."
     },
@@ -130,7 +132,7 @@
           "08:00-18:00",
           "closed"
         ],
-        "limits": "Complete own business-hours dialog read; no owner confirmation. No plan imported while precise premises gate remains unresolved."
+        "limits": "Own full-week research retained; no owner confirmation. Street evidence now obtained, but no attributable active Maps identity. Conflicting public email spellings remain unresolved and unusable."
       },
       "contactResearchFollowupCompletedAt": "2026-10-19T04:01:47.352249+00:00",
       "contactResearchLimits": "Checked accessible own/contact, directory and attributable social/search sources as recorded. Absence is bounded by those sources; no outreach and no claim of exhaustive web absence.",
@@ -188,7 +190,7 @@
           "09:00-15:00",
           "closed"
         ],
-        "note": "Plausible full week; no owner confirmation. Publication blocked by missing retraceablePlaceID."
+        "note": "Plausible independently sourced full week; source undated, no owner confirmation. Identity gate now resolved; reviewed import/release acceptance still pending."
       },
       "googleIdentity": {
         "method": "public-maps-ui",
@@ -341,7 +343,245 @@
       "healthy": true
     },
     "openPullRequests": 0,
-    "activeReleaseJobs": 0
+    "activeReleaseJobs": 0,
+    "backupRestore": {
+      "checkedAt": "2026-10-19T06:17:16.249977+00:00",
+      "sha256": "64a5f8bc60308329f36d5dfd4fdffc7ba223a014087f7efa4f743aedcede346b",
+      "rows": 925,
+      "tables": {
+        "catalog_state": 74,
+        "workshops": 195,
+        "workshop_contact_details": 10,
+        "workshop_email_addresses": 128,
+        "workshop_email_imports": 5,
+        "workshop_google_places": 195,
+        "workshop_google_ratings": 129,
+        "workshop_opening_hours_imports": 189
+      },
+      "exactRowsRestored": true,
+      "integrityCheck": "ok",
+      "protectedFiles": true
+    },
+    "liveInventory": {
+      "checkedAt": "2026-10-19T06:19:00.328Z",
+      "profiles": 195,
+      "profileFieldsMatched": 19,
+      "allPlaceAssignmentsAndHashesMatched": true,
+      "retirementMarkers": 35,
+      "tables": [
+        {
+          "table": "catalog_state",
+          "count": 74,
+          "sha256": "36cb3e1e93a438e137fe3d4c0308ce72fd43f8eedf9b95d05e6fd2184f36dc6b"
+        },
+        {
+          "table": "workshops",
+          "count": 195,
+          "sha256": "70b37c002403ac5aea2b846a9470655f8855f806aeb7171cb32a164d4a7ec578"
+        },
+        {
+          "table": "workshop_contact_details",
+          "count": 10,
+          "sha256": "feaad907c80bf5f503ebdea1719ee2c7ac21c5ad59cf15028f01bfb83b1952c1"
+        },
+        {
+          "table": "workshop_email_addresses",
+          "count": 128,
+          "sha256": "0b9fb269566a139e185e6af1afb606f4e24476afaeb85ebf305159676c370b46"
+        },
+        {
+          "table": "workshop_email_imports",
+          "count": 5,
+          "sha256": "d95b5451b07569dfb9784289e57488b1982978013aee08b05c9d8fc5af33d9ff"
+        },
+        {
+          "table": "workshop_google_places",
+          "count": 195,
+          "sha256": "1267720f75e6549675f5e5f527ada24c04d6bee2b63830bba943c5a9349826af"
+        },
+        {
+          "table": "workshop_google_ratings",
+          "count": 129,
+          "sha256": "31d5723c7255ae19a0463c46370644b15059f9d477a69dbdb284282373e4a42c"
+        },
+        {
+          "table": "workshop_opening_hours_imports",
+          "count": 189,
+          "sha256": "3e2690761bc8055f5687d41f3598ed5b1edfe1480c439c83a9d76f2264cde5a0"
+        }
+      ]
+    },
+    "outcomes": {
+      "from": "2026-10-19T06:05:00Z",
+      "to": "2026-10-19T06:18:59Z",
+      "workerVersion": "b5772db6-72a7-4b0c-b230-5245fced7df6",
+      "ok": 84,
+      "other": 0,
+      "boundedSample": true
+    },
+    "release": "v1.43.0",
+    "drafts": 0,
+    "pendingChanges": 0
   },
-  "checkedAt": "2026-10-19T06:13:59.773493+00:00"
+  "checkedAt": "2026-10-19T06:24:11.757088+00:00",
+  "whatsappVerification": {
+    "checks": [
+      {
+        "workshopIds": ["auto-fellne-vullkanizer-perparimi-drenas"],
+        "phone": "+38344353514",
+        "checkedAt": "2026-10-19T06:16:24.589Z",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "registered"
+      },
+      {
+        "workshopIds": ["auto-fellne-vullkanizer-perparimi-drenas"],
+        "phone": "+38344777282",
+        "checkedAt": "2026-10-19T06:17:30.805Z",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "not_registered"
+      },
+      {
+        "workshopIds": ["auto-servis-miloti-drenas"],
+        "phone": "+38349691333",
+        "checkedAt": "2026-10-19T06:18:42.160Z",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "registered"
+      },
+      {
+        "workshopIds": ["auto-servis-miloti-drenas"],
+        "phone": "+38344698910",
+        "checkedAt": "2026-10-19T06:19:30.558Z",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "unresolved",
+        "reason": "Completed row displays a different international country prefix than the exact entered number. No prefix conversion or positive registration claim for the requested number."
+      },
+      {
+        "workshopIds": ["autoservis-fidani-prishtina"],
+        "phone": "+38344192943",
+        "checkedAt": "2026-10-19T03:46:08.734Z",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "registered",
+        "evidence": "Completed exact-number account result; no chat or contact action. Missing MapsPlaceID still blocks publication.",
+        "reusedSameDayEvidence": true,
+        "sourceManifest": "data/import-2026-10-19-daily.json",
+        "reason": "Exact same independently attributed number and site; same-day completed lookup reused, not counted again as a new lookup."
+      },
+      {
+        "workshopIds": ["auto-fellne-vullkanizer-perparimi-drenas"],
+        "phone": "+38349444490",
+        "checkedAt": "2026-10-19T03:48:06.979Z",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "registered",
+        "evidence": "Completed exact-number account result; no chat or contact action. Premises continuity still blocks publication.",
+        "reusedSameDayEvidence": true,
+        "sourceManifest": "data/import-2026-10-19-daily.json",
+        "reason": "Exact same independently attributed number and site; same-day completed lookup reused, not counted again as a new lookup."
+      }
+    ],
+    "summary": {
+      "newUniqueLookups": 4,
+      "newRegistered": 2,
+      "newNotRegistered": 1,
+      "newUnresolved": 1,
+      "reusedSameDayRegistered": 2,
+      "allRelevantUniqueNumbers": 6,
+      "registeredAcrossRelevantNumbers": 4,
+      "notRegisteredAcrossRelevantNumbers": 1,
+      "unresolvedAcrossRelevantNumbers": 1,
+      "preparedNewWorkshopContacts": 2,
+      "newlyProvidedContacts": 0
+    },
+    "privacy": "No private chats, account/profile names or screenshots retained; no contact/chat/message/call/invitation action performed."
+  },
+  "before": {
+    "total": 195,
+    "published": 195,
+    "catalogueRows": 925
+  },
+  "validation": {
+    "preliminarySpecReview": "PASS Fidani/Perparimi eligibility; Miloti remains deferred",
+    "preliminaryStandards": "Two stale blocker notes corrected; final review pending",
+    "catalogueMerge": {
+      "dryRun": {
+        "added": [
+          "autoservis-fidani-prishtina",
+          "auto-fellne-vullkanizer-perparimi-drenas"
+        ],
+        "updated": [],
+        "total": 197
+      },
+      "write": {
+        "localOnly": true,
+        "added": [
+          "autoservis-fidani-prishtina",
+          "auto-fellne-vullkanizer-perparimi-drenas"
+        ],
+        "updated": [],
+        "total": 197
+      }
+    },
+    "catalogueCheck": "PASS:197 profiles,197 unique confirmed Place IDs,0 drafts",
+    "hoursDryRun": "PASS:191 records,157 researched/34 assumed; two new researched plans",
+    "emailDryRun": "PASS:197 covered,129 addresses; one new publicly sourced address",
+    "targetedRegression": ["workshop-source:PASS", "workshop-import:PASS"],
+    "isolatedImport": {
+      "checkedAt": "2026-10-19T06:23:33.867Z",
+      "priorRowsPreserved": 925,
+      "previousProfilesPreserved": 195,
+      "newProfiles": 2,
+      "newResearchedHours": 2,
+      "newAssumedHours": 0,
+      "newWhatsAppContacts": 2,
+      "newBusinessEmails": 1,
+      "ownerConfirmationInvented": false,
+      "productionTouched": false,
+      "counts": {
+        "catalog_state": 75,
+        "workshops": 197,
+        "workshop_contact_details": 10,
+        "workshop_email_addresses": 129,
+        "workshop_email_imports": 5,
+        "workshop_google_places": 197,
+        "workshop_google_ratings": 129,
+        "workshop_opening_hours_imports": 191
+      }
+    },
+    "toolchains": {
+      "workflowNode": "24",
+      "workflowGo": "1.27.1",
+      "node": "v24.21.0",
+      "go": "go1.27.1 darwin/arm64"
+    }
+  },
+  "importedWorkshopIds": [
+    "autoservis-fidani-prishtina",
+    "auto-fellne-vullkanizer-perparimi-drenas"
+  ],
+  "after": {
+    "total": 197,
+    "published": 197,
+    "scope": "Prepared canonical inventory; actual followup publication remains zero.",
+    "localProductionWrites": 0
+  },
+  "openingHours": {
+    "preparedResearched": 2,
+    "preparedAssumed": 0,
+    "publishedResearched": 0,
+    "publishedAssumed": 0,
+    "revision": "c1cd2735b0cb195588582671d6633f3f0429e1b51c42c9ff4ebf5e04e1004cb9"
+  },
+  "publicBusinessEmailSummary": {
+    "preparedWithEmail": 1,
+    "preparedWithoutEmail": 1,
+    "publishedWithEmail": 0,
+    "publishedWithoutEmail": 0,
+    "deferredWithConflictingEmail": 1
+  },
+  "researchSummary": {
+    "requestedIdentities": 3,
+    "fullyVerifiedPublicationCandidates": 2,
+    "deferredIdentities": 1,
+    "duplicates": 0,
+    "confirmedMapsChecks": 2
+  }
 }

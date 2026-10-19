@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-19T03:59:30.114Z",
+  "updatedAt": "2026-10-19T06:21:15.633Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 195,
+    "published": 197,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 195 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 195,
+    "reason": "All 197 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 197,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -1100,6 +1100,60 @@
             "https://faqet-e-verdha.cybo.com/XK/prizreni/riparimi-i-makinave-"
           ],
           "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
+        }
+      }
+    },
+    {
+      "id": "auto-fellne-vullkanizer-perparimi-drenas",
+      "name": "Auto Fellne & Vullkanizer Përparimi",
+      "city": "Drenas",
+      "address": "Jasharaj 94, Drenas",
+      "phone": "+38349444490",
+      "phoneNote": "Weitere Geschäftskontakte: +38344353514, +38344777282; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349444490",
+      "brands": [],
+      "services": ["Reifen & Klima"],
+      "serviceDetails": [
+        "Verkauf und Reparatur von Reifen",
+        "Auswuchten von Reifen",
+        "Reparatur und Schweißen von Felgen"
+      ],
+      "languages": [],
+      "specialty": "Reifenservice · Auswuchten · Felgenreparatur",
+      "description": "Auto Fellne & Vullkanizer Përparimi in Drenas bietet Reifenverkauf, Reifenreparaturen und Auswuchten sowie die Reparatur und das Schweißen von Felgen an. Die eigene Facebook-Seite nennt Jasharaj 94; das unabhängige Firmenverzeichnis ergänzt die Zuordnung über die Rruga e Jasharajve und einen weiteren Geschäftskontakt.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/profile.php?id=100063575593193",
+          "title": "Eigene Facebook-Seite: Betriebsname, Anschrift und öffentlicher Hauptkontakt",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/photo/?fbid=1691234263005744&set=pcb.1691234986339005",
+          "title": "Eigener Betriebsbeitrag: Werkstattfassade, Reifenservice und weitere Geschäftskontakte",
+          "kind": "official"
+        },
+        {
+          "url": "https://stgres.gjirafa.biz/vullkanizer-prparimi-1",
+          "title": "Unabhängiges Firmenverzeichnis: Straße, weiterer Geschäftskontakt und Reifen-/Felgenleistungen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-19",
+      "status": "published",
+      "updatedAt": "2026-10-19T06:20:50.167Z",
+      "google": {
+        "placeId": "ChIJ_z8XrKhvUxMRgfX76ea_IaQ",
+        "matchedAt": "2026-10-19T06:20:50.167Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.facebook.com/profile.php?id=100063575593193",
+            "https://stgres.gjirafa.biz/vullkanizer-prparimi-1"
+          ],
+          "note": "Public Maps direct Place-ID return with London fallback matches the own business identity/main phone and links the exact own Facebook account. Independent road/second-contact evidence and matching own facade resolve the previous premises ambiguity. No Google business fields retained or owner confirmation claimed."
         }
       }
     },
@@ -6320,6 +6374,47 @@
             "https://www.google.com/maps/?cid=13500840597129851265"
           ],
           "note": "Individual Google listing confirmed using an independently evidenced phone number, workshop name and precise address; CID and actual Place ID designate the same entry. No Google business details or reviews adopted into the profile source."
+        }
+      }
+    },
+    {
+      "id": "autoservis-fidani-prishtina",
+      "name": "Autoservis Fidani",
+      "city": "Prishtina",
+      "address": "Xhelal Mitrovica, Prishtinë",
+      "phone": "+38344192943",
+      "phoneNote": "Öffentlicher Geschäftskontakt laut Firmenverzeichnis; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344192943",
+      "brands": [],
+      "services": ["Motor & Getriebe"],
+      "serviceDetails": [
+        "Mechanische Reparaturen an Pkw",
+        "Getriebereparaturen",
+        "Reparatur von Turboladern"
+      ],
+      "languages": [],
+      "specialty": "Pkw-Reparaturen · Getriebe · Turbolader",
+      "description": "Autoservis Fidani an der Xhelal Mitrovica in Prishtina bietet laut öffentlichem Firmenverzeichnis mechanische Reparaturen an Pkw sowie die Reparatur von Getrieben und Turboladern an.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://stgres.gjirafa.biz/autoservis-fidani-1",
+          "title": "Öffentliches Firmenverzeichnis: Name, Straße, Telefon, Pkw-Leistungen und Geschäftskontakt",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-19",
+      "status": "published",
+      "updatedAt": "2026-10-19T06:20:50.167Z",
+      "google": {
+        "placeId": "ChIJq6pjpCCfVBMRyKzxdASnYkE",
+        "matchedAt": "2026-10-19T06:20:50.167Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-fidani-1"],
+          "note": "Visible official public Maps result link and direct Place-ID return with London fallback identify the same active workshop. Name, exact independently sourced phone and street match. No Google business fields retained; ownership is not claimed."
         }
       }
     },

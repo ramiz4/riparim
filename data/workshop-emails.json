@@ -487,6 +487,20 @@
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; Instagram bio checked; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
     },
     {
+      "workshopId": "auto-fellne-vullkanizer-perparimi-drenas",
+      "matchedName": "Auto Fellne & Vullkanizer Përparimi",
+      "matchedPhone": "+38349444490",
+      "matchedCity": "Drenas",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://www.facebook.com/profile.php?id=100063575593193",
+        "https://www.facebook.com/photo/?fbid=1691234263005744&set=pcb.1691234986339005",
+        "https://stgres.gjirafa.biz/vullkanizer-prparimi-1"
+      ],
+      "notes": "Own Facebook contact/Info, attributable social search and full independent directory checked; no business email found. No guessed address or outreach."
+    },
+    {
       "workshopId": "auto-ford-service-prizren",
       "matchedName": "Auto Ford service",
       "matchedPhone": "+38344605241",
@@ -2728,6 +2742,26 @@
         "https://www.google.com/search?q=%22049%20850%20252%22%20Peja"
       ],
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. Public Instagram candidates rechecked while logged in with their complete bio. At least one contact page was not publicly available. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
+    },
+    {
+      "workshopId": "autoservis-fidani-prishtina",
+      "matchedName": "Autoservis Fidani",
+      "matchedPhone": "+38344192943",
+      "matchedCity": "Prishtina",
+      "emails": [
+        {
+          "address": "autoservis.fidani@gmail.com",
+          "sourceUrls": ["https://stgres.gjirafa.biz/autoservis-fidani-1"],
+          "checkedAt": "2026-10-19",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://stgres.gjirafa.biz/autoservis-fidani-1",
+        "https://www.instagram.com/autoservisfidani/"
+      ],
+      "notes": "Explicit public directory business email beside matching phone/street/name; official-social search retained no unrelated account. No deliverability, ownership or consent claim."
     },
     {
       "workshopId": "autoservis-keni-prishtina",
