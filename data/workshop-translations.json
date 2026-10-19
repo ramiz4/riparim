@@ -1088,6 +1088,40 @@
       }
     },
     {
+      "id": "auto-pjese-servis-bekimi-drenas",
+      "sourceHash": "e6186c819c5b8167b2eb256efb1b990174e9de237af81d5bcd4e2e198eb14068",
+      "sq": {
+        "specialty": "Mirëmbajtje veturash · Ndërrim motorësh · Riparime",
+        "description": "Auto Pjesë & Servis Bekimi në Korroticë e Epërme pranë Drenasit ofron pjesë auto, mirëmbajtje dhe riparime të veturave. Postimet e publikuara nga vetë biznesi përshkruajnë ndërrimin dhe montimin e motorëve, si dhe montimin e turbinave, injektorëve dhe pompave të naftës.",
+        "serviceDetails": [
+          "Mirëmbajtje dhe riparime të veturave",
+          "Ndërrim dhe montim motorësh",
+          "Montim turbinash, injektorësh dhe pompash të naftës"
+        ],
+        "phoneNote": "Kontakte të tjera të publikuara të biznesit: +38344157000, +38349204090; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vetë biznesit në Facebook: emri, adresa e saktë dhe kontaktet publike",
+          "Profili i vetë biznesit në Instagram: identiteti dhe kontaktet publike",
+          "Direktori me postime të vetë biznesit: mirëmbajtje dhe riparime veturash"
+        ]
+      },
+      "en": {
+        "specialty": "Car maintenance · Engine replacement · Repairs",
+        "description": "Auto Pjesë & Servis Bekimi in Korroticë e Epërme near Drenas offers car parts, passenger-car maintenance and repairs. Posts published by the business describe engine replacement and fitting, as well as fitting turbochargers, injectors and diesel pumps.",
+        "serviceDetails": [
+          "Passenger-car maintenance and repairs",
+          "Engine replacement and fitting",
+          "Fitting turbochargers, injectors and diesel pumps"
+        ],
+        "phoneNote": "Other published business contacts: +38344157000, +38349204090; reachability not confirmed",
+        "sourceTitles": [
+          "Own Facebook page: name, precise address and public business contacts",
+          "Own Instagram profile: business identity and public contacts",
+          "Directory carrying own-business posts: passenger-car maintenance and repairs"
+        ]
+      }
+    },
+    {
       "id": "auto-pjese-servis-fatosi-gracanice",
       "sourceHash": "75e642b7c2620d14468f9cbfda044f68a340db19ec3a8baf681e4d7ad8bc211d",
       "sq": {

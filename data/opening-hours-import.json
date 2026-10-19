@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "aacc8cf613f15e4c5f8137c089363e71d1084a073708582bf8b0d37ea28553f8",
+  "revision": "1f386cc9677b98eb07452c6e9c4537c4909c3ae56297ac1bc25dbf2f29e635b9",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -3365,6 +3365,95 @@
           "09:00-19:00",
           "09:00-19:00",
           "09:00-19:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-pjese-servis-bekimi-drenas",
+      "expected": {
+        "name": "Auto Pjesë & Servis Bekimi",
+        "city": "Drenas",
+        "address": "Doktor Ibrahim Rugova 387, Korroticë e Epërme, Drenas",
+        "phone": "+38349157000"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-19",
+        "source": "https://www.facebook.com/autoservisbekimi/",
+        "sourceName": "Auto Pjesë & Servis Bekimi",
+        "researchStatus": "Gefunden (eigener Betriebsauftritt)",
+        "notes": "Complete own public business-hours dialog. Source update age not displayed; viewing date is not operator confirmation. Own precise site and contact match. No Google hours copied.",
+        "originalWeek": [
+          "08:30-18:00",
+          "08:30-18:00",
+          "08:30-18:00",
+          "08:30-18:00",
+          "08:30-18:00",
+          "08:30-18:00",
           "Geschlossen"
         ],
         "earlierPlan": ""

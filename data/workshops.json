@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-18T14:03:08.403Z",
+  "updatedAt": "2026-10-19T03:59:30.114Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 194,
+    "published": 195,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 194 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 194,
+    "reason": "All 195 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 195,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -1901,6 +1901,60 @@
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJx-kdM1l-VBMRwc2PmJdYa4Q"
           ],
           "note": "The business's own history establishes that Auto Servis INOVATOR continued as INOVATOR Automotive. Its own contact details and direct Maps link confirm the same Google identity even without a published phone number there."
+        }
+      }
+    },
+    {
+      "id": "auto-pjese-servis-bekimi-drenas",
+      "name": "Auto Pjesë & Servis Bekimi",
+      "city": "Drenas",
+      "address": "Doktor Ibrahim Rugova 387, Korroticë e Epërme, Drenas",
+      "phone": "+38349157000",
+      "phoneNote": "Weitere veröffentlichte Betriebskontakte: +38344157000, +38349204090; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349157000",
+      "brands": [],
+      "services": ["Inspektion & Wartung", "Motor & Getriebe"],
+      "serviceDetails": [
+        "Wartung und Reparatur von Pkw",
+        "Austausch und Einbau von Motoren",
+        "Einbau von Turboladern, Einspritzdüsen und Dieselpumpen"
+      ],
+      "languages": [],
+      "specialty": "Pkw-Wartung · Motorentausch · Reparaturen",
+      "description": "Auto Pjesë & Servis Bekimi in Korroticë e Epërme bei Drenas bietet neben Autoteilen auch Wartung und Reparatur von Pkw an. Eigene veröffentlichte Betriebsbeiträge beschreiben den Austausch und Einbau von Motoren sowie den Einbau von Turboladern, Einspritzdüsen und Dieselpumpen.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/autoservisbekimi/",
+          "title": "Eigene Facebook-Seite: Name, genaue Anschrift und öffentliche Geschäftskontakte",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autopjese_servisbekimi/",
+          "title": "Eigenes Instagram-Profil: Betriebsidentität und öffentliche Geschäftskontakte",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.autos1000.com/XK/Drenas/106698517935482/Auto-Pjes%C3%AB-%26-Servis-Bekimi",
+          "title": "Verzeichnis mit eigenen Betriebsbeiträgen: Pkw-Wartung und Reparaturen",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-19",
+      "status": "published",
+      "updatedAt": "2026-10-19T03:58:58.326Z",
+      "google": {
+        "placeId": "ChIJFRhrVwB7UxMR5Jv5N91gNww",
+        "matchedAt": "2026-10-19T03:58:58.326Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.facebook.com/autoservisbekimi/",
+            "https://www.instagram.com/autopjese_servisbekimi/"
+          ],
+          "note": "Public Maps UI: business identity, exact independently sourced main phone, named road and locality agree. Nearby homonyms have different phones and locations. Official visible Place-ID link returned the same active entry with a mismatched London fallback; no Google business fields retained."
         }
       }
     },
