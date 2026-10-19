@@ -1,0 +1,347 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-19",
+  "timezone": "Europe/Zurich",
+  "kind": "explicit-user-requested-followup",
+  "authorization": "User explicitly requested fresh blocker resolution and reviewed publication for Fidani, Perparimi and Miloti after completion of the daily import. This is not a second automatic daily run.",
+  "baseCommit": "c24ca6779adb2a5cc6d6d713be44f53c1c772b86",
+  "startedAt": "2026-10-19T06:09:22.208113+00:00",
+  "status": "research-in-progress",
+  "dailyCompletionPreserved": true,
+  "previousDailyReceipt": "receipt-2026-10-19.json",
+  "candidates": [
+    {
+      "name": "Auto fellne vullkanizer Perparimi",
+      "city": "Drenas",
+      "checkedAt": "2026-10-19T03:37:43.589335+00:00",
+      "status": "site-clarification-awaiting-independent-review",
+      "sourceUrls": [
+        "https://www.autos1000.com/XK/Drenas/350207982437071/Auto-fellne-vullkanizer-Perparimi",
+        "https://www.facebook.com/350207982437071/"
+      ],
+      "independentEvidence": {
+        "publicPhones": ["+38349444490"]
+      },
+      "reason": "New independent street/second-contact evidence plus own-account and facade linkage prepared for independent eligibility review; no import before approval.",
+      "nextCheck": "Current own precise premises or manual own businessMapslink resolving location continuity. ",
+      "publicBusinessEmail": {
+        "address": null,
+        "status": "not-found",
+        "sourceUrl": "https://www.autos1000.com/XK/Drenas/350207982437071/Auto-fellne-vullkanizer-Perparimi",
+        "checkedAt": "2026-10-19T04:01:47.352249+00:00",
+        "note": "Own full Facebook contact tab lists telephone only; full directory and focused exact-name/phone Instagram/email search yielded no attributable business email. No guessed address or private email-finder source used."
+      },
+      "openingHoursResearch": {
+        "status": "researched-directory-full-week",
+        "sourceUrl": "https://stgres.gjirafa.biz/vullkanizer-prparimi-1",
+        "checkedAt": "2026-10-19T06:13:59.773493+00:00",
+        "sourceAge": "Undated directory; own main/contact source did not establish a full week.",
+        "week": [
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "closed"
+        ],
+        "limits": "Directory is attributable through street, second own-signage contact and tyre/wheel scope. No Google hours copied or owner confirmation invented."
+      },
+      "googleIdentity": {
+        "placeId": "ChIJ_z8XrKhvUxMRgfX76ea_IaQ",
+        "method": "public-maps-ui",
+        "officialVisibleLinkRead": true,
+        "nameMatched": true,
+        "phoneMatched": true,
+        "locationMatched": false,
+        "directIdReturn": "completed-same-business",
+        "identityConfirmed": false,
+        "checkedAt": "2026-10-19T06:13:59.773493+00:00",
+        "directIdReturnWithMismatchedFallbackPassed": true,
+        "ownWebsiteAccountMatched": true,
+        "ownFacadeMatched": true
+      },
+      "contactResearchFollowupCompletedAt": "2026-10-19T04:01:47.352249+00:00",
+      "contactResearchLimits": "Checked accessible own/contact, directory and attributable social/search sources as recorded. Absence is bounded by those sources; no outreach and no claim of exhaustive web absence.",
+      "previousCheckIsHistorical": true,
+      "followupCheckedAt": "2026-10-19T06:13:59.773493+00:00",
+      "id": "auto-fellne-vullkanizer-perparimi-drenas",
+      "newIndependentSource": "https://stgres.gjirafa.biz/vullkanizer-prparimi-1",
+      "followupEvidence": {
+        "ownSource": "https://www.facebook.com/profile.php?id=100063575593193",
+        "ownPost": "https://www.facebook.com/photo/?fbid=1691234263005744&set=pcb.1691234986339005",
+        "independentStreet": "Rruga e Jasharajve, Drenas",
+        "ownAddress": "Jasharaj 94, Drenas",
+        "additionalIndependentPhone": "+38344353514",
+        "scope": [
+          "wheel repair and welding",
+          "tyre sales, repair and balancing"
+        ],
+        "siteAssessment": "Independent directory now corroborates the named Jasharaj road and a second contact also legible on own business signage. The selected Maps entry links exactly the same own Facebook business account and its facade matches the own business photograph. Earlier offset from an automatically generated Facebook navigation marker alone is not a competing premises declaration. Require independent review before calling the site resolved.",
+        "selectedPhone": "+38349444490",
+        "selectedPhoneSource": "Explicit current own public contact field; exact selected Maps phone matches.",
+        "otherOwnSignagePhone": "+38344777282",
+        "uncertainPhotoDigits": "One photographed mobile-number suffix is not confidently legible and is not inferred or adopted. No assertion that a different number is current or a replacement."
+      },
+      "previousBlockerReason": "Own address is Jasharaj94; current publicMaps premises do not clearly corroborate the same exact site. Name/contact match alone does not resolve site continuity."
+    },
+    {
+      "name": "Auto Servis Miloti",
+      "city": "Drenas",
+      "checkedAt": "2026-10-19T03:37:43.589335+00:00",
+      "status": "deferred-no-attributable-active-maps-entry",
+      "sourceUrls": [
+        "https://www.autos1000.com/XK/Drenas/443034459209272/Auto-Servis-Miloti",
+        "https://www.facebook.com/automekanikmiloti/"
+      ],
+      "independentEvidence": {
+        "publicPhones": ["+38349691333", "+38344698910"]
+      },
+      "reason": "Precise independent street now found, but no attributable active Maps identity for either exact own contact or new street/name search. Email spelling variation remains unresolved and is not a usable contact.",
+      "nextCheck": "Obtain a new attributable own official Maps link or a current business-name/phone continuity source. Do not repeat unchanged name/phone queries. Resolve email variation before presenting it as usable.",
+      "publicBusinessEmail": {
+        "address": null,
+        "status": "unresolved",
+        "sourceUrl": "https://www.facebook.com/automekanikmiloti/",
+        "checkedAt": "2026-10-19T06:13:59.773493+00:00",
+        "conflictingPublicAddresses": [
+          {
+            "address": "milot__h@hotmail.com",
+            "sourceUrl": "https://www.facebook.com/automekanikmiloti/"
+          },
+          {
+            "address": "miloti__h@hotmail.com",
+            "sourceUrl": "https://stgres.gjirafa.biz/autoservis-miloti-1"
+          }
+        ],
+        "note": "Both sources match the business contact but differ by one character. No inferred correction, SMTP probe or outreach; no usable email selected."
+      },
+      "openingHoursResearch": {
+        "status": "researched-own-full-week-identity-deferred",
+        "sourceUrl": "https://www.facebook.com/automekanikmiloti/",
+        "checkedAt": "2026-10-19T04:01:47.352249+00:00",
+        "sourceAge": "Own update age not displayed.",
+        "week": [
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "closed"
+        ],
+        "limits": "Complete own business-hours dialog read; no owner confirmation. No plan imported while precise premises gate remains unresolved."
+      },
+      "contactResearchFollowupCompletedAt": "2026-10-19T04:01:47.352249+00:00",
+      "contactResearchLimits": "Checked accessible own/contact, directory and attributable social/search sources as recorded. Absence is bounded by those sources; no outreach and no claim of exhaustive web absence.",
+      "previousCheckIsHistorical": true,
+      "followupCheckedAt": "2026-10-19T06:13:59.773493+00:00",
+      "id": "auto-servis-miloti-drenas",
+      "newIndependentSource": "https://stgres.gjirafa.biz/autoservis-miloti-1",
+      "followupEvidence": {
+        "address": "Adem Jashari, Drenas",
+        "phone": "+38344698910",
+        "phoneMatchesOwnSecondContact": true,
+        "scope": "Passenger-car servicing",
+        "mapsResult": "Original name/town search returned an unrelated business; both exact own numbers returned completed no-results, and the newly sourced street/name search returned unrelated entries. No active workshop identity or Place ID established."
+      },
+      "previousBlockerReason": "Own current business contact and passenger-car mechanic scope match the directory; independent location is only Drenas."
+    },
+    {
+      "name": "Autoservis Fidani",
+      "city": "Prishtinë",
+      "checkedAt": "2026-10-19T03:37:43.589335+00:00",
+      "status": "eligible-awaiting-independent-review",
+      "sourceUrls": [
+        "https://stgres.gjirafa.biz/autoservis-fidani-1",
+        "https://www.instagram.com/autoservisfidani/"
+      ],
+      "independentEvidence": {
+        "publicPhones": ["+38344192943"],
+        "address": "Xhelal Mitrovica, Prishtinë",
+        "services": [
+          "passenger-car mechanical repair",
+          "gearbox repair",
+          "turbo repair"
+        ]
+      },
+      "reason": "Previous missing official Place-ID link resolved through the visible public result list and successful direct wrong-fallback return; prepare guarded publication.",
+      "nextCheck": "Fresh live/duplicate guard, import, translations/hours, reviewed release and live acceptance.",
+      "publicBusinessEmail": {
+        "address": "autoservis.fidani@gmail.com",
+        "status": "publicly-sourced",
+        "sourceUrl": "https://stgres.gjirafa.biz/autoservis-fidani-1",
+        "checkedAt": "2026-10-19T06:13:59.773493+00:00",
+        "note": "Public business contact listed beside matching name/phone/street; not delivery/owner/consent confirmation."
+      },
+      "openingHoursResearch": {
+        "status": "researched-directory-week",
+        "sourceUrl": "https://stgres.gjirafa.biz/autoservis-fidani-1",
+        "checkedAt": "2026-10-19T06:13:59.773493+00:00",
+        "sourceAge": "undated directory",
+        "week": [
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "09:00-15:00",
+          "closed"
+        ],
+        "note": "Plausible full week; no owner confirmation. Publication blocked by missing retraceablePlaceID."
+      },
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "placeId": "ChIJq6pjpCCfVBMRyKzxdASnYkE",
+        "officialVisibleLinkRead": true,
+        "directPlaceIdReturnWithMismatchedFallbackPassed": true,
+        "nameMatched": true,
+        "phoneMatched": true,
+        "addressMatched": true,
+        "activeStatusObserved": true,
+        "identityConfirmed": true,
+        "checkedAt": "2026-10-19T06:13:59.773493+00:00",
+        "note": "The broader public Maps result list exposed the official visible Place-ID link; direct return with London fallback selected the independently evidenced workshop. No Google business fields retained."
+      },
+      "contactResearchFollowupCompletedAt": "2026-10-19T04:01:47.352249+00:00",
+      "contactResearchLimits": "Checked accessible own/contact, directory and attributable social/search sources as recorded. Absence is bounded by those sources; no outreach and no claim of exhaustive web absence.",
+      "previousCheckIsHistorical": false,
+      "followupCheckedAt": "2026-10-19T06:13:59.773493+00:00",
+      "id": "autoservis-fidani-prishtina",
+      "previousBlockerReason": "Full independent directory supplies street/contact/passenger-car repair/week/email. PublicMaps exact name, phone and street match, but no official publicly visible retraceable Place-ID link was obtained. Related Instagram has no attributable phone/site in bio."
+    }
+  ],
+  "publishedWorkshopIds": [],
+  "publishedCountConfirmed": 0,
+  "provider": {
+    "extraCosts": 0,
+    "outreach": 0,
+    "googleApiCalls": 0,
+    "newKeys": 0,
+    "quotaChanges": 0
+  },
+  "handoff": {
+    "status": "active-lock-held",
+    "lockReleased": false
+  },
+  "preflight": {
+    "health": {
+      "checkedAt": "2026-10-19T06:09:23.912Z",
+      "published": 195,
+      "checks": [
+        {
+          "path": "/werkstaetten",
+          "status": 200,
+          "bytes": 733051,
+          "ray": "a4cd9d15b9f6c115-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/werkstatt/auto-pjese-servis-bekimi-drenas",
+          "status": 200,
+          "bytes": 110166,
+          "ray": "a4cd9d164b1cc115-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/werkstatt/auto-servis-sistem-mazgit",
+          "status": 200,
+          "bytes": 108192,
+          "ray": "a4cd9d169bc6c115-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/sq/serviset",
+          "status": 200,
+          "bytes": 750491,
+          "ray": "a4cd9d17ee8bc115-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/sq/servis/auto-pjese-servis-bekimi-drenas",
+          "status": 200,
+          "bytes": 109596,
+          "ray": "a4cd9d188feac115-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/sq/servis/auto-servis-sistem-mazgit",
+          "status": 200,
+          "bytes": 108001,
+          "ray": "a4cd9d18f93dc115-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/en/workshops",
+          "status": 200,
+          "bytes": 737210,
+          "ray": "a4cd9d1acd53c115-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/en/workshop/auto-pjese-servis-bekimi-drenas",
+          "status": 200,
+          "bytes": 107900,
+          "ray": "a4cd9d1b4eb0c115-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/en/workshop/auto-servis-sistem-mazgit",
+          "status": 200,
+          "bytes": 105002,
+          "ray": "a4cd9d1baf84c115-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        }
+      ],
+      "healthy": true
+    },
+    "openPullRequests": 0,
+    "activeReleaseJobs": 0
+  },
+  "checkedAt": "2026-10-19T06:13:59.773493+00:00"
+}
