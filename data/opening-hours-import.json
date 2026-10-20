@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "c1cd2735b0cb195588582671d6633f3f0429e1b51c42c9ff4ebf5e04e1004cb9",
+  "revision": "887bdf2e63be23a52e093bb0622a64b4a08d625e946e2fbca3990eedc7a4b9bf",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -2125,6 +2125,95 @@
       }
     },
     {
+      "id": "auto-gazi-lipjan",
+      "expected": {
+        "name": "Auto Gazi",
+        "city": "Lipjan",
+        "address": "Rr Bajram Gashi, Lipjan",
+        "phone": "+38344185042"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-20",
+        "source": "https://www.cybo.com/XK-biz/auto-gazi",
+        "sourceName": "Auto Gazi",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Undated directory week, current viewing is not operator confirmation. Complete plausible independently published week. No current Google hours copied; no operator confirmation or live open-status claim. Checked sources: https://www.cybo.com/XK-biz/auto-gazi https://numrat.com/biznes/8QJbGJn3BZjS/auto-gazi/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-glass-kosovo-fushe-kosove",
       "expected": {
         "name": "Auto Glass Kosovo - Auto Xhama",
@@ -3282,6 +3371,87 @@
       }
     },
     {
+      "id": "auto-paint-luta-lipjan",
+      "expected": {
+        "name": "Auto Paint Luta",
+        "city": "Lipjan",
+        "address": "163 Hajredin Bajrami, Lipjan",
+        "phone": "+38345405619"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-20",
+        "source": "https://www.instagram.com/auto.paint.luta/",
+        "sourceName": "Auto Paint Luta",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own posts include August2026 opening event; directory updated12October; neither gives a regular complete week. The29August18:00 opening-event time is not a weekly business schedule. No attributable own Facebook week found. Central preparer must supply explicitly assumed standard week; no Google hours or operator confirmation. Checked sources: https://www.instagram.com/auto.paint.luta/ https://numrat.com/biznes/XWuKe20rwFko/auto-paint-luta/ https://www.instagram.com/auto.paint.luta/p/DdA0MpPCudO/ https://www.instagram.com/auto.paint.luta/reel/Ddw3_cZqiBC/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-picasso-prishtina",
       "expected": {
         "name": "Auto Picasso",
@@ -3454,6 +3624,95 @@
           "09:00-19:00",
           "09:00-19:00",
           "09:00-19:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-pjese-servis-albani-lipjan",
+      "expected": {
+        "name": "Auto Pjesë & Servis Albani",
+        "city": "Lipjan",
+        "address": "Bajram Gashi, Banullë, Lipjan",
+        "phone": "+38344586265"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-20",
+        "source": "https://www.facebook.com/profile.php?id=100067064265312",
+        "sourceName": "Auto Pjesë & Servis Albani",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own full hours dialog gives no update age; current viewing is not operator confirmation. Complete plausible own-site week. No conflicting attributable branch plan found. Wrong Mitrovica/Sllatinë sources excluded; no Google hours copied or current open status asserted. Checked sources: https://www.facebook.com/profile.php?id=100067064265312 https://www.facebook.com/Auto-Servis-Albani-107846644280153/videos/autopjes%C3%AB-servis-albanibanull%C3%ABlipjan38344586265044586265049646540/2905931719677076/ https://numrat.com/biznes/Du6apxPy8xMx/auto-pjese-servis-albani/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
           "Geschlossen"
         ],
         "earlierPlan": ""
@@ -6759,6 +7018,87 @@
       }
     },
     {
+      "id": "auto-servis-france-kabash-viti",
+      "expected": {
+        "name": "Auto Servis FRANCE Kabash",
+        "city": "Viti",
+        "address": "Martiret e Kabashit 55, Kabash, Viti",
+        "phone": "+38349397010"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-20",
+        "source": "https://www.instagram.com/autoservis_france/",
+        "sourceName": "Auto Servis FRANCE Kabash",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own bio and posts have no weekly hours or update date; directory updated12October has no schedule. Gjirafa France results are different businesses/locations and not attributable to Kabash. Focused own Facebook/contact/hours search supplies no attributable weekly plan. Google hours explicitly not copied. Central preparer must supply assumed standard plan for this otherwise eligible business. Checked sources: https://www.instagram.com/autoservis_france/ https://numrat.com/biznes/YKdpkjeKtHA8/auto-servis-france-kabash/ https://stgres.gjirafa.biz/Biznesi/Kerko?query=France&lokacioni=-1&radius= https://www.instagram.com/autoservis_france/p/CYCQam_MhLJ/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-servis-gashi-peja",
       "expected": {
         "name": "Auto Servis \"Gashi\"",
@@ -7473,6 +7813,87 @@
           "08:00-18:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-kushtrimi-lipjan",
+      "expected": {
+        "name": "Auto Servis Kushtrimi",
+        "city": "Lipjan",
+        "address": "216 Bajram Gashi, Lipjan",
+        "phone": "+38348301361"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-20",
+        "source": "https://numrat.com/biznes/5q21QocR6QXC/auto-servis-kushtrimi/",
+        "sourceName": "Auto Servis Kushtrimi",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated12October has no schedule; same-name social workshop has different contact/city. No usable week for this exact Lipjan site. Central preparer must supply explicitly assumed standard plan; never copy Ferizaj or Google hours. Checked sources: https://numrat.com/biznes/5q21QocR6QXC/auto-servis-kushtrimi/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -8455,6 +8876,176 @@
           "09:00-18:00",
           "09:00-18:00",
           "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-niti-kamenice",
+      "expected": {
+        "name": "Auto servis niti",
+        "city": "Kamenicë",
+        "address": "Adem jashari, Kamenicë",
+        "phone": "+38349321523"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-20",
+        "source": "https://numrat.com/biznes/BS0XD9JhYNbB/auto-servis-niti/",
+        "sourceName": "Auto servis niti",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated12October, no weeklyplan. No attributable own schedule found in scoped source/social research. Central preparer must supply explicitly assumed standard plan. Never reuse the different Viti or Ferizaj business hours. Checked sources: https://numrat.com/biznes/BS0XD9JhYNbB/auto-servis-niti/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-niti-viti",
+      "expected": {
+        "name": "Auto Servis Niti",
+        "city": "Viti",
+        "address": "Rr. 24 Marsi, Ramnishtë, Viti",
+        "phone": "+38348260507"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-20",
+        "source": "https://www.facebook.com/autoservisNiti/",
+        "sourceName": "Auto Servis Niti",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own hours dialog provides no update date. Current viewing is not operator confirmation. Exact own full-week dialog has Friday closed and Sunday open, retained without inventing a different weekend. No contradiction in checked independent sources. Imported hours will not determine live open status. Checked sources: https://www.facebook.com/autoservisNiti/ https://www.instagram.com/autoservisniti/ https://numrat.com/biznes/bgFFqma49sZS/auto-servis-niti/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "Geschlossen",
+          "08:00-18:00",
+          "08:00-18:00"
         ],
         "earlierPlan": ""
       }
@@ -9940,6 +10531,95 @@
         "sourceName": "Auto Xhama Premium",
         "researchStatus": "Gefunden (eigener Betriebsauftritt)",
         "notes": "Own public Facebook business-hours dialog lists full week, updated about nine months ago. Exact published business phone matches verified profile; retained as public research, not owner confirmation.",
+        "originalWeek": [
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-xhama-top-glass-viti",
+      "expected": {
+        "name": "Auto Xhama Top Glass",
+        "city": "Viti",
+        "address": "Ibrahim Rugova, Viti",
+        "phone": "+38348700755"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-20",
+        "source": "https://www.facebook.com/p/Auto-Xhama-Top-Glass-100063958128476/",
+        "sourceName": "Auto Xhama Top Glass",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own full hours dialog says updated about6yearsago; no exact update date inferred. Complete plausible own-source week retained as researched with its old update-age limitation, not as a fresh operator confirmation or current-open status. No conflicting independent weekly plan found. Checked sources: https://www.facebook.com/p/Auto-Xhama-Top-Glass-100063958128476/ https://www.instagram.com/autoxhama_topglass/ https://numrat.com/biznes/umnJjYRH1zAw/auto-xhama-top-glass/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
         "originalWeek": [
           "09:00-18:00",
           "09:00-18:00",
@@ -12071,6 +12751,87 @@
       }
     },
     {
+      "id": "car-service-keqqa-kamenice",
+      "expected": {
+        "name": "car service keqqa",
+        "city": "Kamenicë",
+        "address": "rafet isufi, Kamenicë",
+        "phone": "+38348602568"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-20",
+        "source": "https://numrat.com/biznes/1KjlGWul0BIQ/car-service-keqqa/",
+        "sourceName": "car service keqqa",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No independent full week or attributable own social/contactsite; central assumed plan only after Place-ID gate clears. Checked sources: https://numrat.com/biznes/1KjlGWul0BIQ/car-service-keqqa/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "cesko-auto-service-prizren",
       "expected": {
         "name": "Cesko auto service",
@@ -13671,6 +14432,87 @@
           "08:00-17:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "isa-tuning-lipjan",
+      "expected": {
+        "name": "Isa Tuning",
+        "city": "Lipjan",
+        "address": "Hajredin Bajrami, Lipjan",
+        "phone": "+38349207069"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-20",
+        "source": "https://www.facebook.com/p/IsaTuning-61568646849306/",
+        "sourceName": "Isa Tuning",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own hours dialog only says continuously open, updatedabout2yearsago; no regular seven-day premises schedule. Own current business description explicitly says appointments only. Generic old always-open flag is not accepted as a normal physical-workshop week. Central assumed plan mandatory; retain appointment-only note, no operator confirmation or present open/closed claim. Checked sources: https://www.facebook.com/p/IsaTuning-61568646849306/ https://www.instagram.com/isatuning/ https://linktr.ee/isatuning https://numrat.com/biznes/8EGBM8xN6xbx/isa-tuning/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },

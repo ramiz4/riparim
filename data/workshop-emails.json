@@ -527,6 +527,19 @@
       "notes": "Follow-up on 14.10.2026 (Europe/Zurich): the business's own Autoford contact page lists canajymer@gmail.com, exactly +38344605241 and R107, Prizren. The different footer phone number 044-602-241 and Instagram Fordservice Bashkimi are not part of the assignment evidence; profile fields unchanged. The address check date is stored in UTC."
     },
     {
+      "workshopId": "auto-gazi-lipjan",
+      "matchedName": "Auto Gazi",
+      "matchedPhone": "+38344185042",
+      "matchedCity": "Lipjan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://www.cybo.com/XK-biz/auto-gazi",
+        "https://numrat.com/biznes/8QJbGJn3BZjS/auto-gazi/"
+      ],
+      "notes": "Full Cybo/Numrat listing and focused own Facebook/Instagram/email search checked. Candidate Instagram auto_gazi1 was opened: car-sales bio has a different phone and no attributable Lipjan-body-repair link; rejected. Other public Facebook hits have different names and cannot supply this workshop contact. No attributable own website or business email found."
+    },
+    {
       "workshopId": "auto-glass-kosovo-fushe-kosove",
       "matchedName": "Auto Glass Kosovo - Auto Xhama",
       "matchedPhone": "+38349219999",
@@ -803,6 +816,21 @@
       "notes": "The Facebook search result International Auto Ngjyrosje is a different business; only the business's own website used."
     },
     {
+      "workshopId": "auto-paint-luta-lipjan",
+      "matchedName": "Auto Paint Luta",
+      "matchedPhone": "+38345405619",
+      "matchedCity": "Lipjan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://www.instagram.com/auto.paint.luta/",
+        "https://www.instagram.com/auto.paint.luta/p/DdA0MpPCudO/",
+        "https://www.instagram.com/auto.paint.luta/reel/Ddw3_cZqiBC/",
+        "https://numrat.com/biznes/XWuKe20rwFko/auto-paint-luta/"
+      ],
+      "notes": "Own full Instagram bio and current public own-post captions, full Numrat detail and scoped public Facebook page search checked. Closest Luta Facebook results explicitly identify Ferizaj and a Slovak used-car business; rejected. No own contactwebsite, attributable Facebook business email or email in checked own Instagram source found."
+    },
+    {
       "workshopId": "auto-picasso-prishtina",
       "matchedName": "Auto Picasso",
       "matchedPhone": "+38344113775",
@@ -853,6 +881,29 @@
         "https://inovatorautomotive.com/kontakti/"
       ],
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
+    },
+    {
+      "workshopId": "auto-pjese-servis-albani-lipjan",
+      "matchedName": "Auto Pjesë & Servis Albani",
+      "matchedPhone": "+38344586265",
+      "matchedCity": "Lipjan",
+      "emails": [
+        {
+          "address": "albaniservis1@outlook.com",
+          "sourceUrls": [
+            "https://www.facebook.com/profile.php?id=100067064265312"
+          ],
+          "checkedAt": "2026-10-20",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://www.facebook.com/profile.php?id=100067064265312",
+        "https://www.facebook.com/Auto-Servis-Albani-107846644280153/videos/autopjes%C3%AB-servis-albanibanull%C3%ABlipjan38344586265044586265049646540/2905931719677076/",
+        "https://numrat.com/biznes/Du6apxPy8xMx/auto-pjese-servis-albani/"
+      ],
+      "notes": "Explicit public mailto on own current workshop page matching main44, with own post linking49andBanullë. WrongMitrovica info@autopjesealbani.com not adopted. Not deliverability or consent confirmation."
     },
     {
       "workshopId": "auto-pjese-servis-bekimi-drenas",
@@ -1704,6 +1755,20 @@
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
     },
     {
+      "workshopId": "auto-servis-france-kabash-viti",
+      "matchedName": "Auto Servis FRANCE Kabash",
+      "matchedPhone": "+38349397010",
+      "matchedCity": "Viti",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://www.instagram.com/autoservis_france/",
+        "https://www.instagram.com/autoservis_france/p/CYCQam_MhLJ/",
+        "https://numrat.com/biznes/YKdpkjeKtHA8/auto-servis-france-kabash/"
+      ],
+      "notes": "Own full Instagram bio and visible own repair-post captions, full Numrat detail, focused name/handle Facebook-email-hours search and Gjirafa name search checked. No attributable business email, own contact website or official Facebook profile found. Foreign France entities, different-phone/location listings and platform contact addresses rejected."
+    },
+    {
       "workshopId": "auto-servis-gashi-peja",
       "matchedName": "Auto Servis \"Gashi\"",
       "matchedPhone": "+38345972775",
@@ -1864,6 +1929,18 @@
         "https://www.instagram.com/p/DOOY-CiCCFY/"
       ],
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
+    },
+    {
+      "workshopId": "auto-servis-kushtrimi-lipjan",
+      "matchedName": "Auto Servis Kushtrimi",
+      "matchedPhone": "+38348301361",
+      "matchedCity": "Lipjan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/5q21QocR6QXC/auto-servis-kushtrimi/"
+      ],
+      "notes": "Full directory has no email/ownsite; exact name/city search, exact national-number Facebook/Instagram/email query and public Facebook search checked. Opened Auto Service Kushtrimi page explicitly identifies Ferizaj and a different telephone; its email and hours are not this workshop data. No attributable own Instagram/contactsite or business email found; generic social-account/email-finder services rejected."
     },
     {
       "workshopId": "auto-servis-lirimi-podujeve",
@@ -2113,6 +2190,33 @@
         "https://www.google.com/search?q=Auto-Servis%20NEXHI%20Lipjan%20email%20-site%3Acybo.com%20-site%3Ariparim.com"
       ],
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; Instagram bio checked; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
+    },
+    {
+      "workshopId": "auto-servis-niti-kamenice",
+      "matchedName": "Auto servis niti",
+      "matchedPhone": "+38349321523",
+      "matchedCity": "Kamenicë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/BS0XD9JhYNbB/auto-servis-niti/"
+      ],
+      "notes": "Full directory has no email/ownwebsite. Focused exact business-name/town search, exact-number Facebook/Instagram/email query and public Facebook business search found only different-town/foreign Niti identities and unrelated platform/finder results; rejected rather than merging their contacts. No attributable own Instagram or Facebook business-contact email found."
+    },
+    {
+      "workshopId": "auto-servis-niti-viti",
+      "matchedName": "Auto Servis Niti",
+      "matchedPhone": "+38348260507",
+      "matchedCity": "Viti",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://www.facebook.com/autoservisNiti/",
+        "https://www.instagram.com/autoservisniti/",
+        "https://numrat.com/biznes/bgFFqma49sZS/auto-servis-niti/",
+        "https://www.facebook.com/autoservisNiti/directory_contact_info"
+      ],
+      "notes": "Own Facebook bio/contact tab, own linked Instagram full short bio and full Numrat detail expose no business email or own contact website. No unlinked or guessed address adopted."
     },
     {
       "workshopId": "auto-servis-perparimi-ferizaj",
@@ -2496,6 +2600,29 @@
         "https://www.facebook.com/autoxhamapremium/"
       ],
       "notes": "Public business contact evidenced on the attributed own source; no deliverability, consent or ownership claim. No contact message sent."
+    },
+    {
+      "workshopId": "auto-xhama-top-glass-viti",
+      "matchedName": "Auto Xhama Top Glass",
+      "matchedPhone": "+38348700755",
+      "matchedCity": "Viti",
+      "emails": [
+        {
+          "address": "b.emerllahu@hotmail.com",
+          "sourceUrls": [
+            "https://www.facebook.com/p/Auto-Xhama-Top-Glass-100063958128476/"
+          ],
+          "checkedAt": "2026-10-20",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://www.facebook.com/p/Auto-Xhama-Top-Glass-100063958128476/",
+        "https://www.instagram.com/autoxhama_topglass/",
+        "https://numrat.com/biznes/umnJjYRH1zAw/auto-xhama-top-glass/"
+      ],
+      "notes": "Explicit public mailto business contact in own workshop page matching name, primary phone and glass services. Not a deliverability, ownership or marketing-consent claim. Own Instagram and full independent detail also checked; no conflicting address observed."
     },
     {
       "workshopId": "autoavangarde-bmw-service-peja",
@@ -2986,6 +3113,18 @@
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; Facebook requires login; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found. ARBK Open Idriz N. Haliti B.I. / D.P.Z. Servisi BMW lists exactly 044116212 but no email. Instagram dr.bmw.service.ferizaj lists BMW service Ferizaj without email; bmwserviceferizaj is inaccessible."
     },
     {
+      "workshopId": "car-service-keqqa-kamenice",
+      "matchedName": "car service keqqa",
+      "matchedPhone": "+38348602568",
+      "matchedCity": "Kamenicë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/1KjlGWul0BIQ/car-service-keqqa/"
+      ],
+      "notes": "Full directory has no email/ownsite. Focused exact business-name search, public Facebook lookup and Kamenice Instagram/email search returned unrelated businesses, generic platforms and email-finder sites; rejected. No attributable own business email located."
+    },
+    {
       "workshopId": "cesko-auto-service-prizren",
       "matchedName": "Cesko auto service",
       "matchedPhone": "+38345623482",
@@ -3374,6 +3513,21 @@
         "https://mygreensteam.com/contact-us-1/"
       ],
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
+    },
+    {
+      "workshopId": "isa-tuning-lipjan",
+      "matchedName": "Isa Tuning",
+      "matchedPhone": "+38349207069",
+      "matchedCity": "Lipjan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://www.facebook.com/p/IsaTuning-61568646849306/",
+        "https://www.instagram.com/isatuning/",
+        "https://linktr.ee/isatuning",
+        "https://numrat.com/biznes/8EGBM8xN6xbx/isa-tuning/"
+      ],
+      "notes": "Own public Facebook contact summary, own expanded Instagram and complete own Linktree checked. Only matching phone/social/Maps links; no business email or separate contact website published in checked sources. No thirdparty account-finder, private data or guessed address used."
     },
     {
       "workshopId": "kio-garage-prizren",

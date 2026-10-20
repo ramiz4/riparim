@@ -694,6 +694,34 @@
       }
     },
     {
+      "id": "auto-gazi-lipjan",
+      "sourceHash": "27c4020318310cf5c2e6641e5da693edb10888088d76743728b4376379fd43b8",
+      "sq": {
+        "specialty": "Riparime karrocerie",
+        "description": "Auto Gazi në Rr Bajram Gashi në Lipjan figuron në direktorinë publike të bizneseve për riparime karrocerie. Shtrirjen e punimeve konkrete duhet ta sqaroni drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Riparime karrocerie të veturave sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria",
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Car body repairs",
+        "description": "Auto Gazi on Rr Bajram Gashi in Lipjan is listed in the public business directory for car body repairs. Please confirm the scope of specific work directly with the business.",
+        "serviceDetails": [
+          "Passenger-car body repairs according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: business name, address, contact and category",
+          "Public business directory: business name, address, contact and category"
+        ]
+      }
+    },
+    {
       "id": "auto-glass-kosovo-fushe-kosove",
       "sourceHash": "09daa7cb58be0deebd99ede4e66c541414ef69abed3bb5c67e82d664d8606566",
       "sq": {
@@ -1058,6 +1086,42 @@
       }
     },
     {
+      "id": "auto-paint-luta-lipjan",
+      "sourceHash": "c30b0ffd7d08b1b7d00586863df71866a16514d59d8cdc7a0bda4104cbf4443b",
+      "sq": {
+        "specialty": "Karroceri · Ngjyrosje · Polirim",
+        "description": "Auto Paint Luta në Hajredin Bajrami 163 në Lipjan ofron, sipas profilit të vet të biznesit, punime karrocerie dhe ngjyrosje, restaurim dhe polirim automjetesh.",
+        "serviceDetails": [
+          "Punime karrocerie dhe ngjyrosje",
+          "Restaurim automjetesh",
+          "Polirim automjetesh"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Bodywork · Paint · Polishing",
+        "description": "Auto Paint Luta at Hajredin Bajrami 163 in Lipjan offers bodywork and paint, vehicle restoration and polishing, according to its own business profile.",
+        "serviceDetails": [
+          "Bodywork and paint",
+          "Vehicle restoration",
+          "Vehicle polishing"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own business page: location, business contact and offered services",
+          "Own business page: location, business contact and offered services",
+          "Own business page: location, business contact and offered services",
+          "Public business directory: business name, address, contact and category"
+        ]
+      }
+    },
+    {
       "id": "auto-picasso-prishtina",
       "sourceHash": "936ad343435a26edcad3019729ab883e29bf2f73c273005db8a1dddb2ce32560",
       "sq": {
@@ -1118,6 +1182,40 @@
           "Current evidence of contact details, location and passenger-car servicing",
           "Current evidence of contact details, location and passenger-car servicing",
           "Current evidence of contact details, location and passenger-car servicing"
+        ]
+      }
+    },
+    {
+      "id": "auto-pjese-servis-albani-lipjan",
+      "sourceHash": "7a72a881c28908014c1e42c6f10be7f40c326b6640fb87fc4c1293e87e8c2c56",
+      "sq": {
+        "specialty": "Servis veturash · Diagnostikë · Klimatizim",
+        "description": "Auto Pjesë & Servis Albani në rrugën Bajram Gashi në Banullë të Lipjanit ofron, sipas faqes së vet të biznesit, servis veturash, diagnostikë, servisim të klimatizimit dhe autopjesë.",
+        "serviceDetails": [
+          "Servis veturash",
+          "Diagnostikë automjetesh",
+          "Servisim i klimatizimit"
+        ],
+        "phoneNote": "Kontakt tjetër i biznesit: +38349646540; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Car service · Diagnostics · Air conditioning",
+        "description": "Auto Pjesë & Servis Albani on Bajram Gashi in Banullë near Lipjan offers car service, vehicle diagnostics, air-conditioning service and car parts, according to its own business page.",
+        "serviceDetails": [
+          "Car service",
+          "Vehicle diagnostics",
+          "Air-conditioning service"
+        ],
+        "phoneNote": "Additional business contact: +38349646540; reachability not confirmed",
+        "sourceTitles": [
+          "Own business page: location, business contact and offered services",
+          "Own business page: location, business contact and offered services",
+          "Public business directory: business name, address, contact and category"
         ]
       }
     },
@@ -2260,6 +2358,40 @@
       }
     },
     {
+      "id": "auto-servis-france-kabash-viti",
+      "sourceHash": "927d991dfb80e14149ce78738c77c99465a9898894839ffa033a01a10ae65d8f",
+      "sq": {
+        "specialty": "Riparime veturash · Frena · Klimatizim",
+        "description": "Auto Servis FRANCE Kabash në Kabash të Vitisë paraqet në profilin e vet riparime motorësh dhe punime në frena, rripa të shpërndarjes, friksione, turbina dhe klimatizim.",
+        "serviceDetails": [
+          "Riparime motorësh dhe ndërrim rripash të shpërndarjes",
+          "Ndërrim frenash, friksionesh dhe turbinash",
+          "Servisim i klimatizimit"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Car repairs · Brakes · Air conditioning",
+        "description": "Auto Servis FRANCE Kabash in Kabash near Viti shows engine repairs and work on brakes, timing belts, clutches, turbochargers and air conditioning on its own business profile.",
+        "serviceDetails": [
+          "Engine repairs and timing-belt replacement",
+          "Brake, clutch and turbocharger replacement",
+          "Air-conditioning service"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own business page: location, business contact and offered services",
+          "Own business page: location, business contact and offered services",
+          "Public business directory: business name, address, contact and category"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-gashi-peja",
       "sourceHash": "a39d0f78d1e914bf989aafb7f6629e83b98d1b79f4d565c15208590d14482398",
       "sq": {
@@ -2482,6 +2614,32 @@
         "phoneNote": "Public directory contact (Gjirafa.biz); not confirmed by the business",
         "sourceTitles": [
           "Gjirafa.biz: published name · address · telephone · vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-kushtrimi-lipjan",
+      "sourceHash": "2367f03fba586493e4a3e151089000f6ae05079009ea9cce66d46da17a40cc10",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis Kushtrimi në Bajram Gashi 216 në Lipjan figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis Kushtrimi at Bajram Gashi 216 in Lipjan is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: business name, address, contact and category"
         ]
       }
     },
@@ -2772,6 +2930,66 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-niti-kamenice",
+      "sourceHash": "4abffe3804e326e6063ce47b43e091c579201cfdd0c8dcf2d2b74b2b343b7710",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto servis niti në rrugën Adem jashari në Kamenicë figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto servis niti on Adem jashari in Kamenicë is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: business name, address, contact and category"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-niti-viti",
+      "sourceHash": "11e9ba8c702426e4acfcf916c45e4e7b0ca0b181d64b536ba0629ea3cc3c710d",
+      "sq": {
+        "specialty": "Motorë · Zinxhirë shpërndarjeje · Frena",
+        "description": "Postimet e vetë Auto Servis Niti në Ramnishtë të Vitisë tregojnë riparime motorësh dhe ndërrimin e zinxhirëve të shpërndarjes e të frenave.",
+        "serviceDetails": [
+          "Riparime motorësh të veturave",
+          "Ndërrim zinxhirësh të shpërndarjes",
+          "Ndërrim frenash"
+        ],
+        "phoneNote": "Kontakt tjetër i biznesit: +38344260507; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Engines · Timing chains · Brakes",
+        "description": "Own business posts from Auto Servis Niti in Ramnishtë near Viti show engine repairs, timing-chain replacement and brake replacement.",
+        "serviceDetails": [
+          "Passenger-car engine repairs",
+          "Timing-chain replacement",
+          "Brake replacement"
+        ],
+        "phoneNote": "Additional business contact: +38344260507; reachability not confirmed",
+        "sourceTitles": [
+          "Own business page: location, business contact and offered services",
+          "Own business page: location, business contact and offered services",
+          "Public business directory: business name, address, contact and category"
         ]
       }
     },
@@ -3260,6 +3478,38 @@
         "sourceTitles": [
           "Own Instagram page: name, location, contact and offered services",
           "Own Facebook page: name, location, contact and offered services"
+        ]
+      }
+    },
+    {
+      "id": "auto-xhama-top-glass-viti",
+      "sourceHash": "8c4a0772720e998112a26474907d1f5f4e05b890c7042710007a6eef4fac3c0a",
+      "sq": {
+        "specialty": "Xhama automjetesh · Ndërrim xhamash",
+        "description": "Auto Xhama Top Glass në rrugën Ibrahim Rugova në Viti ofron, sipas faqeve të veta publike, riparimin dhe ndërrimin e xhamave të automjeteve dhe montimin e xhamave të përparmë.",
+        "serviceDetails": [
+          "Riparim dhe ndërrim xhamash automjetesh",
+          "Montim xhamash të përparmë"
+        ],
+        "phoneNote": "Kontakt tjetër i biznesit: +38344874222; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle glass · Windscreen replacement",
+        "description": "Auto Xhama Top Glass on Ibrahim Rugova in Viti offers vehicle-glass repair and replacement and windscreen installation, according to its own public business pages.",
+        "serviceDetails": [
+          "Vehicle-glass repair and replacement",
+          "Windscreen installation"
+        ],
+        "phoneNote": "Additional business contact: +38344874222; reachability not confirmed",
+        "sourceTitles": [
+          "Own business page: location, business contact and offered services",
+          "Own business page: location, business contact and offered services",
+          "Public business directory: business name, address, contact and category"
         ]
       }
     },
@@ -3945,6 +4195,32 @@
       }
     },
     {
+      "id": "car-service-keqqa-kamenice",
+      "sourceHash": "d51b07bf03bf8730fc5f6272cb2504be624216e1dd8ce3afd9e3741dfa331df4",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "car service keqqa në rrugën rafet isufi në Kamenicë figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "car service keqqa on rafet isufi in Kamenicë is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: business name, address, contact and category"
+        ]
+      }
+    },
+    {
       "id": "cesko-auto-service-prizren",
       "sourceHash": "a424f9610e6403a309d90359e597f99d4c7fbf6dd95edb42eece087f05dad4c9",
       "sq": {
@@ -4494,6 +4770,42 @@
         "sourceTitles": [
           "Business website: contact, location and services",
           "Business website: detailing and paint protection"
+        ]
+      }
+    },
+    {
+      "id": "isa-tuning-lipjan",
+      "sourceHash": "b9666470dc577ffd1fd1849a7559c1bc3bc0329c7ceae4daf950bba31a8bcb60",
+      "sq": {
+        "specialty": "Diagnostikë · Kodim · Chip tuning",
+        "description": "Isa Tuning në rrugën Hajredin Bajrami në Lipjan ofron, sipas faqeve të veta publike, diagnostikë elektronike të automjeteve, kodim dhe chip tuning. Vizitat bëhen me termin paraprak.",
+        "serviceDetails": [
+          "Diagnostikë elektronike e automjeteve",
+          "Kodim automjetesh",
+          "Chip tuning"
+        ],
+        "phoneNote": "Vizita vetëm me termin paraprak",
+        "sourceTitles": [
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Diagnostics · Coding · Chip tuning",
+        "description": "Isa Tuning on Hajredin Bajrami in Lipjan offers electronic vehicle diagnostics, coding and chip tuning, according to its own public business pages. Visits are by appointment.",
+        "serviceDetails": [
+          "Electronic vehicle diagnostics",
+          "Vehicle coding",
+          "Chip tuning"
+        ],
+        "phoneNote": "Visits by appointment only",
+        "sourceTitles": [
+          "Own business page: location, business contact and offered services",
+          "Own business page: location, business contact and offered services",
+          "Own business page: location, business contact and offered services",
+          "Public business directory: business name, address, contact and category"
         ]
       }
     },
