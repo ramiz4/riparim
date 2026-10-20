@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-19T06:21:15.633Z",
+  "updatedAt": "2026-10-20T04:34:13.672Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 197,
+    "published": 207,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 197 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 197,
+    "reason": "All 207 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 207,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -1212,6 +1212,51 @@
       }
     },
     {
+      "id": "auto-gazi-lipjan",
+      "name": "Auto Gazi",
+      "city": "Lipjan",
+      "address": "Rr Bajram Gashi, Lipjan",
+      "phone": "+38344185042",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344185042",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": ["Karosseriereparaturen an Pkw laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Karosseriereparaturen",
+      "description": "Auto Gazi an der Rr Bajram Gashi in Lipjan ist im öffentlichen Firmenverzeichnis für Karosseriereparaturen aufgeführt. Den Umfang konkreter Arbeiten bitte direkt mit dem Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-gazi",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://numrat.com/biznes/8QJbGJn3BZjS/auto-gazi/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-20",
+      "status": "published",
+      "updatedAt": "2026-10-20T04:33:28.070Z",
+      "google": {
+        "placeId": "ChIJ08aoaoqDVBMR4K_4lpeuFRs",
+        "matchedAt": "2026-10-20T03:36:51.526094Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.cybo.com/XK-biz/auto-gazi",
+            "https://numrat.com/biznes/8QJbGJn3BZjS/auto-gazi/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-glass-kosovo-fushe-kosove",
       "name": "Auto Glass Kosovo - Auto Xhama",
       "city": "Fushë Kosovë",
@@ -1844,6 +1889,67 @@
       }
     },
     {
+      "id": "auto-paint-luta-lipjan",
+      "name": "Auto Paint Luta",
+      "city": "Lipjan",
+      "address": "163 Hajredin Bajrami, Lipjan",
+      "phone": "+38345405619",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38345405619",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Karosserie- und Lackarbeiten",
+        "Fahrzeugrestaurierung",
+        "Polieren von Fahrzeugen"
+      ],
+      "languages": [],
+      "specialty": "Karosserie · Lack · Polieren",
+      "description": "Auto Paint Luta an der Hajredin Bajrami 163 in Lipjan bietet laut eigenem Betriebsprofil Karosserie- und Lackarbeiten, Fahrzeugrestaurierung und Polieren an.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.instagram.com/auto.paint.luta/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/auto.paint.luta/p/DdA0MpPCudO/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/auto.paint.luta/reel/Ddw3_cZqiBC/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://numrat.com/biznes/XWuKe20rwFko/auto-paint-luta/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-20",
+      "status": "published",
+      "updatedAt": "2026-10-20T04:33:28.070Z",
+      "google": {
+        "placeId": "ChIJjd1pOWSDVBMRZa2J68tK2XE",
+        "matchedAt": "2026-10-20T04:02:46.801144Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.instagram.com/auto.paint.luta/",
+            "https://www.instagram.com/auto.paint.luta/p/DdA0MpPCudO/",
+            "https://www.instagram.com/auto.paint.luta/reel/Ddw3_cZqiBC/",
+            "https://numrat.com/biznes/XWuKe20rwFko/auto-paint-luta/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-picasso-prishtina",
       "name": "Auto Picasso",
       "city": "Prishtina",
@@ -1955,6 +2061,61 @@
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJx-kdM1l-VBMRwc2PmJdYa4Q"
           ],
           "note": "The business's own history establishes that Auto Servis INOVATOR continued as INOVATOR Automotive. Its own contact details and direct Maps link confirm the same Google identity even without a published phone number there."
+        }
+      }
+    },
+    {
+      "id": "auto-pjese-servis-albani-lipjan",
+      "name": "Auto Pjesë & Servis Albani",
+      "city": "Lipjan",
+      "address": "Bajram Gashi, Banullë, Lipjan",
+      "phone": "+38344586265",
+      "phoneNote": "Weiterer Geschäftskontakt: +38349646540; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": [
+        "Inspektion & Wartung",
+        "Diagnose & Elektronik",
+        "Reifen & Klima"
+      ],
+      "serviceDetails": ["Pkw-Service", "Fahrzeugdiagnose", "Klimaservice"],
+      "languages": [],
+      "specialty": "Pkw-Service · Diagnose · Klimaservice",
+      "description": "Auto Pjesë & Servis Albani an der Bajram Gashi in Banullë bei Lipjan bietet laut eigener Betriebsseite Pkw-Service, Fahrzeugdiagnose und Klimaservice sowie Autoteile an.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/profile.php?id=100067064265312",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/Auto-Servis-Albani-107846644280153/videos/autopjes%C3%AB-servis-albanibanull%C3%ABlipjan38344586265044586265049646540/2905931719677076/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://numrat.com/biznes/Du6apxPy8xMx/auto-pjese-servis-albani/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-20",
+      "status": "published",
+      "updatedAt": "2026-10-20T04:33:28.070Z",
+      "google": {
+        "placeId": "ChIJDdYhDrqDVBMRKWaDynP-fgE",
+        "matchedAt": "2026-10-20T04:27:07.806Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.facebook.com/profile.php?id=100067064265312",
+            "https://www.facebook.com/Auto-Servis-Albani-107846644280153/videos/autopjes%C3%AB-servis-albanibanull%C3%ABlipjan38344586265044586265049646540/2905931719677076/",
+            "https://numrat.com/biznes/Du6apxPy8xMx/auto-pjese-servis-albani/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active site and independently published additional contact49. Own23January2021post explicitly pairs49and44 with Banullë/Lipjan and links the current own page; current own main contact44 is retained. Maps main is not claimed44. No Google fields retained or ownership confirmation claimed."
         }
       }
     },
@@ -3961,6 +4122,61 @@
       }
     },
     {
+      "id": "auto-servis-france-kabash-viti",
+      "name": "Auto Servis FRANCE Kabash",
+      "city": "Viti",
+      "address": "Martiret e Kabashit 55, Kabash, Viti",
+      "phone": "+38349397010",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349397010",
+      "brands": [],
+      "services": ["Motor & Getriebe", "Bremsen & Fahrwerk", "Reifen & Klima"],
+      "serviceDetails": [
+        "Motorreparaturen und Zahnriemenwechsel",
+        "Austausch von Bremsen, Kupplungen und Turboladern",
+        "Klimaservice"
+      ],
+      "languages": [],
+      "specialty": "Pkw-Reparaturen · Bremsen · Klimaservice",
+      "description": "Auto Servis FRANCE Kabash in Kabash bei Viti zeigt auf dem eigenen Betriebsprofil Motorreparaturen sowie Arbeiten an Bremsen, Zahnriemen, Kupplungen, Turboladern und Klimaanlagen.",
+      "lat": 42.308767,
+      "lng": 21.357003,
+      "sources": [
+        {
+          "url": "https://www.instagram.com/autoservis_france/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autoservis_france/p/CYCQam_MhLJ/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://numrat.com/biznes/YKdpkjeKtHA8/auto-servis-france-kabash/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-20",
+      "status": "published",
+      "updatedAt": "2026-10-20T04:33:28.070Z",
+      "google": {
+        "placeId": "ChIJ1zeAH4FjVBMRum-bN88d-jA",
+        "matchedAt": "2026-10-20T03:16:22.346685Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.instagram.com/autoservis_france/",
+            "https://www.instagram.com/autoservis_france/p/CYCQam_MhLJ/",
+            "https://numrat.com/biznes/YKdpkjeKtHA8/auto-servis-france-kabash/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-servis-gashi-peja",
       "name": "Auto Servis \"Gashi\"",
       "city": "Peja",
@@ -4365,6 +4581,45 @@
           "method": "phone_and_location",
           "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-klima-1"],
           "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-kushtrimi-lipjan",
+      "name": "Auto Servis Kushtrimi",
+      "city": "Lipjan",
+      "address": "216 Bajram Gashi, Lipjan",
+      "phone": "+38348301361",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38348301361",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis Kushtrimi an der Bajram Gashi 216 in Lipjan ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/5q21QocR6QXC/auto-servis-kushtrimi/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-20",
+      "status": "published",
+      "updatedAt": "2026-10-20T04:33:28.070Z",
+      "google": {
+        "placeId": "ChIJIaivOgCDVBMRMtSXMzjR0f4",
+        "matchedAt": "2026-10-20T03:53:03.904659Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/5q21QocR6QXC/auto-servis-kushtrimi/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
         }
       }
     },
@@ -4878,6 +5133,100 @@
             "https://www.gjithebiznesi.com/XK/auto-servis-nexhi_1n-044-736-933"
           ],
           "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-niti-kamenice",
+      "name": "Auto servis niti",
+      "city": "Kamenicë",
+      "address": "Adem jashari, Kamenicë",
+      "phone": "+38349321523",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto servis niti an der Adem jashari in Kamenicë ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/BS0XD9JhYNbB/auto-servis-niti/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-20",
+      "status": "published",
+      "updatedAt": "2026-10-20T04:33:28.070Z",
+      "google": {
+        "placeId": "ChIJbaLSG6rpVBMRSIXXe-vC6K0",
+        "matchedAt": "2026-10-20T03:29:19.179864Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/BS0XD9JhYNbB/auto-servis-niti/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-niti-viti",
+      "name": "Auto Servis Niti",
+      "city": "Viti",
+      "address": "Rr. 24 Marsi, Ramnishtë, Viti",
+      "phone": "+38348260507",
+      "phoneNote": "Weiterer Geschäftskontakt: +38344260507; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38348260507",
+      "brands": [],
+      "services": ["Motor & Getriebe", "Bremsen & Fahrwerk"],
+      "serviceDetails": [
+        "Motorreparaturen an Pkw",
+        "Austausch von Steuerketten",
+        "Austausch von Bremsen"
+      ],
+      "languages": [],
+      "specialty": "Motor · Steuerketten · Bremsen",
+      "description": "Die eigenen Betriebsbeiträge von Auto Servis Niti in Ramnishtë bei Viti zeigen Motorreparaturen sowie den Austausch von Steuerketten und Bremsen.",
+      "lat": 42.31946,
+      "lng": 21.382381,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/autoservisNiti/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autoservisniti/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://numrat.com/biznes/bgFFqma49sZS/auto-servis-niti/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-20",
+      "status": "published",
+      "updatedAt": "2026-10-20T04:33:28.070Z",
+      "google": {
+        "placeId": "ChIJ9UTGi4BhVBMRa_CFJuJ5n4I",
+        "matchedAt": "2026-10-20T03:09:24.111799Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.facebook.com/autoservisNiti/",
+            "https://www.instagram.com/autoservisniti/",
+            "https://numrat.com/biznes/bgFFqma49sZS/auto-servis-niti/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
         }
       }
     },
@@ -5731,6 +6080,60 @@
             "https://www.facebook.com/autoxhamapremium/"
           ],
           "note": "Public Maps UI in the confirmed project account: independently sourced identity, international phone and location match an active entry. Place ID read from a visible official !19s link and directly returned with an unrelated London fallback. Catalogue fields come exclusively from independent business sources; no ownership claim or current Google business content adopted."
+        }
+      }
+    },
+    {
+      "id": "auto-xhama-top-glass-viti",
+      "name": "Auto Xhama Top Glass",
+      "city": "Viti",
+      "address": "Ibrahim Rugova, Viti",
+      "phone": "+38348700755",
+      "phoneNote": "Weiterer Geschäftskontakt: +38344874222; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38348700755",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Reparatur und Austausch von Fahrzeugglas",
+        "Einbau von Windschutzscheiben"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugglas · Scheibentausch",
+      "description": "Auto Xhama Top Glass an der Ibrahim Rugova in Viti bietet laut eigenen Betriebsauftritten die Reparatur und den Austausch von Fahrzeugglas sowie den Einbau von Windschutzscheiben an.",
+      "lat": 42.3185,
+      "lng": 21.337404,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/p/Auto-Xhama-Top-Glass-100063958128476/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autoxhama_topglass/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://numrat.com/biznes/umnJjYRH1zAw/auto-xhama-top-glass/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-20",
+      "status": "published",
+      "updatedAt": "2026-10-20T04:33:28.070Z",
+      "google": {
+        "placeId": "ChIJIc33HaFjVBMRB9K8ObP-fMg",
+        "matchedAt": "2026-10-20T03:21:02.859133Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.facebook.com/p/Auto-Xhama-Top-Glass-100063958128476/",
+            "https://www.instagram.com/autoxhama_topglass/",
+            "https://numrat.com/biznes/umnJjYRH1zAw/auto-xhama-top-glass/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
         }
       }
     },
@@ -6963,6 +7366,45 @@
       }
     },
     {
+      "id": "car-service-keqqa-kamenice",
+      "name": "car service keqqa",
+      "city": "Kamenicë",
+      "address": "rafet isufi, Kamenicë",
+      "phone": "+38348602568",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "car service keqqa an der rafet isufi in Kamenicë ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/1KjlGWul0BIQ/car-service-keqqa/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-20",
+      "status": "published",
+      "updatedAt": "2026-10-20T04:33:28.070Z",
+      "google": {
+        "placeId": "ChIJW4fKQADpVBMRq4gId6UO-5A",
+        "matchedAt": "2026-10-20T03:33:26.261266Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/1KjlGWul0BIQ/car-service-keqqa/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "cesko-auto-service-prizren",
       "name": "Cesko auto service",
       "city": "Prizren",
@@ -7876,6 +8318,67 @@
             "https://mygreensteam.com/"
           ],
           "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
+        }
+      }
+    },
+    {
+      "id": "isa-tuning-lipjan",
+      "name": "Isa Tuning",
+      "city": "Lipjan",
+      "address": "Hajredin Bajrami, Lipjan",
+      "phone": "+38349207069",
+      "phoneNote": "Besuche nur nach Terminvereinbarung",
+      "whatsapp": "+38349207069",
+      "brands": [],
+      "services": ["Diagnose & Elektronik"],
+      "serviceDetails": [
+        "Elektronische Fahrzeugdiagnose",
+        "Fahrzeugcodierung",
+        "Chiptuning"
+      ],
+      "languages": [],
+      "specialty": "Diagnose · Codierung · Chiptuning",
+      "description": "Isa Tuning an der Hajredin Bajrami in Lipjan bietet laut eigenen Betriebsauftritten elektronische Fahrzeugdiagnose, Codierung und Chiptuning an. Besuche erfolgen nach Terminvereinbarung.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/p/IsaTuning-61568646849306/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/isatuning/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://linktr.ee/isatuning",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://numrat.com/biznes/8EGBM8xN6xbx/isa-tuning/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-20",
+      "status": "published",
+      "updatedAt": "2026-10-20T04:33:28.070Z",
+      "google": {
+        "placeId": "ChIJN-GbsOGDVBMRNZzCF5LNUVA",
+        "matchedAt": "2026-10-20T04:14:42.007936Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.facebook.com/p/IsaTuning-61568646849306/",
+            "https://www.instagram.com/isatuning/",
+            "https://linktr.ee/isatuning",
+            "https://numrat.com/biznes/8EGBM8xN6xbx/isa-tuning/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
         }
       }
     },
