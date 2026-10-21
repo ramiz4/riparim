@@ -7998,13 +7998,13 @@
       "note": "All eligible phones, names/site evidence and Place IDs compared with canonical/full live snapshot and previously read historical manifests/scope/removal markers. Gulla corridor precision is not treated as a proven road alias; blocked contact/street identities excluded."
     },
     "isolatedImport": {
-      "checkedAt": "2026-10-21T04:11:29.789Z",
+      "checkedAt": "2026-10-21T04:14:48.540Z",
       "priorRowsPreserved": 966,
       "previousProfilesPreserved": 207,
       "previousCanonicalAndOverlayRecordsUnchanged": true,
       "newProfiles": 7,
-      "newResearchedHours": 1,
-      "newAssumedHours": 6,
+      "newResearchedHours": 2,
+      "newAssumedHours": 5,
       "newWhatsAppContacts": 5,
       "newBusinessEmails": 0,
       "ownerConfirmationInvented": false,
