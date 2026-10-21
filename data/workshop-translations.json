@@ -228,6 +228,38 @@
       }
     },
     {
+      "id": "auto-detailing-bilaku-istog",
+      "sourceHash": "6381684beef7584dd892dcffaba61bc281eb1ad1021d91032ac27af4f07499c0",
+      "sq": {
+        "specialty": "Pastrimi i veturave · Polirim · Mbrojtje qeramike",
+        "description": "Auto Detailing Bilaku në Istog ofron, sipas faqes së vet publike, pastrim veturash, polirim dhe mbrojtje qeramike.",
+        "serviceDetails": [
+          "Pastrim i brendësisë",
+          "Polirim veturash",
+          "Mbrojtje qeramike"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle detailing · Polishing · Ceramic protection",
+        "description": "Auto Detailing Bilaku in Istog offers vehicle cleaning, polishing and ceramic protection, according to its own public business page.",
+        "serviceDetails": [
+          "Interior cleaning",
+          "Vehicle polishing",
+          "Ceramic protection"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own business page: location, business contact and offered services",
+          "Public business directory: business name, address, contact and category"
+        ]
+      }
+    },
+    {
       "id": "auto-detailing-edi-malisheve",
       "sourceHash": "9193d28be365c7616f329bf201b4db28b58cb2fc5ab4e26c40d9391582759b38",
       "sq": {
@@ -368,6 +400,38 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "auto-elektrik-shulina-rahovec",
+      "sourceHash": "af53a8fe0af7c4dadfafd621f64cebe8a8d752df7190024b16c731fc75f0ebe5",
+      "sq": {
+        "specialty": "Autoelektrikë",
+        "description": "Auto Elektrik Shulina në Rahovec figuron në direktorinë publike të bizneseve si biznes për autoelektrikë. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Autoelektrikë për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria",
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Auto electrics",
+        "description": "Auto Elektrik Shulina in Rahovec is listed in the public business directory for auto-electrical services. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Passenger-car auto-electrical services according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own business page: location, business contact and offered services",
+          "Own business page: location, business contact and offered services",
+          "Public business directory: business name, address, contact and category",
+          "Public business directory: business name, address, contact and category"
         ]
       }
     },
@@ -2306,6 +2370,32 @@
       }
     },
     {
+      "id": "auto-servis-f-gashi-decan",
+      "sourceHash": "f8faebc1ed4b5587cdfe357f510abaf5d5de224ffc6ef96e508b51fdc0ba6e6a",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis F.Gashi në Deçan figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis F.Gashi in Deçan is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: business name, address, contact and category"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-fitimi-suhareke",
       "sourceHash": "8c38f7e0a3bd22e276f761f84533f6d0dab3e492188272987b5716735d0fb03f",
       "sq": {
@@ -2810,6 +2900,34 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-moni-decan",
+      "sourceHash": "946e16dafa04454d0805f4ac869bbbf19968a124327d8f758595bc22ec3ee5ef",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis Moni në Deçan figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt tjetër i biznesit: +38344729545; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis Moni in Deçan is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Additional business contact: +38344729545; reachability not confirmed",
+        "sourceTitles": [
+          "Own business page: location, business contact and offered services",
+          "Public business directory: business name, address, contact and category"
         ]
       }
     },
@@ -3576,6 +3694,40 @@
       }
     },
     {
+      "id": "autodetailing-sharani-istog",
+      "sourceHash": "b311f8f54c861c76e0f7d0106ea627b75deb1278b4cc4b93b4f9db2fc24a60b3",
+      "sq": {
+        "specialty": "Pastrimi i veturave · Polirim · Mbrojtje qeramike",
+        "description": "Autodetailing Sharani në Istog ofron, sipas faqes së vet publike, pastrim veturash, polirim dhe mbrojtje qeramike.",
+        "serviceDetails": [
+          "Pastrim i veturave dhe i brendësisë",
+          "Polirim dhe mbrojtje qeramike",
+          "Pastrim i fenerëve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle detailing · Polishing · Ceramic protection",
+        "description": "Autodetailing Sharani in Istog offers vehicle cleaning, polishing and ceramic protection, according to its own public business page.",
+        "serviceDetails": [
+          "Vehicle and interior cleaning",
+          "Polishing and ceramic protection",
+          "Headlight cleaning"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own business page: location, business contact and offered services",
+          "Own business page: location, business contact and offered services",
+          "Public business directory: business name, address, contact and category"
+        ]
+      }
+    },
+    {
       "id": "autodetailingdaja-vushtrri",
       "sourceHash": "97a7cfdf5c0aa153bbb7feebf499abe5eb03ff3d21a85d867c30f8c4ba235f4a",
       "sq": {
@@ -3864,6 +4016,32 @@
         "phoneNote": "Public directory contact (Cybo); not confirmed by the business",
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "autoservis-ervini-rahovec",
+      "sourceHash": "c9aaf1896de728224169be2cdb27226f2c57d60e2920518c7b251f1fab005946",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "AutoServis Ervini në Rahovec figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "AutoServis Ervini in Rahovec is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: business name, address, contact and category"
         ]
       }
     },
@@ -5779,6 +5957,40 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Public directory: name, contact and vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "transmission-service-shop-gulla-rahovec",
+      "sourceHash": "e18523aa82cbd79783cdc24f00d74ec214b461291c158b5575af8d4eea7b025c",
+      "sq": {
+        "specialty": "Kambio automatike · Riparim · Diagnostikë",
+        "description": "Transmission Services & Shop Gulla në Rahovec ofron, sipas faqeve të veta publike, riparim dhe diagnostikë të kambieve automatike.",
+        "serviceDetails": [
+          "Riparim i kambieve automatike",
+          "Diagnostikë e kambieve automatike"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria",
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Automatic transmissions · Repairs · Diagnostics",
+        "description": "Transmission Services & Shop Gulla in Rahovec offers automatic transmission repair and diagnostics, according to its own public business pages.",
+        "serviceDetails": [
+          "Automatic transmission repair",
+          "Automatic transmission diagnostics"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own business page: location, business contact and offered services",
+          "Own business page: location, business contact and offered services",
+          "Public business directory: business name, address, contact and category",
+          "Public business directory: business name, address, contact and category"
         ]
       }
     },
