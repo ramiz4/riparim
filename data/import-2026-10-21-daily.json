@@ -3,7 +3,7 @@
   "date": "2026-10-21",
   "timezone": "Europe/Zurich",
   "startedAt": "2026-10-21T02:58:38.621Z",
-  "checkedAt": "2026-10-21T04:11:18.881Z",
+  "checkedAt": "2026-10-21T04:14:33.054875+00:00",
   "status": "local-import-prepared-awaiting-tests-review-ci-release",
   "completedDateGuard": false,
   "baseCommit": "a24c65eea6033a024506642f9631906b8a5aac37",
@@ -7091,7 +7091,7 @@
         "name": "Transmission Services & Shop Gulla",
         "city": "Rahovec",
         "checkedAt": "2026-10-21T04:07:24.501606+00:00",
-        "status": "eligible-whatsapp-confirmed-assumed-hours-required",
+        "status": "eligible-whatsapp-confirmed-researched-directory-hours",
         "sourceUrls": [
           "https://www.facebook.com/transmissionservicerahovec/",
           "https://www.instagram.com/transmission_servis/",
@@ -7129,18 +7129,27 @@
           "note": "Own Facebook contact/Details and expanded Instagram bio, full Numrat/regional listing and targeted business email/source search inspected. No attributable workshop email found. info@rahoveci.biz is listing publisher/platform contact, not this workshop; generic share-mail link rejected."
         },
         "openingHoursResearch": {
-          "status": "unusable-unconfirmed-unusual-directory-week",
+          "status": "researched-directory-full-week",
+          "sourceUrl": "https://rahoveci.biz/auto-servis/transmission-services-shop-gulla/",
           "sources": [
             "https://www.facebook.com/transmissionservicerahovec/",
             "https://www.instagram.com/transmission_servis/",
             "https://numrat.com/biznes/MC3G45zYVAAo/transmission-services-shop-gulla/",
             "https://rahoveci.biz/auto-servis/transmission-services-shop-gulla/"
           ],
-          "checkedAt": "2026-10-21T04:07:24.501606+00:00",
-          "sourceAge": "Own sources expose no complete weekly plan or age. Unclaimed regional listing is undated.",
-          "defaultRequired": true,
-          "metadataKind": "assumed",
-          "note": "Regional listing displays 08:00-18:00 Monday-Thursday and Saturday-Sunday but Friday closed, with no own-source corroboration or discernible freshness. Unusual incomplete-purpose/currentness evidence treated as unusable, not silently corrected. Central labelled assumed standard plan required; no operator confirmation or Google hours adopted."
+          "checkedAt": "2026-10-21T04:14:33.054875+00:00",
+          "sourceAge": "Undated unclaimed regional business listing, own Facebook/Instagram have no usable complete week. Viewing today is not operator confirmation.",
+          "week": [
+            "08:00-18:00",
+            "08:00-18:00",
+            "08:00-18:00",
+            "08:00-18:00",
+            "closed",
+            "08:00-18:00",
+            "08:00-18:00"
+          ],
+          "limits": "Complete plausible listing-specific opening-hours widget precedes listing-owner block/footer; exact full name/phone/RrugaUCK site match independently confirmed workshop. Friday closed and Sunday open retained exactly, without assuming a different weekend. No Google hours or operator confirmation.",
+          "note": "Independent Spec review corrected initial unjustified rejection of unusual Friday/Sunday pattern. No concrete attribution conflict or internal impossible interval was found; retain complete independently sourced week as researched."
         }
       },
       {
@@ -7181,14 +7190,24 @@
           "note": "Own full contact/Details tabs and Numrat inspected; scoped explicit email/Instagram search gives location-tag and unrelated accounts, no attributable own Instagram or business email."
         },
         "openingHoursResearch": {
-          "status": "identity-deferred-own-week-not-expanded",
-          "sources": ["https://www.facebook.com/Orahovec/directory_basic_info"],
-          "checkedAt": "2026-10-21T04:09:57.884687+00:00",
-          "sourceAge": "Own Details has business-hours control; full week not expanded in this identity-blocked investigation.",
-          "nextCheck": "Research full own week after contact continuity resolves; otherwise use central labelled default."
+          "status": "researched-own-full-week-identity-deferred",
+          "sources": ["https://www.facebook.com/Orahovec/"],
+          "sourceUrl": "https://www.facebook.com/Orahovec/",
+          "checkedAt": "2026-10-21T04:14:33.054875+00:00",
+          "sourceAge": "Full own public business-hours dialog has no update age displayed. Viewing today is not operator confirmation.",
+          "week": [
+            "08:00-18:59",
+            "08:00-18:59",
+            "08:00-18:59",
+            "08:00-18:59",
+            "08:00-18:59",
+            "08:00-18:59",
+            "closed"
+          ],
+          "note": "Complete actual own dialog inspected. Exact source endpoints retained without rounding or correction. No hours import while substantive identity/site/contact continuity remains deferred."
         },
         "reason": "Own current44 business number differs from directory/Maps49 on matching name/street, without explicit pairing or transition.",
-        "nextCheck": "Find own paired44/49 contacts or documented contact transition/current premises continuity, then repeat Maps exact contact gate and check all intended numbers.",
+        "nextCheck": "Find own paired44/49 contacts or documented contact transition/current premises continuity, then repeat Maps exact contact gate and check all intended numbers. Own full week already researched; recheck when resumed.",
         "checkedAt": "2026-10-21T04:09:57.884687+00:00"
       },
       {
@@ -7229,21 +7248,28 @@
           "note": "Own business contact tab explicitly labels this address as email; own name/town/exact international phone match. Public sourcing only, no deliverability/consent claim. Identity/site remains deferred."
         },
         "openingHoursResearch": {
-          "status": "identity-deferred-own-week-not-expanded",
-          "sources": [
-            "https://www.facebook.com/Gynber/directory_basic_info",
-            "https://www.instagram.com/autoservicegynber/"
+          "status": "researched-own-full-week-identity-deferred",
+          "sources": ["https://www.facebook.com/Gynber/"],
+          "sourceUrl": "https://www.facebook.com/Gynber/",
+          "checkedAt": "2026-10-21T04:14:33.054875+00:00",
+          "sourceAge": "Full own public business-hours dialog has no update age displayed. Viewing today is not operator confirmation.",
+          "week": [
+            "08:00-20:00",
+            "08:00-20:00",
+            "08:00-20:00",
+            "08:00-20:00",
+            "08:00-20:00",
+            "08:00-20:00",
+            "closed"
           ],
-          "checkedAt": "2026-10-21T04:09:57.884687+00:00",
-          "sourceAge": "Own Instagram has no week; Facebook Details business-hours control not expanded after site conflict.",
-          "nextCheck": "Resolve exact premises, inspect full own week, use central assumed fallback if unusable."
+          "note": "Complete actual own dialog inspected. Exact source endpoints retained without rounding or correction. No hours import while substantive identity/site/contact continuity remains deferred."
         },
         "whatsappResearch": {
           "status": "not-checked-identity-deferred",
           "intendedPublicPhones": ["+38344828828"]
         },
         "reason": "Own Facebook/Instagram names Fari/Fahri Fazliu while directory and active Maps name110; precise premises equivalence/continuity not proven.",
-        "nextCheck": "Obtain own precise current premises or official business map link/road equivalence/relocation evidence; then direct-ID contact/site return, complete hours and WhatsApp lookup.",
+        "nextCheck": "Resolve own Fari/FahriFazliu versus110 exact-premises continuity, then direct-ID site/contact return and WhatsApp lookup. Complete own week already researched; recheck when resumed.",
         "checkedAt": "2026-10-21T04:09:57.884687+00:00"
       }
     ],
@@ -7790,10 +7816,10 @@
   "openingHours": {
     "newPublishedResearchedPlans": 0,
     "newPublishedAssumedPlans": 0,
-    "preparedResearchedPlans": 1,
-    "preparedAssumedPlans": 6,
-    "revision": "20dacaa44b351929df38e151c5f3cdeb1ee7c3429123fb8a801c1ff99dddbe4e",
-    "note": "Seven prepared plans: one independently researched Cybo week, six centrally prepared labelled assumed plans; previous201 records/six exclusions unchanged. Published totals remain zero pending release acceptance."
+    "preparedResearchedPlans": 2,
+    "preparedAssumedPlans": 5,
+    "revision": "a30f6e6995340df5f85788513669551eaf22779c53fc28b22a4f2ead1dc03c34",
+    "note": "Seven prepared plans: two independently sourced complete directory weeks, five central explicitly assumed defaults. All201 previousplans/sixexclusions unchanged."
   },
   "publicBusinessEmailSummary": {
     "newPublishedWithSourcedEmail": 0,
@@ -7915,7 +7941,7 @@
     "release": null,
     "commit": null,
     "deployment": null,
-    "reason": "Seven eligible additions prepared locally; complete checks, review, CI, release and live acceptance pending."
+    "reason": "Seven independently eligible additions; corrections from Spec review completed; final-head checks/reviews/CI/release/live pending."
   },
   "schedule": {
     "requestedLocalTime": "06:00",
@@ -8030,7 +8056,15 @@
     },
     "hoursDryRun": "passed full208record manifest",
     "emailsDryRun": "passed; seven new researched not-found records, zero invented emails",
-    "requiredWorkflowChecks": "pending, must pass before merge"
+    "requiredWorkflowChecks": "pending, must pass before merge",
+    "reviewCorrections": {
+      "checkedAt": "2026-10-21T04:14:33.054875+00:00",
+      "previousHead": "f05b402cc514627c58063b9c8ad61aaabea6f701",
+      "actions": [
+        "Expanded own complete Valtoni/Gynber weekly dialogs despite identity deferrals",
+        "Retained full listing-specific Gulla directory week including Fridayclosed/Sundayopen as researched; no arbitrary default"
+      ]
+    }
   },
   "after": {
     "total": 214,

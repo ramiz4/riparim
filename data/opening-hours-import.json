@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "20dacaa44b351929df38e151c5f3cdeb1ee7c3429123fb8a801c1ff99dddbe4e",
+  "revision": "a30f6e6995340df5f85788513669551eaf22779c53fc28b22a4f2ead1dc03c34",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -17792,6 +17792,9 @@
             ]
           },
           {
+            "mode": "closed"
+          },
+          {
             "mode": "open",
             "intervals": [
               {
@@ -17805,24 +17808,29 @@
             "intervals": [
               {
                 "start": "08:00",
-                "end": "16:00"
+                "end": "18:00"
               }
             ]
-          },
-          {
-            "mode": "closed"
           }
         ],
         "exceptions": []
       },
       "metadata": {
-        "kind": "assumed",
+        "kind": "researched",
         "checkedAt": "2026-10-21",
-        "source": "https://www.facebook.com/transmissionservicerahovec/",
+        "source": "https://rahoveci.biz/auto-servis/transmission-services-shop-gulla/",
         "sourceName": "Transmission Services & Shop Gulla",
-        "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Own sources expose no complete weekly plan or age. Unclaimed regional listing is undated. Regional listing displays 08:00-18:00 Monday-Thursday and Saturday-Sunday but Friday closed, with no own-source corroboration or discernible freshness. Unusual incomplete-purpose/currentness evidence treated as unusable, not silently corrected. Central labelled assumed standard plan required; no operator confirmation or Google hours adopted. Checked sources: https://www.facebook.com/transmissionservicerahovec/ https://www.instagram.com/transmission_servis/ https://numrat.com/biznes/MC3G45zYVAAo/transmission-services-shop-gulla/ https://rahoveci.biz/auto-servis/transmission-services-shop-gulla/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
-        "originalWeek": ["", "", "", "", "", "", ""],
+        "researchStatus": "Gefunden (unabhängiges Firmenverzeichnis)",
+        "notes": "Undated unclaimed regional business listing, own Facebook/Instagram have no usable complete week. Viewing today is not operator confirmation. Complete plausible listing-specific opening-hours widget precedes listing-owner block/footer; exact full name/phone/RrugaUCK site match independently confirmed workshop. Friday closed and Sunday open retained exactly, without assuming a different weekend. No Google hours or operator confirmation. Independent Spec review corrected initial unjustified rejection of unusual Friday/Sunday pattern. No concrete attribution conflict or internal impossible interval was found; retain complete independently sourced week as researched.",
+        "originalWeek": [
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "Geschlossen",
+          "08:00-18:00",
+          "08:00-18:00"
+        ],
         "earlierPlan": ""
       }
     },
