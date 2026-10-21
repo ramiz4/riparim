@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "887bdf2e63be23a52e093bb0622a64b4a08d625e946e2fbca3990eedc7a4b9bf",
+  "revision": "20dacaa44b351929df38e151c5f3cdeb1ee7c3429123fb8a801c1ff99dddbe4e",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -709,6 +709,87 @@
       }
     },
     {
+      "id": "auto-detailing-bilaku-istog",
+      "expected": {
+        "name": "Auto Detailing Bilaku",
+        "city": "Istog",
+        "address": "75 Hysen Bujupi, Istog",
+        "phone": "+38349877786"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-21",
+        "source": "https://www.instagram.com/autodetailingbilaku/",
+        "sourceName": "Auto Detailing Bilaku",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own bio has no weekly schedule or update date; directory updated12October has no week. No attributable own Facebook/contactsite schedule found. Otherwise independently fully verified: central assumed standard plan mandatory. No Google hours or operator confirmation copied. Checked sources: https://www.instagram.com/autodetailingbilaku/ https://numrat.com/biznes/GTtV9rx8j3zm/auto-detailing-bilaku/ https://www.facebook.com/search/pages/?q=Auto%20Detailing%20Bilaku No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-detailing-edi-malisheve",
       "expected": {
         "name": "Auto Detailing EDI",
@@ -1146,6 +1227,95 @@
           "08:00-18:00",
           "08:00-18:00",
           "08:00-16:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-elektrik-shulina-rahovec",
+      "expected": {
+        "name": "Auto Elektrik Shulina",
+        "city": "Rahovec",
+        "address": "110, Rahovec",
+        "phone": "+38344900067"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:30"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:30"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:30"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:30"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:30"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:30"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-21",
+        "source": "https://www.cybo.com/XK-biz/auto-elektrik-shulina",
+        "sourceName": "Auto Elektrik Shulina",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Undated directory week; current viewing is not operator confirmation. Complete plausible traceable directory week, matched exact business contact/site. Own Facebook source did not provide usable weekly dialog in checked profile. No Google hours or current open-status claim adopted. Checked sources: https://www.cybo.com/XK-biz/auto-elektrik-shulina https://www.facebook.com/AutoShulina/ https://www.facebook.com/AutoShulina/directory_contact_info https://numrat.com/biznes/FLUfU7k3xPwM/auto-elektrik-shulina/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "09:00-18:30",
+          "09:00-18:30",
+          "09:00-18:30",
+          "09:00-18:30",
+          "09:00-18:30",
+          "09:00-18:30",
           "Geschlossen"
         ],
         "earlierPlan": ""
@@ -6840,6 +7010,87 @@
       }
     },
     {
+      "id": "auto-servis-f-gashi-decan",
+      "expected": {
+        "name": "Auto Servis F.Gashi",
+        "city": "Deçan",
+        "address": "269, Deçan",
+        "phone": "+38344196551"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-21",
+        "source": "https://numrat.com/biznes/77DGLsUIJ4WH/auto-servis-f-gashi/",
+        "sourceName": "Auto Servis F.Gashi",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated12October has no week. No attributable own Facebook/Instagram/contactsite schedule found. No generic Gashi-homonym or Google hours reused. Central assumed standard plan required for otherwise verified exact-site identity. Checked sources: https://numrat.com/biznes/77DGLsUIJ4WH/auto-servis-f-gashi/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-servis-fitimi-suhareke",
       "expected": {
         "name": "Auto Servis \"Fitimi\"",
@@ -8428,6 +8679,87 @@
           "08:00-18:00",
           "08:00-18:00"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-moni-decan",
+      "expected": {
+        "name": "Auto Servis Moni",
+        "city": "Deçan",
+        "address": "45 Enver Haradinaj, Deçan",
+        "phone": "+38349436294"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-21",
+        "source": "https://www.instagram.com/autoservismoni/",
+        "sourceName": "Auto Servis Moni",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own bio has no weekly plan/update age; directory updated12October has no schedule. No attributable own Facebook/site week found. Central assumed plan mandatory for otherwise eligible business; no Google hours copied. Checked sources: https://www.instagram.com/autoservismoni/ https://numrat.com/biznes/IH8bbKEkZZq9/auto-servis-moni/ https://www.facebook.com/search/pages/?q=Auto%20Servis%20Moni No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -10803,6 +11135,87 @@
       }
     },
     {
+      "id": "autodetailing-sharani-istog",
+      "expected": {
+        "name": "Autodetailing Sharani",
+        "city": "Istog",
+        "address": "Rr Deshmoret Dervishaj 64, Istog",
+        "phone": "+38343844344"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-21",
+        "source": "https://www.facebook.com/p/Autodetailing-Sharani-100076222178108/",
+        "sourceName": "Autodetailing Sharani",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own pages show no complete weekly plan or hours-update age; directory updated12October has no week. Use existing central assumed standard plan for this otherwise fully confirmed workshop. Booking CTA is not a weekly premises schedule; no Google hours or operator confirmation adopted. Checked sources: https://www.facebook.com/p/Autodetailing-Sharani-100076222178108/ https://www.instagram.com/autodetailing.sharani/ https://numrat.com/biznes/fcOCdI5rdsbN/autodetailing-sharani/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "autodetailingdaja-vushtrri",
       "expected": {
         "name": "Autodetailingdaja",
@@ -11784,6 +12197,87 @@
           "07:30-20:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "autoservis-ervini-rahovec",
+      "expected": {
+        "name": "AutoServis Ervini",
+        "city": "Rahovec",
+        "address": "Xhelal Hajda 314, Rahovec",
+        "phone": "+38344230272"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-21",
+        "source": "https://numrat.com/biznes/SjFjqQD7CW5p/autoservis-ervini/",
+        "sourceName": "AutoServis Ervini",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated12October has no weekly plan. No attributable own website/Facebook/Instagram weekly schedule found in bounded source research. For this otherwise verified workshop use existing central preparer assumed standard plan. No Google or different-town homonym hours copied. Checked sources: https://numrat.com/biznes/SjFjqQD7CW5p/autoservis-ervini/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -17248,6 +17742,87 @@
           "07:00-17:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "transmission-service-shop-gulla-rahovec",
+      "expected": {
+        "name": "Transmission Services & Shop Gulla",
+        "city": "Rahovec",
+        "address": "Rruga UÇK, Rahovec",
+        "phone": "+38345612080"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-21",
+        "source": "https://www.facebook.com/transmissionservicerahovec/",
+        "sourceName": "Transmission Services & Shop Gulla",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own sources expose no complete weekly plan or age. Unclaimed regional listing is undated. Regional listing displays 08:00-18:00 Monday-Thursday and Saturday-Sunday but Friday closed, with no own-source corroboration or discernible freshness. Unusual incomplete-purpose/currentness evidence treated as unusable, not silently corrected. Central labelled assumed standard plan required; no operator confirmation or Google hours adopted. Checked sources: https://www.facebook.com/transmissionservicerahovec/ https://www.instagram.com/transmission_servis/ https://numrat.com/biznes/MC3G45zYVAAo/transmission-services-shop-gulla/ https://rahoveci.biz/auto-servis/transmission-services-shop-gulla/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },

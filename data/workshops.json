@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-20T04:34:13.672Z",
+  "updatedAt": "2026-10-21T04:11:18.765Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 207,
+    "published": 214,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 207 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 207,
+    "reason": "All 214 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 214,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -407,6 +407,55 @@
       }
     },
     {
+      "id": "auto-detailing-bilaku-istog",
+      "name": "Auto Detailing Bilaku",
+      "city": "Istog",
+      "address": "75 Hysen Bujupi, Istog",
+      "phone": "+38349877786",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349877786",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Innenraumreinigung",
+        "Fahrzeugpolitur",
+        "Keramikschutz"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugaufbereitung · Polieren · Keramikschutz",
+      "description": "Auto Detailing Bilaku in Istog bietet laut eigenem Betriebsauftritt Fahrzeugreinigung, Polieren und Keramikschutz an.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.instagram.com/autodetailingbilaku/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://numrat.com/biznes/GTtV9rx8j3zm/auto-detailing-bilaku/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-21",
+      "status": "published",
+      "updatedAt": "2026-10-21T04:10:50.391Z",
+      "google": {
+        "placeId": "ChIJa6vefFIZUxMRr9RHfLY2log",
+        "matchedAt": "2026-10-21T03:34:59.441Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.instagram.com/autodetailingbilaku/",
+            "https://numrat.com/biznes/GTtV9rx8j3zm/auto-detailing-bilaku/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-detailing-edi-malisheve",
       "name": "Auto Detailing EDI",
       "city": "Malishevë",
@@ -657,6 +706,63 @@
             "https://halaman-kuning.cybo.com/XK/gjakov%C3%AB/membaiki-kereta-?d=c"
           ],
           "note": "Identical name and phone contact. The Google location marker lies within the independently published Plus Code cell 9CVV+6CW on Wesley Clark street. Direct Place Details ID check passed."
+        }
+      }
+    },
+    {
+      "id": "auto-elektrik-shulina-rahovec",
+      "name": "Auto Elektrik Shulina",
+      "city": "Rahovec",
+      "address": "110, Rahovec",
+      "phone": "+38344900067",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Diagnose & Elektronik"],
+      "serviceDetails": ["Autoelektrik an Pkw laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Autoelektrik",
+      "description": "Auto Elektrik Shulina in Rahovec ist im öffentlichen Firmenverzeichnis als Betrieb für Autoelektrik aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/AutoShulina/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/AutoShulina/directory_contact_info",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://numrat.com/biznes/FLUfU7k3xPwM/auto-elektrik-shulina/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-elektrik-shulina",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-21",
+      "status": "published",
+      "updatedAt": "2026-10-21T04:10:50.391Z",
+      "google": {
+        "placeId": "ChIJHQQjSXyhUxMRE_rGzeqVhLA",
+        "matchedAt": "2026-10-21T03:28:51.967Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.facebook.com/AutoShulina/",
+            "https://www.facebook.com/AutoShulina/directory_contact_info",
+            "https://numrat.com/biznes/FLUfU7k3xPwM/auto-elektrik-shulina/",
+            "https://www.cybo.com/XK-biz/auto-elektrik-shulina"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
         }
       }
     },
@@ -4021,6 +4127,45 @@
       }
     },
     {
+      "id": "auto-servis-f-gashi-decan",
+      "name": "Auto Servis F.Gashi",
+      "city": "Deçan",
+      "address": "269, Deçan",
+      "phone": "+38344196551",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis F.Gashi in Deçan ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/77DGLsUIJ4WH/auto-servis-f-gashi/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-21",
+      "status": "published",
+      "updatedAt": "2026-10-21T04:10:50.391Z",
+      "google": {
+        "placeId": "ChIJIx3EVwBVUhMRCRL0GA0tZDM",
+        "matchedAt": "2026-10-21T03:45:09.191Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/77DGLsUIJ4WH/auto-servis-f-gashi/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-servis-fitimi-suhareke",
       "name": "Auto Servis \"Fitimi\"",
       "city": "Suharekë",
@@ -4926,6 +5071,51 @@
             "https://www.gjithebiznesi.com/XK/auto-servis-meti_1J-044-385-480"
           ],
           "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-moni-decan",
+      "name": "Auto Servis Moni",
+      "city": "Deçan",
+      "address": "45 Enver Haradinaj, Deçan",
+      "phone": "+38349436294",
+      "phoneNote": "Weiterer Geschäftskontakt: +38344729545; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349436294",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis Moni in Deçan ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.instagram.com/autoservismoni/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://numrat.com/biznes/IH8bbKEkZZq9/auto-servis-moni/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-21",
+      "status": "published",
+      "updatedAt": "2026-10-21T04:10:50.391Z",
+      "google": {
+        "placeId": "ChIJMQPNAgBVUhMRUTdHdOfVlnw",
+        "matchedAt": "2026-10-21T03:43:01.661Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.instagram.com/autoservismoni/",
+            "https://numrat.com/biznes/IH8bbKEkZZq9/auto-servis-moni/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
         }
       }
     },
@@ -6248,6 +6438,61 @@
       }
     },
     {
+      "id": "autodetailing-sharani-istog",
+      "name": "Autodetailing Sharani",
+      "city": "Istog",
+      "address": "Rr Deshmoret Dervishaj 64, Istog",
+      "phone": "+38343844344",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38343844344",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Fahrzeug- und Innenraumreinigung",
+        "Polieren und Keramikschutz",
+        "Scheinwerferreinigung"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugaufbereitung · Polieren · Keramikschutz",
+      "description": "Autodetailing Sharani in Istog bietet laut eigenem Betriebsauftritt Fahrzeugreinigung, Polieren und Keramikschutz an.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/p/Autodetailing-Sharani-100076222178108/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autodetailing.sharani/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://numrat.com/biznes/fcOCdI5rdsbN/autodetailing-sharani/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-21",
+      "status": "published",
+      "updatedAt": "2026-10-21T04:10:50.391Z",
+      "google": {
+        "placeId": "ChIJq1j6JTIZUxMRF01z4QzewXQ",
+        "matchedAt": "2026-10-21T03:36:07.190Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.facebook.com/p/Autodetailing-Sharani-100076222178108/",
+            "https://www.instagram.com/autodetailing.sharani/",
+            "https://numrat.com/biznes/fcOCdI5rdsbN/autodetailing-sharani/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "autodetailingdaja-vushtrri",
       "name": "Autodetailingdaja",
       "city": "Vushtrri",
@@ -6777,6 +7022,45 @@
             "https://www.google.com/maps/?cid=13500840597129851265"
           ],
           "note": "Individual Google listing confirmed using an independently evidenced phone number, workshop name and precise address; CID and actual Place ID designate the same entry. No Google business details or reviews adopted into the profile source."
+        }
+      }
+    },
+    {
+      "id": "autoservis-ervini-rahovec",
+      "name": "AutoServis Ervini",
+      "city": "Rahovec",
+      "address": "Xhelal Hajda 314, Rahovec",
+      "phone": "+38344230272",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344230272",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "AutoServis Ervini in Rahovec ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/SjFjqQD7CW5p/autoservis-ervini/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-21",
+      "status": "published",
+      "updatedAt": "2026-10-21T04:10:50.391Z",
+      "google": {
+        "placeId": "ChIJZz3tSuKjUxMR792Wq3szEWM",
+        "matchedAt": "2026-10-21T03:30:23.752Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/SjFjqQD7CW5p/autoservis-ervini/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
         }
       }
     },
@@ -10076,6 +10360,66 @@
           "method": "name_and_address",
           "sourceUrls": ["https://www.cybo.com/XK/pristina/car-repair"],
           "note": "Distinctive business name, city and postal address 15000 agree with the independent contact directory."
+        }
+      }
+    },
+    {
+      "id": "transmission-service-shop-gulla-rahovec",
+      "name": "Transmission Services & Shop Gulla",
+      "city": "Rahovec",
+      "address": "Rruga UÇK, Rahovec",
+      "phone": "+38345612080",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38345612080",
+      "brands": [],
+      "services": ["Motor & Getriebe", "Diagnose & Elektronik"],
+      "serviceDetails": [
+        "Reparatur von Automatikgetrieben",
+        "Diagnose von Automatikgetrieben"
+      ],
+      "languages": [],
+      "specialty": "Automatikgetriebe · Reparatur · Diagnose",
+      "description": "Transmission Services & Shop Gulla in Rahovec bietet laut eigenen Betriebsauftritten die Reparatur und Diagnose von Automatikgetrieben an.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/transmissionservicerahovec/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/transmission_servis/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://numrat.com/biznes/MC3G45zYVAAo/transmission-services-shop-gulla/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://rahoveci.biz/auto-servis/transmission-services-shop-gulla/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-21",
+      "status": "published",
+      "updatedAt": "2026-10-21T04:10:50.391Z",
+      "google": {
+        "placeId": "ChIJ_VwgIbmjUxMRYGa-rG2QVTk",
+        "matchedAt": "2026-10-21T03:58:39.936Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.facebook.com/transmissionservicerahovec/",
+            "https://www.instagram.com/transmission_servis/",
+            "https://numrat.com/biznes/MC3G45zYVAAo/transmission-services-shop-gulla/",
+            "https://rahoveci.biz/auto-servis/transmission-services-shop-gulla/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
         }
       }
     },
