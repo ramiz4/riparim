@@ -204,6 +204,38 @@
       }
     },
     {
+      "id": "auto-detailig-elkerim-mamushe",
+      "sourceHash": "220a86fc0384aa4ce0e316f07f25187cab923624fcb3ff3aaf6c145b2956828c",
+      "sq": {
+        "specialty": "Pastrim veturash · Polirim · Mbrojtje qeramike",
+        "description": "Auto Detailig Elkerim në Mamushë ofron, sipas faqes së vet publike, pastrim veturash, polirim dhe mbrojtje qeramike, si dhe riparim e pastrim fenerësh.",
+        "serviceDetails": [
+          "Pastrim veturash",
+          "Polirim dhe mbrojtje qeramike",
+          "Riparim dhe pastrim fenerësh"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle detailing · Polishing · Ceramic protection",
+        "description": "Auto Detailig Elkerim in Mamushë offers vehicle cleaning, polishing and ceramic protection, plus headlight repair and cleaning, according to its own public business page.",
+        "serviceDetails": [
+          "Vehicle cleaning",
+          "Vehicle polishing and ceramic protection",
+          "Headlight repair and cleaning"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own business page: location, business contact and offered services",
+          "Public business directory: business name, address, contact and category"
+        ]
+      }
+    },
+    {
       "id": "auto-detailing-besi-prizren",
       "sourceHash": "bcb1348b609ee4444e64dee2d1a15493210c8e7bbe729acc905fe5ac6a8ae819",
       "sq": {
@@ -1608,6 +1640,32 @@
       }
     },
     {
+      "id": "auto-service-desi-dragash",
+      "sourceHash": "b1d498ea27b1da8a9c89ae34a275eb405453a43272928ab65dc3daba0f94b101",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Service Desi në Dragash figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Service Desi in Dragash is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: business name, address, contact and category"
+        ]
+      }
+    },
+    {
       "id": "auto-service-express-prishtina",
       "sourceHash": "068f4e8b40acc19974b4fa147eeaac689a0f18f4c818cd0a94e0e89bdfcc82dc",
       "sq": {
@@ -2482,6 +2540,32 @@
       }
     },
     {
+      "id": "auto-servis-fuli-shtime",
+      "sourceHash": "dd8ae83a32f77a7b59452f257c7b8e7a73b56f471f0eabc84775d1ff9e260d12",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis Fuli në Shtime figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis Fuli in Shtime is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: business name, address, contact and category"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-gashi-peja",
       "sourceHash": "a39d0f78d1e914bf989aafb7f6629e83b98d1b79f4d565c15208590d14482398",
       "sq": {
@@ -3140,6 +3224,32 @@
       }
     },
     {
+      "id": "auto-servis-petriti-hani-i-elezit",
+      "sourceHash": "03ef9541d8c7c0bb70a17e579bbe9273fad72f30c5128350eb5c8352f30e55d7",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis Petriti në Hani i Elezit figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis Petriti in Hani i Elezit is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: business name, address, contact and category"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-pirqi-vushtrri",
       "sourceHash": "ee0778eaf2f6b2ee06c337b850056930170fee459ad434e287beee89b88d1489",
       "sq": {
@@ -3380,6 +3490,32 @@
       }
     },
     {
+      "id": "auto-servis-xhaneri-mamushe",
+      "sourceHash": "57318e25973782591c74a6332259d2806c05a9112a6a109278471cc95bc07c49",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis Xhaneri në Mamushë figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis Xhaneri in Mamushë is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: business name, address, contact and category"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-xhelali-prizren",
       "sourceHash": "1442db2e1b5073ba564cb5ddc2e68fb6986838ec1393849f9a9ab41751d693a3",
       "sq": {
@@ -3438,6 +3574,34 @@
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category",
           "Rechecked directory contact: name · address · telephone · passenger-car service category"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-ylberi-xh-kacanik",
+      "sourceHash": "058c1a311221659d6d7085de326f8883089e275c75d2c04ae2f844bcce269505",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis YLBERI-XH në Kaçanik figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis YLBERI-XH in Kaçanik is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own business page: location, business contact and offered services",
+          "Public business directory: business name, address, contact and category"
         ]
       }
     },
@@ -3830,6 +3994,38 @@
       }
     },
     {
+      "id": "autogang-kacanik",
+      "sourceHash": "6bf99857917d3277c6f55e5789e4e942214b48c3512e210ced03ee4fd853b0cf",
+      "sq": {
+        "specialty": "Shërbime të përgjithshme për vetura",
+        "description": "AutoGang në Kaçanik përshkruan në profilin e vet lokal shërbime të përgjithshme për automjete dhe paraqet mirëmbajtje të rregullt. Kontakti i biznesit dhe vendndodhja e saktë janë marrë nga direktoria publike e bizneseve.",
+        "serviceDetails": [
+          "Shërbime të përgjithshme për vetura",
+          "Mirëmbajtje e rregullt sipas postimit të vet të biznesit"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "General car service",
+        "description": "AutoGang in Kaçanik describes general vehicle service on its local business profile and shows routine maintenance work. The business contact and precise location come from the public business directory.",
+        "serviceDetails": [
+          "General passenger-car service",
+          "Routine vehicle maintenance according to its own business post"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own business page: location, business contact and offered services",
+          "Own business page: location, business contact and offered services",
+          "Public business directory: business name, address, contact and category"
+        ]
+      }
+    },
+    {
       "id": "autohouse-pjese-servis-ferizaj",
       "sourceHash": "d516fe956a93fa02e0f2d2922e9d60772be0c8e4984bc3302e5b1dceb71fd9ab",
       "sq": {
@@ -3906,6 +4102,40 @@
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category",
           "Contact, location and passenger-car service cross-check dated 5 October 2026"
+        ]
+      }
+    },
+    {
+      "id": "autongjyroses-lunik-kacanik",
+      "sourceHash": "85dfd0632527b3a8cd708eb1711638dff36259a02c41cf119eed1b3d969ae768",
+      "sq": {
+        "specialty": "Karroceri · Ngjyrosje · Pastrim veturash",
+        "description": "Autongjyroses LUNIK në Bob të Kaçanikut figuron në direktorinë e bizneseve për punime karrocerie dhe ngjyrosje. Profili i vet i biznesit përfshin pastrimin profesional të veturave.",
+        "serviceDetails": [
+          "Punime karrocerie dhe ngjyrosje sipas direktorisë",
+          "Pastrim profesional veturash sipas profilit të vet të biznesit"
+        ],
+        "phoneNote": "Kontakt tjetër i biznesit: +38349904243; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Faqja e vet e biznesit: vendndodhja, kontakti dhe shërbimet e ofruara",
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Bodywork · Paint · Vehicle detailing",
+        "description": "Autongjyroses LUNIK in Bob near Kaçanik is listed for bodywork and paint in the business directory. Its own business profile lists vehicle detailing.",
+        "serviceDetails": [
+          "Bodywork and paint according to the business directory",
+          "Vehicle detailing according to its own business profile"
+        ],
+        "phoneNote": "Additional business contact: +38349904243; reachability not confirmed",
+        "sourceTitles": [
+          "Own business page: location, business contact and offered services",
+          "Own business page: location, business contact and offered services",
+          "Own business page: location, business contact and offered services",
+          "Public business directory: business name, address, contact and category"
         ]
       }
     },
@@ -4952,6 +5182,34 @@
       }
     },
     {
+      "id": "guri-car-mechanic-kacanik",
+      "sourceHash": "075451b683d378146b6bd03b660bd3c1e8c235bbb50668039f402edbe28334d7",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Guri Car Mechanic në Kaçanik figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria",
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Guri Car Mechanic in Kaçanik is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: business name, address, contact and category",
+          "Public business directory: business name, address, contact and category"
+        ]
+      }
+    },
+    {
       "id": "isa-tuning-lipjan",
       "sourceHash": "b9666470dc577ffd1fd1849a7559c1bc3bc0329c7ceae4daf950bba31a8bcb60",
       "sq": {
@@ -5038,6 +5296,34 @@
         "phoneNote": "Public directory contact (Gjirafa.biz); not confirmed by the business",
         "sourceTitles": [
           "Gjirafa.biz: published name · address · telephone · vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "kushtrimi-auto-service-kacanik",
+      "sourceHash": "d87b8c578eeb9f2b25276771f497340dea58bb022c63bfd1d57cb859f5dd3a83",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Kushtrimi Auto Service në Kaçanik figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria",
+          "Direktori publike biznesesh: emri, adresa, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Kushtrimi Auto Service in Kaçanik is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: business name, address, contact and category",
+          "Public business directory: business name, address, contact and category"
         ]
       }
     },

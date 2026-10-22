@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "a30f6e6995340df5f85788513669551eaf22779c53fc28b22a4f2ead1dc03c34",
+  "revision": "350d3b8a20b2f4946a04c2f6320f68c3f519a05a7f55c218aad43888231b3768",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -616,6 +616,87 @@
           "Geschlossen",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-detailig-elkerim-mamushe",
+      "expected": {
+        "name": "Auto Detailig Elkerim",
+        "city": "Mamushë",
+        "address": "Sancak 45, Mamushë",
+        "phone": "+38345212110"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-22",
+        "source": "https://www.instagram.com/autodetailig_elkerim/",
+        "sourceName": "Auto Detailig Elkerim",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own complete bio has no weekly schedule/update age. Directory updated12October has no week. Own publicly indexed service post supports polishing/ceramic only, not regular opening times; no attributable own Facebook/week found. Central explicitly assumed default required; no owner confirmation or Google hours. Checked sources: https://www.instagram.com/autodetailig_elkerim/ https://numrat.com/biznes/kv5k99Avh95e/auto-detailig-elkerim/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -4868,6 +4949,87 @@
       }
     },
     {
+      "id": "auto-service-desi-dragash",
+      "expected": {
+        "name": "Auto Service Desi",
+        "city": "Dragash",
+        "address": "Dragash 22000",
+        "phone": "+38343732967"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-22",
+        "source": "https://numrat.com/biznes/tKbDpjlZZcIv/auto-service-desi/",
+        "sourceName": "Auto Service Desi",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated12October has no week; no attributable own current Kosovo contactsite or social week found. Central explicitly assumed default required for otherwise verified precise site; no Google hours/owner confirmation. Checked sources: https://numrat.com/biznes/tKbDpjlZZcIv/auto-service-desi/ https://www.facebook.com/search/pages/?q=Auto%20Service%20Desi No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-service-express-prishtina",
       "expected": {
         "name": "Auto Service Express",
@@ -7350,6 +7512,87 @@
       }
     },
     {
+      "id": "auto-servis-fuli-shtime",
+      "expected": {
+        "name": "Auto Servis Fuli",
+        "city": "Shtime",
+        "address": "Anton Qeta, Shtime",
+        "phone": "+38344142520"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-22",
+        "source": "https://numrat.com/biznes/DE7xD1WqFh29/auto-servis-fuli/",
+        "sourceName": "Auto Servis Fuli",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated12October has no week; no attributable own weekly plan found. Gjilan AutoElectroFULI details describe another city/contact; do not copy that closure/hours to Shtime. Central explicitly assumed default mandatory for verified Shtime identity; no Google hours/owner confirmation. Checked sources: https://numrat.com/biznes/DE7xD1WqFh29/auto-servis-fuli/ https://www.facebook.com/search/pages/?q=Auto%20Servis%20Fuli No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-servis-gashi-peja",
       "expected": {
         "name": "Auto Servis \"Gashi\"",
@@ -9472,6 +9715,87 @@
       }
     },
     {
+      "id": "auto-servis-petriti-hani-i-elezit",
+      "expected": {
+        "name": "Auto Servis Petriti",
+        "city": "Hani i Elezit",
+        "address": "Adem Jashari 109, Hani i Elezit",
+        "phone": "+38346126478"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-22",
+        "source": "https://numrat.com/biznes/iyxMDfrIiVXW/auto-servis-petriti/",
+        "sourceName": "Auto Servis Petriti",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated12October has no week; own social candidate is independently identified as different Vushtrri workshop. Do not borrow foreign-town homonym hours. Central explicitly assumed week required for independently verified Hani premises, no Google hours or operator confirmation. Checked sources: https://numrat.com/biznes/iyxMDfrIiVXW/auto-servis-petriti/ https://duckduckgo.com/?q=Auto+Servis+Petriti+Hani+i+Elezit No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-servis-pirqi-vushtrri",
       "expected": {
         "name": "Auto Servis Pirqi",
@@ -10267,6 +10591,87 @@
       }
     },
     {
+      "id": "auto-servis-xhaneri-mamushe",
+      "expected": {
+        "name": "Auto Servis Xhaneri",
+        "city": "Mamushë",
+        "address": "Mamushë 20540",
+        "phone": "+38344288810"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-22",
+        "source": "https://numrat.com/biznes/MNhsNNmxoFjF/auto-servis-xhaneri/",
+        "sourceName": "Auto Servis Xhaneri",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated12October has no weekly plan; no attributable own week found. Central explicitly assumed default mandatory for verified exactsite; no Google hours/current open-status/owner confirmation. Checked sources: https://numrat.com/biznes/MNhsNNmxoFjF/auto-servis-xhaneri/ https://www.facebook.com/search/pages/?q=Auto%20Servis%20Xhaneri No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-servis-xhelali-prizren",
       "expected": {
         "name": "Auto Servis Xhelali",
@@ -10442,6 +10847,95 @@
           "Geschlossen"
         ],
         "earlierPlan": "24 Stunden geöffnet | 24 Stunden geöffnet | 24 Stunden geöffnet | 24 Stunden geöffnet | 24 Stunden geöffnet | 24 Stunden geöffnet | Geschlossen"
+      }
+    },
+    {
+      "id": "auto-servis-ylberi-xh-kacanik",
+      "expected": {
+        "name": "Auto Servis YLBERI-XH",
+        "city": "Kaçanik",
+        "address": "Kaçanik 71000",
+        "phone": "+38344243800"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:30"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:30"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:30"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:30"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:30"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-22",
+        "source": "https://www.facebook.com/autoservisiYLBERI/",
+        "sourceName": "Auto Servis YLBERI-XH",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own complete weekly dialog updatedabout5yearsago; exactdateunknown, viewingtodaynotoperatorconfirmation. Full own week reread exactly as displayed; plausible older research with explicit five-year source-age limit, not current operator confirmation or current-open claim. Current premises gate resolved by new independent precise listing. Checked sources: https://www.facebook.com/autoservisiYLBERI/ https://numrat.com/biznes/jIUuCioqTWGk/auto-servis-ylberi-xh/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "08:00-18:30",
+          "08:00-18:30",
+          "08:00-18:30",
+          "08:00-18:30",
+          "08:00-18:30",
+          "08:00-18:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
       }
     },
     {
@@ -11578,6 +12072,87 @@
       }
     },
     {
+      "id": "autogang-kacanik",
+      "expected": {
+        "name": "AutoGang",
+        "city": "Kaçanik",
+        "address": "Kaçanik",
+        "phone": "+38344992695"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-22",
+        "source": "https://www.instagram.com/autogangkacanik/",
+        "sourceName": "AutoGang",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own bio/servicepost has no weeklyplan or hoursupdateage. Servicepost displays30April/24weeksago; exactyearnotinferred. Directory updated12October has no usableweek. Central explicitly assumed default required for verifiedprecisesite; no Google hours/operatorconfirmation/currentopenclaim. Checked sources: https://www.instagram.com/autogangkacanik/ https://www.instagram.com/autogangkacanik/p/DXxQiH3CI4L/ https://numrat.com/biznes/KWdA68cJTaV7/autogang/ https://www.facebook.com/search/pages/?q=AutoGang%20Kacanik No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "autohouse-pjese-servis-ferizaj",
       "expected": {
         "name": "Autohouse Auto Pjese & Servis",
@@ -11835,6 +12410,87 @@
           "09:00-16:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "autongjyroses-lunik-kacanik",
+      "expected": {
+        "name": "Autongjyroses LUNIK",
+        "city": "Kaçanik",
+        "address": "M2, Bob, Kaçanik",
+        "phone": "+38344227708"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-22",
+        "source": "https://www.facebook.com/profile.php?id=100092190263937",
+        "sourceName": "Autongjyroses LUNIK",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own full business-hours dialog says continuously open, updated about3yearsago. It gives no regular physical-bodyshop seven-day plan; exact update date not inferred. Own full hours dialog actually inspected; generic old always-open flag is not a usable regular premises schedule. Own full IGbio no week. Central explicitly assumed standard required for otherwise resolved identity; no operator confirmation/current open-status claim. Checked sources: https://www.facebook.com/profile.php?id=100092190263937 https://www.instagram.com/autolunik/ https://www.facebook.com/reel/1446642345997221/ https://numrat.com/biznes/90hjmY58u256/autongjyroses-lunik/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -14930,6 +15586,95 @@
       }
     },
     {
+      "id": "guri-car-mechanic-kacanik",
+      "expected": {
+        "name": "Guri Car Mechanic",
+        "city": "Kaçanik",
+        "address": "Magjistralja XK, Kaçanik",
+        "phone": "+38344378142"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-22",
+        "source": "https://www.cybo.com/XK-biz/guri-car-mechanic",
+        "sourceName": "Guri Car Mechanic",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Undated public directory week; current viewing is not operator confirmation. Complete published Monday-Saturday08:00-19:00/Sundayclosed. Exact phone and MagjistraljaXK site match. Own possible Facebook profile has no attributable complete week; no conflicting usable plan found. Public page loaded automatically after initial security screen; no verification challenge or bypass performed. Independent-directory schedule only; no Google hours, owner confirmation or current-open claim. Checked sources: https://www.cybo.com/XK-biz/guri-car-mechanic https://numrat.com/biznes/ADAY4ZGioBs5/guri-car-mechanic/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "08:00-19:00",
+          "08:00-19:00",
+          "08:00-19:00",
+          "08:00-19:00",
+          "08:00-19:00",
+          "08:00-19:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "isa-tuning-lipjan",
       "expected": {
         "name": "Isa Tuning",
@@ -15183,6 +15928,95 @@
           "09:00-19:00",
           "09:00-19:00",
           "09:00-19:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "kushtrimi-auto-service-kacanik",
+      "expected": {
+        "name": "Kushtrimi Auto Service",
+        "city": "Kaçanik",
+        "address": "Magj. Kaçanik-Ferizaj, Kaçanik",
+        "phone": "+38344227720"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "18:30"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "18:30"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "18:30"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "18:30"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "18:30"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "18:30"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-22",
+        "source": "https://www.cybo.com/XK-biz/kushtrimi-auto-service",
+        "sourceName": "Kushtrimi Auto Service",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Undated public directory schedule, viewing today is not operator confirmation. Complete Cybo Monday-Saturday08:30-18:30/Sundayclosed with exact44phone/Kaçanikroute. Not the different Ferizaj workshop schedule; no Google hours or current open-status claim. Retain exact half-hour endpoints without replacing them with default hours. No owner confirmation. Checked sources: https://www.cybo.com/XK-biz/kushtrimi-auto-service https://numrat.com/biznes/0DH0fzGb2gB8/kushtrimi-auto-service/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "08:30-18:30",
+          "08:30-18:30",
+          "08:30-18:30",
+          "08:30-18:30",
+          "08:30-18:30",
+          "08:30-18:30",
           "Geschlossen"
         ],
         "earlierPlan": ""
