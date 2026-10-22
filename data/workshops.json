@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-21T04:11:18.765Z",
+  "updatedAt": "2026-10-22T04:08:55.224Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 214,
+    "published": 224,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 214 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 214,
+    "reason": "All 224 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 224,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -362,6 +362,55 @@
             "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/"
           ],
           "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted."
+        }
+      }
+    },
+    {
+      "id": "auto-detailig-elkerim-mamushe",
+      "name": "Auto Detailig Elkerim",
+      "city": "Mamushë",
+      "address": "Sancak 45, Mamushë",
+      "phone": "+38345212110",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38345212110",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Fahrzeugreinigung",
+        "Fahrzeugpolitur und Keramikschutz",
+        "Reparatur und Reinigung von Scheinwerfern"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugaufbereitung · Polieren · Keramikschutz",
+      "description": "Auto Detailig Elkerim in Mamushë bietet laut eigener Betriebsseite Fahrzeugreinigung, Polieren und Keramikschutz sowie Scheinwerferreparatur und -reinigung an.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.instagram.com/autodetailig_elkerim/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://numrat.com/biznes/kv5k99Avh95e/auto-detailig-elkerim/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-22",
+      "status": "published",
+      "updatedAt": "2026-10-22T04:02:07.653Z",
+      "google": {
+        "placeId": "ChIJX_De4SyXUxMRHz9mtjIG9zQ",
+        "matchedAt": "2026-10-22T03:28:52.084854+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.instagram.com/autodetailig_elkerim/",
+            "https://numrat.com/biznes/kv5k99Avh95e/auto-detailig-elkerim/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
         }
       }
     },
@@ -2818,6 +2867,45 @@
       }
     },
     {
+      "id": "auto-service-desi-dragash",
+      "name": "Auto Service Desi",
+      "city": "Dragash",
+      "address": "Dragash 22000",
+      "phone": "+38343732967",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Service Desi in Dragash ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.058521,
+      "lng": 20.647906,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/tKbDpjlZZcIv/auto-service-desi/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-22",
+      "status": "published",
+      "updatedAt": "2026-10-22T04:02:07.653Z",
+      "google": {
+        "placeId": "ChIJgQz380HDUxMR4MvX6knmovU",
+        "matchedAt": "2026-10-22T03:30:15.387Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/tKbDpjlZZcIv/auto-service-desi/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-service-express-prishtina",
       "name": "Auto Service Express",
       "city": "Prishtina",
@@ -4322,6 +4410,45 @@
       }
     },
     {
+      "id": "auto-servis-fuli-shtime",
+      "name": "Auto Servis Fuli",
+      "city": "Shtime",
+      "address": "Anton Qeta, Shtime",
+      "phone": "+38344142520",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis Fuli in Shtime ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/DE7xD1WqFh29/auto-servis-fuli/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-22",
+      "status": "published",
+      "updatedAt": "2026-10-22T04:02:07.653Z",
+      "google": {
+        "placeId": "ChIJ25c65tV_UxMRIoeCUl_4kiE",
+        "matchedAt": "2026-10-22T03:14:25.236Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/DE7xD1WqFh29/auto-servis-fuli/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-servis-gashi-peja",
       "name": "Auto Servis \"Gashi\"",
       "city": "Peja",
@@ -5476,6 +5603,45 @@
       }
     },
     {
+      "id": "auto-servis-petriti-hani-i-elezit",
+      "name": "Auto Servis Petriti",
+      "city": "Hani i Elezit",
+      "address": "Adem Jashari 109, Hani i Elezit",
+      "phone": "+38346126478",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38346126478",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis Petriti in Hani i Elezit ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/iyxMDfrIiVXW/auto-servis-petriti/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-22",
+      "status": "published",
+      "updatedAt": "2026-10-22T04:02:07.653Z",
+      "google": {
+        "placeId": "ChIJP8vXtNhvVBMRZiFwo0GJ2HQ",
+        "matchedAt": "2026-10-22T03:18:15.894Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/iyxMDfrIiVXW/auto-servis-petriti/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-servis-pirqi-vushtrri",
       "name": "Auto Servis Pirqi",
       "city": "Vushtrri",
@@ -5892,6 +6058,45 @@
       }
     },
     {
+      "id": "auto-servis-xhaneri-mamushe",
+      "name": "Auto Servis Xhaneri",
+      "city": "Mamushë",
+      "address": "Mamushë 20540",
+      "phone": "+38344288810",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344288810",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis Xhaneri in Mamushë ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.335577,
+      "lng": 20.730588,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/MNhsNNmxoFjF/auto-servis-xhaneri/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-22",
+      "status": "published",
+      "updatedAt": "2026-10-22T04:02:07.653Z",
+      "google": {
+        "placeId": "ChIJ4-M-fAaZUxMR-gdUAX7NsUo",
+        "matchedAt": "2026-10-22T03:50:49.824Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/MNhsNNmxoFjF/auto-servis-xhaneri/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-servis-xhelali-prizren",
       "name": "Auto Servis Xhelali",
       "city": "Prizren",
@@ -6012,6 +6217,51 @@
             "https://www.google.com/maps/?cid=9099976421809570009"
           ],
           "note": "Individual Google listing confirmed using an independently evidenced phone number, workshop name and precise address; CID and actual Place ID designate the same entry. No Google business details or reviews adopted into the profile source."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-ylberi-xh-kacanik",
+      "name": "Auto Servis YLBERI-XH",
+      "city": "Kaçanik",
+      "address": "Kaçanik 71000",
+      "phone": "+38344243800",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis YLBERI-XH in Kaçanik ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.261705,
+      "lng": 21.232752,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/autoservisiYLBERI/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://numrat.com/biznes/jIUuCioqTWGk/auto-servis-ylberi-xh/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-22",
+      "status": "published",
+      "updatedAt": "2026-10-22T04:02:07.653Z",
+      "google": {
+        "placeId": "ChIJ4S3V2GV7VBMRF6If7-r2Lyg",
+        "matchedAt": "2026-10-22T03:54:05.755Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.facebook.com/autoservisiYLBERI/",
+            "https://numrat.com/biznes/jIUuCioqTWGk/auto-servis-ylberi-xh/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
         }
       }
     },
@@ -6682,6 +6932,60 @@
       }
     },
     {
+      "id": "autogang-kacanik",
+      "name": "AutoGang",
+      "city": "Kaçanik",
+      "address": "Kaçanik",
+      "phone": "+38344992695",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344992695",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Allgemeiner Pkw-Service",
+        "Regelmäßige Fahrzeugwartung laut eigenem Betriebsbeitrag"
+      ],
+      "languages": [],
+      "specialty": "Allgemeiner Pkw-Service",
+      "description": "AutoGang in Kaçanik beschreibt auf seinem lokalen Betriebsprofil allgemeinen Fahrzeugservice und zeigt regelmäßige Wartungsarbeiten. Geschäftskontakt und genauer Standort stammen aus dem öffentlichen Firmenverzeichnis.",
+      "lat": 42.24167166067569,
+      "lng": 21.24343747986195,
+      "sources": [
+        {
+          "url": "https://www.instagram.com/autogangkacanik/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autogangkacanik/p/DXxQiH3CI4L/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://numrat.com/biznes/KWdA68cJTaV7/autogang/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-22",
+      "status": "published",
+      "updatedAt": "2026-10-22T04:02:07.653Z",
+      "google": {
+        "placeId": "ChIJr5vGk3t7VBMREmnk4mk5JVc",
+        "matchedAt": "2026-10-22T03:59:27.998Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.instagram.com/autogangkacanik/",
+            "https://www.instagram.com/autogangkacanik/p/DXxQiH3CI4L/",
+            "https://numrat.com/biznes/KWdA68cJTaV7/autogang/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "autohouse-pjese-servis-ferizaj",
       "name": "Autohouse Auto Pjese & Servis",
       "city": "Ferizaj",
@@ -6821,6 +7125,67 @@
             "https://faqet-e-verdha.cybo.com/XK/gjakov%C3%AB/riparimi-i-makinave-"
           ],
           "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
+        }
+      }
+    },
+    {
+      "id": "autongjyroses-lunik-kacanik",
+      "name": "Autongjyroses LUNIK",
+      "city": "Kaçanik",
+      "address": "M2, Bob, Kaçanik",
+      "phone": "+38344227708",
+      "phoneNote": "Weiterer Geschäftskontakt: +38349904243; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344227708",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Karosserie- und Lackarbeiten laut Firmenverzeichnis",
+        "Fahrzeugaufbereitung laut eigenem Betriebsprofil"
+      ],
+      "languages": [],
+      "specialty": "Karosserie · Lack · Fahrzeugaufbereitung",
+      "description": "Autongjyroses LUNIK in Bob bei Kaçanik ist im Firmenverzeichnis für Karosserie- und Lackarbeiten aufgeführt. Der eigene Betriebsauftritt führt Fahrzeugaufbereitung auf.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.instagram.com/autolunik/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/profile.php?id=100092190263937",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/reel/1446642345997221/",
+          "title": "Eigener Betriebsauftritt: Standort, Geschäftskontakt und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://numrat.com/biznes/90hjmY58u256/autongjyroses-lunik/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-22",
+      "status": "published",
+      "updatedAt": "2026-10-22T04:02:07.653Z",
+      "google": {
+        "placeId": "ChIJ2RWaPABxVBMRicBzcn0bZqM",
+        "matchedAt": "2026-10-22T03:39:54.977Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.instagram.com/autolunik/",
+            "https://www.facebook.com/profile.php?id=100092190263937",
+            "https://www.facebook.com/reel/1446642345997221/",
+            "https://numrat.com/biznes/90hjmY58u256/autongjyroses-lunik/",
+            "https://www.openstreetmap.org/way/776353907"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
         }
       }
     },
@@ -8606,6 +8971,51 @@
       }
     },
     {
+      "id": "guri-car-mechanic-kacanik",
+      "name": "Guri Car Mechanic",
+      "city": "Kaçanik",
+      "address": "Magjistralja XK, Kaçanik",
+      "phone": "+38344378142",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Guri Car Mechanic in Kaçanik ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/ADAY4ZGioBs5/guri-car-mechanic/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.cybo.com/XK-biz/guri-car-mechanic",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-22",
+      "status": "published",
+      "updatedAt": "2026-10-22T04:02:07.653Z",
+      "google": {
+        "placeId": "ChIJ600aq157VBMRbXS1D59CYi0",
+        "matchedAt": "2026-10-22T03:32:47.712Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/ADAY4ZGioBs5/guri-car-mechanic/",
+            "https://www.cybo.com/XK-biz/guri-car-mechanic"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "isa-tuning-lipjan",
       "name": "Isa Tuning",
       "city": "Lipjan",
@@ -8753,6 +9163,51 @@
           "method": "phone_and_location",
           "sourceUrls": ["https://stgres.gjirafa.biz/koli-1"],
           "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
+        }
+      }
+    },
+    {
+      "id": "kushtrimi-auto-service-kacanik",
+      "name": "Kushtrimi Auto Service",
+      "city": "Kaçanik",
+      "address": "Magj. Kaçanik-Ferizaj, Kaçanik",
+      "phone": "+38344227720",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344227720",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Kushtrimi Auto Service in Kaçanik ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/0DH0fzGb2gB8/kushtrimi-auto-service/",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.cybo.com/XK-biz/kushtrimi-auto-service",
+          "title": "Öffentliches Firmenverzeichnis: Betriebsname, Anschrift, Kontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-22",
+      "status": "published",
+      "updatedAt": "2026-10-22T04:02:07.653Z",
+      "google": {
+        "placeId": "ChIJSV4c6kd7VBMR9U9et9Ymd4c",
+        "matchedAt": "2026-10-22T03:34:59.759Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/0DH0fzGb2gB8/kushtrimi-auto-service/",
+            "https://www.cybo.com/XK-biz/kushtrimi-auto-service"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
         }
       }
     },
