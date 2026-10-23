@@ -1526,6 +1526,32 @@
       }
     },
     {
+      "id": "auto-service-b-b-podujeve",
+      "sourceHash": "75c173ed49e0187c486b8442e0cb26dcc2ccbc41b04ab7b453c13494a4a3bc55",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Service B&B në Podujevë figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Service B&B in Podujevë is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
+        ]
+      }
+    },
+    {
       "id": "auto-service-bardhi-peja",
       "sourceHash": "1c3a77227a551189a7a8f808513a430490f89874bc93a3e2bdd33a63bc6c4da0",
       "sq": {
@@ -1690,6 +1716,60 @@
       }
     },
     {
+      "id": "auto-service-istrefi-skenderaj",
+      "sourceHash": "1e688a0d4e34851852366278f00e44593a9c304f56e4b72e71b488b6e323fc30",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Service \"Istrefi\" në Skenderaj figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Service \"Istrefi\" in Skenderaj is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
+        ]
+      }
+    },
+    {
+      "id": "auto-service-kela-podujeve",
+      "sourceHash": "48427e6d63cf6ca2625b31be830b4b747da83dd09032016d8a4f33523341abdf",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Service KELA në Podujevë figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt tjetër i biznesit: +38345785666; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Profili i vet i biznesit: emri, vendi dhe kontaktet",
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Service KELA in Podujevë is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Additional business contact: +38345785666; reachability not confirmed",
+        "sourceTitles": [
+          "Own business profile: name, locality and business contacts",
+          "Public business directory: name, location, business contact and category"
+        ]
+      }
+    },
+    {
       "id": "auto-service-kushtrimi-ferizaj",
       "sourceHash": "8f65755d0d243a701c4ec7d6293b7141bd8ba0dd61871f61f44af0e19b74872d",
       "sq": {
@@ -1714,6 +1794,40 @@
         "sourceTitles": [
           "Public directory: name, contact and vehicle service category",
           "Directory: name, phone and Plus Code address checked again"
+        ]
+      }
+    },
+    {
+      "id": "auto-service-labi-center-podujeve",
+      "sourceHash": "528551e55a21f32d9b4042e5c3dab8ac7474662f793db55524d0935050b5f911",
+      "sq": {
+        "specialty": "Autoelektrikë · Servis automjetesh · Kalibrim ADAS",
+        "description": "Profili i vet i Auto Service LABI CENTER në Podujevë paraqet autoelektrikë, servis automjetesh dhe kalibrim të sistemeve të asistencës për drejtuesin.",
+        "serviceDetails": [
+          "Autoelektrikë dhe servis i përgjithshëm i automjeteve",
+          "Kalibrim i sistemeve të asistencës për drejtuesin (ADAS)"
+        ],
+        "phoneNote": "Kontakt tjetër i biznesit: +38345997555; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Profili i vet i biznesit: emri, adresa, kontaktet dhe shërbimet",
+          "Profili i vet i biznesit: emri, vendndodhja dhe shërbimet e ofruara",
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Direktori publike biznesesh: kontakti dhe orari javor"
+        ]
+      },
+      "en": {
+        "specialty": "Auto electrics · Vehicle service · ADAS calibration",
+        "description": "Auto Service LABI CENTER in Podujevë lists auto-electrical work, vehicle service and driver-assistance-system calibration on its own business profile.",
+        "serviceDetails": [
+          "Auto-electrical work and general vehicle service",
+          "Advanced driver-assistance-system (ADAS) calibration"
+        ],
+        "phoneNote": "Additional business contact: +38345997555; reachability not confirmed",
+        "sourceTitles": [
+          "Own business profile: name, address, business contacts and services",
+          "Own business profile: name, location and offered services",
+          "Public business directory: name, location, business contact and category",
+          "Public business directory: business contact and weekly schedule"
         ]
       }
     },
@@ -2238,6 +2352,32 @@
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category",
           "Contact, location and passenger-car service cross-check dated 5 October 2026"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-burimi-podujeve",
+      "sourceHash": "76337978014ca6a3cb524b3e9debe07e0e7609529e7c71cc71e13d183909510c",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis Burimi në Podujevë figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis Burimi in Podujevë is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
         ]
       }
     },
@@ -2788,6 +2928,58 @@
         "phoneNote": "Public directory contact (Gjirafa.biz); not confirmed by the business",
         "sourceTitles": [
           "Gjirafa.biz: published name · address · telephone · vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-kolludra-skenderaj",
+      "sourceHash": "872df048f8f10f13517be6e0e174456afb8e625fd98a2e92b99ade478a3d5bba",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis Kolludra në Skenderaj figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis Kolludra in Skenderaj is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-kujta-skenderaj",
+      "sourceHash": "d5b2373fe9210fbf5aff0926810e79c3f89bf824956f319e6c209ff0ae11bc79",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "AUTO SERVIS KUJTA në Skenderaj figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "AUTO SERVIS KUJTA in Skenderaj is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
         ]
       }
     },
@@ -4390,6 +4582,32 @@
       }
     },
     {
+      "id": "autoservis-rinori-podujeve",
+      "sourceHash": "b6f1eca341d7fa0d379fd4c57f9c5e42e9c3ba3855d20fb8a409ca710fb8cb05",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Autoservis Rinori në Podujevë figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Autoservis Rinori in Podujevë is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
+        ]
+      }
+    },
+    {
       "id": "autoservis-semini-prizren",
       "sourceHash": "204ea430789b465ebcca15acff261318a65c8069795b6e297d62381a6cc54e6c",
       "sq": {
@@ -4450,6 +4668,36 @@
           "Autotrade: name · exact address · service business; 2024 brochure, offers expired",
           "Regular maintenance in the current Toyota service portal",
           "Hybrid system check and written report in the Toyota service portal"
+        ]
+      }
+    },
+    {
+      "id": "autoxhama-mamushe",
+      "sourceHash": "6ad3be9e7000260e1e80dd38c08777c561e490c50838d23111a756fb31906a29",
+      "sq": {
+        "specialty": "Shërbime për xhama automjetesh",
+        "description": "AutoXhama në Mamushë paraqet në profilin e vet shërbime për xhama automjetesh. Numrat publikë të biznesit përputhen me identitetin e hulumtuar në mënyrë të pavarur.",
+        "serviceDetails": [
+          "Shërbime për xhama automjetesh sipas profilit të vet të biznesit"
+        ],
+        "phoneNote": "Kontakt tjetër i biznesit: +38349835618; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Profili i vet i biznesit: shërbime për xhama automjetesh dhe numrat e kontaktit",
+          "Profili i vet i biznesit: emri, vendi dhe orari",
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle glass service",
+        "description": "AutoXhama in Mamushë lists vehicle glass services on its own business profile. Its public business numbers agree with the independently researched identity.",
+        "serviceDetails": [
+          "Vehicle glass service according to its own business profile"
+        ],
+        "phoneNote": "Additional business contact: +38349835618; reachability not confirmed",
+        "sourceTitles": [
+          "Own business profile: vehicle glass service and business phone numbers",
+          "Own business profile: name, locality and opening hours",
+          "Public business directory: name, location, business contact and category"
         ]
       }
     },
@@ -4751,6 +4999,42 @@
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category",
           "Contact, location and passenger-car service cross-check dated 5 October 2026"
+        ]
+      }
+    },
+    {
+      "id": "dizzi-garage-skenderaj",
+      "sourceHash": "4eb61d471b3ac8d0d08e64a7f7993b50373f88583705b98f94c01f19bf00c800",
+      "sq": {
+        "specialty": "Diagnostikë · Mirëmbajtje · Motor dhe transmision",
+        "description": "Faqja e vet e Dizzi Garage në Skenderaj paraqet diagnostikë të automjeteve, mirëmbajtje me ndërrim vaji e filtrash dhe punime në motor e transmision.",
+        "serviceDetails": [
+          "Diagnostikë kompjuterike të automjeteve",
+          "Mirëmbajtje me ndërrim vaji dhe filtrash",
+          "Riparim dhe ndërrim motori",
+          "Riparim i kutive automatike dhe manuale të shpejtësive",
+          "Ndërrim i pjesëve mekanike"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Faqja e vet e biznesit: vendndodhja, kontakti, shërbimet dhe orari",
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Diagnostics · Maintenance · Engine and transmission",
+        "description": "Dizzi Garage in Skenderaj lists vehicle diagnostics, maintenance with oil and filter changes, and engine and transmission work on its own business website.",
+        "serviceDetails": [
+          "Computer-based vehicle diagnostics",
+          "Maintenance with oil and filter changes",
+          "Engine repair and replacement",
+          "Automatic and manual transmission repairs",
+          "Mechanical parts replacement"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Own business website: location, contact, services and opening hours",
+          "Public business directory: name, location, business contact and category"
         ]
       }
     },

@@ -1094,6 +1094,21 @@
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
     },
     {
+      "workshopId": "auto-service-b-b-podujeve",
+      "matchedName": "Auto Service B&B",
+      "matchedPhone": "+38345580898",
+      "matchedCity": "Podujevë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/A5DbEK9NriEe/auto-service-b-b/",
+        "https://www.facebook.com/search/pages/?q=Auto%20Service%20B%26B%20Podujeve",
+        "https://duckduckgo.com/?q=Auto+Service+B%26B+Podujeve",
+        "https://duckduckgo.com/?q=%22%2B38345580898%22"
+      ],
+      "notes": "Full exact45 directory, broad name/town web/nativeFacebook searches and exact international-phone query checked. Native B&B results include foreign Texas/other global businesses, none attributable to target contact/site; web results concern other local businesses, exact phone query no results. No attributable own website/Facebook/Instagram or published business email found; no guessed contacts."
+    },
+    {
       "workshopId": "auto-service-bardhi-peja",
       "matchedName": "Auto Service Bardhi",
       "matchedPhone": "+38349666755",
@@ -1207,6 +1222,38 @@
       "notes": "Previous address preserved. Business website inaccessible on repeat retrieval; other Facebook businesses not assigned."
     },
     {
+      "workshopId": "auto-service-istrefi-skenderaj",
+      "matchedName": "Auto Service \"Istrefi\"",
+      "matchedPhone": "+38349336455",
+      "matchedCity": "Skenderaj",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/dArTO8nb2oHO/auto-service-istrefi/",
+        "https://www.facebook.com/search/pages/?q=Auto%20Service%20Istrefi%20Skenderaj",
+        "https://duckduckgo.com/?q=%22Auto+Service+Istrefi%22+Skenderaj+email+instagram+orari"
+      ],
+      "notes": "Full independent detail, nativeFacebookpublicpages search and focused exactname/town/email/Instagram/orari query checked. No attributable own page/contactwebsite/Instagram or business email found. NativeFacebook results are unrelated Kushtrimi/taxis/buscharter/dealers; none borrowed."
+    },
+    {
+      "workshopId": "auto-service-kela-podujeve",
+      "matchedName": "Auto Service KELA",
+      "matchedPhone": "+38344406377",
+      "matchedCity": "Podujevë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://www.instagram.com/autoservice_kela/",
+        "https://numrat.com/biznes/GMZ6g9jZH4K7/auto-service-kela/",
+        "https://www.facebook.com/search/pages/?q=Auto%20Service%20Kela%20Podujeve",
+        "https://duckduckgo.com/?q=Auto+Service+Kela+Podujeve",
+        "https://www.autoyas.com/CS/Podujev%C3%AB/1637790466490552/AutoService-KELA",
+        "https://www.facebook.com/1637790466490552/",
+        "https://arbk.org/biz/skender-mernica-bi/"
+      ],
+      "notes": "Own complete operating-site Instagram bio publishes two numbers only; full exact-primary directory has no email. NativeFacebook/broad web search checked; city mirror and legal record expose different phones/no usable target email, linkedFacebook unavailable, not attributed. No own operating-site website or business email found; no guessed email patterns."
+    },
+    {
       "workshopId": "auto-service-kushtrimi-ferizaj",
       "matchedName": "Auto Service Kushtrimi",
       "matchedPhone": "+38345444656",
@@ -1227,6 +1274,28 @@
         "https://www.instagram.com/auto_service_kushtrimi/"
       ],
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
+    },
+    {
+      "workshopId": "auto-service-labi-center-podujeve",
+      "matchedName": "Auto Service LABI CENTER",
+      "matchedPhone": "+38344997555",
+      "matchedCity": "Podujevë",
+      "emails": [
+        {
+          "address": "info@labicenter.com",
+          "sourceUrls": ["https://www.facebook.com/labicenterperformance/"],
+          "checkedAt": "2026-10-23",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://www.facebook.com/labicenterperformance/",
+        "https://www.instagram.com/labicenter/",
+        "https://numrat.com/biznes/xZ6ILm1InTwt/auto-service-labi-center/",
+        "https://www.gjithebiznesi.com/XK/auto-service-labi-center-044-997-555"
+      ],
+      "notes": "Fresh ownFacebook Info>Contact explicitly publishes exact44main and business email. Source matched to concreteSkenderbeu319 site. A single obvious website check at emaildomainlabicenter.com failed webDNSresolution; no URL variants/SMTP/testmail or deliverability/consent claim. Instagramfullbio/noadditionalbusiness email; directorycorroboratescontact."
     },
     {
       "workshopId": "auto-service-mali-prishtina",
@@ -1630,6 +1699,22 @@
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found. Facebook BULI Auto Dekor publishes autodekorbuli@gmail.com with 044181113/049181113; no evidence linking it to the workshop contact 049288882 in Prishtina. Not adopted."
     },
     {
+      "workshopId": "auto-servis-burimi-podujeve",
+      "matchedName": "Auto Servis Burimi",
+      "matchedPhone": "+38343556548",
+      "matchedCity": "Podujevë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/I1arxQWjEdhi/auto-servis-burimi/",
+        "https://www.facebook.com/search/pages/?q=Auto%20Servis%20Burimi%20Podujeve",
+        "https://www.facebook.com/profile.php?id=61570409141959",
+        "https://duckduckgo.com/?q=Auto+Servis+Burimi+Podujeve",
+        "https://gjirafa.biz/auto-servis-burimi-1/"
+      ],
+      "notes": "Full exact43directory noemail. Broadname/townweb/nativeFacebook searches and strongestowncandidatefullprofile checked; no attributable own43contactsite/Instagram/email found. Gllamnik49profile remains unassigned; its fields notborrowed. Gjirafa detailedresult isdifferentKamenicë44business, notused. No guessedaddress."
+    },
+    {
       "workshopId": "auto-servis-cima-ferizaj",
       "matchedName": "Auto servis CIMA Ferizaj",
       "matchedPhone": "+38345260944",
@@ -2006,6 +2091,34 @@
         "https://www.instagram.com/p/DOOY-CiCCFY/"
       ],
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
+    },
+    {
+      "workshopId": "auto-servis-kolludra-skenderaj",
+      "matchedName": "Auto Servis Kolludra",
+      "matchedPhone": "+38343878669",
+      "matchedCity": "Skenderaj",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/v8aDRyPgnjVA/auto-servis-kolludra/",
+        "https://www.facebook.com/search/pages/?q=Auto%20Servis%20Kolludra%20Skenderaj",
+        "https://duckduckgo.com/?q=%22Auto+Servis+Kolludra%22+Skenderaj+email+instagram+orari"
+      ],
+      "notes": "Full directory, native publicFacebookpages search and exactname/town email/Instagram/orari query checked. No attributable own business website/Facebook/Instagram or published email found; unrelated local taxis/dealers not used."
+    },
+    {
+      "workshopId": "auto-servis-kujta-skenderaj",
+      "matchedName": "AUTO SERVIS KUJTA",
+      "matchedPhone": "+38349493435",
+      "matchedCity": "Skenderaj",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/YFASGkDHqDUZ/auto-servis-kujta/",
+        "https://www.facebook.com/search/pages/?q=Auto%20Servis%20Kujta%20Skenderaj",
+        "https://duckduckgo.com/?q=%22Auto+Servis+Kujta%22+Skenderaj+email+instagram+orari"
+      ],
+      "notes": "Full directory, nativeFacebookpage search and exact name/town/email/Instagram/hours search checked. No attributable own site/social/business email found. Same-name legal-directory/Kompass entries explicitly point to Prishtinë/VëllëzëritFazliu; not attributed to this Skenderaj branch, no borrowed email/contact."
     },
     {
       "workshopId": "auto-servis-kushtrimi-lipjan",
@@ -3148,6 +3261,23 @@
       "notes": "The public contact list of ARBK Open (an independent directory) lists PEG BOSCH, Prishtinë, Rruga Qëndresa Nr.146 and exactly +38344282504."
     },
     {
+      "workshopId": "autoservis-rinori-podujeve",
+      "matchedName": "Autoservis Rinori",
+      "matchedPhone": "+38345726616",
+      "matchedCity": "Podujevë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/ZpwTrlNdIE8i/autoservis-rinori/",
+        "https://www.facebook.com/search/pages/?q=Autoservis%20Rinori%20Podujeve",
+        "https://duckduckgo.com/?q=Autoservis+Rinori+Podujeve",
+        "https://stgres.gjirafa.biz/auto-servis-rinori-1",
+        "https://www.instagram.com/auto_rinori/",
+        "https://www.facebook.com/Autorinorii/"
+      ],
+      "notes": "Full exact45directory and broadname/town web/nativeFacebook searches checked. Strongest possible sources directly inspected: GjirafaRINORI explicitlyRamjan-Viti/different44phone; Instagramauto_rinori explicitlyRegensdorfSwitzerland/Swisscontact/domain; FacebookAutorinorii explicitlyFerizaj/different44phone. None attributable toPodujevë45site; contacts/services/hours notborrowed. No attributable own business email found."
+    },
+    {
       "workshopId": "autoservis-semini-prizren",
       "matchedName": "AutoServis Semini",
       "matchedPhone": "+38349424287",
@@ -3192,6 +3322,20 @@
         "https://www.instagram.com/toyotakosova/"
       ],
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number. Previously stored address and evidence preserved and compared again."
+    },
+    {
+      "workshopId": "autoxhama-mamushe",
+      "matchedName": "AutoXhama",
+      "matchedPhone": "+38344615918",
+      "matchedCity": "Mamushë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://www.instagram.com/autoxhama__/",
+        "https://www.facebook.com/AUTOXHAM/",
+        "https://numrat.com/biznes/D9t8XLZDcJgu/autoxhama/"
+      ],
+      "notes": "Fresh ownFacebook Info/Contact shows legacy WhatsApp contact only, no business email. Own fullInstagram bio and Numrat detail have no email. Focused DuckDuckGo exact brand/town email/orari/Instagram query returns no results; no attributable own website or additional contact source found. No guessed address."
     },
     {
       "workshopId": "autozone-center-fushe-kosove",
@@ -3415,6 +3559,21 @@
         "https://www.facebook.com/profile.php?id=100063452055819&sk=directory_basic_info"
       ],
       "notes": "After login, DIDA SERViS explicitly lists auto servis and a service area of Prizren, Kosovo. The email is in the contact register. Assignment through the distinctive business name and published Prizren service area; street address and phone are not published there, existing Cybo details unchanged."
+    },
+    {
+      "workshopId": "dizzi-garage-skenderaj",
+      "matchedName": "Dizzi Garage",
+      "matchedPhone": "+38349250073",
+      "matchedCity": "Skenderaj",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://www.dizzigarage.com/",
+        "https://numrat.com/biznes/GM1SK7APQPzL/dizzi-garage/",
+        "https://www.facebook.com/search/pages/?q=Dizzi%20Garage%20Skenderaj",
+        "https://duckduckgo.com/?q=%22Dizzi+Garage%22+Skenderaj+email+instagram+orari"
+      ],
+      "notes": "Full ownwebsite contact/location sections, all visible social/mailto links (none), full directory, focused exactbrand/town email/Instagram/hours query and nativeFacebookpage search checked. No attributable own Facebook/Instagram or public business email found. Website Email* is customer form field, not contact address; developer-domain/GitHub not treated as workshop contact."
     },
     {
       "workshopId": "dpf-auto-gjini-prizren",

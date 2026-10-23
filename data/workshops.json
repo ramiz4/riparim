@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-22T04:08:55.224Z",
+  "updatedAt": "2026-10-23T06:59:45.515Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 224,
+    "published": 234,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 224 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 224,
+    "reason": "All 234 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 234,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -2657,6 +2657,45 @@
       }
     },
     {
+      "id": "auto-service-b-b-podujeve",
+      "name": "Auto Service B&B",
+      "city": "Podujevë",
+      "address": "Podujevë",
+      "phone": "+38345580898",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38345580898",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Service B&B in Podujevë ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.882563,
+      "lng": 21.180212,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/A5DbEK9NriEe/auto-service-b-b/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-23",
+      "status": "published",
+      "updatedAt": "2026-10-23T06:57:54.322Z",
+      "google": {
+        "placeId": "ChIJPWfffgCpVBMRjc868vOqO_E",
+        "matchedAt": "2026-10-23T06:27:07.522Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/A5DbEK9NriEe/auto-service-b-b/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, exact independently sourced main number and sourced site. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed. Detailed source decisions are in the dated daily manifest."
+        }
+      }
+    },
+    {
       "id": "auto-service-bardhi-peja",
       "name": "Auto Service Bardhi",
       "city": "Peja",
@@ -2954,6 +2993,90 @@
       }
     },
     {
+      "id": "auto-service-istrefi-skenderaj",
+      "name": "Auto Service \"Istrefi\"",
+      "city": "Skenderaj",
+      "address": "Skenderaj, Rr, 124 Azem Bejta",
+      "phone": "+38349336455",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349336455",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Service \"Istrefi\" in Skenderaj ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.744029,
+      "lng": 20.796272,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/dArTO8nb2oHO/auto-service-istrefi/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-23",
+      "status": "published",
+      "updatedAt": "2026-10-23T06:57:54.322Z",
+      "google": {
+        "placeId": "ChIJNVDaQgBrUxMRQ6KmkjGlT4o",
+        "matchedAt": "2026-10-23T05:40:17.499Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/dArTO8nb2oHO/auto-service-istrefi/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, exact independently sourced main number and sourced site. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed. Detailed source decisions are in the dated daily manifest."
+        }
+      }
+    },
+    {
+      "id": "auto-service-kela-podujeve",
+      "name": "Auto Service KELA",
+      "city": "Podujevë",
+      "address": "M25, Podujevë",
+      "phone": "+38344406377",
+      "phoneNote": "Weiterer Geschäftskontakt: +38345785666; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344406377",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Service KELA in Podujevë ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.919016,
+      "lng": 21.225591,
+      "sources": [
+        {
+          "url": "https://www.instagram.com/autoservice_kela/",
+          "title": "Eigener Betriebsauftritt: Name, Ortsangabe und Geschäftskontakte",
+          "kind": "official"
+        },
+        {
+          "url": "https://numrat.com/biznes/GMZ6g9jZH4K7/auto-service-kela/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-23",
+      "status": "published",
+      "updatedAt": "2026-10-23T06:57:54.322Z",
+      "google": {
+        "placeId": "ChIJb9X2SputVBMRrO3v78DCcBE",
+        "matchedAt": "2026-10-23T06:35:47.014Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.instagram.com/autoservice_kela/",
+            "https://numrat.com/biznes/GMZ6g9jZH4K7/auto-service-kela/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, exact independently sourced main number and sourced site. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed. Detailed source decisions are in the dated daily manifest."
+        }
+      }
+    },
+    {
       "id": "auto-service-kushtrimi-ferizaj",
       "name": "Auto Service Kushtrimi",
       "city": "Ferizaj",
@@ -3005,6 +3128,66 @@
             "https://www.cybo.com/XK/ferizaj/car-repair"
           ],
           "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted."
+        }
+      }
+    },
+    {
+      "id": "auto-service-labi-center-podujeve",
+      "name": "Auto Service LABI CENTER",
+      "city": "Podujevë",
+      "address": "Rruga Skenderbeu 319, Podujevë",
+      "phone": "+38344997555",
+      "phoneNote": "Weiterer Geschäftskontakt: +38345997555; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344997555",
+      "brands": [],
+      "services": ["Diagnose & Elektronik", "Inspektion & Wartung"],
+      "serviceDetails": [
+        "Autoelektrik und allgemeiner Fahrzeugservice",
+        "Kalibrierung von Fahrerassistenzsystemen (ADAS)"
+      ],
+      "languages": [],
+      "specialty": "Autoelektrik · Fahrzeugservice · ADAS-Kalibrierung",
+      "description": "Der eigene Betriebsauftritt von Auto Service LABI CENTER in Podujevë nennt Autoelektrik, Fahrzeugservice und die Kalibrierung von Fahrerassistenzsystemen.",
+      "lat": 42.895309,
+      "lng": 21.182542,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/labicenterperformance/",
+          "title": "Eigener Betriebsauftritt: Name, Anschrift, Geschäftskontakte und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/labicenter/",
+          "title": "Eigener Betriebsauftritt: Name, Standort und angebotene Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://numrat.com/biznes/xZ6ILm1InTwt/auto-service-labi-center/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.gjithebiznesi.com/XK/auto-service-labi-center-044-997-555",
+          "title": "Öffentliches Firmenverzeichnis: Geschäftskontakt und Wochenplan",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-23",
+      "status": "published",
+      "updatedAt": "2026-10-23T06:57:54.322Z",
+      "google": {
+        "placeId": "ChIJlwlTgmCpVBMRh97JVZOfjqg",
+        "matchedAt": "2026-10-23T06:03:35.815Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.facebook.com/labicenterperformance/",
+            "https://www.instagram.com/labicenter/",
+            "https://numrat.com/biznes/xZ6ILm1InTwt/auto-service-labi-center/",
+            "https://www.gjithebiznesi.com/XK/auto-service-labi-center-044-997-555"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, exact independently sourced main number and sourced site. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed. Detailed source decisions are in the dated daily manifest."
         }
       }
     },
@@ -3888,6 +4071,45 @@
             "https://yellowpages-tl.cybo.com/XK/ajvalija/pagkumpuni-ng-kotse"
           ],
           "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-burimi-podujeve",
+      "name": "Auto Servis Burimi",
+      "city": "Podujevë",
+      "address": "Podujevë",
+      "phone": "+38343556548",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38343556548",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis Burimi in Podujevë ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.883515,
+      "lng": 21.181301,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/I1arxQWjEdhi/auto-servis-burimi/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-23",
+      "status": "published",
+      "updatedAt": "2026-10-23T06:57:54.322Z",
+      "google": {
+        "placeId": "ChIJO4oBaQCpVBMRdieM_o-zntQ",
+        "matchedAt": "2026-10-23T05:59:15.689Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/I1arxQWjEdhi/auto-servis-burimi/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, exact independently sourced main number and sourced site. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed. Detailed source decisions are in the dated daily manifest."
         }
       }
     },
@@ -4853,6 +5075,84 @@
           "method": "phone_and_location",
           "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-klima-1"],
           "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-kolludra-skenderaj",
+      "name": "Auto Servis Kolludra",
+      "city": "Skenderaj",
+      "address": "56 Kajtaz Rrecaj, Skenderaj",
+      "phone": "+38343878669",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38343878669",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis Kolludra in Skenderaj ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.74838,
+      "lng": 20.779533,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/v8aDRyPgnjVA/auto-servis-kolludra/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-23",
+      "status": "published",
+      "updatedAt": "2026-10-23T06:57:54.322Z",
+      "google": {
+        "placeId": "ChIJJXx1CABrUxMRz-9qd1rGCOo",
+        "matchedAt": "2026-10-23T05:46:56.569Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/v8aDRyPgnjVA/auto-servis-kolludra/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, exact independently sourced main number and sourced site. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed. Detailed source decisions are in the dated daily manifest."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-kujta-skenderaj",
+      "name": "AUTO SERVIS KUJTA",
+      "city": "Skenderaj",
+      "address": "Azem bejta, Skenderaj",
+      "phone": "+38349493435",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349493435",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "AUTO SERVIS KUJTA in Skenderaj ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.740503,
+      "lng": 20.797559,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/YFASGkDHqDUZ/auto-servis-kujta/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-23",
+      "status": "published",
+      "updatedAt": "2026-10-23T06:57:54.322Z",
+      "google": {
+        "placeId": "ChIJZ0VToRVrUxMRlxulQ9fQYf8",
+        "matchedAt": "2026-10-23T05:49:01.799Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/YFASGkDHqDUZ/auto-servis-kujta/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, exact independently sourced main number and sourced site. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed. Detailed source decisions are in the dated daily manifest."
         }
       }
     },
@@ -7621,6 +7921,45 @@
       }
     },
     {
+      "id": "autoservis-rinori-podujeve",
+      "name": "Autoservis Rinori",
+      "city": "Podujevë",
+      "address": "255 Rrugë 28 Nëntori, Podujevë",
+      "phone": "+38345726616",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Autoservis Rinori in Podujevë ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.92131,
+      "lng": 21.176897,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/ZpwTrlNdIE8i/autoservis-rinori/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-23",
+      "status": "published",
+      "updatedAt": "2026-10-23T06:57:54.322Z",
+      "google": {
+        "placeId": "ChIJ4dPiSACpVBMRw4-M_cHdjko",
+        "matchedAt": "2026-10-23T06:11:05.402Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/ZpwTrlNdIE8i/autoservis-rinori/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, exact independently sourced main number and sourced site. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed. Detailed source decisions are in the dated daily manifest."
+        }
+      }
+    },
+    {
       "id": "autoservis-semini-prizren",
       "name": "AutoServis Semini",
       "city": "Prizren",
@@ -7736,6 +8075,57 @@
             "https://www.toyota-kosovo.com/owners/maintenance/hybrid-service"
           ],
           "note": "The official Toyota Kosovo domain, dealer name and branch location confirm the identity. Historical country dialing codes are not treated as generally equivalent."
+        }
+      }
+    },
+    {
+      "id": "autoxhama-mamushe",
+      "name": "AutoXhama",
+      "city": "Mamushë",
+      "address": "Mamushë 20540",
+      "phone": "+38344615918",
+      "phoneNote": "Weiterer Geschäftskontakt: +38349835618; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": ["Autoglas-Service laut eigenem Betriebsprofil"],
+      "languages": [],
+      "specialty": "Autoglas-Service",
+      "description": "AutoXhama in Mamushë führt im eigenen Betriebsprofil Autoglas-Service auf. Die öffentlich angegebenen Geschäftsnummern stimmen mit der unabhängig recherchierten Identität überein.",
+      "lat": 42.318682,
+      "lng": 20.718234,
+      "sources": [
+        {
+          "url": "https://www.instagram.com/autoxhama__/",
+          "title": "Eigener Betriebsauftritt: Autoglas-Service und Geschäftsnummern",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/AUTOXHAM/",
+          "title": "Eigener Betriebsauftritt: Name, Ort und Öffnungszeiten",
+          "kind": "official"
+        },
+        {
+          "url": "https://numrat.com/biznes/D9t8XLZDcJgu/autoxhama/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-23",
+      "status": "published",
+      "updatedAt": "2026-10-23T06:57:54.322Z",
+      "google": {
+        "placeId": "ChIJ8RH7PACXUxMRj62ZOSNSfPs",
+        "matchedAt": "2026-10-23T05:29:07.540Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.instagram.com/autoxhama__/",
+            "https://www.facebook.com/AUTOXHAM/",
+            "https://numrat.com/biznes/D9t8XLZDcJgu/autoxhama/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, exact independently sourced main number and sourced site. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed. Detailed source decisions are in the dated daily manifest."
         }
       }
     },
@@ -8274,6 +8664,61 @@
             "https://faqet-e-verdha.cybo.com/XK/prizreni/riparimi-i-makinave-"
           ],
           "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
+        }
+      }
+    },
+    {
+      "id": "dizzi-garage-skenderaj",
+      "name": "Dizzi Garage",
+      "city": "Skenderaj",
+      "address": "53 Arben Haliti, Skenderaj 41000",
+      "phone": "+38349250073",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349250073",
+      "brands": [],
+      "services": [
+        "Diagnose & Elektronik",
+        "Inspektion & Wartung",
+        "Motor & Getriebe"
+      ],
+      "serviceDetails": [
+        "Computergestützte Fahrzeugdiagnose",
+        "Wartung mit Öl- und Filterwechsel",
+        "Motorreparatur und Motorwechsel",
+        "Reparatur von Automatik- und Schaltgetrieben",
+        "Austausch mechanischer Teile"
+      ],
+      "languages": [],
+      "specialty": "Diagnose · Wartung · Motor und Getriebe",
+      "description": "Die eigene Betriebswebsite von Dizzi Garage in Skenderaj führt Fahrzeugdiagnose, Wartung mit Öl- und Filterwechsel sowie Motor- und Getriebearbeiten auf.",
+      "lat": 42.738959,
+      "lng": 20.792828,
+      "sources": [
+        {
+          "url": "https://www.dizzigarage.com/",
+          "title": "Eigene Betriebswebsite: Standort, Kontakt, Leistungen und Öffnungszeiten",
+          "kind": "official"
+        },
+        {
+          "url": "https://numrat.com/biznes/GM1SK7APQPzL/dizzi-garage/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-23",
+      "status": "published",
+      "updatedAt": "2026-10-23T06:57:54.322Z",
+      "google": {
+        "placeId": "ChIJga1YVe1rUxMR1K8HnHtk-j8",
+        "matchedAt": "2026-10-23T05:54:15.813Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.dizzigarage.com/",
+            "https://numrat.com/biznes/GM1SK7APQPzL/dizzi-garage/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, exact independently sourced main number and sourced site. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed. Detailed source decisions are in the dated daily manifest."
         }
       }
     },
