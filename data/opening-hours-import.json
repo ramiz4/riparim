@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "350d3b8a20b2f4946a04c2f6320f68c3f519a05a7f55c218aad43888231b3768",
+  "revision": "1dfbcf58b11d13eba6d7f04580baa80727efd63a2dbd0162c29ca9fc05fa33d6",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -4593,6 +4593,87 @@
       }
     },
     {
+      "id": "auto-service-b-b-podujeve",
+      "expected": {
+        "name": "Auto Service B&B",
+        "city": "Podujevë",
+        "address": "Podujevë",
+        "phone": "+38345580898"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-23",
+        "source": "https://numrat.com/biznes/A5DbEK9NriEe/auto-service-b-b/",
+        "sourceName": "Auto Service B&B",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated12October; no week. No attributable own exact-contact weekly source found in bounded searches. Use central explicitly assumed defaults; no foreign B&B hours, Google hours, owner confirmation or current-open claim. Checked sources: https://numrat.com/biznes/A5DbEK9NriEe/auto-service-b-b/ https://www.facebook.com/search/pages/?q=Auto%20Service%20B%26B%20Podujeve https://duckduckgo.com/?q=Auto+Service+B%26B+Podujeve https://duckduckgo.com/?q=%22%2B38345580898%22 No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-service-bardhi-peja",
       "expected": {
         "name": "Auto Service Bardhi",
@@ -5119,6 +5200,168 @@
       }
     },
     {
+      "id": "auto-service-istrefi-skenderaj",
+      "expected": {
+        "name": "Auto Service \"Istrefi\"",
+        "city": "Skenderaj",
+        "address": "Skenderaj, Rr, 124 Azem Bejta",
+        "phone": "+38349336455"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-23",
+        "source": "https://numrat.com/biznes/dArTO8nb2oHO/auto-service-istrefi/",
+        "sourceName": "Auto Service \"Istrefi\"",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated12October2026; no weekly hours. No attributable own site/social hours found in bounded searches. Central explicitly labelled assumed standard required; no Google hours or operator confirmation/current-open claim. Checked sources: https://numrat.com/biznes/dArTO8nb2oHO/auto-service-istrefi/ https://www.facebook.com/search/pages/?q=Auto%20Service%20Istrefi%20Skenderaj https://duckduckgo.com/?q=%22Auto+Service+Istrefi%22+Skenderaj+email+instagram+orari No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-service-kela-podujeve",
+      "expected": {
+        "name": "Auto Service KELA",
+        "city": "Podujevë",
+        "address": "M25, Podujevë",
+        "phone": "+38344406377"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-23",
+        "source": "https://www.instagram.com/autoservice_kela/",
+        "sourceName": "Auto Service KELA",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own operating-site bio is undated and has no week. Directory updated12October has no week. Unassigned city mirror/register provide no attributable week; linkedFacebook unavailable. Use central explicitly assumed standard after documented attributable-source search. No Google hours, operator confirmation, invented staffed hours or current-open claim. Checked sources: https://www.instagram.com/autoservice_kela/ https://numrat.com/biznes/GMZ6g9jZH4K7/auto-service-kela/ https://www.autoyas.com/CS/Podujev%C3%AB/1637790466490552/AutoService-KELA https://www.facebook.com/1637790466490552/ https://arbk.org/biz/skender-mernica-bi/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-service-kushtrimi-ferizaj",
       "expected": {
         "name": "Auto Service Kushtrimi",
@@ -5209,6 +5452,95 @@
           "08:00-20:00",
           "08:00-20:00",
           "08:00-20:00"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-service-labi-center-podujeve",
+      "expected": {
+        "name": "Auto Service LABI CENTER",
+        "city": "Podujevë",
+        "address": "Rruga Skenderbeu 319, Podujevë",
+        "phone": "+38344997555"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-23",
+        "source": "https://www.gjithebiznesi.com/XK/auto-service-labi-center-044-997-555",
+        "sourceName": "Auto Service LABI CENTER",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Undated GjithëBiznesi/AllBiz full Q&Aweek; freshviewingnotoperatorconfirmation. OwnFacebook Details exposescurrentopens-soon status, no completeweek; ownfullInstagram hasnoweek; websitecheckunavailable. Full source Q&A explicitlyMon–Sat09:00–19:00/Sunclosed. Exact44contact+ownedFacebooklink and actual publicMapsreturnofsource link confirm sameprecisesite despiteQendresa streetlabel. Do not assumeold/newstreetnames; adopt ownedcurrentSkenderbeu319forcatalogue. No Googlehourstextcopied, ownerconfirmation/current-openclaim or duplicate-directoryupstreamindependence claimed. Checked sources: https://www.gjithebiznesi.com/XK/auto-service-labi-center-044-997-555 https://www.facebook.com/labicenterperformance/ https://www.instagram.com/labicenter/ https://numrat.com/biznes/xZ6ILm1InTwt/auto-service-labi-center/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "09:00-19:00",
+          "09:00-19:00",
+          "09:00-19:00",
+          "09:00-19:00",
+          "09:00-19:00",
+          "09:00-19:00",
+          "Geschlossen"
         ],
         "earlierPlan": ""
       }
@@ -6628,6 +6960,87 @@
           "09:00-18:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-burimi-podujeve",
+      "expected": {
+        "name": "Auto Servis Burimi",
+        "city": "Podujevë",
+        "address": "Podujevë",
+        "phone": "+38343556548"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-23",
+        "source": "https://numrat.com/biznes/I1arxQWjEdhi/auto-servis-burimi/",
+        "sourceName": "Auto Servis Burimi",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Exact43directory updated12October but no week. No attributable own43sourceweek found; unmatched49profile and foreignKamenicëdirectory cannot supply thissitehours. Central assumed defaults required, no Google hours, ownerconfirmation/current-open claim. Checked sources: https://numrat.com/biznes/I1arxQWjEdhi/auto-servis-burimi/ https://www.facebook.com/search/pages/?q=Auto%20Servis%20Burimi%20Podujeve https://duckduckgo.com/?q=Auto+Servis+Burimi+Podujeve No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -8307,6 +8720,168 @@
           "08:00-18:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-kolludra-skenderaj",
+      "expected": {
+        "name": "Auto Servis Kolludra",
+        "city": "Skenderaj",
+        "address": "56 Kajtaz Rrecaj, Skenderaj",
+        "phone": "+38343878669"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-23",
+        "source": "https://numrat.com/biznes/v8aDRyPgnjVA/auto-servis-kolludra/",
+        "sourceName": "Auto Servis Kolludra",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated12October; no weekly schedule. No attributable own current contactsite/social schedule found in bounded sources. Central explicitly assumed defaults required; no Google hours/owner confirmation/current-open claim. Checked sources: https://numrat.com/biznes/v8aDRyPgnjVA/auto-servis-kolludra/ https://www.facebook.com/search/pages/?q=Auto%20Servis%20Kolludra%20Skenderaj https://duckduckgo.com/?q=%22Auto+Servis+Kolludra%22+Skenderaj+email+instagram+orari No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-kujta-skenderaj",
+      "expected": {
+        "name": "AUTO SERVIS KUJTA",
+        "city": "Skenderaj",
+        "address": "Azem bejta, Skenderaj",
+        "phone": "+38349493435"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-23",
+        "source": "https://numrat.com/biznes/YFASGkDHqDUZ/auto-servis-kujta/",
+        "sourceName": "AUTO SERVIS KUJTA",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated12October; no week. No attributable own website/social schedule found; foreign-city homonym cannot supply this site hours. Use central explicitly assumed standard; no Google hours, operator confirmation or current open-status claim. Checked sources: https://numrat.com/biznes/YFASGkDHqDUZ/auto-servis-kujta/ https://www.facebook.com/search/pages/?q=Auto%20Servis%20Kujta%20Skenderaj https://duckduckgo.com/?q=%22Auto+Servis+Kujta%22+Skenderaj+email+instagram+orari No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -13286,6 +13861,87 @@
       }
     },
     {
+      "id": "autoservis-rinori-podujeve",
+      "expected": {
+        "name": "Autoservis Rinori",
+        "city": "Podujevë",
+        "address": "255 Rrugë 28 Nëntori, Podujevë",
+        "phone": "+38345726616"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-23",
+        "source": "https://numrat.com/biznes/ZpwTrlNdIE8i/autoservis-rinori/",
+        "sourceName": "Autoservis Rinori",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Exact45directory updated12October, no week. Directly inspected Gjirafa week belongs toViti homonym; own-lookingIG/FB refer toSwitzerland/Ferizaj, notthissite. No attributable ownPodujevë45weeklyplan found; use central explicitlyassumeddefaults, no Google hours or ownerconfirmation/current-openclaim. Checked sources: https://numrat.com/biznes/ZpwTrlNdIE8i/autoservis-rinori/ https://stgres.gjirafa.biz/auto-servis-rinori-1 https://www.instagram.com/auto_rinori/ https://www.facebook.com/Autorinorii/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "autoservis-semini-prizren",
       "expected": {
         "name": "AutoServis Semini",
@@ -13459,6 +14115,101 @@
           "08:30-17:30",
           "09:00-14:00",
           "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "autoxhama-mamushe",
+      "expected": {
+        "name": "AutoXhama",
+        "city": "Mamushë",
+        "address": "Mamushë 20540",
+        "phone": "+38344615918"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-23",
+        "source": "https://www.facebook.com/AUTOXHAM/",
+        "sourceName": "AutoXhama",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own Facebook business-hours field explicitly says continuously open; update date not exposed. Current source viewing is not operator confirmation. No contrary attributable own schedule found. Preserve explicit published all-day schedule; no assumed staffed-hours qualification, owner confirmation or current open-status claim. OwnIG/directory have no weekly hours. Independent narrow Spec and Standards assessments agree unusual schedule/unknown source age alone do not justify replacing explicit first-party continuously-open hours with defaults. Central model accepts00:00–24:00. Checked sources: https://www.facebook.com/AUTOXHAM/ https://www.instagram.com/autoxhama__/ https://numrat.com/biznes/D9t8XLZDcJgu/autoxhama/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00"
         ],
         "earlierPlan": ""
       }
@@ -14325,6 +15076,95 @@
         "sourceName": "Dida Service",
         "researchStatus": "Gefunden (Google Maps)",
         "notes": "",
+        "originalWeek": [
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "dizzi-garage-skenderaj",
+      "expected": {
+        "name": "Dizzi Garage",
+        "city": "Skenderaj",
+        "address": "53 Arben Haliti, Skenderaj 41000",
+        "phone": "+38349250073"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-23",
+        "source": "https://www.dizzigarage.com/",
+        "sourceName": "Dizzi Garage",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own full weekly Orari field is undated; current source viewing is not fresh operator confirmation. Own location section explicitly Mon–Sat09:00–18:00/Sunclosed for53ArbenHaliti. No Google hours copied or currentopen/ownerconfirmation claimed. Checked sources: https://www.dizzigarage.com/ https://numrat.com/biznes/GM1SK7APQPzL/dizzi-garage/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
         "originalWeek": [
           "09:00-18:00",
           "09:00-18:00",
