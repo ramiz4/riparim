@@ -2572,6 +2572,34 @@
       }
     },
     {
+      "id": "auto-servis-endriti-obiliq",
+      "sourceHash": "e5f807d21d394aeb83e6a904af3cc1527ab6eb6d470553e253ff682df476bdda",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto servis Endriti në Obiliq figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Direktori publike biznesesh: kontakti, vendndodhja dhe orari javor"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto servis Endriti in Obiliq is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Public business directory: business contact, location and weekly schedule"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-enisi-obiliq",
       "sourceHash": "f0a3fad712d5f2572e11ba3d7c3b1d610d7157a982e4e3eaf2a91eefd44d91da",
       "sq": {
@@ -5109,6 +5137,36 @@
         "sourceTitles": [
           "Official Citroën location page: name · exact address · service phone · WhatsApp · bodywork",
           "Official Citroën page: maintenance and repair"
+        ]
+      }
+    },
+    {
+      "id": "detailing-mergimi-lipjan",
+      "sourceHash": "39cef82dc81da900d3900548432ba4fb47440a48bd365672047758272c112f70",
+      "sq": {
+        "specialty": "Përgatitje estetike e automjeteve · Detailing",
+        "description": "Detailing Mergimi në Lipjan ofron përgatitje estetike të automjeteve sipas publikimit të vet. Procedurat konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Përgatitje estetike e automjeteve (detailing) sipas publikimit të vet"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Publikimi i vet i biznesit: detailing dhe numri i plotë i kontaktit",
+          "Profili i vet i biznesit: emri, vendi, emaili i biznesit dhe orari"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle preparation · Detailing",
+        "description": "Detailing Mergimi in Lipjan offers vehicle detailing according to its own business post. Please confirm specific procedures and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle detailing according to its own business post"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business post: detailing and complete business phone number",
+          "Own business profile: name, locality, business email and opening hours"
         ]
       }
     },

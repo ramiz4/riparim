@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "ec6565d243a05a3e19adfcbdfb9b7b1248ce97742273ce2d3e0b9e825a5b4b54",
+  "revision": "941a3f4f9abcdde8ad6590339e4564300c3025fd98ce9264051376b1acf9acf3",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -7663,6 +7663,95 @@
           "Geschlossen"
         ],
         "earlierPlan": "09:00-17:30 | 09:00-05:30 | 09:00-05:30 | 09:00-05:30 | 09:00-05:30 | Geschlossen | Geschlossen"
+      }
+    },
+    {
+      "id": "auto-servis-endriti-obiliq",
+      "expected": {
+        "name": "Auto servis Endriti",
+        "city": "Obiliq",
+        "address": "380 Hasan Prishtina",
+        "phone": "+38344630910"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "14:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-24",
+        "source": "https://www.cybo.com/XK-biz/auto-servis-endriti",
+        "sourceName": "Auto servis Endriti",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Cybo weekly schedule undated; Numrat detail saysupdated2026-10-12. Fresh viewing is not operatorconfirmation. Fresh exact phone/address Cybo business text lists weekdays09-18,Sat09-14,Sunclosed. No Google hours copied; originalPlace-IDblocker resolved. Checked sources: https://www.cybo.com/XK-biz/auto-servis-endriti https://numrat.com/biznes/jARLjEvB3DnR/auto-servis-endriti/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-14:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
       }
     },
     {
@@ -15416,6 +15505,101 @@
           "08:30-17:30",
           "08:30-16:00",
           "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "detailing-mergimi-lipjan",
+      "expected": {
+        "name": "Detailing Mergimi",
+        "city": "Lipjan",
+        "address": "Rrugë Avdi Kelmendi",
+        "phone": "+38349416541"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "20:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "20:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "20:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "20:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "20:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "20:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "20:00"
+              }
+            ]
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-24",
+        "source": "https://www.facebook.com/EleaPolir/",
+        "sourceName": "Detailing Mergimi",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Undated own business hours popover viewed today; not ownerconfirmation. Explicit own weeklypopover read all seven days09-20. Broad current-open indicator was not copied as schedule. No own website or attributable Instagram found in prior same-dayqueries; no Google hours used. Checked sources: https://www.facebook.com/EleaPolir/ https://numrat.com/biznes/XsMiRg1X7lcC/detailing-mergimi/ https://www.facebook.com/EleaPolir/posts/pfbid02rigFRDsKNPuXuwf6WKJKEt6BZRCegyUYTdbMQ3zZ4oVj5qaEohUcE111WaTQUW35l No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "09:00-20:00",
+          "09:00-20:00",
+          "09:00-20:00",
+          "09:00-20:00",
+          "09:00-20:00",
+          "09:00-20:00",
+          "09:00-20:00"
         ],
         "earlierPlan": ""
       }
