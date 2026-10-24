@@ -4,8 +4,8 @@
   "timezone": "Europe/Zurich",
   "startedAt": "2026-10-24T03:00:38.882Z",
   "checkedAt": "2026-10-24T06:34:23.281Z",
-  "status": "local-import-prepared-awaiting-tests-review-ci-release",
-  "completedDateGuard": false,
+  "status": "automatic-daily-completed-explicit-followup-prepared",
+  "completedDateGuard": true,
   "baseCommit": "d746a76fb4027d484b0073a9fee4f16652bcbd46",
   "branch": "codex/daily-import-2026-10-24",
   "before": {
@@ -20,10 +20,18 @@
     "auto-servis-besi-obiliq",
     "auto-pjese-servis-te-arti-lipjan",
     "auto-xhama-becos-lipjan",
+    "auto-star-kosova-lipjan",
+    "auto-servis-endriti-obiliq",
+    "detailing-mergimi-lipjan"
+  ],
+  "publishedWorkshopIds": [
+    "auto-servise-benz-viti",
+    "auto-servis-besi-obiliq",
+    "auto-pjese-servis-te-arti-lipjan",
+    "auto-xhama-becos-lipjan",
     "auto-star-kosova-lipjan"
   ],
-  "publishedWorkshopIds": [],
-  "publishedCountConfirmed": 0,
+  "publishedCountConfirmed": 5,
   "historicalSourcesRead": [
     {
       "path": "data/import-2026-10-03.json",
@@ -4443,8 +4451,169 @@
     }
   ],
   "after": {
-    "total": 239,
-    "published": 239,
-    "scope": "Local canonical preparation only; publication unconfirmed."
-  }
+    "total": 241,
+    "published": 241,
+    "scope": "Prepared canonical inventory including the explicitly requested manual blocker followup. The original completed automatic daily outcome is preserved in originalCompletedDailyResult; the followup is not yet published."
+  },
+  "originalCompletedDailyResult": {
+    "importedWorkshopIds": [
+      "auto-servise-benz-viti",
+      "auto-servis-besi-obiliq",
+      "auto-pjese-servis-te-arti-lipjan",
+      "auto-xhama-becos-lipjan",
+      "auto-star-kosova-lipjan"
+    ],
+    "after": {
+      "total": 239,
+      "published": 239,
+      "newPublished": 5,
+      "drafts": 0,
+      "pendingWorkshopChanges": 0,
+      "catalogueRows": 1069,
+      "retirementMarkers": 35,
+      "localProductionWrites": 0,
+      "productionImport": "External revision-guarded verified main-release plan before Worker upload"
+    },
+    "publishedWorkshopIds": [
+      "auto-servise-benz-viti",
+      "auto-servis-besi-obiliq",
+      "auto-pjese-servis-te-arti-lipjan",
+      "auto-xhama-becos-lipjan",
+      "auto-star-kosova-lipjan"
+    ],
+    "publishedCountConfirmed": 5,
+    "completedAt": "2026-10-24T07:01:36.200514+00:00",
+    "publication": {
+      "pr": "https://github.com/ramiz4/riparim/pull/225",
+      "prNumber": 225,
+      "reviewedHead": "fe0847c5c8b1d50634aa21bc3d1b1854357604c0",
+      "commit": "3bd741edd5111f424380efd9f0d2b2073d8a65cd",
+      "squashMerged": true,
+      "reviewedAndSquashTreesIdentical": true,
+      "release": {
+        "checkedAt": "2026-10-24T06:57:38.323Z",
+        "tag": "v1.49.0",
+        "commit": "3bd741edd5111f424380efd9f0d2b2073d8a65cd",
+        "releaseUrl": "https://github.com/ramiz4/riparim/releases/tag/v1.49.0",
+        "publishedAt": "2026-10-24T06:56:52Z",
+        "assets": [
+          {
+            "name": "riparim-node-v1.49.0.json",
+            "bytes": 210,
+            "sha256": "eb03e2715e9b46cfc825266b02bec006703088170fbcb8bda3e9faf7d6a68948"
+          },
+          {
+            "name": "riparim-node-v1.49.0.tar.gz",
+            "bytes": 5094185,
+            "sha256": "e225db5b87c0b8d1ad1d1a678854b53e44635f12df6b8e67bbc417c5287fe1a4"
+          },
+          {
+            "name": "riparim-sites-v1.49.0.json",
+            "bytes": 256,
+            "sha256": "73cfcf1de88c777ac0e19369a55d358ebf3129b0c3d381fe85d60ab48b540852"
+          },
+          {
+            "name": "riparim-sites-v1.49.0.tar.gz",
+            "bytes": 4361876,
+            "sha256": "7d92d35751978b84763ade1cc574f7b27af9aafe4cc9860154dc2e2ddc47bd77"
+          },
+          {
+            "name": "riparim-v1.49.0.json",
+            "bytes": 201,
+            "sha256": "019a0b09850254a55721a690175a465d7646e9108108ca20ba2ff219c8bf8cc2"
+          },
+          {
+            "name": "riparim-v1.49.0.tar.gz",
+            "bytes": 50100209,
+            "sha256": "dfae0e9f992c3ac045ae802f74054fef8e9e45f758e653c9aad255eeb3f3028a"
+          }
+        ],
+        "provenances": [
+          {
+            "provider": "cloudflare",
+            "commit": "3bd741edd5111f424380efd9f0d2b2073d8a65cd",
+            "sha256": "dfae0e9f992c3ac045ae802f74054fef8e9e45f758e653c9aad255eeb3f3028a"
+          },
+          {
+            "provider": "sites",
+            "commit": "3bd741edd5111f424380efd9f0d2b2073d8a65cd",
+            "sha256": "7d92d35751978b84763ade1cc574f7b27af9aafe4cc9860154dc2e2ddc47bd77"
+          },
+          {
+            "provider": "node",
+            "commit": "3bd741edd5111f424380efd9f0d2b2073d8a65cd",
+            "sha256": "e225db5b87c0b8d1ad1d1a678854b53e44635f12df6b8e67bbc417c5287fe1a4"
+          }
+        ],
+        "exactReviewedReleasePlanMatched": true,
+        "statements": 502,
+        "planKey": "workshop-source:601def0b3c78f86475a54c1d757389aa7c9d9b497ed45200c00d2ace6bc66601",
+        "renderedPublishedProfiles": 239,
+        "renderedLocalePages": 750
+      },
+      "releaseWorkflow": {
+        "id": 40071801439,
+        "url": "https://github.com/ramiz4/riparim/actions/runs/40071801439",
+        "headSha": "3bd741edd5111f424380efd9f0d2b2073d8a65cd",
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "name": "Verify merged main / Node build and integration tests",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify merged main / Quality and core tests",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify merged main / Cloudflare and Sites builds",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify merged main / Tests, types, lint and build",
+            "conclusion": "success"
+          },
+          {
+            "name": "Semantic release",
+            "conclusion": "success"
+          },
+          {
+            "name": "Deploy published release to Cloudflare",
+            "conclusion": "success"
+          }
+        ]
+      },
+      "deployment": {
+        "checkedAt": "2026-10-24T07:00:45.341Z",
+        "commit": "3bd741edd5111f424380efd9f0d2b2073d8a65cd",
+        "tag": "v1.49.0",
+        "deploymentId": "19d089f6-1bb9-4c03-922e-633dd062effe",
+        "versionId": "058e574d-af21-4f5e-8ef7-45f2330d9117",
+        "percentage": 100,
+        "ready": true,
+        "verifiedJobSuccess": true,
+        "operator": {
+          "total": 239,
+          "drafts": 0,
+          "pending": 0,
+          "retirementMarkers": 35
+        }
+      },
+      "reason": "Completed regular verified main-release deployment and live acceptance; no duplicate release/direct production mutation."
+    },
+    "protectedReceipt": "receipt-2026-10-24.json"
+  },
+  "explicitUserRequestedFollowups": [
+    {
+      "manifest": "data/import-2026-10-24-blocker-followup.json",
+      "authorization": "Explicit user request after the completed daily run: resolve Endriti, Te Lila and Mergimi and publish fully verified businesses.",
+      "preparedNewIds": [
+        "auto-servis-endriti-obiliq",
+        "detailing-mergimi-lipjan"
+      ],
+      "publishedNewIds": [],
+      "status": "local-import-prepared-awaiting-tests-review"
+    }
+  ]
 }
