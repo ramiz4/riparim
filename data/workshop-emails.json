@@ -1835,6 +1835,19 @@
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
     },
     {
+      "workshopId": "auto-servis-endriti-obiliq",
+      "matchedName": "Auto servis Endriti",
+      "matchedPhone": "+38344630910",
+      "matchedCity": "Obiliq",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/jARLjEvB3DnR/auto-servis-endriti/",
+        "https://www.cybo.com/XK-biz/auto-servis-endriti"
+      ],
+      "notes": "Fresh exact-phone email/Instagram search returned no results; full Numrat and Cybo details do not publish business email/site. Earlier same-day own-looking Facebook checks remain unassigned: autoserviceendriti only cityPrishtina/email without targetphone; other profile100069718250533 is Nekofc/Komoran429957. No borrowed email or guessed address."
+    },
+    {
       "workshopId": "auto-servis-enisi-obiliq",
       "matchedName": "Auto Servis Enisi",
       "matchedPhone": "+38344809246",
@@ -3605,6 +3618,27 @@
         "https://www.delfin-ltd.com/"
       ],
       "notes": "Business website and matching Citroën business profile with the same km 7 location; two publicly listed addresses."
+    },
+    {
+      "workshopId": "detailing-mergimi-lipjan",
+      "matchedName": "Detailing Mergimi",
+      "matchedPhone": "+38349416541",
+      "matchedCity": "Lipjan",
+      "emails": [
+        {
+          "address": "mergimkongjeli9@gmail.com",
+          "sourceUrls": ["https://www.facebook.com/EleaPolir/"],
+          "checkedAt": "2026-10-24",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/XsMiRg1X7lcC/detailing-mergimi/",
+        "https://www.facebook.com/EleaPolir/posts/pfbid02rigFRDsKNPuXuwf6WKJKEt6BZRCegyUYTdbMQ3zZ4oVj5qaEohUcE111WaTQUW35l",
+        "https://www.facebook.com/EleaPolir/"
+      ],
+      "notes": "Own public business Contact displaysmergimkongjeli9@gmail.com. Exactpage-to-target attribution now established by own originalpost explicitlypublishing049416541 and samebrand/city. No delivery/consent claim."
     },
     {
       "workshopId": "dida-service-prizren",

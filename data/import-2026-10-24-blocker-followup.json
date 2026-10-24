@@ -1,0 +1,751 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-24",
+  "runType": "explicit-user-requested-blocker-followup",
+  "automaticDailyRunAlreadyCompleted": true,
+  "scope": [
+    "auto-servis-endriti-obiliq",
+    "auto-servis-te-lila-viti",
+    "detailing-mergimi-lipjan"
+  ],
+  "startedAt": "2026-10-24T09:17:29.302483+00:00",
+  "baseCommit": "3bd741edd5111f424380efd9f0d2b2073d8a65cd",
+  "status": "local-import-prepared-awaiting-tests-review-ci-release",
+  "publishedWorkshopIds": [],
+  "publishedCountConfirmed": 0,
+  "priorEvidence": [
+    {
+      "id": "auto-servis-te-lila-viti",
+      "name": "Auto Servis \"Te Lila\"",
+      "city": "Viti",
+      "checkedAt": "2026-10-24T06:04:33.353Z",
+      "status": "deferred-premises-continuity",
+      "phone": "+38344210898",
+      "sourceUrls": [
+        "https://numrat.com/biznes/QEunQCsBn0wa/auto-servis-te-lila/",
+        "https://www.facebook.com/autoservistelila/directory_contact_info",
+        "https://www.facebook.com/autoservistelila/about_details"
+      ],
+      "independentEvidence": {
+        "directoryAddress": "Rexhep Bislimi",
+        "point": [42.32693, 21.36277],
+        "ownAddress": "Viti rruga tiranes perball qendres trektare etc",
+        "scope": "Own profile states Auto shlep & Servis; directory mechanic"
+      },
+      "googleIdentity": {
+        "placeId": "ChIJuUh8GLNjVBMR7JL19Oxijr0",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "locationGate": "Own Tirana road/opposite ETC versus directory Rexhep Bislimi requires attributable physical-site continuity; do not assume street alias."
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": "2026-10-24T06:05:44.717488+00:00",
+        "status": "not-found",
+        "note": "Own Facebook Info/Contact publishes phone only; Details only address. Exact brand/town search including email, hours, Facebook and Instagram returned no results. No attributable own website or Instagram found; no guessed email."
+      },
+      "openingHoursResearch": {
+        "checkedAt": "2026-10-24T06:05:44.717488+00:00",
+        "status": "no-usable-week",
+        "note": "Full directory and own Facebook Info/Contact/Details expose no weekly plan. Default only after identity conflict is resolved."
+      },
+      "reason": "Own precise address differs from directory/Maps street; contact matches but premises continuity unconfirmed.",
+      "nextCheck": "Find attributable own map pin or explicit street-alias/relocation evidence connecting Tirana road opposite ETC to Rexhep Bislimi site."
+    },
+    {
+      "id": "auto-servis-endriti-obiliq",
+      "name": "Auto servis Endriti",
+      "city": "Obiliq",
+      "phone": "+38344630910",
+      "address": "380 Hasan Prishtina",
+      "point": [42.681095, 21.084189],
+      "checkedAt": "2026-10-24T06:25:33.528Z",
+      "status": "deferred-visible-place-id",
+      "sourceUrls": [
+        "https://numrat.com/biznes/jARLjEvB3DnR/auto-servis-endriti/",
+        "https://www.cybo.com/XK-biz/auto-servis-endriti"
+      ],
+      "scope": "Mechanic directory classification",
+      "googleIdentity": {
+        "placeId": null,
+        "method": "public-maps-ui",
+        "nameAndPhoneMatched": true,
+        "note": "Named regular Maps profile matches exact phone/address, but no official visible Place-ID link obtained in generic service feed or scrolled mechanic feed. No alternate identifier substituted."
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": "2026-10-24T06:10:17.949079+00:00",
+        "status": "not-found",
+        "note": "Numrat/Cybo exact-site profiles have no email. NativeFB/web own-looking autoserviceendriti publishes ditii15@live.com but cityPrishtina only and no matching phone, so not assigned or output as target contact. Other FB100069718250533 is Nekofc/Komoran with429957, excluded. No attributable own website/Instagram found."
+      },
+      "openingHoursResearch": {
+        "checkedAt": "2026-10-24T06:10:17.949079+00:00",
+        "status": "researched-held",
+        "kind": "researched",
+        "sourceUrl": "https://www.cybo.com/XK-biz/auto-servis-endriti",
+        "sourceAge": "Undated current directory view, not owner confirmation",
+        "week": "Mon-Fri09:00-18:00,Sat09:00-14:00,Sunclosed",
+        "note": "Exactphone/street match, directory not treated as a second independent identity source; no hours import while PID missing."
+      },
+      "reason": "Mandatory official visible Place-ID and direct-ID return incomplete.",
+      "nextCheck": "Inspect newly available official public Maps link containing Place-ID; do not repeat unchanged broad searches or substitute CID."
+    },
+    {
+      "id": "detailing-mergimi-lipjan",
+      "name": "Detailing Mergimi",
+      "city": "Lipjan",
+      "phone": "+38349416541",
+      "address": "Rrugë Avdi Kelmendi",
+      "point": [42.527945, 21.11838],
+      "checkedAt": "2026-10-24T06:17:17.948818+00:00",
+      "sourceUrls": [
+        "https://numrat.com/biznes/XsMiRg1X7lcC/detailing-mergimi/",
+        "https://www.facebook.com/EleaPolir/directory_contact_info"
+      ],
+      "status": "deferred-own-phone-conflict",
+      "reason": "Own Detailing Mergim profile in Lipjan publishes truncated German-format +49 4165 41; cannot assume this equals independently listed Kosovo38349 contact.",
+      "nextCheck": "Find own explicit complete Kosovo international/national phone and precise site, without automatic prefix correction.",
+      "googleIdentity": {
+        "placeId": "ChIJm4IxfVWDVBMR7dk7fIBK0XI",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "note": "Official visible regular Lipjan service-feed Place-ID link and direct London fallback return checked. Independent precise source location compared where publication eligible; held contacts remain blocked."
+      },
+      "publicBusinessEmail": {
+        "address": "mergimkongjeli9@gmail.com",
+        "sourceUrl": "https://www.facebook.com/EleaPolir/directory_contact_info",
+        "checkedAt": "2026-10-24T06:17:17.948818+00:00",
+        "status": "unresolved",
+        "note": "Own Facebook Contact publicly displays this email alongside conflicting truncated+49 phone. Target assignment unresolved; broad brand/town and dedicated Instagram queries returned no results. No own website found."
+      },
+      "openingHoursResearch": {
+        "checkedAt": "2026-10-24T06:17:17.948818+00:00",
+        "kind": "assumed",
+        "status": "no-usable-week",
+        "week": null,
+        "note": "Full directory has no week; own profile only current opens-soon indicator, not usable weekly plan. No defaults imported while contact conflict held."
+      }
+    }
+  ],
+  "candidates": [
+    {
+      "id": "auto-servis-endriti-obiliq",
+      "name": "Auto servis Endriti",
+      "city": "Obiliq",
+      "phone": "+38344630910",
+      "address": "380 Hasan Prishtina",
+      "point": [42.681095, 21.084189],
+      "checkedAt": "2026-10-24T09:31:52.955158+00:00",
+      "status": "eligible",
+      "sourceUrls": [
+        "https://numrat.com/biznes/jARLjEvB3DnR/auto-servis-endriti/",
+        "https://www.cybo.com/XK-biz/auto-servis-endriti"
+      ],
+      "scope": "Mechanic directory classification",
+      "googleIdentity": {
+        "placeId": "ChIJ_TR6BEhhUxMRdxZqAjrrKIs",
+        "method": "public-maps-ui",
+        "checkedAt": "2026-10-24T09:31:52.955158+00:00",
+        "visibleOfficialPlaceIdLink": true,
+        "directMismatchedFallbackReturn": true,
+        "identityConfirmed": true,
+        "note": "Public Auto servis Endriti Kosovo feed exposes actual !19s Place-ID. Direct London fallback returns independently evidenced380HasanPrishtina/38344630910 and same source point. No Google business data or alternateidentifier retained."
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": "2026-10-24T09:31:52.955158+00:00",
+        "status": "not-found",
+        "note": "Fresh exact-phone email/Instagram search returned no results; full Numrat and Cybo details do not publish business email/site. Earlier same-day own-looking Facebook checks remain unassigned: autoserviceendriti only cityPrishtina/email without targetphone; other profile100069718250533 is Nekofc/Komoran429957. No borrowed email or guessed address."
+      },
+      "openingHoursResearch": {
+        "checkedAt": "2026-10-24T09:31:52.955158+00:00",
+        "status": "researched",
+        "kind": "researched",
+        "sourceUrl": "https://www.cybo.com/XK-biz/auto-servis-endriti",
+        "sourceAge": "Cybo weekly schedule undated; Numrat detail saysupdated2026-10-12. Fresh viewing is not operatorconfirmation.",
+        "week": [
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-14:00",
+          "closed"
+        ],
+        "note": "Fresh exact phone/address Cybo business text lists weekdays09-18,Sat09-14,Sunclosed. No Google hours copied; originalPlace-IDblocker resolved."
+      },
+      "reason": "Missing official visible Place-ID resolved through public nationwide same-name Maps result feed, distinguishing homonyms. Direct London fallback return matches exact independent phone/name/address and source coordinates within rounding.",
+      "nextCheck": "Complete guarded import, full checks/review/CI/release and live acceptance.",
+      "continuedFrom": "data/import-2026-10-24-daily.json"
+    },
+    {
+      "id": "detailing-mergimi-lipjan",
+      "name": "Detailing Mergimi",
+      "city": "Lipjan",
+      "phone": "+38349416541",
+      "address": "Rrugë Avdi Kelmendi",
+      "point": [42.527945, 21.11838],
+      "checkedAt": "2026-10-24T09:31:52.955158+00:00",
+      "sourceUrls": [
+        "https://numrat.com/biznes/XsMiRg1X7lcC/detailing-mergimi/",
+        "https://www.facebook.com/EleaPolir/posts/pfbid02rigFRDsKNPuXuwf6WKJKEt6BZRCegyUYTdbMQ3zZ4oVj5qaEohUcE111WaTQUW35l",
+        "https://www.facebook.com/EleaPolir/"
+      ],
+      "status": "eligible",
+      "reason": "Own public page-search result and directly opened original post explicitly publish national049416541 with DetajlingMergimi. Normalizing this independently published Kosovo national contact matches currentNumrat/Maps38349416541. The malformed+49profilefield is not converted or used as the phone source.",
+      "nextCheck": "Complete guarded import, full checks/review/CI/release and live acceptance.",
+      "googleIdentity": {
+        "placeId": "ChIJm4IxfVWDVBMR7dk7fIBK0XI",
+        "method": "public-maps-ui",
+        "checkedAt": "2026-10-24T09:31:52.955158+00:00",
+        "visibleOfficialPlaceIdLink": true,
+        "directMismatchedFallbackReturn": true,
+        "identityConfirmed": true,
+        "note": "Fresh regular public DetailingLipjanKosovo feed provides official !19sPID. London directreturn matches own post-nationalphone normalized38349, independently listed name/AvdiKelmendi address and Numratpoint within rounding. Ownpage is inLipjan; no conflictingownstreet found."
+      },
+      "publicBusinessEmail": {
+        "address": "mergimkongjeli9@gmail.com",
+        "sourceUrl": "https://www.facebook.com/EleaPolir/",
+        "checkedAt": "2026-10-24T09:31:52.955158+00:00",
+        "status": "publicly-sourced",
+        "note": "Own public business Contact displaysmergimkongjeli9@gmail.com. Exactpage-to-target attribution now established by own originalpost explicitlypublishing049416541 and samebrand/city. No delivery/consent claim."
+      },
+      "openingHoursResearch": {
+        "status": "researched",
+        "kind": "researched",
+        "week": [
+          "09:00-20:00",
+          "09:00-20:00",
+          "09:00-20:00",
+          "09:00-20:00",
+          "09:00-20:00",
+          "09:00-20:00",
+          "09:00-20:00"
+        ],
+        "sourceUrl": "https://www.facebook.com/EleaPolir/",
+        "checkedAt": "2026-10-24T09:31:52.955158+00:00",
+        "sourceAge": "Undated own business hours popover viewed today; not ownerconfirmation.",
+        "note": "Explicit own weeklypopover read all seven days09-20. Broad current-open indicator was not copied as schedule. No own website or attributable Instagram found in prior same-dayqueries; no Google hours used."
+      },
+      "continuedFrom": "data/import-2026-10-24-daily.json",
+      "scope": "Generic vehicle detailing according to own public business service post; no polishing, ceramic protection, brands or techniques inferred.",
+      "ownPhoneEvidence": {
+        "sourceUrl": "https://www.facebook.com/EleaPolir/posts/pfbid02rigFRDsKNPuXuwf6WKJKEt6BZRCegyUYTdbMQ3zZ4oVj5qaEohUcE111WaTQUW35l",
+        "nationalPhoneAsPublished": "049416541",
+        "sourceDateAsDisplayed": "2025-12-04",
+        "checkedAt": "2026-10-24T09:31:52.955158+00:00",
+        "note": "Photo view displayed2025-12-03; directly opened originalpost displayed2025-12-04. Originalpostdate retained; date difference is not silently resolved. Both views link to same ownpost. This is historical owncontactevidence corroborated by currentdirectory and currentpublicMaps identity; no claim of newoperatorconfirmation."
+      }
+    },
+    {
+      "id": "auto-servis-te-lila-viti",
+      "name": "Auto Servis \"Te Lila\"",
+      "city": "Viti",
+      "checkedAt": "2026-10-24T09:31:52.955158+00:00",
+      "status": "deferred-premises-continuity",
+      "phone": "+38344210898",
+      "sourceUrls": [
+        "https://numrat.com/biznes/QEunQCsBn0wa/auto-servis-te-lila/",
+        "https://www.facebook.com/autoservistelila/directory_contact_info",
+        "https://www.facebook.com/autoservistelila/about_details"
+      ],
+      "independentEvidence": {
+        "directoryAddress": "Rexhep Bislimi",
+        "point": [42.32693, 21.36277],
+        "ownAddress": "Viti rruga tiranes perball qendres trektare etc",
+        "scope": "Own profile states Auto shlep & Servis; directory mechanic"
+      },
+      "googleIdentity": {
+        "placeId": "ChIJuUh8GLNjVBMR7JL19Oxijr0",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "locationGate": "Own Tirana road/opposite ETC versus directory Rexhep Bislimi requires attributable physical-site continuity; do not assume street alias."
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "checkedAt": "2026-10-24T09:31:52.955158+00:00",
+        "status": "not-found",
+        "note": "Ownpublicprofile stillshows exactphone only; earlier same-dayContact/Details+outsideGoogleweb/Instagramsearch no attributableemail/site. Additional ownprofile/landmarkresearch found no business email."
+      },
+      "openingHoursResearch": {
+        "checkedAt": "2026-10-24T09:31:52.955158+00:00",
+        "status": "no-usable-week",
+        "note": "No complete attributable weeklyplan established in ownpage/directory evidence; identity remains held. Missinghours alone would notblock publication andcentralassumeddefault would follow if identityresolved."
+      },
+      "reason": "Own contact stillmatches, but ownpublished Facebook address-map link points about5.7km from independentdirectory site. Public own-profile Rexhep search and focused ETC/Viti landmark checks did not establish continuity.",
+      "nextCheck": "Obtain a fresh attributable own precise premises/map publication connecting the stated Tirana-road/oppositeETC address to the independently listedRexhepBislimi site. Resolve the mismatching own-page link, rather than assume geocoding error or relocation.",
+      "followupEvidence": {
+        "ownLocationSource": "https://www.facebook.com/autoservistelila/",
+        "ownLinkedBingWhere1": [42.28953, 21.4103],
+        "independentNumratPoint": [42.32693, 21.36277],
+        "approximateDifferenceMetres": 5707,
+        "note": "These are independently publishedsourcepoints, not retainedGooglecoordinates. Facebook linkedpoint may reflect platformgeocoding, but this is unproven and not treatedas harmless. Focused DuckDuckGoETCVitiTiran query returnednone; Numratquery corrected fromdefaultDiaspora toKosovo andexactViti/ETC then returned0. That doesnotprove ETCabsence. OwnprofileRexhep search returned no matching posts."
+      }
+    }
+  ],
+  "whatsappVerification": {
+    "checks": [
+      {
+        "workshopIds": ["auto-servis-endriti-obiliq"],
+        "phone": "+38344630910",
+        "checkedAt": "2026-10-24T09:28:23.722Z",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "registered"
+      },
+      {
+        "workshopIds": ["detailing-mergimi-lipjan"],
+        "phone": "+38349416541",
+        "checkedAt": "2026-10-24T09:28:57.153Z",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "registered"
+      }
+    ],
+    "summary": {
+      "uniqueNumbersChecked": 2,
+      "registered": 2,
+      "not_registered": 0,
+      "unresolved": 0,
+      "completedUiLookups": 2,
+      "newlyProvidedWorkshopContacts": 0,
+      "heldCandidateNotRechecked": "TeLila number unchanged and no proposedpublication; prior same-dayresult not counted as a freshlookup.",
+      "preparedWorkshopContacts": 2
+    }
+  },
+  "provider": {
+    "googleApiOrSdkCalls": 0,
+    "additionalCosts": 0,
+    "outreach": 0
+  },
+  "handoff": {
+    "lockHeld": true,
+    "safeToReleaseLock": false,
+    "reason": "Two additions prepared locally; full checks/review/CI/release/live acceptance pending. Shared lock held."
+  },
+  "browser": {
+    "projectProfileVisiblyConfirmed": true,
+    "internalBrowserId": "3",
+    "createdTabs": ["22", "23", "24", "25", "26", "27", "28", "29"]
+  },
+  "researchProgress": {
+    "continuedIdentities": 3,
+    "newlyDiscoveredIdentities": 0,
+    "eligible": 2,
+    "deferred": 1,
+    "duplicateNewImports": 0,
+    "completedMapsIdentityChecks": 2
+  },
+  "openingHours": {
+    "preparedResearchedPlans": 2,
+    "preparedAssumedPlans": 0,
+    "publishedResearchedPlans": 0,
+    "publishedAssumedPlans": 0,
+    "revision": "941a3f4f9abcdde8ad6590339e4564300c3025fd98ce9264051376b1acf9acf3"
+  },
+  "publicBusinessEmailSummary": {
+    "preparedWithSourcedEmail": 1,
+    "preparedWithoutEmail": 1,
+    "publishedWithSourcedEmail": 0,
+    "publishedWithoutEmail": 0
+  },
+  "checkedAt": "2026-10-24T09:37:07.195821+00:00",
+  "preflight": {
+    "health": {
+      "checkedAt": "2026-10-24T09:15:45.960Z",
+      "published": 239,
+      "checks": [
+        {
+          "path": "/werkstaetten",
+          "status": 200,
+          "bytes": 864429,
+          "ray": "a4f7e0f70f32e70f-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/werkstatt/auto-servis-besi-obiliq",
+          "status": 200,
+          "bytes": 103476,
+          "ray": "a4f7e0f798a2e70f-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/werkstatt/auto-pjese-servis-te-arti-lipjan",
+          "status": 200,
+          "bytes": 108115,
+          "ray": "a4f7e0f809b9e70f-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/sq/serviset",
+          "status": 200,
+          "bytes": 880701,
+          "ray": "a4f7e0f8ec19e70f-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/sq/servis/auto-servis-besi-obiliq",
+          "status": 200,
+          "bytes": 103037,
+          "ray": "a4f7e0f9adb5e70f-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/sq/servis/auto-pjese-servis-te-arti-lipjan",
+          "status": 200,
+          "bytes": 107591,
+          "ray": "a4f7e0fa5f79e70f-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/en/workshops",
+          "status": 200,
+          "bytes": 866514,
+          "ray": "a4f7e0fac89ee70f-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/en/workshop/auto-servis-besi-obiliq",
+          "status": 200,
+          "bytes": 100761,
+          "ray": "a4f7e0fb49eae70f-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/en/workshop/auto-pjese-servis-te-arti-lipjan",
+          "status": 200,
+          "bytes": 106053,
+          "ray": "a4f7e0fc2c35e70f-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        }
+      ],
+      "healthy": true
+    },
+    "protectedBackup": {
+      "checkedAt": "2026-10-24T09:30:31.253199+00:00",
+      "method": "Existing authenticated Cloudflare D1 Studio SELECT-only query and CSV export of one JSON payload",
+      "databaseId": "b395ea3a-5316-4b0b-bdee-533bdb68d6a0",
+      "catalogueRows": 1069,
+      "tableCounts": {
+        "catalog_state": 80,
+        "workshops": 239,
+        "workshop_contact_details": 10,
+        "workshop_email_addresses": 134,
+        "workshop_email_imports": 5,
+        "workshop_google_places": 239,
+        "workshop_google_ratings": 129,
+        "workshop_opening_hours_imports": 233
+      },
+      "backupSha256": "ee028afa7de9256783cbd583a06214de9d271b4a8251c5ecf9bacb8716c46880",
+      "csvSha256": "de84bc26c6a92f5862c327fb3d985bc1adbb0ec9b539a3327e4a4f66680ddb23",
+      "rawBytes": 793796,
+      "exactRestoration": true,
+      "allCurrentColumnsIncluded": true,
+      "integrity": "ok",
+      "foreignKeyViolations": 0,
+      "privateAccountOrCustomerTablesExported": false,
+      "productionWrites": 0
+    },
+    "fullDatabaseComparison": {
+      "checkedAt": "2026-10-24T09:32:42.920Z",
+      "published": 239,
+      "profileFieldsMatched": 19,
+      "allPlaceIdsAndCentralHashesMatched": true,
+      "retirementMarkers": 35,
+      "extraMissingMarkers": 0,
+      "tables": {
+        "catalog_state": {
+          "count": 80,
+          "columns": ["key", "value"],
+          "sha256": "e9b50ef6edacf87e6e7c241188791d34c304c8f1857e4682cd241eec9bb2fa01"
+        },
+        "workshops": {
+          "count": 239,
+          "columns": [
+            "address",
+            "brands",
+            "checked_at",
+            "city",
+            "description",
+            "editorial_emails",
+            "id",
+            "languages",
+            "lat",
+            "lng",
+            "name",
+            "opening_hours",
+            "opening_hours_confirmed_at",
+            "phone",
+            "phone_note",
+            "service_details",
+            "services",
+            "sources",
+            "specialty",
+            "status",
+            "updated_at",
+            "whatsapp"
+          ],
+          "sha256": "2f19e66c1f0664f5e9c41a492d26cfa821ee7cfaee17d360c8fd2b6bc6248a08"
+        },
+        "workshop_contact_details": {
+          "count": 10,
+          "columns": [
+            "checked_at",
+            "email",
+            "email_verification",
+            "matched_city",
+            "matched_name",
+            "matched_phone",
+            "source_urls",
+            "website",
+            "workshop_id"
+          ],
+          "sha256": "e86f69e11cb160d25a06b80d7aabd43b1a42cc1d2f522a7d069da54eb2462ebe"
+        },
+        "workshop_email_addresses": {
+          "count": 134,
+          "columns": [
+            "checked_at",
+            "email",
+            "email_key",
+            "import_revision",
+            "matched_city",
+            "matched_name",
+            "matched_phone",
+            "position",
+            "source_urls",
+            "workshop_id"
+          ],
+          "sha256": "db3b4126ee4d6eadefb7bb0db176b52584a839bac5b2980fcb3fa2777852ae88"
+        },
+        "workshop_email_imports": {
+          "count": 5,
+          "columns": ["applied_at", "revision"],
+          "sha256": "f8557d4905e72618f08e07b36a5021aacd3fb98022c4897a0a583886fa846940"
+        },
+        "workshop_google_places": {
+          "count": 239,
+          "columns": [
+            "checked_at",
+            "place_id",
+            "profile_hash",
+            "retry_after",
+            "workshop_id"
+          ],
+          "sha256": "ce64920e2e8a2b001ffee5b4a7eb0fc4a181c46dcb001fc68d536b1878dc7479"
+        },
+        "workshop_google_ratings": {
+          "count": 129,
+          "columns": [
+            "checked_at",
+            "maps_url",
+            "rating",
+            "review_count",
+            "source_label",
+            "source_updated_at",
+            "source_url",
+            "workshop_id"
+          ],
+          "sha256": "23644a0a5c728e2038411a4e920f1445b59e70ac29c14917bd9914da20f6038d"
+        },
+        "workshop_opening_hours_imports": {
+          "count": 233,
+          "columns": [
+            "import_revision",
+            "imported_at",
+            "opening_hours",
+            "source_metadata",
+            "suppressed",
+            "workshop_id"
+          ],
+          "sha256": "92e46911f5d42b1f91773667afcf1572204183c4ad66db3d6fae950c117271c9"
+        }
+      }
+    },
+    "resources": {
+      "checkedAt": "2026-10-24T09:34:03.698Z",
+      "operator": {
+        "total": 239,
+        "drafts": 0,
+        "pending": 0,
+        "retirementMarkers": 35
+      },
+      "rowsWritten": 0,
+      "deployment": {
+        "id": "19d089f6-1bb9-4c03-922e-633dd062effe",
+        "source": "wrangler",
+        "strategy": "percentage",
+        "annotations": {
+          "workers/message": "v1.49.0 (3bd741edd5111f424380efd9f0d2b2073d8a65cd)",
+          "workers/triggered_by": "deployment"
+        },
+        "versions": [
+          {
+            "version_id": "058e574d-af21-4f5e-8ef7-45f2330d9117",
+            "percentage": 100
+          }
+        ],
+        "created_on": "2026-10-24T06:58:17.945129Z"
+      },
+      "logs": {
+        "timeframe": {
+          "from": 1792830842555,
+          "to": 1792834442555
+        },
+        "status": "COMPLETED",
+        "outcomes": [
+          {
+            "outcome": "ok",
+            "events": 102,
+            "sampleInterval": 1
+          }
+        ]
+      }
+    },
+    "freshPrewriteDatabaseGuard": {
+      "checkedAt": "2026-10-24T09:34:47.730Z",
+      "all1069RowsAndSchemaUnchanged": true
+    }
+  },
+  "publication": {
+    "pr": null,
+    "release": null,
+    "commit": null,
+    "deployment": null,
+    "reason": "Two explicitly requested follow-up additions prepared locally; full checks, exact-head independent review, CI, release and live acceptance pending."
+  },
+  "importedWorkshopIds": [
+    "auto-servis-endriti-obiliq",
+    "detailing-mergimi-lipjan"
+  ],
+  "after": {
+    "total": 241,
+    "published": 241,
+    "scope": "Local canonical preparation only; publication unconfirmed."
+  },
+  "priorCompletedDaily": {
+    "date": "2026-10-24",
+    "pr": 225,
+    "release": "v1.49.0",
+    "publishedCount": 5,
+    "mustNotRepeat": true,
+    "completionManifestSha256": "966495933304102a8a3b08b386f8066ffa149aad6635dc980befcb4151bfad89"
+  },
+  "validation": {
+    "scope": "Two manual-followup additions prepared locally; no local production writes.",
+    "localProductionWrites": 0,
+    "dryRun": {
+      "added": ["auto-servis-endriti-obiliq", "detailing-mergimi-lipjan"],
+      "updated": [],
+      "deduplicated": [],
+      "total": 241
+    },
+    "isolatedImport": {
+      "checkedAt": "2026-10-24T09:35:25.195Z",
+      "priorRowsPreserved": 1069,
+      "previousProfilesPreserved": 239,
+      "previousCanonicalAndOverlayRecordsUnchanged": true,
+      "newProfiles": 2,
+      "newResearchedHours": 2,
+      "newAssumedHours": 0,
+      "newWhatsAppContacts": 2,
+      "newBusinessEmails": 1,
+      "ownerConfirmationInvented": false,
+      "productionTouched": false,
+      "idempotent": true,
+      "integrity": "ok",
+      "foreignKeyViolations": 0,
+      "counts": {
+        "catalog_state": 81,
+        "workshops": 241,
+        "workshop_contact_details": 10,
+        "workshop_email_addresses": 135,
+        "workshop_email_imports": 5,
+        "workshop_google_places": 241,
+        "workshop_google_ratings": 129,
+        "workshop_opening_hours_imports": 235
+      },
+      "releasePlanStatements": 506
+    },
+    "duplicateCheck": {
+      "checkedAt": "2026-10-24T09:33:25.987626+00:00",
+      "baselineProfiles": 239,
+      "newIdentities": 2,
+      "canonicalAndFullLiveIdsPlaceIdsPhonesDistinct": true,
+      "retiredIdentitiesChecked": 35,
+      "retiredIdentityMatches": 0,
+      "historicalContinuations": [
+        "auto-servis-endriti-obiliq",
+        "detailing-mergimi-lipjan"
+      ],
+      "noReidentificationOrRemovalBypass": true
+    },
+    "toolchains": {
+      "node": "24.21.0",
+      "go": "1.27.1",
+      "ciNodeMajor": 24,
+      "ciGo": "1.27.1",
+      "actualVersionsVerified": true
+    },
+    "remainingGates": [
+      "Full local workflow checks",
+      "Independent final-head reviews",
+      "PR and final-head CI",
+      "Fresh full live/revision guard before merge",
+      "Verified main release and full live acceptance"
+    ]
+  }
+}

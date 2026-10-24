@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-24T06:34:23.039Z",
+  "updatedAt": "2026-10-24T09:35:23.446Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 239,
+    "published": 241,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 239 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 239,
+    "reason": "All 241 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 241,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -4447,6 +4447,51 @@
       }
     },
     {
+      "id": "auto-servis-endriti-obiliq",
+      "name": "Auto servis Endriti",
+      "city": "Obiliq",
+      "address": "380 Hasan Prishtina",
+      "phone": "+38344630910",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344630910",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto servis Endriti in Obiliq ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.681095,
+      "lng": 21.084189,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/jARLjEvB3DnR/auto-servis-endriti/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-servis-endriti",
+          "title": "Öffentliches Firmenverzeichnis: Geschäftskontakt, Standort und Wochenplan",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-24",
+      "status": "published",
+      "updatedAt": "2026-10-24T09:32:42.093Z",
+      "google": {
+        "placeId": "ChIJ_TR6BEhhUxMRdxZqAjrrKIs",
+        "matchedAt": "2026-10-24T09:31:52.955158+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/jARLjEvB3DnR/auto-servis-endriti/",
+            "https://www.cybo.com/XK-biz/auto-servis-endriti"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently evidenced exact phone, name and site. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed. The explicit follow-up manifest records the resolved blocker."
+        }
+      }
+    },
+    {
       "id": "auto-servis-enisi-obiliq",
       "name": "Auto Servis Enisi",
       "city": "Obiliq",
@@ -8839,6 +8884,59 @@
             "https://www.citroen-ks.com/"
           ],
           "note": "The embedded map on the official Citroën dealer portal confirms CID 5469968250566796252. The other Delfin branch was excluded."
+        }
+      }
+    },
+    {
+      "id": "detailing-mergimi-lipjan",
+      "name": "Detailing Mergimi",
+      "city": "Lipjan",
+      "address": "Rrugë Avdi Kelmendi",
+      "phone": "+38349416541",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349416541",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Fahrzeugaufbereitung (Detailing) laut eigenem Betriebsbeitrag"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugaufbereitung · Detailing",
+      "description": "Detailing Mergimi in Lipjan bietet laut eigenem Betriebsbeitrag Fahrzeugaufbereitung an. Konkrete Verfahren und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.527945,
+      "lng": 21.11838,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/XsMiRg1X7lcC/detailing-mergimi/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/EleaPolir/posts/pfbid02rigFRDsKNPuXuwf6WKJKEt6BZRCegyUYTdbMQ3zZ4oVj5qaEohUcE111WaTQUW35l",
+          "title": "Eigener Betriebsbeitrag: Detailing und vollständige Geschäftsnummer",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/EleaPolir/",
+          "title": "Eigener Betriebsauftritt: Name, Ort, Geschäfts-E-Mail und Öffnungszeiten",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-24",
+      "status": "published",
+      "updatedAt": "2026-10-24T09:32:42.093Z",
+      "google": {
+        "placeId": "ChIJm4IxfVWDVBMR7dk7fIBK0XI",
+        "matchedAt": "2026-10-24T09:31:52.955158+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/XsMiRg1X7lcC/detailing-mergimi/",
+            "https://www.facebook.com/EleaPolir/posts/pfbid02rigFRDsKNPuXuwf6WKJKEt6BZRCegyUYTdbMQ3zZ4oVj5qaEohUcE111WaTQUW35l",
+            "https://www.facebook.com/EleaPolir/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently evidenced exact phone, name and site. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed. The explicit follow-up manifest records the resolved blocker."
         }
       }
     },
