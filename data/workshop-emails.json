@@ -1004,6 +1004,20 @@
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
     },
     {
+      "workshopId": "auto-pjese-servis-te-arti-lipjan",
+      "matchedName": "Auto Pjese & Servis Te ARTI",
+      "matchedPhone": "+38344315339",
+      "matchedCity": "Lipjan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/TJzSBEcHWzsA/auto-pjese-servis-te-arti/",
+        "https://www.facebook.com/profile.php?id=100093901753911",
+        "https://www.gjithebiznesi.com/XK/auto-pjese-servis-te-arti-044-315-339"
+      ],
+      "notes": "Own Facebook Info/Contact publishes exact phone only; full Numrat and AllBiz no email/site. Dedicated Instagram search returns own Facebook and Kompass company listings only, no attributable Instagram. No guessed addresses."
+    },
+    {
       "workshopId": "auto-rally-90-kline",
       "matchedName": "Auto Rally 90",
       "matchedPhone": "+38349138886",
@@ -1565,6 +1579,18 @@
         "https://www.instagram.com/auto_service_berati_/"
       ],
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; Instagram bio checked; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
+    },
+    {
+      "workshopId": "auto-servis-besi-obiliq",
+      "matchedName": "Auto Servis BESI",
+      "matchedPhone": "+38344235627",
+      "matchedCity": "Obiliq",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/GeCd7r5NM9zz/auto-servis-besi/"
+      ],
+      "notes": "Full directory has no email/week/website. Broad exact-name/town web search and native Facebook examined. Own-looking facebook.com/besiservis is Prugoc/Prishtina with different271826 contacts; instagram.com/autoservisbesii is Lipjan/Avdi Kelmendi with735254/625862; instagram.com/autoservis_besi is Malisheve/ImerKrasniqi with777715/802757. None assigned to exact Obiliq235627 site; no borrowed contacts/hours."
     },
     {
       "workshopId": "auto-servis-besimi-kline",
@@ -2737,6 +2763,31 @@
       "notes": "Current ownhomepage/fullcontacttab gives44phoneonly. FullnewNumrat and explicitownhandle/email/Instagramquery inspected; no attributableownwebsite/Instagram/business email found. HistoricalcommunityInstagramad remains historicalthirdparty proof, not ownbusinessprofile."
     },
     {
+      "workshopId": "auto-servise-benz-viti",
+      "matchedName": "Auto servise benz",
+      "matchedPhone": "+38344616052",
+      "matchedCity": "Viti",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/cL6FF1ht19ar/auto-servise-benz/"
+      ],
+      "notes": "Full directory has no email/website/social profile. Exact brand/town DuckDuckGo query returns no result; native Facebook pages search shows foreign homonyms and unrelated Viti dealers/parts businesses, none attributable to exact target. No attributable Instagram or own website found."
+    },
+    {
+      "workshopId": "auto-star-kosova-lipjan",
+      "matchedName": "Auto Star Kosova",
+      "matchedPhone": "+38344155079",
+      "matchedCity": "Lipjan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/wesJyRDVlYBz/auto-star-kosova/",
+        "https://www.instagram.com/autostarkosova_official/"
+      ],
+      "notes": "Own full Instagram bio names both contacts and PrishtinaMall-LipjanKm3/nearMall. Exact main phone and independent Numrat M25 pin match publicMaps direct return within rounding. Same-name Findglocal mirror uses own secondary phone and links FB399317526843256, currently unavailable; not closure proof. Directory/ownIG/mirror no email or fullweek; no attributable own website. Visitor subscription email fields are not business contacts."
+    },
+    {
       "workshopId": "auto-star-xharra-gjakova",
       "matchedName": "Mercedes-Benz | Auto Star Xharra",
       "matchedPhone": "+38349588500",
@@ -2778,6 +2829,29 @@
         "https://www.google.com/search?q=Auto+Servis+Tershana+Ferizaj+email+kontakt"
       ],
       "notes": "The business's own contact page shows the email, Zenel Hajdini/Ferizaj and the exact existing phone number 044/048 177 020."
+    },
+    {
+      "workshopId": "auto-xhama-becos-lipjan",
+      "matchedName": "Auto Xhama Becos - Lipjan",
+      "matchedPhone": "+38345661120",
+      "matchedCity": "Lipjan",
+      "emails": [
+        {
+          "address": "becos2021@hotmail.com",
+          "sourceUrls": [
+            "https://www.facebook.com/profile.php?id=61551492666060"
+          ],
+          "checkedAt": "2026-10-24",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://www.facebook.com/profile.php?id=61551492666060",
+        "https://www.instagram.com/autoxhama.becos/",
+        "https://www.cybo.com/XK-biz/auto-xhama-becos-shpk"
+      ],
+      "notes": "Own Facebook Contact publishes exact main international number, address and email, links own Instagram. Complete Instagram bio publishes both national numbers with redundant trunk0 after+383; canonical international forms remove that domestic trunk0 only. Cybo exact main phone and same road address match; no own website found. No consent or deliverability claim."
     },
     {
       "workshopId": "auto-xhama-euro-glass-fushe-kosove",

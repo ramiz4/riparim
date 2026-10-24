@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "1dfbcf58b11d13eba6d7f04580baa80727efd63a2dbd0162c29ca9fc05fa33d6",
+  "revision": "ec6565d243a05a3e19adfcbdfb9b7b1248ce97742273ce2d3e0b9e825a5b4b54",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -4237,6 +4237,95 @@
       }
     },
     {
+      "id": "auto-pjese-servis-te-arti-lipjan",
+      "expected": {
+        "name": "Auto Pjese & Servis Te ARTI",
+        "city": "Lipjan",
+        "address": "llugaxhi",
+        "phone": "+38344315339"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-24",
+        "source": "https://www.gjithebiznesi.com/XK/auto-pjese-servis-te-arti-044-315-339",
+        "sourceName": "Auto Pjese & Servis Te ARTI",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Undated AllBiz Q&A complete week, exact phone/street; own Facebook current open indicator is not copied as a schedule. Undated independently published schedule, not operator confirmation. Eligible plan prepared locally for guarded release import. Checked sources: https://www.gjithebiznesi.com/XK/auto-pjese-servis-te-arti-044-315-339 https://numrat.com/biznes/TJzSBEcHWzsA/auto-pjese-servis-te-arti/ https://www.facebook.com/profile.php?id=100093901753911 No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "08:00-16:00",
+          "08:00-16:00",
+          "08:00-16:00",
+          "08:00-16:00",
+          "08:00-16:00",
+          "08:00-16:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-rally-90-kline",
       "expected": {
         "name": "Auto Rally 90",
@@ -6521,6 +6610,87 @@
           "08:00-16:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-besi-obiliq",
+      "expected": {
+        "name": "Auto Servis BESI",
+        "city": "Obiliq",
+        "address": "Obiliq 15000",
+        "phone": "+38344235627"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-24",
+        "source": "https://numrat.com/biznes/GeCd7r5NM9zz/auto-servis-besi/",
+        "sourceName": "Auto Servis BESI",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Checked sources: https://numrat.com/biznes/GeCd7r5NM9zz/auto-servis-besi/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -11514,6 +11684,168 @@
       }
     },
     {
+      "id": "auto-servise-benz-viti",
+      "expected": {
+        "name": "Auto servise benz",
+        "city": "Viti",
+        "address": "Daut zenuni, Muhamet muharremi",
+        "phone": "+38344616052"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-24",
+        "source": "https://numrat.com/biznes/cL6FF1ht19ar/auto-servise-benz/",
+        "sourceName": "Auto servise benz",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Checked sources: https://numrat.com/biznes/cL6FF1ht19ar/auto-servise-benz/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-star-kosova-lipjan",
+      "expected": {
+        "name": "Auto Star Kosova",
+        "city": "Lipjan",
+        "address": "M25, Lipjan",
+        "phone": "+38344155079"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-24",
+        "source": "https://numrat.com/biznes/wesJyRDVlYBz/auto-star-kosova/",
+        "sourceName": "Auto Star Kosova",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Undated source; viewing today is not operator confirmation No Google hours copied. A complete attributable source week is retained if usable; otherwise central assumed default. Held identities receive no import. Checked sources: https://numrat.com/biznes/wesJyRDVlYBz/auto-star-kosova/ https://www.instagram.com/autostarkosova_official/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-star-xharra-gjakova",
       "expected": {
         "name": "Mercedes-Benz | Auto Star Xharra",
@@ -11680,6 +12012,95 @@
           "08:30-19:00",
           "08:30-17:00",
           "08:30-19:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-xhama-becos-lipjan",
+      "expected": {
+        "name": "Auto Xhama Becos - Lipjan",
+        "city": "Lipjan",
+        "address": "Rruga Ibrahim Rugova, Magjistralja Shtime-Prishtine",
+        "phone": "+38345661120"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-24",
+        "source": "https://www.cybo.com/XK-biz/auto-xhama-becos-shpk",
+        "sourceName": "Auto Xhama Becos - Lipjan",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Undated source; viewing today is not operator confirmation Cybo full Mon-Sat09-17/Sunclosed week for exact main phone and same address. OwnFB Details shows current opens-soon indicator only; not copied as a schedule. OwnIG fullbio no week. No ownerconfirmation/currentopenstatus. Checked sources: https://www.cybo.com/XK-biz/auto-xhama-becos-shpk https://www.facebook.com/profile.php?id=61551492666060 https://www.instagram.com/autoxhama.becos/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "09:00-17:00",
+          "09:00-17:00",
+          "09:00-17:00",
+          "09:00-17:00",
+          "09:00-17:00",
+          "09:00-17:00",
           "Geschlossen"
         ],
         "earlierPlan": ""
