@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-23T06:59:45.515Z",
+  "updatedAt": "2026-10-24T06:34:23.039Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 234,
+    "published": 239,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 234 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 234,
+    "reason": "All 239 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 239,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -2459,6 +2459,57 @@
       }
     },
     {
+      "id": "auto-pjese-servis-te-arti-lipjan",
+      "name": "Auto Pjese & Servis Te ARTI",
+      "city": "Lipjan",
+      "address": "llugaxhi",
+      "phone": "+38344315339",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344315339",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Pkw-Reparaturen laut eigenem Betriebsprofil"],
+      "languages": [],
+      "specialty": "Pkw-Reparaturen",
+      "description": "Auto Pjese & Servis Te ARTI in Llugaxhi bei Lipjan bietet laut eigenem Betriebsprofil Pkw-Reparaturen und den Verkauf von Autoteilen an.",
+      "lat": 42.498236,
+      "lng": 21.174101,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/TJzSBEcHWzsA/auto-pjese-servis-te-arti/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/profile.php?id=100093901753911",
+          "title": "Eigener Betriebsauftritt: Name, Standort, Geschäftskontakte und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.gjithebiznesi.com/XK/auto-pjese-servis-te-arti-044-315-339",
+          "title": "Öffentliches Firmenverzeichnis: Geschäftskontakt, Standort und Wochenplan",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-24",
+      "status": "published",
+      "updatedAt": "2026-10-24T06:34:13.550Z",
+      "google": {
+        "placeId": "ChIJyZ6clvGDVBMR6emb16WMqvA",
+        "matchedAt": "2026-10-24T06:17:17.948818+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/TJzSBEcHWzsA/auto-pjese-servis-te-arti/",
+            "https://www.facebook.com/profile.php?id=100093901753911",
+            "https://www.gjithebiznesi.com/XK/auto-pjese-servis-te-arti-044-315-339"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, exact independently sourced main number and published site address. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed. Detailed evidence is in the dated daily manifest."
+        }
+      }
+    },
+    {
       "id": "auto-rally-90-kline",
       "name": "Auto Rally 90",
       "city": "Klinë",
@@ -3796,6 +3847,45 @@
             "https://www.google.com/maps/search/?api=1&query=NOT_A_REAL_RIPARIM_BUSINESS&query_place_id=ChIJR0jrutd1UxMRlemhiDV-aUA"
           ],
           "note": "Public Maps interface in the confirmed project profile: name, normalized phone and independent street/place agree; active entry with regular opening status. Place ID from the visible !19s result link directly rechecked with an incorrect fallback search. No API/SDK calls, no owner verification."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-besi-obiliq",
+      "name": "Auto Servis BESI",
+      "city": "Obiliq",
+      "address": "Obiliq 15000",
+      "phone": "+38344235627",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis BESI in Obiliq ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.67969,
+      "lng": 21.091721,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/GeCd7r5NM9zz/auto-servis-besi/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-24",
+      "status": "published",
+      "updatedAt": "2026-10-24T06:34:13.550Z",
+      "google": {
+        "placeId": "ChIJ4_E6NQBhUxMRldM6-mS5P4I",
+        "matchedAt": "2026-10-24T06:10:17.949079+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/GeCd7r5NM9zz/auto-servis-besi/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, exact independently sourced main number and published site address. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed. Detailed evidence is in the dated daily manifest."
         }
       }
     },
@@ -6566,6 +6656,92 @@
       }
     },
     {
+      "id": "auto-servise-benz-viti",
+      "name": "Auto servise benz",
+      "city": "Viti",
+      "address": "Daut zenuni, Muhamet muharremi",
+      "phone": "+38344616052",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto servise benz in Viti ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.320732,
+      "lng": 21.34994,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/cL6FF1ht19ar/auto-servise-benz/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-24",
+      "status": "published",
+      "updatedAt": "2026-10-24T06:34:13.550Z",
+      "google": {
+        "placeId": "ChIJMzRz1BVjVBMR9PrHohyIS_A",
+        "matchedAt": "2026-10-24T06:05:13.763Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/cL6FF1ht19ar/auto-servise-benz/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, exact independently sourced main number and published site address. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed. Detailed evidence is in the dated daily manifest."
+        }
+      }
+    },
+    {
+      "id": "auto-star-kosova-lipjan",
+      "name": "Auto Star Kosova",
+      "city": "Lipjan",
+      "address": "M25, Lipjan",
+      "phone": "+38344155079",
+      "phoneNote": "Weiterer Geschäftskontakt: +38344755908; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Diagnose & Elektronik", "Inspektion & Wartung"],
+      "serviceDetails": [
+        "Mechanische Arbeiten und Autoelektrik laut eigenem Betriebsprofil"
+      ],
+      "languages": [],
+      "specialty": "Mechanik · Autoelektrik",
+      "description": "Auto Star Kosova in Lipjan nennt im eigenen Betriebsprofil mechanische Arbeiten und Autoelektrik. Konkrete Reparaturen und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.546563,
+      "lng": 21.125679,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/wesJyRDVlYBz/auto-star-kosova/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.instagram.com/autostarkosova_official/",
+          "title": "Eigener Betriebsauftritt: Name, Standort, Geschäftskontakte und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-24",
+      "status": "published",
+      "updatedAt": "2026-10-24T06:34:13.550Z",
+      "google": {
+        "placeId": "ChIJ0ZZyj3-DVBMRSwXzNw-z44o",
+        "matchedAt": "2026-10-24T06:30:08.229357+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/wesJyRDVlYBz/auto-star-kosova/",
+            "https://www.instagram.com/autostarkosova_official/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, exact independently sourced main number and published site address. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed. Detailed evidence is in the dated daily manifest."
+        }
+      }
+    },
+    {
       "id": "auto-star-xharra-gjakova",
       "name": "Mercedes-Benz | Auto Star Xharra",
       "city": "Gjakova",
@@ -6675,6 +6851,59 @@
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
+        }
+      }
+    },
+    {
+      "id": "auto-xhama-becos-lipjan",
+      "name": "Auto Xhama Becos - Lipjan",
+      "city": "Lipjan",
+      "address": "Rruga Ibrahim Rugova, Magjistralja Shtime-Prishtine",
+      "phone": "+38345661120",
+      "phoneNote": "Weiterer Geschäftskontakt: +38345511170; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38345661120",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Verkauf und Montage von Pkw-Glas laut eigenem Betriebsprofil"
+      ],
+      "languages": [],
+      "specialty": "Autoglas-Montage",
+      "description": "Auto Xhama Becos in Lipjan bietet laut eigenem Betriebsprofil den Verkauf und die Montage von Fahrzeugglas an. Für Pkw sind Autoglasarbeiten ausdrücklich im Angebot genannt.",
+      "lat": null,
+      "lng": null,
+      "sources": [
+        {
+          "url": "https://www.facebook.com/profile.php?id=61551492666060",
+          "title": "Eigener Betriebsauftritt: Name, Standort, Geschäftskontakte und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autoxhama.becos/",
+          "title": "Eigener Betriebsauftritt: Name, Standort, Geschäftskontakte und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.cybo.com/XK-biz/auto-xhama-becos-shpk",
+          "title": "Öffentliches Firmenverzeichnis: Geschäftskontakt, Standort und Wochenplan",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-24",
+      "status": "published",
+      "updatedAt": "2026-10-24T06:34:13.550Z",
+      "google": {
+        "placeId": "ChIJW_DrACeDVBMRjO4gMQQVcZ0",
+        "matchedAt": "2026-10-24T06:30:08.229357+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://www.facebook.com/profile.php?id=61551492666060",
+            "https://www.instagram.com/autoxhama.becos/",
+            "https://www.cybo.com/XK-biz/auto-xhama-becos-shpk"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, exact independently sourced main number and published site address. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed. Detailed evidence is in the dated daily manifest."
         }
       }
     },

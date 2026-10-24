@@ -1414,6 +1414,34 @@
       }
     },
     {
+      "id": "auto-pjese-servis-te-arti-lipjan",
+      "sourceHash": "ae250e11c65bb65a12d42cca1b60ced57d38ab383f983f75354324173ba7e4d2",
+      "sq": {
+        "specialty": "Riparime veturash",
+        "description": "Auto Pjese & Servis Te ARTI në Llugaxhi të Lipjanit ofron riparime veturash dhe shitje të pjesëve të automjeteve sipas profilit të vet.",
+        "serviceDetails": ["Riparime veturash sipas profilit të vet"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: emri, vendndodhja, kontaktet dhe shërbimet",
+          "Direktori publike biznesesh: kontakti, vendndodhja dhe orari javor"
+        ]
+      },
+      "en": {
+        "specialty": "Passenger-car repairs",
+        "description": "Auto Pjese & Servis Te ARTI in Llugaxhi, Lipjan, lists passenger-car repairs and automotive parts sales on its own business profile.",
+        "serviceDetails": [
+          "Passenger-car repairs according to its own profile"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: name, location, business contacts and services",
+          "Public business directory: business contact, location and weekly schedule"
+        ]
+      }
+    },
+    {
       "id": "auto-rally-90-kline",
       "sourceHash": "c35bd14a14a514277bf0b7127ae08abbeaea38dd230e7bd862789e672912299e",
       "sq": {
@@ -2192,6 +2220,32 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "GjithëBiznesi: name, telephone number, location and vehicle maintenance/repair"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-besi-obiliq",
+      "sourceHash": "ebe82a2cc29fb88bc6209356eaca19a12dfb621ee7db89653d4a8f04410d9fa5",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis BESI në Obiliq figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis BESI in Obiliq is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
         ]
       }
     },
@@ -3798,6 +3852,60 @@
       }
     },
     {
+      "id": "auto-servise-benz-viti",
+      "sourceHash": "677080bce49ac5b505fc38d03465839e4ed85e9c41c08ec3117041a43ae3b616",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto servise benz në Viti figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto servise benz in Viti is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
+        ]
+      }
+    },
+    {
+      "id": "auto-star-kosova-lipjan",
+      "sourceHash": "7060bd1f30d519051e1bcc4775fb61a63751c08085934ecf304c6b7b41b71b64",
+      "sq": {
+        "specialty": "Mekanikë · Autoelektrikë",
+        "description": "Auto Star Kosova në Lipjan paraqet punime mekanike dhe autoelektrikë në profilin e vet. Riparimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Punime mekanike dhe autoelektrikë sipas profilit të vet"
+        ],
+        "phoneNote": "Kontakt tjetër i biznesit: +38344755908; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: emri, vendndodhja, kontaktet dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical work · Auto electrics",
+        "description": "Auto Star Kosova in Lipjan lists mechanical work and auto electrics on its own business profile. Please confirm specific repairs and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical work and auto electrics according to its own profile"
+        ],
+        "phoneNote": "Additional business contact: +38344755908; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: name, location, business contacts and services"
+        ]
+      }
+    },
+    {
       "id": "auto-star-xharra-gjakova",
       "sourceHash": "bc9544e46ef661c47798d8d876b5d22bb64b23129e22139da4c928913059f475",
       "sq": {
@@ -3860,6 +3968,36 @@
         "sourceTitles": [
           "Name · address · both telephone numbers",
           "Vehicle diagnostics · Coding · Engine servicing"
+        ]
+      }
+    },
+    {
+      "id": "auto-xhama-becos-lipjan",
+      "sourceHash": "4e13150611976dcff7cb5afdfbda2b428c0601336d12390dc3f6c1494cc3eab8",
+      "sq": {
+        "specialty": "Montim xhamash automjetesh",
+        "description": "Auto Xhama Becos në Lipjan ofron shitjen dhe montimin e xhamave të automjeteve sipas profilit të vet. Në ofertë përfshihen shprehimisht xhamat për vetura.",
+        "serviceDetails": [
+          "Shitje dhe montim xhamash për vetura sipas profilit të vet"
+        ],
+        "phoneNote": "Kontakt tjetër i biznesit: +38345511170; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Profili i vet i biznesit: emri, vendndodhja, kontaktet dhe shërbimet",
+          "Profili i vet i biznesit: emri, vendndodhja, kontaktet dhe shërbimet",
+          "Direktori publike biznesesh: kontakti, vendndodhja dhe orari javor"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle glass installation",
+        "description": "Auto Xhama Becos in Lipjan lists vehicle glass sales and installation on its own business profile. Its offering explicitly includes passenger-car glass.",
+        "serviceDetails": [
+          "Passenger-car glass sales and installation according to its own profile"
+        ],
+        "phoneNote": "Additional business contact: +38345511170; reachability not confirmed",
+        "sourceTitles": [
+          "Own business profile: name, location, business contacts and services",
+          "Own business profile: name, location, business contacts and services",
+          "Public business directory: business contact, location and weekly schedule"
         ]
       }
     },
