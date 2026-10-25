@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "941a3f4f9abcdde8ad6590339e4564300c3025fd98ce9264051376b1acf9acf3",
+  "revision": "cb04f59fa021df774e9734f4217bd91c48d06e0b72689b6c36f881547aa95679",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -9315,6 +9315,87 @@
       }
     },
     {
+      "id": "auto-servis-luli-kamenice",
+      "expected": {
+        "name": "AutoServis Luli",
+        "city": "Kamenicë",
+        "address": "Kamenicë 62000",
+        "phone": "+38344743434"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-25",
+        "source": "https://numrat.com/biznes/zI22d1Gi36U1/autoservis-luli/",
+        "sourceName": "AutoServis Luli",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No weekly plan on full independent detail; no attributable own website/Facebook/Instagram through focused searches. Use central explicitly assumed default after all publication gates. Checked sources: https://numrat.com/biznes/zI22d1Gi36U1/autoservis-luli/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-servis-lumi-m-gjakova",
       "expected": {
         "name": "Auto Servis Lumi-M",
@@ -11152,6 +11233,95 @@
           "09:00-18:00",
           "09:00-18:00",
           "09:00-18:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-univerzal-kamenice",
+      "expected": {
+        "name": "Auto Servis Univerzal",
+        "city": "Kamenicë",
+        "address": "Kamenicë 62000",
+        "phone": "+38344350558"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-25",
+        "source": "https://www.facebook.com/people/Auto-Servis-Univerzal/100063695373283/",
+        "sourceName": "Auto Servis Univerzal",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own full weekly popup reports updated about7months ago; not current operator confirmation. Full attributed source weekly plan, not operator confirmation. Checked sources: https://www.facebook.com/people/Auto-Servis-Univerzal/100063695373283/ https://numrat.com/biznes/12Yu0ti6M9OM/auto-servis-univerzal/ https://www.instagram.com/autoservis_univerzal/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
           "Geschlossen"
         ],
         "earlierPlan": ""
@@ -14018,6 +14188,87 @@
         "sourceName": "AutoServis Ervini",
         "researchStatus": "Standardzeiten (angenommen)",
         "notes": "Directory updated12October has no weekly plan. No attributable own website/Facebook/Instagram weekly schedule found in bounded source research. For this otherwise verified workshop use existing central preparer assumed standard plan. No Google or different-town homonym hours copied. Checked sources: https://numrat.com/biznes/SjFjqQD7CW5p/autoservis-ervini/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "autoservis-feimi-malisheve",
+      "expected": {
+        "name": "Autoservis FEIMI",
+        "city": "Malishevë",
+        "address": "Mehmet Mazreku",
+        "phone": "+38349697172"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-25",
+        "source": "https://numrat.com/biznes/mjXMa589drIo/autoservis-feimi/",
+        "sourceName": "Autoservis FEIMI",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Full source has no weekly plan; no attributable own public source found. Use central explicitly assumed default. Checked sources: https://numrat.com/biznes/mjXMa589drIo/autoservis-feimi/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
         "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }

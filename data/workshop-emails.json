@@ -2200,6 +2200,18 @@
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; Instagram bio checked; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; new published email adopted. Gjirafa lists Auto Servis Lirimi and exactly +38345533746. The imprecise place label Kursumlija Municipality and differing street description there are not adopted into the profile; assignment through name and exact phone, additionally Facebook asLirimi in Podujevë. The address is only publicly listed, not confirmed by the owner."
     },
     {
+      "workshopId": "auto-servis-luli-kamenice",
+      "matchedName": "AutoServis Luli",
+      "matchedPhone": "+38344743434",
+      "matchedCity": "Kamenicë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/zI22d1Gi36U1/autoservis-luli/"
+      ],
+      "notes": "Full Numrat detail has no email/website. Targeted brand+town+email+Facebook+Instagram returned other-town homonyms only; exact national-phone search no results. No attributable owned source found."
+    },
+    {
       "workshopId": "auto-servis-lumi-m-gjakova",
       "matchedName": "Auto Servis Lumi-M",
       "matchedPhone": "+38349339252",
@@ -2628,6 +2640,29 @@
         "https://www.facebook.com/profile.php?id=100050371847518&sk=directory_contact_info"
       ],
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; Instagram bio checked; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found. Additionally Facebook Autoservis Trimi 100050371847518: Messenger only. Instagram autopjesetrimi lists Prelez/Ferizaj and 044471578 instead of 049195447/Prishtina; no email."
+    },
+    {
+      "workshopId": "auto-servis-univerzal-kamenice",
+      "matchedName": "Auto Servis Univerzal",
+      "matchedPhone": "+38344350558",
+      "matchedCity": "Kamenicë",
+      "emails": [
+        {
+          "address": "univerzalchip@hotmail.com",
+          "sourceUrls": [
+            "https://www.facebook.com/people/Auto-Servis-Univerzal/100063695373283/"
+          ],
+          "checkedAt": "2026-10-25",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/12Yu0ti6M9OM/auto-servis-univerzal/",
+        "https://www.facebook.com/people/Auto-Servis-Univerzal/100063695373283/",
+        "https://www.instagram.com/autoservis_univerzal/"
+      ],
+      "notes": "Own public business contact clearly attributed by exact primary phone, business name and locality. No consent or deliverability claimed."
     },
     {
       "workshopId": "auto-servis-univerzal-lipjan",
@@ -3260,6 +3295,18 @@
         "https://numrat.com/biznes/SjFjqQD7CW5p/autoservis-ervini/"
       ],
       "notes": "Full directory has no email/ownwebsite/week. Focused exact business-name/town Facebook/Instagram/email query and exact-number/Instagram/email query inspected. Generic platform pages, Istog hardware business, other workshops, personal/social/foreign hotel/realestate accounts and finder services rejected; no attributable own FB/IG or business address found."
+    },
+    {
+      "workshopId": "autoservis-feimi-malisheve",
+      "matchedName": "Autoservis FEIMI",
+      "matchedPhone": "+38349697172",
+      "matchedCity": "Malishevë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/mjXMa589drIo/autoservis-feimi/"
+      ],
+      "notes": "Full independent Numrat page has no email/website; exact brand search including email/Facebook/Instagram returns no results. No attributable own source found."
     },
     {
       "workshopId": "autoservis-fidani-prishtina",
