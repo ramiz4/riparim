@@ -3116,6 +3116,32 @@
       }
     },
     {
+      "id": "auto-servis-luli-kamenice",
+      "sourceHash": "dd6ba8ff5be48d3c2d6e973269e2896afaeb245e1849fe976fde3785fc4abdb9",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "AutoServis Luli në Kamenicë figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "AutoServis Luli in Kamenicë is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-lumi-m-gjakova",
       "sourceHash": "8c99634a77efb7b45d1862858098846de1475eb4e757a1c4e908bfdf9ca551fa",
       "sq": {
@@ -3684,6 +3710,36 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Public directory: name, contact and vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-univerzal-kamenice",
+      "sourceHash": "7a83d340697376530a6948d10f5eafa059676af17203f77a096e56186c5b6ae0",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis Univerzal në Kamenicë figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: emri, kontakti dhe shërbimet",
+          "Profili i vet i biznesit: emri, kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis Univerzal in Kamenicë is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: name, business contact and services",
+          "Own business profile: name, business contact and services"
         ]
       }
     },
@@ -4630,6 +4686,32 @@
         "phoneNote": "Public business contact; reachability not confirmed",
         "sourceTitles": [
           "Public business directory: business name, address, contact and category"
+        ]
+      }
+    },
+    {
+      "id": "autoservis-feimi-malisheve",
+      "sourceHash": "3489031790c13b0357498815c785c5620048eb21dfb5ae44e8b7d3ddfab9cbe7",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Autoservis FEIMI në Malishevë figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Autoservis FEIMI in Malishevë is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
         ]
       }
     },

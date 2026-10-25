@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-24T09:35:23.446Z",
+  "updatedAt": "2026-10-25T04:17:01.528Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 241,
+    "published": 244,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 241 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 241,
+    "reason": "All 244 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 244,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -5372,6 +5372,45 @@
       }
     },
     {
+      "id": "auto-servis-luli-kamenice",
+      "name": "AutoServis Luli",
+      "city": "Kamenicë",
+      "address": "Kamenicë 62000",
+      "phone": "+38344743434",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344743434",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "AutoServis Luli in Kamenicë ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.601881,
+      "lng": 21.580599,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/zI22d1Gi36U1/autoservis-luli/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-25",
+      "status": "published",
+      "updatedAt": "2026-10-25T04:16:01.699Z",
+      "google": {
+        "placeId": "ChIJcXqufQDpVBMRJkAQzGVoCKM",
+        "matchedAt": "2026-10-25T04:03:36.757851+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/zI22d1Gi36U1/autoservis-luli/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match active identity, independently evidenced phone, name and precise source point. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-servis-lumi-m-gjakova",
       "name": "Auto Servis Lumi-M",
       "city": "Gjakova",
@@ -6353,6 +6392,57 @@
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
+        }
+      }
+    },
+    {
+      "id": "auto-servis-univerzal-kamenice",
+      "name": "Auto Servis Univerzal",
+      "city": "Kamenicë",
+      "address": "Kamenicë 62000",
+      "phone": "+38344350558",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349624899",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis Univerzal in Kamenicë ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.600196,
+      "lng": 21.58123,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/12Yu0ti6M9OM/auto-servis-univerzal/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/people/Auto-Servis-Univerzal/100063695373283/",
+          "title": "Eigener Betriebsauftritt: Name, Geschäftskontakt und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autoservis_univerzal/",
+          "title": "Eigener Betriebsauftritt: Name, Geschäftskontakt und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-25",
+      "status": "published",
+      "updatedAt": "2026-10-25T04:16:01.699Z",
+      "google": {
+        "placeId": "ChIJt4djUsHpVBMREx1vNJyYWo8",
+        "matchedAt": "2026-10-25T04:02:23.018145+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/12Yu0ti6M9OM/auto-servis-univerzal/",
+            "https://www.facebook.com/people/Auto-Servis-Univerzal/100063695373283/",
+            "https://www.instagram.com/autoservis_univerzal/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match active identity, independently evidenced phone, name and precise source point. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
         }
       }
     },
@@ -8000,6 +8090,45 @@
             "https://numrat.com/biznes/SjFjqQD7CW5p/autoservis-ervini/"
           ],
           "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
+        }
+      }
+    },
+    {
+      "id": "autoservis-feimi-malisheve",
+      "name": "Autoservis FEIMI",
+      "city": "Malishevë",
+      "address": "Mehmet Mazreku",
+      "phone": "+38349697172",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Autoservis FEIMI in Malishevë ist im öffentlichen Firmenverzeichnis als mechanischer Pkw-Service aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.470116,
+      "lng": 20.734939,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/mjXMa589drIo/autoservis-feimi/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-25",
+      "status": "published",
+      "updatedAt": "2026-10-25T04:16:01.699Z",
+      "google": {
+        "placeId": "ChIJlwtKmAifUxMR_SlmTz7hxrM",
+        "matchedAt": "2026-10-25T04:07:53.008889+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/mjXMa589drIo/autoservis-feimi/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct London fallback match active identity, independently evidenced phone, name and precise source point. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
         }
       }
     },
