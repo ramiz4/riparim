@@ -109,6 +109,27 @@
       "notes": "Facebook confirms the email for KTD Exhaust System/Kurti TD; the same Rruga Tivari in Gjakova and older posts explicitly name Auspuh Servis Kurti TD. Current business phones differ; profile phone unchanged."
     },
     {
+      "workshopId": "auto-armiri-transmission-malisheve",
+      "matchedName": "Auto Armiri Transmission",
+      "matchedPhone": "+38349451861",
+      "matchedCity": "Malishevë",
+      "emails": [
+        {
+          "address": "info@autoarmiri.com",
+          "sourceUrls": ["https://autoarmiri.com/contact.php?lang=sq"],
+          "checkedAt": "2026-10-26",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/MFphedO7MYBx/auto-armiri-transmission/",
+        "https://autoarmiri.com/",
+        "https://autoarmiri.com/contact.php?lang=sq"
+      ],
+      "notes": "Own homepage and contact page publish exact phone and locality with business email; no consent or deliverability claim."
+    },
+    {
       "workshopId": "auto-beli-ferizaj",
       "matchedName": "Auto Beli",
       "matchedPhone": "+38344772003",
@@ -162,6 +183,20 @@
         "https://arbk.org/biz/auto-kozmetika-te-fitimi-bi/"
       ],
       "notes": "Auto Kozmetika TE FITIMI B.I. and SH.P.K. name the same owner Besnik Uka and location Shupkovc/Mitrovicë. The older entry lists 044/213901; the matching Gjirafa profile lists this number together with the profile contact 049/213901. Email in the current SH.P.K. contact; additional registry phone unchanged internally."
+    },
+    {
+      "workshopId": "auto-decor-design-riki-malisheve",
+      "matchedName": "Auto Decor & Design RIKI SH.P.K",
+      "matchedPhone": "+38349349580",
+      "matchedCity": "Malishevë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/NsuatCm3Q86e/auto-decor-design-riki-sh-p-k/",
+        "https://www.facebook.com/autodecor.design.riki/",
+        "https://www.facebook.com/autodecor.design.riki/posts/pfbid0DQ8m8oZUMUB8RCA5kZEvBPpdiVFsP2yrGafyB9yqqBW1tneft5soNPKJG2MvRoAQl"
+      ],
+      "notes": "Own public Facebook Contact has phone and same WhatsApp number only; own-looking publicly tagged Instagram autodecordesignriki inspected with no email/bio contact, not used for extra identity claims. Full directory no email/site. Cybo security challenge not bypassed and not counted as inspected detail."
     },
     {
       "workshopId": "auto-detailig-elkerim-mamushe",
@@ -2379,6 +2414,28 @@
       "notes": "Directly confirmed after Facebook login: Auto Servis Muriqi/MuriqiColor in Prizren, exactly +383 44 126 700 and a publicly listed email."
     },
     {
+      "workshopId": "auto-servis-muslimi-skenderaj",
+      "matchedName": "Auto Servis Muslimi",
+      "matchedPhone": "+38349382088",
+      "matchedCity": "Skenderaj",
+      "emails": [
+        {
+          "address": "limanvojvoda14@gmail.com",
+          "sourceUrls": [
+            "https://www.facebook.com/p/Auto-Servis-Muslimi-61580186164779/"
+          ],
+          "checkedAt": "2026-10-26",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/y8zvSaboRIC7/auto-servis-muslimi/",
+        "https://www.facebook.com/p/Auto-Servis-Muslimi-61580186164779/"
+      ],
+      "notes": "Fresh own public Contact explicitly publishes exact matching business phone and email. Publicly named business Instagram limanvojvoda inspected: AutoServisMuslimi-Skenderaj/AutoMekanik but no additional phone/email/week; no unverified contact adopted."
+    },
+    {
       "workshopId": "auto-servis-naimi-vushtrri",
       "matchedName": "Auto Servis Naimi",
       "matchedPhone": "+38344198428",
@@ -2944,6 +3001,30 @@
       "notes": "Public business contact evidenced on the attributed own source; no deliverability, consent or ownership claim. No contact message sent."
     },
     {
+      "workshopId": "auto-xhama-kristal-fushe-kosove",
+      "matchedName": "Auto Xhama Kristal",
+      "matchedPhone": "+38344360362",
+      "matchedCity": "Fushë Kosovë",
+      "emails": [
+        {
+          "address": "autoxhamakristal@gmail.com",
+          "sourceUrls": [
+            "https://www.facebook.com/p/Auto-Xhama-Kristal-100063482621925/"
+          ],
+          "checkedAt": "2026-10-26",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/ogi66Z5i8hkP/auto-xhama-kristal/",
+        "https://www.facebook.com/p/Auto-Xhama-Kristal-100063482621925/",
+        "https://www.facebook.com/permalink.php?story_fbid=pfbid0cKLAgi5ZP4hLSiHZwXj6YfRw5mLAARcgpy418FmQpR3ShpGthinbqSRhSC19v3Ysl&id=100063482621925",
+        "https://www.instagram.com/autoxhamakristal_/"
+      ],
+      "notes": "Own public business Contact explicitly publishes email and main contact; original own current-number pairing links it to this exact branch. No deliverability or advertising consent claimed. Google-hosted business.site was not used as an independent source."
+    },
+    {
       "workshopId": "auto-xhama-premium-fushe-kosove",
       "matchedName": "Auto Xhama Premium",
       "matchedPhone": "+38345232341",
@@ -2962,6 +3043,27 @@
         "https://www.facebook.com/autoxhamapremium/"
       ],
       "notes": "Public business contact evidenced on the attributed own source; no deliverability, consent or ownership claim. No contact message sent."
+    },
+    {
+      "workshopId": "auto-xhama-super-glass-fushe-kosove",
+      "matchedName": "Auto Xhama Super Glass",
+      "matchedPhone": "+38344744311",
+      "matchedCity": "Fushë Kosovë",
+      "emails": [
+        {
+          "address": "autoglas2@gmail.com",
+          "sourceUrls": ["https://www.facebook.com/autoxhama/"],
+          "checkedAt": "2026-10-26",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/Aj0aWXAdJiNt/auto-xhama-super-glass/",
+        "https://www.facebook.com/autoxhama/",
+        "https://www.instagram.com/autoxhamasuperglass/"
+      ],
+      "notes": "Fresh own public Contact explicitly labels this business email, with exact matching phone and locality. Own expanded Instagram bio pairs primary44744311 and secondary49533305; no additional email. No consent or delivery claim."
     },
     {
       "workshopId": "auto-xhama-top-glass-viti",
@@ -3435,6 +3537,16 @@
         "https://www.google.com/search?q=AutoServis+Semini+Prizren+site%3Aarbk.org"
       ],
       "notes": "ARBK Open assigns this registry contact address to Auto Servis SEMINI (Semin Totaj B.I.) with exactly +38349424287 in Prizren/Gjonaj. The address may designate an accounting/representative contact; no business-owner or delivery verification."
+    },
+    {
+      "workshopId": "autoservis-shtupel-kline",
+      "matchedName": "AutoServis",
+      "matchedPhone": "+38349307943",
+      "matchedCity": "Klinë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": ["https://numrat.com/biznes/0w41Z6tlWJ97/autoservis/"],
+      "notes": "Full directory detail no email/website. Exact phone plus business-name/email/Facebook/Instagram query yielded no attributable own source."
     },
     {
       "workshopId": "autotrade-toyota",

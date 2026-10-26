@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-25T04:17:01.528Z",
+  "updatedAt": "2026-10-26T06:21:57.840Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 244,
+    "published": 250,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 244 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 244,
+    "reason": "All 250 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 250,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -269,6 +269,59 @@
       }
     },
     {
+      "id": "auto-armiri-transmission-malisheve",
+      "name": "Auto Armiri Transmission",
+      "city": "Malishevë",
+      "address": "532 Skenderbeu",
+      "phone": "+38349451861",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349451861",
+      "brands": [],
+      "services": ["Motor & Getriebe"],
+      "serviceDetails": [
+        "Diagnose, Wartung und Reparatur von Automatikgetrieben"
+      ],
+      "languages": [],
+      "specialty": "Automatikgetriebe-Service",
+      "description": "Auto Armiri Transmission in Malishevë bietet laut eigener Website Diagnose, Wartung und Reparatur von Automatikgetrieben an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.471263,
+      "lng": 20.768648,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/MFphedO7MYBx/auto-armiri-transmission/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://autoarmiri.com/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://autoarmiri.com/contact.php?lang=sq",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-26",
+      "status": "published",
+      "updatedAt": "2026-10-26T06:21:07.881Z",
+      "google": {
+        "placeId": "ChIJ2c0otYWWaiYRlAe-sgYw8l4",
+        "matchedAt": "2026-10-26T04:26:19.479159+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/MFphedO7MYBx/auto-armiri-transmission/",
+            "https://autoarmiri.com/",
+            "https://autoarmiri.com/contact.php?lang=sq"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-beli-ferizaj",
       "name": "Auto Beli",
       "city": "Ferizaj",
@@ -362,6 +415,59 @@
             "https://www.cybo.com/XK/mitrovica-kosovo/car-repair/"
           ],
           "note": "Rechecked using the stored Google Place ID link: the distinctive name, phone and independently evidenced Plus Code agree. The Plus Code determines the new coordinates; Google business data was not adopted."
+        }
+      }
+    },
+    {
+      "id": "auto-decor-design-riki-malisheve",
+      "name": "Auto Decor & Design RIKI SH.P.K",
+      "city": "Malishevë",
+      "address": "Rr. Imer Krasniqi Mirushë",
+      "phone": "+38349349580",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349349580",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Restaurierung von Fahrzeuginnenräumen und Fahrzeugaußenseiten"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugrestaurierung innen und außen",
+      "description": "Auto Decor & Design RIKI SH.P.K in Malishevë bietet laut eigenem Betriebsbeitrag professionelle Restaurierung von Fahrzeuginnenräumen und Fahrzeugaußenseiten an. Umfang und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.492975,
+      "lng": 20.726224,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/NsuatCm3Q86e/auto-decor-design-riki-sh-p-k/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/autodecor.design.riki/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/autodecor.design.riki/posts/pfbid0DQ8m8oZUMUB8RCA5kZEvBPpdiVFsP2yrGafyB9yqqBW1tneft5soNPKJG2MvRoAQl",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-26",
+      "status": "published",
+      "updatedAt": "2026-10-26T06:21:07.881Z",
+      "google": {
+        "placeId": "ChIJNdqxqW51UxMRi2sUYMXqTaA",
+        "matchedAt": "2026-10-26T04:26:19.479159+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/NsuatCm3Q86e/auto-decor-design-riki-sh-p-k/",
+            "https://www.facebook.com/autodecor.design.riki/",
+            "https://www.facebook.com/autodecor.design.riki/posts/pfbid0DQ8m8oZUMUB8RCA5kZEvBPpdiVFsP2yrGafyB9yqqBW1tneft5soNPKJG2MvRoAQl"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
         }
       }
     },
@@ -5809,6 +5915,51 @@
       }
     },
     {
+      "id": "auto-servis-muslimi-skenderaj",
+      "name": "Auto Servis Muslimi",
+      "city": "Skenderaj",
+      "address": "Ulpiana, 20",
+      "phone": "+38349382088",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349382088",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis Muslimi in Skenderaj bietet laut öffentlichem Firmenverzeichnis mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.73138,
+      "lng": 20.800345,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/y8zvSaboRIC7/auto-servis-muslimi/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/p/Auto-Servis-Muslimi-61580186164779/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-26",
+      "status": "published",
+      "updatedAt": "2026-10-26T06:21:07.881Z",
+      "google": {
+        "placeId": "ChIJ-XrfcAVrUxMRbxOK-BnMBk0",
+        "matchedAt": "2026-10-26T04:36:09.048457+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/y8zvSaboRIC7/auto-servis-muslimi/",
+            "https://www.facebook.com/p/Auto-Servis-Muslimi-61580186164779/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-servis-naimi-vushtrri",
       "name": "Auto Servis Naimi",
       "city": "Vushtrri",
@@ -7139,6 +7290,63 @@
       }
     },
     {
+      "id": "auto-xhama-kristal-fushe-kosove",
+      "name": "Auto Xhama Kristal",
+      "city": "Fushë Kosovë",
+      "address": "Rruga e pejes, Bresje",
+      "phone": "+38344360362",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344845050",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": ["Reparatur und Austausch von Pkw-Glas"],
+      "languages": [],
+      "specialty": "Autoglas-Reparatur und Austausch",
+      "description": "Auto Xhama Kristal in Fushë Kosovë bietet laut eigenem Betriebsauftritt Reparatur und Austausch von Fahrzeugglas an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.628665,
+      "lng": 21.090086,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/ogi66Z5i8hkP/auto-xhama-kristal/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/p/Auto-Xhama-Kristal-100063482621925/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/permalink.php?story_fbid=pfbid0cKLAgi5ZP4hLSiHZwXj6YfRw5mLAARcgpy418FmQpR3ShpGthinbqSRhSC19v3Ysl&id=100063482621925",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autoxhamakristal_/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-26",
+      "status": "published",
+      "updatedAt": "2026-10-26T06:21:07.881Z",
+      "google": {
+        "placeId": "ChIJT-AwyGefVBMRRtnSdRFegFA",
+        "matchedAt": "2026-10-26T05:17:05.182758+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/ogi66Z5i8hkP/auto-xhama-kristal/",
+            "https://www.facebook.com/p/Auto-Xhama-Kristal-100063482621925/",
+            "https://www.facebook.com/permalink.php?story_fbid=pfbid0cKLAgi5ZP4hLSiHZwXj6YfRw5mLAARcgpy418FmQpR3ShpGthinbqSRhSC19v3Ysl&id=100063482621925",
+            "https://www.instagram.com/autoxhamakristal_/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-xhama-premium-fushe-kosove",
       "name": "Auto Xhama Premium",
       "city": "Fushë Kosovë",
@@ -7184,6 +7392,57 @@
             "https://www.facebook.com/autoxhamapremium/"
           ],
           "note": "Public Maps UI in the confirmed project account: independently sourced identity, international phone and location match an active entry. Place ID read from a visible official !19s link and directly returned with an unrelated London fallback. Catalogue fields come exclusively from independent business sources; no ownership claim or current Google business content adopted."
+        }
+      }
+    },
+    {
+      "id": "auto-xhama-super-glass-fushe-kosove",
+      "name": "Auto Xhama Super Glass",
+      "city": "Fushë Kosovë",
+      "address": "335 Rruga E Pejës",
+      "phone": "+38344744311",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344744311",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": ["Fahrzeugglas-Service für Pkw"],
+      "languages": [],
+      "specialty": "Autoglas-Service",
+      "description": "Auto Xhama Super Glass in Fushë Kosovë bietet laut eigenem Betriebsauftritt Fahrzeugglas-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.625774,
+      "lng": 21.087444,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/Aj0aWXAdJiNt/auto-xhama-super-glass/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/autoxhama/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autoxhamasuperglass/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-26",
+      "status": "published",
+      "updatedAt": "2026-10-26T06:21:07.881Z",
+      "google": {
+        "placeId": "ChIJKyXcKB5jUxMRLa9NTFdDl48",
+        "matchedAt": "2026-10-26T05:49:10.325330+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/Aj0aWXAdJiNt/auto-xhama-super-glass/",
+            "https://www.facebook.com/autoxhama/",
+            "https://www.instagram.com/autoxhamasuperglass/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
         }
       }
     },
@@ -8413,6 +8672,43 @@
             "https://www.gjithebiznesi.com/XK/autoservis-semini-049-424-287"
           ],
           "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
+        }
+      }
+    },
+    {
+      "id": "autoservis-shtupel-kline",
+      "name": "AutoServis",
+      "city": "Klinë",
+      "address": "Shtupel, 9 Fadil Zhabota",
+      "phone": "+38349307943",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "AutoServis in Klinë bietet laut öffentlichem Firmenverzeichnis mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.663816,
+      "lng": 20.596684,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/0w41Z6tlWJ97/autoservis/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-26",
+      "status": "published",
+      "updatedAt": "2026-10-26T06:21:07.881Z",
+      "google": {
+        "placeId": "ChIJFzQZHQARUxMRlvXONSZunpM",
+        "matchedAt": "2026-10-26T04:13:55.219501+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": ["https://numrat.com/biznes/0w41Z6tlWJ97/autoservis/"],
+          "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
         }
       }
     },

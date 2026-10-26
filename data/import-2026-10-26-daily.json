@@ -1,0 +1,3490 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-26",
+  "timezone": "Europe/Zurich",
+  "startedAt": "2026-10-26T03:59:47.332569+00:00",
+  "status": "local-import-prepared-awaiting-tests-review-ci-release",
+  "completedDateGuard": false,
+  "baseCommit": "63914dbbc9b4b3644e4f9f25d339c4d663b35f5e",
+  "branch": "codex/daily-import-2026-10-26",
+  "before": {
+    "canonical": 244,
+    "total": 244,
+    "published": 244,
+    "uniquePlaceIds": 244,
+    "catalogueRows": 1088,
+    "drafts": 0,
+    "pending": 0,
+    "retirementMarkers": 35
+  },
+  "historicalSourcesRead": [
+    {
+      "path": "data/import-2026-10-03.json",
+      "sha256": "a1882285bdd82b66971f4b95cd4b57f3b6dd2d49605bd150ce007cf7381ac67c",
+      "status": null
+    },
+    {
+      "path": "data/import-2026-10-10.json",
+      "sha256": "1ae645454ff8eaf5e0336417c3d7a8b946376de188390463d117d95fe9855882",
+      "status": null
+    },
+    {
+      "path": "data/import-2026-10-11-daily.json",
+      "sha256": "c74d18c01b57f668f429630ad7fb7d69045bc6269c90260f4429f1f1ad271dd3",
+      "status": "completed_and_live_verified"
+    },
+    {
+      "path": "data/import-2026-10-12-daily.json",
+      "sha256": "0a80b94c027cdf52d4ab96399d7d809b912a3117497864a79a86bb6b7744cb17",
+      "status": "prepared_pr_pending_build_release"
+    },
+    {
+      "path": "data/import-2026-10-13-daily.json",
+      "sha256": "a7657a2f03b3769c3f54bde20af655bd31a1d51ad08b761e7e77416ad9de5571",
+      "status": "supplement-prepared-review-and-ci-pending"
+    },
+    {
+      "path": "data/import-2026-10-14-daily.json",
+      "sha256": "d07da3da1f0dd1dadf899514009d92ba9d572fbd3ced7acf4354964e7b8ce77c",
+      "status": "imported-awaiting-review-release"
+    },
+    {
+      "path": "data/import-2026-10-16-daily.json",
+      "sha256": "76e4da6e2be4c5eebbaebcdf124ce6f3543b6ddaa6ca622306e860993f992d87",
+      "status": "local-tests-passed-awaiting-final-review-ci-release"
+    },
+    {
+      "path": "data/import-2026-10-17-daily.json",
+      "sha256": "d8366448e2cac1339c49ff402a03dd59d7515f846a510254d7d61d06ecfb5957",
+      "status": "local-import-prepared-awaiting-tests-review-ci-release"
+    },
+    {
+      "path": "data/import-2026-10-18-daily.json",
+      "sha256": "61325d9b618f023ad01ea6591c5f3673f90d9bfe040996f96c9ad96a68ef2535",
+      "status": "prepared-awaiting-final-head-verification"
+    },
+    {
+      "path": "data/import-2026-10-19-blocker-followup.json",
+      "sha256": "3184543798fdb429c363d101a64207a8e80c5acd545b6790db82d5a660204f31",
+      "status": "local-import-prepared-awaiting-tests-review"
+    },
+    {
+      "path": "data/import-2026-10-19-daily.json",
+      "sha256": "d1e91e3f1231a1887555bea7c15c495ff401749d741b1ae8e48eb2f71a110994",
+      "status": "automatic-daily-completed-explicit-followup-prepared"
+    },
+    {
+      "path": "data/import-2026-10-20-daily.json",
+      "sha256": "4fe2f802ce11a6618c366fa2ec498a6e474fdfb2658e6d3b264abd1a70fe309b",
+      "status": "local-import-prepared-awaiting-tests-review-ci-release"
+    },
+    {
+      "path": "data/import-2026-10-21-daily.json",
+      "sha256": "e04f0047aca0b59eba7d2fd6a8a3c9006f8a4e0f681519f5c448b3a8fb2a5c6c",
+      "status": "local-import-prepared-awaiting-tests-review-ci-release"
+    },
+    {
+      "path": "data/import-2026-10-22-daily.json",
+      "sha256": "25e0967a4696508782cdf99d2dc6373dbadf9debe853a16da866f0a5eee61b9f",
+      "status": "local-import-prepared-awaiting-tests-review-ci-release"
+    },
+    {
+      "path": "data/import-2026-10-23-daily.json",
+      "sha256": "9288f907fe41b2d8142a71c2c3e1aef27d5be3e902da83e6d8f66b5d60298670",
+      "status": "local-import-prepared-awaiting-tests-review-ci-release"
+    },
+    {
+      "path": "data/import-2026-10-24-blocker-followup.json",
+      "sha256": "e2783b38ebe0e0c03f881552f1ac9d509dfa2d9677032d1f2aeb4085bc473386",
+      "status": "local-import-prepared-awaiting-tests-review-ci-release"
+    },
+    {
+      "path": "data/import-2026-10-24-daily.json",
+      "sha256": "bfe2b1269c339efc5e727636e5ca471c3a9f697910895104ef86e7189ecb5102",
+      "status": "automatic-daily-completed-explicit-followup-prepared"
+    },
+    {
+      "path": "data/import-2026-10-25-daily.json",
+      "sha256": "dd51bcb66af49831b7ece9b78ff4e351c34c1fa35018a4c68b0976953af46871",
+      "status": "local-import-prepared-awaiting-tests-review-ci-release"
+    },
+    {
+      "path": "data/opening-hours-research-2026-10-16.json",
+      "sha256": "f0169824e715ba0f8b8bec72ab4baf0baa959743067cca3ad8521e64508b583e",
+      "status": "local-tests-passed-awaiting-final-head-ci-and-release"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-13-manual.json",
+      "sha256": "43f9c2fb68faf194e79c567e75a58e0905cb708676e941bfe93d72003b98d042",
+      "status": "completed-live-accepted"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-13-scheduled.json",
+      "sha256": "300b2d2fc3ad62d88c1049b234ef9c4c6800f2104fe71efe51c064693c582520",
+      "status": "completed-live-accepted"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-13.json",
+      "sha256": "43f9c2fb68faf194e79c567e75a58e0905cb708676e941bfe93d72003b98d042",
+      "status": "completed-live-accepted"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-14-initial.json",
+      "sha256": "f601f9ef1626494d813de0ee5b472fcecb03e3e0d956cb3e9836cba909524e1f",
+      "status": "blocked-browser-profile-safe-handoff"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-14-resumed.json",
+      "sha256": "431aad3e1eddc6dd1d6b4b017840fc23a4fc003a3916feabb1e383496ee650d5",
+      "status": "completed-live-verified"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-14.json",
+      "sha256": "431aad3e1eddc6dd1d6b4b017840fc23a4fc003a3916feabb1e383496ee650d5",
+      "status": "completed-live-verified"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-15.json",
+      "sha256": "24eddf164dcc0c5a8e11b668a2a6df3c9ce9172e2d796125c8f834416a16e4b8",
+      "status": "blocked-browser-profile-safe-handoff"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16-initial.json",
+      "sha256": "6459921c21adaeed77e34e98f72d28c49d1f3a9b616396ef58c3d7af625f23fa",
+      "status": "blocked-browser-profile-safe-handoff"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16-resumed.json",
+      "sha256": "2f834400462a0c437ed01e27a355bdf7d30305a87914ef63ca72fc807e92ea67",
+      "status": "completed-live-verified"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "sha256": "2f834400462a0c437ed01e27a355bdf7d30305a87914ef63ca72fc807e92ea67",
+      "status": "completed-live-verified"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-17.json",
+      "sha256": "90844c279bc23f6fd8f45ec570f670a3fb0b197f38404403fcb0cc77da14ee7b",
+      "status": "completed-with-documented-schedule-discrepancy"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-18.json",
+      "sha256": "a7bae4d5931fe928a78bf23cd300c85a964d6b8fb8feb2b8c2d8c7249601ac33",
+      "status": "completed"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-19-blocker-followup.json",
+      "sha256": "878a3e9708f926e86ec70cd39fb1c8fc1a3f9a421e9d3564111d6bae85d75755",
+      "status": "completed"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-19.json",
+      "sha256": "1bc7f979c9577eef2bf0d986b4909d805ea31ed794527331a55799353f4a3ddb",
+      "status": "completed"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-20.json",
+      "sha256": "072d426611b2ef061fdefd38fd11a2f7601684771977fecb4b99934d7688581c",
+      "status": "completed-live-verified"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-21.json",
+      "sha256": "6378bb61a59248ef584fd0d01d0d207056e14da85078c70ca9493d90803c66d1",
+      "status": "completed-live-verified"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-22.json",
+      "sha256": "2c50c20c66b62c6221f27dd9badb73a9cbb6dd06f1126ff6a83ccb975077569b",
+      "status": "completed-live-verified"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-23.json",
+      "sha256": "d78fd4a92ba51da1cb4c9bf313deaa1d1d001d245a0efd86079f99c4c3f64da5",
+      "status": "completed-live-verified"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-24-blocker-followup.json",
+      "sha256": "c0cf6d7adfb81a463005c0c549e18953ef91b842cb790d1a5222521652964b7b",
+      "status": "completed-live-verified"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-24.json",
+      "sha256": "893bac1441ad6ad064b226e8c314920d365bacef318739e7b26326de2148ca6b",
+      "status": "completed-live-verified"
+    },
+    {
+      "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-25.json",
+      "sha256": "d29584b515168e83d804831d8b9bbc015c8ca7adc660bc7e49cc67548c8598ac",
+      "status": "completed-live-verified"
+    }
+  ],
+  "historicalQueue": [
+    {
+      "name": "Auto polir Kastrati Rahovec",
+      "status": "deferred",
+      "reason": "Exact public Maps search returned different businesses, including existing MANA, and no matching identity.",
+      "nextCheck": "Recheck only after a new official Maps link or independent relocation evidence is available.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "GENTI autoservis",
+      "status": "deferred",
+      "reason": "Two public Maps entries leave branch/location continuity unresolved: phone match at a different site; independently named Reshtan entry lacks phone. No site identity accepted.",
+      "nextCheck": "Obtain a current own-source link tying the public phone and exact Reshtan workshop site to one Maps entry.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Servis Fatoni",
+      "status": "deferred",
+      "reason": "Public Maps search returned other businesses and no uniquely matching Peqan identity/phone.",
+      "nextCheck": "Find official active Maps link.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Servis Luani Suharekë",
+      "status": "deferred",
+      "reason": "Independent review accepts own Kosovo local-number normalization, but the known old own premises number versus current Maps premises number remains a site-continuity conflict. Dropping both numbers would not resolve it.",
+      "nextCheck": "Obtain current own exact site/relocation or renumbering proof; direct-ID return already passed. Keep deferred until location continuity is evidenced.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Servis & Vullkanizer XONI Suharekë",
+      "status": "deferred",
+      "reason": "Maps search returned different-phone XONI/EGZONI/EDONI businesses; no matching site identity.",
+      "nextCheck": "Find current own site/address details and an official Maps link matching own public telephone.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Servis Ledioni",
+      "status": "deferred",
+      "reason": "Maps search selected another-name business in another town with different phone; exact active site not found. Own detailed repair service evidence also remains incomplete.",
+      "nextCheck": "Find current explicit repair offerings and official Maps link for Strellc site.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Servis ISTREFI",
+      "status": "deferred",
+      "reason": "Maps-selected similarly named identity has a different telephone; no independent continuity evidence. Own precise address and service scope still missing.",
+      "nextCheck": "Resolve phone/continuity and prove own precise workshop site/services before another Maps identity attempt.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Servis MUSLIMI",
+      "status": "deferred",
+      "reason": "Own name/phone/service evidence matches active public Maps identity, but no independently precise workshop site beyond city. No Google street copied.",
+      "nextCheck": "Find own street/site evidence or attributable independent location before final assignment.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Servis Bekaj",
+      "status": "deferred",
+      "reason": "Passenger-car repair scope unproven; selected public Maps identity lacks telephone. No strict phone match.",
+      "nextCheck": "Prove actual passenger-car services and matching own/Maps telephone before reconsideration.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Servis Artoni",
+      "status": "deferred",
+      "reason": "Public Maps returned only partial city match; no identifiable matching active workshop.",
+      "nextCheck": "Find official active Maps link; obtain detailed own passenger-car service evidence.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Servis Bexheti",
+      "status": "deferred",
+      "reason": "Own current phone and precise site missing; Maps returned other business identities.",
+      "nextCheck": "Obtain attributable current phone, precise site and passenger-car repair description before further Maps research.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Servis TOTI",
+      "status": "deferred",
+      "reason": "Own current phone not shown in inspected summary; Maps selected different-name business in another municipality.",
+      "nextCheck": "Find attributable current phone/contact section and exact active Runik Maps identity; finish email lookup.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto City Deçan",
+      "status": "deferred",
+      "reason": "Exact name/location public Maps query returned other-country businesses; own-phone/Kosovo follow-up returned only city partial match. No matching active Place ID.",
+      "nextCheck": "Reconsider after a current official Maps business link appears; retain exact independent site/contact proof.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Supreme Detailing",
+      "status": "deferred",
+      "reason": "Maps matches exact own domain/phone/identity, but no independently precise street/site proof; no Google address adopted.",
+      "nextCheck": "Find own precise workshop street/site declaration; then complete direct visible Place-ID verification.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Revive Auto Detailing",
+      "status": "deferred",
+      "reason": "Precise independent location not established; Google search knowledge-panel address is not an independent source and was not adopted. Public Maps identity not completed.",
+      "nextCheck": "Find own precise street/site evidence before Maps/publication.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Xhama Center / Glass Service",
+      "status": "deferred",
+      "reason": "Existing location-continuity block persists. Current own Instagram states km4; directory states km1, while historical Maps check differed. Related names/three shared contacts grouped conservatively, not counted as two new businesses.",
+      "nextCheck": "Obtain own current exact site/relocation and contact evidence resolving historical road-distance conflict; do not publish another alias/ID.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Autoservis Cani / Hasan Q. Maliqi",
+      "status": "deferred",
+      "reason": "Registration alone does not prove current passenger-car operation, public telephone or exact site.",
+      "nextCheck": "Find current attributable own operating/contact/site source before Maps verification.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Xhama SUPER GLASS",
+      "status": "deferred",
+      "reason": "Exact independent workshop site not established; own source city and older directory road description insufficient for precise-location gate.",
+      "nextCheck": "Obtain own precise current site and clarify business-email contact; only then complete Maps identity/direct-ID verification.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Elektro \"Energy\" Suharekë",
+      "status": "deferred",
+      "reason": "Own precise site missing; no complete Maps assignment attempted.",
+      "nextCheck": "Find own current street/site or attributable directory location before Maps proof.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto BONI Servis",
+      "status": "deferred",
+      "reason": "Own Facebook publishes Skenderaj and +38344309535 but no precise site or sufficiently detailed passenger-car service scope.",
+      "nextCheck": "Obtain current own exact site, branch contact and qualifying service evidence, then complete public Maps identity; revisit only with a new attributable source.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "AUTO PJESË VETONI-H",
+      "status": "deferred",
+      "reason": "Own source establishes parts retail at Lebushë on Pejë-Deçan road, +38349483493; actual passenger-car repair scope unproven.",
+      "nextCheck": "Obtain current own exact site, branch contact and qualifying service evidence, then complete public Maps identity; revisit only with a new attributable source.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Autopjes Arberi",
+      "status": "deferred",
+      "reason": "Own source is parts/car-import retail; current attributable phone and actual repair scope missing.",
+      "nextCheck": "Obtain current own exact site, branch contact and qualifying service evidence, then complete public Maps identity; revisit only with a new attributable source.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto servis fetahu",
+      "status": "deferred",
+      "reason": "Own Facebook Karaqevë e Poshtme/Kamenicë contact is incomplete and recent operation unproven; linked site DNS failed.",
+      "nextCheck": "Obtain current own exact site, branch contact and qualifying service evidence, then complete public Maps identity; revisit only with a new attributable source.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Autoparts Partner Kamenicë",
+      "status": "deferred",
+      "reason": "Own source establishes wholesale/parts-store opening, not workshop services; foreign headquarters contacts are not proven Kamenicë branch contacts.",
+      "nextCheck": "Obtain current own exact site, branch contact and qualifying service evidence, then complete public Maps identity; revisit only with a new attributable source.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto ngjyrosje & polir Labi",
+      "status": "deferred",
+      "reason": "Own TikTok publishes Qubrel/Skenderaj, +38343509362 and painting/restoration/polishing; no matching public Maps identity in exact locality search.",
+      "nextCheck": "Obtain current own exact site, branch contact and qualifying service evidence, then complete public Maps identity; revisit only with a new attributable source.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "AutoDetailingNisi",
+      "status": "deferred",
+      "reason": "Own TikTok publishes polishing/ceramic/deep cleaning and local 049199251, but no precise independent site or completed Maps identity.",
+      "nextCheck": "Obtain current own exact site, branch contact and qualifying service evidence, then complete public Maps identity; revisit only with a new attributable source.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Detailing Diori",
+      "status": "deferred",
+      "reason": "Own Instagram publishes Mitrovicë and local 049274968 detailing contact, but no precise independent site or completed Maps identity.",
+      "nextCheck": "Obtain current own exact site, branch contact and qualifying service evidence, then complete public Maps identity; revisit only with a new attributable source.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Supreme Detailing",
+      "city": "Gjilan",
+      "status": "deferred",
+      "reason": "Own current website and fully expanded Instagram bio still do not provide an independently precise site. No Google street adopted; no repeated Maps attempt.",
+      "nextCheck": "Revisit only after an own precise site declaration or attributable independent location source appears.",
+      "checkedAt": "2026-10-17T03:10:42Z",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-17.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto City Detailing",
+      "city": "Deçan",
+      "checkedAt": "2026-10-17T03:13:35Z",
+      "status": "deferred",
+      "reason": "Current own contact page/bio prove exact site/contact, but public Maps full-name search still returns city-only partial match; no active business identity or Place ID accepted.",
+      "nextCheck": "Wait for an attributable official Maps business link or a newly documented business alias; do not repeat the same failed search.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-17.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Klima-Elektrika Skenda",
+      "city": "Drenas",
+      "status": "deferred",
+      "checkedAt": "2026-10-17T03:25:00Z",
+      "nextCheck": "Obtain own precise premises directions or attributable independent location evidence.",
+      "reason": "Own current sources state Lagjja e Re neighborhood in Komoran; public Maps exact-contact entry presents only a precise map position without independent premises reference. Location comparison incomplete.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-17.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Digital Servis Shala",
+      "city": "Drenas",
+      "status": "deferred",
+      "checkedAt": "2026-10-17T03:25:00Z",
+      "reason": "Public Maps and own Facebook exact-contact entries have materially different premises/towns; no relocation continuity established. Passenger-car service detail also requires explicit own evidence.",
+      "nextCheck": "Find new own relocation statement connecting same contact to current premises, and own explicit repair-service evidence.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-17.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Perfect Detailing",
+      "city": "Podujevë",
+      "reason": "Current own sources give village only; old street and active exact-contact Maps street differ. No independent current premises/relocation proof. Legacy377 WhatsApp field discarded; own383current phone independently matches.",
+      "nextCheck": "Obtain own current street/premises declaration clarifying older Brigadat address versus current site before Maps assignment.",
+      "status": "deferred",
+      "checkedAt": "2026-10-17T03:28:44Z",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-17.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Edis - Auto Detailing",
+      "city": "Drenas",
+      "reason": "Own current website-less FB/IG sources identify rural village but no independent precise premises reference; no Google-derived site adopted.",
+      "nextCheck": "Find own premises directions/landmark or attributable independent precise site evidence before Maps assignment.",
+      "status": "deferred",
+      "checkedAt": "2026-10-17T03:28:44Z",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-17.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "GentiGarage",
+      "city": "Obiliq",
+      "status": "deferred",
+      "checkedAt": "2026-10-17T03:28:44Z",
+      "reason": "Public Maps similar-name entry has no telephone or linked own source, so required independent-phone comparison cannot be completed.",
+      "nextCheck": "Recheck only after official business publishes direct attributable Maps identity/contact evidence; do not infer a phone match.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-17.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "AUTO LUMI",
+      "city": "Drenas",
+      "status": "deferred",
+      "checkedAt": "2026-10-17T03:28:44Z",
+      "reason": "Own city-only address lacks precise premises; own location video highlight is244weeks old and displayed initial road scene has no independently identifiable premises. No inferred street or Google location adopted.",
+      "nextCheck": "Obtain new own precise premises/location declaration; old road-scene highlight is not adequate current identity proof.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-17.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Service Te Rexha",
+      "city": "Podujevë",
+      "status": "deferred",
+      "checkedAt": "2026-10-17T03:28:44Z",
+      "reason": "Public Maps query returns two related-name sites; one lacks comparable phone, other matches own alternate contact but materially different street. No branch/relocation continuity proof.",
+      "nextCheck": "Obtain own precise current site/alias/branch declaration tying contact to exact active Maps premises.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-17.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Llaker Lirimi",
+      "city": "Kamenicë",
+      "status": "deferred-no-attributable-active-maps-entry",
+      "checkedAt": "2026-10-18T08:09:02.017771+00:00",
+      "reason": "Independent directory contact, village and offered painting/polishing are evidenced. Public name/country and primary international-phone Maps searches did not establish an attributable active entry; independent precise current premises remain missing.",
+      "nextCheck": "New own contact/precise-site or attributable Maps business link needed; do not repeat unchanged exact searches.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-18.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Autoservis Vëllezërit Asllani",
+      "city": "Kaçanik",
+      "status": "deferred-no-attributable-active-maps-entry",
+      "checkedAt": "2026-10-18T08:09:02.017771+00:00",
+      "reason": "Full Gjirafa business page was retrieved in the internal browser, with own-independent directory contact/site/service/week data. Full-name/town/country and exact international-phone Maps searches yielded no attributable identity; related construction-company contact results were rejected.",
+      "nextCheck": "New own contact/precise-site or attributable Maps business link needed; do not repeat unchanged exact searches.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-18.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Servis Idrizi",
+      "city": "Shtime",
+      "status": "deferred-no-attributable-active-maps-entry",
+      "checkedAt": "2026-10-18T08:05:46.681334+00:00",
+      "reason": "Independent directory name/contact/street/service/week evidence was read. Public Maps name/town/country and exact international-phone searches did not establish a matching entry; focused own/contact/social source search found no attributable business email.",
+      "nextCheck": "Resume only when own attributable Maps/alias/contact evidence appears; no repeated same phone/name search without new evidence.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-18.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Servis & Pjesë Starti",
+      "city": "Shtime",
+      "status": "deferred-contact-continuity",
+      "checkedAt": "2026-10-18T08:09:02.017771+00:00",
+      "reason": "Public Maps comparison matches own current Facebook name/contact/street point, but continuity with the different directory contact remains unresolved. Own full weekly hours and contact panel have been read; no attributable business email was found.",
+      "nextCheck": "Find attributable contact/branch continuity connecting the old directory contact with the current own business. No additional email or hours gap alone blocks publication; identity conflict does.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-18.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Ledo motors",
+      "city": "Prishtinë",
+      "status": "deferred-phone-and-premises-conflict",
+      "checkedAt": "2026-10-18T08:17:48.195404+00:00",
+      "nextCheck": "Find own relocation/contact continuity or attributable old-phone Maps entry; do not repeatedly search unchanged name.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-18.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Autoservis Elektrika",
+      "city": "Prishtinë",
+      "checkedAt": "2026-10-19T03:37:43.589335+00:00",
+      "status": "deferred-phone-and-site-conflict",
+      "reason": "New publicMaps matching-name link surfaced during another lookup; directPlaceIDreturn fails independent phone and site match, so priordeferral remains.",
+      "nextCheck": "An attributable current own contact/alias/premises record must resolve the conflict; never adopt an unrelated same-name entry.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-19.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Drini Detailing",
+      "city": "Prishtinë",
+      "status": "deferred-no-matching-active-entry",
+      "checkedAt": "2026-10-18T08:17:48.195404+00:00",
+      "nextCheck": "Obtain own attributable direct business Maps link/new alias, retain exact street/email evidence.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-18.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Platinum X",
+      "city": "Prishtinë",
+      "status": "deferred-imprecise-independent-premises",
+      "checkedAt": "2026-10-18T08:17:48.195404+00:00",
+      "nextCheck": "Find own exact street/premises declaration then Maps check; do not infer from city.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-18.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "IAS Detailing",
+      "city": "Vushtrri",
+      "status": "deferred",
+      "checkedAt": "2026-10-18T08:40:44.070753Z",
+      "reason": "Find own exact premises/street/landmark. Full own Instagram bio names village only; own Facebook Details empty and contact panel only phone. US IAS website result is unrelated and rejected.",
+      "nextCheck": "Find own exact premises/street/landmark. Full own Instagram bio names village only; own Facebook Details empty and contact panel only phone. US IAS website result is unrelated and rejected. Resume only on a new attributable missing proof, not unchanged search repetition.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-18.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Pristine Detailing",
+      "city": "Prishtinë",
+      "status": "deferred",
+      "checkedAt": "2026-10-18T08:40:44.070753Z",
+      "reason": "Find own precise premises reference; full own bio gives neighborhood only. Current bio phone and own older reel alternate contact are separate explicit own contacts, not an inferred number conversion.",
+      "nextCheck": "Find own precise premises reference; full own bio gives neighborhood only. Current bio phone and own older reel alternate contact are separate explicit own contacts, not an inferred number conversion. Resume only on a new attributable missing proof, not unchanged search repetition.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-18.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Lumi Detailing",
+      "city": "Prishtinë",
+      "status": "deferred",
+      "checkedAt": "2026-10-18T08:40:44.070753Z",
+      "reason": "Resolve identity/contact/premises continuity with the related-name Maps hint. Own2022public page and different-place related-name hint are not merged; own linked website hint DNS unavailable. Foreign similarly named Instagram profiles rejected.",
+      "nextCheck": "Resolve identity/contact/premises continuity with the related-name Maps hint. Own2022public page and different-place related-name hint are not merged; own linked website hint DNS unavailable. Foreign similarly named Instagram profiles rejected. Resume only on a new attributable missing proof, not unchanged search repetition.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-18.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Autoservis Rekordi",
+      "city": "Drenas",
+      "status": "deferred",
+      "checkedAt": "2026-10-18T08:40:44.070753Z",
+      "reason": "New own Instagram evidence resolves the independent exact-street gap. Public Maps full-name/town/country and exact primary international-phone checks still yield no attributable matching entry; no business identity is published without that match.",
+      "nextCheck": "Find an attributable official business Maps link or a current public Maps contact matching independently published business numbers; avoid repeating unchanged generic searches.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-18.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Land Rover VALI / AS Vali",
+      "city": "Prishtinë",
+      "status": "deferred",
+      "checkedAt": "2026-10-18T08:40:44.070753Z",
+      "reason": "Resolve public Maps phone discrepancy using an independently attributable official business contact or exact own-phone entry. Exact current own international-phone search yielded no result. Ownwebsite contact page unavailable; no country-code substitution from legacy Maps contact allowed.",
+      "nextCheck": "Resolve public Maps phone discrepancy using an independently attributable official business contact or exact own-phone entry. Exact current own international-phone search yielded no result. Ownwebsite contact page unavailable; no country-code substitution from legacy Maps contact allowed. Resume only on a new attributable missing proof, not unchanged search repetition.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-18.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Servis Miloti",
+      "city": "Drenas",
+      "checkedAt": "2026-10-19T03:37:43.589335+00:00",
+      "status": "deferred-no-attributable-active-maps-entry",
+      "reason": "Precise independent street now found, but no attributable active Maps identity for either exact own contact or new street/name search. Email spelling variation remains unresolved and is not a usable contact.",
+      "nextCheck": "Obtain a new attributable own official Maps link or a current business-name/phone continuity source. Do not repeat unchanged name/phone queries. Resolve email variation before presenting it as usable.",
+      "id": "auto-servis-miloti-drenas",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-19-blocker-followup.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Autoservis Adem Ramadani",
+      "city": "Skenderaj",
+      "checkedAt": "2026-10-19T03:09:52.583238+00:00",
+      "status": "deferred-country-phone-conflict",
+      "reason": "Own Facebook publishes Rr.AliGashi,Skenderaj with countryAlbania and+35544685018; directory mirrors it. No country-prefix correction is inferred. Need current independently explicit Kosovo phone and premises attribution. No Maps or WhatsApp lookup yet.",
+      "nextCheck": "Find current own explicit international Kosovo number and a matching precise site; preserve the completed contact/hours research.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-19.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Servis Miloti",
+      "city": "Drenas",
+      "checkedAt": "2026-10-19T03:37:43.589335+00:00",
+      "status": "deferred-independent-site-or-contact",
+      "reason": "Own current business contact and passenger-car mechanic scope match the directory; independent location is only Drenas.",
+      "nextCheck": "Obtain exact own street/premises; complete own contact and weekly schedule. Maps deferred until source site complete.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-19.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Servis EDI Official",
+      "city": "Drenas",
+      "checkedAt": "2026-10-19T03:37:43.589335+00:00",
+      "status": "deferred-independent-site-or-contact",
+      "reason": "Own profile contact visible; current precise site and concrete passenger-car scope not yet independently complete.",
+      "nextCheck": "Read own full contact/site/service posts; separate from AutoEdisDetailing, which is another source identity.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-19.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Autoservis Nagipi",
+      "city": "Istog",
+      "checkedAt": "2026-10-19T03:37:43.589335+00:00",
+      "status": "deferred-current-contact",
+      "reason": "Own profile publishes DeshmoretDervishaj/Istog and a legacy+377 contact. No replacement-country-prefix inference is allowed.",
+      "nextCheck": "Find an explicitly current published international number or national contact in own business advert; complete own Instagram/email/week sources.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-19.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Autoservis Universal NIKI",
+      "city": "Deçan",
+      "checkedAt": "2026-10-19T03:37:43.589335+00:00",
+      "status": "deferred-independent-site-or-contact",
+      "reason": "Own passenger-car servicing/diagnosis/air-conditioning scope and phone are explicit. Site is city only; own contact tabs not available in loaded view.",
+      "nextCheck": "Find precise current premises, attributable own Instagram/contact evidence; read available own weekly dialog.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-19.json",
+      "externallyRecheckedToday": true,
+      "currentRunCandidateId": "autoservis-universal-niki-decan",
+      "currentRunStatus": "deferred-precise-premises"
+    },
+    {
+      "name": "Autoservice & Tuning A-Lokaj",
+      "city": "Deçan",
+      "checkedAt": "2026-10-19T03:37:43.589335+00:00",
+      "status": "deferred-independent-site-or-contact",
+      "reason": "Own business page links a website that fails DNS; no closure conclusion. Current independent address is city only and contact attribution remains incomplete.",
+      "nextCheck": "Complete own contact/Instagram/week sources; need actual workshop contact and precise premises.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-19.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Autoservis Fidani",
+      "city": "Prishtinë",
+      "checkedAt": "2026-10-19T03:37:43.589335+00:00",
+      "status": "deferred-official-place-id-link",
+      "reason": "Full independent directory supplies street/contact/passenger-car repair/week/email. PublicMaps exact name, phone and street match, but no official publicly visible retraceable Place-ID link was obtained. Related Instagram has no attributable phone/site in bio.",
+      "nextCheck": "Need an official visible Maps Place-ID link; do not substitute CID or another identifier. Complete official social attribution without unrelated same-name profiles.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-19.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Autoservis Grezda",
+      "city": "Prishtinë",
+      "checkedAt": "2026-10-19T03:37:43.589335+00:00",
+      "status": "deferred-no-attributable-maps",
+      "reason": "Complete directory evidence; publicMaps name and exact international phone searches did not establish an attributable entry.",
+      "nextCheck": "New attributable own Maps/business-alias/contact proof; no repetition of unchanged phone/name queries. Complete official social search.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-19.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "TAFA POLISH",
+      "city": "Prizren",
+      "checkedAt": "2026-10-19T03:37:43.589335+00:00",
+      "status": "deferred-place-id-and-site-proof",
+      "reason": "Own current bio explicitly supplies polishing/ceramic/detailing and ABIcenter-road location. PublicMaps name/phone match but no official visible retraceable Place-ID was obtained; road/landmark attribution also needs corroboration.",
+      "nextCheck": "Own precise current site/full businessMaplink and retraceablePlaceID; complete own Facebook/contact/email/week sources.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-19.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Larje SUPER / Detailing and Polishing by Edona",
+      "city": "Prizren",
+      "checkedAt": "2026-10-19T03:37:43.589335+00:00",
+      "status": "deferred-site-and-contact-attribution",
+      "reason": "Own published joint service advert links SUPER and Edona; city-only contact evidence lacks exact site. Old linkedInstagram unavailable, not closure proof. Do not allocate separate identities to a service collaboration without site/branch evidence.",
+      "nextCheck": "Precise current premises and attribution of the two service contacts; complete own contact/email/week.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-19.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "DK Polir Detailer",
+      "city": "Prizren",
+      "checkedAt": "2026-10-19T03:37:43.589335+00:00",
+      "status": "deferred-independent-site-or-contact",
+      "reason": "Own professionally branded profile and logo evidence vehicle polishing, but independent business contact and exact site are missing. Personal-details tab is not harvested as private contact evidence.",
+      "nextCheck": "Public business advert with a phone and precise site; no Google-only contact copied.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-19.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Autongjyrosje Lali",
+      "city": "Prizren",
+      "checkedAt": "2026-10-19T03:37:43.589335+00:00",
+      "status": "deferred-independent-site-or-contact",
+      "reason": "Own business bio supplies two explicit contacts and Terzimahall location only. Not confused with canonical AutoServisXhelali, whose phone and PlaceID differ.",
+      "nextCheck": "Precise independently attributable street/site plus current own contact/weekly/email proof. No inferred branch or address.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-19.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Autoservis Lind",
+      "city": "Prishtinë",
+      "checkedAt": "2026-10-19T03:50:58.648199+00:00",
+      "status": "deferred-no-attributable-current-maps-entry",
+      "nextCheck": "New attributable current business contact/alias/directMaplink; do not repeat unchanged name/phone lookups.",
+      "reason": "Full source contact/site/repair evidence, but no attributable currentMaps identity.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-19.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto servis Balia",
+      "city": "Prishtinë",
+      "checkedAt": "2026-10-19T03:50:58.648199+00:00",
+      "status": "deferred-no-attributable-current-maps-entry",
+      "nextCheck": "New attributable current business contact/alias/directMaplink; do not repeat unchanged name/phone lookups.",
+      "reason": "A related canonical BMWBalia name has another phone and source; source continuity is unresolved, not a verified newbranch or duplicate.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-19.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Produkti",
+      "city": "Viti",
+      "status": "deferred-international-phone-conflict",
+      "reason": "Independent directories publish Kosovo international number; public Maps result shows a different country prefix. No automatic conversion. Own-source search found only an explicitly unofficial Facebook stub with no posts/contact corroboration.",
+      "nextCheck": "Find an attributable current own workshop source explicitly linking current and legacy contacts and the precise site; then repeat phone/Maps identity check.",
+      "checkedAt": "2026-10-20T03:13:34.584728Z",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-20.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Servis Te Rinori",
+      "city": "Viti",
+      "status": "deferred-maps-phone-and-precise-site",
+      "reason": "Independent full directory provides contact, car servicing and road. Maps search has several distinct local/foreign homonyms; local candidate lacks a visible matching telephone and has an uncorroborated precise premises attribution. Focused official Facebook/Instagram/contact search returned unrelated results.",
+      "nextCheck": "Find current attributable own contact and precise site/direct Maps link; do not adopt a same-name local or foreign listing without phone attribution.",
+      "checkedAt": "2026-10-20T03:13:34.584728Z",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-20.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Elezi",
+      "city": "Viti",
+      "status": "deferred-workshop-service-scope",
+      "reason": "Exact own Instagram contact/locality agrees with directory and direct-return Maps identity, but own posts advertise imported used cars and original used parts. Generic auto-servis directory category does not resolve the own sales/parts scope gap. No actual repair/detailing/glass offering established.",
+      "nextCheck": "Require an attributable own passenger-car workshop service offer; sales/parts alone remain out of import scope.",
+      "checkedAt": "2026-10-20T03:13:34.584728Z",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-20.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "name": "Auto Servis Regllazh Argjendi",
+      "id": "auto-servis-regllazh-argjendi-kamenice",
+      "city": "Kamenicë",
+      "checkedAt": "2026-10-20T03:29:19.179864Z",
+      "status": "deferred-contact-and-premises-continuity",
+      "nextCheck": "Find current own source explicitly linking both phones and precise Berivojce premises or proving distinct operators/branches; then renew Google/contact comparison. Unavailable own Facebook is not closure proof.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-20.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-service-tuning-a-lokaj-decan",
+      "name": "Autoservice & Tuning A-Lokaj",
+      "city": "Deçan",
+      "checkedAt": "2026-10-21T03:22:14.543669+00:00",
+      "status": "deferred-competing-contact-continuity",
+      "reason": "Same-name/same-road attributable competing contacts are not resolved by the current49Maps match. Independent preliminary Spec review requires the conservative continuity gate.",
+      "nextCheck": "Obtain own public source explicitly pairing49and44numbers, a documented contact/name transition or precise independently evidenced separate sites/operators. No repeated unchanged Maps/name/phone lookup without new useful continuity proof.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-21.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "autodetailing-eli-istog",
+      "name": "Autodetailing Eli",
+      "city": "Istog",
+      "checkedAt": "2026-10-21T03:40:47.182172+00:00",
+      "status": "deferred-own-current-street-versus-directory-maps-site",
+      "reason": "Own address names LidhjaePrizerenit; existing independent directory and Maps attribution name DeshmoretDervishaj. Their precise premises equivalence/continuity is not independently established.",
+      "nextCheck": "Find own explicit current premises/Maps business link, relocation or intersection evidence linking the two street labels, then repeat strict current-site/phone/PlaceID comparison. Do not infer an alias or repeat unchanged queries daily.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-21.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "autoservis-xheki-decan",
+      "name": "AutoServis XHEKI",
+      "city": "Deçan",
+      "checkedAt": "2026-10-21T03:53:03.521711+00:00",
+      "status": "deferred-visible-retraceable-place-id-unavailable",
+      "reason": "No official visible retraceable Place-ID despite matching active public name/contact/site; no alternate identifier accepted.",
+      "nextCheck": "Use a newly available official public Maps result/share link carrying a real Place-ID, then direct-ID mismatch-fallback return. Preserve current source/lookup work; do not repeat unchanged broad-name queries daily.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-21.json",
+      "externallyRecheckedToday": true,
+      "currentRunCandidateId": "autoservis-xheki-decan",
+      "currentRunStatus": "deferred-new-own-premises-conflict"
+    },
+    {
+      "id": "autoservice-loni-m-decan",
+      "name": "AutoService-Loni/M",
+      "city": "Deçan",
+      "checkedAt": "2026-10-21T03:57:19.062478+00:00",
+      "status": "deferred-malformed-independent-address-no-current-precise-premises",
+      "reason": "Malformed email-looking directory address cannot establish a current precise workshop location; exact own contact page provides no independent premises/site information.",
+      "nextCheck": "Obtain own current street/village/premises record and qualifying repair offering, and confirm whether the displayed directory string is a public business email. Then complete strict public Maps/direct-ID and WhatsApp checks; do not invent address or email purpose.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-21.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-servis-valtoni-rahovec",
+      "name": "Auto Servis Valtoni",
+      "city": "Rahovec",
+      "status": "deferred-own-versus-directory-phone-continuity",
+      "reason": "Own current44 business number differs from directory/Maps49 on matching name/street, without explicit pairing or transition.",
+      "nextCheck": "Find own paired44/49 contacts or documented contact transition/current premises continuity, then repeat Maps exact contact gate and check all intended numbers. Own full week already researched; recheck when resumed.",
+      "checkedAt": "2026-10-21T04:09:57.884687+00:00",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-21.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-servis-gynber-rahovec",
+      "name": "Auto servis Gynber Rahovec",
+      "city": "Rahovec",
+      "status": "deferred-own-versus-directory-precise-street",
+      "reason": "Own Facebook/Instagram names Fari/Fahri Fazliu while directory and active Maps name110; precise premises equivalence/continuity not proven.",
+      "nextCheck": "Resolve own Fari/FahriFazliu versus110 exact-premises continuity, then direct-ID site/contact return and WhatsApp lookup. Complete own week already researched; recheck when resumed.",
+      "checkedAt": "2026-10-21T04:09:57.884687+00:00",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-21.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-servis-starti-shtime",
+      "name": "AUTO SERVIS STARTI",
+      "city": "Shtime",
+      "checkedAt": "2026-10-22T03:16:41.918464+00:00",
+      "status": "deferred-own-and-maps-versus-same-road-directory-contact",
+      "reason": "Same-name/same-road Gjirafa907contact is not independently paired with current own/Maps220number.",
+      "nextCheck": "Find own explicit220/907contact pairing, documented change or distinct premises/branch proof; then refresh strict identity and check every intended exact workshop number on WhatsApp.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-22.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "autoservis-agroni-hani-i-elezit",
+      "name": "Autoservis Agroni",
+      "city": "Hani i Elezit",
+      "checkedAt": "2026-10-22T03:20:49.407675+00:00",
+      "status": "deferred-passenger-car-scope-not-established",
+      "reason": "Own matching business identifies truck workshop and current inspected posts show truck work; no independently attributable passenger-car service evidence yet.",
+      "nextCheck": "Find an explicit own passenger-car repair/service offering for the same527contact/AdemJashari premises. Do not infer Pkw scope from general mechanic category or same-name Ferizaj workshop.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-22.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-pjese-servis-bushi-hani-i-elezit",
+      "name": "Auto Pjesë-Servis Bushi",
+      "city": "Hani i Elezit",
+      "checkedAt": "2026-10-22T03:24:55.675527+00:00",
+      "status": "deferred-contact-continuity-and-passenger-car-repair-scope",
+      "reason": "Own sources explicitly market parts wholesale/retail but no actual Pkw service offering; own45contact is unpaired with directory44contact.",
+      "nextCheck": "Find an own explicit passenger-car repair/service offering and own45/44contact pairing, documented transition or distinct-site evidence. Reconcile AutoPjeseAgroni source alias before proposing one identity and full Maps/WhatsApp checks.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-22.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "te-neza-auto-elektro-servis-kacanik",
+      "name": "Te Neza",
+      "city": "Kaçanik",
+      "checkedAt": "2026-10-22T03:39:46.518492+00:00",
+      "status": "deferred-maps-versus-current-own-international-country-prefix",
+      "reason": "Direct official-ID return uses a different historical country prefix from current own/independent international contact; exact phone match not yet established.",
+      "nextCheck": "Find explicit own historical/current international contact continuity or an updated official public Maps current contact. Then repeat exact current phone/site direct-ID check. Do not rewrite primary number solely to force a match or treat WhatsApp registration as identity continuity.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-22.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-servis-muslimi-skenderaj",
+      "name": "Auto Servis Muslimi",
+      "city": "Skenderaj",
+      "status": "deferred-visible-place-id",
+      "reason": "Fresh nationwide exact-name Maps search still resolves only detail without an official visible true Place-ID. Prior independent site evidence retained; no substitute identifier.",
+      "nextCheck": "Wait for a new official retraceable listing/share result link; do not repeat unchanged searches.",
+      "checkedAt": "2026-10-25T04:03:36.757851+00:00",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-25.json",
+      "externallyRecheckedToday": true,
+      "currentRunCandidateId": "auto-servis-muslimi-skenderaj",
+      "currentRunStatus": "identity-confirmed-awaiting-full-live-and-whatsapp"
+    },
+    {
+      "id": "auto-servis-prekazi-skenderaj",
+      "name": "Auto Servis \"Prekazi\"",
+      "city": "Skenderaj",
+      "status": "deferred-own-country-location-label-conflict",
+      "reason": "Own exact-phone Facebook Details says Skënderaj,Albania; independent directory and activeMaps attribution isSkenderajKosovo. No explicit own precise-premises/country correction or distinct-branch proof found.",
+      "nextCheck": "Find own explicit current precise Kosovo premises/country evidence or attributable branch/relocation clarification; do not silently treat contradictory own country label as a harmless typo.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-23.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "amiri-autoservis-podujeve",
+      "name": "Amiri AutoServis",
+      "city": "Podujevë",
+      "status": "deferred-own-km2-versus-directory-km1-premises",
+      "reason": "Own matching-phone business describes Podujevë-Prishtinë km2 oppositeVedapetrol; directory uses km1. No independently precise current own site/transition reference reconciles both.",
+      "nextCheck": "Obtain own precise current premises/landmark map or explicit continuity explanation linking km1andkm2. One focused publicOSM VedaPetrolPodujevë query returned noresult; do not infer different distance origins or repeat unchangeddeadends.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-23.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-servis-enveri-podujeve",
+      "name": "Auto Servis ENVERI",
+      "city": "Podujevë",
+      "status": "deferred-current-directory-versus-owned-legacy-contact-continuity",
+      "reason": "Owned phone has legacy international prefix; current38344 directory/Maps contact and owned distinct49 CTA lack explicit own continuity pairing. No automatic prefix conversion.",
+      "nextCheck": "Find an own current38344 publication or explicit legacy/current contact pairing and branch continuity. Then recheck every intended current workshop number, including owned49 if selected, before import.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-23.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-servis-sahiti-podujeve",
+      "name": "Auto Servis SAHITI Podujevë",
+      "city": "Podujevë",
+      "status": "deferred-same-road-registry-phone-digit-conflict",
+      "reason": "Same-brand/same-street legal-register contact45575525 differs from current directory/Maps45545525. No explicit pairing, correction or distinct branch proof.",
+      "nextCheck": "Find current own exact contact and precise branch or an attributable declaration pairing/correcting both45 numbers. Resolve the legal-email assignment before treating it as usable; no guessed digit correction.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-23.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-service-petriti-podujeve",
+      "name": "Auto Service Petriti",
+      "city": "Podujevë",
+      "status": "deferred-own44-versus-directory49-mobile-prefix",
+      "reason": "Own exact-name/same-road Contact and public CTA use38344, directory/Maps use38349 with same suffix; no explicit pairing or number-transition proof.",
+      "nextCheck": "Find an own explicit44/49 contact pairing or transition for this concrete Skënderbeu site. Then repeat every intended number lookup, including44 if proposed, and resolve email assignment; no suffix-based inference.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-23.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-service-noli-podujeve",
+      "name": "Auto Service NOLI",
+      "city": "Podujevë",
+      "status": "deferred-owned45-versus-directory44-contact-continuity",
+      "reason": "Own current45 contact differs from directory/Maps44; no attributable owner pairing, change statement or branch assignment.",
+      "nextCheck": "Find own exact44/45 pairing or transition for Penuh premises; then verify every intended current number including45 if proposed and resolve business-email assignment. Preserve real PID without inventing phone equivalence.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-23.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-servis-te-lila-viti",
+      "name": "Auto Servis \"Te Lila\"",
+      "city": "Viti",
+      "checkedAt": "2026-10-24T09:31:52.955158+00:00",
+      "status": "deferred-premises-continuity",
+      "reason": "Own contact stillmatches, but ownpublished Facebook address-map link points about5.7km from independentdirectory site. Public own-profile Rexhep search and focused ETC/Viti landmark checks did not establish continuity.",
+      "nextCheck": "Obtain a fresh attributable own precise premises/map publication connecting the stated Tirana-road/oppositeETC address to the independently listedRexhepBislimi site. Resolve the mismatching own-page link, rather than assume geocoding error or relocation.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-24-blocker-followup.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "xhida-servis-obiliq",
+      "name": "Xhida Servis",
+      "city": "Obiliq",
+      "checkedAt": "2026-10-24T06:10:17.949079+00:00",
+      "status": "deferred-passenger-car-repair-scope",
+      "nextCheck": "Find attributable exact-phone/site own service description or a traceable explicit repair classification; do not infer repair from broad category or name.",
+      "reason": "Numrat only places this identity in broad Auto servis category, which also includes dealers/parts shops. Own-looking Facebook has no exact phone/site or repair statement. Actual qualifying car repair service not independently established.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-24.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-pjese-servis-selimi-lipjan",
+      "name": "AUTO PJESË & SERVIS SELIMI SH.P.K",
+      "city": "Lipjan",
+      "checkedAt": "2026-10-24T06:17:17.948818+00:00",
+      "status": "deferred-own-phone-continuity",
+      "reason": "Own same-street business contact and recent featured advertisement publish38348 316466; directory/Maps use38344 316466. No explicit number pairing/continuity established.",
+      "nextCheck": "Find attributable own44/48 pairing or replacement clarification and current workshop scope; reverify intended phone(s) afterwards.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-24.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-sokoli-lipjan",
+      "name": "Auto \"Sokoli\" Lipjan",
+      "city": "Lipjan",
+      "checkedAt": "2026-10-24T06:30:08.229357+00:00",
+      "status": "deferred-own-phone-continuity",
+      "nextCheck": "Find attributable own45/44 pairing or transition at concrete28Nentori site; resolve email assignment and all intended numbers before import.",
+      "reason": "Own website and FB CTA44 contact differ from directory/Maps45; no explicit pairing/current transition.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-24.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-lami-lipjan",
+      "name": "Auto Lami",
+      "city": "Lipjan",
+      "checkedAt": "2026-10-24T06:30:08.229357+00:00",
+      "status": "deferred-passenger-car-repair-scope",
+      "nextCheck": "Require own explicit passenger-car repair service and attributable workshop contact before reconsidering.",
+      "reason": "Own sources describe car dealership and vehicle sales; general directory Auto servis category does not establish actual workshop services.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-24.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-servis-beni-obiliq",
+      "name": "Auto Servis BENI",
+      "city": "Obiliq",
+      "checkedAt": "2026-10-24T06:30:08.229357+00:00",
+      "status": "deferred-scope-and-premises",
+      "nextCheck": "Find own repair offering and explicit precise premises/map or street continuity; no phone lookups performed because these contacts are not proposed for publication.",
+      "reason": "Own Shkabaj/km13/oppositeHotelAmazona location and sales bio require precise operating-site/repair evidence; publicMaps samephone688Viktoria not silently treated as address alias.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-24.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-karoseria-klecka-lipjan",
+      "name": "Auto Karoseria Kleçka - Lipjan",
+      "city": "Lipjan",
+      "checkedAt": "2026-10-24T06:30:08.229357+00:00",
+      "status": "deferred-maps-identity-and-hours-attribution",
+      "nextCheck": "Find official public Maps entry with exact own contact/current96IbrahimRugova premises and retraceablePID; verify hours source site or use explicitlyassumed default thereafter.",
+      "reason": "Neither public bodywork-category nor exact-name Maps query yields matching active identifiable entry. No Place-ID invented; AllBiz neighborhood versus own precise street hours-site assignment remains incomplete.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-24.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-servis-toni-shtime",
+      "name": "Auto Servis Toni",
+      "city": "Shtime",
+      "status": "deferred-maps-identity",
+      "reason": "Own brand/phone/service and independent OSM-derived precise location established; public name/town then explicit Kosovo search returned other identities, no matching target phone/site.",
+      "nextCheck": "Find official Maps target with exact phone and Adem Jashari premises; do not substitute same-name other-town businesses.",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-25.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-servis-xeni-malisheve",
+      "name": "Auto Servis Xeni",
+      "city": "Malishevë",
+      "status": "deferred-phone-continuity",
+      "reason": "Own same-brand/town public contact49305783 differs from independent directory49104480; no attributable pairing or transition.",
+      "nextCheck": "Find own explicit pairing/transition and precise Rilindja Kombetare site proof; do not infer equivalence.",
+      "checkedAt": "2026-10-25T04:07:53.008889+00:00",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-25.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-servis-genti-malisheve",
+      "name": "Auto Servis GENTI",
+      "city": "Malishevë",
+      "status": "deferred-own-identity-assignment",
+      "reason": "Same-town own-looking NgjyrosesGenti repair profile publishes+35544205113, not directory44860019. Cannot assign this profile or assume homonyms are one workshop.",
+      "nextCheck": "Find an attributable exact-phone own profile or establish distinct premises/identity for the same-town homonym.",
+      "checkedAt": "2026-10-25T04:07:53.008889+00:00",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-25.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-skendi-dragash",
+      "name": "Auto Skendi",
+      "city": "Dragash",
+      "status": "deferred-official-visible-place-id",
+      "reason": "Exact public Maps query returned detail without visible true Place-ID; local workshop feed did not expose target. No substitute ID adopted.",
+      "nextCheck": "Obtain new official visible Maps link with true Place-ID and direct return; complete own social attribution.",
+      "checkedAt": "2026-10-25T04:07:53.008889+00:00",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-25.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-servis-fs-skender-hoxha-malisheve",
+      "name": "Auto Servis F&S Skender Hoxha",
+      "city": "Malishevë",
+      "status": "deferred-premises-and-scope-continuity",
+      "reason": "Numrat mechanic at Gjergj Kastrioti Skenderbeu; same-phone AutoYas own-source mirror names Skenda Marali at Rr.UCK pn-Marali. Cybo categorizes industrial mechanical plant. No documented site/brand continuity or resolved passenger-car scope at target premises.",
+      "nextCheck": "Inspect original Facebook source and current exact premises/relocation pairing; resolve conflicting scope before import.",
+      "checkedAt": "2026-10-25T04:13:19.682976+00:00",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-25.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-servis-auto-bartje-naimi-malisheve",
+      "name": "Auto Servis & Auto Bartje Naimi",
+      "city": "Malishevë",
+      "status": "deferred-passenger-car-scope-conflict",
+      "reason": "Directory mechanic classification conflicts with same-phone/same-site Cybo parking-lot classification; exact phone search no result, own-source search only Cybo. Actual current passenger-car repairs not independently resolved.",
+      "nextCheck": "Find attributable own explicit passenger-car repair offer at this exact site; do not infer scope from name or towing.",
+      "checkedAt": "2026-10-25T04:13:19.682976+00:00",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-25.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-service-urimi-malisheve",
+      "name": "Auto Service Urimi",
+      "city": "Malishevë",
+      "status": "deferred-official-visible-place-id",
+      "reason": "Independent explicit mechanic identity and precise Adem Jashari551 point match public Maps detail; no official visible true Place-ID obtained from name or broader brand result.",
+      "nextCheck": "Obtain an official visible retraceable Place-ID link; retain exact551site and phone gate.",
+      "checkedAt": "2026-10-25T04:13:19.682976+00:00",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-25.json",
+      "externallyRecheckedToday": true,
+      "currentRunCandidateId": "auto-service-urimi-malisheve",
+      "currentRunStatus": "deferred-official-visible-place-id"
+    },
+    {
+      "id": "auto-servisi-joni-malisheve",
+      "name": "Auto servisi JONI",
+      "city": "Malishevë",
+      "status": "deferred-own-premises-and-phone-attribution",
+      "reason": "Directory points to Adem Jashari; own-looking same-town page/Details says Terpez e poshtme, exposes no matching contact in inspected Info. No site continuity established.",
+      "nextCheck": "Find explicit current phone and premises pairing or proof of distinct identities; do not assume village/street equivalence.",
+      "checkedAt": "2026-10-25T04:13:19.682976+00:00",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-25.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-detailing-ardi-malisheve",
+      "name": "Auto Detailing ARDI",
+      "city": "Malishevë",
+      "status": "deferred-detailing-scope",
+      "reason": "Directory classifies carwash only; detailing in name alone is not actual service proof. Targeted brand/town/email/Facebook/Instagram query no result.",
+      "nextCheck": "Find attributable own detailing/polishing/ceramic offering and exact contact/site, then Maps identity.",
+      "checkedAt": "2026-10-25T04:13:19.682976+00:00",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-25.json",
+      "externallyRecheckedToday": false
+    },
+    {
+      "id": "auto-servis-hoti-malisheve",
+      "name": "Auto Servis Hoti",
+      "city": "Malishevë",
+      "status": "deferred-official-visible-place-id",
+      "reason": "Independent mechanic classification and contact/site evidence; public exact nationwide brand query exposes no official visible true Place-ID. No completed direct-ID identity check.",
+      "nextCheck": "Find retraceable official public Maps result link and complete direct return against exact contact/RrugaAdemJashari/sourcepoint.",
+      "checkedAt": "2026-10-25T04:13:19.682976+00:00",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-25.json",
+      "externallyRecheckedToday": true,
+      "currentRunCandidateId": "auto-servis-hoti-malisheve",
+      "currentRunStatus": "deferred-official-visible-place-id"
+    },
+    {
+      "id": "x-garage-car-details-malisheve",
+      "name": "X Garage Car details",
+      "city": "Malishevë",
+      "status": "deferred-precise-site-and-own-attribution",
+      "reason": "Directory explicitly says map location not confirmed, address only24000AdemJashari. Own-looking IG describes detailing but no matching phone/town in inspected bio; cannot attribute it to target.",
+      "nextCheck": "Find independently attributable precise premises and exact contact linking an own detailing source, then Maps.",
+      "checkedAt": "2026-10-25T04:13:19.682976+00:00",
+      "historicalSource": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-25.json",
+      "externallyRecheckedToday": false
+    }
+  ],
+  "focusMunicipalitiesPlanned": ["Istog", "Deçan", "Klinë", "Malishevë"],
+  "focusReason": "Three smaller underrepresented towns plus promising uncompleted source leads from prior Malisheve triage. Existing unresolved conflicts remain held without new evidence.",
+  "browser": {
+    "profileVisiblyConfirmed": true,
+    "method": "Own internal Google account menu visible; unrelated native browser untouched"
+  },
+  "candidates": [
+    {
+      "id": "autoservis-universal-niki-decan",
+      "name": "Autoservis Universal NIKI",
+      "city": "Deçan",
+      "phone": "+38345598009",
+      "status": "deferred-precise-premises",
+      "sourceUrls": [
+        "https://www.facebook.com/AUTOSERVIS.NIKI.DECAN/",
+        "https://www.facebook.com/AUTOSERVIS.NIKI.DECAN/directory_basic_info"
+      ],
+      "reason": "Previously inaccessible own Info/Details now inspected: address remains city only, no precise premises or linked coordinate. No independently attributable exact-site source found.",
+      "nextCheck": "Require current own precise street/site or attributed coordinate; do not repeat unchanged city-only source.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://www.facebook.com/AUTOSERVIS.NIKI.DECAN/",
+        "status": "not-found",
+        "note": "Fresh own full Contact has phone only; current focused business-name/contact/Instagram search yielded same Facebook profile and mirrors, no attributable website or Instagram/email.",
+        "checkedAt": "2026-10-26T04:07:28.987989+00:00"
+      },
+      "openingHoursResearch": {
+        "status": "held-historical-week-not-reconfirmed",
+        "sourceUrl": "https://www.facebook.com/AUTOSERVIS.NIKI.DECAN/directory_basic_info",
+        "note": "Fresh own Details exposes hours control but clicking did not produce a complete readable week. Earlier own five-year-old schedule remains historical only; no default import for unresolved premises.",
+        "checkedAt": "2026-10-26T04:07:28.987989+00:00"
+      },
+      "checkedAt": "2026-10-26T04:07:28.987989+00:00"
+    },
+    {
+      "id": "autoservis-xheki-decan",
+      "name": "AutoServis XHEKI",
+      "city": "Deçan",
+      "phone": "+38344466905",
+      "status": "deferred-new-own-premises-conflict",
+      "sourceUrls": [
+        "https://numrat.com/biznes/GzstjiU85Y5B/autoservis-xheki/",
+        "https://www.facebook.com/xheki.autoservis/"
+      ],
+      "reason": "Previously missing official Place-ID now resolved in current local feed and direct return matches directory. Fresh own profile instead gives Agim kukleci/Isniq with own published map point42.56268,20.30803 versus independent directory42.552373,20.291467. No current premises continuity demonstrated.",
+      "nextCheck": "Obtain own explicit relocation/street/site connection or accurate current premises proof; do not assume map geocoding error or ignore conflict.",
+      "googleIdentity": {
+        "placeId": "ChIJE1tB13NVUhMROMq7DnmQXbk",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "directoryIdentityMatched": true,
+        "ownPremisesGate": false,
+        "note": "Only Place-ID and authored comparison retained; no Google business data copied.",
+        "checkedAt": "2026-10-26T04:07:28.987989+00:00"
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://www.facebook.com/xheki.autoservis/",
+        "status": "not-found",
+        "note": "Fresh own page and Contact only phone; directory no email/website. Targeted business/town/email/Instagram search gives directories and own FB only, no attributable Instagram contact.",
+        "checkedAt": "2026-10-26T04:07:28.987989+00:00"
+      },
+      "openingHoursResearch": {
+        "status": "held-source-plan-not-validated",
+        "note": "Own profile/contact no complete week. Search surfaced Cybo hours lead but not accepted as verified full attributable schedule; identity held, no default imported.",
+        "checkedAt": "2026-10-26T04:07:28.987989+00:00"
+      },
+      "checkedAt": "2026-10-26T04:07:28.987989+00:00"
+    },
+    {
+      "id": "auto-gomister-llugiqi-istog",
+      "name": "Auto Gomister Llugiqi",
+      "city": "Istog",
+      "phone": "+38349305512",
+      "address": "Bajram Gashi, 94",
+      "lat": 42.780903,
+      "lng": 20.480438,
+      "status": "deferred-official-visible-place-id",
+      "sourceUrls": [
+        "https://numrat.com/biznes/aFKoatrlBolF/auto-gomister-llugiqi/"
+      ],
+      "reason": "Independent explicit tyre-service classification, exact phone and precise site match public Maps detail; targeted tyre and broader workshop feeds did not expose official visible true Place-ID.",
+      "nextCheck": "Obtain retraceable official visible Place-ID link and direct-ID return; no substitute identifier.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "status": "not-found",
+        "note": "Full independent detail no email/website; exact brand/email/Facebook/Instagram search no results.",
+        "checkedAt": "2026-10-26T04:07:28.987989+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "status": "held",
+        "reason": "No full independent weekly plan; default only if all identity gates complete.",
+        "checkedAt": "2026-10-26T04:07:28.987989+00:00",
+        "note": "No full independent weekly plan; default only if all identity gates complete."
+      },
+      "checkedAt": "2026-10-26T04:07:28.987989+00:00"
+    },
+    {
+      "id": "auto-folje-taulanti-istog",
+      "name": "Auto Folje Taulanti",
+      "city": "Istog",
+      "phone": "+38345463731",
+      "status": "deferred-qualifying-service-proof",
+      "sourceUrls": [
+        "https://numrat.com/biznes/1mVDAFMzqUz6/auto-folje-taulanti/"
+      ],
+      "reason": "Broad auto-service category and wrapping-related name alone do not establish passenger-car repair, glass or actual detailing/polishing/ceramic service.",
+      "nextCheck": "Find independently attributable own specific qualifying service offer and precise contact/site before Maps qualification.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "status": "not-found",
+        "note": "Full directory detail no email/website; exact brand/email/Facebook/Instagram search no results.",
+        "checkedAt": "2026-10-26T04:07:28.987989+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "status": "held",
+        "reason": "No usable complete independent week; no default publication while scope unresolved.",
+        "checkedAt": "2026-10-26T04:07:28.987989+00:00",
+        "note": "No usable complete independent week; no default publication while scope unresolved."
+      },
+      "checkedAt": "2026-10-26T04:07:28.987989+00:00"
+    },
+    {
+      "id": "autoservis-shtupel-kline",
+      "name": "AutoServis",
+      "city": "Klinë",
+      "phone": "+38349307943",
+      "address": "Shtupel, 9 Fadil Zhabota",
+      "lat": 42.663816,
+      "lng": 20.596684,
+      "status": "eligible",
+      "sourceUrls": ["https://numrat.com/biznes/0w41Z6tlWJ97/autoservis/"],
+      "scope": "Explicit independent Mekanik classification; generic passenger-car mechanical service only. Generic published business name retained without inventing a brand.",
+      "googleIdentity": {
+        "placeId": "ChIJFzQZHQARUxMRlvXONSZunpM",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "namePhoneLocationActiveMatched": true,
+        "note": "Visible official local workshop-result link and direct London return matched exact independent name, phone, numbered street/village and precise sourcepoint; no Google content retained.",
+        "checkedAt": "2026-10-26T04:13:55.219501+00:00"
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "status": "not-found",
+        "note": "Full directory detail no email/website. Exact phone plus business-name/email/Facebook/Instagram query yielded no attributable own source.",
+        "checkedAt": "2026-10-26T04:13:55.219501+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "reason": "No complete week on independent full detail; no attributable own website/Facebook/Instagram found. Prepare central explicitly assumed default only after remaining gates.",
+        "checkedAt": "2026-10-26T04:13:55.219501+00:00",
+        "note": "No complete week on independent full detail; no attributable own website/Facebook/Instagram found. Prepare central explicitly assumed default only after remaining gates.",
+        "sourceAge": "No usable independently sourced weekly schedule; source publication/update age unavailable."
+      },
+      "checkedAt": "2026-10-26T04:13:55.219501+00:00",
+      "selectedWhatsApp": "",
+      "whatsAppSelection": "Completed negative lookup; no WhatsApp contact advertised."
+    },
+    {
+      "id": "autoservis-turbo-kline",
+      "name": "AUTOSERVIS TURBO",
+      "city": "Klinë",
+      "phone": "+38344409307",
+      "status": "deferred-contact-and-premises-continuity",
+      "sourceUrls": [
+        "https://numrat.com/biznes/VpbZHl8U3Pqi/autoservis-turbo/",
+        "https://arbk.org/biz/leonard-marleku-bi/"
+      ],
+      "reason": "Exact-brand same-town registry mirror publishes national044283250 and AbedinRexha, versus directory44409307 and Perlina. No own pairing or premises/identity continuity; cannot assume same or distinct workshops.",
+      "nextCheck": "Find current own exact contacts and premises tying or distinguishing the registered entity and the directory site.",
+      "googleIdentity": {
+        "placeId": "ChIJ0ZI5bwQPUxMRSKi5n_4u0y0",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "directoryIdentityMatched": true,
+        "ownContinuityGate": false,
+        "checkedAt": "2026-10-26T04:13:55.219501+00:00"
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "status": "not-found",
+        "note": "Full independent directory and registry mirror no business email/ownwebsite. Focused email/Facebook/Instagram search finds only unrelated Croatia profile and registry; no attributable own social contact.",
+        "checkedAt": "2026-10-26T04:13:55.219501+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "status": "held",
+        "reason": "No complete usable independent weekly plan; defaults do not bypass contact/site conflict.",
+        "checkedAt": "2026-10-26T04:13:55.219501+00:00",
+        "note": "No complete usable independent weekly plan; defaults do not bypass contact/site conflict."
+      },
+      "checkedAt": "2026-10-26T04:13:55.219501+00:00"
+    },
+    {
+      "id": "goma-te-fatosi-kline",
+      "name": "Goma Te Fatosi",
+      "city": "Klinë",
+      "phone": "+38349250143",
+      "status": "deferred-own-contact-and-passenger-car-scope",
+      "sourceUrls": [
+        "https://numrat.com/biznes/znrCPiYP9zcI/goma-te-fatosi/",
+        "https://www.facebook.com/people/Goma-Te-Fatosi/100053078027550/"
+      ],
+      "reason": "Own current contact49454090 differs from directory49250143. Expanded own public24Aprilpost explicitly advertises tyres for large working/transport vehicles at Drenoc-Kline; no attributable passenger-car repair/tyre-service scope established.",
+      "nextCheck": "Find own explicit passenger-car service offer and intended workshop-number pairing/site continuity; never infer Pkw scope from generic tyre category.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://www.facebook.com/people/Goma-Te-Fatosi/100053078027550/",
+        "status": "unresolved",
+        "observedAddress": "fatosi.fatosii@hotmail.com",
+        "note": "Public own contact email observed, but unresolved phone/site attribution to target directory branch means it is not a usable imported contact. Focused Instagram search no attributable account.",
+        "checkedAt": "2026-10-26T04:13:55.219501+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "status": "held",
+        "reason": "Own profile/full directory no complete attributed week; no defaults for unqualified identity/scope.",
+        "checkedAt": "2026-10-26T04:13:55.219501+00:00",
+        "note": "Own profile/full directory no complete attributed week; no defaults for unqualified identity/scope."
+      },
+      "checkedAt": "2026-10-26T04:13:55.219501+00:00"
+    },
+    {
+      "id": "eurogoma-kline",
+      "name": "Eurogoma - Klinë",
+      "city": "Klinë",
+      "phone": "+38349475111",
+      "status": "deferred-own-current-phone-and-street-continuity",
+      "sourceUrls": [
+        "https://numrat.com/biznes/BsFaekTUn9gB/eurogoma-kline/",
+        "https://www.eurogoma.net/locations/"
+      ],
+      "reason": "Official manually selected Kline branch publishes only legacy+38649(0)475111 and AbedinRexha, while directory uses38349475111 and SadikRama. No inferred country-code conversion or street equivalence.",
+      "nextCheck": "Find own current national/international branch contact and documented exact premises/street pairing; keep general corporate contacts separate from workshop phone.",
+      "publicBusinessEmail": {
+        "address": "infokline@eurogoma.net",
+        "sourceUrl": "https://www.eurogoma.net/locations/",
+        "status": "publicly-sourced",
+        "note": "Explicit official Kline branch email; branch identity publication remains held by current-phone/premises proof. General corporate Instagram/contact email is not substituted.",
+        "checkedAt": "2026-10-26T04:13:55.219501+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "status": "held",
+        "reason": "Official branch panel no complete weekly plan; no default import until all identity gates pass.",
+        "checkedAt": "2026-10-26T04:13:55.219501+00:00",
+        "note": "Official branch panel no complete weekly plan; no default import until all identity gates pass."
+      },
+      "checkedAt": "2026-10-26T04:13:55.219501+00:00"
+    },
+    {
+      "id": "auto-armiri-transmission-malisheve",
+      "name": "Auto Armiri Transmission",
+      "city": "Malishevë",
+      "phone": "+38349451861",
+      "address": "532 Skenderbeu",
+      "lat": 42.471263,
+      "lng": 20.768648,
+      "status": "eligible",
+      "serviceKind": "automatic-transmission",
+      "sourceUrls": [
+        "https://numrat.com/biznes/MFphedO7MYBx/auto-armiri-transmission/",
+        "https://autoarmiri.com/",
+        "https://autoarmiri.com/contact.php?lang=sq"
+      ],
+      "scope": "Own website explicitly offers diagnosis, maintenance and repair exclusively for automatic passenger-car transmissions, DSG/DCT/CVT and mechatronic/hydraulic components. Use only generic evidenced transmission scope; no brands/languages inferred.",
+      "googleIdentity": {
+        "placeId": "ChIJ2c0otYWWaiYRlAe-sgYw8l4",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "namePhoneLocationActiveMatched": true,
+        "note": "Official visible transmission-category result and direct London fallback match independent name, exact phone, numbered street and sourcepoint. Own contact confirms Skenderbeu in Banje/Malisheve; no Google business data retained.",
+        "checkedAt": "2026-10-26T04:26:19.479159+00:00"
+      },
+      "publicBusinessEmail": {
+        "address": "info@autoarmiri.com",
+        "sourceUrl": "https://autoarmiri.com/contact.php?lang=sq",
+        "status": "publicly-sourced",
+        "note": "Own homepage and contact page publish exact phone and locality with business email; no consent or deliverability claim.",
+        "checkedAt": "2026-10-26T04:26:19.479159+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "sourceUrls": [
+          "https://autoarmiri.com/",
+          "https://autoarmiri.com/contact.php?lang=sq",
+          "https://numrat.com/biznes/MFphedO7MYBx/auto-armiri-transmission/"
+        ],
+        "reason": "Own complete homepage/services/contact and independent detail have no weekly schedule. Focused brand/email/Facebook/Instagram search found own website only; no attributable social schedule found. Central explicitly assumed default required.",
+        "checkedAt": "2026-10-26T04:26:19.479159+00:00",
+        "note": "Own complete homepage/services/contact and independent detail have no weekly schedule. Focused brand/email/Facebook/Instagram search found own website only; no attributable social schedule found. Central explicitly assumed default required.",
+        "sourceAge": "No usable independently sourced weekly schedule; source publication/update age unavailable."
+      },
+      "checkedAt": "2026-10-26T04:26:19.479159+00:00",
+      "selectedWhatsApp": "+38349451861",
+      "whatsAppSelection": "Exact positive lookup for independently attributed workshop contact; preferred own main contact selected when multiple numbers exist."
+    },
+    {
+      "id": "auto-decor-design-riki-malisheve",
+      "name": "Auto Decor & Design RIKI SH.P.K",
+      "city": "Malishevë",
+      "phone": "+38349349580",
+      "address": "Rr. Imer Krasniqi Mirushë",
+      "lat": 42.492975,
+      "lng": 20.726224,
+      "status": "eligible",
+      "serviceKind": "vehicle-restoration",
+      "sourceUrls": [
+        "https://numrat.com/biznes/NsuatCm3Q86e/auto-decor-design-riki-sh-p-k/",
+        "https://www.facebook.com/autodecor.design.riki/",
+        "https://www.facebook.com/autodecor.design.riki/posts/pfbid0DQ8m8oZUMUB8RCA5kZEvBPpdiVFsP2yrGafyB9yqqBW1tneft5soNPKJG2MvRoAQl"
+      ],
+      "scope": "Own original15April2025 business post, fully expanded through native profile search restaurimi and directly reopened, explicitly offers professional interior and exterior car restoration, with Mirushë and exact primary number. Parts/rental alone are not the qualifying scope; no polishing/ceramic/paint technique inferred.",
+      "googleIdentity": {
+        "placeId": "ChIJNdqxqW51UxMRi2sUYMXqTaA",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "namePhoneLocationActiveMatched": true,
+        "note": "Previously unseen scrolled section of regular public category feed exposes official visible true Place-ID; direct London fallback matches own/independent exact street, contact and directorypoint. No Google content retained.",
+        "checkedAt": "2026-10-26T04:26:19.479159+00:00"
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "status": "not-found",
+        "note": "Own public Facebook Contact has phone and same WhatsApp number only; own-looking publicly tagged Instagram autodecordesignriki inspected with no email/bio contact, not used for extra identity claims. Full directory no email/site. Cybo security challenge not bypassed and not counted as inspected detail.",
+        "checkedAt": "2026-10-26T04:26:19.479159+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "researched",
+        "week": [
+          "08:00-17:00",
+          "08:00-17:00",
+          "08:00-17:00",
+          "08:00-17:00",
+          "08:00-17:00",
+          "09:00-16:00",
+          "closed"
+        ],
+        "sourceUrl": "https://www.facebook.com/autodecor.design.riki/",
+        "sourceAge": "Own complete weekly-hours popup reports updated about2years ago; present viewing is not current operator confirmation.",
+        "note": "Own full7dayplan explicitly read; no Google hours copied. Source is undated beyond relative age; no contradictory independent accepted schedule.",
+        "checkedAt": "2026-10-26T04:26:19.479159+00:00"
+      },
+      "checkedAt": "2026-10-26T04:26:19.479159+00:00",
+      "selectedWhatsApp": "+38349349580",
+      "whatsAppSelection": "Exact positive lookup for independently attributed workshop contact; preferred own main contact selected when multiple numbers exist."
+    },
+    {
+      "id": "te-fazli-hoti-malisheve",
+      "name": "Te fazli hoti malishev",
+      "city": "Malishevë",
+      "phone": "+38349335142",
+      "status": "deferred-qualifying-service-and-own-attribution",
+      "sourceUrls": [
+        "https://numrat.com/biznes/zqVMx2e5J7Cg/te-fazli-hoti-malishev/",
+        "https://www.facebook.com/te.fazli.hoti.malishev"
+      ],
+      "reason": "Broad directory category has no explicit qualifying service. Public business-named profile offers no attributable exact contact or service description in inspected view; traceable local promotion describes parts/rental. No repair/detailing scope inferred from Maps category.",
+      "nextCheck": "Find own attributable specific repair/detailing/glass offer and exact workshop contact; distinguish nearby Urimi551 from this553site before import.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "status": "not-found",
+        "note": "Directory and inspected public business profile no business email; focused email/Facebook/Instagram search only business profile/promotional snippet and unrelated municipal notices. Municipal addresses and private profile information not adopted.",
+        "checkedAt": "2026-10-26T04:26:19.479159+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "status": "held",
+        "reason": "No usable own/independent weekly plan; identity/scope still held.",
+        "checkedAt": "2026-10-26T04:26:19.479159+00:00",
+        "note": "No usable own/independent weekly plan; identity/scope still held."
+      },
+      "checkedAt": "2026-10-26T04:26:19.479159+00:00"
+    },
+    {
+      "id": "kadini-service-malisheve",
+      "name": "Kadini Service",
+      "city": "Malishevë",
+      "phone": "+38349277758",
+      "status": "deferred-current-precise-premises",
+      "sourceUrls": [
+        "https://numrat.com/biznes/yVvrrHpuVOXL/kadini-service/",
+        "https://www.facebook.com/kadiniservice/"
+      ],
+      "reason": "Own same-phone address text explicitly says ImerKrasniqi/Malisheve but also Rahovec platformlocality; own published map point42.48548,20.73842 differs from directory42.489618,20.730324. No current precise premises continuity; do not silently assume geocoding error.",
+      "nextCheck": "Obtain own precise current premises/pin or explicit relocation/branch clarification, resolving mixed locality and differing points.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "status": "not-found",
+        "note": "Fresh full own page and Contact show exact phone only; directory no email/website. Focused brand/email/Facebook/Instagram search found own Facebook and promotional videos, no attributable Instagram or website email.",
+        "checkedAt": "2026-10-26T04:26:19.479159+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "status": "held",
+        "reason": "Own page/Contact and directory no complete week; defaults cannot bypass premises conflict.",
+        "checkedAt": "2026-10-26T04:26:19.479159+00:00",
+        "note": "Own page/Contact and directory no complete week; defaults cannot bypass premises conflict."
+      },
+      "checkedAt": "2026-10-26T04:26:19.479159+00:00"
+    },
+    {
+      "id": "genart-tuning-malisheve",
+      "name": "Genart Tuning",
+      "city": "Malishevë",
+      "phone": "+38349651536",
+      "status": "deferred-independent-precise-site-correspondence",
+      "sourceUrls": [
+        "https://www.facebook.com/people/Genart-Tuning/100091315838340/",
+        "https://www.instagram.com/genarttuning/",
+        "https://www.openstreetmap.org/search?query=Rruga%20Skenderbeu%20Malishev%C3%AB"
+      ],
+      "reason": "Own Facebook phone and engine-work post establish business/scope; own Instagram publishes Rruga Skenderbeu, Malisevo24000. The direct public Maps listing uses a different road/village description; exact correspondence is still unproved. No Google location copied into catalogue.",
+      "nextCheck": "Obtain own numbered premises or an independent street/route correspondence for the currently published Instagram address. The focused public OpenStreetMap address search returned no result; do not infer an alias.",
+      "publicBusinessEmail": {
+        "address": "genartbegaj7@gmail.com",
+        "sourceUrl": "https://www.facebook.com/people/Genart-Tuning/100091315838340/",
+        "status": "publicly-sourced",
+        "note": "Own public business Contact shows exact matching name/phone/locality and email. Kept as research only until precise site completes; no deliverability/consent claim.",
+        "checkedAt": "2026-10-26T04:26:19.479159+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "status": "held",
+        "reason": "Own full Facebook profile and Instagram bio no complete week; no publication until precise site verified.",
+        "checkedAt": "2026-10-26T04:26:19.479159+00:00",
+        "note": "Own full Facebook profile and Instagram bio no complete week; no publication until precise site verified."
+      },
+      "checkedAt": "2026-10-26T04:26:19.479159+00:00",
+      "googleIdentity": {
+        "placeId": "ChIJ8aKch_WfUxMR_A_i6hPNFGs",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": false,
+        "note": "Direct return matches own business/contact but road correspondence remains unverified; no Google coordinates or business fields adopted.",
+        "checkedAt": "2026-10-26T04:26:19.479159+00:00"
+      }
+    },
+    {
+      "id": "auto-servis-muslimi-skenderaj",
+      "name": "Auto Servis Muslimi",
+      "city": "Skenderaj",
+      "phone": "+38349382088",
+      "address": "Ulpiana, 20",
+      "lat": 42.73138,
+      "lng": 20.800345,
+      "status": "eligible",
+      "sourceUrls": [
+        "https://numrat.com/biznes/y8zvSaboRIC7/auto-servis-muslimi/",
+        "https://www.facebook.com/p/Auto-Servis-Muslimi-61580186164779/"
+      ],
+      "scope": "Explicit independent mechanic classification and own general motor-vehicle servicing description; generic passenger-car mechanical service only.",
+      "googleIdentity": {
+        "placeId": "ChIJ-XrfcAVrUxMRbxOK-BnMBk0",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "namePhoneLocationActiveMatched": true,
+        "note": "Previously missing retraceable Place-ID now visible in newly read scrolled local-category result section. Direct London return matches refreshed independent exact phone, numbered street and sourcepoint; no Google business content retained.",
+        "checkedAt": "2026-10-26T04:36:09.048457+00:00"
+      },
+      "publicBusinessEmail": {
+        "address": "limanvojvoda14@gmail.com",
+        "sourceUrl": "https://www.facebook.com/p/Auto-Servis-Muslimi-61580186164779/",
+        "status": "publicly-sourced",
+        "note": "Fresh own public Contact explicitly publishes exact matching business phone and email. Publicly named business Instagram limanvojvoda inspected: AutoServisMuslimi-Skenderaj/AutoMekanik but no additional phone/email/week; no unverified contact adopted.",
+        "checkedAt": "2026-10-26T04:36:09.048457+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "researched",
+        "week": [
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00"
+        ],
+        "sourceUrl": "https://www.facebook.com/p/Auto-Servis-Muslimi-61580186164779/",
+        "sourceAge": "Own business-hours dialog explicitly says continuously open, updated about1year ago. No exact update date invented.",
+        "note": "Own published always-open schedule represented as7full days; not a current operator confirmation or promise of on-demand availability. No Google hours copied and imported schedule must not assert current open/closed status.",
+        "checkedAt": "2026-10-26T04:36:09.048457+00:00"
+      },
+      "checkedAt": "2026-10-26T04:36:09.048457+00:00",
+      "selectedWhatsApp": "+38349382088",
+      "whatsAppSelection": "Exact positive lookup for independently attributed workshop contact; preferred own main contact selected when multiple numbers exist."
+    },
+    {
+      "id": "auto-servis-hoti-malisheve",
+      "name": "Auto Servis Hoti",
+      "city": "Malishevë",
+      "phone": "+38344254560",
+      "status": "deferred-official-visible-place-id",
+      "sourceUrls": [
+        "https://numrat.com/biznes/rX1uuBEGwZzn/auto-servis-hoti/"
+      ],
+      "reason": "Fresh independent mechanic/phone/street listing remains consistent. The newly inspected deeper public local result sections reached the end without exposing a retraceable target Place-ID. No substitute identifier adopted.",
+      "nextCheck": "Require a newly available official public link carrying a true Place-ID, then direct return; do not repeat unchanged query variants.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "status": "not-found",
+        "note": "Fresh full directory detail has no email or website; targeted business/town/email/Facebook/Instagram search returned no attributable sources.",
+        "checkedAt": "2026-10-26T05:01:12.959173+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "status": "held",
+        "reason": "No complete independent weekly plan; central defaults only after the missing identity gate completes.",
+        "checkedAt": "2026-10-26T05:01:12.959173+00:00",
+        "note": "No complete independent weekly plan; central defaults only after the missing identity gate completes."
+      },
+      "checkedAt": "2026-10-26T05:01:12.959173+00:00"
+    },
+    {
+      "id": "auto-service-urimi-malisheve",
+      "name": "Auto Service Urimi",
+      "city": "Malishevë",
+      "phone": "+38349286862",
+      "status": "deferred-official-visible-place-id",
+      "sourceUrls": [
+        "https://numrat.com/biznes/z0EepoWSa1gx/auto-service-urimi/"
+      ],
+      "reason": "Fresh independent mechanic/phone/numbered-street listing remains consistent. The newly inspected deeper public local result sections reached the end without exposing a retraceable target Place-ID. No substitute identifier adopted.",
+      "nextCheck": "Obtain a new official visible Place-ID link and directly compare exact contact and 551 Adem Jashari premises; nearby 553 site remains a separate unresolved identity.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "status": "not-found",
+        "note": "Fresh full directory detail has no email or website; targeted business/town/email/Facebook/Instagram search returned no attributable sources.",
+        "checkedAt": "2026-10-26T05:01:12.959173+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "status": "held",
+        "reason": "No complete independent weekly plan; central defaults only after the missing identity gate completes.",
+        "checkedAt": "2026-10-26T05:01:12.959173+00:00",
+        "note": "No complete independent weekly plan; central defaults only after the missing identity gate completes."
+      },
+      "checkedAt": "2026-10-26T05:01:12.959173+00:00"
+    },
+    {
+      "id": "servisi-gjipave-tarzani-decan",
+      "name": "Servisi i Gjipave te Tarzani",
+      "city": "Deçan",
+      "phone": "+38344237240",
+      "additionalPhones": ["+38344129123"],
+      "status": "deferred-precise-workshop-site-and-contact-role",
+      "sourceUrls": [
+        "https://numrat.com/biznes/7vouLjPRruC0/servisi-i-gjipave-te-tarzani/",
+        "https://www.facebook.com/profile.php?id=61593480462259",
+        "https://www.facebook.com/photo/?fbid=122101754031449348&set=a.122101084557449348"
+      ],
+      "scope": "Own public business flyer explicitly advertises professional repairs for Japanese SUVs as well as buying/selling, in Prilep/Decan, and publishes both exact +383 business numbers. Qualifying repair scope is now evidenced; no brand support inferred solely from logos.",
+      "reason": "Two nearby active public entries correspond to the two own-advertised numbers. The independent directory point matches one entry, while the operational repair-site/contact assignment remains unresolved. The flyer combines sales and repairs without assigning number roles; no sales line or different premises silently treated as the repair contact.",
+      "nextCheck": "Find an attributable precise repair-site address/pin and explicit workshop-contact assignment for the paired numbers; then select one matching active entry without creating duplicate identities.",
+      "googleIdentity": {
+        "observedPlaceIds": [
+          "ChIJ8yHllttVUhMRXhEHgKPtVtY",
+          "ChIJYdsOUrZVUhMRkvjZVJA0LnM"
+        ],
+        "method": "public-maps-ui",
+        "officialVisibleLinks": true,
+        "directReturnsPerformed": true,
+        "identityConfirmed": false,
+        "note": "Both publicly visible official links were directly returned with a mismatched fallback. Only Place-IDs and authored comparison retained; no Google business fields or coordinates adopted.",
+        "checkedAt": "2026-10-26T05:01:12.959173+00:00"
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "status": "not-found",
+        "note": "Focused business/email/Facebook/Instagram web search had no result; native Facebook Pages search found the exact business. Own public page and fully read business flyer show phones only, no email or website. No attributable Instagram found and no private profile data retained.",
+        "checkedAt": "2026-10-26T05:01:12.959173+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "researched",
+        "status": "held-site-attribution",
+        "week": [
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "closed"
+        ],
+        "sourceUrl": "https://www.facebook.com/profile.php?id=61593480462259",
+        "sourceAge": "Own full weekly-hours dialog reports updated about two months ago; no operator confirmation inferred.",
+        "checkedAt": "2026-10-26T05:01:12.959173+00:00",
+        "note": "Own published weekly plan; no operator confirmation."
+      },
+      "checkedAt": "2026-10-26T05:01:12.959173+00:00"
+    },
+    {
+      "id": "auto-xhama-kristal-fushe-kosove",
+      "name": "Auto Xhama Kristal",
+      "city": "Fushë Kosovë",
+      "phone": "+38344360362",
+      "additionalPhones": ["+38344845050"],
+      "whatsappPreferredPhone": "+38344845050",
+      "address": "Rruga e pejes, Bresje",
+      "lat": 42.628665,
+      "lng": 21.090086,
+      "status": "eligible",
+      "serviceKind": "vehicle-glass",
+      "sourceUrls": [
+        "https://numrat.com/biznes/ogi66Z5i8hkP/auto-xhama-kristal/",
+        "https://www.facebook.com/p/Auto-Xhama-Kristal-100063482621925/",
+        "https://www.facebook.com/permalink.php?story_fbid=pfbid0cKLAgi5ZP4hLSiHZwXj6YfRw5mLAARcgpy418FmQpR3ShpGthinbqSRhSC19v3Ysl&id=100063482621925",
+        "https://www.instagram.com/autoxhamakristal_/"
+      ],
+      "scope": "Own full bio explicitly repairs and replaces glass for cars and trucks; use passenger-car glass repair/replacement only. Original own service post directly reopened, displayed20July without explicit year, specifies traffic lights at Bresje/FusheKosove and explicitly pairs both current +383 contacts.",
+      "contactContinuity": "Own Contact primary is +38344845050; its WhatsApp field retains legacy+37744360362. The directly opened own service advertisement separately publishes +38344360362 with +38344845050, so the current second-country number is NOT inferred by converting the legacy field. Catalogue uses independently advertised directory/Maps matching contact360362; prefer own current Contact number845050 for WhatsApp if positive. Check both current intended contacts. Fresh expanded own Instagram bio independently repeats both exact +383 numbers and the Bresje traffic-light location; no legacy-country conversion.",
+      "googleIdentity": {
+        "placeId": "ChIJT-AwyGefVBMRRtnSdRFegFA",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "namePhoneLocationActiveMatched": true,
+        "note": "Visible official public local glass-category result and direct London return match independent exact name/current advertised phone/street and sourcepoint. Own original post confirms Bresje premises and current paired contacts; no Google business data retained.",
+        "checkedAt": "2026-10-26T05:17:05.182758+00:00"
+      },
+      "publicBusinessEmail": {
+        "address": "autoxhamakristal@gmail.com",
+        "sourceUrl": "https://www.facebook.com/p/Auto-Xhama-Kristal-100063482621925/",
+        "status": "publicly-sourced",
+        "note": "Own public business Contact explicitly publishes email and main contact; original own current-number pairing links it to this exact branch. No deliverability or advertising consent claimed. Google-hosted business.site was not used as an independent source.",
+        "checkedAt": "2026-10-26T05:17:05.182758+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "researched",
+        "week": [
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "closed"
+        ],
+        "sourceUrl": "https://www.facebook.com/p/Auto-Xhama-Kristal-100063482621925/",
+        "sourceAge": "Own full seven-day hours dialog read; no source update date shown. Today's viewing is not operator confirmation.",
+        "note": "Complete own plan matched to exact business via current paired phones, identity and Bresje location; no Google hours copied.",
+        "checkedAt": "2026-10-26T05:17:05.182758+00:00"
+      },
+      "checkedAt": "2026-10-26T05:17:05.182758+00:00",
+      "selectedWhatsApp": "+38344845050",
+      "whatsAppSelection": "Exact positive lookup for independently attributed workshop contact; preferred own main contact selected when multiple numbers exist."
+    },
+    {
+      "id": "auto-xhama-super-glass-fushe-kosove",
+      "name": "Auto Xhama Super Glass",
+      "city": "Fushë Kosovë",
+      "phone": "+38344744311",
+      "additionalPhones": ["+38349533305"],
+      "address": "335 Rruga E Pejës",
+      "lat": 42.625774,
+      "lng": 21.087444,
+      "status": "eligible",
+      "serviceKind": "vehicle-glass-generic",
+      "sourceUrls": [
+        "https://numrat.com/biznes/Aj0aWXAdJiNt/auto-xhama-super-glass/",
+        "https://www.facebook.com/autoxhama/",
+        "https://www.instagram.com/autoxhamasuperglass/"
+      ],
+      "scope": "Own Facebook and Instagram explicitly present a vehicle-glass service. Use generic glass-service scope, with no unsupported brand or specific technique claims.",
+      "resolvedPriorHold": "Newly retrieved full independent listing supplies numbered street and precise point; current own Contact explicitly publishes matching phone and business email. This completes the earlier city-only premises/email-purpose gaps.",
+      "googleIdentity": {
+        "placeId": "ChIJKyXcKB5jUxMRLa9NTFdDl48",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "namePhoneLocationActiveMatched": true,
+        "note": "Visible official glass-category result and direct London return match independently evidenced exact name, phone, numbered street and sourcepoint. No Google business data retained.",
+        "checkedAt": "2026-10-26T05:49:10.325330+00:00"
+      },
+      "publicBusinessEmail": {
+        "address": "autoglas2@gmail.com",
+        "sourceUrl": "https://www.facebook.com/autoxhama/",
+        "status": "publicly-sourced",
+        "note": "Fresh own public Contact explicitly labels this business email, with exact matching phone and locality. Own expanded Instagram bio pairs primary44744311 and secondary49533305; no additional email. No consent or delivery claim.",
+        "checkedAt": "2026-10-26T05:49:10.325330+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "researched",
+        "week": [
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "closed"
+        ],
+        "sourceUrl": "https://www.facebook.com/autoxhama/",
+        "sourceAge": "Own full seven-day hours dialog read; no update date shown. Viewing today is not operator confirmation.",
+        "note": "Source matched to exact workshop contact and independently located site; no Google hours copied.",
+        "checkedAt": "2026-10-26T05:49:10.325330+00:00"
+      },
+      "checkedAt": "2026-10-26T05:49:10.325330+00:00",
+      "selectedWhatsApp": "+38344744311",
+      "whatsAppSelection": "Exact positive lookup for independently attributed workshop contact; preferred own main contact selected when multiple numbers exist."
+    },
+    {
+      "id": "auto-xhama-fadili-obiliq",
+      "name": "Auto Xhama Fadili",
+      "city": "Obiliq",
+      "phone": "+38344636264",
+      "additionalPhones": ["+38349636264"],
+      "status": "deferred-current-contact-and-locality-continuity",
+      "sourceUrls": [
+        "https://numrat.com/biznes/vJpPjuJ5Q1fA/auto-xhama-fadili/",
+        "https://www.facebook.com/autoxhamafadili1/",
+        "https://www.facebook.com/photo/?fbid=1428341529295351&set=a.473203484809165"
+      ],
+      "scope": "Own current public bio explicitly offers professional vehicle-glass installation and service.",
+      "reason": "Current own Contact/WhatsApp and current profile image dated17November2025 publish49number, whereas directory uses44number. Indexed older2022 posts pair44/49, but no current pairing or transition was confirmed. Own locality isObiliq while directory groups Kryshec15000 underFusheKosove; do not silently reconcile contact/locality differences.",
+      "nextCheck": "Find current explicit own44/49 pairing or a documented transition and a matching active entry; reconcile exact Kryshec municipality/site before import. Historical pairing is a lead, not current operator confirmation.",
+      "googleIdentity": {
+        "placeId": "ChIJgWQ9KwJhUxMRtcquGJe-cfA",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": false,
+        "identityConfirmed": false,
+        "note": "Official visible public result observed; no accepted full direct/current-contact check while independent continuity is unresolved.",
+        "checkedAt": "2026-10-26T05:49:10.325330+00:00"
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "status": "not-found",
+        "note": "Own full Contact shows phone and WhatsApp only; current profile image only phone. Focused business/email/Instagram search found own Facebook, old posts and directories, no attributable Instagram/own website business email. Marketplace snippets not treated as verified current contact lists.",
+        "checkedAt": "2026-10-26T05:49:10.325330+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "researched",
+        "status": "held-contact-attribution",
+        "week": [
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "closed"
+        ],
+        "sourceUrl": "https://www.facebook.com/autoxhamafadili1/",
+        "sourceAge": "Own full hours popup read; no update date shown. No hours import until identity/contact gate passes.",
+        "checkedAt": "2026-10-26T05:49:10.325330+00:00",
+        "note": "Own published weekly plan; no operator confirmation."
+      },
+      "checkedAt": "2026-10-26T05:49:10.325330+00:00"
+    },
+    {
+      "id": "auto-elektricist-agimi-kline",
+      "name": "Auto Elektricist Agimi",
+      "city": "Klinë",
+      "phone": null,
+      "status": "deferred-independent-source-access-and-contact",
+      "sourceUrls": [
+        "https://www.cybo.com/XK-biz/auto-elektricist-agimi",
+        "https://www.facebook.com/search/pages/?q=Auto%20Elektricist%20Agimi"
+      ],
+      "reason": "Targeted local auto-electrics search surfaces a directory lead, but its regular detail page requires a human security check. No bypass attempted. Native public Facebook Pages search returned homonyms; the electrical-service-looking page inspected used a different country and was not attributed to this Kosovo business. No independently confirmed target phone or precise site obtained.",
+      "nextCheck": "Use an accessible attributable own business source or normally accessible directory detail to establish exact contact/site; only then Maps and WhatsApp checks.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": null,
+        "status": "not-found",
+        "note": "No attributable own profile/email obtained. Unrelated foreign-business contact details were not adopted; directory access limitation is explicit, not a claim of exhaustive absence.",
+        "checkedAt": "2026-10-26T05:49:10.325330+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "status": "held-source-access",
+        "reason": "No complete attributable independent schedule retrieved. Defaults apply only after all identity gates pass; no placeholder publication.",
+        "checkedAt": "2026-10-26T05:49:10.325330+00:00",
+        "note": "No complete attributable independent schedule retrieved. Defaults apply only after all identity gates pass; no placeholder publication."
+      },
+      "checkedAt": "2026-10-26T05:49:10.325330+00:00"
+    }
+  ],
+  "researchProgress": {
+    "uniqueCandidatesInvestigated": 21,
+    "duplicates": 12,
+    "independentlyFullyEvidenced": 6,
+    "completedMapsChecks": 6,
+    "deferredToday": 15,
+    "precheckedSourceIdentityRecords": 68,
+    "sourceIndexRecords": 59,
+    "additionalPartialOrConflictedDirectReturns": 5,
+    "sourceIndexNotFullyVerified": 35,
+    "note": "68 source records are preliminary records, not68 verified unique businesses.21 identities received detailed review. Ambiguous same-name branch records are not counted as separate new businesses; index-only leads remain unverified.",
+    "lessThanTenReason": "Broadened four initial municipalities to Skenderaj, Fushe Kosove and Obiliq. Of21 detailed candidates,15 remain held for unresolved premises/contact continuity, missing official visible Place-ID, qualifying service or source access. Other index-only leads are not fully verified. No quota-driven additions."
+  },
+  "importedWorkshopIds": [
+    "autoservis-shtupel-kline",
+    "auto-armiri-transmission-malisheve",
+    "auto-decor-design-riki-malisheve",
+    "auto-servis-muslimi-skenderaj",
+    "auto-xhama-kristal-fushe-kosove",
+    "auto-xhama-super-glass-fushe-kosove"
+  ],
+  "publishedWorkshopIds": [],
+  "publishedCountConfirmed": 0,
+  "provider": {
+    "googleApiCalls": 0,
+    "additionalCosts": 0,
+    "outreach": false,
+    "accessLimitations": [
+      "Cybo security challenge for RIKI and Agimi detail pages was not solved or bypassed. RIKI was independently resolved through own original service post; Agimi remains held."
+    ],
+    "browserTransportRequests": "Not metered; manual public UI only",
+    "googleApiOrSdkCalls": 0,
+    "paidServicesUsed": false,
+    "quotaChanges": false,
+    "freeGoogleApiQuota": "Not used; no keys or SDK calls"
+  },
+  "handoff": {
+    "lockHeld": true,
+    "safeToReleaseLock": false,
+    "resumeSameWorktree": "/Users/ramizloki/.codex/worktrees/daily-import-2026-10-26/riparim",
+    "resumeSameManifest": "data/import-2026-10-26-daily.json",
+    "reason": "Six identities prepared locally; full tests, independent review, CI, release and live acceptance pending. Shared lock held."
+  },
+  "preflight": {
+    "health": {
+      "checkedAt": "2026-10-26T04:00:03.787Z",
+      "published": 244,
+      "checks": [
+        {
+          "path": "/werkstaetten",
+          "status": 200,
+          "bytes": 879204,
+          "ray": "a5068d43ef1903b5-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/werkstatt/auto-servis-univerzal-kamenice",
+          "status": 200,
+          "bytes": 109005,
+          "ray": "a5068d44680d03b5-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/werkstatt/autoservis-feimi-malisheve",
+          "status": 200,
+          "bytes": 103703,
+          "ray": "a5068d44c8ac03b5-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/sq/serviset",
+          "status": 200,
+          "bytes": 895333,
+          "ray": "a5068d45496203b5-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/sq/servis/auto-servis-univerzal-kamenice",
+          "status": 200,
+          "bytes": 108490,
+          "ray": "a5068d45da5f03b5-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/sq/servis/autoservis-feimi-malisheve",
+          "status": 200,
+          "bytes": 103195,
+          "ray": "a5068d463ad703b5-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/en/workshops",
+          "status": 200,
+          "bytes": 881051,
+          "ray": "a5068d46ab8903b5-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/en/workshop/auto-servis-univerzal-kamenice",
+          "status": 200,
+          "bytes": 105742,
+          "ray": "a5068d472c7503b5-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/en/workshop/autoservis-feimi-malisheve",
+          "status": 200,
+          "bytes": 100773,
+          "ray": "a5068d478cfe03b5-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        }
+      ],
+      "healthy": true
+    },
+    "resources": {
+      "checkedAt": "2026-10-26T04:00:14.742Z",
+      "deployment": {
+        "id": "6c78edb3-3f6f-48cb-b8df-a058e3c312a7",
+        "source": "wrangler",
+        "strategy": "percentage",
+        "annotations": {
+          "workers/message": "v1.51.0 (63914dbbc9b4b3644e4f9f25d339c4d663b35f5e)",
+          "workers/triggered_by": "deployment"
+        },
+        "versions": [
+          {
+            "version_id": "91a0237c-42ef-4bb3-b03a-5adea2d95491",
+            "percentage": 100
+          }
+        ],
+        "created_on": "2026-10-25T04:38:07.643302Z"
+      },
+      "operator": [
+        {
+          "results": [
+            {
+              "total": 244,
+              "drafts": 0,
+              "pending": 0,
+              "retirementMarkers": 35
+            }
+          ],
+          "rowsWritten": 0
+        }
+      ],
+      "observability": {
+        "status": "COMPLETED",
+        "timeframe": {
+          "from": 1792983614291,
+          "to": 1792987214291
+        },
+        "aggregates": [
+          [
+            {
+              "groups": [
+                {
+                  "key": "$workers.outcome",
+                  "value": "ok"
+                }
+              ],
+              "groupKey": "ok",
+              "value": 43,
+              "interval": 1,
+              "sampleInterval": 1,
+              "count": 43
+            }
+          ]
+        ],
+        "scope": "Bounded one-hour observable outcomes, not all-request proof."
+      }
+    }
+  },
+  "checkedAt": "2026-10-26T06:21:58.023Z",
+  "expandedMunicipalities": ["Skenderaj", "Fushë Kosovë", "Obiliq"],
+  "validation": {
+    "backupRecovery": {
+      "checkedAt": "2026-10-26T04:30:26.891665+00:00",
+      "method": "Existing authenticated Cloudflare D1 Studio SELECT-only query and CSV export of one JSON payload",
+      "databaseId": "b395ea3a-5316-4b0b-bdee-533bdb68d6a0",
+      "catalogueRows": 1088,
+      "tableCounts": {
+        "catalog_state": 82,
+        "workshops": 244,
+        "workshop_contact_details": 10,
+        "workshop_email_addresses": 136,
+        "workshop_email_imports": 5,
+        "workshop_google_places": 244,
+        "workshop_google_ratings": 129,
+        "workshop_opening_hours_imports": 238
+      },
+      "backupSha256": "f737d07fea33600867f0e8904b12d119a6727480f8f339334de0df615a19cdf5",
+      "csvSha256": "6c7a9783238f8339e1fa88772d7314470b7c7d2030fe9a9daaeaf9c1c39dddbd",
+      "rawBytes": 809862,
+      "exactRestoration": true,
+      "allCurrentColumnsIncluded": true,
+      "integrity": "ok",
+      "foreignKeyViolations": 0,
+      "privateAccountOrCustomerTablesExported": false,
+      "productionWrites": 0
+    },
+    "fullDatabase": {
+      "checkedAt": "2026-10-26T04:30:27.010Z",
+      "published": 244,
+      "profileFieldsMatched": 19,
+      "allPlaceIdsAndCentralHashesMatched": true,
+      "retirementMarkers": 35,
+      "extraMissingMarkers": 0,
+      "tables": {
+        "catalog_state": {
+          "count": 82,
+          "columns": ["key", "value"],
+          "sha256": "db6ef5b46105683c4103b7d73310dddff56f86a9635b357b930d9123341a62fa"
+        },
+        "workshops": {
+          "count": 244,
+          "columns": [
+            "address",
+            "brands",
+            "checked_at",
+            "city",
+            "description",
+            "editorial_emails",
+            "id",
+            "languages",
+            "lat",
+            "lng",
+            "name",
+            "opening_hours",
+            "opening_hours_confirmed_at",
+            "phone",
+            "phone_note",
+            "service_details",
+            "services",
+            "sources",
+            "specialty",
+            "status",
+            "updated_at",
+            "whatsapp"
+          ],
+          "sha256": "4d19ce328202d8cfb8c55b0a36486955f79003b6a4739e179b98c2338fb6f951"
+        },
+        "workshop_contact_details": {
+          "count": 10,
+          "columns": [
+            "checked_at",
+            "email",
+            "email_verification",
+            "matched_city",
+            "matched_name",
+            "matched_phone",
+            "source_urls",
+            "website",
+            "workshop_id"
+          ],
+          "sha256": "e86f69e11cb160d25a06b80d7aabd43b1a42cc1d2f522a7d069da54eb2462ebe"
+        },
+        "workshop_email_addresses": {
+          "count": 136,
+          "columns": [
+            "checked_at",
+            "email",
+            "email_key",
+            "import_revision",
+            "matched_city",
+            "matched_name",
+            "matched_phone",
+            "position",
+            "source_urls",
+            "workshop_id"
+          ],
+          "sha256": "aafc69edd97cdb8cdc161630bf6d7d97bbf3a21283face3fd2175f6f16685901"
+        },
+        "workshop_email_imports": {
+          "count": 5,
+          "columns": ["applied_at", "revision"],
+          "sha256": "f8557d4905e72618f08e07b36a5021aacd3fb98022c4897a0a583886fa846940"
+        },
+        "workshop_google_places": {
+          "count": 244,
+          "columns": [
+            "checked_at",
+            "place_id",
+            "profile_hash",
+            "retry_after",
+            "workshop_id"
+          ],
+          "sha256": "757c8ec723eb482cc29320186f6e8ff711295a4e1d2055319c98bccf908013e7"
+        },
+        "workshop_google_ratings": {
+          "count": 129,
+          "columns": [
+            "checked_at",
+            "maps_url",
+            "rating",
+            "review_count",
+            "source_label",
+            "source_updated_at",
+            "source_url",
+            "workshop_id"
+          ],
+          "sha256": "23644a0a5c728e2038411a4e920f1445b59e70ac29c14917bd9914da20f6038d"
+        },
+        "workshop_opening_hours_imports": {
+          "count": 238,
+          "columns": [
+            "import_revision",
+            "imported_at",
+            "opening_hours",
+            "source_metadata",
+            "suppressed",
+            "workshop_id"
+          ],
+          "sha256": "6c4cbd9f016ab1a082ae10a23efe2db6c6f0086fc05e5767c0fb6e2cc8bbb630"
+        }
+      }
+    },
+    "publicApi": {
+      "profileColumns": [
+        "id",
+        "name",
+        "city",
+        "address",
+        "phone",
+        "phone_note",
+        "whatsapp",
+        "brands",
+        "services",
+        "service_details",
+        "languages",
+        "specialty",
+        "description",
+        "lat",
+        "lng",
+        "sources",
+        "checked_at",
+        "status",
+        "updated_at"
+      ],
+      "profilesSha256": "169afe93c6da122cea7bc17fbd0e9a036b6e1a6759f8fccc06e2033cc9f4d8e6",
+      "placesSha256": "6c3df2cf59d88572d3233a2422766e4feb34ec3c35eab17a87f5d9672c070297",
+      "retirementSha256": "45471b5f656e358bc223ef4125af70c3b47e72dbda1f4c9d064b4b62021080fd",
+      "count": 244,
+      "publicApiFieldsMatched": 19,
+      "checkedAt": "2026-10-26T04:07:28.950Z"
+    },
+    "localProductionWrites": 0,
+    "prewriteLiveGuard": {
+      "checkedAt": "2026-10-26T06:21:43.512Z",
+      "allTablesAndSchemaUnchanged": true,
+      "profiles": 244,
+      "rows": 1088
+    },
+    "duplicates": {
+      "checkedAt": "2026-10-26T06:21:35.232Z",
+      "newCandidates": 6,
+      "canonicalProfiles": 244,
+      "retiredIdentities": 35,
+      "conflicts": [],
+      "historyReviewed": [
+        {
+          "path": "data/import-2026-10-03.json",
+          "sha256": "a1882285bdd82b66971f4b95cd4b57f3b6dd2d49605bd150ce007cf7381ac67c",
+          "status": null
+        },
+        {
+          "path": "data/import-2026-10-10.json",
+          "sha256": "1ae645454ff8eaf5e0336417c3d7a8b946376de188390463d117d95fe9855882",
+          "status": null
+        },
+        {
+          "path": "data/import-2026-10-11-daily.json",
+          "sha256": "c74d18c01b57f668f429630ad7fb7d69045bc6269c90260f4429f1f1ad271dd3",
+          "status": "completed_and_live_verified"
+        },
+        {
+          "path": "data/import-2026-10-12-daily.json",
+          "sha256": "0a80b94c027cdf52d4ab96399d7d809b912a3117497864a79a86bb6b7744cb17",
+          "status": "prepared_pr_pending_build_release"
+        },
+        {
+          "path": "data/import-2026-10-13-daily.json",
+          "sha256": "a7657a2f03b3769c3f54bde20af655bd31a1d51ad08b761e7e77416ad9de5571",
+          "status": "supplement-prepared-review-and-ci-pending"
+        },
+        {
+          "path": "data/import-2026-10-14-daily.json",
+          "sha256": "d07da3da1f0dd1dadf899514009d92ba9d572fbd3ced7acf4354964e7b8ce77c",
+          "status": "imported-awaiting-review-release"
+        },
+        {
+          "path": "data/import-2026-10-16-daily.json",
+          "sha256": "76e4da6e2be4c5eebbaebcdf124ce6f3543b6ddaa6ca622306e860993f992d87",
+          "status": "local-tests-passed-awaiting-final-review-ci-release"
+        },
+        {
+          "path": "data/import-2026-10-17-daily.json",
+          "sha256": "d8366448e2cac1339c49ff402a03dd59d7515f846a510254d7d61d06ecfb5957",
+          "status": "local-import-prepared-awaiting-tests-review-ci-release"
+        },
+        {
+          "path": "data/import-2026-10-18-daily.json",
+          "sha256": "61325d9b618f023ad01ea6591c5f3673f90d9bfe040996f96c9ad96a68ef2535",
+          "status": "prepared-awaiting-final-head-verification"
+        },
+        {
+          "path": "data/import-2026-10-19-blocker-followup.json",
+          "sha256": "3184543798fdb429c363d101a64207a8e80c5acd545b6790db82d5a660204f31",
+          "status": "local-import-prepared-awaiting-tests-review"
+        },
+        {
+          "path": "data/import-2026-10-19-daily.json",
+          "sha256": "d1e91e3f1231a1887555bea7c15c495ff401749d741b1ae8e48eb2f71a110994",
+          "status": "automatic-daily-completed-explicit-followup-prepared"
+        },
+        {
+          "path": "data/import-2026-10-20-daily.json",
+          "sha256": "4fe2f802ce11a6618c366fa2ec498a6e474fdfb2658e6d3b264abd1a70fe309b",
+          "status": "local-import-prepared-awaiting-tests-review-ci-release"
+        },
+        {
+          "path": "data/import-2026-10-21-daily.json",
+          "sha256": "e04f0047aca0b59eba7d2fd6a8a3c9006f8a4e0f681519f5c448b3a8fb2a5c6c",
+          "status": "local-import-prepared-awaiting-tests-review-ci-release"
+        },
+        {
+          "path": "data/import-2026-10-22-daily.json",
+          "sha256": "25e0967a4696508782cdf99d2dc6373dbadf9debe853a16da866f0a5eee61b9f",
+          "status": "local-import-prepared-awaiting-tests-review-ci-release"
+        },
+        {
+          "path": "data/import-2026-10-23-daily.json",
+          "sha256": "9288f907fe41b2d8142a71c2c3e1aef27d5be3e902da83e6d8f66b5d60298670",
+          "status": "local-import-prepared-awaiting-tests-review-ci-release"
+        },
+        {
+          "path": "data/import-2026-10-24-blocker-followup.json",
+          "sha256": "e2783b38ebe0e0c03f881552f1ac9d509dfa2d9677032d1f2aeb4085bc473386",
+          "status": "local-import-prepared-awaiting-tests-review-ci-release"
+        },
+        {
+          "path": "data/import-2026-10-24-daily.json",
+          "sha256": "bfe2b1269c339efc5e727636e5ca471c3a9f697910895104ef86e7189ecb5102",
+          "status": "automatic-daily-completed-explicit-followup-prepared"
+        },
+        {
+          "path": "data/import-2026-10-25-daily.json",
+          "sha256": "dd51bcb66af49831b7ece9b78ff4e351c34c1fa35018a4c68b0976953af46871",
+          "status": "local-import-prepared-awaiting-tests-review-ci-release"
+        },
+        {
+          "path": "data/opening-hours-research-2026-10-16.json",
+          "sha256": "f0169824e715ba0f8b8bec72ab4baf0baa959743067cca3ad8521e64508b583e",
+          "status": "local-tests-passed-awaiting-final-head-ci-and-release"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-13-manual.json",
+          "sha256": "43f9c2fb68faf194e79c567e75a58e0905cb708676e941bfe93d72003b98d042",
+          "status": "completed-live-accepted"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-13-scheduled.json",
+          "sha256": "300b2d2fc3ad62d88c1049b234ef9c4c6800f2104fe71efe51c064693c582520",
+          "status": "completed-live-accepted"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-13.json",
+          "sha256": "43f9c2fb68faf194e79c567e75a58e0905cb708676e941bfe93d72003b98d042",
+          "status": "completed-live-accepted"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-14-initial.json",
+          "sha256": "f601f9ef1626494d813de0ee5b472fcecb03e3e0d956cb3e9836cba909524e1f",
+          "status": "blocked-browser-profile-safe-handoff"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-14-resumed.json",
+          "sha256": "431aad3e1eddc6dd1d6b4b017840fc23a4fc003a3916feabb1e383496ee650d5",
+          "status": "completed-live-verified"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-14.json",
+          "sha256": "431aad3e1eddc6dd1d6b4b017840fc23a4fc003a3916feabb1e383496ee650d5",
+          "status": "completed-live-verified"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-15.json",
+          "sha256": "24eddf164dcc0c5a8e11b668a2a6df3c9ce9172e2d796125c8f834416a16e4b8",
+          "status": "blocked-browser-profile-safe-handoff"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16-initial.json",
+          "sha256": "6459921c21adaeed77e34e98f72d28c49d1f3a9b616396ef58c3d7af625f23fa",
+          "status": "blocked-browser-profile-safe-handoff"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16-resumed.json",
+          "sha256": "2f834400462a0c437ed01e27a355bdf7d30305a87914ef63ca72fc807e92ea67",
+          "status": "completed-live-verified"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-16.json",
+          "sha256": "2f834400462a0c437ed01e27a355bdf7d30305a87914ef63ca72fc807e92ea67",
+          "status": "completed-live-verified"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-17.json",
+          "sha256": "90844c279bc23f6fd8f45ec570f670a3fb0b197f38404403fcb0cc77da14ee7b",
+          "status": "completed-with-documented-schedule-discrepancy"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-18.json",
+          "sha256": "a7bae4d5931fe928a78bf23cd300c85a964d6b8fb8feb2b8c2d8c7249601ac33",
+          "status": "completed"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-19-blocker-followup.json",
+          "sha256": "878a3e9708f926e86ec70cd39fb1c8fc1a3f9a421e9d3564111d6bae85d75755",
+          "status": "completed"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-19.json",
+          "sha256": "1bc7f979c9577eef2bf0d986b4909d805ea31ed794527331a55799353f4a3ddb",
+          "status": "completed"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-20.json",
+          "sha256": "072d426611b2ef061fdefd38fd11a2f7601684771977fecb4b99934d7688581c",
+          "status": "completed-live-verified"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-21.json",
+          "sha256": "6378bb61a59248ef584fd0d01d0d207056e14da85078c70ca9493d90803c66d1",
+          "status": "completed-live-verified"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-22.json",
+          "sha256": "2c50c20c66b62c6221f27dd9badb73a9cbb6dd06f1126ff6a83ccb975077569b",
+          "status": "completed-live-verified"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-23.json",
+          "sha256": "d78fd4a92ba51da1cb4c9bf313deaa1d1d001d245a0efd86079f99c4c3f64da5",
+          "status": "completed-live-verified"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-24-blocker-followup.json",
+          "sha256": "c0cf6d7adfb81a463005c0c549e18953ef91b842cb790d1a5222521652964b7b",
+          "status": "completed-live-verified"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-24.json",
+          "sha256": "893bac1441ad6ad064b226e8c314920d365bacef318739e7b26326de2148ca6b",
+          "status": "completed-live-verified"
+        },
+        {
+          "path": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/receipt-2026-10-25.json",
+          "sha256": "d29584b515168e83d804831d8b9bbc015c8ca7adc660bc7e49cc67548c8598ac",
+          "status": "completed-live-verified"
+        }
+      ],
+      "scope": "IDs, Place IDs, full phones and conservative legacy suffixes, normalized names/cities and addresses; prior research queue retained in daily manifest."
+    },
+    "isolatedImport": {
+      "checkedAt": "2026-10-26T06:21:59.224Z",
+      "priorRowsPreserved": 1088,
+      "previousProfilesPreserved": 244,
+      "previousCanonicalAndOverlayRecordsUnchanged": true,
+      "newProfiles": 6,
+      "newResearchedHours": 4,
+      "newAssumedHours": 2,
+      "newWhatsAppContacts": 5,
+      "newBusinessEmails": 4,
+      "ownerConfirmationInvented": false,
+      "productionTouched": false,
+      "idempotent": true,
+      "integrity": "ok",
+      "foreignKeyViolations": 0,
+      "counts": {
+        "catalog_state": 83,
+        "workshops": 250,
+        "workshop_contact_details": 10,
+        "workshop_email_addresses": 140,
+        "workshop_email_imports": 5,
+        "workshop_google_places": 250,
+        "workshop_google_ratings": 129,
+        "workshop_opening_hours_imports": 244
+      },
+      "releasePlanStatements": 522
+    },
+    "catalogueDryRun": {
+      "added": 6,
+      "updated": 0,
+      "deduplicated": 0,
+      "total": 250,
+      "existingSharedPhonePairUnchanged": [
+        "eurogoma-gjakova",
+        "eurogoma-mitrovica"
+      ]
+    }
+  },
+  "historicalQueueNote": "Historical record keys, not fresh unique research. Detailed current rechecks are in candidates; prior source documents are preserved by path/hash and not overwritten.",
+  "whatsappVerification": {
+    "checks": [
+      {
+        "workshopIds": ["autoservis-shtupel-kline"],
+        "phone": "+38349307943",
+        "checkedAt": "2026-10-26T04:44:25.182Z",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "not_registered"
+      },
+      {
+        "workshopIds": ["auto-armiri-transmission-malisheve"],
+        "phone": "+38349451861",
+        "checkedAt": "2026-10-26T04:47:03.312Z",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "registered"
+      },
+      {
+        "workshopIds": ["auto-decor-design-riki-malisheve"],
+        "phone": "+38349349580",
+        "checkedAt": "2026-10-26T04:48:48.116Z",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "registered"
+      },
+      {
+        "workshopIds": ["auto-servis-muslimi-skenderaj"],
+        "phone": "+38349382088",
+        "checkedAt": "2026-10-26T04:52:27.761Z",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "registered"
+      },
+      {
+        "workshopIds": ["auto-xhama-kristal-fushe-kosove"],
+        "phone": "+38344360362",
+        "checkedAt": "2026-10-26T06:05:21.574Z",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "unresolved",
+        "reason": "Completed account result displays a different country code from the exact input; no conversion or availability claim.",
+        "nextCheck": "Recheck the exact international number after attributable clarification; use only the independently paired positively checked workshop main contact meanwhile."
+      },
+      {
+        "workshopIds": ["auto-xhama-kristal-fushe-kosove"],
+        "phone": "+38344845050",
+        "checkedAt": "2026-10-26T06:19:01.179Z",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "registered"
+      },
+      {
+        "workshopIds": ["auto-xhama-super-glass-fushe-kosove"],
+        "phone": "+38344744311",
+        "checkedAt": "2026-10-26T06:19:30.964Z",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "registered"
+      },
+      {
+        "workshopIds": ["auto-xhama-super-glass-fushe-kosove"],
+        "phone": "+38349533305",
+        "checkedAt": "2026-10-26T06:19:52.852Z",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "registered"
+      }
+    ],
+    "summary": {
+      "uniqueNumbersChecked": 8,
+      "completedUiLookups": 8,
+      "registered": 6,
+      "not_registered": 1,
+      "unresolved": 1,
+      "loginBlocked": 0,
+      "newlyProvidedWorkshopContacts": 0,
+      "preparedWorkshopContacts": 5
+    }
+  },
+  "sourceTriage": [
+    {
+      "name": "A-Lokaj Tuned",
+      "city": "Deçan",
+      "phone": "+38349405078",
+      "sourceUrl": "https://numrat.com/kosove/decan/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Auto Servis F.Gashi",
+      "city": "Deçan",
+      "phone": "+38344196551",
+      "sourceUrl": "https://numrat.com/kosove/decan/auto-servis/",
+      "status": "existing-canonical-match",
+      "canonicalMatches": ["auto-servis-f-gashi-decan"],
+      "candidateId": null,
+      "nextCheck": null
+    },
+    {
+      "name": "Auto Servis Moni",
+      "city": "Deçan",
+      "phone": "+38349436294",
+      "sourceUrl": "https://numrat.com/kosove/decan/auto-servis/",
+      "status": "existing-canonical-match",
+      "canonicalMatches": ["auto-servis-moni-decan"],
+      "candidateId": null,
+      "nextCheck": null
+    },
+    {
+      "name": "Autopjesë Altini",
+      "city": "Deçan",
+      "phone": "+38344856000",
+      "sourceUrl": "https://numrat.com/kosove/decan/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "AutoService-Loni/M",
+      "city": "Deçan",
+      "phone": "+38344830244",
+      "sourceUrl": "https://numrat.com/kosove/decan/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "AutoServis XHEKI",
+      "city": "Deçan",
+      "phone": "+38344466905",
+      "sourceUrl": "https://numrat.com/kosove/decan/auto-servis/",
+      "status": "detailed-in-candidates",
+      "canonicalMatches": [],
+      "candidateId": "autoservis-xheki-decan",
+      "nextCheck": null
+    },
+    {
+      "name": "Edi Dacaj",
+      "city": "Deçan",
+      "phone": "+38349592833",
+      "sourceUrl": "https://numrat.com/kosove/decan/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "N.sh Goma te Isa",
+      "city": "Deçan",
+      "phone": "+38349625708",
+      "sourceUrl": "https://numrat.com/kosove/decan/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Peja Univerzal",
+      "city": "Deçan",
+      "phone": "+38348613940",
+      "sourceUrl": "https://numrat.com/kosove/decan/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Servisi i Gjipave te Tarzani",
+      "city": "Deçan",
+      "phone": "+38344237240",
+      "sourceUrl": "https://numrat.com/kosove/decan/auto-servis/",
+      "status": "detailed-in-candidates",
+      "canonicalMatches": [],
+      "candidateId": "servisi-gjipave-tarzani-decan",
+      "nextCheck": null
+    },
+    {
+      "name": "Toni M",
+      "city": "Deçan",
+      "phone": "+38344329435",
+      "sourceUrl": "https://numrat.com/kosove/decan/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Zekaj Universal",
+      "city": "Deçan",
+      "phone": "+38349367873",
+      "sourceUrl": "https://numrat.com/kosove/decan/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Auto Detailing Bilaku",
+      "city": "Istog",
+      "phone": "+38349877786",
+      "sourceUrl": "https://numrat.com/kosove/istog/auto-servis/",
+      "status": "existing-canonical-match",
+      "canonicalMatches": ["auto-detailing-bilaku-istog"],
+      "candidateId": null,
+      "nextCheck": null
+    },
+    {
+      "name": "Auto Folje Taulanti",
+      "city": "Istog",
+      "phone": "+38345463731",
+      "sourceUrl": "https://numrat.com/kosove/istog/auto-servis/",
+      "status": "detailed-in-candidates",
+      "canonicalMatches": [],
+      "candidateId": "auto-folje-taulanti-istog",
+      "nextCheck": null
+    },
+    {
+      "name": "Auto Gomister Llugiqi",
+      "city": "Istog",
+      "phone": "+38349305512",
+      "sourceUrl": "https://numrat.com/kosove/istog/auto-servis/",
+      "status": "detailed-in-candidates",
+      "canonicalMatches": [],
+      "candidateId": "auto-gomister-llugiqi-istog",
+      "nextCheck": null
+    },
+    {
+      "name": "Auto Pjesë Gashi",
+      "city": "Istog",
+      "phone": "+38344276373",
+      "sourceUrl": "https://numrat.com/kosove/istog/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Auto servis Vali",
+      "city": "Istog",
+      "phone": "+38344920210",
+      "sourceUrl": "https://numrat.com/kosove/istog/auto-servis/",
+      "status": "existing-canonical-match",
+      "canonicalMatches": ["auto-service-vali-istog"],
+      "candidateId": null,
+      "nextCheck": null
+    },
+    {
+      "name": "Autobratje&pjes Lendi",
+      "city": "Istog",
+      "phone": "+38345375623",
+      "sourceUrl": "https://numrat.com/kosove/istog/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Autodetailing Eli",
+      "city": "Istog",
+      "phone": "+38345925061",
+      "sourceUrl": "https://numrat.com/kosove/istog/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Autodetailing Sharani",
+      "city": "Istog",
+      "phone": "+38343844344",
+      "sourceUrl": "https://numrat.com/kosove/istog/auto-servis/",
+      "status": "existing-canonical-match",
+      "canonicalMatches": ["autodetailing-sharani-istog"],
+      "candidateId": null,
+      "nextCheck": null
+    },
+    {
+      "name": "Auto Klina Kline",
+      "city": "Klinë",
+      "phone": "+38343883662",
+      "sourceUrl": "https://numrat.com/kosove/kline/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Auto Servis Besimi",
+      "city": "Klinë",
+      "phone": "+38344173716",
+      "sourceUrl": "https://numrat.com/kosove/kline/auto-servis/",
+      "status": "existing-canonical-match",
+      "canonicalMatches": ["auto-servis-besimi-kline"],
+      "candidateId": null,
+      "nextCheck": null
+    },
+    {
+      "name": "Auto Servis BLEDI",
+      "city": "Klinë",
+      "phone": "+38349654571",
+      "sourceUrl": "https://numrat.com/kosove/kline/auto-servis/",
+      "status": "existing-canonical-match",
+      "canonicalMatches": ["auto-servis-bledi-kline"],
+      "candidateId": null,
+      "nextCheck": null
+    },
+    {
+      "name": "AutoPjese Doruntina",
+      "city": "Klinë",
+      "phone": "+38349877698",
+      "sourceUrl": "https://numrat.com/kosove/kline/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "AutoServis",
+      "city": "Klinë",
+      "phone": "+38349307943",
+      "sourceUrl": "https://numrat.com/kosove/kline/auto-servis/",
+      "status": "detailed-in-candidates",
+      "canonicalMatches": [],
+      "candidateId": "autoservis-shtupel-kline",
+      "nextCheck": null
+    },
+    {
+      "name": "AUTOSERVIS TURBO",
+      "city": "Klinë",
+      "phone": "+38344409307",
+      "sourceUrl": "https://numrat.com/kosove/kline/auto-servis/",
+      "status": "detailed-in-candidates",
+      "canonicalMatches": [],
+      "candidateId": "autoservis-turbo-kline",
+      "nextCheck": null
+    },
+    {
+      "name": "BLEDI-SH",
+      "city": "Klinë",
+      "phone": "+38343779227",
+      "sourceUrl": "https://numrat.com/kosove/kline/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Eurogoma - Klinë",
+      "city": "Klinë",
+      "phone": "+38349475111",
+      "sourceUrl": "https://numrat.com/kosove/kline/auto-servis/",
+      "status": "detailed-in-candidates",
+      "canonicalMatches": [],
+      "candidateId": "eurogoma-kline",
+      "nextCheck": null
+    },
+    {
+      "name": "Goma Te Fatosi",
+      "city": "Klinë",
+      "phone": "+38349250143",
+      "sourceUrl": "https://numrat.com/kosove/kline/auto-servis/",
+      "status": "detailed-in-candidates",
+      "canonicalMatches": [],
+      "candidateId": "goma-te-fatosi-kline",
+      "nextCheck": null
+    },
+    {
+      "name": "Granit mermer sokoli",
+      "city": "Klinë",
+      "phone": "+38349217500",
+      "sourceUrl": "https://numrat.com/kosove/kline/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "ARDHMERIA",
+      "city": "Malishevë",
+      "phone": "+38344734724",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "ARDHMERIA",
+      "city": "Malishevë",
+      "phone": "+38349111232",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Auto Armiri Transmission",
+      "city": "Malishevë",
+      "phone": "+38349451861",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "detailed-in-candidates",
+      "canonicalMatches": [],
+      "candidateId": "auto-armiri-transmission-malisheve",
+      "nextCheck": null
+    },
+    {
+      "name": "Auto Decor & Design RIKI SH.P.K",
+      "city": "Malishevë",
+      "phone": "+38349349580",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "detailed-in-candidates",
+      "canonicalMatches": [],
+      "candidateId": "auto-decor-design-riki-malisheve",
+      "nextCheck": null
+    },
+    {
+      "name": "Auto Detailing ARDI",
+      "city": "Malishevë",
+      "phone": "+38349193681",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Auto Kevini",
+      "city": "Malishevë",
+      "phone": "+38348800000",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "AUTO REFKIA",
+      "city": "Malishevë",
+      "phone": "+38343888860",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "auto sallon aag",
+      "city": "Malishevë",
+      "phone": "+38349199563",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "AUTO SALLON LIONI",
+      "city": "Malishevë",
+      "phone": "+38343905022",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Auto Service Urimi",
+      "city": "Malishevë",
+      "phone": "+38349286862",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "detailed-in-candidates",
+      "canonicalMatches": [],
+      "candidateId": "auto-service-urimi-malisheve",
+      "nextCheck": null
+    },
+    {
+      "name": "Auto servis BERATI BMW",
+      "city": "Malishevë",
+      "phone": "+38349378051",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "existing-canonical-match",
+      "canonicalMatches": ["auto-servis-berati-malisheve"],
+      "candidateId": null,
+      "nextCheck": null
+    },
+    {
+      "name": "Auto Servis GENTI Malishevë",
+      "city": "Malishevë",
+      "phone": "+38344860019",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Auto Servis & Auto Bartje Naimi",
+      "city": "Malishevë",
+      "phone": "+38349717441",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Auto Servis & Diagnoz OPEL",
+      "city": "Malishevë",
+      "phone": "+38349284990",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "existing-canonical-match",
+      "canonicalMatches": ["auto-servis-diagnoz-opel-malisheve"],
+      "candidateId": null,
+      "nextCheck": null
+    },
+    {
+      "name": "Auto Servis F&S Skender Hoxha",
+      "city": "Malishevë",
+      "phone": "+38349151054",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Auto Servis Hoti",
+      "city": "Malishevë",
+      "phone": "+38344254560",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "detailed-in-candidates",
+      "canonicalMatches": [],
+      "candidateId": "auto-servis-hoti-malisheve",
+      "nextCheck": null
+    },
+    {
+      "name": "Auto Servis Xeni",
+      "city": "Malishevë",
+      "phone": "+38349104480",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Auto servisi Joni",
+      "city": "Malishevë",
+      "phone": "+38348296530",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "AutoLarje Xhema",
+      "city": "Malishevë",
+      "phone": "+38344276434",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "AutoPjese Partner - Malishevë",
+      "city": "Malishevë",
+      "phone": "+38345130006",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Autoservis FEIMI",
+      "city": "Malishevë",
+      "phone": "+38349697172",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "existing-canonical-match",
+      "canonicalMatches": ["autoservis-feimi-malisheve"],
+      "candidateId": null,
+      "nextCheck": null
+    },
+    {
+      "name": "AutoSprint",
+      "city": "Malishevë",
+      "phone": "+38349189440",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Eurogoma - Malishevë",
+      "city": "Malishevë",
+      "phone": "+38349764711",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Eurojeta2026",
+      "city": "Malishevë",
+      "phone": "+38344229586",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Istref Begaj BI",
+      "city": "Malishevë",
+      "phone": "+38344937432",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Kadini Service",
+      "city": "Malishevë",
+      "phone": "+38349277758",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "detailed-in-candidates",
+      "canonicalMatches": [],
+      "candidateId": "kadini-service-malisheve",
+      "nextCheck": null
+    },
+    {
+      "name": "Rent a car Eroni Malisheve",
+      "city": "Malishevë",
+      "phone": "+38349393519",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    },
+    {
+      "name": "Te fazli hoti malishev",
+      "city": "Malishevë",
+      "phone": "+38349335142",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "detailed-in-candidates",
+      "canonicalMatches": [],
+      "candidateId": "te-fazli-hoti-malisheve",
+      "nextCheck": null
+    },
+    {
+      "name": "X Garage Car details",
+      "city": "Malishevë",
+      "phone": "+38348600578",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "status": "index-lead-not-fully-verified",
+      "canonicalMatches": [],
+      "candidateId": null,
+      "nextCheck": "Verify actual qualifying service, current contact and precise site from attributable sources before Maps/contact/hour acceptance. Existing historical exclusions and conflicts remain binding."
+    }
+  ],
+  "additionalTargetedSourceTriage": [
+    {
+      "candidateId": "autoservis-universal-niki-decan",
+      "name": "Autoservis Universal NIKI",
+      "city": "Deçan",
+      "sourceUrl": "https://www.facebook.com/AUTOSERVIS.NIKI.DECAN/",
+      "status": "detailed-in-candidates"
+    },
+    {
+      "candidateId": "genart-tuning-malisheve",
+      "name": "Genart Tuning",
+      "city": "Malishevë",
+      "sourceUrl": "https://www.facebook.com/people/Genart-Tuning/100091315838340/",
+      "status": "detailed-in-candidates"
+    },
+    {
+      "candidateId": "auto-servis-muslimi-skenderaj",
+      "name": "Auto Servis Muslimi",
+      "city": "Skenderaj",
+      "sourceUrl": "https://numrat.com/biznes/y8zvSaboRIC7/auto-servis-muslimi/",
+      "status": "detailed-in-candidates"
+    },
+    {
+      "candidateId": "auto-xhama-kristal-fushe-kosove",
+      "name": "Auto Xhama Kristal",
+      "city": "Fushë Kosovë",
+      "sourceUrl": "https://numrat.com/biznes/ogi66Z5i8hkP/auto-xhama-kristal/",
+      "status": "detailed-in-candidates"
+    },
+    {
+      "candidateId": "auto-xhama-super-glass-fushe-kosove",
+      "name": "Auto Xhama Super Glass",
+      "city": "Fushë Kosovë",
+      "sourceUrl": "https://numrat.com/biznes/Aj0aWXAdJiNt/auto-xhama-super-glass/",
+      "status": "detailed-in-candidates"
+    },
+    {
+      "candidateId": "auto-xhama-fadili-obiliq",
+      "name": "Auto Xhama Fadili",
+      "city": "Obiliq",
+      "sourceUrl": "https://numrat.com/biznes/vJpPjuJ5Q1fA/auto-xhama-fadili/",
+      "status": "detailed-in-candidates"
+    },
+    {
+      "candidateId": "auto-elektricist-agimi-kline",
+      "name": "Auto Elektricist Agimi",
+      "city": "Klinë",
+      "sourceUrl": "https://www.cybo.com/XK-biz/auto-elektricist-agimi",
+      "status": "detailed-in-candidates"
+    },
+    {
+      "name": "Auto Glass Kosovo",
+      "city": "Fushë Kosovë",
+      "sourceUrl": "https://autoglasskosovo.com/",
+      "status": "existing-canonical-match",
+      "canonicalMatches": ["auto-glass-kosovo-fushe-kosove"],
+      "evidence": "Targeted glass search returned the same official business domain already recorded in canonical; not a new site claim."
+    },
+    {
+      "name": "Auto Xhama Euro Glass",
+      "city": "Fushë Kosovë",
+      "sourceUrl": "https://www.instagram.com/autoxhama.euroglass/",
+      "status": "existing-canonical-match",
+      "canonicalMatches": ["auto-xhama-euro-glass-fushe-kosove"],
+      "evidence": "Public search result includes the same business name and explicit44102010 contact; current canonical already contains that branch. No fresh full profile acceptance claimed."
+    }
+  ],
+  "municipalityCategoryChecks": [
+    {
+      "municipality": "Deçan",
+      "sourceUrl": "https://numrat.com/kosove/decan/auto-servis/",
+      "sourceRecords": 12,
+      "scope": "Whole municipal auto-service index manually inspected, including available mechanic/tyre/electrics/glass/detailing categories; index classification alone is not final service proof."
+    },
+    {
+      "municipality": "Istog",
+      "sourceUrl": "https://numrat.com/kosove/istog/auto-servis/",
+      "sourceRecords": 8,
+      "scope": "Whole municipal auto-service index manually inspected, including available mechanic/tyre/electrics/glass/detailing categories; index classification alone is not final service proof."
+    },
+    {
+      "municipality": "Klinë",
+      "sourceUrl": "https://numrat.com/kosove/kline/auto-servis/",
+      "sourceRecords": 10,
+      "scope": "Whole municipal auto-service index manually inspected, including available mechanic/tyre/electrics/glass/detailing categories; index classification alone is not final service proof."
+    },
+    {
+      "municipality": "Malishevë",
+      "sourceUrl": "https://numrat.com/kosove/malisheve/auto-servis/",
+      "sourceRecords": 29,
+      "scope": "Whole municipal auto-service index manually inspected, including available mechanic/tyre/electrics/glass/detailing categories; index classification alone is not final service proof."
+    },
+    {
+      "municipality": "Klinë",
+      "category": "vehicle glass",
+      "sourceUrl": "https://duckduckgo.com/?q=auto+xhama+Klin%C3%AB",
+      "result": "Focused search surfaced mainly other-town glass firms and parts/municipal records; expanded relevant own-source leads in FusheKosove, detecting two existing businesses and checking three further identities."
+    },
+    {
+      "municipality": "Klinë",
+      "category": "auto-electrics",
+      "sourceUrl": "https://duckduckgo.com/?q=auto+elektricist+Klin%C3%AB",
+      "result": "Agimi directory lead could not be read beyond provider security check; native Facebook Pages search did not yield an attributable current Kosovo contact."
+    },
+    {
+      "municipality": "Deçan",
+      "category": "detailing",
+      "result": "Public local-category search did not resolve the historical AutoCityDetailing identity. An unrelated/unattributed result was not adopted; no copied Google business fields retained."
+    },
+    {
+      "municipality": "Istog",
+      "category": "detailing",
+      "result": "Bilaku and Sharani already exist; Eli prior conflict remains without new evidence; Taulanti wrapping/name alone did not prove qualifying detailing."
+    },
+    {
+      "municipality": "Malishevë",
+      "category": "vehicle restoration and electronic/transmission work",
+      "result": "Own Armiri website and own RIKI original restoration post supplied concrete service proof; Genart precise-site correspondence remains held."
+    }
+  ],
+  "openingHours": {
+    "preparedResearchedPlans": 4,
+    "preparedAssumedPlans": 2,
+    "publishedResearchedPlans": 0,
+    "publishedAssumedPlans": 0,
+    "revision": "854f8adfb0087a4f064fc420bc332479c4265ca00ebc5a8d83671a8ec1a6317c"
+  },
+  "publicBusinessEmailSummary": {
+    "preparedWithSourcedEmail": 4,
+    "preparedWithoutEmail": 2,
+    "publishedWithSourcedEmail": 0,
+    "publishedWithoutEmail": 0
+  },
+  "publication": {
+    "pr": null,
+    "release": null,
+    "commit": null,
+    "reason": "Six daily additions prepared locally; full checks, exact-head independent review, CI, release and live acceptance pending."
+  },
+  "after": {
+    "total": 250,
+    "published": 250,
+    "scope": "Local canonical preparation only; publication unconfirmed."
+  }
+}
