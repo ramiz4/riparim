@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "cb04f59fa021df774e9734f4217bd91c48d06e0b72689b6c36f881547aa95679",
+  "revision": "854f8adfb0087a4f064fc420bc332479c4265ca00ebc5a8d83671a8ec1a6317c",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -448,6 +448,87 @@
       }
     },
     {
+      "id": "auto-armiri-transmission-malisheve",
+      "expected": {
+        "name": "Auto Armiri Transmission",
+        "city": "Malishevë",
+        "address": "532 Skenderbeu",
+        "phone": "+38349451861"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-26",
+        "source": "https://autoarmiri.com/",
+        "sourceName": "Auto Armiri Transmission",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own complete homepage/services/contact and independent detail have no weekly schedule. Focused brand/email/Facebook/Instagram search found own website only; no attributable social schedule found. Central explicitly assumed default required. Checked sources: https://autoarmiri.com/ https://autoarmiri.com/contact.php?lang=sq https://numrat.com/biznes/MFphedO7MYBx/auto-armiri-transmission/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-beli-ferizaj",
       "expected": {
         "name": "Auto Beli",
@@ -614,6 +695,95 @@
           "08:00-18:00",
           "08:00-18:00",
           "Geschlossen",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-decor-design-riki-malisheve",
+      "expected": {
+        "name": "Auto Decor & Design RIKI SH.P.K",
+        "city": "Malishevë",
+        "address": "Rr. Imer Krasniqi Mirushë",
+        "phone": "+38349349580"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-26",
+        "source": "https://www.facebook.com/autodecor.design.riki/",
+        "sourceName": "Auto Decor & Design RIKI SH.P.K",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own complete weekly-hours popup reports updated about2years ago; present viewing is not current operator confirmation. Own full7dayplan explicitly read; no Google hours copied. Source is undated beyond relative age; no contradictory independent accepted schedule. Checked sources: https://www.facebook.com/autodecor.design.riki/ https://numrat.com/biznes/NsuatCm3Q86e/auto-decor-design-riki-sh-p-k/ https://www.facebook.com/autodecor.design.riki/posts/pfbid0DQ8m8oZUMUB8RCA5kZEvBPpdiVFsP2yrGafyB9yqqBW1tneft5soNPKJG2MvRoAQl No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "08:00-17:00",
+          "08:00-17:00",
+          "08:00-17:00",
+          "08:00-17:00",
+          "08:00-17:00",
+          "09:00-16:00",
           "Geschlossen"
         ],
         "earlierPlan": ""
@@ -10104,6 +10274,101 @@
       }
     },
     {
+      "id": "auto-servis-muslimi-skenderaj",
+      "expected": {
+        "name": "Auto Servis Muslimi",
+        "city": "Skenderaj",
+        "address": "Ulpiana, 20",
+        "phone": "+38349382088"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-26",
+        "source": "https://www.facebook.com/p/Auto-Servis-Muslimi-61580186164779/",
+        "sourceName": "Auto Servis Muslimi",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own business-hours dialog explicitly says continuously open, updated about1year ago. No exact update date invented. Own published always-open schedule represented as7full days; not a current operator confirmation or promise of on-demand availability. No Google hours copied and imported schedule must not assert current open/closed status. Checked sources: https://www.facebook.com/p/Auto-Servis-Muslimi-61580186164779/ https://numrat.com/biznes/y8zvSaboRIC7/auto-servis-muslimi/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-servis-naimi-vushtrri",
       "expected": {
         "name": "Auto Servis Naimi",
@@ -12536,6 +12801,95 @@
       }
     },
     {
+      "id": "auto-xhama-kristal-fushe-kosove",
+      "expected": {
+        "name": "Auto Xhama Kristal",
+        "city": "Fushë Kosovë",
+        "address": "Rruga e pejes, Bresje",
+        "phone": "+38344360362"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-26",
+        "source": "https://www.facebook.com/p/Auto-Xhama-Kristal-100063482621925/",
+        "sourceName": "Auto Xhama Kristal",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own full seven-day hours dialog read; no source update date shown. Today's viewing is not operator confirmation. Complete own plan matched to exact business via current paired phones, identity and Bresje location; no Google hours copied. Checked sources: https://www.facebook.com/p/Auto-Xhama-Kristal-100063482621925/ https://numrat.com/biznes/ogi66Z5i8hkP/auto-xhama-kristal/ https://www.facebook.com/permalink.php?story_fbid=pfbid0cKLAgi5ZP4hLSiHZwXj6YfRw5mLAARcgpy418FmQpR3ShpGthinbqSRhSC19v3Ysl&id=100063482621925 https://www.instagram.com/autoxhamakristal_/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-xhama-premium-fushe-kosove",
       "expected": {
         "name": "Auto Xhama Premium",
@@ -12612,6 +12966,95 @@
         "sourceName": "Auto Xhama Premium",
         "researchStatus": "Gefunden (eigener Betriebsauftritt)",
         "notes": "Own public Facebook business-hours dialog lists full week, updated about nine months ago. Exact published business phone matches verified profile; retained as public research, not owner confirmation.",
+        "originalWeek": [
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-xhama-super-glass-fushe-kosove",
+      "expected": {
+        "name": "Auto Xhama Super Glass",
+        "city": "Fushë Kosovë",
+        "address": "335 Rruga E Pejës",
+        "phone": "+38344744311"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-26",
+        "source": "https://www.facebook.com/autoxhama/",
+        "sourceName": "Auto Xhama Super Glass",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own full seven-day hours dialog read; no update date shown. Viewing today is not operator confirmation. Source matched to exact workshop contact and independently located site; no Google hours copied. Checked sources: https://www.facebook.com/autoxhama/ https://numrat.com/biznes/Aj0aWXAdJiNt/auto-xhama-super-glass/ https://www.instagram.com/autoxhamasuperglass/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
         "originalWeek": [
           "09:00-18:00",
           "09:00-18:00",
@@ -14788,6 +15231,87 @@
           "08:00-20:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "autoservis-shtupel-kline",
+      "expected": {
+        "name": "AutoServis",
+        "city": "Klinë",
+        "address": "Shtupel, 9 Fadil Zhabota",
+        "phone": "+38349307943"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-26",
+        "source": "https://numrat.com/biznes/0w41Z6tlWJ97/autoservis/",
+        "sourceName": "AutoServis",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No complete week on independent full detail; no attributable own website/Facebook/Instagram found. Prepare central explicitly assumed default only after remaining gates. Checked sources: https://numrat.com/biznes/0w41Z6tlWJ97/autoservis/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },

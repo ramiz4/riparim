@@ -150,6 +150,36 @@
       }
     },
     {
+      "id": "auto-armiri-transmission-malisheve",
+      "sourceHash": "67c9f38a0bea9845ae0cae34c482d73ab15288d51c2b6fd937f18c08ffc2d911",
+      "sq": {
+        "specialty": "Servis për ndërrues automatikë",
+        "description": "Auto Armiri Transmission në Malishevë ofron diagnostikim, mirëmbajtje dhe riparim të ndërruesve automatikë sipas faqes së vet. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Diagnostikim, mirëmbajtje dhe riparim i ndërruesve automatikë"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Automatic transmission service",
+        "description": "Auto Armiri Transmission in Malishevë offers diagnosis, maintenance and repair of automatic transmissions according to its own website. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Diagnosis, maintenance and repair of automatic transmissions"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services",
+          "Own business profile: business contact and services"
+        ]
+      }
+    },
+    {
       "id": "auto-beli-ferizaj",
       "sourceHash": "d516fe956a93fa02e0f2d2922e9d60772be0c8e4984bc3302e5b1dceb71fd9ab",
       "sq": {
@@ -200,6 +230,34 @@
         "sourceTitles": [
           "Public directory: name, contact and vehicle service category",
           "Directory: name, phone and Plus Code address checked again"
+        ]
+      }
+    },
+    {
+      "id": "auto-decor-design-riki-malisheve",
+      "sourceHash": "abdf86835cbb89fd437fa7d1450bf6814778a9ba5919f00f5d496b2ca538e14e",
+      "sq": {
+        "specialty": "Restaurim i brendshëm dhe i jashtëm i veturave",
+        "description": "Auto Decor & Design RIKI SH.P.K në Malishevë ofron restaurim profesional të pjesës së brendshme dhe të jashtme të veturave sipas publikimit të vet. Shtrirja e punimeve dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Restaurim i pjesës së brendshme dhe të jashtme të veturave"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle interior and exterior restoration",
+        "description": "Auto Decor & Design RIKI SH.P.K in Malishevë offers professional vehicle interior and exterior restoration according to its own business post. Please confirm the scope of work and appointments directly with the business.",
+        "serviceDetails": ["Vehicle interior and exterior restoration"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services",
+          "Own business profile: business contact and services"
         ]
       }
     },
@@ -3366,6 +3424,34 @@
       }
     },
     {
+      "id": "auto-servis-muslimi-skenderaj",
+      "sourceHash": "7f73d4005a2bdc74c934479863349bb010b6f23553814662634fc558691ed94b",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis Muslimi në Skenderaj ofron shërbime mekanike për vetura sipas direktorisë publike të bizneseve. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis Muslimi in Skenderaj offers mechanical passenger-car service according to the public business directory. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-naimi-vushtrri",
       "sourceHash": "8208c49d00b20dcd4357d3bdd28e2c5fb31106301e58984ca71223306e138872",
       "sq": {
@@ -4146,6 +4232,34 @@
       }
     },
     {
+      "id": "auto-xhama-kristal-fushe-kosove",
+      "sourceHash": "e2d9b751e36f110fd1f17e1f6f600e3fa794353ebb25c82aa0c80e049dd2d3cf",
+      "sq": {
+        "specialty": "Riparim dhe ndërrim i xhamave të veturave",
+        "description": "Auto Xhama Kristal në Fushë Kosovë ofron riparim dhe ndërrim të xhamave të automjeteve sipas profilit të vet. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Riparim dhe ndërrim i xhamave të veturave"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet",
+          "Profili i vet i biznesit: kontakti dhe shërbimet",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle glass repair and replacement",
+        "description": "Auto Xhama Kristal in Fushë Kosovë offers vehicle glass repair and replacement according to its own business profile. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Passenger-car glass repair and replacement"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services",
+          "Own business profile: business contact and services",
+          "Own business profile: business contact and services"
+        ]
+      }
+    },
+    {
       "id": "auto-xhama-premium-fushe-kosove",
       "sourceHash": "e97bbbc0182d50b092390ad03f20e6029154e1fe5c935050599f29dd1b586a44",
       "sq": {
@@ -4174,6 +4288,32 @@
         "sourceTitles": [
           "Own Instagram page: name, location, contact and offered services",
           "Own Facebook page: name, location, contact and offered services"
+        ]
+      }
+    },
+    {
+      "id": "auto-xhama-super-glass-fushe-kosove",
+      "sourceHash": "9ba1a6481b94a14f69f0b8e4e15dad8add91c087bba0c7eb75b02ee418471dab",
+      "sq": {
+        "specialty": "Shërbime për xhama të veturave",
+        "description": "Auto Xhama Super Glass në Fushë Kosovë ofron shërbime për xhama të automjeteve sipas profilit të vet. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime për xhama të veturave"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle glass service",
+        "description": "Auto Xhama Super Glass in Fushë Kosovë offers vehicle glass services according to its own business profile. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Passenger-car glass services"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services",
+          "Own business profile: business contact and services"
         ]
       }
     },
@@ -4880,6 +5020,32 @@
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category",
           "Contact, location and passenger-car service cross-check dated 5 October 2026"
+        ]
+      }
+    },
+    {
+      "id": "autoservis-shtupel-kline",
+      "sourceHash": "42798a31094ce92f5a9dec4581e1562be50f7f66c394d7050aedfb56ffadf894",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "AutoServis në Klinë ofron shërbime mekanike për vetura sipas direktorisë publike të bizneseve. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "AutoServis in Klinë offers mechanical passenger-car service according to the public business directory. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
         ]
       }
     },
