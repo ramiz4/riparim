@@ -639,6 +639,20 @@
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
     },
     {
+      "workshopId": "auto-gomister-llugiqi-istog",
+      "matchedName": "Auto Gomister Llugiqi",
+      "matchedPhone": "+38349305512",
+      "matchedCity": "Istog",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/aFKoatrlBolF/auto-gomister-llugiqi/",
+        "https://www.instagram.com/autodetailingllugiqi/",
+        "https://www.facebook.com/profile.php?id=100094977326420&sk=directory_basic_info"
+      ],
+      "notes": "Complete Numrat detail no website/email; expanded own Instagram bio lists only both phones and street. Native Facebook Pages search found same-name page, but full Info/Details exposes no contact/site/week; not attributed as additional identity evidence. No usable public email found."
+    },
+    {
       "workshopId": "auto-laker-kimi-prishtina",
       "matchedName": "Auto Laker Kimi",
       "matchedPhone": "+38344294811",
@@ -1502,6 +1516,18 @@
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. At least one additional directory search was limited by HTTP 429. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
     },
     {
+      "workshopId": "auto-servis-arberi-suhareke",
+      "matchedName": "Auto servis arberi",
+      "matchedPhone": "+38349699364",
+      "matchedCity": "Suharekë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/U3QDmq7OewRI/auto-servis-arberi/"
+      ],
+      "notes": "Full directory no email/site; exact name/town/phone/email/Facebook/Instagram search no results. Native Facebook Pages found Ferizaj Arberi with differentphone45869833, rejected. Second sparse Arberi parts-shop page100093075909786 full Info/Details supplies no matching contact/site/email/week, not attributed."
+    },
+    {
       "workshopId": "auto-servis-arlindi-prishtina",
       "matchedName": "Auto Servis Arlindi",
       "matchedPhone": "+38344848728",
@@ -1774,6 +1800,30 @@
         "https://gjirafa.biz/auto-servis-burimi-1/"
       ],
       "notes": "Full exact43directory noemail. Broadname/townweb/nativeFacebook searches and strongestowncandidatefullprofile checked; no attributable own43contactsite/Instagram/email found. Gllamnik49profile remains unassigned; its fields notborrowed. Gjirafa detailedresult isdifferentKamenicë44business, notused. No guessedaddress."
+    },
+    {
+      "workshopId": "auto-servis-cadraki-suhareke",
+      "matchedName": "Auto Servis Çadraki",
+      "matchedPhone": "+38349746168",
+      "matchedCity": "Suharekë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/299oXgF4oAgO/auto-servis-cadraki/"
+      ],
+      "notes": "Complete directory no email/site; exact business/Facebook/Instagram/email query found no target, only unrelated Gjekaj/Shkoder and generic service profiles, not adopted. Native Facebook Pages search also found only unrelated Albani; no exact attributable contact source."
+    },
+    {
+      "workshopId": "auto-servis-champion-suhareke",
+      "matchedName": "Auto servis Champion",
+      "matchedPhone": "+38349183874",
+      "matchedCity": "Suharekë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/t7L5kPjV2W3w/auto-servis-champion/"
+      ],
+      "notes": "Full independent directory no email/site. Focused business/town/Facebook/Instagram/email query found AutoServiceChampion Facebook; direct full Info/Details explicitly identifies Ferizaj70510, so not attributed to target. No exact target own Instagram/website/business email found."
     },
     {
       "workshopId": "auto-servis-cima-ferizaj",
@@ -2678,6 +2728,21 @@
       "notes": "Explicit public business contact on the attributed own source. No deliverability, consent or ownership assertion; no contact message sent."
     },
     {
+      "workshopId": "auto-servis-skenda-suhareke",
+      "matchedName": "Auto Servis SKENDA",
+      "matchedPhone": "+38344379273",
+      "matchedCity": "Suharekë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/6nHyhXAcdHpA/auto-servis-skenda/",
+        "https://www.instagram.com/servis.skenda/",
+        "https://www.facebook.com/servis.skenda/",
+        "https://www.facebook.com/autodekorskenda/"
+      ],
+      "notes": "Full independent detail no email/site. Own-looking Instagram has no matchingphone/site; same-name Facebook personal profile not harvested. Skenda.autodekor business has different contact49536396 and no demonstrated link to target44379273; its data not adopted. No attributable business email found."
+    },
+    {
       "workshopId": "auto-servis-trimi-prishtina",
       "matchedName": "Auto Servis Trimi",
       "matchedPhone": "+38349195447",
@@ -2741,6 +2806,18 @@
         "https://www.google.com/search?q=%2B38344269491%20Lipjan%20email%20Facebook%20Instagram"
       ],
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
+    },
+    {
+      "workshopId": "auto-servis-vellezerit-bytyci-suhareke",
+      "matchedName": "Auto Servis Vellezerit Bytyçi",
+      "matchedPhone": "+38349648855",
+      "matchedCity": "Suharekë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/Akksvi0i2TUh/auto-servis-vellezerit-bytyci/"
+      ],
+      "notes": "Full directory no email/site. Focused business/email/Facebook/Instagram search identified possible Facebook100056657059750; full Bio/Info/Details has no attributable exact contact/site/email/week. No Instagram found; no same-name private or unassigned contact adopted."
     },
     {
       "workshopId": "auto-servis-visari-prizren",
@@ -2831,6 +2908,18 @@
         "https://autoxhelali.com/contact-page/"
       ],
       "notes": "The business's own website links its current contact and previous domain. Both publicly listed addresses adopted."
+    },
+    {
+      "workshopId": "auto-servis-xiki-suhareke",
+      "matchedName": "AUTO servis-Xiki",
+      "matchedPhone": "+38348352282",
+      "matchedCity": "Suharekë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/YVWDCtuO8n7z/auto-servis-xiki/"
+      ],
+      "notes": "Full directory no email/site; focused business/town/email/Facebook/Instagram search yielded no attributable own source. Native Facebook Pages returned Xheki and other LimarXiki business identities including differentnumber044546770; no unsupported assignment or borrowed contact."
     },
     {
       "workshopId": "auto-servis-xoni-gjilan",
@@ -3385,6 +3474,18 @@
         "https://www.google.com/search?q=%22049%20850%20252%22%20Peja"
       ],
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. Public Instagram candidates rechecked while logged in with their complete bio. At least one contact page was not publicly available. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
+    },
+    {
+      "workshopId": "autoservis-altini-suhareke",
+      "matchedName": "Autoservis Altini",
+      "matchedPhone": "+38349595380",
+      "matchedCity": "Suharekë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/8TRuVeDjETWp/autoservis-altini/"
+      ],
+      "notes": "Full directory no email/site; targeted name/town/Facebook/Instagram/email search only unrelated Tirana motorcycle workshop, not adopted. Native Facebook Pages exact business/town search reports no matching results. No attributable business email found."
     },
     {
       "workshopId": "autoservis-ervini-rahovec",

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "854f8adfb0087a4f064fc420bc332479c4265ca00ebc5a8d83671a8ec1a6317c",
+  "revision": "5173a26e9ce22534bcc9667602038fc18920509128a49725a250612168e4eefb",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -2720,6 +2720,87 @@
           "09:00-18:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-gomister-llugiqi-istog",
+      "expected": {
+        "name": "Auto Gomister Llugiqi",
+        "city": "Istog",
+        "address": "Bajram Gashi, 94",
+        "phone": "+38349305512"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-27",
+        "source": "https://numrat.com/biznes/aFKoatrlBolF/auto-gomister-llugiqi/",
+        "sourceName": "Auto Gomister Llugiqi",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No independently sourced weekly schedule; update age unavailable. Full directory, expanded own Instagram bio and visible posts expose no complete week. Same-name Facebook Info/Details has no schedule and lacks exact attribution. Use central explicitly assumed default only after remaining import gates. Checked sources: https://numrat.com/biznes/aFKoatrlBolF/auto-gomister-llugiqi/ https://www.instagram.com/autodetailingllugiqi/ https://www.facebook.com/profile.php?id=100094977326420&sk=directory_basic_info No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -6339,6 +6420,87 @@
       }
     },
     {
+      "id": "auto-servis-arberi-suhareke",
+      "expected": {
+        "name": "Auto servis arberi",
+        "city": "Suharekë",
+        "address": "Tre te renet",
+        "phone": "+38349699364"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-27",
+        "source": "https://numrat.com/biznes/U3QDmq7OewRI/auto-servis-arberi/",
+        "sourceName": "Auto servis arberi",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No attributed schedule; source age unavailable. No complete week in independent directory; inspected own-looking social profiles could not be attributed by exact contact/site and expose no usable week. Central explicitly assumed default required. Checked sources: https://numrat.com/biznes/U3QDmq7OewRI/auto-servis-arberi/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-servis-arlindi-prishtina",
       "expected": {
         "name": "Auto Servis Arlindi",
@@ -7380,6 +7542,168 @@
         "sourceName": "Auto Servis Burimi",
         "researchStatus": "Standardzeiten (angenommen)",
         "notes": "Exact43directory updated12October but no week. No attributable own43sourceweek found; unmatched49profile and foreignKamenicëdirectory cannot supply thissitehours. Central assumed defaults required, no Google hours, ownerconfirmation/current-open claim. Checked sources: https://numrat.com/biznes/I1arxQWjEdhi/auto-servis-burimi/ https://www.facebook.com/search/pages/?q=Auto%20Servis%20Burimi%20Podujeve https://duckduckgo.com/?q=Auto+Servis+Burimi+Podujeve No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-cadraki-suhareke",
+      "expected": {
+        "name": "Auto Servis Çadraki",
+        "city": "Suharekë",
+        "address": "Rr Idriz Seferi",
+        "phone": "+38349746168"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-27",
+        "source": "https://numrat.com/biznes/299oXgF4oAgO/auto-servis-cadraki/",
+        "sourceName": "Auto Servis Çadraki",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No attributable complete weekly plan; source publication/update age unavailable. Full independent directory no weekly plan; targeted exactname/Facebook/Instagram/email query found no attributable own source. Central explicitly assumed default required. Checked sources: https://numrat.com/biznes/299oXgF4oAgO/auto-servis-cadraki/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-champion-suhareke",
+      "expected": {
+        "name": "Auto servis Champion",
+        "city": "Suharekë",
+        "address": "p.n Rr. Skenderbeu",
+        "phone": "+38349183874"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-27",
+        "source": "https://numrat.com/biznes/t7L5kPjV2W3w/auto-servis-champion/",
+        "sourceName": "Auto servis Champion",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No attributable week; source age unavailable. Full directory no weeklyplan; only own-looking source is different-town business and cannot supply targethours. Central explicitly assumed default required. Checked sources: https://numrat.com/biznes/t7L5kPjV2W3w/auto-servis-champion/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
         "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
@@ -11415,6 +11739,87 @@
       }
     },
     {
+      "id": "auto-servis-skenda-suhareke",
+      "expected": {
+        "name": "Auto Servis SKENDA",
+        "city": "Suharekë",
+        "address": "Sopije",
+        "phone": "+38344379273"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-27",
+        "source": "https://numrat.com/biznes/6nHyhXAcdHpA/auto-servis-skenda/",
+        "sourceName": "Auto Servis SKENDA",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No attributed weekly schedule; source age unavailable. Full directory no schedule. Inspected Instagram and Facebook homonyms cannot be assigned to this exactphone/site, so their schedules are unusable. Central explicitly assumed default required. Checked sources: https://numrat.com/biznes/6nHyhXAcdHpA/auto-servis-skenda/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-servis-trimi-prishtina",
       "expected": {
         "name": "Auto Servis Trimi",
@@ -11678,6 +12083,87 @@
           "09:00-18:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-vellezerit-bytyci-suhareke",
+      "expected": {
+        "name": "Auto Servis Vellezerit Bytyçi",
+        "city": "Suharekë",
+        "address": "Suharekë 23000",
+        "phone": "+38349648855"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-27",
+        "source": "https://numrat.com/biznes/Akksvi0i2TUh/auto-servis-vellezerit-bytyci/",
+        "sourceName": "Auto Servis Vellezerit Bytyçi",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No attributed schedule; source age unavailable. No complete week in independent directory; inspected own-looking social profiles could not be attributed by exact contact/site and expose no usable week. Central explicitly assumed default required. Checked sources: https://numrat.com/biznes/Akksvi0i2TUh/auto-servis-vellezerit-bytyci/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -12026,6 +12512,87 @@
           "10:00-18:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-xiki-suhareke",
+      "expected": {
+        "name": "AUTO servis-Xiki",
+        "city": "Suharekë",
+        "address": "Suharekë 23000",
+        "phone": "+38348352282"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-27",
+        "source": "https://numrat.com/biznes/YVWDCtuO8n7z/auto-servis-xiki/",
+        "sourceName": "AUTO servis-Xiki",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No attributable weekly plan; source age unavailable. Full directory no week; no attributable own website/Facebook/Instagram schedule found. Central explicitly assumed default required. Checked sources: https://numrat.com/biznes/YVWDCtuO8n7z/auto-servis-xiki/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -14551,6 +15118,87 @@
           "07:30-20:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "autoservis-altini-suhareke",
+      "expected": {
+        "name": "Autoservis Altini",
+        "city": "Suharekë",
+        "address": "Rr Uji i Mire 99 Savrovë",
+        "phone": "+38349595380"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-27",
+        "source": "https://numrat.com/biznes/8TRuVeDjETWp/autoservis-altini/",
+        "sourceName": "Autoservis Altini",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No attributed schedule; source age unavailable. No weekly schedule in full directory and no attributable own website/Facebook/Instagram source found; central explicitly assumed default required. Checked sources: https://numrat.com/biznes/8TRuVeDjETWp/autoservis-altini/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
