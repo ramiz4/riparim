@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-26T06:21:57.840Z",
+  "updatedAt": "2026-10-27T04:29:03.830Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 250,
+    "published": 258,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 250 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 250,
+    "reason": "All 258 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 258,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -1559,6 +1559,53 @@
             "https://autoglasskosovo.com/location"
           ],
           "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
+        }
+      }
+    },
+    {
+      "id": "auto-gomister-llugiqi-istog",
+      "name": "Auto Gomister Llugiqi",
+      "city": "Istog",
+      "address": "Bajram Gashi, 94",
+      "phone": "+38349305512",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349305512",
+      "brands": [],
+      "services": ["Reifen & Klima", "Karosserie & Lack"],
+      "serviceDetails": [
+        "Reifenservice, Fahrzeugpolieren, Keramikschutz und Innenreinigung"
+      ],
+      "languages": [],
+      "specialty": "Reifenservice und Fahrzeugaufbereitung",
+      "description": "Auto Gomister Llugiqi in Istog bietet laut Firmenverzeichnis Reifenservice und laut eigenem Betriebsauftritt Fahrzeugpolieren, Keramikschutz und Innenreinigung an. Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.780903,
+      "lng": 20.480438,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/aFKoatrlBolF/auto-gomister-llugiqi/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.instagram.com/autodetailingllugiqi/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-27",
+      "status": "published",
+      "updatedAt": "2026-10-27T04:28:49.713Z",
+      "google": {
+        "placeId": "ChIJ4dMai_AZUxMR7wuQpaA8pYo",
+        "matchedAt": "2026-10-27T04:00:15.318915+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/aFKoatrlBolF/auto-gomister-llugiqi/",
+            "https://www.instagram.com/autodetailingllugiqi/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
         }
       }
     },
@@ -3721,6 +3768,45 @@
       }
     },
     {
+      "id": "auto-servis-arberi-suhareke",
+      "name": "Auto servis arberi",
+      "city": "Suharekë",
+      "address": "Tre te renet",
+      "phone": "+38349699364",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto servis arberi in Suharekë bietet laut öffentlichem Firmenverzeichnis mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.36319,
+      "lng": 20.833371,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/U3QDmq7OewRI/auto-servis-arberi/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-27",
+      "status": "published",
+      "updatedAt": "2026-10-27T04:28:49.713Z",
+      "google": {
+        "placeId": "ChIJP6x7V6qbUxMRlXHWL3evSM8",
+        "matchedAt": "2026-10-27T04:13:23.434493+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/U3QDmq7OewRI/auto-servis-arberi/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-servis-arlindi-prishtina",
       "name": "Auto Servis Arlindi",
       "city": "Prishtina",
@@ -4306,6 +4392,84 @@
             "https://numrat.com/biznes/I1arxQWjEdhi/auto-servis-burimi/"
           ],
           "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, exact independently sourced main number and sourced site. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed. Detailed source decisions are in the dated daily manifest."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-cadraki-suhareke",
+      "name": "Auto Servis Çadraki",
+      "city": "Suharekë",
+      "address": "Rr Idriz Seferi",
+      "phone": "+38349746168",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis Çadraki in Suharekë bietet laut öffentlichem Firmenverzeichnis mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.361852,
+      "lng": 20.848588,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/299oXgF4oAgO/auto-servis-cadraki/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-27",
+      "status": "published",
+      "updatedAt": "2026-10-27T04:28:49.713Z",
+      "google": {
+        "placeId": "ChIJdd1QCwCbUxMR_l-knxVk3VM",
+        "matchedAt": "2026-10-27T04:17:19.157874+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/299oXgF4oAgO/auto-servis-cadraki/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-champion-suhareke",
+      "name": "Auto servis Champion",
+      "city": "Suharekë",
+      "address": "p.n Rr. Skenderbeu",
+      "phone": "+38349183874",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349183874",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto servis Champion in Suharekë bietet laut öffentlichem Firmenverzeichnis mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.3599,
+      "lng": 20.816613,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/t7L5kPjV2W3w/auto-servis-champion/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-27",
+      "status": "published",
+      "updatedAt": "2026-10-27T04:28:49.713Z",
+      "google": {
+        "placeId": "ChIJbS_HCPebUxMRGbwhqKpXTDk",
+        "matchedAt": "2026-10-27T04:19:02.264719+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/t7L5kPjV2W3w/auto-servis-champion/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
         }
       }
     },
@@ -6505,6 +6669,45 @@
       }
     },
     {
+      "id": "auto-servis-skenda-suhareke",
+      "name": "Auto Servis SKENDA",
+      "city": "Suharekë",
+      "address": "Sopije",
+      "phone": "+38344379273",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344379273",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis SKENDA in Suharekë bietet laut öffentlichem Firmenverzeichnis mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.339364,
+      "lng": 20.834398,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/6nHyhXAcdHpA/auto-servis-skenda/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-27",
+      "status": "published",
+      "updatedAt": "2026-10-27T04:28:49.713Z",
+      "google": {
+        "placeId": "ChIJf49b0HibUxMRXiIgbALvQHw",
+        "matchedAt": "2026-10-27T04:09:00.328384+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/6nHyhXAcdHpA/auto-servis-skenda/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-servis-trimi-prishtina",
       "name": "Auto Servis Trimi",
       "city": "Prishtina",
@@ -6635,6 +6838,45 @@
             "https://www.gjithebiznesi.com/XK/auto-servis-univerzal_1s-044-269-491"
           ],
           "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-vellezerit-bytyci-suhareke",
+      "name": "Auto Servis Vellezerit Bytyçi",
+      "city": "Suharekë",
+      "address": "Suharekë 23000",
+      "phone": "+38349648855",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis Vellezerit Bytyçi in Suharekë bietet laut öffentlichem Firmenverzeichnis mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.360421,
+      "lng": 20.819836,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/Akksvi0i2TUh/auto-servis-vellezerit-bytyci/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-27",
+      "status": "published",
+      "updatedAt": "2026-10-27T04:28:49.713Z",
+      "google": {
+        "placeId": "ChIJP5j-XvubUxMR23O6S4oXCc0",
+        "matchedAt": "2026-10-27T04:13:23.434493+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/Akksvi0i2TUh/auto-servis-vellezerit-bytyci/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
         }
       }
     },
@@ -6837,6 +7079,45 @@
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJgc9JBjKUUxMRoP3PNI5Eo-U"
           ],
           "note": "Independent business evidence explicitly links the previous contact to Auto Folje Xhelali. The business's own profile confirms the current contact, address and exact Directions destination within 300 meters of the same Google entry."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-xiki-suhareke",
+      "name": "AUTO servis-Xiki",
+      "city": "Suharekë",
+      "address": "Suharekë 23000",
+      "phone": "+38348352282",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38348352282",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "AUTO servis-Xiki in Suharekë bietet laut öffentlichem Firmenverzeichnis mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.362461,
+      "lng": 20.831925,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/YVWDCtuO8n7z/auto-servis-xiki/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-27",
+      "status": "published",
+      "updatedAt": "2026-10-27T04:28:49.713Z",
+      "google": {
+        "placeId": "ChIJwVnTawCbUxMRfpmO4lAVHkw",
+        "matchedAt": "2026-10-27T04:10:50.160671+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/YVWDCtuO8n7z/auto-servis-xiki/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
         }
       }
     },
@@ -8310,6 +8591,45 @@
             "https://www.google.com/maps/?cid=13500840597129851265"
           ],
           "note": "Individual Google listing confirmed using an independently evidenced phone number, workshop name and precise address; CID and actual Place ID designate the same entry. No Google business details or reviews adopted into the profile source."
+        }
+      }
+    },
+    {
+      "id": "autoservis-altini-suhareke",
+      "name": "Autoservis Altini",
+      "city": "Suharekë",
+      "address": "Rr Uji i Mire 99 Savrovë",
+      "phone": "+38349595380",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Autoservis Altini in Suharekë bietet laut öffentlichem Firmenverzeichnis mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.333815,
+      "lng": 20.867999,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/8TRuVeDjETWp/autoservis-altini/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-27",
+      "status": "published",
+      "updatedAt": "2026-10-27T04:28:49.713Z",
+      "google": {
+        "placeId": "ChIJw0VUZxWbUxMREqrl_iDfl0c",
+        "matchedAt": "2026-10-27T04:11:48.560294+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/8TRuVeDjETWp/autoservis-altini/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
         }
       }
     },

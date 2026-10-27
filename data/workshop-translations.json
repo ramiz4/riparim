@@ -900,6 +900,34 @@
       }
     },
     {
+      "id": "auto-gomister-llugiqi-istog",
+      "sourceHash": "1ece14f549d8a8b0c71516595b2e58b0348b25c81e6caa96aa0affa913cb3dae",
+      "sq": {
+        "specialty": "Shërbime për goma dhe kujdes për vetura",
+        "description": "Auto Gomister Llugiqi në Istog ofron shërbime për goma sipas direktorisë së bizneseve dhe lustrim, mbrojtje qeramike e pastrim të brendshëm sipas profilit të vet. Punimet dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime për goma, lustrim, mbrojtje qeramike dhe pastrim i brendshëm"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Tyre service and vehicle detailing",
+        "description": "Auto Gomister Llugiqi in Istog offers tyre services according to the business directory and vehicle polishing, ceramic protection and interior cleaning according to its own business profile. Please confirm work and appointments directly with the business.",
+        "serviceDetails": [
+          "Tyre services, vehicle polishing, ceramic protection and interior cleaning"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services"
+        ]
+      }
+    },
+    {
       "id": "auto-laker-kimi-prishtina",
       "sourceHash": "2b635d078160c25b93a461ca7670bac04ae8ea941e8e3b17c5942f7a3a8e8a02",
       "sq": {
@@ -2140,6 +2168,32 @@
       }
     },
     {
+      "id": "auto-servis-arberi-suhareke",
+      "sourceHash": "20a56d66523bc240f19b645284ccfab75bef9730ea9731bb10391398241ff0ad",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto servis arberi në Suharekë ofron shërbime mekanike për vetura sipas direktorisë publike të bizneseve. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto servis arberi in Suharekë offers mechanical passenger-car service according to the public business directory. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-arlindi-prishtina",
       "sourceHash": "17704d292a737cae7ee37a7ef5704b2a2f3e36a6c754252daf370fb362376f97",
       "sq": {
@@ -2484,6 +2538,58 @@
       "en": {
         "specialty": "Mechanical car service",
         "description": "Auto Servis Burimi in Podujevë is listed in the public business directory as a mechanical passenger-car service. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-cadraki-suhareke",
+      "sourceHash": "3aedbc482b42eb82d3f2f5d0475ab52bc088e9fcf29ac86e47b4c2a1df789e1c",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis Çadraki në Suharekë ofron shërbime mekanike për vetura sipas direktorisë publike të bizneseve. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis Çadraki in Suharekë offers mechanical passenger-car service according to the public business directory. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-champion-suhareke",
+      "sourceHash": "ebe8244fbf9147011375162f3da2c3a770cb0bf5bf4a40d68a85af7fa9263292",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto servis Champion në Suharekë ofron shërbime mekanike për vetura sipas direktorisë publike të bizneseve. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto servis Champion in Suharekë offers mechanical passenger-car service according to the public business directory. Please confirm specific work and appointments directly with the business.",
         "serviceDetails": [
           "Mechanical passenger-car service according to the business directory"
         ],
@@ -3774,6 +3880,32 @@
       }
     },
     {
+      "id": "auto-servis-skenda-suhareke",
+      "sourceHash": "2121d770d3b3ed38429a97062bb1546844d2189587d0231d1c2623cda3d6f3c1",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis SKENDA në Suharekë ofron shërbime mekanike për vetura sipas direktorisë publike të bizneseve. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis SKENDA in Suharekë offers mechanical passenger-car service according to the public business directory. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-trimi-prishtina",
       "sourceHash": "17704d292a737cae7ee37a7ef5704b2a2f3e36a6c754252daf370fb362376f97",
       "sq": {
@@ -3850,6 +3982,32 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-vellezerit-bytyci-suhareke",
+      "sourceHash": "a09959b3ecaf48f90ce44749fe74d54ccd8742ef006346a6509daa615ff0b4ef",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis Vellezerit Bytyçi në Suharekë ofron shërbime mekanike për vetura sipas direktorisë publike të bizneseve. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis Vellezerit Bytyçi in Suharekë offers mechanical passenger-car service according to the public business directory. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
         ]
       }
     },
@@ -3962,6 +4120,32 @@
           "Current evidence of contact details, location and passenger-car servicing",
           "Current evidence of contact details, location and passenger-car servicing",
           "Current evidence of contact details, location and passenger-car servicing"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-xiki-suhareke",
+      "sourceHash": "36c0c399b5e1e91acd36c0c5629fed055a0f6ccee8eec76fa6ad79207ebdf298",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "AUTO servis-Xiki në Suharekë ofron shërbime mekanike për vetura sipas direktorisë publike të bizneseve. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "AUTO servis-Xiki in Suharekë offers mechanical passenger-car service according to the public business directory. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
         ]
       }
     },
@@ -4800,6 +4984,32 @@
         "phoneNote": "Public directory contact (Cybo); not confirmed by the business",
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "autoservis-altini-suhareke",
+      "sourceHash": "821a8bfc252574bbcfabbb7f19fa629e5a6ad198e8ee40b219828e4d11eb81c2",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Autoservis Altini në Suharekë ofron shërbime mekanike për vetura sipas direktorisë publike të bizneseve. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Autoservis Altini in Suharekë offers mechanical passenger-car service according to the public business directory. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
         ]
       }
     },
