@@ -4326,6 +4326,24 @@
       }
     },
     {
+      "id": "auto-xhama-ajdini-mamushe",
+      "sourceHash": "0c585ec29e6c63c5d9bac6ef0922ad07dfb259e120e0f21d77f8442ab5c934cd",
+      "sq": {
+        "specialty": "Shërbime për xhama të veturave",
+        "description": "Auto Xhama Ajdini në Mamushë ofron shërbime për xhama të automjeteve sipas profilit të vet. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime për xhama të veturave"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": ["Profili i vet i biznesit: kontakti dhe shërbimet"]
+      },
+      "en": {
+        "specialty": "Vehicle glass service",
+        "description": "Auto Xhama Ajdini in Mamushë offers vehicle glass services according to its own business profile. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Passenger-car glass services"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": ["Own business profile: business contact and services"]
+      }
+    },
+    {
       "id": "auto-xhama-becos-lipjan",
       "sourceHash": "4e13150611976dcff7cb5afdfbda2b428c0601336d12390dc3f6c1494cc3eab8",
       "sq": {
@@ -6000,6 +6018,32 @@
       }
     },
     {
+      "id": "garage-carrosserie-beni-rahovec",
+      "sourceHash": "fa497038d51991bb595c95eb9bbe3effc56cb13903228e5dd466c073fa5137bd",
+      "sq": {
+        "specialty": "Riparime karrocerie dhe lyerje të veturave",
+        "description": "Garage Carrosserie BENI në Rahovec ofron riparime karrocerie dhe lyerje të veturave sipas profilit të vet. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Riparime karrocerie dhe lyerje të veturave"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Bodywork repairs and vehicle painting",
+        "description": "Garage Carrosserie BENI in Rahovec offers bodywork repairs and vehicle painting according to its own business profile. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Bodywork repairs and vehicle painting"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services",
+          "Own business profile: business contact and services"
+        ]
+      }
+    },
+    {
       "id": "garage-fita-gjilan",
       "sourceHash": "ddf6697b1f1d1637a95a5649795081c634abb19ccec0c32abdfe32fdc486f432",
       "sq": {
@@ -6878,6 +6922,34 @@
       }
     },
     {
+      "id": "servis-auto-tecno-rahovec",
+      "sourceHash": "d15aa1f2f5592714c2712d166776885d0938b1e310ee50e89f55f8850a55d2e5",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Servis Auto Tecno në Rahovec ofron shërbime mekanike për vetura sipas direktorisë publike të bizneseve. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Servis Auto Tecno in Rahovec offers mechanical passenger-car service according to the public business directory. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services"
+        ]
+      }
+    },
+    {
       "id": "servis-kelmendi-suhareke",
       "sourceHash": "c742ea9c7d30a5e5abea25c8aef32128ab70b984dca093454976f331eb5bb94b",
       "sq": {
@@ -7297,6 +7369,36 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Public directory: name, contact and vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "vullkanizer-asmiri-rahovec",
+      "sourceHash": "982646bdc05d2cd75f7ae53a3a22eb2718b95e30c4cf0368dca20cddece59801",
+      "sq": {
+        "specialty": "Shërbime për goma",
+        "description": "Vullkanizer Asmiri në Rahovec ofron ndërrim, balancim dhe riparim të gomave sipas profilit të vet. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Ndërrim, balancim dhe riparim i gomave të veturave"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Tyre service",
+        "description": "Vullkanizer Asmiri in Rahovec offers tyre changes, balancing and tyre repairs according to its own business profile. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Tyre changes, balancing and tyre repairs for passenger cars"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services",
+          "Own business profile: business contact and services"
         ]
       }
     },

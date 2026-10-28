@@ -3025,6 +3025,23 @@
       "notes": "The business's own contact page shows the email, Zenel Hajdini/Ferizaj and the exact existing phone number 044/048 177 020."
     },
     {
+      "workshopId": "auto-xhama-ajdini-mamushe",
+      "matchedName": "Auto Xhama Ajdini",
+      "matchedPhone": "+38345478015",
+      "matchedCity": "Mamushë",
+      "emails": [
+        {
+          "address": "ismailmorina572@gmail.com",
+          "sourceUrls": ["https://www.facebook.com/Ajdin.Morina1"],
+          "checkedAt": "2026-10-28",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": ["https://www.facebook.com/Ajdin.Morina1"],
+      "notes": "Own public business Contact explicitly publishes email with exactphone. Focused name/town/email/Facebook/Instagram search found this own business page; no attributable Instagram/ownwebsite. No delivery/consent claim."
+    },
+    {
       "workshopId": "auto-xhama-becos-lipjan",
       "matchedName": "Auto Xhama Becos - Lipjan",
       "matchedPhone": "+38345661120",
@@ -4151,6 +4168,20 @@
       "notes": "Only the direct Foleja Motors contact mailbox adopted; general B2B platform address not adopted."
     },
     {
+      "workshopId": "garage-carrosserie-beni-rahovec",
+      "matchedName": "Garage Carrosserie BENI",
+      "matchedPhone": "+38349223797",
+      "matchedCity": "Rahovec",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/a8rmq01HAq1B/garage-carrosserie-beni/",
+        "https://www.facebook.com/people/Garage-Carrosserie-BENI/61584436647005/",
+        "https://www.instagram.com/garagecarrosseriebeni/"
+      ],
+      "notes": "Complete directory no email/site; own Facebook public Contact phone only; own Instagram full bio phone/services/Mapslink but no email. Own Mapslink not used as independent source. Focused email/social search found no attributable business email."
+    },
+    {
       "workshopId": "garage-fita-gjilan",
       "matchedName": "Garage Fita",
       "matchedPhone": "+38349273699",
@@ -4740,6 +4771,19 @@
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
     },
     {
+      "workshopId": "servis-auto-tecno-rahovec",
+      "matchedName": "Servis Auto Tecno",
+      "matchedPhone": "+38344203980",
+      "matchedCity": "Rahovec",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/hDIw0vnIIXXi/servis-auto-tecno/",
+        "https://www.facebook.com/100066441018178/"
+      ],
+      "notes": "Complete independent detail no email/site; own public Contact exactphone only. Focused name/town/email/Facebook/Instagram query found own Facebook but no attributable Instagram or website; Instagram keyword view did not expose an attributable result. No guessed address."
+    },
+    {
       "workshopId": "servis-kelmendi-suhareke",
       "matchedName": "Servis Kelmendi",
       "matchedPhone": "+38349229141",
@@ -5049,6 +5093,20 @@
         "https://www.google.com/search?q=Valoni-I+Mitrovica+email+kontakt"
       ],
       "notes": "Gjirafa shows an email for AutoServis Valoni-i at exactly Nr.1 Adem Voca, Mitrovicë 40000. The directory lists different/older phone numbers, so assignment uses the distinctive name and identical street address; profile phones remain unchanged."
+    },
+    {
+      "workshopId": "vullkanizer-asmiri-rahovec",
+      "matchedName": "Vullkanizer Asmiri",
+      "matchedPhone": "+38344255103",
+      "matchedCity": "Rahovec",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/qtrFTqhd7Gj7/vullkanizer-asmiri/",
+        "https://www.instagram.com/vullkanizer_asmiri/",
+        "https://www.facebook.com/vullkanizerasmiri/"
+      ],
+      "notes": "Full independent detail no email/site; own expanded Instagram bio and full public Facebook business Contact list phone numbers only. No attributable email/ownwebsite found in focused email/social search."
     },
     {
       "workshopId": "waxon-auto-detailing-mitrovica",

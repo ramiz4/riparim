@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "5173a26e9ce22534bcc9667602038fc18920509128a49725a250612168e4eefb",
+  "revision": "2c23accb0436529da7eb9da4d017b23579d002f0e3fc27be6a534070a5066157",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -13109,6 +13109,95 @@
       }
     },
     {
+      "id": "auto-xhama-ajdini-mamushe",
+      "expected": {
+        "name": "Auto Xhama Ajdini",
+        "city": "Mamushë",
+        "address": "CUMURİYET,152 Mamushë",
+        "phone": "+38345478015"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-28",
+        "source": "https://www.facebook.com/Ajdin.Morina1",
+        "sourceName": "Auto Xhama Ajdini",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own complete seven-day dialog reports updated about2weeks ago. Own exact business/site week; checked today, not operator confirmation. No Google hours or current-open claim. Checked sources: https://www.facebook.com/Ajdin.Morina1 No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-xhama-becos-lipjan",
       "expected": {
         "name": "Auto Xhama Becos - Lipjan",
@@ -18092,6 +18181,101 @@
       }
     },
     {
+      "id": "garage-carrosserie-beni-rahovec",
+      "expected": {
+        "name": "Garage Carrosserie BENI",
+        "city": "Rahovec",
+        "address": "406, Rahovec",
+        "phone": "+38349223797"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-28",
+        "source": "https://www.facebook.com/people/Garage-Carrosserie-BENI/61584436647005/",
+        "sourceName": "Garage Carrosserie BENI",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own full business-hours dialog explicitly continuously open, updated about11months ago. Published continuous week recorded as source-researched, not operator confirmation, on-demand promise or current open status. No Google hours copied. Checked sources: https://www.facebook.com/people/Garage-Carrosserie-BENI/61584436647005/ https://numrat.com/biznes/a8rmq01HAq1B/garage-carrosserie-beni/ https://www.instagram.com/garagecarrosseriebeni/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "garage-fita-gjilan",
       "expected": {
         "name": "Garage Fita",
@@ -20572,6 +20756,95 @@
       }
     },
     {
+      "id": "servis-auto-tecno-rahovec",
+      "expected": {
+        "name": "Servis Auto Tecno",
+        "city": "Rahovec",
+        "address": "Xhelal Hajda",
+        "phone": "+38344203980"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-28",
+        "source": "https://www.facebook.com/100066441018178/",
+        "sourceName": "Servis Auto Tecno",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own full seven-day dialog reports updated about6years ago. Plausible complete own schedule retained with explicit age; present viewing is not operator confirmation. No Google hours copied or current open/closed claim. Checked sources: https://www.facebook.com/100066441018178/ https://numrat.com/biznes/hDIw0vnIIXXi/servis-auto-tecno/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "servis-kelmendi-suhareke",
       "expected": {
         "name": "Servis Kelmendi",
@@ -21800,6 +22073,87 @@
           "09:00-18:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "vullkanizer-asmiri-rahovec",
+      "expected": {
+        "name": "Vullkanizer Asmiri",
+        "city": "Rahovec",
+        "address": "Rruga UÇK",
+        "phone": "+38344255103"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-28",
+        "source": "https://numrat.com/biznes/qtrFTqhd7Gj7/vullkanizer-asmiri/",
+        "sourceName": "Vullkanizer Asmiri",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No complete independent weekly plan; publication age unavailable. Full directory, expanded own Instagram and public Facebook business details expose no weekly schedule. Central explicitly assumed defaults required after remaining gates. Checked sources: https://numrat.com/biznes/qtrFTqhd7Gj7/vullkanizer-asmiri/ https://www.instagram.com/vullkanizer_asmiri/ https://www.facebook.com/vullkanizerasmiri/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
