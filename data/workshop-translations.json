@@ -92,6 +92,32 @@
       }
     },
     {
+      "id": "amiri-autoservis-podujeve",
+      "sourceHash": "d2ae54a3c7fdcf1debe445146644e4cbd14b7939bc4f8770d91a61de55601d95",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Amiri AutoServis në Podujevë ofron shërbime mekanike për vetura sipas direktorisë publike të bizneseve. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Amiri AutoServis in Podujevë offers mechanical passenger-car service according to the public business directory. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
+        ]
+      }
+    },
+    {
       "id": "as-motors",
       "sourceHash": "e618e1db5ad566eb57f42c2b0928ef185f7f851b9d8c77d6309729b731ebf825",
       "sq": {
@@ -1942,6 +1968,34 @@
           "Own business profile: name, location and offered services",
           "Public business directory: name, location, business contact and category",
           "Public business directory: business contact and weekly schedule"
+        ]
+      }
+    },
+    {
+      "id": "auto-service-luani-hajvali",
+      "sourceHash": "cb8919dd9572d3206a77cb0f1aacf09be09be2fbae4790ef1df145ea5c0cd984",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Service LUANI në Prishtina ofron shërbime mekanike për vetura sipas direktorisë publike të bizneseve. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Service LUANI in Prishtina offers mechanical passenger-car service according to the public business directory. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services"
         ]
       }
     },
@@ -3822,6 +3876,32 @@
       }
     },
     {
+      "id": "auto-servis-sahiti-podujeve",
+      "sourceHash": "3faa1aa668373b401bbe88c68c5db5c98e3ba6305475246bc9a091c13012c034",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis SAHITI Podujevë në Podujevë ofron shërbime mekanike për vetura sipas direktorisë publike të bizneseve. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis SAHITI Podujevë in Podujevë offers mechanical passenger-car service according to the public business directory. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-sejda-gjilan",
       "sourceHash": "0323e2234b92fd072713d7acf9682ed5f0b691415582e20f6503bfccfd6cb2fe",
       "sq": {
@@ -3846,6 +3926,32 @@
         "phoneNote": "Public directory contact (Gjirafa.biz); not confirmed by the business",
         "sourceTitles": [
           "Gjirafa.biz: published name · address · telephone · vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-shemi-podujeve",
+      "sourceHash": "bf44ce95f94f9a130bc44ce803db01a76f267d98ad522faef4e53b78b637b946",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis Shemi në Podujevë ofron shërbime mekanike për vetura sipas direktorisë publike të bizneseve. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime mekanike për vetura sipas direktorisë së bizneseve"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis Shemi in Podujevë offers mechanical passenger-car service according to the public business directory. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Mechanical passenger-car service according to the business directory"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
         ]
       }
     },

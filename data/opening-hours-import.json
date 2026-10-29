@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "2c23accb0436529da7eb9da4d017b23579d002f0e3fc27be6a534070a5066157",
+  "revision": "1086b30df8607aeb37fc7d644a0d4d9abffb41733d53d015943e898779759449",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -266,6 +266,87 @@
           "09:00-18:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "amiri-autoservis-podujeve",
+      "expected": {
+        "name": "Amiri AutoServis",
+        "city": "Podujevë",
+        "address": "Podujeve-Prishtinë km 1",
+        "phone": "+38349221860"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-29",
+        "source": "https://numrat.com/biznes/sqXMX5D1f9F5/amiri-autoservis/",
+        "sourceName": "Amiri AutoServis",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No attributable complete weekly plan found. Directory lacks hours; own-source search/native Facebook no target, Instagram different-phone identity not assigned. Central explicit default required. Checked sources: https://numrat.com/biznes/sqXMX5D1f9F5/amiri-autoservis/ https://www.instagram.com/autoservisamiri/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -5880,6 +5961,95 @@
           "09:00-19:00",
           "09:00-19:00",
           "09:00-19:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-service-luani-hajvali",
+      "expected": {
+        "name": "Auto Service LUANI",
+        "city": "Prishtina",
+        "address": "M25-2, Hajvali",
+        "phone": "+38344665455"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-29",
+        "source": "https://www.facebook.com/AutoServisLUANI/",
+        "sourceName": "Auto Service LUANI",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own full weekly dialog updated about four years ago. Source-stated weekly plan; no current operator confirmation. Checked sources: https://www.facebook.com/AutoServisLUANI/ https://numrat.com/biznes/tT9W1kwUqZ77/auto-service-luani/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": [
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
           "Geschlossen"
         ],
         "earlierPlan": ""
@@ -11561,6 +11731,87 @@
       }
     },
     {
+      "id": "auto-servis-sahiti-podujeve",
+      "expected": {
+        "name": "Auto Servis SAHITI Podujevë",
+        "city": "Podujevë",
+        "address": "495 Skënderbeu",
+        "phone": "+38345545525"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-29",
+        "source": "https://numrat.com/biznes/WEoIdg6QbPZo/auto-servis-sahiti-podujeve/",
+        "sourceName": "Auto Servis SAHITI Podujevë",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No attributable complete weekly plan found. Directory no week; targeted own Facebook/Instagram/email search and native Facebook Pages no attributable target. Unrelated Sabiti hours not assigned. Central explicit default required. Checked sources: https://numrat.com/biznes/WEoIdg6QbPZo/auto-servis-sahiti-podujeve/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-servis-sejda-gjilan",
       "expected": {
         "name": "Auto Servis SEJDA",
@@ -11646,6 +11897,87 @@
           "09:00-17:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-shemi-podujeve",
+      "expected": {
+        "name": "Auto Servis Shemi",
+        "city": "Podujevë",
+        "address": "Gryka e Llapit",
+        "phone": "+38344169848"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-29",
+        "source": "https://numrat.com/biznes/5IormJdIOeAb/auto-servis-shemi/",
+        "sourceName": "Auto Servis Shemi",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No attributable complete weekly plan found. No weekly plan in full directory. Focused own-source search and native Facebook Pages no attributable target weekly plan. Central explicit defaults required. Checked sources: https://numrat.com/biznes/5IormJdIOeAb/auto-servis-shemi/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
