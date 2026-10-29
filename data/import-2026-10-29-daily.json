@@ -103,30 +103,6 @@
       "checkedAt": "2026-10-27T04:01:56.300853+00:00"
     },
     {
-      "name": "MA Auto Detailing",
-      "city": "Viti",
-      "reason": "Existing canonical exact name/city/phone identity; no new candidate or Maps/WhatsApp work needed.",
-      "historicalManifest": "data/import-2026-10-27-daily.json"
-    },
-    {
-      "name": "Auto Servis Joni",
-      "city": "Viti",
-      "reason": "Exact branch/name and one independently published shared contact match canonical; second public directory number is not silently imported.",
-      "historicalManifest": "data/import-2026-10-27-daily.json"
-    },
-    {
-      "name": "Auto-Servis NEXHI",
-      "city": "Lipjan",
-      "reason": "Exact canonical name/city/phone matches newly visible independent index; no new profile.",
-      "historicalManifest": "data/import-2026-10-27-daily.json"
-    },
-    {
-      "name": "Auto Servis UNIVERZAL",
-      "city": "Lipjan",
-      "reason": "Exact canonical name/city/phone matches newly visible independent index; no new profile.",
-      "historicalManifest": "data/import-2026-10-27-daily.json"
-    },
-    {
       "id": "auto-service-tuning-a-lokaj-decan",
       "name": "Autoservice & Tuning A-Lokaj",
       "city": "Deçan",
@@ -1082,21 +1058,27 @@
         "https://numrat.com/biznes/T5SONozTib0o/vullkanizer-genti/"
       ],
       "reason": "Direct official Place-ID matches independent contact and point, but another tyre-business identity appears at virtually the same premises in the public feed. Linked Facebook is a personal-labelled profile, not accepted as business source. Directory municipality also needs reconciliation with Hajvali.",
-      "nextCheck": "Find attributable business premises/continuity evidence distinguishing Genti from Astriti at this site; complete own-business email and hours research.",
+      "nextCheck": "Find current attributable business premises/continuity evidence distinguishing Genti from Astriti at the site and reconcile locality; then refresh contact checks.",
       "publicBusinessEmail": {
         "address": null,
         "sourceUrl": null,
-        "checkedAt": "2026-10-29T04:16:00.370038+00:00",
-        "status": "unresolved",
-        "note": "No usable target address established; unassigned contacts are not adopted."
+        "checkedAt": "2026-10-29T04:23:53.016571+00:00",
+        "status": "not-found",
+        "note": "Complete independent directory has no own website, email or weekly plan. Focused exact-name/phone/Facebook/Instagram/email search provided no attributable business profile; linked personal-labelled profile was not adopted as a business source. Native Facebook Pages exactname/Hajvali search completed with no results.",
+        "checkedUrls": [
+          "https://numrat.com/biznes/T5SONozTib0o/vullkanizer-genti/",
+          "https://www.facebook.com/search/pages/?q=Vullkanizer%20Genti%20Hajvali"
+        ]
       },
       "openingHoursResearch": {
         "kind": "assumed",
-        "status": "research-incomplete",
-        "week": null,
-        "sourceAge": "Not established.",
-        "note": "No source-qualified plan prepared; candidate research remains incomplete and cannot publish.",
-        "checkedAt": "2026-10-29T04:16:00.370038+00:00"
+        "status": "held",
+        "sourceAge": "No attributable complete weekly plan found.",
+        "note": "Complete independent directory has no own website, email or weekly plan. Focused exact-name/phone/Facebook/Instagram/email search provided no attributable business profile; linked personal-labelled profile was not adopted as a business source. Native Facebook Pages exactname/Hajvali search completed with no results. Default only after identity/service gates qualify.",
+        "checkedAt": "2026-10-29T04:23:53.016571+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/T5SONozTib0o/vullkanizer-genti/"
+        ]
       }
     },
     {
@@ -1110,21 +1092,27 @@
         "https://numrat.com/biznes/ii4IQQUnVr9V/auto-general-service/"
       ],
       "reason": "Broad auto-service category only; targeted own-source search surfaced different-phone General Auto Kosova, not attributable target. Actual passenger-car service and own contact source remain unproved.",
-      "nextCheck": "Find attributable actual service offer for exact211112contact; then email/hours and Maps.",
+      "nextCheck": "Find independently attributable actual passenger-car service offer for exact211112contact; then complete Maps/WhatsApp qualification.",
       "publicBusinessEmail": {
         "address": null,
         "sourceUrl": null,
-        "checkedAt": "2026-10-29T04:16:00.370038+00:00",
-        "status": "unresolved",
-        "note": "No usable target address established; unassigned contacts are not adopted."
+        "checkedAt": "2026-10-29T04:23:53.016571+00:00",
+        "status": "not-found",
+        "note": "Complete independent directory has no own website, email or weekly plan. Focused exactname/Facebook/Instagram/email search found only a different-phone General Auto Kosova; native Facebook Pages exactname/Gracanice search returned foreign businesses, not the target. No contacts or hours assigned from those results.",
+        "checkedUrls": [
+          "https://numrat.com/biznes/ii4IQQUnVr9V/auto-general-service/",
+          "https://www.facebook.com/search/pages/?q=Auto%20General%20Service%20Gracanice"
+        ]
       },
       "openingHoursResearch": {
         "kind": "assumed",
-        "status": "research-incomplete",
-        "week": null,
-        "sourceAge": "Not established.",
-        "note": "No source-qualified plan prepared; candidate research remains incomplete and cannot publish.",
-        "checkedAt": "2026-10-29T04:16:00.370038+00:00"
+        "status": "held",
+        "sourceAge": "No attributable complete weekly plan found.",
+        "note": "Complete independent directory has no own website, email or weekly plan. Focused exactname/Facebook/Instagram/email search found only a different-phone General Auto Kosova; native Facebook Pages exactname/Gracanice search returned foreign businesses, not the target. No contacts or hours assigned from those results. Default only after identity/service gates qualify.",
+        "checkedAt": "2026-10-29T04:23:53.016571+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/ii4IQQUnVr9V/auto-general-service/"
+        ]
       }
     },
     {
@@ -1182,13 +1170,19 @@
         "https://www.instagram.com/autoteknik_vllahiu/"
       ],
       "reason": "Independent category broad auto service; exact-phone own Facebook currently categorizes parts retail. Instagram advertises tuning but has no displayed phone and explicit own cross-link/current service attribution has not been completed.",
-      "nextCheck": "Read original own service-offer post and explicit Instagram cross-link; verify repair scope at exact premises and complete full Contact tab before publication.",
+      "nextCheck": "Read original exact-phone own repair/service offer and explicit Instagram cross-link; verify performed passenger-car service at the precise site before publication.",
       "publicBusinessEmail": {
         "address": null,
         "sourceUrl": null,
-        "checkedAt": "2026-10-29T04:18:29.621126+00:00",
-        "status": "unresolved",
-        "note": "No email in inspected Facebook overview and expanded Instagram; full contact-panel/source attribution remains incomplete."
+        "checkedAt": "2026-10-29T04:23:53.016571+00:00",
+        "status": "not-found",
+        "note": "Complete independent directory, own Facebook overview and full Contact panel, and expanded own-looking Instagram bio contain no business email. Full Contact publishes only exact45690069. No separate own website linked.",
+        "checkedUrls": [
+          "https://numrat.com/biznes/nYMdk3OoXuHA/autoteknik-vllahiu/",
+          "https://www.facebook.com/AutoTeknikVllahiu/",
+          "https://www.instagram.com/autoteknik_vllahiu/",
+          "https://www.facebook.com/AutoTeknikVllahiu/directory_contact_info"
+        ]
       },
       "openingHoursResearch": {
         "kind": "researched",
@@ -1318,8 +1312,8 @@
     "existingMatches": 14,
     "deferred": 8,
     "reasonBelowTen": "Four detailed identities qualify. Eight remain held for documented contact, premises or service-attribution gaps; 63 index records in six municipalities read, with14 existing matches. Index-only leads and incomplete research are not counted as verified candidates. The desired40-60 detailed preliminary checks were not completed.",
-    "mapsDirectReturnsCompleted": 7,
-    "mapsDirectReturnsNote": "Four qualified plus Genti, Enveri and Petriti; a return does not resolve separate attribution conflicts."
+    "mapsDirectReturnsCompleted": 8,
+    "mapsDirectReturnsNote": "Four qualified plus Genti, Enveri, Petriti and Vllahiu; returns do not resolve separate attribution conflicts."
   },
   "whatsappVerification": {
     "checks": [
@@ -1364,7 +1358,7 @@
       "accessBlockedAttempts": 0
     }
   },
-  "checkedAt": "2026-10-29T04:19:30.757Z",
+  "checkedAt": "2026-10-29T04:23:53.016571+00:00",
   "openingHours": {
     "preparedResearchedPlans": 1,
     "preparedAssumedPlans": 3,
@@ -1503,7 +1497,7 @@
       "deduplicated": []
     },
     "workflowChecks": "running; final results in protected completion receipt",
-    "independentReview": "pending; required before merge"
+    "independentReview": "Initial spec/standards reviews found no blocker in four publication records. Held-candidate source checks and historical/count metadata corrected; final-head re-review pending."
   },
   "municipalityCategoryChecks": [
     {
