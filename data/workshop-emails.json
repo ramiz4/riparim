@@ -65,6 +65,18 @@
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
     },
     {
+      "workshopId": "amiri-autoservis-podujeve",
+      "matchedName": "Amiri AutoServis",
+      "matchedPhone": "+38349221860",
+      "matchedCity": "Podujevë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/sqXMX5D1f9F5/amiri-autoservis/"
+      ],
+      "notes": "Complete independent directory has no email or own website. Focused Facebook/Instagram/email query finds other-phone Pristina Amiri; directly inspected Instagram autoservisamiri publishes049102150, not target. Native Facebook Pages name/town search yields unrelated footballer only. No contacts borrowed."
+    },
+    {
       "workshopId": "as-motors",
       "matchedName": "AS Motors",
       "matchedPhone": "+38338536060",
@@ -1359,6 +1371,21 @@
         "https://www.gjithebiznesi.com/XK/auto-service-labi-center-044-997-555"
       ],
       "notes": "Fresh ownFacebook Info>Contact explicitly publishes exact44main and business email. Source matched to concreteSkenderbeu319 site. A single obvious website check at emaildomainlabicenter.com failed webDNSresolution; no URL variants/SMTP/testmail or deliverability/consent claim. Instagramfullbio/noadditionalbusiness email; directorycorroboratescontact."
+    },
+    {
+      "workshopId": "auto-service-luani-hajvali",
+      "matchedName": "Auto Service LUANI",
+      "matchedPhone": "+38344665455",
+      "matchedCity": "Prishtina",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/tT9W1kwUqZ77/auto-service-luani/",
+        "https://www.facebook.com/AutoServisLUANI/",
+        "https://www.facebook.com/AutoServisLUANI/directory_contact_info",
+        "https://auto-luani.com/"
+      ],
+      "notes": "Full independent listing and own full Contact publish no email. Linked own website DNS resolution failed. Focused Facebook/Instagram/email search yielded own Facebook only, no attributable Instagram. No guessed address."
     },
     {
       "workshopId": "auto-service-mali-prishtina",
@@ -2688,6 +2715,18 @@
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
     },
     {
+      "workshopId": "auto-servis-sahiti-podujeve",
+      "matchedName": "Auto Servis SAHITI Podujevë",
+      "matchedPhone": "+38345545525",
+      "matchedCity": "Podujevë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/WEoIdg6QbPZo/auto-servis-sahiti-podujeve/"
+      ],
+      "notes": "Complete directory lacks email/website. Focused own-site/email/Facebook/Instagram search surfaces different-phone Sabiti, not target. Native Facebook Pages exactname/town search yields other local workshops, no attributable target. No email borrowed."
+    },
+    {
       "workshopId": "auto-servis-sejda-gjilan",
       "matchedName": "Auto Servis SEJDA",
       "matchedPhone": "+38344177086",
@@ -2703,6 +2742,18 @@
       "researchStatus": "found",
       "checkedUrls": ["https://stgres.gjirafa.biz/auto-servis-sejda-1"],
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
+    },
+    {
+      "workshopId": "auto-servis-shemi-podujeve",
+      "matchedName": "Auto Servis Shemi",
+      "matchedPhone": "+38344169848",
+      "matchedCity": "Podujevë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/5IormJdIOeAb/auto-servis-shemi/"
+      ],
+      "notes": "Full independent directory has no email/website. Focused own-site/Facebook/Instagram/email search finds supplier mentions but no attributable own profile. Native Facebook Pages name/town returns other businesses, not target; no contact borrowed."
     },
     {
       "workshopId": "auto-servis-sistem-mazgit",

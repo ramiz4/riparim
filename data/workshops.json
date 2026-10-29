@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-28T04:42:20.071Z",
+  "updatedAt": "2026-10-29T04:19:30.594Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 262,
+    "published": 266,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 262 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 262,
+    "reason": "All 266 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 266,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -164,6 +164,45 @@
             "https://www.google.com/maps/?cid=7899182740166590548"
           ],
           "note": "Individual Google listing confirmed using an independently evidenced phone number, workshop name and precise address; CID and actual Place ID designate the same entry. No Google business details or reviews adopted into the profile source."
+        }
+      }
+    },
+    {
+      "id": "amiri-autoservis-podujeve",
+      "name": "Amiri AutoServis",
+      "city": "Podujevë",
+      "address": "Podujeve-Prishtinë km 1",
+      "phone": "+38349221860",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349221860",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Amiri AutoServis in Podujevë bietet laut öffentlichem Firmenverzeichnis mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.886785,
+      "lng": 21.181061,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/sqXMX5D1f9F5/amiri-autoservis/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-29",
+      "status": "published",
+      "updatedAt": "2026-10-29T04:18:29.786Z",
+      "google": {
+        "placeId": "ChIJGWTZHNGvVBMRNUyhi2ZbhUQ",
+        "matchedAt": "2026-10-29T04:10:46.859533+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/sqXMX5D1f9F5/amiri-autoservis/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
         }
       }
     },
@@ -3396,6 +3435,51 @@
       }
     },
     {
+      "id": "auto-service-luani-hajvali",
+      "name": "Auto Service LUANI",
+      "city": "Prishtina",
+      "address": "M25-2, Hajvali",
+      "phone": "+38344665455",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344665455",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Service LUANI in Prishtina bietet laut öffentlichem Firmenverzeichnis mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.61533,
+      "lng": 21.169583,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/tT9W1kwUqZ77/auto-service-luani/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/AutoServisLUANI/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-29",
+      "status": "published",
+      "updatedAt": "2026-10-29T04:18:29.786Z",
+      "google": {
+        "placeId": "ChIJ0Xh59hWdVBMRvPBB9FonVJo",
+        "matchedAt": "2026-10-29T04:08:41.006480+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/tT9W1kwUqZ77/auto-service-luani/",
+            "https://www.facebook.com/AutoServisLUANI/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-service-mali-prishtina",
       "name": "Auto Service Mali",
       "city": "Prishtina",
@@ -6573,6 +6657,45 @@
       }
     },
     {
+      "id": "auto-servis-sahiti-podujeve",
+      "name": "Auto Servis SAHITI Podujevë",
+      "city": "Podujevë",
+      "address": "495 Skënderbeu",
+      "phone": "+38345545525",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis SAHITI Podujevë in Podujevë bietet laut öffentlichem Firmenverzeichnis mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.901731,
+      "lng": 21.184825,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/WEoIdg6QbPZo/auto-servis-sahiti-podujeve/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-29",
+      "status": "published",
+      "updatedAt": "2026-10-29T04:18:29.786Z",
+      "google": {
+        "placeId": "ChIJtxxsYwCpVBMRgg1EzCzIAPo",
+        "matchedAt": "2026-10-29T04:16:00.370038+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/WEoIdg6QbPZo/auto-servis-sahiti-podujeve/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-servis-sejda-gjilan",
       "name": "Auto Servis SEJDA",
       "city": "Gjilan",
@@ -6617,6 +6740,45 @@
           "method": "phone_and_location",
           "sourceUrls": ["https://stgres.gjirafa.biz/auto-servis-sejda-1"],
           "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-shemi-podujeve",
+      "name": "Auto Servis Shemi",
+      "city": "Podujevë",
+      "address": "Gryka e Llapit",
+      "phone": "+38344169848",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344169848",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service laut Firmenverzeichnis"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis Shemi in Podujevë bietet laut öffentlichem Firmenverzeichnis mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.887434,
+      "lng": 21.181156,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/5IormJdIOeAb/auto-servis-shemi/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-10-29",
+      "status": "published",
+      "updatedAt": "2026-10-29T04:18:29.786Z",
+      "google": {
+        "placeId": "ChIJn55_pV2pVBMR0vlOC_QWBkM",
+        "matchedAt": "2026-10-29T04:17:09.724032+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/5IormJdIOeAb/auto-servis-shemi/"
+          ],
+          "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
         }
       }
     },
