@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "1086b30df8607aeb37fc7d644a0d4d9abffb41733d53d015943e898779759449",
+  "revision": "459d028302ed956910a890dfd455f0de42ee902b229a06aaa18c97367a156767",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -2799,6 +2799,95 @@
           "09:00-18:00",
           "09:00-18:00",
           "09:00-18:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-goma-sfishta-podujeve",
+      "expected": {
+        "name": "Auto Goma Sfishta",
+        "city": "Podujevë",
+        "address": "Rr.Ali Ajeti, Hasan Ramadani",
+        "phone": "+38344765778"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-30",
+        "source": "https://www.facebook.com/sfishtaa/",
+        "sourceName": "Auto Goma Sfishta",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own full dialog updated about seven months ago. Own weekly plan, not present owner confirmation. Checked sources: https://www.facebook.com/sfishtaa/ https://numrat.com/biznes/tOgaTumIRCF7/auto-goma-sfishta/ No Google hours copied. Source viewed today is not operator confirmation; no current open/closed status asserted.",
+        "originalWeek": [
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
           "Geschlossen"
         ],
         "earlierPlan": ""
@@ -7021,6 +7110,95 @@
           "08:00-18:00",
           "08:00-18:00",
           "08:00-18:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-beka-kllokot",
+      "expected": {
+        "name": "Auto Servis BEKA",
+        "city": "Kllokot",
+        "address": "25-3 Pozheran",
+        "phone": "+38344164790"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "15:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-30",
+        "source": "https://www.facebook.com/bekaservis/",
+        "sourceName": "Auto Servis BEKA",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own full dialog updated about three years ago. Source-stated plan, not current operator confirmation. Checked sources: https://www.facebook.com/bekaservis/ https://numrat.com/biznes/uOI6qtTi0RQ0/auto-servis-beka/ No Google hours copied. Source viewed today is not operator confirmation; no current open/closed status asserted.",
+        "originalWeek": [
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-15:00",
           "Geschlossen"
         ],
         "earlierPlan": ""
@@ -15454,6 +15632,101 @@
       }
     },
     {
+      "id": "autoservice-enisi-kllokot",
+      "expected": {
+        "name": "Autoservice Enisi",
+        "city": "Kllokot",
+        "address": "Balkanska",
+        "phone": "+38344370720"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-30",
+        "source": "https://www.facebook.com/AutoserviceEnisi/",
+        "sourceName": "Autoservice Enisi",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own full dialog updated about five years ago. Complete source-stated week; source age disclosed, no present operator confirmation. Checked sources: https://www.facebook.com/AutoserviceEnisi/ https://numrat.com/biznes/IG3ZeIT8XGlC/autoservice-enisi/ No Google hours copied. Source viewed today is not operator confirmation; no current open/closed status asserted.",
+        "originalWeek": [
+          "08:00-19:00",
+          "08:00-19:00",
+          "08:00-19:00",
+          "08:00-19:00",
+          "08:00-19:00",
+          "09:00-17:00",
+          "09:00-17:00"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "autoservis-agimi-peja",
       "expected": {
         "name": "Autoservis Agimi",
@@ -16381,6 +16654,95 @@
         "researchStatus": "Standardzeiten (angenommen)",
         "notes": "No complete week on independent full detail; no attributable own website/Facebook/Instagram found. Prepare central explicitly assumed default only after remaining gates. Checked sources: https://numrat.com/biznes/0w41Z6tlWJ97/autoservis/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
         "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "autoteknik-vllahiu-podujeve",
+      "expected": {
+        "name": "Autoteknik VLLAHIU",
+        "city": "Podujevë",
+        "address": "Magjistralja",
+        "phone": "+38345690069"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-10-30",
+        "source": "https://www.facebook.com/AutoTeknikVllahiu/",
+        "sourceName": "Autoteknik VLLAHIU",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "No updated date displayed in full own weekly dialog. Own complete weekly plan; viewing today is not current operator confirmation. Checked sources: https://www.facebook.com/AutoTeknikVllahiu/ https://numrat.com/biznes/nYMdk3OoXuHA/autoteknik-vllahiu/ https://www.facebook.com/AutoTeknikVllahiu/posts/2892738920834808/ https://www.instagram.com/autoteknik_vllahiu/ No Google hours copied. Source viewed today is not operator confirmation; no current open/closed status asserted.",
+        "originalWeek": [
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "Geschlossen"
+        ],
         "earlierPlan": ""
       }
     },
@@ -20022,6 +20384,87 @@
       }
     },
     {
+      "id": "mercedesbenz-toni-hajvali",
+      "expected": {
+        "name": "Mercedesbenz-Toni",
+        "city": "Hajvali",
+        "address": "Magjistralja Prishtine-Gjilan",
+        "phone": "+38349330039"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-30",
+        "source": "https://numrat.com/biznes/N2mI2xAc0rRY/mercedesbenz-toni/",
+        "sourceName": "Mercedesbenz-Toni",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No complete attributable workshop week found. Own24/7statement explicitly applies to towing, not workshop repair hours. Public business bio/Info, Instagram and directory no weekly repair schedule; central explicit defaults required. No Google hours copied. Checked sources: https://numrat.com/biznes/N2mI2xAc0rRY/mercedesbenz-toni/ https://www.facebook.com/mercedesbenz.toni/ https://www.instagram.com/mercedesbenz_toni/ https://www.instagram.com/p/C4lDl0dtsdl/ No Google hours copied. Source viewed today is not operator confirmation; no current open/closed status asserted.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "nero-prizren",
       "expected": {
         "name": "Nero",
@@ -20374,6 +20817,87 @@
           "08:00-16:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "perfect-detailing-podujeve",
+      "expected": {
+        "name": "Perfect Detailing",
+        "city": "Podujevë",
+        "address": "Peran, 28 Nentori",
+        "phone": "+38344837460"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-30",
+        "source": "https://numrat.com/biznes/l9TnCb78DRJ4/perfect-detailing/",
+        "sourceName": "Perfect Detailing",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No complete own or independent weekly plan found. Full own Facebook Details has address/service area but no hours; own Instagram and full directory no week. Central explicit defaults required; no Google hours copied. Checked sources: https://numrat.com/biznes/l9TnCb78DRJ4/perfect-detailing/ https://www.facebook.com/100082876163691/directory_basic_info https://www.instagram.com/perfect_detailingg/ https://www.facebook.com/100082876163691/ No Google hours copied. Source viewed today is not operator confirmation; no current open/closed status asserted.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },

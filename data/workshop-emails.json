@@ -651,6 +651,26 @@
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
     },
     {
+      "workshopId": "auto-goma-sfishta-podujeve",
+      "matchedName": "Auto Goma Sfishta",
+      "matchedPhone": "+38344765778",
+      "matchedCity": "Podujevë",
+      "emails": [
+        {
+          "address": "jetonsfishta@hotmail.com",
+          "sourceUrls": ["https://www.facebook.com/sfishtaa/"],
+          "checkedAt": "2026-10-30",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/tOgaTumIRCF7/auto-goma-sfishta/",
+        "https://www.facebook.com/sfishtaa/"
+      ],
+      "notes": "Own full Contact labels business email; own bio pairs both exact international phones. Full directory no email/site; focused Instagram/email search yields no attributable Instagram. No delivery or consent assertion."
+    },
+    {
       "workshopId": "auto-gomister-llugiqi-istog",
       "matchedName": "Auto Gomister Llugiqi",
       "matchedPhone": "+38349305512",
@@ -1648,6 +1668,20 @@
       "researchStatus": "found",
       "checkedUrls": ["https://www.facebook.com/AutoServiceBehari/"],
       "notes": "Public business contact evidenced on the attributed own source; no deliverability, consent or ownership claim. No contact message sent."
+    },
+    {
+      "workshopId": "auto-servis-beka-kllokot",
+      "matchedName": "Auto Servis BEKA",
+      "matchedPhone": "+38344164790",
+      "matchedCity": "Kllokot",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/uOI6qtTi0RQ0/auto-servis-beka/",
+        "https://www.facebook.com/bekaservis/",
+        "https://www.facebook.com/bekaservis/directory_contact_info"
+      ],
+      "notes": "Full directory and full own Contact contain no email or own website. Focused Facebook/Instagram/email search yielded own Facebook and older third-party promotion; no attributable Instagram/email."
     },
     {
       "workshopId": "auto-servis-berati-malisheve",
@@ -3524,6 +3558,26 @@
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
     },
     {
+      "workshopId": "autoservice-enisi-kllokot",
+      "matchedName": "Autoservice Enisi",
+      "matchedPhone": "+38344370720",
+      "matchedCity": "Kllokot",
+      "emails": [
+        {
+          "address": "autoserviceenisi@outlook.com",
+          "sourceUrls": ["https://www.facebook.com/AutoserviceEnisi/"],
+          "checkedAt": "2026-10-30",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/IG3ZeIT8XGlC/autoservice-enisi/",
+        "https://www.facebook.com/AutoserviceEnisi/"
+      ],
+      "notes": "Own business Contact pairs exactphone, name and street with labelled business email. No deliverability or consent assertion. Directory has no additional email; focused Facebook/Instagram/email search found this own source and no separately attributable Instagram."
+    },
+    {
       "workshopId": "autoservis-agimi-peja",
       "matchedName": "Autoservis Agimi",
       "matchedPhone": "+38349850252",
@@ -3716,6 +3770,22 @@
       "researchStatus": "not_found",
       "checkedUrls": ["https://numrat.com/biznes/0w41Z6tlWJ97/autoservis/"],
       "notes": "Full directory detail no email/website. Exact phone plus business-name/email/Facebook/Instagram query yielded no attributable own source."
+    },
+    {
+      "workshopId": "autoteknik-vllahiu-podujeve",
+      "matchedName": "Autoteknik VLLAHIU",
+      "matchedPhone": "+38345690069",
+      "matchedCity": "Podujevë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/nYMdk3OoXuHA/autoteknik-vllahiu/",
+        "https://www.facebook.com/AutoTeknikVllahiu/",
+        "https://www.facebook.com/AutoTeknikVllahiu/posts/2892738920834808/",
+        "https://www.instagram.com/autoteknik_vllahiu/",
+        "https://www.facebook.com/AutoTeknikVllahiu/directory_contact_info"
+      ],
+      "notes": "Full independent listing, own full Facebook Contact and expanded linked Instagram bio contain no email or separate business website. No personal linked-profile data adopted."
     },
     {
       "workshopId": "autotrade-toyota",
@@ -4559,6 +4629,21 @@
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; Instagram bio checked; Facebook requires login; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
     },
     {
+      "workshopId": "mercedesbenz-toni-hajvali",
+      "matchedName": "Mercedesbenz-Toni",
+      "matchedPhone": "+38349330039",
+      "matchedCity": "Hajvali",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/N2mI2xAc0rRY/mercedesbenz-toni/",
+        "https://www.facebook.com/mercedesbenz.toni/",
+        "https://www.instagram.com/mercedesbenz_toni/",
+        "https://www.instagram.com/p/C4lDl0dtsdl/"
+      ],
+      "notes": "Full directory, own public Facebook business bio/Info and own Instagram bio/post have no publicly attributable business email or independent business website. Search-generated email not adopted without source. No private personal-profile data accessed."
+    },
+    {
       "workshopId": "nero-prizren",
       "matchedName": "Nero",
       "matchedPhone": "+38344428865",
@@ -4635,6 +4720,27 @@
         "https://gjakova.rks-gov.net/wp-content/uploads/2025/09/Vendim-nr.44122-Menaxher-kontrate-Furnizimi-me-material-per-kabinete-teknike.pdf"
       ],
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; Facebook requires login; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found. Google finds municipal documents for 043730111 with tabakubesnik@gmail.com and sometimes fjollaqela@gmail.com in a school/contract context. No evidenced connection to the workshop business; PDF unreadable in the internal browser. These candidates are not adopted."
+    },
+    {
+      "workshopId": "perfect-detailing-podujeve",
+      "matchedName": "Perfect Detailing",
+      "matchedPhone": "+38344837460",
+      "matchedCity": "Podujevë",
+      "emails": [
+        {
+          "address": "perfectdetailing2@gmail.com",
+          "sourceUrls": ["https://www.facebook.com/100082876163691/"],
+          "checkedAt": "2026-10-30",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/l9TnCb78DRJ4/perfect-detailing/",
+        "https://www.facebook.com/100082876163691/",
+        "https://www.instagram.com/perfect_detailingg/"
+      ],
+      "notes": "Own full Contact explicitly labels business email alongside exact mainphone and linked Instagram. No deliverability or consent assertion."
     },
     {
       "workshopId": "peugeot-te-beda-prishtina",

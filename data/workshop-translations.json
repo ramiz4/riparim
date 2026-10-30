@@ -926,6 +926,30 @@
       }
     },
     {
+      "id": "auto-goma-sfishta-podujeve",
+      "sourceHash": "7200eb6fad407985a652c04ec75897d174eac9b4fb89f8fa42b6e88ea624b867",
+      "sq": {
+        "specialty": "Shërbime për goma",
+        "description": "Auto Goma Sfishta në Podujevë ofron shërbime për goma sipas direktorisë dhe profilit të vet. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime për goma të veturave"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Tyre service",
+        "description": "Auto Goma Sfishta in Podujevë offers tyre services according to the business directory and its own business profile. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Passenger-car tyre service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services"
+        ]
+      }
+    },
+    {
       "id": "auto-gomister-llugiqi-istog",
       "sourceHash": "1ece14f549d8a8b0c71516595b2e58b0348b25c81e6caa96aa0affa913cb3dae",
       "sq": {
@@ -2360,6 +2384,30 @@
         "phoneNote": "Public business contact; reachability not confirmed",
         "sourceTitles": [
           "Own Facebook page: name, location, contact and offered services"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-beka-kllokot",
+      "sourceHash": "1e7f47676ad861bd970e615a85cbe665a37dba4ea0336e92999261c6d48de29a",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis BEKA në Kllokot ofron shërbime mekanike për vetura sipas profilit të vet. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis BEKA in Kllokot offers mechanical passenger-car service according to its own business profile. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services"
         ]
       }
     },
@@ -5086,6 +5134,30 @@
       }
     },
     {
+      "id": "autoservice-enisi-kllokot",
+      "sourceHash": "d1fc8d8526ba99d3283438befcfa170b5c3a83281ab17c5b7215ceb728746e8c",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Autoservice Enisi në Kllokot ofron shërbime mekanike për vetura sipas profilit të vet. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Autoservice Enisi in Kllokot offers mechanical passenger-car service according to its own business profile. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services"
+        ]
+      }
+    },
+    {
       "id": "autoservis-agimi-peja",
       "sourceHash": "6e4fe5336247220fbff6833e3a992aae732489e6a18fdf84d93c5450df60fe51",
       "sq": {
@@ -5380,6 +5452,34 @@
         "phoneNote": "Public business contact; reachability not confirmed",
         "sourceTitles": [
           "Public business directory: name, location, business contact and category"
+        ]
+      }
+    },
+    {
+      "id": "autoteknik-vllahiu-podujeve",
+      "sourceHash": "cb74e26e2f37d55dd0517561b1ea9491867f0d561f3f064ff8231886372bc455",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Autoteknik VLLAHIU në Podujevë ofron shërbime mekanike për vetura sipas profilit të vet. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet",
+          "Profili i vet i biznesit: kontakti dhe shërbimet",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Autoteknik VLLAHIU in Podujevë offers mechanical passenger-car service according to its own business profile. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services",
+          "Own business profile: business contact and services",
+          "Own business profile: business contact and services"
         ]
       }
     },
@@ -6660,6 +6760,34 @@
       }
     },
     {
+      "id": "mercedesbenz-toni-hajvali",
+      "sourceHash": "94183f6e124a486b8b86655b5c39983f1be84b621b8e3886fcfbd1c7f7e3a3b8",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Mercedesbenz-Toni në Hajvali ofron shërbime mekanike për vetura sipas profilit të vet. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet",
+          "Profili i vet i biznesit: kontakti dhe shërbimet",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Mercedesbenz-Toni in Hajvali offers mechanical passenger-car service according to its own business profile. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services",
+          "Own business profile: business contact and services",
+          "Own business profile: business contact and services"
+        ]
+      }
+    },
+    {
       "id": "nero-prizren",
       "sourceHash": "dc951412ab5d39fc5a1a706b711b1944eeea001afa30faed50ec4b0eae01b3f5",
       "sq": {
@@ -6766,6 +6894,36 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "perfect-detailing-podujeve",
+      "sourceHash": "f4ec6b7cd355f2fe3a565d8fe06eb40e3c678a8b0ae3a4f72180c1c816a60452",
+      "sq": {
+        "specialty": "Kujdes për vetura, lustrim dhe mbrojtje qeramike",
+        "description": "Perfect Detailing në Podujevë ofron lustrim, mbrojtje qeramike dhe pastrim të brendshëm sipas profilit të vet. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Lustrim, mbrojtje qeramike dhe pastrim i brendshëm"
+        ],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Vehicle detailing, polishing and ceramic protection",
+        "description": "Perfect Detailing in Podujevë offers vehicle polishing, ceramic coating and interior cleaning according to its own business profile. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle polishing, ceramic coating and interior cleaning"
+        ],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services",
+          "Own business profile: business contact and services"
         ]
       }
     },
