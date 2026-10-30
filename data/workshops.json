@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-29T04:19:30.594Z",
+  "updatedAt": "2026-10-30T07:41:34.077Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 266,
+    "published": 272,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 266 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 266,
+    "reason": "All 272 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 272,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -1598,6 +1598,51 @@
             "https://autoglasskosovo.com/location"
           ],
           "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
+        }
+      }
+    },
+    {
+      "id": "auto-goma-sfishta-podujeve",
+      "name": "Auto Goma Sfishta",
+      "city": "Podujevë",
+      "address": "Rr.Ali Ajeti, Hasan Ramadani",
+      "phone": "+38344765778",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38345568446",
+      "brands": [],
+      "services": ["Reifen & Klima"],
+      "serviceDetails": ["Reifenservice für Pkw"],
+      "languages": [],
+      "specialty": "Reifenservice",
+      "description": "Auto Goma Sfishta in Podujevë bietet laut Firmenverzeichnis und eigenem Betriebsauftritt Reifenservice an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.892645,
+      "lng": 21.209673,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/tOgaTumIRCF7/auto-goma-sfishta/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/sfishtaa/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-30",
+      "status": "published",
+      "updatedAt": "2026-10-30T07:40:11.776Z",
+      "google": {
+        "placeId": "ChIJJ-r1HoGvVBMRI3OSzVVQcZA",
+        "matchedAt": "2026-10-30T07:13:34.834515+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/tOgaTumIRCF7/auto-goma-sfishta/",
+            "https://www.facebook.com/sfishtaa/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
         }
       }
     },
@@ -4081,6 +4126,51 @@
           "method": "phone_and_location",
           "sourceUrls": ["https://www.facebook.com/AutoServiceBehari/"],
           "note": "Public Maps UI in the confirmed project account: independently sourced identity, international phone and location match an active entry. Place ID read from a visible official !19s link and directly returned with an unrelated London fallback. Catalogue fields come exclusively from independent business sources; no ownership claim or current Google business content adopted."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-beka-kllokot",
+      "name": "Auto Servis BEKA",
+      "city": "Kllokot",
+      "address": "25-3 Pozheran",
+      "phone": "+38344164790",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344164790",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis BEKA in Kllokot bietet laut eigenem Betriebsauftritt mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.37103,
+      "lng": 21.368603,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/uOI6qtTi0RQ0/auto-servis-beka/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/bekaservis/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-30",
+      "status": "published",
+      "updatedAt": "2026-10-30T07:40:11.775Z",
+      "google": {
+        "placeId": "ChIJl1pNb7CJVBMROTmMQ3_p3D8",
+        "matchedAt": "2026-10-30T06:56:42.445125+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/uOI6qtTi0RQ0/auto-servis-beka/",
+            "https://www.facebook.com/bekaservis/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
         }
       }
     },
@@ -8744,6 +8834,51 @@
       }
     },
     {
+      "id": "autoservice-enisi-kllokot",
+      "name": "Autoservice Enisi",
+      "city": "Kllokot",
+      "address": "Balkanska",
+      "phone": "+38344370720",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344370720",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Autoservice Enisi in Kllokot bietet laut eigenem Betriebsauftritt mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.369111,
+      "lng": 21.37801,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/IG3ZeIT8XGlC/autoservice-enisi/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/AutoserviceEnisi/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-30",
+      "status": "published",
+      "updatedAt": "2026-10-30T07:40:11.775Z",
+      "google": {
+        "placeId": "ChIJz69EetqJVBMRSxSsdraj7oo",
+        "matchedAt": "2026-10-30T06:58:14.194955+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/IG3ZeIT8XGlC/autoservice-enisi/",
+            "https://www.facebook.com/AutoserviceEnisi/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "autoservis-agimi-peja",
       "name": "Autoservis Agimi",
       "city": "Peja",
@@ -9228,6 +9363,63 @@
           "method": "official_maps",
           "sourceUrls": ["https://numrat.com/biznes/0w41Z6tlWJ97/autoservis/"],
           "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
+        }
+      }
+    },
+    {
+      "id": "autoteknik-vllahiu-podujeve",
+      "name": "Autoteknik VLLAHIU",
+      "city": "Podujevë",
+      "address": "Magjistralja",
+      "phone": "+38345690069",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38345690069",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Autoteknik VLLAHIU in Podujevë bietet laut eigenem Betriebsauftritt mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.880561,
+      "lng": 21.180558,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/nYMdk3OoXuHA/autoteknik-vllahiu/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/AutoTeknikVllahiu/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/AutoTeknikVllahiu/posts/2892738920834808/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autoteknik_vllahiu/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-30",
+      "status": "published",
+      "updatedAt": "2026-10-30T07:40:11.769Z",
+      "google": {
+        "placeId": "ChIJVbFaCACpVBMRZWjr92Zcy4Q",
+        "matchedAt": "2026-10-30T06:50:46.604463+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/nYMdk3OoXuHA/autoteknik-vllahiu/",
+            "https://www.facebook.com/AutoTeknikVllahiu/",
+            "https://www.facebook.com/AutoTeknikVllahiu/posts/2892738920834808/",
+            "https://www.instagram.com/autoteknik_vllahiu/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
         }
       }
     },
@@ -11412,6 +11604,63 @@
       }
     },
     {
+      "id": "mercedesbenz-toni-hajvali",
+      "name": "Mercedesbenz-Toni",
+      "city": "Hajvali",
+      "address": "Magjistralja Prishtine-Gjilan",
+      "phone": "+38349330039",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349330039",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Mercedesbenz-Toni in Hajvali bietet laut eigenem Betriebsauftritt mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.608627,
+      "lng": 21.179465,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/N2mI2xAc0rRY/mercedesbenz-toni/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/mercedesbenz.toni/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/mercedesbenz_toni/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/p/C4lDl0dtsdl/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-30",
+      "status": "published",
+      "updatedAt": "2026-10-30T07:40:11.776Z",
+      "google": {
+        "placeId": "ChIJu4TTqpadVBMRv6QOebbreZU",
+        "matchedAt": "2026-10-30T07:21:44.515091+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/N2mI2xAc0rRY/mercedesbenz-toni/",
+            "https://www.facebook.com/mercedesbenz.toni/",
+            "https://www.instagram.com/mercedesbenz_toni/",
+            "https://www.instagram.com/p/C4lDl0dtsdl/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "nero-prizren",
       "name": "Nero",
       "city": "Prizren",
@@ -11612,6 +11861,59 @@
             "https://faqet-e-verdha.cybo.com/XK/gjakov%C3%AB/riparimi-i-makinave-"
           ],
           "note": "Two Google business locations share the phone number. Only the Place ID with the matching name and exact independent Plus Code 9CGP+R24 on Skënderbeu street is adopted. Direct Place Details ID check passed."
+        }
+      }
+    },
+    {
+      "id": "perfect-detailing-podujeve",
+      "name": "Perfect Detailing",
+      "city": "Podujevë",
+      "address": "Peran, 28 Nentori",
+      "phone": "+38344837460",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+37744837460",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Fahrzeugpolieren, Keramikversiegelung und Innenreinigung"
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugaufbereitung, Polieren und Keramikschutz",
+      "description": "Perfect Detailing in Podujevë bietet laut eigenem Betriebsauftritt Fahrzeugpolieren, Keramikversiegelung und Innenreinigung an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.923034,
+      "lng": 21.174759,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/l9TnCb78DRJ4/perfect-detailing/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/100082876163691/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/perfect_detailingg/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-30",
+      "status": "published",
+      "updatedAt": "2026-10-30T07:40:11.775Z",
+      "google": {
+        "placeId": "ChIJaUyww96pVBMRXZXdhl42egw",
+        "matchedAt": "2026-10-30T07:03:20.970548+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/l9TnCb78DRJ4/perfect-detailing/",
+            "https://www.facebook.com/100082876163691/",
+            "https://www.instagram.com/perfect_detailingg/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
         }
       }
     },
