@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-10-30T07:41:34.077Z",
+  "updatedAt": "2026-10-31T04:07:14.874Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 272,
+    "published": 273,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 272 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 272,
+    "reason": "All 273 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 273,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -12024,6 +12024,51 @@
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
+        }
+      }
+    },
+    {
+      "id": "premium-auto-service-lipjan",
+      "name": "Premium auto service",
+      "city": "Lipjan",
+      "address": "Rrugë Ukshin Hoti",
+      "phone": "+38343575820",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38343575820",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Premium auto service in Lipjan bietet laut eigenem Betriebsauftritt mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.504417,
+      "lng": 21.111131,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/zk4E26q32cMo/premium-auto-service/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.instagram.com/autoservis.premium/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-10-31",
+      "status": "published",
+      "updatedAt": "2026-10-31T04:06:31.498Z",
+      "google": {
+        "placeId": "ChIJY-KnRgCDVBMRwU9OitgRW0E",
+        "matchedAt": "2026-10-31T04:06:31.338305+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/zk4E26q32cMo/premium-auto-service/",
+            "https://www.instagram.com/autoservis.premium/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
         }
       }
     },

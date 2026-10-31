@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "459d028302ed956910a890dfd455f0de42ee902b229a06aaa18c97367a156767",
+  "revision": "5bf9643ae9ec5b5cf552a5005dc03469fb7bb312dd72193a531e28ca33b5c29b",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -21076,6 +21076,87 @@
           "09:00-14:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "premium-auto-service-lipjan",
+      "expected": {
+        "name": "Premium auto service",
+        "city": "Lipjan",
+        "address": "Rrugë Ukshin Hoti",
+        "phone": "+38343575820"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-10-31",
+        "source": "https://numrat.com/biznes/zk4E26q32cMo/premium-auto-service/",
+        "sourceName": "Premium auto service",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated2026-10-12; own bio undated. Viewing today is not operator confirmation. Directory has no week. Exact-phone own Instagram has no hours or own website. Same-name Facebook has hours but lacks contact/site attribution, so not used. Use central explicitly assumed standard week. Checked sources: https://numrat.com/biznes/zk4E26q32cMo/premium-auto-service/ https://www.instagram.com/autoservis.premium/ https://www.instagram.com/reel/DbDKAbrsklP/ https://www.facebook.com/autoserviceepremium/ No Google hours copied. Source viewed today is not operator confirmation; no current open/closed status asserted.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
