@@ -6990,6 +6990,30 @@
       }
     },
     {
+      "id": "premium-auto-service-lipjan",
+      "sourceHash": "4073e03aa82b23c2b734c1ffd3a4c976ffca0b95072c3ebaa480a755f567e9ba",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Premium auto service në Lipjan ofron shërbime mekanike për vetura sipas profilit të vet. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Premium auto service in Lipjan offers mechanical passenger-car service according to its own business profile. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services"
+        ]
+      }
+    },
+    {
       "id": "prishtina-auto-home-prishtina",
       "sourceHash": "f8c59200bba22b5ad033ba5a3c1cdc303e2f2491f581b0afba278662f847a816",
       "sq": {
