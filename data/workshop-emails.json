@@ -4324,6 +4324,28 @@
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; Facebook requires login; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found. ARBK Open Fitim N. Morina B.I. lists exactly 049273699 and Fatmir Ibishi nr.6 but no email. An additional Facebook page DriveSmart lists only phone/Messenger and no email."
     },
     {
+      "workshopId": "genci-auto-servis-pjese-suhareke",
+      "matchedName": "GENCI Auto Servis & Pjesë",
+      "matchedPhone": "+38344653026",
+      "matchedCity": "Suharekë",
+      "emails": [
+        {
+          "address": "autoservisgenci@gmail.com",
+          "sourceUrls": ["https://www.facebook.com/AutoServisGenci/"],
+          "checkedAt": "2026-11-02",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/NtZfasY0uBz1/genci-auto-servis-pjese/",
+        "https://www.instagram.com/servis.pjese.genci/",
+        "https://asgenci.com/",
+        "https://www.facebook.com/AutoServisGenci/"
+      ],
+      "notes": "Own public Facebook Contact explicitly lists exact workshop phone and business email; same own domain as linked Instagram. No deliverability/consent/ownership claim."
+    },
+    {
       "workshopId": "global-automotive",
       "matchedName": "Global Automotive",
       "matchedPhone": "+38344409000",

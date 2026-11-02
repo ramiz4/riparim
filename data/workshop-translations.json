@@ -6276,6 +6276,34 @@
       }
     },
     {
+      "id": "genci-auto-servis-pjese-suhareke",
+      "sourceHash": "b4801f1186b14368be5fc2f3a7783d60bcd2169bcdd67bd75fa1da1d38b45e1c",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "GENCI Auto Servis & Pjesë në Suharekë ofron shërbime mekanike për vetura sipas profilit të vet. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet",
+          "Profili i vet i biznesit: kontakti dhe shërbimet",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "GENCI Auto Servis & Pjesë in Suharekë offers mechanical passenger-car service according to its own business profile. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services",
+          "Own business profile: business contact and services",
+          "Own business profile: business contact and services"
+        ]
+      }
+    },
+    {
       "id": "global-automotive",
       "sourceHash": "7740b70948b235e95e2acf129b147718d31d629d83cae40494f6d9b5175f6f37",
       "sq": {
