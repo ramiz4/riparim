@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "5bf9643ae9ec5b5cf552a5005dc03469fb7bb312dd72193a531e28ca33b5c29b",
+  "revision": "d9dac1c1f1ac85baad58e61d6dcee81270e6ad39b1d9535dcfc5fe568236498b",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -19053,6 +19053,95 @@
           "08:00-18:00",
           "08:00-18:00",
           "08:00-19:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "genci-auto-servis-pjese-suhareke",
+      "expected": {
+        "name": "GENCI Auto Servis & Pjesë",
+        "city": "Suharekë",
+        "address": "Topliçan",
+        "phone": "+38344653026"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-11-02",
+        "source": "https://www.facebook.com/AutoServisGenci/",
+        "sourceName": "GENCI Auto Servis & Pjesë",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own hours dialog has no visible update age; websitefooter2025, directory2026-10-12. Complete own Facebook weekly dialog Monday-Saturday09–17,Sundayclosed. Exact phone/domain match; general municipality label compatible with independent Toplican site. No Google hours copied and no operator confirmation date invented. Checked sources: https://www.facebook.com/AutoServisGenci/ https://numrat.com/biznes/NtZfasY0uBz1/genci-auto-servis-pjese/ https://www.instagram.com/servis.pjese.genci/ https://asgenci.com/ No Google hours copied. Source viewed today is not operator confirmation; no current open/closed status asserted.",
+        "originalWeek": [
+          "09:00-17:00",
+          "09:00-17:00",
+          "09:00-17:00",
+          "09:00-17:00",
+          "09:00-17:00",
+          "09:00-17:00",
           "Geschlossen"
         ],
         "earlierPlan": ""
