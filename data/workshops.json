@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-11-02T04:05:45.197Z",
+  "updatedAt": "2026-11-03T07:14:06.037Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 274,
+    "published": 280,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 274 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 274,
+    "reason": "All 280 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 280,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -3233,6 +3233,51 @@
       }
     },
     {
+      "id": "auto-service-duga-gjakova",
+      "name": "Auto Service Duga",
+      "city": "Gjakova",
+      "address": "Gaspër Krasniqi",
+      "phone": "+38343599998",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38343599998",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Service Duga in Gjakova bietet laut eigenem Betriebsauftritt mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.371663,
+      "lng": 20.453719,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/WnrQ2ZGXWeCw/auto-service-duga/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.instagram.com/autoservice_duga/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-03",
+      "status": "published",
+      "updatedAt": "2026-11-03T07:14:00.407Z",
+      "google": {
+        "placeId": "ChIJJ3xcUoKxUxMRtWACM4Q9BmA",
+        "matchedAt": "2026-11-03T06:45:03.294337+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/WnrQ2ZGXWeCw/auto-service-duga/",
+            "https://www.instagram.com/autoservice_duga/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-service-express-prishtina",
       "name": "Auto Service Express",
       "city": "Prishtina",
@@ -3851,6 +3896,45 @@
             "https://www.autos1000.com/XK/Gjakova/209901509451149/Auto-servis-%22Agimi%22"
           ],
           "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-agroni-gjakova",
+      "name": "Auto Servis Agroni",
+      "city": "Gjakova",
+      "address": "Gjakova 50000",
+      "phone": "+38343991105",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38343991105",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis Agroni in Gjakova ist im öffentlichen Firmenverzeichnis als mechanische Pkw-Werkstatt aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.36402,
+      "lng": 20.413169,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/oc4wdKDDgEUq/auto-servis-agroni/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-03",
+      "status": "published",
+      "updatedAt": "2026-11-03T07:14:00.408Z",
+      "google": {
+        "placeId": "ChIJEW6RMACzUxMR9z3OwUqmd58",
+        "matchedAt": "2026-11-03T06:51:10.402808+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/oc4wdKDDgEUq/auto-servis-agroni/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
         }
       }
     },
@@ -6511,6 +6595,45 @@
       }
     },
     {
+      "id": "auto-servis-noshi-gjakova",
+      "name": "Auto Servis NOSHI",
+      "city": "Gjakova",
+      "address": "48 Urim Bytyqi",
+      "phone": "+38344630480",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis NOSHI in Gjakova ist im öffentlichen Firmenverzeichnis als mechanische Pkw-Werkstatt aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.373524,
+      "lng": 20.431785,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/11YpcifJSs1W/auto-servis-noshi/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-03",
+      "status": "published",
+      "updatedAt": "2026-11-03T07:14:00.408Z",
+      "google": {
+        "placeId": "ChIJp0yQ2RKxUxMR25k6r9fMLfY",
+        "matchedAt": "2026-11-03T06:57:33.128266+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/11YpcifJSs1W/auto-servis-noshi/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-servis-perparimi-ferizaj",
       "name": "Auto Servis Përparimi",
       "city": "Ferizaj",
@@ -6743,6 +6866,45 @@
           "method": "phone_and_location",
           "sourceUrls": ["https://www.cybo.com/XK-biz/auto-servis-rizvanolli"],
           "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-rraqi-gjakova",
+      "name": "Auto Servis Rraqi",
+      "city": "Gjakova",
+      "address": "29 Vesli Klark",
+      "phone": "+38345681442",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38345681442",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis Rraqi in Gjakova ist im öffentlichen Firmenverzeichnis als mechanische Pkw-Werkstatt aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.388865,
+      "lng": 20.436349,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/JxIzp2E2Nuj5/auto-servis-rraqi/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-03",
+      "status": "published",
+      "updatedAt": "2026-11-03T07:14:00.408Z",
+      "google": {
+        "placeId": "ChIJpeSJiyexUxMRM34FeBCErl8",
+        "matchedAt": "2026-11-03T07:00:41.070519+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/JxIzp2E2Nuj5/auto-servis-rraqi/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
         }
       }
     },
@@ -9892,6 +10054,45 @@
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
+        }
+      }
+    },
+    {
+      "id": "checkbox-garage-gjakova",
+      "name": "CheckBox Garage Gjakovë",
+      "city": "Gjakova",
+      "address": "Rruga Gasper Karaqi",
+      "phone": "+38344530006",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344530006",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "CheckBox Garage Gjakovë in Gjakova ist im öffentlichen Firmenverzeichnis als mechanische Pkw-Werkstatt aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.374581,
+      "lng": 20.446273,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/P5DCxmqPDX4e/checkbox-garage-gjakove/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-03",
+      "status": "published",
+      "updatedAt": "2026-11-03T07:14:00.409Z",
+      "google": {
+        "placeId": "ChIJdQzU0saxUxMRe39XpsmKBwY",
+        "matchedAt": "2026-11-03T07:05:52.881634+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/P5DCxmqPDX4e/checkbox-garage-gjakove/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
         }
       }
     },
@@ -13230,6 +13431,63 @@
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
+        }
+      }
+    },
+    {
+      "id": "vp-garage-gjakova",
+      "name": "VP GARAGE",
+      "city": "Gjakova",
+      "address": "Qerim, Rr. Wesley Clark",
+      "phone": "+38344971859",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344971859",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "VP GARAGE in Gjakova bietet laut eigenem Betriebsauftritt mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.404466,
+      "lng": 20.436048,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/kMx4UjXib8UG/vp-garage-auto-service/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.vp-garage.com/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/vpgarage1/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/profile.php?id=61587271346407",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-03",
+      "status": "published",
+      "updatedAt": "2026-11-03T07:14:00.408Z",
+      "google": {
+        "placeId": "ChIJoRKVuSSvUxMRHMXM_-2S0b4",
+        "matchedAt": "2026-11-03T06:56:38.635137+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/kMx4UjXib8UG/vp-garage-auto-service/",
+            "https://www.vp-garage.com/",
+            "https://www.instagram.com/vpgarage1/",
+            "https://www.facebook.com/profile.php?id=61587271346407"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
         }
       }
     },

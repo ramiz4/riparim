@@ -1297,6 +1297,19 @@
       "notes": "Full directory, focused business-name/town query, native Facebook public pages search and exact43phone/email/Instagram query inspected. No attributable own Kosovo website/social/email found; foreign same-name/design results unrelated and not adopted."
     },
     {
+      "workshopId": "auto-service-duga-gjakova",
+      "matchedName": "Auto Service Duga",
+      "matchedPhone": "+38343599998",
+      "matchedCity": "Gjakova",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/WnrQ2ZGXWeCw/auto-service-duga/",
+        "https://www.instagram.com/autoservice_duga/"
+      ],
+      "notes": "Fulldirectory noemail/site; exactphone search and nativeFacebookPages search yieldnoattributablebusinesspage; targetedInstagram/emailsearch found ownInstagram, expandedbio lists2numbers only, noemail/website."
+    },
+    {
       "workshopId": "auto-service-express-prishtina",
       "matchedName": "Auto Service Express",
       "matchedPhone": "+38349595483",
@@ -1543,6 +1556,18 @@
         "https://www.google.com/search?q=Auto%20servis%20%22Agimi%22%20Gjakova%20email%20-site%3Acybo.com%20-site%3Ariparim.com"
       ],
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
+    },
+    {
+      "workshopId": "auto-servis-agroni-gjakova",
+      "matchedName": "Auto Servis Agroni",
+      "matchedPhone": "+38343991105",
+      "matchedCity": "Gjakova",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/oc4wdKDDgEUq/auto-servis-agroni/"
+      ],
+      "notes": "Fulldirectory noemail/site. Exactphone and targetedname/town/Instagram/emailsearch produced noattributableownsource. NativeFacebookPagessearch returned different-town/differentphoneAgroni, not adopted."
     },
     {
       "workshopId": "auto-servis-anuari-prishtina",
@@ -2641,6 +2666,18 @@
       "notes": "Own Facebook bio/contact tab, own linked Instagram full short bio and full Numrat detail expose no business email or own contact website. No unlinked or guessed address adopted."
     },
     {
+      "workshopId": "auto-servis-noshi-gjakova",
+      "matchedName": "Auto Servis NOSHI",
+      "matchedPhone": "+38344630480",
+      "matchedCity": "Gjakova",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/11YpcifJSs1W/auto-servis-noshi/"
+      ],
+      "notes": "Fullindependentlisting noemail/website; exactphonequery, nativeFacebookPages and explicitname/town/Instagram/emailsearch foundnoattributableownsource. Unrelatedprofiles notadopted."
+    },
+    {
       "workshopId": "auto-servis-perparimi-ferizaj",
       "matchedName": "Auto Servis Përparimi",
       "matchedPhone": "+38344444713",
@@ -2747,6 +2784,18 @@
         "https://www.google.com/search?q=%2B38344605905%20Gjakova%20email%20Facebook%20Instagram"
       ],
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
+    },
+    {
+      "workshopId": "auto-servis-rraqi-gjakova",
+      "matchedName": "Auto Servis Rraqi",
+      "matchedPhone": "+38345681442",
+      "matchedCity": "Gjakova",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/JxIzp2E2Nuj5/auto-servis-rraqi/"
+      ],
+      "notes": "Full directory noemail/site. Exactphonequery/nativeFacebookPages and name/town/Instagram/emailquery yieldednoattributableownsource; unrelatedpersonalRaqi profile and othercitylocation notadopted."
     },
     {
       "workshopId": "auto-servis-sahiti-podujeve",
@@ -3965,6 +4014,18 @@
         "https://www.instagram.com/ceskoauto/?hl=de"
       ],
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
+    },
+    {
+      "workshopId": "checkbox-garage-gjakova",
+      "matchedName": "CheckBox Garage Gjakovë",
+      "matchedPhone": "+38344530006",
+      "matchedCity": "Gjakova",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/P5DCxmqPDX4e/checkbox-garage-gjakove/"
+      ],
+      "notes": "Full directory noemail/site. NativeFacebookPages noresults; exactphone andexplicitname/town/Instagram/emailqueries noattributableownprofile. SwissCheckBoxnetwork contacts notadopted."
     },
     {
       "workshopId": "dd-auto-service",
@@ -5287,6 +5348,28 @@
         "https://www.google.com/search?q=Valoni-I+Mitrovica+email+kontakt"
       ],
       "notes": "Gjirafa shows an email for AutoServis Valoni-i at exactly Nr.1 Adem Voca, Mitrovicë 40000. The directory lists different/older phone numbers, so assignment uses the distinctive name and identical street address; profile phones remain unchanged."
+    },
+    {
+      "workshopId": "vp-garage-gjakova",
+      "matchedName": "VP GARAGE",
+      "matchedPhone": "+38344971859",
+      "matchedCity": "Gjakova",
+      "emails": [
+        {
+          "address": "info@vp-garage.com",
+          "sourceUrls": ["https://www.vp-garage.com/"],
+          "checkedAt": "2026-11-03",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/kMx4UjXib8UG/vp-garage-auto-service/",
+        "https://www.vp-garage.com/",
+        "https://www.instagram.com/vpgarage1/",
+        "https://www.facebook.com/profile.php?id=61587271346407"
+      ],
+      "notes": "Own Contact section explicit business email beside exactphoneandlocation. No deliverability/consent/ownership claim."
     },
     {
       "workshopId": "vullkanizer-asmiri-rahovec",

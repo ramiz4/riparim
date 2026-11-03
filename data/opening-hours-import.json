@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "d9dac1c1f1ac85baad58e61d6dcee81270e6ad39b1d9535dcfc5fe568236498b",
+  "revision": "ca25cd3a1076e2278cf1c1ef6f8749e60f6ae7ed612db6447448a73072683c6f",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -5621,6 +5621,87 @@
       }
     },
     {
+      "id": "auto-service-duga-gjakova",
+      "expected": {
+        "name": "Auto Service Duga",
+        "city": "Gjakova",
+        "address": "Gaspër Krasniqi",
+        "phone": "+38343599998"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-03",
+        "source": "https://numrat.com/biznes/WnrQ2ZGXWeCw/auto-service-duga/",
+        "sourceName": "Auto Service Duga",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory2026-10-12; ownbio undated No completeweek in independentlisting or ownexpandedbio; noattributableFacebook or ownwebsitefound. Centralexplicitassumeddefault after allgates. NoGooglehours copied. Checked sources: https://numrat.com/biznes/WnrQ2ZGXWeCw/auto-service-duga/ https://www.instagram.com/autoservice_duga/ No Google hours copied. Source viewed today is not operator confirmation; no current open/closed status asserted.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-service-express-prishtina",
       "expected": {
         "name": "Auto Service Express",
@@ -6586,6 +6667,87 @@
           "09:00-18:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-agroni-gjakova",
+      "expected": {
+        "name": "Auto Servis Agroni",
+        "city": "Gjakova",
+        "address": "Gjakova 50000",
+        "phone": "+38343991105"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-03",
+        "source": "https://numrat.com/biznes/oc4wdKDDgEUq/auto-servis-agroni/",
+        "sourceName": "Auto Servis Agroni",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directoryupdated2026-10-12; noownsourceattributed No independent completeweeklyplan; Googlehours notcopied. Usecentralexplicitassumeddefaults aftergates. Checked sources: https://numrat.com/biznes/oc4wdKDDgEUq/auto-servis-agroni/ No Google hours copied. Source viewed today is not operator confirmation; no current open/closed status asserted.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -11478,6 +11640,87 @@
       }
     },
     {
+      "id": "auto-servis-noshi-gjakova",
+      "expected": {
+        "name": "Auto Servis NOSHI",
+        "city": "Gjakova",
+        "address": "48 Urim Bytyqi",
+        "phone": "+38344630480"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-03",
+        "source": "https://numrat.com/biznes/11YpcifJSs1W/auto-servis-noshi/",
+        "sourceName": "Auto Servis NOSHI",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directoryupdated2026-10-12 No complete independentweek orattributableownhours source found. Centralexplicitassumeddefaults; noGooglehourscopied. Checked sources: https://numrat.com/biznes/11YpcifJSs1W/auto-servis-noshi/ No Google hours copied. Source viewed today is not operator confirmation; no current open/closed status asserted.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-servis-perparimi-ferizaj",
       "expected": {
         "name": "Auto Servis Përparimi",
@@ -11905,6 +12148,87 @@
           "08:00-16:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-rraqi-gjakova",
+      "expected": {
+        "name": "Auto Servis Rraqi",
+        "city": "Gjakova",
+        "address": "29 Vesli Klark",
+        "phone": "+38345681442"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-03",
+        "source": "https://numrat.com/biznes/JxIzp2E2Nuj5/auto-servis-rraqi/",
+        "sourceName": "Auto Servis Rraqi",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directoryupdated2026-10-12 No complete independentweeklyplan orattributableownsource found. Centralexplicitassumeddefaults; noGooglehourscopied. Checked sources: https://numrat.com/biznes/JxIzp2E2Nuj5/auto-servis-rraqi/ No Google hours copied. Source viewed today is not operator confirmation; no current open/closed status asserted.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -17538,6 +17862,87 @@
       }
     },
     {
+      "id": "checkbox-garage-gjakova",
+      "expected": {
+        "name": "CheckBox Garage Gjakovë",
+        "city": "Gjakova",
+        "address": "Rruga Gasper Karaqi",
+        "phone": "+38344530006"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-03",
+        "source": "https://numrat.com/biznes/P5DCxmqPDX4e/checkbox-garage-gjakove/",
+        "sourceName": "CheckBox Garage Gjakovë",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory2026-10-12 No independent completeweeklyplan orattributableownsource found. Centralexplicitassumeddefaults; noGooglehourscopied. Checked sources: https://numrat.com/biznes/P5DCxmqPDX4e/checkbox-garage-gjakove/ No Google hours copied. Source viewed today is not operator confirmation; no current open/closed status asserted.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "dd-auto-service",
       "expected": {
         "name": "DD Auto Service",
@@ -23097,6 +23502,95 @@
           "09:00-18:00",
           "09:00-18:00",
           "09:00-18:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "vp-garage-gjakova",
+      "expected": {
+        "name": "VP GARAGE",
+        "city": "Gjakova",
+        "address": "Qerim, Rr. Wesley Clark",
+        "phone": "+38344971859"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "15:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-11-03",
+        "source": "https://www.vp-garage.com/",
+        "sourceName": "VP GARAGE",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Ownwebsitecontactweekundated; linkedFacebook identicalweek updatedabout9monthsago. Websiteblog hasJune2026posts; notcurrentoperatorconfirmation. Complete ownwebweek independently read; linkedFacebook corroborates. No Googlehours copied. Checked sources: https://www.vp-garage.com/ https://www.facebook.com/profile.php?id=61587271346407 https://numrat.com/biznes/kMx4UjXib8UG/vp-garage-auto-service/ https://www.instagram.com/vpgarage1/ No Google hours copied. Source viewed today is not operator confirmation; no current open/closed status asserted.",
+        "originalWeek": [
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-18:00",
+          "09:00-15:00",
           "Geschlossen"
         ],
         "earlierPlan": ""

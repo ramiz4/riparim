@@ -1856,6 +1856,30 @@
       }
     },
     {
+      "id": "auto-service-duga-gjakova",
+      "sourceHash": "7d9b6645e94251caaf486d7fdb8ca2c3f194bc60ffccac0b7736fa2a40658ec9",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Service Duga në Gjakova ofron shërbime mekanike për vetura sipas profilit të vet. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Service Duga in Gjakova offers mechanical passenger-car service according to its own business profile. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services"
+        ]
+      }
+    },
+    {
       "id": "auto-service-express-prishtina",
       "sourceHash": "068f4e8b40acc19974b4fa147eeaac689a0f18f4c818cd0a94e0e89bdfcc82dc",
       "sq": {
@@ -2216,6 +2240,28 @@
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category",
           "Contact, location and passenger-car service cross-check dated 5 October 2026"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-agroni-gjakova",
+      "sourceHash": "006a8d4203c59384383c7d1715d002f7e3ff6590fa45aa0cb218ac80f0b3b9db",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis Agroni në Gjakova figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis Agroni in Gjakova is listed in the public business directory as a mechanical passenger-car workshop. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
         ]
       }
     },
@@ -3790,6 +3836,28 @@
       }
     },
     {
+      "id": "auto-servis-noshi-gjakova",
+      "sourceHash": "0625c83b94a1ed5cc18a81918ab14516f17e5f3de22e10de29bf90b252b672de",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis NOSHI në Gjakova figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis NOSHI in Gjakova is listed in the public business directory as a mechanical passenger-car workshop. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-perparimi-ferizaj",
       "sourceHash": "a7beabeb73865c5061b7775a5e8cbc2c45f16869cd6f0e6e8f8fea549c78cd9d",
       "sq": {
@@ -3920,6 +3988,28 @@
         "phoneNote": "Public directory contact (Cybo); not confirmed by the business",
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-rraqi-gjakova",
+      "sourceHash": "57bbef4cde0bc62ea8b3babd3be02b4403a31f51e462e55e2ec20a4b9202181f",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis Rraqi në Gjakova figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis Rraqi in Gjakova is listed in the public business directory as a mechanical passenger-car workshop. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
         ]
       }
     },
@@ -5747,6 +5837,28 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Public directory: name, contact and vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "checkbox-garage-gjakova",
+      "sourceHash": "c756e2ab6551882b448f129645eb71e5c092d0c76947bedcd21cd5bfd3c7bcf3",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "CheckBox Garage Gjakovë në Gjakova figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "CheckBox Garage Gjakovë in Gjakova is listed in the public business directory as a mechanical passenger-car workshop. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
         ]
       }
     },
@@ -7685,6 +7797,34 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Public directory: name, contact and vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "vp-garage-gjakova",
+      "sourceHash": "17fb77b08993676859f4d8a6541e3ca1b8d4f4e3c59dc4837ca874c18ce4ccd4",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "VP GARAGE në Gjakova ofron shërbime mekanike për vetura sipas profilit të vet. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet",
+          "Profili i vet i biznesit: kontakti dhe shërbimet",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "VP GARAGE in Gjakova offers mechanical passenger-car service according to its own business profile. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services",
+          "Own business profile: business contact and services",
+          "Own business profile: business contact and services"
         ]
       }
     },
