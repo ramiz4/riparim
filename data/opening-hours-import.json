@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "ca25cd3a1076e2278cf1c1ef6f8749e60f6ae7ed612db6447448a73072683c6f",
+  "revision": "cea8ba6ef5406810848aa6997a5d817071deb2592003b55b8e8a465dde1e9219",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -5273,6 +5273,87 @@
       }
     },
     {
+      "id": "auto-service-beni-vushtrri",
+      "expected": {
+        "name": "Auto Service BENI",
+        "city": "Vushtrri",
+        "address": "57 Minatori",
+        "phone": "+38349198120"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-04",
+        "source": "https://numrat.com/biznes/2cxUTYdrbiU8/auto-service-beni/",
+        "sourceName": "Auto Service BENI",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated 2026-10-12; no attributable own weekly plan found. No full weekly plan in independent directory or attributable own site/social source. Use central explicitly assumed defaults. No Google hours copied. Checked sources: https://numrat.com/biznes/2cxUTYdrbiU8/auto-service-beni/ No Google hours copied. Source viewed today is not operator confirmation; no current open/closed status asserted.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-service-besi-vushtrri",
       "expected": {
         "name": "Auto service BESI",
@@ -6315,6 +6396,95 @@
       }
     },
     {
+      "id": "auto-service-merovci-vushtrri",
+      "expected": {
+        "name": "Auto Service MEROVCI",
+        "city": "Vushtrri",
+        "address": "Doberlluke",
+        "phone": "+38349536524"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-11-04",
+        "source": "https://www.facebook.com/profile.php?id=61594189251457",
+        "sourceName": "Auto Service MEROVCI",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own full weekly dialog updated about two months ago Own schedule read directly, including shorter Monday. Expanded Instagram bio has no conflicting week. No Google hours copied; no operator confirmation inferred. Checked sources: https://www.facebook.com/profile.php?id=61594189251457 https://numrat.com/biznes/s98SjMpP3boj/auto-service-merovci/ https://www.instagram.com/autoservismerovci/ No Google hours copied. Source viewed today is not operator confirmation; no current open/closed status asserted.",
+        "originalWeek": [
+          "09:00-17:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-service-muslija-prizren",
       "expected": {
         "name": "Auto Service \"MUSLIJA\"",
@@ -6400,6 +6570,87 @@
           "08:00-19:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-service-plus-vushtrri",
+      "expected": {
+        "name": "Auto Service Plus",
+        "city": "Vushtrri",
+        "address": "Ana Lin",
+        "phone": "+38349111469"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-04",
+        "source": "https://numrat.com/biznes/MbUdClMSRsGW/auto-service-plus/",
+        "sourceName": "Auto Service Plus",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated 2026-10-12; own Instagram bio undated No full week in independent listing or own bio. Facebook search produced no attributable Kosovo page; no own website found. Use central assumed default, no Google hours copied. Checked sources: https://numrat.com/biznes/MbUdClMSRsGW/auto-service-plus/ https://www.instagram.com/autoserviceplus_/ No Google hours copied. Source viewed today is not operator confirmation; no current open/closed status asserted.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -8482,6 +8733,87 @@
           "08:00-18:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-dini-vushtrri",
+      "expected": {
+        "name": "Auto Servis DINI",
+        "city": "Vushtrri",
+        "address": "120 Ukshin Hoti",
+        "phone": "+38344235009"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-04",
+        "source": "https://numrat.com/biznes/FONs6VEeRmFR/auto-servis-dini/",
+        "sourceName": "Auto Servis DINI",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Numrat updated2026-10-12; Filikaqa advertisement undated Neither independent listing publishes a full week; no attributable own Facebook/Instagram/website hours found. Central assumed default; no Google hours copied. Checked sources: https://numrat.com/biznes/FONs6VEeRmFR/auto-servis-dini/ https://www.filikaqa.com/en/listings/478-auto-servis-dini No Google hours copied. Source viewed today is not operator confirmation; no current open/closed status asserted.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -15507,6 +15839,95 @@
           "08:00-17:00",
           "08:00-17:00",
           "Geschlossen",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "automeqa-servis-gjakova",
+      "expected": {
+        "name": "AUTOMEQA Servis",
+        "city": "Gjakova",
+        "address": "Deshmoret e Rugoves",
+        "phone": "+38345468888"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "15:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-11-04",
+        "source": "https://www.facebook.com/automeqa/",
+        "sourceName": "AUTOMEQA Servis",
+        "researchStatus": "Gefunden (nachvollziehbare Betriebsquelle)",
+        "notes": "Own full weekly dialog updated about four years ago; viewed today, not operator confirmation. Full own Facebook schedule, no independent contradiction. No Google hours copied. Checked sources: https://www.facebook.com/automeqa/ https://numrat.com/biznes/7momesnjxjp8/automeqa-servis/ No Google hours copied. Source viewed today is not operator confirmation; no current open/closed status asserted.",
+        "originalWeek": [
+          "08:30-17:00",
+          "08:30-17:00",
+          "08:30-17:00",
+          "08:30-17:00",
+          "08:30-17:00",
+          "08:30-15:00",
           "Geschlossen"
         ],
         "earlierPlan": ""

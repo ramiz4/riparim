@@ -1742,6 +1742,28 @@
       }
     },
     {
+      "id": "auto-service-beni-vushtrri",
+      "sourceHash": "3c3880509c69abdc59a82e1aa087def6d6860380cba000d0fb60a9f2cc0fe222",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Service BENI në Vushtrri figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Service BENI in Vushtrri is listed in the public business directory as a mechanical passenger-car workshop. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
+        ]
+      }
+    },
+    {
       "id": "auto-service-besi-vushtrri",
       "sourceHash": "f1104831a7ad34d38f76e93f3a160e99b7eecf72df50843fae30e58dc64b6069",
       "sq": {
@@ -2074,6 +2096,32 @@
       }
     },
     {
+      "id": "auto-service-merovci-vushtrri",
+      "sourceHash": "2edb2cd8c6116af2a50bcc2f857753726e7e0595df5890730e8c242f06f8f14d",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Service MEROVCI në Vushtrri ofron shërbime mekanike për vetura sipas profilit të vet. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Service MEROVCI in Vushtrri offers mechanical passenger-car service according to its own business profile. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services",
+          "Own business profile: business contact and services"
+        ]
+      }
+    },
+    {
       "id": "auto-service-muslija-prizren",
       "sourceHash": "5fd7b27d10b953c98a76c9d24c0ecb53876c7dc41c8724902f34d83e6b6243c4",
       "sq": {
@@ -2098,6 +2146,30 @@
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category",
           "Contact, location and passenger-car service cross-check dated 5 October 2026"
+        ]
+      }
+    },
+    {
+      "id": "auto-service-plus-vushtrri",
+      "sourceHash": "a137d1c0701740c27fe7d7104435eeca704a82320a8dcdebd9d32c9240265def",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Service Plus në Vushtrri figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe vendndodhja"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Service Plus in Vushtrri is listed in the public business directory as a mechanical passenger-car workshop. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and location"
         ]
       }
     },
@@ -2830,6 +2902,30 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "GjithëBiznesi: name, telephone number, location and vehicle maintenance/repair"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-dini-vushtrri",
+      "sourceHash": "e585855e236fd83f6be49d65dc93c42f051a611c45c91695951f60ec7edd219a",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis DINI në Vushtrri figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis DINI in Vushtrri is listed in the public business directory as a mechanical passenger-car workshop. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Public business directory: name, location, business contact and category"
         ]
       }
     },
@@ -5074,6 +5170,30 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Public directory: name, contact and vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "automeqa-servis-gjakova",
+      "sourceHash": "557426d649dac93aba7e4b88bd5a79875dc3ecf8ef1e56d00f80af9e22596de1",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "AUTOMEQA Servis në Gjakova ofron shërbime mekanike për vetura sipas profilit të vet. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Profili i vet i biznesit: kontakti dhe shërbimet"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "AUTOMEQA Servis in Gjakova offers mechanical passenger-car service according to its own business profile. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Own business profile: business contact and services"
         ]
       }
     },
