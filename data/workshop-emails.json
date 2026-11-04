@@ -1224,6 +1224,18 @@
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; Instagram bio checked; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
     },
     {
+      "workshopId": "auto-service-beni-vushtrri",
+      "matchedName": "Auto Service BENI",
+      "matchedPhone": "+38349198120",
+      "matchedCity": "Vushtrri",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/2cxUTYdrbiU8/auto-service-beni/"
+      ],
+      "notes": "Full independent directory, focused name/town/Instagram/email search, exact phone search and native Facebook Pages search inspected. No attributable own website, social contact or public email found. Unrelated contacts excluded."
+    },
+    {
       "workshopId": "auto-service-besi-vushtrri",
       "matchedName": "Auto service BESI",
       "matchedPhone": "+38349205441",
@@ -1443,6 +1455,29 @@
       "notes": "The public contact list of ARBK Open (an independent directory, not a government website) lists the email, the business in Prishtinë and exactly +38343799021. Generic contact@gmail.com from the other Atlas result excluded."
     },
     {
+      "workshopId": "auto-service-merovci-vushtrri",
+      "matchedName": "Auto Service MEROVCI",
+      "matchedPhone": "+38349536524",
+      "matchedCity": "Vushtrri",
+      "emails": [
+        {
+          "address": "merovcilaurent@gmail.com",
+          "sourceUrls": [
+            "https://www.facebook.com/profile.php?id=61594189251457"
+          ],
+          "checkedAt": "2026-11-04",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/s98SjMpP3boj/auto-service-merovci/",
+        "https://www.facebook.com/profile.php?id=61594189251457",
+        "https://www.instagram.com/autoservismerovci/"
+      ],
+      "notes": "Own public business Contact lists this address beside exact workshop phone; no deliverability or consent claim."
+    },
+    {
       "workshopId": "auto-service-muslija-prizren",
       "matchedName": "Auto Service \"MUSLIJA\"",
       "matchedPhone": "+38344662200",
@@ -1462,6 +1497,19 @@
         "https://www.facebook.com/p/AUTO-servis-Muslija-100050343203947/"
       ],
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
+    },
+    {
+      "workshopId": "auto-service-plus-vushtrri",
+      "matchedName": "Auto Service Plus",
+      "matchedPhone": "+38349111469",
+      "matchedCity": "Vushtrri",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/MbUdClMSRsGW/auto-service-plus/",
+        "https://www.instagram.com/autoserviceplus_/"
+      ],
+      "notes": "Full independent listing, full own Instagram bio, focused email search and native Facebook Pages search inspected. Plausible Facebook namesake is a foreign rental business with +225 contact, excluded. No attributable own website/email found."
     },
     {
       "workshopId": "auto-service-prekazi-vushtrri",
@@ -1964,6 +2012,19 @@
         "https://www.google.com/search?q=Auto%20Servis%20%26%20Diagnoz%20%22OPEL%22%20Malishev%C3%AB%20email%20-site%3Acybo.com%20-site%3Ariparim.com"
       ],
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
+    },
+    {
+      "workshopId": "auto-servis-dini-vushtrri",
+      "matchedName": "Auto Servis DINI",
+      "matchedPhone": "+38344235009",
+      "matchedCity": "Vushtrri",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/FONs6VEeRmFR/auto-servis-dini/",
+        "https://www.filikaqa.com/en/listings/478-auto-servis-dini"
+      ],
+      "notes": "Read both full directories and focused exact-phone query. Name/town/Instagram/email and native Facebook Pages searches found only other-city Dini profiles, not adopted. No attributable own website or public business email found."
     },
     {
       "workshopId": "auto-servis-doni-skenderaj",
@@ -3507,6 +3568,26 @@
         "https://www.google.com/search?q=%22%2B381649192290%22%20Gjilan"
       ],
       "notes": "The Facebook result Auto Sada has a different name, address and phone number. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Facebook SADA publishes autoservissada@gmail.com with +38344300966, without a link to the catalogue contact +381649192290 in Koretiste; excluded. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
+    },
+    {
+      "workshopId": "automeqa-servis-gjakova",
+      "matchedName": "AUTOMEQA Servis",
+      "matchedPhone": "+38345468888",
+      "matchedCity": "Gjakova",
+      "emails": [
+        {
+          "address": "automeqa22@gmail.com",
+          "sourceUrls": ["https://www.facebook.com/automeqa/"],
+          "checkedAt": "2026-11-04",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/7momesnjxjp8/automeqa-servis/",
+        "https://www.facebook.com/automeqa/"
+      ],
+      "notes": "Own public contact tab explicitly pairs email and exact business phone. Directory and targeted website/Instagram/email search checked; no separate attributable website or Instagram found."
     },
     {
       "workshopId": "automex-gjakova",

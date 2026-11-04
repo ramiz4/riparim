@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-11-03T07:14:06.037Z",
+  "updatedAt": "2026-11-04T06:53:08.411Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 280,
+    "published": 285,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 280 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 280,
+    "reason": "All 285 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 285,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -3035,6 +3035,45 @@
       }
     },
     {
+      "id": "auto-service-beni-vushtrri",
+      "name": "Auto Service BENI",
+      "city": "Vushtrri",
+      "address": "57 Minatori",
+      "phone": "+38349198120",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Service BENI in Vushtrri ist im öffentlichen Firmenverzeichnis als mechanische Pkw-Werkstatt aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.850046,
+      "lng": 20.942552,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/2cxUTYdrbiU8/auto-service-beni/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-04",
+      "status": "published",
+      "updatedAt": "2026-11-04T06:52:44.605Z",
+      "google": {
+        "placeId": "ChIJe2G2YgBbUxMR5yANyWwGgHY",
+        "matchedAt": "2026-11-04T06:42:12.126228+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/2cxUTYdrbiU8/auto-service-beni/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-service-besi-vushtrri",
       "name": "Auto service BESI",
       "city": "Vushtrri",
@@ -3612,6 +3651,57 @@
       }
     },
     {
+      "id": "auto-service-merovci-vushtrri",
+      "name": "Auto Service MEROVCI",
+      "city": "Vushtrri",
+      "address": "Doberlluke",
+      "phone": "+38349536524",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Service MEROVCI in Vushtrri bietet laut eigenem Betriebsauftritt mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.843467,
+      "lng": 20.9533,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/s98SjMpP3boj/auto-service-merovci/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/profile.php?id=61594189251457",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autoservismerovci/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-04",
+      "status": "published",
+      "updatedAt": "2026-11-04T06:52:44.605Z",
+      "google": {
+        "placeId": "ChIJJWtJVu5bUxMR9045kWIXFzU",
+        "matchedAt": "2026-11-04T06:43:09.715255+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/s98SjMpP3boj/auto-service-merovci/",
+            "https://www.facebook.com/profile.php?id=61594189251457",
+            "https://www.instagram.com/autoservismerovci/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-service-muslija-prizren",
       "name": "Auto Service \"MUSLIJA\"",
       "city": "Prizren",
@@ -3662,6 +3752,51 @@
             "https://faqet-e-verdha.cybo.com/XK-biz/auto-service-muslija"
           ],
           "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
+        }
+      }
+    },
+    {
+      "id": "auto-service-plus-vushtrri",
+      "name": "Auto Service Plus",
+      "city": "Vushtrri",
+      "address": "Ana Lin",
+      "phone": "+38349111469",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349111469",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Service Plus in Vushtrri ist im öffentlichen Firmenverzeichnis als mechanische Pkw-Werkstatt aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.828989,
+      "lng": 20.966491,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/MbUdClMSRsGW/auto-service-plus/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.instagram.com/autoserviceplus_/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Standort",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-04",
+      "status": "published",
+      "updatedAt": "2026-11-04T06:52:44.605Z",
+      "google": {
+        "placeId": "ChIJX6Z5GCZbUxMRdxO6XFjVfnI",
+        "matchedAt": "2026-11-04T06:44:24.882370+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/MbUdClMSRsGW/auto-service-plus/",
+            "https://www.instagram.com/autoserviceplus_/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
         }
       }
     },
@@ -4880,6 +5015,51 @@
             "https://www.google.com/maps/search/?api=1&query=NOT_A_REAL_RIPARIM_BUSINESS&query_place_id=ChIJ35tXXoOfUxMRZEfRxbLnlrc"
           ],
           "note": "Public Maps interface in the confirmed project profile: name, normalized phone and independent street/place agree; active entry with regular opening status. Place ID from the visible !19s result link directly rechecked with an incorrect fallback search. No API/SDK calls, no owner verification."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-dini-vushtrri",
+      "name": "Auto Servis DINI",
+      "city": "Vushtrri",
+      "address": "120 Ukshin Hoti",
+      "phone": "+38344235009",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344235009",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis DINI in Vushtrri ist im öffentlichen Firmenverzeichnis als mechanische Pkw-Werkstatt aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.805664,
+      "lng": 20.990237,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/FONs6VEeRmFR/auto-servis-dini/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.filikaqa.com/en/listings/478-auto-servis-dini",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-04",
+      "status": "published",
+      "updatedAt": "2026-11-04T06:52:44.605Z",
+      "google": {
+        "placeId": "ChIJnypvQQBdUxMRR0jff14JCuQ",
+        "matchedAt": "2026-11-04T06:45:51.666730+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/FONs6VEeRmFR/auto-servis-dini/",
+            "https://www.filikaqa.com/en/listings/478-auto-servis-dini"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
         }
       }
     },
@@ -8726,6 +8906,51 @@
           "method": "name_and_address",
           "sourceUrls": ["https://www.cybo.com/XK/gjilan/car-repair/"],
           "note": "Full name and exact address Koretiste/Gjilan 38250 agree with the independent directory entry."
+        }
+      }
+    },
+    {
+      "id": "automeqa-servis-gjakova",
+      "name": "AUTOMEQA Servis",
+      "city": "Gjakova",
+      "address": "Deshmoret e Rugoves",
+      "phone": "+38345468888",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "AUTOMEQA Servis in Gjakova bietet laut eigenem Betriebsauftritt mechanischen Pkw-Service an. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.374143,
+      "lng": 20.448004,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/7momesnjxjp8/automeqa-servis/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/automeqa/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Leistungen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-04",
+      "status": "published",
+      "updatedAt": "2026-11-04T06:52:44.603Z",
+      "google": {
+        "placeId": "ChIJHWYVBgCyUxMRuZ5DNxX7sBU",
+        "matchedAt": "2026-11-04T06:36:54.688741+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/7momesnjxjp8/automeqa-servis/",
+            "https://www.facebook.com/automeqa/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
         }
       }
     },
