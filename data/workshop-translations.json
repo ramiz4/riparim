@@ -1902,6 +1902,28 @@
       }
     },
     {
+      "id": "auto-service-ernesti-ferizaj",
+      "sourceHash": "46085269d4af06c1f2c0232d5db7e6984b7124276a52f5c44f0b1ece6e75abdb",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Service - Ernesti në Ferizaj figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Service - Ernesti in Ferizaj is listed in the public business directory as a mechanical passenger-car workshop. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
+        ]
+      }
+    },
+    {
       "id": "auto-service-express-prishtina",
       "sourceHash": "068f4e8b40acc19974b4fa147eeaac689a0f18f4c818cd0a94e0e89bdfcc82dc",
       "sq": {
@@ -2118,6 +2140,30 @@
           "Public business directory: name, location, business contact and category",
           "Own business profile: business contact and services",
           "Own business profile: business contact and services"
+        ]
+      }
+    },
+    {
+      "id": "auto-service-muf-gjilan",
+      "sourceHash": "6dc83c2d13f7cca2a682439dcda2b91ee3b568e183a1dc1394a298c13a80ad68",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Service MUF në Gjilan figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Faqja e biznesit në Facebook: kontakti i biznesit"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Service MUF in Gjilan is listed in the public business directory as a mechanical passenger-car workshop. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Business Facebook page: workshop contact"
         ]
       }
     },
@@ -2360,6 +2406,28 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Public directory: name, contact and vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-arbeni-beni-ferizaj",
+      "sourceHash": "afd2b7bc7668cf23152916254f2c0244302a82ddddb9da955559f0ce66f977bf",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis Arbeni (BENI) në Ferizaj figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis Arbeni (BENI) in Ferizaj is listed in the public business directory as a mechanical passenger-car workshop. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
         ]
       }
     },
@@ -3640,6 +3708,28 @@
       }
     },
     {
+      "id": "auto-servis-mercedes-benz-ferizaj",
+      "sourceHash": "e627001f21c36e3ee53a16b743ebbe7dd97d24b71e4dc5685880e44018445428",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis Mercedes-Benz Ferizaj në Ferizaj figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis Mercedes-Benz Ferizaj in Ferizaj is listed in the public business directory as a mechanical passenger-car workshop. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-mercedes-benz-vedati-prishtina",
       "sourceHash": "fd0a49ded11d3dc37a735ed5dcc1475900da717575403fbb05cdb1e83a5926af",
       "sq": {
@@ -4217,6 +4307,30 @@
           "Own Facebook page: business contact and location attribution"
         ],
         "phoneNote": "Public business contact; reachability not confirmed"
+      }
+    },
+    {
+      "id": "auto-servis-skenda-ferizaj",
+      "sourceHash": "2def24230b3d40a105cf3e606fa9e257f4035ec322c63d3eddd29802a826369a",
+      "sq": {
+        "specialty": "Shërbime mekanike për vetura",
+        "description": "Auto Servis Skenda në Ferizaj figuron në direktorinë publike të bizneseve si servis mekanik për vetura. Punimet konkrete dhe terminet duhen sqaruar drejtpërdrejt me biznesin.",
+        "serviceDetails": ["Shërbime mekanike për vetura"],
+        "phoneNote": "Kontakt publik i biznesit; mundësia e kontaktit nuk është konfirmuar",
+        "sourceTitles": [
+          "Direktori publike biznesesh: emri, vendndodhja, kontakti dhe kategoria",
+          "Faqja e biznesit në Facebook: kontakti i biznesit"
+        ]
+      },
+      "en": {
+        "specialty": "Mechanical car service",
+        "description": "Auto Servis Skenda in Ferizaj is listed in the public business directory as a mechanical passenger-car workshop. Please confirm specific work and appointments directly with the business.",
+        "serviceDetails": ["Mechanical passenger-car service"],
+        "phoneNote": "Public business contact; reachability not confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location, business contact and category",
+          "Business Facebook page: workshop contact"
+        ]
       }
     },
     {

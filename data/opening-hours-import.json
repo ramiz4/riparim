@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "cea8ba6ef5406810848aa6997a5d817071deb2592003b55b8e8a465dde1e9219",
+  "revision": "d678ff6174860c581ca8e5fb8a3758ab9633133555941ba156a8184ba555b1c3",
   "records": [
     {
       "id": "advance-detailing-prishtina",
@@ -5783,6 +5783,87 @@
       }
     },
     {
+      "id": "auto-service-ernesti-ferizaj",
+      "expected": {
+        "name": "Auto Service - Ernesti",
+        "city": "Ferizaj",
+        "address": "Rrugë Gursel Dhe Bajram Sylejmani",
+        "phone": "+38344172465"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-11",
+        "source": "https://numrat.com/biznes/d4OA2XF6xsni/auto-service-ernesti/",
+        "sourceName": "Auto Service - Ernesti",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory has no weekly hours or email. Searches for own site, social accounts, name and exact phone led to a rental business and other workshops. No attributable business email or week found.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-service-express-prishtina",
       "expected": {
         "name": "Auto Service Express",
@@ -6485,6 +6566,87 @@
       }
     },
     {
+      "id": "auto-service-muf-gjilan",
+      "expected": {
+        "name": "Auto Service MUF",
+        "city": "Gjilan",
+        "address": "Gjilan 60000",
+        "phone": "+38344761559"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-11",
+        "source": "https://www.facebook.com/autoservicemufa/",
+        "sourceName": "Auto Service MUF",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own Facebook contact lists the exact workshop phone and town with no email or week. Auto Mufa Instagram advertises vehicles with a distinct sales number. No attributable own website, business email or weekly schedule found.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-service-muslija-prizren",
       "expected": {
         "name": "Auto Service \"MUSLIJA\"",
@@ -7089,6 +7251,87 @@
           "Geschlossen"
         ],
         "earlierPlan": "16:00-00:00 | 16:00-00:00 | 16:00-00:00 | 16:00-00:00 | 16:00-00:00 | 09:00-18:00 | 09:00-18:00"
+      }
+    },
+    {
+      "id": "auto-servis-arbeni-beni-ferizaj",
+      "expected": {
+        "name": "Auto Servis Arbeni (BENI)",
+        "city": "Ferizaj",
+        "address": "Rr, 24 Bajram Kelmendi",
+        "phone": "+38344644135"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-11",
+        "source": "https://numrat.com/biznes/QsUWHmD8Y471/auto-servis-arbeni-beni/",
+        "sourceName": "Auto Servis Arbeni (BENI)",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory has no hours or email. Contact and social discovery returned Autobartje Arbeni with a different phone and service, and a differently named Arberi. Neither supplies a branch-attributable email or week.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
       }
     },
     {
@@ -10999,6 +11242,87 @@
       }
     },
     {
+      "id": "auto-servis-mercedes-benz-ferizaj",
+      "expected": {
+        "name": "Auto Servis Mercedes-Benz Ferizaj",
+        "city": "Ferizaj",
+        "address": "Ferizaj 70000",
+        "phone": "+38344227953"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-11",
+        "source": "https://numrat.com/biznes/IFszUCmqtNx7/auto-servis-mercedes-benz-ferizaj/",
+        "sourceName": "Auto Servis Mercedes-Benz Ferizaj",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Website and social discovery by name and exact number returned Mercedes Isa (different premises and phone), and unrelated Instagram results. The directory supplies no weekly schedule or business email.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-servis-mercedes-benz-vedati-prishtina",
       "expected": {
         "name": "Auto Servis Mercedes Benz Vedati",
@@ -12899,6 +13223,95 @@
           "08:30-17:30",
           "08:30-17:30",
           "08:30-17:30",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-skenda-ferizaj",
+      "expected": {
+        "name": "Auto Servis Skenda",
+        "city": "Ferizaj",
+        "address": "Rruga Kadri Zeka",
+        "phone": "+38348164878"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-11-11",
+        "source": "https://www.facebook.com/autoserviceskenda/",
+        "sourceName": "Auto Servis Skenda",
+        "researchStatus": "Recherchiert",
+        "notes": "Own Facebook details match the street, town and phone, and display a complete weekly hours dialog. No business email in contact details. Land Rover Skenda Instagram was not used as an additional contact.",
+        "originalWeek": [
+          "09:00-19:00",
+          "09:00-19:00",
+          "09:00-19:00",
+          "09:00-19:00",
+          "09:00-19:00",
+          "09:00-19:00",
           "Geschlossen"
         ],
         "earlierPlan": ""
