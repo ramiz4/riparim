@@ -1322,6 +1322,18 @@
       "notes": "Fulldirectory noemail/site; exactphone search and nativeFacebookPages search yieldnoattributablebusinesspage; targetedInstagram/emailsearch found ownInstagram, expandedbio lists2numbers only, noemail/website."
     },
     {
+      "workshopId": "auto-service-ernesti-ferizaj",
+      "matchedName": "Auto Service - Ernesti",
+      "matchedPhone": "+38344172465",
+      "matchedCity": "Ferizaj",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/d4OA2XF6xsni/auto-service-ernesti/"
+      ],
+      "notes": "Directory has no weekly hours or email. Searches for own site, social accounts, name and exact phone led to a rental business and other workshops. No attributable business email or week found."
+    },
+    {
       "workshopId": "auto-service-express-prishtina",
       "matchedName": "Auto Service Express",
       "matchedPhone": "+38349595483",
@@ -1476,6 +1488,19 @@
         "https://www.instagram.com/autoservismerovci/"
       ],
       "notes": "Own public business Contact lists this address beside exact workshop phone; no deliverability or consent claim."
+    },
+    {
+      "workshopId": "auto-service-muf-gjilan",
+      "matchedName": "Auto Service MUF",
+      "matchedPhone": "+38344761559",
+      "matchedCity": "Gjilan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/tOWL4DFLfFEC/auto-service-muf/",
+        "https://www.facebook.com/autoservicemufa/"
+      ],
+      "notes": "Own Facebook contact lists the exact workshop phone and town with no email or week. Auto Mufa Instagram advertises vehicles with a distinct sales number. No attributable own website, business email or weekly schedule found."
     },
     {
       "workshopId": "auto-service-muslija-prizren",
@@ -1634,6 +1659,18 @@
         "https://www.google.com/search?q=Auto%20Servis%20ANUARI%20Prishtina%20email%20-site%3Acybo.com%20-site%3Ariparim.com"
       ],
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. At least one additional directory search was limited by HTTP 429. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
+    },
+    {
+      "workshopId": "auto-servis-arbeni-beni-ferizaj",
+      "matchedName": "Auto Servis Arbeni (BENI)",
+      "matchedPhone": "+38344644135",
+      "matchedCity": "Ferizaj",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/QsUWHmD8Y471/auto-servis-arbeni-beni/"
+      ],
+      "notes": "Directory has no hours or email. Contact and social discovery returned Autobartje Arbeni with a different phone and service, and a differently named Arberi. Neither supplies a branch-attributable email or week."
     },
     {
       "workshopId": "auto-servis-arberi-suhareke",
@@ -2511,6 +2548,18 @@
       "notes": "Mapcarta/OpenStreetMap lists the email for exactly Auto Servis MEGI, Nr. 3 Rruga Jasharajve, Drenas 13000 and links the same Facebook page. The map lists an older phone, 044609224; the existing profile phone remains unchanged."
     },
     {
+      "workshopId": "auto-servis-mercedes-benz-ferizaj",
+      "matchedName": "Auto Servis Mercedes-Benz Ferizaj",
+      "matchedPhone": "+38344227953",
+      "matchedCity": "Ferizaj",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/IFszUCmqtNx7/auto-servis-mercedes-benz-ferizaj/"
+      ],
+      "notes": "Website and social discovery by name and exact number returned Mercedes Isa (different premises and phone), and unrelated Instagram results. The directory supplies no weekly schedule or business email."
+    },
+    {
       "workshopId": "auto-servis-mercedes-benz-vedati-prishtina",
       "matchedName": "Auto Servis Mercedes Benz Vedati",
       "matchedPhone": "+38344496496",
@@ -2921,6 +2970,19 @@
         "https://www.facebook.com/autoservis.sistem/"
       ],
       "notes": "Explicit public business contact on the attributed own source. No deliverability, consent or ownership assertion; no contact message sent."
+    },
+    {
+      "workshopId": "auto-servis-skenda-ferizaj",
+      "matchedName": "Auto Servis Skenda",
+      "matchedPhone": "+38348164878",
+      "matchedCity": "Ferizaj",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/bkzbo9q5tIpT/auto-servis-skenda/",
+        "https://www.facebook.com/autoserviceskenda/"
+      ],
+      "notes": "Own Facebook details match the street, town and phone, and display a complete weekly hours dialog. No business email in contact details. Land Rover Skenda Instagram was not used as an additional contact."
     },
     {
       "workshopId": "auto-servis-skenda-suhareke",

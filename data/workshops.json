@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-11-04T06:53:08.411Z",
+  "updatedAt": "2026-11-11T08:53:36.198Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 285,
+    "published": 290,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,8 +12,8 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 285 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 285,
+    "reason": "All 290 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 290,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -3317,6 +3317,45 @@
       }
     },
     {
+      "id": "auto-service-ernesti-ferizaj",
+      "name": "Auto Service - Ernesti",
+      "city": "Ferizaj",
+      "address": "Rrugë Gursel Dhe Bajram Sylejmani",
+      "phone": "+38344172465",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344172465",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Service - Ernesti in Ferizaj ist im öffentlichen Firmenverzeichnis als mechanische Pkw-Werkstatt aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.357259,
+      "lng": 21.168714,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/d4OA2XF6xsni/auto-service-ernesti/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-11",
+      "status": "published",
+      "updatedAt": "2026-11-11T08:51:46Z",
+      "google": {
+        "placeId": "ChIJk9IsHMt_VBMR-i4WQL6qxhA",
+        "matchedAt": "2026-11-11T08:51:46Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/d4OA2XF6xsni/auto-service-ernesti/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-service-express-prishtina",
       "name": "Auto Service Express",
       "city": "Prishtina",
@@ -3696,6 +3735,51 @@
             "https://numrat.com/biznes/s98SjMpP3boj/auto-service-merovci/",
             "https://www.facebook.com/profile.php?id=61594189251457",
             "https://www.instagram.com/autoservismerovci/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
+        }
+      }
+    },
+    {
+      "id": "auto-service-muf-gjilan",
+      "name": "Auto Service MUF",
+      "city": "Gjilan",
+      "address": "Gjilan 60000",
+      "phone": "+38344761559",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344761559",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Service MUF in Gjilan ist im öffentlichen Firmenverzeichnis als mechanische Pkw-Werkstatt aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.462911,
+      "lng": 21.447219,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/tOWL4DFLfFEC/auto-service-muf/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/autoservicemufa/",
+          "title": "Eigene Facebook-Seite: Geschäftskontakt",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-11",
+      "status": "published",
+      "updatedAt": "2026-11-11T08:51:46Z",
+      "google": {
+        "placeId": "ChIJd-B0JH2NVBMR583mnFntx2w",
+        "matchedAt": "2026-11-11T08:51:46Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/tOWL4DFLfFEC/auto-service-muf/",
+            "https://www.facebook.com/autoservicemufa/"
           ],
           "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
         }
@@ -4112,6 +4196,45 @@
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
+        }
+      }
+    },
+    {
+      "id": "auto-servis-arbeni-beni-ferizaj",
+      "name": "Auto Servis Arbeni (BENI)",
+      "city": "Ferizaj",
+      "address": "Rr, 24 Bajram Kelmendi",
+      "phone": "+38344644135",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis Arbeni (BENI) in Ferizaj ist im öffentlichen Firmenverzeichnis als mechanische Pkw-Werkstatt aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.386293,
+      "lng": 21.155608,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/QsUWHmD8Y471/auto-servis-arbeni-beni/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-11",
+      "status": "published",
+      "updatedAt": "2026-11-11T08:51:46Z",
+      "google": {
+        "placeId": "ChIJJRxQnfl_VBMRrEoBokA44gw",
+        "matchedAt": "2026-11-11T08:51:46Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/QsUWHmD8Y471/auto-servis-arbeni-beni/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
         }
       }
     },
@@ -6281,6 +6404,45 @@
       }
     },
     {
+      "id": "auto-servis-mercedes-benz-ferizaj",
+      "name": "Auto Servis Mercedes-Benz Ferizaj",
+      "city": "Ferizaj",
+      "address": "Ferizaj 70000",
+      "phone": "+38344227953",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344227953",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis Mercedes-Benz Ferizaj in Ferizaj ist im öffentlichen Firmenverzeichnis als mechanische Pkw-Werkstatt aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.381812,
+      "lng": 21.150063,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/IFszUCmqtNx7/auto-servis-mercedes-benz-ferizaj/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-11",
+      "status": "published",
+      "updatedAt": "2026-11-11T08:51:46Z",
+      "google": {
+        "placeId": "ChIJXb3Lzzt_VBMRRuIv9RMD6Sg",
+        "matchedAt": "2026-11-11T08:51:46Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/IFszUCmqtNx7/auto-servis-mercedes-benz-ferizaj/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-servis-mercedes-benz-vedati-prishtina",
       "name": "Auto Servis Mercedes Benz Vedati",
       "city": "Prishtina",
@@ -7259,6 +7421,51 @@
             "https://www.facebook.com/autoservis.sistem/"
           ],
           "note": "Public Maps UI in the confirmed project account: independently sourced business name, international phone and precise site match an active entry. Place ID read from a visible official result link and returned with an unrelated London fallback. No Google business content or ownership claim adopted."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-skenda-ferizaj",
+      "name": "Auto Servis Skenda",
+      "city": "Ferizaj",
+      "address": "Rruga Kadri Zeka",
+      "phone": "+38348164878",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38348164878",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": ["Mechanischer Pkw-Service"],
+      "languages": [],
+      "specialty": "Mechanischer Pkw-Service",
+      "description": "Auto Servis Skenda in Ferizaj ist im öffentlichen Firmenverzeichnis als mechanische Pkw-Werkstatt aufgeführt. Konkrete Arbeiten und Termine bitte direkt mit dem Betrieb klären.",
+      "lat": 42.377725,
+      "lng": 21.169578,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/bkzbo9q5tIpT/auto-servis-skenda/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort, Geschäftskontakt und Kategorie",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/autoserviceskenda/",
+          "title": "Eigene Facebook-Seite: Geschäftskontakt",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-11",
+      "status": "published",
+      "updatedAt": "2026-11-11T08:51:46Z",
+      "google": {
+        "placeId": "ChIJ3YfIh7N_VBMRb2atAqc-AEQ",
+        "matchedAt": "2026-11-11T08:51:46Z",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/bkzbo9q5tIpT/auto-servis-skenda/",
+            "https://www.facebook.com/autoserviceskenda/"
+          ],
+          "note": "Visible official public Maps Place-ID and direct mismatched fallback matched active identity, independently evidenced name, exact main phone and precise location. No Google business data retained; no ownership confirmation claimed."
         }
       }
     },

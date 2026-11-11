@@ -1,0 +1,546 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-05",
+  "timezone": "Europe/Zurich",
+  "checkedAt": "2026-11-11T08:56:08.519790+00:00",
+  "status": "local-import-verified-awaiting-release",
+  "completedDateGuard": false,
+  "publishedCountConfirmed": 0,
+  "publishedWorkshopIds": [],
+  "minimumRequiredNewPublished": 5,
+  "branch": "codex/daily-import-2026-11-05",
+  "baseCommit": "1bbb27e4205d9b397a9fb904060ccefaf8e8e6d7",
+  "preflight": {
+    "published": 285,
+    "healthy": true,
+    "localeChecks": 9,
+    "browserAccountConfirmed": true,
+    "recoveredCatalogueRows": 1232,
+    "recoveredCatalogueTables": 8,
+    "schemaObjects": 14,
+    "integrity": "ok",
+    "foreignKeyViolations": 0,
+    "pendingWorkshopChanges": 0,
+    "drafts": 0,
+    "activeRelease": "v1.60.0",
+    "activeTrafficPercent": 100,
+    "observability": {
+      "from": "2026-11-11T07:41:20Z",
+      "to": "2026-11-11T08:41:20Z",
+      "ok": 66,
+      "other": 0
+    }
+  },
+  "externalBlocker": null,
+  "remaining": "Confirm reviewed head, all CI checks, fresh premerge live inventory, squash merge, release deployment and live acceptance.",
+  "notes": [
+    "Referenced November 4 completion receipt is absent on this filesystem. PR236 is merged; prior import is not repeated.",
+    "Initial health invocation used a nonexistent profile ID; corrected invocation with advance-detailing-prishtina and ahp-volkswagen-prizren passed."
+  ],
+  "additionalCosts": 0,
+  "continuations": [
+    {
+      "checkedAt": "2026-11-06T04:05:14.698246+00:00",
+      "status": "incomplete-preflight-only",
+      "publishedCountConfirmed": 0,
+      "externalBlocker": null,
+      "checks": [
+        "Main clean and fetched origin/main identical",
+        "Required Google account visibly confirmed in fresh internal browser tab",
+        "Health: 285 profiles, nine complete DE/SQ/EN responses, no Error 1102"
+      ],
+      "remaining": "Research, complete live export and recovery, verification, import, reviews, CI, PR, merge, release and acceptance not performed. No external blocker established."
+    },
+    {
+      "checkedAt": "2026-11-07T04:04:20.128178+00:00",
+      "status": "incomplete-preflight-only",
+      "publishedCountConfirmed": 0,
+      "externalBlocker": null,
+      "checks": [
+        "Shared lock acquired; primary main clean and matches freshly fetched origin/main",
+        "Required Google account visibly confirmed in newly opened internal browser tab",
+        "Cloudflare dashboard authenticated and accessible",
+        "Health passed: 285 profiles and nine complete DE/SQ/EN responses, no Error 1102"
+      ],
+      "remaining": "Full catalogue export/recovery, research, candidate verification, import, two reviews, CI, PR, merge, release and acceptance not performed. No external blocker established."
+    },
+    {
+      "checkedAt": "2026-11-08T04:05:27.145816+00:00",
+      "status": "blocked-browser-provider",
+      "externalBlocker": "Only external Chrome listed. Creating the Google confirmation tab on iab returned 'Browser is not available: iab' before and after resetting the UI session.",
+      "publishedCountConfirmed": 0,
+      "health": {
+        "profiles": 285,
+        "completeLocaleResponses": 9
+      },
+      "nextStep": "Restore internal browser availability, confirm project account, resume this manifest under lock."
+    },
+    {
+      "checkedAt": "2026-11-09T03:56:45.405749+00:00",
+      "status": "blocked-browser-provider",
+      "externalBlocker": "Google confirmation tab could not be created on iab, both before and after resetting the UI session: Browser is not available: iab. Only external Chrome was listed.",
+      "health": {
+        "profiles": 285,
+        "completeLocaleResponses": 9,
+        "error1102": 0
+      },
+      "publishedCountConfirmed": 0,
+      "latestGitHubRelease": "v1.60.0",
+      "pr": null,
+      "release": null,
+      "nextStep": "Resume the same worktree under lock when iab is available. Confirm the account, revisit IAS Detailing in Stanofc for attributable contact and services, and retain the existing Gogi and Trimi premises holds pending specific new evidence."
+    },
+    {
+      "checkedAt": "2026-11-10T04:04:59.060565+00:00",
+      "status": "blocked-browser-provider",
+      "externalBlocker": "Google confirmation tab could not be created on iab, both before and after resetting the UI session: Browser is not available: iab. Only external Chrome was listed.",
+      "health": {
+        "profiles": 285,
+        "completeLocaleResponses": 9
+      },
+      "cloudflareConnectorIdentityVerified": true,
+      "dashboardAccessChecked": false,
+      "fullD1BaselineChecked": false,
+      "freshCandidateChecks": 0,
+      "completedWhatsAppLookups": 0,
+      "publishedCountConfirmed": 0,
+      "pr": null,
+      "release": null,
+      "nextStep": "Resume the same worktree under lock when iab is available. Confirm the account, revisit IAS Detailing in Stanofc for attributable contact and services, and retain the existing Gogi and Trimi premises holds pending specific new evidence."
+    },
+    {
+      "checkedAt": "2026-11-11T04:00:07.440167+00:00",
+      "status": "blocked-browser-provider",
+      "externalBlocker": "Only external Chrome listed. Google confirmation tab creation returned Browser is not available: iab before and after CUA reset.",
+      "health": {
+        "published": 285,
+        "healthy": true,
+        "localeChecks": 9
+      },
+      "freshCandidateChecks": 0,
+      "completedWhatsAppLookups": 0,
+      "publishedCountConfirmed": 0,
+      "pr": null,
+      "release": null,
+      "latestGitHubRelease": "v1.60.0",
+      "nextStep": "Resume the same worktree under lock when iab is available. Confirm the account, revisit IAS Detailing in Stanofc for attributable contact and services, and retain the existing Gogi and Trimi premises holds pending specific new evidence."
+    }
+  ],
+  "candidates": [
+    {
+      "id": "auto-servis-mercedes-benz-ferizaj",
+      "name": "Auto Servis Mercedes-Benz Ferizaj",
+      "city": "Ferizaj",
+      "address": "Ferizaj 70000",
+      "phone": "+38344227953",
+      "lat": 42.381812,
+      "lng": 21.150063,
+      "sourceUrls": [
+        "https://numrat.com/biznes/IFszUCmqtNx7/auto-servis-mercedes-benz-ferizaj/"
+      ],
+      "checkedAt": "2026-11-11T08:51:46Z",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "placeId": "ChIJXb3Lzzt_VBMRRuIv9RMD6Sg",
+        "checkedAt": "2026-11-11T08:51:46Z",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://numrat.com/biznes/IFszUCmqtNx7/auto-servis-mercedes-benz-ferizaj/",
+        "checkedAt": "2026-11-11T08:51:46Z",
+        "status": "not-found",
+        "note": "Website and social discovery by name and exact number returned Mercedes Isa (different premises and phone), and unrelated Instagram results. The directory supplies no weekly schedule or business email."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-11T08:51:46Z",
+        "sourceUrl": "https://numrat.com/biznes/IFszUCmqtNx7/auto-servis-mercedes-benz-ferizaj/",
+        "sourceAge": "No business confirmation timestamp available",
+        "note": "Website and social discovery by name and exact number returned Mercedes Isa (different premises and phone), and unrelated Instagram results. The directory supplies no weekly schedule or business email."
+      }
+    },
+    {
+      "id": "auto-servis-arbeni-beni-ferizaj",
+      "name": "Auto Servis Arbeni (BENI)",
+      "city": "Ferizaj",
+      "address": "Rr, 24 Bajram Kelmendi",
+      "phone": "+38344644135",
+      "lat": 42.386293,
+      "lng": 21.155608,
+      "sourceUrls": [
+        "https://numrat.com/biznes/QsUWHmD8Y471/auto-servis-arbeni-beni/"
+      ],
+      "checkedAt": "2026-11-11T08:51:46Z",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "placeId": "ChIJJRxQnfl_VBMRrEoBokA44gw",
+        "checkedAt": "2026-11-11T08:51:46Z",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://numrat.com/biznes/QsUWHmD8Y471/auto-servis-arbeni-beni/",
+        "checkedAt": "2026-11-11T08:51:46Z",
+        "status": "not-found",
+        "note": "Directory has no hours or email. Contact and social discovery returned Autobartje Arbeni with a different phone and service, and a differently named Arberi. Neither supplies a branch-attributable email or week."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-11T08:51:46Z",
+        "sourceUrl": "https://numrat.com/biznes/QsUWHmD8Y471/auto-servis-arbeni-beni/",
+        "sourceAge": "No business confirmation timestamp available",
+        "note": "Directory has no hours or email. Contact and social discovery returned Autobartje Arbeni with a different phone and service, and a differently named Arberi. Neither supplies a branch-attributable email or week."
+      }
+    },
+    {
+      "id": "auto-servis-skenda-ferizaj",
+      "name": "Auto Servis Skenda",
+      "city": "Ferizaj",
+      "address": "Rruga Kadri Zeka",
+      "phone": "+38348164878",
+      "lat": 42.377725,
+      "lng": 21.169578,
+      "sourceUrls": [
+        "https://numrat.com/biznes/bkzbo9q5tIpT/auto-servis-skenda/",
+        "https://www.facebook.com/autoserviceskenda/"
+      ],
+      "checkedAt": "2026-11-11T08:51:46Z",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "placeId": "ChIJ3YfIh7N_VBMRb2atAqc-AEQ",
+        "checkedAt": "2026-11-11T08:51:46Z",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://www.facebook.com/autoserviceskenda/",
+        "checkedAt": "2026-11-11T08:51:46Z",
+        "status": "not-found",
+        "note": "Own Facebook details match the street, town and phone, and display a complete weekly hours dialog. No business email in contact details. Land Rover Skenda Instagram was not used as an additional contact."
+      },
+      "openingHoursResearch": {
+        "kind": "researched",
+        "checkedAt": "2026-11-11T08:51:46Z",
+        "sourceUrl": "https://www.facebook.com/autoserviceskenda/",
+        "sourceAge": "No business confirmation timestamp available",
+        "note": "Own Facebook details match the street, town and phone, and display a complete weekly hours dialog. No business email in contact details. Land Rover Skenda Instagram was not used as an additional contact.",
+        "week": [
+          "09:00-19:00",
+          "09:00-19:00",
+          "09:00-19:00",
+          "09:00-19:00",
+          "09:00-19:00",
+          "09:00-19:00",
+          "closed"
+        ]
+      }
+    },
+    {
+      "id": "auto-service-ernesti-ferizaj",
+      "name": "Auto Service - Ernesti",
+      "city": "Ferizaj",
+      "address": "Rrugë Gursel Dhe Bajram Sylejmani",
+      "phone": "+38344172465",
+      "lat": 42.357259,
+      "lng": 21.168714,
+      "sourceUrls": [
+        "https://numrat.com/biznes/d4OA2XF6xsni/auto-service-ernesti/"
+      ],
+      "checkedAt": "2026-11-11T08:51:46Z",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "placeId": "ChIJk9IsHMt_VBMR-i4WQL6qxhA",
+        "checkedAt": "2026-11-11T08:51:46Z",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://numrat.com/biznes/d4OA2XF6xsni/auto-service-ernesti/",
+        "checkedAt": "2026-11-11T08:51:46Z",
+        "status": "not-found",
+        "note": "Directory has no weekly hours or email. Searches for own site, social accounts, name and exact phone led to a rental business and other workshops. No attributable business email or week found."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-11T08:51:46Z",
+        "sourceUrl": "https://numrat.com/biznes/d4OA2XF6xsni/auto-service-ernesti/",
+        "sourceAge": "No business confirmation timestamp available",
+        "note": "Directory has no weekly hours or email. Searches for own site, social accounts, name and exact phone led to a rental business and other workshops. No attributable business email or week found."
+      }
+    },
+    {
+      "id": "auto-service-muf-gjilan",
+      "name": "Auto Service MUF",
+      "city": "Gjilan",
+      "address": "Gjilan 60000",
+      "phone": "+38344761559",
+      "lat": 42.462911,
+      "lng": 21.447219,
+      "sourceUrls": [
+        "https://numrat.com/biznes/tOWL4DFLfFEC/auto-service-muf/",
+        "https://www.facebook.com/autoservicemufa/"
+      ],
+      "checkedAt": "2026-11-11T08:51:46Z",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "placeId": "ChIJd-B0JH2NVBMR583mnFntx2w",
+        "checkedAt": "2026-11-11T08:51:46Z",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://www.facebook.com/autoservicemufa/",
+        "checkedAt": "2026-11-11T08:51:46Z",
+        "status": "not-found",
+        "note": "Own Facebook contact lists the exact workshop phone and town with no email or week. Auto Mufa Instagram advertises vehicles with a distinct sales number. No attributable own website, business email or weekly schedule found."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-11T08:51:46Z",
+        "sourceUrl": "https://www.facebook.com/autoservicemufa/",
+        "sourceAge": "No business confirmation timestamp available",
+        "note": "Own Facebook contact lists the exact workshop phone and town with no email or week. Auto Mufa Instagram advertises vehicles with a distinct sales number. No attributable own website, business email or weekly schedule found."
+      }
+    }
+  ],
+  "whatsappVerification": [
+    {
+      "workshopIds": ["auto-servis-mercedes-benz-ferizaj"],
+      "phone": "+38344227953",
+      "checkedAt": "2026-11-11T08:54:44.897Z",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered"
+    },
+    {
+      "workshopIds": ["auto-servis-arbeni-beni-ferizaj"],
+      "phone": "+38344644135",
+      "checkedAt": "2026-11-11T08:54:45.900Z",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "unresolved",
+      "reason": "Different country code in result",
+      "nextCheck": "Repeat exact business-number lookup before enabling WhatsApp."
+    },
+    {
+      "workshopIds": ["auto-servis-skenda-ferizaj"],
+      "phone": "+38348164878",
+      "checkedAt": "2026-11-11T08:54:46.834Z",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered"
+    },
+    {
+      "workshopIds": ["auto-service-ernesti-ferizaj"],
+      "phone": "+38344172465",
+      "checkedAt": "2026-11-11T08:54:47.779Z",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered"
+    },
+    {
+      "workshopIds": ["auto-service-muf-gjilan"],
+      "phone": "+38344761559",
+      "checkedAt": "2026-11-11T08:54:48.722Z",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered"
+    },
+    {
+      "workshopIds": ["auto-service-luani-ferizaj"],
+      "phone": "+38345280020",
+      "checkedAt": "2026-11-11T08:55:15.883Z",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "publication": "deferred"
+    },
+    {
+      "workshopIds": ["auto-servis-bajrami-gjilan"],
+      "phone": "+38344212271",
+      "checkedAt": "2026-11-11T08:55:16.810Z",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "unresolved",
+      "publication": "deferred",
+      "reason": "Different country code returned",
+      "nextCheck": "Repeat exact lookup if the site qualifies."
+    },
+    {
+      "workshopIds": ["auto-servis-toska-gjilan"],
+      "phone": "+38344321676",
+      "checkedAt": "2026-11-11T08:55:17.709Z",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "publication": "deferred"
+    },
+    {
+      "workshopIds": ["auto-servis-onari-ferizaj"],
+      "phone": "+38344425668",
+      "checkedAt": "2026-11-11T08:55:18.631Z",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "publication": "deferred"
+    }
+  ],
+  "researchProgress": {
+    "municipalities": [
+      "Vushtrri",
+      "Malishevë",
+      "Ferizaj",
+      "Shtime",
+      "Kamenicë",
+      "Gjilan"
+    ],
+    "qualifiedForDryRun": 5,
+    "directoryListingsScreened": 73,
+    "screeningNote": "11 Malishevë, 30 Ferizaj, 2 Shtime, 5 Kamenicë and 25 Gjilan mechanic directory rows. Index rows are not detailed verifications. IAS checked separately.",
+    "existingMatches": [
+      "BERATI BMW",
+      "Auto Servis & Diagnoz OPEL",
+      "Autoservis FEIMI",
+      "Auto Service Kushtrimi",
+      "Auto servis CIMA Ferizaj",
+      "Auto Servis Cufa",
+      "Auto Servis Tershana",
+      "Sonic Garage Ferizaj",
+      "Auto Servis Fuli",
+      "Auto Servis UNIVERZAL",
+      "Auto servis niti",
+      "AutoServis LULI",
+      "car service keqqa",
+      "Auto Moto Universum",
+      "Auto Service Adonisi",
+      "Auto servis XONI"
+    ],
+    "deferred": [
+      {
+        "name": "IAS Detailing",
+        "source": "https://www.instagram.com/ias_detailing/",
+        "reason": "Own profile confirms Stanofc i Ulët, +38345629562, polish and ceramic coating. Maps returned a different country and business. Need precise premises and exact Maps return."
+      },
+      {
+        "name": "Auto Service Urimi",
+        "reason": "Directory still supports street and number. Need new official visible Place-ID."
+      },
+      {
+        "name": "Adonis Garage",
+        "reason": "Exact phone and street on individual Maps detail. A true Place-ID link and direct return still required."
+      },
+      {
+        "name": "AutoServis FADILI",
+        "reason": "Direct Maps return has a different country code from the independent listing. Need current independent contact continuity."
+      },
+      {
+        "name": "AUTO SERVIS ONARI",
+        "reason": "Own Facebook and directory have the same phone and street but different precise points. Need premises correspondence before using the business email or hours."
+      },
+      {
+        "name": "Auto Service Luani",
+        "reason": "Same street and phone on Luani Tuning, but the exact linked point differs. Verify specific building and continuity."
+      },
+      {
+        "name": "Meti Auto Service",
+        "reason": "Direct Maps return does not confirm the own published business phone."
+      },
+      {
+        "name": "Auto Servis Bajrami",
+        "reason": "Directory and direct Maps match. Similar Facebook and Instagram profiles lack verified branch attribution. Complete source screening before admission."
+      },
+      {
+        "name": "Auto Servis Toska",
+        "reason": "Facebook has exact phone and business email but uses Metush Krasniqi while the directory gives only 299. Verify address correspondence before importing."
+      }
+    ],
+    "belowPreferredTenReason": "Prioritized verifiable identities across six municipalities. The five selected businesses passed direct identity and contact checks. Separate unresolved address, international prefix and source-attribution cases remain deferred.",
+    "completedDirectMapsReturns": 10,
+    "directories": [
+      "https://numrat.com/kosove/ferizaj/mekanik/",
+      "https://numrat.com/kosove/malisheve/mekanik/",
+      "https://numrat.com/kosove/shtime/mekanik/",
+      "https://numrat.com/kosove/kamenice/mekanik/",
+      "https://numrat.com/kosove/gjilan/mekanik/"
+    ],
+    "freshDuplicateCount": 16
+  },
+  "importedWorkshopIds": [
+    "auto-servis-mercedes-benz-ferizaj",
+    "auto-servis-arbeni-beni-ferizaj",
+    "auto-servis-skenda-ferizaj",
+    "auto-service-ernesti-ferizaj",
+    "auto-service-muf-gjilan"
+  ],
+  "before": {
+    "published": 285,
+    "drafts": 0
+  },
+  "afterLocal": {
+    "published": 290,
+    "drafts": 0
+  },
+  "validation": {
+    "dryRun": {
+      "added": 5,
+      "updated": 0,
+      "deduplicated": 0,
+      "existingSharedPhonePair": "Eurogoma Gjakova / Mitrovica"
+    },
+    "prewriteGuard": {
+      "protectedTables": 8,
+      "rows": 1232,
+      "schemaObjects": 14,
+      "operatorChanges": 0,
+      "publicProfiles": 285,
+      "publicFieldsPerProfile": 19
+    },
+    "recovery": {
+      "replays": 2,
+      "statementsPerReplay": 582,
+      "previousRowsPreserved": 1232,
+      "integrity": "ok",
+      "foreignKeyViolations": 0
+    },
+    "hoursManifestRevision": "d678ff6174860c581ca8e5fb8a3758ab9633133555941ba156a8184ba555b1c3",
+    "sourceHashes": "Central workshopTranslationSourceHash; SQ and EN coverage validated."
+  },
+  "provider": {
+    "googleApiCalls": 0,
+    "outboundContacts": 0,
+    "newKeys": 0,
+    "quotaChanges": 0,
+    "budget": "Public UI only; no billable Google API requests."
+  },
+  "whatsappSummary": {
+    "uniqueNumbersChecked": 9,
+    "registered": 7,
+    "not_registered": 0,
+    "unresolved": 2,
+    "blockedAttempts": 0,
+    "newContactsPrepared": 4
+  },
+  "preparedSummary": {
+    "researchHours": 1,
+    "assumedHours": 4,
+    "publiclySourcedEmails": 0,
+    "noPublicEmailFound": 5
+  }
+}
