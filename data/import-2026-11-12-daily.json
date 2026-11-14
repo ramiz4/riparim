@@ -1,0 +1,878 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-12",
+  "timezone": "Europe/Zurich",
+  "checkedAt": "2026-11-14T08:10:11.113610+00:00",
+  "status": "local-import-prepared-awaiting-tests-review-ci-release",
+  "completedDateGuard": false,
+  "publishedCountConfirmed": 0,
+  "publishedWorkshopIds": [],
+  "minimumRequiredNewPublished": 5,
+  "branch": "codex/daily-import-2026-11-12",
+  "baseCommit": "e639b5f894961c464b2c194f29eed9260840c4e8",
+  "recoveryNote": "Original untracked November12 manifest absent with worktree. Tracked checkout recovered from preserved Git index. No previous candidate checks reused. Durable automation notes confirm zero publications; fresh evidence required.",
+  "candidates": [
+    {
+      "id": "auto-service-urimi-malisheve",
+      "name": "Auto Service Urimi",
+      "city": "Malishevë",
+      "address": "Adem Jashari 551",
+      "phone": "+38349286862",
+      "additionalPhones": ["+38344484783"],
+      "lat": 42.504185,
+      "lng": 20.763598,
+      "sourceUrls": [
+        "https://numrat.com/biznes/z0EepoWSa1gx/auto-service-urimi/",
+        "https://www.instagram.com/auto_service_urimi/"
+      ],
+      "googleIdentity": {
+        "placeId": "ChIJTSdM_O-fUxMR7_1fdgf7DpQ",
+        "method": "public-maps-ui",
+        "checkedAt": "2026-11-14T07:56:56.058950+00:00",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "status": "verified-for-dry-run",
+      "checkedAt": "2026-11-14T08:08:14.175252+00:00",
+      "sourceReview": {
+        "checkedUrls": [
+          "https://numrat.com/biznes/z0EepoWSa1gx/auto-service-urimi/",
+          "https://www.instagram.com/auto_service_urimi/",
+          "https://www.facebook.com/1648742688698922/albums/1648742815365576/",
+          "https://www.google.com/search?q=Auto+Service+Urimi+Malisheve+facebook+instagram+email"
+        ],
+        "sourceAge": "Directory updated 2026-10-12; social bio update dates unavailable.",
+        "note": "Directory updated 2026-10-12 gives numbered street and main phone. Own Instagram matches both workshop numbers and service identity but has no email or weekly hours. The Facebook album discovered through search returned Not Found. Instagram website label www.auto/service.com is malformed and not used. No usable attributable week found."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-14T08:08:14.175252+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/z0EepoWSa1gx/auto-service-urimi/",
+          "https://www.instagram.com/auto_service_urimi/"
+        ],
+        "sourceAge": "Directory updated 2026-10-12; social bio update dates unavailable.",
+        "note": "Directory updated 2026-10-12 gives numbered street and main phone. Own Instagram matches both workshop numbers and service identity but has no email or weekly hours. The Facebook album discovered through search returned Not Found. Instagram website label www.auto/service.com is malformed and not used. No usable attributable week found."
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://numrat.com/biznes/z0EepoWSa1gx/auto-service-urimi/",
+        "checkedAt": "2026-11-14T08:08:14.175252+00:00",
+        "status": "not-found",
+        "note": "Directory updated 2026-10-12 gives numbered street and main phone. Own Instagram matches both workshop numbers and service identity but has no email or weekly hours. The Facebook album discovered through search returned Not Found. Instagram website label www.auto/service.com is malformed and not used. No usable attributable week found."
+      }
+    },
+    {
+      "id": "adonis-garage-ferizaj",
+      "name": "Adonis Garage",
+      "city": "Ferizaj",
+      "address": "Rruga Enver Topalli",
+      "phone": "+38346666025",
+      "lat": 42.334122,
+      "lng": 21.152025,
+      "sourceUrls": [
+        "https://numrat.com/biznes/gH5xmY5cWafL/adonis-garage/",
+        "https://www.instagram.com/adonis_garage/"
+      ],
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "placeId": "ChIJ1QoPHgB_VBMRjaqm0Yev--o",
+        "checkedAt": "2026-11-14T08:02:53.630456+00:00",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "checkedAt": "2026-11-14T08:08:14.175252+00:00",
+      "sourceReview": {
+        "checkedUrls": [
+          "https://numrat.com/biznes/gH5xmY5cWafL/adonis-garage/",
+          "https://www.instagram.com/adonis_garage/",
+          "https://www.google.com/search?q=Adonis+Garage+Ferizaj+facebook+instagram+email"
+        ],
+        "sourceAge": "Directory updated 2026-10-12; social bio update dates unavailable.",
+        "note": "Directory updated 2026-10-12 and own Instagram show same exact phone and repair identity. Instagram bio has no business email or weekly hours. Own website/Facebook discovery returned no attributable additional contact source; unrelated BMW service and car-sales profiles were not used."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-14T08:08:14.175252+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/gH5xmY5cWafL/adonis-garage/",
+          "https://www.instagram.com/adonis_garage/"
+        ],
+        "sourceAge": "Directory updated 2026-10-12; social bio update dates unavailable.",
+        "note": "Directory updated 2026-10-12 and own Instagram show same exact phone and repair identity. Instagram bio has no business email or weekly hours. Own website/Facebook discovery returned no attributable additional contact source; unrelated BMW service and car-sales profiles were not used."
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://numrat.com/biznes/gH5xmY5cWafL/adonis-garage/",
+        "checkedAt": "2026-11-14T08:08:14.175252+00:00",
+        "status": "not-found",
+        "note": "Directory updated 2026-10-12 and own Instagram show same exact phone and repair identity. Instagram bio has no business email or weekly hours. Own website/Facebook discovery returned no attributable additional contact source; unrelated BMW service and car-sales profiles were not used."
+      }
+    },
+    {
+      "id": "auto-servis-bajrami-gjilan",
+      "name": "Auto Servis Bajrami",
+      "city": "Gjilan",
+      "address": "57 Arkitekt Sinani",
+      "phone": "+38344212271",
+      "lat": 42.462078,
+      "lng": 21.479734,
+      "sourceUrls": [
+        "https://numrat.com/biznes/rXLKuZVbM1hL/auto-servis-bajrami/"
+      ],
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "placeId": "ChIJ0xBI-UbzVBMRMtOYv3Ax5XE",
+        "checkedAt": "2026-11-14T08:02:53.630456+00:00",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "checkedAt": "2026-11-14T08:08:14.175252+00:00",
+      "sourceReview": {
+        "checkedUrls": [
+          "https://numrat.com/biznes/rXLKuZVbM1hL/auto-servis-bajrami/",
+          "https://www.facebook.com/Bajramiiiiiiiiiii/",
+          "https://www.google.com/search?q=%22Auto+Servis+Bajrami%22+%2244+212+271%22+instagram+email"
+        ],
+        "sourceAge": "Directory updated 2026-10-12; social bio update dates unavailable.",
+        "note": "Directory updated 2026-10-12 provides numbered street, phone and mechanic category, no email or hours. Same-name Gjilan Facebook Bajramiiiiiiiiiii has no attributable phone or exact street, so not adopted as own source. Instagram and website search returned different Peja/Mitrovica businesses and different numbers, not branch-attributable contacts or hours."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-14T08:08:14.175252+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/rXLKuZVbM1hL/auto-servis-bajrami/"
+        ],
+        "sourceAge": "Directory updated 2026-10-12; social bio update dates unavailable.",
+        "note": "Directory updated 2026-10-12 provides numbered street, phone and mechanic category, no email or hours. Same-name Gjilan Facebook Bajramiiiiiiiiiii has no attributable phone or exact street, so not adopted as own source. Instagram and website search returned different Peja/Mitrovica businesses and different numbers, not branch-attributable contacts or hours."
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://numrat.com/biznes/rXLKuZVbM1hL/auto-servis-bajrami/",
+        "checkedAt": "2026-11-14T08:08:14.175252+00:00",
+        "status": "not-found",
+        "note": "Directory updated 2026-10-12 provides numbered street, phone and mechanic category, no email or hours. Same-name Gjilan Facebook Bajramiiiiiiiiiii has no attributable phone or exact street, so not adopted as own source. Instagram and website search returned different Peja/Mitrovica businesses and different numbers, not branch-attributable contacts or hours."
+      }
+    },
+    {
+      "id": "auto-service-biti-ferizaj",
+      "name": "Auto Service Biti",
+      "city": "Ferizaj",
+      "address": "Rruga Kadri Zeka",
+      "phone": "+38349130132",
+      "lat": 42.376659,
+      "lng": 21.165455,
+      "sourceUrls": [
+        "https://numrat.com/biznes/RfklPPYIg2A1/auto-service-biti/",
+        "https://www.facebook.com/p/Auto-Service-Biti-100033575594524/",
+        "https://www.instagram.com/autoservicebiti/"
+      ],
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "placeId": "ChIJ3wWXxih_VBMRdGOHzXfU7fM",
+        "checkedAt": "2026-11-14T08:02:53.630456+00:00",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "publicBusinessEmail": {
+        "address": "bitiautoservice@gmail.com",
+        "sourceUrl": "https://www.facebook.com/p/Auto-Service-Biti-100033575594524/",
+        "checkedAt": "2026-11-14T08:02:53.630456+00:00",
+        "status": "publicly-sourced",
+        "note": "Own Facebook contact details show exact workshop phone and Ferizaj. Search AI suggested another email but it was not accepted as source evidence."
+      },
+      "checkedAt": "2026-11-14T08:08:14.175252+00:00",
+      "sourceReview": {
+        "checkedUrls": [
+          "https://numrat.com/biznes/RfklPPYIg2A1/auto-service-biti/",
+          "https://www.facebook.com/p/Auto-Service-Biti-100033575594524/",
+          "https://www.instagram.com/autoservicebiti/",
+          "https://www.facebook.com/profile.php?id=100033575594524&sk=about",
+          "https://www.google.com/search?q=%22Auto+Service+Biti%22+Ferizaj+facebook+instagram+email"
+        ],
+        "sourceAge": "Directory updated 2026-10-12; social bio update dates unavailable.",
+        "note": "Directory updated 2026-10-12; own Facebook exact phone and town, own Instagram same phone and repair/service description. Facebook email directly read. Neither own profile supplies a usable weekly plan. A dated 2024 holiday notice is not a current weekly schedule. Search AI output is not evidence and its alternative email was not imported."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-14T08:08:14.175252+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/RfklPPYIg2A1/auto-service-biti/",
+          "https://www.facebook.com/p/Auto-Service-Biti-100033575594524/",
+          "https://www.instagram.com/autoservicebiti/"
+        ],
+        "sourceAge": "Directory updated 2026-10-12; social bio update dates unavailable.",
+        "note": "Directory updated 2026-10-12; own Facebook exact phone and town, own Instagram same phone and repair/service description. Facebook email directly read. Neither own profile supplies a usable weekly plan. A dated 2024 holiday notice is not a current weekly schedule. Search AI output is not evidence and its alternative email was not imported."
+      }
+    },
+    {
+      "id": "auto-service-bejta-ferizaj",
+      "name": "Auto Service Bejta",
+      "city": "Ferizaj",
+      "address": "Ferizaj 70000",
+      "phone": "+38345925011",
+      "lat": 42.368385,
+      "lng": 21.167875,
+      "sourceUrls": [
+        "https://numrat.com/biznes/GU4MghMurBvz/auto-service-bejta/"
+      ],
+      "status": "verified-for-dry-run",
+      "checkedAt": "2026-11-14T08:08:14.175252+00:00",
+      "sourceReview": {
+        "checkedUrls": [
+          "https://numrat.com/biznes/GU4MghMurBvz/auto-service-bejta/",
+          "https://www.facebook.com/autopjesbejta/",
+          "https://www.google.com/search?q=%22Auto+Service+Bejta%22+Ferizaj+facebook+instagram+email"
+        ],
+        "sourceAge": "Directory updated 2026-10-12; social bio update dates unavailable.",
+        "note": "Directory updated 2026-10-12 gives mechanic category, phone and precise mapped site, no email or week. Own website/Facebook/Instagram discovery returned Autopjes bejta parts page without workshop phone/site attribution; no contact or hours copied from it. No usable independent week found."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-14T08:08:14.175252+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/GU4MghMurBvz/auto-service-bejta/"
+        ],
+        "sourceAge": "Directory updated 2026-10-12; social bio update dates unavailable.",
+        "note": "Directory updated 2026-10-12 gives mechanic category, phone and precise mapped site, no email or week. Own website/Facebook/Instagram discovery returned Autopjes bejta parts page without workshop phone/site attribution; no contact or hours copied from it. No usable independent week found."
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://numrat.com/biznes/GU4MghMurBvz/auto-service-bejta/",
+        "checkedAt": "2026-11-14T08:08:14.175252+00:00",
+        "status": "not-found",
+        "note": "Directory updated 2026-10-12 gives mechanic category, phone and precise mapped site, no email or week. Own website/Facebook/Instagram discovery returned Autopjes bejta parts page without workshop phone/site attribution; no contact or hours copied from it. No usable independent week found."
+      },
+      "googleIdentity": {
+        "placeId": "ChIJ8Ym2SQB_VBMRl1h1usc4_6w",
+        "checkedAt": "2026-11-14T08:10:11.113610+00:00",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      }
+    }
+  ],
+  "whatsappVerification": [
+    {
+      "workshopIds": ["auto-service-urimi-malisheve"],
+      "phone": "+38349286862",
+      "checkedAt": "2026-11-14T08:02:53.630456+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "unresolved",
+      "reason": "Exact +383 input returned an account for +386; mismatched country prefix, no number substitution."
+    },
+    {
+      "workshopIds": ["auto-service-urimi-malisheve"],
+      "phone": "+38344484783",
+      "checkedAt": "2026-11-14T08:04:21.922953+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "not_registered",
+      "note": "Completed No results found for exact international input; field cleared before next lookup."
+    },
+    {
+      "workshopIds": ["adonis-garage-ferizaj"],
+      "phone": "+38346666025",
+      "checkedAt": "2026-11-14T08:04:21.922953+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "not_registered",
+      "note": "Completed No results found for exact international input; field cleared before next lookup."
+    },
+    {
+      "workshopIds": ["auto-servis-fs-skender-hoxha-malisheve"],
+      "phone": "+38349151054",
+      "checkedAt": "2026-11-14T08:07:01.530520+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "note": "Exact international account result; identity remains deferred separately."
+    },
+    {
+      "workshopIds": ["auto-servis-bajrami-gjilan"],
+      "phone": "+38344212271",
+      "checkedAt": "2026-11-14T08:07:01.530520+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "unresolved",
+      "note": "Exact +383 input returned +377; no automatic number substitution."
+    },
+    {
+      "workshopIds": ["auto-service-biti-ferizaj"],
+      "phone": "+38349130132",
+      "checkedAt": "2026-11-14T08:07:01.530520+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "note": "Exact international account result."
+    },
+    {
+      "workshopIds": ["auto-service-bejta-ferizaj"],
+      "phone": "+38345925011",
+      "checkedAt": "2026-11-14T08:08:14.175252+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "unresolved",
+      "note": "Exact +383 input returned account for +377; no availability claim or number replacement."
+    }
+  ],
+  "additionalCosts": 0,
+  "deferred": [
+    {
+      "name": "Auto Servis Xeni",
+      "reason": "Directory and Maps list +38349104480; same-name own Facebook lists +38349305783. Contact continuity not established.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/jOahGMjSJPIm/auto-servis-xeni/",
+        "https://www.facebook.com/p/Auto-Servis-XENI-Malishev%C3%AB-100066587336868/"
+      ],
+      "nextCheck": "Find own evidence pairing both contacts and exact premises.",
+      "checkedAt": "2026-11-14T08:13:43.151974+00:00",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://numrat.com/biznes/jOahGMjSJPIm/auto-servis-xeni/",
+        "checkedAt": "2026-11-14T08:13:43.151974+00:00",
+        "status": "unresolved",
+        "note": "Business/branch attribution unresolved; no usable email established."
+      },
+      "openingHoursResearch": {
+        "status": "identity-held",
+        "checkedAt": "2026-11-14T08:13:43.151974+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/jOahGMjSJPIm/auto-servis-xeni/",
+          "https://www.facebook.com/p/Auto-Servis-XENI-Malishev%C3%AB-100066587336868/"
+        ],
+        "note": "No attributable complete week established; no default imported for an unresolved identity."
+      }
+    },
+    {
+      "id": "auto-servisi-joni-malisheve",
+      "name": "Auto servisi Joni",
+      "city": "Malishevë",
+      "address": "Rruga Adem Jashari",
+      "phone": "+38348296530",
+      "lat": 42.515605,
+      "lng": 20.787207,
+      "sourceUrls": [
+        "https://numrat.com/biznes/4RTaEc332Zct/auto-servisi-joni/",
+        "https://www.facebook.com/p/Auto-servisi-JONI-100064949523899/"
+      ],
+      "status": "checking-own-source",
+      "reason": "Own same-name Facebook lists Terpez e poshtme with a precise point different from the directory/Maps site. Specific premises continuity not established.",
+      "nextCheck": "Establish own phone and precise premises continuity.",
+      "checkedAt": "2026-11-14T08:13:43.152248+00:00",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://numrat.com/biznes/4RTaEc332Zct/auto-servisi-joni/",
+        "checkedAt": "2026-11-14T08:13:43.152248+00:00",
+        "status": "unresolved",
+        "note": "Business/branch attribution unresolved; no usable email established."
+      },
+      "openingHoursResearch": {
+        "status": "identity-held",
+        "checkedAt": "2026-11-14T08:13:43.152248+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/4RTaEc332Zct/auto-servisi-joni/",
+          "https://www.facebook.com/p/Auto-servisi-JONI-100064949523899/"
+        ],
+        "note": "No attributable complete week established; no default imported for an unresolved identity."
+      }
+    },
+    {
+      "name": "Auto Servis Genti Malishevë",
+      "reason": "Same-name Facebook search lead has Albanian +355 contact and no exact branch attribution. Do not transfer contact or service claims.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/qci5sr5ERyxL/auto-servis-genti-malisheve/",
+        "https://www.facebook.com/p/Auto-servis-NgjyrosesGenti-100063518048936/"
+      ],
+      "nextCheck": "Find source tying directory phone +38344860019 to the exact own workshop.",
+      "checkedAt": "2026-11-14T08:13:43.152253+00:00",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://numrat.com/biznes/qci5sr5ERyxL/auto-servis-genti-malisheve/",
+        "checkedAt": "2026-11-14T08:13:43.152253+00:00",
+        "status": "unresolved",
+        "note": "Business/branch attribution unresolved; no usable email established."
+      },
+      "openingHoursResearch": {
+        "status": "identity-held",
+        "checkedAt": "2026-11-14T08:13:43.152253+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/qci5sr5ERyxL/auto-servis-genti-malisheve/",
+          "https://www.facebook.com/p/Auto-servis-NgjyrosesGenti-100063518048936/"
+        ],
+        "note": "No attributable complete week established; no default imported for an unresolved identity."
+      }
+    },
+    {
+      "id": "auto-servis-fs-skender-hoxha-malisheve",
+      "name": "Auto Servis F&S Skender Hoxha",
+      "city": "Malishevë",
+      "address": "Rruga Gjergj Kastrioti Skenderbeu",
+      "phone": "+38349151054",
+      "lat": 42.479849,
+      "lng": 20.748061,
+      "sourceUrls": [
+        "https://numrat.com/biznes/52ZA0BrNoR2k/auto-servis-f-s-skender-hoxha/"
+      ],
+      "status": "deferred",
+      "googleIdentity": {
+        "placeId": "ChIJzznvDr2fUxMRmacT2v2PgbA",
+        "method": "public-maps-ui",
+        "checkedAt": "2026-11-14T07:58:10.907219+00:00",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "reason": "Historical unresolved premises/scope conflict remains: same-phone AutoYas mirror Skenda Marali at Rr.UCK pn-Marali versus target street and industrial-mechanical category. Fresh Maps match alone does not resolve it.",
+      "nextCheck": "Original business source and precise site/passenger-car scope correspondence required.",
+      "checkedAt": "2026-11-14T08:13:43.152255+00:00",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://numrat.com/biznes/52ZA0BrNoR2k/auto-servis-f-s-skender-hoxha/",
+        "checkedAt": "2026-11-14T08:13:43.152255+00:00",
+        "status": "unresolved",
+        "note": "Business/branch attribution unresolved; no usable email established."
+      },
+      "openingHoursResearch": {
+        "status": "identity-held",
+        "checkedAt": "2026-11-14T08:13:43.152255+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/52ZA0BrNoR2k/auto-servis-f-s-skender-hoxha/"
+        ],
+        "note": "No attributable complete week established; no default imported for an unresolved identity."
+      }
+    }
+  ],
+  "before": {
+    "published": 290,
+    "drafts": 0,
+    "workshopChanges": 0,
+    "backupRows": 1248,
+    "backupSha256": "a60c1284c3c7d3fbdf071e6d2c230a04c11c28305b273c4394cacd2eb73e190a",
+    "integrityCheck": "ok",
+    "foreignKeyViolations": 0,
+    "activeRelease": "v1.61.0",
+    "activeCommit": "e639b5f894961c464b2c194f29eed9260840c4e8",
+    "workerVersion": "4214d97d-586b-42cb-ac22-7687054a4788",
+    "trafficPercent": 100
+  },
+  "preflight": {
+    "health": {
+      "checkedAt": "2026-11-14T07:51:24.127Z",
+      "published": 290,
+      "checks": [
+        {
+          "path": "/werkstaetten",
+          "status": 200,
+          "bytes": 1011561,
+          "ray": "a5a46e422e254335-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/werkstatt/auto-servis-mercedes-benz-ferizaj",
+          "status": 200,
+          "bytes": 107778,
+          "ray": "a5a46e42ffa44335-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/werkstatt/auto-service-muf-gjilan",
+          "status": 200,
+          "bytes": 107157,
+          "ray": "a5a46e4388614335-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/sq/serviset",
+          "status": 200,
+          "bytes": 1025296,
+          "ray": "a5a46e4439974335-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/sq/servis/auto-servis-mercedes-benz-ferizaj",
+          "status": 200,
+          "bytes": 107274,
+          "ray": "a5a46e44eab84335-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/sq/servis/auto-service-muf-gjilan",
+          "status": 200,
+          "bytes": 106472,
+          "ray": "a5a46e456b6c4335-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/en/workshops",
+          "status": 200,
+          "bytes": 1010566,
+          "ray": "a5a46e45fc354335-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/en/workshop/auto-servis-mercedes-benz-ferizaj",
+          "status": 200,
+          "bytes": 104997,
+          "ray": "a5a46e469d3f4335-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        },
+        {
+          "path": "/en/workshop/auto-service-muf-gjilan",
+          "status": 200,
+          "bytes": 103807,
+          "ray": "a5a46e477f084335-ZRH",
+          "error1102": false,
+          "complete": true,
+          "locale": true,
+          "heading": true,
+          "shell": false,
+          "profileIdentity": true
+        }
+      ],
+      "healthy": true
+    },
+    "outcomes": {
+      "from": "2026-11-14T07:06:04Z",
+      "to": "2026-11-14T08:06:04Z",
+      "ok": 59,
+      "other": 0,
+      "note": "Bounded one-hour sample, not global absence proof."
+    },
+    "toolchains": {
+      "node": "v24.21.0",
+      "go": "go1.27.1 darwin/arm64",
+      "source": "Official vendor downloads verified against vendor SHA256 metadata."
+    }
+  },
+  "provider": {
+    "googleApiRequests": 0,
+    "additionalCosts": 0,
+    "paidServicesCreated": false,
+    "sourceMethod": "Manual public browser pages; no scraping or bulk capture",
+    "availableFreeBudget": "No API quota consumed; remaining browser/Codex allowance not independently measurable."
+  },
+  "whatsappSummary": {
+    "uniqueNumbersChecked": 7,
+    "registered": 2,
+    "not_registered": 2,
+    "unresolved": 3,
+    "completedUiLookups": 7,
+    "loginBlockedAttempts": 0,
+    "preparedPublishedContacts": 1,
+    "note": "One registered number belongs to held F&S and is not imported. Three lookups returned a different country prefix."
+  },
+  "preparedSummary": {
+    "newIds": 5,
+    "researchedWeeks": 0,
+    "assumedWeeks": 5,
+    "publicBusinessEmails": 1,
+    "missingBusinessEmails": 4,
+    "whatsappContacts": 1
+  },
+  "researchProgress": {
+    "municipalities": ["Malishevë", "Ferizaj", "Gjilan"],
+    "directoryListingsScreened": 61,
+    "detailedCandidates": 9,
+    "qualified": 5,
+    "deferred": 4,
+    "note": "25 visible Ferizaj directory rows, 11 Malishevë rows and 25 Gjilan rows manually screened. Index-only entries are not verified identities. Historical holds read and retained; F&S rejected after historical continuity gate.",
+    "directories": [
+      "https://numrat.com/kosove/ferizaj/mekanik/",
+      "https://numrat.com/kosove/malisheve/mekanik/",
+      "https://numrat.com/kosove/gjilan/mekanik/"
+    ],
+    "belowPreferredTenReason": "Five complete identities selected across three municipalities; four detailed cases remain blocked by source/premises attribution. Remaining index leads have not passed detailed gates and are not admitted.",
+    "screenedDirectoryNames": {
+      "Ferizaj": [
+        "Adonis Garage",
+        "Auto Center LINDI",
+        "Auto Garazha dielli",
+        "Auto Service - Ernesti",
+        "Auto Service Bejta",
+        "Auto Service Biti",
+        "Auto Service Kushtrimi",
+        "Auto Service Luani",
+        "Auto servis CIMA Ferizaj",
+        "Auto Servis Arbeni BENI",
+        "Auto Servis Cufa",
+        "Auto Servis Egzoni",
+        "Auto Servis Fixit",
+        "AUTO SERVIS HAMZA",
+        "Auto Servis HAZIRI",
+        "Auto Servis Ismeti",
+        "Auto servis LIMI",
+        "Auto Servis Mercedes-Benz Ferizaj",
+        "AUTO SERVIS ONARI",
+        "Auto Servis Skenda",
+        "Auto Servis Tershana",
+        "Automekanik Luta",
+        "AutoServis FADILI",
+        "Autoservis Krosa Citroën Peugeot Renault",
+        "Autoservis VEBA"
+      ],
+      "Malishevë": [
+        "Auto Service Urimi",
+        "Auto servis BERATI BMW",
+        "Auto Servis GENTI Malishevë",
+        "Auto Servis & Auto Bartje Naimi",
+        "Auto Servis & Diagnoz OPEL",
+        "Auto Servis F&S Skender Hoxha",
+        "Auto Servis Hoti",
+        "Auto Servis Xeni",
+        "Auto servisi Joni",
+        "Autoservis FEIMI",
+        "X Garage Car details"
+      ],
+      "Gjilan": [
+        "Auto mechanic Celi",
+        "Auto Mekanik ISA",
+        "Auto Moto Universum",
+        "Auto service Te Shepndi",
+        "AUTO SERVICE ADONISI",
+        "Auto Service Iliri",
+        "Auto Service MUF",
+        "Auto Service Rexha",
+        "Auto service Sokoli",
+        "Auto Service TONI",
+        "Auto Servis Setllari",
+        "Auto Servis Ardiani-A",
+        "Auto Servis Bajrami",
+        "Auto Servis Bashkimi",
+        "Auto Servis Besarti",
+        "Auto Servis Dritoni",
+        "Auto Servis Elektro-Klima SELA",
+        "Auto Servis Fejza",
+        "Auto servis Florenti",
+        "Auto Servis Jakupi",
+        "Auto Servis Ludi",
+        "Auto Servis Rally",
+        "Auto Servis Shefiki",
+        "Auto Servis Toska",
+        "Auto servis XONI"
+      ]
+    },
+    "existingNameMatches": [
+      {
+        "name": "Auto Service - Ernesti",
+        "city": "Ferizaj",
+        "existingId": "auto-service-ernesti-ferizaj",
+        "basis": "exact normalized name and municipality screening match; no new-ID claim"
+      },
+      {
+        "name": "Auto Service Kushtrimi",
+        "city": "Ferizaj",
+        "existingId": "auto-service-kushtrimi-ferizaj",
+        "basis": "exact normalized name and municipality screening match; no new-ID claim"
+      },
+      {
+        "name": "Auto servis CIMA Ferizaj",
+        "city": "Ferizaj",
+        "existingId": "auto-servis-cima-ferizaj",
+        "basis": "exact normalized name and municipality screening match; no new-ID claim"
+      },
+      {
+        "name": "Auto Servis Arbeni BENI",
+        "city": "Ferizaj",
+        "existingId": "auto-servis-arbeni-beni-ferizaj",
+        "basis": "exact normalized name and municipality screening match; no new-ID claim"
+      },
+      {
+        "name": "Auto Servis Cufa",
+        "city": "Ferizaj",
+        "existingId": "auto-servis-cufa-ferizaj",
+        "basis": "exact normalized name and municipality screening match; no new-ID claim"
+      },
+      {
+        "name": "Auto Servis Mercedes-Benz Ferizaj",
+        "city": "Ferizaj",
+        "existingId": "auto-servis-mercedes-benz-ferizaj",
+        "basis": "exact normalized name and municipality screening match; no new-ID claim"
+      },
+      {
+        "name": "Auto Servis Skenda",
+        "city": "Ferizaj",
+        "existingId": "auto-servis-skenda-ferizaj",
+        "basis": "exact normalized name and municipality screening match; no new-ID claim"
+      },
+      {
+        "name": "Auto Servis Tershana",
+        "city": "Ferizaj",
+        "existingId": "auto-tershana",
+        "basis": "exact normalized name and municipality screening match; no new-ID claim"
+      },
+      {
+        "name": "Auto servis BERATI BMW",
+        "city": "Malishevë",
+        "existingId": "auto-servis-berati-malisheve",
+        "basis": "exact normalized name and municipality screening match; no new-ID claim"
+      },
+      {
+        "name": "Auto Servis & Diagnoz OPEL",
+        "city": "Malishevë",
+        "existingId": "auto-servis-diagnoz-opel-malisheve",
+        "basis": "exact normalized name and municipality screening match; no new-ID claim"
+      },
+      {
+        "name": "Autoservis FEIMI",
+        "city": "Malishevë",
+        "existingId": "autoservis-feimi-malisheve",
+        "basis": "exact normalized name and municipality screening match; no new-ID claim"
+      },
+      {
+        "name": "AUTO SERVICE ADONISI",
+        "city": "Gjilan",
+        "existingId": "auto-service-adonisi-gjilan",
+        "basis": "exact normalized name and municipality screening match; no new-ID claim"
+      },
+      {
+        "name": "Auto Service MUF",
+        "city": "Gjilan",
+        "existingId": "auto-service-muf-gjilan",
+        "basis": "exact normalized name and municipality screening match; no new-ID claim"
+      },
+      {
+        "name": "Auto servis XONI",
+        "city": "Gjilan",
+        "existingId": "auto-servis-xoni-gjilan",
+        "basis": "exact normalized name and municipality screening match; no new-ID claim"
+      }
+    ],
+    "existingNameMatchCount": 14,
+    "categoryCoverage": {
+      "mechanics": "61 directory rows across three municipalities.",
+      "autoElectrics": "Auto Servis Elektro-Klima SELA screened as a Gjilan index lead, not admitted without detailed checks.",
+      "detailing": "X Garage Car details screened as a Malishevë index lead, not admitted without detailed checks.",
+      "vehicleGlass": {
+        "query": "auto xhama Malisheve Ferizaj Gjilan",
+        "sourceUrl": "https://www.google.com/search?q=auto+xhama+Malisheve+Ferizaj+Gjilan",
+        "leads": [
+          "Auto Xhama Fer Glass",
+          "Auto Xhama Center",
+          "Auto xhama shmeki"
+        ],
+        "existingMatches": [],
+        "note": "Additional discovery only; no Google data adopted. Existing identity/branch conflicts were not overridden."
+      }
+    }
+  },
+  "importedWorkshopIds": [
+    "auto-service-urimi-malisheve",
+    "adonis-garage-ferizaj",
+    "auto-servis-bajrami-gjilan",
+    "auto-service-biti-ferizaj",
+    "auto-service-bejta-ferizaj"
+  ],
+  "validation": {
+    "dryRun": {
+      "added": [
+        "auto-service-urimi-malisheve",
+        "adonis-garage-ferizaj",
+        "auto-servis-bajrami-gjilan",
+        "auto-service-biti-ferizaj",
+        "auto-service-bejta-ferizaj"
+      ],
+      "updated": [],
+      "deduplicated": []
+    },
+    "prewriteFullExportMatchesBaseline": true,
+    "translations": "Central source hash; complete DE/SQ/EN",
+    "hoursRevision": "9d32667b72d734ad5d0fc8e56cff8a16df9f21b30cd97991410ebb8b6c5231c6",
+    "isolatedReplay": {
+      "statements": 589,
+      "key": "workshop-source:7001dab4616e0318d6ef8edd3bacbed42f93b5433b25b8a5e257b01859fb149a",
+      "priorRowsPreserved": 1248,
+      "afterCounts": {
+        "catalog_state": 93,
+        "workshops": 295,
+        "workshop_google_ratings": 129,
+        "workshop_google_places": 295,
+        "workshop_contact_details": 10,
+        "workshop_opening_hours_imports": 289,
+        "workshop_email_addresses": 149,
+        "workshop_email_imports": 5
+      },
+      "idempotent": true,
+      "integrity": "ok",
+      "foreignKeyViolations": 0
+    },
+    "historicalGate": "All prior import manifests and exclusion/removal files checked by exact IDs/phones and names; F&S prior premises/scope conflict retained, Urimi prior Place-ID gap resolved freshly.",
+    "independentReviews": {
+      "standards": "No outstanding findings after removing stale count. Existing records and source hashes independently checked.",
+      "spec": "No outstanding findings after removing stale count. Browser observations assessed from authored evidence, not independently repeated."
+    },
+    "localQualityChecks": {
+      "coreSuites": "passed",
+      "types": "passed",
+      "lint": "passed",
+      "backupWorker": "passed",
+      "workflowLint": "passed",
+      "language": "passed",
+      "i18n": "passed",
+      "node": "24.21.0",
+      "go": "1.27.1",
+      "temporaryDirectory": "Canonical private worktree runtime path used for macOS restore fixture."
+    }
+  },
+  "sourceLimits": "Directory category supports only generic vehicle service. Additional social search results without phone/site attribution are excluded. No Google hours or AI summaries used as catalogue evidence.",
+  "after": {
+    "total": 295,
+    "published": 295,
+    "drafts": 0,
+    "note": "Prepared canonical/local replay counts; not a live publication claim."
+  }
+}

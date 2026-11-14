@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-11-11T08:53:36.198Z",
+  "updatedAt": "2026-11-14T08:10:33.097Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 290,
+    "published": 295,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -12,12 +12,59 @@
   },
   "googleImport": {
     "status": "completed",
-    "reason": "All 290 published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 290,
+    "reason": "All published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
+    "matchedPlaceIds": 295,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
   "workshops": [
+    {
+      "id": "adonis-garage-ferizaj",
+      "name": "Adonis Garage",
+      "city": "Ferizaj",
+      "address": "Rruga Enver Topalli",
+      "phone": "+38346666025",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Fahrzeugservice und Reparatur; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice und Reparatur",
+      "description": "Adonis Garage in Ferizaj ist als Werkstatt für Fahrzeugservice und Reparatur aufgeführt. Der eigene Betriebsauftritt bestätigt den öffentlichen Geschäftskontakt. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.334122,
+      "lng": 21.152025,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/gH5xmY5cWafL/adonis-garage/",
+          "title": "Öffentliches Verzeichnis: Name, Werkstattkategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.instagram.com/adonis_garage/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Fahrzeugservice",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-14",
+      "status": "published",
+      "updatedAt": "2026-11-14T08:10:11.113610+00:00",
+      "google": {
+        "placeId": "ChIJ1QoPHgB_VBMRjaqm0Yev--o",
+        "matchedAt": "2026-11-14T08:02:53.630456+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/gH5xmY5cWafL/adonis-garage/",
+            "https://www.instagram.com/adonis_garage/"
+          ],
+          "note": "Public Maps UI in the visibly confirmed project account: independent name, exact phone and precise site match an active entry. Place ID read from an official visible !19s link and directly returned with unrelated London fallback. No Google business content adopted and no ownership claim."
+        }
+      }
+    },
     {
       "id": "advance-detailing-prishtina",
       "name": "Advance Detailing Co.",
@@ -3035,6 +3082,47 @@
       }
     },
     {
+      "id": "auto-service-bejta-ferizaj",
+      "name": "Auto Service Bejta",
+      "city": "Ferizaj",
+      "address": "Ferizaj 70000",
+      "phone": "+38345925011",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Fahrzeugservice und Reparatur; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice und Reparatur",
+      "description": "Auto Service Bejta in Ferizaj ist als Werkstatt für Fahrzeugservice und Reparatur aufgeführt. Name, Standort und Kontakt stammen aus einem öffentlichen Werkstattverzeichnis. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.368385,
+      "lng": 21.167875,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/GU4MghMurBvz/auto-service-bejta/",
+          "title": "Öffentliches Verzeichnis: Name, Werkstattkategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-14",
+      "status": "published",
+      "updatedAt": "2026-11-14T08:10:11.113610+00:00",
+      "google": {
+        "placeId": "ChIJ8Ym2SQB_VBMRl1h1usc4_6w",
+        "matchedAt": "2026-11-14T08:10:11.113610+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/GU4MghMurBvz/auto-service-bejta/"
+          ],
+          "note": "Public Maps UI in the visibly confirmed project account: independent name, exact phone and precise site match an active entry. Place ID read from an official visible !19s link and directly returned with unrelated London fallback. No Google business content adopted and no ownership claim."
+        }
+      }
+    },
+    {
       "id": "auto-service-beni-vushtrri",
       "name": "Auto Service BENI",
       "city": "Vushtrri",
@@ -3109,6 +3197,59 @@
             "https://www.gjithebiznesi.com/XK/auto-service-besi-049-205-441"
           ],
           "note": "Public Maps interface in the confirmed account: name, independently published phone and location agree; active entry. Place ID from the visible !19s link directly rechecked with an incorrect fallback search. No API/SDK requests and no owner verification."
+        }
+      }
+    },
+    {
+      "id": "auto-service-biti-ferizaj",
+      "name": "Auto Service Biti",
+      "city": "Ferizaj",
+      "address": "Rruga Kadri Zeka",
+      "phone": "+38349130132",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349130132",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Fahrzeugservice und Reparatur; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice und Reparatur",
+      "description": "Auto Service Biti in Ferizaj ist als Werkstatt für Fahrzeugservice und Reparatur aufgeführt. Der eigene Betriebsauftritt bestätigt den öffentlichen Geschäftskontakt. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.376659,
+      "lng": 21.165455,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/RfklPPYIg2A1/auto-service-biti/",
+          "title": "Öffentliches Verzeichnis: Name, Werkstattkategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/p/Auto-Service-Biti-100033575594524/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Fahrzeugservice",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autoservicebiti/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Fahrzeugservice",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-14",
+      "status": "published",
+      "updatedAt": "2026-11-14T08:10:11.113610+00:00",
+      "google": {
+        "placeId": "ChIJ3wWXxih_VBMRdGOHzXfU7fM",
+        "matchedAt": "2026-11-14T08:02:53.630456+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/RfklPPYIg2A1/auto-service-biti/",
+            "https://www.facebook.com/p/Auto-Service-Biti-100033575594524/",
+            "https://www.instagram.com/autoservicebiti/"
+          ],
+          "note": "Public Maps UI in the visibly confirmed project account: independent name, exact phone and precise site match an active entry. Place ID read from an official visible !19s link and directly returned with unrelated London fallback. No Google business content adopted and no ownership claim."
         }
       }
     },
@@ -4026,6 +4167,53 @@
       }
     },
     {
+      "id": "auto-service-urimi-malisheve",
+      "name": "Auto Service Urimi",
+      "city": "Malishevë",
+      "address": "Adem Jashari 551",
+      "phone": "+38349286862",
+      "phoneNote": "Weiterer veröffentlichter Werkstattkontakt: +383 44 484 783; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Fahrzeugservice und Reparatur; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice und Reparatur",
+      "description": "Auto Service Urimi in Malishevë ist als Werkstatt für Fahrzeugservice und Reparatur aufgeführt. Der eigene Betriebsauftritt bestätigt den öffentlichen Geschäftskontakt. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.504185,
+      "lng": 20.763598,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/z0EepoWSa1gx/auto-service-urimi/",
+          "title": "Öffentliches Verzeichnis: Name, Werkstattkategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.instagram.com/auto_service_urimi/",
+          "title": "Eigener Betriebsauftritt: Geschäftskontakt und Fahrzeugservice",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-14",
+      "status": "published",
+      "updatedAt": "2026-11-14T08:10:11.113610+00:00",
+      "google": {
+        "placeId": "ChIJTSdM_O-fUxMR7_1fdgf7DpQ",
+        "matchedAt": "2026-11-14T07:56:56.058950+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/z0EepoWSa1gx/auto-service-urimi/",
+            "https://www.instagram.com/auto_service_urimi/"
+          ],
+          "note": "Public Maps UI in the visibly confirmed project account: independent name, exact phone and precise site match an active entry. Place ID read from an official visible !19s link and directly returned with unrelated London fallback. No Google business content adopted and no ownership claim."
+        }
+      }
+    },
+    {
       "id": "auto-service-vali-istog",
       "name": "Auto Service Vali",
       "city": "Istog",
@@ -4316,6 +4504,47 @@
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
+        }
+      }
+    },
+    {
+      "id": "auto-servis-bajrami-gjilan",
+      "name": "Auto Servis Bajrami",
+      "city": "Gjilan",
+      "address": "57 Arkitekt Sinani",
+      "phone": "+38344212271",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Fahrzeugservice und Reparatur; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice und Reparatur",
+      "description": "Auto Servis Bajrami in Gjilan ist als Werkstatt für Fahrzeugservice und Reparatur aufgeführt. Name, Standort und Kontakt stammen aus einem öffentlichen Werkstattverzeichnis. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.462078,
+      "lng": 21.479734,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/rXLKuZVbM1hL/auto-servis-bajrami/",
+          "title": "Öffentliches Verzeichnis: Name, Werkstattkategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-14",
+      "status": "published",
+      "updatedAt": "2026-11-14T08:10:11.113610+00:00",
+      "google": {
+        "placeId": "ChIJ0xBI-UbzVBMRMtOYv3Ax5XE",
+        "matchedAt": "2026-11-14T08:02:53.630456+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/rXLKuZVbM1hL/auto-servis-bajrami/"
+          ],
+          "note": "Public Maps UI in the visibly confirmed project account: independent name, exact phone and precise site match an active entry. Place ID read from an official visible !19s link and directly returned with unrelated London fallback. No Google business content adopted and no ownership claim."
         }
       }
     },
