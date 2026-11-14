@@ -1,7 +1,88 @@
 {
   "schemaVersion": 1,
-  "revision": "d678ff6174860c581ca8e5fb8a3758ab9633133555941ba156a8184ba555b1c3",
+  "revision": "9d32667b72d734ad5d0fc8e56cff8a16df9f21b30cd97991410ebb8b6c5231c6",
   "records": [
+    {
+      "id": "adonis-garage-ferizaj",
+      "expected": {
+        "name": "Adonis Garage",
+        "city": "Ferizaj",
+        "address": "Rruga Enver Topalli",
+        "phone": "+38346666025"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-14",
+        "source": "https://numrat.com/biznes/gH5xmY5cWafL/adonis-garage/ | https://www.instagram.com/adonis_garage/",
+        "sourceName": "Adonis Garage",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated 2026-10-12 and own Instagram show same exact phone and repair identity. Instagram bio has no business email or weekly hours. Own website/Facebook discovery returned no attributable additional contact source; unrelated BMW service and car-sales profiles were not used.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
     {
       "id": "advance-detailing-prishtina",
       "expected": {
@@ -5273,6 +5354,87 @@
       }
     },
     {
+      "id": "auto-service-bejta-ferizaj",
+      "expected": {
+        "name": "Auto Service Bejta",
+        "city": "Ferizaj",
+        "address": "Ferizaj 70000",
+        "phone": "+38345925011"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-14",
+        "source": "https://numrat.com/biznes/GU4MghMurBvz/auto-service-bejta/",
+        "sourceName": "Auto Service Bejta",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated 2026-10-12 gives mechanic category, phone and precise mapped site, no email or week. Own website/Facebook/Instagram discovery returned Autopjes bejta parts page without workshop phone/site attribution; no contact or hours copied from it. No usable independent week found.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-service-beni-vushtrri",
       "expected": {
         "name": "Auto Service BENI",
@@ -5439,6 +5601,87 @@
           "09:00-16:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-service-biti-ferizaj",
+      "expected": {
+        "name": "Auto Service Biti",
+        "city": "Ferizaj",
+        "address": "Rruga Kadri Zeka",
+        "phone": "+38349130132"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-14",
+        "source": "https://numrat.com/biznes/RfklPPYIg2A1/auto-service-biti/ | https://www.facebook.com/p/Auto-Service-Biti-100033575594524/ | https://www.instagram.com/autoservicebiti/",
+        "sourceName": "Auto Service Biti",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated 2026-10-12; own Facebook exact phone and town, own Instagram same phone and repair/service description. Facebook email directly read. Neither own profile supplies a usable weekly plan. A dated 2024 holiday notice is not a current weekly schedule. Search AI output is not evidence and its alternative email was not imported.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -6995,6 +7238,87 @@
       }
     },
     {
+      "id": "auto-service-urimi-malisheve",
+      "expected": {
+        "name": "Auto Service Urimi",
+        "city": "Malishevë",
+        "address": "Adem Jashari 551",
+        "phone": "+38349286862"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-14",
+        "source": "https://numrat.com/biznes/z0EepoWSa1gx/auto-service-urimi/ | https://www.instagram.com/auto_service_urimi/",
+        "sourceName": "Auto Service Urimi",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated 2026-10-12 gives numbered street and main phone. Own Instagram matches both workshop numbers and service identity but has no email or weekly hours. The Facebook album discovered through search returned Not Found. Instagram website label www.auto/service.com is malformed and not used. No usable attributable week found.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-servis-agimi-gjakova",
       "expected": {
         "name": "Auto servis \"Agimi\"",
@@ -7501,6 +7825,87 @@
           "08:00-16:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-bajrami-gjilan",
+      "expected": {
+        "name": "Auto Servis Bajrami",
+        "city": "Gjilan",
+        "address": "57 Arkitekt Sinani",
+        "phone": "+38344212271"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-14",
+        "source": "https://numrat.com/biznes/rXLKuZVbM1hL/auto-servis-bajrami/",
+        "sourceName": "Auto Servis Bajrami",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated 2026-10-12 provides numbered street, phone and mechanic category, no email or hours. Same-name Gjilan Facebook Bajramiiiiiiiiiii has no attributable phone or exact street, so not adopted as own source. Instagram and website search returned different Peja/Mitrovica businesses and different numbers, not branch-attributable contacts or hours.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },

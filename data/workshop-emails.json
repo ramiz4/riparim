@@ -2,6 +2,20 @@
   "schemaVersion": 2,
   "contacts": [
     {
+      "workshopId": "adonis-garage-ferizaj",
+      "matchedName": "Adonis Garage",
+      "matchedPhone": "+38346666025",
+      "matchedCity": "Ferizaj",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/gH5xmY5cWafL/adonis-garage/",
+        "https://www.instagram.com/adonis_garage/",
+        "https://www.google.com/search?q=Adonis+Garage+Ferizaj+facebook+instagram+email"
+      ],
+      "notes": "Directory updated 2026-10-12 and own Instagram show same exact phone and repair identity. Instagram bio has no business email or weekly hours. Own website/Facebook discovery returned no attributable additional contact source; unrelated BMW service and car-sales profiles were not used."
+    },
+    {
       "workshopId": "advance-detailing-prishtina",
       "matchedName": "Advance Detailing Co.",
       "matchedPhone": "+38349909229",
@@ -1224,6 +1238,20 @@
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; Instagram bio checked; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
     },
     {
+      "workshopId": "auto-service-bejta-ferizaj",
+      "matchedName": "Auto Service Bejta",
+      "matchedPhone": "+38345925011",
+      "matchedCity": "Ferizaj",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/GU4MghMurBvz/auto-service-bejta/",
+        "https://www.facebook.com/autopjesbejta/",
+        "https://www.google.com/search?q=%22Auto+Service+Bejta%22+Ferizaj+facebook+instagram+email"
+      ],
+      "notes": "Directory updated 2026-10-12 gives mechanic category, phone and precise mapped site, no email or week. Own website/Facebook/Instagram discovery returned Autopjes bejta parts page without workshop phone/site attribution; no contact or hours copied from it. No usable independent week found."
+    },
+    {
       "workshopId": "auto-service-beni-vushtrri",
       "matchedName": "Auto Service BENI",
       "matchedPhone": "+38349198120",
@@ -1253,6 +1281,31 @@
         "https://www.google.com/search?q=Auto%20service%20BESI%20Vushtrri%20email%20-site%3Acybo.com%20-site%3Ariparim.com"
       ],
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; Facebook requires login; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
+    },
+    {
+      "workshopId": "auto-service-biti-ferizaj",
+      "matchedName": "Auto Service Biti",
+      "matchedPhone": "+38349130132",
+      "matchedCity": "Ferizaj",
+      "emails": [
+        {
+          "address": "bitiautoservice@gmail.com",
+          "sourceUrls": [
+            "https://www.facebook.com/p/Auto-Service-Biti-100033575594524/"
+          ],
+          "checkedAt": "2026-11-14",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/RfklPPYIg2A1/auto-service-biti/",
+        "https://www.facebook.com/p/Auto-Service-Biti-100033575594524/",
+        "https://www.instagram.com/autoservicebiti/",
+        "https://www.facebook.com/profile.php?id=100033575594524&sk=about",
+        "https://www.google.com/search?q=%22Auto+Service+Biti%22+Ferizaj+facebook+instagram+email"
+      ],
+      "notes": "Own Facebook contact details show exact workshop phone and Ferizaj. Search AI suggested another email but it was not accepted as source evidence."
     },
     {
       "workshopId": "auto-service-bmw-visari-peja",
@@ -1596,6 +1649,21 @@
       "notes": "Publicly evidenced business email address. Research confirms neither delivery, consent nor business ownership."
     },
     {
+      "workshopId": "auto-service-urimi-malisheve",
+      "matchedName": "Auto Service Urimi",
+      "matchedPhone": "+38349286862",
+      "matchedCity": "Malishevë",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/z0EepoWSa1gx/auto-service-urimi/",
+        "https://www.instagram.com/auto_service_urimi/",
+        "https://www.facebook.com/1648742688698922/albums/1648742815365576/",
+        "https://www.google.com/search?q=Auto+Service+Urimi+Malisheve+facebook+instagram+email"
+      ],
+      "notes": "Directory updated 2026-10-12 gives numbered street and main phone. Own Instagram matches both workshop numbers and service identity but has no email or weekly hours. The Facebook album discovered through search returned Not Found. Instagram website label www.auto/service.com is malformed and not used. No usable attributable week found."
+    },
+    {
       "workshopId": "auto-service-vali-istog",
       "matchedName": "Auto Service Vali",
       "matchedPhone": "+38344920210",
@@ -1711,6 +1779,20 @@
         "https://www.google.com/search?q=Auto%20Servis%20Arlindi%20Prishtina%20email%20-site%3Acybo.com%20-site%3Ariparim.com"
       ],
       "notes": "Follow-up on 14.10.2026: Numrat confirms Auto Servis Arlindi, Rr Qëndresa, Prishtina and +38344848728 but lists no email. The public cover image of the Sopa Facebook page lists Llapushnik/Drenas and 045655827/044314959; current contact +38348454542. Instagram auto.servis.arlindi lists Ferizaj/Driton Islami and 044287682. No evidenced link between these email candidates and the Prishtina profile; no address imported. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found. Additional candidate Servisarlindi.info@gmail.com belongs, according to its own Instagram post DOrGAulgJO0, to Rruga Driton Islami, Ferizaj, 044287682; no evidenced link to Qëndresa/Prishtina and 044848728, therefore excluded."
+    },
+    {
+      "workshopId": "auto-servis-bajrami-gjilan",
+      "matchedName": "Auto Servis Bajrami",
+      "matchedPhone": "+38344212271",
+      "matchedCity": "Gjilan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/rXLKuZVbM1hL/auto-servis-bajrami/",
+        "https://www.facebook.com/Bajramiiiiiiiiiii/",
+        "https://www.google.com/search?q=%22Auto+Servis+Bajrami%22+%2244+212+271%22+instagram+email"
+      ],
+      "notes": "Directory updated 2026-10-12 provides numbered street, phone and mechanic category, no email or hours. Same-name Gjilan Facebook Bajramiiiiiiiiiii has no attributable phone or exact street, so not adopted as own source. Instagram and website search returned different Peja/Mitrovica businesses and different numbers, not branch-attributable contacts or hours."
     },
     {
       "workshopId": "auto-servis-bajrami-peja",

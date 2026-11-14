@@ -2,6 +2,34 @@
   "schemaVersion": 1,
   "workshops": [
     {
+      "id": "adonis-garage-ferizaj",
+      "sourceHash": "1b2b2b4d0c54adc68b4581cf208a2ad4c39cf8354fee502f615e869b723212ef",
+      "en": {
+        "specialty": "Vehicle servicing and repair",
+        "description": "Adonis Garage in Ferizaj is listed as a workshop for vehicle servicing and repair. The business’s own profile confirms its public contact number. Please confirm the service scope and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle servicing and repair; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, workshop category, location and business contact",
+          "Business’s own profile: business contact and vehicle servicing"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim dhe riparim automjetesh",
+        "description": "Adonis Garage në Ferizaj figuron si servis për mirëmbajtjen dhe riparimin e automjeteve. Profili i vetë biznesit konfirmon numrin publik të kontaktit. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Servisim dhe riparim automjetesh; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria e servisit, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: kontakti dhe servisimi i automjeteve"
+        ]
+      }
+    },
+    {
       "id": "advance-detailing-prishtina",
       "sourceHash": "cd34934040cbbbdcb902fe913f3bf47b7a579a157e848185141ee0f2667435fe",
       "sq": {
@@ -1742,6 +1770,32 @@
       }
     },
     {
+      "id": "auto-service-bejta-ferizaj",
+      "sourceHash": "ec55a17b4b809612ec94a1996c40904b6b80f78757aa8d1e49a606f0144773d6",
+      "en": {
+        "specialty": "Vehicle servicing and repair",
+        "description": "Auto Service Bejta in Ferizaj is listed as a workshop for vehicle servicing and repair. The name, location and contact details come from a public workshop directory. Please confirm the service scope and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle servicing and repair; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, workshop category, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim dhe riparim automjetesh",
+        "description": "Auto Service Bejta në Ferizaj figuron si servis për mirëmbajtjen dhe riparimin e automjeteve. Emri, vendndodhja dhe kontakti vijnë nga një drejtori publike servisesh. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Servisim dhe riparim automjetesh; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria e servisit, vendndodhja dhe kontakti"
+        ]
+      }
+    },
+    {
       "id": "auto-service-beni-vushtrri",
       "sourceHash": "3c3880509c69abdc59a82e1aa087def6d6860380cba000d0fb60a9f2cc0fe222",
       "sq": {
@@ -1783,6 +1837,36 @@
         ],
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": ["Public directory: contact, location and bodywork"]
+      }
+    },
+    {
+      "id": "auto-service-biti-ferizaj",
+      "sourceHash": "26d5f3c890257247beb5b7785670277b262a02e6c9fbd3f5a39bea6a56bebcb6",
+      "en": {
+        "specialty": "Vehicle servicing and repair",
+        "description": "Auto Service Biti in Ferizaj is listed as a workshop for vehicle servicing and repair. The business’s own profile confirms its public contact number. Please confirm the service scope and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle servicing and repair; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, workshop category, location and business contact",
+          "Business’s own profile: business contact and vehicle servicing",
+          "Business’s own profile: business contact and vehicle servicing"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim dhe riparim automjetesh",
+        "description": "Auto Service Biti në Ferizaj figuron si servis për mirëmbajtjen dhe riparimin e automjeteve. Profili i vetë biznesit konfirmon numrin publik të kontaktit. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Servisim dhe riparim automjetesh; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria e servisit, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: kontakti dhe servisimi i automjeteve",
+          "Profili i vetë biznesit: kontakti dhe servisimi i automjeteve"
+        ]
       }
     },
     {
@@ -2308,6 +2392,34 @@
       }
     },
     {
+      "id": "auto-service-urimi-malisheve",
+      "sourceHash": "0c75387f71d250597e89bd2cc75baab6e4d722b19242dabeba52eb0c37303a5a",
+      "en": {
+        "specialty": "Vehicle servicing and repair",
+        "description": "Auto Service Urimi in Malishevë is listed as a workshop for vehicle servicing and repair. The business’s own profile confirms its public contact number. Please confirm the service scope and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle servicing and repair; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Additional published workshop contact: +383 44 484 783; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, workshop category, location and business contact",
+          "Business’s own profile: business contact and vehicle servicing"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim dhe riparim automjetesh",
+        "description": "Auto Service Urimi në Malishevë figuron si servis për mirëmbajtjen dhe riparimin e automjeteve. Profili i vetë biznesit konfirmon numrin publik të kontaktit. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Servisim dhe riparim automjetesh; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt tjetër i publikuar i servisit: +383 44 484 783; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria e servisit, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: kontakti dhe servisimi i automjeteve"
+        ]
+      }
+    },
+    {
       "id": "auto-service-vali-istog",
       "sourceHash": "4aad536a2159b33165db6ae9799a480acf0523f329eaa1fd3e3ba76836834a05",
       "sq": {
@@ -2480,6 +2592,32 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Public directory: name, contact and vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-bajrami-gjilan",
+      "sourceHash": "019848467667aad8b5a34e08100f78d8212cae11730573292b6d879a2c109349",
+      "en": {
+        "specialty": "Vehicle servicing and repair",
+        "description": "Auto Servis Bajrami in Gjilan is listed as a workshop for vehicle servicing and repair. The name, location and contact details come from a public workshop directory. Please confirm the service scope and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle servicing and repair; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, workshop category, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim dhe riparim automjetesh",
+        "description": "Auto Servis Bajrami në Gjilan figuron si servis për mirëmbajtjen dhe riparimin e automjeteve. Emri, vendndodhja dhe kontakti vijnë nga një drejtori publike servisesh. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Servisim dhe riparim automjetesh; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria e servisit, vendndodhja dhe kontakti"
         ]
       }
     },
