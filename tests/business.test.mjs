@@ -289,6 +289,11 @@ const check = (condition, label) => {
   assert(condition, label);
   passed++;
 };
+check(
+  directory.validateProfile({ ...first, city: "Vushtrri" }, first.id).city ===
+    "Vushtrri",
+  "Published Vushtrri workshops remain valid for owner profile changes",
+);
 for (const locale of ["de", "sq", "en"]) {
   globalThis.fixtureUser = actors.a;
   const invalid = await route.POST(

@@ -72,6 +72,12 @@
       "translations": {
         "en": "Vehicle servicing and repair",
         "sq": "Servisim dhe riparim automjetesh"
+      },
+      "historicalHoldResolution": {
+        "manifest": "data/import-2026-11-04-daily.json",
+        "previousReason": "Passenger-car repair scope not independently established.",
+        "newEvidence": "Own Instagram autoservis.xhida now visibly pairs exact 049549894 with other workshop numbers and shows a BMW X4 engine-service/technical-check post. This resolves the prior scope-only hold; directory premises and Maps identity were freshly matched.",
+        "sourceUrl": "https://www.instagram.com/autoservis.xhida/p/DM8AraCic9h/"
       }
     },
     {
@@ -350,7 +356,8 @@
       "checkedAt": "2026-11-15T08:59:39.789Z",
       "workshopIds": ["zeka-detail-vushtrri"],
       "method": "whatsapp_web_phone_number_lookup",
-      "note": "Completed result returned +377 instead of requested +383."
+      "note": "Completed result returned +377 instead of requested +383.",
+      "nextCheck": "Repeat the exact +38345967312 lookup with a fully cleared field; keep unresolved and no WhatsApp contact unless that exact prefix returns."
     }
   ],
   "whatsappSummary": {
@@ -382,7 +389,9 @@
     "note": "Manual index screening; 103 entries are not fully verified identities. Existing profiles, retailers, car sales and wash-only businesses excluded. Four latest historical identity holds retained without unchanged requery.",
     "belowPreferredTenReason": "Expanded across three municipalities; five candidates passed identity gates while six detailed candidates have scope, contact or premises conflicts. Other index entries are not admitted without verification.",
     "detailedCandidates": 11,
-    "deferred": 6
+    "deferred": 6,
+    "existingNameMatches": 29,
+    "existingMatchLimit": "Name/city screening only, including known spelling aliases; not 29 independently reverified duplicate identities."
   },
   "deferred": [
     {
@@ -459,6 +468,11 @@
       "idempotent": true,
       "integrity": "ok",
       "foreignKeyViolations": 0
+    },
+    "runtimeRegression": {
+      "cause": "Vushtrri absent from shared runtime city options; validateProfile rejected an otherwise valid published profile.",
+      "fix": "Add Vushtrri to shared supported cities.",
+      "test": "Explicit Vushtrri profile validation failed red, then business contract suite passed160 checks after one-line city addition."
     }
   },
   "importedWorkshopIds": [
