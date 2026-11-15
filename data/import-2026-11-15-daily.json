@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "date": "2026-11-15",
   "timezone": "Europe/Zurich",
-  "checkedAt": "2026-11-15T09:01:43.583212+00:00",
+  "checkedAt": "2026-11-15T09:13:54.201062+00:00",
   "status": "prepared-awaiting-tests-review-ci-release",
   "completedDateGuard": false,
   "publishedCountConfirmed": 0,
@@ -189,15 +189,15 @@
       }
     },
     {
-      "id": "5a-body-repair-shop-vushtrri",
-      "name": "5A Body Repair Shop",
+      "id": "lindi-automotive-vushtrri",
+      "name": "LINDI Automotive",
       "city": "Vushtrri",
-      "address": "Arsim Rrushtolli, 22 Rrugica",
-      "phone": "+38345277816",
-      "lat": 42.825495,
-      "lng": 20.966015,
-      "sourceUrl": "https://numrat.com/biznes/8XAOW62kaVfh/5a-body-repair-shop/",
-      "checkedAt": "2026-11-15T08:56:27.005073+00:00",
+      "address": "Rruga e shales",
+      "phone": "+38344332254",
+      "lat": 42.828877,
+      "lng": 20.976061,
+      "sourceUrl": "https://numrat.com/biznes/0nyx7Xr9HXUS/lindi-automotive/",
+      "checkedAt": "2026-11-15T09:13:54.201062+00:00",
       "status": "verified-for-dry-run",
       "mapsVerification": {
         "officialVisible19sLink": true,
@@ -206,31 +206,37 @@
       },
       "sourceAge": "Directory updated 2026-10-12",
       "sourceUrls": [
-        "https://numrat.com/biznes/8XAOW62kaVfh/5a-body-repair-shop/"
+        "https://numrat.com/biznes/0nyx7Xr9HXUS/lindi-automotive/",
+        "https://www.facebook.com/lindiautomotive/",
+        "https://www.instagram.com/lindi_automotive/"
       ],
       "publicBusinessEmail": {
-        "address": null,
-        "sourceUrl": "https://numrat.com/biznes/8XAOW62kaVfh/5a-body-repair-shop/",
-        "checkedAt": "2026-11-15T09:01:43.583212+00:00",
-        "status": "not-found",
+        "address": "lindi.automotive@gmail.com",
+        "sourceUrl": "https://www.facebook.com/lindiautomotive/",
+        "checkedAt": "2026-11-15T09:13:54.201062+00:00",
+        "status": "publicly-sourced",
         "checkedSources": [
-          "https://numrat.com/biznes/8XAOW62kaVfh/5a-body-repair-shop/"
+          "https://numrat.com/biznes/0nyx7Xr9HXUS/lindi-automotive/",
+          "https://www.facebook.com/lindiautomotive/",
+          "https://www.instagram.com/lindi_automotive/"
         ],
-        "note": "Directory updated 2026-10-12 supplies the independent category, contact and precise map point but no email or weekly schedule. Own website/Facebook/Instagram discovery found no attributable additional source; unrelated namesakes were excluded."
+        "note": "Directory updated 2026-10-12. Own Facebook and Instagram match exact main phone and Vushtrri. Current Instagram bio explicitly advertises detailing/polishing; Facebook post dated 2020-12-07 describes vehicle polishing. Facebook publicly lists lindi.automotive@gmail.com. Facebook hours expose only generic open-now text, not a usable week. Linked own website https://lindi-automotive.com/ failed DNS (ERR_NAME_NOT_RESOLVED); no security bypass. Instagram supplies no weekly plan; no Google hours adopted."
       },
       "openingHoursResearch": {
         "kind": "assumed",
-        "checkedAt": "2026-11-15T09:01:43.583212+00:00",
+        "checkedAt": "2026-11-15T09:13:54.201062+00:00",
         "sourceUrls": [
-          "https://numrat.com/biznes/8XAOW62kaVfh/5a-body-repair-shop/"
+          "https://numrat.com/biznes/0nyx7Xr9HXUS/lindi-automotive/",
+          "https://www.facebook.com/lindiautomotive/",
+          "https://www.instagram.com/lindi_automotive/"
         ],
-        "note": "Directory updated 2026-10-12 supplies the independent category, contact and precise map point but no email or weekly schedule. Own website/Facebook/Instagram discovery found no attributable additional source; unrelated namesakes were excluded.",
+        "note": "Directory updated 2026-10-12. Own Facebook and Instagram match exact main phone and Vushtrri. Current Instagram bio explicitly advertises detailing/polishing; Facebook post dated 2020-12-07 describes vehicle polishing. Facebook publicly lists lindi.automotive@gmail.com. Facebook hours expose only generic open-now text, not a usable week. Linked own website https://lindi-automotive.com/ failed DNS (ERR_NAME_NOT_RESOLVED); no security bypass. Instagram supplies no weekly plan; no Google hours adopted.",
         "timezone": "Europe/Belgrade"
       },
       "googleIdentity": {
-        "placeId": "ChIJoY6jPkpbUxMRjQLjvfKxXb4",
+        "placeId": "ChIJy5m4hTxbUxMRnWN2YxD0h-w",
         "method": "public-maps-ui",
-        "checkedAt": "2026-11-15T08:56:27.005073+00:00",
+        "checkedAt": "2026-11-15T09:13:54.201062+00:00",
         "officialVisibleLink": true,
         "directMismatchedFallbackReturn": true,
         "nameAndPhoneMatched": true,
@@ -238,8 +244,15 @@
         "activeStatusMatched": true
       },
       "translations": {
-        "en": "Bodywork repair",
-        "sq": "Riparime karrocerie"
+        "en": "Vehicle detailing and polishing",
+        "sq": "Pastrimi i detajuar dhe lustrimi i automjeteve"
+      },
+      "ownSource": "https://www.instagram.com/lindi_automotive/",
+      "historicalSecondaryContact": {
+        "phone": "+38349336635",
+        "sourceUrl": "https://www.facebook.com/lindiautomotive/videos/instalimi-i-dritave-led-ne-interier-dysheme-nje-ngjyrsh-dhe-shume-ngjyra-me-tele/702901963374809/",
+        "sourceAge": "About eight years",
+        "decision": "Checked but not republished as current contact; current own bio lists primary only."
       }
     },
     {
@@ -358,24 +371,42 @@
       "method": "whatsapp_web_phone_number_lookup",
       "note": "Completed result returned +377 instead of requested +383.",
       "nextCheck": "Repeat the exact +38345967312 lookup with a fully cleared field; keep unresolved and no WhatsApp contact unless that exact prefix returns."
+    },
+    {
+      "phone": "+38344332254",
+      "status": "unresolved",
+      "checkedAt": "2026-11-15T09:12:29.045Z",
+      "workshopIds": ["lindi-automotive-vushtrri"],
+      "method": "whatsapp_web_phone_number_lookup",
+      "note": "Result showed +37744332254.",
+      "nextCheck": "Recheck exact +383 primary with fully cleared field; verify current secondary on own source before publishing."
+    },
+    {
+      "phone": "+38349336635",
+      "status": "registered",
+      "checkedAt": "2026-11-15T09:12:57.924Z",
+      "workshopIds": ["lindi-automotive-vushtrri"],
+      "method": "whatsapp_web_phone_number_lookup",
+      "note": "Historical 2018 own secondary only; no current republication.",
+      "nextCheck": "Recheck exact +383 primary with fully cleared field; verify current secondary on own source before publishing."
     }
   ],
   "whatsappSummary": {
-    "uniqueNumbersChecked": 7,
-    "registered": 4,
+    "uniqueNumbersChecked": 9,
+    "registered": 5,
     "not_registered": 2,
-    "unresolved": 1,
-    "completedUiLookups": 7,
-    "newPreparedContacts": 3,
-    "selection": "Xhida main number matches directory and Maps; secondary registered number retained only in phone note."
+    "unresolved": 2,
+    "completedUiLookups": 9,
+    "newPreparedContacts": 2,
+    "selection": "Xhida main matches current sources; its registered secondary stays in phone note. Registered5A is held. Historical Lindi secondary not republished; exact main prefix unresolved."
   },
   "preparedSummary": {
     "newIds": 5,
     "researchedWeeks": 0,
     "assumedWeeks": 5,
-    "publicBusinessEmails": 0,
-    "missingBusinessEmails": 5,
-    "whatsappContacts": 3
+    "publicBusinessEmails": 1,
+    "missingBusinessEmails": 4,
+    "whatsappContacts": 2
   },
   "researchProgress": {
     "municipalities": ["Lipjan", "Obiliq", "Vushtrri"],
@@ -387,9 +418,9 @@
     },
     "qualified": 5,
     "note": "Manual index screening; 103 entries are not fully verified identities. Existing profiles, retailers, car sales and wash-only businesses excluded. Four latest historical identity holds retained without unchanged requery.",
-    "belowPreferredTenReason": "Expanded across three municipalities; five candidates passed identity gates while six detailed candidates have scope, contact or premises conflicts. Other index entries are not admitted without verification.",
-    "detailedCandidates": 11,
-    "deferred": 6,
+    "belowPreferredTenReason": "Expanded across three municipalities and103 index entries. Five identities have sufficient independent scope/contact evidence; seven detailed candidates remain held. 5A replaced after independent review; no gate waived.",
+    "detailedCandidates": 12,
+    "deferred": 7,
     "existingNameMatches": 29,
     "existingMatchLimit": "Name/city screening only, including known spelling aliases; not 29 independently reverified duplicate identities."
   },
@@ -417,6 +448,15 @@
     {
       "name": "FitCar-E",
       "reason": "Registry-derived search lead has another contact; relationship to directory number not established."
+    },
+    {
+      "id": "5a-body-repair-shop-vushtrri",
+      "name": "5A Body Repair Shop",
+      "reason": "Independent Architect review: broad Auto servis directory category and name alone do not establish passenger-car bodywork. No attributable own repair statement found. Positive WhatsApp and Maps identity do not qualify scope.",
+      "nextCheck": "Find explicit independent repair classification or attributable own passenger-car bodywork statement.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/8XAOW62kaVfh/5a-body-repair-shop/"
+      ]
     }
   ],
   "preflight": {
@@ -440,7 +480,7 @@
         "xhida-servis-obiliq",
         "auto-goma-alberti-obiliq",
         "auto-elektrik-menduh-vushtrri",
-        "5a-body-repair-shop-vushtrri",
+        "lindi-automotive-vushtrri",
         "zeka-detail-vushtrri"
       ],
       "updated": [],
@@ -449,10 +489,10 @@
     },
     "prewriteFullExportMatchesBaseline": true,
     "translations": "Central source hash; complete DE/SQ/EN",
-    "hoursRevision": "32b52f4eee9f005f4d30f3801473e07ad70d3347f27afa5fb8b8ab5f7c4fe535",
+    "hoursRevision": "3e25dd301a5e0ecc6e1f09010552eee97ec551e0c80754d691429fcb5373b02e",
     "isolatedReplay": {
-      "statements": 596,
-      "key": "workshop-source:fa8aa7ef286db0c1c6d8980f40c527e152245d6625601e1234fa7054113b7436",
+      "statements": 597,
+      "key": "workshop-source:0e4e31b528ba79f692128a686043fb6e6bdc562f820f6757437aad8939af00bb",
       "priorRowsPreserved": 1269,
       "afterCounts": {
         "catalog_state": 94,
@@ -462,7 +502,7 @@
         "workshop_premium": 4,
         "workshop_contact_details": 10,
         "workshop_opening_hours_imports": 294,
-        "workshop_email_addresses": 149,
+        "workshop_email_addresses": 150,
         "workshop_email_imports": 5
       },
       "idempotent": true,
@@ -470,16 +510,21 @@
       "foreignKeyViolations": 0
     },
     "runtimeRegression": {
-      "cause": "Vushtrri absent from shared runtime city options; validateProfile rejected an otherwise valid published profile.",
-      "fix": "Add Vushtrri to shared supported cities.",
-      "test": "Explicit Vushtrri profile validation failed red, then business contract suite passed160 checks after one-line city addition."
+      "cause": "Vushtrri missing from shared city options",
+      "fix": "Supported city added with failing-then-passing owner profile regression."
     }
   },
   "importedWorkshopIds": [
     "xhida-servis-obiliq",
     "auto-goma-alberti-obiliq",
     "auto-elektrik-menduh-vushtrri",
-    "5a-body-repair-shop-vushtrri",
+    "lindi-automotive-vushtrri",
     "zeka-detail-vushtrri"
-  ]
+  ],
+  "after": {
+    "total": 300,
+    "published": 300,
+    "drafts": 0,
+    "state": "prepared-not-live"
+  }
 }

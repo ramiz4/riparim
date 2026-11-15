@@ -2,18 +2,6 @@
   "schemaVersion": 2,
   "contacts": [
     {
-      "workshopId": "5a-body-repair-shop-vushtrri",
-      "matchedName": "5A Body Repair Shop",
-      "matchedPhone": "+38345277816",
-      "matchedCity": "Vushtrri",
-      "emails": [],
-      "researchStatus": "not_found",
-      "checkedUrls": [
-        "https://numrat.com/biznes/8XAOW62kaVfh/5a-body-repair-shop/"
-      ],
-      "notes": "Directory updated 2026-10-12 supplies the independent category, contact and precise map point but no email or weekly schedule. Own website/Facebook/Instagram discovery found no attributable additional source; unrelated namesakes were excluded."
-    },
-    {
       "workshopId": "adonis-garage-ferizaj",
       "matchedName": "Adonis Garage",
       "matchedPhone": "+38346666025",
@@ -4809,6 +4797,27 @@
         "https://www.cybo.com/XK-biz/kushtrimi-auto-service"
       ],
       "notes": "Full independent directory details, focused business-name/town query and exact44contact/email/Instagram query checked. Closest own-named Facebook100063208571027explicitly locatesFerizaj, not this Kaçanik premises; unrelated contact/service claims not adopted. No attributable own Kaçanik website/Instagram/business email found. Generic directoryEmail lookup is not a contact address."
+    },
+    {
+      "workshopId": "lindi-automotive-vushtrri",
+      "matchedName": "LINDI Automotive",
+      "matchedPhone": "+38344332254",
+      "matchedCity": "Vushtrri",
+      "emails": [
+        {
+          "address": "lindi.automotive@gmail.com",
+          "sourceUrls": ["https://www.facebook.com/lindiautomotive/"],
+          "checkedAt": "2026-11-15",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/0nyx7Xr9HXUS/lindi-automotive/",
+        "https://www.facebook.com/lindiautomotive/",
+        "https://www.instagram.com/lindi_automotive/"
+      ],
+      "notes": "Directory updated 2026-10-12. Own Facebook and Instagram match exact main phone and Vushtrri. Current Instagram bio explicitly advertises detailing/polishing; Facebook post dated 2020-12-07 describes vehicle polishing. Facebook publicly lists lindi.automotive@gmail.com. Facebook hours expose only generic open-now text, not a usable week. Linked own website https://lindi-automotive.com/ failed DNS (ERR_NAME_NOT_RESOLVED); no security bypass. Instagram supplies no weekly plan; no Google hours adopted."
     },
     {
       "workshopId": "lipjani-coding-lipjan",

@@ -1,88 +1,7 @@
 {
   "schemaVersion": 1,
-  "revision": "32b52f4eee9f005f4d30f3801473e07ad70d3347f27afa5fb8b8ab5f7c4fe535",
+  "revision": "3e25dd301a5e0ecc6e1f09010552eee97ec551e0c80754d691429fcb5373b02e",
   "records": [
-    {
-      "id": "5a-body-repair-shop-vushtrri",
-      "expected": {
-        "name": "5A Body Repair Shop",
-        "city": "Vushtrri",
-        "address": "Arsim Rrushtolli, 22 Rrugica",
-        "phone": "+38345277816"
-      },
-      "hours": {
-        "week": [
-          {
-            "mode": "open",
-            "intervals": [
-              {
-                "start": "08:00",
-                "end": "18:00"
-              }
-            ]
-          },
-          {
-            "mode": "open",
-            "intervals": [
-              {
-                "start": "08:00",
-                "end": "18:00"
-              }
-            ]
-          },
-          {
-            "mode": "open",
-            "intervals": [
-              {
-                "start": "08:00",
-                "end": "18:00"
-              }
-            ]
-          },
-          {
-            "mode": "open",
-            "intervals": [
-              {
-                "start": "08:00",
-                "end": "18:00"
-              }
-            ]
-          },
-          {
-            "mode": "open",
-            "intervals": [
-              {
-                "start": "08:00",
-                "end": "18:00"
-              }
-            ]
-          },
-          {
-            "mode": "open",
-            "intervals": [
-              {
-                "start": "08:00",
-                "end": "16:00"
-              }
-            ]
-          },
-          {
-            "mode": "closed"
-          }
-        ],
-        "exceptions": []
-      },
-      "metadata": {
-        "kind": "assumed",
-        "checkedAt": "2026-11-15",
-        "source": "https://numrat.com/biznes/8XAOW62kaVfh/5a-body-repair-shop/",
-        "sourceName": "5A Body Repair Shop",
-        "researchStatus": "Standardzeiten (angenommen)",
-        "notes": "Directory updated 2026-10-12 supplies the independent category, contact and precise map point but no email or weekly schedule. Own website/Facebook/Instagram discovery found no attributable additional source; unrelated namesakes were excluded.",
-        "originalWeek": ["", "", "", "", "", "", ""],
-        "earlierPlan": ""
-      }
-    },
     {
       "id": "adonis-garage-ferizaj",
       "expected": {
@@ -21741,6 +21660,87 @@
           "08:30-18:30",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "lindi-automotive-vushtrri",
+      "expected": {
+        "name": "LINDI Automotive",
+        "city": "Vushtrri",
+        "address": "Rruga e shales",
+        "phone": "+38344332254"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-15",
+        "source": "https://numrat.com/biznes/0nyx7Xr9HXUS/lindi-automotive/ | https://www.facebook.com/lindiautomotive/ | https://www.instagram.com/lindi_automotive/",
+        "sourceName": "LINDI Automotive",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated 2026-10-12. Own Facebook and Instagram match exact main phone and Vushtrri. Current Instagram bio explicitly advertises detailing/polishing; Facebook post dated 2020-12-07 describes vehicle polishing. Facebook publicly lists lindi.automotive@gmail.com. Facebook hours expose only generic open-now text, not a usable week. Linked own website https://lindi-automotive.com/ failed DNS (ERR_NAME_NOT_RESOLVED); no security bypass. Instagram supplies no weekly plan; no Google hours adopted.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },

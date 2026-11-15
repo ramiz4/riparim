@@ -2,32 +2,6 @@
   "schemaVersion": 1,
   "workshops": [
     {
-      "id": "5a-body-repair-shop-vushtrri",
-      "sourceHash": "af95118be6f84ee6caa8ee5cd1a058438029691d6b083e3f4e6abe9099565a70",
-      "en": {
-        "specialty": "Bodywork repair",
-        "description": "5A Body Repair Shop in Vushtrri: Bodywork repair. The name, location and business contact come from a public directory. Please confirm the services and appointments directly with the business.",
-        "serviceDetails": [
-          "Bodywork repair; confirm the specific services directly with the business."
-        ],
-        "phoneNote": "Public business contact; availability not confirmed",
-        "sourceTitles": [
-          "Public directory: name, category, location and business contact"
-        ]
-      },
-      "sq": {
-        "specialty": "Riparime karrocerie",
-        "description": "5A Body Repair Shop në Vushtrri: Riparime karrocerie. Emri, vendndodhja dhe kontakti i biznesit vijnë nga një drejtori publike. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
-        "serviceDetails": [
-          "Riparime karrocerie; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
-        ],
-        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
-        "sourceTitles": [
-          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti"
-        ]
-      }
-    },
-    {
       "id": "adonis-garage-ferizaj",
       "sourceHash": "1b2b2b4d0c54adc68b4581cf208a2ad4c39cf8354fee502f615e869b723212ef",
       "en": {
@@ -7102,6 +7076,36 @@
         "sourceTitles": [
           "Public business directory: business name, address, contact and category",
           "Public business directory: business name, address, contact and category"
+        ]
+      }
+    },
+    {
+      "id": "lindi-automotive-vushtrri",
+      "sourceHash": "8dc3dbc9f6f4688c395283bc5867e7691d31bbf6714f56e7ef7903da97b3e86f",
+      "en": {
+        "specialty": "Vehicle detailing and polishing",
+        "description": "LINDI Automotive in Vushtrri: Vehicle detailing and polishing. The name, location and business contact come from a public directory. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle detailing and polishing; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact",
+          "Business’s own profile: vehicle service and public business information",
+          "Business’s own profile: vehicle service and public business information"
+        ]
+      },
+      "sq": {
+        "specialty": "Pastrimi i detajuar dhe lustrimi i automjeteve",
+        "description": "LINDI Automotive në Vushtrri: Pastrimi i detajuar dhe lustrimi i automjeteve. Emri, vendndodhja dhe kontakti i biznesit vijnë nga një drejtori publike. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Pastrimi i detajuar dhe lustrimi i automjeteve; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: shërbime automjetesh dhe të dhëna publike",
+          "Profili i vetë biznesit: shërbime automjetesh dhe të dhëna publike"
         ]
       }
     },
