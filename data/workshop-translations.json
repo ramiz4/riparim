@@ -2,6 +2,32 @@
   "schemaVersion": 1,
   "workshops": [
     {
+      "id": "5a-body-repair-shop-vushtrri",
+      "sourceHash": "af95118be6f84ee6caa8ee5cd1a058438029691d6b083e3f4e6abe9099565a70",
+      "en": {
+        "specialty": "Bodywork repair",
+        "description": "5A Body Repair Shop in Vushtrri: Bodywork repair. The name, location and business contact come from a public directory. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Bodywork repair; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Riparime karrocerie",
+        "description": "5A Body Repair Shop në Vushtrri: Riparime karrocerie. Emri, vendndodhja dhe kontakti i biznesit vijnë nga një drejtori publike. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Riparime karrocerie; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti"
+        ]
+      }
+    },
+    {
       "id": "adonis-garage-ferizaj",
       "sourceHash": "1b2b2b4d0c54adc68b4581cf208a2ad4c39cf8354fee502f615e869b723212ef",
       "en": {
@@ -548,6 +574,32 @@
       }
     },
     {
+      "id": "auto-elektrik-menduh-vushtrri",
+      "sourceHash": "bd7e4ba5072bb6ff6380015e817e5c8f31963bd2e6f5c0f4709561a6fedc1eaf",
+      "en": {
+        "specialty": "Auto electrical service",
+        "description": "Auto Elektrik Menduh in Vushtrri: Auto electrical service. The name, location and business contact come from a public directory. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Auto electrical service; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Shërbime autoelektrike",
+        "description": "Auto Elektrik Menduh në Vushtrri: Shërbime autoelektrike. Emri, vendndodhja dhe kontakti i biznesit vijnë nga një drejtori publike. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime autoelektrike; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti"
+        ]
+      }
+    },
+    {
       "id": "auto-elektrik-shulina-rahovec",
       "sourceHash": "af53a8fe0af7c4dadfafd621f64cebe8a8d752df7190024b16c731fc75f0ebe5",
       "sq": {
@@ -950,6 +1002,32 @@
         "sourceTitles": [
           "Independent business source: contact, location and services",
           "Business website: vehicle glass and location"
+        ]
+      }
+    },
+    {
+      "id": "auto-goma-alberti-obiliq",
+      "sourceHash": "bbd4e975bc634dcdb8b8f8cd2efc4900f7bb06979e00c404ca61227b0ede03df",
+      "en": {
+        "specialty": "Tyre service",
+        "description": "Auto Goma Alberti in Obiliq: Tyre service. The name, location and business contact come from a public directory. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Tyre service; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Shërbime gomash",
+        "description": "Auto Goma Alberti në Obiliq: Shërbime gomash. Emri, vendndodhja dhe kontakti i biznesit vijnë nga një drejtori publike. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime gomash; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti"
         ]
       }
     },
@@ -8283,6 +8361,34 @@
       }
     },
     {
+      "id": "xhida-servis-obiliq",
+      "sourceHash": "8c55f59f4d7c45aa014ae6d067a8c2e98d84974d07e35b3f97854ff9f3491066",
+      "en": {
+        "specialty": "Vehicle servicing and repair",
+        "description": "Xhida Servis in Obiliq: Vehicle servicing and repair. The name, location and business contact come from a public directory. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle servicing and repair; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Additional workshop contacts: +383 44 239 153, +383 48 777 787; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact",
+          "Business’s own profile: vehicle service and public business information"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim dhe riparim automjetesh",
+        "description": "Xhida Servis në Obiliq: Servisim dhe riparim automjetesh. Emri, vendndodhja dhe kontakti i biznesit vijnë nga një drejtori publike. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Servisim dhe riparim automjetesh; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakte të tjera të servisit: +383 44 239 153, +383 48 777 787; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: shërbime automjetesh dhe të dhëna publike"
+        ]
+      }
+    },
+    {
       "id": "ylli-performance-chip-tuning-gjilan",
       "sourceHash": "3feff6794eb28648db11ab45c294ade78240713e8f7a33423e819e9b5406a56e",
       "sq": {
@@ -8305,6 +8411,34 @@
         "phoneNote": "Public directory contact (Cybo); not confirmed by the business",
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "zeka-detail-vushtrri",
+      "sourceHash": "931d42dc5281e744345f7f34410dbb5ebac96725a24c4cb72048ee78914e9967",
+      "en": {
+        "specialty": "Vehicle detailing, polishing and ceramic coating",
+        "description": "Zeka detail in Vushtrri: Vehicle detailing, polishing and ceramic coating. The name, location and business contact come from a public directory. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle detailing, polishing and ceramic coating; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact",
+          "Business’s own profile: vehicle service and public business information"
+        ]
+      },
+      "sq": {
+        "specialty": "Pastrimi i detajuar, lustrimi dhe mbrojtja qeramike",
+        "description": "Zeka detail në Vushtrri: Pastrimi i detajuar, lustrimi dhe mbrojtja qeramike. Emri, vendndodhja dhe kontakti i biznesit vijnë nga një drejtori publike. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Pastrimi i detajuar, lustrimi dhe mbrojtja qeramike; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: shërbime automjetesh dhe të dhëna publike"
         ]
       }
     }

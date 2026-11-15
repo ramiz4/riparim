@@ -1,7 +1,88 @@
 {
   "schemaVersion": 1,
-  "revision": "9d32667b72d734ad5d0fc8e56cff8a16df9f21b30cd97991410ebb8b6c5231c6",
+  "revision": "32b52f4eee9f005f4d30f3801473e07ad70d3347f27afa5fb8b8ab5f7c4fe535",
   "records": [
+    {
+      "id": "5a-body-repair-shop-vushtrri",
+      "expected": {
+        "name": "5A Body Repair Shop",
+        "city": "Vushtrri",
+        "address": "Arsim Rrushtolli, 22 Rrugica",
+        "phone": "+38345277816"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-15",
+        "source": "https://numrat.com/biznes/8XAOW62kaVfh/5a-body-repair-shop/",
+        "sourceName": "5A Body Repair Shop",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated 2026-10-12 supplies the independent category, contact and precise map point but no email or weekly schedule. Own website/Facebook/Instagram discovery found no attributable additional source; unrelated namesakes were excluded.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
     {
       "id": "adonis-garage-ferizaj",
       "expected": {
@@ -1646,6 +1727,87 @@
       }
     },
     {
+      "id": "auto-elektrik-menduh-vushtrri",
+      "expected": {
+        "name": "Auto Elektrik Menduh",
+        "city": "Vushtrri",
+        "address": "Vushtrri 42000",
+        "phone": "+38344198032"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-15",
+        "source": "https://numrat.com/biznes/rQ0REkgSMCXt/auto-elektrik-menduh/",
+        "sourceName": "Auto Elektrik Menduh",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated 2026-10-12 supplies the independent category, contact and precise map point but no email or weekly schedule. Own website/Facebook/Instagram discovery found no attributable additional source; unrelated namesakes were excluded.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-elektrik-shulina-rahovec",
       "expected": {
         "name": "Auto Elektrik Shulina",
@@ -2882,6 +3044,87 @@
           "09:00-18:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-goma-alberti-obiliq",
+      "expected": {
+        "name": "Auto Goma Alberti",
+        "city": "Obiliq",
+        "address": "R220, Obiliq",
+        "phone": "+38345285740"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-15",
+        "source": "https://numrat.com/biznes/bPSflpBQ17oi/auto-goma-alberti-vullkanizer/",
+        "sourceName": "Auto Goma Alberti",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated 2026-10-12 supplies the independent category, contact and precise map point but no email or weekly schedule. Own website/Facebook/Instagram discovery found no attributable additional source; unrelated namesakes were excluded.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -25101,6 +25344,87 @@
       }
     },
     {
+      "id": "xhida-servis-obiliq",
+      "expected": {
+        "name": "Xhida Servis",
+        "city": "Obiliq",
+        "address": "16 Llapi",
+        "phone": "+38349549894"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-15",
+        "source": "https://numrat.com/biznes/G3JhdTgSOufZ/xhida-servis/ | https://www.instagram.com/autoservis.xhida/",
+        "sourceName": "Xhida Servis",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated 2026-10-12 and own Instagram checked. Instagram bio supplies three workshop contact numbers and vehicle servicing but no email or weekly schedule. No usable attributable weekly plan or public email found. Social bio update date unavailable.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "ylli-performance-chip-tuning-gjilan",
       "expected": {
         "name": "Ylli Performance Chip Tuning",
@@ -25186,6 +25510,87 @@
           "08:00-19:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "zeka-detail-vushtrri",
+      "expected": {
+        "name": "Zeka detail",
+        "city": "Vushtrri",
+        "address": "Ana Lin",
+        "phone": "+38345967312"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-15",
+        "source": "https://numrat.com/biznes/7s8MUTp6vNhK/zeka-detail/ | https://www.instagram.com/zeka_detail/",
+        "sourceName": "Zeka detail",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated 2026-10-12 and own Instagram checked. Instagram bio supplies detailing, polishing and ceramic coating in Vushtrri but no email or weekly schedule. No usable attributable weekly plan or public email found. Social bio update date unavailable.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     }

@@ -1,0 +1,471 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-15",
+  "timezone": "Europe/Zurich",
+  "checkedAt": "2026-11-15T09:01:43.583212+00:00",
+  "status": "prepared-awaiting-tests-review-ci-release",
+  "completedDateGuard": false,
+  "publishedCountConfirmed": 0,
+  "publishedWorkshopIds": [],
+  "minimumRequiredNewPublished": 5,
+  "branch": "codex/daily-import-2026-11-15",
+  "baseCommit": "f40231f03e987700dccd0afa91d6ba6a061d53b9",
+  "before": {
+    "published": 295,
+    "workshopChanges": 0
+  },
+  "candidates": [
+    {
+      "id": "xhida-servis-obiliq",
+      "name": "Xhida Servis",
+      "city": "Obiliq",
+      "address": "16 Llapi",
+      "phone": "+38349549894",
+      "lat": 42.694885,
+      "lng": 21.062895,
+      "sourceUrl": "https://numrat.com/biznes/G3JhdTgSOufZ/xhida-servis/",
+      "checkedAt": "2026-11-15T08:56:27.005073+00:00",
+      "status": "verified-for-dry-run",
+      "mapsVerification": {
+        "officialVisible19sLink": true,
+        "directMismatchedFallback": "London",
+        "namePhonePreciseSiteActiveMatched": true
+      },
+      "sourceAge": "Directory updated 2026-10-12",
+      "additionalPhones": ["+38344239153", "+38348777787"],
+      "ownSource": "https://www.instagram.com/autoservis.xhida/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/G3JhdTgSOufZ/xhida-servis/",
+        "https://www.instagram.com/autoservis.xhida/"
+      ],
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://numrat.com/biznes/G3JhdTgSOufZ/xhida-servis/",
+        "checkedAt": "2026-11-15T09:01:43.583212+00:00",
+        "status": "not-found",
+        "checkedSources": [
+          "https://numrat.com/biznes/G3JhdTgSOufZ/xhida-servis/",
+          "https://www.instagram.com/autoservis.xhida/"
+        ],
+        "note": "Directory updated 2026-10-12 and own Instagram checked. Instagram bio supplies three workshop contact numbers and vehicle servicing but no email or weekly schedule. No usable attributable weekly plan or public email found. Social bio update date unavailable."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-15T09:01:43.583212+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/G3JhdTgSOufZ/xhida-servis/",
+          "https://www.instagram.com/autoservis.xhida/"
+        ],
+        "note": "Directory updated 2026-10-12 and own Instagram checked. Instagram bio supplies three workshop contact numbers and vehicle servicing but no email or weekly schedule. No usable attributable weekly plan or public email found. Social bio update date unavailable.",
+        "timezone": "Europe/Belgrade"
+      },
+      "googleIdentity": {
+        "placeId": "ChIJA9VsNQBhUxMRABpblyc-7j0",
+        "method": "public-maps-ui",
+        "checkedAt": "2026-11-15T08:56:27.005073+00:00",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "translations": {
+        "en": "Vehicle servicing and repair",
+        "sq": "Servisim dhe riparim automjetesh"
+      }
+    },
+    {
+      "id": "auto-goma-alberti-obiliq",
+      "name": "Auto Goma Alberti",
+      "city": "Obiliq",
+      "address": "R220, Obiliq",
+      "phone": "+38345285740",
+      "lat": 42.696985,
+      "lng": 21.065327,
+      "sourceUrl": "https://numrat.com/biznes/bPSflpBQ17oi/auto-goma-alberti-vullkanizer/",
+      "checkedAt": "2026-11-15T08:56:27.005073+00:00",
+      "status": "verified-for-dry-run",
+      "mapsVerification": {
+        "officialVisible19sLink": true,
+        "directMismatchedFallback": "London",
+        "namePhonePreciseSiteActiveMatched": true
+      },
+      "sourceAge": "Directory updated 2026-10-12",
+      "sourceUrls": [
+        "https://numrat.com/biznes/bPSflpBQ17oi/auto-goma-alberti-vullkanizer/"
+      ],
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://numrat.com/biznes/bPSflpBQ17oi/auto-goma-alberti-vullkanizer/",
+        "checkedAt": "2026-11-15T09:01:43.583212+00:00",
+        "status": "not-found",
+        "checkedSources": [
+          "https://numrat.com/biznes/bPSflpBQ17oi/auto-goma-alberti-vullkanizer/"
+        ],
+        "note": "Directory updated 2026-10-12 supplies the independent category, contact and precise map point but no email or weekly schedule. Own website/Facebook/Instagram discovery found no attributable additional source; unrelated namesakes were excluded."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-15T09:01:43.583212+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/bPSflpBQ17oi/auto-goma-alberti-vullkanizer/"
+        ],
+        "note": "Directory updated 2026-10-12 supplies the independent category, contact and precise map point but no email or weekly schedule. Own website/Facebook/Instagram discovery found no attributable additional source; unrelated namesakes were excluded.",
+        "timezone": "Europe/Belgrade"
+      },
+      "googleIdentity": {
+        "placeId": "ChIJT9aLMANhUxMRg3Asx1w6Alg",
+        "method": "public-maps-ui",
+        "checkedAt": "2026-11-15T08:56:27.005073+00:00",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "translations": {
+        "en": "Tyre service",
+        "sq": "Shërbime gomash"
+      }
+    },
+    {
+      "id": "auto-elektrik-menduh-vushtrri",
+      "name": "Auto Elektrik Menduh",
+      "city": "Vushtrri",
+      "address": "Vushtrri 42000",
+      "phone": "+38344198032",
+      "lat": 42.823971,
+      "lng": 20.956903,
+      "sourceUrl": "https://numrat.com/biznes/rQ0REkgSMCXt/auto-elektrik-menduh/",
+      "checkedAt": "2026-11-15T08:56:27.005073+00:00",
+      "status": "verified-for-dry-run",
+      "mapsVerification": {
+        "officialVisible19sLink": true,
+        "directMismatchedFallback": "London",
+        "namePhonePreciseSiteActiveMatched": true
+      },
+      "sourceAge": "Directory updated 2026-10-12",
+      "sourceUrls": [
+        "https://numrat.com/biznes/rQ0REkgSMCXt/auto-elektrik-menduh/"
+      ],
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://numrat.com/biznes/rQ0REkgSMCXt/auto-elektrik-menduh/",
+        "checkedAt": "2026-11-15T09:01:43.583212+00:00",
+        "status": "not-found",
+        "checkedSources": [
+          "https://numrat.com/biznes/rQ0REkgSMCXt/auto-elektrik-menduh/"
+        ],
+        "note": "Directory updated 2026-10-12 supplies the independent category, contact and precise map point but no email or weekly schedule. Own website/Facebook/Instagram discovery found no attributable additional source; unrelated namesakes were excluded."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-15T09:01:43.583212+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/rQ0REkgSMCXt/auto-elektrik-menduh/"
+        ],
+        "note": "Directory updated 2026-10-12 supplies the independent category, contact and precise map point but no email or weekly schedule. Own website/Facebook/Instagram discovery found no attributable additional source; unrelated namesakes were excluded.",
+        "timezone": "Europe/Belgrade"
+      },
+      "googleIdentity": {
+        "placeId": "ChIJEx7pcwBbUxMRQV0mrbmNEVE",
+        "method": "public-maps-ui",
+        "checkedAt": "2026-11-15T08:56:27.005073+00:00",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "translations": {
+        "en": "Auto electrical service",
+        "sq": "Shërbime autoelektrike"
+      }
+    },
+    {
+      "id": "5a-body-repair-shop-vushtrri",
+      "name": "5A Body Repair Shop",
+      "city": "Vushtrri",
+      "address": "Arsim Rrushtolli, 22 Rrugica",
+      "phone": "+38345277816",
+      "lat": 42.825495,
+      "lng": 20.966015,
+      "sourceUrl": "https://numrat.com/biznes/8XAOW62kaVfh/5a-body-repair-shop/",
+      "checkedAt": "2026-11-15T08:56:27.005073+00:00",
+      "status": "verified-for-dry-run",
+      "mapsVerification": {
+        "officialVisible19sLink": true,
+        "directMismatchedFallback": "London",
+        "namePhonePreciseSiteActiveMatched": true
+      },
+      "sourceAge": "Directory updated 2026-10-12",
+      "sourceUrls": [
+        "https://numrat.com/biznes/8XAOW62kaVfh/5a-body-repair-shop/"
+      ],
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://numrat.com/biznes/8XAOW62kaVfh/5a-body-repair-shop/",
+        "checkedAt": "2026-11-15T09:01:43.583212+00:00",
+        "status": "not-found",
+        "checkedSources": [
+          "https://numrat.com/biznes/8XAOW62kaVfh/5a-body-repair-shop/"
+        ],
+        "note": "Directory updated 2026-10-12 supplies the independent category, contact and precise map point but no email or weekly schedule. Own website/Facebook/Instagram discovery found no attributable additional source; unrelated namesakes were excluded."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-15T09:01:43.583212+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/8XAOW62kaVfh/5a-body-repair-shop/"
+        ],
+        "note": "Directory updated 2026-10-12 supplies the independent category, contact and precise map point but no email or weekly schedule. Own website/Facebook/Instagram discovery found no attributable additional source; unrelated namesakes were excluded.",
+        "timezone": "Europe/Belgrade"
+      },
+      "googleIdentity": {
+        "placeId": "ChIJoY6jPkpbUxMRjQLjvfKxXb4",
+        "method": "public-maps-ui",
+        "checkedAt": "2026-11-15T08:56:27.005073+00:00",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "translations": {
+        "en": "Bodywork repair",
+        "sq": "Riparime karrocerie"
+      }
+    },
+    {
+      "id": "zeka-detail-vushtrri",
+      "name": "Zeka detail",
+      "city": "Vushtrri",
+      "address": "Ana Lin",
+      "phone": "+38345967312",
+      "lat": 42.831603,
+      "lng": 20.96409,
+      "sourceUrl": "https://numrat.com/biznes/7s8MUTp6vNhK/zeka-detail/",
+      "checkedAt": "2026-11-15T08:56:27.005073+00:00",
+      "status": "verified-for-dry-run",
+      "mapsVerification": {
+        "officialVisible19sLink": true,
+        "directMismatchedFallback": "London",
+        "namePhonePreciseSiteActiveMatched": true
+      },
+      "sourceAge": "Directory updated 2026-10-12",
+      "ownSource": "https://www.instagram.com/zeka_detail/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/7s8MUTp6vNhK/zeka-detail/",
+        "https://www.instagram.com/zeka_detail/"
+      ],
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://numrat.com/biznes/7s8MUTp6vNhK/zeka-detail/",
+        "checkedAt": "2026-11-15T09:01:43.583212+00:00",
+        "status": "not-found",
+        "checkedSources": [
+          "https://numrat.com/biznes/7s8MUTp6vNhK/zeka-detail/",
+          "https://www.instagram.com/zeka_detail/"
+        ],
+        "note": "Directory updated 2026-10-12 and own Instagram checked. Instagram bio supplies detailing, polishing and ceramic coating in Vushtrri but no email or weekly schedule. No usable attributable weekly plan or public email found. Social bio update date unavailable."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-15T09:01:43.583212+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/7s8MUTp6vNhK/zeka-detail/",
+          "https://www.instagram.com/zeka_detail/"
+        ],
+        "note": "Directory updated 2026-10-12 and own Instagram checked. Instagram bio supplies detailing, polishing and ceramic coating in Vushtrri but no email or weekly schedule. No usable attributable weekly plan or public email found. Social bio update date unavailable.",
+        "timezone": "Europe/Belgrade"
+      },
+      "googleIdentity": {
+        "placeId": "ChIJ3xabWEpbUxMRP068zwoT-F4",
+        "method": "public-maps-ui",
+        "checkedAt": "2026-11-15T08:56:27.005073+00:00",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "translations": {
+        "en": "Vehicle detailing, polishing and ceramic coating",
+        "sq": "Pastrimi i detajuar, lustrimi dhe mbrojtja qeramike"
+      }
+    }
+  ],
+  "whatsappVerification": [
+    {
+      "phone": "+38349549894",
+      "status": "registered",
+      "checkedAt": "2026-11-15T08:57:42.886Z",
+      "workshopIds": ["xhida-servis-obiliq"],
+      "method": "whatsapp_web_phone_number_lookup",
+      "note": "Completed exact-number lookup; no chat opened."
+    },
+    {
+      "phone": "+38344239153",
+      "status": "not_registered",
+      "checkedAt": "2026-11-15T08:57:58.410Z",
+      "workshopIds": ["xhida-servis-obiliq"],
+      "method": "whatsapp_web_phone_number_lookup",
+      "note": "Completed exact-number lookup; no chat opened."
+    },
+    {
+      "phone": "+38348777787",
+      "status": "registered",
+      "checkedAt": "2026-11-15T08:58:22.195Z",
+      "workshopIds": ["xhida-servis-obiliq"],
+      "method": "whatsapp_web_phone_number_lookup",
+      "note": "Completed exact-number lookup; no chat opened."
+    },
+    {
+      "phone": "+38345285740",
+      "status": "not_registered",
+      "checkedAt": "2026-11-15T08:58:40.243Z",
+      "workshopIds": ["auto-goma-alberti-obiliq"],
+      "method": "whatsapp_web_phone_number_lookup",
+      "note": "Completed exact-number lookup; no chat opened."
+    },
+    {
+      "phone": "+38344198032",
+      "status": "registered",
+      "checkedAt": "2026-11-15T08:58:53.670Z",
+      "workshopIds": ["auto-elektrik-menduh-vushtrri"],
+      "method": "whatsapp_web_phone_number_lookup",
+      "note": "Completed exact-number lookup; no chat opened."
+    },
+    {
+      "phone": "+38345277816",
+      "status": "registered",
+      "checkedAt": "2026-11-15T08:59:11.555Z",
+      "workshopIds": ["5a-body-repair-shop-vushtrri"],
+      "method": "whatsapp_web_phone_number_lookup",
+      "note": "Completed exact-number lookup; no chat opened."
+    },
+    {
+      "phone": "+38345967312",
+      "status": "unresolved",
+      "checkedAt": "2026-11-15T08:59:39.789Z",
+      "workshopIds": ["zeka-detail-vushtrri"],
+      "method": "whatsapp_web_phone_number_lookup",
+      "note": "Completed result returned +377 instead of requested +383."
+    }
+  ],
+  "whatsappSummary": {
+    "uniqueNumbersChecked": 7,
+    "registered": 4,
+    "not_registered": 2,
+    "unresolved": 1,
+    "completedUiLookups": 7,
+    "newPreparedContacts": 3,
+    "selection": "Xhida main number matches directory and Maps; secondary registered number retained only in phone note."
+  },
+  "preparedSummary": {
+    "newIds": 5,
+    "researchedWeeks": 0,
+    "assumedWeeks": 5,
+    "publicBusinessEmails": 0,
+    "missingBusinessEmails": 5,
+    "whatsappContacts": 3
+  },
+  "researchProgress": {
+    "municipalities": ["Lipjan", "Obiliq", "Vushtrri"],
+    "directoryListingsScreened": 103,
+    "countsByTown": {
+      "Lipjan": 36,
+      "Obiliq": 17,
+      "Vushtrri": 50
+    },
+    "qualified": 5,
+    "note": "Manual index screening; 103 entries are not fully verified identities. Existing profiles, retailers, car sales and wash-only businesses excluded. Four latest historical identity holds retained without unchanged requery.",
+    "belowPreferredTenReason": "Expanded across three municipalities; five candidates passed identity gates while six detailed candidates have scope, contact or premises conflicts. Other index entries are not admitted without verification.",
+    "detailedCandidates": 11,
+    "deferred": 6
+  },
+  "deferred": [
+    {
+      "name": "Selimi Lipjan",
+      "reason": "Own current page lists +38348316466 while directory has +38344316466; continuity and passenger-car scope need further evidence."
+    },
+    {
+      "name": "Mentori com",
+      "reason": "Own sources emphasize transport/van parts; passenger-car workshop scope not established."
+    },
+    {
+      "name": "Auto Service 028 Group",
+      "reason": "Own source announces new garage and Doberlluk location; current M2 premises continuity unresolved."
+    },
+    {
+      "name": "Autoservis Visari",
+      "reason": "Directory address names Prishtina street/block while coordinates point to Vushtrri; own sources show different street and contacts."
+    },
+    {
+      "name": "Gashi Auto Service",
+      "reason": "Public relocation announcement effective 2026-01-01 conflicts with directory premises."
+    },
+    {
+      "name": "FitCar-E",
+      "reason": "Registry-derived search lead has another contact; relationship to directory number not established."
+    }
+  ],
+  "preflight": {
+    "browserAccount": "ramizloki82@googlemail.com",
+    "visible": true,
+    "backgroundProviderStillUnproven": true,
+    "node": "24.21.0",
+    "go": "1.27.1",
+    "backup": "Fresh filtered nine-table export; all 1269 old rows preserved in idempotent central replay; integrity and foreign keys passed."
+  },
+  "provider": {
+    "googleApiRequests": 0,
+    "additionalCosts": 0,
+    "quota": "No paid API used; remaining browser allowance not independently measurable."
+  },
+  "additionalCosts": 0,
+  "outreachSent": false,
+  "validation": {
+    "dryRun": {
+      "added": [
+        "xhida-servis-obiliq",
+        "auto-goma-alberti-obiliq",
+        "auto-elektrik-menduh-vushtrri",
+        "5a-body-repair-shop-vushtrri",
+        "zeka-detail-vushtrri"
+      ],
+      "updated": [],
+      "deduplicated": [],
+      "total": 300
+    },
+    "prewriteFullExportMatchesBaseline": true,
+    "translations": "Central source hash; complete DE/SQ/EN",
+    "hoursRevision": "32b52f4eee9f005f4d30f3801473e07ad70d3347f27afa5fb8b8ab5f7c4fe535",
+    "isolatedReplay": {
+      "statements": 596,
+      "key": "workshop-source:fa8aa7ef286db0c1c6d8980f40c527e152245d6625601e1234fa7054113b7436",
+      "priorRowsPreserved": 1269,
+      "afterCounts": {
+        "catalog_state": 94,
+        "workshops": 300,
+        "workshop_google_ratings": 129,
+        "workshop_google_places": 300,
+        "workshop_premium": 4,
+        "workshop_contact_details": 10,
+        "workshop_opening_hours_imports": 294,
+        "workshop_email_addresses": 149,
+        "workshop_email_imports": 5
+      },
+      "idempotent": true,
+      "integrity": "ok",
+      "foreignKeyViolations": 0
+    }
+  },
+  "importedWorkshopIds": [
+    "xhida-servis-obiliq",
+    "auto-goma-alberti-obiliq",
+    "auto-elektrik-menduh-vushtrri",
+    "5a-body-repair-shop-vushtrri",
+    "zeka-detail-vushtrri"
+  ]
+}
