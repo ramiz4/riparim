@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-11-15T09:14:37.109Z",
+  "updatedAt": "2026-11-16T06:50:13.004Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 300,
+    "published": 302,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -13,7 +13,7 @@
   "googleImport": {
     "status": "completed",
     "reason": "All published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 300,
+    "matchedPlaceIds": 302,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -250,6 +250,59 @@
             "https://numrat.com/biznes/sqXMX5D1f9F5/amiri-autoservis/"
           ],
           "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
+        }
+      }
+    },
+    {
+      "id": "as-detailing-prishtina",
+      "name": "A. S. Detailing",
+      "city": "Prishtina",
+      "address": "Rr. Afrim Rama, Matiqan",
+      "phone": "+38349689136",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Fahrzeugaufbereitung und Polieren; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugaufbereitung und Polieren",
+      "description": "A. S. Detailing in Prishtina: Fahrzeugaufbereitung und Polieren. Name, Standort und Geschäftskontakt sind durch ein öffentliches Verzeichnis und den eigenen Betriebsauftritt belegt. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.645292,
+      "lng": 21.191896,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/1qUDwraTslR0/a-s-detailing/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.instagram.com/as_detailing.prishtine/",
+          "title": "Eigener Betriebsauftritt: Leistungen und öffentliche Geschäftsinformationen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/detailignyo/",
+          "title": "Eigener Betriebsauftritt: Leistungen und öffentliche Geschäftsinformationen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-16",
+      "status": "published",
+      "updatedAt": "2026-11-16T06:49:31.714794+00:00",
+      "google": {
+        "placeId": "ChIJc40oPO2ZVBMRln5uMtOSS34",
+        "matchedAt": "2026-11-16T06:49:31.714794+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/1qUDwraTslR0/a-s-detailing/",
+            "https://www.instagram.com/as_detailing.prishtine/",
+            "https://www.facebook.com/detailignyo/"
+          ],
+          "note": "Individually verified in public Maps UI; exact phone, name and precise site matched. Place ID read from official visible result link and returned with unrelated Zurich fallback. No Google content adopted or ownership claimed."
         }
       }
     },
@@ -1214,6 +1267,59 @@
           "method": "phone_and_location",
           "sourceUrls": ["https://aesagroni.com/rreth-nesh"],
           "note": "Name, normalized phone number and location independently compared. Active public Maps entry; Place ID from the official visible Maps link directly rechecked with a deliberately unrelated fallback search. No Google owner verification and no API/SDK calls made by us."
+        }
+      }
+    },
+    {
+      "id": "auto-elektro-service-amp-prishtina",
+      "name": "Auto Elektro Service - AMP",
+      "city": "Prishtina",
+      "address": "Justina Shkupi",
+      "phone": "+38349308052",
+      "phoneNote": "Weiterer Werkstattkontakt: +383 44 500 891; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349308052",
+      "brands": [],
+      "services": ["Diagnose & Elektronik", "Reifen & Klima"],
+      "serviceDetails": [
+        "Autoelektrik und Klimaservice; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Autoelektrik und Klimaservice",
+      "description": "Auto Elektro Service - AMP in Prishtina: Autoelektrik und Klimaservice. Name, Standort und Geschäftskontakt sind durch ein öffentliches Verzeichnis und den eigenen Betriebsauftritt belegt. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.674655,
+      "lng": 21.172771,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/eLUDD1vmX9mw/auto-elektro-service-amp/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.instagram.com/amp__service/",
+          "title": "Eigener Betriebsauftritt: Leistungen und öffentliche Geschäftsinformationen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/amp__service/p/DXTyEA-iIQP/",
+          "title": "Eigener Betriebsauftritt: Leistungen und öffentliche Geschäftsinformationen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-16",
+      "status": "published",
+      "updatedAt": "2026-11-16T06:49:31.714794+00:00",
+      "google": {
+        "placeId": "ChIJoWBXVRufVBMRJ4x_QKAI8-o",
+        "matchedAt": "2026-11-16T06:49:31.714794+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/eLUDD1vmX9mw/auto-elektro-service-amp/",
+            "https://www.instagram.com/amp__service/",
+            "https://www.instagram.com/amp__service/p/DXTyEA-iIQP/"
+          ],
+          "note": "Individually verified in public Maps UI; exact phone, name and precise site matched. Place ID read from official visible result link and returned with unrelated Zurich fallback. Own AMP bio Maps link also returns same premises. No Google content adopted or ownership claimed."
         }
       }
     },

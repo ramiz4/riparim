@@ -146,6 +146,36 @@
       }
     },
     {
+      "id": "as-detailing-prishtina",
+      "sourceHash": "4ab2dd37d8a43f9af555d596ef4f66c64412690ef947fca6694da3d1a47bd52e",
+      "en": {
+        "specialty": "Vehicle detailing and polishing",
+        "description": "A. S. Detailing in Prishtina: Vehicle detailing and polishing. The name, location and business contact are documented by a public directory and the business’s own profile. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle detailing and polishing; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact",
+          "Business’s own profile: services and public business information",
+          "Business’s own profile: services and public business information"
+        ]
+      },
+      "sq": {
+        "specialty": "Detajim dhe polirim automjetesh",
+        "description": "A. S. Detailing në Prishtina: Detajim dhe polirim automjetesh. Emri, vendndodhja dhe kontakti dokumentohen nga një drejtori publike dhe profili i vetë biznesit. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Detajim dhe polirim automjetesh; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: shërbimet dhe të dhënat publike",
+          "Profili i vetë biznesit: shërbimet dhe të dhënat publike"
+        ]
+      }
+    },
+    {
       "id": "as-motors",
       "sourceHash": "e618e1db5ad566eb57f42c2b0928ef185f7f851b9d8c77d6309729b731ebf825",
       "sq": {
@@ -713,6 +743,36 @@
         ],
         "phoneNote": "Public business contact; reachability not confirmed",
         "sourceTitles": ["Business website: contact, location and services"]
+      }
+    },
+    {
+      "id": "auto-elektro-service-amp-prishtina",
+      "sourceHash": "b05bfd6297da136ebdea08082574919487d9d2af93079d329d3e69d98c732bff",
+      "en": {
+        "specialty": "Vehicle electrical repairs and air conditioning service",
+        "description": "Auto Elektro Service - AMP in Prishtina: Vehicle electrical repairs and air conditioning service. The name, location and business contact are documented by a public directory and the business’s own profile. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle electrical repairs and air conditioning service; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Additional workshop contact: +383 44 500 891; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact",
+          "Business’s own profile: services and public business information",
+          "Business’s own profile: services and public business information"
+        ]
+      },
+      "sq": {
+        "specialty": "Riparime elektrike të automjeteve dhe servis i klimës",
+        "description": "Auto Elektro Service - AMP në Prishtina: Riparime elektrike të automjeteve dhe servis i klimës. Emri, vendndodhja dhe kontakti dokumentohen nga një drejtori publike dhe profili i vetë biznesit. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Riparime elektrike të automjeteve dhe servis i klimës; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt tjetër i servisit: +383 44 500 891; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: shërbimet dhe të dhënat publike",
+          "Profili i vetë biznesit: shërbimet dhe të dhënat publike"
+        ]
       }
     },
     {

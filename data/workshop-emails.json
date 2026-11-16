@@ -91,6 +91,27 @@
       "notes": "Complete independent directory has no email or own website. Focused Facebook/Instagram/email query finds other-phone Pristina Amiri; directly inspected Instagram autoservisamiri publishes049102150, not target. Native Facebook Pages name/town search yields unrelated footballer only. No contacts borrowed."
     },
     {
+      "workshopId": "as-detailing-prishtina",
+      "matchedName": "A. S. Detailing",
+      "matchedPhone": "+38349689136",
+      "matchedCity": "Prishtina",
+      "emails": [
+        {
+          "address": "albseldetailing@gmail.com",
+          "sourceUrls": ["https://www.facebook.com/detailignyo/"],
+          "checkedAt": "2026-11-16",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/1qUDwraTslR0/a-s-detailing/",
+        "https://www.instagram.com/as_detailing.prishtine/",
+        "https://www.facebook.com/detailignyo/"
+      ],
+      "notes": "Own Facebook business-hours dialog gives a complete week, marked updated about five years ago. Own Facebook contact and Instagram posts match exact phone and Matiqan. Weekly plan is researched historical source information, not owner-confirmed current hours. Directory updated2026-10-12; Google hours not used."
+    },
+    {
       "workshopId": "as-motors",
       "matchedName": "AS Motors",
       "matchedPhone": "+38338536060",
@@ -484,6 +505,20 @@
         "https://www.instagram.com/reel/DFWCbAaIEbm/"
       ],
       "notes": "Two publicly listed addresses on the business website and Instagram. Previously stored address and evidence preserved and compared again."
+    },
+    {
+      "workshopId": "auto-elektro-service-amp-prishtina",
+      "matchedName": "Auto Elektro Service - AMP",
+      "matchedPhone": "+38349308052",
+      "matchedCity": "Prishtina",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/eLUDD1vmX9mw/auto-elektro-service-amp/",
+        "https://www.instagram.com/amp__service/",
+        "https://www.instagram.com/amp__service/p/DXTyEA-iIQP/"
+      ],
+      "notes": "Own Instagram bio pairs both public workshop numbers; April19 business post confirms air-conditioning service. Own Maps bio link returns same exact workshop premises. Directory updated2026-10-12. No email, own website, attributable Facebook page or weekly schedule found in directory, own Instagram bio/posts and targeted discovery. Central assumed fallback authorized; Google hours not used."
     },
     {
       "workshopId": "auto-elektro-servis-a-plus-prizren",

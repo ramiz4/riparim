@@ -2,12 +2,12 @@
   "schemaVersion": 1,
   "date": "2026-11-15",
   "timezone": "Europe/Zurich",
-  "checkedAt": "2026-11-15T09:13:54.201062+00:00",
+  "checkedAt": "2026-11-16T06:51:20.068Z",
   "status": "prepared-awaiting-tests-review-ci-release",
   "completedDateGuard": false,
   "publishedCountConfirmed": 0,
   "publishedWorkshopIds": [],
-  "minimumRequiredNewPublished": 5,
+  "minimumRequiredNewPublished": 7,
   "branch": "codex/daily-import-2026-11-15",
   "baseCommit": "f40231f03e987700dccd0afa91d6ba6a061d53b9",
   "before": {
@@ -312,6 +312,165 @@
         "en": "Vehicle detailing, polishing and ceramic coating",
         "sq": "Pastrimi i detajuar, lustrimi dhe mbrojtja qeramike"
       }
+    },
+    {
+      "id": "as-detailing-prishtina",
+      "name": "A. S. Detailing",
+      "city": "Prishtina",
+      "address": "Rr. Afrim Rama, Matiqan",
+      "phone": "+38349689136",
+      "lat": 42.645292,
+      "lng": 21.191896,
+      "pid": "ChIJc40oPO2ZVBMRln5uMtOSS34",
+      "urls": [
+        "https://numrat.com/biznes/1qUDwraTslR0/a-s-detailing/",
+        "https://www.instagram.com/as_detailing.prishtine/",
+        "https://www.facebook.com/detailignyo/"
+      ],
+      "specialty": "Fahrzeugaufbereitung und Polieren",
+      "services": ["Aufbereitung & Pflege"],
+      "en": "Vehicle detailing and polishing",
+      "sq": "Detajim dhe polirim automjetesh",
+      "email": "albseldetailing@gmail.com",
+      "wa": "",
+      "hours": [
+        "09:00-20:00",
+        "09:00-20:00",
+        "09:00-20:00",
+        "08:00-20:00",
+        "09:00-20:00",
+        "09:00-17:00",
+        "Geschlossen"
+      ],
+      "note": "Own Facebook business-hours dialog gives a complete week, marked updated about five years ago. Own Facebook contact and Instagram posts match exact phone and Matiqan. Weekly plan is researched historical source information, not owner-confirmed current hours. Directory updated2026-10-12; Google hours not used.",
+      "checkedAt": "2026-11-16T06:49:31.714794+00:00",
+      "status": "verified-for-dry-run",
+      "sourceUrl": "https://numrat.com/biznes/1qUDwraTslR0/a-s-detailing/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/1qUDwraTslR0/a-s-detailing/",
+        "https://www.instagram.com/as_detailing.prishtine/",
+        "https://www.facebook.com/detailignyo/"
+      ],
+      "ownSource": "https://www.instagram.com/as_detailing.prishtine/",
+      "sourceAge": "Directory2026-10-12; own source age described in notes",
+      "translations": {
+        "en": "Vehicle detailing and polishing",
+        "sq": "Detajim dhe polirim automjetesh"
+      },
+      "googleIdentity": {
+        "placeId": "ChIJc40oPO2ZVBMRln5uMtOSS34",
+        "method": "public-maps-ui",
+        "checkedAt": "2026-11-16T06:49:31.714794+00:00",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "publicBusinessEmail": {
+        "address": "albseldetailing@gmail.com",
+        "sourceUrl": "https://www.facebook.com/detailignyo/",
+        "checkedAt": "2026-11-16T06:49:31.714794+00:00",
+        "status": "publicly-sourced",
+        "checkedSources": [
+          "https://numrat.com/biznes/1qUDwraTslR0/a-s-detailing/",
+          "https://www.instagram.com/as_detailing.prishtine/",
+          "https://www.facebook.com/detailignyo/"
+        ],
+        "note": "Own Facebook business-hours dialog gives a complete week, marked updated about five years ago. Own Facebook contact and Instagram posts match exact phone and Matiqan. Weekly plan is researched historical source information, not owner-confirmed current hours. Directory updated2026-10-12; Google hours not used."
+      },
+      "openingHoursResearch": {
+        "kind": "researched",
+        "checkedAt": "2026-11-16T06:49:31.714794+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/1qUDwraTslR0/a-s-detailing/",
+          "https://www.instagram.com/as_detailing.prishtine/",
+          "https://www.facebook.com/detailignyo/"
+        ],
+        "note": "Own Facebook business-hours dialog gives a complete week, marked updated about five years ago. Own Facebook contact and Instagram posts match exact phone and Matiqan. Weekly plan is researched historical source information, not owner-confirmed current hours. Directory updated2026-10-12; Google hours not used.",
+        "timezone": "Europe/Belgrade",
+        "week": [
+          "09:00-20:00",
+          "09:00-20:00",
+          "09:00-20:00",
+          "08:00-20:00",
+          "09:00-20:00",
+          "09:00-17:00",
+          "Geschlossen"
+        ]
+      }
+    },
+    {
+      "id": "auto-elektro-service-amp-prishtina",
+      "name": "Auto Elektro Service - AMP",
+      "city": "Prishtina",
+      "address": "Justina Shkupi",
+      "phone": "+38349308052",
+      "lat": 42.674655,
+      "lng": 21.172771,
+      "pid": "ChIJoWBXVRufVBMRJ4x_QKAI8-o",
+      "urls": [
+        "https://numrat.com/biznes/eLUDD1vmX9mw/auto-elektro-service-amp/",
+        "https://www.instagram.com/amp__service/",
+        "https://www.instagram.com/amp__service/p/DXTyEA-iIQP/"
+      ],
+      "specialty": "Autoelektrik und Klimaservice",
+      "services": ["Diagnose & Elektronik", "Klimaservice"],
+      "en": "Vehicle electrical repairs and air conditioning service",
+      "sq": "Riparime elektrike të automjeteve dhe servis i klimës",
+      "email": null,
+      "wa": "+38349308052",
+      "additionalPhones": ["+38344500891"],
+      "hours": null,
+      "note": "Own Instagram bio pairs both public workshop numbers; April19 business post confirms air-conditioning service. Own Maps bio link returns same exact workshop premises. Directory updated2026-10-12. No email, own website, attributable Facebook page or weekly schedule found in directory, own Instagram bio/posts and targeted discovery. Central assumed fallback authorized; Google hours not used.",
+      "checkedAt": "2026-11-16T06:49:31.714794+00:00",
+      "status": "verified-for-dry-run",
+      "sourceUrl": "https://numrat.com/biznes/eLUDD1vmX9mw/auto-elektro-service-amp/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/eLUDD1vmX9mw/auto-elektro-service-amp/",
+        "https://www.instagram.com/amp__service/",
+        "https://www.instagram.com/amp__service/p/DXTyEA-iIQP/"
+      ],
+      "ownSource": "https://www.instagram.com/amp__service/",
+      "sourceAge": "Directory2026-10-12; own source age described in notes",
+      "translations": {
+        "en": "Vehicle electrical repairs and air conditioning service",
+        "sq": "Riparime elektrike të automjeteve dhe servis i klimës"
+      },
+      "googleIdentity": {
+        "placeId": "ChIJoWBXVRufVBMRJ4x_QKAI8-o",
+        "method": "public-maps-ui",
+        "checkedAt": "2026-11-16T06:49:31.714794+00:00",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://www.instagram.com/amp__service/",
+        "checkedAt": "2026-11-16T06:49:31.714794+00:00",
+        "status": "not-found",
+        "checkedSources": [
+          "https://numrat.com/biznes/eLUDD1vmX9mw/auto-elektro-service-amp/",
+          "https://www.instagram.com/amp__service/",
+          "https://www.instagram.com/amp__service/p/DXTyEA-iIQP/"
+        ],
+        "note": "Own Instagram bio pairs both public workshop numbers; April19 business post confirms air-conditioning service. Own Maps bio link returns same exact workshop premises. Directory updated2026-10-12. No email, own website, attributable Facebook page or weekly schedule found in directory, own Instagram bio/posts and targeted discovery. Central assumed fallback authorized; Google hours not used."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-16T06:49:31.714794+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/eLUDD1vmX9mw/auto-elektro-service-amp/",
+          "https://www.instagram.com/amp__service/",
+          "https://www.instagram.com/amp__service/p/DXTyEA-iIQP/"
+        ],
+        "note": "Own Instagram bio pairs both public workshop numbers; April19 business post confirms air-conditioning service. Own Maps bio link returns same exact workshop premises. Directory updated2026-10-12. No email, own website, attributable Facebook page or weekly schedule found in directory, own Instagram bio/posts and targeted discovery. Central assumed fallback authorized; Google hours not used.",
+        "timezone": "Europe/Belgrade",
+        "week": null
+      }
     }
   ],
   "whatsappVerification": [
@@ -389,40 +548,76 @@
       "method": "whatsapp_web_phone_number_lookup",
       "note": "Historical 2018 own secondary only; no current republication.",
       "nextCheck": "Recheck exact +383 primary with fully cleared field; verify current secondary on own source before publishing."
+    },
+    {
+      "phone": "+38349689136",
+      "status": "unresolved",
+      "checkedAt": "2026-11-16T06:51:20.068Z",
+      "workshopIds": ["as-detailing-prishtina"],
+      "method": "whatsapp_web_phone_number_lookup",
+      "note": "Exact +383 input returned +38649689136; no WhatsApp contact adopted."
+    },
+    {
+      "phone": "+38349308052",
+      "status": "registered",
+      "checkedAt": "2026-11-16T06:51:20.068Z",
+      "workshopIds": ["auto-elektro-service-amp-prishtina"],
+      "method": "whatsapp_web_phone_number_lookup",
+      "note": "Exact account result; independently matched primary, selected for WhatsApp."
+    },
+    {
+      "phone": "+38344500891",
+      "status": "registered",
+      "checkedAt": "2026-11-16T06:51:20.068Z",
+      "workshopIds": ["auto-elektro-service-amp-prishtina"],
+      "method": "whatsapp_web_phone_number_lookup",
+      "note": "Exact account result; own Instagram secondary retained in phone note."
     }
   ],
   "whatsappSummary": {
-    "uniqueNumbersChecked": 9,
-    "registered": 5,
+    "uniqueNumbersChecked": 12,
+    "registered": 7,
     "not_registered": 2,
-    "unresolved": 2,
-    "completedUiLookups": 9,
-    "newPreparedContacts": 2,
-    "selection": "Xhida main matches current sources; its registered secondary stays in phone note. Registered5A is held. Historical Lindi secondary not republished; exact main prefix unresolved."
+    "unresolved": 3,
+    "completedUiLookups": 12,
+    "newPreparedContacts": 3,
+    "selection": "Xhida main matches current sources; its registered secondary stays in phone note. Registered5A is held. Historical Lindi secondary not republished; exact main prefix unresolved. AMP primary independently matches directory/Maps and own bio; secondary also registered. AS exact +383 unresolved due +386 result."
   },
   "preparedSummary": {
-    "newIds": 5,
-    "researchedWeeks": 0,
-    "assumedWeeks": 5,
-    "publicBusinessEmails": 1,
-    "missingBusinessEmails": 4,
-    "whatsappContacts": 2
+    "newIds": 7,
+    "researchedWeeks": 1,
+    "assumedWeeks": 6,
+    "publicBusinessEmails": 2,
+    "missingBusinessEmails": 5,
+    "whatsappContacts": 3
   },
   "researchProgress": {
-    "municipalities": ["Lipjan", "Obiliq", "Vushtrri"],
-    "directoryListingsScreened": 103,
+    "municipalities": [
+      "Lipjan",
+      "Obiliq",
+      "Vushtrri",
+      "Shtime",
+      "Kamenicë",
+      "Prishtina"
+    ],
+    "directoryListingsScreened": 139,
     "countsByTown": {
       "Lipjan": 36,
       "Obiliq": 17,
       "Vushtrri": 50
     },
-    "qualified": 5,
+    "qualified": 7,
     "note": "Manual index screening; 103 entries are not fully verified identities. Existing profiles, retailers, car sales and wash-only businesses excluded. Four latest historical identity holds retained without unchanged requery.",
-    "belowPreferredTenReason": "Expanded across three municipalities and103 index entries. Five identities have sufficient independent scope/contact evidence; seven detailed candidates remain held. 5A replaced after independent review; no gate waived.",
-    "detailedCandidates": 12,
-    "deferred": 7,
-    "existingNameMatches": 29,
-    "existingMatchLimit": "Name/city screening only, including known spelling aliases; not 29 independently reverified duplicate identities."
+    "belowPreferredTenReason": "User raised minimum to seven. Expanded original103 index entries by36 across Shtime/Kamenice/Prishtina. Added two qualified identities; Ibra held and historical Starti/Kamenice conflicts not repeated. Index entries are not fully verified identities.",
+    "detailedCandidates": 15,
+    "deferred": 8,
+    "existingNameMatches": 34,
+    "existingMatchLimit": "Name/city screening matches, not independently reverified duplicate identities.",
+    "additionalScreening": {
+      "Shtime": 3,
+      "Kamenice": 8,
+      "Prishtina": 25
+    }
   },
   "deferred": [
     {
@@ -457,6 +652,15 @@
       "sourceUrls": [
         "https://numrat.com/biznes/8XAOW62kaVfh/5a-body-repair-shop/"
       ]
+    },
+    {
+      "name": "Auto Elektro Ibra",
+      "sourceUrls": [
+        "https://numrat.com/biznes/d9lIu4iRcWuh/auto-elektro-ibra/",
+        "https://www.facebook.com/autoelektroibra/"
+      ],
+      "reason": "Directory/current Maps match +38344430895 and Xheladin Hana, but own Facebook contact target uses historical +377; historical relocation lead not resolved. No contacts or source claims transferred.",
+      "nextCheck": "Establish current own exact international number and premises continuity."
     }
   ],
   "preflight": {
@@ -465,7 +669,17 @@
     "backgroundProviderStillUnproven": true,
     "node": "24.21.0",
     "go": "1.27.1",
-    "backup": "Fresh filtered nine-table export; all 1269 old rows preserved in idempotent central replay; integrity and foreign keys passed."
+    "backup": "Fresh filtered nine-table export; all 1269 old rows preserved in idempotent central replay; integrity and foreign keys passed.",
+    "continuation20261116": {
+      "completeLiveExportTables": 9,
+      "baselineRowsPreserved": 1269,
+      "byteIdenticalPrewrite": true,
+      "healthPublished": 295,
+      "healthCompleteResponses": 9,
+      "visibility": "User explicitly confirmed browser open and project account; visibility=false alone is not a blocker for this run.",
+      "localCosts": 0,
+      "visibleExistingLocaleProfiles": 6
+    }
   },
   "provider": {
     "googleApiRequests": 0,
@@ -481,28 +695,30 @@
         "auto-goma-alberti-obiliq",
         "auto-elektrik-menduh-vushtrri",
         "lindi-automotive-vushtrri",
-        "zeka-detail-vushtrri"
+        "zeka-detail-vushtrri",
+        "as-detailing-prishtina",
+        "auto-elektro-service-amp-prishtina"
       ],
       "updated": [],
       "deduplicated": [],
-      "total": 300
+      "total": 302
     },
     "prewriteFullExportMatchesBaseline": true,
     "translations": "Central source hash; complete DE/SQ/EN",
-    "hoursRevision": "3e25dd301a5e0ecc6e1f09010552eee97ec551e0c80754d691429fcb5373b02e",
+    "hoursRevision": "d9df9d30edd36480bb01db9da7729fe6668683d876f17020d04e10df803f70ff",
     "isolatedReplay": {
-      "statements": 597,
-      "key": "workshop-source:0e4e31b528ba79f692128a686043fb6e6bdc562f820f6757437aad8939af00bb",
+      "statements": 601,
+      "key": "workshop-source:1dda67c317e6928806c1b4ef5f3278d58c5d5be6e7f1105ad6730ea95ddcc919",
       "priorRowsPreserved": 1269,
       "afterCounts": {
         "catalog_state": 94,
-        "workshops": 300,
+        "workshops": 302,
         "workshop_google_ratings": 129,
-        "workshop_google_places": 300,
+        "workshop_google_places": 302,
         "workshop_premium": 4,
         "workshop_contact_details": 10,
-        "workshop_opening_hours_imports": 294,
-        "workshop_email_addresses": 150,
+        "workshop_opening_hours_imports": 296,
+        "workshop_email_addresses": 151,
         "workshop_email_imports": 5
       },
       "idempotent": true,
@@ -512,18 +728,21 @@
     "runtimeRegression": {
       "cause": "Vushtrri missing from shared city options",
       "fix": "Supported city added with failing-then-passing owner profile regression."
-    }
+    },
+    "prewriteCheckedAt": "2026-11-16T06:51:20.068Z"
   },
   "importedWorkshopIds": [
     "xhida-servis-obiliq",
     "auto-goma-alberti-obiliq",
     "auto-elektrik-menduh-vushtrri",
     "lindi-automotive-vushtrri",
-    "zeka-detail-vushtrri"
+    "zeka-detail-vushtrri",
+    "as-detailing-prishtina",
+    "auto-elektro-service-amp-prishtina"
   ],
   "after": {
-    "total": 300,
-    "published": 300,
+    "total": 302,
+    "published": 302,
     "drafts": 0,
     "state": "prepared-not-live"
   }

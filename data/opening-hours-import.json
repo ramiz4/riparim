@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "3e25dd301a5e0ecc6e1f09010552eee97ec551e0c80754d691429fcb5373b02e",
+  "revision": "d9df9d30edd36480bb01db9da7729fe6668683d876f17020d04e10df803f70ff",
   "records": [
     {
       "id": "adonis-garage-ferizaj",
@@ -428,6 +428,95 @@
         "researchStatus": "Standardzeiten (angenommen)",
         "notes": "No attributable complete weekly plan found. Directory lacks hours; own-source search/native Facebook no target, Instagram different-phone identity not assigned. Central explicit default required. Checked sources: https://numrat.com/biznes/sqXMX5D1f9F5/amiri-autoservis/ https://www.instagram.com/autoservisamiri/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
         "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "as-detailing-prishtina",
+      "expected": {
+        "name": "A. S. Detailing",
+        "city": "Prishtina",
+        "address": "Rr. Afrim Rama, Matiqan",
+        "phone": "+38349689136"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "20:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "20:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "20:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "20:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "20:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-11-16",
+        "source": "https://www.facebook.com/detailignyo/",
+        "sourceName": "A. S. Detailing",
+        "researchStatus": "Recherchiert",
+        "notes": "Own Facebook business-hours dialog gives a complete week, marked updated about five years ago. Own Facebook contact and Instagram posts match exact phone and Matiqan. Weekly plan is researched historical source information, not owner-confirmed current hours. Directory updated2026-10-12; Google hours not used.",
+        "originalWeek": [
+          "09:00-20:00",
+          "09:00-20:00",
+          "09:00-20:00",
+          "08:00-20:00",
+          "09:00-20:00",
+          "09:00-17:00",
+          "Geschlossen"
+        ],
         "earlierPlan": ""
       }
     },
@@ -2168,6 +2257,87 @@
           "09:00-14:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-elektro-service-amp-prishtina",
+      "expected": {
+        "name": "Auto Elektro Service - AMP",
+        "city": "Prishtina",
+        "address": "Justina Shkupi",
+        "phone": "+38349308052"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-16",
+        "source": "https://numrat.com/biznes/eLUDD1vmX9mw/auto-elektro-service-amp/ | https://www.instagram.com/amp__service/ | https://www.instagram.com/amp__service/p/DXTyEA-iIQP/",
+        "sourceName": "Auto Elektro Service - AMP",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own Instagram bio pairs both public workshop numbers; April19 business post confirms air-conditioning service. Own Maps bio link returns same exact workshop premises. Directory updated2026-10-12. No email, own website, attributable Facebook page or weekly schedule found in directory, own Instagram bio/posts and targeted discovery. Central assumed fallback authorized; Google hours not used.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
