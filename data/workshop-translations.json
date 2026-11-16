@@ -146,6 +146,36 @@
       }
     },
     {
+      "id": "as-detailing-prishtina",
+      "sourceHash": "4ab2dd37d8a43f9af555d596ef4f66c64412690ef947fca6694da3d1a47bd52e",
+      "en": {
+        "specialty": "Vehicle detailing and polishing",
+        "description": "A. S. Detailing in Prishtina: Vehicle detailing and polishing. The name, location and business contact are documented by a public directory and the business’s own profile. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle detailing and polishing; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact",
+          "Business’s own profile: services and public business information",
+          "Business’s own profile: services and public business information"
+        ]
+      },
+      "sq": {
+        "specialty": "Detajim dhe polirim automjetesh",
+        "description": "A. S. Detailing në Prishtina: Detajim dhe polirim automjetesh. Emri, vendndodhja dhe kontakti dokumentohen nga një drejtori publike dhe profili i vetë biznesit. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Detajim dhe polirim automjetesh; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: shërbimet dhe të dhënat publike",
+          "Profili i vetë biznesit: shërbimet dhe të dhënat publike"
+        ]
+      }
+    },
+    {
       "id": "as-motors",
       "sourceHash": "e618e1db5ad566eb57f42c2b0928ef185f7f851b9d8c77d6309729b731ebf825",
       "sq": {
@@ -548,6 +578,32 @@
       }
     },
     {
+      "id": "auto-elektrik-menduh-vushtrri",
+      "sourceHash": "bd7e4ba5072bb6ff6380015e817e5c8f31963bd2e6f5c0f4709561a6fedc1eaf",
+      "en": {
+        "specialty": "Auto electrical service",
+        "description": "Auto Elektrik Menduh in Vushtrri: Auto electrical service. The name, location and business contact come from a public directory. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Auto electrical service; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Shërbime autoelektrike",
+        "description": "Auto Elektrik Menduh në Vushtrri: Shërbime autoelektrike. Emri, vendndodhja dhe kontakti i biznesit vijnë nga një drejtori publike. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime autoelektrike; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti"
+        ]
+      }
+    },
+    {
       "id": "auto-elektrik-shulina-rahovec",
       "sourceHash": "af53a8fe0af7c4dadfafd621f64cebe8a8d752df7190024b16c731fc75f0ebe5",
       "sq": {
@@ -687,6 +743,36 @@
         ],
         "phoneNote": "Public business contact; reachability not confirmed",
         "sourceTitles": ["Business website: contact, location and services"]
+      }
+    },
+    {
+      "id": "auto-elektro-service-amp-prishtina",
+      "sourceHash": "b05bfd6297da136ebdea08082574919487d9d2af93079d329d3e69d98c732bff",
+      "en": {
+        "specialty": "Vehicle electrical repairs and air conditioning service",
+        "description": "Auto Elektro Service - AMP in Prishtina: Vehicle electrical repairs and air conditioning service. The name, location and business contact are documented by a public directory and the business’s own profile. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle electrical repairs and air conditioning service; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Additional workshop contact: +383 44 500 891; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact",
+          "Business’s own profile: services and public business information",
+          "Business’s own profile: services and public business information"
+        ]
+      },
+      "sq": {
+        "specialty": "Riparime elektrike të automjeteve dhe servis i klimës",
+        "description": "Auto Elektro Service - AMP në Prishtina: Riparime elektrike të automjeteve dhe servis i klimës. Emri, vendndodhja dhe kontakti dokumentohen nga një drejtori publike dhe profili i vetë biznesit. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Riparime elektrike të automjeteve dhe servis i klimës; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt tjetër i servisit: +383 44 500 891; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: shërbimet dhe të dhënat publike",
+          "Profili i vetë biznesit: shërbimet dhe të dhënat publike"
+        ]
       }
     },
     {
@@ -950,6 +1036,32 @@
         "sourceTitles": [
           "Independent business source: contact, location and services",
           "Business website: vehicle glass and location"
+        ]
+      }
+    },
+    {
+      "id": "auto-goma-alberti-obiliq",
+      "sourceHash": "bbd4e975bc634dcdb8b8f8cd2efc4900f7bb06979e00c404ca61227b0ede03df",
+      "en": {
+        "specialty": "Tyre service",
+        "description": "Auto Goma Alberti in Obiliq: Tyre service. The name, location and business contact come from a public directory. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Tyre service; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Shërbime gomash",
+        "description": "Auto Goma Alberti në Obiliq: Shërbime gomash. Emri, vendndodhja dhe kontakti i biznesit vijnë nga një drejtori publike. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Shërbime gomash; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti"
         ]
       }
     },
@@ -7028,6 +7140,36 @@
       }
     },
     {
+      "id": "lindi-automotive-vushtrri",
+      "sourceHash": "8dc3dbc9f6f4688c395283bc5867e7691d31bbf6714f56e7ef7903da97b3e86f",
+      "en": {
+        "specialty": "Vehicle detailing and polishing",
+        "description": "LINDI Automotive in Vushtrri: Vehicle detailing and polishing. The name, location and business contact come from a public directory. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle detailing and polishing; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact",
+          "Business’s own profile: vehicle service and public business information",
+          "Business’s own profile: vehicle service and public business information"
+        ]
+      },
+      "sq": {
+        "specialty": "Pastrimi i detajuar dhe lustrimi i automjeteve",
+        "description": "LINDI Automotive në Vushtrri: Pastrimi i detajuar dhe lustrimi i automjeteve. Emri, vendndodhja dhe kontakti i biznesit vijnë nga një drejtori publike. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Pastrimi i detajuar dhe lustrimi i automjeteve; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: shërbime automjetesh dhe të dhëna publike",
+          "Profili i vetë biznesit: shërbime automjetesh dhe të dhëna publike"
+        ]
+      }
+    },
+    {
       "id": "lipjani-coding-lipjan",
       "sourceHash": "40ea3a8e8e95f6c22c1a46bf46818709f4afcb17026a177615215d749ff03803",
       "sq": {
@@ -8283,6 +8425,34 @@
       }
     },
     {
+      "id": "xhida-servis-obiliq",
+      "sourceHash": "8c55f59f4d7c45aa014ae6d067a8c2e98d84974d07e35b3f97854ff9f3491066",
+      "en": {
+        "specialty": "Vehicle servicing and repair",
+        "description": "Xhida Servis in Obiliq: Vehicle servicing and repair. The name, location and business contact come from a public directory. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle servicing and repair; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Additional workshop contacts: +383 44 239 153, +383 48 777 787; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact",
+          "Business’s own profile: vehicle service and public business information"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim dhe riparim automjetesh",
+        "description": "Xhida Servis në Obiliq: Servisim dhe riparim automjetesh. Emri, vendndodhja dhe kontakti i biznesit vijnë nga një drejtori publike. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Servisim dhe riparim automjetesh; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakte të tjera të servisit: +383 44 239 153, +383 48 777 787; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: shërbime automjetesh dhe të dhëna publike"
+        ]
+      }
+    },
+    {
       "id": "ylli-performance-chip-tuning-gjilan",
       "sourceHash": "3feff6794eb28648db11ab45c294ade78240713e8f7a33423e819e9b5406a56e",
       "sq": {
@@ -8305,6 +8475,34 @@
         "phoneNote": "Public directory contact (Cybo); not confirmed by the business",
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "zeka-detail-vushtrri",
+      "sourceHash": "931d42dc5281e744345f7f34410dbb5ebac96725a24c4cb72048ee78914e9967",
+      "en": {
+        "specialty": "Vehicle detailing, polishing and ceramic coating",
+        "description": "Zeka detail in Vushtrri: Vehicle detailing, polishing and ceramic coating. The name, location and business contact come from a public directory. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle detailing, polishing and ceramic coating; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact",
+          "Business’s own profile: vehicle service and public business information"
+        ]
+      },
+      "sq": {
+        "specialty": "Pastrimi i detajuar, lustrimi dhe mbrojtja qeramike",
+        "description": "Zeka detail në Vushtrri: Pastrimi i detajuar, lustrimi dhe mbrojtja qeramike. Emri, vendndodhja dhe kontakti i biznesit vijnë nga një drejtori publike. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Pastrimi i detajuar, lustrimi dhe mbrojtja qeramike; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: shërbime automjetesh dhe të dhëna publike"
         ]
       }
     }

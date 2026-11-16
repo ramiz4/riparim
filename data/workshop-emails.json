@@ -91,6 +91,27 @@
       "notes": "Complete independent directory has no email or own website. Focused Facebook/Instagram/email query finds other-phone Pristina Amiri; directly inspected Instagram autoservisamiri publishes049102150, not target. Native Facebook Pages name/town search yields unrelated footballer only. No contacts borrowed."
     },
     {
+      "workshopId": "as-detailing-prishtina",
+      "matchedName": "A. S. Detailing",
+      "matchedPhone": "+38349689136",
+      "matchedCity": "Prishtina",
+      "emails": [
+        {
+          "address": "albseldetailing@gmail.com",
+          "sourceUrls": ["https://www.facebook.com/detailignyo/"],
+          "checkedAt": "2026-11-16",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/1qUDwraTslR0/a-s-detailing/",
+        "https://www.instagram.com/as_detailing.prishtine/",
+        "https://www.facebook.com/detailignyo/"
+      ],
+      "notes": "Own Facebook business-hours dialog gives a complete week, marked updated about five years ago. Own Facebook contact and Instagram posts match exact phone and Matiqan. Weekly plan is researched historical source information, not owner-confirmed current hours. Directory updated2026-10-12; Google hours not used."
+    },
+    {
       "workshopId": "as-motors",
       "matchedName": "AS Motors",
       "matchedPhone": "+38338536060",
@@ -373,6 +394,18 @@
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
     },
     {
+      "workshopId": "auto-elektrik-menduh-vushtrri",
+      "matchedName": "Auto Elektrik Menduh",
+      "matchedPhone": "+38344198032",
+      "matchedCity": "Vushtrri",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/rQ0REkgSMCXt/auto-elektrik-menduh/"
+      ],
+      "notes": "Directory updated 2026-10-12 supplies the independent category, contact and precise map point but no email or weekly schedule. Own website/Facebook/Instagram discovery found no attributable additional source; unrelated namesakes were excluded."
+    },
+    {
       "workshopId": "auto-elektrik-shulina-rahovec",
       "matchedName": "Auto Elektrik Shulina",
       "matchedPhone": "+38344900067",
@@ -472,6 +505,20 @@
         "https://www.instagram.com/reel/DFWCbAaIEbm/"
       ],
       "notes": "Two publicly listed addresses on the business website and Instagram. Previously stored address and evidence preserved and compared again."
+    },
+    {
+      "workshopId": "auto-elektro-service-amp-prishtina",
+      "matchedName": "Auto Elektro Service - AMP",
+      "matchedPhone": "+38349308052",
+      "matchedCity": "Prishtina",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/eLUDD1vmX9mw/auto-elektro-service-amp/",
+        "https://www.instagram.com/amp__service/",
+        "https://www.instagram.com/amp__service/p/DXTyEA-iIQP/"
+      ],
+      "notes": "Own Instagram bio pairs both public workshop numbers; April19 business post confirms air-conditioning service. Own Maps bio link returns same exact workshop premises. Directory updated2026-10-12. No email, own website, attributable Facebook page or weekly schedule found in directory, own Instagram bio/posts and targeted discovery. Central assumed fallback authorized; Google hours not used."
     },
     {
       "workshopId": "auto-elektro-servis-a-plus-prizren",
@@ -663,6 +710,18 @@
         "https://www.facebook.com/autoglasskosovo/?locale=sq_AL"
       ],
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
+    },
+    {
+      "workshopId": "auto-goma-alberti-obiliq",
+      "matchedName": "Auto Goma Alberti",
+      "matchedPhone": "+38345285740",
+      "matchedCity": "Obiliq",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/bPSflpBQ17oi/auto-goma-alberti-vullkanizer/"
+      ],
+      "notes": "Directory updated 2026-10-12 supplies the independent category, contact and precise map point but no email or weekly schedule. Own website/Facebook/Instagram discovery found no attributable additional source; unrelated namesakes were excluded."
     },
     {
       "workshopId": "auto-goma-sfishta-podujeve",
@@ -4775,6 +4834,27 @@
       "notes": "Full independent directory details, focused business-name/town query and exact44contact/email/Instagram query checked. Closest own-named Facebook100063208571027explicitly locatesFerizaj, not this Kaçanik premises; unrelated contact/service claims not adopted. No attributable own Kaçanik website/Instagram/business email found. Generic directoryEmail lookup is not a contact address."
     },
     {
+      "workshopId": "lindi-automotive-vushtrri",
+      "matchedName": "LINDI Automotive",
+      "matchedPhone": "+38344332254",
+      "matchedCity": "Vushtrri",
+      "emails": [
+        {
+          "address": "lindi.automotive@gmail.com",
+          "sourceUrls": ["https://www.facebook.com/lindiautomotive/"],
+          "checkedAt": "2026-11-15",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/0nyx7Xr9HXUS/lindi-automotive/",
+        "https://www.facebook.com/lindiautomotive/",
+        "https://www.instagram.com/lindi_automotive/"
+      ],
+      "notes": "Directory updated 2026-10-12. Own Facebook and Instagram match exact main phone and Vushtrri. Current Instagram bio explicitly advertises detailing/polishing; Facebook post dated 2020-12-07 describes vehicle polishing. Facebook publicly lists lindi.automotive@gmail.com. Facebook hours expose only generic open-now text, not a usable week. Linked own website https://lindi-automotive.com/ failed DNS (ERR_NAME_NOT_RESOLVED); no security bypass. Instagram supplies no weekly plan; no Google hours adopted."
+    },
+    {
       "workshopId": "lipjani-coding-lipjan",
       "matchedName": "Lipjani Coding",
       "matchedPhone": "+38344415621",
@@ -5651,6 +5731,19 @@
       "notes": "Publicly evidenced address; assignment checked using business name, location or phone number."
     },
     {
+      "workshopId": "xhida-servis-obiliq",
+      "matchedName": "Xhida Servis",
+      "matchedPhone": "+38349549894",
+      "matchedCity": "Obiliq",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/G3JhdTgSOufZ/xhida-servis/",
+        "https://www.instagram.com/autoservis.xhida/"
+      ],
+      "notes": "Directory updated 2026-10-12 and own Instagram checked. Instagram bio supplies three workshop contact numbers and vehicle servicing but no email or weekly schedule. No usable attributable weekly plan or public email found. Social bio update date unavailable."
+    },
+    {
       "workshopId": "ylli-performance-chip-tuning-gjilan",
       "matchedName": "Ylli Performance Chip Tuning",
       "matchedPhone": "+38345332669",
@@ -5668,6 +5761,19 @@
         "https://www.google.com/search?q=%22045%20332%20669%22%20Gjilan"
       ],
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; Instagram bio checked; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
+    },
+    {
+      "workshopId": "zeka-detail-vushtrri",
+      "matchedName": "Zeka detail",
+      "matchedPhone": "+38345967312",
+      "matchedCity": "Vushtrri",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/7s8MUTp6vNhK/zeka-detail/",
+        "https://www.instagram.com/zeka_detail/"
+      ],
+      "notes": "Directory updated 2026-10-12 and own Instagram checked. Instagram bio supplies detailing, polishing and ceramic coating in Vushtrri but no email or weekly schedule. No usable attributable weekly plan or public email found. Social bio update date unavailable."
     }
   ]
 }

@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-11-14T08:10:33.097Z",
+  "updatedAt": "2026-11-16T06:50:13.004Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 295,
+    "published": 302,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -13,7 +13,7 @@
   "googleImport": {
     "status": "completed",
     "reason": "All published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 295,
+    "matchedPlaceIds": 302,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -250,6 +250,59 @@
             "https://numrat.com/biznes/sqXMX5D1f9F5/amiri-autoservis/"
           ],
           "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
+        }
+      }
+    },
+    {
+      "id": "as-detailing-prishtina",
+      "name": "A. S. Detailing",
+      "city": "Prishtina",
+      "address": "Rr. Afrim Rama, Matiqan",
+      "phone": "+38349689136",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Fahrzeugaufbereitung und Polieren; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugaufbereitung und Polieren",
+      "description": "A. S. Detailing in Prishtina: Fahrzeugaufbereitung und Polieren. Name, Standort und Geschäftskontakt sind durch ein öffentliches Verzeichnis und den eigenen Betriebsauftritt belegt. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.645292,
+      "lng": 21.191896,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/1qUDwraTslR0/a-s-detailing/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.instagram.com/as_detailing.prishtine/",
+          "title": "Eigener Betriebsauftritt: Leistungen und öffentliche Geschäftsinformationen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/detailignyo/",
+          "title": "Eigener Betriebsauftritt: Leistungen und öffentliche Geschäftsinformationen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-16",
+      "status": "published",
+      "updatedAt": "2026-11-16T06:49:31.714794+00:00",
+      "google": {
+        "placeId": "ChIJc40oPO2ZVBMRln5uMtOSS34",
+        "matchedAt": "2026-11-16T06:49:31.714794+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/1qUDwraTslR0/a-s-detailing/",
+            "https://www.instagram.com/as_detailing.prishtine/",
+            "https://www.facebook.com/detailignyo/"
+          ],
+          "note": "Individually verified in public Maps UI; exact phone, name and precise site matched. Place ID read from official visible result link and returned with unrelated Zurich fallback. No Google content adopted or ownership claimed."
         }
       }
     },
@@ -951,6 +1004,47 @@
       }
     },
     {
+      "id": "auto-elektrik-menduh-vushtrri",
+      "name": "Auto Elektrik Menduh",
+      "city": "Vushtrri",
+      "address": "Vushtrri 42000",
+      "phone": "+38344198032",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344198032",
+      "brands": [],
+      "services": ["Diagnose & Elektronik"],
+      "serviceDetails": [
+        "Autoelektrik; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Autoelektrik",
+      "description": "Auto Elektrik Menduh in Vushtrri: Autoelektrik. Name, Standort und Geschäftskontakt stammen aus einem öffentlichen Verzeichnis. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.823971,
+      "lng": 20.956903,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/rQ0REkgSMCXt/auto-elektrik-menduh/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-15",
+      "status": "published",
+      "updatedAt": "2026-11-15T09:01:43.583212+00:00",
+      "google": {
+        "placeId": "ChIJEx7pcwBbUxMRQV0mrbmNEVE",
+        "matchedAt": "2026-11-15T08:56:27.005073+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/rQ0REkgSMCXt/auto-elektrik-menduh/"
+          ],
+          "note": "Individually verified in public Maps UI: name, exact international phone and precise location match. Place ID read from visible official !19s result link and returned with unrelated London fallback. No Google content adopted; no ownership claim."
+        }
+      }
+    },
+    {
       "id": "auto-elektrik-shulina-rahovec",
       "name": "Auto Elektrik Shulina",
       "city": "Rahovec",
@@ -1173,6 +1267,59 @@
           "method": "phone_and_location",
           "sourceUrls": ["https://aesagroni.com/rreth-nesh"],
           "note": "Name, normalized phone number and location independently compared. Active public Maps entry; Place ID from the official visible Maps link directly rechecked with a deliberately unrelated fallback search. No Google owner verification and no API/SDK calls made by us."
+        }
+      }
+    },
+    {
+      "id": "auto-elektro-service-amp-prishtina",
+      "name": "Auto Elektro Service - AMP",
+      "city": "Prishtina",
+      "address": "Justina Shkupi",
+      "phone": "+38349308052",
+      "phoneNote": "Weiterer Werkstattkontakt: +383 44 500 891; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349308052",
+      "brands": [],
+      "services": ["Diagnose & Elektronik", "Reifen & Klima"],
+      "serviceDetails": [
+        "Autoelektrik und Klimaservice; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Autoelektrik und Klimaservice",
+      "description": "Auto Elektro Service - AMP in Prishtina: Autoelektrik und Klimaservice. Name, Standort und Geschäftskontakt sind durch ein öffentliches Verzeichnis und den eigenen Betriebsauftritt belegt. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.674655,
+      "lng": 21.172771,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/eLUDD1vmX9mw/auto-elektro-service-amp/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.instagram.com/amp__service/",
+          "title": "Eigener Betriebsauftritt: Leistungen und öffentliche Geschäftsinformationen",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/amp__service/p/DXTyEA-iIQP/",
+          "title": "Eigener Betriebsauftritt: Leistungen und öffentliche Geschäftsinformationen",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-16",
+      "status": "published",
+      "updatedAt": "2026-11-16T06:49:31.714794+00:00",
+      "google": {
+        "placeId": "ChIJoWBXVRufVBMRJ4x_QKAI8-o",
+        "matchedAt": "2026-11-16T06:49:31.714794+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/eLUDD1vmX9mw/auto-elektro-service-amp/",
+            "https://www.instagram.com/amp__service/",
+            "https://www.instagram.com/amp__service/p/DXTyEA-iIQP/"
+          ],
+          "note": "Individually verified in public Maps UI; exact phone, name and precise site matched. Place ID read from official visible result link and returned with unrelated Zurich fallback. Own AMP bio Maps link also returns same premises. No Google content adopted or ownership claimed."
         }
       }
     },
@@ -1645,6 +1792,47 @@
             "https://autoglasskosovo.com/location"
           ],
           "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
+        }
+      }
+    },
+    {
+      "id": "auto-goma-alberti-obiliq",
+      "name": "Auto Goma Alberti",
+      "city": "Obiliq",
+      "address": "R220, Obiliq",
+      "phone": "+38345285740",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Reifen & Klima"],
+      "serviceDetails": [
+        "Reifenservice; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Reifenservice",
+      "description": "Auto Goma Alberti in Obiliq: Reifenservice. Name, Standort und Geschäftskontakt stammen aus einem öffentlichen Verzeichnis. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.696985,
+      "lng": 21.065327,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/bPSflpBQ17oi/auto-goma-alberti-vullkanizer/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-15",
+      "status": "published",
+      "updatedAt": "2026-11-15T09:01:43.583212+00:00",
+      "google": {
+        "placeId": "ChIJT9aLMANhUxMRg3Asx1w6Alg",
+        "matchedAt": "2026-11-15T08:56:27.005073+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/bPSflpBQ17oi/auto-goma-alberti-vullkanizer/"
+          ],
+          "note": "Individually verified in public Maps UI: name, exact international phone and precise location match. Place ID read from visible official !19s result link and returned with unrelated London fallback. No Google content adopted; no ownership claim."
         }
       }
     },
@@ -12090,6 +12278,59 @@
       }
     },
     {
+      "id": "lindi-automotive-vushtrri",
+      "name": "LINDI Automotive",
+      "city": "Vushtrri",
+      "address": "Rruga e shales",
+      "phone": "+38344332254",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Fahrzeugaufbereitung und Polieren laut eigenem Betriebsauftritt; Termine direkt abstimmen."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugaufbereitung und Polieren",
+      "description": "LINDI Automotive in Vushtrri bietet laut eigenem Betriebsauftritt Fahrzeugaufbereitung und Polieren an. Name, Standort und Geschäftskontakt sind durch ein öffentliches Verzeichnis und die eigenen Betriebsprofile belegt. Leistungen und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.828877,
+      "lng": 20.976061,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/0nyx7Xr9HXUS/lindi-automotive/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/lindiautomotive/",
+          "title": "Eigener Betriebsauftritt: Fahrzeugaufbereitung, Geschäftskontakt und Betriebsangaben",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/lindi_automotive/",
+          "title": "Eigener Betriebsauftritt: Fahrzeugaufbereitung, Geschäftskontakt und Betriebsangaben",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-15",
+      "status": "published",
+      "updatedAt": "2026-11-15T09:13:54.201062+00:00",
+      "google": {
+        "placeId": "ChIJy5m4hTxbUxMRnWN2YxD0h-w",
+        "matchedAt": "2026-11-15T09:13:54.201062+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/0nyx7Xr9HXUS/lindi-automotive/",
+            "https://www.facebook.com/lindiautomotive/",
+            "https://www.instagram.com/lindi_automotive/"
+          ],
+          "note": "Individually verified in public Maps UI: name, exact international phone and precise location match. Place ID read from visible official !19s result link and returned with unrelated London fallback. No Google content adopted; no ownership claim."
+        }
+      }
+    },
+    {
       "id": "lipjani-coding-lipjan",
       "name": "Lipjani Coding",
       "city": "Lipjan",
@@ -14292,6 +14533,53 @@
       }
     },
     {
+      "id": "xhida-servis-obiliq",
+      "name": "Xhida Servis",
+      "city": "Obiliq",
+      "address": "16 Llapi",
+      "phone": "+38349549894",
+      "phoneNote": "Weitere Werkstattkontakte: +383 44 239 153, +383 48 777 787; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349549894",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Fahrzeugservice und Reparatur; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice und Reparatur",
+      "description": "Xhida Servis in Obiliq: Fahrzeugservice und Reparatur. Name, Standort und Geschäftskontakt stammen aus einem öffentlichen Verzeichnis. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.694885,
+      "lng": 21.062895,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/G3JhdTgSOufZ/xhida-servis/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.instagram.com/autoservis.xhida/",
+          "title": "Eigener Betriebsauftritt: Fahrzeugservice und öffentliche Betriebsangaben",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-15",
+      "status": "published",
+      "updatedAt": "2026-11-15T09:01:43.583212+00:00",
+      "google": {
+        "placeId": "ChIJA9VsNQBhUxMRABpblyc-7j0",
+        "matchedAt": "2026-11-15T08:56:27.005073+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/G3JhdTgSOufZ/xhida-servis/",
+            "https://www.instagram.com/autoservis.xhida/"
+          ],
+          "note": "Individually verified in public Maps UI: name, exact international phone and precise location match. Place ID read from visible official !19s result link and returned with unrelated London fallback. No Google content adopted; no ownership claim."
+        }
+      }
+    },
+    {
       "id": "ylli-performance-chip-tuning-gjilan",
       "name": "Ylli Performance Chip Tuning",
       "city": "Gjilan",
@@ -14338,6 +14626,53 @@
             "https://www.google.com/maps/?cid=17632544202562383595"
           ],
           "note": "Individual Google listing confirmed using an independently evidenced phone number, workshop name and precise address; CID and actual Place ID designate the same entry. No Google business details or reviews adopted into the profile source."
+        }
+      }
+    },
+    {
+      "id": "zeka-detail-vushtrri",
+      "name": "Zeka detail",
+      "city": "Vushtrri",
+      "address": "Ana Lin",
+      "phone": "+38345967312",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Fahrzeugaufbereitung, Polieren und Keramikschutz; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugaufbereitung, Polieren und Keramikschutz",
+      "description": "Zeka detail in Vushtrri: Fahrzeugaufbereitung, Polieren und Keramikschutz. Name, Standort und Geschäftskontakt stammen aus einem öffentlichen Verzeichnis. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.831603,
+      "lng": 20.96409,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/7s8MUTp6vNhK/zeka-detail/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.instagram.com/zeka_detail/",
+          "title": "Eigener Betriebsauftritt: Fahrzeugservice und öffentliche Betriebsangaben",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-15",
+      "status": "published",
+      "updatedAt": "2026-11-15T09:01:43.583212+00:00",
+      "google": {
+        "placeId": "ChIJ3xabWEpbUxMRP068zwoT-F4",
+        "matchedAt": "2026-11-15T08:56:27.005073+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/7s8MUTp6vNhK/zeka-detail/",
+            "https://www.instagram.com/zeka_detail/"
+          ],
+          "note": "Individually verified in public Maps UI: name, exact international phone and precise location match. Place ID read from visible official !19s result link and returned with unrelated London fallback. No Google content adopted; no ownership claim."
         }
       }
     }

@@ -18,6 +18,7 @@ export const cities = [
   "Istog",
   "Skenderaj",
   "Obiliq",
+  "Vushtrri",
 ];
 export const brands = [
   storedSentinels.allBrands,
