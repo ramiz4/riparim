@@ -554,6 +554,32 @@
       }
     },
     {
+      "id": "auto-elektricist-univerzal-fushe-kosove",
+      "sourceHash": "2d5ddeec3dd3f21546e0a4b1c101021caa0a39cbf487d1c9f96ca45e8fb0611b",
+      "en": {
+        "specialty": "Auto electrics",
+        "description": "Auto elektricist UNIVERZAL in Fushë Kosovë: Auto electrics. The name, location and business contact are publicly documented. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Auto electrics; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Autoelektrikë",
+        "description": "Auto elektricist UNIVERZAL në Fushë Kosovë: Autoelektrikë. Emri, vendndodhja dhe kontakti i biznesit janë të dokumentuar publikisht. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Autoelektrikë; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti"
+        ]
+      }
+    },
+    {
       "id": "auto-elektricist-xhaviti-gjakova",
       "sourceHash": "f1e93639ed94d80c49d930dab28085c7700aed77a0caeef3414dc56f0ceb54bf",
       "sq": {
@@ -710,6 +736,34 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Public directory: name, contact and vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "auto-elektro-liri-fushe-kosove",
+      "sourceHash": "f1e531b0c97560984f5fa648e881a2d10417a248c6499adb7486a37b6df948c7",
+      "en": {
+        "specialty": "Auto electrics and vehicle diagnostics",
+        "description": "Auto Elektro Liri in Fushë Kosovë: Auto electrics and vehicle diagnostics. The name, location and business contact are publicly documented. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Auto electrics and vehicle diagnostics; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Additional workshop contacts: +38345590059; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact",
+          "Business’s own profile: services and public business information"
+        ]
+      },
+      "sq": {
+        "specialty": "Autoelektrikë dhe diagnostikim automjetesh",
+        "description": "Auto Elektro Liri në Fushë Kosovë: Autoelektrikë dhe diagnostikim automjetesh. Emri, vendndodhja dhe kontakti i biznesit janë të dokumentuar publikisht. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Autoelektrikë dhe diagnostikim automjetesh; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakte të tjera të servisit: +38345590059; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: shërbime dhe të dhëna publike"
         ]
       }
     },
@@ -3842,6 +3896,32 @@
       }
     },
     {
+      "id": "auto-servis-luani-fushe-kosove",
+      "sourceHash": "2bb5c1d4ac38347d3295c98473747a0407aa21f4c495a3673bc4d57d4f497644",
+      "en": {
+        "specialty": "Vehicle servicing and repair",
+        "description": "Auto Servis Luani in Fushë Kosovë: Vehicle servicing and repair. The name, location and business contact are publicly documented. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle servicing and repair; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim dhe riparim automjetesh",
+        "description": "Auto Servis Luani në Fushë Kosovë: Servisim dhe riparim automjetesh. Emri, vendndodhja dhe kontakti i biznesit janë të dokumentuar publikisht. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Servisim dhe riparim automjetesh; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-luli-kamenice",
       "sourceHash": "dd6ba8ff5be48d3c2d6e973269e2896afaeb245e1849fe976fde3785fc4abdb9",
       "sq": {
@@ -4008,6 +4088,34 @@
           "Gjirafa.biz: published name · address · telephone · vehicle service category",
           "Cross-check of contact details, location and current service scope",
           "Cross-check of contact details, location and current service scope"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-meritoni-fushe-kosove",
+      "sourceHash": "476d64739c5ad52359b12ec98b57c5fa750306855d47d96558316412efb99898",
+      "en": {
+        "specialty": "Vehicle servicing, tyres and air conditioning",
+        "description": "Auto Servis Meritoni in Fushë Kosovë: Vehicle servicing, tyres and air conditioning. The name, location and business contact are publicly documented. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle servicing, tyres and air conditioning; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact",
+          "Business’s own profile: services and public business information"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim automjetesh, goma dhe klimë",
+        "description": "Auto Servis Meritoni në Fushë Kosovë: Servisim automjetesh, goma dhe klimë. Emri, vendndodhja dhe kontakti i biznesit janë të dokumentuar publikisht. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Servisim automjetesh, goma dhe klimë; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: shërbime dhe të dhëna publike"
         ]
       }
     },
@@ -6215,6 +6323,34 @@
       }
     },
     {
+      "id": "besi-regllazh-fushe-kosove",
+      "sourceHash": "45583e3e15f8605d0a1849db0b6462056a7ea795f3adaa001da1215c59e7bd3a",
+      "en": {
+        "specialty": "Vehicle servicing, tyres and air conditioning",
+        "description": "Besi Regllazh in Fushë Kosovë: Vehicle servicing, tyres and air conditioning. The name, location and business contact are publicly documented. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle servicing, tyres and air conditioning; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact",
+          "Business’s own profile: services and public business information"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim automjetesh, goma dhe klimë",
+        "description": "Besi Regllazh në Fushë Kosovë: Servisim automjetesh, goma dhe klimë. Emri, vendndodhja dhe kontakti i biznesit janë të dokumentuar publikisht. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Servisim automjetesh, goma dhe klimë; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: shërbime dhe të dhëna publike"
+        ]
+      }
+    },
+    {
       "id": "bmw-prishtina-prishtina",
       "sourceHash": "c309c2cae054520ed3ee096a0e4e00506fe882f40b7d07d29224d0e5f6b0eb98",
       "sq": {
@@ -6537,6 +6673,34 @@
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category",
           "Contact, location and passenger-car service cross-check dated 5 October 2026"
+        ]
+      }
+    },
+    {
+      "id": "dpf-kosova-fushe-kosove",
+      "sourceHash": "4f4d05b91e9479e4d21ca3fa93631289a91754c3083e897bf33ea99982ee7739",
+      "en": {
+        "specialty": "Professional cleaning of DPF, catalytic converter and SCR systems",
+        "description": "DPF Kosova in Fushë Kosovë: Professional cleaning of DPF, catalytic converter and SCR systems. The name, location and business contact are publicly documented. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Professional cleaning of DPF, catalytic converter and SCR systems; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact",
+          "Business’s own profile: services and public business information"
+        ]
+      },
+      "sq": {
+        "specialty": "Pastrim profesional i sistemeve DPF, katalizator dhe SCR",
+        "description": "DPF Kosova në Fushë Kosovë: Pastrim profesional i sistemeve DPF, katalizator dhe SCR. Emri, vendndodhja dhe kontakti i biznesit janë të dokumentuar publikisht. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Pastrim profesional i sistemeve DPF, katalizator dhe SCR; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: shërbime dhe të dhëna publike"
         ]
       }
     },
@@ -7196,6 +7360,36 @@
       }
     },
     {
+      "id": "lr-motors-fushe-kosove",
+      "sourceHash": "465989ac1e8168a7a4ca1c4b086c11f137e99014a7e9456e4e6b81e83fc31b4b",
+      "en": {
+        "specialty": "Vehicle servicing for Land Rover",
+        "description": "LR MOTORS in Fushë Kosovë: Vehicle servicing for Land Rover. The name, location and business contact are publicly documented. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle servicing for Land Rover; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Additional workshop contacts: +38344466366; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact",
+          "Business’s own profile: services and public business information",
+          "Business’s own profile: services and public business information"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim automjetesh Land Rover",
+        "description": "LR MOTORS në Fushë Kosovë: Servisim automjetesh Land Rover. Emri, vendndodhja dhe kontakti i biznesit janë të dokumentuar publikisht. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Servisim automjetesh Land Rover; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakte të tjera të servisit: +38344466366; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: shërbime dhe të dhëna publike",
+          "Profili i vetë biznesit: shërbime dhe të dhëna publike"
+        ]
+      }
+    },
+    {
       "id": "luxury-auto-detailing-gjilan",
       "sourceHash": "3233953c3e3c366fb514fe81f7189f4ab2bb711cac0985bcf456784b018ad18c",
       "sq": {
@@ -7310,6 +7504,36 @@
         "sourceTitles": [
           "Own website: exact address · +383 mobile telephone · service email",
           "Own website: maintenance and repair explicitly at the business’s own premises"
+        ]
+      }
+    },
+    {
+      "id": "mercedes-benz-duda-fushe-kosove",
+      "sourceHash": "203cb6782389981643f3af59b8ec5a97e28d1594fafea61c98ddb62a23b32bcd",
+      "en": {
+        "specialty": "Mercedes-Benz servicing, vehicle diagnostics and air conditioning",
+        "description": "Mercedes-Benz DUDA Service & Autobartje in Fushë Kosovë: Mercedes-Benz servicing, vehicle diagnostics and air conditioning. The name, location and business contact are publicly documented. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Mercedes-Benz servicing, vehicle diagnostics and air conditioning; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Additional workshop contacts: +38348329112; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact",
+          "Business’s own profile: services and public business information",
+          "Business’s own profile: services and public business information"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim Mercedes-Benz, diagnostikim automjetesh dhe klimë",
+        "description": "Mercedes-Benz DUDA Service & Autobartje në Fushë Kosovë: Servisim Mercedes-Benz, diagnostikim automjetesh dhe klimë. Emri, vendndodhja dhe kontakti i biznesit janë të dokumentuar publikisht. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Servisim Mercedes-Benz, diagnostikim automjetesh dhe klimë; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakte të tjera të servisit: +38348329112; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: shërbime dhe të dhëna publike",
+          "Profili i vetë biznesit: shërbime dhe të dhëna publike"
         ]
       }
     },

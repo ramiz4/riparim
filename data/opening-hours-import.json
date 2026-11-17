@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "d9df9d30edd36480bb01db9da7729fe6668683d876f17020d04e10df803f70ff",
+  "revision": "c146619fc97bd9ae5415e2dab0fe70b94ce6ff74db03a982a0517147ec21faf3",
   "records": [
     {
       "id": "adonis-garage-ferizaj",
@@ -1646,6 +1646,87 @@
       }
     },
     {
+      "id": "auto-elektricist-univerzal-fushe-kosove",
+      "expected": {
+        "name": "Auto elektricist UNIVERZAL",
+        "city": "Fushë Kosovë",
+        "address": "Nora KelmendiFushë",
+        "phone": "+38344357694"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-17",
+        "source": "https://numrat.com/biznes/QP4yCFM8tnSu/auto-elektricist-univerzal/",
+        "sourceName": "Auto elektricist UNIVERZAL",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No hours on directory. Targeted own website/social/email search returns other cities/operators; no attributable own source or complete non-Google week. Do not transfer other Univerzal contacts.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-elektricist-xhaviti-gjakova",
       "expected": {
         "name": "Auto elektriçist Xhaviti",
@@ -2168,6 +2249,87 @@
           "09:00-18:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-elektro-liri-fushe-kosove",
+      "expected": {
+        "name": "Auto Elektro Liri",
+        "city": "Fushë Kosovë",
+        "address": "Fushë-Kosovë 12000",
+        "phone": "+38345600660"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-17",
+        "source": "https://numrat.com/biznes/Iwm3LRnrKVuz/auto-elektro-liri/ | https://www.facebook.com/p/Auto-Elektro-Liri-61576521387205/",
+        "sourceName": "Auto Elektro Liri",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No weekly hours in own Facebook Info or directory; source post Nov16 2026",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -11631,6 +11793,87 @@
       }
     },
     {
+      "id": "auto-servis-luani-fushe-kosove",
+      "expected": {
+        "name": "Auto Servis Luani",
+        "city": "Fushë Kosovë",
+        "address": "Hashim Hajdini",
+        "phone": "+38344224723"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-17",
+        "source": "https://numrat.com/biznes/LLji2fMkue1S/auto-servis-luani/",
+        "sourceName": "Auto Servis Luani",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory has no hours/email; exact name and number query returns no attributable own website or social profile. Other Luani locations and contacts not transferred.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-servis-luli-kamenice",
       "expected": {
         "name": "AutoServis Luli",
@@ -12145,6 +12388,87 @@
           "08:00-18:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-meritoni-fushe-kosove",
+      "expected": {
+        "name": "Auto Servis Meritoni",
+        "city": "Fushë Kosovë",
+        "address": "Fushë-Kosovë 12000",
+        "phone": "+38349815403"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-17",
+        "source": "https://numrat.com/biznes/jU9D6BUTXE3N/auto-servis-meritoni/ | https://www.instagram.com/auto_service_meritoni/",
+        "sourceName": "Auto Servis Meritoni",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own full Instagram bio and directory contain no week or email; search mostly unrelated Prizren operator, not transferred",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -19085,6 +19409,95 @@
       }
     },
     {
+      "id": "besi-regllazh-fushe-kosove",
+      "expected": {
+        "name": "Besi Regllazh",
+        "city": "Fushë Kosovë",
+        "address": "Shefki Kuleta",
+        "phone": "+38344169457"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-11-17",
+        "source": "https://numrat.com/biznes/F7eG7DbuXvut/besi-regllazh/ | https://www.facebook.com/besiregllazh/",
+        "sourceName": "Besi Regllazh",
+        "researchStatus": "Recherchierte Öffnungszeiten",
+        "notes": "Own Facebook business-hours dialog Mon-Sat08-17 Sunday closed; marked updated about two months ago. Own Info has no email/contact-email tab; linked business.site is Google-managed not used for independent hours.",
+        "originalWeek": [
+          "08:00-17:00",
+          "08:00-17:00",
+          "08:00-17:00",
+          "08:00-17:00",
+          "08:00-17:00",
+          "08:00-17:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "bmw-prishtina-prishtina",
       "expected": {
         "name": "BMW Prishtina",
@@ -20041,6 +20454,95 @@
         "sourceName": "DPF Auto Gjini",
         "researchStatus": "Gefunden (Google Maps)",
         "notes": "",
+        "originalWeek": [
+          "09:00-17:00",
+          "09:00-17:00",
+          "09:00-17:00",
+          "09:00-17:00",
+          "09:00-17:00",
+          "09:00-17:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "dpf-kosova-fushe-kosove",
+      "expected": {
+        "name": "DPF Kosova",
+        "city": "Fushë Kosovë",
+        "address": "Apollonia E6, rruga per Uglar",
+        "phone": "+38344240333"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-11-17",
+        "source": "https://numrat.com/biznes/iS6sDiGgfNgr/dpf-kosova/ | https://www.facebook.com/dpfkosova1/",
+        "sourceName": "DPF Kosova",
+        "researchStatus": "Recherchierte Öffnungszeiten",
+        "notes": "Own Facebook business-hours dialog Monday-Saturday09-17, Sunday closed; update age not displayed",
         "originalWeek": [
           "09:00-17:00",
           "09:00-17:00",
@@ -22004,6 +22506,89 @@
       }
     },
     {
+      "id": "lr-motors-fushe-kosove",
+      "expected": {
+        "name": "LR MOTORS",
+        "city": "Fushë Kosovë",
+        "address": "Rr. Agron Rrahmani",
+        "phone": "+38344240688"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-11-17",
+        "source": "https://numrat.com/biznes/FMM7xE7ErUIc/lr-motors/ | https://www.instagram.com/lr_motors/ | https://www.facebook.com/LandRoverMotors/",
+        "sourceName": "LR MOTORS",
+        "researchStatus": "Recherchierte Öffnungszeiten",
+        "notes": "Own Facebook business-hours dialog Mon-Fri08-17; Saturday/Sunday closed. Update age not displayed; visible latest post2018. Current Instagram verifies primary and secondary international contacts. Linked website ERR_BLOCKED_BY_CLIENT, not bypassed.",
+        "originalWeek": [
+          "08:00-17:00",
+          "08:00-17:00",
+          "08:00-17:00",
+          "08:00-17:00",
+          "08:00-17:00",
+          "Geschlossen",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "luxury-auto-detailing-gjilan",
       "expected": {
         "name": "Luxury Auto Detailing",
@@ -22257,6 +22842,95 @@
           "08:00-18:00",
           "08:00-18:00",
           "08:00-18:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "mercedes-benz-duda-fushe-kosove",
+      "expected": {
+        "name": "Mercedes-Benz DUDA Service & Autobartje",
+        "city": "Fushë Kosovë",
+        "address": "300 Rruga e Pejës",
+        "phone": "+38349329112"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:30",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-11-17",
+        "source": "https://numrat.com/biznes/B4w3rHr3pGNH/mercedes-benz-duda-service-autobartje/ | https://www.facebook.com/100063589029745/ | https://www.instagram.com/auto_servis_auto_bartje_duda/",
+        "sourceName": "Mercedes-Benz DUDA Service & Autobartje",
+        "researchStatus": "Recherchierte Öffnungszeiten",
+        "notes": "Own Facebook hours dialog Mon-Sat08:30-18, Sunday closed; update age not shown",
+        "originalWeek": [
+          "08:30-18:00",
+          "08:30-18:00",
+          "08:30-18:00",
+          "08:30-18:00",
+          "08:30-18:00",
+          "08:30-18:00",
           "Geschlossen"
         ],
         "earlierPlan": ""
