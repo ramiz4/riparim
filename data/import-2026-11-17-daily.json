@@ -1,0 +1,836 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-17",
+  "timezone": "Europe/Zurich",
+  "checkedAt": "2026-11-17T06:44:49.358263+00:00",
+  "status": "prepared-awaiting-tests-review-ci-release",
+  "completedDateGuard": false,
+  "minimumRequiredNewPublished": 8,
+  "publishedCountConfirmed": 0,
+  "publishedWorkshopIds": [],
+  "baseCommit": "a39cd657cac420e4aa42c40391a06a5154f6b9fc",
+  "branch": "codex/daily-import-2026-11-17",
+  "manifest": "data/import-2026-11-17-daily.json",
+  "before": {
+    "canonical": 302,
+    "published": 302,
+    "catalogueTables": 9,
+    "liveRows": 1293
+  },
+  "candidates": [
+    {
+      "id": "auto-elektro-liri-fushe-kosove",
+      "name": "Auto Elektro Liri",
+      "city": "Fushë Kosovë",
+      "address": "Fushë-Kosovë 12000",
+      "phone": "+38345600660",
+      "additionalPhones": ["+38345590059"],
+      "lat": 42.634742,
+      "lng": 21.091364,
+      "directory": "https://numrat.com/biznes/Iwm3LRnrKVuz/auto-elektro-liri/",
+      "official": "https://www.facebook.com/p/Auto-Elektro-Liri-61576521387205/",
+      "placeId": "ChIJxfTNLABjUxMRxRo_ETpnj-w",
+      "mapsChecked": true,
+      "qualified": true,
+      "scope": "Autoelektricist directory; own Nov16 post offers diagnostics and DPF problem repair with both numbers",
+      "continuity": "Own Facebook external Maps link explicitly matches same CID as verified entry; no competing own address",
+      "hoursNote": "No weekly hours in own Facebook Info or directory; source post Nov16 2026",
+      "hoursKind": "assumed",
+      "email": null,
+      "checkedAt": "2026-11-17T06:23:00.193164+00:00",
+      "translations": {
+        "de": "Autoelektrik und Fahrzeugdiagnose",
+        "en": "Auto electrics and vehicle diagnostics",
+        "sq": "Autoelektrikë dhe diagnostikim automjetesh"
+      },
+      "sourceUrls": [
+        "https://numrat.com/biznes/Iwm3LRnrKVuz/auto-elektro-liri/",
+        "https://www.facebook.com/p/Auto-Elektro-Liri-61576521387205/"
+      ],
+      "selectedWhatsapp": "+38345590059",
+      "selectionReason": "Prefer independently evidenced primary when positively checked; otherwise use positively checked, independently advertised workshop secondary. No prefix conversion.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://www.facebook.com/p/Auto-Elektro-Liri-61576521387205/",
+        "checkedAt": "2026-11-17T06:41:38.202036+00:00",
+        "status": "not-found",
+        "checkedUrls": [
+          "https://numrat.com/biznes/Iwm3LRnrKVuz/auto-elektro-liri/",
+          "https://www.facebook.com/p/Auto-Elektro-Liri-61576521387205/"
+        ],
+        "note": "No attributable public business email found in checked directory, own sources where available, and targeted own website/Facebook/Instagram discovery; namesake contacts not transferred."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "sourceUrls": [
+          "https://numrat.com/biznes/Iwm3LRnrKVuz/auto-elektro-liri/",
+          "https://www.facebook.com/p/Auto-Elektro-Liri-61576521387205/"
+        ],
+        "checkedAt": "2026-11-17T06:41:38.202036+00:00",
+        "note": "No weekly hours in own Facebook Info or directory; source post Nov16 2026",
+        "week": null,
+        "sourceAge": "Directory updated 2026-10-12; own source age/limits stated in note."
+      },
+      "googleIdentity": {
+        "placeId": "ChIJxfTNLABjUxMRxRo_ETpnj-w",
+        "method": "public-maps-ui",
+        "checkedAt": "2026-11-17T06:23:00.193164+00:00",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      }
+    },
+    {
+      "id": "auto-elektricist-univerzal-fushe-kosove",
+      "name": "Auto elektricist UNIVERZAL",
+      "city": "Fushë Kosovë",
+      "address": "Nora KelmendiFushë",
+      "phone": "+38344357694",
+      "lat": 42.64212,
+      "lng": 21.099262,
+      "directory": "https://numrat.com/biznes/QP4yCFM8tnSu/auto-elektricist-univerzal/",
+      "official": null,
+      "placeId": "ChIJPXKO_UCfVBMRhXI_qZN0W4o",
+      "mapsChecked": true,
+      "qualified": true,
+      "scope": "Explicit Autoelektricist independent directory",
+      "hoursNote": "No hours on directory. Targeted own website/social/email search returns other cities/operators; no attributable own source or complete non-Google week. Do not transfer other Univerzal contacts.",
+      "hoursKind": "assumed",
+      "email": null,
+      "checkedAt": "2026-11-17T06:23:42.464291+00:00",
+      "translations": {
+        "de": "Autoelektrik",
+        "en": "Auto electrics",
+        "sq": "Autoelektrikë"
+      },
+      "sourceUrls": [
+        "https://numrat.com/biznes/QP4yCFM8tnSu/auto-elektricist-univerzal/"
+      ],
+      "selectedWhatsapp": "+38344357694",
+      "selectionReason": "Prefer independently evidenced primary when positively checked; otherwise use positively checked, independently advertised workshop secondary. No prefix conversion.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://numrat.com/biznes/QP4yCFM8tnSu/auto-elektricist-univerzal/",
+        "checkedAt": "2026-11-17T06:41:38.202036+00:00",
+        "status": "not-found",
+        "checkedUrls": [
+          "https://numrat.com/biznes/QP4yCFM8tnSu/auto-elektricist-univerzal/"
+        ],
+        "note": "No attributable public business email found in checked directory, own sources where available, and targeted own website/Facebook/Instagram discovery; namesake contacts not transferred."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "sourceUrls": [
+          "https://numrat.com/biznes/QP4yCFM8tnSu/auto-elektricist-univerzal/"
+        ],
+        "checkedAt": "2026-11-17T06:41:38.202036+00:00",
+        "note": "No hours on directory. Targeted own website/social/email search returns other cities/operators; no attributable own source or complete non-Google week. Do not transfer other Univerzal contacts.",
+        "week": null,
+        "sourceAge": "Directory updated 2026-10-12; own source age/limits stated in note."
+      },
+      "googleIdentity": {
+        "placeId": "ChIJPXKO_UCfVBMRhXI_qZN0W4o",
+        "method": "public-maps-ui",
+        "checkedAt": "2026-11-17T06:23:42.464291+00:00",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      }
+    },
+    {
+      "id": "auto-servis-meritoni-fushe-kosove",
+      "name": "Auto Servis Meritoni",
+      "city": "Fushë Kosovë",
+      "address": "Fushë-Kosovë 12000",
+      "phone": "+38349815403",
+      "lat": 42.616667,
+      "lng": 21.075129,
+      "directory": "https://numrat.com/biznes/jU9D6BUTXE3N/auto-servis-meritoni/",
+      "official": "https://www.instagram.com/auto_service_meritoni/",
+      "placeId": "ChIJRZOpMABjUxMRcj5Tw3v7TUw",
+      "mapsChecked": true,
+      "qualified": true,
+      "scope": "Mekanik directory; own Instagram offers all-vehicle servicing, AC, tyre replacement and balancing",
+      "continuity": "Own Instagram short Maps link hyuzj5Q699584Dmk7 returns exact same CID/entry; unrelated Prizren Meritoni not used",
+      "hoursNote": "Own full Instagram bio and directory contain no week or email; search mostly unrelated Prizren operator, not transferred",
+      "hoursKind": "assumed",
+      "email": null,
+      "checkedAt": "2026-11-17T06:25:39.613372+00:00",
+      "translations": {
+        "de": "Fahrzeugservice, Reifenservice und Klimaservice",
+        "en": "Vehicle servicing, tyres and air conditioning",
+        "sq": "Servisim automjetesh, goma dhe klimë"
+      },
+      "sourceUrls": [
+        "https://numrat.com/biznes/jU9D6BUTXE3N/auto-servis-meritoni/",
+        "https://www.instagram.com/auto_service_meritoni/"
+      ],
+      "selectedWhatsapp": "",
+      "selectionReason": "Prefer independently evidenced primary when positively checked; otherwise use positively checked, independently advertised workshop secondary. No prefix conversion.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://www.instagram.com/auto_service_meritoni/",
+        "checkedAt": "2026-11-17T06:41:38.202036+00:00",
+        "status": "not-found",
+        "checkedUrls": [
+          "https://numrat.com/biznes/jU9D6BUTXE3N/auto-servis-meritoni/",
+          "https://www.instagram.com/auto_service_meritoni/"
+        ],
+        "note": "No attributable public business email found in checked directory, own sources where available, and targeted own website/Facebook/Instagram discovery; namesake contacts not transferred."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "sourceUrls": [
+          "https://numrat.com/biznes/jU9D6BUTXE3N/auto-servis-meritoni/",
+          "https://www.instagram.com/auto_service_meritoni/"
+        ],
+        "checkedAt": "2026-11-17T06:41:38.202036+00:00",
+        "note": "Own full Instagram bio and directory contain no week or email; search mostly unrelated Prizren operator, not transferred",
+        "week": null,
+        "sourceAge": "Directory updated 2026-10-12; own source age/limits stated in note."
+      },
+      "googleIdentity": {
+        "placeId": "ChIJRZOpMABjUxMRcj5Tw3v7TUw",
+        "method": "public-maps-ui",
+        "checkedAt": "2026-11-17T06:25:39.613372+00:00",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      }
+    },
+    {
+      "id": "auto-servis-luani-fushe-kosove",
+      "name": "Auto Servis Luani",
+      "city": "Fushë Kosovë",
+      "address": "Hashim Hajdini",
+      "phone": "+38344224723",
+      "lat": 42.633759,
+      "lng": 21.089464,
+      "directory": "https://numrat.com/biznes/LLji2fMkue1S/auto-servis-luani/",
+      "official": null,
+      "placeId": "ChIJQ_9zs_VjUxMRRSzl6vpSxIk",
+      "mapsChecked": true,
+      "qualified": true,
+      "scope": "Mekanik independent directory",
+      "hoursNote": "Directory has no hours/email; exact name and number query returns no attributable own website or social profile. Other Luani locations and contacts not transferred.",
+      "hoursKind": "assumed",
+      "email": null,
+      "checkedAt": "2026-11-17T06:27:59.398786+00:00",
+      "translations": {
+        "de": "Fahrzeugservice und Reparatur",
+        "en": "Vehicle servicing and repair",
+        "sq": "Servisim dhe riparim automjetesh"
+      },
+      "sourceUrls": [
+        "https://numrat.com/biznes/LLji2fMkue1S/auto-servis-luani/"
+      ],
+      "selectedWhatsapp": "",
+      "selectionReason": "Prefer independently evidenced primary when positively checked; otherwise use positively checked, independently advertised workshop secondary. No prefix conversion.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://numrat.com/biznes/LLji2fMkue1S/auto-servis-luani/",
+        "checkedAt": "2026-11-17T06:41:38.202036+00:00",
+        "status": "not-found",
+        "checkedUrls": [
+          "https://numrat.com/biznes/LLji2fMkue1S/auto-servis-luani/"
+        ],
+        "note": "No attributable public business email found in checked directory, own sources where available, and targeted own website/Facebook/Instagram discovery; namesake contacts not transferred."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "sourceUrls": [
+          "https://numrat.com/biznes/LLji2fMkue1S/auto-servis-luani/"
+        ],
+        "checkedAt": "2026-11-17T06:41:38.202036+00:00",
+        "note": "Directory has no hours/email; exact name and number query returns no attributable own website or social profile. Other Luani locations and contacts not transferred.",
+        "week": null,
+        "sourceAge": "Directory updated 2026-10-12; own source age/limits stated in note."
+      },
+      "googleIdentity": {
+        "placeId": "ChIJQ_9zs_VjUxMRRSzl6vpSxIk",
+        "method": "public-maps-ui",
+        "checkedAt": "2026-11-17T06:27:59.398786+00:00",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      }
+    },
+    {
+      "id": "dpf-kosova-fushe-kosove",
+      "name": "DPF Kosova",
+      "city": "Fushë Kosovë",
+      "address": "Apollonia E6, rruga per Uglar",
+      "phone": "+38344240333",
+      "lat": 42.640246,
+      "lng": 21.106988,
+      "directory": "https://numrat.com/biznes/iS6sDiGgfNgr/dpf-kosova/",
+      "official": "https://www.facebook.com/dpfkosova1/",
+      "placeId": "ChIJTUB8LmifVBMRpESx5aOYM6g",
+      "mapsChecked": true,
+      "qualified": true,
+      "scope": "Own public page explicitly offers professional DPF/CAT/SCR cleaning for cars as well as heavy vehicles. Only car service published.",
+      "continuity": "Own precise coordinate42.640107190099,21.107139587402 is same premises within20m of directory; exact phone matches",
+      "hoursNote": "Own Facebook business-hours dialog Monday-Saturday09-17, Sunday closed; update age not displayed",
+      "hoursKind": "researched",
+      "hoursWeek": "Mo-Sa09:00-17:00;So closed",
+      "email": "info.dpfkosova@gmail.com",
+      "checkedAt": "2026-11-17T06:33:29.120744+00:00",
+      "translations": {
+        "de": "Professionelle Reinigung von DPF-, Katalysator- und SCR-Systemen",
+        "en": "Professional cleaning of DPF, catalytic converter and SCR systems",
+        "sq": "Pastrim profesional i sistemeve DPF, katalizator dhe SCR"
+      },
+      "sourceUrls": [
+        "https://numrat.com/biznes/iS6sDiGgfNgr/dpf-kosova/",
+        "https://www.facebook.com/dpfkosova1/"
+      ],
+      "selectedWhatsapp": "+38344240333",
+      "selectionReason": "Prefer independently evidenced primary when positively checked; otherwise use positively checked, independently advertised workshop secondary. No prefix conversion.",
+      "publicBusinessEmail": {
+        "address": "info.dpfkosova@gmail.com",
+        "sourceUrl": "https://www.facebook.com/dpfkosova1/",
+        "checkedAt": "2026-11-17T06:41:38.202036+00:00",
+        "status": "publicly-sourced",
+        "checkedUrls": [
+          "https://numrat.com/biznes/iS6sDiGgfNgr/dpf-kosova/",
+          "https://www.facebook.com/dpfkosova1/"
+        ],
+        "note": "Public business contact only; no deliverability or marketing-consent claim."
+      },
+      "openingHoursResearch": {
+        "kind": "researched",
+        "sourceUrls": [
+          "https://numrat.com/biznes/iS6sDiGgfNgr/dpf-kosova/",
+          "https://www.facebook.com/dpfkosova1/"
+        ],
+        "checkedAt": "2026-11-17T06:41:38.202036+00:00",
+        "note": "Own Facebook business-hours dialog Monday-Saturday09-17, Sunday closed; update age not displayed",
+        "week": "Mo-Sa09:00-17:00;So closed",
+        "sourceAge": "Directory updated 2026-10-12; own source age/limits stated in note."
+      },
+      "googleIdentity": {
+        "placeId": "ChIJTUB8LmifVBMRpESx5aOYM6g",
+        "method": "public-maps-ui",
+        "checkedAt": "2026-11-17T06:33:29.120744+00:00",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      }
+    },
+    {
+      "id": "lr-motors-fushe-kosove",
+      "name": "LR MOTORS",
+      "city": "Fushë Kosovë",
+      "address": "Rr. Agron Rrahmani",
+      "phone": "+38344240688",
+      "additionalPhones": ["+38344466366"],
+      "lat": 42.638465,
+      "lng": 21.107912,
+      "directory": "https://numrat.com/biznes/FMM7xE7ErUIc/lr-motors/",
+      "official": "https://www.instagram.com/lr_motors/",
+      "additionalSource": "https://www.facebook.com/LandRoverMotors/",
+      "placeId": "ChIJA_GZcQWfVBMRT_ODHrqsThQ",
+      "mapsChecked": true,
+      "qualified": true,
+      "scope": "Own Instagram explicitly services Land Rover vehicles; no authorized-dealer claim",
+      "continuity": "Current own Instagram publishes exact +383 primary and secondary, superseding legacy +377 Facebook contact. Own street/town matches independent premises; Facebook only town no competing precise pin.",
+      "hoursNote": "Own Facebook business-hours dialog Mon-Fri08-17; Saturday/Sunday closed. Update age not displayed; visible latest post2018. Current Instagram verifies primary and secondary international contacts. Linked website ERR_BLOCKED_BY_CLIENT, not bypassed.",
+      "hoursKind": "researched",
+      "email": "info@lr-motors.com",
+      "checkedAt": "2026-11-17T06:36:50.981781+00:00",
+      "hoursWeek": "Mo-Fr08:00-17:00;Sa-So closed",
+      "translations": {
+        "de": "Fahrzeugservice für Land Rover",
+        "en": "Vehicle servicing for Land Rover",
+        "sq": "Servisim automjetesh Land Rover"
+      },
+      "sourceUrls": [
+        "https://numrat.com/biznes/FMM7xE7ErUIc/lr-motors/",
+        "https://www.instagram.com/lr_motors/",
+        "https://www.facebook.com/LandRoverMotors/"
+      ],
+      "selectedWhatsapp": "+38344466366",
+      "selectionReason": "Prefer independently evidenced primary when positively checked; otherwise use positively checked, independently advertised workshop secondary. No prefix conversion.",
+      "publicBusinessEmail": {
+        "address": "info@lr-motors.com",
+        "sourceUrl": "https://www.facebook.com/LandRoverMotors/",
+        "checkedAt": "2026-11-17T06:41:38.202036+00:00",
+        "status": "publicly-sourced",
+        "checkedUrls": [
+          "https://numrat.com/biznes/FMM7xE7ErUIc/lr-motors/",
+          "https://www.instagram.com/lr_motors/",
+          "https://www.facebook.com/LandRoverMotors/"
+        ],
+        "note": "Public business contact only; no deliverability or marketing-consent claim."
+      },
+      "openingHoursResearch": {
+        "kind": "researched",
+        "sourceUrls": [
+          "https://numrat.com/biznes/FMM7xE7ErUIc/lr-motors/",
+          "https://www.instagram.com/lr_motors/",
+          "https://www.facebook.com/LandRoverMotors/"
+        ],
+        "checkedAt": "2026-11-17T06:41:38.202036+00:00",
+        "note": "Own Facebook business-hours dialog Mon-Fri08-17; Saturday/Sunday closed. Update age not displayed; visible latest post2018. Current Instagram verifies primary and secondary international contacts. Linked website ERR_BLOCKED_BY_CLIENT, not bypassed.",
+        "week": "Mo-Fr08:00-17:00;Sa-So closed",
+        "sourceAge": "Directory updated 2026-10-12; own source age/limits stated in note."
+      },
+      "googleIdentity": {
+        "placeId": "ChIJA_GZcQWfVBMRT_ODHrqsThQ",
+        "method": "public-maps-ui",
+        "checkedAt": "2026-11-17T06:36:50.981781+00:00",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      }
+    },
+    {
+      "id": "mercedes-benz-duda-fushe-kosove",
+      "name": "Mercedes-Benz DUDA Service & Autobartje",
+      "city": "Fushë Kosovë",
+      "address": "300 Rruga e Pejës",
+      "phone": "+38349329112",
+      "additionalPhones": ["+38348329112"],
+      "lat": 42.627235,
+      "lng": 21.088118,
+      "directory": "https://numrat.com/biznes/B4w3rHr3pGNH/mercedes-benz-duda-service-autobartje/",
+      "official": "https://www.facebook.com/100063589029745/",
+      "additionalSource": "https://www.instagram.com/auto_servis_auto_bartje_duda/",
+      "placeId": "ChIJ_bhPds9jUxMRZ7hY2FIC7eU",
+      "mapsChecked": true,
+      "qualified": true,
+      "scope": "Own profiles explicitly car service, diagnostic, AC and alignment; Mercedes servicing independently stated. Tow service not converted into workshop24/7.",
+      "continuity": "Own Instagram Rruga e Pejes, own Facebook exact main and recent post both national contacts; same directory/Maps site. No competing precise own pin.",
+      "hoursNote": "Own Facebook hours dialog Mon-Sat08:30-18, Sunday closed; update age not shown",
+      "hoursKind": "researched",
+      "hoursWeek": "Mo-Sa08:30-18:00;So closed",
+      "email": "bunjaminmaliqi@gmail.com",
+      "checkedAt": "2026-11-17T06:36:50.981781+00:00",
+      "translations": {
+        "de": "Mercedes-Benz-Service, Fahrzeugdiagnose und Klimaservice",
+        "en": "Mercedes-Benz servicing, vehicle diagnostics and air conditioning",
+        "sq": "Servisim Mercedes-Benz, diagnostikim automjetesh dhe klimë"
+      },
+      "sourceUrls": [
+        "https://numrat.com/biznes/B4w3rHr3pGNH/mercedes-benz-duda-service-autobartje/",
+        "https://www.facebook.com/100063589029745/",
+        "https://www.instagram.com/auto_servis_auto_bartje_duda/"
+      ],
+      "selectedWhatsapp": "+38349329112",
+      "selectionReason": "Prefer independently evidenced primary when positively checked; otherwise use positively checked, independently advertised workshop secondary. No prefix conversion.",
+      "publicBusinessEmail": {
+        "address": "bunjaminmaliqi@gmail.com",
+        "sourceUrl": "https://www.facebook.com/100063589029745/",
+        "checkedAt": "2026-11-17T06:41:38.202036+00:00",
+        "status": "publicly-sourced",
+        "checkedUrls": [
+          "https://numrat.com/biznes/B4w3rHr3pGNH/mercedes-benz-duda-service-autobartje/",
+          "https://www.facebook.com/100063589029745/",
+          "https://www.instagram.com/auto_servis_auto_bartje_duda/"
+        ],
+        "note": "Public business contact only; no deliverability or marketing-consent claim."
+      },
+      "openingHoursResearch": {
+        "kind": "researched",
+        "sourceUrls": [
+          "https://numrat.com/biznes/B4w3rHr3pGNH/mercedes-benz-duda-service-autobartje/",
+          "https://www.facebook.com/100063589029745/",
+          "https://www.instagram.com/auto_servis_auto_bartje_duda/"
+        ],
+        "checkedAt": "2026-11-17T06:41:38.202036+00:00",
+        "note": "Own Facebook hours dialog Mon-Sat08:30-18, Sunday closed; update age not shown",
+        "week": "Mo-Sa08:30-18:00;So closed",
+        "sourceAge": "Directory updated 2026-10-12; own source age/limits stated in note."
+      },
+      "googleIdentity": {
+        "placeId": "ChIJ_bhPds9jUxMRZ7hY2FIC7eU",
+        "method": "public-maps-ui",
+        "checkedAt": "2026-11-17T06:36:50.981781+00:00",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      }
+    },
+    {
+      "id": "besi-regllazh-fushe-kosove",
+      "name": "Besi Regllazh",
+      "city": "Fushë Kosovë",
+      "address": "Shefki Kuleta",
+      "phone": "+38344169457",
+      "lat": 42.641742,
+      "lng": 21.097802,
+      "directory": "https://numrat.com/biznes/F7eG7DbuXvut/besi-regllazh/",
+      "official": "https://www.facebook.com/besiregllazh/",
+      "placeId": "ChIJR6Mutb6fVBMRsEwEvziypI8",
+      "mapsChecked": true,
+      "qualified": true,
+      "scope": "Own bio explicitly all-car servicing, AC, tyre replacement and balancing. Alignment in business name not sole service evidence.",
+      "continuity": "Own exact street and pin42.6417724599,21.097853779793 match within6m; own pinned2022 post ties044169457 to Fushe branch and distinguishes Prishtina second branch.",
+      "hoursNote": "Own Facebook business-hours dialog Mon-Sat08-17 Sunday closed; marked updated about two months ago. Own Info has no email/contact-email tab; linked business.site is Google-managed not used for independent hours.",
+      "hoursKind": "researched",
+      "hoursWeek": "Mo-Sa08:00-17:00;So closed",
+      "email": null,
+      "checkedAt": "2026-11-17T06:40:10.965416+00:00",
+      "translations": {
+        "de": "Fahrzeugservice, Reifenservice und Klimaservice",
+        "en": "Vehicle servicing, tyres and air conditioning",
+        "sq": "Servisim automjetesh, goma dhe klimë"
+      },
+      "sourceUrls": [
+        "https://numrat.com/biznes/F7eG7DbuXvut/besi-regllazh/",
+        "https://www.facebook.com/besiregllazh/"
+      ],
+      "selectedWhatsapp": "+38344169457",
+      "selectionReason": "Prefer independently evidenced primary when positively checked; otherwise use positively checked, independently advertised workshop secondary. No prefix conversion.",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://www.facebook.com/besiregllazh/",
+        "checkedAt": "2026-11-17T06:41:38.202036+00:00",
+        "status": "not-found",
+        "checkedUrls": [
+          "https://numrat.com/biznes/F7eG7DbuXvut/besi-regllazh/",
+          "https://www.facebook.com/besiregllazh/"
+        ],
+        "note": "No attributable public business email found in checked directory, own sources where available, and targeted own website/Facebook/Instagram discovery; namesake contacts not transferred."
+      },
+      "openingHoursResearch": {
+        "kind": "researched",
+        "sourceUrls": [
+          "https://numrat.com/biznes/F7eG7DbuXvut/besi-regllazh/",
+          "https://www.facebook.com/besiregllazh/"
+        ],
+        "checkedAt": "2026-11-17T06:41:38.202036+00:00",
+        "note": "Own Facebook business-hours dialog Mon-Sat08-17 Sunday closed; marked updated about two months ago. Own Info has no email/contact-email tab; linked business.site is Google-managed not used for independent hours.",
+        "week": "Mo-Sa08:00-17:00;So closed",
+        "sourceAge": "Directory updated 2026-10-12; own source age/limits stated in note."
+      },
+      "googleIdentity": {
+        "placeId": "ChIJR6Mutb6fVBMRsEwEvziypI8",
+        "method": "public-maps-ui",
+        "checkedAt": "2026-11-17T06:40:10.965416+00:00",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      }
+    }
+  ],
+  "importedWorkshopIds": [
+    "auto-elektro-liri-fushe-kosove",
+    "auto-elektricist-univerzal-fushe-kosove",
+    "auto-servis-meritoni-fushe-kosove",
+    "auto-servis-luani-fushe-kosove",
+    "dpf-kosova-fushe-kosove",
+    "lr-motors-fushe-kosove",
+    "mercedes-benz-duda-fushe-kosove",
+    "besi-regllazh-fushe-kosove"
+  ],
+  "deferred": [
+    {
+      "name": "AutoService-Loni/M",
+      "reason": "Malformed directory address; precise premises unresolved.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "AutoServis XHEKI",
+      "reason": "Historical own precise pin conflicts with directory; today name/phone/Maps match does not settle premises.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "Auto Service BELTI",
+      "reason": "Own current49303254 conflicts with directory49703594; no explicit pairing.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "Auto Servis LUANI Suharekë",
+      "reason": "Historical own legacy international prefix unresolved; matching Instagram street not enough.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "Auto servis EGZONI Suharekë",
+      "reason": "Historical own precise premises conflict remains; matched phone and researched own hours do not settle it.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "AutoNgjyrosje AGONI",
+      "reason": "Own Festari versus directory Naser Kelmeni; precise own pin differs.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "Auto servis OPEL",
+      "reason": "Active Maps uses386 prefix versus independent383; no continuity evidence.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "Auto servis & pjesë Qershori",
+      "reason": "Directory parts retail; passenger-car repair proof unresolved.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "Servisi i Gjipave te Tarzani",
+      "reason": "Historical two premises/two numbers: repair-site/contact role unresolved.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "N.sh Goma te Isa",
+      "reason": "No attributable active Maps target returned in current exact lookup; prior own-source scope requires resolution.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "AMK Automotive",
+      "reason": "Own business focuses parts/batteries/tyres and has competing phone; no qualifying workshop scope.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "ER Garage",
+      "reason": "Own Aleks Caci pin differs from directory Knjaza Milosa by about500m; no continuity proof.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "Auto Color Endriti",
+      "reason": "Current own/search and Maps Prishtina Ramiz Cernica site differs from directory Fushe coordinates; relocation continuity unresolved.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "Auto Servis Govori",
+      "reason": "Own precise pin and directory differ by about340m; same street/phone insufficient for precise site.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "Auto Servis Vista",
+      "reason": "Directory city Fushe versus own Prishtina and Maps Cagllavice; locality attribution requires resolution.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "Auto Service Esati",
+      "reason": "No attributable active Maps target; returned unrelated Swiss business.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "Autoservice QAZA",
+      "reason": "Own same-town contacts differ from directory primary; no pairing established.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "Drivetech",
+      "reason": "Own search source describes wheel sales; qualifying workshop service not established.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "DetailHaus",
+      "reason": "Own precise Facebook pin differs about1km; own50-70m restaurant landmark is near directory but does not conclusively resolve precise premises; excluded.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "AutoserviceVSH",
+      "reason": "Directory street is only XK; full precise independent address not established.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "Auto Dinamika",
+      "reason": "General category only; detailed service qualification not completed.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "Auto Solutions",
+      "reason": "General category and registry contact only; actual workshop scope not established.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    },
+    {
+      "name": "Auto service Kushtrimi",
+      "reason": "Incomplete directory address Rruga per; precise current attribution not completed.",
+      "nextCheck": "Resolve the specific missing identity/scope evidence before a fresh qualification; do not repeat unchanged lookups."
+    }
+  ],
+  "research": {
+    "municipalities": ["Suharekë", "Deçan", "Fushë Kosovë"],
+    "directoryListingsScreened": 128,
+    "countsByTown": {
+      "Suharekë": 41,
+      "Deçan": 12,
+      "Fushë Kosovë": 75
+    },
+    "qualifiedNew": 8,
+    "detailedOrHeld": 31,
+    "deferred": 23,
+    "confirmedIdentityDuplicates": 0,
+    "existingMatches": "Existing catalogue names/phones excluded during screening; not reverified as duplicate identities. No old profile counts as an addition.",
+    "belowPreferredTenReason": "User requires at least eight. Expanded to128 preliminary listings and31 detailed/held cases across3 municipalities; eight satisfy scope/identity gates, conflicts remain excluded.",
+    "sourceLimits": "Directory indexes are preliminary, not128 verified identities. Public directory explicitly identified as such. Historical conflict queue from November4 plus November12/15 manifests checked; later published IDs removed from pending qualification."
+  },
+  "browser": {
+    "profile": "ramizloki82@googlemail.com",
+    "accountVisiblyConfirmed": true,
+    "providerAvailableInInteractiveRetry": true,
+    "visibilityApiReturned": false,
+    "visibilityOverride": "User explicitly confirmed visible panel and instructed continuation in this chat; scheduled provider fix not claimed."
+  },
+  "preflight": {
+    "health": "302 public profiles;9 complete DE/SQ/EN responses; no1102",
+    "visibleProfiles": "Two existing profiles checked in DE/SQ/EN",
+    "fullBackup": "Protected fresh nine-table SQL export; restored isolated SQLite integrity/FK clean; byte-identical to earlier today and prior accepted catalogue rows",
+    "prewriteLiveComparison": true,
+    "deployment": "v1.63.0 a39cd657 at100percent; no deployment change",
+    "runtime": "Node24.21.0 and Go1.27.1 match currentCI"
+  },
+  "openingHours": {
+    "researched": 4,
+    "assumed": 4,
+    "revision": "c146619fc97bd9ae5415e2dab0fe70b94ce6ff74db03a982a0517147ec21faf3",
+    "centralPreparer": true,
+    "noInventedOwnerConfirmation": true
+  },
+  "publicBusinessEmailSummary": {
+    "with": 3,
+    "without": 5,
+    "noDeliverabilityOrConsentClaim": true
+  },
+  "whatsappVerification": {
+    "checks": [
+      {
+        "workshopIds": ["auto-elektro-liri-fushe-kosove"],
+        "phone": "+38345600660",
+        "checkedAt": "2026-11-17T06:32:43.754521+00:00",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "unresolved",
+        "note": "Exact +383 input returned +377 account; not used."
+      },
+      {
+        "workshopIds": ["auto-elektro-liri-fushe-kosove"],
+        "phone": "+38345590059",
+        "checkedAt": "2026-11-17T06:32:43.754521+00:00",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "registered"
+      },
+      {
+        "workshopIds": ["auto-elektricist-univerzal-fushe-kosove"],
+        "phone": "+38344357694",
+        "checkedAt": "2026-11-17T06:32:43.754521+00:00",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "registered"
+      },
+      {
+        "workshopIds": ["auto-servis-meritoni-fushe-kosove"],
+        "phone": "+38349815403",
+        "checkedAt": "2026-11-17T06:33:29.121639+00:00",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "unresolved",
+        "note": "Exact +383 input returns +386 result"
+      },
+      {
+        "workshopIds": ["auto-servis-luani-fushe-kosove"],
+        "phone": "+38344224723",
+        "checkedAt": "2026-11-17T06:34:47.656273+00:00",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "not_registered"
+      },
+      {
+        "workshopIds": ["dpf-kosova-fushe-kosove"],
+        "phone": "+38344240333",
+        "checkedAt": "2026-11-17T06:34:47.656666+00:00",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "registered"
+      },
+      {
+        "workshopIds": ["lr-motors-fushe-kosove"],
+        "phone": "+38344240688",
+        "checkedAt": "2026-11-17T06:36:50.981781+00:00",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "unresolved",
+        "note": "Exact +383 input returned +377 account"
+      },
+      {
+        "workshopIds": ["lr-motors-fushe-kosove"],
+        "phone": "+38344466366",
+        "checkedAt": "2026-11-17T06:36:50.981781+00:00",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "registered",
+        "note": ""
+      },
+      {
+        "workshopIds": ["mercedes-benz-duda-fushe-kosove"],
+        "phone": "+38349329112",
+        "checkedAt": "2026-11-17T06:36:50.981781+00:00",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "registered",
+        "note": ""
+      },
+      {
+        "workshopIds": ["mercedes-benz-duda-fushe-kosove"],
+        "phone": "+38348329112",
+        "checkedAt": "2026-11-17T06:40:10.965416+00:00",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "registered"
+      },
+      {
+        "workshopIds": ["besi-regllazh-fushe-kosove"],
+        "phone": "+38344169457",
+        "checkedAt": "2026-11-17T06:40:10.965416+00:00",
+        "method": "whatsapp_web_phone_number_lookup",
+        "status": "registered"
+      }
+    ],
+    "uniqueNumbersChecked": 11,
+    "registered": 7,
+    "not_registered": 1,
+    "unresolved": 3,
+    "newPreparedContacts": 6,
+    "newPublishedContacts": 0,
+    "noChatsOpened": true,
+    "noMessagesSent": true,
+    "selection": "Positive independently published secondary for Liri andLR because exact primary lookup returned another prefix; positive primary forDUDA despite both registered; all planned numbers checked."
+  },
+  "provider": {
+    "googleApisUsed": false,
+    "browserQueries": "Manual publicUI; no mass collection. Provider request/budget totals not exposed.",
+    "additionalCosts": 0,
+    "newKeysOrSubscriptions": false
+  },
+  "validation": {
+    "catalogueDryRun": {
+      "added": 8,
+      "updated": 0,
+      "deduplicated": 0,
+      "total": 310
+    },
+    "catalogueCheck": "pass",
+    "hoursDryRun": "pass",
+    "translationHash": "workshopTranslationSourceHash only",
+    "localCI": "pending",
+    "independentReviews": "pending",
+    "isolatedReplay": {
+      "statements": 614,
+      "priorRowsPreserved": 1293,
+      "idempotent": true,
+      "integrity": "ok",
+      "foreignKeyViolations": 0
+    }
+  },
+  "publication": {
+    "pr": null,
+    "release": null,
+    "deployment": null,
+    "liveAcceptance": "pending"
+  },
+  "protectedEvidence": "Automation runs/2026-11-17 contains full snapshot, restored/replay databases, research notes and runtime scripts. No secrets, customer records or private chats retained.",
+  "after": {
+    "total": 310,
+    "published": 310,
+    "new": 8
+  }
+}

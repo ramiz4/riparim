@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-11-16T06:50:13.004Z",
+  "updatedAt": "2026-11-17T06:43:30.062Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 302,
+    "published": 310,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -13,7 +13,7 @@
   "googleImport": {
     "status": "completed",
     "reason": "All published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 302,
+    "matchedPlaceIds": 310,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -963,6 +963,47 @@
       }
     },
     {
+      "id": "auto-elektricist-univerzal-fushe-kosove",
+      "name": "Auto elektricist UNIVERZAL",
+      "city": "Fushë Kosovë",
+      "address": "Nora KelmendiFushë",
+      "phone": "+38344357694",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344357694",
+      "brands": [],
+      "services": ["Diagnose & Elektronik"],
+      "serviceDetails": [
+        "Autoelektrik; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Autoelektrik",
+      "description": "Auto elektricist UNIVERZAL in Fushë Kosovë: Autoelektrik. Name, Standort und Geschäftskontakt sind öffentlich belegt. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.64212,
+      "lng": 21.099262,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/QP4yCFM8tnSu/auto-elektricist-univerzal/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-17",
+      "status": "published",
+      "updatedAt": "2026-11-17T06:41:38.202036+00:00",
+      "google": {
+        "placeId": "ChIJPXKO_UCfVBMRhXI_qZN0W4o",
+        "matchedAt": "2026-11-17T06:23:42.464291+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/QP4yCFM8tnSu/auto-elektricist-univerzal/"
+          ],
+          "note": "Individually verified in public Maps UI: name, exact international phone and precise location match. Place ID read from visible official !19s result link and returned with unrelated London fallback. No Google content adopted; no ownership claim."
+        }
+      }
+    },
+    {
       "id": "auto-elektricist-xhaviti-gjakova",
       "name": "Auto elektriçist Xhaviti",
       "city": "Gjakova",
@@ -1224,6 +1265,53 @@
           "sourceLabel": null,
           "checkedAt": "2026-10-04T06:50:11.092Z",
           "sourceUpdatedAt": null
+        }
+      }
+    },
+    {
+      "id": "auto-elektro-liri-fushe-kosove",
+      "name": "Auto Elektro Liri",
+      "city": "Fushë Kosovë",
+      "address": "Fushë-Kosovë 12000",
+      "phone": "+38345600660",
+      "phoneNote": "Weitere Werkstattkontakte: +38345590059; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38345590059",
+      "brands": [],
+      "services": ["Diagnose & Elektronik"],
+      "serviceDetails": [
+        "Autoelektrik und Fahrzeugdiagnose; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Autoelektrik und Fahrzeugdiagnose",
+      "description": "Auto Elektro Liri in Fushë Kosovë: Autoelektrik und Fahrzeugdiagnose. Name, Standort und Geschäftskontakt sind öffentlich belegt. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.634742,
+      "lng": 21.091364,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/Iwm3LRnrKVuz/auto-elektro-liri/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/p/Auto-Elektro-Liri-61576521387205/",
+          "title": "Eigener Betriebsauftritt: Leistungen und öffentliche Betriebsangaben",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-17",
+      "status": "published",
+      "updatedAt": "2026-11-17T06:41:38.202036+00:00",
+      "google": {
+        "placeId": "ChIJxfTNLABjUxMRxRo_ETpnj-w",
+        "matchedAt": "2026-11-17T06:23:00.193164+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/Iwm3LRnrKVuz/auto-elektro-liri/",
+            "https://www.facebook.com/p/Auto-Elektro-Liri-61576521387205/"
+          ],
+          "note": "Individually verified in public Maps UI: name, exact international phone and precise location match. Place ID read from visible official !19s result link and returned with unrelated London fallback. No Google content adopted; no ownership claim."
         }
       }
     },
@@ -6620,6 +6708,47 @@
       }
     },
     {
+      "id": "auto-servis-luani-fushe-kosove",
+      "name": "Auto Servis Luani",
+      "city": "Fushë Kosovë",
+      "address": "Hashim Hajdini",
+      "phone": "+38344224723",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Fahrzeugservice und Reparatur; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice und Reparatur",
+      "description": "Auto Servis Luani in Fushë Kosovë: Fahrzeugservice und Reparatur. Name, Standort und Geschäftskontakt sind öffentlich belegt. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.633759,
+      "lng": 21.089464,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/LLji2fMkue1S/auto-servis-luani/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-17",
+      "status": "published",
+      "updatedAt": "2026-11-17T06:41:38.202036+00:00",
+      "google": {
+        "placeId": "ChIJQ_9zs_VjUxMRRSzl6vpSxIk",
+        "matchedAt": "2026-11-17T06:27:59.398786+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/LLji2fMkue1S/auto-servis-luani/"
+          ],
+          "note": "Individually verified in public Maps UI: name, exact international phone and precise location match. Place ID read from visible official !19s result link and returned with unrelated London fallback. No Google content adopted; no ownership claim."
+        }
+      }
+    },
+    {
       "id": "auto-servis-luli-kamenice",
       "name": "AutoServis Luli",
       "city": "Kamenicë",
@@ -6918,6 +7047,53 @@
             "https://www.google.com/maps/search/?api=1&query=Google-Identit%C3%A4tspr%C3%BCfung&query_place_id=ChIJCz9-2W6fVBMRuVUellpelNw"
           ],
           "note": "The current business advertisement links its previous and current contacts. The direct Maps link and valid Place ID select the same business with a confirmed address."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-meritoni-fushe-kosove",
+      "name": "Auto Servis Meritoni",
+      "city": "Fushë Kosovë",
+      "address": "Fushë-Kosovë 12000",
+      "phone": "+38349815403",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung", "Reifen & Klima"],
+      "serviceDetails": [
+        "Fahrzeugservice, Reifenservice und Klimaservice; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice, Reifenservice und Klimaservice",
+      "description": "Auto Servis Meritoni in Fushë Kosovë: Fahrzeugservice, Reifenservice und Klimaservice. Name, Standort und Geschäftskontakt sind öffentlich belegt. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.616667,
+      "lng": 21.075129,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/jU9D6BUTXE3N/auto-servis-meritoni/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.instagram.com/auto_service_meritoni/",
+          "title": "Eigener Betriebsauftritt: Leistungen und öffentliche Betriebsangaben",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-17",
+      "status": "published",
+      "updatedAt": "2026-11-17T06:41:38.202036+00:00",
+      "google": {
+        "placeId": "ChIJRZOpMABjUxMRcj5Tw3v7TUw",
+        "matchedAt": "2026-11-17T06:25:39.613372+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/jU9D6BUTXE3N/auto-servis-meritoni/",
+            "https://www.instagram.com/auto_service_meritoni/"
+          ],
+          "note": "Individually verified in public Maps UI: name, exact international phone and precise location match. Place ID read from visible official !19s result link and returned with unrelated London fallback. No Google content adopted; no ownership claim."
         }
       }
     },
@@ -10712,6 +10888,53 @@
       }
     },
     {
+      "id": "besi-regllazh-fushe-kosove",
+      "name": "Besi Regllazh",
+      "city": "Fushë Kosovë",
+      "address": "Shefki Kuleta",
+      "phone": "+38344169457",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344169457",
+      "brands": [],
+      "services": ["Inspektion & Wartung", "Reifen & Klima"],
+      "serviceDetails": [
+        "Fahrzeugservice, Reifenservice und Klimaservice; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice, Reifenservice und Klimaservice",
+      "description": "Besi Regllazh in Fushë Kosovë: Fahrzeugservice, Reifenservice und Klimaservice. Name, Standort und Geschäftskontakt sind öffentlich belegt. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.641742,
+      "lng": 21.097802,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/F7eG7DbuXvut/besi-regllazh/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/besiregllazh/",
+          "title": "Eigener Betriebsauftritt: Leistungen und öffentliche Betriebsangaben",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-17",
+      "status": "published",
+      "updatedAt": "2026-11-17T06:41:38.202036+00:00",
+      "google": {
+        "placeId": "ChIJR6Mutb6fVBMRsEwEvziypI8",
+        "matchedAt": "2026-11-17T06:40:10.965416+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/F7eG7DbuXvut/besi-regllazh/",
+            "https://www.facebook.com/besiregllazh/"
+          ],
+          "note": "Individually verified in public Maps UI: name, exact international phone and precise location match. Place ID read from visible official !19s result link and returned with unrelated London fallback. No Google content adopted; no ownership claim."
+        }
+      }
+    },
+    {
       "id": "bmw-prishtina-prishtina",
       "name": "BMW Prishtina",
       "city": "Prishtina",
@@ -11286,6 +11509,53 @@
             "https://www.gjithebiznesi.com/XK/dpf-auto-gjini-049-445-589"
           ],
           "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
+        }
+      }
+    },
+    {
+      "id": "dpf-kosova-fushe-kosove",
+      "name": "DPF Kosova",
+      "city": "Fushë Kosovë",
+      "address": "Apollonia E6, rruga per Uglar",
+      "phone": "+38344240333",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344240333",
+      "brands": [],
+      "services": ["Motor & Getriebe"],
+      "serviceDetails": [
+        "Professionelle Reinigung von DPF-, Katalysator- und SCR-Systemen; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Professionelle Reinigung von DPF-, Katalysator- und SCR-Systemen",
+      "description": "DPF Kosova in Fushë Kosovë: Professionelle Reinigung von DPF-, Katalysator- und SCR-Systemen. Name, Standort und Geschäftskontakt sind öffentlich belegt. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.640246,
+      "lng": 21.106988,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/iS6sDiGgfNgr/dpf-kosova/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/dpfkosova1/",
+          "title": "Eigener Betriebsauftritt: Leistungen und öffentliche Betriebsangaben",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-17",
+      "status": "published",
+      "updatedAt": "2026-11-17T06:41:38.202036+00:00",
+      "google": {
+        "placeId": "ChIJTUB8LmifVBMRpESx5aOYM6g",
+        "matchedAt": "2026-11-17T06:33:29.120744+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/iS6sDiGgfNgr/dpf-kosova/",
+            "https://www.facebook.com/dpfkosova1/"
+          ],
+          "note": "Individually verified in public Maps UI: name, exact international phone and precise location match. Place ID read from visible official !19s result link and returned with unrelated London fallback. No Google content adopted; no ownership claim."
         }
       }
     },
@@ -12380,6 +12650,59 @@
       }
     },
     {
+      "id": "lr-motors-fushe-kosove",
+      "name": "LR MOTORS",
+      "city": "Fushë Kosovë",
+      "address": "Rr. Agron Rrahmani",
+      "phone": "+38344240688",
+      "phoneNote": "Weitere Werkstattkontakte: +38344466366; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344466366",
+      "brands": ["Land Rover"],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Fahrzeugservice für Land Rover; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice für Land Rover",
+      "description": "LR MOTORS in Fushë Kosovë: Fahrzeugservice für Land Rover. Name, Standort und Geschäftskontakt sind öffentlich belegt. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.638465,
+      "lng": 21.107912,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/FMM7xE7ErUIc/lr-motors/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.instagram.com/lr_motors/",
+          "title": "Eigener Betriebsauftritt: Leistungen und öffentliche Betriebsangaben",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.facebook.com/LandRoverMotors/",
+          "title": "Eigener Betriebsauftritt: Leistungen und öffentliche Betriebsangaben",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-17",
+      "status": "published",
+      "updatedAt": "2026-11-17T06:41:38.202036+00:00",
+      "google": {
+        "placeId": "ChIJA_GZcQWfVBMRT_ODHrqsThQ",
+        "matchedAt": "2026-11-17T06:36:50.981781+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/FMM7xE7ErUIc/lr-motors/",
+            "https://www.instagram.com/lr_motors/",
+            "https://www.facebook.com/LandRoverMotors/"
+          ],
+          "note": "Individually verified in public Maps UI: name, exact international phone and precise location match. Place ID read from visible official !19s result link and returned with unrelated London fallback. No Google content adopted; no ownership claim."
+        }
+      }
+    },
+    {
       "id": "luxury-auto-detailing-gjilan",
       "name": "Luxury Auto Detailing",
       "city": "Gjilan",
@@ -12574,6 +12897,63 @@
             "https://baaf-ks.com/sip/garanti.php"
           ],
           "note": "The official phone number, distinctive business identifier and map location linked from the business's own contact page confirm the workshop."
+        }
+      }
+    },
+    {
+      "id": "mercedes-benz-duda-fushe-kosove",
+      "name": "Mercedes-Benz DUDA Service & Autobartje",
+      "city": "Fushë Kosovë",
+      "address": "300 Rruga e Pejës",
+      "phone": "+38349329112",
+      "phoneNote": "Weitere Werkstattkontakte: +38348329112; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349329112",
+      "brands": ["Mercedes-Benz"],
+      "services": [
+        "Inspektion & Wartung",
+        "Diagnose & Elektronik",
+        "Reifen & Klima"
+      ],
+      "serviceDetails": [
+        "Mercedes-Benz-Service, Fahrzeugdiagnose und Klimaservice; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Mercedes-Benz-Service, Fahrzeugdiagnose und Klimaservice",
+      "description": "Mercedes-Benz DUDA Service & Autobartje in Fushë Kosovë: Mercedes-Benz-Service, Fahrzeugdiagnose und Klimaservice. Name, Standort und Geschäftskontakt sind öffentlich belegt. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.627235,
+      "lng": 21.088118,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/B4w3rHr3pGNH/mercedes-benz-duda-service-autobartje/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/100063589029745/",
+          "title": "Eigener Betriebsauftritt: Leistungen und öffentliche Betriebsangaben",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/auto_servis_auto_bartje_duda/",
+          "title": "Eigener Betriebsauftritt: Leistungen und öffentliche Betriebsangaben",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-17",
+      "status": "published",
+      "updatedAt": "2026-11-17T06:41:38.202036+00:00",
+      "google": {
+        "placeId": "ChIJ_bhPds9jUxMRZ7hY2FIC7eU",
+        "matchedAt": "2026-11-17T06:36:50.981781+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/B4w3rHr3pGNH/mercedes-benz-duda-service-autobartje/",
+            "https://www.facebook.com/100063589029745/",
+            "https://www.instagram.com/auto_servis_auto_bartje_duda/"
+          ],
+          "note": "Individually verified in public Maps UI: name, exact international phone and precise location match. Place ID read from visible official !19s result link and returned with unrelated London fallback. No Google content adopted; no ownership claim."
         }
       }
     },
