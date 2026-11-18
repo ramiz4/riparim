@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "c146619fc97bd9ae5415e2dab0fe70b94ce6ff74db03a982a0517147ec21faf3",
+  "revision": "11b3fd27db07cdd2d6a3de5fa8304f43e1b2c726170ff16ae99c02e7e3675873",
   "records": [
     {
       "id": "adonis-garage-ferizaj",
@@ -3118,6 +3118,87 @@
           "Geschlossen"
         ],
         "earlierPlan": "Startseite: Samstag 08:00-17:00. Footer: Montag–Samstag 08:00-18:00."
+      }
+    },
+    {
+      "id": "auto-garazha-dielli-ferizaj",
+      "expected": {
+        "name": "Auto Garazha dielli",
+        "city": "Ferizaj",
+        "address": "Nnaim beka",
+        "phone": "+38349444968"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-18",
+        "source": "https://numrat.com/biznes/t8rOCBB0XBhK/auto-garazha-dielli/",
+        "sourceName": "Auto Garazha dielli",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated October12 has no hours/email. Focused own website/Facebook/Instagram/email discovery returned different Auto Dielli dealer/phone, rent-a-car and foreign garage; none attributed to this site. No usable non-Google weekly schedule.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
       }
     },
     {
@@ -10492,6 +10573,87 @@
       }
     },
     {
+      "id": "auto-servis-fixit-ferizaj",
+      "expected": {
+        "name": "Auto Servis Fixit",
+        "city": "Ferizaj",
+        "address": "Rruga Gursel Dhe Bajram Sylejmani",
+        "phone": "+38345548340"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-18",
+        "source": "https://numrat.com/biznes/pYUqszavVZMk/auto-servis-fixit/ | https://www.facebook.com/100083009628612/ | https://www.instagram.com/autoservis.fixit/",
+        "sourceName": "Auto Servis Fixit",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No weekly hours or email in directory, full own Instagram bio or Facebook contact/details; targeted website/social/email discovery did not find another attributable source. Directory October12, own latest visible post July11,2025. Google/AI schedule not used.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-servis-ford-jashanica-prishtina",
       "expected": {
         "name": "Auto Servis Ford Jashanica",
@@ -11191,6 +11353,87 @@
           "Geschlossen"
         ],
         "earlierPlan": "24 Stunden geöffnet | 24 Stunden geöffnet | 24 Stunden geöffnet | 24 Stunden geöffnet | 24 Stunden geöffnet | 24 Stunden geöffnet | Geschlossen"
+      }
+    },
+    {
+      "id": "auto-servis-hamza-ferizaj",
+      "expected": {
+        "name": "Auto Servis HAMZA",
+        "city": "Ferizaj",
+        "address": "Sojevë",
+        "phone": "+38349600855"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-18",
+        "source": "https://numrat.com/biznes/unXUf8j3WFgC/auto-servis-hamza/ | https://www.facebook.com/100064870186355/",
+        "sourceName": "Auto Servis HAMZA",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own Facebook week updated about5years ago: Monday08:00-06:00, Tue-Sat08-18, Sunday closed. Unusual overnight Monday not corroborated and not silently corrected to18:00. No usable unambiguous current week; central assumed plan selected with this limit. Directory has no week; targeted own-source search found no attributable website/Instagram schedule.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
       }
     },
     {
@@ -18877,6 +19120,87 @@
       }
     },
     {
+      "id": "autoservis-veba-ferizaj",
+      "expected": {
+        "name": "Autoservis VEBA",
+        "city": "Ferizaj",
+        "address": "Gryka e Kaçanikut 53",
+        "phone": "+38343514422"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-18",
+        "source": "https://numrat.com/biznes/NNFFxicrGxE8/autoservis-veba/",
+        "sourceName": "Autoservis VEBA",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory updated October12 has no hours/email. Focused own website/Facebook/Instagram/email search returned no attributable business source; unrelated Vebi Garage Switzerland excluded. AI/Google schedules not used.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "autoteknik-vllahiu-podujeve",
       "expected": {
         "name": "Autoteknik VLLAHIU",
@@ -23021,6 +23345,95 @@
           "Geschlossen",
           "08:00-17:00",
           "08:00-17:00"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "mercedes-benz-te-rexha-podujeve",
+      "expected": {
+        "name": "Mercedes-Benz Te Rexha",
+        "city": "Podujevë",
+        "address": "Skenderbeu 15",
+        "phone": "+38349418368"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-11-18",
+        "source": "https://numrat.com/biznes/1Dq8HgF3THfx/mercedes-benz-te-rexha/ | https://www.facebook.com/AutoserviceTeRexha/",
+        "sourceName": "Mercedes-Benz Te Rexha",
+        "researchStatus": "Recherchierte Öffnungszeiten",
+        "notes": "Own public Facebook business-hours dialog full week; update age unavailable, latest own visible service post May23,2026. Directory updated October12.",
+        "originalWeek": [
+          "09:00-19:00",
+          "09:00-19:00",
+          "09:00-19:00",
+          "09:00-19:00",
+          "09:00-19:00",
+          "09:00-19:00",
+          "Geschlossen"
         ],
         "earlierPlan": ""
       }

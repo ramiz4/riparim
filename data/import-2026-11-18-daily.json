@@ -1,0 +1,571 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-18",
+  "timezone": "Europe/Zurich",
+  "checkedAt": "2026-11-18T06:43:13.747321+00:00",
+  "status": "prepared-awaiting-ci-review-release-live",
+  "completedDateGuard": false,
+  "minimumRequiredNewPublished": 5,
+  "publishedCountConfirmed": 0,
+  "publishedWorkshopIds": [],
+  "baseCommit": "7b4e6c9691b0218ccb0d10786aac83af957636b4",
+  "branch": "codex/daily-import-2026-11-18",
+  "candidates": [
+    {
+      "id": "mercedes-benz-te-rexha-podujeve",
+      "name": "Mercedes-Benz Te Rexha",
+      "city": "Podujevë",
+      "address": "Skenderbeu 15",
+      "phone": "+38349418368",
+      "additionalPhones": ["+38344666618"],
+      "lat": 42.88907,
+      "lng": 21.182027,
+      "directory": "https://numrat.com/biznes/1Dq8HgF3THfx/mercedes-benz-te-rexha/",
+      "official": "https://www.facebook.com/AutoserviceTeRexha/",
+      "scope": "Own business bio and posts explicitly offer Mercedes-Benz vehicle servicing; not authorized-dealer claim. Both contacts paired in bio.",
+      "continuity": "Own precise point42.889313226335,21.182103526103 within28m of independent directory premises; own address landmark Maxhistrale te Qershiat2 corresponds to same premises.",
+      "email": null,
+      "hoursKind": "researched",
+      "hoursWeek": "Mo-Sa09:00-19:00;So closed",
+      "hoursNote": "Own public Facebook business-hours dialog full week; update age unavailable, latest own visible service post May23,2026. Directory updated October12.",
+      "checkedAt": "2026-11-18T06:20:43.336180+00:00",
+      "status": "verified-for-dry-run",
+      "placeId": "ChIJYxVPt1CLh2YRHmakTskAvGQ",
+      "googleIdentity": {
+        "placeId": "ChIJYxVPt1CLh2YRHmakTskAvGQ",
+        "checkedAt": "2026-11-18T06:23:01.601013+00:00",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "websiteReview": "Website matches49contact and links exact own Facebook/Instagram. Footer displayed49number has conflicting tel:+38344123456, and footer info@terexha.com differs from main Krasniqiblerim331@gmail.com and Facebook business email. Do not use website service/guarantee template claims or footer contact. Email unresolved pending conservative review; primary directory49 and independently paired own Facebook44 contacts remain intended.",
+      "emailStatus": "unresolved",
+      "sourceUrls": [
+        "https://numrat.com/biznes/1Dq8HgF3THfx/mercedes-benz-te-rexha/",
+        "https://www.facebook.com/AutoserviceTeRexha/"
+      ],
+      "selectedWhatsapp": "",
+      "translations": {
+        "de": "Fahrzeugservice für Mercedes-Benz",
+        "en": "Vehicle servicing for Mercedes-Benz",
+        "sq": "Servisim automjetesh Mercedes-Benz"
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://www.facebook.com/AutoserviceTeRexha/",
+        "checkedAt": "2026-11-18T06:42:29.020753+00:00",
+        "status": "unresolved",
+        "checkedUrls": [
+          "https://numrat.com/biznes/1Dq8HgF3THfx/mercedes-benz-te-rexha/",
+          "https://www.facebook.com/AutoserviceTeRexha/",
+          "https://mercedesterexha.com/"
+        ],
+        "note": "Website matches49contact and links exact own Facebook/Instagram. Footer displayed49number has conflicting tel:+38344123456, and footer info@terexha.com differs from main Krasniqiblerim331@gmail.com and Facebook business email. Do not use website service/guarantee template claims or footer contact. Email unresolved pending conservative review; primary directory49 and independently paired own Facebook44 contacts remain intended."
+      },
+      "openingHoursResearch": {
+        "kind": "researched",
+        "sourceUrls": [
+          "https://numrat.com/biznes/1Dq8HgF3THfx/mercedes-benz-te-rexha/",
+          "https://www.facebook.com/AutoserviceTeRexha/"
+        ],
+        "checkedAt": "2026-11-18T06:20:43.336180+00:00",
+        "note": "Own public Facebook business-hours dialog full week; update age unavailable, latest own visible service post May23,2026. Directory updated October12.",
+        "week": "Mo-Sa09:00-19:00;So closed"
+      }
+    },
+    {
+      "id": "auto-servis-fixit-ferizaj",
+      "name": "Auto Servis Fixit",
+      "city": "Ferizaj",
+      "address": "Rruga Gursel Dhe Bajram Sylejmani",
+      "phone": "+38345548340",
+      "lat": 42.355453,
+      "lng": 21.170233,
+      "directory": "https://numrat.com/biznes/pYUqszavVZMk/auto-servis-fixit/",
+      "official": "https://www.facebook.com/100083009628612/",
+      "additionalSource": "https://www.instagram.com/autoservis.fixit/",
+      "scope": "Independent mechanic category, own Facebook exact phone and engine-repair post; own Instagram vehicle service and same street.",
+      "hoursKind": "assumed",
+      "email": null,
+      "hoursNote": "No weekly hours or email in directory, full own Instagram bio or Facebook contact/details; targeted website/social/email discovery did not find another attributable source. Directory October12, own latest visible post July11,2025. Google/AI schedule not used.",
+      "checkedAt": "2026-11-18T06:27:04.299560+00:00",
+      "status": "verified-for-dry-run",
+      "placeId": "ChIJr6Zs5eZ_VBMRYnczqRN9HBo",
+      "googleIdentity": {
+        "placeId": "ChIJr6Zs5eZ_VBMRYnczqRN9HBo",
+        "checkedAt": "2026-11-18T06:27:45.298785+00:00",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "sourceUrls": [
+        "https://numrat.com/biznes/pYUqszavVZMk/auto-servis-fixit/",
+        "https://www.facebook.com/100083009628612/",
+        "https://www.instagram.com/autoservis.fixit/"
+      ],
+      "selectedWhatsapp": "+38345548340",
+      "translations": {
+        "de": "Fahrzeugservice und Reparatur",
+        "en": "Vehicle servicing and repair",
+        "sq": "Servisim dhe riparim automjetesh"
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://www.facebook.com/100083009628612/",
+        "checkedAt": "2026-11-18T06:42:29.020753+00:00",
+        "status": "not-found",
+        "checkedUrls": [
+          "https://numrat.com/biznes/pYUqszavVZMk/auto-servis-fixit/",
+          "https://www.facebook.com/100083009628612/",
+          "https://www.instagram.com/autoservis.fixit/"
+        ],
+        "note": "No weekly hours or email in directory, full own Instagram bio or Facebook contact/details; targeted website/social/email discovery did not find another attributable source. Directory October12, own latest visible post July11,2025. Google/AI schedule not used."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "sourceUrls": [
+          "https://numrat.com/biznes/pYUqszavVZMk/auto-servis-fixit/",
+          "https://www.facebook.com/100083009628612/",
+          "https://www.instagram.com/autoservis.fixit/"
+        ],
+        "checkedAt": "2026-11-18T06:27:04.299560+00:00",
+        "note": "No weekly hours or email in directory, full own Instagram bio or Facebook contact/details; targeted website/social/email discovery did not find another attributable source. Directory October12, own latest visible post July11,2025. Google/AI schedule not used.",
+        "week": null
+      }
+    },
+    {
+      "id": "auto-servis-hamza-ferizaj",
+      "name": "Auto Servis HAMZA",
+      "city": "Ferizaj",
+      "address": "Sojevë",
+      "phone": "+38349600855",
+      "lat": 42.372858,
+      "lng": 21.216316,
+      "directory": "https://numrat.com/biznes/unXUf8j3WFgC/auto-servis-hamza/",
+      "official": "https://www.facebook.com/100064870186355/",
+      "scope": "Independent mechanic category plus exact own business name and phone.",
+      "hoursKind": "assumed",
+      "email": "hamzaservis@hotmail.com",
+      "hoursNote": "Own Facebook week updated about5years ago: Monday08:00-06:00, Tue-Sat08-18, Sunday closed. Unusual overnight Monday not corroborated and not silently corrected to18:00. No usable unambiguous current week; central assumed plan selected with this limit. Directory has no week; targeted own-source search found no attributable website/Instagram schedule.",
+      "checkedAt": "2026-11-18T06:31:30.475729+00:00",
+      "status": "verified-for-dry-run",
+      "placeId": "ChIJrdwc75t9VBMRc7a07YhxrE8",
+      "googleIdentity": {
+        "placeId": "ChIJrdwc75t9VBMRc7a07YhxrE8",
+        "checkedAt": "2026-11-18T06:32:06.555506+00:00",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "sourceUrls": [
+        "https://numrat.com/biznes/unXUf8j3WFgC/auto-servis-hamza/",
+        "https://www.facebook.com/100064870186355/"
+      ],
+      "selectedWhatsapp": "+38349600855",
+      "translations": {
+        "de": "Fahrzeugservice und Reparatur",
+        "en": "Vehicle servicing and repair",
+        "sq": "Servisim dhe riparim automjetesh"
+      },
+      "publicBusinessEmail": {
+        "address": "hamzaservis@hotmail.com",
+        "sourceUrl": "https://www.facebook.com/100064870186355/",
+        "checkedAt": "2026-11-18T06:42:29.020753+00:00",
+        "status": "publicly-sourced",
+        "checkedUrls": [
+          "https://numrat.com/biznes/unXUf8j3WFgC/auto-servis-hamza/",
+          "https://www.facebook.com/100064870186355/"
+        ],
+        "note": "Own Facebook week updated about5years ago: Monday08:00-06:00, Tue-Sat08-18, Sunday closed. Unusual overnight Monday not corroborated and not silently corrected to18:00. No usable unambiguous current week; central assumed plan selected with this limit. Directory has no week; targeted own-source search found no attributable website/Instagram schedule."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "sourceUrls": [
+          "https://numrat.com/biznes/unXUf8j3WFgC/auto-servis-hamza/",
+          "https://www.facebook.com/100064870186355/"
+        ],
+        "checkedAt": "2026-11-18T06:31:30.475729+00:00",
+        "note": "Own Facebook week updated about5years ago: Monday08:00-06:00, Tue-Sat08-18, Sunday closed. Unusual overnight Monday not corroborated and not silently corrected to18:00. No usable unambiguous current week; central assumed plan selected with this limit. Directory has no week; targeted own-source search found no attributable website/Instagram schedule.",
+        "week": null
+      }
+    },
+    {
+      "id": "autoservis-veba-ferizaj",
+      "name": "Autoservis VEBA",
+      "city": "Ferizaj",
+      "address": "Gryka e Kaçanikut 53",
+      "phone": "+38343514422",
+      "lat": 42.367138,
+      "lng": 21.180461,
+      "directory": "https://numrat.com/biznes/NNFFxicrGxE8/autoservis-veba/",
+      "official": null,
+      "scope": "Explicit mechanic independent directory with numbered street and precise premises.",
+      "hoursKind": "assumed",
+      "email": null,
+      "hoursNote": "Directory updated October12 has no hours/email. Focused own website/Facebook/Instagram/email search returned no attributable business source; unrelated Vebi Garage Switzerland excluded. AI/Google schedules not used.",
+      "checkedAt": "2026-11-18T06:33:03.488915+00:00",
+      "status": "verified-for-dry-run",
+      "placeId": "ChIJLd0yGXp_VBMRDysQJ8poGcg",
+      "googleIdentity": {
+        "placeId": "ChIJLd0yGXp_VBMRDysQJ8poGcg",
+        "checkedAt": "2026-11-18T06:33:40.503741+00:00",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "sourceUrls": ["https://numrat.com/biznes/NNFFxicrGxE8/autoservis-veba/"],
+      "selectedWhatsapp": "+38343514422",
+      "translations": {
+        "de": "Fahrzeugservice und Reparatur",
+        "en": "Vehicle servicing and repair",
+        "sq": "Servisim dhe riparim automjetesh"
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://numrat.com/biznes/NNFFxicrGxE8/autoservis-veba/",
+        "checkedAt": "2026-11-18T06:42:29.020753+00:00",
+        "status": "not-found",
+        "checkedUrls": [
+          "https://numrat.com/biznes/NNFFxicrGxE8/autoservis-veba/"
+        ],
+        "note": "Directory updated October12 has no hours/email. Focused own website/Facebook/Instagram/email search returned no attributable business source; unrelated Vebi Garage Switzerland excluded. AI/Google schedules not used."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "sourceUrls": [
+          "https://numrat.com/biznes/NNFFxicrGxE8/autoservis-veba/"
+        ],
+        "checkedAt": "2026-11-18T06:33:03.488915+00:00",
+        "note": "Directory updated October12 has no hours/email. Focused own website/Facebook/Instagram/email search returned no attributable business source; unrelated Vebi Garage Switzerland excluded. AI/Google schedules not used.",
+        "week": null
+      }
+    },
+    {
+      "id": "auto-garazha-dielli-ferizaj",
+      "name": "Auto Garazha dielli",
+      "city": "Ferizaj",
+      "address": "Nnaim beka",
+      "phone": "+38349444968",
+      "lat": 42.373478,
+      "lng": 21.145881,
+      "directory": "https://numrat.com/biznes/t8rOCBB0XBhK/auto-garazha-dielli/",
+      "official": null,
+      "scope": "Explicit mechanic independent directory with street and precise premises.",
+      "hoursKind": "assumed",
+      "email": null,
+      "hoursNote": "Directory updated October12 has no hours/email. Focused own website/Facebook/Instagram/email discovery returned different Auto Dielli dealer/phone, rent-a-car and foreign garage; none attributed to this site. No usable non-Google weekly schedule.",
+      "checkedAt": "2026-11-18T06:38:15.333886+00:00",
+      "placeId": "ChIJ59Su3vx_VBMROcglkYDRaUM",
+      "googleIdentity": {
+        "placeId": "ChIJ59Su3vx_VBMROcglkYDRaUM",
+        "checkedAt": "2026-11-18T06:38:15.333886+00:00",
+        "method": "public-maps-ui",
+        "officialVisibleLink": true,
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true
+      },
+      "status": "verified-for-dry-run",
+      "sourceUrls": [
+        "https://numrat.com/biznes/t8rOCBB0XBhK/auto-garazha-dielli/"
+      ],
+      "selectedWhatsapp": "+38349444968",
+      "translations": {
+        "de": "Fahrzeugservice und Reparatur",
+        "en": "Vehicle servicing and repair",
+        "sq": "Servisim dhe riparim automjetesh"
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://numrat.com/biznes/t8rOCBB0XBhK/auto-garazha-dielli/",
+        "checkedAt": "2026-11-18T06:42:29.020753+00:00",
+        "status": "not-found",
+        "checkedUrls": [
+          "https://numrat.com/biznes/t8rOCBB0XBhK/auto-garazha-dielli/"
+        ],
+        "note": "Directory updated October12 has no hours/email. Focused own website/Facebook/Instagram/email discovery returned different Auto Dielli dealer/phone, rent-a-car and foreign garage; none attributed to this site. No usable non-Google weekly schedule."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "sourceUrls": [
+          "https://numrat.com/biznes/t8rOCBB0XBhK/auto-garazha-dielli/"
+        ],
+        "checkedAt": "2026-11-18T06:38:15.333886+00:00",
+        "note": "Directory updated October12 has no hours/email. Focused own website/Facebook/Instagram/email discovery returned different Auto Dielli dealer/phone, rent-a-car and foreign garage; none attributed to this site. No usable non-Google weekly schedule.",
+        "week": null
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "name": "ASC Service Center",
+      "reason": "Directory has only broad category and no confirmed precise location. Focused own-source search returns unrelated identities.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/MNp26R1yqskS/asc-service-center/"
+      ],
+      "checkedAt": "2026-11-18T06:43:13.747321+00:00",
+      "nextCheck": "Resolve the stated precise identity or visible Place-ID gap using new attributable evidence; do not repeat unchanged searches."
+    },
+    {
+      "name": "Naseri BMW",
+      "reason": "Directory broad category only. Focused own website/social/email query returns no attributable independent service source; AI-generated summary ignored.",
+      "sourceUrls": ["https://numrat.com/biznes/GAJ4FewZ9kut/naseri-bmw/"],
+      "checkedAt": "2026-11-18T06:43:13.747321+00:00",
+      "nextCheck": "Resolve the stated precise identity or visible Place-ID gap using new attributable evidence; do not repeat unchanged searches."
+    },
+    {
+      "name": "Service Leutrimi",
+      "reason": "Own Instagram gives Gryka e Llapit1096 while directory1071, no matching phone in bio; precise site continuity unresolved.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/71L4kIuI84jG/service-leutrimi/",
+        "https://www.instagram.com/autoserviceleutrimi/"
+      ],
+      "checkedAt": "2026-11-18T06:43:13.747321+00:00",
+      "nextCheck": "Resolve the stated precise identity or visible Place-ID gap using new attributable evidence; do not repeat unchanged searches."
+    },
+    {
+      "name": "Auto Servis Mali Prizren",
+      "reason": "Independent directory mechanic scope but no precise mapped premises; own-source discovery only homonyms/general street mention, no independent precise site.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/hCMLEMaW1sv4/auto-servis-mali/"
+      ],
+      "checkedAt": "2026-11-18T06:43:13.747321+00:00",
+      "nextCheck": "Resolve the stated precise identity or visible Place-ID gap using new attributable evidence; do not repeat unchanged searches."
+    },
+    {
+      "name": "Enisi Service shpk",
+      "reason": "Broad directory category only; discovery found industrial/hydraulics-related lead, passenger-car service not established.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/55tM31fpFmo4/enisi-service-shpk/"
+      ],
+      "checkedAt": "2026-11-18T06:43:13.747321+00:00",
+      "nextCheck": "Resolve the stated precise identity or visible Place-ID gap using new attributable evidence; do not repeat unchanged searches."
+    },
+    {
+      "name": "Auto llaker Standox Muçiqi",
+      "reason": "Broad directory category; no attributable own source or independently explicit service description found.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/aqBmq5kWdzDS/auto-llaker-standox-muciqi/"
+      ],
+      "checkedAt": "2026-11-18T06:43:13.747321+00:00",
+      "nextCheck": "Resolve the stated precise identity or visible Place-ID gap using new attributable evidence; do not repeat unchanged searches."
+    },
+    {
+      "name": "AutoService France Center",
+      "reason": "Own repair scope established, but only town-level location and no visible contact at inspected profile; precise independent site not established.",
+      "sourceUrls": ["https://www.facebook.com/francecenter/"],
+      "checkedAt": "2026-11-18T06:43:13.747321+00:00",
+      "nextCheck": "Resolve the stated precise identity or visible Place-ID gap using new attributable evidence; do not repeat unchanged searches."
+    },
+    {
+      "name": "AUTO SERVIS ONARI",
+      "reason": "Own Facebook precise Avdi Shaq Biba point42.37405,21.18955 conflicts with directory42.368705,21.168951; no premises continuity established.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/ebHvGAXUd3bg/auto-servis-onari/",
+        "https://www.facebook.com/p/AUTO-servis-ONARI-100069990874259/"
+      ],
+      "checkedAt": "2026-11-18T06:43:13.747321+00:00",
+      "nextCheck": "Resolve the stated precise identity or visible Place-ID gap using new attributable evidence; do not repeat unchanged searches."
+    },
+    {
+      "name": "Auto Servis HAZIRI",
+      "reason": "Own precise point42.36128,21.16328 and street conflict with independent directory42.35664,21.169716/address122; no premises continuity established.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/KyHvnHeLDmDI/auto-servis-haziri/",
+        "https://www.facebook.com/HazirHajdari/"
+      ],
+      "checkedAt": "2026-11-18T06:43:13.747321+00:00",
+      "nextCheck": "Resolve the stated precise identity or visible Place-ID gap using new attributable evidence; do not repeat unchanged searches."
+    },
+    {
+      "name": "Auto Center LINDI Ferizaj",
+      "reason": "Own precise point42.40256059432,21.118512153625 differs64m from directory42.403133,21.118493; exact premises not resolved. Own FB/Instagram pair primary49contact and repair scope, own Mon-Sat08-18 week/email established but not imported.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/4OF9CODoGgyS/auto-center-lindi/",
+        "https://www.facebook.com/autocenterLINDI/",
+        "https://www.instagram.com/autocenterlindi1/"
+      ],
+      "checkedAt": "2026-11-18T06:43:13.747321+00:00",
+      "nextCheck": "Resolve the stated precise identity or visible Place-ID gap using new attributable evidence; do not repeat unchanged searches."
+    },
+    {
+      "name": "Auto servis LIMI Ferizaj",
+      "reason": "Independent numbered street/phone and public Maps agree, but no visible official Place-ID link obtained; own-source discovery yields other contacts/unassigned namesakes.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/VwF30yVNk5mK/auto-servis-limi/"
+      ],
+      "checkedAt": "2026-11-18T06:43:13.747321+00:00",
+      "nextCheck": "Resolve the stated precise identity or visible Place-ID gap using new attributable evidence; do not repeat unchanged searches."
+    },
+    {
+      "name": "Auto Servis Ismeti Ferizaj",
+      "reason": "Identity and independent own repair evidence/phone match; official visible Place-ID link not obtained in current public UI checks. No import without it.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/9B85Y3O63JcL/auto-servis-ismeti/",
+        "https://www.facebook.com/100060243224538/"
+      ],
+      "checkedAt": "2026-11-18T06:43:13.747321+00:00",
+      "nextCheck": "Resolve the stated precise identity or visible Place-ID gap using new attributable evidence; do not repeat unchanged searches."
+    }
+  ],
+  "whatsappVerification": [
+    {
+      "workshopIds": ["mercedes-benz-te-rexha-podujeve"],
+      "phone": "+38349418368",
+      "checkedAt": "2026-11-18T06:40:09.025808+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "unresolved",
+      "note": "Completed UI account result uses different country prefix 386; exact entered383number not confirmed. No chat opened."
+    },
+    {
+      "workshopIds": ["mercedes-benz-te-rexha-podujeve"],
+      "phone": "+38344666618",
+      "checkedAt": "2026-11-18T06:40:09.025808+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "unresolved",
+      "note": "Completed UI account result uses different country prefix 377; exact entered383number not confirmed. No chat opened."
+    },
+    {
+      "workshopIds": ["auto-servis-fixit-ferizaj"],
+      "phone": "+38345548340",
+      "checkedAt": "2026-11-18T06:40:31.813623+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered"
+    },
+    {
+      "workshopIds": ["auto-servis-hamza-ferizaj"],
+      "phone": "+38349600855",
+      "checkedAt": "2026-11-18T06:40:53.224403+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered"
+    },
+    {
+      "workshopIds": ["autoservis-veba-ferizaj"],
+      "phone": "+38343514422",
+      "checkedAt": "2026-11-18T06:41:14.661762+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered"
+    },
+    {
+      "workshopIds": ["auto-garazha-dielli-ferizaj"],
+      "phone": "+38349444968",
+      "checkedAt": "2026-11-18T06:41:36.468719+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered"
+    }
+  ],
+  "whatsappSummary": {
+    "uniqueNumbersChecked": 6,
+    "registered": 4,
+    "not_registered": 0,
+    "unresolved": 2,
+    "preparedNewContacts": 4,
+    "publishedNewContacts": 0,
+    "noChatsOpened": true,
+    "noMessagesCallsInvitationsOrContacts": true
+  },
+  "emailSummary": {
+    "publiclySourced": 1,
+    "notFound": 3,
+    "unresolved": 1,
+    "publishedWith": 0,
+    "publishedWithout": 0
+  },
+  "hoursSummary": {
+    "researched": 1,
+    "assumed": 4,
+    "centralPreparer": "prepareOpeningHoursImport",
+    "operatorConfirmed": 0,
+    "note": "Te Rexha own Facebook Mon-Sat09-19. Hamza five-year-old Monday08-06 not silently normalized; uncorroborated unusual week not imported as researched. Standard assumed week applies to four fully identity-verified sites."
+  },
+  "research": {
+    "directoryListingsScreened": 89,
+    "countsByTown": {
+      "Istog": 8,
+      "Klinë": 10,
+      "Prizren": 15,
+      "Podujevë": 31,
+      "Ferizaj": 25
+    },
+    "additionalOwnSourceLeads": 1,
+    "qualifiedNew": 5,
+    "detailedDeferred": 12,
+    "confirmedImportDuplicates": 0,
+    "existingMatches": "Previously published names and exact phone matches excluded at preliminary screen; not reverified and not counted as fresh identity duplicates.",
+    "historicalQueue": "241 normalized-name historical hold records deduplicated locally; already published exact names excluded. Unchanged conflicts not re-searched.",
+    "belowPreferredTenReason": "Expanded from64 listings in four municipalities to89 across five plus an own-source lead. Seventeen detailed candidates yield five qualified; remaining detailed identities have source/premises/Place-ID gaps.",
+    "sourceLimits": "Directory is a public third-party directory, not an owned business source. Search AI answers never used as factual evidence."
+  },
+  "browser": {
+    "accountConfirmed": "ramizloki82@googlemail.com",
+    "internalBrowser": true,
+    "scheduledProviderInitiallyMissing": true,
+    "interactiveProviderAvailable": true,
+    "visibilityFalseExplicitlyOverriddenByUser": true,
+    "unattendedRecoveryProven": false
+  },
+  "before": {
+    "published": 310,
+    "catalogueRows": 1321,
+    "tables": 9,
+    "schemaAndRowsEqualLastAcceptance": true,
+    "backup": "Protected runs/2026-11-18/prewrite.sql",
+    "isolatedRestore": "baseline.sqlite",
+    "integrity": "ok",
+    "foreignKeyViolations": 0,
+    "health": "310 published,9 complete DE/SQ/EN HTTP checks; visible full Liri DE/SQ/EN preflight passed",
+    "activeRelease": "v1.64.0",
+    "activeCommit": "7b4e6c9691b0218ccb0d10786aac83af957636b4",
+    "trafficPercent": 100
+  },
+  "import": {
+    "centralMergeDryRun": "exactly5 added,0updated,0deduplicated",
+    "centralMergeWrite": "same5 additions only",
+    "hoursDryRun": "passed",
+    "translations": "DE originals plus SQ/EN with central workshopTranslationSourceHash",
+    "premergeComparison": "pending",
+    "fullLocalCi": "pending",
+    "independentReviews": "pending",
+    "pr": null,
+    "release": null,
+    "liveAcceptance": "pending",
+    "localRegressionCorrection": "Existing workshop-import test requires importedWorkshopIds and after.total; added accurate prepared-batch fields. No test assertion changed.",
+    "reviewCorrection": "Motor & Getriebe removed from four generic service records; retained only for Fixit with explicit own engine-repair evidence."
+  },
+  "provider": {
+    "googleApiRequests": 0,
+    "paidApiRequests": 0,
+    "manualBrowserQueries": "Individual public UI research only; no bulk scraping. Exact provider billing usage unavailable.",
+    "additionalCosts": 0
+  },
+  "additionalCosts": 0,
+  "outreachSent": false,
+  "scheduleChanged": false,
+  "durableEvidenceDirectory": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/runs/2026-11-18",
+  "importedWorkshopIds": [
+    "mercedes-benz-te-rexha-podujeve",
+    "auto-servis-fixit-ferizaj",
+    "auto-servis-hamza-ferizaj",
+    "autoservis-veba-ferizaj",
+    "auto-garazha-dielli-ferizaj"
+  ],
+  "after": {
+    "total": 315,
+    "published": 315,
+    "new": 5,
+    "scope": "Prepared canonical catalogue, not live acceptance"
+  }
+}

@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-11-17T06:43:30.062Z",
+  "updatedAt": "2026-11-18T06:42:39.272Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 310,
+    "published": 315,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -13,7 +13,7 @@
   "googleImport": {
     "status": "completed",
     "reason": "All published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 310,
+    "matchedPlaceIds": 315,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -1790,6 +1790,47 @@
             "https://faqet-e-verdha.cybo.com/XK/prizreni/riparimi-i-makinave-"
           ],
           "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
+        }
+      }
+    },
+    {
+      "id": "auto-garazha-dielli-ferizaj",
+      "name": "Auto Garazha dielli",
+      "city": "Ferizaj",
+      "address": "Nnaim beka",
+      "phone": "+38349444968",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349444968",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Fahrzeugservice und Reparatur; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice und Reparatur",
+      "description": "Auto Garazha dielli in Ferizaj: Fahrzeugservice und Reparatur. Name, Standort und Geschäftskontakt sind öffentlich belegt. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.373478,
+      "lng": 21.145881,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/t8rOCBB0XBhK/auto-garazha-dielli/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-18",
+      "status": "published",
+      "updatedAt": "2026-11-18T06:42:29.020753+00:00",
+      "google": {
+        "placeId": "ChIJ59Su3vx_VBMROcglkYDRaUM",
+        "matchedAt": "2026-11-18T06:38:15.333886+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/t8rOCBB0XBhK/auto-garazha-dielli/"
+          ],
+          "note": "Individually verified in public Maps UI: name, exact international phone and precise location match. Place ID read from visible official !19s result link and returned with unrelated Zurich fallback. No Google content adopted; no ownership claim."
         }
       }
     },
@@ -5992,6 +6033,59 @@
       }
     },
     {
+      "id": "auto-servis-fixit-ferizaj",
+      "name": "Auto Servis Fixit",
+      "city": "Ferizaj",
+      "address": "Rruga Gursel Dhe Bajram Sylejmani",
+      "phone": "+38345548340",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38345548340",
+      "brands": [],
+      "services": ["Inspektion & Wartung", "Motor & Getriebe"],
+      "serviceDetails": [
+        "Fahrzeugservice und Reparatur; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice und Reparatur",
+      "description": "Auto Servis Fixit in Ferizaj: Fahrzeugservice und Reparatur. Name, Standort und Geschäftskontakt sind öffentlich belegt. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.355453,
+      "lng": 21.170233,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/pYUqszavVZMk/auto-servis-fixit/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/100083009628612/",
+          "title": "Eigener Betriebsauftritt: Fahrzeugservice und öffentliche Betriebsangaben",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autoservis.fixit/",
+          "title": "Eigener Betriebsauftritt: Fahrzeugservice und öffentliche Betriebsangaben",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-18",
+      "status": "published",
+      "updatedAt": "2026-11-18T06:42:29.020753+00:00",
+      "google": {
+        "placeId": "ChIJr6Zs5eZ_VBMRYnczqRN9HBo",
+        "matchedAt": "2026-11-18T06:27:45.298785+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/pYUqszavVZMk/auto-servis-fixit/",
+            "https://www.facebook.com/100083009628612/",
+            "https://www.instagram.com/autoservis.fixit/"
+          ],
+          "note": "Individually verified in public Maps UI: name, exact international phone and precise location match. Place ID read from visible official !19s result link and returned with unrelated Zurich fallback. No Google content adopted; no ownership claim."
+        }
+      }
+    },
+    {
       "id": "auto-servis-ford-jashanica-prishtina",
       "name": "Auto Servis Ford Jashanica",
       "city": "Prishtina",
@@ -6398,6 +6492,53 @@
             "https://www.gjithebiznesi.com/XK/auto-servis-good-year-044-371-634"
           ],
           "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-hamza-ferizaj",
+      "name": "Auto Servis HAMZA",
+      "city": "Ferizaj",
+      "address": "Sojevë",
+      "phone": "+38349600855",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38349600855",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Fahrzeugservice und Reparatur; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice und Reparatur",
+      "description": "Auto Servis HAMZA in Ferizaj: Fahrzeugservice und Reparatur. Name, Standort und Geschäftskontakt sind öffentlich belegt. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.372858,
+      "lng": 21.216316,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/unXUf8j3WFgC/auto-servis-hamza/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/100064870186355/",
+          "title": "Eigener Betriebsauftritt: Fahrzeugservice und öffentliche Betriebsangaben",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-18",
+      "status": "published",
+      "updatedAt": "2026-11-18T06:42:29.020753+00:00",
+      "google": {
+        "placeId": "ChIJrdwc75t9VBMRc7a07YhxrE8",
+        "matchedAt": "2026-11-18T06:32:06.555506+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/unXUf8j3WFgC/auto-servis-hamza/",
+            "https://www.facebook.com/100064870186355/"
+          ],
+          "note": "Individually verified in public Maps UI: name, exact international phone and precise location match. Place ID read from visible official !19s result link and returned with unrelated Zurich fallback. No Google content adopted; no ownership claim."
         }
       }
     },
@@ -10554,6 +10695,47 @@
       }
     },
     {
+      "id": "autoservis-veba-ferizaj",
+      "name": "Autoservis VEBA",
+      "city": "Ferizaj",
+      "address": "Gryka e Kaçanikut 53",
+      "phone": "+38343514422",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38343514422",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Fahrzeugservice und Reparatur; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice und Reparatur",
+      "description": "Autoservis VEBA in Ferizaj: Fahrzeugservice und Reparatur. Name, Standort und Geschäftskontakt sind öffentlich belegt. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.367138,
+      "lng": 21.180461,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/NNFFxicrGxE8/autoservis-veba/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-18",
+      "status": "published",
+      "updatedAt": "2026-11-18T06:42:29.020753+00:00",
+      "google": {
+        "placeId": "ChIJLd0yGXp_VBMRDysQJ8poGcg",
+        "matchedAt": "2026-11-18T06:33:40.503741+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/NNFFxicrGxE8/autoservis-veba/"
+          ],
+          "note": "Individually verified in public Maps UI: name, exact international phone and precise location match. Place ID read from visible official !19s result link and returned with unrelated Zurich fallback. No Google content adopted; no ownership claim."
+        }
+      }
+    },
+    {
       "id": "autoteknik-vllahiu-podujeve",
       "name": "Autoteknik VLLAHIU",
       "city": "Podujevë",
@@ -13014,6 +13196,53 @@
             "https://www.openstreetmap.org/way/889901834"
           ],
           "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
+        }
+      }
+    },
+    {
+      "id": "mercedes-benz-te-rexha-podujeve",
+      "name": "Mercedes-Benz Te Rexha",
+      "city": "Podujevë",
+      "address": "Skenderbeu 15",
+      "phone": "+38349418368",
+      "phoneNote": "Weitere Werkstattkontakte: +38344666618; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": ["Mercedes-Benz"],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Fahrzeugservice für Mercedes-Benz; konkreten Leistungsumfang direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice für Mercedes-Benz",
+      "description": "Mercedes-Benz Te Rexha in Podujevë: Fahrzeugservice für Mercedes-Benz. Name, Standort und Geschäftskontakt sind öffentlich belegt. Leistungsumfang und Termine bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.88907,
+      "lng": 21.182027,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/1Dq8HgF3THfx/mercedes-benz-te-rexha/",
+          "title": "Öffentliches Verzeichnis: Name, Kategorie, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/AutoserviceTeRexha/",
+          "title": "Eigener Betriebsauftritt: Fahrzeugservice und öffentliche Betriebsangaben",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-18",
+      "status": "published",
+      "updatedAt": "2026-11-18T06:42:29.020753+00:00",
+      "google": {
+        "placeId": "ChIJYxVPt1CLh2YRHmakTskAvGQ",
+        "matchedAt": "2026-11-18T06:23:01.601013+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "phone_and_location",
+          "sourceUrls": [
+            "https://numrat.com/biznes/1Dq8HgF3THfx/mercedes-benz-te-rexha/",
+            "https://www.facebook.com/AutoserviceTeRexha/"
+          ],
+          "note": "Individually verified in public Maps UI: name, exact international phone and precise location match. Place ID read from visible official !19s result link and returned with unrelated Zurich fallback. No Google content adopted; no ownership claim."
         }
       }
     },
