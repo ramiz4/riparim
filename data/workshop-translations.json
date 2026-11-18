@@ -1042,6 +1042,32 @@
       }
     },
     {
+      "id": "auto-garazha-dielli-ferizaj",
+      "sourceHash": "b6e08b7a7ca5e652f1440e73bc57c79db7cd76ae8779227654b839c6cb294b51",
+      "en": {
+        "specialty": "Vehicle servicing and repair",
+        "description": "Auto Garazha dielli in Ferizaj: Vehicle servicing and repair. The name, location and business contact are publicly documented. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle servicing and repair; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim dhe riparim automjetesh",
+        "description": "Auto Garazha dielli në Ferizaj: Servisim dhe riparim automjetesh. Emri, vendndodhja dhe kontakti i biznesit janë të dokumentuar publikisht. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Servisim dhe riparim automjetesh; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti"
+        ]
+      }
+    },
+    {
       "id": "auto-gazi-lipjan",
       "sourceHash": "27c4020318310cf5c2e6641e5da693edb10888088d76743728b4376379fd43b8",
       "sq": {
@@ -3480,6 +3506,36 @@
       }
     },
     {
+      "id": "auto-servis-fixit-ferizaj",
+      "sourceHash": "4cf9fedbaa8eb96a389a504e6161f7111fdb07b17b054c86fff1c503204f3096",
+      "en": {
+        "specialty": "Vehicle servicing and repair",
+        "description": "Auto Servis Fixit in Ferizaj: Vehicle servicing and repair. The name, location and business contact are publicly documented. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle servicing and repair; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact",
+          "Business’s own profile: services and public business information",
+          "Business’s own profile: services and public business information"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim dhe riparim automjetesh",
+        "description": "Auto Servis Fixit në Ferizaj: Servisim dhe riparim automjetesh. Emri, vendndodhja dhe kontakti i biznesit janë të dokumentuar publikisht. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Servisim dhe riparim automjetesh; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: shërbime dhe të dhëna publike",
+          "Profili i vetë biznesit: shërbime dhe të dhëna publike"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-ford-jashanica-prishtina",
       "sourceHash": "76e5f7a885d601c0696de3f261ef2b2803dd8c61db6f63e66688f325a4b71be9",
       "sq": {
@@ -3700,6 +3756,34 @@
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category",
           "Contact, location and passenger-car service cross-check dated 5 October 2026"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-hamza-ferizaj",
+      "sourceHash": "96b0603c21d45458c79b52f91ffcbc2a41836e5e316340be0eeeb7b322f25209",
+      "en": {
+        "specialty": "Vehicle servicing and repair",
+        "description": "Auto Servis HAMZA in Ferizaj: Vehicle servicing and repair. The name, location and business contact are publicly documented. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle servicing and repair; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact",
+          "Business’s own profile: services and public business information"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim dhe riparim automjetesh",
+        "description": "Auto Servis HAMZA në Ferizaj: Servisim dhe riparim automjetesh. Emri, vendndodhja dhe kontakti i biznesit janë të dokumentuar publikisht. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Servisim dhe riparim automjetesh; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: shërbime dhe të dhëna publike"
         ]
       }
     },
@@ -6138,6 +6222,32 @@
       }
     },
     {
+      "id": "autoservis-veba-ferizaj",
+      "sourceHash": "0697ff13609fec4051311dd0a58593e8983bba33f4bbd14a2eb0c2b97df96989",
+      "en": {
+        "specialty": "Vehicle servicing and repair",
+        "description": "Autoservis VEBA in Ferizaj: Vehicle servicing and repair. The name, location and business contact are publicly documented. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle servicing and repair; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim dhe riparim automjetesh",
+        "description": "Autoservis VEBA në Ferizaj: Servisim dhe riparim automjetesh. Emri, vendndodhja dhe kontakti i biznesit janë të dokumentuar publikisht. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Servisim dhe riparim automjetesh; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti"
+        ]
+      }
+    },
+    {
       "id": "autoteknik-vllahiu-podujeve",
       "sourceHash": "cb74e26e2f37d55dd0517561b1ea9491867f0d561f3f064ff8231886372bc455",
       "sq": {
@@ -7564,6 +7674,34 @@
           "Cybo: individual listing “Mercedes-Benz-Limi-Service” with name · address · telephone · vehicle service category",
           "Contact, location and passenger-car service cross-check dated 5 October 2026",
           "Contact, location and passenger-car service cross-check dated 5 October 2026"
+        ]
+      }
+    },
+    {
+      "id": "mercedes-benz-te-rexha-podujeve",
+      "sourceHash": "7448d8e422976f1b8279c55dec422ba01394480b3cabcea00160898dfa8fd738",
+      "en": {
+        "specialty": "Vehicle servicing for Mercedes-Benz",
+        "description": "Mercedes-Benz Te Rexha in Podujevë: Vehicle servicing for Mercedes-Benz. The name, location and business contact are publicly documented. Please confirm the services and appointments directly with the business.",
+        "serviceDetails": [
+          "Vehicle servicing for Mercedes-Benz; confirm the specific services directly with the business."
+        ],
+        "phoneNote": "Additional workshop contacts: +38344666618; availability not confirmed",
+        "sourceTitles": [
+          "Public directory: name, category, location and business contact",
+          "Business’s own profile: services and public business information"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim automjetesh Mercedes-Benz",
+        "description": "Mercedes-Benz Te Rexha në Podujevë: Servisim automjetesh Mercedes-Benz. Emri, vendndodhja dhe kontakti i biznesit janë të dokumentuar publikisht. Ju lutemi sqaroni shërbimet dhe terminet drejtpërdrejt me biznesin.",
+        "serviceDetails": [
+          "Servisim automjetesh Mercedes-Benz; sqaroni shërbimet konkrete drejtpërdrejt me biznesin."
+        ],
+        "phoneNote": "Kontakte të tjera të servisit: +38344666618; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
+          "Profili i vetë biznesit: shërbime dhe të dhëna publike"
         ]
       }
     },

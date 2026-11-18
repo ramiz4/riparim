@@ -701,6 +701,18 @@
       "notes": "Follow-up on 14.10.2026 (Europe/Zurich): the business's own Autoford contact page lists canajymer@gmail.com, exactly +38344605241 and R107, Prizren. The different footer phone number 044-602-241 and Instagram Fordservice Bashkimi are not part of the assignment evidence; profile fields unchanged. The address check date is stored in UTC."
     },
     {
+      "workshopId": "auto-garazha-dielli-ferizaj",
+      "matchedName": "Auto Garazha dielli",
+      "matchedPhone": "+38349444968",
+      "matchedCity": "Ferizaj",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/t8rOCBB0XBhK/auto-garazha-dielli/"
+      ],
+      "notes": "Directory updated October12 has no hours/email. Focused own website/Facebook/Instagram/email discovery returned different Auto Dielli dealer/phone, rent-a-car and foreign garage; none attributed to this site. No usable non-Google weekly schedule."
+    },
+    {
       "workshopId": "auto-gazi-lipjan",
       "matchedName": "Auto Gazi",
       "matchedPhone": "+38344185042",
@@ -2356,6 +2368,20 @@
       "notes": "Public business contact evidenced on the attributed own source; no deliverability, consent or ownership claim. No contact message sent."
     },
     {
+      "workshopId": "auto-servis-fixit-ferizaj",
+      "matchedName": "Auto Servis Fixit",
+      "matchedPhone": "+38345548340",
+      "matchedCity": "Ferizaj",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/pYUqszavVZMk/auto-servis-fixit/",
+        "https://www.facebook.com/100083009628612/",
+        "https://www.instagram.com/autoservis.fixit/"
+      ],
+      "notes": "No weekly hours or email in directory, full own Instagram bio or Facebook contact/details; targeted website/social/email discovery did not find another attributable source. Directory October12, own latest visible post July11,2025. Google/AI schedule not used."
+    },
+    {
       "workshopId": "auto-servis-ford-jashanica-prishtina",
       "matchedName": "Auto Servis Ford Jashanica",
       "matchedPhone": "+38344650843",
@@ -2500,6 +2526,26 @@
         "https://www.google.com/search?q=Auto%20Servis%20Good%26Year%20Gjakova%20email%20-site%3Acybo.com%20-site%3Ariparim.com"
       ],
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
+    },
+    {
+      "workshopId": "auto-servis-hamza-ferizaj",
+      "matchedName": "Auto Servis HAMZA",
+      "matchedPhone": "+38349600855",
+      "matchedCity": "Ferizaj",
+      "emails": [
+        {
+          "address": "hamzaservis@hotmail.com",
+          "sourceUrls": ["https://www.facebook.com/100064870186355/"],
+          "checkedAt": "2026-11-18",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/unXUf8j3WFgC/auto-servis-hamza/",
+        "https://www.facebook.com/100064870186355/"
+      ],
+      "notes": "Public business email listed in the own Facebook contact section, matched by exact business name, town and international phone. No delivery, ownership or marketing-consent claim. No contact message sent."
     },
     {
       "workshopId": "auto-servis-joni-viti",
@@ -4155,6 +4201,18 @@
       "notes": "Full directory detail no email/website. Exact phone plus business-name/email/Facebook/Instagram query yielded no attributable own source."
     },
     {
+      "workshopId": "autoservis-veba-ferizaj",
+      "matchedName": "Autoservis VEBA",
+      "matchedPhone": "+38343514422",
+      "matchedCity": "Ferizaj",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/NNFFxicrGxE8/autoservis-veba/"
+      ],
+      "notes": "Directory updated October12 has no hours/email. Focused own website/Facebook/Instagram/email search returned no attributable business source; unrelated Vebi Garage Switzerland excluded. AI/Google schedules not used."
+    },
+    {
       "workshopId": "autoteknik-vllahiu-podujeve",
       "matchedName": "Autoteknik VLLAHIU",
       "matchedPhone": "+38345690069",
@@ -5099,6 +5157,20 @@
         "https://www.google.com/search?q=%22044%20270%20982%22%20Istog"
       ],
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
+    },
+    {
+      "workshopId": "mercedes-benz-te-rexha-podujeve",
+      "matchedName": "Mercedes-Benz Te Rexha",
+      "matchedPhone": "+38349418368",
+      "matchedCity": "Podujevë",
+      "emails": [],
+      "researchStatus": "uncertain",
+      "checkedUrls": [
+        "https://numrat.com/biznes/1Dq8HgF3THfx/mercedes-benz-te-rexha/",
+        "https://www.facebook.com/AutoserviceTeRexha/",
+        "https://mercedesterexha.com/"
+      ],
+      "notes": "Website matches49contact and links exact own Facebook/Instagram. Footer displayed49number has conflicting tel:+38344123456, and footer info@terexha.com differs from main Krasniqiblerim331@gmail.com and Facebook business email. Do not use website service/guarantee template claims or footer contact. Email unresolved pending conservative review; primary directory49 and independently paired own Facebook44 contacts remain intended."
     },
     {
       "workshopId": "mercedes-isa-ferizaj",
