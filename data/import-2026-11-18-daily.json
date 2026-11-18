@@ -541,7 +541,9 @@
     "independentReviews": "pending",
     "pr": null,
     "release": null,
-    "liveAcceptance": "pending"
+    "liveAcceptance": "pending",
+    "localRegressionCorrection": "Existing workshop-import test requires importedWorkshopIds and after.total; added accurate prepared-batch fields. No test assertion changed.",
+    "reviewCorrection": "Motor & Getriebe removed from four generic service records; retained only for Fixit with explicit own engine-repair evidence."
   },
   "provider": {
     "googleApiRequests": 0,
@@ -552,5 +554,18 @@
   "additionalCosts": 0,
   "outreachSent": false,
   "scheduleChanged": false,
-  "durableEvidenceDirectory": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/runs/2026-11-18"
+  "durableEvidenceDirectory": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/runs/2026-11-18",
+  "importedWorkshopIds": [
+    "mercedes-benz-te-rexha-podujeve",
+    "auto-servis-fixit-ferizaj",
+    "auto-servis-hamza-ferizaj",
+    "autoservis-veba-ferizaj",
+    "auto-garazha-dielli-ferizaj"
+  ],
+  "after": {
+    "total": 315,
+    "published": 315,
+    "new": 5,
+    "scope": "Prepared canonical catalogue, not live acceptance"
+  }
 }

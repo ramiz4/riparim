@@ -1802,7 +1802,7 @@
       "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
       "whatsapp": "+38349444968",
       "brands": [],
-      "services": ["Inspektion & Wartung", "Motor & Getriebe"],
+      "services": ["Inspektion & Wartung"],
       "serviceDetails": [
         "Fahrzeugservice und Reparatur; konkreten Leistungsumfang direkt beim Betrieb klären."
       ],
@@ -6504,7 +6504,7 @@
       "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
       "whatsapp": "+38349600855",
       "brands": [],
-      "services": ["Inspektion & Wartung", "Motor & Getriebe"],
+      "services": ["Inspektion & Wartung"],
       "serviceDetails": [
         "Fahrzeugservice und Reparatur; konkreten Leistungsumfang direkt beim Betrieb klären."
       ],
@@ -10703,7 +10703,7 @@
       "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
       "whatsapp": "+38343514422",
       "brands": [],
-      "services": ["Inspektion & Wartung", "Motor & Getriebe"],
+      "services": ["Inspektion & Wartung"],
       "serviceDetails": [
         "Fahrzeugservice und Reparatur; konkreten Leistungsumfang direkt beim Betrieb klären."
       ],
@@ -13208,7 +13208,7 @@
       "phoneNote": "Weitere Werkstattkontakte: +38344666618; Erreichbarkeit nicht bestätigt",
       "whatsapp": "",
       "brands": ["Mercedes-Benz"],
-      "services": ["Inspektion & Wartung", "Motor & Getriebe"],
+      "services": ["Inspektion & Wartung"],
       "serviceDetails": [
         "Fahrzeugservice für Mercedes-Benz; konkreten Leistungsumfang direkt beim Betrieb klären."
       ],
