@@ -1,10 +1,10 @@
 {
   "$schema": "./workshops.schema.json",
   "schemaVersion": 1,
-  "updatedAt": "2026-11-18T06:42:39.272Z",
+  "updatedAt": "2026-11-21T09:13:37.998Z",
   "coverage": {
     "countryCode": "XK",
-    "published": 315,
+    "published": 335,
     "drafts": 0,
     "estimatedTotal": 1700,
     "estimateSource": "user",
@@ -13,7 +13,7 @@
   "googleImport": {
     "status": "completed",
     "reason": "All published automotive service businesses have individually confirmed Google Place IDs. New identities are checked through the public Maps interface against independent contact, location and service evidence; no open drafts.",
-    "matchedPlaceIds": 315,
+    "matchedPlaceIds": 335,
     "numericSnapshotRatings": 5,
     "pendingPublishedMatches": 0
   },
@@ -461,6 +461,59 @@
       }
     },
     {
+      "id": "auto-bashkimi-kikza-performance-gjilan",
+      "name": "Auto Bashkimi x Kikza Performance",
+      "city": "Gjilan",
+      "address": "Livoq i Poshtem, Rr. Gjilan - Ferizaj",
+      "phone": "+38344955389",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344955389",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Mechanischer Fahrzeugservice",
+      "description": "Auto Bashkimi x Kikza Performance in Gjilan: Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären. Termine und den konkreten Leistungsumfang bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.435436,
+      "lng": 21.456001,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/DozTTnBsYUpq/auto-servis-pjese-bashkimi-kikza-performance/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/autobashkimi/",
+          "title": "Eigener Betriebsauftritt: Name und Geschäftskontakt",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/autobashkimi_kikzaperformance/",
+          "title": "Eigener Betriebsauftritt: Name und Geschäftskontakt",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-21",
+      "status": "published",
+      "updatedAt": "2026-11-21T09:12:18.033117+00:00",
+      "google": {
+        "placeId": "ChIJ9XsfUlCNVBMRcuux8IQNjFA",
+        "matchedAt": "2026-11-21T08:56:18.091426+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/DozTTnBsYUpq/auto-servis-pjese-bashkimi-kikza-performance/",
+            "https://www.facebook.com/autobashkimi/",
+            "https://www.instagram.com/autobashkimi_kikzaperformance/"
+          ],
+          "note": "Manually checked visible official Maps Place-ID link and direct return with unrelated Zurich fallback. Name, international phone, active listing and independently sourced precise location matched. No Google business content retained and no ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-beli-ferizaj",
       "name": "Auto Beli",
       "city": "Ferizaj",
@@ -607,6 +660,59 @@
             "https://www.facebook.com/autodecor.design.riki/posts/pfbid0DQ8m8oZUMUB8RCA5kZEvBPpdiVFsP2yrGafyB9yqqBW1tneft5soNPKJG2MvRoAQl"
           ],
           "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
+        }
+      }
+    },
+    {
+      "id": "auto-dermaku-gjilan",
+      "name": "Auto Dermaku",
+      "city": "Gjilan",
+      "address": "Gjilan 60000",
+      "phone": "+38345603631",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38345603631",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Fahrzeuglackierung, Polieren und Keramikschutz laut eigenen öffentlichen Betriebsbeiträgen."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeuglackierung, Polieren und Keramikschutz",
+      "description": "Auto Dermaku in Gjilan: Fahrzeuglackierung, Polieren und Keramikschutz laut eigenen öffentlichen Betriebsbeiträgen. Termine und den konkreten Leistungsumfang bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.465923,
+      "lng": 21.44862,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/G7xavqDc0UBk/auto-dermaku/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.instagram.com/valondermaku/",
+          "title": "Eigener Betriebsauftritt: Name und Geschäftskontakt",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/valondermaku/reel/DfHUT37lTPt/",
+          "title": "Eigener Betriebsauftritt: Name und Geschäftskontakt",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-21",
+      "status": "published",
+      "updatedAt": "2026-11-21T09:12:18.033117+00:00",
+      "google": {
+        "placeId": "ChIJPWzVJwCNVBMRQvBmNNzjQVI",
+        "matchedAt": "2026-11-21T08:42:42.018896+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/G7xavqDc0UBk/auto-dermaku/",
+            "https://www.instagram.com/valondermaku/",
+            "https://www.instagram.com/valondermaku/reel/DfHUT37lTPt/"
+          ],
+          "note": "Manually checked visible official Maps Place-ID link and direct return with unrelated Zurich fallback. Name, international phone, active listing and independently sourced precise location matched. No Google business content retained and no ownership confirmation claimed."
         }
       }
     },
@@ -844,6 +950,53 @@
             "https://www.autoyas.com/XK/Mitrovica/309155915624453/Auto-Detailing-Meti"
           ],
           "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
+        }
+      }
+    },
+    {
+      "id": "auto-detailing-nedimi-gjilan",
+      "name": "Auto Detailing Nedimi",
+      "city": "Gjilan",
+      "address": "Mic Sokoli",
+      "phone": "+38345285343",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38345285343",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Gründliche Innen- und Außenaufbereitung laut eigenem Betriebsauftritt."
+      ],
+      "languages": [],
+      "specialty": "Innen- und Außenaufbereitung",
+      "description": "Auto Detailing Nedimi in Gjilan: Gründliche Innen- und Außenaufbereitung laut eigenem Betriebsauftritt. Termine und den konkreten Leistungsumfang bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.462437,
+      "lng": 21.452061,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/wnWT4iQIObZm/auto-detailing-nedimi/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.instagram.com/autodetailingnedimi/",
+          "title": "Eigener Betriebsauftritt: Name und Geschäftskontakt",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-21",
+      "status": "published",
+      "updatedAt": "2026-11-21T09:12:18.033117+00:00",
+      "google": {
+        "placeId": "ChIJk2wJ6-eNVBMR7ZKVMfsPoqM",
+        "matchedAt": "2026-11-21T08:46:50.930976+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/wnWT4iQIObZm/auto-detailing-nedimi/",
+            "https://www.instagram.com/autodetailingnedimi/"
+          ],
+          "note": "Manually checked visible official Maps Place-ID link and direct return with unrelated Zurich fallback. Name, international phone, active listing and independently sourced precise location matched. No Google business content retained and no ownership confirmation claimed."
         }
       }
     },
@@ -1312,6 +1465,45 @@
             "https://www.facebook.com/p/Auto-Elektro-Liri-61576521387205/"
           ],
           "note": "Individually verified in public Maps UI: name, exact international phone and precise location match. Place ID read from visible official !19s result link and returned with unrelated London fallback. No Google content adopted; no ownership claim."
+        }
+      }
+    },
+    {
+      "id": "auto-elektro-muja-gjilan",
+      "name": "Auto Elektro Muja",
+      "city": "Gjilan",
+      "address": "Afer tregut te veturave, Rruga Qarkore",
+      "phone": "+38344989298",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344989298",
+      "brands": [],
+      "services": ["Diagnose & Elektronik"],
+      "serviceDetails": ["Autoelektrik laut öffentlichem Firmenverzeichnis."],
+      "languages": [],
+      "specialty": "Autoelektrik",
+      "description": "Auto Elektro Muja in Gjilan: Autoelektrik laut öffentlichem Firmenverzeichnis. Termine und den konkreten Leistungsumfang bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.459359,
+      "lng": 21.449762,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/MJFnGCm6U87B/auto-elektro-muja/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-21",
+      "status": "published",
+      "updatedAt": "2026-11-21T09:12:18.033117+00:00",
+      "google": {
+        "placeId": "ChIJ_-_5965u-w8R7Gx0biKGwKQ",
+        "matchedAt": "2026-11-21T08:36:33.220016+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/MJFnGCm6U87B/auto-elektro-muja/"
+          ],
+          "note": "Manually checked visible official Maps Place-ID link and direct return with unrelated Zurich fallback. Name, international phone, active listing and independently sourced precise location matched. No Google business content retained and no ownership confirmation claimed."
         }
       }
     },
@@ -2253,6 +2445,47 @@
           "method": "phone_and_location",
           "sourceUrls": ["https://www.cybo.com/XK-biz/auto-llamarist-valoni"],
           "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
+        }
+      }
+    },
+    {
+      "id": "auto-mechanic-celi-gjilan",
+      "name": "Auto mechanic Celi",
+      "city": "Gjilan",
+      "address": "Rr Ernest Koliqi",
+      "phone": "+38344292023",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344292023",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Mechanischer Fahrzeugservice",
+      "description": "Auto mechanic Celi in Gjilan: Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären. Termine und den konkreten Leistungsumfang bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.474316,
+      "lng": 21.459751,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/BaQTirnr40cL/auto-mechanic-celi/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-21",
+      "status": "published",
+      "updatedAt": "2026-11-21T09:12:18.033117+00:00",
+      "google": {
+        "placeId": "ChIJszLKcHONVBMRFQdwxxLGo2I",
+        "matchedAt": "2026-11-21T08:59:50.375040+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/BaQTirnr40cL/auto-mechanic-celi/"
+          ],
+          "note": "Manually checked visible official Maps Place-ID link and direct return with unrelated Zurich fallback. Name, international phone, active listing and independently sourced precise location matched. No Google business content retained and no ownership confirmation claimed."
         }
       }
     },
@@ -3862,6 +4095,47 @@
       }
     },
     {
+      "id": "auto-service-iliri-gjilan",
+      "name": "Auto Service Iliri",
+      "city": "Gjilan",
+      "address": "42°26'08.8\"N 21°28'53.9\"E",
+      "phone": "+38343720009",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38343720009",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Mechanischer Fahrzeugservice",
+      "description": "Auto Service Iliri in Gjilan: Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären. Termine und den konkreten Leistungsumfang bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.435769,
+      "lng": 21.481712,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/GmWELMXb0KDR/auto-service-iliri/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-21",
+      "status": "published",
+      "updatedAt": "2026-11-21T09:12:18.033117+00:00",
+      "google": {
+        "placeId": "ChIJm3GGYPzzVBMRZeVDVDksDCw",
+        "matchedAt": "2026-11-21T09:01:25.338942+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/GmWELMXb0KDR/auto-service-iliri/"
+          ],
+          "note": "Manually checked visible official Maps Place-ID link and direct return with unrelated Zurich fallback. Name, international phone, active listing and independently sourced precise location matched. No Google business content retained and no ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-service-istrefi-skenderaj",
       "name": "Auto Service \"Istrefi\"",
       "city": "Skenderaj",
@@ -4437,6 +4711,47 @@
       }
     },
     {
+      "id": "auto-service-sokoli-gjilan",
+      "name": "Auto Service Sokoli",
+      "city": "Gjilan",
+      "address": "Enver Miftari",
+      "phone": "+38344477221",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344477221",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Mechanischer Fahrzeugservice",
+      "description": "Auto Service Sokoli in Gjilan: Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären. Termine und den konkreten Leistungsumfang bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.482993,
+      "lng": 21.478484,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/ll3pw3JY6Zr6/auto-service-sokoli/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-21",
+      "status": "published",
+      "updatedAt": "2026-11-21T09:12:18.033117+00:00",
+      "google": {
+        "placeId": "ChIJmUt5XNrzVBMRp_gaMnV_Xnw",
+        "matchedAt": "2026-11-21T08:54:42.693974+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/ll3pw3JY6Zr6/auto-service-sokoli/"
+          ],
+          "note": "Manually checked visible official Maps Place-ID link and direct return with unrelated Zurich fallback. Name, international phone, active listing and independently sourced precise location matched. No Google business content retained and no ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-service-tuli-rahovec",
       "name": "Auto Service TULI",
       "city": "Rahovec",
@@ -4783,6 +5098,53 @@
       }
     },
     {
+      "id": "auto-servis-ardiani-a-gjilan",
+      "name": "Auto Servis Ardiani-A",
+      "city": "Gjilan",
+      "address": "Magjistrale",
+      "phone": "+38348818111",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38348818111",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Mechanischer Fahrzeugservice",
+      "description": "Auto Servis Ardiani-A in Gjilan: Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären. Termine und den konkreten Leistungsumfang bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.469078,
+      "lng": 21.435735,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/HR5efWeWeB9U/auto-servis-ardiani-a/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/p/Auto-service-Ardiani-100028835366842/",
+          "title": "Eigener Betriebsauftritt: Name und Geschäftskontakt",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-21",
+      "status": "published",
+      "updatedAt": "2026-11-21T09:12:18.033117+00:00",
+      "google": {
+        "placeId": "ChIJMX-nHQCNVBMR1UaqH2So2is",
+        "matchedAt": "2026-11-21T09:03:03.599659+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/HR5efWeWeB9U/auto-servis-ardiani-a/",
+            "https://www.facebook.com/p/Auto-service-Ardiani-100028835366842/"
+          ],
+          "note": "Manually checked visible official Maps Place-ID link and direct return with unrelated Zurich fallback. Name, international phone, active listing and independently sourced precise location matched. No Google business content retained and no ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-servis-arlindi-prishtina",
       "name": "Auto Servis Arlindi",
       "city": "Prishtina",
@@ -4916,6 +5278,47 @@
             "https://www.gjithebiznesi.com/XK/auto-servis-bajrami-049-275-728"
           ],
           "note": "The same independently evidenced phone number, distinctive name and matching place within the known locality confirm exactly one Google entry. Passenger-car service was independently evidenced."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-bashkimi-gjilan",
+      "name": "Auto Servis Bashkimi",
+      "city": "Gjilan",
+      "address": "Rr.Prishtines, Kastriot arifi Nr.32",
+      "phone": "+38348474555",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38348474555",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Mechanischer Fahrzeugservice",
+      "description": "Auto Servis Bashkimi in Gjilan: Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären. Termine und den konkreten Leistungsumfang bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.463145,
+      "lng": 21.453899,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/hLOkwooGmYAl/auto-servis-bashkimi/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-21",
+      "status": "published",
+      "updatedAt": "2026-11-21T09:12:18.033117+00:00",
+      "google": {
+        "placeId": "ChIJT9zBlO6NVBMRQbLP9BgXJjI",
+        "matchedAt": "2026-11-21T08:41:42.998584+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/hLOkwooGmYAl/auto-servis-bashkimi/"
+          ],
+          "note": "Manually checked visible official Maps Place-ID link and direct return with unrelated Zurich fallback. Name, international phone, active listing and independently sourced precise location matched. No Google business content retained and no ownership confirmation claimed."
         }
       }
     },
@@ -5101,6 +5504,47 @@
             "https://www.google.com/maps/search/?api=1&query=NOT_A_REAL_RIPARIM_BUSINESS&query_place_id=ChIJR0jrutd1UxMRlemhiDV-aUA"
           ],
           "note": "Public Maps interface in the confirmed project profile: name, normalized phone and independent street/place agree; active entry with regular opening status. Place ID from the visible !19s result link directly rechecked with an incorrect fallback search. No API/SDK calls, no owner verification."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-besarti-gjilan",
+      "name": "Auto Servis Besarti",
+      "city": "Gjilan",
+      "address": "Nëna Tereze",
+      "phone": "+38348144785",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38348144785",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Mechanischer Fahrzeugservice",
+      "description": "Auto Servis Besarti in Gjilan: Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären. Termine und den konkreten Leistungsumfang bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.467727,
+      "lng": 21.442696,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/EgLPe5FIUjyN/auto-servis-besarti/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-21",
+      "status": "published",
+      "updatedAt": "2026-11-21T09:12:18.033117+00:00",
+      "google": {
+        "placeId": "ChIJCyjWVQuNVBMRYcXFXyPWvR0",
+        "matchedAt": "2026-11-21T08:59:50.375040+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/EgLPe5FIUjyN/auto-servis-besarti/"
+          ],
+          "note": "Manually checked visible official Maps Place-ID link and direct return with unrelated Zurich fallback. Name, international phone, active listing and independently sourced precise location matched. No Google business content retained and no ownership confirmation claimed."
         }
       }
     },
@@ -5783,6 +6227,53 @@
       }
     },
     {
+      "id": "auto-servis-dritoni-gjilan",
+      "name": "Auto Servis Dritoni",
+      "city": "Gjilan",
+      "address": "28 Nentori",
+      "phone": "+38344212139",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Mechanischer Fahrzeugservice",
+      "description": "Auto Servis Dritoni in Gjilan: Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären. Termine und den konkreten Leistungsumfang bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.46658,
+      "lng": 21.429298,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/Arvu2pwt59Qr/auto-servis-dritoni/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/p/Auto-Servis-Dritoni-100093646698850/",
+          "title": "Eigener Betriebsauftritt: Name und Geschäftskontakt",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-21",
+      "status": "published",
+      "updatedAt": "2026-11-21T09:12:18.033117+00:00",
+      "google": {
+        "placeId": "ChIJ7zpNMmONVBMR_I3b6baiZ_4",
+        "matchedAt": "2026-11-21T08:40:36.505748+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/Arvu2pwt59Qr/auto-servis-dritoni/",
+            "https://www.facebook.com/p/Auto-Servis-Dritoni-100093646698850/"
+          ],
+          "note": "Manually checked visible official Maps Place-ID link and direct return with unrelated Zurich fallback. Name, international phone, active listing and independently sourced precise location matched. No Google business content retained and no ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-servis-edi-fushe-kosove",
       "name": "Auto servis Edi",
       "city": "Fushë Kosovë",
@@ -5820,6 +6311,47 @@
             "https://www.gjithebiznesi.com/XK/auto-servis-edi-045-411-022"
           ],
           "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-elektro-klima-sela-gjilan",
+      "name": "Auto Servis Elektro-Klima SELA",
+      "city": "Gjilan",
+      "address": "272 Medlin Ollbrajt",
+      "phone": "+38344320224",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344320224",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Mechanischer Fahrzeugservice",
+      "description": "Auto Servis Elektro-Klima SELA in Gjilan: Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären. Termine und den konkreten Leistungsumfang bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.465703,
+      "lng": 21.450223,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/NH8kXZ0Ucr3b/auto-servis-elektro-klima-sela/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-21",
+      "status": "published",
+      "updatedAt": "2026-11-21T09:12:18.033117+00:00",
+      "google": {
+        "placeId": "ChIJUeScOwCNVBMRrJ6CPQnnLdo",
+        "matchedAt": "2026-11-21T09:08:59.463230+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/NH8kXZ0Ucr3b/auto-servis-elektro-klima-sela/"
+          ],
+          "note": "Manually checked visible official Maps Place-ID link and direct return with unrelated Zurich fallback. Name, international phone, active listing and independently sourced precise location matched. No Google business content retained and no ownership confirmation claimed."
         }
       }
     },
@@ -6082,6 +6614,59 @@
             "https://www.instagram.com/autoservis.fixit/"
           ],
           "note": "Individually verified in public Maps UI: name, exact international phone and precise location match. Place ID read from visible official !19s result link and returned with unrelated Zurich fallback. No Google content adopted; no ownership claim."
+        }
+      }
+    },
+    {
+      "id": "auto-servis-florenti-gjilan",
+      "name": "Auto Servis Florenti",
+      "city": "Gjilan",
+      "address": "Rruga e Ferizajit",
+      "phone": "+38349666686",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Mechanischer Fahrzeugservice",
+      "description": "Auto Servis Florenti in Gjilan: Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären. Termine und den konkreten Leistungsumfang bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.440979,
+      "lng": 21.458799,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/XAI3fGhkvmZV/auto-servis-florenti/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/autoserviceflorenti/",
+          "title": "Eigener Betriebsauftritt: Name und Geschäftskontakt",
+          "kind": "official"
+        },
+        {
+          "url": "https://gjirafa.biz/auto-servis-florenti-1",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-21",
+      "status": "published",
+      "updatedAt": "2026-11-21T09:12:18.033117+00:00",
+      "google": {
+        "placeId": "ChIJGxtkzp6NVBMR0gJ6bQVLbkM",
+        "matchedAt": "2026-11-21T09:06:13.970409+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/XAI3fGhkvmZV/auto-servis-florenti/",
+            "https://www.facebook.com/autoserviceflorenti/",
+            "https://gjirafa.biz/auto-servis-florenti-1"
+          ],
+          "note": "Manually checked visible official Maps Place-ID link and direct return with unrelated Zurich fallback. Name, international phone, active listing and independently sourced precise location matched. No Google business content retained and no ownership confirmation claimed."
         }
       }
     },
@@ -8243,6 +8828,53 @@
       }
     },
     {
+      "id": "auto-servis-toska-gjilan",
+      "name": "Auto Servis Toska",
+      "city": "Gjilan",
+      "address": "299, Gjilan",
+      "phone": "+38344321676",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344321676",
+      "brands": [],
+      "services": ["Inspektion & Wartung", "Reifen & Klima"],
+      "serviceDetails": [
+        "Fahrzeugreparatur und Befüllen von Klimaanlagen laut eigenem Betriebsauftritt."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugservice und Klimabefüllung",
+      "description": "Auto Servis Toska in Gjilan: Fahrzeugreparatur und Befüllen von Klimaanlagen laut eigenem Betriebsauftritt. Termine und den konkreten Leistungsumfang bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.479787,
+      "lng": 21.463521,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/Bbd6MO8XFYTu/auto-servis-toska/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/autoservisitoska/",
+          "title": "Eigener Betriebsauftritt: Name und Geschäftskontakt",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-21",
+      "status": "published",
+      "updatedAt": "2026-11-21T09:12:18.033117+00:00",
+      "google": {
+        "placeId": "ChIJrRL9LwCNVBMR7EQeTD7g_h8",
+        "matchedAt": "2026-11-21T08:40:36.505748+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/Bbd6MO8XFYTu/auto-servis-toska/",
+            "https://www.facebook.com/autoservisitoska/"
+          ],
+          "note": "Manually checked visible official Maps Place-ID link and direct return with unrelated Zurich fallback. Name, international phone, active listing and independently sourced precise location matched. No Google business content retained and no ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "auto-servis-trimi-prishtina",
       "name": "Auto Servis Trimi",
       "city": "Prishtina",
@@ -9708,6 +10340,53 @@
       }
     },
     {
+      "id": "autoexpert-rks-gjilan",
+      "name": "AUTOEXPERT.RKS",
+      "city": "Gjilan",
+      "address": "Rruga Qarkore",
+      "phone": "+38344175319",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344175319",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Mechanischer Fahrzeugservice",
+      "description": "AUTOEXPERT.RKS in Gjilan: Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären. Termine und den konkreten Leistungsumfang bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.472057,
+      "lng": 21.450622,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/3EJaci9qWK55/autoexpert-rks/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/mallra.nga.zvicra.209790/photos/122332858616232258/",
+          "title": "Eigener Betriebsauftritt: Name und Geschäftskontakt",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-21",
+      "status": "published",
+      "updatedAt": "2026-11-21T09:12:18.033117+00:00",
+      "google": {
+        "placeId": "ChIJwaHY75aNVBMR1Azyj4usjfg",
+        "matchedAt": "2026-11-21T08:43:56.201327+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/3EJaci9qWK55/autoexpert-rks/",
+            "https://www.facebook.com/mallra.nga.zvicra.209790/photos/122332858616232258/"
+          ],
+          "note": "Manually checked visible official Maps Place-ID link and direct return with unrelated Zurich fallback. Name, international phone, active listing and independently sourced precise location matched. No Google business content retained and no ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "autogang-kacanik",
       "name": "AutoGang",
       "city": "Kaçanik",
@@ -10292,6 +10971,100 @@
             "https://numrat.com/biznes/8TRuVeDjETWp/autoservis-altini/"
           ],
           "note": "Visible official public Maps Place-ID link and direct mismatched fallback matched active identity, independently evidenced name, exact phone and precise location. Only Place-ID and authored checks retained; no Google business data or ownership confirmation claimed."
+        }
+      }
+    },
+    {
+      "id": "autoservis-andi-gjilan",
+      "name": "Autoservis Andi",
+      "city": "Gjilan",
+      "address": "Hajdar Hashani",
+      "phone": "+38345462193",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Mechanischer Fahrzeugservice",
+      "description": "Autoservis Andi in Gjilan: Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären. Termine und den konkreten Leistungsumfang bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.456726,
+      "lng": 21.491826,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/Blz6D6OJRdAx/autoservis-andi/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-21",
+      "status": "published",
+      "updatedAt": "2026-11-21T09:12:18.033117+00:00",
+      "google": {
+        "placeId": "ChIJC6H24ubzVBMRC414ILbIWL0",
+        "matchedAt": "2026-11-21T09:01:25.338942+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/Blz6D6OJRdAx/autoservis-andi/"
+          ],
+          "note": "Manually checked visible official Maps Place-ID link and direct return with unrelated Zurich fallback. Name, international phone, active listing and independently sourced precise location matched. No Google business content retained and no ownership confirmation claimed."
+        }
+      }
+    },
+    {
+      "id": "autoservis-dilaveri-gjilan",
+      "name": "AutoServis Dilaveri",
+      "city": "Gjilan",
+      "address": "14 Bejtulla Ismajli",
+      "phone": "+38344654777",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38344654777",
+      "brands": [],
+      "services": ["Inspektion & Wartung"],
+      "serviceDetails": [
+        "Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären."
+      ],
+      "languages": [],
+      "specialty": "Mechanischer Fahrzeugservice",
+      "description": "AutoServis Dilaveri in Gjilan: Mechanischer Fahrzeugservice; konkrete Arbeiten bitte direkt beim Betrieb klären. Termine und den konkreten Leistungsumfang bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.481869,
+      "lng": 21.480402,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/lHBZa1ExD4pu/autoservis-dilaveri/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/AutoServisDilaveri/",
+          "title": "Eigener Betriebsauftritt: Name und Geschäftskontakt",
+          "kind": "official"
+        },
+        {
+          "url": "https://stgres.gjirafa.biz/auto-servis-dilaveri-1",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        }
+      ],
+      "checkedAt": "2026-11-21",
+      "status": "published",
+      "updatedAt": "2026-11-21T09:12:18.033117+00:00",
+      "google": {
+        "placeId": "ChIJzwDlOgDzVBMRwacsAHNQPmE",
+        "matchedAt": "2026-11-21T08:53:25.318849+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/lHBZa1ExD4pu/autoservis-dilaveri/",
+            "https://www.facebook.com/AutoServisDilaveri/",
+            "https://stgres.gjirafa.biz/auto-servis-dilaveri-1"
+          ],
+          "note": "Manually checked visible official Maps Place-ID link and direct return with unrelated Zurich fallback. Name, international phone, active listing and independently sourced precise location matched. No Google business content retained and no ownership confirmation claimed."
         }
       }
     },
@@ -11792,6 +12565,53 @@
       }
     },
     {
+      "id": "elite-detailing-gjilan",
+      "name": "Elite Detailing",
+      "city": "Gjilan",
+      "address": "Muharrem Ibrahimi",
+      "phone": "+38344424420",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Gründliche Innenraumaufbereitung und Sitzreinigung laut eigenem Betriebsauftritt."
+      ],
+      "languages": [],
+      "specialty": "Innenraum-Detailing und Sitzreinigung",
+      "description": "Elite Detailing in Gjilan: Gründliche Innenraumaufbereitung und Sitzreinigung laut eigenem Betriebsauftritt. Termine und den konkreten Leistungsumfang bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.467911,
+      "lng": 21.459276,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/FajVYay3waBq/elite-detailing/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.instagram.com/elitedetaiiling/",
+          "title": "Eigener Betriebsauftritt: Name und Geschäftskontakt",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-21",
+      "status": "published",
+      "updatedAt": "2026-11-21T09:12:18.033117+00:00",
+      "google": {
+        "placeId": "ChIJf3KXq0mNVBMRsN1jWQKyQEk",
+        "matchedAt": "2026-11-21T08:45:04.387528+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/FajVYay3waBq/elite-detailing/",
+            "https://www.instagram.com/elitedetaiiling/"
+          ],
+          "note": "Manually checked visible official Maps Place-ID link and direct return with unrelated Zurich fallback. Name, international phone, active listing and independently sourced precise location matched. No Google business content retained and no ownership confirmation claimed."
+        }
+      }
+    },
+    {
       "id": "eurogoma-ferizaj",
       "name": "Eurogoma – Ferizaj",
       "city": "Ferizaj",
@@ -12591,6 +13411,59 @@
             "https://numrat.com/biznes/8EGBM8xN6xbx/isa-tuning/"
           ],
           "note": "Visible official public Maps Place-ID link and direct London fallback match the active identity, independently published exact phone and location. Only Place-ID and authored checks retained; no Google business fields or Google ownership confirmation claimed."
+        }
+      }
+    },
+    {
+      "id": "ismail-detailing-gjilan",
+      "name": "Ismail Detailing",
+      "city": "Gjilan",
+      "address": "Hysni Xhemajli 25",
+      "phone": "+38345235777",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38345235777",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Innen- und Außenaufbereitung, Polieren und Keramikschutz laut eigenem Betriebsauftritt."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugaufbereitung, Polieren und Keramikschutz",
+      "description": "Ismail Detailing in Gjilan: Innen- und Außenaufbereitung, Polieren und Keramikschutz laut eigenem Betriebsauftritt. Termine und den konkreten Leistungsumfang bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.461768,
+      "lng": 21.450457,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/ZZCQOHyF6OiF/ismail-detailing/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://www.facebook.com/p/Ismail-Detailing-61575732369043/",
+          "title": "Eigener Betriebsauftritt: Name und Geschäftskontakt",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/ismail.detailing/",
+          "title": "Eigener Betriebsauftritt: Name und Geschäftskontakt",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-21",
+      "status": "published",
+      "updatedAt": "2026-11-21T09:12:18.033117+00:00",
+      "google": {
+        "placeId": "ChIJT2YaBbLzVBMRo1U7jY3Yw8g",
+        "matchedAt": "2026-11-21T08:45:47.828483+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/ZZCQOHyF6OiF/ismail-detailing/",
+            "https://www.facebook.com/p/Ismail-Detailing-61575732369043/",
+            "https://www.instagram.com/ismail.detailing/"
+          ],
+          "note": "Manually checked visible official Maps Place-ID link and direct return with unrelated Zurich fallback. Name, international phone, active listing and independently sourced precise location matched. No Google business content retained and no ownership confirmation claimed."
         }
       }
     },
@@ -14655,6 +15528,59 @@
             "https://www.gjithebiznesi.com/XK/superclean-prishtin%C3%AB-045-677-633"
           ],
           "note": "Phone, distinctive business name and location were individually compared with the Google entry. The Place ID was confirmed directly through Place Details; no Google business details were adopted."
+        }
+      }
+    },
+    {
+      "id": "supreme-detailing-gjilan",
+      "name": "Supreme Detailing",
+      "city": "Gjilan",
+      "address": "283 Rruga Marie Shllaku",
+      "phone": "+38348644529",
+      "phoneNote": "Öffentlicher Geschäftskontakt; Erreichbarkeit nicht bestätigt",
+      "whatsapp": "+38348644529",
+      "brands": [],
+      "services": ["Karosserie & Lack"],
+      "serviceDetails": [
+        "Innen- und Außenaufbereitung, Polieren, Keramikschutz und Lackschutzfolie laut eigener Website."
+      ],
+      "languages": [],
+      "specialty": "Fahrzeugaufbereitung und Lackschutz",
+      "description": "Supreme Detailing in Gjilan: Innen- und Außenaufbereitung, Polieren, Keramikschutz und Lackschutzfolie laut eigener Website. Termine und den konkreten Leistungsumfang bitte direkt mit dem Betrieb abstimmen.",
+      "lat": 42.47262,
+      "lng": 21.48281,
+      "sources": [
+        {
+          "url": "https://numrat.com/biznes/yIJvZJZoirdG/supremedetailing/",
+          "title": "Öffentliches Firmenverzeichnis: Name, Standort und Geschäftskontakt",
+          "kind": "directory"
+        },
+        {
+          "url": "https://supremedetailing-ks.com/",
+          "title": "Eigener Betriebsauftritt: Name und Geschäftskontakt",
+          "kind": "official"
+        },
+        {
+          "url": "https://www.instagram.com/supremedetailing_/",
+          "title": "Eigener Betriebsauftritt: Name und Geschäftskontakt",
+          "kind": "official"
+        }
+      ],
+      "checkedAt": "2026-11-21",
+      "status": "published",
+      "updatedAt": "2026-11-21T09:12:18.033117+00:00",
+      "google": {
+        "placeId": "ChIJpVIhznXzVBMReSYW6x18XF8",
+        "matchedAt": "2026-11-21T08:47:24.462926+00:00",
+        "snapshot": null,
+        "verification": {
+          "method": "official_maps",
+          "sourceUrls": [
+            "https://numrat.com/biznes/yIJvZJZoirdG/supremedetailing/",
+            "https://supremedetailing-ks.com/",
+            "https://www.instagram.com/supremedetailing_/"
+          ],
+          "note": "Manually checked visible official Maps Place-ID link and direct return with unrelated Zurich fallback. Name, international phone, active listing and independently sourced precise location matched. No Google business content retained and no ownership confirmation claimed."
         }
       }
     },

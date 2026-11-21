@@ -122,6 +122,10 @@ ownership, approval and removals. No direct live inserts or invented placeholder
 Use one `data/import-YYYY-MM-DD-daily.json` through all continuations. Record coverage,
 sources/check times, previous/live inventory, duplicates, deferrals, identity evidence,
 request/quota use, dry-run, imported IDs, translations and final PR/release/live results.
+Keep `before` and `after` catalogue counts explicit: `total`, `published` and `drafts`.
+Set `importedWorkshopIds` to the prepared canonical additions; record confirmed live IDs
+separately in `publishedWorkshopIds` only after acceptance. Existing catalogue tests
+validate these manifest fields before publication.
 Include the per-number WhatsApp checks, shared-site associations, status counts, newly
 provided contacts, unresolved blockers and post-deployment button/target acceptance.
 Copy no current Google stars/reviews/photos/hours/business fields; change no quotas/widgets.

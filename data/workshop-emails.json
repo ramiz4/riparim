@@ -177,6 +177,27 @@
       "notes": "Own homepage and contact page publish exact phone and locality with business email; no consent or deliverability claim."
     },
     {
+      "workshopId": "auto-bashkimi-kikza-performance-gjilan",
+      "matchedName": "Auto Bashkimi x Kikza Performance",
+      "matchedPhone": "+38344955389",
+      "matchedCity": "Gjilan",
+      "emails": [
+        {
+          "address": "lorikhasanibiz@gmail.com",
+          "sourceUrls": ["https://www.facebook.com/autobashkimi/"],
+          "checkedAt": "2026-11-21",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/DozTTnBsYUpq/auto-servis-pjese-bashkimi-kikza-performance/",
+        "https://www.facebook.com/autobashkimi/",
+        "https://www.instagram.com/autobashkimi_kikzaperformance/"
+      ],
+      "notes": "Public business contact evidenced on the attributed own source; no delivery, consent or ownership claim. No contact message sent."
+    },
+    {
       "workshopId": "auto-beli-ferizaj",
       "matchedName": "Auto Beli",
       "matchedPhone": "+38344772003",
@@ -244,6 +265,29 @@
         "https://www.facebook.com/autodecor.design.riki/posts/pfbid0DQ8m8oZUMUB8RCA5kZEvBPpdiVFsP2yrGafyB9yqqBW1tneft5soNPKJG2MvRoAQl"
       ],
       "notes": "Own public Facebook Contact has phone and same WhatsApp number only; own-looking publicly tagged Instagram autodecordesignriki inspected with no email/bio contact, not used for extra identity claims. Full directory no email/site. Cybo security challenge not bypassed and not counted as inspected detail."
+    },
+    {
+      "workshopId": "auto-dermaku-gjilan",
+      "matchedName": "Auto Dermaku",
+      "matchedPhone": "+38345603631",
+      "matchedCity": "Gjilan",
+      "emails": [
+        {
+          "address": "Valodermaku@gmail.com",
+          "sourceUrls": [
+            "https://www.instagram.com/valondermaku/reel/DfHUT37lTPt/"
+          ],
+          "checkedAt": "2026-11-21",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/G7xavqDc0UBk/auto-dermaku/",
+        "https://www.instagram.com/valondermaku/",
+        "https://www.instagram.com/p/CamPFtGjBbp/"
+      ],
+      "notes": "Business contact explicitly paired with exact phone in public own service-post captions; personal profile details excluded."
     },
     {
       "workshopId": "auto-detailig-elkerim-mamushe",
@@ -331,6 +375,19 @@
         "https://www.facebook.com/p/Auto-Detailing-Meti-61562521143329/"
       ],
       "notes": "Facebook lists the email, Mitrovica and the exact existing phone number +383 43 509 444."
+    },
+    {
+      "workshopId": "auto-detailing-nedimi-gjilan",
+      "matchedName": "Auto Detailing Nedimi",
+      "matchedPhone": "+38345285343",
+      "matchedCity": "Gjilan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/wnWT4iQIObZm/auto-detailing-nedimi/",
+        "https://www.instagram.com/autodetailingnedimi/"
+      ],
+      "notes": "Focused own website/Facebook/Instagram/email search; attributed Instagram expanded bio no email, other Facebook results unrelated."
     },
     {
       "workshopId": "auto-diagnostika-prishtina",
@@ -503,6 +560,19 @@
         "https://www.facebook.com/p/Auto-Elektro-Liri-61576521387205/"
       ],
       "notes": "No attributable public business email found in checked directory, own sources where available, and targeted own website/Facebook/Instagram discovery; namesake contacts not transferred."
+    },
+    {
+      "workshopId": "auto-elektro-muja-gjilan",
+      "matchedName": "Auto Elektro Muja",
+      "matchedPhone": "+38344989298",
+      "matchedCity": "Gjilan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/MJFnGCm6U87B/auto-elektro-muja/",
+        "https://www.facebook.com/pages/Auto-Electro-Servis-MUJA-/517276365017501"
+      ],
+      "notes": "Focused own website/social/email discovery; Facebook result explicitly unofficial, no contacts or posts. Search AI ignored."
     },
     {
       "workshopId": "auto-elektro-service-agroni-vushtrri",
@@ -873,6 +943,19 @@
         "https://www.google.com/search?q=Auto%20Llamarist%20Valoni%20Peja%20email%20-site%3Acybo.com%20-site%3Ariparim.com"
       ],
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. At least one additional directory search was limited by HTTP 429. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
+    },
+    {
+      "workshopId": "auto-mechanic-celi-gjilan",
+      "matchedName": "Auto mechanic Celi",
+      "matchedPhone": "+38344292023",
+      "matchedCity": "Gjilan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/BaQTirnr40cL/auto-mechanic-celi/",
+        "https://www.facebook.com/pages/Auto-Servis-CELI-gjilan/142675819161406"
+      ],
+      "notes": "Focused own website/Facebook/Instagram/email/hours discovery found unofficial Facebook stub without business contacts or hours. No own source attribution claimed."
     },
     {
       "workshopId": "auto-mita",
@@ -1503,6 +1586,18 @@
       "notes": "Previous address preserved. Business website inaccessible on repeat retrieval; other Facebook businesses not assigned."
     },
     {
+      "workshopId": "auto-service-iliri-gjilan",
+      "matchedName": "Auto Service Iliri",
+      "matchedPhone": "+38343720009",
+      "matchedCity": "Gjilan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/GmWELMXb0KDR/auto-service-iliri/"
+      ],
+      "notes": "Focused own website/Facebook/Instagram/email/hours search returned unrelated regional namesakes only; no attributable business email or own site found."
+    },
+    {
       "workshopId": "auto-service-istrefi-skenderaj",
       "matchedName": "Auto Service \"Istrefi\"",
       "matchedPhone": "+38349336455",
@@ -1728,6 +1823,20 @@
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; Instagram bio checked; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
     },
     {
+      "workshopId": "auto-service-sokoli-gjilan",
+      "matchedName": "Auto Service Sokoli",
+      "matchedPhone": "+38344477221",
+      "matchedCity": "Gjilan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/ll3pw3JY6Zr6/auto-service-sokoli/",
+        "https://autoservissokoli.weebly.com/",
+        "https://autoservissokoli.weebly.com/kontakte.html"
+      ],
+      "notes": "Focused website/Facebook/Instagram/email search; website candidate has no matching phone/location and contact page contains only a form, so not adopted as official source. No message sent."
+    },
+    {
       "workshopId": "auto-service-tuli-rahovec",
       "matchedName": "Auto Service TULI",
       "matchedPhone": "+38344887896",
@@ -1849,6 +1958,19 @@
       "notes": "Full directory no email/site; exact name/town/phone/email/Facebook/Instagram search no results. Native Facebook Pages found Ferizaj Arberi with differentphone45869833, rejected. Second sparse Arberi parts-shop page100093075909786 full Info/Details supplies no matching contact/site/email/week, not attributed."
     },
     {
+      "workshopId": "auto-servis-ardiani-a-gjilan",
+      "matchedName": "Auto Servis Ardiani-A",
+      "matchedPhone": "+38348818111",
+      "matchedCity": "Gjilan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/HR5efWeWeB9U/auto-servis-ardiani-a/",
+        "https://www.facebook.com/p/Auto-service-Ardiani-100028835366842/"
+      ],
+      "notes": "Own public contact section no email; focused Instagram/own-site/email discovery shows unrelated rental businesses, not adopted."
+    },
+    {
       "workshopId": "auto-servis-arlindi-prishtina",
       "matchedName": "Auto Servis Arlindi",
       "matchedPhone": "+38344848728",
@@ -1916,6 +2038,18 @@
         "https://checkout.shopify.com/61688217739/policies/26643562635.html?locale=en-GB"
       ],
       "notes": "Follow-up on 14.10.2026: Instagram autoservicebajrami, viewed while logged in, confirms 044/049275728 and Rruga Tranzitit Selman Lajqi, Peja; the job advertisement also lists only a phone. Facebook page 100068832498690 shows autoservicebajrami@gmail.com but neither a place, phone nor public posts, and no evidenced link to the Instagram profile. The email candidate remains unresolved and was not imported. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found. Auto Pjesë Bajrami / autopjesbajrami.com lists Ferizaj and info@autobajrami.com in its contact policy; no connection to the Peja profile at Selman Lajçi and 049275728. Not adopted. Matching Instagram autoservicebajrami rechecked: unchanged matching phones/address, no public email."
+    },
+    {
+      "workshopId": "auto-servis-bashkimi-gjilan",
+      "matchedName": "Auto Servis Bashkimi",
+      "matchedPhone": "+38348474555",
+      "matchedCity": "Gjilan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/hLOkwooGmYAl/auto-servis-bashkimi/"
+      ],
+      "notes": "Focused own website/Facebook/Instagram/email discovery followed by exact primary-phone search. Other Bashkimi at Livoq has different phone; no attribution of its email. AI summaries ignored."
     },
     {
       "workshopId": "auto-servis-bashkimi-viti",
@@ -1989,6 +2123,19 @@
         "https://www.instagram.com/auto_service_berati_/"
       ],
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; Instagram bio checked; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Instagram candidates rechecked while logged in with their complete bio. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
+    },
+    {
+      "workshopId": "auto-servis-besarti-gjilan",
+      "matchedName": "Auto Servis Besarti",
+      "matchedPhone": "+38348144785",
+      "matchedCity": "Gjilan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/EgLPe5FIUjyN/auto-servis-besarti/",
+        "https://www.facebook.com/besart.ahoxha.10/"
+      ],
+      "notes": "Focused own website/Facebook/Instagram/email/hours search; possible public announcement source opened after connection recovery but attributable business post not visible; unrelated Hajvali profiles excluded. No personal details retained."
     },
     {
       "workshopId": "auto-servis-besi-obiliq",
@@ -2263,6 +2410,19 @@
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
     },
     {
+      "workshopId": "auto-servis-dritoni-gjilan",
+      "matchedName": "Auto Servis Dritoni",
+      "matchedPhone": "+38344212139",
+      "matchedCity": "Gjilan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/Arvu2pwt59Qr/auto-servis-dritoni/",
+        "https://www.facebook.com/p/Auto-Servis-Dritoni-100093646698850/"
+      ],
+      "notes": "Public business contact evidenced on the attributed own source; no delivery, consent or ownership claim. No contact message sent."
+    },
+    {
       "workshopId": "auto-servis-edi-fushe-kosove",
       "matchedName": "Auto servis Edi",
       "matchedPhone": "+38345411022",
@@ -2280,6 +2440,18 @@
         "https://gjirafa.biz/auti-servis-edi-1"
       ],
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
+    },
+    {
+      "workshopId": "auto-servis-elektro-klima-sela-gjilan",
+      "matchedName": "Auto Servis Elektro-Klima SELA",
+      "matchedPhone": "+38344320224",
+      "matchedCity": "Gjilan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/NH8kXZ0Ucr3b/auto-servis-elektro-klima-sela/"
+      ],
+      "notes": "Focused own website/Facebook/Instagram/email discovery returns unrelated ABC/Labi businesses; no attributable additional source."
     },
     {
       "workshopId": "auto-servis-endriti-obiliq",
@@ -2380,6 +2552,20 @@
         "https://www.instagram.com/autoservis.fixit/"
       ],
       "notes": "No weekly hours or email in directory, full own Instagram bio or Facebook contact/details; targeted website/social/email discovery did not find another attributable source. Directory October12, own latest visible post July11,2025. Google/AI schedule not used."
+    },
+    {
+      "workshopId": "auto-servis-florenti-gjilan",
+      "matchedName": "Auto Servis Florenti",
+      "matchedPhone": "+38349666686",
+      "matchedCity": "Gjilan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/XAI3fGhkvmZV/auto-servis-florenti/",
+        "https://www.facebook.com/autoserviceflorenti/",
+        "https://gjirafa.biz/auto-servis-florenti-1"
+      ],
+      "notes": "Own page and independent contact directory no email; focused Instagram/website/email discovery returns unrelated Lorenti, excluded."
     },
     {
       "workshopId": "auto-servis-ford-jashanica-prishtina",
@@ -3237,6 +3423,26 @@
       "notes": "Full independent detail no email/site. Own-looking Instagram has no matchingphone/site; same-name Facebook personal profile not harvested. Skenda.autodekor business has different contact49536396 and no demonstrated link to target44379273; its data not adopted. No attributable business email found."
     },
     {
+      "workshopId": "auto-servis-toska-gjilan",
+      "matchedName": "Auto Servis Toska",
+      "matchedPhone": "+38344321676",
+      "matchedCity": "Gjilan",
+      "emails": [
+        {
+          "address": "autoservistoska@gmail.com",
+          "sourceUrls": ["https://www.facebook.com/autoservisitoska/"],
+          "checkedAt": "2026-11-21",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/Bbd6MO8XFYTu/auto-servis-toska/",
+        "https://www.facebook.com/autoservisitoska/"
+      ],
+      "notes": "Own business page explicitly publishes this address with exact phone. Different generic Hamid address in directory not adopted."
+    },
+    {
       "workshopId": "auto-servis-trimi-prishtina",
       "matchedName": "Auto Servis Trimi",
       "matchedPhone": "+38349195447",
@@ -3818,6 +4024,28 @@
       "notes": "Public sources and available social-media results checked; no reliably attributable email address found. Researched again on 13.10.2026 in the internal browser; no additional directly evidenced email adopted. Additional public-directory search performed on 13.10.2026. Facebook details rechecked after login. Follow-up on 14.10.2026: additional search by phone number or business name and place performed. Public Facebook candidates rechecked while logged in. No additional reliably assigned email adopted. Follow-up 14.10.2026: another targeted Google search and comparison of available contact sources; no further reliably attributable published email found."
     },
     {
+      "workshopId": "autoexpert-rks-gjilan",
+      "matchedName": "AUTOEXPERT.RKS",
+      "matchedPhone": "+38344175319",
+      "matchedCity": "Gjilan",
+      "emails": [
+        {
+          "address": "autoexpert.rks@gmail.com",
+          "sourceUrls": [
+            "https://www.facebook.com/mallra.nga.zvicra.209790/photos/122332858616232258/"
+          ],
+          "checkedAt": "2026-11-21",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/3EJaci9qWK55/autoexpert-rks/",
+        "https://www.facebook.com/mallra.nga.zvicra.209790/photos/122332858616232258/"
+      ],
+      "notes": "Read visually from own dated business advertisement, same primary phone and street."
+    },
+    {
       "workshopId": "autogang-kacanik",
       "matchedName": "AutoGang",
       "matchedPhone": "+38344992695",
@@ -4037,6 +4265,32 @@
         "https://numrat.com/biznes/8TRuVeDjETWp/autoservis-altini/"
       ],
       "notes": "Full directory no email/site; targeted name/town/Facebook/Instagram/email search only unrelated Tirana motorcycle workshop, not adopted. Native Facebook Pages exact business/town search reports no matching results. No attributable business email found."
+    },
+    {
+      "workshopId": "autoservis-andi-gjilan",
+      "matchedName": "Autoservis Andi",
+      "matchedPhone": "+38345462193",
+      "matchedCity": "Gjilan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/Blz6D6OJRdAx/autoservis-andi/"
+      ],
+      "notes": "Focused own website/Facebook/Instagram/email/hours search returned unrelated regional namesakes only; no attributable business email or own site found."
+    },
+    {
+      "workshopId": "autoservis-dilaveri-gjilan",
+      "matchedName": "AutoServis Dilaveri",
+      "matchedPhone": "+38344654777",
+      "matchedCity": "Gjilan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/lHBZa1ExD4pu/autoservis-dilaveri/",
+        "https://www.facebook.com/AutoServisDilaveri/",
+        "https://stgres.gjirafa.biz/auto-servis-dilaveri-1"
+      ],
+      "notes": "Own public contact section and independent directory no email; focused own site/Instagram/email discovery no attributed additional contact."
     },
     {
       "workshopId": "autoservis-ervini-rahovec",
@@ -4601,6 +4855,20 @@
       "notes": "Own full Facebook Info/bio and Instagram bio plus independent name/town email/Instagram search show no attributable email or own contact website; Prishtine Drini email is a separate identity and not reused."
     },
     {
+      "workshopId": "elite-detailing-gjilan",
+      "matchedName": "Elite Detailing",
+      "matchedPhone": "+38344424420",
+      "matchedCity": "Gjilan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/FajVYay3waBq/elite-detailing/",
+        "https://www.instagram.com/elitedetaiiling/",
+        "https://www.facebook.com/p/Elite-Detailing-100068240602022/"
+      ],
+      "notes": "Own Instagram bio no email. Facebook namesake does not independently establish phone/location and was not used; no attributable own website found."
+    },
+    {
       "workshopId": "eurogoma-ferizaj",
       "matchedName": "Eurogoma – Ferizaj",
       "matchedPhone": "+38349504424",
@@ -4919,6 +5187,27 @@
         "https://numrat.com/biznes/8EGBM8xN6xbx/isa-tuning/"
       ],
       "notes": "Own public Facebook contact summary, own expanded Instagram and complete own Linktree checked. Only matching phone/social/Maps links; no business email or separate contact website published in checked sources. No thirdparty account-finder, private data or guessed address used."
+    },
+    {
+      "workshopId": "ismail-detailing-gjilan",
+      "matchedName": "Ismail Detailing",
+      "matchedPhone": "+38345235777",
+      "matchedCity": "Gjilan",
+      "emails": [
+        {
+          "address": "ismaildetailing@gmail.com",
+          "sourceUrls": ["https://www.instagram.com/ismail.detailing/"],
+          "checkedAt": "2026-11-21",
+          "emailVerification": "publicly_listed"
+        }
+      ],
+      "researchStatus": "found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/ZZCQOHyF6OiF/ismail-detailing/",
+        "https://www.facebook.com/p/Ismail-Detailing-61575732369043/",
+        "https://www.instagram.com/ismail.detailing/"
+      ],
+      "notes": "Public business contact evidenced on the attributed own source; no delivery, consent or ownership claim. No contact message sent."
     },
     {
       "workshopId": "kio-garage-prizren",
@@ -5724,6 +6013,20 @@
         "https://www.instagram.com/supercleanprishtine/"
       ],
       "notes": "Follow-up on 14.10.2026: the correct Super Clean Facebook page lists godeni84@gmail.com and exactly +38345677633. The matching Instagram profile supercleanprishtine links this page directly. Unrelated cleaning service Super Clean Ks with +38348111868 remains excluded. Profile fields unchanged; check date in UTC."
+    },
+    {
+      "workshopId": "supreme-detailing-gjilan",
+      "matchedName": "Supreme Detailing",
+      "matchedPhone": "+38348644529",
+      "matchedCity": "Gjilan",
+      "emails": [],
+      "researchStatus": "not_found",
+      "checkedUrls": [
+        "https://numrat.com/biznes/yIJvZJZoirdG/supremedetailing/",
+        "https://supremedetailing-ks.com/",
+        "https://www.instagram.com/supremedetailing_/"
+      ],
+      "notes": "Own website contact/footer and expanded Instagram bio contain phone but no email; focused Facebook/email/hours discovery no additional attributable source."
     },
     {
       "workshopId": "tiptop-detailing-gjakova",
