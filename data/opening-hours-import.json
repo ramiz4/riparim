@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "revision": "11b3fd27db07cdd2d6a3de5fa8304f43e1b2c726170ff16ae99c02e7e3675873",
+  "revision": "6460db797a51aca80c9bb427518ef289e6df779fb6b278f3ddc0161b08f362c3",
   "records": [
     {
       "id": "adonis-garage-ferizaj",
@@ -780,6 +780,95 @@
       }
     },
     {
+      "id": "auto-bashkimi-kikza-performance-gjilan",
+      "expected": {
+        "name": "Auto Bashkimi x Kikza Performance",
+        "city": "Gjilan",
+        "address": "Livoq i Poshtem, Rr. Gjilan - Ferizaj",
+        "phone": "+38344955389"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "20:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "20:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "20:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "20:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "20:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "09:00",
+                "end": "17:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-11-21",
+        "source": "https://www.facebook.com/autobashkimi/",
+        "sourceName": "Auto Bashkimi x Kikza Performance",
+        "researchStatus": "Researched public source",
+        "notes": "Own public full seven-day business-hours dialog, update age unavailable. Search AI reports different schedule and is ignored; no owner-confirmed/current-open claim.",
+        "originalWeek": [
+          "09:00-20:00",
+          "09:00-20:00",
+          "09:00-20:00",
+          "09:00-20:00",
+          "09:00-20:00",
+          "09:00-17:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-beli-ferizaj",
       "expected": {
         "name": "Auto Beli",
@@ -1037,6 +1126,87 @@
           "09:00-16:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-dermaku-gjilan",
+      "expected": {
+        "name": "Auto Dermaku",
+        "city": "Gjilan",
+        "address": "Gjilan 60000",
+        "phone": "+38345603631"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21",
+        "source": "https://numrat.com/biznes/G7xavqDc0UBk/auto-dermaku/ | https://www.instagram.com/valondermaku/",
+        "sourceName": "Auto Dermaku",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No weekly plan in independent directory or own public bio/service captions. Facebook route resolves personal profile; personal details not retained. No Google hours adopted.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -1458,6 +1628,87 @@
           "10:00-18:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-detailing-nedimi-gjilan",
+      "expected": {
+        "name": "Auto Detailing Nedimi",
+        "city": "Gjilan",
+        "address": "Mic Sokoli",
+        "phone": "+38345285343"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21",
+        "source": "https://numrat.com/biznes/wnWT4iQIObZm/auto-detailing-nedimi/ | https://www.instagram.com/autodetailingnedimi/",
+        "sourceName": "Auto Detailing Nedimi",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own fully expanded bio and independent directory have no week; Google24h/AI excluded.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -2329,6 +2580,87 @@
         "sourceName": "Auto Elektro Liri",
         "researchStatus": "Standardzeiten (angenommen)",
         "notes": "No weekly hours in own Facebook Info or directory; source post Nov16 2026",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-elektro-muja-gjilan",
+      "expected": {
+        "name": "Auto Elektro Muja",
+        "city": "Gjilan",
+        "address": "Afer tregut te veturave, Rruga Qarkore",
+        "phone": "+38344989298"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21",
+        "source": "https://numrat.com/biznes/MJFnGCm6U87B/auto-elektro-muja/",
+        "sourceName": "Auto Elektro Muja",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No attributable own weekly schedule found; directory no hours; Facebook result unofficial and empty. Do not use Google hours.",
         "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
@@ -3983,6 +4315,87 @@
           "08:00-17:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-mechanic-celi-gjilan",
+      "expected": {
+        "name": "Auto mechanic Celi",
+        "city": "Gjilan",
+        "address": "Rr Ernest Koliqi",
+        "phone": "+38344292023"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21",
+        "source": "https://numrat.com/biznes/BaQTirnr40cL/auto-mechanic-celi/ | https://www.facebook.com/pages/Auto-Servis-CELI-gjilan/142675819161406",
+        "sourceName": "Auto mechanic Celi",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Focused own website/Facebook/Instagram/email/hours discovery found unofficial Facebook stub without business contacts or hours. No own source attribution claimed. No attributable weekly plan; Google/AI times not adopted.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -6771,6 +7184,87 @@
       }
     },
     {
+      "id": "auto-service-iliri-gjilan",
+      "expected": {
+        "name": "Auto Service Iliri",
+        "city": "Gjilan",
+        "address": "42°26'08.8\"N 21°28'53.9\"E",
+        "phone": "+38343720009"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21",
+        "source": "https://numrat.com/biznes/GmWELMXb0KDR/auto-service-iliri/",
+        "sourceName": "Auto Service Iliri",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Independent directory has no hours; focused own-source discovery found no attributable weekly plan. Google/AI hours ignored.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-service-istrefi-skenderaj",
       "expected": {
         "name": "Auto Service \"Istrefi\"",
@@ -7813,6 +8307,87 @@
       }
     },
     {
+      "id": "auto-service-sokoli-gjilan",
+      "expected": {
+        "name": "Auto Service Sokoli",
+        "city": "Gjilan",
+        "address": "Enver Miftari",
+        "phone": "+38344477221"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21",
+        "source": "https://numrat.com/biznes/ll3pw3JY6Zr6/auto-service-sokoli/ | https://autoservissokoli.weebly.com/ | https://autoservissokoli.weebly.com/kontakte.html",
+        "sourceName": "Auto Service Sokoli",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No attributable weekly hours; unassigned same-name website not used for service claims.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-service-urimi-malisheve",
       "expected": {
         "name": "Auto Service Urimi",
@@ -8315,6 +8890,99 @@
       }
     },
     {
+      "id": "auto-servis-ardiani-a-gjilan",
+      "expected": {
+        "name": "Auto Servis Ardiani-A",
+        "city": "Gjilan",
+        "address": "Magjistrale",
+        "phone": "+38348818111"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              },
+              {
+                "start": "19:00",
+                "end": "20:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-11-21",
+        "source": "https://www.facebook.com/p/Auto-service-Ardiani-100028835366842/",
+        "sourceName": "Auto Servis Ardiani-A",
+        "researchStatus": "Researched public source",
+        "notes": "Own full seven-day hours dialog, updated about6years ago. Friday split hours explicitly shown; no inference from Google/AI, no owner-confirmed/current-open claim.",
+        "originalWeek": [
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00,19:00-20:00",
+          "08:00-18:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-servis-arlindi-prishtina",
       "expected": {
         "name": "Auto Servis Arlindi",
@@ -8570,6 +9238,87 @@
           "09:00-17:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-bashkimi-gjilan",
+      "expected": {
+        "name": "Auto Servis Bashkimi",
+        "city": "Gjilan",
+        "address": "Rr.Prishtines, Kastriot arifi Nr.32",
+        "phone": "+38348474555"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21",
+        "source": "https://numrat.com/biznes/hLOkwooGmYAl/auto-servis-bashkimi/",
+        "sourceName": "Auto Servis Bashkimi",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No own source or attributable weekly plan found; unrelated Bashkimi schedules excluded.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -8926,6 +9675,87 @@
           "08:00-16:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-besarti-gjilan",
+      "expected": {
+        "name": "Auto Servis Besarti",
+        "city": "Gjilan",
+        "address": "Nëna Tereze",
+        "phone": "+38348144785"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21",
+        "source": "https://numrat.com/biznes/EgLPe5FIUjyN/auto-servis-besarti/ | https://www.facebook.com/besart.ahoxha.10/",
+        "sourceName": "Auto Servis Besarti",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Focused own website/Facebook/Instagram/email/hours search; possible public announcement source opened after connection recovery but attributable business post not visible; unrelated Hajvali profiles excluded. No personal details retained. No attributable weekly plan; Google/AI times not adopted.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },
@@ -10136,6 +10966,87 @@
       }
     },
     {
+      "id": "auto-servis-dritoni-gjilan",
+      "expected": {
+        "name": "Auto Servis Dritoni",
+        "city": "Gjilan",
+        "address": "28 Nentori",
+        "phone": "+38344212139"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21",
+        "source": "https://numrat.com/biznes/Arvu2pwt59Qr/auto-servis-dritoni/ | https://www.facebook.com/p/Auto-Servis-Dritoni-100093646698850/",
+        "sourceName": "Auto Servis Dritoni",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own public page and contact tab contain phone only, no week; focused website/Instagram/email/hours search found no attributable additional source.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-servis-edi-fushe-kosove",
       "expected": {
         "name": "Auto servis Edi",
@@ -10222,6 +11133,87 @@
           "Geschlossen"
         ],
         "earlierPlan": "09:00-17:30 | 09:00-05:30 | 09:00-05:30 | 09:00-05:30 | 09:00-05:30 | Geschlossen | Geschlossen"
+      }
+    },
+    {
+      "id": "auto-servis-elektro-klima-sela-gjilan",
+      "expected": {
+        "name": "Auto Servis Elektro-Klima SELA",
+        "city": "Gjilan",
+        "address": "272 Medlin Ollbrajt",
+        "phone": "+38344320224"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21",
+        "source": "https://numrat.com/biznes/NH8kXZ0Ucr3b/auto-servis-elektro-klima-sela/",
+        "sourceName": "Auto Servis Elektro-Klima SELA",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Directory no week; no attributable own website/social source found; Google/AI hours excluded.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
       }
     },
     {
@@ -10650,6 +11642,95 @@
         "researchStatus": "Standardzeiten (angenommen)",
         "notes": "No weekly hours or email in directory, full own Instagram bio or Facebook contact/details; targeted website/social/email discovery did not find another attributable source. Directory October12, own latest visible post July11,2025. Google/AI schedule not used.",
         "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "auto-servis-florenti-gjilan",
+      "expected": {
+        "name": "Auto Servis Florenti",
+        "city": "Gjilan",
+        "address": "Rruga e Ferizajit",
+        "phone": "+38349666686"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-11-21",
+        "source": "https://www.facebook.com/autoserviceflorenti/ | https://gjirafa.biz/auto-servis-florenti-1",
+        "sourceName": "Auto Servis Florenti",
+        "researchStatus": "Researched public source",
+        "notes": "Own page no week; independent full seven-day schedule and same exact phone. Source age unavailable; directory calls locality Livoq i Poshtem/IdrizSeferi vs Rruga e Ferizajit, no alternate precise point seen. No owner-confirmed/current-open claim.",
+        "originalWeek": [
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "Geschlossen"
+        ],
         "earlierPlan": ""
       }
     },
@@ -14703,6 +15784,95 @@
       }
     },
     {
+      "id": "auto-servis-toska-gjilan",
+      "expected": {
+        "name": "Auto Servis Toska",
+        "city": "Gjilan",
+        "address": "299, Gjilan",
+        "phone": "+38344321676"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-11-21",
+        "source": "https://www.facebook.com/autoservisitoska/ | https://gjirafa.biz/autoservisitoska-1",
+        "sourceName": "Auto Servis Toska",
+        "researchStatus": "Researched public source",
+        "notes": "Own page no hours. Independent Gjirafa full seven-day list, source age unavailable, same primary phone and city; no owner confirmation. Own street Metush Krasniqi vs directory number299 and Gjirafa Rruga Qarkore retained as source variants; exact independent point matches Maps.",
+        "originalWeek": [
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "08:00-18:00",
+          "Geschlossen"
+        ],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "auto-servis-trimi-prishtina",
       "expected": {
         "name": "Auto Servis Trimi",
@@ -17309,6 +18479,87 @@
       }
     },
     {
+      "id": "autoexpert-rks-gjilan",
+      "expected": {
+        "name": "AUTOEXPERT.RKS",
+        "city": "Gjilan",
+        "address": "Rruga Qarkore",
+        "phone": "+38344175319"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21",
+        "source": "https://numrat.com/biznes/3EJaci9qWK55/autoexpert-rks/ | https://www.facebook.com/mallra.nga.zvicra.209790/photos/122332858616232258/ | https://www.facebook.com/mallra.nga.zvicra.209790",
+        "sourceName": "AUTOEXPERT.RKS",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own advertisement/profile and directory no weekly hours; focused own-source/email/Instagram/hours search yielded no attributable schedule.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "autogang-kacanik",
       "expected": {
         "name": "AutoGang",
@@ -18355,6 +19606,176 @@
         "researchStatus": "Standardzeiten (angenommen)",
         "notes": "No attributed schedule; source age unavailable. No weekly schedule in full directory and no attributable own website/Facebook/Instagram source found; central explicitly assumed default required. Checked sources: https://numrat.com/biznes/8TRuVeDjETWp/autoservis-altini/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
         "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "autoservis-andi-gjilan",
+      "expected": {
+        "name": "Autoservis Andi",
+        "city": "Gjilan",
+        "address": "Hajdar Hashani",
+        "phone": "+38345462193"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21",
+        "source": "https://numrat.com/biznes/Blz6D6OJRdAx/autoservis-andi/",
+        "sourceName": "Autoservis Andi",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Independent directory has no hours; focused own-source discovery found no attributable weekly plan. Google/AI hours ignored.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "autoservis-dilaveri-gjilan",
+      "expected": {
+        "name": "AutoServis Dilaveri",
+        "city": "Gjilan",
+        "address": "14 Bejtulla Ismajli",
+        "phone": "+38344654777"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "19:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-11-21",
+        "source": "https://www.facebook.com/AutoServisDilaveri/ | https://stgres.gjirafa.biz/auto-servis-dilaveri-1",
+        "sourceName": "AutoServis Dilaveri",
+        "researchStatus": "Researched public source",
+        "notes": "Own page no weekly hours. Separate directory full seven-day week, same exact phone, source age unavailable; no owner/current-open confirmation. Address variants Rruga Qarkore/AdaGas and Metush Krasniqi retained as source limitations; precise point from Numrat matches Maps.",
+        "originalWeek": [
+          "08:00-19:00",
+          "08:00-19:00",
+          "08:00-19:00",
+          "08:00-19:00",
+          "08:00-19:00",
+          "08:00-19:00",
+          "Geschlossen"
+        ],
         "earlierPlan": ""
       }
     },
@@ -20961,6 +22382,87 @@
       }
     },
     {
+      "id": "elite-detailing-gjilan",
+      "expected": {
+        "name": "Elite Detailing",
+        "city": "Gjilan",
+        "address": "Muharrem Ibrahimi",
+        "phone": "+38344424420"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21",
+        "source": "https://numrat.com/biznes/FajVYay3waBq/elite-detailing/ | https://www.instagram.com/elitedetaiiling/",
+        "sourceName": "Elite Detailing",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "Own Instagram bio has no week and zero posts; directory has no hours. Google/AI24h ignored.",
+        "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
       "id": "eurogoma-ferizaj",
       "expected": {
         "name": "Eurogoma – Ferizaj",
@@ -22389,6 +23891,101 @@
         "researchStatus": "Standardzeiten (angenommen)",
         "notes": "Own hours dialog only says continuously open, updatedabout2yearsago; no regular seven-day premises schedule. Own current business description explicitly says appointments only. Generic old always-open flag is not accepted as a normal physical-workshop week. Central assumed plan mandatory; retain appointment-only note, no operator confirmation or present open/closed claim. Checked sources: https://www.facebook.com/p/IsaTuning-61568646849306/ https://www.instagram.com/isatuning/ https://linktr.ee/isatuning https://numrat.com/biznes/8EGBM8xN6xbx/isa-tuning/ No Google hours copied. Viewing today is not operator confirmation; imported hours do not assert present open/closed status.",
         "originalWeek": ["", "", "", "", "", "", ""],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "ismail-detailing-gjilan",
+      "expected": {
+        "name": "Ismail Detailing",
+        "city": "Gjilan",
+        "address": "Hysni Xhemajli 25",
+        "phone": "+38345235777"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "00:00",
+                "end": "24:00"
+              }
+            ]
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "researched",
+        "checkedAt": "2026-11-21",
+        "source": "https://www.facebook.com/p/Ismail-Detailing-61575732369043/",
+        "sourceName": "Ismail Detailing",
+        "researchStatus": "Researched public source",
+        "notes": "Own public business-hours dialog explicitly continuously open, updated about2years ago; source-age caveat. Recent own posts November16 2026. No owner-confirmed/current-open claim.",
+        "originalWeek": [
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00",
+          "00:00-24:00"
+        ],
         "earlierPlan": ""
       }
     },
@@ -25798,6 +27395,87 @@
           "09:00-21:00",
           "Geschlossen"
         ],
+        "earlierPlan": ""
+      }
+    },
+    {
+      "id": "supreme-detailing-gjilan",
+      "expected": {
+        "name": "Supreme Detailing",
+        "city": "Gjilan",
+        "address": "283 Rruga Marie Shllaku",
+        "phone": "+38348644529"
+      },
+      "hours": {
+        "week": [
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "18:00"
+              }
+            ]
+          },
+          {
+            "mode": "open",
+            "intervals": [
+              {
+                "start": "08:00",
+                "end": "16:00"
+              }
+            ]
+          },
+          {
+            "mode": "closed"
+          }
+        ],
+        "exceptions": []
+      },
+      "metadata": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21",
+        "source": "https://numrat.com/biznes/yIJvZJZoirdG/supremedetailing/ | https://supremedetailing-ks.com/ | https://www.instagram.com/supremedetailing_/",
+        "sourceName": "Supreme Detailing",
+        "researchStatus": "Standardzeiten (angenommen)",
+        "notes": "No weekly plan in own website or expanded bio. Website24h is turnaround marketing, not opening hours; Google/AI hours excluded.",
+        "originalWeek": ["", "", "", "", "", "", ""],
         "earlierPlan": ""
       }
     },

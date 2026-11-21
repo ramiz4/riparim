@@ -1,0 +1,1550 @@
+{
+  "minimumRequiredNewPublished": 20,
+  "checkedAt": "2026-11-21T09:21:26.420717+00:00",
+  "candidates": [
+    {
+      "id": "auto-elektro-muja-gjilan",
+      "name": "Auto Elektro Muja",
+      "city": "Gjilan",
+      "address": "Afer tregut te veturave, Rruga Qarkore",
+      "phone": "+38344989298",
+      "lat": 42.459359,
+      "lng": 21.449762,
+      "directory": "https://numrat.com/biznes/MJFnGCm6U87B/auto-elektro-muja/",
+      "scope": "Independent directory explicitly classifies automotive electrical service; no additional services inferred.",
+      "placeId": "ChIJ_-_5965u-w8R7Gx0biKGwKQ",
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "officialVisibleLink": "!19s link in manually inspected Autoelektricist Gjilan results",
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true,
+        "checkedAt": "2026-11-21T08:36:33.220016+00:00"
+      },
+      "publicBusinessEmail": {
+        "address": null,
+        "status": "not-found",
+        "checkedAt": "2026-11-21T08:36:33.220016+00:00",
+        "sourceUrl": "https://numrat.com/biznes/MJFnGCm6U87B/auto-elektro-muja/",
+        "checkedUrls": [
+          "https://numrat.com/biznes/MJFnGCm6U87B/auto-elektro-muja/",
+          "https://www.facebook.com/pages/Auto-Electro-Servis-MUJA-/517276365017501"
+        ],
+        "note": "Focused own website/social/email discovery; Facebook result explicitly unofficial, no contacts or posts. Search AI ignored."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21T08:36:33.220016+00:00",
+        "note": "No attributable own weekly schedule found; directory no hours; Facebook result unofficial and empty. Do not use Google hours."
+      },
+      "status": "verified-for-dry-run",
+      "selectedWhatsapp": "+38344989298",
+      "sourceUrls": [
+        "https://numrat.com/biznes/MJFnGCm6U87B/auto-elektro-muja/"
+      ],
+      "checkedAt": "2026-11-21T08:36:33.220016+00:00"
+    },
+    {
+      "id": "auto-servis-dritoni-gjilan",
+      "name": "Auto Servis Dritoni",
+      "phone": "+38344212139",
+      "city": "Gjilan",
+      "address": "28 Nentori",
+      "lat": 42.46658,
+      "lng": 21.429298,
+      "directory": "https://numrat.com/biznes/Arvu2pwt59Qr/auto-servis-dritoni/",
+      "official": "https://www.facebook.com/p/Auto-Servis-Dritoni-100093646698850/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/Arvu2pwt59Qr/auto-servis-dritoni/",
+        "https://www.facebook.com/p/Auto-Servis-Dritoni-100093646698850/"
+      ],
+      "scope": "Independent directory Mekanik and own business workshop page. General vehicle repair only.",
+      "placeId": "ChIJ7zpNMmONVBMR_I3b6baiZ_4",
+      "checkedAt": "2026-11-21T08:40:36.505748+00:00",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "officialVisibleLink": "!19s in manually inspected Mekanik Gjilan list",
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true,
+        "checkedAt": "2026-11-21T08:40:36.505748+00:00"
+      },
+      "selectedWhatsapp": "",
+      "publicBusinessEmail": {
+        "address": null,
+        "sourceUrl": "https://www.facebook.com/p/Auto-Servis-Dritoni-100093646698850/",
+        "checkedUrls": [
+          "https://numrat.com/biznes/Arvu2pwt59Qr/auto-servis-dritoni/",
+          "https://www.facebook.com/p/Auto-Servis-Dritoni-100093646698850/"
+        ],
+        "status": "not-found",
+        "checkedAt": "2026-11-21T08:40:36.505748+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21T08:40:36.505748+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/Arvu2pwt59Qr/auto-servis-dritoni/",
+          "https://www.facebook.com/p/Auto-Servis-Dritoni-100093646698850/"
+        ],
+        "note": "Own public page and contact tab contain phone only, no week; focused website/Instagram/email/hours search found no attributable additional source."
+      },
+      "continuity": "Own page names city only; its generic city pin is not claimed as precise workshop premises. Independent precise address/point matches Maps."
+    },
+    {
+      "id": "auto-servis-toska-gjilan",
+      "name": "Auto Servis Toska",
+      "phone": "+38344321676",
+      "city": "Gjilan",
+      "address": "299, Gjilan",
+      "lat": 42.479787,
+      "lng": 21.463521,
+      "directory": "https://numrat.com/biznes/Bbd6MO8XFYTu/auto-servis-toska/",
+      "official": "https://www.facebook.com/autoservisitoska/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/Bbd6MO8XFYTu/auto-servis-toska/",
+        "https://www.facebook.com/autoservisitoska/"
+      ],
+      "scope": "Own Facebook bio explicitly states vehicle repairs and air-conditioning recharge: Auto Servisi Toska merret me riparimin e te gjitha llojeve te veturave poashtu edhe me mbushjen e klimave. Exact primary phone paired on same page. Independent directory additionally classifies Mekanik.",
+      "placeId": "ChIJrRL9LwCNVBMR7EQeTD7g_h8",
+      "checkedAt": "2026-11-21T08:40:36.505748+00:00",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "officialVisibleLink": "!19s in manually inspected Mekanik Gjilan list",
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true,
+        "checkedAt": "2026-11-21T08:40:36.505748+00:00"
+      },
+      "selectedWhatsapp": "+38344321676",
+      "publicBusinessEmail": {
+        "address": "autoservistoska@gmail.com",
+        "sourceUrl": "https://www.facebook.com/autoservisitoska/",
+        "checkedUrls": [
+          "https://numrat.com/biznes/Bbd6MO8XFYTu/auto-servis-toska/",
+          "https://www.facebook.com/autoservisitoska/"
+        ],
+        "status": "publicly-sourced",
+        "checkedAt": "2026-11-21T08:40:36.505748+00:00",
+        "note": "Own business page explicitly publishes this address with exact phone. Different generic Hamid address in directory not adopted."
+      },
+      "openingHoursResearch": {
+        "kind": "researched",
+        "checkedAt": "2026-11-21T08:40:36.505748+00:00",
+        "sourceUrls": [
+          "https://www.facebook.com/autoservisitoska/",
+          "https://gjirafa.biz/autoservisitoska-1"
+        ],
+        "note": "Own page no hours. Independent Gjirafa full seven-day list, source age unavailable, same primary phone and city; no owner confirmation. Own street Metush Krasniqi vs directory number299 and Gjirafa Rruga Qarkore retained as source variants; exact independent point matches Maps.",
+        "week": "Mo-Sa 08:00-18:00; So closed"
+      }
+    },
+    {
+      "id": "auto-servis-bashkimi-gjilan",
+      "name": "Auto Servis Bashkimi",
+      "city": "Gjilan",
+      "phone": "+38348474555",
+      "address": "Rr.Prishtines, Kastriot arifi Nr.32",
+      "lat": 42.463145,
+      "lng": 21.453899,
+      "directory": "https://numrat.com/biznes/hLOkwooGmYAl/auto-servis-bashkimi/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/hLOkwooGmYAl/auto-servis-bashkimi/"
+      ],
+      "scope": "Independent directory explicitly Mekanik; only general vehicle repair.",
+      "placeId": "ChIJT9zBlO6NVBMRQbLP9BgXJjI",
+      "checkedAt": "2026-11-21T08:41:42.998584+00:00",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "officialVisibleLink": "!19s in manually inspected Mekanik Gjilan list",
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true,
+        "checkedAt": "2026-11-21T08:41:42.998584+00:00"
+      },
+      "selectedWhatsapp": "+38348474555",
+      "publicBusinessEmail": {
+        "address": null,
+        "status": "not-found",
+        "sourceUrl": "https://numrat.com/biznes/hLOkwooGmYAl/auto-servis-bashkimi/",
+        "checkedUrls": [
+          "https://numrat.com/biznes/hLOkwooGmYAl/auto-servis-bashkimi/"
+        ],
+        "checkedAt": "2026-11-21T08:41:42.998584+00:00",
+        "note": "Focused own website/Facebook/Instagram/email discovery followed by exact primary-phone search. Other Bashkimi at Livoq has different phone; no attribution of its email. AI summaries ignored."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21T08:41:42.998584+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/hLOkwooGmYAl/auto-servis-bashkimi/"
+        ],
+        "note": "No own source or attributable weekly plan found; unrelated Bashkimi schedules excluded."
+      }
+    },
+    {
+      "id": "auto-dermaku-gjilan",
+      "name": "Auto Dermaku",
+      "city": "Gjilan",
+      "phone": "+38345603631",
+      "address": "Gjilan 60000",
+      "lat": 42.465923,
+      "lng": 21.44862,
+      "directory": "https://numrat.com/biznes/G7xavqDc0UBk/auto-dermaku/",
+      "official": "https://www.instagram.com/valondermaku/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/G7xavqDc0UBk/auto-dermaku/",
+        "https://www.instagram.com/valondermaku/",
+        "https://www.instagram.com/valondermaku/reel/DfHUT37lTPt/"
+      ],
+      "scope": "Own public business captions explicitly offer vehicle painting, polishing and ceramic coating with exact workshop phone and business email. No general mechanical service inferred.",
+      "placeId": "ChIJPWzVJwCNVBMRQvBmNNzjQVI",
+      "checkedAt": "2026-11-21T08:42:42.018896+00:00",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "officialVisibleLink": "!19s in manually inspected Mekanik Gjilan list",
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true,
+        "checkedAt": "2026-11-21T08:42:42.018896+00:00"
+      },
+      "selectedWhatsapp": "+38345603631",
+      "publicBusinessEmail": {
+        "address": "Valodermaku@gmail.com",
+        "status": "publicly-sourced",
+        "sourceUrl": "https://www.instagram.com/valondermaku/reel/DfHUT37lTPt/",
+        "checkedUrls": [
+          "https://numrat.com/biznes/G7xavqDc0UBk/auto-dermaku/",
+          "https://www.instagram.com/valondermaku/",
+          "https://www.instagram.com/p/CamPFtGjBbp/"
+        ],
+        "checkedAt": "2026-11-21T08:42:42.018896+00:00",
+        "note": "Business contact explicitly paired with exact phone in public own service-post captions; personal profile details excluded."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21T08:42:42.018896+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/G7xavqDc0UBk/auto-dermaku/",
+          "https://www.instagram.com/valondermaku/"
+        ],
+        "note": "No weekly plan in independent directory or own public bio/service captions. Facebook route resolves personal profile; personal details not retained. No Google hours adopted."
+      }
+    },
+    {
+      "id": "autoexpert-rks-gjilan",
+      "name": "AUTOEXPERT.RKS",
+      "city": "Gjilan",
+      "phone": "+38344175319",
+      "additionalPhones": ["+38349197090"],
+      "address": "Rruga Qarkore",
+      "lat": 42.472057,
+      "lng": 21.450622,
+      "directory": "https://numrat.com/biznes/3EJaci9qWK55/autoexpert-rks/",
+      "official": "https://www.facebook.com/mallra.nga.zvicra.209790/photos/122332858616232258/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/3EJaci9qWK55/autoexpert-rks/",
+        "https://www.facebook.com/mallra.nga.zvicra.209790/photos/122332858616232258/"
+      ],
+      "scope": "Own November5 2026 public business advertisement visually says Professional Car Service; exact phone pair/email and Rruga qarkore nato99 Gjilan. General vehicle service only; no detailed service claims inferred from icons.",
+      "placeId": "ChIJwaHY75aNVBMR1Azyj4usjfg",
+      "checkedAt": "2026-11-21T08:43:56.201327+00:00",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "officialVisibleLink": "!19s in manually inspected Mekanik Gjilan list",
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true,
+        "checkedAt": "2026-11-21T08:43:56.201327+00:00"
+      },
+      "selectedWhatsapp": "+38344175319",
+      "whatsappSelection": "Independent directory primary44 is positive; own advertised49 completed negative.",
+      "publicBusinessEmail": {
+        "address": "autoexpert.rks@gmail.com",
+        "status": "publicly-sourced",
+        "sourceUrl": "https://www.facebook.com/mallra.nga.zvicra.209790/photos/122332858616232258/",
+        "checkedUrls": [
+          "https://numrat.com/biznes/3EJaci9qWK55/autoexpert-rks/",
+          "https://www.facebook.com/mallra.nga.zvicra.209790/photos/122332858616232258/"
+        ],
+        "checkedAt": "2026-11-21T08:43:56.201327+00:00",
+        "note": "Read visually from own dated business advertisement, same primary phone and street."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21T08:43:56.201327+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/3EJaci9qWK55/autoexpert-rks/",
+          "https://www.facebook.com/mallra.nga.zvicra.209790/photos/122332858616232258/",
+          "https://www.facebook.com/mallra.nga.zvicra.209790"
+        ],
+        "note": "Own advertisement/profile and directory no weekly hours; focused own-source/email/Instagram/hours search yielded no attributable schedule."
+      }
+    },
+    {
+      "id": "elite-detailing-gjilan",
+      "name": "Elite Detailing",
+      "city": "Gjilan",
+      "phone": "+38344424420",
+      "address": "Muharrem Ibrahimi",
+      "lat": 42.467911,
+      "lng": 21.459276,
+      "directory": "https://numrat.com/biznes/FajVYay3waBq/elite-detailing/",
+      "official": "https://www.instagram.com/elitedetaiiling/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/FajVYay3waBq/elite-detailing/",
+        "https://www.instagram.com/elitedetaiiling/"
+      ],
+      "scope": "Own Instagram bio explicitly interior detailing and seat cleaning, exact business phone and own location42.468,21.4592 within12m of independent directory. No polishing or ceramic claim.",
+      "placeId": "ChIJf3KXq0mNVBMRsN1jWQKyQEk",
+      "checkedAt": "2026-11-21T08:45:04.387528+00:00",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "officialVisibleLink": "!19s in manually inspected Detailing Gjilan list",
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true,
+        "checkedAt": "2026-11-21T08:45:04.387528+00:00"
+      },
+      "selectedWhatsapp": "",
+      "publicBusinessEmail": {
+        "address": null,
+        "status": "not-found",
+        "sourceUrl": "https://www.instagram.com/elitedetaiiling/",
+        "checkedUrls": [
+          "https://numrat.com/biznes/FajVYay3waBq/elite-detailing/",
+          "https://www.instagram.com/elitedetaiiling/",
+          "https://www.facebook.com/p/Elite-Detailing-100068240602022/"
+        ],
+        "checkedAt": "2026-11-21T08:45:04.387528+00:00",
+        "note": "Own Instagram bio no email. Facebook namesake does not independently establish phone/location and was not used; no attributable own website found."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21T08:45:04.387528+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/FajVYay3waBq/elite-detailing/",
+          "https://www.instagram.com/elitedetaiiling/"
+        ],
+        "note": "Own Instagram bio has no week and zero posts; directory has no hours. Google/AI24h ignored."
+      }
+    },
+    {
+      "id": "ismail-detailing-gjilan",
+      "name": "Ismail Detailing",
+      "city": "Gjilan",
+      "phone": "+38345235777",
+      "address": "Hysni Xhemajli 25",
+      "lat": 42.461768,
+      "lng": 21.450457,
+      "directory": "https://numrat.com/biznes/ZZCQOHyF6OiF/ismail-detailing/",
+      "official": "https://www.facebook.com/p/Ismail-Detailing-61575732369043/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/ZZCQOHyF6OiF/ismail-detailing/",
+        "https://www.facebook.com/p/Ismail-Detailing-61575732369043/",
+        "https://www.instagram.com/ismail.detailing/"
+      ],
+      "scope": "Own Facebook and Instagram explicitly interior/exterior detailing, polishing and ceramic coating; exact phone and premises.",
+      "continuity": "Own Facebook point42.46178,21.45045 within2m of directory; exact street25.",
+      "placeId": "ChIJT2YaBbLzVBMRo1U7jY3Yw8g",
+      "checkedAt": "2026-11-21T08:45:47.828483+00:00",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "officialVisibleLink": "!19s in manually inspected Detailing Gjilan list",
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true,
+        "checkedAt": "2026-11-21T08:45:47.828483+00:00"
+      },
+      "selectedWhatsapp": "+38345235777",
+      "publicBusinessEmail": {
+        "address": "ismaildetailing@gmail.com",
+        "status": "publicly-sourced",
+        "sourceUrl": "https://www.instagram.com/ismail.detailing/",
+        "checkedUrls": [
+          "https://numrat.com/biznes/ZZCQOHyF6OiF/ismail-detailing/",
+          "https://www.facebook.com/p/Ismail-Detailing-61575732369043/",
+          "https://www.instagram.com/ismail.detailing/"
+        ],
+        "checkedAt": "2026-11-21T08:45:47.828483+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "researched",
+        "checkedAt": "2026-11-21T08:45:47.828483+00:00",
+        "week": "Mo-So 00:00-24:00",
+        "sourceUrls": [
+          "https://www.facebook.com/p/Ismail-Detailing-61575732369043/"
+        ],
+        "note": "Own public business-hours dialog explicitly continuously open, updated about2years ago; source-age caveat. Recent own posts November16 2026. No owner-confirmed/current-open claim."
+      }
+    },
+    {
+      "id": "auto-detailing-nedimi-gjilan",
+      "name": "Auto Detailing Nedimi",
+      "city": "Gjilan",
+      "phone": "+38345285343",
+      "address": "Mic Sokoli",
+      "lat": 42.462437,
+      "lng": 21.452061,
+      "directory": "https://numrat.com/biznes/wnWT4iQIObZm/auto-detailing-nedimi/",
+      "official": "https://www.instagram.com/autodetailingnedimi/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/wnWT4iQIObZm/auto-detailing-nedimi/",
+        "https://www.instagram.com/autodetailingnedimi/"
+      ],
+      "scope": "Own fully expanded public Instagram bio explicitly professional interior/exterior detailing, same street/city/phone. No polishing/ceramic inferred.",
+      "placeId": "ChIJk2wJ6-eNVBMR7ZKVMfsPoqM",
+      "checkedAt": "2026-11-21T08:46:50.930976+00:00",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "officialVisibleLink": "!19s in manually inspected Detailing Gjilan list",
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true,
+        "checkedAt": "2026-11-21T08:46:50.930976+00:00"
+      },
+      "selectedWhatsapp": "+38345285343",
+      "publicBusinessEmail": {
+        "address": null,
+        "status": "not-found",
+        "sourceUrl": "https://www.instagram.com/autodetailingnedimi/",
+        "checkedUrls": [
+          "https://numrat.com/biznes/wnWT4iQIObZm/auto-detailing-nedimi/",
+          "https://www.instagram.com/autodetailingnedimi/"
+        ],
+        "checkedAt": "2026-11-21T08:46:50.930976+00:00",
+        "note": "Focused own website/Facebook/Instagram/email search; attributed Instagram expanded bio no email, other Facebook results unrelated."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21T08:46:50.930976+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/wnWT4iQIObZm/auto-detailing-nedimi/",
+          "https://www.instagram.com/autodetailingnedimi/"
+        ],
+        "note": "Own fully expanded bio and independent directory have no week; Google24h/AI excluded."
+      }
+    },
+    {
+      "id": "supreme-detailing-gjilan",
+      "name": "Supreme Detailing",
+      "city": "Gjilan",
+      "phone": "+38348644529",
+      "address": "283 Rruga Marie Shllaku",
+      "lat": 42.47262,
+      "lng": 21.48281,
+      "directory": "https://numrat.com/biznes/yIJvZJZoirdG/supremedetailing/",
+      "official": "https://supremedetailing-ks.com/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/yIJvZJZoirdG/supremedetailing/",
+        "https://supremedetailing-ks.com/",
+        "https://www.instagram.com/supremedetailing_/"
+      ],
+      "scope": "Own website and fully expanded Instagram bio mutually linked, exact phone: interior/exterior detailing, polishing, ceramic coating and PPF. No numerical marketing or certification claims adopted.",
+      "placeId": "ChIJpVIhznXzVBMReSYW6x18XF8",
+      "checkedAt": "2026-11-21T08:47:24.462926+00:00",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "officialVisibleLink": "!19s in manually inspected Detailing Gjilan list",
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true,
+        "checkedAt": "2026-11-21T08:47:24.462926+00:00"
+      },
+      "selectedWhatsapp": "+38348644529",
+      "publicBusinessEmail": {
+        "address": null,
+        "status": "not-found",
+        "sourceUrl": "https://supremedetailing-ks.com/",
+        "checkedUrls": [
+          "https://numrat.com/biznes/yIJvZJZoirdG/supremedetailing/",
+          "https://supremedetailing-ks.com/",
+          "https://www.instagram.com/supremedetailing_/"
+        ],
+        "checkedAt": "2026-11-21T08:47:24.462926+00:00",
+        "note": "Own website contact/footer and expanded Instagram bio contain phone but no email; focused Facebook/email/hours discovery no additional attributable source."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21T08:47:24.462926+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/yIJvZJZoirdG/supremedetailing/",
+          "https://supremedetailing-ks.com/",
+          "https://www.instagram.com/supremedetailing_/"
+        ],
+        "note": "No weekly plan in own website or expanded bio. Website24h is turnaround marketing, not opening hours; Google/AI hours excluded."
+      }
+    },
+    {
+      "id": "autoservis-dilaveri-gjilan",
+      "name": "AutoServis Dilaveri",
+      "city": "Gjilan",
+      "phone": "+38344654777",
+      "address": "14 Bejtulla Ismajli",
+      "lat": 42.481869,
+      "lng": 21.480402,
+      "directory": "https://numrat.com/biznes/lHBZa1ExD4pu/autoservis-dilaveri/",
+      "official": "https://www.facebook.com/AutoServisDilaveri/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/lHBZa1ExD4pu/autoservis-dilaveri/",
+        "https://www.facebook.com/AutoServisDilaveri/",
+        "https://stgres.gjirafa.biz/auto-servis-dilaveri-1"
+      ],
+      "scope": "Independent mechanic directory, own workshop page and separate directory explicitly vehicle service.",
+      "placeId": "ChIJzwDlOgDzVBMRwacsAHNQPmE",
+      "checkedAt": "2026-11-21T08:53:25.318849+00:00",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "officialVisibleLink": "!19s in manually inspected and scrolled Mekanik Gjilan list",
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true,
+        "checkedAt": "2026-11-21T08:53:25.318849+00:00"
+      },
+      "selectedWhatsapp": "+38344654777",
+      "publicBusinessEmail": {
+        "address": null,
+        "status": "not-found",
+        "sourceUrl": "https://www.facebook.com/AutoServisDilaveri/",
+        "checkedUrls": [
+          "https://numrat.com/biznes/lHBZa1ExD4pu/autoservis-dilaveri/",
+          "https://www.facebook.com/AutoServisDilaveri/",
+          "https://stgres.gjirafa.biz/auto-servis-dilaveri-1"
+        ],
+        "checkedAt": "2026-11-21T08:53:25.318849+00:00",
+        "note": "Own public contact section and independent directory no email; focused own site/Instagram/email discovery no attributed additional contact."
+      },
+      "openingHoursResearch": {
+        "kind": "researched",
+        "checkedAt": "2026-11-21T08:53:25.318849+00:00",
+        "week": "Mo-Sa08:00-19:00;So closed",
+        "sourceUrls": [
+          "https://www.facebook.com/AutoServisDilaveri/",
+          "https://stgres.gjirafa.biz/auto-servis-dilaveri-1"
+        ],
+        "note": "Own page no weekly hours. Separate directory full seven-day week, same exact phone, source age unavailable; no owner/current-open confirmation. Address variants Rruga Qarkore/AdaGas and Metush Krasniqi retained as source limitations; precise point from Numrat matches Maps."
+      }
+    },
+    {
+      "id": "auto-service-sokoli-gjilan",
+      "name": "Auto Service Sokoli",
+      "city": "Gjilan",
+      "phone": "+38344477221",
+      "address": "Enver Miftari",
+      "lat": 42.482993,
+      "lng": 21.478484,
+      "directory": "https://numrat.com/biznes/ll3pw3JY6Zr6/auto-service-sokoli/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/ll3pw3JY6Zr6/auto-service-sokoli/"
+      ],
+      "scope": "Independent directory specifically Mekanik; general mechanical car service only.",
+      "placeId": "ChIJmUt5XNrzVBMRp_gaMnV_Xnw",
+      "checkedAt": "2026-11-21T08:54:42.693974+00:00",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "officialVisibleLink": "!19s in manually inspected scrolled Mekanik Gjilan list",
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true,
+        "checkedAt": "2026-11-21T08:54:42.693974+00:00"
+      },
+      "selectedWhatsapp": "+38344477221",
+      "publicBusinessEmail": {
+        "address": null,
+        "status": "not-found",
+        "sourceUrl": "https://numrat.com/biznes/ll3pw3JY6Zr6/auto-service-sokoli/",
+        "checkedUrls": [
+          "https://numrat.com/biznes/ll3pw3JY6Zr6/auto-service-sokoli/",
+          "https://autoservissokoli.weebly.com/",
+          "https://autoservissokoli.weebly.com/kontakte.html"
+        ],
+        "checkedAt": "2026-11-21T08:54:42.693974+00:00",
+        "note": "Focused website/Facebook/Instagram/email search; website candidate has no matching phone/location and contact page contains only a form, so not adopted as official source. No message sent."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21T08:54:42.693974+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/ll3pw3JY6Zr6/auto-service-sokoli/",
+          "https://autoservissokoli.weebly.com/",
+          "https://autoservissokoli.weebly.com/kontakte.html"
+        ],
+        "note": "No attributable weekly hours; unassigned same-name website not used for service claims."
+      }
+    },
+    {
+      "id": "auto-bashkimi-kikza-performance-gjilan",
+      "name": "Auto Bashkimi x Kikza Performance",
+      "city": "Gjilan",
+      "phone": "+38344955389",
+      "address": "Livoq i Poshtem, Rr. Gjilan - Ferizaj",
+      "lat": 42.435436,
+      "lng": 21.456001,
+      "directory": "https://numrat.com/biznes/DozTTnBsYUpq/auto-servis-pjese-bashkimi-kikza-performance/",
+      "official": "https://www.facebook.com/autobashkimi/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/DozTTnBsYUpq/auto-servis-pjese-bashkimi-kikza-performance/",
+        "https://www.facebook.com/autobashkimi/",
+        "https://www.instagram.com/autobashkimi_kikzaperformance/"
+      ],
+      "scope": "Own current automotive-service posts include engine oil-leak diagnosis/repair; own linked Instagram explicitly services/programming. General vehicle repair and diagnostics only; no emissions-disable claims imported.",
+      "continuity": "Own exact point42.435414,21.455870 within12m of independent site; distinct phone and premises from Kastriot Arifi Bashkimi.",
+      "placeId": "ChIJ9XsfUlCNVBMRcuux8IQNjFA",
+      "checkedAt": "2026-11-21T08:56:18.091426+00:00",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "officialVisibleLink": "!19s in manually inspected scrolled Mekanik Gjilan list",
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true,
+        "checkedAt": "2026-11-21T08:56:18.091426+00:00"
+      },
+      "selectedWhatsapp": "+38344955389",
+      "publicBusinessEmail": {
+        "address": "lorikhasanibiz@gmail.com",
+        "status": "publicly-sourced",
+        "sourceUrl": "https://www.facebook.com/autobashkimi/",
+        "checkedUrls": [
+          "https://numrat.com/biznes/DozTTnBsYUpq/auto-servis-pjese-bashkimi-kikza-performance/",
+          "https://www.facebook.com/autobashkimi/",
+          "https://www.instagram.com/autobashkimi_kikzaperformance/"
+        ],
+        "checkedAt": "2026-11-21T08:56:18.091426+00:00"
+      },
+      "openingHoursResearch": {
+        "kind": "researched",
+        "checkedAt": "2026-11-21T08:56:18.091426+00:00",
+        "week": "Mo-Fr09:00-20:00;Sa09:00-17:00;So closed",
+        "sourceUrls": ["https://www.facebook.com/autobashkimi/"],
+        "note": "Own public full seven-day business-hours dialog, update age unavailable. Search AI reports different schedule and is ignored; no owner-confirmed/current-open claim."
+      }
+    },
+    {
+      "id": "auto-servis-besarti-gjilan",
+      "name": "Auto Servis Besarti",
+      "city": "Gjilan",
+      "phone": "+38348144785",
+      "address": "Nëna Tereze",
+      "lat": 42.467727,
+      "lng": 21.442696,
+      "directory": "https://numrat.com/biznes/EgLPe5FIUjyN/auto-servis-besarti/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/EgLPe5FIUjyN/auto-servis-besarti/"
+      ],
+      "scope": "Independent directory explicitly Mekanik; general mechanical vehicle service only.",
+      "placeId": "ChIJCyjWVQuNVBMRYcXFXyPWvR0",
+      "checkedAt": "2026-11-21T08:59:50.375040+00:00",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "officialVisibleLink": "!19s in manually inspected scrolled Mekanik Gjilan list",
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true,
+        "checkedAt": "2026-11-21T08:59:50.375040+00:00"
+      },
+      "selectedWhatsapp": "+38348144785",
+      "publicBusinessEmail": {
+        "address": null,
+        "status": "not-found",
+        "sourceUrl": "https://numrat.com/biznes/EgLPe5FIUjyN/auto-servis-besarti/",
+        "checkedUrls": [
+          "https://numrat.com/biznes/EgLPe5FIUjyN/auto-servis-besarti/",
+          "https://www.facebook.com/besart.ahoxha.10/"
+        ],
+        "checkedAt": "2026-11-21T08:59:50.375040+00:00",
+        "note": "Focused own website/Facebook/Instagram/email/hours search; possible public announcement source opened after connection recovery but attributable business post not visible; unrelated Hajvali profiles excluded. No personal details retained."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21T08:59:50.375040+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/EgLPe5FIUjyN/auto-servis-besarti/",
+          "https://www.facebook.com/besart.ahoxha.10/"
+        ],
+        "note": "Focused own website/Facebook/Instagram/email/hours search; possible public announcement source opened after connection recovery but attributable business post not visible; unrelated Hajvali profiles excluded. No personal details retained. No attributable weekly plan; Google/AI times not adopted."
+      }
+    },
+    {
+      "id": "auto-mechanic-celi-gjilan",
+      "name": "Auto mechanic Celi",
+      "city": "Gjilan",
+      "phone": "+38344292023",
+      "address": "Rr Ernest Koliqi",
+      "lat": 42.474316,
+      "lng": 21.459751,
+      "directory": "https://numrat.com/biznes/BaQTirnr40cL/auto-mechanic-celi/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/BaQTirnr40cL/auto-mechanic-celi/"
+      ],
+      "scope": "Independent directory explicitly Mekanik; general mechanical vehicle service only.",
+      "placeId": "ChIJszLKcHONVBMRFQdwxxLGo2I",
+      "checkedAt": "2026-11-21T08:59:50.375040+00:00",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "officialVisibleLink": "!19s in manually inspected scrolled Mekanik Gjilan list",
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true,
+        "checkedAt": "2026-11-21T08:59:50.375040+00:00"
+      },
+      "selectedWhatsapp": "+38344292023",
+      "publicBusinessEmail": {
+        "address": null,
+        "status": "not-found",
+        "sourceUrl": "https://numrat.com/biznes/BaQTirnr40cL/auto-mechanic-celi/",
+        "checkedUrls": [
+          "https://numrat.com/biznes/BaQTirnr40cL/auto-mechanic-celi/",
+          "https://www.facebook.com/pages/Auto-Servis-CELI-gjilan/142675819161406"
+        ],
+        "checkedAt": "2026-11-21T08:59:50.375040+00:00",
+        "note": "Focused own website/Facebook/Instagram/email/hours discovery found unofficial Facebook stub without business contacts or hours. No own source attribution claimed."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21T08:59:50.375040+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/BaQTirnr40cL/auto-mechanic-celi/",
+          "https://www.facebook.com/pages/Auto-Servis-CELI-gjilan/142675819161406"
+        ],
+        "note": "Focused own website/Facebook/Instagram/email/hours discovery found unofficial Facebook stub without business contacts or hours. No own source attribution claimed. No attributable weekly plan; Google/AI times not adopted."
+      }
+    },
+    {
+      "id": "autoservis-andi-gjilan",
+      "name": "Autoservis Andi",
+      "city": "Gjilan",
+      "phone": "+38345462193",
+      "address": "Hajdar Hashani",
+      "lat": 42.456726,
+      "lng": 21.491826,
+      "directory": "https://numrat.com/biznes/Blz6D6OJRdAx/autoservis-andi/",
+      "sourceUrls": ["https://numrat.com/biznes/Blz6D6OJRdAx/autoservis-andi/"],
+      "scope": "Independent directory explicitly Mekanik; general mechanical vehicle service only.",
+      "placeId": "ChIJC6H24ubzVBMRC414ILbIWL0",
+      "checkedAt": "2026-11-21T09:01:25.338942+00:00",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "officialVisibleLink": "!19s in manually inspected scrolled Mekanik Gjilan list",
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true,
+        "checkedAt": "2026-11-21T09:01:25.338942+00:00"
+      },
+      "selectedWhatsapp": "",
+      "publicBusinessEmail": {
+        "address": null,
+        "status": "not-found",
+        "sourceUrl": "https://numrat.com/biznes/Blz6D6OJRdAx/autoservis-andi/",
+        "checkedUrls": [
+          "https://numrat.com/biznes/Blz6D6OJRdAx/autoservis-andi/"
+        ],
+        "checkedAt": "2026-11-21T09:01:25.338942+00:00",
+        "note": "Focused own website/Facebook/Instagram/email/hours search returned unrelated regional namesakes only; no attributable business email or own site found."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21T09:01:25.338942+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/Blz6D6OJRdAx/autoservis-andi/"
+        ],
+        "note": "Independent directory has no hours; focused own-source discovery found no attributable weekly plan. Google/AI hours ignored."
+      }
+    },
+    {
+      "id": "auto-service-iliri-gjilan",
+      "name": "Auto Service Iliri",
+      "city": "Gjilan",
+      "phone": "+38343720009",
+      "address": "42°26'08.8\"N 21°28'53.9\"E",
+      "lat": 42.435769,
+      "lng": 21.481712,
+      "directory": "https://numrat.com/biznes/GmWELMXb0KDR/auto-service-iliri/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/GmWELMXb0KDR/auto-service-iliri/"
+      ],
+      "scope": "Independent directory explicitly Mekanik; general mechanical vehicle service only.",
+      "placeId": "ChIJm3GGYPzzVBMRZeVDVDksDCw",
+      "checkedAt": "2026-11-21T09:01:25.338942+00:00",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "officialVisibleLink": "!19s in manually inspected scrolled Mekanik Gjilan list",
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true,
+        "checkedAt": "2026-11-21T09:01:25.338942+00:00"
+      },
+      "selectedWhatsapp": "+38343720009",
+      "publicBusinessEmail": {
+        "address": null,
+        "status": "not-found",
+        "sourceUrl": "https://numrat.com/biznes/GmWELMXb0KDR/auto-service-iliri/",
+        "checkedUrls": [
+          "https://numrat.com/biznes/GmWELMXb0KDR/auto-service-iliri/"
+        ],
+        "checkedAt": "2026-11-21T09:01:25.338942+00:00",
+        "note": "Focused own website/Facebook/Instagram/email/hours search returned unrelated regional namesakes only; no attributable business email or own site found."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21T09:01:25.338942+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/GmWELMXb0KDR/auto-service-iliri/"
+        ],
+        "note": "Independent directory has no hours; focused own-source discovery found no attributable weekly plan. Google/AI hours ignored."
+      }
+    },
+    {
+      "id": "auto-servis-ardiani-a-gjilan",
+      "name": "Auto Servis Ardiani-A",
+      "city": "Gjilan",
+      "phone": "+38348818111",
+      "address": "Magjistrale",
+      "lat": 42.469078,
+      "lng": 21.435735,
+      "directory": "https://numrat.com/biznes/HR5efWeWeB9U/auto-servis-ardiani-a/",
+      "official": "https://www.facebook.com/p/Auto-service-Ardiani-100028835366842/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/HR5efWeWeB9U/auto-servis-ardiani-a/",
+        "https://www.facebook.com/p/Auto-service-Ardiani-100028835366842/"
+      ],
+      "scope": "Independent directory specifically Mekanik; own page same phone/city, general vehicle service only.",
+      "placeId": "ChIJMX-nHQCNVBMR1UaqH2So2is",
+      "checkedAt": "2026-11-21T09:03:03.599659+00:00",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "officialVisibleLink": "!19s in manually inspected scrolled Mekanik Gjilan list",
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true,
+        "checkedAt": "2026-11-21T09:03:03.599659+00:00"
+      },
+      "selectedWhatsapp": "+38348818111",
+      "publicBusinessEmail": {
+        "address": null,
+        "status": "not-found",
+        "sourceUrl": "https://www.facebook.com/p/Auto-service-Ardiani-100028835366842/",
+        "checkedUrls": [
+          "https://numrat.com/biznes/HR5efWeWeB9U/auto-servis-ardiani-a/",
+          "https://www.facebook.com/p/Auto-service-Ardiani-100028835366842/"
+        ],
+        "checkedAt": "2026-11-21T09:03:03.599659+00:00",
+        "note": "Own public contact section no email; focused Instagram/own-site/email discovery shows unrelated rental businesses, not adopted."
+      },
+      "openingHoursResearch": {
+        "kind": "researched",
+        "checkedAt": "2026-11-21T09:03:03.599659+00:00",
+        "week": "Mo-Thu08:00-18:00;Fr08:00-18:00,19:00-20:00;Sa08:00-18:00;So closed",
+        "sourceUrls": [
+          "https://www.facebook.com/p/Auto-service-Ardiani-100028835366842/"
+        ],
+        "note": "Own full seven-day hours dialog, updated about6years ago. Friday split hours explicitly shown; no inference from Google/AI, no owner-confirmed/current-open claim."
+      }
+    },
+    {
+      "id": "auto-servis-florenti-gjilan",
+      "name": "Auto Servis Florenti",
+      "city": "Gjilan",
+      "phone": "+38349666686",
+      "address": "Rruga e Ferizajit",
+      "lat": 42.440979,
+      "lng": 21.458799,
+      "directory": "https://numrat.com/biznes/XAI3fGhkvmZV/auto-servis-florenti/",
+      "official": "https://www.facebook.com/autoserviceflorenti/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/XAI3fGhkvmZV/auto-servis-florenti/",
+        "https://www.facebook.com/autoserviceflorenti/",
+        "https://gjirafa.biz/auto-servis-florenti-1"
+      ],
+      "scope": "Independent mechanic directory and separate directory explicitly vehicle service; own page publishes same49phone.",
+      "placeId": "ChIJGxtkzp6NVBMR0gJ6bQVLbkM",
+      "checkedAt": "2026-11-21T09:06:13.970409+00:00",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "officialVisibleLink": "!19s in manually inspected scrolled Mekanik Gjilan list",
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true,
+        "checkedAt": "2026-11-21T09:06:13.970409+00:00"
+      },
+      "selectedWhatsapp": "",
+      "publicBusinessEmail": {
+        "address": null,
+        "status": "not-found",
+        "sourceUrl": "https://www.facebook.com/autoserviceflorenti/",
+        "checkedUrls": [
+          "https://numrat.com/biznes/XAI3fGhkvmZV/auto-servis-florenti/",
+          "https://www.facebook.com/autoserviceflorenti/",
+          "https://gjirafa.biz/auto-servis-florenti-1"
+        ],
+        "checkedAt": "2026-11-21T09:06:13.970409+00:00",
+        "note": "Own page and independent contact directory no email; focused Instagram/website/email discovery returns unrelated Lorenti, excluded."
+      },
+      "openingHoursResearch": {
+        "kind": "researched",
+        "checkedAt": "2026-11-21T09:06:13.970409+00:00",
+        "week": "Mo-Sa08:00-18:00;So closed",
+        "sourceUrls": [
+          "https://www.facebook.com/autoserviceflorenti/",
+          "https://gjirafa.biz/auto-servis-florenti-1"
+        ],
+        "note": "Own page no week; independent full seven-day schedule and same exact phone. Source age unavailable; directory calls locality Livoq i Poshtem/IdrizSeferi vs Rruga e Ferizajit, no alternate precise point seen. No owner-confirmed/current-open claim."
+      }
+    },
+    {
+      "id": "auto-servis-elektro-klima-sela-gjilan",
+      "name": "Auto Servis Elektro-Klima SELA",
+      "city": "Gjilan",
+      "phone": "+38344320224",
+      "address": "272 Medlin Ollbrajt",
+      "lat": 42.465703,
+      "lng": 21.450223,
+      "directory": "https://numrat.com/biznes/NH8kXZ0Ucr3b/auto-servis-elektro-klima-sela/",
+      "sourceUrls": [
+        "https://numrat.com/biznes/NH8kXZ0Ucr3b/auto-servis-elektro-klima-sela/"
+      ],
+      "scope": "Independent directory specifically Mekanik; general mechanical vehicle service only, no detailed electrical/air-conditioning claims inferred from name.",
+      "placeId": "ChIJUeScOwCNVBMRrJ6CPQnnLdo",
+      "checkedAt": "2026-11-21T09:08:59.463230+00:00",
+      "status": "verified-for-dry-run",
+      "googleIdentity": {
+        "method": "public-maps-ui",
+        "officialVisibleLink": "!19s in manually inspected Autoelektricist Gjilan and Mekanik Gjilan lists",
+        "directMismatchedFallbackReturn": true,
+        "nameAndPhoneMatched": true,
+        "preciseLocationMatched": true,
+        "activeStatusMatched": true,
+        "checkedAt": "2026-11-21T09:08:59.463230+00:00"
+      },
+      "selectedWhatsapp": "+38344320224",
+      "publicBusinessEmail": {
+        "address": null,
+        "status": "not-found",
+        "sourceUrl": "https://numrat.com/biznes/NH8kXZ0Ucr3b/auto-servis-elektro-klima-sela/",
+        "checkedUrls": [
+          "https://numrat.com/biznes/NH8kXZ0Ucr3b/auto-servis-elektro-klima-sela/"
+        ],
+        "checkedAt": "2026-11-21T09:08:59.463230+00:00",
+        "note": "Focused own website/Facebook/Instagram/email discovery returns unrelated ABC/Labi businesses; no attributable additional source."
+      },
+      "openingHoursResearch": {
+        "kind": "assumed",
+        "checkedAt": "2026-11-21T09:08:59.463230+00:00",
+        "sourceUrls": [
+          "https://numrat.com/biznes/NH8kXZ0Ucr3b/auto-servis-elektro-klima-sela/"
+        ],
+        "note": "Directory no week; no attributable own website/social source found; Google/AI hours excluded."
+      }
+    }
+  ],
+  "deferred": [
+    {
+      "name": "Auto Elektro Gimzi",
+      "sourceUrl": "https://numrat.com/biznes/4Yh95YAD4qEw/auto-elektro-gimzi/",
+      "reason": "Independent Oso Kuka premises conflicts with Maps explicitly described new Martiret e Gjilanit premises; continuity not yet evidenced.",
+      "checkedAt": "2026-11-21T08:36:33.220016+00:00"
+    },
+    {
+      "name": "Autoelektro Fuli shpk",
+      "reason": "Potential own Facebook explicitly permanently closed and lists a different contact; continuity unresolved. Do not import on directory/Maps alone.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/ScTzR1IbK2pv/autoelektro-fuli-shpk/",
+        "https://www.facebook.com/p/Auto-Electro-FULI-100076077295502/"
+      ],
+      "checkedAt": "2026-11-21T08:38:59.944743+00:00"
+    },
+    {
+      "name": "Auto Servis Regllazh Argjendi",
+      "city": "Kamenicë",
+      "reason": "Directory and Maps agree on49phone/premises, but historical same-name same-village source has44phone/different navigation point and linked own page unavailable. Continuity unresolved; no hours or old phone adopted.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/7QnprdYKr397/auto-servis-regllazh-argjendi/",
+        "https://www.autoyas.com/CS/Kamenic%C3%AB/192752201064122/Auto-Servis-%26-Regllazh-%22Argjendi%22",
+        "https://www.facebook.com/192752201064122/"
+      ],
+      "checkedAt": "2026-11-21T08:49:54.039659+00:00"
+    },
+    {
+      "name": "AUTO GOMA TOLI",
+      "city": "Prizren",
+      "reason": "Own Facebook explicitly publishes coordinates42.199905,20.677988 unlike directory/Maps42.217892,20.731195; additional auto-generated Bing destination outside Kosovo. No continuity evidence; not dismissed as presumed geocoding error.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/nymTe1jKTKk0/auto-goma-toli/",
+        "https://www.facebook.com/p/AUTO-GOMA-TOLI-100065700450510/",
+        "https://www.instagram.com/auto_goma_toli/"
+      ],
+      "checkedAt": "2026-11-21T08:51:36.482459+00:00"
+    },
+    {
+      "name": "Auto Mekanik ISA",
+      "reason": "Own383primary and additional385bio versus public Maps377prefix; own precise point differs about64m from directory/Maps. No concrete continuity resolution.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/N8qNdNXPncXY/auto-mekanik-isa/",
+        "https://www.facebook.com/p/Auto-Mechaniker-ISA-100028103303232/"
+      ],
+      "checkedAt": "2026-11-21T08:53:25.318849+00:00"
+    },
+    {
+      "name": "Te Kushtrimi",
+      "reason": "Broad auto-service directory category only; focused own-source search returns unrelated driving school/legal business. Independent qualifying passenger-car service not established.",
+      "sourceUrls": ["https://numrat.com/biznes/bysw2ZPTxVlQ/te-kushtrimi/"],
+      "checkedAt": "2026-11-21T08:54:42.693974+00:00"
+    },
+    {
+      "name": "Turbo Servis Ximi",
+      "reason": "Directory/Maps48number versus own Facebook44number; own location nearby but no explicit pairing or continuity proof. Do not replace/convert contact automatically.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/AgDvZJgRmfDD/turbo-servis-ximi/",
+        "https://www.facebook.com/p/Turbo-Servis-XIMI-100063598147105/",
+        "https://www.instagram.com/turbo.servisximi/"
+      ],
+      "checkedAt": "2026-11-21T08:56:18.091426+00:00"
+    },
+    {
+      "name": "Auto Ngjyrosje Kena",
+      "reason": "Own Facebook/Instagram and second directory44primary plus44secondary; Numrat/Maps49primary not explicitly paired. Identity continuity unresolved despite matching business name/street.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/smpnOyEEzM48/auto-ngjyrosje-kena/",
+        "https://www.facebook.com/autongjyrosjekena/",
+        "https://www.instagram.com/autongjyrosjekena/",
+        "https://gjirafa.biz/auto-ngjyrosje-kena-1/"
+      ],
+      "checkedAt": "2026-11-21T08:59:50.375040+00:00"
+    },
+    {
+      "name": "Auto Servis Fejza",
+      "reason": "Current directory/Maps46number and Tefta Tashko versus older independent44number and Nato99. No attributable continuity proof; no old hours adopted.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/yTwirttUZJac/auto-servis-fejza/",
+        "https://gjirafa.biz/auto-servis-fejza-1/?p360=1"
+      ],
+      "checkedAt": "2026-11-21T09:01:25.338942+00:00"
+    },
+    {
+      "name": "Auto Servis Jakupi",
+      "reason": "Own precise Facebook point42.469413,21.448670 conflicts with directory/Maps42.465003,21.444613 although phone/street text match; no relocation evidence.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/Xcy8fYvWq3XP/auto-servis-jakupi/",
+        "https://www.facebook.com/p/Auto-Servis-Jakupi-100033124668243/"
+      ],
+      "checkedAt": "2026-11-21T09:04:18.313486+00:00"
+    },
+    {
+      "name": "Auto Servis Rally",
+      "reason": "Own Instagram names Deshmoret e Kombit, independent/Maps Marie Shllaku/Rr.Bujanovcit; no concrete same-premises/relocation evidence. Own weekday-only08-19 week differs from secondary search snippet; do not resolve site by assumption.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/VFhvhBlZFPpN/auto-servis-rally/",
+        "https://www.facebook.com/AutoServisRally/",
+        "https://www.instagram.com/autoservisrally/"
+      ],
+      "checkedAt": "2026-11-21T09:04:18.313486+00:00"
+    },
+    {
+      "name": "Auto Servis Beka",
+      "reason": "Broad auto-service directory category only; focused exactphone discovery yields unrelated Beka retail chains; no independent passenger-car repair scope established.",
+      "sourceUrls": [
+        "https://numrat.com/biznes/s6Na9rZx1ewz/auto-servis-beka/"
+      ],
+      "checkedAt": "2026-11-21T09:06:13.970409+00:00"
+    }
+  ],
+  "pending": [
+    {
+      "name": "Auto Servis Shefiki",
+      "directory": "https://numrat.com/biznes/GxVVqkkRmb75/auto-servis-shefiki/",
+      "phone": "+38349203567",
+      "address": "Gjilan 60000",
+      "lat": 42.440869,
+      "lng": 21.458349,
+      "note": "Independent Mekanik and own/email/hours focused search completed without attributable additional sources; visible Place-ID and WhatsApp pending."
+    },
+    {
+      "name": "Auto Grande",
+      "sourceUrls": [
+        "https://auto-grande.com/",
+        "https://www.facebook.com/p/AutoGrande-100066623391799/",
+        "https://www.instagram.com/auto_grande06/"
+      ],
+      "phone": "+38343870110",
+      "email": "durimajeti5@gmail.com",
+      "note": "Own service scope/phone/email verified. Only Lladove locality and short Maps location link; independent precise coordinate/street source missing. Own websiteMoSa09-18 versus FB5yearold09-19; not imported."
+    }
+  ],
+  "whatsappVerification": [
+    {
+      "workshopIds": ["auto-elektro-muja-gjilan"],
+      "phone": "+38344989298",
+      "checkedAt": "2026-11-21T08:37:09.199777+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true
+    },
+    {
+      "workshopIds": ["auto-servis-dritoni-gjilan"],
+      "phone": "+38344212139",
+      "checkedAt": "2026-11-21T08:38:59.944743+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "not_registered",
+      "inputClearedAndBlankObserved": true
+    },
+    {
+      "workshopIds": ["auto-servis-toska-gjilan"],
+      "phone": "+38344321676",
+      "checkedAt": "2026-11-21T08:40:36.505748+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true
+    },
+    {
+      "workshopIds": ["auto-servis-bashkimi-gjilan"],
+      "phone": "+38348474555",
+      "checkedAt": "2026-11-21T08:41:42.998584+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true
+    },
+    {
+      "workshopIds": ["auto-dermaku-gjilan"],
+      "phone": "+38345603631",
+      "checkedAt": "2026-11-21T08:42:42.018896+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true
+    },
+    {
+      "workshopIds": ["autoexpert-rks-gjilan"],
+      "phone": "+38344175319",
+      "checkedAt": "2026-11-21T08:43:56.201327+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true
+    },
+    {
+      "workshopIds": ["autoexpert-rks-gjilan"],
+      "phone": "+38349197090",
+      "checkedAt": "2026-11-21T08:43:56.201327+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "not_registered",
+      "inputClearedAndBlankObserved": true
+    },
+    {
+      "workshopIds": ["elite-detailing-gjilan"],
+      "phone": "+38344424420",
+      "checkedAt": "2026-11-21T08:45:04.387528+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "unresolved",
+      "inputClearedAndBlankObserved": true,
+      "note": "Exact383 input returned377 prefix; no contact adopted."
+    },
+    {
+      "workshopIds": ["ismail-detailing-gjilan"],
+      "phone": "+38345235777",
+      "checkedAt": "2026-11-21T08:45:47.828483+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true
+    },
+    {
+      "workshopIds": ["auto-detailing-nedimi-gjilan"],
+      "phone": "+38345285343",
+      "checkedAt": "2026-11-21T08:46:50.930976+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true
+    },
+    {
+      "workshopIds": ["supreme-detailing-gjilan"],
+      "phone": "+38348644529",
+      "checkedAt": "2026-11-21T08:47:24.462926+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true
+    },
+    {
+      "workshopIds": ["auto-servis-regllazh-argjendi-kamenice"],
+      "phone": "+38349529699",
+      "checkedAt": "2026-11-21T08:49:54.039659+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true,
+      "publication": "deferred identity continuity"
+    },
+    {
+      "workshopIds": ["auto-goma-toli-prizren"],
+      "phone": "+38348113324",
+      "checkedAt": "2026-11-21T08:51:36.482459+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true,
+      "publication": "deferred location conflict"
+    },
+    {
+      "workshopIds": ["autoservis-dilaveri-gjilan"],
+      "phone": "+38344654777",
+      "checkedAt": "2026-11-21T08:53:25.318849+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true
+    },
+    {
+      "workshopIds": ["auto-service-sokoli-gjilan"],
+      "phone": "+38344477221",
+      "checkedAt": "2026-11-21T08:54:42.693974+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true
+    },
+    {
+      "workshopIds": ["auto-bashkimi-kikza-performance-gjilan"],
+      "phone": "+38344955389",
+      "checkedAt": "2026-11-21T08:56:18.091426+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true
+    },
+    {
+      "workshopIds": ["auto-servis-besarti-gjilan"],
+      "phone": "+38348144785",
+      "checkedAt": "2026-11-21T08:59:50.375040+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true
+    },
+    {
+      "workshopIds": ["auto-mechanic-celi-gjilan"],
+      "phone": "+38344292023",
+      "checkedAt": "2026-11-21T08:59:50.375040+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true
+    },
+    {
+      "workshopIds": ["autoservis-andi-gjilan"],
+      "phone": "+38345462193",
+      "checkedAt": "2026-11-21T09:01:25.338942+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "unresolved",
+      "inputClearedAndBlankObserved": true,
+      "note": "Exact383input returned377prefix; leave WhatsApp empty."
+    },
+    {
+      "workshopIds": ["auto-service-iliri-gjilan"],
+      "phone": "+38343720009",
+      "checkedAt": "2026-11-21T09:01:25.338942+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true,
+      "note": "Exact matching positive account result."
+    },
+    {
+      "workshopIds": ["auto-servis-fejza-gjilan"],
+      "phone": "+38346211111",
+      "checkedAt": "2026-11-21T09:01:25.338942+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true,
+      "publication": "deferred continuity"
+    },
+    {
+      "workshopIds": ["auto-servis-ardiani-a-gjilan"],
+      "phone": "+38348818111",
+      "checkedAt": "2026-11-21T09:03:03.599659+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true
+    },
+    {
+      "workshopIds": ["auto-servis-jakupi-gjilan"],
+      "phone": "+38344211226",
+      "checkedAt": "2026-11-21T09:04:18.313486+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true,
+      "publication": "deferred location conflict"
+    },
+    {
+      "workshopIds": ["auto-servis-rally-gjilan"],
+      "phone": "+38344116902",
+      "checkedAt": "2026-11-21T09:04:18.313486+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true,
+      "publication": "deferred location conflict"
+    },
+    {
+      "workshopIds": ["auto-servis-florenti-gjilan"],
+      "phone": "+38349666686",
+      "checkedAt": "2026-11-21T09:06:13.970409+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "unresolved",
+      "inputClearedAndBlankObserved": true,
+      "note": "Exact383input returned386prefix; field stays empty."
+    },
+    {
+      "workshopIds": ["auto-servis-elektro-klima-sela-gjilan"],
+      "phone": "+38344320224",
+      "checkedAt": "2026-11-21T09:08:59.463230+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "registered",
+      "inputClearedAndBlankObserved": true
+    },
+    {
+      "workshopIds": ["auto-grande-gjilan"],
+      "phone": "+38343870110",
+      "checkedAt": "2026-11-21T09:08:59.463230+00:00",
+      "method": "whatsapp_web_phone_number_lookup",
+      "status": "not_registered",
+      "inputClearedAndBlankObserved": true,
+      "publication": "pending independent precise site"
+    }
+  ],
+  "research": {
+    "preliminaryListings": 139,
+    "uniquePreliminaryCandidates": 115,
+    "directoryPages": [
+      "https://numrat.com/kosove/gjilan/auto-servis/",
+      "https://numrat.com/kosove/gjilan/auto-servis/?faqe=2",
+      "https://numrat.com/kosove/gjilan/auto-servis/?faqe=3",
+      "https://numrat.com/kosove/gjilan/auto-servis/?faqe=4",
+      "https://numrat.com/kosove/gjilan/auto-servis/?faqe=5"
+    ],
+    "indexOnlyNameCityMatches": 12,
+    "samePhoneSamePointAliasPair": ["Servis Dritoni", "Servis Jetoni"],
+    "note": "Five pages manually inspected. Existing name/city matches and index-only retail/moto/truck entries not fully identity-qualified. Historical queue still being consolidated.",
+    "municipalities": ["Gjilan", "Kamenicë", "Partesh", "Prizren"],
+    "kamenice": {
+      "listings": 8,
+      "existingPrimaryContacts": 4,
+      "existingSecondaryContactAlias": 1,
+      "unchangedHistoricalHolds": ["BK Auto felne Besnik KËRQELI", "Shojka"],
+      "newDetailedDeferrals": 1,
+      "newQualified": 0
+    },
+    "historicalRecordCount": 326,
+    "historicalResolved": [
+      {
+        "name": "Supreme Detailing",
+        "reason": "Newly checked attributable independent directory supplies precise site, solving historical missing precise location gate."
+      }
+    ],
+    "partesh": {
+      "newQualified": 0,
+      "reason": "Directory town page lists15categories but no automotive workshop category; not proof town has no workshops."
+    },
+    "prizren": {
+      "listings": 15,
+      "newDetailedDeferrals": 1,
+      "newQualified": 0,
+      "note": "Other entries preliminary only, known ASC/Mali holds not repeated."
+    }
+  },
+  "duplicates": [
+    {
+      "name": "ChipTuningUniverzalQallaki",
+      "existingId": "auto-servis-univerzal-kamenice",
+      "reason": "Exact49contact already existing verified WhatsApp of Univerzal at same adjacent premises; not a new workshop."
+    }
+  ],
+  "liveDraftCheck": {
+    "checkedAt": "2026-11-21T08:51:36.482459+00:00",
+    "method": "D1 Studio SELECT status,count(*) FROM workshop_changes GROUP BY status",
+    "rows": 0,
+    "privateAccountColumnsRead": false
+  },
+  "schemaVersion": 1,
+  "date": "2026-11-19",
+  "timezone": "Europe/Zurich",
+  "status": "incomplete-user-requested-handoff",
+  "completedDateGuard": false,
+  "publishedCountConfirmed": 0,
+  "publishedWorkshopIds": [],
+  "importedWorkshopIds": [
+    "auto-elektro-muja-gjilan",
+    "auto-servis-dritoni-gjilan",
+    "auto-servis-toska-gjilan",
+    "auto-servis-bashkimi-gjilan",
+    "auto-dermaku-gjilan",
+    "autoexpert-rks-gjilan",
+    "elite-detailing-gjilan",
+    "ismail-detailing-gjilan",
+    "auto-detailing-nedimi-gjilan",
+    "supreme-detailing-gjilan",
+    "autoservis-dilaveri-gjilan",
+    "auto-service-sokoli-gjilan",
+    "auto-bashkimi-kikza-performance-gjilan",
+    "auto-servis-besarti-gjilan",
+    "auto-mechanic-celi-gjilan",
+    "autoservis-andi-gjilan",
+    "auto-service-iliri-gjilan",
+    "auto-servis-ardiani-a-gjilan",
+    "auto-servis-florenti-gjilan",
+    "auto-servis-elektro-klima-sela-gjilan"
+  ],
+  "baseCommit": "07286673c342841ed1fc10407dd1ed028d21cc40",
+  "branch": "codex/daily-import-2026-11-19",
+  "before": {
+    "total": 315,
+    "catalogueRows": 1338,
+    "draftChanges": 0,
+    "published": 315,
+    "drafts": 0
+  },
+  "after": {
+    "total": 335,
+    "liveConfirmed": false,
+    "published": 335,
+    "drafts": 0
+  },
+  "import": {
+    "added": 20,
+    "updated": 0,
+    "deduplicated": 0,
+    "canonicalOldProfilesUnchanged": true,
+    "translations": {
+      "sq": 20,
+      "en": 20,
+      "hashContract": "workshopTranslationSourceHash"
+    },
+    "fullHoursDryRun": "passed",
+    "isolatedReplay": {
+      "statements": 652,
+      "key": "workshop-source:94e977ccac0bd9cb346532c22846c5adb0e3ef94d5697b99f8b20a342834de43",
+      "priorRowsPreserved": 1338,
+      "afterCounts": {
+        "catalog_state": 97,
+        "workshop_contact_details": 10,
+        "workshop_email_addresses": 160,
+        "workshop_email_imports": 5,
+        "workshop_google_places": 335,
+        "workshop_google_ratings": 129,
+        "workshop_opening_hours_imports": 329,
+        "workshop_premium": 4,
+        "workshops": 335
+      },
+      "idempotent": true,
+      "integrity": "ok",
+      "foreignKeyViolations": 0
+    }
+  },
+  "browser": {
+    "profile": "ramizloki82@googlemail.com",
+    "internalBrowser": true,
+    "visibleAccountConfirmed": true,
+    "visibilityApi": false,
+    "userConfirmedVisibleAndAuthorizedOverride": true,
+    "unattendedRecoveryProven": false
+  },
+  "provider": {
+    "googleApiCalls": 0,
+    "newKeys": 0,
+    "newSubscriptions": 0,
+    "browserUiRequestCount": "not exposed by provider",
+    "mapsMethod": "Manual public UI; official visible !19s Place-ID and direct unrelated-query return. No current Google hours, ratings, photos or reviews retained."
+  },
+  "additionalCosts": 0,
+  "outreachSent": false,
+  "scheduleChanged": false,
+  "hoursSummary": {
+    "researched": 6,
+    "assumed": 14,
+    "ownerConfirmed": 0
+  },
+  "emailSummary": {
+    "publiclySourced": 5,
+    "withoutPublicEmail": 15
+  },
+  "whatsappSummary": {
+    "uniqueNumbers": 27,
+    "statuses": {
+      "registered": 21,
+      "not_registered": 3,
+      "unresolved": 3
+    },
+    "preparedNewContacts": 16,
+    "publishedNewContacts": 0,
+    "note": "Includes completed lookups for held candidates; no private profiles or chat content retained."
+  },
+  "liveBaseline": {
+    "fullNineTableD1StudioExports": true,
+    "restoreIntegrity": "ok",
+    "foreignKeyViolations": 0,
+    "prewriteAll1338RowsIdentical": true,
+    "canonicalProfileComparison": {
+      "profiles": 315,
+      "fields": 19,
+      "coordinateStorage": "DB text normalized to numeric values without tolerance"
+    },
+    "activeRelease": "v1.65.0",
+    "activeCommit": "07286673c342841ed1fc10407dd1ed028d21cc40",
+    "activeWorkerPrefix": "c3d856c6",
+    "trafficPercent": 100,
+    "boundedDashboardMetrics": {
+      "window": "Last 24 hours",
+      "invocationsDisplayed": "4.46k",
+      "workerErrors": 0,
+      "cpuLimitErrors": 0,
+      "memoryLimitErrors": 0,
+      "clientCancelled": 1,
+      "globalHttpProof": false
+    }
+  },
+  "gates": {
+    "fullLocalCi": "Quality/core/types/lint/backup-worker/Node build passed; stopped during Node integration tests at user request. Remaining packaging/Workers/Sites/remote gates not completed.",
+    "independentReviews": "Two independent file/data reviews clear; final-head binding pending",
+    "remoteCi": "pending",
+    "pr": null,
+    "merge": "pending",
+    "release": "pending",
+    "liveAcceptance": "pending"
+  },
+  "durableEvidenceDirectory": "/Users/ramizloki/.codex/automations/f-hre-die-t-gliche-recherche-import-und-ver-ffentlichungsroutine-f-r-ramiz4/runs/2026-11-19/interactive-2026-11-21",
+  "handoff": {
+    "requestedByUser": "Komm zum Schluss!",
+    "preparedNewProfiles": 20,
+    "newLiveConfirmed": 0,
+    "checkedAt": "2026-11-21T09:21:26.420717+00:00",
+    "lockHeld": false,
+    "nextSteps": [
+      "Resume same November19 branch and manifest with minimum20; preserve current20 prepared profiles",
+      "Refresh current browser/account and full live snapshot under lock",
+      "Finish Node integration/package, Cloudflare and Sites build/package, final content/reviewer binding, verified PR squash/main release",
+      "Accept all20new IDs in API/DB and60visibleDE-SQ-EN profiles; only then write completed receipt"
+    ]
+  }
+}

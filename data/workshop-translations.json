@@ -264,6 +264,36 @@
       }
     },
     {
+      "id": "auto-bashkimi-kikza-performance-gjilan",
+      "sourceHash": "4cf181fd6aea2d1e5da965a867eae0205db9c79132c57052bddd21c558050db8",
+      "en": {
+        "specialty": "Mechanical vehicle servicing",
+        "description": "Auto Bashkimi x Kikza Performance in Gjilan: Mechanical vehicle servicing; please confirm specific work directly with the business. Please arrange appointments and confirm the scope of services directly with the business.",
+        "serviceDetails": [
+          "Mechanical vehicle servicing; please confirm specific work directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability has not been confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location and business contact",
+          "Business’s own page: name and business contact",
+          "Business’s own page: name and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim mekanik i automjeteve",
+        "description": "Auto Bashkimi x Kikza Performance në Gjilan: Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin. Për termine dhe shërbime konkrete kontaktoni drejtpërdrejt biznesin.",
+        "serviceDetails": [
+          "Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti",
+          "Faqja e biznesit: emri dhe kontakti i biznesit",
+          "Faqja e biznesit: emri dhe kontakti i biznesit"
+        ]
+      }
+    },
+    {
       "id": "auto-beli-ferizaj",
       "sourceHash": "d516fe956a93fa02e0f2d2922e9d60772be0c8e4984bc3302e5b1dceb71fd9ab",
       "sq": {
@@ -342,6 +372,36 @@
           "Public business directory: name, location, business contact and category",
           "Own business profile: business contact and services",
           "Own business profile: business contact and services"
+        ]
+      }
+    },
+    {
+      "id": "auto-dermaku-gjilan",
+      "sourceHash": "6d082fa61da06070a0d99563dfd2a4b661a4cc7207d07399b5d391a2ba5dc480",
+      "en": {
+        "specialty": "Vehicle painting, polishing and ceramic coating",
+        "description": "Auto Dermaku in Gjilan: Vehicle painting, polishing and ceramic coating according to the business’s own public posts. Please arrange appointments and confirm the scope of services directly with the business.",
+        "serviceDetails": [
+          "Vehicle painting, polishing and ceramic coating according to the business’s own public posts."
+        ],
+        "phoneNote": "Public business contact; availability has not been confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location and business contact",
+          "Business’s own page: name and business contact",
+          "Business’s own page: name and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Ngjyrosje automjetesh, polirim dhe mbrojtje qeramike",
+        "description": "Auto Dermaku në Gjilan: Ngjyrosje automjetesh, polirim dhe mbrojtje qeramike sipas postimeve publike të biznesit. Për termine dhe shërbime konkrete kontaktoni drejtpërdrejt biznesin.",
+        "serviceDetails": [
+          "Ngjyrosje automjetesh, polirim dhe mbrojtje qeramike sipas postimeve publike të biznesit."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti",
+          "Faqja e biznesit: emri dhe kontakti i biznesit",
+          "Faqja e biznesit: emri dhe kontakti i biznesit"
         ]
       }
     },
@@ -492,6 +552,34 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "auto-detailing-nedimi-gjilan",
+      "sourceHash": "b04c291952a304fea7f8ba4a136a46c4d51b99d3cc1fde09f7be74120f973e80",
+      "en": {
+        "specialty": "Interior and exterior detailing",
+        "description": "Auto Detailing Nedimi in Gjilan: Thorough interior and exterior detailing according to the business’s own page. Please arrange appointments and confirm the scope of services directly with the business.",
+        "serviceDetails": [
+          "Thorough interior and exterior detailing according to the business’s own page."
+        ],
+        "phoneNote": "Public business contact; availability has not been confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location and business contact",
+          "Business’s own page: name and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Detailing i brendshëm dhe i jashtëm",
+        "description": "Auto Detailing Nedimi në Gjilan: Detailing i brendshëm dhe i jashtëm sipas faqes së biznesit. Për termine dhe shërbime konkrete kontaktoni drejtpërdrejt biznesin.",
+        "serviceDetails": [
+          "Detailing i brendshëm dhe i jashtëm sipas faqes së biznesit."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti",
+          "Faqja e biznesit: emri dhe kontakti i biznesit"
         ]
       }
     },
@@ -764,6 +852,32 @@
         "sourceTitles": [
           "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
           "Profili i vetë biznesit: shërbime dhe të dhëna publike"
+        ]
+      }
+    },
+    {
+      "id": "auto-elektro-muja-gjilan",
+      "sourceHash": "ee937ab422776ab94abd609e3710b083b285ab0f1d5ab8e3566c95fe2af45c54",
+      "en": {
+        "specialty": "Automotive electrical services",
+        "description": "Auto Elektro Muja in Gjilan: Automotive electrical services according to the public business directory. Please arrange appointments and confirm the scope of services directly with the business.",
+        "serviceDetails": [
+          "Automotive electrical services according to the public business directory."
+        ],
+        "phoneNote": "Public business contact; availability has not been confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Shërbime autoelektrike",
+        "description": "Auto Elektro Muja në Gjilan: Shërbime autoelektrike sipas drejtorisë publike të bizneseve. Për termine dhe shërbime konkrete kontaktoni drejtpërdrejt biznesin.",
+        "serviceDetails": [
+          "Shërbime autoelektrike sipas drejtorisë publike të bizneseve."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti"
         ]
       }
     },
@@ -1304,6 +1418,32 @@
         "phoneNote": "Public directory contact (Cybo); not confirmed by the business",
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category"
+        ]
+      }
+    },
+    {
+      "id": "auto-mechanic-celi-gjilan",
+      "sourceHash": "0d9761e445592d2d3205bbad8fb48045a23356bcaaa6d91884eb51a02faee674",
+      "en": {
+        "specialty": "Mechanical vehicle servicing",
+        "description": "Auto mechanic Celi in Gjilan: Mechanical vehicle servicing; please confirm specific work directly with the business. Please arrange appointments and confirm the scope of services directly with the business.",
+        "serviceDetails": [
+          "Mechanical vehicle servicing; please confirm specific work directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability has not been confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim mekanik i automjeteve",
+        "description": "Auto mechanic Celi në Gjilan: Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin. Për termine dhe shërbime konkrete kontaktoni drejtpërdrejt biznesin.",
+        "serviceDetails": [
+          "Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti"
         ]
       }
     },
@@ -2224,6 +2364,32 @@
       }
     },
     {
+      "id": "auto-service-iliri-gjilan",
+      "sourceHash": "f1ed4c4c09f8c697e4e92abcbd4d346afbde3c43bd5cd4861a3d96d2b756fef4",
+      "en": {
+        "specialty": "Mechanical vehicle servicing",
+        "description": "Auto Service Iliri in Gjilan: Mechanical vehicle servicing; please confirm specific work directly with the business. Please arrange appointments and confirm the scope of services directly with the business.",
+        "serviceDetails": [
+          "Mechanical vehicle servicing; please confirm specific work directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability has not been confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim mekanik i automjeteve",
+        "description": "Auto Service Iliri në Gjilan: Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin. Për termine dhe shërbime konkrete kontaktoni drejtpërdrejt biznesin.",
+        "serviceDetails": [
+          "Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti"
+        ]
+      }
+    },
+    {
       "id": "auto-service-istrefi-skenderaj",
       "sourceHash": "1e688a0d4e34851852366278f00e44593a9c304f56e4b72e71b488b6e323fc30",
       "sq": {
@@ -2552,6 +2718,32 @@
       }
     },
     {
+      "id": "auto-service-sokoli-gjilan",
+      "sourceHash": "d213a1cfc6664e9ad819ff4f11a9cc5c994067fc383b9c05c5d9307b17597c09",
+      "en": {
+        "specialty": "Mechanical vehicle servicing",
+        "description": "Auto Service Sokoli in Gjilan: Mechanical vehicle servicing; please confirm specific work directly with the business. Please arrange appointments and confirm the scope of services directly with the business.",
+        "serviceDetails": [
+          "Mechanical vehicle servicing; please confirm specific work directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability has not been confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim mekanik i automjeteve",
+        "description": "Auto Service Sokoli në Gjilan: Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin. Për termine dhe shërbime konkrete kontaktoni drejtpërdrejt biznesin.",
+        "serviceDetails": [
+          "Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti"
+        ]
+      }
+    },
+    {
       "id": "auto-service-tuli-rahovec",
       "sourceHash": "cce37edd1a52d3b2b0493ba2a54f3ce00c55d67b96beeeeb16783c3d3b8d5827",
       "sq": {
@@ -2762,6 +2954,34 @@
       }
     },
     {
+      "id": "auto-servis-ardiani-a-gjilan",
+      "sourceHash": "fc5990f8212bb598ede6b8ebd8d0d33d705889e69a2e0a2ed2dc06a3815a1ab3",
+      "en": {
+        "specialty": "Mechanical vehicle servicing",
+        "description": "Auto Servis Ardiani-A in Gjilan: Mechanical vehicle servicing; please confirm specific work directly with the business. Please arrange appointments and confirm the scope of services directly with the business.",
+        "serviceDetails": [
+          "Mechanical vehicle servicing; please confirm specific work directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability has not been confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location and business contact",
+          "Business’s own page: name and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim mekanik i automjeteve",
+        "description": "Auto Servis Ardiani-A në Gjilan: Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin. Për termine dhe shërbime konkrete kontaktoni drejtpërdrejt biznesin.",
+        "serviceDetails": [
+          "Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti",
+          "Faqja e biznesit: emri dhe kontakti i biznesit"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-arlindi-prishtina",
       "sourceHash": "17704d292a737cae7ee37a7ef5704b2a2f3e36a6c754252daf370fb362376f97",
       "sq": {
@@ -2838,6 +3058,32 @@
         "sourceTitles": [
           "Cybo: published name · address · telephone · vehicle service category",
           "Contact, location and passenger-car service cross-check dated 5 October 2026"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-bashkimi-gjilan",
+      "sourceHash": "571c5b6d0c65c9283813eb5b2f8e06e20807467ddf0477ae7c23a7d4a9f3139e",
+      "en": {
+        "specialty": "Mechanical vehicle servicing",
+        "description": "Auto Servis Bashkimi in Gjilan: Mechanical vehicle servicing; please confirm specific work directly with the business. Please arrange appointments and confirm the scope of services directly with the business.",
+        "serviceDetails": [
+          "Mechanical vehicle servicing; please confirm specific work directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability has not been confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim mekanik i automjeteve",
+        "description": "Auto Servis Bashkimi në Gjilan: Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin. Për termine dhe shërbime konkrete kontaktoni drejtpërdrejt biznesin.",
+        "serviceDetails": [
+          "Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti"
         ]
       }
     },
@@ -2950,6 +3196,32 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "GjithëBiznesi: name, telephone number, location and vehicle maintenance/repair"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-besarti-gjilan",
+      "sourceHash": "157b59c56956d2fde2219cd9d2e098f145f207cc55ef1f98b803a78abe44d83d",
+      "en": {
+        "specialty": "Mechanical vehicle servicing",
+        "description": "Auto Servis Besarti in Gjilan: Mechanical vehicle servicing; please confirm specific work directly with the business. Please arrange appointments and confirm the scope of services directly with the business.",
+        "serviceDetails": [
+          "Mechanical vehicle servicing; please confirm specific work directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability has not been confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim mekanik i automjeteve",
+        "description": "Auto Servis Besarti në Gjilan: Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin. Për termine dhe shërbime konkrete kontaktoni drejtpërdrejt biznesin.",
+        "serviceDetails": [
+          "Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti"
         ]
       }
     },
@@ -3354,6 +3626,34 @@
       }
     },
     {
+      "id": "auto-servis-dritoni-gjilan",
+      "sourceHash": "e737bf1b062e1e05015e1a67072b8d277fa4554437aa25f8106fe320129a01e6",
+      "en": {
+        "specialty": "Mechanical vehicle servicing",
+        "description": "Auto Servis Dritoni in Gjilan: Mechanical vehicle servicing; please confirm specific work directly with the business. Please arrange appointments and confirm the scope of services directly with the business.",
+        "serviceDetails": [
+          "Mechanical vehicle servicing; please confirm specific work directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability has not been confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location and business contact",
+          "Business’s own page: name and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim mekanik i automjeteve",
+        "description": "Auto Servis Dritoni në Gjilan: Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin. Për termine dhe shërbime konkrete kontaktoni drejtpërdrejt biznesin.",
+        "serviceDetails": [
+          "Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti",
+          "Faqja e biznesit: emri dhe kontakti i biznesit"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-edi-fushe-kosove",
       "sourceHash": "1a43d424ac39cc810b649bea7a10ce5509da37f4c92a99dc455d1b829aefe89f",
       "sq": {
@@ -3374,6 +3674,32 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-elektro-klima-sela-gjilan",
+      "sourceHash": "50894491acf09795910adb573f18b4e8de6cd8dfad8160f253325375c5095dcd",
+      "en": {
+        "specialty": "Mechanical vehicle servicing",
+        "description": "Auto Servis Elektro-Klima SELA in Gjilan: Mechanical vehicle servicing; please confirm specific work directly with the business. Please arrange appointments and confirm the scope of services directly with the business.",
+        "serviceDetails": [
+          "Mechanical vehicle servicing; please confirm specific work directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability has not been confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim mekanik i automjeteve",
+        "description": "Auto Servis Elektro-Klima SELA në Gjilan: Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin. Për termine dhe shërbime konkrete kontaktoni drejtpërdrejt biznesin.",
+        "serviceDetails": [
+          "Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti"
         ]
       }
     },
@@ -3532,6 +3858,36 @@
           "Drejtori publike: emri, kategoria, vendndodhja dhe kontakti",
           "Profili i vetë biznesit: shërbime dhe të dhëna publike",
           "Profili i vetë biznesit: shërbime dhe të dhëna publike"
+        ]
+      }
+    },
+    {
+      "id": "auto-servis-florenti-gjilan",
+      "sourceHash": "e65d0d40a24e041784ad3ddae6c0f4901186dc090ac300b3e1789966efda4105",
+      "en": {
+        "specialty": "Mechanical vehicle servicing",
+        "description": "Auto Servis Florenti in Gjilan: Mechanical vehicle servicing; please confirm specific work directly with the business. Please arrange appointments and confirm the scope of services directly with the business.",
+        "serviceDetails": [
+          "Mechanical vehicle servicing; please confirm specific work directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability has not been confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location and business contact",
+          "Business’s own page: name and business contact",
+          "Public business directory: name, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim mekanik i automjeteve",
+        "description": "Auto Servis Florenti në Gjilan: Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin. Për termine dhe shërbime konkrete kontaktoni drejtpërdrejt biznesin.",
+        "serviceDetails": [
+          "Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti",
+          "Faqja e biznesit: emri dhe kontakti i biznesit",
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti"
         ]
       }
     },
@@ -4802,6 +5158,34 @@
       }
     },
     {
+      "id": "auto-servis-toska-gjilan",
+      "sourceHash": "c484e084843136538456fffb874c7f20d0f2421cdfee96daeb6fbe1101ca52b5",
+      "en": {
+        "specialty": "Vehicle repairs and air-conditioning recharge",
+        "description": "Auto Servis Toska in Gjilan: Vehicle repairs and air-conditioning recharge according to the business’s own page. Please arrange appointments and confirm the scope of services directly with the business.",
+        "serviceDetails": [
+          "Vehicle repairs and air-conditioning recharge according to the business’s own page."
+        ],
+        "phoneNote": "Public business contact; availability has not been confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location and business contact",
+          "Business’s own page: name and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Riparim automjetesh dhe mbushje klime",
+        "description": "Auto Servis Toska në Gjilan: Riparim automjetesh dhe mbushje klime sipas faqes së biznesit. Për termine dhe shërbime konkrete kontaktoni drejtpërdrejt biznesin.",
+        "serviceDetails": [
+          "Riparim automjetesh dhe mbushje klime sipas faqes së biznesit."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti",
+          "Faqja e biznesit: emri dhe kontakti i biznesit"
+        ]
+      }
+    },
+    {
       "id": "auto-servis-trimi-prishtina",
       "sourceHash": "17704d292a737cae7ee37a7ef5704b2a2f3e36a6c754252daf370fb362376f97",
       "sq": {
@@ -5646,6 +6030,34 @@
       }
     },
     {
+      "id": "autoexpert-rks-gjilan",
+      "sourceHash": "abf3f66ce14e71f5143ce7c5ac6ba0ea5a66566bfd0fb55eeb08bec26f30387a",
+      "en": {
+        "specialty": "Mechanical vehicle servicing",
+        "description": "AUTOEXPERT.RKS in Gjilan: Mechanical vehicle servicing; please confirm specific work directly with the business. Please arrange appointments and confirm the scope of services directly with the business.",
+        "serviceDetails": [
+          "Mechanical vehicle servicing; please confirm specific work directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability has not been confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location and business contact",
+          "Business’s own page: name and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim mekanik i automjeteve",
+        "description": "AUTOEXPERT.RKS në Gjilan: Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin. Për termine dhe shërbime konkrete kontaktoni drejtpërdrejt biznesin.",
+        "serviceDetails": [
+          "Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti",
+          "Faqja e biznesit: emri dhe kontakti i biznesit"
+        ]
+      }
+    },
+    {
       "id": "autogang-kacanik",
       "sourceHash": "6bf99857917d3277c6f55e5789e4e942214b48c3512e210ced03ee4fd853b0cf",
       "sq": {
@@ -5972,6 +6384,62 @@
         "phoneNote": "Public business contact; reachability not confirmed",
         "sourceTitles": [
           "Public business directory: name, location, business contact and category"
+        ]
+      }
+    },
+    {
+      "id": "autoservis-andi-gjilan",
+      "sourceHash": "6859440697e185911d3f69904c3603559fd75f18eca55771b3e06ba4bf150568",
+      "en": {
+        "specialty": "Mechanical vehicle servicing",
+        "description": "Autoservis Andi in Gjilan: Mechanical vehicle servicing; please confirm specific work directly with the business. Please arrange appointments and confirm the scope of services directly with the business.",
+        "serviceDetails": [
+          "Mechanical vehicle servicing; please confirm specific work directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability has not been confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim mekanik i automjeteve",
+        "description": "Autoservis Andi në Gjilan: Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin. Për termine dhe shërbime konkrete kontaktoni drejtpërdrejt biznesin.",
+        "serviceDetails": [
+          "Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti"
+        ]
+      }
+    },
+    {
+      "id": "autoservis-dilaveri-gjilan",
+      "sourceHash": "8d096645460e089068a1ef206413a607ff608126dc533012de9a6c448a84801b",
+      "en": {
+        "specialty": "Mechanical vehicle servicing",
+        "description": "AutoServis Dilaveri in Gjilan: Mechanical vehicle servicing; please confirm specific work directly with the business. Please arrange appointments and confirm the scope of services directly with the business.",
+        "serviceDetails": [
+          "Mechanical vehicle servicing; please confirm specific work directly with the business."
+        ],
+        "phoneNote": "Public business contact; availability has not been confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location and business contact",
+          "Business’s own page: name and business contact",
+          "Public business directory: name, location and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Servisim mekanik i automjeteve",
+        "description": "AutoServis Dilaveri në Gjilan: Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin. Për termine dhe shërbime konkrete kontaktoni drejtpërdrejt biznesin.",
+        "serviceDetails": [
+          "Servisim mekanik i automjeteve; për punët konkrete kontaktoni drejtpërdrejt biznesin."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti",
+          "Faqja e biznesit: emri dhe kontakti i biznesit",
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti"
         ]
       }
     },
@@ -6849,6 +7317,34 @@
       }
     },
     {
+      "id": "elite-detailing-gjilan",
+      "sourceHash": "e5a3a0f5a315dc5ff262ed5bb038b97b6a5c042f091b5bbe95ae8aefbac15acb",
+      "en": {
+        "specialty": "Interior detailing and seat cleaning",
+        "description": "Elite Detailing in Gjilan: Thorough interior detailing and seat cleaning according to the business’s own page. Please arrange appointments and confirm the scope of services directly with the business.",
+        "serviceDetails": [
+          "Thorough interior detailing and seat cleaning according to the business’s own page."
+        ],
+        "phoneNote": "Public business contact; availability has not been confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location and business contact",
+          "Business’s own page: name and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Detailing i brendshëm dhe pastrim ulësesh",
+        "description": "Elite Detailing në Gjilan: Detailing i brendshëm dhe pastrim i ulëseve sipas faqes së biznesit. Për termine dhe shërbime konkrete kontaktoni drejtpërdrejt biznesin.",
+        "serviceDetails": [
+          "Detailing i brendshëm dhe pastrim i ulëseve sipas faqes së biznesit."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti",
+          "Faqja e biznesit: emri dhe kontakti i biznesit"
+        ]
+      }
+    },
+    {
       "id": "eurogoma-ferizaj",
       "sourceHash": "da6cc1470c2bc17f74465fd1bbb8ae039e869bd6dbb606e53a4c479b6e3b831a",
       "sq": {
@@ -7328,6 +7824,36 @@
           "Own business page: location, business contact and offered services",
           "Own business page: location, business contact and offered services",
           "Public business directory: business name, address, contact and category"
+        ]
+      }
+    },
+    {
+      "id": "ismail-detailing-gjilan",
+      "sourceHash": "c7d275928489b7fc47028b7cb3bbdec47ce4e255f6b0c3385dde7f43b03b6408",
+      "en": {
+        "specialty": "Vehicle detailing, polishing and ceramic coating",
+        "description": "Ismail Detailing in Gjilan: Interior and exterior detailing, polishing and ceramic coating according to the business’s own page. Please arrange appointments and confirm the scope of services directly with the business.",
+        "serviceDetails": [
+          "Interior and exterior detailing, polishing and ceramic coating according to the business’s own page."
+        ],
+        "phoneNote": "Public business contact; availability has not been confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location and business contact",
+          "Business’s own page: name and business contact",
+          "Business’s own page: name and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Detailing, polirim dhe mbrojtje qeramike",
+        "description": "Ismail Detailing në Gjilan: Detailing i brendshëm dhe i jashtëm, polirim dhe mbrojtje qeramike sipas faqes së biznesit. Për termine dhe shërbime konkrete kontaktoni drejtpërdrejt biznesin.",
+        "serviceDetails": [
+          "Detailing i brendshëm dhe i jashtëm, polirim dhe mbrojtje qeramike sipas faqes së biznesit."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti",
+          "Faqja e biznesit: emri dhe kontakti i biznesit",
+          "Faqja e biznesit: emri dhe kontakti i biznesit"
         ]
       }
     },
@@ -8507,6 +9033,36 @@
         "phoneNote": "Public directory contact; reachability not confirmed",
         "sourceTitles": [
           "Independent business source: contact, location and services"
+        ]
+      }
+    },
+    {
+      "id": "supreme-detailing-gjilan",
+      "sourceHash": "b19c642b74cc45d5d6331f0ae49023b0d1c8d9e723ebb3185a6953b2d4928398",
+      "en": {
+        "specialty": "Vehicle detailing and paint protection",
+        "description": "Supreme Detailing in Gjilan: Interior and exterior detailing, polishing, ceramic coating and paint protection film according to the business’s own website. Please arrange appointments and confirm the scope of services directly with the business.",
+        "serviceDetails": [
+          "Interior and exterior detailing, polishing, ceramic coating and paint protection film according to the business’s own website."
+        ],
+        "phoneNote": "Public business contact; availability has not been confirmed",
+        "sourceTitles": [
+          "Public business directory: name, location and business contact",
+          "Business’s own page: name and business contact",
+          "Business’s own page: name and business contact"
+        ]
+      },
+      "sq": {
+        "specialty": "Detailing dhe mbrojtje e ngjyrës",
+        "description": "Supreme Detailing në Gjilan: Detailing i brendshëm dhe i jashtëm, polirim, mbrojtje qeramike dhe folje mbrojtëse sipas uebfaqes së biznesit. Për termine dhe shërbime konkrete kontaktoni drejtpërdrejt biznesin.",
+        "serviceDetails": [
+          "Detailing i brendshëm dhe i jashtëm, polirim, mbrojtje qeramike dhe folje mbrojtëse sipas uebfaqes së biznesit."
+        ],
+        "phoneNote": "Kontakt publik i biznesit; arritshmëria nuk është konfirmuar",
+        "sourceTitles": [
+          "Drejtori publike e bizneseve: emri, vendndodhja dhe kontakti",
+          "Faqja e biznesit: emri dhe kontakti i biznesit",
+          "Faqja e biznesit: emri dhe kontakti i biznesit"
         ]
       }
     },
